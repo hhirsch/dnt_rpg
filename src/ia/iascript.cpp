@@ -16,7 +16,7 @@ iaScript::iaScript(string scriptFile, void* usedEngine)
    characterOwner = NULL;
    actualMap = NULL;
    npcs = NULL;
-   pendingAction = NULL;
+   pendAction = NULL;
    actualEngine = usedEngine;
    type = IASCRIPT_TYPE_DEFAULT;
 }
@@ -70,11 +70,11 @@ iaScript::~iaScript()
  ***********************************************************************/
 void iaScript::close()
 {
-   if(pendingAction)
+   if(pendAction)
    {
       engine* eng = (engine*)actualEngine;
-      eng->actionControl->removeAction(pendingAction);
-      pendingAction = NULL;
+      eng->actionControl->removeAction(pendAction);
+      pendAction = NULL;
    }
    if(file.is_open())
    {
@@ -187,21 +187,21 @@ void iaScript::run(int maxLines)
    {
       while(!done)
       {
-         if( (pendingAction) && (!pendingAction->isRunning()) )
+         if( (pendAction) && (!pendAction->isRunning()) )
          {
             /* Go to where stops at the action */
-            strBuffer = pendingAction->getScriptLine();
+            strBuffer = pendAction->getScriptLine();
             interpret = true;
 
             //printf("Action Type ""%d"" ended: %s\n", 
-            //       pendingAction->getType(), strBuffer.c_str());
+            //       pendAction->getType(), strBuffer.c_str());
 
             /* Remove the action from the controller */
             engine* eng = (engine*)actualEngine;
-            eng->actionControl->removeAction(pendingAction);
-            pendingAction = NULL;
+            eng->actionControl->removeAction(pendAction);
+            pendAction = NULL;
          }
-         else if(pendingAction)
+         else if(pendAction)
          {
             /* The pending action isn't finished, so do nothing */
             done = true;
@@ -499,7 +499,7 @@ void iaScript::run(int maxLines)
             done = true;
          }
 
-         if( (!pendingAction) && (symbols) )
+         if( (!pendAction) && (symbols) )
          {
             /* Remove all temporary symbols used */
             symbols->removeTempSymbols();
@@ -674,8 +674,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       if(dude)
       {
          dude->pathFind.defineMap(actualMap);
-         pendingAction = eng->actionControl->addAction(line, ACT_MOVE, 
-                                                       dude, X, Z);
+         pendAction = eng->actionControl->addAction(line, ACT_MOVE, 
+                                                    dude, X, Z);
       }
    }
 
@@ -715,8 +715,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       if( (dude) && (tgt) )
       {
          dude->pathFind.defineMap(actualMap);
-         pendingAction = eng->actionControl->addAction(line, ACT_MOVE, 
-                                                       dude, tgt);
+         pendAction = eng->actionControl->addAction(line, ACT_MOVE, 
+                                                     dude, tgt);
       }
    }
 
@@ -756,8 +756,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       if( (dude) && (obj) )
       {
          dude->pathFind.defineMap(actualMap);
-         pendingAction = eng->actionControl->addAction(line, ACT_MOVE, 
-                                                       dude, obj);
+         pendAction = eng->actionControl->addAction(line, ACT_MOVE, 
+                                                    dude, obj);
       }
    }
 
@@ -806,8 +806,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
             delete(iv);
          }
          /* Set the pending action (note: time is in mseconds) */
-         pendingAction = eng->actionControl->addAction(line, ACT_WAIT, 
-                                                       seconds*1000);
+         pendAction = eng->actionControl->addAction(line, ACT_WAIT, 
+                                                    seconds*1000);
       }
    }
 

@@ -11,6 +11,7 @@
 #include "../classes/skills.h"
 #include "../map/map.h"
 #include "../classes/actions.h"
+#include "../classes/pendingaction.h"
 
 #include <string>
 #include <stdlib.h>
@@ -86,7 +87,7 @@ class iaScript
 
       int type;                  /**< Define the type if is a child */
 
-      action* pendingAction;     /**< Pending Action on the script. Only
+      pendingAction* pendAction; /**< Pending Action on the script. Only
                                       will advance on script when receive
                                       that this actions was done. */
 

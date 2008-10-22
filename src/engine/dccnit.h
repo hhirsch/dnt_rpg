@@ -13,6 +13,7 @@
 #include "../classes/classes.h"
 #include "../classes/weapon.h"
 #include "../classes/actions.h"
+#include "../classes/pendingaction.h"
 #include "../classes/mission.h"
 #include "../etc/message3d.h"
 #include "../etc/dirs.h"
@@ -66,7 +67,7 @@ class engine
       characterList *NPCs;             /**< NPC's List */
       characterList *PCs;              /**< PC's List */
 
-      actionController* actionControl; /**< The action controller */
+      pendingActionController* actionControl; /**< The action controller */
       
       #ifdef REDE
          char *server;                 /**< Server to Connect \b NOTUSED */

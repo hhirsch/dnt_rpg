@@ -546,6 +546,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                         character* target = owner;
                         
                         /* Apply the heal to the target */
+                        //TODO
 
                         /* And discard the object */
                         inventories->removeFromInventory(objX,objY, 

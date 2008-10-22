@@ -125,7 +125,7 @@ engine::engine()
    fight = new fightSystem(msgController, particleController);
 
    /* Create the action Controller */
-   actionControl = new actionController();
+   actionControl = new pendingActionController();
 
    /* Create the missions controller */
    missions = new missionsController();
