@@ -27,6 +27,7 @@ class mapObject: public object
 
    protected:
       void callDeadAnimation();
+      void updateHealthBar(){};
 };
 
 /*! Objects list */

@@ -238,6 +238,9 @@ void model3d::callIdleAnimation()
    //TODO
 }
 
+void model3d::updateHealthBar()
+{
+}
 
 
 /*************************************************************************

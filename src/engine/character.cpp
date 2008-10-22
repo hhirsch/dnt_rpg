@@ -330,24 +330,14 @@ string character::getPortraitFileName()
 }
 
 /*********************************************************************
- *                       defineMaxLifePoints                         *
+ *                         updateHealthBar                           *
  *********************************************************************/
-void character::defineMaxLifePoints(int maxPoints)
+void character::updateHealthBar()
 {
-  maxLifePoints = maxPoints;
-  lifeBar->defineMaxHealth(maxPoints);
-  defineActualLifePoints(maxPoints);
-}
-
-/*********************************************************************
- *                      defineActualLifePoints                       *
- *********************************************************************/
-void character::defineActualLifePoints(int newLife)
-{
-   lifePoints = newLife;
-   lifeBar->defineActualHealth(newLife);
-   lifeBar->draw(portraitImage);
-   setTextureRGBA(portraitImage, portraitTexture);
+  lifeBar->defineMaxHealth(maxLifePoints);
+  lifeBar->defineActualHealth(lifePoints);
+  lifeBar->draw(portraitImage);
+  setTextureRGBA(portraitImage, portraitTexture);
 }
 
 /*********************************************************************
@@ -453,7 +443,7 @@ void character::defineInitialLifePoints()
 {
    /* At First Level, the hit points is equal to the Max dice value 
     * plus  constitution bonus */
-   defineMaxLifePoints(actualClass[0]->lifeDiceID + attBonus(ATT_CONSTITUTION));
+   setMaxLifePoints(actualClass[0]->lifeDiceID + attBonus(ATT_CONSTITUTION));
 }
 
 /*********************************************************************

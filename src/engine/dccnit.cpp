@@ -3236,7 +3236,7 @@ void engine::updateAllHealthBars()
    character* pers = (character*) PCs->getFirst();
    for(i = 0; i < PCs->getTotal(); i++)
    {
-      pers->defineActualLifePoints(pers->getLifePoints());
+      pers->setLifePoints(pers->getLifePoints());
       pers = (character*) pers->next;
    }
 }

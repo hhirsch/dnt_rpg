@@ -167,6 +167,9 @@ class thing
        **********************************************/
        bool isAlive();
 
+       /*! Virtual Method to update the health bar draw */
+       virtual void updateHealthBar()=0;
+
        /*!
        **********************************************
        *   Virtual method to call dead animation

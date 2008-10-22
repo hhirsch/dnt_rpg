@@ -72,10 +72,6 @@ class character: public aniModel
       /*! Draw the Portrait */
       void drawMainPortrait();
 
-      /*! Define actual life points value
-       * \param newLife -> new value to the lifepoints*/
-      void defineActualLifePoints(int newLife);
-
       /*! Get First Level Skill Points
        * \param multiClassNumber -> number of the class in the multiclass
        * \return -> total points at first level */
@@ -96,6 +92,9 @@ class character: public aniModel
 
       /*! Define Character initial life points, based on its class */
       void defineInitialLifePoints();
+
+      /*! Update the health bar draw */
+      void updateHealthBar();
 
       /*! Define the character weapon, based on the current one at
        * the inventory. If none is there, the current weapon is bare
@@ -159,10 +158,10 @@ class character: public aniModel
       void callDeadAnimation();
 
       /*! Call the thing attack animation */
-       void callAttackAnimation();
+      void callAttackAnimation();
 
       /*! Call the thing attack animation */
-       void callIdleAnimation();
+      void callIdleAnimation();
 
        /*! Delete the Existed Inventory and Create a new One. 
         *  Usually called after death*/
@@ -198,10 +197,6 @@ class character: public aniModel
       friend class characterList;
        
    protected:
-       /*! Define max value of the lifePoints
-       * \param maxPoints -> new max points to life points */
-      void defineMaxLifePoints(int maxPoints);
-
       /*! Get points based on calculation
        * \param pt -> calculation info
        * \return points */

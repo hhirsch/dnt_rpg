@@ -96,6 +96,9 @@ class model3d: public aniModel
       /*!
        **********************************************/
        void callIdleAnimation();
+
+       /*! Just for thing compatibility  */
+       void updateHealthBar();
       
       model3d* next;     /**< next model on list */
       model3d* previous; /**< previous model on list */

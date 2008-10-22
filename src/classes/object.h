@@ -84,6 +84,10 @@ class object: public thing
       /*! Call the idle animation of the model */
       void callIdleAnimation();
 
+      /*! Update the health bar
+       * \note not used */
+      void updateHealthBar(){};
+
       /*! Get the type of the object */
       int getType(){return(type);};
 

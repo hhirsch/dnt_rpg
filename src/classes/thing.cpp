@@ -245,6 +245,7 @@ void thing::addLifePoints(int points)
    {
       lifePoints = maxLifePoints;
    }
+   updateHealthBar();
 }
 
 /******************************************************
@@ -253,6 +254,7 @@ void thing::addLifePoints(int points)
 void thing::setLifePoints(int points)
 {
    lifePoints = points;
+   updateHealthBar();
 }
 
 /******************************************************
@@ -268,6 +270,8 @@ int thing::getMaxLifePoints()
 void thing::setMaxLifePoints(int points)
 {
    maxLifePoints = points;
+   lifePoints = maxLifePoints;
+   updateHealthBar();
 }
 
 /******************************************************
