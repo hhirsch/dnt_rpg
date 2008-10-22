@@ -26,6 +26,7 @@
  - Define sound effects per map;
  - Walls with different textures per side;
  - MapEditor: tool to cut walls (knife);
+ - Use of heal items;
 
 Working on:
  - Character level up;
@@ -39,7 +40,6 @@ Working on:
  - Initial approach to NPC use other actions than attack actions at combat;
  - Load/Save Functions;
  - Receive XP on killing, trickering and completing missions;
- - Use of some itens;
 
 Pending:
  - Minimap Tags;
