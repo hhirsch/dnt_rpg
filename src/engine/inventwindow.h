@@ -8,6 +8,7 @@
 #include <libintl.h>
 #include "../classes/inventory.h"
 #include "../map/map.h"
+#include "character.h"
 #include "cursor.h"
 #include "modstate.h"
 #include "util.h"
@@ -28,20 +29,20 @@ class inventWindow
 {
    public:
       /*! Constructor
-       * \param invent -> inventories to show
+       * \param invent -> pointer to the character whose inventories will show
        * \param inter -> GUI interface to use 
        * \param itemWindow -> pointer to the info window used */
-      inventWindow(inventory *invent, guiInterface* inter, itemWindow* infoW);
+      inventWindow(character *invent, guiInterface* inter, itemWindow* infoW);
 
       /*! Constructor
        * \param xa -> position X to open the window
        * \param ya -> y position to open the window
        * \param title -> title of the inventory window
-       * \param invent -> inventories to show
+       * \param invent -> pointer to the character whose inventories will show
        * \param inter -> GUI interface to use 
        * \param itemWindow -> pointer to the info window used */
       inventWindow(int xa, int ya, string title, 
-                   inventory *invent, guiInterface* inter,
+                   character *invent, guiInterface* inter,
                    itemWindow* infoW);
 
       /*! Destructor */
@@ -69,15 +70,16 @@ class inventWindow
    private:
 
       /*! Init the window */
-      void init(int xa, int ya, string title, inventory *invent,
+      void init(int xa, int ya, string title, character *invent,
                 guiInterface* inter, itemWindow* infoW);
 
       /*! Open the Inventory Object Menu  */
       void openMenu(int x, int y, int type, bool seller);
 
-      itemWindow* infoWindow;
+      itemWindow* infoWindow;         /**< The item window to show object's */
 
-      inventory *inventories;         /**< Extern Inventories*/
+      inventory* inventories;         /**< Extern Inventories*/
+      character* owner;               /**< The inventories owner */
 
       guiInterface* interf;           /**< Pointer to Interface */
       window* intWindow;              /**< Internal Window */

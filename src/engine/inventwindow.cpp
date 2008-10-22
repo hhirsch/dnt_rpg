@@ -16,7 +16,7 @@
  *                          Constructor                       *
  **************************************************************/
 inventWindow::inventWindow(int xa, int ya, string title, 
-                           inventory *invent,guiInterface* inter,
+                           character* invent, guiInterface* inter,
                            itemWindow* infoW)
 {
    init(xa,ya,title,invent,inter, infoW);
@@ -25,7 +25,7 @@ inventWindow::inventWindow(int xa, int ya, string title,
 /**************************************************************
  *                          Constructor                       *
  **************************************************************/
-inventWindow::inventWindow(inventory *invent, guiInterface* inter,
+inventWindow::inventWindow(character *invent, guiInterface* inter,
                            itemWindow* infoW)
 {
    init(0,1, gettext("Inventory"), invent, inter, infoW);
@@ -35,7 +35,7 @@ inventWindow::inventWindow(inventory *invent, guiInterface* inter,
  *                              init                          *
  **************************************************************/
 void inventWindow::init(int xa, int ya, string title, 
-                       inventory *invent,guiInterface* inter,
+                       character *invent,guiInterface* inter,
                        itemWindow* infoW)
 {
    dirs dir;
@@ -49,7 +49,8 @@ void inventWindow::init(int xa, int ya, string title,
    infoWindow = infoW;
 
    /* Copy Inventories Pointers */
-   inventories = invent;
+   owner = invent;
+   inventories = owner->inventories;
    inventories->setOpenedWindow(this);
 
    /* Add Window */
@@ -487,7 +488,8 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
          }
       }
       break;
-      
+     
+      /* Verify Menu Options */
       case SELECTED_MENU:
       {
          if(objectMenu)
@@ -519,6 +521,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                {
                   if(objWhere == INVENTORY_INVENTORY)
                   {
+                     /* Equip an weapon (if possible) */
                      if(activeObject->getType() == OBJECT_TYPE_WEAPON)
                      {
                         /* Equip Weapon */
@@ -534,11 +537,13 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                         activeObject = NULL;
                         reDraw();
                      }
+
+                     /* Use a heal object */
                      else if(activeObject->getType() == OBJECT_TYPE_HEAL)
                      {
                         /* TODO -> get the heal target (currently 
                          * doing always on the inventory owner) */
-                        //character* target = owner;
+                        character* target = owner;
                         
                         /* Apply the heal to the target */
 

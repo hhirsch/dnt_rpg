@@ -78,8 +78,7 @@ void barterWindow::open(character* s, character* b,
    if(seller->inventories->getOpenedWindow() == NULL)
    {
       sellerWindow = new inventWindow(536,0,gettext("Inventory"),
-                                      seller->inventories, inter, 
-                                      infoWindow);
+                                      seller, inter, infoWindow);
    }
    else
    {
@@ -89,7 +88,7 @@ void barterWindow::open(character* s, character* b,
    if(buyer->inventories->getOpenedWindow() == NULL)
    {
       buyerWindow = new inventWindow(0,0,gettext("Inventory"),
-                                     buyer->inventories, inter, infoWindow);
+                                     buyer, inter, infoWindow);
    }
    else
    {
