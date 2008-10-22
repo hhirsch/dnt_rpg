@@ -117,227 +117,33 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
                                   messageController* controller,
                                   void* pSystem, bool heal)
 {
-   int diceValue;
-   int criticalRoll = -1;
-   int damage = 0;
-   int targetValue; 
-   int bonus;
-   bool criticalHit = false;
-   bool criticalMiss = false;
-   bool miss = false;
-   char texto[1024];
-   string diceText;
+   char texto[255];
    briefing brief;
 
+   /* Verify if the feat is valid */
    if( (featNumber < 0) || (featNumber >= totalFeats) )
    {
       brief.addText(gettext("Invalid Feat"), 255, 0, 0);
       return(false);
    }
 
-   if(!actionInRange(actor.xPosition, actor.zPosition, 
-                     target.xPosition, target.zPosition,
-                     m_feats[featNumber].range*METER_TO_DNT))
-   {
-      brief.addText(gettext("Too far away for action!"), 225, 20, 20);
-      return(false);
-   }
-
+   /* Show feature name */
    sprintf(texto,"%s ",m_feats[featNumber].name.c_str());
    brief.addText(texto);
 
-   srand(SDL_GetTicks());
-
+   /* Verify if have the feat points to use it */
    if( (m_feats[featNumber].actualQuantity >= m_feats[featNumber].costToUse)
        || (m_feats[featNumber].costToUse) == 0 )
    {
-      /* apply Costs */
-      useFeat(featNumber);
-
-      /* Call the animation */
-      //TODO call other animation, if is defined
-      if(!heal)
-      {
-         actor.callAttackAnimation();
-      }
-      //TODO -> create an heal animation!
-
-
-      //TODO verify if can use or not based on target thing
-
-
-      //verify Bonus
-      bonus = actor.getBonusValue(m_feats[featNumber].conceptBonus) + 
-              actor.sizeModifier + actor.baseAttackModifier;
-
-      dice d20;
-      diceValue = d20.roll();
-
-      //TODO apply reflexes bonus, esquive bonus, etc, to target 
-      targetValue = target.armatureClass;
-   
-      /* verify critical Hit */
-      if(diceValue == DICE_D20)
-      {
-          criticalRoll = d20.roll();
-          if( (criticalRoll + bonus - targetValue) > 0)
-          {
-              criticalHit = true;
-          }
-      }
-      else
-      /* verify critical Miss */
-      if( diceValue == 1)  
-      {
-          miss = true;
-          criticalRoll = d20.roll();
-          if( (criticalRoll + bonus - targetValue) <= 0 )
-          {
-             criticalMiss = true;
-          }
-      }
-
-      /* Put Dice Values on Briefing */
-      char txtBonus[32];
-      if(bonus >= 0)
-      {
-         sprintf(txtBonus,"+%d",bonus);
-      }
-      else
-      {
-         sprintf(txtBonus,"%d",bonus);
-      }
-
-      if(criticalRoll != -1)
-      {
-         sprintf(texto,"%d(%s) & (%d%s) x %d : ",diceValue,txtBonus,
-                                                 criticalRoll,
-                                                 txtBonus,targetValue);
-      }
-      else
-      {
-         sprintf(texto,"%d(%s) x %d : ",diceValue,txtBonus,targetValue);
-      }
-      diceText = texto;
-
-      //apply bonus (skill bonus)
-      diceValue += bonus;
-
-      /*TODO apply resistances  */
-
-      if( (diceValue - targetValue <= 0) || (criticalMiss) || (miss) )
-      {
-         brief.addText(diceText + gettext("Miss."));
-         if( criticalMiss )
-         {
-             brief.addText(gettext("Critical Miss!"), 220, 0, 0);
-             controller->addMessage(actor.xPosition,
-                                    actor.yPosition+actor.max[1],
-                                    actor.zPosition,
-                                    gettext("Critical Miss!"),
-                                    0.92,0.41,0.14);
-             if(heal)
-             {
-                 /* Damage the target with ??? ! */
-                 //TODO
-             }
-             else
-             {
-                //TODO lose weapon;
-             }
-         }
-         else
-         {
-            controller->addMessage(actor.xPosition,
-                                   actor.yPosition+actor.max[1],
-                                   actor.zPosition,gettext("Miss."),
-                                   0.92,0.41,0.14);
-         }
-         return(true);
-      }
-
-      /* Apply Base Damage Dices */
-      damage += m_feats[featNumber].diceInfo.baseDice.roll(criticalHit);
-
-      /*TODO apply aditional dices */
-
-      if(heal)
-      {
-         sprintf(texto,gettext("Healed %d points."),damage);
-      }
-      else
-      {
-         sprintf(texto,gettext("Hit for %d points."),damage);
-      }
-      brief.addText(diceText + texto);
-
-      if(heal)
-      {
-         /* apply the heal */
-         target.addLifePoints(damage);
-      }
-      else
-      {
-         /* apply damage on thing */
-         target.addLifePoints(-damage);
-      }
-
-      if( criticalHit)
-      {
-          if(heal)
-          {
-             brief.addText(gettext("Critical Heal!"), 12, 10, 128);
-             controller->addMessage(actor.xPosition,
-                                    actor.yPosition+actor.max[1],
-                                    actor.zPosition,gettext("Critical Heal!"),
-                                    0.06,0.04,0.56);
-          }
-          else
-          {
-             brief.addText(gettext("Critical Hit!"), 12, 10, 128);
-             /* Show critical hit */
-             controller->addMessage(actor.xPosition,
-                                    actor.yPosition+actor.max[1],
-                                    actor.zPosition,gettext("Critical Hit!"),
-                                    0.54,0.0,0.0);
-          }
-      }
-      /* Show Damage */
-      sprintf(texto,"%d",damage);
-      if(heal)
-      {
-         controller->addMessage(target.xPosition, 
-                                target.yPosition + target.max[1],
-                                target.zPosition, texto,
-                                0.21, 0.15, 0.7);
-      } 
-      else
-      {
-         controller->addMessage(target.xPosition, 
-                                target.yPosition + target.max[1],
-                                target.zPosition, texto,
-                                0.4, 0.01, 0.03);
-      }
-
-      if(heal)
-      {
-         /* Add Some Effect to the healed creature! */
-         //TODO!
-      }
-      else
-      {
-         /* Add Blood */
-         GLfloat cs = cos(deg2Rad(target.orientation));
-         GLfloat sn = sin(deg2Rad(target.orientation));
-         partController* ps = (partController*)pSystem;
-         ps->addParticle(PART_BLOOD, target.xPosition - (sn*2),
-                         target.yPosition + target.bloodPosition,
-                         target.zPosition - (cs*2), 
-                         target.bloodFileName);
-      }
-
-      return(true);
+      /* Try to use the feat */
+      return(doHealOrAttack(actor, target, 
+                            m_feats[featNumber].diceInfo, 
+                            &m_feats[featNumber].conceptBonus,
+                            m_feats[featNumber].range,
+                            pSystem, heal));
    }
+
+   /* Can't use due to points! */
    brief.addText(gettext("Not enought points to use!"), 255, 10, 10);
    return(false);
 }

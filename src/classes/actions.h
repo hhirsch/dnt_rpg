@@ -1,6 +1,8 @@
 #ifndef _dnt_actions_h
 #define _dnt_actions_h
 
+#include "thing.h"
+#include "dices.h"
 #include <string>
 using namespace std;
 
@@ -70,6 +72,23 @@ int numberAction(string buffer);
  * \return correspondent action Type number.
  ***************************************************************/
 int numberActionType(string buffer);
+
+/*!
+ **************************************************************** 
+ * Do an action that will affect the Life Points of the Target
+ * \param actor -> thing that will act
+ * \param target -> target of the action
+ * \param diceInfo -> the action dice
+ * \param conceptBonus -> pointer to the concept bonus (if one), or NULL
+ * \param range -> action range
+ * \param pSystem -> the particle system controller
+ * \param heal -> true if is a heal/fix feat, 
+ *                false if is an attack/break one.
+ * \return \c true if the feat was used.
+ ***************************************************************/
+bool doHealOrAttack(thing& actor, thing& target, 
+                    diceThing diceInfo, factor* conceptBonus,
+                    int range, void* pSystem, bool heal);
 
 #endif
 
