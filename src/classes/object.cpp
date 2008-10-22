@@ -47,6 +47,9 @@ object::object(string path, modelList& mdlList): thing()
    string cal3DFile = "";
    int aux;
    dirs dir;
+   int diceId;
+   int numberOfDices;
+   int sumNumber;
 
    /* Initial Values */
    cleanValues();
@@ -133,6 +136,20 @@ object::object(string path, modelList& mdlList): thing()
       else if((key == "weight_value") || (key == "weight"))
       {
          sscanf(value.c_str(),"%f",&weight);
+      }
+      else if(key == "base_dice")
+      {
+         sscanf(value.c_str(),"%d*d%d+%d",&numberOfDices, &diceId, &sumNumber);
+         diceInfo.baseDice.setNumberOfDices(numberOfDices);
+         diceInfo.baseDice.setType(diceId);
+         diceInfo.baseDice.setSumNumber(sumNumber);
+      }
+      else if(key == "aditional_dice")
+      {
+         sscanf(value.c_str(),"%d*d%d+%d",&numberOfDices, &diceId, &sumNumber);
+         diceInfo.aditionalDice.setNumberOfDices(numberOfDices);
+         diceInfo.aditionalDice.setType(diceId);
+         diceInfo.aditionalDice.setSumNumber(sumNumber);
       }
       else
       {
