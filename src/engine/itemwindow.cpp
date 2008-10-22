@@ -73,9 +73,36 @@ void itemWindow::open(object* item)
    intWindow->getObjectsList()->insertTextBox(70,prvY,250,curY-1,1,"");
 
    /***********************
+    * Heal Items Things
+    ***********************/
+   if(item->getType() == OBJECT_TYPE_HEAL)
+   {
+      diceThing dInfo = item->getDiceInfo();
+
+      /* Base Dice */
+      sprintf(buf,"%s %dd%d+%d", gettext("Heal Factor: "), 
+              dInfo.baseDice.getNumberOfDices(), 
+              dInfo.baseDice.getType(),
+              dInfo.baseDice.getSumNumber());
+      intWindow->getObjectsList()->insertTextBox(70,curY,250,curY+17,1,buf);
+      curY += 18;
+
+      /* Aditional Dice */
+      if(dInfo.aditionalDice.getNumberOfDices() > 0)
+      {
+         sprintf(buf,"%s %dd%d+%d", gettext("Aditional Factor: "), 
+                 dInfo.aditionalDice.getNumberOfDices(), 
+                 dInfo.aditionalDice.getType(),
+                 dInfo.aditionalDice.getSumNumber());
+         intWindow->getObjectsList()->insertTextBox(70,curY,250,curY+17,1,buf);
+         curY += 18;
+      }
+   }
+
+   /***********************
     * Weapons Things 
     ***********************/
-   if(item->getType() == OBJECT_TYPE_WEAPON)
+   else if(item->getType() == OBJECT_TYPE_WEAPON)
    {
       /* Get All Info from the weapon */
       wInfo category, range, size, weight,
