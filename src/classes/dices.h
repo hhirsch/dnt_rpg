@@ -84,6 +84,10 @@ class dice
 class diceThing
 {
    public:
+
+      /*! Constructor */
+      diceThing();
+
       dice baseDice;         /**< Basic Dice. */
       dice aditionalDice;    /**< Aditional Dice per Level. */
       int aditionalLevels;   /**< Number of Levels per Aditional Dices. */
