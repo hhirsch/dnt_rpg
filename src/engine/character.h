@@ -109,9 +109,7 @@ class character: public aniModel
       int classLevels[MAX_DISTINCT_CLASSES]; /**< Current level of each class */
       race* actualRace;         /**< Pointer to Race */
       align* actualAlign;       /**< Pointer to Align */
-      feats actualFeats;        /**< Feats owned by character */
-
-      string name;              /**< Character's name */
+      feats actualFeats;        /**< Feats owned by character */      
 
       int actualFightGroup;     /**< fightGroup of character, used on battles*/
       character* actualEnemy;   /**< Pointer to actual fight enemy (target) */

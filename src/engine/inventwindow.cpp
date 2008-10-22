@@ -3,10 +3,14 @@
  *************************************************************************/
 
 #include "inventwindow.h"
+#include "barterwindow.h"
+
+#include "../classes/actions.h"
 #include "../etc/dirs.h"
 #include "../gui/dntfont.h"
 #include "../sound/sound.h"
-#include "barterwindow.h"
+
+
 
 #define INVENTORY_STATE_NONE   0
 #define INVENTORY_STATE_OBJECT 1
@@ -545,8 +549,11 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                          * doing always on the inventory owner) */
                         character* target = owner;
                         
-                        /* Apply the heal to the target */
-                        //TODO
+                        /* Apply the heal to the target 
+                         * FIXME: set the range! */
+                        doHealOrAttack(*owner, *target, 
+                                       activeObject->getDiceInfo(),
+                                       NULL, 20, NULL, true);
 
                         /* And discard the object */
                         inventories->removeFromInventory(objX,objY, 

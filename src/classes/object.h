@@ -11,6 +11,7 @@ using namespace std;
 
 #include "../etc/modellist.h"
 #include "thing.h"
+#include "dices.h"
 
 #define OBJECT_TYPE_GENERIC   0
 #define OBJECT_TYPE_MAPOBJECT 1
@@ -126,6 +127,10 @@ class object: public thing
       bool depthCollision(GLfloat angle, GLfloat pX, GLfloat pY, GLfloat pZ,
                           GLfloat colMin[3], GLfloat colMax[3]);
 
+      /*! Get the related object dice information
+       * \return -> diceThing of the object */
+      diceThing getDiceInfo();
+
       object* next;         /**< Next Object on List */
       object* previous;     /**< Previous Object on List */
       
@@ -134,6 +139,8 @@ class object: public thing
       int inventSizeX,      /**< Size on inventory X axis */
           inventSizeY;      /**< Size on inventory Y axis */
 
+      diceThing diceInfo;   /**< The object's dice for action */
+
       bool staticScenery;   /**< True if is static scenery */
 
       int type;             /**< Type of the object */
@@ -141,7 +148,6 @@ class object: public thing
       model3d* model3D;     /**< Pointer to used 3D Model Maximun Quality */
       SDL_Surface* model2d; /**< Pointer to used 2D Model */
       
-      string name;          /**< Name of the Object */
       string fileName;      /**< FileName of the Object */
       string model2dName;   /**< FileName of the 2D Model */
 

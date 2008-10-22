@@ -90,6 +90,19 @@ bool doHealOrAttack(thing& actor, thing& target,
    briefing brief;
    messageController controller;
 
+   /* Show try brief */
+   if(!heal)
+   {
+      sprintf(texto, gettext("%s try to attack %s"), 
+                     actor.name.c_str(), target.name.c_str());
+   }
+   else
+   {
+      sprintf(texto, gettext("%s try to heal %s"), 
+                     actor.name.c_str(), target.name.c_str());
+   }
+   brief.addText(texto);
+
    /* Verify Action Range */
    if(!actionInRange(actor.xPosition, actor.zPosition, 
                      target.xPosition, target.zPosition,

@@ -334,7 +334,6 @@ int fightSystem::doBattleCicle()
 void fightSystem::doNPCAction(character* pers)
 {
    int attackFeat;
-   char buffer[1024];
 
    /* Determine the target of the character */
    if( (pers->actualEnemy == NULL) || (!pers->actualEnemy->isAlive()))
@@ -354,9 +353,6 @@ void fightSystem::doNPCAction(character* pers)
 
    if( (pers->actualEnemy != NULL) && (attackFeat != -1))
    {
-      sprintf(buffer, gettext("%s attacks %s|"), pers->name.c_str(),
-              pers->actualEnemy->name.c_str());
-      brief->addText(buffer);
       pers->actualFeats.applyAttackAndBreakFeat(*pers,attackFeat,
                                                 *pers->actualEnemy,
                                                 msgController,

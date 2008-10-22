@@ -45,6 +45,7 @@ class thing
       string bloodFileName;   /**< Blood Particle FileName to use */ 
       int sexType;            /**< Thing's Sex Type */
       int age;                /**< Thing's Age */
+      string name;              /**< Character's name */
 
       float cr;               /**< The Challenge Rating */
       float xpPercent;        /**< The percentual Left of XP to give */
