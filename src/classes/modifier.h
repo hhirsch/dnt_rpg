@@ -10,7 +10,8 @@ using namespace std;
 #define MAX_ATTACKS 6
 
 
-#define MOD_TYPE_ATT  "ATT"
+#define MOD_TYPE_ATT   "ATTRIBUTE"
+#define MOD_TYPE_SKILL "SKILL"
 
 /**! Actuation Factor */
 class factor

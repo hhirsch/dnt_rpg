@@ -98,7 +98,7 @@ int thing::attBonus(int curAttribute)
 int thing::getBonusValue(factor something)
 {
    skill* s = NULL;
-   if(something.type == "ATTRIBUTE")
+   if(something.type == MOD_TYPE_ATT)
    {
       s = sk.getSkillByString(something.id);
       if(s)
@@ -110,7 +110,7 @@ int thing::getBonusValue(factor something)
          cerr << "Unknow Attribute: " << something.id << endl;
       }
    }
-   else if(something.type == "SKILL")
+   else if(something.type == MOD_TYPE_SKILL)
    {
       s = sk.getSkillByString(something.id);
       if(s)

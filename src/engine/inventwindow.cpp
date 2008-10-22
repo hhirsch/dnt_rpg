@@ -551,9 +551,12 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                         
                         /* Apply the heal to the target 
                          * FIXME: set the range! */
+                        factor healFactor;
+                        healFactor.id = "HEAL";
+                        healFactor.type = MOD_TYPE_SKILL;
                         doHealOrAttack(*owner, *target, 
                                        activeObject->getDiceInfo(),
-                                       NULL, 20, NULL, true);
+                                       &healFactor, 20, NULL, true);
 
                         /* And discard the object */
                         inventories->removeFromInventory(objX,objY, 
