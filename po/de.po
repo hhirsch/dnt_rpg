@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-10-14 09:15-0200\n"
+"POT-Creation-Date: 2008-10-23 08:03-0200\n"
 "PO-Revision-Date: 2008-05-18 14:48+0000\n"
 "Last-Translator: pano <Pano_90@gmx.de>\n"
 "Language-Team: German <de@li.org>\n"
@@ -17,45 +17,55 @@ msgstr ""
 "X-Launchpad-Export-Date: 2008-10-14 09:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/classes/classes.cpp:105 src/classes/race.cpp:105
-msgid "Unknow Attribute:"
-msgstr "Unbekannte Eigenschaft:"
-
-#: src/classes/feats.cpp:134
-msgid "Invalid Feat"
+#: src/classes/actions.cpp:96
+#, c-format
+msgid "%s try to attack %s"
 msgstr ""
 
-#: src/classes/feats.cpp:142
+#: src/classes/actions.cpp:101
+#, c-format
+msgid "%s try to heal %s"
+msgstr ""
+
+#: src/classes/actions.cpp:111
 msgid "Too far away for action!"
 msgstr "Zu weit entfernt zum Agieren!"
 
-#: src/classes/feats.cpp:230 src/classes/feats.cpp:253
+#: src/classes/actions.cpp:193 src/classes/actions.cpp:216
 msgid "Miss."
 msgstr "Fehlschlag."
 
-#: src/classes/feats.cpp:233 src/classes/feats.cpp:237
+#: src/classes/actions.cpp:196 src/classes/actions.cpp:200
 msgid "Critical Miss!"
 msgstr "Kritischer Fehlschlag!"
 
-#: src/classes/feats.cpp:266
+#: src/classes/actions.cpp:229
 #, c-format
 msgid "Healed %d points."
 msgstr "%d Punkte geheilt"
 
-#: src/classes/feats.cpp:270
+#: src/classes/actions.cpp:233
 #, c-format
 msgid "Hit for %d points."
 msgstr ""
 
-#: src/classes/feats.cpp:289 src/classes/feats.cpp:292
+#: src/classes/actions.cpp:252 src/classes/actions.cpp:255
 msgid "Critical Heal!"
 msgstr "kritische HEilung"
 
-#: src/classes/feats.cpp:297 src/classes/feats.cpp:301
+#: src/classes/actions.cpp:260 src/classes/actions.cpp:264
 msgid "Critical Hit!"
 msgstr "Kritischer Treffer"
 
-#: src/classes/feats.cpp:341
+#: src/classes/classes.cpp:105 src/classes/race.cpp:105
+msgid "Unknow Attribute:"
+msgstr "Unbekannte Eigenschaft:"
+
+#: src/classes/feats.cpp:126
+msgid "Invalid Feat"
+msgstr ""
+
+#: src/classes/feats.cpp:147
 msgid "Not enought points to use!"
 msgstr "Nicht genug Punkte um zu benutzen"
 
@@ -197,28 +207,28 @@ msgstr ""
 msgid "Impose"
 msgstr ""
 
-#: src/engine/barterwindow.cpp:80 src/engine/barterwindow.cpp:91
-#: src/engine/inventwindow.cpp:31
+#: src/engine/barterwindow.cpp:80 src/engine/barterwindow.cpp:90
+#: src/engine/inventwindow.cpp:35
 msgid "Inventory"
 msgstr "Inventar"
 
-#: src/engine/barterwindow.cpp:246
+#: src/engine/barterwindow.cpp:245
 msgid "The barter was accepted."
 msgstr ""
 
-#: src/engine/barterwindow.cpp:251
+#: src/engine/barterwindow.cpp:250
 msgid "The barter was rejected."
 msgstr ""
 
-#: src/engine/barterwindow.cpp:271
+#: src/engine/barterwindow.cpp:270
 msgid "The barter imposition was accepted."
 msgstr ""
 
-#: src/engine/barterwindow.cpp:276
+#: src/engine/barterwindow.cpp:275
 msgid "The barter imposition was rejected."
 msgstr ""
 
-#: src/engine/barterwindow.cpp:295 src/engine/inventwindow.cpp:197
+#: src/engine/barterwindow.cpp:294 src/engine/inventwindow.cpp:203
 msgid "Remove"
 msgstr ""
 
@@ -563,27 +573,27 @@ msgstr ""
 msgid "Exit"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:178
+#: src/engine/inventwindow.cpp:183
 msgid "Drop"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:185
+#: src/engine/inventwindow.cpp:190
 msgid "Buy"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:185
+#: src/engine/inventwindow.cpp:190
 msgid "Sell"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:192
+#: src/engine/inventwindow.cpp:197
 msgid "Use"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:201
+#: src/engine/inventwindow.cpp:207
 msgid "Info"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:205
+#: src/engine/inventwindow.cpp:211
 msgid "Get"
 msgstr ""
 
@@ -602,31 +612,39 @@ msgstr ""
 msgid "Weight: %.2f Kg"
 msgstr ""
 
-#: src/engine/itemwindow.cpp:88
+#: src/engine/itemwindow.cpp:83
+msgid "Heal Factor: "
+msgstr ""
+
+#: src/engine/itemwindow.cpp:93
+msgid "Aditional Factor: "
+msgstr ""
+
+#: src/engine/itemwindow.cpp:115
 msgid "Category: "
 msgstr ""
 
-#: src/engine/itemwindow.cpp:94
+#: src/engine/itemwindow.cpp:121
 msgid "Damage Dice: "
 msgstr ""
 
-#: src/engine/itemwindow.cpp:102
+#: src/engine/itemwindow.cpp:129
 msgid "Primary Damage: "
 msgstr ""
 
-#: src/engine/itemwindow.cpp:109
+#: src/engine/itemwindow.cpp:136
 msgid "Secondary Damage: "
 msgstr ""
 
-#: src/engine/itemwindow.cpp:121
+#: src/engine/itemwindow.cpp:148
 msgid "Range: "
 msgstr ""
 
-#: src/engine/itemwindow.cpp:126
+#: src/engine/itemwindow.cpp:153
 msgid "Size: "
 msgstr ""
 
-#: src/engine/itemwindow.cpp:144
+#: src/engine/itemwindow.cpp:171
 msgid "Ok"
 msgstr ""
 
@@ -834,11 +852,6 @@ msgstr ""
 #: src/fight/fightSystem.cpp:289 src/fight/fightSystem.cpp:295
 #, c-format
 msgid "%s's turn."
-msgstr ""
-
-#: src/fight/fightSystem.cpp:357
-#, c-format
-msgid "%s attacks %s|"
 msgstr ""
 
 #: src/fight/initiative.cpp:40

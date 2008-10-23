@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-10-14 09:15-0200\n"
+"POT-Creation-Date: 2008-10-23 08:03-0200\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -15,45 +15,55 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/classes/classes.cpp:105 src/classes/race.cpp:105
-msgid "Unknow Attribute:"
-msgstr "Atributo Desconhecido:"
+#: src/classes/actions.cpp:96
+#, c-format
+msgid "%s try to attack %s"
+msgstr "%s tenta atacar %s"
 
-#: src/classes/feats.cpp:134
-msgid "Invalid Feat"
-msgstr "Habilidade Inválida"
+#: src/classes/actions.cpp:101
+#, c-format
+msgid "%s try to heal %s"
+msgstr "%s tenta medicar %s"
 
-#: src/classes/feats.cpp:142
+#: src/classes/actions.cpp:111
 msgid "Too far away for action!"
 msgstr "Muito distante para realizar ação!"
 
-#: src/classes/feats.cpp:230 src/classes/feats.cpp:253
+#: src/classes/actions.cpp:193 src/classes/actions.cpp:216
 msgid "Miss."
 msgstr "Erro."
 
-#: src/classes/feats.cpp:233 src/classes/feats.cpp:237
+#: src/classes/actions.cpp:196 src/classes/actions.cpp:200
 msgid "Critical Miss!"
 msgstr "Erro Crítico!"
 
-#: src/classes/feats.cpp:266
+#: src/classes/actions.cpp:229
 #, c-format
 msgid "Healed %d points."
 msgstr "Curou %d pontos."
 
-#: src/classes/feats.cpp:270
+#: src/classes/actions.cpp:233
 #, c-format
 msgid "Hit for %d points."
 msgstr "Acertou para %d pontos."
 
-#: src/classes/feats.cpp:289 src/classes/feats.cpp:292
+#: src/classes/actions.cpp:252 src/classes/actions.cpp:255
 msgid "Critical Heal!"
 msgstr "Cura Crítica!"
 
-#: src/classes/feats.cpp:297 src/classes/feats.cpp:301
+#: src/classes/actions.cpp:260 src/classes/actions.cpp:264
 msgid "Critical Hit!"
 msgstr "Dano Crítico!"
 
-#: src/classes/feats.cpp:341
+#: src/classes/classes.cpp:105 src/classes/race.cpp:105
+msgid "Unknow Attribute:"
+msgstr "Atributo Desconhecido:"
+
+#: src/classes/feats.cpp:126
+msgid "Invalid Feat"
+msgstr "Habilidade Inválida"
+
+#: src/classes/feats.cpp:147
 msgid "Not enought points to use!"
 msgstr "Pontos não suficientes para usar!"
 
@@ -195,28 +205,28 @@ msgstr "Oferecer"
 msgid "Impose"
 msgstr "Impor"
 
-#: src/engine/barterwindow.cpp:80 src/engine/barterwindow.cpp:91
-#: src/engine/inventwindow.cpp:31
+#: src/engine/barterwindow.cpp:80 src/engine/barterwindow.cpp:90
+#: src/engine/inventwindow.cpp:35
 msgid "Inventory"
 msgstr "Inventário"
 
-#: src/engine/barterwindow.cpp:246
+#: src/engine/barterwindow.cpp:245
 msgid "The barter was accepted."
 msgstr "A barganha foi aceita."
 
-#: src/engine/barterwindow.cpp:251
+#: src/engine/barterwindow.cpp:250
 msgid "The barter was rejected."
 msgstr "A barganha foi recusada."
 
-#: src/engine/barterwindow.cpp:271
+#: src/engine/barterwindow.cpp:270
 msgid "The barter imposition was accepted."
 msgstr "A imposição foi aceita."
 
-#: src/engine/barterwindow.cpp:276
+#: src/engine/barterwindow.cpp:275
 msgid "The barter imposition was rejected."
 msgstr "A imposição foi recusada."
 
-#: src/engine/barterwindow.cpp:295 src/engine/inventwindow.cpp:197
+#: src/engine/barterwindow.cpp:294 src/engine/inventwindow.cpp:203
 msgid "Remove"
 msgstr "Remover"
 
@@ -565,27 +575,27 @@ msgstr "Opções"
 msgid "Exit"
 msgstr "Sair"
 
-#: src/engine/inventwindow.cpp:178
+#: src/engine/inventwindow.cpp:183
 msgid "Drop"
 msgstr "Descartar"
 
-#: src/engine/inventwindow.cpp:185
+#: src/engine/inventwindow.cpp:190
 msgid "Buy"
 msgstr "Comprar"
 
-#: src/engine/inventwindow.cpp:185
+#: src/engine/inventwindow.cpp:190
 msgid "Sell"
 msgstr "Vender"
 
-#: src/engine/inventwindow.cpp:192
+#: src/engine/inventwindow.cpp:197
 msgid "Use"
 msgstr "Usar"
 
-#: src/engine/inventwindow.cpp:201
+#: src/engine/inventwindow.cpp:207
 msgid "Info"
 msgstr "Info"
 
-#: src/engine/inventwindow.cpp:205
+#: src/engine/inventwindow.cpp:211
 msgid "Get"
 msgstr "Pegar"
 
@@ -604,31 +614,39 @@ msgstr "Custo: %.2f"
 msgid "Weight: %.2f Kg"
 msgstr "Peso: %.2f Kg"
 
-#: src/engine/itemwindow.cpp:88
+#: src/engine/itemwindow.cpp:83
+msgid "Heal Factor: "
+msgstr "Fator de Cura:"
+
+#: src/engine/itemwindow.cpp:93
+msgid "Aditional Factor: "
+msgstr "Fator Adicional: "
+
+#: src/engine/itemwindow.cpp:115
 msgid "Category: "
 msgstr "Categoria: "
 
-#: src/engine/itemwindow.cpp:94
+#: src/engine/itemwindow.cpp:121
 msgid "Damage Dice: "
 msgstr "Dado de Dano: "
 
-#: src/engine/itemwindow.cpp:102
+#: src/engine/itemwindow.cpp:129
 msgid "Primary Damage: "
 msgstr "Dano Primário: "
 
-#: src/engine/itemwindow.cpp:109
+#: src/engine/itemwindow.cpp:136
 msgid "Secondary Damage: "
 msgstr "Dano Secundário: "
 
-#: src/engine/itemwindow.cpp:121
+#: src/engine/itemwindow.cpp:148
 msgid "Range: "
 msgstr "Alcance: "
 
-#: src/engine/itemwindow.cpp:126
+#: src/engine/itemwindow.cpp:153
 msgid "Size: "
 msgstr "Tamanho: "
 
-#: src/engine/itemwindow.cpp:144
+#: src/engine/itemwindow.cpp:171
 msgid "Ok"
 msgstr "Ok"
 
@@ -837,11 +855,6 @@ msgstr "Erro: Sem Personagens!"
 #, c-format
 msgid "%s's turn."
 msgstr "Turno de %s."
-
-#: src/fight/fightSystem.cpp:357
-#, c-format
-msgid "%s attacks %s|"
-msgstr "%s ataca %s|"
 
 #: src/fight/initiative.cpp:40
 #, c-format
@@ -3608,6 +3621,9 @@ msgstr "Leve"
 #: data/weapons/types/weights.dcl:4
 msgid "Heavy"
 msgstr "Pesada"
+
+#~ msgid "%s attacks %s|"
+#~ msgstr "%s ataca %s|"
 
 #~ msgid "Warn: Can't Load Picture, may crash soon (out of memory)!\n"
 #~ msgstr "Aviso: Não pude carregar imagem (sem memória)!\n"
