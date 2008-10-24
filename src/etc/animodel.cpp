@@ -66,6 +66,15 @@ GLuint aniModel::loadTexture(const string& strFilename)
       format = GL_RGBA;
    }
 
+   /* Show Warning if not power of 2 */
+   if( (img->h != smallestPowerOfTwo(img->h)) ||
+       (img->w != smallestPowerOfTwo(img->w)) )
+   {
+      cout << "Warning: image '" << strFilename 
+           << "' is of non-power of two dimension '" 
+           << img->w << "x" << img->h << "'" << endl;
+   }
+
    
    glGenTextures(1, &pId);
    glBindTexture(GL_TEXTURE_2D, pId);
