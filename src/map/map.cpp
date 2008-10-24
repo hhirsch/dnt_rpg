@@ -8,6 +8,7 @@
 #include "../etc/extensions.h"
 #include "../engine/options.h"
 #include "../etc/dirs.h"
+#include "../config.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -2403,7 +2404,7 @@ int Map::save(string arquivo)
    
    /* Write Dimensions */
    fprintf(arq,"T %dX%d\n",x,z);
-   fprintf(arq,"# Made by DccNiTghtmare's MapEditor, v0.2\n");
+   fprintf(arq,"# Made by DccNiTghtmare's MapEditor, %s\n", VERSION);
 
    /* Write fog file name, if exists */
    if( !fog.fileName.empty() )
