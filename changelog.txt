@@ -26,6 +26,7 @@
  - Define sound effects per map;
  - Walls with different textures per side;
  - MapEditor: tool to cut walls (knife);
+ - New MiniMap Draw Method;
  - Use of heal items;
 
 Working on:
@@ -40,14 +41,13 @@ Working on:
  - Initial approach to NPC use other actions than attack actions at combat;
  - Load/Save Functions;
  - Receive XP on killing, trickering and completing missions;
+ - New Maps;
 
 Pending:
  - Minimap Tags;
- - Outdoor MiniMap rewrite;
  - Extend walls to follow map height;
  - Define paths to improve the A* at outdoor maps;
  - New Missions;
- - New Maps;
  - Put Lights on MapEditor;
  - Make a tutorial to the battle system;
  - Implement 5-15% of the feats defined on DNT Book;
