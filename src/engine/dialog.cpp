@@ -561,14 +561,14 @@ void conversation::openDialog(guiInterface* gui, character* PC)
    usedGui = gui;
    actualPC = PC;
    actual = -1;
-   jan = gui->insertWindow(330,100,585,355,gettext("Dialog"));
+   jan = gui->insertWindow(280,100,605,355,gettext("Dialog"));
    barterButton = jan->getObjectsList()->insertButton(5,86,69,104,
                                             gettext("Barter"),1);
    jan->getObjectsList()->insertPicture(10,25,0,0,
                       dir.getRealFile(ownerNPC->getPortraitFileName()).c_str());
-   npcText = jan->getObjectsList()->insertRolBar(71,20,250,115,"");
+   npcText = jan->getObjectsList()->insertRolBar(71,20,320,115,"");
    //npcText->fonte = FMINI;
-   pcSelText = jan->getObjectsList()->insertSelText(5,116,250,250,"","","",
+   pcSelText = jan->getObjectsList()->insertSelText(5,116,320,250,"","","",
                                                     "","");
    jan->setExternPointer(&jan);
    gui->openWindow(jan);
