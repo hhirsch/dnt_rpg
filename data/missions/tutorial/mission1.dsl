@@ -31,8 +31,10 @@ script()
          if(dialog == 6)
             # Have the cartridge, set logan talk to get it!
             dialog = 7
-            dialogSetInitial(logan, mapa, dialog)
-         end   
+            dialogSetInitial(logan, mapa, dialog)            
+         end
+         # Just a bigger sleep when with the cartridge
+         wait(waitTime)
       else 
          if(dialog != 6)
             # Haven't the cartridge, set the logan talk to wait.
@@ -58,9 +60,7 @@ script()
       end
 
       # Wait some time, before the next check
-      # FIXME: accept pendingActions at mission scripts!!
-      #        (for now it is always deleted on map changes!)
-      #wait(waitTime)
+      wait(waitTime)
 
    end
 
