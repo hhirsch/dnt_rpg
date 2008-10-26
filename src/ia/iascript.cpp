@@ -247,6 +247,7 @@ void iaScript::run(int maxLines)
                   jmp->begin = lastPos;
                   jmp->end = 0; //Unknow.
                   jmp->command = IA_SETENCE_SCRIPT;
+                  jmp->lineNumber = actualLine;
                   jumpStack->push(jmp);
                }
                else if(!context.empty())
@@ -313,6 +314,7 @@ void iaScript::run(int maxLines)
                                  jmp->begin = lastPos;
                                  jmp->end = 0; //Unknow.
                                  jmp->command = IA_SETENCE_ELSE;
+                                 jmp->lineNumber = actualLine;
                                  jumpStack->push(jmp);
                               }
                               else if(token == IA_SETENCE_IF)
@@ -328,6 +330,7 @@ void iaScript::run(int maxLines)
                                     jmp->begin = lastPos;
                                     jmp->end = 0; //Unknow.
                                     jmp->command = IA_SETENCE_IF;
+                                    jmp->lineNumber = actualLine;
                                     jumpStack->push(jmp);
                                  }
                               }
@@ -348,6 +351,7 @@ void iaScript::run(int maxLines)
                        jmp->begin = lastPos;
                        jmp->end = 0; //Unknow.
                        jmp->command = IA_SETENCE_IF;
+                       jmp->lineNumber = actualLine;
                        jumpStack->push(jmp);
                     }
                     delete(ifCond);
@@ -406,6 +410,7 @@ void iaScript::run(int maxLines)
                        jmp->begin = lastPos;
                        jmp->end = 0; //Unknow.
                        jmp->command = IA_SETENCE_WHILE;
+                       jmp->lineNumber = actualLine;
                        jumpStack->push(jmp);
                      }
                      else
@@ -448,6 +453,8 @@ void iaScript::run(int maxLines)
                         if(jmp->command == IA_SETENCE_WHILE)
                         {
                            file.seekg(jmp->begin);
+                           /* Redefine current line (to -1, cause will inc) */
+                           actualLine = jmp->lineNumber - 1;
                         }
                         delete(jmp);
                      }

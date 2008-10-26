@@ -14,6 +14,7 @@ class iaJumpPos
       streampos begin;     /**< The begin of the block */
       streampos end;       /**< The end of the block (normally used only on
                                 for and whiles). */
+      int lineNumber;      /**< The file line number (for errors show) */
       iaJumpPos* previous; /**< Previous jump on the stack */
       string command;      /**< The token command (if, else, for) */
 };
