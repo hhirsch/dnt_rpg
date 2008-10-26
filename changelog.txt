@@ -28,6 +28,8 @@
  - MapEditor: tool to cut walls (knife);
  - New MiniMap Draw Method;
  - Use of heal items;
+ - Fixed a bug at IA Script variable type check;
+ - VIM syntax file for DNT Script Language;
 
 Working on:
  - Character level up;
@@ -42,12 +44,12 @@ Working on:
  - Load/Save Functions;
  - Receive XP on killing, trickering and completing missions;
  - New Maps;
+ - New Missions;
 
 Pending:
  - Minimap Tags;
  - Extend walls to follow map height;
  - Define paths to improve the A* at outdoor maps;
- - New Missions;
  - Put Lights on MapEditor;
  - Make a tutorial to the battle system;
  - Implement 5-15% of the feats defined on DNT Book;
