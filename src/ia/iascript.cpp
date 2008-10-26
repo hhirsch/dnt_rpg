@@ -610,12 +610,33 @@ void iaScript::callFunction(iaVariable* var, string strLine,
 
    string varName = "";
 
+
+   ////////////////////////////////////////////////////
+   //                   Debug Functions              //
+   ////////////////////////////////////////////////////
+   
+   /* Syntax: void print(string message)  */
+   if(functionName == IA_DEBUG_PRINT)
+   {
+      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
+      if(iv)
+      {
+         string st = *(string*)iv->value;
+         /* Print the message */
+         cout << st << endl;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+   }
+
    ////////////////////////////////////////////////////
    //             Movimentation Functions            //
    ////////////////////////////////////////////////////
 
    /* Move to Position */
-   if(functionName == IA_MOVE_TO_POSITION)
+   else if(functionName == IA_MOVE_TO_POSITION)
    {
       /* Syntax bool moveToPosition(character char, int x, int z) */
       varName = symbols->addTempSymbol(IA_TYPE_BOOL);
@@ -1311,6 +1332,31 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    //                Character Functions             //
    ////////////////////////////////////////////////////
 
+   /* Syntax character function(s)  */
+   else if(functionName == IA_GET_NPC_BY_NAME)
+   {
+      string charName = "";
+
+      /* Get the name */
+      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
+      if(iv != NULL)
+      {
+         charName = *(string*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      /* character getNPCByName(string s) */
+      character* dude = NULL;
+      if(eng->NPCs != NULL)
+      {
+         eng->NPCs->getCharacter(charName);
+      }
+      assignValue(var, (void*)dude, IA_TYPE_CHARACTER);
+   }
+
    /* Syntax void function(character c, int i) */
    else if(functionName == IA_CHARACTER_SET_PSYCHO)
    {
@@ -1471,16 +1517,14 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          }
       }
 
+      /* Set the result */
+      bool bl = false;
+      
       if(dude != NULL)
       {
-         bool bl = (dude->inventories->getItemByFileName(objectFile) != NULL);
-         assignValue(var, (void*)&bl, IA_TYPE_BOOL);
+         bl = (dude->inventories->getItemByFileName(objectFile) != NULL);
       }
-      else
-      {
-         cerr << "Error: Tried to access a NULL character at line " 
-                 << actualLine << " of the script: " << fileName << endl;
-      }
+      assignValue(var, (void*)&bl, IA_TYPE_BOOL);
    }
 
    ////////////////////////////////////////////////////

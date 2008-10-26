@@ -82,7 +82,8 @@ bool isType(string s)
  ***********************************************************************/
 bool isFunction(string s)
 {
-   return( (s == IA_MOVE_TO_POSITION) || (s == IA_MOVE_TO_CHARACTER) ||
+   return( (s == IA_DEBUG_PRINT) || 
+           (s == IA_MOVE_TO_POSITION) || (s == IA_MOVE_TO_CHARACTER) ||
            (s == IA_MOVE_TO_OBJECT) || (s == IA_SET_IDLE) ||
            (s == IA_WAIT) ||
            (s == IA_FEAT_ACTUAL_QUANTITY) || (s == IA_FEAT_QUANTITY_PER_DAY) ||
@@ -103,7 +104,7 @@ bool isFunction(string s)
            (s == IA_MISSION_IS_ACTIVE) || (s == IA_MISSION_SET_TEMP) ||
            (s == IA_MISSION_GET_TEMP) || (s == IA_MISSION_SET_XP) ||
            (s == IA_INVENTORY_HAVE) || (s == IA_FIGHT_GET_NEAREST_ENEMY) ||
-           (s == IA_DIALOG_SET_INITIAL) );
+           (s == IA_DIALOG_SET_INITIAL) || (s == IA_GET_NPC_BY_NAME) );
 }
 
 /***********************************************************************
@@ -146,7 +147,7 @@ string functionType(string s)
    }
    /* Character Functions */
    else if( (s == IA_SELF_CHARACTER) || (s == IA_ACTIVE_CHARACTER) ||
-            (s == IA_FIGHT_GET_NEAREST_ENEMY) )
+            (s == IA_FIGHT_GET_NEAREST_ENEMY) || (s == IA_GET_NPC_BY_NAME) )
    {
       return(IA_TYPE_CHARACTER);
    }

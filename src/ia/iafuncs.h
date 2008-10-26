@@ -85,6 +85,12 @@ using namespace std;
 #define IA_WAIT "wait"
 
 ////////////////////////////////////////////////////
+//               Debug Functions                  //
+////////////////////////////////////////////////////
+/*! void print(string msg) */
+#define IA_DEBUG_PRINT "print"
+
+////////////////////////////////////////////////////
 //             Movimentation Functions            //
 ////////////////////////////////////////////////////
 /*! bool moveToPosition(character char, int x, int z) */
@@ -157,6 +163,9 @@ using namespace std;
 ////////////////////////////////////////////////////
 //                Character Functions             //
 ////////////////////////////////////////////////////
+/*! character getNPCBytName(string c) */
+#define IA_GET_NPC_BY_NAME "getNPCByName"
+
 /*! int getPsycho(character c)  */
 #define IA_CHARACTER_GET_PSYCHO "getPsycho"
 /*! void setPsycho(character c, int psychoState)  */
