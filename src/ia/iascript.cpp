@@ -358,12 +358,15 @@ void iaScript::run(int maxLines)
                   }
                   else if(token == IA_SETENCE_ELSE)
                   {
-                     /* It's an else */
+                     /* It's an else (an else at this state means
+                      * just to be ignored: it's treated only when the 'if'
+                      * condition fails) */
                      iaJumpPos* jmp = jumpStack->pop();
                      if( (jmp) && (jmp->command == IA_SETENCE_IF) )
                      {
-                        //ignore the else and all elses after it, to an end
-                        while( (token != IA_SETENCE_END) )
+                        /* Search for the else end */
+                        numBegins = 1; // The else is a begin block
+                        while(numBegins > 0)
                         {
                            lastPos = file.tellg();
                            getline(file, strBuffer);
@@ -380,6 +383,30 @@ void iaScript::run(int maxLines)
                            else
                            {
                               token = nextToken(strBuffer, pos);
+                              /* The numBegins is to avoid ENDs not related 
+                               * to the ELSE itself */
+                              if(token == IA_SETENCE_END)
+                              {
+                                 numBegins--;
+                              }
+                              else if(token == IA_SETENCE_ELSE)
+                              {
+                                 if(numBegins == 1)
+                                 {
+                                    /* It's an else to the current one, so
+                                     * is the end of block! */
+                                    numBegins = 0;
+                                 }
+                                 /* Otherwise, It's an else for another if, so
+                                  * it's a block open. But it is also a block
+                                  * close, for the if, so no numBegins change
+                                  * here! (trickery, no? =^P) */
+                              }
+                              else if( (token == IA_SETENCE_IF) ||
+                                    (token == IA_SETENCE_WHILE) )
+                              {
+                                 numBegins++;
+                              }
                            }
                         }
                         /* free the jump */
@@ -704,7 +731,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       {
          dude->pathFind.defineMap(actualMap);
          pendAction = eng->actionControl->addAction(line, ACT_MOVE, 
-                                                    dude, X, Z);
+                                                    dude, X, Z,
+                                               (type == IASCRIPT_TYPE_MISSION));
       }
    }
 
@@ -745,7 +773,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       {
          dude->pathFind.defineMap(actualMap);
          pendAction = eng->actionControl->addAction(line, ACT_MOVE, 
-                                                     dude, tgt);
+                                                    dude, tgt, 
+                                               (type == IASCRIPT_TYPE_MISSION));
       }
    }
 
@@ -786,7 +815,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       {
          dude->pathFind.defineMap(actualMap);
          pendAction = eng->actionControl->addAction(line, ACT_MOVE, 
-                                                    dude, obj);
+                                                    dude, obj,
+                                               (type == IASCRIPT_TYPE_MISSION));
       }
    }
 
@@ -836,7 +866,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          }
          /* Set the pending action (note: time is in mseconds) */
          pendAction = eng->actionControl->addAction(line, ACT_WAIT, 
-                                                    seconds*1000);
+                                                    seconds*1000,
+                                               (type == IASCRIPT_TYPE_MISSION));
       }
    }
 
