@@ -107,7 +107,7 @@ using namespace std;
 ////////////////////////////////////////////////////
 /*! void missionAdd(string missionFile) */
 #define IA_MISSION_ADD  "missionAdd"
-/*! void missionComplete(string missionFile) */
+/*! void missionComplete(string missionFile, int cType) */
 #define IA_MISSION_COMPLETE "missionComplete"
 /*! bool missionIsActive(string missionFile) */
 #define IA_MISSION_IS_ACTIVE "missionIsActive"
