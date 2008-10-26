@@ -95,6 +95,14 @@ class pendingAction
       /*! set the toggle state */
       void setToggle(bool b);
 
+      /*! Set the action as a mission one
+       * \note -> mission actions aren't aborted */
+      void setAsMissionAction();
+
+      /*! Verify if the action is a mission one
+       * \return -> true if is a mission action */
+      bool isMissionAction();
+
       /*! Get the script line where the action was called
        * \return -> the line, with the action's function changed to the
        *            temporary variable. */
@@ -126,6 +134,9 @@ class pendingAction
       Uint32 initedTime;  /**< Time when inited */
 
       bool toggle;        /**< The state of the action */
+
+      bool missionAction; /**< True if is a mission action (that can't
+                               be stopped) */
 };
 
 /*! the controller of actions taked by characters on the game */
@@ -142,18 +153,20 @@ class pendingActionController
        * \param type -> the type of the action
        * \param act -> the character actor
        * \param tgt -> the target thing
+       * \param mission -> if is a mission action
        * \return pointer to the pending action added */
       pendingAction* addAction(string strLine, int type, character* act, 
-                               thing* tgt);
+                               thing* tgt, bool mission);
       /*! Add action to the controller
        * \param strLine -> the line of the script the action was 
        * \param type -> the type of the action
        * \param act -> the character actor
        * \param tgtX -> target X position
        * \param tgtZ -> target Z position
+       * \param mission -> if is a mission action
        * \return pointer to the pnding action added */
       pendingAction* addAction(string strLine, int type, character* act, 
-                               GLfloat tgtX, GLfloat tgtZ);
+                               GLfloat tgtX, GLfloat tgtZ, bool mission);
       /*! Add action to the controller
        * \param strLine -> the line of the script the action was 
        * \param type -> the type of the action
@@ -161,25 +174,30 @@ class pendingActionController
        * \param tgt -> the target thing
        * \param tgtX -> target X position
        * \param tgtZ -> target Z position
+       * \param mission -> if is a mission action
        * \return pointer to the pending action added */
       pendingAction* addAction(string strLine, int type, character* act, 
-                               thing* tgt, GLfloat tgtX, GLfloat tgtZ);
+                               thing* tgt, GLfloat tgtX, GLfloat tgtZ, 
+                               bool mission);
       /*! Constructor
        * \param strLine -> the line of the script the action was
        * \param type -> type of the action
+       * \param mission -> if is a mission action
        * \param v -> integer value to pass */
-      pendingAction* addAction(string strLine, int type, int v);
+      pendingAction* addAction(string strLine, int type, int v, bool mission);
       /*! add action to the controller
        * \param act -> pointer to the action to add
+       * \param mission -> if is a mission action
        * \return -> action pointer. the same of the parameter. */
-      pendingAction* addAction(pendingAction* act);
+      pendingAction* addAction(pendingAction* act, bool mission);
 
       /*! Remove Action from the controller
        * \param act -> pointer to the pendingAction to remove */
       void removeAction(pendingAction* act);
 
-      /*! Remove all Actions from the controller */
-      void removeAllActions();
+      /*! Remove all Actions from the controller
+       * \param missions -> true if will remove missions actions too */
+      void removeAllActions(bool missions=false);
 
       /*! Abort All actions at the controller (usefull when changing from
        *  battle mode to real time mode). */

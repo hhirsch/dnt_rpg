@@ -59,6 +59,7 @@ void pendingAction::init(string strLine, int type, character* act, thing* tgt,
    previous = NULL;
    value = v;
    initedTime = SDL_GetTicks();
+   missionAction = false;
 }
 
 /************************************************************
@@ -143,6 +144,23 @@ void pendingAction::setToggle(bool b)
 }
 
 /************************************************************
+ *                    setAsMissionAction                    *
+ ************************************************************/
+void pendingAction::setAsMissionAction()
+{
+   missionAction = true;
+}
+
+/************************************************************
+ *                      isMissionAction                     *
+ ************************************************************/
+bool pendingAction::isMissionAction()
+{
+   return(missionAction);
+}
+
+
+/************************************************************
  *                       getScriptLine                      *
  ************************************************************/
 string pendingAction::getScriptLine()
@@ -174,7 +192,7 @@ pendingActionController::pendingActionController()
  ************************************************************/
 pendingActionController::~pendingActionController()
 {
-   removeAllActions();
+   removeAllActions(true);
 }
 
 /************************************************************
@@ -196,19 +214,35 @@ void pendingActionController::abortAllActions()
    pendingAction* ac = first;
    for(i = 0; i < total; i++)
    {
-      ac->setAsEnded(false);
-      ac = ac->next;
+      if(!ac->isMissionAction())
+      {
+         ac->setAsEnded(false);
+         ac = ac->next;
+      }
    }
 }
 
 /************************************************************
  *                      removeAllActions                    *
  ************************************************************/
-void pendingActionController::removeAllActions()
+void pendingActionController::removeAllActions(bool mission)
 {
-   while(total > 0)
+   int curTotal = total;
+   int i;
+   pendingAction* act = first;
+   pendingAction* ract;
+
+   /* Remove all Actions */
+   for(i = 0; i < curTotal; i++)
    {
-      removeAction(first);
+      ract = act;
+      act = act->next;
+      /* Only if is not a missionAction or 
+       * if is to delete missions actions too */
+      if( (mission) || (!ract->isMissionAction()))
+      {
+         removeAction(ract);
+      }
    }
 }
 
@@ -234,7 +268,8 @@ void pendingActionController::removeAction(pendingAction* act)
 /************************************************************
  *                        addAction                         *
  ************************************************************/
-pendingAction* pendingActionController::addAction(pendingAction* act)
+pendingAction* pendingActionController::addAction(pendingAction* act, 
+                                                  bool mission)
 {
    if(act)
    {
@@ -291,6 +326,13 @@ pendingAction* pendingActionController::addAction(pendingAction* act)
       }
 
    }
+
+   /* Set as mission action, if needed */
+   if(mission)
+   {
+      act->setAsMissionAction();
+   }
+
    return(act);
 }
 
@@ -298,10 +340,11 @@ pendingAction* pendingActionController::addAction(pendingAction* act)
  *                        addAction                         *
  ************************************************************/
 pendingAction* pendingActionController::addAction(string strLine, int type, 
-                                                  character* act, thing* tgt)
+                                                  character* act, thing* tgt,
+                                                  bool mission)
 {
    pendingAction* a = new pendingAction(strLine, type, act, tgt);
-   return(addAction(a));
+   return(addAction(a, mission));
 }
 
 /************************************************************
@@ -309,10 +352,11 @@ pendingAction* pendingActionController::addAction(string strLine, int type,
  ************************************************************/
 pendingAction* pendingActionController::addAction(string strLine, int type, 
                                                   character* act, 
-                                                  GLfloat tgtX, GLfloat tgtZ)
+                                                  GLfloat tgtX, GLfloat tgtZ,
+                                                  bool mission)
 {
    pendingAction* a = new pendingAction(strLine, type, act, tgtX, tgtZ);
-   return(addAction(a));
+   return(addAction(a, mission));
 }
 
 /************************************************************
@@ -320,20 +364,21 @@ pendingAction* pendingActionController::addAction(string strLine, int type,
  ************************************************************/
 pendingAction* pendingActionController::addAction(string strLine, int type, 
                                                   character* act, thing* tgt, 
-                                                  GLfloat tgtX, GLfloat tgtZ)
+                                                  GLfloat tgtX, GLfloat tgtZ,
+                                                  bool mission)
 {
    pendingAction* a = new pendingAction(strLine, type, act, tgt, tgtX, tgtZ);
-   return(addAction(a));
+   return(addAction(a, mission));
 }
 
 /************************************************************
  *                        addAction                         *
  ************************************************************/
 pendingAction* pendingActionController::addAction(string strLine, int type, 
-                                                  int v)
+                                                  int v, bool mission)
 {
    pendingAction* a = new pendingAction(strLine, type, v);
-   return(addAction(a));
+   return(addAction(a, mission));
 }
 
 /************************************************************
