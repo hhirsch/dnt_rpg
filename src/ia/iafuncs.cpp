@@ -96,7 +96,8 @@ bool isFunction(string s)
            (s == IA_CHARACTER_SET_PSYCHO) || (s == IA_CHARACTER_AT_RANGE) || 
            (s == IA_CHARACTER_GET_ACTUAL_LIFE) ||
            (s == IA_CHARACTER_GET_MAX_LIFE) || (s == IA_SELF_OBJECT) ||
-           (s == IA_SELF_CHARACTER) || (s == IA_ACTIVE_CHARACTER) ||
+           (s == IA_SELF_CHARACTER) || (s == IA_SELF_MISSION) ||
+           (s == IA_ACTIVE_CHARACTER) ||
            (s == IA_ACTUAL_MAP) || (s == IA_TRUE) || (s == IA_FALSE) ||
            (s == IA_MISSION_ADD) || (s == IA_MISSION_COMPLETE) ||
            (s == IA_MISSION_IS_ACTIVE) || (s == IA_MISSION_SET_TEMP) ||
@@ -133,7 +134,8 @@ string functionType(string s)
    else if( (s == IA_FEAT_GET_RANDOM_ATTACK) ||
             (s == IA_FEAT_GET_POWERFULL_ATTACK) ||
             (s == IA_FEAT_GET_RANDOM_HEAL) ||
-            (s == IA_FEAT_GET_POWERFULL_HEAL) )
+            (s == IA_FEAT_GET_POWERFULL_HEAL) ||
+            (s == IA_SELF_MISSION) )
    {
       return(IA_TYPE_STRING);
    }

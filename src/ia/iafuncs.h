@@ -70,6 +70,7 @@ using namespace std;
 #define IA_SELF_CHARACTER "SELF_CHARACTER" /**< As script's owner character */
 #define IA_ACTIVE_CHARACTER "ACTIVE_CHARACTER" /**< The Active PC */
 #define IA_ACTUAL_MAP "ACTUAL_MAP" /**< The actual openned map */
+#define IA_SELF_MISSION "SELF_MISSION" /**< As the script's owner mission */
 
 ////////////////////////////////////////////////////
 //              Imediate Expressions              //

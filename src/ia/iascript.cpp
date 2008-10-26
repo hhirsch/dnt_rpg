@@ -544,8 +544,8 @@ iaVariable* iaScript::getParameter(string& token, string strLine,
    if( ( (!iv) && (!isFunction(token)) ) ||
        ( (iv) && 
          ( (iv->type != paramType) && 
-           (! (paramType == IA_TYPE_FLOAT) &&
-              (iv->type == IA_TYPE_INT) 
+           (! ( (paramType == IA_TYPE_FLOAT) &&
+                (iv->type == IA_TYPE_INT) )
            )
          ) 
        )
@@ -556,6 +556,7 @@ iaVariable* iaScript::getParameter(string& token, string strLine,
            << " at file " << fileName << " line " << actualLine << endl;
       return(NULL);
    }
+
    return(iv);
 }
 
@@ -1576,6 +1577,14 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       }
    }
 
+   /* IA_SELF_MISSION */
+   else if(functionName == IA_SELF_MISSION)
+   {
+      if(var)
+      {
+         assignValue(var, (void*)fileName.c_str(), IA_TYPE_STRING);
+      }
+   }
 
    /* Active Character */
    else if(functionName == IA_ACTIVE_CHARACTER)
