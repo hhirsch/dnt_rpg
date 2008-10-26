@@ -17,7 +17,7 @@ syn match dntByte             "\$[0-9a-fA-F]\+\>"
 
 " Comments
 syn match   dntComment       "#.*$" contains=dntTodo
-syn keyword dntTodo          contained TODO FIXME XXX
+syn keyword dntTodo          contained TODO FIXME XXX NOTE
 
 
 " Operators and Types
