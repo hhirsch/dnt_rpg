@@ -444,6 +444,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
 
    /* Remove All Sound Effects */
    snd->removeAllSoundEffects();
+   walkSound = NULL;
 
    /* Show the "Loading Map" */
    color_Set(200,20,20,255);
