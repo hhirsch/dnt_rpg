@@ -257,6 +257,24 @@ void iaVariable::operator=(const iaVariable& v)
       }
 
    }
+
+   /* If making a boolan from a pointer */
+   else if( (type == IA_TYPE_BOOL) && 
+            (v.type != IA_TYPE_STRING) &&
+            (v.type != IA_TYPE_FLOAT) &&
+            (v.type != IA_TYPE_INT) )
+   {
+      /* True if not NULL */
+      bool* va = (bool*)value;
+      *va = (v.value != NULL);
+   }
+
+   /* Invalid types assign */
+   else
+   {
+      cout << "Error: Invalid conversion from type: " << v.type 
+           << " to type: " << type << endl;
+   }
 }
 
 /***********************************************************
