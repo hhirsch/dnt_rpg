@@ -1352,7 +1352,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       character* dude = NULL;
       if(eng->NPCs != NULL)
       {
-         eng->NPCs->getCharacter(charName);
+         dude = eng->NPCs->getCharacter(charName);
       }
       assignValue(var, (void*)dude, IA_TYPE_CHARACTER);
    }
@@ -1521,7 +1521,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       bool bl = false;
       
       if(dude != NULL)
-      {
+      {         
          bl = (dude->inventories->getItemByFileName(objectFile) != NULL);
       }
       assignValue(var, (void*)&bl, IA_TYPE_BOOL);
@@ -1626,7 +1626,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    {
       if(var)
       {
-         assignValue(var, (void*)fileName.c_str(), IA_TYPE_STRING);
+         assignValue(var, (void*)&fileName, IA_TYPE_STRING);
       }
    }
 
