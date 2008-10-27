@@ -82,17 +82,27 @@ dialog(5)
    npc_begin
       text = gettext("Ah, some time ago I've lost our Chrono Trigger Snes cartridge, just find it for us.")
    npc_end
-   pc_begin
+   pc_begin      
+      option
+         pre_test = greater(INTELLIGENCE, 12)
+         text = gettext("Where it can be?")
+         action = go_to_dialog(13)
       option
          text = gettext("Ok, I'll search it")
          action = add_mission("missions/tutorial/mission1.dsl")
          action = dialog_init(6)
          action = finish_dialog()
       option
-         text = gettext("Oh, Chrono Trigger! This name resounds good memories in my head.")
-         action = add_mission("missions/tutorial/mission1.dsl")
-         action = dialog_init(6)
-         action = finish_dialog()
+         text = gettext("But everyone knows that Chrono is lost in time! It's impossible to take him from Lavos!")
+         post_test = roll(BLUFF,20)
+         # The bluff Worked!
+         if_action = dialog_init(9)
+         if_action = add_mission("missions/tutorial/mission1.dsl")
+         if_action = complete_mission("missions/tutorial/mission1.dsl", 200, 1)
+         if_action = go_to_dialog(11)
+         # The bluff failed!
+         else_action = dialog_init(12)
+         else_action = go_to_dialog(12)
       option
          text = gettext("Never! Chrono taked me 3 years! Die!")
          action = init_fight()
@@ -108,6 +118,9 @@ dialog(6)
    pc_begin
       option 
          text = gettext("I'm still looking...")
+         action = finish_dialog()
+      option
+         text = gettext("Oh, Chrono Trigger! This name resounds good memories in my head.")
          action = finish_dialog()
    pc_end
 end_dialog
@@ -169,6 +182,50 @@ dialog(10)
    pc_begin
       option 
          text = gettext("Bye!")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                         Dialog                           #
+############################################################
+dialog(11)
+   npc_begin
+      text = gettext("That dammed Lavos! So, we must forget about Chrono...")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Yes, let's forget about him...")
+         action = dialog_init(9)
+         action = go_to_dialog(9)
+   pc_end
+end_dialog
+############################################################
+#                         Dialog                           #
+############################################################
+dialog(12)
+   npc_begin
+      text = gettext("No, you are wrong. Chrono is lost somewhere in the Bunker School. Go take a look...")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Ok, I'll search it")
+         action = add_mission("missions/tutorial/mission1.dsl")
+         action = dialog_init(6)
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                         Dialog                           #
+############################################################
+dialog(13)
+   npc_begin
+      text = gettext("Ahm, last time I saw him was in the Bunker School, when I was riping it to play online with zsnes.")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Ok, I'll search it")
+         action = add_mission("missions/tutorial/mission1.dsl")
+         action = dialog_init(6)
          action = finish_dialog()
    pc_end
 end_dialog
