@@ -8,9 +8,28 @@
 #include "../lang/translate.h"
 #include "../etc/dirs.h"
 #include "../classes/mission.h"
+#include "briefing.h"
 #include "barterwindow.h"
 #include "modstate.h"
 
+/* The Functions */
+#define TALK_ACTION_GO_TO_DIALOG      0 /* Go To some conversation point */
+#define TALK_ACTION_INIT_FIGHT        1 /* End talk and initiate a fight */
+#define TALK_ACTION_FINISH_DIALOG     2 /* End Talk */
+#define TALK_ACTION_MOD_PC            3 /* Modify PC attribute */
+#define TALK_ACTION_MOD_NPC           4 /* Modify NPC attribute */
+#define TALK_ACTION_DIALOG_INIT       5 /* Set the new initial dialog */
+#define TALK_ACTION_ADD_MISSION       6 /* Add a mission */
+#define TALK_ACTION_COMPLETE_MISSION  7 /* Complete Mission */
+#define TALK_ACTION_GIVE_ITEM         8 /* Give an item */
+#define TALK_ACTION_RECEIVE_MONEY     9 /* Receive some money */
+
+#define TALK_TEST_TRUE                0  /* Always True */
+#define TALK_TEST_ROLL                1  /* Roll some test */
+#define TALK_TEST_GREATER             2  /* Test if is greater */
+#define TALK_TEST_LESSER              3  /* Test if is lesser */
+#define TALK_TEST_EQUAL               4  /* Test if is equal */
+#define TALK_TEST_DIFF                5  /* Test if is diff */
 
 #define BUFFER_SIZE 512
 
@@ -23,8 +42,12 @@
 #define TK_NPC_END "npc_end"
 #define TK_PC_BEGIN "pc_begin"
 #define TK_PC_END "pc_end"
+#define TK_PRE_TEST "pre_test"
+#define TK_POST_TEST "post_test"
 #define TK_TEXT "text"
 #define TK_ACTION "action"
+#define TK_IF_ACTION "if_action"
+#define TK_ELSE_ACTION "else_action"
 #define TK_OPTION "option"
 
 /* Action Tokens */
@@ -37,9 +60,203 @@
 #define TK_ACTION_GIVE_ITEM "give_item"
 #define TK_ACTION_RECEIVE_MONEY "receive_money"
 
-//TODO If-else tokens
-#define TK_IF_CONDITION "if_condition"
-#define TK_ELSE_CONDITION "else_condition"
+/* Test Tokens */
+#define TK_TEST_ROLL "roll"
+#define TK_TEST_GREATER "greater"
+#define TK_TEST_LESSER "lesser"
+#define TK_TEST_EQUAL "equal"
+#define TK_TEST_DIFF "diff"
+
+///////////////////////////////////////////////////////////////////////////
+//                                                                       //
+//                              talkAction                               //
+//                                                                       //
+///////////////////////////////////////////////////////////////////////////
+
+/*************************************************************************
+ *                              Constructor                              *
+ *************************************************************************/
+talkAction::talkAction()
+{
+   id = -1;
+   oper = -1; 
+   qty = 0;
+   att = -1;
+   satt = "";
+}
+
+///////////////////////////////////////////////////////////////////////////
+//                                                                       //
+//                               talkTest                                //
+//                                                                       //
+///////////////////////////////////////////////////////////////////////////
+
+/*************************************************************************
+ *                              Constructor                              *
+ *************************************************************************/
+talkTest::talkTest()
+{
+   id = TALK_TEST_TRUE;
+   test = "";
+   against = "";
+}
+
+/*************************************************************************
+ *                                  set                                  *
+ *************************************************************************/
+bool talkTest::set(string token, string t, string a)
+{
+   /* Set test and against */
+   test = t;
+   against = a;
+
+   /* translate token string to id */
+
+   /* roll */
+   if(token == TK_TEST_ROLL)
+   {
+      id = TALK_TEST_ROLL;
+   }
+   /* greater */
+   else if(token == TK_TEST_GREATER)
+   {
+      id = TALK_TEST_GREATER;
+   }
+   /* lesser */
+   else if(token == TK_TEST_LESSER)
+   {
+      id = TALK_TEST_LESSER;
+   }
+   /* equal */
+   else if(token == TK_TEST_EQUAL)
+   {
+      id = TALK_TEST_EQUAL;
+   }
+   /* diff */
+   else if(token == TK_TEST_DIFF)
+   {
+      id = TALK_TEST_DIFF;
+   }
+   else
+   {
+      /* Unknow test function! */
+      return(false);
+   }
+
+   return(true);
+}
+
+/*************************************************************************
+ *                                 doTest                                *
+ *************************************************************************/
+bool talkTest::doTest(character* pc)
+{
+   //FIXME - Must verify if the against is a number or a thing...
+   //        for now, always is a number
+   int value;
+
+   /* Verify if we have a pc to check */
+   if(!pc)
+   {
+      return(false);
+   }
+
+   /* true*/
+   if(id == TALK_TEST_TRUE)
+   {
+      /* Always return true */
+      return(true);
+   }
+   else if(id == TALK_TEST_ROLL)
+   {
+      /* Get the value */
+      sscanf(against.c_str(), "%d", &value);
+
+      /* Roll the thing! */
+      skill* sk = pc->sk.getSkillByString(test);
+      int rollValue = pc->sk.doSkillCheck(sk);
+      bool res = (rollValue > value);
+
+      /* Brief the result */
+      char buffer[512];
+      briefing brief;
+      sprintf(&buffer[0], "%s %s: %d x %d: %s.",
+              sk->name.c_str(), gettext("check"), rollValue, value, 
+              res?gettext("Success"):gettext("Failure"));
+      if(res)
+      {
+         /* With blue color */
+         brief.addText(buffer, 25, 33, 145);
+      }
+      else
+      {
+         /* With red color */
+         brief.addText(buffer, 135, 21, 21);
+      }
+      
+      /* Return what got */
+      return(res);
+   }
+   else
+   {
+      /* Get the skill or attribute to compare */
+      skill* sk = pc->sk.getSkillByString(test);
+
+      if(!sk)
+      {
+         cerr << "Unknow Attribute or Skill: " << test << endl;
+         return(false);
+      }
+
+      /* Get the value to compare with */
+      sscanf(against.c_str(), "%d", &value);
+
+      /* greater */
+      if(id == TALK_TEST_GREATER)
+      {
+         return(sk->points > value);
+      }
+      /* lesser */
+      else if(id == TALK_TEST_LESSER)
+      {
+         return(sk->points < value);
+      }
+      /* equal */
+      else if(id == TALK_TEST_EQUAL)
+      {
+         return(sk->points == value);
+      }
+      /* diff */
+      else if(id == TALK_TEST_DIFF)
+      {
+         return(sk->points != value);
+      }
+   }
+
+   return(false);
+}
+
+///////////////////////////////////////////////////////////////////////////
+//                                                                       //
+//                             dialogOption                              //
+//                                                                       //
+///////////////////////////////////////////////////////////////////////////
+
+/*************************************************************************
+ *                              Constructor                              *
+ *************************************************************************/
+dialogOption::dialogOption()
+{
+   text = "";
+   totalIfActions = 0;
+   totalElseActions = 0;
+}
+
+///////////////////////////////////////////////////////////////////////////
+//                                                                       //
+//                             Conversation                              //
+//                                                                       //
+///////////////////////////////////////////////////////////////////////////
 
 /*************************************************************************
  *                              Constructor                              *
@@ -233,7 +450,6 @@ int conversation::loadFile(string name)
   bool endDialog = true;
   int line = 0;
   int option = -1;
-  int curAct = -1;
 
   bool npcBegin = false;
   bool pcBegin = false;
@@ -244,7 +460,7 @@ int conversation::loadFile(string name)
             ios::in | ios::binary);
   if(!file)
   {
-     printError(dir.getRealFile(name), gettext("Cannot open File!\n"), 0);
+     printError(dir.getRealFile(name), "Cannot open File!\n", 0);
      return(0);
   }
 
@@ -255,19 +471,19 @@ int conversation::loadFile(string name)
     position = 0;
     separator = '\0';
 
-    /* Ignore comentaries */
-    if(buffer[0] != '#')
-    {
-      token = getString(position, buffer, separator);
+    /* Get the first token */
+    token = getString(position, buffer, separator);
 
+    /* Ignore comentaries */
+    if(token[0] != '#')
+    {
       
       /* Create New Dialog */
       if(token == TK_DIALOG)
       {
          if(!endDialog)
          {
-            printError(name,
-                       gettext("Tried to define dialog before end last one!"),
+            printError(name, "Tried to define dialog before end last one!",
                        line);
          }
          else
@@ -283,7 +499,7 @@ int conversation::loadFile(string name)
       {
          if( (endDialog) || (dlg == NULL))
          {
-            printError(name,gettext("Tried to end an undefined dialog!"),line);
+            printError(name, "Tried to end an undefined dialog!", line);
          }
 
          endDialog = true;
@@ -294,8 +510,7 @@ int conversation::loadFile(string name)
       {
          if(npcBegin || pcBegin)
          {
-            printError(name,gettext("Tried to begin NPC before end something!"),
-                       line);
+            printError(name, "Tried to begin NPC before end something!", line);
          }
          npcBegin = true;
       }
@@ -303,7 +518,7 @@ int conversation::loadFile(string name)
       {
          if(!npcBegin)
          {
-            printError(name, gettext("Tried to end NPC before begin it!"),line);
+            printError(name, "Tried to end NPC before begin it!", line);
          }
          npcBegin = false;
       }
@@ -312,8 +527,7 @@ int conversation::loadFile(string name)
       {
          if(npcBegin || pcBegin)
          {
-            printError(name,gettext("Tried to begin PC before end something!"),
-                       line);
+            printError(name, "Tried to begin PC before end something!", line);
          }
          pcBegin = true;
          option = -1;
@@ -322,7 +536,7 @@ int conversation::loadFile(string name)
       {
          if(!pcBegin)
          {
-            printError(name, gettext("Tried to end PC before begin it!"),line);
+            printError(name, "Tried to end PC before begin it!", line);
          }
          pcBegin = false;
       }
@@ -331,35 +545,28 @@ int conversation::loadFile(string name)
       {
          if(npcBegin)
          {
-            dlg->npc.ifText = translateDataString(getString(position, buffer, 
-                                                            separator));
+            dlg->npcText = translateDataString(getString(position, buffer, 
+                                                         separator));
          }
          else if(pcBegin)
          {
-            if( (option >= 0) && (option < MAX_OPTIONS))
+            if(option >= 0)
             {
                char str[10];
                sprintf(str, "%d - ", option+1);
-               dlg->options[option].ifText = str;
-               dlg->options[option].ifText += translateDataString(
+               dlg->options[option].text = str;
+               dlg->options[option].text += translateDataString(
                                                    getString(position, buffer, 
                                                              separator));
             }
             else
             {
-               if(option < 0)
-               {
-                  printError(name,gettext("Option Text without option!"),line);
-               }
-               else
-               {
-                  printError(name,gettext("Options overflow!"), line);
-               }
+               printError(name, "Option Text without option!",line);
             }
          }
          else
          {
-            printError(name,gettext("Text without any relation!"), line);
+            printError(name, "Text without any relation!", line);
          }
       }
       /* Option */
@@ -367,43 +574,115 @@ int conversation::loadFile(string name)
       {
          if(pcBegin)
          {
-            option++;
-            curAct = -1;
+            if(option+1 < MAX_OPTIONS)
+            {
+               option++;
+            }
+            else
+            {
+               printError(name, "Options overflow!", line);
+            }
          }
          else
          {
-            printError(name, gettext("Option without begin PC!"), line);
+            printError(name, "Option without begin PC!", line);
+         }
+      }
+      /* PreTest and PostTest */
+      else if((token == TK_PRE_TEST) || (token == TK_POST_TEST))
+      {
+         if(pcBegin)
+         {
+            if(option >= 0)
+            {
+               /* Get function(param,param) */
+               string func = getString(position, buffer, separator); 
+               string test = getString(position, buffer, separator);
+               string against = getString(position, buffer, separator);
+
+               bool res = true;
+
+               /* Assign it to its test */
+               if(token == TK_PRE_TEST)
+               {
+                  /* Pre - Test */
+                  res = dlg->options[option].preTest.set(func, test, against);
+               }
+               else
+               {
+                  /* Post-Test */
+                  res = dlg->options[option].postTest.set(func, test, against);
+               }
+
+               /* Verify test function parser error */
+               if(!res)
+               {
+                  printError(name, "Unknow Test Function!", line);
+               }
+            }
+            else
+            {
+               printError(name, "Test without option!",line);
+            }
+         }
+         else
+         {
+            printError(name, "Option Test Without PC!", line);
          }
       }
       /* Action */
-      else if(token == TK_ACTION)
+      else if( (token == TK_ACTION) || (token == TK_IF_ACTION) ||
+               (token == TK_ELSE_ACTION) )
       {
          if(npcBegin)
          {
-            printError(name,gettext("Action isn't yet defined to NPC!"),line);
+            printError(name, "Action isn't yet defined to NPC!", line);
          }
          else if(pcBegin)
          {
             if( (option >= 0) && (option < MAX_OPTIONS))
             {
-               curAct++;
-               if(curAct < MAX_ACTIONS)
+               talkAction* tact = NULL;
+               int curAction = 5;
+              
+               /* Get the current number of actions (if or else) */
+               if(token == TK_ELSE_ACTION)
                {
-                  dlg->options[option].totalIfActions++;
-                  token = getString(position, buffer, separator);
-                  talkAction* tact = &dlg->options[option].ifAction[curAct];
+                  curAction = dlg->options[option].totalElseActions;
+               }
+               else
+               {
+                  curAction = dlg->options[option].totalIfActions;
+               }
+
+               if(curAction < MAX_ACTIONS)
+               {
+                  /* Increment the number of actins and set a pointer to work */
+                  if(token == TK_ELSE_ACTION)
+                  {
+                     dlg->options[option].totalElseActions++;
+                     tact = &dlg->options[option].elseAction[curAction];
+                  }
+                  else
+                  {
+                     dlg->options[option].totalIfActions++;
+                     tact = &dlg->options[option].ifAction[curAction];
+                  }
+
+                  /* Get The action and its parameters */
+                  token = getString(position, buffer, separator);               
                   tact->id = getActionID(token, name,line);
 
                   /* Parse Action Parameters */
                   if( (tact->id == TALK_ACTION_GO_TO_DIALOG) ||
-                      (tact->id == TALK_ACTION_DIALOG_INIT) )
+                        (tact->id == TALK_ACTION_DIALOG_INIT) )
                   {
                      //get dialog number
                      token = getString(position, buffer, separator);
                      tact->att = atoi(token.c_str());
                   }
                   else if( (tact->id == TALK_ACTION_ADD_MISSION) ||
-                           (tact->id == TALK_ACTION_COMPLETE_MISSION) )
+                        (tact->id == TALK_ACTION_COMPLETE_MISSION) )
                   {
                      //get mission
                      token = getString(position, buffer, separator);
@@ -429,31 +708,30 @@ int conversation::loadFile(string name)
                }
                else
                {
-                  printError(name, gettext("Actions List overflow!"), line);
+                  printError(name, "Actions List overflow!", line);
                }
             }
             else
             {
                if(option < 0)
                {
-                  printError(name,gettext("Option Action without option!"),
-                             line);
+                  printError(name, "Option Action without option!", line);
                }
                else
                {
-                  printError(name, gettext("Options overflow!"), line);
+                  printError(name, "Options overflow!", line);
                }
             }
          }
          else
          {
-            printError(name, gettext("Action without any relation!\n"), line);
+            printError(name, "Action without any relation!\n", line);
          }
       }
       /* Unkown! */
       else
       {
-         printError(name, gettext("Unknow Token!"), line);
+         printError(name, "Unknow Token!", line);
       }
     }
   }
@@ -483,23 +761,7 @@ dialog* conversation::insertDialog()
    dlg->id = dlg->next->id+1;
    first->next = dlg;
 
-   dlg->npc.ifText = "";
-   dlg->npc.attribute = -1;
-   dlg->npc.elseText = "";
-   dlg->npc.operation = -1;
-   dlg->npc.totalIfActions = 0;
-   dlg->npc.totalElseActions = 0;
-
-   int aux;
-   for(aux = 0; aux< 5; aux++)
-   {
-      dlg->options[aux].ifText = "";
-      dlg->options[aux].attribute = -1;
-      dlg->options[aux].elseText = "";
-      dlg->options[aux].operation = -1;
-      dlg->options[aux].totalIfActions = 0;
-      dlg->options[aux].totalElseActions = 0;
-   }
+   dlg->npcText = "";
 
    total++;
    return(dlg);
@@ -583,6 +845,9 @@ void conversation::proccessAction(int numDialog, int opcao)
 {
    /* Get dialog on list */
    dialog* dlg = first->next;
+   int i, totalActions = 0;
+   talkAction* actions = NULL;
+
    while( (dlg != first) && (dlg->id != numDialog))
    {
       dlg = dlg->next;
@@ -592,21 +857,28 @@ void conversation::proccessAction(int numDialog, int opcao)
       return;
    }
 
-   //FIXME else too
-
-   int i;
-   int action;
+   /* To the post check to resolve wich actions take (if or else actions) */
+   if(dlg->options[opcao].postTest.doTest(actualPC))
+   {
+      /* Passed test, so if action */
+      totalActions = dlg->options[opcao].totalIfActions;
+      actions = &dlg->options[opcao].ifAction[0];
+   }
+   else
+   {
+      /* Failed test, so else action */
+      totalActions = dlg->options[opcao].totalElseActions;
+      actions = &dlg->options[opcao].elseAction[0];
+   }
 
    /* Take all actions */
-   for(i = 0; i < dlg->options[opcao].totalIfActions; i++)
+   for(i = 0; i < totalActions; i++)
    {
-      action  = dlg->options[opcao].ifAction[i].id;
-
-      switch(action)
+      switch(actions[i].id)
       {
          case TALK_ACTION_GO_TO_DIALOG:
             /* change dialog */
-            changeDialog(dlg->options[opcao].ifAction[i].att);
+            changeDialog(actions[i].att);
          break;
          case TALK_ACTION_INIT_FIGHT:
          {
@@ -628,7 +900,7 @@ void conversation::proccessAction(int numDialog, int opcao)
          case TALK_ACTION_DIALOG_INIT:
          {
             modState modif;
-            initialDialog = dlg->options[opcao].ifAction[i].att;
+            initialDialog = actions[i].att;
             modif.mapTalkAddAction(MODSTATE_TALK_ENTER_VALUE, 
                                    ownerNPC->getCharacterFile(),
                                    ownerMap, initialDialog);
@@ -637,18 +909,18 @@ void conversation::proccessAction(int numDialog, int opcao)
          case TALK_ACTION_ADD_MISSION:
          {
             missionsController missions;
-            missions.addNewMission(dlg->options[opcao].ifAction[i].satt);
+            missions.addNewMission(actions[i].satt);
          }
          break;
          case TALK_ACTION_COMPLETE_MISSION:
          {
             missionsController missions;
             mission* m;
-            m=missions.getCurrentMission(dlg->options[opcao].ifAction[i].satt);
+            m=missions.getCurrentMission(actions[i].satt);
             if(m)
             {
-               m->setXp(dlg->options[opcao].ifAction[i].att);
-               missions.completeMission(m, dlg->options[opcao].ifAction[i].qty);
+               m->setXp(actions[i].att);
+               missions.completeMission(m, actions[i].qty);
                char vstr[200];
                sprintf(vstr,gettext("Mission Completed: %d XP!"),m->getXp());
                messageController msgController;
@@ -663,7 +935,7 @@ void conversation::proccessAction(int numDialog, int opcao)
          {
             /* Search for the item at actor's inventory */
             object* obj = actualPC->inventories->getItemByFileName(
-                                          dlg->options[opcao].ifAction[i].satt);
+                                                               actions[i].satt);
             if(obj)
             {
                /* Remove it from there */
@@ -676,10 +948,8 @@ void conversation::proccessAction(int numDialog, int opcao)
             }
             else
             {
-               cerr << "Error: No object '" 
-                    << dlg->options[opcao].ifAction[i].satt 
-                    << "' to give at character inventory!" 
-                    << endl;
+               cerr << "Error: No object '" << actions[i].satt 
+                    << "' to give at character inventory!" << endl;
             }
          }
          break;
@@ -695,7 +965,7 @@ void conversation::proccessAction(int numDialog, int opcao)
  *************************************************************************/
 void conversation::changeDialog(int numDialog)
 {
-   int i;
+   int i, curOpt;
 
    if(numDialog == actual)
    {
@@ -703,6 +973,7 @@ void conversation::changeDialog(int numDialog)
       return;
    }
 
+   /* Get the dialog pointer */
    dialog* dlg = first->next;
    while( (dlg != first) && (dlg->id != numDialog))
    {
@@ -713,26 +984,26 @@ void conversation::changeDialog(int numDialog)
       return;
    }
 
+   /* Define the current dialog number */
    actual = numDialog;
 
-   string npc;
-   string options[5];
-   int aux;
+   /* Define the NPC Text */
+   npcText->setText(dlg->npcText);
 
-//TODO verify if/else 
-
-   npc = dlg->npc.ifText;
-   for(aux = 0; aux<5; aux++)
-   {
-      options[aux] = dlg->options[aux].ifText; 
-   }
- 
-   npcText->setText(npc);
+   /* Define the options */
+   curOpt = 0;
+   pcSelText->clearText();
    for(i = 0; i < MAX_OPTIONS; i++)
    {
-      pcSelText->setText(i,options[i]);
+      /* Only insert the option if it pass on preTest */
+      if(dlg->options[i].preTest.doTest(actualPC))
+      {
+         pcSelText->setText(curOpt,dlg->options[i].text, i);
+         curOpt++;
+      }
    }
 
+   /* Redraw the window */
    if(windowOpened())
    {
       jan->draw(0,0);
@@ -757,12 +1028,20 @@ void conversation::closeWindow()
 bool conversation::treat(guiObject* guiObj, int eventInfo, itemWindow* infoW)
 {
    barterWindow tradeWindow;
+   int index = -1;
 
    if(eventInfo == SELECTED_SEL_TEXT)
    {
       if(guiObj == (guiObject*)pcSelText)
       {
-         proccessAction(actual, pcSelText->getLastSelectedItem());
+         /* Get the last Selected Item Index */
+         pcSelText->getLastSelectedItem(&index);
+
+         if(index != -1)
+         {
+            /* Process the action! */
+            proccessAction(actual, index);
+         }
          return(true);
       }
    }

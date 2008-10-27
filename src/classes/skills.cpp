@@ -236,6 +236,29 @@ int skills::getSkillIntByString(string idString)
 }
 
 /*************************************************************
+ *                       doSkillCheck                        *
+ *************************************************************/
+int skills::doSkillCheck(string idString)
+{
+   return(doSkillCheck(getSkillByString(idString)));
+}
+
+/*************************************************************
+ *                       doSkillCheck                        *
+ *************************************************************/
+int skills::doSkillCheck(skill* sk)
+{
+   if(sk != NULL)
+   {
+      dice d20(DICE_D20);
+
+      //TODO apply modifiers (manly attribute)!
+      return(d20.roll() + sk->points);
+   }
+   return(0);
+}
+
+/*************************************************************
  *                   setAvaiblePoints                        *
  *************************************************************/
 void skills::setAvaiblePoints(int points)

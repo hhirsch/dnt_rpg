@@ -49,11 +49,27 @@ class skills
       /*! skills destructor. */
       ~skills();
 
-      /*! Return the wanted skill */
+      /*! Return the wanted skill
+       * \param idString -> String Identifier of the skill 
+       * \return -> pointer to the skill */
       skill* getSkillByString(string idString);
 
-      /*! Return the wanted skill number */
+      /*! Return the wanted skill number
+       * \param idString -> String identifier of the skill 
+       * \return -> skill index */
       int getSkillIntByString(string idString);
+
+      /*! Do a skill check (getting the value got at the check,
+       *  to compare latter with another skill check or a fixed value) 
+       *  \param idString -> String identifier of the skill
+       *  \return -> skill check result value */
+      int doSkillCheck(string idString);
+
+      /*! Do a skill check (getting the value got at the check,
+       *  to compare latter with another skill check or a fixed value) 
+       *  \param sk -> pointer to the skill to check 
+       *  \return -> skill check result value */
+      int doSkillCheck(skill* sk);
 
       /*! set avaible points
        * \param points -> avaiblePoints */

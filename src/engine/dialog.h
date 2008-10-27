@@ -7,29 +7,6 @@
 
 /*! \file dialog.h Define conversations options.*/
 
-#define TALK_ACTION_GO_TO_DIALOG   0 /**< Go To some conversation point */
-#define TALK_ACTION_INIT_FIGHT     1 /**< End talk and initiate a fight */
-#define TALK_ACTION_FINISH_DIALOG  2 /**< End Talk */
-#define TALK_ACTION_MOD_PC         3 /**< Modify PC attribute */
-#define TALK_ACTION_MOD_NPC        4 /**< Modify NPC attribute */
-#define TALK_ACTION_DIALOG_INIT    5 /**< Set the new initial dialog */
-#define TALK_ACTION_ADD_MISSION    6 /**< Add a mission */
-#define TALK_ACTION_COMPLETE_MISSION 7 /**< Complete Mission */
-#define TALK_ACTION_GIVE_ITEM      8 /**< Give an item */
-#define TALK_ACTION_RECEIVE_MONEY  9 /**< Receive some money */
-
-#define TALK_OPER_EQUAL        0 /**< Operation Equal */
-#define TALK_OPER_GREATER      1 /**< Operation Greater */
-#define TALK_OPER_GREATEREQUAL 2 /**< Operation Greater or Equal */
-#define TALK_OPER_LESSER       3 /**< Operation Lesser */
-#define TALK_OPER_LESSEREQUAL  4 /**< Operation Lesser or Equal */
-#define TALK_OPER_TRUE         5 /**< Operation True (always accepts) */
-#define TALK_OPER_FALSE        6 /**< Operation False (always rejects) */
-
-#define TALK_OPER_ZERO  0  /**< Operator Zero */
-#define TALK_OPER_MINUS 1  /**< Operator Minus */
-#define TALK_OPER_PLUS  2  /**< Operator Plus */
-
 #define MAX_OPTIONS 5 /**< Max number of options per dialog */
 
 #define MAX_ACTIONS 5 /**< Max number of actions per option */
@@ -43,6 +20,10 @@ using namespace std;
 class talkAction
 {
   public:
+
+     /*! Constructor */
+     talkAction();
+
      int id;   /**< Talk Action Identificator */
      int oper; /**< Operator used */
      int qty;  /**< Quantity */
@@ -50,33 +31,61 @@ class talkAction
      string satt; /**< String Attribute */
 };
 
-/*! If else struct on conversations */
-class ifElse
+/* a talk test */
+class talkTest
 {
-  public:
-   string ifText;         /**< If */
-   int attribute;         /**< Attribute */
-   int operation;         /**< Operator */
-   int limit;             /**< Limit */
-   
-   string elseText;       /**< Else */ 
+   public:
 
-   talkAction ifAction[MAX_ACTIONS];   /**< If action */
-   int totalIfActions;                 /**< Number of if actions */
-   talkAction elseAction[MAX_ACTIONS]; /**< Else Action */
-   int totalElseActions;               /**< Number of else actions */
-    
+      /*! Constructor  */
+      talkTest();
+
+      /*! Set the Talk test function
+       * \param token -> function token string
+       * \param t -> the test string
+       * \param a -> the against string */
+      bool set(string token, string t, string a);
+
+      /*! Do the test with a character
+       * \param pc -> pointer to the character to test 
+       * \return -> true if test pass */
+      bool doTest(character* pc);
+
+   protected:
+      int id;            /**< Talk test ID */
+      string test;       /**< The modifier to test */
+      string against;    /**< The against modifier to test (or value) */
+};
+
+/*! The dialog Option definition */
+class dialogOption
+{
+   public:
+
+      /*! Constructor */
+      dialogOption();       
+
+      talkTest preTest;    /**< The pre test (if true, the option is show) */
+
+      string text;         /**< The option text */
+
+      talkTest postTest;   /**< The post test (if true run ifActions) */
+
+      talkAction ifAction[MAX_ACTIONS];   /**< If postTest == true actions */
+      int totalIfActions;                 /**< Number of if actions */
+      talkAction elseAction[MAX_ACTIONS]; /**< If postTest == false actions */
+      int totalElseActions;               /**< Number of else actions */
 };
 
 /*! Dialog Struct */
 class dialog
 {
-  public:
-   ifElse npc;        /**< NPC ifElse */
-   ifElse options[MAX_OPTIONS]; /**< PC options to talk */
-   int id;            /**< Identificator */
-   dialog* next;      /**< Next dialog on list */
-   dialog* previous;  /**< Previous Dialog on struct */
+   public:
+      string npcText;                     /**< NPC text */
+      dialogOption options[MAX_OPTIONS];  /**< PC options to talk */
+      int id;                             /**< Identificator */
+
+      dialog* next;                       /**< Next dialog on chain list */
+      dialog* previous;                   /**< Previous Dialog on chain list */
 };
 
 /*! Conversation Class  */
