@@ -29,7 +29,8 @@
  - New MiniMap Draw Method;
  - Use of heal items;
  - Fixed a bug at IA Script variable type check;
- - VIM syntax file for DNT Script Language;
+ - VIM syntax files for DNT Script and Dialog Languages;
+ - Skill Checks at Dialogs;
 
 Working on:
  - Character level up;
@@ -47,6 +48,7 @@ Working on:
  - New Missions;
 
 Pending:
+ - Define Counter Skills;
  - Minimap Tags;
  - Extend walls to follow map height;
  - Define paths to improve the A* at outdoor maps;
