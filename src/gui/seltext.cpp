@@ -148,6 +148,14 @@ int selText::treat(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen)
     /* Get the current item */
     selec = getSelectedItem(ya);
 
+    /* Verify if it exists or not */
+    if( (selec >= MAX_OPTIONS) || (selec < 0) || 
+        (optText[selec].empty()) )
+    {
+       /* Not valid selection */
+       selec = -1;
+    }
+
     //No more draw here, since will redraw the 
     //window after treat, to avoid problems at
     //the transparent textbox.
