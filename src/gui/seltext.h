@@ -71,6 +71,9 @@ class selText: public guiObject
        * \param txt -> option txt */
       void setText(int opt, string txt);
 
+      /*! Clear the selText options text */
+      void clearText();
+
    private:
       /*! Write to the surface the selected item on differente color.
        * \param selectItem -> number of the selected text
