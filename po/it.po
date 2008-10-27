@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-10-23 08:03-0200\n"
+"POT-Creation-Date: 2008-10-27 09:46-0200\n"
 "PO-Revision-Date: 2008-10-12 15:57+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -69,7 +69,7 @@ msgstr ""
 msgid "Not enought points to use!"
 msgstr "Non abbastanza punti per usare!"
 
-#: src/classes/mission.cpp:198 src/engine/dialog.cpp:653
+#: src/classes/mission.cpp:198 src/engine/dialog.cpp:693
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "Missione Completata: %d Punti Esperienza!"
@@ -195,7 +195,7 @@ msgstr "Avvertimento"
 msgid "You Need to Assign All Attributes."
 msgstr "Devi Assegnare Tutti Gli Attributi."
 
-#: src/engine/barterwindow.cpp:32 src/engine/dialog.cpp:566
+#: src/engine/barterwindow.cpp:32 src/engine/dialog.cpp:606
 msgid "Barter"
 msgstr "Baratta"
 
@@ -387,46 +387,46 @@ msgstr ""
 msgid "Saving Current Map Modifications"
 msgstr "Salvando Le Modifiche Alla Mappa Attuali"
 
-#: src/engine/dccnit.cpp:451
+#: src/engine/dccnit.cpp:452
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Caricando Mappa: %s"
 
-#: src/engine/dccnit.cpp:508
+#: src/engine/dccnit.cpp:509
 #, c-format
 msgid "Ouch, can't load NPC's file: %s.\n"
 msgstr ""
 
-#: src/engine/dccnit.cpp:523
+#: src/engine/dccnit.cpp:524
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Caricando NPC: %s"
 
-#: src/engine/dccnit.cpp:548
+#: src/engine/dccnit.cpp:549
 msgid "Loading Character"
 msgstr "Caricando Personaggio"
 
-#: src/engine/dccnit.cpp:554
+#: src/engine/dccnit.cpp:555
 msgid "Creating MiniMap"
 msgstr ""
 
-#: src/engine/dccnit.cpp:560
+#: src/engine/dccnit.cpp:561
 msgid "Putting GUI on Screen"
 msgstr "Piazzando la GUI sullo Schermo"
 
-#: src/engine/dccnit.cpp:607
+#: src/engine/dccnit.cpp:608
 msgid "Loading Particles"
 msgstr ""
 
-#: src/engine/dccnit.cpp:637
+#: src/engine/dccnit.cpp:638
 msgid "Loading Changes..."
 msgstr "Caricando Cambiamenti..."
 
-#: src/engine/dccnit.cpp:666
+#: src/engine/dccnit.cpp:667
 msgid "Done!"
 msgstr "Fatto!"
 
-#: src/engine/dccnit.cpp:758
+#: src/engine/dccnit.cpp:759
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -434,118 +434,54 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1286
+#: src/engine/dccnit.cpp:1287
 msgid "Too far away for the action!"
 msgstr "Troppo lontano per l'azione!"
 
-#: src/engine/dccnit.cpp:1324
+#: src/engine/dccnit.cpp:1325
 msgid "No NPCs in the area."
 msgstr "Nessun NPC nell'area"
 
-#: src/engine/dccnit.cpp:1380
+#: src/engine/dccnit.cpp:1381
 msgid "Surprise Attack Turn."
 msgstr "Turno Di Attacco A Sorpresa."
 
-#: src/engine/dccnit.cpp:1397
+#: src/engine/dccnit.cpp:1398
 msgid "No enemies in the area."
 msgstr "Nessun nemico nell'area."
 
-#: src/engine/dccnit.cpp:1576 src/engine/dccnit.cpp:1998
+#: src/engine/dccnit.cpp:1577 src/engine/dccnit.cpp:1999
 msgid "Nothing"
 msgstr "Niente"
 
-#: src/engine/dccnit.cpp:1747
+#: src/engine/dccnit.cpp:1748
 #, c-format
 msgid "%s taken."
 msgstr "%s preso"
 
-#: src/engine/dccnit.cpp:1769
+#: src/engine/dccnit.cpp:1770
 msgid "Inventory is full!"
 msgstr "L'inventario è pieno!"
 
-#: src/engine/dccnit.cpp:1803
+#: src/engine/dccnit.cpp:1804
 msgid "Door"
 msgstr "Porta"
 
-#: src/engine/dccnit.cpp:1931
+#: src/engine/dccnit.cpp:1932
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s attacca%s"
 
-#: src/engine/dccnit.cpp:3388
+#: src/engine/dccnit.cpp:3389
 msgid "Exit Battle Mode"
 msgstr "Esci Dalla Modalità Battaglia"
 
-#: src/engine/dialog.cpp:247
-msgid "Cannot open File!\n"
-msgstr "Non è possibile aprire il File!\n"
-
-#: src/engine/dialog.cpp:270
-msgid "Tried to define dialog before end last one!"
-msgstr "Provato a definire il dialogo prima di finire l'ultimo!"
-
-#: src/engine/dialog.cpp:286
-msgid "Tried to end an undefined dialog!"
-msgstr "Provato a finire un dialogo indefinito!"
-
-#: src/engine/dialog.cpp:297
-msgid "Tried to begin NPC before end something!"
-msgstr "Provato a iniziare un NPC prima di finire qualcosa!"
-
-#: src/engine/dialog.cpp:306
-msgid "Tried to end NPC before begin it!"
-msgstr "Provato a finire un NPC prima di cominciarlo!"
-
-#: src/engine/dialog.cpp:315
-msgid "Tried to begin PC before end something!"
-msgstr "Provato a iniziare un PC prima di finire qualcosa!"
-
-#: src/engine/dialog.cpp:325
-msgid "Tried to end PC before begin it!"
-msgstr "Provato a finire un PC prima di iniziarlo!"
-
-#: src/engine/dialog.cpp:352
-msgid "Option Text without option!"
-msgstr "Testo Di Opzione senza opzione!"
-
-#: src/engine/dialog.cpp:356 src/engine/dialog.cpp:444
-msgid "Options overflow!"
-msgstr ""
-
-#: src/engine/dialog.cpp:362
-msgid "Text without any relation!"
-msgstr "Testo senza alcuna relazione!"
-
-#: src/engine/dialog.cpp:375
-msgid "Option without begin PC!"
-msgstr "Opzione senza aver cominciato un PC!"
-
-#: src/engine/dialog.cpp:383
-msgid "Action isn't yet defined to NPC!"
-msgstr ""
-
-#: src/engine/dialog.cpp:432
-msgid "Actions List overflow!"
-msgstr ""
-
-#: src/engine/dialog.cpp:439
-msgid "Option Action without option!"
-msgstr "Azione Di Opzione senza opzione!"
-
-#: src/engine/dialog.cpp:450
-msgid "Action without any relation!\n"
-msgstr "Azione senza alcuna relazione!\n"
-
-#: src/engine/dialog.cpp:456
-msgid "Unknow Token!"
-msgstr "Gesto Sconosciuto!"
-
-#: src/engine/dialog.cpp:520
+#: src/engine/dialog.cpp:560
 #, c-format
 msgid "Not found on dialog: %d\n"
 msgstr "Non trovato nel dialogo: %d\n"
 
-#: src/engine/dialog.cpp:564
+#: src/engine/dialog.cpp:604
 msgid "Dialog"
 msgstr "Dialogo"
 
@@ -2744,8 +2680,8 @@ msgstr "Cosa diavolo! Un albero parlante?"
 msgid "Die!"
 msgstr "Muori!"
 
-#: data/dialogs/initial.dlg:22 data/dialogs/tutorial/logan.dlg:157
-#: data/dialogs/tutorial/logan.dlg:171
+#: data/dialogs/initial.dlg:22 data/dialogs/tutorial/logan.dlg:172
+#: data/dialogs/tutorial/logan.dlg:186
 msgid "Bye!"
 msgstr "Arrivederci!"
 
@@ -2858,57 +2794,88 @@ msgstr ""
 "semplicemente ritrovala per noi."
 
 #: data/dialogs/tutorial/logan.dlg:87
+msgid ""
+"But everyone knows that Chrono is lost in time! It's impossible to take him "
+"from Lavos!"
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:99
+msgid "Where it can be?"
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:102 data/dialogs/tutorial/logan.dlg:213
+#: data/dialogs/tutorial/logan.dlg:228
 msgid "Ok, I'll search it"
 msgstr "Ok, la cercherò"
 
-#: data/dialogs/tutorial/logan.dlg:92
+#: data/dialogs/tutorial/logan.dlg:107
 msgid "Oh, Chrono Trigger! This name resounds good memories in my head."
 msgstr ""
 "Oh, Chrono Trigger! Questo nome richiama buone memorie nella mia testa."
 
-#: data/dialogs/tutorial/logan.dlg:97
+#: data/dialogs/tutorial/logan.dlg:112
 msgid "Never! Chrono taked me 3 years! Die!"
 msgstr "Mai! Chrono mi ha preso 3 anni! Muori!"
 
-#: data/dialogs/tutorial/logan.dlg:106
+#: data/dialogs/tutorial/logan.dlg:121
 msgid "You still haven't found our Chrono Trigger Snes cartridge!"
 msgstr "Non hai ancora trovato la nostra cartuccia per Snes di Chrono Trigger!"
 
-#: data/dialogs/tutorial/logan.dlg:110
+#: data/dialogs/tutorial/logan.dlg:125
 msgid "I'm still looking..."
 msgstr "Sto ancora cercando..."
 
-#: data/dialogs/tutorial/logan.dlg:119
+#: data/dialogs/tutorial/logan.dlg:134
 msgid "Here! Chrono is here! Let me play it!"
 msgstr "Qua! Chrono è qua! Fammelo giocare!"
 
-#: data/dialogs/tutorial/logan.dlg:123
+#: data/dialogs/tutorial/logan.dlg:138
 msgid "Its all yours..."
 msgstr "È tutto tuo..."
 
-#: data/dialogs/tutorial/logan.dlg:128
+#: data/dialogs/tutorial/logan.dlg:143
 msgid "Its yours, but I want some money!"
 msgstr "È tuo, ma voglio dei soldi!"
 
-#: data/dialogs/tutorial/logan.dlg:140
+#: data/dialogs/tutorial/logan.dlg:155
 msgid ""
 "Money, money! All you want is money!! But... it's Chrono... take these "
 "coins..."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:144
+#: data/dialogs/tutorial/logan.dlg:159
 msgid "Thanks."
 msgstr "Grazie."
 
-#: data/dialogs/tutorial/logan.dlg:153
+#: data/dialogs/tutorial/logan.dlg:168
 msgid ""
 "So, for this DNT 0.2 version, I haven't any more missions for you. Go take a "
 "walk (it's an open world game) and wait for DNT 0.3 release."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:167
+#: data/dialogs/tutorial/logan.dlg:182
 msgid "Chrono... Chrono... Chrono!"
 msgstr "Chrono... Chrono... Chrono!"
+
+#: data/dialogs/tutorial/logan.dlg:195
+msgid "That dammed Lavos! So, we must forget about Chrono..."
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:199
+msgid "Yes, let's forget about him..."
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:209
+msgid ""
+"No, you are wrong. Chrono is lost somewhere in the Bunker School. Go take a "
+"look..."
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:224
+msgid ""
+"Ahm, last time I saw him was in the Bunker School, when I was riping it to "
+"play online with zsnes."
+msgstr ""
 
 #: data/weapons/definitions/axe.wcc:1
 msgid "Great Axe"
@@ -3026,6 +2993,45 @@ msgstr "Leggero"
 #: data/weapons/types/weights.dcl:4
 msgid "Heavy"
 msgstr "Pesante"
+
+#~ msgid "Cannot open File!\n"
+#~ msgstr "Non è possibile aprire il File!\n"
+
+#~ msgid "Tried to define dialog before end last one!"
+#~ msgstr "Provato a definire il dialogo prima di finire l'ultimo!"
+
+#~ msgid "Tried to end an undefined dialog!"
+#~ msgstr "Provato a finire un dialogo indefinito!"
+
+#~ msgid "Tried to begin NPC before end something!"
+#~ msgstr "Provato a iniziare un NPC prima di finire qualcosa!"
+
+#~ msgid "Tried to end NPC before begin it!"
+#~ msgstr "Provato a finire un NPC prima di cominciarlo!"
+
+#~ msgid "Tried to begin PC before end something!"
+#~ msgstr "Provato a iniziare un PC prima di finire qualcosa!"
+
+#~ msgid "Tried to end PC before begin it!"
+#~ msgstr "Provato a finire un PC prima di iniziarlo!"
+
+#~ msgid "Option Text without option!"
+#~ msgstr "Testo Di Opzione senza opzione!"
+
+#~ msgid "Text without any relation!"
+#~ msgstr "Testo senza alcuna relazione!"
+
+#~ msgid "Option without begin PC!"
+#~ msgstr "Opzione senza aver cominciato un PC!"
+
+#~ msgid "Option Action without option!"
+#~ msgstr "Azione Di Opzione senza opzione!"
+
+#~ msgid "Action without any relation!\n"
+#~ msgstr "Azione senza alcuna relazione!\n"
+
+#~ msgid "Unknow Token!"
+#~ msgstr "Gesto Sconosciuto!"
 
 #~ msgid "%s attacks %s|"
 #~ msgstr "%s attacca %s|"
