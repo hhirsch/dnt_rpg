@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-10-27 09:46-0200\n"
+"POT-Creation-Date: 2008-10-27 18:53-0200\n"
 "PO-Revision-Date: 2008-07-22 19:40+0000\n"
 "Last-Translator: María \"tatica\" Leandro <tatadbb@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -69,7 +69,7 @@ msgstr "Propiedad Invalida"
 msgid "Not enought points to use!"
 msgstr "No tiene suficientes puntos para usarlo!"
 
-#: src/classes/mission.cpp:198 src/engine/dialog.cpp:693
+#: src/classes/mission.cpp:198 src/engine/dialog.cpp:942
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr ""
@@ -195,7 +195,7 @@ msgstr ""
 msgid "You Need to Assign All Attributes."
 msgstr "Necesitas Asignar todos los Atributos"
 
-#: src/engine/barterwindow.cpp:32 src/engine/dialog.cpp:606
+#: src/engine/barterwindow.cpp:32 src/engine/dialog.cpp:845
 msgid "Barter"
 msgstr ""
 
@@ -230,6 +230,14 @@ msgstr ""
 
 #: src/engine/barterwindow.cpp:294 src/engine/inventwindow.cpp:203
 msgid "Remove"
+msgstr ""
+
+#: src/engine/briefing.cpp:33
+msgid "Briefing"
+msgstr ""
+
+#: src/engine/briefing.cpp:35
+msgid "Welcome to DNT!"
 msgstr ""
 
 #: src/engine/charwindow.cpp:96
@@ -451,6 +459,7 @@ msgid "No enemies in the area."
 msgstr ""
 
 #: src/engine/dccnit.cpp:1577 src/engine/dccnit.cpp:1999
+#: src/engine/shortcutswindow.cpp:32
 msgid "Nothing"
 msgstr ""
 
@@ -476,12 +485,20 @@ msgstr ""
 msgid "Exit Battle Mode"
 msgstr ""
 
-#: src/engine/dialog.cpp:560
+#: src/engine/dialog.cpp:205
+msgid "Success"
+msgstr ""
+
+#: src/engine/dialog.cpp:205
+msgid "Failure"
+msgstr ""
+
+#: src/engine/dialog.cpp:799
 #, c-format
 msgid "Not found on dialog: %d\n"
 msgstr ""
 
-#: src/engine/dialog.cpp:604
+#: src/engine/dialog.cpp:843
 msgid "Dialog"
 msgstr ""
 
@@ -493,11 +510,11 @@ msgstr ""
 msgid "Continue"
 msgstr ""
 
-#: src/engine/initial.cpp:71
+#: src/engine/initial.cpp:71 src/engine/shortcutswindow.cpp:39
 msgid "Save"
 msgstr ""
 
-#: src/engine/initial.cpp:74
+#: src/engine/initial.cpp:74 src/engine/shortcutswindow.cpp:44
 msgid "Load"
 msgstr ""
 
@@ -750,6 +767,62 @@ msgstr ""
 #: src/engine/racewindow.cpp:179
 msgid "Race Skills"
 msgstr "Habilidades de Carrera"
+
+#: src/engine/shortcutswindow.cpp:30
+msgid "Shortcuts"
+msgstr ""
+
+#: src/engine/shortcutswindow.cpp:41
+msgid "Menu"
+msgstr ""
+
+#: src/engine/shortcutswindow.cpp:121
+msgid "Particles"
+msgstr ""
+
+#: src/engine/shortcutswindow.cpp:134
+msgid "FPS"
+msgstr ""
+
+#: src/engine/shortcutswindow.cpp:172
+msgid "Enter Battle Mode"
+msgstr ""
+
+#: src/engine/shortcutswindow.cpp:176
+msgid "Select Normal Attack"
+msgstr ""
+
+#: src/engine/shortcutswindow.cpp:182
+msgid "Open Quests Window"
+msgstr ""
+
+#: src/engine/shortcutswindow.cpp:187
+msgid "Open Map Window"
+msgstr ""
+
+#: src/engine/shortcutswindow.cpp:194
+msgid "End Character's Turn"
+msgstr ""
+
+#: src/engine/shortcutswindow.cpp:198
+msgid "Only Avaible on Battle Mode"
+msgstr ""
+
+#: src/engine/shortcutswindow.cpp:204
+msgid "Open Inventory Window"
+msgstr ""
+
+#: src/engine/shortcutswindow.cpp:209
+msgid "Open Assign Attacks Window"
+msgstr ""
+
+#: src/engine/shortcutswindow.cpp:214
+msgid "View Character Informations"
+msgstr ""
+
+#: src/engine/shortcutswindow.cpp:219
+msgid "Open Group/Party Window"
+msgstr ""
 
 #: src/engine/skillwindow.cpp:69
 msgid "Total Free Points:"
@@ -2666,8 +2739,8 @@ msgstr ""
 msgid "Die!"
 msgstr ""
 
-#: data/dialogs/initial.dlg:22 data/dialogs/tutorial/logan.dlg:172
-#: data/dialogs/tutorial/logan.dlg:186
+#: data/dialogs/initial.dlg:22 data/dialogs/tutorial/logan.dlg:170
+#: data/dialogs/tutorial/logan.dlg:184
 msgid "Bye!"
 msgstr ""
 
@@ -2777,84 +2850,84 @@ msgid ""
 "for us."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:87
+#: data/dialogs/tutorial/logan.dlg:88
+msgid "Where it can be?"
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:91 data/dialogs/tutorial/logan.dlg:211
+#: data/dialogs/tutorial/logan.dlg:226
+msgid "Ok, I'll search it"
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:96
 msgid ""
 "But everyone knows that Chrono is lost in time! It's impossible to take him "
 "from Lavos!"
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:99
-msgid "Where it can be?"
-msgstr ""
-
-#: data/dialogs/tutorial/logan.dlg:102 data/dialogs/tutorial/logan.dlg:213
-#: data/dialogs/tutorial/logan.dlg:228
-msgid "Ok, I'll search it"
-msgstr ""
-
 #: data/dialogs/tutorial/logan.dlg:107
-msgid "Oh, Chrono Trigger! This name resounds good memories in my head."
-msgstr ""
-
-#: data/dialogs/tutorial/logan.dlg:112
 msgid "Never! Chrono taked me 3 years! Die!"
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:121
+#: data/dialogs/tutorial/logan.dlg:116
 msgid "You still haven't found our Chrono Trigger Snes cartridge!"
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:125
+#: data/dialogs/tutorial/logan.dlg:120
 msgid "I'm still looking..."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:134
+#: data/dialogs/tutorial/logan.dlg:123
+msgid "Oh, Chrono Trigger! This name resounds good memories in my head."
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:132
 msgid "Here! Chrono is here! Let me play it!"
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:138
+#: data/dialogs/tutorial/logan.dlg:136
 msgid "Its all yours..."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:143
+#: data/dialogs/tutorial/logan.dlg:141
 msgid "Its yours, but I want some money!"
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:155
+#: data/dialogs/tutorial/logan.dlg:153
 msgid ""
 "Money, money! All you want is money!! But... it's Chrono... take these "
 "coins..."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:159
+#: data/dialogs/tutorial/logan.dlg:157
 msgid "Thanks."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:168
+#: data/dialogs/tutorial/logan.dlg:166
 msgid ""
 "So, for this DNT 0.2 version, I haven't any more missions for you. Go take a "
 "walk (it's an open world game) and wait for DNT 0.3 release."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:182
+#: data/dialogs/tutorial/logan.dlg:180
 msgid "Chrono... Chrono... Chrono!"
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:195
+#: data/dialogs/tutorial/logan.dlg:193
 msgid "That dammed Lavos! So, we must forget about Chrono..."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:199
+#: data/dialogs/tutorial/logan.dlg:197
 msgid "Yes, let's forget about him..."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:209
+#: data/dialogs/tutorial/logan.dlg:207
 msgid ""
 "No, you are wrong. Chrono is lost somewhere in the Bunker School. Go take a "
 "look..."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:224
+#: data/dialogs/tutorial/logan.dlg:222
 msgid ""
 "Ahm, last time I saw him was in the Bunker School, when I was riping it to "
 "play online with zsnes."

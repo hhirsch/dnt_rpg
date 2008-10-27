@@ -26,6 +26,7 @@ src/engine/alignwindow.cpp
 src/engine/aspectwindow.cpp
 src/engine/attwindow.cpp
 src/engine/barterwindow.cpp
+src/engine/briefing.cpp
 src/engine/camera.cpp
 src/engine/character.cpp
 src/engine/charwindow.cpp
@@ -41,7 +42,9 @@ src/engine/itemwindow.cpp
 src/engine/modstate.cpp
 src/engine/options.cpp
 src/engine/racewindow.cpp
+src/engine/savefile.cpp
 src/engine/shadow.cpp
+src/engine/shortcutswindow.cpp
 src/engine/skillwindow.cpp
 src/engine/sky.cpp
 src/engine/sun.cpp
