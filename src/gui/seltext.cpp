@@ -15,11 +15,18 @@ selText::selText(int xa,int ya,int xb,int yb, string text0, string text1,
    y1 = ya;
    x2 = xb;
    y2 = yb;
+   
    optText[0] = text0;
+   optInfo[0] = 0;
    optText[1] = text1;
+   optInfo[1] = 0;
    optText[2] = text2;
+   optInfo[2] = 0;
    optText[3] = text3;
+   optInfo[3] = 0;
    optText[4] = text4;
+   optInfo[4] = 0;
+
    selec = -1;
    pressed = false;
 }
@@ -177,19 +184,25 @@ int selText::treat(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen)
 /***************************************************************************
  *                          getLastSelectedItem                            *
  ***************************************************************************/
-int selText::getLastSelectedItem()
+int selText::getLastSelectedItem(int* info)
 {
+   if( (info) && (selec >= 0) && (selec < MAX_OPTIONS))
+   {
+      *info = optInfo[selec];
+   }
+
    return(selec);
 }
 
 /***************************************************************************
  *                                setText                                  *
  ***************************************************************************/
-void selText::setText(int opt, string txt)
+void selText::setText(int opt, string txt, int info)
 {
    if(opt < MAX_OPTIONS)
    {
       optText[opt] = txt;
+      optInfo[opt] = info;
    }
 }
 

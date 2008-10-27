@@ -63,13 +63,17 @@ class selText: public guiObject
       int treat(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen);
 
       /*! Get the last selected item 
+       * \param info -> pointer to a integer to get the info or NULL
        * \return -> last selected item */
-      int getLastSelectedItem();
+      int getLastSelectedItem(int* info = NULL);
 
       /*! Set the text of an option
        * \param opt -> option number
-       * \param txt -> option txt */
-      void setText(int opt, string txt);
+       * \param txt -> option txt 
+       * \param info -> option info to store
+       * \note -> at info you can store, for example, external vector 
+       *          position of the element */
+      void setText(int opt, string txt, int info=0);
 
       /*! Clear the selText options text */
       void clearText();
@@ -88,6 +92,7 @@ class selText: public guiObject
    protected:
       int y[MAX_OPTIONS];          /**< Final Y of each option */
       string optText[MAX_OPTIONS]; /**< Text Options */
+      int optInfo[MAX_OPTIONS];    /**< Info Options */
       int selec;                   /**< last item selected */
       farso_colors Cores;          /**< colors */
       bool pressed;                /**< while pressed == true */
