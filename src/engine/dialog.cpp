@@ -147,6 +147,26 @@ bool talkTest::set(string token, string t, string a)
 }
 
 /*************************************************************************
+ *                              getTestName                              *
+ *************************************************************************/
+string talkTest::getTestName(character* pc)
+{
+   string res = "";
+
+   /* Get the skill name */
+   if(pc)
+   {
+      skill* sk = pc->sk.getSkillByString(test);
+      if(sk)
+      {
+         res = "(" + sk->name + ") ";
+      }
+   }
+
+   return(res);
+}
+
+/*************************************************************************
  *                                 doTest                                *
  *************************************************************************/
 bool talkTest::doTest(character* pc)
@@ -180,8 +200,8 @@ bool talkTest::doTest(character* pc)
       /* Brief the result */
       char buffer[512];
       briefing brief;
-      sprintf(&buffer[0], "%s %s: %d x %d: %s.",
-              sk->name.c_str(), gettext("check"), rollValue, value, 
+      sprintf(&buffer[0], "%s: %d x %d: %s.",
+              sk->name.c_str(), rollValue, value, 
               res?gettext("Success"):gettext("Failure"));
       if(res)
       {
@@ -552,10 +572,7 @@ int conversation::loadFile(string name)
          {
             if(option >= 0)
             {
-               char str[10];
-               sprintf(str, "%d - ", option+1);
-               dlg->options[option].text = str;
-               dlg->options[option].text += translateDataString(
+               dlg->options[option].text = translateDataString(
                                                    getString(position, buffer, 
                                                              separator));
             }
@@ -966,6 +983,8 @@ void conversation::proccessAction(int numDialog, int opcao)
 void conversation::changeDialog(int numDialog)
 {
    int i, curOpt;
+   string text;
+   char conv[16];
 
    if(numDialog == actual)
    {
@@ -995,10 +1014,14 @@ void conversation::changeDialog(int numDialog)
    pcSelText->clearText();
    for(i = 0; i < MAX_OPTIONS; i++)
    {
-      /* Only insert the option if it pass on preTest */
-      if(dlg->options[i].preTest.doTest(actualPC))
+      /* Only insert the option if it pass on preTest (and is not empty) */
+      if( (!dlg->options[i].text.empty()) && 
+          (dlg->options[i].preTest.doTest(actualPC)) )
       {
-         pcSelText->setText(curOpt,dlg->options[i].text, i);
+         sprintf(conv, "%d - ", curOpt+1);
+         text = conv + dlg->options[i].postTest.getTestName(actualPC) + 
+                dlg->options[i].text;
+         pcSelText->setText(curOpt, text, i);
          curOpt++;
       }
    }

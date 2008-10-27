@@ -50,6 +50,11 @@ class talkTest
        * \return -> true if test pass */
       bool doTest(character* pc);
 
+      /*! Get the test name (ie. if a skill, the skill name)
+       * \param pc -> pointer to the character
+       * \return -> the test name */
+      string getTestName(character* pc);
+
    protected:
       int id;            /**< Talk test ID */
       string test;       /**< The modifier to test */
