@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-10-27 18:53-0200\n"
+"POT-Creation-Date: 2008-10-27 19:03-0200\n"
 "PO-Revision-Date: 2007-11-20 17:24+0000\n"
 "Last-Translator: Sergei Zivukov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -600,6 +600,10 @@ msgstr ""
 #: src/engine/itemwindow.cpp:171
 msgid "Ok"
 msgstr ""
+
+#: src/engine/minimapwindow.cpp:37
+msgid "Map"
+msgstr "Карта"
 
 #: src/engine/options.cpp:19
 msgid "Portuguese"
@@ -3089,9 +3093,6 @@ msgstr ""
 
 #~ msgid "%s attacks %s|"
 #~ msgstr "%s атаковал %s|"
-
-#~ msgid "Map"
-#~ msgstr "Карта"
 
 #~ msgid "0.2"
 #~ msgstr "0.2"

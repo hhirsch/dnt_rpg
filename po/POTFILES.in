@@ -39,6 +39,7 @@ src/engine/dialog.cpp
 src/engine/initial.cpp
 src/engine/inventwindow.cpp
 src/engine/itemwindow.cpp
+src/engine/minimapwindow.cpp
 src/engine/modstate.cpp
 src/engine/options.cpp
 src/engine/racewindow.cpp

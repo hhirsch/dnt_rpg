@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-10-27 18:53-0200\n"
+"POT-Creation-Date: 2008-10-27 19:03-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -598,6 +598,10 @@ msgstr ""
 
 #: src/engine/itemwindow.cpp:171
 msgid "Ok"
+msgstr ""
+
+#: src/engine/minimapwindow.cpp:37
+msgid "Map"
 msgstr ""
 
 #: src/engine/options.cpp:19

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-10-27 18:53-0200\n"
+"POT-Creation-Date: 2008-10-27 19:03-0200\n"
 "PO-Revision-Date: 2008-05-18 14:48+0000\n"
 "Last-Translator: pano <Pano_90@gmx.de>\n"
 "Language-Team: German <de@li.org>\n"
@@ -599,6 +599,10 @@ msgstr ""
 
 #: src/engine/itemwindow.cpp:171
 msgid "Ok"
+msgstr ""
+
+#: src/engine/minimapwindow.cpp:37
+msgid "Map"
 msgstr ""
 
 #: src/engine/options.cpp:19
