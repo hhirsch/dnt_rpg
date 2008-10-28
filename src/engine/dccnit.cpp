@@ -2410,26 +2410,36 @@ int engine::treatIO(SDL_Surface *screen)
          cursors->set(CURSOR_WALK_CONT);
          if(mButton & SDL_BUTTON(3))
          {
-            /* Set character orientation (if mouse is far from character.
-             *  if it is too near, some weird angles appears) */
+            /* Set character orientation (if mouse is far from character,
+             * because if it is too near, some weird angles appears) */
             dist = sqrt( (xReal - activeCharacter->xPosition) *
                          (xReal - activeCharacter->xPosition) +
                          (zReal - activeCharacter->zPosition) *
                          (zReal - activeCharacter->zPosition) );
             
-            float angle = getAngle(activeCharacter->xPosition,
-                                   activeCharacter->zPosition,
-                                   xReal, zReal);
+            walkAngle = getAngle(activeCharacter->xPosition,
+                                 activeCharacter->zPosition,
+                                 xReal, zReal);
             if(dist > 8)
             {
-               activeCharacter->orientation = angle; 
+               /* Try to change the angle */
+               if(canWalk(0,0, walkAngle - activeCharacter->orientation))
+               { 
+                  /* can change */
+                  activeCharacter->orientation = walkAngle; 
+               }
+            }
+            else
+            {
+               /* Keep the direction angle */
+               walkAngle = activeCharacter->orientation;
             }
 
-             /* Try to move it forward */
+             /* Try to move it forward the angle */
              varX = -1 * activeCharacter->walk_interval * 
-                         sin(deg2Rad(activeCharacter->orientation));
+                         sin(deg2Rad(walkAngle));
              varZ = -1 * activeCharacter->walk_interval * 
-                         cos(deg2Rad(activeCharacter->orientation));
+                         cos(deg2Rad(walkAngle));
             walked |= tryWalk(varX, varZ);
          }
          else
@@ -2879,6 +2889,7 @@ void engine::renderNoShadowThings()
 
    }
 
+   /* Draw A* movimentation things */
    if(walkStatus == ENGINE_WALK_MOUSE_ASTAR)
    {
       GLfloat destX =0, destZ=0;
@@ -2982,15 +2993,18 @@ void engine::renderGUI()
       glPushMatrix();
          if(walkStatus == ENGINE_WALK_MOUSE)
          {
+            /* Set the cursor to the current walkAngle orientation */
             cursors->draw(mouseX, mouseY,
-                          PCs->getActiveCharacter()->orientation -
-                          gameCamera.getPhi());
+                          walkAngle - gameCamera.getPhi());
          }
          else
          {
+            /* Keep cursor */
             cursors->draw(mouseX, mouseY);
          }
       glPopMatrix();
+
+      /* Rdefine 3D Mode */
       if(actualMap->isOutdoor())
       {
          draw3DMode(option->getFarViewFactor()*OUTDOOR_FARVIEW);
@@ -3002,6 +3016,7 @@ void engine::renderGUI()
 
    glPopMatrix();
    
+   /* Renable things */
    glEnable(GL_LIGHTING);
    glEnable(GL_DEPTH_TEST);
    glEnable(GL_FOG);
