@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-10-27 19:03-0200\n"
+"POT-Creation-Date: 2008-10-28 13:22-0200\n"
 "PO-Revision-Date: 2008-05-18 14:48+0000\n"
 "Last-Translator: pano <Pano_90@gmx.de>\n"
 "Language-Team: German <de@li.org>\n"
@@ -57,10 +57,6 @@ msgstr "kritische HEilung"
 msgid "Critical Hit!"
 msgstr "Kritischer Treffer"
 
-#: src/classes/classes.cpp:105 src/classes/race.cpp:105
-msgid "Unknow Attribute:"
-msgstr "Unbekannte Eigenschaft:"
-
 #: src/classes/feats.cpp:126
 msgid "Invalid Feat"
 msgstr ""
@@ -103,14 +99,14 @@ msgid "Tendency & Alignment"
 msgstr ""
 
 #: src/engine/alignwindow.cpp:55 src/engine/aspectwindow.cpp:70
-#: src/engine/attwindow.cpp:218 src/engine/classwindow.cpp:107
+#: src/engine/attwindow.cpp:221 src/engine/classwindow.cpp:107
 #: src/engine/options.cpp:735 src/engine/racewindow.cpp:102
 #: src/engine/skillwindow.cpp:139
 msgid "Confirm"
 msgstr "Bestätigen"
 
 #: src/engine/alignwindow.cpp:59 src/engine/aspectwindow.cpp:74
-#: src/engine/attwindow.cpp:222 src/engine/barterwindow.cpp:48
+#: src/engine/attwindow.cpp:225 src/engine/barterwindow.cpp:48
 #: src/engine/classwindow.cpp:111 src/engine/options.cpp:739
 #: src/engine/racewindow.cpp:106 src/engine/skillwindow.cpp:142
 msgid "Cancel"
@@ -137,61 +133,61 @@ msgstr "Geschlecht:"
 msgid "Can't open the list with portraits: portraits.lst!\n"
 msgstr ""
 
-#: src/engine/attwindow.cpp:40
+#: src/engine/attwindow.cpp:43
 msgid "Attributes"
 msgstr ""
 
-#: src/engine/attwindow.cpp:62
+#: src/engine/attwindow.cpp:65
 msgid "Roll"
 msgstr ""
 
-#: src/engine/attwindow.cpp:65
+#: src/engine/attwindow.cpp:68
 msgid "Clear"
 msgstr "Leeren"
 
-#: src/engine/attwindow.cpp:69
+#: src/engine/attwindow.cpp:72
 msgid "Auto"
 msgstr ""
 
-#: src/engine/attwindow.cpp:72 src/engine/charwindow.cpp:146
+#: src/engine/attwindow.cpp:75 src/engine/charwindow.cpp:146
 #: data/skills/forca.ski:1
 msgid "Strength"
 msgstr "Stärke"
 
-#: src/engine/attwindow.cpp:92 src/engine/charwindow.cpp:151
+#: src/engine/attwindow.cpp:95 src/engine/charwindow.cpp:151
 #: data/skills/destreza.ski:1
 msgid "Dexterity"
 msgstr ""
 
-#: src/engine/attwindow.cpp:112 src/engine/charwindow.cpp:156
+#: src/engine/attwindow.cpp:115 src/engine/charwindow.cpp:156
 #: data/skills/constituicao.ski:1
 msgid "Constitution"
 msgstr ""
 
-#: src/engine/attwindow.cpp:132 src/engine/charwindow.cpp:161
+#: src/engine/attwindow.cpp:135 src/engine/charwindow.cpp:161
 #: data/skills/inteligencia.ski:1
 msgid "Intelligence"
 msgstr "Intelligenz"
 
-#: src/engine/attwindow.cpp:153 src/engine/charwindow.cpp:166
+#: src/engine/attwindow.cpp:156 src/engine/charwindow.cpp:166
 #: data/skills/sabedoria.ski:1
 msgid "Wisdom"
 msgstr "Weisheit"
 
-#: src/engine/attwindow.cpp:174 src/engine/charwindow.cpp:171
+#: src/engine/attwindow.cpp:177 src/engine/charwindow.cpp:171
 #: data/skills/carisma.ski:1
 msgid "Charism"
 msgstr "Charisma"
 
-#: src/engine/attwindow.cpp:206
+#: src/engine/attwindow.cpp:209
 msgid "Attribute Description"
 msgstr ""
 
-#: src/engine/attwindow.cpp:508 src/engine/options.cpp:943
+#: src/engine/attwindow.cpp:511 src/engine/options.cpp:943
 msgid "Warning"
 msgstr "Warnung"
 
-#: src/engine/attwindow.cpp:509
+#: src/engine/attwindow.cpp:512
 msgid "You Need to Assign All Attributes."
 msgstr ""
 
@@ -481,7 +477,7 @@ msgstr ""
 msgid "%s attacks %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:3389
+#: src/engine/dccnit.cpp:3404
 msgid "Exit Battle Mode"
 msgstr ""
 
@@ -522,7 +518,7 @@ msgstr ""
 msgid "Options"
 msgstr ""
 
-#: src/engine/initial.cpp:79
+#: src/engine/initial.cpp:79 data/dialogs/objects/computers.dlg:21
 msgid "Exit"
 msgstr ""
 
@@ -2566,242 +2562,63 @@ msgid ""
 "that can produce at last 7 distinct notes."
 msgstr ""
 
-#: data/dialogs/ameiva1.dlg:6
-msgid "Oh, little student, what do you want?"
+#: data/dialogs/objects/computers.dlg:6
+msgid "(You see the computer main screen)"
 msgstr ""
 
-#: data/dialogs/ameiva1.dlg:10
-msgid "Why can't I win a battle against the Ente?"
+#: data/dialogs/objects/computers.dlg:11
+msgid "Install a new Operational System"
 msgstr ""
 
-#: data/dialogs/ameiva1.dlg:13
-msgid "I am a brutal killing machine. Die!"
+#: data/dialogs/objects/computers.dlg:31
+msgid "What Operational System do you wish to install?"
 msgstr ""
 
-#: data/dialogs/ameiva1.dlg:16
-msgid "What are you?"
+#: data/dialogs/objects/computers.dlg:39
+msgid "Install Pirate Windows"
 msgstr ""
 
-#: data/dialogs/ameiva1.dlg:19
-msgid "Nothing."
+#: data/dialogs/objects/computers.dlg:49
+msgid "Install Original Windows"
 msgstr ""
 
-#: data/dialogs/ameiva1.dlg:28
+#: data/dialogs/objects/computers.dlg:59
+msgid "Install Ubuntu Linux"
+msgstr ""
+
+#: data/dialogs/objects/computers.dlg:69
+msgid "Install Gentoo Linux"
+msgstr ""
+
+#: data/dialogs/objects/computers.dlg:84
+msgid "Operational System successfully installed."
+msgstr ""
+
+#: data/dialogs/objects/computers.dlg:88
+#: data/dialogs/objects/computers.dlg:102
+msgid "Back"
+msgstr ""
+
+#: data/dialogs/objects/computers.dlg:98
+msgid "You have failed to install an Operational System"
+msgstr ""
+
+#: data/dialogs/objects/computers.dlg:112
 msgid ""
-"Win Ente on a Battle? Are you crazy? You only are a first level student and "
-"the Ente is a mythological 14 level creature! Say thanks to the DNTeam yet "
-"not implemented the Ente attack feats (He only attacks you with his bare "
-"hands!)"
+"(You see a blue screen with some hexadecimal codes. There's nothing you can "
+"do unless restart the system.)"
 msgstr ""
 
-#: data/dialogs/ameiva1.dlg:32
-msgid "Mythological, like a D&D Dragon?"
-msgstr ""
-
-#: data/dialogs/ameiva1.dlg:35
-msgid "Bare hands? Oh, thank you DNT dev team!"
-msgstr ""
-
-#: data/dialogs/ameiva1.dlg:38
-msgid "And you, can I kill?"
-msgstr ""
-
-#: data/dialogs/ameiva1.dlg:47
-msgid "I am an Ameiva. A very usefull little Ameiva. An wise and great Ameiva!"
-msgstr ""
-
-#: data/dialogs/ameiva1.dlg:51
-msgid "Wise?  So, why can't I win a battle against the Ente?"
-msgstr ""
-
-#: data/dialogs/ameiva1.dlg:54
-msgid "You are fully of yourself!"
-msgstr ""
-
-#: data/dialogs/ameiva1.dlg:57 data/dialogs/ameiva1.dlg:105
-#: data/dialogs/ameiva1.dlg:121 data/dialogs/ameiva1.dlg:150
-msgid "Let's talk about something else."
-msgstr ""
-
-#: data/dialogs/ameiva1.dlg:66
-msgid ""
-"Nothing? You click that ugly mouse cursor on me for nothing? I'll kill you, "
-"humanoid!"
-msgstr ""
-
-#: data/dialogs/ameiva1.dlg:70
-msgid "Come on!"
-msgstr ""
-
-#: data/dialogs/ameiva1.dlg:73
-msgid "Please, no!"
-msgstr ""
-
-#: data/dialogs/ameiva1.dlg:82
-msgid ""
-"Mythological. Like a D&D Giant. A D&D dragon is much more like a DNT Panda. "
-"Thankfully to the DNTeam, no Pandas are actually modeled, so don't worry, "
-"almost for this version."
-msgstr ""
-
-#: data/dialogs/ameiva1.dlg:86
-msgid "Thank you DNTeam, for not modeled a Panda!"
-msgstr ""
-
-#: data/dialogs/ameiva1.dlg:95
-msgid "That's the way to think! I, too, won't exist without DNTeam!"
-msgstr ""
-
-#: data/dialogs/ameiva1.dlg:99
-msgid "And I won't be killing you without them! Die little Ameiva!"
-msgstr ""
-
-#: data/dialogs/ameiva1.dlg:102
-msgid "Yes. See you great Ameiva!"
-msgstr ""
-
-#: data/dialogs/ameiva1.dlg:114
-msgid "Of course I am! You, for example, can't be a great Ameiva like me!"
-msgstr ""
-
-#: data/dialogs/ameiva1.dlg:118
-msgid ""
-"Yes, I can only be this fucking Model! I hope that on  next version the "
-"DNTeam make other humanoid model!"
-msgstr ""
-
-#: data/dialogs/ameiva1.dlg:130
-msgid "Ok, I'll be mercy on you. Now, get out of my sight!"
-msgstr ""
-
-#: data/dialogs/ameiva1.dlg:134
-msgid "Yes, great Ameiva!"
-msgstr ""
-
-#: data/dialogs/ameiva1.dlg:137
-msgid "I've changed my mind. Die!"
-msgstr ""
-
-#: data/dialogs/ameiva1.dlg:146
-msgid ""
-"Yes, I hope too. But the team needs more people to help them! If you wanna "
-"join, just go to their forum  at dnt.dnteam.org"
-msgstr ""
-
-#: data/dialogs/ratazana1.dlg:6
-msgid ""
-"Cri... If you wanna know about DccNiTghtmare, talk to the Ente outside! I "
-"don't know anything."
-msgstr ""
-
-#: data/dialogs/ratazana1.dlg:10
-msgid "Calm down little one. I'll look for the Ente."
-msgstr ""
-
-#: data/dialogs/ratazana1.dlg:13
-msgid "Ha, ha, ha. A weak animal! Die!"
-msgstr ""
-
-#: data/dialogs/ratazana1.dlg:16 data/dialogs/tutorial/logan.dlg:10
-msgid "Who are you?"
-msgstr ""
-
-#: data/dialogs/ratazana1.dlg:25
-msgid ""
-"I'm only a Ratazana. Please, human that come from nowhere here, I'm afraid, "
-"go out, please!"
-msgstr ""
-
-#: data/dialogs/ratazana1.dlg:29
-msgid "I'll go. (After kill you)..."
-msgstr ""
-
-#: data/dialogs/ratazana1.dlg:32
-msgid "Ok. Just calm down..."
-msgstr ""
-
-#: data/dialogs/initial.dlg:6
-msgid "Welcome to DccNiTghtmare!"
-msgstr ""
-
-#: data/dialogs/initial.dlg:10 data/dialogs/initial.dlg:79
-msgid "What is DccNiTghtmare?"
-msgstr ""
-
-#: data/dialogs/initial.dlg:13
-msgid "I wanna help!"
-msgstr ""
-
-#: data/dialogs/initial.dlg:16 data/dialogs/initial.dlg:41
-#: data/dialogs/initial.dlg:63
-msgid "What the hell! A tree talking?"
-msgstr ""
-
-#: data/dialogs/initial.dlg:19
-msgid "Die!"
-msgstr ""
-
-#: data/dialogs/initial.dlg:22 data/dialogs/tutorial/logan.dlg:170
-#: data/dialogs/tutorial/logan.dlg:184
-msgid "Bye!"
-msgstr ""
-
-#: data/dialogs/initial.dlg:31
-msgid ""
-"DccNiTghtmare (for short DNT) is a project to make a post-apocalyptic "
-"realtime RPG with battles in turns. Actually, it is on early stage of "
-"development, so don't expect too much here."
-msgstr ""
-
-#: data/dialogs/initial.dlg:35
-msgid "I really wanna help!"
-msgstr ""
-
-#: data/dialogs/initial.dlg:38
-msgid "Die Fanatic!"
-msgstr ""
-
-#: data/dialogs/initial.dlg:44
-msgid "So, bye!"
-msgstr ""
-
-#: data/dialogs/initial.dlg:53
-msgid "Use our foruns at dnt.dnteam.org to contact us!"
-msgstr ""
-
-#: data/dialogs/initial.dlg:57
-msgid "I forgot what is DccNiTghtmare!"
-msgstr ""
-
-#: data/dialogs/initial.dlg:60
-msgid "I don't like, die!"
-msgstr ""
-
-#: data/dialogs/initial.dlg:66
-msgid "Goodbye!"
-msgstr ""
-
-#: data/dialogs/initial.dlg:75
-msgid ""
-"Tree? Where are you seeing a talking tree? I?? I am an ENTE! (Ok that a Ente "
-"was a tree on a remote past, but it's a too long history for a 0.2 techdemo "
-"of DccNiTghtmare)"
-msgstr ""
-
-#: data/dialogs/initial.dlg:82
-msgid "Die Cursed Tree!"
-msgstr ""
-
-#: data/dialogs/initial.dlg:85
-msgid "Bye Tree!"
-msgstr ""
-
-#: data/dialogs/initial.dlg:88
-msgid "Bye Ente!"
+#: data/dialogs/objects/computers.dlg:116
+msgid "Restart"
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:6
 msgid "Ah, so finally you awake!"
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:10
+msgid "Who are you?"
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:19
@@ -2909,6 +2726,10 @@ msgstr ""
 msgid ""
 "So, for this DNT 0.2 version, I haven't any more missions for you. Go take a "
 "walk (it's an open world game) and wait for DNT 0.3 release."
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:170 data/dialogs/tutorial/logan.dlg:184
+msgid "Bye!"
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:180
@@ -3051,3 +2872,6 @@ msgstr ""
 #: data/weapons/types/weights.dcl:4
 msgid "Heavy"
 msgstr ""
+
+#~ msgid "Unknow Attribute:"
+#~ msgstr "Unbekannte Eigenschaft:"

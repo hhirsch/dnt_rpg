@@ -230,9 +230,7 @@ data/skills/suborno.ski
 data/skills/tocarinst.ski
 
 #dialogs
-data/dialogs/ameiva1.dlg  
-data/dialogs/ratazana1.dlg
-data/dialogs/initial.dlg
+data/dialogs/objects/computers.dlg
 data/dialogs/tutorial/logan.dlg
 
 #weapons
