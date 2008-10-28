@@ -460,6 +460,10 @@ SOURCE=.\src\ia\pattAgent.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\classes\pendingaction.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\gui\picture.cpp
 # End Source File
 # Begin Source File
@@ -965,6 +969,10 @@ SOURCE=.\src\particle\partlist.h
 # Begin Source File
 
 SOURCE=.\src\ia\pattAgent.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\classes\pendingaction.h
 # End Source File
 # Begin Source File
 
