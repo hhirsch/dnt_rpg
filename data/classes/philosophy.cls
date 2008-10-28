@@ -3,11 +3,11 @@ gettext("'Better die by vodka than by boredom!'|(Vladmir Maiakovsky)")
 gettext("Not satisfied  with don't want nothing for their life, the Philosophy Student enters the University with just one objective: to perfect that 'want nothing'. Adepts of drink beers and of do nothing, mixing their time between one and other, the Philosophy Student become the bohemian master and full of hot air.")
 d6
 7
-2 ATT CONSTITUTION ALL ALL
+2 ATTRIBUTE CONSTITUTION ALL ALL
 gettext("Receive +2 of Constitution, because their body is barely of a monk, fully usual to the alcohol.")
--2 ATT WISDOM ALL ALL
+-2 ATTRIBUTE WISDOM ALL ALL
 gettext("Since they only study complex things, the Philosophy Student easily forget all pratical and common life things, receiving -2 of Wisdom.")
-2 ATT CHARISM ALL ALL
+2 ATTRIBUTE CHARISM ALL ALL
 gettext("For spending almost all their student's life in pubs, the Philosophy Student acquire some kind of aptitude to deal with others, receiving +2 of Charisma.")
 4 SKILL KNOWLEDGE_CLASSIC ALL ALL
 gettext("The Philosophy Student receive +4 of Knowledge (Classic) for the few they learn at university.")

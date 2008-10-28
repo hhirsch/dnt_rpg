@@ -3,11 +3,11 @@ gettext("'You should have studied more and entered the Federal University!'|(Wan
 gettext("Medicine Students arqui-rivals, the Physiotherapy Student feeds a mortal hate whith their half-blood brothers. The Physiotherapy Student, althought have something similar with the Medicine ones (like elves and half-elves), hate them with all their forces because the little medicians passed in the place that the Physiotherapy one always want. The Physiotherapy Student usually works at physical academies, to better look for their victims.")
 d8
 6
-1 ATT DEXTERITY ALL ALL
+1 ATTRIBUTE DEXTERITY ALL ALL
 gettext("For hard study the human body mobility, they can realize some achievements, receiveing +1 of Dexterity.")
-1 ATT INTELLIGENCE ALL ALL
+1 ATTRIBUTE INTELLIGENCE ALL ALL
 gettext("All Physiotherapy Student lost one or more years studing to be a Medicine Student, receiving +1 of Intelligence.")
--2 ATT WISDOM ALL ALL
+-2 ATTRIBUTE WISDOM ALL ALL
 gettext("Because the effort to be a Medicine Student, the little Physioterapist inherit the penalty of -2 of Wisdom.")
 1 ACTION ATTACK CLASS MED
 gettext("Feeding the hate to their medicine rivals, the Physiotherapy Student receive the class bonus against them, of +1 on all attacks against Medicians.")

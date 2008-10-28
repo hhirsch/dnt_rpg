@@ -3,11 +3,11 @@ gettext("'Today we'll see the comprex prane pracle probrem!'|(Haroldao, Mechanic
 gettext("The student of mechanical engineering is the Campus most frustrated person. After enter the graduation on the hope of learn everything about cars, planes,  boats and other mechanical structures of high complexity, they discover that the world is summarized to F = m*a. In possession of that simple equation and of absurd quantities of inexplicable calculations, the teachers of physics make  their life a hell on the basic course. But on specific classes they realize that the world was happy on the basic cycle. Generally they're seen in all classes  inside the Exacts Institute (ICEX), therefore no one is going to finish the graduation regularly.")
 d8
 4
-3 ATT INTELLIGENCE ALL ALL
+3 ATTRIBUTE INTELLIGENCE ALL ALL
 gettext("Students of Mechanics are going to study crazy, if they want to do something more than hold tight bolts in their lifes, so they receive + 3 of Intelligence.")
-3 ATT WISDOM ALL ALL
+3 ATTRIBUTE WISDOM ALL ALL
 gettext("Due to the quantity of information about steels, kinds of tempera, tools of plants, electronic systems and other things that they are obliged to swallow, the Students of Mechanics receive +3 of Wisdom.")
--2 ATT STRENGTH
+-2 ATTRIBUTE STRENGTH
 gettext("They receive -2 of Strength, one time that the Autocad mouse doesn't weigh much.")
 -10 SOCIAL_TESTS ALL SEX OPPOSITE
 gettext("A student of Mechanics always suffers a penalty of -10 in any kind of tests against things of female sex. The total absence of contact with that kind of organism causes a barely unruly frenzy on the student, that should do a test of I Am Not A Fool (with the penalty of -10) to not jump wildily on top of the female. In case of fail, the student enters in frenzy and will try with all his forces to 'copulate' with the same one.")

@@ -3,11 +3,11 @@ gettext("'- Are we going to the bar taking one?|- Yes, from whose?'|(Typical dia
 gettext("Living at the Campus disguised as penguins, Law Students are organisms that, when perceive the minor possibility to make profits by some situation they judge 'juridic', will use of all their verborragy, deturpations and sofisms to make it. Is always important to have a Law Student on your group (party), be for avoiding other Law Students knowledge (and policial aparate) take advantages from you, or for taking advantages from others and avoid that iminent punition.")
 d6
 4
--2 ATT INTELLIGENCE ALL ALL
+-2 ATTRIBUTE INTELLIGENCE ALL ALL
 gettext("For usually being stupids among anything that isn't related with money, they receive -2 of Intelligence.")
--1 ATT CHARISM ALL ALL
+-1 ATTRIBUTE CHARISM ALL ALL
 gettext("For their hungry to take the last copeck of their victims, they receive -1 of Charism.")
-2 ATT WISDOM ALL ALL
+2 ATTRIBUTE WISDOM ALL ALL
 gettext("By can modify any situation to make money from it, receive +2 of Wisdom.")
 1 SKILL APPRAISE ALL ALL
 gettext("Since they know everything about money, the Law Student receives  +1 of Appraise on their first level.")

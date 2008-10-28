@@ -3,11 +3,11 @@ gettext("'Steel with steel is bad...'|(Zamboy, future Administration Student)")
 gettext("Also knowledged as Taylor's little boys Administration Students are frequently found  in self-help shelves of commercial bookstores. They enter in this course  since they not really know what want to their lifes (exacts science, human science, group  dynamics?) and, although in the most of the cases don't possess NOTHING to administer, they think, vehemently, that are doing the helpful and certain thing to their lives.")
 d4
 6
--2 ATT INTELLIGENCE ALL ALL
+-2 ATTRIBUTE INTELLIGENCE ALL ALL
 gettext("Administration Students, definitively, aren't knowledge by their intelectual attributes. (Am I wrong Elis Regina?). So, they receive -2 of Intelligence.")
--4 ATT CHARISM ALL ALL
+-4 ATTRIBUTE CHARISM ALL ALL
 gettext("It's a really dumb ass to find some of them in group. -4 of Charism.")
-2 ATT CONSTITUTION ALL ALL
+2 ATTRIBUTE CONSTITUTION ALL ALL
 gettext("The Taylor's Knowledges are a common part of the Administration Students, +2 to their constitution.")
 4 SKILL BOVINICE ALL ALL
 gettext("Since they are Taylor's fiel disciples, they receive +4 of Taylor's Vialty Skill")

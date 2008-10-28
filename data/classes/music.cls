@@ -3,15 +3,15 @@ gettext("'Without you I sound nothing.'|(Typical commentary of a Lyric-man to a 
 gettext("In a scientific world, few people adventure in a different concept, following some art source, like music. The Music Student is a creature with extreme patience to learn all tecnics related to ternary compass atonalisms, have the capacity to realize them and a distorced taste to play one of the most bizarre and ocult musical instrument.|Creator's Note: 'Based on the idea that musical tastes are distints and only the the most understood ones appreciate distinct rhythms (obviously all that aren't atempts to kill the musical concept), the class was made. So, the same sound, Bach for example, can be a beautifull music or something boring, depending from the ear of the listener. Probably a progressive fan will like Bach, but a fan of Tati-Quebra-Barraco, without any musical sense, will think  Bach as a great shit. So, the Music Student will be a virtuous misunderstood.'")
 d6
 7
--4 ATT STRENGTH ALL ALL
+-4 ATTRIBUTE STRENGTH ALL ALL
 gettext("-4 of Strength by the fact that their muscles atrophy since aren't used more than the much needed to play their instrument.")
--1 ATT CONSTITUTION ALL ALL
+-1 ATTRIBUTE CONSTITUTION ALL ALL
 gettext("-1 of Constitution for the hours spent in a closed ambient, playing.")
-2 ATT DEXTERITY ALL ALL
+2 ATTRIBUTE DEXTERITY ALL ALL
 gettext("+2 of Dexterity for having the ability to play a Gb7M or a Am#5/7/9 on  their strange musical instrument.")
-1 ATT INTELLIGENCE ALL ALL
+1 ATTRIBUTE INTELLIGENCE ALL ALL
 gettext("+1 of Intelligence for know those notes, how they are created and all musical theory envolved on their creation.")
-2 ATT CHARISM ALL ALL
+2 ATTRIBUTE CHARISM ALL ALL
 gettext("+2 of Charism for the capacity to joy people.")
 8 ACTION PLAY_INSTRUMENT ALL ALL
 gettext("Cause of the extense and hard work since they were childs, the Music Student have incredible capacity to play their bizarre instrument, receiving +8 of bonus when playing it.")

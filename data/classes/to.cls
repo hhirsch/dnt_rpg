@@ -3,11 +3,11 @@ gettext("'- Hey, girls from OT, answer me a question I have since entered the Un
 gettext("Usually little and fragile, the Occupational Therapy Students can be high emoted watching the most previsible mexican novel. Knowledge by their 'hard'  group therapies, called 'Academic Classes', and for the hours spent painting a little paper like a three years old child (and FOR a three years old child), calling it 'Scientific  Project', the OT Students can't explain to what their graduation is (it's one of the universe's secrets not answered by 42), their life is, their clients, their friends, their bass, the Anamabeka, their..., finally... but sure know what happened at the previous chapter of the midday television novel.")
 d4
 8
--2 ATT INTELLIGENCE ALL ALL
+-2 ATTRIBUTE INTELLIGENCE ALL ALL
 gettext("Receive -2 of Intelligence, for spent too much time watching TV novels.")
-1 ATT WISDOM ALL ALL
+1 ATTRIBUTE WISDOM ALL ALL
 gettext("+1 of Wisdom, for the inutiles knowledges obtained watching TV novels.")
-3 ATT CHARISM ALL ALL
+3 ATTRIBUTE CHARISM ALL ALL
 gettext("+3 of Charism, for not study at the Exacts Sciences Institute (ICEX), usually being pleasants.")
 10 SOCIAL_TESTS ALL CLASS ICEX
 gettext("For usually have some rare  beauty to the ICEX, the OT Students receive +10 on all social tests against Students from that Institute.")

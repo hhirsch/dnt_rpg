@@ -3,15 +3,15 @@ gettext("'No! The swimming class is too complex!'|(Typical Physical Education St
 gettext("Usually having 'Soccer' and 'Basketball' as classes, the dedicated (in the physical sense of the word) Students of Physical Education are things that value the muscular force above all. With too muscles in the brain, those Students possess nothing less than a supernatural resistance in the head - in change of some points of Intelligence, really. Finally, these boys are stars in the soccer but aren't distinguished students of mathematics (hardly knowing number's fundamentals).")
 d12
 17
-3 ATT STRENGTH ALL ALL
+3 ATTRIBUTE STRENGTH ALL ALL
 gettext("Receive +3 of Strength, due to the lot of hours kicking a ball.")
-2 ATT DEXTERITY ALL ALL
+2 ATTRIBUTE DEXTERITY ALL ALL
 gettext("+2 of Dexterity, due to the hours fluctuating in the water.")
-4 ATT CONSTITUTION ALL ALL
+4 ATTRIBUTE CONSTITUTION ALL ALL
 gettext("+4 of Constitution for hours running in circles.")
--6 ATT INTELLIGENCE ALL ALL
+-6 ATTRIBUTE INTELLIGENCE ALL ALL
 gettext("-6 of Intelligence since they abandoned the books in a remote past.")
--6 ATT WISDOM ALL ALL
+-6 ATTRIBUTE WISDOM ALL ALL
 gettext("-6 of Widow, by the same reason.")
 4 SKILL STRENGHT ALL ALL
 gettext("The Student of Physical Education receives +4 of Jump, Scale, Mount, Swimming, Soccer, Basketball, finally, sports  in  general or anything that emanates physical power.")

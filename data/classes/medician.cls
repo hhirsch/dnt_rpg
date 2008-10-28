@@ -3,11 +3,11 @@ gettext("'If I've tried Physiotherapy there, I should passed on first with the p
 gettext("The Medicine Student is the thing that abdicated to their social life in change of an anormal dedication to the studies, believing they'll be something in life. Those creatures haven't any cleverness, one time based their lifes on theories and more theories. To be one of this class, the character need to be submitted to any hideous  attitude, like drown  hookies, public peversion, among others that result in death.")
 d6
 8
-1 ATT STRENGTH ALL ALL
+1 ATTRIBUTE STRENGTH ALL ALL
 gettext("Although being theory creatures, they usually spent their money in physical academies, receiving +1 of Strength.")
-2 ATT INTELLIGENCE ALL ALL
+2 ATTRIBUTE INTELLIGENCE ALL ALL
 gettext("By the dedication to the studies, the Medicine Student receive +2 of Intelligence.")
--4 ATT WISDOM ALL ALL
+-4 ATTRIBUTE WISDOM ALL ALL
 gettext("Since their attention is only for the books, these creatures haven't any cleverness, receiving -4 of Wisdom.")
 -3 TESTS NSB ALL ALL
 gettext("Frequently in the studies, the Medicine Student forgot to grow up, being very susceptible to questions, receiving -3 on all I am not a Fool tests (this modifier  fall down to -6 when the target is their father or mother).")

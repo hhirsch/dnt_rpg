@@ -3,9 +3,9 @@ gettext("'-I really don't know why I'm making this graduation...|- How  not? For
 gettext("Computer Science Student is the most bizarre class in DccNiTghtmare (and, paradoxically, the most common). They are knowledge by their suicidal choices (the first one is the graduation they choosed), their little patience to view what their masters call 'classes', the infinity time spent on Pratical Exercises (TPs) and the hate when they percept that it works perfectly, but their masters won't  look  and  appraise  it, since CS teachers are displicents and without any compromise with the graduation.")
 d8
 4
-2 ATT WISDOM ALL ALL
+2 ATTRIBUTE WISDOM ALL ALL
 gettext("Since they have to be self-teachers, they receive +2 of Wisdom.")
--1 ATT CHARISM ALL ALL
+-1 ATTRIBUTE CHARISM ALL ALL
 gettext("By their natural tendency to be qualified as Geeks, being one or not, they receive -1 of Charism.")
 5 SAVE FORTITUDE ALL ALL
 gettext("Computer Science Students receive +5 of fortitute by survive to their hoax and boring graduation.")

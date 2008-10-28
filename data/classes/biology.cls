@@ -3,9 +3,9 @@ gettext("'This place is filled with arthropodes!'|(Bin, that time, a Biology Stu
 gettext("Able to be for two weeks isoleted in the mountains doing their 'Field Works', ambushing and observing the incredible and exciting ameiva's feed habits (and sometimes mistaken as Hippies in their search for Feed-Karma), the Biology Students are from all things a few: a few  medicians, a few hippies,  a few computers, a few hot-dog sellers...")
 d8
 5
-2 ATT DEXTERITY ALL ALL
+2 ATTRIBUTE DEXTERITY ALL ALL
 gettext("+2 of Dexterity, since they always observe and follow in distinct terrains the ameivas (and by also open its body, counting how many worms it has).")
--1 ATT STRENGTH ALL ALL
+-1 ATTRIBUTE STRENGTH ALL ALL
 gettext("-1 of Strength, since their muscles atrophy after spent 12 hours inert observing the ameiva's coupling rituals.")
 6 SKILL DISGUISES CLASS HIPPIE
 gettext("Since they are commonly mistaken as hippies, Biology Students receive +6 of Disguises when disguised as hippie (and when not of this race)")
