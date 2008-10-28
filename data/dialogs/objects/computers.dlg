@@ -1,0 +1,119 @@
+############################################################
+#                     Main Dialog                          #
+############################################################
+dialog(0)
+   npc_begin
+      text = gettext("(You see the computer main screen)")
+   npc_end
+   pc_begin
+      option
+         pre_test = equal(OBJECT_STATE, 0)
+         text = gettext("Install a new Operational System")
+         action = go_to_dialog(1)
+
+      # The windows option =^P
+      option
+         pre_test = lesser(OBJECT_STATE, 3)
+         text = "Buy CHEAP nIAGaRA $$"
+         action = go_to_dialog(4)
+
+      option
+         text = gettext("Exit")
+         action = finish_dialog()
+   pc_end
+end_dialog
+
+############################################################
+#                    Install OS Dialog                     #
+############################################################
+dialog(1)
+   npc_begin
+      text = gettext("What Operational System do you wish to install?")
+   npc_end
+
+   pc_begin
+
+      # The PIRATE Windows Install
+      option
+         pre_test = align_not(FREE_SOFTWARE)
+         text = gettext("Install Pirate Windows")
+         post_test = roll(OPERATE_ELETRONIC_OBJECTS, 5)
+         if_action = change_object_state(1)
+         if_action = receive_xp(15)
+         if_action = go_to_dialog(2)
+         else_action = go_to_dialog(3)
+
+      # The ORIGINAL Windows Install
+      option
+         pre_test = has_item("models/objetos/icex/ruindows_box/ruindows_box.dcc")
+         text = gettext("Install Original Windows")
+         post_test = roll(OPERATE_ELETRONIC_OBJECTS, 6)
+         if_action = change_object_state(2)
+         if_action = receive_xp(25)
+         if_action = go_to_dialog(2)
+         else_action = go_to_dialog(3)
+
+      # The UBUNTU Linux Install
+      option
+         pre_test = align_not(PROPRIETARY_SOFTWARE)
+         text = gettext("Install Ubuntu Linux")
+         post_test = roll(OPERATE_ELETRONIC_OBJECTS, 5)
+         if_action = change_object_state(3)
+         if_action = receive_xp(25)
+         if_action = go_to_dialog(2)
+         else_action = go_to_dialog(3)
+
+      # The GENTOO Linux Install
+      option
+         pre_test = align_not(PROPRIETARY_SOFTWARE)
+         text = gettext("Install Gentoo Linux")
+         post_test = roll(OPERATE_ELETRONIC_OBJECTS, 15)
+         if_action = change_object_state(4)
+         if_action = receive_xp(50)
+         if_action = go_to_dialog(2)
+         else_action = go_to_dialog(3)
+
+   pc_end
+end_dialog
+
+############################################################
+#                Install OS Success Dialog                 #
+############################################################
+dialog(2)
+   npc_begin
+      text = gettext("Operational System successfully installed.")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Back")
+         action = go_to_dialog(0)
+   pc_end
+end_dialog
+
+############################################################
+#                Install OS Failure Dialog                 #
+############################################################
+dialog(3)
+   npc_begin
+      text = gettext("You have failed to install an Operational System")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Back")
+         action = go_to_dialog(0)
+   pc_end
+end_dialog
+
+############################################################
+#                  Windows Failure Dialog                  #
+############################################################
+dialog(4)
+   npc_begin
+      text = gettext("(You see a blue screen with some hexadecimal codes. There's nothing you can do unless restart the system.)")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Restart")
+         action = go_to_dialog(0)
+   pc_end
+end_dialog
