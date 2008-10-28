@@ -217,9 +217,9 @@ bool options::load(string file)
    {
       farViewFactor = 1.0;
    }
-   else if(farViewFactor < 0.2)
+   else if(farViewFactor < 0.4)
    {
-      farViewFactor = 0.2;
+      farViewFactor = 0.4;
    }
 
    fclose(arq);
@@ -912,7 +912,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
       }
       else if(object == (guiObject*) buttonFarViewDec) 
       {
-         if(farViewFactor > 0.2)
+         if(farViewFactor > 0.4)
          {
             farViewFactor -= 0.1;
          }
