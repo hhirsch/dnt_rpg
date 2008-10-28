@@ -6,7 +6,7 @@ gettext("Boys, and their female versions, Patys, are creatures endowed with a st
 gettext("Patys have +1 of Diplomacy since they always exhibit their bodies characteristics. For more horrendous that she was, she is able to 'magically' alter herself on few hours.")
 2 SKILL DISGUISES ALL ALL
 gettext("By the aforesaid reasons, the Patys also receive + 2 of Disguises.")
-1 ATT CONSTITUTION ALL ALL
+1 ATTRIBUTE CONSTITUTION ALL ALL
 gettext("Boys and Patys receive +1 od Constitution due to the constant time they spend on body academies. If they no more go there, they'll lose this bonus and automatically become aim of jokes among others of their own race.")
 0
 1
