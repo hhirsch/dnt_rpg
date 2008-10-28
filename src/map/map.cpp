@@ -8,7 +8,13 @@
 #include "../etc/extensions.h"
 #include "../engine/options.h"
 #include "../etc/dirs.h"
-#include "../config.h"
+
+#ifdef _MSC_VER
+   #include "../config_win.h"
+#else
+   #include "../config.h"
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
