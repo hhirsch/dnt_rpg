@@ -70,7 +70,7 @@ void classe::applySkillCosts(skills* sk)
       }
       else
       {
-         printf("Warn: Unknow class Skill: %s\n",classSkills[i].c_str());
+         cerr << "Warn: Unknow class Skill: " << classSkills[i] << endl;
       }
    }
 }
@@ -102,8 +102,7 @@ void classe::getAttModifiers(int mods[6], bool sum, skills* sk)
          }
          else
          {
-            cout << gettext("Unknow Attribute:") << classModifiers[i].cause.id
-                 << endl;
+            cerr << "Unknow Attribute:" << classModifiers[i].cause.id << endl;
          }
       }
    }
@@ -131,7 +130,7 @@ classes::classes(string directory, string fileListName)
 
    if(!file)
    {
-      printf("Error opening class list file: %s\n",fileListName.c_str());
+      cerr << "Error opening class list file: " << fileListName << endl;
       return;
    }
 
@@ -182,7 +181,7 @@ void classes::insertClass(string fileName, string imgFile, string idString,
 
    if(!file)
    {
-      printf("Error while opening class file: %s\n",fileName.c_str());
+      cerr << "Error while opening class file: " << fileName << endl;
       return;
    }
 
@@ -215,7 +214,7 @@ void classes::insertClass(string fileName, string imgFile, string idString,
    ins->image = IMG_Load(dir.getRealFile(imgFile).c_str());
    if(!ins->image)
    {
-      printf("Error while opening image class file: %s\n",imgFile.c_str());
+      cerr << "Error while opening image class file: " << imgFile << endl;
    }
 
    /* Modifiers */

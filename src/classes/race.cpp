@@ -70,7 +70,7 @@ void race::applySkillCosts(skills* sk)
       }
       else
       {
-         printf("Warn: Unknow race Skill: %s\n",raceSkills[i].c_str());
+         cerr << "Warn: Unknow race Skill: " << raceSkills[i] << endl;
       }
    }
 }
@@ -102,8 +102,7 @@ void race::getAttModifiers(int mods[6], bool sum, skills* sk)
          }
          else
          {
-            cout << gettext("Unknow Attribute:") << raceModifiers[i].cause.id
-                 << endl;
+            cerr << "Unknow Attribute: " << raceModifiers[i].cause.id  << endl;
          }
       }
    }
@@ -131,7 +130,7 @@ races::races(string directory, string fileListName)
 
    if(!file)
    {
-      printf("Error opening race list file: %s\n",fileListName.c_str());
+      cerr << "Error opening race list file: " << fileListName << endl;
       return;
    }
 
@@ -181,7 +180,7 @@ void races::insertRace(string fileName,string imgFile,string idString,int idInt)
 
    if(!file)
    {
-      printf("Error while opening race file: %s\n",fileName.c_str());
+      cerr << "Error while opening race file: " << fileName << endl;
       return;
    }
 
@@ -205,7 +204,7 @@ void races::insertRace(string fileName,string imgFile,string idString,int idInt)
    ins->image = IMG_Load(dir.getRealFile(imgFile).c_str());
    if(!ins->image)
    {
-      printf("Error while opening image race image file: %s\n",imgFile.c_str());
+      cerr << "Error while opening image race image: " << imgFile << endl;
    }
 
    /* Modifiers */

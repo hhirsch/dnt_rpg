@@ -2,6 +2,9 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code. *
  *************************************************************************/
 
+#include <iostream>
+using namespace std;
+
 #include "attwindow.h"
 #include "../classes/skills.h"
 #include "../classes/dices.h"
