@@ -1,7 +1,7 @@
 [Project]
 FileName=DccNiTghtmare.dev
 Name=DccNiTghtmare
-UnitCount=242
+UnitCount=244
 Type=0
 Ver=1
 ObjFiles=
@@ -27,7 +27,7 @@ CustomMakefile=
 IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
-CompilerSettings=0000000000000000000000
+CompilerSettings=0000000001010000000000
 
 [Unit1]
 FileName=src\engine\teste.cpp
@@ -2459,6 +2459,26 @@ BuildCmd=
 
 [Unit242]
 FileName=src\map\mapsound.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit243]
+FileName=src\classes\pendingaction.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit244]
+FileName=src\classes\pendingaction.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
 Compile=1

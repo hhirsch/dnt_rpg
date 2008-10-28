@@ -1,7 +1,7 @@
 [Project]
 FileName=DNTMapEditor.dev
 Name=DNTMapEditor
-UnitCount=261
+UnitCount=263
 Type=0
 Ver=1
 ObjFiles=
@@ -2649,6 +2649,26 @@ BuildCmd=
 
 [Unit261]
 FileName=src\etc\texrenderer.h
+CompileCpp=1
+Folder=DNTMapEditor
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit262]
+FileName=src\classes\pendingaction.h
+CompileCpp=1
+Folder=DNTMapEditor
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit263]
+FileName=src\classes\pendingaction.cpp
 CompileCpp=1
 Folder=DNTMapEditor
 Compile=1
