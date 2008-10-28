@@ -150,13 +150,20 @@ skills::skills()
    int aux;
    for(aux = 0; aux < totalSkills; aux++)
    {
-      //fscanf(file,"%d %s",&num,&buffer[0]);
+      /* get the skill definition */
       fgets(buffer, sizeof(buffer), file);
       sscanf(buffer,"%d %s %s %s",&num, &buf2[0],&buf3[0], &buf4[0]);
       arqImagem = buf3;
       arqDescricao = buf2;
       arqDescricao = dir.getRealFile("skills/") + arqDescricao;
       m_skills[aux].idString = buf4;
+
+      /* Make sure idString not have \n or #13 */
+      if( (m_skills[aux].idString[m_skills[aux].idString.length()-1] == '\n') ||
+          (m_skills[aux].idString[m_skills[aux].idString.length()-1] == 13) )
+      {
+         m_skills[aux].idString.erase(m_skills[aux].idString.length()-1);
+      }
 
       FILE* desc;
       if(! (desc = fopen(arqDescricao.c_str(), "r")))
