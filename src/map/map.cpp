@@ -2614,8 +2614,8 @@ SDL_Surface* Map::getMiniMap()
 void Map::drawMiniMap(modelList* models)
 {
    /* Setting the View  */
-   int mapSizeX = squareMiniSize*x;
-   int mapSizeZ = squareMiniSize*z;
+   int mapSizeX = (int)squareMiniSize*x;
+   int mapSizeZ = (int)squareMiniSize*z;
    glViewport(0,0, mapSizeX, mapSizeZ);
    glMatrixMode (GL_PROJECTION);
    glLoadIdentity ();
