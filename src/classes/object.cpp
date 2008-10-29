@@ -234,6 +234,7 @@ void object::cleanValues()
    sizeModifier = 0;
    cost = 0;
    staticScenery = false;
+   thingType = THING_TYPE_OBJECT;
 }
 
 /**************************************************************

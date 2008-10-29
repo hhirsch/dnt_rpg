@@ -3,6 +3,7 @@
 #include "defs.h"
 
 #include "../engine/util.h"
+#include "../engine/dialog.h" 
 #include "../ia/iascript.h"
 
 #include <math.h>
@@ -52,6 +53,7 @@ thing::thing()
    bloodPosition = 25;
    walk_interval = 37.5 * WALK_UPDATE; //default value, if not
                                        //defined at the def file.
+   thingType = THING_TYPE_NONE;
 }
 
 /******************************************************
@@ -66,6 +68,14 @@ thing::~thing()
       delete(isc);
       battleScript = NULL;
    }
+}
+
+/******************************************************
+ *                   getThingType                     *
+ ******************************************************/
+int thing::getThingType()
+{
+   return(thingType);
 }
 
 /******************************************************
@@ -288,3 +298,54 @@ void thing::setPsychoState(int state)
 {
    psychoState = state;
 }
+
+/*********************************************************************
+ *                        setConversationFile                        *
+ *********************************************************************/
+void thing::setConversationFile(string file)
+{
+   conversationFile = file;
+}
+
+/*********************************************************************
+ *                        getConversationFile                        *
+ *********************************************************************/
+string thing::getConversationFile()
+{
+   return(conversationFile);
+}
+
+/*********************************************************************
+ *                          getConversation                          *
+ *********************************************************************/
+void* thing::getConversation()
+{
+   return(conv);
+}
+
+/*********************************************************************
+ *                        createConversation                         *
+ *********************************************************************/
+void thing::createConversation(void* pEngine, string curMap)
+{
+   if(conversationFile != "")
+   {
+      conv = (void*) new conversation(pEngine);
+      conversation* cs = (conversation*)conv;
+      cs->loadFile(conversationFile);
+      cs->setOwner(this, curMap);
+   }
+}
+
+/*********************************************************************
+ *                      setInitialConversation                       *
+ *********************************************************************/
+void thing::setInitialConversation(int i)
+{
+   if(conv != NULL)
+   {
+      conversation* cs = (conversation*)conv;
+      cs->setInitialDialog(i);
+   }
+}
+

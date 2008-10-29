@@ -289,7 +289,7 @@ conversation::conversation(void* pEngine)
    first->id = 0;
    total = 0;
    actualPC = NULL;
-   ownerNPC = NULL;
+   owner = NULL;
    ownerMap = "";
    actual = -1;
    initialDialog = 0;
@@ -804,22 +804,30 @@ void conversation::removeDialog(int num)
  *************************************************************************/
 void conversation::setInitialDialog(int numDialog)
 {
+   modState mod;
+   
+   /* Set the initial dialog */
    initialDialog = numDialog;
-   if(ownerNPC)
+   
+   /* Tell the modeState */
+   if(owner)
    {
-      modState mod;
-      mod.mapTalkAddAction(MODSTATE_TALK_ENTER_VALUE, 
-                           ownerNPC->getCharacterFile(),
-                           ownerMap, numDialog);
+      if(owner->getThingType() == THING_TYPE_CHARACTER)
+      {
+         character* ownerNPC = (character*)owner;
+         mod.mapTalkAddAction(MODSTATE_TALK_ENTER_VALUE, 
+                              ownerNPC->getCharacterFile(),
+                              ownerMap, numDialog);
+      }
    }
 }
 
 /*************************************************************************
  *                               setOwner                                *
  *************************************************************************/
-void conversation::setOwner(character* pers, string mapFile)
+void conversation::setOwner(thing* o, string mapFile)
 {
-   ownerNPC = pers;
+   owner = o;
    ownerMap = mapFile;
 }
 
@@ -832,11 +840,11 @@ void conversation::setPC(character* PC)
 }
 
 /*************************************************************************
- *                                 getNPC                                *
+ *                                getOwner                               *
  *************************************************************************/
-character* conversation::getNPC()
+thing* conversation::getOwner()
 {
-   return(ownerNPC);
+   return(owner);
 }
 
 /*************************************************************************
@@ -894,7 +902,7 @@ void conversation::proccessAction(int opcao)
          case TALK_ACTION_INIT_FIGHT:
          {
             engine* eng = (engine*)actualEngine;
-            ownerNPC->setAsEnemy();
+            owner->setAsEnemy();
             eng->enterBattleMode(false);
             dlgWindow.close();
          }
@@ -911,10 +919,7 @@ void conversation::proccessAction(int opcao)
          case TALK_ACTION_DIALOG_INIT:
          {
             modState modif;
-            initialDialog = actions[i].att;
-            modif.mapTalkAddAction(MODSTATE_TALK_ENTER_VALUE, 
-                                   ownerNPC->getCharacterFile(),
-                                   ownerMap, initialDialog);
+            setInitialDialog(actions[i].att);
          }
          break;
          case TALK_ACTION_ADD_MISSION:
@@ -944,23 +949,28 @@ void conversation::proccessAction(int opcao)
          break;
          case TALK_ACTION_GIVE_ITEM:
          {
-            /* Search for the item at actor's inventory */
-            object* obj = actualPC->inventories->getItemByFileName(
-                                                               actions[i].satt);
-            if(obj)
+            /* Only give item if the owner is a character */
+            if(owner->getThingType() == THING_TYPE_CHARACTER)
             {
-               /* Remove it from there */
-               actualPC->inventories->removeFromInventory(obj);
+               character* ownerNPC = (character*)owner;
+               /* Search for the item at actor's inventory */
+               object* obj = actualPC->inventories->getItemByFileName(
+                     actions[i].satt);
+               if(obj)
+               {
+                  /* Remove it from there */
+                  actualPC->inventories->removeFromInventory(obj);
 
-               /* Add it to the Owner NPC inventory */
-               ownerNPC->inventories->addObject(obj);
-               /* NOTE: The NPC inventory is always saved at modstate when 
-                * the PC leaves the map, and reloaded when it come back */
-            }
-            else
-            {
-               cerr << "Error: No object '" << actions[i].satt 
-                    << "' to give at character inventory!" << endl;
+                  /* Add it to the Owner NPC inventory */
+                  ownerNPC->inventories->addObject(obj);
+                  /* NOTE: The NPC inventory is always saved at modstate when 
+                   * the PC leaves the map, and reloaded when it come back */
+               }
+               else
+               {
+                  cerr << "Error: No object '" << actions[i].satt 
+                     << "' to give at character inventory!" << endl;
+               }
             }
          }
          break;
@@ -1075,9 +1085,17 @@ void dialogWindow::open(guiInterface* gui, character* PC, conversation* cv,
    /* Create the Window */
    jan = gui->insertWindow(280,100,605,355,gettext("Dialog"));
    
-   /* Buttons */
-   barterButton = jan->getObjectsList()->insertButton(5,86,69,104,
-                                            gettext("Barter"),1);
+   /* Barter Button (only for characters) */
+   if(conv->getOwner()->getThingType() == THING_TYPE_CHARACTER)
+   {
+      barterButton = jan->getObjectsList()->insertButton(5,86,69,104,
+                                                         gettext("Barter"),1);
+   }
+   else
+   {
+      barterButton = NULL;
+   }
+
    /* Picture */
    jan->getObjectsList()->insertPicture(10,25,0,0, 
                                         dir.getRealFile(pictureFile).c_str());
@@ -1159,7 +1177,11 @@ bool dialogWindow::treat(guiObject* guiObj, int eventInfo, itemWindow* infoW)
          {
             tradeWindow.close();
          }
-         tradeWindow.open(conv->getNPC(), conv->getPC(), usedGui, infoW);
+         
+         /* Open the trade. If trade button is avalaible, the
+          * owner is, for sure, a character. */
+         tradeWindow.open((character*)conv->getOwner(), conv->getPC(), 
+                          usedGui, infoW);
 
       }
    }

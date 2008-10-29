@@ -82,14 +82,6 @@ class character: public aniModel
        * \return -> total points at first level */
       int getOtherLevelSkillPoints(int multiClassNumber);
 
-      /*! Set the conversation file
-       * \param file -> name of the conversation file*/
-      void setConversationFile(string file);
-      
-      /*! Get the conversation file
-       * \return -> conversation fileName */
-      string getConversationFile();
-
       /*! Define Character initial life points, based on its class */
       void defineInitialLifePoints();
 
@@ -122,19 +114,6 @@ class character: public aniModel
       /*! Set character orientation value
        * \param ori -> new orientation value */
       void setOrientation(GLfloat ori);
-
-      /*! Create the conversation (load all things, but not open the dialog)
-       * \param pEngine -> pointer to current engine
-       * \param curMap -> string with the map character is in */
-      void createConversation(void* pEngine, string curMap);
-
-      /*! Set the initial dialog to the character conversation
-       * \param i -> initial dialog number */
-      void setInitialConversation(int i);
-
-      /*! Get the character conversation
-       * \return -> pointer to the character conversation (or NULL) */
-      void* getConversation();
    
       /*! Kill the character without calling dead animation
        * \note this is usually used at modState  */
@@ -194,9 +173,7 @@ class character: public aniModel
       float portraitPropY;        /**< Y proportion for portrait texture */
       SDL_Surface* portraitImage; /**< Character's portrait image */
       GLuint portraitTexture;     /**< The Portrait Texture */
-      string conversationFile;    /**< Name of the Conversation File */
-      void* conv;                 /**< Pointer to the conversation */
-
+      
       void* generalScript;         /**< Pointer to the general iaScript */
       string generalScriptFileName;/**< The General Script Filename */
 

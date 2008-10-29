@@ -14,6 +14,10 @@
 #define PSYCHO_NEUTRAL     1  /**< Thing is neutral to PCs */
 #define PSYCHO_FRIENDLY    2  /**< Thing is friendly to PCs */
 
+#define THING_TYPE_NONE       0  /**< Unknow thing */
+#define THING_TYPE_OBJECT     1  /**< Object thing */
+#define THING_TYPE_CHARACTER  2  /**< Thing is a character */
+
 /*! Define what is a thing on game, in other words, what is the base fields
  * for characters and map objects.*/
 class thing
@@ -24,8 +28,7 @@ class thing
       /*! thing virtual Destructor */
       virtual ~thing();
 
-      skills sk;             /**< skills without images and description */
-
+      skills sk;             /**< skills without images and descriptions */
       
       int fortitude;          /**< Thing's Fortitude */
       int reflex;             /**< Thing's Reflexes */
@@ -59,6 +62,38 @@ class thing
       float max[3];           /**< Max points of static bounding box */
 
 
+      //////////////////////////////////////////////////////////////////////
+      //                                                                  //
+      //                        Dialog Functions                          //
+      //                                                                  //
+      //////////////////////////////////////////////////////////////////////
+      /*! Set the conversation file
+       * \param file -> name of the conversation file*/
+      void setConversationFile(string file);
+
+      /*! Get the conversation file
+       * \return -> conversation fileName */
+      string getConversationFile();
+
+      /*! Create the conversation (load all things, but not open the dialog)
+       * \param pEngine -> pointer to current engine
+       * \param curMap -> string with the map character is in */
+      void createConversation(void* pEngine, string curMap);
+
+      /*! Set the initial dialog to the character conversation
+       * \param i -> initial dialog number */
+      void setInitialConversation(int i);
+
+      /*! Get the character conversation
+       * \return -> pointer to the character conversation (or NULL) */
+      void* getConversation();
+
+      //////////////////////////////////////////////////////////////////////
+      //                                                                  //
+      //                      Level and XP Functions                      //
+      //                                                                  //
+      //////////////////////////////////////////////////////////////////////
+
       /*! Get the number of levels pending to up
        * \return -> number of levels the thing can up
        * \note -> 0 means the thing can't advance an levels */
@@ -75,6 +110,12 @@ class thing
       /*! Set the current XP of the thing
        * \param points -> new current experince */
       void setXP(int points);
+
+      //////////////////////////////////////////////////////////////////////
+      //                                                                  //
+      //                 Life and LifePoints Functions                    //
+      //                                                                  //
+      //////////////////////////////////////////////////////////////////////
 
       /*! Get the current number of life points
        * \return -> current life points */
@@ -93,99 +134,88 @@ class thing
        * \param points -> new max life points*/
       void setMaxLifePoints(int points);
 
+
+      //////////////////////////////////////////////////////////////////////
+      //                                                                  //
+      //                 Skills and States Functions                      //
+      //                                                                  //
+      //////////////////////////////////////////////////////////////////////
+ 
+      /*! Get the thing type 
+       * \return -> type of the thing */
+      int getThingType();
+ 
       /*! Get the current psycho state
        * \return Psycho state constant */
       int getPsychoState();
       /*! Set the crrent psycho state
        * \param state -> Psycho state constant */
       void setPsychoState(int state);
-      
-      /*!
-       **********************************************
-       *  Get the skill bonus (modifier or not).
+
+      /*!  Get the skill bonus (modifier or not).
        *  \param curSkill -> current Skill
-       *  \return bonus.
-       **********************************************/
+       *  \return bonus. */
       int skillBonus(skill* curSkill);
-      /*!
-       **********************************************
-       *  Get the attribute bonus: modifier.
+      /*! Get the attribute bonus: modifier.
        *  \param curAttribute -> current attribute pointer.
-       *  \return bonus.
-       **********************************************/
+       *  \return bonus. */
       int attBonus(skill* curAttribute);
-      /*!
-       **********************************************
-       *  Get the attribute bonus: modifier.
+      /*! Get the attribute bonus: modifier.
        *  \param curAttribute -> current attribute ID.
-       *  \return bonus.
-       **********************************************/
+       *  \return bonus. */
       int attBonus(int curAttribute);
 
-      /*!
-       **********************************************
-       *  Get the bonus Value (modifier or not).
+      /*! Get the bonus Value (modifier or not).
        *  \param something -> number of the definition.
-       *  \return bonus.
-       **********************************************/
+       *  \return bonus. */
       int getBonusValue(factor something);
 
-      /*!
-       **********************************************
-       *  Get the battle script of this thing
+
+      //////////////////////////////////////////////////////////////////////
+      //                                                                  //
+      //                       Fight Functions                            //
+      //                                                                  //
+      //////////////////////////////////////////////////////////////////////
+
+      /*! Get the battle script of this thing
        *  \return -> pointer to iaScript that 
        *             controlls the battle mode
-       *             of this thing.
-       **********************************************/
+       *             of this thing. */
       void* getBattleScript();
 
-      /*!
-       **********************************************
-       *  Set the battle Script of the thing
+      /*! Set the battle Script of the thing
        * \param script -> pointer to the battle script
-       * \param scriptFileName -> filename of the script
-       **********************************************/
+       * \param scriptFileName -> filename of the script */
       void setBattleScript(void* script, string scriptFileName);
 
-      /*!
-       **********************************************
-       *  Set the thing as enemy to PC
-       **********************************************/
+      /*! Set the thing as enemy to PC */
       void setAsEnemy();
 
-      /*!
-       **********************************************
-       *  Set thing as dead (AKA: call die animation
-       *  and then put on state dead)
-       **********************************************/
-       void kill();
+      /*! Set thing as dead (ie. call die animation
+       *  and set state as dead) */
+      void kill();
 
-       /*!
-       **********************************************
-       *  Verify if the thing is alive
-       *  \return -> true if continue live
-       **********************************************/
-       bool isAlive();
+      /*! Verify if the thing is alive
+       *  \return -> true if continue live */
+      bool isAlive();
+
+
+      //////////////////////////////////////////////////////////////////////
+      //                                                                  //
+      //                     Virtual Functions                            //
+      //                                                                  //
+      //////////////////////////////////////////////////////////////////////
 
        /*! Virtual Method to update the health bar draw */
        virtual void updateHealthBar()=0;
 
-       /*!
-       **********************************************
-       *   Virtual method to call dead animation
-       **********************************************/
+       /*! Virtual method to call dead animation */
        virtual void callDeadAnimation()=0;
 
-      /*!
-       **********************************************
-       *   Virtual method to call attack animation
-       **********************************************/
+       /*! Virtual method to call attack animation */
        virtual void callAttackAnimation()=0;
 
-      /*!
-       **********************************************
-       *   Virtual method to call attack animation
-       **********************************************/
+       /*! Virtual method to call attack animation */
        virtual void callIdleAnimation()=0;
 
    protected:
@@ -200,6 +230,13 @@ class thing
 
       void* battleScript;          /**< Pointer to the battle iaScript */
       string battleScriptFileName; /**< The Battle Script Filename */
+
+      int thingType;              /**< The type of the thing */
+
+      string conversationFile;    /**< Name of the Conversation File */
+      void* conv;                 /**< Pointer to the conversation */
+
+
 
 };
 

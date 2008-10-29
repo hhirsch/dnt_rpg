@@ -21,56 +21,60 @@
  *********************************************************************/
 character::character(featsList* ft)
 {
-  int i;
+   int i;
 
-  lifeBar = new healthBar(5,64,59,74);
+   /* Set the thing type */
+   thingType = THING_TYPE_CHARACTER;
 
-  for(i=0; i<MAX_DISTINCT_CLASSES; i++)
-  {
+   /* Create the Health Bar */
+   lifeBar = new healthBar(5,64,59,74);
+
+   for(i=0; i<MAX_DISTINCT_CLASSES; i++)
+   {
 
       actualClass[i] = NULL;
       classLevels[i] = 1;
-  }
-  actualRace = NULL;
-  actualAlign = NULL;
-  actualEnemy = NULL;
-  portraitImage = NULL;
-  conversationFile = "";
-  conv = NULL;
-  
-  inventories = new inventory;
+   }
+   actualRace = NULL;
+   actualAlign = NULL;
+   actualEnemy = NULL;
+   portraitImage = NULL;
+   conversationFile = "";
+   conv = NULL;
 
-  /* Feat Details */
-  if(ft != NULL)
-  {
-     actualFeats.insertFeat(ft->featByNumber(FEAT_MELEE_ATTACK));
-     actualFeats.insertFeat(ft->featByNumber(FEAT_RANGED_ATTACK));
-  }
+   inventories = new inventory;
 
-  /* Scripts */
-  generalScript = NULL;
-  generalScriptFileName = "";
+   /* Feat Details */
+   if(ft != NULL)
+   {
+      actualFeats.insertFeat(ft->featByNumber(FEAT_MELEE_ATTACK));
+      actualFeats.insertFeat(ft->featByNumber(FEAT_RANGED_ATTACK));
+   }
 
-  /* Clear Models */
-  headModel.modelName = "";
-  headModel.meshID = -1;
-  leftHandModel.modelName = "";
-  leftHandModel.meshID = -1;
-  rightHandModel.modelName = "";
-  rightHandModel.meshID = -1;
-  leftFingerModel.modelName = "";
-  leftFingerModel.meshID = -1;
-  rightFingerModel.modelName = "";
-  rightFingerModel.meshID = -1;
-  neckModel.modelName = "";
-  neckModel.meshID = -1;
-  footModel.modelName = "";
-  footModel.meshID = -1;
-  bodyModel.modelName = "";
-  bodyModel.meshID = -1;
+   /* Scripts */
+   generalScript = NULL;
+   generalScriptFileName = "";
 
-  /* Define the weapon */
-  defineWeapon();
+   /* Clear Models */
+   headModel.modelName = "";
+   headModel.meshID = -1;
+   leftHandModel.modelName = "";
+   leftHandModel.meshID = -1;
+   rightHandModel.modelName = "";
+   rightHandModel.meshID = -1;
+   leftFingerModel.modelName = "";
+   leftFingerModel.meshID = -1;
+   rightFingerModel.modelName = "";
+   rightFingerModel.meshID = -1;
+   neckModel.modelName = "";
+   neckModel.meshID = -1;
+   footModel.modelName = "";
+   footModel.meshID = -1;
+   bodyModel.modelName = "";
+   bodyModel.meshID = -1;
+
+   /* Define the weapon */
+   defineWeapon();
 }
 
 /*********************************************************************
@@ -158,56 +162,6 @@ void character::newInventory()
       delete(inventories);
    }
    inventories = new inventory;
-}
-
-/*********************************************************************
- *                        setConversationFile                        *
- *********************************************************************/
-void character::setConversationFile(string file)
-{
-   conversationFile = file;
-}
-
-/*********************************************************************
- *                        getConversationFile                        *
- *********************************************************************/
-string character::getConversationFile()
-{
-   return(conversationFile);
-}
-
-/*********************************************************************
- *                          getConversation                          *
- *********************************************************************/
-void* character::getConversation()
-{
-   return(conv);
-}
-
-/*********************************************************************
- *                        createConversation                         *
- *********************************************************************/
-void character::createConversation(void* pEngine, string curMap)
-{
-   if(conversationFile != "")
-   {
-      conv = (void*) new conversation(pEngine);
-      conversation* cs = (conversation*)conv;
-      cs->loadFile(conversationFile);
-      cs->setOwner(this, curMap);
-   }
-}
-
-/*********************************************************************
- *                      setInitialConversation                       *
- *********************************************************************/
-void character::setInitialConversation(int i)
-{
-   if(conv != NULL)
-   {
-      conversation* cs = (conversation*)conv;
-      cs->setInitialDialog(i);
-   }
 }
 
 /*********************************************************************

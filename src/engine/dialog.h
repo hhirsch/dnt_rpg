@@ -131,17 +131,17 @@ class conversation
       void setInitialDialog(int numDialog);
 
       /*! Set the owner of the conversation
-       * \param pers -> pointer to NPC owner
+       * \param thing -> pointer to thing owner
        * \param mapFile -> fileName where the NPC is */
-      void setOwner(character* pers, string mapFile);
+      void setOwner(thing* o, string mapFile);
 
       /*! Set the playable character pointer
        * \param PC -> pointer to the playable character */
       void setPC(character* PC);
 
-      /*! Get the NPC owner of the dialog (if one)
-       * \return -> pointer to the character owner or NULL */
-      character* getNPC();
+      /*! Get the owner of the dialog (if one)
+       * \return -> pointer to the owner or NULL */
+      thing* getOwner();
 
       /*! Get the current PC talking to the NPC
        * \return -> pointer to the PC character */
@@ -164,7 +164,7 @@ class conversation
       int actual;           /**< Actual active Dialog */
       int initialDialog;    /**< First dialog to show */
       character* actualPC;  /**< The Actual PC */
-      character* ownerNPC;  /**< The NPC owner of the conversation */
+      thing* owner;         /**< The owner of the conversation */
       string ownerMap;      /**< The Map Owner */
       void* actualEngine;   /**< The actual Engine */
       
