@@ -6,6 +6,9 @@
 #include "menu.h"
 #include "../etc/dirs.h"
 
+#include <iostream>
+using namespace std;
+
 /*********************************************************************
  *                            Constructor                            *
  *********************************************************************/
@@ -495,7 +498,7 @@ bool window::changed()
    bool result = false;
 
    /* Verify the Window */
-   result |= hadChanged;
+   result |= guiObject::changed();
 
    /* Verify some Object Change. Must verify all to avoid
     * not needed redraws at next frame.  */
@@ -508,7 +511,6 @@ bool window::changed()
    }
 
    /* Reset the Flag */
-   hadChanged = false;
    return(result);
 }
 

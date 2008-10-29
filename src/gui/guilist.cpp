@@ -228,7 +228,7 @@ selText* guiList::insertSelText(int xa,int ya,int xb,int yb,
                                 string text4)
 {
    selText* novo;
-   novo = new selText(xa,ya,xb,yb,text0,text1,text2,text3,text4);
+   novo = new selText(xa,ya,xb,yb,text0,text1,text2,text3,text4,wSurface);
    insertObject(novo);
    return(novo);
 } 

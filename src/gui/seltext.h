@@ -29,9 +29,10 @@ class selText: public guiObject
        * \param text1 -> option 1 text
        * \param text2 -> option 2 text
        * \param text3 -> option 3 text
-       * \param text4 -> option 4 text*/
+       * \param text4 -> option 4 text
+       * \param screen -> the window screen used */
       selText(int xa,int ya,int xb,int yb, string text0, string text1,
-              string text2, string text3, string text4);
+              string text2, string text3, string text4, SDL_Surface* screen);
 
       /*! Destructor */
       ~selText();
@@ -96,6 +97,7 @@ class selText: public guiObject
       int selec;                   /**< last item selected */
       farso_colors Cores;          /**< colors */
       bool pressed;                /**< while pressed == true */
+      SDL_Surface* windowScreen;   /**< Pointer to the window screen */
 
 
 };

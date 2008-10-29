@@ -101,8 +101,10 @@ class guiObject
           x2,              /**< Coordinate on Window */
           y2;              /**< Coordinate on Window */
       bool avaible;        /**< Avaible? */
-      bool hadChanged;           /**< Flag if the had changed its draw state */
       string text;         /**< Text on the bar */
+   
+   private:
+      bool hadChanged;     /**< Flag if the had changed its draw state */
 };
 
 

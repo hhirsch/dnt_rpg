@@ -1031,7 +1031,7 @@ void conversation::changeDialog(int numDialog)
    }
 
    /* Redraw the window */
-   dlgWindow.redraw();
+   //dlgWindow.redraw();
 }
 
 

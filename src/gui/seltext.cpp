@@ -3,18 +3,23 @@
  */
 
 #include "seltext.h"
+#include <iostream>
+using namespace std;
+
 
 /***************************************************************************
  *                            Constructor                                  *
  ***************************************************************************/
 selText::selText(int xa,int ya,int xb,int yb, string text0, string text1,
-                 string text2, string text3, string text4)
+                 string text2, string text3, string text4,
+                 SDL_Surface* screen)
 {
    type = GUI_SEL_TEXT;
    x1 = xa;
    y1 = ya;
    x2 = xb;
    y2 = yb;
+   windowScreen = screen;
    
    optText[0] = text0;
    optInfo[0] = 0;
@@ -72,7 +77,20 @@ void selText::draw(SDL_Surface *screen)
    int aux;
    dntFont fnt;
    fnt.defineFont(DNT_FONT_ARIAL,10); 
+   fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
+   fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
+   
    int height = fnt.getHeight();
+
+   /* Clear the current */
+   color_Set(Cores.colorWindow.R, Cores.colorWindow.G, 
+             Cores.colorWindow.B, Cores.colorWindow.A);
+   rectangle_Fill(screen,x1,y1,x2,y2);
+   color_Set(Cores.colorCont[1].R, Cores.colorCont[1].G,
+             Cores.colorCont[1].B, Cores.colorCont[1].A);
+   rectangle_2Colors(screen,x1,y1,x2,y2, Cores.colorCont[0].R,
+                     Cores.colorCont[0].G, Cores.colorCont[0].B,
+                     Cores.colorCont[0].A);
 
    for(aux = 0; aux<5;aux++)
    {
@@ -93,12 +111,6 @@ void selText::draw(SDL_Surface *screen)
      y[aux] = ya;
      ya += height;
    }
-   //y2 = ya+2;
-   color_Set(Cores.colorCont[1].R, Cores.colorCont[1].G,
-             Cores.colorCont[1].B, Cores.colorCont[1].A);
-   rectangle_2Colors(screen,x1,y1,x2,y2, Cores.colorCont[0].R,
-                     Cores.colorCont[0].G, Cores.colorCont[0].B,
-                     Cores.colorCont[0].A);
 }
 
 /***************************************************************************
@@ -117,6 +129,8 @@ int selText::getSelectedItem(int ya )
 {
    dntFont fnt;
    fnt.defineFont(DNT_FONT_ARIAL,10);
+   fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
+   fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
    int height = fnt.getHeight();
    int aux;
    int selaux = -1;
@@ -145,40 +159,50 @@ int selText::getSelectedItem(int ya )
  ***************************************************************************/
 int selText::treat(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen)
 {
-    selec = -1;
+   int lastSelec = selec;
+   selec = -1;
 
-    if(!isMouseIn(xa,ya))
-    {
-       return(-1);
-    }
+   if(!isMouseIn(xa,ya))
+   {
+      /* Redraw, if needed */
+      if(lastSelec != -1)
+      {
+         draw(screen);
+         setChanged();
+      }
+      selec = -1;
+      return(-1);
+   }
 
-    /* Get the current item */
-    selec = getSelectedItem(ya);
+   /* Get the current item */
+   selec = getSelectedItem(ya);
 
-    /* Verify if it exists or not */
-    if( (selec >= MAX_OPTIONS) || (selec < 0) || 
-        (optText[selec].empty()) )
-    {
-       /* Not valid selection */
-       selec = -1;
-    }
+   /* Verify if it exists or not */
+   if( (selec >= MAX_OPTIONS) || (selec < 0) || 
+         (optText[selec].empty()) )
+   {
+      /* Not valid selection */
+      selec = -1;
+   }
 
-    //No more draw here, since will redraw the 
-    //window after treat, to avoid problems at
-    //the transparent textbox.
-    //writeSelected(selaux, screen);
+   /* Redraw, if needed */
+   if(lastSelec != selec)
+   {
+      draw(screen);
+      setChanged();
+   }
 
-    /* Test optText pression */
-    if( Mbotao & SDL_BUTTON(1) )
-    {
-       pressed = true;
-    }
-    else if(pressed)
-    {
+   /* Test optText pression */
+   if( Mbotao & SDL_BUTTON(1) )
+   {
+      pressed = true;
+   }
+   else if(pressed)
+   {
       pressed = false;
       return(selec);
-    }
-    return(-2);
+   }
+   return(-2);
 }
 
 /***************************************************************************
@@ -203,6 +227,9 @@ void selText::setText(int opt, string txt, int info)
    {
       optText[opt] = txt;
       optInfo[opt] = info;
+
+      draw(windowScreen);
+      setChanged();
    }
 }
 
@@ -216,5 +243,7 @@ void selText::clearText()
    {
       optText[i] = "";
    }
+   draw(windowScreen);
+   setChanged();
 }
 

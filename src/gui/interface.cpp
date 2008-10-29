@@ -511,12 +511,12 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
             focus = FOCUS_GAME;
             eventInfo = NOTHING;
             /* Redraw, since the last selected now is -1! */
-            ljan->getActiveWindow()->draw(0,0);
+            //ljan->getActiveWindow()->draw(0,0);
         }
         else if(res < 0)
         {
           eventInfo = MODIFIED_SEL_TEXT;
-          ljan->getActiveWindow()->draw(0,0);
+          //ljan->getActiveWindow()->draw(0,0);
         }
         else
         {
