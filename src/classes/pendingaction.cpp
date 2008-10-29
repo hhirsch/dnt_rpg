@@ -1,9 +1,10 @@
 #include "pendingaction.h"
 
+#include "../engine/dialog.h"
 
 /////////////////////////////////////////////////////////////////////////////
 //                                                                         //
-//                                pendingAction                                   //
+//                           pendingAction                                 //
 //                                                                         //
 /////////////////////////////////////////////////////////////////////////////
 
@@ -405,6 +406,7 @@ void pendingActionController::treatActions(Map* actualMap)
    int i;
    pendingAction* act = getFirst();
    Uint32 curTime = SDL_GetTicks();
+   dialogWindow dlgWindow;
 
    for(i = 0; i < getTotal(); i++)
    {
@@ -451,7 +453,8 @@ void pendingActionController::treatActions(Map* actualMap)
             }
          }
          character* actor = act->getActor();
-         if( (actor->isAlive()) && (!actor->isConversationOpened()) )
+         if( (actor->isAlive()) && 
+             (!dlgWindow.isOpened((conversation*)actor->getConversation())))
          {
             int state = actor->pathFind.getState();
             if(state == ASTAR_STATE_FOUND)

@@ -165,9 +165,12 @@ engine::~engine()
       delete(snd);
    }
 
-   /* Close the barter window, if needed */
+   /* Close the static windows, if needed */
    barterWindow tradeWindow;
+   dialogWindow dlgWindow;
    tradeWindow.close();
+   dlgWindow.close();
+
 
    /* Delete particles */
    if(particleController != NULL)
@@ -438,6 +441,12 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    {
      delete(NPCs);
    }
+
+   /* Close the Dialog or Barter windows, if opened */
+   barterWindow btWindow;
+   dialogWindow dlgWindow;
+   btWindow.close();
+   dlgWindow.close();
 
    /* Remove All Pending Actions */
    actionControl->removeAllActions();
@@ -1313,6 +1322,10 @@ void engine::enterBattleMode(bool surprisePC)
   int numEnemies = 0;
   character* ch;
   int i;
+
+  /* Close Dialog window, if openned */
+  dialogWindow dlgWindow;
+  dlgWindow.close();
   
   character* activeCharacter = PCs->getActiveCharacter();
   
@@ -1339,8 +1352,6 @@ void engine::enterBattleMode(bool surprisePC)
          ch->callIdleAnimation();
          /* Remove Move, if it is moving */
          ch->pathFind.clear();
-         /* Close Dialog window, if openned */
-         ch->closeConversation();
       }
       ch = (character*) ch->next; 
       SDL_Delay(1);
@@ -1365,8 +1376,6 @@ void engine::enterBattleMode(bool surprisePC)
          ch->callIdleAnimation();
          /* Remove Move, if it is moving */
          ch->pathFind.clear();
-         /* Close Dialog window, if openned */
-         ch->closeConversation();
          SDL_Delay(1);
       }
                    
@@ -1508,8 +1517,9 @@ void engine::treatPendingActions()
  *********************************************************************/
 void engine::treatGuiEvents(guiObject* object, int eventInfo)
 {
-   int i;
    barterWindow tradeWindow;
+   dialogWindow dlgWindow;
+   
    /* Verify if Inventory Window is opened */
    if(inventoryWindow)
    {
@@ -1524,15 +1534,7 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
    tradeWindow.treat(object, eventInfo, mouseX, mouseY, cursors, actualMap);
 
    /* Verify Dialog Windows */
-   if(NPCs != NULL)
-   {
-      character* ch =(character*) NPCs->getFirst();
-      for(i = 0; i < NPCs->getTotal(); i++)
-      {
-         ch->treatConversation(object, eventInfo, infoWindow);
-         ch = (character*) ch->next;
-      }
-   }
+   dlgWindow.treat(object, eventInfo, infoWindow);
 
    /* Verify Inventory Window Actions */
    if( (inventoryWindow) )
@@ -1899,6 +1901,8 @@ int engine::verifyMouseActions(Uint8 mButton)
                   {
                      cursors->set(CURSOR_GET);
                   }
+
+                  /* The Character Dialog Window Call */
                   else if(pers->getConversationFile() != "")
                   {
                      cursors->set(CURSOR_TALK);
@@ -1908,7 +1912,10 @@ int engine::verifyMouseActions(Uint8 mButton)
                                       pers->xPosition, pers->zPosition,
                                       WALK_PER_MOVE_ACTION)) )
                      {
-                        pers->openConversationDialog(gui,activeCharacter);
+                        dialogWindow dlgWindow;
+                        dlgWindow.open(gui, activeCharacter, 
+                                       (conversation*)pers->getConversation(), 
+                                       pers->getPortraitFileName());
                      }
                   }
                   shortcuts->setThing(pers->name); 
@@ -2542,6 +2549,10 @@ int engine::treatIO(SDL_Surface *screen)
       /* Verify Sounds FIXME -> for npc sounds! */
       if( (walked) && (activeCharacter->isAlive()) )
       {
+         /* Make sure no conversation is opened */
+         dialogWindow dlgWindow;
+         dlgWindow.close();
+
          if( (!walkSound) && (snd) )
          {
             walkSound = snd->addSoundEffect(activeCharacter->xPosition,0.0,

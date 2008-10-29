@@ -93,7 +93,8 @@ class dialog
       dialog* previous;                   /**< Previous Dialog on chain list */
 };
 
-/*! Conversation Class  */
+/*! Conversation Class. A conversation is a set of dialogs, usually for
+ * a NPC character or an object. */
 class conversation
 {
    public:
@@ -128,18 +129,61 @@ class conversation
       /*! Set the initial dialog (the one displayed at a click on character)
        * \param numDialog -> new init dialog number */
       void setInitialDialog(int numDialog);
-      
+
       /*! Set the owner of the conversation
        * \param pers -> pointer to NPC owner
        * \param mapFile -> fileName where the NPC is */
       void setOwner(character* pers, string mapFile);
 
-      /*!
-       * Opens the conversation on window
+      /*! Set the playable character pointer
+       * \param PC -> pointer to the playable character */
+      void setPC(character* PC);
+
+      /*! Get the NPC owner of the dialog (if one)
+       * \return -> pointer to the character owner or NULL */
+      character* getNPC();
+
+      /*! Get the current PC talking to the NPC
+       * \return -> pointer to the PC character */
+      character* getPC();
+
+      /*! Computates the action on dialog, based on selected option.
+       * \param opcao -> option selected */
+      void proccessAction(int opcao);
+
+      /*! Change dialog
+       * \param numDialog -> number of the new dialog to use */
+      void changeDialog(int numDialog);
+
+      /*! Change dialog to the initial one */
+      void changeDialog();
+
+   protected:
+      dialog* first;        /**< Head Node */
+      int total;            /**< Total Dialogs */
+      int actual;           /**< Actual active Dialog */
+      int initialDialog;    /**< First dialog to show */
+      character* actualPC;  /**< The Actual PC */
+      character* ownerNPC;  /**< The NPC owner of the conversation */
+      string ownerMap;      /**< The Map Owner */
+      void* actualEngine;   /**< The actual Engine */
+      
+      string getString(int& initialPosition, string buffer, char& separator);
+      int getActionID(string token, string fileName, int line);
+      void printError(string fileName, string error, int lineNumber);
+};
+
+/*! The window where will show a dialog */
+class dialogWindow
+{
+   public:
+      /*! Open the dialog window
        * \param gui -> window interface used
-       * \param pers -> character to talk to
-       * \param PC -> player's character */
-      void openDialog(guiInterface* gui, character* PC);
+       * \param PC -> player's character 
+       * \param cv -> pointer to the conversation to show 
+       * \param pictureFile -> filename of the picture to use */
+      void open(guiInterface* gui, character* PC, conversation* cv, 
+                string pictureFile);
 
       /*! Treat Events on Window. 
        * \param guiObj -> active GUI object
@@ -151,43 +195,43 @@ class conversation
 
       /*! Verify if the dialog is open or not 
        * \return true if the window is opened */
-      bool windowOpened();
+      bool isOpened();
+
+      /*! Verify if the dialog window is opened for an specific conversation
+       * \param cv -> pointer to the conversation to verify if the 
+       *              dialog window is opened for
+       * \return -> true if the dialog window is opened for this conversation
+       *            false if the dialog window is closed or opened for another 
+       *            conversation. */
+      bool isOpened(conversation* cv);
 
       /*! Close, if opened, the dialog window */
-      void closeWindow();
+      void close();
 
-      protected:
-         window* jan;          /**< Pointer to window used to show */
-         guiInterface* usedGui;/**< Pointer to the used interface */
-         dialog* first;        /**< Head Node */
-         int total;            /**< Total Dialogs */
-         int actual;           /**< Actual active Dialog */
-         int initialDialog;    /**< First dialog to show */
-         rolBar* npcText;      /**< The NPC text quad */
-         selText* pcSelText;   /**< The PC selection text */
-         button* barterButton; /**< The Barter Button */
-         character* actualPC;  /**< The Actual PC */
-         character* ownerNPC;  /**< The NPC owner of the conversation */
-         string ownerMap;      /**< The Map Owner */
-         void* actualEngine;   /**< The actual Engine */
+      /*! Redraw the window */
+      void redraw();
 
-         /*!
-          * Computates the action on dialog, based on selected option.
-          * \param numDialog -> dialog number 
-          * \param opcao -> option selected */
-         void proccessAction(int numDialog, int opcao);
+      /*! Set the current NPC Text
+       * \param text -> current npc text to display */
+      void setNPCText(string text);
 
-         /*! 
-          * Change dialog
-          * \param numDialog -> number of the new dialog to use */
-         void changeDialog(int numDialog);
+      /*! Clear all options */
+      void clearOptions();
 
-         string getString(int& initialPosition, string buffer,
-                          char& separator);
-         int getActionID(string token, string fileName, int line);
-         void printError(string fileName, string error, int lineNumber);
+      /*! Add a option 
+       * \param optNumber -> the option number
+       * \param text -> the option text 
+       * \param info -> the option info */
+      void addOption(int optNumber, string text, int info);
+
+   protected:
+      static conversation* conv;     /**< Pointer to the conversation used */
+      static window* jan;            /**< Pointer to window used to show */
+      static guiInterface* usedGui;  /**< Pointer to the used interface */
+      static rolBar* npcText;        /**< The NPC text quad */
+      static selText* pcSelText;     /**< The PC selection text */
+      static button* barterButton;   /**< The Barter Button */
 };
-
 
 #endif
 

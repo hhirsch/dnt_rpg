@@ -177,6 +177,14 @@ string character::getConversationFile()
 }
 
 /*********************************************************************
+ *                          getConversation                          *
+ *********************************************************************/
+void* character::getConversation()
+{
+   return(conv);
+}
+
+/*********************************************************************
  *                        createConversation                         *
  *********************************************************************/
 void character::createConversation(void* pEngine, string curMap)
@@ -200,63 +208,6 @@ void character::setInitialConversation(int i)
       conversation* cs = (conversation*)conv;
       cs->setInitialDialog(i);
    }
-}
-
-/*********************************************************************
- *                       isConversationOpenned                       *
- *********************************************************************/
-bool character::isConversationOpened()
-{
-   conversation* cs = (conversation*) conv;
-   return((cs != NULL) && (cs->windowOpened()));
-}
-
-/*********************************************************************
- *                         closeConversation                         *
- *********************************************************************/
-void character::closeConversation()
-{
-   conversation* cs = (conversation*) conv;
-   if( (cs) && (cs->windowOpened()) )
-   {
-      cs->closeWindow();
-   }
-}
-
-/*********************************************************************
- *                      openConversationDialog                       *
- *********************************************************************/
-void character::openConversationDialog(guiInterface* gui, character * PC)
-{
-   conversation* cs = (conversation*) conv;
-   if( (cs != NULL) && (!cs->windowOpened()) )
-   {
-      cs->openDialog(gui, PC);
-      convPressed = true;
-   }
-}
-
-/*********************************************************************
- *                         treatConversation                         *
- *********************************************************************/
-bool character::treatConversation(guiObject* guiObj, int eventInfo, 
-                                  itemWindow* infoW)
-{
-   if(convPressed)
-   {
-      int x, y;
-      Uint8 Mbotao = SDL_GetMouseState(&x,&y);
-      convPressed = (Mbotao & SDL_BUTTON(1));
-   }
-   else
-   {
-      conversation* cs = (conversation*) conv;
-      if( (cs != NULL) && (cs->windowOpened()) )
-      {
-         return(cs->treat(guiObj, eventInfo, infoW));
-      }
-   }
-   return(false);
 }
 
 /*********************************************************************

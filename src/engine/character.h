@@ -123,9 +123,6 @@ class character: public aniModel
        * \param ori -> new orientation value */
       void setOrientation(GLfloat ori);
 
-      /*! Open, if exists and not opened, the conversation dialog */
-      void openConversationDialog(guiInterface* gui, character *PC);
-
       /*! Create the conversation (load all things, but not open the dialog)
        * \param pEngine -> pointer to current engine
        * \param curMap -> string with the map character is in */
@@ -134,22 +131,11 @@ class character: public aniModel
       /*! Set the initial dialog to the character conversation
        * \param i -> initial dialog number */
       void setInitialConversation(int i);
+
+      /*! Get the character conversation
+       * \return -> pointer to the character conversation (or NULL) */
+      void* getConversation();
    
-      /*! Verify if the conversation dialog is opened
-       * \return true if the conversation dialog is opened */
-      bool isConversationOpened();
-
-      /*! Close the conversation dialog */
-      void closeConversation();
-
-      /*! Treat Events on Conversation Window. 
-       * \param guiObj -> active GUI object
-       * \param eventInfo -> last GUI Event 
-       * \param infoW -> pointer to the used itemWindow 
-       * \return true if event is threated, false otherwise. */
-      bool treatConversation(guiObject* guiObj, int eventInfo,
-                             itemWindow* infoW);
-
       /*! Kill the character without calling dead animation
        * \note this is usually used at modState  */
       void instantKill();
@@ -210,8 +196,6 @@ class character: public aniModel
       GLuint portraitTexture;     /**< The Portrait Texture */
       string conversationFile;    /**< Name of the Conversation File */
       void* conv;                 /**< Pointer to the conversation */
-      bool convPressed;           /**< To avoid do some conversation action
-                                       before releases the left mouse button */
 
       void* generalScript;         /**< Pointer to the general iaScript */
       string generalScriptFileName;/**< The General Script Filename */

@@ -288,10 +288,6 @@ conversation::conversation(void* pEngine)
    first->previous = first;
    first->id = 0;
    total = 0;
-   npcText = NULL;
-   pcSelText = NULL;
-   jan = NULL;
-   usedGui = NULL;
    actualPC = NULL;
    ownerNPC = NULL;
    ownerMap = "";
@@ -305,10 +301,6 @@ conversation::conversation(void* pEngine)
  *************************************************************************/
 conversation::~conversation()
 {
-   if( (jan) && (usedGui) )
-   {
-      usedGui->closeWindow(jan);
-   }
    dialog* dlg;
    while(total>0)
    {
@@ -832,35 +824,37 @@ void conversation::setOwner(character* pers, string mapFile)
 }
 
 /*************************************************************************
- *                              openDialog                               *
+ *                                 setPC                                 *
  *************************************************************************/
-void conversation::openDialog(guiInterface* gui, character* PC)
+void conversation::setPC(character* PC)
 {
-   dirs dir;
-   usedGui = gui;
    actualPC = PC;
-   actual = -1;
-   jan = gui->insertWindow(280,100,605,355,gettext("Dialog"));
-   barterButton = jan->getObjectsList()->insertButton(5,86,69,104,
-                                            gettext("Barter"),1);
-   jan->getObjectsList()->insertPicture(10,25,0,0,
-                      dir.getRealFile(ownerNPC->getPortraitFileName()).c_str());
-   npcText = jan->getObjectsList()->insertRolBar(71,20,320,115,"");
-   //npcText->fonte = FMINI;
-   pcSelText = jan->getObjectsList()->insertSelText(5,116,320,250,"","","",
-                                                    "","");
-   jan->setExternPointer(&jan);
-   gui->openWindow(jan);
+}
 
-   changeDialog(initialDialog);
+/*************************************************************************
+ *                                 getNPC                                *
+ *************************************************************************/
+character* conversation::getNPC()
+{
+   return(ownerNPC);
+}
+
+/*************************************************************************
+ *                                 getPC                                 *
+ *************************************************************************/
+character* conversation::getPC()
+{
+   return(actualPC);
 }
 
 /*************************************************************************
  *                            proccessAction                             *
  *************************************************************************/
-void conversation::proccessAction(int numDialog, int opcao)
+void conversation::proccessAction(int opcao)
 {
    /* Get dialog on list */
+   int numDialog = actual;
+   dialogWindow dlgWindow;
    dialog* dlg = first->next;
    int i, totalActions = 0;
    talkAction* actions = NULL;
@@ -902,11 +896,11 @@ void conversation::proccessAction(int numDialog, int opcao)
             engine* eng = (engine*)actualEngine;
             ownerNPC->setAsEnemy();
             eng->enterBattleMode(false);
-            closeWindow();
+            dlgWindow.close();
          }
          break;
          case TALK_ACTION_FINISH_DIALOG:
-            closeWindow();
+            dlgWindow.close();
          break;
          case TALK_ACTION_MOD_PC:
             //TODO
@@ -980,11 +974,21 @@ void conversation::proccessAction(int numDialog, int opcao)
 /*************************************************************************
  *                            changeDialog                               *
  *************************************************************************/
+void conversation::changeDialog()
+{
+   actual = -1;
+   changeDialog(initialDialog);
+}
+
+/*************************************************************************
+ *                            changeDialog                               *
+ *************************************************************************/
 void conversation::changeDialog(int numDialog)
 {
    int i, curOpt;
    string text;
    char conv[16];
+   dialogWindow dlgWindow;
 
    if(numDialog == actual)
    {
@@ -1007,11 +1011,11 @@ void conversation::changeDialog(int numDialog)
    actual = numDialog;
 
    /* Define the NPC Text */
-   npcText->setText(dlg->npcText);
+   dlgWindow.setNPCText(dlg->npcText);
 
    /* Define the options */
    curOpt = 0;
-   pcSelText->clearText();
+   dlgWindow.clearOptions();  
    for(i = 0; i < MAX_OPTIONS; i++)
    {
       /* Only insert the option if it pass on preTest (and is not empty) */
@@ -1021,22 +1025,80 @@ void conversation::changeDialog(int numDialog)
          sprintf(conv, "%d - ", curOpt+1);
          text = conv + dlg->options[i].postTest.getTestName(actualPC) + 
                 dlg->options[i].text;
-         pcSelText->setText(curOpt, text, i);
+         dlgWindow.addOption(curOpt, text, i);
          curOpt++;
       }
    }
 
    /* Redraw the window */
-   if(windowOpened())
+   dlgWindow.redraw();
+}
+
+
+
+///////////////////////////////////////////////////////////////////////////
+//                                                                       //
+//                            dialogWindow                               //
+//                                                                       //
+///////////////////////////////////////////////////////////////////////////
+
+/*************************************************************************
+ *                                 open                                  *
+ *************************************************************************/
+void dialogWindow::open(guiInterface* gui, character* PC, conversation* cv,
+                        string pictureFile)
+{
+   dirs dir;
+
+   /* Do not open NULL conversations */
+   if(!cv)
    {
-      jan->draw(0,0);
+      return;
    }
+
+   /* Close the window, if it is currently opened */
+   if(isOpened())
+   {
+      if(cv == conv)
+      {
+         /* Dialog for this one is already opened! */
+         return;
+      }
+      close();
+   }
+
+   /* Set Pointers*/
+   conv = cv;
+   usedGui = gui;
+   conv->setPC(PC);
+
+   /* Create the Window */
+   jan = gui->insertWindow(280,100,605,355,gettext("Dialog"));
+   
+   /* Buttons */
+   barterButton = jan->getObjectsList()->insertButton(5,86,69,104,
+                                            gettext("Barter"),1);
+   /* Picture */
+   jan->getObjectsList()->insertPicture(10,25,0,0, 
+                                        dir.getRealFile(pictureFile).c_str());
+   
+   /* Texts */
+   npcText = jan->getObjectsList()->insertRolBar(71,20,320,115,"");
+   pcSelText = jan->getObjectsList()->insertSelText(5,116,320,250,"","","",
+                                                    "","");
+   
+   /* Open the Window */
+   jan->setExternPointer(&jan);
+   gui->openWindow(jan);
+
+   /* Set the initial dialog */
+   conv->changeDialog();
 }
 
 /*************************************************************************
- *                             closeWindow                               *
+ *                                close                                  *
  *************************************************************************/
-void conversation::closeWindow()
+void dialogWindow::close()
 {
    if((usedGui) && (jan))
    {
@@ -1046,12 +1108,29 @@ void conversation::closeWindow()
 }
 
 /*************************************************************************
+ *                               redraw                                  *
+ *************************************************************************/
+void dialogWindow::redraw()
+{
+   if(isOpened())
+   {
+      jan->draw(0,0);
+   }
+}
+
+/*************************************************************************
  *                                treat                                  *
  *************************************************************************/
-bool conversation::treat(guiObject* guiObj, int eventInfo, itemWindow* infoW)
+bool dialogWindow::treat(guiObject* guiObj, int eventInfo, itemWindow* infoW)
 {
    barterWindow tradeWindow;
    int index = -1;
+
+   if(!jan)
+   {
+      /* No Opened window, so no event to treat here */
+      return(false);
+   }
 
    if(eventInfo == SELECTED_SEL_TEXT)
    {
@@ -1063,7 +1142,7 @@ bool conversation::treat(guiObject* guiObj, int eventInfo, itemWindow* infoW)
          if(index != -1)
          {
             /* Process the action! */
-            proccessAction(actual, index);
+            conv->proccessAction(index);
          }
          return(true);
       }
@@ -1073,14 +1152,14 @@ bool conversation::treat(guiObject* guiObj, int eventInfo, itemWindow* infoW)
       if(guiObj == (guiObject*)barterButton)
       {
          /* Closes the dialog window  */
-         closeWindow();
+         close();
 
          /* If exists a barter, delete it! */
          if( (tradeWindow.isOpen()))
          {
             tradeWindow.close();
          }
-         tradeWindow.open(ownerNPC, actualPC, usedGui, infoW);
+         tradeWindow.open(conv->getNPC(), conv->getPC(), usedGui, infoW);
 
       }
    }
@@ -1088,10 +1167,66 @@ bool conversation::treat(guiObject* guiObj, int eventInfo, itemWindow* infoW)
 }
 
 /*************************************************************************
- *                            windowOpened                               *
+ *                              isOpened                                 *
  *************************************************************************/
-bool conversation::windowOpened()
+bool dialogWindow::isOpened(conversation* cv)
+{
+   if(isOpened())
+   {
+      return(cv != conv);
+   }
+
+   return(false);
+}
+
+/*************************************************************************
+ *                              isOpened                                 *
+ *************************************************************************/
+bool dialogWindow::isOpened()
 {
    return(jan != NULL);
 }
+
+/*************************************************************************
+ *                            setNPCText                                 *
+ *************************************************************************/
+void dialogWindow::setNPCText(string text)
+{
+   if(isOpened())
+   {
+      npcText->setText(text);
+   }
+}
+
+/*************************************************************************
+ *                           clearOptions                                *
+ *************************************************************************/
+void dialogWindow::clearOptions()
+{
+   if(isOpened())
+   {
+      pcSelText->clearText();
+   }
+}
+
+/*************************************************************************
+ *                            setNPCText                                 *
+ *************************************************************************/
+void dialogWindow::addOption(int optNumber, string text, int info)
+{
+   if(isOpened())
+   {
+      pcSelText->setText(optNumber, text, info);
+   }
+}
+
+/*************************************************************************
+ *                             Static Members                            *
+ *************************************************************************/
+conversation* dialogWindow::conv = NULL;
+window* dialogWindow::jan = NULL;
+guiInterface* dialogWindow::usedGui = NULL;
+rolBar* dialogWindow::npcText = NULL;
+selText* dialogWindow::pcSelText = NULL;
+button* dialogWindow::barterButton = NULL;
 
