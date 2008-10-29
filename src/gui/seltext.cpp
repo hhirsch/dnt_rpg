@@ -170,7 +170,6 @@ int selText::treat(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen)
          draw(screen);
          setChanged();
       }
-      selec = -1;
       return(-1);
    }
 
