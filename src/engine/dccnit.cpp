@@ -1714,7 +1714,8 @@ int engine::verifyMouseActions(Uint8 mButton)
       /* Objects Verification */
       for(pronto = 0; ( (obj < quaux->getTotalObjects()) && (!pronto) );obj++)
       {
-         if( (sobj->obj) && (sobj->obj->canGet()) )
+         if( (sobj->obj) && ( (sobj->obj->canGet()) || 
+             (!sobj->obj->getConversationFile().empty()) ) )
          {
             boundingBox bound = sobj->obj->getBoundingBox();
             GLfloat X[4]; GLfloat Z[4];
@@ -1727,57 +1728,78 @@ int engine::verifyMouseActions(Uint8 mButton)
             X[3] = bound.x2;
             Z[3] = bound.z1;
             rotTransBoundingBox(sobj->orientation, X, Z, sobj->x, 0.0, 
-                                0.0, sobj->z, minObj, maxObj);
+                  0.0, sobj->z, minObj, maxObj);
             if(intercepts( minObj, maxObj, minMouse, maxMouse))
             {
-                cursors->set(CURSOR_GET);
-                shortcuts->setThing(sobj->obj->getName()); 
-                if( (mButton & SDL_BUTTON(1)) && 
-                    (rangeAction(activeCharacter->xPosition, 
-                                 activeCharacter->zPosition,
-                                 sobj->x, sobj->z,
-                                 WALK_PER_MOVE_ACTION) ) )
-                {
-                   /* Get Object */
-                   lastMousePression = time;
+               shortcuts->setThing(sobj->obj->getName());
+               
+               /* The Object Dialog Window Call */
+               if(!sobj->obj->getConversationFile().empty())
+               {
+                  cursors->set(CURSOR_TALK);
+                  if( (mButton & SDL_BUTTON(1)) && 
+                      (rangeAction(activeCharacter->xPosition, 
+                                   activeCharacter->zPosition,
+                                   sobj->x, sobj->z,
+                                   WALK_PER_MOVE_ACTION)) )
+                  {
+                     dialogWindow dlgWindow;
+                     dlgWindow.open(gui, activeCharacter, 
+                           (conversation*)sobj->obj->getConversation(), 
+                           sobj->obj->get2dModelName());
+                  }
+               }
+               else
+               {
+                  cursors->set(CURSOR_GET);
+                  shortcuts->setThing(sobj->obj->getName()); 
+                  if( (mButton & SDL_BUTTON(1)) && 
+                        (rangeAction(activeCharacter->xPosition, 
+                                     activeCharacter->zPosition,
+                                     sobj->x, sobj->z,
+                                     WALK_PER_MOVE_ACTION) ) )
+                  {
+                     /* Get Object */
+                     lastMousePression = time;
 
-                   if(activeCharacter->inventories->addObject(sobj->obj))
-                   {
-                      snd->addSoundEffect(sobj->x, sobj->y, sobj->z, 
-                                          SOUND_NO_LOOP,
-                                          "sndfx/objects/take_item.ogg");
-                                     
-                      sprintf(buf,gettext("%s taken."),
+                     if(activeCharacter->inventories->addObject(sobj->obj))
+                     {
+                        snd->addSoundEffect(sobj->x, sobj->y, sobj->z, 
+                              SOUND_NO_LOOP,
+                              "sndfx/objects/take_item.ogg");
+
+                        sprintf(buf,gettext("%s taken."),
                               sobj->obj->getName().c_str());
-                     
-                      brief->addText(buf);
 
-                      /* Log State to the modState */
-                      modifState.mapObjectAddAction(
-                                              MODSTATE_ACTION_OBJECT_REMOVE,
-                                              sobj->obj->getFileName(),
-                                              actualMap->getFileName(),
-                                              sobj->x, sobj->z);
-                         
-                      /* Remove object from Map */
-                      actualMap->removeObject(sobj->x, sobj->z, sobj->obj);
-                         
-                      if(inventoryWindow)
-                      {
-                         inventoryWindow->reDraw();
-                      }
-                   }
-                   else
-                   {
-                      brief->addText(gettext("Inventory is full!"),
-                                     220,20,20); 
-                   }
-                }
-                if(mButton & SDL_BUTTON(2))
-                {
-                   /* TODO Open Menu of choices */
-                }
-                pronto = 1;
+                        brief->addText(buf);
+
+                        /* Log State to the modState */
+                        modifState.mapObjectAddAction(
+                              MODSTATE_ACTION_OBJECT_REMOVE,
+                              sobj->obj->getFileName(),
+                              actualMap->getFileName(),
+                              sobj->x, sobj->z);
+
+                        /* Remove object from Map */
+                        actualMap->removeObject(sobj->x, sobj->z, sobj->obj);
+
+                        if(inventoryWindow)
+                        {
+                           inventoryWindow->reDraw();
+                        }
+                     }
+                     else
+                     {
+                        brief->addText(gettext("Inventory is full!"),
+                              220,20,20); 
+                     }
+                  }
+                  if(mButton & SDL_BUTTON(2))
+                  {
+                     /* TODO Open Menu of choices */
+                  }
+               }
+               pronto = 1;
             }
          }
          sobj = sobj->next;

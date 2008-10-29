@@ -29,7 +29,7 @@ class object: public thing
       /*! Constructor 
        * \param path -> path to the object file
        * \param mdlList -> list of openned models */
-      object(string path, modelList& mdlList);
+      object(string path, modelList& mdlList, string curMap);
       /*! Constructor
        * \param obj -> some object to be the source of actual */
       object(object* obj);
@@ -118,6 +118,8 @@ class object: public thing
       /*! Get the 2D image of the object
        * \return the pointer to the surface */
       SDL_Surface* get2dModel(){return(model2d);};
+
+      string get2dModelName(){return(model2dName);};
 
       /*! Verify, with all Meshes of the model, if the model colides
        *  with the bounding box defined as parameter. 

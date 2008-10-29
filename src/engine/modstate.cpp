@@ -267,7 +267,8 @@ void modInventory::flush(inventory* inv, lObject& objs, modelList& models,
       if(!curObj)
       {
          /* It's not on the list, so must insert it */
-         curObj = objs.insertObject(invObj->fileName, models, wTypes);
+         curObj = objs.insertObject(invObj->fileName, models, wTypes,
+                                    mapFileName);
       }
 
       /* Now insert it at the inventory */

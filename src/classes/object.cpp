@@ -42,7 +42,7 @@ int getObjectTypeId(string type)
 /**************************************************************
  *                         Constructor                        *
  **************************************************************/
-object::object(string path, modelList& mdlList): thing()
+object::object(string path, modelList& mdlList, string curMap): thing()
 {
    string cal3DFile = "";
    int aux;
@@ -72,6 +72,11 @@ object::object(string path, modelList& mdlList): thing()
       if(key == "name")
       {
          name = value;
+      }
+      else if(key == "dialog")
+      {
+         setConversationFile(value);
+         createConversation(curMap);
       }
       else if(key == "cal3d")
       {

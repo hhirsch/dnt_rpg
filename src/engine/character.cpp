@@ -727,10 +727,7 @@ character* characterList::insertCharacter(string file, featsList* ft,
       else if (buf == "conversationFile")
       {
          novo->setConversationFile(token2);
-         if(pEngine != NULL)
-         {
-            novo->createConversation(curMap);
-         }
+         novo->createConversation(curMap);
       }
       /* General Script */
       else if(buf == "generalScript")

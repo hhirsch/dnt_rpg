@@ -1799,7 +1799,7 @@ object* Map::getObject(string fileName)
 object* Map::insertObject(string arquivo, modelList& mdlList, 
                           weaponTypes& wTypes)
 {
-   return(objects->insertObject(arquivo, mdlList, wTypes));
+   return(objects->insertObject(arquivo, mdlList, wTypes, name));
 }
 
 /********************************************************************
@@ -2058,7 +2058,7 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
          {
              fgets(buffer, sizeof(buffer), arq); 
              sscanf(buffer, "%s",nomeArq);
-             objects->insertObject(nomeArq, mdlList, wTypes);
+             objects->insertObject(nomeArq, mdlList, wTypes, name);
              break;
          }
          case 'O': /* Define OutDoor */

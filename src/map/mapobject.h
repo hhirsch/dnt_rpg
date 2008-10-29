@@ -21,9 +21,10 @@ class mapObject: public object
    public:
       /*!Constructor 
        * \param path -> path to the object file
-       * \param mdlList -> list of openned models */
-      mapObject(string path, modelList& mdlList):
-         object(path, mdlList){};
+       * \param mdlList -> list of openned models 
+       * \param curMap -> current map filename */
+      mapObject(string path, modelList& mdlList, string curMap):
+         object(path, mdlList, curMap){};
 
    protected:
       void callDeadAnimation();
@@ -44,9 +45,10 @@ class lObject
         * \param arquivo -> filename to load
         * \param mdlList -> modelList
         * \param wTypes -> list of weapons types
+        * \param curMap -> current map filename
         * \return pointer to the map Object created */
        object* insertObject(string arquivo, modelList& mdlList,
-                            weaponTypes& wTypes);
+                            weaponTypes& wTypes, string curMap);
        /*!
         * Search for object on map list
         * \param fileName -> object file name 

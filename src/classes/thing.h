@@ -15,7 +15,7 @@
 #define PSYCHO_FRIENDLY    2  /**< Thing is friendly to PCs */
 
 #define THING_TYPE_NONE       0  /**< Unknow thing */
-#define THING_TYPE_OBJECT     1  /**< Object thing */
+#define THING_TYPE_OBJECT     1  /**< Thing is an Object */
 #define THING_TYPE_CHARACTER  2  /**< Thing is a character */
 
 /*! Define what is a thing on game, in other words, what is the base fields

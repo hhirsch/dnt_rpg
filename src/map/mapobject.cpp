@@ -33,7 +33,7 @@ lObject::~lObject()
  *                           insertMapObject                         *
  *********************************************************************/
 object* lObject::insertObject(string arquivo, modelList& mdlList, 
-                              weaponTypes& wTypes)
+                              weaponTypes& wTypes, string curMap)
 {
    object* novo = NULL;
 
@@ -41,7 +41,7 @@ object* lObject::insertObject(string arquivo, modelList& mdlList,
    if( loc != string::npos )
    {
       /* Is a map Object *.dcc */
-      novo = (object*) new mapObject(arquivo, mdlList);
+      novo = (object*) new mapObject(arquivo, mdlList, curMap);
    }
    else
    {
