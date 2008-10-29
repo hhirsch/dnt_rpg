@@ -281,7 +281,7 @@ dialogOption::dialogOption()
 /*************************************************************************
  *                              Constructor                              *
  *************************************************************************/
-conversation::conversation(void* pEngine)
+conversation::conversation()
 {
    first = new(dialog);
    first->next = first;
@@ -293,7 +293,6 @@ conversation::conversation(void* pEngine)
    ownerMap = "";
    actual = -1;
    initialDialog = 0;
-   actualEngine = pEngine;
 }
 
 /*************************************************************************
@@ -858,7 +857,7 @@ character* conversation::getPC()
 /*************************************************************************
  *                            proccessAction                             *
  *************************************************************************/
-void conversation::proccessAction(int opcao)
+void conversation::proccessAction(int opcao, void* curEngine)
 {
    /* Get dialog on list */
    int numDialog = actual;
@@ -901,7 +900,7 @@ void conversation::proccessAction(int opcao)
          break;
          case TALK_ACTION_INIT_FIGHT:
          {
-            engine* eng = (engine*)actualEngine;
+            engine* eng = (engine*)curEngine;
             owner->setAsEnemy();
             eng->enterBattleMode(false);
             dlgWindow.close();
@@ -1139,7 +1138,8 @@ void dialogWindow::redraw()
 /*************************************************************************
  *                                treat                                  *
  *************************************************************************/
-bool dialogWindow::treat(guiObject* guiObj, int eventInfo, itemWindow* infoW)
+bool dialogWindow::treat(guiObject* guiObj, int eventInfo, itemWindow* infoW,
+                         void* curEngine)
 {
    barterWindow tradeWindow;
    int index = -1;
@@ -1160,7 +1160,7 @@ bool dialogWindow::treat(guiObject* guiObj, int eventInfo, itemWindow* infoW)
          if(index != -1)
          {
             /* Process the action! */
-            conv->proccessAction(index);
+            conv->proccessAction(index, curEngine);
          }
          return(true);
       }

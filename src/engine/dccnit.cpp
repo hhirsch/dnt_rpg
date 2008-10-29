@@ -1534,7 +1534,7 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
    tradeWindow.treat(object, eventInfo, mouseX, mouseY, cursors, actualMap);
 
    /* Verify Dialog Windows */
-   dlgWindow.treat(object, eventInfo, infoWindow);
+   dlgWindow.treat(object, eventInfo, infoWindow, this);
 
    /* Verify Inventory Window Actions */
    if( (inventoryWindow) )

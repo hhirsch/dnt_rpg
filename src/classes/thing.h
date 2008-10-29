@@ -76,9 +76,8 @@ class thing
       string getConversationFile();
 
       /*! Create the conversation (load all things, but not open the dialog)
-       * \param pEngine -> pointer to current engine
        * \param curMap -> string with the map character is in */
-      void createConversation(void* pEngine, string curMap);
+      void createConversation(string curMap);
 
       /*! Set the initial dialog to the character conversation
        * \param i -> initial dialog number */

@@ -98,9 +98,8 @@ class dialog
 class conversation
 {
    public:
-      /*! conversation Constructor
-       * \param pEngine -> pointer to current engine*/
-      conversation(void* pEngine);
+      /*! conversation Constructor */
+      conversation();
       /*! conversation destructor */
       ~conversation();
 
@@ -148,8 +147,9 @@ class conversation
       character* getPC();
 
       /*! Computates the action on dialog, based on selected option.
-       * \param opcao -> option selected */
-      void proccessAction(int opcao);
+       * \param opcao -> option selected 
+       * \param curEngine -> pointer to the current engine */
+      void proccessAction(int opcao, void* curEngine);
 
       /*! Change dialog
        * \param numDialog -> number of the new dialog to use */
@@ -166,7 +166,6 @@ class conversation
       character* actualPC;  /**< The Actual PC */
       thing* owner;         /**< The owner of the conversation */
       string ownerMap;      /**< The Map Owner */
-      void* actualEngine;   /**< The actual Engine */
       
       string getString(int& initialPosition, string buffer, char& separator);
       int getActionID(string token, string fileName, int line);
@@ -189,9 +188,10 @@ class dialogWindow
        * \param guiObj -> active GUI object
        * \param eventInfo -> last GUI Event 
        * \param infoW -> pointer to the used itemWindow
+       * \param curEngine ->pointer to the current engine
        * \return true if event is threated, false otherwise. */
       bool treat(guiObject* guiObj, int eventInfo,
-                 itemWindow* infoW);
+                 itemWindow* infoW, void* curEngine);
 
       /*! Verify if the dialog is open or not 
        * \return true if the window is opened */

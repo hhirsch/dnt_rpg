@@ -326,11 +326,11 @@ void* thing::getConversation()
 /*********************************************************************
  *                        createConversation                         *
  *********************************************************************/
-void thing::createConversation(void* pEngine, string curMap)
+void thing::createConversation(string curMap)
 {
    if(conversationFile != "")
    {
-      conv = (void*) new conversation(pEngine);
+      conv = (void*) new conversation();
       conversation* cs = (conversation*)conv;
       cs->loadFile(conversationFile);
       cs->setOwner(this, curMap);

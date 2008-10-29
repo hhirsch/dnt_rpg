@@ -729,7 +729,7 @@ character* characterList::insertCharacter(string file, featsList* ft,
          novo->setConversationFile(token2);
          if(pEngine != NULL)
          {
-            novo->createConversation(pEngine, curMap);
+            novo->createConversation(curMap);
          }
       }
       /* General Script */
