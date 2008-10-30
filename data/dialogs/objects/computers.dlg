@@ -13,7 +13,7 @@ dialog(0)
 
       # The windows option =^P
       option
-         pre_test = lesser(OBJECT_STATE, 3)
+         pre_test = greater(OBJECT_STATE, 3)
          text = "Buy CHEAP nIAGaRA $$"
          action = go_to_dialog(4)
 
@@ -38,17 +38,17 @@ dialog(1)
          pre_test = align_not(FREE_SOFTWARE)
          text = gettext("Install Pirate Windows")
          post_test = roll(OPERATE_ELETRONIC_OBJECTS, 5)
-         if_action = change_object_state(1)
+         if_action = change_object_state(5)
          if_action = receive_xp(15)
          if_action = go_to_dialog(2)
          else_action = go_to_dialog(3)
 
       # The ORIGINAL Windows Install
       option
-         pre_test = has_item("models/objetos/icex/ruindows_box/ruindows_box.dcc")
+         pre_test = have_item("models/objetos/icex/ruindows_box/ruindows_box.dcc")
          text = gettext("Install Original Windows")
          post_test = roll(OPERATE_ELETRONIC_OBJECTS, 6)
-         if_action = change_object_state(2)
+         if_action = change_object_state(4)
          if_action = receive_xp(25)
          if_action = go_to_dialog(2)
          else_action = go_to_dialog(3)
@@ -68,10 +68,15 @@ dialog(1)
          pre_test = align_not(PROPRIETARY_SOFTWARE)
          text = gettext("Install Gentoo Linux")
          post_test = roll(OPERATE_ELETRONIC_OBJECTS, 15)
-         if_action = change_object_state(4)
+         if_action = change_object_state(2)
          if_action = receive_xp(50)
          if_action = go_to_dialog(2)
          else_action = go_to_dialog(3)
+
+      # Back (do nothing) option
+      option
+         text = gettext("Back")
+         action = go_to_dialog(0)
 
    pc_end
 end_dialog
