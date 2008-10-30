@@ -31,6 +31,8 @@
  - Fixed a bug at IA Script variable type check;
  - VIM syntax files for DNT Script and Dialog Languages;
  - Skill Checks at Dialogs;
+ - Receive XP on killing, trickering and completing missions;
+ - Use of Computers;
 
 Working on:
  - Character level up;
@@ -43,7 +45,6 @@ Working on:
  - Initial approach to move NPC on battle;
  - Initial approach to NPC use other actions than attack actions at combat;
  - Load/Save Functions;
- - Receive XP on killing, trickering and completing missions;
  - New Maps;
  - New Missions;
 
