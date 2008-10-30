@@ -29,7 +29,7 @@ class modAction
        * \param xPos -> x position
        * \param zPos -> z position */
       modAction(int act, string tgt, string mapFile,
-                GLfloat xPos, GLfloat zPos);
+                GLfloat xPos, GLfloat yPos, GLfloat zPos);
 
       /*! Destructor */
       ~modAction();
@@ -46,13 +46,15 @@ class modAction
 
       /*! Get the position where action occurs
        * \param posX -> X position
+       * \param posY -> Y position
        * \param posZ -> Z position */
-      void getPosition(GLfloat &posX, GLfloat& posZ);
+      void getPosition(GLfloat &posX, GLfloat& posY, GLfloat& posZ);
 
       /*! Set the position where action occurs
        * \param posX -> X position
+       * \param posY -> Y position
        * \param posZ -> Z position */
-      void setPosition(GLfloat posX, GLfloat posZ);
+      void setPosition(GLfloat posX, GLfloat posY, GLfloat posZ);
 
       /*! Get next action on list 
        * \return pointer to next action on list */
@@ -72,6 +74,7 @@ class modAction
       string mapFileName;       /**< name of the map file where action occurs */
       int action;               /**< type of the action */
       GLfloat x;                /**< X position on map */
+      GLfloat y;                /**< Y Position on map */
       GLfloat z;                /**< Z position on map */
       string target;            /**< target of the action (fileName) */
       modAction* next;          /**< next action on list */
@@ -92,7 +95,8 @@ class mapCharacterModAction : public modAction
        * \param initialX -> initial X position when loaded the map
        * \param initialZ -> initial Z position when loaded the map */
       mapCharacterModAction(int act, string character, string mapFile,
-                            GLfloat xPos, GLfloat zPos, GLfloat orientation,
+                            GLfloat xPos, GLfloat yPos, GLfloat zPos, 
+                            GLfloat orientation,
                             GLfloat initialX, GLfloat initialZ);
       /*! Destructor */                      
       ~mapCharacterModAction();
@@ -126,7 +130,7 @@ class mapObjectModAction: public modAction
        * \param xPos -> x position
        * \param zPos -> z position */
       mapObjectModAction(int act, string obj, string mapFile,
-                         GLfloat xPos, GLfloat zPos);
+                         GLfloat xPos, GLfloat yPos, GLfloat zPos);
       /*! Destructor */
       ~mapObjectModAction();
 
@@ -193,11 +197,11 @@ class modInventory: public modAction
 
       /*! Flush the objects list to the inventory,
        * loading needed models to the list
+       * \param curMap -> current opened map
        * \param inv -> inventory to populate 
-       * \param objs -> objects list
        * \param models -> models list
        * \param wType -> weapons type information */
-      void flush(inventory* inv, lObject& objs, modelList& models, 
+      void flush(Map* map, inventory* inv, modelList& models, 
                  weaponTypes& wTypes);
 
       /*! Create the modInventory list based on an inventory
@@ -214,7 +218,7 @@ class modInventory: public modAction
        * \param obj -> pointer of object to insert */
       void insert(modInvObj* obj);
 
-      modInvObj* objectsList;  /**< The objects on inventory list */
+      modInvObj* objects;      /**< The objects on inventory list */
       int totalObjects;        /**< Total Objects on the list */
 };
 
@@ -235,7 +239,7 @@ class modMap
        * \param xPos -> x position
        * \param zPos -> z position*/
       void mapObjectAddAction(int action, string target, string mapFileName,
-                              GLfloat xPos, GLfloat zPos);
+                              GLfloat xPos, GLfloat yPos, GLfloat zPos);
 
       /*! Add action to the list (or remove inverse action from)
        * \param act -> action type
@@ -247,7 +251,7 @@ class modMap
        * \param initialX -> initial X position when loaded the map
        * \param initialZ -> initial Z position when loaded the map */
       void mapCharacterAddAction(int act, string character, string mapFile,
-                                 GLfloat xPos, GLfloat zPos, 
+                                 GLfloat xPos, GLfloat yPos, GLfloat zPos, 
                                  GLfloat orientation,
                                  GLfloat initialX, GLfloat initialZ);
 
@@ -270,10 +274,9 @@ class modMap
        * like when you left it). 
        * \param actualMap -> pointer to actual opened map
        * \param NPCs -> current NPCs list
-       * \param objList -> current map objects list
        * \param mdlList -> current model list
        * \param wTypes -> current weapon types */
-      void doMapModifications(Map* actualMap, void* NPCs, lObject& objs,
+      void doMapModifications(Map* actualMap, void* NPCs, 
                               modelList& mdlList, weaponTypes& wTypes);
 
       /*! Clear All the modifications states (usually called after death) */
@@ -314,14 +317,14 @@ class modMap
        * \return true if the inverse action is found and removed. */
       bool removeInverseObjectAction(int action, string target, 
                                      string mapFileName, GLfloat xPos, 
-                                     GLfloat zPos);
+                                     GLfloat yPos, GLfloat zPos);
 
       /*! Search for a modAction on the list
        * \param action -> action number constant
        * \param target -> target name
        * \return -> pointer to the modAction found, or NULL if none */
       modAction* search(int action, string target, 
-                        GLfloat xPos=-1, GLfloat zPos=-1);
+                        GLfloat xPos=-1, GLfloat yPos=-1, GLfloat zPos=-1);
 
       string mapFileName;          /**< The map file name */
       modMap* next;                /**< Next modMap on list */
@@ -353,21 +356,23 @@ class modState
        * \param target -> fileName of the object
        * \param mapFileName - name of the map file where action occurs
        * \param xPos -> x position
+       * \param yPos -> y position 
        * \param zPos -> z position*/
       void mapObjectAddAction(int action, string target, string mapFileName,
-                              GLfloat xPos, GLfloat zPos);
+                              GLfloat xPos, GLfloat yPos, GLfloat zPos);
 
       /*! Add action to the list (or remove inverse action from)
        * \param act -> action type
        * \param character -> character fileName
        * \param mapFile -> name of the map file where action occurs 
        * \param xPos -> x position
+       * \param yPos -> y position
        * \param zPos -> z position
        * \param orientation -> character orientation angle
        * \param initialX -> initial X position when loaded the map
        * \param initialZ -> initial Z position when loaded the map */
       void mapCharacterAddAction(int act, string character, string mapFile,
-                                 GLfloat xPos, GLfloat zPos, 
+                                 GLfloat xPos, GLfloat yPos, GLfloat zPos, 
                                  GLfloat orientation,
                                  GLfloat initialX, GLfloat initialZ);
 
@@ -391,10 +396,9 @@ class modState
        * like when you left it). 
        * \param actualMap -> pointer to actual opened map
        * \param NPCs -> current NPCs list
-       * \param objList -> current map objects list
        * \param mdlList -> current model list
        * \param wTypes -> current weapon types */
-      void doMapModifications(Map* actualMap, void* NPCs, lObject& objs,
+      void doMapModifications(Map* actualMap, void* NPCs, 
                               modelList& mdlList, weaponTypes& wTypes);
 
       /*! Clear All the modifications states (usually called after death) */

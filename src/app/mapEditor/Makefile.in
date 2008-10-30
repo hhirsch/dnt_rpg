@@ -17,7 +17,7 @@ ENDLANG = ../../lang/
 ENDCBOOK = ../../cbook/
 
 OBJSCBOOK = $(ENDCBOOK)comicbox.o $(ENDCBOOK)comicbook.o $(ENDCBOOK)comicpage.o
-OBJSMAPA = $(ENDMAP)map.o $(ENDMAP)mapfog.o $(ENDMAP)maplights.o $(ENDMAP)mapobject.o $(ENDMAP)maproad.o $(ENDMAP)mapsound.o
+OBJSMAPA = $(ENDMAP)map.o $(ENDMAP)mapfog.o $(ENDMAP)maplights.o $(ENDMAP)maproad.o $(ENDMAP)mapsound.o
 OBJSGUI = $(ENDGUI)textbar.o $(ENDGUI)button.o $(ENDGUI)color.o $(ENDGUI)cxsel.o $(ENDGUI)draw.o $(ENDGUI)messages.o $(ENDGUI)interface.o $(ENDGUI)farso.o $(ENDGUI)filesel.o $(ENDGUI)picture.o $(ENDGUI)dntfont.o $(ENDGUI)healthBar.o $(ENDGUI)window.o $(ENDGUI)guilist.o $(ENDGUI)listtext.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)textbox.o $(ENDGUI)rolbar.o $(ENDGUI)seltext.o $(ENDGUI)tabbutton.o
 OBJSNET = #$(ENDNET)client.o $(ENDNET)common.o
 OBJSIA = $(ENDIA)agent.o $(ENDIA)pattAgent.o $(ENDIA)potentAgent.o $(ENDIA)astar.o $(ENDIA)fuzzy.o $(ENDIA)fuzzyvariable.o $(ENDIA)fuzzyfunction.o $(ENDIA)fuzzyrule.o $(ENDIA)iafuncs.o $(ENDIA)iascript.o $(ENDIA)iastack.o $(ENDIA)iavariable.o
@@ -84,7 +84,7 @@ npcs.o: npcs.cpp npcs.h message.h $(ENDMAP)map.h $(ENDETC)modellist.h\
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 objects.o: objects.cpp objects.h message.h $(ENDMAP)map.h\
-          $(ENDMAP)mapobject.h $(ENDETC)modellist.h $(ENDENGINE)util.h
+          $(ENDETC)modellist.h $(ENDENGINE)util.h
 	@printf "Making objects.o... "
 	@$(CC) $(CFLAGS) objects.cpp -o objects.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -96,7 +96,7 @@ particles.o: particles.cpp particles.h grasswindow.h waterwindow.h message.h\
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 portal.o: portal.cpp portal.h area.h message.h $(ENDMAP)map.h\
-          $(ENDMAP)mapobject.h $(ENDENGINE)util.h
+          $(ENDENGINE)util.h
 	@printf "Making portal.o... "
 	@$(CC) $(CFLAGS) portal.cpp -o portal.o
 	@printf "\e[0;32mDone.\e[0;0m\n"

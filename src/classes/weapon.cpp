@@ -26,7 +26,8 @@ void wInfo::operator=(wInfo& v)
 /************************************************************
  *                        Constructor                       *
  ************************************************************/
-weapon::weapon(string path, modelList& mdlList, weaponTypes& wTypes): object()
+weapon::weapon(string path, modelList& mdlList, weaponTypes& wTypes): 
+       object(path)
 {
    dirs dir;
    string key="", value="";

@@ -4,7 +4,7 @@
 #include "../../map/map.h"
 #include "area.h"
 #include "message.h"
-#include "../../map/mapobject.h"
+#include "../../classes/object.h"
 #include "../../engine/util.h"
 
 

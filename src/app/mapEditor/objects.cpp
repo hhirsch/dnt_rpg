@@ -69,6 +69,9 @@ void objects::verifyAction(Uint8* keys,
             int x,y;
             mButton = SDL_GetMouseState(&x,&y);
          }
+
+         /* No more with the actual */
+         actualObstacle = NULL;
       }
 
       /* Rotate Left/Right object */
@@ -118,12 +121,12 @@ void objects::drawTemporary()
 {
    if( (state == OBJECTS_STATE_ADD) && (actualObstacle != NULL))
    {
-      glPushMatrix();
-      glTranslatef(0.0, 
-                   obstacleY + actualMap->getHeight(obstacleX, obstacleZ), 
-                   0.0);
-      actualObstacle->draw(obstacleX, obstacleZ, 0, obstacleOrientation, false);
-      glPopMatrix();
+      actualObstacle->xPosition = obstacleX;
+      actualObstacle->yPosition = obstacleY + 
+                                 actualMap->getHeight(obstacleX, obstacleZ);
+      actualObstacle->zPosition = obstacleZ;
+      actualObstacle->orientation = obstacleOrientation;
+      actualObstacle->draw(false);
    }
 }
 

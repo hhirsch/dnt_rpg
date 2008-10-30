@@ -42,7 +42,6 @@ editor::editor()
    gameSky = new(sky);
    models = new modelList();
    wTypes = new weaponTypes();
-   objectsList = new lObject();
 
    terrainEditor = NULL;
    portalEditor = NULL;
@@ -65,7 +64,9 @@ editor::~editor()
       delete(particleEditor);
       delete(npcController);
    }
-   delete(objectsList);
+
+   objectsList::removeAll();
+
    delete(gameSun);
    delete(gameSky);
    if(particleSystem != NULL)
@@ -149,8 +150,7 @@ void editor::closeMap()
       delete(objectEditor);
       delete(particleEditor);
       delete(npcController);
-      delete(objectsList);
-      objectsList = new lObject();
+      objectsList::removeAll();
       delete(models);
       models = new modelList();
       mapOpened = false;
@@ -171,7 +171,7 @@ void editor::openMap()
    }
    gui->showMessage("Opening actual Map...");
    draw();
-   map = new Map(objectsList);
+   map = new Map();
    if(map->open(gui->getFileName(),*models,*wTypes))
    {
       mapOpened = true;
@@ -350,7 +350,7 @@ void editor::newMap()
    }
 
    mapOpened = true;
-   map = new Map(objectsList);
+   map = new Map();
 
    sizeX = -1, sizeZ = -1;
    string s;

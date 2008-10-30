@@ -5,13 +5,16 @@
  * DccNiTghtmare is Public Domain - Do whatever you want with this code. *
  *************************************************************************/
 
-#include "mapobject.h"
 #include "mapfog.h"
 #include "maplights.h"
 #include "maproad.h"
 #include "mapsound.h"
+
 #include "../particle/lake.h"
 #include "../etc/texrenderer.h"
+#include "../classes/object.h"
+#include "../classes/weapon.h"
+
 #include <string>
 using namespace std;
 
@@ -149,12 +152,12 @@ class objSquare
                                 square. This is used to avoid drawning
                                 more than one time the object, if it is on
                                 more than one square at a time).*/
-      int squareX;         /**< The square X coordinate of the object */
-      int squareZ;         /**< The square Z coordinate of the object */
-      int orientation;     /**< The orientation angle of the object */
-      float x;             /**< The X position of the object on the map */
-      float y;             /**< The Y position of the object on the map */
-      float z;             /**< The Z position of the object on the map */
+      
+      GLfloat x;           /**< X Position (used to simplify) */
+      GLfloat y;           /**< Y position (used to simplify) */
+      GLfloat z;           /**< Z positon (used to simplify) */
+      GLfloat orientation; /**< Orientation (used to simplify) */
+      
       int status;          /**< The status of the object */
       bool colision;       /**< If the collision is enable to this object */
       object* obj;         /**< The pointer to the object used */
@@ -187,12 +190,17 @@ class Square
       /*! Set the Number of Divisions, based on Square Heights */
       void setDivisions();
 
-      /*! Add object to the square */
-      objSquare* addObject(bool draw, int squareX, int squareZ, int orientation,
-                           float x, float y, float z, bool colision,
-                           object* obj);
+      /*! Add object to the square 
+       * \param draw -> true if the draw is at this square
+       * \param collision -> if collision is enabled for this object 
+       * \param obj -> pointer to the object that is in the square
+       * \return -> pointer to the created objectSquare */
+      objSquare* addObject(bool draw, GLfloat x, GLfloat y, GLfloat z,
+                           GLfloat orientaton, bool colision, object* obj);
 
-      /*! Remove Object from the square */
+      /*! Remove Object from the square
+       * \param obj -> pointer to the objectSquare to remove
+       * \note -> it will free the objSquare, but not the object* */
       void removeObject(objSquare* obj);
    
       /*! Get the first object on the list
@@ -213,8 +221,8 @@ class Square
 class Map
 {
    public:
-      Map(lObject* lObjects);    /**< Construtor */
-      ~Map();                    /**< Destruidor */
+      Map();       /**< Construtor */
+      ~Map();      /**< Destruidor */
 
 
       /*! Gets the square size on the map 
@@ -335,15 +343,10 @@ class Map
 
 
       /*! Remove Object from Map
-       * \param xObj -> x Object Coordinate
-       * \param zObj -> z Object Coordinate
-       * \param obj -> pointer to map Object */
-      void removeObject(GLfloat xObj, GLfloat zObj, object* obj);
-      /*! Remove Object from Map
-       * \param xObj -> x Object Coordinate
-       * \param zObj -> z Object Coordinate
-       * \param fileName -> fileName of the object to remove */
-      void removeObject(GLfloat xObj, GLfloat zObj, string fileName);
+       * \param obj -> pointer to map Object
+       * \note -> this function will not delete the object pointer.
+       *          so if you want it deleted, just do yourself */
+      void removeObject(object* obj);
       /*! Insert Object on Map
        * \param xReal -> xPosition to insert
        * \param yReal -> yPosition to insert
@@ -353,7 +356,8 @@ class Map
        * \param qx -> square internal X (in Squares)
        * \param qz -> square internal Z (in squares)
        * \param collision -> true if has collision with object */
-      void insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal, int orObj,
+      void insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal, 
+                        GLfloat orObj,
                         object* obj, int qx, int qz, bool collision);
       /*! Insert Object on Map
        * \param xReal -> xPosition to insert
@@ -362,9 +366,8 @@ class Map
        * \param orObj -> object orientation value
        * \param obj -> pointer to mapObject
        * \param collision -> true if has collision with object */
-      void insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal, int orObj,
-                        object* obj, bool collision);
-
+      void insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal, 
+                        GLfloat orObj, object* obj, bool collision);
       /*! Insert object on map list
        * \param arquivo -> filename to load
        * \param mdlList -> modelList
@@ -375,7 +378,8 @@ class Map
       /*! Get object from the list (if exists)
        * \param fileName -> file name of the object
        * \return pointer to the founded object or NULL */
-      object* getObject(string fileName);
+      object* getObject(string fileName, GLfloat posX, 
+                        GLfloat posY, GLfloat posZ);
 
 
       /*! Get Map File Name
@@ -574,6 +578,9 @@ class Map
                              GLfloat** matriz, bool selectionRender=false,
                              bool outdoorCompatible=false);
 
+      /*! Delete all remaining objects on the map */
+      void deleteObjects();
+
 
       SDL_Surface* miniMap;    /**< The rendered minimap surface */
 
@@ -602,7 +609,6 @@ class Map
           z;                /**< Map Z Dimension (in squares) */
       bool outdoor;         /**< If it's an outdoor or indoor map */
       Square** MapSquares;  /**< Internal Map squares */
-      lObject* objects;     /**< Map's objects list */
       string music;         /**< Map Music */
       string name;          /**< File name of loaded map */
 

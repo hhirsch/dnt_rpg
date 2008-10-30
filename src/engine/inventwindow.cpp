@@ -618,7 +618,9 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                      modifState.mapObjectAddAction(MODSTATE_ACTION_OBJECT_ADD,
                                                    activeObject->getFileName(),
                                                    actualMap->getFileName(),
-                                                   X,Z);
+                                                   X,
+                                                   actualMap->getHeight(X,Z),
+                                                   Z);
                      /* Return to the NONE state */
                      activeObject = NULL;
                      state = INVENTORY_STATE_NONE;

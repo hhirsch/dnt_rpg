@@ -9,6 +9,13 @@
 #include "../etc/dirs.h"
 #include "../etc/defparser.h"
 
+////////////////////////////////////////////////////////////////////////////
+//                                                                        //
+//                               Object                                   //
+//                                                                        //
+////////////////////////////////////////////////////////////////////////////
+
+
 /**************************************************************
  *                       getObjectTypeId                      *
  **************************************************************/
@@ -177,6 +184,9 @@ object::object(string path, modelList& mdlList, string curMap): thing()
    {
       printf("Error: 3D Model not defined for %s!\n", name.c_str());
    }
+
+   /* Add the object to the list */
+   objectsList::insert(this);
 }
 
 /**************************************************************
@@ -210,14 +220,23 @@ object::object(object* obj): thing()
    fortitude = obj->fortitude;
    armatureClass = obj->armatureClass;
    sizeModifier = obj->sizeModifier;
+
+   /* Add the object to the list */
+   objectsList::insert(this);
 }
 
 /**************************************************************
  *                         Constructor                        *
  **************************************************************/
-object::object(): thing()
+object::object(string path): thing()
 {
    cleanValues();
+
+   /* Set the fileName */
+   fileName = path;
+   
+   /* Add the object to the list */
+   objectsList::insert(this);
 }
 
 /**************************************************************
@@ -233,8 +252,6 @@ void object::cleanValues()
    model2dName = "";
    model2d = NULL;
    model3D = NULL;
-   next = NULL;
-   previous = NULL;
    type = OBJECT_TYPE_GENERIC;
    maxLifePoints = 0;
    lifePoints = 0;
@@ -251,23 +268,61 @@ void object::cleanValues()
  **************************************************************/
 object::~object()
 {
+   /* Decrement Model3D Usage */
    model3D->decUsed();
+
+   /* Delete the model 2D used 
+    * TODO something like model3d for model2d */
    if(model2d)
    {
       SDL_FreeSurface(model2d);
    }
+
+   /* Remove the object from the list */
+   objectsList::remove(this);
+}
+
+/**************************************************************
+ *                           getNext                          *
+ **************************************************************/
+object* object::getNext()
+{
+   return(next);
+}
+
+/**************************************************************
+ *                         getPrevious                        *
+ **************************************************************/
+object* object::getPrevious()
+{
+   return(previous);
+}
+
+/**************************************************************
+ *                           setNext                          *
+ **************************************************************/
+void object::setNext(object* o)
+{
+   next = o;
+}
+
+/**************************************************************
+ *                         setPrevious                        *
+ **************************************************************/
+void object::setPrevious(object* o)
+{
+   previous = o;
 }
 
 /**************************************************************
  *                            draw                            *
  **************************************************************/
-void object::draw(float x, float z, GLfloat dist, float orientation, 
-                  bool inverted)
+void object::draw(bool inverted)
 {
    /* Draw the defined model */
    glEnable(GL_COLOR_MATERIAL);
    glPushMatrix();
-      glTranslatef(x, 0 ,z);
+      glTranslatef(xPosition, (inverted?-yPosition:yPosition), zPosition);
       glRotatef(orientation,0,1,0);
       if(inverted)
       {
@@ -363,30 +418,6 @@ int object::getType()
 }
 
 /*********************************************************************
- *                             incUsedFlag                           *
- *********************************************************************/
-void object::incUsedFlag()
-{
-   usedFlag++;
-}
-
-/*********************************************************************
- *                             decUsedFlag                           *
- *********************************************************************/
-void object::decUsedFlag()
-{
-   usedFlag--;
-}
-
-/*********************************************************************
- *                            getUsedFlag                            *
- *********************************************************************/
-int object::getUsedFlag()
-{
-   return(usedFlag);
-}
-
-/*********************************************************************
  *                            isStaticScenery                        *
  *********************************************************************/
 bool object::isStaticScenery()
@@ -461,4 +492,154 @@ bool object::depthCollision(GLfloat angle, GLfloat pX, GLfloat pY, GLfloat pZ,
    /* If no model, no collision =^P */
    return(false);
 }
+
+
+////////////////////////////////////////////////////////////////////////////
+//                                                                        //
+//                            ObjectsList                                 //
+//                                                                        //
+////////////////////////////////////////////////////////////////////////////
+
+/*********************************************************************
+ *                               insert                              *
+ *********************************************************************/
+void objectsList::insert(object* o)
+{
+   /* Redefine the object's pointers */
+   if(first)
+   {
+      o->setNext(first);
+      o->setPrevious(first->getPrevious());
+      o->getPrevious()->setNext(o);
+      o->getNext()->setPrevious(o);
+   }
+   else
+   {
+      o->setNext(o);
+      o->setPrevious(o);
+   }
+
+   /* Set it as the initial one */
+   first = o;
+   total++;
+}
+
+/*********************************************************************
+ *                               remove                              *
+ *********************************************************************/
+void objectsList::remove(object* o)
+{
+   /* Redefine the first, if needed */
+   if(first == o)
+   {
+      first = o->getNext();
+   }
+
+   /* Redefine the neighboor pointers */
+   o->getNext()->setPrevious(o->getPrevious());
+   o->getPrevious()->setNext(o->getNext());
+
+   /* Decrement the counter */
+   total--;
+
+   /* Nullify the first, if needed */
+   if(total <= 0)
+   {
+      first = 0;
+   }
+}
+
+/*********************************************************************
+ *                       removeStaticSceneries                       *
+ *********************************************************************/
+void objectsList::removeStaticSceneries()
+{ 
+   int i;
+   int curTotal = total;
+   object* cur = first;
+   object* oth = NULL;
+
+   /* Look at all list */
+   for(i=0; i<curTotal; i++)
+   {
+      oth = cur;
+      cur = cur->getNext();
+
+      /* verify if is static scenery */
+      if(oth->isStaticScenery())
+      {
+         /* Just delete, because the destructor will call
+          * the remove(oth) for us. */
+         delete(oth);
+      }
+   }
+}
+
+/*********************************************************************
+ *                             removeAll                             *
+ *********************************************************************/
+void objectsList::removeAll()
+{ 
+   int i;
+   int curTotal = total;
+   object* cur = first;
+   object* oth = NULL;
+
+   /* Look at all list */
+   for(i=0; i<curTotal; i++)
+   {
+      oth = cur;
+      cur = cur->getNext();
+
+      /* Just delete, because the destructor will call
+       * the remove(oth) for us. */
+      delete(oth);
+   }
+
+   total = 0;
+   first = NULL;
+}
+
+/*********************************************************************
+ *                              search                               *
+ *********************************************************************/
+object* objectsList::search(string fileName, GLfloat posX, GLfloat posY,
+                           GLfloat posZ)
+{
+   int i;
+   object* cur = first;
+
+   /* Search all the list */
+   for(i=0; i<total; i++)
+   {
+      if(cur->getFileName() == fileName)
+      {
+         if(cur->isStaticScenery())
+         {
+            /* static sceneries always use the same object pointer,
+             * so it is found! */
+            return(cur);
+         }
+         else if( (cur->xPosition == posX) && 
+                  (cur->yPosition == posY) &&
+                  (cur->zPosition == posZ) )
+         {
+            /* same name, at the same position, it's the same! */
+            return(cur);
+         }
+      }
+      cur = cur->getNext();
+   }
+
+   /* Not found! */
+   return(NULL);
+
+}
+
+/*********************************************************************
+ *                          static members                           *
+ *********************************************************************/
+object* objectsList::first = NULL;
+int objectsList::total = 0;
+
 

@@ -171,6 +171,7 @@ void fightSystem::verifyDeads()
                                   actualActor->actualEnemy->getCharacterFile(),
                                   mapFileName, 
                                   actualActor->actualEnemy->xPosition,
+                                  actualActor->actualEnemy->yPosition,
                                   actualActor->actualEnemy->zPosition,
                                   actualActor->actualEnemy->orientation,
                                   actualActor->actualEnemy->initialXPosition,

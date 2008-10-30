@@ -66,19 +66,16 @@ Square::~Square()
 /********************************************************************
  *                           addObject                              *
  ********************************************************************/
-objSquare* Square::addObject(bool draw, int squareX, int squareZ, 
-                             int orientation, float x, float y, float z, 
-                             bool colision, object* obj)
+objSquare* Square::addObject(bool draw, GLfloat x, GLfloat y, GLfloat z,
+                             GLfloat orientation, bool colision, object* obj)
 {
    objSquare* n = new objSquare;
    n->draw = draw;
    n->status = 0;
-   n->squareX = squareX;
-   n->squareZ = squareZ;
-   n->orientation = orientation;
    n->x = x;
    n->y = y;
    n->z = z;
+   n->orientation = orientation;
    n->colision = colision;
    n->obj = obj;
 
@@ -113,16 +110,7 @@ void Square::removeObject(objSquare* obj)
    obj->previous->next = obj->next;
    obj->next->previous = obj->previous;
 
-   if(obj->draw)
-   {
-      /* If mark as draw, dec the used flag of the object, since it
-       * is no more used here. */
-      obj->obj->decUsedFlag();
-      if(obj->obj->isStaticScenery())
-      {
-         //TODO Remove Position
-      }
-   }
+   /* Delete the internal squareObject reference */
    delete(obj);
 
    totalObjects--;
@@ -251,7 +239,7 @@ void wallTexture::setDelta(GLuint x, GLuint y, GLuint z)
 /********************************************************************
  *                          Map Constructor                         *
  ********************************************************************/
-Map::Map(lObject* lObjects)
+Map::Map()
 {
    miniMap = NULL;
    numTextures = 0;
@@ -282,7 +270,6 @@ Map::Map(lObject* lObjects)
    totalLakes = 0;
    
    /* Initialize Structs */
-   objects = lObjects;
    x = z = 0;
    xInic = zInic = 0;
 
@@ -298,6 +285,9 @@ Map::Map(lObject* lObjects)
  ********************************************************************/
 Map::~Map()
 {
+   /* Deleting all related objects */
+   deleteObjects();
+
    /* Delete All Textures */
    texture* tex = textures;
    texture* au;
@@ -365,9 +355,6 @@ Map::~Map()
 
    /* Delete the Wall texture renderer */
    delete(wallRenderer);
-
-   /* Unselect the objects list */
-   objects = NULL;
 
    /* Deleting all squares */
    int x1;
@@ -652,47 +639,103 @@ void Map::removeUnusedTextures()
 }
 
 /********************************************************************
- *                          removeObject                            *
+ *                          deleteObjects                           *
  ********************************************************************/
-void Map::removeObject(GLfloat xObj, GLfloat zObj, object* obj)
+void Map::deleteObjects()
 {
-    removeObject(xObj, zObj, obj->getFileName());
+   int Xaux = 0, Zaux = 0, o = 0;
+   objSquare* sobj;
+   objSquare* next;
+
+   /* First, remove all sceneries */
+   objectsList::removeStaticSceneries();
+
+   /* Now, all doors Objects */
+   door* dor = doors;
+   for(o = 0; o < totalDoors; o++)
+   {
+      delete(dor->obj);
+      dor = dor->next;
+   }
+
+   /* and finally, search all squares for non sceneries objects */
+   for(Xaux = 0; Xaux < x; Xaux++)
+   {
+     for(Zaux = 0; Zaux < z; Zaux++)
+     {
+        /* all objects at the square */
+        sobj = MapSquares[Xaux][Zaux].getFirstObject();
+        for(o=0; o < MapSquares[Xaux][Zaux].getTotalObjects(); o++)
+        {
+           next = sobj->next;
+           if(sobj != NULL) 
+           {
+              /* If will draw here and isn't scenery */
+              if( (sobj->draw) && (!sobj->obj->isStaticScenery()) ) 
+              {
+                 /* delete it! */
+                 switch(sobj->obj->getType())
+                 {
+                    case OBJECT_TYPE_WEAPON:
+                    {
+                       weapon* w = (weapon*)sobj->obj;
+                       delete(w);
+                    }
+                    break;
+                    default:
+                    {
+                       delete(sobj->obj);
+                    }
+                    break;
+                 }
+              }
+           }
+           sobj = next;
+        }
+     }
+   }
+
 }
 
 /********************************************************************
  *                          removeObject                            *
  ********************************************************************/
-void Map::removeObject(GLfloat xObj, GLfloat zObj, string fileName)
+void Map::removeObject(object* obj)
 {
    int Xaux = 0, Zaux = 0, o = 0;
-   objSquare* obj;
+   objSquare* sobj;
    objSquare* next;
+
+   /* Search on all squares for the object */
    for(Xaux = 0; Xaux < x; Xaux++)
    {
      for(Zaux = 0; Zaux < z; Zaux++)
      {
-        obj = MapSquares[Xaux][Zaux].getFirstObject();
+        /* Search on all objects at the square */
+        sobj = MapSquares[Xaux][Zaux].getFirstObject();
         for(o=0; o < MapSquares[Xaux][Zaux].getTotalObjects(); o++)
         {
-           next = obj->next;
-           if( (obj != NULL) && (obj->x == xObj) && (obj->z == zObj) )
+           next = sobj->next;
+           if(sobj != NULL) 
            {
-              if(obj->obj->getFileName() == fileName)
+              if(sobj->obj == obj)
               {
-                 MapSquares[Xaux][Zaux].removeObject(obj);
+                 /* Remove it from square */
+                 MapSquares[Xaux][Zaux].removeObject(sobj);
               }
            }
-           obj = next;
+           sobj = next;
         }
      }
    }
+
 }
 
 /******************************************************************
  *                          insertObject                          *
  ******************************************************************/
-void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal, int orObj,
-                        object* obj, bool collision)
+void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal, 
+                       GLfloat orObj, object* obj, bool collision)
 {
    int qx = (int)xReal / squareSize();
    int qz = (int)zReal / squareSize();
@@ -702,16 +745,26 @@ void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal, int orObj,
 /******************************************************************
  *                          insertObject                          *
  ******************************************************************/
-void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal, int orObj,
-                       object* obj, int qx, int qz, bool collision)
+void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal, 
+                       GLfloat orObj, object* obj, int qx, int qz, 
+                       bool collision)
 {
+   /* Define the object Position */
+   obj->xPosition = xReal;
+   obj->yPosition = yReal;
+   obj->zPosition = zReal;
+   obj->orientation = orObj;
+
+   /* Get the main square where object is */
    Square* saux = relativeSquare(qx,qz);
    int ob=0;
    if(saux)
    {
-      saux->addObject(true, qx, qz, orObj, xReal, yReal, zReal, collision, obj);
+      /* Add Object to the square */
+      saux->addObject(true, xReal, yReal, zReal, orObj, collision, obj);
       boundingBox  bounds = obj->getBoundingBox();
 
+      /* Now will search all other squares the object can be */
       float X[4], Z[4];
       GLfloat min2[3];
       GLfloat max2[3];
@@ -725,42 +778,40 @@ void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal, int orObj,
       X[3] = bounds.x2;
       Z[3] = bounds.z1;
       rotTransBoundingBox(orObj, X, Z, xReal, bounds.y1+yReal, 
-                          bounds.y2+yReal, zReal, min2, max2);
+            bounds.y2+yReal, zReal, min2, max2);
 
 
-     int minqx, minqz, maxqx, maxqz;
-     int ssize = squareSize();
-     minqx = (int)(min2[0]) / ssize;
-     minqz = (int)(min2[2]) / ssize;
-     maxqx = (int)(max2[0]) / ssize;
-     maxqz = (int)(max2[2]) / ssize; 
-     int X1, Z1;
-     Square* qaux;
-     for(X1 = minqx; X1<=maxqx; X1++)
-     {
-        for(Z1 = minqz; Z1 <=maxqz; Z1++) 
-        {
-           qaux = relativeSquare(X1,Z1);
-           if((qaux) && (qaux != saux))
-           {
-              ob =0;
-              qaux->addObject(false,qx,qz,orObj,xReal,yReal,zReal,
-                              collision,obj);
-           }
-        }
-     }
-     /* Mark the object as used */
-     obj->incUsedFlag();
+      int minqx, minqz, maxqx, maxqz;
+      int ssize = squareSize();
+      minqx = (int)(min2[0]) / ssize;
+      minqz = (int)(min2[2]) / ssize;
+      maxqx = (int)(max2[0]) / ssize;
+      maxqz = (int)(max2[2]) / ssize; 
+      int X1, Z1;
+      Square* qaux;
+      for(X1 = minqx; X1<=maxqx; X1++)
+      {
+         for(Z1 = minqz; Z1 <=maxqz; Z1++) 
+         {
+            qaux = relativeSquare(X1,Z1);
+            if((qaux) && (qaux != saux))
+            {
+               ob =0;
+               qaux->addObject(false,xReal, yReal, zReal, orObj,collision,obj);
+            }
+         }
+      }
 
-     /* If is a scenery one, the render is controlled by model3d, so..  */
-     if(obj->isStaticScenery())
-     {
-        obj->addRenderPosition(xReal, yReal, zReal, orObj);
-     }
+      /* If is a scenery one, the render is controlled by model3d, so
+       * add a render position to it! */
+      if(obj->isStaticScenery())
+      {
+         obj->addRenderPosition(xReal, yReal, zReal, orObj);
+      }
    }
    else
    {
-     printf("Warn: Try to insert object out of Map's Limits!\n");
+      printf("Warn: Try to insert object out of Map's Limits!\n");
    }
 }
 
@@ -1382,15 +1433,19 @@ void Map::renderObjects(GLfloat cameraX, GLfloat cameraY,
             Z[3] = bound.z1;
             if(inverted)
             {
-               rotTransBoundingBox(obj->orientation, X, Z, obj->x, 
-                                   obj->y - bound.y2, -obj->y - bound.y1, 
-                                   obj->z, min, max);
+               rotTransBoundingBox(obj->obj->orientation, X, Z, 
+                                   obj->obj->xPosition, 
+                                   obj->obj->yPosition - bound.y2, 
+                                   -obj->obj->yPosition - bound.y1, 
+                                   obj->obj->zPosition, min, max);
             }
             else
             {
-               rotTransBoundingBox(obj->orientation, X, Z, obj->x, 
-                                   obj->y + bound.y1, obj->y + bound.y2, 
-                                   obj->z, min, max );
+               rotTransBoundingBox(obj->obj->orientation, X, Z, 
+                                   obj->obj->xPosition, 
+                                   obj->obj->yPosition + bound.y1, 
+                                   obj->obj->yPosition + bound.y2, 
+                                   obj->obj->zPosition, min, max );
             }
 
             /* Verify ViewFrustum Culling */
@@ -1398,18 +1453,7 @@ void Map::renderObjects(GLfloat cameraX, GLfloat cameraY,
                 (visibleCube(min[0],min[1],min[2],max[0],max[1],max[2],
                              matriz)) )
             {
-               glPushMatrix();
-                if(inverted)
-                {
-                   glTranslatef(0.0, -obj->y - obj->obj->yPosition, 0.0);
-                }
-                else
-                {
-                   glTranslatef(0.0, obj->y + obj->obj->yPosition, 0.0);
-                }
-                obj->obj->draw(obj->x, obj->z, distancia, obj->orientation, 
-                               inverted);
-               glPopMatrix();
+               obj->obj->draw(inverted);
             }
          }
          obj = obj->next;
@@ -1423,6 +1467,9 @@ void Map::renderObjects(GLfloat cameraX, GLfloat cameraY,
    {
       if(dor->obj != NULL)
       {
+         /* Remove previous delta */
+         dor->obj->orientation -= dor->delta;
+
          /* Do the "animation" */
          if( (dor->status == DOOR_STATUS_OPENED) && (dor->delta < 90))
          {
@@ -1433,9 +1480,11 @@ void Map::renderObjects(GLfloat cameraX, GLfloat cameraY,
             dor->delta -= 5;
          }
 
+         /* Apply the new delta */
+         dor->obj->orientation += dor->delta; 
+
          /* Draw it */
-         dor->obj->draw(dor->x,dor->z,0,
-                        dor->delta + dor->orientation, inverted);
+         dor->obj->draw(inverted);
       }
       dor = dor->next;
    }
@@ -1787,11 +1836,13 @@ void Map::setOutdoor(bool val)
 /********************************************************************
  *                           getObject                              *
  ********************************************************************/
-object* Map::getObject(string fileName)
+object* Map::getObject(string fileName, 
+                       GLfloat posX, GLfloat posY, GLfloat posZ)
 {
-   return(objects->getObject(fileName));
-}
+   object* result = objectsList::search(fileName, posX, posY, posZ);
 
+   return(result);
+}
 
 /********************************************************************
  *                       insertMapObject                            *
@@ -1799,7 +1850,32 @@ object* Map::getObject(string fileName)
 object* Map::insertObject(string arquivo, modelList& mdlList, 
                           weaponTypes& wTypes)
 {
-   return(objects->insertObject(arquivo, mdlList, wTypes, name));
+   object* novo = NULL;
+
+   string::size_type loc = arquivo.find( ".dcc", 0 );
+   if( loc != string::npos )
+   {
+      /* Is a map Object *.dcc */
+      novo = (object*) new object(arquivo, mdlList, name);
+   }
+   else
+   {
+      loc = arquivo.find( ".wcc", 0 );
+      if( loc != string::npos )
+      {
+         /* Is a weapon Object *.wcc */
+         novo = (object*) new weapon(arquivo, mdlList, wTypes);
+      }
+   }
+
+   /* verify if created the pointer */
+   if(novo == NULL)
+   {
+      printf("Error, cannot define the type of %s\n",arquivo.c_str());
+      return(NULL);
+   }
+
+   return(novo);
 }
 
 /********************************************************************
@@ -1919,17 +1995,19 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
             sscanf(buffer,"%s %f,%f:%d",nome,&doorAux->x,&doorAux->z,
                                         &doorAux->orientation);
             doorAux->delta = 0;
-            doorAux->obj = objects->getObject(nome);
+            doorAux->obj = objectsList::search(nome, doorAux->x, 0, doorAux->z);
             if(doorAux->obj == NULL)
             {
-               printf("Can't Locate Door File: %s\n",nome);
+               /* Not found on list, so insert it! */
+               doorAux->obj = insertObject(nome,mdlList,wTypes);
+               doorAux->obj->xPosition = doorAux->x;
+               doorAux->obj->yPosition = 0;
+               doorAux->obj->zPosition = doorAux->z;
+               doorAux->obj->orientation = doorAux->orientation;
             }
-            else
-            {
-               doorAux->status = 0;
-               doorAux->next = doors;
-               doors = doorAux;
-            }
+            doorAux->status = 0;
+            doorAux->next = doors;
+            doors = doorAux;
             break;
          }
          case 'M': /* Define Music */
@@ -2054,13 +2132,6 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
             }
             break;
          }
-         case 'o': /* Insert Object */
-         {
-             fgets(buffer, sizeof(buffer), arq); 
-             sscanf(buffer, "%s",nomeArq);
-             objects->insertObject(nomeArq, mdlList, wTypes, name);
-             break;
-         }
          case 'O': /* Define OutDoor */
          {
             int a;
@@ -2151,19 +2222,30 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                }
                case 'o': /* Insert Object on Square */
                {
-                  int des, quadX, quadZ, oOri, oPis;
-                  float oX, oY, oZ;
+                  int des, quadX, quadZ, oPis;
+                  float oX, oY, oZ, oOri;
                   objSquare* oObj;
                   fgets(buffer, sizeof(buffer), arq);
-                  sscanf(buffer,"%s %d:%d,%d:%f,%f,%f:%d:%d",nome,
+                  sscanf(buffer,"%s %d:%d,%d:%f,%f,%f:%f:%d",nome,
                          &des, &quadX, &quadZ, &oX, &oY, &oZ, &oOri, &oPis);
 
-                  oObj = MapSquares[posX][posZ].addObject(des==1, quadX,quadZ,
-                                                          oOri,oX,oY,oZ,oPis!=1,
-                                                    objects->getObject(nome));
+                  object* obj = objectsList::search(nome, oX, oY, oZ);
+                  if(obj == NULL)
+                  {
+                     /* Insert it */
+                     obj = insertObject(nome, mdlList, wTypes);
+                     /* set the object position */
+                     obj->xPosition = oX;
+                     obj->yPosition = oY;
+                     obj->zPosition = oZ;
+                     obj->orientation = oOri;
+                   }
+
+                  oObj = MapSquares[posX][posZ].addObject(des==1, oX, oY, oZ,
+                                                          oOri, oPis!=1,
+                                                          obj);
                   if(oObj->draw)
                   {
-                     oObj->obj->incUsedFlag();
                      if(oObj->obj->isStaticScenery())
                      {
                         oObj->obj->addRenderPosition(oX, oY, oZ, oOri);
@@ -2468,25 +2550,6 @@ int Map::save(string arquivo)
       l = l->next;
    }
 
-   /* Write used objects */
-   if( (objects) && (objects->total > 0))
-   {
-      object* objAux = objects->first;
-      for(i = 0; i < objects->total; i++)
-      {
-         if(!objAux->getFileName().empty())
-         {
-            fprintf(arq,"o %s\n",
-                    dir.getRelativeFile(objAux->getFileName()).c_str());
-         }
-         else
-         {
-            printf("Object FileName is Empty!!!\n");
-         }
-         objAux = objAux->next;
-      }
-   }
-
    /* Write used Textures */
    texture* tex = (texture*)textures;
    int t;
@@ -2580,12 +2643,13 @@ int Map::save(string arquivo)
           {
             if(obj->obj)
             {
-               x2 = (int)obj->x / squareSize();
-               z2 = (int)obj->z / squareSize();
-               fprintf(arq,"uo %s %d:%d,%d:%f,%f,%f:%d:%d\n",
+               x2 = (int)obj->obj->xPosition / squareSize();
+               z2 = (int)obj->obj->zPosition / squareSize();
+               fprintf(arq,"uo %s %d:%d,%d:%f,%f,%f:%f:%d\n",
                        dir.getRelativeFile(obj->obj->getFileName()).c_str(),
                        obj->draw, x2 + 1, z2 + 1,
-                       obj->x, obj->y, obj->z, obj->orientation, 
+                       obj->obj->xPosition, obj->obj->yPosition, 
+                       obj->obj->zPosition, obj->obj->orientation, 
                        !obj->colision);
             }
             obj = obj->next;

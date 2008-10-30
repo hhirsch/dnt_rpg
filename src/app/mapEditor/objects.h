@@ -2,9 +2,9 @@
 #define _objects_h
 
 #include "../../map/map.h"
-#include "../../map/mapobject.h"
 #include "../../etc/modellist.h"
 #include "../../engine/util.h"
+#include "../../classes/object.h"
 #include "message.h"
 
 /*! The objects Map Controller Class */

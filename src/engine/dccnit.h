@@ -352,7 +352,6 @@ class engine
       dirs dir;                    /**< Data directories finder */
 
       Map* actualMap;              /**< Actual Engine Map */
-      lObject* objectsList;        /**< The list of loaded objects */
       cursor* cursors;             /**< Utilized mouse cursors */
 
       modState modifState;         /**< Current modification state */

@@ -186,6 +186,7 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
    
       if(mButton & SDL_BUTTON(1))
       {
+         /* Insert the door */
          GLfloat mx1,mx2,mz1,mz2;
          mx1 = doorWall->x1;
          mx2 = doorWall->x2;
@@ -233,6 +234,9 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
             int x,y;
             mButton = SDL_GetMouseState(&x,&y);
          }
+
+         /* Unset the pointer */
+         actualDoor = NULL;
       }
       
       if(mButton & SDL_BUTTON(3))
@@ -258,15 +262,42 @@ void portal::drawTemporary()
    int delta = -2;
    if( (actualTool == TOOL_PORTAL_DOOR) && (actualDoor))
    {
-      if(doorMode) delta = 2;
+      /* Set a delta to we ca see the door "outter" the wall */
+      if(doorMode)
+      {
+         delta = 2;
+      }
+
       if(doorOrientation)
       {
-        actualDoor->draw(doorX+delta, doorZ, 0, doorOrientation, false);
+         /* Set the position */
+         actualDoor->xPosition = doorX+delta;
+         actualDoor->yPosition = 0;
+         actualDoor->zPosition = doorZ;
+         actualDoor->orientation = doorOrientation;
+
+         /* Render */
+         actualDoor->draw(false);
+
+         /* Remove the delta */
+         actualDoor->xPosition -= delta;
       }
       else
       {
-        actualDoor->draw(doorX, doorZ+delta, 0, doorOrientation, false);
+         /* Set Position */
+         actualDoor->xPosition = doorX;
+         actualDoor->yPosition = 0;
+         actualDoor->zPosition = doorZ+delta;
+         actualDoor->orientation = doorOrientation;
+         
+         /* Render */
+         actualDoor->draw(false);
+
+         /* Remove the delta */
+         actualDoor->zPosition -= delta;
       }
+
+      /* Render a mouse position */
       glBegin(GL_QUADS);
          glVertex3f(mX-2,1,mZ-2);
          glVertex3f(mX-2,1,mZ+2);

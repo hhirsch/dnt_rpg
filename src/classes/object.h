@@ -22,7 +22,9 @@ using namespace std;
 #define OBJECT_TYPE_AMMO      6
 
 /*! Define Objects of the DNT (an object is almost everything that 
- * isn't live (like chairs, doors, equipments, weapons, etc).*/
+ * isn't live (like chairs, doors, equipments, weapons, etc).
+ * \note -> the object is automatically added to objectsList
+ *          in its constructos, and removed in its desctructor. */
 class object: public thing
 {
    public:
@@ -34,7 +36,7 @@ class object: public thing
        * \param obj -> some object to be the source of actual */
       object(object* obj);
       /*! Constructor withou parameter. Do not load anyhing */
-      object();
+      object(string path);
       /*! Destructor */
       ~object();
 
@@ -44,13 +46,8 @@ class object: public thing
 
       /*!
        * Draws the object
-       * \param x -> X position 
-       * \param z -> Z posotion
-       * \param dist -> distance from observator (defines the LOD used)
-       * \param orientation -> orientation angle of the object
        * \param inverted -> to invert the Y position */
-      void draw(float x, float z,GLfloat dist, float orientation, 
-                bool inverted);
+      void draw(bool inverted);
 
       /*! Draw the 2D Model to Surface
        * \param x -> x value on surface
@@ -91,14 +88,6 @@ class object: public thing
       /*! Get the type of the object */
       int getType();
 
-      /*! Inc the used flag  */
-      void incUsedFlag();
-      /*! Dec the used flag */
-      void decUsedFlag();
-      /*! Get the used Flag
-       * \return usedFlag Number. If is 0, the object can be deleted */
-      int getUsedFlag();
-
       /*! Verify if the object is a Scenery one */
       bool isStaticScenery();
 
@@ -138,9 +127,20 @@ class object: public thing
        * \return -> diceThing of the object */
       diceThing getDiceInfo();
 
-      object* next;         /**< Next Object on List */
-      object* previous;     /**< Previous Object on List */
-      
+      /*! Get the next object on the list
+       * \return -> pointer to the next */
+      object* getNext();
+      /*! Get the previous object on the list
+       * \return -> pointer to the previous */
+      object* getPrevious();
+
+      /*! Set the next object on the list
+       * \param o -> pointer to the next */
+      void setNext(object* o);
+      /*! Set the previous object on the list
+       * \param o -> previous object */
+      void setPrevious(object* o);
+
    protected:
       int usedFlag;         /**< The used flag of an object */
       int inventSizeX,      /**< Size on inventory X axis */
@@ -158,9 +158,47 @@ class object: public thing
       string fileName;      /**< FileName of the Object */
       string model2dName;   /**< FileName of the 2D Model */
 
+      object* next;         /**< Next Object on List */
+      object* previous;     /**< Previous Object on List */ 
+
       /*! Init the values (all with null or zero). Usually called
        * at begining of the constructors. */
       void cleanValues();
+
+};
+
+/*! The object list. All active objects on the game are here.
+ * Objects are removed at map exit and added at map enter.
+ * Also, objects are kept in the lis when in inventory. */
+class objectsList
+{
+   public:
+      /*! Remove an object from the list
+       * \param o -> object to remove from the list
+       * \note -> usually called at object's contructor */
+      static void remove(object* o);
+
+      /*! Insert an object to the list
+       * \param o -> object to add to the list
+       * \note -> usually called at object's destructor */
+      static void insert(object* o);
+
+      /*! Remove all static sceneries from the list,
+       * deleting its pointers. */
+      static void removeStaticSceneries();
+
+      /*! Remove All objects from the list, deleting its pointers */
+      static void removeAll();
+
+      /*! Search for the object on the list
+       * \return -> pointer to the object found or NULL
+       * \note -> static sceneries objects always use the same object pointer */
+      static object* search(string fileName, GLfloat posX, GLfloat posY,
+                            GLfloat posZ);
+
+   protected:
+      static object* first;       /**< First object on the list */
+      static int total;           /**< Total Objects on the list */
 };
 
 

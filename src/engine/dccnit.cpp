@@ -34,8 +34,6 @@ engine::engine()
 
    curConection = NULL;
 
-   objectsList = new(lObject);
-
    walkStatus = ENGINE_WALK_KEYS;
 
    /* Initialize the Cursor */
@@ -275,8 +273,8 @@ engine::~engine()
    /* Delete the action controller */
    delete(actionControl);
 
-   /* Delete the list of objects */
-   delete(objectsList);
+   /* Removel all objects in the list */
+   objectsList::removeAll();
 
    /* Clear 3D Models List */
    delete(models);
@@ -430,8 +428,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
       }
       arqVelho = actualMap->getFileName();
       delete(actualMap);
-      /* Remove All Unused Objects */
-      objectsList->removeUnusedObjects();
+
       /* Remove All Unused 3D Models */
       models->removeUnusedModels();
    }
@@ -462,7 +459,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    showLoading(img,&texturaTexto,texturaCarga, texto, progress);
    progress->defineActualHealth(3);
 
-   actualMap = new Map(objectsList);
+   actualMap = new Map();
    actualMap->setFileName(arqVelho);
    actualMap->open(arqMapa,*models, *weaponsTypes);
 
@@ -648,8 +645,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    progress->defineActualHealth(11);
 
    /* Do Modifications */
-   modifState.doMapModifications(actualMap, NPCs, *objectsList, 
-                                 *models, *weaponsTypes);
+   modifState.doMapModifications(actualMap, NPCs, *models, *weaponsTypes);
 
    /* Change Music, if needed */
    if(!actualMap->getMusicFileName().empty())
@@ -1778,10 +1774,10 @@ int engine::verifyMouseActions(Uint8 mButton)
                               MODSTATE_ACTION_OBJECT_REMOVE,
                               sobj->obj->getFileName(),
                               actualMap->getFileName(),
-                              sobj->x, sobj->z);
+                              sobj->x, sobj->y, sobj->z);
 
                         /* Remove object from Map */
-                        actualMap->removeObject(sobj->x, sobj->z, sobj->obj);
+                        actualMap->removeObject(sobj->obj);
 
                         if(inventoryWindow)
                         {
@@ -3403,11 +3399,7 @@ int engine::run(SDL_Surface *surface, bool commingBack)
          }
 
          /* Clear Objects List */
-         if(objectsList)
-         {
-            delete(objectsList);
-            objectsList = new (lObject);
-         }
+         objectsList::removeAll();
 
          /* Clear the Models List */
          if(models)

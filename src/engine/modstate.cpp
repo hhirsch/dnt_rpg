@@ -15,7 +15,7 @@
  *                       Constructor                        *
  ************************************************************/
 modAction::modAction(int act, string obj, string mapFile,
-                     GLfloat xPos, GLfloat zPos)
+                     GLfloat xPos, GLfloat yPos, GLfloat zPos)
 {
    next = NULL;
    previous = NULL;
@@ -23,6 +23,7 @@ modAction::modAction(int act, string obj, string mapFile,
    target = obj;
    mapFileName = mapFile;
    x = xPos;
+   y = yPos;
    z = zPos;
 }
 
@@ -60,18 +61,20 @@ int modAction::getAction()
 /************************************************************
  *                       getPosition                        *
  ************************************************************/
-void modAction::getPosition(GLfloat &posX, GLfloat& posZ)
+void modAction::getPosition(GLfloat &posX, GLfloat& posY, GLfloat& posZ)
 {
    posX = x;
+   posY = y;
    posZ = z;
 }
 
 /************************************************************
  *                       setPosition                        *
  ************************************************************/
-void modAction::setPosition(GLfloat posX, GLfloat posZ)
+void modAction::setPosition(GLfloat posX, GLfloat posY, GLfloat posZ)
 {
    x = posX;
+   y = posY;
    z = posZ;
 }
 
@@ -118,11 +121,12 @@ void modAction::setPrevious(modAction* act)
  ************************************************************/
 mapCharacterModAction::mapCharacterModAction(int act, string character, 
                                              string mapFile,
-                                             GLfloat xPos, GLfloat zPos, 
+                                             GLfloat xPos, GLfloat yPos,
+                                             GLfloat zPos, 
                                              GLfloat orientation,  
                                              GLfloat initialX, 
                                              GLfloat initialZ):
-                        modAction(act, character, mapFile, xPos, zPos)
+                        modAction(act, character, mapFile, xPos, yPos, zPos)
 {
    oriAngle = orientation;
    initX = initialX;
@@ -169,8 +173,9 @@ GLfloat mapCharacterModAction::getInitialZ()
  *                       Constructor                        *
  ************************************************************/
 mapObjectModAction::mapObjectModAction(int act, string obj, string mapFile,
-                                       GLfloat xPos, GLfloat zPos): 
-                    modAction(act, obj, mapFile, xPos, zPos)
+                                       GLfloat xPos, GLfloat yPos, 
+                                       GLfloat zPos): 
+                    modAction(act, obj, mapFile, xPos, yPos, zPos)
 {
 }
 
@@ -192,7 +197,7 @@ mapObjectModAction::~mapObjectModAction()
  ************************************************************/
 mapTalkModAction::mapTalkModAction(int act, string character, string mapFile,
                                    int talkValue): 
-                  modAction(act, character, mapFile, 0, 0)
+                  modAction(act, character, mapFile, 0, 0, 0)
 {
    value = talkValue;
 }
@@ -230,10 +235,10 @@ void mapTalkModAction::setValue(int v)
  *                       Constructor                        *
  ************************************************************/
 modInventory::modInventory(inventory* inv, string owner, string mapFile)
-             : modAction(MODSTATE_INVENTORY, owner, mapFile, 0, 0)
+             : modAction(MODSTATE_INVENTORY, owner, mapFile, -1, -1, -1)
 {
    /* Default Initial Values */
-   objectsList = NULL;
+   objects = NULL;
    totalObjects = 0;
 
    /* Create the list from the inventory */
@@ -252,10 +257,10 @@ modInventory::~modInventory()
 /************************************************************
  *                            flush                         *
  ************************************************************/
-void modInventory::flush(inventory* inv, lObject& objs, modelList& models, 
-                         weaponTypes& wTypes)
+void modInventory::flush(Map* curMap, inventory* inv,
+                         modelList& models,weaponTypes& wTypes)
 {
-   modInvObj* invObj = objectsList;
+   modInvObj* invObj = objects;
    object* curObj = NULL;
    int i;
 
@@ -263,12 +268,11 @@ void modInventory::flush(inventory* inv, lObject& objs, modelList& models,
    for(i = 0; i < totalObjects; i++)
    {
       /* Try get object from map object list */
-      curObj = objs.getObject(invObj->fileName);
+      curObj = objectsList::search(invObj->fileName, -1, -1, -1);
       if(!curObj)
       {
          /* It's not on the list, so must insert it */
-         curObj = objs.insertObject(invObj->fileName, models, wTypes,
-                                    mapFileName);
+         curObj = curMap->insertObject(invObj->fileName, models, wTypes);
       }
 
       /* Now insert it at the inventory */
@@ -333,21 +337,21 @@ void modInventory::create(inventory* inv)
 void modInventory::insert(modInvObj* obj)
 {
    /* Set next/previous pointers */
-   if(objectsList == NULL)
+   if(objects == NULL)
    {
       obj->next = obj;
       obj->previous = obj;
    }
    else
    {
-      obj->next = objectsList;
-      obj->previous = objectsList->previous;
+      obj->next = objects;
+      obj->previous = objects->previous;
       obj->next->previous = obj;
       obj->previous->next = obj;
    }
 
    /* Set it as the initial node on list */
-   objectsList = obj;
+   objects = obj;
    totalObjects++;
 }
 
@@ -357,7 +361,7 @@ void modInventory::insert(modInvObj* obj)
 void modInventory::clear()
 {
    int i;
-   modInvObj* cur = objectsList;
+   modInvObj* cur = objects;
    modInvObj* aux = NULL;
 
    /* Free all objects */
@@ -484,7 +488,7 @@ void modMap::addAction(modAction* act)
  ************************************************************/
 void modMap::mapObjectAddAction(int action, string target, 
                                   string mapFileName, 
-                                  GLfloat xPos, GLfloat zPos)
+                                  GLfloat xPos, GLfloat yPos, GLfloat zPos)
 {
    if( (action != MODSTATE_ACTION_OBJECT_REMOVE) && 
        (action != MODSTATE_ACTION_OBJECT_ADD) )
@@ -492,7 +496,7 @@ void modMap::mapObjectAddAction(int action, string target,
       cerr << "Invalid modification object action: " <<  action << endl;
    }
 
-   if(removeInverseObjectAction(action, target, mapFileName, xPos, zPos))
+   if(removeInverseObjectAction(action, target, mapFileName, xPos, yPos, zPos))
    {
       /*! Add is similar to remove inverse, so it is added! */
       return;
@@ -500,7 +504,7 @@ void modMap::mapObjectAddAction(int action, string target,
    else
    {
       mapObjectModAction* n;
-      n = new mapObjectModAction(action, target, mapFileName, xPos, zPos);
+      n = new mapObjectModAction(action, target, mapFileName, xPos, yPos, zPos);
       addAction(n);
    }
 }
@@ -509,7 +513,7 @@ void modMap::mapObjectAddAction(int action, string target,
  *                  mapCharacterAddAction                   *
  ************************************************************/
 void modMap::mapCharacterAddAction(int act, string character, string mapFile,
-                                   GLfloat xPos, GLfloat zPos, 
+                                   GLfloat xPos, GLfloat yPos, GLfloat zPos, 
                                    GLfloat orientation, GLfloat initialX, 
                                    GLfloat initialZ)
 {
@@ -525,12 +529,12 @@ void modMap::mapCharacterAddAction(int act, string character, string mapFile,
    if(n != NULL)
    {
       /* Just update the one found */
-      n->setPosition(xPos, zPos);
+      n->setPosition(xPos, yPos, zPos);
    }
    else
    {
       /* None found, must create a new one */
-      n = new mapCharacterModAction(act, character, mapFile, xPos, zPos,
+      n = new mapCharacterModAction(act, character, mapFile, xPos, yPos, zPos,
                                     orientation, initialX, initialZ);
       addAction(n);
    }
@@ -590,7 +594,7 @@ void modMap::mapInventoryAdd(inventory* inv, string owner)
  *                           search                         *
  ************************************************************/
 modAction* modMap::search(int action, string target, 
-                          GLfloat xPos, GLfloat zPos)
+                          GLfloat xPos, GLfloat yPos, GLfloat zPos)
 {
    int i;
    modAction* mod = modActionsList;
@@ -602,7 +606,7 @@ modAction* modMap::search(int action, string target,
          if((xPos != -1) && (zPos != -1))
          {
             /* verify the initial or current position */
-            GLfloat pX=0, pZ=0;
+            GLfloat pX=0, pY=0, pZ=0;
 
 
             if( (action == MODSTATE_ACTION_CHARACTER_DEAD) ||
@@ -616,7 +620,7 @@ modAction* modMap::search(int action, string target,
             else
             {
                /* For all other types, verify the current position */
-               mod->getPosition(pX, pZ);
+               mod->getPosition(pX, pY, pZ);
             }
             if( (pX == xPos) && (pZ == zPos))
             {
@@ -694,7 +698,7 @@ void modMap::removeAction(modAction* act)
  ************************************************************/
 bool modMap::removeInverseObjectAction(int action, string target, 
                                        string mapFileName, 
-                                       GLfloat xPos, GLfloat zPos)
+                                       GLfloat xPos, GLfloat yPos, GLfloat zPos)
 {
 
    if( (action != MODSTATE_ACTION_OBJECT_REMOVE) && 
@@ -704,7 +708,7 @@ bool modMap::removeInverseObjectAction(int action, string target,
       return(false);
    }
 
-   modAction* tmp = search(!action, target, xPos, zPos);
+   modAction* tmp = search(!action, target, xPos, yPos, zPos);
    if(tmp != NULL)
    {
       /* Found the Inverse, so remove it */
@@ -717,35 +721,39 @@ bool modMap::removeInverseObjectAction(int action, string target,
 /************************************************************
  *                    doMapModifications                    *
  ************************************************************/
-void modMap::doMapModifications(Map* actualMap, 
-                                void* NPCs, lObject& objs,
-                                modelList& mdlList, 
-                                weaponTypes& wTypes)
+void modMap::doMapModifications(Map* actualMap, void* NPCs, 
+                                modelList& mdlList, weaponTypes& wTypes)
 {
    int i;
    characterList* npcs = (characterList*) NPCs;
    character* ch  = NULL;
-   GLfloat x=0, z=0;
+   GLfloat x=0, y=0, z=0;
    modAction* tmpMobj = modActionsList;
    for(i = 0; i < totalModActions; i++)
    {
       /* If the information is from the loaded map, apply it! */
       if(tmpMobj->getMapFileName() == actualMap->getFileName())
       {
-         tmpMobj->getPosition(x,z);
+         tmpMobj->getPosition(x,y,z);
          if(tmpMobj->getAction() == MODSTATE_ACTION_OBJECT_REMOVE)
          {
-            actualMap->removeObject(x, z, tmpMobj->getTarget());
+            /* Get the object from the list */
+            object* obj = objectsList::search(tmpMobj->getTarget(), x, y, z);
+            /* Remove it from the map */
+            actualMap->removeObject(obj);
+            /* And remove it from game! */
+            delete(obj);
          }
          else if(tmpMobj->getAction() == MODSTATE_ACTION_OBJECT_ADD)
          {
-            object* obj = actualMap->getObject(tmpMobj->getTarget());
+            object* obj = objectsList::search(tmpMobj->getTarget(),
+                                              x, actualMap->getHeight(x,z),z);
             if(obj == NULL)
             {
                /* Load it to the map */
                obj = actualMap->insertObject(tmpMobj->getTarget(), mdlList, 
                                              wTypes);
-
+               cout << "OBJECT: " << obj << "2D: " << obj->get2dModel() << endl;
             }
             /* Insert the Object  */
             actualMap->insertObject(x, actualMap->getHeight(x,z), z, 
@@ -765,7 +773,8 @@ void modMap::doMapModifications(Map* actualMap,
                   /* Put it as dead at the position */
                   ch->instantKill();
                   ch->orientation = charAct->getOrientation();
-                  charAct->getPosition(ch->xPosition, ch->zPosition);
+                  charAct->getPosition(ch->xPosition, ch->yPosition, 
+                                       ch->zPosition);
                   done = true;
                }
                else
@@ -797,7 +806,7 @@ void modMap::doMapModifications(Map* actualMap,
             ch = npcs->getCharacter(tmpMobj->getTarget());
             if(ch)
             {
-               mInv->flush(ch->inventories, objs, mdlList, wTypes);
+               mInv->flush(actualMap, ch->inventories, mdlList, wTypes);
             }
          }
          else
@@ -918,13 +927,13 @@ modMap* modState::createModMap(string fileName)
  ************************************************************/
 void modState::mapObjectAddAction(int action, string target, 
                                   string mapFileName, 
-                                  GLfloat xPos, GLfloat zPos)
+                                  GLfloat xPos, GLfloat yPos, GLfloat zPos)
 {
    modMap* mod = findModMap(mapFileName);
 
    if(mod != NULL)
    {
-      mod->mapObjectAddAction(action, target, mapFileName, xPos, zPos);
+      mod->mapObjectAddAction(action, target, mapFileName, xPos, yPos, zPos);
    }
 }
 
@@ -932,14 +941,14 @@ void modState::mapObjectAddAction(int action, string target,
  *                  mapCharacterAddAction                   *
  ************************************************************/
 void modState::mapCharacterAddAction(int act, string character, string mapFile,
-                                     GLfloat xPos, GLfloat zPos, 
+                                     GLfloat xPos, GLfloat yPos, GLfloat zPos, 
                                      GLfloat orientation,
                                      GLfloat initialX, GLfloat initialZ)
 {
    modMap* mod = findModMap(mapFile);
    if(mod != NULL)
    {
-      mod->mapCharacterAddAction(act, character, mapFile, xPos, zPos,
+      mod->mapCharacterAddAction(act, character, mapFile, xPos, yPos, zPos,
                                  orientation, initialX, initialZ);
    }
 }
@@ -973,14 +982,14 @@ void modState::mapInventoryAdd(inventory* inv, string owner, string mapFile)
  *                    doMapModifications                    *
  ************************************************************/
 void modState::doMapModifications(Map* actualMap, 
-                                  void* NPCs, lObject& objs,
+                                  void* NPCs, 
                                   modelList& mdlList, 
                                   weaponTypes& wTypes)
 {
    modMap* mod = findModMap(actualMap->getFileName());
    if(mod != NULL)
    {
-      mod->doMapModifications(actualMap, NPCs, objs, mdlList, wTypes);
+      mod->doMapModifications(actualMap, NPCs, mdlList, wTypes);
    } 
 }
 

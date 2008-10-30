@@ -49,7 +49,8 @@ itemSlot::~itemSlot()
              (spaces[x][y].origX == x) &&
              (spaces[x][y].origY == y))
          {
-            spaces[x][y].obj->decUsedFlag();
+            /* Delete the object */
+            delete(spaces[x][y].obj);
          }
          spaces[x][y].obj = NULL;
       }
@@ -76,7 +77,6 @@ bool itemSlot::addObject(object* obj, int x, int y)
    int j,k;
    obj->getInventorySize(sX, sY);
 
-
    if(canAdd(obj, x, y))
    {
       /* Occup all needed spaces */
@@ -89,7 +89,12 @@ bool itemSlot::addObject(object* obj, int x, int y)
             spaces[j][k].origY = y;
          }
       }
-      obj->incUsedFlag();
+      /* Change Object Position (to avoid being deleted when back 
+       * to the map where got it) */
+      obj->xPosition = -x;
+      obj->yPosition = -y;
+      obj->zPosition = -1;
+
       totalItems++;
       return(true);
    }
@@ -226,7 +231,6 @@ void itemSlot::removeObject(int x, int y)
             }
          }
          /* Free obj from use here */
-         obj->decUsedFlag();
          totalItems--;
       }
    }

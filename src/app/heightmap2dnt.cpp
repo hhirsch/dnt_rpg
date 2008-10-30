@@ -31,7 +31,7 @@ bool doConversion(string imgFile, string mapFile)
    }
 
    /* Create Map, based on image size */
-   dntMap = new Map(NULL);
+   dntMap = new Map();
    sizeX = img->w / 10;
    sizeZ = img->h / 10;
    dntMap->newMap(img->w / 10, img->h / 10);
