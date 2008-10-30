@@ -56,7 +56,7 @@ bool portal::inner(GLfloat ax, GLfloat az, GLfloat bx1, GLfloat bz1,
 /******************************************************
  *                     defineDoor                     *
  ******************************************************/
-void portal::defineDoor(mapObject* newDoor, string fileName)
+void portal::defineDoor(object* newDoor, string fileName)
 {
    if(newDoor != NULL)
    {
@@ -68,7 +68,7 @@ void portal::defineDoor(mapObject* newDoor, string fileName)
 /******************************************************
  *                       getDoor                      *
  ******************************************************/
-mapObject* portal::getDoor()
+object* portal::getDoor()
 {
    return(actualDoor);
 }

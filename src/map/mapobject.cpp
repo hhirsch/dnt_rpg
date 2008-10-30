@@ -41,7 +41,7 @@ object* lObject::insertObject(string arquivo, modelList& mdlList,
    if( loc != string::npos )
    {
       /* Is a map Object *.dcc */
-      novo = (object*) new mapObject(arquivo, mdlList, curMap);
+      novo = (object*) new object(arquivo, mdlList, curMap);
    }
    else
    {
@@ -124,12 +124,6 @@ void lObject::removeObject(object* obj)
    /* Delete object memory */
    switch(obj->getType())
    {
-      case OBJECT_TYPE_MAPOBJECT:
-      {
-         mapObject *o = (mapObject*)obj;
-         delete(o);
-         break;
-      }
       case OBJECT_TYPE_WEAPON:
       {
          weapon *w = (weapon*)obj;
@@ -167,13 +161,5 @@ object* lObject::getObject(string fileName)
       obj = obj->next;
    }
    return(NULL);
-}
-
-/*********************************************************************
- *                              canGet                               *
- *********************************************************************/
-void mapObject::callDeadAnimation()
-{
-   //TODO
 }
 

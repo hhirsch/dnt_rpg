@@ -131,7 +131,7 @@ void objects::drawTemporary()
  *                          insertObject                          *
  ******************************************************************/
 void objects::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
-                          Map* acMap, mapObject* obj, int qx, int qz)
+                          Map* acMap, object* obj, int qx, int qz)
 {
    //TODO, mark with no collision some pickable objects
    acMap->insertObject(xReal, 
@@ -142,7 +142,7 @@ void objects::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
 /******************************************************************
  *                       defineActualObject                       *
  ******************************************************************/
-void objects::defineActualObject(mapObject* obj, string fileName)
+void objects::defineActualObject(object* obj, string fileName)
 {
    if(obj)
    {

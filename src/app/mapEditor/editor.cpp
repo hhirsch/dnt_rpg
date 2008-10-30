@@ -911,7 +911,7 @@ void editor::doEditorIO()
          if(!doorFile.empty())
          {
             object* obj = map->insertObject(doorFile, *models, *wTypes);
-            portalEditor->defineDoor((mapObject*)obj, gui->getSelectedText());
+            portalEditor->defineDoor((object*)obj, gui->getSelectedText());
          }
       }
       portalEditor->verifyAction(xReal, yReal, zReal, mButton, gui->getTool(),
@@ -929,7 +929,7 @@ void editor::doEditorIO()
       string objFile = gui->getSelectedText();
       if( (!objFile.empty()) && (objFile != objectEditor->getObjectFileName()))
       {
-         mapObject* obj = (mapObject*) map->insertObject(objFile, *models, 
+         object* obj = (object*) map->insertObject(objFile, *models, 
                                                          *wTypes);
          objectEditor->defineActualObject(obj, objFile);
       }

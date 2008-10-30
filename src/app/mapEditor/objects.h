@@ -32,14 +32,14 @@ class objects
       /*! If have some temporary things to draw, draw it! */
       void drawTemporary();
 
-      void defineActualObject(mapObject* obj, string fileName);
+      void defineActualObject(object* obj, string fileName);
 
       string getObjectFileName();
 
     private:
       modelList* models;          /**< Used Model List */
       Map* actualMap;             /**< Actual Internal Map */
-      mapObject* actualObstacle;  /**< Actual Obstacle */
+      object* actualObstacle;     /**< Actual Obstacle */
       string objectFile;          /**< Actual Obstacle Filename */
       int actualTool;             /**< Actual Tool */
       int state;                  /**< Actual Internal State */
@@ -54,7 +54,7 @@ class objects
       GLint obstacleOrientation;  /**< Orientation of the Obstacle */
 
       void insertObject(GLfloat xReal, GLfloat zReal, int orObj,
-                        Map* acMap, mapObject* obj, int qx, int qz);
+                        Map* acMap, object* obj, int qx, int qz);
 
 };
 

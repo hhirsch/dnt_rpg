@@ -485,8 +485,8 @@ int conversation::loadFile(string name)
     /* Get the first token */
     token = getString(position, buffer, separator);
 
-    /* Ignore comentaries */
-    if(token[0] != '#')
+    /* Ignore comentaries and empty lines */
+    if( (token[0] != '#') && (!token.empty()) )
     {
       
       /* Create New Dialog */

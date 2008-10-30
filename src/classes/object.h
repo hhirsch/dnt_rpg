@@ -14,7 +14,7 @@ using namespace std;
 #include "dices.h"
 
 #define OBJECT_TYPE_GENERIC   0
-#define OBJECT_TYPE_MAPOBJECT 1
+#define OBJECT_TYPE_SCENERY   1
 #define OBJECT_TYPE_WEAPON    2
 #define OBJECT_TYPE_ARMOR     3
 #define OBJECT_TYPE_HEAL      4
@@ -89,18 +89,18 @@ class object: public thing
       void updateHealthBar(){};
 
       /*! Get the type of the object */
-      int getType(){return(type);};
+      int getType();
 
       /*! Inc the used flag  */
-      void incUsedFlag(){usedFlag++;};
+      void incUsedFlag();
       /*! Dec the used flag */
-      void decUsedFlag(){usedFlag--;};
+      void decUsedFlag();
       /*! Get the used Flag
        * \return usedFlag Number. If is 0, the object can be deleted */
-      int getUsedFlag(){return(usedFlag);};
+      int getUsedFlag();
 
       /*! Verify if the object is a Scenery one */
-      bool isStaticScenery(){return(staticScenery);};
+      bool isStaticScenery();
 
       /*! Verify if the item is usable or not
        * \return -> true if the item is usable */
@@ -117,9 +117,10 @@ class object: public thing
 
       /*! Get the 2D image of the object
        * \return the pointer to the surface */
-      SDL_Surface* get2dModel(){return(model2d);};
+      SDL_Surface* get2dModel();
 
-      string get2dModelName(){return(model2dName);};
+      /*! Get the 2D model name */
+      string get2dModelName();
 
       /*! Verify, with all Meshes of the model, if the model colides
        *  with the bounding box defined as parameter. 

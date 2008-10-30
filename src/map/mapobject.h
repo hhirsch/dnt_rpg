@@ -11,26 +11,6 @@
 #include <string>
 using namespace std;
 
-
-/*!
- ****************************************************
- *               Map's Objects                      *
- ****************************************************/
-class mapObject: public object
-{
-   public:
-      /*!Constructor 
-       * \param path -> path to the object file
-       * \param mdlList -> list of openned models 
-       * \param curMap -> current map filename */
-      mapObject(string path, modelList& mdlList, string curMap):
-         object(path, mdlList, curMap){};
-
-   protected:
-      void callDeadAnimation();
-      void updateHealthBar(){};
-};
-
 /*! Objects list */
 class lObject
 {
