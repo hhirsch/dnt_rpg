@@ -97,6 +97,10 @@ object::object(string path, modelList& mdlList, string curMap): thing()
       {
          type = getObjectTypeId(value);
       }
+      else if(key == "state")
+      {
+         sscanf(value.c_str(), "%d", &state);
+      }
       else if(key == "inventory_sizes")
       {
          sscanf(value.c_str(),"%d %d",&inventSizeX, &inventSizeY);
@@ -244,6 +248,7 @@ object::object(string path): thing()
  **************************************************************/
 void object::cleanValues()
 {
+   state = 0;
    usedFlag = 0;
    inventSizeX = 0;
    inventSizeY = 0;
@@ -415,6 +420,22 @@ bool object::isUsable()
 int object::getType()
 {
    return(type);
+}
+
+/*********************************************************************
+ *                               setState                            *
+ *********************************************************************/
+void object::setState(int st)
+{
+   state = st;
+}
+
+/*********************************************************************
+ *                               getState                            *
+ *********************************************************************/
+int object::getState()
+{
+   return(state);
 }
 
 /*********************************************************************

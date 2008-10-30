@@ -13,16 +13,18 @@
 #include "modstate.h"
 
 /* The Functions */
-#define TALK_ACTION_GO_TO_DIALOG      0 /* Go To some conversation point */
-#define TALK_ACTION_INIT_FIGHT        1 /* End talk and initiate a fight */
-#define TALK_ACTION_FINISH_DIALOG     2 /* End Talk */
-#define TALK_ACTION_MOD_PC            3 /* Modify PC attribute */
-#define TALK_ACTION_MOD_NPC           4 /* Modify NPC attribute */
-#define TALK_ACTION_DIALOG_INIT       5 /* Set the new initial dialog */
-#define TALK_ACTION_ADD_MISSION       6 /* Add a mission */
-#define TALK_ACTION_COMPLETE_MISSION  7 /* Complete Mission */
-#define TALK_ACTION_GIVE_ITEM         8 /* Give an item */
-#define TALK_ACTION_RECEIVE_MONEY     9 /* Receive some money */
+#define TALK_ACTION_GO_TO_DIALOG         0 /* Go To some conversation point */
+#define TALK_ACTION_INIT_FIGHT           1 /* End talk and initiate a fight */
+#define TALK_ACTION_FINISH_DIALOG        2 /* End Talk */
+#define TALK_ACTION_MOD_PC               3 /* Modify PC attribute */
+#define TALK_ACTION_MOD_NPC              4 /* Modify NPC attribute */
+#define TALK_ACTION_DIALOG_INIT          5 /* Set the new initial dialog */
+#define TALK_ACTION_ADD_MISSION          6 /* Add a mission */
+#define TALK_ACTION_COMPLETE_MISSION     7 /* Complete Mission */
+#define TALK_ACTION_GIVE_ITEM            8 /* Give an item */
+#define TALK_ACTION_RECEIVE_MONEY        9 /* Receive some money */
+#define TALK_ACTION_CHANGE_OBJECT_STATE 10 /* Change Object State */
+#define TALK_ACTION_RECEIVE_XP          11
 
 #define TALK_TEST_TRUE                0  /* Always True */
 #define TALK_TEST_ROLL                1  /* Roll some test */
@@ -30,6 +32,9 @@
 #define TALK_TEST_LESSER              3  /* Test if is lesser */
 #define TALK_TEST_EQUAL               4  /* Test if is equal */
 #define TALK_TEST_DIFF                5  /* Test if is diff */
+#define TALK_TEST_HAVE_ITEM           6  /* Test if have item*/
+#define TALK_TEST_ALIGN_NOT           7  /* Test if align not of type */
+#define TALK_TEST_ALIGN               8  /* Test if align is of a type */
 
 #define BUFFER_SIZE 512
 
@@ -59,6 +64,8 @@
 #define TK_ACTION_COMPLETE_MISSION "complete_mission"
 #define TK_ACTION_GIVE_ITEM "give_item"
 #define TK_ACTION_RECEIVE_MONEY "receive_money"
+#define TK_ACTION_CHANGE_OBJECT_STATE "change_object_state"
+#define TK_ACTION_RECEIVE_XP "receive_xp"
 
 /* Test Tokens */
 #define TK_TEST_ROLL "roll"
@@ -66,6 +73,13 @@
 #define TK_TEST_LESSER "lesser"
 #define TK_TEST_EQUAL "equal"
 #define TK_TEST_DIFF "diff"
+#define TK_TEST_ALIGN "align"
+#define TK_TEST_ALIGN_NOT "align_not"
+#define TK_TEST_HAVE_ITEM "have_item"
+
+
+/* Constant Tokens */
+#define TK_CONST_OBJECT_STATE "OBJECT_STATE"
 
 ///////////////////////////////////////////////////////////////////////////
 //                                                                       //
@@ -137,6 +151,21 @@ bool talkTest::set(string token, string t, string a)
    {
       id = TALK_TEST_DIFF;
    }
+   /* have_item */
+   else if(token == TK_TEST_HAVE_ITEM)
+   {
+      id = TALK_TEST_HAVE_ITEM;
+   }
+   /* align_not */
+   else if(token == TK_TEST_ALIGN_NOT)
+   {
+      id = TALK_TEST_ALIGN_NOT;
+   }
+   /* align */
+   else if(token == TK_TEST_ALIGN)
+   {
+      id = TALK_TEST_ALIGN;
+   }
    else
    {
       /* Unknow test function! */
@@ -169,7 +198,7 @@ string talkTest::getTestName(character* pc)
 /*************************************************************************
  *                                 doTest                                *
  *************************************************************************/
-bool talkTest::doTest(character* pc)
+bool talkTest::doTest(character* pc, thing* owner)
 {
    //FIXME - Must verify if the against is a number or a thing...
    //        for now, always is a number
@@ -206,50 +235,90 @@ bool talkTest::doTest(character* pc)
       if(res)
       {
          /* With blue color */
-         brief.addText(buffer, 25, 33, 145);
+         brief.addText(buffer, 27, 169, 245);
       }
       else
       {
          /* With red color */
-         brief.addText(buffer, 135, 21, 21);
+         brief.addText(buffer, 233, 0, 5);
       }
       
       /* Return what got */
       return(res);
    }
+
+   /* Have Item test */
+   else if(id == TALK_TEST_HAVE_ITEM)
+   {
+      return(pc->inventories->getItemByFileName(test) != NULL);  
+   }
+
+   /* Align Not Test */
+   else if(id == TALK_TEST_ALIGN_NOT)
+   {
+      return(!pc->isAlignOf(test));
+   }
+
+   /* Align Test */
+   else if(id == TALK_TEST_ALIGN)
+   {
+      return(pc->isAlignOf(test));
+   }
+
+
+   /* Comparasion tests (greater, equal, etc) */
    else
    {
-      /* Get the skill or attribute to compare */
-      skill* sk = pc->sk.getSkillByString(test);
+      /* First the the compValue */
+      int compValue = 0;
 
-      if(!sk)
+      /* Is comparing an owner state */
+      if(test == TK_CONST_OBJECT_STATE)
       {
-         cerr << "Unknow Attribute or Skill: " << test << endl;
-         return(false);
+         object* obj = (object*)owner;
+         compValue = obj->getState();
+      }
+
+      /* Must be comparing the active character skill or attribute */
+      else
+      {
+
+         /* Get the skill or attribute to compare */
+         skill* sk = pc->sk.getSkillByString(test);
+
+         if(!sk)
+         {
+            cerr << "Unknow Attribute or Skill: " << test << endl;
+            return(false);
+         }
+
+         compValue = sk->points;
       }
 
       /* Get the value to compare with */
       sscanf(against.c_str(), "%d", &value);
 
+      /* Now, finally do the test */
+
       /* greater */
       if(id == TALK_TEST_GREATER)
       {
-         return(sk->points > value);
+         return(compValue > value);
       }
       /* lesser */
       else if(id == TALK_TEST_LESSER)
       {
-         return(sk->points < value);
+         return(compValue < value);
       }
       /* equal */
       else if(id == TALK_TEST_EQUAL)
       {
-         return(sk->points == value);
+         return(compValue == value);
       }
       /* diff */
       else if(id == TALK_TEST_DIFF)
       {
-         return(sk->points != value);
+         return(compValue != value);
       }
    }
 
@@ -440,6 +509,14 @@ int conversation::getActionID(string token, string fileName, int line)
    else if(token == TK_ACTION_RECEIVE_MONEY)
    {
       return(TALK_ACTION_RECEIVE_MONEY);
+   }
+   else if(token == TK_ACTION_CHANGE_OBJECT_STATE)
+   {
+      return(TALK_ACTION_CHANGE_OBJECT_STATE);
+   }
+   else if(token == TK_ACTION_RECEIVE_XP)
+   {
+      return(TALK_ACTION_RECEIVE_XP);
    }
 
    printError(fileName, "Unknow action!", line);
@@ -683,14 +760,17 @@ int conversation::loadFile(string name)
 
                   /* Parse Action Parameters */
                   if( (tact->id == TALK_ACTION_GO_TO_DIALOG) ||
-                        (tact->id == TALK_ACTION_DIALOG_INIT) )
+                      (tact->id == TALK_ACTION_DIALOG_INIT) ||
+                      (tact->id == TALK_ACTION_RECEIVE_MONEY) ||
+                      (tact->id == TALK_ACTION_CHANGE_OBJECT_STATE) ||
+                      (tact->id == TALK_ACTION_RECEIVE_XP))
                   {
-                     //get dialog number
+                     //get number
                      token = getString(position, buffer, separator);
                      tact->att = atoi(token.c_str());
                   }
                   else if( (tact->id == TALK_ACTION_ADD_MISSION) ||
-                        (tact->id == TALK_ACTION_COMPLETE_MISSION) )
+                           (tact->id == TALK_ACTION_COMPLETE_MISSION))
                   {
                      //get mission
                      token = getString(position, buffer, separator);
@@ -876,7 +956,7 @@ void conversation::proccessAction(int opcao, void* curEngine)
    }
 
    /* To the post check to resolve wich actions take (if or else actions) */
-   if(dlg->options[opcao].postTest.doTest(actualPC))
+   if(dlg->options[opcao].postTest.doTest(actualPC, owner))
    {
       /* Passed test, so if action */
       totalActions = dlg->options[opcao].totalIfActions;
@@ -894,10 +974,11 @@ void conversation::proccessAction(int opcao, void* curEngine)
    {
       switch(actions[i].id)
       {
+         /* Change Dialog */
          case TALK_ACTION_GO_TO_DIALOG:
-            /* change dialog */
             changeDialog(actions[i].att);
          break;
+         /* Init a Fight with the owner */
          case TALK_ACTION_INIT_FIGHT:
          {
             engine* eng = (engine*)curEngine;
@@ -906,6 +987,7 @@ void conversation::proccessAction(int opcao, void* curEngine)
             dlgWindow.close();
          }
          break;
+         /* Close the dialog */
          case TALK_ACTION_FINISH_DIALOG:
             dlgWindow.close();
          break;
@@ -915,18 +997,20 @@ void conversation::proccessAction(int opcao, void* curEngine)
          case TALK_ACTION_MOD_NPC:
             //TODO
          break;
+         /* Set new initial dialog */
          case TALK_ACTION_DIALOG_INIT:
          {
-            modState modif;
             setInitialDialog(actions[i].att);
          }
          break;
+         /* Add a misstion */
          case TALK_ACTION_ADD_MISSION:
          {
             missionsController missions;
             missions.addNewMission(actions[i].satt);
          }
          break;
+         /* Complete a mission */
          case TALK_ACTION_COMPLETE_MISSION:
          {
             missionsController missions;
@@ -946,6 +1030,7 @@ void conversation::proccessAction(int opcao, void* curEngine)
             }
          }
          break;
+         /* Give a Item */
          case TALK_ACTION_GIVE_ITEM:
          {
             /* Only give item if the owner is a character */
@@ -973,8 +1058,45 @@ void conversation::proccessAction(int opcao, void* curEngine)
             }
          }
          break;
+         /* Receive Money */
          case TALK_ACTION_RECEIVE_MONEY:
             //TODO
+         break;
+         /* Change Object State */
+         case TALK_ACTION_CHANGE_OBJECT_STATE:
+         {
+            /* Change the state */
+            object* obj = (object*)owner;
+            obj->setState(actions[i].att);
+            /* Tell ModState about the change */
+            modState modif;
+            modif.mapObjectAddAction(MODSTATE_ACTION_OBJECT_CHANGE_STATE,
+                                     obj->getFileName(), ownerMap,
+                                     obj->xPosition, obj->yPosition, 
+                                     obj->zPosition, obj->getState());
+         }
+         break;
+         /* Receive XP */
+         case TALK_ACTION_RECEIVE_XP:
+         {
+            /* At XP to the character */
+            actualPC->addXP(actions[i].att);
+
+            /* Set the Message */
+            char vstr[200];
+            sprintf(vstr, "%d XP", actions[i].att);
+
+            /* Put Message at game */
+            messageController msgController;
+            msgController.addMessage(actualPC->xPosition,
+                  actualPC->max[1]+actualPC->yPosition,
+                  actualPC->zPosition, vstr,
+                  0.94, 0.8, 0.0);
+
+            /* Put Message at Briefing */
+            briefing brief;
+            brief.addText(vstr, 251, 209, 12);
+         }
          break;
       }
    }
@@ -1029,7 +1151,7 @@ void conversation::changeDialog(int numDialog)
    {
       /* Only insert the option if it pass on preTest (and is not empty) */
       if( (!dlg->options[i].text.empty()) && 
-          (dlg->options[i].preTest.doTest(actualPC)) )
+          (dlg->options[i].preTest.doTest(actualPC, owner)) )
       {
          sprintf(conv, "%d - ", curOpt+1);
          text = conv + dlg->options[i].postTest.getTestName(actualPC) + 

@@ -127,6 +127,14 @@ class object: public thing
        * \return -> diceThing of the object */
       diceThing getDiceInfo();
 
+      /*! Set the object state
+       * \param st -> new state value */
+      void setState(int st);
+
+      /*! Get the object state
+       * \return -> current object state value */
+      int getState();
+
       /*! Get the next object on the list
        * \return -> pointer to the next */
       object* getNext();
@@ -154,7 +162,11 @@ class object: public thing
 
       model3d* model3D;     /**< Pointer to used 3D Model Maximun Quality */
       SDL_Surface* model2d; /**< Pointer to used 2D Model */
-      
+
+      int state;            /**< Object state. Its use is dependant of object. 
+                                 For example, at computers, it keeps the 
+                                 operational system installed. */
+
       string fileName;      /**< FileName of the Object */
       string model2dName;   /**< FileName of the 2D Model */
 

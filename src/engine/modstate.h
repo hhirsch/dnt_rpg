@@ -10,6 +10,7 @@
 
 #define MODSTATE_ACTION_OBJECT_REMOVE  0  /**< Removed object from map */
 #define MODSTATE_ACTION_OBJECT_ADD     1  /**< Added object to the map */
+#define MODSTATE_ACTION_OBJECT_CHANGE_STATE 2 /**< Changed Object State */
 
 #define MODSTATE_ACTION_CHARACTER_DEAD 3  /**< Killed Character on map */
 #define MODSTATE_ACTION_CHARACTER_MOVE 4  /**< Character moved to positon */
@@ -134,7 +135,16 @@ class mapObjectModAction: public modAction
       /*! Destructor */
       ~mapObjectModAction();
 
+      /*! Get the action value
+       * \return -> action value */
+      int getValue();
+
+      /*! Set the action value
+       * \param v -> new action value */
+      void setValue(int v);
+
    protected:
+       int value;   /**< Some Value Information (usually related to state)  */
 
 };
 
@@ -237,9 +247,12 @@ class modMap
        * \param target -> fileName of the object
        * \param mapFileName - name of the map file where action occurs
        * \param xPos -> x position
-       * \param zPos -> z position*/
+       * \param yPos -> y position
+       * \param zPos -> z position
+       * \param value -> some value related to the action */
       void mapObjectAddAction(int action, string target, string mapFileName,
-                              GLfloat xPos, GLfloat yPos, GLfloat zPos);
+                              GLfloat xPos, GLfloat yPos, GLfloat zPos,
+                              int value);
 
       /*! Add action to the list (or remove inverse action from)
        * \param act -> action type
@@ -357,9 +370,11 @@ class modState
        * \param mapFileName - name of the map file where action occurs
        * \param xPos -> x position
        * \param yPos -> y position 
-       * \param zPos -> z position*/
+       * \param zPos -> z position
+       * \param value -> some value related to the action */
       void mapObjectAddAction(int action, string target, string mapFileName,
-                              GLfloat xPos, GLfloat yPos, GLfloat zPos);
+                              GLfloat xPos, GLfloat yPos, GLfloat zPos,
+                              int value=0);
 
       /*! Add action to the list (or remove inverse action from)
        * \param act -> action type

@@ -145,6 +145,18 @@ int character::getLevel()
 }
 
 /*********************************************************************
+ *                             isAlignOf                             *
+ *********************************************************************/
+bool character::isAlignOf(string al)
+{
+   if(actualAlign)
+   {
+      return(actualAlign->strID.find(al) != string::npos);
+   }
+   return(false);
+}
+
+/*********************************************************************
  *                         getGeneralScript                          *
  *********************************************************************/
 void* character::getGeneralScript()

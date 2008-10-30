@@ -46,9 +46,10 @@ class talkTest
       bool set(string token, string t, string a);
 
       /*! Do the test with a character
-       * \param pc -> pointer to the character to test 
+       * \param pc -> pointer to the character to test
+       * \param owner -> the owner of the dialog (object or character)
        * \return -> true if test pass */
-      bool doTest(character* pc);
+      bool doTest(character* pc, thing* owner);
 
       /*! Get the test name (ie. if a skill, the skill name)
        * \param pc -> pointer to the character

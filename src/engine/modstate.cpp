@@ -186,6 +186,22 @@ mapObjectModAction::~mapObjectModAction()
 {
 }
 
+/************************************************************
+ *                          getValue                        *
+ ************************************************************/
+int mapObjectModAction::getValue()
+{
+   return(value);
+}
+
+/************************************************************
+ *                          setValue                        *
+ ************************************************************/
+void mapObjectModAction::setValue(int v)
+{
+   value = v;
+}
+
 ////////////////////////////////////////////////////////////////////////////
 //                                                                        //
 //                          mapTalkModAction                              //
@@ -488,24 +504,49 @@ void modMap::addAction(modAction* act)
  ************************************************************/
 void modMap::mapObjectAddAction(int action, string target, 
                                   string mapFileName, 
-                                  GLfloat xPos, GLfloat yPos, GLfloat zPos)
+                                  GLfloat xPos, GLfloat yPos, GLfloat zPos,
+                                  int value)
 {
-   if( (action != MODSTATE_ACTION_OBJECT_REMOVE) && 
-       (action != MODSTATE_ACTION_OBJECT_ADD) )
-   {
-      cerr << "Invalid modification object action: " <<  action << endl;
-   }
+   mapObjectModAction* n;
 
-   if(removeInverseObjectAction(action, target, mapFileName, xPos, yPos, zPos))
+   /* Object Add or Object Remove Actions */
+   if( (action == MODSTATE_ACTION_OBJECT_REMOVE) ||
+       (action == MODSTATE_ACTION_OBJECT_ADD) )
    {
-      /*! Add is similar to remove inverse, so it is added! */
-      return;
+      if(removeInverseObjectAction(action, target, mapFileName, 
+                                   xPos, yPos, zPos))
+      {
+         /*! Add is similar to remove inverse, so it is added! */
+         return;
+      }
+      else
+      {
+         n = new mapObjectModAction(action, target, mapFileName, 
+                                    xPos, yPos, zPos);
+         addAction(n);
+      }
    }
+   /* Change State Action */
+   else if(action == MODSTATE_ACTION_OBJECT_CHANGE_STATE)
+   {
+      /* search for already created one */
+      n = (mapObjectModAction*)search(action, target, xPos, yPos, zPos);
+
+      /* not found, so must create a new one */
+      if(n == NULL)
+      {
+         n = new mapObjectModAction(action, target, mapFileName, 
+                                    xPos, yPos, zPos);
+         addAction(n);
+      }
+
+      /* Define the new state :value */
+      n->setValue(value);
+   }
+   /* Invalid Action  */
    else
    {
-      mapObjectModAction* n;
-      n = new mapObjectModAction(action, target, mapFileName, xPos, yPos, zPos);
-      addAction(n);
+      cerr << "Invalid modification object action: " <<  action << endl;
    }
 }
 
@@ -735,15 +776,28 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs,
       if(tmpMobj->getMapFileName() == actualMap->getFileName())
       {
          tmpMobj->getPosition(x,y,z);
+         
+         /* Object Remove */
          if(tmpMobj->getAction() == MODSTATE_ACTION_OBJECT_REMOVE)
          {
             /* Get the object from the list */
             object* obj = objectsList::search(tmpMobj->getTarget(), x, y, z);
-            /* Remove it from the map */
-            actualMap->removeObject(obj);
-            /* And remove it from game! */
-            delete(obj);
+
+            if(obj)
+            {
+               /* Remove it from the map */
+               actualMap->removeObject(obj);
+               /* And remove it from game! */
+               delete(obj);
+            }
+            else
+            {
+               cerr << "Error: Unknow object: " << tmpMobj->getTarget() 
+                    << " to remove at modState" << endl;
+            }
          }
+
+         /* Object Add */
          else if(tmpMobj->getAction() == MODSTATE_ACTION_OBJECT_ADD)
          {
             object* obj = objectsList::search(tmpMobj->getTarget(),
@@ -759,6 +813,27 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs,
             actualMap->insertObject(x, actualMap->getHeight(x,z), z, 
                                     0, obj, 0);
          }
+
+         /* Object Change State */
+         else if(tmpMobj->getAction() == MODSTATE_ACTION_OBJECT_CHANGE_STATE)
+         {
+            /* Get the object from the list */
+            mapObjectModAction* act = (mapObjectModAction*)tmpMobj;
+            object* obj = objectsList::search(act->getTarget(), x, y, z);
+
+            if(obj)
+            {
+               /* Change its state */
+               obj->setState(act->getValue());
+            }
+            else
+            {
+               cerr << "Error: Unknow object: " << act->getTarget() 
+                    << " to change at modState" << endl;
+            }
+         }
+
+         /* Character Dead */
          else if(tmpMobj->getAction() == MODSTATE_ACTION_CHARACTER_DEAD)
          {
             /* Get The character Pointer */
@@ -784,10 +859,14 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs,
                }
             }
          }
+
+         /* Character Move */
          else if(tmpMobj->getAction() == MODSTATE_ACTION_CHARACTER_MOVE)
          {
             //TODO
          }
+
+         /* Talk Initial Dialog */
          else if(tmpMobj->getAction() == MODSTATE_TALK_ENTER_VALUE)
          {
             /* Get the character pointer */
@@ -798,6 +877,8 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs,
                ch->setInitialConversation(mTalk->getValue());
             }
          }
+
+         /* Inventory */
          else if(tmpMobj->getAction() == MODSTATE_INVENTORY)
          {
             /* Get the modified inventory */
@@ -809,6 +890,8 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs,
                mInv->flush(actualMap, ch->inventories, mdlList, wTypes);
             }
          }
+
+         /* Unknow */
          else
          {
             printf("Unknow saved action: %d, at %d element!\n", 
@@ -927,13 +1010,15 @@ modMap* modState::createModMap(string fileName)
  ************************************************************/
 void modState::mapObjectAddAction(int action, string target, 
                                   string mapFileName, 
-                                  GLfloat xPos, GLfloat yPos, GLfloat zPos)
+                                  GLfloat xPos, GLfloat yPos, GLfloat zPos,
+                                  int value)
 {
    modMap* mod = findModMap(mapFileName);
 
    if(mod != NULL)
    {
-      mod->mapObjectAddAction(action, target, mapFileName, xPos, yPos, zPos);
+      mod->mapObjectAddAction(action, target, mapFileName, 
+                              xPos, yPos, zPos, value);
    }
 }
 

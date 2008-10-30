@@ -61,6 +61,13 @@ class character: public aniModel
        * \return total level of the character */
       int getLevel();
 
+      /*! Verify if the character alignment is of type represented by al
+       * \param al -> string with align type
+       * \return -> true if the align string identifier have the string al
+       *            in it, false otherwise. 
+       * \note -> a common use is, for example: isAlignOf("FREE_SOFTWARE") */
+      bool isAlignOf(string al);
+
       /*! Define the image used as portrait
        * \param portraitFile -> file name of the image to use*/
       void definePortrait(string portraitFile);
