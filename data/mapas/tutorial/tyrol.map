@@ -5,14 +5,6 @@ PS mapas/tutorial/tyrol.map.par
 MUSICA music/musica13.ogg
 Outdoor: 1
 lake 4109.487,166.066,5302.500,2594.114:0.710,0.850,0.960,0.400
-o models/natural/fogueira/fogueira.dcc
-o models/natural/arvores/tree1/tree1.dcc
-o models/building/ruin_house3/ruin_house3.dcc
-o models/building/ruin_house2/ruin_house2.dcc
-o models/building/ruin_house1/ruin_house1.dcc
-o models/objetos/geral/barrel/barrel.dcc
-o models/junk/bloco1/bloco1.dcc
-o models/junk/madeira1/madeira1.dcc
 t texturas/floor_outdoor/sand.png texturas/floor_outdoor/sand.png 200 178 136
 t texturas/floor_outdoor/rock2.png texturas/floor_outdoor/rock2.png 154 105 72
 t texturas/floor_outdoor/rock.png texturas/floor_outdoor/rock.png 126 129 134

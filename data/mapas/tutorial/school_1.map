@@ -2,22 +2,6 @@ T 5X6
 # Made by DccNiTghtmare's MapEditor, 0.3
 light mapas/tutorial/school_1.map.lgh
 Outdoor: 0
-o models/objetos/icex/quadro/quadro.dcc
-o models/objetos/geral/sofa2/sofa2.dcc
-o models/objetos/geral/pc_chair/pc_chair.dcc
-o models/objetos/geral/computador/computador.dcc
-o weapons/definitions/dagger.wcc
-o models/objetos/icex/fallout_box/fallout_box.dcc
-o models/objetos/icex/snes/chrono/snes_chrono.dcc
-o models/objetos/itens/healkit/healkit.dcc
-o models/objetos/geral/gabinete/gabinete.dcc
-o models/objetos/geral/bookshelf/bookshelf.dcc
-o models/objetos/geral/escrivaninha/escrivaninha.dcc
-o models/objetos/icex/mesa_redonda/mesa_redonda.dcc
-o models/objetos/geral/refmachine/refmachine.dcc
-o models/objetos/icex/mesa_braco/mesa_braco.dcc
-o models/objetos/icex/lixo/lixo.dcc
-o models/objetos/geral/porta7/porta7.dcc
 t texturas/floor_indoor/mosaic2.png texturas/floor_indoor/mosaic2.png 35 35 36
 t texturas/floor_indoor/mosaic.png texturas/floor_indoor/mosaic.png 36 63 48
 t texturas/floor_indoor/steel2.png texturas/floor_indoor/steel2.png 47 9 7

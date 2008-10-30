@@ -1,8 +1,6 @@
 T 10X10
 # Made by DccNiTghtmare's MapEditor, v0.2
 Outdoor: 0
-o models/objetos/geral/porta5/porta5.dcc
-o models/objetos/geral/porta2/porta2.dcc
 t texturas/floor_indoor/tile1_1.png texturas/floor_indoor/tile1_1.png 248 248 252
 t texturas/floor_indoor/tile1_2.png texturas/floor_indoor/tile1_2.png 252 250 252
 t texturas/floor_indoor/wood.png texturas/floor_indoor/wood.png 102 57 29

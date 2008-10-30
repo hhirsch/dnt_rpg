@@ -4,38 +4,6 @@ npc mapas/tutorial/house1.map.npc
 MUSICA music/musica12.ogg
 light mapas/tutorial/house1.map.lgh
 Outdoor: 0
-o models/objetos/itens/healkit/healkit.dcc
-o models/objetos/geral/pia/pia.dcc
-o models/objetos/geral/calendar/calendar.dcc
-o models/objetos/icex/quadro/quadro.dcc
-o models/objetos/icex/snes/sf2/snes_sf2.dcc
-o models/objetos/icex/snes/mario/snes_mario.dcc
-o models/objetos/icex/snes/contra/snes_contra.dcc
-o models/objetos/icex/snes/snes.dcc
-o models/objetos/geral/tv42/tv42.dcc
-o models/objetos/geral/meuble/meuble.dcc
-o models/objetos/geral/pillow/pillow.dcc
-o models/objetos/geral/notebook/notebook.dcc
-o models/objetos/geral/letto/letto.dcc
-o models/objetos/icex/lixo/lixo.dcc
-o models/objetos/geral/porta5/porta5.dcc
-o models/objetos/geral/porta4/porta4.dcc
-o models/objetos/geral/fridge/fridge.dcc
-o models/objetos/geral/dinner_table/dinner_table.dcc
-o models/objetos/geral/dinner_chair/dinner_chair.dcc
-o models/objetos/banho/privada/privada.dcc
-o models/objetos/geral/wardrobe/wardrobe.dcc
-o models/objetos/geral/sofa/sofa.dcc
-o weapons/definitions/knife.wcc
-o models/objetos/geral/mala/mala.dcc
-o models/objetos/geral/guitarra/guitarra.dcc
-o models/objetos/banho/broom/broom.dcc
-o models/objetos/geral/rug/rug.dcc
-o weapons/definitions/scimitar.wcc
-o models/objetos/geral/et/et.dcc
-o models/objetos/geral/pc_table/pc_table.dcc
-o models/objetos/geral/pc_chair/pc_chair.dcc
-o models/objetos/banho/papel_higienico/papel_higienico.dcc
 t texturas/floor_indoor/stone.png texturas/floor_indoor/stone.png 28 28 28
 t texturas/floor_indoor/wood6.png texturas/floor_indoor/wood6.png 191 97 27
 t texturas/floor_indoor/wood5.png texturas/floor_indoor/wood5.png 94 47 31
