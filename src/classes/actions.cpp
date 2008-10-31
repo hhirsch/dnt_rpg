@@ -253,7 +253,7 @@ bool doHealOrAttack(thing& actor, thing& target,
          controller.addMessage(actor.xPosition,
                actor.yPosition+actor.max[1],
                actor.zPosition,gettext("Critical Heal!"),
-               0.06,0.04,0.56);
+               0.06,0.24,0.86);
       }
       else
       {
@@ -262,7 +262,7 @@ bool doHealOrAttack(thing& actor, thing& target,
          controller.addMessage(actor.xPosition,
                actor.yPosition+actor.max[1],
                actor.zPosition,gettext("Critical Hit!"),
-               0.54,0.0,0.0);
+               0.84,0.2,0.01);
       }
    }
    /* Show Damage */
