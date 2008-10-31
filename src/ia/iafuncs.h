@@ -159,6 +159,8 @@ using namespace std;
 #define IA_FIGHT_RUN_AWAY_FROM_BATTLE "runAwayFromBattle"
 /*! character getNearestEnemy(character dude) */
 #define IA_FIGHT_GET_NEAREST_ENEMY "getNearestEnemy"
+/*! bool canAttack() */
+#define IA_FIGHT_CAN_ATTACK "canAttack"
 
 ////////////////////////////////////////////////////
 //                Character Functions             //

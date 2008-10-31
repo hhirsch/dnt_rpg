@@ -218,6 +218,11 @@ class engine
        ***************************************************************/
       fightSystem* getFightSystem();
 
+      /*! Get the canAttack value
+       * \return -> true if the character acting in the turn can attack,
+       *            false otherwise. */
+      bool getCanAttack();
+
    private:
 
       /*!

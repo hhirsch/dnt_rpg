@@ -1414,12 +1414,25 @@ void engine::endTurn()
        ((SDL_GetTicks() - lastTurnTime) > 200) )
    {
       fightStatus = FIGHT_CONTINUE;
+      canAttack = true;
+      canMove = true;
    }
    else if( (engineMode == ENGINE_MODE_TURN_BATTLE) &&
             (fightStatus == FIGHT_NPC_TURN) )
    {
       fightStatus = FIGHT_CONTINUE;
+      canAttack = true;
+      canMove = true;
    }
+}
+
+/*********************************************************************
+ *                           getCanAttack                            *
+ *********************************************************************/
+bool engine::getCanAttack()
+{
+   //FIXME: set the canAttack for NPC's scripts!!!
+   return(canAttack);
 }
 
 /*********************************************************************

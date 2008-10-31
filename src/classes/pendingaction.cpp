@@ -304,12 +304,12 @@ pendingAction* pendingActionController::addAction(pendingAction* act,
          }
          else
          {
-            //FIXME: Move to a position not ON the target!
+            //FIXME: When can't reach the -10,-10, try another near position!
 
             /* Save the target value to move (to get changes of 
              *                                target position ) */
-            act->targetX = act->target->xPosition;
-            act->targetZ = act->target->zPosition;
+            act->targetX = act->target->xPosition - 10;
+            act->targetZ = act->target->zPosition - 10;
 
             /* It's a move to a target */
             act->actor->pathFind.findPath(act->actor,

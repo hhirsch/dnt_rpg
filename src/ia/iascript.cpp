@@ -1302,38 +1302,38 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    ////////////////////////////////////////////////////
 
 
-   /* fight enter */
-   else if(functionName == IA_FIGHT_ENTER)
+   /* void function() */
+   else if( (functionName == IA_FIGHT_ENTER) ||
+            (functionName == IA_FIGHT_EXIT) )
    {
-      /* syntax: void fightEnter() */
-      /* Enter the battle mode, with the character owner and
-       * the PC's characters. */
+     
       if(!var)
       {
-         characterOwner->setPsychoState(PSYCHO_HOSTILE);
-         eng->enterBattleMode(false);
+         /* syntax: void fightEnter() */
+         if(functionName == IA_FIGHT_ENTER)
+         {
+            characterOwner->setPsychoState(PSYCHO_HOSTILE);
+            eng->enterBattleMode(false);
+         }
+         /* syntax void fightExit() */
+         else if(functionName == IA_FIGHT_EXIT)
+         {
+            eng->exitBattleMode();
+         }
       }
       else
       {
-         cerr << "Error: " << IA_FIGHT_ENTER << " don't return any value!" 
+         cerr << "Error: " << functionName << " don't return any value!" 
               << " at " << strLine << " on script: " << fileName << endl;
       }
    }
 
-
-   /* fight_exit */
-   else if(functionName == IA_FIGHT_EXIT)
+   /* bool function() */
+   else if(functionName == IA_FIGHT_CAN_ATTACK)
    {
-      /* syntax void fightExit() */
-      if(!var)
-      {
-         eng->exitBattleMode();
-      }
-      else
-      {
-         cerr << "Error: " << IA_FIGHT_EXIT << " don't return any value!" 
-              << " at " << strLine << " on script: " << fileName << endl;
-      }
+      /* syntax bool canAttack() */
+      bool res = eng->getCanAttack();
+      assignValue(var, (bool*)&res, IA_TYPE_BOOL);
    }
 
    /* getNearestEnemy */
