@@ -114,8 +114,8 @@ void cursor::set(SDL_Surface* img)
                               (float)smallestPowerOfTwo(img->w);
    propY[CURSOR_USER_IMAGE] = (float)(img->h) / 
                               (float)smallestPowerOfTwo(img->h);
-   hotSpot[CURSOR_USER_IMAGE][0] = 15;
-   hotSpot[CURSOR_USER_IMAGE][1] = 15;
+   hotSpot[CURSOR_USER_IMAGE][0] = 0;
+   hotSpot[CURSOR_USER_IMAGE][1] = 0;
    currentCursor = CURSOR_USER_IMAGE;
 }
 
