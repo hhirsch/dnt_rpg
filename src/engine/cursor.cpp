@@ -36,6 +36,7 @@ void cursor::init()
    loadCursor(dir.getRealFile("cursors/Door.png"), CURSOR_DOOR);
    loadCursor(dir.getRealFile("cursors/forbidden.png"), CURSOR_FORBIDDEN);
    loadCursor(dir.getRealFile("cursors/walk_cont.png"), CURSOR_WALK_CONT);
+   loadCursor(dir.getRealFile("cursors/use.png"), CURSOR_USE);
    currentCursor = CURSOR_WALK;
 }
 

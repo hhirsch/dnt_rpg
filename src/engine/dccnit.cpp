@@ -1732,7 +1732,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                /* The Object Dialog Window Call */
                if(!sobj->obj->getConversationFile().empty())
                {
-                  cursors->set(CURSOR_TALK);
+                  cursors->set(CURSOR_USE);
                   if( (mButton & SDL_BUTTON(1)) && 
                       (rangeAction(activeCharacter->xPosition, 
                                    activeCharacter->zPosition,

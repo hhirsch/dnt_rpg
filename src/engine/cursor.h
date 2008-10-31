@@ -22,8 +22,9 @@ using namespace std;
 #define CURSOR_DOOR         7 /**< Door Mouse Cursor */
 #define CURSOR_FORBIDDEN    8 /**< Forbidden Mouse Cursor */
 #define CURSOR_WALK_CONT    9 /**< Continuous Walk Cursor */
-#define CURSOR_USER_IMAGE  10 /**< Any user image seted as cursor */
-#define CURSOR_TOTAL       11 /**< Total number of mouse cursors */
+#define CURSOR_USE         10 /**< Object Use */
+#define CURSOR_USER_IMAGE  11 /**< Any user image seted as cursor */
+#define CURSOR_TOTAL       12 /**< Total number of mouse cursors */
 
 /*! A mouse cursor class.*/
 class cursor
