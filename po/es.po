@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-10-28 13:22-0200\n"
+"POT-Creation-Date: 2008-10-31 16:33-0200\n"
 "PO-Revision-Date: 2008-07-22 19:40+0000\n"
 "Last-Translator: María \"tatica\" Leandro <tatadbb@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -65,7 +65,7 @@ msgstr "Propiedad Invalida"
 msgid "Not enought points to use!"
 msgstr "No tiene suficientes puntos para usarlo!"
 
-#: src/classes/mission.cpp:198 src/engine/dialog.cpp:942
+#: src/classes/mission.cpp:198 src/engine/dialog.cpp:1024
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr ""
@@ -79,7 +79,7 @@ msgstr ""
 msgid "Error while opening skills list: %s\n"
 msgstr "Error mientras se abría la lista de habilidades: %s\n"
 
-#: src/classes/skills.cpp:57 src/classes/skills.cpp:164
+#: src/classes/skills.cpp:57 src/classes/skills.cpp:171
 #, c-format
 msgid "Can't open skill file: %s \n"
 msgstr "No se puede abrir el archivo de habilidades: %s \n"
@@ -191,7 +191,7 @@ msgstr ""
 msgid "You Need to Assign All Attributes."
 msgstr "Necesitas Asignar todos los Atributos"
 
-#: src/engine/barterwindow.cpp:32 src/engine/dialog.cpp:845
+#: src/engine/barterwindow.cpp:32 src/engine/dialog.cpp:1213
 msgid "Barter"
 msgstr ""
 
@@ -305,7 +305,7 @@ msgid "Skills"
 msgstr ""
 
 #: src/engine/charwindow.cpp:226 src/engine/skillwindow.cpp:149
-#: src/gui/window.cpp:172
+#: src/gui/window.cpp:175
 msgid "Close"
 msgstr ""
 
@@ -381,56 +381,56 @@ msgstr "Clases de Habilidades"
 msgid "No Skills."
 msgstr "Sin Habilidades"
 
-#: src/engine/cursor.cpp:68
+#: src/engine/cursor.cpp:92
 #, c-format
 msgid "Can't load mouse cursor: %s\n"
 msgstr "No se puede cargar el cursor del ratón: %s\n"
 
-#: src/engine/dccnit.cpp:408
+#: src/engine/dccnit.cpp:409
 #, c-format
 msgid "Saving Current Map Modifications"
 msgstr ""
 
-#: src/engine/dccnit.cpp:452
+#: src/engine/dccnit.cpp:458
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Cargando Mapa: %s"
 
-#: src/engine/dccnit.cpp:509
+#: src/engine/dccnit.cpp:515
 #, c-format
 msgid "Ouch, can't load NPC's file: %s.\n"
 msgstr "Ups, No se pueden cargar los archivos NPC's: %s.\n"
 
-#: src/engine/dccnit.cpp:524
+#: src/engine/dccnit.cpp:530
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Cargando NPC: %s"
 
-#: src/engine/dccnit.cpp:549
+#: src/engine/dccnit.cpp:555
 msgid "Loading Character"
 msgstr "Cargando Caracter"
 
-#: src/engine/dccnit.cpp:555
+#: src/engine/dccnit.cpp:561
 msgid "Creating MiniMap"
 msgstr ""
 
-#: src/engine/dccnit.cpp:561
+#: src/engine/dccnit.cpp:567
 msgid "Putting GUI on Screen"
 msgstr "Colocando GUI en Pantalla"
 
-#: src/engine/dccnit.cpp:608
+#: src/engine/dccnit.cpp:614
 msgid "Loading Particles"
 msgstr "Cargando Particulas"
 
-#: src/engine/dccnit.cpp:638
+#: src/engine/dccnit.cpp:644
 msgid "Loading Changes..."
 msgstr "Cargando Cambios..."
 
-#: src/engine/dccnit.cpp:667
+#: src/engine/dccnit.cpp:672
 msgid "Done!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:759
+#: src/engine/dccnit.cpp:764
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -438,63 +438,63 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1287
+#: src/engine/dccnit.cpp:1292
 msgid "Too far away for the action!"
 msgstr "Muy lejos para la acción!"
 
-#: src/engine/dccnit.cpp:1325
+#: src/engine/dccnit.cpp:1334
 msgid "No NPCs in the area."
 msgstr "No hay NPC's en el área."
 
-#: src/engine/dccnit.cpp:1381
+#: src/engine/dccnit.cpp:1386
 msgid "Surprise Attack Turn."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1398
+#: src/engine/dccnit.cpp:1403
 msgid "No enemies in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1577 src/engine/dccnit.cpp:1999
+#: src/engine/dccnit.cpp:1575 src/engine/dccnit.cpp:2024
 #: src/engine/shortcutswindow.cpp:32
 msgid "Nothing"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1748
+#: src/engine/dccnit.cpp:1767
 #, c-format
 msgid "%s taken."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1770
+#: src/engine/dccnit.cpp:1789
 msgid "Inventory is full!"
 msgstr "Inventorio Lleno!"
 
-#: src/engine/dccnit.cpp:1804
+#: src/engine/dccnit.cpp:1824
 msgid "Door"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1932
+#: src/engine/dccnit.cpp:1957
 #, c-format
 msgid "%s attacks %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:3404
+#: src/engine/dccnit.cpp:3430
 msgid "Exit Battle Mode"
 msgstr ""
 
-#: src/engine/dialog.cpp:205
+#: src/engine/dialog.cpp:234
 msgid "Success"
 msgstr ""
 
-#: src/engine/dialog.cpp:205
+#: src/engine/dialog.cpp:234
 msgid "Failure"
 msgstr ""
 
-#: src/engine/dialog.cpp:799
+#: src/engine/dialog.cpp:870
 #, c-format
 msgid "Not found on dialog: %d\n"
 msgstr ""
 
-#: src/engine/dialog.cpp:843
+#: src/engine/dialog.cpp:1207
 msgid "Dialog"
 msgstr ""
 
@@ -805,7 +805,7 @@ msgid "End Character's Turn"
 msgstr ""
 
 #: src/engine/shortcutswindow.cpp:198
-msgid "Only Avaible on Battle Mode"
+msgid "Only Available on Battle Mode"
 msgstr ""
 
 #: src/engine/shortcutswindow.cpp:204
@@ -845,20 +845,20 @@ msgstr ""
 msgid "%s is dead!"
 msgstr "%s esta muerto!"
 
-#: src/fight/fightSystem.cpp:206
+#: src/fight/fightSystem.cpp:207
 #, c-format
 msgid "%s receive %d XP for killing"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:252 src/fight/fightSystem.cpp:271
+#: src/fight/fightSystem.cpp:253 src/fight/fightSystem.cpp:272
 msgid "New Round"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:257 src/fight/fightSystem.cpp:276
+#: src/fight/fightSystem.cpp:258 src/fight/fightSystem.cpp:277
 msgid "Error: No Characters!"
 msgstr "Error: No hay Caracteres!"
 
-#: src/fight/fightSystem.cpp:289 src/fight/fightSystem.cpp:295
+#: src/fight/fightSystem.cpp:290 src/fight/fightSystem.cpp:296
 #, c-format
 msgid "%s's turn."
 msgstr ""
@@ -898,7 +898,7 @@ msgstr ""
 msgid "Can't open font file: %s\n"
 msgstr "No se puede abrir archivo de fuentes: %s\n"
 
-#: src/gui/window.cpp:174
+#: src/gui/window.cpp:177
 msgid "Maximize"
 msgstr ""
 
@@ -2592,26 +2592,26 @@ msgstr ""
 msgid "Install Gentoo Linux"
 msgstr ""
 
-#: data/dialogs/objects/computers.dlg:84
-msgid "Operational System successfully installed."
-msgstr ""
-
-#: data/dialogs/objects/computers.dlg:88
-#: data/dialogs/objects/computers.dlg:102
+#: data/dialogs/objects/computers.dlg:78 data/dialogs/objects/computers.dlg:93
+#: data/dialogs/objects/computers.dlg:107
 msgid "Back"
 msgstr ""
 
-#: data/dialogs/objects/computers.dlg:98
+#: data/dialogs/objects/computers.dlg:89
+msgid "Operational System successfully installed."
+msgstr ""
+
+#: data/dialogs/objects/computers.dlg:103
 msgid "You have failed to install an Operational System"
 msgstr ""
 
-#: data/dialogs/objects/computers.dlg:112
+#: data/dialogs/objects/computers.dlg:117
 msgid ""
 "(You see a blue screen with some hexadecimal codes. There's nothing you can "
 "do unless restart the system.)"
 msgstr ""
 
-#: data/dialogs/objects/computers.dlg:116
+#: data/dialogs/objects/computers.dlg:121
 msgid "Restart"
 msgstr ""
 

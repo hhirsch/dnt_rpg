@@ -105,7 +105,6 @@ src/map/map.cpp
 src/map/maplights.cpp
 src/map/maproad.cpp
 src/map/mapfog.cpp
-src/map/mapobject.cpp
 
 #particle
 src/particle/grass.cpp
