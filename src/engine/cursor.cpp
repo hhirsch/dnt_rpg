@@ -54,7 +54,7 @@ void cursor::init()
    hotSpot[CURSOR_FORBIDDEN][0] = 15;
    hotSpot[CURSOR_FORBIDDEN][1] = 15;
    loadCursor(dir.getRealFile("cursors/walk_cont.png"), CURSOR_WALK_CONT);
-   hotSpot[CURSOR_WALK_CONT][0] = 16;
+   hotSpot[CURSOR_WALK_CONT][0] = 0;
    hotSpot[CURSOR_WALK_CONT][1] = 0;
    loadCursor(dir.getRealFile("cursors/use.png"), CURSOR_USE);
    hotSpot[CURSOR_USE][0] = 15;
