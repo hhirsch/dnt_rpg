@@ -195,7 +195,7 @@ int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode)
             }
             else
             {
-               thingTxt->setText(gettext("Only Avaible on Battle Mode"));
+               thingTxt->setText(gettext("Only Available on Battle Mode"));
             }
             return(SHORTCUTS_WINDOW_OTHER);
          }
