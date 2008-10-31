@@ -63,6 +63,7 @@ class cursor
       static float sizeY[CURSOR_TOTAL];    /**< Cursors Heights */
       static float propX[CURSOR_TOTAL];    /**< X Proportion */
       static float propY[CURSOR_TOTAL];    /**< Y Proportion */
+      static float hotSpot[CURSOR_TOTAL][2]; /**< HotSpot */
       static int currentCursor;            /**< Current Cursor Index */
       
       /*! Load Cursor file 
