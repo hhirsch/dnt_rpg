@@ -1893,7 +1893,7 @@ int engine::verifyMouseActions(Uint8 mButton)
       if(NPCs)
       {
          pers = (character*) NPCs->getFirst();
-         for(i = 0; ((i < PCs->getTotal()) && (!pronto)); i++)
+         for(i = 0; ((i < NPCs->getTotal()) && (!pronto)); i++)
          {
             GLfloat x[4],z[4];
             GLfloat min[3], max[3];
@@ -1939,10 +1939,10 @@ int engine::verifyMouseActions(Uint8 mButton)
                   shortcuts->setThing(pers->name); 
                   pronto = 1;
                }
-               else
-               /* Verify Attacks! */
-               if( (engineMode == ENGINE_MODE_TURN_BATTLE) && (canAttack) &&
-                   (fightStatus == FIGHT_PC_TURN) && (!fullMovePCAction))
+               /* Verify attacks */
+               else if( (engineMode == ENGINE_MODE_TURN_BATTLE) && 
+                        (canAttack) &&
+                        (fightStatus == FIGHT_PC_TURN) && (!fullMovePCAction))
                {
                   cursors->set(CURSOR_ATTACK);
                   shortcuts->setThing(pers->name); 
