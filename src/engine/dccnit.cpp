@@ -2904,7 +2904,8 @@ void engine::renderNoShadowThings()
                moveCircleZ+WALK_PER_MOVE_ACTION,
                0.2,20);
       }
-      if( (canAttack) || (fightStatus == FIGHT_NPC_TURN) )
+      if( (canAttack) && (!fullMovePCAction) && 
+          (fightStatus != FIGHT_NPC_TURN) )
       {
          /* Feat Range Circle */
          float rangeValue = activeCharacter->getActiveFeatRange()*METER_TO_DNT;
