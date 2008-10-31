@@ -1990,7 +1990,11 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
          }
          case 'd': /* Define Doors */
          {
+            /* Create and insert the door */
             doorAux = new(door);
+            insertDoor(doorAux);
+
+            /* Read info */
             fgets(buffer, sizeof(buffer),arq);
             sscanf(buffer,"%s %f,%f:%d",nome,&doorAux->x,&doorAux->z,
                                         &doorAux->orientation);
@@ -2005,9 +2009,6 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                doorAux->obj->zPosition = doorAux->z;
                doorAux->obj->orientation = doorAux->orientation;
             }
-            doorAux->status = 0;
-            doorAux->next = doors;
-            doors = doorAux;
             break;
          }
          case 'M': /* Define Music */
