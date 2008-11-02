@@ -2619,14 +2619,19 @@ int Map::save(string arquivo)
       fprintf(arq,"#Z: %d\n",z1);
       for(x1=0;x1<x;x1++)
       {
+          /* Square Definition */
           fprintf(arq,"p %d,%f,%f,%f,%f\n",
                   MapSquares[x1][z1].flags,
                   MapSquares[x1][z1].h1,
                   MapSquares[x1][z1].h2,
                   MapSquares[x1][z1].h3,
                   MapSquares[x1][z1].h4);
+          
+          /* Square Texture */
           fprintf(arq,"ut %s\n",
                   getTextureName(MapSquares[x1][z1].texture).c_str());
+          
+          /* Connection */
           if( MapSquares[x1][z1].mapConection.active )
           {
               fprintf(arq,"uc %f,%f,%f,%f:%f:%s\n",
@@ -2638,6 +2643,8 @@ int Map::save(string arquivo)
                       dir.getRelativeFile(
                               MapSquares[x1][z1].mapConection.mapName).c_str());
           }
+
+          /* Objects at Square */
           int aux;
           objSquare* obj = MapSquares[x1][z1].getFirstObject();
           for(aux=0; aux < MapSquares[x1][z1].getTotalObjects(); aux++)
@@ -2649,8 +2656,8 @@ int Map::save(string arquivo)
                fprintf(arq,"uo %s %d:%d,%d:%f,%f,%f:%f:%d\n",
                        dir.getRelativeFile(obj->obj->getFileName()).c_str(),
                        obj->draw, x2 + 1, z2 + 1,
-                       obj->obj->xPosition, obj->obj->yPosition, 
-                       obj->obj->zPosition, obj->obj->orientation, 
+                       obj->x, obj->y, 
+                       obj->z, obj->orientation, 
                        !obj->colision);
             }
             obj = obj->next;
