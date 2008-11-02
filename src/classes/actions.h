@@ -81,14 +81,13 @@ int numberActionType(string buffer);
  * \param diceInfo -> the action dice
  * \param conceptBonus -> pointer to the concept bonus (if one), or NULL
  * \param range -> action range
- * \param pSystem -> the particle system controller
  * \param heal -> true if is a heal/fix feat, 
  *                false if is an attack/break one.
  * \return \c true if the feat was used.
  ***************************************************************/
 bool doHealOrAttack(thing& actor, thing* target, 
                     diceThing diceInfo, factor* conceptBonus,
-                    int range, void* pSystem, bool heal);
+                    int range, bool heal);
 
 #endif
 

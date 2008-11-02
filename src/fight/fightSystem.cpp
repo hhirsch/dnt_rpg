@@ -8,12 +8,11 @@
 /***************************************************************
  *                       CONSTRUCTOR                           *
  ***************************************************************/
-fightSystem::fightSystem(partController* pSystem)
+fightSystem::fightSystem()
 {
    lastTime = 0;
    actualActor = NULL;
    pendingAnimation = true;
-   particleSystem = pSystem;
    mapFileName = "";
    brief = new briefing();
 }
@@ -361,8 +360,7 @@ void fightSystem::doNPCAction(character* pers)
    if( (pers->currentEnemy != NULL) && (attackFeat != -1))
    {
       pers->actualFeats.applyAttackAndBreakFeat(*pers,attackFeat,
-                                                pers->currentEnemy,
-                                                particleSystem);
+                                                pers->currentEnemy);
       verifyDeads();   
    }
 

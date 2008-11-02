@@ -113,14 +113,14 @@ engine::engine()
    showRange = false;
 
    /* Create the particle System */
-   particleController = new partController();
+   particleController.init();
 
    /* Create the message controller */
    msgController = new messageController();
    msgController->init();
 
    /* Create the fight system */
-   fight = new fightSystem(particleController);
+   fight = new fightSystem();
 
    /* Create the action Controller */
    actionControl = new pendingActionController();
@@ -170,11 +170,8 @@ engine::~engine()
    dlgWindow.close();
 
 
-   /* Delete particles */
-   if(particleController != NULL)
-   {
-      delete(particleController);
-   }
+   /* Finish particles */
+   particleController.finish();
 
    /* Close option */
    delete(option);
@@ -615,15 +612,15 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    progress->defineActualHealth(10);
    if(!actualMap->getParticlesFileName().empty())
    {
-       particleController->loadFromFile(actualMap->getParticlesFileName());
+       particleController.loadFromFile(actualMap->getParticlesFileName());
        if(option->getEnableParticles())
        {
-          particleController->stabilizeAll();
+          particleController.stabilizeAll();
        }
    }
    else
    {
-      particleController->deleteAll();
+      particleController.deleteAll();
    }
    
 
@@ -662,7 +659,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    actualMap->flushSounds();
 
    /* Define Map */
-   particleController->setActualMap(actualMap, &colisionDetect);
+   particleController.setActualMap(actualMap, &colisionDetect);
    colisionDetect.defineMap(actualMap, NPCs, PCs);
    actionControl->setCharacterLists(NPCs, PCs);
    fight->setMap(actualMap->getFileName());
@@ -1978,8 +1975,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                      canAttack = !activeCharacter->actualFeats.
                                                    applyAttackAndBreakFeat(
                                                           *activeCharacter,
-                                                          attackFeat, pers, 
-                                                          particleController);
+                                                          attackFeat, pers);
                      fight->verifyDeads();
 
                      if( pers->getPsychoState() != PSYCHO_HOSTILE)
@@ -2244,7 +2240,7 @@ int engine::treatIO(SDL_Surface *screen)
          lastKeyb = time;
          if(!effect)
          {
-            effect = (part2*)particleController->addParticle(PART_FIRE,
+            effect = (part2*)particleController.addParticle(PART_FIRE,
                   activeCharacter->xPosition,0,
                   activeCharacter->zPosition,
                   "particles/effect1.par");
@@ -2255,7 +2251,7 @@ int engine::treatIO(SDL_Surface *screen)
          }
          else
          {
-            particleController->removeParticle(PART_FIRE, effect);
+            particleController.removeParticle(PART_FIRE, effect);
             effect = NULL;
          }
       }
@@ -2265,7 +2261,7 @@ int engine::treatIO(SDL_Surface *screen)
       {
          lastKey = SDLK_t;
          lastKeyb = time;
-         particleController->addParticle(PART_METEOR,
+         particleController.addParticle(PART_METEOR,
                activeCharacter->xPosition,
                MAX_HEIGHT+100,
                activeCharacter->zPosition,
@@ -2284,7 +2280,7 @@ int engine::treatIO(SDL_Surface *screen)
          lastKey = SDLK_u;
          GLfloat incZ = -cos(deg2Rad(activeCharacter->orientation));
          GLfloat incX = -sin(deg2Rad(activeCharacter->orientation));
-         particleController->addParticle(PART_METEOR,
+         particleController.addParticle(PART_METEOR,
                activeCharacter->xPosition,
                activeCharacter->yPosition + 15,
                activeCharacter->zPosition,
@@ -2300,7 +2296,7 @@ int engine::treatIO(SDL_Surface *screen)
       {
          lastKey = SDLK_l;
          lastKeyb = time;
-         particleController->addParticle(PART_LIGHTNING,
+         particleController.addParticle(PART_LIGHTNING,
                activeCharacter->xPosition,250,
                activeCharacter->zPosition,
                "particles/lightning1.par");
@@ -2575,7 +2571,7 @@ int engine::treatIO(SDL_Surface *screen)
       {
          lastFPS = time;
          shortcuts->setFPS(actualFPS);
-         shortcuts->setParticlesNumber(particleController->numParticles());
+         shortcuts->setParticlesNumber(particleController.numParticles());
       }
       
       /* Verify Sounds FIXME -> for npc sounds! */
@@ -3000,7 +2996,7 @@ void engine::renderNoShadowThings()
    if(option->getEnableParticles())
    {
       glPushMatrix();
-         particleController->updateAll(activeCharacter->xPosition,
+         particleController.updateAll(activeCharacter->xPosition,
                                    activeCharacter->yPosition,
                                    activeCharacter->zPosition, 
                                    visibleMatrix, option->getEnableGrass());

@@ -409,10 +409,10 @@ class engine
       skills* skillsList;          /**< List of Skills */
       weaponTypes* weaponsTypes;   /**< List of Types of Weapons */
 
-      messageController* msgController;/**< The message controller */
-      missionsController* missions;    /**< The missions controller */
+      messageController* msgController;   /**< The message controller */
+      missionsController* missions;       /**< The missions controller */
+      partController particleController;  /**< The paticle controller */
 
-      partController* particleController;/**< The Particle System Controller */
       GLfloat seconds;             /**< Seconds from last actualization */
       
       int imgNumber;               /**< Used on exporting images to make video*/

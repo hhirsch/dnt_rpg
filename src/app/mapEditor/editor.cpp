@@ -14,6 +14,7 @@ editor::editor()
    map = NULL;
    NPCs = NULL;
    particleSystem = new partController();
+   particleSystem->init();
    features = new featsList(dir.getRealFile("feats/"),
                             dir.getRealFile("feats/feats.ftl"));
 
@@ -71,6 +72,7 @@ editor::~editor()
    delete(gameSky);
    if(particleSystem != NULL)
    {
+      particleSystem->finish();
       delete(particleSystem);
    }
    if(NPCs != NULL)

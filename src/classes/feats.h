@@ -141,24 +141,20 @@ class feats
        * \param attacker -> thing that will attack
        * \param featNumber -> Number of Feat on List
        * \param target -> target to use the Feat
-       * \param pSystem -> the particle system controller
        * \return \c true if the feat was used.
        ***************************************************************/
       bool applyAttackAndBreakFeat(thing& attacker, int featNumber, 
-                                   thing* target,
-                                   void* pSystem);
+                                   thing* target);
       /*!
        **************************************************************** 
        * Apply a heal or fix feat.
        * \param attacker -> thing that will attack
        * \param featNumber -> Number of Feat on List
        * \param target -> target to use the Feat
-       * \param pSystem -> the particle system controller
        * \return \c true if the feat was used.
        ***************************************************************/
       bool applyHealAndFixFeat(thing& attacker, int featNumber, 
-                               thing* target,
-                               void* pSystem);
+                               thing* target);
       /*!
        **************************************************************** 
        * Apply a psycho feat.
@@ -254,14 +250,12 @@ class feats
        * \param attacker -> thing that will attack
        * \param featNumber -> Number of Feat on List
        * \param target -> target to use the Feat
-       * \param pSystem -> the particle system controller
        * \param heal -> true if is a heal/fix feat, 
        *                false if is an attack/break one.
        * \return \c true if the feat was used.
        ***************************************************************/
        bool applyHealOrAttackFeat(thing& actor, int featNumber, 
-                                  thing* target, 
-                                  void* pSystem, bool heal);
+                                  thing* target, bool heal);
 };
 
 /*! List of All Feats on Game */

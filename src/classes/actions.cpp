@@ -75,8 +75,9 @@ int numberActionType(string buffer)
  ***************************************************************/
 bool doHealOrAttack(thing& actor, thing* target, 
                     diceThing diceInfo, factor* conceptBonus,
-                    int range, void* pSystem, bool heal)
+                    int range, bool heal)
 {
+   partController pSystem;
    int diceValue;
    int criticalRoll = -1;
    int damage = 0;
@@ -301,16 +302,11 @@ bool doHealOrAttack(thing& actor, thing* target,
    else
    {
       /* Add Blood */
-      if(pSystem)
-      {
-         GLfloat cs = cos(deg2Rad(target->orientation));
-         GLfloat sn = sin(deg2Rad(target->orientation));
-         partController* ps = (partController*)pSystem;
-         ps->addParticle(PART_BLOOD, target->xPosition - (sn*2),
-                         target->yPosition + target->bloodPosition,
-                         target->zPosition - (cs*2), 
-                         target->bloodFileName);
-      }
+      GLfloat cs = cos(deg2Rad(target->orientation));
+      GLfloat sn = sin(deg2Rad(target->orientation));
+      pSystem.addParticle(PART_BLOOD, target->xPosition - (sn*2),
+                          target->yPosition + target->bloodPosition,
+                          target->zPosition - (cs*2), target->bloodFileName);
    }
 
    return(true);

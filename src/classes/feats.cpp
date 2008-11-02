@@ -113,8 +113,7 @@ void feats::useFeat(int featNumber)
  *                   applyHealOrAttackFeat                     *
  ***************************************************************/
 bool feats::applyHealOrAttackFeat(thing& actor, int featNumber, 
-                                  thing* target, 
-                                  void* pSystem, bool heal)
+                                  thing* target, bool heal)
 {
    char texto[255];
    briefing brief;
@@ -139,7 +138,7 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
                             m_feats[featNumber].diceInfo, 
                             &m_feats[featNumber].conceptBonus,
                             m_feats[featNumber].range,
-                            pSystem, heal));
+                            heal));
    }
 
    /* Can't use due to points! */
@@ -151,11 +150,9 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
  *                   applyHealAndFixFeat                       *
  ***************************************************************/
 bool feats::applyHealAndFixFeat(thing& attacker, int featNumber, 
-                                thing* target, 
-                                void* pSystem)
+                                thing* target)
 {
-   return(applyHealOrAttackFeat(attacker, featNumber, target,
-                                pSystem, true));
+   return(applyHealOrAttackFeat(attacker, featNumber, target, true));
 }
 
 /***************************************************************
@@ -183,11 +180,9 @@ bool feats::applyInvocationFeat(thing& attacker, int featNumber,
  *                 applyAttackAndBreakFeat                     *
  ***************************************************************/
 bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber, 
-                                    thing* target,
-                                    void* pSystem)
+                                    thing* target)
 {
-   return(applyHealOrAttackFeat(attacker, featNumber, target,
-                                pSystem, false));
+   return(applyHealOrAttackFeat(attacker, featNumber, target, false));
 }
 
 /***************************************************************

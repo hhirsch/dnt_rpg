@@ -33,9 +33,8 @@
 class fightSystem
 {
    public:
-     /*! Constructor 
-      * \param pSystem -> the particle system controller */
-     fightSystem(partController* pSystem);
+     /*! Constructor */ 
+     fightSystem();
      /*! Destructor */
      ~fightSystem();
   
@@ -124,7 +123,6 @@ class fightSystem
      Uint32 lastTime;            /**< Last time of some animation */
      character* actualActor;         /**< Actual Character Acting */
      bool pendingAnimation;     /**< If some animation is pending */
-     partController* particleSystem; /**< The particle system control */
      string mapFileName;        /**< Current Openned Map filename */
      briefing* brief;                           /**< The briefing */
 

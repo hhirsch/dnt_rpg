@@ -556,7 +556,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                         healFactor.type = MOD_TYPE_SKILL;
                         doHealOrAttack(*owner, target, 
                                        activeObject->getDiceInfo(),
-                                       &healFactor, 20, NULL, true);
+                                       &healFactor, 20, true);
 
                         /* And discard the object */
                         inventories->removeFromInventory(objX,objY, 

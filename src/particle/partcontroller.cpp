@@ -7,9 +7,9 @@
 #include "../etc/extensions.h"
 
 /**********************************************************************
- *                             Constructor                            *
+ *                              init                                  *
  **********************************************************************/
-partController::partController()
+void partController::init()
 {
    waterfall = new particleList();
    fire = new particleList();
@@ -24,9 +24,9 @@ partController::partController()
 }
 
 /**********************************************************************
- *                              Destructor                            *
+ *                               finish                               *
  **********************************************************************/
-partController::~partController()
+void partController::finish()
 {
    deleteAll();
    delete(waterfall);
@@ -798,4 +798,19 @@ void partController::saveToFile(string fileName)
    
    fclose(file);
 }
+
+/**********************************************************************
+ *                          static members                            *
+ **********************************************************************/
+particleList* partController::waterfall = NULL;
+particleList* partController::fire = NULL;
+particleList* partController::waterSurface = NULL;
+particleList* partController::smoke = NULL;
+particleList* partController::blood = NULL;
+particleList* partController::lightning = NULL;
+particleList* partController::snow = NULL;
+particleList* partController::grassParticles = NULL;
+particleList* partController::meteorParticles = NULL;
+collision* partController::colDetect = NULL;
+
 

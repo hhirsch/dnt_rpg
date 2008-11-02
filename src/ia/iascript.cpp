@@ -1272,7 +1272,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
                //TODO verify if is an attack and break before call!
                characterOwner->actualFeats.applyAttackAndBreakFeat(
                                                         *characterOwner,
-                                                        featId, dude, NULL);
+                                                        featId, dude);
             }
          }
       }
