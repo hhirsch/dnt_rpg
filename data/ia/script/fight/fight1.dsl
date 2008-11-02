@@ -17,21 +17,21 @@ script()
       end
    end
 
-   if(canAttack)
+   if(canAttack())
       character dude
       dude = getNearestEnemy(SELF_CHARACTER)
       if(!characterAtRange(dude))
          moveToCharacter(SELF_CHARACTER, dude)
       end
 
-      if(canAttack)
+      if(canAttack())
          feat at
          at = getRandomAttackFeat()
          featUseAtCharacter(at, dude)
       end
    end
 
-   if(canMove)
+   if(canMove())
       dude = getNearestEnemy(SELF_CHARACTER)
       if(!characterAtRange(dude))
          moveToCharacter(SELF_CHARACTER, dude)
