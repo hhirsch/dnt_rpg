@@ -39,7 +39,7 @@ syn keyword dntFunction       skillPoints attModifier
 syn keyword dntFunction       combatEnter getNearestEnemy
 syn keyword dntFunction       getNPCByName
 syn keyword dntFunction       getPsycho setPsycho getActualLife getMaxLife
-syn keyword dntFunction       characterAtRange
+syn keyword dntFunction       characterAtRange canAttack
 syn keyword dntFunction       inventoryHave
 syn keyword dntFunction       dialogSetInitial
 
