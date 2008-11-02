@@ -86,7 +86,7 @@ int numberActionType(string buffer);
  *                false if is an attack/break one.
  * \return \c true if the feat was used.
  ***************************************************************/
-bool doHealOrAttack(thing& actor, thing& target, 
+bool doHealOrAttack(thing& actor, thing* target, 
                     diceThing diceInfo, factor* conceptBonus,
                     int range, void* pSystem, bool heal);
 

@@ -34,9 +34,8 @@ class fightSystem
 {
    public:
      /*! Constructor 
-      * \param controller -> the world messages controller
       * \param pSystem -> the particle system controller */
-     fightSystem(messageController* controller, partController* pSystem);
+     fightSystem(partController* pSystem);
      /*! Destructor */
      ~fightSystem();
   
@@ -125,7 +124,6 @@ class fightSystem
      Uint32 lastTime;            /**< Last time of some animation */
      character* actualActor;         /**< Actual Character Acting */
      bool pendingAnimation;     /**< If some animation is pending */
-     messageController* msgController; /**< World message control */
      partController* particleSystem; /**< The particle system control */
      string mapFileName;        /**< Current Openned Map filename */
      briefing* brief;                           /**< The briefing */
@@ -149,7 +147,7 @@ class fightSystem
      * \param target -> Pointer to Character that will receive feat
      * \return feat number to use.
      ***************************************************************/
-     int getNPCAttackFeat(character* pers, character* target);
+     int getNPCAttackFeat(character* pers, thing* target);
      /*!
      *************************************************************** 
      * Do, if wanted, NPC movimentation  

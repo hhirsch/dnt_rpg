@@ -50,6 +50,8 @@ class thing
       int age;                /**< Thing's Age */
       string name;              /**< Character's name */
 
+      thing* currentEnemy;    /**< Pointer to current fight enemy (target) */
+
       float cr;               /**< The Challenge Rating */
       float xpPercent;        /**< The percentual Left of XP to give */
       float cost;             /**< Cost Value */

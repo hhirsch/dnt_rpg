@@ -37,7 +37,6 @@ character::character(featsList* ft)
    }
    actualRace = NULL;
    actualAlign = NULL;
-   actualEnemy = NULL;
    portraitImage = NULL;
    conversationFile = "";
    conv = NULL;

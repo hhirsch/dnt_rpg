@@ -113,8 +113,7 @@ void feats::useFeat(int featNumber)
  *                   applyHealOrAttackFeat                     *
  ***************************************************************/
 bool feats::applyHealOrAttackFeat(thing& actor, int featNumber, 
-                                  thing& target, 
-                                  messageController* controller,
+                                  thing* target, 
                                   void* pSystem, bool heal)
 {
    char texto[255];
@@ -152,21 +151,18 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
  *                   applyHealAndFixFeat                       *
  ***************************************************************/
 bool feats::applyHealAndFixFeat(thing& attacker, int featNumber, 
-                                thing& target, 
-                                messageController* controller,
+                                thing* target, 
                                 void* pSystem)
 {
    return(applyHealOrAttackFeat(attacker, featNumber, target,
-                                controller, pSystem,
-                                true));
+                                pSystem, true));
 }
 
 /***************************************************************
  *                     applyPsychoFeat                         *
  ***************************************************************/
 bool feats::applyPsychoFeat(thing& attacker, int featNumber, 
-                            thing& target,
-                            messageController* controller)
+                            thing* target)
 {
    //TODO
    return(false);
@@ -176,8 +172,7 @@ bool feats::applyPsychoFeat(thing& attacker, int featNumber,
  *                   applyInvocationFeat                       *
  ***************************************************************/
 bool feats::applyInvocationFeat(thing& attacker, int featNumber, 
-                                thing& target,
-                                messageController* controller)
+                                thing* target)
 {
    //TODO
    return(false);
@@ -188,13 +183,11 @@ bool feats::applyInvocationFeat(thing& attacker, int featNumber,
  *                 applyAttackAndBreakFeat                     *
  ***************************************************************/
 bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber, 
-                                    thing& target,
-                                    messageController* controller,
+                                    thing* target,
                                     void* pSystem)
 {
    return(applyHealOrAttackFeat(attacker, featNumber, target,
-                                controller, pSystem,
-                                false));
+                                pSystem, false));
 }
 
 /***************************************************************

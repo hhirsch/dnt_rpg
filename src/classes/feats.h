@@ -141,13 +141,11 @@ class feats
        * \param attacker -> thing that will attack
        * \param featNumber -> Number of Feat on List
        * \param target -> target to use the Feat
-       * \param controller -> the world message controller
        * \param pSystem -> the particle system controller
        * \return \c true if the feat was used.
        ***************************************************************/
       bool applyAttackAndBreakFeat(thing& attacker, int featNumber, 
-                                   thing& target,
-                                   messageController* controller,
+                                   thing* target,
                                    void* pSystem);
       /*!
        **************************************************************** 
@@ -155,13 +153,11 @@ class feats
        * \param attacker -> thing that will attack
        * \param featNumber -> Number of Feat on List
        * \param target -> target to use the Feat
-       * \param controller -> the world message controller
        * \param pSystem -> the particle system controller
        * \return \c true if the feat was used.
        ***************************************************************/
       bool applyHealAndFixFeat(thing& attacker, int featNumber, 
-                               thing& target,
-                               messageController* controller,
+                               thing* target,
                                void* pSystem);
       /*!
        **************************************************************** 
@@ -169,24 +165,20 @@ class feats
        * \param attacker -> thing that will attack
        * \param featNumber -> Number of Feat on List
        * \param target -> target to use the Feat
-       * \param controller -> the world message controller
        * \return \c true if the feat was used.
        ***************************************************************/
       bool applyPsychoFeat(thing& attacker, int featNumber, 
-                           thing& target,
-                           messageController* controller);
+                           thing* target);
       /*!
        **************************************************************** 
        * Apply an invocation feat.
        * \param attacker -> thing that will attack
        * \param featNumber -> Number of Feat on List
        * \param target -> target to use the Feat
-       * \param controller -> the world message controller
        * \return \c true if the feat was used.
        ***************************************************************/
       bool applyInvocationFeat(thing& attacker, int featNumber, 
-                               thing& target,
-                               messageController* controller);
+                               thing* target);
 
       /*!
        **************************************************************** 
@@ -262,15 +254,13 @@ class feats
        * \param attacker -> thing that will attack
        * \param featNumber -> Number of Feat on List
        * \param target -> target to use the Feat
-       * \param controller -> the world message controller
        * \param pSystem -> the particle system controller
        * \param heal -> true if is a heal/fix feat, 
        *                false if is an attack/break one.
        * \return \c true if the feat was used.
        ***************************************************************/
        bool applyHealOrAttackFeat(thing& actor, int featNumber, 
-                                  thing& target, 
-                                  messageController* controller,
+                                  thing* target, 
                                   void* pSystem, bool heal);
 };
 

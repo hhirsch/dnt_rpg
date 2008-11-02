@@ -1114,23 +1114,23 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    //                 Feats Functions                //
    ////////////////////////////////////////////////////
 
-   /* int function(string featID) */
+   /* int function(int featID) */
    else if( (functionName == IA_FEAT_ACTUAL_QUANTITY) ||
             (functionName == IA_FEAT_COST) ||
             (functionName == IA_FEAT_QUANTITY_PER_DAY) )
    {
-      string featID = "";
+      int featID = -1;
       feat* ft = NULL;
 
       /* Get feat */
-      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
+      iv = getParameter(token, strLine, IA_TYPE_INT, pos);
       if(iv)
       {
-         featID = *(string*)iv->value;
+         featID = *(int*)iv->value;
          if(characterOwner)
          {
             /* Get really the feat */
-            ft = characterOwner->actualFeats.featByString(featID);
+            ft = characterOwner->actualFeats.featByNumber(featID);
          }
          else
          {
@@ -1169,63 +1169,121 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       }
    }
 
-   /* string function() */
+   /* int function(character target) */
    else if( (functionName == IA_FEAT_GET_RANDOM_ATTACK) ||
             (functionName == IA_FEAT_GET_POWERFULL_ATTACK) ||
             (functionName == IA_FEAT_GET_RANDOM_HEAL) ||
             (functionName == IA_FEAT_GET_POWERFULL_HEAL) )
    {
-      string res = "";
-
       if(characterOwner)
       {
+         character* dude = NULL;
          int ft = -1;
-         feat* ftp = NULL;
 
-         /* Syntax: string getRandomAttackFeat() */
-         if(functionName == IA_FEAT_GET_RANDOM_ATTACK)
+         /* Get character */
+         iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
+         if(iv != NULL)
          {
-            ft = characterOwner->actualFeats.getRandomNPCAttackFeat(
-                                                   characterOwner,
-                                                   characterOwner->actualEnemy);
-         }
-         /* Syntax: string getPowerfullAttackFeat() */
-         else if(functionName == IA_FEAT_GET_POWERFULL_ATTACK)
-         {
-            ft = characterOwner->actualFeats.getPowerfullAttackFeat(
-                                                  characterOwner,
-                                                  characterOwner->actualEnemy);
-         }
-         /* Syntax: string getRandomHealFeat() */
-         else if(functionName == IA_FEAT_GET_RANDOM_HEAL)
-         {
-            ft = characterOwner->actualFeats.getRandomHealFeat(characterOwner);
-         }
-         /* Syntax: string getPowerfullHealFeat() */
-         else if(functionName == IA_FEAT_GET_POWERFULL_HEAL)
-         {
-            ft=characterOwner->actualFeats.getPowerfullHealFeat(characterOwner);
-         }
-
-         /* Get the feat name */
-         if(ft != -1)
-         {
-            ftp = characterOwner->actualFeats.featByNumber(ft);
-            if(ftp)
+            dude = (character*)iv->value;
+            if(isFunction(token))
             {
-               res = ftp->idString;
+               delete(iv);
             }
+         }
+
+         if(dude != NULL)
+         {
+            /* Syntax: int getRandomAttackFeat() */
+            if(functionName == IA_FEAT_GET_RANDOM_ATTACK)
+            {
+               ft = characterOwner->actualFeats.getRandomNPCAttackFeat(
+                                                           characterOwner,dude);
+            }
+            /* Syntax: int getPowerfullAttackFeat() */
+            else if(functionName == IA_FEAT_GET_POWERFULL_ATTACK)
+            {
+               ft = characterOwner->actualFeats.getPowerfullAttackFeat(
+                                                           characterOwner,dude);
+            }
+            /* Syntax: int getRandomHealFeat() */
+            else if(functionName == IA_FEAT_GET_RANDOM_HEAL)
+            {
+               ft = characterOwner->actualFeats.getRandomHealFeat(
+                                                                characterOwner);
+            }
+            /* Syntax: int getPowerfullHealFeat() */
+            else if(functionName == IA_FEAT_GET_POWERFULL_HEAL)
+            {
+               ft=characterOwner->actualFeats.getPowerfullHealFeat(
+                                                                characterOwner);
+            }
+
+            /* Assign value */
+            if(ft != -1)
+            {
+               assignValue(var, (void*)&ft, IA_TYPE_INT);
+            }
+         }
+         else
+         {
+            cerr << "Error: Tried to access a NULL character at line " 
+                 << actualLine << " of the script: " << fileName << endl;
+         }
+      }
+   }
+
+   /* void function(id, character) */
+   else if(functionName == IA_FEAT_USE_AT_CHARACTER)
+   {
+      character* dude = NULL;
+      int featId = -1;
+
+      /* Get feat */
+      iv = getParameter(token, strLine, IA_TYPE_INT, pos);
+      if(iv != NULL)
+      {
+         featId = (*(int*)iv->value);
+         if(isFunction(token))
+         {
+            delete(iv);
          }
       }
 
-      /* Assign the result */
-      assignValue(var, (void*)&res, IA_TYPE_STRING);
+      /* Get character */
+      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
+      if(iv != NULL)
+      {
+         dude = (character*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      /* call the function */
+      if(dude != NULL)
+      {
+         /* Get the feat number  */
+         if(!featId != -1)
+         {
+            if(characterOwner)
+            {
+               /* Syntax void setPsycho(character c, int psycho) */
+               //TODO verify if is an attack and break before call!
+               characterOwner->actualFeats.applyAttackAndBreakFeat(
+                                                        *characterOwner,
+                                                        featId, dude, NULL);
+            }
+         }
+      }
+      else
+      {
+         cerr << "Error: Tried to access a NULL character at line " 
+                 << actualLine << " of the script: " << fileName << endl;
+      }
    }
 
-   else if(functionName == IA_FEAT_USE_AT_CHARACTER)
-   {
-      //TODO
-   }
+   /* void function(string, object) */
    else if(functionName == IA_FEAT_USE_AT_OBJECT)
    {
       //TODO

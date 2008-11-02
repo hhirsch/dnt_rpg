@@ -554,7 +554,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                         factor healFactor;
                         healFactor.id = "HEAL";
                         healFactor.type = MOD_TYPE_SKILL;
-                        doHealOrAttack(*owner, *target, 
+                        doHealOrAttack(*owner, target, 
                                        activeObject->getDiceInfo(),
                                        &healFactor, 20, NULL, true);
 

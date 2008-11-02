@@ -73,7 +73,7 @@ int numberActionType(string buffer)
 /***************************************************************
  *                       doHealOrAttack                        *
  ***************************************************************/
-bool doHealOrAttack(thing& actor, thing& target, 
+bool doHealOrAttack(thing& actor, thing* target, 
                     diceThing diceInfo, factor* conceptBonus,
                     int range, void* pSystem, bool heal)
 {
@@ -90,22 +90,33 @@ bool doHealOrAttack(thing& actor, thing& target,
    briefing brief;
    messageController controller;
 
+   /* Define Actor orientation
+    * FIXME -> call rotate animation! */
+   actor.orientation = getAngle(actor.xPosition, actor.zPosition,
+                                target->xPosition, target->zPosition);
+
+   /* Define Actor target to the current */
+   actor.currentEnemy = target;
+
+   /* define its status to hostile */
+   target->setPsychoState(PSYCHO_HOSTILE);
+
    /* Show try brief */
    if(!heal)
    {
       sprintf(texto, gettext("%s try to attack %s"), 
-                     actor.name.c_str(), target.name.c_str());
+                     actor.name.c_str(), target->name.c_str());
    }
    else
    {
       sprintf(texto, gettext("%s try to heal %s"), 
-                     actor.name.c_str(), target.name.c_str());
+                     actor.name.c_str(), target->name.c_str());
    }
    brief.addText(texto);
 
    /* Verify Action Range */
    if(!actionInRange(actor.xPosition, actor.zPosition, 
-                     target.xPosition, target.zPosition,
+                     target->xPosition, target->zPosition,
                      range*METER_TO_DNT))
    {
       brief.addText(gettext("Too far away for action!"), 225, 20, 20);
@@ -137,7 +148,7 @@ bool doHealOrAttack(thing& actor, thing& target,
    diceValue = d20.roll();
 
    //TODO apply reflexes bonus, esquive bonus, etc, to target 
-   targetValue = target.armatureClass;
+   targetValue = target->armatureClass;
 
    /* verify critical Hit */
    if(diceValue == DICE_D20)
@@ -237,12 +248,12 @@ bool doHealOrAttack(thing& actor, thing& target,
    if(heal)
    {
       /* apply the heal */
-      target.addLifePoints(damage);
+      target->addLifePoints(damage);
    }
    else
    {
       /* apply damage on thing */
-      target.addLifePoints(-damage);
+      target->addLifePoints(-damage);
    }
 
    if( criticalHit)
@@ -269,16 +280,16 @@ bool doHealOrAttack(thing& actor, thing& target,
    sprintf(texto,"%d",damage);
    if(heal)
    {
-      controller.addMessage(target.xPosition, 
-            target.yPosition + target.max[1],
-            target.zPosition, texto,
+      controller.addMessage(target->xPosition, 
+            target->yPosition + target->max[1],
+            target->zPosition, texto,
             0.21, 0.15, 0.7);
    } 
    else
    {
-      controller.addMessage(target.xPosition, 
-            target.yPosition + target.max[1],
-            target.zPosition, texto,
+      controller.addMessage(target->xPosition, 
+            target->yPosition + target->max[1],
+            target->zPosition, texto,
             0.4, 0.01, 0.03);
    }
 
@@ -292,13 +303,13 @@ bool doHealOrAttack(thing& actor, thing& target,
       /* Add Blood */
       if(pSystem)
       {
-         GLfloat cs = cos(deg2Rad(target.orientation));
-         GLfloat sn = sin(deg2Rad(target.orientation));
+         GLfloat cs = cos(deg2Rad(target->orientation));
+         GLfloat sn = sin(deg2Rad(target->orientation));
          partController* ps = (partController*)pSystem;
-         ps->addParticle(PART_BLOOD, target.xPosition - (sn*2),
-                         target.yPosition + target.bloodPosition,
-                         target.zPosition - (cs*2), 
-                         target.bloodFileName);
+         ps->addParticle(PART_BLOOD, target->xPosition - (sn*2),
+                         target->yPosition + target->bloodPosition,
+                         target->zPosition - (cs*2), 
+                         target->bloodFileName);
       }
    }
 

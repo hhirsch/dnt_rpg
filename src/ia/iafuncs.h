@@ -121,25 +121,26 @@ using namespace std;
 ////////////////////////////////////////////////////
 //                 Feats Functions                //
 ////////////////////////////////////////////////////
-/*! int featActualQuantity(string featID) */
+/*! int featActualQuantity(int featID) */
 #define IA_FEAT_ACTUAL_QUANTITY "featActualQuantity"
-/*! int featCost(string featID) */
+/*! int featCost(int featID) */
 #define IA_FEAT_COST  "featCost"
-/*! int featQuantityPerDay(string featID) */
+/*! int featQuantityPerDay(int featID) */
 #define IA_FEAT_QUANTITY_PER_DAY "featQuantityPerDay"
+/*! void featUseAtCharacter(int featID, character target) */
 #define IA_FEAT_USE_AT_CHARACTER "featUseAtCharacter"
 #define IA_FEAT_USE_AT_OBJECT "featUseAtObject"
-/*! string getRandomAttackFeat()
+/*! int getRandomAttackFeat(character target)
  * This function get a random attack feat that can be used by
  * the characterOwner of the script on its defined target. */
 #define IA_FEAT_GET_RANDOM_ATTACK "getRandomAttackFeat"
-/*! string getPowerfullAttackFeat()
+/*! int getPowerfullAttackFeat(character target)
  * This function get the powerfull attack feat that the characterOwner
  * of the script can use at its defined target */
 #define IA_FEAT_GET_POWERFULL_ATTACK "getPowerfullAttackFeat"
-/*! string getRandomHealFeat() */
+/*! int getRandomHealFeat(character target) */
 #define IA_FEAT_GET_RANDOM_HEAL "getRandomHealFeat"
-/*! string getPowerfullHealFeat() */
+/*! int getPowerfullHealFeat(character target) */
 #define IA_FEAT_GET_POWERFULL_HEAL "getPowerfullHealFeat"
 
 ////////////////////////////////////////////////////

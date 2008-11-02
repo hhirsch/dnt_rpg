@@ -129,16 +129,16 @@ string functionType(string s)
             (s == IA_CHARACTER_GET_PSYCHO) || (s == IA_MISSION_GET_TEMP) ||
             (s == IA_CHARACTER_GET_ACTUAL_LIFE) || 
             (s == IA_FEAT_QUANTITY_PER_DAY) ||
-            (s == IA_CHARACTER_GET_MAX_LIFE ) )
+            (s == IA_CHARACTER_GET_MAX_LIFE ) || 
+            (s == IA_FEAT_GET_RANDOM_ATTACK) ||
+            (s == IA_FEAT_GET_POWERFULL_ATTACK) ||
+            (s == IA_FEAT_GET_RANDOM_HEAL) ||
+            (s == IA_FEAT_GET_POWERFULL_HEAL) )
    {
       return(IA_TYPE_INT);
    }
    /* String Functions */
-   else if( (s == IA_FEAT_GET_RANDOM_ATTACK) ||
-            (s == IA_FEAT_GET_POWERFULL_ATTACK) ||
-            (s == IA_FEAT_GET_RANDOM_HEAL) ||
-            (s == IA_FEAT_GET_POWERFULL_HEAL) ||
-            (s == IA_SELF_MISSION) )
+   else if( (s == IA_SELF_MISSION) )
    {
       return(IA_TYPE_STRING);
    }

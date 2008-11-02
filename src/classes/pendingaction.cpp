@@ -304,13 +304,19 @@ pendingAction* pendingActionController::addAction(pendingAction* act,
          }
          else
          {
-            //FIXME: When can't reach the -10,-10, try another near position!
+            //FIXME: When can't reach the random, try another near position!
+            
+            /* Do some randomize (current ticks + random number [0,1000) */
+            srand(SDL_GetTicks() + (int)(1 + 1000 * 
+                                         (rand() / (RAND_MAX + 1.0))));
 
             /* Save the target value to move (to get changes of 
              *                                target position ) */
-            act->targetX = act->target->xPosition - 10;
-            act->targetZ = act->target->zPosition - 10;
-
+            act->targetX = act->target->xPosition - 
+                                           ((int)(20*rand()/(RAND_MAX+1.0))+20);
+            act->targetZ = act->target->zPosition - 
+                                           ((int)(20*rand()/(RAND_MAX+1.0))+20);
+            
             /* It's a move to a target */
             act->actor->pathFind.findPath(act->actor,
                                           act->target->xPosition - 

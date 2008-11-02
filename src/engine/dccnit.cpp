@@ -120,7 +120,7 @@ engine::engine()
    msgController->init();
 
    /* Create the fight system */
-   fight = new fightSystem(msgController, particleController);
+   fight = new fightSystem(particleController);
 
    /* Create the action Controller */
    actionControl = new pendingActionController();
@@ -1504,7 +1504,11 @@ void engine::treatScripts()
                /* End turn when script finished */
                if(script->finished())
                {
+                  /* Verify Deads */
+                  fight->verifyDeads();
+                  /* End the NPC turn */
                   endTurn();
+                  /* Reput script at start */
                   script->restart();
                }
             }
@@ -1974,11 +1978,8 @@ int engine::verifyMouseActions(Uint8 mButton)
                      canAttack = !activeCharacter->actualFeats.
                                                    applyAttackAndBreakFeat(
                                                           *activeCharacter,
-                                                          attackFeat, *pers, 
-                                                          msgController,
+                                                          attackFeat, pers, 
                                                           particleController);
-
-                     activeCharacter->actualEnemy = pers;
                      fight->verifyDeads();
 
                      if( pers->getPsychoState() != PSYCHO_HOSTILE)
@@ -3465,6 +3466,7 @@ int engine::run(SDL_Surface *surface, bool commingBack)
         {
            lastTurnTime = time;
            fightStatus = fight->doBattleCicle();
+           
            updateAllHealthBars();
 
            if(fightStatus == FIGHT_PC_TURN)

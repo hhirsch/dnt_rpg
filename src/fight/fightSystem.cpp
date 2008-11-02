@@ -8,12 +8,11 @@
 /***************************************************************
  *                       CONSTRUCTOR                           *
  ***************************************************************/
-fightSystem::fightSystem(messageController* controller, partController* pSystem)
+fightSystem::fightSystem(partController* pSystem)
 {
    lastTime = 0;
    actualActor = NULL;
    pendingAnimation = true;
-   msgController = controller;
    particleSystem = pSystem;
    mapFileName = "";
    brief = new briefing();
@@ -70,7 +69,7 @@ bool fightSystem::insertNPC(character* pers, int group)
       {
          pers->actualFightGroup = group;
          charsInitiatives.insertCharacter(pers);
-         pers->actualEnemy = NULL;
+         pers->currentEnemy = NULL;
          return(true);
       }
       else
@@ -113,7 +112,7 @@ bool fightSystem::hasEnemies(character* pers)
    /* Verify if some enemy PC is alive */
    for(i=0; i < FIGHT_MAX_PC_GROUPS; i++)
    {
-       if( ((isNPC) || (pers->actualFightGroup != i) ) &&  
+       if( ((isNPC) || (pers->actualFightGroup != i) ) &&
            (pcGroups[i].anyoneIsAliveAndInRange(false)) )
        {
            return(true);
@@ -154,28 +153,30 @@ void fightSystem::verifyDeads()
    // that affects an area instead of a target)!
 
    /* Kill the target, if it is dead and not marked as dead */
-   if( (actualActor->actualEnemy->getLifePoints() <= 0) && 
-       (actualActor->actualEnemy->isAlive()) )
+   if( (actualActor->currentEnemy->getLifePoints() <= 0) && 
+       (actualActor->currentEnemy->isAlive()) )
    {
 
       //FIXME Other states, like partial death to be implemented
-      actualActor->actualEnemy->kill();
+      actualActor->currentEnemy->kill();
 
       sprintf(buf, gettext("%s is dead!"), 
-              actualActor->actualEnemy->name.c_str());
+              actualActor->currentEnemy->name.c_str());
       brief->addText(buf, 255, 144, 0);
 
       /* Add to the modstate the 'dead character' */
+      //FIXME always using as character. Must check if it is an object!
+      character* currentEnemy = (character*)actualActor->currentEnemy;
       modState modif;
       modif.mapCharacterAddAction(MODSTATE_ACTION_CHARACTER_DEAD,
-                                  actualActor->actualEnemy->getCharacterFile(),
+                                  currentEnemy->getCharacterFile(),
                                   mapFileName, 
-                                  actualActor->actualEnemy->xPosition,
-                                  actualActor->actualEnemy->yPosition,
-                                  actualActor->actualEnemy->zPosition,
-                                  actualActor->actualEnemy->orientation,
-                                  actualActor->actualEnemy->initialXPosition,
-                                  actualActor->actualEnemy->initialZPosition);
+                                  currentEnemy->xPosition,
+                                  currentEnemy->yPosition,
+                                  currentEnemy->zPosition,
+                                  currentEnemy->orientation,
+                                  currentEnemy->initialXPosition,
+                                  currentEnemy->initialZPosition);
 
       if(isPC(actualActor))
       {
@@ -200,8 +201,8 @@ void fightSystem::verifyDeads()
             {
                /* Calculate and apply the number of XP points 
                 * for killing the target */
-               xp = (int)(actualActor->actualEnemy->xpPercent/100.0 * 
-                     getXP(actualActor, actualActor->actualEnemy->cr)) / 
+               xp = (int)(actualActor->currentEnemy->xpPercent/100.0 * 
+                     getXP(actualActor, actualActor->currentEnemy->cr)) / 
                      pcGroups[pcg].total();
                p->addXP(xp);
                sprintf(buf, gettext("%s receive %d XP for killing"), 
@@ -211,7 +212,7 @@ void fightSystem::verifyDeads()
          }
 
          /* Since is dead, the xpPercent avaible to give is now 0 */
-         actualActor->actualEnemy->xpPercent = 0;
+         actualActor->currentEnemy->xpPercent = 0;
       }
    }
    else
@@ -233,7 +234,7 @@ int fightSystem::doTurn()
    {
       lastTime = time;
 
-      if( (actualActor != NULL) && (actualActor->actualEnemy != NULL) && 
+      if( (actualActor != NULL) && (actualActor->currentEnemy != NULL) && 
           (pendingAnimation))
       {
          /* Put the actor at idle state */
@@ -247,6 +248,7 @@ int fightSystem::doTurn()
       {
          actualActor = charsInitiatives.nextCharacter();
 
+         /* Verify new round! */
          if(actualActor == NULL)
          {
             /* Begin new Round */
@@ -280,6 +282,17 @@ int fightSystem::doTurn()
             } 
          }
 
+         /* Verify if the hostile creature have enemies */
+         if( (actualActor->getPsychoState() == PSYCHO_HOSTILE) &&
+             (!hasEnemies(actualActor)) )
+         {
+            /* There's no more enemies, so no more battle */
+            return(FIGHT_END);
+         }
+
+         /* Set its state to IDLE */
+         actualActor->setState(STATE_IDLE);
+
          if(isPC(actualActor))
          {
              if(!hasEnemies(actualActor))
@@ -308,13 +321,6 @@ int fightSystem::doTurn()
                return(FIGHT_NPC_TURN);
             }
          }
-
-         if(!hasEnemies(actualActor))
-         {
-            /* There's no more enemies, so no more battle */
-            return(FIGHT_END);
-         }
-         
       }
    }
 
@@ -337,9 +343,9 @@ void fightSystem::doNPCAction(character* pers)
    int attackFeat;
 
    /* Determine the target of the character */
-   if( (pers->actualEnemy == NULL) || (!pers->actualEnemy->isAlive()))
+   if( (pers->currentEnemy == NULL) || (!pers->currentEnemy->isAlive()))
    {
-      pers->actualEnemy =  getNearestEnemy(pers);
+      pers->currentEnemy =  getNearestEnemy(pers);
    }
    
    //doMovimentation, if wanted, before
@@ -350,13 +356,12 @@ void fightSystem::doNPCAction(character* pers)
    //TODO else some sing or enchantment
 
    //else, do an basic attack
-   attackFeat = getNPCAttackFeat(pers,pers->actualEnemy);
+   attackFeat = getNPCAttackFeat(pers,pers->currentEnemy);
 
-   if( (pers->actualEnemy != NULL) && (attackFeat != -1))
+   if( (pers->currentEnemy != NULL) && (attackFeat != -1))
    {
       pers->actualFeats.applyAttackAndBreakFeat(*pers,attackFeat,
-                                                *pers->actualEnemy,
-                                                msgController,
+                                                pers->currentEnemy,
                                                 particleSystem);
       verifyDeads();   
    }
@@ -369,11 +374,12 @@ void fightSystem::doNPCAction(character* pers)
 /***************************************************************
  *                       getNPCAttackFeat                      *
  ***************************************************************/
-int fightSystem::getNPCAttackFeat(character* pers, character* target)
+int fightSystem::getNPCAttackFeat(character* pers, thing* target)
 {
    if( (target != NULL) && (pers != NULL))
    { 
-       return(pers->actualFeats.getRandomNPCAttackFeat(pers,target));
+       return(pers->actualFeats.getRandomNPCAttackFeat(pers,
+                                                       (character*)target));
    }
    
    return(-1);

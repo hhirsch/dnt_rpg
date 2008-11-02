@@ -110,7 +110,7 @@ class character: public aniModel
       feats actualFeats;        /**< Feats owned by character */      
 
       int actualFightGroup;     /**< fightGroup of character, used on battles*/
-      character* actualEnemy;   /**< Pointer to actual fight enemy (target) */
+
       healthBar* lifeBar;       /**< Character's Life Bar */
 
       aStar pathFind;           /**< The A* pathFind to the character */

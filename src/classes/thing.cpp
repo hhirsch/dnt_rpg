@@ -47,6 +47,8 @@ thing::thing()
    battleScript = NULL;
    battleScriptFileName = "";
 
+   currentEnemy = NULL;
+
    /* Set Default Values */
    dirs dir;
    bloodFileName = dir.getRealFile("particles/blood3.par");
