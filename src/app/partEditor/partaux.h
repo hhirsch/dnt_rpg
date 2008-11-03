@@ -109,6 +109,13 @@ class partAux: public particleSystem
       void setDSumVelZ(float d);
       float getDSumVelZ();
 
+      void setInitVelX(float d);
+      float getInitVelX();
+      void setInitVelY(float d);
+      float getInitVelY();
+      void setInitVelZ(float d);
+      float getInitVelZ();
+
 };
 
 

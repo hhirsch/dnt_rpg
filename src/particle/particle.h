@@ -221,6 +221,10 @@ class particleSystem
             finalB;            /**< Final Blue Color */
       float alpha;             /**< Global Alpha Value */
 
+      float initVelX,          /**< Initial Velocity at X */
+            initVelY,          /**< Initial Velocity at Y */
+            initVelZ;          /**< Initial Velocity at Z */
+
       float boundX1;           /**< Bounding Box */
       float boundX2;           /**< Bounding Box */
       float boundY1;           /**< Bounding Box */

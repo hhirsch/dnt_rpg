@@ -442,6 +442,15 @@ void editor::createWindows()
    edit2Window->getObjectsList()->insertTextBox(3,237,60,253,0,"DSVelZ");
    dSVelZEdit = edit2Window->getObjectsList()->insertTextBar(60,237,123,253,
                                                              "",0);
+   edit2Window->getObjectsList()->insertTextBox(3,257,60,273,0,"initVelX");
+   initVelXEdit = edit2Window->getObjectsList()->insertTextBar(60,257,123,273,
+                                                             "",0);
+   edit2Window->getObjectsList()->insertTextBox(3,277,60,293,0,"initVelY");
+   initVelYEdit = edit2Window->getObjectsList()->insertTextBar(60,277,123,293,
+                                                             "",0);
+   edit2Window->getObjectsList()->insertTextBox(3,297,60,313,0,"initVelZ");
+   initVelZEdit = edit2Window->getObjectsList()->insertTextBar(60,297,123,313,
+                                                             "",0);
    gui->openWindow(edit2Window);
 }
 
@@ -617,6 +626,18 @@ void editor::treatTextBars(guiObject* obj)
    {
       p->setDSumVelZ(value);
    }
+   else if(obj == initVelXEdit)
+   {
+      p->setInitVelX(value);
+   }
+   else if(obj == initVelYEdit)
+   {
+      p->setInitVelY(value);
+   }
+   else if(obj == initVelZEdit)
+   {
+      p->setInitVelZ(value);
+   }
 }
 
 /************************************************************************
@@ -702,6 +723,12 @@ void editor::updateTexts()
    dSVelYEdit->setText(aux);
    sprintf(aux,"%.3f", p->getDSumVelZ());
    dSVelZEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getInitVelX());
+   initVelXEdit->setText(aux); 
+   sprintf(aux,"%.3f", p->getInitVelY());
+   initVelYEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getInitVelZ());
+   initVelZEdit->setText(aux);
 }
 
 /************************************************************************

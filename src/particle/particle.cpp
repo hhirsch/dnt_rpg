@@ -105,6 +105,9 @@ particleSystem::particleSystem(string fileName, int mode)
    sscanf(aux.c_str(), "%s %f %f %f",&aux2[0], &dSumVel[0],
                              &dSumVel[1], &dSumVel[2] );
 
+   getline(file, aux);
+   sscanf(aux.c_str(), "%s %f %f %f",&aux2[0], &initVelX, &initVelY, &initVelZ);
+
    file.close();
 
    init(maxParticles, mode);
@@ -205,10 +208,19 @@ void particleSystem::doStep(GLfloat** matriz)
             (!continueLive(&particles[n])) ) && (pendingCreate > 0)  )
       {
           if(particles[n].status == PARTICLE_STATUS_DEAD)
+          {
              actualParticles++; 
+          }
+          /* Create a new particle */
           createParticle(&particles[n]);
+          /* Set State */
           particles[n].status = PARTICLE_STATUS_ALIVE;
           particles[n].age = 0;
+          /* Add the initial velocity to it */
+          particles[n].velX += initVelX;
+          particles[n].velY += initVelY;
+          particles[n].velZ += initVelZ;
+          /* Decrement the number of pending to create particles */
           pendingCreate--;
       }
       else if( (!continueLive(&particles[n])) && 
@@ -355,6 +367,8 @@ bool particleSystem::save( string fileName)
                              dMultVel[2] << "\n";
    file << "DSUMVEL " << dSumVel[0] << " " <<  dSumVel[1] << " " << 
                            dSumVel[2] << "\n";
+   file << "INITIALVEL " << initVelX << " " << initVelY << " " <<
+                           initVelZ << "\n";
 
    file.close();
    return(true);

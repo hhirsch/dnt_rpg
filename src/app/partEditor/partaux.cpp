@@ -359,3 +359,31 @@ float partAux::getDSumColorB()
 {
    return(dSumColor[2]);
 }
+
+void partAux::setInitVelX(float d)
+{
+   initVelX = d;
+}
+float partAux::getInitVelX()
+{
+   return(initVelX);
+}
+
+void partAux::setInitVelY(float d)
+{
+   initVelY = d;
+}
+float partAux::getInitVelY()
+{
+   return(initVelY);
+}
+
+void partAux::setInitVelZ(float d)
+{
+   initVelZ = d;
+}
+float partAux::getInitVelZ()
+{
+   return(initVelZ);
+}
+

@@ -159,6 +159,9 @@ class editor
       textBar* dSVelXEdit;
       textBar* dSVelYEdit;
       textBar* dSVelZEdit;
+      textBar* initVelXEdit;
+      textBar* initVelYEdit;
+      textBar* initVelZEdit;
 };
 
 #endif
