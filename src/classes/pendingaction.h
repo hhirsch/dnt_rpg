@@ -212,7 +212,7 @@ class pendingActionController
       pendingAction* getFirst();
 
       /*! Treat the actions on the controller */
-      void treatActions(Map* actualMap);
+      void treatActions(Map* actualMap, bool fightMode);
 
       /*! Set the character Lists of the action controller */
       void setCharacterLists(characterList* npcs, characterList* pcs);

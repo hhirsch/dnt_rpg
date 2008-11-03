@@ -270,23 +270,6 @@ void aStar::doCycle(bool fightMode)
          patt->definePosition( ((character*)curActor)->xPosition, 
                                ((character*)curActor)->zPosition );
 
-#if 0
-         /* Set the actor "fight" states */
-         if(fightMode)
-         { 
-            /* Moved! */
-            ((character*) curActor)->setCanMove(false);
-            /* Verify if full move! */
-            float dist = sqrt( (destinyX - ((character*)curActor)->xPosition) *
-                               (destinyX - ((character*)curActor)->xPosition) +
-                               (destinyZ - ((character*)curActor)->zPosition) *
-                               (destinyZ - ((character*)curActor)->zPosition) );
-            if(dist > WALK_PER_MOVE_ACTION)
-            {
-               ((character*)curActor)->setCanAttack(false);
-            }
-         }
-#endif
          /* We're done */
          clearSearch();
          state = ASTAR_STATE_FOUND;

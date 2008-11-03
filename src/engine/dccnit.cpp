@@ -1502,7 +1502,8 @@ void engine::treatScripts()
  *********************************************************************/
 void engine::treatPendingActions()
 {
-   actionControl->treatActions(actualMap);
+   actionControl->treatActions(actualMap, 
+                               engineMode == ENGINE_MODE_TURN_BATTLE);
 }
 
 /*********************************************************************
@@ -2479,9 +2480,10 @@ int engine::treatIO(SDL_Surface *screen)
       if(walkStatus == ENGINE_WALK_MOUSE_ASTAR)
       {
             if(! activeCharacter->pathFind.getNewPosition(
-                                             activeCharacter->xPosition,
-                                             activeCharacter->zPosition,
-                                             activeCharacter->orientation))
+                                        activeCharacter->xPosition,
+                                        activeCharacter->zPosition,
+                                        activeCharacter->orientation,
+                                        engineMode == ENGINE_MODE_TURN_BATTLE))
             {
                walkStatus = ENGINE_WALK_KEYS;
             }

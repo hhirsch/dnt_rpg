@@ -407,7 +407,7 @@ pendingAction* pendingActionController::getFirst()
 /************************************************************
  *                      treatActions                        *
  ************************************************************/
-void pendingActionController::treatActions(Map* actualMap)
+void pendingActionController::treatActions(Map* actualMap, bool fightMode)
 {
    int i;
    pendingAction* act = getFirst();
@@ -449,14 +449,13 @@ void pendingActionController::treatActions(Map* actualMap)
                act->actor->pathFind.forceNextCall();
 
                //FIXME Move not ON character but TO character
-               //FIXME : verify fightMode
                act->actor->pathFind.findPath(act->actor,
                                              act->target->xPosition - 
                                              ACT_MOVE_DELTA, 
                                              act->target->zPosition - 
                                              ACT_MOVE_DELTA, 
                                              act->actor->walk_interval, 
-                                             NPCs, PCs, false);
+                                             NPCs, PCs, fightMode);
             }
          }
          character* actor = act->getActor();
@@ -481,7 +480,8 @@ void pendingActionController::treatActions(Map* actualMap)
             {
                if(!actor->pathFind.getNewPosition(actor->xPosition,
                                                   actor->zPosition,
-                                                  actor->orientation))
+                                                  actor->orientation,
+                                                  fightMode))
                {  
                   /* The move ended */
                   act->setAsEnded(true);
