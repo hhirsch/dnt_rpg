@@ -1,6 +1,9 @@
 #include "pattAgent.h"
+#include <iostream>
 #include <math.h>
-#include <stdio.h>
+
+using namespace std;
+
 
 #define KA 0.005
 #define KR 0.5
@@ -13,6 +16,7 @@ pattAgent::pattAgent(bool oriented):agent(oriented)
    wayPoints = NULL;
    actualWayPoint = NULL;
    totalWayPoints = 0;
+   totalWalked = 0;
 }
 
 /********************************************************************
@@ -48,6 +52,8 @@ void pattAgent::calculateAngle(wayPoint* way, wayPoint* previous)
  ********************************************************************/
 bool pattAgent::defineNextPosition()
 {
+   float varX=0, varZ=0;
+
    if(!actualWayPoint)
    {
       return(false); //not defined yet the way points, so stay static.
@@ -78,10 +84,12 @@ bool pattAgent::defineNextPosition()
        (xInc == 0))
    {
       actualX = actualWayPoint->x;
+      varX = actualWayPoint->x - actualX;
    }
    else
    {
       actualX += xInc;
+      varX = xInc;
    }
 
    if( ((zInc > 0) && (actualZ + zInc > actualWayPoint->z)) ||
@@ -89,11 +97,15 @@ bool pattAgent::defineNextPosition()
        (zInc == 0))
    {
       actualZ = actualWayPoint->z;
+      varZ = actualWayPoint->z - actualZ;
    }
    else
    {
       actualZ += zInc;
+      varZ = zInc;
    }
+
+   totalWalked += sqrt(varX*varX + varZ*varZ);
 
    return(true);
 }
@@ -215,7 +227,6 @@ void pattAgent::removeLinearWayPoints()
  ********************************************************************/
 void pattAgent::changeToNextWayPoint()
 {
-   //FIXME -> diagonal Moves are > stepSize per time.
    float loops;
    if(!actualWayPoint)
    {

@@ -61,6 +61,8 @@ class pattAgent: public agent
 
       int totalWayPoints;           /**< Total WayPoints on List */
 
+      GLfloat totalWalked;          /**< Total units current walked */
+
       GLfloat xInc;                 /**< How many units X coordinate uptade */
       GLfloat zInc;                 /**< How many units Z coordinate update */
 
