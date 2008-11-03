@@ -1,11 +1,13 @@
 name = Ameiva
 model = models/personagens/Ameiva/modelo.cfg
 portrait = characters/portraits/ameiva.png
+battleScript = ia/script/fight/fight_animal.dsl
+bloodFileName = particles/blood2.par
+bloodPosition = 10
 maxLifePoints = 53
 baseModifier = 12/25/17
 attackModifier = 13/8/3/0/0/0
 sizeModifier = 3
-conversationFile = dialogs/ameiva1.dlg
 ATT_LEVEL = 7
 ATT_STRENGHT = 10
 ATT_DEXTERY = 20
