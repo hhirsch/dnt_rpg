@@ -194,6 +194,13 @@ bool options::load(string file)
          sscanf(buffer,"%d",&aux);
          enableMultiTexture = (aux == 1);
       }
+      else if(s == "AutoEndTurn:")
+      {
+         /* Rea Auto End Turn options */
+         fgets(buffer, sizeof(buffer), arq);
+         sscanf(buffer,"%d",&aux);
+         autoEndTurn = (aux == 1);
+      }
       else if(s == "AntiAliasing:")
       {
          /* Read Antialising Options */
@@ -252,24 +259,10 @@ void options::save()
    fprintf(arq,"Camera: %d\n", cameraNumber);
 
    /* Particles */
-   if(enableParticles)
-   {
-      fprintf(arq,"Particles: 1\n");
-   }
-   else
-   {
-      fprintf(arq,"Particles: 0\n");
-   }
+   fprintf(arq, "Particles: %d\n",enableParticles?1:0);
    
    /* Grass */
-   if(enableGrass)
-   {
-      fprintf(arq,"Grass: 1\n");
-   }
-   else
-   {
-      fprintf(arq,"Grass: 0\n");
-   }
+   fprintf(arq, "Grass: %d\n",enableGrass?1:0);
 
    /* Reflexion */
    fprintf(arq, "Reflexions: %d\n", reflexionType);
@@ -278,30 +271,19 @@ void options::save()
    fprintf(arq, "Resolution: %d %d\n",screenWidth, screenHeight);
 
    /* Fullscreen */
-   if(enableFullScreen)
-   {
-      fprintf(arq, "FullScreen: 1\n");
-   }
-   else
-   {
-      fprintf(arq, "FullScreen: 0\n");
-   }
+   fprintf(arq, "FullScreen: %d\n",enableFullScreen?1:0);
    
    /* Multi Texture */
-   if(enableMultiTexture)
-   {
-      fprintf(arq, "MultiTexture: 1\n");
-   }
-   else
-   {
-      fprintf(arq, "MultiTexture: 0\n");
-   }
+   fprintf(arq, "MultiTexture: %d\n",enableMultiTexture?1:0);
 
    /* AntiAliasing */
    fprintf(arq, "AntiAliasing: %d\n",antiAliasing);
 
    /* FarViewFactor */
    fprintf(arq, "FarViewFactor: %.2f\n", farViewFactor);
+
+   /* AutoEndTurn */
+   fprintf(arq, "AutoEndTurn: %d\n", autoEndTurn?1:0);
 
    fclose(arq);
 }
@@ -1090,6 +1072,14 @@ bool options::getEnableFullScreen()
 }
 
 /****************************************************************
+ *                       getAutoEndTurn                         *
+ ****************************************************************/
+bool options::getAutoEndTurn()
+{
+   return(autoEndTurn);
+}
+
+/****************************************************************
  *                        getAntiAliasing                       *
  ****************************************************************/
 int options::getAntiAliasing()
@@ -1124,19 +1114,20 @@ void options::setFarViewFactor(float factor)
 /****************************************************************
  *                         Static Members                       *
  ****************************************************************/
-int    options::musicVolume = 0;
-int    options::sndfxVolume = 0;
+int    options::musicVolume = 90;
+int    options::sndfxVolume = 128;
 int    options::langNumber = 0;
-int    options::cameraNumber = 0;
-bool   options::enableParticles = false;
-bool   options::enableGrass = false;
-int    options::reflexionType = 0;
-int    options::screenWidth = 800;
-int    options::screenHeight = 600; 
+int    options::cameraNumber = 1;
+bool   options::enableParticles = true;
+bool   options::enableGrass = true;
+int    options::reflexionType = 2;
+int    options::screenWidth = 1024;
+int    options::screenHeight = 768; 
 bool   options::enableFullScreen = false;
-int    options::antiAliasing = 0;
+int    options::antiAliasing = 4;
 float  options::farViewFactor = 1.0;
-bool   options::enableMultiTexture = false;
+bool   options::enableMultiTexture = true;
+bool   options::autoEndTurn = true;
 
 string options::fileName = "";
 

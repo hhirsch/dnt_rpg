@@ -2053,7 +2053,7 @@ int engine::treatIO(SDL_Surface *screen)
    {
       timePass = true;
 
-      /* Actualize Time */
+      /* Update Time */
       seconds = varTempo / 1000.0;
 
       hour = (hour + seconds / 100.0 );
@@ -2067,7 +2067,6 @@ int engine::treatIO(SDL_Surface *screen)
 
       SDL_PumpEvents();
 
-
       /* Get Keyboard State */
       keys = SDL_GetKeyState(NULL);
 
@@ -2075,6 +2074,20 @@ int engine::treatIO(SDL_Surface *screen)
       mButton = SDL_GetMouseState(&x,&y);
       mouseX = x;
       mouseY = y;
+
+      /* Verify if need to endTurn */
+      if(option->getAutoEndTurn())
+      {
+         if( (engineMode == ENGINE_MODE_TURN_BATTLE) &&
+             (fightStatus == FIGHT_PC_TURN) &&
+             (!PCs->getActiveCharacter()->getCanAttack()) &&
+             (!PCs->getActiveCharacter()->getCanMove()) )
+         {
+            /* Can't take more actions, so autoEnd the turn! */
+            brief->addText(gettext("No more actions. Turn ended."));
+            endTurn();
+         }
+      }
 
       /* Get Mouse Coordinates at world system */
       updateMouseWorldPos();

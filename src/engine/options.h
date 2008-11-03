@@ -88,6 +88,11 @@ class options
       /*! Verify if the multitexture is enabled (and avalaible) 
        * \return true if enabled */
       bool getEnableMultiTexture();
+      /*! Verify if the auto end turn is enabled
+       * \return -> true if enabled 
+       * \note -> if enabled, if the character have no possible actions,
+       *          the turn automatically ends.  */
+      bool getAutoEndTurn();
       /*! Get the current antialiasing
        * \return -> current antialiasing*/
       int getAntiAliasing();
@@ -126,6 +131,7 @@ class options
       static int     antiAliasing;    /**< Current Anti-Aliasing */
       static float   farViewFactor;   /**< Current FarView Factor */
       static bool    enableMultiTexture; /**< If terrain multi texture */
+      static bool    autoEndTurn;     /**< If will autoend turn or not */
 
       window* intWindow;       /**< Options Window Pointer */
 
