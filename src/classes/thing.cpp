@@ -53,8 +53,7 @@ thing::thing()
    currentEnemy = NULL;
 
    /* Set Default Values */
-   dirs dir;
-   bloodFileName = dir.getRealFile("particles/blood3.par");
+   bloodFileName = "particles/blood3.par";
    bloodPosition = 25;
    walk_interval = 37.5 * WALK_UPDATE; //default value, if not
                                        //defined at the def file.
