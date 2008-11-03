@@ -304,7 +304,6 @@ bool doHealOrAttack(thing& actor, thing* target,
       /* Add Blood */
       GLfloat cs = cos(deg2Rad(target->orientation));
       GLfloat sn = sin(deg2Rad(target->orientation));
-      cout << target->bloodFileName << endl;
       pSystem.addParticle(PART_BLOOD, target->xPosition - (sn*2),
                           target->yPosition + target->bloodPosition,
                           target->zPosition - (cs*2), target->bloodFileName);

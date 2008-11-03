@@ -2856,6 +2856,20 @@ void engine::renderNoShadowThings()
       activeCharacter->pathFind.drawPath();
    }*/
 
+   /* The SUN or MOON */
+   if(actualMap->isOutdoor())
+   {
+      if(!actualMap->getFog().enabled)
+      {
+         glDisable(GL_FOG);
+      }
+      gameSun->drawSun();
+      if(!actualMap->getFog().enabled)
+      {
+         glEnable(GL_FOG);
+      }
+   }
+
    if( showRange )
    {
        /* Range Circle */
@@ -2937,21 +2951,6 @@ void engine::renderNoShadowThings()
                                      0.25,4);
    }
 
-   /* The SUN or MOON */
-   if(actualMap->isOutdoor())
-   {
-      if(!actualMap->getFog().enabled)
-      {
-         glDisable(GL_FOG);
-      }
-      gameSun->drawSun();
-      if(!actualMap->getFog().enabled)
-      {
-         glEnable(GL_FOG);
-      }
-   }
-
-
    /* The Current Connection */
    if(curConection)
    {
@@ -2977,7 +2976,6 @@ void engine::renderNoShadowThings()
       glPopMatrix();
    }
 
-   
    /* Draw Particles */
    if(option->getEnableParticles())
    {
