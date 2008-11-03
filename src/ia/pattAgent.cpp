@@ -17,6 +17,8 @@ pattAgent::pattAgent(bool oriented):agent(oriented)
    actualWayPoint = NULL;
    totalWayPoints = 0;
    totalWalked = 0;
+   origX = 0;
+   origZ = 0;
 }
 
 /********************************************************************
@@ -34,6 +36,15 @@ pattAgent::~pattAgent()
       actualWayPoint = actualWayPoint->next;
       delete(aux);
    }
+}
+
+/********************************************************************
+ *                          setOrigin                               *
+ ********************************************************************/
+void pattAgent::setOrigin(GLfloat x, GLfloat z)
+{
+   origX = x;
+   origZ = z;
 }
 
 /********************************************************************
@@ -84,12 +95,10 @@ bool pattAgent::defineNextPosition()
        (xInc == 0))
    {
       actualX = actualWayPoint->x;
-      varX = actualWayPoint->x - actualX;
    }
    else
    {
       actualX += xInc;
-      varX = xInc;
    }
 
    if( ((zInc > 0) && (actualZ + zInc > actualWayPoint->z)) ||
@@ -97,15 +106,16 @@ bool pattAgent::defineNextPosition()
        (zInc == 0))
    {
       actualZ = actualWayPoint->z;
-      varZ = actualWayPoint->z - actualZ;
    }
    else
    {
       actualZ += zInc;
-      varZ = zInc;
    }
 
-   totalWalked += sqrt(varX*varX + varZ*varZ);
+   /* Calculate the linear distance to the orign */ 
+   varX = actualX - origX;
+   varZ = actualZ - origZ;
+   totalWalked = sqrt(varX*varX + varZ*varZ);
 
    return(true);
 }

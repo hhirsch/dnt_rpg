@@ -44,7 +44,6 @@ void aStar::clearSearch()
    }
 
    /* Clear Variables */
-   curActor = NULL;
    pcs = NULL;
    npcs = NULL;
    curStepSize = 1;
@@ -142,10 +141,7 @@ void aStar::findPath(void* actor, GLfloat x, GLfloat z, GLfloat stepSize,
       if(fightMode)
       {
          /* Verify if can walk */
-         if( (!((character*)actor)->getCanMove()) ||
-             ( (!((character*)actor)->getCanAttack()) && 
-                 (dist > WALK_PER_MOVE_ACTION) ) ||
-             (dist > 2*WALK_PER_MOVE_ACTION) )
+         if(!((character*)actor)->getCanMove())
          {
              /* Can't move! */
              state = ASTAR_STATE_NOT_FOUND;
@@ -269,9 +265,12 @@ void aStar::doCycle(bool fightMode)
             node = closed->find(node->parentX, node->parentZ);
          }
          patt->removeLinearWayPoints();
+         patt->setOrigin( ((character*)curActor)->xPosition, 
+                          ((character*)curActor)->zPosition );
          patt->definePosition( ((character*)curActor)->xPosition, 
                                ((character*)curActor)->zPosition );
 
+#if 0
          /* Set the actor "fight" states */
          if(fightMode)
          { 
@@ -287,7 +286,7 @@ void aStar::doCycle(bool fightMode)
                ((character*)curActor)->setCanAttack(false);
             }
          }
-
+#endif
          /* We're done */
          clearSearch();
          state = ASTAR_STATE_FOUND;
@@ -444,13 +443,56 @@ void aStar::setOrientation(GLfloat ori)
 /****************************************************************
  *                       getNewPosition                         *
  ****************************************************************/
-bool aStar::getNewPosition(GLfloat& posX, GLfloat& posZ, GLfloat& ori)
+bool aStar::getNewPosition(GLfloat& posX, GLfloat& posZ, GLfloat& ori,
+                           bool fightMode)
 {
    if(patt->defineNextPosition())
    {
+      /* Update Position */
       patt->getPosition(posX, posZ);
       ori = patt->orientationValue();
-      return((posX != destinyX) || (posZ != destinyZ));
+
+      if(fightMode)
+      {
+         /* Verify if overflow the max normal walk */
+         if( (patt->getTotalWalked() > WALK_PER_MOVE_ACTION) &&
+             ( !((character*)curActor)->getCanAttack() ) )
+         {
+            /* Can't do a full move, so stop here */
+            ((character*)curActor)->setCanMove(false);
+            return(false);
+         }
+
+         /* Verify if overflow the max full walk */
+         else if( patt->getTotalWalked() >= 2*WALK_PER_MOVE_ACTION)
+         {
+            ((character*)curActor)->setCanAttack(false);
+            ((character*)curActor)->setCanMove(false);
+            return(false);
+         }
+
+         /* Verify if arrived at destiny */
+         else if( (posX == destinyX) && (posZ == destinyZ) )
+         {
+            /* Update the booleans */
+            if(patt->getTotalWalked() > WALK_PER_MOVE_ACTION)
+            {
+               ((character*)curActor)->setCanAttack(false);
+            }
+            ((character*)curActor)->setCanMove(false);
+            
+            /* Stop the motion */
+            return(false);
+         }
+
+         /* Still walking */
+         return(true);
+      }
+      else
+      {
+         /* Only stop when arrive at destiny */
+         return((posX != destinyX) || (posZ != destinyZ));
+      }
    }
    return(false);
 }

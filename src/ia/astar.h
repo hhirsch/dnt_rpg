@@ -102,8 +102,10 @@ class aStar
        * \param posX -> new X position
        * \param posZ -> new Z position
        * \param ori -> new orientation
+       * \param fightMode -> true if is in the fight mode
        * \return true if can actualize, false otherwise */
-      bool getNewPosition(GLfloat& posX, GLfloat& posZ, GLfloat& ori);
+      bool getNewPosition(GLfloat& posX, GLfloat& posZ, GLfloat& ori,
+                          bool fightMode);
 
       /*! Gets the Destiny of The Character
        * \param destX -> X destiny Position

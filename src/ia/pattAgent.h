@@ -29,6 +29,11 @@ class pattAgent: public agent
        * \return true if position was defined */
       bool defineNextPosition();
 
+      /*! Set the pattern origin
+       * \param x -> origin X position
+       * \param z -> origin Z position */
+      void setOrigin(GLfloat x, GLfloat z);
+
       /*! Add WayPoint to be the "last" on the Agent */
       void addWayPoint(GLfloat x, GLfloat z);
 
@@ -48,6 +53,8 @@ class pattAgent: public agent
       /*! Return the number of Way Points  */
       int getTotalWayPoints(){return(totalWayPoints);};
 
+      float getTotalWalked(){return(totalWalked);};
+
       /*! Get WayPoints List. Only for save on editor. */
       wayPoint* getWayPoints(){return(wayPoints);};
 
@@ -63,6 +70,9 @@ class pattAgent: public agent
 
       GLfloat totalWalked;          /**< Total units current walked */
 
+      GLfloat origX,                /**< Original X position */
+              origZ;                /**< Original Z position */
+      
       GLfloat xInc;                 /**< How many units X coordinate uptade */
       GLfloat zInc;                 /**< How many units Z coordinate update */
 
