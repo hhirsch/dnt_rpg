@@ -97,7 +97,7 @@ void aStar::forceNextCall()
  *                            findPath                          *
  ****************************************************************/
 void aStar::findPath(void* actor, GLfloat x, GLfloat z, GLfloat stepSize,
-                     void* NPCs, void* PCs, bool forceCall)
+                     void* NPCs, void* PCs, bool fightMode, bool forceCall)
 {
    GLuint actualTime = SDL_GetTicks();
 
@@ -132,6 +132,21 @@ void aStar::findPath(void* actor, GLfloat x, GLfloat z, GLfloat stepSize,
       dZ = (z - actualZ);
       GLfloat dist = sqrt( (dX*dX) + (dZ*dZ) );
 
+      if(fightMode)
+      {
+         /* Verify if can walk */
+         if( (!((character*)actor)->getCanMove()) ||
+             ( (!((character*)actor)->getCanAttack()) && 
+                 (dist > WALK_PER_MOVE_ACTION) ) ||
+             (dist > 2*WALK_PER_MOVE_ACTION) )
+         {
+             /* Can't move! */
+             state = ASTAR_STATE_NOT_FOUND;
+             return;
+         }
+      }
+
+      /* Verify if the destiny is in map and not too far away */
       if( (destinyX < 0) || (destinyZ < 0) || 
           (destinyX >= actualMap->getSizeX()*actualMap->squareSize()) ||
           (destinyZ >= actualMap->getSizeZ()*actualMap->squareSize()) ||
@@ -174,7 +189,7 @@ void aStar::clear()
 /****************************************************************
  *                             doCycle                          *
  ****************************************************************/
-void aStar::doCycle()
+void aStar::doCycle(bool fightMode)
 {
    GLfloat newg = 0;                /* new gone value */
    pointStar* node, *node2, *node3; /* auxiliar nodes */
@@ -250,8 +265,28 @@ void aStar::doCycle()
          patt->definePosition( ((character*)curActor)->xPosition, 
                                ((character*)curActor)->zPosition );
 
+         /* Set the actor "fight" states */
+         if(fightMode)
+         { 
+            /* Moved! */
+            ((character*) curActor)->setCanMove(false);
+            /* Verify if full move! */
+            float dist = sqrt( (destinyX - ((character*)curActor)->xPosition) *
+                               (destinyX - ((character*)curActor)->xPosition) +
+                               (destinyZ - ((character*)curActor)->zPosition) *
+                               (destinyZ - ((character*)curActor)->zPosition) );
+            if(dist > WALK_PER_MOVE_ACTION)
+            {
+               ((character*)curActor)->setCanAttack(false);
+            }
+         }
+
+         /* We're done */
          clearSearch();
          state = ASTAR_STATE_FOUND;
+
+
+
          return;
       }
 

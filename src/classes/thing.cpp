@@ -47,6 +47,9 @@ thing::thing()
    battleScript = NULL;
    battleScriptFileName = "";
 
+   canMove = true;
+   canAttack = true;
+
    currentEnemy = NULL;
 
    /* Set Default Values */
@@ -299,6 +302,38 @@ int thing::getPsychoState()
 void thing::setPsychoState(int state)
 {
    psychoState = state;
+}
+
+/*********************************************************************
+ *                           getCanAttack                            *
+ *********************************************************************/
+bool thing::getCanAttack()
+{
+   return(canAttack);
+}
+
+/*********************************************************************
+ *                           setCanAttack                            *
+ *********************************************************************/
+void thing::setCanAttack(bool can)
+{
+   canAttack = can;
+}
+
+/*********************************************************************
+ *                            getCanMove                            *
+ *********************************************************************/
+bool thing::getCanMove()
+{
+   return(canMove);
+}
+
+/*********************************************************************
+ *                            setCanMove                             *
+ *********************************************************************/
+void thing::setCanMove(bool can)
+{
+   canMove = can;
 }
 
 /*********************************************************************

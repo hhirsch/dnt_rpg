@@ -86,14 +86,17 @@ class aStar
        * \param stepSize -> size of the Step 
        * \param NPCs -> list of NPCs 
        * \param PCs -> list of PCs
+       * \param fightMode -> true if is in the fight mode
        * \param forceCall -> true to force the call (there's a counter inner
        *                      the function that don't allow too often calls)
        * */
       void findPath(void* actor, GLfloat x, GLfloat z, GLfloat stepSize,
-                    void* NPCs, void* PCs, bool forceCall=false);
+                    void* NPCs, void* PCs, bool fightMode, 
+                    bool forceCall=false);
 
-      /* Do the a* cycle (if is current searching for something) */
-      void doCycle();
+      /* Do the a* cycle (if is current searching for something)
+       * \param fightMode -> true if is in the fight mode */
+      void doCycle(bool fightMode);
 
       /*! Get the New Character Position, based on Path Found previously 
        * \param posX -> new X position

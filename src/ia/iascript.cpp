@@ -1390,7 +1390,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    else if(functionName == IA_FIGHT_CAN_ATTACK)
    {
       /* syntax bool canAttack() */
-      bool res = eng->getCanAttack();
+      bool res = characterOwner->getCanAttack();
       assignValue(var, (bool*)&res, IA_TYPE_BOOL);
    }
 

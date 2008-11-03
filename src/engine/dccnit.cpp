@@ -1376,18 +1376,14 @@ void engine::enterBattleMode(bool surprisePC)
       if(surprisePC)
       {
          fightStatus = FIGHT_PC_TURN;
-         fullMovePCAction = false;
-         canMove = true;
-         canAttack = true;
+         PCs->getActiveCharacter()->setCanMove(true);
+         PCs->getActiveCharacter()->setCanAttack(true);
          fight->setActualActor(PCs->getActiveCharacter());
          brief->addText(gettext("Surprise Attack Turn."));
       }
       else
       {
          fightStatus = FIGHT_CONTINUE;
-         fullMovePCAction = false;
-         canMove = false;
-         canAttack = false;
       }
       attackFeat = activeCharacter->getActiveFeatRangeType();
 
@@ -1411,25 +1407,12 @@ void engine::endTurn()
        ((SDL_GetTicks() - lastTurnTime) > 200) )
    {
       fightStatus = FIGHT_CONTINUE;
-      canAttack = true;
-      canMove = true;
    }
    else if( (engineMode == ENGINE_MODE_TURN_BATTLE) &&
             (fightStatus == FIGHT_NPC_TURN) )
    {
       fightStatus = FIGHT_CONTINUE;
-      canAttack = true;
-      canMove = true;
    }
-}
-
-/*********************************************************************
- *                           getCanAttack                            *
- *********************************************************************/
-bool engine::getCanAttack()
-{
-   //FIXME: set the canAttack for NPC's scripts!!!
-   return(canAttack);
 }
 
 /*********************************************************************
@@ -1445,7 +1428,7 @@ void engine::doAStar()
       per = (character*) NPCs->getFirst();
       for(aux=0; aux < NPCs->getTotal(); aux++)
       {
-         per->pathFind.doCycle();
+         per->pathFind.doCycle((engineMode == ENGINE_MODE_TURN_BATTLE));
          per = per->next;
       }
    }
@@ -1455,7 +1438,7 @@ void engine::doAStar()
       per = (character*) PCs->getFirst();
       for(aux=0; aux < PCs->getTotal(); aux++)
       {
-         per->pathFind.doCycle();
+         per->pathFind.doCycle((engineMode == ENGINE_MODE_TURN_BATTLE));
          per = per->next;
       }
 
@@ -1561,7 +1544,7 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
             PCs->getActiveCharacter()->defineWeapon();
 
             /* Menu Use count as an action */
-            canAttack = false;
+            PCs->getActiveCharacter()->setCanAttack(false);
 
             /* TODO redefine the armors! */
          }
@@ -1764,49 +1747,52 @@ int engine::verifyMouseActions(Uint8 mButton)
                   cursors->set(CURSOR_GET);
                   shortcuts->setThing(sobj->obj->getName()); 
                   if( (mButton & SDL_BUTTON(1)) && 
-                        (rangeAction(activeCharacter->xPosition, 
-                                     activeCharacter->zPosition,
-                                     sobj->x, sobj->z,
-                                     WALK_PER_MOVE_ACTION) ) )
+                      (rangeAction(activeCharacter->xPosition, 
+                                   activeCharacter->zPosition,
+                                   sobj->x, sobj->z,
+                                   WALK_PER_MOVE_ACTION) ) )
                   {
-                     /* Get Object */
-                     lastMousePression = time;
-
-                     if(activeCharacter->inventories->addObject(sobj->obj))
+                     if( (engineMode != ENGINE_MODE_TURN_BATTLE) ||
+                           (activeCharacter->getCanAttack() ) )
                      {
-                        snd->addSoundEffect(sobj->x, sobj->y, sobj->z, 
-                              SOUND_NO_LOOP,
-                              "sndfx/objects/take_item.ogg");
+                        /* Get Item count as action */
+                        activeCharacter->setCanAttack(false);
 
-                        sprintf(buf,gettext("%s taken."),
-                              sobj->obj->getName().c_str());
+                        /* Get Object */
+                        lastMousePression = time;
 
-                        brief->addText(buf);
-
-                        /* Log State to the modState */
-                        modifState.mapObjectAddAction(
-                              MODSTATE_ACTION_OBJECT_REMOVE,
-                              sobj->obj->getFileName(),
-                              actualMap->getFileName(),
-                              sobj->x, sobj->y, sobj->z);
-
-                        /* Remove object from Map */
-                        actualMap->removeObject(sobj->obj);
-
-                        if(inventoryWindow)
+                        if(activeCharacter->inventories->addObject(sobj->obj))
                         {
-                           inventoryWindow->reDraw();
+                           snd->addSoundEffect(sobj->x, sobj->y, sobj->z, 
+                                 SOUND_NO_LOOP,
+                                 "sndfx/objects/take_item.ogg");
+
+                           sprintf(buf,gettext("%s taken."),
+                                 sobj->obj->getName().c_str());
+
+                           brief->addText(buf);
+
+                           /* Log State to the modState */
+                           modifState.mapObjectAddAction(
+                                 MODSTATE_ACTION_OBJECT_REMOVE,
+                                 sobj->obj->getFileName(),
+                                 actualMap->getFileName(),
+                                 sobj->x, sobj->y, sobj->z);
+
+                           /* Remove object from Map */
+                           actualMap->removeObject(sobj->obj);
+
+                           if(inventoryWindow)
+                           {
+                              inventoryWindow->reDraw();
+                           }
+                        }
+                        else
+                        {
+                           brief->addText(gettext("Inventory is full!"),
+                                 220,20,20); 
                         }
                      }
-                     else
-                     {
-                        brief->addText(gettext("Inventory is full!"),
-                              220,20,20); 
-                     }
-                  }
-                  if(mButton & SDL_BUTTON(2))
-                  {
-                     /* TODO Open Menu of choices */
                   }
                }
                pronto = 1;
@@ -1955,8 +1941,8 @@ int engine::verifyMouseActions(Uint8 mButton)
                }
                /* Verify attacks */
                else if( (engineMode == ENGINE_MODE_TURN_BATTLE) && 
-                        (canAttack) &&
-                        (fightStatus == FIGHT_PC_TURN) && (!fullMovePCAction))
+                        (activeCharacter->getCanAttack()) &&
+                        (fightStatus == FIGHT_PC_TURN) )
                {
                   cursors->set(CURSOR_ATTACK);
                   shortcuts->setThing(pers->name); 
@@ -1972,10 +1958,12 @@ int engine::verifyMouseActions(Uint8 mButton)
                              activeCharacter->name.c_str(),
                              pers->name.c_str());
                      brief->addText(buf);
-                     canAttack = !activeCharacter->actualFeats.
+                     activeCharacter->setCanAttack(
+                                             !activeCharacter->actualFeats.
                                                    applyAttackAndBreakFeat(
                                                           *activeCharacter,
-                                                          attackFeat, pers);
+                                                          attackFeat, pers));
+
                      fight->verifyDeads();
 
                      if( pers->getPsychoState() != PSYCHO_HOSTILE)
@@ -2413,30 +2401,13 @@ int engine::treatIO(SDL_Surface *screen)
       {
          /* Path Verification */
          walkPressTime = 0;
-         dist = sqrt( (xReal - moveCircleX) *
-               (xReal - moveCircleX) +
-               (zReal - moveCircleZ) *
-               (zReal - moveCircleZ) );
 
-         /* Only Find Path if move is avaible */
-         if( (engineMode != ENGINE_MODE_TURN_BATTLE) || 
-               ( (canMove) && (dist <= WALK_PER_MOVE_ACTION)) ||
-               ( (canMove) && (canAttack) && 
-                 (dist <= 2*WALK_PER_MOVE_ACTION )) )
-         {
-            if(dist > WALK_PER_MOVE_ACTION)
-            {
-               /* Disable attack action on round if move more than 
-                * one move act */
-               canAttack = false;
-            }
-            activeCharacter->pathFind.defineMap(actualMap);
+         activeCharacter->pathFind.defineMap(actualMap);
 
-            activeCharacter->pathFind.findPath(activeCharacter,
-                  xReal, zReal, 
-                  activeCharacter->walk_interval, 
-                  NPCs, PCs );
-         }
+         activeCharacter->pathFind.findPath(activeCharacter, xReal, zReal, 
+                                            activeCharacter->walk_interval, 
+                                            NPCs, PCs, 
+                                         engineMode == ENGINE_MODE_TURN_BATTLE);
       }
 
       /* Verify Continuous Walk with Mouse */
@@ -2601,7 +2572,7 @@ int engine::treatIO(SDL_Surface *screen)
              (engineMode == ENGINE_MODE_TURN_BATTLE) && 
              (fightStatus == FIGHT_PC_TURN) )
          {
-            canMove = false;
+            activeCharacter->setCanMove(false);
          }
          activeCharacter->setState(STATE_IDLE);
          if(walkSound)
@@ -2897,15 +2868,18 @@ void engine::renderNoShadowThings()
          turnCharacter = activeCharacter;
       }
       /* Draw Movimentation Circles */
-      if(canMove)
+      if(turnCharacter->getCanMove())
       {
          /* Full Circle */
-         actualMap->renderSurfaceOnMap(fullMoveCircle,
-               moveCircleX-2*WALK_PER_MOVE_ACTION,
-               moveCircleZ-2*WALK_PER_MOVE_ACTION,
-               moveCircleX+2*WALK_PER_MOVE_ACTION, 
-               moveCircleZ+2*WALK_PER_MOVE_ACTION,
-               0.1,12);
+         if(turnCharacter->getCanAttack())
+         {
+            actualMap->renderSurfaceOnMap(fullMoveCircle,
+                  moveCircleX-2*WALK_PER_MOVE_ACTION,
+                  moveCircleZ-2*WALK_PER_MOVE_ACTION,
+                  moveCircleX+2*WALK_PER_MOVE_ACTION, 
+                  moveCircleZ+2*WALK_PER_MOVE_ACTION,
+                  0.1,12);
+         }
          /* Normal Circle */
          actualMap->renderSurfaceOnMap(normalMoveCircle,
                moveCircleX-WALK_PER_MOVE_ACTION,
@@ -2914,11 +2888,10 @@ void engine::renderNoShadowThings()
                moveCircleZ+WALK_PER_MOVE_ACTION,
                0.2,20);
       }
-      if( (canAttack) && (!fullMovePCAction) && 
-          (fightStatus != FIGHT_NPC_TURN) )
+      if( (turnCharacter->getCanAttack()) )
       {
          /* Feat Range Circle */
-         float rangeValue = activeCharacter->getActiveFeatRange()*METER_TO_DNT;
+         float rangeValue = turnCharacter->getActiveFeatRange()*METER_TO_DNT;
          actualMap->renderSurfaceOnMap(featRangeCircle, 
                turnCharacter->xPosition-rangeValue,
                turnCharacter->zPosition-rangeValue, 
@@ -3200,7 +3173,7 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    if((engineMode == ENGINE_MODE_TURN_BATTLE) && 
        (fightStatus == FIGHT_PC_TURN))
    {
-      if(!canMove)
+      if(!activeCharacter->getCanMove())
       {
          /* Already Moved */
          return(false);
@@ -3210,8 +3183,9 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
                    (activeCharacter->xPosition + varX - moveCircleX) +
                    (activeCharacter->zPosition + varZ - moveCircleZ) *
                    (activeCharacter->zPosition + varZ - moveCircleZ) );
-      if( ( (canAttack) && (dist > 2*WALK_PER_MOVE_ACTION)) || 
-            ( (!canAttack) && (dist > WALK_PER_MOVE_ACTION) ))
+      if( ( (activeCharacter->getCanAttack()) && 
+            (dist > 2*WALK_PER_MOVE_ACTION)) || 
+          ( (dist > WALK_PER_MOVE_ACTION) )  )
       {
          return(false);
       }
@@ -3246,11 +3220,7 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
       {
          if(dist > WALK_PER_MOVE_ACTION)
          {
-            fullMovePCAction = true;
-         }
-         else
-         {
-            fullMovePCAction = false;
+            activeCharacter->setCanAttack(false);
          }
       }
    }
@@ -3471,10 +3441,7 @@ int engine::run(SDL_Surface *surface, bool commingBack)
                {
                   PCs->setActiveCharacter(fight->actualCharacterTurn());
                   character* activeCharacter = PCs->getActiveCharacter();
-                  fullMovePCAction = false;
-                  canMove = true;
                   attackFeat = activeCharacter->getActiveFeatRangeType();
-                  canAttack = true;
 
                   moveCircleX = activeCharacter->xPosition;
                   moveCircleY = activeCharacter->yPosition;

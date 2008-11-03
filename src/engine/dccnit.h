@@ -218,11 +218,6 @@ class engine
        ***************************************************************/
       fightSystem* getFightSystem();
 
-      /*! Get the canAttack value
-       * \return -> true if the character acting in the turn can attack,
-       *            false otherwise. */
-      bool getCanAttack();
-
    private:
 
       /*!
@@ -438,9 +433,6 @@ class engine
 
       Uint32 lastTurnTime;        /**< Time when last calls for turn */
       int fightStatus;            /**< Current Fight Status */
-      bool fullMovePCAction;      /**< Taked Full Move Action on round? */
-      bool canAttack;             /**< can attack in the round? */
-      bool canMove;               /**< can move more in the round? */
       int attackFeat;             /**< attack feat to use. */
 
       conection* curConection;    /**< Current Mouse Conection */

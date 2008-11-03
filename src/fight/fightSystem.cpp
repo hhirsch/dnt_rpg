@@ -148,6 +148,13 @@ void fightSystem::setActualActor(character* actor)
 void fightSystem::verifyDeads()
 {
    char buf[512];
+
+   if(actualActor->currentEnemy == NULL)
+   {
+      /* No current enemy, so no need to verify */
+      return;
+   }
+
    //TODO verify other deads than the target one (for example for a feat
    // that affects an area instead of a target)!
 
@@ -291,6 +298,10 @@ int fightSystem::doTurn()
 
          /* Set its state to IDLE */
          actualActor->setState(STATE_IDLE);
+
+         /* Clear its actions! */
+         actualActor->setCanAttack(true);
+         actualActor->setCanMove(true);
 
          if(isPC(actualActor))
          {

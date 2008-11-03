@@ -449,13 +449,14 @@ void pendingActionController::treatActions(Map* actualMap)
                act->actor->pathFind.forceNextCall();
 
                //FIXME Move not ON character but TO character
+               //FIXME : verify fightMode
                act->actor->pathFind.findPath(act->actor,
                                              act->target->xPosition - 
                                              ACT_MOVE_DELTA, 
                                              act->target->zPosition - 
                                              ACT_MOVE_DELTA, 
                                              act->actor->walk_interval, 
-                                             NPCs, PCs);
+                                             NPCs, PCs, false);
             }
          }
          character* actor = act->getActor();

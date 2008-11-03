@@ -200,6 +200,19 @@ class thing
        *  \return -> true if continue live */
       bool isAlive();
 
+      /*! Get if the thing still have attack actions at fight's turn
+       * \return -> true if have attack actions */
+      bool getCanAttack();
+      /*! Set if the thing have attack actions at a fight's turn
+       * \param can -> true if can, false if can't*/
+      void setCanAttack(bool can);
+      /*! Get if the thing still have move actions at fight's turn
+       * \return -> true if have move actions */
+      bool getCanMove();
+      /*! Set if the thing have move actions at a fight's turn
+       * \param can -> true if can, false if can't*/
+      void setCanMove(bool can);
+
 
       //////////////////////////////////////////////////////////////////////
       //                                                                  //
@@ -233,6 +246,9 @@ class thing
       string battleScriptFileName; /**< The Battle Script Filename */
 
       int thingType;              /**< The type of the thing */
+
+      bool canMove;               /**< If still have movements at fight */
+      bool canAttack;             /**< If still have actions at fight */
 
       string conversationFile;    /**< Name of the Conversation File */
       void* conv;                 /**< Pointer to the conversation */
