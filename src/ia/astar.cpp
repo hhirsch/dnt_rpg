@@ -132,6 +132,13 @@ void aStar::findPath(void* actor, GLfloat x, GLfloat z, GLfloat stepSize,
       dZ = (z - actualZ);
       GLfloat dist = sqrt( (dX*dX) + (dZ*dZ) );
 
+      /* Verify if the actor is alive (dead things can't walk, right?) */
+      if(!((character*)actor)->isAlive())
+      {
+         state = ASTAR_STATE_NOT_FOUND;
+         return;
+      }
+
       if(fightMode)
       {
          /* Verify if can walk */
