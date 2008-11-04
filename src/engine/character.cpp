@@ -802,17 +802,15 @@ character* characterList::insertCharacter(string file, featsList* ft,
       }
       else
       {
-         int cn;
-         cn = numberConstant(buf);
-         if( (isAttribute(cn)) || (isSkill(cn)) )
+         skill* skl =  novo->sk.getSkillByString(buf);
+
+         if(skl != NULL)
          {
-            sscanf(token2.c_str(), "%d", &novo->sk.m_skills[cn].points);
-            //TODO COSTS per SKILL, based on classes...
+            sscanf(token2.c_str(), "%d", &skl->points);
          }
          else
          {
-            //FIXME commented until fix the numberConstant thing
-            //printf("Unkown token: %s at file: %s\n",buf.c_str(),file.c_str());
+            cout << "Unknow token '" << buf << "' at file: " << file << endl;
          }
          //TODO FEATS.
       }
