@@ -9,13 +9,11 @@ t texturas/floor_indoor/burl.png texturas/floor_indoor/burl.png 169 94 57
 t texturas/floor_indoor/steel1.png texturas/floor_indoor/steel1.png 128 128 128
 t texturas/floor_indoor/steel4.png texturas/floor_indoor/steel4.png 113 91 72
 d models/objetos/geral/porta7/porta7.dcc 128.000000,75.440201:90
-d models/objetos/geral/porta7/porta7.dcc 138.000000,75.440201:90
-d models/objetos/geral/porta7/porta7.dcc 247.237839,266.000000:0
 d models/objetos/geral/porta7/porta7.dcc 247.237839,256.000000:0
 d models/objetos/geral/porta7/porta7.dcc 192.000000,123.610687:90
 d models/objetos/geral/porta7/porta7.dcc 59.392025,192.000000:0
 d models/objetos/geral/porta7/porta7.dcc 152.558258,384.000000:0
-wall 128.000000,75.440201,138.000000,138.000000
+wall 118.000000,75.440201,128.000000,138.000000
 wtf 16,16,16 texturas/floor_indoor/burl.png
 wtb 48,50,16 texturas/floor_indoor/burl.png
 wtr 64,50,16 texturas/floor_indoor/burl.png
@@ -30,12 +28,12 @@ wtf 16,16,16 texturas/floor_indoor/burl.png
 wtb 16,16,16 texturas/floor_indoor/burl.png
 wtr 62,50,16 texturas/floor_indoor/mosaic2.png
 wtl 63,50,16 texturas/floor_indoor/burl.png
-wall 81.229828,192.000000,128.000000,202.000000
+wall 81.229828,192.000000,118.000000,202.000000
 wtf 59,50,16 texturas/floor_indoor/burl.png
 wtb 60,50,16 texturas/floor_indoor/mosaic2.png
 wtr 16,16,16 texturas/floor_indoor/burl.png
 wtl 16,16,16 texturas/floor_indoor/burl.png
-wall 128.000000,10.000000,138.000000,53.602402
+wall 118.000000,10.000000,128.000000,53.602402
 wtf 16,16,16 texturas/floor_indoor/burl.png
 wtb 48,50,16 texturas/floor_indoor/burl.png
 wtr 64,50,16 texturas/floor_indoor/burl.png
@@ -55,12 +53,12 @@ wtf 59,50,16 texturas/floor_indoor/burl.png
 wtb 60,50,16 texturas/floor_indoor/mosaic2.png
 wtr 16,16,16 texturas/floor_indoor/burl.png
 wtl 16,16,16 texturas/floor_indoor/burl.png
-wall 10.000000,128.000000,128.000000,138.000000
+wall 10.000000,128.000000,118.000000,138.000000
 wtf 59,50,16 texturas/floor_indoor/steel4.png
 wtb 59,50,16 texturas/floor_indoor/burl.png
 wtr 16,16,16 texturas/floor_indoor/burl.png
 wtl 16,16,16 texturas/floor_indoor/burl.png
-wall 128.000000,192.000000,138.000000,374.000000
+wall 118.000000,192.000000,128.000000,374.000000
 wtf 46,50,16 texturas/floor_indoor/burl.png
 wtb 16,16,16 texturas/floor_indoor/burl.png
 wtr 58,50,16 texturas/floor_indoor/burl.png
@@ -75,7 +73,7 @@ wtf 63,50,16 texturas/floor_indoor/mosaic2.png
 wtb 59,50,16 texturas/floor_indoor/burl.png
 wtr 16,16,16 texturas/floor_indoor/burl.png
 wtl 52,50,16 texturas/floor_indoor/burl.png
-wall 10.000000,374.000000,133.285858,384.000000
+wall 10.000000,374.000000,123.285858,384.000000
 wtf 61,50,16 texturas/floor_indoor/mosaic2.png
 wtb 16,16,16 texturas/floor_indoor/steel1.png
 wtr 16,16,16 texturas/floor_indoor/mosaic.png
@@ -90,7 +88,7 @@ wtf 16,16,16 texturas/floor_indoor/steel1.png
 wtb 16,16,16 texturas/floor_indoor/mosaic.png
 wtr 65,50,16 texturas/floor_indoor/steel4.png
 wtl 16,16,16 texturas/floor_indoor/steel1.png
-wall 10.000000,0.000000,133.734848,10.000000
+wall 10.000000,0.000000,123.734848,10.000000
 wtf 16,16,16 texturas/floor_indoor/steel1.png
 wtb 59,50,16 texturas/floor_indoor/steel4.png
 wtr 16,16,16 texturas/floor_indoor/mosaic.png
@@ -100,7 +98,7 @@ wtf 57,50,16 texturas/floor_indoor/steel4.png
 wtb 16,16,16 texturas/floor_indoor/steel1.png
 wtr 16,16,16 texturas/floor_indoor/mosaic.png
 wtl 16,16,16 texturas/floor_indoor/mosaic.png
-wall 133.285858,374.000000,152.558258,384.000000
+wall 123.285858,374.000000,152.558258,384.000000
 wtf 58,50,16 texturas/floor_indoor/burl.png
 wtb 16,16,16 texturas/floor_indoor/steel1.png
 wtr 55,52,16 texturas/floor_indoor/burl.png
@@ -130,7 +128,7 @@ wtf 16,16,16 texturas/floor_indoor/steel1.png
 wtb 57,50,16 texturas/floor_indoor/mosaic2.png
 wtr 16,16,16 texturas/floor_indoor/mosaic.png
 wtl 16,16,16 texturas/floor_indoor/mosaic.png
-wall 133.734848,0.000000,196.972458,10.000000
+wall 123.734848,0.000000,196.972458,10.000000
 wtf 16,16,16 texturas/floor_indoor/steel1.png
 wtb 57,50,16 texturas/floor_indoor/burl.png
 wtr 16,16,16 texturas/floor_indoor/mosaic.png
