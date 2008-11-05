@@ -204,15 +204,16 @@ void editor::openMap()
             int npc;
             char name[30];
             char arquivo[255];
-            float posX, posZ;
+            float posX, posZ,ori;
             fscanf(arq,"%d",&total);
             for(npc = 0; npc < total; npc++)
             {
-                fscanf(arq,"%s %s %f %f",&name[0],&arquivo[0],
-                       &posX,&posZ);
+                fscanf(arq,"%s %s %f %f %f",&name[0],&arquivo[0],
+                       &posX,&posZ, &ori);
                 per = NPCs->insertCharacter(arquivo,features, NULL, "");
                 per->xPosition = posX;
                 per->zPosition = posZ;
+                per->orientation = ori;
                 per->update(0); 
                 per->calculateBoundingBox();
             }

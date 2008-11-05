@@ -42,15 +42,31 @@ void npcs::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
    {
       state = NPCS_STATE_ADD;
 
+      /* Changed Character Position */
       if( (mX != mouseXw) || (mY != mouseYw))
       {
+         /* Set the new position */
          mX = mouseXw;
          mY = mouseYw;
          actualNpc->xPosition = mouseX;
          actualNpc->zPosition = mouseZ;
+         /* Get its current height */
          actualNpc->yPosition = actualMap->getHeight(mouseX, mouseZ);
       }
-      
+
+      /* Rotate the NPC + */
+      if( (mButton & SDL_BUTTON(2)) && (actualNpc != NULL) )
+      {
+         actualNpc->orientation = ((int) (actualNpc->orientation + 1)) % 360;
+      }
+
+      /* Rotate the NPC - */
+      if( (mButton & SDL_BUTTON(3)) && (actualNpc != NULL) )
+      {
+         actualNpc->orientation = ((int) (actualNpc->orientation - 1)) % 360;
+      }
+     
+      /* Insert the NPC */
       if( (mButton & SDL_BUTTON(1)) && (actualNpc != NULL) )
       {
          insertNpc(mouseX, mouseZ, actualNpc, 
@@ -98,6 +114,7 @@ void npcs::insertNpc(GLfloat xReal, GLfloat zReal,
 {
    character* per;
    per = NPCs->insertCharacter(npcFile,features, NULL, "");
+   per->orientation = npc->orientation;
    per->xPosition = xReal;
    per->zPosition = zReal;
    per->yPosition = actualMap->getHeight(xReal, zReal);
@@ -146,9 +163,9 @@ bool npcs::saveFile(string fileName)
       character* per = (character*) NPCs->getFirst();
       for(npc = 0; npc < NPCs->getTotal(); npc++)
       {
-         fprintf(arq,"%s %s %f %f\n",per->name.c_str(),
+         fprintf(arq,"%s %s %f %f %f\n",per->name.c_str(),
                  per->getCharacterFile().c_str(),
-                 per->xPosition,per->zPosition);
+                 per->xPosition,per->zPosition, per->orientation);
          per = (character*) per->next;
        }
        fclose(arq);

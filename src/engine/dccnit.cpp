@@ -519,11 +519,11 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
          int npc;
          char name[30];
          char arquivo[255];
-         GLfloat posX, posZ;
+         GLfloat posX, posZ, ori;
          fscanf(arq,"%d",&total);
          for(npc = 0; npc < total; npc++)
          {
-           fscanf(arq,"%s %s %f %f",&name[0],&arquivo[0],&posX,&posZ);
+           fscanf(arq,"%s %s %f %f %f",&name[0],&arquivo[0],&posX,&posZ,&ori);
            sprintf(texto, gettext("Loading NPC: %s"), name);
            showLoading(img,&texturaTexto,texturaCarga,
                        texto, progress);
@@ -531,6 +531,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
            /* Define Initial Position */
            per->initialXPosition = posX;
            per->initialZPosition = posZ;
+           per->orientation = ori;
            per->xPosition = posX;
            per->zPosition = posZ;
            per->yPosition = actualMap->getHeight(posX, posZ);
