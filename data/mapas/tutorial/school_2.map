@@ -1,71 +1,69 @@
 T 5X4
 # Made by DccNiTghtmare's MapEditor, 0.3
 Outdoor: 0
-t texturas/floor_indoor/steel4.png texturas/floor_indoor/steel4.png 113 91 72
-t texturas/floor_indoor/steel2.png texturas/floor_indoor/steel2.png 47 9 7
-t texturas/floor_outdoor/grass.png texturas/floor_outdoor/grass.png 54 102 49
-wall 10.000000,246.000000,310.000000,256.000000
-wtf 16,16,16 texturas/floor_outdoor/grass.png
-wtb 16,16,16 texturas/floor_outdoor/grass.png
-wtr 16,16,16 texturas/floor_outdoor/grass.png
-wtl 16,16,16 texturas/floor_outdoor/grass.png
-wall 310.000000,0.000000,320.000000,256.000000
-wtf 16,16,16 texturas/floor_outdoor/grass.png
-wtb 16,16,16 texturas/floor_outdoor/grass.png
-wtr 16,16,16 texturas/floor_outdoor/grass.png
-wtl 16,16,16 texturas/floor_outdoor/grass.png
-wall 0.000000,0.000000,10.000000,256.000000
-wtf 16,16,16 texturas/floor_outdoor/grass.png
-wtb 16,16,16 texturas/floor_outdoor/grass.png
-wtr 16,16,16 texturas/floor_outdoor/grass.png
-wtl 16,16,16 texturas/floor_outdoor/grass.png
+t texturas/floor_indoor/burl.png texturas/floor_indoor/burl.png 169 94 57
 wall 10.000000,0.000000,310.000000,10.000000
-wtf 16,16,16 texturas/floor_outdoor/grass.png
-wtb 16,16,16 texturas/floor_outdoor/grass.png
-wtr 16,16,16 texturas/floor_outdoor/grass.png
-wtl 16,16,16 texturas/floor_outdoor/grass.png
+wtf 64,64,64 texturas/floor_indoor/burl.png
+wtb 64,64,64 texturas/floor_indoor/burl.png
+wtr 64,64,64 texturas/floor_indoor/burl.png
+wtl 64,64,64 texturas/floor_indoor/burl.png
+wall 0.000000,0.000000,10.000000,256.000000
+wtf 64,64,64 texturas/floor_indoor/burl.png
+wtb 64,64,64 texturas/floor_indoor/burl.png
+wtr 64,64,64 texturas/floor_indoor/burl.png
+wtl 64,64,64 texturas/floor_indoor/burl.png
+wall 310.000000,0.000000,320.000000,256.000000
+wtf 64,64,64 texturas/floor_indoor/burl.png
+wtb 64,64,64 texturas/floor_indoor/burl.png
+wtr 64,64,64 texturas/floor_indoor/burl.png
+wtl 64,64,64 texturas/floor_indoor/burl.png
+wall 10.000000,246.000000,310.000000,256.000000
+wtf 64,64,64 texturas/floor_indoor/burl.png
+wtb 64,64,64 texturas/floor_indoor/burl.png
+wtr 64,64,64 texturas/floor_indoor/burl.png
+wtl 64,64,64 texturas/floor_indoor/burl.png
 #Z: 0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_indoor/steel2.png
+ut texturas/floor_indoor/burl.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_indoor/steel2.png
+ut texturas/floor_indoor/burl.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_indoor/steel4.png
+ut texturas/floor_indoor/burl.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_indoor/steel4.png
+ut texturas/floor_indoor/burl.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_indoor/steel4.png
+ut texturas/floor_indoor/burl.png
 #Z: 1
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_indoor/steel2.png
+ut texturas/floor_indoor/burl.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_indoor/steel2.png
+ut texturas/floor_indoor/burl.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_indoor/steel4.png
+ut texturas/floor_indoor/burl.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_indoor/steel2.png
+ut texturas/floor_indoor/burl.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_indoor/steel4.png
+ut texturas/floor_indoor/burl.png
 #Z: 2
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_indoor/steel2.png
+ut texturas/floor_indoor/burl.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_indoor/steel2.png
+ut texturas/floor_indoor/burl.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_indoor/steel4.png
+ut texturas/floor_indoor/burl.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_indoor/steel2.png
+ut texturas/floor_indoor/burl.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_indoor/steel4.png
+ut texturas/floor_indoor/burl.png
 #Z: 3
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_indoor/steel2.png
+ut texturas/floor_indoor/burl.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_indoor/steel2.png
+ut texturas/floor_indoor/burl.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_indoor/steel4.png
+ut texturas/floor_indoor/burl.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_indoor/steel4.png
+ut texturas/floor_indoor/burl.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_indoor/steel4.png
+ut texturas/floor_indoor/burl.png
 i 160.000000,128.000000
