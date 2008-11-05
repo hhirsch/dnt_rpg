@@ -769,6 +769,11 @@ character* characterList::insertCharacter(string file, featsList* ft,
       {
          novo->bloodFileName = token2;
       }
+      /* Challenge Rating */
+      else if(buf == "challengeRating")
+      {
+         sscanf(token2.c_str(), "%f", &novo->cr);
+      }
 
       //TODO
       /*else if (buf == "lifeDice")
