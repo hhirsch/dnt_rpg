@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-10-31 16:33-0200\n"
+"POT-Creation-Date: 2008-11-06 08:44-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,51 +16,51 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/classes/actions.cpp:96
+#: src/classes/actions.cpp:108
 #, c-format
 msgid "%s try to attack %s"
 msgstr ""
 
-#: src/classes/actions.cpp:101
+#: src/classes/actions.cpp:113
 #, c-format
 msgid "%s try to heal %s"
 msgstr ""
 
-#: src/classes/actions.cpp:111
+#: src/classes/actions.cpp:123
 msgid "Too far away for action!"
 msgstr ""
 
-#: src/classes/actions.cpp:193 src/classes/actions.cpp:216
+#: src/classes/actions.cpp:205 src/classes/actions.cpp:228
 msgid "Miss."
 msgstr ""
 
-#: src/classes/actions.cpp:196 src/classes/actions.cpp:200
+#: src/classes/actions.cpp:208 src/classes/actions.cpp:212
 msgid "Critical Miss!"
 msgstr ""
 
-#: src/classes/actions.cpp:229
+#: src/classes/actions.cpp:241
 #, c-format
 msgid "Healed %d points."
 msgstr ""
 
-#: src/classes/actions.cpp:233
+#: src/classes/actions.cpp:245
 #, c-format
 msgid "Hit for %d points."
 msgstr ""
 
-#: src/classes/actions.cpp:252 src/classes/actions.cpp:255
+#: src/classes/actions.cpp:264 src/classes/actions.cpp:267
 msgid "Critical Heal!"
 msgstr ""
 
-#: src/classes/actions.cpp:260 src/classes/actions.cpp:264
+#: src/classes/actions.cpp:272 src/classes/actions.cpp:276
 msgid "Critical Hit!"
 msgstr ""
 
-#: src/classes/feats.cpp:126
+#: src/classes/feats.cpp:124
 msgid "Invalid Feat"
 msgstr ""
 
-#: src/classes/feats.cpp:147
+#: src/classes/feats.cpp:145
 msgid "Not enought points to use!"
 msgstr ""
 
@@ -99,14 +99,14 @@ msgstr ""
 
 #: src/engine/alignwindow.cpp:55 src/engine/aspectwindow.cpp:70
 #: src/engine/attwindow.cpp:221 src/engine/classwindow.cpp:107
-#: src/engine/options.cpp:735 src/engine/racewindow.cpp:102
+#: src/engine/options.cpp:717 src/engine/racewindow.cpp:102
 #: src/engine/skillwindow.cpp:139
 msgid "Confirm"
 msgstr ""
 
 #: src/engine/alignwindow.cpp:59 src/engine/aspectwindow.cpp:74
 #: src/engine/attwindow.cpp:225 src/engine/barterwindow.cpp:48
-#: src/engine/classwindow.cpp:111 src/engine/options.cpp:739
+#: src/engine/classwindow.cpp:111 src/engine/options.cpp:721
 #: src/engine/racewindow.cpp:106 src/engine/skillwindow.cpp:142
 msgid "Cancel"
 msgstr ""
@@ -182,7 +182,7 @@ msgstr ""
 msgid "Attribute Description"
 msgstr ""
 
-#: src/engine/attwindow.cpp:511 src/engine/options.cpp:943
+#: src/engine/attwindow.cpp:511 src/engine/options.cpp:925
 msgid "Warning"
 msgstr ""
 
@@ -385,51 +385,51 @@ msgstr ""
 msgid "Can't load mouse cursor: %s\n"
 msgstr ""
 
-#: src/engine/dccnit.cpp:409
+#: src/engine/dccnit.cpp:406
 #, c-format
 msgid "Saving Current Map Modifications"
 msgstr ""
 
-#: src/engine/dccnit.cpp:458
+#: src/engine/dccnit.cpp:455
 #, c-format
 msgid "Loading Map: %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:515
+#: src/engine/dccnit.cpp:512
 #, c-format
 msgid "Ouch, can't load NPC's file: %s.\n"
 msgstr ""
 
-#: src/engine/dccnit.cpp:530
+#: src/engine/dccnit.cpp:527
 #, c-format
 msgid "Loading NPC: %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:555
+#: src/engine/dccnit.cpp:553
 msgid "Loading Character"
 msgstr ""
 
-#: src/engine/dccnit.cpp:561
+#: src/engine/dccnit.cpp:559
 msgid "Creating MiniMap"
 msgstr ""
 
-#: src/engine/dccnit.cpp:567
+#: src/engine/dccnit.cpp:565
 msgid "Putting GUI on Screen"
 msgstr ""
 
-#: src/engine/dccnit.cpp:614
+#: src/engine/dccnit.cpp:612
 msgid "Loading Particles"
 msgstr ""
 
-#: src/engine/dccnit.cpp:644
+#: src/engine/dccnit.cpp:642
 msgid "Loading Changes..."
 msgstr ""
 
-#: src/engine/dccnit.cpp:672
+#: src/engine/dccnit.cpp:670
 msgid "Done!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:764
+#: src/engine/dccnit.cpp:762
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -437,46 +437,50 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1292
+#: src/engine/dccnit.cpp:1290
 msgid "Too far away for the action!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1334
+#: src/engine/dccnit.cpp:1332
 msgid "No NPCs in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1386
+#: src/engine/dccnit.cpp:1383
 msgid "Surprise Attack Turn."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1403
+#: src/engine/dccnit.cpp:1397
 msgid "No enemies in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1575 src/engine/dccnit.cpp:2024
+#: src/engine/dccnit.cpp:1574 src/engine/dccnit.cpp:2024
 #: src/engine/shortcutswindow.cpp:32
 msgid "Nothing"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1767
+#: src/engine/dccnit.cpp:1772
 #, c-format
 msgid "%s taken."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1789
+#: src/engine/dccnit.cpp:1794
 msgid "Inventory is full!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1824
+#: src/engine/dccnit.cpp:1826
 msgid "Door"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1957
+#: src/engine/dccnit.cpp:1959
 #, c-format
 msgid "%s attacks %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:3430
+#: src/engine/dccnit.cpp:2089
+msgid "No more actions. Turn ended."
+msgstr ""
+
+#: src/engine/dccnit.cpp:3424
 msgid "Exit Battle Mode"
 msgstr ""
 
@@ -513,7 +517,7 @@ msgstr ""
 msgid "Load"
 msgstr ""
 
-#: src/engine/initial.cpp:77 src/engine/options.cpp:545
+#: src/engine/initial.cpp:77 src/engine/options.cpp:527
 msgid "Options"
 msgstr ""
 
@@ -648,98 +652,98 @@ msgstr ""
 msgid "Creating Options: %s\n"
 msgstr ""
 
-#: src/engine/options.cpp:211
+#: src/engine/options.cpp:218
 #, c-format
 msgid "Unknow option: %s\n"
 msgstr ""
 
-#: src/engine/options.cpp:241
+#: src/engine/options.cpp:248
 #, c-format
 msgid "Error while writing Options: %s\n"
 msgstr ""
 
-#: src/engine/options.cpp:439 data/weapons/types/munitions.dcl:2
+#: src/engine/options.cpp:421 data/weapons/types/munitions.dcl:2
 msgid "None"
 msgstr ""
 
-#: src/engine/options.cpp:444
+#: src/engine/options.cpp:426
 msgid "Characters"
 msgstr ""
 
-#: src/engine/options.cpp:449
+#: src/engine/options.cpp:431
 msgid "All"
 msgstr ""
 
-#: src/engine/options.cpp:465 data/weapons/types/sizes.dcl:3
+#: src/engine/options.cpp:447 data/weapons/types/sizes.dcl:3
 #: data/weapons/types/weights.dcl:3
 msgid "Normal"
 msgstr ""
 
-#: src/engine/options.cpp:468
+#: src/engine/options.cpp:450
 msgid "Pursue"
 msgstr ""
 
-#: src/engine/options.cpp:483
+#: src/engine/options.cpp:465
 msgid "Disabled"
 msgstr ""
 
-#: src/engine/options.cpp:486
+#: src/engine/options.cpp:468
 msgid "2x"
 msgstr ""
 
-#: src/engine/options.cpp:489
+#: src/engine/options.cpp:471
 msgid "4x"
 msgstr ""
 
-#: src/engine/options.cpp:549
+#: src/engine/options.cpp:531
 msgid "Music Volume:"
 msgstr ""
 
-#: src/engine/options.cpp:568
+#: src/engine/options.cpp:550
 msgid "Effects Volume:"
 msgstr ""
 
-#: src/engine/options.cpp:587
+#: src/engine/options.cpp:569
 msgid "Language:"
 msgstr ""
 
-#: src/engine/options.cpp:605
+#: src/engine/options.cpp:587
 msgid "Camera Mode:"
 msgstr ""
 
-#: src/engine/options.cpp:622
+#: src/engine/options.cpp:604
 msgid "Enable Grass Effects (need particles)"
 msgstr ""
 
-#: src/engine/options.cpp:631
+#: src/engine/options.cpp:613
 msgid "Enable Particles Effects"
 msgstr ""
 
-#: src/engine/options.cpp:646
+#: src/engine/options.cpp:628
 msgid "Reflections:"
 msgstr ""
 
-#: src/engine/options.cpp:665
+#: src/engine/options.cpp:647
 msgid "Screen Resolution:"
 msgstr ""
 
-#: src/engine/options.cpp:681
+#: src/engine/options.cpp:663
 msgid "Enable FullScreen"
 msgstr ""
 
-#: src/engine/options.cpp:692
+#: src/engine/options.cpp:674
 msgid "Anti-Aliasing:"
 msgstr ""
 
-#: src/engine/options.cpp:709
+#: src/engine/options.cpp:691
 msgid "FarView:"
 msgstr ""
 
-#: src/engine/options.cpp:724
+#: src/engine/options.cpp:706
 msgid "Enable MultiTextures"
 msgstr ""
 
-#: src/engine/options.cpp:944
+#: src/engine/options.cpp:926
 msgid "Some changes will only take effect upon restart."
 msgstr ""
 
@@ -835,29 +839,29 @@ msgstr ""
 msgid "Cost"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:135
+#: src/fight/fightSystem.cpp:133
 msgid "No more enemies."
 msgstr ""
 
-#: src/fight/fightSystem.cpp:164
+#: src/fight/fightSystem.cpp:169
 #, c-format
 msgid "%s is dead!"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:207
+#: src/fight/fightSystem.cpp:214
 #, c-format
 msgid "%s receive %d XP for killing"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:253 src/fight/fightSystem.cpp:272
+#: src/fight/fightSystem.cpp:261 src/fight/fightSystem.cpp:280
 msgid "New Round"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:258 src/fight/fightSystem.cpp:277
+#: src/fight/fightSystem.cpp:266 src/fight/fightSystem.cpp:285
 msgid "Error: No Characters!"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:290 src/fight/fightSystem.cpp:296
+#: src/fight/fightSystem.cpp:313 src/fight/fightSystem.cpp:319
 #, c-format
 msgid "%s's turn."
 msgstr ""
