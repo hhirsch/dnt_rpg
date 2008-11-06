@@ -28,7 +28,6 @@ void partController::init()
  **********************************************************************/
 void partController::finish()
 {
-   deleteAll();
    delete(waterfall);
    delete(fire);
    delete(waterSurface);
@@ -45,69 +44,10 @@ void partController::finish()
  **********************************************************************/
 void partController::deleteAll()
 {
-   while(waterfall->getTotal() > 0)
-   {
-      part1* wt = (part1*)waterfall->getFirst();
-      waterfall->removeSystem(waterfall->getFirst());
-      delete(wt);
-   }
-
-   while(fire->getTotal() > 0)
-   {
-      part2* fr = (part2*)fire->getFirst();
-      fire->removeSystem(fire->getFirst());
-      delete(fr);
-   }
-
-   while(waterSurface->getTotal() > 0)
-   {
-      part3* ws = (part3*)waterSurface->getFirst();
-      waterSurface->removeSystem(waterSurface->getFirst());
-      delete(ws);
-   }
-
-   while(smoke->getTotal() > 0)
-   {
-      part4* sm = (part4*)smoke->getFirst();
-      smoke->removeSystem(smoke->getFirst());
-      delete(sm);
-   }
-
-   while(blood->getTotal() > 0)
-   {
-      part5* bl = (part5*)blood->getFirst();
-      blood->removeSystem(blood->getFirst());
-      delete(bl);
-   }
-
-   while(lightning->getTotal() > 0)
-   {
-      part6* lt = (part6*)lightning->getFirst();
-      lightning->removeSystem(lightning->getFirst());
-      delete(lt);
-   }
-
-   while(snow->getTotal() > 0)
-   {
-      part7* sn = (part7*)snow->getFirst();
-      snow->removeSystem(snow->getFirst());
-      delete(sn);
-   }
-
-   while(grassParticles->getTotal() > 0)
-   {
-      grass* gr = (grass*)grassParticles->getFirst();
-      grassParticles->removeSystem(grassParticles->getFirst());
-      delete(gr);
-   }
-
-   while(meteorParticles->getTotal() > 0)
-   {
-      meteor* mt = (meteor*)meteorParticles->getFirst();
-      meteorParticles->removeSystem(meteorParticles->getFirst());
-      delete(mt);
-   }
-
+   /* Delete all Lists */
+   finish();
+   /* Recreate all lists */
+   init();
 }
 
 /**********************************************************************
