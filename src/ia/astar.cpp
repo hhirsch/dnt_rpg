@@ -2,8 +2,8 @@
 #include "../engine/collision.h"
 #include <math.h>
 
-#define SEARCH_LIMIT  10000  /**< Max Nodes the aStar will search */
-#define SEARCH_INTERVAL  10  /**< Interval of Nodes when aStar will sleep */
+#define SEARCH_LIMIT   1000  /**< Max Nodes the aStar will search */
+#define SEARCH_INTERVAL   5  /**< Interval of Nodes when aStar will sleep */
 #define MIN_CALL        200  /**< Minimun time interval to call search again */
 
 
@@ -149,11 +149,23 @@ void aStar::findPath(void* actor, GLfloat x, GLfloat z, GLfloat stepSize,
          }
       }
 
+      /* Verify if can occupy the destiny */
+      collision collisionDetect;
+      collisionDetect.defineMap(actualMap, (characterList*)npcs, 
+                                (characterList*)pcs);
+      GLfloat varHeight=0, nx=0, nz=0;
+      if(!collisionDetect.canWalk((character*)actor, destinyX, 0, destinyZ, 0, 
+                                   varHeight, nx, nz, false))
+      {
+         state = ASTAR_STATE_NOT_FOUND;
+         return;
+      }
+
       /* Verify if the destiny is in map and not too far away */
       if( (destinyX < 0) || (destinyZ < 0) || 
           (destinyX >= actualMap->getSizeX()*actualMap->squareSize()) ||
           (destinyZ >= actualMap->getSizeZ()*actualMap->squareSize()) ||
-          (dist > 5*WALK_PER_MOVE_ACTION ) )
+          (dist > 4*WALK_PER_MOVE_ACTION ) )
       {
          state = ASTAR_STATE_NOT_FOUND;
          return;
