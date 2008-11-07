@@ -359,7 +359,7 @@ void character::defineInitialLifePoints()
 {
    /* At First Level, the hit points is equal to the Max dice value 
     * plus  constitution bonus */
-   setMaxLifePoints(actualClass[0]->lifeDiceID + attBonus(ATT_CONSTITUTION));
+   setMaxLifePoints(2*actualClass[0]->lifeDiceID + attBonus(ATT_CONSTITUTION));
 }
 
 /*********************************************************************
