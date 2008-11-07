@@ -31,11 +31,11 @@ msgstr "Muito distante para realizar ação!"
 
 #: src/classes/actions.cpp:205 src/classes/actions.cpp:228
 msgid "Miss."
-msgstr "Erro."
+msgstr "Falha."
 
 #: src/classes/actions.cpp:208 src/classes/actions.cpp:212
 msgid "Critical Miss!"
-msgstr "Erro Crítico!"
+msgstr "Falha Crítica!"
 
 #: src/classes/actions.cpp:241
 #, c-format
