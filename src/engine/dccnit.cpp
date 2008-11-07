@@ -2046,6 +2046,7 @@ int engine::treatIO(SDL_Surface *screen)
    int x,y;
    int guiEvent;
    Uint8 mButton;
+   int i;
 
    GLfloat varTempo;  // Time Variation
    
@@ -2077,6 +2078,36 @@ int engine::treatIO(SDL_Surface *screen)
       mButton = SDL_GetMouseState(&x,&y);
       mouseX = x;
       mouseY = y;
+
+      /* Verify if will enter the Battle Mode because of
+       * enemies characters at range! */
+      if( (engineMode != ENGINE_MODE_TURN_BATTLE) && (NPCs != NULL) &&
+          (activeCharacter->isAlive()) )
+      {
+         character* npc = NPCs->getFirst();
+         for(i = 0; ( (i < NPCs->getTotal()) && 
+                      (engineMode != ENGINE_MODE_TURN_BATTLE)); i++)
+         {
+            /* Only Force Enter Battle Mode with Hostile Character */
+            if( (npc->isAlive()) && (npc->getPsychoState() == PSYCHO_HOSTILE) )
+            {
+               /* Verify Distance */
+               dist = sqrt( (npc->xPosition - activeCharacter->xPosition)*
+                            (npc->xPosition - activeCharacter->xPosition) +
+                            (npc->zPosition - activeCharacter->zPosition)*
+                            (npc->zPosition - activeCharacter->zPosition));
+
+               if(dist < 3*WALK_PER_MOVE_ACTION)
+               {
+                  //TODO -> do a perception check before enter!
+
+                  /* If near, enter battle Mode  */
+                  enterBattleMode(false);
+               }
+            }
+            npc = npc->next;
+         }
+      }
 
       /* Verify if need to endTurn */
       if(option->getAutoEndTurn())
