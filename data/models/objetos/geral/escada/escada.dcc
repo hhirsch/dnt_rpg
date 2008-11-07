@@ -1,0 +1,13 @@
+name = Escada
+cal3d = models/objetos/geral/escada/model.cfg
+inventory_sizes = 0 0
+inventory_texture = texturas/na.png
+life_points = 420
+fortitude = 3
+reflex = -1
+will = 1
+displacement = 0
+armature_class = 12
+size_modifier = 0
+cost = 200
+static_scenery = 1

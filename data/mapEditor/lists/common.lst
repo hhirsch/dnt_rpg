@@ -1,4 +1,4 @@
-30
+31
 Bookshelf models/objetos/geral/bookshelf/bookshelf.dcc
 Briefcase models/objetos/geral/mala/mala.dcc
 Calendar models/objetos/geral/calendar/calendar.dcc
@@ -26,6 +26,7 @@ RefMachine models/objetos/geral/refmachine/refmachine.dcc
 Rug models/objetos/geral/rug/rug.dcc
 Sofa models/objetos/geral/sofa/sofa.dcc
 Sofa_2 models/objetos/geral/sofa2/sofa2.dcc
+Stair models/objetos/geral/escada/escada.dcc
 TV_42 models/objetos/geral/tv42/tv42.dcc
 TV_Hack models/objetos/geral/tv_hack/tv_hack.dcc
 Wardrobe models/objetos/geral/wardrobe/wardrobe.dcc
