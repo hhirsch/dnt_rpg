@@ -313,9 +313,9 @@ pendingAction* pendingActionController::addAction(pendingAction* act,
             /* Save the target value to move (to get changes of 
              *                                target position ) */
             act->targetX = act->target->xPosition - 
-                                           ((int)(20*rand()/(RAND_MAX+1.0))+20);
+                                           ((int)(20*rand()/(RAND_MAX+1.0))+30);
             act->targetZ = act->target->zPosition - 
-                                           ((int)(20*rand()/(RAND_MAX+1.0))+20);
+                                           ((int)(20*rand()/(RAND_MAX+1.0))+30);
             
             /* It's a move to a target */
             act->actor->pathFind.findPath(act->actor,
