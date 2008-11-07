@@ -438,6 +438,7 @@ class engine
       conection* curConection;    /**< Current Mouse Conection */
 
       Uint32 walkPressTime;       /**< Ticks when pressed walk mouse button */
+      GLfloat walkDistance;       /**< The current walk distance travelled */
 
       part2* effect;
 

@@ -28,6 +28,7 @@ engine::engine()
    inventoryWindow = NULL;
 
    walkPressTime = 0;
+   walkDistance = 0;
 
    imgNumber = 0;
    actualScreen = NULL;
@@ -2420,9 +2421,8 @@ int engine::treatIO(SDL_Surface *screen)
          activeCharacter->pathFind.defineMap(actualMap);
 
          activeCharacter->pathFind.findPath(activeCharacter, xReal, zReal, 
-                                            activeCharacter->walk_interval, 
-                                            NPCs, PCs, 
-                                         engineMode == ENGINE_MODE_TURN_BATTLE);
+               activeCharacter->walk_interval, NPCs, PCs, 
+               engineMode == ENGINE_MODE_TURN_BATTLE);
       }
 
       /* Verify Continuous Walk with Mouse */
@@ -2592,13 +2592,26 @@ int engine::treatIO(SDL_Surface *screen)
       }
       else if( (timePass) && (activeCharacter->isAlive()))
       { 
+         /* The move stoped (or never occurred)  */
          if( (activeCharacter->getState() == STATE_WALK) &&
              (engineMode == ENGINE_MODE_TURN_BATTLE) && 
              (fightStatus == FIGHT_PC_TURN) )
          {
+            /* Stoped, so must set that cannot move */
             activeCharacter->setCanMove(false);
+
+            /* And verify if can attack */
+            if(walkDistance > WALK_PER_MOVE_ACTION)
+            {
+               activeCharacter->setCanAttack(false);
+            }
+            walkDistance = 0;
          }
+
+         /* Put at Idle animation */
          activeCharacter->setState(STATE_IDLE);
+
+         /* And remove walk sound effect */
          if(walkSound)
          {
             snd->removeSoundEffect(walkSound);
@@ -2926,7 +2939,8 @@ void engine::renderNoShadowThings()
                moveCircleZ+WALK_PER_MOVE_ACTION,
                0.2,20);
       }
-      if( (turnCharacter->getCanAttack()) )
+      if( (turnCharacter->getCanAttack()) && 
+          (walkDistance < WALK_PER_MOVE_ACTION) )
       {
          /* Feat Range Circle */
          float rangeValue = turnCharacter->getActiveFeatRange()*METER_TO_DNT;
@@ -3175,7 +3189,6 @@ bool engine::tryWalk(GLfloat varX, GLfloat varZ)
 bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 {
    bool result = true;
-   GLfloat dist = 0;
    GLfloat varHeight = 0;
    GLfloat nx, nz;
    character* activeCharacter = PCs->getActiveCharacter();
@@ -3186,28 +3199,31 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
       return(false);
    }
    else if((engineMode == ENGINE_MODE_TURN_BATTLE) && 
-       (fightStatus != FIGHT_PC_TURN))
+           (fightStatus != FIGHT_PC_TURN))
    {
        /* In turn mode, and not character's turn. */
        return(false);
    }
-   else
-   if((engineMode == ENGINE_MODE_TURN_BATTLE) && 
-       (fightStatus == FIGHT_PC_TURN))
+   else if((engineMode == ENGINE_MODE_TURN_BATTLE) && 
+           (fightStatus == FIGHT_PC_TURN))
    {
       if(!activeCharacter->getCanMove())
       {
          /* Already Moved */
          return(false);
       }
+
       //verify distance to the orign point
-      dist = sqrt( (activeCharacter->xPosition + varX - moveCircleX) *
-                   (activeCharacter->xPosition + varX - moveCircleX) +
-                   (activeCharacter->zPosition + varZ - moveCircleZ) *
-                   (activeCharacter->zPosition + varZ - moveCircleZ) );
+      walkDistance = sqrt( (activeCharacter->xPosition + varX - moveCircleX) *
+                           (activeCharacter->xPosition + varX - moveCircleX) +
+                           (activeCharacter->zPosition + varZ - moveCircleZ) *
+                           (activeCharacter->zPosition + varZ - moveCircleZ) );
+
+      /* Verify walk limits at FightMode */
       if( ( (activeCharacter->getCanAttack()) && 
-            (dist > 2*WALK_PER_MOVE_ACTION)) || 
-          ( (dist > WALK_PER_MOVE_ACTION) )  )
+            (walkDistance > 2*WALK_PER_MOVE_ACTION) ) || 
+          ( (!activeCharacter->getCanAttack()) &&
+            (walkDistance > WALK_PER_MOVE_ACTION) )  )
       {
          return(false);
       }
@@ -3235,16 +3251,6 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 
       /* Apply VarHeight */
       activeCharacter->yPosition += varHeight;
-      
-      /* Verify Turn Based Mode Action */
-      if((engineMode == ENGINE_MODE_TURN_BATTLE) && 
-         (fightStatus == FIGHT_PC_TURN))
-      {
-         if(dist > WALK_PER_MOVE_ACTION)
-         {
-            activeCharacter->setCanAttack(false);
-         }
-      }
    }
    
    return(result);
