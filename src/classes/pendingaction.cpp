@@ -309,20 +309,39 @@ pendingAction* pendingActionController::addAction(pendingAction* act,
             /* Do some randomize (current ticks + random number [0,1000) */
             srand(SDL_GetTicks() + (int)(1 + 1000 * 
                                          (rand() / (RAND_MAX + 1.0))));
-
+ 
             /* Save the target value to move (to get changes of 
              *                                target position ) */
-            act->targetX = act->target->xPosition - 
-                                           ((int)(20*rand()/(RAND_MAX+1.0))+30);
-            act->targetZ = act->target->zPosition - 
-                                           ((int)(20*rand()/(RAND_MAX+1.0))+30);
-            
+            bool signalX = ((rand()/(RAND_MAX+1.0)) > 0.5);
+            GLfloat varX = (int)((10 * (rand()/(RAND_MAX+1.0)))+10);
+
+            bool signalZ = ((rand()/(RAND_MAX+1.0)) > 0.5);
+            GLfloat varZ = (int)((10 * (rand()/(RAND_MAX+1.0)))+10);
+
+            /* Apply X variation */
+            if(signalX)
+            {
+               act->targetX = act->target->xPosition + varX;
+            }
+            else
+            {
+               act->targetX = act->target->xPosition - varX;
+            }
+
+            /* Apply X variation */
+            if(signalZ)
+            {
+               act->targetZ = act->target->zPosition + varZ;
+            }
+            else
+            {
+               act->targetZ = act->target->zPosition - varZ;
+            }
+
             /* It's a move to a target */
             act->actor->pathFind.findPath(act->actor,
-                                          act->target->xPosition - 
-                                          ACT_MOVE_DELTA, 
-                                          act->target->zPosition - 
-                                          ACT_MOVE_DELTA, 
+                                          act->targetX, 
+                                          act->targetZ, 
                                           act->actor->walk_interval, 
                                           NPCs, PCs, true);
          }
@@ -432,32 +451,9 @@ void pendingActionController::treatActions(Map* actualMap, bool fightMode)
       {
          if(act->getTargetThing() != NULL)
          {
-            /* Verify if the target moves */
-            thing* tgt = act->getTargetThing();
-            GLfloat tX = 0, tZ = 0;
-            act->getTargetPosition(tX, tZ);
-            if( ( (tgt->xPosition <= tX - ACT_MOVE_DELTA) || 
-                  (tgt->xPosition >= tX + ACT_MOVE_DELTA) ) || 
-                ( (tgt->zPosition <= tZ - ACT_MOVE_DELTA) || 
-                  (tgt->zPosition >= tZ + ACT_MOVE_DELTA) ) )
-            {
-               /* Rerun the pathFind */
-               act->targetX = tgt->xPosition;
-               act->targetZ = tgt->zPosition;
-
-               act->setToggle(false);
-               act->actor->pathFind.forceNextCall();
-
-               //FIXME Move not ON character but TO character
-               act->actor->pathFind.findPath(act->actor,
-                                             act->target->xPosition - 
-                                             ACT_MOVE_DELTA, 
-                                             act->target->zPosition - 
-                                             ACT_MOVE_DELTA, 
-                                             act->actor->walk_interval, 
-                                             NPCs, PCs, fightMode);
-            }
+            /* TODO Verify if the target moves */
          }
+
          character* actor = act->getActor();
          if( (actor->isAlive()) && 
              (!dlgWindow.isOpened((conversation*)actor->getConversation())))
