@@ -427,10 +427,21 @@ void aStar::setOrientation(GLfloat ori)
 bool aStar::getNewPosition(GLfloat& posX, GLfloat& posZ, GLfloat& ori,
                            bool fightMode)
 {
+   GLfloat pX=0, pZ=0;
+
+   /* Get the pattern next position */
    if(patt->defineNextPosition())
    {
+      /* If Position not changed (with the same angle), the move ended! */
+      patt->getPosition(pX, pZ);
+      if( (pX == posX) && (pZ == posZ) && (ori == patt->orientationValue()) )
+      {
+         return(false);
+      }
+
       /* Update Position */
-      patt->getPosition(posX, posZ);
+      posX = pX;
+      posZ = pZ;
       ori = patt->orientationValue();
 
       if(fightMode)
