@@ -2554,6 +2554,14 @@ int engine::treatIO(SDL_Surface *screen)
 
       /* Update FPS */
       actualFPS = (actualFPS + (1000.0 / (SDL_GetTicks() - lastRead))) / 2;
+
+      /* Limit its max */
+      if(actualFPS > 1000)
+      {
+         actualFPS = 1000;
+      }
+
+      /* Show it! */
       if( time-lastFPS >= 500 )
       {
          lastFPS = time;
