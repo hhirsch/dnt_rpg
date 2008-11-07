@@ -1,13 +1,9 @@
 T 5X4
 # Made by DccNiTghtmare's MapEditor, 0.3
+npc mapas/tutorial/school_2.map.npc
 Outdoor: 0
 t texturas/floor_indoor/burl.png texturas/floor_indoor/burl.png 169 94 57
-wall 10.000000,0.000000,310.000000,10.000000
-wtf 64,64,64 texturas/floor_indoor/burl.png
-wtb 64,64,64 texturas/floor_indoor/burl.png
-wtr 64,64,64 texturas/floor_indoor/burl.png
-wtl 64,64,64 texturas/floor_indoor/burl.png
-wall 0.000000,0.000000,10.000000,256.000000
+wall 10.000000,246.000000,310.000000,256.000000
 wtf 64,64,64 texturas/floor_indoor/burl.png
 wtb 64,64,64 texturas/floor_indoor/burl.png
 wtr 64,64,64 texturas/floor_indoor/burl.png
@@ -17,7 +13,12 @@ wtf 64,64,64 texturas/floor_indoor/burl.png
 wtb 64,64,64 texturas/floor_indoor/burl.png
 wtr 64,64,64 texturas/floor_indoor/burl.png
 wtl 64,64,64 texturas/floor_indoor/burl.png
-wall 10.000000,246.000000,310.000000,256.000000
+wall 0.000000,0.000000,10.000000,256.000000
+wtf 64,64,64 texturas/floor_indoor/burl.png
+wtb 64,64,64 texturas/floor_indoor/burl.png
+wtr 64,64,64 texturas/floor_indoor/burl.png
+wtl 64,64,64 texturas/floor_indoor/burl.png
+wall 10.000000,0.000000,310.000000,10.000000
 wtf 64,64,64 texturas/floor_indoor/burl.png
 wtb 64,64,64 texturas/floor_indoor/burl.png
 wtr 64,64,64 texturas/floor_indoor/burl.png
@@ -33,6 +34,13 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
+uo models/junk/madeira1/madeira1.dcc 1:5,1:291.192474,1.100000,44.209053:-241.000000:0
+uo models/junk/madeira1/madeira1.dcc 1:5,1:292.389465,0.000000,61.654343:-244.000000:0
+uo models/junk/madeira1/madeira1.dcc 1:5,1:285.318695,0.000000,43.732330:-177.000000:0
+uo models/junk/madeira1/madeira1.dcc 1:5,1:284.121185,1.400000,34.221058:-78.000000:0
+uo models/junk/madeira1/madeira1.dcc 1:5,1:274.904022,0.000000,30.905388:-185.000000:0
+uo models/junk/madeira1/madeira1.dcc 1:5,1:293.748016,0.000000,32.632286:-143.000000:0
+uo models/objetos/itens/healkit/healkit.dcc 1:5,1:275.371643,1.100000,26.237434:-30.000000:0
 #Z: 1
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
@@ -44,6 +52,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
+uo models/junk/madeira1/madeira1.dcc 0:5,1:292.389465,0.000000,61.654343:-244.000000:0
 #Z: 2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
