@@ -143,13 +143,11 @@ void comicPage::render()
    { 
       ratio = (float)SCREEN_Y / (float)texture->h;
    }
- 
-   
 
    glColor4f(1.0,1.0,1.0,1.0);
 
-
    glPushMatrix();
+   glDisable(GL_DEPTH_TEST);
 
    /* Center the Page on screen */
    if(texture)
@@ -182,6 +180,7 @@ void comicPage::render()
    glPopMatrix();
 
    glDisable(GL_TEXTURE_2D);
+   glEnable(GL_DEPTH_TEST);
 }
 
 /***********************************************************************

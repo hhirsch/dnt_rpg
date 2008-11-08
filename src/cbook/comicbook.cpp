@@ -386,7 +386,6 @@ bool comicBook::verifyInput()
 
    /* If Skip Texture Pressed, skip comic book too */
    if(isMouseAt(SCREEN_X-55, SCREEN_Y-55, SCREEN_X, SCREEN_Y, mouseX, mouseY)) 
-
    {
       changeColor = true;
       if(mButton & SDL_BUTTON(1))
