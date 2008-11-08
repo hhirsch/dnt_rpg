@@ -251,9 +251,12 @@ bool defParser::load(string fileName, bool fullPath)
           /* get the data */
           strData = strBuffer.substr(pos, strBuffer.length() - pos);
           /* Delete last character if it is an \n or #13.
-           * This is an issue that happens mainly on windows */
-          if( (strData[strData.length()-1] == '\n') ||
-              (strData[strData.length()-1] == 13) )
+           * This is an issue that happens mainly on windows.
+           * Also, delete it while is an space */
+          while( (strData.length() > 0) &&
+                 ( (strData[strData.length()-1] == '\n') ||
+                   (strData[strData.length()-1] == 13) ||
+                   (strData[strData.length()-1] == ' ') ) )
           {
              strData.erase(strData.length()-1);
           }
