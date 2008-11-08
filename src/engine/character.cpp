@@ -4,12 +4,17 @@
 
 
 #include "character.h"
+#include "barterwindow.h"
 #include "dialog.h"
+
 #include "../gui/draw.h"
 #include "../ia/iascript.h"
 #include "../etc/dirs.h"
+#include "../etc/defparser.h"
+
 #include <SDL/SDL_image.h>
-#include "barterwindow.h"
+#include <iostream>
+using namespace std;
 
 #define BORDER_FILE "characters/portraits/borda.png"
 #define BORDER_SIZE 5
@@ -615,41 +620,6 @@ characterList::~characterList()
    delete(first);
 }
 
-/**************************************************************
- *                        getAfterEqual                       *
- **************************************************************/
-string getAfterEqual(string s)
-{
-   unsigned int i = 0;
-
-   /* First, delete the \n character at the end of the string,
-    * if there is one there. */
-   if(s[s.length()-1] == '\n')
-   {
-      s.erase(s.length()-1,1);
-   }
-
-   /* Goes to the equal character */
-   while( (i < s.length()) && (s[i] != '='))
-   {
-      i++;
-   }
-   i++;
-
-   /* Remove all spaces after the equal */
-   while( (i < s.length()) && (s[i] == ' '))
-   {
-      i++;
-   }
-
-   if(i < s.length())
-   {
-      return(s.substr(i));
-   }
-   printf("Error parsing %s\n", s.c_str());
-   return("");
-}
- 
 /*********************************************************************
  *                           insertCharacter                         *
  *********************************************************************/
@@ -657,12 +627,11 @@ character* characterList::insertCharacter(string file, featsList* ft,
                                           void* pEngine, string curMap)
 
 {
-   dirs dir;
-   FILE* arq;
-   char buffer[128];
-   string buf; 
+   defParser def;
    string arqModelo;
-   string token2;
+   string key, value;
+  
+   /* Create the Character */ 
    character* novo;
    novo = new character(ft);
    novo->orientation = 0.0;
@@ -670,152 +639,140 @@ character* characterList::insertCharacter(string file, featsList* ft,
    novo->zPosition = 0.0;
    novo->yPosition = 0.0;
 
-   if(!(arq = fopen(dir.getRealFile(file).c_str(),"r")))
+   /* Try to Load the file */
+   if(!def.load(file))
    {
-      printf("Error while opening character file: %s\n",
-             dir.getRealFile(file).c_str());
-	return(0);
+      cerr << "Error while opening character file: " << file << endl;
+      delete(novo);
+      return(0);
    }
 
-   while(fscanf(arq, "%s", buffer) != EOF)
+   /* Parse it! */
+   while(def.getNextTuple(key, value))
    {
-      buf = buffer;
-
-      /* eat up the rest of line */
-      fgets(buffer, sizeof(buffer), arq);
-      token2 = getAfterEqual(buffer);
-      if(token2 == "")
-      {
-         printf("at file: %s\n",file.c_str());
-      }
-
       /* Character Name */
-      if(buf == "name")
+      if(key == "name")
       {
-         novo->name = token2;
+         novo->name = value;
       }
       /* Character FileName */
-      else if(buf == "model")
+      else if(key == "model")
       {
          novo->setCharacterFile(file);
-         arqModelo = token2;
+         arqModelo = value;
       }
       /* Define the Portrait */
-      else if(buf == "portrait")
+      else if(key == "portrait")
       {
-         novo->definePortrait(token2);
+         novo->definePortrait(value);
       }
       /* LifePoints */
-      else if(buf == "maxLifePoints")
+      else if(key == "maxLifePoints")
       {
-         sscanf(token2.c_str(), "%d", &novo->lifePoints);
+         sscanf(value.c_str(), "%d", &novo->lifePoints);
          novo->maxLifePoints = novo->lifePoints;
       }
       /* Base Modifier */
-      else if (buf == "baseModifier")
+      else if(key == "baseModifier")
       {
-         sscanf(token2.c_str(),"%d/%d/%d", &novo->fortitude, &novo->reflex, 
-                                           &novo->iAmNotAFool); 
+         sscanf(value.c_str(),"%d/%d/%d", &novo->fortitude, &novo->reflex, 
+                                          &novo->iAmNotAFool); 
       }
       /* Attack Modifier */
-      else if (buf == "attackModifier")
+      else if(key == "attackModifier")
       {
-         sscanf(token2.c_str(),"%d", &novo->baseAttackModifier);
+         sscanf(value.c_str(),"%d", &novo->baseAttackModifier);
          //TODO others attack modifiers
       }
       /* Size Mofifier */
-      else if (buf == "sizeModifier")
+      else if(key == "sizeModifier")
       {
-         sscanf(token2.c_str(), "%d", &novo->sizeModifier);
+         sscanf(value.c_str(), "%d", &novo->sizeModifier);
       }
       /* Walk Interval */
-      else if (buf == "walk_interval")
+      else if(key == "walk_interval")
       {
-         sscanf(token2.c_str(), "%f", &novo->walk_interval);
+         sscanf(value.c_str(), "%f", &novo->walk_interval);
          novo->walk_interval *= WALK_UPDATE;
       }
       /* Conversation File */
-      else if (buf == "conversationFile")
+      else if(key == "conversationFile")
       {
-         novo->setConversationFile(token2);
+         novo->setConversationFile(value);
          novo->createConversation(curMap);
       }
       /* General Script */
-      else if(buf == "generalScript")
+      else if(key == "generalScript")
       {
          /* Create the script */
-         iaScript* isc = new iaScript(token2, pEngine);
+         iaScript* isc = new iaScript(value, pEngine);
          novo->generalScript = isc;
-         novo->generalScriptFileName = token2;
+         novo->generalScriptFileName = value;
          /* Set the owner */
          isc->defineCharacterOwner(novo);
       }
       /* Battle Script */
-      else if(buf == "battleScript")
+      else if(key == "battleScript")
       {
          /* Create the Script */
-         iaScript* isc = new iaScript(token2, pEngine);
-         novo->setBattleScript(isc, token2);
+         iaScript* isc = new iaScript(value, pEngine);
+         novo->setBattleScript(isc, value);
          /* Set the owner */
          isc->defineCharacterOwner(novo);
       }
       /* Blood Position */
-      else if(buf == "bloodPosition")
+      else if(key == "bloodPosition")
       {
-         sscanf(token2.c_str(), "%f", &novo->bloodPosition); 
+         sscanf(value.c_str(), "%f", &novo->bloodPosition); 
       }
       /* Blood File Name */
-      else if(buf == "bloodFileName")
+      else if(key == "bloodFileName")
       {
-         novo->bloodFileName = token2;
+         novo->bloodFileName = value;
       }
       /* Challenge Rating */
-      else if(buf == "challengeRating")
+      else if(key == "challengeRating")
       {
-         sscanf(token2.c_str(), "%f", &novo->cr);
+         sscanf(value.c_str(), "%f", &novo->cr);
       }
 
       //TODO
-      /*else if (buf == "lifeDice")
+      /*else if(key == "lifeDice")
       {
-         fgets(buffer, sizeof(buffer),arq);
-         sscanf(buffer, "d%d", &novo->lifeDice);
+         sscanf(value.c_str(), "d%d", &novo->lifeDice);
       }
-      else if (buf == "race")
+      else if(key == "race")
       {
-         fgets(buffer, sizeof(buffer),arq);
-         sscanf(buffer, "%s", &buf2[0]);
-         novo->race = numberConstant(buf2);
+         novo->race = numberConstant(value);
       }
-      else if (buf == "class")
+      else if(key == "class")
       {
-         fgets(buffer, sizeof(buffer),arq);
-         sscanf(buffer, "%s", &buf2[0]);
-         novo->cclass = numberConstant(buf2);
+         novo->cclass = numberConstant(value);
       }
-      else if (buf == "tendency")
+      else if(key == "tendency")
       {
-         fgets(buffer, sizeof(buffer),arq);
-         sscanf(buffer, "%s", &buf2[0]);
-         novo->tendency = numberConstant(buf2);
+         novo->tendency = numberConstant(value);
       }*/
 
       /* Psycho State */
-      else if (buf == "psychoState")
+      else if(key == "psychoState")
       {
-         sscanf(token2.c_str(), "%d", &novo->psychoState);
+         sscanf(value.c_str(), "%d", &novo->psychoState);
       }
+
+      /* Some Skill or Attribute definition */
       else
       {
-         skill* skl =  novo->sk.getSkillByString(buf);
+         skill* skl =  novo->sk.getSkillByString(key);
 
          if(skl != NULL)
          {
-            sscanf(token2.c_str(), "%d", &skl->points);
+            sscanf(value.c_str(), "%d", &skl->points);
          }
          else
          {
-            cout << "Unknow token '" << buf << "' at file: " << file << endl;
+            /* No skill?? So unknow Token! */
+            cout << "Unknow token '" << key << "' at file: " << file << endl;
          }
          //TODO FEATS.
       }
@@ -823,7 +780,7 @@ character* characterList::insertCharacter(string file, featsList* ft,
    }
   
    /* Define AC TODO others values to sum here*/ 
-   novo->armatureClass = 10 + novo->sizeModifier + novo->attBonus(ATT_DEXTERITY);
+   novo->armatureClass = 10+novo->sizeModifier+novo->attBonus(ATT_DEXTERITY);
    
    /* Load The 3D Model */ 
    novo->loadModel(arqModelo);
