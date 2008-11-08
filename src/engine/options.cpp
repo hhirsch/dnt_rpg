@@ -4,6 +4,7 @@
 #include "camera.h"
 #include "util.h"
 #include "../etc/userinfo.h"
+#include "../etc/defparser.h"
 #include "../etc/dirs.h"
 #include "../etc/extensions.h"
 
@@ -77,9 +78,11 @@ void options::getAvaibleResolutions()
 bool options::load()
 {
    string file;
+   
    /* Try to Load From Users Directory */
    userInfo info;
    file  = info.getUserHome()+"options.cfg";
+
    if(!load(file))
    {
       cerr << "Can't Open the options file: " << file << endl;
@@ -120,115 +123,123 @@ bool options::load()
  ****************************************************************/
 bool options::load(string file)
 {
-   FILE* arq;
-   char buffer[256];
-   int aux;
-   string s = "";
+   defParser def;
+   string key="", value="";
 
    reflexionType = REFLEXIONS_NONE;
   
    timeLastOperation = SDL_GetTicks();
 
-   if(!(arq = fopen(file.c_str(),"r")))
+   /* Try to load the definitions */
+   if(!def.load(file, true))
    {
       return(false);
    }
 
-   while(fscanf(arq, "%s", buffer) != EOF)
+   /* The first key is mandatory options version */
+   def.getNextTuple(key, value);
+   if(key != "Version")
    {
-      s = buffer;
-      if(s == "Sound:")
+      /* FIXME: convert old files! */
+      cerr << "DNT Options too old (<0.3), so ignoring it!" << endl;
+      return(false);
+   }
+
+   /* Now, parse all tuples got */
+   while(def.getNextTuple(key, value))
+   {
+      /**********************************************
+       *                 Sound Options              *
+       **********************************************/
+      if(key == "SoundVolume")
       {
-         /* Read Sound and Music Options */
-         fgets(buffer, sizeof(buffer), arq);
-         sscanf(buffer,"%d %d",&musicVolume,&sndfxVolume);
+         /* Read Sound Options */
+         sscanf(value.c_str(), "%d", &sndfxVolume);
       }
-      else if(s == "Language:")
+      else if(key == "MusicVolume")
+      {
+         /* Read Music Options */
+         sscanf(value.c_str(), "%d", &musicVolume);
+      }
+
+      /**********************************************
+       *                 Game Options               *
+       **********************************************/
+      else if(key == "Language")
       {
          /* Read Language Options */
-         fgets(buffer, sizeof(buffer), arq); 
-         sscanf(buffer,"%d",&langNumber);
+         sscanf(value.c_str(), "%d", &langNumber);
       }
-      else if(s == "Camera:")
+      else if(key == "Camera")
       {
          /* Read Camera Options */
-         fgets(buffer, sizeof(buffer), arq); 
-         sscanf(buffer,"%d",&cameraNumber);
+         sscanf(value.c_str(),"%d",&cameraNumber);
       }
-      else if(s == "Particles:")
-      {
-         /* Read Particles Options */
-         fgets(buffer, sizeof(buffer), arq); 
-         sscanf(buffer,"%d",&aux);
-         enableParticles = (aux == 1);
-      }
-      else if(s == "Grass:")
-      {
-         /* Read Grass Options */
-         fgets(buffer, sizeof(buffer), arq); 
-         sscanf(buffer,"%d",&aux);
-         enableGrass = (aux == 1);
-      }
-      else if(s == "Reflexions:")
-      {
-         /* Read Reflexions Options */
-         fgets(buffer, sizeof(buffer), arq);
-         sscanf(buffer,"%d",&aux);
-         reflexionType = aux;
-      }
-      else if(s == "Resolution:")
-      {
-         /* Read the resolution informations */
-         fgets(buffer, sizeof(buffer), arq);
-         sscanf(buffer,"%d %d", &screenWidth, &screenHeight);
-      }
-      else if(s == "FullScreen:")
-      {
-         /* Read FullScreen Options */
-         fgets(buffer, sizeof(buffer), arq); 
-         sscanf(buffer,"%d",&aux);
-         enableFullScreen = (aux == 1);
-      }
-      else if(s == "MultiTexture:")
-      {
-         /* Read Multitexture options */
-         fgets(buffer, sizeof(buffer), arq);
-         sscanf(buffer,"%d",&aux);
-         enableMultiTexture = (aux == 1);
-      }
-      else if(s == "AutoEndTurn:")
+      else if(key == "AutoEndTurn")
       {
          /* Read Auto End Turn options */
-         fgets(buffer, sizeof(buffer), arq);
-         sscanf(buffer,"%d",&aux);
-         autoEndTurn = (aux == 1);
+         autoEndTurn = (value == "true");
       }
-      else if(s == "ShowEnemyCircles:")
+      else if(key == "ShowEnemyCircles")
       {
          /* Read Show Enemy Circles options */
-         fgets(buffer, sizeof(buffer), arq);
-         sscanf(buffer,"%d",&aux);
-         showEnemyCircles = (aux == 1);
+         showEnemyCircles = (value == "true");
       }
-      else if(s == "AntiAliasing:")
+
+      /**********************************************
+       *                 Video Options              *
+       **********************************************/
+      else if(key == "Resolution")
       {
-         /* Read Antialising Options */
-         fgets(buffer, sizeof(buffer), arq); 
-         sscanf(buffer,"%d",&antiAliasing);
+         /* Read the resolution informations */
+         sscanf(value.c_str(),"%dx%d", &screenWidth, &screenHeight);
       }
-      else if(s == "FarViewFactor:")
+      else if(key == "FullScreen")
+      {
+         /* Read FullScreen Options */
+         enableFullScreen = (value == "true");
+      }
+      else if(key == "Particles")
+      {
+         /* Read Particles Options */
+         enableParticles = (value == "true");
+      }
+      else if(key == "Grass")
+      {
+         /* Read Grass Options */
+         enableGrass = (value == "true");
+      }
+      else if(key == "Reflexions")
+      {
+         /* Read Reflexions Options */
+         sscanf(value.c_str(),"%d", &reflexionType);
+      }
+      else if(key == "AntiAliasing")
+      {
+         /* Read Antialiasing Options */
+         sscanf(value.c_str(),"%d",&antiAliasing);
+      }
+      else if(key == "FarViewFactor")
       {
          /* Read FarViewFactor Options */
-         fgets(buffer, sizeof(buffer), arq); 
-         sscanf(buffer,"%f",&farViewFactor);
+         sscanf(value.c_str(),"%f",&farViewFactor);
       }
+      else if(key == "MultiTexture")
+      {
+         /* Read Multitexture options */
+         enableMultiTexture = (value == "true");
+      }
+      
+      /**********************************************
+       *                 Unknow Option              *
+       **********************************************/
       else 
       {
-         cerr << "Warning: Unknow option: " << buffer << endl;
+         cerr << "Warning: Unknow option: " << key << endl;
       }
    }
 
-   /* Limits */
+   /* Now, set some limits */
    if(farViewFactor > 1.0)
    {
       farViewFactor = 1.0;
@@ -238,12 +249,11 @@ bool options::load(string file)
       farViewFactor = 0.4;
    }
 
-   fclose(arq);
-
+   /* Define the as the used file */
    fileName = file;
-   
+  
+   /* Done! */
    return(true);
-
 }
 
 /****************************************************************
@@ -258,44 +268,52 @@ void options::save()
       return;
    }
 
-   /* Sound */
-   fprintf(arq,"Sound: %d %d\n",musicVolume,sndfxVolume);
+   /* File Version */
+   fprintf(arq, "# Mandatory Version Definition\n");
+   fprintf(arq, "Version = %s\n", VERSION);
 
+   /**********************************************
+    *                 Sound Options              *
+    **********************************************/
+   fprintf(arq, "# Sound Options\n");
+   /* SoundVolume */
+   fprintf(arq,"SoundVolume = %d\n", sndfxVolume);
+   /* MusicVolume */
+   fprintf(arq,"MusicVolume = %d\n", musicVolume);
+
+   /**********************************************
+    *                 Game Options               *
+    **********************************************/
+   fprintf(arq, "# Game Preferences\n");
    /* Language */
-   fprintf(arq,"Language: %d\n",langNumber);
-
+   fprintf(arq,"Language = %d\n",langNumber);
    /* Camera */
-   fprintf(arq,"Camera: %d\n", cameraNumber);
-
-   /* Particles */
-   fprintf(arq, "Particles: %d\n",enableParticles?1:0);
-   
-   /* Grass */
-   fprintf(arq, "Grass: %d\n",enableGrass?1:0);
-
-   /* Reflexion */
-   fprintf(arq, "Reflexions: %d\n", reflexionType);
-
-   /* Resolution */
-   fprintf(arq, "Resolution: %d %d\n",screenWidth, screenHeight);
-
-   /* Fullscreen */
-   fprintf(arq, "FullScreen: %d\n",enableFullScreen?1:0);
-   
-   /* Multi Texture */
-   fprintf(arq, "MultiTexture: %d\n",enableMultiTexture?1:0);
-
-   /* AntiAliasing */
-   fprintf(arq, "AntiAliasing: %d\n",antiAliasing);
-
-   /* FarViewFactor */
-   fprintf(arq, "FarViewFactor: %.2f\n", farViewFactor);
-
+   fprintf(arq,"Camera = %d\n", cameraNumber);
    /* AutoEndTurn */
-   fprintf(arq, "AutoEndTurn: %d\n", autoEndTurn?1:0);
- 
+   fprintf(arq, "AutoEndTurn = %s\n", autoEndTurn?"true":"false");
    /* Show Enemy Circles */
-   fprintf(arq, "ShowEnemyCircles: %d\n", showEnemyCircles?1:0);
+   fprintf(arq, "ShowEnemyCircles = %s\n", showEnemyCircles?"true":"false");
+
+   /**********************************************
+    *                Video Options               *
+    **********************************************/
+   fprintf(arq, "# Video Preferences\n");
+   /* Resolution */
+   fprintf(arq, "Resolution = %dx%d\n",screenWidth, screenHeight);
+   /* Fullscreen */
+   fprintf(arq, "FullScreen = %s\n",enableFullScreen?"true":"false");
+   /* Particles */
+   fprintf(arq, "Particles = %s\n",enableParticles?"true":"false");
+   /* Grass */
+   fprintf(arq, "Grass = %s\n",enableGrass?"true":"false");
+   /* Reflexion */
+   fprintf(arq, "Reflexions = %d\n", reflexionType);
+   /* AntiAliasing */
+   fprintf(arq, "AntiAliasing = %d\n",antiAliasing);
+   /* FarViewFactor */
+   fprintf(arq, "FarViewFactor = %.2f\n", farViewFactor);  
+   /* Multi Texture */
+   fprintf(arq, "MultiTexture = %s\n",enableMultiTexture?"true":"false");
 
    fclose(arq);
 }
