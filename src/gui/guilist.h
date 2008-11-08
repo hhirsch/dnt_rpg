@@ -30,6 +30,14 @@ class guiList
       /*! Destructor */
       ~guiList();
 
+      /*! Verify if some object at the list changed its draw status
+       * \return -> true if something changed, false if not */
+      bool changed();
+
+      /*! Draw All objects at the list
+       * \param surface -> SDL_Surface to draw to */
+      void draw(SDL_Surface* surface);
+
       /*! Remove Object From the List
        * \param obj -> pointer to the object to remove */
       void removeObject(guiObject* obj);

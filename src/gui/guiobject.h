@@ -18,6 +18,7 @@
 #define GUI_LIST_TEXT    10
 #define GUI_FILE_SEL     11
 #define GUI_HEALTH_BAR   12
+#define GUI_TAB_BOX      13
 
 #include <SDL/SDL.h>
 #include <string>

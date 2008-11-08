@@ -13,11 +13,7 @@
 guiList::guiList()
 {
    total = 0;
-   /* Head Node. Of button type, since guiObject is virtual! */
-   first = (guiObject*)new button(0,0, 0,0, "", false);
-   first->type = -1;
-   first->next = first;
-   first->previous = first;
+   first = NULL;
    intMenu = NULL;
    wSurface = NULL;
 }
@@ -29,13 +25,9 @@ guiList::~guiList()
 {
    int tot = total;
    int aux;
-   for(aux = 0;aux < tot;aux++)
+   for(aux = 0; aux < tot;aux++)
    {
-      removeObject(first->next);
-   }
-   if (first != NULL)
-   {
-      delete((button*)first);
+      removeObject(first);
    }
    if(intMenu)
    {
@@ -44,12 +36,106 @@ guiList::~guiList()
 }
 
 /**************************************************************
+ *                            changed                         *
+ **************************************************************/
+bool guiList::changed()
+{
+   bool result = false;
+
+   guiObject *obj= first;
+   int aux;
+   for(aux=0; aux < total; aux++)
+   {
+      result |= obj->changed();
+      obj = obj->next;
+   }
+
+   return(result);
+}
+
+/**************************************************************
+ *                            draw                            *
+ **************************************************************/
+void guiList::draw(SDL_Surface* surface)
+{
+   guiObject *obj = first;
+   int aux;
+   for(aux=0; aux < total; aux++)
+   {
+      switch(obj->type)
+      {
+         case GUI_BUTTON:
+         {
+              button *b = (button*) obj;   
+              b->draw(surface);
+              break;
+         }
+         case GUI_TEXT_BAR:
+         {
+              textBar *bart = (textBar*) obj; 
+              bart->draw(surface);
+              break;
+         }
+         case GUI_SEL_BOX:
+         {
+              cxSel *cx = (cxSel*) obj;
+              cx->draw(surface);
+              break;
+         }
+         case GUI_SEL_TEXT:
+         {
+              selText *st = (selText*) obj;
+              st->draw(surface);
+              break;
+         }
+         case GUI_PICTURE:
+         {
+              picture* fig = (picture*) obj;
+              fig->draw(surface);
+              break;
+         }
+         case GUI_TEXT_BOX:
+         {
+              textBox *quad = (textBox*) obj;
+              quad->draw();
+              break;
+         }
+         case GUI_TAB_BUTTON:
+         {
+              tabButton *bt = (tabButton*) obj; 
+              bt->setCurrent(-1);
+              bt->draw(surface);
+              break;
+         }
+         case GUI_HEALTH_BAR:
+         {
+              healthBar* hb = (healthBar*) obj;
+              hb->draw(surface);
+              break;
+         }
+         default:break;
+       
+      } //case
+      obj = obj->next;
+   }
+}
+
+/**************************************************************
  *                         removeObject                       *
  **************************************************************/
 void guiList::removeObject(guiObject *obj)
 {
+   /* Update first, if needed */
+   if(obj == first)
+   {
+      first = obj->next;
+   }
+
+   /* Update pointers */
    obj->previous->next = obj->next;
    obj->next->previous = obj->previous;
+
+   /* Delete the memory used */
    switch (obj->type) 
    {
       case GUI_BUTTON:
@@ -124,7 +210,15 @@ void guiList::removeObject(guiObject *obj)
         break;
       }
    }
+
+   /* Decrement things */
    total--;
+
+   /* Verify if list still exists */
+   if(total <= 0)
+   {
+      first = NULL;
+   }
 }
 
 /**************************************************************
@@ -132,10 +226,20 @@ void guiList::removeObject(guiObject *obj)
  **************************************************************/
 void guiList::insertObject(guiObject* obj)
 {
-   obj->next = first->next;
-   obj->previous = first;
-   first->next = obj;
-   obj->next->previous = obj;
+   if(first == NULL)
+   {
+      obj->next = obj;
+      obj->previous = obj;
+   }
+   else
+   {
+      obj->next = first;
+      obj->previous = first->previous;
+      obj->next->previous = obj;
+      obj->previous->next = obj;
+   }
+
+   first = obj;
    total++;
 }
 

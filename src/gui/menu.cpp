@@ -62,7 +62,7 @@ void menu::insertItem(string text, string imageFile, bool avaible)
  *********************************************************/
 guiObject* menu::getItem(int i)
 {
-   guiObject* it= (guiObject*) first->next;
+   guiObject* it= (guiObject*) first;
    if(i <= (total-numPictures))
    {
       while(it->type == GUI_PICTURE)
@@ -165,7 +165,7 @@ void menu::draw(int pos, SDL_Surface *screen)
    int ya = y1+3;
    int k;
    int med = (MENU_ITEM_HEIGHT - 10) / 2;
-   guiObject* item = (guiObject*) first->next;
+   guiObject* item = (guiObject*) first;
    for (k=0; k < total; k++)
    {
       /* Treat Pictures */

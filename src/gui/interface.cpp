@@ -58,10 +58,10 @@ guiObject* guiInterface::manipulateEvents(int x, int y, Uint8 Mbotao,
  *                   verifyFileSelectorsEvents                       *
  *********************************************************************/
 guiObject* guiInterface::verifyFileSelectorsEvents(guiObject* actObj, 
-                                                int& eventInfo)
+                                                   int& eventInfo)
 {
    int aux;
-   guiObject *obj = ljan->getActiveWindow()->getObjectsList()->getFirst()->next;
+   guiObject *obj = ljan->getActiveWindow()->getObjectsList()->getFirst();
 
    /* pass all objects, treating file selectors */
    for(aux=0; aux < ljan->getActiveWindow()->getObjectsList()->getTotal(); 
@@ -100,10 +100,11 @@ guiObject* guiInterface::verifyFileSelectorsEvents(guiObject* actObj,
 /*********************************************************************
  *                      verifyCompositeEvents                        *
  *********************************************************************/
-guiObject* guiInterface::verifyCompositeEvents(guiObject* actObj, int& eventInfo)
+guiObject* guiInterface::verifyCompositeEvents(guiObject* actObj, 
+                                               int& eventInfo)
 {
    int aux;
-   guiObject *obj = ljan->getActiveWindow()->getObjectsList()->getFirst()->next;
+   guiObject *obj = ljan->getActiveWindow()->getObjectsList()->getFirst();
 
    /* pass all objects, treating those composited */
    for(aux=0; aux < ljan->getActiveWindow()->getObjectsList()->getTotal(); 
@@ -190,10 +191,10 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
             (ljan->getActiveWindow()->isMouseIn(x,y)))
         {
             /* Verify All objects */
-            guiObject *obj = 
-                    ljan->getActiveWindow()->getObjectsList()->getFirst()->next;
-            for(aux=0; aux < 
-                       ljan->getActiveWindow()->getObjectsList()->getTotal();
+            guiObject *obj;
+            obj = ljan->getActiveWindow()->getObjectsList()->getFirst();
+            for(aux=0; 
+                aux < ljan->getActiveWindow()->getObjectsList()->getTotal();
                 aux++)
             {
                /* Test selTexto */
@@ -244,8 +245,8 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
                   (ljan->getActiveWindow()->isMouseIn(x,y)))
         {
             /* Here are the internal windows clicks verification */
-            guiObject *obj = 
-                    ljan->getActiveWindow()->getObjectsList()->getFirst()->next;
+            guiObject *obj; 
+            obj = ljan->getActiveWindow()->getObjectsList()->getFirst();
             int aux;
             for(aux=0; aux < 
                    ljan->getActiveWindow()->getObjectsList()->getTotal(); aux++)
@@ -312,8 +313,8 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
            /* Test Other Windows Activation (with the current one 
             * isn't a modal window) */
            int aux; 
-           window *jaux=(window*)ljan->getFirst()->next;
-           for(aux=0;aux<ljan->getTotal();aux++)
+           window *jaux=(window*)ljan->getFirst();
+           for(aux=0; aux < ljan->getTotal(); aux++)
            {
                if( (jaux->isVisible()) &&
                    (jaux != ljan->getActiveWindow())  && 
@@ -390,11 +391,12 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
            else
            {
               /* Verify RolBar */
-              guiObject *obj = 
-                    ljan->getActiveWindow()->getObjectsList()->getFirst()->next;
+              guiObject *obj;
+              obj = ljan->getActiveWindow()->getObjectsList()->getFirst();
               int aux;
-              for(aux=0; aux < 
-                  ljan->getActiveWindow()->getObjectsList()->getTotal(); aux++)
+              for(aux=0; 
+                  aux < ljan->getActiveWindow()->getObjectsList()->getTotal(); 
+                  aux++)
               {
                  if(obj->type == GUI_ROL_BAR)
                  {
@@ -546,10 +548,10 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
 #if 0
             /* Verify List Text */
             guiObject *obj = 
-                    ljan->getActiveWindow()->getObjectsList()->getFirst()->next;
+                    ljan->getActiveWindow()->getObjectsList()->getFirst();
             int aux;
-            for(aux=0; aux <
-                       ljan->getActiveWindow()->getObjectsList()->getTotal(); 
+            for(aux=0; 
+                aux < ljan->getActiveWindow()->getObjectsList()->getTotal(); 
                 aux++)
             {
                if(obj->type == GUI_LIST_TEXT)
@@ -614,7 +616,7 @@ void guiInterface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    int aux;
    double depth = 0.012;
-   window* jan = (window*) ljan->getFirst()->next;
+   window* jan = (window*) ljan->getFirst();
 
    if(ljan->getActiveWindow() == NULL)
      return;
@@ -678,9 +680,13 @@ void guiInterface::closeWindow(window *jan)
  *********************************************************************/
 void guiInterface::closeAllWindows()
 {
-   window* j = (window*)ljan->getFirst()->next;
+   int i;
+   int total = ljan->getTotal();
+
+   window* j = (window*)ljan->getFirst();
    window* tmp;
-   while(j != (window*)ljan->getFirst())
+
+   for(i = 0; i < total; i++)
    {
       tmp = j;
       j = (window*)j->next;
@@ -711,8 +717,8 @@ void guiInterface::openWindow(window* jan)
 bool guiInterface::mouseOnGui(int mouseX, int mouseY)
 {
    int aux;
-   window *jaux=(window*)ljan->getFirst()->next;
-   for(aux=0;aux<ljan->getTotal();aux++)
+   window *jaux=(window*)ljan->getFirst();
+   for(aux=0; aux < ljan->getTotal(); aux++)
    {
       if( (jaux->isVisible()) && (jaux->isMouseIn(mouseX,mouseY)) )
       {
@@ -729,8 +735,8 @@ bool guiInterface::mouseOnGui(int mouseX, int mouseY)
 void guiInterface::hideAll()
 {
    int aux;
-   window *jaux=(window*)ljan->getFirst()->next;
-   for(aux=0;aux<ljan->getTotal();aux++)
+   window *jaux=(window*)ljan->getFirst();
+   for(aux=0; aux < ljan->getTotal(); aux++)
    {
       jaux->hide();
       jaux = (window*) jaux->next;
@@ -743,8 +749,8 @@ void guiInterface::hideAll()
 void guiInterface::showAll()
 {
    int aux;
-   window *jaux=(window*)ljan->getFirst()->next;
-   for(aux=0;aux<ljan->getTotal();aux++)
+   window *jaux=(window*)ljan->getFirst();
+   for(aux=0; aux < ljan->getTotal(); aux++)
    {
       jaux->show();
       jaux = (window*) jaux->next;

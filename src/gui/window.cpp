@@ -16,10 +16,7 @@ windowList::windowList()
 {
    activeWindow = NULL;
    total = 0;
-   first = (window*) new window(10,10,20,20,"",this);
-   first->type = GUI_WINDOW;
-   first->next = first;
-   first->previous = first;
+   first = NULL;
    intMenu = NULL;
 }
 
@@ -28,15 +25,19 @@ windowList::windowList()
  *********************************************************************/
 windowList::~windowList()
 {
+   int i;
+   int tot = total;
    window* jan;
    window* tmp;
-   jan = (window*)first->next;
-   while(jan != first )
+   jan = (window*)first;
+
+   for(i = 0; i < tot; i++)
    {
       tmp = jan;
       jan = (window*)jan->next;
       delete(tmp);
    }
+   total = 0;
 } 
  
 /*********************************************************************
@@ -46,11 +47,23 @@ window* windowList::insertWindow(int xa,int ya,int xb,int yb,string text)
 {
    window* novo;
    novo = new window(xa,ya,xb,yb,text,this);
-   novo->next = first->next;
-   novo->previous = first;
-   first->next = novo;
-   novo->next->previous = novo;
+
+   if(first == NULL)
+   {
+      novo->next = novo;
+      novo->previous = novo;
+   }
+   else
+   {
+      novo->next = first;
+      novo->previous = first->previous;
+      novo->next->previous = novo;
+      novo->previous->next = novo;
+   }
+
+   first = novo;
    total++;
+
    return(novo);
 } 
 
@@ -59,22 +72,37 @@ window* windowList::insertWindow(int xa,int ya,int xb,int yb,string text)
  *********************************************************************/
 void windowList::removeWindow(window *jan)
 {
+   /* Verify if not first */
+   if(first == jan)
+   {
+      first = (window*)jan->next;
+   }
+
+   /* Update Pointers */
    jan->previous->next = jan->next;
    jan->next->previous = jan->previous;
-   if (jan->getSurface() == NULL)
-      printf("Fatal: jan->surface == NULL!!!\n");
+
+   /* Verify ActiveWindow Pointer */
    if(jan == activeWindow)
    {
       activeWindow = NULL;
       if((total > 1))
       {
-         window* j = (window*)first->next;
+         window* j = (window*)first;
          j->activate();
       }
    }
+
    delete(jan);
    jan = NULL;
+
    total--;
+
+   /* Verify if list exits */
+   if(total <= 0)
+   {
+      first = NULL;
+   }
 }
 
 /**************************************************************
@@ -254,66 +282,8 @@ void window::draw(int mouseX, int mouseY, bool drawBar)
    }
 
    /* Objects Draw */
-   guiObject *obj=objects->getFirst()->next;
-   int aux;
-   for(aux=0;aux<objects->getTotal();aux++)
-   {
-      switch(obj->type)
-      {
-         case GUI_BUTTON:
-         {
-              button *b = (button*) obj;   
-              b->draw(surface);
-              break;
-         }
-         case GUI_TEXT_BAR:
-         {
-              textBar *bart = (textBar*) obj; 
-              bart->draw(surface);
-              break;
-         }
-         case GUI_SEL_BOX:
-         {
-              cxSel *cx = (cxSel*) obj;
-              cx->draw(surface);
-              break;
-         }
-         case GUI_SEL_TEXT:
-         {
-              selText *st = (selText*) obj;
-              st->draw(surface);
-              break;
-         }
-         case GUI_PICTURE:
-         {
-              picture* fig = (picture*) obj;
-              fig->draw(surface);
-              break;
-         }
-         case GUI_TEXT_BOX:
-         {
-              textBox *quad = (textBox*) obj;
-              quad->draw();
-              break;
-         }
-         case GUI_TAB_BUTTON:
-         {
-              tabButton *bt = (tabButton*) obj; 
-              bt->setCurrent(-1);
-              bt->draw(surface);
-              break;
-         }
-         case GUI_HEALTH_BAR:
-         {
-              healthBar* hb = (healthBar*) obj;
-              hb->draw(surface);
-              break;
-         }
-         default:break;
-       
-      } //case
-      obj = obj->next;
-   }
+   objects->draw(surface);
+   
    setChanged();
 }
 
@@ -502,13 +472,7 @@ bool window::changed()
 
    /* Verify some Object Change. Must verify all to avoid
     * not needed redraws at next frame.  */
-   guiObject *obj=objects->getFirst()->next;
-   int aux;
-   for(aux=0; (aux < objects->getTotal()) ;aux++)
-   {
-      result |= obj->changed();
-      obj = obj->next;
-   }
+   result |= objects->changed();
 
    /* Reset the Flag */
    return(result);
@@ -521,37 +485,37 @@ int window::doMove(SDL_Surface* backGround, int xinic, int yinic, int Mbotao)
 {
    int dx = x2 - x1;        /* Width */
    int dy = y2 - y1;        /* Heigh */
-   
+
    int x,y;         /* Mouse Coordinates */
-   
-      if (Mbotao & SDL_BUTTON(1))
-      {
-         x = xinic - difx; 
-         y = yinic - dify;
-         if(x + dx > SCREEN_X-1)
-         { 
-             x -= (x + dx) - (SCREEN_X-1);
-         }
-         if(y + dy > SCREEN_Y-1) 
-         {
-             y -= (y+dy) - (SCREEN_Y-1);
-         }
-         if(x < 0)
-            x = 0;
-         if(y <0)
-            y = 0;
-         x1 = x;
-         x2 = x + dx;
-         y1 = y;
-         y2 = y+ dy;
+
+   if (Mbotao & SDL_BUTTON(1))
+   {
+      x = xinic - difx; 
+      y = yinic - dify;
+      if(x + dx > SCREEN_X-1)
+      { 
+         x -= (x + dx) - (SCREEN_X-1);
       }
-      else 
+      if(y + dy > SCREEN_Y-1) 
       {
-         //No more pressed the mouse button. Finished
-         return(0);
+         y -= (y+dy) - (SCREEN_Y-1);
       }
-      //Button pressed, continue to move
-      return(1);
+      if(x < 0)
+         x = 0;
+      if(y <0)
+         y = 0;
+      x1 = x;
+      x2 = x + dx;
+      y1 = y;
+      y2 = y+ dy;
+   }
+   else 
+   {
+      //No more pressed the mouse button. Finished
+      return(0);
+   }
+   //Button pressed, continue to move
+   return(1);
 }
 
 
