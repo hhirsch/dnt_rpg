@@ -2942,7 +2942,9 @@ void engine::renderNoShadowThings()
 
    /* Draw Combat Mode Things */
    if( (engineMode == ENGINE_MODE_TURN_BATTLE) && 
-         ( (fightStatus == FIGHT_PC_TURN) || (fightStatus == FIGHT_NPC_TURN) ) )
+         ( (fightStatus == FIGHT_PC_TURN) || 
+           ( (fightStatus == FIGHT_NPC_TURN) && 
+             (option->getShowEnemyCircles()) )))
    {
       character* turnCharacter = fight->actualCharacterTurn();
       if(!turnCharacter)

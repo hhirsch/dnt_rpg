@@ -93,6 +93,9 @@ class options
        * \note -> if enabled, if the character have no possible actions,
        *          the turn automatically ends.  */
       bool getAutoEndTurn();
+      /*! Verify if will show enemies circles at battle
+       * \return true if will show, false if not. */
+      bool getShowEnemyCircles();
       /*! Get the current antialiasing
        * \return -> current antialiasing*/
       int getAntiAliasing();
@@ -132,6 +135,7 @@ class options
       static float   farViewFactor;   /**< Current FarView Factor */
       static bool    enableMultiTexture; /**< If terrain multi texture */
       static bool    autoEndTurn;     /**< If will autoend turn or not */
+      static bool    showEnemyCircles; /**< if show enemies battle circles */
 
       window* intWindow;       /**< Options Window Pointer */
 

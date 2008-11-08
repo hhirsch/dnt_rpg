@@ -198,10 +198,17 @@ bool options::load(string file)
       }
       else if(s == "AutoEndTurn:")
       {
-         /* Rea Auto End Turn options */
+         /* Read Auto End Turn options */
          fgets(buffer, sizeof(buffer), arq);
          sscanf(buffer,"%d",&aux);
          autoEndTurn = (aux == 1);
+      }
+      else if(s == "ShowEnemyCircles:")
+      {
+         /* Read Show Enemy Circles options */
+         fgets(buffer, sizeof(buffer), arq);
+         sscanf(buffer,"%d",&aux);
+         showEnemyCircles = (aux == 1);
       }
       else if(s == "AntiAliasing:")
       {
@@ -286,6 +293,9 @@ void options::save()
 
    /* AutoEndTurn */
    fprintf(arq, "AutoEndTurn: %d\n", autoEndTurn?1:0);
+ 
+   /* Show Enemy Circles */
+   fprintf(arq, "ShowEnemyCircles: %d\n", showEnemyCircles?1:0);
 
    fclose(arq);
 }
@@ -1082,6 +1092,14 @@ bool options::getAutoEndTurn()
 }
 
 /****************************************************************
+ *                     getShowEnemyCircles                      *
+ ****************************************************************/
+bool options::getShowEnemyCircles()
+{
+   return(showEnemyCircles);
+}
+
+/****************************************************************
  *                        getAntiAliasing                       *
  ****************************************************************/
 int options::getAntiAliasing()
@@ -1130,6 +1148,7 @@ int    options::antiAliasing = 4;
 float  options::farViewFactor = 1.0;
 bool   options::enableMultiTexture = true;
 bool   options::autoEndTurn = true;
+bool   options::showEnemyCircles = false;
 
 string options::fileName = "";
 
