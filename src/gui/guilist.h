@@ -66,7 +66,7 @@ class guiList
        * \param h -> height of the picture
        * \param arquivo -> fileName to opwn or NULL to not open a file
        * \return pointer to the picture inserted */
-      picture* insertPicture(int x,int y,int w,int h,const char* arquivo);
+      picture* insertPicture(int x,int y,int w,int h, const char* arquivo);
 
       /*! Insert a new tabButton on the list
        * \param x -> x initial coordinate
@@ -75,7 +75,7 @@ class guiList
        * \param h -> height of the picture
        * \param arquivo -> fileName to opwn or NULL to not open a file 
        * \return tabbutton inserted */
-      tabButton* insertTabButton(int x,int y,int w,int h,const char* arquivo);
+      tabButton* insertTabButton(int x,int y,int w,int h, const char* arquivo);
 
       /*! Insert a textBar on the List
        * \param xa -> x1 coordinate

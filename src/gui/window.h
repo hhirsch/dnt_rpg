@@ -11,6 +11,7 @@
 #include "dntfont.h"
 #include "guiobject.h"
 #include "guilist.h"
+#include "tabbox.h"
 
 #include <libintl.h>
 #include <string>
@@ -69,7 +70,23 @@ class window: public guiObject
        * \param Mbotao -> mouse button state */
       int doMove(SDL_Surface* backGround, int xinic, int yinic, int Mbotao);
 
-      /*! Get the object list
+      /*! Define a tabBox for the window
+       * \param x1 -> x first coordinate
+       * \param y1 -> y first coordinate
+       * \param x2 -> x last coordinate
+       * \param y2 -> y last coordinate
+       * \return -> pointer to the defined tabBox */
+      tabBox* defineTabBox(int x1, int y1, int x2, int y2);
+
+      /*! Get the current tabBox 
+       * \return -> pointer to the current tabBox */
+      tabBox* getTabBox();
+  
+      /*! Get the objects list relative to the tabBox (if one)
+       * \return guiList of objects active at the tabBox */
+      guiList* getActiveTabBoxList();
+
+      /*! Get the objects list
        * \return guiList of objects on the window */
       guiList* getObjectsList(){return(objects);};
 
@@ -129,6 +146,7 @@ class window: public guiObject
       bool canMove;              /**< If can move the window */
       bool modal;                /**< If the window is modal or not */
       bool visible;              /**< If the window is visible or not */
+      tabBox * tab;              /**< The tabBox */
       guiList* objects;          /**< Objects on the Window */
       SDL_Surface *surface;      /**< Window Surface */
       GLuint texture;            /**< GL texture for the window */

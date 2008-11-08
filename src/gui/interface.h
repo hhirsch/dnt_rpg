@@ -120,6 +120,19 @@ class guiInterface
 
    private:
 
+      /*! Verify mouse press at objects
+       * \param x -> mouse x coordinate
+       * \param y -> mouse y coordinate
+       * \param list -> pointer to the guiList to verify 
+       * \note -> call this function after verify the mouse is pressed. */
+      void verifyMousePressObjects(int x, int y, guiList* list);
+
+      /*! Verify mouse in at objects
+       * \param x -> mouse x coordinate
+       * \param y -> mouse y coordinate
+       * \param list -> pointer to the guiList to verify */
+      void verifyMouseInObjects(int x, int y, guiList* list);
+
       /*! Verify events occured on gui at single components
        * \param x -> current mouse x
        * \param y -> current mouse y

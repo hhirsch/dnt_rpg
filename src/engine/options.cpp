@@ -556,191 +556,197 @@ void options::displayOptionsScreen(guiInterface* interf)
    intWindow = interf->insertWindow(xPos-128,yPos-192,xPos+128,yPos+192,
                                     gettext("Options"));
 
+   /* Insert the Objects TabBox */
+   tabBox* tb = intWindow->defineTabBox(8,27,248,352);
+   guiList* list;
+   int posY;
+
+   /************************************************
+    *                Sound Options                 *
+    ************************************************/
+   list = tb->insertOption(gettext("Sound"));
+
+   posY = 52;
    /* Music Things */
-   qt = intWindow->getObjectsList()->insertTextBox(8,27,145,44,0,
-                                         gettext("Music Volume:"));
+   qt = list->insertTextBox(8,posY,145,posY+17,0, gettext("Music Volume:"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
-   buttonMusDec = intWindow->getObjectsList()->insertButton(121,27,131,44,
-                                                  fnt.createUnicode(0x25C4),0);
+   buttonMusDec = list->insertButton(121,posY,131,posY+17,
+                                     fnt.createUnicode(0x25C4),0);
    buttonMusDec->defineFont(DNT_FONT_ARIAL, 9);
-   barMusicVolume = intWindow->getObjectsList()->insertHealthBar(133,27,
-                                                                 196,44,255);
+   barMusicVolume = list->insertHealthBar(133,posY,196,posY+17,255);
    barMusicVolume->defineActualHealth(musicVolume);
-   buttonMusSum = intWindow->getObjectsList()->insertButton(198,27,208,44,
-                                                  fnt.createUnicode(0x25BA),0);
+   buttonMusSum = list->insertButton(198,posY,208,posY+17,
+                                     fnt.createUnicode(0x25BA),0);
    buttonMusSum->defineFont(DNT_FONT_ARIAL, 9);
-   intWindow->getObjectsList()->insertPicture(220,27,40,112,
-                         dir.getRealFile("texturas/options/music.png").c_str());
-   
-  
+   list->insertPicture(220,posY,40,112,
+                       dir.getRealFile("texturas/options/music.png").c_str());
+   posY += 25;
+
    /* Sound Effects Things */
    sprintf(tmp,"%d",sndfxVolume);
    saux = tmp;
-   qt = intWindow->getObjectsList()->insertTextBox(8,52,145,69,0,
-                                         gettext("Effects Volume:"));
+   qt = list->insertTextBox(8,posY,145,posY+17,0, gettext("Effects Volume:"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
-   buttonSndDec = intWindow->getObjectsList()->insertButton(121,52,131,69,
-                                                  fnt.createUnicode(0x25C4),0);
+   buttonSndDec = list->insertButton(121,posY,131,posY+17,
+                                     fnt.createUnicode(0x25C4),0);
    buttonSndDec->defineFont(DNT_FONT_ARIAL, 9);
-   barSndfxVolume = intWindow->getObjectsList()->insertHealthBar(133,52,
-                                                                 196,69,255);
+   barSndfxVolume = list->insertHealthBar(133,posY,196,posY+17,255);
    barSndfxVolume->defineActualHealth(sndfxVolume);
-   buttonSndSum = intWindow->getObjectsList()->insertButton(198,52,208,69,
-                                                  fnt.createUnicode(0x25BA),0);
+   buttonSndSum = list->insertButton(198,posY,208,posY+17,
+                                     fnt.createUnicode(0x25BA),0);
    buttonSndSum->defineFont(DNT_FONT_ARIAL, 9);
-   intWindow->getObjectsList()->insertPicture(220,52,40,112,
-                         dir.getRealFile("texturas/options/sndfx.png").c_str());
+   list->insertPicture(220,posY,40,112,
+                       dir.getRealFile("texturas/options/sndfx.png").c_str());
 
 
-   /* Language Things */
-   prevLanguage = langNumber;
-   saux = languageName();
-   qt = intWindow->getObjectsList()->insertTextBox(8,88,145,105,0,
-                                                   gettext("Language:"));
-   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
-   buttonLangDec = intWindow->getObjectsList()->insertButton(121,88,131,105,
-                                                   fnt.createUnicode(0x25C4),0);
-   buttonLangDec->defineFont(DNT_FONT_ARIAL, 9);
-   txtLanguage = intWindow->getObjectsList()->insertTextBox(132,88,197,105,1,
-                                 saux.c_str());
-   txtLanguage->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
-   buttonLangSum = intWindow->getObjectsList()->insertButton(198,88,208,105,
-                                                   fnt.createUnicode(0x25BA),0);
-   buttonLangSum->defineFont(DNT_FONT_ARIAL, 9);
-   intWindow->getObjectsList()->insertPicture(220,88,40,112,
-                      dir.getRealFile("texturas/options/language.png").c_str());
-
-   /* Camera Mode Things */
-   prevCamera = cameraNumber;
-   saux = cameraName();
-   qt = intWindow->getObjectsList()->insertTextBox(8,126,145,143,0,
-                                            gettext("Camera Mode:"));
-   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
-   buttonCamDec = intWindow->getObjectsList()->insertButton(121,126,131,143,
-                                                  fnt.createUnicode(0x25C4),0);
-   buttonCamDec->defineFont(DNT_FONT_ARIAL, 9);
-   txtCamera = intWindow->getObjectsList()->insertTextBox(132,126,197,143,1,
-                                 saux.c_str());
-   txtCamera->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
-   buttonCamSum = intWindow->getObjectsList()->insertButton(198,126,208,143,
-                                                  fnt.createUnicode(0x25BA),0);
-   buttonCamSum->defineFont(DNT_FONT_ARIAL, 9);
-   intWindow->getObjectsList()->insertPicture(220,126,40,112,
-                        dir.getRealFile("texturas/options/camera.png").c_str());
-
-
-   /* Grass Enabled or Not */
-   qt = intWindow->getObjectsList()->insertTextBox(20,156,200,173,0,
-                          gettext("Enable Grass Effects (need particles)"));
-   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
-   cxSelGrass = intWindow->getObjectsList()->insertCxSel(8,160, enableGrass);
-   intWindow->getObjectsList()->insertPicture(220,156,40,112,
-                         dir.getRealFile("texturas/options/grass.png").c_str());
-
-
-   /* Particle System Enabled or Not */
-   qt = intWindow->getObjectsList()->insertTextBox(20,174,200,191,0,
-                                         gettext("Enable Particles Effects"));
-   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
-   cxSelParticles = intWindow->getObjectsList()->insertCxSel(8,178, 
-                                                             enableParticles);
-   intWindow->getObjectsList()->insertPicture(220,174,40,112,
-                     dir.getRealFile("texturas/options/particles.png").c_str());
-   cxSelParticles->setAvaible(getAvaibleParticles());
-   cxSelGrass->setAvaible(getAvaibleParticles() && 
-                          cxSelParticles->isSelected());
-
-
-   /* Reflexions */
-   prevReflexion = reflexionType;
-   saux = reflexionName();
-   qt = intWindow->getObjectsList()->insertTextBox(8,203,145,220,0,
-                                            gettext("Reflections:"));
-   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
-   buttonReflDec = intWindow->getObjectsList()->insertButton(121,203,131,220,
-                                                  fnt.createUnicode(0x25C4),0);
-   buttonReflDec->defineFont(DNT_FONT_ARIAL, 9);
-   txtReflexion = intWindow->getObjectsList()->insertTextBox(132,203,197,220,1,
-                                 saux.c_str());
-   txtReflexion->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
-   buttonReflSum = intWindow->getObjectsList()->insertButton(198,203,208,220,
-                                                  fnt.createUnicode(0x25BA),0);
-   buttonReflSum->defineFont(DNT_FONT_ARIAL, 9);
-   intWindow->getObjectsList()->insertPicture(220,203,40,220,
-                    dir.getRealFile("texturas/options/reflexions.png").c_str());
-
+   /************************************************
+    *                Video Options                 *
+    ************************************************/
+   list = tb->insertOption(gettext("Video"));
+   
+   posY = 52;
    /* Resolution */
    prevHeight = screenHeight;
    prevWidth = screenWidth;
    saux = resolutionName();
-   qt = intWindow->getObjectsList()->insertTextBox(8,240,145,257,0,
-                                            gettext("Screen Resolution:"));
+   qt = list->insertTextBox(8,posY,145,posY+17,0,gettext("Screen Resolution:"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
-   buttonResDec = intWindow->getObjectsList()->insertButton(121,240,131,257,
-                                                  fnt.createUnicode(0x25C4),0);
+   buttonResDec = list->insertButton(121,posY,131,posY+17,
+                                     fnt.createUnicode(0x25C4),0);
    buttonResDec->defineFont(DNT_FONT_ARIAL, 9);
-   txtResolution = intWindow->getObjectsList()->insertTextBox(132,240,197,257,1,
-                                 saux.c_str());
+   txtResolution = list->insertTextBox(132,posY,197,posY+17,1,saux.c_str());
    txtResolution->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
-   buttonResSum = intWindow->getObjectsList()->insertButton(198,240,208,257,
-                                                  fnt.createUnicode(0x25BA),0);
+   buttonResSum = list->insertButton(198,posY,208,posY+17,
+                                     fnt.createUnicode(0x25BA),0);
    buttonResSum->defineFont(DNT_FONT_ARIAL, 9);
-   intWindow->getObjectsList()->insertPicture(220,240,40,220,
+   list->insertPicture(220,posY,40,220,
                     dir.getRealFile("texturas/options/resolution.png").c_str());
-
+   posY += 35;
+  
    /* Fullscreen */
-   qt = intWindow->getObjectsList()->insertTextBox(20,265,200,282,0,
-                                               gettext("Enable FullScreen"));
+   qt = list->insertTextBox(20,posY,200,posY+17,0,gettext("Enable FullScreen"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
-   cxSelFullScreen = intWindow->getObjectsList()->insertCxSel(8,269, 
-                                                              enableFullScreen);
-
-   intWindow->getObjectsList()->insertPicture(220,265,40,220,
+   cxSelFullScreen = list->insertCxSel(8,posY+4,enableFullScreen);
+   list->insertPicture(220,posY,40,220,
                     dir.getRealFile("texturas/options/fullscreen.png").c_str());
+   posY += 25;
+
+   /* Grass Enabled or Not */
+   qt = list->insertTextBox(20,posY,200,posY+17,0,
+                            gettext("Enable Grass Effects (need particles)"));
+   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   cxSelGrass = list->insertCxSel(8,posY+4, enableGrass);
+   list->insertPicture(220,posY,40,112,
+                       dir.getRealFile("texturas/options/grass.png").c_str());
+   posY += 25;
+
+   /* Particle System Enabled or Not */
+   qt = list->insertTextBox(20,posY,200,posY+17,0,
+                            gettext("Enable Particles Effects"));
+   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   cxSelParticles = list->insertCxSel(8, posY+4, enableParticles);
+   list->insertPicture(220,posY,40,112,
+                     dir.getRealFile("texturas/options/particles.png").c_str());
+   cxSelParticles->setAvaible(getAvaibleParticles());
+   cxSelGrass->setAvaible(getAvaibleParticles() && 
+                          cxSelParticles->isSelected());
+   posY += 25;
+
+   /* MultiTexture Enable or Not */
+   qt = list->insertTextBox(20,posY,200,posY+17,0,
+                            gettext("Enable MultiTextures"));
+   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   cxSelMultiTexture = list->insertCxSel(8,posY+4,enableMultiTexture);
+   list->insertPicture(220,posY,40,112,
+                  dir.getRealFile("texturas/options/multitexture.png").c_str());
+   cxSelMultiTexture->setAvaible(ext.hasMultiTexture());
+   posY += 35;
+
+   /* Reflexions */
+   prevReflexion = reflexionType;
+   saux = reflexionName();
+   qt = list->insertTextBox(8,posY,145,posY+17,0,gettext("Reflections:"));
+   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   buttonReflDec = list->insertButton(121,posY,131,posY+17,
+                                      fnt.createUnicode(0x25C4),0);
+   buttonReflDec->defineFont(DNT_FONT_ARIAL, 9);
+   txtReflexion = list->insertTextBox(132,posY,197,posY+17,1,saux.c_str());
+   txtReflexion->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   buttonReflSum = list->insertButton(198,posY,208,posY+17,
+                                      fnt.createUnicode(0x25BA),0);
+   buttonReflSum->defineFont(DNT_FONT_ARIAL, 9);
+   list->insertPicture(220,posY,40,220,
+                    dir.getRealFile("texturas/options/reflexions.png").c_str());
+   posY += 25;
 
    /* AntiAliasing */                 
    saux = antiAliasingName();
-   qt = intWindow->getObjectsList()->insertTextBox(8,288,145,305,0,
-                                            gettext("Anti-Aliasing:"));
+   qt = list->insertTextBox(8,posY,145,posY+17,0,gettext("Anti-Aliasing:"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
-   buttonAliasDec = intWindow->getObjectsList()->insertButton(121,288,131,305,
-                                                  fnt.createUnicode(0x25C4),0);
+   buttonAliasDec = list->insertButton(121,posY,131,posY+17,
+                                       fnt.createUnicode(0x25C4),0);
    buttonAliasDec->defineFont(DNT_FONT_ARIAL, 9);
-   txtAntiAliasing = intWindow->getObjectsList()->insertTextBox(132,288,
-                                                                197,305,1,
-                                                                saux.c_str());
+   txtAntiAliasing = list->insertTextBox(132,posY,197,posY+17,1,saux.c_str());
    txtAntiAliasing->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
-   buttonAliasSum = intWindow->getObjectsList()->insertButton(198,288,208,305,
-                                                  fnt.createUnicode(0x25BA),0);
+   buttonAliasSum = list->insertButton(198,posY,208,posY+17,
+                                       fnt.createUnicode(0x25BA),0);
    buttonAliasSum->defineFont(DNT_FONT_ARIAL, 9);
-   intWindow->getObjectsList()->insertPicture(220,288,40,220,
-                 dir.getRealFile("texturas/options/antialiasing.png").c_str());
-
+   list->insertPicture(220,posY,40,220,
+                  dir.getRealFile("texturas/options/antialiasing.png").c_str());
+   posY += 25;
+ 
    /* FarViewFactor */
-   qt = intWindow->getObjectsList()->insertTextBox(8,311,145,328,0,
-                                                   gettext("FarView:"));
+   qt = list->insertTextBox(8,posY,145,posY+17,0, gettext("FarView:"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
-   buttonFarViewDec = intWindow->getObjectsList()->insertButton(121,311,131,328,
-                                                  fnt.createUnicode(0x25C4),0);
+   buttonFarViewDec = list->insertButton(121,posY,131,posY+17,
+                                         fnt.createUnicode(0x25C4),0);
    buttonFarViewDec->defineFont(DNT_FONT_ARIAL, 9);
-   barFarView = intWindow->getObjectsList()->insertHealthBar(133,311,196,328,9);
+   barFarView = list->insertHealthBar(133,posY,196,posY+17,9);
    barFarView->defineActualHealth((int)floor(farViewFactor*9));                                                          
-   buttonFarViewSum = intWindow->getObjectsList()->insertButton(198,311,208,328,
-                                                  fnt.createUnicode(0x25BA),0);
+   buttonFarViewSum = list->insertButton(198,posY,208,posY+17,
+                                         fnt.createUnicode(0x25BA),0);
    buttonFarViewSum->defineFont(DNT_FONT_ARIAL, 9);
-   intWindow->getObjectsList()->insertPicture(220,311,40,328,
-                      dir.getRealFile("texturas/options/farview.png").c_str());
+   list->insertPicture(220,posY,40,223,
+                     dir.getRealFile("texturas/options/farview.png").c_str());
 
-   /* MultiTexture Enable or Not */
-   qt = intWindow->getObjectsList()->insertTextBox(20,334,200,351,0,
-                                               gettext("Enable MultiTextures"));
+   /************************************************
+    *                 Game Options                 *
+    ************************************************/
+   list = tb->insertOption(gettext("Game"));
+
+   posY = 52;
+   /* Language Things */
+   prevLanguage = langNumber;
+   saux = languageName();
+   qt = list->insertTextBox(8,posY,145,posY+17,0,gettext("Language:"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
-   cxSelMultiTexture = intWindow->getObjectsList()->insertCxSel(8,338, 
-                                                            enableMultiTexture);
-   intWindow->getObjectsList()->insertPicture(220,334,40,112,
-                  dir.getRealFile("texturas/options/multitexture.png").c_str());
-   cxSelMultiTexture->setAvaible(ext.hasMultiTexture());
+   buttonLangDec = list->insertButton(121,posY,131,posY+17,
+                                      fnt.createUnicode(0x25C4),0);
+   buttonLangDec->defineFont(DNT_FONT_ARIAL, 9);
+   txtLanguage = list->insertTextBox(132,posY,197,posY+17,1,saux.c_str());
+   txtLanguage->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   buttonLangSum = list->insertButton(198,posY,208,posY+17,
+                                      fnt.createUnicode(0x25BA),0);
+   buttonLangSum->defineFont(DNT_FONT_ARIAL, 9);
+   list->insertPicture(220,posY,40,112,
+                      dir.getRealFile("texturas/options/language.png").c_str());
+   posY += 25;                      
 
+   /* Camera Mode Things */
+   prevCamera = cameraNumber;
+   saux = cameraName();
+   qt = list->insertTextBox(8,posY,145,posY+17,0,gettext("Camera Mode:"));
+   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   buttonCamDec = list->insertButton(121,posY,131,posY+17,
+                                     fnt.createUnicode(0x25C4),0);
+   buttonCamDec->defineFont(DNT_FONT_ARIAL, 9);
+   txtCamera = list->insertTextBox(132,posY,197,posY+17,1,saux.c_str());
+   txtCamera->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   buttonCamSum = list->insertButton(198,posY,208,posY+17,
+                                     fnt.createUnicode(0x25BA),0);
+   buttonCamSum->defineFont(DNT_FONT_ARIAL, 9);
+   list->insertPicture(220,posY,40,posY+17,
+                       dir.getRealFile("texturas/options/camera.png").c_str());
 
    /* Confirm Button */
    buttonConfirm = intWindow->getObjectsList()->insertButton(177,356,247,375,
@@ -750,6 +756,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    buttonCancel = intWindow->getObjectsList()->insertButton(8,356,78,375,
                                               gettext("Cancel"),1);
 
+#if 0
    /* borders */
    intWindow->getObjectsList()->insertTextBox(5,20,250,77,2,"");
    intWindow->getObjectsList()->insertTextBox(5,78,250,115,2,"");
@@ -758,7 +765,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    intWindow->getObjectsList()->insertTextBox(5,193,250,230,2,"");
    intWindow->getObjectsList()->insertTextBox(5,231,250,352,2,"");
    intWindow->getObjectsList()->insertTextBox(5,352,250,379,2,"");
-
+#endif
    
    /* Open Window */
    intWindow->setExternPointer(&intWindow);

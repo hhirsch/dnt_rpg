@@ -163,6 +163,7 @@ window::window(int xa, int ya, int xb, int yb, string title, void* list)
    modal = false;
    visible = true;
    externPointer = NULL;
+   tab = NULL;
 
    /* Define Machine Bit Order */
    Uint32 rmask, gmask, bmask, amask;
@@ -226,6 +227,10 @@ window::~window()
    {
       *externPointer = NULL;
    }
+   if(tab)
+   {
+      delete(tab);
+   }
    glDeleteTextures(1,&texture);
    SDL_FreeSurface(surface);
    delete(objects);
@@ -283,6 +288,12 @@ void window::draw(int mouseX, int mouseY, bool drawBar)
 
    /* Objects Draw */
    objects->draw(surface);
+
+   /* TabBox Draw */
+   if(tab != NULL)
+   {
+      tab->draw(surface);
+   }
    
    setChanged();
 }
@@ -474,6 +485,17 @@ bool window::changed()
     * not needed redraws at next frame.  */
    result |= objects->changed();
 
+   /* Verify tabBox Objects */
+   if(tab != NULL)
+   {
+      result |= tab->changed();
+
+      if(tab->getActiveList() != NULL)
+      {
+         result |= tab->getActiveList()->changed();
+      }
+   }
+
    /* Reset the Flag */
    return(result);
 }
@@ -518,4 +540,38 @@ int window::doMove(SDL_Surface* backGround, int xinic, int yinic, int Mbotao)
    return(1);
 }
 
+/*********************************************************************
+ *                          defineTabBox                             *
+ *********************************************************************/
+tabBox* window::defineTabBox(int x1, int y1, int x2, int y2)
+{
+   if(tab != NULL)
+   {
+      delete(tab);
+   }
+
+   tab = new tabBox(x1,y1,x2,y2,surface);
+   return(tab);
+}
+
+/*********************************************************************
+ *                            getTabBox                              *
+ *********************************************************************/
+tabBox* window::getTabBox()
+{
+   return(tab);
+}
+
+/*********************************************************************
+ *                       getActiveTabBoxList                         *
+ *********************************************************************/
+guiList* window::getActiveTabBoxList()
+{
+   if(tab != NULL)
+   {
+      return(tab->getActiveList());
+   }
+
+   return(NULL);
+}
 

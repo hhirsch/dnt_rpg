@@ -38,6 +38,122 @@ guiInterface::~guiInterface()
 }
 
 /*********************************************************************
+ *                        verifyMouseInObjects                       *
+ *********************************************************************/
+void guiInterface::verifyMouseInObjects(int x, int y, guiList* list)
+{
+   int aux;
+   /* Verify if the list is valid */
+   if(list == NULL)
+   {
+      return;
+   }
+
+   guiObject *obj;
+   obj = list->getFirst();
+   for(aux=0; aux < list->getTotal(); aux++)
+   {
+      /* Test selTexto */
+      if(obj->type == GUI_SEL_TEXT) 
+      {
+         selText *st = (selText*) obj;
+         int xa,ya,xb,yb;
+         st->getCoordinate(xa,ya,xb,yb);
+         if(ljan->getActiveWindow()->isMouseIn(x,y))
+         {
+            objAtivo = st;
+            focus = FOCUS_SEL_TEXT;
+         }
+      }
+      /* Verify Button Table */
+      else if(obj->type == GUI_TAB_BUTTON)
+      {
+         tabButton *tb = (tabButton*) obj;
+         if(tb->isMouseIn(x-ljan->getActiveWindow()->getX1(),
+                  y-ljan->getActiveWindow()->getY1()))
+         {
+            objAtivo = tb;
+            focus = FOCUS_TAB_BUTTON;
+         }
+      }
+      obj = obj->next;
+   }
+}
+
+/*********************************************************************
+ *                      verifyMousePressObjects                      *
+ *********************************************************************/
+void guiInterface::verifyMousePressObjects(int x, int y, guiList* list)
+{
+   /* Verify if the guiList is valid */
+   if(!list)
+   {
+      return;
+   }
+
+   /* Here are the internal windows clicks verification */
+   guiObject *obj = list->getFirst();
+   int aux;
+
+   for(aux=0; aux < list->getTotal(); aux++)
+   {
+      if(obj->type == GUI_BUTTON)
+      {
+         /* Verify Click on Button */
+         button *bot = (button*) obj;
+         if(bot->isMouseIn(x - ljan->getActiveWindow()->getX1(),
+                  y - ljan->getActiveWindow()->getY1()))
+         {
+
+            objAtivo = bot;
+            focus = FOCUS_BUTTON;
+         }
+      }
+      /* Verify Click on TextBar */ 
+      else if(obj->type == GUI_TEXT_BAR)
+      {
+         textBar *bart = (textBar*) obj;
+         if(bart->isMouseIn(x-ljan->getActiveWindow()->getX1(),
+                  y-ljan->getActiveWindow()->getY1()))
+         {
+            objAtivo = bart;
+            bart->defineCursorPosition(x-
+                  ljan->getActiveWindow()->getX1(),
+                  y-ljan->getActiveWindow()->getY1());
+            focus = FOCUS_TEXT_BAR;
+         }
+      }
+      /* Verify RadioBoxes */
+      else if(obj->type == GUI_SEL_BOX)
+      {
+         cxSel* cx = (cxSel*) obj;
+         if(cx->isMouseIn(x-ljan->getActiveWindow()->getX1(),
+                  y-ljan->getActiveWindow()->getY1()))
+         {
+            objAtivo = cx;
+            focus = FOCUS_CX_SEL;
+         }
+      }
+      /* Verify Text Select */
+      else if(obj->type == GUI_SEL_TEXT)
+      {
+         selText* st = (selText*) obj;
+         int xa,ya,xb,yb;
+         st->getCoordinate(xa,ya,xb,yb);
+         if(isMouseAt(xa+ljan->getActiveWindow()->getX1(),
+                  ya+ljan->getActiveWindow()->getY1(),
+                  xb+ljan->getActiveWindow()->getX1(),
+                  yb+ljan->getActiveWindow()->getY1(),x,y))
+         {
+            objAtivo = st;
+            focus = FOCUS_SEL_TEXT;
+         }
+      }
+      obj = obj->next;
+   }
+}
+
+/*********************************************************************
  *                   Take care of GUI I/O Events                     *
  *********************************************************************/
 guiObject* guiInterface::manipulateEvents(int x, int y, Uint8 Mbotao, 
@@ -143,7 +259,6 @@ guiObject* guiInterface::verifyCompositeEvents(guiObject* actObj,
 guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao, 
                                          Uint8* tecla, int& eventInfo)
 {
-    int aux;
     dntFont fnt;
 
     if(!objAtivo)
@@ -191,37 +306,9 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
             (ljan->getActiveWindow()->isMouseIn(x,y)))
         {
             /* Verify All objects */
-            guiObject *obj;
-            obj = ljan->getActiveWindow()->getObjectsList()->getFirst();
-            for(aux=0; 
-                aux < ljan->getActiveWindow()->getObjectsList()->getTotal();
-                aux++)
-            {
-               /* Test selTexto */
-               if(obj->type == GUI_SEL_TEXT) 
-               {
-                  selText *st = (selText*) obj;
-                  int xa,ya,xb,yb;
-                  st->getCoordinate(xa,ya,xb,yb);
-                  if(ljan->getActiveWindow()->isMouseIn(x,y))
-                  {
-                      objAtivo = st;
-                      focus = FOCUS_SEL_TEXT;
-                  }
-               }
-               /* Verify Button Table */
-               else if(obj->type == GUI_TAB_BUTTON)
-               {
-                  tabButton *tb = (tabButton*) obj;
-                  if(tb->isMouseIn(x-ljan->getActiveWindow()->getX1(),
-                                   y-ljan->getActiveWindow()->getY1()))
-                  {
-                     objAtivo = tb;
-                     focus = FOCUS_TAB_BUTTON;
-                  }
-               }
-               obj = obj->next;
-            }
+            window* actWindow = ljan->getActiveWindow();
+            verifyMouseInObjects(x,y,actWindow->getObjectsList());
+            verifyMouseInObjects(x,y,actWindow->getActiveTabBoxList());
         }
     }
 
@@ -244,67 +331,23 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
         else if ( (ljan->getActiveWindow() != NULL) &&
                   (ljan->getActiveWindow()->isMouseIn(x,y)))
         {
-            /* Here are the internal windows clicks verification */
-            guiObject *obj; 
-            obj = ljan->getActiveWindow()->getObjectsList()->getFirst();
-            int aux;
-            for(aux=0; aux < 
-                   ljan->getActiveWindow()->getObjectsList()->getTotal(); aux++)
+             /* Will search at two lists: the widow one and the 
+             * active tabBox one (if exists) */
+            window* actWindow = ljan->getActiveWindow();
+            verifyMousePressObjects(x,y,actWindow->getObjectsList());
+            verifyMousePressObjects(x,y,actWindow->getActiveTabBoxList());
+
+            /* Verify the tabBox */
+            if(actWindow->getTabBox() != NULL)
             {
-               if(obj->type == GUI_BUTTON)
+               if(actWindow->getTabBox()->isMouseIn(x - actWindow->getX1(),
+                                                    y - actWindow->getY1()))
                {
-                  /* Verify Click on Button */
-                  button *bot = (button*) obj;
-                  if(bot->isMouseIn(x - ljan->getActiveWindow()->getX1(),
-                                    y - ljan->getActiveWindow()->getY1()))
-                  {
-                      
-                     objAtivo = bot;
-                     focus = FOCUS_BUTTON;
-                  }
+                  actWindow->getTabBox()->verifyChanges(x - actWindow->getX1(),
+                                                        y - actWindow->getY1());
                }
-               /* Verify Click on TextBar */ 
-               else if(obj->type == GUI_TEXT_BAR)
-               {
-                   textBar *bart = (textBar*) obj;
-                   if(bart->isMouseIn(x-ljan->getActiveWindow()->getX1(),
-                                      y-ljan->getActiveWindow()->getY1()))
-                   {
-                       objAtivo = bart;
-                       bart->defineCursorPosition(x-
-                                            ljan->getActiveWindow()->getX1(),
-                                            y-ljan->getActiveWindow()->getY1());
-                       focus = FOCUS_TEXT_BAR;
-                   }
-               }
-               /* Verify RadioBoxes */
-               else if(obj->type == GUI_SEL_BOX)
-               {
-                   cxSel* cx = (cxSel*) obj;
-                   if(cx->isMouseIn(x-ljan->getActiveWindow()->getX1(),
-                                    y-ljan->getActiveWindow()->getY1()))
-                   {
-                       objAtivo = cx;
-                       focus = FOCUS_CX_SEL;
-                   }
-               }
-               /* Verify Text Select */
-               else if(obj->type == GUI_SEL_TEXT)
-               {
-                  selText* st = (selText*) obj;
-                  int xa,ya,xb,yb;
-                  st->getCoordinate(xa,ya,xb,yb);
-                  if(isMouseAt(xa+ljan->getActiveWindow()->getX1(),
-                               ya+ljan->getActiveWindow()->getY1(),
-                               xb+ljan->getActiveWindow()->getX1(),
-                               yb+ljan->getActiveWindow()->getY1(),x,y))
-                  {
-                     objAtivo = st;
-                     focus = FOCUS_SEL_TEXT;
-                  }
-               }
-               obj = obj->next;
             }
+            
             eventInfo = CLICKED_WINDOW;
             return((guiObject*) ljan->getActiveWindow());
         }

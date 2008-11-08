@@ -10,7 +10,7 @@ OBJSPP = button.o color.o cxsel.o dntfont.o draw.o \
          farso.o filesel.o guilist.o healthBar.o \
 			interface.o listtext.o menu.o messages.o \
 			mouse.o picture.o rolbar.o seltext.o \
-			tabbutton.o textbar.o textbox.o window.o
+			tabbutton.o tabbox.o textbar.o textbox.o window.o
 EFLAGSGL = -L/usr/X11R6/lib -lGLU -lGL -lSDL -lSDL_image
 PROGFLAGs = 
 BIN = ../../bin/
@@ -107,6 +107,11 @@ seltext.o: seltext.h seltext.cpp draw.h dntfont.h color.h mouse.h guiobject.h
 tabbutton.o: tabbutton.h tabbutton.cpp picture.h color.h guiobject.h
 	@printf "Making tabbutton.o... "
 	@$(CC) $(CFLAGS) tabbutton.cpp -o tabbutton.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+tabbox.o: tabbox.h tabbox.cpp color.h guiobject.h guilist.h
+	@printf "Making tabbox.o... "
+	@$(CC) $(CFLAGS) tabbox.cpp -o tabbox.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 textbar.o: textbar.h textbar.cpp color.h draw.h dntfont.h mouse.h guiobject.h
