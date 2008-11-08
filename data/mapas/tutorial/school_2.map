@@ -1,6 +1,7 @@
 T 5X4
 # Made by DccNiTghtmare's MapEditor, 0.3
 npc mapas/tutorial/school_2.map.npc
+light mapas/tutorial/school_2.map.lgh
 Outdoor: 0
 t texturas/floor_indoor/burl.png texturas/floor_indoor/burl.png 169 94 57
 wall 10.000000,246.000000,310.000000,256.000000
