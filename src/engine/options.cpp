@@ -16,6 +16,9 @@
    #include <errno.h>
 #endif
 
+#include <iostream>
+using namespace std;
+
 #define NM_PORTUGUESE gettext("Portuguese")
 #define NM_ENGLISH    gettext("English")
 #define NM_FRENCH     gettext("French")
@@ -79,7 +82,7 @@ bool options::load()
    file  = info.getUserHome()+"options.cfg";
    if(!load(file))
    {
-      printf(gettext("Can't Open the options file: %s\n"), file.c_str());
+      cerr << "Can't Open the options file: " << file << endl;
       /* Try to Load from Default Installed Data Dir */
       file = DATADIR;
       file += "/";
@@ -87,25 +90,24 @@ bool options::load()
       file += "/dcc.opc";
       if(!load(file))
       {
-         printf(gettext("Can't Open the options file: %s\n"), file.c_str());
+         cerr << "Can't Open the options file: " << file << endl;
          /* Load from default executable path */
          if(!load("./dcc.opc"))
          {
-            printf(gettext("No Options File Avaible!\n"));
+            cerr << "No Options File Avaible!" << endl;
             return(false);
          }
       }
 
       #ifndef _MSC_VER
          fileName = info.getUserHome() + "options.cfg";
-         printf(gettext("Creating Directory: %s : "), 
-                info.getUserHome().c_str());
+         cerr << "Creating Directory: " << info.getUserHome() << ":";
          /* Create the User directory */
          mkdir(info.getUserHome().c_str(),0755);
-         printf("%s\n", strerror(errno));
+         cerr << strerror(errno) << endl;
 
          /* Save the options file */
-         printf(gettext("Creating Options: %s\n"), fileName.c_str());
+         cerr << "Creating Options: " << fileName << endl;
          save();
       #endif
 
@@ -215,7 +217,7 @@ bool options::load(string file)
       }
       else 
       {
-         printf(gettext("Unknow option: %s\n"), buffer);
+         cerr << "Warning: Unknow option: " << buffer << endl;
       }
    }
 
@@ -245,7 +247,7 @@ void options::save()
    FILE* arq;
    if(!(arq = fopen(fileName.c_str(),"w")))
    {
-      printf(gettext("Error while writing Options: %s\n"),fileName.c_str());
+      cerr << "Error while writing Options: " << fileName << endl;
       return;
    }
 

@@ -1,8 +1,12 @@
 #include "dntfont.h"
+
 #include "draw.h"
 #include "../engine/options.h"
 #include "../etc/dirs.h"
+
 #include <libintl.h>
+#include <iostream>
+using namespace std;
 
 /**********************************************************************
  *                               init                                 *
@@ -12,7 +16,7 @@ void dntFont::init()
    /* Init SDL_ttf */
     if(TTF_Init() == -1)
     {
-       printf(gettext("Can't init SDL_ttf : %s\n"), TTF_GetError());
+       cerr << "Can't init SDL_ttf : " << TTF_GetError() << endl;
        exit(3);
     }
     fontsList = NULL;
@@ -88,8 +92,7 @@ loadedFont* dntFont::loadFont(string fontName, int fontSize)
 
       if(!fnt->font)
       {
-         printf(gettext("Can't open font file: %s\n"), 
-                dir.getRealFile(fontName).c_str());
+         cerr << "Can't open font file: " << dir.getRealFile(fontName) << endl;
          return(NULL);
       }
 

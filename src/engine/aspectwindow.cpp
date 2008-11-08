@@ -3,7 +3,12 @@
  *************************************************************************/
 
 #include "aspectwindow.h"
+
 #include "../etc/userinfo.h"
+
+#include <iostream>
+using namespace std;
+
 
 /**************************************************************
  *                          Constructor                       *
@@ -105,7 +110,7 @@ void aspectWindow::loadImages()
    if( !(f=fopen(dir.getRealFile("characters/portraits/portraits.lst").c_str(),
                  "r")) )
    {
-      printf(gettext("Can't open the list with portraits: portraits.lst!\n"));
+      cerr << "Can't open the list with portraits: portraits.lst!" << endl;
       return;
    }
 

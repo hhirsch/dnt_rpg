@@ -1,6 +1,10 @@
 #include "cursor.h"
+
 #include "util.h"
 #include "../etc/dirs.h"
+
+#include <iostream>
+using namespace std;
 
 /*****************************************************************
  *                         Constructor                           *
@@ -89,7 +93,7 @@ void cursor::loadCursor(string fileName, int index)
    }
    else
    {
-      printf(gettext("Can't load mouse cursor: %s\n"), fileName.c_str());
+      cerr << "Can't load mouse cursor: " << fileName << endl;
    }
 }
 

@@ -3,6 +3,10 @@
  *************************************************************************/
 
 #include <libintl.h>
+#include <iostream>
+
+using namespace std;
+
 #include "skills.h"
 #include "defs.h"
 #include "../lang/translate.h"
@@ -24,7 +28,7 @@ skills::skills(string dir, string arq)
    int num;
    if(!(file=fopen(arq.c_str(),"r")))
    {
-       printf(gettext("Error while opening skills list: %s\n"),arq.c_str());
+       cerr << "Error while opening skills list: " << arq << endl;
        return;
    }
 
@@ -54,7 +58,7 @@ skills::skills(string dir, string arq)
       FILE* desc;
       if(! (desc = fopen(arqDescricao.c_str(), "r")))
       {
-         printf(gettext("Can't open skill file: %s \n"),arqDescricao.c_str() );
+         cerr << "Can't open skill file: " << arqDescricao << endl;
          return;
       }
       fgets(buffer, sizeof(buffer), desc);
@@ -68,8 +72,8 @@ skills::skills(string dir, string arq)
       m_skills[aux].image = IMG_Load(dirInfo.getRealFile(arqImagem).c_str());
       if(!m_skills[aux].image)
       {
-         printf(gettext("Can't open skill image: %s\n"),
-                dirInfo.getRealFile(arqImagem).c_str() );
+         cout << "Can't open skill image: " << dirInfo.getRealFile(arqImagem)
+              << endl;
       }
       fclose(desc);
    }
@@ -129,8 +133,7 @@ skills::skills()
    string fName = "";
    if(!(file=fopen(dir.getRealFile("skills/skills.skl").c_str(),"r")))
    {
-       printf(gettext("Error while opening skills list:"
-                      "skills/skills.skl\n"));
+       cout << "Error while opening skills list: skills/skills.skl" << endl;
        return;
    }
 
@@ -168,7 +171,7 @@ skills::skills()
       FILE* desc;
       if(! (desc = fopen(arqDescricao.c_str(), "r")))
       {
-         printf(gettext("Can't open skill file: %s \n"),arqDescricao.c_str() );
+         cerr << "Can't open skill file: " << arqDescricao << endl;
          return;
       }
       fgets(buffer, sizeof(buffer), desc);

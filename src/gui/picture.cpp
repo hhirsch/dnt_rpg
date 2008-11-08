@@ -2,11 +2,12 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code.
  */
 
-
 #include "picture.h"
-#include <stdio.h>
+
 #include <SDL/SDL_image.h>
 #include <libintl.h>
+#include <iostream>
+using namespace std;
 
 /******************************************************
  *                    Destructor                      *
@@ -48,7 +49,7 @@ picture::picture(int x,int y,int w,int h,const char* arquivo)
       SDL_Surface* img = IMG_Load(arquivo);
       if(!img)
       {
-         printf(gettext("Can't open image: %s\n"),arquivo);
+         cerr << "Can't open image: " << arquivo << endl;
          return;
       }
 

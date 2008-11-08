@@ -2,8 +2,10 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code.
  */
 
-
 #include "farso.h"
+
+#include <iostream>
+using namespace std;
 
 /************************************************************
  *                        Farso_Init                        *
@@ -14,7 +16,7 @@ void Farso_Init(SDL_Surface **screen, string title, int width, int height,
     /* Start Openning the screen  */
     if ( SDL_Init(SDL_INIT_VIDEO) < 0 ) 
     {
-        printf(gettext("Argh! Can't init SDL!\n"));
+        cerr << "Argh! Can't init SDL!" << endl;
         exit(1);
     }
     atexit(SDL_Quit);
@@ -81,11 +83,11 @@ void Farso_DefineResolution(SDL_Surface **screen, string title,
     *screen = SDL_SetVideoMode(SCREEN_X, SCREEN_Y, 32, flags);
     if ( *screen == NULL ) 
     {
-       printf(gettext("Oxi! Can't ajust video mode: %s!\n"),SDL_GetError());
+       cerr << "Oxi! Can't ajust video mode: " << SDL_GetError() << endl;
 
        if(antiAliasingSamples > 0)
        {
-          printf(gettext("Trying again without AntiAliasing.\n"));
+          cerr << "Trying again without AntiAliasing." << endl;
           /* Quit the SDL  */
           SDL_Quit();
           /* Restart it  */
@@ -93,8 +95,8 @@ void Farso_DefineResolution(SDL_Surface **screen, string title,
        }
        else
        {
-          printf(gettext("Something must be wrong! "
-                         "Try editing ~/.dccnitghtmare/options.cfg\n"));
+          cerr << "Something must be wrong! " << endl
+               << "Try editing ~/.dccnitghtmare/options.cfg" << endl;
           exit(2);
        }
     }
