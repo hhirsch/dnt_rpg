@@ -36,6 +36,8 @@
  - Initial approach to NPC select the target to attack;
  - Initial approach to select better attack to NPC use;
  - Initial approach to move NPC on battle;
+ - Implemented GUI tabBox;
+ - Use tabBox for Options and Inventories;
 
 Working on:
  - Character level up;
