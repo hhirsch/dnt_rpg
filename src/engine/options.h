@@ -185,6 +185,9 @@ class options
 
       cxSel* cxSelMultiTexture;
 
+      cxSel* cxSelShowEnemyCircles;
+      cxSel* cxSelAutoEndTurn;
+
       button* buttonConfirm;
       button* buttonCancel;
 

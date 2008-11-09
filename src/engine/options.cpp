@@ -748,7 +748,30 @@ void options::displayOptionsScreen(guiInterface* interf)
    buttonCamSum->defineFont(DNT_FONT_ARIAL, 9);
    list->insertPicture(220,posY,40,posY+17,
                        dir.getRealFile("texturas/options/camera.png").c_str());
+   posY += 35;
 
+   /* AutoEndTurn Enable or Not */
+   qt = list->insertTextBox(24,posY,200,posY+17,0,
+                            gettext("Auto End Turn"));
+   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   cxSelAutoEndTurn = list->insertCxSel(12,posY+4,autoEndTurn);
+   list->insertPicture(220,posY,40,112,
+                  dir.getRealFile("texturas/options/autoendturn.png").c_str());
+   posY += 25;
+
+   /* ShowEnemyCircles or or Not */
+   qt = list->insertTextBox(24,posY,200,posY+17,0,
+                            gettext("Show Enemies Battle Circles"));
+   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   cxSelShowEnemyCircles = list->insertCxSel(12,posY+4,showEnemyCircles);
+   list->insertPicture(220,posY,40,112,
+              dir.getRealFile("texturas/options/showenemycircles.png").c_str());
+   posY += 25;
+
+
+   /************************************************
+    *                 Action Buttons               *
+    ************************************************/
    /* Confirm Button */
    buttonConfirm = intWindow->getObjectsList()->insertButton(177,356,247,375,
                                               gettext("Confirm"),1);
@@ -948,6 +971,8 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          enableParticles = cxSelParticles->isSelected();
          enableGrass = cxSelGrass->isSelected();
          enableMultiTexture = cxSelMultiTexture->isSelected();
+         autoEndTurn = cxSelAutoEndTurn->isSelected();
+         showEnemyCircles = cxSelShowEnemyCircles->isSelected();
 
          bool prevFullScreen = enableFullScreen;
          enableFullScreen = cxSelFullScreen->isSelected();

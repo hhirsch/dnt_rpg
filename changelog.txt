@@ -19,7 +19,7 @@
  - Barter;
  - Define multitexture as option (improve critically the outdoor rendering at
  old graphic cards, but disable the terrain texture splatting);
- - Fixed sun/moon position;
+ - Fixed a bug at sun/moon position;
  - Continuous Walk with Mouse;
  - Calling read-only skills window at character's window;
  - Define sound's interval time before loop;
@@ -38,6 +38,8 @@
  - Initial approach to move NPC on battle;
  - Implemented GUI tabBox;
  - Use tabBox for Options and Inventories;
+ - Option: Show Enemies Battle Circles;
+ - Option: Auto End Turn;
 
 Working on:
  - Character level up;
