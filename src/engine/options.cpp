@@ -625,7 +625,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    posY += 35;
   
    /* Fullscreen */
-   qt = list->insertTextBox(24,posY,200,posY+17,0,gettext("Enable FullScreen"));
+   qt = list->insertTextBox(24,posY,219,posY+17,0,gettext("Enable FullScreen"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
    cxSelFullScreen = list->insertCxSel(12,posY+4,enableFullScreen);
    list->insertPicture(220,posY,40,220,
@@ -633,7 +633,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    posY += 25;
 
    /* Grass Enabled or Not */
-   qt = list->insertTextBox(24,posY,200,posY+17,0,
+   qt = list->insertTextBox(24,posY,219,posY+17,0,
                             gettext("Enable Grass Effects (need particles)"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
    cxSelGrass = list->insertCxSel(12,posY+4, enableGrass);
@@ -642,7 +642,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    posY += 25;
 
    /* Particle System Enabled or Not */
-   qt = list->insertTextBox(24,posY,200,posY+17,0,
+   qt = list->insertTextBox(24,posY,219,posY+17,0,
                             gettext("Enable Particles Effects"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
    cxSelParticles = list->insertCxSel(12, posY+4, enableParticles);
@@ -654,7 +654,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    posY += 25;
 
    /* MultiTexture Enable or Not */
-   qt = list->insertTextBox(24,posY,200,posY+17,0,
+   qt = list->insertTextBox(24,posY,219,posY+17,0,
                             gettext("Enable MultiTextures"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
    cxSelMultiTexture = list->insertCxSel(12,posY+4,enableMultiTexture);
@@ -751,7 +751,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    posY += 35;
 
    /* AutoEndTurn Enable or Not */
-   qt = list->insertTextBox(24,posY,200,posY+17,0,
+   qt = list->insertTextBox(24,posY,219,posY+17,0,
                             gettext("Auto End Turn"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
    cxSelAutoEndTurn = list->insertCxSel(12,posY+4,autoEndTurn);
@@ -760,7 +760,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    posY += 25;
 
    /* ShowEnemyCircles or or Not */
-   qt = list->insertTextBox(24,posY,200,posY+17,0,
+   qt = list->insertTextBox(24,posY,219,posY+17,0,
                             gettext("Show Enemies Battle Circles"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
    cxSelShowEnemyCircles = list->insertCxSel(12,posY+4,showEnemyCircles);
