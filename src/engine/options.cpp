@@ -562,13 +562,13 @@ void options::displayOptionsScreen(guiInterface* interf)
    int posY;
 
    /************************************************
-    *                Sound Options                 *
+    *                Audio Options                 *
     ************************************************/
-   list = tb->insertOption(gettext("Sound"));
+   list = tb->insertOption(gettext("Audio"));
 
    posY = 52;
    /* Music Things */
-   qt = list->insertTextBox(8,posY,145,posY+17,0, gettext("Music Volume:"));
+   qt = list->insertTextBox(12,posY,145,posY+17,0, gettext("Music Volume:"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
    buttonMusDec = list->insertButton(121,posY,131,posY+17,
                                      fnt.createUnicode(0x25C4),0);
@@ -585,7 +585,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    /* Sound Effects Things */
    sprintf(tmp,"%d",sndfxVolume);
    saux = tmp;
-   qt = list->insertTextBox(8,posY,145,posY+17,0, gettext("Effects Volume:"));
+   qt = list->insertTextBox(12,posY,145,posY+17,0, gettext("Effects Volume:"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
    buttonSndDec = list->insertButton(121,posY,131,posY+17,
                                      fnt.createUnicode(0x25C4),0);
@@ -609,7 +609,8 @@ void options::displayOptionsScreen(guiInterface* interf)
    prevHeight = screenHeight;
    prevWidth = screenWidth;
    saux = resolutionName();
-   qt = list->insertTextBox(8,posY,145,posY+17,0,gettext("Screen Resolution:"));
+   qt = list->insertTextBox(12,posY,145,posY+17,0,
+                            gettext("Screen Resolution:"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
    buttonResDec = list->insertButton(121,posY,131,posY+17,
                                      fnt.createUnicode(0x25C4),0);
@@ -624,27 +625,27 @@ void options::displayOptionsScreen(guiInterface* interf)
    posY += 35;
   
    /* Fullscreen */
-   qt = list->insertTextBox(20,posY,200,posY+17,0,gettext("Enable FullScreen"));
+   qt = list->insertTextBox(24,posY,200,posY+17,0,gettext("Enable FullScreen"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
-   cxSelFullScreen = list->insertCxSel(8,posY+4,enableFullScreen);
+   cxSelFullScreen = list->insertCxSel(12,posY+4,enableFullScreen);
    list->insertPicture(220,posY,40,220,
                     dir.getRealFile("texturas/options/fullscreen.png").c_str());
    posY += 25;
 
    /* Grass Enabled or Not */
-   qt = list->insertTextBox(20,posY,200,posY+17,0,
+   qt = list->insertTextBox(24,posY,200,posY+17,0,
                             gettext("Enable Grass Effects (need particles)"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
-   cxSelGrass = list->insertCxSel(8,posY+4, enableGrass);
+   cxSelGrass = list->insertCxSel(12,posY+4, enableGrass);
    list->insertPicture(220,posY,40,112,
                        dir.getRealFile("texturas/options/grass.png").c_str());
    posY += 25;
 
    /* Particle System Enabled or Not */
-   qt = list->insertTextBox(20,posY,200,posY+17,0,
+   qt = list->insertTextBox(24,posY,200,posY+17,0,
                             gettext("Enable Particles Effects"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
-   cxSelParticles = list->insertCxSel(8, posY+4, enableParticles);
+   cxSelParticles = list->insertCxSel(12, posY+4, enableParticles);
    list->insertPicture(220,posY,40,112,
                      dir.getRealFile("texturas/options/particles.png").c_str());
    cxSelParticles->setAvaible(getAvaibleParticles());
@@ -653,10 +654,10 @@ void options::displayOptionsScreen(guiInterface* interf)
    posY += 25;
 
    /* MultiTexture Enable or Not */
-   qt = list->insertTextBox(20,posY,200,posY+17,0,
+   qt = list->insertTextBox(24,posY,200,posY+17,0,
                             gettext("Enable MultiTextures"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
-   cxSelMultiTexture = list->insertCxSel(8,posY+4,enableMultiTexture);
+   cxSelMultiTexture = list->insertCxSel(12,posY+4,enableMultiTexture);
    list->insertPicture(220,posY,40,112,
                   dir.getRealFile("texturas/options/multitexture.png").c_str());
    cxSelMultiTexture->setAvaible(ext.hasMultiTexture());
@@ -665,7 +666,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    /* Reflexions */
    prevReflexion = reflexionType;
    saux = reflexionName();
-   qt = list->insertTextBox(8,posY,145,posY+17,0,gettext("Reflections:"));
+   qt = list->insertTextBox(12,posY,145,posY+17,0,gettext("Reflections:"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
    buttonReflDec = list->insertButton(121,posY,131,posY+17,
                                       fnt.createUnicode(0x25C4),0);
@@ -681,7 +682,7 @@ void options::displayOptionsScreen(guiInterface* interf)
 
    /* AntiAliasing */                 
    saux = antiAliasingName();
-   qt = list->insertTextBox(8,posY,145,posY+17,0,gettext("Anti-Aliasing:"));
+   qt = list->insertTextBox(12,posY,145,posY+17,0,gettext("Anti-Aliasing:"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
    buttonAliasDec = list->insertButton(121,posY,131,posY+17,
                                        fnt.createUnicode(0x25C4),0);
@@ -696,7 +697,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    posY += 25;
  
    /* FarViewFactor */
-   qt = list->insertTextBox(8,posY,145,posY+17,0, gettext("FarView:"));
+   qt = list->insertTextBox(12,posY,145,posY+17,0, gettext("FarView:"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
    buttonFarViewDec = list->insertButton(121,posY,131,posY+17,
                                          fnt.createUnicode(0x25C4),0);
@@ -718,7 +719,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    /* Language Things */
    prevLanguage = langNumber;
    saux = languageName();
-   qt = list->insertTextBox(8,posY,145,posY+17,0,gettext("Language:"));
+   qt = list->insertTextBox(12,posY,145,posY+17,0,gettext("Language:"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
    buttonLangDec = list->insertButton(121,posY,131,posY+17,
                                       fnt.createUnicode(0x25C4),0);
@@ -735,7 +736,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    /* Camera Mode Things */
    prevCamera = cameraNumber;
    saux = cameraName();
-   qt = list->insertTextBox(8,posY,145,posY+17,0,gettext("Camera Mode:"));
+   qt = list->insertTextBox(12,posY,145,posY+17,0,gettext("Camera Mode:"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
    buttonCamDec = list->insertButton(121,posY,131,posY+17,
                                      fnt.createUnicode(0x25C4),0);
