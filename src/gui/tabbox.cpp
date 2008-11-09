@@ -230,7 +230,7 @@ void tabBox::draw(SDL_Surface* screen)
    /* Draw Limitators */
    color_Set(colors.colorButton.R, colors.colorButton.G,
              colors.colorButton.B, colors.colorButton.A);
-   rectangle_Fill(screen, x1+1, y1+19, x2-1, y2-1);
+   rectangle_Fill(screen, x1, y1, x2, y2);
    color_Set(colors.colorCont[0].R, colors.colorCont[0].G,
              colors.colorCont[0].B, colors.colorCont[0].A);
    rectangle_2Colors(screen, x1, y1+18, x2, y2,
