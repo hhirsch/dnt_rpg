@@ -126,7 +126,7 @@ void model3d::draw(GLfloat** matriz, bool inverted)
          }
 
          /* Reflected Draw */
-         if( (inverted) && (pos->y > 0) )
+         if( (inverted) && (pos->y >= 0) )
          {
             /* Do Clulling */
             rotTransBoundingBox(pos->angle, X, Z, pos->x, 
