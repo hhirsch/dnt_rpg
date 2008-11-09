@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-11-08 09:41-0200\n"
+"POT-Creation-Date: 2008-11-09 13:53-0200\n"
 "PO-Revision-Date: 2008-07-22 19:40+0000\n"
 "Last-Translator: María \"tatica\" Leandro <tatadbb@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -80,14 +80,14 @@ msgstr ""
 
 #: src/engine/alignwindow.cpp:55 src/engine/aspectwindow.cpp:75
 #: src/engine/attwindow.cpp:221 src/engine/classwindow.cpp:107
-#: src/engine/options.cpp:719 src/engine/racewindow.cpp:102
+#: src/engine/options.cpp:777 src/engine/racewindow.cpp:102
 #: src/engine/skillwindow.cpp:139
 msgid "Confirm"
 msgstr ""
 
 #: src/engine/alignwindow.cpp:59 src/engine/aspectwindow.cpp:79
-#: src/engine/attwindow.cpp:225 src/engine/barterwindow.cpp:48
-#: src/engine/classwindow.cpp:111 src/engine/options.cpp:723
+#: src/engine/attwindow.cpp:225 src/engine/barterwindow.cpp:46
+#: src/engine/classwindow.cpp:111 src/engine/options.cpp:781
 #: src/engine/racewindow.cpp:106 src/engine/skillwindow.cpp:142
 msgid "Cancel"
 msgstr ""
@@ -158,7 +158,7 @@ msgstr "Carisma"
 msgid "Attribute Description"
 msgstr "Descripción de Atributo"
 
-#: src/engine/attwindow.cpp:511 src/engine/options.cpp:927
+#: src/engine/attwindow.cpp:511 src/engine/options.cpp:988
 msgid "Warning"
 msgstr ""
 
@@ -166,40 +166,40 @@ msgstr ""
 msgid "You Need to Assign All Attributes."
 msgstr "Necesitas Asignar todos los Atributos"
 
-#: src/engine/barterwindow.cpp:32 src/engine/dialog.cpp:1213
+#: src/engine/barterwindow.cpp:30 src/engine/dialog.cpp:1213
 msgid "Barter"
 msgstr ""
 
-#: src/engine/barterwindow.cpp:44
+#: src/engine/barterwindow.cpp:42
 msgid "Offer"
 msgstr "Oferta"
 
-#: src/engine/barterwindow.cpp:46
+#: src/engine/barterwindow.cpp:44
 msgid "Impose"
 msgstr ""
 
-#: src/engine/barterwindow.cpp:80 src/engine/barterwindow.cpp:90
+#: src/engine/barterwindow.cpp:72 src/engine/barterwindow.cpp:82
 #: src/engine/inventwindow.cpp:35
 msgid "Inventory"
 msgstr ""
 
-#: src/engine/barterwindow.cpp:245
+#: src/engine/barterwindow.cpp:237
 msgid "The barter was accepted."
 msgstr ""
 
-#: src/engine/barterwindow.cpp:250
+#: src/engine/barterwindow.cpp:242
 msgid "The barter was rejected."
 msgstr ""
 
-#: src/engine/barterwindow.cpp:270
+#: src/engine/barterwindow.cpp:262
 msgid "The barter imposition was accepted."
 msgstr ""
 
-#: src/engine/barterwindow.cpp:275
+#: src/engine/barterwindow.cpp:267
 msgid "The barter imposition was rejected."
 msgstr ""
 
-#: src/engine/barterwindow.cpp:294 src/engine/inventwindow.cpp:203
+#: src/engine/barterwindow.cpp:286 src/engine/inventwindow.cpp:182
 msgid "Remove"
 msgstr ""
 
@@ -280,7 +280,7 @@ msgid "Skills"
 msgstr ""
 
 #: src/engine/charwindow.cpp:226 src/engine/skillwindow.cpp:149
-#: src/gui/window.cpp:175
+#: src/gui/window.cpp:204
 msgid "Close"
 msgstr ""
 
@@ -451,7 +451,7 @@ msgstr ""
 msgid "No more actions. Turn ended."
 msgstr ""
 
-#: src/engine/dccnit.cpp:3469
+#: src/engine/dccnit.cpp:3471
 msgid "Exit Battle Mode"
 msgstr ""
 
@@ -488,7 +488,7 @@ msgstr ""
 msgid "Load"
 msgstr ""
 
-#: src/engine/initial.cpp:77 src/engine/options.cpp:529
+#: src/engine/initial.cpp:77 src/engine/options.cpp:557
 msgid "Options"
 msgstr ""
 
@@ -496,27 +496,27 @@ msgstr ""
 msgid "Exit"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:183
+#: src/engine/inventwindow.cpp:162
 msgid "Drop"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:190
+#: src/engine/inventwindow.cpp:169
 msgid "Buy"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:190
+#: src/engine/inventwindow.cpp:169
 msgid "Sell"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:197
+#: src/engine/inventwindow.cpp:176
 msgid "Use"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:207
+#: src/engine/inventwindow.cpp:186
 msgid "Info"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:211
+#: src/engine/inventwindow.cpp:190
 msgid "Get"
 msgstr ""
 
@@ -575,116 +575,136 @@ msgstr ""
 msgid "Map"
 msgstr ""
 
-#: src/engine/options.cpp:22
+#: src/engine/options.cpp:23
 msgid "Portuguese"
 msgstr ""
 
-#: src/engine/options.cpp:23
+#: src/engine/options.cpp:24
 msgid "English"
 msgstr ""
 
-#: src/engine/options.cpp:24
+#: src/engine/options.cpp:25
 msgid "French"
 msgstr ""
 
-#: src/engine/options.cpp:25
+#: src/engine/options.cpp:26
 msgid "German"
 msgstr ""
 
-#: src/engine/options.cpp:26
+#: src/engine/options.cpp:27
 msgid "Spanish"
 msgstr ""
 
-#: src/engine/options.cpp:27
+#: src/engine/options.cpp:28
 msgid "Italian"
 msgstr ""
 
-#: src/engine/options.cpp:28
+#: src/engine/options.cpp:29
 msgid "Russian"
 msgstr ""
 
-#: src/engine/options.cpp:423 data/weapons/types/munitions.dcl:2
+#: src/engine/options.cpp:451 data/weapons/types/munitions.dcl:2
 msgid "None"
 msgstr ""
 
-#: src/engine/options.cpp:428
+#: src/engine/options.cpp:456
 msgid "Characters"
 msgstr ""
 
-#: src/engine/options.cpp:433
+#: src/engine/options.cpp:461
 msgid "All"
 msgstr ""
 
-#: src/engine/options.cpp:449 data/weapons/types/sizes.dcl:3
+#: src/engine/options.cpp:477 data/weapons/types/sizes.dcl:3
 #: data/weapons/types/weights.dcl:3
 msgid "Normal"
 msgstr ""
 
-#: src/engine/options.cpp:452
+#: src/engine/options.cpp:480
 msgid "Pursue"
 msgstr ""
 
-#: src/engine/options.cpp:467
+#: src/engine/options.cpp:495
 msgid "Disabled"
 msgstr ""
 
-#: src/engine/options.cpp:470
+#: src/engine/options.cpp:498
 msgid "2x"
 msgstr ""
 
-#: src/engine/options.cpp:473
+#: src/engine/options.cpp:501
 msgid "4x"
 msgstr ""
 
-#: src/engine/options.cpp:533
+#: src/engine/options.cpp:567
+msgid "Audio"
+msgstr ""
+
+#: src/engine/options.cpp:571
 msgid "Music Volume:"
 msgstr "Volúmen de Música"
 
-#: src/engine/options.cpp:552
+#: src/engine/options.cpp:588
 msgid "Effects Volume:"
 msgstr "Volúmen de Effectos:"
 
-#: src/engine/options.cpp:571
-msgid "Language:"
+#: src/engine/options.cpp:605
+msgid "Video"
 msgstr ""
 
-#: src/engine/options.cpp:589
-msgid "Camera Mode:"
-msgstr "Modo de Camara:"
-
-#: src/engine/options.cpp:606
-msgid "Enable Grass Effects (need particles)"
-msgstr "Habilitar Effecto de Cesped (necesita partículas)"
-
-#: src/engine/options.cpp:615
-msgid "Enable Particles Effects"
-msgstr "Habilitar Effecto de Partículas"
-
-#: src/engine/options.cpp:630
-msgid "Reflections:"
-msgstr ""
-
-#: src/engine/options.cpp:649
+#: src/engine/options.cpp:613
 msgid "Screen Resolution:"
 msgstr "Resolución de Pantalla:"
 
-#: src/engine/options.cpp:665
+#: src/engine/options.cpp:628
 msgid "Enable FullScreen"
 msgstr "Habilitar Pantalla Completa"
 
-#: src/engine/options.cpp:676
-msgid "Anti-Aliasing:"
-msgstr ""
+#: src/engine/options.cpp:637
+msgid "Enable Grass Effects (need particles)"
+msgstr "Habilitar Effecto de Cesped (necesita partículas)"
 
-#: src/engine/options.cpp:693
-msgid "FarView:"
-msgstr ""
+#: src/engine/options.cpp:646
+msgid "Enable Particles Effects"
+msgstr "Habilitar Effecto de Partículas"
 
-#: src/engine/options.cpp:708
+#: src/engine/options.cpp:658
 msgid "Enable MultiTextures"
 msgstr ""
 
-#: src/engine/options.cpp:928
+#: src/engine/options.cpp:669
+msgid "Reflections:"
+msgstr ""
+
+#: src/engine/options.cpp:685
+msgid "Anti-Aliasing:"
+msgstr ""
+
+#: src/engine/options.cpp:700
+msgid "FarView:"
+msgstr ""
+
+#: src/engine/options.cpp:716
+msgid "Game"
+msgstr ""
+
+#: src/engine/options.cpp:722
+msgid "Language:"
+msgstr ""
+
+#: src/engine/options.cpp:739
+msgid "Camera Mode:"
+msgstr "Modo de Camara:"
+
+#: src/engine/options.cpp:755
+msgid "Auto End Turn"
+msgstr ""
+
+#: src/engine/options.cpp:764
+msgid "Show Enemies Battle Circles"
+msgstr ""
+
+#: src/engine/options.cpp:989
 msgid "Some changes will only take effect upon restart."
 msgstr "Algunos cambios solo tomarán efecto una vez reiniciado."
 
@@ -812,7 +832,7 @@ msgstr ""
 msgid "%s rolls initiative: "
 msgstr ""
 
-#: src/gui/window.cpp:177
+#: src/gui/window.cpp:206
 msgid "Maximize"
 msgstr ""
 
