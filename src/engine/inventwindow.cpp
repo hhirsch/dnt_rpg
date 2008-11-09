@@ -42,6 +42,9 @@ void inventWindow::init(int xa, int ya, string title,
                        character *invent,guiInterface* inter,
                        itemWindow* infoW)
 {
+   int i;
+   char buf[8];
+
    dirs dir;
    objectMenu = NULL;
    previousCursor = -1;
@@ -58,7 +61,7 @@ void inventWindow::init(int xa, int ya, string title,
    inventories->setOpenedWindow(this);
 
    /* Add Window */
-   intWindow = inter->insertWindow(xa,ya,xa+266,ya+407,title.c_str());
+   intWindow = inter->insertWindow(xa,ya,xa+266,ya+415,title.c_str());
 
    /* Add Character (equip) Tab Button */
    characterTabButton = intWindow->getObjectsList()->insertTabButton(4,15,
@@ -73,15 +76,20 @@ void inventWindow::init(int xa, int ya, string title,
    rightFingerButton = characterTabButton->insertButton(36,169,55,188);
    leftFingerButton = characterTabButton->insertButton(200,169,219,188);
 
-   /* Add Inventory Tab Button */
-   inventoryTabButton = intWindow->getObjectsList()->insertTabButton(4,272,
-                                                                     256,128,
+   /* Add Inventory Tab Box */
+   inventoryTabBox = intWindow->defineTabBox(6,272,258,409);
+
+   /* Add Each Options */
+   guiList* list;
+   for(i = 4; i > 0; i--)
+   {
+      sprintf(buf, "%d", i);
+      list = inventoryTabBox->insertOption(buf);
+      inventoryTabButton[i-1] = list->insertTabButton(8,292,0,0,
                    dir.getRealFile("texturas/inventory/inventory.png").c_str());
-   inventoryButton = inventoryTabButton->insertButton(4,13,251,127);
-   inv1Button = inventoryTabButton->insertButton(4,0,64,13);
-   inv2Button = inventoryTabButton->insertButton(64,0,127,13);
-   inv3Button = inventoryTabButton->insertButton(127,0,191,13);
-   inv4Button = inventoryTabButton->insertButton(191,0,251,13);
+      inventoryButton[i-1] = inventoryTabButton[i-1]->insertButton(0,0,
+                                                                   247,114);
+   }
 
    /* Open Window */
    intWindow->setExternPointer(&intWindow);
@@ -130,42 +138,13 @@ bool inventWindow::isOpen()
  **************************************************************/
 void inventWindow::reDraw()
 {
-   int i;
-   dntFont fnt;
-   int x = 32;
-   char buf[8];
-   farso_colors colors;
-   fnt.defineFont(DNT_FONT_TIMES, 10);
-   fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
-   fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
    if(isOpen())
    {
-      inventories->draw(0,0, inventoryTabButton->get(), currentInventory);
+      inventories->draw(0,0, inventoryTabButton[currentInventory]->get(), 
+                        currentInventory);
       inventories->drawEquiped(0,0,characterTabButton->get());
 
-      /* Write Inventory Numbers */
-      for(i=0; i < 4; i++)
-      {
-         if(currentInventory == i)
-         {
-            color_Set(colors.colorText.R,
-                      colors.colorText.G,
-                      colors.colorText.B,
-                      colors.colorText.A);
-         }
-         else
-         {
-            color_Set(colors.colorCont[1].R,
-                      colors.colorCont[1].G,
-                      colors.colorCont[1].B,
-                      colors.colorCont[1].A);
-         }
-         sprintf(buf,"%d", i);
-         fnt.write(inventoryTabButton->get(), x, 1, buf, true);
-         x += 61;
-      }
       intWindow->draw(0,0);
-
    }
 }
 
@@ -285,8 +264,9 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
    }
 
 
+   /* Get the position at "inventory coordinates" */
    int posX = (int) floor((x - (8 + intWindow->getX1())) / (19.0));
-   int posY = (int) floor((y - (284 + intWindow->getY1())) / (19.0));
+   int posY = (int) floor((y - (292 + intWindow->getY1())) / (19.0));
 
    if(Mbotao & SDL_BUTTON(3))
    {
@@ -305,10 +285,30 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
    
    switch(eventInfo)
    {
+      /* Changes to the Current Inventory */
+      case TAB_BOX_CHANGED:
+      {
+         if(guiObj == (guiObject*)inventoryTabBox)
+         {
+            int inv;
+            sscanf(inventoryTabBox->getActiveTitle().c_str(),"%d",&inv);
+            if((inv >= 1) && (inv <= 4))
+            {
+               currentInventory = inv-1;
+               reDraw();
+            }
+         }
+      }
+      break;
+
+      /* Accessing inventory or equipment slots! */
       case PRESSED_TAB_BUTTON:
       {
          /* Inventory Spaces Selected */
-         if(guiObj == (guiObject*) inventoryButton)
+         if( (guiObj == (guiObject*) inventoryButton[0]) ||
+             (guiObj == (guiObject*) inventoryButton[1]) ||
+             (guiObj == (guiObject*) inventoryButton[2]) ||
+             (guiObj == (guiObject*) inventoryButton[3]))
          {
             if(state == INVENTORY_STATE_NONE)
             {
@@ -337,36 +337,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                }
                return(true);
             }
-         }
-         
-         /* Change to Inventory 1 */
-         else if(guiObj == (guiObject*) inv1Button)
-         {
-            currentInventory = 0;
-            reDraw();
-            return(true);
-         }
-         /* Change to Inventory 2 */
-         else if(guiObj == (guiObject*) inv2Button)
-         {
-            currentInventory = 1;
-            reDraw();
-            return(true);
-         }
-         /* Change to Inventory 3 */
-         else if(guiObj == (guiObject*) inv3Button)
-         {
-            currentInventory = 2;
-            reDraw();
-            return(true);
-         }
-         /* Change to Inventory 4 */
-         else if(guiObj == (guiObject*) inv4Button)
-         {
-            currentInventory = 3;
-            reDraw();
-            return(true);
-         } 
+         }                  
          
          if(state == INVENTORY_STATE_NONE)
          {

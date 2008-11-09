@@ -215,10 +215,10 @@ void barter::draw(int x, int y, SDL_Surface* surface,
    SDL_BlitSurface(barterImage, NULL, surface, &ret);
 
    /* Draw the SellSlot */
-   sellSlot[curSellSlot]->draw(x+4,y+13, surface);
+   sellSlot[curSellSlot]->draw(x,y, surface);
 
    /* Draw the BuySlot */
-   buySlot[curBuySlot]->draw(x+137,y+13,surface);
+   buySlot[curBuySlot]->draw(x+133,y,surface);
 
 }
 

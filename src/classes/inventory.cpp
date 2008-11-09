@@ -292,14 +292,14 @@ void inventory::drawEquiped(int x, int y, SDL_Surface* surface)
    SDL_BlitSurface(equipedImage, NULL, surface, &ret);
 
    /* Next, draw all the slots */
-   equippedSlots[INVENTORY_HEAD]->draw(x+105,y-10, surface);
-   equippedSlots[INVENTORY_LEFT_HAND]->draw(x+155,y+99, surface);
-   equippedSlots[INVENTORY_RIGHT_HAND]->draw(x+54,y+99, surface);
-   equippedSlots[INVENTORY_LEFT_FINGER]->draw(x+196,y+156, surface);
-   equippedSlots[INVENTORY_RIGHT_FINGER]->draw(x+33,y+156, surface);
-   equippedSlots[INVENTORY_NECK]->draw(x+155,y+64, surface);
-   equippedSlots[INVENTORY_FOOT]->draw(x+105,y+201, surface);
-   equippedSlots[INVENTORY_BODY]->draw(x+95,y+87, surface);
+   equippedSlots[INVENTORY_HEAD]->draw(x+109,y+3, surface);
+   equippedSlots[INVENTORY_LEFT_HAND]->draw(x+159,y+112, surface);
+   equippedSlots[INVENTORY_RIGHT_HAND]->draw(x+58,y+112, surface);
+   equippedSlots[INVENTORY_LEFT_FINGER]->draw(x+200,y+169, surface);
+   equippedSlots[INVENTORY_RIGHT_FINGER]->draw(x+37,y+169, surface);
+   equippedSlots[INVENTORY_NECK]->draw(x+159,y+77, surface);
+   equippedSlots[INVENTORY_FOOT]->draw(x+109,y+214, surface);
+   equippedSlots[INVENTORY_BODY]->draw(x+95,y+100, surface);
 }
 
 /**************************************************************

@@ -340,11 +340,15 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
             /* Verify the tabBox */
             if(actWindow->getTabBox() != NULL)
             {
-               if(actWindow->getTabBox()->isMouseIn(x - actWindow->getX1(),
-                                                    y - actWindow->getY1()))
+               tabBox* tb = actWindow->getTabBox();
+               if(tb->isMouseIn(x - actWindow->getX1(), y - actWindow->getY1()))
                {
-                  actWindow->getTabBox()->verifyChanges(x - actWindow->getX1(),
-                                                        y - actWindow->getY1());
+                  if(tb->verifyChanges(x - actWindow->getX1(),
+                                       y - actWindow->getY1()))
+                  {
+                     eventInfo = TAB_BOX_CHANGED;
+                     return((guiObject*)tb);
+                  }
                }
             }
             

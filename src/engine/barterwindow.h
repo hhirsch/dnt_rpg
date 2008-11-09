@@ -99,9 +99,6 @@ class barterWindow
 
       static bool sellerObj;            /**< True if object is from seller */
 
-      static int curSellSlot;           /**< Index of the actual sell slot */
-      static int curBuySlot;            /**< Index of the actual buy slot */
-
       static barter* barterInventory;   /**< The barter inventory */
       static guiInterface* gui;         /**< The used GUI */
       static textBox* sellerTotals;     /**< The Seller Totals */
@@ -111,15 +108,9 @@ class barterWindow
       static button* offerButton;       /**< The Offer Button */
       static button* cancelButton;      /**< The Cancel Button */
       static tabButton* barterTabButton;/**< The Barter TabButton */
-      static oneTabButton* seller1;     /**< The first inventory */
-      static oneTabButton* seller2;     /**< The second inventory */
-      static oneTabButton* seller3;     /**< The third inventory */
       static oneTabButton* sellerInv;   /**< The actual Inventory */
       static inventWindow* sellerWindow;/**< Pointer to the seller inventory
                                              window, if it is openned here. */
-      static oneTabButton* buyer1;      /**< The first inventory */
-      static oneTabButton* buyer2;      /**< The second inventory */
-      static oneTabButton* buyer3;      /**< The third inventory */
       static oneTabButton* buyerInv;    /**< The actual Inventory */
       static inventWindow* buyerWindow; /**< Pointer to the buyer inventory 
                                              window, if it is opened here. */

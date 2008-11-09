@@ -36,6 +36,7 @@
 #define FILE_SEL_ACCEPT     18
 #define FILE_SEL_CANCEL     19
 #define FILE_SEL_CHANGED    20
+#define TAB_BOX_CHANGED     21
 
 /********************************************************************
  *                       Focus's constants                          *

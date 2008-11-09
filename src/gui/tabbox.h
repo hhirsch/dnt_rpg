@@ -48,6 +48,10 @@ class tabBox: public guiObject
        * \return -> guiList relative to the active option or NULL */
       guiList* getActiveList();
 
+      /*! Get the active element title
+       * \return -> title of the active element (or "") */
+      string getActiveTitle();
+
       /*! Get list relative to the option
        * \param opt -> option number to get guiList from [0,total)
        * \return -> guiList relative to the option or NULL */
@@ -73,8 +77,9 @@ class tabBox: public guiObject
 
       /*! Verify changes to the active option
        * \param mouseX -> current mouseX position relative to window 
-       * \param mouseY -> current mouseY position relative to window */
-      void verifyChanges(int mouseX, int mouseY);
+       * \param mouseY -> current mouseY position relative to window
+       * \return -> true if got a change here, false otherwise */
+      bool verifyChanges(int mouseX, int mouseY);
 
    protected:
 

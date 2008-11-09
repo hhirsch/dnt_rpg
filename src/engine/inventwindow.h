@@ -81,14 +81,11 @@ class inventWindow
       inventory* inventories;         /**< Extern Inventories*/
       character* owner;               /**< The inventories owner */
 
-      guiInterface* interf;           /**< Pointer to Interface */
-      window* intWindow;              /**< Internal Window */
-      tabButton* inventoryTabButton;  /**< Inventory Tab Button */
-      oneTabButton* inventoryButton;  /**< Inventory Spaces Button */
-      oneTabButton* inv1Button;       /**< First Inventory Button */
-      oneTabButton* inv2Button;       /**< Second Inventory Button */
-      oneTabButton* inv3Button;       /**< Third Inventory Button */
-      oneTabButton* inv4Button;       /**< Forth Inventory Button */
+      guiInterface* interf;              /**< Pointer to Interface */
+      window* intWindow;                 /**< Internal Window */
+      tabButton* inventoryTabButton[4];  /**< Inventory Tab Button */
+      oneTabButton* inventoryButton[4];  /**< Button to acces inventory */
+      tabBox* inventoryTabBox;           /**< The Inventory selector */
       
       tabButton* characterTabButton;  /**< Character Tab Button */
       oneTabButton* headButton;       /**< Head Button */

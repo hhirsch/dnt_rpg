@@ -16,8 +16,6 @@ void barterWindow::open(character* s, character* b,
 {
    dirs dir;
    /* Init Values */
-   curSellSlot = 0;
-   curBuySlot = 0;
    gui = inter;
    infoWindow = infoW;
 
@@ -55,20 +53,14 @@ void barterWindow::open(character* s, character* b,
 
 
    /* Create the TabButton */
-   barterTabButton = intWindow->getObjectsList()->insertTabButton(3,15,256,220,
+   barterTabButton = intWindow->getObjectsList()->insertTabButton(7,41,256,220,
                        dir.getRealFile("texturas/inventory/trade.png").c_str());
 
    /* Buyer Buttons */
-   buyer1 = barterTabButton->insertButton(4,13,42,26);
-   buyer2 = barterTabButton->insertButton(42,13,80,26);
-   buyer3 = barterTabButton->insertButton(80,13,118,26);
-   buyerInv = barterTabButton->insertButton(4,26,118,216);
+   buyerInv = barterTabButton->insertButton(0,0,114,190);
 
    /* Seller Buttons */
-   seller1 = barterTabButton->insertButton(137,13,175,26);
-   seller2 = barterTabButton->insertButton(175,13,213,26);
-   seller3 = barterTabButton->insertButton(213,13,251,26);
-   sellerInv = barterTabButton->insertButton(137,26,251,216);
+   sellerInv = barterTabButton->insertButton(133,0,247,190);
 
    /* Open Window */
    intWindow->setExternPointer(&intWindow);
@@ -206,7 +198,7 @@ void barterWindow::reDraw()
    {
       /* Draw the barter inventory */
       barterInventory->draw(0,0, barterTabButton->get(), 
-                            curSellSlot, curBuySlot);
+                            0, 0);
 
       /* Draw the Prices Text */
 
@@ -381,18 +373,18 @@ bool barterWindow::treat(guiObject* guiObj, int eventInfo, int mouseX,
          {
             /* Define Inventory */
             sellerObj = (guiObj == (guiObject*) sellerInv);
-            int curInv = seller ? curBuySlot : curSellSlot;
+            int curInv = 0;
 
             /* Convert Mouse Coordinate to inventory coordinate */
             if(sellerObj)
             {
                posX = (int) floor((mouseX - (140 + intWindow->getX1())) / 19.0);
-               posY = (int) floor((mouseY - (28 + intWindow->getY1())) / 19.0);
+               posY = (int) floor((mouseY - (41 + intWindow->getY1())) / 19.0);
             }
             else
             {
                posX = (int) floor((mouseX - (7 + intWindow->getX1())) / 19.0);
-               posY = (int) floor((mouseY - (28 + intWindow->getY1())) / 19.0);
+               posY = (int) floor((mouseY - (41 + intWindow->getY1())) / 19.0);
             }
 
             /* Open Menu For Object if one is avaible */
@@ -422,11 +414,11 @@ bool barterWindow::treat(guiObject* guiObj, int eventInfo, int mouseX,
                {
                   if(sellerObj)
                   {
-                     removeBuyItem(objX, objY, curBuySlot);
+                     removeBuyItem(objX, objY, 0);
                   }
                   else
                   {
-                     removeSellItem(objX, objY, curSellSlot);
+                     removeSellItem(objX, objY, 0);
                   }
                   reDraw();
                }
@@ -456,9 +448,6 @@ int barterWindow::objX = 0;
 int barterWindow::objY = 0;
 bool barterWindow::sellerObj = false;
 
-int barterWindow::curSellSlot = 0;
-int barterWindow::curBuySlot = 0;
-
 barter* barterWindow::barterInventory = NULL;
 guiInterface* barterWindow::gui = NULL;
 textBox* barterWindow::sellerTotals = NULL;
@@ -469,15 +458,9 @@ button* barterWindow::offerButton = NULL;
 button* barterWindow::cancelButton = NULL;
 
 tabButton* barterWindow::barterTabButton = NULL;
-oneTabButton* barterWindow::seller1 = NULL;
-oneTabButton* barterWindow::seller2 = NULL;
-oneTabButton* barterWindow::seller3 = NULL;
 oneTabButton* barterWindow::sellerInv = NULL;
 inventWindow* barterWindow::sellerWindow = NULL;
 
-oneTabButton* barterWindow::buyer1 = NULL;
-oneTabButton* barterWindow::buyer2 = NULL;
-oneTabButton* barterWindow::buyer3 = NULL;
 oneTabButton* barterWindow::buyerInv = NULL;
 inventWindow* barterWindow::buyerWindow = NULL;
 

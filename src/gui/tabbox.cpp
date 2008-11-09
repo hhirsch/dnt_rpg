@@ -86,6 +86,18 @@ guiList* tabBox::getActiveList()
 }
 
 /***********************************************************************
+ *                            getActiveTitle                           *
+ ***********************************************************************/
+string tabBox::getActiveTitle()
+{
+   if(active)
+   {
+      return(active->title);
+   }
+   return("");
+}
+
+/***********************************************************************
  *                               getObject                             *
  ***********************************************************************/
 tabObj* tabBox::getObject(int opt)
@@ -287,11 +299,11 @@ void tabBox::draw(SDL_Surface* screen)
 /***********************************************************************
  *                              verifyChanges                          *
  ***********************************************************************/
-void tabBox::verifyChanges(int mouseX, int mouseY)
+bool tabBox::verifyChanges(int mouseX, int mouseY)
 {
    if(total == 0)
    {
-      return;//nothing to verify
+      return(false);//nothing to verify
    }
    int incX = (x2-x1) / total;
    int cur = 0;
@@ -307,9 +319,10 @@ void tabBox::verifyChanges(int mouseX, int mouseY)
          active = obj;
          draw(wSurface);
          setChanged();
+         return(true);
       }
-
    }
+   return(false);
 }
 
 
