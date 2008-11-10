@@ -196,15 +196,15 @@ skills::skills()
 skills::~skills()
 {
   int aux;
-  for(aux = 0; aux < totalSkills;aux++)
-  {
-     if( m_skills[aux].image)
-     {
-        SDL_FreeSurface( m_skills[aux].image );
-     }
-  }
   if(m_skills)
   {
+     for(aux = 0; aux < totalSkills;aux++)
+     {
+        if( m_skills[aux].image)
+        {
+           SDL_FreeSurface( m_skills[aux].image );
+        }
+     }
      delete [] m_skills;
   }
 }
