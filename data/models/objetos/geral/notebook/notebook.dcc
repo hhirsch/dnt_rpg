@@ -1,4 +1,4 @@
-name = Notebook
+name = gettext("Notebook")
 cal3d = models/objetos/geral/notebook/model.cfg
 inventory_sizes = 0 0
 inventory_texture = models/objetos/geral/notebook/tex_inv.png
