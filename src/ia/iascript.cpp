@@ -236,7 +236,7 @@ void iaScript::run(int maxLines)
 
                if(token[0] == IA_COMMENT_LINE)
                {
-                  //ignore the line, since it is commented
+                  /* ignore the line (it is commented) */
                   lines--;
                }
                else if(token == IA_SETENCE_SCRIPT)
@@ -1266,13 +1266,20 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          /* Get the feat number  */
          if(!featId != -1)
          {
-            if(characterOwner)
+            if( (characterOwner) && (characterOwner->getCanAttack()) )
             {
-               /* Syntax void setPsycho(character c, int psycho) */
-               //TODO verify if is an attack and break before call!
-               characterOwner->actualFeats.applyAttackAndBreakFeat(
-                                                        *characterOwner,
-                                                        featId, dude);
+               /* Verify if at range */
+               if(actionInRange(characterOwner->xPosition, 
+                                characterOwner->zPosition,  
+                                dude->xPosition, dude->zPosition,
+                                characterOwner->getActiveFeatRange() * 
+                                METER_TO_DNT))
+               {
+                  //TODO verify if is an attack and break before call!
+                  characterOwner->actualFeats.applyAttackAndBreakFeat(
+                                                           *characterOwner,
+                                                           featId, dude);
+               }
             }
          }
       }
@@ -1362,7 +1369,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
 
    /* void function() */
    else if( (functionName == IA_FIGHT_ENTER) ||
-            (functionName == IA_FIGHT_EXIT) )
+            (functionName == IA_FIGHT_EXIT) ||
+            (functionName == IA_FIGHT_RUN_AWAY_FROM_BATTLE) )
    {
      
       if(!var)
@@ -1377,6 +1385,36 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          else if(functionName == IA_FIGHT_EXIT)
          {
             eng->exitBattleMode();
+         }
+         /* syntax void runAwayFromBattle() */
+         else if(functionName == IA_FIGHT_RUN_AWAY_FROM_BATTLE)
+         {
+            float posX = 0;
+            float posZ = 0;
+            if(characterOwner->currentEnemy != NULL)
+            {
+               /* Define a position away from the current target */
+               //FIXME... wrong!
+               float angle = getAngle(characterOwner->xPosition,
+                                      characterOwner->zPosition,
+                                      characterOwner->currentEnemy->xPosition,
+                                      characterOwner->currentEnemy->zPosition);
+               posX = characterOwner->xPosition - 
+                      (cos(deg2Rad(angle))*2*WALK_PER_MOVE_ACTION);
+               posZ = characterOwner->zPosition - 
+                      (sin(deg2Rad(angle))*2*WALK_PER_MOVE_ACTION);
+
+               //cout << "Angle: " << angle << " X: " << posX << " Z: " << posZ 
+               //     << endl;
+
+               /* Make the owner go to the position */
+               string line = changeFrom(strLine, functionName, 0, varName);
+               characterOwner->pathFind.defineMap(actualMap);
+               pendAction = eng->actionControl->addAction(line, ACT_MOVE, 
+                                                          characterOwner, 
+                                                          posX, posZ,
+                                               (type == IASCRIPT_TYPE_MISSION));
+            }
          }
       }
       else

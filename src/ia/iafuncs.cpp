@@ -94,6 +94,7 @@ bool isFunction(string s)
            (s == IA_FEAT_GET_POWERFULL_HEAL) || (s == IA_SKILL_POINTS) ||
            (s == IA_ATT_MODIFIER) || (s == IA_FIGHT_ENTER) ||
            (s == IA_FIGHT_EXIT) || (s == IA_FIGHT_CAN_ATTACK) ||
+           (s == IA_FIGHT_RUN_AWAY_FROM_BATTLE) || 
            (s == IA_CHARACTER_GET_PSYCHO) ||
            (s == IA_CHARACTER_SET_PSYCHO) || (s == IA_CHARACTER_AT_RANGE) || 
            (s == IA_CHARACTER_GET_ACTUAL_LIFE) ||
