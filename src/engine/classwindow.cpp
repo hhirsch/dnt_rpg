@@ -62,8 +62,8 @@ classWindow::classWindow(classes* cls, skills* sk, guiInterface* inter,
    }
    
    /* create intWindow */
-   intWindow = inter->insertWindow(centerX-310,centerY-200,
-                                   centerX+310,centerY+200,
+   intWindow = inter->insertWindow(centerX-175,centerY-200,
+                                   centerX+175,centerY+200,
                                    gettext("Class"));
 
    /* Class Image */
@@ -71,39 +71,31 @@ classWindow::classWindow(classes* cls, skills* sk, guiInterface* inter,
    classImage = intWindow->getObjectsList()->insertPicture(7,20,0,0,NULL);   
    classImage->set(classesOrder[curClass]->image);
 
-   /* Class Description */
-   textDescTitle = intWindow->getObjectsList()->insertTextBox(74,18,345,35,1,
-                                           gettext("Class Description"));
-   textDescTitle->setFont(DNT_FONT_TIMES,12,DNT_FONT_ALIGN_CENTER,
-                          DNT_FONT_STYLE_BOLD);
-   
-   textDesc = intWindow->getObjectsList()->insertRolBar(74,36,345,345,"");
+   /* TabBox */
+   tabBox *tab = intWindow->defineTabBox(74,18,345,345);
+   guiList *listChar = tab->insertOption(gettext("Characteristics"));
+   guiList *listDesc = tab->insertOption(gettext("Description"));
 
+   /* Class Description */
+   textDesc = listDesc->insertRolBar(77,39,342,341,"");
    setDescription();
    
    /* Class Characteristics */
-   textCharacTitle = intWindow->getObjectsList()->insertTextBox(346,18,615,35,1,
-                                       gettext("Class Characteristics"));
-   textCharacTitle->setFont(DNT_FONT_TIMES,12,DNT_FONT_ALIGN_CENTER,
-                            DNT_FONT_STYLE_BOLD);
-
-   textCharac = intWindow->getObjectsList()->insertRolBar(346,36,615,345,"");
+   textCharac = listChar->insertRolBar(77,39,342,341,"");
    setCharacteristics();
 
    /* Name and Selectors */
    buttonPrevious = intWindow->getObjectsList()->insertButton(74,346,89,364,
                                                   fnt.createUnicode(0x25C4),0);
-   buttonNext = intWindow->getObjectsList()->insertButton(600,346,615,364,
+   buttonNext = intWindow->getObjectsList()->insertButton(330,346,345,364,
                                                   fnt.createUnicode(0x25BA),0);
-   textName = intWindow->getObjectsList()->insertTextBox(90,346,599,364,1, 
+   textName = intWindow->getObjectsList()->insertTextBox(90,346,329,364,1, 
                                           classesOrder[curClass]->name.c_str());
    textName->setFont(DNT_FONT_ARIAL,12,DNT_FONT_ALIGN_CENTER,
                      DNT_FONT_STYLE_BOLD);
 
-   intWindow->getObjectsList()->insertTextBox(6,365,615,394,2,"");
-
    /* Confirm Button */
-   buttonConfirm = intWindow->getObjectsList()->insertButton(541,370,611,389,
+   buttonConfirm = intWindow->getObjectsList()->insertButton(271,370,341,389,
                                               gettext("Confirm"),1);
    
    /* Cancel Button */

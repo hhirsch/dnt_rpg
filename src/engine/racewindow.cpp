@@ -58,47 +58,41 @@ raceWindow::raceWindow(races* rc, skills* sk, guiInterface* inter,
    }
    
    /* create intWindow */
-   intWindow = inter->insertWindow(centerX-310,centerY-200,
-                                   centerX+310,centerY+200,
+   intWindow = inter->insertWindow(centerX-175,centerY-200,
+                                   centerX+175,centerY+200,
                                    gettext("Race"));
 
    /* Race Image */
-   intWindow->getObjectsList()->insertTextBox(278,18,344,345,2,"");
-   raceImage = intWindow->getObjectsList()->insertPicture(279,152,0,0,NULL);   
+   intWindow->getObjectsList()->insertTextBox(278,18,344,364,2,"");
+   raceImage = intWindow->getObjectsList()->insertPicture(279,157,0,0,NULL);   
    raceImage->set(racesOrder[curRace]->image);
 
+   /* TabBox */
+   tabBox *tab = intWindow->defineTabBox(6,18,277,345);
+
+   guiList *listChar = tab->insertOption(gettext("Characteristics"));
+   guiList *listDesc = tab->insertOption(gettext("Description"));
+
    /* Race Description */
-   textDescTitle = intWindow->getObjectsList()->insertTextBox(6,18,277,35,1,
-                                            gettext("Race Description"));
-   textDescTitle->setFont(DNT_FONT_TIMES,12,DNT_FONT_ALIGN_CENTER,
-                          DNT_FONT_STYLE_BOLD);
-   
-   textDesc = intWindow->getObjectsList()->insertRolBar(6,36,277,345,"");
+   textDesc = listDesc->insertRolBar(9,39,274,341,"");
    setDescription();
 
    /* Race Characteristics */
-   textCharacTitle = intWindow->getObjectsList()->insertTextBox(345,18,615,35,1,
-                                       gettext("Race Characteristcs"));
-   textCharacTitle->setFont(DNT_FONT_TIMES,12,DNT_FONT_ALIGN_CENTER,
-                            DNT_FONT_STYLE_BOLD);
-
-   textCharac = intWindow->getObjectsList()->insertRolBar(345,36,615,345,"");
+   textCharac = listChar->insertRolBar(9,39,274,341,"");
    setCharacteristics();
 
    /* Name and Selectors */
    buttonPrevious = intWindow->getObjectsList()->insertButton(6,346,21,364,
                                              fnt.createUnicode(0x25C4),0);
-   buttonNext = intWindow->getObjectsList()->insertButton(600,346,615,364,
+   buttonNext = intWindow->getObjectsList()->insertButton(262,346,277,364,
                                              fnt.createUnicode(0x25BA),0);
-   textName = intWindow->getObjectsList()->insertTextBox(22,346,599,364,1, 
-                                                  racesOrder[curRace]->name.c_str());
+   textName = intWindow->getObjectsList()->insertTextBox(22,346,261,364,1, 
+                                             racesOrder[curRace]->name.c_str());
    textName->setFont(DNT_FONT_ARIAL,12,DNT_FONT_ALIGN_CENTER,
                      DNT_FONT_STYLE_BOLD);
 
-   intWindow->getObjectsList()->insertTextBox(6,365,615,394,2,"");
-
    /* Confirm Button */
-   buttonConfirm = intWindow->getObjectsList()->insertButton(541,370,611,389,
+   buttonConfirm = intWindow->getObjectsList()->insertButton(270,370,340,389,
                                          gettext("Confirm"),1);
    
    /* Cancel Button */
