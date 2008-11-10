@@ -3,6 +3,9 @@
 
 #include "guilist.h"
 
+#include <iostream>
+using namespace std;
+
 //////////////////////////////////////////////////////////////////////////
 //                                                                      //
 //                                  tabObj                              //
@@ -312,7 +315,7 @@ bool tabBox::verifyChanges(int mouseX, int mouseY)
    if(isMouseAt(x1, y1, x2, y1+18, mouseX, mouseY))
    {
       /* Clicked at the title bar! */
-      cur = mouseX / incX;
+      cur = (mouseX-x1) / incX;
       obj = getObject(cur);
       if( (obj != NULL) && (obj != active))
       {
