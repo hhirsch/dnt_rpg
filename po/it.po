@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-11-10 09:47-0200\n"
+"POT-Creation-Date: 2008-11-10 13:17-0200\n"
 "PO-Revision-Date: 2008-10-12 15:57+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -2694,6 +2694,18 @@ msgstr ""
 msgid ""
 "Ahm, last time I saw him was in the Bunker School, when I was riping it to "
 "play online with zsnes."
+msgstr ""
+
+#: data/models/objetos/itens/healkit/healkit.dcc:1
+msgid "Healkit"
+msgstr ""
+
+#: data/models/objetos/geral/computador/computador.dcc:1
+msgid "Computer"
+msgstr ""
+
+#: data/models/objetos/geral/notebook/notebook.dcc:1
+msgid "Notebook"
 msgstr ""
 
 #: data/weapons/definitions/axe.wcc:1

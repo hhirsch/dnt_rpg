@@ -232,6 +232,11 @@ data/skills/tocarinst.ski
 data/dialogs/objects/computers.dlg
 data/dialogs/tutorial/logan.dlg
 
+#objects
+data/models/objetos/itens/healkit/healkit.dcc
+data/models/objetos/geral/computador/computador.dcc
+data/models/objetos/geral/notebook/notebook.dcc
+
 #weapons
 data/weapons/definitions/axe.wcc
 data/weapons/definitions/dagger.wcc
