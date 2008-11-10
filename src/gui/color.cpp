@@ -14,9 +14,9 @@ farso_colors::farso_colors()
    colorCont[0].G = 134;
    colorCont[0].B = 134;
    colorCont[0].A = 255;
-   colorCont[1].R = 58;
-   colorCont[1].G = 58;
-   colorCont[1].B = 58;
+   colorCont[1].R = 70;
+   colorCont[1].G = 70;
+   colorCont[1].B = 70;
    colorCont[1].A = 255;
    colorCont[2].R = 169;
    colorCont[2].G = 169;
