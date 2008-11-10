@@ -8,6 +8,7 @@
 #include "../engine/util.h"
 #include "../etc/dirs.h"
 #include "../etc/defparser.h"
+#include "../lang/translate.h"
 
 ////////////////////////////////////////////////////////////////////////////
 //                                                                        //
@@ -82,7 +83,7 @@ object::object(string path, modelList& mdlList, string curMap): thing()
    {
       if(key == "name")
       {
-         name = value;
+         name = translateDataString(value);
       }
       else if(key == "dialog")
       {
