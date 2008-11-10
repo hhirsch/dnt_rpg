@@ -154,6 +154,36 @@ void guiInterface::verifyMousePressObjects(int x, int y, guiList* list)
 }
 
 /*********************************************************************
+ *                           verifyRolBars                           *
+ *********************************************************************/
+void guiInterface::verifyRolBars(guiList* list)
+{
+   /* Verify if list exists */
+   if(list == NULL)
+   {
+      return;
+   }
+
+   /* Now search it for rolBars */
+   guiObject *obj;
+   obj = list->getFirst();
+   int aux;
+   for(aux=0; aux < list->getTotal(); aux++)
+   {
+      if(obj->type == GUI_ROL_BAR)
+      {
+         rolBar* rb = (rolBar*)obj;
+         if(rb->eventGot(ON_PRESS_BUTTON, objAtivo))
+         {
+            ljan->getActiveWindow()->draw(0,0);
+            rb->redraw();
+         }
+      }
+      obj = obj->next;
+   }
+}
+
+/*********************************************************************
  *                   Take care of GUI I/O Events                     *
  *********************************************************************/
 guiObject* guiInterface::manipulateEvents(int x, int y, Uint8 Mbotao, 
@@ -438,24 +468,8 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
            else
            {
               /* Verify RolBar */
-              guiObject *obj;
-              obj = ljan->getActiveWindow()->getObjectsList()->getFirst();
-              int aux;
-              for(aux=0; 
-                  aux < ljan->getActiveWindow()->getObjectsList()->getTotal(); 
-                  aux++)
-              {
-                 if(obj->type == GUI_ROL_BAR)
-                 {
-                    rolBar* rb = (rolBar*)obj;
-                    if(rb->eventGot(ON_PRESS_BUTTON, objAtivo))
-                    {
-                       ljan->getActiveWindow()->draw(0,0);
-                       rb->redraw();
-                    }
-                 }
-                 obj = obj->next;
-              }
+              verifyRolBars(ljan->getActiveWindow()->getObjectsList());
+              verifyRolBars(ljan->getActiveWindow()->getActiveTabBoxList());
 
               eventInfo = ON_PRESS_BUTTON;
               return(objAtivo);
