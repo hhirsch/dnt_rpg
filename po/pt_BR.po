@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-11-09 13:53-0200\n"
+"POT-Creation-Date: 2008-11-10 09:47-0200\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -77,16 +77,16 @@ msgid "Tendency & Alignment"
 msgstr "Tendência e Alinhamento"
 
 #: src/engine/alignwindow.cpp:55 src/engine/aspectwindow.cpp:75
-#: src/engine/attwindow.cpp:221 src/engine/classwindow.cpp:107
-#: src/engine/options.cpp:777 src/engine/racewindow.cpp:102
+#: src/engine/attwindow.cpp:221 src/engine/classwindow.cpp:99
+#: src/engine/options.cpp:777 src/engine/racewindow.cpp:96
 #: src/engine/skillwindow.cpp:139
 msgid "Confirm"
 msgstr "Confirmar"
 
 #: src/engine/alignwindow.cpp:59 src/engine/aspectwindow.cpp:79
 #: src/engine/attwindow.cpp:225 src/engine/barterwindow.cpp:46
-#: src/engine/classwindow.cpp:111 src/engine/options.cpp:781
-#: src/engine/racewindow.cpp:106 src/engine/skillwindow.cpp:142
+#: src/engine/classwindow.cpp:103 src/engine/options.cpp:781
+#: src/engine/racewindow.cpp:100 src/engine/skillwindow.cpp:142
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -306,51 +306,51 @@ msgstr "Não Aplicável"
 msgid "Class"
 msgstr "Classe"
 
-#: src/engine/classwindow.cpp:76
-msgid "Class Description"
-msgstr "Descrição da Classe"
+#: src/engine/classwindow.cpp:76 src/engine/racewindow.cpp:73
+msgid "Characteristics"
+msgstr "Características"
 
-#: src/engine/classwindow.cpp:86
-msgid "Class Characteristics"
-msgstr "Características da Classe"
+#: src/engine/classwindow.cpp:77 src/engine/racewindow.cpp:74
+msgid "Description"
+msgstr "Descrição"
 
-#: src/engine/classwindow.cpp:140
+#: src/engine/classwindow.cpp:132
 msgid "Life Dice"
 msgstr "Dado de Vida"
 
-#: src/engine/classwindow.cpp:144
+#: src/engine/classwindow.cpp:136
 msgid "Skill Points"
 msgstr "Pontos de Perícia"
 
-#: src/engine/classwindow.cpp:171
+#: src/engine/classwindow.cpp:163
 msgid "First Level"
 msgstr "Primeiro Nível"
 
-#: src/engine/classwindow.cpp:199
+#: src/engine/classwindow.cpp:191
 msgid "Other Levels"
 msgstr "Outros Níveis"
 
-#: src/engine/classwindow.cpp:204
+#: src/engine/classwindow.cpp:196
 msgid "Class Modifiers"
 msgstr "Moficadores de Classe"
 
-#: src/engine/classwindow.cpp:215 src/engine/racewindow.cpp:153
+#: src/engine/classwindow.cpp:207 src/engine/racewindow.cpp:147
 msgid "No Modifiers."
 msgstr "Sem Modificadores."
 
-#: src/engine/classwindow.cpp:222
+#: src/engine/classwindow.cpp:214
 msgid "Class Feats"
 msgstr "Habilidades da Classe"
 
-#: src/engine/classwindow.cpp:233 src/engine/racewindow.cpp:171
+#: src/engine/classwindow.cpp:225 src/engine/racewindow.cpp:165
 msgid "No Feats."
 msgstr "Sem Habilidades."
 
-#: src/engine/classwindow.cpp:241
+#: src/engine/classwindow.cpp:233
 msgid "Class Skills"
 msgstr "Perícias da Classe"
 
-#: src/engine/classwindow.cpp:260 src/engine/racewindow.cpp:199
+#: src/engine/classwindow.cpp:252 src/engine/racewindow.cpp:193
 msgid "No Skills."
 msgstr "Sem Perícias"
 
@@ -704,7 +704,7 @@ msgstr "Término Automático de Turnos"
 
 #: src/engine/options.cpp:764
 msgid "Show Enemies Battle Circles"
-msgstr "Mostrar Cículos de Batalha dos Enemigos"
+msgstr "Mostrar Cículos de Luta Inimigos"
 
 #: src/engine/options.cpp:989
 msgid "Some changes will only take effect upon restart."
@@ -714,23 +714,15 @@ msgstr "Algumas alterações só terão efeito após o reinício do programa."
 msgid "Race"
 msgstr "Raça"
 
-#: src/engine/racewindow.cpp:72
-msgid "Race Description"
-msgstr "Descrição da Raça"
-
-#: src/engine/racewindow.cpp:81
-msgid "Race Characteristcs"
-msgstr "Características da Raça"
-
-#: src/engine/racewindow.cpp:142
+#: src/engine/racewindow.cpp:136
 msgid "Race Modifiers"
 msgstr "Modificadores da Raça"
 
-#: src/engine/racewindow.cpp:159
+#: src/engine/racewindow.cpp:153
 msgid "Race Feats"
 msgstr "Habilidades da Raça"
 
-#: src/engine/racewindow.cpp:179
+#: src/engine/racewindow.cpp:173
 msgid "Race Skills"
 msgstr "Perícias da Raça"
 
@@ -3397,6 +3389,12 @@ msgstr "Leve"
 #: data/weapons/types/weights.dcl:4
 msgid "Heavy"
 msgstr "Pesada"
+
+#~ msgid "Class Description"
+#~ msgstr "Descrição da Classe"
+
+#~ msgid "Race Characteristcs"
+#~ msgstr "Características da Raça"
 
 #~ msgid "Error while opening skills list: %s\n"
 #~ msgstr "Erro ao abrir a lista de perícias: %s\n"

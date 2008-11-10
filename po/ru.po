@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-11-09 13:53-0200\n"
+"POT-Creation-Date: 2008-11-10 09:47-0200\n"
 "PO-Revision-Date: 2007-11-20 17:24+0000\n"
 "Last-Translator: Sergei Zivukov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -79,16 +79,16 @@ msgid "Tendency & Alignment"
 msgstr "Стремление и Равнение"
 
 #: src/engine/alignwindow.cpp:55 src/engine/aspectwindow.cpp:75
-#: src/engine/attwindow.cpp:221 src/engine/classwindow.cpp:107
-#: src/engine/options.cpp:777 src/engine/racewindow.cpp:102
+#: src/engine/attwindow.cpp:221 src/engine/classwindow.cpp:99
+#: src/engine/options.cpp:777 src/engine/racewindow.cpp:96
 #: src/engine/skillwindow.cpp:139
 msgid "Confirm"
 msgstr "Подтвердить"
 
 #: src/engine/alignwindow.cpp:59 src/engine/aspectwindow.cpp:79
 #: src/engine/attwindow.cpp:225 src/engine/barterwindow.cpp:46
-#: src/engine/classwindow.cpp:111 src/engine/options.cpp:781
-#: src/engine/racewindow.cpp:106 src/engine/skillwindow.cpp:142
+#: src/engine/classwindow.cpp:103 src/engine/options.cpp:781
+#: src/engine/racewindow.cpp:100 src/engine/skillwindow.cpp:142
 msgid "Cancel"
 msgstr "Отменить"
 
@@ -308,51 +308,51 @@ msgstr ""
 msgid "Class"
 msgstr "Класс"
 
-#: src/engine/classwindow.cpp:76
-msgid "Class Description"
-msgstr "Описание класса"
+#: src/engine/classwindow.cpp:76 src/engine/racewindow.cpp:73
+msgid "Characteristics"
+msgstr ""
 
-#: src/engine/classwindow.cpp:86
-msgid "Class Characteristics"
-msgstr "Характеристики класса"
+#: src/engine/classwindow.cpp:77 src/engine/racewindow.cpp:74
+msgid "Description"
+msgstr ""
 
-#: src/engine/classwindow.cpp:140
+#: src/engine/classwindow.cpp:132
 msgid "Life Dice"
 msgstr ""
 
-#: src/engine/classwindow.cpp:144
+#: src/engine/classwindow.cpp:136
 msgid "Skill Points"
 msgstr ""
 
-#: src/engine/classwindow.cpp:171
+#: src/engine/classwindow.cpp:163
 msgid "First Level"
 msgstr "Первый уровень"
 
-#: src/engine/classwindow.cpp:199
+#: src/engine/classwindow.cpp:191
 msgid "Other Levels"
 msgstr "Другие уровни"
 
-#: src/engine/classwindow.cpp:204
+#: src/engine/classwindow.cpp:196
 msgid "Class Modifiers"
 msgstr ""
 
-#: src/engine/classwindow.cpp:215 src/engine/racewindow.cpp:153
+#: src/engine/classwindow.cpp:207 src/engine/racewindow.cpp:147
 msgid "No Modifiers."
 msgstr ""
 
-#: src/engine/classwindow.cpp:222
+#: src/engine/classwindow.cpp:214
 msgid "Class Feats"
 msgstr ""
 
-#: src/engine/classwindow.cpp:233 src/engine/racewindow.cpp:171
+#: src/engine/classwindow.cpp:225 src/engine/racewindow.cpp:165
 msgid "No Feats."
 msgstr ""
 
-#: src/engine/classwindow.cpp:241
+#: src/engine/classwindow.cpp:233
 msgid "Class Skills"
 msgstr ""
 
-#: src/engine/classwindow.cpp:260 src/engine/racewindow.cpp:199
+#: src/engine/classwindow.cpp:252 src/engine/racewindow.cpp:193
 msgid "No Skills."
 msgstr "Нет умений."
 
@@ -712,23 +712,15 @@ msgstr ""
 msgid "Race"
 msgstr "Раса"
 
-#: src/engine/racewindow.cpp:72
-msgid "Race Description"
-msgstr "Описание расы"
-
-#: src/engine/racewindow.cpp:81
-msgid "Race Characteristcs"
-msgstr "Характеристики расы"
-
-#: src/engine/racewindow.cpp:142
+#: src/engine/racewindow.cpp:136
 msgid "Race Modifiers"
 msgstr ""
 
-#: src/engine/racewindow.cpp:159
+#: src/engine/racewindow.cpp:153
 msgid "Race Feats"
 msgstr ""
 
-#: src/engine/racewindow.cpp:179
+#: src/engine/racewindow.cpp:173
 msgid "Race Skills"
 msgstr ""
 
@@ -2801,6 +2793,12 @@ msgstr ""
 #: data/weapons/types/weights.dcl:4
 msgid "Heavy"
 msgstr ""
+
+#~ msgid "Class Description"
+#~ msgstr "Описание класса"
+
+#~ msgid "Race Characteristcs"
+#~ msgstr "Характеристики расы"
 
 #~ msgid "Error while opening skills list: %s\n"
 #~ msgstr "Произошла ошибка пока открывается список скиллов: %s\n"

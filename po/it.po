@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-11-09 13:53-0200\n"
+"POT-Creation-Date: 2008-11-10 09:47-0200\n"
 "PO-Revision-Date: 2008-10-12 15:57+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -79,16 +79,16 @@ msgid "Tendency & Alignment"
 msgstr "Tendenza & Allineamento"
 
 #: src/engine/alignwindow.cpp:55 src/engine/aspectwindow.cpp:75
-#: src/engine/attwindow.cpp:221 src/engine/classwindow.cpp:107
-#: src/engine/options.cpp:777 src/engine/racewindow.cpp:102
+#: src/engine/attwindow.cpp:221 src/engine/classwindow.cpp:99
+#: src/engine/options.cpp:777 src/engine/racewindow.cpp:96
 #: src/engine/skillwindow.cpp:139
 msgid "Confirm"
 msgstr "Conferma"
 
 #: src/engine/alignwindow.cpp:59 src/engine/aspectwindow.cpp:79
 #: src/engine/attwindow.cpp:225 src/engine/barterwindow.cpp:46
-#: src/engine/classwindow.cpp:111 src/engine/options.cpp:781
-#: src/engine/racewindow.cpp:106 src/engine/skillwindow.cpp:142
+#: src/engine/classwindow.cpp:103 src/engine/options.cpp:781
+#: src/engine/racewindow.cpp:100 src/engine/skillwindow.cpp:142
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -308,51 +308,51 @@ msgstr "Non Applicabile"
 msgid "Class"
 msgstr "Classe"
 
-#: src/engine/classwindow.cpp:76
-msgid "Class Description"
-msgstr "Descrizione Classe"
+#: src/engine/classwindow.cpp:76 src/engine/racewindow.cpp:73
+msgid "Characteristics"
+msgstr "Caratteristiche"
 
-#: src/engine/classwindow.cpp:86
-msgid "Class Characteristics"
-msgstr "Caratteristiche Classe"
+#: src/engine/classwindow.cpp:77 src/engine/racewindow.cpp:74
+msgid "Description"
+msgstr "Descrizione"
 
-#: src/engine/classwindow.cpp:140
+#: src/engine/classwindow.cpp:132
 msgid "Life Dice"
 msgstr "Dado Vita"
 
-#: src/engine/classwindow.cpp:144
+#: src/engine/classwindow.cpp:136
 msgid "Skill Points"
 msgstr "Punti Abilità"
 
-#: src/engine/classwindow.cpp:171
+#: src/engine/classwindow.cpp:163
 msgid "First Level"
 msgstr "Primo Livello"
 
-#: src/engine/classwindow.cpp:199
+#: src/engine/classwindow.cpp:191
 msgid "Other Levels"
 msgstr "Altri Livelli"
 
-#: src/engine/classwindow.cpp:204
+#: src/engine/classwindow.cpp:196
 msgid "Class Modifiers"
 msgstr "Modificatori Classe"
 
-#: src/engine/classwindow.cpp:215 src/engine/racewindow.cpp:153
+#: src/engine/classwindow.cpp:207 src/engine/racewindow.cpp:147
 msgid "No Modifiers."
 msgstr "Nessun Modificatore."
 
-#: src/engine/classwindow.cpp:222
+#: src/engine/classwindow.cpp:214
 msgid "Class Feats"
 msgstr ""
 
-#: src/engine/classwindow.cpp:233 src/engine/racewindow.cpp:171
+#: src/engine/classwindow.cpp:225 src/engine/racewindow.cpp:165
 msgid "No Feats."
 msgstr ""
 
-#: src/engine/classwindow.cpp:241
+#: src/engine/classwindow.cpp:233
 msgid "Class Skills"
 msgstr "Abilità Classe"
 
-#: src/engine/classwindow.cpp:260 src/engine/racewindow.cpp:199
+#: src/engine/classwindow.cpp:252 src/engine/racewindow.cpp:193
 msgid "No Skills."
 msgstr "Nessuna Abilità."
 
@@ -712,23 +712,15 @@ msgstr "Alcuni cambiamenti avranno effetto dopo il riavvio"
 msgid "Race"
 msgstr "Razza"
 
-#: src/engine/racewindow.cpp:72
-msgid "Race Description"
-msgstr "Descrizione Razza"
-
-#: src/engine/racewindow.cpp:81
-msgid "Race Characteristcs"
-msgstr "Caratteristiche Razza"
-
-#: src/engine/racewindow.cpp:142
+#: src/engine/racewindow.cpp:136
 msgid "Race Modifiers"
 msgstr "Modificatori Razza"
 
-#: src/engine/racewindow.cpp:159
+#: src/engine/racewindow.cpp:153
 msgid "Race Feats"
 msgstr ""
 
-#: src/engine/racewindow.cpp:179
+#: src/engine/racewindow.cpp:173
 msgid "Race Skills"
 msgstr "Abilità Razza"
 
@@ -2820,6 +2812,12 @@ msgstr "Leggero"
 #: data/weapons/types/weights.dcl:4
 msgid "Heavy"
 msgstr "Pesante"
+
+#~ msgid "Class Description"
+#~ msgstr "Descrizione Classe"
+
+#~ msgid "Race Characteristcs"
+#~ msgstr "Caratteristiche Razza"
 
 #~ msgid "Can't Open the options file: %s\n"
 #~ msgstr "Non è possibile Aprire il file di opzioni: %s\n"
