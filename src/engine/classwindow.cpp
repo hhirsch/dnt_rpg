@@ -91,7 +91,7 @@ classWindow::classWindow(classes* cls, skills* sk, guiInterface* inter,
                                                   fnt.createUnicode(0x25BA),0);
    textName = intWindow->getObjectsList()->insertTextBox(90,346,329,364,1, 
                                           classesOrder[curClass]->name.c_str());
-   textName->setFont(DNT_FONT_ARIAL,12,DNT_FONT_ALIGN_CENTER,
+   textName->setFont(DNT_FONT_ARIAL,10,DNT_FONT_ALIGN_CENTER,
                      DNT_FONT_STYLE_BOLD);
 
    /* Confirm Button */

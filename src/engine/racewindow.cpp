@@ -88,7 +88,7 @@ raceWindow::raceWindow(races* rc, skills* sk, guiInterface* inter,
                                              fnt.createUnicode(0x25BA),0);
    textName = intWindow->getObjectsList()->insertTextBox(22,346,261,364,1, 
                                              racesOrder[curRace]->name.c_str());
-   textName->setFont(DNT_FONT_ARIAL,12,DNT_FONT_ALIGN_CENTER,
+   textName->setFont(DNT_FONT_ARIAL,10,DNT_FONT_ALIGN_CENTER,
                      DNT_FONT_STYLE_BOLD);
 
    /* Confirm Button */
