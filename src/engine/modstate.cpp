@@ -566,7 +566,8 @@ void modMap::mapCharacterAddAction(int act, string character, string mapFile,
 
    /* Search for a previous modAction with same info */
    mapCharacterModAction* n=(mapCharacterModAction*)search(act, character,
-                                                           initialX, initialZ);
+                                                           initialX, 0, 
+                                                           initialZ);
    if(n != NULL)
    {
       /* Just update the one found */
@@ -663,6 +664,8 @@ modAction* modMap::search(int action, string target,
                /* For all other types, verify the current position */
                mod->getPosition(pX, pY, pZ);
             }
+
+            /* Verify the position */
             if( (pX == xPos) && (pZ == zPos))
             {
                /* Found it at the desired position */
@@ -807,7 +810,6 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs,
                /* Load it to the map */
                obj = actualMap->insertObject(tmpMobj->getTarget(), mdlList, 
                                              wTypes);
-               cout << "OBJECT: " << obj << "2D: " << obj->get2dModel() << endl;
             }
             /* Insert the Object  */
             actualMap->insertObject(x, actualMap->getHeight(x,z), z, 
