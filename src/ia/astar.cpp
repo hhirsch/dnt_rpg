@@ -22,6 +22,7 @@ aStar::aStar()
    lastCallTime = SDL_GetTicks();
    opened = NULL;
    closed = NULL;
+   walking = false;
 }
 
 /****************************************************************
@@ -104,6 +105,14 @@ void aStar::findPath(void* actor, GLfloat x, GLfloat z, GLfloat stepSize,
    if( (actualTime - lastCallTime >= MIN_CALL) || (forceCall))
    {
       lastCallTime = actualTime;
+
+      /* Verify, if at fight mode, if not already walking */
+      if((fightMode) && (walking))
+      {
+         /* Can't change the walk, so keep the current one */
+         state = ASTAR_STATE_FOUND;
+         return;
+      }      
 
       /* Clear the current search (if one) */
       clearSearch();
@@ -199,6 +208,7 @@ void aStar::clear()
    delete(patt);
    patt = new pattAgent(true);
    state = ASTAR_STATE_OTHER;
+   walking = false;
 }
 
 /****************************************************************
@@ -285,6 +295,7 @@ void aStar::doCycle(bool fightMode)
          /* We're done */
          clearSearch();
          state = ASTAR_STATE_FOUND;
+         walking = true;
 
          return;
       }
@@ -448,6 +459,7 @@ bool aStar::getNewPosition(GLfloat& posX, GLfloat& posZ, GLfloat& ori,
       patt->getPosition(pX, pZ);
       if( (pX == posX) && (pZ == posZ) && (ori == patt->orientationValue()) )
       {
+         walking = false;
          return(false);
       }
 
@@ -464,6 +476,7 @@ bool aStar::getNewPosition(GLfloat& posX, GLfloat& posZ, GLfloat& ori,
          {
             /* Can't do a full move, so stop here */
             ((character*)curActor)->setCanMove(false);
+            walking = false;
             return(false);
          }
 
@@ -472,6 +485,7 @@ bool aStar::getNewPosition(GLfloat& posX, GLfloat& posZ, GLfloat& ori,
          {
             ((character*)curActor)->setCanAttack(false);
             ((character*)curActor)->setCanMove(false);
+            walking = false;
             return(false);
          }
 
@@ -486,18 +500,22 @@ bool aStar::getNewPosition(GLfloat& posX, GLfloat& posZ, GLfloat& ori,
             ((character*)curActor)->setCanMove(false);
             
             /* Stop the motion */
+            walking = false;
             return(false);
          }
 
          /* Still walking */
+         walking = true;
          return(true);
       }
       else
       {
          /* Only stop when arrive at destiny */
-         return((posX != destinyX) || (posZ != destinyZ));
+         walking = (posX != destinyX) || (posZ != destinyZ);
+         return(walking);
       }
    }
+   walking = false;
    return(false);
 }
 

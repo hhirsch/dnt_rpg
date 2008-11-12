@@ -143,6 +143,8 @@ class aStar
       void* pcs;                /**< PCs list */
       void* npcs;               /**< NPCs list */
       GLfloat curStepSize;      /**< Current Step Size */
+      bool walking;             /**< True if the character is walking with
+                                     at a* at the momment. */
 
       listStar* opened;         /**< Opened nodes list */
       listStar* closed;         /**< Closed nodes list */
