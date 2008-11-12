@@ -8,7 +8,7 @@
 
 \begin{document}
 
-\title{\textbf{DNT Script Language}}
+\title{\textbf{DNT Script Language - 0.3}}
 
 \author
 {
@@ -29,15 +29,15 @@ DNTeam
 DccNiTghtmare computer game. 
 
    Why write a new language instead of using an existed one? Simple: first we
-had tried {\it LUA} as a language, but its integration with C++ language and poor
-compatibility between versions forced us to abandon the use. In the other hand,
-a language implemented at the core of the game engine can be much more optimized
-and extensible than a generic one.
+tried {\it LUA} as the game script language, but its integration with C++ and
+poor compatibility between versions forced us to abandon the use. At the other
+hand, a language implemented at the core of the game engine can be much more
+optimized and extensible than a generic one.
 
 \section{Restrictions}
 
 \subsection{Expressions/Lines}
-A expression must be at the same line. So,
+An expression must be entirely at the same line. So,
 
 \begin{verbatim}
 a = 25 + 45 + b * (d + e);
@@ -54,7 +54,7 @@ a = 25 + 45 + b
 
 \subsection{Function Parameters}
 
-Function parameters must be variables. So, you can't pass constants to funcions.
+Function parameters must be variables: you can't pass constants to funcions.
 For Example:
 
 \begin{verbatim}
@@ -73,7 +73,8 @@ For Example:
 
 \section{Comments}
  
-   A comment is a line with its first valid character equal to '\#'. For example:
+   A comment is a line with its first valid character equal to '\#'. For
+example:
 
 \begin{verbatim}
    # This script is a test to the DNT script language
@@ -82,7 +83,8 @@ For Example:
 
 \section{Separators}
 
-The separators, as its names suggests, separates terms on the language. They are:
+   The separators, as the name suggest, separate terms in the language. They
+are:
 
 \begin{itemize}
 \item{Comma: ','}
@@ -126,6 +128,27 @@ float dist; mean, sum;
 
 \subsection{Types}
 
+Note: for scripts that keeps runnig for more than one map (mission scripts, for
+example), {\bf don't keep variables} that will change it's value (or existence)
+at maps (for example, don't keep NPC characters as variables, instead get them
+with functions:
+
+\begin{verbatim}
+if(inventoryHave(getNPCByName(logan),objFile))
+end
+\end{verbatim}
+
+{\it will work}, but
+
+\begin{verbatim}
+character c
+c = getNPCByName(logan)
+if(inventoryHave(c, objFile))
+end
+\end{verbatim}
+
+{\it isn't athomical} and can give you {\bf errors}.)
+
 \subsubsection{void}
 
 The void type is as in C/C++: a representation of an empty set of values.
@@ -154,15 +177,6 @@ end with ``. For Example:
 \subsubsection{character}
 
 The character type represents a game character, playable or non-playable.
-
-\subsubsection{object}
-
-The object type represents an object in the game. This object can be mapObjects,
-weapons, etc.
-
-\subsubsection{map}
-
-The map type represents a game map.
 
 \section{Operations}
 
@@ -203,7 +217,7 @@ paranthesis '(' must have a close ')' one. And {\it vice-versa}.
 \subsection{Script Declaration}
 
 All scripts must have a {\it script()} marking its begining. A {\it script()}
-must has an {\it end}.
+must have an {\it end}.
 
 \begin{verbatim}
 script()
@@ -241,8 +255,7 @@ else if} is valid. Examples:
 \begin{verbatim}
    if(a >= 2)
       b = 1
-   else 
-   if(a <= 0)
+   else if(a <= 0)
       b = 2
    else
       b = 3;
@@ -283,22 +296,23 @@ The iterational flux control is an {\it while}. Each {\it while} must have an
 
 \section{Functions}
 
-At this time, you can't implement functions at the script. This is a feature
+
+\subsection{User Defined Functions}
+
+   At this time, you can't implement functions at the script. This is a feature
 that we plan to put latter on the language if we need it.
 
 \subsection{Pending Actions}
 
-   There are two types of functions, those that can be done in a time lesser to
+   There are two types of functions, those that can be done in a time lesser of
 a render cycle, and those that remains for more than one cycle. For example,
-verify the current position of the character is done in a time lesser than the
-render cycle, but make a character move from its current position to another is 
-an operation that requers more than one render cycle to be done.
-   For the functions that requires more than one render cycle, the interpreter puts
-them at an {\it Action Controller} and wait for the action end (with success or
-not) to continue the script interpretation. So this kind of functions {\bf must} be
-{\bf boolean} ones.
+verify the current character position is done in a time lesser than the render
+cycle, but make a character move from its current position to another one is an
+operation that requires more than one render cycle to finish.
 
-Next, we'll describe the functions implemented to the script use.
+   For those functions types, the interpreter puts them at an {\it Action 
+Controller} and wait for the action's end (with success or not) to continue 
+the script interpretation. 
 
 \subsection{Quick Pointers}
 
@@ -306,7 +320,7 @@ The quick pointer are pointers to somethings in game that can be used as a
 global variable {\it (but can't have his value directly changed)}.
 
 \subsubsection{SELF\_OBJECT}
-{\bf type:} object
+{\bf type:} string
 
 The {\it SELF\_OBJECT} is the representation of the object owner of the script
 (if one exists). This variable is available when the script is one that
@@ -315,9 +329,15 @@ controls some object behaviour.
 \subsubsection{SELF\_CHARACTER}
 {\bf type:} character
 
-The {\it SELF\_CHARACTER} is the representation of the character owner of the script
-(if one exists). This variable is available when the script is one that
+The {\it SELF\_CHARACTER} is the representation of the character owner of the
+script (if one exists). This variable is available when the script is one that
 controls some character behaviour (in combat or not).
+
+\subsubsection{SELF\_MISSION}
+{\bf type:} string
+
+The {\it SELF\_MISSION} is the representation of the mission owner of the script
+(if one is defined). This variable is only available for mission's scripts.
 
 \subsubsection{ACTIVE\_CHARACTER}
 {\bf type:} character
@@ -326,7 +346,7 @@ The {\it ACTIVE\_CHARACTER} represents the current character controlled by the
 user.
 
 \subsubsection{ACTUAL\_MAP}
-{\bf type:} map
+{\bf type:} string
 
 The {\it ACTUAL\_MAP} represents the current opened map.
 
@@ -415,6 +435,16 @@ life points of the character.
 Verify if the character {\it target} is at the range of the character {\it ref}.
 {\bf Returns:} true if at range, false if isn't.
 
+\subsubsection{canAttack}
+{\bf definition:} bool canAttack(character c)
+
+Verify if the character "c" can use attack actions at the current turn.
+{\bf Note:} {\it This function only have valid values at the Fight Mode}.
+
+\subsubsection{getNPCByName}
+{\bf definition:} character getNPCByName(string pcFile)
+
+Get a NPC character based on its fileName, at the current map.
 
 \subsection{Inventory}
 
@@ -465,6 +495,11 @@ the characterOwner of the script on its defined target.
 This function get the powerfull heal feat that the characterOwner
 of the script can use at its defined target.
 
+\subsubsection{featUseAtCharacter}
+{\bf definition:} bool featUseAtCharacter(string feat, character target)
+
+Use a feat at a character.
+
 \subsection{Skill}
 
 \subsubsection{skillPoints}
@@ -488,6 +523,12 @@ Put the engine at combat mode.
 {\bf definition:} character getNearestEnemy(character dude)
 
 Get the nearest enemy character from the character {\it dude}
+
+\subsubsection{runAwayFromBattle}
+{\bf definition:} void runAwayFromBattle()
+
+The SELF\_CHARACTER will try to run away from the battle (moving to a position
+far).
 
 
 \subsection{Missions}
@@ -527,6 +568,20 @@ missionFile};
 Set the ammount of xp to complete the mission {\it missionFile} to {\it
 xpValue}.
 
+\subsection{Dialogs}
+
+\subsubsection{dialogSetInitial}
+{\bf definition:} void dialogSetInitial(string charFile, string map, int dlg)
+
+Set the initial dialog for the character repreesented by the character of file
+"charFile" at the "map" to the number "dlg".
+
+\subsection{Debug}
+
+\subsubsection{print}
+{\bf definition:} void print(string var)
+
+Print the current value of at string variable.
 
 \section{Uses}
 
@@ -575,49 +630,37 @@ The script can control the combat behaviour of the NPC. They are one pass
 scripts types, controlling the character {\bf per turn}. For example:
 
 \begin{verbatim}
-#An NPC behaviour for a turn on the combat mode
-#It's our first test for the NPC combat IA scripts
-
+#############################################################
+# This is a dummy script to control animal combat behaviour
+#
+# NOTE: the control if character can attack, can move or not
+#       is done at the script controller, not at the script
+#       (this simplify the script code)
 script()
-   int actualLife
 
-   # Get the actual life of the character
-   actualLife = getActualLife(SELF_CHARACTER)
-   if(actualLife < 10)
-      if(haveHealFunction)
-         #if can cure itself, cure
-         healCharacter(SELF_CHARACTER)
+   # Verify if the curren life is too low.
+   # If is the case, try to run away
+   int curLife
+   curLife = getActualLife(SELF_CHARACTER)
+   if(curLife < 2)
+      runAwayFromBattle()
+
+   # Else (if have enough life, try to attack and be near enemy)
+   # Cause it's an animal and don't have range attacks
+   else
+      # verify if the enemy (active character) is reachable
+      if(!characterAtRange(SELF_CHARACTER, ACTIVE_CHARACTER))
+         moveToCharacter(SELF_CHARACTER, ACTIVE_CHARACTER)
       end
-      else
-         #if can't cure itself, try to run away
-         runAwayFromBattle();
-      end
+
+      # Now, finally, attack the enemy!
+      int at
+      at = getRandomAttackFeat(ACTIVE_CHARACTER)
+      featUseAtCharacter(at, ACTIVE_CHARACTER)
    end
 
-   if(canAttack)
-      character dude
-      dude = getNearestEnemy(SELF_CHARACTER)
-      if(!characterAtRange(dude))
-         moveToCharacter(SELF_CHARACTER, dude)
-      end
-
-      if(canAttack)
-         feat at
-         at = getRandomAttackFeat()
-         featUseAtCharacter(at, dude)
-      end
-   end
-
-   if(canMove)
-      dude = getNearestEnemy(SELF_CHARACTER)
-      if(!characterAtRange(dude))
-         moveToCharacter(SELF_CHARACTER, dude)
-      end
-   end
 end
 \end{verbatim}
-
-{\it Note that the above script isn't fully implemented on the language yet.}
 
 \subsection{Missions}
 
@@ -626,37 +669,76 @@ ammount of XP characters receive by completing them (with {\it missionSetXp}
 function). When {\it missionComplete} or {\it missionAbort} is called, the
 script is ended. 
 
-For example, a mission that is completed when the character have a {\it Beretta
-92} with him. 
+For example, the first tutorial mission.
 
 \begin{verbatim}
 # TUTORIAL - I
 # The first tutorial mission
+# - Found a Chrono Trigger Game for Logan
+# NOTE: this mission is controlled between this script and
+#       Logan's tutorial dialog.
 
 script()
 
+   int waitTime
+   waitTime = 2
+
    # create the object fileName, since can't have a literal parameter
    string objFile
-   objFile = "weapons/definitions/beretta92.wcc"
+   objFile = "models/objetos/icex/snes/chrono/snes_chrono.dcc"
 
-   #create the mission filename too
-   string missionFile
-   missionFile = "missions/tutorial/mission1.dsl"
+   # define logan character
+   string logan
+   logan = "characters/pcs/logan.pc"   
 
-   int xpValue
-   xpValue = 100
-   missionSetXp(missionFile, xpValue)
+   # define map where logan is
+   string mapa
+   mapa = "mapas/tutorial/house1.map"
 
+   # the dialog number
+   int dialog
+   dialog = 6
+   
    while(true)
-      if(inventoryHave(ACTIVE_CHARACTER,objFile))
-         int compType
-         compType = 1
-         missionComplete(missionFile, compType)
+
+      if(inventoryHave(ACTIVE_CHARACTER,objFile)) 
+         if(dialog == 6)
+            # Have the cartridge, set logan talk to get it!
+            dialog = 7
+            dialogSetInitial(logan, mapa, dialog)            
+         end
+         # Just a bigger sleep when with the cartridge
+         wait(waitTime)
+      else 
+         if(dialog != 6)
+            # Haven't the cartridge, set the logan talk to wait.
+            dialog = 6
+            dialogSetInitial(logan, mapa, dialog)
+         else
+            # Verify if logan has the cartdrige: if you barteres with him
+            if(inventoryHave(getNPCByName(logan),objFile))
+               # Set the dialog to next one
+               dialog = 9
+               dialogSetInitial(logan, mapa, dialog)
+
+               # You've bartered the cartridge with logan, so finish Mission
+               int xp
+               int type
+               xp = 180
+               type = 3
+               missionSetXp(SELF_MISSION, xp)
+               missionComplete(SELF_MISSION, type)
+            end
+
+         end   
       end
+
+      # Wait some time, before the next check
+      wait(waitTime)
+
    end
 
 end
-
 \end{verbatim}
 
 \subsection{Triggers}
