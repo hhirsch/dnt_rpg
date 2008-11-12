@@ -1,0 +1,52 @@
+############################################################
+#                     Main Dialog                          #
+############################################################
+dialog(0)
+   npc_begin
+      text = gettext("(You see the bunker school server main screen)")
+   npc_end
+   pc_begin
+      option
+         pre_test = equal(OBJECT_STATE, 0)
+         text = gettext("Temporally turn off the subterrain air system")
+         post_test = roll(OPERATE_ELETRONIC_OBJECTS, 10)
+         if_action = change_object_state(1)
+         if_action = kill_all("mapas/tutorial/school_2.map.npc")
+         if_action = receive_xp(200)
+         if_action = go_to_dialog(2)
+         else_action = change_object_state(2)
+         else_action = go_to_dialog(1)
+
+      option
+         text = gettext("Exit")
+         action = finish_dialog()
+   pc_end
+end_dialog
+
+############################################################
+#                          Fail Dialog                     #
+############################################################
+dialog(1)
+   npc_begin
+      text = gettext("The computer laughts at you. You have failed.")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Exit")
+         action = finish_dialog()
+   pc_end
+end_dialog
+
+############################################################
+#                      Success  Dialog                     #
+############################################################
+dialog(2)
+   npc_begin
+      text = gettext("Subterrain air system down for cleaning... Back in 5, 4, 3, 2, 1... Subterrain air system cleaned and functional.")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Exit")
+         action = finish_dialog()
+   pc_end
+end_dialog
