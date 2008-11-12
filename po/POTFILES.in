@@ -230,6 +230,7 @@ data/skills/tocarinst.ski
 
 #dialogs
 data/dialogs/objects/computers.dlg
+data/dialogs/objects/bunker_school_server.dlg
 data/dialogs/tutorial/logan.dlg
 
 #objects

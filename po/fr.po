@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-11-10 13:17-0200\n"
+"POT-Creation-Date: 2008-11-12 13:51-0200\n"
 "PO-Revision-Date: 2008-09-10 12:15+0000\n"
 "Last-Translator: Anthony Guéchoum <Unknown>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -65,7 +65,7 @@ msgstr "Déplacement non valide"
 msgid "Not enought points to use!"
 msgstr "Pas assez de points pour utiliser !"
 
-#: src/classes/mission.cpp:198 src/engine/dialog.cpp:1024
+#: src/classes/mission.cpp:198 src/engine/dialog.cpp:1036
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "Mission accomplie: %d XP !"
@@ -166,7 +166,7 @@ msgstr "Avertissement"
 msgid "You Need to Assign All Attributes."
 msgstr "Vous devez assigner tous les attributs."
 
-#: src/engine/barterwindow.cpp:30 src/engine/dialog.cpp:1213
+#: src/engine/barterwindow.cpp:30 src/engine/dialog.cpp:1233
 msgid "Barter"
 msgstr "Troc"
 
@@ -463,12 +463,12 @@ msgstr ""
 msgid "Failure"
 msgstr ""
 
-#: src/engine/dialog.cpp:870
+#: src/engine/dialog.cpp:882
 #, c-format
 msgid "Not found on dialog: %d\n"
 msgstr "Introuvable dans le dialogue : %d\n"
 
-#: src/engine/dialog.cpp:1207
+#: src/engine/dialog.cpp:1227
 msgid "Dialog"
 msgstr "Dialogue"
 
@@ -493,6 +493,9 @@ msgid "Options"
 msgstr "Options"
 
 #: src/engine/initial.cpp:79 data/dialogs/objects/computers.dlg:21
+#: data/dialogs/objects/bunker_school_server.dlg:22
+#: data/dialogs/objects/bunker_school_server.dlg:36
+#: data/dialogs/objects/bunker_school_server.dlg:50
 msgid "Exit"
 msgstr "Quitter"
 
@@ -2655,6 +2658,24 @@ msgstr ""
 msgid "Restart"
 msgstr ""
 
+#: data/dialogs/objects/bunker_school_server.dlg:6
+msgid "(You see the bunker school server main screen)"
+msgstr ""
+
+#: data/dialogs/objects/bunker_school_server.dlg:12
+msgid "Temporally turn off the subterrain air system"
+msgstr ""
+
+#: data/dialogs/objects/bunker_school_server.dlg:32
+msgid "The computer laughts at you. You have failed."
+msgstr ""
+
+#: data/dialogs/objects/bunker_school_server.dlg:46
+msgid ""
+"Subterrain air system down for cleaning... Back in 5, 4, 3, 2, 1... "
+"Subterrain air system cleaned and functional."
+msgstr ""
+
 #: data/dialogs/tutorial/logan.dlg:6
 msgid "Ah, so finally you awake!"
 msgstr ""
@@ -2715,8 +2736,7 @@ msgstr ""
 msgid "Where it can be?"
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:91 data/dialogs/tutorial/logan.dlg:211
-#: data/dialogs/tutorial/logan.dlg:226
+#: data/dialogs/tutorial/logan.dlg:91
 msgid "Ok, I'll search it"
 msgstr "Bien, je vais le rechercher..."
 
@@ -2766,37 +2786,81 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:166
 msgid ""
-"So, for this DNT 0.2 version, I haven't any more missions for you. Go take a "
-"walk (it's an open world game) and wait for DNT 0.3 release."
+"I want another thing from you. Some dangerous living creatures are infesting "
+"the subterrain areas of the bunker school. Please, exterminate them all."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:170 data/dialogs/tutorial/logan.dlg:184
-msgid "Bye!"
-msgstr "AU revoir !"
+#: data/dialogs/tutorial/logan.dlg:170
+msgid "Let's see what I can do."
+msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:180
+#: data/dialogs/tutorial/logan.dlg:176
+msgid ""
+"Hey, have you heard about the Vermin Extermination Services of S.C.O.U.R.G."
+"E ?"
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:188
 msgid "Chrono... Chrono... Chrono!"
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:193
+#: data/dialogs/tutorial/logan.dlg:192
+msgid "Bye!"
+msgstr "AU revoir !"
+
+#: data/dialogs/tutorial/logan.dlg:201
 msgid "That dammed Lavos! So, we must forget about Chrono..."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:197
+#: data/dialogs/tutorial/logan.dlg:205
 msgid "Yes, let's forget about him..."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:207
+#: data/dialogs/tutorial/logan.dlg:215
 msgid ""
 "No, you are wrong. Chrono is lost somewhere in the Bunker School. Go take a "
 "look..."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:222
+#: data/dialogs/tutorial/logan.dlg:219 data/dialogs/tutorial/logan.dlg:234
+msgid "Ok, I'll look for it."
+msgstr "Bien, je vais le rechercher..."
+
+#: data/dialogs/tutorial/logan.dlg:230
 msgid ""
 "Ahm, last time I saw him was in the Bunker School, when I was riping it to "
 "play online with zsnes."
 msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:245
+msgid "About the extermination, have you done it?"
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:249
+msgid "Not yet."
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:253
+msgid "Yes, there's no living thing there..."
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:264
+msgid "The Heroes of Lesser Renown? That's true, I'll call them."
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:268
+msgid "Great."
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:277
+msgid ""
+"I haven't any more things for you at this DNT version. Come back at a latter "
+"version or join DNTeam to help us develop it!"
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:281
+msgid "Bye."
+msgstr "Au revoir."
 
 #: data/models/objetos/itens/healkit/healkit.dcc:1
 msgid "Healkit"
