@@ -11,6 +11,8 @@
 
 #define MAX_ACTIONS 5 /**< Max number of actions per option */
 
+#define MAX_PRE_TESTS 2 /**< Max number of preTests per option */
+
 #include "../gui/farso.h"
 #include "character.h"
 #include <string>
@@ -70,7 +72,8 @@ class dialogOption
       /*! Constructor */
       dialogOption();       
 
-      talkTest preTest;    /**< The pre test (if true, the option is show) */
+      talkTest preTest[MAX_PRE_TESTS]; /**< The pre test 
+                                            (if all true, the option is show) */
 
       string text;         /**< The option text */
 

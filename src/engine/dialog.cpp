@@ -538,6 +538,7 @@ int conversation::loadFile(string name)
   bool endDialog = true;
   int line = 0;
   int option = -1;
+  int preTest = 0;
 
   bool npcBegin = false;
   bool pcBegin = false;
@@ -659,6 +660,7 @@ int conversation::loadFile(string name)
       {
          if(pcBegin)
          {
+            preTest = 0;
             if(option+1 < MAX_OPTIONS)
             {
                option++;
@@ -690,8 +692,18 @@ int conversation::loadFile(string name)
                /* Assign it to its test */
                if(token == TK_PRE_TEST)
                {
-                  /* Pre - Test */
-                  res = dlg->options[option].preTest.set(func, test, against);
+                  /* Pre-Test */
+                  if(preTest < MAX_PRE_TESTS)
+                  {
+                     res = dlg->options[option].preTest[preTest].set(func, 
+                                                                     test, 
+                                                                     against);
+                     preTest++;
+                  }
+                  else
+                  {
+                     printError(name, "Number of pre-tests overflow!", line);
+                  }
                }
                else
                {
@@ -1116,7 +1128,7 @@ void conversation::changeDialog()
  *************************************************************************/
 void conversation::changeDialog(int numDialog)
 {
-   int i, curOpt;
+   int i, j, curOpt;
    string text;
    char conv[16];
    dialogWindow dlgWindow;
@@ -1149,20 +1161,28 @@ void conversation::changeDialog(int numDialog)
    dlgWindow.clearOptions();  
    for(i = 0; i < MAX_OPTIONS; i++)
    {
-      /* Only insert the option if it pass on preTest (and is not empty) */
-      if( (!dlg->options[i].text.empty()) && 
-          (dlg->options[i].preTest.doTest(actualPC, owner)) )
+      /* Only insert the option if isn't empty */
+      if(!dlg->options[i].text.empty())
       {
-         sprintf(conv, "%d - ", curOpt+1);
-         text = conv + dlg->options[i].postTest.getTestName(actualPC) + 
-                dlg->options[i].text;
-         dlgWindow.addOption(curOpt, text, i);
-         curOpt++;
+         bool res = true;
+
+         /* And passes all preTests */
+         for(j = 0; j < MAX_PRE_TESTS; j++)
+         {
+            res &= dlg->options[i].preTest[j].doTest(actualPC, owner);
+         }
+
+         /* So, if pass all, add the option */
+         if(res)
+         {
+            sprintf(conv, "%d - ", curOpt+1);
+            text = conv + dlg->options[i].postTest.getTestName(actualPC) + 
+               dlg->options[i].text;
+            dlgWindow.addOption(curOpt, text, i);
+            curOpt++;
+         }
       }
    }
-
-   /* Redraw the window */
-   //dlgWindow.redraw();
 }
 
 
