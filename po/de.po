@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-11-12 13:51-0200\n"
+"POT-Creation-Date: 2008-11-13 16:37-0200\n"
 "PO-Revision-Date: 2008-05-18 14:48+0000\n"
 "Last-Translator: pano <Pano_90@gmx.de>\n"
 "Language-Team: German <de@li.org>\n"
@@ -65,7 +65,7 @@ msgstr ""
 msgid "Not enought points to use!"
 msgstr "Nicht genug Punkte um zu benutzen"
 
-#: src/classes/mission.cpp:198 src/engine/dialog.cpp:1036
+#: src/classes/mission.cpp:198 src/engine/dialog.cpp:1070
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr ""
@@ -166,7 +166,7 @@ msgstr "Warnung"
 msgid "You Need to Assign All Attributes."
 msgstr ""
 
-#: src/engine/barterwindow.cpp:30 src/engine/dialog.cpp:1233
+#: src/engine/barterwindow.cpp:30 src/engine/dialog.cpp:1278
 msgid "Barter"
 msgstr ""
 
@@ -366,41 +366,36 @@ msgstr ""
 msgid "Loading Map: %s"
 msgstr "Lade Karte: %s"
 
-#: src/engine/dccnit.cpp:513
-#, c-format
-msgid "Ouch, can't load NPC's file: %s.\n"
-msgstr ""
-
-#: src/engine/dccnit.cpp:528
+#: src/engine/dccnit.cpp:519
 #, c-format
 msgid "Loading NPC: %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:554
+#: src/engine/dccnit.cpp:545
 msgid "Loading Character"
 msgstr "Lade Charakter"
 
-#: src/engine/dccnit.cpp:560
+#: src/engine/dccnit.cpp:551
 msgid "Creating MiniMap"
 msgstr ""
 
-#: src/engine/dccnit.cpp:566
+#: src/engine/dccnit.cpp:557
 msgid "Putting GUI on Screen"
 msgstr ""
 
-#: src/engine/dccnit.cpp:613
+#: src/engine/dccnit.cpp:604
 msgid "Loading Particles"
 msgstr ""
 
-#: src/engine/dccnit.cpp:643
+#: src/engine/dccnit.cpp:634
 msgid "Loading Changes..."
 msgstr ""
 
-#: src/engine/dccnit.cpp:671
+#: src/engine/dccnit.cpp:662
 msgid "Done!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:763
+#: src/engine/dccnit.cpp:754
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -408,67 +403,67 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1291
+#: src/engine/dccnit.cpp:1282
 msgid "Too far away for the action!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1333
+#: src/engine/dccnit.cpp:1324
 msgid "No NPCs in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1384
+#: src/engine/dccnit.cpp:1375
 msgid "Surprise Attack Turn."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1398
+#: src/engine/dccnit.cpp:1389
 msgid "No enemies in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1575 src/engine/dccnit.cpp:2025
+#: src/engine/dccnit.cpp:1566 src/engine/dccnit.cpp:2016
 #: src/engine/shortcutswindow.cpp:32
 msgid "Nothing"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1773
+#: src/engine/dccnit.cpp:1764
 #, c-format
 msgid "%s taken."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1795
+#: src/engine/dccnit.cpp:1786
 msgid "Inventory is full!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1827
+#: src/engine/dccnit.cpp:1818
 msgid "Door"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1960
+#: src/engine/dccnit.cpp:1951
 #, c-format
 msgid "%s attacks %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2121
+#: src/engine/dccnit.cpp:2112
 msgid "No more actions. Turn ended."
 msgstr ""
 
-#: src/engine/dccnit.cpp:3471
+#: src/engine/dccnit.cpp:3462
 msgid "Exit Battle Mode"
 msgstr ""
 
-#: src/engine/dialog.cpp:234
+#: src/engine/dialog.cpp:249
 msgid "Success"
 msgstr ""
 
-#: src/engine/dialog.cpp:234
+#: src/engine/dialog.cpp:249
 msgid "Failure"
 msgstr ""
 
-#: src/engine/dialog.cpp:882
+#: src/engine/dialog.cpp:916
 #, c-format
 msgid "Not found on dialog: %d\n"
 msgstr ""
 
-#: src/engine/dialog.cpp:1227
+#: src/engine/dialog.cpp:1272
 msgid "Dialog"
 msgstr ""
 
@@ -2559,7 +2554,7 @@ msgstr ""
 msgid "Ah, so finally you awake!"
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:10
+#: data/dialogs/tutorial/logan.dlg:10 data/dialogs/tutorial/santa.dlg:10
 msgid "Who are you?"
 msgstr ""
 
@@ -2739,6 +2734,131 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:281
 msgid "Bye."
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:6
+msgid "Wanna some milk, kid?"
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:19
+msgid "Don't you known me? I am a descendant of a famous pre-war character."
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:30
+msgid "Descendant of a slaver called Santa Claws, right?"
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:41
+msgid ""
+"He was the owner of a worldwide factory, with thousands of slaves. His name? "
+"Santa Claws. (Same as me)."
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:46
+msgid "Mr. Santa Claws of Cica Cula? Ow..."
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:58
+msgid "Yes, the great Santa Claws! (I was named in honour of him)."
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:71
+msgid ""
+"And you are... Ah!... You are the one Logan found near the waterfall... Can "
+"I ask you a favor?"
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:75 data/dialogs/tutorial/santa.dlg:172
+msgid "Yes."
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:78
+msgid "What kind of favor?"
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:81
+msgid "No."
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:91
+msgid ""
+"I need you to install a Ruindows at the occupation's notebook. Will you do "
+"it?"
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:96
+msgid "Never! I am a Free Software Adept and will never touch this evil O.S."
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:102
+msgid "For sure!"
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:108
+msgid "Yes. (but inner you something is telling to take another action)"
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:120
+msgid "So get out of here!"
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:124 data/dialogs/tutorial/santa.dlg:137
+msgid "(Close dialog)"
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:133
+msgid "I won't chat with you, heretic."
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:150
+msgid "Ok."
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:153
+msgid "Ok. (you look suspicious to Santa Claws notebook)"
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:162
+msgid "So you've installed it! Soon the blue screen will rule the world!"
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:167 data/dialogs/tutorial/santa.dlg:213
+msgid "Amem, brother!"
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:177
+#, fuzzy
+msgid "Maybe."
+msgstr "Männlich"
+
+#: data/dialogs/tutorial/santa.dlg:188
+msgid ""
+"You've installed a linux on my notebook? But... it's the cause of it not "
+"freezing anymore? How can I feel in home now?"
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:192
+msgid "Maybe you can go the the North Pole?"
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:197
+msgid "Linux rocks!"
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:208
+msgid "Follow the frozen blue screen path, brother!"
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:216
+msgid "I will try to!"
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:219
+msgid "Never!"
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:146
+msgid "I'm waiting to you install the Ruindows at the occupation's notebook!"
 msgstr ""
 
 #: data/models/objetos/itens/healkit/healkit.dcc:1

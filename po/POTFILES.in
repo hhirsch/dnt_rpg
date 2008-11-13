@@ -232,6 +232,7 @@ data/skills/tocarinst.ski
 data/dialogs/objects/computers.dlg
 data/dialogs/objects/bunker_school_server.dlg
 data/dialogs/tutorial/logan.dlg
+data/dialogs/tutorial/santa.dlg
 
 #objects
 data/models/objetos/itens/healkit/healkit.dcc
