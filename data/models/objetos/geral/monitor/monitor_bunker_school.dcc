@@ -1,0 +1,14 @@
+name = gettext("Computer")
+cal3d = models/objetos/geral/monitor/model.cfg
+inventory_sizes = 0 0
+inventory_texture = models/objetos/geral/monitor/tex_dlg.png
+life_points = 200
+fortitude = 8
+reflex = -2
+will = 0
+displacement = 0
+armature_class = 10
+size_modifier = 0
+cost = 2500
+dialog = dialogs/objects/bunker_school_server.dlg
+static_scenery = 0
