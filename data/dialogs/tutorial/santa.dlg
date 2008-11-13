@@ -1,0 +1,223 @@
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(0)
+   npc_begin
+      text = gettext("Wanna some milk, kid?")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Who are you?")
+         action = go_to_dialog(1)
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(1)
+   npc_begin
+      text = gettext("Don't you known me? I am a descendant of a famous pre-war character.")
+   npc_end
+   pc_begin
+      option
+         text = "Uhm..."
+         action = go_to_dialog(2)
+      option
+         text = "Ehr..."
+         action = go_to_dialog(2)
+      option
+         pre_test = roll(KNOWLEDGE_GENERAL, 20)
+         text = gettext("Descendant of a slaver called Santa Claws, right?")
+         action = receive_xp(20)
+         action = dialog_init(3)
+         action = go_to_dialog(3)
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(2)
+   npc_begin
+      text = gettext("He was the owner of a worldwide factory, with thousands of slaves. His name? Santa Claws. (Same as me).")
+   npc_end
+   pc_begin
+      option 
+         pre_test align(PROPRIETARY_SOFTWARE)
+         text = gettext("Mr. Santa Claws of Cica Cula? Ow...")
+         action = go_to_dialog(4)
+      option
+         text = "Uhm..."
+         action = go_to_dialog(4)
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(3)
+   npc_begin
+      text = gettext("Yes, the great Santa Claws! (I was named in honour of him).")
+   npc_end
+   pc_begin
+      option
+         text = "Ahm..."
+         action = go_to_dialog(4)
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(4)
+   npc_begin
+      text = gettext("And you are... Ah!... You are the one Logan found near the waterfall... Can I ask you a favor?")
+   npc_end
+   pc_begin
+      option
+          text = gettext("Yes.")
+          action = go_to_dialog(5)
+       option
+          text = gettext("What kind of favor?")
+          action = go_to_dialog(5)
+       option
+          text = gettext("No.")
+          action = dialog_init(7)
+          action = go_to_dialog(6)
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(5)
+   npc_begin
+      text = gettext("I need you to install a Ruindows at the occupation's notebook. Will you do it?")
+   npc_end
+   pc_begin
+      option
+         pre_test = align(FREE_SOFTWARE)
+         text = gettext("Never! I am a Free Software Adept and will never touch this evil O.S.")
+         action = add_mission("missions/tutorial/mission3.dsl")
+         action = complete_mission("missions/tutorial/mission3.dsl", 50)
+         action = dialog_init(7)
+         action = go_to_dialog(6)
+      option
+         text = gettext("For sure!")
+         action = dialog_init(8)
+         action = add_mission("missions/tutorial/mission3.dsl")
+         action = receive_item("models/objetos/icex/ruindows_box/ruindows_box.dcc")
+         action = finish_dialog()
+      option
+         text = gettext("Yes. (but inner you something is telling to take another action)")
+         action = dialog_init(8)
+         action = receive_item("models/objetos/icex/ruindows_box/ruindows_box.dcc")
+         action = add_mission("missions/tutorial/mission3.dsl")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(6)
+   npc_begin
+      text = gettext("So get out of here!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("(Close dialog)")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(7)
+   npc_begin
+      text = gettext("I won't chat with you, heretic.")
+   npc_end
+   pc_begin
+      option
+         text = gettext("(Close dialog)")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(8)
+   npc_begin
+      text = gettext("I'm waiting to you install the Ruindows at the occupation's notebook!"
+   npc_end
+   pc_begin
+      option
+         text = gettext("Ok.")
+         action = finish_dialog()
+      option
+         text = gettext("Ok. (you look suspicious to Santa Claws notebook)")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(9)
+   npc_begin
+      text = gettext("So you've installed it! Soon the blue screen will rule the world!")
+   npc_end
+   pc_begin
+      option
+         pre_test = align(PROPRIETARY_SOFTWARE)
+         text = gettext("Amem, brother!")
+         action = complete_mission("missions/tutorial/mission3.dsl", 200)
+         action = dialog_init(11)
+         action = go_to_dialog(11)
+      option
+         text = gettext("Yes.")
+         action = complete_mission("missions/tutorial/mission3.dsl", 200)
+         action = dialog_init(11)
+         action = go_to_dialog(11)
+      option
+         text = gettext("Maybe.")
+         action = complete_mission("missions/tutorial/mission3.dsl", 200)
+         action = dialog_init(11)
+         action = go_to_dialog(11)
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(10)
+   npc_begin
+      text = gettext("You've installed a linux on my notebook? But... it's the cause of it not freezing anymore? How can I feel in home now?")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Maybe you can go the the North Pole?")
+         action = complete_mission("missions/tutorial/mission3.dsl", 200)
+         action = dialog_init(7)
+         action = go_to_dialog(7)
+      option
+         text = gettext("Linux rocks!")
+         action = complete_mission("missions/tutorial/mission3.dsl", 200)
+         action = dialog_init(7)
+         action = go_to_dialog(7)
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(11)
+   npc_begin
+      text = gettext("Follow the frozen blue screen path, brother!")
+   npc_end
+   pc_begin
+       option
+         pre_test = align(PROPRIETARY_SOFTWARE)
+         text = gettext("Amem, brother!")
+         action = finish_dialog()
+      option
+         text = gettext("I will try to!")
+         action = finish_dialog()
+      option
+         text = gettext("Never!")
+         action = dialog_init(7)
+         action = finish_dialog()
+   pc_end
+end_dialog
