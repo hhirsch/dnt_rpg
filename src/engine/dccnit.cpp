@@ -506,29 +506,20 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    character* per;
    if(!actualMap->getNpcFileName().empty())
    {
-      FILE* arq;
-      if(!(arq = fopen(dir.getRealFile(actualMap->getNpcFileName()).c_str(),
-                       "r")))
-      {
-         printf(gettext("Ouch, can't load NPC's file: %s.\n"),
-               dir.getRealFile(actualMap->getNpcFileName()).c_str());
-      }
-      else
-      {
-         NPCs = new (characterList);
-         int total;
-         int npc;
-         char name[30];
-         char arquivo[255];
-         GLfloat posX, posZ, ori;
-         fscanf(arq,"%d",&total);
-         for(npc = 0; npc < total; npc++)
+      string npcFileName="", name="";
+      GLfloat posX=0, posZ=0, ori=0;
+
+      npcFile* arq = new npcFile();
+      NPCs = new (characterList);
+
+      if(arq->load(actualMap->getNpcFileName()))
+      { 
+         while(arq->getNextCharacter(name, npcFileName, posX, posZ, ori))
          {
-           fscanf(arq,"%s %s %f %f %f",&name[0],&arquivo[0],&posX,&posZ,&ori);
-           sprintf(texto, gettext("Loading NPC: %s"), name);
+           sprintf(texto, gettext("Loading NPC: %s"), name.c_str());
            showLoading(img,&texturaTexto,texturaCarga,
                        texto, progress);
-           per = NPCs->insertCharacter(arquivo,features, this, arqMapa);
+           per = NPCs->insertCharacter(npcFileName, features, this, arqMapa);
            /* Define Initial Position */
            per->initialXPosition = posX;
            per->initialZPosition = posZ;
@@ -541,8 +532,8 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
            int posZ =(int)floor(per->zPosition / actualMap->squareSize());
            per->ocSquare = actualMap->relativeSquare(posX,posZ);
          }
-         fclose(arq);
       }  
+      delete(arq);
    }
    progress->defineActualHealth(6);
 

@@ -38,7 +38,7 @@ OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSyst
 OBJSETC = $(ENDETC)animodel.o $(ENDETC)extensions.o $(ENDETC)message3d.o \
 $(ENDETC)modellist.o $(ENDETC)userinfo.o $(ENDETC)dirs.o $(ENDETC)overlaps.o \
 $(ENDETC)defparser.o $(ENDETC)texrenderer.o $(ENDETC)shader.o \
-$(ENDETC)btreecell.o $(ENDETC)btree.o
+$(ENDETC)btreecell.o $(ENDETC)btree.o $(ENDETC)npcfile.o
 OBJS = alignwindow.o aspectwindow.o attwindow.o barterwindow.o briefing.o camera.o character.o charwindow.o classwindow.o collision.o culling.o cursor.o dialog.o dccnit.o initial.o inventwindow.o itemwindow.o minimapwindow.o modstate.o options.o racewindow.o skillwindow.o shadow.o shortcutswindow.o sky.o sun.o teste.o util.o
 BIN = ../../bin/
 SUPREDE = #-DVIDEO_MODE #-DREDE #comente para nao ter suporte a rede na bagaca

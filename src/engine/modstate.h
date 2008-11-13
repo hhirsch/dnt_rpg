@@ -293,7 +293,7 @@ class modMap
                               modelList& mdlList, weaponTypes& wTypes);
 
       /*! Clear All the modifications states (usually called after death) */
-      void clear();
+      void clear();      
 
       /*! Get the next modMap pointer
        * \return -> next modMap */
@@ -310,6 +310,16 @@ class modMap
       
       /*! Get the mapFileName */
       string getMapFileName();
+
+      /*! Verify if all Characters defined at a NPC file (relative,
+       * obviously, to a map) are dead. 
+       * \return -> true if all are dead*/
+      bool allCharactersDead(string npcFileName);
+
+      /*! Verify if all Characters defined at a NPC file (relative,
+       * obviously, to a map) are alive 
+       * \return -> true if all are alive */
+      bool allCharactersAlive(string npcFileName);
 
    protected:
 
@@ -418,6 +428,16 @@ class modState
 
       /*! Clear All the modifications states (usually called after death) */
       void clear();
+
+      /*! Verify if all Characters defined at a NPC file (relative,
+       * obviously, to a map) are dead. 
+       * \return -> true if all are dead*/
+      bool allCharactersDead(string npcFileName);
+
+      /*! Verify if all Characters defined at a NPC file (relative,
+       * obviously, to a map) are alive 
+       * \return -> true if all are alive */
+      bool allCharactersAlive(string npcFileName);
 
    protected:
 

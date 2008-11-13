@@ -1,6 +1,7 @@
 #include "editor.h"
 #include "../../etc/extensions.h"
 #include "../../etc/dirs.h"
+#include "../../etc/npcfile.h"
 #include "../../engine/options.h"
 
 /*********************************************************************
@@ -165,7 +166,6 @@ void editor::closeMap()
  *********************************************************************/
 void editor::openMap()
 {
-   dirs dir;
    if(mapOpened)
    {
       //Close Actual Map
@@ -187,38 +187,37 @@ void editor::openMap()
 
       /* Open NPCs */
       if(NPCs)
+      {
          delete(NPCs);
+      }
       NPCs = new (characterList);
       npcController = new npcs(map, NPCs, features);
       character* per;
+
+      /* Load the NPCs */
       if(!map->getNpcFileName().empty())
       {
-         FILE* arq;
-         if(!(arq = fopen(dir.getRealFile(map->getNpcFileName()).c_str(),"r")))
+         npcFile* arq = new npcFile();
+
+         if(!arq->load(map->getNpcFileName()))
          {
             gui->showMessage("Ouch, can't load NPC's file");
          }
          else
          {
-            int total;
-            int npc;
-            char name[30];
-            char arquivo[255];
-            float posX, posZ,ori;
-            fscanf(arq,"%d",&total);
-            for(npc = 0; npc < total; npc++)
+            string name="", arquivo="";
+            GLfloat posX=0, posZ=0, ori=0;
+            while(arq->getNextCharacter(name, arquivo, posX, posZ, ori))
             {
-                fscanf(arq,"%s %s %f %f %f",&name[0],&arquivo[0],
-                       &posX,&posZ, &ori);
-                per = NPCs->insertCharacter(arquivo,features, NULL, "");
+                per = NPCs->insertCharacter(arquivo, features, NULL, "");
                 per->xPosition = posX;
                 per->zPosition = posZ;
                 per->orientation = ori;
                 per->update(0); 
                 per->calculateBoundingBox();
-            }
-            fclose(arq);
-         }  
+            }            
+         }
+         delete(arq);
       }
       /* Open FOG */
       if(map->fog.enabled)

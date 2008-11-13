@@ -17,6 +17,7 @@
 #include "../classes/mission.h"
 #include "../etc/message3d.h"
 #include "../etc/dirs.h"
+#include "../etc/npcfile.h"
 #include "../fight/fightSystem.h"
 #include "../gui/farso.h"
 #include "../map/map.h"

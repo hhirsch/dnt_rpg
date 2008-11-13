@@ -24,7 +24,8 @@
 #define TALK_ACTION_GIVE_ITEM            8 /* Give an item */
 #define TALK_ACTION_RECEIVE_MONEY        9 /* Receive some money */
 #define TALK_ACTION_CHANGE_OBJECT_STATE 10 /* Change Object State */
-#define TALK_ACTION_RECEIVE_XP          11
+#define TALK_ACTION_RECEIVE_XP          11 /* Receive XP ammount */
+#define TALK_ACTION_KILL_ALL            12 /* Kill All NPCs from a map */
 
 #define TALK_TEST_TRUE                0  /* Always True */
 #define TALK_TEST_ROLL                1  /* Roll some test */
@@ -35,6 +36,8 @@
 #define TALK_TEST_HAVE_ITEM           6  /* Test if have item*/
 #define TALK_TEST_ALIGN_NOT           7  /* Test if align not of type */
 #define TALK_TEST_ALIGN               8  /* Test if align is of a type */
+#define TALK_TEST_ALL_ALIVE           9  /* If all characters are alive */
+#define TALK_TEST_ALL_DEAD           10  /* If all characters are dead */
 
 #define BUFFER_SIZE 512
 
@@ -66,6 +69,7 @@
 #define TK_ACTION_RECEIVE_MONEY "receive_money"
 #define TK_ACTION_CHANGE_OBJECT_STATE "change_object_state"
 #define TK_ACTION_RECEIVE_XP "receive_xp"
+#define TK_ACTION_KILL_ALL "kill_all"
 
 /* Test Tokens */
 #define TK_TEST_ROLL "roll"
@@ -76,7 +80,8 @@
 #define TK_TEST_ALIGN "align"
 #define TK_TEST_ALIGN_NOT "align_not"
 #define TK_TEST_HAVE_ITEM "have_item"
-
+#define TK_TEST_ALL_ALIVE "all_alive"
+#define TK_TEST_ALL_DEAD "all_dead"
 
 /* Constant Tokens */
 #define TK_CONST_OBJECT_STATE "OBJECT_STATE"
@@ -165,6 +170,16 @@ bool talkTest::set(string token, string t, string a)
    else if(token == TK_TEST_ALIGN)
    {
       id = TALK_TEST_ALIGN;
+   }
+   /* all_dead */
+   else if(token == TK_TEST_ALL_DEAD)
+   { 
+      id = TALK_TEST_ALL_DEAD;
+   }
+   /* all_alive */
+   else if(token == TK_TEST_ALL_ALIVE)
+   {
+      id = TALK_TEST_ALL_ALIVE;
    }
    else
    {
@@ -263,6 +278,20 @@ bool talkTest::doTest(character* pc, thing* owner)
    else if(id == TALK_TEST_ALIGN)
    {
       return(pc->isAlignOf(test));
+   }
+
+   /* All Alive */
+   else if(id == TALK_TEST_ALL_ALIVE)
+   {
+      modState modif;
+      return(modif.allCharactersAlive(test));
+   }
+
+   /* All Dead */
+   else if(id == TALK_TEST_ALL_DEAD)
+   {
+      modState modif;
+      return(modif.allCharactersDead(test));
    }
 
 
@@ -517,6 +546,10 @@ int conversation::getActionID(string token, string fileName, int line)
    else if(token == TK_ACTION_RECEIVE_XP)
    {
       return(TALK_ACTION_RECEIVE_XP);
+   }
+   else if(token == TK_ACTION_KILL_ALL)
+   {
+      return(TALK_ACTION_KILL_ALL);
    }
 
    printError(fileName, "Unknow action!", line);
@@ -799,9 +832,10 @@ int conversation::loadFile(string name)
                         tact->qty =  atoi(token.c_str());
                      }
                   }
-                  else if( (tact->id == TALK_ACTION_GIVE_ITEM) )
+                  else if( (tact->id == TALK_ACTION_GIVE_ITEM) ||
+                           (tact->id == TALK_ACTION_KILL_ALL) )
                   {
-                     //get item name
+                     //get name
                      token = getString(position, buffer, separator);
                      tact->satt = token;
                   }
@@ -1108,6 +1142,17 @@ void conversation::proccessAction(int opcao, void* curEngine)
             /* Put Message at Briefing */
             briefing brief;
             brief.addText(vstr, 251, 209, 12);
+         }
+         break;
+
+         /* Kill All NPCs from a file */
+         case TALK_ACTION_KILL_ALL:
+         {
+            npcFile npcs;
+            if(npcs.load(actions[i].satt))
+            {
+               npcs.killAll();
+            }
          }
          break;
       }

@@ -4,6 +4,7 @@
 
 #include "modstate.h"
 #include "character.h"
+#include "../etc/npcfile.h"
 
 ////////////////////////////////////////////////////////////////////////////
 //                                                                        //
@@ -906,6 +907,66 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs,
 
 }
 
+/************************************************************
+ *                     allCharacterDead                     *
+ ************************************************************/
+bool modMap::allCharactersDead(string npcFileName)
+{
+   npcFile npcs;
+   string name="", arq ="";
+   GLfloat posX=0, posZ=0, angle=0;
+
+   if(!npcs.load(npcFileName))
+   {
+      /* No File, so always false */
+      return(false);
+   }
+
+   /* Try to search for all characters dead definition here */
+   while(npcs.getNextCharacter(name, arq, posX, posZ, angle))
+   {
+      /* If one isn't found, not all character are dead, so exit! */
+      if(search(MODSTATE_ACTION_CHARACTER_DEAD, arq, posX, 0, posZ) == NULL)
+      {
+         /* Not dead, so false! */
+         return(false);
+      }
+   }
+
+   /*  All found (or no one defined), so all dead! */
+   return(true);
+}
+
+/************************************************************
+ *                    allCharacterAlive                     *
+ ************************************************************/
+bool modMap::allCharactersAlive(string npcFileName)
+{
+   npcFile npcs;
+   string name="", arq ="";
+   GLfloat posX=0, posZ=0, angle=0;
+
+   if(!npcs.load(npcFileName))
+   {
+      /* No File, so always false */
+      return(false);
+   }
+
+   /* Try to search for all characters dead definition here */
+   while(npcs.getNextCharacter(name, arq, posX, posZ, angle))
+   {
+      /* If one is found, not all character are alive, so exit! */
+      if(search(MODSTATE_ACTION_CHARACTER_DEAD, arq, posX, 0, posZ) != NULL)
+      {
+         /* Not dead, so false! */
+         return(false);
+      }
+   }
+
+   /*  No one found (or no one defined), so all alive! */
+   return(true);
+}
+
 ////////////////////////////////////////////////////////////////////////////
 //                                                                        //
 //                               modState                                 //
@@ -1099,6 +1160,47 @@ void modState::clear()
 
    modMapList = NULL;
    totalModMaps = 0;
+}
+
+/************************************************************
+ *                    allCharactersDead                     *
+ ************************************************************/
+bool modState::allCharactersDead(string npcFileName)
+{
+   modMap* mod;   
+   /* FIXME: trick, removing .npc and getting map Name! */
+   string mapFile = npcFileName.erase(npcFileName.length()-4,4);
+
+   /* Find its modMap */
+   mod = findModMap(mapFile);
+   if(mod)
+   {
+      return(mod->allCharactersDead(npcFileName));
+   }
+
+   /* No Mod, so all alive */
+   return(false);
+}
+
+
+/************************************************************
+ *                    allCharactersAlive                    *
+ ************************************************************/
+bool modState::allCharactersAlive(string npcFileName)
+{
+   modMap* mod;   
+   /* FIXME: trick, removing .npc and getting map Name! */
+   string mapFile = npcFileName.erase(npcFileName.length()-4,4);
+
+   /* Find its modMap */
+   mod = findModMap(mapFile);
+   if(mod)
+   {
+      return(mod->allCharactersAlive(npcFileName));
+   }
+
+   /* No Mod, so all alive */
+   return(true);
 }
 
 /************************************************************
