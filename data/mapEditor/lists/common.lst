@@ -1,4 +1,4 @@
-31
+33
 Bookshelf models/objetos/geral/bookshelf/bookshelf.dcc
 Briefcase models/objetos/geral/mala/mala.dcc
 Calendar models/objetos/geral/calendar/calendar.dcc
@@ -15,6 +15,8 @@ Fridge models/objetos/geral/fridge/fridge.dcc
 Gabinete models/objetos/geral/gabinete/gabinete.dcc
 Guitar models/objetos/geral/guitarra/guitarra.dcc
 Healkit models/objetos/itens/healkit/healkit.dcc
+LCD_Monitor models/objetos/geral/monitor/monitor.dcc
+LCD_Bunker_School models/objetos/geral/monitor/monitor_bunker_school.dcc
 Letto models/objetos/geral/letto/letto.dcc
 Meuble models/objetos/geral/meuble/meuble.dcc
 Notebook models/objetos/geral/notebook/notebook.dcc
