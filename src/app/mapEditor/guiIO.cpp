@@ -159,7 +159,8 @@ void guiIO::openObjectWindow()
 void guiIO::openNavWindow()
 {
    dirs dir;
-   navWindow = gui->insertWindow(799-68,599-75,799,599,"Nav");
+   navWindow = gui->insertWindow(SCREEN_X-69,SCREEN_Y-76,SCREEN_X-1,SCREEN_Y-1,
+                                 "Nav");
    navTabButton = navWindow->getObjectsList()->insertTabButton(7,17,0,0,
                                   dir.getRealFile("mapEditor/nav.png").c_str());
    moreZoomButton = navTabButton->insertButton(0,0,8,8);    /* More Zoom */
@@ -182,9 +183,11 @@ void guiIO::openNavWindow()
  ****************************************************************/
 void guiIO::openMessageWindow()
 {
-   messageWindow = gui->insertWindow(153,599-37,799-67,599,"Messages");
-   messageText = messageWindow->getObjectsList()->insertTextBox(7,16,610,31,0,
-                 "Welcome to DccNiTghtmare Map Editor!");
+   int width = SCREEN_X - 153 - 68;
+   messageWindow = gui->insertWindow(153,SCREEN_Y-38,SCREEN_X-68,SCREEN_Y-1,
+                                     "Messages");
+   messageText = messageWindow->getObjectsList()->insertTextBox(7,16,
+                 width-7,31,0,"Welcome to DccNiTghtmare Map Editor!");
    messageWindow->setAttributes(false,true,false,false);
    messageWindow->setExternPointer(&messageWindow);
    gui->openWindow(messageWindow);

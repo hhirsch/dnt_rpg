@@ -892,7 +892,7 @@ void editor::doEditorIO()
 {
    GLfloat wx, wy, wz;
 
-   wx = mouseX; wy = 600-mouseY; 
+   wx = mouseX; wy = SCREEN_Y-mouseY; 
 
    glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
    gluUnProject( wx, wy, wz, modl, proj, viewPort, &xReal, &yReal, &zReal);
