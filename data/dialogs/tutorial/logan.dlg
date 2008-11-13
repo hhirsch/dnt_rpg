@@ -163,13 +163,21 @@ end_dialog
 ############################################################
 dialog(9)
    npc_begin
-      text = gettext("So, for this DNT 0.2 version, I haven't any more missions for you. Go take a walk (it's an open world game) and wait for DNT 0.3 release.")
+      text = gettext("I want another thing from you. Some dangerous living creatures are infesting the subterrain areas of the bunker school. Please, exterminate them all.")
    npc_end
    pc_begin
       option 
-         text = gettext("Bye!")
-         action = dialog_init(10)
+         text = gettext("Let's see what I can do.")
+         action = dialog_init(14)
          action = finish_dialog()
+      option
+         pre_test = roll(KNOWLEDGE_GENERAL, 12) 
+         pre_test = all_alive("mapas/tutorial/school_2.map.npc")
+         text = gettext("Hey, have you heard about the Vermin Extermination Services of S.C.O.U.R.G.E ?")
+         action = receive_xp(300)
+         action = kill_all("mapas/tutorial/school_2.map.npc")
+         action = dialog_init(16)
+         action = go_to_dialog(15)
    pc_end
 end_dialog
 ############################################################
@@ -208,7 +216,7 @@ dialog(12)
    npc_end
    pc_begin
       option
-         text = gettext("Ok, I'll search it")
+         text = gettext("Ok, I'll look for it.")
          action = add_mission("missions/tutorial/mission1.dsl")
          action = dialog_init(6)
          action = finish_dialog()
@@ -223,9 +231,54 @@ dialog(13)
    npc_end
    pc_begin
       option
-         text = gettext("Ok, I'll search it")
+         text = gettext("Ok, I'll look for it.")
          action = add_mission("missions/tutorial/mission1.dsl")
          action = dialog_init(6)
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                         Dialog                           #
+############################################################
+dialog(14)
+   npc_begin
+      text = gettext("About the extermination, have you done it?")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Not yet.")
+         action = finish_dialog()
+      option
+         pre_test = all_dead("mapas/tutorial/school_2.map.npc")
+         text = gettext("Yes, there's no living thing there...")
+         action = receive_xp(150)
+         action = dialog_init(16)
+         action = go_to_dialog(16)
+   pc_end
+end_dialog
+############################################################
+#                         Dialog                           #
+############################################################
+dialog(15)
+   npc_begin
+      text = gettext("The Heroes of Lesser Renown? That's true, I'll call them.")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Great.")
+         action = go_to_dialog(16)
+   pc_end
+end_dialog
+############################################################
+#                         Dialog                           #
+############################################################
+dialog(16)
+   npc_begin
+      text = gettext("I haven't any more things for you at this DNT version. Come back at a latter version or join DNTeam to help us develop it!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Bye.")
          action = finish_dialog()
    pc_end
 end_dialog

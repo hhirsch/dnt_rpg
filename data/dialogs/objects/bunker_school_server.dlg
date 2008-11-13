@@ -8,6 +8,7 @@ dialog(0)
    pc_begin
       option
          pre_test = equal(OBJECT_STATE, 0)
+         pre_test = all_alive("mapas/tutorial/school_2.map.npc")
          text = gettext("Temporally turn off the subterrain air system")
          post_test = roll(OPERATE_ELETRONIC_OBJECTS, 10)
          if_action = change_object_state(1)
