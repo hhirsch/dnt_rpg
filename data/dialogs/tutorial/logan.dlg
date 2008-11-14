@@ -136,12 +136,14 @@ dialog(7)
          text = gettext("Its all yours...")
          action = give_item("models/objetos/icex/snes/chrono/snes_chrono.dcc")
          action = complete_mission("missions/tutorial/mission1.dsl", 200, 1)
+         action = dialog_init(9)
          action = go_to_dialog(9)
        option
          text = gettext("Its yours, but I want some money!")
          action = give_item("models/objetos/icex/snes/chrono/snes_chrono.dcc")
          action = receive_money(30);
          action = complete_mission("missions/tutorial/mission1.dsl", 150, 2)
+         action = dialog_init(9)
          action = go_to_dialog(8)
    pc_end
 end_dialog
@@ -155,6 +157,7 @@ dialog(8)
    pc_begin
       option 
          text = gettext("Thanks.")
+         action = dialog_init(9)
          action = go_to_dialog(9)
    pc_end
 end_dialog
@@ -168,13 +171,15 @@ dialog(9)
    pc_begin
       option 
          text = gettext("Let's see what I can do.")
+         action = add_mission("missions/tutorial/mission2.dsl")
          action = dialog_init(14)
          action = finish_dialog()
       option
          pre_test = roll(KNOWLEDGE_GENERAL, 12) 
          pre_test = all_alive("mapas/tutorial/school_2.map.npc")
          text = gettext("Hey, have you heard about the Vermin Extermination Services of S.C.O.U.R.G.E ?")
-         action = receive_xp(300)
+         action = add_mission("missions/tutorial/mission2.dsl")
+         action = complete_mission("missions/tutorial/mission2.dsl", 300, 1)
          action = kill_all("mapas/tutorial/school_2.map.npc")
          action = dialog_init(16)
          action = go_to_dialog(15)
@@ -251,7 +256,7 @@ dialog(14)
       option
          pre_test = all_dead("mapas/tutorial/school_2.map.npc")
          text = gettext("Yes, there's no living thing there...")
-         action = receive_xp(150)
+         action = complete_mission("missions/tutorial/mission2.dsl", 150, 2)
          action = dialog_init(16)
          action = go_to_dialog(16)
    pc_end

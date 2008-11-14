@@ -42,7 +42,7 @@ dialog(2)
    npc_end
    pc_begin
       option 
-         pre_test align(PROPRIETARY_SOFTWARE)
+         pre_test = align(PROPRIETARY_SOFTWARE)
          text = gettext("Mr. Santa Claws of Cica Cula? Ow...")
          action = go_to_dialog(4)
       option
@@ -95,7 +95,7 @@ dialog(5)
          pre_test = align(FREE_SOFTWARE)
          text = gettext("Never! I am a Free Software Adept and will never touch this evil O.S.")
          action = add_mission("missions/tutorial/mission3.dsl")
-         action = complete_mission("missions/tutorial/mission3.dsl", 50)
+         action = complete_mission("missions/tutorial/mission3.dsl", 50, 4)
          action = dialog_init(7)
          action = go_to_dialog(6)
       option
@@ -165,17 +165,17 @@ dialog(9)
       option
          pre_test = align(PROPRIETARY_SOFTWARE)
          text = gettext("Amem, brother!")
-         action = complete_mission("missions/tutorial/mission3.dsl", 200)
+         action = complete_mission("missions/tutorial/mission3.dsl", 200, 1)
          action = dialog_init(11)
          action = go_to_dialog(11)
       option
          text = gettext("Yes.")
-         action = complete_mission("missions/tutorial/mission3.dsl", 200)
+         action = complete_mission("missions/tutorial/mission3.dsl", 200, 2)
          action = dialog_init(11)
          action = go_to_dialog(11)
       option
          text = gettext("Maybe.")
-         action = complete_mission("missions/tutorial/mission3.dsl", 200)
+         action = complete_mission("missions/tutorial/mission3.dsl", 200, 2)
          action = dialog_init(11)
          action = go_to_dialog(11)
    pc_end
@@ -190,12 +190,12 @@ dialog(10)
    pc_begin
       option
          text = gettext("Maybe you can go the the North Pole?")
-         action = complete_mission("missions/tutorial/mission3.dsl", 200)
+         action = complete_mission("missions/tutorial/mission3.dsl", 200, 3)
          action = dialog_init(7)
          action = go_to_dialog(7)
       option
          text = gettext("Linux rocks!")
-         action = complete_mission("missions/tutorial/mission3.dsl", 200)
+         action = complete_mission("missions/tutorial/mission3.dsl", 200, 3)
          action = dialog_init(7)
          action = go_to_dialog(7)
    pc_end
