@@ -193,9 +193,6 @@ void iaScript::run(int maxLines)
             strBuffer = pendAction->getScriptLine();
             interpret = true;
 
-            //printf("Action Type ""%d"" ended: %s\n", 
-            //       pendAction->getType(), strBuffer.c_str());
-
             /* Remove the action from the controller */
             engine* eng = (engine*)actualEngine;
             eng->actionControl->removeAction(pendAction);
@@ -262,6 +259,7 @@ void iaScript::run(int maxLines)
                   {
                     /* It's an if */
                     iaVariable* ifCond = new iaVariable(IA_TYPE_BOOL,"ifcond");
+                    
                     evaluateExpression(ifCond, strBuffer, false);
 
                     /* If false, need to get to an else or end.
@@ -305,6 +303,7 @@ void iaScript::run(int maxLines)
                               numBegins = 0; // To exit the while
                               /* It's an else for its if! */
                               token = nextToken(strBuffer, pos);
+
                               if(token.empty())
                               {
                                  /* It's an pure else thing, so run it! */
@@ -332,6 +331,12 @@ void iaScript::run(int maxLines)
                                     jmp->command = IA_SETENCE_IF;
                                     jmp->lineNumber = actualLine;
                                     jumpStack->push(jmp);
+                                 }
+                                 else
+                                 {
+                                    /* Is false, so the "if begin" must be 
+                                     * still opened */
+                                    numBegins = 1;
                                  }
                               }
                               else
@@ -887,6 +892,34 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          /* Add the mission to the engine */
          missionsController missions;
          missions.addNewMission(st);
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+   }
+
+   /* Mission Abort */
+   else if(functionName == IA_MISSION_ABORT)
+   {
+      /*! void missionAbort(string missionFile) */
+      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
+      if(iv)
+      {
+         string st = *(string*)iv->value;
+         /* Search for the mission to the engine */
+         missionsController missions;
+         mission* m = missions.getCurrentMission(st);
+         if(m)
+         {
+            /*! Do the Abort */
+            missions.completeMission(m, -1);
+         }
+         else
+         {
+            cerr << "Error: No current mission " << st 
+                 << " at " << strLine << " on script: " << fileName << endl;
+         }
          if(isFunction(token))
          {
             delete(iv);
@@ -1461,6 +1494,100 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       }
    }
 
+   
+   ////////////////////////////////////////////////////
+   //                 Object Functions               //
+   ////////////////////////////////////////////////////
+
+   /* Syntax object function(string, float, float) */
+   else if(functionName == IA_GET_OBJECT)
+   {
+      string objName = "";
+      float posX=0, posY=0, posZ=0;
+
+      /* Get the name */
+      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
+      if(iv != NULL)
+      {
+         objName = *(string*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      /* Get the X position */
+      iv = getParameter(token, strLine, IA_TYPE_FLOAT, pos);
+      if(iv != NULL)
+      {
+         posX = *(float*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      /* Get the Y position */
+      iv = getParameter(token, strLine, IA_TYPE_FLOAT, pos);
+      if(iv != NULL)
+      {
+         posY = *(float*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      /* Get the Z position */
+      iv = getParameter(token, strLine, IA_TYPE_FLOAT, pos);
+      if(iv != NULL)
+      {
+         posZ = *(float*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      /* object getObject(string fileName, float posX, float posZ) */
+      object* obj = NULL;
+      obj = actualMap->getObject(objName, posX, posY, posZ);
+      assignValue(var, (void*)obj, IA_TYPE_OBJECT);
+   }
+
+   /* Syntax int function(object) */
+   else if(functionName == IA_GET_OBJECT_STATE)
+   {
+      object* obj = NULL;
+
+      /* Get object */
+      iv = getParameter(token, strLine, IA_TYPE_OBJECT, pos);
+      if(iv != NULL)
+      {
+         obj = (object*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      /* Set the result */
+      int res = -1;
+      
+      if(obj != NULL)
+      {
+         /* Syntax: int getObjectState(object o) */
+         if(functionName == IA_GET_OBJECT_STATE)
+         {
+            res = obj->getState();
+         }
+      }
+      else
+      {
+         cout << "NULL Object!" << endl;
+      }
+      assignValue(var, (void*)&res, IA_TYPE_INT);
+   }
 
    ////////////////////////////////////////////////////
    //                Character Functions             //
@@ -1489,6 +1616,36 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          dude = eng->NPCs->getCharacter(charName);
       }
       assignValue(var, (void*)dude, IA_TYPE_CHARACTER);
+   }
+
+   /* Syntax bool function(character c) */
+   else if(functionName == IA_CHARACTER_IS_ALIVE)
+   {
+      character* dude = NULL;
+
+      /* Get character */
+      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
+      if(iv != NULL)
+      {
+         dude = (character*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      /* Set the result */
+      bool bl = true;
+      
+      if(dude != NULL)
+      {
+         /* Syntax: bool isAlive(character c) */
+         if(functionName == IA_CHARACTER_IS_ALIVE)
+         {
+            bl = dude->isAlive();
+         }
+      }
+      assignValue(var, (void*)&bl, IA_TYPE_BOOL);
    }
 
    /* Syntax void function(character c, int i) */
@@ -1824,11 +1981,25 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine,
                                   bool assignExpression)
 {
    unsigned int pos = 0;
+   unsigned int pos2 = 0;
    string token;
    string type; 
 
    /* get the variable */
-   nextToken(strLine, pos);
+   token = nextToken(strLine, pos);
+
+   /* Verify else ifs */
+   if(token == IA_SETENCE_ELSE)
+   {
+      pos2 = pos;
+      token = nextToken(strLine, pos2);
+      if(token == IA_SETENCE_IF)
+      {
+         /* So, must ignore the "else" AND the "if" */
+         pos = pos2;
+      }
+   }
+
 
    iaVariable* varStack[1024];
    int varPos = 0;
