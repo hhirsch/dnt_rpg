@@ -1,6 +1,7 @@
 name = Logan
 model = models/personagens/Logan/model.cfg
 portrait = characters/portraits/logan.png
+battleScript = ia/script/fight/fight_animal.dsl
 maxLifePoints = 87
 baseModifier  = 14/11/12
 attackModifier = 12/7/2/0/0/0

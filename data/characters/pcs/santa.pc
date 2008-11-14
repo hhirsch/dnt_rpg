@@ -1,9 +1,14 @@
 name = Santa
 model = models/personagens/santa/model.cfg
-portrait = characters/portraits/metaleiro.png
+portrait = characters/portraits/santa.png
+battleScript = ia/script/fight/fight_animal.dsl
+bloodFileName = particles/blood2.par
+bloodPosition = 45
+conversationFile = dialogs/tutorial/santa.dlg
+challengeRating = 1
 maxLifePoints = 12
 baseModifier = 2/1/2
-attackModifier = 1/0/0/0/0/0
+attackModifier = 2/0/0/0/0/0
 sizeModifier = 0
 psychoState = 2
 walk_interval = 32
