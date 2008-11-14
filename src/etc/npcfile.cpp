@@ -50,7 +50,8 @@ bool npcFile::load(string fileName)
    dirs dir;
    npcFileName = fileName;
 
-   if(!(arq = fopen(dir.getRealFile(fileName).c_str(),"r")))
+   arq = fopen(dir.getRealFile(fileName).c_str(),"r");
+   if(arq == NULL)
    {
       cerr << "Can't open NPCs File: " << fileName << endl;
       return(false);
@@ -158,7 +159,8 @@ void npcFile::killAll()
    /* FIXME: trick to get mapFile, removing the ".npc" */
    if(npcFileName.length() > 4)
    {
-      mapFileName = npcFileName.erase(npcFileName.length()-4, 4);
+      mapFileName = npcFileName;
+      mapFileName.erase(mapFileName.length()-4, 4);
    }
 
    /* Tell modState that All Elements are dead */

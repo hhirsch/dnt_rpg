@@ -1169,7 +1169,8 @@ bool modState::allCharactersDead(string npcFileName)
 {
    modMap* mod;   
    /* FIXME: trick, removing .npc and getting map Name! */
-   string mapFile = npcFileName.erase(npcFileName.length()-4,4);
+   string mapFile = npcFileName;
+   mapFile.erase(mapFile.length()-4,4);
 
    /* Find its modMap */
    mod = findModMap(mapFile);
@@ -1188,9 +1189,11 @@ bool modState::allCharactersDead(string npcFileName)
  ************************************************************/
 bool modState::allCharactersAlive(string npcFileName)
 {
-   modMap* mod;   
+   modMap* mod;
+
    /* FIXME: trick, removing .npc and getting map Name! */
-   string mapFile = npcFileName.erase(npcFileName.length()-4,4);
+   string mapFile = npcFileName;
+   mapFile.erase(mapFile.length()-4,4);
 
    /* Find its modMap */
    mod = findModMap(mapFile);
