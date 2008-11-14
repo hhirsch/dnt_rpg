@@ -5,11 +5,11 @@ PS mapas/tutorial/tyrol.map.par
 MUSICA music/musica13.ogg
 Outdoor: 1
 lake 4109.487,166.066,5302.500,2594.114:0.710,0.850,0.960,0.400
-t texturas/floor_outdoor/sand.png texturas/floor_outdoor/sand.png 200 178 136
-t texturas/floor_outdoor/rock2.png texturas/floor_outdoor/rock2.png 154 105 72
-t texturas/floor_outdoor/rock.png texturas/floor_outdoor/rock.png 126 129 134
-t texturas/floor_outdoor/grass4.png texturas/floor_outdoor/grass4.png 74 74 35
 t texturas/floor_outdoor/grass.png texturas/floor_outdoor/grass.png 55 64 5
+t texturas/floor_outdoor/grass4.png texturas/floor_outdoor/grass4.png 74 74 35
+t texturas/floor_outdoor/rock.png texturas/floor_outdoor/rock.png 126 129 134
+t texturas/floor_outdoor/rock2.png texturas/floor_outdoor/rock2.png 154 105 72
+t texturas/floor_outdoor/sand.png texturas/floor_outdoor/sand.png 200 178 136
 #Z: 0
 p 0,755.000000,692.000000,601.000000,696.000000
 ut texturas/floor_outdoor/rock2.png
@@ -400,7 +400,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass.png
 p 1,0.000000,0.000000,0.000000,6.000000
 ut texturas/floor_outdoor/grass.png
-uo models/natural/arvores/tree1/tree1.dcc 1:16,8:3948.858398,0.000000,1957.325562:50:0
+uo models/natural/arvores/tree1/tree1.dcc 1:16,8:3948.858398,0.000000,1957.325562:50.000000:0
 p 1,6.000000,0.000000,-34.000000,-3.000000
 ut texturas/floor_outdoor/grass.png
 p 1,-3.000000,-34.000000,-63.877171,-68.000000
@@ -452,11 +452,11 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass.png
 p 1,0.000000,0.000000,4.000000,0.000000
 ut texturas/floor_outdoor/grass.png
-uo models/natural/fogueira/fogueira.dcc 1:16,9:4057.772461,3.006756,2240.432373:-10:0
-uo models/natural/arvores/tree1/tree1.dcc 1:16,9:4077.439697,3.207321,2253.268555:-10:0
+uo models/natural/arvores/tree1/tree1.dcc 1:16,8:4077.439697,3.207321,2253.268555:-10.000000:0
+uo models/natural/fogueira/fogueira.dcc 1:16,9:4057.772461,3.006756,2240.432373:-10.000000:0
 p 1,0.000000,4.000000,-21.000000,-34.000000
 ut texturas/floor_outdoor/grass.png
-uo models/natural/arvores/tree1/tree1.dcc 0:16,9:4077.439697,3.207321,2253.268555:-10:0
+uo models/natural/arvores/tree1/tree1.dcc 0:16,8:4077.439697,3.207321,2253.268555:-10.000000:0
 p 1,-34.000000,-21.000000,-45.000000,-63.877171
 ut texturas/floor_outdoor/grass4.png
 p 1,-63.877171,-45.000000,-14.000000,-20.000000
@@ -592,11 +592,11 @@ p 0,2.000000,32.000000,9.000000,0.000000
 ut texturas/floor_outdoor/sand.png
 p 1,0.000000,9.000000,0.000000,0.000000
 ut texturas/floor_outdoor/sand.png
-uo models/building/ruin_house3/ruin_house3.dcc 0:9,12:2094.149170,0.000000,2982.594238:-90:0
+uo models/building/ruin_house3/ruin_house3.dcc 0:9,12:2094.149170,0.000000,2982.594238:-90.000000:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/sand.png
 uc 2199.701660,2970.625244,2223.826172,2993.921631:0.000000:mapas/tutorial/school_1.map
-uo models/building/ruin_house3/ruin_house3.dcc 1:9,12:2094.149170,0.000000,2982.594238:-90:0
+uo models/building/ruin_house3/ruin_house3.dcc 1:9,12:2094.149170,0.000000,2982.594238:-90.000000:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass4.png
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -646,25 +646,25 @@ p 0,32.000000,63.000000,1.000000,9.000000
 ut texturas/floor_outdoor/sand.png
 p 1,9.000000,1.000000,0.000000,0.000000
 ut texturas/floor_outdoor/sand.png
-uo models/building/ruin_house3/ruin_house3.dcc 0:9,12:2094.149170,0.000000,2982.594238:-90:0
+uo models/building/ruin_house3/ruin_house3.dcc 0:9,12:2094.149170,0.000000,2982.594238:-90.000000:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/sand.png
-uo models/building/ruin_house3/ruin_house3.dcc 0:9,12:2094.149170,0.000000,2982.594238:-90:0
-uo models/junk/bloco1/bloco1.dcc 1:9,13:2093.690674,0.000000,3124.609863:-202:0
-uo models/junk/madeira1/madeira1.dcc 1:9,13:2120.168213,0.000000,3116.830811:-202:0
-uo models/junk/madeira1/madeira1.dcc 1:9,13:2118.969971,0.000000,3137.095215:-245:0
+uo models/junk/madeira1/madeira1.dcc 1:9,13:2118.969971,0.000000,3137.095215:-245.000000:0
+uo models/junk/madeira1/madeira1.dcc 1:9,13:2120.168213,0.000000,3116.830811:-202.000000:0
+uo models/junk/bloco1/bloco1.dcc 1:9,13:2093.690674,0.000000,3124.609863:-202.000000:0
+uo models/building/ruin_house3/ruin_house3.dcc 0:9,12:2094.149170,0.000000,2982.594238:-90.000000:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/sand.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/sand.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/sand.png
-uo models/building/ruin_house1/ruin_house1.dcc 0:12,14:2990.746338,0.000000,3433.842041:-271:0
+uo models/building/ruin_house1/ruin_house1.dcc 0:12,14:2990.746338,0.000000,3433.842041:-271.000000:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/sand.png
 uc 3231.470947,3168.143555,3260.237549,3205.079346:0.000000:mapas/tutorial/house1.map
-uo models/building/ruin_house2/ruin_house2.dcc 1:13,13:3150.842041,0.000000,3263.456787:0:0
-uo models/objetos/geral/barrel/barrel.dcc 1:13,13:3301.980713,0.000000,3201.001465:197:0
+uo models/objetos/geral/barrel/barrel.dcc 1:13,13:3301.980713,0.000000,3201.001465:197.000000:0
+uo models/building/ruin_house2/ruin_house2.dcc 1:13,13:3150.842041,0.000000,3263.456787:0.000000:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/sand.png
 p 1,0.000000,0.000000,54.000000,69.000000
@@ -708,16 +708,18 @@ p 1,1.000000,16.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass4.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass4.png
+uo models/objetos/geral/notebook/notebook.dcc 1:9,14:2185.18,17.90,3571.00:-87.000000:0
+uo models/objetos/geral/santa_barrel/santa_barrel.dcc 1:9,14:2184.626709,0.000000,3571.123535:-3.000000:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass4.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/sand.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/sand.png
-uo models/building/ruin_house1/ruin_house1.dcc 1:12,14:2990.746338,0.000000,3433.842041:-271:0
+uo models/building/ruin_house1/ruin_house1.dcc 1:12,14:2990.746338,0.000000,3433.842041:-271.000000:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/sand.png
-uo models/building/ruin_house2/ruin_house2.dcc 0:13,13:3150.842041,0.000000,3263.456787:0:0
+uo models/building/ruin_house2/ruin_house2.dcc 0:13,13:3150.842041,0.000000,3263.456787:0.000000:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/sand.png
 p 1,0.000000,0.000000,0.000000,54.000000

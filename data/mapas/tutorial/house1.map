@@ -293,7 +293,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/tile2.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/tile2.png
-uo models/objetos/geral/notebook/notebook.dcc 1:6,6:349.118866,17.399988,383.820984:0:0
+uo models/objetos/geral/notebook/notebook.dcc 1:6,6:349.11,17.39,383.82:0:0
 uo models/objetos/geral/dinner_table/dinner_table.dcc 0:6,7:347.737183,0.000000,398.303467:0:0
 uo models/objetos/geral/dinner_chair/dinner_chair.dcc 0:6,7:364.083191,0.000000,388.047455:0:0
 uo models/objetos/geral/dinner_chair/dinner_chair.dcc 1:6,6:347.492218,0.000000,370.749054:90:0
@@ -319,7 +319,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/tile2.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/tile2.png
-uo models/objetos/geral/notebook/notebook.dcc 0:6,6:349.118866,17.399988,383.820984:0:0
+uo models/objetos/geral/notebook/notebook.dcc 0:6,6:349.11,17.39,383.82:0:0
 uo models/objetos/geral/dinner_table/dinner_table.dcc 1:6,7:347.737183,0.000000,398.303467:0:0
 uo models/objetos/geral/dinner_chair/dinner_chair.dcc 1:6,7:359.657135,0.000000,406.422760:0:0
 uo models/objetos/geral/dinner_chair/dinner_chair.dcc 1:6,7:364.083191,0.000000,388.047455:0:0
