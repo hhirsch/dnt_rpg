@@ -27,36 +27,42 @@ script()
    
    while(true)
 
-      if(inventoryHave(ACTIVE_CHARACTER,objFile)) 
-         if(dialog == 6)
-            # Have the cartridge, set logan talk to get it!
-            dialog = 7
-            dialogSetInitial(logan, mapa, dialog)            
+      if(ACTUAL_MAP == mapa)
+         
+         # Verify if logan is still alive (if dead, mission failed!)
+         if(!isAlive(getNPCByName(logan)))
+            missionAbort(SELF_MISSION)
          end
-         # Just a bigger sleep when with the cartridge
-         wait(waitTime)
-      else 
-         if(dialog != 6)
-            # Haven't the cartridge, set the logan talk to wait.
-            dialog = 6
-            dialogSetInitial(logan, mapa, dialog)
-         else
-            # Verify if logan has the cartdrige: if you barteres with him
-            if(inventoryHave(getNPCByName(logan),objFile))
-               # Set the dialog to next one
-               dialog = 9
-               dialogSetInitial(logan, mapa, dialog)
 
-               # You've bartered the cartridge with logan, so finish Mission
-               int xp
-               int type
-               xp = 180
-               type = 3
-               missionSetXp(SELF_MISSION, xp)
-               missionComplete(SELF_MISSION, type)
+         if(inventoryHave(ACTIVE_CHARACTER,objFile)) 
+            if(dialog == 6)
+               # Have the cartridge, set logan talk to get it!
+               dialog = 7
+               dialogSetInitial(logan, mapa, dialog)            
             end
+         else 
+            if(dialog != 6)
+               # Haven't the cartridge, set the logan talk to wait.
+               dialog = 6
+               dialogSetInitial(logan, mapa, dialog)
+            else
+               # Verify if logan has the cartdrige: if you barteres with him
+               if(inventoryHave(getNPCByName(logan),objFile))
+                  # Set the dialog to next one
+                  dialog = 9
+                  dialogSetInitial(logan, mapa, dialog)
+  
+                  # You've bartered the cartridge with logan, so finish Mission
+                  int xp
+                  int type
+                  xp = 180
+                  type = 3
+                  missionSetXp(SELF_MISSION, xp)
+                  missionComplete(SELF_MISSION, type)
+               end
 
-         end   
+            end   
+         end
       end
 
       # Wait some time, before the next check
