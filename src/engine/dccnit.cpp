@@ -2600,10 +2600,17 @@ int engine::treatIO(SDL_Surface *screen)
 
          if( (!walkSound) && (snd) )
          {
+            string walkSoundFile = "sndfx/passos.ogg";
+
+            if(actualMap->isOutdoor())
+            {
+               walkSoundFile = "sndfx/passos_terra.ogg";
+            }
+
             walkSound = snd->addSoundEffect(activeCharacter->xPosition,0.0,
                                             activeCharacter->zPosition,
                                             SOUND_AUTO_LOOP,
-                                            "sndfx/passos.ogg");
+                                            walkSoundFile);
          }
          else if(walkSound)
          {
