@@ -93,8 +93,9 @@ bool isFunction(string s)
            (s == IA_FEAT_GET_POWERFULL_HEAL) || (s == IA_SKILL_POINTS) ||
            (s == IA_ATT_MODIFIER) || (s == IA_FIGHT_ENTER) ||
            (s == IA_FIGHT_EXIT) || (s == IA_FIGHT_CAN_ATTACK) ||
-           (s == IA_FIGHT_RUN_AWAY_FROM_BATTLE) || 
-           (s == IA_CHARACTER_GET_PSYCHO) ||
+           (s == IA_FIGHT_RUN_AWAY_FROM_BATTLE) ||
+           (s == IA_GET_OBJECT) || (s == IA_GET_OBJECT_STATE) ||
+           (s == IA_CHARACTER_IS_ALIVE) || (s == IA_CHARACTER_GET_PSYCHO) ||
            (s == IA_CHARACTER_SET_PSYCHO) || (s == IA_CHARACTER_AT_RANGE) || 
            (s == IA_CHARACTER_GET_ACTUAL_LIFE) ||
            (s == IA_CHARACTER_GET_MAX_LIFE) || (s == IA_SELF_OBJECT) ||
@@ -102,6 +103,7 @@ bool isFunction(string s)
            (s == IA_ACTIVE_CHARACTER) ||
            (s == IA_ACTUAL_MAP) || (s == IA_TRUE) || (s == IA_FALSE) ||
            (s == IA_MISSION_ADD) || (s == IA_MISSION_COMPLETE) ||
+           (s == IA_MISSION_ABORT) ||
            (s == IA_MISSION_IS_ACTIVE) || (s == IA_MISSION_SET_TEMP) ||
            (s == IA_MISSION_GET_TEMP) || (s == IA_MISSION_SET_XP) ||
            (s == IA_INVENTORY_HAVE) || (s == IA_FIGHT_GET_NEAREST_ENEMY) ||
@@ -118,8 +120,8 @@ string functionType(string s)
        (s == IA_MOVE_TO_OBJECT) || (s == IA_FEAT_USE_AT_CHARACTER) ||
        (s == IA_FEAT_USE_AT_OBJECT) || (s == IA_TRUE) || (s == IA_FALSE) ||
        (s == IA_MISSION_IS_ACTIVE) || (s == IA_INVENTORY_HAVE) ||
-       (s == IA_CHARACTER_AT_RANGE) || (s == IA_WAIT) || 
-       (s == IA_FIGHT_CAN_ATTACK) )
+       (s == IA_CHARACTER_IS_ALIVE) || (s == IA_CHARACTER_AT_RANGE) || 
+       (s == IA_WAIT) || (s == IA_FIGHT_CAN_ATTACK) )
    {
       return(IA_TYPE_BOOL);
    }
@@ -133,7 +135,8 @@ string functionType(string s)
             (s == IA_FEAT_GET_RANDOM_ATTACK) ||
             (s == IA_FEAT_GET_POWERFULL_ATTACK) ||
             (s == IA_FEAT_GET_RANDOM_HEAL) ||
-            (s == IA_FEAT_GET_POWERFULL_HEAL) )
+            (s == IA_FEAT_GET_POWERFULL_HEAL) ||
+            (s == IA_GET_OBJECT_STATE) )
    {
       return(IA_TYPE_INT);
    }
@@ -149,7 +152,7 @@ string functionType(string s)
       return(IA_TYPE_CHARACTER);
    }
    /* Object Function */
-   else if( (s == IA_SELF_OBJECT) )
+   else if( (s == IA_SELF_OBJECT) || (s == IA_GET_OBJECT) )
    {
       return(IA_TYPE_OBJECT);
    }

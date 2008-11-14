@@ -106,6 +106,8 @@ using namespace std;
 #define IA_MISSION_ADD  "missionAdd"
 /*! void missionComplete(string missionFile, int cType) */
 #define IA_MISSION_COMPLETE "missionComplete"
+/*! void missionAbort(string missionFile) */
+#define IA_MISSION_ABORT "missionAbort"
 /*! bool missionIsActive(string missionFile) */
 #define IA_MISSION_IS_ACTIVE "missionIsActive"
 /*! void missionSetTemp(string missionfile, int tmpNumber, int value) */
@@ -162,10 +164,23 @@ using namespace std;
 #define IA_FIGHT_CAN_ATTACK "canAttack"
 
 ////////////////////////////////////////////////////
+//                 Object Functions               //
+////////////////////////////////////////////////////
+/*! object getObject(string fileName, float posX, float posY, float posZ) */
+#define IA_GET_OBJECT "getObject"
+
+/*! int getObjectState(object obj) */
+#define IA_GET_OBJECT_STATE "getObjectState"
+
+
+////////////////////////////////////////////////////
 //                Character Functions             //
 ////////////////////////////////////////////////////
 /*! character getNPCBytName(string c) */
 #define IA_GET_NPC_BY_NAME "getNPCByName"
+
+/*! bool isAlive(character c) */
+#define IA_CHARACTER_IS_ALIVE "isAlive"
 
 /*! int getPsycho(character c)  */
 #define IA_CHARACTER_GET_PSYCHO "getPsycho"

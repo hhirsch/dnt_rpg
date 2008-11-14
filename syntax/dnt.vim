@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language: DNT Script Language
 " Maintainer: Guilherme Farrer <farrer@dnteam.org>
-" Last Change: 2008 Nov 10
+" Last Change: 2008 Nov 14
 
 syn clear
 
@@ -31,18 +31,20 @@ syn keyword dntFunction       wait print
 syn keyword dntFunction       moveToPosition moveToCharacter
 syn keyword dntFunction       moveToObject setIdle
 syn keyword dntFunction       missionAdd missionComplete missionIsActive
+syn keyword dntFunction       missionAbort
 syn keyword dntFunction       missionSetTemp missionGetTemp missionSetXp
 syn keyword dntFunction       featActualQuantity featCost featQuantityPerDay
 syn keyword dntFunction       getRandomAttackFeat getPowerfullAttackFeat
 syn keyword dntFunction       getRandomHealFeat getPowerfullHealFeat
 syn keyword dntFunction       skillPoints attModifier
 syn keyword dntFunction       combatEnter getNearestEnemy
-syn keyword dntFunction       getNPCByName
+syn keyword dntFunction       getNPCByName isAlive
 syn keyword dntFunction       getPsycho setPsycho getActualLife getMaxLife
 syn keyword dntFunction       characterAtRange canAttack
 syn keyword dntFunction       featUseAtCharacter runAwayFromBattle
 syn keyword dntFunction       inventoryHave
 syn keyword dntFunction       dialogSetInitial
+syn keyword dntFunction       getObject getObjectState
 
 syn sync lines=250
 
