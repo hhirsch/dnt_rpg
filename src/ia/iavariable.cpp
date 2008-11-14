@@ -31,8 +31,7 @@ iaVariable::iaVariable(string varType, string varName)
    {
       value = new string;
    }
-   else if( (type == IA_TYPE_CHARACTER) || (type == IA_TYPE_OBJECT) ||
-            (type == IA_TYPE_SKILL) || (type == IA_TYPE_FEAT))
+   else if( (type == IA_TYPE_CHARACTER) || (type == IA_TYPE_OBJECT) )
    {
       /* It'll be only a pointer, so NULL for now. */
       value = NULL;

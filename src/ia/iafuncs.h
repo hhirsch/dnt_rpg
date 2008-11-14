@@ -49,9 +49,6 @@ using namespace std;
 #define IA_TYPE_STRING "string"
 #define IA_TYPE_CHARACTER "character"
 #define IA_TYPE_OBJECT "object"
-#define IA_TYPE_FEAT "feat"
-#define IA_TYPE_SKILL "skill"
-#define IA_TYPE_MAP "map"
 
 /* Setences */
 #define IA_SETENCE_SCRIPT "script"

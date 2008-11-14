@@ -1782,7 +1782,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       /* Define the variable as the actualMap */
       if(var)
       {
-         assignValue(var, actualMap, IA_TYPE_MAP);
+         string mapFileName = actualMap->getFileName();
+         assignValue(var, (void*)&mapFileName, IA_TYPE_STRING);
       }
    }
 

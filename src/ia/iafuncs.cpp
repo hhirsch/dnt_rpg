@@ -71,9 +71,8 @@ bool isType(string s)
 {
    return( (s == IA_TYPE_VOID) || (s == IA_TYPE_BOOL) ||
            (s == IA_TYPE_INT) || (s == IA_TYPE_FLOAT) ||
-           (s == IA_TYPE_STRING) || (s == IA_TYPE_CHARACTER) ||
-           (s == IA_TYPE_OBJECT) || (s == IA_TYPE_FEAT) ||
-           (s == IA_TYPE_SKILL) || (s == IA_TYPE_MAP) );
+           (s == IA_TYPE_STRING) || (s == IA_TYPE_CHARACTER) ||  
+           (s == IA_TYPE_OBJECT) );
 
 }
 
@@ -139,14 +138,9 @@ string functionType(string s)
       return(IA_TYPE_INT);
    }
    /* String Functions */
-   else if( (s == IA_SELF_MISSION) )
+   else if( (s == IA_SELF_MISSION) || (s == IA_ACTUAL_MAP) )
    {
       return(IA_TYPE_STRING);
-   }
-   /* Object Functions */
-   else if(s == IA_SELF_OBJECT)
-   {
-      return(IA_TYPE_OBJECT);
    }
    /* Character Functions */
    else if( (s == IA_SELF_CHARACTER) || (s == IA_ACTIVE_CHARACTER) ||
@@ -154,10 +148,10 @@ string functionType(string s)
    {
       return(IA_TYPE_CHARACTER);
    }
-   /* Map Functions */
-   else if(s == IA_ACTUAL_MAP)
+   /* Object Function */
+   else if( (s == IA_SELF_OBJECT) )
    {
-      return(IA_TYPE_MAP);
+      return(IA_TYPE_OBJECT);
    }
    /* Void Functions */
    return(IA_TYPE_VOID);
