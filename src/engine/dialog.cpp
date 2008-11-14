@@ -26,6 +26,7 @@
 #define TALK_ACTION_CHANGE_OBJECT_STATE 10 /* Change Object State */
 #define TALK_ACTION_RECEIVE_XP          11 /* Receive XP ammount */
 #define TALK_ACTION_KILL_ALL            12 /* Kill All NPCs from a map */
+#define TALK_ACTION_RECEIVE_ITEM        13 /* Receive an Item */
 
 #define TALK_TEST_TRUE                0  /* Always True */
 #define TALK_TEST_ROLL                1  /* Roll some test */
@@ -70,6 +71,7 @@
 #define TK_ACTION_CHANGE_OBJECT_STATE "change_object_state"
 #define TK_ACTION_RECEIVE_XP "receive_xp"
 #define TK_ACTION_KILL_ALL "kill_all"
+#define TK_ACTION_RECEIVE_ITEM "receive_item"
 
 /* Test Tokens */
 #define TK_TEST_ROLL "roll"
@@ -535,6 +537,10 @@ int conversation::getActionID(string token, string fileName, int line)
    {
       return(TALK_ACTION_GIVE_ITEM);
    }
+   else if(token == TK_ACTION_RECEIVE_ITEM)
+   {
+      return(TALK_ACTION_RECEIVE_ITEM);
+   }
    else if(token == TK_ACTION_RECEIVE_MONEY)
    {
       return(TALK_ACTION_RECEIVE_MONEY);
@@ -833,6 +839,7 @@ int conversation::loadFile(string name)
                      }
                   }
                   else if( (tact->id == TALK_ACTION_GIVE_ITEM) ||
+                           (tact->id == TALK_ACTION_RECEIVE_ITEM) ||
                            (tact->id == TALK_ACTION_KILL_ALL) )
                   {
                      //get name
@@ -1104,6 +1111,45 @@ void conversation::proccessAction(int opcao, void* curEngine)
             }
          }
          break;
+
+         /* Receive Item */
+         case TALK_ACTION_RECEIVE_ITEM:
+         {
+            /* Search for the item (or load one, if needed) */
+            object* obj = objectsList::search(actions[i].satt, 0,0,0);
+            modState modif;
+            Map* actualMap = ((engine*)curEngine)->getCurrentMap();
+            weaponTypes* wTypes = ((engine*)curEngine)->getWeaponTypes();
+            modelList* mdlList = ((engine*)curEngine)->getModelList();
+
+            if(obj == NULL)
+            {
+               /* Must load one */
+               obj = actualMap->insertObject(actions[i].satt, (*mdlList), 
+                                             (*wTypes));
+            }
+
+            /* Now, put it at the actualCharacter Inventory */
+            if(obj != NULL)
+            {
+               if(!actualPC->inventories->addObject(obj))
+               {
+                  /* Can't add to the inventory (is full?), so puting it
+                   * at the floor. */
+                  float height =  actualMap->getHeight(actualPC->xPosition, 
+                                                       actualPC->zPosition);
+                  actualMap->insertObject(actualPC->xPosition, height,
+                                          actualPC->zPosition, 0, obj, 0);
+                  modif.mapObjectAddAction(MODSTATE_ACTION_OBJECT_ADD,
+                                           actions[i].satt,
+                                           actualMap->getFileName(),
+                                           actualPC->xPosition, height,
+                                           actualPC->zPosition);
+               }
+            }
+         }
+         break;
+
          /* Receive Money */
          case TALK_ACTION_RECEIVE_MONEY:
             //TODO

@@ -219,6 +219,21 @@ class engine
        ***************************************************************/
       fightSystem* getFightSystem();
 
+      /*!
+       ***************************************************************
+       * Get the current opened map at the engine
+       * \return pointer to the current opened map
+       ***************************************************************/
+      Map* getCurrentMap();
+
+      /*! Get the current modelList
+       * \return pointer to the current modelList */
+      modelList* getModelList();
+
+      /*! Get the current loaded weapon types definition
+       * \return pointer to the weaponTypes */
+      weaponTypes* getWeaponTypes();
+
    private:
 
       /*!
