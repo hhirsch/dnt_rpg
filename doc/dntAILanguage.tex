@@ -401,6 +401,12 @@ Will move the character {\it char} near to the object {\it obj}. {\bf Returns:}
 
 \subsection{Character}
 
+\subsubsection{isAlive}
+{\bf definition:} bool isAlive(character c)
+
+Verify if a character is alive. {\bf Return} true if the character {\it c} is
+alive, or false if its is dead.
+
 \subsubsection{setIdle}
 {\bf definition:} void setIdle(character char)
 
@@ -409,7 +415,7 @@ Puts the character {\it char} at idle state.
 \subsubsection{getPsycho}
 {\bf definition:} int getPsycho(character c)
 
-Gets the psycho state of the character {\it c}. {\bf Returns} psycho state of
+Gets the psycho state of the character {\it c}. {\bf Return} psycho state of
 the character.
 
 \subsubsection{setPsycho}
@@ -445,6 +451,22 @@ Verify if the character "c" can use attack actions at the current turn.
 {\bf definition:} character getNPCByName(string pcFile)
 
 Get a NPC character based on its fileName, at the current map.
+
+\subsection{Objects}
+
+\subsubsection{getObject}
+{\bf description:} object getObject(string fileName, float posX, float posY,
+float posZ)
+
+Get an object pointer at the current map. The object is defined by its {\it
+filename} and current position {\it posX, posY, posZ}.
+
+\subsubsection{getObjectState}
+{\bf description:} int getObjectState(object obj)
+
+Get the current object state value ({\bf note:} the state is relative to the
+object, representing a relative attribute for it, for example, at computers, the
+state represents the operational system installed by the active character).
 
 \subsection{Inventory}
 
