@@ -36,10 +36,13 @@
  - Initial approach to NPC select the target to attack;
  - Initial approach to select better attack to NPC use;
  - Initial approach to move NPC on battle;
+ - Initial approach to NPC use other actions than attack actions at combat;
  - Implemented GUI tabBox;
  - Use tabBox for Options and Inventories;
  - Option: Show Enemies Battle Circles;
  - Option: Auto End Turn;
+ - New Missions;
+ - Finish the combat system implementation;
 
 Working on:
  - Character level up;
@@ -47,11 +50,8 @@ Working on:
  - Shadows;
  - New Models;
  - Use dntMapEditor to insert sound effects at maps;
- - Initial approach to NPC use other actions than attack actions at combat;
  - Load/Save Functions;
  - New Maps;
- - New Missions;
- - Finish the combat system implementation;
 
 Pending:
  - Define Counter Skills;
