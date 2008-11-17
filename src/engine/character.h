@@ -150,6 +150,11 @@ class character: public aniModel
         * \param fileName -> new fileName of the character */
        void setCharacterFile(string fileName){characterFile = fileName;}
 
+       /*! Save the character to a new file 
+        * \param fileName -> name of the file to save
+        * \return-> true if can save, false otherwise */
+       bool save(string fileName);
+
        /*! Get the range type of the active attack feat
         * \return range type of the actual attack feat */
        int getActiveFeatRangeType();
@@ -166,7 +171,7 @@ class character: public aniModel
        void* getGeneralScript();    
 
        /*! Define the character list as friend class */
-      friend class characterList;
+       friend class characterList;
        
    protected:
       /*! Get points based on calculation

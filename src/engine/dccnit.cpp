@@ -5,6 +5,7 @@
 #include "dccnit.h"
 #include "culling.h"
 #include "util.h"
+#include "savefile.h"
 
 #include <math.h>
 #include <SDL/SDL_image.h>
@@ -78,16 +79,19 @@ engine::engine()
                             dir.getRealFile("feats/feats.ftl"));
 
    /* Load Alignments & Tendecies */
-   alignList = new aligns(dir.getRealFile("alignment/"),
-                          dir.getRealFile("alignment/alignment.lst"));
+   alignList = new aligns();
+   alignList->init(dir.getRealFile("alignment/"),
+                   dir.getRealFile("alignment/alignment.lst"));
 
    /* Load Races */
-   raceList = new races(dir.getRealFile("races/"), 
-                        dir.getRealFile("races/races.lst"));
+   raceList = new races();
+   raceList->init(dir.getRealFile("races/"), 
+                  dir.getRealFile("races/races.lst"));
 
    /* Load Classes */
-   classList = new classes(dir.getRealFile("classes/"),
-                           dir.getRealFile("classes/classes.lst"));
+   classList = new classes();
+   classList->init(dir.getRealFile("classes/"),
+                  dir.getRealFile("classes/classes.lst"));
 
    /* Load Weapons Types */
    weaponsTypes = new weaponTypes();
@@ -278,9 +282,14 @@ engine::~engine()
    delete(models);
    
    /* Clear Characters Lists */
+   alignList->finish();
    delete(alignList);
    delete(features);
+
+   raceList->finish();
    delete(raceList);
+ 
+   classList->finish();
    delete(classList);
    delete(skillsList);
    delete(weaponsTypes);
@@ -308,29 +317,31 @@ void engine::loadGame()
  *********************************************************************/
 void engine::saveGame()
 {
-   //TODO
-   modifState.saveState("");
+   saveFile *sav = new saveFile();
+
+   //TODO get the file name and title!
+   sav->save("Teste","teste.sav", (void*)this);
+
+   delete(sav);
 }
 
 /*********************************************************************
- *                                loadPCs                            *
+ *                                 loadPC                            *
  *********************************************************************/
-void engine::loadPCs()
+bool engine::loadPC(string pcFile)
 {
-   character* per;
    if(PCs)
    {
       delete(PCs);
    }
    PCs  = new (characterList);
-   per = PCs->insertCharacter("characters/pcs/metaleiro.pc",
-                              features, this, "PC");
+   return(PCs->insertCharacter(pcFile, features, this, "PC") != NULL);
 }
 
 /*********************************************************************
  *                         Load Map to Engine                        *
  *********************************************************************/
-int engine::loadMap(string arqMapa, int RecarregaPCs)
+int engine::loadMap(string arqMapa)
 {
    healthBar* progress = NULL; /* the progress bar */
 
@@ -537,13 +548,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    }
    progress->defineActualHealth(6);
 
-   /* Loading PCs */
-   if(RecarregaPCs)
-   {
-       loadPCs(); 
-       showLoading(img,&texturaTexto,texturaCarga,
-                   gettext("Loading Character"), progress);
-   }
+   //FIXME
    progress->defineActualHealth(7);
 
    /* Create the MiniMap */
@@ -910,7 +915,7 @@ int engine::characterScreen(GLuint idTextura)
    int status = 0;
 
    /* First Load PCs */
-   loadPCs();
+   loadPC("characters/pcs/metaleiro.pc");
 
    /* Att Screen */
    attWindow* atWindow = NULL;//new attWindow(sk, gui);
@@ -1988,7 +1993,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                              xReal, zReal,
                              WALK_PER_MOVE_ACTION) ) )
             {
-               loadMap(quaux->mapConection.mapName, 0);
+               loadMap(quaux->mapConection.mapName);
                return(1);
             }
          }

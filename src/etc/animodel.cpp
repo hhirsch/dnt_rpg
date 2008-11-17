@@ -26,6 +26,7 @@ aniModel::aniModel():thing()
    m_meshCount = 0;
    m_renderScale = 1.0f;
    m_lodLevel = 1.0f;
+   modelFileName = "";
 }
 
 /**********************************************************************
@@ -176,6 +177,8 @@ bool aniModel::loadModel(const string& strFilename)
    {
       return(false);
    }
+
+   modelFileName = strFilename;
 
    string strKey = "", strData = "";
    

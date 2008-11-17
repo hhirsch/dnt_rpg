@@ -65,13 +65,14 @@ class classe
 class classes
 {
    public:
-      /*! Constructor
+      /*! Init the classes list to use 
        * \param fileListName -> name of the file containing the list of all
        *         classes (usually ../data/classes/classes.lst)  
        * \param directory -> directory of classes descriptions */
-      classes(string directory, string fileListName);
-      /*! Destructor */
-      ~classes();
+      void init(string directory, string fileListName);
+
+      /*! Finish the classes list  */
+      void finish();
 
       /*! Get a Class from list
        * \param id -> integer ID of the class
@@ -86,8 +87,8 @@ class classes
       int getTotalClasses();
       
    private:
-      int totalClasses;        /**< Total Classes on List */
-      classe* first;           /**< First Class on List */
+      static int totalClasses;        /**< Total Classes on List */
+      static classe* first;           /**< First Class on List */
 
       /*! Insert a class on List
        * \param fileName -> file name of the class to insert 

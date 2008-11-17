@@ -107,7 +107,10 @@ bool options::load()
          cerr << "Creating Directory: " << info.getUserHome() << ":";
          /* Create the User directory */
          mkdir(info.getUserHome().c_str(),0755);
-         cerr << strerror(errno) << endl;
+         if(errno != EEXIST)
+         {
+            cerr << strerror(errno) << endl;
+         }
 
          /* Save the options file */
          cerr << "Creating Options: " << fileName << endl;

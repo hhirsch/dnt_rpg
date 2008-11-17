@@ -136,10 +136,16 @@ class engine
        **************************************************************** 
        * Load and activate Map to engine
        * \param arqMapa -> string with filename
-       * \param RecarregaPCs -> 1 to reload PCs 0 to not.
        * \return 0 if can't load file .
        ***************************************************************/
-      int loadMap(string arqMapa, int RecarregaPCs);
+      int loadMap(string arqMapa);
+
+      /*!
+       ****************************************************************
+       * Load a new playable character to the engine
+       * \param pcFile -> fileName of the character to load
+       ****************************************************************/
+      bool loadPC(string pcFile);
 
       /*!
        ****************************************************************
@@ -358,12 +364,6 @@ class engine
       bool rangeAction(GLfloat posX, GLfloat posZ, 
                        GLfloat targX, GLfloat targZ,
                        GLfloat range);
-
-      /*! 
-       **************************************************************
-       * Load All PCs
-       ***************************************************************/  
-      void loadPCs();
 
       dirs dir;                    /**< Data directories finder */
 

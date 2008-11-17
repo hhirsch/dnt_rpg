@@ -112,7 +112,7 @@ void classe::getAttModifiers(int mods[6], bool sum, skills* sk)
 /******************************************************************
  *                            Constructor                         *
  ******************************************************************/
-classes::classes(string directory, string fileListName)
+void classes::init(string directory, string fileListName)
 {
    std::ifstream file;
    string aux;
@@ -152,7 +152,7 @@ classes::classes(string directory, string fileListName)
 /******************************************************************
  *                            Destructor                          *
  ******************************************************************/
-classes::~classes()
+void classes::finish()
 {
    int i;
    classe* aux;
@@ -394,4 +394,10 @@ int classes::getTotalClasses()
 {
    return(totalClasses);
 }
+
+/******************************************************************
+ *                          static members                        *
+ ******************************************************************/
+int classes::totalClasses = 0;
+classe* classes::first = NULL;
 

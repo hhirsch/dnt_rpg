@@ -39,7 +39,12 @@ OBJSETC = $(ENDETC)animodel.o $(ENDETC)extensions.o $(ENDETC)message3d.o \
 $(ENDETC)modellist.o $(ENDETC)userinfo.o $(ENDETC)dirs.o $(ENDETC)overlaps.o \
 $(ENDETC)defparser.o $(ENDETC)texrenderer.o $(ENDETC)shader.o \
 $(ENDETC)btreecell.o $(ENDETC)btree.o $(ENDETC)npcfile.o
-OBJS = alignwindow.o aspectwindow.o attwindow.o barterwindow.o briefing.o camera.o character.o charwindow.o classwindow.o collision.o culling.o cursor.o dialog.o dccnit.o initial.o inventwindow.o itemwindow.o minimapwindow.o modstate.o options.o racewindow.o skillwindow.o shadow.o shortcutswindow.o sky.o sun.o teste.o util.o
+OBJS = alignwindow.o aspectwindow.o attwindow.o barterwindow.o briefing.o \
+       camera.o character.o charwindow.o classwindow.o collision.o \
+		 culling.o cursor.o dialog.o dccnit.o initial.o inventwindow.o \
+		 itemwindow.o minimapwindow.o modstate.o options.o racewindow.o \
+		 savefile.o skillwindow.o shadow.o shortcutswindow.o sky.o sun.o \
+		 teste.o util.o
 BIN = ../../bin/
 SUPREDE = #-DVIDEO_MODE #-DREDE #comente para nao ter suporte a rede na bagaca
 FIFO = #../etc/fifo.o
@@ -149,6 +154,11 @@ options.o: options.h options.cpp $(ENDGUI)farso.h $(ENDETC)userinfo.h $(ENDETC)d
 racewindow.o: racewindow.h racewindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)race.h
 	@printf "Making racewindow.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) racewindow.cpp -o racewindow.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+savefile.o: savefile.h savefile.cpp dccnit.h modstate.h $(ENDGUI)farso.h
+	@printf "Making savefile.o... "
+	@$(CC) $(CFLAGS) savefile.cpp -o savefile.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 skillwindow.o: skillwindow.h skillwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)skills.h

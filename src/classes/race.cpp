@@ -112,7 +112,7 @@ void race::getAttModifiers(int mods[6], bool sum, skills* sk)
 /******************************************************************
  *                            Constructor                         *
  ******************************************************************/
-races::races(string directory, string fileListName)
+void races::init(string directory, string fileListName)
 {
    std::ifstream file;
    string aux;
@@ -152,7 +152,7 @@ races::races(string directory, string fileListName)
 /******************************************************************
  *                            Destructor                          *
  ******************************************************************/
-races::~races()
+void races::finish()
 {
    int i;
    race* aux;
@@ -341,4 +341,10 @@ int races::getTotalRaces()
 {
    return(totalRaces);
 }
+
+/******************************************************************
+ *                          Static Members                        *
+ ******************************************************************/
+int races::totalRaces = 0; 
+race* races::first = NULL;
 

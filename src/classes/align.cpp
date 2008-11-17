@@ -6,7 +6,7 @@
 /******************************************************************
  *                            Constructor                         *
  ******************************************************************/
-aligns::aligns(string directory, string fileListName)
+void aligns::init(string directory, string fileListName)
 {
    std::ifstream file;
    string aux;
@@ -44,7 +44,7 @@ aligns::aligns(string directory, string fileListName)
 /******************************************************************
  *                            Destructor                          *
  ******************************************************************/
-aligns::~aligns()
+void aligns::finish()
 {
    int i;
    align* aux;
@@ -140,7 +140,7 @@ align* aligns::getAlignByInteger(int id)
 }
 
 /******************************************************************
- *                            Constructor                         *
+ *                          getAlignByString                      *
  ******************************************************************/
 align* aligns::getAlignByString(string id)
 {
@@ -157,4 +157,10 @@ align* aligns::getAlignByString(string id)
 
    return(NULL);
 }
+
+/******************************************************************
+ *                           Static Members                       *
+ ******************************************************************/
+int aligns::totalAlignments = 0;
+align* aligns::first = NULL;
 

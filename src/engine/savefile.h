@@ -19,11 +19,11 @@ class saveFile
       ~saveFile();
 
       /*! Load save file files
-       * \param modifState -> the modState to load from file
+       * \param curEngine -> pointer to the current engine
        * \return -> true if can load, false otherwise 
        * \note -> you must read the header with loadHeader before call
        *          this function */
-      bool load(modState* modifState);
+      bool load(void* curEngine);
 
       /*! Load Save file header, before really load the save
        * \param fileName -> header filename (without path)
@@ -35,9 +35,9 @@ class saveFile
        * \param saveFile -> save file name string
        * \param modifState -> the modState to save to the file
        * \param curMap -> current opened map
+       * \param curEngine -> pointer to the current engine
        * \return -> true if can save, false otherwise */
-      bool save(string saveTitle, string saveFile, modState* modifState,
-                string curMap);
+      bool save(string saveTitle, string saveFile, void* curEngine);
 
       /*! Get the save file title
        * \return -> save file title */
@@ -61,6 +61,7 @@ class saveFile
       string modStateFile;   /**< The modState file */
       string missionsFile;   /**< The missions file */
       string pcFile;         /**< The PC file */
+      float pcPos[3];        /**< The PC Position */
 
 
 };

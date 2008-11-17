@@ -97,7 +97,7 @@ int main(int argc, char **argv)
              cBook->load("comics/intro/intro.dcb");
              cBook->run();
 
-             gameEngine->loadMap("mapas/tutorial/house1.map",0);
+             gameEngine->loadMap("mapas/tutorial/house1.map");
           }
        }
        

@@ -57,13 +57,13 @@ class race
 class races
 {
    public:
-      /*! Constructor
+      /*! Static Constructor
        * \param fileListName -> name of the file containing the list of all
        *         races (usually ../data/race/race.lst)  
        * \param directory -> directory of races descriptions */
-      races(string directory, string fileListName);
-      /*! Destructor */
-      ~races();
+      void init(string directory, string fileListName);
+      /*! Static Destructor */
+      void finish();
 
       /*! Get an Race from list
        * \param id -> integer ID of the race
@@ -79,8 +79,8 @@ class races
       int getTotalRaces();
 
    private:
-      int totalRaces;              /**< Total Races on List */
-      race* first;                 /**< First Race on List */
+      static int totalRaces;              /**< Total Races on List */
+      static race* first;                 /**< First Race on List */
 
       /*! Insert an race on List
        * \param fileName -> file name of the race to insert 

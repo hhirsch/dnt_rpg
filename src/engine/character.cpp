@@ -585,6 +585,97 @@ void character::applySkillCosts()
    }
 }
 
+/*********************************************************************
+ *                                save                               *
+ *********************************************************************/
+bool character::save(string saveFile)
+{
+   ofstream file;
+   int i;
+
+   /* Open the file to save */
+   file.open(saveFile.c_str(), ios::out | ios::binary);
+   if(!file)
+   {
+      cerr << "Error Opening File: " << saveFile << endl;
+      return(false);
+   }
+
+   /* Name */
+   file << "name = " << name << endl;
+   /* Model */
+   file << "model = " << modelFileName << endl;
+   /* Portrait */
+   file << "portrait = " << talkPortrait << endl;
+   /* Race */
+   if(actualRace != NULL)
+   {
+      file << "race = " << actualRace->strID << endl;
+   }
+   /* Alignment */
+   if(actualAlign)
+   {
+      file << "align = " << actualAlign->strID << endl;
+   }
+   /* Classes */
+   for(i = 0; i < MAX_DISTINCT_CLASSES; i++)
+   {
+      if(actualClass[i] != NULL)
+      {
+         file << "class = " << actualClass[i]->strID << " " 
+                            << classLevels[i] << endl;
+      }
+   }
+   /* Battle Script (if one) */
+   if(!battleScriptFileName.empty())
+   {
+      file << "battleScript = " << battleScriptFileName << endl;
+   }
+   /* Blood Filename and position */
+   file << "bloodFileName = " << bloodFileName << endl;
+   file << "bloodPosition = " << bloodPosition << endl;
+   /* Conversation File (if one) */
+   if(!conversationFile.empty())
+   {
+      file << "conversationFile = " << conversationFile << endl;
+   }
+   /* Challenge Rating */
+   if(cr != 0)
+   {
+      file << "chalengeRating = " << cr << endl;
+   }
+   /* Life Points */
+   file << "maxLifePoints = " << maxLifePoints << endl;
+   file << "curLifePoints = " << lifePoints << endl;
+   /* Base Modifier */
+   file << "baseModifier = " << fortitude << "/" << reflex << "/"
+                             << iAmNotAFool << endl;
+   /* Attack Modifier: FIXME! */
+   file << "attackModifier = " << baseAttackModifier << "/0/0/0/0/0" << endl;
+   /* Size Modifier */
+   file << "sizeModifier = " << sizeModifier << endl;
+   /* PsychoState */
+   file << "psychoState = " << psychoState << endl;
+   /* Walk Interval */
+   file << "walk_interval = " << displacement << endl;
+
+   /* Now, put all not 0 skills */
+   for(i = 0; i < sk.getTotalSkills(); i++)
+   {
+      if(sk.m_skills[i].points != 0)
+      {
+         file << sk.m_skills[i].idString << " = " 
+              << sk.m_skills[i].points << endl;
+      }
+   }
+
+   /* TODO, save all feats! */
+
+   /* Close the file and return */
+   file.close();
+   return(true);
+}
+
 /***************************************************************************
  ***************************************************************************
  *                            characterList                                *
@@ -628,8 +719,14 @@ character* characterList::insertCharacter(string file, featsList* ft,
 
 {
    defParser def;
+   races racesDesc;
+   aligns alignsDesc;
+   classes classesDesc;
    string arqModelo;
    string key, value;
+   char buf[256];
+   int lvl;
+   int curClass = 0;
   
    /* Create the Character */ 
    character* novo;
@@ -671,6 +768,10 @@ character* characterList::insertCharacter(string file, featsList* ft,
       {
          sscanf(value.c_str(), "%d", &novo->lifePoints);
          novo->maxLifePoints = novo->lifePoints;
+      }
+      else if(key == "curLifePoints")
+      {
+         sscanf(value.c_str(),"%d",&novo->lifePoints);
       }
       /* Base Modifier */
       else if(key == "baseModifier")
@@ -734,6 +835,31 @@ character* characterList::insertCharacter(string file, featsList* ft,
       else if(key == "challengeRating")
       {
          sscanf(value.c_str(), "%f", &novo->cr);
+      }
+      /* Race */
+      else if(key == "race")
+      {
+         novo->actualRace = racesDesc.getRaceByString(value);
+      }
+      /* Alignment */
+      else if(key == "align")
+      {
+         novo->actualAlign = alignsDesc.getAlignByString(value);
+      }
+      /* Class */
+      else if(key == "class")
+      {
+         sscanf(value.c_str(), "%s %d", &buf[0], &lvl);
+         if(curClass < MAX_DISTINCT_CLASSES)
+         {
+            novo->actualClass[curClass] = classesDesc.getClassByString(buf);
+            novo->classLevels[curClass] = lvl;
+            curClass++;
+         }
+         else
+         {
+            cerr << "Error: class overflow for: " << file << endl;
+         }
       }
 
       //TODO

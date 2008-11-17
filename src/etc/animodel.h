@@ -92,6 +92,7 @@ class aniModel:public thing
       float m_renderScale;           /**< Cal3D scale on render */
       float m_lodLevel;              /**< Cal3D Level of Detail to render */
       string m_path;                 /**< Path to cal3D model */
+      string modelFileName;          /**< Filename of the model */
 
       CalRenderer *pCalRenderer;     /**< Pointer to themodel renderer */
       static float meshVertices[30000][3]; /**< Model Vertices */

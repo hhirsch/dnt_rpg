@@ -26,13 +26,13 @@ class align
 class aligns
 {
    public:
-      /*! Constructor
+      /*! Static Constructor
        * \param fileListName -> name of the file containing the list of all
        *         aligments (usually ../data/alignment/alignment.lst)  
        * \param directory -> directory of the Descriptions to use. */
-      aligns(string directory, string fileListName);
-      /*! Destructor */
-      ~aligns();
+      void init(string directory, string fileListName);
+      /*! Static Destructor */
+      void finish();
 
       /*! Get an Alignment from list
        * \param id -> integer ID of the alignment
@@ -44,8 +44,8 @@ class aligns
       align* getAlignByString(string id);
       
    private:
-      int totalAlignments;          /**< Total Alignments on List */
-      align* first;                 /**< First Alignment on List */
+      static int totalAlignments;          /**< Total Alignments on List */
+      static align* first;                 /**< First Alignment on List */
 
       /*! Insert an alignment on List
        * \param fileName -> fileName of the alignment to insert 

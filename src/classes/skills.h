@@ -82,6 +82,10 @@ class skills
       /*! clear all skills points */
       void clear();
 
+      /*! Get Total Skills on the list
+       * \return -> number of skills */
+      int getTotalSkills();
+
 
      skill* m_skills; /**< the internal skills */
 
