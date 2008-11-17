@@ -982,7 +982,8 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          /* Verify if need to show advise of reinit */
          if( (screenWidth != prevWidth) || (screenHeight != prevHeight) ||
              (prevFullScreen != enableFullScreen) || 
-             (antiAliasing != prevAntiAliasing) )
+             (antiAliasing != prevAntiAliasing) ||
+             (langNumber != prevLanguage) )
          {
             warning warn;
             warn.show(gettext("Warning"), 

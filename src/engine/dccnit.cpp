@@ -888,20 +888,7 @@ int engine::optionsScreen(GLuint idTextura)
       option->setLanguage();
    }
 
-   delete(alignList);
-   alignList = new aligns(dir.getRealFile("alignment/"),
-                          dir.getRealFile("alignment/alignment.lst"));
-
-   delete(features);
-   features = new featsList(dir.getRealFile("feats/"),
-                            dir.getRealFile("feats/feats.ftl"));
-
-   delete(raceList);
-   raceList = new races(dir.getRealFile("races/"), 
-                        dir.getRealFile("races/races.lst"));
-
    glEnable(GL_LIGHTING);
-
    return(optionW);
 }
 
@@ -2647,6 +2634,7 @@ int engine::treatIO(SDL_Surface *screen)
             walkSound = NULL;
          }
       }
+
    }
    else
    {
