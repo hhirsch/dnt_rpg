@@ -25,6 +25,7 @@ engine::engine()
    actualMap = NULL;
    PCs = NULL;
    NPCs = NULL;
+   activeCharacter = NULL;
 
    inventoryWindow = NULL;
 
@@ -308,8 +309,13 @@ engine::~engine()
  *********************************************************************/
 void engine::loadGame()
 {
-   //TODO
-   modifState.loadState("");
+   saveFile *sav = new saveFile();
+
+   //TODO get the file name!
+   sav->loadHeader("teste.sav");
+   sav->load((void*)this);
+
+   delete(sav);
 }
 
 /*********************************************************************
@@ -335,7 +341,8 @@ bool engine::loadPC(string pcFile)
       delete(PCs);
    }
    PCs  = new (characterList);
-   return(PCs->insertCharacter(pcFile, features, this, "PC") != NULL);
+   activeCharacter = PCs->insertCharacter(pcFile, features, this, "PC");
+   return(activeCharacter != NULL);
 }
 
 /*********************************************************************
@@ -623,7 +630,7 @@ int engine::loadMap(string arqMapa)
    
 
    /* Put Active Party at initial Position */
-   character* activeCharacter = PCs->getActiveCharacter();
+   activeCharacter = PCs->getActiveCharacter();
    actualMap->getInitialPosition(activeCharacter->xPosition,
                                  activeCharacter->zPosition,
                                  activeCharacter->orientation);
@@ -936,7 +943,7 @@ int engine::characterScreen(GLuint idTextura)
    glDisable(GL_LIGHTING);
 
    /* Race Window */
-   character* activeCharacter = PCs->getActiveCharacter();
+   activeCharacter = PCs->getActiveCharacter();
    raceWindow* rcWindow = new raceWindow(raceList,&activeCharacter->sk,gui,
                                          &activeCharacter->actualRace);
 
@@ -1305,7 +1312,7 @@ void engine::enterBattleMode(bool surprisePC)
   dialogWindow dlgWindow;
   dlgWindow.close();
   
-  character* activeCharacter = PCs->getActiveCharacter();
+  activeCharacter = PCs->getActiveCharacter();
   
   /* clear fight status */
   fight->empty();
@@ -1671,7 +1678,7 @@ int engine::verifyMouseActions(Uint8 mButton)
    char buf[1024];
 
    Uint32 time = SDL_GetTicks();
-   character* activeCharacter = PCs->getActiveCharacter();
+   activeCharacter = PCs->getActiveCharacter();
 
    /* Create a bounding box for the mouse position */
    GLfloat minMouse[3], maxMouse[3];
@@ -2024,7 +2031,7 @@ int engine::treatIO(SDL_Surface *screen)
    Uint32 time;              // Actual Time
    GLfloat varX, varZ;       // to avoid GLfloat calculate
    GLfloat dist;
-   character* activeCharacter = PCs->getActiveCharacter();
+   activeCharacter = PCs->getActiveCharacter();
    Uint8 *keys;
    int x,y;
    int guiEvent;
@@ -2894,7 +2901,7 @@ void engine::renderScene()
 void engine::renderNoShadowThings()
 {
 
-   character* activeCharacter = PCs->getActiveCharacter(); 
+   activeCharacter = PCs->getActiveCharacter(); 
 
    /* Draw Path */
    /*if(walkStatus == ENGINE_WALK_MOUSE_ASTAR)
@@ -3150,7 +3157,7 @@ void engine::drawWithoutShadows()
  *********************************************************************/
 bool engine::tryWalk(GLfloat varX, GLfloat varZ)
 {
-   character* activeCharacter = PCs->getActiveCharacter();
+   activeCharacter = PCs->getActiveCharacter();
    
    /* Try Normal Move */
    if(canWalk(varX,varZ,0)) 
@@ -3215,7 +3222,7 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    bool result = true;
    GLfloat varHeight = 0;
    GLfloat nx, nz;
-   character* activeCharacter = PCs->getActiveCharacter();
+   activeCharacter = PCs->getActiveCharacter();
   
    if(!activeCharacter->isAlive())
    {
@@ -3516,7 +3523,7 @@ int engine::run(SDL_Surface *surface, bool commingBack)
                if(fight->actualCharacterTurn()) 
                {
                   PCs->setActiveCharacter(fight->actualCharacterTurn());
-                  character* activeCharacter = PCs->getActiveCharacter();
+                  activeCharacter = PCs->getActiveCharacter();
                   attackFeat = activeCharacter->getActiveFeatRangeType();
 
                   moveCircleX = activeCharacter->xPosition;
@@ -3530,7 +3537,7 @@ int engine::run(SDL_Surface *surface, bool commingBack)
            }
            else if(fightStatus == FIGHT_NPC_TURN)
            {
-              character* activeCharacter = fight->actualCharacterTurn();
+              activeCharacter = fight->actualCharacterTurn();
               moveCircleX = activeCharacter->xPosition;
               moveCircleY = activeCharacter->yPosition;
               moveCircleZ = activeCharacter->zPosition;

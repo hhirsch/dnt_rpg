@@ -387,7 +387,8 @@ class engine
              zReal,                /**< Actual mouse Z coordinates on World */
              yReal;                /**< Actual mouse Y coordinates on World */
 
-      
+     
+      character* activeCharacter;    /**< Pointer to the PC active */
 
       inventWindow* inventoryWindow; /**< Inventory Window */
       itemWindow* infoWindow;        /**< The info Window */
