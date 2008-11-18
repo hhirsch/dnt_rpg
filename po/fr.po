@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-11-13 16:37-0200\n"
+"POT-Creation-Date: 2008-11-18 12:34-0200\n"
 "PO-Revision-Date: 2008-09-10 12:15+0000\n"
 "Last-Translator: Anthony Guéchoum <Unknown>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -65,7 +65,7 @@ msgstr "Déplacement non valide"
 msgid "Not enought points to use!"
 msgstr "Pas assez de points pour utiliser !"
 
-#: src/classes/mission.cpp:198 src/engine/dialog.cpp:1070
+#: src/classes/mission.cpp:198 src/engine/dialog.cpp:1077
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "Mission accomplie: %d XP !"
@@ -80,14 +80,14 @@ msgstr "tendance et Alignement"
 
 #: src/engine/alignwindow.cpp:55 src/engine/aspectwindow.cpp:75
 #: src/engine/attwindow.cpp:221 src/engine/classwindow.cpp:99
-#: src/engine/options.cpp:777 src/engine/racewindow.cpp:96
+#: src/engine/options.cpp:780 src/engine/racewindow.cpp:96
 #: src/engine/skillwindow.cpp:139
 msgid "Confirm"
 msgstr "Confirmer"
 
 #: src/engine/alignwindow.cpp:59 src/engine/aspectwindow.cpp:79
 #: src/engine/attwindow.cpp:225 src/engine/barterwindow.cpp:46
-#: src/engine/classwindow.cpp:103 src/engine/options.cpp:781
+#: src/engine/classwindow.cpp:103 src/engine/options.cpp:784
 #: src/engine/racewindow.cpp:100 src/engine/skillwindow.cpp:142
 msgid "Cancel"
 msgstr "Annuler"
@@ -158,7 +158,7 @@ msgstr "Charisme"
 msgid "Attribute Description"
 msgstr "Description des attributs"
 
-#: src/engine/attwindow.cpp:511 src/engine/options.cpp:988
+#: src/engine/attwindow.cpp:511 src/engine/options.cpp:992
 msgid "Warning"
 msgstr "Avertissement"
 
@@ -166,7 +166,7 @@ msgstr "Avertissement"
 msgid "You Need to Assign All Attributes."
 msgstr "Vous devez assigner tous les attributs."
 
-#: src/engine/barterwindow.cpp:30 src/engine/dialog.cpp:1278
+#: src/engine/barterwindow.cpp:30 src/engine/dialog.cpp:1324
 msgid "Barter"
 msgstr "Troc"
 
@@ -356,46 +356,42 @@ msgstr "Compétences de Classe"
 msgid "No Skills."
 msgstr "Pas de Compétences."
 
-#: src/engine/dccnit.cpp:407
+#: src/engine/dccnit.cpp:425
 #, c-format
 msgid "Saving Current Map Modifications"
 msgstr ""
 
-#: src/engine/dccnit.cpp:456
+#: src/engine/dccnit.cpp:474
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Chargement de la Carte : %s"
 
-#: src/engine/dccnit.cpp:519
+#: src/engine/dccnit.cpp:537
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Chargement du PNJ : %s"
 
-#: src/engine/dccnit.cpp:545
-msgid "Loading Character"
-msgstr "Chargement du Caractère"
-
-#: src/engine/dccnit.cpp:551
+#: src/engine/dccnit.cpp:563
 msgid "Creating MiniMap"
 msgstr ""
 
-#: src/engine/dccnit.cpp:557
+#: src/engine/dccnit.cpp:569
 msgid "Putting GUI on Screen"
 msgstr ""
 
-#: src/engine/dccnit.cpp:604
+#: src/engine/dccnit.cpp:616
 msgid "Loading Particles"
 msgstr "Chargement des Particules"
 
-#: src/engine/dccnit.cpp:634
+#: src/engine/dccnit.cpp:646
 msgid "Loading Changes..."
 msgstr "Chargement des modifications..."
 
-#: src/engine/dccnit.cpp:662
+#: src/engine/dccnit.cpp:674
 msgid "Done!"
 msgstr "Terminé !"
 
-#: src/engine/dccnit.cpp:754
+#: src/engine/dccnit.cpp:766
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -403,67 +399,67 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1282
+#: src/engine/dccnit.cpp:1281
 msgid "Too far away for the action!"
 msgstr "Trop loin pour cette action !"
 
-#: src/engine/dccnit.cpp:1324
+#: src/engine/dccnit.cpp:1323
 msgid "No NPCs in the area."
 msgstr "Pas de PNJ dans la zone"
 
-#: src/engine/dccnit.cpp:1375
+#: src/engine/dccnit.cpp:1374
 msgid "Surprise Attack Turn."
 msgstr "Tour des attaques surprises."
 
-#: src/engine/dccnit.cpp:1389
+#: src/engine/dccnit.cpp:1388
 msgid "No enemies in the area."
 msgstr "Pas d'ennemis dans la zone."
 
-#: src/engine/dccnit.cpp:1566 src/engine/dccnit.cpp:2016
+#: src/engine/dccnit.cpp:1565 src/engine/dccnit.cpp:2015
 #: src/engine/shortcutswindow.cpp:32
 msgid "Nothing"
 msgstr "Rien"
 
-#: src/engine/dccnit.cpp:1764
+#: src/engine/dccnit.cpp:1763
 #, c-format
 msgid "%s taken."
 msgstr "%s pris."
 
-#: src/engine/dccnit.cpp:1786
+#: src/engine/dccnit.cpp:1785
 msgid "Inventory is full!"
 msgstr "L'inventaire est plein!"
 
-#: src/engine/dccnit.cpp:1818
+#: src/engine/dccnit.cpp:1817
 msgid "Door"
 msgstr "Porte"
 
-#: src/engine/dccnit.cpp:1951
+#: src/engine/dccnit.cpp:1950
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s attaque %s"
 
-#: src/engine/dccnit.cpp:2112
+#: src/engine/dccnit.cpp:2111
 msgid "No more actions. Turn ended."
 msgstr ""
 
-#: src/engine/dccnit.cpp:3462
+#: src/engine/dccnit.cpp:3493
 msgid "Exit Battle Mode"
 msgstr "Quitter le Mode Combat"
 
-#: src/engine/dialog.cpp:249
+#: src/engine/dialog.cpp:251
 msgid "Success"
 msgstr ""
 
-#: src/engine/dialog.cpp:249
+#: src/engine/dialog.cpp:251
 msgid "Failure"
 msgstr ""
 
-#: src/engine/dialog.cpp:916
+#: src/engine/dialog.cpp:923
 #, c-format
-msgid "Not found on dialog: %d\n"
+msgid "Not found in dialog: %d\n"
 msgstr "Introuvable dans le dialogue : %d\n"
 
-#: src/engine/dialog.cpp:1272
+#: src/engine/dialog.cpp:1318
 msgid "Dialog"
 msgstr "Dialogue"
 
@@ -483,7 +479,7 @@ msgstr "Enregistrer"
 msgid "Load"
 msgstr "Charger"
 
-#: src/engine/initial.cpp:77 src/engine/options.cpp:557
+#: src/engine/initial.cpp:77 src/engine/options.cpp:560
 msgid "Options"
 msgstr "Options"
 
@@ -601,108 +597,108 @@ msgstr ""
 msgid "Russian"
 msgstr "Russe"
 
-#: src/engine/options.cpp:451 data/weapons/types/munitions.dcl:2
+#: src/engine/options.cpp:454 data/weapons/types/munitions.dcl:2
 msgid "None"
 msgstr "Aucun"
 
-#: src/engine/options.cpp:456
+#: src/engine/options.cpp:459
 msgid "Characters"
 msgstr "Caractères"
 
-#: src/engine/options.cpp:461
+#: src/engine/options.cpp:464
 msgid "All"
 msgstr "Tous"
 
-#: src/engine/options.cpp:477 data/weapons/types/sizes.dcl:3
+#: src/engine/options.cpp:480 data/weapons/types/sizes.dcl:3
 #: data/weapons/types/weights.dcl:3
 msgid "Normal"
 msgstr "Normal"
 
-#: src/engine/options.cpp:480
+#: src/engine/options.cpp:483
 msgid "Pursue"
 msgstr "Poursuite"
 
-#: src/engine/options.cpp:495
+#: src/engine/options.cpp:498
 msgid "Disabled"
 msgstr "Désactivé"
 
-#: src/engine/options.cpp:498
+#: src/engine/options.cpp:501
 msgid "2x"
 msgstr "2x"
 
-#: src/engine/options.cpp:501
+#: src/engine/options.cpp:504
 msgid "4x"
 msgstr "4x"
 
-#: src/engine/options.cpp:567
+#: src/engine/options.cpp:570
 msgid "Audio"
 msgstr ""
 
-#: src/engine/options.cpp:571
+#: src/engine/options.cpp:574
 msgid "Music Volume:"
 msgstr "Volume de la musique :"
 
-#: src/engine/options.cpp:588
+#: src/engine/options.cpp:591
 msgid "Effects Volume:"
 msgstr "Volume des effets :"
 
-#: src/engine/options.cpp:605
+#: src/engine/options.cpp:608
 msgid "Video"
 msgstr ""
 
-#: src/engine/options.cpp:613
+#: src/engine/options.cpp:616
 msgid "Screen Resolution:"
 msgstr ""
 
-#: src/engine/options.cpp:628
+#: src/engine/options.cpp:631
 msgid "Enable FullScreen"
 msgstr "Activer le plein écran"
 
-#: src/engine/options.cpp:637
+#: src/engine/options.cpp:640
 msgid "Enable Grass Effects (need particles)"
 msgstr "Activer les effets de l'herbe (demande l'effet particles)"
 
-#: src/engine/options.cpp:646
+#: src/engine/options.cpp:649
 msgid "Enable Particles Effects"
 msgstr "Activer les effets de particules"
 
-#: src/engine/options.cpp:658
+#: src/engine/options.cpp:661
 msgid "Enable MultiTextures"
 msgstr ""
 
-#: src/engine/options.cpp:669
+#: src/engine/options.cpp:672
 msgid "Reflections:"
 msgstr "Réflections :"
 
-#: src/engine/options.cpp:685
+#: src/engine/options.cpp:688
 msgid "Anti-Aliasing:"
 msgstr ""
 
-#: src/engine/options.cpp:700
+#: src/engine/options.cpp:703
 msgid "FarView:"
 msgstr ""
 
-#: src/engine/options.cpp:716
+#: src/engine/options.cpp:719
 msgid "Game"
 msgstr ""
 
-#: src/engine/options.cpp:722
+#: src/engine/options.cpp:725
 msgid "Language:"
 msgstr "Langue :"
 
-#: src/engine/options.cpp:739
+#: src/engine/options.cpp:742
 msgid "Camera Mode:"
 msgstr "Mode de la caméra :"
 
-#: src/engine/options.cpp:755
+#: src/engine/options.cpp:758
 msgid "Auto End Turn"
 msgstr ""
 
-#: src/engine/options.cpp:764
-msgid "Show Enemies Battle Circles"
+#: src/engine/options.cpp:767
+msgid "Show Enemy Battle Circle"
 msgstr ""
 
-#: src/engine/options.cpp:989
+#: src/engine/options.cpp:993
 msgid "Some changes will only take effect upon restart."
 msgstr "Certains changement prendrons effet au redémarrage."
 
@@ -759,7 +755,7 @@ msgid "End Character's Turn"
 msgstr ""
 
 #: src/engine/shortcutswindow.cpp:198
-msgid "Only Available on Battle Mode"
+msgid "Only Available in Battle Mode"
 msgstr ""
 
 #: src/engine/shortcutswindow.cpp:204
@@ -827,7 +823,7 @@ msgid "Maximize"
 msgstr "Agrandir"
 
 #: data/comics/intro/intro.dcb:15
-msgid "Once Upon a time, there's a happy university called UFMG..."
+msgid "Once Upon a time, there was a happy university called UFMG..."
 msgstr ""
 
 #: data/comics/intro/intro.dcb:25
@@ -836,7 +832,7 @@ msgstr "Les gens vivaient là des vies paisibles"
 
 #: data/comics/intro/intro.dcb:35
 msgid ""
-"(except the medicine students, who had the habit of sacrifice one rookie per "
+"(except the medical students who had the habit of sacrificing one rookie per "
 "year)"
 msgstr ""
 "(excepté les étudiants en médecine, qui ont l'habitude de sacrifier un bleu "
@@ -847,12 +843,12 @@ msgid "When something happened..."
 msgstr "Quand quelque chose arriva..."
 
 #: data/comics/intro/intro.dcb:47
-msgid "a big explosion, with unknow causes."
+msgid "a big explosion, with unknown causes."
 msgstr "une grande explosion, avec des causes inconnues."
 
 #: data/comics/intro/intro.dcb:61
 msgid ""
-"It made the happy and peacefull city called Belo Horizonte be know as "
+"It made the happy and peacefull city called Belo Horizonte be known as "
 "Horrivel Horizonte."
 msgstr ""
 "Cela fit connaître la joyeuse et paisible ville de Belo Horizonte sous le "
@@ -872,7 +868,7 @@ msgstr "et les rats devinrent assoiffés de sang."
 
 #: data/comics/intro/intro.dcb:85
 msgid ""
-"In this chaotic scene, emerged the main race that would dominate the land:"
+"From this chaotic scene, emerged the main race that would dominate the land:"
 msgstr ""
 "Dans ce décor chaotique émergea le race principale qui allait dominer la "
 "région:"
@@ -882,20 +878,19 @@ msgid "UNIVERSITY STUDENTS!"
 msgstr "LES ETUDIANTS UNIVERSITAIRES!"
 
 #: data/comics/intro/intro.dcb:89
-msgid "who desired, at all costs, obtain their legendary levels of knowledge."
+msgid ""
+"who desired to, at all costs, obtain their legendary levels of knowledge."
 msgstr ""
 "qui désiraient, à tous prix, obtenir leurs légendaires niveaux intellectuels."
 
 #: data/comics/intro/intro.dcb:103
 msgid ""
-"On this doomed world, tells the tales spoken mouth by mouth by the risen "
-"journalists,"
+"On this doomed world, thanks to the risen journalists, tales were told and "
+"spread by word of mouth, saying that"
 msgstr ""
-"Dans ce monde apocalyptique, racontent les contes rapportés de bouche à "
-"oreille par les journalistes,"
 
 #: data/comics/intro/intro.dcb:113
-msgid "the first man who walked and claimed for his right of a graduation"
+msgid "the first man who came and proclaimed his right to graduate"
 msgstr ""
 "le premier homme qui marcha et clama ses droits à une remise de diplôme"
 
@@ -926,9 +921,9 @@ msgstr ""
 
 #: data/alignment/sllibertario.ali:2
 msgid ""
-"   Libertarian Free-Software Adepts usually are creatures that  believe in "
-"the free circulation of knowledge, without any intervention, be of "
-"governments, be of private groups or individuals. Usually they are adepts of "
+"   Libertarian Free-Software Adepts usually are creatures that believe in "
+"the free circulation of knowledge, without any intervention, be it of "
+"governments, private groups or individuals. Usually they are adepts of "
 "public-domain software."
 msgstr ""
 
@@ -948,7 +943,7 @@ msgstr ""
 
 #: data/alignment/spcaotico.ali:2
 msgid ""
-"   The wealth sometimes interest them, sometimes not, also uncle Portoe$, "
+"   Wealth and uncle Portoe$ sometimes interests them, sometimes not, "
 "although they consider all Free-Software Adepts as crazy guys."
 msgstr ""
 
@@ -960,7 +955,7 @@ msgstr ""
 msgid ""
 "   Functional Neutral creatures don't have a solid position on software "
 "licenses. They are adepts of software that works correctly (and this concept "
-"is a lot vague)."
+"is very vague)."
 msgstr ""
 
 #: data/alignment/spcapitalista.ali:1
@@ -980,8 +975,8 @@ msgstr "Logiciel Libre Chaotique"
 
 #: data/alignment/slcaotico.ali:2
 msgid ""
-"   Chaotic Free-Software adepts are more permissive to the software license, "
-"since it is without charge and let full access to the source code."
+"   Chaotic Free-Software adepts are more permissive about software license, "
+"since it is without charge and allows full access to the source code."
 msgstr ""
 
 #: data/alignment/spneutro.ali:1
@@ -991,7 +986,7 @@ msgstr ""
 #: data/alignment/spneutro.ali:2
 msgid ""
 "   Neutral Proprietary Software Adepts want to make money with their "
-"programs, but distrust of the absence of security of their Ruindow$."
+"programs, but distrust the absence of security of their Ruindow$."
 msgstr ""
 
 #: data/alignment/slcentrista.ali:1
@@ -1000,9 +995,9 @@ msgstr ""
 
 #: data/alignment/slcentrista.ali:2
 msgid ""
-"   Center Free-Software Adepts also believes in the free knowledge "
-"circulation, but, for them, that circulation doesn't be as free as in public "
-"domain, but restrict to be free for all since continue free. Usually they "
+"   Center Free-Software Adepts also believe in the free circulation of "
+"knowledge. But not so free as the Public Domain, here, the liberty is "
+"restricted to be free since kept as free as it originally was. Usually they "
 "are only adepts of GPL licences."
 msgstr ""
 
@@ -1018,18 +1013,19 @@ msgstr ""
 
 #: data/classes/administration.cls:3
 msgid ""
-"Also knowledged as Taylor's little boys Administration Students are "
-"frequently found  in self-help shelves of commercial bookstores. They enter "
-"in this course  since they not really know what want to their lifes (exacts "
-"science, human science, group  dynamics?) and, although in the most of the "
-"cases don't possess NOTHING to administer, they think, vehemently, that are "
-"doing the helpful and certain thing to their lives."
+"Also known as Taylor's little boys, Administration Students are frequently "
+"found in front of self-help shelves in commercial bookstores. They have "
+"chosen their course of studies because they do not really know what they "
+"want to do with their lives (exact sciences, human sciences, group "
+"dynamics?) and, although in most cases they have NOTHING to administer, they "
+"firmly believe that what they are doing is useful to others and to "
+"themselves."
 msgstr ""
 
 #: data/classes/administration.cls:7
 msgid ""
-"Administration Students, definitively, aren't knowledge by their intelectual "
-"attributes. (Am I wrong Elis Regina?). So, they receive -2 of Intelligence."
+"Administration students are very definitely not known for their intellectual "
+"capacities. (Am I wrong, Elis Regina?). So, they receive -2 of Intelligence."
 msgstr ""
 "Les Etudiants en Administration ne sont définitivement pas intelligents de "
 "par leur capacités intellectuelles. (Ai-je tord Elis Regina?). Ils reçoivent "
@@ -2765,95 +2761,95 @@ msgstr ""
 msgid "Its all yours..."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:141
+#: data/dialogs/tutorial/logan.dlg:142
 msgid "Its yours, but I want some money!"
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:153
+#: data/dialogs/tutorial/logan.dlg:155
 msgid ""
 "Money, money! All you want is money!! But... it's Chrono... take these "
 "coins..."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:157
+#: data/dialogs/tutorial/logan.dlg:159
 msgid "Thanks."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:166
+#: data/dialogs/tutorial/logan.dlg:169
 msgid ""
 "I want another thing from you. Some dangerous living creatures are infesting "
 "the subterrain areas of the bunker school. Please, exterminate them all."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:170
+#: data/dialogs/tutorial/logan.dlg:173
 msgid "Let's see what I can do."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:176
+#: data/dialogs/tutorial/logan.dlg:180
 msgid ""
 "Hey, have you heard about the Vermin Extermination Services of S.C.O.U.R.G."
 "E ?"
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:188
+#: data/dialogs/tutorial/logan.dlg:193
 msgid "Chrono... Chrono... Chrono!"
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:192
+#: data/dialogs/tutorial/logan.dlg:197
 msgid "Bye!"
 msgstr "AU revoir !"
 
-#: data/dialogs/tutorial/logan.dlg:201
+#: data/dialogs/tutorial/logan.dlg:206
 msgid "That dammed Lavos! So, we must forget about Chrono..."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:205
+#: data/dialogs/tutorial/logan.dlg:210
 msgid "Yes, let's forget about him..."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:215
+#: data/dialogs/tutorial/logan.dlg:220
 msgid ""
 "No, you are wrong. Chrono is lost somewhere in the Bunker School. Go take a "
 "look..."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:219 data/dialogs/tutorial/logan.dlg:234
+#: data/dialogs/tutorial/logan.dlg:224 data/dialogs/tutorial/logan.dlg:239
 msgid "Ok, I'll look for it."
 msgstr "Bien, je vais le rechercher..."
 
-#: data/dialogs/tutorial/logan.dlg:230
+#: data/dialogs/tutorial/logan.dlg:235
 msgid ""
 "Ahm, last time I saw him was in the Bunker School, when I was riping it to "
 "play online with zsnes."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:245
+#: data/dialogs/tutorial/logan.dlg:250
 msgid "About the extermination, have you done it?"
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:249
+#: data/dialogs/tutorial/logan.dlg:254
 msgid "Not yet."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:253
+#: data/dialogs/tutorial/logan.dlg:258
 msgid "Yes, there's no living thing there..."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:264
+#: data/dialogs/tutorial/logan.dlg:269
 msgid "The Heroes of Lesser Renown? That's true, I'll call them."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:268
+#: data/dialogs/tutorial/logan.dlg:273
 msgid "Great."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:277
+#: data/dialogs/tutorial/logan.dlg:282
 msgid ""
 "I haven't any more things for you at this DNT version. Come back at a latter "
 "version or join DNTeam to help us develop it!"
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:281
+#: data/dialogs/tutorial/logan.dlg:286
 msgid "Bye."
 msgstr "Au revoir."
 
@@ -3109,6 +3105,16 @@ msgstr "Léger"
 #: data/weapons/types/weights.dcl:4
 msgid "Heavy"
 msgstr "Lourd"
+
+#~ msgid "Loading Character"
+#~ msgstr "Chargement du Caractère"
+
+#~ msgid ""
+#~ "On this doomed world, tells the tales spoken mouth by mouth by the risen "
+#~ "journalists,"
+#~ msgstr ""
+#~ "Dans ce monde apocalyptique, racontent les contes rapportés de bouche à "
+#~ "oreille par les journalistes,"
 
 #~ msgid "Ouch, can't load NPC's file: %s.\n"
 #~ msgstr "Impossible de charger le fichier PNJ : %s\n"
