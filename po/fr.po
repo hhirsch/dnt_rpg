@@ -1908,6 +1908,8 @@ msgid ""
 "Boys have Driver as class skill, since they are distinguished offenders of "
 "traffic laws."
 msgstr ""
+"Chauffeur est la compétence de la classe des garçons, puisqu'ils "
+"contreviennent au Code de la route, et ce de façon très distinguée."
 
 #: data/races/gotico.rca:1
 msgid "Gothic"
@@ -3108,11 +3110,11 @@ msgstr "Melée"
 
 #: data/weapons/types/ranges.dcl:3
 msgid "Ranged"
-msgstr ""
+msgstr "À distance"
 
 #: data/weapons/types/sizes.dcl:2
 msgid "Tiny"
-msgstr ""
+msgstr "Minuscule"
 
 #: data/weapons/types/sizes.dcl:4
 msgid "Large"
@@ -3125,19 +3127,3 @@ msgstr "Léger"
 #: data/weapons/types/weights.dcl:4
 msgid "Heavy"
 msgstr "Lourd"
-
-#~ msgid "Loading Character"
-#~ msgstr "Chargement du Caractère"
-
-#~ msgid ""
-#~ "On this doomed world, tells the tales spoken mouth by mouth by the risen "
-#~ "journalists,"
-#~ msgstr ""
-#~ "Dans ce monde apocalyptique, racontent les contes rapportés de bouche à "
-#~ "oreille par les journalistes,"
-
-#~ msgid "Oxi! Can't ajust video mode: %s!\n"
-#~ msgstr "Impossible d'ajuster le mode vidéo: %s !\n"
-
-#~ msgid "Use our foruns at dnt.dnteam.org to contact us!"
-#~ msgstr "Utilisez notre forum dnt.dnteam.org pour nous contacter !"
