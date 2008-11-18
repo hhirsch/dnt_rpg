@@ -63,6 +63,20 @@
        inkscape:vp_y="0 : 1000 : 0"
        inkscape:vp_x="0 : 526.18109 : 1"
        sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2506"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2556"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -71,16 +85,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="429.29582"
-     inkscape:cy="833.67036"
+     inkscape:zoom="0.35"
+     inkscape:cx="1235.2774"
+     inkscape:cy="710.62901"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1360"
      inkscape:window-height="847"
-     inkscape:window-x="2"
-     inkscape:window-y="2" />
+     inkscape:window-x="16"
+     inkscape:window-y="5" />
   <metadata
      id="metadata4010">
     <rdf:RDF>
@@ -178,6 +192,14 @@
        inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/intro/page3.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
+    <image
+       y="392.14789"
+       x="15.000008"
+       id="image2558"
+       height="651.85712"
+       width="715.71429"
+       sodipodi:absref="/programacao/dccnitghtmare/data/comics/intro/forno.png"
+       xlink:href="forno.png" />
     <image
        y="393.31128"
        x="13.710747"

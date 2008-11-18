@@ -109,7 +109,7 @@ vertex = 367,376
 vertex = 735,376
 vertex = 735,7
 effect = 1
-textbox = 382,329,711,368
+textbox = 384,330,711,368
 text = gettext("the first man who came and proclaimed his right to graduate")
 
 # Third and Last Box
@@ -121,7 +121,7 @@ vertex = 735,390
 effect = 1
 textbox = 70,420,155,460
 text = gettext("was Logan.")
-textbox = 408,996,718,1022
+textbox = 408,998,718,1024
 text = gettext("And that's how the tale began...")
 
 #
