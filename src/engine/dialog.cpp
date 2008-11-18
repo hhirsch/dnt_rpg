@@ -920,7 +920,7 @@ void conversation::removeDialog(int num)
    }
    if(dlg == first)
    {
-      printf(gettext("Not found on dialog: %d\n"),num);
+      printf(gettext("Not found in dialog: %d\n"),num);
    }
    else
    {

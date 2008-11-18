@@ -12,7 +12,7 @@ vertex = 741,339
 vertex = 741,10
 effect = 1 
 textbox = 22,22,314,70
-text = gettext("Once Upon a time, there's a happy university called UFMG...")
+text = gettext("Once Upon a time, there was a happy university called UFMG...")
 
 # Second Box
 box = "Second Box"
@@ -32,7 +32,7 @@ vertex = 739,588
 vertex = 739,341
 effect = 1
 textbox = 362,510,652,573
-text = gettext("(except the medicine students, who had the habit of sacrifice one rookie per year)")
+text = gettext("(except the medical students who had the habit of sacrificing one rookie per year)")
 
 # Forth Box
 box = "Forth Box"
@@ -44,7 +44,7 @@ effect = 1
 textbox = 22,603,238,624
 text = gettext("When something happened...")
 textbox = 312,1002,721,1022
-text = gettext("a big explosion, with unknow causes.")
+text = gettext("a big explosion, with unknown causes.")
 
 # Second Page
 page = "Second Page"
@@ -58,7 +58,7 @@ vertex = 431,307
 vertex = 431,6
 effect = 1
 textbox = 19,19,282,74
-text = gettext("It made the happy and peacefull city called Belo Horizonte be know as Horrivel Horizonte.")
+text = gettext("It made the happy and peacefull city called Belo Horizonte be known as Horrivel Horizonte.")
 
 # Second Box
 box = "Second Box"
@@ -82,11 +82,11 @@ vertex = 734,1044
 vertex = 734,310
 effect = 1
 textbox = 13,319,377,353
-text = gettext("In this chaotic scene, emerged the main race that would dominate the land:")
+text = gettext("From this chaotic scene, emerged the main race that would dominate the land:")
 textbox = 75,370,214,426 
 text = gettext("UNIVERSITY STUDENTS!")
 textbox = 482,949,721,1029
-text = gettext("who desired, at all costs, obtain their legendary levels of knowledge.")
+text = gettext("who desired to, at all costs, obtain their legendary levels of knowledge.")
 
 # Third Page
 page = "Third Page"
@@ -100,7 +100,7 @@ vertex = 358,376
 vertex = 358,7
 effect = 1
 textbox = 22,19,342,69
-text = gettext("On this doomed world, tells the tales spoken mouth by mouth by the risen journalists,")
+text = gettext("On this doomed world, thanks to the risen journalists, tales were told and spread by word of mouth, saying that")
 
 # Second Box
 box = "Second Box"
@@ -110,7 +110,7 @@ vertex = 735,376
 vertex = 735,7
 effect = 1
 textbox = 382,329,711,368
-text = gettext("the first man who walked and claimed for his right of a graduation")
+text = gettext("the first man who came and proclaimed his right to graduate")
 
 # Third and Last Box
 box = "Phew, this is the last box"

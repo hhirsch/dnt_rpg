@@ -1,10 +1,10 @@
 gettext("Administration Student")
 gettext("'Steel with steel is bad...'|(Zamboy, future Administration Student)")
-gettext("Also knowledged as Taylor's little boys Administration Students are frequently found  in self-help shelves of commercial bookstores. They enter in this course  since they not really know what want to their lifes (exacts science, human science, group  dynamics?) and, although in the most of the cases don't possess NOTHING to administer, they think, vehemently, that are doing the helpful and certain thing to their lives.")
+gettext("Also known as Taylor's little boys, Administration Students are frequently found in front of self-help shelves in commercial bookstores. They have chosen their course of studies because they do not really know what they want to do with their lives (exact sciences, human sciences, group dynamics?) and, although in most cases they have NOTHING to administer, they firmly believe that what they are doing is useful to others and to themselves.")
 d4
 6
 -2 ATTRIBUTE INTELLIGENCE ALL ALL
-gettext("Administration Students, definitively, aren't knowledge by their intelectual attributes. (Am I wrong Elis Regina?). So, they receive -2 of Intelligence.")
+gettext("Administration students are very definitely not known for their intellectual capacities. (Am I wrong, Elis Regina?). So, they receive -2 of Intelligence.")
 -4 ATTRIBUTE CHARISM ALL ALL
 gettext("It's a really dumb ass to find some of them in group. -4 of Charism.")
 2 ATTRIBUTE CONSTITUTION ALL ALL
