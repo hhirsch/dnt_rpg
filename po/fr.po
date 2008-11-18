@@ -8,24 +8,24 @@ msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
 "POT-Creation-Date: 2008-11-18 12:34-0200\n"
-"PO-Revision-Date: 2008-09-10 12:15+0000\n"
-"Last-Translator: Anthony Guéchoum <Unknown>\n"
+"PO-Revision-Date: 2008-11-18 15:07+0000\n"
+"Last-Translator: Elizabeth <Unknown>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-10-14 09:44+0000\n"
+"X-Launchpad-Export-Date: 2008-11-18 15:41+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: src/classes/actions.cpp:108
 #, c-format
 msgid "%s try to attack %s"
-msgstr ""
+msgstr "%s essaie d'attaquer %s"
 
 #: src/classes/actions.cpp:113
 #, c-format
 msgid "%s try to heal %s"
-msgstr ""
+msgstr "%s essaie de soigner %s"
 
 #: src/classes/actions.cpp:123
 msgid "Too far away for action!"
@@ -37,12 +37,12 @@ msgstr "Loupé."
 
 #: src/classes/actions.cpp:208 src/classes/actions.cpp:212
 msgid "Critical Miss!"
-msgstr "Loupé critique !"
+msgstr "Echec Critique !"
 
 #: src/classes/actions.cpp:241
 #, c-format
 msgid "Healed %d points."
-msgstr "Soigné %d points."
+msgstr "%d points soignés."
 
 #: src/classes/actions.cpp:245
 #, c-format
@@ -63,7 +63,7 @@ msgstr "Déplacement non valide"
 
 #: src/classes/feats.cpp:145
 msgid "Not enought points to use!"
-msgstr "Pas assez de points pour utiliser !"
+msgstr "Vous ne pouvez pas utiliser vos points - il n'y en a pas assez !"
 
 #: src/classes/mission.cpp:198 src/engine/dialog.cpp:1077
 #, c-format
@@ -205,11 +205,11 @@ msgstr "Retirer"
 
 #: src/engine/briefing.cpp:33
 msgid "Briefing"
-msgstr ""
+msgstr "Objectifs"
 
 #: src/engine/briefing.cpp:35
 msgid "Welcome to DNT!"
-msgstr ""
+msgstr "Bienvenue sur DNT !"
 
 #: src/engine/charwindow.cpp:96
 msgid "Female"
@@ -253,11 +253,11 @@ msgstr "Courage"
 
 #: src/engine/charwindow.cpp:189
 msgid "Reflex"
-msgstr "réflexe"
+msgstr "Réflexe"
 
 #: src/engine/charwindow.cpp:193
 msgid "I am Not a Fool"
-msgstr "Je ne suis pas un idiot"
+msgstr "Je ne suis Pas un idiot"
 
 #: src/engine/charwindow.cpp:197
 msgid "Base Attack Modifier"
@@ -338,7 +338,7 @@ msgstr "Moficateur de classe"
 
 #: src/engine/classwindow.cpp:207 src/engine/racewindow.cpp:147
 msgid "No Modifiers."
-msgstr "Pas de modificateur."
+msgstr "Pas de changeurs"
 
 #: src/engine/classwindow.cpp:214
 msgid "Class Feats"
@@ -440,7 +440,7 @@ msgstr "%s attaque %s"
 
 #: src/engine/dccnit.cpp:2111
 msgid "No more actions. Turn ended."
-msgstr ""
+msgstr "Pas d'action supplémentaires. Fin du tour."
 
 #: src/engine/dccnit.cpp:3493
 msgid "Exit Battle Mode"
@@ -448,11 +448,11 @@ msgstr "Quitter le Mode Combat"
 
 #: src/engine/dialog.cpp:251
 msgid "Success"
-msgstr ""
+msgstr "Réussite"
 
 #: src/engine/dialog.cpp:251
 msgid "Failure"
-msgstr ""
+msgstr "Échec"
 
 #: src/engine/dialog.cpp:923
 #, c-format
@@ -531,7 +531,7 @@ msgstr "Poids : %.2f Kg"
 
 #: src/engine/itemwindow.cpp:83
 msgid "Heal Factor: "
-msgstr ""
+msgstr "Facteur de guérison : "
 
 #: src/engine/itemwindow.cpp:93
 msgid "Aditional Factor: "
@@ -567,7 +567,7 @@ msgstr "Valider"
 
 #: src/engine/minimapwindow.cpp:37
 msgid "Map"
-msgstr ""
+msgstr "Carte"
 
 #: src/engine/options.cpp:23
 msgid "Portuguese"
@@ -591,7 +591,7 @@ msgstr "Espagnol"
 
 #: src/engine/options.cpp:28
 msgid "Italian"
-msgstr ""
+msgstr "Italien"
 
 #: src/engine/options.cpp:29
 msgid "Russian"
@@ -632,7 +632,7 @@ msgstr "4x"
 
 #: src/engine/options.cpp:570
 msgid "Audio"
-msgstr ""
+msgstr "Audio"
 
 #: src/engine/options.cpp:574
 msgid "Music Volume:"
@@ -644,11 +644,11 @@ msgstr "Volume des effets :"
 
 #: src/engine/options.cpp:608
 msgid "Video"
-msgstr ""
+msgstr "Vidéo"
 
 #: src/engine/options.cpp:616
 msgid "Screen Resolution:"
-msgstr ""
+msgstr "Résolution d'écran :"
 
 #: src/engine/options.cpp:631
 msgid "Enable FullScreen"
@@ -720,11 +720,11 @@ msgstr "Aptitudes de la race"
 
 #: src/engine/shortcutswindow.cpp:30
 msgid "Shortcuts"
-msgstr ""
+msgstr "Raccourcis"
 
 #: src/engine/shortcutswindow.cpp:41
 msgid "Menu"
-msgstr ""
+msgstr "Menu"
 
 #: src/engine/shortcutswindow.cpp:121
 msgid "Particles"
@@ -736,7 +736,7 @@ msgstr ""
 
 #: src/engine/shortcutswindow.cpp:172
 msgid "Enter Battle Mode"
-msgstr ""
+msgstr "Entrer en Mode Bataille"
 
 #: src/engine/shortcutswindow.cpp:176
 msgid "Select Normal Attack"
@@ -744,35 +744,35 @@ msgstr ""
 
 #: src/engine/shortcutswindow.cpp:182
 msgid "Open Quests Window"
-msgstr ""
+msgstr "Ouvrir la fenêtre des Quètes"
 
 #: src/engine/shortcutswindow.cpp:187
 msgid "Open Map Window"
-msgstr ""
+msgstr "Ouvrir la fenêtre de la Carte"
 
 #: src/engine/shortcutswindow.cpp:194
 msgid "End Character's Turn"
-msgstr ""
+msgstr "Fin de tour du personnage"
 
 #: src/engine/shortcutswindow.cpp:198
 msgid "Only Available in Battle Mode"
-msgstr ""
+msgstr "Disponible uniquement en mode combat."
 
 #: src/engine/shortcutswindow.cpp:204
 msgid "Open Inventory Window"
-msgstr ""
+msgstr "Ouvrir la fenêtre d'inventaire"
 
 #: src/engine/shortcutswindow.cpp:209
 msgid "Open Assign Attacks Window"
-msgstr ""
+msgstr "Ouvrir la fenêtre des Postes d'attaque"
 
 #: src/engine/shortcutswindow.cpp:214
 msgid "View Character Informations"
-msgstr ""
+msgstr "Voir les informations du personnage"
 
 #: src/engine/shortcutswindow.cpp:219
 msgid "Open Group/Party Window"
-msgstr ""
+msgstr "Ouvrir la fenêtre du Groupe"
 
 #: src/engine/skillwindow.cpp:69
 msgid "Total Free Points:"
@@ -811,7 +811,7 @@ msgstr "Ereur : pas de caractères !"
 #: src/fight/fightSystem.cpp:313 src/fight/fightSystem.cpp:319
 #, c-format
 msgid "%s's turn."
-msgstr ""
+msgstr "Tour de %s."
 
 #: src/fight/initiative.cpp:40
 #, c-format
@@ -824,7 +824,7 @@ msgstr "Agrandir"
 
 #: data/comics/intro/intro.dcb:15
 msgid "Once Upon a time, there was a happy university called UFMG..."
-msgstr ""
+msgstr "Il était une fois une joyeuse université appelée UFMG..."
 
 #: data/comics/intro/intro.dcb:25
 msgid "People there used to live peacefull lives"
@@ -891,8 +891,7 @@ msgstr ""
 
 #: data/comics/intro/intro.dcb:113
 msgid "the first man who came and proclaimed his right to graduate"
-msgstr ""
-"le premier homme qui marcha et clama ses droits à une remise de diplôme"
+msgstr "le premier homme qui vint et proclama son droit à un diplôme"
 
 #: data/comics/intro/intro.dcb:123
 msgid "was Logan."
@@ -911,9 +910,6 @@ msgid ""
 "   Chaotic Neutral creatures sometimes are free software adepts, sometimes "
 "proprietary software adepts, depending on their daily humor."
 msgstr ""
-"   Les créatures Chaotique Neutre sont parfois des adeptes du logiciel "
-"gratuit, parfois des adeptes du logiciel propriétaire. Tout dépend de leur "
-"humeur du jour."
 
 #: data/alignment/sllibertario.ali:1
 msgid "Libertarian Free-Software"
@@ -946,6 +942,9 @@ msgid ""
 "   Wealth and uncle Portoe$ sometimes interests them, sometimes not, "
 "although they consider all Free-Software Adepts as crazy guys."
 msgstr ""
+"   Parfois, les richesses les intéressent, parfois, non, tout comme l'oncle "
+"Portoe$, bien qu'ils pensent que tous les Adeptes des logiciels libres et "
+"gratuits sont des fous furieux."
 
 #: data/alignment/neutrofuncional.ali:1
 msgid "Functional Neutral"
@@ -960,7 +959,7 @@ msgstr ""
 
 #: data/alignment/spcapitalista.ali:1
 msgid "Capitalist Proprietary-Software"
-msgstr ""
+msgstr "Logiciels propriétaires capitalistes"
 
 #: data/alignment/spcapitalista.ali:2
 msgid ""
@@ -978,6 +977,9 @@ msgid ""
 "   Chaotic Free-Software adepts are more permissive about software license, "
 "since it is without charge and allows full access to the source code."
 msgstr ""
+"   Les Adeptes des logiciels libres chaotiques  sont plus cools en ce qui "
+"concerne la licence des logiciels, puisqu'il n'y a pas de frais et qu'ils "
+"peuvent avoir libre accès au code source."
 
 #: data/alignment/spneutro.ali:1
 msgid "Neutral Proprietary-Software"
@@ -1046,12 +1048,17 @@ msgid ""
 "Since they are Taylor's fiel disciples, they receive +4 of Taylor's Vialty "
 "Skill"
 msgstr ""
+"Etant de fidèles disciples de Taylor, ils reçoivent +4 en Aptitudes Vitales "
+"de Taylor."
 
 #: data/classes/administration.cls:15
 msgid ""
 "In their dogmatic cult to Taylor they found bizarre things (with maximun "
 "financial efficiency) to be their 'clothes', receiving +4 of Bizarre Clothes."
 msgstr ""
+"Dans le culte dogmatique qu'ils vouent à Taylor, ils trouvèrent des choses "
+"bizarres (ayant une maximum d'efficacité dans le domaine de la finance) qui "
+"leur servent de \"vêtements\". Ainsi, ils reçoivent +4 en Vêtements bizarres."
 
 #: data/classes/administration.cls:17
 msgid ""
@@ -1073,6 +1080,9 @@ msgid ""
 "I've made in Medicine.'|(Mattar, Medician Student answering the provocation "
 "of Wanucia, Physiotherapy Student)"
 msgstr ""
+"\"Si j'ai essayé la Physiothérapie là, je devrais être reçu premier, grâce "
+"aux points faits en Médecine.\"|(Mattar, étudiant en Médecine, répondant à "
+"la provocation de Wanucia, étudiant en Physiothérapie)"
 
 #: data/classes/medician.cls:3
 msgid ""
@@ -1089,22 +1099,25 @@ msgid ""
 "Although being theory creatures, they usually spent their money in physical "
 "academies, receiving +1 of Strength."
 msgstr ""
+"Malgré le fait qu'ils soient des créatures théoriques, ils dépensent "
+"généralement leur argent dans des académies sportives, et reçoivent +1 en "
+"Force."
 
 #: data/classes/medician.cls:9
 msgid ""
 "By the dedication to the studies, the Medicine Student receive +2 of "
 "Intelligence."
 msgstr ""
-"Par le dévouement pour leurs études, les élèves en médecine reçoivent +2 en "
-"intelligence."
+"Par suite de leur dévouement à leurs études, les étudiants en Médecine "
+"reçoivent +2 en Intelligence."
 
 #: data/classes/medician.cls:11
 msgid ""
 "Since their attention is only for the books, these creatures haven't any "
 "cleverness, receiving -4 of Wisdom."
 msgstr ""
-"Comme leur attention n'est dirigée que sur les livres, ces créatures n'ont "
-"aucune vivacité d'esprit, recevant -4 en Sagesse."
+"Comme ils se concentrent entièrement sur les livres, ces créatures ne sont "
+"point ingénieuses, et reçoivent ainsi -4 en Sagesse."
 
 #: data/classes/medician.cls:13
 msgid ""
@@ -1156,6 +1169,8 @@ msgid ""
 "+2 of Dexterity, since they always observe and follow in distinct terrains "
 "the ameivas (and by also open its body, counting how many worms it has)."
 msgstr ""
+"+2 en Dextérité, à force d'observer et à suivre les améives (et à ouvrir "
+"leurs corps pour compter les vers) en premanence sur divers terrains."
 
 #: data/classes/biology.cls:9
 msgid ""
@@ -1214,6 +1229,8 @@ msgid ""
 "-4 of Strength by the fact that their muscles atrophy since aren't used more "
 "than the much needed to play their instrument."
 msgstr ""
+"-4 en Force à cause de leur muscles, atrophiés à force de ne pas être "
+"utilisés plus que le nécessaire pour jouer de leur instrument."
 
 #: data/classes/music.cls:9
 msgid "-1 of Constitution for the hours spent in a closed ambient, playing."
@@ -1245,9 +1262,9 @@ msgid ""
 "have incredible capacity to play their bizarre instrument, receiving +8 of "
 "bonus when playing it."
 msgstr ""
-"A cause du travail intensif et difficile depuis qu'ils sont enfants, les "
-"Etudiants en Musique ont la capacité incroyable de pouvoir jouer de leurs "
-"étranges instruments, recevant +8 de bonus lorsqu'ils en jouent."
+"Depuis leur enfance, les étudiants en Musique ont travaillé dur et de façon "
+"intensive. Ils ont ainsi acquis la capacité de jouer de leurs étranges "
+"instruments et reçoivent +8 de bonus lorsqu'ils en jouent."
 
 #: data/classes/music.cls:19
 msgid ""
@@ -1279,7 +1296,6 @@ msgstr ""
 #: data/classes/compsci.cls:7
 msgid "Since they have to be self-teachers, they receive +2 of Wisdom."
 msgstr ""
-"Comme ils doivent apprendre en autodidacte, ils reçoivent +2 en Sagesse."
 
 #: data/classes/compsci.cls:9
 msgid ""
@@ -1414,7 +1430,7 @@ msgid ""
 "intelligence."
 msgstr ""
 "Les étudiants en journalisme ont un besoin de 'tout savoir', ce qui augmente "
-"de 2 leurs intelligence."
+"de 2 leur intelligence."
 
 #: data/classes/journalism.cls:11
 msgid ""
@@ -1451,15 +1467,15 @@ msgstr ""
 
 #: data/classes/physicaled.cls:1
 msgid "Physical Education Student"
-msgstr "étudiant en éducation physique"
+msgstr "Eudiant en éducation physique"
 
 #: data/classes/physicaled.cls:2
 msgid ""
 "'No! The swimming class is too complex!'|(Typical Physical Education Student "
 "thought)"
 msgstr ""
-"'Non! le cours de natation est trop complexe!'(réflèxion typique d'un élève "
-"en éducation physique)"
+"'Non! le cours de natation est trop complexe!'|(Pensée typique d'un étudiant "
+"en Education physique)"
 
 #: data/classes/physicaled.cls:3
 msgid ""
@@ -1483,7 +1499,7 @@ msgstr ""
 #: data/classes/physicaled.cls:7
 msgid "Receive +3 of Strength, due to the lot of hours kicking a ball."
 msgstr ""
-"Ils reçoivent +3 en Force, dûs à toutes les heures passer à frapper une "
+"Ils reçoivent +3 en Force, grâce à toutes les heures passées à frapper une "
 "balle."
 
 #: data/classes/physicaled.cls:9
@@ -1497,10 +1513,11 @@ msgstr "+4 en Constitution pour les heures passées à courir en rond."
 #: data/classes/physicaled.cls:13
 msgid "-6 of Intelligence since they abandoned the books in a remote past."
 msgstr ""
+"-6 en Intelligence pour avoir abandonné les livres dans un passé lointain."
 
 #: data/classes/physicaled.cls:15
 msgid "-6 of Widow, by the same reason."
-msgstr "-6 en sagesse, pour les mêmes raisons."
+msgstr "-6 en Sagesse, pour les mêmes raisons."
 
 #: data/classes/physicaled.cls:17
 msgid ""
@@ -1510,7 +1527,7 @@ msgid ""
 msgstr ""
 "L'Etudiant en Education Physique reçoit +4 en Saut, Escalade, Natation, "
 "Football, Basketball, et finalement, dans tous les sports et toutes les "
-"activités qui émanent de la force physique..."
+"activités qui nécessitent de la force physique..."
 
 #: data/classes/physicaled.cls:19
 msgid ""
@@ -1527,12 +1544,12 @@ msgstr ""
 #: data/classes/physicaled.cls:23
 msgid "-2 of Listen, therefore their muscles take all ear's openings."
 msgstr ""
-"-2 en Ecoute, puisque leurs muscles prennent toutes les ouvertures de leurs "
-"oreilles."
+"-2 en Ecoute, puisque leurs muscles commandent toutes les ouvertures de "
+"leurs oreilles."
 
 #: data/classes/physicaled.cls:25
 msgid "The Student receives +1 of Natural Armor."
-msgstr "Les étudiants reçoivent +1 en Armure Naturelle."
+msgstr "L'étudiant reçoit +1 en Armure Naturelle."
 
 #: data/classes/physicaled.cls:27
 msgid ""
@@ -1550,8 +1567,8 @@ msgstr ""
 msgid ""
 "Receives -3 in Direction cause they usually get lost among their own muscles."
 msgstr ""
-"Ils reçoivent -3 en Direction car ils se perdent généralement dans leurs "
-"propres muscles."
+"Il reçoit -3 en Direction car il se perd généralement dans ses propres "
+"muscles."
 
 #: data/classes/physicaled.cls:33
 msgid ""
@@ -1808,7 +1825,7 @@ msgstr ""
 
 #: data/races/autista.rca:1
 msgid "Strange Autistic"
-msgstr ""
+msgstr "L'autiste étrange"
 
 #: data/races/autista.rca:2
 msgid ""
@@ -1891,7 +1908,7 @@ msgstr ""
 
 #: data/races/gotico.rca:1
 msgid "Gothic"
-msgstr ""
+msgstr "Gothique"
 
 #: data/races/gotico.rca:2
 msgid "'I have a problem...'|(Creepy Susie)"
@@ -2815,7 +2832,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:224 data/dialogs/tutorial/logan.dlg:239
 msgid "Ok, I'll look for it."
-msgstr "Bien, je vais le rechercher..."
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:235
 msgid ""
@@ -2851,7 +2868,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:286
 msgid "Bye."
-msgstr "Au revoir."
+msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:6
 msgid "Wanna some milk, kid?"
@@ -3116,187 +3133,8 @@ msgstr "Lourd"
 #~ "Dans ce monde apocalyptique, racontent les contes rapportés de bouche à "
 #~ "oreille par les journalistes,"
 
-#~ msgid "Ouch, can't load NPC's file: %s.\n"
-#~ msgstr "Impossible de charger le fichier PNJ : %s\n"
-
-#~ msgid "Class Description"
-#~ msgstr "Description de la Classe"
-
-#~ msgid "Race Characteristcs"
-#~ msgstr "Caractéristique de la Race"
-
-#~ msgid "Error while opening skills list: %s\n"
-#~ msgstr "Erreur lors de l'ouverture de la liste des compétence : %s\n"
-
-#~ msgid "Can't open skill file: %s \n"
-#~ msgstr "Impossible d'ouvrir le fichier des compétences : %s \n"
-
-#~ msgid "Can't open the list with portraits: portraits.lst!\n"
-#~ msgstr "Impossible d'ouvrir la liste des portraits : portraits.lst !\n"
-
-#~ msgid "Can't Open the options file: %s\n"
-#~ msgstr "Impossible d'ouvrir le fichier des options: %s\n"
-
-#~ msgid "No Options File Avaible!\n"
-#~ msgstr "Aucun fichier d'options disponible!\n"
-
-#~ msgid "Creating Directory: %s : "
-#~ msgstr "Dossier de création : %s : "
-
-#~ msgid "Creating Options: %s\n"
-#~ msgstr "Options de création : %s\n"
-
-#~ msgid "Error while writing Options: %s\n"
-#~ msgstr "Erreur lors de l'écriture des options : %s\n"
-
-#~ msgid "Argh! Can't init SDL!\n"
-#~ msgstr "Impossible d'initialiser SDL !\n"
-
 #~ msgid "Oxi! Can't ajust video mode: %s!\n"
 #~ msgstr "Impossible d'ajuster le mode vidéo: %s !\n"
 
-#~ msgid "Can't open image: %s\n"
-#~ msgstr "Impossible d'ouvrir l'image: %s\n"
-
-#~ msgid "Oh, little student, what do you want?"
-#~ msgstr "Oh, petit étudiant, que veux-tu ?"
-
-#~ msgid "Why can't I win a battle against the Ente?"
-#~ msgstr "Pourquoi ne puis-je remporter de bataille contre l'Ente ?"
-
-#~ msgid "I am a brutal killing machine. Die!"
-#~ msgstr "Je suis une brutale machine à tuer. Meurs !"
-
-#~ msgid "What are you?"
-#~ msgstr "Qu'êtes-vous ?"
-
-#~ msgid "Nothing."
-#~ msgstr "Rien."
-
-#~ msgid "Mythological, like a D&D Dragon?"
-#~ msgstr "Mythologique ? Comme un Dragon de D&D ?"
-
-#~ msgid "And you, can I kill?"
-#~ msgstr "Et toi, je peux te tuer ?"
-
-#~ msgid ""
-#~ "I am an Ameiva. A very usefull little Ameiva. An wise and great Ameiva!"
-#~ msgstr ""
-#~ "Je suis une Améive. Une courante petite Améive. Une sage et grande Améive!"
-
-#~ msgid "Wise?  So, why can't I win a battle against the Ente?"
-#~ msgstr ""
-#~ "Sage? Alors, pourquoi ne puis-je gagner une bataille contre l'Ente ?"
-
-#~ msgid "Let's talk about something else."
-#~ msgstr "Parlons d'autre chose."
-
-#~ msgid ""
-#~ "Nothing? You click that ugly mouse cursor on me for nothing? I'll kill "
-#~ "you, humanoid!"
-#~ msgstr ""
-#~ "Rien ? Tu as pointé ce curseur de souris immonde sur moi pour rien ? Je "
-#~ "vais te tuer, humanoïde !"
-
-#~ msgid "Come on!"
-#~ msgstr "Allez!"
-
-#~ msgid "Please, no!"
-#~ msgstr "S'il vous plaît, non !"
-
-#~ msgid "Thank you DNTeam, for not modeled a Panda!"
-#~ msgstr "Merci DNTeam, de ne pas avoir modélisé de Panda!"
-
-#~ msgid "And I won't be killing you without them! Die little Ameiva!"
-#~ msgstr "Et je ne pourrais pas non plus te tuer ! Meurs petite Améive !"
-
-#~ msgid ""
-#~ "Yes, I can only be this fucking Model! I hope that on  next version the "
-#~ "DNTeam make other humanoid model!"
-#~ msgstr ""
-#~ "Oui, je ne peux être que ce putain de Modèle! J'espère que dans la "
-#~ "prochaine version, la DNTeam fera d'autres modèle humanoïdes!"
-
-#~ msgid "Yes, great Ameiva!"
-#~ msgstr "Oui, grande Améive!"
-
-#~ msgid "I've changed my mind. Die!"
-#~ msgstr "J'ai changé d'avis. Meurt!"
-
-#~ msgid "Ha, ha, ha. A weak animal! Die!"
-#~ msgstr "Ha, ha, ha. Un animal faible! Meurt!"
-
-#~ msgid "I'll go. (After kill you)..."
-#~ msgstr "Je vais y aller. (Après vous avoir tué)..."
-
-#~ msgid "Ok. Just calm down..."
-#~ msgstr "D'accord. Simplement, calmez-vous..."
-
-#~ msgid "Welcome to DccNiTghtmare!"
-#~ msgstr "Bienvenu dans DccNiTghtmare !"
-
-#~ msgid "What is DccNiTghtmare?"
-#~ msgstr "Qu'es DccNiTghtmare !"
-
-#~ msgid "I wanna help!"
-#~ msgstr "Je veux aider !"
-
-#~ msgid "What the hell! A tree talking?"
-#~ msgstr "Qu'est-ce que..? Un arbre qui parle ?"
-
-#~ msgid "Die!"
-#~ msgstr "Mort !"
-
-#~ msgid "I really wanna help!"
-#~ msgstr "Je veux vraiment aider !"
-
-#~ msgid "Die Fanatic!"
-#~ msgstr "Meur fanatique !"
-
-#~ msgid "So, bye!"
-#~ msgstr "Donc, au revoir !"
-
 #~ msgid "Use our foruns at dnt.dnteam.org to contact us!"
 #~ msgstr "Utilisez notre forum dnt.dnteam.org pour nous contacter !"
-
-#~ msgid "I forgot what is DccNiTghtmare!"
-#~ msgstr "J'ai oublié ce qu'est DccNiTghtmare !"
-
-#~ msgid "Goodbye!"
-#~ msgstr "Au revoir !"
-
-#~ msgid "Die Cursed Tree!"
-#~ msgstr "Meurs Arbre Maudit !"
-
-#~ msgid "Bye Tree!"
-#~ msgstr "Au revoir, l'Arbre !"
-
-#~ msgid "Bye Ente!"
-#~ msgstr "Au revoir, Ente !"
-
-#~ msgid "Unknow Attribute:"
-#~ msgstr "Attribut inconnu :"
-
-#~ msgid "Cannot open File!\n"
-#~ msgstr "Impossible d'ouvrir le fichier !\n"
-
-#~ msgid "Tried to define dialog before end last one!"
-#~ msgstr "Vous tentez de définir un dialogue avant de fini le précédent !"
-
-#~ msgid "Tried to end an undefined dialog!"
-#~ msgstr "Vous tentez de finir un dialague indéfini !"
-
-#~ msgid "Text without any relation!"
-#~ msgstr "Texte sans aucune relation !"
-
-#~ msgid "Action isn't yet defined to NPC!"
-#~ msgstr "Cette action n'est pas encore définie pour les PNJ !"
-
-#~ msgid "Action without any relation!\n"
-#~ msgstr "Action sans aucune relation !\n"
-
-#~ msgid "Unknow Token!"
-#~ msgstr "Marqueur inconnu !"
-
-#~ msgid "%s attacks %s|"
-#~ msgstr "%s attaque %s|"
