@@ -34,6 +34,7 @@ saveFile::saveFile()
    pcPos[0] = 0;
    pcPos[1] = 0;
    pcPos[2] = 0;
+   pcAngle = 0;
 }
 
 /***********************************************************************
@@ -120,6 +121,7 @@ bool saveFile::save(string saveTitle, string saveFile, void* curEngine)
    pcPos[0] = eng->PCs->getActiveCharacter()->xPosition;
    pcPos[1] = eng->PCs->getActiveCharacter()->yPosition;
    pcPos[2] = eng->PCs->getActiveCharacter()->zPosition;
+   pcAngle = eng->PCs->getActiveCharacter()->orientation;
 
    /* Save to the header file */
    
@@ -139,7 +141,8 @@ bool saveFile::save(string saveTitle, string saveFile, void* curEngine)
    file << DNT_SAVE_TOKEN_PC << " = " << pcFile << endl;
    file << DNT_SAVE_TOKEN_PC_POSITION << " = " << pcPos[0] << ","  
                                                << pcPos[1] << "," 
-                                               << pcPos[2] << endl;
+                                               << pcPos[2] << ":" 
+                                               << pcAngle << endl;
    
    /* Close the file */
    file.close();
@@ -178,7 +181,7 @@ bool saveFile::load(void* curEngine)
       /* Load the Playable character */
       if(!eng->loadPC(pcFile))
       {
-         cerr << "Can't load npc of save file!" << endl;
+         cerr << "Can't load pc of save file!" << endl;
          return(false);
       }
    }
@@ -193,6 +196,19 @@ bool saveFile::load(void* curEngine)
    {
       /* Load the map! */
       eng->loadMap(mapFile);
+
+      /* Set Character Position */
+      character* pc = eng->PCs->getActiveCharacter();      
+      if(pc)
+      {
+         pc->xPosition = pcPos[0];
+         pc->yPosition = pcPos[1];
+         pc->zPosition = pcPos[2];
+         Map* actualMap = eng->getCurrentMap();
+         int posX =(int)floor(pc->xPosition / actualMap->squareSize());
+         int posZ =(int)floor(pc->zPosition / actualMap->squareSize());
+         pc->ocSquare = actualMap->relativeSquare(posX,posZ);
+      }
    }
 
    if(!missionsFile.empty())
@@ -258,7 +274,8 @@ bool saveFile::loadHeader(string fileName)
          else if(key == DNT_SAVE_TOKEN_PC_POSITION)
          {
             /* Define the positions */
-            sscanf(value.c_str(), "%f,%f,%f", &pcPos[0], &pcPos[1], &pcPos[2]);
+            sscanf(value.c_str(), "%f,%f,%f %f", &pcPos[0], &pcPos[1], 
+                                                 &pcPos[2], &pcAngle);
          }
          else if(key == DNT_SAVE_TOKEN_MAP)
          {

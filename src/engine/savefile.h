@@ -62,6 +62,7 @@ class saveFile
       string missionsFile;   /**< The missions file */
       string pcFile;         /**< The PC file */
       float pcPos[3];        /**< The PC Position */
+      float pcAngle;         /**< The PC angle */
 
 
 };
