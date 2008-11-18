@@ -45,6 +45,7 @@ character::character(featsList* ft)
    portraitImage = NULL;
    conversationFile = "";
    conv = NULL;
+   cr = 0;
 
    inventories = new inventory;
 
@@ -642,7 +643,7 @@ bool character::save(string saveFile)
    /* Challenge Rating */
    if(cr != 0)
    {
-      file << "chalengeRating = " << cr << endl;
+      file << "challengeRating = " << cr << endl;
    }
    /* Life Points */
    file << "maxLifePoints = " << maxLifePoints << endl;
@@ -657,7 +658,7 @@ bool character::save(string saveFile)
    /* PsychoState */
    file << "psychoState = " << psychoState << endl;
    /* Walk Interval */
-   file << "walk_interval = " << displacement << endl;
+   file << "walk_interval = " << (walk_interval / WALK_UPDATE) << endl;
 
    /* Now, put all not 0 skills */
    for(i = 0; i < sk.getTotalSkills(); i++)
