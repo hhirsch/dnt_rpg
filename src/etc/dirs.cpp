@@ -53,6 +53,12 @@ void dirs::findDataDirectories()
  *********************************************************************/
 string dirs::getRealFile(string fileName)
 {
+   /* Don't change full path fileNames (those with "/" at init) */
+   if(fileName[0] == '/')
+   {
+      return(fileName);
+   }
+
    /* Only change if not already changed or if no dataPath */
    if((dataPath != "") && (fileName.find(dataPath,0) == string::npos))
    {
