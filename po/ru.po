@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-11-18 12:34-0200\n"
+"POT-Creation-Date: 2008-11-18 16:58-0200\n"
 "PO-Revision-Date: 2007-11-20 17:24+0000\n"
 "Last-Translator: Sergei Zivukov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -922,8 +922,8 @@ msgstr "Центральный нейтрал"
 
 #: data/alignment/neutrocentrista.ali:2
 msgid ""
-"   The thing  that are more on top of the wall in the DNT's universe. They "
-"have tendency to be favorable to what people near them are."
+"   They are the fence-sitters of the DNT universe, having tendency to be "
+"favorable to what people near them are."
 msgstr ""
 
 #: data/alignment/spcaotico.ali:1
@@ -985,8 +985,9 @@ msgstr ""
 #: data/alignment/slcentrista.ali:2
 msgid ""
 "   Center Free-Software Adepts also believe in the free circulation of "
-"knowledge. But not so free as the Public Domain, here, the liberty is "
-"restricted to be free since kept as free as it originally was. Usually they "
+"knowledge, but that freedom is actually only relative and not so free as in "
+"the Public Domain. Here the software is restricted to being free, or, in "
+"point of fact, just as free - or not - as it originally was. Usually they "
 "are only adepts of GPL licences."
 msgstr ""
 
