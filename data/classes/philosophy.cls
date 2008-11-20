@@ -16,7 +16,7 @@ gettext("Receive +4 of Bohemia, obviously.")
 -4 SKILL DEXTERITY ALL ALL
 gettext("Receive -4 of all Dexterity-related tests, for they are frequently drunk.")
 -4 SKILL OUT_OF_TIME ALL ALL
-gettext("Because he doesn't attend any (or very few) classes, the Philosophy Student receives -4 of Out of time.")
+gettext("Because he doesn't attend any (or very few) classes, the Philosophy Student receives -4 of Not Enough Time.")
 10
 1 DRUNK_FIGHT
 1 TURN_TURN_TURN

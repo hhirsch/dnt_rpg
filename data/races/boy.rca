@@ -1,13 +1,13 @@
 gettext("Boy / Paty")
 gettext("'Ah friend, I can't, 'cause I'll do some biceps exercises today'|(Tico Bombadinho)")
-gettext("Boys, and their female versions, Patys, are creatures endowed with a strange fondness to body academies. Always wanting to be slenders to go to jet set parties and rubbing with their oposite sex equivalents, they usually ignore their friends of distinct races. But, by more upper they consider theirselves, and despite they have a huge fondness, this race is always the aim of mockeries and jokes by other races.")
+gettext("Boys, and their female versions, Patys, are creatures endowed with a strange fondness for body academies. Always wanting to be thin, to go to jet-set parties and rubbing with their opposite sex equivalents, they usually ignore their friends of other races. But, the more upper-class they consider themselves, and although they have a great capacity for affection, this race is always the target of mockeries and jokes by other races.")
 3
 1 SKILL DIPLOMACY SEX OPOSITE
-gettext("Patys have +1 of Diplomacy since they always exhibit their bodies characteristics. For more horrendous that she was, she is able to 'magically' alter herself on few hours.")
+gettext("Patys have +1 of Diplomacy since they always exhibit the characteristics of their bodies. As terribly horrendous as she was, she is able to alter herself 'magically' in just a few hours.")
 2 SKILL DISGUISES ALL ALL
-gettext("By the aforesaid reasons, the Patys also receive + 2 of Disguises.")
+gettext("For the aforesaid reasons, the Patys also receive + 2 of Disguises.")
 1 ATTRIBUTE CONSTITUTION ALL ALL
-gettext("Boys and Patys receive +1 od Constitution due to the constant time they spend on body academies. If they no more go there, they'll lose this bonus and automatically become aim of jokes among others of their own race.")
+gettext("Boys and Patys receive +1 of Constitution due to the time they constantly spend at body academies. If they no longer go there, they'll lose this bonus and automatically become the butt of jokes among others of their own race.")
 0
 1
 CONDUCTION

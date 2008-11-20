@@ -10,7 +10,7 @@ gettext("-1 of Strength, cause their muscles atrophy after spending 12 hours mot
 6 SKILL DISGUISES CLASS HIPPIE
 gettext("Since they are commonly mistaken for hippies, Biology Students receive +6 of Disguises when disguised as hippies (and when not of this race)")
 -4 SKILL FREE_PASS ALL ALL
-gettext("For the same reason, -4 of free-pass.")
+gettext("For the same reason, -4 of Carte Blanche.")
 2 SKILL FURTIVE ALL ALL
 gettext("For the hard work observing ameivas, the Biology Student receives +2 of furtivity.")
 7

@@ -1,5 +1,5 @@
 gettext("Law Student")
-gettext("'- Are we going to the bar taking one?|- Yes, from whose?'|(Typical dialog between two law students)")
+gettext("You seem to have more than the average share of intelligence for a man of your background, sneered the lawyer at a witness on the stand.|If I wasn't under oath, I'd return the compliment, replied the witness.")
 gettext("Living on Campus disguised as penguins, Law Students are organisms that, when they perceive the minor possibility of making a profit of some situation they judge to be 'juridical', will use all their vocabulary, rhetorical tricks and sophisms to take advantage of it. It is always important to have a Law Student in your group (party), be it to avoid being taken advantage of by the knowledge (and political apparatus) of other Law Students, or to be able to take advantage of others, hence avoiding that looming punishment.")
 d6
 4
