@@ -102,6 +102,9 @@ void levelUp::doLevelUp(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
                   if(current->canClass(selClass))
                   {
                      /* Can, so, we must go to the skill window */
+                     int points = current->getOtherLevelSkillPoints(selClass);
+                     current->sk.setAvaiblePoints(points + 
+                                                current->sk.getAvaiblePoints());
                      skWindow = new skillWindow(skillsList, &current->sk,
                                                 gui, 
                                                 current->getLevel(selClass)+1);
@@ -140,6 +143,10 @@ void levelUp::doLevelUp(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
                }
                else if(res == SKILLW_CANCEL)
                {
+                  /* Must undo the previous class free skills points */
+                  int points = current->getOtherLevelSkillPoints(selClass);
+                  current->sk.setAvaiblePoints(current->sk.getAvaiblePoints() -
+                                               points);
                   /* Must go back to the class window */
                   delete(skWindow);
                   state = LEVEL_UP_CLASS_WINDOW;

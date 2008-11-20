@@ -85,14 +85,14 @@ class character: public aniModel
       void drawMainPortrait();
 
       /*! Get First Level Skill Points
-       * \param multiClassNumber -> number of the class in the multiclass
+       * \param cl -> pointer to the class
        * \return -> total points at first level */
-      int getFirstLevelSkillPoints(int multiClassNumber);
+      int getFirstLevelSkillPoints(classe* cl);
 
       /*! Get Other Levels Skill Points
-       * \param multiClassNumber -> number of the class in the multiclass
+       * \param cl -> pointer to the class
        * \return -> total points at first level */
-      int getOtherLevelSkillPoints(int multiClassNumber);
+      int getOtherLevelSkillPoints(classe* cl);
 
       /*! Define Character initial life points, based on its class */
       void defineInitialLifePoints();

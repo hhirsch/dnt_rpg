@@ -38,8 +38,9 @@ character::character(featsList* ft)
    {
 
       actualClass[i] = NULL;
-      classLevels[i] = 1;
+      classLevels[i] = 0;
    }
+   classLevels[0] = 1;
    actualRace = NULL;
    actualAlign = NULL;
    portraitImage = NULL;
@@ -343,35 +344,34 @@ void character::clearSkills()
 {
    sk.clear();
    applySkillCosts();
-   sk.setAvaiblePoints(getFirstLevelSkillPoints(0));
+   sk.setAvaiblePoints(getFirstLevelSkillPoints(actualClass[0]));
 }
 
 /******************************************************************
  *                   getFirstLevelSkillPoints                     *
  ******************************************************************/
-int character::getFirstLevelSkillPoints(int multiClassNumber)
+int character::getFirstLevelSkillPoints(classe* cl)
 {
    /* Verify if the class exists */
-   if( (multiClassNumber < 0) || (multiClassNumber >= MAX_DISTINCT_CLASSES) ||
-       (!actualClass[multiClassNumber]) )
+   if(!cl)
    {
       return(0);
    }
-   return(getPoints(actualClass[multiClassNumber]->firstLevelSP));
+
+   return(getPoints(cl->firstLevelSP));
 }
 
 /******************************************************************
  *                   getOtherLevelSkillPoints                     *
  ******************************************************************/
-int character::getOtherLevelSkillPoints(int multiClassNumber)
+int character::getOtherLevelSkillPoints(classe* cl)
 {
    /* Verify if the class exists */
-   if( (multiClassNumber < 0) || (multiClassNumber >= MAX_DISTINCT_CLASSES) ||
-       (!actualClass[multiClassNumber]) )
+   if(cl == NULL)
    {
       return(0);
    }
-   return(getPoints(actualClass[multiClassNumber]->otherLevelsSP));
+   return(getPoints(cl->otherLevelsSP));
 }
 
 /******************************************************************
