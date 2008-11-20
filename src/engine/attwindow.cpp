@@ -57,19 +57,19 @@ attWindow::attWindow(skills* sk, skills* savSkill, guiInterface* inter,
       sprintf(tmp,"%.2d ", points[i]); 
       saux += tmp;
    }
-   rolledPoints = intWindow->getObjectsList()->insertTextBox(8,19,320,32,0,
+   rolledPoints = intWindow->getObjectsList()->insertTextBox(8,19,243,32,0,
                                                              saux.c_str());
    rolledPoints->setFont(DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER);
    /* reroll button */
-   rerollButton = intWindow->getObjectsList()->insertButton(323,17,386,34,
-                                                  gettext("Roll"),0);
+   rerollButton = intWindow->getObjectsList()->insertButton(244,17,334,35,
+                                                  gettext("Roll"),1);
    /* clear button */
-   clearButton = intWindow->getObjectsList()->insertButton(387,17,451,34,
-                                                  gettext("Clear"),0);
+   clearButton = intWindow->getObjectsList()->insertButton(335,17,425,35,
+                                                  gettext("Clear"),1);
 
    /* auto button */
-   autoButton = intWindow->getObjectsList()->insertButton(452,17,516,34,
-                                                   gettext("Auto"),0);
+   autoButton = intWindow->getObjectsList()->insertButton(426,17,516,35,
+                                                   gettext("Auto"),1);
 
    /* Strenght */
    intWindow->getObjectsList()->insertTextBox(9,50,85,63,0,gettext("Strength"));
