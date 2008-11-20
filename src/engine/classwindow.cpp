@@ -17,9 +17,9 @@ static int cmpClassFunction(const void *p1,  const void *p2)
 /********************************************************************
  *                           Constructor                            *
  ********************************************************************/
-classWindow::classWindow(classes* cls, skills* sk, guiInterface* inter, 
-                         classe** retClass)
+classWindow::classWindow(skills* sk, guiInterface* inter, classe** retClass)
 {
+   classes cls;
    dntFont fnt;
    int centerY = SCREEN_Y / 2;
    int centerX = SCREEN_X / 2;
@@ -31,11 +31,11 @@ classWindow::classWindow(classes* cls, skills* sk, guiInterface* inter,
    curClass = -1;
 
    /* Alphabetical Order Races */
-   totalClasses = cls->getTotalClasses();
+   totalClasses = cls.getTotalClasses();
    classesOrder = new classe*[totalClasses];
    for(i = 0; i < totalClasses; i++)
    {
-      classesOrder[i] = cls->getClassByInteger(i);
+      classesOrder[i] = cls.getClassByInteger(i);
    }
    qsort(&classesOrder[0], totalClasses, sizeof(classe**), cmpClassFunction);
 

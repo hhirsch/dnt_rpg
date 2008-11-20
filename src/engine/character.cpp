@@ -150,6 +150,22 @@ int character::getLevel()
 }
 
 /*********************************************************************
+ *                             getLevel                              *
+ *********************************************************************/
+int character::getLevel(classe* cl)
+{
+   int i;
+   for(i = 0; i < MAX_DISTINCT_CLASSES; i++)
+   {
+      if(actualClass[i] != cl)
+      {
+         return(classLevels[i]);
+      }
+   }
+   return(0);
+}
+
+/*********************************************************************
  *                             isAlignOf                             *
  *********************************************************************/
 bool character::isAlignOf(string al)
@@ -583,6 +599,67 @@ void character::applySkillCosts()
       {
          actualClass[i]->applySkillCosts(&sk);
       }
+   }
+}
+
+/*********************************************************************
+ *                             canClass                              *
+ *********************************************************************/
+bool character::canClass(classe* cl)
+{
+   int i;
+   for(i=0; i < MAX_DISTINCT_CLASSES; i++)
+   {
+      /* If multiclass spaces empty or already have a level at this class,
+       * the character can get a level at it. */
+      if( (actualClass[i] == NULL) || (actualClass[i] == cl))
+      {
+         return(true);
+      }
+   }
+
+   return(false);
+}
+
+/*********************************************************************
+ *                          getNewClassLevel                         *
+ *********************************************************************/
+void character::getNewClassLevel(classe* cl)
+{
+   int i;
+
+   if( (canClass(cl)) && (upLevels > 0))
+   {
+      /* Got the level */
+      upLevels--;
+
+      /* Find the class space */
+      i = 0;
+      while( (i < MAX_DISTINCT_CLASSES) && 
+             (actualClass[i] != NULL) &&
+             (actualClass[i] != cl) ) 
+      {
+         i++;
+      }
+      if(i == MAX_DISTINCT_CLASSES)
+      {
+         cerr << "Ops, classes overflow! Something really bad occurred!";
+         return;
+      }
+
+      /* Define the class new level */
+      actualClass[i] = cl;
+      classLevels[i]++;
+
+      /* Roll a life dice */
+      dice d;
+      d.setType(cl->lifeDiceID);
+      setMaxLifePoints(d.roll()+attBonus(ATT_CONSTITUTION));
+
+      /* Apply skill costs! */
+      applySkillCosts();
+
+      /* TODO, something related to the feats, when fully implemented */
    }
 }
 

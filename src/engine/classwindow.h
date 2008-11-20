@@ -17,12 +17,10 @@ class classWindow
 {
    public:
       /*! Constructor 
-       * \param cls -> list of classes
-       * \param sk -> list of skills 
+       * \param sk -> character skills 
        * \param inter -> pointer to the GUI
        * \param retClass -> pointer to the choosed class */
-      classWindow(classes* cls, skills* sk, guiInterface* inter, 
-                  classe** retClass);
+      classWindow(skills* sk, guiInterface* inter, classe** retClass);
 
       /*! Destructor */
       ~classWindow();

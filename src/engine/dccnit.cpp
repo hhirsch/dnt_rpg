@@ -944,7 +944,7 @@ int engine::characterScreen(GLuint idTextura)
 
    /* Race Window */
    activeCharacter = PCs->getActiveCharacter();
-   raceWindow* rcWindow = new raceWindow(raceList,&activeCharacter->sk,gui,
+   raceWindow* rcWindow = new raceWindow(&activeCharacter->sk, gui,
                                          &activeCharacter->actualRace);
 
    while( (status != 6) )
@@ -983,9 +983,8 @@ int engine::characterScreen(GLuint idTextura)
             {
                status = 1;
                delete(rcWindow);
-               clWindow = new classWindow(classList, &activeCharacter->sk,
-                                         gui,
-                                         &activeCharacter->actualClass[0]);
+               clWindow = new classWindow(&activeCharacter->sk, gui,
+                                          &activeCharacter->actualClass[0]);
             }
             else if(charCreation == RACEW_CANCEL)
             {
@@ -998,19 +997,18 @@ int engine::characterScreen(GLuint idTextura)
          else if(status == 1)
          {
             charCreation = clWindow->treat(object, eventInfo, gui);
-            if(charCreation == ALIGNW_CONFIRM)
+            if(charCreation == CLASSW_CONFIRM)
             {
                status = 2;
                delete(clWindow);
                alWindow = new alignWindow(alignList, gui, 
                                           &activeCharacter->actualAlign);
             }
-            else if(charCreation == ALIGNW_CANCEL)
+            else if(charCreation == CLASSW_CANCEL)
             {
                status = 0;
                delete(clWindow);
-               rcWindow = new raceWindow(raceList, &activeCharacter->sk, 
-                                         gui,
+               rcWindow = new raceWindow(&activeCharacter->sk, gui,
                                          &activeCharacter->actualRace);
             }
          }
@@ -1030,9 +1028,8 @@ int engine::characterScreen(GLuint idTextura)
             {
                status = 1;
                delete(alWindow);
-               clWindow = new classWindow(classList, &activeCharacter->sk,
-                                         gui,
-                                         &activeCharacter->actualClass[0]);
+               clWindow = new classWindow(&activeCharacter->sk, gui,
+                                          &activeCharacter->actualClass[0]);
             }
          }
          /* Attribute Window Opened */
@@ -1553,7 +1550,8 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
    /* Verify Character Window */
    if( (charInfoWindow->isOpen()) || (charInfoWindow->hasChildrenWindows()) )
    {
-      charInfoWindow->treat(object, eventInfo, skillsList);
+      charInfoWindow->treat(object, eventInfo, skillsList,
+                            proj, modl, viewPort);
    }
 
    /* Verify ShortCutsWindow */

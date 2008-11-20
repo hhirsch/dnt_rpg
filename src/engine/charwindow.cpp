@@ -1,9 +1,8 @@
 #include "charwindow.h"
+#include "levelup.h"
 #include "../classes/xp.h"
 
-//TODO -> LEVEL UP BUTTON!
-//
-//TODO -> TREAT BUTTONS!
+//TODO -> TREAT FEATS BUTTON!
 
 
 /********************************************************************
@@ -275,7 +274,8 @@ bool charWindow::hasChildrenWindows()
 /********************************************************************
  *                              treat                               *
  ********************************************************************/
-int charWindow::treat(guiObject* object, int eventInfo, skills* skillsList)
+int charWindow::treat(guiObject* object, int eventInfo, skills* skillsList,
+                      GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    if(!isOpen())
    {
@@ -309,19 +309,32 @@ int charWindow::treat(guiObject* object, int eventInfo, skills* skillsList)
    if(eventInfo == PRESSED_BUTTON)
    {
       /* Ok Button */
-      if(object == (guiObject*) okButton)
+      if(object == (guiObject*)okButton)
       {
          close();
          return(1);
       }
       /* Skills Button */
-      else if (object == (guiObject*) skillsButton)
+      else if(object == (guiObject*)skillsButton)
       {
          if(skWindow == NULL)
          {
             skWindow = new skillWindow(skillsList, &current->sk,
                                        inter, current->getLevel(), true );
          }
+      }
+      /* Level Up Button */
+      else if(object == (guiObject*)levelUpButton)
+      {
+         /* Call Level Up for Character */
+         levelUp* lvlUp = new levelUp(current, skillsList);
+         lvlUp->doLevelUp(proj,modl,viewPort);
+         delete(lvlUp);
+
+         /* Close the character window */
+         close();
+
+         return(1);
       }
    }
    return(0);

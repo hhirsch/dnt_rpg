@@ -61,6 +61,11 @@ class character: public aniModel
        * \return total level of the character */
       int getLevel();
 
+      /*! Get the character level for a specific class
+       * \param cl -> clas to get how many levels the character has
+       * \return -> number of lvels the character has on class cl */
+      int getLevel(classe* cl);
+
       /*! Verify if the character alignment is of type represented by al
        * \param al -> string with align type
        * \return -> true if the align string identifier have the string al
@@ -94,6 +99,17 @@ class character: public aniModel
 
       /*! Update the health bar draw */
       void updateHealthBar();
+
+      /*! Verify if the character can take levels on a specific class
+       * \param cl -> class to verify if can take levels 
+       * \return -> true if can take a level, false otherwise */
+      bool canClass(classe* cl);
+
+      /*! Get a new level at the class
+       * \param cl -> pointer to the class to get a new level
+       * \note -> will only take a level if have enought XP
+       *          and can take a level at the specified class */
+      void getNewClassLevel(classe* cl);
 
       /*! Define the character weapon, based on the current one at
        * the inventory. If none is there, the current weapon is bare

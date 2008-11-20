@@ -17,11 +17,10 @@ class raceWindow
 {
    public:
       /*! Constructor
-       * \param sk -> skill list
-       * \param rc -> races list
+       * \param sk -> character's skills pointer
        * \param inter -> GUI interface
        * \param retRace -> pointer where will be the choosed race */
-      raceWindow(races* rc, skills* sk, guiInterface* inter, race** retRace);
+      raceWindow(skills* sk, guiInterface* inter, race** retRace);
 
       /*! Destructor */
       ~raceWindow();

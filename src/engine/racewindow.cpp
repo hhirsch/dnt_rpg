@@ -15,9 +15,9 @@ static int cmpRaceFunction(const void *p1,  const void *p2)
 /********************************************************************
  *                           Constructor                            *
  ********************************************************************/
-raceWindow::raceWindow(races* rc, skills* sk, guiInterface* inter,
-                       race** retRace)
+raceWindow::raceWindow(skills* sk, guiInterface* inter, race** retRace)
 {
+   races rc;
    dntFont fnt;
    int i;
    int centerY = SCREEN_Y / 2;
@@ -28,11 +28,11 @@ raceWindow::raceWindow(races* rc, skills* sk, guiInterface* inter,
    curRace = -1;
 
    /* Alphabetical Order Races */
-   totalRaces = rc->getTotalRaces();
+   totalRaces = rc.getTotalRaces();
    racesOrder = new race*[totalRaces];
    for(i = 0; i < totalRaces; i++)
    {
-      racesOrder[i] = rc->getRaceByInteger(i);
+      racesOrder[i] = rc.getRaceByInteger(i);
    }
    qsort(&racesOrder[0], totalRaces, sizeof(race**), cmpRaceFunction);
    
