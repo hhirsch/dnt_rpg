@@ -7,7 +7,7 @@ d6
 gettext("Receive +2 of Contitution, because of his monk's body filled with alcohol.")
 -2 ATTRIBUTE WISDOM ALL ALL
 gettext("Since they only study complex things, Philosophy Students easily forget all the practical and ordinary things of life, receiving -2 of Wisdom.")
-2 ATTRIBUTE CHARISM ALL ALL
+2 ATTRIBUTE CHARISMA ALL ALL
 gettext("For spending almost all their student lives in pubs, the Philosophy Student acquire some kind of aptitude of dealing with others, receiving +2 of Charisma.")
 4 SKILL KNOWLEDGE_CLASSIC ALL ALL
 gettext("The Philosophy Student receives +4 of Knowledge (Classic) for the little they learn at university.")

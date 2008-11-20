@@ -7,8 +7,8 @@ d4
 gettext("Receive -2 of Intelligence, for spending too much time watching soap operas on TV.")
 1 ATTRIBUTE WISDOM ALL ALL
 gettext("+1 of Wisdom, for the inutiles knowledges obtained watching TV novels.")
-3 ATTRIBUTE CHARISM ALL ALL
-gettext("+3 of Charism, for not studying at the Exact Sciences Institute (ICEX), and for usually being very nice.")
+3 ATTRIBUTE CHARISMA ALL ALL
+gettext("+3 of Charisma, for not studying at the Exact Sciences Institute (ICEX), and for usually being very nice.")
 10 SOCIAL_TESTS ALL CLASS ICEX
 gettext("For usually have some rare  beauty to the ICEX, the OT Students receive +10 on all social tests against Students from that Institute.")
 -12 SKILL FURTIVE CLASS ICEX
@@ -36,8 +36,8 @@ KNOWLEDGE(THERAPY)
 PLAY_INSTRUMENT
 PROFESSIONAL_SPEECH
 SEE_LIES
-( 5 + CHARISM )x3
-( 2 + CHARISM )x2
+( 5 + CHARISMA )x3
+( 2 + CHARISMA )x2
 1,1/0/0/0/0/0,0/0/2
 2,1/0/0/0/0/0,0/0/2
 3,1/0/0/0/0/0,1/1/3

@@ -5,7 +5,7 @@ d6
 4
 -2 ATTRIBUTE INTELLIGENCE ALL ALL
 gettext("Because they are usually quite stupid about anything that isn't related to money, they receive -2 of Intelligence.")
--1 ATTRIBUTE CHARISM ALL ALL
+-1 ATTRIBUTE CHARISMA ALL ALL
 gettext("Because they are anxious to take the last kopeck from their victims, they receive -1 of Charisma.")
 2 ATTRIBUTE WISDOM ALL ALL
 gettext("Because they can modify any situation to make money from it, they receive +2 of Wisdom.")

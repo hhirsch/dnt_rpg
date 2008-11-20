@@ -11,8 +11,8 @@ gettext("-1 of Constitution for the hours spent in a closed ambient, playing.")
 gettext("+2 of Dexterity for having the ability to play a Gb7M or a Am#5/7/9 on  their strange musical instrument.")
 1 ATTRIBUTE INTELLIGENCE ALL ALL
 gettext("+1 of Intelligence for knowing those notes, how they are created and all the musical theory envolved on their creation.")
-2 ATTRIBUTE CHARISM ALL ALL
-gettext("+2 of Charism for the capacity to fill people with joy.")
+2 ATTRIBUTE CHARISMA ALL ALL
+gettext("+2 of Charisma for the capacity to fill people with joy.")
 8 ACTION PLAY_INSTRUMENT ALL ALL
 gettext("Because of their intense and difficult work since they were children, the Music Students have an incredible capacity to play their bizarre instruments, receiving +8 of bonus when playing them.")
 1 RESTRICTION SKILL PLAY_INSTRUMENT ALL

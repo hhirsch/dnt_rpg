@@ -5,8 +5,8 @@ d8
 4
 2 ATTRIBUTE WISDOM ALL ALL
 gettext("Because they have to teach themselves, they receive +2 of Wisdom.")
--1 ATTRIBUTE CHARISM ALL ALL
-gettext("By their natural tendency to be qualified as Geeks, being one or not, they receive -1 of Charism.")
+-1 ATTRIBUTE CHARISMA ALL ALL
+gettext("By their natural tendency to be qualified as Geeks, being one or not, they receive -1 of Charisma.")
 5 SAVE FORTITUDE ALL ALL
 gettext("Computer Science Students receive +5 of fortitude for surviving their boring studies that are just a pale imitation of what real computer studies should be.")
 -2 SAVE REFLEX ALL ALL
