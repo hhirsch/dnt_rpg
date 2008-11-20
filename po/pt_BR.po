@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-11-20 08:10-0200\n"
+"POT-Creation-Date: 2008-11-20 17:11-0200\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -94,15 +94,15 @@ msgstr "Cancelar"
 msgid "Aspect"
 msgstr "Aspecto"
 
-#: src/engine/aspectwindow.cpp:49 src/engine/charwindow.cpp:87
+#: src/engine/aspectwindow.cpp:49 src/engine/charwindow.cpp:86
 msgid "Name:"
 msgstr "Nome:"
 
-#: src/engine/aspectwindow.cpp:54 src/engine/charwindow.cpp:90
+#: src/engine/aspectwindow.cpp:54 src/engine/charwindow.cpp:89
 msgid "Age:"
 msgstr "Idade:"
 
-#: src/engine/aspectwindow.cpp:58 src/engine/charwindow.cpp:105
+#: src/engine/aspectwindow.cpp:58 src/engine/charwindow.cpp:104
 msgid "Sex:"
 msgstr "Sexo:"
 
@@ -122,32 +122,32 @@ msgstr "Limpar"
 msgid "Auto"
 msgstr "Auto"
 
-#: src/engine/attwindow.cpp:75 src/engine/charwindow.cpp:146
+#: src/engine/attwindow.cpp:75 src/engine/charwindow.cpp:145
 #: data/skills/forca.ski:1
 msgid "Strength"
 msgstr "Força"
 
-#: src/engine/attwindow.cpp:95 src/engine/charwindow.cpp:151
+#: src/engine/attwindow.cpp:95 src/engine/charwindow.cpp:150
 #: data/skills/destreza.ski:1
 msgid "Dexterity"
 msgstr "Destreza"
 
-#: src/engine/attwindow.cpp:115 src/engine/charwindow.cpp:156
+#: src/engine/attwindow.cpp:115 src/engine/charwindow.cpp:155
 #: data/skills/constituicao.ski:1
 msgid "Constitution"
 msgstr "Constituição"
 
-#: src/engine/attwindow.cpp:135 src/engine/charwindow.cpp:161
+#: src/engine/attwindow.cpp:135 src/engine/charwindow.cpp:160
 #: data/skills/inteligencia.ski:1
 msgid "Intelligence"
 msgstr "Inteligência"
 
-#: src/engine/attwindow.cpp:156 src/engine/charwindow.cpp:166
+#: src/engine/attwindow.cpp:156 src/engine/charwindow.cpp:165
 #: data/skills/sabedoria.ski:1
 msgid "Wisdom"
 msgstr "Sabedoria"
 
-#: src/engine/attwindow.cpp:177 src/engine/charwindow.cpp:171
+#: src/engine/attwindow.cpp:177 src/engine/charwindow.cpp:170
 msgid "Charism"
 msgstr "Carisma"
 
@@ -208,96 +208,96 @@ msgstr "Mensagens"
 msgid "Welcome to DNT!"
 msgstr "Bem-Vindo ao DNT!"
 
-#: src/engine/charwindow.cpp:96
+#: src/engine/charwindow.cpp:95
 msgid "Female"
 msgstr "Feminino"
 
-#: src/engine/charwindow.cpp:99
+#: src/engine/charwindow.cpp:98
 msgid "Male"
 msgstr "Masculino"
 
-#: src/engine/charwindow.cpp:102
+#: src/engine/charwindow.cpp:101
 msgid "Undefined"
 msgstr "Indefinido"
 
-#: src/engine/charwindow.cpp:108
+#: src/engine/charwindow.cpp:107
 msgid "Race:"
 msgstr "Raça:"
 
-#: src/engine/charwindow.cpp:111
+#: src/engine/charwindow.cpp:110
 msgid "Alignment:"
 msgstr "Alinhamento:"
 
-#: src/engine/charwindow.cpp:115
+#: src/engine/charwindow.cpp:114
 msgid "XP"
 msgstr "XP"
 
-#: src/engine/charwindow.cpp:116
+#: src/engine/charwindow.cpp:115
 msgid "Next Level"
 msgstr "Próximo Nível"
 
-#: src/engine/charwindow.cpp:122
+#: src/engine/charwindow.cpp:121
 msgid "HP"
 msgstr "PV"
 
-#: src/engine/charwindow.cpp:125
+#: src/engine/charwindow.cpp:124
 msgid "AC"
 msgstr "CA"
 
-#: src/engine/charwindow.cpp:185
+#: src/engine/charwindow.cpp:184
 msgid "Fortitude"
 msgstr "Fortaleza"
 
-#: src/engine/charwindow.cpp:189
+#: src/engine/charwindow.cpp:188
 msgid "Reflex"
 msgstr "Reflexos"
 
-#: src/engine/charwindow.cpp:193
+#: src/engine/charwindow.cpp:192
 msgid "I am Not a Fool"
 msgstr "Não Sou Bobo"
 
-#: src/engine/charwindow.cpp:197
+#: src/engine/charwindow.cpp:196
 msgid "Base Attack Modifier"
 msgstr "Modificador de Ataque Base"
 
-#: src/engine/charwindow.cpp:202
+#: src/engine/charwindow.cpp:201
 msgid "Size Modifier"
 msgstr "Modificador de Tamanho"
 
-#: src/engine/charwindow.cpp:212
+#: src/engine/charwindow.cpp:211
 msgid "Level Up"
 msgstr "Subir Nível"
 
-#: src/engine/charwindow.cpp:218
+#: src/engine/charwindow.cpp:217
 msgid "Feats"
 msgstr "Habilidades"
 
-#: src/engine/charwindow.cpp:222 src/engine/skillwindow.cpp:61
+#: src/engine/charwindow.cpp:221 src/engine/skillwindow.cpp:61
 msgid "Skills"
 msgstr "Perícias"
 
-#: src/engine/charwindow.cpp:226 src/engine/skillwindow.cpp:149
+#: src/engine/charwindow.cpp:225 src/engine/skillwindow.cpp:149
 #: src/gui/window.cpp:204
 msgid "Close"
 msgstr "Fechar"
 
-#: src/engine/charwindow.cpp:343
+#: src/engine/charwindow.cpp:356
 msgid "Main Weapon"
 msgstr "Arma Principal"
 
-#: src/engine/charwindow.cpp:347
+#: src/engine/charwindow.cpp:360
 msgid "Secondary Weapon"
 msgstr "Arma Secundária"
 
-#: src/engine/charwindow.cpp:351
+#: src/engine/charwindow.cpp:364
 msgid "Weapon"
 msgstr "Arma"
 
-#: src/engine/charwindow.cpp:363
+#: src/engine/charwindow.cpp:376
 msgid "Unarmed"
 msgstr "Desarmado"
 
-#: src/engine/charwindow.cpp:369
+#: src/engine/charwindow.cpp:382
 msgid "Not Applicable"
 msgstr "Não Aplicável"
 
@@ -400,50 +400,50 @@ msgstr ""
 "mesmos). DccNiTghtmare agradece aos que desenvolveram as bibliotecas: "
 "OpenAL, Cal3D, OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 
-#: src/engine/dccnit.cpp:1281
+#: src/engine/dccnit.cpp:1278
 msgid "Too far away for the action!"
 msgstr "Muito distante para realizar a ação!"
 
-#: src/engine/dccnit.cpp:1323
+#: src/engine/dccnit.cpp:1320
 msgid "No NPCs in the area."
 msgstr "Sem NPCs na área."
 
-#: src/engine/dccnit.cpp:1374
+#: src/engine/dccnit.cpp:1371
 msgid "Surprise Attack Turn."
 msgstr "Turno de ataque surpresa."
 
-#: src/engine/dccnit.cpp:1388
+#: src/engine/dccnit.cpp:1385
 msgid "No enemies in the area."
 msgstr "Sem inimigos na área."
 
-#: src/engine/dccnit.cpp:1565 src/engine/dccnit.cpp:2015
+#: src/engine/dccnit.cpp:1563 src/engine/dccnit.cpp:2013
 #: src/engine/shortcutswindow.cpp:32
 msgid "Nothing"
 msgstr "Nada"
 
-#: src/engine/dccnit.cpp:1763
+#: src/engine/dccnit.cpp:1761
 #, c-format
 msgid "%s taken."
 msgstr "Pegou %s."
 
-#: src/engine/dccnit.cpp:1785
+#: src/engine/dccnit.cpp:1783
 msgid "Inventory is full!"
 msgstr "O inventário está cheio!"
 
-#: src/engine/dccnit.cpp:1817
+#: src/engine/dccnit.cpp:1815
 msgid "Door"
 msgstr "Porta"
 
-#: src/engine/dccnit.cpp:1950
+#: src/engine/dccnit.cpp:1948
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s ataca %s"
 
-#: src/engine/dccnit.cpp:2111
+#: src/engine/dccnit.cpp:2109
 msgid "No more actions. Turn ended."
 msgstr "Sem mais ações: Turno Finalizado."
 
-#: src/engine/dccnit.cpp:3493
+#: src/engine/dccnit.cpp:3491
 msgid "Exit Battle Mode"
 msgstr "Sai do Modo de Batalha"
 
@@ -1079,8 +1079,8 @@ msgstr ""
 
 #: data/classes/administration.cls:13
 msgid ""
-"Since they are Taylor's faithful disciples, they receive +4 of Taylor's Veal "
-"Thoughts Skill."
+"Since they are Taylor's faithful disciples, they receive +4 of Taylorism "
+"Skill."
 msgstr ""
 "Por serem fiéis discípulos de Taylor, recebem +4 na perícia Bovinice de "
 "Taylor."
@@ -1254,7 +1254,7 @@ msgstr ""
 "raça)."
 
 #: data/classes/biology.cls:13
-msgid "For the same reason, -4 of free-pass."
+msgid "For the same reason, -4 of Carte Blanche."
 msgstr "Pelo mesmo motivo, recebem -4 em passe-livre."
 
 #: data/classes/biology.cls:15
@@ -1504,7 +1504,7 @@ msgstr ""
 #: data/classes/philosophy.cls:19
 msgid ""
 "Because he doesn't attend any (or very few) classes, the Philosophy Student "
-"receives -4 of Out of time."
+"receives -4 of Not Enough Time."
 msgstr ""
 "Por fazerem poucas ou nenhuma matéria, os Estudantes de Filosofia recebem -4 "
 "em Sem Tempo."
@@ -1734,8 +1734,9 @@ msgstr "Estudante de Direito"
 
 #: data/classes/lawner.cls:2
 msgid ""
-"'- Are we going to the bar taking one?|- Yes, from whose?'|(Typical dialog "
-"between two law students)"
+"You seem to have more than the average share of intelligence for a man of "
+"your background, sneered the lawyer at a witness on the stand.|If I wasn't "
+"under oath, I'd return the compliment, replied the witness."
 msgstr ""
 "'- Vamos no bar tomar uma?|- Vamos, de quem?'|(Típico diálogo entre dois "
 "estudantes de Direito)"
@@ -2123,11 +2124,11 @@ msgstr "'Ah velho, não dá porque vou malhar hoje'|(Tico Bombadinho)"
 #: data/races/boy.rca:3
 msgid ""
 "Boys, and their female versions, Patys, are creatures endowed with a strange "
-"fondness to body academies. Always wanting to be slenders to go to jet set "
-"parties and rubbing with their oposite sex equivalents, they usually ignore "
-"their friends of distinct races. But, by more upper they consider "
-"theirselves, and despite they have a huge fondness, this race is always the "
-"aim of mockeries and jokes by other races."
+"fondness for body academies. Always wanting to be thin, to go to jet-set "
+"parties and rubbing with their opposite sex equivalents, they usually ignore "
+"their friends of other races. But, the more upper-class they consider "
+"themselves, and although they have a great capacity for affection, this race "
+"is always the target of mockeries and jokes by other races."
 msgstr ""
 "Boys e suas versões femininas, as Patys, são organismos dotados de uma "
 "estranha afeição à academia. Sempre querendo ficar esbeltos para irem a "
@@ -2138,23 +2139,23 @@ msgstr ""
 
 #: data/races/boy.rca:6
 msgid ""
-"Patys have +1 of Diplomacy since they always exhibit their bodies "
-"characteristics. For more horrendous that she was, she is able to "
-"'magically' alter herself on few hours."
+"Patys have +1 of Diplomacy since they always exhibit the characteristics of "
+"their bodies. As terribly horrendous as she was, she is able to alter "
+"herself 'magically' in just a few hours."
 msgstr ""
 "As patys recebem +1 em Diplomacia por sempre exibirem, direta ou "
 "indiretamente, suas características físicas. Por mais horrenda que ela seja, "
 "é capaz de alterar-se quase que magicamente."
 
 #: data/races/boy.rca:8
-msgid "By the aforesaid reasons, the Patys also receive + 2 of Disguises."
+msgid "For the aforesaid reasons, the Patys also receive + 2 of Disguises."
 msgstr "Pelas razões supracitadas, as Patys também recebem +2 em Disfarces."
 
 #: data/races/boy.rca:10
 msgid ""
-"Boys and Patys receive +1 od Constitution due to the constant time they "
-"spend on body academies. If they no more go there, they'll lose this bonus "
-"and automatically become aim of jokes among others of their own race."
+"Boys and Patys receive +1 of Constitution due to the time they constantly "
+"spend at body academies. If they no longer go there, they'll lose this bonus "
+"and automatically become the butt of jokes among others of their own race."
 msgstr ""
 "Boys e Patys recebem +1 de Constituição devido a sua constante ida às "
 "academias. Caso deixem de frequentá-las, perdem este bônus e tornam-se "
@@ -2178,14 +2179,14 @@ msgstr "'I have a problem...'|(Creepy Susie ao queimar o clubinho)"
 
 #: data/races/gotico.rca:3
 msgid ""
-"With their nose facing the moon and their depressive way of life (that for "
-"them are a bale), the Gothic live in groups since cemeteries up to Savassi "
-"plaza. Always dressed entirely in black and with strange makeups, wandering "
-"by the night reciting Alvares de Azevedo (Brazilian Lord Byron clone) and "
-"claiming of their life to other innocent races.|They  love  the internet, "
-"but there they forget, from time to time, that they hate the life, leaving "
-"visible flashes of joy and that everything they do is only pretend to "
-"other's eyes."
+"With their noses turned up to the moon and their depressing way of life "
+"(that for them is full of melancholy), the Gothic live in groups from the "
+"cemeteries up to Savassi plaza. Always dressed entirely in black and with "
+"strange makeup, they wander in the night reciting Alvares de Azevedo (a "
+"Brazilian clone of Lord Byron) and extol their lives to other innocent "
+"races.|They love the Internet, but there they forget, from time to time, "
+"that they hate life, leaving visible flashes of joy in their eyes. Others "
+"therefore tend to believe that their behavior is only pretense."
 msgstr ""
 "Com o nariz virado para a lua e seu modo depressivo de levar a vida, que "
 "para eles é um fardo, os Góticos vivem em bandos que se reúnem desde "
@@ -2198,7 +2199,7 @@ msgstr ""
 
 #: data/races/gotico.rca:6
 msgid ""
-"Since Boys / Patys are hightly emotional, Gothics receive +2 in intimidation "
+"Since Boys / Patys are highly emotional, Gothics receive +2 in intimidation "
 "against them."
 msgstr ""
 "Por Boys / Patys serem altamente impressionáveis, recebem +2 de intimidação "
@@ -2210,19 +2211,20 @@ msgstr "Hippie"
 
 #: data/races/hippie.rca:2
 msgid ""
-"'They say that they want to save nature, but the only thing they do is smoke "
-"maryjane and smells bad!'|(Eric Cartman)"
+"'They say that they want to save nature, but the only thing they do is  "
+"smoke maryjane and it smells bad!'|(Eric Cartman)"
 msgstr ""
 "'Eles falam que querem salvar a natureza, mas tudo o que fazem é fumar "
 "maconha e cheirar mal!'|(Eric Cartman)"
 
 #: data/races/hippie.rca:3
 msgid ""
-"Lovers of plants, animals, fungi, worms, air, wind, water, breeze, fire, "
-"heat, in other words, everything that emanate something from nature and can "
-"transmit them energy or karma (no, we aren't talking about Druid Elfs), the "
-"hippies can be for hours listening to the wind voice or seeing little land "
-"worms entering their bodies, since equiped with high LSD doses."
+"Lovers of plants, animals, fungi, worms, air, wind, water, breezes, fire, "
+"heat, in other words, everything that emanates in some way from nature and "
+"can transmit to them energy or karma (no, we aren't talking about Druid "
+"Elves), the hippies can spend hours listening to the voice of the wind or "
+"watching little earthworms enter their bodies, when they have taken high "
+"doses of LSD."
 msgstr ""
 "Amantes das plantas, animais, fungos, vermes, ar, vento, água, brisa, fogo, "
 "calor, enfim, tudo o que emana da natureza e lhes possa transmitir alguma "
@@ -2234,16 +2236,17 @@ msgstr ""
 
 #: data/races/hippie.rca:6
 msgid ""
-"Since they have a lot of love for the nature, the el.., I've said, hippies, "
-"receive +5 of Train Animals."
+"Since they love nature so much, the el.., err, I said, hippies, receive +5 "
+"of Training Animals."
 msgstr ""
 "Por possuírem um grande amor pela natureza, os seres élf.., digo, hippies, "
 "recebem +5 em adestrar bichos."
 
 #: data/races/hippie.rca:8
 msgid ""
-"Usually Hippies creatures aren't well accept by society, fearful of their "
-"subversives actions based on LSD, so, they receive -6 of Free-pass."
+"Usually Hippie creatures aren't well accepted by society, fearful of their "
+"subversive actions under the influence of LSD, so, they receive -6 of Carte "
+"Blanche."
 msgstr ""
 "Usualmente, os Hippies são criaturas mal vistas pela sociedade, temerosa de "
 "suas atitudes subversivas à doses de LSD, logo recebem -6 em Passe-Livre."
@@ -2262,12 +2265,12 @@ msgstr ""
 
 #: data/races/humano.rca:3
 msgid ""
-"Also knowleged as Homo Sapiens Sapiens. An human is an human, uai! Look the "
-"rest at your D&D book cause I'm too busy to write normal things here. We "
+"Also known as Homo Sapiens Sapiens. A human is a human is a human! Find out "
+"the rest in your D&D book cause I'm too busy to write normal things here. We "
 "really hope that nobody owns the patent to the name 'human' and we have to "
-"use another denomination to this race because of copyright violations.|The "
-"Common Human is so normal and so common that don't own any extraordinary "
-"quality nor extraordinary defects."
+"use another term for this race because of copyright violations.|The Common "
+"Human is so normal and so common that he has neither any extraordinary "
+"qualities nor any extraordinary defects."
 msgstr ""
 "Também conhecidos como Homo Sapiens Sapiens. Um humano é um humano, uai! "
 "Olhe o resto no seu livro de D&D que estou com preguiça de escrever. "
@@ -2277,20 +2280,20 @@ msgstr ""
 "nenhuma qualidade extraordinária tampouco defeito extraordinário."
 
 #: data/races/llama.rca:1
-msgid "Human Llama"
+msgid "Human Lama"
 msgstr "Llama Humana"
 
 #: data/races/llama.rca:2
-msgid "'Is he insane??'|(Oktober Fest's Queen, while looking to a human llama)"
+msgid "'Is he insane??'|(Oktober Fest Queen, while looking at a human lama)"
 msgstr ""
 "'Ele é doido varrido?'|(Rainha do Oktober Fest ao visualizar uma llama "
 "humana)"
 
 #: data/races/llama.rca:3
 msgid ""
-"Human llamas are humans that believe earnestly they are nearly descendants "
-"of the Andes llamas. Usually they walk with a bolivian poncho, drink a lot "
-"of water and think exactly like a llama."
+"Human lamas are humans that earnestly believe they are descendants of the "
+"Andes lamas. Usually they walk wearing a Bolivian poncho, drink a lot of "
+"water and think exactly like a lama."
 msgstr ""
 "Llamas humanas são seres humanos que acreditam piamente serem descendentes "
 "próximos das llamas das regiões andinas. Costumeiramente andam com um poncho "
@@ -2299,14 +2302,14 @@ msgstr ""
 
 #: data/races/llama.rca:6
 msgid ""
-"For having sociopats tendencies, the Human Llammas receive -4 on all social "
+"For having sociopathic tendencies, the Human Lammas receive -4 on all social "
 "tests."
 msgstr ""
 "Por ser um organismo com tendências sociopatas, a Llama Humana recebe -4 em "
 "todos os testes sociais."
 
 #: data/races/llama.rca:8
-msgid "Human llamas receive +2 of Intelligence."
+msgid "Human lamas receive +2 of Intelligence."
 msgstr "Llamas recebem +2 de Inteligência."
 
 #: data/races/metaleiro.rca:1
@@ -2319,14 +2322,14 @@ msgstr "'Dark...'|(Anamatheus Iskurium)"
 
 #: data/races/metaleiro.rca:3
 msgid ""
-"These creatures usually walk with black pants, black skirts (of bands or "
-"not) and military  boots. They wear this kind of clothes to 'be different', "
-"althought all of them use the same. They love to play all things they find "
-"thinking it is a drum, and to sing the lyrics of the musics they love. "
-"Usually passed as autistcs, these creatures walk with others headbangers "
-"(from 2 to 5) and have the need to show others their 'revolt'. They are "
-"easily attracted by anything that looks 'malignant', for more rougher that "
-"it is."
+"These creatures usually walk around wearing black pants, black skirts (of "
+"bands or not) and military boots. They wear this kind of clothes to 'be "
+"different', although all of them wear the same. They love to play everything "
+"they find, thinking it is a drum, and to sing the lyrics of the music they "
+"love. Usually categorized as autistic, these creatures walk with other "
+"headbangers (from 2 to 5) and have the need to show others their 'revolt'. "
+"They are easily attracted by anything that looks 'malignant', the rougher "
+"the better."
 msgstr ""
 "Estes organismos costumam caminhar por aí de calças pretas, blusas pretas "
 "(de bandas ou não) e coturno. Se vestem assim para 'serem diferentes', mas "
@@ -2339,7 +2342,7 @@ msgstr ""
 
 #: data/races/metaleiro.rca:6
 msgid ""
-"Since Boys / Patys are hightly emotional, Headbangers receive +2 of "
+"Since Boys / Patys are highly emotional, Headbangers receive +2 of "
 "intimidation against them."
 msgstr ""
 "Por Boys / Patys serem altamente impressionáveis, Metaleiros recebem +2 de "
@@ -2356,11 +2359,11 @@ msgstr ""
 
 #: data/races/mutante.rca:3
 msgid ""
-"No one knows why, but mutant things started to attent Icex. With their diet "
-"based on crickets or small hopping bugs, the Human Cricket have some "
-"canibalistic habits and, for this, aren't welcome at bugs colonies. The "
+"No one knows why, but mutants have started to attend Icex. With their diet "
+"based on crickets or small hopping bugs, the Human Crickets have some "
+"cannibalistic habits and, for this, aren't welcome in bug colonies. The "
 "habitat of the Human Cricket is the famous Tyrol, near Barreiro, where they "
-"live happily among their parents."
+"live happily among their relatives."
 msgstr ""
 "Não se sabe bem ao certo, mas seres mutantes passam a frequentar os "
 "corredores do Icex, tendo sua dieta básica composta de grilos ou pequenos "
@@ -2372,7 +2375,7 @@ msgstr ""
 #: data/races/mutante.rca:6
 msgid ""
 "Since they eat Crickets, Human Crickets receive -4 on all social tests when "
-"threating with someone of their race or insects."
+"treating with someone of their race or insects."
 msgstr ""
 "Por sua tendência de comer grilos, os homens grilo recebem -4 em todos "
 "Testes Sociais quando lidam com alguém de sua própria raça ou insetos."
@@ -2425,7 +2428,7 @@ msgstr ""
 #: data/races/skinhead.rca:12
 msgid ""
 "Skinhead Maniacs, since they have army's friends, can get any kind of heavy "
-"guns and walk freely with them. So, they receive the skill Free-pass as "
+"guns and walk freely with them. So, they receive the skill Carte Blanche as "
 "class skill for any choosed class"
 msgstr ""
 "Os Maníacos Skinheads, por possuírem contatos com membros do exército, "
@@ -2528,13 +2531,13 @@ msgstr ""
 "normais capazes de constringê-lo."
 
 #: data/skills/avaliar.ski:1
-msgid "Appraise"
+msgid "Appraisal"
 msgstr "Avaliar"
 
 #: data/skills/avaliar.ski:2
 msgid ""
-"Usually utilized to estimate the price of that 486 processor sold by that "
-"contrabandist or that poisoned chips to your loved teacher."
+"Usually used to estimate the price of that 486 processor sold by that "
+"contrabandist or of that poisoned chips to your loved teacher."
 msgstr ""
 "Muito utilizada para se conseguir estimar o preço daquele processador 486 na "
 "mão de receptadores obscuros ou daquele salgadinho enveneado para o seu "
@@ -2576,7 +2579,7 @@ msgstr ""
 "agradável de se estar."
 
 #: data/skills/bovinice.ski:1
-msgid "Taylor's Veal Thoughts"
+msgid "Taylorism"
 msgstr "Bovinice de Taylor"
 
 #: data/skills/bovinice.ski:2
@@ -2958,14 +2961,14 @@ msgstr ""
 "um dedo ou a mão."
 
 #: data/skills/passelivre.ski:1
-msgid "Free-Pass"
-msgstr "Passe-Livre"
+msgid "Carte Blanche"
+msgstr "Equilíbrio"
 
 #: data/skills/passelivre.ski:2
 msgid ""
 "Is the hability to realize any ilegal thing without suffer retaliations from "
-"the responsible authorities. Free-Pass serves to walk on restricted areas or "
-"walk with heavy guns."
+"the responsible authorities. Carte Blanche serves to walk on restricted "
+"areas or with heavy guns."
 msgstr ""
 "É habilidade de realizar quaisquer atitudes ilegais sem sofrer represália "
 "das autoridades responsáveis. Passe livre serve tanto para andar em áreas "
@@ -3038,7 +3041,7 @@ msgstr ""
 "Ente: Sabedoria 12"
 
 #: data/skills/semtempo.ski:1
-msgid "Out of Time"
+msgid "Not Enough Time"
 msgstr "Sem-Tempo"
 
 #: data/skills/semtempo.ski:2
@@ -3618,6 +3621,19 @@ msgstr "Leve"
 #: data/weapons/types/weights.dcl:4
 msgid "Heavy"
 msgstr "Pesada"
+
+#~ msgid "Taylor's Veal Thoughts"
+#~ msgstr "Bovinice de Taylor"
+
+#~ msgid "Free-Pass"
+#~ msgstr "Passe-Livre"
+
+#~ msgid ""
+#~ "'- Are we going to the bar taking one?|- Yes, from whose?'|(Typical "
+#~ "dialog between two law students)"
+#~ msgstr ""
+#~ "'- Vamos no bar tomar uma?|- Vamos, de quem?'|(Típico diálogo entre dois "
+#~ "estudantes de Direito)"
 
 #~ msgid "Loading Character"
 #~ msgstr "Carregando Personagem"
