@@ -24,7 +24,7 @@ gettext("Everyone knows that Administration Students have a lot of difficulty in
 15 ESTHETIC_SHOCK_III
 20 SUPREME_ESTHETIC_SHOCK
 20 ABERRATION
-8
+7
 APPRAISE
 BIZARRE_CLOTHES
 BRIBE

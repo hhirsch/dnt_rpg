@@ -23,7 +23,7 @@ gettext("Also receive -2 of reflexes for the mount of time spent in front of a c
 12 IMPROVED_SUFFER_REISTENCE
 15 PARALEL_REALITY
 20 CHAOS_MATRIX
-10
+9
 DRINKING
 BLUFF
 KNOWLEDGE_SUFFER

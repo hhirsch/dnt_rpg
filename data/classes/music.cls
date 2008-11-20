@@ -30,7 +30,7 @@ gettext("The Music Student need to have at least one graduation on Play Instrume
 17 EPIC_CHORDS_MELODY
 19 FORBIDDEN_HAMELIN_MELODY
 20 PERFECT_HARMONY_MELODY
-7
+6
 BIZARRE_CLOTHES
 BOHEMIA
 LISTEN

@@ -21,7 +21,7 @@ gettext("A student of Mechanics always suffers a penalty of -10 in any kind of t
 14 ACTION_AND_REACTION
 17 LIKE_A_CHILD_ON_SLID
 20 F=M*A
-7
+6
 CONDUCTION
 DRINKING
 OBSERVATE

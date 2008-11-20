@@ -16,7 +16,7 @@ gettext("Since they know everything about money, the Law Student receives  +1 of
 4 I_AM_WRONG
 13 SUPREME_BLUFF
 20 FINAL_JUDGE
-13
+12
 ART_OF_THE_ESCAPE
 APPRAISE
 BLUFF
