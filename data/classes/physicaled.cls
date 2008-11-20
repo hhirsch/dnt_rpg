@@ -15,7 +15,7 @@ gettext("-6 of Intelligence since they abandoned the books in a remote past.")
 gettext("-6 of Wisdom, for the same reason.")
 4 SKILL STRENGHT ALL ALL
 gettext("The Student of Physical Education receives +4 of Jumping, Climbing, Riding, Swimming, Soccer, Basketball, finally, sports in general or anything that radiates physical power.")
--5 SKILL KNOWLEDGE ALL ALL
+-5 SKILL KNOWLEDGE_GENERAL ALL ALL
 gettext("Receive -5 of Knowledge of any sort at all, simply because that they have no idea of the meaning of this word.")
 -4 SKILL HIDE ALL ALL
 gettext("-4 of Hide, since they are coarse hulks.")

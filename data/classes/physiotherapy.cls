@@ -29,7 +29,7 @@ gettext("Because they are failed Medical Students, whenever there is any chance 
 5
 DISGUISES
 HEAL
-KNOWLEDGE(MEDICINE)
+KNOWLEDGE_GENERAL
 MEDICAL_LOUD_MOUTH
 PROFESSIONAL_SPEECH
 ( 3 + INTELLIGENCE )x3

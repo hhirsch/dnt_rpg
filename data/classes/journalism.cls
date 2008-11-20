@@ -29,7 +29,7 @@ gettext("As long as the Journalism Student speaks the targets language, he'll ne
 15
 APPRAISE
 BLUFF
-KNOWLEDGE(ALL)
+KNOWLEDGE_GENERAL
 DIPLOMACY
 PROFESSIONAL_SPEECH
 DISGUISES

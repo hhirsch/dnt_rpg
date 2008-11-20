@@ -33,7 +33,6 @@ gettext("The Music Student need to have at least one graduation on Play Instrume
 7
 BIZARRE_CLOTHES
 BOHEMIA
-KNOWLEDGE(MUSIC)
 LISTEN
 PERFORMATE
 PLAY_INSTRUMENT

@@ -26,8 +26,7 @@ gettext("Also receive -2 of reflexes for the mount of time spent in front of a c
 10
 DRINKING
 BLUFF
-KNOWLEDGE(TECNOLOGY)
-KNOWLEDGE(SUFFER)
+KNOWLEDGE_SUFFER
 PROFESSIONAL_SPEECH
 HIDE
 LISTEN

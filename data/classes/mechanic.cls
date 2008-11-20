@@ -24,7 +24,6 @@ gettext("A student of Mechanics always suffers a penalty of -10 in any kind of t
 7
 CONDUCTION
 DRINKING
-KNOWLEDGE(MATERIAL)
 OBSERVATE
 OPERATE_ELETRONIC_OBJECTS
 OPERATE_MECHANIC_OBJECTS
