@@ -42,18 +42,18 @@ else
 fi
 
 #Check for openal-config to find openal Paths
-AC_CHECK_PROG(OPENALCONFIG,openal-config,yes,no)
-if test $OPENALCONFIG = "yes"; then
-{
-   CFLAGS="$CFLAGS $(openal-config --cflags)"
-   CPPFLAGS="$CPPFLAGS $(openal-config --cflags)" 
-   LIBS="$LIBS $(openal-config --libs)"
-}
-else
-{
-   AC_MSG_ERROR(Coudn't find the program openal-config. Usually it is installed with OpenAL library. Please go to http://www.openal.org and get it.)
-}
-fi
+#AC_CHECK_PROG(OPENALCONFIG,openal-config,yes,no)
+#if test $OPENALCONFIG = "yes"; then
+#{
+#   CFLAGS="$CFLAGS $(openal-config --cflags)"
+#   CPPFLAGS="$CPPFLAGS $(openal-config --cflags)" 
+#   LIBS="$LIBS $(openal-config --libs)"
+#}
+#else
+#{
+#   AC_MSG_ERROR(Coudn't find the program openal-config. Usually it is installed with OpenAL library. Please go to http://www.openal.org and get it.)
+#}
+#fi
 
 # Checks for libraries.
 
