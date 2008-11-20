@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-11-18 16:58-0200\n"
+"POT-Creation-Date: 2008-11-19 18:53-0200\n"
 "PO-Revision-Date: 2007-11-20 17:24+0000\n"
 "Last-Translator: Sergei Zivukov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -150,7 +150,6 @@ msgid "Wisdom"
 msgstr "Мудрость"
 
 #: src/engine/attwindow.cpp:177 src/engine/charwindow.cpp:171
-#: data/skills/carisma.ski:1
 msgid "Charism"
 msgstr "Харизма"
 
@@ -1017,19 +1016,21 @@ msgid ""
 msgstr ""
 
 #: data/classes/administration.cls:9
-msgid "It's a really dumb ass to find some of them in group. -4 of Charism."
+msgid ""
+"It's a real turn-off to find some of those dumb asses in a group. -4 of "
+"Charisma."
 msgstr ""
 
 #: data/classes/administration.cls:11
 msgid ""
-"The Taylor's Knowledges are a common part of the Administration Students, +2 "
-"to their constitution."
+"The works of Taylor are a common part of the Administration Students' course "
+"of study. +2 for Constitution."
 msgstr ""
 
 #: data/classes/administration.cls:13
 msgid ""
-"Since they are Taylor's fiel disciples, they receive +4 of Taylor's Vialty "
-"Skill"
+"Since they are Taylor's faithful disciples, they receive +4 of Taylor's Veal "
+"Thoughts Skill."
 msgstr ""
 
 #: data/classes/administration.cls:15
@@ -1046,7 +1047,7 @@ msgid ""
 msgstr ""
 
 #: data/classes/medician.cls:1
-msgid "Medicine Student"
+msgid "Medical Student"
 msgstr ""
 
 #: data/classes/medician.cls:2
@@ -1058,18 +1059,18 @@ msgstr ""
 
 #: data/classes/medician.cls:3
 msgid ""
-"The Medicine Student is the thing that abdicated to their social life in "
-"change of an anormal dedication to the studies, believing they'll be "
-"something in life. Those creatures haven't any cleverness, one time based "
-"their lifes on theories and more theories. To be one of this class, the "
-"character need to be submitted to any hideous  attitude, like drown  "
-"hookies, public peversion, among others that result in death."
+"The Medical Student is a person who has given up his social life in exchange "
+"for an abnormal dedication to his studies, believing he'll be something in "
+"life. Those creatures haven't any cleverness, and base their lives on "
+"theories and more theories. To be one of this class, the character needs to "
+"be able to behave in a hideous manner: drowning hookies, public perversion, "
+"among other activities that result in death."
 msgstr ""
 
 #: data/classes/medician.cls:7
 msgid ""
-"Although being theory creatures, they usually spent their money in physical "
-"academies, receiving +1 of Strength."
+"Although they are creatures of theory, they usually spend their money in "
+"physical academies, receiving +1 of Strength."
 msgstr ""
 
 #: data/classes/medician.cls:9
@@ -1086,15 +1087,16 @@ msgstr ""
 
 #: data/classes/medician.cls:13
 msgid ""
-"Frequently in the studies, the Medicine Student forgot to grow up, being "
-"very susceptible to questions, receiving -3 on all I am not a Fool tests "
-"(this modifier  fall down to -6 when the target is their father or mother)."
+"So immersed in his studies is the Medical Student that he has often "
+"forgotten to grow up, being very susceptible to questions, receiving -3 on "
+"all I am not a Fool tests (diminished to -6 when the target is their father "
+"or mother)."
 msgstr ""
 
 #: data/classes/medician.cls:15
 msgid ""
-"Those creatures receive +4 on all Bluff tests, one time that all bluff they "
-"made, for more ridiculous they are, can really (and easily) be true."
+"Those creatures receive +4 on all Bluff tests. They bluff all the time and "
+"the more ridiculous their bluffing is, the more easily it can be really true."
 msgstr ""
 
 #: data/classes/medician.cls:17
@@ -1120,29 +1122,30 @@ msgstr ""
 
 #: data/classes/biology.cls:3
 msgid ""
-"Able to be for two weeks isoleted in the mountains doing their 'Field "
-"Works', ambushing and observing the incredible and exciting ameiva's feed "
-"habits (and sometimes mistaken as Hippies in their search for Feed-Karma), "
-"the Biology Students are from all things a few: a few  medicians, a few "
-"hippies,  a few computers, a few hot-dog sellers..."
+"Able to be isolated in the mountains for two weeks at a time doing their "
+"'Field Work', ambushing and observing the incredible and exciting ameiva's "
+"feeding habits (and they are sometimes mistaken as Hippies in their search "
+"for Feed-Karma), the Biology Students can be all things to all men: among "
+"them, there are a few doctors, a few hippies, a few computer analysts, a few "
+"hot-dog sellers..."
 msgstr ""
 
 #: data/classes/biology.cls:7
 msgid ""
-"+2 of Dexterity, since they always observe and follow in distinct terrains "
-"the ameivas (and by also open its body, counting how many worms it has)."
+"+2 of Dexterity, since they always observe and follow the ameivas on "
+"whatever terrain (and also dissect them, to count how many worms they have)."
 msgstr ""
 
 #: data/classes/biology.cls:9
 msgid ""
-"-1 of Strength, since their muscles atrophy after spent 12 hours inert "
-"observing the ameiva's coupling rituals."
+"-1 of Strength, cause their muscles atrophy after spending 12 hours "
+"motionless, observing the ameiva's coupling rituals. "
 msgstr ""
 
 #: data/classes/biology.cls:11
 msgid ""
-"Since they are commonly mistaken as hippies, Biology Students receive +6 of "
-"Disguises when disguised as hippie (and when not of this race)"
+"Since they are commonly mistaken for hippies, Biology Students receive +6 of "
+"Disguises when disguised as hippies (and when not of this race)"
 msgstr ""
 
 #: data/classes/biology.cls:13
@@ -1151,7 +1154,7 @@ msgstr ""
 
 #: data/classes/biology.cls:15
 msgid ""
-"For the hard work observing ameivas, the Biology Student receveis +2 of "
+"For the hard work observing ameivas, the Biology Student receives +2 of "
 "furtivity."
 msgstr ""
 
@@ -1167,24 +1170,25 @@ msgstr ""
 
 #: data/classes/music.cls:3
 msgid ""
-"In a scientific world, few people adventure in a different concept, "
-"following some art source, like music. The Music Student is a creature with "
-"extreme patience to learn all tecnics related to ternary compass atonalisms, "
-"have the capacity to realize them and a distorced taste to play one of the "
-"most bizarre and ocult musical instrument.|Creator's Note: 'Based on the "
-"idea that musical tastes are distints and only the the most understood ones "
-"appreciate distinct rhythms (obviously all that aren't atempts to kill the "
-"musical concept), the class was made. So, the same sound, Bach for example, "
-"can be a beautifull music or something boring, depending from the ear of the "
-"listener. Probably a progressive fan will like Bach, but a fan of Tati-"
-"Quebra-Barraco, without any musical sense, will think  Bach as a great shit. "
-"So, the Music Student will be a virtuous misunderstood.'"
+"In a scientific world, few people adventure into different concepts, delving "
+"into some art source, like music. The Music Student is a creature with "
+"extreme patience, needed to learn all the techniques related to ternary "
+"compass atonalisms, has the capacity to create them and a distorted taste "
+"for playing one of the most bizarre and occult musical instruments.|"
+"Creator's Note: 'Based on the idea that musical tastes are distinct and only "
+"the the most open-minded people appreciate distinct rhythms (obviously all "
+"that aren't attempts to kill the musical concept), the class was made. So, "
+"the same sound, Bach for example, can be beautiful music or terribly boring, "
+"depending upon the ear of the listener. Probably a progressive fan will like "
+"Bach, but a fan of Tati-Quebra-Barraco, without any musical sense, will "
+"think Bach is shit. So, the Music Student will be virtuous and "
+"misunderstood.'"
 msgstr ""
 
 #: data/classes/music.cls:7
 msgid ""
-"-4 of Strength by the fact that their muscles atrophy since aren't used more "
-"than the much needed to play their instrument."
+"-4 of Strength because of the fact that their muscles atrophy since they "
+"aren't used for anything but playing their instruments."
 msgstr ""
 
 #: data/classes/music.cls:9
@@ -1199,19 +1203,19 @@ msgstr ""
 
 #: data/classes/music.cls:13
 msgid ""
-"+1 of Intelligence for know those notes, how they are created and all "
+"+1 of Intelligence for knowing those notes, how they are created and all the "
 "musical theory envolved on their creation."
 msgstr ""
 
 #: data/classes/music.cls:15
-msgid "+2 of Charism for the capacity to joy people."
+msgid "+2 of Charism for the capacity to fill people with joy."
 msgstr ""
 
 #: data/classes/music.cls:17
 msgid ""
-"Cause of the extense and hard work since they were childs, the Music Student "
-"have incredible capacity to play their bizarre instrument, receiving +8 of "
-"bonus when playing it."
+"Because of their intense and difficult work since they were children, the "
+"Music Students have an incredible capacity to play their bizarre "
+"instruments, receiving +8 of bonus when playing them."
 msgstr ""
 
 #: data/classes/music.cls:19
@@ -1226,23 +1230,25 @@ msgstr ""
 
 #: data/classes/compsci.cls:2
 msgid ""
-"'-I really don't know why I'm making this graduation...|- How  not? For the "
-"womans, obviously!'|(Gushm, that time CS Student, answering the CS dilema)"
+"'I really don't know why I want to earn this diploma...|Are you stupid? For "
+"the women, obviously!'|(Gushm, then a CS Student, answering the existential "
+"question of his class)."
 msgstr ""
 
 #: data/classes/compsci.cls:3
 msgid ""
-"Computer Science Student is the most bizarre class in DccNiTghtmare (and, "
-"paradoxically, the most common). They are knowledge by their suicidal "
-"choices (the first one is the graduation they choosed), their little "
-"patience to view what their masters call 'classes', the infinity time spent "
-"on Pratical Exercises (TPs) and the hate when they percept that it works "
-"perfectly, but their masters won't  look  and  appraise  it, since CS "
-"teachers are displicents and without any compromise with the graduation."
+"The Computer Science Student is the most bizarre class in DccNiTghtmare "
+"(and, paradoxically, the most common). They are known by their suicidal "
+"choices (the first one being the course of studies they have chosen), their "
+"lack of patience when attending what their masters call 'classes', the "
+"infinite time spent on Practical Exercises (TPs) and the hatred they feel "
+"when they perceive that what they have done works perfectly, but their "
+"masters won't look at and appraise it, since CS teachers are disciplined and "
+"will not compromise the worth of the diploma."
 msgstr ""
 
 #: data/classes/compsci.cls:7
-msgid "Since they have to be self-teachers, they receive +2 of Wisdom."
+msgid "Because they have to teach themselves, they receive +2 of Wisdom."
 msgstr ""
 
 #: data/classes/compsci.cls:9
@@ -1253,13 +1259,15 @@ msgstr ""
 
 #: data/classes/compsci.cls:11
 msgid ""
-"Computer Science Students receive +5 of fortitute by survive to their hoax "
-"and boring graduation."
+"Computer Science Students receive +5 of fortitude for surviving their boring "
+"studies that are just a pale imitation of what real computer studies should "
+"be."
 msgstr ""
 
 #: data/classes/compsci.cls:13
 msgid ""
-"Also receive -2 of reflexes for the lot of time spent in front of a computer."
+"Also receive -2 of reflexes for the mount of time spent in front of a "
+"computer."
 msgstr ""
 
 #: data/classes/philosophy.cls:1
@@ -1272,35 +1280,35 @@ msgstr ""
 
 #: data/classes/philosophy.cls:3
 msgid ""
-"Not satisfied  with don't want nothing for their life, the Philosophy "
-"Student enters the University with just one objective: to perfect that 'want "
-"nothing'. Adepts of drink beers and of do nothing, mixing their time between "
-"one and other, the Philosophy Student become the bohemian master and full of "
-"hot air."
+"Not satisfied with not wanting anything for his life, the Philosophy Student "
+"enters the University with just one objective: to perfect that lack of "
+"desire. Because they are Adepts of drinking beer and of doing nothing, "
+"sharing their time between one and other activity, the Philosophy Student "
+"becomes the perfect bohemian and is full of hot air. "
 msgstr ""
 
 #: data/classes/philosophy.cls:7
 msgid ""
-"Receive +2 of Constitution, because their body is barely of a monk, fully "
-"usual to the alcohol."
+"Receive +2 of Contitution, because of his monk's body filled with alcohol."
 msgstr ""
 
 #: data/classes/philosophy.cls:9
 msgid ""
-"Since they only study complex things, the Philosophy Student easily forget "
-"all pratical and common life things, receiving -2 of Wisdom."
+"Since they only study complex things, Philosophy Students easily forget all "
+"the practical and ordinary things of life, receiving -2 of Wisdom."
 msgstr ""
 
 #: data/classes/philosophy.cls:11
 msgid ""
-"For spending almost all their student's life in pubs, the Philosophy Student "
-"acquire some kind of aptitude to deal with others, receiving +2 of Charisma."
+"For spending almost all their student lives in pubs, the Philosophy Student "
+"acquire some kind of aptitude of dealing with others, receiving +2 of "
+"Charisma."
 msgstr ""
 
 #: data/classes/philosophy.cls:13
 msgid ""
-"The Philosophy Student receive +4 of Knowledge (Classic) for the few they "
-"learn at university."
+"The Philosophy Student receives +4 of Knowledge (Classic) for the little "
+"they learn at university."
 msgstr ""
 
 #: data/classes/philosophy.cls:15
@@ -1309,14 +1317,13 @@ msgstr ""
 
 #: data/classes/philosophy.cls:17
 msgid ""
-"Receive -4 of all Dexterity related tests, one time they are frequently "
-"drunk."
+"Receive -4 of all Dexterity-related tests, for they are frequently drunk."
 msgstr ""
 
 #: data/classes/philosophy.cls:19
 msgid ""
-"For don't make any (or very few) classes, the Philosophy Student receive -4 "
-"of Out of time."
+"Because he doesn't attend any (or very few) classes, the Philosophy Student "
+"receives -4 of Out of time."
 msgstr ""
 
 #: data/classes/journalism.cls:1
@@ -1332,18 +1339,19 @@ msgstr ""
 
 #: data/classes/journalism.cls:3
 msgid ""
-"Graduating in the arts of deceit a cheating, the journalism student is a "
-"writing master. With words, he can create events, stun his enemies, swindle "
-"his audience, towards other habilities. Despite of being college friends, "
-"these malicious creatures can be very rude to each other, not being common "
-"to see them on large groups. But they can easily join the masses, to gather "
-"as much information as possible."
+"Graduating in the arts of deceit and cheating, the journalism student is a "
+"master writer. With words, he can create events, stun his enemies, swindle "
+"his audience, and so forth. Although they are college friends, these "
+"malicious creatures can be very rude to each other, and it is unusual to see "
+"them in large groups. But they can easily join the masses, to gather as much "
+"information as possible."
 msgstr ""
 
 #: data/classes/journalism.cls:7
 msgid ""
-"As they usually are deep involved on mental work, these organisms don't find "
-"time or will to exercise their muscles, receiving -2 of Strength."
+"As they are usually deeply involved in mental work, these organisms don't "
+"find the time or the will to exercise their muscles, receiving -2 of "
+"Strength."
 msgstr ""
 
 #: data/classes/journalism.cls:9
@@ -1354,16 +1362,16 @@ msgstr ""
 
 #: data/classes/journalism.cls:11
 msgid ""
-"Despite of being extemely hard criticals, these organisms can dissimulate "
-"their true nature, being very kind to their audience and informations "
-"sources, receiving +1 of Charism."
+"Although they are extremely severe critics, these organisms can dissimulate "
+"their true nature, being very kind to their audience and information "
+"sources, receiving +1 of Charisma."
 msgstr ""
 
 #: data/classes/journalism.cls:13
 msgid ""
-"Impartiality: Before choosing this class, the Journalism student rolls  a "
+"Impartiality: Before choosing this class, the Journalism student rolls a "
 "d100. If the result is between 1 and 99, he can't be neutral. Else, he can "
-"be a Journalism Student of any alingment."
+"be a Journalism Student of any alignment."
 msgstr ""
 
 #: data/classes/journalism.cls:15
@@ -1390,21 +1398,21 @@ msgstr ""
 
 #: data/classes/physicaled.cls:3
 msgid ""
-"Usually having 'Soccer' and 'Basketball' as classes, the dedicated (in the "
+"Usually taking classes in 'Soccer' and 'Basketball', the dedicated (in the "
 "physical sense of the word) Students of Physical Education are things that "
-"value the muscular force above all. With too muscles in the brain, those "
+"value muscular force above all. With too many muscles in the brain, those "
 "Students possess nothing less than a supernatural resistance in the head - "
-"in change of some points of Intelligence, really. Finally, these boys are "
-"stars in the soccer but aren't distinguished students of mathematics (hardly "
-"knowing number's fundamentals)."
+"in exchange for some points of Intelligence, really. Finally, these boys are "
+"stars on the soccer field but aren't distinguished students of mathematics "
+"(hardly knowing the fundamentals of numbers)."
 msgstr ""
 
 #: data/classes/physicaled.cls:7
-msgid "Receive +3 of Strength, due to the lot of hours kicking a ball."
+msgid "Receive +3 of Strength, due to all those hours spent kicking a ball."
 msgstr ""
 
 #: data/classes/physicaled.cls:9
-msgid "+2 of Dexterity, due to the hours fluctuating in the water."
+msgid "+2 of Dexterity, due to the hours floating in the water."
 msgstr ""
 
 #: data/classes/physicaled.cls:11
@@ -1416,20 +1424,20 @@ msgid "-6 of Intelligence since they abandoned the books in a remote past."
 msgstr ""
 
 #: data/classes/physicaled.cls:15
-msgid "-6 of Widow, by the same reason."
+msgid "-6 of Wisdom, for the same reason."
 msgstr ""
 
 #: data/classes/physicaled.cls:17
 msgid ""
-"The Student of Physical Education receives +4 of Jump, Scale, Mount, "
-"Swimming, Soccer, Basketball, finally, sports  in  general or anything that "
-"emanates physical power."
+"The Student of Physical Education receives +4 of Jumping, Climbing, Riding, "
+"Swimming, Soccer, Basketball, finally, sports in general or anything that "
+"radiates physical power."
 msgstr ""
 
 #: data/classes/physicaled.cls:19
 msgid ""
-"Receive -5 on all Knowledges by the simple fact that they have no idea of "
-"the meaning of this word."
+"Receive -5 of Knowledge of any sort at all, simply because that they have no "
+"idea of the meaning of this word."
 msgstr ""
 
 #: data/classes/physicaled.cls:21
@@ -1437,7 +1445,7 @@ msgid "-4 of Hide, since they are coarse hulks."
 msgstr ""
 
 #: data/classes/physicaled.cls:23
-msgid "-2 of Listen, therefore their muscles take all ear's openings."
+msgid "-2 of Listen, since their muscles fill their ear canals."
 msgstr ""
 
 #: data/classes/physicaled.cls:25
@@ -1446,14 +1454,14 @@ msgstr ""
 
 #: data/classes/physicaled.cls:27
 msgid ""
-"Receive +2 of I Am Not A Fool by the fact of their brain stop function "
+"Receive +2 of I Am Not A Fool because their brain stops functioning "
 "sometimes."
 msgstr ""
 
 #: data/classes/physicaled.cls:29
 msgid ""
-"The Student receives -4 in Train Animals, since haven't absolute control of "
-"their muscles, there is a chance of crushing the animal."
+"The Student receives -4 in Training Animals, since, because they haven't "
+"absolute control of their muscles, there is a chance of crushing the animal."
 msgstr ""
 
 #: data/classes/physicaled.cls:31
@@ -1463,8 +1471,8 @@ msgstr ""
 
 #: data/classes/physicaled.cls:33
 msgid ""
-"Also they possess -2 of Bluff, therefore their muscles practically possess "
-"own life and easily contratic themselves on theirlies."
+"Also they possess -2 of Bluff, for their muscles practically have a life of "
+"their own and easily contradict themselves when they are lying."
 msgstr ""
 
 #: data/classes/physicaled.cls:35
@@ -1497,30 +1505,32 @@ msgstr ""
 
 #: data/classes/lawner.cls:3
 msgid ""
-"Living at the Campus disguised as penguins, Law Students are organisms that, "
-"when perceive the minor possibility to make profits by some situation they "
-"judge 'juridic', will use of all their verborragy, deturpations and sofisms "
-"to make it. Is always important to have a Law Student on your group (party), "
-"be for avoiding other Law Students knowledge (and policial aparate) take "
-"advantages from you, or for taking advantages from others and avoid that "
-"iminent punition."
+"Living on Campus disguised as penguins, Law Students are organisms that, "
+"when they perceive the minor possibility of making a profit of some "
+"situation they judge to be 'juridical', will use all their vocabulary, "
+"rhetorical tricks and sophisms to take advantage of it. It is always "
+"important to have a Law Student in your group (party), be it to avoid being "
+"taken advantage of by the knowledge (and political apparatus) of other Law "
+"Students, or to be able to take advantage of others, hence avoiding that "
+"looming punishment."
 msgstr ""
 
 #: data/classes/lawner.cls:7
 msgid ""
-"For usually being stupids among anything that isn't related with money, they "
-"receive -2 of Intelligence."
+"Because they are usually quite stupid about anything that isn't related to "
+"money, they receive -2 of Intelligence."
 msgstr ""
 
 #: data/classes/lawner.cls:9
 msgid ""
-"For their hungry to take the last copeck of their victims, they receive -1 "
-"of Charism."
+"Because they are anxious to take the last kopeck from their victims, they "
+"receive -1 of Charisma."
 msgstr ""
 
 #: data/classes/lawner.cls:11
 msgid ""
-"By can modify any situation to make money from it, receive +2 of Wisdom."
+"Because they can modify any situation to make money from it, they receive +2 "
+"of Wisdom."
 msgstr ""
 
 #: data/classes/lawner.cls:13
@@ -1541,50 +1551,52 @@ msgstr ""
 
 #: data/classes/physiotherapy.cls:3
 msgid ""
-"Medicine Students arqui-rivals, the Physiotherapy Student feeds a mortal "
-"hate whith their half-blood brothers. The Physiotherapy Student, althought "
-"have something similar with the Medicine ones (like elves and half-elves), "
-"hate them with all their forces because the little medicians passed in the "
-"place that the Physiotherapy one always want. The Physiotherapy Student "
-"usually works at physical academies, to better look for their victims."
+"The arch-rivals of Medical Students, the Physiotherapy Student feeds a "
+"mortal hatred towards their half-blood brothers. The Physiotherapy Student, "
+"although somewhat similar to the Medical ones (like elves and half-elves), "
+"hate them with all their forces because the little physicians-to-be managed "
+"to enter the school that the Physiotherapy Student always wanted. The "
+"Physiotherapy Student usually works in physical academies, the better to "
+"find their victims."
 msgstr ""
 
 #: data/classes/physiotherapy.cls:7
 msgid ""
-"For hard study the human body mobility, they can realize some achievements, "
-"receiveing +1 of Dexterity."
+"Because of their diligent study of the mobility of the human body, they can "
+"do some amazing things, receiving +1 of Dexterity."
 msgstr ""
 
 #: data/classes/physiotherapy.cls:9
 msgid ""
-"All Physiotherapy Student lost one or more years studing to be a Medicine "
-"Student, receiving +1 of Intelligence."
+"All Physiotherapy Students have lost one or more years studying to be a "
+"Medical Student, receiving +1 of Intelligence."
 msgstr ""
 
 #: data/classes/physiotherapy.cls:11
 msgid ""
-"Because the effort to be a Medicine Student, the little Physioterapist "
-"inherit the penalty of -2 of Wisdom."
+"Because of all his wasted efforts to become a Medical Student, the little "
+"Physiotherapist inherits the penalty of -2 of Wisdom."
 msgstr ""
 
 #: data/classes/physiotherapy.cls:13
 msgid ""
-"Feeding the hate to their medicine rivals, the Physiotherapy Student receive "
-"the class bonus against them, of +1 on all attacks against Medicians."
+"Feeding their hatred towards their rivals in medicine, the Physiotherapy "
+"Students receive the class bonus against them, of +1 on all attacks against "
+"Med Students."
 msgstr ""
 
 #: data/classes/physiotherapy.cls:15
 msgid ""
-"They receive +3 of Listen, Observate, Bluff and I am not a Fool tests when "
-"targeting Medicine Students."
+"They receive +3 of Listen, Observe, Bluff and I am not a Fool tests when "
+"targeting Medical Students."
 msgstr ""
 
 #: data/classes/physiotherapy.cls:17
 msgid ""
-"Because they are failed medicians, any chance of social interaction when "
-"there is a Medicine Student in a radius of 20 meters, the Physiotherapy "
-"Student will receive -5 to the Social Skills. If they fail a test by 5 or "
-"more, they will commit suicide."
+"Because they are failed Medical Students, whenever there is any chance of "
+"social interaction when there is a Medical Student within a radius of 20 "
+"meters, the Physiotherapy Student will receive -5 of Social Skills. If they "
+"fail a test by 5 or more, they will commit suicide."
 msgstr ""
 
 #: data/classes/mechanic.cls:1
@@ -1599,22 +1611,23 @@ msgstr ""
 
 #: data/classes/mechanic.cls:3
 msgid ""
-"The student of mechanical engineering is the Campus most frustrated person. "
-"After enter the graduation on the hope of learn everything about cars, "
-"planes,  boats and other mechanical structures of high complexity, they "
-"discover that the world is summarized to F = m*a. In possession of that "
-"simple equation and of absurd quantities of inexplicable calculations, the "
-"teachers of physics make  their life a hell on the basic course. But on "
-"specific classes they realize that the world was happy on the basic cycle. "
-"Generally they're seen in all classes  inside the Exacts Institute (ICEX), "
-"therefore no one is going to finish the graduation regularly."
+"The student of Mechanical Engineering is the most frustrated person on "
+"Campus. After choosing that course of studies in hopes of learning "
+"everything about cars, planes, boats and other mechanical structures of "
+"great complexity, they discover that the world can be summarized to F = m*a. "
+"In possession of that simple equation and of absurd quantities of "
+"inexplicable calculations, the teachers of physics make their life a hell "
+"during the fundamental first year. But in specific classes they realize that "
+"the world was happy during that basic cycle. Generally, because they're seen "
+"in all classes inside the Exacts Institute (ICEX), it is certain that no one "
+"is assured of graduating regularly."
 msgstr ""
 
 #: data/classes/mechanic.cls:7
 msgid ""
-"Students of Mechanics are going to study crazy, if they want to do something "
-"more than hold tight bolts in their lifes, so they receive + 3 of "
-"Intelligence."
+"ME Students will study like crazy, if they want to do something more in "
+"their lives than hold bolts while somebody else tightens them, so they "
+"receive +3 of Intelligence."
 msgstr ""
 
 #: data/classes/mechanic.cls:9
@@ -1626,18 +1639,17 @@ msgstr ""
 
 #: data/classes/mechanic.cls:11
 msgid ""
-"They receive -2 of Strength, one time that the Autocad mouse doesn't weigh "
-"much."
+"They receive -2 of Strength. After all, the Autocad mouse doesn't weigh much."
 msgstr ""
 
 #: data/classes/mechanic.cls:13
 msgid ""
-"A student of Mechanics always suffers a penalty of -10 in any kind of tests "
-"against things of female sex. The total absence of contact with that kind of "
-"organism causes a barely unruly frenzy on the student, that should do a test "
-"of I Am Not A Fool (with the penalty of -10) to not jump wildily on top of "
-"the female. In case of fail, the student enters in frenzy and will try with "
-"all his forces to 'copulate' with the same one."
+"A student of Mechanics always suffers a penalty of -10 in any kind of test "
+"against things of the female sex. Total absence of contact with that kind of "
+"organism causes a barely controlled frenzy in the student, who should do an "
+"I Am Not A Fool test (with the penalty of -10) so he won't jump wildly on "
+"top of the female. If he fails, the student becomes hysterically frantic and "
+"will try as hard as he can to 'copulate' with her."
 msgstr ""
 
 #: data/classes/to.cls:1
@@ -1646,27 +1658,30 @@ msgstr ""
 
 #: data/classes/to.cls:2
 msgid ""
-"'- Hey, girls from OT, answer me a question I have since entered the "
-"University...|- No, we also don't know to what our graduation is made for "
-"and are bored by others asking us about it!'|(Turmalina, Computer Science "
-"Student, asking three OT Students)"
+"'Hey, girls from OT, there's a question I've had in my mind since I entered "
+"the University. Can you answer it for me?...| No, we don't know what our "
+"diploma will allow us to do and we're bored by others asking us about it!'|"
+"(Turmalina, Computer Science Student, interviewing three OT Students)"
 msgstr ""
 
 #: data/classes/to.cls:3
 msgid ""
-"Usually little and fragile, the Occupational Therapy Students can be high "
-"emoted watching the most previsible mexican novel. Knowledge by their "
-"'hard'  group therapies, called 'Academic Classes', and for the hours spent "
-"painting a little paper like a three years old child (and FOR a three years "
-"old child), calling it 'Scientific  Project', the OT Students can't explain "
-"to what their graduation is (it's one of the universe's secrets not answered "
-"by 42), their life is, their clients, their friends, their bass, the "
-"Anamabeka, their..., finally... but sure know what happened at the previous "
-"chapter of the midday television novel."
+"Usually little and fragile, the Occupational Therapy Students can become "
+"highly emotional when they watch Mexican soap operas, however conventional. "
+"Known for their 'hard' group therapies, called 'Academic Classes', and for "
+"the hours they spend painting a little piece of paper like a three-year-old "
+"child (and FOR a three-year-old child), calling it a 'Scientific Project', "
+"the OT Students can't explain the purpose of their diploma (it's one of the "
+"universe's secrets not answered by 42), of their lives, their clients, their "
+"friends, their bass guitars, the Anamabeka, their..., finally... But they "
+"sure do know what happened in the previous chapter of the midday television "
+"soap opera."
 msgstr ""
 
 #: data/classes/to.cls:7
-msgid "Receive -2 of Intelligence, for spent too much time watching TV novels."
+msgid ""
+"Receive -2 of Intelligence, for spending too much time watching soap operas "
+"on TV."
 msgstr ""
 
 #: data/classes/to.cls:9
@@ -1675,8 +1690,8 @@ msgstr ""
 
 #: data/classes/to.cls:11
 msgid ""
-"+3 of Charism, for not study at the Exacts Sciences Institute (ICEX), "
-"usually being pleasants."
+"+3 of Charism, for not studying at the Exact Sciences Institute (ICEX), and "
+"for usually being very nice."
 msgstr ""
 
 #: data/classes/to.cls:13
@@ -1691,7 +1706,7 @@ msgid ""
 msgstr ""
 
 #: data/classes/to.cls:17
-msgid "-12 of Hide at the same circunstances."
+msgid "-12 of Hide in the same circunstances."
 msgstr ""
 
 #: data/classes/to.cls:19
@@ -1700,8 +1715,8 @@ msgstr ""
 
 #: data/classes/to.cls:21
 msgid ""
-"OT Students have the tendency to play that musical instrument someone call "
-"bass, receiving -4 of Observe."
+"OT Students have a tendency to play that musical instrument called a bass, "
+"receiving -4 of Observe."
 msgstr ""
 
 #: data/races/autista.rca:1
@@ -1718,29 +1733,28 @@ msgstr ""
 
 #: data/races/autista.rca:3
 msgid ""
-"Despite of, in the distance, looks like a common and normal person, this "
-"tormented organism suffers serious psychological dysfunctions and "
-"comportamentals detours. These creatures have the power to bring outside "
-"their own world all elements that exists there, sometimes confunding other "
-"races. Feared by many and misunderstood by everything, this organism is "
-"going to lead their life as any other race, without put the others, or he, "
-"in risk. Everybody has a little of Strange Autistic inside itself, be this "
-"autism a world of wars and shots, fights and samurais, Latin America culture "
-"or styles of swords and drums."
+"Although, from a distance, he or she looks like a common and normal person, "
+"this tormented organism suffers serious psychological dysfunctions and "
+"behavioral quirks. These creatures have the power to externalize all the "
+"elements that exist within their own world, sometimes confounding other "
+"races. Feared by many and misunderstood by everyone, this organism will lead "
+"his life like any other race, without putting himself or others at risk. "
+"There is a little bit of the Strange Autistic inside everyone, whether this "
+"autism be a world of wars and shots, fights and samurais, Latin American "
+"culture or styles of swords and drums."
 msgstr ""
 
 #: data/races/autista.rca:6
 msgid ""
-"Being too much strange for someone else's eyes, the Strange Autistic "
-"receives -4 on all Social Tests when dealing with a target of opposite "
-"tendencies."
+"Being far too strange in someone else's eyes, the Strange Autistic receives -"
+"4 on all Social Tests when dealing with a target of opposite tendencies."
 msgstr ""
 
 #: data/races/autista.rca:8
 msgid ""
-"Understanding the fact that everybody is a few Strange Autistics, the "
-"Strange Autistic receives a bonus of + 2 on all Social Tests when dealing "
-"with a target of compatible tendencies."
+"Understanding the fact that everybody is a little bit autistic like him or "
+"her, the Strange Autistic receives a bonus of + 2 on all Social Tests when "
+"dealing with a target of compatible tendencies."
 msgstr ""
 
 #: data/races/boy.rca:1
@@ -2027,7 +2041,7 @@ msgid ""
 msgstr ""
 
 #: data/skills/adestrarbichos.ski:1
-msgid "Train Animals"
+msgid "Training Animals"
 msgstr ""
 
 #: data/skills/adestrarbichos.ski:2
@@ -2096,7 +2110,7 @@ msgid ""
 msgstr ""
 
 #: data/skills/bovinice.ski:1
-msgid "Taylor's Vealty"
+msgid "Taylor's Veal Thoughts"
 msgstr ""
 
 #: data/skills/bovinice.ski:2
@@ -2106,13 +2120,17 @@ msgid ""
 "creature capacity to do hard work without discuss."
 msgstr ""
 
+#: data/skills/carisma.ski:1
+msgid "Charisma"
+msgstr "Харизма"
+
 #: data/skills/carisma.ski:2
 msgid ""
 "Measures how eloquent, imponent with words, inspirated or similar adjectives "
 "the creature is. A very charismatic organism can aglomerate students groups "
 "to invade the University Presidency Building. A not charismatic one can't "
-"make his dog obey him.||Ameiva: Charism 25|Ratazana: Charism 6|Ente: Charism "
-"8"
+"make his dog obey him.||Ameiva: Charisma 25|Ratazana: Charisma 6|Ente: "
+"Charisma 8"
 msgstr ""
 
 #: data/skills/cnhgeral.ski:1
@@ -2396,8 +2414,8 @@ msgstr ""
 #: data/skills/passelivre.ski:2
 msgid ""
 "Is the hability to realize any ilegal thing without suffer retaliations from "
-"the responsibles authorities. Free-Pass serves to walk on restricted areas "
-"or walk with heavy guns."
+"the responsible authorities. Free-Pass serves to walk on restricted areas or "
+"walk with heavy guns."
 msgstr ""
 
 #: data/skills/penosaco.ski:1
@@ -2456,8 +2474,8 @@ msgstr ""
 
 #: data/skills/semtempo.ski:2
 msgid ""
-"People with it can't make all normal things in live, 'cause their graduation "
-"don't let! (Can be a glorious excuse to not to something)."
+"People with it can't do all normal things in live, 'cause their graduation "
+"don't let! (Can be a glorious excuse to not do something)."
 msgstr ""
 
 #: data/skills/suborno.ski:1

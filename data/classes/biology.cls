@@ -1,18 +1,18 @@
 gettext("Biology Student")
 gettext("'This place is filled with arthropodes!'|(Bin, that time, a Biology Student)")
-gettext("Able to be for two weeks isoleted in the mountains doing their 'Field Works', ambushing and observing the incredible and exciting ameiva's feed habits (and sometimes mistaken as Hippies in their search for Feed-Karma), the Biology Students are from all things a few: a few  medicians, a few hippies,  a few computers, a few hot-dog sellers...")
+gettext("Able to be isolated in the mountains for two weeks at a time doing their 'Field Work', ambushing and observing the incredible and exciting ameiva's feeding habits (and they are sometimes mistaken as Hippies in their search for Feed-Karma), the Biology Students can be all things to all men: among them, there are a few doctors, a few hippies, a few computer analysts, a few hot-dog sellers...")
 d8
 5
 2 ATTRIBUTE DEXTERITY ALL ALL
-gettext("+2 of Dexterity, since they always observe and follow in distinct terrains the ameivas (and by also open its body, counting how many worms it has).")
+gettext("+2 of Dexterity, since they always observe and follow the ameivas on whatever terrain (and also dissect them, to count how many worms they have).")
 -1 ATTRIBUTE STRENGTH ALL ALL
-gettext("-1 of Strength, since their muscles atrophy after spent 12 hours inert observing the ameiva's coupling rituals.")
+gettext("-1 of Strength, cause their muscles atrophy after spending 12 hours motionless, observing the ameiva's coupling rituals. ")
 6 SKILL DISGUISES CLASS HIPPIE
-gettext("Since they are commonly mistaken as hippies, Biology Students receive +6 of Disguises when disguised as hippie (and when not of this race)")
+gettext("Since they are commonly mistaken for hippies, Biology Students receive +6 of Disguises when disguised as hippies (and when not of this race)")
 -4 SKILL FREE_PASS ALL ALL
 gettext("For the same reason, -4 of free-pass.")
 2 SKILL FURTIVE ALL ALL
-gettext("For the hard work observing ameivas, the Biology Student receveis +2 of furtivity.")
+gettext("For the hard work observing ameivas, the Biology Student receives +2 of furtivity.")
 7
 1 AMEIVAS_ADORATION
 4 AMEIVAS_WORMS

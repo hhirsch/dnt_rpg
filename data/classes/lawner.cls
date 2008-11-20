@@ -1,14 +1,14 @@
 gettext("Law Student")
 gettext("'- Are we going to the bar taking one?|- Yes, from whose?'|(Typical dialog between two law students)")
-gettext("Living at the Campus disguised as penguins, Law Students are organisms that, when perceive the minor possibility to make profits by some situation they judge 'juridic', will use of all their verborragy, deturpations and sofisms to make it. Is always important to have a Law Student on your group (party), be for avoiding other Law Students knowledge (and policial aparate) take advantages from you, or for taking advantages from others and avoid that iminent punition.")
+gettext("Living on Campus disguised as penguins, Law Students are organisms that, when they perceive the minor possibility of making a profit of some situation they judge to be 'juridical', will use all their vocabulary, rhetorical tricks and sophisms to take advantage of it. It is always important to have a Law Student in your group (party), be it to avoid being taken advantage of by the knowledge (and political apparatus) of other Law Students, or to be able to take advantage of others, hence avoiding that looming punishment.")
 d6
 4
 -2 ATTRIBUTE INTELLIGENCE ALL ALL
-gettext("For usually being stupids among anything that isn't related with money, they receive -2 of Intelligence.")
+gettext("Because they are usually quite stupid about anything that isn't related to money, they receive -2 of Intelligence.")
 -1 ATTRIBUTE CHARISM ALL ALL
-gettext("For their hungry to take the last copeck of their victims, they receive -1 of Charism.")
+gettext("Because they are anxious to take the last kopeck from their victims, they receive -1 of Charisma.")
 2 ATTRIBUTE WISDOM ALL ALL
-gettext("By can modify any situation to make money from it, receive +2 of Wisdom.")
+gettext("Because they can modify any situation to make money from it, they receive +2 of Wisdom.")
 1 SKILL APPRAISE ALL ALL
 gettext("Since they know everything about money, the Law Student receives  +1 of Appraise on their first level.")
 4

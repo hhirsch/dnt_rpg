@@ -1,22 +1,22 @@
 gettext("Philosophy Student")
 gettext("'Better die by vodka than by boredom!'|(Vladmir Maiakovsky)")
-gettext("Not satisfied  with don't want nothing for their life, the Philosophy Student enters the University with just one objective: to perfect that 'want nothing'. Adepts of drink beers and of do nothing, mixing their time between one and other, the Philosophy Student become the bohemian master and full of hot air.")
+gettext("Not satisfied with not wanting anything for his life, the Philosophy Student enters the University with just one objective: to perfect that lack of desire. Because they are Adepts of drinking beer and of doing nothing, sharing their time between one and other activity, the Philosophy Student becomes the perfect bohemian and is full of hot air. ")
 d6
 7
 2 ATTRIBUTE CONSTITUTION ALL ALL
-gettext("Receive +2 of Constitution, because their body is barely of a monk, fully usual to the alcohol.")
+gettext("Receive +2 of Contitution, because of his monk's body filled with alcohol.")
 -2 ATTRIBUTE WISDOM ALL ALL
-gettext("Since they only study complex things, the Philosophy Student easily forget all pratical and common life things, receiving -2 of Wisdom.")
+gettext("Since they only study complex things, Philosophy Students easily forget all the practical and ordinary things of life, receiving -2 of Wisdom.")
 2 ATTRIBUTE CHARISM ALL ALL
-gettext("For spending almost all their student's life in pubs, the Philosophy Student acquire some kind of aptitude to deal with others, receiving +2 of Charisma.")
+gettext("For spending almost all their student lives in pubs, the Philosophy Student acquire some kind of aptitude of dealing with others, receiving +2 of Charisma.")
 4 SKILL KNOWLEDGE_CLASSIC ALL ALL
-gettext("The Philosophy Student receive +4 of Knowledge (Classic) for the few they learn at university.")
+gettext("The Philosophy Student receives +4 of Knowledge (Classic) for the little they learn at university.")
 4 SKILL BOHEMIA ALL ALL
 gettext("Receive +4 of Bohemia, obviously.")
 -4 SKILL DEXTERITY ALL ALL
-gettext("Receive -4 of all Dexterity related tests, one time they are frequently drunk.")
+gettext("Receive -4 of all Dexterity-related tests, for they are frequently drunk.")
 -4 SKILL OUT_OF_TIME ALL ALL
-gettext("For don't make any (or very few) classes, the Philosophy Student receive -4 of Out of time.")
+gettext("Because he doesn't attend any (or very few) classes, the Philosophy Student receives -4 of Out of time.")
 10
 1 DRUNK_FIGHT
 1 TURN_TURN_TURN

@@ -1,16 +1,16 @@
 gettext("Computer Science Student")
-gettext("'-I really don't know why I'm making this graduation...|- How  not? For the womans, obviously!'|(Gushm, that time CS Student, answering the CS dilema)")
-gettext("Computer Science Student is the most bizarre class in DccNiTghtmare (and, paradoxically, the most common). They are knowledge by their suicidal choices (the first one is the graduation they choosed), their little patience to view what their masters call 'classes', the infinity time spent on Pratical Exercises (TPs) and the hate when they percept that it works perfectly, but their masters won't  look  and  appraise  it, since CS teachers are displicents and without any compromise with the graduation.")
+gettext("'I really don't know why I want to earn this diploma...|Are you stupid? For the women, obviously!'|(Gushm, then a CS Student, answering the existential question of his class).")
+gettext("The Computer Science Student is the most bizarre class in DccNiTghtmare (and, paradoxically, the most common). They are known by their suicidal choices (the first one being the course of studies they have chosen), their lack of patience when attending what their masters call 'classes', the infinite time spent on Practical Exercises (TPs) and the hatred they feel when they perceive that what they have done works perfectly, but their masters won't look at and appraise it, since CS teachers are disciplined and will not compromise the worth of the diploma.")
 d8
 4
 2 ATTRIBUTE WISDOM ALL ALL
-gettext("Since they have to be self-teachers, they receive +2 of Wisdom.")
+gettext("Because they have to teach themselves, they receive +2 of Wisdom.")
 -1 ATTRIBUTE CHARISM ALL ALL
 gettext("By their natural tendency to be qualified as Geeks, being one or not, they receive -1 of Charism.")
 5 SAVE FORTITUDE ALL ALL
-gettext("Computer Science Students receive +5 of fortitute by survive to their hoax and boring graduation.")
+gettext("Computer Science Students receive +5 of fortitude for surviving their boring studies that are just a pale imitation of what real computer studies should be.")
 -2 SAVE REFLEX ALL ALL
-gettext("Also receive -2 of reflexes for the lot of time spent in front of a computer.")
+gettext("Also receive -2 of reflexes for the mount of time spent in front of a computer.")
 11
 1 SUICIDAL_CHOICES
 2 SUFFER_RESISTANCE

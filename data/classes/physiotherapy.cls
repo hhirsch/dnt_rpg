@@ -1,20 +1,20 @@
 gettext("Physiotherapy Student")
 gettext("'You should have studied more and entered the Federal University!'|(Wanucia, Pysiotherapy Student angry with Mattar, Medicine Student)")
-gettext("Medicine Students arqui-rivals, the Physiotherapy Student feeds a mortal hate whith their half-blood brothers. The Physiotherapy Student, althought have something similar with the Medicine ones (like elves and half-elves), hate them with all their forces because the little medicians passed in the place that the Physiotherapy one always want. The Physiotherapy Student usually works at physical academies, to better look for their victims.")
+gettext("The arch-rivals of Medical Students, the Physiotherapy Student feeds a mortal hatred towards their half-blood brothers. The Physiotherapy Student, although somewhat similar to the Medical ones (like elves and half-elves), hate them with all their forces because the little physicians-to-be managed to enter the school that the Physiotherapy Student always wanted. The Physiotherapy Student usually works in physical academies, the better to find their victims.")
 d8
 6
 1 ATTRIBUTE DEXTERITY ALL ALL
-gettext("For hard study the human body mobility, they can realize some achievements, receiveing +1 of Dexterity.")
+gettext("Because of their diligent study of the mobility of the human body, they can do some amazing things, receiving +1 of Dexterity.")
 1 ATTRIBUTE INTELLIGENCE ALL ALL
-gettext("All Physiotherapy Student lost one or more years studing to be a Medicine Student, receiving +1 of Intelligence.")
+gettext("All Physiotherapy Students have lost one or more years studying to be a Medical Student, receiving +1 of Intelligence.")
 -2 ATTRIBUTE WISDOM ALL ALL
-gettext("Because the effort to be a Medicine Student, the little Physioterapist inherit the penalty of -2 of Wisdom.")
+gettext("Because of all his wasted efforts to become a Medical Student, the little Physiotherapist inherits the penalty of -2 of Wisdom.")
 1 ACTION ATTACK CLASS MED
-gettext("Feeding the hate to their medicine rivals, the Physiotherapy Student receive the class bonus against them, of +1 on all attacks against Medicians.")
+gettext("Feeding their hatred towards their rivals in medicine, the Physiotherapy Students receive the class bonus against them, of +1 on all attacks against Med Students.")
 3 SKILL INTELLIGENCE CLASS MED
-gettext("They receive +3 of Listen, Observate, Bluff and I am not a Fool tests when targeting Medicine Students.")
+gettext("They receive +3 of Listen, Observe, Bluff and I am not a Fool tests when targeting Medical Students.")
 -5 SOCIAL_TESTS ALL CLASS MED
-gettext("Because they are failed medicians, any chance of social interaction when there is a Medicine Student in a radius of 20 meters, the Physiotherapy Student will receive -5 to the Social Skills. If they fail a test by 5 or more, they will commit suicide.")
+gettext("Because they are failed Medical Students, whenever there is any chance of social interaction when there is a Medical Student within a radius of 20 meters, the Physiotherapy Student will receive -5 of Social Skills. If they fail a test by 5 or more, they will commit suicide.")
 10
 1 FAVORITE_PREY_MEDICINE
 2 RAKE

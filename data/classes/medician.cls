@@ -1,18 +1,18 @@
-gettext("Medicine Student")
+gettext("Medical Student")
 gettext("'If I've tried Physiotherapy there, I should passed on first with the points I've made in Medicine.'|(Mattar, Medician Student answering the provocation of Wanucia, Physiotherapy Student)")
-gettext("The Medicine Student is the thing that abdicated to their social life in change of an anormal dedication to the studies, believing they'll be something in life. Those creatures haven't any cleverness, one time based their lifes on theories and more theories. To be one of this class, the character need to be submitted to any hideous  attitude, like drown  hookies, public peversion, among others that result in death.")
+gettext("The Medical Student is a person who has given up his social life in exchange for an abnormal dedication to his studies, believing he'll be something in life. Those creatures haven't any cleverness, and base their lives on theories and more theories. To be one of this class, the character needs to be able to behave in a hideous manner: drowning hookies, public perversion, among other activities that result in death.")
 d6
 8
 1 ATTRIBUTE STRENGTH ALL ALL
-gettext("Although being theory creatures, they usually spent their money in physical academies, receiving +1 of Strength.")
+gettext("Although they are creatures of theory, they usually spend their money in physical academies, receiving +1 of Strength.")
 2 ATTRIBUTE INTELLIGENCE ALL ALL
 gettext("By the dedication to the studies, the Medicine Student receive +2 of Intelligence.")
 -4 ATTRIBUTE WISDOM ALL ALL
 gettext("Since their attention is only for the books, these creatures haven't any cleverness, receiving -4 of Wisdom.")
 -3 TESTS NSB ALL ALL
-gettext("Frequently in the studies, the Medicine Student forgot to grow up, being very susceptible to questions, receiving -3 on all I am not a Fool tests (this modifier  fall down to -6 when the target is their father or mother).")
+gettext("So immersed in his studies is the Medical Student that he has often forgotten to grow up, being very susceptible to questions, receiving -3 on all I am not a Fool tests (diminished to -6 when the target is their father or mother).")
 4 SKILL BLUFF ALL ALL
-gettext("Those creatures receive +4 on all Bluff tests, one time that all bluff they made, for more ridiculous they are, can really (and easily) be true.")
+gettext("Those creatures receive +4 on all Bluff tests. They bluff all the time and the more ridiculous their bluffing is, the more easily it can be really true.")
 2 SKILL DIPLOMACY RACE BOY
 gettext("They Receive +2 of Diplomacy when talking to boys and patys.")
 -2 SKILL DIPLOMACY RACE OTHER

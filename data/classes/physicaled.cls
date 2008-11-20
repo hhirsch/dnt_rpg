@@ -1,36 +1,36 @@
 gettext("Physical Education Student")
 gettext("'No! The swimming class is too complex!'|(Typical Physical Education Student thought)")
-gettext("Usually having 'Soccer' and 'Basketball' as classes, the dedicated (in the physical sense of the word) Students of Physical Education are things that value the muscular force above all. With too muscles in the brain, those Students possess nothing less than a supernatural resistance in the head - in change of some points of Intelligence, really. Finally, these boys are stars in the soccer but aren't distinguished students of mathematics (hardly knowing number's fundamentals).")
+gettext("Usually taking classes in 'Soccer' and 'Basketball', the dedicated (in the physical sense of the word) Students of Physical Education are things that value muscular force above all. With too many muscles in the brain, those Students possess nothing less than a supernatural resistance in the head - in exchange for some points of Intelligence, really. Finally, these boys are stars on the soccer field but aren't distinguished students of mathematics (hardly knowing the fundamentals of numbers).")
 d12
 17
 3 ATTRIBUTE STRENGTH ALL ALL
-gettext("Receive +3 of Strength, due to the lot of hours kicking a ball.")
+gettext("Receive +3 of Strength, due to all those hours spent kicking a ball.")
 2 ATTRIBUTE DEXTERITY ALL ALL
-gettext("+2 of Dexterity, due to the hours fluctuating in the water.")
+gettext("+2 of Dexterity, due to the hours floating in the water.")
 4 ATTRIBUTE CONSTITUTION ALL ALL
 gettext("+4 of Constitution for hours running in circles.")
 -6 ATTRIBUTE INTELLIGENCE ALL ALL
 gettext("-6 of Intelligence since they abandoned the books in a remote past.")
 -6 ATTRIBUTE WISDOM ALL ALL
-gettext("-6 of Widow, by the same reason.")
+gettext("-6 of Wisdom, for the same reason.")
 4 SKILL STRENGHT ALL ALL
-gettext("The Student of Physical Education receives +4 of Jump, Scale, Mount, Swimming, Soccer, Basketball, finally, sports  in  general or anything that emanates physical power.")
+gettext("The Student of Physical Education receives +4 of Jumping, Climbing, Riding, Swimming, Soccer, Basketball, finally, sports in general or anything that radiates physical power.")
 -5 SKILL KNOWLEDGE ALL ALL
-gettext("Receive -5 on all Knowledges by the simple fact that they have no idea of the meaning of this word.")
+gettext("Receive -5 of Knowledge of any sort at all, simply because that they have no idea of the meaning of this word.")
 -4 SKILL HIDE ALL ALL
 gettext("-4 of Hide, since they are coarse hulks.")
 -2 SKILL LISTEN ALL ALL
-gettext("-2 of Listen, therefore their muscles take all ear's openings.")
+gettext("-2 of Listen, since their muscles fill their ear canals.")
 1 MODIFIER CLASS_ARMATURE ALL ALL
 gettext("The Student receives +1 of Natural Armor.")
 2 MODIFIER I_AM_NOT_A_FOOL ALL ALL
-gettext("Receive +2 of I Am Not A Fool by the fact of their brain stop function sometimes.")
+gettext("Receive +2 of I Am Not A Fool because their brain stops functioning sometimes.")
 -4 SKILL TRAIN_ANIMALS ALL ALL
-gettext("The Student receives -4 in Train Animals, since haven't absolute control of their muscles, there is a chance of crushing the animal.")
+gettext("The Student receives -4 in Training Animals, since, because they haven't absolute control of their muscles, there is a chance of crushing the animal.")
 -3 SKILL DRIVER ALL ALL
 gettext("Receives -3 in Direction cause they usually get lost among their own muscles.")
 -2 SKILL BLUFF ALL ALL
-gettext("Also they possess -2 of Bluff, therefore their muscles practically possess own life and easily contratic themselves on theirlies.")
+gettext("Also they possess -2 of Bluff, for their muscles practically have a life of their own and easily contradict themselves when they are lying.")
 60 RESTRICTION COMBAT CAIR ALL
 gettext("By the corpulent size of their muscles and the total absence of control, the Student of Physical  Education  have 0.60 chance to tumble in battle.")
 1 RESTRICTION SKILLS INTELIGENCY ALL

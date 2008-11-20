@@ -5,12 +5,12 @@ d4
 6
 -2 ATTRIBUTE INTELLIGENCE ALL ALL
 gettext("Administration students are very definitely not known for their intellectual capacities. (Am I wrong, Elis Regina?). So, they receive -2 of Intelligence.")
--4 ATTRIBUTE CHARISM ALL ALL
-gettext("It's a really dumb ass to find some of them in group. -4 of Charism.")
+-4 ATTRIBUTE CHARISMA ALL ALL
+gettext("It's a real turn-off to find some of those dumb asses in a group. -4 of Charisma.")
 2 ATTRIBUTE CONSTITUTION ALL ALL
-gettext("The Taylor's Knowledges are a common part of the Administration Students, +2 to their constitution.")
+gettext("The works of Taylor are a common part of the Administration Students' course of study. +2 for Constitution.")
 4 SKILL BOVINICE ALL ALL
-gettext("Since they are Taylor's fiel disciples, they receive +4 of Taylor's Vialty Skill")
+gettext("Since they are Taylor's faithful disciples, they receive +4 of Taylor's Veal Thoughts Skill.")
 4 SKILL BIZARRE_CLOTHES ALL ALL
 gettext("In their dogmatic cult to Taylor they found bizarre things (with maximun financial efficiency) to be their 'clothes', receiving +4 of Bizarre Clothes.")
 -6 SKILL LISTEN ALL ALL 
