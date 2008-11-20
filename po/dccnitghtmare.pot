@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-11-19 18:53-0200\n"
+"POT-Creation-Date: 2008-11-20 08:10-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1207,7 +1207,7 @@ msgid ""
 msgstr ""
 
 #: data/classes/music.cls:15
-msgid "+2 of Charism for the capacity to fill people with joy."
+msgid "+2 of Charisma for the capacity to fill people with joy."
 msgstr ""
 
 #: data/classes/music.cls:17
@@ -1253,7 +1253,7 @@ msgstr ""
 #: data/classes/compsci.cls:9
 msgid ""
 "By their natural tendency to be qualified as Geeks, being one or not, they "
-"receive -1 of Charism."
+"receive -1 of Charisma."
 msgstr ""
 
 #: data/classes/compsci.cls:11
@@ -1689,7 +1689,7 @@ msgstr ""
 
 #: data/classes/to.cls:11
 msgid ""
-"+3 of Charism, for not studying at the Exact Sciences Institute (ICEX), and "
+"+3 of Charisma, for not studying at the Exact Sciences Institute (ICEX), and "
 "for usually being very nice."
 msgstr ""
 
