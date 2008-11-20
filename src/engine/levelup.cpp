@@ -40,6 +40,7 @@ void levelUp::doLevelUp(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
    Uint8 mButton;
    Uint8* keys;
    options option;
+   dirs dir;
    int x,y;
    int time=0, lastTime=0;
    int eventInfo, res;
@@ -51,6 +52,14 @@ void levelUp::doLevelUp(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 
    /* Create the new GUI */
    guiInterface* gui = new guiInterface(NULL);
+
+   /* Create the background */
+   GLuint tituloId;
+   SDL_Surface* img = IMG_Load(
+         dir.getRealFile("texturas/general/inicio.png").c_str());
+   glGenTextures(1,&tituloId);
+   setTexture(img,tituloId);
+   SDL_FreeSurface(img);
 
    /* Open the class window */
    clWindow = new classWindow(&current->sk, gui, &selClass);
@@ -76,7 +85,7 @@ void levelUp::doLevelUp(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
          /* Render Things */
          glPushMatrix();
             draw2DMode();
-            //textureToScreen(idTextura,0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
+            textureToScreen(tituloId,0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
             gui->draw(proj,modl,viewPort);
             glPushMatrix();
                cursors.draw(x, y);
