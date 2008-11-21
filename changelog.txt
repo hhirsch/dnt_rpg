@@ -43,9 +43,10 @@
  - Option: Auto End Turn;
  - New Missions;
  - Finish the combat system implementation;
+ - Applying Classes Saves and Bonus to Characters;
+ - Character level up;
 
 Working on:
- - Character level up;
  - Weather effects;
  - Shadows;
  - New Models;
