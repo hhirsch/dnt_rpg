@@ -121,7 +121,7 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
    /* Verify if the feat is valid */
    if( (featNumber < 0) || (featNumber >= totalFeats) )
    {
-      brief.addText(gettext("Invalid Feat"), 255, 0, 0);
+      brief.addText(gettext("Invalid Talent"), 255, 0, 0);
       return(false);
    }
 
@@ -479,7 +479,7 @@ featsList::featsList(string dir, string arq)
       FILE* desc;
       if(! (desc = fopen(arqDescricao.c_str(), "r")))
       {
-         printf("Can't open feat file: %s \n",arqDescricao.c_str() );
+         printf("Can't open talent file: %s \n",arqDescricao.c_str() );
          return;
       }
       m_feats[aux].internalListNumber = aux;

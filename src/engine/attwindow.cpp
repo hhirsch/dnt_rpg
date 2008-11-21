@@ -174,7 +174,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, guiInterface* inter,
 
    /* Charism */
    intWindow->getObjectsList()->insertTextBox(9,222,87,235,0,
-                                              gettext("Charism"));
+                                              gettext("Charisma"));
    attPoints[5] = intWindow->getObjectsList()->insertTextBox(103,220,122,237,1,
                                                              "");
    attPoints[5]->setFont(DNT_FONT_ARIAL, 10, 0);

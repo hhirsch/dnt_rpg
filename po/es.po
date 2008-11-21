@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-11-20 17:11-0200\n"
+"POT-Creation-Date: 2008-11-21 16:06-0200\n"
 "PO-Revision-Date: 2008-07-22 19:40+0000\n"
 "Last-Translator: María \"tatica\" Leandro <tatadbb@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -20,46 +20,46 @@ msgstr ""
 #: src/classes/actions.cpp:108
 #, c-format
 msgid "%s try to attack %s"
-msgstr ""
+msgstr "%s tenta atacar a %s"
 
 #: src/classes/actions.cpp:113
 #, c-format
 msgid "%s try to heal %s"
-msgstr ""
+msgstr "%s tenta curar a %s"
 
 #: src/classes/actions.cpp:123
 msgid "Too far away for action!"
-msgstr "Muy lejos para una acción!"
+msgstr "Muy lejos para la acción!"
 
-#: src/classes/actions.cpp:205 src/classes/actions.cpp:228
+#: src/classes/actions.cpp:208 src/classes/actions.cpp:231
 msgid "Miss."
 msgstr "Pérdida."
 
-#: src/classes/actions.cpp:208 src/classes/actions.cpp:212
+#: src/classes/actions.cpp:211 src/classes/actions.cpp:215
 msgid "Critical Miss!"
 msgstr "Pérdida Crítica."
 
-#: src/classes/actions.cpp:241
+#: src/classes/actions.cpp:244
 #, c-format
 msgid "Healed %d points."
 msgstr "Curado %d puntos."
 
-#: src/classes/actions.cpp:245
+#: src/classes/actions.cpp:248
 #, c-format
 msgid "Hit for %d points."
 msgstr "Golpe por %d puntos."
 
-#: src/classes/actions.cpp:264 src/classes/actions.cpp:267
+#: src/classes/actions.cpp:267 src/classes/actions.cpp:270
 msgid "Critical Heal!"
-msgstr "Salud Critica!"
+msgstr "Cura Critica!"
 
-#: src/classes/actions.cpp:272 src/classes/actions.cpp:276
+#: src/classes/actions.cpp:275 src/classes/actions.cpp:279
 msgid "Critical Hit!"
 msgstr "Golpe Critico!"
 
 #: src/classes/feats.cpp:124
-msgid "Invalid Feat"
-msgstr "Propiedad Invalida"
+msgid "Invalid Talent"
+msgstr "Dote Invalido"
 
 #: src/classes/feats.cpp:145
 msgid "Not enought points to use!"
@@ -68,49 +68,49 @@ msgstr "No tiene suficientes puntos para usarlo!"
 #: src/classes/mission.cpp:198 src/engine/dialog.cpp:1077
 #, c-format
 msgid "Mission Completed: %d XP!"
-msgstr ""
+msgstr "Missión Completa: %d XP!"
 
 #: src/classes/mission.cpp:211
 msgid "Mission Failure!"
-msgstr ""
+msgstr "Falha na Missión"
 
 #: src/engine/alignwindow.cpp:30
 msgid "Tendency & Alignment"
-msgstr ""
+msgstr "Alineamiento"
 
 #: src/engine/alignwindow.cpp:55 src/engine/aspectwindow.cpp:75
 #: src/engine/attwindow.cpp:221 src/engine/classwindow.cpp:99
 #: src/engine/options.cpp:780 src/engine/racewindow.cpp:96
 #: src/engine/skillwindow.cpp:139
 msgid "Confirm"
-msgstr ""
+msgstr "Confirmar"
 
 #: src/engine/alignwindow.cpp:59 src/engine/aspectwindow.cpp:79
 #: src/engine/attwindow.cpp:225 src/engine/barterwindow.cpp:46
 #: src/engine/classwindow.cpp:103 src/engine/options.cpp:784
 #: src/engine/racewindow.cpp:100 src/engine/skillwindow.cpp:142
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: src/engine/aspectwindow.cpp:31
 msgid "Aspect"
-msgstr ""
+msgstr "Aspecto"
 
 #: src/engine/aspectwindow.cpp:49 src/engine/charwindow.cpp:86
 msgid "Name:"
-msgstr ""
+msgstr "Apellido:"
 
 #: src/engine/aspectwindow.cpp:54 src/engine/charwindow.cpp:89
 msgid "Age:"
-msgstr ""
+msgstr "Edad:"
 
 #: src/engine/aspectwindow.cpp:58 src/engine/charwindow.cpp:104
 msgid "Sex:"
-msgstr ""
+msgstr "Sexo:"
 
 #: src/engine/attwindow.cpp:43
 msgid "Attributes"
-msgstr ""
+msgstr "Características"
 
 #: src/engine/attwindow.cpp:65
 msgid "Roll"
@@ -118,21 +118,21 @@ msgstr ""
 
 #: src/engine/attwindow.cpp:68
 msgid "Clear"
-msgstr ""
+msgstr "Limpiar"
 
 #: src/engine/attwindow.cpp:72
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 #: src/engine/attwindow.cpp:75 src/engine/charwindow.cpp:145
 #: data/skills/forca.ski:1
 msgid "Strength"
-msgstr ""
+msgstr "Fuerza"
 
 #: src/engine/attwindow.cpp:95 src/engine/charwindow.cpp:150
 #: data/skills/destreza.ski:1
 msgid "Dexterity"
-msgstr ""
+msgstr "Destreza"
 
 #: src/engine/attwindow.cpp:115 src/engine/charwindow.cpp:155
 #: data/skills/constituicao.ski:1
@@ -147,10 +147,10 @@ msgstr "Inteligencia"
 #: src/engine/attwindow.cpp:156 src/engine/charwindow.cpp:165
 #: data/skills/sabedoria.ski:1
 msgid "Wisdom"
-msgstr ""
+msgstr "Sabeduría"
 
-#: src/engine/attwindow.cpp:177 src/engine/charwindow.cpp:170
-msgid "Charism"
+#: src/engine/attwindow.cpp:177 data/skills/carisma.ski:1
+msgid "Charisma"
 msgstr "Carisma"
 
 #: src/engine/attwindow.cpp:209
@@ -159,7 +159,7 @@ msgstr "Descripción de Atributo"
 
 #: src/engine/attwindow.cpp:511 src/engine/options.cpp:992
 msgid "Warning"
-msgstr ""
+msgstr "Aviso"
 
 #: src/engine/attwindow.cpp:512
 msgid "You Need to Assign All Attributes."
@@ -167,20 +167,20 @@ msgstr "Necesitas Asignar todos los Atributos"
 
 #: src/engine/barterwindow.cpp:30 src/engine/dialog.cpp:1324
 msgid "Barter"
-msgstr ""
+msgstr "Trueque"
 
 #: src/engine/barterwindow.cpp:42
 msgid "Offer"
-msgstr "Oferta"
+msgstr "Ofrecer"
 
 #: src/engine/barterwindow.cpp:44
 msgid "Impose"
-msgstr ""
+msgstr "Imponer"
 
 #: src/engine/barterwindow.cpp:72 src/engine/barterwindow.cpp:82
 #: src/engine/inventwindow.cpp:35
 msgid "Inventory"
-msgstr ""
+msgstr "Equipo"
 
 #: src/engine/barterwindow.cpp:237
 msgid "The barter was accepted."
@@ -204,108 +204,112 @@ msgstr ""
 
 #: src/engine/briefing.cpp:33
 msgid "Briefing"
-msgstr ""
+msgstr "Mensajes"
 
 #: src/engine/briefing.cpp:35
 msgid "Welcome to DNT!"
-msgstr ""
+msgstr "Bienvenido a DNT!"
 
 #: src/engine/charwindow.cpp:95
 msgid "Female"
-msgstr ""
+msgstr "Mujer"
 
 #: src/engine/charwindow.cpp:98
 msgid "Male"
-msgstr ""
+msgstr "Hombre"
 
 #: src/engine/charwindow.cpp:101
 msgid "Undefined"
-msgstr ""
+msgstr "Indefinido"
 
 #: src/engine/charwindow.cpp:107
 msgid "Race:"
-msgstr "Carrera"
+msgstr "Raza:"
 
 #: src/engine/charwindow.cpp:110
 msgid "Alignment:"
-msgstr ""
+msgstr "Alineamiento:"
 
 #: src/engine/charwindow.cpp:114
 msgid "XP"
-msgstr ""
+msgstr "XP"
 
 #: src/engine/charwindow.cpp:115
 msgid "Next Level"
-msgstr ""
+msgstr "Prójimo Nivel"
 
 #: src/engine/charwindow.cpp:121
 msgid "HP"
-msgstr ""
+msgstr "PV"
 
 #: src/engine/charwindow.cpp:124
 msgid "AC"
-msgstr ""
+msgstr "CA"
+
+#: src/engine/charwindow.cpp:170
+msgid "Charism"
+msgstr "Carisma"
 
 #: src/engine/charwindow.cpp:184
 msgid "Fortitude"
-msgstr ""
+msgstr "Fortaleza"
 
-#: src/engine/charwindow.cpp:188
+#: src/engine/charwindow.cpp:189
 msgid "Reflex"
-msgstr "Reflejo"
+msgstr "Reflejos"
 
-#: src/engine/charwindow.cpp:192
+#: src/engine/charwindow.cpp:193
 msgid "I am Not a Fool"
-msgstr "No soy un tonto"
+msgstr "No Soy un Tonto"
 
-#: src/engine/charwindow.cpp:196
+#: src/engine/charwindow.cpp:198
 msgid "Base Attack Modifier"
 msgstr "Modificador de Ataque Base"
 
-#: src/engine/charwindow.cpp:201
+#: src/engine/charwindow.cpp:203
 msgid "Size Modifier"
 msgstr "Modificador de Tamaño"
 
-#: src/engine/charwindow.cpp:211
+#: src/engine/charwindow.cpp:213
 msgid "Level Up"
-msgstr ""
+msgstr "Subir Nivel"
 
-#: src/engine/charwindow.cpp:217
-msgid "Feats"
-msgstr "Características"
+#: src/engine/charwindow.cpp:219
+msgid "Talents"
+msgstr "Dotes"
 
-#: src/engine/charwindow.cpp:221 src/engine/skillwindow.cpp:61
+#: src/engine/charwindow.cpp:223 src/engine/skillwindow.cpp:61
 msgid "Skills"
-msgstr ""
+msgstr "Habilidades"
 
-#: src/engine/charwindow.cpp:225 src/engine/skillwindow.cpp:149
+#: src/engine/charwindow.cpp:227 src/engine/skillwindow.cpp:149
 #: src/gui/window.cpp:204
 msgid "Close"
-msgstr ""
+msgstr "Cerrar"
 
-#: src/engine/charwindow.cpp:356
+#: src/engine/charwindow.cpp:358
 msgid "Main Weapon"
 msgstr "Arma Principal"
 
-#: src/engine/charwindow.cpp:360
+#: src/engine/charwindow.cpp:362
 msgid "Secondary Weapon"
 msgstr "Arma Secundaria"
 
-#: src/engine/charwindow.cpp:364
+#: src/engine/charwindow.cpp:366
 msgid "Weapon"
 msgstr "Arma"
 
-#: src/engine/charwindow.cpp:376
+#: src/engine/charwindow.cpp:378
 msgid "Unarmed"
 msgstr "Desarmado"
 
-#: src/engine/charwindow.cpp:382
+#: src/engine/charwindow.cpp:384
 msgid "Not Applicable"
 msgstr "No aplicable"
 
 #: src/engine/classwindow.cpp:67
 msgid "Class"
-msgstr ""
+msgstr "Clase"
 
 #: src/engine/classwindow.cpp:76 src/engine/racewindow.cpp:73
 msgid "Characteristics"
@@ -325,7 +329,7 @@ msgstr "Puntos por Habilidad"
 
 #: src/engine/classwindow.cpp:163
 msgid "First Level"
-msgstr ""
+msgstr "Primero Nivel"
 
 #: src/engine/classwindow.cpp:191
 msgid "Other Levels"
@@ -333,19 +337,19 @@ msgstr "Otros Niveles"
 
 #: src/engine/classwindow.cpp:196
 msgid "Class Modifiers"
-msgstr "Modificador de Clases"
+msgstr "Modificador de Clase"
 
 #: src/engine/classwindow.cpp:207 src/engine/racewindow.cpp:147
 msgid "No Modifiers."
 msgstr "No hay Modificadores."
 
 #: src/engine/classwindow.cpp:214
-msgid "Class Feats"
-msgstr "Características de la Clase"
+msgid "Class Talents"
+msgstr "Dotes de Clase"
 
 #: src/engine/classwindow.cpp:225 src/engine/racewindow.cpp:165
-msgid "No Feats."
-msgstr "Sin Características"
+msgid "No Talents."
+msgstr "Sin Dotes"
 
 #: src/engine/classwindow.cpp:233
 msgid "Class Skills"
@@ -358,7 +362,7 @@ msgstr "Sin Habilidades"
 #: src/engine/dccnit.cpp:425
 #, c-format
 msgid "Saving Current Map Modifications"
-msgstr ""
+msgstr "Salvando Modificaciones del Mapa Actual"
 
 #: src/engine/dccnit.cpp:474
 #, c-format
@@ -372,7 +376,7 @@ msgstr "Cargando NPC: %s"
 
 #: src/engine/dccnit.cpp:563
 msgid "Creating MiniMap"
-msgstr ""
+msgstr "Creando MiniMapa"
 
 #: src/engine/dccnit.cpp:569
 msgid "Putting GUI on Screen"
@@ -388,7 +392,7 @@ msgstr "Cargando Cambios..."
 
 #: src/engine/dccnit.cpp:674
 msgid "Done!"
-msgstr ""
+msgstr "Echo!"
 
 #: src/engine/dccnit.cpp:766
 msgid ""
@@ -398,60 +402,60 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1278
+#: src/engine/dccnit.cpp:1279
 msgid "Too far away for the action!"
 msgstr "Muy lejos para la acción!"
 
-#: src/engine/dccnit.cpp:1320
+#: src/engine/dccnit.cpp:1321
 msgid "No NPCs in the area."
 msgstr "No hay NPC's en el área."
 
-#: src/engine/dccnit.cpp:1371
+#: src/engine/dccnit.cpp:1372
 msgid "Surprise Attack Turn."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1385
+#: src/engine/dccnit.cpp:1386
 msgid "No enemies in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1563 src/engine/dccnit.cpp:2013
+#: src/engine/dccnit.cpp:1564 src/engine/dccnit.cpp:2014
 #: src/engine/shortcutswindow.cpp:32
 msgid "Nothing"
-msgstr ""
+msgstr "Nada"
 
-#: src/engine/dccnit.cpp:1761
+#: src/engine/dccnit.cpp:1762
 #, c-format
 msgid "%s taken."
-msgstr ""
+msgstr "%s recogido"
 
-#: src/engine/dccnit.cpp:1783
+#: src/engine/dccnit.cpp:1784
 msgid "Inventory is full!"
 msgstr "Inventorio Lleno!"
 
-#: src/engine/dccnit.cpp:1815
+#: src/engine/dccnit.cpp:1816
 msgid "Door"
-msgstr ""
+msgstr "Puerta"
 
-#: src/engine/dccnit.cpp:1948
+#: src/engine/dccnit.cpp:1949
 #, c-format
 msgid "%s attacks %s"
-msgstr ""
+msgstr "%s ataca %s"
 
-#: src/engine/dccnit.cpp:2109
+#: src/engine/dccnit.cpp:2110
 msgid "No more actions. Turn ended."
-msgstr ""
+msgstr "Sin acciones. Turno finalizado."
 
-#: src/engine/dccnit.cpp:3491
+#: src/engine/dccnit.cpp:3492
 msgid "Exit Battle Mode"
-msgstr ""
+msgstr "Salir del Modo de Batalla"
 
 #: src/engine/dialog.cpp:251
 msgid "Success"
-msgstr ""
+msgstr "Éxito"
 
 #: src/engine/dialog.cpp:251
 msgid "Failure"
-msgstr ""
+msgstr "Falla"
 
 #: src/engine/dialog.cpp:923
 #, c-format
@@ -464,59 +468,59 @@ msgstr ""
 
 #: src/engine/initial.cpp:63
 msgid "New"
-msgstr ""
+msgstr "Nuevo"
 
 #: src/engine/initial.cpp:68
 msgid "Continue"
-msgstr ""
+msgstr "Continuar"
 
 #: src/engine/initial.cpp:71 src/engine/shortcutswindow.cpp:39
 msgid "Save"
-msgstr ""
+msgstr "Salvar"
 
 #: src/engine/initial.cpp:74 src/engine/shortcutswindow.cpp:44
 msgid "Load"
-msgstr ""
+msgstr "Cargar"
 
 #: src/engine/initial.cpp:77 src/engine/options.cpp:560
 msgid "Options"
-msgstr ""
+msgstr "Opciones"
 
 #: src/engine/initial.cpp:79 data/dialogs/objects/computers.dlg:21
 #: data/dialogs/objects/bunker_school_server.dlg:22
 #: data/dialogs/objects/bunker_school_server.dlg:36
 #: data/dialogs/objects/bunker_school_server.dlg:50
 msgid "Exit"
-msgstr ""
+msgstr "Salir"
 
 #: src/engine/inventwindow.cpp:162
 msgid "Drop"
-msgstr ""
+msgstr "Largar"
 
 #: src/engine/inventwindow.cpp:169
 msgid "Buy"
-msgstr ""
+msgstr "Comprar"
 
 #: src/engine/inventwindow.cpp:169
 msgid "Sell"
-msgstr ""
+msgstr "Vender"
 
 #: src/engine/inventwindow.cpp:176
 msgid "Use"
-msgstr ""
+msgstr "Usar"
 
 #: src/engine/inventwindow.cpp:186
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #: src/engine/inventwindow.cpp:190
 msgid "Get"
-msgstr ""
+msgstr "Coger"
 
 #: src/engine/itemwindow.cpp:58
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "Apellido: %s"
 
 #: src/engine/itemwindow.cpp:63
 #, c-format
@@ -526,112 +530,112 @@ msgstr "Precio: %.2f"
 #: src/engine/itemwindow.cpp:68
 #, c-format
 msgid "Weight: %.2f Kg"
-msgstr ""
+msgstr "Peso: %.2f Kg"
 
 #: src/engine/itemwindow.cpp:83
 msgid "Heal Factor: "
-msgstr ""
+msgstr "Factor de Cura: "
 
 #: src/engine/itemwindow.cpp:93
 msgid "Aditional Factor: "
-msgstr ""
+msgstr "Factor Adicional: "
 
 #: src/engine/itemwindow.cpp:115
 msgid "Category: "
-msgstr ""
+msgstr "Categoría: "
 
 #: src/engine/itemwindow.cpp:121
 msgid "Damage Dice: "
-msgstr ""
+msgstr "Dado de Daño: "
 
 #: src/engine/itemwindow.cpp:129
 msgid "Primary Damage: "
-msgstr ""
+msgstr "Daño Primario: "
 
 #: src/engine/itemwindow.cpp:136
 msgid "Secondary Damage: "
-msgstr ""
+msgstr "Daño Secundario: "
 
 #: src/engine/itemwindow.cpp:148
 msgid "Range: "
-msgstr ""
+msgstr "Alcance: "
 
 #: src/engine/itemwindow.cpp:153
 msgid "Size: "
-msgstr ""
+msgstr "Tamaño: "
 
 #: src/engine/itemwindow.cpp:171
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 #: src/engine/minimapwindow.cpp:37
 msgid "Map"
-msgstr ""
+msgstr "Mapa"
 
 #: src/engine/options.cpp:23
 msgid "Portuguese"
-msgstr ""
+msgstr "Portugués"
 
 #: src/engine/options.cpp:24
 msgid "English"
-msgstr ""
+msgstr "Inglés"
 
 #: src/engine/options.cpp:25
 msgid "French"
-msgstr ""
+msgstr "Francés"
 
 #: src/engine/options.cpp:26
 msgid "German"
-msgstr ""
+msgstr "Alemán"
 
 #: src/engine/options.cpp:27
 msgid "Spanish"
-msgstr ""
+msgstr "Español"
 
 #: src/engine/options.cpp:28
 msgid "Italian"
-msgstr ""
+msgstr "Italiano"
 
 #: src/engine/options.cpp:29
 msgid "Russian"
-msgstr ""
+msgstr "Ruso"
 
 #: src/engine/options.cpp:454 data/weapons/types/munitions.dcl:2
 msgid "None"
-msgstr ""
+msgstr "Ninguna"
 
 #: src/engine/options.cpp:459
 msgid "Characters"
-msgstr ""
+msgstr "Personajes"
 
 #: src/engine/options.cpp:464
 msgid "All"
-msgstr ""
+msgstr "Todas"
 
 #: src/engine/options.cpp:480 data/weapons/types/sizes.dcl:3
 #: data/weapons/types/weights.dcl:3
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: src/engine/options.cpp:483
 msgid "Pursue"
-msgstr ""
+msgstr "Perseguir"
 
 #: src/engine/options.cpp:498
 msgid "Disabled"
-msgstr ""
+msgstr "Desactivar"
 
 #: src/engine/options.cpp:501
 msgid "2x"
-msgstr ""
+msgstr "2x"
 
 #: src/engine/options.cpp:504
 msgid "4x"
-msgstr ""
+msgstr "4x"
 
 #: src/engine/options.cpp:570
 msgid "Audio"
-msgstr ""
+msgstr "Sonido"
 
 #: src/engine/options.cpp:574
 msgid "Music Volume:"
@@ -643,7 +647,7 @@ msgstr "Volúmen de Effectos:"
 
 #: src/engine/options.cpp:608
 msgid "Video"
-msgstr ""
+msgstr "Video"
 
 #: src/engine/options.cpp:616
 msgid "Screen Resolution:"
@@ -663,27 +667,27 @@ msgstr "Habilitar Effecto de Partículas"
 
 #: src/engine/options.cpp:661
 msgid "Enable MultiTextures"
-msgstr ""
+msgstr "Habilitar Múltiples Texturas"
 
 #: src/engine/options.cpp:672
 msgid "Reflections:"
-msgstr ""
+msgstr "Reflejos:"
 
 #: src/engine/options.cpp:688
 msgid "Anti-Aliasing:"
-msgstr ""
+msgstr "Anti-Aliasing:"
 
 #: src/engine/options.cpp:703
 msgid "FarView:"
-msgstr ""
+msgstr "Distancia Visible:"
 
 #: src/engine/options.cpp:719
 msgid "Game"
-msgstr ""
+msgstr "Juego"
 
 #: src/engine/options.cpp:725
 msgid "Language:"
-msgstr ""
+msgstr "Lenguaje:"
 
 #: src/engine/options.cpp:742
 msgid "Camera Mode:"
@@ -691,7 +695,7 @@ msgstr "Modo de Camara:"
 
 #: src/engine/options.cpp:758
 msgid "Auto End Turn"
-msgstr ""
+msgstr "Fin de Turno Automático"
 
 #: src/engine/options.cpp:767
 msgid "Show Enemy Battle Circle"
@@ -703,39 +707,39 @@ msgstr "Algunos cambios solo tomarán efecto una vez reiniciado."
 
 #: src/engine/racewindow.cpp:63
 msgid "Race"
-msgstr "Carrera"
+msgstr "Raza"
 
 #: src/engine/racewindow.cpp:136
 msgid "Race Modifiers"
-msgstr "Modificadores de la Carrera"
+msgstr "Modificadores de Raza"
 
 #: src/engine/racewindow.cpp:153
-msgid "Race Feats"
-msgstr ""
+msgid "Race Talents"
+msgstr "Dotes de Raza"
 
 #: src/engine/racewindow.cpp:173
 msgid "Race Skills"
-msgstr "Habilidades de Carrera"
+msgstr "Habilidades de Raza"
 
 #: src/engine/shortcutswindow.cpp:30
 msgid "Shortcuts"
-msgstr ""
+msgstr "Atajos"
 
 #: src/engine/shortcutswindow.cpp:41
 msgid "Menu"
-msgstr ""
+msgstr "Menú"
 
 #: src/engine/shortcutswindow.cpp:121
 msgid "Particles"
-msgstr ""
+msgstr "Partículas"
 
 #: src/engine/shortcutswindow.cpp:134
 msgid "FPS"
-msgstr ""
+msgstr "FPS"
 
 #: src/engine/shortcutswindow.cpp:172
 msgid "Enter Battle Mode"
-msgstr ""
+msgstr "Entrar Modo de Batalla"
 
 #: src/engine/shortcutswindow.cpp:176
 msgid "Select Normal Attack"
@@ -779,11 +783,11 @@ msgstr "Total de puntos Libres:"
 
 #: src/engine/skillwindow.cpp:103
 msgid "Points:"
-msgstr ""
+msgstr "Puntos:"
 
 #: src/engine/skillwindow.cpp:129
 msgid "Cost"
-msgstr ""
+msgstr "Custo"
 
 #: src/fight/fightSystem.cpp:133
 msgid "No more enemies."
@@ -810,7 +814,7 @@ msgstr "Error: No hay Caracteres!"
 #: src/fight/fightSystem.cpp:313 src/fight/fightSystem.cpp:319
 #, c-format
 msgid "%s's turn."
-msgstr ""
+msgstr "Turno de %s."
 
 #: src/fight/initiative.cpp:40
 #, c-format
@@ -2127,10 +2131,6 @@ msgid ""
 "creature capacity to do hard work without discuss."
 msgstr ""
 
-#: data/skills/carisma.ski:1
-msgid "Charisma"
-msgstr "Carisma"
-
 #: data/skills/carisma.ski:2
 msgid ""
 "Measures how eloquent, imponent with words, inspirated or similar adjectives "
@@ -3012,6 +3012,9 @@ msgstr ""
 #: data/weapons/types/weights.dcl:4
 msgid "Heavy"
 msgstr ""
+
+#~ msgid "Feats"
+#~ msgstr "Características"
 
 #~ msgid "Loading Character"
 #~ msgstr "Cargando Caracter"

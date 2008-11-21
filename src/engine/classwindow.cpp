@@ -211,7 +211,7 @@ void classWindow::setCharacteristics()
    }
 
    //TODO get Feat Name
-   textCharac->addText(string(gettext("Class Feats")) + "||",
+   textCharac->addText(string(gettext("Class Talents")) + "||",
                        DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
                        DNT_FONT_STYLE_UNDERLINE,
                        86, 161, 32);
@@ -222,7 +222,7 @@ void classWindow::setCharacteristics()
 
    if(classesOrder[curClass]->totalFeats == 0)
    {
-      textCharac->addText(string(gettext("No Feats.")) + "||",
+      textCharac->addText(string(gettext("No Talents.")) + "||",
                           DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
                           DNT_FONT_STYLE_NORMAL,
                           75,147,207);

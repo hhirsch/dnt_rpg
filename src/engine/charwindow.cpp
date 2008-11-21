@@ -216,7 +216,7 @@ void charWindow::open(character* pers)
 
    /* Feats Button */
    intWindow->getObjectsList()->insertButton(5,212,125,231,
-                                             gettext("Feats"),1);
+                                             gettext("Talents"),1);
 
    /* Skill Button */
    skillsButton = intWindow->getObjectsList()->insertButton(5,232,125,251,

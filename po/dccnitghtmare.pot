@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-11-20 17:11-0200\n"
+"POT-Creation-Date: 2008-11-21 16:06-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,34 +30,34 @@ msgstr ""
 msgid "Too far away for action!"
 msgstr ""
 
-#: src/classes/actions.cpp:205 src/classes/actions.cpp:228
+#: src/classes/actions.cpp:208 src/classes/actions.cpp:231
 msgid "Miss."
 msgstr ""
 
-#: src/classes/actions.cpp:208 src/classes/actions.cpp:212
+#: src/classes/actions.cpp:211 src/classes/actions.cpp:215
 msgid "Critical Miss!"
 msgstr ""
 
-#: src/classes/actions.cpp:241
+#: src/classes/actions.cpp:244
 #, c-format
 msgid "Healed %d points."
 msgstr ""
 
-#: src/classes/actions.cpp:245
+#: src/classes/actions.cpp:248
 #, c-format
 msgid "Hit for %d points."
 msgstr ""
 
-#: src/classes/actions.cpp:264 src/classes/actions.cpp:267
+#: src/classes/actions.cpp:267 src/classes/actions.cpp:270
 msgid "Critical Heal!"
 msgstr ""
 
-#: src/classes/actions.cpp:272 src/classes/actions.cpp:276
+#: src/classes/actions.cpp:275 src/classes/actions.cpp:279
 msgid "Critical Hit!"
 msgstr ""
 
 #: src/classes/feats.cpp:124
-msgid "Invalid Feat"
+msgid "Invalid Talent"
 msgstr ""
 
 #: src/classes/feats.cpp:145
@@ -148,8 +148,8 @@ msgstr ""
 msgid "Wisdom"
 msgstr ""
 
-#: src/engine/attwindow.cpp:177 src/engine/charwindow.cpp:170
-msgid "Charism"
+#: src/engine/attwindow.cpp:177 data/skills/carisma.ski:1
+msgid "Charisma"
 msgstr ""
 
 #: src/engine/attwindow.cpp:209
@@ -245,60 +245,64 @@ msgstr ""
 msgid "AC"
 msgstr ""
 
+#: src/engine/charwindow.cpp:170
+msgid "Charism"
+msgstr ""
+
 #: src/engine/charwindow.cpp:184
 msgid "Fortitude"
 msgstr ""
 
-#: src/engine/charwindow.cpp:188
+#: src/engine/charwindow.cpp:189
 msgid "Reflex"
 msgstr ""
 
-#: src/engine/charwindow.cpp:192
+#: src/engine/charwindow.cpp:193
 msgid "I am Not a Fool"
 msgstr ""
 
-#: src/engine/charwindow.cpp:196
+#: src/engine/charwindow.cpp:198
 msgid "Base Attack Modifier"
 msgstr ""
 
-#: src/engine/charwindow.cpp:201
+#: src/engine/charwindow.cpp:203
 msgid "Size Modifier"
 msgstr ""
 
-#: src/engine/charwindow.cpp:211
+#: src/engine/charwindow.cpp:213
 msgid "Level Up"
 msgstr ""
 
-#: src/engine/charwindow.cpp:217
-msgid "Feats"
+#: src/engine/charwindow.cpp:219
+msgid "Talents"
 msgstr ""
 
-#: src/engine/charwindow.cpp:221 src/engine/skillwindow.cpp:61
+#: src/engine/charwindow.cpp:223 src/engine/skillwindow.cpp:61
 msgid "Skills"
 msgstr ""
 
-#: src/engine/charwindow.cpp:225 src/engine/skillwindow.cpp:149
+#: src/engine/charwindow.cpp:227 src/engine/skillwindow.cpp:149
 #: src/gui/window.cpp:204
 msgid "Close"
 msgstr ""
 
-#: src/engine/charwindow.cpp:356
+#: src/engine/charwindow.cpp:358
 msgid "Main Weapon"
 msgstr ""
 
-#: src/engine/charwindow.cpp:360
+#: src/engine/charwindow.cpp:362
 msgid "Secondary Weapon"
 msgstr ""
 
-#: src/engine/charwindow.cpp:364
+#: src/engine/charwindow.cpp:366
 msgid "Weapon"
 msgstr ""
 
-#: src/engine/charwindow.cpp:376
+#: src/engine/charwindow.cpp:378
 msgid "Unarmed"
 msgstr ""
 
-#: src/engine/charwindow.cpp:382
+#: src/engine/charwindow.cpp:384
 msgid "Not Applicable"
 msgstr ""
 
@@ -339,11 +343,11 @@ msgid "No Modifiers."
 msgstr ""
 
 #: src/engine/classwindow.cpp:214
-msgid "Class Feats"
+msgid "Class Talents"
 msgstr ""
 
 #: src/engine/classwindow.cpp:225 src/engine/racewindow.cpp:165
-msgid "No Feats."
+msgid "No Talents."
 msgstr ""
 
 #: src/engine/classwindow.cpp:233
@@ -397,50 +401,50 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1278
+#: src/engine/dccnit.cpp:1279
 msgid "Too far away for the action!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1320
+#: src/engine/dccnit.cpp:1321
 msgid "No NPCs in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1371
+#: src/engine/dccnit.cpp:1372
 msgid "Surprise Attack Turn."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1385
+#: src/engine/dccnit.cpp:1386
 msgid "No enemies in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1563 src/engine/dccnit.cpp:2013
+#: src/engine/dccnit.cpp:1564 src/engine/dccnit.cpp:2014
 #: src/engine/shortcutswindow.cpp:32
 msgid "Nothing"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1761
+#: src/engine/dccnit.cpp:1762
 #, c-format
 msgid "%s taken."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1783
+#: src/engine/dccnit.cpp:1784
 msgid "Inventory is full!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1815
+#: src/engine/dccnit.cpp:1816
 msgid "Door"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1948
+#: src/engine/dccnit.cpp:1949
 #, c-format
 msgid "%s attacks %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2109
+#: src/engine/dccnit.cpp:2110
 msgid "No more actions. Turn ended."
 msgstr ""
 
-#: src/engine/dccnit.cpp:3491
+#: src/engine/dccnit.cpp:3492
 msgid "Exit Battle Mode"
 msgstr ""
 
@@ -709,7 +713,7 @@ msgid "Race Modifiers"
 msgstr ""
 
 #: src/engine/racewindow.cpp:153
-msgid "Race Feats"
+msgid "Race Talents"
 msgstr ""
 
 #: src/engine/racewindow.cpp:173
@@ -2120,10 +2124,6 @@ msgid ""
 "Taylor wrote 'The Principles of Scientific Management' where people are(to "
 "him) like cattle, only used to maximize the profits. This skill measure the "
 "creature capacity to do hard work without discuss."
-msgstr ""
-
-#: data/skills/carisma.ski:1
-msgid "Charisma"
 msgstr ""
 
 #: data/skills/carisma.ski:2

@@ -150,7 +150,7 @@ void raceWindow::setCharacteristics()
                           75, 147, 207);
    }
 
-   textCharac->addText(string(gettext("Race Feats")) + "||",
+   textCharac->addText(string(gettext("Race Talents")) + "||",
                        DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
                        DNT_FONT_STYLE_UNDERLINE,
                        86, 161, 32);
@@ -162,7 +162,7 @@ void raceWindow::setCharacteristics()
 
    if(racesOrder[curRace]->totalFeats == 0)
    {
-      textCharac->addText(string(gettext("No Feats.")) + "|",
+      textCharac->addText(string(gettext("No Talents.")) + "|",
                           DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
                           DNT_FONT_STYLE_NORMAL,
                           75,147,207);
