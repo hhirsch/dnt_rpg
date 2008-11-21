@@ -176,6 +176,7 @@ void classes::insertClass(string fileName, string imgFile, string idString,
    int i;
    char buf1[128], buf2[128], buf3[128], buf4[128];
    classe* ins = new(classe);
+   int tmpBonus;
 
    file.open(fileName.c_str(), ios::in | ios::binary);
 
@@ -316,17 +317,13 @@ void classes::insertClass(string fileName, string imgFile, string idString,
    for(i=0; i<MAX_DEFINED_LEVEL; i++)
    {
       getline(file, str);
-      sscanf(str.c_str(), "%d,%d/%d/%d/%d/%d/%d,%d/%d/%d",
+      sscanf(str.c_str(), "%d,%d,%d/%d/%d",
              &ins->bonus[i].level,
-             &ins->bonus[i].baseAttackBonus[0],
-             &ins->bonus[i].baseAttackBonus[1],
-             &ins->bonus[i].baseAttackBonus[2],
-             &ins->bonus[i].baseAttackBonus[3],
-             &ins->bonus[i].baseAttackBonus[4],
-             &ins->bonus[i].baseAttackBonus[5],
+             &tmpBonus,
              &ins->bonus[i].fortSave,
              &ins->bonus[i].refSave, 
              &ins->bonus[i].willSave);
+      ins->bonus[i].baseAttackBonus = attackBonus(tmpBonus);
    }
 
    file.close();

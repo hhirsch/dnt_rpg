@@ -654,7 +654,7 @@ void character::getNewClassLevel(classe* cl)
       /* Roll a life dice */
       dice d;
       d.setType(cl->lifeDiceID);
-      setMaxLifePoints(d.roll()+attBonus(ATT_CONSTITUTION));
+      setMaxLifePoints(maxLifePoints + d.roll()+attBonus(ATT_CONSTITUTION));
 
       /* Apply skill costs! */
       applySkillCosts();

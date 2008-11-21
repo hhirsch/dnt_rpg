@@ -6,6 +6,7 @@ using namespace std;
 #include "skills.h"
 #include "feats.h"
 #include "defs.h"
+#include "modifier.h"
 
 #define MAX_DEFINED_LEVEL 20
 

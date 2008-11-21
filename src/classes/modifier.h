@@ -4,11 +4,10 @@
 #include <string>
 using namespace std;
 
+#include "defs.h"
+
 #define SIGNAL_DEC 0
 #define SIGNAL_SUM 1
-
-#define MAX_ATTACKS 6
-
 
 #define MOD_TYPE_ATT   "ATTRIBUTE"
 #define MOD_TYPE_SKILL "SKILL"
@@ -47,11 +46,12 @@ class bonusAndSaves
 {
    public:
       int level;                          /**< Class Level */
-      int baseAttackBonus[MAX_ATTACKS];   /**< Base Attack Bonus */
+      attackBonus baseAttackBonus;        /**< Base Attack Bonus */
       int fortSave;                       /**< Fortitude Save Bonus */
       int refSave;                        /**< Reflex Save Bonus */
       int willSave;                       /**< Will Save Bonus */
 };
+
 
 
 #endif

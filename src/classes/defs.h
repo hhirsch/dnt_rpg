@@ -9,6 +9,9 @@
 #include <string>
 using namespace std;
 
+
+#define MAX_ATTACKS 6
+
 /******************************************************************
  *                        ATTRIBUTES CONSTANTS                    *
  ******************************************************************/
@@ -40,6 +43,54 @@ using namespace std;
 #define SEX_MALE        0
 #define SEX_FEMALE      1
 #define SEX_OTHER       2
+
+/*! The attackBonus class represents a single base attack bonus */
+class attackBonus
+{
+   public:
+      /*! Constructor */
+      attackBonus();
+
+      /*! Constructor
+       * \total -> total bonus value
+       * \note -> usually, the total is relative to the 
+       *          first attack bonus.
+       * \note -> you can get the total value if the toInt() function */
+      attackBonus(int total);
+
+      /*! Destructor */
+      ~attackBonus();
+
+      /*! + Overloaded operator -> will sum attackBonus
+       * \param atBonus -> attackBonus to sum
+       * \return -> sum result */
+      attackBonus operator+(attackBonus& atBonus);
+
+      /*! = Overloaded operator
+       * \param atBonus -> attackBonus to use as base */
+      attackBonus& operator=(const attackBonus& atBonus);
+
+      /*! Convert the attack bonus to a string 
+       * \return -> string representing the attack bonus */
+      string toString();
+
+      /*! Convert the attack bonus to a representativ integer
+       * \return -> int with the attack bonus */
+      int toInt();
+
+      /*! Get bonus for an attack
+       * \param attackNumber -> number of the attack (1 for first) 
+       * \return -> base attack bonus for the attack */
+      int getBonus(int attackNumber);
+
+      /*! Set bonus for an attack
+       * \param attackNumbner -> number of the attack (1 for first)
+       * \param value -> bonus value for the attack */
+      void setBonus(int attackNumber, int value);
+
+    protected:
+      int bonus[MAX_ATTACKS];  /**< The Bonuses itself */
+};
 
 
 #endif
