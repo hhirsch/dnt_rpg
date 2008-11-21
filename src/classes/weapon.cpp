@@ -92,15 +92,15 @@ weapon::weapon(string path, modelList& mdlList, weaponTypes& wTypes):
       }
       else if(key == "fortitude")
       {
-         sscanf(value.c_str(),"%d",&fortitude);
+         sscanf(value.c_str(),"%d",&curBonusAndSaves.fortitude);
       }
       else if(key == "reflex")
       {
-         sscanf(value.c_str(),"%d",&reflex);
+         sscanf(value.c_str(),"%d",&curBonusAndSaves.reflex);
       }
       else if( (key == "will") || (key == "i_am_not_a_fool") )
       {
-         sscanf(value.c_str(),"%d",&iAmNotAFool);
+         sscanf(value.c_str(),"%d",&curBonusAndSaves.iAmNotAFool);
       }
       else if(key == "displacement")
       {

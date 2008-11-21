@@ -123,15 +123,15 @@ object::object(string path, modelList& mdlList, string curMap): thing()
       }
       else if(key == "fortitude")
       {
-         sscanf(value.c_str(),"%d",&fortitude);
+         sscanf(value.c_str(),"%d",&curBonusAndSaves.fortitude);
       }
       else if(key == "reflex")
       {
-         sscanf(value.c_str(),"%d",&reflex);
+         sscanf(value.c_str(),"%d",&curBonusAndSaves.reflex);
       }
       else if((key == "will") || (key == "i_am_not_a_fool") )
       {
-         sscanf(value.c_str(),"%d",&iAmNotAFool);
+         sscanf(value.c_str(),"%d",&curBonusAndSaves.iAmNotAFool);
       }
       else if(key == "displacement")
       {
@@ -222,7 +222,9 @@ object::object(object* obj): thing()
    /* Define some Points */
    maxLifePoints = obj->maxLifePoints;
    lifePoints = maxLifePoints;
-   fortitude = obj->fortitude;
+   curBonusAndSaves.fortitude = obj->curBonusAndSaves.fortitude;
+   curBonusAndSaves.reflex = obj->curBonusAndSaves.reflex;
+   curBonusAndSaves.iAmNotAFool = obj->curBonusAndSaves.iAmNotAFool;
    armatureClass = obj->armatureClass;
    sizeModifier = obj->sizeModifier;
 
@@ -261,7 +263,7 @@ void object::cleanValues()
    type = OBJECT_TYPE_GENERIC;
    maxLifePoints = 0;
    lifePoints = 0;
-   fortitude = 0;
+   curBonusAndSaves.fortitude = 0;
    armatureClass = 0;
    sizeModifier = 0;
    cost = 0;

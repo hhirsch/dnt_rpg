@@ -26,12 +26,8 @@ thing::thing()
    sexType = SEX_MALE;
    lifePoints = 0;
    maxLifePoints = 0;
-   fortitude = 0;
-   reflex = 0;
-   iAmNotAFool = 0;
    armatureClass = 0;
    displacement = 0;
-   baseAttackModifier = 0;
    sizeModifier = 0;
    psychoState = PSYCHO_NEUTRAL;
    xPosition = 0;

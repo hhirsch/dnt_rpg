@@ -181,20 +181,22 @@ void charWindow::open(character* pers)
       writeAboutWeapon(INVENTORY_LEFT_HAND);
 
       /* Fortitude */
-      sprintf(buf,"%s: %d", gettext("Fortitude"), pers->fortitude);
+      sprintf(buf,"%s: %d", gettext("Fortitude"), 
+              pers->curBonusAndSaves.fortitude);
       infoBar->addText(buf);
 
       /* Reflex */
-      sprintf(buf,"%s: %d", gettext("Reflex"), pers->reflex);
+      sprintf(buf,"%s: %d", gettext("Reflex"), pers->curBonusAndSaves.reflex);
       infoBar->addText(buf);
 
       /* IAmNotAFool */
-      sprintf(buf,"%s: %d", gettext("I am Not a Fool"), pers->iAmNotAFool);
+      sprintf(buf,"%s: %d", gettext("I am Not a Fool"), 
+              pers->curBonusAndSaves.iAmNotAFool);
       infoBar->addText(buf);
 
       /* Base Attack Modifier */
-      sprintf(buf,"%s: %d", gettext("Base Attack Modifier"), 
-                            pers->baseAttackModifier);
+      sprintf(buf,"%s: %s", gettext("Base Attack Modifier"), 
+              pers->curBonusAndSaves.baseAttackBonus.toString().c_str());
       infoBar->addText(buf);
 
       /* Size Modifier */

@@ -61,10 +61,13 @@ class attackBonus
       /*! Destructor */
       ~attackBonus();
 
+      /*! Clear the bonus values */
+      void clear();
+
       /*! + Overloaded operator -> will sum attackBonus
        * \param atBonus -> attackBonus to sum
        * \return -> sum result */
-      attackBonus operator+(attackBonus& atBonus);
+      attackBonus operator+(const attackBonus& atBonus);
 
       /*! = Overloaded operator
        * \param atBonus -> attackBonus to use as base */
@@ -91,6 +94,33 @@ class attackBonus
     protected:
       int bonus[MAX_ATTACKS];  /**< The Bonuses itself */
 };
+
+
+/*! Per Level Bonus and Saves */
+class bonusAndSaves
+{
+   public:
+      /*! Constructor */
+      bonusAndSaves();
+      /*! Destructor */
+      ~bonusAndSaves();
+
+      /*! Clear Values */
+      void clear();
+
+      /*! = Operator */
+      bonusAndSaves& operator=(const bonusAndSaves& b);
+
+      /*! + Operator */
+      bonusAndSaves operator+(const bonusAndSaves& b);
+
+      int level;                          /**< Class Level */
+      attackBonus baseAttackBonus;        /**< Base Attack Bonus */
+      int fortitude;                      /**< Fortitude Save Bonus */
+      int reflex;                         /**< Reflex Save Bonus */
+      int iAmNotAFool;                    /**< I Am Not A Fool Bonus */
+};
+
 
 
 #endif

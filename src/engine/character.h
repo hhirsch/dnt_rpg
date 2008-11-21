@@ -158,6 +158,9 @@ class character: public aniModel
        /*! Apply all Race and Classes Skills Costs */
        void applySkillCosts();
 
+       /*! Apply Bonus And Saves from Classes to the character */
+       void applyBonusAndSaves();
+
        /*! Get the character filename
         * \return -> the character filename */
        string getCharacterFile(){return(characterFile);};

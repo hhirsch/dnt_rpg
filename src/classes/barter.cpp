@@ -139,7 +139,7 @@ bool barter::doBarter()
       dice d20;
       float roll = d20.roll() / 30.0;
       float sellDiff = (totalSellValue - totalBuyValue);
-      float eqn = 1.0 / (seller->iAmNotAFool + fabs(sellDiff));
+      float eqn = 1.0 / (seller->curBonusAndSaves.iAmNotAFool+fabs(sellDiff));
 
       accept = eqn > roll;
    }
@@ -181,9 +181,9 @@ bool barter::imposeBarter()
 {
    dice d20;
    int stTest = (d20.roll()+buyer->attBonus(ATT_STRENGTH)) - 
-                (d20.roll()+seller->iAmNotAFool);
+                (d20.roll()+seller->curBonusAndSaves.iAmNotAFool);
    int coTest = (d20.roll()+buyer->attBonus(ATT_CONSTITUTION)) - 
-                (d20.roll()+seller->iAmNotAFool);
+                (d20.roll()+seller->curBonusAndSaves.iAmNotAFool);
 
    if( (stTest > 0) && (coTest > 0) )
    {

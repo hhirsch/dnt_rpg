@@ -320,9 +320,9 @@ void classes::insertClass(string fileName, string imgFile, string idString,
       sscanf(str.c_str(), "%d,%d,%d/%d/%d",
              &ins->bonus[i].level,
              &tmpBonus,
-             &ins->bonus[i].fortSave,
-             &ins->bonus[i].refSave, 
-             &ins->bonus[i].willSave);
+             &ins->bonus[i].fortitude,
+             &ins->bonus[i].reflex, 
+             &ins->bonus[i].iAmNotAFool);
       ins->bonus[i].baseAttackBonus = attackBonus(tmpBonus);
    }
 

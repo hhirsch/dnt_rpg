@@ -1,16 +1,17 @@
 #include "defs.h"
 
+///////////////////////////////////////////////////////////////////////////
+//                                                                       //
+//                             attackBonus                               //
+//                                                                       //
+///////////////////////////////////////////////////////////////////////////
 
 /***********************************************************************
  *                              Constructor                            *
  ***********************************************************************/
 attackBonus::attackBonus()
 {
-   int i;
-   for(i=0; i <MAX_ATTACKS; i++)
-   {
-      bonus[i] = 0;
-   }
+   clear();
 }
 
 /***********************************************************************
@@ -49,6 +50,18 @@ attackBonus::~attackBonus()
 }
 
 /***********************************************************************
+ *                                clear                                *
+ ***********************************************************************/
+void attackBonus::clear()
+{
+   int i;
+   for(i=0; i <MAX_ATTACKS; i++)
+   {
+      bonus[i] = 0;
+   }
+}
+
+/***********************************************************************
  *                                toString                             *
  ***********************************************************************/
 string attackBonus::toString()
@@ -71,6 +84,12 @@ string attackBonus::toString()
          res += "+";
          res += val;
       }
+   }
+
+   /* If empty, no bonus, so 0 is defined */
+   if(res.empty())
+   {
+      res = "0";
    }
 
    return(res);
@@ -111,9 +130,9 @@ void attackBonus::setBonus(int attackNumber, int value)
 /***********************************************************************
  *                               operator+                             *
  ***********************************************************************/
-attackBonus attackBonus::operator+(attackBonus& atBonus)
+attackBonus attackBonus::operator+(const attackBonus& atBonus)
 {
-   return(attackBonus(toInt()+atBonus.toInt()));
+   return(attackBonus(toInt()+atBonus.bonus[0]));
 }
 
 /***********************************************************************
@@ -129,3 +148,65 @@ attackBonus& attackBonus::operator=(const attackBonus& atBonus)
 
    return(*this);
 }
+
+///////////////////////////////////////////////////////////////////////////
+//                                                                       //
+//                            bonusAndSaves                              //
+//                                                                       //
+///////////////////////////////////////////////////////////////////////////
+
+/***********************************************************************
+ *                              Constructor                            *
+ ***********************************************************************/
+bonusAndSaves::bonusAndSaves()
+{
+   clear();
+}
+
+/***********************************************************************
+ *                               Destructor                            *
+ ***********************************************************************/
+bonusAndSaves::~bonusAndSaves()
+{
+}
+
+/***********************************************************************
+ *                                 clear                               *
+ ***********************************************************************/
+void bonusAndSaves::clear()
+{
+   level = 0;
+   iAmNotAFool = 0;
+   reflex = 0;
+   fortitude = 0;
+   baseAttackBonus.clear();
+}
+
+/***********************************************************************
+ *                               operator+                             *
+ ***********************************************************************/
+bonusAndSaves bonusAndSaves::operator+(const bonusAndSaves& b)
+{
+   bonusAndSaves res;
+   res.level = level + b.level;
+   res.iAmNotAFool = iAmNotAFool + b.iAmNotAFool;
+   res.reflex = reflex + b.reflex;
+   res.fortitude = fortitude + b.fortitude;
+   res.baseAttackBonus = baseAttackBonus + b.baseAttackBonus;
+
+   return(res);
+}
+
+/***********************************************************************
+ *                               operator=                             *
+ ***********************************************************************/
+bonusAndSaves& bonusAndSaves::operator=(const bonusAndSaves& b)
+{
+   level = b.level;
+   iAmNotAFool = b.iAmNotAFool;
+   reflex = b.reflex;
+   fortitude = b.fortitude;
+   baseAttackBonus = b.baseAttackBonus;
+   return(*this);
+}
+

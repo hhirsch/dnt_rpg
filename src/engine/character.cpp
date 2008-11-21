@@ -603,6 +603,27 @@ void character::applySkillCosts()
 }
 
 /*********************************************************************
+ *                         applyBonusAndSaves                        *
+ *********************************************************************/
+void character::applyBonusAndSaves()
+{
+   int i;
+
+   /* Clear the current */
+   curBonusAndSaves.clear();
+
+   /* Add from all classes */
+   for(i = 0; i < MAX_DISTINCT_CLASSES; i++)
+   {
+      if(actualClass[i] != NULL)
+      {
+         curBonusAndSaves = curBonusAndSaves + 
+                            actualClass[i]->bonus[classLevels[i]-1];
+      }
+   }
+}
+
+/*********************************************************************
  *                             canClass                              *
  *********************************************************************/
 bool character::canClass(classe* cl)
@@ -658,6 +679,9 @@ void character::getNewClassLevel(classe* cl)
 
       /* Apply skill costs! */
       applySkillCosts();
+
+      /* Apply the Saves and Bonus */
+      applyBonusAndSaves();
 
       /* TODO, something related to the feats, when fully implemented */
    }
@@ -725,11 +749,6 @@ bool character::save(string saveFile)
    /* Life Points */
    file << "maxLifePoints = " << maxLifePoints << endl;
    file << "curLifePoints = " << lifePoints << endl;
-   /* Base Modifier */
-   file << "baseModifier = " << fortitude << "/" << reflex << "/"
-                             << iAmNotAFool << endl;
-   /* Attack Modifier: FIXME! */
-   file << "attackModifier = " << baseAttackModifier << "/0/0/0/0/0" << endl;
    /* Size Modifier */
    file << "sizeModifier = " << sizeModifier << endl;
    /* PsychoState */
@@ -850,18 +869,6 @@ character* characterList::insertCharacter(string file, featsList* ft,
       else if(key == "curLifePoints")
       {
          sscanf(value.c_str(),"%d",&novo->lifePoints);
-      }
-      /* Base Modifier */
-      else if(key == "baseModifier")
-      {
-         sscanf(value.c_str(),"%d/%d/%d", &novo->fortitude, &novo->reflex, 
-                                          &novo->iAmNotAFool); 
-      }
-      /* Attack Modifier */
-      else if(key == "attackModifier")
-      {
-         sscanf(value.c_str(),"%d", &novo->baseAttackModifier);
-         //TODO others attack modifiers
       }
       /* Size Mofifier */
       else if(key == "sizeModifier")

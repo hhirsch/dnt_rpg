@@ -30,12 +30,9 @@ class thing
 
       skills sk;             /**< skills without images and descriptions */
       
-      int fortitude;          /**< Thing's Fortitude */
-      int reflex;             /**< Thing's Reflexes */
-      int iAmNotAFool;        /**< Thing's I'm not a fool */
+      bonusAndSaves curBonusAndSaves; /**< Thing's bonus and saves */
       int armatureClass;      /**< Thing's Armature Class (AC) */
       int displacement;       /**< Thing's Displacement (in meters) */
-      int baseAttackModifier; /**< Thing's Base Attack Modifier */
       int sizeModifier;       /**< Thing's Size Modifier */
 
       float orientation;      /**< Thing's orientation (angle) */

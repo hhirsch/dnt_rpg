@@ -41,18 +41,6 @@ class points
       int mult;         /**< Value of Mult */
 };
 
-/*! Per Level Bonus and Saves */
-class bonusAndSaves
-{
-   public:
-      int level;                          /**< Class Level */
-      attackBonus baseAttackBonus;        /**< Base Attack Bonus */
-      int fortSave;                       /**< Fortitude Save Bonus */
-      int refSave;                        /**< Reflex Save Bonus */
-      int willSave;                       /**< Will Save Bonus */
-};
-
-
 
 #endif
 

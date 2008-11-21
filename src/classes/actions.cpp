@@ -139,7 +139,9 @@ bool doHealOrAttack(thing& actor, thing* target,
 
 
    /* Apply Bonuses */
-   bonus = actor.sizeModifier + actor.baseAttackModifier;
+   //FIXME get fromm the relative attack, not always of the first!
+   bonus = actor.sizeModifier + 
+           actor.curBonusAndSaves.baseAttackBonus.getBonus(1);
    if(conceptBonus)
    { 
       bonus += actor.getBonusValue(*conceptBonus);
@@ -148,7 +150,8 @@ bool doHealOrAttack(thing& actor, thing* target,
    dice d20;
    diceValue = d20.roll();
 
-   //TODO apply reflexes bonus, esquive bonus, etc, to target 
+   //TODO apply reflexes bonus, esquive bonus, etc, to target,
+   //depending of the attack type!
    targetValue = target->armatureClass;
 
    /* verify critical Hit */

@@ -1103,6 +1103,7 @@ int engine::characterScreen(GLuint idTextura)
    {
       /* Calculate Life Points */
       activeCharacter->defineInitialLifePoints();
+      activeCharacter->applyBonusAndSaves();
    }
 
    glEnable(GL_LIGHTING);
