@@ -589,7 +589,10 @@ void character::applySkillCosts()
    int i;
 
    /* Apply Race Costs */
-   actualRace->applySkillCosts(&sk);
+   if(actualRace)
+   {
+      actualRace->applySkillCosts(&sk);
+   }
 
    //FIXME Classes Costs will be only per actual class?
    //      In the way bellow is always for all classes.
@@ -992,6 +995,10 @@ character* characterList::insertCharacter(string file, featsList* ft,
   
    /* Define AC TODO others values to sum here*/ 
    novo->armatureClass = 10+novo->sizeModifier+novo->attBonus(ATT_DEXTERITY);
+
+   /* Apply Saves and Bonus and Costs */
+   novo->applyBonusAndSaves();
+   novo->applySkillCosts();
    
    /* Load The 3D Model */ 
    novo->loadModel(arqModelo);
