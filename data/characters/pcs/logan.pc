@@ -5,6 +5,7 @@ battleScript = ia/script/fight/fight_animal.dsl
 maxLifePoints = 87
 class = COM 20
 race = MUTANT_HUMAN_CRICKET
+align = CHAOTIC_FREE_SOFTWARE
 sizeModifier = 0
 conversationFile = dialogs/tutorial/logan.dlg
 STRENGTH = 14
