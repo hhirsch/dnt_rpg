@@ -363,8 +363,9 @@ void textureToScreen(GLuint texturaID, int xa, int ya, int xb, int yb,
 /*********************************************************************
  *                             setTexture                            *
  *********************************************************************/
-void setTexture(SDL_Surface* img, GLuint textID)
+void setTexture(SDL_Surface* img, GLuint textID, bool mipMaps)
 {
+   SDL_Surface* tmp = NULL;
    /* Define Machine Bit Order */
    Uint32 rmask, gmask, bmask, amask;
    #if SDL_BYTEORDER == SDL_BIG_ENDIAN
@@ -381,7 +382,7 @@ void setTexture(SDL_Surface* img, GLuint textID)
 
    if(img->format->BytesPerPixel == 4)
    {
-      setTextureRGBA(img, textID);
+      setTextureRGBA(img, textID, mipMaps);
       return;
    }
 
@@ -391,7 +392,7 @@ void setTexture(SDL_Surface* img, GLuint textID)
        ( (img->h & (img->h - 1)) != 0 )  )
    {
       /* Convert to Power of Two */
-      SDL_Surface* tmp = SDL_CreateRGBSurface(SDL_SWSURFACE,
+      tmp = SDL_CreateRGBSurface(SDL_SWSURFACE,
                        smallestPowerOfTwo(img->w),
                        smallestPowerOfTwo(img->h),32,
                        rmask, gmask, bmask, amask);
@@ -399,8 +400,7 @@ void setTexture(SDL_Surface* img, GLuint textID)
       SDL_BlitSurface(img, NULL, tmp, NULL);
       glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tmp->w, tmp->h, 
                                   0, GL_RGBA, GL_UNSIGNED_BYTE, 
-                                  tmp->pixels);
-      SDL_FreeSurface(tmp);
+                                  tmp->pixels);      
    }
    else
    {
@@ -408,17 +408,52 @@ void setTexture(SDL_Surface* img, GLuint textID)
                                   0, GL_RGB, GL_UNSIGNED_BYTE, 
                                   img->pixels);
    }
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
+   if(mipMaps)
+   {
+      glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
+      glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
+            GL_LINEAR_MIPMAP_LINEAR );
+      glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+      if(tmp)
+      {
+         gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, tmp->w,
+               tmp->h, GL_RGBA, GL_UNSIGNED_BYTE,
+               tmp->pixels );
+      }
+      else
+      {
+         gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, img->w,
+               img->h, GL_RGB, GL_UNSIGNED_BYTE,
+               img->pixels );
+      }
+   }
+   else
+   {
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+   }
+
+   /* Free tmp as needed */
+   if(tmp != NULL)
+   {
+      SDL_FreeSurface(tmp);
+   }
 }
 
 /******************************************************************
  *                          setTextureRGBA                        *
  ******************************************************************/
-void setTextureRGBA(SDL_Surface* img, GLuint textID)
+void setTextureRGBA(SDL_Surface* img, GLuint textID, bool mipMaps)
 {
+   SDL_Surface* tmp = NULL;
    /* Define Machine Bit Order */
    Uint32 rmask, gmask, bmask, amask;
    #if SDL_BYTEORDER == SDL_BIG_ENDIAN
@@ -448,7 +483,7 @@ void setTextureRGBA(SDL_Surface* img, GLuint textID)
                                                    img->pitch, 
                                                    rmask, gmask, bmask,amask);
 
-      SDL_Surface* tmp = SDL_CreateRGBSurface(SDL_SWSURFACE,
+      tmp = SDL_CreateRGBSurface(SDL_SWSURFACE,
                        smallestPowerOfTwo(img->w),
                        smallestPowerOfTwo(img->h),32,
                        rmask, gmask, bmask, amask);
@@ -458,8 +493,6 @@ void setTextureRGBA(SDL_Surface* img, GLuint textID)
       glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tmp->w, tmp->h, 
                                   0, GL_RGBA, GL_UNSIGNED_BYTE, 
                                   tmp->pixels);
-
-      SDL_FreeSurface(tmp);
       SDL_FreeSurface(gamb);
    }
    else
@@ -467,10 +500,39 @@ void setTextureRGBA(SDL_Surface* img, GLuint textID)
       glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 
                                   0, GL_RGBA, GL_UNSIGNED_BYTE, 
                                   img->pixels);
+      tmp = img;
    }
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
+   /* Generate mipMaps */
+   if(mipMaps)
+   {
+      glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
+      glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
+            GL_LINEAR_MIPMAP_LINEAR );
+      glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+
+      gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, tmp->w,
+            tmp->h, GL_RGBA, GL_UNSIGNED_BYTE,
+            tmp->pixels );
+   }
+   else
+   {
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+   }
+
+   /* Free the tmp surface, if needed */
+   if( (tmp != NULL) && (tmp != img))
+   {
+      SDL_FreeSurface(tmp);
+   }
 }
+
 

@@ -138,13 +138,15 @@ int smallestPowerOfTwo(int num);
 
 /*! Load the GL texture based on the surface
  * \param img -> surface to load as texture
- * \param textID -> texture Identifier loaded */
-void setTexture(SDL_Surface* img, GLuint textID);
+ * \param textID -> texture Identifier loaded
+ * \param mipMaps-> if will use mipMaps */
+void setTexture(SDL_Surface* img, GLuint textID, bool mipMaps=false);
 
 /*! Load the GL RGBA texture based on the surface
  * \param img -> surface to load as texture
- * \param textID -> texture Identifier loaded */
-void setTextureRGBA(SDL_Surface* img, GLuint textID);
+ * \param textID -> texture Identifier loaded
+ * \param mipMaps -> if will use mipMaps */
+void setTextureRGBA(SDL_Surface* img, GLuint textID, bool mipMaps=false);
 
 
 #endif
