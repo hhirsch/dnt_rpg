@@ -508,6 +508,15 @@ GLuint Map::insertTexture(string arq, string name, GLuint R, GLuint G, GLuint B)
       return(0);
    }
 
+   /* Show Warning if not power of 2 */
+   if( (img->h != smallestPowerOfTwo(img->h)) ||
+       (img->w != smallestPowerOfTwo(img->w)) )
+   {
+      cout << "Warning: image '" << arq 
+           << "' is of non-power of two dimension '" 
+           << img->w << "x" << img->h << "'" << endl;
+   }
+
    /* Create the Texture Structs */ 
    tex = new(texture);
    if(numTextures == 0)
@@ -541,7 +550,7 @@ GLuint Map::insertTexture(string arq, string name, GLuint R, GLuint G, GLuint B)
       tex->alphaValues[aux] = new float[getSizeZ() * ALPHA_TEXTURE_INC];
    }
 
-   /* Generate the openGL texture */
+   /* Generate the openGL texture */   
    glGenTextures(1, &(tex->index));
    glBindTexture(GL_TEXTURE_2D, tex->index);
    glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,img->w,img->h, 
