@@ -315,6 +315,16 @@ void engine::loadGame()
    sav->loadHeader("teste.sav");
    sav->load((void*)this);
 
+   /* Put the camera at the characters position */
+   activeCharacter = PCs->getActiveCharacter();
+   if(activeCharacter)
+   {
+      gameCamera.updateCamera(activeCharacter->xPosition,
+                              activeCharacter->yPosition,
+                              activeCharacter->zPosition,
+                              activeCharacter->orientation);
+   }
+
    delete(sav);
 }
 
