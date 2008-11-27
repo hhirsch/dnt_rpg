@@ -91,6 +91,9 @@ bool saveFile::save(string saveTitle, string saveFile, void* curEngine)
    {
       return(false);
    }
+
+   /* Flush the npcs inventories to the modState */
+   eng->keepNPCInventoryStatus();
    
    /* Define Save Path */
    userInfo uInfo;

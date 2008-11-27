@@ -133,6 +133,12 @@ class engine
       void renderGUI();
 
       /*!
+       ****************************************************************
+       * Send all NPCs inventories to the modState
+       ****************************************************************/
+      void keepNPCInventoryStatus();
+
+      /*!
        **************************************************************** 
        * Load and activate Map to engine
        * \param arqMapa -> string with filename

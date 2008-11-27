@@ -356,6 +356,29 @@ bool engine::loadPC(string pcFile)
 }
 
 /*********************************************************************
+ *                       keepNPCInventoryStatus                      *
+ *********************************************************************/
+void engine::keepNPCInventoryStatus()
+{
+   if( (NPCs) && (actualMap))
+   {
+      /* Save All Needed Inventory Status */
+      character* dude = NPCs->getFirst();
+      int i;
+      for(i = 0; i < NPCs->getTotal(); i++)
+      {
+         if(dude->inventories->getTotalItems() > 0)
+         {
+            modifState.mapInventoryAdd(dude->inventories, 
+                  dude->getCharacterFile(),
+                  actualMap->getFileName());
+         }
+         dude = (character*)dude->next;
+      }
+   }
+}
+
+/*********************************************************************
  *                         Load Map to Engine                        *
  *********************************************************************/
 int engine::loadMap(string arqMapa)
@@ -436,22 +459,8 @@ int engine::loadMap(string arqMapa)
       showLoading(img,&texturaTexto,texturaCarga, texto, progress);
       progress->defineActualHealth(1);
 
-      if(NPCs)
-      {
-         /* Save All Needed Inventory Status */
-         character* dude = NPCs->getFirst();
-         int i;
-         for(i = 0; i < NPCs->getTotal(); i++)
-         {
-            if(dude->inventories->getTotalItems() > 0)
-            {
-               modifState.mapInventoryAdd(dude->inventories, 
-                                          dude->getCharacterFile(),
-                                          actualMap->getFileName());
-            }
-            dude = (character*)dude->next;
-         }
-      }
+      keepNPCInventoryStatus();
+      
       arqVelho = actualMap->getFileName();
       delete(actualMap);
 
