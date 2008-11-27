@@ -6,6 +6,22 @@
 #include "character.h"
 #include "../etc/npcfile.h"
 
+#ifdef _MSC_VER
+   #include "../config_win.h"
+#else
+   #include "../config.h"
+#endif
+
+
+
+#define MODSTATE_TOKEN_MAP                  "map"
+#define MODSTATE_TOKEN_VERSION              "version"
+#define MODSTATE_TOKEN_CHARACTER_MOD_ACTION "characterModAction"
+#define MODSTATE_TOKEN_OBJECT_MOD_ACTION    "objectModAction"
+#define MODSTATE_TOKEN_TALK_MOD_ACTION      "talkModAction"
+#define MODSTATE_TOKEN_MOD_INVENTORY        "modInventory"
+#define MODSTATE_TOKEN_INVENTORY_ITEM       "inventoryItem"
+
 ////////////////////////////////////////////////////////////////////////////
 //                                                                        //
 //                               modAction                                //
@@ -135,6 +151,15 @@ mapCharacterModAction::mapCharacterModAction(int act, string character,
 }
 
 /************************************************************
+ *                       Constructor                        *
+ ************************************************************/
+mapCharacterModAction::mapCharacterModAction(string s)
+                      :modAction(0,"","",0,0,0)
+{
+   fromString(s);
+}
+
+/************************************************************
  *                        Destructor                        *
  ************************************************************/
 mapCharacterModAction::~mapCharacterModAction()
@@ -164,6 +189,49 @@ GLfloat mapCharacterModAction::getInitialZ()
 {
    return(initZ);
 }
+
+/************************************************************
+ *                         toString                         *
+ ************************************************************/
+string mapCharacterModAction::toString()
+{
+   char buf[64];
+
+   /* Definition */
+   string res = MODSTATE_TOKEN_CHARACTER_MOD_ACTION;
+   res + " = ";
+
+   /* Action Type */
+   sprintf(buf, " %d ", action);
+   res += buf; 
+
+   /* Target */
+   res += target;
+
+   /* Position */
+   sprintf(buf, " %.3f %.3f %.3f ", x,y,z);
+   res += buf;
+
+   /* Orientation and Initial Position  */
+   sprintf(buf, " %.3f  %.3f %.3f ", oriAngle, initX, initZ);
+   res += buf;
+
+   /* Done */
+   return(res);
+}
+
+/************************************************************
+ *                       fromString                         *
+ ************************************************************/
+void mapCharacterModAction::fromString(string s)
+{
+   char buf[256];
+
+   sscanf(s.c_str(),"%d %s %f %f %f %f %f %f", &action, &buf[0],
+                    &x, &y, &z, &oriAngle, &initX, &initZ);
+   target = buf[0];
+}
+
 ////////////////////////////////////////////////////////////////////////////
 //                                                                        //
 //                         mapObjectModAction                             //
@@ -179,6 +247,16 @@ mapObjectModAction::mapObjectModAction(int act, string obj, string mapFile,
                     modAction(act, obj, mapFile, xPos, yPos, zPos)
 {
 }
+
+/************************************************************
+ *                       Constructor                        *
+ ************************************************************/
+mapObjectModAction::mapObjectModAction(string s)
+                   :modAction(0, "", "", 0,0,0)
+{
+   fromString(s);
+}
+
 
 /************************************************************
  *                        Destructor                        *
@@ -203,6 +281,48 @@ void mapObjectModAction::setValue(int v)
    value = v;
 }
 
+/************************************************************
+ *                         toString                         *
+ ************************************************************/
+string mapObjectModAction::toString()
+{
+   char buf[64];
+
+   /* Definition */
+   string res = MODSTATE_TOKEN_OBJECT_MOD_ACTION;
+   res + " = ";
+
+   /* Action Type */
+   sprintf(buf, " %d ", action);
+   res += buf; 
+
+   /* Target */
+   res += target;
+
+   /* Position */
+   sprintf(buf, " %.3f %.3f %.3f ", x,y,z);
+   res += buf;
+
+   /* Value  */
+   sprintf(buf, " %d ", value);
+   res += buf;
+
+   /* Done */
+   return(res);
+}
+
+/************************************************************
+ *                       fromString                         *
+ ************************************************************/
+void mapObjectModAction::fromString(string s)
+{
+   char buf[256];
+
+   sscanf(s.c_str(),"%d %s %f %f %f %d", &action, &buf[0],
+                    &x, &y, &z, &value);
+   target = buf[0];
+}
+
 ////////////////////////////////////////////////////////////////////////////
 //                                                                        //
 //                          mapTalkModAction                              //
@@ -217,6 +337,15 @@ mapTalkModAction::mapTalkModAction(int act, string character, string mapFile,
                   modAction(act, character, mapFile, 0, 0, 0)
 {
    value = talkValue;
+}
+
+/************************************************************
+ *                       Constructor                        *
+ ************************************************************/
+mapTalkModAction::mapTalkModAction(string s)
+                   :modAction(0, "", "", 0,0,0)
+{
+   fromString(s);
 }
 
 /************************************************************
@@ -240,6 +369,43 @@ int mapTalkModAction::getValue()
 void mapTalkModAction::setValue(int v)
 {
    value = v;
+}
+
+/************************************************************
+ *                         toString                         *
+ ************************************************************/
+string mapTalkModAction::toString()
+{
+   char buf[64];
+
+   /* Definition */
+   string res = MODSTATE_TOKEN_TALK_MOD_ACTION;
+   res + " = ";
+
+   /* Action Type */
+   sprintf(buf, " %d ", action);
+   res += buf; 
+
+   /* Target */
+   res += target;
+
+   /* Value  */
+   sprintf(buf, " %d ", value);
+   res += buf;
+
+   /* Done */
+   return(res);
+}
+
+/************************************************************
+ *                       fromString                         *
+ ************************************************************/
+void mapTalkModAction::fromString(string s)
+{
+   char buf[256];
+
+   sscanf(s.c_str(),"%d %s %d", &action, &buf[0], &value);
+   target = buf[0];
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -392,6 +558,45 @@ void modInventory::clear()
    totalObjects = 0;
 }
 
+/************************************************************
+ *                           save                           *
+ ************************************************************/
+void modInventory::save(ofstream* file)
+{
+   int i;
+   modInvObj* obj;
+
+   /* Define the owner (target) */
+   *file << MODSTATE_TOKEN_MOD_INVENTORY << " = " << target << endl;
+
+   /* Save all objects here */
+   obj = objects;
+   for(i = 0; i < totalObjects; i++)
+   {
+      *file << MODSTATE_TOKEN_INVENTORY_ITEM << " = " 
+            << obj->fileName << " " << obj->x << " " 
+            << obj->y << " " << obj->invNumber << endl;
+      obj = obj->next;
+   }
+}
+
+/************************************************************
+ *                         toString                         *
+ ************************************************************/
+string modInventory::toString()
+{
+   /* Not used for modInventories */
+   return("");
+}
+
+/************************************************************
+ *                       fromString                         *
+ ************************************************************/
+void modInventory::fromString(string s)
+{
+   /* Not used for modInventories */
+}
+
 ////////////////////////////////////////////////////////////////////////////
 //                                                                        //
 //                                modMap                                  //
@@ -475,6 +680,38 @@ void modMap::clear()
    }
    modActionsList = NULL;
    totalModActions = 0;
+}
+
+/************************************************************
+ *                            save                          *
+ ************************************************************/
+void modMap::save(ofstream* file)
+{
+   int i;
+   modAction* act;
+   modInventory* inv;
+
+   /* Save the map fileName */
+   *file << MODSTATE_TOKEN_MAP << " = " << mapFileName << endl;
+
+   /* Now save each modAction */
+   act = modActionsList;
+   for(i = 0; i < totalModActions; i++)
+   {
+      /* Save normal actions */
+      if(act->getAction() != MODSTATE_INVENTORY)
+      {
+         *file << act->toString() << endl;
+      }
+
+      /* Save a modInventory */
+      else
+      {
+         inv = (modInventory*)act;
+         inv->save(file);
+      }
+      act = act->getNext();
+   }
 }
 
 /************************************************************
@@ -1002,19 +1239,31 @@ bool modState::loadState(string file)
  ************************************************************/
 bool modState::saveState(string file)
 {
-   //TODO. For now is only printing on screen for debug!
-/*   int i;
-   GLfloat x=0, z=0;
-   modAction* tmpMod = modActionsList;
-   for(i = 0; i < totalModActions; i++)
-   {
-      tmpMod->getPosition(x,z);
-      printf("Map: %s, Action: %d\n\ttarget: %s\n\tx:%.3f z:%.3f\n",
-             tmpMod->getMapFileName().c_str(), tmpMod->getAction(),
-             tmpMod->getTarget().c_str(), x, z);
-      tmpMod = tmpMod->getNext();
-   }*/
+   ofstream f;
+   int i;
+   modMap* cur;
 
+   /* Create the file */
+   f.open(file.c_str(), ios::out | ios::binary);
+   if(!f)
+   {
+      cerr << "Can't save file: " << file << endl;
+      return(false);
+   }
+
+   /* Save the version */
+   f << MODSTATE_TOKEN_VERSION << " = " << VERSION << endl;
+
+   /* Now call to save each modMap */
+   cur = modMapList;
+   for(i = 0; i < totalModMaps; i++)
+   {
+      cur->save(&f);
+      cur = cur->getNext();
+   }
+
+   /* Close the file and done! */
+   f.close();
    return(true);
 }
 

@@ -33,7 +33,7 @@ class modAction
                 GLfloat xPos, GLfloat yPos, GLfloat zPos);
 
       /*! Destructor */
-      ~modAction();
+      virtual ~modAction();
 
       /*! Get the target of the action
        * \return pointer to object of the action */
@@ -71,6 +71,13 @@ class modAction
        * \param act -> pointer to previous action */
       void setPrevious(modAction* act);
 
+      /*! Convert the action to a string (usually to save)
+       * \return string representing the action */
+      virtual string toString()=0;
+      /*! Define the action from a string (usually to load) 
+       * \param s -> string to load from */
+      virtual void fromString(string s)=0;
+
    protected:
       string mapFileName;       /**< name of the map file where action occurs */
       int action;               /**< type of the action */
@@ -99,6 +106,11 @@ class mapCharacterModAction : public modAction
                             GLfloat xPos, GLfloat yPos, GLfloat zPos, 
                             GLfloat orientation,
                             GLfloat initialX, GLfloat initialZ);
+
+      /*! Constructor from string
+       * \param s -> string with info to load */
+      mapCharacterModAction(string s);
+
       /*! Destructor */                      
       ~mapCharacterModAction();
 
@@ -113,6 +125,13 @@ class mapCharacterModAction : public modAction
       /*! Get the orientation of the character at action's instant
        * \return character orientation */
       GLfloat getOrientation();
+
+      /*! Convert the action to a string (usually to save)
+       * \return string representing the action */
+      string toString();
+      /*! Define the action from a string (usually to load)
+       * \param s -> string to load from */
+      void fromString(string s);
 
    protected:
       GLfloat initX;                   /**< X initial position on map */
@@ -132,6 +151,11 @@ class mapObjectModAction: public modAction
        * \param zPos -> z position */
       mapObjectModAction(int act, string obj, string mapFile,
                          GLfloat xPos, GLfloat yPos, GLfloat zPos);
+
+      /*! Constructor from string
+       * \param s -> string with info to load */
+      mapObjectModAction(string s);
+
       /*! Destructor */
       ~mapObjectModAction();
 
@@ -142,6 +166,13 @@ class mapObjectModAction: public modAction
       /*! Set the action value
        * \param v -> new action value */
       void setValue(int v);
+
+      /*! Convert the action to a string (usually to save)
+       * \return string representing the action */
+      string toString();
+      /*! Define the action from a string (usually to load)
+       * \param s -> string to load from */
+      void fromString(string s);
 
    protected:
        int value;   /**< Some Value Information (usually related to state)  */
@@ -160,6 +191,10 @@ class mapTalkModAction: public modAction
       mapTalkModAction(int act, string tgt, string mapFile,
                        int talkValue);
 
+      /*! Constructor from string
+       * \param s -> string with info to load */
+      mapTalkModAction(string s);
+
       /*! Destructor */
       ~mapTalkModAction();
 
@@ -170,6 +205,13 @@ class mapTalkModAction: public modAction
       /*! Set the talk action value
        * \param v -> new talk action value */
       void setValue(int v);
+
+      /*! Convert the action to a string (usually to save)
+       * \return string representing the action */
+      string toString();
+      /*! Define the action from a string (usually to load)
+       * \param s -> string to load from */
+      void fromString(string s);
 
    protected:
        int value;   /**< Some talk Value Information */
@@ -202,6 +244,7 @@ class modInventory: public modAction
        * \param owner -> inventory owner
        * \param mapFile -> mapFileName where the owner is */
       modInventory(inventory* inv,string owner, string mapFile);
+
       /*! Destructor */
       ~modInventory();
 
@@ -222,6 +265,17 @@ class modInventory: public modAction
       /*! Clear the Objects List */
       void clear();
 
+      /*! Convert the action to a string (usually to save)
+       * \return string representing the action */
+      string toString();
+      /*! Define the action from a string (usually to load)
+       * \param s -> string to load from */
+      void fromString(string s);
+
+      /*! Save the modInventory to the file
+       * \param file -> pointer to the file to save */
+      void save(ofstream* file);
+
    protected:
     
       /*! Insert a modInvObj on the list
@@ -241,6 +295,10 @@ class modMap
       modMap(string fileName);
       /*! Destructor */
       ~modMap();
+
+      /*! Save the modMap to the file
+       * \param file -> pointer to the file to save */
+      void save(ofstream* file);
       
       /*! Add action to the list (or remove some inverse action from)
        * \param action -> action type

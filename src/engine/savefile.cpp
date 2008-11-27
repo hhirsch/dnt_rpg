@@ -84,6 +84,8 @@ bool saveFile::save(string saveTitle, string saveFile, void* curEngine)
    ofstream file;
    engine* eng = (engine*)curEngine;
 
+   modState mState;
+
    /* Verify if we got an engine */
    if(eng == NULL)
    {
@@ -150,8 +152,11 @@ bool saveFile::save(string saveTitle, string saveFile, void* curEngine)
    /* Save the PC File */
    eng->PCs->getActiveCharacter()->save(pcFile);
 
+   /* Save the ModState File */
+   mState.saveState(modStateFile);
    
-   //TODO Call save to modState, current missions, screenshot and pc
+   //TODO Call save to modState, current missions, screenshot
+
 
    return(true);
 }
