@@ -333,12 +333,21 @@ void engine::loadGame()
  *********************************************************************/
 void engine::saveGame()
 {
-   saveFile *sav = new saveFile();
+   if(engineMode != ENGINE_MODE_TURN_BATTLE)
+   {
+      saveFile *sav = new saveFile();
 
-   //TODO get the file name and title!
-   sav->save("Teste","teste.sav", (void*)this);
+      //TODO get the file name and title!
+      sav->save("Teste","teste.sav", (void*)this);
 
-   delete(sav);
+      delete(sav);
+   }
+   else
+   {
+      warning warn;
+      warn.show(gettext("Warning"), 
+                gettext("Can't save game while fighting!"), gui);
+   }
 }
 
 /*********************************************************************
