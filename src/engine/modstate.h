@@ -6,6 +6,7 @@
  *************************************************************************/
 
 #include "../classes/inventory.h"
+#include "../etc/defparser.h"
 #include "../map/map.h"
 
 #define MODSTATE_ACTION_OBJECT_REMOVE  0  /**< Removed object from map */
@@ -276,6 +277,10 @@ class modInventory: public modAction
        * \param file -> pointer to the file to save */
       void save(ofstream* file);
 
+      /*! Insert a item form a string representing the modInvObj
+       * \param s -> string representing modInvObj */
+      void insert(string s);
+
    protected:
     
       /*! Insert a modInvObj on the list
@@ -299,6 +304,10 @@ class modMap
       /*! Save the modMap to the file
        * \param file -> pointer to the file to save */
       void save(ofstream* file);
+
+      /*! Load the modMap from the definitions parser
+       * \param def -> pointer to the defParser with info for the modMap */
+      void load(defParser* def);
       
       /*! Add action to the list (or remove some inverse action from)
        * \param action -> action type
@@ -506,7 +515,8 @@ class modState
 
       /*! Find the modMap on the list related to the fileName
        * \param fileName -> map filename to search
-       * \return -> modMap pointer if found or NULL */
+       * \return -> modMap pointer if found or created
+       * \note -> if not found a modMap this function create a new one */
       modMap* findModMap(string fileName);
       
       static modMap* modMapList;   /**< List of maps */

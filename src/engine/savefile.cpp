@@ -167,6 +167,7 @@ bool saveFile::save(string saveTitle, string saveFile, void* curEngine)
 bool saveFile::load(void* curEngine)
 {
    engine* eng = (engine*)curEngine;
+   modState modif;
 
    /* Verify if we got a valid engine */
    if(eng == NULL)
@@ -194,7 +195,7 @@ bool saveFile::load(void* curEngine)
    if(!modStateFile.empty())
    {
       /* Load the modState! */
-      // TODO
+      modif.loadState(modStateFile);
    }
 
    if(!mapFile.empty())

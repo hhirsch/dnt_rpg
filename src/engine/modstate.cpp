@@ -6,6 +6,7 @@
 #include "character.h"
 #include "../etc/npcfile.h"
 
+
 #ifdef _MSC_VER
    #include "../config_win.h"
 #else
@@ -15,6 +16,7 @@
 
 
 #define MODSTATE_TOKEN_MAP                  "map"
+#define MODSTATE_TOKEN_MAP_END              "mapEnd"
 #define MODSTATE_TOKEN_VERSION              "version"
 #define MODSTATE_TOKEN_CHARACTER_MOD_ACTION "characterModAction"
 #define MODSTATE_TOKEN_OBJECT_MOD_ACTION    "objectModAction"
@@ -199,7 +201,7 @@ string mapCharacterModAction::toString()
 
    /* Definition */
    string res = MODSTATE_TOKEN_CHARACTER_MOD_ACTION;
-   res + " = ";
+   res += " = ";
 
    /* Action Type */
    sprintf(buf, " %d ", action);
@@ -229,7 +231,7 @@ void mapCharacterModAction::fromString(string s)
 
    sscanf(s.c_str(),"%d %s %f %f %f %f %f %f", &action, &buf[0],
                     &x, &y, &z, &oriAngle, &initX, &initZ);
-   target = buf[0];
+   target = buf;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -290,7 +292,7 @@ string mapObjectModAction::toString()
 
    /* Definition */
    string res = MODSTATE_TOKEN_OBJECT_MOD_ACTION;
-   res + " = ";
+   res += " = ";
 
    /* Action Type */
    sprintf(buf, " %d ", action);
@@ -320,7 +322,7 @@ void mapObjectModAction::fromString(string s)
 
    sscanf(s.c_str(),"%d %s %f %f %f %d", &action, &buf[0],
                     &x, &y, &z, &value);
-   target = buf[0];
+   target = buf;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -380,7 +382,7 @@ string mapTalkModAction::toString()
 
    /* Definition */
    string res = MODSTATE_TOKEN_TALK_MOD_ACTION;
-   res + " = ";
+   res += " = ";
 
    /* Action Type */
    sprintf(buf, " %d ", action);
@@ -405,7 +407,7 @@ void mapTalkModAction::fromString(string s)
    char buf[256];
 
    sscanf(s.c_str(),"%d %s %d", &action, &buf[0], &value);
-   target = buf[0];
+   target = buf;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -425,7 +427,10 @@ modInventory::modInventory(inventory* inv, string owner, string mapFile)
    totalObjects = 0;
 
    /* Create the list from the inventory */
-   create(inv);
+   if(inv != NULL)
+   {
+      create(inv);
+   }
 }
 
 /************************************************************
@@ -581,6 +586,23 @@ void modInventory::save(ofstream* file)
 }
 
 /************************************************************
+ *                         insert                           *
+ ************************************************************/
+void modInventory::insert(string s)
+{
+   modInvObj* obj = new modInvObj();
+   char fName[256];
+
+   /* Get Values */
+   sscanf(s.c_str(), "%s %d %d %d", &fName[0], &obj->x, &obj->y, 
+          &obj->invNumber);
+   obj->fileName = fName;
+
+   /* Insert it! */
+   insert(obj);
+}
+
+/************************************************************
  *                         toString                         *
  ************************************************************/
 string modInventory::toString()
@@ -683,6 +705,60 @@ void modMap::clear()
 }
 
 /************************************************************
+ *                            load                          *
+ ************************************************************/
+void modMap::load(defParser* def)
+{
+   string key="", value="";
+   modInventory* modInv = NULL;
+
+   while(def->getNextTuple(key, value))
+   {
+      if(key == MODSTATE_TOKEN_MAP_END)
+      {
+         /* Done with the current modMap, so exit! */
+         return;
+      }
+      else if(key == MODSTATE_TOKEN_CHARACTER_MOD_ACTION)
+      {
+         /* Parse and add Character ModAction */
+         mapCharacterModAction* mChar = new mapCharacterModAction(value);
+         addAction(mChar);
+      }
+      else if(key == MODSTATE_TOKEN_OBJECT_MOD_ACTION)
+      {
+         /* Parse and add Object ModAction */
+         mapObjectModAction* mObj = new mapObjectModAction(value);
+         addAction(mObj);
+      }
+      else if(key == MODSTATE_TOKEN_TALK_MOD_ACTION)
+      {
+         /* Parse and add Talk ModAction */
+         mapTalkModAction* mTalk = new mapTalkModAction(value);
+         addAction(mTalk);
+      }
+      else if(key == MODSTATE_TOKEN_MOD_INVENTORY)
+      {
+         /* Add the modInventory */
+         modInv = new modInventory(NULL, value, mapFileName);
+         addAction(modInv);
+      }
+      else if(key == MODSTATE_TOKEN_INVENTORY_ITEM)
+      {
+         /* Add item to the current mod Inventory */
+         if(modInv)
+         {
+            modInv->insert(value);
+         }
+         else
+         {
+            cerr << "Warning: Item without modInventory!" << endl;
+         }
+      }
+   }
+}
+
+/************************************************************
  *                            save                          *
  ************************************************************/
 void modMap::save(ofstream* file)
@@ -712,6 +788,9 @@ void modMap::save(ofstream* file)
       }
       act = act->getNext();
    }
+
+   /* Mark end of map */
+   *file << MODSTATE_TOKEN_MAP_END << " = " << mapFileName << endl;
 }
 
 /************************************************************
@@ -1013,130 +1092,126 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs,
    modAction* tmpMobj = modActionsList;
    for(i = 0; i < totalModActions; i++)
    {
-      /* If the information is from the loaded map, apply it! */
-      if(tmpMobj->getMapFileName() == actualMap->getFileName())
+      tmpMobj->getPosition(x,y,z);
+
+      /* Object Remove */
+      if(tmpMobj->getAction() == MODSTATE_ACTION_OBJECT_REMOVE)
       {
-         tmpMobj->getPosition(x,y,z);
-         
-         /* Object Remove */
-         if(tmpMobj->getAction() == MODSTATE_ACTION_OBJECT_REMOVE)
+         /* Get the object from the list */
+         object* obj = objectsList::search(tmpMobj->getTarget(), x, y, z);
+
+         if(obj)
          {
-            /* Get the object from the list */
-            object* obj = objectsList::search(tmpMobj->getTarget(), x, y, z);
-
-            if(obj)
-            {
-               /* Remove it from the map */
-               actualMap->removeObject(obj);
-               /* And remove it from game! */
-               delete(obj);
-            }
-            else
-            {
-               cerr << "Error: Unknow object: " << tmpMobj->getTarget() 
-                    << " to remove at modState" << endl;
-            }
+            /* Remove it from the map */
+            actualMap->removeObject(obj);
+            /* And remove it from game! */
+            delete(obj);
          }
-
-         /* Object Add */
-         else if(tmpMobj->getAction() == MODSTATE_ACTION_OBJECT_ADD)
-         {
-            object* obj = objectsList::search(tmpMobj->getTarget(),
-                                              x, actualMap->getHeight(x,z),z);
-            if(obj == NULL)
-            {
-               /* Load it to the map */
-               obj = actualMap->insertObject(tmpMobj->getTarget(), mdlList, 
-                                             wTypes);
-            }
-            /* Insert the Object  */
-            actualMap->insertObject(x, actualMap->getHeight(x,z), z, 
-                                    0, obj, 0);
-         }
-
-         /* Object Change State */
-         else if(tmpMobj->getAction() == MODSTATE_ACTION_OBJECT_CHANGE_STATE)
-         {
-            /* Get the object from the list */
-            mapObjectModAction* act = (mapObjectModAction*)tmpMobj;
-            object* obj = objectsList::search(act->getTarget(), x, y, z);
-
-            if(obj)
-            {
-               /* Change its state */
-               obj->setState(act->getValue());
-            }
-            else
-            {
-               cerr << "Error: Unknow object: " << act->getTarget() 
-                    << " to change at modState" << endl;
-            }
-         }
-
-         /* Character Dead */
-         else if(tmpMobj->getAction() == MODSTATE_ACTION_CHARACTER_DEAD)
-         {
-            /* Get The character Pointer */
-            mapCharacterModAction* charAct = (mapCharacterModAction*)tmpMobj;
-            ch = npcs->getCharacter(charAct->getTarget());
-            bool done = false;
-            while( (ch != NULL) && (!done) )
-            {
-               if( (ch->xPosition == charAct->getInitialX()) &&
-                   (ch->zPosition == charAct->getInitialZ()) )
-               {
-                  /* Put it as dead at the position */
-                  ch->instantKill();
-                  ch->orientation = charAct->getOrientation();
-                  charAct->getPosition(ch->xPosition, ch->yPosition, 
-                                       ch->zPosition);
-                  done = true;
-               }
-               else
-               {
-                  /* Not the one, get the next */
-                  ch = npcs->getNextSameCharacter(ch);
-               }
-            }
-         }
-
-         /* Character Move */
-         else if(tmpMobj->getAction() == MODSTATE_ACTION_CHARACTER_MOVE)
-         {
-            //TODO
-         }
-
-         /* Talk Initial Dialog */
-         else if(tmpMobj->getAction() == MODSTATE_TALK_ENTER_VALUE)
-         {
-            /* Get the character pointer */
-            ch = npcs->getCharacter(tmpMobj->getTarget());
-            if(ch)
-            {
-               mapTalkModAction* mTalk = (mapTalkModAction*)tmpMobj;
-               ch->setInitialConversation(mTalk->getValue());
-            }
-         }
-
-         /* Inventory */
-         else if(tmpMobj->getAction() == MODSTATE_INVENTORY)
-         {
-            /* Get the modified inventory */
-            modInventory* mInv = (modInventory*)tmpMobj;
-            /* Get the character */
-            ch = npcs->getCharacter(tmpMobj->getTarget());
-            if(ch)
-            {
-               mInv->flush(actualMap, ch->inventories, mdlList, wTypes);
-            }
-         }
-
-         /* Unknow */
          else
          {
-            printf("Unknow saved action: %d, at %d element!\n", 
-                   tmpMobj->getAction(), i);
+            cerr << "Error: Unknow object: " << tmpMobj->getTarget() 
+               << " to remove at modState" << endl;
          }
+      }
+
+      /* Object Add */
+      else if(tmpMobj->getAction() == MODSTATE_ACTION_OBJECT_ADD)
+      {
+         object* obj = objectsList::search(tmpMobj->getTarget(),
+               x, actualMap->getHeight(x,z),z);
+         if(obj == NULL)
+         {
+            /* Load it to the map */
+            obj = actualMap->insertObject(tmpMobj->getTarget(), mdlList, 
+                  wTypes);
+         }
+         /* Insert the Object  */
+         actualMap->insertObject(x, actualMap->getHeight(x,z), z, 
+               0, obj, 0);
+      }
+
+      /* Object Change State */
+      else if(tmpMobj->getAction() == MODSTATE_ACTION_OBJECT_CHANGE_STATE)
+      {
+         /* Get the object from the list */
+         mapObjectModAction* act = (mapObjectModAction*)tmpMobj;
+         object* obj = objectsList::search(act->getTarget(), x, y, z);
+
+         if(obj)
+         {
+            /* Change its state */
+            obj->setState(act->getValue());
+         }
+         else
+         {
+            cerr << "Error: Unknow object: " << act->getTarget() 
+               << " to change at modState" << endl;
+         }
+      }
+
+      /* Character Dead */
+      else if(tmpMobj->getAction() == MODSTATE_ACTION_CHARACTER_DEAD)
+      {
+         /* Get The character Pointer */
+         mapCharacterModAction* charAct = (mapCharacterModAction*)tmpMobj;
+         ch = npcs->getCharacter(charAct->getTarget());
+         bool done = false;
+         while( (ch != NULL) && (!done) )
+         {
+            if( (ch->xPosition == charAct->getInitialX()) &&
+                  (ch->zPosition == charAct->getInitialZ()) )
+            {
+               /* Put it as dead at the position */
+               ch->instantKill();
+               ch->orientation = charAct->getOrientation();
+               charAct->getPosition(ch->xPosition, ch->yPosition, 
+                     ch->zPosition);
+               done = true;
+            }
+            else
+            {
+               /* Not the one, get the next */
+               ch = npcs->getNextSameCharacter(ch);
+            }
+         }
+      }
+
+      /* Character Move */
+      else if(tmpMobj->getAction() == MODSTATE_ACTION_CHARACTER_MOVE)
+      {
+         //TODO
+      }
+
+      /* Talk Initial Dialog */
+      else if(tmpMobj->getAction() == MODSTATE_TALK_ENTER_VALUE)
+      {
+         /* Get the character pointer */
+         ch = npcs->getCharacter(tmpMobj->getTarget());
+         if(ch)
+         {
+            mapTalkModAction* mTalk = (mapTalkModAction*)tmpMobj;
+            ch->setInitialConversation(mTalk->getValue());
+         }
+      }
+
+      /* Inventory */
+      else if(tmpMobj->getAction() == MODSTATE_INVENTORY)
+      {
+         /* Get the modified inventory */
+         modInventory* mInv = (modInventory*)tmpMobj;
+         /* Get the character */
+         ch = npcs->getCharacter(tmpMobj->getTarget());
+         if(ch)
+         {
+            mInv->flush(actualMap, ch->inventories, mdlList, wTypes);
+         }
+      }
+
+      /* Unknow */
+      else
+      {
+         printf("Unknow saved action: %d, at %d element!\n", 
+               tmpMobj->getAction(), i);
       }
       
       tmpMobj = tmpMobj->getNext();
@@ -1229,8 +1304,45 @@ modState::~modState()
  ************************************************************/
 bool modState::loadState(string file)
 {
-   //TODO
-   printf("Not done yet!\n");
+   defParser def;
+   string key, value;
+   modMap* mod = NULL;
+
+   if(!def.load(file))
+   {
+      cerr << "Can't open modstate file: " << file << endl;
+      return(false);
+   }
+
+   /* Get version */
+   def.getNextTuple(key, value);
+   if(key == MODSTATE_TOKEN_VERSION)
+   {
+      //TODO do some latter version check
+   }
+   else
+   {
+      cerr << "Invalid modState File: " << file << endl;
+      return(false);
+   }
+
+   /* Now parse the file */
+   while(def.getNextTuple(key, value))
+   {
+      if(key == MODSTATE_TOKEN_MAP)
+      {
+         /* Get the modMap */
+         mod = findModMap(value);
+
+         /* And load things for it! */
+         mod->load(&def);
+      }
+      else
+      {
+         cerr << "Unexpected token '" << key << "' at file " << file << endl;
+      }
+   }
+
    return(true);
 }
 
