@@ -2580,7 +2580,7 @@ int Map::save(string arquivo)
    door* doorAux = (door*)doors;
    while(doorAux != NULL)
    {
-      fprintf(arq,"d %s %f,%f:%d\n",
+      fprintf(arq,"d %s %.3f,%.3f:%d\n",
               dir.getRelativeFile(doorAux->obj->getFileName()).c_str(),
               doorAux->x,doorAux->z, doorAux->orientation);
       doorAux = doorAux->next;
@@ -2592,7 +2592,8 @@ int Map::save(string arquivo)
    for(wNum=0; wNum < totalWalls; wNum++)
    {
       GLuint dX=0, dY=0, dZ=0;
-      fprintf(arq,"wall %f,%f,%f,%f\n",maux->x1,maux->z1,maux->x2,maux->z2);
+      fprintf(arq,"wall %.3f,%.3f,%.3f,%.3f\n",
+              maux->x1,maux->z1,maux->x2,maux->z2);
       maux->frontTexture.getDelta(dX,dY,dZ);
       fprintf(arq,"wtf %d,%d,%d %s\n", dX, dY, dZ, 
                   getTextureName(maux->frontTexture.getTextureId()).c_str());
@@ -2662,7 +2663,7 @@ int Map::save(string arquivo)
             {
                x2 = (int)obj->obj->xPosition / squareSize();
                z2 = (int)obj->obj->zPosition / squareSize();
-               fprintf(arq,"uo %s %d:%d,%d:%f,%f,%f:%f:%d\n",
+               fprintf(arq,"uo %s %d:%d,%d:%.3f,%.3f,%.3f:%.3f:%d\n",
                        dir.getRelativeFile(obj->obj->getFileName()).c_str(),
                        obj->draw, x2 + 1, z2 + 1,
                        obj->x, obj->y, 
@@ -2675,7 +2676,7 @@ int Map::save(string arquivo)
    }
 
    /* Write Initial Character Position */
-   fprintf(arq,"i %f,%f\n",xInic,zInic);
+   fprintf(arq,"i %.3f,%.3f\n",xInic,zInic);
 
    fclose(arq);
    return(1);
