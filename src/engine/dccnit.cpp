@@ -315,6 +315,9 @@ void engine::loadGame()
    sav->loadHeader("teste.sav");
    sav->load((void*)this);
 
+   /* make sure not in battle mode */
+   engineMode = ENGINE_MODE_REAL_TIME;
+
    /* Put the camera at the characters position */
    activeCharacter = PCs->getActiveCharacter();
    if(activeCharacter)
