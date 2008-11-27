@@ -1308,6 +1308,10 @@ bool modState::loadState(string file)
    string key, value;
    modMap* mod = NULL;
 
+   /* Clear current modState */
+   clear();
+
+   /* Try to open the modState file */
    if(!def.load(file))
    {
       cerr << "Can't open modstate file: " << file << endl;
