@@ -70,7 +70,7 @@ void race::applySkillCosts(skills* sk)
       }
       else
       {
-         cerr << "Warn: Unknow race Skill: " << raceSkills[i] << endl;
+         cerr << "Warn: Unknow race Skill: '" << raceSkills[i] << "'" << endl;
       }
    }
 }

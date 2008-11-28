@@ -70,7 +70,7 @@ void classe::applySkillCosts(skills* sk)
       }
       else
       {
-         cerr << "Warn: Unknow class Skill: " << classSkills[i] << endl;
+         cerr << "Warn: Unknow class Skill: '" << classSkills[i] << "'" << endl;
       }
    }
 }
