@@ -1,0 +1,19 @@
+All Textures used in DNT are free (as in free speech).
+
+Here are the licenses for those at the current directory.
+
+===========================================================================
+DNTeam Public Domain Textures
+
+asfalt.png, rock.png
+
+===========================================================================
+
+OpenFrag and Lemog3D C-C-BY Textures
+
+burlwood.png, grass.png, grass2.png, grass3.png, grass4.png, grass5.png,
+grass6.png, grass7.png, grass8.png, ground.png, rock2.png, rock3.png,
+sand.png, stones2.png, stones.png, streetng.png, stressed.png
+
+===========================================================================
+
