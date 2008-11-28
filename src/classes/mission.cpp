@@ -5,6 +5,10 @@
 #include "../etc/dirs.h"
 #include "../etc/message3d.h"
 
+#define MISSION_TOKEN_CURRENT_MISSION    "currentMission"
+#define MISSION_TOKEN_COMPLETED_MISSION  "completedMission"
+
+
 #define MISSION_CONTROLLER_TOTAL_TREAT  5
 
 /************************************************************
@@ -78,6 +82,37 @@ void mission::setXp(int xp)
 {
    xpValue = xp;
 }
+
+/************************************************************
+ *                      saveAsCompleted                     *
+ ************************************************************/
+void mission::saveAsCompleted(ofstream* file)
+{
+}
+
+/************************************************************
+ *                      loadAsCompleted                     *
+ ************************************************************/
+void mission::loadAsCompleted(defParser* def)
+{
+}
+
+
+/************************************************************
+ *                       saveAsCurrent                      *
+ ************************************************************/
+void mission::saveAsCurrent(ofstream* file)
+{
+}
+
+/************************************************************
+ *                       loadAsCurrent                      *
+ ************************************************************/
+void mission::loadAsCurrent(defParser* def)
+{
+}
+
+
 ///////////////////////////////////////////////////////////////////////
 //                                                                   //
 //                        MISSIONS CONTROLLER                        //
@@ -137,20 +172,7 @@ void missionsController::addNewMission(string scriptFile)
 {
    mission* m = new mission(scriptFile, pEngine);
 
-   if(current)
-   {
-      m->next = current;
-      m->previous = current->previous;
-      m->next->previous = m;
-      m->previous->next = m;
-   }
-   else
-   {
-      m->next = m;
-      m->previous = m;
-   }
-   current = m;
-   totalCurrent++;
+   addCurrent(m);
 }
 
 /************************************************************
@@ -243,6 +265,26 @@ void missionsController::removeFromCurrent(mission* m, bool del)
    }
 }
 
+/************************************************************
+ *                        addCurrent                        *
+ ************************************************************/
+void missionsController::addCurrent(mission* m)
+{
+   if(current)
+   {
+      m->next = current;
+      m->previous = current->previous;
+      m->next->previous = m;
+      m->previous->next = m;
+   }
+   else
+   {
+      m->next = m;
+      m->previous = m;
+   }
+   current = m;
+   totalCurrent++;
+}
 
 /************************************************************
  *                       addCompleted                       *
@@ -345,6 +387,98 @@ void missionsController::treat(Map* acMap, characterList* NPCs)
          }
       }
    }
+}
+
+/************************************************************
+ *                            save                          *
+ ************************************************************/
+bool missionsController::save(string fName)
+{
+   ofstream f;
+   int i;
+   mission* m;
+
+   /* Create the file */
+   f.open(fName.c_str(), ios::out | ios::binary);
+   if(!f)
+   {
+      cerr << "Can't save file: " << fName << endl;
+      return(false);
+   }
+
+   /* Call to save each completed mission */
+   m = completed;
+   for(i = 0; i < totalCompleted; i++)
+   {
+      m->saveAsCompleted(&f);
+      m = m->next;
+   }
+
+   /* And Call to save each current mission */
+   m = current;
+   for(i = 0; i < totalCurrent; i++)
+   {
+      m->saveAsCurrent(&f);
+      m = m->next;
+   }
+
+   /* Close the file and done! */
+   f.close();
+   return(true);
+}
+
+/************************************************************
+ *                            load                          *
+ ************************************************************/
+bool missionsController::load(string fName)
+{
+   defParser def;
+   string key, value;
+   mission* m = NULL;
+
+   /* Clear Current */
+   finish();
+   init(pEngine); 
+
+   /* Try to open the missions file */
+   if(!def.load(fName))
+   {
+      cerr << "Can't open missions file: " << fName << endl;
+      return(false);
+   }
+
+   /* Now parse the file */
+   while(def.getNextTuple(key, value))
+   {
+      if(key == MISSION_TOKEN_CURRENT_MISSION)
+      {
+         /* Create the new mission */
+         m = new mission(value, pEngine);
+
+         /* Insert as current */
+         addCurrent(m);
+
+         /* Load as current */
+         m->loadAsCurrent(&def);
+      }
+      else if(key == MISSION_TOKEN_COMPLETED_MISSION)
+      {
+         /* Create new mission */
+         m = new mission(value, pEngine);
+
+         /* Insert as completed */
+         addCompleted(m);
+
+         /* Load as completed */
+         m->loadAsCompleted(&def);
+      }
+      else
+      {
+         cerr << "Unexpected token '" << key << "' at file " << fName << endl;
+      }
+   }
+
+   return(true);
 }
 
 /*************************************************************************

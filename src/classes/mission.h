@@ -2,6 +2,10 @@
 #define _mission_h
 
 #include "../ia/iascript.h"
+#include "../etc/defparser.h"
+
+#include <iostream>
+using namespace std;
 
 #define MISSION_TEMP_FLAGS  5    /**< Number of temp flags on missions */
 
@@ -44,6 +48,24 @@ class mission: public iaScript
       /*! Set the xp value of the function
        * \param xp -> new xp value */
       void setXp(int xp);
+
+      /*! Save the current mission status to a file
+       * \param file -> pointer to the file to use
+       * \note -> this function will save all the stack and script 
+       *          status relative to the mission */
+      void saveAsCurrent(ofstream* file);
+
+      /*! Save the completed mission to a file
+       * \param file -> pointer to the file to use */
+      void saveAsCompleted(ofstream* file);
+
+      /*! Load the completed mission from a definitions file
+       * \param def -> pointer to the defintions file to load from */
+      void loadAsCompleted(defParser* def);
+
+      /*! Load the current mission state from a definitions file
+       * \param def -> pointer to the defintions file to load from */
+      void loadAsCurrent(defParser* def);
 
       /*! Define the controller as friend */
       friend class missionsController;
@@ -96,6 +118,16 @@ class missionsController
        * \param NPCs -> pointer to the current NPCs list*/
       void treat(Map* acMap, characterList* NPCs);
 
+      /*! Save all missions (completed and current) to a file
+       * \param fName -> fileName to save 
+       * \return -> true if save. */
+      bool save(string fName);
+
+      /*! Load all mission
+       * \param fName -> name of the file to load
+       * \return -> true if loaded. */
+      bool load(string fName);
+
    protected:
       /*! Remove misssion from current
        * \param m-> mission to remove
@@ -109,6 +141,10 @@ class missionsController
       /*! Add mission to completed list
        * \param m -> new completed mission */
       void addCompleted(mission* m);
+
+      /*! Add mission to current list
+       * \param m -> pointer to the mission to add */
+      void addCurrent(mission* m);
 
       static mission* completed;  /**< The List of Completed Missions */
       static mission* curTreat;   /**< Pointer to the mission to treat next  */
