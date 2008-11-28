@@ -1,0 +1,12 @@
+All Textures used in DNT are free (as in free speech).
+
+Here are the licenses for those at the current directory.
+
+===========================================================================
+DNTeam Public Domain Textures
+
+base_curve.png, dirt_curve2.png, dirt.png, base.png, dirt2.png, 
+dirt_curve.png
+
+===========================================================================
+

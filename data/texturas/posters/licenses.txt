@@ -1,0 +1,17 @@
+All Textures used in DNT are free (as in free speech).
+
+Here are the licenses for those at the current directory.
+
+===========================================================================
+DNTeam Public Domain Textures
+
+flower_maiden.png, redecubo.png, texugo.png, flower_maiden2.png, 
+flower_maiden.xcf, redecubo.xcf, texugo.xcf
+
+===========================================================================
+Other Public Domain Textures
+
+hell.png
+
+===========================================================================
+
