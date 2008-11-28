@@ -1,0 +1,12 @@
+All Textures used in DNT are free (as in free speech).
+
+Here are the licenses for those at the current directory.
+
+===========================================================================
+DNTeam Public Domain Textures
+
+equip.xcf  inventory.xcf  moeda.png  trade.xcf
+equip.png  inventory.png  trade.png
+
+===========================================================================
+
