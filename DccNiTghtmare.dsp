@@ -336,6 +336,10 @@ SOURCE=.\src\particle\lake.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\engine\levelup.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\gui\listtext.cpp
 # End Source File
 # Begin Source File
@@ -349,10 +353,6 @@ SOURCE=.\src\map\mapfog.cpp
 # Begin Source File
 
 SOURCE=.\src\map\maplights.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\map\mapobject.cpp
 # End Source File
 # Begin Source File
 
@@ -397,6 +397,10 @@ SOURCE=.\src\engine\modstate.cpp
 # Begin Source File
 
 SOURCE=.\src\gui\mouse.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\etc\npcfile.cpp
 # End Source File
 # Begin Source File
 
@@ -484,6 +488,10 @@ SOURCE=.\src\gui\rolbar.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\engine\savefile.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\gui\seltext.cpp
 # End Source File
 # Begin Source File
@@ -521,6 +529,10 @@ SOURCE=.\src\sound\sound.cpp
 # Begin Source File
 
 SOURCE=.\src\engine\sun.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\gui\tabbox.cpp
 # End Source File
 # Begin Source File
 
@@ -832,6 +844,10 @@ SOURCE=.\src\particle\lake.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\engine\levelup.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\gui\lista.h
 # End Source File
 # Begin Source File
@@ -849,14 +865,6 @@ SOURCE=.\src\map\mapfog.h
 # Begin Source File
 
 SOURCE=.\src\map\maplights.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\map\mapobject.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\map\mapobjeto.h
 # End Source File
 # Begin Source File
 
@@ -905,6 +913,10 @@ SOURCE=.\src\engine\modstate.h
 # Begin Source File
 
 SOURCE=.\src\gui\mouse.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\etc\npcfile.h
 # End Source File
 # Begin Source File
 
@@ -996,6 +1008,10 @@ SOURCE=.\src\engine\racewindow.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\engine\savefile.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\gui\seltext.h
 # End Source File
 # Begin Source File
@@ -1033,6 +1049,10 @@ SOURCE=.\src\sound\sound.h
 # Begin Source File
 
 SOURCE=.\src\engine\sun.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\gui\tabbox.h
 # End Source File
 # Begin Source File
 
