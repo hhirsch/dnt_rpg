@@ -10,7 +10,7 @@ gettext("+1 of Wisdom, for the inutiles knowledges obtained watching TV novels."
 3 ATTRIBUTE CHARISMA ALL ALL
 gettext("+3 of Charisma, for not studying at the Exact Sciences Institute (ICEX), and for usually being very nice.")
 10 SOCIAL_TESTS ALL CLASS ICEX
-gettext("For usually have some rare  beauty to the ICEX, the OT Students receive +10 on all social tests against Students from that Institute.")
+gettext("Because they symbolize rare beauty to the Students of the ISEX,  the OT Students receive +10 on all social tests against Students from that Institute.")
 -12 SKILL FURTIVE CLASS ICEX
 gettext("-12 of Furtive when in a radius of 30 meters of at least one ICEX Student.")
 -12 SKILL HIDE CLASS ICEX

@@ -36,7 +36,7 @@ gettext("By the corpulent size of their muscles and the total absence of control
 1 RESTRICTION SKILLS INTELIGENCY ALL
 gettext("Beyond this, the Student of Physical Education can't buy points on Skills whose ability key is Intelligence.")
 99 LIMIT SKILLS SPORTS ALL
-gettext("Since extremely limited on its Skills, the Physical Education Student don't have any limit on Sports graduation.")
+gettext("Because his skills are extremely limited, the Physical Education Student doesn't have any limits concerning how many points he can get in Sports.")
 7
 1 IMPROVISE_WEAPONS(BALLS)
 3 SHRINK_ITEMS

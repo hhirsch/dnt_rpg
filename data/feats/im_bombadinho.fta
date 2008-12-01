@@ -1,5 +1,5 @@
 gettext("I am Bombadinho")
-gettext("The Student, who had gone frequently to the academy, permanently receives +1 to strenght.")
+gettext("The Student who has frequently gone to the academy, permanently receives +1 in Strength.")
 10
 EDFISICA
 ATTRIBUTE STRENGTH
