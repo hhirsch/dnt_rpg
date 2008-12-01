@@ -1,5 +1,10 @@
 #include "iavariable.h"
 
+#include "../engine/character.h"
+#include "../engine/dccnit.h"
+#include "../classes/object.h"
+
+
 /***********************************************************
  *                      Constructor                        *
  ***********************************************************/
@@ -505,11 +510,82 @@ string iaVariable::toString()
    {
       return(*(string*)value);
    }
+   else if(type == IA_TYPE_CHARACTER)
+   {
+      character* chr = (character*)value;
+      if(chr)
+      {
+         return(chr->getCharacterFile());
+      }
+      else
+      {
+         return("NULL");
+      }
+   }
+   else if(type == IA_TYPE_OBJECT)
+   {
+      object* obj = (object*)value;
+      if(obj)
+      {
+         string res = obj->getFileName();
+         sprintf(buffer," %.3f %.3f %.3f ",obj->xPosition, 
+                 obj->yPosition, obj->zPosition);
+         res += buffer;
+         return(res);
+      }
+      else
+      {
+         return("NULL");
+      }
+   }
    else
    {
       sprintf(buffer,"%p",value);
    }
    return(buffer);
+}
+
+/***********************************************************
+ *                       fromString                        *
+ ***********************************************************/
+void iaVariable::fromString(string s, void* curEngine)
+{
+   if(type == IA_TYPE_BOOL)
+   {
+      int i;
+      sscanf(s.c_str(), "%d", &i);
+      *(bool*)value = i;
+   }
+   else if(type == IA_TYPE_INT)
+   {
+      sscanf(s.c_str(),"%d",(int*)value);  
+   }
+   else if(type == IA_TYPE_FLOAT)
+   {
+      sscanf(s.c_str(),"%f",(float*)value);
+   }
+   else if(type == IA_TYPE_STRING)
+   {
+      *(string*)value = s;
+   }
+   else if(type == IA_TYPE_CHARACTER)
+   {
+      /* Get the NPC with the file */
+      engine* eng = (engine*)curEngine;
+      value = (void*)eng->NPCs->getCharacter(s);
+   }
+   else if(type == IA_TYPE_OBJECT)
+   {
+      engine* eng = (engine*)curEngine;
+      char fName[512];
+      float pX=0, pY=0, pZ=0;
+
+      /* Get Paramenters */
+      sscanf(s.c_str(), "%s %f %f %f", &fName[0], &pX, &pY, &pZ);
+
+      /* Get the object defined! */
+      value = (void*)eng->getCurrentMap()->getObject(fName, pX, pY, pZ);
+   }
 }
 
 

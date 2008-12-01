@@ -44,8 +44,14 @@ class iaVariable
        * \param v2 -> pointer to the second variable (NULL on NOT !)*/
       void receiveOperation(string operation, iaVariable* v1, iaVariable* v2);
 
-      /*!  Convert the variable value to a string one. */
+      /*!  Convert the variable value to a string one
+       * \return -> string representing the variable value */
       string toString();
+
+      /*! Define the variable value from a string
+       * \param s -> string with variable value
+       * \param curEngine -> pointer to the current engine */
+      void fromString(string s, void* curEngine);
 
       void* value;   /**< The value of the variable. */
       string type;   /**< The type string id of the variable */
