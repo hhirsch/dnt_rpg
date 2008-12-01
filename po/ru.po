@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-11-27 16:14-0200\n"
+"POT-Creation-Date: 2008-12-01 21:10-0200\n"
 "PO-Revision-Date: 2007-11-20 17:24+0000\n"
 "Last-Translator: Sergei Zivukov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -65,12 +65,12 @@ msgstr "Неправильный подвиг"
 msgid "Not enought points to use!"
 msgstr "Недостаточно очков для использования!"
 
-#: src/classes/mission.cpp:198 src/engine/dialog.cpp:1077
+#: src/classes/mission.cpp:274 src/engine/dialog.cpp:1077
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "Миссия завершена: %d XP!"
 
-#: src/classes/mission.cpp:211
+#: src/classes/mission.cpp:287
 msgid "Mission Failure!"
 msgstr ""
 
@@ -1498,8 +1498,8 @@ msgstr ""
 
 #: data/classes/physicaled.cls:39
 msgid ""
-"Since extremely limited on its Skills, the Physical Education Student don't "
-"have any limit on Sports graduation."
+"Because his skills are extremely limited, the Physical Education Student "
+"doesn't have any limits concerning how many points he can get in Sports."
 msgstr ""
 
 #: data/classes/lawner.cls:1
@@ -1706,8 +1706,9 @@ msgstr ""
 
 #: data/classes/to.cls:13
 msgid ""
-"For usually have some rare  beauty to the ICEX, the OT Students receive +10 "
-"on all social tests against Students from that Institute."
+"Because they symbolize rare beauty to the Students of the ISEX,  the OT "
+"Students receive +10 on all social tests against Students from that "
+"Institute."
 msgstr ""
 
 #: data/classes/to.cls:15
@@ -1961,7 +1962,7 @@ msgstr ""
 #: data/races/mutante.rca:6
 msgid ""
 "Since they eat Crickets, Human Crickets receive -4 on all social tests when "
-"treating with someone of their race or insects."
+"dealing with someone of their race or insects."
 msgstr ""
 
 #: data/races/mutante.rca:8
@@ -1974,19 +1975,19 @@ msgstr ""
 
 #: data/races/skinhead.rca:2
 msgid ""
-"' - Is 'cause ther'are some peopl'in front of my house that puts a pagode in "
-"high volume on the weekends...|- There is, so? Give me R$500,00 and I'll "
-"five you a fragmentation granade to throw up there and end with their "
-"party!'|(Corrente, Skinhead Maniac, answering Gordo, Mechanical engineering "
-"frustrated studant)"
+"- It's 'cause ther'are some peopl'in front of my house that puts a ghetto "
+"blaster at high volume on the weekends...|- There is, so? Give me R$500,00 "
+"and I'll give you a fragmentation granade to throw there and end their party "
+"for good!'|(Corrente, Skinhead Maniac, answering Gordo, frustrated "
+"Mechanical Engineering Student)"
 msgstr ""
 
 #: data/races/skinhead.rca:3
 msgid ""
-"Skinhead Maniacs are a rare race in the campus. Without any comon sense, "
-"these creatures don't lose time to get their objectives by the more directly "
-"possible way. Walking alone in the world, they aren't able to make friends "
-"with any other race, always wanting to end those they dislike."
+"Skinhead Maniacs are a rare race on the campus. Without any common sense, "
+"these creatures don't lose time in reaching their goals in the most direct "
+"way possible. Alone in the world, they aren't able to make friends with any "
+"other race and they always want to put a definite end to those they dislike."
 msgstr ""
 
 #: data/races/skinhead.rca:6
@@ -1998,9 +1999,9 @@ msgstr ""
 
 #: data/races/skinhead.rca:12
 msgid ""
-"Skinhead Maniacs, since they have army's friends, can get any kind of heavy "
-"guns and walk freely with them. So, they receive the skill Carte Blanche as "
-"class skill for any choosed class"
+"Since they have friends in the army, Skinhead Maniacs can get all kinds of "
+"heavy guns and walk around freely with them. Their class skill is obviously "
+"Carte Blanche."
 msgstr ""
 
 #: data/feats/im_bombadinho.fta:1
@@ -2009,8 +2010,8 @@ msgstr ""
 
 #: data/feats/im_bombadinho.fta:2
 msgid ""
-"The Student, who had gone frequently to the academy, permanently receives +1 "
-"to strenght."
+"The Student who has frequently gone to the academy, permanently receives +1 "
+"in Strength."
 msgstr ""
 
 #: data/feats/melee_attack.fta:1
@@ -2027,9 +2028,9 @@ msgstr ""
 
 #: data/feats/powerfull_esophagus.fta:2
 msgid ""
-"Cause his muscles grown in internal organs, the Phisical Education Estudant "
-"is able to expel, one time per day, a fire sphere that causes 6d6 plus 2d6 "
-"each level above 15."
+"Once a day, and because his muscles have invaded his internal organs, the "
+"Physical Education Student is able to expel a sphere of fire that causes 6d6 "
+"(plus 2d6, for each level above 15) in Damage."
 msgstr ""
 
 #: data/feats/ranged_attack.fta:1
@@ -2041,15 +2042,15 @@ msgid "Character's ranged attack."
 msgstr ""
 
 #: data/skills/acrobacias.ski:1
-msgid "Acrobatics"
+msgid "Acrobats"
 msgstr ""
 
 #: data/skills/acrobacias.ski:2
 msgid ""
-"The acrobatic organism is able to do trully exploits, like capers, twirling "
-"or play capoeira. With this skill, he is able to cross enemy's areas without "
-"taking damage or Coward Attacks, fall from high places without taking damage "
-"and also make an impression to little girls."
+"The acrobatic organism is able to perform true exploits, like cutting "
+"capers, twirling or playing Capoeira. With this skill, he is able to cross "
+"enemy areas without suffering Coward Attacks or fall from high places "
+"without being hurt and also make an impression on little girls."
 msgstr ""
 
 #: data/skills/adestrarbichos.ski:1
