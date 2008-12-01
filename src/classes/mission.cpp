@@ -6,7 +6,13 @@
 #include "../etc/message3d.h"
 
 #define MISSION_TOKEN_CURRENT_MISSION    "currentMission"
+#define MISSION_TOKEN_XP_VALUE           "xpValue"
+#define MISSION_TOKEN_TEMP_FLAG          "tempFlag"
+
+#define MISSION_TOKEN_END_MISSION        "endMission"
+
 #define MISSION_TOKEN_COMPLETED_MISSION  "completedMission"
+#define MISSION_TOKEN_COMPLETED          "completed"
 
 
 #define MISSION_CONTROLLER_TOTAL_TREAT  5
@@ -88,6 +94,14 @@ void mission::setXp(int xp)
  ************************************************************/
 void mission::saveAsCompleted(ofstream* file)
 {
+   /* Filename as completed */
+   *file << MISSION_TOKEN_COMPLETED_MISSION << " = " << fileName << endl;
+
+   /* Completed mission things */
+   *file << MISSION_TOKEN_COMPLETED << " = " << completed << endl;
+
+   /* Mark End */
+   *file << MISSION_TOKEN_END_MISSION << " = " << fileName << endl;
 }
 
 /************************************************************
@@ -95,6 +109,27 @@ void mission::saveAsCompleted(ofstream* file)
  ************************************************************/
 void mission::loadAsCompleted(defParser* def)
 {
+   string key="", value="";
+
+   /* parse until file end or mission definition's end */
+   while(def->getNextTuple(key, value))
+   {
+      if(key == MISSION_TOKEN_END_MISSION)
+      {
+         /* Done loading this mission */
+         return;
+      }
+      else if(key == MISSION_TOKEN_COMPLETED)
+      {
+         /* Get the completed state */
+         sscanf(value.c_str(),"%d", &completed);
+      }
+      else
+      {
+         cerr << "Unexpected token '" << key <<"' while loading mission: " 
+              << fileName << endl;
+      }
+   }
 }
 
 
@@ -103,6 +138,24 @@ void mission::loadAsCompleted(defParser* def)
  ************************************************************/
 void mission::saveAsCurrent(ofstream* file)
 {
+   int i;
+
+   /* Mission file as Current */
+   *file << MISSION_TOKEN_CURRENT_MISSION << " = " << fileName << endl;
+
+   /* Save Mission Related Things */
+   *file << MISSION_TOKEN_XP_VALUE << " = " << xpValue << endl;
+
+   for(i = 0; i < MISSION_TEMP_FLAGS; i++)
+   {
+      *file << MISSION_TOKEN_TEMP_FLAG << " = " << tempFlag[i] << endl;
+   }
+
+   /* Save Script Related Things */
+   //TODO
+
+   /* Mark End */
+   *file << MISSION_TOKEN_END_MISSION << " = " << fileName << endl;
 }
 
 /************************************************************
@@ -110,6 +163,7 @@ void mission::saveAsCurrent(ofstream* file)
  ************************************************************/
 void mission::loadAsCurrent(defParser* def)
 {
+   //TODO
 }
 
 
