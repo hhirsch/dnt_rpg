@@ -2,8 +2,11 @@
 #define _iavariable_h
 
 #include "iafuncs.h"
+#include "../etc/defparser.h"
+
 #include <string>
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 
@@ -73,7 +76,7 @@ class iaSymbolsTable
       /*! Add the symbol to the table.
        * \param type -> type of the symbol;
        * \param name -> name of the symbol; */
-      void addSymbol(string type, string name);
+      iaVariable* addSymbol(string type, string name);
 
       /*! Add the symbol to the table.
        * \param type -> type of the symbol;
@@ -99,6 +102,16 @@ class iaSymbolsTable
        * \param name -/. name of the symbol to get.
        * \return pointer to the symbol, or NULL if not found any. */
       iaVariable* getSymbol(string name);
+
+      /*! Save the Symbols Table to a file
+       * \param file -> ofstream file to save to */
+      void save(ofstream* file);
+
+      /*! Load the Symbols Table from a file
+       * \param def -> defParser to load from
+       * \param curEngine -> pointer to the engine used */
+      void load(defParser* def, void* curEngine);
+
    protected:
       iaVariable* first;   /**< First element on the list */
       int total;           /**< Total symbols on the list */

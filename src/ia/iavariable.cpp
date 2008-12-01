@@ -4,6 +4,10 @@
 #include "../engine/dccnit.h"
 #include "../classes/object.h"
 
+#define IA_SYMBOLS_TOKEN_VARIABLE   "variable"
+#define IA_SYMBOLS_TOKEN_VALUE      "value"
+#define IA_SYMBOLS_TOKEN_END        "symbolsTableEnd"
+
 
 /***********************************************************
  *                      Constructor                        *
@@ -613,7 +617,7 @@ iaSymbolsTable::~iaSymbolsTable()
 /***********************************************************
  *                        addSymbol                        *
  ***********************************************************/
-void iaSymbolsTable::addSymbol(string type, string name)
+iaVariable* iaSymbolsTable::addSymbol(string type, string name)
 {
    iaVariable* iv = new iaVariable(type, name);
 
@@ -631,6 +635,8 @@ void iaSymbolsTable::addSymbol(string type, string name)
    }
    first = iv;
    total++;
+
+   return(iv);
 }
 
 /***********************************************************
@@ -744,5 +750,70 @@ iaVariable* iaSymbolsTable::getSymbol(string name)
    return(NULL);
 }
 
+/***********************************************************
+ *                          save                           *
+ ***********************************************************/
+void iaSymbolsTable::save(ofstream* file)
+{
+   iaVariable* iv = first;
+   int i;
 
+   /* Save All Variables */
+   for(i=0; i<total; i++)
+   {
+      /* Name and Type */
+      *file << IA_SYMBOLS_TOKEN_VARIABLE << " = " 
+            << iv->type << " " << iv->name << endl;
+      /* Current Value */
+      *file << IA_SYMBOLS_TOKEN_VALUE << " = " << iv->toString() << endl;
+      iv = iv->next;
+   }
+
+   /* Mark Stack End */
+   *file << IA_SYMBOLS_TOKEN_END << " = " << endl;
+}
+
+/***********************************************************
+ *                          load                           *
+ ***********************************************************/
+void iaSymbolsTable::load(defParser* def, void* curEngine)
+{
+   string key="", value="";
+   char type[256], name[256];
+   iaVariable* curVar = NULL;
+
+   /* Parse all table symbols related tokens */
+   while(def->getNextTuple(key, value))
+   {
+      if(key == IA_SYMBOLS_TOKEN_END)
+      {
+         /* Done loading */
+         return;
+      }
+      else if(key == IA_SYMBOLS_TOKEN_VARIABLE)
+      {
+         /* Get Type and Name */
+         sscanf(value.c_str(),"%s %s",&type[0], &name[0]);
+         /* Create the variable */
+         curVar = addSymbol(type, name);
+      }
+      else if(key == IA_SYMBOLS_TOKEN_VALUE)
+      {
+         /* Define the variable value */
+         if(curVar)
+         {
+            curVar->fromString(value, curEngine);
+         }
+         else
+         {
+            cerr << "Error: Defined value without variable for table!" << endl;
+         }
+      }
+      else
+      {
+         cerr << "Warning: Uknown token '" << key 
+              << "' while loading symbols table" << endl;
+      }
+   }
+}
 
