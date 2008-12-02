@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-12-02 13:11-0200\n"
+"POT-Creation-Date: 2008-12-02 13:25-0200\n"
 "PO-Revision-Date: 2007-11-20 17:24+0000\n"
 "Last-Translator: Sergei Zivukov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -2064,7 +2064,7 @@ msgid ""
 msgstr ""
 
 #: data/skills/arrombar.ski:1
-msgid "Burglarize"
+msgid "Burglary"
 msgstr ""
 
 #: data/skills/arrombar.ski:2
