@@ -1,3 +1,3 @@
-gettext("Conduction(Vehicle)")
-gettext("It's the organism capacity to drive vehicles. The player has to specify the type of vehicle he is proficient.")
+gettext("Driving (Vehicles)")
+gettext("It's the organism's capacity to drive vehicles. The player must specify the type of vehicle he is good at driving.")
 5

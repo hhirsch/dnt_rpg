@@ -1,3 +1,3 @@
-gettext("Heal")
-gettext("The organism with points at this skill is capable to heal by normal ways, from stop an hemorragy to treat a sickness.")
+gettext("Healing")
+gettext("The organism with points in this skill is capable of healing wounds and illnesses in completely ordinary ways: He may stop hemorrhaging or cure a disease.")
 5
