@@ -139,7 +139,6 @@ void races::init()
       sscanf(value.c_str(),"%d %s %s",&idInt,&raceFile[0],&imgFile[0]);
       insertRace(raceFile, imgFile, key, idInt);
    }
-   
 }
 
 /******************************************************************
@@ -266,6 +265,10 @@ void races::insertRace(string fileName,string imgFile,string idString,int idInt)
       else if(key == "skillText")
       {
          ins->raceSkillsJustify[curSkill] = value;
+      }
+      else
+      {
+         cerr << "Unknow Token '" << key << "' at race: " << fileName << endl;
       }
    }
 

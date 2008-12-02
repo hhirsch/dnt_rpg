@@ -1,13 +1,12 @@
-12
-00 administration.cls classes/Img/administracao.png ADM
-01 biology.cls classes/Img/biologia.png BIO
-02 compsci.cls classes/Img/dcc.png  COM
-03 lawner.cls classes/Img/direito.png DIR
-04 physicaled.cls classes/Img/edfisica.png  EDF
-05 mechanic.cls classes/Img/engmecanica.png MEC
-06 philosophy.cls classes/Img/filosofia.png  FIL
-07 physiotherapy.cls classes/Img/fisioterapia.png FSO
-08 journalism.cls classes/Img/jornalismo.png JOR
-09 medician.cls classes/Img/medicina.png MED
-10 music.cls classes/Img/musica.png MUS
-11 to.cls classes/Img/to.png TO
+ADM = 0 administration.cls classes/Img/administracao.png
+BIOLOGY = 1 biology.cls classes/Img/biologia.png
+COMP = 2 compsci.cls classes/Img/dcc.png
+LAW = 3 lawner.cls classes/Img/direito.png
+PHYSICAL_EDUCATION = 4 physicaled.cls classes/Img/edfisica.png
+ME = 5 mechanic.cls classes/Img/engmecanica.png
+PHILOSOPHY = 6 philosophy.cls classes/Img/filosofia.png
+PHYSIOTERAPHY = 7 physiotherapy.cls classes/Img/fisioterapia.png
+JOURNALISM = 8 journalism.cls classes/Img/jornalismo.png
+MEDICAL =  9 medician.cls classes/Img/medicina.png
+MUSIC = 10 music.cls classes/Img/musica.png
+TO = 11 to.cls classes/Img/to.png

@@ -89,8 +89,7 @@ engine::engine()
 
    /* Load Classes */
    classList = new classes();
-   classList->init(dir.getRealFile("classes/"),
-                  dir.getRealFile("classes/classes.lst"));
+   classList->init();
 
    /* Load Weapons Types */
    weaponsTypes = new weaponTypes();

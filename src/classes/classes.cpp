@@ -1,8 +1,12 @@
 #include "classes.h"
+
 #include "../lang/translate.h"
 #include "../etc/dirs.h"
+#include "../etc/defparser.h"
+
 #include <iostream>
 #include <fstream>
+using namespace std;
 
 /******************************************************************
  *                            Constructor                         *
@@ -112,41 +116,30 @@ void classe::getAttModifiers(int mods[6], bool sum, skills* sk)
 /******************************************************************
  *                            Constructor                         *
  ******************************************************************/
-void classes::init(string directory, string fileListName)
+void classes::init()
 {
-   std::ifstream file;
-   string aux;
-   char arqName[255];
-   char imgFile[255];
-   char idStr[255];
-   int idInt;
-   int total = 0;
-   int i;
+   defParser def;
+   int idInt=0;
+   char classFile[256], imgFile[256];
+   string key="", value="";
 
    totalClasses = 0;
    first = NULL;
 
-   file.open(fileListName.c_str(), ios::in | ios::binary);
-
-   if(!file)
+   /* Open the list */
+   if(!def.load("classes/classes.lst"))
    {
-      cerr << "Error opening class list file: " << fileListName << endl;
+      cerr << "Error opening class list file!" << endl;
       return;
    }
 
-   getline(file, aux);
-   sscanf(aux.c_str(), "%d", &total);
-
-   for(i = 0; i < total; i++)
+   /* Get and Insert All Races */
+   while(def.getNextTuple(key, value))
    {
-      getline(file, aux);
-      sscanf(aux.c_str(),"%d %s %s %s", &idInt, &arqName[0], &imgFile[0], 
-             &idStr[0]);
-      insertClass(directory+arqName, imgFile, idStr, idInt);
+      /* Break Value */
+      sscanf(value.c_str(),"%d %s %s",&idInt,&classFile[0],&imgFile[0]);
+      insertClass(classFile, imgFile, key, idInt);
    }
-
-   
-   file.close();
 }
 
 /******************************************************************
@@ -170,164 +163,163 @@ void classes::finish()
 void classes::insertClass(string fileName, string imgFile, string idString,
                           int idInt)
 {
+   defParser def;
    dirs dir;
-   std::ifstream file;
-   string str;
-   int i;
+   classe* ins;
+   string key="", value="";
    char buf1[128], buf2[128], buf3[128], buf4[128];
-   classe* ins = new(classe);
-   int tmpBonus;
+   int tmpBonus=0;
+   int curBonus=-1, curMod=-1, curTalent=-1, curSkill=-1;
 
-   file.open(fileName.c_str(), ios::in | ios::binary);
-
-   if(!file)
+   /* Read the file */
+   if(!def.load("classes/" + fileName))
    {
-      cerr << "Error while opening class file: " << fileName << endl;
+      cerr << "Error while opening race file: " << fileName << endl;
       return;
    }
 
-   /* Indentifiers */
+   /* Define Indentifiers */
+   ins = new classe();
    ins->strID = idString;
    ins->intID = idInt;
 
-   /* Name */
-   getline(file, ins->name);
-
-   /* Translate Name */
-   ins->name = translateDataString(ins->name);
-
-   /* Citation */
-   getline(file, ins->citation);
-
-   /* Translate Citation */
-   ins->citation = translateDataString(ins->citation);
-
-   /* Description */
-   getline(file, ins->description);
-
-   /* Translate Description */
-   ins->description = translateDataString(ins->description);
-
-   /* Life Dice */
-   getline(file, str);
-   sscanf(str.c_str(), "d%d",&ins->lifeDiceID);
-
+   /* Define Image */
    ins->image = IMG_Load(dir.getRealFile(imgFile).c_str());
    if(!ins->image)
    {
-      cerr << "Error while opening image class file: " << imgFile << endl;
+      cerr << "Error while opening image class image: " << imgFile << endl;
    }
 
-   /* Modifiers */
-   getline(file, str);
-   sscanf(str.c_str(),"%d",&ins->totalModifiers);
-
-   if(ins->totalModifiers > 0)
+   /* Now parse all tokens got */
+   while(def.getNextTuple(key, value))
    {
-      ins->classModifiers = new modifier[ins->totalModifiers];
-   }
-   else
-   {
-      ins->classModifiers = NULL;
-   }
-
-   for(i=0; i<ins->totalModifiers;i++)
-   {
+      /* Name */
+      if(key == "name")
+      {
+         ins->name = translateDataString(value);
+      }
+      /* Epigraph */
+      else if(key == "epigraph")
+      {
+         ins->citation = translateDataString(value);
+      }
+      /* Description */
+      else if(key == "description")
+      {
+         ins->description = translateDataString(value);
+      }
+      /* LifeDice */
+      else if(key == "lifeDice")
+      {
+         sscanf(value.c_str(), "d%d",&ins->lifeDiceID);
+      }
+      /* Total Modifiers */
+      else if(key == "totalModifiers")
+      {
+         sscanf(value.c_str(), "%d", &ins->totalModifiers);
+         if(ins->totalModifiers > 0)
+         {
+            ins->classModifiers = new modifier[ins->totalModifiers];
+         }
+      }
       /* Modifier */
-      getline(file,str);
-      sscanf(str.c_str(),"%d %s %s %s %s",&ins->classModifiers[i].mod, &buf1[0],
-                                          &buf2[0], &buf3[0], &buf4[0]);
-      ins->classModifiers[i].cause.type = buf1;
-      ins->classModifiers[i].cause.id = buf2;
-      ins->classModifiers[i].target.type = buf3;
-      ins->classModifiers[i].target.id = buf4;
-      /* Modifier Description */
-      getline(file, ins->classModifiers[i].description);
-      ins->classModifiers[i].description = translateDataString(
-                                           ins->classModifiers[i].description);
+      else if(key == "modifier")
+      {
+         curMod++;
+         sscanf(value.c_str(),"%d %s %s %s %s", 
+               &ins->classModifiers[curMod].mod,
+               &buf1[0], &buf2[0], &buf3[0], &buf4[0]);
+         ins->classModifiers[curMod].cause.type = buf1;
+         ins->classModifiers[curMod].cause.id = buf2;
+         ins->classModifiers[curMod].target.type = buf3;
+         ins->classModifiers[curMod].target.id = buf4;
+      }
+      /* Modifier Text */
+      else if(key == "modifierText")
+      {
+         ins->classModifiers[curMod].description = translateDataString(value);
+      }
+      /* TotalFeats */
+      else if(key == "totalTalents")
+      {
+         sscanf(value.c_str(),"%d",&ins->totalFeats);
+         if(ins->totalFeats > 0)
+         {
+            ins->classFeats = new string[ins->totalFeats];
+            ins->reqLevel = new int[ins->totalFeats];
+         }
+      }
+      /* Feat */
+      else if(key == "talent")
+      {
+         curTalent++;
+         sscanf(value.c_str(), "%d %s", &ins->reqLevel[curTalent], &buf1[0]);
+         ins->classFeats[curTalent] = buf1;
+      }
+      /* Total Skills */
+      else if(key == "totalSkills")
+      {
+         sscanf(value.c_str(),"%d",&ins->totalSkills);
+         if(ins->totalSkills > 0)
+         {
+            ins->classSkills = new string[ins->totalSkills];
+         }
+      }
+      /* Skill  */
+      else if(key == "skill")
+      {
+         curSkill++;
+         ins->classSkills[curSkill] = value;
+      }
+      /* First Skill Points */
+      else if(key == "firstSkillPoints")
+      {
+         sscanf(value.c_str(), "( %d %s %s )x%d", &ins->firstLevelSP.sum, 
+               &buf1[0], &buf2[0], &ins->firstLevelSP.mult);
+         ins->firstLevelSP.attID = buf2;
+         if(buf1[0] == '-')
+         {
+            ins->firstLevelSP.signal = SIGNAL_DEC;
+         }
+         else
+         {
+            ins->firstLevelSP.signal = SIGNAL_SUM;
+         }
+      }
+      /* Next Skill Points */
+      else if(key == "nextSkillPoints")
+      {
+         sscanf(value.c_str(), "( %d %s %s )x%d", &ins->otherLevelsSP.sum, 
+               &buf1[0], &buf2[0], &ins->otherLevelsSP.mult);
+         ins->otherLevelsSP.attID = buf2;
+         if(buf1[0] == '-')
+         {
+            ins->otherLevelsSP.signal = SIGNAL_DEC;
+         }
+         else
+         {
+            ins->otherLevelsSP.signal = SIGNAL_SUM;
+         }
+      }
+      /* Bonus Attack and Mods Per Level */
+      else if(key == "bonus")
+      {
+         curBonus++;
+         sscanf(value.c_str(), "%d,%d,%d/%d/%d",
+               &ins->bonus[curBonus].level,
+               &tmpBonus,
+               &ins->bonus[curBonus].fortitude,
+               &ins->bonus[curBonus].reflex, 
+               &ins->bonus[curBonus].iAmNotAFool);
+         ins->bonus[curBonus].baseAttackBonus = attackBonus(tmpBonus);
+      }
+      else
+      {
+         cerr << "Unknow token: '" << key << "' for class: " 
+              << fileName << endl;
+      }
    }
 
-   /* Feats */
-   getline(file, str);
-   sscanf(str.c_str(),"%d",&ins->totalFeats);
-
-   if(ins->totalFeats > 0)
-   {
-      ins->classFeats = new string[ins->totalFeats];
-      ins->reqLevel = new int[ins->totalFeats];
-   }
-   else
-   {
-      ins->classFeats = NULL;
-      ins->reqLevel = NULL;
-   }
-
-   for(i=0; i < ins->totalFeats; i++)
-   {
-      getline(file, str);
-      sscanf(str.c_str(), "%d %s", &ins->reqLevel[i], &buf1[0]);
-      ins->classFeats[i] = buf1;
-   }
-
-   /* Skills */
-   getline(file, str);
-   sscanf(str.c_str(),"%d",&ins->totalSkills);
-
-   if(ins->totalSkills > 0)
-   {
-      ins->classSkills = new string[ins->totalSkills];
-   }
-   else
-   {
-      ins->classSkills = NULL;
-   }
-
-   for(i=0; i < ins->totalSkills; i++)
-   {
-      getline(file, ins->classSkills[i]);
-   }
-
-   /* Skill Points per Level */
-   getline(file, str);
-   sscanf(str.c_str(), "( %d %s %s )x%d", &ins->firstLevelSP.sum, &buf1[0], 
-                                        &buf2[0], &ins->firstLevelSP.mult);
-   ins->firstLevelSP.attID = buf2;
-   if(buf1[0] == '-')
-   {
-      ins->firstLevelSP.signal = SIGNAL_DEC;
-   }
-   else
-   {
-      ins->firstLevelSP.signal = SIGNAL_SUM;
-   }
-   getline(file, str);
-   sscanf(str.c_str(), "( %d %s %s )x%d", &ins->otherLevelsSP.sum, &buf1[0], 
-                                        &buf2[0], &ins->otherLevelsSP.mult);
-   ins->otherLevelsSP.attID = buf2;
-   if(buf1[0] == '-')
-   {
-      ins->otherLevelsSP.signal = SIGNAL_DEC;
-   }
-   else
-   {
-      ins->otherLevelsSP.signal = SIGNAL_SUM;
-   }
-
-   /* Points and Attacks per Level */
-   for(i=0; i<MAX_DEFINED_LEVEL; i++)
-   {
-      getline(file, str);
-      sscanf(str.c_str(), "%d,%d,%d/%d/%d",
-             &ins->bonus[i].level,
-             &tmpBonus,
-             &ins->bonus[i].fortitude,
-             &ins->bonus[i].reflex, 
-             &ins->bonus[i].iAmNotAFool);
-      ins->bonus[i].baseAttackBonus = attackBonus(tmpBonus);
-   }
-
-   file.close();
-   
    /* Pointers */
    if(first == NULL)
    {

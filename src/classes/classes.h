@@ -66,11 +66,8 @@ class classe
 class classes
 {
    public:
-      /*! Init the classes list to use 
-       * \param fileListName -> name of the file containing the list of all
-       *         classes (usually ../data/classes/classes.lst)  
-       * \param directory -> directory of classes descriptions */
-      void init(string directory, string fileListName);
+      /*! Init the classes list to use */ 
+      void init();
 
       /*! Finish the classes list  */
       void finish();
