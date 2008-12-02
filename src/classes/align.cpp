@@ -1,44 +1,39 @@
 #include "align.h"
+
 #include "../lang/translate.h"
+#include "../etc/defparser.h"
+
 #include <iostream>
 #include <fstream>
+using namespace std;
 
 /******************************************************************
  *                            Constructor                         *
  ******************************************************************/
-void aligns::init(string directory, string fileListName)
+void aligns::init()
 {
-   std::ifstream file;
-   string aux;
-   char arqName[255];
-   char idStr[255];
-   int idInt;
-   int total = 0;
-   int i;
+   defParser def;
+   int idInt=0;
+   char alignFile[256];
+   string key="", value="";
 
    totalAlignments = 0;
    first = NULL;
 
-   file.open(fileListName.c_str(), ios::in | ios::binary);
-
-   if(!file)
+   /* Open the list */
+   if(!def.load("alignment/alignment.lst"))
    {
-      printf("Error on opening alignment list file: %s\n",fileListName.c_str());
+      cerr << "Error opening alignment list file!" << endl;
       return;
    }
 
-   getline(file, aux);
-   sscanf(aux.c_str(), "%d", &total);
-
-   for(i = 0; i < total; i++)
+   /* Get and Insert All Aligns */
+   while(def.getNextTuple(key, value))
    {
-      getline(file, aux);
-      sscanf(aux.c_str(), "%d %s %s", &idInt, &arqName[0], &idStr[0]);
-      insertAlign(directory+arqName, idStr, idInt);
+      /* Break Value */
+      sscanf(value.c_str(),"%d %s",&idInt,&alignFile[0]);
+      insertAlign(alignFile, key, idInt);
    }
-
-   
-   file.close();
 }
 
 /******************************************************************
@@ -62,45 +57,46 @@ void aligns::finish()
 void aligns::insertAlign(string fileName, string idString, int idInt)
 {
    dirs dir;
-   std::ifstream file;
-   string str;
-   align* ins = new(align);
+   defParser def;
+   string key="", value="";
+   align* ins;
 
-   file.open(fileName.c_str(), ios::in | ios::binary);
-
-   if(!file)
+   if(!def.load("alignment/"+fileName))
    {
-      printf("Error while opening alignment file: %s\n",fileName.c_str());
+      cerr << "Error while opening alignment file: " << fileName << endl;
       return;
    }
+
+   /* Create the alignment */
+   ins = new(align);
 
    /* Indentifiers */
    ins->strID = idString;
    ins->intID = idInt;
-
-   /* Name */
-   getline(file, ins->name);
-
-   /* Translate Name */
-   ins->name = translateDataString(ins->name);
-
-   /* Description */
-   getline(file, ins->description);
-
-   /* Translate Description */
-   ins->description = translateDataString(ins->description);
-
-   /* Image */
-   getline(file, str);
-
-   ins->image = IMG_Load(dir.getRealFile(str).c_str());
-   if(!ins->image)
+ 
+   while(def.getNextTuple(key, value))
    {
-      printf("Error while opening image alignment file: %s\n",str.c_str());
+      /* Name */
+      if(key == "name")
+      {
+         ins->name = translateDataString(value);
+      }
+      /* Description */
+      else if(key == "description")
+      {
+         ins->description = translateDataString(value);
+      }
+      /* Image */
+      else if(key == "image")
+      {
+         ins->image = IMG_Load(dir.getRealFile(value).c_str());
+         if(!ins->image)
+         {
+            cerr << "Error opening image alignment file: " << value << endl;
+         }
+      }
    }
-   
-   file.close();
-   
+
    /* Pointers */
    if(first == NULL)
    {

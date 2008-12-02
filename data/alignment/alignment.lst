@@ -1,10 +1,9 @@
-9
-00 sllibertario.ali LIBERTARIAN_FREE_SOFTWARE
-01 slcentrista.ali CENTER_FREE_SOFTWARE
-02 slcaotico.ali CHAOTIC_FREE_SOFTWARE
-03 neutrofuncional.ali FUNCTIONAL_NEUTRAL
-04 neutrocentrista.ali CENTER_NEUTRAL
-05 neutrocaotico.ali CHAOTIC_NEUTRAL
-06 spcapitalista.ali CAPITALIST_PROPRIETARY_SOFTWARE
-07 spneutro.ali NEUTRAL_PROPRIETARY_SOFTWARE
-08 spcaotico.ali CHAOTIC_PROPRIETARY_SOFTWARE
+LIBERTARIAN_FREE_SOFTWARE = 0 sllibertario.ali
+CENTER_FREE_SOFTWARE = 1 slcentrista.ali
+CHAOTIC_FREE_SOFTWARE = 2 slcaotico.ali
+FUNCTIONAL_NEUTRAL = 3 neutrofuncional.ali
+CENTER_NEUTRAL = 4 neutrocentrista.ali
+CHAOTIC_NEUTRAL = 5 neutrocaotico.ali
+CAPITALIST_PROPRIETARY_SOFTWARE = 6 spcapitalista.ali
+NEUTRAL_PROPRIETARY_SOFTWARE = 7 spneutro.ali
+CHAOTIC_PROPRIETARY_SOFTWARE = 8 spcaotico.ali

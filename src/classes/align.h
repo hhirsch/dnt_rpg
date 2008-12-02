@@ -26,11 +26,8 @@ class align
 class aligns
 {
    public:
-      /*! Static Constructor
-       * \param fileListName -> name of the file containing the list of all
-       *         aligments (usually ../data/alignment/alignment.lst)  
-       * \param directory -> directory of the Descriptions to use. */
-      void init(string directory, string fileListName);
+      /*! Static Constructor */
+      void init();
       /*! Static Destructor */
       void finish();
 

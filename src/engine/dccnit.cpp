@@ -80,8 +80,7 @@ engine::engine()
 
    /* Load Alignments & Tendecies */
    alignList = new aligns();
-   alignList->init(dir.getRealFile("alignment/"),
-                   dir.getRealFile("alignment/alignment.lst"));
+   alignList->init();
 
    /* Load Races */
    raceList = new races();
