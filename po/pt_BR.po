@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-12-02 13:25-0200\n"
+"POT-Creation-Date: 2008-12-02 17:36-0200\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -155,7 +155,7 @@ msgstr "Carisma"
 msgid "Attribute Description"
 msgstr "Descrição do Atributo"
 
-#: src/engine/attwindow.cpp:511 src/engine/dccnit.cpp:348
+#: src/engine/attwindow.cpp:511 src/engine/dccnit.cpp:347
 #: src/engine/options.cpp:992
 msgid "Warning"
 msgstr "Aviso"
@@ -358,46 +358,46 @@ msgstr "Perícias da Classe"
 msgid "No Skills."
 msgstr "Sem Perícias"
 
-#: src/engine/dccnit.cpp:349
+#: src/engine/dccnit.cpp:348
 msgid "Can't save game while fighting!"
 msgstr "Não é possível salvar o jogo durante uma batalha!"
 
-#: src/engine/dccnit.cpp:467
+#: src/engine/dccnit.cpp:466
 #, c-format
 msgid "Saving Current Map Modifications"
 msgstr "Salvando Modificações"
 
-#: src/engine/dccnit.cpp:502
+#: src/engine/dccnit.cpp:501
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Carregando Mapa: %s"
 
-#: src/engine/dccnit.cpp:565
+#: src/engine/dccnit.cpp:564
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Carregando NPC: %s"
 
-#: src/engine/dccnit.cpp:591
+#: src/engine/dccnit.cpp:590
 msgid "Creating MiniMap"
 msgstr "Criando Mini Mapa"
 
-#: src/engine/dccnit.cpp:597
+#: src/engine/dccnit.cpp:596
 msgid "Putting GUI on Screen"
 msgstr "Colocando as janelas na tela"
 
-#: src/engine/dccnit.cpp:644
+#: src/engine/dccnit.cpp:643
 msgid "Loading Particles"
 msgstr "Carregando Partículas"
 
-#: src/engine/dccnit.cpp:674
+#: src/engine/dccnit.cpp:673
 msgid "Loading Changes..."
 msgstr "Carregando Mudanças..."
 
-#: src/engine/dccnit.cpp:702
+#: src/engine/dccnit.cpp:701
 msgid "Done!"
 msgstr "Pronto!"
 
-#: src/engine/dccnit.cpp:794
+#: src/engine/dccnit.cpp:793
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -409,50 +409,50 @@ msgstr ""
 "mesmos). DccNiTghtmare agradece aos que desenvolveram as bibliotecas: "
 "OpenAL, Cal3D, OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 
-#: src/engine/dccnit.cpp:1307
+#: src/engine/dccnit.cpp:1306
 msgid "Too far away for the action!"
 msgstr "Muito distante para realizar a ação!"
 
-#: src/engine/dccnit.cpp:1349
+#: src/engine/dccnit.cpp:1348
 msgid "No NPCs in the area."
 msgstr "Sem NPCs na área."
 
-#: src/engine/dccnit.cpp:1400
+#: src/engine/dccnit.cpp:1399
 msgid "Surprise Attack Turn."
 msgstr "Turno de ataque surpresa."
 
-#: src/engine/dccnit.cpp:1414
+#: src/engine/dccnit.cpp:1413
 msgid "No enemies in the area."
 msgstr "Sem inimigos na área."
 
-#: src/engine/dccnit.cpp:1592 src/engine/dccnit.cpp:2042
+#: src/engine/dccnit.cpp:1591 src/engine/dccnit.cpp:2041
 #: src/engine/shortcutswindow.cpp:32
 msgid "Nothing"
 msgstr "Nada"
 
-#: src/engine/dccnit.cpp:1790
+#: src/engine/dccnit.cpp:1789
 #, c-format
 msgid "%s taken."
 msgstr "Pegou %s."
 
-#: src/engine/dccnit.cpp:1812
+#: src/engine/dccnit.cpp:1811
 msgid "Inventory is full!"
 msgstr "O inventário está cheio!"
 
-#: src/engine/dccnit.cpp:1844
+#: src/engine/dccnit.cpp:1843
 msgid "Door"
 msgstr "Porta"
 
-#: src/engine/dccnit.cpp:1977
+#: src/engine/dccnit.cpp:1976
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s ataca %s"
 
-#: src/engine/dccnit.cpp:2138
+#: src/engine/dccnit.cpp:2137
 msgid "No more actions. Turn ended."
 msgstr "Sem mais ações: Turno Finalizado."
 
-#: src/engine/dccnit.cpp:3520
+#: src/engine/dccnit.cpp:3519
 msgid "Exit Battle Mode"
 msgstr "Sai do Modo de Batalha"
 
@@ -927,8 +927,8 @@ msgstr ""
 "ora de software proprietário, dependendo de seu humor diário."
 
 #: data/alignment/sllibertario.ali:1
-msgid "Libertarian Free-Software"
-msgstr "Software-Livre Libertário"
+msgid "Libertarian Free-Software Adept"
+msgstr "Adepto de Software-Livre Libertário"
 
 #: data/alignment/sllibertario.ali:2
 msgid ""
@@ -955,8 +955,8 @@ msgstr ""
 "favoráveis ao que os que estão perto dele são. "
 
 #: data/alignment/spcaotico.ali:1
-msgid "Chaotic Proprietary-Software"
-msgstr "Software-Proprietário Caótico"
+msgid "Chaotic Proprietary-Software Adept"
+msgstr "Adepto de Software-Proprietário Caótico"
 
 #: data/alignment/spcaotico.ali:2
 msgid ""
@@ -981,8 +981,8 @@ msgstr ""
 "BEM vago)."
 
 #: data/alignment/spcapitalista.ali:1
-msgid "Capitalist Proprietary-Software"
-msgstr "Software-Proprietário Capitalista"
+msgid "Capitalist Proprietary-Software Adept"
+msgstr "Adepto de Software-Proprietário Capitalista"
 
 #: data/alignment/spcapitalista.ali:2
 msgid ""
@@ -995,8 +995,8 @@ msgstr ""
 "empresas de software nacionais."
 
 #: data/alignment/slcaotico.ali:1
-msgid "Chaotic Free-Software"
-msgstr "Software-Livre Caótico"
+msgid "Chaotic Free-Software Adept"
+msgstr "Adepto de Software-Livre Caótico"
 
 #: data/alignment/slcaotico.ali:2
 msgid ""
@@ -1008,8 +1008,8 @@ msgstr ""
 "gratuita e que tenha acesso ao código-fonte."
 
 #: data/alignment/spneutro.ali:1
-msgid "Neutral Proprietary-Software"
-msgstr "Software-Proprietário Neutro"
+msgid "Neutral Proprietary-Software Adept"
+msgstr "Adepto de Software-Proprietário Neutro"
 
 #: data/alignment/spneutro.ali:2
 msgid ""
@@ -1020,8 +1020,8 @@ msgstr ""
 "falta de segurança de seu Ruindow$."
 
 #: data/alignment/slcentrista.ali:1
-msgid "Center Free-Software"
-msgstr "Software-Livre Centrista"
+msgid "Center Free-Software Adept"
+msgstr "Adepto de Software-Livre Centrista"
 
 #: data/alignment/slcentrista.ali:2
 msgid ""
@@ -2534,8 +2534,8 @@ msgstr "Arte do Escape"
 
 #: data/skills/artedoescape.ski:2
 msgid ""
-"The Art of the Escape's perit is able to escape from the most diverse normal "
-"ways that can imprision him."
+"A person whose talent is the Art of the Escape is able to escape from the "
+"most diverse, ordinary conditions of imprisonment."
 msgstr ""
 "O perito em Arte do Escape é capaz de escapar dos mais diversos meios "
 "normais capazes de constringê-lo."
@@ -2547,7 +2547,7 @@ msgstr "Avaliar"
 #: data/skills/avaliar.ski:2
 msgid ""
 "Usually used to estimate the price of that 486 processor sold by that "
-"contrabandist or of that poisoned chips to your loved teacher."
+"smuggler or of those poisoned chips given to your beloved teacher."
 msgstr ""
 "Muito utilizada para se conseguir estimar o preço daquele processador 486 na "
 "mão de receptadores obscuros ou daquele salgadinho enveneado para o seu "
@@ -2559,8 +2559,8 @@ msgstr "Beber"
 
 #: data/skills/beber.ski:2
 msgid ""
-"It's the hability to get really drunk without throwing up. Drinking is a "
-"good way to get more extroverted and social."
+"It's the ability to get really drunk without throwing up. Drinking is a good "
+"way to get more extroverted and social."
 msgstr ""
 "É a habilidade de encher a cara sem passar mal. Beber é um ótimo jeito do "
 "organismo se tornar mais extrovertido e mais apto ao convívio social."
@@ -2571,7 +2571,8 @@ msgstr "Blefar"
 
 #: data/skills/blefar.ski:2
 msgid ""
-"The organism mastered at this skill is capable to fool the expertest teacher."
+"The organism that has mastered this skill is capable of fooling the most "
+"expert teacher."
 msgstr ""
 "Os organismos mestres nesta perícia são capazes de enganar até os mais "
 "espertos dos professores."
@@ -2582,8 +2583,8 @@ msgstr "Boemia"
 
 #: data/skills/boemia.ski:2
 msgid ""
-"It's the skill to socialize at various environments, being a nice person to "
-"be with."
+"It's the skill of socializing in various environments, in other words, being "
+"a nice person to be with."
 msgstr ""
 "É a habilidade de se socializar em ambientes diversos, sendo uma pessoa "
 "agradável de se estar."
@@ -2594,9 +2595,10 @@ msgstr "Bovinice de Taylor"
 
 #: data/skills/bovinice.ski:2
 msgid ""
-"Taylor wrote 'The Principles of Scientific Management' where people are(to "
-"him) like cattle, only used to maximize the profits. This skill measure the "
-"creature capacity to do hard work without discuss."
+"Taylor wrote 'The Principles of Scientific Management' in which he speaks of "
+"people as though he considers them cattle, to be used only to maximize "
+"profits. This skill measures the creature's capacity to do hard work with no "
+"discussion."
 msgstr ""
 "Taylor escreveu 'Princípios da Administração Científica' onde as pessoas "
 "(para ele) não passavam de gado, útil para maximizar os lucros. Esta perícia "
@@ -2604,11 +2606,11 @@ msgstr ""
 
 #: data/skills/carisma.ski:2
 msgid ""
-"Measures how eloquent, imponent with words, inspirated or similar adjectives "
-"the creature is. A very charismatic organism can aglomerate students groups "
-"to invade the University Presidency Building. A not charismatic one can't "
-"make his dog obey him.||Ameiva: Charisma 25|Ratazana: Charisma 6|Ente: "
-"Charisma 8"
+"Measures how eloquence, skilled with words, inspired, or the like, the "
+"creature is. A very charismatic organism can convince students groups to "
+"combine to invade the University President's Building. One who is not "
+"charismatic can't make his dog obey him.||Ameiva: Charisma 25|Ratazana: "
+"Charisma 6|Ente: Charisma 8"
 msgstr ""
 "É quão eloquente, imponente com as palavras, inspirador ou adjetivos "
 "semelhantes, o organismo é. Um organismo muito carismático é capaz de reunir "
@@ -2622,22 +2624,22 @@ msgstr "Conhecimento: (Geral)"
 
 #: data/skills/cnhgeral.ski:2
 msgid ""
-"This feature points to any knowledge the organism might have. The "
-"'(General)' must be substituted by the knowledge. Each type of  knowledge "
-"affects the tests related to it."
+"This feature points to any knowledge the organism might have. The term "
+"'(General)' must be replaced by the specific type of knowledge. Each type of "
+"knowledge affects the tests related to it."
 msgstr ""
 "Esta perícia aponta qualquer conhecimento que o organismo possa ter, devendo "
 "o '(geral)' ser substituido pelo mesmo. O conhecimento de cada área afeta os "
 "testes relacionados à mesma quando no quesito intelectual."
 
 #: data/skills/cnhsofrimento.ski:1
-msgid "Knowledge: (Suffer)"
+msgid "Knowledge: (Suffering)"
 msgstr "Conhecimento: (Sofrimento)"
 
 #: data/skills/cnhsofrimento.ski:2
 msgid ""
-"People who has this knows everything about suffer (but in the normal case "
-"don't suffered them)."
+"People who have this sort of knowledge know everything about suffering (but, "
+"normally speaking, don't suffer themselves.)"
 msgstr ""
 "   Pessoas que possuem isto sabem tudo sobre sofrimento (mas não "
 "necessariamente viveram este sofrimento)."
@@ -2648,33 +2650,34 @@ msgstr "Tagarelice Medicinal"
 
 #: data/skills/cnhtagmedicinal.ski:2
 msgid ""
-"The character can talk in an way fully unrecognizable to those that not know "
-"this skill, making use only from words deriving from the 'Little medician "
-"dictionary'."
+"The character can talk in such a way that those who do not possess this "
+"skill can't understand a word he's saying because he uses only words from "
+"the Dictionary for Little Med Students."
 msgstr ""
 "O personagem pode falar de maneira completamente irreconhecível aos que não "
 "possuam esta perícia, utilizando-se apenas de palavras oriundas do "
 "'Dicionário do Pequeno Médico e afins'."
 
 #: data/skills/conducao.ski:1
-msgid "Conduction(Vehicle)"
-msgstr "Condução: (Veículo)"
+msgid "Driving (Vehicles)"
+msgstr "Condução (Veículos)"
 
 #: data/skills/conducao.ski:2
 msgid ""
-"It's the organism capacity to drive vehicles. The player has to specify the "
-"type of vehicle he is proficient."
+"It's the organism's capacity to drive vehicles. The player must specify the "
+"type of vehicle he is good at driving."
 msgstr ""
 "É a capacidade do organismo de dirigir um veículo. O jogador deverá "
 "especificar em qual veículo ele é proficiente."
 
 #: data/skills/constituicao.ski:2
 msgid ""
-"Measures how physical resistent is the organism. A creature with lot of "
-"constitution is so resistent as a horse, able to inject venon on itself to "
-"withdrawn the antidote. One with few constitution is constantly found at "
-"vegetative state, and, to him, the common influenza can be lethal.||Ameiva: "
-"Constitution 12|Ratazana: Constitution 6|Ente: Constitution 26"
+"Measures how physically resistant the organism is. A creature with a lot of "
+"constitution is as resistant as a horse, and is able to self-inject venom in "
+"order to create and withdraw an antidote. One with little constitution is "
+"constantly found in a vegetative state, and, to him, the common influenza "
+"virus can be lethal.||Ameiva: Constitution 12|Ratazana: Constitution 6|Ente: "
+"Constitution 26"
 msgstr ""
 "Mede o quão resistente fisicamente o organismo é. Um organismo com muita "
 "Constituição é resistente como um cavalo, podendo ter veneno injetado em si "
@@ -2684,13 +2687,14 @@ msgstr ""
 "26"
 
 #: data/skills/curar.ski:1
-msgid "Heal"
+msgid "Healing"
 msgstr "Curar"
 
 #: data/skills/curar.ski:2
 msgid ""
-"The organism with points at this skill is capable to heal by normal ways, "
-"from stop an hemorragy to treat a sickness."
+"The organism with points in this skill is capable of healing wounds and "
+"illnesses in completely ordinary ways: He may stop hemorrhaging or cure a "
+"disease."
 msgstr ""
 "O organismo com pontos nesta perícia é capaz de curar os demais organismos "
 "através de meios normais. Pode-se desde estancar um sangramento até tratar "
@@ -2710,11 +2714,11 @@ msgstr ""
 
 #: data/skills/destreza.ski:2
 msgid ""
-"It's how skillful, agile, flexible, among others similar adjectives, the "
-"creature is. An organism with much dexterity is able to do jugglings with "
-"knives and deviate easily from shots. A creature with low dexterity "
-"constantly stumbles at its legs and can't set a stone at the wall of a "
-"granary.||Ameiva: Dexterity 8|Ratazana: Dexterity 12|Ente: Dexterity 2"
+"It's how skillful, agile, supple, among other similar adjectives, the "
+"creature is. An organism with much dexterity is able juggle with knives and "
+"easily avoid bullets. A creature with little dexterity constantly trips over "
+"its own legs and can't set a stone in the wall of a granary.||Ameiva: "
+"Dexterity 8|Ratazana: Dexterity 12|Ente: Dexterity 2"
 msgstr ""
 "É quão habilidoso, ágil, flexível, dentre outros adjetivos similares, o "
 "organismo é. Um organismo com muita Destreza é capaz de fazer malabarismos "
@@ -2729,9 +2733,10 @@ msgstr "Diplomacia"
 
 #: data/skills/diplomacia.ski:2
 msgid ""
-"Is the organism's capacity to treat a lot of problems with others organims. "
-"Include eloquency, gentleman, know how to use the correct words at correct "
-"times, in other words, all those fucking social things."
+"It is the organism's capacity to solve a lot of problems with other "
+"organisms. Includes eloquence, gentlemanly behavior, and knowing how to use "
+"the correct words at correct times, in other words, all those boring social "
+"things."
 msgstr ""
 "É a capacidade do organismo de tratar diversos tipos de questões com os "
 "demais organismos. Inclui também etiqueta, saber utilizar as palavras "
@@ -2751,7 +2756,8 @@ msgid "Disguises"
 msgstr "Disfarces"
 
 #: data/skills/disfarces.ski:2
-msgid "Measures the creature skill to disguise (and be unrecognizable)."
+msgid ""
+"Measures the creature's ability to disguise himself (and be unrecognizable)."
 msgstr ""
 "Mede o quão bem o personagem sabe se disfaçar: tornar-se irreconhecível."
 
@@ -2761,35 +2767,35 @@ msgstr "Equilíbrio"
 
 #: data/skills/equilibrio.ski:2
 msgid ""
-"Is the organism's capacity to not fall from a wall when walks on it, or to "
-"walk on a narrow rope in an attempt to obtain money for lunch."
+"Is the organism's capacity not to fall from a wall when walking on it, or to "
+"walk on a tightrope in an attempt to obtain money for lunch."
 msgstr ""
 "É a capacidade do organismo de não despencar do alto de um muro enquanto "
 "caminha sobre ele ou de andar na corda bamba em uma tentativa desesperada de "
 "ganhar dinheiro para o almoço."
 
 #: data/skills/escalar.ski:1
-msgid "Climb"
+msgid "Climbing"
 msgstr "Escalar"
 
 #: data/skills/escalar.ski:2
-msgid "Measure the organism's capacity to climb accented surfaces."
+msgid "Measure the organism's capacity to climb very steep surfaces."
 msgstr "Mede a capacidade do organismo de escalar superfícies íngremes."
 
 #: data/skills/esconder.ski:1
-msgid "Hide"
-msgstr "Esconder"
+msgid "Concealment"
+msgstr "Esconder-se"
 
 #: data/skills/esconder.ski:2
 msgid ""
-"Is the skill to put yourself on a buch or hide at the shadows, with the aim "
-"to not be spoted."
+"Is the skill of putting yourself in a bush or hiding in the shadows, with "
+"the aim of not being spotted."
 msgstr ""
 "É a habilidade do organismo de se meter em moitas ou esconder-se nas "
 "sombras, com o propósito de não ser notado."
 
 #: data/skills/falaridioma.ski:1
-msgid "Speak Language"
+msgid "Foreign Languages"
 msgstr "Falar Idioma"
 
 #: data/skills/falaridioma.ski:2
@@ -2807,7 +2813,7 @@ msgstr "Falsificar"
 #: data/skills/falsificar.ski:2
 msgid ""
 "Is used to make false copies of something, like director's signatures or "
-"teacher's points notes."
+"teacher's grade books."
 msgstr ""
 "É usado para criar cópias falsas de alguma coisa, como a assinatura do "
 "reitor ou o caderno de notas de um professor."
@@ -2827,11 +2833,12 @@ msgstr ""
 "Força 2|Ente: Força 23"
 
 #: data/skills/furtividade.ski:1
-msgid "Furtive"
+msgid "Stealth"
 msgstr "Furtividade"
 
 #: data/skills/furtividade.ski:2
-msgid "Is the organism's capacity to pass at some areas without making sounds."
+msgid ""
+"Is the organism's capacity to pass through some areas without making sounds."
 msgstr ""
 "É a capacidade do organismo de passar por determinadas áreas sem emitir "
 "nenhum tipo de som."
@@ -2851,16 +2858,16 @@ msgstr ""
 "Inteligência 6|Ratazana: Inteligência 2|Ente: Inteligência 16"
 
 #: data/skills/intimidar.ski:1
-msgid "Intimidate"
-msgstr "Intimidar"
+msgid "Intimidatation"
+msgstr "Intimidação"
 
 #: data/skills/intimidar.ski:2
 msgid ""
-"Measures the capacity to, throught gestures, words or strenght exhibition, "
-"compel the target to act in accordance with yours orders. This skill don't "
-"let you directally control the will of a target. It's only used to assure "
-"exemptions, like make a student let you copy its exercises or make the snack-"
-"barwoman give a discount on a hot-dog."
+"Measures the capacity to compel the target to act in accordance with your "
+"orders, through gestures, words or shows of strength. This skill doesn't "
+"allow you to control the will of a target directly. It's only used to insure "
+"special treatment, like make a student let you copy his exercises or make "
+"the snack-bar woman give you a discount on a hot-dog."
 msgstr ""
 "Mede a capacidade do organismo de, através de gestos, palavras ou exibição "
 "de força bruta, obrigar um alvo a agir de acordo com suas ordens. Esta "
@@ -2870,13 +2877,13 @@ msgstr ""
 "cachorro quente."
 
 #: data/skills/montar.ski:1
-msgid "Ride Animals"
+msgid "Riding"
 msgstr "Montar Animais"
 
 #: data/skills/montar.ski:2
 msgid ""
-"Those who knows how to ride animals, hardly will fall from an War Ente. "
-"This  skill is used to ride any creature."
+"Those who know how to ride animals, will hardly ever fall from a War Ente. "
+"This skill is used to ride any creature."
 msgstr ""
 "Quem sabe montar dificilmente cairá de um ente de guerra quando estiver "
 "sobre ele. Esta perícia é utilizada para montar qualquer criatura."
@@ -2887,9 +2894,9 @@ msgstr "Esportes"
 
 #: data/skills/nadar.ski:2
 msgid ""
-"This skill measures how good the thing is on sports, without any kind of "
-"distinction; Surelly, those good on sports, usually aren't good on any more "
-"thing."
+"This skill measures how good the thing is at sports, without any kind of "
+"distinction. Surely, those good at sports, usually aren't good at any other "
+"things."
 msgstr ""
 "Essa perícia mede o quão bom o organismo é em todos os esportes, sem "
 "distinção; afinal de contas, quem é muito bom em esportes, tende a não ser "
@@ -2909,8 +2916,9 @@ msgstr "Observar"
 
 #: data/skills/observar.ski:2
 msgid ""
-"Is the visual acuidate of an organism to view far  distances or to discern "
-"details from an object or scene. It's the counter-skill of Hide."
+"Is the visual acuity of an organism and indicates whether it can see far "
+"distances or discern the details of an object or a scene. It's the counter-"
+"skill of Concealment."
 msgstr ""
 "É a acuidade visual possuida pelo organismo, tanto para conseguir enxergar a "
 "longas distâncias quanto para discernir detalhes específicos em um objeto ou "
@@ -2972,7 +2980,7 @@ msgstr "Equilíbrio"
 
 #: data/skills/passelivre.ski:2
 msgid ""
-"Is the hability to realize any ilegal thing without suffer retaliations from "
+"Is the ability to realize any ilegal thing without suffer retaliations from "
 "the responsible authorities. Carte Blanche serves to walk on restricted "
 "areas or with heavy guns."
 msgstr ""
@@ -3627,6 +3635,27 @@ msgstr "Leve"
 #: data/weapons/types/weights.dcl:4
 msgid "Heavy"
 msgstr "Pesada"
+
+#~ msgid ""
+#~ "The character can talk in an way fully unrecognizable to those that not "
+#~ "know this skill, making use only from words deriving from the 'Little "
+#~ "medician dictionary'."
+#~ msgstr ""
+#~ "O personagem pode falar de maneira completamente irreconhecível aos que "
+#~ "não possuam esta perícia, utilizando-se apenas de palavras oriundas do "
+#~ "'Dicionário do Pequeno Médico e afins'."
+
+#~ msgid "Conduction(Vehicle)"
+#~ msgstr "Condução: (Veículo)"
+
+#~ msgid "Hide"
+#~ msgstr "Esconder"
+
+#~ msgid "Furtive"
+#~ msgstr "Furtividade"
+
+#~ msgid "Ride Animals"
+#~ msgstr "Montar Animais"
 
 #~ msgid "Feats"
 #~ msgstr "Habilidades"
