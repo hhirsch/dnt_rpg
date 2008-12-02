@@ -1,48 +1,48 @@
-47
-00 notused.ski skills/Img/na.png NOT_USED
-01 forca.ski   skills/Img/forca.png STRENGTH
-02 destreza.ski skills/Img/destreza.png DEXTERITY
-03 constituicao.ski skills/Img/constituicao.png CONSTITUTION
-04 inteligencia.ski skills/Img/inteligencia.png INTELLIGENCE
-05 sabedoria.ski skills/Img/sabedoria.png WISDOM
-06 carisma.ski skills/Img/carisma.png CHARISMA
-07 acrobacias.ski skills/Img/acrobacias.png ACROBATICS
-08 adestrarbichos.ski skills/Img/adestrar.png TRAIN_ANIMALS
-09 arrombar.ski skills/Img/arrombar.png BURGLARIZE
-10 artedoescape.ski skills/Img/artedoescape.png ART_OF_THE_ESCAPE
-11 avaliar.ski skills/Img/avaliar.png APPRAISE
-12 beber.ski skills/Img/beber.png DRINKING
-13 blefar.ski skills/Img/blefar.png BLUFF
-14 boemia.ski skills/Img/boemia.png BOHEMIA
-15 bovinice.ski skills/Img/bovinice.png BOVINICE
-16 conducao.ski skills/Img/conducao.png CONDUCTION
-17 cnhgeral.ski skills/Img/cnhgeral.png KNOWLEDGE_GENERAL
-18 cnhsofrimento.ski skills/Img/cnhsofrimento.png KNOWLEDGE_SUFFER
-19 curar.ski skills/Img/curar.png HEAL
-20 desmentir.ski skills/Img/desmentir.png SEE_LIES
-21 diplomacia.ski skills/Img/diplomacia.png DIPLOMACY
-22 discursoprof.ski skills/Img/discursoprof.png PROFESSIONAL_SPEECH
-23 disfarces.ski skills/Img/disfarces.png DISGUISES
-24 equilibrio.ski skills/Img/equilibrio.png BALANCE
-25 escalar.ski skills/Img/escalar.png CLIMB
-26 esconder.ski skills/Img/esconder.png HIDE
-27 nadar.ski skills/Img/nadar.png SPORTS
-28 falaridioma.ski skills/Img/falaridioma.png SPEAK_LANGUAGE
-29 falsificar.ski skills/Img/falsificar.png COUNTERFEIT
-30 furtividade.ski skills/Img/furtividade.png FURTIVE
-31 intimidar.ski skills/Img/intimidar.png INTIMIDATE
-32 montar.ski skills/Img/montar.png RIDE_ANIMALS
-33 observar.ski skills/Img/observar.png OBSERVATE
-34 opobjele.ski skills/Img/opobjele.png OPERATE_ELETRONIC_OBJECTS
-35 opobjmec.ski skills/Img/opobjmec.png OPERATE_MECHANIC_OBJECTS
-36 obterinf.ski skills/Img/obterinf.png GET_INFORMATIONS
-37 ouvir.ski skills/Img/ouvir.png LISTEN
-38 passelivre.ski skills/Img/passelivre.png FREE_PASS
-39 penosaco.ski skills/Img/penosaco.png FOOT_ON_MANS_GENITALS
-40 performar.ski skills/Img/performar.png PERFORMATE
-41 prestidig.ski skills/Img/prestidig.png PRESTIDIGITATION
-42 roupasbizarras.ski skills/Img/roupasbizarras.png BIZARRE_CLOTHES
-43 suborno.ski skills/Img/suborno.png BRIBE
-44 semtempo.ski skills/Img/semtempo.png OUT_OF_TIME
-45 cnhtagmedicinal.ski skills/Img/tagarelice.png MEDICAL_LOUD_MOUTH
-46 tocarinst.ski skills/Img/tocarinst.png PLAY_INSTRUMENT
+totalSkills = 47
+NOT_USED = 00 notused.ski skills/Img/na.png
+STRENGTH = 01 forca.ski   skills/Img/forca.png
+DEXTERITY = 02 destreza.ski skills/Img/destreza.png
+CONSTITUTION = 03 constituicao.ski skills/Img/constituicao.png
+INTELLIGENCE = 04 inteligencia.ski skills/Img/inteligencia.png
+WISDOM = 05 sabedoria.ski skills/Img/sabedoria.png
+CHARISMA = 06 carisma.ski skills/Img/carisma.png
+ACROBATS = 07 acrobacias.ski skills/Img/acrobacias.png
+TRAIN_ANIMALS = 08 adestrarbichos.ski skills/Img/adestrar.png
+BURGLARY = 09 arrombar.ski skills/Img/arrombar.png
+ART_OF_THE_SCAPE = 10 artedoescape.ski skills/Img/artedoescape.png
+APPRAISE = 11 avaliar.ski skills/Img/avaliar.png
+DRINKING = 12 beber.ski skills/Img/beber.png
+BLUFF = 13 blefar.ski skills/Img/blefar.png
+BOHEMIA = 14 boemia.ski skills/Img/boemia.png
+TAYLORISM = 15 bovinice.ski skills/Img/bovinice.png
+CONDUCTION = 16 conducao.ski skills/Img/conducao.png
+KNOWLEDGE_GENERAL = 17 cnhgeral.ski skills/Img/cnhgeral.png
+KNOWLEDGE_SUFFER = 18 cnhsofrimento.ski skills/Img/cnhsofrimento.png
+HEAL = 19 curar.ski skills/Img/curar.png
+SEE_LIES = 20 desmentir.ski skills/Img/desmentir.png
+DIPLOMACY = 21 diplomacia.ski skills/Img/diplomacia.png
+PROFESSIONAL_SPEECH = 22 discursoprof.ski skills/Img/discursoprof.png
+DISGUISES = 23 disfarces.ski skills/Img/disfarces.png
+BALANCE = 24 equilibrio.ski skills/Img/equilibrio.png
+CLIMB = 25 escalar.ski skills/Img/escalar.png
+HIDE = 26 esconder.ski skills/Img/esconder.png
+SPORTS = 27 nadar.ski skills/Img/nadar.png
+SPEAK_LANGUAGE = 28 falaridioma.ski skills/Img/falaridioma.png
+COUNTERFEIT = 29 falsificar.ski skills/Img/falsificar.png
+FURTIVE = 30 furtividade.ski skills/Img/furtividade.png
+INTIMIDATE = 31 intimidar.ski skills/Img/intimidar.png
+RIDE_ANIMALS = 32 montar.ski skills/Img/montar.png
+OBSERVATE = 33 observar.ski skills/Img/observar.png
+OPERATE_ELETRONIC_OBJECTS = 34 opobjele.ski skills/Img/opobjele.png
+OPERATE_MECHANIC_OBJECTS = 35 opobjmec.ski skills/Img/opobjmec.png
+GET_INFORMATIONS = 36 obterinf.ski skills/Img/obterinf.png
+LISTEN = 37 ouvir.ski skills/Img/ouvir.png
+CARTE_BLANCHE = 38 passelivre.ski skills/Img/passelivre.png
+FOOT_ON_MEN_GENITALS = 39 penosaco.ski skills/Img/penosaco.png
+PERFORMATE = 40 performar.ski skills/Img/performar.png
+PRESTIDIGITATION = 41 prestidig.ski skills/Img/prestidig.png
+BIZARRE_CLOTHES = 42 roupasbizarras.ski skills/Img/roupasbizarras.png
+BRIBE = 43 suborno.ski skills/Img/suborno.png
+NOT_ENOUGH_TIME = 44 semtempo.ski skills/Img/semtempo.png
+MEDICAL_LOUD_MOUTH = 45 cnhtagmedicinal.ski skills/Img/tagarelice.png
+PLAY_INSTRUMENT = 46 tocarinst.ski skills/Img/tocarinst.png

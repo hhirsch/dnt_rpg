@@ -72,8 +72,7 @@ engine::engine()
    ext.defineAllExtensions();
 
    /* Load Skills List */
-   skillsList = new skills(dir.getRealFile("skills/"),
-                           dir.getRealFile("skills/skills.skl"));
+   skillsList = new skills();
   
    /* Load Features List */
    features = new featsList(dir.getRealFile("feats/"),

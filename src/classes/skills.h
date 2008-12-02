@@ -36,7 +36,7 @@ class skills
       /*! skills contructor. Read all skills from file.
        *  \param dir -> directory of the skills files
        *  \param arq -> filename of the skills list. */
-      skills(string dir, string arq); 
+      //skills(string dir, string arq); 
       /*! skills contructor. Read all skills from a skills. Do not load 
        *  descriptions. 
        *  \param sk -> other skills pointer.

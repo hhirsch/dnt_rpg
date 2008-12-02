@@ -11,10 +11,12 @@ using namespace std;
 #include "defs.h"
 #include "../lang/translate.h"
 #include "../etc/dirs.h"
+#include "../etc/defparser.h"
 
 /*************************************************************
  *                      Constructor                          *
  *************************************************************/
+#if 0
 skills::skills(string dir, string arq)
 {
    dirs dirInfo;
@@ -55,6 +57,7 @@ skills::skills(string dir, string arq)
       arqDescricao = dir+arqDescricao;
       m_skills[aux].idString = buf4;
 
+      /* Load the skill */
       FILE* desc;
       if(! (desc = fopen(arqDescricao.c_str(), "r")))
       {
@@ -82,6 +85,7 @@ skills::skills(string dir, string arq)
 
    avaiblePoints = 0;
 }
+#endif
 
 /*************************************************************
  *                      Constructor                          *
@@ -122,24 +126,33 @@ skills::skills(skills* sk)
 skills::skills()
 {
    dirs dir;
-   FILE* file;
-   string arqDescricao;
-   string arqImagem;
    char buffer[1024];
+   char buf[128];
    char buf2[128];
-   char buf3[128];
-   char buf4[128];
    int num;
-   string fName = "";
-   if(!(file=fopen(dir.getRealFile("skills/skills.skl").c_str(),"r")))
+   FILE* desc;
+   string descFile, imgFile;
+
+   defParser def;
+   string key="", value="";
+
+   /* Load the definitions file */ 
+   if(!def.load("skills/skills.skl"))
    {
-       cout << "Error while opening skills list: skills/skills.skl" << endl;
-       return;
+      cerr << "Error: Can't parse skills.skl file!" << endl;
+      return;
    }
 
-   fgets(buffer, sizeof(buffer), file);
-   sscanf(buffer, "%d", &totalSkills);
+   /* Define total skills */
+   def.getNextTuple(key, value);
+   if(key != "totalSkills")
+   {
+      cerr << "Error: Invalid skills.skl file!" << endl;
+      return;
+   }
+   sscanf(value.c_str(), "%d", &totalSkills);
 
+   /* Create the skills space */
    if(totalSkills > 0)
    {
       m_skills = new skill[totalSkills];
@@ -149,45 +162,40 @@ skills::skills()
       m_skills = NULL;
    }
 
-   
-   int aux;
-   for(aux = 0; aux < totalSkills; aux++)
+   /* Now define and load all skills */ 
+   while(def.getNextTuple(key, value))
    {
-      /* get the skill definition */
-      fgets(buffer, sizeof(buffer), file);
-      sscanf(buffer,"%d %s %s %s",&num, &buf2[0],&buf3[0], &buf4[0]);
-      arqImagem = buf3;
-      arqDescricao = buf2;
-      arqDescricao = dir.getRealFile("skills/") + arqDescricao;
-      m_skills[aux].idString = buf4;
+      /* Break the value */
+      sscanf(value.c_str(),"%d %s %s", &num, &buf[0], &buf2[0]);
 
-      /* Make sure idString not have \n or #13 */
-      if( (m_skills[aux].idString[m_skills[aux].idString.length()-1] == '\n') ||
-          (m_skills[aux].idString[m_skills[aux].idString.length()-1] == 13) )
+      /* Define the skill */
+      m_skills[num].idString = key;
+      descFile = dir.getRealFile("skills/") + buf;
+      imgFile = buf2;
+   
+      /* Read the Skill Description */
+      if(! (desc = fopen(descFile.c_str(), "r")))
       {
-         m_skills[aux].idString.erase(m_skills[aux].idString.length()-1);
-      }
-
-      FILE* desc;
-      if(! (desc = fopen(arqDescricao.c_str(), "r")))
-      {
-         cerr << "Can't open skill file: " << arqDescricao << endl;
+         cerr << "Error: Can't open skill file: " << descFile << endl;
          return;
       }
       fgets(buffer, sizeof(buffer), desc);
-      m_skills[aux].name = translateDataString(buffer);
+      m_skills[num].name = translateDataString(buffer);
       fgets(buffer, sizeof(buffer), desc);
-      m_skills[aux].description = "";
-      fscanf(desc,"%d",&m_skills[aux].baseAttribute);
-      m_skills[aux].points = 0;
-      m_skills[aux].mod = 2;
-      m_skills[aux].prevPoints = 0;
-      m_skills[aux].image = NULL;
+      m_skills[num].description = translateDataString(buffer);
+      fscanf(desc,"%d",&m_skills[num].baseAttribute);
+      m_skills[num].points = 0;
+      m_skills[num].mod = 2;
+      m_skills[num].prevPoints = 0;
+      m_skills[num].image = IMG_Load(dir.getRealFile(imgFile).c_str());
+      if(!m_skills[num].image)
+      {
+         cout << "Can't open skill image: " << imgFile << endl;
+      }
       fclose(desc);
    }
 
-   fclose(file);
-
+   avaiblePoints = 0;
 }
 
 /*************************************************************
