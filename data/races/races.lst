@@ -1,10 +1,9 @@
-9
-00 autista.rca races/Img/autista.png STRANGE_AUTISTIC
-01 boy.rca races/Img/boy.png BOY_PATY
-02 gotico.rca races/Img/gotico.png GOTHIC
-03 hippie.rca races/Img/hippie.png HIPPIE
-04 humano.rca races/Img/humano.png COMMON_HUMAN
-05 llama.rca races/Img/llama.png HUMAN_LLAMA
-06 metaleiro.rca races/Img/metaleiro.png HEADBANGER
-07 skinhead.rca races/Img/skin.png SKINHEAD_MANIAC
-08 mutante.rca races/Img/grilo.png MUTANT_HUMAN_CRICKET
+STRANGE_AUTISTIC = 0 autista.rca races/Img/autista.png
+BOY_PATY = 1 boy.rca races/Img/boy.png
+GOTHIC = 2 gotico.rca races/Img/gotico.png
+HIPPIE = 3 hippie.rca races/Img/hippie.png
+COMMON_HUMAN = 4 humano.rca races/Img/humano.png
+HUMAN_LAMA = 5 llama.rca races/Img/llama.png
+HEADBANGER = 6 metaleiro.rca races/Img/metaleiro.png
+SKINHEAD_MANIAC = 7 skinhead.rca races/Img/skin.png
+MUTANT_HUMAN_CRICKET = 8 mutante.rca races/Img/grilo.png

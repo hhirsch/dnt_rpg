@@ -85,8 +85,7 @@ engine::engine()
 
    /* Load Races */
    raceList = new races();
-   raceList->init(dir.getRealFile("races/"), 
-                  dir.getRealFile("races/races.lst"));
+   raceList->init();
 
    /* Load Classes */
    classList = new classes();

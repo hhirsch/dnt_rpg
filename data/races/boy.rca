@@ -1,14 +1,13 @@
-gettext("Boy / Paty")
-gettext("'Ah friend, I can't, 'cause I'll do some biceps exercises today'|(Tico Bombadinho)")
-gettext("Boys, and their female versions, Patys, are creatures endowed with a strange fondness for body academies. Always wanting to be thin, to go to jet-set parties and rubbing with their opposite sex equivalents, they usually ignore their friends of other races. But, the more upper-class they consider themselves, and although they have a great capacity for affection, this race is always the target of mockeries and jokes by other races.")
-3
-1 SKILL DIPLOMACY SEX OPOSITE
-gettext("Patys have +1 of Diplomacy since they always exhibit the characteristics of their bodies. As terribly horrendous as she was, she is able to alter herself 'magically' in just a few hours.")
-2 SKILL DISGUISES ALL ALL
-gettext("For the aforesaid reasons, the Patys also receive + 2 of Disguises.")
-1 ATTRIBUTE CONSTITUTION ALL ALL
-gettext("Boys and Patys receive +1 of Constitution due to the time they constantly spend at body academies. If they no longer go there, they'll lose this bonus and automatically become the butt of jokes among others of their own race.")
-0
-1
-CONDUCTION
-gettext("Boys have Driver as class skill, since they are distinguished offenders of traffic laws.")
+name = gettext("Boy / Paty")
+epigraph = gettext("'Ah friend, I can't, 'cause I'll do some biceps exercises today'|(Tico Bombadinho)")
+description = gettext("Boys, and their female versions, Patys, are creatures endowed with a strange fondness for body academies. Always wanting to be thin, to go to jet-set parties and rubbing with their opposite sex equivalents, they usually ignore their friends of other races. But, the more upper-class they consider themselves, and although they have a great capacity for affection, this race is always the target of mockeries and jokes by other races.")
+totalModifiers = 3
+modifier = 1 SKILL DIPLOMACY SEX OPOSITE
+modifierText = gettext("Patys have +1 of Diplomacy since they always exhibit the characteristics of their bodies. As terribly horrendous as she was, she is able to alter herself 'magically' in just a few hours.")
+modifier = 2 SKILL DISGUISES ALL ALL
+modifierText = gettext("For the aforesaid reasons, the Patys also receive + 2 of Disguises.")
+modifier = 1 ATTRIBUTE CONSTITUTION ALL ALL
+modifierText = gettext("Boys and Patys receive +1 of Constitution due to the time they constantly spend at body academies. If they no longer go there, they'll lose this bonus and automatically become the butt of jokes among others of their own race.")
+totalSkills = 1
+skill = CONDUCTION
+skillText = gettext("Boys have Driver as class skill, since they are distinguished offenders of traffic laws.")

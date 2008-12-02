@@ -57,11 +57,8 @@ class race
 class races
 {
    public:
-      /*! Static Constructor
-       * \param fileListName -> name of the file containing the list of all
-       *         races (usually ../data/race/race.lst)  
-       * \param directory -> directory of races descriptions */
-      void init(string directory, string fileListName);
+      /*! Static Constructor */
+      void init();
       /*! Static Destructor */
       void finish();
 

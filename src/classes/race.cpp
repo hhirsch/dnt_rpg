@@ -1,8 +1,11 @@
 #include "race.h"
 #include "../lang/translate.h"
 #include "../etc/dirs.h"
+#include "../etc/defparser.h"
+
 #include <iostream>
 #include <fstream>
+using namespace std;
 
 /******************************************************************
  *                            Constructor                         *
@@ -112,41 +115,31 @@ void race::getAttModifiers(int mods[6], bool sum, skills* sk)
 /******************************************************************
  *                            Constructor                         *
  ******************************************************************/
-void races::init(string directory, string fileListName)
+void races::init()
 {
-   std::ifstream file;
-   string aux;
-   char arqName[255];
-   char imgFile[255];
-   char idStr[255];
-   int idInt;
-   int total = 0;
-   int i;
+   defParser def;
+   int idInt=0;
+   char raceFile[256], imgFile[256];
+   string key="", value="";
 
    totalRaces = 0;
    first = NULL;
 
-   file.open(fileListName.c_str(), ios::in | ios::binary);
-
-   if(!file)
+   /* Open the list */
+   if(!def.load("races/races.lst"))
    {
-      cerr << "Error opening race list file: " << fileListName << endl;
+      cerr << "Error opening race list file!" << endl;
       return;
    }
 
-   getline(file, aux);
-   sscanf(aux.c_str(), "%d", &total);
-
-   for(i = 0; i < total; i++)
+   /* Get and Insert All Races */
+   while(def.getNextTuple(key, value))
    {
-      getline(file, aux);
-      sscanf(aux.c_str(),"%d %s %s %s",&idInt,&arqName[0],&imgFile[0],
-             &idStr[0]);
-      insertRace(directory+arqName, imgFile, idStr, idInt);
+      /* Break Value */
+      sscanf(value.c_str(),"%d %s %s",&idInt,&raceFile[0],&imgFile[0]);
+      insertRace(raceFile, imgFile, key, idInt);
    }
-
    
-   file.close();
 }
 
 /******************************************************************
@@ -169,115 +162,113 @@ void races::finish()
  ******************************************************************/
 void races::insertRace(string fileName,string imgFile,string idString,int idInt)
 {
+   defParser def;
    dirs dir;
-   std::ifstream file;
-   string str;
-   int i;
+   race* ins;
+   string key="", value="";
    char buf1[128], buf2[128], buf3[128], buf4[128];
-   race* ins = new(race);
+   int curMod=-1, curTalent=-1, curSkill=-1;
 
-   file.open(fileName.c_str(), ios::in | ios::binary);
-
-   if(!file)
+   /* Read the file */
+   if(!def.load("races/" + fileName))
    {
       cerr << "Error while opening race file: " << fileName << endl;
       return;
    }
 
-   /* Indentifiers */
+   /* Define Indentifiers */
+   ins = new race();
    ins->strID = idString;
    ins->intID = idInt;
 
-   /* Name */
-   getline(file, ins->name);
-   ins->name = translateDataString(ins->name);
-
-   /* Citation */
-   getline(file, ins->citation);
-   ins->citation = translateDataString(ins->citation);
-
-   /* Description */
-   getline(file, ins->description);
-   ins->description = translateDataString(ins->description);
-
-   /* Image */
+   /* Define Image */
    ins->image = IMG_Load(dir.getRealFile(imgFile).c_str());
    if(!ins->image)
    {
       cerr << "Error while opening image race image: " << imgFile << endl;
    }
 
-   /* Modifiers */
-   getline(file, str);
-   sscanf(str.c_str(),"%d",&ins->totalModifiers);
-
-   if(ins->totalModifiers > 0)
+   /* Now parse all tokens got */
+   while(def.getNextTuple(key, value))
    {
-      ins->raceModifiers = new modifier[ins->totalModifiers];
-   }
-   else
-   {
-      ins->raceModifiers = NULL;
-   }
-
-   for(i=0; i<ins->totalModifiers;i++)
-   {
+      /* Name */
+      if(key == "name")
+      {
+         ins->name = translateDataString(value);
+      }
+      /* Epigraph */
+      else if(key == "epigraph")
+      {
+         ins->citation = translateDataString(value);
+      }
+      /* Description */
+      else if(key == "description")
+      {
+         ins->description = translateDataString(value);
+      }
+      /* Total Modifiers */
+      else if(key == "totalModifiers")
+      {
+         sscanf(value.c_str(), "%d", &ins->totalModifiers);
+         if(ins->totalModifiers > 0)
+         {
+            ins->raceModifiers = new modifier[ins->totalModifiers];
+         }
+      }
       /* Modifier */
-      getline(file,str);
-      sscanf(str.c_str(),"%d %s %s %s %s", &ins->raceModifiers[i].mod, &buf1[0], 
-                                           &buf2[0], &buf3[0], &buf4[0]);
-      ins->raceModifiers[i].cause.type = buf1;
-      ins->raceModifiers[i].cause.id = buf2;
-      ins->raceModifiers[i].target.type = buf3;
-      ins->raceModifiers[i].target.id = buf4;
-      /* Modifier Description */
-      getline(file, ins->raceModifiers[i].description);
-      ins->raceModifiers[i].description = translateDataString(
-                                           ins->raceModifiers[i].description);
+      else if(key == "modifier")
+      {
+         curMod++;
+         sscanf(value.c_str(),"%d %s %s %s %s", &ins->raceModifiers[curMod].mod,
+                &buf1[0], &buf2[0], &buf3[0], &buf4[0]);
+         ins->raceModifiers[curMod].cause.type = buf1;
+         ins->raceModifiers[curMod].cause.id = buf2;
+         ins->raceModifiers[curMod].target.type = buf3;
+         ins->raceModifiers[curMod].target.id = buf4;
+      }
+      /* Modifier Text */
+      else if(key == "modifierText")
+      {
+         ins->raceModifiers[curMod].description = translateDataString(value);
+      }
+      /* TotalFeats */
+      else if(key == "totalTalents")
+      {
+         sscanf(value.c_str(),"%d",&ins->totalFeats);
+         if(ins->totalFeats > 0)
+         {
+            ins->raceFeats = new string[ins->totalFeats];
+         }
+      }
+      /* Feat */
+      else if(key == "talent")
+      {
+         curTalent++;
+         ins->raceFeats[curTalent] = value;
+      }
+      /* Total Skills */
+      else if(key == "totalSkills")
+      {
+         sscanf(value.c_str(),"%d",&ins->totalSkills);
+         if(ins->totalSkills > 0)
+         {
+            ins->raceSkills = new string[ins->totalSkills];
+            ins->raceSkillsJustify = new string[ins->totalSkills];
+         }
+      }
+      /* Skill  */
+      else if(key == "skill")
+      {
+         curSkill++;
+         ins->raceSkills[curSkill] = value;
+      }
+      /* Skill Text */
+      else if(key == "skillText")
+      {
+         ins->raceSkillsJustify[curSkill] = value;
+      }
    }
 
-   /* Feats */
-   getline(file, str);
-   sscanf(str.c_str(),"%d",&ins->totalFeats);
-
-   if(ins->totalFeats > 0)
-   {
-      ins->raceFeats = new string[ins->totalFeats];
-   }
-   else
-   {
-      ins->raceFeats = NULL;
-   }
-
-   for(i=0; i < ins->totalFeats; i++)
-   {
-      getline(file, ins->raceFeats[i]);
-   }
-
-   /* Skills */
-   getline(file, str);
-   sscanf(str.c_str(),"%d",&ins->totalSkills);
-
-   if(ins->totalSkills > 0)
-   {
-      ins->raceSkills = new string[ins->totalSkills];
-      ins->raceSkillsJustify = new string[ins->totalSkills];
-   }
-   else
-   {
-      ins->raceSkills = NULL;
-      ins->raceSkillsJustify = NULL;
-   }
-
-   for(i=0; i < ins->totalSkills; i++)
-   {
-      getline(file, ins->raceSkills[i]);
-      getline(file, ins->raceSkillsJustify[i]);
-      ins->raceSkillsJustify[i]=translateDataString(ins->raceSkillsJustify[i]);
-   }
-   
-   file.close();
-   
    /* Pointers */
    if(first == NULL)
    {
