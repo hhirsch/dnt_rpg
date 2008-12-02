@@ -25,16 +25,16 @@ alignWindow::alignWindow(aligns* alg, guiInterface* inter, align** actual)
    }
    
    /* create intWindow */
-   intWindow = inter->insertWindow(centerX-134,centerY-129,
-                                   centerX+134,centerY+129,
+   intWindow = inter->insertWindow(centerX-144,centerY-129,
+                                   centerX+144,centerY+129,
                                    gettext("Tendency & Alignment"));
 
    /* Align Image */
-   alignImage = intWindow->getObjectsList()->insertPicture(103,185,0,0,NULL);   
+   alignImage = intWindow->getObjectsList()->insertPicture(113,185,0,0,NULL);   
    alignImage->set(actualAlign->image);
 
    /* Align Description */
-   textDesc = intWindow->getObjectsList()->insertRolBar(5,38,262,180,"");
+   textDesc = intWindow->getObjectsList()->insertRolBar(5,38,282,180,"");
    textDesc->addText(actualAlign->description.c_str(),
                      DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
                      DNT_FONT_STYLE_NORMAL, 86, 161, 132); 
@@ -43,27 +43,27 @@ alignWindow::alignWindow(aligns* alg, guiInterface* inter, align** actual)
    /* Name and Selectors */
    buttonPrevious = intWindow->getObjectsList()->insertButton(5,19,19,37,
                                                  fnt.createUnicode(0x25C4),0);
-   buttonNext = intWindow->getObjectsList()->insertButton(248,19,262,37,
+   buttonNext = intWindow->getObjectsList()->insertButton(268,19,282,37,
                                                  fnt.createUnicode(0x25BA),0);
-   textName = intWindow->getObjectsList()->insertTextBox(20,19,247,37,1, 
+   textName = intWindow->getObjectsList()->insertTextBox(20,19,267,37,1, 
                                                   actualAlign->name.c_str());
-   textName->setFont(DNT_FONT_ARIAL,12,DNT_FONT_ALIGN_CENTER,
+   textName->setFont(DNT_FONT_ARIAL,10,DNT_FONT_ALIGN_CENTER,
                      DNT_FONT_STYLE_BOLD);
 
    /* Confirm Button */
-   buttonConfirm = intWindow->getObjectsList()->insertButton(188,229,258,248, 
+   buttonConfirm = intWindow->getObjectsList()->insertButton(203,229,273,248, 
                                               gettext("Confirm"),1);
    
    /* Cancel Button */
-   buttonCancel = intWindow->getObjectsList()->insertButton(11,229,81,248,
+   buttonCancel = intWindow->getObjectsList()->insertButton(16,229,86,248,
                                                gettext("Cancel"),1);
 
    /* Contorns */
-   intWindow->getObjectsList()->insertTextBox(5,181,87,224,2,"");
-   intWindow->getObjectsList()->insertTextBox(5,225,87,252,2,"");
-   intWindow->getObjectsList()->insertTextBox(88,181,181,252,2,"");
-   intWindow->getObjectsList()->insertTextBox(182,181,262,224,2,"");
-   intWindow->getObjectsList()->insertTextBox(182,225,262,252,2,"");
+   intWindow->getObjectsList()->insertTextBox(5,181,97,224,2,"");
+   intWindow->getObjectsList()->insertTextBox(5,225,97,252,2,"");
+   intWindow->getObjectsList()->insertTextBox(98,181,191,252,2,"");
+   intWindow->getObjectsList()->insertTextBox(192,181,282,224,2,"");
+   intWindow->getObjectsList()->insertTextBox(192,225,282,252,2,"");
 
    /* Open Skill Window */
    intWindow->setExternPointer(&intWindow);
