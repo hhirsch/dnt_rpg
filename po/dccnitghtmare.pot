@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-12-01 21:10-0200\n"
+"POT-Creation-Date: 2008-12-02 13:11-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -156,7 +156,7 @@ msgstr ""
 msgid "Attribute Description"
 msgstr ""
 
-#: src/engine/attwindow.cpp:511 src/engine/dccnit.cpp:351
+#: src/engine/attwindow.cpp:511 src/engine/dccnit.cpp:348
 #: src/engine/options.cpp:992
 msgid "Warning"
 msgstr ""
@@ -359,46 +359,46 @@ msgstr ""
 msgid "No Skills."
 msgstr ""
 
-#: src/engine/dccnit.cpp:352
+#: src/engine/dccnit.cpp:349
 msgid "Can't save game while fighting!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:470
+#: src/engine/dccnit.cpp:467
 #, c-format
 msgid "Saving Current Map Modifications"
 msgstr ""
 
-#: src/engine/dccnit.cpp:505
+#: src/engine/dccnit.cpp:502
 #, c-format
 msgid "Loading Map: %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:568
+#: src/engine/dccnit.cpp:565
 #, c-format
 msgid "Loading NPC: %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:594
+#: src/engine/dccnit.cpp:591
 msgid "Creating MiniMap"
 msgstr ""
 
-#: src/engine/dccnit.cpp:600
+#: src/engine/dccnit.cpp:597
 msgid "Putting GUI on Screen"
 msgstr ""
 
-#: src/engine/dccnit.cpp:647
+#: src/engine/dccnit.cpp:644
 msgid "Loading Particles"
 msgstr ""
 
-#: src/engine/dccnit.cpp:677
+#: src/engine/dccnit.cpp:674
 msgid "Loading Changes..."
 msgstr ""
 
-#: src/engine/dccnit.cpp:705
+#: src/engine/dccnit.cpp:702
 msgid "Done!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:797
+#: src/engine/dccnit.cpp:794
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -406,50 +406,50 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1310
+#: src/engine/dccnit.cpp:1307
 msgid "Too far away for the action!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1352
+#: src/engine/dccnit.cpp:1349
 msgid "No NPCs in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1403
+#: src/engine/dccnit.cpp:1400
 msgid "Surprise Attack Turn."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1417
+#: src/engine/dccnit.cpp:1414
 msgid "No enemies in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1595 src/engine/dccnit.cpp:2045
+#: src/engine/dccnit.cpp:1592 src/engine/dccnit.cpp:2042
 #: src/engine/shortcutswindow.cpp:32
 msgid "Nothing"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1793
+#: src/engine/dccnit.cpp:1790
 #, c-format
 msgid "%s taken."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1815
+#: src/engine/dccnit.cpp:1812
 msgid "Inventory is full!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1847
+#: src/engine/dccnit.cpp:1844
 msgid "Door"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1980
+#: src/engine/dccnit.cpp:1977
 #, c-format
 msgid "%s attacks %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2141
+#: src/engine/dccnit.cpp:2138
 msgid "No more actions. Turn ended."
 msgstr ""
 
-#: src/engine/dccnit.cpp:3523
+#: src/engine/dccnit.cpp:3520
 msgid "Exit Battle Mode"
 msgstr ""
 
@@ -1705,7 +1705,7 @@ msgstr ""
 
 #: data/classes/to.cls:13
 msgid ""
-"Because they symbolize rare beauty to the Students of the ISEX,  the OT "
+"Because they symbolize rare beauty to the Students of the ICEX,  the OT "
 "Students receive +10 on all social tests against Students from that "
 "Institute."
 msgstr ""
@@ -1805,7 +1805,7 @@ msgid ""
 "and automatically become the butt of jokes among others of their own race."
 msgstr ""
 
-#: data/races/boy.rca:14
+#: data/races/boy.rca:13
 msgid ""
 "Boys have Driver as class skill, since they are distinguished offenders of "
 "traffic laws."
