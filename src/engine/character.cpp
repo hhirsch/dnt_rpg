@@ -11,6 +11,7 @@
 #include "../ia/iascript.h"
 #include "../etc/dirs.h"
 #include "../etc/defparser.h"
+#include "../lang/translate.h"
 
 #include <SDL/SDL_image.h>
 #include <iostream>
@@ -852,7 +853,7 @@ character* characterList::insertCharacter(string file, featsList* ft,
       /* Character Name */
       if(key == "name")
       {
-         novo->name = value;
+         novo->name = translateDataString(value);
       }
       /* Character FileName */
       else if(key == "model")
