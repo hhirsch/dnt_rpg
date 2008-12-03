@@ -761,11 +761,16 @@ void iaSymbolsTable::save(ofstream* file)
    /* Save All Variables */
    for(i=0; i<total; i++)
    {
-      /* Name and Type */
-      *file << IA_SYMBOLS_TOKEN_VARIABLE << " = " 
+      /* FIXME Only save no temporary variables
+       * (this will ignore the pending actions) */
+      if(!isTemp(iv))
+      {
+         /* Name and Type */
+         *file << IA_SYMBOLS_TOKEN_VARIABLE << " = " 
             << iv->type << " " << iv->name << endl;
-      /* Current Value */
-      *file << IA_SYMBOLS_TOKEN_VALUE << " = " << iv->toString() << endl;
+         /* Current Value */
+         *file << IA_SYMBOLS_TOKEN_VALUE << " = " << iv->toString() << endl;
+      }
       iv = iv->next;
    }
 
