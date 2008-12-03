@@ -9,7 +9,7 @@ dialog(0)
       option
          pre_test = equal(OBJECT_STATE, 0)
          pre_test = all_alive("mapas/tutorial/school_2.map.npc")
-         text = gettext("Temporally turn off the subterrain air system")
+         text = gettext("Temporally turn off the subterranean air system")
          post_test = roll(OPERATE_ELETRONIC_OBJECTS, 10)
          if_action = change_object_state(1)
          if_action = kill_all("mapas/tutorial/school_2.map.npc")
@@ -43,7 +43,7 @@ end_dialog
 ############################################################
 dialog(2)
    npc_begin
-      text = gettext("Subterrain air system down for cleaning... Back in 5, 4, 3, 2, 1... Subterrain air system cleaned and functional.")
+      text = gettext("Subterranean air system down for cleaning... Back in 5, 4, 3, 2, 1... Subterranean air system cleaned and functional.")
    npc_end
    pc_begin
       option

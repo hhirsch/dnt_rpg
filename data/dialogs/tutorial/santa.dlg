@@ -16,7 +16,7 @@ end_dialog
 ############################################################
 dialog(1)
    npc_begin
-      text = gettext("Don't you known me? I am a descendant of a famous pre-war character.")
+      text = gettext("Don't you know me? I am a descendant of a famous pre-war character.")
    npc_end
    pc_begin
       option
@@ -88,7 +88,7 @@ end_dialog
 ############################################################
 dialog(5)
    npc_begin
-      text = gettext("I need you to install a Ruindows at the occupation's notebook. Will you do it?")
+      text = gettext("I need you to install a Ruindows on the occupation's notebook. Will you do it?")
    npc_end
    pc_begin
       option
@@ -105,7 +105,7 @@ dialog(5)
          action = receive_item("models/objetos/icex/ruindows_box/ruindows_box.dcc")
          action = finish_dialog()
       option
-         text = gettext("Yes. (but inner you something is telling to take another action)")
+         text = gettext("Yes. (but inside you something is telling you to take another action)")
          action = dialog_init(8)
          action = receive_item("models/objetos/icex/ruindows_box/ruindows_box.dcc")
          action = add_mission("missions/tutorial/mission3.dsl")
@@ -143,14 +143,14 @@ end_dialog
 ############################################################
 dialog(8)
    npc_begin
-      text = gettext("I'm waiting to you install the Ruindows at the occupation's notebook!"
+      text = gettext("I'm waiting for you install the Ruindows on the occupation's notebook!"
    npc_end
    pc_begin
       option
          text = gettext("Ok.")
          action = finish_dialog()
       option
-         text = gettext("Ok. (you look suspicious to Santa Claws notebook)")
+         text = gettext("Ok. (you look suspiciously at Santa Claws' notebook)")
          action = finish_dialog()
    pc_end
 end_dialog
@@ -164,7 +164,7 @@ dialog(9)
    pc_begin
       option
          pre_test = align(PROPRIETARY_SOFTWARE)
-         text = gettext("Amem, brother!")
+         text = gettext("Amen, brother!")
          action = complete_mission("missions/tutorial/mission3.dsl", 200, 1)
          action = dialog_init(11)
          action = go_to_dialog(11)
@@ -185,11 +185,11 @@ end_dialog
 ############################################################
 dialog(10)
    npc_begin
-      text = gettext("You've installed a linux on my notebook? But... it's the cause of it not freezing anymore? How can I feel in home now?")
+      text = gettext("You've installed a linux on my notebook? But... it's the cause of it's not freezing up anymore? How can I feel at home now?")
    npc_end
    pc_begin
       option
-         text = gettext("Maybe you can go the the North Pole?")
+         text = gettext("Maybe you can go the North Pole?")
          action = complete_mission("missions/tutorial/mission3.dsl", 200, 3)
          action = dialog_init(7)
          action = go_to_dialog(7)
@@ -210,7 +210,7 @@ dialog(11)
    pc_begin
        option
          pre_test = align(PROPRIETARY_SOFTWARE)
-         text = gettext("Amem, brother!")
+         text = gettext("Amen, brother!")
          action = finish_dialog()
       option
          text = gettext("I will try to!")

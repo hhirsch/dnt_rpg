@@ -8,7 +8,7 @@ dialog(0)
    pc_begin
       option
          pre_test = equal(OBJECT_STATE, 0)
-         text = gettext("Install a new Operational System")
+         text = gettext("Install a new Operating System")
          action = go_to_dialog(1)
 
       # The windows option =^P
@@ -28,7 +28,7 @@ end_dialog
 ############################################################
 dialog(1)
    npc_begin
-      text = gettext("What Operational System do you wish to install?")
+      text = gettext("What Operating System do you wish to install?")
    npc_end
 
    pc_begin
@@ -114,7 +114,7 @@ end_dialog
 ############################################################
 dialog(4)
    npc_begin
-      text = gettext("(You see a blue screen with some hexadecimal codes. There's nothing you can do unless restart the system.)")
+      text = gettext("(You see a blue screen with some hexadecimal codes. There's nothing you can do except restart the system.)")
    npc_end
    pc_begin
       option

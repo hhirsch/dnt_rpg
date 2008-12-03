@@ -48,7 +48,7 @@ end_dialog
 ############################################################
 dialog(3)
    npc_begin
-      text = gettext("Yes, occupation. A clean and sweet ocupation that also serves as heal clinic for people with big tongue and no gratitude!")
+      text = gettext("Yes, occupation. A clean and sweet ocupation that also serves as a healing clinic for people with big tongues and no gratitude!")
    npc_end
    pc_begin
       option
@@ -88,7 +88,7 @@ dialog(5)
          text = gettext("Where it can be?")
          action = go_to_dialog(13)
       option
-         text = gettext("Ok, I'll search it")
+         text = gettext("Ok, I'll search for it")
          action = add_mission("missions/tutorial/mission1.dsl")
          action = dialog_init(6)
          action = finish_dialog()
@@ -104,7 +104,7 @@ dialog(5)
          else_action = dialog_init(12)
          else_action = go_to_dialog(12)
       option
-         text = gettext("Never! Chrono taked me 3 years! Die!")
+         text = gettext("Never! Chrono took 3 years from me! Die!")
          action = init_fight()
    pc_end
 end_dialog
@@ -166,7 +166,7 @@ end_dialog
 ############################################################
 dialog(9)
    npc_begin
-      text = gettext("I want another thing from you. Some dangerous living creatures are infesting the subterrain areas of the bunker school. Please, exterminate them all.")
+      text = gettext("I want another thing from you. Some dangerous living creatures are infesting the subterranean areas of the bunker school. Please, exterminate them all.")
    npc_end
    pc_begin
       option 
@@ -203,7 +203,7 @@ end_dialog
 ############################################################
 dialog(11)
    npc_begin
-      text = gettext("That dammed Lavos! So, we must forget about Chrono...")
+      text = gettext("That damned Lavos! So, we must forget about Chrono...")
    npc_end
    pc_begin
       option
@@ -279,7 +279,7 @@ end_dialog
 ############################################################
 dialog(16)
    npc_begin
-      text = gettext("I haven't any more things for you at this DNT version. Come back at a latter version or join DNTeam to help us develop it!")
+      text = gettext("I haven't any more things for you in this DNT version. Come back when there's a latter version or join DNTeam to help us develop it!")
    npc_end
    pc_begin
       option
