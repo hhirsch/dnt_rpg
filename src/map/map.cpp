@@ -512,7 +512,7 @@ GLuint Map::insertTexture(string arq, string name, GLuint R, GLuint G, GLuint B)
    if( (img->h != smallestPowerOfTwo(img->h)) ||
        (img->w != smallestPowerOfTwo(img->w)) )
    {
-      cout << "Warning: image '" << arq 
+      cerr << "Warning: image '" << arq 
            << "' is of non-power of two dimension '" 
            << img->w << "x" << img->h << "'" << endl;
    }
@@ -1904,7 +1904,7 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
    GLuint R,G,B;
    GLuint Ratual,Gatual,Batual;
    dirs dir; 
-   
+  
    if(!(arq = fopen(dir.getRealFile(arquivo).c_str(),"r")))
    {
       printf("Error while opening map file: %s\n",
@@ -1935,7 +1935,7 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
 
    /* Alloc all Map Structures */
    alloc();
-   
+
    wall* maux = NULL;
    door* doorAux = NULL;
 
@@ -2261,11 +2261,13 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                         oObj->obj->addRenderPosition(oX, oY, oZ, oOri);
                      }
                   }
+
                   break;
                }
                default:
                {
-                  printf("What the Hell: %s on %s\n",buffer,arquivo.c_str());
+                  cerr << "What the Hell is: " << buffer 
+                       << " on " << arquivo << endl;
                   break;
                }
             }
@@ -2278,8 +2280,8 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
          }
          default: //something not defined!
          {
-                 printf("What is: %s on %s ?\n",buffer,arquivo.c_str());
-                 break;
+            cerr << "What is: " << buffer << " on " << arquivo << endl;
+            break;
          }
       }
    }

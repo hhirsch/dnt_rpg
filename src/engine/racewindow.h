@@ -17,10 +17,9 @@ class raceWindow
 {
    public:
       /*! Constructor
-       * \param sk -> character's skills pointer
        * \param inter -> GUI interface
        * \param retRace -> pointer where will be the choosed race */
-      raceWindow(skills* sk, guiInterface* inter, race** retRace);
+      raceWindow(guiInterface* inter, race** retRace);
 
       /*! Destructor */
       ~raceWindow();
@@ -39,7 +38,6 @@ class raceWindow
       int         totalRaces;      /**< total Races */
       race**      choosedRace;     /**< Pointer to the choosed pointer race */
       race**      racesOrder;      /**< Vector with races ordered by name */
-      skills*     externalSkills;  /**< Pointer to External Skills List */
 
       button* buttonConfirm;
       button* buttonCancel;

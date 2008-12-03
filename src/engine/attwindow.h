@@ -18,12 +18,11 @@ class attWindow
 {
    public:
       /*! Constructor 
-       * \param sk -> skill List Descriptions
        * \param savSkill -> skill to be edited
        * \param inter -> GUI interface to be used
        * \param modifiers -> race and class Modifiers
        * \param usePreviousValues -> if will use previous values or new ones */
-      attWindow(skills* sk, skills* savSkill, guiInterface* inter, 
+      attWindow(skills* savSkill, guiInterface* inter, 
                 int modifiers[6], bool usePreviousValues);
 
       /*! Treat Events on Window. 
@@ -45,8 +44,7 @@ class attWindow
       bool used[6];               /**< Mark Used Rolled Points */
       int rcModifiers[6];         /**< Race And class modifiers */
 
-      skills* externalSkill;      /**< Pointer to skill List with description */
-      skills* saveSkill;          /**< Pointer to thje edited skill List */
+      skills* saveSkill;          /**< Pointer to the edited skill List */
 
       textBox* rolledPoints;  /**< Rolled Points Text */
       textBox* attPoints[6];  /**< Attributes Points Texts */

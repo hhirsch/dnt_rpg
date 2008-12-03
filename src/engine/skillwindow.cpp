@@ -17,13 +17,13 @@ static int cmpSkillFunction(const void *p1,  const void *p2)
    skill** s1 = (skill**) p1;
    skill** s2 = (skill**) p2;
 
-   return((*s1)->name.compare((*s2)->name));
+   return((*s1)->definition->name.compare((*s2)->definition->name));
 }
 
 /**************************************************************
  *                          Constructor                       *
  **************************************************************/
-skillWindow::skillWindow(skills* sk, skills* savSkill, guiInterface* inter,
+skillWindow::skillWindow(skills* savSkill, guiInterface* inter,
                          int actualLevel, bool readOnlyMode)
 {
    dntFont fnt;
@@ -45,15 +45,12 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, guiInterface* inter,
    /* Alphabetical Order Skills */
    totalSkills = (ATT_SKILL_LAST - ATT_SKILL_FIRST)+1;
    skillsOrder = new skill*[totalSkills];
-   skillsDesc = new skill*[totalSkills];
    for(i = 0; i < totalSkills; i++)
    {
-      skillsOrder[i] = &savSkill->m_skills[i+ATT_SKILL_FIRST];
+      skillsOrder[i] = savSkill->getSkillByInt(i+ATT_SKILL_FIRST);
       skillsOrder[i]->prevPoints = skillsOrder[i]->points;
-      skillsDesc[i] = &sk->m_skills[i+ATT_SKILL_FIRST];
    }
    qsort(&skillsOrder[0], totalSkills, sizeof(skill**), cmpSkillFunction);
-   qsort(&skillsDesc[0], totalSkills, sizeof(skill**), cmpSkillFunction);
 
    /* Create Skill Window */
    intWindow = inter->insertWindow(centerX-132,centerY-128,
@@ -76,8 +73,9 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, guiInterface* inter,
    }
 
    /* Skill Description */
+   skillDefinition* sk = skillsOrder[curSkill]->definition;
    desc = intWindow->getObjectsList()->insertRolBar(8,38,256,170,
-                         skillsDesc[curSkill]->description.c_str());
+                                                    sk->description.c_str());
 
    /* Contorns */
    intWindow->getObjectsList()->insertTextBox(8,171,256,224,2,"");
@@ -90,13 +88,13 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, guiInterface* inter,
    buttonNext = intWindow->getObjectsList()->insertButton(234,175,248,193,
                                               fnt.createUnicode(0x25BA),0);
    skillName = intWindow->getObjectsList()->insertTextBox(67,175,233,193,1,
-                                skillsDesc[curSkill]->name.c_str());
+                                                          sk->name.c_str());
    skillName->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER,
                       DNT_FONT_STYLE_BOLD);
 
    /* Skill Image */
    skFig = intWindow->getObjectsList()->insertPicture(13,175,0,0,NULL);
-   skFig->set(skillsDesc[curSkill]->image);
+   skFig->set(sk->image);
  
    /* Skill Points */
    intWindow->getObjectsList()->insertTextBox(52,200,101,214,0,
@@ -163,7 +161,6 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, guiInterface* inter,
 skillWindow::~skillWindow()
 {
    delete[] skillsOrder;
-   delete[] skillsDesc;
 }
 
 /**************************************************************
@@ -199,11 +196,12 @@ void skillWindow::updateSkillInfo()
    setColors();
 
    /* Name and Description */
-   skillName->setText(skillsDesc[curSkill]->name.c_str());
-   desc->setText(skillsDesc[curSkill]->description.c_str());
+   skillDefinition* sk = skillsOrder[curSkill]->definition;
+   skillName->setText(sk->name.c_str());
+   desc->setText(sk->description.c_str());
 
    /* Set Current Image */
-   skFig->set(skillsDesc[curSkill]->image);
+   skFig->set(sk->image);
 
    /* Define Skill Points */
    sprintf(tmp,"%d",skillsOrder[curSkill]->points);

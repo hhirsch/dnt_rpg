@@ -72,7 +72,7 @@ engine::engine()
    ext.defineAllExtensions();
 
    /* Load Skills List */
-   skillsList = new skills();
+   skillsList.init();
   
    /* Load Features List */
    features = new featsList(dir.getRealFile("feats/"),
@@ -288,7 +288,7 @@ engine::~engine()
  
    classList->finish();
    delete(classList);
-   delete(skillsList);
+   skillsList.finish();
    delete(weaponsTypes);
 
    /* Clear the visibleMatrix */
@@ -952,7 +952,7 @@ int engine::characterScreen(GLuint idTextura)
    loadPC("characters/pcs/metaleiro.pc");
 
    /* Att Screen */
-   attWindow* atWindow = NULL;//new attWindow(sk, gui);
+   attWindow* atWindow = NULL;
 
    /* Skill Screen */
    skillWindow* skWindow = NULL;
@@ -971,8 +971,7 @@ int engine::characterScreen(GLuint idTextura)
 
    /* Race Window */
    activeCharacter = PCs->getActiveCharacter();
-   raceWindow* rcWindow = new raceWindow(&activeCharacter->sk, gui,
-                                         &activeCharacter->actualRace);
+   raceWindow* rcWindow = new raceWindow(gui, &activeCharacter->actualRace);
 
    while( (status != 6) )
    {
@@ -1010,8 +1009,7 @@ int engine::characterScreen(GLuint idTextura)
             {
                status = 1;
                delete(rcWindow);
-               clWindow = new classWindow(&activeCharacter->sk, gui,
-                                          &activeCharacter->actualClass[0]);
+               clWindow = new classWindow(gui,&activeCharacter->actualClass[0]);
             }
             else if(charCreation == RACEW_CANCEL)
             {
@@ -1035,8 +1033,7 @@ int engine::characterScreen(GLuint idTextura)
             {
                status = 0;
                delete(clWindow);
-               rcWindow = new raceWindow(&activeCharacter->sk, gui,
-                                         &activeCharacter->actualRace);
+               rcWindow = new raceWindow(gui,&activeCharacter->actualRace);
             }
          }
          /* Aligment Window Opened */
@@ -1048,15 +1045,13 @@ int engine::characterScreen(GLuint idTextura)
                status = 3;
                delete(alWindow);
                activeCharacter->getAttModifiers(mods);
-               atWindow = new attWindow(skillsList, &activeCharacter->sk,
-                                        gui, mods, false);
+               atWindow = new attWindow(&activeCharacter->sk, gui, mods, false);
             }
             else if(charCreation == ALIGNW_CANCEL)
             {
                status = 1;
                delete(alWindow);
-               clWindow = new classWindow(&activeCharacter->sk, gui,
-                                          &activeCharacter->actualClass[0]);
+               clWindow = new classWindow(gui,&activeCharacter->actualClass[0]);
             }
          }
          /* Attribute Window Opened */
@@ -1069,8 +1064,8 @@ int engine::characterScreen(GLuint idTextura)
                status = 4;
                delete(atWindow);
                activeCharacter->clearSkills();
-               skWindow = new skillWindow(skillsList,&activeCharacter->sk,
-                                          gui, activeCharacter->getLevel());
+               skWindow = new skillWindow(&activeCharacter->sk, gui, 
+                                          activeCharacter->getLevel());
              }
              else if(charCreation == ATTW_CANCEL)
              {
@@ -1095,8 +1090,7 @@ int engine::characterScreen(GLuint idTextura)
                status = 3;
                delete(skWindow);
                activeCharacter->getAttModifiers(mods);
-               atWindow = new attWindow(skillsList, &activeCharacter->sk,
-                                        gui, mods, true);
+               atWindow = new attWindow(&activeCharacter->sk, gui, mods, true);
             }
          }
          /* Aspect Window Opened */
@@ -1113,7 +1107,7 @@ int engine::characterScreen(GLuint idTextura)
             {
                status = 4;
                delete(aspWindow);
-               skWindow = new skillWindow(skillsList,&activeCharacter->sk,
+               skWindow = new skillWindow(&activeCharacter->sk,
                                           gui, activeCharacter->getLevel());
             }
          }         
@@ -1578,8 +1572,7 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
    /* Verify Character Window */
    if( (charInfoWindow->isOpen()) || (charInfoWindow->hasChildrenWindows()) )
    {
-      charInfoWindow->treat(object, eventInfo, skillsList,
-                            proj, modl, viewPort);
+      charInfoWindow->treat(object, eventInfo, proj, modl, viewPort);
    }
 
    /* Verify ShortCutsWindow */

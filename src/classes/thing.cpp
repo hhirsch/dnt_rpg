@@ -83,9 +83,21 @@ int thing::getThingType()
  ******************************************************/
 int thing::skillBonus(skill* curSkill)
 {
-   int att;
-   att = attBonus(curSkill->baseAttribute);
-   return(att + curSkill->points);
+   int att=0;
+
+   if(curSkill)
+   {
+      /* define the attribute bonus, if exists */
+      if(curSkill->definition)
+      {
+         att = attBonus(curSkill->definition->baseAttribute);
+      }
+
+      return(att + curSkill->points);
+   }
+
+   cerr << "Warning: Tried to define bonus of undefined skill! " << endl;
+   return(0);
 }
 
 /******************************************************
@@ -96,9 +108,12 @@ int thing::attBonus(skill* curAttribute)
    return((int)floor((curAttribute->points-10) / 2.0));
 }
 
+/******************************************************
+ *                     attBonus                       *
+ ******************************************************/
 int thing::attBonus(int curAttribute)
 {
-   return(attBonus(&sk.m_skills[curAttribute]));
+   return(attBonus(sk.getSkillByInt(curAttribute)));
 }
 
 

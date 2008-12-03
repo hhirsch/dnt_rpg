@@ -17,10 +17,9 @@ class classWindow
 {
    public:
       /*! Constructor 
-       * \param sk -> character skills 
        * \param inter -> pointer to the GUI
        * \param retClass -> pointer to the choosed class */
-      classWindow(skills* sk, guiInterface* inter, classe** retClass);
+      classWindow(guiInterface* inter, classe** retClass);
 
       /*! Destructor */
       ~classWindow();
@@ -38,7 +37,6 @@ class classWindow
       int           curClass;         /**< Pointer to current Class */
       classe**      classesOrder;     /**< Alphabetical ordered classes */
       classe**      choosedClass;     /**< Pointer to choosed pointer class */
-      skills*       externalSkills;   /**< Pointer to actual Skill List */
       int           totalClasses;     /**< Total Avaible classes */
 
       button* buttonConfirm;

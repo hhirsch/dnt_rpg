@@ -424,7 +424,7 @@ class engine
       aligns* alignList;           /**< Alignments List */
       races* raceList;             /**< Races List */
       classes* classList;          /**< Classes List */
-      skills* skillsList;          /**< List of Skills */
+      skillsDefinitions skillsList;/**< List of Skills */
       weaponTypes* weaponsTypes;   /**< List of Types of Weapons */
 
       messageController* msgController;   /**< The message controller */

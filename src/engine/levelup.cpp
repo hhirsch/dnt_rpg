@@ -17,10 +17,9 @@
 /***********************************************************************
  *                            Constructor                              *
  ***********************************************************************/
-levelUp::levelUp(character* c, skills* sk)
+levelUp::levelUp(character* c)
 {
    current = c;
-   skillsList = sk;
 }
 
 /***********************************************************************
@@ -62,7 +61,7 @@ void levelUp::doLevelUp(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
    SDL_FreeSurface(img);
 
    /* Open the class window */
-   clWindow = new classWindow(&current->sk, gui, &selClass);
+   clWindow = new classWindow(gui, &selClass);
    state = LEVEL_UP_CLASS_WINDOW;
 
    /* Run, until canceled or finished */
@@ -114,8 +113,7 @@ void levelUp::doLevelUp(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
                      int points = current->getOtherLevelSkillPoints(selClass);
                      current->sk.setAvaiblePoints(points + 
                                                 current->sk.getAvaiblePoints());
-                     skWindow = new skillWindow(skillsList, &current->sk,
-                                                gui, 
+                     skWindow = new skillWindow(&current->sk, gui, 
                                                 current->getLevel(selClass)+1);
                      state = LEVEL_UP_SKILL_WINDOW;
                   }
@@ -124,7 +122,7 @@ void levelUp::doLevelUp(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
                      /* Can't, so must alert user and keep at the 
                       * class window */                     
                      warning warn;
-                     clWindow = new classWindow(&current->sk, gui, &selClass);
+                     clWindow = new classWindow(gui, &selClass);
                      state = LEVEL_UP_CLASS_WINDOW;
                      warn.show(gettext("Warning"), 
                                gettext("You can't multiclass more!"), gui);
@@ -159,7 +157,7 @@ void levelUp::doLevelUp(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
                   /* Must go back to the class window */
                   delete(skWindow);
                   state = LEVEL_UP_CLASS_WINDOW;
-                  clWindow = new classWindow(&current->sk, gui, &selClass);
+                  clWindow = new classWindow(gui, &selClass);
                }
             }
             break;

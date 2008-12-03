@@ -13,117 +13,16 @@ using namespace std;
 #include "../etc/dirs.h"
 #include "../etc/defparser.h"
 
-/*************************************************************
- *                      Constructor                          *
- *************************************************************/
-#if 0
-skills::skills(string dir, string arq)
-{
-   dirs dirInfo;
-   FILE* file;
-   string arqDescricao;
-   string arqImagem;
-   char buffer[1024];
-   char buf2[128];
-   char buf3[128];
-   char buf4[128];
-   int num;
-   if(!(file=fopen(arq.c_str(),"r")))
-   {
-       cerr << "Error while opening skills list: " << arq << endl;
-       return;
-   }
-
-   fgets(buffer, sizeof(buffer), file);
-   sscanf(buffer, "%d", &totalSkills);
-
-   if(totalSkills > 0)
-   {
-      m_skills = new skill[totalSkills];
-   }
-   else
-   {
-      m_skills = NULL;
-   }
-   
-   int aux;
-   for(aux = 0; aux < totalSkills; aux++)
-   {
-      //fscanf(file,"%d %s",&num,&buffer[0]);
-      fgets(buffer, sizeof(buffer), file);
-      sscanf(buffer,"%d %s %s %s",&num, &buf2[0],&buf3[0], &buf4[0]);
-      arqImagem = buf3;
-      arqDescricao = buf2;
-      arqDescricao = dir+arqDescricao;
-      m_skills[aux].idString = buf4;
-
-      /* Load the skill */
-      FILE* desc;
-      if(! (desc = fopen(arqDescricao.c_str(), "r")))
-      {
-         cerr << "Can't open skill file: " << arqDescricao << endl;
-         return;
-      }
-      fgets(buffer, sizeof(buffer), desc);
-      m_skills[aux].name = translateDataString(buffer);
-      fgets(buffer, sizeof(buffer), desc);
-      m_skills[aux].description = translateDataString(buffer);
-      fscanf(desc,"%d",&m_skills[aux].baseAttribute);
-      m_skills[aux].points = 0;
-      m_skills[aux].mod = 2;
-      m_skills[aux].prevPoints = 0;
-      m_skills[aux].image = IMG_Load(dirInfo.getRealFile(arqImagem).c_str());
-      if(!m_skills[aux].image)
-      {
-         cout << "Can't open skill image: " << dirInfo.getRealFile(arqImagem)
-              << endl;
-      }
-      fclose(desc);
-   }
-
-   fclose(file);
-
-   avaiblePoints = 0;
-}
-#endif
+///////////////////////////////////////////////////////////////////////////
+//                                                                       //
+//                         SkillsDefinitions                             //
+//                                                                       //
+///////////////////////////////////////////////////////////////////////////
 
 /*************************************************************
- *                      Constructor                          *
+ *                          Init                             *
  *************************************************************/
-/* Load from previous skill, but don't load images and descriptions */
-skills::skills(skills* sk)
-{
-   int aux;
-
-   totalSkills = sk->totalSkills;
-   if(totalSkills > 0)
-   {
-      m_skills = new skill[totalSkills];
-   }
-   else
-   {
-      m_skills = NULL;
-   }
-
-   for(aux = 0; aux < totalSkills; aux++)
-   {
-      m_skills[aux].name = sk->m_skills[aux].name;
-      m_skills[aux].description = "";//sk->m_skills[aux].descricao;
-      m_skills[aux].points = 0;
-      m_skills[aux].prevPoints = 0;
-      m_skills[aux].mod = 2;
-      m_skills[aux].baseAttribute = sk->m_skills[aux].baseAttribute;
-      m_skills[aux].image = NULL;
-      m_skills[aux].idString = sk->m_skills[aux].idString;
-   }
-
-   avaiblePoints = 0;
-}
-
-/*************************************************************
- *                       Destructor                          *
- *************************************************************/
-skills::skills()
+void skillsDefinitions::init()
 {
    dirs dir;
    char buffer[1024];
@@ -155,11 +54,11 @@ skills::skills()
    /* Create the skills space */
    if(totalSkills > 0)
    {
-      m_skills = new skill[totalSkills];
+      skillsDefs = new skillDefinition[totalSkills];
    }
    else
    {
-      m_skills = NULL;
+      skillsDefs = NULL;
    }
 
    /* Now define and load all skills */ 
@@ -169,7 +68,7 @@ skills::skills()
       sscanf(value.c_str(),"%d %s %s", &num, &buf[0], &buf2[0]);
 
       /* Define the skill */
-      m_skills[num].idString = key;
+      skillsDefs[num].idString = key;
       descFile = dir.getRealFile("skills/") + buf;
       imgFile = buf2;
    
@@ -180,22 +79,121 @@ skills::skills()
          return;
       }
       fgets(buffer, sizeof(buffer), desc);
-      m_skills[num].name = translateDataString(buffer);
+      skillsDefs[num].name = translateDataString(buffer);
       fgets(buffer, sizeof(buffer), desc);
-      m_skills[num].description = translateDataString(buffer);
-      fscanf(desc,"%d",&m_skills[num].baseAttribute);
-      m_skills[num].points = 0;
-      m_skills[num].mod = 2;
-      m_skills[num].prevPoints = 0;
-      m_skills[num].image = IMG_Load(dir.getRealFile(imgFile).c_str());
-      if(!m_skills[num].image)
+      skillsDefs[num].description = translateDataString(buffer);
+      fscanf(desc,"%d",&skillsDefs[num].baseAttribute);
+      skillsDefs[num].image = IMG_Load(dir.getRealFile(imgFile).c_str());
+      if(!skillsDefs[num].image)
       {
          cout << "Can't open skill image: " << imgFile << endl;
       }
       fclose(desc);
    }
+}
 
+/*************************************************************
+ *                         Finish                            *
+ *************************************************************/
+void skillsDefinitions::finish()
+{
+  int aux;
+  if(skillsDefs)
+  {
+     for(aux = 0; aux < totalSkills; aux++)
+     {
+        if(skillsDefs[aux].image)
+        {
+           SDL_FreeSurface(skillsDefs[aux].image);
+        }
+     }
+     delete [] skillsDefs;
+  }
+}
+
+/*************************************************************
+ *                      getTotalSkills                       *
+ *************************************************************/
+int skillsDefinitions::getTotalSkills()
+{
+   return(totalSkills);
+}
+
+/*************************************************************
+ *                  getSkillDefinition                       *
+ *************************************************************/
+skillDefinition* skillsDefinitions::getSkillDefinition(string idString)
+{
+   int i;
+   for(i=0; i < totalSkills; i++)
+   {
+      if(skillsDefs[i].idString == idString)
+      {
+         return(&skillsDefs[i]);
+      }
+   }
+
+   return(NULL);
+}
+
+/*************************************************************
+ *                  getSkillDefinition                       *
+ *************************************************************/
+skillDefinition* skillsDefinitions::getSkillDefinition(int i)
+{
+   if( (i >= 0) && (i < totalSkills) )
+   {
+      return(&skillsDefs[i]);
+   }
+
+   return(NULL);
+}
+
+/*************************************************************
+ *                      static members                       *
+ *************************************************************/
+skillDefinition* skillsDefinitions::skillsDefs = NULL;
+int skillsDefinitions::totalSkills = 0;
+
+
+///////////////////////////////////////////////////////////////////////////
+//                                                                       //
+//                                Skills                                 //
+//                                                                       //
+///////////////////////////////////////////////////////////////////////////
+
+/*************************************************************
+ *                      Constructor                          *
+ *************************************************************/
+skills::skills()
+{
+   int i;
+   skillsDefinitions skDef;
+
+   /* Set Values */
    avaiblePoints = 0;
+   totalSkills = skDef.getTotalSkills();
+
+   /* Define Skills */
+   if(totalSkills > 0)
+   {
+      /* Alloc Vector */
+      skillsVector = new skill[totalSkills];
+
+      /* Define initial values and definitions */
+      for(i = 0; i < totalSkills; i++)
+      {
+         skillsVector[i].points = 0;
+         skillsVector[i].prevPoints = 0;
+         skillsVector[i].mod = 2;
+         skillsVector[i].definition = skDef.getSkillDefinition(i);
+      }
+   }
+   else
+   {
+      skillsVector = NULL;
+      totalSkills = 0;
+   }
 }
 
 /*************************************************************
@@ -203,18 +201,10 @@ skills::skills()
  *************************************************************/
 skills::~skills()
 {
-  int aux;
-  if(m_skills)
-  {
-     for(aux = 0; aux < totalSkills;aux++)
-     {
-        if( m_skills[aux].image)
-        {
-           SDL_FreeSurface( m_skills[aux].image );
-        }
-     }
-     delete [] m_skills;
-  }
+   if(skillsVector != NULL)
+   {
+      delete[] skillsVector;
+   }
 }
 
 
@@ -226,10 +216,26 @@ skill* skills::getSkillByString(string idString)
    int i;
    for(i=0; i<totalSkills; i++)
    {
-      if(idString == m_skills[i].idString)
+      if(skillsVector[i].definition != NULL)
       {
-         return(&m_skills[i]);
+         if(idString == skillsVector[i].definition->idString)
+         {
+            return(&skillsVector[i]);
+         }
       }
+   }
+
+   return(NULL);
+}
+
+/*************************************************************
+ *                    getSkillByString                       *
+ *************************************************************/
+skill* skills::getSkillByInt(int i)
+{
+   if( (i >= 0) && (i < totalSkills) )
+   {
+      return(&skillsVector[i]);
    }
 
    return(NULL);
@@ -243,9 +249,12 @@ int skills::getSkillIntByString(string idString)
    int i;
    for(i=0; i<totalSkills; i++)
    {
-      if(idString == m_skills[i].idString)
+      if(skillsVector[i].definition != NULL)
       {
-         return(i);
+         if(idString == skillsVector[i].definition->idString)
+         {
+            return(i);
+         }
       }
    }
 
@@ -309,9 +318,9 @@ void skills::clear()
    /* Clear only skills */
    for(aux = ATT_SKILL_FIRST; aux < totalSkills; aux++)
    {
-      m_skills[aux].points = 0;
-      m_skills[aux].prevPoints = 0;
-      m_skills[aux].mod = 2;
+      skillsVector[aux].points = 0;
+      skillsVector[aux].prevPoints = 0;
+      skillsVector[aux].mod = 2;
    }
 }
 

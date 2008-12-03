@@ -9,9 +9,8 @@ class levelUp
 {
    public:
       /*! Constructor
-       * \param c -> pointer to character to level up
-       * \param sk -> list of skill descriptions */
-      levelUp(character* c, skills* sk);
+       * \param c -> pointer to character to level up */
+      levelUp(character* c);
       /*! Destructor */
       ~levelUp();
 
@@ -21,7 +20,6 @@ class levelUp
    protected:
       character* current;
       int state;
-      skills* skillsList;
 };
 
 #endif

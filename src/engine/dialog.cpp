@@ -205,7 +205,7 @@ string talkTest::getTestName(character* pc)
       skill* sk = pc->sk.getSkillByString(test);
       if(sk)
       {
-         res = "(" + sk->name + ") ";
+         res = "(" + sk->definition->name + ") ";
       }
    }
 
@@ -247,7 +247,7 @@ bool talkTest::doTest(character* pc, thing* owner)
       char buffer[512];
       briefing brief;
       sprintf(&buffer[0], "%s: %d x %d: %s.",
-              sk->name.c_str(), rollValue, value, 
+              sk->definition->name.c_str(), rollValue, value, 
               res?gettext("Success"):gettext("Failure"));
       if(res)
       {

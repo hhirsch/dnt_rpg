@@ -13,23 +13,64 @@ using namespace std;
 
 #include "../etc/dirs.h"
 
+
+
+
 /*! The individual skill definition.
  */
+class skillDefinition
+{
+   public:
+      string name;          /**< The Skill's Name */
+      string description;   /**< The Skill's Description */
+      SDL_Surface* image;   /**< The Skill's Image */
+      string idString;      /**< String Identificator of the Skill */
+      int baseAttribute;    /**< Base Attibute */
+};
+
+/*! The individual skill */
 class skill
 {
    public:
       int points;             /**< Total skill points */
       int prevPoints;         /**< Previous points, when adding and cancel */
       int mod;                /**< Needed points to add +1 on points */
-      string name;            /**< Skill Name */
-      string description;     /**< Skill Description */
-      string idString;        /**< String Identificator of the Skill */
-      int baseAttribute;      /**< Base Attibute */
-      SDL_Surface* image;     /**< Skill Image */
+      skillDefinition* definition; /**< Pointer to definition of this skill */
 };
 
-/*! The group skill definitions. All game skills are here.
-  */
+/*! The group skill definitions. All game skills are here. */
+class skillsDefinitions
+{
+   public:
+      /*! Init the the skills Definitions, loading them all from the
+       * definition file skills/skills.lst */
+      void init();
+
+      /*! Finish the use of the skills definitions,
+       * freeing the memory of them all */
+      void finish();
+
+      /*! Get total skills */
+      int getTotalSkills();
+
+      /*! Return the wanted skill definition
+       * \param idString -> String Identifier of the skill 
+       * \return -> pointer to the skillDefinition */
+      skillDefinition* getSkillDefinition(string idString);
+
+      /*! Get an specific skill definition
+       * \param i -> index of the skill
+       * \return -> pointer to the skill description or NULL */
+      skillDefinition* getSkillDefinition(int i);
+
+   protected:
+      static skillDefinition* skillsDefs;
+      static int totalSkills;
+  
+};
+
+/*! The skills of a character or thing. It has the pointers to the
+ * definitions needed. */
 class skills
 {
    public:
@@ -53,6 +94,11 @@ class skills
        * \param idString -> String Identifier of the skill 
        * \return -> pointer to the skill */
       skill* getSkillByString(string idString);
+      
+      /*! Return the wanted skill
+       * \param i -> integer representing the skill 
+       * \return -> pointer to the skill */
+      skill* getSkillByInt(int i);
 
       /*! Return the wanted skill number
        * \param idString -> String identifier of the skill 
@@ -86,10 +132,9 @@ class skills
        * \return -> number of skills */
       int getTotalSkills();
 
-
-     skill* m_skills; /**< the internal skills */
-
    private:
+     skill* skillsVector;     /**< the internal skills */
+
      int totalSkills;         /**< Total Number of Skills on List */
      int avaiblePoints;       /**< Total Avaible Points on List */
 };

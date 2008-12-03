@@ -760,12 +760,14 @@ bool character::save(string saveFile)
    file << "walk_interval = " << (walk_interval / WALK_UPDATE) << endl;
 
    /* Now, put all not 0 skills */
+   skill* ski;
    for(i = 0; i < sk.getTotalSkills(); i++)
    {
-      if(sk.m_skills[i].points != 0)
+      ski = sk.getSkillByInt(i);
+      if( (ski != NULL) && (ski->definition != NULL) && (ski->points != 0))
       {
-         file << sk.m_skills[i].idString << " = " 
-              << sk.m_skills[i].points << endl;
+         file << ski->definition->idString << " = " 
+              << ski->points << endl;
       }
    }
 

@@ -141,35 +141,36 @@ void charWindow::open(character* pers)
    intWindow->getObjectsList()->insertTextBox(65,76,335,116,2,"");
 
    /* Character Attributes */
+   skill* sk;
       /* Strength */
-   sprintf(buf,"%s: %.2d (%d)", gettext("Strength"), 
-                              pers->sk.m_skills[ATT_STRENGTH].points,
-                 (int)floor((pers->sk.m_skills[ATT_STRENGTH].points-10) / 2.0));
+   sk = pers->sk.getSkillByInt(ATT_STRENGTH);
+   sprintf(buf,"%s: %.2d (%d)", gettext("Strength"), sk->points,
+           (int)floor((sk->points-10) / 2.0));
    intWindow->getObjectsList()->insertTextBox(8,117,125,127,0,buf);
       /* Dexterity */
-   sprintf(buf,"%s: %.2d (%d)", gettext("Dexterity"), 
-                              pers->sk.m_skills[ATT_DEXTERITY].points,
-                (int)floor((pers->sk.m_skills[ATT_DEXTERITY].points-10) / 2.0));
+   sk = pers->sk.getSkillByInt(ATT_DEXTERITY);
+   sprintf(buf,"%s: %.2d (%d)", gettext("Dexterity"), sk->points, 
+           (int)floor((sk->points-10) / 2.0));
    intWindow->getObjectsList()->insertTextBox(8,128,125,138,0,buf);
       /* Constitution */
-   sprintf(buf,"%s: %.2d (%d)", gettext("Constitution"), 
-                              pers->sk.m_skills[ATT_CONSTITUTION].points,
-             (int)floor((pers->sk.m_skills[ATT_CONSTITUTION].points-10) / 2.0));
+   sk = pers->sk.getSkillByInt(ATT_CONSTITUTION);
+   sprintf(buf,"%s: %.2d (%d)", gettext("Constitution"), sk->points,
+           (int)floor((sk->points-10) / 2.0));
    intWindow->getObjectsList()->insertTextBox(8,139,125,149,0,buf);
       /* Intelligence */
-   sprintf(buf,"%s: %.2d (%d)", gettext("Intelligence"), 
-                              pers->sk.m_skills[ATT_INTELLIGENCE].points,
-             (int)floor((pers->sk.m_skills[ATT_INTELLIGENCE].points-10) / 2.0));
+   sk = pers->sk.getSkillByInt(ATT_INTELLIGENCE);
+   sprintf(buf,"%s: %.2d (%d)", gettext("Intelligence"), sk->points,
+           (int)floor((sk->points-10) / 2.0));
    intWindow->getObjectsList()->insertTextBox(8,150,125,160,0,buf);
       /* Wisdow */
-   sprintf(buf,"%s: %.2d (%d)", gettext("Wisdom"), 
-                              pers->sk.m_skills[ATT_WISDOM].points,
-                  (int)floor((pers->sk.m_skills[ATT_WISDOM].points-10) / 2.0));
+   sk = pers->sk.getSkillByInt(ATT_WISDOM);
+   sprintf(buf,"%s: %.2d (%d)", gettext("Wisdom"), sk->points,
+           (int)floor((sk->points-10) / 2.0));
    intWindow->getObjectsList()->insertTextBox(8,161,125,171,0,buf);
       /* Charism */
-   sprintf(buf,"%s: %.2d (%d)", gettext("Charism"), 
-                              pers->sk.m_skills[ATT_CHARISM].points,
-                  (int)floor((pers->sk.m_skills[ATT_CHARISM].points-10) / 2.0));
+   sk = pers->sk.getSkillByInt(ATT_CHARISM);
+   sprintf(buf,"%s: %.2d (%d)", gettext("Charisma"), sk->points,
+           (int)floor((sk->points-10) / 2.0));
    intWindow->getObjectsList()->insertTextBox(8,172,125,182,0,buf);
       /* Contorn */
    intWindow->getObjectsList()->insertTextBox(5,117,125,191,2,"");
@@ -276,7 +277,7 @@ bool charWindow::hasChildrenWindows()
 /********************************************************************
  *                              treat                               *
  ********************************************************************/
-int charWindow::treat(guiObject* object, int eventInfo, skills* skillsList,
+int charWindow::treat(guiObject* object, int eventInfo,
                       GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    if(!isOpen())
@@ -321,7 +322,7 @@ int charWindow::treat(guiObject* object, int eventInfo, skills* skillsList,
       {
          if(skWindow == NULL)
          {
-            skWindow = new skillWindow(skillsList, &current->sk,
+            skWindow = new skillWindow(&current->sk,
                                        inter, current->getLevel(), true );
          }
       }
@@ -329,7 +330,7 @@ int charWindow::treat(guiObject* object, int eventInfo, skills* skillsList,
       else if(object == (guiObject*)levelUpButton)
       {
          /* Call Level Up for Character */
-         levelUp* lvlUp = new levelUp(current, skillsList);
+         levelUp* lvlUp = new levelUp(current);
          lvlUp->doLevelUp(proj,modl,viewPort);
          delete(lvlUp);
 

@@ -1,6 +1,9 @@
 #include "savefile.h"
+
 #include "../etc/userinfo.h"
 #include "../etc/defparser.h"
+
+#include "../classes/mission.h"
 
 #include "dccnit.h"
 
@@ -85,6 +88,7 @@ bool saveFile::save(string saveTitle, string saveFile, void* curEngine)
    engine* eng = (engine*)curEngine;
 
    modState mState;
+   missionsController missions;
 
    /* Verify if we got an engine */
    if(eng == NULL)
@@ -158,6 +162,9 @@ bool saveFile::save(string saveTitle, string saveFile, void* curEngine)
    /* Save the ModState File */
    mState.saveState(modStateFile);
    
+   /* Save the Missions */
+   missions.save(missionsFile);
+
    //TODO Call save to modState, current missions, screenshot
 
 
@@ -171,6 +178,7 @@ bool saveFile::load(void* curEngine)
 {
    engine* eng = (engine*)curEngine;
    modState modif;
+   missionsController missions;
 
    /* Verify if we got a valid engine */
    if(eng == NULL)
@@ -223,7 +231,7 @@ bool saveFile::load(void* curEngine)
    if(!missionsFile.empty())
    {
       /* Load the missions! */
-      // TODO
+      missions.load(missionsFile);
    }
 
    return(true);

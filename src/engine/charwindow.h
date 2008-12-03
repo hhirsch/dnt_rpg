@@ -28,7 +28,7 @@ class charWindow
        * \param object -> last GUI object
        * \param eventInfo -> last GUI Event
        * \return != 0 if event is gathered */
-      int treat(guiObject* object, int eventInfo, skills* skillsList,
+      int treat(guiObject* object, int eventInfo,
                 GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
 
       /*! Verify if the window is openned

@@ -14,7 +14,7 @@ using namespace std;
 /**************************************************************
  *                      Constructor                           *
  **************************************************************/
-attWindow::attWindow(skills* sk, skills* savSkill, guiInterface* inter,
+attWindow::attWindow(skills* savSkill, guiInterface* inter,
                      int modifiers[6],bool usePreviousValues)
 {
    dirs dir;
@@ -25,7 +25,6 @@ attWindow::attWindow(skills* sk, skills* savSkill, guiInterface* inter,
    string saux;
    char tmp[16];
 
-   externalSkill = sk;
    saveSkill = savSkill;
 
    /* clear internal informations */
@@ -241,13 +240,21 @@ attWindow::attWindow(skills* sk, skills* savSkill, guiInterface* inter,
  **************************************************************/
 void attWindow::setDescription(int sk)
 {
-   textDesc->setText("");
-   textDesc->addText(externalSkill->m_skills[sk].name + "||", 
-                     DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
-                     DNT_FONT_STYLE_UNDERLINE,
-                     86, 161, 32);
-   textDesc->addText(externalSkill->m_skills[sk].description);
-   textDesc->setFirstLine(0);
+   /* Get the definition */
+   skillsDefinitions defSkills;
+   skillDefinition* skDef = defSkills.getSkillDefinition(sk); 
+
+   /* Set it to the window */
+   if(skDef != NULL)
+   {
+      textDesc->setText("");
+      textDesc->addText(skDef->name + "||", 
+            DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
+            DNT_FONT_STYLE_UNDERLINE,
+            86, 161, 32);
+      textDesc->addText(skDef->description);
+      textDesc->setFirstLine(0);
+   }
 }
 
 /**************************************************************
@@ -285,10 +292,16 @@ int attWindow::rollDices()
 void attWindow::assignPreviousToDices()
 {
    int i;
+   skill* sk;
+
    for(i = 0; i < 6; i++)
    {
-      points[i] = saveSkill->m_skills[i+1].points;
-      used[i] = true;
+      sk = saveSkill->getSkillByInt(i+1);
+      if(sk != NULL)
+      {
+         points[i] = sk->points;
+         used[i] = true;
+      }
    }
 }
 
@@ -299,12 +312,19 @@ void attWindow::assignPreviousValues()
 {
    int i;
    char tmp[10];
+   skill* sk;
+
    for(i = 0; i < 6; i++)
    {
-      sprintf(tmp,"%.2d", saveSkill->m_skills[i+1].points);
-      attPoints[i]->setText(tmp);
-      attPointsIndex[i] = i;
-      assignAttMod(i);
+      sk = saveSkill->getSkillByInt(i+1);
+
+      if(sk != NULL)
+      {
+         sprintf(tmp,"%.2d", sk->points);
+         attPoints[i]->setText(tmp);
+         attPointsIndex[i] = i;
+         assignAttMod(i);
+      }
    }
 }
 
@@ -450,19 +470,23 @@ int attWindow::assignAttMod(int att)
    char tmpTotal[10];
    int attBonus = 0;
    string total;
+   skill* sk = saveSkill->getSkillByInt(att+1);
 
-   /* Get the assign value */
-   saveSkill->m_skills[att+1].points = points[attPointsIndex[att]];
+   if(sk != NULL)
+   {
+      /* Get the assign value */
+      sk->points = points[attPointsIndex[att]];
 
-   /* Apply the modifiers */
-   saveSkill->m_skills[att+1].points += rcModifiers[att];
+      /* Apply the modifiers */
+      sk->points += rcModifiers[att];
 
-   /* Get the bonus */
-   attBonus = (int)floor((saveSkill->m_skills[att+1].points-10) / 2.0);
+      /* Get the bonus */
+      attBonus = (int)floor((sk->points-10) / 2.0);
 
-   sprintf(tmpTotal,"%.2d",saveSkill->m_skills[att+1].points);
-   total += tmpTotal;
-   sprintf(tmpMod,"%+.2d",attBonus);
+      sprintf(tmpTotal,"%.2d",sk->points);
+      total += tmpTotal;
+      sprintf(tmpMod,"%+.2d",attBonus);
+   }
 
    /* Define Color */
    if(attBonus > 0)

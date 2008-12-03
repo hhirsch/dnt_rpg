@@ -14,6 +14,11 @@
 #define MISSION_TOKEN_COMPLETED_MISSION  "completedMission"
 #define MISSION_TOKEN_COMPLETED          "completed"
 
+#define MISSION_TOKEN_ACTUAL_LINE        "actualLine"
+#define MISSION_TOKEN_LAST_POS           "lastPos"
+#define MISSION_TOKEN_CONTEXT            "context"
+#define MISSION_TOKEN_SYMBOLS_TABLE      "symbolsTable"
+#define MISSION_TOKEN_STACK              "stack"
 
 #define MISSION_CONTROLLER_TOTAL_TREAT  5
 
@@ -111,6 +116,9 @@ void mission::loadAsCompleted(defParser* def)
 {
    string key="", value="";
 
+    /* Define type */
+   type = IASCRIPT_TYPE_MISSION;
+
    /* parse until file end or mission definition's end */
    while(def->getNextTuple(key, value))
    {
@@ -152,7 +160,25 @@ void mission::saveAsCurrent(ofstream* file)
    }
 
    /* Save Script Related Things */
-   //TODO
+
+   /* Actual Line */
+   *file << MISSION_TOKEN_ACTUAL_LINE << " = " << actualLine << endl;
+
+   /* Last Pos */
+   *file << MISSION_TOKEN_LAST_POS << " = " << lastPos << endl;
+
+   /* Current Context */
+   *file << MISSION_TOKEN_CONTEXT << " = " << context << endl;
+
+   /* the symbols table */
+   *file << MISSION_TOKEN_SYMBOLS_TABLE << " = BEGIN " << endl;
+   symbols->save(file);
+
+   /* the stack */
+   *file << MISSION_TOKEN_STACK << " = BEGIN " << endl;
+   jumpStack->save(file);
+
+   //TODO: FIXME: Pending Action!
 
    /* Mark End */
    *file << MISSION_TOKEN_END_MISSION << " = " << fileName << endl;
@@ -163,7 +189,94 @@ void mission::saveAsCurrent(ofstream* file)
  ************************************************************/
 void mission::loadAsCurrent(defParser* def)
 {
-   //TODO
+   string key="", value="";
+   int flagCount = 0;
+   bool done = false;
+
+   /* Define type */
+   type = IASCRIPT_TYPE_MISSION;
+
+   /* Load Things from the parser */
+   while(!done)
+   {
+      done |= !def->getNextTuple(key, value);
+
+      if(!done)
+      {
+         /* Mission Declaration Ended */
+         if(key == MISSION_TOKEN_END_MISSION)
+         {
+            /* So, no more parser here! */
+            done = true;
+         }
+         /* Xp Value */
+         else if(key == MISSION_TOKEN_XP_VALUE)
+         {
+            sscanf(value.c_str(),"%d",&xpValue);
+         }
+         /* Temporary Flags */
+         else if(key == MISSION_TOKEN_TEMP_FLAG)
+         {
+            if(flagCount < MISSION_TEMP_FLAGS)
+            {
+               sscanf(value.c_str(),"%d", &tempFlag[flagCount]);
+               flagCount++;
+            }
+            else
+            {
+               cerr << "Warning: Temporary Flags Overflow for: " << fileName 
+                    << endl;
+            }
+         }
+         /* Actual Line */
+         else if(key == MISSION_TOKEN_ACTUAL_LINE)
+         {
+            sscanf(value.c_str(),"%d",&actualLine);
+         }
+         /* Last Pos */
+         else if(key == MISSION_TOKEN_LAST_POS)
+         {
+            int lp=0;
+            sscanf(value.c_str(),"%d",&lp);
+            lastPos = lp;
+         }
+         /* Context */
+         else if(key == MISSION_TOKEN_CONTEXT)
+         {
+            context = value;
+         }
+         /* Symbols Table */
+         else if(key == MISSION_TOKEN_SYMBOLS_TABLE)
+         {
+            symbols->load(def, actualEngine);
+         }
+         /* Stack */
+         else if(key == MISSION_TOKEN_STACK)
+         {
+            jumpStack->load(def);
+         }
+         /* Unknow! */
+         else
+         {
+            cerr << "Error: Unknow Token: '" << key << "' loading mission save!"
+                 << endl;
+         }
+      }
+   }
+
+   /* Now read the script file to the actual line */
+   int i;
+   string strBuffer;
+   streampos pos;
+   for(i = 0; i < actualLine; i++)
+   {
+      pos = file.tellg();
+      getline(file, strBuffer);
+   }
+
+   cout << "Pos: " << pos << "  lastPos: " << lastPos << endl;
+   cout << "Current was: " << context << endl;
+   cout << "Buffer is: " << strBuffer << endl;
 }
 
 

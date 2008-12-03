@@ -17,7 +17,7 @@ static int cmpClassFunction(const void *p1,  const void *p2)
 /********************************************************************
  *                           Constructor                            *
  ********************************************************************/
-classWindow::classWindow(skills* sk, guiInterface* inter, classe** retClass)
+classWindow::classWindow(guiInterface* inter, classe** retClass)
 {
    classes cls;
    dntFont fnt;
@@ -25,8 +25,6 @@ classWindow::classWindow(skills* sk, guiInterface* inter, classe** retClass)
    int centerX = SCREEN_X / 2;
    int i;
 
-   externalSkills = sk;
-   
    choosedClass = retClass;
    curClass = -1;
 
@@ -124,7 +122,10 @@ void classWindow::setCharacteristics()
    int i;
    char tmp[1024];
    char c;
-   skill* skTmp;
+   skillDefinition* skTmp;
+   skillsDefinitions skDefs;
+
+
    sprintf(tmp,": d%d||",classesOrder[curClass]->lifeDiceID);
 
 
@@ -147,16 +148,18 @@ void classWindow::setCharacteristics()
    {
       c = '+';
    }
-   skTmp = externalSkills->getSkillByString(classesOrder[curClass]->firstLevelSP.attID);
+   skTmp =skDefs.getSkillDefinition(classesOrder[curClass]->firstLevelSP.attID);
    if(skTmp)
    {
-      sprintf(tmp,": ( %d %c %s) x %d|",classesOrder[curClass]->firstLevelSP.sum, 
+      sprintf(tmp,": ( %d %c %s) x %d|",
+              classesOrder[curClass]->firstLevelSP.sum, 
               c, skTmp->name.c_str(), 
               classesOrder[curClass]->firstLevelSP.mult);
    }
    else
    {
-      sprintf(tmp,": ( %d %c %s) x %d|",classesOrder[curClass]->firstLevelSP.sum, 
+      sprintf(tmp,": ( %d %c %s) x %d|",
+              classesOrder[curClass]->firstLevelSP.sum, 
               c, classesOrder[curClass]->firstLevelSP.attID.c_str(), 
               classesOrder[curClass]->firstLevelSP.mult);
    }
@@ -173,7 +176,7 @@ void classWindow::setCharacteristics()
    {
       c = '+';
    }
-   skTmp = externalSkills->getSkillByString(classesOrder[curClass]->otherLevelsSP.attID);
+   skTmp=skDefs.getSkillDefinition(classesOrder[curClass]->otherLevelsSP.attID);
    if(skTmp)
    {
       sprintf(tmp,": ( %d %c %s) x %d||",
@@ -236,7 +239,7 @@ void classWindow::setCharacteristics()
                        86, 161, 32);
    for(i=0; i<classesOrder[curClass]->totalSkills; i++)
    {
-      skTmp = externalSkills->getSkillByString(classesOrder[curClass]->classSkills[i]);
+      skTmp = skDefs.getSkillDefinition(classesOrder[curClass]->classSkills[i]);
       if(skTmp != NULL)
       {
          textCharac->addText(skTmp->name + "|");

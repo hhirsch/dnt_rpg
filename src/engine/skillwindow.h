@@ -22,12 +22,11 @@ class skillWindow
 {
    public:
       /*! Skill Window constructor 
-       * \param sk -> skills list (with images and description) 
        * \param savSkill -> skills list to save/modify 
        * \param inter -> interface used
        * \actualLevel -> current character level
        * \readOnlyMode -> if the windows is read only, or not */
-      skillWindow(skills* sk, skills* savSkill, guiInterface* inter,
+      skillWindow(skills* savSkill, guiInterface* inter,
                   int actualLevel, bool readOnlyMode=false);
 
       /*! Destructor */
@@ -58,7 +57,6 @@ class skillWindow
       window*      intWindow;     /**< Pointer to the internal window */
       skills*      saveSkill;     /**< Pointer to the edited skill list */
       skill**      skillsOrder;   /**< Sorted skills */
-      skill**      skillsDesc;    /**< Skill Descriptions Sorted */
       int          totalSkills;   /**< Total avaible skills */
       int          avaiblePoints; /**< Avaible points to distribute */
       int          curSkill;      /**< Actual Skill */

@@ -15,7 +15,7 @@ static int cmpRaceFunction(const void *p1,  const void *p2)
 /********************************************************************
  *                           Constructor                            *
  ********************************************************************/
-raceWindow::raceWindow(skills* sk, guiInterface* inter, race** retRace)
+raceWindow::raceWindow(guiInterface* inter, race** retRace)
 {
    races rc;
    dntFont fnt;
@@ -23,7 +23,6 @@ raceWindow::raceWindow(skills* sk, guiInterface* inter, race** retRace)
    int centerY = SCREEN_Y / 2;
    int centerX = SCREEN_X / 2;
 
-   externalSkills = sk;
    choosedRace = retRace;
    curRace = -1;
 
@@ -132,6 +131,9 @@ void raceWindow::setDescription()
 void raceWindow::setCharacteristics()
 {
    int i;
+   skillDefinition* skTmp;
+   skillsDefinitions skDefs;
+
    textCharac->setText("");
    textCharac->addText(string(gettext("Race Modifiers")) + "||",
                        DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
@@ -139,7 +141,8 @@ void raceWindow::setCharacteristics()
                        86, 161, 32);
    for(i=0; i<racesOrder[curRace]->totalModifiers; i++)
    {
-      textCharac->addText(racesOrder[curRace]->raceModifiers[i].description + "||");
+      textCharac->addText(racesOrder[curRace]->raceModifiers[i].description + 
+                          "||");
    }
 
    if(racesOrder[curRace]->totalModifiers == 0)
@@ -169,15 +172,13 @@ void raceWindow::setCharacteristics()
    }
 
    /* Race Skills */
-   skill* skTmp;
    textCharac->addText(string("|") + string(gettext("Race Skills")) + "||",
                        DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
                        DNT_FONT_STYLE_UNDERLINE,
                        86, 161, 32);
    for(i=0; i<racesOrder[curRace]->totalSkills; i++)
    {
-      skTmp = externalSkills->getSkillByString(racesOrder[curRace]->
-                                                                 raceSkills[i]);
+      skTmp = skDefs.getSkillDefinition(racesOrder[curRace]->raceSkills[i]);
       if(skTmp)
       {
          textCharac->addText(skTmp->name + "|");
