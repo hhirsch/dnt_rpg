@@ -249,7 +249,15 @@ bool defParser::load(string fileName, bool fullPath)
           pos = strBuffer.find_first_not_of(" \t", pos + 1);
 
           /* get the data */
-          strData = strBuffer.substr(pos, strBuffer.length() - pos);
+          if(pos != string::npos)
+          {
+             strData = strBuffer.substr(pos, strBuffer.length() - pos);
+          }
+          else
+          {
+             strData = "";
+          }
+
           /* Delete last character if it is an \n or #13.
            * This is an issue that happens mainly on windows.
            * Also, delete it while is an space */

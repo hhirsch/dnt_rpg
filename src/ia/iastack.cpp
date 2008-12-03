@@ -144,11 +144,14 @@ void iaStack::load(defParser* def)
    iaJumpPos* jmp = NULL;
    int pos=0;
 
+   cout << "loading stack" << endl;
+
    while(def->getNextTuple(key, value))
    {
       if(key == IA_STACK_TOKEN_END_STACK)
       {
          /* Done with the stack */
+         print();
          return;
       }
       else if(key == IA_STACK_TOKEN_BEGIN)
