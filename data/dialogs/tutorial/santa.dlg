@@ -130,7 +130,7 @@ end_dialog
 ############################################################
 dialog(7)
    npc_begin
-      text = gettext("I won't chat with you, heretic.")
+      text = gettext("I won't talk with you, heretic.")
    npc_end
    pc_begin
       option

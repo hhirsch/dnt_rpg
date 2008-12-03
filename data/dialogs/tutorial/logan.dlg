@@ -104,7 +104,7 @@ dialog(5)
          else_action = dialog_init(12)
          else_action = go_to_dialog(12)
       option
-         text = gettext("Never! Chrono took 3 years from me! Die!")
+         text = gettext("Never! Chrono took 3 years from me! I'll kill you!")
          action = init_fight()
    pc_end
 end_dialog

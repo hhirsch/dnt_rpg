@@ -1,4 +1,4 @@
-name = Santa
+name = gettext("Santa Claws")
 model = models/personagens/santa/model.cfg
 portrait = characters/portraits/santa.png
 battleScript = ia/script/fight/fight_animal.dsl

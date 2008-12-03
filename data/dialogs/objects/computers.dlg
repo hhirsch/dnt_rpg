@@ -36,7 +36,7 @@ dialog(1)
       # The PIRATE Windows Install
       option
          pre_test = align_not(FREE_SOFTWARE)
-         text = gettext("Install Pirate Windows")
+         text = gettext("Install Pirate Ruindows")
          post_test = roll(OPERATE_ELETRONIC_OBJECTS, 5)
          if_action = change_object_state(5)
          if_action = receive_xp(15)
@@ -46,7 +46,7 @@ dialog(1)
       # The ORIGINAL Windows Install
       option
          pre_test = have_item("models/objetos/icex/ruindows_box/ruindows_box.dcc")
-         text = gettext("Install Original Windows")
+         text = gettext("Install Original Ruindows")
          post_test = roll(OPERATE_ELETRONIC_OBJECTS, 6)
          if_action = change_object_state(4)
          if_action = receive_xp(25)
