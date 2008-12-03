@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-12-02 17:36-0200\n"
+"POT-Creation-Date: 2008-12-03 17:32-0200\n"
 "PO-Revision-Date: 2008-10-12 15:57+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -65,12 +65,12 @@ msgstr ""
 msgid "Not enought points to use!"
 msgstr "Non abbastanza punti per usare!"
 
-#: src/classes/mission.cpp:274 src/engine/dialog.cpp:1077
+#: src/classes/mission.cpp:387 src/engine/dialog.cpp:1077
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "Missione Completata: %d Punti Esperienza!"
 
-#: src/classes/mission.cpp:287
+#: src/classes/mission.cpp:400
 msgid "Mission Failure!"
 msgstr "Fallimento Missione!"
 
@@ -79,16 +79,16 @@ msgid "Tendency & Alignment"
 msgstr "Tendenza & Allineamento"
 
 #: src/engine/alignwindow.cpp:55 src/engine/aspectwindow.cpp:75
-#: src/engine/attwindow.cpp:221 src/engine/classwindow.cpp:99
-#: src/engine/options.cpp:780 src/engine/racewindow.cpp:96
-#: src/engine/skillwindow.cpp:139
+#: src/engine/attwindow.cpp:220 src/engine/classwindow.cpp:97
+#: src/engine/options.cpp:780 src/engine/racewindow.cpp:95
+#: src/engine/skillwindow.cpp:137
 msgid "Confirm"
 msgstr "Conferma"
 
 #: src/engine/alignwindow.cpp:59 src/engine/aspectwindow.cpp:79
-#: src/engine/attwindow.cpp:225 src/engine/barterwindow.cpp:46
-#: src/engine/classwindow.cpp:103 src/engine/options.cpp:784
-#: src/engine/racewindow.cpp:100 src/engine/skillwindow.cpp:142
+#: src/engine/attwindow.cpp:224 src/engine/barterwindow.cpp:46
+#: src/engine/classwindow.cpp:101 src/engine/options.cpp:784
+#: src/engine/racewindow.cpp:99 src/engine/skillwindow.cpp:140
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -108,61 +108,62 @@ msgstr "Età:"
 msgid "Sex:"
 msgstr "Sesso:"
 
-#: src/engine/attwindow.cpp:43
+#: src/engine/attwindow.cpp:42
 msgid "Attributes"
 msgstr "Attributi"
 
-#: src/engine/attwindow.cpp:65
+#: src/engine/attwindow.cpp:64
 msgid "Roll"
 msgstr "Scorrimento"
 
-#: src/engine/attwindow.cpp:68
+#: src/engine/attwindow.cpp:67
 msgid "Clear"
 msgstr "Azzera"
 
-#: src/engine/attwindow.cpp:72
+#: src/engine/attwindow.cpp:71
 msgid "Auto"
 msgstr "Automatico"
 
-#: src/engine/attwindow.cpp:75 src/engine/charwindow.cpp:145
+#: src/engine/attwindow.cpp:74 src/engine/charwindow.cpp:147
 #: data/skills/forca.ski:1
 msgid "Strength"
 msgstr "Forza"
 
-#: src/engine/attwindow.cpp:95 src/engine/charwindow.cpp:150
+#: src/engine/attwindow.cpp:94 src/engine/charwindow.cpp:152
 #: data/skills/destreza.ski:1
 msgid "Dexterity"
 msgstr "Destrezza"
 
-#: src/engine/attwindow.cpp:115 src/engine/charwindow.cpp:155
+#: src/engine/attwindow.cpp:114 src/engine/charwindow.cpp:157
 #: data/skills/constituicao.ski:1
 msgid "Constitution"
 msgstr "Costituzione"
 
-#: src/engine/attwindow.cpp:135 src/engine/charwindow.cpp:160
+#: src/engine/attwindow.cpp:134 src/engine/charwindow.cpp:162
 #: data/skills/inteligencia.ski:1
 msgid "Intelligence"
 msgstr "Intelligenza"
 
-#: src/engine/attwindow.cpp:156 src/engine/charwindow.cpp:165
+#: src/engine/attwindow.cpp:155 src/engine/charwindow.cpp:167
 #: data/skills/sabedoria.ski:1
 msgid "Wisdom"
 msgstr "Saggezza"
 
-#: src/engine/attwindow.cpp:177 data/skills/carisma.ski:1
+#: src/engine/attwindow.cpp:176 src/engine/charwindow.cpp:172
+#: data/skills/carisma.ski:1
 msgid "Charisma"
 msgstr "Carisma"
 
-#: src/engine/attwindow.cpp:209
+#: src/engine/attwindow.cpp:208
 msgid "Attribute Description"
 msgstr "Descrizione Attributo"
 
-#: src/engine/attwindow.cpp:511 src/engine/dccnit.cpp:347
+#: src/engine/attwindow.cpp:535 src/engine/dccnit.cpp:347
 #: src/engine/options.cpp:992
 msgid "Warning"
 msgstr "Avvertimento"
 
-#: src/engine/attwindow.cpp:512
+#: src/engine/attwindow.cpp:536
 msgid "You Need to Assign All Attributes."
 msgstr "Devi Assegnare Tutti Gli Attributi."
 
@@ -247,116 +248,112 @@ msgstr "PV"
 msgid "AC"
 msgstr "AC"
 
-#: src/engine/charwindow.cpp:170
-msgid "Charism"
-msgstr "Carisma"
-
-#: src/engine/charwindow.cpp:184
+#: src/engine/charwindow.cpp:185
 msgid "Fortitude"
 msgstr "Fortitudo"
 
-#: src/engine/charwindow.cpp:189
+#: src/engine/charwindow.cpp:190
 msgid "Reflex"
 msgstr "Riflesso"
 
-#: src/engine/charwindow.cpp:193
+#: src/engine/charwindow.cpp:194
 msgid "I am Not a Fool"
 msgstr "Non Sono un Folle"
 
-#: src/engine/charwindow.cpp:198
+#: src/engine/charwindow.cpp:199
 msgid "Base Attack Modifier"
 msgstr "Modificatore Attacco Base"
 
-#: src/engine/charwindow.cpp:203
+#: src/engine/charwindow.cpp:204
 msgid "Size Modifier"
 msgstr "Modificatore Dimensione"
 
-#: src/engine/charwindow.cpp:213
+#: src/engine/charwindow.cpp:214
 msgid "Level Up"
 msgstr "Livello Salito"
 
-#: src/engine/charwindow.cpp:219
+#: src/engine/charwindow.cpp:220
 msgid "Talents"
 msgstr ""
 
-#: src/engine/charwindow.cpp:223 src/engine/skillwindow.cpp:61
+#: src/engine/charwindow.cpp:224 src/engine/skillwindow.cpp:58
 msgid "Skills"
 msgstr "Abilità"
 
-#: src/engine/charwindow.cpp:227 src/engine/skillwindow.cpp:149
+#: src/engine/charwindow.cpp:228 src/engine/skillwindow.cpp:147
 #: src/gui/window.cpp:204
 msgid "Close"
 msgstr "Chiudi"
 
-#: src/engine/charwindow.cpp:358
+#: src/engine/charwindow.cpp:359
 msgid "Main Weapon"
 msgstr "Arma Principale"
 
-#: src/engine/charwindow.cpp:362
+#: src/engine/charwindow.cpp:363
 msgid "Secondary Weapon"
 msgstr "Arma Secondaria"
 
-#: src/engine/charwindow.cpp:366
+#: src/engine/charwindow.cpp:367
 msgid "Weapon"
 msgstr "Arma"
 
-#: src/engine/charwindow.cpp:378
+#: src/engine/charwindow.cpp:379
 msgid "Unarmed"
 msgstr "Disarmato"
 
-#: src/engine/charwindow.cpp:384
+#: src/engine/charwindow.cpp:385
 msgid "Not Applicable"
 msgstr "Non Applicabile"
 
-#: src/engine/classwindow.cpp:67
+#: src/engine/classwindow.cpp:65
 msgid "Class"
 msgstr "Classe"
 
-#: src/engine/classwindow.cpp:76 src/engine/racewindow.cpp:73
+#: src/engine/classwindow.cpp:74 src/engine/racewindow.cpp:72
 msgid "Characteristics"
 msgstr "Caratteristiche"
 
-#: src/engine/classwindow.cpp:77 src/engine/racewindow.cpp:74
+#: src/engine/classwindow.cpp:75 src/engine/racewindow.cpp:73
 msgid "Description"
 msgstr "Descrizione"
 
-#: src/engine/classwindow.cpp:132
+#: src/engine/classwindow.cpp:133
 msgid "Life Dice"
 msgstr "Dado Vita"
 
-#: src/engine/classwindow.cpp:136
+#: src/engine/classwindow.cpp:137
 msgid "Skill Points"
 msgstr "Punti Abilità"
 
-#: src/engine/classwindow.cpp:163
+#: src/engine/classwindow.cpp:166
 msgid "First Level"
 msgstr "Primo Livello"
 
-#: src/engine/classwindow.cpp:191
+#: src/engine/classwindow.cpp:194
 msgid "Other Levels"
 msgstr "Altri Livelli"
 
-#: src/engine/classwindow.cpp:196
+#: src/engine/classwindow.cpp:199
 msgid "Class Modifiers"
 msgstr "Modificatori Classe"
 
-#: src/engine/classwindow.cpp:207 src/engine/racewindow.cpp:147
+#: src/engine/classwindow.cpp:210 src/engine/racewindow.cpp:150
 msgid "No Modifiers."
 msgstr "Nessun Modificatore."
 
-#: src/engine/classwindow.cpp:214
+#: src/engine/classwindow.cpp:217
 msgid "Class Talents"
 msgstr "Abilità Classe"
 
-#: src/engine/classwindow.cpp:225 src/engine/racewindow.cpp:165
+#: src/engine/classwindow.cpp:228 src/engine/racewindow.cpp:168
 msgid "No Talents."
 msgstr ""
 
-#: src/engine/classwindow.cpp:233
+#: src/engine/classwindow.cpp:236
 msgid "Class Skills"
 msgstr "Abilità Classe"
 
-#: src/engine/classwindow.cpp:252 src/engine/racewindow.cpp:193
+#: src/engine/classwindow.cpp:255 src/engine/racewindow.cpp:194
 msgid "No Skills."
 msgstr "Nessuna Abilità."
 
@@ -407,50 +404,50 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1306
+#: src/engine/dccnit.cpp:1300
 msgid "Too far away for the action!"
 msgstr "Troppo lontano per l'azione!"
 
-#: src/engine/dccnit.cpp:1348
+#: src/engine/dccnit.cpp:1342
 msgid "No NPCs in the area."
 msgstr "Nessun NPC nell'area"
 
-#: src/engine/dccnit.cpp:1399
+#: src/engine/dccnit.cpp:1393
 msgid "Surprise Attack Turn."
 msgstr "Turno Di Attacco A Sorpresa."
 
-#: src/engine/dccnit.cpp:1413
+#: src/engine/dccnit.cpp:1407
 msgid "No enemies in the area."
 msgstr "Nessun nemico nell'area."
 
-#: src/engine/dccnit.cpp:1591 src/engine/dccnit.cpp:2041
+#: src/engine/dccnit.cpp:1584 src/engine/dccnit.cpp:2034
 #: src/engine/shortcutswindow.cpp:32
 msgid "Nothing"
 msgstr "Niente"
 
-#: src/engine/dccnit.cpp:1789
+#: src/engine/dccnit.cpp:1782
 #, c-format
 msgid "%s taken."
 msgstr "%s preso"
 
-#: src/engine/dccnit.cpp:1811
+#: src/engine/dccnit.cpp:1804
 msgid "Inventory is full!"
 msgstr "L'inventario è pieno!"
 
-#: src/engine/dccnit.cpp:1843
+#: src/engine/dccnit.cpp:1836
 msgid "Door"
 msgstr "Porta"
 
-#: src/engine/dccnit.cpp:1976
+#: src/engine/dccnit.cpp:1969
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s attacca%s"
 
-#: src/engine/dccnit.cpp:2137
+#: src/engine/dccnit.cpp:2130
 msgid "No more actions. Turn ended."
 msgstr ""
 
-#: src/engine/dccnit.cpp:3519
+#: src/engine/dccnit.cpp:3512
 msgid "Exit Battle Mode"
 msgstr "Esci Dalla Modalità Battaglia"
 
@@ -710,19 +707,19 @@ msgstr ""
 msgid "Some changes will only take effect upon restart."
 msgstr "Alcuni cambiamenti avranno effetto dopo il riavvio"
 
-#: src/engine/racewindow.cpp:63
+#: src/engine/racewindow.cpp:62
 msgid "Race"
 msgstr "Razza"
 
-#: src/engine/racewindow.cpp:136
+#: src/engine/racewindow.cpp:138
 msgid "Race Modifiers"
 msgstr "Modificatori Razza"
 
-#: src/engine/racewindow.cpp:153
+#: src/engine/racewindow.cpp:156
 msgid "Race Talents"
 msgstr "Abilità Razza"
 
-#: src/engine/racewindow.cpp:173
+#: src/engine/racewindow.cpp:175
 msgid "Race Skills"
 msgstr "Abilità Razza"
 
@@ -782,15 +779,15 @@ msgstr ""
 msgid "Open Group/Party Window"
 msgstr ""
 
-#: src/engine/skillwindow.cpp:69
+#: src/engine/skillwindow.cpp:66
 msgid "Total Free Points:"
 msgstr "Punti Liberi Totali:"
 
-#: src/engine/skillwindow.cpp:103
+#: src/engine/skillwindow.cpp:101
 msgid "Points:"
 msgstr "Punti:"
 
-#: src/engine/skillwindow.cpp:129
+#: src/engine/skillwindow.cpp:127
 msgid "Cost"
 msgstr "Costo"
 
@@ -2403,39 +2400,39 @@ msgstr "Ottenere Informazioni"
 
 #: data/skills/obterinf.ski:2
 msgid ""
-"This skill is used to gain restricted informations. It's not so strange to "
+"This skill is used to gain restricted information. It's not so hard to "
 "understand."
 msgstr ""
 
 #: data/skills/opobjele.ski:1
-msgid "Operate Eletronic Object"
+msgid "Operates Eletronic Object"
 msgstr "Operare Su Oggetti Elettronici"
 
 #: data/skills/opobjele.ski:2
 msgid ""
-"Is the capacity to operate or fix eletronic objects without taking eletric "
-"shocks and lose 70 percent of your brain or explode the object (and "
-"yourself)."
+"Is the capacity to operate or fix electronic objects without getting "
+"electric shocks and losing 70 percent of your brain or blowing the object "
+"(and yourself) up."
 msgstr ""
 
 #: data/skills/opobjmec.ski:1
-msgid "Operate Mechanic Object"
+msgid "Operates Mechanic Object"
 msgstr "Operare Su Oggetti Meccanici"
 
 #: data/skills/opobjmec.ski:2
 msgid ""
-"Is the capacity to operate or fix mechanical objects without loss a finger "
-"or a hand."
+"Is the capacity to operate or fix mechanical objects without the loss of a "
+"finger or a hand."
 msgstr ""
 
 #: data/skills/ouvir.ski:1
-msgid "Listen"
-msgstr "Ascoltare"
+msgid "Hearing"
+msgstr ""
 
 #: data/skills/ouvir.ski:2
 msgid ""
-"The so good that an organism can listen and discern sounds. It is the "
-"counter-skill to Furtive."
+"His hearing is so good that an organism can listen to and discern even low "
+"sounds. It is the counter-skill to Stealth."
 msgstr ""
 
 #: data/skills/passelivre.ski:1
@@ -2444,30 +2441,30 @@ msgstr ""
 
 #: data/skills/passelivre.ski:2
 msgid ""
-"Is the ability to realize any ilegal thing without suffer retaliations from "
-"the responsible authorities. Carte Blanche serves to walk on restricted "
-"areas or with heavy guns."
+"Is the ability to do anything illegal without suffering retaliation from the "
+"responsible authorities. Carte Blanche allows the creature to walk through "
+"restricted areas or carry heavy guns."
 msgstr ""
 
 #: data/skills/penosaco.ski:1
-msgid "Foot on Man's Genitals"
-msgstr "Calcio sui Genitali Dell'Uomo"
+msgid "Mental Castration"
+msgstr ""
 
 #: data/skills/penosaco.ski:2
 msgid ""
-"People who have the capacity to make you feel, while talking to them, like "
-"if a foot was put at your genitals."
+"People who have the capacity to make you feel, while talking to them, as if "
+"you've been kicked in the balls."
 msgstr ""
 
 #: data/skills/performar.ski:1
-msgid "Perform"
-msgstr "Performare"
+msgid "Performing on Stage"
+msgstr ""
 
 #: data/skills/performar.ski:2
 msgid ""
-"Those who knows the art to perform is able to participate on little theaters "
-"at the street or join a lot of vacated persons to see they make something "
-"banal. Perform perits DON'T know how to play musical instruments."
+"Those who have knowledge of the performing arts are able to participate in "
+"street theatricals or join a lot of layabouts to watch them doing something "
+"ordinary. Stage performers DON'T know how to play musical instruments."
 msgstr ""
 
 #: data/skills/prestidig.ski:1
@@ -2476,27 +2473,27 @@ msgstr ""
 
 #: data/skills/prestidig.ski:2
 msgid ""
-"Is the  skill used to steal little objects that are with someone or at "
-"somewhere observed by a lot of people."
+"Is the skill used to steal little objects on someone's person, or in a place "
+"observed by a lot of people."
 msgstr ""
 
 #: data/skills/roupasbizarras.ski:1
-msgid "Bizarre Cloths"
+msgid "Bizarre Clothes"
 msgstr "Vestiti Bizzarri"
 
 #: data/skills/roupasbizarras.ski:2
 msgid ""
-"It measure the capacity of a creature to wear the most bizarre things and "
-"call it 'Cloth'.)"
+"It measures the capacity of a creature to wear the strangest things and call "
+"them 'Clothes'."
 msgstr ""
 
 #: data/skills/sabedoria.ski:2
 msgid ""
-"Measures how much expert the creature is, knowing how to do in any life "
-"situations. An wisdom organism can make 10 years of post graduation without "
-"any problem. A creature with low wisdom can be lost in the way from the "
-"university restaurant to the bathroom.||Ameiva: Wisdom 4|Ratazana: Wisdom 6|"
-"Ente: Wisdom 12"
+"Measures the creature' expertise in dealing with any sort of real-life "
+"situation. A very wise organism can do 10 years of post-graduate studies "
+"without any problem. A creature with few wisdom points can get lost on the "
+"way from the university restaurant to the bathroom.||Ameiva: Wisdom 4|"
+"Ratazana: Wisdom 6|Ente: Wisdom 12"
 msgstr ""
 
 #: data/skills/semtempo.ski:1
@@ -2505,18 +2502,18 @@ msgstr ""
 
 #: data/skills/semtempo.ski:2
 msgid ""
-"People with it can't do all normal things in live, 'cause their graduation "
-"don't let! (Can be a glorious excuse to not do something)."
+"People with it can't do any of the normal things in life, 'cause their "
+"studies won't let them! (Can be a glorious excuse not to do something)."
 msgstr ""
 
 #: data/skills/suborno.ski:1
-msgid "Bribe"
+msgid "Bribery"
 msgstr "Corrompere"
 
 #: data/skills/suborno.ski:2
 msgid ""
-"This skill measures how good you are to 'buy' people, getting some favors in "
-"exchange of money or other material stuff."
+"This skill measures how good you are at 'buying' people, getting some favors "
+"in exchange for money or other material stuff."
 msgstr ""
 
 #: data/skills/tocarinst.ski:1
@@ -2534,19 +2531,19 @@ msgid "(You see the computer main screen)"
 msgstr ""
 
 #: data/dialogs/objects/computers.dlg:11
-msgid "Install a new Operational System"
+msgid "Install a new Operating System"
 msgstr ""
 
 #: data/dialogs/objects/computers.dlg:31
-msgid "What Operational System do you wish to install?"
+msgid "What Operating System do you wish to install?"
 msgstr ""
 
 #: data/dialogs/objects/computers.dlg:39
-msgid "Install Pirate Windows"
+msgid "Install Pirate Ruindows"
 msgstr ""
 
 #: data/dialogs/objects/computers.dlg:49
-msgid "Install Original Windows"
+msgid "Install Original Ruindows"
 msgstr ""
 
 #: data/dialogs/objects/computers.dlg:59
@@ -2573,7 +2570,7 @@ msgstr ""
 #: data/dialogs/objects/computers.dlg:117
 msgid ""
 "(You see a blue screen with some hexadecimal codes. There's nothing you can "
-"do unless restart the system.)"
+"do except restart the system.)"
 msgstr ""
 
 #: data/dialogs/objects/computers.dlg:121
@@ -2585,7 +2582,7 @@ msgid "(You see the bunker school server main screen)"
 msgstr ""
 
 #: data/dialogs/objects/bunker_school_server.dlg:12
-msgid "Temporally turn off the subterrain air system"
+msgid "Temporally turn off the subterranean air system"
 msgstr ""
 
 #: data/dialogs/objects/bunker_school_server.dlg:32
@@ -2594,8 +2591,8 @@ msgstr ""
 
 #: data/dialogs/objects/bunker_school_server.dlg:46
 msgid ""
-"Subterrain air system down for cleaning... Back in 5, 4, 3, 2, 1... "
-"Subterrain air system cleaned and functional."
+"Subterranean air system down for cleaning... Back in 5, 4, 3, 2, 1... "
+"Subterranean air system cleaned and functional."
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:6
@@ -2636,8 +2633,8 @@ msgstr "Cosa vuoi da me?"
 
 #: data/dialogs/tutorial/logan.dlg:51
 msgid ""
-"Yes, occupation. A clean and sweet ocupation that also serves as heal clinic "
-"for people with big tongue and no gratitude!"
+"Yes, occupation. A clean and sweet ocupation that also serves as a healing "
+"clinic for people with big tongues and no gratitude!"
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:61
@@ -2661,7 +2658,7 @@ msgid "Where it can be?"
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:91
-msgid "Ok, I'll search it"
+msgid "Ok, I'll search for it"
 msgstr "Ok, la cercherò"
 
 #: data/dialogs/tutorial/logan.dlg:96
@@ -2671,7 +2668,7 @@ msgid ""
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:107
-msgid "Never! Chrono taked me 3 years! Die!"
+msgid "Never! Chrono took 3 years from me! I'll kill you!"
 msgstr "Mai! Chrono mi ha preso 3 anni! Muori!"
 
 #: data/dialogs/tutorial/logan.dlg:116
@@ -2712,7 +2709,7 @@ msgstr "Grazie."
 #: data/dialogs/tutorial/logan.dlg:169
 msgid ""
 "I want another thing from you. Some dangerous living creatures are infesting "
-"the subterrain areas of the bunker school. Please, exterminate them all."
+"the subterranean areas of the bunker school. Please, exterminate them all."
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:173
@@ -2734,7 +2731,7 @@ msgid "Bye!"
 msgstr "Arrivederci!"
 
 #: data/dialogs/tutorial/logan.dlg:206
-msgid "That dammed Lavos! So, we must forget about Chrono..."
+msgid "That damned Lavos! So, we must forget about Chrono..."
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:210
@@ -2779,8 +2776,8 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:282
 msgid ""
-"I haven't any more things for you at this DNT version. Come back at a latter "
-"version or join DNTeam to help us develop it!"
+"I haven't any more things for you in this DNT version. Come back when "
+"there's a latter version or join DNTeam to help us develop it!"
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:286
@@ -2792,7 +2789,7 @@ msgid "Wanna some milk, kid?"
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:19
-msgid "Don't you known me? I am a descendant of a famous pre-war character."
+msgid "Don't you know me? I am a descendant of a famous pre-war character."
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:30
@@ -2833,7 +2830,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:91
 msgid ""
-"I need you to install a Ruindows at the occupation's notebook. Will you do "
+"I need you to install a Ruindows on the occupation's notebook. Will you do "
 "it?"
 msgstr ""
 
@@ -2846,7 +2843,7 @@ msgid "For sure!"
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:108
-msgid "Yes. (but inner you something is telling to take another action)"
+msgid "Yes. (but inside you something is telling you to take another action)"
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:120
@@ -2858,7 +2855,7 @@ msgid "(Close dialog)"
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:133
-msgid "I won't chat with you, heretic."
+msgid "I won't talk with you, heretic."
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:150
@@ -2866,7 +2863,7 @@ msgid "Ok."
 msgstr "Ok."
 
 #: data/dialogs/tutorial/santa.dlg:153
-msgid "Ok. (you look suspicious to Santa Claws notebook)"
+msgid "Ok. (you look suspiciously at Santa Claws' notebook)"
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:162
@@ -2874,7 +2871,7 @@ msgid "So you've installed it! Soon the blue screen will rule the world!"
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:167 data/dialogs/tutorial/santa.dlg:213
-msgid "Amem, brother!"
+msgid "Amen, brother!"
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:177
@@ -2883,12 +2880,12 @@ msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:188
 msgid ""
-"You've installed a linux on my notebook? But... it's the cause of it not "
-"freezing anymore? How can I feel in home now?"
+"You've installed a linux on my notebook? But... it's the cause of it's not "
+"freezing up anymore? How can I feel at home now?"
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:192
-msgid "Maybe you can go the the North Pole?"
+msgid "Maybe you can go the North Pole?"
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:197
@@ -2908,11 +2905,11 @@ msgid "Never!"
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:146
-msgid "I'm waiting to you install the Ruindows at the occupation's notebook!"
+msgid "I'm waiting for you install the Ruindows on the occupation's notebook!"
 msgstr ""
 
 #: data/models/objetos/itens/healkit/healkit.dcc:1
-msgid "Healkit"
+msgid "First Aid Kit"
 msgstr ""
 
 #: data/models/objetos/geral/computador/computador.dcc:1
@@ -3040,177 +3037,6 @@ msgstr "Leggero"
 msgid "Heavy"
 msgstr "Pesante"
 
-#~ msgid "Conduction(Vehicle)"
-#~ msgstr "Conduzione(Veicolo)"
-
-#~ msgid "Hide"
-#~ msgstr "Nascondersi"
-
-#~ msgid "Furtive"
-#~ msgstr "Furtività"
-
-#~ msgid "Ride Animals"
-#~ msgstr "Cavalcare Animali"
-
-#~ msgid "Free-Pass"
-#~ msgstr "Passare-Liberamente"
-
-#~ msgid "Loading Character"
-#~ msgstr "Caricando Personaggio"
-
-#~ msgid ""
-#~ "On this doomed world, tells the tales spoken mouth by mouth by the risen "
-#~ "journalists,"
-#~ msgstr ""
-#~ "In questo mondo maledetto, racconta le storie trasmesse oralmente dai "
-#~ "giornalisti apparsi,"
-
-#~ msgid "Class Description"
-#~ msgstr "Descrizione Classe"
-
-#~ msgid "Race Characteristcs"
-#~ msgstr "Caratteristiche Razza"
-
-#~ msgid "Can't Open the options file: %s\n"
-#~ msgstr "Non è possibile Aprire il file di opzioni: %s\n"
-
-#~ msgid "No Options File Avaible!\n"
-#~ msgstr "Nessun File Di Opzioni Disponibile!\n"
-
-#~ msgid "Creating Directory: %s : "
-#~ msgstr "Creando La Directory: %s : "
-
-#~ msgid "Creating Options: %s\n"
-#~ msgstr "Creando Opzioni: %s\n"
-
-#~ msgid "Unknow option: %s\n"
-#~ msgstr "Opzione sconosciuta: %s\n"
-
-#~ msgid "Error while writing Options: %s\n"
-#~ msgstr "Errore durante la scrittura delle Opzioni: %s\n"
-
-#~ msgid "Trying again without AntiAliasing.\n"
-#~ msgstr "Provando ancora senza AntiAliasing.\n"
-
-#~ msgid "Can't open font file: %s\n"
-#~ msgstr "Non è possibile aprire il file di caratteri: %s\n"
-
-#~ msgid "Can't open image: %s\n"
-#~ msgstr "Non è possibile aprire l'immagine: %s\n"
-
-#~ msgid "Oh, little student, what do you want?"
-#~ msgstr "Oh, piccolo studente, cosa vuoi?"
-
-#~ msgid "What are you?"
-#~ msgstr "Cosa sei?"
-
-#~ msgid "Nothing."
-#~ msgstr "Niente."
-
-#~ msgid "And you, can I kill?"
-#~ msgstr "E tu, posso uccidere?"
-
-#~ msgid "Let's talk about something else."
-#~ msgstr "Parliamo di qualcos'altro"
-
-#~ msgid "Come on!"
-#~ msgstr "Dai!"
-
-#~ msgid "Please, no!"
-#~ msgstr "Per favore, no!"
-
-#~ msgid "I've changed my mind. Die!"
-#~ msgstr "Ho cambiato idea. Muori!"
-
-#~ msgid "Ha, ha, ha. A weak animal! Die!"
-#~ msgstr "Ha, ha, ha. Un animale debole! Muori!"
-
-#~ msgid "I'll go. (After kill you)..."
-#~ msgstr "Me ne andrò. (Dopo averti ucciso)..."
-
-#~ msgid "Ok. Just calm down..."
-#~ msgstr "Ok. Calmati..."
-
-#~ msgid "Welcome to DccNiTghtmare!"
-#~ msgstr "Benvenuto in DccNiTghtmare!"
-
-#~ msgid "What is DccNiTghtmare?"
-#~ msgstr "Cos'è DccNiTghtmare?"
-
-#~ msgid "I wanna help!"
-#~ msgstr "Voglio aiutare!"
-
-#~ msgid "What the hell! A tree talking?"
-#~ msgstr "Cosa diavolo! Un albero parlante?"
-
-#~ msgid "Die!"
-#~ msgstr "Muori!"
-
-#~ msgid "I really wanna help!"
-#~ msgstr "Voglio davvero aiutare!"
-
-#~ msgid "Die Fanatic!"
-#~ msgstr "Muori Fanatico!"
-
-#~ msgid "So, bye!"
-#~ msgstr "Quindi, arrivederci!"
-
-#~ msgid "I don't like, die!"
-#~ msgstr "Non mi piace, muori!"
-
-#~ msgid "Goodbye!"
-#~ msgstr "Arrivederci!"
-
-#~ msgid "Die Cursed Tree!"
-#~ msgstr "Muori Albero Maledetto!"
-
-#~ msgid "Bye Tree!"
-#~ msgstr "Addio Albero!"
-
-#~ msgid "Bye Ente!"
-#~ msgstr "Addio Ente!"
-
-#~ msgid "Unknow Attribute:"
-#~ msgstr "Attributo Sconosciuto:"
-
-#~ msgid "Cannot open File!\n"
-#~ msgstr "Non è possibile aprire il File!\n"
-
-#~ msgid "Tried to define dialog before end last one!"
-#~ msgstr "Provato a definire il dialogo prima di finire l'ultimo!"
-
-#~ msgid "Tried to end an undefined dialog!"
-#~ msgstr "Provato a finire un dialogo indefinito!"
-
-#~ msgid "Tried to begin NPC before end something!"
-#~ msgstr "Provato a iniziare un NPC prima di finire qualcosa!"
-
-#~ msgid "Tried to end NPC before begin it!"
-#~ msgstr "Provato a finire un NPC prima di cominciarlo!"
-
-#~ msgid "Tried to begin PC before end something!"
-#~ msgstr "Provato a iniziare un PC prima di finire qualcosa!"
-
-#~ msgid "Tried to end PC before begin it!"
-#~ msgstr "Provato a finire un PC prima di iniziarlo!"
-
-#~ msgid "Option Text without option!"
-#~ msgstr "Testo Di Opzione senza opzione!"
-
-#~ msgid "Text without any relation!"
-#~ msgstr "Testo senza alcuna relazione!"
-
-#~ msgid "Option without begin PC!"
-#~ msgstr "Opzione senza aver cominciato un PC!"
-
-#~ msgid "Option Action without option!"
-#~ msgstr "Azione Di Opzione senza opzione!"
-
-#~ msgid "Action without any relation!\n"
-#~ msgstr "Azione senza alcuna relazione!\n"
-
-#~ msgid "Unknow Token!"
-#~ msgstr "Gesto Sconosciuto!"
-
-#~ msgid "%s attacks %s|"
-#~ msgstr "%s attacca %s|"
+#: data/characters/pcs/santa.pc:1
+msgid "Santa Claws"
+msgstr ""

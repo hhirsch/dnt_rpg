@@ -257,3 +257,8 @@ data/weapons/types/ranges.dcl
 data/weapons/types/sizes.dcl
 data/weapons/types/weights.dcl
 
+#characters
+data/characters/pcs/santa.pc
+
+
+
