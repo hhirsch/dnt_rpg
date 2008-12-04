@@ -1,4 +1,24 @@
 ================================================
+|                Version 0.4                   |
+================================================
+
+Working on:
+ - Weather effects;
+ - Shadows;
+ - Use dntMapEditor to insert sound effects at maps;
+
+Pending:
+ - Define Counter Skills;
+ - Minimap Tags;
+ - Extend walls to follow map height;
+ - Define paths to improve the A* at outdoor maps;
+ - Put Lights on MapEditor;
+ - Make a tutorial to the battle system;
+ - Implement 5-15% of the feats defined on DNT Book;
+ - Score at Death Screen;
+ - Capacity of using feats;
+
+================================================
 |                Version 0.3                   |
 ================================================
  - Briefing now has its own window; 
@@ -45,25 +65,13 @@
  - Finish the combat system implementation;
  - Applying Classes Saves and Bonus to Characters;
  - Character level up;
+ - New Maps;
+ - New Models;
+ - English spelling fixes (thanks to Elizabeth);
+ - Full French Translation (again, thanks to Elizabeth);
 
 Working on:
- - Weather effects;
- - Shadows;
- - New Models;
- - Use dntMapEditor to insert sound effects at maps;
  - Load/Save Functions;
- - New Maps;
-
-Pending:
- - Define Counter Skills;
- - Minimap Tags;
- - Extend walls to follow map height;
- - Define paths to improve the A* at outdoor maps;
- - Put Lights on MapEditor;
- - Make a tutorial to the battle system;
- - Implement 5-15% of the feats defined on DNT Book;
- - Score at Death Screen;
- - Capacity of using feats;
 
 ================================================
 |                Version 0.2                   |
