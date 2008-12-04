@@ -274,9 +274,6 @@ void mission::loadAsCurrent(defParser* def)
       getline(file, strBuffer);
    }
 
-   cout << "Pos: " << pos << "  lastPos: " << lastPos << endl;
-   cout << "Current was: " << context << endl;
-   cout << "Buffer is: " << strBuffer << endl;
 }
 
 
