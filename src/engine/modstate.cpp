@@ -566,6 +566,42 @@ void modInventory::clear()
 /************************************************************
  *                           save                           *
  ************************************************************/
+bool modInventory::load(string file)
+{
+   defParser def;
+   string key="", value="";
+   
+   if(!def.load(file))
+   {
+      cerr << "Error: Can't load the inventory file: " << file << endl;
+      return(false);
+   }
+
+   /* Parse all the file */
+   while(def.getNextTuple(key, value))
+   {
+      if(key == MODSTATE_TOKEN_MOD_INVENTORY)
+      {
+         /* The Owner */
+         target = value;
+      }
+      else if(key == MODSTATE_TOKEN_INVENTORY_ITEM)
+      {
+         /* Insert the item! */
+         insert(value);
+      }
+      else
+      {
+         cerr << "Unknow token: '" << key << "' at modInventory load!" << endl;
+      }
+   }
+
+   return(true);
+}
+
+/************************************************************
+ *                           save                           *
+ ************************************************************/
 void modInventory::save(ofstream* file)
 {
    int i;

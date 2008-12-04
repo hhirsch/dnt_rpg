@@ -277,7 +277,12 @@ class modInventory: public modAction
        * \param file -> pointer to the file to save */
       void save(ofstream* file);
 
-      /*! Insert a item form a string representing the modInvObj
+      /*! Load the modInventory from a file
+       * \param file -> fileName to load
+       * \return -> true if ok  */
+      bool load(string file);
+
+      /*! Insert a item from a string representing the modInvObj
        * \param s -> string representing modInvObj */
       void insert(string s);
 

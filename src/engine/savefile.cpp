@@ -20,6 +20,7 @@
 #define DNT_SAVE_TOKEN_MOD_STATE     "modState"
 #define DNT_SAVE_TOKEN_MISSIONS      "missions"
 #define DNT_SAVE_TOKEN_PC            "pc"
+#define DNT_SAVE_TOKEN_PC_INVENTORY  "pcInventory"
 #define DNT_SAVE_TOKEN_PC_POSITION   "pcPosition"
 
 /***********************************************************************
@@ -34,6 +35,7 @@ saveFile::saveFile()
    modStateFile = "";
    missionsFile = "";
    pcFile = "";
+   invFile = "";
    pcPos[0] = 0;
    pcPos[1] = 0;
    pcPos[2] = 0;
@@ -88,6 +90,8 @@ bool saveFile::save(string saveTitle, string saveFile, void* curEngine)
    engine* eng = (engine*)curEngine;
 
    modState mState;
+   modInventory* inv;
+   character* pc;
    missionsController missions;
 
    /* Verify if we got an engine */
@@ -98,6 +102,7 @@ bool saveFile::save(string saveTitle, string saveFile, void* curEngine)
 
    /* Flush the npcs inventories to the modState */
    eng->keepNPCInventoryStatus();
+   pc = eng->PCs->getActiveCharacter();
    
    /* Define Save Path */
    userInfo uInfo;
@@ -127,10 +132,11 @@ bool saveFile::save(string saveTitle, string saveFile, void* curEngine)
    modStateFile = prefix + ".mod";
    missionsFile = prefix + ".mis";
    pcFile = prefix + ".pc";
-   pcPos[0] = eng->PCs->getActiveCharacter()->xPosition;
-   pcPos[1] = eng->PCs->getActiveCharacter()->yPosition;
-   pcPos[2] = eng->PCs->getActiveCharacter()->zPosition;
-   pcAngle = eng->PCs->getActiveCharacter()->orientation;
+   invFile = prefix + ".inv";
+   pcPos[0] = pc->xPosition;
+   pcPos[1] = pc->yPosition;
+   pcPos[2] = pc->zPosition;
+   pcAngle = pc->orientation;
 
    /* Save to the header file */
    
@@ -148,6 +154,7 @@ bool saveFile::save(string saveTitle, string saveFile, void* curEngine)
    file << DNT_SAVE_TOKEN_MISSIONS << " = " << missionsFile << endl;
    /* Save the Current PC Status File */
    file << DNT_SAVE_TOKEN_PC << " = " << pcFile << endl;
+   file << DNT_SAVE_TOKEN_PC_INVENTORY << " = " << invFile << endl;
    file << DNT_SAVE_TOKEN_PC_POSITION << " = " << pcPos[0] << ","  
                                                << pcPos[1] << "," 
                                                << pcPos[2] << ":" 
@@ -157,7 +164,22 @@ bool saveFile::save(string saveTitle, string saveFile, void* curEngine)
    file.close();
 
    /* Save the PC File */
-   eng->PCs->getActiveCharacter()->save(pcFile);
+   pc->save(pcFile);
+
+   /* Save the PC Inventory */
+   inv = new modInventory(pc->inventories, pc->getCharacterFile(), "");
+   ofstream f;
+   f.open(invFile.c_str(), ios::out | ios::binary);
+   if(f)
+   {
+      inv->save(&f);
+   }
+   else
+   {
+      cerr << "Can't save file: " << invFile << endl;
+   }
+   f.close();
+   delete(inv);
 
    /* Save the ModState File */
    mState.saveState(modStateFile);
@@ -178,6 +200,7 @@ bool saveFile::load(void* curEngine)
 {
    engine* eng = (engine*)curEngine;
    modState modif;
+   modInventory* inv;
    missionsController missions;
 
    /* Verify if we got a valid engine */
@@ -225,6 +248,21 @@ bool saveFile::load(void* curEngine)
          int posX =(int)floor(pc->xPosition / actualMap->squareSize());
          int posZ =(int)floor(pc->zPosition / actualMap->squareSize());
          pc->ocSquare = actualMap->relativeSquare(posX,posZ);
+      }
+   }
+
+   /* Load the PC Inventory */
+   if(!invFile.empty())
+   {
+      character* pc = eng->PCs->getActiveCharacter();
+
+      if(pc)
+      {
+         inv = new modInventory(NULL, "", "");
+         inv->load(invFile);
+         inv->flush(eng->getCurrentMap(), pc->inventories, 
+                    *eng->getModelList(), *eng->getWeaponTypes());
+         delete(inv);
       }
    }
 
@@ -287,6 +325,11 @@ bool saveFile::loadHeader(string fileName)
          {
             /* Define the pc file */
             pcFile = value;
+         }
+         else if(key == DNT_SAVE_TOKEN_PC_INVENTORY)
+         {
+            /* Define Inventory File */
+            invFile = value;
          }
          else if(key == DNT_SAVE_TOKEN_PC_POSITION)
          {

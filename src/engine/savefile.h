@@ -57,6 +57,7 @@ class saveFile
       string title;          /**< The save File title*/
       string version;        /**< The DNT version who created the save */
       string imageFile;      /**< The screenshot file */
+      string invFile;        /**< The inventory file */
       string mapFile;        /**< The current map file */
       string modStateFile;   /**< The modState file */
       string missionsFile;   /**< The missions file */
