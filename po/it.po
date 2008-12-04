@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-12-03 17:43-0200\n"
+"POT-Creation-Date: 2008-12-04 16:41-0200\n"
 "PO-Revision-Date: 2008-10-12 15:57+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -65,12 +65,12 @@ msgstr ""
 msgid "Not enought points to use!"
 msgstr "Non abbastanza punti per usare!"
 
-#: src/classes/mission.cpp:387 src/engine/dialog.cpp:1077
+#: src/classes/mission.cpp:384 src/engine/dialog.cpp:1077
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "Missione Completata: %d Punti Esperienza!"
 
-#: src/classes/mission.cpp:400
+#: src/classes/mission.cpp:397
 msgid "Mission Failure!"
 msgstr "Fallimento Missione!"
 

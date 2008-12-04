@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-12-03 17:43-0200\n"
-"PO-Revision-Date: 2008-12-03 18:58+0000\n"
+"POT-Creation-Date: 2008-12-04 16:41-0200\n"
+"PO-Revision-Date: 2008-12-04 18:33+0000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-12-03 19:21+0000\n"
+"X-Launchpad-Export-Date: 2008-12-04 18:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: src/classes/actions.cpp:108
@@ -65,12 +65,12 @@ msgstr "Don non valide"
 msgid "Not enought points to use!"
 msgstr "Vous ne pouvez pas utiliser vos points - il n'y en a pas assez !"
 
-#: src/classes/mission.cpp:387 src/engine/dialog.cpp:1077
+#: src/classes/mission.cpp:384 src/engine/dialog.cpp:1077
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "Mission accomplie: %d XP !"
 
-#: src/classes/mission.cpp:400
+#: src/classes/mission.cpp:397
 msgid "Mission Failure!"
 msgstr "Echec de la Mission!"
 
@@ -266,7 +266,7 @@ msgstr "Modificateur de combat"
 
 #: src/engine/charwindow.cpp:204
 msgid "Size Modifier"
-msgstr "Modificateur de taille"
+msgstr "Modificateur de Taille"
 
 #: src/engine/charwindow.cpp:214
 msgid "Level Up"
@@ -378,7 +378,7 @@ msgstr "Chargement du PNJ : %s"
 
 #: src/engine/dccnit.cpp:590
 msgid "Creating MiniMap"
-msgstr ""
+msgstr "Création d'une Carte miniature"
 
 #: src/engine/dccnit.cpp:596
 msgid "Putting GUI on Screen"
@@ -577,7 +577,7 @@ msgstr "Valider"
 
 #: src/engine/minimapwindow.cpp:37
 msgid "Map"
-msgstr "Carte"
+msgstr "Plan"
 
 #: src/engine/options.cpp:23
 msgid "Portuguese"
@@ -674,7 +674,7 @@ msgstr "Activer les Systèmes de Particules"
 
 #: src/engine/options.cpp:661
 msgid "Enable MultiTextures"
-msgstr ""
+msgstr "Activer MultiTextures"
 
 #: src/engine/options.cpp:672
 msgid "Reflections:"
@@ -682,11 +682,11 @@ msgstr "Reflets :"
 
 #: src/engine/options.cpp:688
 msgid "Anti-Aliasing:"
-msgstr ""
+msgstr "Anti-Aliasing:"
 
 #: src/engine/options.cpp:703
 msgid "FarView:"
-msgstr ""
+msgstr "Longue-Vu"
 
 #: src/engine/options.cpp:719
 msgid "Game"
@@ -698,15 +698,15 @@ msgstr "Langue :"
 
 #: src/engine/options.cpp:742
 msgid "Camera Mode:"
-msgstr "Mode de la caméra :"
+msgstr "Mode de la Caméra :"
 
 #: src/engine/options.cpp:758
 msgid "Auto End Turn"
-msgstr ""
+msgstr "Fin de Tour Automatique"
 
 #: src/engine/options.cpp:767
 msgid "Show Enemy Battle Circle"
-msgstr ""
+msgstr "Montrer le Cercle de bataille de l'ennemi"
 
 #: src/engine/options.cpp:993
 msgid "Some changes will only take effect upon restart."
@@ -738,11 +738,11 @@ msgstr "Menu"
 
 #: src/engine/shortcutswindow.cpp:121
 msgid "Particles"
-msgstr ""
+msgstr "Particules"
 
 #: src/engine/shortcutswindow.cpp:134
 msgid "FPS"
-msgstr ""
+msgstr "IPS"
 
 #: src/engine/shortcutswindow.cpp:172
 msgid "Enter Battle Mode"
@@ -750,7 +750,7 @@ msgstr "Démarrer Mode bataille"
 
 #: src/engine/shortcutswindow.cpp:176
 msgid "Select Normal Attack"
-msgstr ""
+msgstr "Choisir l'attaque normal"
 
 #: src/engine/shortcutswindow.cpp:182
 msgid "Open Quests Window"
@@ -936,6 +936,10 @@ msgid ""
 "governments, private groups or individuals. Usually they are adepts of "
 "public-domain software."
 msgstr ""
+"   Les Adeptes des logiciels gratuits et libertaires sont habituellement des "
+"créatures qui croient en la transmission libre des connaissances, sans "
+"intervention aucune, que se soit gouvernementale, de groupes ou d'individus. "
+"La plupart du temps, ce sontdes adeptes de logiciels dans le domaine public."
 
 #: data/alignment/neutrocentrista.ali:1
 msgid "Center Neutral"
@@ -1786,6 +1790,8 @@ msgid ""
 "Because they are anxious to take the last kopeck from their victims, they "
 "receive -1 of Charisma."
 msgstr ""
+"Parce qu'ils ont un désir impérieux de rafler jusqu'au dernier sou de leurs "
+"victimes, ils reçoivent -1 de Charisme."
 
 #: data/classes/lawner.cls:11
 msgid ""
@@ -2339,7 +2345,7 @@ msgstr "Les lamas humains reçoivent +2 en Intelligence."
 
 #: data/races/metaleiro.rca:1
 msgid "Headbanger"
-msgstr ""
+msgstr "Donneur de coups de boule"
 
 #: data/races/metaleiro.rca:2
 msgid "'Dark...'|(Anamatheus Iskurium)"
@@ -2410,7 +2416,7 @@ msgstr ""
 
 #: data/races/mutante.rca:8
 msgid "By obvious reasons, the Human Cricket receive + 6 of Jump."
-msgstr ""
+msgstr "Pour des raisons évidentes, le Criquet humain reçoit +6 en Saut."
 
 #: data/races/skinhead.rca:1
 msgid "Skinhead Maniac"
@@ -2458,6 +2464,9 @@ msgid ""
 "heavy guns and walk around freely with them. Their class skill is obviously "
 "Carte Blanche."
 msgstr ""
+"Puisqu'ils ont des copains dans l'armée, les Skinheads fous ont accès à "
+"toute sorte d'armes à feu lourdes et peuvent se promener librement avec. "
+"Cela va sans dire que la compétence de leur classe est Carte Blanche."
 
 #: data/feats/im_bombadinho.fta:1
 msgid "I am Bombadinho"
@@ -2468,6 +2477,8 @@ msgid ""
 "The Student who has frequently gone to the academy, permanently receives +1 "
 "in Strength."
 msgstr ""
+"L'étudiant qui va souvent et depuis longtemps à l'académie, reçoit +1 en "
+"Force de façon permanente."
 
 #: data/feats/melee_attack.fta:1
 msgid "Melee Attack"
@@ -2475,11 +2486,11 @@ msgstr "Attaque en melée"
 
 #: data/feats/melee_attack.fta:2
 msgid "Character's melee attack."
-msgstr ""
+msgstr "Attaque de melée du personnage"
 
 #: data/feats/powerfull_esophagus.fta:1
 msgid "Powerful Esophagus"
-msgstr ""
+msgstr "Gorge puissant"
 
 #: data/feats/powerfull_esophagus.fta:2
 msgid ""
@@ -2487,6 +2498,10 @@ msgid ""
 "Physical Education Student is able to expel a sphere of fire that causes 6d6 "
 "(plus 2d6, for each level above 15) in Damage."
 msgstr ""
+"Parce que ses muscles ont envahi ses organes internes, l'étudiant en "
+"Éducation physique a la capacité d'expulser une boule de feu une fois par "
+"jour. Celle-ci provoque 6d6 (plus 2d6, pour chaque niveau au-delà du 15ième) "
+"en Dégâts."
 
 #: data/feats/ranged_attack.fta:1
 msgid "Ranged Attack"
@@ -2498,7 +2513,7 @@ msgstr "Attaque à distance du personnage"
 
 #: data/skills/acrobacias.ski:1
 msgid "Acrobats"
-msgstr ""
+msgstr "Gymnastes"
 
 #: data/skills/acrobacias.ski:2
 msgid ""
@@ -2771,7 +2786,7 @@ msgstr "Déguisement"
 #: data/skills/disfarces.ski:2
 msgid ""
 "Measures the creature's ability to disguise himself (and be unrecognizable)."
-msgstr ""
+msgstr "Indique la capacité de la créature de se déguiser sans être reconnue."
 
 #: data/skills/equilibrio.ski:1
 msgid "Balance"
@@ -2793,6 +2808,8 @@ msgstr "Escalade"
 #: data/skills/escalar.ski:2
 msgid "Measure the organism's capacity to climb very steep surfaces."
 msgstr ""
+"Quantifie la capacité de l'organisme d'escalader des surfaces extrêmement "
+"pentues."
 
 #: data/skills/esconder.ski:1
 msgid "Concealment"
@@ -3070,7 +3087,7 @@ msgstr ""
 
 #: data/skills/semtempo.ski:1
 msgid "Not Enough Time"
-msgstr "Pass Assez de Temps"
+msgstr "Pas Assez de Temps"
 
 #: data/skills/semtempo.ski:2
 msgid ""
@@ -3111,7 +3128,7 @@ msgstr "(Vous voyez l'écran principal de l'ordinateur)"
 
 #: data/dialogs/objects/computers.dlg:11
 msgid "Install a new Operating System"
-msgstr "Installer un nouvea système d'exploitation"
+msgstr "Installer un nouveau système d'exploitation"
 
 #: data/dialogs/objects/computers.dlg:31
 msgid "What Operating System do you wish to install?"
@@ -3241,7 +3258,7 @@ msgid ""
 "Ah, some time ago I've lost our Chrono Trigger Snes cartridge, just find it "
 "for us."
 msgstr ""
-"Ah, il y a quelque temps, j'ai perdu notre cassette Chrono Gachette Snes. Il "
+"Ah, il y a quelque temps, j'ai perdu notre cassette Chrono Trigger. Il "
 "suffit de la retrouver pour nous."
 
 #: data/dialogs/tutorial/logan.dlg:88
@@ -3262,7 +3279,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:107
 msgid "Never! Chrono took 3 years from me! I'll kill you!"
-msgstr "Jamais ! Chrono m'a pris trois années ! Qu'il meure !"
+msgstr "Jamais ! Chrono m'a pris trois années ! Je vais vous tuer !"
 
 #: data/dialogs/tutorial/logan.dlg:116
 msgid "You still haven't found our Chrono Trigger Snes cartridge!"
@@ -3275,12 +3292,12 @@ msgstr "Je cherche encore..."
 #: data/dialogs/tutorial/logan.dlg:123
 msgid "Oh, Chrono Trigger! This name resounds good memories in my head."
 msgstr ""
-"O, Chrono Gachette ! Ce nom retentit dans ma tête et rappelle de bons "
+"Oh, Chrono Trigger ! Ce nom retentit dans ma tête et me rappelle de bons "
 "souvenirs."
 
 #: data/dialogs/tutorial/logan.dlg:132
 msgid "Here! Chrono is here! Let me play it!"
-msgstr "Ici ! Voici Chrono ! Laissez-moi la regarder !"
+msgstr "Ici ! Voici Chrono ! Je veux y jouer !"
 
 #: data/dialogs/tutorial/logan.dlg:136
 msgid "Its all yours..."
@@ -3309,7 +3326,7 @@ msgid ""
 msgstr ""
 "Je veux que vous fassiez quelque chose d'autre pour nous. Des créatures "
 "vivantes et dangereuses pullulent dans les zones souterraines de l'école "
-"bunker. Je vous en prie, éliminez-les toues."
+"bunker. Je vous en prie, éliminez-les toutes."
 
 #: data/dialogs/tutorial/logan.dlg:173
 msgid "Let's see what I can do."
@@ -3356,6 +3373,8 @@ msgid ""
 "Ahm, last time I saw him was in the Bunker School, when I was riping it to "
 "play online with zsnes."
 msgstr ""
+"Hmm. La dernière fois que je l'ai vu, c'était à l'Ecole Bunker, lorsque "
+"j'étais en train de le ripper pour pouvoir jouer en ligne avec zsnes."
 
 #: data/dialogs/tutorial/logan.dlg:250
 msgid "About the extermination, have you done it?"
@@ -3403,7 +3422,8 @@ msgstr ""
 #: data/dialogs/tutorial/santa.dlg:30
 msgid "Descendant of a slaver called Santa Claws, right?"
 msgstr ""
-"Le descendant d'un esclavagiste nommé Saint Serre-Pince, n'est-ce pas ?"
+"Le descendant d'un esclavagiste nommé Fouettard (comme le père du même nom), "
+"n'est-ce pas ?"
 
 #: data/dialogs/tutorial/santa.dlg:41
 msgid ""
@@ -3411,22 +3431,23 @@ msgid ""
 "Santa Claws. (Same as me)."
 msgstr ""
 "C'était le propriétaire d'une usine mondiale, où il y avait des milliers "
-"d'esclaves. Son nom? Saint Serre-Pince. (Le même que moi)."
+"d'esclaves. Son nom? Fouettard. (Le même que moi)."
 
 #: data/dialogs/tutorial/santa.dlg:46
 msgid "Mr. Santa Claws of Cica Cula? Ow..."
-msgstr "Monsieur Saint Serre-Pince de Cica Cula ? Ouah..."
+msgstr "Monsieur Fouettard de Cica Cula ? Ouah..."
 
 #: data/dialogs/tutorial/santa.dlg:58
 msgid "Yes, the great Santa Claws! (I was named in honour of him)."
-msgstr ""
-"Oui, le grand Saint Serre-Pince ! (On m'a donné mon nom en son honneur)."
+msgstr "Oui, le grand Père Fouettard! (On m'a donné mon nom en son honneur)."
 
 #: data/dialogs/tutorial/santa.dlg:71
 msgid ""
 "And you are... Ah!... You are the one Logan found near the waterfall... Can "
 "I ask you a favor?"
 msgstr ""
+"Et vous êtes ?... Ah !... Vous êtes celui que Logan trouva près de la chute "
+"d'eau... Pourrais-je vous demander de me rendre un service ?"
 
 #: data/dialogs/tutorial/santa.dlg:75 data/dialogs/tutorial/santa.dlg:172
 msgid "Yes."
@@ -3434,7 +3455,7 @@ msgstr "Oui."
 
 #: data/dialogs/tutorial/santa.dlg:78
 msgid "What kind of favor?"
-msgstr "Quel genre de faveur ?"
+msgstr "Quel genre de service ?"
 
 #: data/dialogs/tutorial/santa.dlg:81
 msgid "No."
@@ -3446,7 +3467,7 @@ msgid ""
 "it?"
 msgstr ""
 "J'ai besoin de vous pour installer une version de Ruindows sur le portable "
-"de l'occupation. Le ferez-vous ?"
+"de l'habitation. Le ferez-vous ?"
 
 #: data/dialogs/tutorial/santa.dlg:96
 msgid "Never! I am a Free Software Adept and will never touch this evil O.S."
@@ -3482,8 +3503,7 @@ msgstr "Ok."
 
 #: data/dialogs/tutorial/santa.dlg:153
 msgid "Ok. (you look suspiciously at Santa Claws' notebook)"
-msgstr ""
-"D'accord. (Vous jetez un regard soupçonneux au portable de Saint Serre-Pince)"
+msgstr "D'accord. (Vous jetez un regard soupçonneux au portable de Père Cruel)"
 
 #: data/dialogs/tutorial/santa.dlg:162
 msgid "So you've installed it! Soon the blue screen will rule the world!"
@@ -3530,7 +3550,7 @@ msgstr "Jamais !"
 #: data/dialogs/tutorial/santa.dlg:146
 msgid "I'm waiting for you install the Ruindows on the occupation's notebook!"
 msgstr ""
-"J'attends que vous installiez Ruindows sur le portable de l'occupation !"
+"J'attends que vous installiez Ruindows sur le portable de l'habitation !"
 
 #: data/models/objetos/itens/healkit/healkit.dcc:1
 msgid "First Aid Kit"
@@ -3591,7 +3611,7 @@ msgstr "Exotique"
 
 #: data/weapons/types/categories.dcl:4
 msgid "Throwing"
-msgstr ""
+msgstr "Qui se lancent"
 
 #: data/weapons/types/categories.dcl:5
 msgid "Simple"
@@ -3663,4 +3683,4 @@ msgstr "Lourd"
 
 #: data/characters/pcs/santa.pc:1
 msgid "Santa Claws"
-msgstr ""
+msgstr "le Père Fouettard"
