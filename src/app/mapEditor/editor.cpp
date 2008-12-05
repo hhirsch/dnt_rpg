@@ -16,6 +16,8 @@ editor::editor()
    NPCs = NULL;
    particleSystem = new partController();
    particleSystem->init();
+   skillsDefinitions skillList;
+   skillList.init();
    features = new featsList(dir.getRealFile("feats/"),
                             dir.getRealFile("feats/feats.ftl"));
 
@@ -84,6 +86,8 @@ editor::~editor()
    {
       delete(features);
    }
+   skillsDefinitions skillList;
+   skillList.finish();
    delete(gui);
    delete(models);
    delete(wTypes);
