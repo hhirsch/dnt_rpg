@@ -6,6 +6,7 @@
 #include "../classes/mission.h"
 
 #include "dccnit.h"
+#include "util.h"
 
 #ifdef _MSC_VER
    #include "../config_win.h"
@@ -84,7 +85,8 @@ string saveFile::getCharacterFile()
 /***********************************************************************
  *                               save                                  *
  ***********************************************************************/
-bool saveFile::save(string saveTitle, string saveFile, void* curEngine)
+bool saveFile::save(string saveTitle, string saveFile, void* curEngine,
+                    SDL_Surface* frontSurface)
 {
    ofstream file;
    engine* eng = (engine*)curEngine;
@@ -124,7 +126,7 @@ bool saveFile::save(string saveTitle, string saveFile, void* curEngine)
       return(false);
    }
 
-   /* Define variables/files*/
+   /* Define variables/files */
    title = saveTitle;
    version = VERSION;
    imageFile = prefix + ".bmp";
@@ -187,8 +189,8 @@ bool saveFile::save(string saveTitle, string saveFile, void* curEngine)
    /* Save the Missions */
    missions.save(missionsFile);
 
-   //TODO Call save to modState, current missions, screenshot
-
+   /* Save the Screenshot */
+   screenshot(frontSurface, imageFile, true);
 
    return(true);
 }

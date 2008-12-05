@@ -370,6 +370,12 @@ class engine
       bool rangeAction(GLfloat posX, GLfloat posZ, 
                        GLfloat targX, GLfloat targZ,
                        GLfloat range);
+      /*! 
+       **************************************************************
+       * Define the front surface, copying it from the front buffer
+       * \note -> this function is usually called before potential saves
+       ***************************************************************/
+      void defineFrontSurface();
 
       dirs dir;                    /**< Data directories finder */
 
@@ -403,6 +409,8 @@ class engine
       shortcutsWindow* shortcuts;    /**< The shortcuts window */
    
       briefing* brief;               /**< The briefing controller */
+
+      SDL_Surface* frontSurface;   /**< Front Buffer Screenshot */
 
       Uint32 lastRead;             /**< Last Verification of I/O */
       Uint32 lastMouse;            /**< Last read from mouse */

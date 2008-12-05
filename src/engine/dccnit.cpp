@@ -26,6 +26,7 @@ engine::engine()
    PCs = NULL;
    NPCs = NULL;
    activeCharacter = NULL;
+   frontSurface = NULL;
 
    inventoryWindow = NULL;
 
@@ -174,6 +175,12 @@ engine::~engine()
 
    /* Finish particles */
    particleController.finish();
+
+   /* Finish the current front surface, if one */
+   if(frontSurface)
+   {
+      SDL_FreeSurface(frontSurface);
+   }
 
    /* Close option */
    delete(option);
@@ -328,6 +335,21 @@ void engine::loadGame()
 }
 
 /*********************************************************************
+ *                         defineFrontSurface                        *
+ *********************************************************************/
+void engine::defineFrontSurface()
+{
+   /* Delete Previous, if One exists */
+   if(frontSurface)
+   {
+      SDL_FreeSurface(frontSurface);
+   }
+
+   /* Create with the buffer */
+   frontSurface = readFrontBuffer();
+}
+
+/*********************************************************************
  *                               saveGame                            *
  *********************************************************************/
 void engine::saveGame()
@@ -337,7 +359,7 @@ void engine::saveGame()
       saveFile *sav = new saveFile();
 
       //TODO get the file name and title!
-      sav->save("Teste","teste.sav", (void*)this);
+      sav->save("Teste","teste.sav", (void*)this, frontSurface);
 
       delete(sav);
    }
@@ -1595,6 +1617,7 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
          case SHORTCUTS_WINDOW_SAVE:
          {
             /* Go to the save dialog */
+            defineFrontSurface();
             saveGame();
          }
          break;
@@ -2159,6 +2182,7 @@ int engine::treatIO(SDL_Surface *screen)
             ( (time-lastKeyb >= REFRESH_RATE) || 
               (lastKey != SDLK_ESCAPE) ) )
       {
+         defineFrontSurface();
          lastKey = SDLK_ESCAPE;
          lastKeyb = time;
          return(0);
