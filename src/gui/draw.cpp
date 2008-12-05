@@ -197,6 +197,42 @@ void rectangle_2Colors(SDL_Surface *screen, int x1, int y1, int x2, int y2,
 /******************************************************************
  *                            pixel_Get                           *
  ******************************************************************/
+Uint32 pixel_Get_Interpolate(SDL_Surface *surface, int x, int y)
+{
+   Uint32 resR=0, resG=0, resB=0;
+   Uint8 r,g,b;
+
+   SDL_GetRGB(pixel_Get(surface, x, y), surface->format, &r, &g, &b);
+   resR += r; resB += b; resG += g;
+   SDL_GetRGB(pixel_Get(surface, x-1, y), surface->format, &r, &g, &b);
+   resR += r; resB += b; resG += g;
+   SDL_GetRGB(pixel_Get(surface, x+1, y), surface->format, &r, &g, &b);
+   resR += r; resB += b; resG += g;
+   SDL_GetRGB(pixel_Get(surface, x, y-1), surface->format, &r, &g, &b);
+   resR += r; resB += b; resG += g;
+   SDL_GetRGB(pixel_Get(surface, x, y+1), surface->format, &r, &g, &b);
+   resR += r; resB += b; resG += g;
+
+   SDL_GetRGB(pixel_Get(surface, x-1, y-1), surface->format, &r, &g, &b); 
+   resR += r; resB += b; resG += g;
+   SDL_GetRGB(pixel_Get(surface, x-1, y+1), surface->format, &r, &g, &b);
+   resR += r; resB += b; resG += g;
+   SDL_GetRGB(pixel_Get(surface, x+1, y-1), surface->format, &r, &g, &b);
+   resR += r; resB += b; resG += g;
+   SDL_GetRGB(pixel_Get(surface, x+1, y+1), surface->format, &r, &g, &b);
+   resR += r; resB += b; resG += g;
+
+
+   resR = resR / 9;
+   resG = resG / 9;
+   resB = resB / 9;
+
+   return(SDL_MapRGBA(surface->format, resR, resG, resB, 255));
+}
+
+/******************************************************************
+ *                            pixel_Get                           *
+ ******************************************************************/
 Uint32 pixel_Get(SDL_Surface *surface, int x, int y)
 {
    /* Verify Limits */

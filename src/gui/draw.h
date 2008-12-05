@@ -70,6 +70,13 @@ void pixel_Set(SDL_Surface* screen, int x, int y, Uint32 color);
  * \return -> (x,y) surface color */
 Uint32 pixel_Get(SDL_Surface *surface, int x, int y);
 
+/*! Same as pixel_Get, but interpolate with nearest neighbors
+ * \param surface -> surface to draw
+ * \param x -> x coordinate of the pixel
+ * \param y -> y coordinate of the pixel 
+ * \return -> (x,y) surface color */
+Uint32 pixel_Get_Interpolate(SDL_Surface *surface, int x, int y);
+
 /*! Draw a line on the surface
  * \param screen -> surface to draw to
  * \param x1 -> x initial coordinate
