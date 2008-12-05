@@ -34,8 +34,11 @@
 #define DNT_TO_METER   0.5 /**< Constant to multiply to convert meter to DNT.*/
 #define METER_TO_DNT   1.0 / DNT_TO_METER /**< Constant to DNT to Meter value*/
 
+#define THUMB_X      160  /**< X size of the screenshot */
+#define THUMB_Y      120  /**< Y size of the screenshot */
+
 /********************************************************************
- *                     Actualization constants                      *
+ *                          Update constants                        *
  ********************************************************************/
 #define REFRESH_RATE 200.0  /**< Keyboard Refresh Rate for the Engine */
 #define NORMAL_FPS 35       /**< Minimun FPS to the engine runs smooth */
@@ -171,8 +174,10 @@ void draw2DMode();
 void draw3DMode(float actualFarView);
 
 /*! Take screenshot from the current buffer
- * \param fileName -> fileName of the screenShot */
-bool screenshot(string fileName); 
+ * \param fileName -> fileName of the screenShot
+ * \param thumb -> if will save as a miniature 
+ * \return -> true if screenshot was saved */
+bool screenshot(string fileName, bool thumb=false); 
 
 /*! Calculate the angle with two points
  * \param prvX -> point A X

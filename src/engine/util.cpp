@@ -1,5 +1,7 @@
 #include "util.h"
 
+#include <iostream>
+using namespace std;
 
 /*********************************************************************
  *                   Loading Screen Atualization                     *
@@ -314,11 +316,13 @@ void draw3DMode(float actualFarView)
 /*********************************************************************
  *                              screenshot                           *
  *********************************************************************/
-bool screenshot(string fileName) 
+bool screenshot(string fileName, bool thumb) 
 {
-   SDL_Surface* screen;
+   SDL_Surface* screen = NULL;
+   SDL_Surface* dest = NULL;
+   int i,j;
 
-/* Define Machine Bit Order */
+   /* Define Machine Bit Order */
    Uint32 rmask, gmask, bmask, amask;
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
    rmask = 0xff000000;
@@ -332,15 +336,57 @@ bool screenshot(string fileName)
    amask = 0xff000000;
 #endif
 
+   /* Create the Screen */
    screen = SDL_CreateRGBSurface(SDL_SWSURFACE, SCREEN_X, SCREEN_Y, 32, 
                                  rmask, gmask, bmask, amask);
+   
+   /* Create the destiny surface */
+   if(thumb)
+   {
+      dest = SDL_CreateRGBSurface(SDL_SWSURFACE, THUMB_X, THUMB_Y, 32, 
+                                  rmask, gmask, bmask, amask);
+   }
+   else
+   {
+      dest = SDL_CreateRGBSurface(SDL_SWSURFACE, SCREEN_X, SCREEN_Y, 32, 
+                                  rmask, gmask, bmask, amask);
+   }
 
    glReadBuffer(GL_FRONT);
    glReadPixels(0, 0, SCREEN_X, SCREEN_Y, GL_RGBA, GL_UNSIGNED_BYTE, 
                 screen->pixels);
-   SDL_SaveBMP(screen, fileName.c_str());
-
+   
+   /* invert the image Y or scale and invert it */
+   if(!thumb)
+   {
+      /* Only invert the Y axys */
+      for(i = 0; i < SCREEN_X; i++)
+      {
+         for(j = 0; j < SCREEN_Y; j++)
+         {
+            pixel_Set(dest,i,j, pixel_Get(screen,i,SCREEN_Y-j-1));
+         }
+      }
+   }
+   else
+   {
+      int sumX = SCREEN_X / THUMB_X,
+          sumY = SCREEN_Y / THUMB_Y;
+      /* Copy scaling and inverting the Y axys */
+      for(i = 0; i < THUMB_X; i++)
+      {
+         for(j = 0; j < THUMB_Y; j++)
+         {
+            pixel_Set(dest,i,j, 
+                      pixel_Get(screen, (i*sumX), (SCREEN_Y - ((j-1)*sumY))));
+         }
+      }
+   }
+   
+   SDL_SaveBMP(dest, fileName.c_str());
+   
    SDL_FreeSurface(screen);
+   SDL_FreeSurface(dest);
 
    return(true);
 }
