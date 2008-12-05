@@ -378,7 +378,8 @@ bool screenshot(string fileName, bool thumb)
          for(j = 0; j < THUMB_Y; j++)
          {
             pixel_Set(dest,i,j, 
-                      pixel_Get(screen, (i*sumX), (SCREEN_Y - ((j-1)*sumY))));
+                      pixel_Get_Interpolate(screen, (i*sumX), 
+                                            (SCREEN_Y - ((j-1)*sumY))));
          }
       }
    }
