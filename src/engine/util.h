@@ -173,11 +173,23 @@ void draw2DMode();
  * \param actualFarView -> the actual value of farView to set */
 void draw3DMode(float actualFarView);
 
+/*! Read the current front buffer to a SDL_Surface
+ * \return -> pointer to the created SDL_Surface with the front buffer image
+ * \note -> you must SDL_FreeSurface the result when no more needed! */
+SDL_Surface* readFrontBuffer();
+
 /*! Take screenshot from the current buffer
  * \param fileName -> fileName of the screenShot
  * \param thumb -> if will save as a miniature 
  * \return -> true if screenshot was saved */
 bool screenshot(string fileName, bool thumb=false); 
+
+/*! Take screenshot from a SDL_Surface
+ * \param screen -> pointer to the surface to save, containing ALL the screen
+ * \param fileName -> fileName of the screenShot
+ * \param thumb -> if will save as a miniature 
+ * \return -> true if screenshot was saved */
+bool screenshot(SDL_Surface* screen, string fileName, bool thumb);
 
 /*! Calculate the angle with two points
  * \param prvX -> point A X

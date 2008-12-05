@@ -312,15 +312,12 @@ void draw3DMode(float actualFarView)
    glPopMatrix();
 }
 
-
 /*********************************************************************
- *                              screenshot                           *
+ *                           readFrontBuffer                         *
  *********************************************************************/
-bool screenshot(string fileName, bool thumb) 
+SDL_Surface* readFrontBuffer()
 {
    SDL_Surface* screen = NULL;
-   SDL_Surface* dest = NULL;
-   int i,j;
 
    /* Define Machine Bit Order */
    Uint32 rmask, gmask, bmask, amask;
@@ -339,7 +336,38 @@ bool screenshot(string fileName, bool thumb)
    /* Create the Screen */
    screen = SDL_CreateRGBSurface(SDL_SWSURFACE, SCREEN_X, SCREEN_Y, 32, 
                                  rmask, gmask, bmask, amask);
-   
+
+   /* Read screen from the buffer */
+   glReadBuffer(GL_FRONT);
+   glReadPixels(0, 0, SCREEN_X, SCREEN_Y, GL_RGBA, GL_UNSIGNED_BYTE, 
+                screen->pixels);
+
+   return(screen);
+}
+
+/*********************************************************************
+ *                              screenshot                           *
+ *********************************************************************/
+bool screenshot(SDL_Surface* screen, string fileName, bool thumb)
+{
+   bool res;
+   SDL_Surface* dest = NULL;
+   int i,j;
+
+   /* Define Machine Bit Order */
+   Uint32 rmask, gmask, bmask, amask;
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+   rmask = 0xff000000;
+   gmask = 0x00ff0000;
+   bmask = 0x0000ff00;
+   amask = 0x000000ff;
+#else
+   rmask = 0x000000ff;
+   gmask = 0x0000ff00;
+   bmask = 0x00ff0000;
+   amask = 0xff000000;
+#endif
+
    /* Create the destiny surface */
    if(thumb)
    {
@@ -352,26 +380,22 @@ bool screenshot(string fileName, bool thumb)
                                   rmask, gmask, bmask, amask);
    }
 
-   glReadBuffer(GL_FRONT);
-   glReadPixels(0, 0, SCREEN_X, SCREEN_Y, GL_RGBA, GL_UNSIGNED_BYTE, 
-                screen->pixels);
-   
    /* invert the image Y or scale and invert it */
    if(!thumb)
    {
       /* Only invert the Y axys */
-      for(i = 0; i < SCREEN_X; i++)
+      for(i = 0; i < screen->w; i++)
       {
-         for(j = 0; j < SCREEN_Y; j++)
+         for(j = 0; j < screen->h; j++)
          {
-            pixel_Set(dest,i,j, pixel_Get(screen,i,SCREEN_Y-j-1));
+            pixel_Set(dest,i,j, pixel_Get(screen,i,screen->h-j-1));
          }
       }
    }
    else
    {
-      int sumX = SCREEN_X / THUMB_X,
-          sumY = SCREEN_Y / THUMB_Y;
+      int sumX = screen->w / THUMB_X,
+          sumY = screen->h / THUMB_Y;
       /* Copy scaling and inverting the Y axys */
       for(i = 0; i < THUMB_X; i++)
       {
@@ -379,16 +403,35 @@ bool screenshot(string fileName, bool thumb)
          {
             pixel_Set(dest,i,j, 
                       pixel_Get_Interpolate(screen, (i*sumX), 
-                                            (SCREEN_Y - ((j-1)*sumY))));
+                                            (screen->h - ((j-1)*sumY))));
          }
       }
    }
    
-   SDL_SaveBMP(dest, fileName.c_str());
+   res = (SDL_SaveBMP(dest, fileName.c_str()) == 0);
    
-   SDL_FreeSurface(screen);
    SDL_FreeSurface(dest);
 
-   return(true);
+   return(res);
+}
+
+
+/*********************************************************************
+ *                              screenshot                           *
+ *********************************************************************/
+bool screenshot(string fileName, bool thumb) 
+{
+   bool res;
+
+   /* Get the current front buffer */
+   SDL_Surface* screen = readFrontBuffer();
+   
+   /* Save the screenshot */
+   res = screenshot(screen, fileName, thumb);
+
+   /* Free the Surface */
+   SDL_FreeSurface(screen);
+
+   return(res);
 }
 
