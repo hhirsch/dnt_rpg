@@ -756,16 +756,16 @@ void options::displayOptionsScreen(guiInterface* interf)
    /* AutoEndTurn Enable or Not */
    qt = list->insertTextBox(24,posY,219,posY+17,0,
                             gettext("Auto End Turn"));
-   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
    cxSelAutoEndTurn = list->insertCxSel(12,posY+4,autoEndTurn);
    list->insertPicture(220,posY,40,112,
                   dir.getRealFile("texturas/options/autoendturn.png").c_str());
    posY += 25;
 
    /* ShowEnemyCircles or or Not */
-   qt = list->insertTextBox(24,posY,219,posY+17,0,
+   qt = list->insertTextBox(24,posY,219,posY+34,0,
                             gettext("Show Enemy Battle Circle"));
-   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
    cxSelShowEnemyCircles = list->insertCxSel(12,posY+4,showEnemyCircles);
    list->insertPicture(220,posY,40,112,
               dir.getRealFile("texturas/options/showenemycircles.png").c_str());
