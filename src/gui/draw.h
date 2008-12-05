@@ -56,6 +56,13 @@ void pixel_Set(SDL_Surface *screen, int x, int y);
 void pixel_Set(SDL_Surface* screen, int x, int y, 
                int red, int green, int blue, int alpha);
 
+/*! Set the surface (x,y) pixel color
+ * \param screen -> surface to draw 
+ * \param x -> x coordinate of the pixel
+ * \param y -> y coordinate of the pixel
+ * \param color -> color to set pixel */
+void pixel_Set(SDL_Surface* screen, int x, int y, Uint32 color);
+
 /*! Get the surface (x,y) pixel color
  * \param surface -> surface to draw
  * \param x -> x coordinate of the pixel

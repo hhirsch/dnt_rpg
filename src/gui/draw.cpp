@@ -46,6 +46,7 @@ void pixel_Set(SDL_Surface* screen, int x, int y,
    int bpp = screen->format->BytesPerPixel;
    Uint32 color;
 
+   /* Map RGB(A) color to the SDL Color */
    if(bpp == 4)
    {
       color = SDL_MapRGBA(screen->format, red, green, blue, alpha);
@@ -54,7 +55,17 @@ void pixel_Set(SDL_Surface* screen, int x, int y,
    {
       color = SDL_MapRGB(screen->format, red, green, blue);
    }
+   pixel_Set(screen, x, y, color);
+}
 
+/******************************************************************
+ *                            pixel_Set                           *
+ ******************************************************************/
+void pixel_Set(SDL_Surface* screen, int x, int y, Uint32 color)
+{
+   int bpp = screen->format->BytesPerPixel;
+
+   /* Verify Limits */
    if((x>screen->w-1) || (y>screen->h-1) || (x<0) || (y<0))
    {
        return;
@@ -188,30 +199,36 @@ void rectangle_2Colors(SDL_Surface *screen, int x1, int y1, int x2, int y2,
  ******************************************************************/
 Uint32 pixel_Get(SDL_Surface *surface, int x, int y)
 {
-    int bpp = surface->format->BytesPerPixel;
-    /* Here p is the address to the pixel we want to retrieve */
-    Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
+   /* Verify Limits */
+   if((x > surface->w-1) || (y > surface->h-1) || (x<0) || (y<0))
+   {
+      return(0);
+   }
 
-    switch(bpp) 
-    {
-       case 1:
-          return *p;
+   int bpp = surface->format->BytesPerPixel;
+   /* Here p is the address to the pixel we want to retrieve */
+   Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
 
-       case 2:
-          return *(Uint16 *)p;
+   switch(bpp) 
+   {
+      case 1:
+         return *p;
 
-       case 3:
-          if(SDL_BYTEORDER == SDL_BIG_ENDIAN)
-             return p[0] << 16 | p[1] << 8 | p[2];
-          else
-             return p[0] | p[1] << 8 | p[2] << 16;
+      case 2:
+         return *(Uint16 *)p;
 
-       case 4:
-          return *(Uint32 *)p;
+      case 3:
+         if(SDL_BYTEORDER == SDL_BIG_ENDIAN)
+            return p[0] << 16 | p[1] << 8 | p[2];
+         else
+            return p[0] | p[1] << 8 | p[2] << 16;
 
-       default:
-          return 0;       /* shouldn't happen, but avoids warnings */
-    }
+      case 4:
+         return *(Uint32 *)p;
+
+      default:
+         return 0;       /* shouldn't happen, but avoids warnings */
+   }
 }
 
 /******************************************************************
