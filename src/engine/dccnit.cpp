@@ -310,28 +310,39 @@ engine::~engine()
 /*********************************************************************
  *                               loadGame                            *
  *********************************************************************/
-void engine::loadGame()
+bool engine::loadGame()
 {
+   bool res = false;
    saveFile *sav = new saveFile();
 
    //TODO get the file name!
-   sav->loadHeader("teste.sav");
-   sav->load((void*)this);
-
-   /* make sure not in battle mode */
-   engineMode = ENGINE_MODE_REAL_TIME;
-
-   /* Put the camera at the characters position */
-   activeCharacter = PCs->getActiveCharacter();
-   if(activeCharacter)
+   if(sav->loadHeader("teste.sav"))
    {
-      gameCamera.updateCamera(activeCharacter->xPosition,
-                              activeCharacter->yPosition,
-                              activeCharacter->zPosition,
-                              activeCharacter->orientation);
+      sav->load((void*)this);
+
+      /* make sure not in battle mode */
+      engineMode = ENGINE_MODE_REAL_TIME;
+
+      /* Put the camera at the characters position */
+      activeCharacter = PCs->getActiveCharacter();
+      if(activeCharacter)
+      {
+         gameCamera.updateCamera(activeCharacter->xPosition,
+               activeCharacter->yPosition,
+               activeCharacter->zPosition,
+               activeCharacter->orientation);
+      }
+      res = true;
+   }
+   else
+   {
+      warning warn;
+      warn.show(gettext("Error"), gettext("Can't load the saved game!"), gui);
+      res = false;
    }
 
    delete(sav);
+   return(res);
 }
 
 /*********************************************************************
