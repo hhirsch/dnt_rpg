@@ -12,7 +12,7 @@ workDirs="bin data po src syntax"
 homeFiles="aclocal.m4 configure configure.in DccNiTghtmare.dev \
            DccNiTghtmare.dsp DccNiTghtmare.dsw DNTMapEditor.dev Doxyfile \
            install.sh license.txt Makefile.in mapEditor.dsp README \
-           systems.txt torelease.sh"
+           systems.txt torelease.sh config.sub config.guess"
 
 #Verify if file was defined
 if [[ -z $tarFile ]]; then
