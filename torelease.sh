@@ -14,7 +14,7 @@ homeFiles="aclocal.m4 configure configure.in DccNiTghtmare.dev \
            install.sh license.txt Makefile.in mapEditor.dsp README \
            systems.txt torelease.sh config.sub config.guess"
 
-#Verify if file was defined
+# Verify if file was defined
 if [[ -z $tarFile ]]; then
    tarFile="$project.tar.bz2"
 fi
@@ -43,9 +43,11 @@ for directory in $workDirs; do
          mkdir -p $project/$curDir
 
          # And copy all of its files
-         for f in $curDir/*.*;do
-            if [ "$f" != "$curDir/*.*" ]; then
-               cp $f $project/$f
+         for f in $curDir/*;do
+            if [[ -f $f ]]; then
+               if [ "$f" != "$curDir/*" ]; then
+                  cp $f $project/$f
+               fi
             fi
          done
       fi
