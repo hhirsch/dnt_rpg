@@ -43,8 +43,8 @@ OBJS = alignwindow.o aspectwindow.o attwindow.o barterwindow.o briefing.o \
        camera.o character.o charwindow.o classwindow.o collision.o \
 		 culling.o cursor.o dialog.o dccnit.o initial.o inventwindow.o \
 		 itemwindow.o levelup.o minimapwindow.o modstate.o options.o \
-		 racewindow.o savefile.o skillwindow.o shadow.o shortcutswindow.o \
-		 sky.o sun.o teste.o util.o
+		 racewindow.o savefile.o savewindow.o skillwindow.o shadow.o \
+		 shortcutswindow.o sky.o sun.o teste.o util.o
 BIN = ../../bin/
 SUPREDE = #-DVIDEO_MODE #-DREDE #comente para nao ter suporte a rede na bagaca
 FIFO = #../etc/fifo.o
@@ -164,6 +164,11 @@ racewindow.o: racewindow.h racewindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)race.h
 savefile.o: savefile.h savefile.cpp dccnit.h modstate.h $(ENDGUI)farso.h
 	@printf "Making savefile.o... "
 	@$(CC) $(CFLAGS) savefile.cpp -o savefile.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+savewindow.o: savefile.h savewindow.cpp savewindow.h $(ENDGUI)farso.h
+	@printf "Making savewindow.o... "
+	@$(CC) $(CFLAGS) savewindow.cpp -o savewindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 skillwindow.o: skillwindow.h skillwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)skills.h

@@ -227,13 +227,13 @@ void fileSel::changeCurDir(string newDir)
       /* Directories */
       if(s[j][0] == 'd')
       {
-         lastDir = j;
          /* Remove the "group" char */
          s[j].erase(0,1);
 
          /* Insert at list, if directory navigations is defined */
          if(navDirs)
          {
+            lastDir = j;
             textFiles->insertText(s[j], 255,20,20);
          }
       }
@@ -299,10 +299,18 @@ string fileSel::getFileName()
    /* Get the current file */
    if(loading)
    {
+      if(textCurFile->getText().empty())
+      {
+         return("");
+      }
       fileName += textCurFile->getText();
    }
    else
    {
+      if(editCurFile->getText().empty())
+      {
+         return("");
+      } 
       fileName += editCurFile->getText();
    }
 

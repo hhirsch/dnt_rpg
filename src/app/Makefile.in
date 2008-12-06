@@ -42,7 +42,8 @@ OBJSENGINE = $(ENDENGINE)alignwindow.o $(ENDENGINE)aspectwindow.o \
 				 $(ENDENGINE)levelup.o $(ENDENGINE)minimapwindow.o \
 				 $(ENDENGINE)modstate.o $(ENDENGINE)options.o \
 				 $(ENDENGINE)character.o $(ENDENGINE)racewindow.o \
-				 $(ENDENGINE)savefile.o $(ENDENGINE)skillwindow.o \
+				 $(ENDENGINE)savefile.o $(ENDENGINE)savewindow.o \
+				 $(ENDENGINE)skillwindow.o \
 				 $(ENDENGINE)shadow.o $(ENDENGINE)shortcutswindow.o \
 				 $(ENDENGINE)sky.o $(ENDENGINE)sun.o $(ENDENGINE)util.o
 OBJS = area.o editor.o guiIO.o listWindow.o mapEditor.o message.o npcs.o objects.o particles.o portal.o terrain.o wall.o

@@ -362,9 +362,10 @@ listText* guiList::insertListText(int xa,int ya,int xb,int yb)
 /**************************************************************
  *                        insertFileSel                       *
  **************************************************************/
-fileSel* guiList::insertFileSel(int xa, int ya, bool load, string dir)
+fileSel* guiList::insertFileSel(int xa, int ya, bool load, 
+                                string dir, bool nav)
 {
-   fileSel* n = new fileSel(xa, ya, load, dir, this);
+   fileSel* n = new fileSel(xa, ya, load, dir, this, nav);
    insertObject(n);
    return(n);
 }

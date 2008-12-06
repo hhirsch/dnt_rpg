@@ -31,15 +31,13 @@ class saveFile
       bool loadHeader(string fileName);
 
       /*! Create a save file
-       * \param saveTitle -> save file title
        * \param saveFile -> save file name string
        * \param modifState -> the modState to save to the file
        * \param curMap -> current opened map
        * \param curEngine -> pointer to the current engine
        * \param frontSurface -> pointer to the frontSurface (screenshot)
        * \return -> true if can save, false otherwise */
-      bool save(string saveTitle, string saveFile, void* curEngine,
-                SDL_Surface* frontSurface);
+      bool save(string saveFile, void* curEngine, SDL_Surface* frontSurface);
 
       /*! Get the save file title
        * \return -> save file title */
@@ -54,6 +52,7 @@ class saveFile
        * \return -> saved character filename */
       string getCharacterFile();
 
+
    protected:
 
       string title;          /**< The save File title*/
@@ -66,7 +65,6 @@ class saveFile
       string pcFile;         /**< The PC file */
       float pcPos[3];        /**< The PC Position */
       float pcAngle;         /**< The PC angle */
-
 
 };
 

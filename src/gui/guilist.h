@@ -137,8 +137,10 @@ class guiList
        * \param load -> true if the selector is a loading one, false if it
        *                is a saving one.
        * \param dir -> current dir to browse
+       * \param nav -> if show dirs to navigate or not
        * \return -> pointer to the fileSel inserted */
-      fileSel* insertFileSel(int xa, int ya, bool load, string dir);
+      fileSel* insertFileSel(int xa, int ya, bool load, string dir, 
+                             bool nav=true);
 
       /*! Insert a healthBar (a progress bar) on the list
        * \param xa -> x1 coordinate 

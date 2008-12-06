@@ -163,6 +163,10 @@ void levelUp::doLevelUp(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
             break;
          }
       }
+      else
+      {
+         SDL_Delay(UPDATE_RATE-2);
+      }
    }
 
    if(state == LEVEL_UP_FINISHED)
@@ -173,5 +177,6 @@ void levelUp::doLevelUp(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 
    /* Clear the temporary gui, and done! */
    delete(gui);
+   glDeleteTextures(1,&tituloId);
 }
 

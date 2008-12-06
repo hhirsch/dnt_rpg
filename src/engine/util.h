@@ -34,8 +34,8 @@
 #define DNT_TO_METER   0.5 /**< Constant to multiply to convert meter to DNT.*/
 #define METER_TO_DNT   1.0 / DNT_TO_METER /**< Constant to DNT to Meter value*/
 
-#define THUMB_X      160  /**< X size of the screenshot */
-#define THUMB_Y      120  /**< Y size of the screenshot */
+#define THUMB_X      128  /**< X size of the screenshot */
+#define THUMB_Y       96  /**< Y size of the screenshot */
 
 /********************************************************************
  *                          Update constants                        *

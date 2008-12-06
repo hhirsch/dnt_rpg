@@ -85,11 +85,12 @@ string saveFile::getCharacterFile()
 /***********************************************************************
  *                               save                                  *
  ***********************************************************************/
-bool saveFile::save(string saveTitle, string saveFile, void* curEngine,
-                    SDL_Surface* frontSurface)
+bool saveFile::save(string saveFile, void* curEngine, SDL_Surface* frontSurface)
 {
    ofstream file;
    engine* eng = (engine*)curEngine;
+   char buf[256];
+   int i;
 
    modState mState;
    modInventory* inv;
@@ -106,28 +107,37 @@ bool saveFile::save(string saveTitle, string saveFile, void* curEngine,
    eng->keepNPCInventoryStatus();
    pc = eng->PCs->getActiveCharacter();
    
-   /* Define Save Path */
-   userInfo uInfo;
-   string savePath = uInfo.getSavesDirectory() + saveFile;
-
    /* Define the Save Prefix */
    string prefix = "";
-   if(savePath.length() > 4)
+   if(saveFile.length() > 4)
    {
       /* Get the prefix: file path without .sav */
-      prefix = savePath.substr(0, savePath.length()-4);
+      prefix = saveFile.substr(0, saveFile.length()-4);
    }
 
    /* Open the Header File to save */
-   file.open(savePath.c_str(), ios::out | ios::binary);
+   file.open(saveFile.c_str(), ios::out | ios::binary);
    if(!file)
    {
-      cerr << "Error Opening file: " << savePath << endl;
+      cerr << "Error Opening file: " << saveFile << endl;
       return(false);
    }
 
+   /* Define the title */
+   title = pc->name + ", " + pc->actualRace->name + ", " +
+           pc->actualAlign->name;
+   for(i=0; i < MAX_DISTINCT_CLASSES; i++)
+   {
+      if(pc->actualClass[i])
+      {
+         sprintf(buf,"%s(%d)", pc->actualClass[i]->name.c_str(),
+                 pc->classLevels[i]);
+         title += ", ";
+         title += buf;
+      }
+   }
+
    /* Define variables/files */
-   title = saveTitle;
    version = VERSION;
    imageFile = prefix + ".bmp";
    mapFile = eng->getCurrentMap()->getFileName();
@@ -285,12 +295,8 @@ bool saveFile::loadHeader(string fileName)
    defParser parser;
    string key, value;
 
-   /* Define Path */
-   userInfo uInfo;
-   string path = uInfo.getSavesDirectory() + fileName;
-
    /* Parse It! */
-   if(!parser.load(path, true))
+   if(!parser.load(fileName, true))
    {
       return(false);
    }

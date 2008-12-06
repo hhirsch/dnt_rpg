@@ -6,6 +6,7 @@
 #include "culling.h"
 #include "util.h"
 #include "savefile.h"
+#include "savewindow.h"
 
 #include <math.h>
 #include <SDL/SDL_image.h>
@@ -313,35 +314,42 @@ engine::~engine()
 bool engine::loadGame()
 {
    bool res = false;
-   saveFile *sav = new saveFile();
 
-   //TODO get the file name!
-   if(sav->loadHeader("teste.sav"))
+   /* create and run the load/save window */
+   saveWindow *savWindow = new saveWindow();
+   if(savWindow->run(true, proj, modl, viewPort) == DNT_SAVE_WINDOW_CONFIRM)
    {
-      sav->load((void*)this);
+      saveFile *sav = new saveFile();
 
-      /* make sure not in battle mode */
-      engineMode = ENGINE_MODE_REAL_TIME;
-
-      /* Put the camera at the characters position */
-      activeCharacter = PCs->getActiveCharacter();
-      if(activeCharacter)
+      if(sav->loadHeader(savWindow->getSelectedFileName()))
       {
-         gameCamera.updateCamera(activeCharacter->xPosition,
-               activeCharacter->yPosition,
-               activeCharacter->zPosition,
-               activeCharacter->orientation);
-      }
-      res = true;
-   }
-   else
-   {
-      warning warn;
-      warn.show(gettext("Error"), gettext("Can't load the saved game!"), gui);
-      res = false;
-   }
+         sav->load((void*)this);
 
-   delete(sav);
+         /* make sure not in battle mode */
+         engineMode = ENGINE_MODE_REAL_TIME;
+
+         /* Put the camera at the characters position */
+         activeCharacter = PCs->getActiveCharacter();
+         if(activeCharacter)
+         {
+            gameCamera.updateCamera(activeCharacter->xPosition,
+                  activeCharacter->yPosition,
+                  activeCharacter->zPosition,
+                  activeCharacter->orientation);
+         }
+         res = true;
+      }
+      else
+      {
+         warning warn;
+         warn.show(gettext("Error"),gettext("Can't load the saved game!"),gui);
+         res = false;
+      }
+
+      delete(sav);
+   }
+   
+   delete(savWindow);
    return(res);
 }
 
@@ -365,18 +373,34 @@ void engine::defineFrontSurface()
  *********************************************************************/
 void engine::saveGame()
 {
+   warning warn;
+
    if(engineMode != ENGINE_MODE_TURN_BATTLE)
    {
-      saveFile *sav = new saveFile();
+      /* create and run the load/save window */
+      saveWindow *savWindow = new saveWindow();
+      if(savWindow->run(false, proj, modl, viewPort) == DNT_SAVE_WINDOW_CONFIRM)
+      {
+         saveFile *sav = new saveFile();
 
-      //TODO get the file name and title!
-      sav->save("Teste","teste.sav", (void*)this, frontSurface);
+         /* Do the Save */
+         if(sav->save(savWindow->getSelectedFileName(), (void*)this, 
+                      frontSurface))
+         {
+            warn.show(gettext("Information"), 
+                      gettext("The game was saved!"), gui);
+         }
+         else
+         {
+            warn.show(gettext("Error"), gettext("Can't save game!"), gui);
+         }
 
-      delete(sav);
+         delete(sav);
+      }
+      delete(savWindow);
    }
    else
    {
-      warning warn;
       warn.show(gettext("Warning"), 
                 gettext("Can't save game while fighting!"), gui);
    }
