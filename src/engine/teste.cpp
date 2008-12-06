@@ -109,11 +109,13 @@ int main(int argc, char **argv)
        if(result == LOAD_GAME)
        {
           /* Load the game */
-          gameEngine->loadGame();
-          /* And continue to play it (as a new, to
-           * open all initial windows)! */
-          result = NEW_GAME;
-          charCreation = CHAR_CONFIRM;
+          if(gameEngine->loadGame())
+          {
+             /* And continue to play it (as a new, to
+              * open all initial windows)! */
+             result = NEW_GAME;
+             charCreation = CHAR_CONFIRM;
+          }
        }
        
        if(result == OPTIONS)

@@ -40,6 +40,14 @@ string userInfo::getUserHome()
    return(userHome);
 }
 
+/****************************************************************
+ *                     getSavesDirectory                        *
+ ****************************************************************/
+string userInfo::getSavesDirectory()
+{
+   return(userHome + "saves/");
+}
+
 //
 //
 ////////Static Vars///////

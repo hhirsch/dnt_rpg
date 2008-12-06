@@ -111,6 +111,9 @@ bool options::load()
          {
             cerr << strerror(errno) << endl;
          }
+         /* Create the saves directories */
+         cerr << "Creating Saves Directory... " << endl;
+         mkdir(info.getSavesDirectory().c_str(), 0755);
 
          /* Save the options file */
          cerr << "Creating Options: " << fileName << endl;

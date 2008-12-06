@@ -20,6 +20,9 @@ class userInfo
       /*! Get the User Home */
       string getUserHome();
 
+      /*! Get the Saves Directory */
+      string getSavesDirectory();
+
    protected:
       static string userName;    /**< The User Name */
       static string userHome;    /**< The User Home */

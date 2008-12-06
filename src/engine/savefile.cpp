@@ -108,7 +108,7 @@ bool saveFile::save(string saveTitle, string saveFile, void* curEngine,
    
    /* Define Save Path */
    userInfo uInfo;
-   string savePath = uInfo.getUserHome() + saveFile;
+   string savePath = uInfo.getSavesDirectory() + saveFile;
 
    /* Define the Save Prefix */
    string prefix = "";
@@ -287,66 +287,68 @@ bool saveFile::loadHeader(string fileName)
 
    /* Define Path */
    userInfo uInfo;
-   string path = uInfo.getUserHome() + fileName;
+   string path = uInfo.getSavesDirectory() + fileName;
 
    /* Parse It! */
-   if(parser.load(path, true))
+   if(!parser.load(path, true))
    {
-      while(parser.getNextTuple(key, value))
+      return(false);
+   }
+
+   while(parser.getNextTuple(key, value))
+   {
+      if(key == DNT_SAVE_TOKEN_VERSION)
       {
-         if(key == DNT_SAVE_TOKEN_VERSION)
+         version = value;
+         if(version != VERSION)
          {
-            version = value;
-            if(version != VERSION)
-            {
-               //TODO -> throw error!
-               return(false);
-            }
-         }
-         else if(key == DNT_SAVE_TOKEN_IMAGE)
-         {
-           /* Define the image file */
-           imageFile = value;
-         }
-         else if(key == DNT_SAVE_TOKEN_TITLE)
-         {
-            /* Define the title */
-            title = value;
-         }
-         else if(key == DNT_SAVE_TOKEN_MOD_STATE)
-         {
-            /* Define the modState file */
-            modStateFile = value;
-         }
-         else if(key == DNT_SAVE_TOKEN_MISSIONS)
-         {
-            /* Define the missions file */
-            missionsFile = value;
-         }
-         else if(key == DNT_SAVE_TOKEN_PC)
-         {
-            /* Define the pc file */
-            pcFile = value;
-         }
-         else if(key == DNT_SAVE_TOKEN_PC_INVENTORY)
-         {
-            /* Define Inventory File */
-            invFile = value;
-         }
-         else if(key == DNT_SAVE_TOKEN_PC_POSITION)
-         {
-            /* Define the positions */
-            sscanf(value.c_str(), "%f,%f,%f %f", &pcPos[0], &pcPos[1], 
-                                                 &pcPos[2], &pcAngle);
-         }
-         else if(key == DNT_SAVE_TOKEN_MAP)
-         {
-            /* Define the current map file */
-            mapFile = value;
+            //TODO -> throw error!
+            return(false);
          }
       }
+      else if(key == DNT_SAVE_TOKEN_IMAGE)
+      {
+         /* Define the image file */
+         imageFile = value;
+      }
+      else if(key == DNT_SAVE_TOKEN_TITLE)
+      {
+         /* Define the title */
+         title = value;
+      }
+      else if(key == DNT_SAVE_TOKEN_MOD_STATE)
+      {
+         /* Define the modState file */
+         modStateFile = value;
+      }
+      else if(key == DNT_SAVE_TOKEN_MISSIONS)
+      {
+         /* Define the missions file */
+         missionsFile = value;
+      }
+      else if(key == DNT_SAVE_TOKEN_PC)
+      {
+         /* Define the pc file */
+         pcFile = value;
+      }
+      else if(key == DNT_SAVE_TOKEN_PC_INVENTORY)
+      {
+         /* Define Inventory File */
+         invFile = value;
+      }
+      else if(key == DNT_SAVE_TOKEN_PC_POSITION)
+      {
+         /* Define the positions */
+         sscanf(value.c_str(), "%f,%f,%f %f", &pcPos[0], &pcPos[1], 
+               &pcPos[2], &pcAngle);
+      }
+      else if(key == DNT_SAVE_TOKEN_MAP)
+      {
+         /* Define the current map file */
+         mapFile = value;
+      }
    }
-   
+
    return(true);
 }
 
