@@ -759,6 +759,10 @@ bool character::save(string saveFile)
    file << "psychoState = " << psychoState << endl;
    /* Walk Interval */
    file << "walk_interval = " << (walk_interval / WALK_UPDATE) << endl;
+   /* Sex Type */
+   file << "sex = " << sexType << endl;
+   /* Age */
+   file << "age = " << age << endl;
 
    /* Now, put all not 0 skills */
    skill* ski;
@@ -975,6 +979,16 @@ character* characterList::insertCharacter(string file, featsList* ft,
       else if(key == "psychoState")
       {
          sscanf(value.c_str(), "%d", &novo->psychoState);
+      }
+      /* Sex Type */
+      else if(key == "sex")
+      {
+         sscanf(value.c_str(), "%d", &novo->sexType);
+      }
+      /* Psycho State */
+      else if(key == "age")
+      {
+         sscanf(value.c_str(), "%d", &novo->age);
       }
 
       /* Some Skill or Attribute definition */
