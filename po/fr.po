@@ -363,7 +363,7 @@ msgstr "Erreur"
 
 #: src/engine/dccnit.cpp:340
 msgid "Can't load the saved game!"
-msgstr "Ne peut pas charger le jeu!"
+msgstr "Ne peux pas charger le jeu!"
 
 #: src/engine/dccnit.cpp:381
 msgid "Can't save game while fighting!"
