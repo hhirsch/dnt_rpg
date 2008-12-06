@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-12-04 16:41-0200\n"
+"POT-Creation-Date: 2008-12-06 10:32-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -79,14 +79,14 @@ msgstr ""
 
 #: src/engine/alignwindow.cpp:55 src/engine/aspectwindow.cpp:75
 #: src/engine/attwindow.cpp:220 src/engine/classwindow.cpp:97
-#: src/engine/options.cpp:780 src/engine/racewindow.cpp:95
+#: src/engine/options.cpp:783 src/engine/racewindow.cpp:95
 #: src/engine/skillwindow.cpp:137
 msgid "Confirm"
 msgstr ""
 
 #: src/engine/alignwindow.cpp:59 src/engine/aspectwindow.cpp:79
 #: src/engine/attwindow.cpp:224 src/engine/barterwindow.cpp:46
-#: src/engine/classwindow.cpp:101 src/engine/options.cpp:784
+#: src/engine/classwindow.cpp:101 src/engine/options.cpp:787
 #: src/engine/racewindow.cpp:99 src/engine/skillwindow.cpp:140
 msgid "Cancel"
 msgstr ""
@@ -157,8 +157,8 @@ msgstr ""
 msgid "Attribute Description"
 msgstr ""
 
-#: src/engine/attwindow.cpp:535 src/engine/dccnit.cpp:347
-#: src/engine/options.cpp:992
+#: src/engine/attwindow.cpp:535 src/engine/dccnit.cpp:380
+#: src/engine/options.cpp:995
 msgid "Warning"
 msgstr ""
 
@@ -356,46 +356,54 @@ msgstr ""
 msgid "No Skills."
 msgstr ""
 
-#: src/engine/dccnit.cpp:348
+#: src/engine/dccnit.cpp:340
+msgid "Error"
+msgstr ""
+
+#: src/engine/dccnit.cpp:340
+msgid "Can't load the saved game!"
+msgstr ""
+
+#: src/engine/dccnit.cpp:381
 msgid "Can't save game while fighting!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:466
+#: src/engine/dccnit.cpp:499
 #, c-format
 msgid "Saving Current Map Modifications"
 msgstr ""
 
-#: src/engine/dccnit.cpp:501
+#: src/engine/dccnit.cpp:534
 #, c-format
 msgid "Loading Map: %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:564
+#: src/engine/dccnit.cpp:597
 #, c-format
 msgid "Loading NPC: %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:590
+#: src/engine/dccnit.cpp:623
 msgid "Creating MiniMap"
 msgstr ""
 
-#: src/engine/dccnit.cpp:596
+#: src/engine/dccnit.cpp:629
 msgid "Putting GUI on Screen"
 msgstr ""
 
-#: src/engine/dccnit.cpp:643
+#: src/engine/dccnit.cpp:676
 msgid "Loading Particles"
 msgstr ""
 
-#: src/engine/dccnit.cpp:673
+#: src/engine/dccnit.cpp:706
 msgid "Loading Changes..."
 msgstr ""
 
-#: src/engine/dccnit.cpp:701
+#: src/engine/dccnit.cpp:734
 msgid "Done!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:793
+#: src/engine/dccnit.cpp:826
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -403,50 +411,50 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1300
+#: src/engine/dccnit.cpp:1333
 msgid "Too far away for the action!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1342
+#: src/engine/dccnit.cpp:1375
 msgid "No NPCs in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1393
+#: src/engine/dccnit.cpp:1426
 msgid "Surprise Attack Turn."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1407
+#: src/engine/dccnit.cpp:1440
 msgid "No enemies in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1584 src/engine/dccnit.cpp:2034
+#: src/engine/dccnit.cpp:1617 src/engine/dccnit.cpp:2068
 #: src/engine/shortcutswindow.cpp:32
 msgid "Nothing"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1782
+#: src/engine/dccnit.cpp:1816
 #, c-format
 msgid "%s taken."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1804
+#: src/engine/dccnit.cpp:1838
 msgid "Inventory is full!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1836
+#: src/engine/dccnit.cpp:1870
 msgid "Door"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1969
+#: src/engine/dccnit.cpp:2003
 #, c-format
 msgid "%s attacks %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2130
+#: src/engine/dccnit.cpp:2164
 msgid "No more actions. Turn ended."
 msgstr ""
 
-#: src/engine/dccnit.cpp:3512
+#: src/engine/dccnit.cpp:3547
 msgid "Exit Battle Mode"
 msgstr ""
 
@@ -483,7 +491,7 @@ msgstr ""
 msgid "Load"
 msgstr ""
 
-#: src/engine/initial.cpp:76 src/engine/options.cpp:560
+#: src/engine/initial.cpp:76 src/engine/options.cpp:563
 msgid "Options"
 msgstr ""
 
@@ -601,108 +609,108 @@ msgstr ""
 msgid "Russian"
 msgstr ""
 
-#: src/engine/options.cpp:454 data/weapons/types/munitions.dcl:2
+#: src/engine/options.cpp:457 data/weapons/types/munitions.dcl:2
 msgid "None"
 msgstr ""
 
-#: src/engine/options.cpp:459
+#: src/engine/options.cpp:462
 msgid "Characters"
 msgstr ""
 
-#: src/engine/options.cpp:464
+#: src/engine/options.cpp:467
 msgid "All"
 msgstr ""
 
-#: src/engine/options.cpp:480 data/weapons/types/sizes.dcl:3
+#: src/engine/options.cpp:483 data/weapons/types/sizes.dcl:3
 #: data/weapons/types/weights.dcl:3
 msgid "Normal"
 msgstr ""
 
-#: src/engine/options.cpp:483
+#: src/engine/options.cpp:486
 msgid "Pursue"
 msgstr ""
 
-#: src/engine/options.cpp:498
+#: src/engine/options.cpp:501
 msgid "Disabled"
 msgstr ""
 
-#: src/engine/options.cpp:501
+#: src/engine/options.cpp:504
 msgid "2x"
 msgstr ""
 
-#: src/engine/options.cpp:504
+#: src/engine/options.cpp:507
 msgid "4x"
 msgstr ""
 
-#: src/engine/options.cpp:570
+#: src/engine/options.cpp:573
 msgid "Audio"
 msgstr ""
 
-#: src/engine/options.cpp:574
+#: src/engine/options.cpp:577
 msgid "Music Volume:"
 msgstr ""
 
-#: src/engine/options.cpp:591
+#: src/engine/options.cpp:594
 msgid "Effects Volume:"
 msgstr ""
 
-#: src/engine/options.cpp:608
+#: src/engine/options.cpp:611
 msgid "Video"
 msgstr ""
 
-#: src/engine/options.cpp:616
+#: src/engine/options.cpp:619
 msgid "Screen Resolution:"
 msgstr ""
 
-#: src/engine/options.cpp:631
+#: src/engine/options.cpp:634
 msgid "Enable FullScreen"
 msgstr ""
 
-#: src/engine/options.cpp:640
+#: src/engine/options.cpp:643
 msgid "Enable Grass Effects (need particles)"
 msgstr ""
 
-#: src/engine/options.cpp:649
+#: src/engine/options.cpp:652
 msgid "Enable Particles Effects"
 msgstr ""
 
-#: src/engine/options.cpp:661
+#: src/engine/options.cpp:664
 msgid "Enable MultiTextures"
 msgstr ""
 
-#: src/engine/options.cpp:672
+#: src/engine/options.cpp:675
 msgid "Reflections:"
 msgstr ""
 
-#: src/engine/options.cpp:688
+#: src/engine/options.cpp:691
 msgid "Anti-Aliasing:"
 msgstr ""
 
-#: src/engine/options.cpp:703
+#: src/engine/options.cpp:706
 msgid "FarView:"
 msgstr ""
 
-#: src/engine/options.cpp:719
+#: src/engine/options.cpp:722
 msgid "Game"
 msgstr ""
 
-#: src/engine/options.cpp:725
+#: src/engine/options.cpp:728
 msgid "Language:"
 msgstr ""
 
-#: src/engine/options.cpp:742
+#: src/engine/options.cpp:745
 msgid "Camera Mode:"
 msgstr ""
 
-#: src/engine/options.cpp:758
+#: src/engine/options.cpp:761
 msgid "Auto End Turn"
 msgstr ""
 
-#: src/engine/options.cpp:767
+#: src/engine/options.cpp:770
 msgid "Show Enemy Battle Circle"
 msgstr ""
 
-#: src/engine/options.cpp:993
+#: src/engine/options.cpp:996
 msgid "Some changes will only take effect upon restart."
 msgstr ""
 
