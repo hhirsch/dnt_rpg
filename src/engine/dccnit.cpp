@@ -1759,9 +1759,9 @@ int engine::verifyMouseActions(Uint8 mButton)
 
    /* Create a bounding box for the mouse position */
    GLfloat minMouse[3], maxMouse[3];
-   minMouse[0] = xReal-2;  maxMouse[0] = xReal+2;
+   minMouse[0] = xReal-3;  maxMouse[0] = xReal+3;
    minMouse[1] = 0.0;      maxMouse[1] = 0.0;
-   minMouse[2] = zReal-2;  maxMouse[2] = zReal+2;
+   minMouse[2] = zReal-3;  maxMouse[2] = zReal+3;
 
    int qx, qz;
    qx = (int)xReal / actualMap->squareSize();
