@@ -79,7 +79,7 @@ MapEditor:
 
 clean:
 	@printf "Cleaning App Bin Files... "
-	@\rm -rf *.o *.e ./mapEditor/*.o ./iaEditor/*.o $(BIN)DlgEditor $(BIN)mapEditor $(BIN)fntEditor $(BIN)dntPartEditor $(BIN)iaEditor $(BIN)dlgCompiler
+	@\rm -rf *.o *.e ./mapEditor/*.o ./iaEditor/*.o $(BIN)DlgEditor $(BIN)mapEditor $(BIN)fntEditor $(BIN)dntPartEditor $(BIN)iaEditor $(BIN)dlgCompiler $(BIN)heightmap2dnt
 	@for dir in ${SUBSYSTEMS}; do \
 	   (echo " ";cd $$dir; ${MAKE} clean;echo " "); \
 	done
