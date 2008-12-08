@@ -10,6 +10,7 @@
 
 #ifdef _MSC_VER
    #include "../config_win.h"
+   #include <windows.h>
 #else
    #include "../config.h"
    #include <sys/stat.h>
@@ -102,10 +103,23 @@ bool options::load()
          }
       }
 
-      #ifndef _MSC_VER
-         fileName = info.getUserHome() + "options.cfg";
-         cerr << "Creating Directory: " << info.getUserHome() << ":";
-         /* Create the User directory */
+      fileName = info.getUserHome() + "options.cfg";
+      cerr << "Creating Directory: " << info.getUserHome() << ":";
+      /* Create the User directory */
+
+      #ifdef _MSC_VER
+         if(CreateDirectory(info.getUserHome().c_str(),NULL))
+         {
+            cerr << "ok" << endl;
+         }
+         else
+         {
+            cerr << "failed!" << endl;
+         }
+         /* Create the saves directories */
+         cerr << "Creating Saves Directory... " << endl;
+         CreateDirectory(info.getSavesDirectory().c_str(), NULL);
+      #else
          mkdir(info.getUserHome().c_str(),0755);
          if(errno != EEXIST)
          {
@@ -114,12 +128,11 @@ bool options::load()
          /* Create the saves directories */
          cerr << "Creating Saves Directory... " << endl;
          mkdir(info.getSavesDirectory().c_str(), 0755);
-
-         /* Save the options file */
-         cerr << "Creating Options: " << fileName << endl;
-         save();
       #endif
 
+      /* Save the options file */
+      cerr << "Creating Options: " << fileName << endl;
+      save();
    }
    return(true);
 }
@@ -785,17 +798,6 @@ void options::displayOptionsScreen(guiInterface* interf)
    /* Cancel Button */
    buttonCancel = intWindow->getObjectsList()->insertButton(8,356,78,375,
                                               gettext("Cancel"),1);
-
-#if 0
-   /* borders */
-   intWindow->getObjectsList()->insertTextBox(5,20,250,77,2,"");
-   intWindow->getObjectsList()->insertTextBox(5,78,250,115,2,"");
-   intWindow->getObjectsList()->insertTextBox(5,116,250,153,2,"");
-   intWindow->getObjectsList()->insertTextBox(5,154,250,192,2,"");
-   intWindow->getObjectsList()->insertTextBox(5,193,250,230,2,"");
-   intWindow->getObjectsList()->insertTextBox(5,231,250,352,2,"");
-   intWindow->getObjectsList()->insertTextBox(5,352,250,379,2,"");
-#endif
    
    /* Open Window */
    intWindow->setExternPointer(&intWindow);
