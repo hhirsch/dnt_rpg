@@ -1,6 +1,8 @@
 #include "userinfo.h"
 
-#ifndef _MSC_VER
+#ifdef _MSC_VER
+   #include <windows.h>
+#else
    #include <pwd.h>
    #include <unistd.h>
    #include <sys/types.h>
@@ -12,8 +14,17 @@
 void userInfo::getValuesFromSystem()
 {
    #ifdef _MSC_VER
-      //FIXME use windows functions to get this.
-      userName = "don_Ramon";
+      char name[512];
+      DWORD bufSize = sizeof(name);
+      if(GetUserName(&name[0], &bufSize))
+      {
+         userName = name;
+      }
+      else
+      {
+         userName = "Don Ramon";
+      }
+      
       userHome = "./";
    #else
       struct passwd *info;
