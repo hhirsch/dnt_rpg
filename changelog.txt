@@ -69,9 +69,8 @@ Pending:
  - New Models;
  - English spelling fixes (thanks to Elizabeth);
  - Full French Translation (again, thanks to Elizabeth);
-
-Working on:
  - Load/Save Functions;
+ - Getting user name and home on Windows;
 
 ================================================
 |                Version 0.2                   |
