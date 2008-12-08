@@ -499,6 +499,10 @@ SOURCE=.\src\engine\savefile.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\engine\savewindow.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\gui\seltext.cpp
 # End Source File
 # Begin Source File
@@ -916,6 +920,10 @@ SOURCE=.\src\gui\rolbar.h
 # Begin Source File
 
 SOURCE=.\src\engine\savefile.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\engine\savewindow.h
 # End Source File
 # Begin Source File
 
