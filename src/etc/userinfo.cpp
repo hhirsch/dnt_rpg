@@ -8,25 +8,40 @@
    #include <sys/types.h>
 #endif
 
+#include <iostream>
+using namespace std;
+
 /****************************************************************
  *                      getValuesFromSystem                     *
  ****************************************************************/
 void userInfo::getValuesFromSystem()
 {
    #ifdef _MSC_VER
-      char name[512];
-      DWORD bufSize = sizeof(name);
-      if(GetUserName(&name[0], &bufSize))
+      char buffer[512];
+      DWORD bufSize = sizeof(buffer);
+
+      /* Try to define windows user´s name */
+      if(GetUserName(&buffer[0], &bufSize))
       {
-         userName = name;
+         userName = buffer;
       }
       else
       {
          userName = "Don Ramon";
       }
       
-      userHome = "./";
+      /* Try to define windows user´s home */
+      if(ExpandEnvironmentStrings("%USERPROFILE%",&buffer[0],512) != 0)
+      {
+          userHome = buffer;
+          userHome += "/.dccnitghtmare/";
+      }
+      else
+      {
+         userHome = "./"; 
+      }
    #else
+      /* Get all Current User´s Info (so more clean, isn´t it?) */
       struct passwd *info;
       info = getpwuid(getuid());
       userName = info->pw_name;
