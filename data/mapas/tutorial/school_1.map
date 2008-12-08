@@ -1,148 +1,149 @@
 T 5X6
 # Made by DccNiTghtmare's MapEditor, 0.3
+MUSICA music/musica9.ogg
 light mapas/tutorial/school_1.map.lgh
 Outdoor: 0
-t texturas/floor_indoor/wood6.png texturas/floor_indoor/wood6.png 191 97 27
-t texturas/floor_indoor/mosaic2.png texturas/floor_indoor/mosaic2.png 35 35 36
-t texturas/floor_indoor/steel2.png texturas/floor_indoor/steel2.png 47 9 7
-t texturas/floor_indoor/burl.png texturas/floor_indoor/burl.png 169 94 57
-t texturas/floor_indoor/steel1.png texturas/floor_indoor/steel1.png 128 128 128
 t texturas/floor_indoor/steel4.png texturas/floor_indoor/steel4.png 113 91 72
-d models/objetos/geral/porta7/porta7.dcc 128.000,75.440:90
-d models/objetos/geral/porta7/porta7.dcc 247.238,256.000:0
-d models/objetos/geral/porta7/porta7.dcc 192.000,123.611:90
-d models/objetos/geral/porta7/porta7.dcc 59.392,192.000:0
+t texturas/floor_indoor/steel1.png texturas/floor_indoor/steel1.png 128 128 128
+t texturas/floor_indoor/burl.png texturas/floor_indoor/burl.png 169 94 57
+t texturas/floor_indoor/steel2.png texturas/floor_indoor/steel2.png 47 9 7
+t texturas/floor_indoor/mosaic2.png texturas/floor_indoor/mosaic2.png 35 35 36
+t texturas/floor_indoor/wood6.png texturas/floor_indoor/wood6.png 191 97 27
 d models/objetos/geral/porta7/porta7.dcc 152.558,384.000:0
-wall 118.000,75.440,128.000,138.000
-wtf 16,16,16 texturas/floor_indoor/steel4.png
-wtb 48,50,16 texturas/floor_indoor/burl.png
-wtr 64,50,16 texturas/floor_indoor/burl.png
-wtl 60,50,16 texturas/floor_indoor/steel4.png
-wall 269.076,256.000,310.000,266.000
-wtf 56,50,16 texturas/floor_indoor/burl.png
-wtb 57,50,16 texturas/floor_indoor/steel4.png
-wtr 16,16,16 texturas/floor_indoor/burl.png
-wtl 16,16,16 texturas/floor_indoor/steel4.png
-wall 192.000,123.611,202.000,192.000
-wtf 16,16,16 texturas/floor_indoor/wood6.png
-wtb 16,16,16 texturas/floor_indoor/burl.png
-wtr 62,50,16 texturas/floor_indoor/wood6.png
-wtl 63,50,16 texturas/floor_indoor/burl.png
-wall 81.230,192.000,118.000,202.000
-wtf 59,50,16 texturas/floor_indoor/burl.png
-wtb 60,50,16 texturas/floor_indoor/wood6.png
-wtr 16,16,16 texturas/floor_indoor/burl.png
-wtl 16,16,16 texturas/floor_indoor/wood6.png
-wall 118.000,10.000,128.000,53.602
-wtf 16,16,16 texturas/floor_indoor/burl.png
-wtb 48,50,16 texturas/floor_indoor/steel4.png
-wtr 64,50,16 texturas/floor_indoor/burl.png
-wtl 60,50,16 texturas/floor_indoor/steel4.png
-wall 202.000,256.000,247.238,266.000
-wtf 56,50,16 texturas/floor_indoor/burl.png
-wtb 57,50,16 texturas/floor_indoor/steel4.png
-wtr 16,16,16 texturas/floor_indoor/steel4.png
-wtl 16,16,16 texturas/floor_indoor/burl.png
-wall 192.000,256.000,202.000,374.000
-wtf 53,50,16 texturas/floor_indoor/burl.png
-wtb 16,16,16 texturas/floor_indoor/burl.png
-wtr 61,50,16 texturas/floor_indoor/steel4.png
-wtl 59,50,16 texturas/floor_indoor/burl.png
-wall 10.000,192.000,59.392,202.000
-wtf 59,50,16 texturas/floor_indoor/burl.png
-wtb 60,50,16 texturas/floor_indoor/wood6.png
-wtr 16,16,16 texturas/floor_indoor/wood6.png
-wtl 16,16,16 texturas/floor_indoor/burl.png
-wall 10.000,128.000,118.000,138.000
-wtf 59,50,16 texturas/floor_indoor/steel4.png
-wtb 59,50,16 texturas/floor_indoor/burl.png
-wtr 16,16,16 texturas/floor_indoor/burl.png
-wtl 16,16,16 texturas/floor_indoor/burl.png
-wall 118.000,192.000,128.000,374.000
-wtf 46,50,16 texturas/floor_indoor/burl.png
-wtb 16,16,16 texturas/floor_indoor/burl.png
-wtr 58,50,16 texturas/floor_indoor/burl.png
-wtl 62,50,16 texturas/floor_indoor/wood6.png
-wall 192.000,10.000,202.000,101.773
-wtf 16,16,16 texturas/floor_indoor/burl.png
-wtb 16,16,16 texturas/floor_indoor/wood6.png
-wtr 62,50,16 texturas/floor_indoor/wood6.png
-wtl 63,50,16 texturas/floor_indoor/burl.png
-wall 192.000,192.000,310.000,202.000
-wtf 63,50,16 texturas/floor_indoor/wood6.png
-wtb 59,50,16 texturas/floor_indoor/burl.png
-wtr 16,16,16 texturas/floor_indoor/burl.png
-wtl 52,50,16 texturas/floor_indoor/burl.png
-wall 10.000,374.000,123.286,384.000
-wtf 61,50,16 texturas/floor_indoor/wood6.png
+d models/objetos/geral/porta7/porta7.dcc 59.392,192.000:0
+d models/objetos/geral/porta7/porta7.dcc 192.000,123.611:90
+d models/objetos/geral/porta7/porta7.dcc 247.238,256.000:0
+d models/objetos/geral/porta7/porta7.dcc 128.000,75.440:90
+wall 0.000,176.637,10.000,196.959
+wtf 50,52,16 texturas/floor_indoor/burl.png
+wtb 16,16,16 texturas/floor_indoor/steel2.png
+wtr 59,50,16 texturas/floor_indoor/burl.png
+wtl 16,16,16 texturas/floor_indoor/steel1.png
+wall 174.396,374.000,197.361,384.000
+wtf 58,50,16 texturas/floor_indoor/burl.png
 wtb 16,16,16 texturas/floor_indoor/steel1.png
 wtr 16,16,16 texturas/floor_indoor/steel2.png
-wtl 16,16,16 texturas/floor_indoor/steel2.png
-wall 310.000,0.000,320.000,196.653
+wtl 65,50,16 texturas/floor_indoor/burl.png
+wall 123.735,0.000,196.972,10.000
 wtf 16,16,16 texturas/floor_indoor/steel1.png
+wtb 57,50,16 texturas/floor_indoor/burl.png
+wtr 16,16,16 texturas/floor_indoor/steel2.png
+wtl 16,16,16 texturas/floor_indoor/steel2.png
+wall 196.972,0.000,310.000,10.000
+wtf 16,16,16 texturas/floor_indoor/steel1.png
+wtb 57,50,16 texturas/floor_indoor/mosaic2.png
+wtr 16,16,16 texturas/floor_indoor/steel2.png
+wtl 16,16,16 texturas/floor_indoor/steel2.png
+wall 310.000,261.191,320.000,384.000
+wtf 16,16,16 texturas/floor_indoor/steel2.png
+wtb 16,16,16 texturas/floor_indoor/steel1.png
+wtr 16,16,16 texturas/floor_indoor/steel1.png
+wtl 59,50,16 texturas/floor_indoor/steel4.png
+wall 310.000,196.653,320.000,261.191
+wtf 16,16,16 texturas/floor_indoor/steel2.png
 wtb 16,16,16 texturas/floor_indoor/steel2.png
 wtr 16,16,16 texturas/floor_indoor/steel1.png
-wtl 64,50,16 texturas/floor_indoor/wood6.png
-wall 0.000,0.000,10.000,132.473
-wtf 16,16,16 texturas/floor_indoor/steel1.png
-wtb 16,16,16 texturas/floor_indoor/steel2.png
-wtr 65,50,16 texturas/floor_indoor/steel4.png
+wtl 58,50,16 texturas/floor_indoor/burl.png
+wall 0.000,132.473,10.000,154.800
+wtf 16,16,16 texturas/floor_indoor/steel2.png
+wtb 40,51,16 texturas/floor_indoor/burl.png
+wtr 59,50,16 texturas/floor_indoor/burl.png
 wtl 16,16,16 texturas/floor_indoor/steel1.png
-wall 10.000,0.000,123.735,10.000
-wtf 16,16,16 texturas/floor_indoor/steel1.png
-wtb 59,50,16 texturas/floor_indoor/steel4.png
-wtr 16,16,16 texturas/floor_indoor/steel2.png
+wall 0.000,196.959,10.000,384.000
+wtf 16,16,16 texturas/floor_indoor/steel2.png
+wtb 16,16,16 texturas/floor_indoor/steel1.png
+wtr 59,50,16 texturas/floor_indoor/wood6.png
+wtl 16,16,16 texturas/floor_indoor/steel1.png
+wall 123.286,374.000,152.558,384.000
+wtf 58,50,16 texturas/floor_indoor/burl.png
+wtb 16,16,16 texturas/floor_indoor/steel1.png
+wtr 55,52,16 texturas/floor_indoor/burl.png
 wtl 16,16,16 texturas/floor_indoor/steel2.png
 wall 197.361,374.000,310.000,384.000
 wtf 57,50,16 texturas/floor_indoor/steel4.png
 wtb 16,16,16 texturas/floor_indoor/steel1.png
 wtr 16,16,16 texturas/floor_indoor/steel2.png
 wtl 16,16,16 texturas/floor_indoor/steel2.png
-wall 123.286,374.000,152.558,384.000
-wtf 58,50,16 texturas/floor_indoor/burl.png
-wtb 16,16,16 texturas/floor_indoor/steel1.png
-wtr 55,52,16 texturas/floor_indoor/burl.png
+wall 10.000,0.000,123.735,10.000
+wtf 16,16,16 texturas/floor_indoor/steel1.png
+wtb 59,50,16 texturas/floor_indoor/steel4.png
+wtr 16,16,16 texturas/floor_indoor/steel2.png
 wtl 16,16,16 texturas/floor_indoor/steel2.png
-wall 0.000,196.959,10.000,384.000
-wtf 16,16,16 texturas/floor_indoor/steel2.png
-wtb 16,16,16 texturas/floor_indoor/steel1.png
-wtr 59,50,16 texturas/floor_indoor/wood6.png
+wall 0.000,0.000,10.000,132.473
+wtf 16,16,16 texturas/floor_indoor/steel1.png
+wtb 16,16,16 texturas/floor_indoor/steel2.png
+wtr 65,50,16 texturas/floor_indoor/steel4.png
 wtl 16,16,16 texturas/floor_indoor/steel1.png
-wall 0.000,132.473,10.000,154.800
-wtf 16,16,16 texturas/floor_indoor/steel2.png
-wtb 40,51,16 texturas/floor_indoor/burl.png
-wtr 59,50,16 texturas/floor_indoor/burl.png
-wtl 16,16,16 texturas/floor_indoor/steel1.png
-wall 310.000,196.653,320.000,261.191
-wtf 16,16,16 texturas/floor_indoor/steel2.png
+wall 310.000,0.000,320.000,196.653
+wtf 16,16,16 texturas/floor_indoor/steel1.png
 wtb 16,16,16 texturas/floor_indoor/steel2.png
 wtr 16,16,16 texturas/floor_indoor/steel1.png
-wtl 58,50,16 texturas/floor_indoor/burl.png
-wall 310.000,261.191,320.000,384.000
-wtf 16,16,16 texturas/floor_indoor/steel2.png
-wtb 16,16,16 texturas/floor_indoor/steel1.png
-wtr 16,16,16 texturas/floor_indoor/steel1.png
-wtl 59,50,16 texturas/floor_indoor/steel4.png
-wall 196.972,0.000,310.000,10.000
-wtf 16,16,16 texturas/floor_indoor/steel1.png
-wtb 57,50,16 texturas/floor_indoor/mosaic2.png
-wtr 16,16,16 texturas/floor_indoor/steel2.png
-wtl 16,16,16 texturas/floor_indoor/steel2.png
-wall 123.735,0.000,196.972,10.000
-wtf 16,16,16 texturas/floor_indoor/steel1.png
-wtb 57,50,16 texturas/floor_indoor/burl.png
-wtr 16,16,16 texturas/floor_indoor/steel2.png
-wtl 16,16,16 texturas/floor_indoor/steel2.png
-wall 174.396,374.000,197.361,384.000
-wtf 58,50,16 texturas/floor_indoor/burl.png
+wtl 64,50,16 texturas/floor_indoor/wood6.png
+wall 10.000,374.000,123.286,384.000
+wtf 61,50,16 texturas/floor_indoor/wood6.png
 wtb 16,16,16 texturas/floor_indoor/steel1.png
 wtr 16,16,16 texturas/floor_indoor/steel2.png
-wtl 65,50,16 texturas/floor_indoor/burl.png
-wall 0.000,176.637,10.000,196.959
-wtf 50,52,16 texturas/floor_indoor/burl.png
-wtb 16,16,16 texturas/floor_indoor/steel2.png
-wtr 59,50,16 texturas/floor_indoor/burl.png
-wtl 16,16,16 texturas/floor_indoor/steel1.png
+wtl 16,16,16 texturas/floor_indoor/steel2.png
+wall 192.000,192.000,310.000,202.000
+wtf 63,50,16 texturas/floor_indoor/wood6.png
+wtb 59,50,16 texturas/floor_indoor/burl.png
+wtr 16,16,16 texturas/floor_indoor/burl.png
+wtl 52,50,16 texturas/floor_indoor/burl.png
+wall 192.000,10.000,202.000,101.773
+wtf 16,16,16 texturas/floor_indoor/burl.png
+wtb 16,16,16 texturas/floor_indoor/wood6.png
+wtr 62,50,16 texturas/floor_indoor/wood6.png
+wtl 63,50,16 texturas/floor_indoor/burl.png
+wall 118.000,192.000,128.000,374.000
+wtf 46,50,16 texturas/floor_indoor/burl.png
+wtb 16,16,16 texturas/floor_indoor/burl.png
+wtr 58,50,16 texturas/floor_indoor/burl.png
+wtl 62,50,16 texturas/floor_indoor/wood6.png
+wall 10.000,128.000,118.000,138.000
+wtf 59,50,16 texturas/floor_indoor/steel4.png
+wtb 59,50,16 texturas/floor_indoor/burl.png
+wtr 16,16,16 texturas/floor_indoor/burl.png
+wtl 16,16,16 texturas/floor_indoor/burl.png
+wall 10.000,192.000,59.392,202.000
+wtf 59,50,16 texturas/floor_indoor/burl.png
+wtb 60,50,16 texturas/floor_indoor/wood6.png
+wtr 16,16,16 texturas/floor_indoor/wood6.png
+wtl 16,16,16 texturas/floor_indoor/burl.png
+wall 192.000,256.000,202.000,374.000
+wtf 53,50,16 texturas/floor_indoor/burl.png
+wtb 16,16,16 texturas/floor_indoor/burl.png
+wtr 61,50,16 texturas/floor_indoor/steel4.png
+wtl 59,50,16 texturas/floor_indoor/burl.png
+wall 202.000,256.000,247.238,266.000
+wtf 56,50,16 texturas/floor_indoor/burl.png
+wtb 57,50,16 texturas/floor_indoor/steel4.png
+wtr 16,16,16 texturas/floor_indoor/steel4.png
+wtl 16,16,16 texturas/floor_indoor/burl.png
+wall 118.000,10.000,128.000,53.602
+wtf 16,16,16 texturas/floor_indoor/burl.png
+wtb 48,50,16 texturas/floor_indoor/steel4.png
+wtr 64,50,16 texturas/floor_indoor/burl.png
+wtl 60,50,16 texturas/floor_indoor/steel4.png
+wall 81.230,192.000,118.000,202.000
+wtf 59,50,16 texturas/floor_indoor/burl.png
+wtb 60,50,16 texturas/floor_indoor/wood6.png
+wtr 16,16,16 texturas/floor_indoor/burl.png
+wtl 16,16,16 texturas/floor_indoor/wood6.png
+wall 192.000,123.611,202.000,192.000
+wtf 16,16,16 texturas/floor_indoor/wood6.png
+wtb 16,16,16 texturas/floor_indoor/burl.png
+wtr 62,50,16 texturas/floor_indoor/wood6.png
+wtl 63,50,16 texturas/floor_indoor/burl.png
+wall 269.076,256.000,310.000,266.000
+wtf 56,50,16 texturas/floor_indoor/burl.png
+wtb 57,50,16 texturas/floor_indoor/steel4.png
+wtr 16,16,16 texturas/floor_indoor/burl.png
+wtl 16,16,16 texturas/floor_indoor/steel4.png
+wall 118.000,75.440,128.000,138.000
+wtf 16,16,16 texturas/floor_indoor/steel4.png
+wtb 48,50,16 texturas/floor_indoor/burl.png
+wtr 64,50,16 texturas/floor_indoor/burl.png
+wtl 60,50,16 texturas/floor_indoor/steel4.png
 #Z: 0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/steel4.png
@@ -182,8 +183,8 @@ ut texturas/floor_indoor/steel2.png
 uo models/objetos/icex/quadro/quadro.dcc 1:3,3:191.177,0.000,160.124:-990.000:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood6.png
-uo models/objetos/icex/quadro/quadro.dcc 0:3,3:191.177,0.000,160.124:-990.000:0
 uo models/objetos/icex/quadro/quadro.dcc 1:3,3:251.650,0.000,190.136:-1080.000:0
+uo models/objetos/icex/quadro/quadro.dcc 0:3,3:191.177,0.000,160.124:-990.000:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood6.png
 uo models/objetos/icex/quadro/quadro.dcc 0:3,3:251.650,0.000,190.136:-1080.000:0
@@ -204,52 +205,52 @@ uo models/objetos/icex/quadro/quadro.dcc 0:3,3:251.650,0.000,190.136:-1080.000:0
 #Z: 4
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood6.png
-uo models/objetos/icex/mesa_braco/mesa_braco.dcc 1:2,5:27.929,0.000,262.238:-167.000:0
 uo models/objetos/icex/mesa_braco/mesa_braco.dcc 1:2,5:32.633,0.000,306.278:-171.000:0
+uo models/objetos/icex/mesa_braco/mesa_braco.dcc 1:2,5:27.929,0.000,262.238:-167.000:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood6.png
-uo weapons/definitions/dagger.wcc 1:2,5:110.274,9.500,301.216:-874.000:0
-uo models/objetos/icex/mesa_braco/mesa_braco.dcc 1:2,5:109.571,0.000,258.015:-201.000:0
-uo models/objetos/icex/mesa_braco/mesa_braco.dcc 1:2,5:70.125,0.000,295.311:-178.000:0
 uo models/objetos/icex/mesa_braco/mesa_braco.dcc 1:2,5:109.758,0.000,301.502:-192.000:0
+uo models/objetos/icex/mesa_braco/mesa_braco.dcc 1:2,5:70.125,0.000,295.311:-178.000:0
+uo models/objetos/icex/mesa_braco/mesa_braco.dcc 1:2,5:109.571,0.000,258.015:-201.000:0
+uo weapons/definitions/dagger.wcc 1:2,5:110.274,9.500,301.216:-874.000:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/steel2.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/steel4.png
-uo models/objetos/geral/pc_chair/pc_chair.dcc 1:4,5:223.327,0.000,305.891:-799.000:0
-uo models/objetos/geral/computador/computador.dcc 1:4,5:211.866,16.800,305.844:-808.000:0
 uo models/objetos/geral/escrivaninha/escrivaninha.dcc 1:4,5:212.205,0.000,301.592:-179.000:0
+uo models/objetos/geral/computador/computador.dcc 1:4,5:211.866,16.800,305.844:-808.000:0
+uo models/objetos/geral/pc_chair/pc_chair.dcc 1:4,5:223.327,0.000,305.891:-799.000:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/steel4.png
-uo models/objetos/geral/monitor/monitor_bunker_school.dcc 1:5,5:285.177,17.200,275.264:-176.000:0
-uo models/objetos/geral/pc_chair/pc_chair.dcc 1:4,5:284.984,0.000,292.637:-896.000:0
-uo models/objetos/geral/gabinete/gabinete.dcc 1:5,5:297.257,16.900,275.237:-624.000:0
 uo models/objetos/geral/escrivaninha/escrivaninha.dcc 1:4,5:288.277,0.000,275.510:-266.000:0
+uo models/objetos/geral/gabinete/gabinete.dcc 1:5,5:297.257,16.900,275.237:-624.000:0
+uo models/objetos/geral/pc_chair/pc_chair.dcc 1:4,5:284.984,0.000,292.637:-896.000:0
+uo models/objetos/geral/monitor/monitor_bunker_school.dcc 1:5,5:285.177,17.200,275.264:-176.000:0
 #Z: 5
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood6.png
-uo models/objetos/icex/mesa_braco/mesa_braco.dcc 1:2,5:29.274,0.000,338.003:-157.000:0
-uo models/objetos/icex/mesa_braco/mesa_braco.dcc 0:2,5:67.301,0.000,333.896:-181.000:0
-uo models/objetos/icex/lixo/lixo.dcc 1:1,6:14.879,0.000,368.448:0.000:0
 uo models/objetos/icex/quadro/quadro.dcc 0:3,3:68.186,0.000,373.816:0.000:0
+uo models/objetos/icex/lixo/lixo.dcc 1:1,6:14.879,0.000,368.448:0.000:0
+uo models/objetos/icex/mesa_braco/mesa_braco.dcc 0:2,5:67.301,0.000,333.896:-181.000:0
+uo models/objetos/icex/mesa_braco/mesa_braco.dcc 1:2,5:29.274,0.000,338.003:-157.000:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood6.png
-uo models/objetos/icex/mesa_braco/mesa_braco.dcc 1:2,5:67.301,0.000,333.896:-181.000:0
-uo models/objetos/icex/mesa_braco/mesa_braco.dcc 1:2,5:105.081,0.000,338.148:-207.000:0
 uo models/objetos/icex/quadro/quadro.dcc 1:3,3:68.186,0.000,373.816:0.000:0
+uo models/objetos/icex/mesa_braco/mesa_braco.dcc 1:2,5:105.081,0.000,338.148:-207.000:0
+uo models/objetos/icex/mesa_braco/mesa_braco.dcc 1:2,5:67.301,0.000,333.896:-181.000:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/steel2.png
 uc 153.775345,357.285919,172.893448,380.175476:0.000000:mapas/tutorial/tyrol.map
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/steel4.png
-uo models/objetos/geral/pc_chair/pc_chair.dcc 1:4,5:223.078,0.000,355.093:-833.000:0
-uo models/objetos/geral/computador/computador.dcc 1:4,6:212.479,16.900,351.238:-449.000:0
 uo models/objetos/geral/escrivaninha/escrivaninha.dcc 1:4,5:212.223,0.000,347.799:-179.000:0
+uo models/objetos/geral/computador/computador.dcc 1:4,6:212.479,16.900,351.238:-449.000:0
+uo models/objetos/geral/pc_chair/pc_chair.dcc 1:4,5:223.078,0.000,355.093:-833.000:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/steel4.png
-uo models/objetos/icex/fallout_box/fallout_box.dcc 1:5,6:299.941,19.800,369.719:-686.000:0
-uo models/objetos/icex/snes/chrono/snes_chrono.dcc 1:5,6:288.827,19.800,370.235:-708.000:0
-uo models/objetos/itens/healkit/healkit.dcc 1:5,6:279.896,30.300,370.579:-646.000:0
-uo models/objetos/itens/healkit/healkit.dcc 1:5,6:297.741,30.300,370.556:-618.000:0
 uo models/objetos/geral/bookshelf/bookshelf.dcc 1:5,6:288.405,0.000,371.250:-449.000:0
+uo models/objetos/itens/healkit/healkit.dcc 1:5,6:297.741,30.300,370.556:-618.000:0
+uo models/objetos/itens/healkit/healkit.dcc 1:5,6:279.896,30.300,370.579:-646.000:0
+uo models/objetos/icex/snes/chrono/snes_chrono.dcc 1:5,6:288.827,19.800,370.235:-708.000:0
+uo models/objetos/icex/fallout_box/fallout_box.dcc 1:5,6:299.941,19.800,369.719:-686.000:0
 i 160.000,192.000
