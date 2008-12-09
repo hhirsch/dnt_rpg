@@ -12,7 +12,7 @@
 SetCompressor bzip2
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "DccNiTghtmareSetup.exe"
+OutFile "DccNiTghtmare_0_3_Setup.exe"
 LoadLanguageFile "${NSISDIR}\Contrib\Language files\English.nlf"
 InstallDir "$PROGRAMFILES\DccNiTghtmare"
 Icon "${NSISDIR}\Contrib\Graphics\Icons\modern-install.ico"
@@ -1743,6 +1743,18 @@ Section "DNT" SEC01
   File "..\..\data\weapons\types\ranges.dcl"
   File "..\..\data\weapons\types\sizes.dcl"
   File "..\..\data\weapons\types\weights.dcl"
+  SetOutPath "$INSTDIR\data\locale\de\LC_MESSAGES"
+  File "..\..\data\locale\de\LC_MESSAGES\dccnitghtmare.mo"
+  SetOutPath "$INSTDIR\data\locale\es\LC_MESSAGES"
+  File "..\..\data\locale\es\LC_MESSAGES\dccnitghtmare.mo"
+  SetOutPath "$INSTDIR\data\locale\fr\LC_MESSAGES"
+  File "..\..\data\locale\fr\LC_MESSAGES\dccnitghtmare.mo"
+  SetOutPath "$INSTDIR\data\locale\it\LC_MESSAGES"
+  File "..\..\data\locale\it\LC_MESSAGES\dccnitghtmare.mo"
+  SetOutPath "$INSTDIR\data\locale\pt_BR\LC_MESSAGES"
+  File "..\..\data\locale\pt_BR\LC_MESSAGES\dccnitghtmare.mo"
+  SetOutPath "$INSTDIR\data\locale\ru\LC_MESSAGES"
+  File "..\..\data\locale\ru\LC_MESSAGES\dccnitghtmare.mo"
   SetOutPath "$INSTDIR"
   SetOverwrite ifnewer
   File "..\..\systems.txt"
