@@ -53,8 +53,9 @@ void dirs::findDataDirectories()
  *********************************************************************/
 string dirs::getRealFile(string fileName)
 {
-   /* Don't change full path fileNames (those with "/" at init) */
-   if(fileName[0] == '/')
+   /* Don't change full path fileNames (those with "/" at init)
+      (or, Windows, those with ':' at second position) */
+   if( (fileName[0] == '/') || (fileName[1] == ':') )
    {
       return(fileName);
    }
