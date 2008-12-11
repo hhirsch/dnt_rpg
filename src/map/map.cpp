@@ -489,6 +489,7 @@ texture* Map::getTexture(GLuint id)
 GLuint Map::insertTexture(string arq, string name, GLuint R, GLuint G, GLuint B)
 {
    dirs dir;
+   options opt;
    texture* tex;
    int aux;
 
@@ -556,7 +557,15 @@ GLuint Map::insertTexture(string arq, string name, GLuint R, GLuint G, GLuint B)
    glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,img->w,img->h, 
                 0, GL_RGB, GL_UNSIGNED_BYTE, img->pixels);
 
+   /* Enable Anisotropic filtering, if defined */
+   if(opt.getEnableAnisotropicFilter())
+   {
+      GLfloat maxAni=1.0;
+      glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &maxAni);
+      glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, maxAni);
+   }
 
+   /* Define other texture parameters */
    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
    glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
