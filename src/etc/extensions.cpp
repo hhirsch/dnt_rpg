@@ -180,6 +180,21 @@ void extensions::defineShader(string ext)
 }
 
 /***********************************************************************
+ *                          defineAnisotropic                          *
+ ***********************************************************************/
+void extensions::defineAnisotropic(string ext)
+{
+   if(ext.find("GL_EXT_texture_filter_anisotropic") != string::npos)
+   {
+      anisotropic = true;
+   }
+   else
+   {
+      showWarning("GL_EXT_texture_filter_anisotropic");
+   }
+}
+
+/***********************************************************************
  *                           hasPointTexture                           *
  ***********************************************************************/
 bool extensions::hasPointTexture()
@@ -236,6 +251,14 @@ bool extensions::hasShader()
 }
 
 /***********************************************************************
+ *                           hasAnisotropic                            *
+ ***********************************************************************/
+bool extensions::hasAnisotropic()
+{
+   return(anisotropic);
+}
+
+/***********************************************************************
  *                            Static Members                           *
  ***********************************************************************/
 /* Texture per points functions */
@@ -278,4 +301,6 @@ PFNGLGETOBJECTPARAMETERIVARBPROC extensions::arbGetObjectParamenteriv = NULL;
 PFNGLUNIFORM1FARBPROC extensions::arbUniform1f = NULL;
 PFNGLUNIFORM2FARBPROC extensions::arbUniform2f = NULL;
 PFNGLUNIFORM3FARBPROC extensions::arbUniform3f = NULL;
+
+bool extensions::anisotropic = false;
 

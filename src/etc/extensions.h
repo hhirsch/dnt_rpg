@@ -71,6 +71,10 @@ class extensions
        * \return true if the extension is available */
       bool hasShader();
 
+      /*! Verify if the machine have anisotropic extension avalaible
+       * \return true if avalaible */
+      bool hasAnisotropic();
+
    protected:
       /*! Define Point per Texture functions
        * \param ext -> extensions string */
@@ -84,6 +88,9 @@ class extensions
       /*! Define shader functions
        * \param ext -> extensions string */
       void defineShader(string ext);
+      /*! Define anisotropic
+       * \param ext -> extensions string */
+      void defineAnisotropic(string ext);
 
       /*! Get OpenGL Function
        * \param functionName -> function to get
@@ -93,6 +100,8 @@ class extensions
       /*! Sow an warning about not found some extension function 
        * \param functionName -> string wit function name to displa warning of*/
       void showWarning(string functionName);
+
+      static bool anisotropic;   /**< True when anisotropic is avalaible */
 
 };
 
