@@ -116,8 +116,9 @@ class engine
       /*!
        **************************************************************** 
        * Render all the "Shadownable" things 
+       * \param lightPass -> true if at the lighting map generating
        ****************************************************************/
-      void renderScene();
+      void renderScene(bool lightPass);
 
       /*!
        ****************************************************************
@@ -376,6 +377,9 @@ class engine
        * \note -> this function is usually called before potential saves
        ***************************************************************/
       void defineFrontSurface();
+
+      /*! Update all things before render (listener position,camera,sun,etc) */
+      void updateBeforeRender();
 
       dirs dir;                    /**< Data directories finder */
 

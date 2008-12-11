@@ -45,6 +45,10 @@ class sun
       /*! Multiply the Matrix by the currenct Shadow Matrix. */
       void mulShadowMatrix();
 
+      /*! Verifies if the sun is on visible time (born -> death)
+       *  \return true if is in visible time, false otherwise.*/
+      bool visibleTime();
+
    private:
       GLfloat quadricAttenuation;   /**< Quadric Attenuation Light Value */
       GLfloat constantAttenuation;  /**< Constant Attenuation Light Value */
@@ -71,10 +75,6 @@ class sun
 
       /*! Define the shadow matrix */
       void defineShadowMatrix();
-
-      /*! Verifies if the sun is on visible time (born -> death)
-       *  \return true if is in visible time, false otherwise.*/
-      bool visibleTime();
 };
 
 #endif

@@ -56,10 +56,11 @@
  ********************************************************************/
 
 #define DELTA_CAMERA  WALK_UPDATE * 75    /**<  The camera velocity */
-#define ZOOM_MAX            80            /**< Max value of Zoom */
-#define ZOOM_MIN           500            /**< Min value of Zoom */
-#define OUTDOOR_FARVIEW   8192            /**< FarView constant */
-#define INDOOR_FARVIEW     768            /**< Indoor FarView */
+#define ZOOM_MAX             80            /**< Max value of Zoom */
+#define ZOOM_MIN            500            /**< Min value of Zoom */
+#define OUTDOOR_FARVIEW    8192            /**< FarView constant */
+#define OUTDOOR_FARVIEW_D2 4096            /**< FarView / 2 */
+#define INDOOR_FARVIEW      768            /**< Indoor FarView */
 
 /********************************************************************
  *                      Shadow's constants                          *
@@ -204,6 +205,11 @@ GLfloat getAngle(GLfloat prvX, GLfloat prvZ, GLfloat curX, GLfloat curZ);
  * \param ny -> vector Y
  * \param nz -> vector Z */
 void normalize (GLfloat& nx, GLfloat& ny, GLfloat& nz);
+
+/*! Normalize a vector
+ * \param nx -> vector X 
+ * \param ny -> vector Y */
+void normalize(GLfloat& nx, GLfloat& ny);
 
 /*! Rotate a point p by angle theta around an arbitrary line segment p1-p2
     Return the rotated point.

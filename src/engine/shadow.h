@@ -29,7 +29,8 @@ class shadow
       void init();
 
       /*! Define the Light View */
-      void defineLightView(GLfloat pX, GLfloat pY, GLfloat pZ);
+      void defineLightView(GLfloat pX, GLfloat pY, GLfloat pZ,
+                           GLfloat mapX, GLfloat mapZ);
 
       /*! Define the Camera View */
       void defineCameraView(camera& cam, GLdouble proj[16],GLdouble modl[16]);
@@ -42,6 +43,7 @@ class shadow
       bool enable;    /**< Enable the shadows or not */
 
       GLuint shadowMapTexture;  /**< The ShadowMap Texture */
+      GLuint shadowFrameBuffer; /**< The frame buffer used for shadow */
 
 };
 

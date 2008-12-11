@@ -253,6 +253,23 @@ void normalize (GLfloat& nx, GLfloat& ny, GLfloat& nz)
 }
 
 /*********************************************************************
+ *                               normalize                           *
+ *********************************************************************/
+void normalize(GLfloat& nx, GLfloat& ny)
+{
+    // calculate the length of the vector
+    GLfloat len = (GLfloat)(sqrt((nx * nx) + (ny * ny)));
+
+    // avoid division by 0
+    if (len == 0.0f)
+        len = 1.0f;
+
+    // reduce to unit size
+    nx /= len;
+    ny /= len;
+}
+
+/*********************************************************************
  *                                normal                             *
  *********************************************************************/
 void normal (GLfloat x1, GLfloat y1, GLfloat z1,

@@ -1223,10 +1223,6 @@ void engine::init(SDL_Surface *screen)
    glClearDepth(1.0);
    glClearStencil(0);
 
-   /* ShadowMap */
-   shadowMap.init();
-   glPolygonOffset(-2.0, -1.0);
-
    /* Details Definition */
    glDepthFunc(GL_LEQUAL);
    glEnable(GL_DEPTH_TEST);
@@ -1343,6 +1339,9 @@ void engine::init(SDL_Surface *screen)
 
    SDL_FreeSurface(img);
 
+    /* ShadowMap */
+   shadowMap.init();
+   //glPolygonOffset(-2.0, -1.0);
 }
 
 /*********************************************************************
@@ -2741,7 +2740,7 @@ int engine::treatIO(SDL_Surface *screen)
 /********************************************************************
  *                            RenderScene                           *
  ********************************************************************/
-void engine::renderScene()
+void engine::renderScene(bool lightPass)
 {
    GLfloat min[3],max[3];
    GLfloat x[4],z[4];
@@ -2749,7 +2748,7 @@ void engine::renderScene()
    bool shadow = false;//actualMap->isOutdoor();
 
    /* SKY */
-   if(actualMap->isOutdoor())
+   if( (!lightPass) && (actualMap->isOutdoor()) )
    {
       glPushMatrix();
          glTranslatef(gameCamera.getCameraX(), 0.0, gameCamera.getCameraZ());
@@ -2758,106 +2757,105 @@ void engine::renderScene()
    }
 
    glPushMatrix();
-   /* Draw The Floor with Stencil Buffer */
-   if( ((option->getReflexionType() != REFLEXIONS_NONE) && 
-        (!actualMap->isOutdoor()))  || (shadow))
+
+   if(!lightPass)
    {
-      glDisable(GL_DEPTH_TEST);
-      glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
-      glEnable(GL_STENCIL_TEST);
-      glStencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE);
-      glStencilFunc(GL_ALWAYS, 1, 0xffffffff);
-      actualMap->renderFloor(gameCamera.getCameraX(),gameCamera.getCameraY(),
-                             gameCamera.getCameraZ(), visibleMatrix, true);
-      glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
-      glEnable(GL_DEPTH_TEST);
-      glDisable(GL_STENCIL_TEST);
+      /* Draw The Floor with Stencil Buffer */
+      if( ((option->getReflexionType() != REFLEXIONS_NONE) && 
+               (!actualMap->isOutdoor()))  || (shadow))
+      {
+         glDisable(GL_DEPTH_TEST);
+         glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+         glEnable(GL_STENCIL_TEST);
+         glStencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE);
+         glStencilFunc(GL_ALWAYS, 1, 0xffffffff);
+         actualMap->renderFloor(gameCamera.getCameraX(),gameCamera.getCameraY(),
+               gameCamera.getCameraZ(), visibleMatrix, true);
+         glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+         glEnable(GL_DEPTH_TEST);
+         glDisable(GL_STENCIL_TEST);
+      }
    }
 
    /* Draw Playable Characters (PCs) */
-      character* per = (character*) PCs->getFirst();
-      int aux;
+   character* per = (character*) PCs->getFirst();
+   int aux;
 
-      for(aux=0;aux < PCs->getTotal();aux++)
+   for(aux=0;aux < PCs->getTotal();aux++)
+   {
+      /* Update the model */
+      per->update(WALK_UPDATE);
+
+      /* Load the Model */
+      per->loadToGraphicMemory();
+
+      /* Draw Character */
+      glPushMatrix();
+      glTranslatef(per->xPosition, per->yPosition,
+            per->zPosition);
+      glRotatef(per->orientation,0,1,0);
+      per->renderFromGraphicMemory();
+
+      //per->renderBoundingBox();
+      /*glColor3f(1.0,0.1,0.1);
+        glBegin(GL_QUADS);
+        glVertex3f(per->min[0],per->min[1]+1,per->min[2]);
+        glVertex3f(per->min[0],per->min[1]+1,per->max[2]);
+        glVertex3f(per->max[0],per->min[1]+1,per->max[2]);
+        glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
+        glEnd();*/
+      glPopMatrix();
+
+      /* Draw Reflection */
+      if( (option->getReflexionType() >= REFLEXIONS_CHARACTERS) && 
+            (!actualMap->isOutdoor()) )
       {
-         /* Update the model */
-         per->update(WALK_UPDATE);
+         glEnable(GL_STENCIL_TEST);
+         glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
+         glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+         glEnable(GL_NORMALIZE);
 
-         /* Load the Model */
-         per->loadToGraphicMemory();
+         //glCullFace(GL_FRONT);
 
-         /* Draw Character */
          glPushMatrix();
-           glTranslatef(per->xPosition, per->yPosition,
-                        per->zPosition);
-           glRotatef(per->orientation,0,1,0);
-           per->renderFromGraphicMemory();
-
-           //per->renderBoundingBox();
-           /*glColor3f(1.0,0.1,0.1);
-           glBegin(GL_QUADS);
-              glVertex3f(per->min[0],per->min[1]+1,per->min[2]);
-              glVertex3f(per->min[0],per->min[1]+1,per->max[2]);
-              glVertex3f(per->max[0],per->min[1]+1,per->max[2]);
-              glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
-           glEnd();*/
+         glTranslatef(per->xPosition, per->yPosition,
+               per->zPosition);
+         glRotatef(per->orientation,0,1,0);
+         glScalef(1.0, -1.0, 1.0);
+         per->renderFromGraphicMemory();
          glPopMatrix();
-
-
-          
-
-
-           /* Draw Reflection */
-           if( (option->getReflexionType() >= REFLEXIONS_CHARACTERS) && 
-               (!actualMap->isOutdoor()) )
-           {
-              glEnable(GL_STENCIL_TEST);
-               glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
-               glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
-               glEnable(GL_NORMALIZE);
-
-              //glCullFace(GL_FRONT);
-
-              glPushMatrix();
-                 glTranslatef(per->xPosition, per->yPosition,
-                              per->zPosition);
-                 glRotatef(per->orientation,0,1,0);
-                 glScalef(1.0, -1.0, 1.0);
-                 per->renderFromGraphicMemory();
-              glPopMatrix();
-              glDisable(GL_NORMALIZE);
-              //glCullFace(GL_FRONT);
-              glDisable(GL_STENCIL_TEST);
-           }
-
-           /* Draw Projective Shadow */
-           if(shadow)
-           {
-              glEnable(GL_STENCIL_TEST);
-              glStencilFunc(GL_EQUAL, 1, 0xffffffff);
-              glStencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE);
-              glEnable(GL_POLYGON_OFFSET_FILL);
-              glEnable(GL_BLEND);
-              glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-              glDisable(GL_LIGHTING);  
-              glColor4f(0.0, 0.0, 0.0, 0.5);
-              glPushMatrix();
-                 // FIXME -> fix shadow draw, 
-                 // FIXME -> use the already loaded model
-                 gameSun->mulShadowMatrix();
-                 per->renderShadow();
-              glPopMatrix();
-              glDisable(GL_BLEND);
-              glEnable(GL_LIGHTING);
-              glDisable(GL_POLYGON_OFFSET_FILL);
-              glDisable(GL_STENCIL_TEST);
-           }
-
-           /* Unload Model Graphics Memory */
-           per->removeFromGraphicMemory();
-
-           per = (character*) per->next;
+         glDisable(GL_NORMALIZE);
+         //glCullFace(GL_FRONT);
+         glDisable(GL_STENCIL_TEST);
       }
+
+      /* Draw Projective Shadow */
+      if( (shadow) && (gameSun->visibleTime()) )
+      {
+         glEnable(GL_STENCIL_TEST);
+         glStencilFunc(GL_EQUAL, 1, 0xffffffff);
+         glStencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE);
+         glEnable(GL_POLYGON_OFFSET_FILL);
+         glEnable(GL_BLEND);
+         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+         glDisable(GL_LIGHTING);  
+         glColor4f(0.0, 0.0, 0.0, 0.5);
+         glPushMatrix();
+         // FIXME -> fix shadow draw, 
+         gameSun->mulShadowMatrix();
+         per->renderShadow();
+         glPopMatrix();
+         glDisable(GL_BLEND);
+         glEnable(GL_LIGHTING);
+         glDisable(GL_POLYGON_OFFSET_FILL);
+         glDisable(GL_STENCIL_TEST);
+      }
+
+      /* Unload Model Graphics Memory */
+      per->removeFromGraphicMemory();
+
+      per = (character*) per->next;
+   }
    glPopMatrix();
 
    /* Draw the NPCs */
@@ -3185,7 +3183,31 @@ void engine::renderGUI()
  *********************************************************************/
 void engine::drawWithShadows()
 {
-   //FIXME TODO!
+   // FIXME: shadows for indoor maps
+   GLfloat sunPos[4];
+
+   /* Clear and update things */
+   updateBeforeRender();
+
+   /* Define Light View Projetion */
+   gameSun->getPosition(sunPos);
+   shadowMap.defineLightView(sunPos[0], sunPos[1], sunPos[2],
+                       (actualMap->squareSize()*actualMap->getSizeX())/2.0, 
+                       (actualMap->squareSize()*actualMap->getSizeZ())/2.0);
+   
+   /* Update frustum for light view */
+   updateFrustum(visibleMatrix,proj,modl);
+   
+   /* Render the Scene from light view */
+   renderScene(true);
+
+   renderGUI();
+
+   /* Flush */
+   glFlush();
+   SDL_GL_SwapBuffers();
+
+   printOpenGLErrors();
 }
 
 /*********************************************************************
@@ -3193,32 +3215,12 @@ void engine::drawWithShadows()
  *********************************************************************/
 void engine::drawWithoutShadows()
 {
-   glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-   glLoadIdentity();
-
-   /* Redefine camera position */
-   gameCamera.lookAt(actualMap);
+   /* Clear and update things before render */
+   updateBeforeRender();
    updateFrustum(visibleMatrix,proj,modl);
-
-   snd->setListenerPosition(gameCamera.getCameraX(), gameCamera.getCameraY(),
-                            gameCamera.getCameraZ(), gameCamera.getTheta(),
-                            gameCamera.getPhi(), gameCamera.getD(),
-                            gameCamera.getDeltaY());
-
-   /* Sun Definition */
-   if(actualMap->isOutdoor())
-   {
-      gameSun->updateHourOfDay(hour, PCs->getActiveCharacter()->xPosition,
-                               PCs->getActiveCharacter()->zPosition);
-      gameSun->setLight();
-   }
-   else
-   {
-      gameSun->disableLight();
-   }
    
    /* Render all things */
-   renderScene();
+   renderScene(false);
    renderNoShadowThings();
 
    renderGUI();
@@ -3228,6 +3230,39 @@ void engine::drawWithoutShadows()
    SDL_GL_SwapBuffers();
 
    printOpenGLErrors();
+}
+
+/*********************************************************************
+ *                          updateBeforeRender                       *
+ *********************************************************************/
+void engine::updateBeforeRender()
+{
+   glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+   glLoadIdentity();
+
+   /* Redefine camera position */
+   gameCamera.lookAt(actualMap);
+
+   snd->setListenerPosition(gameCamera.getCameraX(), gameCamera.getCameraY(),
+                            gameCamera.getCameraZ(), gameCamera.getTheta(),
+                            gameCamera.getPhi(), gameCamera.getD(),
+                            gameCamera.getDeltaY());
+
+   /* Sun Definition */
+   if(actualMap->isOutdoor())
+   {
+      gameSun->updateHourOfDay(hour, 
+            (actualMap->getSizeX()/2.0)*actualMap->squareSize(), 
+            (actualMap->getSizeZ()/2.0)*actualMap->squareSize());
+      
+      //PCs->getActiveCharacter()->xPosition,
+      //                         PCs->getActiveCharacter()->zPosition);
+      gameSun->setLight();
+   }
+   else
+   {
+      gameSun->disableLight();
+   }
 }
 
 /*********************************************************************
