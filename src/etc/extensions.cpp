@@ -40,6 +40,8 @@ void extensions::defineAllExtensions()
    /* Shaders */
    defineShader(ext);
 
+   /* Anisotropic */
+   defineAnisotropic(ext);
 }
 
 /***********************************************************************
