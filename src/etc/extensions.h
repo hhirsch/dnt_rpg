@@ -24,6 +24,13 @@ class extensions
       static PFNGLMULTITEXCOORD2DPROC arbMultiTexCoord2d;
       static PFNGLMULTITEXCOORD2DVPROC arbMultiTexCoord2dv;
 
+      /* Render Frame Buffer Object Functions */
+      static PFNGLGENFRAMEBUFFERSEXTPROC extGenFramebuffers;
+      static PFNGLBINDFRAMEBUFFEREXTPROC extBindFramebuffer;
+      static PFNGLFRAMEBUFFERTEXTURE2DEXTPROC extFramebufferTexture2D;
+      static PFNGLDELETEFRAMEBUFFERSEXTPROC extDeleteFramebuffers;
+      static PFNGLCHECKFRAMEBUFFERSTATUSEXTPROC extCheckFramebufferStatus;
+
       /* Shader functions */
       static PFNGLCREATESHADEROBJECTARBPROC arbCreateShaderObject;
       static PFNGLCREATEPROGRAMOBJECTARBPROC arbCreateProgramObject;
@@ -57,6 +64,9 @@ class extensions
       /*! Verify if the machine have the multi texture extension
        * \return true if the extension is available */
       bool hasMultiTexture();
+      /*! Verify if the machine have the frame buffer extension
+       * \return -> true if the extension is available */
+      bool hasFrameBuffer();
       /*! Verify if the machine have the shader extension
        * \return true if the extension is available */
       bool hasShader();
@@ -68,6 +78,9 @@ class extensions
       /*! Define MultiTexture functions
        * \param ext -> extensions string */
       void defineMultiTexture(string ext);
+      /*! Define Frame Buffer Object functions
+       * \param ext -> extensions string */
+      void defineFrameBuffer(string ext);
       /*! Define shader functions
        * \param ext -> extensions string */
       void defineShader(string ext);

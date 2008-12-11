@@ -33,7 +33,10 @@ void extensions::defineAllExtensions()
 
    /* Multi Texture */
    defineMultiTexture(ext);
-  
+ 
+   /* Frame Buffer Objects */
+   defineFrameBuffer(ext);
+
    /* Shaders */
    defineShader(ext);
 
@@ -108,6 +111,31 @@ void extensions::defineMultiTexture(string ext)
 }
 
 /***********************************************************************
+ *                          defineFrameBuffer                          *
+ ***********************************************************************/
+void extensions::defineFrameBuffer(string ext)
+{
+   if(ext.find("GL_EXT_framebuffer_object") != string::npos)
+   {
+      extGenFramebuffers = (PFNGLGENFRAMEBUFFERSEXTPROC)
+                                            getFunction("glGenFramebuffersEXT");
+      extBindFramebuffer = (PFNGLBINDFRAMEBUFFEREXTPROC)
+                                            getFunction("glBindFramebufferEXT");
+      extFramebufferTexture2D = (PFNGLFRAMEBUFFERTEXTURE2DEXTPROC)
+                                       getFunction("glFramebufferTexture2DEXT");
+      extDeleteFramebuffers = (PFNGLDELETEFRAMEBUFFERSEXTPROC)
+                                         getFunction("glDeleteFramebuffersEXT");
+      extCheckFramebufferStatus = (PFNGLCHECKFRAMEBUFFERSTATUSEXTPROC)
+                                     getFunction("glCheckFramebufferStatusEXT");
+   }
+   else
+   {
+      showWarning("GL_EXT_framebuffer_object");
+   }
+
+}
+
+/***********************************************************************
  *                            defineShader                             *
  ***********************************************************************/
 void extensions::defineShader(string ext)
@@ -173,6 +201,18 @@ bool extensions::hasMultiTexture()
 }
 
 /***********************************************************************
+ *                           hastFrameBuffer                           *
+ ***********************************************************************/
+bool extensions::hasFrameBuffer()
+{
+   return( (extGenFramebuffers != NULL) &&
+           (extBindFramebuffer != NULL) &&
+           (extFramebufferTexture2D != NULL) &&
+           (extDeleteFramebuffers != NULL) && 
+           (extCheckFramebufferStatus != NULL) );
+}
+
+/***********************************************************************
  *                             hasShader                               *
  ***********************************************************************/
 bool extensions::hasShader()
@@ -209,6 +249,13 @@ PFNGLMULTITEXCOORD2FPROC extensions::arbMultiTexCoord2f = NULL;
 PFNGLMULTITEXCOORD2FVPROC extensions::arbMultiTexCoord2fv = NULL;
 PFNGLMULTITEXCOORD2DPROC extensions::arbMultiTexCoord2d = NULL;
 PFNGLMULTITEXCOORD2DVPROC extensions::arbMultiTexCoord2dv = NULL;
+
+/* Render Frame Buffer Object Functions */
+PFNGLGENFRAMEBUFFERSEXTPROC extensions::extGenFramebuffers = NULL;
+PFNGLBINDFRAMEBUFFEREXTPROC extensions::extBindFramebuffer = NULL;
+PFNGLFRAMEBUFFERTEXTURE2DEXTPROC extensions::extFramebufferTexture2D = NULL;
+PFNGLDELETEFRAMEBUFFERSEXTPROC extensions::extDeleteFramebuffers = NULL;
+PFNGLCHECKFRAMEBUFFERSTATUSEXTPROC extensions::extCheckFramebufferStatus = NULL;
 
 /* Shader Functions */
 PFNGLCREATESHADEROBJECTARBPROC extensions::arbCreateShaderObject = NULL;
