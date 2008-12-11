@@ -88,6 +88,9 @@ class options
       /*! Verify if the multitexture is enabled (and avalaible) 
        * \return true if enabled */
       bool getEnableMultiTexture();
+      /*! Verify if the anisotropic filter is enabled (and available)
+       * \return true if enabled */
+      bool getEnableAnisotropicFilter();
       /*! Verify if the auto end turn is enabled
        * \return -> true if enabled 
        * \note -> if enabled, if the character have no possible actions,
@@ -134,6 +137,7 @@ class options
       static int     antiAliasing;    /**< Current Anti-Aliasing */
       static float   farViewFactor;   /**< Current FarView Factor */
       static bool    enableMultiTexture; /**< If terrain multi texture */
+      static bool    enableAnisotropic; /**< If anisotropic filter is used */
       static bool    autoEndTurn;     /**< If will autoend turn or not */
       static bool    showEnemyCircles; /**< if show enemies battle circles */
 
@@ -184,6 +188,7 @@ class options
       cxSel* cxSelParticles;
 
       cxSel* cxSelMultiTexture;
+      cxSel* cxSelAnisotropic;
 
       cxSel* cxSelShowEnemyCircles;
       cxSel* cxSelAutoEndTurn;

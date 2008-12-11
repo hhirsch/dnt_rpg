@@ -248,6 +248,11 @@ bool options::load(string file)
          /* Read Multitexture options */
          enableMultiTexture = (value == "true");
       }
+      else if(key == "Anisotropic")
+      {
+         /* Read Anisotropi option */
+         enableAnisotropic = (value == "true");
+      }
       
       /**********************************************
        *                 Unknow Option              *
@@ -333,6 +338,8 @@ void options::save()
    fprintf(arq, "FarViewFactor = %.2f\n", farViewFactor);  
    /* Multi Texture */
    fprintf(arq, "MultiTexture = %s\n",enableMultiTexture?"true":"false");
+   /* Anisotropic Filter */
+   fprintf(arq, "Anisotropic = %s\n",enableAnisotropic?"true":"false");
 
    fclose(arq);
 }
@@ -676,10 +683,20 @@ void options::displayOptionsScreen(guiInterface* interf)
    qt = list->insertTextBox(24,posY,219,posY+17,0,
                             gettext("Enable MultiTextures"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
-   cxSelMultiTexture = list->insertCxSel(12,posY+4,enableMultiTexture);
+   cxSelMultiTexture = list->insertCxSel(12,posY+4,getEnableMultiTexture());
    list->insertPicture(220,posY,40,112,
                   dir.getRealFile("texturas/options/multitexture.png").c_str());
    cxSelMultiTexture->setAvaible(ext.hasMultiTexture());
+   posY += 25;
+
+   /* MultiTexture Enable or Not */
+   qt = list->insertTextBox(24,posY,219,posY+17,0,
+                            gettext("Enable Anisotropic Filter"));
+   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   cxSelAnisotropic = list->insertCxSel(12,posY+4,getEnableAnisotropicFilter());
+   list->insertPicture(220,posY,40,112,
+                   dir.getRealFile("texturas/options/anisotropic.png").c_str());
+   cxSelAnisotropic->setAvaible(ext.hasAnisotropic());
    posY += 35;
 
    /* Reflexions */
@@ -979,6 +996,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          enableParticles = cxSelParticles->isSelected();
          enableGrass = cxSelGrass->isSelected();
          enableMultiTexture = cxSelMultiTexture->isSelected();
+         enableAnisotropic = cxSelAnisotropic->isSelected();
          autoEndTurn = cxSelAutoEndTurn->isSelected();
          showEnemyCircles = cxSelShowEnemyCircles->isSelected();
 
@@ -1112,6 +1130,15 @@ bool options::getEnableMultiTexture()
 }
 
 /****************************************************************
+ *                   getEnableAnisotropicFilter                 *
+ ****************************************************************/
+bool options::getEnableAnisotropicFilter()
+{
+   extensions ext;
+   return(enableAnisotropic && ext.hasAnisotropic());
+}
+
+/****************************************************************
  *                         getReflexionType                     *
  ****************************************************************/
 int options::getReflexionType()
@@ -1209,6 +1236,7 @@ float  options::farViewFactor = 1.0;
 bool   options::enableMultiTexture = true;
 bool   options::autoEndTurn = true;
 bool   options::showEnemyCircles = false;
+bool   options::enableAnisotropic = true;
 
 string options::fileName = "";
 
