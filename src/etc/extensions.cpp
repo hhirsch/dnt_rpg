@@ -185,6 +185,9 @@ void extensions::defineShader(string ext)
       arbUniform1f = (PFNGLUNIFORM1FARBPROC)getFunction("glUniform1fARB");
       arbUniform2f = (PFNGLUNIFORM2FARBPROC)getFunction("glUniform2fARB");
       arbUniform3f = (PFNGLUNIFORM3FARBPROC)getFunction("glUniform3fARB");
+      arbUniform1i = (PFNGLUNIFORM1IARBPROC)getFunction("glUniform1iARB");
+      arbUniform2i = (PFNGLUNIFORM2IARBPROC)getFunction("glUniform2iARB");
+      arbUniform3i = (PFNGLUNIFORM3IARBPROC)getFunction("glUniform3iARB");
    }
    else
    {
@@ -265,7 +268,10 @@ bool extensions::hasShader()
            (arbGetObjectParamenteriv != NULL) &&
            (arbUniform1f != NULL) &&
            (arbUniform2f != NULL) &&
-           (arbUniform3f != NULL) );
+           (arbUniform3f != NULL) &&
+           (arbUniform1i != NULL) &&
+           (arbUniform2i != NULL) &&
+           (arbUniform3i != NULL) );
 }
 
 /***********************************************************************
@@ -325,6 +331,9 @@ PFNGLGETOBJECTPARAMETERIVARBPROC extensions::arbGetObjectParamenteriv = NULL;
 PFNGLUNIFORM1FARBPROC extensions::arbUniform1f = NULL;
 PFNGLUNIFORM2FARBPROC extensions::arbUniform2f = NULL;
 PFNGLUNIFORM3FARBPROC extensions::arbUniform3f = NULL;
+PFNGLUNIFORM1IARBPROC extensions::arbUniform1i = NULL;
+PFNGLUNIFORM2IARBPROC extensions::arbUniform2i = NULL;
+PFNGLUNIFORM3IARBPROC extensions::arbUniform3i = NULL;
 
 bool extensions::anisotropic = false;
 

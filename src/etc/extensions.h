@@ -57,7 +57,9 @@ class extensions
       static PFNGLUNIFORM1FARBPROC arbUniform1f;
       static PFNGLUNIFORM2FARBPROC arbUniform2f;
       static PFNGLUNIFORM3FARBPROC arbUniform3f;
-
+      static PFNGLUNIFORM1IARBPROC arbUniform1i;
+      static PFNGLUNIFORM2IARBPROC arbUniform2i;
+      static PFNGLUNIFORM3IARBPROC arbUniform3i;
 
       /*! Gets all Extended Functions that DNT uses. Usually call this after
        * the init of the Engine. */

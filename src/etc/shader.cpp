@@ -218,6 +218,40 @@ GLint shader::getUniformVariable(string variableName)
    return(-1);
 }
 
+/***********************************************************************
+ *                           setUniformVariable                        *
+ ***********************************************************************/
+void shader::setUniformVariable(string variableName, 
+                                GLint x, GLint y, GLint z)
+{
+   if(ext.hasShader())
+   {
+      ext.arbUniform3i(getUniformVariable(variableName), x, y, z);
+   }
+}
+
+/***********************************************************************
+ *                           setUniformVariable                        *
+ ***********************************************************************/
+void shader::setUniformVariable(string variableName, GLint x, GLint y)
+{
+   if(ext.hasShader())
+   {
+      ext.arbUniform2i(getUniformVariable(variableName), x, y);
+   }
+}
+
+/***********************************************************************
+ *                           setUniformVariable                        *
+ ***********************************************************************/
+void shader::setUniformVariable(string variableName, GLint x)
+{
+   if(ext.hasShader())
+   {
+      ext.arbUniform1i(getUniformVariable(variableName), x);
+   }
+}
+
 
 /***********************************************************************
  *                           getUniformVariable                        *

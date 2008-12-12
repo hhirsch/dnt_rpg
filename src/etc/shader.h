@@ -41,6 +41,23 @@ class shader
        * \param x -> x value */
       void setUniformVariable(string variableName, GLfloat x);
 
+      /*! Set the uniform variable value 
+       * \param variableName -> the uniform variable name
+       * \param x -> x value 
+       * \param y -> y value
+       * \param z -> z value */
+      void setUniformVariable(string variableName, 
+                              GLint x, GLint y, GLint z);
+       /*! Set the uniform variable value 
+       * \param variableName -> the uniform variable name
+       * \param x -> x value 
+       * \param y -> y value */
+      void setUniformVariable(string variableName, GLint x, GLint y);
+       /*! Set the uniform variable value 
+       * \param variableName -> the uniform variable name
+       * \param x -> x value */
+      void setUniformVariable(string variableName, GLint x);
+
       /*! Enable the shader */
       void enable();
 
