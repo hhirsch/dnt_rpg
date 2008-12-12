@@ -129,6 +129,17 @@ void extensions::defineFrameBuffer(string ext)
                                          getFunction("glDeleteFramebuffersEXT");
       extCheckFramebufferStatus = (PFNGLCHECKFRAMEBUFFERSTATUSEXTPROC)
                                      getFunction("glCheckFramebufferStatusEXT");
+   
+      extDeleteRenderbuffers = (PFNGLDELETERENDERBUFFERSEXTPROC)
+                                        getFunction("glDeleteRenderbuffersEXT");
+      extGenRenderbuffers = (PFNGLGENRENDERBUFFERSEXTPROC)
+                                           getFunction("glGenRenderbuffersEXT");
+      extBindRenderbuffer = (PFNGLBINDRENDERBUFFEREXTPROC)
+                                           getFunction("glBindRenderbufferEXT");
+      extRenderbufferStorage = (PFNGLRENDERBUFFERSTORAGEEXTPROC)
+                                        getFunction("glRenderbufferStorageEXT");
+      extFramebufferRenderbuffer = (PFNGLFRAMEBUFFERRENDERBUFFEREXTPROC)
+                                    getFunction("glFramebufferRenderbufferEXT");
    }
    else
    {
@@ -226,7 +237,12 @@ bool extensions::hasFrameBuffer()
            (extBindFramebuffer != NULL) &&
            (extFramebufferTexture2D != NULL) &&
            (extDeleteFramebuffers != NULL) && 
-           (extCheckFramebufferStatus != NULL) );
+           (extCheckFramebufferStatus != NULL) &&
+           (extDeleteRenderbuffers != NULL) &&
+           (extGenRenderbuffers != NULL) &&
+           (extBindRenderbuffer != NULL) &&
+           (extRenderbufferStorage != NULL) &&
+           (extFramebufferRenderbuffer != NULL) );
 }
 
 /***********************************************************************
@@ -281,6 +297,12 @@ PFNGLBINDFRAMEBUFFEREXTPROC extensions::extBindFramebuffer = NULL;
 PFNGLFRAMEBUFFERTEXTURE2DEXTPROC extensions::extFramebufferTexture2D = NULL;
 PFNGLDELETEFRAMEBUFFERSEXTPROC extensions::extDeleteFramebuffers = NULL;
 PFNGLCHECKFRAMEBUFFERSTATUSEXTPROC extensions::extCheckFramebufferStatus = NULL;
+PFNGLDELETERENDERBUFFERSEXTPROC extensions::extDeleteRenderbuffers = NULL;
+PFNGLGENRENDERBUFFERSEXTPROC extensions::extGenRenderbuffers = NULL;
+PFNGLBINDRENDERBUFFEREXTPROC extensions::extBindRenderbuffer = NULL;
+PFNGLRENDERBUFFERSTORAGEEXTPROC extensions::extRenderbufferStorage = NULL;
+PFNGLFRAMEBUFFERRENDERBUFFEREXTPROC extensions::extFramebufferRenderbuffer=NULL;
+
 
 /* Shader Functions */
 PFNGLCREATESHADEROBJECTARBPROC extensions::arbCreateShaderObject = NULL;

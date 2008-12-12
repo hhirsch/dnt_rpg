@@ -30,6 +30,11 @@ class extensions
       static PFNGLFRAMEBUFFERTEXTURE2DEXTPROC extFramebufferTexture2D;
       static PFNGLDELETEFRAMEBUFFERSEXTPROC extDeleteFramebuffers;
       static PFNGLCHECKFRAMEBUFFERSTATUSEXTPROC extCheckFramebufferStatus;
+      static PFNGLDELETERENDERBUFFERSEXTPROC extDeleteRenderbuffers;
+      static PFNGLGENRENDERBUFFERSEXTPROC extGenRenderbuffers;
+      static PFNGLBINDRENDERBUFFEREXTPROC extBindRenderbuffer;
+      static PFNGLRENDERBUFFERSTORAGEEXTPROC extRenderbufferStorage;
+      static PFNGLFRAMEBUFFERRENDERBUFFEREXTPROC extFramebufferRenderbuffer;
 
       /* Shader functions */
       static PFNGLCREATESHADEROBJECTARBPROC arbCreateShaderObject;
