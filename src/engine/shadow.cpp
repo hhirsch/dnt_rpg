@@ -8,7 +8,6 @@
  *******************************************************************/
 shadow::shadow()
 {
-   //FIXME -> the shadow is too slow and not working at all
    avaible = false;
    enable = false;//avaible;
 }
@@ -22,6 +21,7 @@ shadow::~shadow()
    if(avaible)
    {
       ext.extDeleteFramebuffers(1, &shadowFrameBuffer);
+      ext.extDeleteRenderbuffers(1, &depthBuffer);
       glDeleteTextures(1, &shadowMapTexture);
    }
 }
@@ -38,8 +38,8 @@ void shadow::init()
       //FIXME: NOT RGBA!!
       glGenTextures(1, &shadowMapTexture);
       glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
-      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 
-                   SHADOW_MAP_SIZE, SHADOW_MAP_SIZE, 0, GL_RGBA,
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 
+                   SHADOW_MAP_SIZE, SHADOW_MAP_SIZE, 0, GL_RGB,
                    GL_UNSIGNED_BYTE, NULL);
       glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE, GL_LUMINANCE);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -47,13 +47,29 @@ void shadow::init()
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 
+      /* Create the Depth Buffer */
+      ext.extGenRenderbuffers(1, &depthBuffer);
+      ext.extBindRenderbuffer(GL_RENDERBUFFER_EXT, depthBuffer);
+      ext.extRenderbufferStorage(GL_RENDERBUFFER_EXT, GL_DEPTH_COMPONENT,
+                                    SHADOW_MAP_SIZE, SHADOW_MAP_SIZE);
+      ext.extBindRenderbuffer(GL_RENDERBUFFER_EXT, 0);
+
+
       /* Create the Frame Buffer */
       ext.extGenFramebuffers(1, &shadowFrameBuffer);
-      ext.extBindFramebuffer(GL_FRAMEBUFFER_EXT, shadowFrameBuffer); 
+      ext.extBindFramebuffer(GL_FRAMEBUFFER_EXT, shadowFrameBuffer);
+
+      /* Attach Texture to Frame Buffer */
       ext.extFramebufferTexture2D(GL_FRAMEBUFFER_EXT, 
                                   GL_COLOR_ATTACHMENT0_EXT, 
                                   GL_TEXTURE_2D, shadowMapTexture, 0);
 
+      /* Attach Depth Buffer to the Frame Buffer */
+      ext.extFramebufferRenderbuffer(GL_FRAMEBUFFER_EXT,
+                                     GL_DEPTH_ATTACHMENT_EXT,
+                                     GL_RENDERBUFFER_EXT, depthBuffer);
+
+      /* Check Status */
       GLenum status = ext.extCheckFramebufferStatus(GL_FRAMEBUFFER_EXT);
       if(status != GL_FRAMEBUFFER_COMPLETE_EXT) 
       {
@@ -66,7 +82,14 @@ void shadow::init()
          cerr << "Status: " << status << endl;
       }
       ext.extBindFramebuffer(GL_FRAMEBUFFER_EXT, 0);
-      enable = true;
+    
+      /* Create and load the shader */
+      if(shadowMapShader.load("shaders/shadowmap.vert",
+               "shaders/shadowmap.frag"))
+      {
+         /* Set as enabled */
+         enable = true;
+      }
    }
 }
 
@@ -88,31 +111,61 @@ void shadow::defineLightView(GLfloat pX, GLfloat pY, GLfloat pZ,
 
       /* Set the view to the light position */
       glLoadIdentity();
-      gluPerspective(45.0f, 1024.0 / 768.0, 1.0f, OUTDOOR_FARVIEW);
+      gluPerspective(45.0f, 1.0, 1.0f, OUTDOOR_FARVIEW);
 
       glLoadIdentity();
       gluLookAt(pX, pY, pZ, mapX, 0.0f, mapZ, 
                 0.0f, 1.0f, 0.0f);
 
-      //glViewport(0, 0, SHADOW_MAP_SIZE, SHADOW_MAP_SIZE);
+      glViewport(0, 0, SHADOW_MAP_SIZE, SHADOW_MAP_SIZE);
    }
 }
 
 /*******************************************************************
- *                        defineCameraView                         *
+ *                        beginLightRender                         *
  *******************************************************************/
-void shadow::defineCameraView(camera& cam, GLdouble proj[16],GLdouble modl[16])
+void shadow::beginLightRender()
 {
-   if(avaible)
+   extensions ext;
+   if(enable)
    {
-      glClear(GL_DEPTH_BUFFER_BIT);
-      glMatrixMode(GL_PROJECTION);
-      glLoadMatrixf((GLfloat*)proj);
+      ext.extBindFramebuffer(GL_FRAMEBUFFER_EXT, shadowFrameBuffer);
+      glEnable( GL_DEPTH_TEST);
+      glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+   }
+}
 
-      glMatrixMode(GL_MODELVIEW);
-      glLoadMatrixf((GLfloat*)modl);
+/*******************************************************************
+ *                         endLightRender                          *
+ *******************************************************************/
+void shadow::endLightRender()
+{
+   extensions ext;
+   if(enable)
+   {
+      ext.extBindFramebuffer(GL_FRAMEBUFFER_EXT, 0);
+   }
+}
 
-      glViewport(0, 0, SCREEN_X, SCREEN_Y);
+/*******************************************************************
+ *                       beginShadowRender                         *
+ *******************************************************************/
+void shadow::beginShadowRender()
+{
+   if(enable)
+   {
+      //TODO
+   }
+}
+
+/*******************************************************************
+ *                        endShadowRender                          *
+ *******************************************************************/
+void shadow::endShadowRender()
+{
+   if(enable)
+   {
+      //TODO
    }
 }
 
@@ -130,15 +183,5 @@ bool shadow::isEnable()
 void shadow::setEnable(bool en)
 {
    enable = ( (en) && (avaible));
-}
-
-/*******************************************************************
- *                         saveShadorMap                           *
- *******************************************************************/
-void shadow::saveShadowMap()
-{
-   glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
-   glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 0, 0, 
-                    SHADOW_MAP_SIZE, SHADOW_MAP_SIZE, 0);
 }
 

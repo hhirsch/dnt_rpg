@@ -2740,7 +2740,7 @@ int engine::treatIO(SDL_Surface *screen)
 /********************************************************************
  *                            RenderScene                           *
  ********************************************************************/
-void engine::renderScene(bool lightPass)
+void engine::renderScene(bool lightPass, bool updateAnimations)
 {
    GLfloat min[3],max[3];
    GLfloat x[4],z[4];
@@ -2784,7 +2784,10 @@ void engine::renderScene(bool lightPass)
    for(aux=0;aux < PCs->getTotal();aux++)
    {
       /* Update the model */
-      per->update(WALK_UPDATE);
+      if(updateAnimations)
+      {
+         per->update(WALK_UPDATE);
+      }
 
       /* Load the Model */
       per->loadToGraphicMemory();
@@ -2865,8 +2868,11 @@ void engine::renderScene(bool lightPass)
       for(aux=0;aux < NPCs->getTotal();aux++)
       {
          /* Update the model */
-         per->update(WALK_UPDATE);
-
+         if(updateAnimations)
+         {
+            per->update(WALK_UPDATE);
+         }
+ 
          /* Load the Model */
          per->loadToGraphicMemory();
 
@@ -2968,7 +2974,6 @@ void engine::renderScene(bool lightPass)
                      PCs->getActiveCharacter()->xPosition,
                      PCs->getActiveCharacter()->zPosition);
    glPopMatrix();
-
 }
 
 /********************************************************************
@@ -3199,10 +3204,33 @@ void engine::drawWithShadows()
    updateFrustum(visibleMatrix,proj,modl);
    
    /* Render the Scene from light view */
-   renderScene(true);
+   shadowMap.beginLightRender();
+   renderScene(true, true);
+   shadowMap.endLightRender();
 
+   /* Now set to the camera view and render again! */
+   glViewport (0, 0, SCREEN_X, SCREEN_Y);
+   glMatrixMode (GL_PROJECTION);
+   glLoadIdentity ();
+   gluPerspective(45.0, SCREEN_X / (float)SCREEN_Y, 1.0, 
+                  OUTDOOR_FARVIEW);
+   glGetIntegerv(GL_VIEWPORT, viewPort);
+   glGetFloatv(GL_MODELVIEW_MATRIX, camProj);
+   glMatrixMode (GL_MODELVIEW);
+   glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+   glLoadIdentity();
+   gameCamera.lookAt(actualMap);
+   updateFrustum(visibleMatrix,proj,modl);
+
+   /* Render Things with shadow */
+   shadowMap.beginShadowRender();
+   renderScene(false, false);
+   shadowMap.endShadowRender();
+
+   /* Render remaining things (and GUI) */
+   renderNoShadowThings();
    renderGUI();
-
+   
    /* Flush */
    glFlush();
    SDL_GL_SwapBuffers();
@@ -3220,7 +3248,7 @@ void engine::drawWithoutShadows()
    updateFrustum(visibleMatrix,proj,modl);
    
    /* Render all things */
-   renderScene(false);
+   renderScene(false, true);
    renderNoShadowThings();
 
    renderGUI();

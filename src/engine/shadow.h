@@ -8,6 +8,8 @@ using namespace std;
 
 #include "camera.h"
 
+#include "../etc/shader.h"
+
 /*! The Shadow Controller Class */
 class shadow
 {
@@ -32,18 +34,21 @@ class shadow
       void defineLightView(GLfloat pX, GLfloat pY, GLfloat pZ,
                            GLfloat mapX, GLfloat mapZ);
 
-      /*! Define the Camera View */
-      void defineCameraView(camera& cam, GLdouble proj[16],GLdouble modl[16]);
+      void beginLightRender();
+      void endLightRender();
 
-      /*! Save the shadow map to the texture */
-      void saveShadowMap();
+      void beginShadowRender();
+      void endShadowRender();
 
    private:
       bool avaible;   /**< Flag if the shadow is avaible or not */
       bool enable;    /**< Enable the shadows or not */
 
+      shader shadowMapShader; /**< The ShadowMap Shader Used */
+
       GLuint shadowMapTexture;  /**< The ShadowMap Texture */
       GLuint shadowFrameBuffer; /**< The frame buffer used for shadow */
+      GLuint depthBuffer;       /**< The depth buffer used for shadow */
 
 };
 

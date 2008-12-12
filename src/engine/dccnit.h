@@ -117,8 +117,9 @@ class engine
        **************************************************************** 
        * Render all the "Shadownable" things 
        * \param lightPass -> true if at the lighting map generating
+       * \param updateAnimations -> true to update animations
        ****************************************************************/
-      void renderScene(bool lightPass);
+      void renderScene(bool lightPass, bool updateAnimations);
 
       /*!
        ****************************************************************
