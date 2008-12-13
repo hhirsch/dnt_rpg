@@ -2999,7 +2999,7 @@ void Map::updateAlphaTextures()
       {
          for(z1=0; z1 < z*ALPHA_TEXTURE_INC; z1++)
          {
-            pixel_Set(img, x1, z1, 255, 255, 255, 
+            pixel_Set(img, x1, z1, 255, 255, 255,
                       (int)floor(((tex->alphaValues[x1][z1])*255)));
          }
       }
