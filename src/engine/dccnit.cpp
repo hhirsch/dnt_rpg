@@ -2745,7 +2745,7 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
    GLfloat min[3],max[3];
    GLfloat x[4],z[4];
 
-   bool shadow = false;//actualMap->isOutdoor();
+   bool shadow = false;//actualMap->isOutdoor() && gameSun->visibleTime();
 
    /* SKY */
    if( (!lightPass) && (actualMap->isOutdoor()) )
@@ -2956,7 +2956,8 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
 
    models->renderSceneryObjects(visibleMatrix,
                                 (option->getReflexionType() >= REFLEXIONS_ALL) 
-                                 && (!actualMap->isOutdoor()) );
+                                 && (!actualMap->isOutdoor()),
+                                 shadow?gameSun->getShadowMatrix():NULL);
 
    glPushMatrix();
    actualMap->render(gameCamera.getCameraX(), gameCamera.getCameraY(),

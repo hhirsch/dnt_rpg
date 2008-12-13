@@ -83,7 +83,7 @@ void model3d::addPosition(float x, float y, float z, float angle)
 /********************************************************
  *                        draw                          *
  ********************************************************/
-void model3d::draw(GLfloat** matriz, bool inverted)
+void model3d::draw(GLfloat** matriz, bool inverted, GLfloat* shadowMatrix)
 {
    GLfloat min[3], max[3];
    GLfloat X[4], Z[4];
@@ -100,6 +100,11 @@ void model3d::draw(GLfloat** matriz, bool inverted)
       /* Render All Models */
       for(i=0; i<totalPositions; i++)
       {
+         xPosition = pos->x;
+         yPosition = pos->y;
+         zPosition = pos->z;
+         orientation = pos->angle;
+
          /* Do View Frustum Culling */
          bound = getBoundingBox();
          X[0] = bound.x1;
@@ -119,8 +124,8 @@ void model3d::draw(GLfloat** matriz, bool inverted)
          {
             /* Is visible, so render */
             glPushMatrix();
-               glTranslatef(pos->x, pos->y, pos->z);
-               glRotatef(pos->angle, 0,1,0);
+               glTranslatef(xPosition, yPosition, zPosition);
+               glRotatef(orientation, 0, 1, 0);
                renderFromGraphicMemory();
             glPopMatrix();
          }
@@ -141,17 +146,27 @@ void model3d::draw(GLfloat** matriz, bool inverted)
                glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
                glEnable(GL_NORMALIZE);
                glPushMatrix();
+                  glTranslatef(xPosition, yPosition, zPosition);
+                  glRotatef(orientation, 0, 1, 0);
                   glScalef(1.0,-1.0,1.0);
-                  glTranslatef(pos->x, pos->y, pos->z);
-                  glRotatef(pos->angle, 0,1,0);
                   renderFromGraphicMemory();
                glPopMatrix();
                glDisable(GL_NORMALIZE);
                glDisable(GL_STENCIL_TEST);
             }
          }
+          
+          /* Do Projective Shadow */
+          //FIXME: apply culling too!
+          if(shadowMatrix != NULL)
+          {
+             orientation = pos->angle;
+             glPushMatrix();
+               renderShadow(shadowMatrix);
+             glPopMatrix();
+          }
 
-         pos = pos->next;
+          pos = pos->next;
       }
 
       /* remove Model from graphic card memory */
@@ -383,7 +398,8 @@ void modelList::removeUnusedModels()
 /********************************************************************
  *                        RenderSceneryObjects                      *
  ********************************************************************/
-void modelList::renderSceneryObjects(GLfloat** visibleMatrix, bool inverted)
+void modelList::renderSceneryObjects(GLfloat** visibleMatrix, bool inverted,
+                                     GLfloat* shadowMatrix)
 {
    model3d* mdl = getFirst();
    int i;
@@ -392,7 +408,7 @@ void modelList::renderSceneryObjects(GLfloat** visibleMatrix, bool inverted)
       /* Only Render here the Static Scenery Objects */
       if(mdl->isStaticScenery())
       {
-         mdl->draw(visibleMatrix, inverted);
+         mdl->draw(visibleMatrix, inverted, shadowMatrix);
       }
       mdl = mdl->next;
    }

@@ -53,8 +53,10 @@ class model3d: public aniModel
 
       /*! Draw All Visible Static Scenery Objects Based on model
        * \param matrix -> visible matrix
-       * \param inverted -> if inverted on Y axys. Usefull for reflexion. */
-      void draw(GLfloat** matriz, bool inverted);
+       * \param inverted -> if inverted on Y axys. Usefull for reflexion.
+       * \param shadowMatrix -> the shadow matrix to render projective
+       *                        shadows (NULL to not render shadows) */
+      void draw(GLfloat** matriz, bool inverted, GLfloat* shadowMatrix=NULL);
 
       /*! Increment the used flag */
       void incUsed();
@@ -163,8 +165,11 @@ class modelList
 
       /*! Render all Scenery Objects
        * \param visibleMatrix -> current visible matrix
-       * \param inverted -> if will render XZ reflexions too */
-      void renderSceneryObjects(GLfloat** visibleMatrix, bool inverted);
+       * \param inverted -> if will render XZ reflexions too
+       * \param shadowMatrix -> the shadow matrix to render projective
+       *                        shadows (NULL to not render shadows) */
+      void renderSceneryObjects(GLfloat** visibleMatrix, bool inverted,
+                                GLfloat* shadowMatrix=NULL);
 
       /*! Print all Models with printf for debug! */
       void printAll();
