@@ -2835,23 +2835,7 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
       /* Draw Projective Shadow */
       if( (shadow) && (gameSun->visibleTime()) )
       {
-         glEnable(GL_STENCIL_TEST);
-         glStencilFunc(GL_EQUAL, 1, 0xffffffff);
-         glStencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE);
-         glEnable(GL_POLYGON_OFFSET_FILL);
-         glEnable(GL_BLEND);
-         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-         glDisable(GL_LIGHTING);  
-         glColor4f(0.0, 0.0, 0.0, 0.5);
-         glPushMatrix();
-         // FIXME -> fix shadow draw, 
-         gameSun->mulShadowMatrix();
-         per->renderShadow();
-         glPopMatrix();
-         glDisable(GL_BLEND);
-         glEnable(GL_LIGHTING);
-         glDisable(GL_POLYGON_OFFSET_FILL);
-         glDisable(GL_STENCIL_TEST);
+         per->renderShadow(gameSun->getShadowMatrix());
       }
 
       /* Unload Model Graphics Memory */
@@ -2938,6 +2922,12 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
                  glDisable(GL_NORMALIZE);
                  //glCullFace(GL_FRONT);
                  glDisable(GL_STENCIL_TEST);
+              }
+
+              /* Draw Projective Shadow */
+              if( (shadow) && (gameSun->visibleTime()) )
+              {
+                 per->renderShadow(gameSun->getShadowMatrix());
               }
          }
          /* Remove the Model From Graphic Memory */

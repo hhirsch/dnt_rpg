@@ -45,6 +45,10 @@ class sun
       /*! Multiply the Matrix by the currenct Shadow Matrix. */
       void mulShadowMatrix();
 
+      /*! Get the current Shadow Matrix related to the sun
+       * \return -> sun's shadow matrix */
+      GLfloat* getShadowMatrix();
+
       /*! Verifies if the sun is on visible time (born -> death)
        *  \return true if is in visible time, false otherwise.*/
       bool visibleTime();
