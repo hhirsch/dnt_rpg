@@ -26,6 +26,7 @@ void main()
    ShadowCoord = texCoord / texCoord.w;
 
    gl_FrontColor = gl_Color;//vec4(scale * gl_Color.rgb, gl_Color.a);
+   gl_TexCoord[0] = gl_MultiTexCoord0; 
    gl_Position = ftransform();
 }
 

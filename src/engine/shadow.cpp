@@ -8,6 +8,8 @@
  *******************************************************************/
 shadow::shadow()
 {
+   //FIXME: Shadow maps probaly won't goot for
+   //outdoor: the light is too much far away!
    avaible = false;
    enable = false;//avaible;
 }
@@ -18,10 +20,10 @@ shadow::shadow()
 shadow::~shadow()
 {
    extensions ext;
-   if(avaible)
+   if(enable)
    {
       ext.extDeleteFramebuffers(1, &shadowFrameBuffer);
-      ext.extDeleteRenderbuffers(1, &depthBuffer);
+      //ext.extDeleteRenderbuffers(1, &depthBuffer);
       glDeleteTextures(1, &shadowMapTexture);
    }
 }
@@ -35,24 +37,27 @@ void shadow::init()
    if(avaible)
    {
       /* Create the texture */
-      //FIXME: NOT RGBA!!
       glGenTextures(1, &shadowMapTexture);
       glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
-      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 
-                   SHADOW_MAP_SIZE, SHADOW_MAP_SIZE, 0, GL_RGB,
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24_ARB, 
+                   SHADOW_MAP_SIZE, SHADOW_MAP_SIZE, 0, GL_DEPTH_COMPONENT,
                    GL_UNSIGNED_BYTE, NULL);
-      glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE, GL_LUMINANCE);
+      /*glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE, GL_LUMINANCE);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);*/
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
       /* Create the Depth Buffer */
-      ext.extGenRenderbuffers(1, &depthBuffer);
-      ext.extBindRenderbuffer(GL_RENDERBUFFER_EXT, depthBuffer);
-      ext.extRenderbufferStorage(GL_RENDERBUFFER_EXT, GL_DEPTH_COMPONENT,
-                                    SHADOW_MAP_SIZE, SHADOW_MAP_SIZE);
-      ext.extBindRenderbuffer(GL_RENDERBUFFER_EXT, 0);
+      //ext.extGenRenderbuffers(1, &depthBuffer);
+      //ext.extBindRenderbuffer(GL_RENDERBUFFER_EXT, depthBuffer);
+      //ext.extRenderbufferStorage(GL_RENDERBUFFER_EXT, GL_DEPTH_COMPONENT,
+      //                              SHADOW_MAP_SIZE, SHADOW_MAP_SIZE);
+      //ext.extBindRenderbuffer(GL_RENDERBUFFER_EXT, 0);
 
 
       /* Create the Frame Buffer */
@@ -61,13 +66,17 @@ void shadow::init()
 
       /* Attach Texture to Frame Buffer */
       ext.extFramebufferTexture2D(GL_FRAMEBUFFER_EXT, 
-                                  GL_COLOR_ATTACHMENT0_EXT, 
+                                  GL_DEPTH_ATTACHMENT_EXT, 
                                   GL_TEXTURE_2D, shadowMapTexture, 0);
 
+      /* Disable DrawBuffer and ReadBuffer (depth only) */
+      glDrawBuffer(GL_NONE);
+      glReadBuffer(GL_NONE);
+
       /* Attach Depth Buffer to the Frame Buffer */
-      ext.extFramebufferRenderbuffer(GL_FRAMEBUFFER_EXT,
-                                     GL_DEPTH_ATTACHMENT_EXT,
-                                     GL_RENDERBUFFER_EXT, depthBuffer);
+      //ext.extFramebufferRenderbuffer(GL_FRAMEBUFFER_EXT,
+      //                               GL_DEPTH_ATTACHMENT_EXT,
+      //                               GL_RENDERBUFFER_EXT, depthBuffer);
 
       /* Check Status */
       GLenum status = ext.extCheckFramebufferStatus(GL_FRAMEBUFFER_EXT);
@@ -154,7 +163,8 @@ void shadow::beginShadowRender()
 {
    if(enable)
    {
-      //TODO
+      shadowMapShader.enable();
+      shadowMapShader.setUniformVariable("ShadowMap", (GLint)shadowMapTexture);
    }
 }
 
@@ -165,7 +175,7 @@ void shadow::endShadowRender()
 {
    if(enable)
    {
-      //TODO
+      shadowMapShader.disable();
    }
 }
 
