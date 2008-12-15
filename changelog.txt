@@ -19,6 +19,12 @@ Pending:
  - Capacity of using feats;
 
 ================================================
+|               Version 0.3.1                  |
+================================================
+ - Running Animation/Action/Option for Playable Characters;
+ - Anisotropic Texture Filtering;
+
+================================================
 |                Version 0.3                   |
 ================================================
  - Briefing now has its own window; 
