@@ -51,7 +51,8 @@ class cursor
       void set(SDL_Surface* img);
 
       /*! Draw th Cursor to screen */
-      void draw(int mouseX, int mouseY, float angle=0.0);
+      void draw(int mouseX, int mouseY, float angle=0.0f,
+                float scaleX=1.0f, float scaleY=1.0f, float scaleZ=1.0f);
 
       /*! Gets the actual mouse cursor
        * \return -> pointer to the surface of the mouse cursor */

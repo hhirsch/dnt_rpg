@@ -135,7 +135,8 @@ int cursor::get()
 /*****************************************************************
  *                             Draw                              *
  *****************************************************************/
-void cursor::draw(int mouseX, int mouseY, float angle)
+void cursor::draw(int mouseX, int mouseY, float angle,
+                  float scaleX, float scaleY, float scaleZ)
 {
    glEnable(GL_BLEND);
    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
@@ -149,6 +150,7 @@ void cursor::draw(int mouseX, int mouseY, float angle)
                    SCREEN_Y - (mouseY+2-hotSpot[currentCursor][0]), 
                    0.1);
       glRotatef(angle, 0, 0, 1);
+      glScalef(scaleX, scaleY, scaleZ);
       glBegin(GL_QUADS);
          glTexCoord2f(0.0, 0.0);
          glVertex2f(0,0);
