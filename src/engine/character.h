@@ -25,8 +25,6 @@ using namespace std;
 #define POSRETX 8   /**< X screen portrait position */
 #define POSRETY 20  /**< Y screen portrait position */
 
-#define STATE_WALK  1 /**< Character Animation State Walking */
-
 #define MAX_DISTINCT_CLASSES 3 /**< Max Different Classes for MultiClass */
 
 /*! The character util model class. Usually used to retain weapons 

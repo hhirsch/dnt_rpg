@@ -13,6 +13,7 @@ using namespace std;
 #define STATE_DIE          2 /**< Character Animation State Die */
 #define STATE_DEAD         3 /**< Character Animation State Dead */
 #define STATE_ATTACK_MEELE 4 /**< Character Animation State Meele Attack */
+#define STATE_RUN          5 /**< Character Animation State Run */
 
 /*! Animated Model Definition (using cal3d) */
 class aniModel:public thing

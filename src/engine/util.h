@@ -28,11 +28,14 @@
 
 #define ENGINE_WALK_ACTION_DELAY 250 /**< Delay before define if is A* or
                                            continuous mouse action */
+#define ENGINE_CONTINUOUS_RUN_DISTANCE 60 /**< Distance to toggle walk/run
+                                               in continuous mouse state */
+#define ENGINE_RUN_MULTIPLIER    2.2f /**< How run is faster than  walk */
 
 #define ENGINE_WAIT_DIE_DELAY  4000 /**< Value to delay for end die animation */
 
-#define DNT_TO_METER   0.5 /**< Constant to multiply to convert meter to DNT.*/
-#define METER_TO_DNT   1.0 / DNT_TO_METER /**< Constant to DNT to Meter value*/
+#define DNT_TO_METER   0.5f /**< Constant to multiply to convert meter to DNT.*/
+#define METER_TO_DNT   1.0f / DNT_TO_METER /**< Constant to DNT to Meter value*/
 
 #define THUMB_X      128  /**< X size of the screenshot */
 #define THUMB_Y       96  /**< Y size of the screenshot */
@@ -40,15 +43,15 @@
 /********************************************************************
  *                          Update constants                        *
  ********************************************************************/
-#define REFRESH_RATE 200.0  /**< Keyboard Refresh Rate for the Engine */
+#define REFRESH_RATE 200.0f  /**< Keyboard Refresh Rate for the Engine */
 #define NORMAL_FPS 35       /**< Minimun FPS to the engine runs smooth */
 #define UPDATE_RATE (1000 / NORMAL_FPS) /**< Update Rate in ms */
-#define WALK_UPDATE (1.0 / NORMAL_FPS)  /**< Walk Update Rate */
+#define WALK_UPDATE (1.0f / NORMAL_FPS) /**< Walk Update Rate */
 
 /********************************************************************
  *                Character's moviments constants                   *
  ********************************************************************/
-#define TURN_VALUE (WALK_UPDATE * 125.0) /**< The turn velocity */
+#define TURN_VALUE (WALK_UPDATE * 125.0f) /**< The turn velocity */
 #define WALK_PER_MOVE_ACTION  60 /**< Distance that can be walked per move */
 
 /********************************************************************
@@ -73,10 +76,10 @@
 /********************************************************************
  *                        Sun's constants                           *
  ********************************************************************/
-#define SUN_HOUR_BORN          4.0    /**< Sun Hour to born */
-#define SUN_HOUR_DEATH         20.0   /**< Sun hour to die */
-#define SUN_HOUR_INITIAL_TOTAL 8.5    /**< Initial hour of Total Light */
-#define SUN_HOUR_FINAL_TOTAL  16.5    /**< Final hour of Total Light */
+#define SUN_HOUR_BORN          4.0f    /**< Sun Hour to born */
+#define SUN_HOUR_DEATH         20.0f   /**< Sun hour to die */
+#define SUN_HOUR_INITIAL_TOTAL 8.5f    /**< Initial hour of Total Light */
+#define SUN_HOUR_FINAL_TOTAL  16.5f    /**< Final hour of Total Light */
 
 /*! Equations for the sun Position
  * EQU = (y = bx + c) 
@@ -84,12 +87,12 @@
  * y = rotation (degrees) */
 
 /*! Day Equation */
-#define SUN_EQU_B 180.0 / (SUN_HOUR_DEATH - SUN_HOUR_BORN)
+#define SUN_EQU_B 180.0f / (SUN_HOUR_DEATH - SUN_HOUR_BORN)
 #define SUN_EQU_C -(SUN_HOUR_BORN * SUN_EQU_B) /**< same for EQU_B */
 
 /*! Night Equation */
-#define SUN_EQN_B 180.0 / (SUN_HOUR_BORN + 24 - SUN_HOUR_DEATH)
-#define SUN_EQN_C (180.0 - (SUN_HOUR_DEATH * SUN_EQN_B)) /**< same for EQN_B */
+#define SUN_EQN_B 180.0f / (SUN_HOUR_BORN + 24 - SUN_HOUR_DEATH)
+#define SUN_EQN_C (180.0f - (SUN_HOUR_DEATH * SUN_EQN_B)) /**< same for EQN_B */
 
 
 

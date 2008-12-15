@@ -2104,6 +2104,8 @@ int engine::treatIO(SDL_Surface *screen)
    exitEngine = 0;           // Exit the engine ?
    bool walked = false;      // Character Walk ?
    bool timePass = false;    // The time to update passes ?
+   bool run = false;         // Is to run, instead of walk ?
+   float curWalkInterval = 0.0; // Current Active Character walk interval
    Uint32 time;              // Actual Time
    GLfloat varX, varZ;       // to avoid GLfloat calculate
    GLfloat dist;
@@ -2115,7 +2117,7 @@ int engine::treatIO(SDL_Surface *screen)
    int i;
 
    GLfloat varTempo;  // Time Variation
-   
+
    time = SDL_GetTicks();
    srand(time);
    varTempo = (time-lastRead);
@@ -2144,6 +2146,9 @@ int engine::treatIO(SDL_Surface *screen)
       mButton = SDL_GetMouseState(&x,&y);
       mouseX = x;
       mouseY = y;
+
+      /* Get AlwaysRun from Options */
+      run = option->getAlwaysRun();
 
       /* Verify if will enter the Battle Mode because of
        * enemies characters at range! */
@@ -2413,13 +2418,30 @@ int engine::treatIO(SDL_Surface *screen)
          hour += 0.1;
       }
 
+      /* Toggle Run state */
+      if( (keys[SDLK_LSHIFT]) || (keys[SDLK_RSHIFT]) )
+      {
+         run = !option->getAlwaysRun();
+      }
+
+      /* Define current walk interval */
+      if(run)
+      {
+         curWalkInterval = activeCharacter->walk_interval * 
+                           ENGINE_RUN_MULTIPLIER;
+      }
+      else
+      {
+         curWalkInterval = activeCharacter->walk_interval;
+      }
+
       /* Keys to character's movimentation */
       if(keys[SDLK_q] || keys[SDLK_e])
       {
          walkStatus = ENGINE_WALK_KEYS;
-          varX = activeCharacter->walk_interval * 
+          varX = curWalkInterval * 
                  sin(deg2Rad(activeCharacter->orientation+90.0));
-          varZ = activeCharacter->walk_interval * 
+          varZ = curWalkInterval * 
                  cos(deg2Rad(activeCharacter->orientation+90.0));
          // Left walk
          if(keys[SDLK_q]) 
@@ -2434,9 +2456,9 @@ int engine::treatIO(SDL_Surface *screen)
       else if(keys[SDLK_w] || keys[SDLK_s])
       { 
          walkStatus = ENGINE_WALK_KEYS;
-         varX = activeCharacter->walk_interval * 
+         varX = curWalkInterval * 
                 sin(deg2Rad(activeCharacter->orientation));
-         varZ = activeCharacter->walk_interval * 
+         varZ = curWalkInterval * 
                 cos(deg2Rad(activeCharacter->orientation));
          if(keys[SDLK_w]) 
          {
@@ -2518,9 +2540,19 @@ int engine::treatIO(SDL_Surface *screen)
 
          activeCharacter->pathFind.defineMap(actualMap);
 
-         activeCharacter->pathFind.findPath(activeCharacter, xReal, zReal, 
-               activeCharacter->walk_interval, NPCs, PCs, 
-               engineMode == ENGINE_MODE_TURN_BATTLE);
+         if(option->getAlwaysRun())
+         {
+            activeCharacter->pathFind.findPath(activeCharacter, xReal, zReal, 
+                  activeCharacter->walk_interval * ENGINE_RUN_MULTIPLIER, 
+                  NPCs, PCs, 
+                  engineMode == ENGINE_MODE_TURN_BATTLE);
+         }
+         else
+         {
+            activeCharacter->pathFind.findPath(activeCharacter, xReal, zReal, 
+                  activeCharacter->walk_interval, NPCs, PCs, 
+                  engineMode == ENGINE_MODE_TURN_BATTLE);
+         }
       }
 
       /* Verify Continuous Walk with Mouse */
@@ -2547,18 +2579,31 @@ int engine::treatIO(SDL_Surface *screen)
                   /* can change */
                   activeCharacter->orientation = walkAngle; 
                }
+
+               /* Verify if is running or walking */
+               run = dist >= ENGINE_CONTINUOUS_RUN_DISTANCE;
             }
             else
             {
                /* Keep the direction angle */
                walkAngle = activeCharacter->orientation;
+               run = false;
             }
 
-             /* Try to move it forward the angle */
-             varX = -1 * activeCharacter->walk_interval * 
-                         sin(deg2Rad(walkAngle));
-             varZ = -1 * activeCharacter->walk_interval * 
-                         cos(deg2Rad(walkAngle));
+            /* Reset, now for the continuous walk, the interval */
+            if(run)
+            {
+               curWalkInterval = activeCharacter->walk_interval * 
+                                 ENGINE_RUN_MULTIPLIER;
+            }
+            else
+            {
+               curWalkInterval = activeCharacter->walk_interval;
+            }
+
+            /* Try to move it forward the angle */
+            varX = -1 * curWalkInterval * sin(deg2Rad(walkAngle));
+            varZ = -1 * curWalkInterval * cos(deg2Rad(walkAngle));
             walked |= tryWalk(varX, varZ);
          }
          else
@@ -2693,14 +2738,24 @@ int engine::treatIO(SDL_Surface *screen)
             walkSound->redefinePosition(activeCharacter->xPosition, 0.0,
                                         activeCharacter->zPosition);
          }
-         activeCharacter->setState(STATE_WALK);
+
+         /* Set the animation (if not yet defined) */
+         if(run)
+         {
+            activeCharacter->setState(STATE_RUN);
+         }
+         else
+         {
+            activeCharacter->setState(STATE_WALK);
+         }
       }
       else if( (timePass) && (activeCharacter->isAlive()))
       { 
          /* The move stoped (or never occurred)  */
-         if( (activeCharacter->getState() == STATE_WALK) &&
-             (engineMode == ENGINE_MODE_TURN_BATTLE) && 
-             (fightStatus == FIGHT_PC_TURN) )
+         if( ( (activeCharacter->getState() == STATE_WALK) ||
+               (activeCharacter->getState() == STATE_RUN) ) &&
+               (engineMode == ENGINE_MODE_TURN_BATTLE) && 
+               (fightStatus == FIGHT_PC_TURN) )
          {
             /* Stoped, so must set that cannot move */
             activeCharacter->setCanMove(false);
@@ -3146,8 +3201,18 @@ void engine::renderGUI()
          if(walkStatus == ENGINE_WALK_MOUSE)
          {
             /* Set the cursor to the current walkAngle orientation */
-            cursors->draw(mouseX, mouseY,
-                          walkAngle - gameCamera.getPhi());
+            if(PCs->getActiveCharacter()->getState() == STATE_RUN)
+            {
+               /* Is running, must scale a bit the cursor to demonstrate this */
+               cursors->draw(mouseX, mouseY,
+                             walkAngle - gameCamera.getPhi(),
+                             1.0f,1.2f,1.0f);
+            }
+            else
+            {
+               cursors->draw(mouseX, mouseY,
+                             walkAngle - gameCamera.getPhi());
+            }
          }
          else
          {
