@@ -733,11 +733,11 @@ void aniModel::setState(int state)
           m_calModel->getMixer()->blendCycle(m_animationId[STATE_DEAD],
                                             0.1f,0.1f);
        }
-       /*else if(state >= STATE_ATTACK_MEELE)
+       else if(state == STATE_ATTACK_MEELE)
        {         
          m_calModel->getMixer()->executeAction(m_animationId[state],
                                                 0.3f,0.3f);
-       }*/
+       }
        else
        {
           m_calModel->getMixer()->clearCycle(m_animationId[m_state],0.1f);
