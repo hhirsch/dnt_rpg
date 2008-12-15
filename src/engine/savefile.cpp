@@ -308,8 +308,7 @@ bool saveFile::loadHeader(string fileName)
          version = value;
          if(version != VERSION)
          {
-            //TODO -> throw error!
-            return(false);
+            cerr << "Warning: loading an old version file: " << version << endl;
          }
       }
       else if(key == DNT_SAVE_TOKEN_IMAGE)
