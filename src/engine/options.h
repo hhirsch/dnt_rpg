@@ -99,6 +99,9 @@ class options
       /*! Verify if will show enemies circles at battle
        * \return true if will show, false if not. */
       bool getShowEnemyCircles();
+      /*! Verify if playable characters will always run or not
+       * \return -> true if will always run */
+      bool getAlwaysRun();
       /*! Get the current antialiasing
        * \return -> current antialiasing*/
       int getAntiAliasing();
@@ -140,6 +143,7 @@ class options
       static bool    enableAnisotropic; /**< If anisotropic filter is used */
       static bool    autoEndTurn;     /**< If will autoend turn or not */
       static bool    showEnemyCircles; /**< if show enemies battle circles */
+      static bool    alwaysRun;        /**< if will always run */
 
       window* intWindow;       /**< Options Window Pointer */
 
@@ -192,6 +196,7 @@ class options
 
       cxSel* cxSelShowEnemyCircles;
       cxSel* cxSelAutoEndTurn;
+      cxSel* cxSelAlwaysRun;
 
       button* buttonConfirm;
       button* buttonCancel;

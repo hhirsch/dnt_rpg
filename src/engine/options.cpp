@@ -204,6 +204,11 @@ bool options::load(string file)
          /* Read Show Enemy Circles options */
          showEnemyCircles = (value == "true");
       }
+      else if(key == "AlwaysRun")
+      {
+         /* If will always run or not */
+         alwaysRun = (value == "true");
+      }
 
       /**********************************************
        *                 Video Options              *
@@ -317,6 +322,8 @@ void options::save()
    fprintf(arq, "AutoEndTurn = %s\n", autoEndTurn?"true":"false");
    /* Show Enemy Circles */
    fprintf(arq, "ShowEnemyCircles = %s\n", showEnemyCircles?"true":"false");
+   /* Always Run */
+   fprintf(arq, "AlwaysRun = %s\n", alwaysRun?"true":"false");
 
    /**********************************************
     *                Video Options               *
@@ -795,6 +802,15 @@ void options::displayOptionsScreen(guiInterface* interf)
                   dir.getRealFile("texturas/options/autoendturn.png").c_str());
    posY += 25;
 
+   /* AlwaysRun Enable or Not */
+   qt = list->insertTextBox(24,posY,219,posY+17,0,
+                            gettext("Always Run"));
+   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   cxSelAlwaysRun = list->insertCxSel(12,posY+4,alwaysRun);
+   list->insertPicture(220,posY,40,112,
+                  dir.getRealFile("texturas/options/alwaysrun.png").c_str());
+   posY += 25;
+
    /* ShowEnemyCircles or or Not */
    qt = list->insertTextBox(24,posY,219,posY+34,0,
                             gettext("Show Enemy Battle Circle"));
@@ -998,6 +1014,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          enableMultiTexture = cxSelMultiTexture->isSelected();
          enableAnisotropic = cxSelAnisotropic->isSelected();
          autoEndTurn = cxSelAutoEndTurn->isSelected();
+         alwaysRun = cxSelAlwaysRun->isSelected();
          showEnemyCircles = cxSelShowEnemyCircles->isSelected();
 
          bool prevFullScreen = enableFullScreen;
@@ -1187,6 +1204,14 @@ bool options::getShowEnemyCircles()
 }
 
 /****************************************************************
+ *                        getAlwaysRun                          *
+ ****************************************************************/
+bool options::getAlwaysRun()
+{
+   return(alwaysRun);
+}
+
+/****************************************************************
  *                        getAntiAliasing                       *
  ****************************************************************/
 int options::getAntiAliasing()
@@ -1237,6 +1262,7 @@ bool   options::enableMultiTexture = true;
 bool   options::autoEndTurn = true;
 bool   options::showEnemyCircles = false;
 bool   options::enableAnisotropic = true;
+bool   options::alwaysRun = false;
 
 string options::fileName = "";
 
