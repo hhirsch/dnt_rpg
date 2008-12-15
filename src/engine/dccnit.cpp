@@ -2719,6 +2719,9 @@ int engine::treatIO(SDL_Surface *screen)
          dialogWindow dlgWindow;
          dlgWindow.close();
 
+//FIXME: Disabled sound for walk, until we'll do one for run
+//       and for NPCS (anyway, its too bad for now)
+#if 0       
          if( (!walkSound) && (snd) )
          {
             string walkSoundFile = "sndfx/passos.ogg";
@@ -2738,6 +2741,7 @@ int engine::treatIO(SDL_Surface *screen)
             walkSound->redefinePosition(activeCharacter->xPosition, 0.0,
                                         activeCharacter->zPosition);
          }
+#endif         
 
          /* Set the animation (if not yet defined) */
          if(run)
