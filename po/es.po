@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-12-15 14:31-0200\n"
+"POT-Creation-Date: 2008-12-16 15:43-0200\n"
 "PO-Revision-Date: 2008-07-22 19:40+0000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -65,12 +65,12 @@ msgstr "Dote Invalido"
 msgid "Not enought points to use!"
 msgstr "No tiene suficientes puntos para usarlo!"
 
-#: src/classes/mission.cpp:384 src/engine/dialog.cpp:1077
+#: src/classes/mission.cpp:385 src/engine/dialog.cpp:1077
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "Missión Completa: %d XP!"
 
-#: src/classes/mission.cpp:397
+#: src/classes/mission.cpp:402 src/classes/mission.cpp:405
 msgid "Mission Failure!"
 msgstr "Falha na Missión"
 
@@ -424,50 +424,50 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1356
+#: src/engine/dccnit.cpp:1355
 msgid "Too far away for the action!"
 msgstr "Muy lejos para la acción!"
 
-#: src/engine/dccnit.cpp:1398
+#: src/engine/dccnit.cpp:1397
 msgid "No NPCs in the area."
 msgstr "No hay NPC's en el área."
 
-#: src/engine/dccnit.cpp:1449
+#: src/engine/dccnit.cpp:1448
 msgid "Surprise Attack Turn."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1463
+#: src/engine/dccnit.cpp:1462
 msgid "No enemies in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1640 src/engine/dccnit.cpp:2091
+#: src/engine/dccnit.cpp:1639 src/engine/dccnit.cpp:2090
 #: src/engine/shortcutswindow.cpp:32
 msgid "Nothing"
 msgstr "Nada"
 
-#: src/engine/dccnit.cpp:1839
+#: src/engine/dccnit.cpp:1838
 #, c-format
 msgid "%s taken."
 msgstr "%s recogido"
 
-#: src/engine/dccnit.cpp:1861
+#: src/engine/dccnit.cpp:1860
 msgid "Inventory is full!"
 msgstr "Inventorio Lleno!"
 
-#: src/engine/dccnit.cpp:1893
+#: src/engine/dccnit.cpp:1892
 msgid "Door"
 msgstr "Puerta"
 
-#: src/engine/dccnit.cpp:2026
+#: src/engine/dccnit.cpp:2025
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s ataca %s"
 
-#: src/engine/dccnit.cpp:2192
+#: src/engine/dccnit.cpp:2191
 msgid "No more actions. Turn ended."
 msgstr "Sin acciones. Turno finalizado."
 
-#: src/engine/dccnit.cpp:3694
+#: src/engine/dccnit.cpp:3708
 msgid "Exit Battle Mode"
 msgstr "Salir del Modo de Batalla"
 

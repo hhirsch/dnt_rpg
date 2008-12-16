@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-12-15 14:31-0200\n"
+"POT-Creation-Date: 2008-12-16 15:43-0200\n"
 "PO-Revision-Date: 2007-11-20 17:24+0000\n"
 "Last-Translator: Sergei Zivukov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -65,12 +65,12 @@ msgstr "Неправильный подвиг"
 msgid "Not enought points to use!"
 msgstr "Недостаточно очков для использования!"
 
-#: src/classes/mission.cpp:384 src/engine/dialog.cpp:1077
+#: src/classes/mission.cpp:385 src/engine/dialog.cpp:1077
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "Миссия завершена: %d XP!"
 
-#: src/classes/mission.cpp:397
+#: src/classes/mission.cpp:402 src/classes/mission.cpp:405
 msgid "Mission Failure!"
 msgstr ""
 
@@ -424,50 +424,50 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1356
+#: src/engine/dccnit.cpp:1355
 msgid "Too far away for the action!"
 msgstr "Слишком далеко для действия!"
 
-#: src/engine/dccnit.cpp:1398
+#: src/engine/dccnit.cpp:1397
 msgid "No NPCs in the area."
 msgstr "Нет NPC'ов на арене"
 
-#: src/engine/dccnit.cpp:1449
+#: src/engine/dccnit.cpp:1448
 msgid "Surprise Attack Turn."
 msgstr "Неожиданное нападение."
 
-#: src/engine/dccnit.cpp:1463
+#: src/engine/dccnit.cpp:1462
 msgid "No enemies in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1640 src/engine/dccnit.cpp:2091
+#: src/engine/dccnit.cpp:1639 src/engine/dccnit.cpp:2090
 #: src/engine/shortcutswindow.cpp:32
 msgid "Nothing"
 msgstr "Ничего"
 
-#: src/engine/dccnit.cpp:1839
+#: src/engine/dccnit.cpp:1838
 #, c-format
 msgid "%s taken."
 msgstr "%s взят."
 
-#: src/engine/dccnit.cpp:1861
+#: src/engine/dccnit.cpp:1860
 msgid "Inventory is full!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1893
+#: src/engine/dccnit.cpp:1892
 msgid "Door"
 msgstr "Дверь"
 
-#: src/engine/dccnit.cpp:2026
+#: src/engine/dccnit.cpp:2025
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s атаковал %s"
 
-#: src/engine/dccnit.cpp:2192
+#: src/engine/dccnit.cpp:2191
 msgid "No more actions. Turn ended."
 msgstr ""
 
-#: src/engine/dccnit.cpp:3694
+#: src/engine/dccnit.cpp:3708
 msgid "Exit Battle Mode"
 msgstr "Покинуть режим сражения"
 
