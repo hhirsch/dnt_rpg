@@ -347,6 +347,7 @@ void missionsController::completeMission(mission* m, int type)
    sound snd;
    briefing brief;
    messageController msgController;
+   char vstr[200];
    int i;
 
    /* First, remove from the current list, without deleting it. */
@@ -380,7 +381,7 @@ void missionsController::completeMission(mission* m, int type)
 
       /* Add 3D Message of success */
       dude = eng->PCs->getActiveCharacter();
-      char vstr[200];
+
       sprintf(vstr,gettext("Mission Completed: %d XP!"),m->getXp()); 
       msgController.addMessage(dude->xPosition, dude->max[1]+dude->yPosition,
                                dude->zPosition, vstr, 0.94, 0.8, 0.0);
@@ -393,7 +394,14 @@ void missionsController::completeMission(mission* m, int type)
    }
    else 
    {
-      /*Add Briefing message of failure */
+      /* Add 3D message of failure */
+      engine* eng = (engine*)pEngine;
+      character* dude = eng->PCs->getActiveCharacter();
+      msgController.addMessage(dude->xPosition, dude->max[1]+dude->yPosition,
+                               dude->zPosition, 
+                               gettext("Mission Failure!"), 0.94, 0.2, 0.1);
+
+      /* Add Briefing message of failure */
       brief.addText(gettext("Mission Failure!"));
 
       /* Play Failure Sound Effect */
