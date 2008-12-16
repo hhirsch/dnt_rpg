@@ -163,7 +163,7 @@ bool npcs::saveFile(string fileName)
       character* per = (character*) NPCs->getFirst();
       for(npc = 0; npc < NPCs->getTotal(); npc++)
       {
-         fprintf(arq,"%s %s %f %f %f\n",per->name.c_str(),
+         fprintf(arq,"%s %s %.3f %.3f %.3f\n",per->name.c_str(),
                  per->getCharacterFile().c_str(),
                  per->xPosition,per->zPosition, per->orientation);
          per = (character*) per->next;

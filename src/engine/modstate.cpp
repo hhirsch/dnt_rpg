@@ -1195,7 +1195,7 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs,
          while( (ch != NULL) && (!done) )
          {
             if( (ch->xPosition == charAct->getInitialX()) &&
-                  (ch->zPosition == charAct->getInitialZ()) )
+                (ch->zPosition == charAct->getInitialZ()) )
             {
                /* Put it as dead at the position */
                ch->instantKill();
@@ -1209,6 +1209,11 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs,
                /* Not the one, get the next */
                ch = npcs->getNextSameCharacter(ch);
             }
+         }
+
+         if(!done)
+         {
+            cerr << "Not found Character: " << charAct->getTarget() << endl;
          }
       }
 
