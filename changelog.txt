@@ -26,6 +26,9 @@ Pending:
  - Fixed a bug that keeps dead characters alive after save file load;
  - Fixed mouse 3d world projection outside the indoor map limits;
  - Fixed the text input on saveWindow (was too slow);
+ - Fixed a bug of losing the equiped weapon after loading save file;
+ - Fixed for Santa model completly finish the die animation;
+ - Fixed to update health bar after load save file;
  - Showing "Mission Failure!" at 3D messages (not only on briefieng) 
    when fail to complete a mission.
 
