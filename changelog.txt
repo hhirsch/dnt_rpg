@@ -14,14 +14,20 @@ Pending:
  - Define paths to improve the A* at outdoor maps;
  - Put Lights on MapEditor;
  - Make a tutorial to the battle system;
- - Implement 5-15% of the feats defined on DNT Book;
+ - Implement 5-15% of the talents defined on DNT Book;
  - Score at Death Screen;
- - Capacity of using feats;
+ - Capacity of using talents;
 
 ================================================
 |               Version 0.3.2                  |
 ================================================
- - Fix a bug on saveWindow when saving over an existent save file;
+ - Fixed a bug on saveWindow when saving over an existent save file;
+ - Fixed a bug on script's interpreter of "else if" jumps;
+ - Fixed a bug that keeps dead characters alive after save file load;
+ - Fixed mouse 3d world projection outside the indoor map limits;
+ - Fixed the text input on saveWindow (was too slow);
+ - Showing "Mission Failure!" at 3D messages (not only on briefieng) 
+   when fail to complete a mission.
 
 ================================================
 |               Version 0.3.1                  |
