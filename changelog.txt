@@ -19,6 +19,11 @@ Pending:
  - Capacity of using feats;
 
 ================================================
+|               Version 0.3.2                  |
+================================================
+ - Fix a bug on saveWindow when saving over an existent save file;
+
+================================================
 |               Version 0.3.1                  |
 ================================================
  - Running Animation/Action/Option for Playable Characters;

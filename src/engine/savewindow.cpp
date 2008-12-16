@@ -92,30 +92,33 @@ void saveWindow::changeInfo()
    warning warn;
 
    /* Free any previous */
-   if(fileImage->get() != NULL)
+   if(windowIsLoad)
    {
-      SDL_FreeSurface(fileImage->get());
-      fileImage->set(NULL);
-   }
-   fileTitle->setText("");
-
-   /* Reload a new, if defined */
-   if(!fileSelector->getFileName().empty())
-   {
-      sav = new saveFile;
-      if(sav->loadHeader(fileSelector->getFileName()))
+      if(fileImage->get() != NULL)
       {
-         fileImage->set(IMG_Load(sav->getImageFile().c_str()));
-         fileTitle->setText(sav->getTitle());
+         SDL_FreeSurface(fileImage->get());
+         fileImage->set(NULL);
       }
-      else
-      {
-         warn.show(gettext("Error"), gettext("Invalid File!"), gui);
-      }
-      delete(sav);
-   }
+      fileTitle->setText("");
 
-   fileWindow->draw(0,0);
+      /* Reload a new, if defined */
+      if(!fileSelector->getFileName().empty())
+      {
+         sav = new saveFile;
+         if(sav->loadHeader(fileSelector->getFileName()))
+         {
+            fileImage->set(IMG_Load(sav->getImageFile().c_str()));
+            fileTitle->setText(sav->getTitle());
+         }
+         else
+         {
+            warn.show(gettext("Error"), gettext("Invalid File!"), gui);
+         }
+         delete(sav);
+      }
+
+      fileWindow->draw(0,0);
+   }
 }
 
 /***********************************************************************
