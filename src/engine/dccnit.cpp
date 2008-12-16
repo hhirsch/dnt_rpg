@@ -133,23 +133,23 @@ engine::engine()
    missions = new missionsController();
    missions->init(this);
 
-   hour = 9.0;
-   float sunPos = (OUTDOOR_FARVIEW * option->getFarViewFactor()) / 2.0;
+   hour = 9.0f;
+   float sunPos = (OUTDOOR_FARVIEW * option->getFarViewFactor()) / 2.0f;
    gameSun = new sun(hour, sunPos, sunPos);
 
    engineMode = ENGINE_MODE_REAL_TIME;
 
-   destinyVariation = -2.0;
+   destinyVariation = -2.0f;
    lastKey = 0;
 
    /* Colors */
    for(i = 0; i < 3; i++)
    {
-      defaultColor[i] = 0.2;
-      blackColor[i] = 0.0;
+      defaultColor[i] = 0.2f;
+      blackColor[i] = 0.0f;
    }
-   defaultColor[3] = 1.0;
-   blackColor[3] = 1.0;
+   defaultColor[3] = 1.0f;
+   blackColor[3] = 1.0f;
 
 }
 
@@ -473,7 +473,7 @@ int engine::loadMap(string arqMapa)
    glGenTextures(1,&texturaCarga);
    
    /* Clear things */
-   glClearColor(0,0,0,1);
+   glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
    glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
    glDisable(GL_LIGHTING);
 
@@ -579,17 +579,17 @@ int engine::loadMap(string arqMapa)
    }
    else
    {
-      GLdouble fogEnd = (option->getFarViewFactor()*OUTDOOR_FARVIEW) + 4000;
-      GLdouble fogStart = 200;
-      GLdouble fogDensity = 5.0;
-      GLfloat color[3] = {1.0,1.0,1.0};
+      GLfloat fogEnd = (option->getFarViewFactor()*OUTDOOR_FARVIEW) + 4000;
+      GLfloat fogStart = 200.0f;
+      GLfloat fogDensity = 5.0f;
+      GLfloat color[3] = {1.0f, 1.0f, 1.0f};
       if(!actualMap->isOutdoor())
       {
-         color[0] = 0.0;
-         color[1] = 0.0;
-         color[2] = 0.0;
-         fogStart = 40;
-         fogDensity = 1.0;
+         color[0] = 0.0f;
+         color[1] = 0.0f;
+         color[2] = 0.0f;
+         fogStart = 40.0f;
+         fogDensity = 1.0f;
          fogEnd = (INDOOR_FARVIEW)-2;
       }
       glEnable(GL_FOG);
@@ -793,14 +793,14 @@ void engine::fadeInTexture(GLuint id, int x1, int y1, int x2, int y2,
       glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT
               | GL_STENCIL_BUFFER_BIT);
       draw2DMode();
-      glColor3f(i/50.0, i/50.0, i/50.0);
+      glColor3f(i/50.0f, i/50.0f, i/50.0f);
       textureToScreen(id,x1,y1,x2,y2,sizeX,sizeY);
       draw3DMode(option->getFarViewFactor()*OUTDOOR_FARVIEW);
       glFlush();
       SDL_GL_SwapBuffers();
       SDL_Delay(10);
    }
-   glColor3f(1.0,1.0,1.0);
+   glColor3f(1.0,1.0f,1.0f);
 }
 
 /*********************************************************************
@@ -815,14 +815,14 @@ void engine::fadeOutTexture(GLuint id, int x1, int y1, int x2, int y2,
       glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT
               | GL_STENCIL_BUFFER_BIT);
       draw2DMode();
-      glColor3f(i/50.0, i/50.0, i/50.0);
+      glColor3f(i/50.0f, i/50.0f, i/50.0f);
       textureToScreen(id,x1,y1,x2,y2,sizeX,sizeY);
       draw3DMode(option->getFarViewFactor()*OUTDOOR_FARVIEW);
       glFlush();
       SDL_GL_SwapBuffers();
       SDL_Delay(10);
    }
-   glColor3f(1.0, 1.0, 1.0);
+   glColor3f(1.0f, 1.0f, 1.0f);
 }
 
 
@@ -870,7 +870,7 @@ void engine::splashScreen()
       glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT
               | GL_STENCIL_BUFFER_BIT);
       draw2DMode();
-      glColor3f(1.0, 1.0, 1.0);
+      glColor3f(1.0f, 1.0f, 1.0f);
       textureToScreen(id, 0, 0, SCREEN_X-1, SCREEN_Y-1, 800, 600);
       draw3DMode(option->getFarViewFactor()*OUTDOOR_FARVIEW);
       glFlush();
@@ -950,7 +950,7 @@ int engine::optionsScreen(GLuint idTextura)
          timeAnterior = time;
          SDL_PumpEvents();
          glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-         glClearColor(0,0,0,1);
+         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
          keys = SDL_GetKeyState(NULL);
          Uint8 mButton = SDL_GetMouseState(&x,&y);
          object = gui->manipulateEvents(x,y,mButton,keys, eventInfo);
@@ -1037,7 +1037,7 @@ int engine::characterScreen(GLuint idTextura)
       {
          timeAnterior = time;
          SDL_PumpEvents();
-         glClearColor(0,0,0,1);
+         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
          glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
          keys = SDL_GetKeyState(NULL);
          Uint8 mButton = SDL_GetMouseState(&x,&y);
@@ -1195,10 +1195,10 @@ int engine::characterScreen(GLuint idTextura)
  *********************************************************************/
 void engine::redefineWindow(SDL_Surface *screen, float actualFarView)
 {
-   glViewport (0, 0, SCREEN_X, SCREEN_Y);
-   glMatrixMode (GL_PROJECTION);
-   glLoadIdentity ();
-   gluPerspective(45.0, SCREEN_X / (float)SCREEN_Y, 1.0, 
+   glViewport(0, 0, SCREEN_X, SCREEN_Y);
+   glMatrixMode(GL_PROJECTION);
+   glLoadIdentity();
+   gluPerspective(45.0f, SCREEN_X / (float)SCREEN_Y, 1.0f, 
                   actualFarView);
    glGetIntegerv(GL_VIEWPORT, viewPort);
    glGetFloatv(GL_MODELVIEW_MATRIX, camProj);
@@ -1207,7 +1207,7 @@ void engine::redefineWindow(SDL_Surface *screen, float actualFarView)
 
    glEnable(GL_LINE_SMOOTH);
    glHint(GL_LINE_SMOOTH_HINT, GL_DONT_CARE);
-   glLineWidth (1.5);
+   glLineWidth(1.5f);
 }
 
 /*********************************************************************
@@ -1219,8 +1219,8 @@ void engine::init(SDL_Surface *screen)
    redefineWindow(screen, option->getFarViewFactor()*OUTDOOR_FARVIEW);
    
    /* Clear */
-   glClearColor (0.0, 0.0, 0.0, 0.0);
-   glClearDepth(1.0);
+   glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+   glClearDepth(1.0f);
    glClearStencil(0);
 
    /* Details Definition */
@@ -1229,7 +1229,7 @@ void engine::init(SDL_Surface *screen)
    glShadeModel(GL_SMOOTH);
 
    /* Light Definition */
-   GLfloat light_ambient[] = { 0.25, 0.25, 0.25, 1.0 };
+   GLfloat light_ambient[] = { 0.25f, 0.25f, 0.25f, 1.0f };
    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, light_ambient);
    glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_FALSE);
    glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE);
@@ -1341,7 +1341,6 @@ void engine::init(SDL_Surface *screen)
 
     /* ShadowMap */
    shadowMap.init();
-   //glPolygonOffset(-2.0, -1.0);
 }
 
 /*********************************************************************
@@ -1886,7 +1885,7 @@ int engine::verifyMouseActions(Uint8 mButton)
          Z[3] = bound.z1;
          rotTransBoundingBox(porta->orientation + porta->delta, 
                              X, Z,porta->x, 
-                             0.0,0.0,porta->z, minObj, maxObj);
+                             0.0f,0.0f,porta->z, minObj, maxObj);
          if(intercepts( minObj, maxObj, minMouse, maxMouse))
          {
             cursors->set(CURSOR_DOOR);
@@ -1977,7 +1976,7 @@ int engine::verifyMouseActions(Uint8 mButton)
             z[3] = pers->min[2];
 
             rotTransBoundingBox(pers->orientation, x, z, 
-                                pers->xPosition, 0.0, 0.0, 
+                                pers->xPosition, 0.0f, 0.0f, 
                                 pers->zPosition, min, max );
 
             if(intercepts( min, max, minMouse, maxMouse))
@@ -2054,14 +2053,14 @@ int engine::verifyMouseActions(Uint8 mButton)
          /* Don't travel on battle mode */
          GLfloat minCon[3], maxCon[3];
          minCon[0] = quaux->mapConection.x1;
-         minCon[1] = 0.0;
+         minCon[1] = 0.0f;
          minCon[2] = quaux->mapConection.z1;
          maxCon[0] = quaux->mapConection.x2;
-         maxCon[1] = 0.0;
+         maxCon[1] = 0.0f;
          maxCon[2] = quaux->mapConection.z2;
          GLfloat minMouse[3], maxMouse[3];
          minMouse[0] = xReal-2;  maxMouse[0] = xReal+2;
-         minMouse[1] = 0.0;      maxMouse[1] = 0.0;
+         minMouse[1] = 0.0f;      maxMouse[1] = 0.0f;
          minMouse[2] = zReal-2;  maxMouse[2] = zReal+2;
          if( intercepts( minCon, maxCon, minMouse, maxMouse ) )
          {
@@ -2105,7 +2104,7 @@ int engine::treatIO(SDL_Surface *screen)
    bool walked = false;      // Character Walk ?
    bool timePass = false;    // The time to update passes ?
    bool run = false;         // Is to run, instead of walk ?
-   float curWalkInterval = 0.0; // Current Active Character walk interval
+   float curWalkInterval = 0.0f; // Current Active Character walk interval
    Uint32 time;              // Actual Time
    GLfloat varX, varZ;       // to avoid GLfloat calculate
    GLfloat dist;
@@ -2126,12 +2125,12 @@ int engine::treatIO(SDL_Surface *screen)
       timePass = true;
 
       /* Update Time */
-      seconds = varTempo / 1000.0;
+      seconds = varTempo / 1000.0f;
 
-      hour = (hour + seconds / 100.0 );
-      if(hour > 23.99)
+      hour = (hour + seconds / 100.0f );
+      if(hour > 23.99f)
       {
-         hour = 0.0;
+         hour = 0.0f;
       }
       hourToTxt();
       lastRead = time;
@@ -2440,9 +2439,9 @@ int engine::treatIO(SDL_Surface *screen)
       {
          walkStatus = ENGINE_WALK_KEYS;
           varX = curWalkInterval * 
-                 sin(deg2Rad(activeCharacter->orientation+90.0));
+                 sin(deg2Rad(activeCharacter->orientation+90.0f));
           varZ = curWalkInterval * 
-                 cos(deg2Rad(activeCharacter->orientation+90.0));
+                 cos(deg2Rad(activeCharacter->orientation+90.0f));
          // Left walk
          if(keys[SDLK_q]) 
          {
@@ -2477,9 +2476,9 @@ int engine::treatIO(SDL_Surface *screen)
          if((keys[SDLK_a]) && (canWalk(0,0,TURN_VALUE)) )  
          {
             ori += TURN_VALUE;
-            if(ori > 360.0)
+            if(ori > 360.0f)
             { 
-               ori -= 360.0;
+               ori -= 360.0f;
             }
             activeCharacter->setOrientation(ori);
             walked = true;
@@ -2488,9 +2487,9 @@ int engine::treatIO(SDL_Surface *screen)
          if((keys[SDLK_d]) && (canWalk(0,0,-TURN_VALUE)) )
          {
             ori -= TURN_VALUE;
-            if(ori < 0.0)
+            if(ori < 0.0f)
             {
-               ori += 360.0;
+               ori += 360.0f;
             }
             activeCharacter->setOrientation(ori);
          }
@@ -2696,7 +2695,7 @@ int engine::treatIO(SDL_Surface *screen)
       }
 
       /* Update FPS */
-      actualFPS = (actualFPS + (1000.0 / (SDL_GetTicks() - lastRead))) / 2;
+      actualFPS = (actualFPS + (1000.0f / (SDL_GetTicks() - lastRead))) / 2;
 
       /* Limit its max */
       if(actualFPS > 1000)
@@ -2810,7 +2809,7 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
    if( (!lightPass) && (actualMap->isOutdoor()) )
    {
       glPushMatrix();
-         glTranslatef(gameCamera.getCameraX(), 0.0, gameCamera.getCameraZ());
+         glTranslatef(gameCamera.getCameraX(), 0.0f, gameCamera.getCameraZ());
          gameSky->draw(actualMap, gameSun->getRotation());
       glPopMatrix();
    }
@@ -2866,7 +2865,7 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
       glPushMatrix();
       glTranslatef(per->xPosition, per->yPosition,
             per->zPosition);
-      glRotatef(per->orientation,0,1,0);
+      glRotatef(per->orientation, 0.0f, 1.0f, 0.0f);
       per->renderFromGraphicMemory();
 
       //per->renderBoundingBox();
@@ -2893,8 +2892,8 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
          glPushMatrix();
          glTranslatef(per->xPosition, per->yPosition,
                per->zPosition);
-         glRotatef(per->orientation,0,1,0);
-         glScalef(1.0, -1.0, 1.0);
+         glRotatef(per->orientation, 0.0f, 1.0f, 0.0f);
+         glScalef(1.0f, -1.0f, 1.0f);
          per->renderFromGraphicMemory();
          glPopMatrix();
          glDisable(GL_NORMALIZE);
@@ -2951,7 +2950,7 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
             glPushMatrix();
               glTranslatef(per->xPosition, per->yPosition,
                            per->zPosition);
-              glRotatef(per->orientation,0,1,0);
+              glRotatef(per->orientation, 0.0f, 1.0f, 0.0f);
               per->renderFromGraphicMemory();
               /*glColor3f(1.0,0.1,0.1);
               glBegin(GL_QUADS);
@@ -2985,8 +2984,8 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
                  glPushMatrix();
                     glTranslatef(per->xPosition, per->yPosition,
                                  per->zPosition);
-                    glRotatef(per->orientation,0,1,0);
-                    glScalef(1.0, -1.0, 1.0);
+                    glRotatef(per->orientation, 0.0f, 1.0f, 0.0f);
+                    glScalef(1.0f, -1.0f, 1.0f);
                     per->renderFromGraphicMemory();
                  glPopMatrix();
                  glDisable(GL_NORMALIZE);
@@ -3081,7 +3080,7 @@ void engine::renderNoShadowThings()
                                                            WALK_PER_MOVE_ACTION,
                                      activeCharacter->zPosition + 
                                                            WALK_PER_MOVE_ACTION,
-                                     0.05, 20);
+                                     0.05f, 20);
    }
 
    /* Draw Combat Mode Things */
@@ -3106,7 +3105,7 @@ void engine::renderNoShadowThings()
                   moveCircleZ-2*WALK_PER_MOVE_ACTION,
                   moveCircleX+2*WALK_PER_MOVE_ACTION, 
                   moveCircleZ+2*WALK_PER_MOVE_ACTION,
-                  0.1,12);
+                  0.1f,12);
          }
          /* Normal Circle */
          actualMap->renderSurfaceOnMap(normalMoveCircle,
@@ -3114,7 +3113,7 @@ void engine::renderNoShadowThings()
                moveCircleZ-WALK_PER_MOVE_ACTION,
                moveCircleX+WALK_PER_MOVE_ACTION, 
                moveCircleZ+WALK_PER_MOVE_ACTION,
-               0.2,20);
+               0.2f,20);
       }
       if( (turnCharacter->getCanAttack()) && 
           (walkDistance < WALK_PER_MOVE_ACTION) )
@@ -3126,7 +3125,7 @@ void engine::renderNoShadowThings()
                turnCharacter->zPosition-rangeValue, 
                turnCharacter->xPosition+rangeValue, 
                turnCharacter->zPosition+rangeValue, 
-               0.3,20);
+               0.3f,20);
       }
 
    }
@@ -3139,24 +3138,24 @@ void engine::renderNoShadowThings()
       activeCharacter->pathFind.getDestiny(destX, destZ);
       
        /* Draw Movimentation Destiny */
-       if(destinyVariation >= 2.0)
+       if(destinyVariation >= 2.0f)
        {
-          destinyVariation = -2.0;
+          destinyVariation = -2.0f;
        }
-       destinyVariation += 0.1;
+       destinyVariation += 0.1f;
 
        actualMap->renderSurfaceOnMap(destinyImage,
                                      destX - (4 + destinyVariation), 
                                      destZ - (4 + destinyVariation),
                                      destX + (4 + destinyVariation),
                                      destZ + (4 + destinyVariation),
-                                     0.25,4);
+                                     0.25f,4);
    }
 
    /* The Current Connection */
    if(curConection)
    {
-      GLfloat ambient[] = { 0.94, 0.292, 0.22, 0.45 };
+      GLfloat ambient[] = { 0.94f, 0.292f, 0.22f, 0.45f };
       glPushMatrix();
       glEnable( GL_BLEND );
       glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -3166,15 +3165,15 @@ void engine::renderNoShadowThings()
          glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, ambient);
          glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, ambient);
          glColor4fv(ambient);
-         glNormal3f(0,1,0);
-         glVertex3f(curConection->x1, 0.5, curConection->z1);
-         glVertex3f(curConection->x1, 0.5, curConection->z2);
-         glVertex3f(curConection->x2, 0.5, curConection->z2);
-         glVertex3f(curConection->x2, 0.5, curConection->z1);
+         glNormal3f(0.0f, 1.0f, 0.0f);
+         glVertex3f(curConection->x1, 0.5f, curConection->z1);
+         glVertex3f(curConection->x1, 0.5f, curConection->z2);
+         glVertex3f(curConection->x2, 0.5f, curConection->z2);
+         glVertex3f(curConection->x2, 0.5f, curConection->z1);
       glEnd();
 
       glDisable( GL_BLEND );
-      glColor3f(1.0,1.0,1.0);
+      glColor3f(1.0f, 1.0f, 1.0f);
       glPopMatrix();
    }
 
@@ -3225,7 +3224,7 @@ void engine::renderGUI()
                /* Is running, must scale a bit the cursor to demonstrate this */
                cursors->draw(mouseX, mouseY,
                              walkAngle - gameCamera.getPhi(),
-                             1.0f,1.2f,1.0f);
+                             1.0f, 1.2f, 1.0f);
             }
             else
             {
@@ -3272,8 +3271,8 @@ void engine::drawWithShadows()
    /* Define Light View Projetion */
    gameSun->getPosition(sunPos);
    shadowMap.defineLightView(sunPos[0], sunPos[1], sunPos[2],
-                       (actualMap->squareSize()*actualMap->getSizeX())/2.0, 
-                       (actualMap->squareSize()*actualMap->getSizeZ())/2.0);
+                       (actualMap->squareSize()*actualMap->getSizeX())/2.0f, 
+                       (actualMap->squareSize()*actualMap->getSizeZ())/2.0f);
    
    /* Update frustum for light view */
    updateFrustum(visibleMatrix,proj,modl);
@@ -3284,14 +3283,14 @@ void engine::drawWithShadows()
    shadowMap.endLightRender();
 
    /* Now set to the camera view and render again! */
-   glViewport (0, 0, SCREEN_X, SCREEN_Y);
-   glMatrixMode (GL_PROJECTION);
-   glLoadIdentity ();
-   gluPerspective(45.0, SCREEN_X / (float)SCREEN_Y, 1.0, 
+   glViewport(0, 0, SCREEN_X, SCREEN_Y);
+   glMatrixMode(GL_PROJECTION);
+   glLoadIdentity();
+   gluPerspective(45.0f, SCREEN_X / (float)SCREEN_Y, 1.0f, 
                   OUTDOOR_FARVIEW);
    glGetIntegerv(GL_VIEWPORT, viewPort);
    glGetFloatv(GL_MODELVIEW_MATRIX, camProj);
-   glMatrixMode (GL_MODELVIEW);
+   glMatrixMode(GL_MODELVIEW);
    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
    glLoadIdentity();
    gameCamera.lookAt(actualMap);
@@ -3355,8 +3354,8 @@ void engine::updateBeforeRender()
    if(actualMap->isOutdoor())
    {
       gameSun->updateHourOfDay(hour, 
-            (actualMap->getSizeX()/2.0)*actualMap->squareSize(), 
-            (actualMap->getSizeZ()/2.0)*actualMap->squareSize());
+            (actualMap->getSizeX()/2.0f)*actualMap->squareSize(), 
+            (actualMap->getSizeZ()/2.0f)*actualMap->squareSize());
       
       //PCs->getActiveCharacter()->xPosition,
       //                         PCs->getActiveCharacter()->zPosition);
@@ -3568,7 +3567,7 @@ void engine::showImage(string fileName)
       glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT
               | GL_STENCIL_BUFFER_BIT);
       draw2DMode();
-      glColor3f(1.0, 1.0, 1.0);
+      glColor3f(1.0f, 1.0f, 1.0f);
       textureToScreen(id, 0, 0, SCREEN_X-1, SCREEN_Y-1, 800, 600);
       draw3DMode(option->getFarViewFactor()*OUTDOOR_FARVIEW);
       glFlush();
@@ -3634,7 +3633,7 @@ int engine::run(SDL_Surface *surface, bool commingBack)
    }
 
    int time;
-   actualFPS = 10.0;
+   actualFPS = 10.0f;
    lastFPS = 0;
 
    /* Unhide All Windows */

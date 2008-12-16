@@ -152,14 +152,14 @@ void cursor::draw(int mouseX, int mouseY, float angle,
       glRotatef(angle, 0, 0, 1);
       glScalef(scaleX, scaleY, scaleZ);
       glBegin(GL_QUADS);
-         glTexCoord2f(0.0, 0.0);
-         glVertex2f(0,0);
-         glTexCoord2f(0.0, propY[currentCursor]);
-         glVertex2f(0, -sizeY[currentCursor]);
+         glTexCoord2f(0.0f, 0.0f);
+         glVertex2f(0.0f, 0.0f);
+         glTexCoord2f(0.0f, propY[currentCursor]);
+         glVertex2f(0.0f, -sizeY[currentCursor]);
          glTexCoord2f(propX[currentCursor], propY[currentCursor]);
          glVertex2f(sizeX[currentCursor], -sizeY[currentCursor]);
-         glTexCoord2f(propX[currentCursor], 0.0);
-         glVertex2f(sizeX[currentCursor], 0.0);
+         glTexCoord2f(propX[currentCursor], 0.0f);
+         glVertex2f(sizeX[currentCursor], 0.0f);
       glEnd();
    glPopMatrix();
 

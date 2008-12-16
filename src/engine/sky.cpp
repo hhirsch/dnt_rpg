@@ -12,9 +12,9 @@
 sky::sky()
 {
    dirs dir;
-   color[0] = 1.0;
-   color[1] = 1.0;
-   color[2] = 1.0;
+   color[0] = 1.0f;
+   color[1] = 1.0f;
+   color[2] = 1.0f;
    glGenTextures(1,&skyMap);
    SDL_Surface* img;
    img = IMG_Load(dir.getRealFile("texturas/sky/skymap.png").c_str());
@@ -38,7 +38,7 @@ sky::~sky()
  *********************************************************************/
 void sky::drawDome(int lats, int longs) 
 {
-   glColor4f(1,1,1,1);
+   glColor4f(1.0f, 1.0f, 1.0, 1.0f);
 
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, skyMap );
@@ -48,10 +48,8 @@ void sky::drawDome(int lats, int longs)
    GLfloat ex,ey,ez;
    int n = lats;
 
-   for (j=n/4;j<n/2;j++) 
+   for(j=n/4;j<n/2;j++) 
    {
-   //for (j=0;j<n/2;j++) 
-   //{
       theta1 = j * TWOPI / n - PID2;
       theta2 = (j + 1) * TWOPI / n - PID2;
 
@@ -65,7 +63,7 @@ void sky::drawDome(int lats, int longs)
          ez = cos(theta2) * sin(theta3);
 
          glNormal3f(ex,ey,ez);
-         glTexCoord2f((solarTime) / (24.0), (3*(j+1) / (GLfloat)n));
+         glTexCoord2f((solarTime) / (24.0f), (3*(j+1) / (GLfloat)n));
          glVertex3f(ex,ey,ez);
 
          ex = cos(theta1) * cos(theta3);
@@ -73,7 +71,7 @@ void sky::drawDome(int lats, int longs)
          ez = cos(theta1) * sin(theta3);
 
          glNormal3f(ex,ey,ez);
-         glTexCoord2f((solarTime) / (24.0), (3*(j) / (GLfloat)n));
+         glTexCoord2f((solarTime) / (24.0f), (3*(j) / (GLfloat)n));
          glVertex3f(ex,ey,ez);
 
       }
@@ -96,7 +94,7 @@ void sky::draw(Map* actualMap, GLfloat sunRot)
                    (opt.getFarViewFactor()*256);
 
 
-   solarTime = (sunRot * 24) / 360.0;
+   solarTime = (sunRot * 24) / 360.0f;
    
    glDisable(GL_FOG);
    glEnable(GL_COLOR_MATERIAL);

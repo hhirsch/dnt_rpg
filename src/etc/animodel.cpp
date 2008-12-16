@@ -452,7 +452,7 @@ void aniModel::renderFromGraphicMemory()
 
   glPopMatrix();
 
-  glColor3f(1.0, 1.0, 1.0);
+  glColor3f(1.0f, 1.0f, 1.0f);
 
 }
 
@@ -545,10 +545,10 @@ void aniModel::render()
 {
   glPushMatrix();
    /* Correct from blender to dnt coordinates */
-   glRotatef(180,0,1,0);
-   glRotatef(-90,1,0,0);
+   glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
+   glRotatef(-90.0f, 1.0f, 0.0f, 0.0f);
    /* Scale, if needed */
-   if(m_renderScale != 1.0)
+   if(m_renderScale != 1.0f)
    {
       glScalef(m_renderScale,m_renderScale,m_renderScale);
    }
@@ -682,7 +682,7 @@ void aniModel::render()
 
   glPopMatrix();
 
-  glColor3f(1.0, 1.0, 1.0);
+  glColor3f(1.0f, 1.0f, 1.0f);
 
 }
 

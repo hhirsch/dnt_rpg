@@ -9,7 +9,7 @@
  ***********************************************************/
 message3d::message3d(GLfloat x, GLfloat y, GLfloat z, string msg)
 {
-   init(x, y, z, msg, 1.0,0.5,0.5);
+   init(x, y, z, msg, 1.0f, 0.5f, 0.5f);
 }
 
 /***********************************************************
@@ -56,7 +56,7 @@ void message3d::init(GLfloat x, GLfloat y, GLfloat z, string msg,
    fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
    fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
    size = fnt.getStringWidth(message) + 8;
-   halfSize = (size / 2.0);
+   halfSize = (size / 2.0f);
    color_Set(0,0,0,255);
    SDL_Surface* s = SDL_CreateRGBSurface(SDL_SWSURFACE,
                                          smallestPowerOfTwo(size),
@@ -199,7 +199,7 @@ void messageController::draw(GLdouble modelView[16], GLdouble projection[16],
 
    GLdouble winX=0, winY=0, winZ=0;
 
-   GLfloat factor = 1.0;
+   GLfloat factor = 1.0f;
 
    glDisable(GL_LIGHTING);
    glDisable(GL_FOG);
@@ -221,7 +221,7 @@ void messageController::draw(GLdouble modelView[16], GLdouble projection[16],
       factor = (float)(msg->size) / (float)(smallestPowerOfTwo(msg->size));
 
       /* Draw */
-      glColor3f(1.0, 1.0, 1.0);
+      glColor3f(1.0f, 1.0f, 1.0f);
       glBindTexture(GL_TEXTURE_2D, msg->messageTexture);
       glPushMatrix();
       glBegin(GL_QUADS);
@@ -237,7 +237,7 @@ void messageController::draw(GLdouble modelView[16], GLdouble projection[16],
       glPopMatrix();
 
       msg->live++;
-      msg->posY += 0.5;
+      msg->posY += 0.5f;
       msg = msg->next;
 
       /* Verify if the message elapsed */

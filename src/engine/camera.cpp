@@ -9,20 +9,21 @@
  ******************************************************************/
 camera::camera()
 {
-   theta=45;
-   phi=75.75;
-   d=320;
-   centerX = centerZ = 0;
-   centerY = 30;
-   deltaY = 0;
+   theta = 45.0f;
+   phi = 75.75f;
+   d = 320.0f;
+   centerX = 0.0f;
+   centerZ = 0.0f;
+   centerY = 30.0f;
+   deltaY = 0.0f;
    cameraX = centerX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
    cameraY = centerY + (float) d * sin(deg2Rad(theta));
    cameraZ = centerZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
    middleMouse = false;
    type = CAMERA_TYPE_NORMAL;
-   zoomAc = 0.0;
-   phiAc = 0.0;
-   thetaAc = 0.0;
+   zoomAc = 0.0f;
+   phiAc = 0.0f;
+   thetaAc = 0.0f;
    minZoom = ZOOM_MIN;
 }
 
@@ -98,8 +99,8 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
    {
       if(middleMouse)
       {
-         theta += (y - prevY) / 10.0;
-         phi += (prevX - x) / 10.0;  // X axis is inverted :~p
+         theta += (y - prevY) / 10.0f;
+         phi += (prevX - x) / 10.0f;  // X axis is inverted :~p
       }
       else
       {

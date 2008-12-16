@@ -291,13 +291,13 @@ void character::drawMainPortrait()
    glBindTexture(GL_TEXTURE_2D, portraitTexture);
 
    glBegin(GL_QUADS);
-      glTexCoord2f(0.0, 0.0);
+      glTexCoord2f(0.0f, 0.0f);
       glVertex2f(SCREEN_X-portraitImage->w-1, SCREEN_Y-1);
-      glTexCoord2f(0.0, portraitPropY);
+      glTexCoord2f(0.0f, portraitPropY);
       glVertex2f(SCREEN_X-portraitImage->w-1, SCREEN_Y-portraitImage->h-1);
       glTexCoord2f(portraitPropX, portraitPropY);
       glVertex2f(SCREEN_X-1, SCREEN_Y-portraitImage->h-1);
-      glTexCoord2f(portraitPropX, 0);
+      glTexCoord2f(portraitPropX, 0.0f);
       glVertex2f(SCREEN_X-1, SCREEN_Y-1);
    glEnd();
 
@@ -838,10 +838,10 @@ character* characterList::insertCharacter(string file, featsList* ft,
    /* Create the Character */ 
    character* novo;
    novo = new character(ft);
-   novo->orientation = 0.0;
-   novo->xPosition = 0.0;
-   novo->zPosition = 0.0;
-   novo->yPosition = 0.0;
+   novo->orientation = 0.0f;
+   novo->xPosition = 0.0f;
+   novo->zPosition = 0.0f;
+   novo->yPosition = 0.0f;
 
    /* Try to Load the file */
    if(!def.load(file))
