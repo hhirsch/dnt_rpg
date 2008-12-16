@@ -287,10 +287,17 @@ void iaScript::run(int maxLines)
 
                            /* The numBegins is to avoid ENDs not related to the
                             * IF itself */
-                           if( (token == IA_SETENCE_END) || 
-                               ((token == IA_SETENCE_ELSE) && (numBegins != 1)))
+                           if(token == IA_SETENCE_END)
                            {
+                              /* An end is just a block less */
                               numBegins--;
+                           }
+                           else if( (token == IA_SETENCE_ELSE) && 
+                                    (numBegins != 1) )
+                           {
+                              /* The number of begins must be kept the same,
+                               * because is an else (or else if) for another
+                               * if (so the block must be kept opened). */
                            }
                            else if( (token == IA_SETENCE_IF) ||
                                     (token == IA_SETENCE_WHILE) )
