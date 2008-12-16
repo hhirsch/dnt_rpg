@@ -64,6 +64,8 @@
 #define OUTDOOR_FARVIEW    8192            /**< FarView constant */
 #define OUTDOOR_FARVIEW_D2 4096            /**< FarView / 2 */
 #define INDOOR_FARVIEW      768            /**< Indoor FarView */
+#define INDOOR_FARVIEW_D2   384            /**< Half Indoor FarView */
+#define INDOOR_FARVIEW_D4   192            /**< Quarter Indoor FarView */
 
 /********************************************************************
  *                      Shadow's constants                          *

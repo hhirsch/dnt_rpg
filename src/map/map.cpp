@@ -992,6 +992,20 @@ void Map::renderFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    }
    else
    {
+      /* Draw a big plane bellow ground to avoid errors
+       * on indoor map mouse projection */
+      glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+      glBegin(GL_QUADS);
+         glVertex3f(-INDOOR_FARVIEW_D4, -5.0f, -INDOOR_FARVIEW_D4);
+         glVertex3f(-INDOOR_FARVIEW_D4, -5.0f, 
+                    z*INDOOR_SQUARE_SIZE+INDOOR_FARVIEW_D4);
+         glVertex3f(x*INDOOR_SQUARE_SIZE+INDOOR_FARVIEW_D4, -5.0f, 
+                    z*INDOOR_SQUARE_SIZE+INDOOR_FARVIEW_D4);
+         glVertex3f(x*INDOOR_SQUARE_SIZE+INDOOR_FARVIEW_D4, -5.0f, 
+                    -INDOOR_FARVIEW_D4);
+      glEnd();
+      glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+
       aux = 0;
 
       if(!outdoorCompatible)
