@@ -2836,6 +2836,17 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
       }
    }
 
+   /* Render terrain for shadows */
+   if(shadow)
+   {
+      glPushMatrix();
+      actualMap->render(gameCamera.getCameraX(), gameCamera.getCameraY(),
+            gameCamera.getCameraZ(), visibleMatrix,
+            PCs->getActiveCharacter()->xPosition,
+            PCs->getActiveCharacter()->zPosition);
+      glPopMatrix();
+   }
+
    /* Draw Playable Characters (PCs) */
    character* per = (character*) PCs->getFirst();
    int aux;
@@ -3018,12 +3029,16 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
                                  && (!actualMap->isOutdoor()),
                                  shadow?gameSun->getShadowMatrix():NULL);
 
-   glPushMatrix();
-   actualMap->render(gameCamera.getCameraX(), gameCamera.getCameraY(),
-                     gameCamera.getCameraZ(), visibleMatrix,
-                     PCs->getActiveCharacter()->xPosition,
-                     PCs->getActiveCharacter()->zPosition);
-   glPopMatrix();
+   /* Render Terrain at last for reflexion */
+   if(!shadow)
+   {
+      glPushMatrix();
+      actualMap->render(gameCamera.getCameraX(), gameCamera.getCameraY(),
+            gameCamera.getCameraZ(), visibleMatrix,
+            PCs->getActiveCharacter()->xPosition,
+            PCs->getActiveCharacter()->zPosition);
+      glPopMatrix();
+   }
 }
 
 /********************************************************************

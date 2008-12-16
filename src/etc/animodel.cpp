@@ -692,21 +692,23 @@ void aniModel::render()
 void aniModel::renderShadow(GLfloat* shadowMatrix)
 {
    /* Set Changes */
+   glEnable(GL_BLEND);
+   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
    glDisable(GL_TEXTURE_2D);
    glEnable(GL_STENCIL_TEST);
    glStencilFunc(GL_EQUAL, 1, 0xffffffff);
-   glStencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE);
-   glPolygonOffset(-2.0,-1.0);
+   glStencilOp(GL_KEEP, GL_KEEP, GL_INCR);
+   glPolygonOffset(-2.0f,-1.0f);
    glEnable(GL_POLYGON_OFFSET_FILL);
    glDisable(GL_LIGHTING);
-   glColor4f(0.1, 0.1, 0.1, 1.0);
+   glColor4f(0.0f, 0.0f, 0.0f, 0.5f);
 
    /* Render */
    glPushMatrix();
       glMultMatrixf(shadowMatrix);
       glPushMatrix();
          glTranslatef(xPosition, yPosition, zPosition);
-         glRotatef(orientation,0,1,0);
+         glRotatef(orientation,0.0f,1.0f,0.0f);
          renderFromGraphicMemory();
      glPopMatrix();
    glPopMatrix();
@@ -716,6 +718,7 @@ void aniModel::renderShadow(GLfloat* shadowMatrix)
    glDisable(GL_POLYGON_OFFSET_FILL);
    glDisable(GL_STENCIL_TEST);
    glEnable(GL_TEXTURE_2D);
+   glDisable(GL_BLEND);
 }
 
 /*********************************************************************
