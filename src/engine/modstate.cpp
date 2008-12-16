@@ -450,7 +450,8 @@ void modInventory::flush(Map* curMap, inventory* inv,
 {
    modInvObj* invObj = objects;
    object* curObj = NULL;
-   int i;
+   int i, invNumber;
+   bool res;
 
    /* Insert all objects at its previous positions */
    for(i = 0; i < totalObjects; i++)
@@ -466,7 +467,23 @@ void modInventory::flush(Map* curMap, inventory* inv,
       /* Now insert it at the inventory */
       if(curObj)
       {
-         if(!inv->addObject(curObj, invObj->x, invObj->y, invObj->invNumber))
+         res = true;
+
+         if(invObj->invNumber >= 0)
+         {
+            /* Insert at inventory */
+            res = inv->addObject(curObj, invObj->x, invObj->y, 
+                                 invObj->invNumber);
+         }
+         else
+         {
+            /* Insert at equipped place */
+            invNumber = invObj->invNumber + 1;
+            invNumber *= -1;
+            res = inv->equipObject(curObj, invNumber);
+         }
+         
+         if(!res)
          {
             cerr << "Error: Can't put object '" << invObj->fileName << "' "
                  << "at inventory position '" << invObj->x << "," << invObj->y
@@ -496,6 +513,24 @@ void modInventory::create(inventory* inv)
 
    /* Clear the current one */
    clear();
+
+   /* Add All Equipped Places */
+   for(curInv = 0; curInv < INVENTORY_TOTAL_PLACES; curInv++)
+   {
+      obj = inv->getFromPlace(curInv);
+      if(obj)
+      {
+         /* Insert it with -1-curInv to designate a place, not a position */
+         invObj =  new modInvObj();
+         invObj->x = 0;
+         invObj->y = 0;
+         invObj->invNumber = -1-curInv;
+         invObj->fileName = obj->getFileName();
+
+         /* Insert it at the modInventory */
+         insert(invObj);
+      }
+   }
 
    /* For all inventories */
    for(curInv = 0; curInv < INVENTORY_PER_CHARACTER; curInv++)
