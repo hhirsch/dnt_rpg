@@ -731,6 +731,13 @@ void aniModel::setState(int state)
        if(state == STATE_DIE)
        {
           m_calModel->getMixer()->clearCycle(m_animationId[m_state],0.1f);
+          
+          if(m_state == STATE_ATTACK_MEELE)
+          {
+             /* The idle is merged with the attack, so clear it too */
+             m_calModel->getMixer()->clearCycle(m_animationId[STATE_IDLE],0.1f);
+          }
+
           m_calModel->getMixer()->executeAction(m_animationId[state],
                                                 0.3f,0.3f);
           m_calModel->getMixer()->blendCycle(m_animationId[STATE_DEAD],
@@ -738,7 +745,7 @@ void aniModel::setState(int state)
        }
        else if(state == STATE_ATTACK_MEELE)
        {         
-         m_calModel->getMixer()->executeAction(m_animationId[state],
+          m_calModel->getMixer()->executeAction(m_animationId[state],
                                                 0.3f,0.3f);
        }
        else
