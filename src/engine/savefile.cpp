@@ -260,6 +260,7 @@ bool saveFile::load(void* curEngine)
          int posX =(int)floor(pc->xPosition / actualMap->squareSize());
          int posZ =(int)floor(pc->zPosition / actualMap->squareSize());
          pc->ocSquare = actualMap->relativeSquare(posX,posZ);
+         pc->updateHealthBar();
       }
    }
 
