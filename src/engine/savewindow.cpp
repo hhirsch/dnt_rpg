@@ -202,9 +202,9 @@ int saveWindow::run(bool load, GLdouble proj[16],GLdouble modl[16],
             break;
          }
       }
-      else
+      else if((UPDATE_RATE-1) - (time - lastTime) > 0 )
       {
-         SDL_Delay(UPDATE_RATE-2);
+         SDL_Delay((UPDATE_RATE-1) - (time - lastTime) );
       }
    }
 
