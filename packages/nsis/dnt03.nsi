@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "DccNiTghtmare"
-!define PRODUCT_VERSION "0.3.1"
+!define PRODUCT_VERSION "0.3.2"
 !define PRODUCT_PUBLISHER "DNTeam"
 !define PRODUCT_WEB_SITE "http://dnt.dnteam.org"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\DccNiTghtmare.exe"
@@ -12,7 +12,7 @@
 SetCompressor bzip2
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "DccNiTghtmare_0_3_1_Setup.exe"
+OutFile "DccNiTghtmare_0_3_2_Setup.exe"
 LoadLanguageFile "${NSISDIR}\Contrib\Language files\English.nlf"
 InstallDir "$PROGRAMFILES\DccNiTghtmare"
 Icon "${NSISDIR}\Contrib\Graphics\Icons\modern-install.ico"
