@@ -15,7 +15,10 @@
    sodipodi:version="0.32"
    inkscape:version="0.46"
    sodipodi:docname="page2.svg"
-   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/tutorial/combat/page2.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs5825">
     <linearGradient
@@ -64,16 +67,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="493.39878"
-     inkscape:cy="276.07938"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="564.47917"
+     inkscape:cy="492.86433"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1365"
      inkscape:window-height="852"
-     inkscape:window-x="0"
-     inkscape:window-y="0" />
+     inkscape:window-x="-1"
+     inkscape:window-y="-1" />
   <metadata
      id="metadata5828">
     <rdf:RDF>
@@ -1628,5 +1631,14 @@
          x="440.42651"
          y="990.06012"
          id="tspan6685">at the current turn.</tspan></text>
+    <image
+       y="-313.92416"
+       x="-347.55209"
+       id="image3177"
+       height="34.271568"
+       width="26.383245"
+       sodipodi:absref="/home/farrer/projetos/dccnitghtmare/data/comics/tutorial/combat/uzi_inv.png"
+       xlink:href="uzi_inv.png"
+       transform="scale(-1,-1)" />
   </g>
 </svg>
