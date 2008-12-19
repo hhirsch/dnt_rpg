@@ -478,7 +478,8 @@ int engine::loadMap(string arqMapa)
    glDisable(GL_LIGHTING);
 
    /* Load the loading image */
-   fig = IMG_Load(dir.getRealFile("texturas/general/carregar.png").c_str());
+   //TODO: randomize loading picture.
+   fig = IMG_Load(dir.getRealFile("comics/loading/loading1.png").c_str());
    if(!fig)
    {
       cerr << "Faled to load 'loading texture'!" << endl;
