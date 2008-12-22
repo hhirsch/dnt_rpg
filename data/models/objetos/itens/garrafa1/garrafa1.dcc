@@ -1,0 +1,14 @@
+name = gettext("Beer Bottle")
+cal3d = models/objetos/itens/garrafa1/model.cfg
+type = narcotic
+base_dice = 1*d6+0
+inventory_sizes = 1 2
+inventory_texture = models/objetos/itens/garrafa1/texture_inv.png
+life_points = 20
+fortitude = 5
+reflex = 2
+will = 0
+displacement = 0
+armature_class = 10
+size_modifier = 0
+cost = 150
