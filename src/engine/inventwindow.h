@@ -76,6 +76,9 @@ class inventWindow
       /*! Open the Inventory Object Menu  */
       void openMenu(int x, int y, int type, bool seller);
 
+      /*! Do an use object action, if possible */
+      void verifyUseObject();
+
       itemWindow* infoWindow;         /**< The item window to show object's */
 
       inventory* inventories;         /**< Extern Inventories*/

@@ -47,6 +47,18 @@ int getObjectTypeId(string type)
    {
       return(OBJECT_TYPE_EXPLOSIVE);
    }
+   else if(type == "narcotic")
+   {
+      return(OBJECT_TYPE_NARCOTIC);
+   }
+   else if(type == "book")
+   {
+      return(OBJECT_TYPE_BOOK);
+   }
+   else
+   {
+      cerr << "Warning: Unknow object type: '" << type << "'" << endl;
+   }
 
    return(OBJECT_TYPE_GENERIC);
 }
@@ -89,6 +101,10 @@ object::object(string path, modelList& mdlList, string curMap): thing()
       {
          setConversationFile(value);
          createConversation(curMap);
+      }
+      else if(key == "related_file")
+      {
+         relatedFile = value;
       }
       else if(key == "cal3d")
       {
@@ -210,6 +226,7 @@ object::object(object* obj): thing()
    /* Define Object Things */
    name = obj->name;
    fileName = obj->fileName;
+   relatedFile = obj->relatedFile;
 
    /* Define 2D model things */
    model2dName = obj->model2dName;
@@ -257,6 +274,7 @@ void object::cleanValues()
    inventSizeY = 0;
    name = "";
    fileName = "";
+   relatedFile = "";
    model2dName = "";
    model2d = NULL;
    model3D = NULL;
@@ -380,6 +398,14 @@ string object::getFileName()
 }
 
 /**************************************************************
+ *                        getRelatedFile                      *
+ **************************************************************/
+string object::getRelatedFile()
+{
+   return(relatedFile);
+}
+
+/**************************************************************
  *                      getInventorySize                      *
  **************************************************************/
 void object::getInventorySize(int &x, int &y)
@@ -414,7 +440,8 @@ bool object::isUsable()
    return( (type == OBJECT_TYPE_WEAPON) ||
            (type == OBJECT_TYPE_ARMOR) ||
            (type == OBJECT_TYPE_HEAL) ||
-           (type == OBJECT_TYPE_EXPLOSIVE) );
+           (type == OBJECT_TYPE_EXPLOSIVE) ||
+           (type == OBJECT_TYPE_BOOK) );
 }
 
 /*********************************************************************

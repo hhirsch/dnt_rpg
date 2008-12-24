@@ -5,6 +5,7 @@
 #include "inventwindow.h"
 #include "barterwindow.h"
 
+#include "../cbook/comicbook.h"
 #include "../classes/actions.h"
 #include "../etc/dirs.h"
 #include "../gui/dntfont.h"
@@ -209,6 +210,85 @@ void inventWindow::openMenu(int x, int y, int type, bool seller)
    objectMenu->setPosition(x,y);
    
    state = INVENTORY_STATE_MENU;
+}
+
+/**************************************************************
+ *                      verifyUseObject                       *
+ **************************************************************/
+void inventWindow::verifyUseObject()
+{
+   if(objWhere == INVENTORY_INVENTORY)
+   {
+      /* Equip an weapon (if possible) */
+      if(activeObject->getType() == OBJECT_TYPE_WEAPON)
+      {
+         /* Equip Weapon */
+         inventories->removeFromInventory(objX,objY, 
+               currentInventory);
+         if(!inventories->equipObject(activeObject, 
+                  INVENTORY_RIGHT_HAND))
+         {
+            /* Can't equip the weapon, so back on inventory */
+            inventories->addObject(activeObject,
+                  objX,objY,currentInventory);
+         }
+         activeObject = NULL;
+         reDraw();
+      }
+
+      /* Use a heal object */
+      else if(activeObject->getType() == OBJECT_TYPE_HEAL)
+      {
+         /* TODO -> get the heal target (currently 
+          * doing always on the inventory owner) */
+         character* target = owner;
+
+         /* Apply the heal to the target 
+          * FIXME: set the range! */
+         factor healFactor;
+         healFactor.id = "HEAL";
+         healFactor.type = MOD_TYPE_SKILL;
+         doHealOrAttack(*owner, target, 
+               activeObject->getDiceInfo(),
+               &healFactor, 20, true);
+
+         /* And discard the object */
+         inventories->removeFromInventory(objX,objY, 
+               currentInventory);
+         activeObject = NULL;
+         reDraw();
+      }
+
+      /* Read a comic book */
+      else if(activeObject->getType() == OBJECT_TYPE_BOOK)
+      {
+         /* Do the comic book run */
+         comicBook *cb = new comicBook();
+         if(cb->load(activeObject->getRelatedFile()))
+         {
+            cb->run();
+         }
+         /* Clear it and done */
+         delete(cb);
+         activeObject = NULL;
+      }
+   }
+   else
+   {
+      /* Unequip */
+      inventories->removeFromPlace(objWhere);
+      if(!inventories->addObject(activeObject))
+      {
+         /* Inventory is Full, so not remove from used place */
+         inventories->equipObject(activeObject, objWhere);
+      }
+      activeObject = NULL;
+      reDraw();
+   }
+   if(!activeObject)
+   {
+      state = INVENTORY_STATE_NONE;
+   }
 }
 
 /**************************************************************
@@ -494,64 +574,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                break;
                case 5: /* Use */
                {
-                  if(objWhere == INVENTORY_INVENTORY)
-                  {
-                     /* Equip an weapon (if possible) */
-                     if(activeObject->getType() == OBJECT_TYPE_WEAPON)
-                     {
-                        /* Equip Weapon */
-                        inventories->removeFromInventory(objX,objY, 
-                                                         currentInventory);
-                        if(!inventories->equipObject(activeObject, 
-                                                     INVENTORY_RIGHT_HAND))
-                        {
-                           /* Can't equip the weapon, so back on inventory */
-                           inventories->addObject(activeObject,
-                                                  objX,objY,currentInventory);
-                        }
-                        activeObject = NULL;
-                        reDraw();
-                     }
-
-                     /* Use a heal object */
-                     else if(activeObject->getType() == OBJECT_TYPE_HEAL)
-                     {
-                        /* TODO -> get the heal target (currently 
-                         * doing always on the inventory owner) */
-                        character* target = owner;
-                        
-                        /* Apply the heal to the target 
-                         * FIXME: set the range! */
-                        factor healFactor;
-                        healFactor.id = "HEAL";
-                        healFactor.type = MOD_TYPE_SKILL;
-                        doHealOrAttack(*owner, target, 
-                                       activeObject->getDiceInfo(),
-                                       &healFactor, 20, true);
-
-                        /* And discard the object */
-                        inventories->removeFromInventory(objX,objY, 
-                                                         currentInventory);
-                        activeObject = NULL;
-                        reDraw();
-                     }
-                  }
-                  else
-                  {
-                     /* Unequip */
-                     inventories->removeFromPlace(objWhere);
-                     if(!inventories->addObject(activeObject))
-                     {
-                        /* Inventory is Full, so not remove from used place */
-                        inventories->equipObject(activeObject, objWhere);
-                     }
-                     activeObject = NULL;
-                     reDraw();
-                  }
-                  if(!activeObject)
-                  {
-                     state = INVENTORY_STATE_NONE;
-                  }
+                 verifyUseObject();
                }
                break;
                case 6: /* Buy /  Sell */

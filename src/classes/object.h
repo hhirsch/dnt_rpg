@@ -20,6 +20,9 @@ using namespace std;
 #define OBJECT_TYPE_HEAL      4
 #define OBJECT_TYPE_EXPLOSIVE 5
 #define OBJECT_TYPE_AMMO      6
+#define OBJECT_TYPE_NARCOTIC  7
+
+#define OBJECT_TYPE_BOOK     20
 
 /*! Define Objects of the DNT (an object is almost everything that 
  * isn't live (like chairs, doors, equipments, weapons, etc).
@@ -108,8 +111,13 @@ class object: public thing
        * \return the pointer to the surface */
       SDL_Surface* get2dModel();
 
-      /*! Get the 2D model name */
+      /*! Get the 2D model name
+       * \return -> model2D Name */
       string get2dModelName();
+
+      /*! Get the related fileName name
+       * \return -> related fileName */
+      string getRelatedFile();
 
       /*! Verify, with all Meshes of the model, if the model colides
        *  with the bounding box defined as parameter. 
@@ -169,6 +177,8 @@ class object: public thing
 
       string fileName;      /**< FileName of the Object */
       string model2dName;   /**< FileName of the 2D Model */
+      string relatedFile;   /**< Some related fileName 
+                                 (comic book file, for example) */
 
       object* next;         /**< Next Object on List */
       object* previous;     /**< Previous Object on List */ 

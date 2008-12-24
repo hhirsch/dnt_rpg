@@ -999,7 +999,7 @@ int engine::characterScreen(GLuint idTextura)
    int timeAnterior = 0;
    Uint8* keys;
    int x,y;
-   guiObject* object = NULL;
+   guiObject* guiObj = NULL;
    int eventInfo = NOTHING;
 
    int mods[6];
@@ -1042,7 +1042,7 @@ int engine::characterScreen(GLuint idTextura)
          glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
          keys = SDL_GetKeyState(NULL);
          Uint8 mButton = SDL_GetMouseState(&x,&y);
-         object = gui->manipulateEvents(x,y,mButton,keys, eventInfo);
+         guiObj = gui->manipulateEvents(x,y,mButton,keys, eventInfo);
 
          
          glPushMatrix();
@@ -1062,7 +1062,7 @@ int engine::characterScreen(GLuint idTextura)
          /* Race Window Opened */
          if(status == 0)
          {
-            charCreation = rcWindow->treat(object, eventInfo, gui);
+            charCreation = rcWindow->treat(guiObj, eventInfo, gui);
             if(charCreation == RACEW_CONFIRM)
             {
                status = 1;
@@ -1079,7 +1079,7 @@ int engine::characterScreen(GLuint idTextura)
          /* Class Window Opened */
          else if(status == 1)
          {
-            charCreation = clWindow->treat(object, eventInfo, gui);
+            charCreation = clWindow->treat(guiObj, eventInfo, gui);
             if(charCreation == CLASSW_CONFIRM)
             {
                status = 2;
@@ -1097,7 +1097,7 @@ int engine::characterScreen(GLuint idTextura)
          /* Aligment Window Opened */
          else if(status == 2)
          {
-            charCreation = alWindow->treat(object, eventInfo, gui);
+            charCreation = alWindow->treat(guiObj, eventInfo, gui);
             if(charCreation == ALIGNW_CONFIRM)
             {
                status = 3;
@@ -1115,7 +1115,7 @@ int engine::characterScreen(GLuint idTextura)
          /* Attribute Window Opened */
          else if(status == 3)
          {
-             charCreation = atWindow->treat(object, eventInfo, gui,
+             charCreation = atWindow->treat(guiObj, eventInfo, gui,
                                             proj, modl,viewPort);
              if(charCreation == ATTW_CONFIRM)
              {
@@ -1136,7 +1136,7 @@ int engine::characterScreen(GLuint idTextura)
          /* Skills Window Opened */
          else if(status == 4)
          {
-            charCreation = skWindow->treat(object, eventInfo, gui); 
+            charCreation = skWindow->treat(guiObj, eventInfo, gui); 
             if(charCreation == SKILLW_CONFIRM)
             {
                status = 5;
@@ -1154,7 +1154,7 @@ int engine::characterScreen(GLuint idTextura)
          /* Aspect Window Opened */
          else if(status == 5)
          {
-            charCreation = aspWindow->treat(object, eventInfo, gui);
+            charCreation = aspWindow->treat(guiObj, eventInfo, gui);
             if(charCreation == ASPECTW_CONFIRM)
             {
                status = 6;
@@ -1177,12 +1177,19 @@ int engine::characterScreen(GLuint idTextura)
    }
 
 
-   /* Apdate and calculate things related to character */
+   /* Update and calculate things related to character */
    if(charCreation == CHAR_CONFIRM)
    {
       /* Calculate Life Points */
       activeCharacter->defineInitialLifePoints();
       activeCharacter->applyBonusAndSaves();
+
+      /* Insert Tutorial Books on its inventory */
+      object* curObj;
+      curObj =
+         new object("models/objetos/books/combat_tutorial/combat_tutorial.dcc",
+                    *models, "tutorial");
+      activeCharacter->inventories->addObject(curObj);
    }
 
    glEnable(GL_LIGHTING);
