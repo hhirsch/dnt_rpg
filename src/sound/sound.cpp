@@ -111,6 +111,12 @@ void sound::finish()
 {
    if(enabled)
    {
+      /* End the Thread */
+      lock();
+      running = false;
+      unLock();
+      SDL_WaitThread(soundThread, NULL);
+
       /* Clear the Opened Music */
       if(backMusic)
       {
@@ -121,12 +127,6 @@ void sound::finish()
 
       /* Clear all opened Sound Effects */
       removeAllSoundEffects();
-   
-      /* End the Thread */
-      lock();
-      running = false;
-      unLock();
-      SDL_WaitThread(soundThread, NULL);
 
       /* Destroy the Mutex */
       SDL_DestroyMutex(soundMutex);
