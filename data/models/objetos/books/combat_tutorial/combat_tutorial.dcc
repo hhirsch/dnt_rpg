@@ -1,0 +1,14 @@
+name = gettext("The Combat Book")
+cal3d = models/objetos/books/combat_tutorial/model.cfg
+related_file = comics/tutorial/combat/combat.dcb
+type = book
+inventory_sizes = 2 2
+inventory_texture = models/objetos/books/combat_tutorial/texture_inv.png
+life_points = 5
+fortitude = 1
+reflex = 0
+will = 0
+displacement = 0
+armature_class = 1
+size_modifier = 0
+cost = 15
