@@ -146,7 +146,7 @@ void model3d::draw(GLfloat** matriz, bool inverted, GLfloat* shadowMatrix)
                glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
                glEnable(GL_NORMALIZE);
                glPushMatrix();
-                  glTranslatef(xPosition, yPosition, zPosition);
+                  glTranslatef(xPosition, -yPosition, zPosition);
                   glRotatef(orientation, 0, 1, 0);
                   glScalef(1.0,-1.0,1.0);
                   renderFromGraphicMemory();
