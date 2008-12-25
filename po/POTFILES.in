@@ -136,6 +136,7 @@ src/sound/sound.cpp
 
 #comic books
 data/comics/intro/intro.dcb
+data/comics/tutorial/combat/combat.dcb
 
 #alignments
 data/alignment/neutrocaotico.ali
@@ -233,6 +234,9 @@ data/dialogs/objects/computers.dlg
 data/dialogs/objects/bunker_school_server.dlg
 data/dialogs/tutorial/logan.dlg
 data/dialogs/tutorial/santa.dlg
+
+#books
+data/models/objetos/books/combat_tutorial/combat_tutorial.dcc
 
 #objects
 data/models/objetos/itens/healkit/healkit.dcc

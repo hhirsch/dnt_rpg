@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-12-16 15:43-0200\n"
+"POT-Creation-Date: 2008-12-25 08:45-0200\n"
 "PO-Revision-Date: 2008-12-05 15:30+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -180,7 +180,7 @@ msgid "Impose"
 msgstr "Imponi"
 
 #: src/engine/barterwindow.cpp:72 src/engine/barterwindow.cpp:82
-#: src/engine/inventwindow.cpp:35
+#: src/engine/inventwindow.cpp:36
 msgid "Inventory"
 msgstr "Inventario"
 
@@ -200,7 +200,7 @@ msgstr "L'imposizione del baratto è stata accettata."
 msgid "The barter imposition was rejected."
 msgstr "L'imposizione del baratto è stata rifiutata."
 
-#: src/engine/barterwindow.cpp:286 src/engine/inventwindow.cpp:182
+#: src/engine/barterwindow.cpp:286 src/engine/inventwindow.cpp:183
 msgid "Remove"
 msgstr "Rimuovi"
 
@@ -381,42 +381,42 @@ msgstr "Non è possibile salvare il gioco!"
 msgid "Can't save game while fighting!"
 msgstr "Non è possibile salvare il gioco mentre si combatte!"
 
-#: src/engine/dccnit.cpp:523
+#: src/engine/dccnit.cpp:524
 #, c-format
 msgid "Saving Current Map Modifications"
 msgstr "Salvando Le Modifiche Alla Mappa Attuali"
 
-#: src/engine/dccnit.cpp:558
+#: src/engine/dccnit.cpp:559
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Caricando Mappa: %s"
 
-#: src/engine/dccnit.cpp:621
+#: src/engine/dccnit.cpp:622
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Caricando NPC: %s"
 
-#: src/engine/dccnit.cpp:647
+#: src/engine/dccnit.cpp:648
 msgid "Creating MiniMap"
 msgstr "Creando MiniMappa"
 
-#: src/engine/dccnit.cpp:653
+#: src/engine/dccnit.cpp:654
 msgid "Putting GUI on Screen"
 msgstr "Piazzando la GUI sullo Schermo"
 
-#: src/engine/dccnit.cpp:700
+#: src/engine/dccnit.cpp:701
 msgid "Loading Particles"
 msgstr "Caricando Particelle"
 
-#: src/engine/dccnit.cpp:730
+#: src/engine/dccnit.cpp:731
 msgid "Loading Changes..."
 msgstr "Caricando Cambiamenti..."
 
-#: src/engine/dccnit.cpp:758
+#: src/engine/dccnit.cpp:759
 msgid "Done!"
 msgstr "Fatto!"
 
-#: src/engine/dccnit.cpp:850
+#: src/engine/dccnit.cpp:851
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -424,50 +424,50 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1355
+#: src/engine/dccnit.cpp:1363
 msgid "Too far away for the action!"
 msgstr "Troppo lontano per l'azione!"
 
-#: src/engine/dccnit.cpp:1397
+#: src/engine/dccnit.cpp:1405
 msgid "No NPCs in the area."
 msgstr "Nessun NPC nell'area"
 
-#: src/engine/dccnit.cpp:1448
+#: src/engine/dccnit.cpp:1456
 msgid "Surprise Attack Turn."
 msgstr "Turno Di Attacco A Sorpresa."
 
-#: src/engine/dccnit.cpp:1462
+#: src/engine/dccnit.cpp:1470
 msgid "No enemies in the area."
 msgstr "Nessun nemico nell'area."
 
-#: src/engine/dccnit.cpp:1639 src/engine/dccnit.cpp:2090
+#: src/engine/dccnit.cpp:1647 src/engine/dccnit.cpp:2098
 #: src/engine/shortcutswindow.cpp:32
 msgid "Nothing"
 msgstr "Niente"
 
-#: src/engine/dccnit.cpp:1838
+#: src/engine/dccnit.cpp:1846
 #, c-format
 msgid "%s taken."
 msgstr "%s preso"
 
-#: src/engine/dccnit.cpp:1860
+#: src/engine/dccnit.cpp:1868
 msgid "Inventory is full!"
 msgstr "L'inventario è pieno!"
 
-#: src/engine/dccnit.cpp:1892
+#: src/engine/dccnit.cpp:1900
 msgid "Door"
 msgstr "Porta"
 
-#: src/engine/dccnit.cpp:2025
+#: src/engine/dccnit.cpp:2033
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s attacca%s"
 
-#: src/engine/dccnit.cpp:2191
+#: src/engine/dccnit.cpp:2199
 msgid "No more actions. Turn ended."
 msgstr "Nessuna azione rimasta. Turno finito."
 
-#: src/engine/dccnit.cpp:3708
+#: src/engine/dccnit.cpp:3716
 msgid "Exit Battle Mode"
 msgstr "Esci Dalla Modalità Battaglia"
 
@@ -515,27 +515,27 @@ msgstr "Opzioni"
 msgid "Exit"
 msgstr "Esci"
 
-#: src/engine/inventwindow.cpp:162
+#: src/engine/inventwindow.cpp:163
 msgid "Drop"
 msgstr "Lascia"
 
-#: src/engine/inventwindow.cpp:169
+#: src/engine/inventwindow.cpp:170
 msgid "Buy"
 msgstr "Compra"
 
-#: src/engine/inventwindow.cpp:169
+#: src/engine/inventwindow.cpp:170
 msgid "Sell"
 msgstr "Vendi"
 
-#: src/engine/inventwindow.cpp:176
+#: src/engine/inventwindow.cpp:177
 msgid "Use"
 msgstr "Uso"
 
-#: src/engine/inventwindow.cpp:186
+#: src/engine/inventwindow.cpp:187
 msgid "Info"
 msgstr "Informazioni"
 
-#: src/engine/inventwindow.cpp:190
+#: src/engine/inventwindow.cpp:191
 msgid "Get"
 msgstr "Ottieni"
 
@@ -936,6 +936,123 @@ msgstr "era Logan."
 #: data/comics/intro/intro.dcb:125
 msgid "And that's how the tale began..."
 msgstr "Ed ecco come la storia cominciò..."
+
+#: data/comics/tutorial/combat/combat.dcb:17
+#: data/comics/tutorial/combat/combat.dcb:34
+#: data/comics/tutorial/combat/combat.dcb:104
+#: data/comics/tutorial/combat/combat.dcb:187
+#: data/models/objetos/books/combat_tutorial/combat_tutorial.dcc:1
+msgid "The Combat Book"
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:44
+msgid "The fight mode is an special turn based interaction used to... FIGHT!"
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:54
+msgid "There are two ways to enter Fight Mode:"
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:56
+msgid ""
+"1 - When hostile creatures are nearby, the Fight Mode is automatically "
+"called."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:66
+msgid ""
+"2 - Or, when you desire, press SPACE or the attack icon at shortcuts window "
+"to enter the Fight Mode."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:76
+msgid ""
+"First, each character rolls an initiative check, to define the order each "
+"one will act."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:87
+msgid ""
+"If it was you who started the Fight Mode and the other creatures didn't see "
+"your hostile intentions, you'll receive a first Surprise Attack Turn before "
+"the normal battle."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:114
+msgid "Each turn, a character can take a move action and an attack action."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:124
+msgid "Or, if needed, take a full move action to move further."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:134
+msgid "Your action's range is represented by circles."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:145
+msgid "The yellow circle represents your current attack range."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:147
+msgid "You can only attack creatures inner the yellow circle!"
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:157
+msgid "The blue circle is the area you can move with a move action."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:168
+msgid "The red circle is the area you can move with a full move action."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:170
+msgid ""
+"If a circle isn't shown it's because you can't take that kind of action "
+"anymore at the current turn."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:197
+msgid "You can attack using your current weapon by simple clicking the target."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:207
+msgid "Or use a talent by selecting it and clicking the target."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:218
+msgid ""
+"You can end your turn any time, by pressing SPACE or selecting the End Turn "
+"icon."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:220
+msgid ""
+"You can also set the options to automatically end your turn when no more "
+"available actions."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:230
+msgid ""
+"The fight will end when no more hostile creatures are near or all PCs are "
+"dead."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:241
+msgid "Remember:"
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:243
+msgid "Take or use objects count as an attack action."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:245
+msgid "You can't save your game while fighting."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:247
+msgid "And you can't leave the current map while in Fight Mode."
+msgstr ""
 
 #: data/alignment/neutrocaotico.ali:1
 msgid "Chaotic Neutral"
