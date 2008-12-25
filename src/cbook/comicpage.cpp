@@ -216,14 +216,24 @@ void comicPage::insertBox(comicBox* box)
  ***********************************************************************/
 void comicPage::insertText(int x1, int y1, int x2, int y2, string text)
 {
+   insertText(x1, y1, x2, y2, text, 16, DNT_FONT_STYLE_NORMAL, 0, 0, 0);
+}
+
+/***********************************************************************
+ *                             insertText                              *
+ ***********************************************************************/
+void comicPage::insertText(int x1, int y1, int x2, int y2, string text,
+                           int fontSize, int fontStyle, 
+                           int R, int G, int B)
+{
    if(texture != NULL)
    {
       dntFont fnt;
-      fnt.defineFont(DNT_FONT_TIMES, 14);
+      fnt.defineFont(DNT_FONT_TIMES, fontSize);
       fnt.defineFontAlign(DNT_FONT_ALIGN_CENTER);
-      fnt.defineFontStyle(DNT_FONT_STYLE_BOLD);
+      fnt.defineFontStyle(fontStyle);
 
-      color_Set(0,0,0, 255);
+      color_Set(R, G, B, 255);
       fnt.write(texture, x1+1,y1+2, text, x1,y1,x2,y2);
 
       fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);

@@ -13,7 +13,9 @@ texture = comics/tutorial/combat/frontpage.png
    vertex = 548,774
    vertex = 548,0
    effect = 1
-   textbox = 68,55,410,102
+   textbox = 44,36,501,172
+   textcolor = 255,255,255
+   textsize = 64
    text = gettext("The Combat Book")
 
 #######################################
@@ -28,9 +30,11 @@ texture = comics/tutorial/combat/page1.png
    vertex = 7,44
    vertex = 738,44
    vertex = 738,7
-   textbox = 7,7,738,44
    effect = 0
    timeout = 10
+   textbox = 7,7,738,44
+   textsize = 28
+   textstyle = 1
    text = gettext("The Combat Book")
 
    # First Box
@@ -98,9 +102,11 @@ texture = comics/tutorial/combat/page2.png
    vertex = 7,44
    vertex = 738,44
    vertex = 738,7
-   textbox = 7,7,738,44
    effect = 0
    timeout = 10
+   textbox = 7,7,738,44
+   textsize = 28
+   textstyle = 1
    text = gettext("The Combat Book")
 
    # First Box
@@ -181,9 +187,11 @@ texture = comics/tutorial/combat/page3.png
    vertex = 7,38
    vertex = 738,38
    vertex = 738,7
-   textbox = 7,7,738,44
    effect = 0
    timeout = 10
+   textbox = 7,7,738,44
+   textsize = 28
+   textstyle = 1
    text = gettext("The Combat Book")
 
    # First Box

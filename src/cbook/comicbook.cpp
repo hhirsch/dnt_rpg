@@ -105,6 +105,8 @@ bool comicBook::load(string bookFile)
    comicBox* curBox = NULL;
    int curVertex = 0;
    int posX1=0, posY1=0, posX2=0, posY2=0;
+   int textColor[3];
+   int textSize=16, textStyle = DNT_FONT_STYLE_NORMAL;
 
    /* First, empty all previous book pages */
    empty();
@@ -210,7 +212,31 @@ bool comicBook::load(string bookFile)
       /* Insert a text box at the comic Box */
       else if(key == "textbox")
       {
+         /* Define the text Box position */
          sscanf(value.c_str(),"%d,%d,%d,%d", &posX1, &posY1, &posX2, &posY2);
+         /* Default as black color */
+         textColor[0] = 0;
+         textColor[1] = 0;
+         textColor[2] = 0;
+         /* Default as normal style and 16 size */
+         textStyle = DNT_FONT_STYLE_NORMAL;
+         textSize = 16;
+      }
+      /* Define the text color */
+      else if(key == "textcolor")
+      {
+         sscanf(value.c_str(),"%d,%d,%d", &textColor[0], &textColor[1], 
+                                          &textColor[2]);
+      }
+      /* Define the text font size */
+      else if(key == "textsize")
+      {
+         sscanf(value.c_str(),"%d",&textSize);
+      }
+      /* Define the text font style */
+      else if(key == "textstyle")
+      {
+         sscanf(value.c_str(),"%d",&textStyle);
       }
       /* Insert the text at the textbox at the comic box */
       else if(key == "text")
@@ -218,7 +244,9 @@ bool comicBook::load(string bookFile)
          value = translateDataString(value);
          if(curPage)
          {
-            curPage->insertText(posX1,posY1,posX2,posY2,value);
+            curPage->insertText(posX1,posY1,posX2,posY2,value,
+                                textSize, textStyle, textColor[0],
+                                textColor[1], textColor[2]);
          }
          else
          {
