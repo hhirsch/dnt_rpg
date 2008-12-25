@@ -999,7 +999,7 @@ msgstr ""
 #: data/comics/tutorial/combat/combat.dcb:124
 msgid "Or, if needed, take a full move action to move further."
 msgstr ""
-"Ou, se necessário, realizar uma ação de movimento completa para ir mais "
+"Ou, se necessário, realizar uma ação de movimento completo para ir mais "
 "distante."
 
 #: data/comics/tutorial/combat/combat.dcb:134
@@ -1017,27 +1017,27 @@ msgstr "Você só pode atacar criaturas dentro deste círculo!"
 #: data/comics/tutorial/combat/combat.dcb:157
 msgid "The blue circle is the area you can move with a move action."
 msgstr ""
-"O círculo azul é a área em que você pode movimentar-se com uma ação de "
+"O círculo azul é a área em que você pode movimentar com uma ação de "
 "movimento."
 
 #: data/comics/tutorial/combat/combat.dcb:168
 msgid "The red circle is the area you can move with a full move action."
 msgstr ""
-"O círculo vermelho é a área que você pode movimentar-se com uma ação de "
-"movimento completa."
+"O círculo vermelho é a área que você pode movimentar com uma ação de "
+"movimento completo."
 
 #: data/comics/tutorial/combat/combat.dcb:170
 msgid ""
 "If a circle isn't shown it's because you can't take that kind of action "
 "anymore at the current turn."
 msgstr ""
-"Se um círculo não é mostrado siginifica que você não pode mais realizar o "
-"tipo de ação representados por ele no presente turno."
+"Se um círculo não é mostrado siginifica que você não pode mais realizar as "
+"ações representadas por ele no presente turno."
 
 #: data/comics/tutorial/combat/combat.dcb:197
 msgid "You can attack using your current weapon by simple clicking the target."
 msgstr ""
-"Você pode atacar utilizando sua arama atual simplesmente clicando no alvo."
+"Você pode atacar utilizando sua arma atual simplesmente clicando no alvo."
 
 #: data/comics/tutorial/combat/combat.dcb:207
 msgid "Or use a talent by selecting it and clicking the target."
@@ -1049,7 +1049,7 @@ msgid ""
 "icon."
 msgstr ""
 "Você pode terminar seu turno a qualquer hora, simplesmente apertando ESPAÇO "
-"ou selectionando o ícone de Fim de Turno."
+"ou selecionando o ícone de Fim de Turno."
 
 #: data/comics/tutorial/combat/combat.dcb:220
 msgid ""
@@ -1064,7 +1064,7 @@ msgid ""
 "The fight will end when no more hostile creatures are near or all PCs are "
 "dead."
 msgstr ""
-"A batalha irá trminar quando não mais existirem criaturas hostis nas "
+"A batalha irá terminar quando não mais existirem criaturas hostis nas "
 "proximidades ou todos os PJs estiverem mortos."
 
 #: data/comics/tutorial/combat/combat.dcb:241
