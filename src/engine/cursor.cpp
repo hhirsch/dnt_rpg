@@ -89,6 +89,7 @@ void cursor::loadCursor(string fileName, int index)
       sizeY[index] = img->h;
       propX[index] = (float)(img->w) / (float)smallestPowerOfTwo(img->w);
       propY[index] = (float)(img->h) / (float)smallestPowerOfTwo(img->h);
+      scaleFactor[index] = 32.0f / (float)(img->w);
       SDL_FreeSurface(img);
    }
    else
@@ -120,6 +121,7 @@ void cursor::set(SDL_Surface* img)
                               (float)smallestPowerOfTwo(img->h);
    hotSpot[CURSOR_USER_IMAGE][0] = 0;
    hotSpot[CURSOR_USER_IMAGE][1] = 0;
+   scaleFactor[CURSOR_USER_IMAGE] = 1.0f;
    currentCursor = CURSOR_USER_IMAGE;
 }
 
@@ -151,6 +153,8 @@ void cursor::draw(int mouseX, int mouseY, float angle,
                    0.1);
       glRotatef(angle, 0, 0, 1);
       glScalef(scaleX, scaleY, scaleZ);
+      glScalef(scaleFactor[currentCursor], scaleFactor[currentCursor], 
+               scaleFactor[currentCursor]);
       glBegin(GL_QUADS);
          glTexCoord2f(0.0f, 0.0f);
          glVertex2f(0.0f, 0.0f);
@@ -178,5 +182,6 @@ float cursor::sizeY[CURSOR_TOTAL];    /**< Cursors Heights */
 float cursor::propX[CURSOR_TOTAL];    /**< X Proportion */
 float cursor::propY[CURSOR_TOTAL];    /**< Y Proportion */
 float cursor::hotSpot[CURSOR_TOTAL][2]; /**< HotSpot */
+float cursor::scaleFactor[CURSOR_TOTAL]; 
 int cursor::currentCursor;
 

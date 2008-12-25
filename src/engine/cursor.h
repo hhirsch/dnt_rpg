@@ -65,6 +65,7 @@ class cursor
       static float propX[CURSOR_TOTAL];    /**< X Proportion */
       static float propY[CURSOR_TOTAL];    /**< Y Proportion */
       static float hotSpot[CURSOR_TOTAL][2]; /**< HotSpot */
+      static float scaleFactor[CURSOR_TOTAL]; /**< Scale Factor */
       static int currentCursor;            /**< Current Cursor Index */
       
       /*! Load Cursor file 
