@@ -73,7 +73,7 @@ texture = comics/tutorial/combat/page1.png
    vertex = 738,367
    effect = 1
    textbox = 375,376,728,436
-   text = gettext("First, each character rolls an initiative check, to define the order each one will act")
+   text = gettext("First, each character rolls an initiative check, to define the order each one will act.")
 
    # Fifth Box
    box = "Fifth Box"
@@ -84,7 +84,7 @@ texture = comics/tutorial/combat/page1.png
    effect = 1
    textbox = 16,688,646,754
    timeout = 8000
-   text = gettext("If it was you who started the Fight Mode and the other creatures didn't see your hostile intentions, you'll receive a first Surprise Attack Turn before the normal battle")
+   text = gettext("If it was you who started the Fight Mode and the other creatures didn't see your hostile intentions, you'll receive a first Surprise Attack Turn before the normal battle.")
 
 #######################################
 # Second Page
