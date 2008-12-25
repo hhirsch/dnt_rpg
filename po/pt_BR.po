@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-12-25 08:45-0200\n"
+"POT-Creation-Date: 2008-12-25 16:57-0200\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -939,24 +939,24 @@ msgstr "foi Logan."
 msgid "And that's how the tale began..."
 msgstr "E foi assim que a lenda começou..."
 
-#: data/comics/tutorial/combat/combat.dcb:17
-#: data/comics/tutorial/combat/combat.dcb:34
-#: data/comics/tutorial/combat/combat.dcb:104
-#: data/comics/tutorial/combat/combat.dcb:187
+#: data/comics/tutorial/combat/combat.dcb:19
+#: data/comics/tutorial/combat/combat.dcb:38
+#: data/comics/tutorial/combat/combat.dcb:110
+#: data/comics/tutorial/combat/combat.dcb:195
 #: data/models/objetos/books/combat_tutorial/combat_tutorial.dcc:1
 msgid "The Combat Book"
 msgstr "O Livro de Combate"
 
-#: data/comics/tutorial/combat/combat.dcb:44
+#: data/comics/tutorial/combat/combat.dcb:48
 msgid "The fight mode is an special turn based interaction used to... FIGHT!"
 msgstr ""
 "O modo de batalha é uma intereção especial em turnos utilizada para... LUTAR!"
 
-#: data/comics/tutorial/combat/combat.dcb:54
+#: data/comics/tutorial/combat/combat.dcb:58
 msgid "There are two ways to enter Fight Mode:"
 msgstr "Existem duas maneiras de entrar no Modo de Batalha:"
 
-#: data/comics/tutorial/combat/combat.dcb:56
+#: data/comics/tutorial/combat/combat.dcb:60
 msgid ""
 "1 - When hostile creatures are nearby, the Fight Mode is automatically "
 "called."
@@ -964,7 +964,7 @@ msgstr ""
 "1- Quando criaturas hostis estão próximas, o Modo de Batalha é "
 "automaticamente iniciado."
 
-#: data/comics/tutorial/combat/combat.dcb:66
+#: data/comics/tutorial/combat/combat.dcb:70
 msgid ""
 "2 - Or, when you desire, press SPACE or the attack icon at shortcuts window "
 "to enter the Fight Mode."
@@ -972,7 +972,7 @@ msgstr ""
 "2 - Ou, quando você desejar, pressione ESPAÇO ou o ícone de ataque da janela "
 "de atalhos para entrar no Modo de Batalha."
 
-#: data/comics/tutorial/combat/combat.dcb:76
+#: data/comics/tutorial/combat/combat.dcb:80
 msgid ""
 "First, each character rolls an initiative check, to define the order each "
 "one will act."
@@ -980,7 +980,7 @@ msgstr ""
 "Inicialmente, cada personagem rola um teste de iniciativa para definir sua "
 "ordem de atuação."
 
-#: data/comics/tutorial/combat/combat.dcb:87
+#: data/comics/tutorial/combat/combat.dcb:91
 msgid ""
 "If it was you who started the Fight Mode and the other creatures didn't see "
 "your hostile intentions, you'll receive a first Surprise Attack Turn before "
@@ -990,43 +990,43 @@ msgstr ""
 "perceberam suas intenções hostis, você terá um Turno de Ataque Surpresa "
 "antes da batalha normal."
 
-#: data/comics/tutorial/combat/combat.dcb:114
+#: data/comics/tutorial/combat/combat.dcb:120
 msgid "Each turn, a character can take a move action and an attack action."
 msgstr ""
 "A cada turno, um personagem pode realizar uma ação de movimento e uma ação "
 "de ataque."
 
-#: data/comics/tutorial/combat/combat.dcb:124
+#: data/comics/tutorial/combat/combat.dcb:130
 msgid "Or, if needed, take a full move action to move further."
 msgstr ""
 "Ou, se necessário, realizar uma ação de movimento completo para ir mais "
 "distante."
 
-#: data/comics/tutorial/combat/combat.dcb:134
+#: data/comics/tutorial/combat/combat.dcb:140
 msgid "Your action's range is represented by circles."
 msgstr "Seu escopo de ação é representado por círculos."
 
-#: data/comics/tutorial/combat/combat.dcb:145
+#: data/comics/tutorial/combat/combat.dcb:151
 msgid "The yellow circle represents your current attack range."
 msgstr "O círculo amarelo representa seu escopo de ataque atual."
 
-#: data/comics/tutorial/combat/combat.dcb:147
+#: data/comics/tutorial/combat/combat.dcb:153
 msgid "You can only attack creatures inner the yellow circle!"
 msgstr "Você só pode atacar criaturas dentro deste círculo!"
 
-#: data/comics/tutorial/combat/combat.dcb:157
+#: data/comics/tutorial/combat/combat.dcb:163
 msgid "The blue circle is the area you can move with a move action."
 msgstr ""
 "O círculo azul é a área em que você pode movimentar com uma ação de "
 "movimento."
 
-#: data/comics/tutorial/combat/combat.dcb:168
+#: data/comics/tutorial/combat/combat.dcb:174
 msgid "The red circle is the area you can move with a full move action."
 msgstr ""
 "O círculo vermelho é a área que você pode movimentar com uma ação de "
 "movimento completo."
 
-#: data/comics/tutorial/combat/combat.dcb:170
+#: data/comics/tutorial/combat/combat.dcb:176
 msgid ""
 "If a circle isn't shown it's because you can't take that kind of action "
 "anymore at the current turn."
@@ -1034,16 +1034,16 @@ msgstr ""
 "Se um círculo não é mostrado siginifica que você não pode mais realizar as "
 "ações representadas por ele no presente turno."
 
-#: data/comics/tutorial/combat/combat.dcb:197
+#: data/comics/tutorial/combat/combat.dcb:205
 msgid "You can attack using your current weapon by simple clicking the target."
 msgstr ""
 "Você pode atacar utilizando sua arma atual simplesmente clicando no alvo."
 
-#: data/comics/tutorial/combat/combat.dcb:207
+#: data/comics/tutorial/combat/combat.dcb:215
 msgid "Or use a talent by selecting it and clicking the target."
 msgstr "Ou utilizar uma habilidade especial selecionando-a e clicando no alvo."
 
-#: data/comics/tutorial/combat/combat.dcb:218
+#: data/comics/tutorial/combat/combat.dcb:226
 msgid ""
 "You can end your turn any time, by pressing SPACE or selecting the End Turn "
 "icon."
@@ -1051,7 +1051,7 @@ msgstr ""
 "Você pode terminar seu turno a qualquer hora, simplesmente apertando ESPAÇO "
 "ou selecionando o ícone de Fim de Turno."
 
-#: data/comics/tutorial/combat/combat.dcb:220
+#: data/comics/tutorial/combat/combat.dcb:228
 msgid ""
 "You can also set the options to automatically end your turn when no more "
 "available actions."
@@ -1059,7 +1059,7 @@ msgstr ""
 "Você também pode definir as opções para terminar automaticamente seu turno "
 "quando não mais ações estão disponíveis."
 
-#: data/comics/tutorial/combat/combat.dcb:230
+#: data/comics/tutorial/combat/combat.dcb:238
 msgid ""
 "The fight will end when no more hostile creatures are near or all PCs are "
 "dead."
@@ -1067,19 +1067,19 @@ msgstr ""
 "A batalha irá terminar quando não mais existirem criaturas hostis nas "
 "proximidades ou todos os PJs estiverem mortos."
 
-#: data/comics/tutorial/combat/combat.dcb:241
+#: data/comics/tutorial/combat/combat.dcb:249
 msgid "Remember:"
 msgstr "Lembre-se:"
 
-#: data/comics/tutorial/combat/combat.dcb:243
+#: data/comics/tutorial/combat/combat.dcb:251
 msgid "Take or use objects count as an attack action."
 msgstr "Pegar ou usar objetos conta como uma ação de ataque."
 
-#: data/comics/tutorial/combat/combat.dcb:245
+#: data/comics/tutorial/combat/combat.dcb:253
 msgid "You can't save your game while fighting."
 msgstr "Você não pode salvar o jogo durante uma batalha."
 
-#: data/comics/tutorial/combat/combat.dcb:247
+#: data/comics/tutorial/combat/combat.dcb:255
 msgid "And you can't leave the current map while in Fight Mode."
 msgstr "Você não pode deixar o mapa atual durante o Modo de Batalha."
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-12-25 08:45-0200\n"
+"POT-Creation-Date: 2008-12-25 16:57-0200\n"
 "PO-Revision-Date: 2008-12-05 15:30+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -937,120 +937,120 @@ msgstr "era Logan."
 msgid "And that's how the tale began..."
 msgstr "Ed ecco come la storia cominciò..."
 
-#: data/comics/tutorial/combat/combat.dcb:17
-#: data/comics/tutorial/combat/combat.dcb:34
-#: data/comics/tutorial/combat/combat.dcb:104
-#: data/comics/tutorial/combat/combat.dcb:187
+#: data/comics/tutorial/combat/combat.dcb:19
+#: data/comics/tutorial/combat/combat.dcb:38
+#: data/comics/tutorial/combat/combat.dcb:110
+#: data/comics/tutorial/combat/combat.dcb:195
 #: data/models/objetos/books/combat_tutorial/combat_tutorial.dcc:1
 msgid "The Combat Book"
 msgstr ""
 
-#: data/comics/tutorial/combat/combat.dcb:44
+#: data/comics/tutorial/combat/combat.dcb:48
 msgid "The fight mode is an special turn based interaction used to... FIGHT!"
 msgstr ""
 
-#: data/comics/tutorial/combat/combat.dcb:54
+#: data/comics/tutorial/combat/combat.dcb:58
 msgid "There are two ways to enter Fight Mode:"
 msgstr ""
 
-#: data/comics/tutorial/combat/combat.dcb:56
+#: data/comics/tutorial/combat/combat.dcb:60
 msgid ""
 "1 - When hostile creatures are nearby, the Fight Mode is automatically "
 "called."
 msgstr ""
 
-#: data/comics/tutorial/combat/combat.dcb:66
+#: data/comics/tutorial/combat/combat.dcb:70
 msgid ""
 "2 - Or, when you desire, press SPACE or the attack icon at shortcuts window "
 "to enter the Fight Mode."
 msgstr ""
 
-#: data/comics/tutorial/combat/combat.dcb:76
+#: data/comics/tutorial/combat/combat.dcb:80
 msgid ""
 "First, each character rolls an initiative check, to define the order each "
 "one will act."
 msgstr ""
 
-#: data/comics/tutorial/combat/combat.dcb:87
+#: data/comics/tutorial/combat/combat.dcb:91
 msgid ""
 "If it was you who started the Fight Mode and the other creatures didn't see "
 "your hostile intentions, you'll receive a first Surprise Attack Turn before "
 "the normal battle."
 msgstr ""
 
-#: data/comics/tutorial/combat/combat.dcb:114
+#: data/comics/tutorial/combat/combat.dcb:120
 msgid "Each turn, a character can take a move action and an attack action."
 msgstr ""
 
-#: data/comics/tutorial/combat/combat.dcb:124
+#: data/comics/tutorial/combat/combat.dcb:130
 msgid "Or, if needed, take a full move action to move further."
 msgstr ""
 
-#: data/comics/tutorial/combat/combat.dcb:134
+#: data/comics/tutorial/combat/combat.dcb:140
 msgid "Your action's range is represented by circles."
 msgstr ""
 
-#: data/comics/tutorial/combat/combat.dcb:145
+#: data/comics/tutorial/combat/combat.dcb:151
 msgid "The yellow circle represents your current attack range."
 msgstr ""
 
-#: data/comics/tutorial/combat/combat.dcb:147
+#: data/comics/tutorial/combat/combat.dcb:153
 msgid "You can only attack creatures inner the yellow circle!"
 msgstr ""
 
-#: data/comics/tutorial/combat/combat.dcb:157
+#: data/comics/tutorial/combat/combat.dcb:163
 msgid "The blue circle is the area you can move with a move action."
 msgstr ""
 
-#: data/comics/tutorial/combat/combat.dcb:168
+#: data/comics/tutorial/combat/combat.dcb:174
 msgid "The red circle is the area you can move with a full move action."
 msgstr ""
 
-#: data/comics/tutorial/combat/combat.dcb:170
+#: data/comics/tutorial/combat/combat.dcb:176
 msgid ""
 "If a circle isn't shown it's because you can't take that kind of action "
 "anymore at the current turn."
 msgstr ""
 
-#: data/comics/tutorial/combat/combat.dcb:197
+#: data/comics/tutorial/combat/combat.dcb:205
 msgid "You can attack using your current weapon by simple clicking the target."
 msgstr ""
 
-#: data/comics/tutorial/combat/combat.dcb:207
+#: data/comics/tutorial/combat/combat.dcb:215
 msgid "Or use a talent by selecting it and clicking the target."
 msgstr ""
 
-#: data/comics/tutorial/combat/combat.dcb:218
+#: data/comics/tutorial/combat/combat.dcb:226
 msgid ""
 "You can end your turn any time, by pressing SPACE or selecting the End Turn "
 "icon."
 msgstr ""
 
-#: data/comics/tutorial/combat/combat.dcb:220
+#: data/comics/tutorial/combat/combat.dcb:228
 msgid ""
 "You can also set the options to automatically end your turn when no more "
 "available actions."
 msgstr ""
 
-#: data/comics/tutorial/combat/combat.dcb:230
+#: data/comics/tutorial/combat/combat.dcb:238
 msgid ""
 "The fight will end when no more hostile creatures are near or all PCs are "
 "dead."
 msgstr ""
 
-#: data/comics/tutorial/combat/combat.dcb:241
+#: data/comics/tutorial/combat/combat.dcb:249
 msgid "Remember:"
 msgstr ""
 
-#: data/comics/tutorial/combat/combat.dcb:243
+#: data/comics/tutorial/combat/combat.dcb:251
 msgid "Take or use objects count as an attack action."
 msgstr ""
 
-#: data/comics/tutorial/combat/combat.dcb:245
+#: data/comics/tutorial/combat/combat.dcb:253
 msgid "You can't save your game while fighting."
 msgstr ""
 
-#: data/comics/tutorial/combat/combat.dcb:247
+#: data/comics/tutorial/combat/combat.dcb:255
 msgid "And you can't leave the current map while in Fight Mode."
 msgstr ""
 
