@@ -109,8 +109,13 @@ class weapon: public object
       void getType(wInfo& category, wInfo& range, wInfo& size, wInfo& weight,
                    wInfo& damageA, wInfo& damageB);
 
-      /*! Gets the range type of the weapon (usually, meele or ranged) */
+      /*! Get the range type of the weapon (usually, meele or ranged)
+       * \return -> wInfo representing the range type */
       wInfo* getRangeType();
+      
+      /*! Get the ammo type of the weapon
+       * \return -> wInfo representing the munition type */
+      wInfo* getMunitionType();
 
       /*! Get the weapon's damage dice
        * \return the weapons damage dice */
@@ -123,6 +128,13 @@ class weapon: public object
       /*! Get the weight of the weapon
        * \return -> weapon's weight in Kg. */
       float getWeight();
+
+      /*! Get the current munition value
+       * \return -> current munition on the weapon */
+      int getCurrentMunition();
+      /*! Set the current munition value
+       * \param v -> new current munition value */
+      void setCurrentMunition(int v);
 
    protected:
       wInfo* munitionType;    /**< Weapon Munition Type (ex: 9mm) */

@@ -13,6 +13,7 @@ using namespace std;
 
 #include "thing.h"
 #include "modifier.h"
+#include "weapon.h"
 #include "../etc/message3d.h"
 #include "../engine/briefing.h"
 
@@ -203,18 +204,15 @@ class feats
 
       /*!
        **************************************************************** 
-       * Define the active character's base attack to be a melee one.
-       * \param weaponDice -> the dice of the weapon used.
-       * \param rangeValue -> range of action
+       * Define the active character's base attack to a weapon.
+       * \param w -> the weapon used.
        ***************************************************************/
-      void defineMeleeWeapon(diceThing& weaponDice, int rangeValue);
+      void defineWeapon(weapon* w);
       /*!
        **************************************************************** 
-       * Define the active character's base attack to be a ranged one.
-       * \param weaponDice -> the dice of the weapon used.
-       * \param rangeValue -> range of the weapon
+       * Flush the Current munition to the current defined weapon
        ***************************************************************/
-      void defineRangedWeapon(diceThing& weaponDice, int rangeValue);
+      void flushCurrentMunition();
 
       /*!
        **************************************************************** 
@@ -233,6 +231,7 @@ class feats
 
    private:
 
+      weapon* currentWeapon;    /**< The current weapon */
       feat m_feats[MAX_FEATS];  /**< Internal Feats Struct */
       int  totalFeats;          /**< Actual Number of Feats */
 

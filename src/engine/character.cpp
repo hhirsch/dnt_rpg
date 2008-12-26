@@ -434,7 +434,7 @@ void character::defineWeapon()
 {
    object* obj = inventories->getFromPlace(INVENTORY_LEFT_HAND);
    weapon* wp = (weapon*) obj;
-   diceThing dc;
+   
    /* Load the Left Hand Weapon, if one is, and if is different than the
     * current one. */
    if(obj)
@@ -462,19 +462,7 @@ void character::defineWeapon()
          addModel(obj->get3dModel());
 
          /* Define the weapon */
-         dc = wp->getDice();
-         if(wp->getRangeType()->index == FEAT_MELEE_ATTACK)
-         {
-            actualFeats.defineMeleeWeapon(dc, wp->getRange());
-         }
-         else if(wp->getRangeType()->index == FEAT_RANGED_ATTACK)
-         {
-            actualFeats.defineRangedWeapon(dc, wp->getRange());
-         }
-         else
-         {
-            printf("Warn: Unknow Range Type: %d\n", wp->getRangeType()->index);
-         }
+         actualFeats.defineWeapon(wp);
       }
    }
    else
@@ -486,15 +474,9 @@ void character::defineWeapon()
          {
             /* Detach the mesh */
             //TODO
-      
-            /* Define the weapon to bare hands */
-            dc.baseDice.setType(DICE_D2);
-            dc.baseDice.setNumberOfDices(1);
-            dc.baseDice.setSumNumber(0);
-            dc.baseDice.setCriticalMultiplier(1);
-            dc.initialLevel = 1;
-            actualFeats.defineMeleeWeapon(dc, 
-                                    (int)(WALK_PER_MOVE_ACTION * DNT_TO_METER));
+
+            /* Define as without weapons */
+            actualFeats.defineWeapon(NULL);
          }
       }
    }   
@@ -528,19 +510,7 @@ void character::defineWeapon()
          addModel(obj->get3dModel());
 
          /* Define the weapon */
-         dc = wp->getDice();
-         if(wp->getRangeType()->index == FEAT_MELEE_ATTACK)
-         {
-            actualFeats.defineMeleeWeapon(dc, wp->getRange());
-         }
-         else if(wp->getRangeType()->index == FEAT_RANGED_ATTACK)
-         {
-            actualFeats.defineRangedWeapon(dc, wp->getRange());
-         }
-         else
-         {
-            printf("Warn: Unknow Range Type: %d\n", wp->getRangeType()->index);
-         }
+         actualFeats.defineWeapon(wp);
       }
    }
    else
@@ -554,13 +524,7 @@ void character::defineWeapon()
          rightHandModel.modelName = "Bare Hands";
          if(!inventories->getFromPlace(INVENTORY_LEFT_HAND))
          {
-            dc.baseDice.setType(DICE_D2);
-            dc.baseDice.setNumberOfDices(1);
-            dc.baseDice.setSumNumber(0);
-            dc.baseDice.setCriticalMultiplier(2);
-            dc.initialLevel = 1;
-            actualFeats.defineMeleeWeapon(dc, 
-                                    (int)(WALK_PER_MOVE_ACTION * DNT_TO_METER));
+            actualFeats.defineWeapon(NULL);
          }
       }
    }

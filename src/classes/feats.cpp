@@ -16,6 +16,7 @@
 feats::feats()
 {
    totalFeats = 0;
+   currentWeapon = NULL;
 }
 
 /***************************************************************
@@ -402,29 +403,83 @@ int feats::getAttackFeatRange()
 }
 
 /***************************************************************
- *                      defineMeleeWeapon                      *
+ *                     flushCurrentMunition                    *
  ***************************************************************/
-void feats::defineMeleeWeapon(diceThing& weaponDice, int rangeValue)
-{ 
-   /* Disable Ranged Attacks */
-   m_feats[FEAT_RANGED_ATTACK].diceInfo.initialLevel = 0;
-   m_feats[FEAT_RANGED_ATTACK].range = 0;
-   /* Enable Melee Attacks */
-   m_feats[FEAT_MELEE_ATTACK].diceInfo = weaponDice;
-   m_feats[FEAT_MELEE_ATTACK].range = rangeValue;
+void feats::flushCurrentMunition()
+{
+   if(currentWeapon)
+   {
+      /* Get the actual quantity for its type */
+      if(currentWeapon->getRangeType()->index == FEAT_MELEE_ATTACK)
+      {
+         currentWeapon->setCurrentMunition( 
+                                     m_feats[FEAT_MELEE_ATTACK].actualQuantity);
+      }
+      else
+      {
+         currentWeapon->setCurrentMunition( 
+                                    m_feats[FEAT_RANGED_ATTACK].actualQuantity);
+      }
+   }
 }
 
 /***************************************************************
- *                      defineRangedWeapon                     *
+ *                         defineWeapon                        *
  ***************************************************************/
-void feats::defineRangedWeapon(diceThing& weaponDice, int rangeValue)
-{
-   /* Disable Melee Attacks */
-   m_feats[FEAT_MELEE_ATTACK].diceInfo.initialLevel = 0;
-   m_feats[FEAT_MELEE_ATTACK].range = 0;
-   /* Enable Ranged Attacks */
-   m_feats[FEAT_RANGED_ATTACK].diceInfo = weaponDice;
-   m_feats[FEAT_RANGED_ATTACK].range = rangeValue;
+void feats::defineWeapon(weapon* w)
+{ 
+   int inUse=0, noUse=0;
+
+   /* Must update the current weapon ammo value */
+   flushCurrentMunition();
+   currentWeapon = w;
+
+   /* Define if is using a Melee or Ranged Weapon */
+   if( (w == NULL) || (w->getRangeType()->index == FEAT_MELEE_ATTACK) )
+   {
+      inUse = FEAT_MELEE_ATTACK;
+      noUse = FEAT_RANGED_ATTACK;
+   }
+   else
+   {
+      inUse = FEAT_RANGED_ATTACK;
+      noUse = FEAT_MELEE_ATTACK;
+   }
+
+   /* Disable "noUse" Attacks */
+   m_feats[noUse].diceInfo.initialLevel = 0;
+   m_feats[noUse].range = 0;
+
+   /* Enable "inUse" Attacks */
+   if(w != NULL)
+   {
+      m_feats[inUse].diceInfo = w->getDice();
+      m_feats[inUse].range = w->getRange();      
+   }
+   else
+   {
+      /* Using bare hands */
+      diceThing dc;
+      dc.baseDice.setType(DICE_D2);
+      dc.baseDice.setNumberOfDices(1);
+      dc.baseDice.setSumNumber(0);
+      dc.baseDice.setCriticalMultiplier(1);
+      dc.initialLevel = 1;
+      m_feats[inUse].diceInfo = dc;
+      m_feats[inUse].range = (int)(WALK_PER_MOVE_ACTION * DNT_TO_METER);
+   }
+
+   /* If Ammo not None, must use it */
+   if( (w != NULL) && (w->getMunitionType()->index != 0) )
+   {
+      m_feats[inUse].actualQuantity = w->getCurrentMunition();
+      m_feats[inUse].costToUse = 1;
+   }
+   else
+   {
+      m_feats[inUse].actualQuantity = 0;
+      m_feats[inUse].costToUse = 0;
+   }
 }
 
 /**************************************************************************
