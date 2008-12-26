@@ -39,7 +39,7 @@ int getObjectTypeId(string type)
    {
       return(OBJECT_TYPE_HEAL);
    }
-   else if(type == "ammo")
+   else if( (type == "ammo") || (type == "munition") )
    {
       return(OBJECT_TYPE_AMMO);
    }
