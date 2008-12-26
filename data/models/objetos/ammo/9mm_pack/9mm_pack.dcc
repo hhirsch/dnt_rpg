@@ -1,0 +1,9 @@
+name = gettext("9mm Ammo")
+cal3d = models/objetos/ammo/9mm_pack/model.cfg
+type = ammo
+state = 30
+inventory_sizes = 1 1
+inventory_texture = models/objetos/ammo/9mm_pack/texture_inv.png
+life_points = 30
+cost = 350
+weight = 2
