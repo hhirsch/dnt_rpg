@@ -4,6 +4,7 @@
  - In-game comic book objects (items);
  - Tutorial to the battle system (as a comic book);
  - Fixed a bug at sound controller when exiting game;
+ - Fixed a bug at some models reflexion;
 
 Working on:
  - Weather effects;
