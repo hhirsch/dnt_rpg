@@ -459,6 +459,7 @@ void character::defineWeapon()
          //           addCoreMaterial(CalCoreMaterial *pCoreMaterial);
          //           int addCoreMesh(CalCoreMesh *pCoreMesh);
          //        and so on. Will try that latter, when have more patience.
+         addModel(obj->get3dModel());
 
          /* Define the weapon */
          dc = wp->getDice();
@@ -524,6 +525,7 @@ void character::defineWeapon()
          //           addCoreMaterial(CalCoreMaterial *pCoreMaterial);
          //           int addCoreMesh(CalCoreMesh *pCoreMesh);
          //        and so on. Will try that latter, when have more patience.
+         addModel(obj->get3dModel());
 
          /* Define the weapon */
          dc = wp->getDice();

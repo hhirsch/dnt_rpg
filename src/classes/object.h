@@ -115,6 +115,10 @@ class object: public thing
        * \return -> model2D Name */
       string get2dModelName();
 
+      /*! Get the 3D model relative to this object
+       * \return -> pointer to the model3d */
+      model3d* get3dModel();
+
       /*! Get the related fileName name
        * \return -> related fileName */
       string getRelatedFile();

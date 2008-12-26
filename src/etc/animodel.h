@@ -33,6 +33,10 @@ class aniModel:public thing
        * \return true if success on load. */
       bool loadModel(const string& strFilename);
 
+      /*! Add a model meshes to this one
+       * \param mdl -> model to add to this one */
+      void addModel(aniModel* mdl);
+
       /*! Set the animation state of the model.
        * \param state -> state ID to be defined. */
       void setState(int state);
