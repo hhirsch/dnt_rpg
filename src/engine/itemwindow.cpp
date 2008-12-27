@@ -33,6 +33,7 @@ void itemWindow::open(object* item)
    int prvY = 0;
 
    char buf[256];
+   string aux;
 
    /* Close the window, if it is openned */
    if(isOpen())
@@ -43,8 +44,8 @@ void itemWindow::open(object* item)
    }
 
    /* Create Window */
-   intWindow = inter->insertWindow(centerX-128,centerY-108,
-                                   centerX+128,centerY+108,
+   intWindow = inter->insertWindow(centerX-128,centerY-118,
+                                   centerX+128,centerY+118,
                                    item->getName());
 
    /***********************
@@ -106,7 +107,7 @@ void itemWindow::open(object* item)
    {
       /* Get All Info from the weapon */
       wInfo category, range, size, weight,
-            damageA, damageB;
+            damageA, damageB, *ammo;
       weapon* wp = (weapon*)item;
       wp->getType(category, range, size, weight, damageA, damageB);
       diceThing dam = wp->getDice();
@@ -156,15 +157,52 @@ void itemWindow::open(object* item)
 
       /* Contorn to range and size */
       intWindow->getObjectsList()->insertTextBox(70,prvY,250,curY-1,1,"");
+
+      prvY = curY;
+      
+      /* Munition Type */
+      ammo = wp->getMunitionType();
+      if(ammo->index != 0)
+      {
+         aux = gettext("Ammo Type:");
+         aux += " " + ammo->title;
+         intWindow->getObjectsList()->insertTextBox(70,curY,250,curY+17,0,aux);
+         curY += 18;
+
+         /* Quantity */
+         sprintf(buf,"%s %d/%d", gettext("Quantity:"), wp->getCurrentMunition(),
+                                 wp->getMunitionCapacity());
+         intWindow->getObjectsList()->insertTextBox(70,curY,250,curY+17,0,buf);
+         curY += 18;
+         
+         /* Contorn */
+         intWindow->getObjectsList()->insertTextBox(70,prvY,250,curY-1,1,"");
+      }
    }
 
    /***********************
     * Ammmo Things 
     ***********************/
-   //TODO
    else if(item->getType() == OBJECT_TYPE_AMMO)
    {
-      //wInfo* 
+      prvY = curY;
+
+      weaponTypes wTypes;
+      /* Get Ammo Type */
+      wInfo* weaponInfo = wTypes.getMunition(item->getRelatedInfo());
+      /* Display Type */
+      aux = gettext("Ammo Type:");
+      aux += " " + weaponInfo->title;
+      intWindow->getObjectsList()->insertTextBox(70,curY,250,curY+17,0,aux);
+      curY += 18;
+      
+      /* Quantity */
+      sprintf(buf, "%s %d", gettext("Quantity:"), item->getState());
+      intWindow->getObjectsList()->insertTextBox(70,curY,250,curY+17,0,buf);
+      curY += 18;
+
+      /* Contorn */
+      intWindow->getObjectsList()->insertTextBox(70,prvY,250,curY-1,1,"");
    }
 
    /* Item Image */
@@ -176,11 +214,11 @@ void itemWindow::open(object* item)
    intWindow->getObjectsList()->insertTextBox(5,15,69,curY-1,1,"");
 
    /* Ok Button */
-   okButton = intWindow->getObjectsList()->insertButton(88,188,158,207,
+   okButton = intWindow->getObjectsList()->insertButton(88,208,158,227,
                                                         gettext("Ok"),1);
 
    /* Remaining Contorn */
-   intWindow->getObjectsList()->insertTextBox(5,curY,250,211,1,"");
+   intWindow->getObjectsList()->insertTextBox(5,curY,250,231,1,"");
    
 
    /* Open Window */
