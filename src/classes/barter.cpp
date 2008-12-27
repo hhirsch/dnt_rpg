@@ -180,10 +180,24 @@ bool barter::doBarter()
 bool barter::imposeBarter()
 {
    dice d20;
-   int stTest = (d20.roll()+buyer->attBonus(ATT_STRENGTH)) - 
-                (d20.roll()+seller->curBonusAndSaves.iAmNotAFool);
-   int coTest = (d20.roll()+buyer->attBonus(ATT_CONSTITUTION)) - 
-                (d20.roll()+seller->curBonusAndSaves.iAmNotAFool);
+
+   /******************************* 
+    * The Test is: 
+    *    (mod(ATT) * 100 ) / dP
+    * Versus
+    *    (IANAF * dP) / 100 
+    *******************************/
+   float dP = (totalBuyValue - totalSellValue);
+   float invDP = 1.0f / dP;
+
+   float stTest = invDP*100*(d20.roll()+buyer->attBonus(ATT_STRENGTH)) - 
+                  dP*0.01f*(d20.roll()+seller->curBonusAndSaves.iAmNotAFool);
+   float coTest = invDP*100*(d20.roll()+buyer->attBonus(ATT_CONSTITUTION)) - 
+                  dP*0.01f*(d20.roll()+seller->curBonusAndSaves.iAmNotAFool);
+
+   /*cout << "dP: " << dP << endl;
+   cout << "St: " << stTest << endl;
+   cout << "Co: " << coTest << endl;*/
 
    if( (stTest > 0) && (coTest > 0) )
    {
