@@ -115,14 +115,45 @@ void barter::cancelBarter()
 }
 
 /*******************************************************************
- *                             doBarter                            *
+ *                          acceptBarter                           *
  *******************************************************************/
-bool barter::doBarter()
+void barter::acceptBarter()
 {
    int i;
    object* obj;
    int oX = 0, 
        oY = 0;
+
+   /* First, put all buy items to the buyer */
+   for(i=0; i<BARTER_BUY_SLOTS; i++)
+   {
+      obj=buySlot[i]->getFirstItem(oX, oY);
+      while(obj != NULL)
+      {
+         buyer->inventories->addObject(obj);
+         buySlot[i]->removeObject(oX, oY);
+         obj = buySlot[i]->getFirstItem(oX, oY);
+      }
+   }
+
+   /* Next, put all sell items to the seller */
+   for(i=0; i<BARTER_SELL_SLOTS; i++)
+   {
+      obj = sellSlot[i]->getFirstItem(oX, oY);
+      while(obj != NULL)
+      {
+         seller->inventories->addObject(obj);
+         sellSlot[i]->removeObject(oX, oY);
+         obj = sellSlot[i]->getFirstItem(oX, oY);
+      }
+   }
+}
+
+/*******************************************************************
+ *                             doBarter                            *
+ *******************************************************************/
+bool barter::doBarter()
+{
    bool accept = false;
 
    // FIXME -> implement the appraise skill here for both
@@ -144,31 +175,10 @@ bool barter::doBarter()
       accept = eqn > roll;
    }
 
+   /* Do the items change */
    if(accept)
    {
-      /* First, put all buy items to the buyer */
-      for(i=0; i<BARTER_BUY_SLOTS; i++)
-      {
-         obj=buySlot[i]->getFirstItem(oX, oY);
-         while(obj != NULL)
-         {
-            buyer->inventories->addObject(obj);
-            buySlot[i]->removeObject(oX, oY);
-            obj = buySlot[i]->getFirstItem(oX, oY);
-         }
-      }
-
-      /* Next, put all sell items to the seller */
-      for(i=0; i<BARTER_SELL_SLOTS; i++)
-      {
-         obj = sellSlot[i]->getFirstItem(oX, oY);
-         while(obj != NULL)
-         {
-            seller->inventories->addObject(obj);
-            sellSlot[i]->removeObject(oX, oY);
-            obj = sellSlot[i]->getFirstItem(oX, oY);
-         }
-      }
+      acceptBarter();
    }
 
    return(accept);
@@ -183,7 +193,7 @@ bool barter::imposeBarter()
 
    /******************************* 
     * The Test is: 
-    *    (mod(ATT) * 100 ) / dP
+    *    (bonus(ATT) * 100 ) / dP
     * Versus
     *    (IANAF * dP) / 100 
     *******************************/
@@ -202,7 +212,7 @@ bool barter::imposeBarter()
    if( (stTest > 0) && (coTest > 0) )
    {
       /* Both Tests Pass, so accept */
-      doBarter();
+      acceptBarter();
       return(true);
    }
    else if( (stTest <= 0) && (coTest <= 0) )

@@ -27,7 +27,7 @@ class barter
       /*! Destructor */
       ~barter();
 
-      /*! Cancel the Actual Barter */
+      /*! Cancel the Current Barter */
       void cancelBarter();
 
       /*! Impose the Actual Barter
@@ -91,6 +91,8 @@ class barter
       object* getFromPosition(int posX, int posY, int curInv, bool seller);
 
    private:
+      /*! Accept the current barter, changing items  */
+      void acceptBarter();
      
       character* buyer;             /**< The buyer character */
       character* seller;            /**< The Seller character */

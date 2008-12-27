@@ -5,7 +5,8 @@
  - Tutorial to the battle system (as a comic book);
  - Fixed a bug at sound controller when exiting game;
  - Fixed a bug at some models reflexion;
- - Populated initial NPCs inventories;
+ - Way to populate NPCs initial inventories;
+ - Fix for Barter Imposition (balanced better tests);
 
 Working on:
  - Weather effects;
