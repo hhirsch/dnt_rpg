@@ -292,9 +292,8 @@ class Map
                                int divisions);
 
 
-      /*! Draw Minimap, relative to current map and character position.
-       * \param models -> modelList to render scenary objects on minimap */
-      void drawMiniMap(modelList* models);
+      /*! Draw Minimap, relative to current map and character position. */
+      void drawMiniMap();
 
       /*! Get the minimap surface
        * \return -> pointer to the rendered minimap surface
@@ -309,10 +308,8 @@ class Map
       void newMap(int X,int Z);
       /*! Opens map from file
        * \param arquivo ->  Name of file to be opened
-       * \param mdlList -> Game models list
-       * \param wTypes -> weapons types
        * \return 1 on success. */
-      int open(string arquivo, modelList& mdlList, weaponTypes& wTypes); 
+      int open(string arquivo); 
       /*! Save map to file
        * \param arquivo -> file name to be saved
        * \return -> 1 on success. */
@@ -368,19 +365,6 @@ class Map
        * \param collision -> true if has collision with object */
       void insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal, 
                         GLfloat orObj, object* obj, bool collision);
-      /*! Insert object on map list
-       * \param arquivo -> filename to load
-       * \param mdlList -> modelList
-       * \param wTypes -> list of weapons types
-       * \return pointer to the map Object created */
-      object* insertObject(string arquivo, modelList& mdlList, 
-                           weaponTypes& wTypes);
-      /*! Get object from the list (if exists)
-       * \param fileName -> file name of the object
-       * \return pointer to the founded object or NULL */
-      object* getObject(string fileName, GLfloat posX, 
-                        GLfloat posY, GLfloat posZ);
-
 
       /*! Get Map File Name
        * \return map fileName */

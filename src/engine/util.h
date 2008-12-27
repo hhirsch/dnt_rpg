@@ -115,7 +115,6 @@
  *                            Functions                             *
  ********************************************************************/
 
-
 /*! degree to radians converter.
  * \param x -> angle in degrees to convert.
  * \return angle in radians. */

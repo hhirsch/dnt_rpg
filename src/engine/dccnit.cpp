@@ -93,10 +93,10 @@ engine::engine()
    classList->init();
 
    /* Load Weapons Types */
-   weaponsTypes = new weaponTypes();
+   weaponsTypes.init();
 
    /* Create 3D Models List */
-   models = new modelList();
+   models.init();
 
    /* Create Special Windows */
    infoWindow = new itemWindow(gui);
@@ -284,7 +284,7 @@ engine::~engine()
    objectsList::removeAll();
 
    /* Clear 3D Models List */
-   delete(models);
+   models.finish();
    
    /* Clear Characters Lists */
    alignList->finish();
@@ -297,7 +297,7 @@ engine::~engine()
    classList->finish();
    delete(classList);
    skillsList.finish();
-   delete(weaponsTypes);
+   weaponsTypes.finish();
 
    /* Clear the visibleMatrix */
    for(i = 0; i < 6; i++)
@@ -305,7 +305,71 @@ engine::~engine()
       delete[] visibleMatrix[i];
    }
    delete[] visibleMatrix;
+}
 
+
+/*********************************************************************
+ *                         quitCurrentGame                           *
+ *********************************************************************/
+void engine::quitCurrentGame()
+{
+   if(actualMap)
+   {
+      /* Remove All Sound Effects */
+      snd->removeAllSoundEffects();
+      walkSound = NULL;
+
+      /* Close the Dialog or Barter windows, if opened */
+      barterWindow btWindow;
+      dialogWindow dlgWindow;
+      btWindow.close();
+      dlgWindow.close();
+
+      /* Clear Modifications */
+      modifState.clear();
+      engineMode = ENGINE_MODE_REAL_TIME;
+      gui->closeAllWindows();
+
+      /* Delete all NPCs */
+      if(NPCs)
+      {
+         delete(NPCs);
+         NPCs = NULL;
+      }
+
+      /* Clear the Inventory */
+      PCs->getActiveCharacter()->newInventory();
+
+      delete(actualMap);
+      actualMap = NULL;
+      
+      /* Clear Objects List */
+      objectsList::removeAll();
+
+      /* Restart the Models List */
+      models.finish();
+      models.init();
+
+      /* Clear all missions */
+      missions->finish();
+      missions->init(this);
+              
+      /* Put the animation state on normal */
+      PCs->getActiveCharacter()->setState(STATE_IDLE);
+
+      /* Remove All Pending Actions */
+      actionControl->removeAllActions();
+
+      /* Close all Opened windows */
+      gui->closeAllWindows();
+
+      /* Remove All Characters */
+      if(PCs)
+      {
+         delete(PCs);
+         PCs = NULL;
+      }
+   }
 }
 
 /*********************************************************************
@@ -323,6 +387,10 @@ bool engine::loadGame()
 
       if(sav->loadHeader(savWindow->getSelectedFileName()))
       {
+         /* Quit from the current map, if is in one */
+         quitCurrentGame();
+
+         /* Load the file */
          sav->load((void*)this);
 
          /* make sure not in battle mode */
@@ -337,6 +405,7 @@ bool engine::loadGame()
                   activeCharacter->zPosition,
                   activeCharacter->orientation);
          }
+
          res = true;
       }
       else
@@ -533,7 +602,7 @@ int engine::loadMap(string arqMapa, bool loadingGame)
       delete(actualMap);
 
       /* Remove All Unused 3D Models */
-      models->removeUnusedModels();
+      models.removeUnusedModels();
    }
 
    /* Remove all NPCS  */
@@ -564,7 +633,7 @@ int engine::loadMap(string arqMapa, bool loadingGame)
 
    actualMap = new Map();
    actualMap->setFileName(arqVelho);
-   actualMap->open(arqMapa,*models, *weaponsTypes);
+   actualMap->open(arqMapa);
 
    /* Enable, if needed, the FOG */
    mapFog fog = actualMap->getFog();
@@ -647,7 +716,7 @@ int engine::loadMap(string arqMapa, bool loadingGame)
            {
               modInventory* inv = new modInventory(NULL, "", "");
               inv->load(per->getInventoryFile());
-              inv->flush(actualMap, per->inventories, *models, *weaponsTypes);
+              inv->flush(actualMap, per->inventories);
               delete(inv);
            }
          }
@@ -662,7 +731,7 @@ int engine::loadMap(string arqMapa, bool loadingGame)
    /* Create the MiniMap */
    showLoading(img,&texturaTexto,texturaCarga,
                gettext("Creating MiniMap"), progress);
-   actualMap->drawMiniMap(models);
+   actualMap->drawMiniMap();
    progress->defineActualHealth(8);
 
    /* Loading Internal Windows */
@@ -748,7 +817,7 @@ int engine::loadMap(string arqMapa, bool loadingGame)
    progress->defineActualHealth(11);
 
    /* Do Modifications */
-   modifState.doMapModifications(actualMap, NPCs, *models, *weaponsTypes);
+   modifState.doMapModifications(actualMap, NPCs);
 
    /* Change Music, if needed */
    if(!actualMap->getMusicFileName().empty())
@@ -1204,8 +1273,14 @@ int engine::characterScreen(GLuint idTextura)
       object* curObj;
       curObj =
          new object("models/objetos/books/combat_tutorial/combat_tutorial.dcc",
-                    *models, "tutorial");
+                    "");
       activeCharacter->inventories->addObject(curObj);
+   
+      /*FIXME: TEST: adding a gun just to test */
+      /*weapon* w = new weapon("weapons/definitions/sw39.wcc");
+      activeCharacter->inventories->addObject(w);
+      curObj = new object("models/objetos/ammo/9mm_pack/9mm_pack.dcc","");
+      activeCharacter->inventories->addObject(curObj);*/
    }
 
    glEnable(GL_LIGHTING);
@@ -2296,7 +2371,7 @@ int engine::treatIO(SDL_Surface *screen)
       {
          lastKey = SDLK_F2;
          lastKeyb = time;
-         models->printAll();
+         models.printAll();
       }      
 
       /* Open Minimap */
@@ -3047,10 +3122,10 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
       glDisable(GL_STENCIL_TEST);
    }
 
-   models->renderSceneryObjects(visibleMatrix,
-                                (option->getReflexionType() >= REFLEXIONS_ALL) 
-                                 && (!actualMap->isOutdoor()),
-                                 shadow?gameSun->getShadowMatrix():NULL);
+   models.renderSceneryObjects(visibleMatrix,
+                               (option->getReflexionType() >= REFLEXIONS_ALL) 
+                                && (!actualMap->isOutdoor()),
+                                shadow?gameSun->getShadowMatrix():NULL);
 
    /* Render Terrain at last for reflexion */
    if(!shadow)
@@ -3623,22 +3698,6 @@ Map* engine::getCurrentMap()
 }
 
 /*********************************************************************
- *                          getModelList                             *
- *********************************************************************/
-modelList* engine::getModelList()
-{
-   return(models);
-}
-
-/*********************************************************************
- *                          getWeaponTypes                           *
- *********************************************************************/
-weaponTypes* engine::getWeaponTypes()
-{
-   return(weaponsTypes);
-}
-
-/*********************************************************************
  *                          Runs the Engine                          *
  *********************************************************************/
 int engine::run(SDL_Surface *surface, bool commingBack)
@@ -3683,40 +3742,7 @@ int engine::run(SDL_Surface *surface, bool commingBack)
          snd->loadMusic("music/musica8.ogg");
          showImage(dir.getRealFile("texturas/fightMode/death.png"));
 
-         /* Remove All Sound Effects */
-         snd->removeAllSoundEffects();
-
-         /* Clear Modifications */
-         modifState.clear();
-         engineMode = ENGINE_MODE_REAL_TIME;
-         gui->closeAllWindows();
-
-         /* Clear the Inventory */
-         PCs->getActiveCharacter()->newInventory();
-
-         /* Clear the Actual Map */
-         if(actualMap)
-         {
-            delete(actualMap);
-            actualMap = NULL;
-         }
-
-         /* Clear Objects List */
-         objectsList::removeAll();
-
-         /* Clear the Models List */
-         if(models)
-         {
-            delete(models);
-            models = new modelList();
-         }
-
-         /* Clear all missions */
-         missions->finish();
-         missions->init(this);
-              
-         /* Put the animation state on normal */
-         PCs->getActiveCharacter()->setState(STATE_IDLE);
+         quitCurrentGame();
 
          cursors->set(CURSOR_WALK);
          return(0);

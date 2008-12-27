@@ -241,14 +241,6 @@ class engine
        ***************************************************************/
       Map* getCurrentMap();
 
-      /*! Get the current modelList
-       * \return pointer to the current modelList */
-      modelList* getModelList();
-
-      /*! Get the current loaded weapon types definition
-       * \return pointer to the weaponTypes */
-      weaponTypes* getWeaponTypes();
-
    private:
 
       /*!
@@ -383,6 +375,9 @@ class engine
       /*! Update all things before render (listener position,camera,sun,etc) */
       void updateBeforeRender();
 
+      /*! Clear and free all current game related things */
+      void quitCurrentGame();
+
       dirs dir;                    /**< Data directories finder */
 
       Map* actualMap;              /**< Actual Engine Map */
@@ -432,14 +427,14 @@ class engine
       sndfx* walkSound;            /**< Actual walking sound */
       options* option;             /**< Current Options */
 
-      modelList* models;           /**< Current Models List */
+      modelList models;            /**< Current Models List */
       
       featsList* features;         /**< Feats descriptions */
       aligns* alignList;           /**< Alignments List */
       races* raceList;             /**< Races List */
       classes* classList;          /**< Classes List */
       skillsDefinitions skillsList;/**< List of Skills */
-      weaponTypes* weaponsTypes;   /**< List of Types of Weapons */
+      weaponTypes weaponsTypes;    /**< List of Categories of Weapons */
 
       messageController* msgController;   /**< The message controller */
       missionsController* missions;       /**< The missions controller */

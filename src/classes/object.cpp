@@ -5,6 +5,8 @@
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_opengl.h>
 #include "object.h"
+#include "weapon.h"
+
 #include "../engine/util.h"
 #include "../etc/dirs.h"
 #include "../etc/defparser.h"
@@ -66,8 +68,9 @@ int getObjectTypeId(string type)
 /**************************************************************
  *                         Constructor                        *
  **************************************************************/
-object::object(string path, modelList& mdlList, string curMap): thing()
+object::object(string path, string curMap): thing()
 {
+   modelList mdlList;
    string cal3DFile = "";
    int aux;
    dirs dir;
@@ -102,9 +105,9 @@ object::object(string path, modelList& mdlList, string curMap): thing()
          setConversationFile(value);
          createConversation(curMap);
       }
-      else if(key == "related_file")
+      else if(key == "related_info")
       {
-         relatedFile = value;
+         relatedInfo = value;
       }
       else if(key == "cal3d")
       {
@@ -226,7 +229,7 @@ object::object(object* obj): thing()
    /* Define Object Things */
    name = obj->name;
    fileName = obj->fileName;
-   relatedFile = obj->relatedFile;
+   relatedInfo = obj->relatedInfo;
 
    /* Define 2D model things */
    model2dName = obj->model2dName;
@@ -274,7 +277,7 @@ void object::cleanValues()
    inventSizeY = 0;
    name = "";
    fileName = "";
-   relatedFile = "";
+   relatedInfo = "";
    model2dName = "";
    model2d = NULL;
    model3D = NULL;
@@ -398,11 +401,11 @@ string object::getFileName()
 }
 
 /**************************************************************
- *                        getRelatedFile                      *
+ *                        getRelatedInfo                      *
  **************************************************************/
-string object::getRelatedFile()
+string object::getRelatedInfo()
 {
-   return(relatedFile);
+   return(relatedInfo);
 }
 
 /**************************************************************
@@ -604,7 +607,7 @@ void objectsList::remove(object* o)
    /* Nullify the first, if needed */
    if(total <= 0)
    {
-      first = 0;
+      first = NULL;
    }
 }
 
@@ -700,5 +703,39 @@ object* objectsList::search(string fileName, GLfloat posX, GLfloat posY,
  *********************************************************************/
 object* objectsList::first = NULL;
 int objectsList::total = 0;
+
+
+/********************************************************************
+ *                         createObject                             *
+ ********************************************************************/
+object* createObject(string arquivo, string mapFileName)
+{
+   object* novo = NULL;
+
+   string::size_type loc = arquivo.find( ".dcc", 0 );
+   if( loc != string::npos )
+   {
+      /* It's an Object *.dcc */
+      novo = (object*) new object(arquivo, mapFileName);
+   }
+   else
+   {
+      loc = arquivo.find( ".wcc", 0 );
+      if( loc != string::npos )
+      {
+         /* It's an weapon Object *.wcc */
+         novo = (object*) new weapon(arquivo);
+      }
+   }
+
+   /* verify if created the pointer */
+   if(novo == NULL)
+   {
+      printf("Error, cannot define the type of %s\n",arquivo.c_str());
+      return(NULL);
+   }
+
+   return(novo);
+}
 
 

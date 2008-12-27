@@ -158,6 +158,15 @@ void itemWindow::open(object* item)
       intWindow->getObjectsList()->insertTextBox(70,prvY,250,curY-1,1,"");
    }
 
+   /***********************
+    * Ammmo Things 
+    ***********************/
+   //TODO
+   else if(item->getType() == OBJECT_TYPE_AMMO)
+   {
+      //wInfo* 
+   }
+
    /* Item Image */
    int remainX = (64 - item->get2dModel()->w) / 2;
    int remainY = ((curY-15) - item->get2dModel()->h) / 2;

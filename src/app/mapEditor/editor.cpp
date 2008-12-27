@@ -44,8 +44,8 @@ editor::editor()
    hour = 12.0;
    gameSun = new sun(hour , OUTDOOR_FARVIEW, OUTDOOR_FARVIEW);
    gameSky = new(sky);
-   models = new modelList();
-   wTypes = new weaponTypes();
+   models.init();
+   wTypes.init();
 
    terrainEditor = NULL;
    portalEditor = NULL;
@@ -89,8 +89,8 @@ editor::~editor()
    skillsDefinitions skillList;
    skillList.finish();
    delete(gui);
-   delete(models);
-   delete(wTypes);
+   models.finish();
+   wTypes.finish();
    Farso_End(screen);
 
    /* Clear the visibleMatrix */
@@ -158,8 +158,8 @@ void editor::closeMap()
       delete(particleEditor);
       delete(npcController);
       objectsList::removeAll();
-      delete(models);
-      models = new modelList();
+      models.finish();;
+      models.init();
       mapOpened = false;
       map = NULL;
    }
@@ -178,13 +178,13 @@ void editor::openMap()
    gui->showMessage("Opening actual Map...");
    draw();
    map = new Map();
-   if(map->open(gui->getFileName(),*models,*wTypes))
+   if(map->open(gui->getFileName()))
    {
       mapOpened = true;
       terrainEditor = new terrain(map);
       portalEditor = new portal(map);
       wallEditor = new wallController(map);
-      objectEditor = new objects(map, models);
+      objectEditor = new objects(map);
       particleEditor = new particles(map);
       curTexture = map->textures->index;
       curTextureName = map->textures->name;
@@ -294,7 +294,7 @@ void editor::saveMap()
    if(mapOpened)
    {
       /* Remove the models that aren't used */
-      models->removeUnusedModels();
+      models.removeUnusedModels();
 
       /* Save the particles File */
       if(particleSystem->numParticles() > 0)
@@ -461,7 +461,7 @@ void editor::newMap()
    terrainEditor = new terrain(map);
    portalEditor = new portal(map);
    wallEditor = new wallController(map);
-   objectEditor = new objects(map, models);
+   objectEditor = new objects(map);
    particleEditor = new particles(map);
    curTexture = map->textures->index;
    curTextureName = map->textures->name;
@@ -619,9 +619,9 @@ int editor::insertTexture(string textureFile)
  ********************************************************************/
 void editor::renderSceneryObjects()
 {
-   model3d* mdl = models->getFirst();
+   model3d* mdl = models.getFirst();
    int i;
-   for(i = 0; i< models->getTotalModels(); i++)
+   for(i = 0; i< models.getTotalModels(); i++)
    {
       /* Only Render here the Static Scenery Objects */
       if(mdl->isStaticScenery())
@@ -916,7 +916,7 @@ void editor::doEditorIO()
       {
          if(!doorFile.empty())
          {
-            object* obj = map->insertObject(doorFile, *models, *wTypes);
+            object* obj = createObject(doorFile, map->getFileName());
             portalEditor->defineDoor((object*)obj, gui->getSelectedText());
          }
       }
@@ -935,8 +935,7 @@ void editor::doEditorIO()
       string objFile = gui->getSelectedText();
       if( (!objFile.empty()) && (objFile != objectEditor->getObjectFileName()))
       {
-         object* obj = (object*) map->insertObject(objFile, *models, 
-                                                         *wTypes);
+         object* obj = createObject(objFile, map->getFileName());
          objectEditor->defineActualObject(obj, objFile);
       }
       objectEditor->verifyAction(keys, xReal, yReal, zReal, mButton, mouseX, mouseY,

@@ -33,12 +33,12 @@ class object: public thing
    public:
       /*! Constructor 
        * \param path -> path to the object file
-       * \param mdlList -> list of openned models */
-      object(string path, modelList& mdlList, string curMap);
+       * \param curmap -> current map filename */
+      object(string path, string curMap);
       /*! Constructor
        * \param obj -> some object to be the source of actual */
       object(object* obj);
-      /*! Constructor withou parameter. Do not load anyhing */
+      /*! Constructor without parameter. Do not load anyhing */
       object(string path);
       /*! Destructor */
       ~object();
@@ -119,9 +119,10 @@ class object: public thing
        * \return -> pointer to the model3d */
       model3d* get3dModel();
 
-      /*! Get the related fileName name
-       * \return -> related fileName */
-      string getRelatedFile();
+      /*! Get the related information string (comic book file name,
+       * ammo type, etc.)
+       * \return -> related info */
+      string getRelatedInfo();
 
       /*! Verify, with all Meshes of the model, if the model colides
        *  with the bounding box defined as parameter. 
@@ -181,7 +182,7 @@ class object: public thing
 
       string fileName;      /**< FileName of the Object */
       string model2dName;   /**< FileName of the 2D Model */
-      string relatedFile;   /**< Some related fileName 
+      string relatedInfo;   /**< Some related fileName 
                                  (comic book file, for example) */
 
       object* next;         /**< Next Object on List */
@@ -226,6 +227,12 @@ class objectsList
       static object* first;       /**< First object on the list */
       static int total;           /**< Total Objects on the list */
 };
+
+/*! Create an object based on its type
+ * \param arquivo -> filename to load
+ * \return -> pointer to the Object created (object* as generic,
+ *            but really create the child type, as weapon*, for example) */
+object* createObject(string arquivo, string curMapFileName);
 
 
 #endif

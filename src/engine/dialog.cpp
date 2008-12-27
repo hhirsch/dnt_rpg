@@ -1119,14 +1119,11 @@ void conversation::proccessAction(int opcao, void* curEngine)
             object* obj = objectsList::search(actions[i].satt, 0,0,0);
             modState modif;
             Map* actualMap = ((engine*)curEngine)->getCurrentMap();
-            weaponTypes* wTypes = ((engine*)curEngine)->getWeaponTypes();
-            modelList* mdlList = ((engine*)curEngine)->getModelList();
 
             if(obj == NULL)
             {
                /* Must load one */
-               obj = actualMap->insertObject(actions[i].satt, (*mdlList), 
-                                             (*wTypes));
+               obj = createObject(actions[i].satt, "");
             }
 
             /* Now, put it at the actualCharacter Inventory */

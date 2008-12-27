@@ -1866,54 +1866,9 @@ void Map::setOutdoor(bool val)
 }
 
 /********************************************************************
- *                           getObject                              *
- ********************************************************************/
-object* Map::getObject(string fileName, 
-                       GLfloat posX, GLfloat posY, GLfloat posZ)
-{
-   object* result = objectsList::search(fileName, posX, posY, posZ);
-
-   return(result);
-}
-
-/********************************************************************
- *                       insertMapObject                            *
- ********************************************************************/
-object* Map::insertObject(string arquivo, modelList& mdlList, 
-                          weaponTypes& wTypes)
-{
-   object* novo = NULL;
-
-   string::size_type loc = arquivo.find( ".dcc", 0 );
-   if( loc != string::npos )
-   {
-      /* Is a map Object *.dcc */
-      novo = (object*) new object(arquivo, mdlList, name);
-   }
-   else
-   {
-      loc = arquivo.find( ".wcc", 0 );
-      if( loc != string::npos )
-      {
-         /* Is a weapon Object *.wcc */
-         novo = (object*) new weapon(arquivo, mdlList, wTypes);
-      }
-   }
-
-   /* verify if created the pointer */
-   if(novo == NULL)
-   {
-      printf("Error, cannot define the type of %s\n",arquivo.c_str());
-      return(NULL);
-   }
-
-   return(novo);
-}
-
-/********************************************************************
  *                       Open Map File                              *
  ********************************************************************/
-int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
+int Map::open(string arquivo)
 {
    FILE* arq;        // file used for the map
    char buffer[128]; // buffer used to read
@@ -2035,7 +1990,7 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
             if(doorAux->obj == NULL)
             {
                /* Not found on list, so insert it! */
-               doorAux->obj = insertObject(nome,mdlList,wTypes);
+               doorAux->obj = createObject(nome, name);
                doorAux->obj->xPosition = doorAux->x;
                doorAux->obj->yPosition = 0;
                doorAux->obj->zPosition = doorAux->z;
@@ -2266,7 +2221,7 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                   if(obj == NULL)
                   {
                      /* Insert it */
-                     obj = insertObject(nome, mdlList, wTypes);
+                     obj = createObject(nome, name);
                      /* set the object position */
                      obj->xPosition = oX;
                      obj->yPosition = oY;
@@ -2718,8 +2673,9 @@ SDL_Surface* Map::getMiniMap()
 /********************************************************************
  *                       Draw MiniMap on Surface                    *
  ********************************************************************/
-void Map::drawMiniMap(modelList* models)
+void Map::drawMiniMap()
 {
+   modelList models;
    /* Setting the View  */
    int mapSizeX = (int)squareMiniSize*x;
    int mapSizeZ = (int)squareMiniSize*z;
@@ -2752,7 +2708,7 @@ void Map::drawMiniMap(modelList* models)
    /* And finally draw the map, scaling it to the "full viewport" size */
    glPushMatrix();
       glScalef(ratio,ratio,ratio);
-      models->renderSceneryObjects(NULL, false);
+      models.renderSceneryObjects(NULL, false);
       render(posX, 529, posZ, NULL, 0, 0);
    glPopMatrix();
 

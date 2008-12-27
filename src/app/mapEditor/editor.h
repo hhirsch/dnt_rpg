@@ -90,9 +90,9 @@ class editor
       wallController* wallEditor;    /**< The wall Editor Module */
       objects* objectEditor;         /**< The Object Editor Module */
       particles* particleEditor;     /**< The Particle Editor Module */
-      modelList* models;             /**< The Objects Model List */
+      modelList models;              /**< The Objects Model List */
       npcs* npcController;           /**< The Npcs Controller */
-      weaponTypes* wTypes;           /**< The list of types */
+      weaponTypes wTypes;            /**< The list of types */
 
       GLuint curTexture;             /**< Current Texture */
       string curTextureName;         /**< Current Texture Name */

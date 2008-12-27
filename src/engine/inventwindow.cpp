@@ -264,7 +264,7 @@ void inventWindow::verifyUseObject()
       {
          /* Do the comic book run */
          comicBook *cb = new comicBook();
-         if(cb->load(activeObject->getRelatedFile()))
+         if(cb->load(activeObject->getRelatedInfo()))
          {
             cb->run();
          }

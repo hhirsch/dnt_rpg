@@ -580,7 +580,6 @@ void iaVariable::fromString(string s, void* curEngine)
    }
    else if(type == IA_TYPE_OBJECT)
    {
-      engine* eng = (engine*)curEngine;
       char fName[512];
       float pX=0, pY=0, pZ=0;
 
@@ -588,7 +587,7 @@ void iaVariable::fromString(string s, void* curEngine)
       sscanf(s.c_str(), "%s %f %f %f", &fName[0], &pX, &pY, &pZ);
 
       /* Get the object defined! */
-      value = (void*)eng->getCurrentMap()->getObject(fName, pX, pY, pZ);
+      value = objectsList::search(fName, pX, pY, pZ);
    }
 }
 

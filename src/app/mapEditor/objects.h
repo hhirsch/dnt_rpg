@@ -13,7 +13,7 @@ class objects
    public:
       /*! Constructor
        * \param acMap -> poiter to opened map*/
-      objects(Map* acMap, modelList* usedModels);
+      objects(Map* acMap);
       /*! Destructor */
       ~objects();
 
@@ -37,7 +37,6 @@ class objects
       string getObjectFileName();
 
     private:
-      modelList* models;          /**< Used Model List */
       Map* actualMap;             /**< Actual Internal Map */
       object* actualObstacle;     /**< Actual Obstacle */
       string objectFile;          /**< Actual Obstacle Filename */

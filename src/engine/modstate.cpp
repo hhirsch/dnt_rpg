@@ -445,8 +445,7 @@ modInventory::~modInventory()
 /************************************************************
  *                            flush                         *
  ************************************************************/
-void modInventory::flush(Map* curMap, inventory* inv,
-                         modelList& models,weaponTypes& wTypes)
+void modInventory::flush(Map* curMap, inventory* inv)
 {
    modInvObj* invObj = objects;
    object* curObj = NULL;
@@ -461,7 +460,7 @@ void modInventory::flush(Map* curMap, inventory* inv,
       if(!curObj)
       {
          /* It's not on the list, so must insert it */
-         curObj = curMap->insertObject(invObj->fileName, models, wTypes);
+         curObj = createObject(invObj->fileName, curMap->getFileName());
       }
 
       /* Now insert it at the inventory */
@@ -1153,8 +1152,7 @@ bool modMap::removeInverseObjectAction(int action, string target,
 /************************************************************
  *                    doMapModifications                    *
  ************************************************************/
-void modMap::doMapModifications(Map* actualMap, void* NPCs, 
-                                modelList& mdlList, weaponTypes& wTypes)
+void modMap::doMapModifications(Map* actualMap, void* NPCs) 
 {
    int i;
    characterList* npcs = (characterList*) NPCs;
@@ -1193,8 +1191,7 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs,
          if(obj == NULL)
          {
             /* Load it to the map */
-            obj = actualMap->insertObject(tmpMobj->getTarget(), mdlList, 
-                  wTypes);
+            obj = createObject(tmpMobj->getTarget(), actualMap->getFileName());
          }
          /* Insert the Object  */
          actualMap->insertObject(x, actualMap->getHeight(x,z), z, 
@@ -1279,7 +1276,7 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs,
          ch = npcs->getCharacter(tmpMobj->getTarget());
          if(ch)
          {
-            mInv->flush(actualMap, ch->inventories, mdlList, wTypes);
+            mInv->flush(actualMap, ch->inventories);
          }
       }
 
@@ -1590,15 +1587,12 @@ void modState::mapInventoryAdd(inventory* inv, string owner, string mapFile)
 /************************************************************
  *                    doMapModifications                    *
  ************************************************************/
-void modState::doMapModifications(Map* actualMap, 
-                                  void* NPCs, 
-                                  modelList& mdlList, 
-                                  weaponTypes& wTypes)
+void modState::doMapModifications(Map* actualMap, void* NPCs)
 {
    modMap* mod = findModMap(actualMap->getFileName());
    if(mod != NULL)
    {
-      mod->doMapModifications(actualMap, NPCs, mdlList, wTypes);
+      mod->doMapModifications(actualMap, NPCs);
    } 
 }
 

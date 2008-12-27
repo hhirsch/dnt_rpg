@@ -265,7 +265,7 @@ void model3d::updateHealthBar()
 /********************************************************
  *                     Constructor                      *
  ********************************************************/
-modelList::modelList()
+void modelList::init()
 {
    first = NULL;
    totalModels = 0;
@@ -274,7 +274,7 @@ modelList::modelList()
 /********************************************************
  *                     Destructor                       *
  ********************************************************/
-modelList::~modelList()
+void modelList::finish()
 {
    while(first)
    {
@@ -431,4 +431,10 @@ void modelList::printAll()
    }
    printf("*****************************************************\n\n");
 }
+
+/********************************************************
+ *                   static members                     *
+ ********************************************************/
+model3d* modelList::first = NULL;
+int modelList::totalModels = 0;
 

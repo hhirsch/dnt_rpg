@@ -26,9 +26,10 @@ void wInfo::operator=(wInfo& v)
 /************************************************************
  *                        Constructor                       *
  ************************************************************/
-weapon::weapon(string path, modelList& mdlList, weaponTypes& wTypes): 
-       object(path)
+weapon::weapon(string path): object(path)
 {
+   modelList mdlList;
+   weaponTypes wTypes;
    dirs dir;
    string key="", value="";
 
@@ -317,7 +318,7 @@ void weapon::setCurrentMunition(int v)
 /************************************************************
  *                        Constructor                       *
  ************************************************************/
-weaponTypes::weaponTypes()
+void weaponTypes::init()
 {
    /* Read Categories */
    readFile(FILE_CATEGORIES);
@@ -336,14 +337,32 @@ weaponTypes::weaponTypes()
 /************************************************************
  *                         Destructor                       *
  ************************************************************/
-weaponTypes::~weaponTypes()
+void weaponTypes::finish()
 {
-   delete[] categories;
-   delete[] ranges;
-   delete[] weights;
-   delete[] sizes;
-   delete[] damages;
-   delete[] munitions;
+   if(categories)
+   {
+      delete[] categories;
+   }
+   if(ranges)
+   {
+      delete[] ranges;
+   }
+   if(weights)
+   {
+      delete[] weights;
+   }
+   if(sizes)
+   {
+      delete[] sizes;
+   }
+   if(damages)
+   {
+      delete[] damages;
+   }
+   if(munitions)
+   {
+      delete[] munitions;
+   }
 }
 
 /************************************************************
@@ -493,4 +512,21 @@ wInfo* weaponTypes::getThing(wInfo* thing, int total, string name)
    printf("Can't found weapon definition type of: %s\n", name.c_str());
    return(NULL);
 }
+
+
+/************************************************************
+ *                     Static Members                       *
+ ************************************************************/
+int weaponTypes::totalCategories = 0;
+wInfo* weaponTypes::categories = NULL;
+int weaponTypes::totalRanges = 0;
+wInfo* weaponTypes::ranges = NULL;
+int weaponTypes::totalSizes = 0;
+wInfo* weaponTypes::sizes = NULL;
+int weaponTypes::totalWeights = 0;
+wInfo* weaponTypes::weights = NULL;
+int weaponTypes::totalDamages = 0;
+wInfo* weaponTypes::damages = NULL;
+int weaponTypes::totalMunitions = 0;
+wInfo* weaponTypes::munitions = NULL;
 

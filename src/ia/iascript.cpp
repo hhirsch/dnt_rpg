@@ -1558,7 +1558,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
 
       /* object getObject(string fileName, float posX, float posZ) */
       object* obj = NULL;
-      obj = actualMap->getObject(objName, posX, posY, posZ);
+      obj = objectsList::search(objName, posX, posY, posZ);
       assignValue(var, (void*)obj, IA_TYPE_OBJECT);
    }
 

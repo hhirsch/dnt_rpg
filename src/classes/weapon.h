@@ -25,9 +25,9 @@ class weaponTypes
 {
    public:
       /*! Constructor */
-      weaponTypes();
+      void init();
       /*! Destructor */
-      ~weaponTypes();
+      void finish();
 
       /*! Get the category number
        * \param name -> name of the category
@@ -72,18 +72,18 @@ class weaponTypes
       wInfo* getThing(wInfo* thing, int total, string name);
 
 
-      int totalCategories;    /**< Total number of categories */
-      wInfo* categories;      /**< The categories */
-      int totalRanges;        /**< Total Number of ranges */
-      wInfo* ranges;          /**< The ranges */
-      int totalSizes;         /**< Total Number of Sizes */
-      wInfo* sizes;           /**< The sizes */
-      int totalWeights;       /**< Total Number of Weights */
-      wInfo* weights;         /**< The weights */
-      int totalDamages;       /**< Total Number of damages */
-      wInfo* damages;         /**< The damages */
-      int totalMunitions;     /**< Total Number of Munitions */
-      wInfo* munitions;       /**< The munitions */
+      static int totalCategories;    /**< Total number of categories */
+      static wInfo* categories;      /**< The categories */
+      static int totalRanges;        /**< Total Number of ranges */
+      static wInfo* ranges;          /**< The ranges */
+      static int totalSizes;         /**< Total Number of Sizes */
+      static wInfo* sizes;           /**< The sizes */
+      static int totalWeights;       /**< Total Number of Weights */
+      static wInfo* weights;         /**< The weights */
+      static int totalDamages;       /**< Total Number of damages */
+      static wInfo* damages;         /**< The damages */
+      static int totalMunitions;     /**< Total Number of Munitions */
+      static wInfo* munitions;       /**< The munitions */
 };
 
 
@@ -92,10 +92,8 @@ class weapon: public object
 {
    public:
       /*! Constructor
-       * \param path -> name of the weapon file to load
-       * \param mdlList -> list of models
-       * \param wTypes -> the weapons types */
-      weapon(string path, modelList& mdlList, weaponTypes& wTypes);
+       * \param path -> name of the weapon file to load */
+      weapon(string path);
       /*! Destructor */
       ~weapon();
 

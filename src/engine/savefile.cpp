@@ -273,8 +273,7 @@ bool saveFile::load(void* curEngine)
       {
          inv = new modInventory(NULL, "", "");
          inv->load(invFile);
-         inv->flush(eng->getCurrentMap(), pc->inventories, 
-                    *eng->getModelList(), *eng->getWeaponTypes());
+         inv->flush(eng->getCurrentMap(), pc->inventories); 
          delete(inv);
       }
    }

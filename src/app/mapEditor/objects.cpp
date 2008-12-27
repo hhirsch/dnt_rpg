@@ -6,16 +6,11 @@
 /******************************************************
  *                      Constructor                   *
  ******************************************************/
-objects::objects(Map* acMap, modelList* usedModels)
+objects::objects(Map* acMap)
 {
    actualTool = 0;
    actualMap = acMap;
    state = OBJECTS_STATE_NONE;
-   if(usedModels == NULL)
-   {
-      printf("No modelList at objects mapEditor controller!\n");
-   }
-   models = usedModels;
    actualObstacle = NULL;
    objectFile = "";
    obstacleX = 0;

@@ -252,11 +252,8 @@ class modInventory: public modAction
       /*! Flush the objects list to the inventory,
        * loading needed models to the list
        * \param curMap -> current opened map
-       * \param inv -> inventory to populate 
-       * \param models -> models list
-       * \param wType -> weapons type information */
-      void flush(Map* map, inventory* inv, modelList& models, 
-                 weaponTypes& wTypes);
+       * \param inv -> inventory to populate */ 
+      void flush(Map* map, inventory* inv);
 
       /*! Create the modInventory list based on an inventory
        * \param inv -> inventory to create the object list
@@ -358,11 +355,8 @@ class modMap
        * usually when you return to the map and want it to appears exactly 
        * like when you left it). 
        * \param actualMap -> pointer to actual opened map
-       * \param NPCs -> current NPCs list
-       * \param mdlList -> current model list
-       * \param wTypes -> current weapon types */
-      void doMapModifications(Map* actualMap, void* NPCs, 
-                              modelList& mdlList, weaponTypes& wTypes);
+       * \param NPCs -> current NPCs list */
+      void doMapModifications(Map* actualMap, void* NPCs);
 
       /*! Clear All the modifications states (usually called after death) */
       void clear();      
@@ -492,11 +486,8 @@ class modState
        * usually when you return to the map and want it to appears exactly 
        * like when you left it). 
        * \param actualMap -> pointer to actual opened map
-       * \param NPCs -> current NPCs list
-       * \param mdlList -> current model list
-       * \param wTypes -> current weapon types */
-      void doMapModifications(Map* actualMap, void* NPCs, 
-                              modelList& mdlList, weaponTypes& wTypes);
+       * \param NPCs -> current NPCs list */
+      void doMapModifications(Map* actualMap, void* NPCs);
 
       /*! Clear All the modifications states (usually called after death) */
       void clear();

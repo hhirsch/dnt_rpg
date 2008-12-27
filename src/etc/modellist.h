@@ -133,9 +133,9 @@ class modelList
 {
    public:
       /*! Constructor */
-      modelList();
+      void init();
       /*! Destructor */
-      ~modelList();
+      void finish();
 
       /*! Add Model to the List
        * \param path -> string containing the path of model
@@ -175,8 +175,8 @@ class modelList
       void printAll();
 
    protected:
-      model3d* first;      /**< First Model on List */
-      int totalModels;     /**< Number of Models on List */
+      static model3d* first;      /**< First Model on List */
+      static int totalModels;     /**< Number of Models on List */
 };
 
 #endif
