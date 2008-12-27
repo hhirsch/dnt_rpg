@@ -2,6 +2,7 @@ name = Logan
 model = models/personagens/Logan/model.cfg
 portrait = characters/portraits/logan.png
 battleScript = ia/script/fight/fight_animal.dsl
+inventory = characters/pcs/logan.inv
 maxLifePoints = 87
 class = COM 20
 race = MUTANT_HUMAN_CRICKET

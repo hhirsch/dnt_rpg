@@ -1,0 +1,6 @@
+modInventory = characters/pcs/logan.pc
+inventoryItem = weapons/definitions/sw39.wcc 0 0 -3
+inventoryItem = weapons/definitions/sw39.wcc 0 0 0
+inventoryItem = models/objetos/ammo/9mm_pack/9mm_pack.dcc 0 2 0
+inventoryItem = models/objetos/ammo/9mm_pack/9mm_pack.dcc 1 2 0
+inventoryItem = models/objetos/itens/garrafa1/garrafa1.dcc 4 4 0
