@@ -1,6 +1,7 @@
-name = gettext("9mm Ammo")
+name = gettext("9mm Ammo Pack")
 cal3d = models/objetos/ammo/9mm_pack/model.cfg
 type = ammo
+related_info = 9mm
 state = 30
 inventory_sizes = 1 1
 inventory_texture = models/objetos/ammo/9mm_pack/texture_inv.png

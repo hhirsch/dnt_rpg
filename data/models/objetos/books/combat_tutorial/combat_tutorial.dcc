@@ -1,6 +1,6 @@
 name = gettext("The Combat Book")
 cal3d = models/objetos/books/combat_tutorial/model.cfg
-related_file = comics/tutorial/combat/combat.dcb
+related_info = comics/tutorial/combat/combat.dcb
 type = book
 inventory_sizes = 2 2
 inventory_texture = models/objetos/books/combat_tutorial/texture_inv.png
