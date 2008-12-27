@@ -446,7 +446,7 @@ void engine::keepNPCInventoryStatus()
 /*********************************************************************
  *                         Load Map to Engine                        *
  *********************************************************************/
-int engine::loadMap(string arqMapa)
+int engine::loadMap(string arqMapa, bool loadingGame)
 {
    healthBar* progress = NULL; /* the progress bar */
 
@@ -464,7 +464,9 @@ int engine::loadMap(string arqMapa)
 
    char texto[512];
    string arqVelho = "nada";
-   
+
+   bool alreadyModified = modifState.haveMap(arqMapa);
+
    /* Set the some initial map-engine status */
    curConection = NULL;
    walkStatus = ENGINE_WALK_KEYS;
@@ -634,6 +636,20 @@ int engine::loadMap(string arqMapa)
            int posX =(int)floor(per->xPosition / actualMap->squareSize());
            int posZ =(int)floor(per->zPosition / actualMap->squareSize());
            per->ocSquare = actualMap->relativeSquare(posX,posZ);
+
+           /* Load its inventory (only when not loading game
+            * and not having the map at modif state. those restrictions
+            * is to avoid "repopulate" a modified inventory with its
+            * initial defined state). */
+           if( (!loadingGame) &&
+               (!alreadyModified) && 
+               (!per->getInventoryFile().empty() ))
+           {
+              modInventory* inv = new modInventory(NULL, "", "");
+              inv->load(per->getInventoryFile());
+              inv->flush(actualMap, per->inventories, *models, *weaponsTypes);
+              delete(inv);
+           }
          }
       }  
       delete(arq);

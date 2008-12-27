@@ -1460,6 +1460,26 @@ bool modState::saveState(string file)
 }
 
 /************************************************************
+ *                          haveMap                         *
+ ************************************************************/
+bool modState::haveMap(string fileName)
+{
+   int i;
+   modMap* mod = modMapList;
+   for(i = 0; i < totalModMaps; i++)
+   {
+      if(mod->getMapFileName() == fileName)
+      {
+         /* Found it! */
+         return(true);
+      }
+      mod = mod->getNext();
+   }
+
+   return(false);
+}
+
+/************************************************************
  *                        findModMap                        *
  ************************************************************/
 modMap* modState::findModMap(string fileName)

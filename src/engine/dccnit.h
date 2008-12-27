@@ -144,9 +144,10 @@ class engine
        **************************************************************** 
        * Load and activate Map to engine
        * \param arqMapa -> string with filename
+       * \param loadingGame -> true when loading map for a saveFile
        * \return 0 if can't load file .
        ***************************************************************/
-      int loadMap(string arqMapa);
+      int loadMap(string arqMapa, bool loadingGame=false);
 
       /*!
        ****************************************************************

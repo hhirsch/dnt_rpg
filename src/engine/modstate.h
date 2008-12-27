@@ -511,6 +511,11 @@ class modState
        * \return -> true if all are alive */
       bool allCharactersAlive(string npcFileName);
 
+      /*! Verify if the modState have informations for the map
+       * \param fileName -> map filename to verify
+       * \return -> true if have info, false if not */
+      bool haveMap(string fileName);
+
    protected:
 
       /*! Create the ModMap related to the fileName 

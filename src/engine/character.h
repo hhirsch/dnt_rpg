@@ -75,9 +75,13 @@ class character: public aniModel
        * \param portraitFile -> file name of the image to use*/
       void definePortrait(string portraitFile);
 
-      /*! Gets the filename of the image used as portrait
+      /*! Get the filename of the image used as portrait
        * \return -> file name of the image used */
       string getPortraitFileName();
+
+      /*! Get the filename of the inventory defined to the character
+       * \return -> string with inventory file name or "" */
+      string getInventoryFile();
 
       /*! Draw the Portrait */
       void drawMainPortrait();
@@ -202,10 +206,10 @@ class character: public aniModel
       float portraitPropY;        /**< Y proportion for portrait texture */
       SDL_Surface* portraitImage; /**< Character's portrait image */
       GLuint portraitTexture;     /**< The Portrait Texture */
+      string inventoryFile;       /**< The inventory file name */
       
       void* generalScript;         /**< Pointer to the general iaScript */
       string generalScriptFileName;/**< The General Script Filename */
-
 
       characterUtilModel headModel;       /**< Head Model */
       characterUtilModel leftHandModel;   /**< Left Hand Model */

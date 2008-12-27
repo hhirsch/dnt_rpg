@@ -6,6 +6,7 @@
 #include "character.h"
 #include "barterwindow.h"
 #include "dialog.h"
+#include "modstate.h"
 
 #include "../gui/draw.h"
 #include "../ia/iascript.h"
@@ -41,6 +42,7 @@ character::character(featsList* ft)
       actualClass[i] = NULL;
       classLevels[i] = 0;
    }
+   inventoryFile = "";
    classLevels[0] = 1;
    actualRace = NULL;
    actualAlign = NULL;
@@ -302,6 +304,14 @@ void character::drawMainPortrait()
    glEnd();
 
    glDisable(GL_TEXTURE_2D);
+}
+
+/******************************************************************
+ *                         getInventoryFile                       *
+ ******************************************************************/
+string character::getInventoryFile()
+{
+   return(inventoryFile);
 }
 
 /******************************************************************
@@ -729,6 +739,12 @@ bool character::save(string saveFile)
    file << "sex = " << sexType << endl;
    /* Age */
    file << "age = " << age << endl;
+   /* Inventory File */
+   if(!inventoryFile.empty())
+   {
+      file << "inventory = " << inventoryFile << endl;
+   }
+
 
    /* Now, put all not 0 skills */
    skill* ski;
@@ -921,6 +937,11 @@ character* characterList::insertCharacter(string file, featsList* ft,
          {
             cerr << "Error: class overflow for: " << file << endl;
          }
+      }
+      /* Inventory Population */
+      else if(key == "inventory")
+      {
+         novo->inventoryFile = value;
       }
 
       //TODO

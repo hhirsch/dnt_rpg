@@ -5,14 +5,19 @@
  - Tutorial to the battle system (as a comic book);
  - Fixed a bug at sound controller when exiting game;
  - Fixed a bug at some models reflexion;
+ - Populated initial NPCs inventories;
 
 Working on:
  - Weather effects;
  - Shadows;
  - Use dntMapEditor to insert sound effects at maps;
+ - New models;
+ - New effects for comic books;
+ - Ammo for Weapons;
+ - Fix Barter Imposition message (is writing "accepted" 
+   when the imposition is refused);
 
 Pending:
- - New Effects for Comic Books Boxes;
  - Define Counter Skills;
  - Minimap Tags;
  - Extend walls to follow map height;

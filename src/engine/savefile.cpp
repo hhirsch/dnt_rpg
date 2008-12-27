@@ -247,7 +247,7 @@ bool saveFile::load(void* curEngine)
    if(!mapFile.empty())
    {
       /* Load the map! */
-      eng->loadMap(mapFile);
+      eng->loadMap(mapFile, true);
 
       /* Set Character Position */
       character* pc = eng->PCs->getActiveCharacter();      
