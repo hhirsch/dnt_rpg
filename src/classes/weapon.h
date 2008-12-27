@@ -127,6 +127,10 @@ class weapon: public object
        * \return -> weapon's weight in Kg. */
       float getWeight();
 
+       /*! Get the current munition capacity 
+       * \return -> current munition capacity of the weapon */
+      int getMunitionCapacity();
+
       /*! Get the current munition value
        * \return -> current munition on the weapon */
       int getCurrentMunition();

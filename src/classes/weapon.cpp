@@ -287,6 +287,14 @@ float weapon::getWeight()
 }
 
 /************************************************************
+ *                    getMunitionCapacity                   *
+ ************************************************************/
+int weapon::getMunitionCapacity()
+{
+   return(munitionCapacity);
+}
+
+/************************************************************
  *                    getCurrentMunition                    *
  ************************************************************/
 int weapon::getCurrentMunition()
