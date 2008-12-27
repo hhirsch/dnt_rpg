@@ -185,7 +185,25 @@ alvo não é suficientemente tolo para aceitá-la.
 
 A criatura que propõe a barganha pode optar por utilizar seus dotes físicos
 para impô-la à criatura alvo. Neste caso rola-se um teste de {\it Força} e um
-teste de {\it Constituição} contra {\it Não Sou Bobo} do alvo. Obtendo-se
+teste de {\it Constituição} contra {\it Não Sou Bobo} do alvo, com os seguintes pesos (para balancear o teste):
+
+\begin{equation}
+(bonus(ATT) * 100) / \Delta{P}
+\end{equation}
+
+contra
+
+\begin{equation}
+(Nao Sou Bobo * \Delta P) / 100
+\end{equation}
+
+Onde:
+
+\begin{equation}
+\Delta P = PrecoItensDeQuemSofreImposicao - PrecoItensDeQuemImpos
+\end{equation}
+
+Obtendo-se
 sucesso em ambos os testes, a barganha será aceita. Em caso de falha em um
 deles, a imposição será negada e a criatura alvo não mais barganhará nada com o
 proponente. Se a falha ocorrer e ambos os testes, a criatura alvo tornar-se-á
