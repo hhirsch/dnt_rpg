@@ -39,7 +39,7 @@ void itemWindow::open(object* item)
    if(isOpen())
    {
       centerX = intWindow->getX1()+128;
-      centerY = intWindow->getY1()+108;
+      centerY = intWindow->getY1()+118;
       close();
    }
 
