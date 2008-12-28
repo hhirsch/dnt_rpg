@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-12-25 16:57-0200\n"
+"POT-Creation-Date: 2008-12-28 11:58-0200\n"
 "PO-Revision-Date: 2008-07-22 19:40+0000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -57,11 +57,11 @@ msgstr "Cura Critica!"
 msgid "Critical Hit!"
 msgstr "Golpe Critico!"
 
-#: src/classes/feats.cpp:124
+#: src/classes/feats.cpp:125
 msgid "Invalid Talent"
 msgstr "Dote Invalido"
 
-#: src/classes/feats.cpp:145
+#: src/classes/feats.cpp:163
 msgid "Not enought points to use!"
 msgstr "No tiene suficientes puntos para usarlo!"
 
@@ -158,7 +158,7 @@ msgstr "Carisma"
 msgid "Attribute Description"
 msgstr "Descripción de Atributo"
 
-#: src/engine/attwindow.cpp:535 src/engine/dccnit.cpp:404
+#: src/engine/attwindow.cpp:535 src/engine/dccnit.cpp:473
 #: src/engine/options.cpp:1032
 msgid "Warning"
 msgstr "Aviso"
@@ -167,7 +167,7 @@ msgstr "Aviso"
 msgid "You Need to Assign All Attributes."
 msgstr "Necesitas Asignar todos los Atributos"
 
-#: src/engine/barterwindow.cpp:30 src/engine/dialog.cpp:1324
+#: src/engine/barterwindow.cpp:30 src/engine/dialog.cpp:1321
 msgid "Barter"
 msgstr "Trueque"
 
@@ -357,66 +357,66 @@ msgstr "Clases de Habilidades"
 msgid "No Skills."
 msgstr "Sin Habilidades"
 
-#: src/engine/dccnit.cpp:345 src/engine/dccnit.cpp:395
+#: src/engine/dccnit.cpp:414 src/engine/dccnit.cpp:464
 msgid "Error"
 msgstr ""
 
-#: src/engine/dccnit.cpp:345
+#: src/engine/dccnit.cpp:414
 msgid "Can't load the saved game!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:390
+#: src/engine/dccnit.cpp:459
 msgid "Information"
 msgstr ""
 
-#: src/engine/dccnit.cpp:391
+#: src/engine/dccnit.cpp:460
 msgid "The game was saved!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:395
+#: src/engine/dccnit.cpp:464
 msgid "Can't save game!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:405
+#: src/engine/dccnit.cpp:474
 msgid "Can't save game while fighting!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:524
+#: src/engine/dccnit.cpp:595
 #, c-format
 msgid "Saving Current Map Modifications"
 msgstr "Salvando Modificaciones del Mapa Actual"
 
-#: src/engine/dccnit.cpp:559
+#: src/engine/dccnit.cpp:630
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Cargando Mapa: %s"
 
-#: src/engine/dccnit.cpp:622
+#: src/engine/dccnit.cpp:693
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Cargando NPC: %s"
 
-#: src/engine/dccnit.cpp:648
+#: src/engine/dccnit.cpp:733
 msgid "Creating MiniMap"
 msgstr "Creando MiniMapa"
 
-#: src/engine/dccnit.cpp:654
+#: src/engine/dccnit.cpp:739
 msgid "Putting GUI on Screen"
 msgstr "Colocando GUI en Pantalla"
 
-#: src/engine/dccnit.cpp:701
+#: src/engine/dccnit.cpp:786
 msgid "Loading Particles"
 msgstr "Cargando Particulas"
 
-#: src/engine/dccnit.cpp:731
+#: src/engine/dccnit.cpp:816
 msgid "Loading Changes..."
 msgstr "Cargando Cambios..."
 
-#: src/engine/dccnit.cpp:759
+#: src/engine/dccnit.cpp:844
 msgid "Done!"
 msgstr "Echo!"
 
-#: src/engine/dccnit.cpp:851
+#: src/engine/dccnit.cpp:936
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -424,50 +424,50 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1363
+#: src/engine/dccnit.cpp:1448
 msgid "Too far away for the action!"
 msgstr "Muy lejos para la acción!"
 
-#: src/engine/dccnit.cpp:1405
+#: src/engine/dccnit.cpp:1493
 msgid "No NPCs in the area."
 msgstr "No hay NPC's en el área."
 
-#: src/engine/dccnit.cpp:1456
+#: src/engine/dccnit.cpp:1544
 msgid "Surprise Attack Turn."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1470
+#: src/engine/dccnit.cpp:1558
 msgid "No enemies in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1647 src/engine/dccnit.cpp:2098
+#: src/engine/dccnit.cpp:1735 src/engine/dccnit.cpp:2186
 #: src/engine/shortcutswindow.cpp:32
 msgid "Nothing"
 msgstr "Nada"
 
-#: src/engine/dccnit.cpp:1846
+#: src/engine/dccnit.cpp:1934
 #, c-format
 msgid "%s taken."
 msgstr "%s recogido"
 
-#: src/engine/dccnit.cpp:1868
+#: src/engine/dccnit.cpp:1956
 msgid "Inventory is full!"
 msgstr "Inventorio Lleno!"
 
-#: src/engine/dccnit.cpp:1900
+#: src/engine/dccnit.cpp:1988
 msgid "Door"
 msgstr "Puerta"
 
-#: src/engine/dccnit.cpp:2033
+#: src/engine/dccnit.cpp:2121
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s ataca %s"
 
-#: src/engine/dccnit.cpp:2199
+#: src/engine/dccnit.cpp:2287
 msgid "No more actions. Turn ended."
 msgstr "Sin acciones. Turno finalizado."
 
-#: src/engine/dccnit.cpp:3716
+#: src/engine/dccnit.cpp:3757
 msgid "Exit Battle Mode"
 msgstr "Salir del Modo de Batalla"
 
@@ -484,7 +484,7 @@ msgstr "Falla"
 msgid "Not found in dialog: %d\n"
 msgstr ""
 
-#: src/engine/dialog.cpp:1318
+#: src/engine/dialog.cpp:1315
 msgid "Dialog"
 msgstr ""
 
@@ -539,54 +539,62 @@ msgstr "Info"
 msgid "Get"
 msgstr "Coger"
 
-#: src/engine/itemwindow.cpp:58
+#: src/engine/itemwindow.cpp:59
 #, c-format
 msgid "Name: %s"
 msgstr "Apellido: %s"
 
-#: src/engine/itemwindow.cpp:63
+#: src/engine/itemwindow.cpp:64
 #, c-format
 msgid "Cost: %.2f"
 msgstr "Precio: %.2f"
 
-#: src/engine/itemwindow.cpp:68
+#: src/engine/itemwindow.cpp:69
 #, c-format
 msgid "Weight: %.2f Kg"
 msgstr "Peso: %.2f Kg"
 
-#: src/engine/itemwindow.cpp:83
+#: src/engine/itemwindow.cpp:84
 msgid "Heal Factor: "
 msgstr "Factor de Cura: "
 
-#: src/engine/itemwindow.cpp:93
+#: src/engine/itemwindow.cpp:94
 msgid "Aditional Factor: "
 msgstr "Factor Adicional: "
 
-#: src/engine/itemwindow.cpp:115
+#: src/engine/itemwindow.cpp:116
 msgid "Category: "
 msgstr "Categoría: "
 
-#: src/engine/itemwindow.cpp:121
+#: src/engine/itemwindow.cpp:122
 msgid "Damage Dice: "
 msgstr "Dado de Daño: "
 
-#: src/engine/itemwindow.cpp:129
+#: src/engine/itemwindow.cpp:130
 msgid "Primary Damage: "
 msgstr "Daño Primario: "
 
-#: src/engine/itemwindow.cpp:136
+#: src/engine/itemwindow.cpp:137
 msgid "Secondary Damage: "
 msgstr "Daño Secundario: "
 
-#: src/engine/itemwindow.cpp:148
+#: src/engine/itemwindow.cpp:149
 msgid "Range: "
 msgstr "Alcance: "
 
-#: src/engine/itemwindow.cpp:153
+#: src/engine/itemwindow.cpp:154
 msgid "Size: "
 msgstr "Tamaño: "
 
-#: src/engine/itemwindow.cpp:171
+#: src/engine/itemwindow.cpp:167 src/engine/itemwindow.cpp:194
+msgid "Ammo Type:"
+msgstr ""
+
+#: src/engine/itemwindow.cpp:173 src/engine/itemwindow.cpp:200
+msgid "Quantity:"
+msgstr ""
+
+#: src/engine/itemwindow.cpp:218
 msgid "Ok"
 msgstr "Ok"
 
@@ -3050,6 +3058,10 @@ msgstr ""
 
 #: data/models/objetos/geral/notebook/notebook.dcc:1
 msgid "Notebook"
+msgstr ""
+
+#: data/models/objetos/ammo/9mm_pack/9mm_pack.dcc:1
+msgid "9mm Ammo Pack"
 msgstr ""
 
 #: data/weapons/definitions/axe.wcc:1

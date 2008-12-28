@@ -243,6 +243,9 @@ data/models/objetos/itens/healkit/healkit.dcc
 data/models/objetos/geral/computador/computador.dcc
 data/models/objetos/geral/notebook/notebook.dcc
 
+#Ammo
+data/models/objetos/ammo/9mm_pack/9mm_pack.dcc
+
 #weapons
 data/weapons/definitions/axe.wcc
 data/weapons/definitions/dagger.wcc
