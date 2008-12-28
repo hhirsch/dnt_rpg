@@ -141,7 +141,6 @@ class weapon: public object
    protected:
       wInfo* munitionType;    /**< Weapon Munition Type (ex: 9mm) */
       int munitionCapacity;   /**< Weapon Max Munition */
-      int actualMunition;     /**< Weapon actual munition */
       wInfo* categoryType;    /**< Weapon Category (Ex: Exotic)  */
       wInfo* rangeType;       /**< Range Type (Ex: Meele) */
       wInfo* sizeType;        /**< Size Type (Ex: Small) */

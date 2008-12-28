@@ -152,7 +152,7 @@ weapon::weapon(string path): object(path)
       else if(key == "munition_capacity")
       {
          sscanf(value.c_str(),"%d",&munitionCapacity);
-         actualMunition = munitionCapacity;
+         state = munitionCapacity;
       }
       else if(key == "main_damage_type")
       {
@@ -299,7 +299,7 @@ int weapon::getMunitionCapacity()
  ************************************************************/
 int weapon::getCurrentMunition()
 {
-   return(actualMunition);
+   return(state);
 }
 
 /************************************************************
@@ -307,7 +307,7 @@ int weapon::getCurrentMunition()
  ************************************************************/
 void weapon::setCurrentMunition(int v)
 {
-   actualMunition = v;
+   state = v;
 }
 
 //////////////////////////////////////////////////////////////////////////////
