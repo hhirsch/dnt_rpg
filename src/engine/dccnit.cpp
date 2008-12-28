@@ -1275,12 +1275,6 @@ int engine::characterScreen(GLuint idTextura)
          new object("models/objetos/books/combat_tutorial/combat_tutorial.dcc",
                     "");
       activeCharacter->inventories->addObject(curObj);
-   
-      /*FIXME: TEST: adding a gun just to test */
-      /*weapon* w = new weapon("weapons/definitions/sw39.wcc");
-      activeCharacter->inventories->addObject(w);
-      curObj = new object("models/objetos/ammo/9mm_pack/9mm_pack.dcc","");
-      activeCharacter->inventories->addObject(curObj);*/
    }
 
    glEnable(GL_LIGHTING);
