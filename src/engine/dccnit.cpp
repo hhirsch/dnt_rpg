@@ -1477,8 +1477,11 @@ void engine::enterBattleMode(bool surprisePC)
 
   /* Close Dialog window, if openned */
   dialogWindow dlgWindow;
+  barterWindow bartWindow;
   dlgWindow.close();
+  bartWindow.close();
   
+
   activeCharacter = PCs->getActiveCharacter();
   
   /* clear fight status */
@@ -2807,9 +2810,11 @@ int engine::treatIO(SDL_Surface *screen)
       /* Verify Sounds FIXME -> for npc sounds! */
       if( (walked) && (activeCharacter->isAlive()) )
       {
-         /* Make sure no conversation is opened */
+         /* Make sure no conversation or barter is opened */
          dialogWindow dlgWindow;
+         barterWindow bartWindow;
          dlgWindow.close();
+         bartWindow.close();
 
 //FIXME: Disabled sound for walk, until we'll do one for run
 //       and for NPCS (anyway, its too bad for now)
