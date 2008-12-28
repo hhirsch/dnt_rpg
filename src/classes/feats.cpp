@@ -135,11 +135,28 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
        || (m_feats[featNumber].costToUse) == 0 )
    {
       /* Try to use the feat */
-      return(doHealOrAttack(actor, target, 
-                            m_feats[featNumber].diceInfo, 
-                            &m_feats[featNumber].conceptBonus,
-                            m_feats[featNumber].range,
-                            heal));
+      if(doHealOrAttack(actor, target, 
+                        m_feats[featNumber].diceInfo, 
+                        &m_feats[featNumber].conceptBonus,
+                        m_feats[featNumber].range, heal))
+      {
+         /* Yes, we've used it */
+         useFeat(featNumber);
+
+         /* Apply Ammo for weapon, if needed */
+         if( (featNumber == FEAT_RANGED_ATTACK) || 
+             (featNumber == FEAT_MELEE_ATTACK) )
+         {
+            flushCurrentMunition();
+         }
+
+         /* Yes, used the feat! */
+         return(true);
+      }
+      else
+      {
+         return(false);
+      }
    }
 
    /* Can't use due to points! */
@@ -409,6 +426,7 @@ void feats::flushCurrentMunition()
 {
    if(currentWeapon)
    {
+      cout << "Have Weapon!" << endl;
       /* Get the actual quantity for its type */
       if(currentWeapon->getRangeType()->index == FEAT_MELEE_ATTACK)
       {
@@ -417,6 +435,8 @@ void feats::flushCurrentMunition()
       }
       else
       {
+         cout << "Will set as: " << m_feats[FEAT_RANGED_ATTACK].actualQuantity
+              << endl;
          currentWeapon->setCurrentMunition( 
                                     m_feats[FEAT_RANGED_ATTACK].actualQuantity);
       }
