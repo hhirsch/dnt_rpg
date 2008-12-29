@@ -16,10 +16,10 @@
 
 #define INVENTORY_ACTION_NONE           0
 #define INVENTORY_ACTION_INTERNAL       1
-#define INVENTORY_ACTION_EQUIPED_WEAPON 2
-#define INVENTORY_ACTION_EQUIPED_ARMOR  3
+#define INVENTORY_ACTION_EQUIPED        2
 #define INVENTORY_ACTION_USE_ITEM       4
-
+#define INVENTORY_ACTION_REMOVE_ITEM    5
+#define INVENTORY_ACTION_CHANGE_ITEM    6
 
 #define MENU_TYPE_INVENTORY             1
 #define MENU_TYPE_EQUIPED               2
@@ -56,8 +56,8 @@ class inventWindow
        * \param X -> character that ownes the inventory X position
        * \param Z ->     "       "    "    "      "     Z    "  
        * \param seller -> if is the seller inventory
-       * \return true if event is threated, false otherwise. */
-      bool treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
+       * \return actionCode if event is threated, 0 otherwise. */
+      int treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                  Map* actualMap, GLfloat X, GLfloat Z, bool seller=false);
 
       /*! Verify if window is still opened

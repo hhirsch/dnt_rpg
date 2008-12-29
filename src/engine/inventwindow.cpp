@@ -294,8 +294,8 @@ void inventWindow::verifyUseObject()
 /**************************************************************
  *                             treat                          *
  **************************************************************/
-bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
-                         Map* actualMap, GLfloat X, GLfloat Z, bool seller)
+int inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
+                        Map* actualMap, GLfloat X, GLfloat Z, bool seller)
 {
    modState modifState;
 
@@ -303,7 +303,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
    if(!isOpen())
    {
       /* Window is no more opened */
-      return(false);
+      return(INVENTORY_ACTION_NONE);
    }
    int x,y;
    Uint8 Mbotao = SDL_GetMouseState(&x,&y);
@@ -358,7 +358,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
             activeObject = NULL;
             state = INVENTORY_STATE_NONE;
             reDraw();
-            return(true);
+            return(INVENTORY_ACTION_REMOVE_ITEM);
          }
       }
    }
@@ -403,7 +403,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                   openMenu((x-intWindow->getX1()),(y-intWindow->getY1()),
                            MENU_TYPE_INVENTORY, seller); 
                }
-               return(true);
+               return(INVENTORY_ACTION_INTERNAL);
             }
             else if(state == INVENTORY_STATE_OBJECT)
             {
@@ -415,7 +415,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                   state = INVENTORY_STATE_NONE;
                   reDraw();
                }
-               return(true);
+               return(INVENTORY_ACTION_CHANGE_ITEM);
             }
          }                  
          
@@ -469,7 +469,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                openMenu((x-intWindow->getX1()),(y-intWindow->getY1()),
                         MENU_TYPE_EQUIPED, seller);
                state = INVENTORY_STATE_MENU;
-               return(true);
+               return(INVENTORY_ACTION_INTERNAL);
             }
          }
          /* State Object */
@@ -538,7 +538,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
             {
                state = INVENTORY_STATE_NONE;
                reDraw();
-               return(true);
+               return(INVENTORY_ACTION_EQUIPED);
             }
          }
       }
@@ -549,6 +549,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
       {
          if(objectMenu)
          {
+            int act = INVENTORY_ACTION_NONE;
             state = INVENTORY_STATE_NONE;
             switch(objectMenu->getActualItem())
             {
@@ -575,6 +576,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                case 5: /* Use */
                {
                  verifyUseObject();
+                 act = INVENTORY_ACTION_USE_ITEM;
                }
                break;
                case 6: /* Buy /  Sell */
@@ -623,17 +625,18 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                      snd.addSoundEffect(X, actualMap->getHeight(X,Z), Z,
                                         SOUND_NO_LOOP,
                                         "sndfx/objects/drop_item.ogg");
+                     act = INVENTORY_ACTION_REMOVE_ITEM;
                   }
                break;
             }
             intWindow->getObjectsList()->removeMenu();
             objectMenu = NULL;
-            return(true);
+            return(act);
          }
       }
       break;
    }
-   return(false);
+   return(INVENTORY_ACTION_NONE);
 }
 
 

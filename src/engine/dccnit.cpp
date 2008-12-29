@@ -1704,12 +1704,14 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
    if( (inventoryWindow) )
    {
       if( ( (engineMode == ENGINE_MODE_TURN_BATTLE) && 
-            (fightStatus == FIGHT_PC_TURN) ) ||
+            (fightStatus == FIGHT_PC_TURN) &&
+            (PCs->getActiveCharacter()->getCanAttack()) ) ||
           (engineMode == ENGINE_MODE_REAL_TIME) )
       {
-         if(inventoryWindow->treat(object, eventInfo, cursors, actualMap,
-                                   PCs->getActiveCharacter()->xPosition,
-                                   PCs->getActiveCharacter()->zPosition))
+         int act =inventoryWindow->treat(object, eventInfo, cursors, actualMap,
+                                         PCs->getActiveCharacter()->xPosition,
+                                         PCs->getActiveCharacter()->zPosition); 
+         if(act > INVENTORY_ACTION_INTERNAL)
          {
             /* Redefine, if need, the weapons */
             PCs->getActiveCharacter()->defineWeapon();
