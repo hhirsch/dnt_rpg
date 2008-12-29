@@ -324,6 +324,9 @@ void engine::quitCurrentGame()
       dialogWindow dlgWindow;
       btWindow.close();
       dlgWindow.close();
+      mapWindow->close(gui);
+      shortcuts->close(gui);
+      brief->closeWindow(gui);
 
       /* Clear Modifications */
       modifState.clear();
@@ -392,6 +395,11 @@ bool engine::loadGame()
 
          /* Load the file */
          sav->load((void*)this);
+
+         /* Open the default windows */
+         mapWindow->open(gui,0,0, actualMap);
+         shortcuts->open(gui);
+         brief->openWindow(gui);
 
          /* make sure not in battle mode */
          engineMode = ENGINE_MODE_REAL_TIME;
