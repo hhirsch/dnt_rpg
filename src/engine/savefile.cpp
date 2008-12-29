@@ -256,6 +256,7 @@ bool saveFile::load(void* curEngine)
          pc->xPosition = pcPos[0];
          pc->yPosition = pcPos[1];
          pc->zPosition = pcPos[2];
+         pc->orientation = pcAngle;
          Map* actualMap = eng->getCurrentMap();
          int posX =(int)floor(pc->xPosition / actualMap->squareSize());
          int posZ =(int)floor(pc->zPosition / actualMap->squareSize());
@@ -344,7 +345,7 @@ bool saveFile::loadHeader(string fileName)
       else if(key == DNT_SAVE_TOKEN_PC_POSITION)
       {
          /* Define the positions */
-         sscanf(value.c_str(), "%f,%f,%f %f", &pcPos[0], &pcPos[1], 
+         sscanf(value.c_str(), "%f,%f,%f:%f", &pcPos[0], &pcPos[1], 
                &pcPos[2], &pcAngle);
       }
       else if(key == DNT_SAVE_TOKEN_MAP)
