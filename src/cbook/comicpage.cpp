@@ -138,13 +138,13 @@ void comicPage::render()
    comicBox *box = boxes;
 
    /* Calculate scale ratio */
-   GLfloat ratio = 1.0;
+   GLfloat ratio = 1.0f;
    if(texture)
    { 
       ratio = (float)SCREEN_Y / (float)texture->h;
    }
 
-   glColor4f(1.0,1.0,1.0,1.0);
+   glColor4f(1.0f,1.0f,1.0f,1.0f);
 
    glPushMatrix();
    glDisable(GL_DEPTH_TEST);

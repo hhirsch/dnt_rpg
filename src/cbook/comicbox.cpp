@@ -50,12 +50,14 @@ comicBox::~comicBox()
 void comicBox::setVertex(int vertNumber, GLfloat x, GLfloat y,
                          int imgX, int imgY)
 {
+   float ratio = (float)SCREEN_Y / (float)imgY;
+   
    if( (vertNumber >= 0) && (vertNumber <= 3) )
    {
       texCoord[vertNumber][0] = x / (float)smallestPowerOfTwo(imgX);
       texCoord[vertNumber][1] = y / (float)smallestPowerOfTwo(imgY);
-      vertex[vertNumber][0] = x * (SCREEN_Y / (float)imgY);
-      vertex[vertNumber][1] = SCREEN_Y - (y * (SCREEN_Y / (float)imgY));
+      vertex[vertNumber][0] = x * ratio;
+      vertex[vertNumber][1] = SCREEN_Y - (y * ratio);
    }
 }
 
