@@ -6,7 +6,12 @@
  - Fixed a bug at sound controller when exiting game;
  - Fixed a bug at some models reflexion;
  - Way to populate NPCs initial inventories;
- - Fix for Barter Imposition (balanced better tests);
+ - Balanced Barter Imposition Tests;
+ - Ammo for Weapons;
+ - Cancel Barter when the character is far;
+ - Fix bug when loading game with inventory window opened;
+ - Fix bug that let you use itens without attack actions;
+ - Fix to PC orientation angle after load a game;
 
 Working on:
  - Weather effects;
@@ -14,9 +19,6 @@ Working on:
  - Use dntMapEditor to insert sound effects at maps;
  - New models;
  - New effects for comic books;
- - Ammo for Weapons;
- - Fix Barter Imposition message (is writing "accepted" 
-   when the imposition is refused);
 
 Pending:
  - Define Counter Skills;
