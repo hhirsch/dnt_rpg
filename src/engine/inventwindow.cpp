@@ -217,6 +217,10 @@ void inventWindow::openMenu(int x, int y, int type, bool seller)
  **************************************************************/
 void inventWindow::verifyUseObject()
 {
+   int i; 
+   char buf[1024];
+   briefing brief;
+
    if(objWhere == INVENTORY_INVENTORY)
    {
       /* Equip an weapon (if possible) */
@@ -255,6 +259,7 @@ void inventWindow::verifyUseObject()
          /* And discard the object */
          inventories->removeFromInventory(objX,objY, 
                currentInventory);
+         delete(activeObject);
          activeObject = NULL;
          reDraw();
       }
@@ -272,6 +277,66 @@ void inventWindow::verifyUseObject()
          delete(cb);
          activeObject = NULL;
       }
+
+      /* Reload an weapon with ammo */
+      else if(activeObject->getType() == OBJECT_TYPE_AMMO)
+      {
+         /* Verify if the ammo type is compatible with any in use weapon */
+         bool used = false;
+         wInfo* ammoType;
+         weapon* wp = (weapon*)inventories->getFromPlace(INVENTORY_RIGHT_HAND);
+         for(i=0; ((i < 2) && (activeObject != NULL)); i++)
+         {
+            if(wp != NULL)
+            {
+               ammoType = wp->getMunitionType();
+               if(ammoType->name == activeObject->getRelatedInfo())
+               {
+                  /* Weapon and ammo of the same type, so reload it! */
+                  used = true;
+                  int needs = wp->getMunitionCapacity() - 
+                              wp->getCurrentMunition();
+
+                  sprintf(buf, gettext("%s reloaded %s with %s ammo."),
+                          owner->name.c_str(), wp->name.c_str(), 
+                          ammoType->title.c_str());
+                  brief.addText(buf);
+
+                  if(activeObject->getState() >= needs)
+                  {
+                     /* Fully recharge */
+                     wp->setCurrentMunition(wp->getMunitionCapacity());
+                     activeObject->setState(activeObject->getState()-needs);
+                  }
+                  else
+                  {
+                     /* Recharge with the quantity we current have */
+                     wp->setCurrentMunition(activeObject->getState());
+                     /* And remove the object (it isn't used anymore) */
+                     inventories->removeFromInventory(objX,objY, 
+                           currentInventory);
+                     delete(activeObject);
+                     activeObject = NULL;
+                     reDraw();
+                  }
+               }
+            }
+ 
+            /* Next, verify the left hand weapon too */
+            wp = (weapon*)inventories->getFromPlace(INVENTORY_LEFT_HAND);
+         }
+         activeObject = NULL;
+         
+         if(!used)
+         {
+            /* If can't use the ammo, better show a message */
+            warning warn;
+            warn.show(gettext("Warning"), 
+                      gettext("No equipped weapons are compatible with this "
+                              "munition type."), interf);
+         }
+      }
+
    }
    else
    {

@@ -444,7 +444,8 @@ bool object::isUsable()
            (type == OBJECT_TYPE_ARMOR) ||
            (type == OBJECT_TYPE_HEAL) ||
            (type == OBJECT_TYPE_EXPLOSIVE) ||
-           (type == OBJECT_TYPE_BOOK) );
+           (type == OBJECT_TYPE_BOOK) ||
+           (type == OBJECT_TYPE_AMMO) );
 }
 
 /*********************************************************************

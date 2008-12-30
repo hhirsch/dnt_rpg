@@ -126,6 +126,13 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
       return(false);
    }
 
+   /* Get Ammo from weapon, if needed */
+   if( (featNumber == FEAT_RANGED_ATTACK) || 
+         (featNumber == FEAT_MELEE_ATTACK) )
+   {
+      defineWeapon(currentWeapon);
+   }
+
    /* Show feature name */
    sprintf(texto,"%s ",m_feats[featNumber].name.c_str());
    brief.addText(texto);
@@ -426,7 +433,6 @@ void feats::flushCurrentMunition()
 {
    if(currentWeapon)
    {
-      cout << "Have Weapon!" << endl;
       /* Get the actual quantity for its type */
       if(currentWeapon->getRangeType()->index == FEAT_MELEE_ATTACK)
       {
@@ -435,8 +441,6 @@ void feats::flushCurrentMunition()
       }
       else
       {
-         cout << "Will set as: " << m_feats[FEAT_RANGED_ATTACK].actualQuantity
-              << endl;
          currentWeapon->setCurrentMunition( 
                                     m_feats[FEAT_RANGED_ATTACK].actualQuantity);
       }
