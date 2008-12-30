@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-12-28 11:58-0200\n"
+"POT-Creation-Date: 2008-12-30 11:10-0200\n"
 "PO-Revision-Date: 2008-05-18 14:48+0000\n"
 "Last-Translator: pano <Pano_90@gmx.de>\n"
 "Language-Team: German <de@li.org>\n"
@@ -61,7 +61,7 @@ msgstr "Kritischer Treffer"
 msgid "Invalid Talent"
 msgstr ""
 
-#: src/classes/feats.cpp:163
+#: src/classes/feats.cpp:170
 msgid "Not enought points to use!"
 msgstr "Nicht genug Punkte um zu benutzen"
 
@@ -158,8 +158,8 @@ msgstr "Charisma"
 msgid "Attribute Description"
 msgstr ""
 
-#: src/engine/attwindow.cpp:535 src/engine/dccnit.cpp:473
-#: src/engine/options.cpp:1032
+#: src/engine/attwindow.cpp:535 src/engine/dccnit.cpp:481
+#: src/engine/inventwindow.cpp:334 src/engine/options.cpp:1032
 msgid "Warning"
 msgstr "Warnung"
 
@@ -357,66 +357,66 @@ msgstr ""
 msgid "No Skills."
 msgstr "Keine Fähigkeiten."
 
-#: src/engine/dccnit.cpp:414 src/engine/dccnit.cpp:464
+#: src/engine/dccnit.cpp:422 src/engine/dccnit.cpp:472
 msgid "Error"
 msgstr ""
 
-#: src/engine/dccnit.cpp:414
+#: src/engine/dccnit.cpp:422
 msgid "Can't load the saved game!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:459
+#: src/engine/dccnit.cpp:467
 msgid "Information"
 msgstr ""
 
-#: src/engine/dccnit.cpp:460
+#: src/engine/dccnit.cpp:468
 msgid "The game was saved!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:464
+#: src/engine/dccnit.cpp:472
 msgid "Can't save game!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:474
+#: src/engine/dccnit.cpp:482
 msgid "Can't save game while fighting!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:595
+#: src/engine/dccnit.cpp:603
 #, c-format
 msgid "Saving Current Map Modifications"
 msgstr ""
 
-#: src/engine/dccnit.cpp:630
+#: src/engine/dccnit.cpp:638
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Lade Karte: %s"
 
-#: src/engine/dccnit.cpp:693
+#: src/engine/dccnit.cpp:701
 #, c-format
 msgid "Loading NPC: %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:733
+#: src/engine/dccnit.cpp:741
 msgid "Creating MiniMap"
 msgstr ""
 
-#: src/engine/dccnit.cpp:739
+#: src/engine/dccnit.cpp:747
 msgid "Putting GUI on Screen"
 msgstr ""
 
-#: src/engine/dccnit.cpp:786
+#: src/engine/dccnit.cpp:794
 msgid "Loading Particles"
 msgstr ""
 
-#: src/engine/dccnit.cpp:816
+#: src/engine/dccnit.cpp:824
 msgid "Loading Changes..."
 msgstr ""
 
-#: src/engine/dccnit.cpp:844
+#: src/engine/dccnit.cpp:852
 msgid "Done!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:936
+#: src/engine/dccnit.cpp:944
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -424,50 +424,50 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1448
+#: src/engine/dccnit.cpp:1456
 msgid "Too far away for the action!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1493
+#: src/engine/dccnit.cpp:1501
 msgid "No NPCs in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1544
+#: src/engine/dccnit.cpp:1552
 msgid "Surprise Attack Turn."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1558
+#: src/engine/dccnit.cpp:1566
 msgid "No enemies in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1735 src/engine/dccnit.cpp:2186
+#: src/engine/dccnit.cpp:1745 src/engine/dccnit.cpp:2196
 #: src/engine/shortcutswindow.cpp:32
 msgid "Nothing"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1934
+#: src/engine/dccnit.cpp:1944
 #, c-format
 msgid "%s taken."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1956
+#: src/engine/dccnit.cpp:1966
 msgid "Inventory is full!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1988
+#: src/engine/dccnit.cpp:1998
 msgid "Door"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2121
+#: src/engine/dccnit.cpp:2131
 #, c-format
 msgid "%s attacks %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2287
+#: src/engine/dccnit.cpp:2297
 msgid "No more actions. Turn ended."
 msgstr ""
 
-#: src/engine/dccnit.cpp:3757
+#: src/engine/dccnit.cpp:3767
 msgid "Exit Battle Mode"
 msgstr ""
 
@@ -537,6 +537,15 @@ msgstr ""
 
 #: src/engine/inventwindow.cpp:191
 msgid "Get"
+msgstr ""
+
+#: src/engine/inventwindow.cpp:300
+#, c-format
+msgid "%s reloaded %s with %s ammo."
+msgstr ""
+
+#: src/engine/inventwindow.cpp:335
+msgid "No equipped weapons are compatible with this munition type."
 msgstr ""
 
 #: src/engine/itemwindow.cpp:59
