@@ -313,65 +313,91 @@ engine::~engine()
  *********************************************************************/
 void engine::quitCurrentGame()
 {
+   /* Remove All Sound Effects */
+   if(snd)
+   {
+      snd->removeAllSoundEffects();
+   }
+   walkSound = NULL;
+
+   /* Close the Dialog or Barter windows, if opened */
+   barterWindow btWindow;
+   dialogWindow dlgWindow;
+   btWindow.close();
+   dlgWindow.close();
+
+   if(mapWindow)
+   {
+      mapWindow->close(gui);
+   }
+
+   if(shortcuts)
+   {
+      shortcuts->close(gui);
+   }
+
+   if(brief)
+   {
+      brief->closeWindow(gui);
+   }
+
+   /* Clear Modifications */
+   modifState.clear();
+   engineMode = ENGINE_MODE_REAL_TIME;
+
+   /* Delete all NPCs */
+   if(NPCs)
+   {
+      delete(NPCs);
+      NPCs = NULL;
+   }
+
+   /* Clear the Inventory */
+   if(PCs)
+   {
+      PCs->getActiveCharacter()->newInventory();
+   }
+
    if(actualMap)
    {
-      /* Remove All Sound Effects */
-      snd->removeAllSoundEffects();
-      walkSound = NULL;
-
-      /* Close the Dialog or Barter windows, if opened */
-      barterWindow btWindow;
-      dialogWindow dlgWindow;
-      btWindow.close();
-      dlgWindow.close();
-      mapWindow->close(gui);
-      shortcuts->close(gui);
-      brief->closeWindow(gui);
-
-      /* Clear Modifications */
-      modifState.clear();
-      engineMode = ENGINE_MODE_REAL_TIME;
-      gui->closeAllWindows();
-
-      /* Delete all NPCs */
-      if(NPCs)
-      {
-         delete(NPCs);
-         NPCs = NULL;
-      }
-
-      /* Clear the Inventory */
-      PCs->getActiveCharacter()->newInventory();
-
       delete(actualMap);
       actualMap = NULL;
-      
-      /* Clear Objects List */
-      objectsList::removeAll();
+   }
 
-      /* Restart the Models List */
-      models.finish();
-      models.init();
+   /* Clear Objects List */
+   objectsList::removeAll();
 
-      /* Clear all missions */
+   /* Restart the Models List */
+   models.finish();
+   models.init();
+
+   /* Clear all missions */
+   if(missions)
+   {
       missions->finish();
       missions->init(this);
-              
+   }
+
+   if(PCs)
+   {
       /* Put the animation state on normal */
       PCs->getActiveCharacter()->setState(STATE_IDLE);
+   }
 
+   if(actionControl)
+   {
       /* Remove All Pending Actions */
       actionControl->removeAllActions();
+   }
 
-      /* Close all Opened windows */
-      gui->closeAllWindows();
+   /* Close all Opened windows */
+   gui->closeAllWindows();
 
-      /* Remove All Characters */
-      if(PCs)
-      {
-         delete(PCs);
-         PCs = NULL;
-      }
+   /* Remove All Characters */
+   if(PCs)
+   {
+      delete(PCs);
+      PCs = NULL;
    }
 }
 
@@ -1283,6 +1309,11 @@ int engine::characterScreen(GLuint idTextura)
          new object("models/objetos/books/combat_tutorial/combat_tutorial.dcc",
                     "");
       activeCharacter->inventories->addObject(curObj);
+   }
+   else
+   {
+      /* Must empty things */
+      quitCurrentGame();
    }
 
    glEnable(GL_LIGHTING);
