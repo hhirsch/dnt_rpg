@@ -222,9 +222,9 @@ texture = comics/tutorial/combat/page3.png
    vertex = 368,359
    effect = 1
    timeout = 12000
-   textbox = 17,369,337,422
+   textbox = 17,369,337,428
    text = gettext("You can end your turn any time, by pressing SPACE or selecting the End Turn icon.")
-   textbox = 25,621,356,669  
+   textbox = 25,608,356,669  
    text = gettext("You can also set the options to automatically end your turn when no more available actions.")
 
    # Fourth Box
@@ -234,7 +234,7 @@ texture = comics/tutorial/combat/page3.png
    vertex = 738,677
    vertex = 738,359
    effect = 1
-   textbox = 380,366,725,415
+   textbox = 380,366,725,432
    text = gettext("The fight will end when no more hostile creatures are near or all PCs are dead.") 
 
    # Fifth Box

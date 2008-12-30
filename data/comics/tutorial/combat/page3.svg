@@ -17,8 +17,8 @@
    sodipodi:docname="page3.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/tutorial/combat/page3.png"
-   inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90">
+   inkscape:export-xdpi="89.988571"
+   inkscape:export-ydpi="89.988571">
   <defs
      id="defs3069">
     <linearGradient
@@ -94,16 +94,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35"
-     inkscape:cx="1047.9838"
-     inkscape:cy="495.81201"
+     inkscape:zoom="0.61005613"
+     inkscape:cx="372.04724"
+     inkscape:cy="460.61335"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1365"
      inkscape:window-height="852"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-x="-1"
+     inkscape:window-y="-1"
      showguides="true"
      inkscape:guide-bbox="true" />
   <metadata
@@ -1038,12 +1038,12 @@
        d="M 368.9301,593.37629 L 736.54561,595.31025"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.43462586;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <rect
-       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.09197736;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.21559477;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect4366"
-       width="324.16699"
-       height="57.486717"
-       x="15.218583"
-       y="366.51459" />
+       width="324.04337"
+       height="64.505959"
+       x="15.280392"
+       y="366.57639" />
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
@@ -1059,28 +1059,28 @@
          y="398.13104"
          id="tspan4364">&quot;Space&quot; or selecting the End Turn icon.</tspan></text>
     <rect
-       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.24095559;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect4374"
-       width="334.3605"
-       height="51.51778"
-       x="23.233509"
-       y="619.00671" />
+       width="334.11957"
+       height="64.7257"
+       x="23.353987"
+       y="605.67828" />
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
        x="25.294428"
-       y="638.19965"
+       y="626.19965"
        id="text4368"><tspan
          sodipodi:role="line"
          id="tspan4370"
          x="25.294428"
-         y="638.19965">You can also set the options to automatically</tspan><tspan
+         y="626.19965">You can also set the options to automatically</tspan><tspan
          sodipodi:role="line"
          x="25.294428"
-         y="655.69965"
+         y="643.69965"
          id="tspan4372">end your turn when no more available actions.</tspan></text>
     <image
-       y="448.39508"
+       y="446.39508"
        x="33.111782"
        id="image2824"
        height="156.53293"
@@ -1088,7 +1088,7 @@
        sodipodi:absref="/home/farrer/projetos/dccnitghtmare/data/comics/tutorial/combat/teclado.png"
        xlink:href="teclado.png" />
     <image
-       y="431.79099"
+       y="439.79099"
        x="28.95686"
        id="image4423"
        height="33"
@@ -1102,7 +1102,7 @@
        height="33"
        id="image4427"
        x="294.95685"
-       y="431.79099" />
+       y="439.79099" />
     <image
        transform="matrix(-8.391631e-2,-0.9964728,-0.9964728,8.391631e-2,0,0)"
        xlink:href="scimitar.png"
@@ -1804,12 +1804,12 @@
       </g>
     </g>
     <rect
-       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.3226912;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect4950"
-       width="347.85715"
-       height="52.142857"
-       x="378.57144"
-       y="364.50504" />
+       width="347.53445"
+       height="70.391594"
+       x="378.73279"
+       y="364.66638" />
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
