@@ -2,6 +2,7 @@
 #include "../lang/translate.h"
 #include "../etc/dirs.h"
 #include "../etc/defparser.h"
+#include "../sound/sound.h"
 
 /************************************************************
  *                        Constructor                       *
@@ -308,6 +309,18 @@ int weapon::getCurrentMunition()
 void weapon::setCurrentMunition(int v)
 {
    state = v;
+}
+
+/************************************************************
+ *                    playMainAttackSound                   *
+ ************************************************************/
+void weapon::playMainAttackSound(float x, float y, float z)
+{
+   if(!attackSound[0].empty())
+   {
+      sound snd;
+      snd.addSoundEffect(x, y, z, SOUND_NO_LOOP, attackSound[0]);
+   }
 }
 
 //////////////////////////////////////////////////////////////////////////////

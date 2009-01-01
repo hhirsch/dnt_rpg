@@ -138,6 +138,12 @@ class weapon: public object
        * \param v -> new current munition value */
       void setCurrentMunition(int v);
 
+      /*! Play the main Attack sound file at position
+       * \param x -> x position of weapon 
+       * \param y -> y position of weapon
+       * \param z -> z position of weapon */
+      void playMainAttackSound(float x, float y, float z);
+
    protected:
       wInfo* munitionType;    /**< Weapon Munition Type (ex: 9mm) */
       int munitionCapacity;   /**< Weapon Max Munition */

@@ -155,6 +155,12 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
              (featNumber == FEAT_MELEE_ATTACK) )
          {
             flushCurrentMunition();
+            /* Do the sound realted to the weapon, if one */
+            if(currentWeapon)
+            {
+               currentWeapon->playMainAttackSound(actor.xPosition, 
+                  actor.yPosition, actor.zPosition);
+            }
          }
 
          /* Yes, used the feat! */
