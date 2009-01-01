@@ -582,9 +582,11 @@ int engine::loadMap(string arqMapa, bool loadingGame)
    glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
    glDisable(GL_LIGHTING);
 
-   /* Load the loading image */
-   //TODO: randomize loading picture.
-   fig = IMG_Load(dir.getRealFile("comics/loading/loading1.png").c_str());
+   /* Load the random loading image */
+   srand(SDL_GetTicks() + (int)(1 + 1000 * (rand() / (RAND_MAX + 1.0))));
+   int loadNumber = 1+(int)(ENGINE_LOADING_IMAGES * (rand()/(RAND_MAX + 1.0)));
+   sprintf(texto,"comics/loading/loading%d.png",loadNumber);
+   fig = IMG_Load(dir.getRealFile(texto).c_str());
    if(!fig)
    {
       cerr << "Faled to load 'loading texture'!" << endl;
