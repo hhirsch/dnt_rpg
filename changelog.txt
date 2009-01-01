@@ -9,9 +9,11 @@
  - Balanced Barter Imposition Tests;
  - Ammo for Weapons;
  - Cancel Barter when the character is far;
- - Fix bug when loading game with inventory window opened;
- - Fix bug that let you use itens without attack actions;
- - Fix to PC orientation angle after load a game;
+ - Fixed bug when loading game with inventory window opened;
+ - Fixed bug that let you use itens without attack actions;
+ - Fixed bug at PC orientation angle after loading a game;
+ - Using weapon sound effect (if exists) when using it to attack;
+ - Fixed Save Files to save Character Experience points (forgot!);
 
 Working on:
  - Weather effects;

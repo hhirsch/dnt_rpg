@@ -739,6 +739,10 @@ bool character::save(string saveFile)
    file << "sex = " << sexType << endl;
    /* Age */
    file << "age = " << age << endl;
+   /* Experience Points */
+   file << "xp = " << xp << endl;
+   /* Up Levels */
+   file << "upLevels = " << upLevels << endl;
    /* Inventory File */
    if(!inventoryFile.empty())
    {
@@ -937,6 +941,15 @@ character* characterList::insertCharacter(string file, featsList* ft,
          {
             cerr << "Error: class overflow for: " << file << endl;
          }
+      }
+      /* Experience Points */
+      else if(key == "xp")
+      {
+         sscanf(value.c_str(),"%d", &novo->xp);
+      }
+      else if(key == "upLevels")
+      {
+         sscanf(value.c_str(),"%d", &novo->upLevels);
       }
       /* Inventory Population */
       else if(key == "inventory")
