@@ -14,6 +14,8 @@
  - Fixed bug at PC orientation angle after loading a game;
  - Using weapon sound effect (if exists) when using it to attack;
  - Fixed Save Files to save Character Experience points (forgot!);
+ - Fixed a bug of lost object when trying to equip a weapon by "using it" 
+   when already have another weapon eqquiped;
 
 Working on:
  - Weather effects;

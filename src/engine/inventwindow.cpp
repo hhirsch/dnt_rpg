@@ -226,15 +226,11 @@ void inventWindow::verifyUseObject()
       /* Equip an weapon (if possible) */
       if(activeObject->getType() == OBJECT_TYPE_WEAPON)
       {
-         /* Equip Weapon */
-         inventories->removeFromInventory(objX,objY, 
-               currentInventory);
-         if(!inventories->equipObject(activeObject, 
-                  INVENTORY_RIGHT_HAND))
+         /* Equip Weapon */         
+         if(inventories->equipObject(activeObject, INVENTORY_RIGHT_HAND))
          {
-            /* Can't equip the weapon, so back on inventory */
-            inventories->addObject(activeObject,
-                  objX,objY,currentInventory);
+            /* Equipped, so must remove from inventory */
+            inventories->removeFromInventory(objX,objY, currentInventory);
          }
          activeObject = NULL;
          reDraw();
