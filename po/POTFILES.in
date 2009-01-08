@@ -240,6 +240,7 @@ data/models/objetos/books/combat_tutorial/combat_tutorial.dcc
 
 #objects
 data/models/objetos/itens/healkit/healkit.dcc
+data/models/objetos/itens/garrafa1/garrafa1.dcc
 data/models/objetos/geral/computador/computador.dcc
 data/models/objetos/geral/notebook/notebook.dcc
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-12-30 11:10-0200\n"
+"POT-Creation-Date: 2009-01-08 15:05-0200\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -59,7 +59,7 @@ msgstr "Dano Crítico!"
 msgid "Invalid Talent"
 msgstr "Habilidade Inválida"
 
-#: src/classes/feats.cpp:170
+#: src/classes/feats.cpp:176
 msgid "Not enought points to use!"
 msgstr "Pontos não suficientes para usar!"
 
@@ -156,8 +156,8 @@ msgstr "Carisma"
 msgid "Attribute Description"
 msgstr "Descrição do Atributo"
 
-#: src/engine/attwindow.cpp:535 src/engine/dccnit.cpp:481
-#: src/engine/inventwindow.cpp:334 src/engine/options.cpp:1032
+#: src/engine/attwindow.cpp:535 src/engine/dccnit.cpp:507
+#: src/engine/inventwindow.cpp:330 src/engine/options.cpp:1032
 msgid "Warning"
 msgstr "Aviso"
 
@@ -355,66 +355,66 @@ msgstr "Perícias da Classe"
 msgid "No Skills."
 msgstr "Sem Perícias"
 
-#: src/engine/dccnit.cpp:422 src/engine/dccnit.cpp:472
+#: src/engine/dccnit.cpp:448 src/engine/dccnit.cpp:498
 msgid "Error"
 msgstr "Erro"
 
-#: src/engine/dccnit.cpp:422
+#: src/engine/dccnit.cpp:448
 msgid "Can't load the saved game!"
 msgstr "Não consegui carregar o jogo salvo!"
 
-#: src/engine/dccnit.cpp:467
+#: src/engine/dccnit.cpp:493
 msgid "Information"
 msgstr "Informação"
 
-#: src/engine/dccnit.cpp:468
+#: src/engine/dccnit.cpp:494
 msgid "The game was saved!"
 msgstr "O jogo foi salvo!"
 
-#: src/engine/dccnit.cpp:472
+#: src/engine/dccnit.cpp:498
 msgid "Can't save game!"
 msgstr "Não consegui salvar o jogo!"
 
-#: src/engine/dccnit.cpp:482
+#: src/engine/dccnit.cpp:508
 msgid "Can't save game while fighting!"
 msgstr "Não é possível salvar o jogo durante uma batalha!"
 
-#: src/engine/dccnit.cpp:603
+#: src/engine/dccnit.cpp:631
 #, c-format
 msgid "Saving Current Map Modifications"
 msgstr "Salvando Modificações"
 
-#: src/engine/dccnit.cpp:638
+#: src/engine/dccnit.cpp:666
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Carregando Mapa: %s"
 
-#: src/engine/dccnit.cpp:701
+#: src/engine/dccnit.cpp:729
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Carregando NPC: %s"
 
-#: src/engine/dccnit.cpp:741
+#: src/engine/dccnit.cpp:769
 msgid "Creating MiniMap"
 msgstr "Criando Mini Mapa"
 
-#: src/engine/dccnit.cpp:747
+#: src/engine/dccnit.cpp:775
 msgid "Putting GUI on Screen"
 msgstr "Colocando as janelas na tela"
 
-#: src/engine/dccnit.cpp:794
+#: src/engine/dccnit.cpp:822
 msgid "Loading Particles"
 msgstr "Carregando Partículas"
 
-#: src/engine/dccnit.cpp:824
+#: src/engine/dccnit.cpp:852
 msgid "Loading Changes..."
 msgstr "Carregando Mudanças..."
 
-#: src/engine/dccnit.cpp:852
+#: src/engine/dccnit.cpp:880
 msgid "Done!"
 msgstr "Pronto!"
 
-#: src/engine/dccnit.cpp:944
+#: src/engine/dccnit.cpp:972
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -426,50 +426,50 @@ msgstr ""
 "mesmos). DccNiTghtmare agradece aos que desenvolveram as bibliotecas: "
 "OpenAL, Cal3D, OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 
-#: src/engine/dccnit.cpp:1456
+#: src/engine/dccnit.cpp:1489
 msgid "Too far away for the action!"
 msgstr "Muito distante para realizar a ação!"
 
-#: src/engine/dccnit.cpp:1501
+#: src/engine/dccnit.cpp:1534
 msgid "No NPCs in the area."
 msgstr "Sem NPCs na área."
 
-#: src/engine/dccnit.cpp:1552
+#: src/engine/dccnit.cpp:1585
 msgid "Surprise Attack Turn."
 msgstr "Turno de ataque surpresa."
 
-#: src/engine/dccnit.cpp:1566
+#: src/engine/dccnit.cpp:1599
 msgid "No enemies in the area."
 msgstr "Sem inimigos na área."
 
-#: src/engine/dccnit.cpp:1745 src/engine/dccnit.cpp:2196
+#: src/engine/dccnit.cpp:1778 src/engine/dccnit.cpp:2229
 #: src/engine/shortcutswindow.cpp:32
 msgid "Nothing"
 msgstr "Nada"
 
-#: src/engine/dccnit.cpp:1944
+#: src/engine/dccnit.cpp:1977
 #, c-format
 msgid "%s taken."
 msgstr "Pegou %s."
 
-#: src/engine/dccnit.cpp:1966
+#: src/engine/dccnit.cpp:1999
 msgid "Inventory is full!"
 msgstr "O inventário está cheio!"
 
-#: src/engine/dccnit.cpp:1998
+#: src/engine/dccnit.cpp:2031
 msgid "Door"
 msgstr "Porta"
 
-#: src/engine/dccnit.cpp:2131
+#: src/engine/dccnit.cpp:2164
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s ataca %s"
 
-#: src/engine/dccnit.cpp:2297
+#: src/engine/dccnit.cpp:2330
 msgid "No more actions. Turn ended."
 msgstr "Sem mais ações: Turno Finalizado."
 
-#: src/engine/dccnit.cpp:3767
+#: src/engine/dccnit.cpp:3800
 msgid "Exit Battle Mode"
 msgstr "Sai do Modo de Batalha"
 
@@ -541,12 +541,12 @@ msgstr "Info"
 msgid "Get"
 msgstr "Pegar"
 
-#: src/engine/inventwindow.cpp:300
+#: src/engine/inventwindow.cpp:296
 #, c-format
 msgid "%s reloaded %s with %s ammo."
 msgstr "%s carregou %s com munição %s."
 
-#: src/engine/inventwindow.cpp:335
+#: src/engine/inventwindow.cpp:331
 msgid "No equipped weapons are compatible with this munition type."
 msgstr "Nenhuma arma em uso é compatível com este tipo de munição."
 
@@ -3696,6 +3696,10 @@ msgstr "Estou esperando que você instale o Ruindows no notebook da ocupação!"
 #: data/models/objetos/itens/healkit/healkit.dcc:1
 msgid "First Aid Kit"
 msgstr "Caixa de Primeiros Socorros"
+
+#: data/models/objetos/itens/garrafa1/garrafa1.dcc:1
+msgid "Beer Bottle"
+msgstr "Garrafa de Cerveja"
 
 #: data/models/objetos/geral/computador/computador.dcc:1
 msgid "Computer"
