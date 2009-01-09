@@ -1,5 +1,6 @@
 T 6X8
 # Made by DccNiTghtmare's MapEditor, 0.3.2
+NAME gettext("Logan's Occupation")
 npc mapas/tutorial/house1.map.npc
 MUSICA music/musica12.ogg
 light mapas/tutorial/house1.map.lgh

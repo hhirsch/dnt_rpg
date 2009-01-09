@@ -3,11 +3,13 @@
  *************************************************************************/
 
 #include "map.h"
+
 #include "../engine/culling.h"
 #include "../engine/util.h"
 #include "../etc/extensions.h"
 #include "../engine/options.h"
 #include "../etc/dirs.h"
+#include "../lang/translate.h"
 
 #ifdef _MSC_VER
    #include "../config_win.h"
@@ -244,7 +246,8 @@ Map::Map()
    miniMap = NULL;
    numTextures = 0;
    textures = NULL;
-   name = "oxi!";
+   fileName = "oxi!";
+   name = "mapName";
    squareInic = NULL;
    walls = NULL;
    totalWalls = 0;
@@ -1723,15 +1726,23 @@ void Map::renderSurfaceOnMap(GLuint image, GLfloat xa, GLfloat za,
  ********************************************************************/
 string Map::getFileName()
 {
-   return(name);
+   return(fileName);
 }
 
 /********************************************************************
  *                          setFileName                             *
  ********************************************************************/
-void Map::setFileName(string fileName)
+void Map::setFileName(string fName)
 {
-   name = fileName;
+   fileName = fName;
+}
+
+/********************************************************************
+ *                            getName                               *
+ ********************************************************************/
+string Map::getName()
+{
+   return(name);
 }
 
 /********************************************************************
@@ -1745,9 +1756,9 @@ string Map::getNpcFileName()
 /********************************************************************
  *                        setNpcFileName                            *
  ********************************************************************/
-void Map::setNpcFileName(string fileName)
+void Map::setNpcFileName(string fName)
 {
-   npcFileName = fileName;
+   npcFileName = fName;
 }
 
 /********************************************************************
@@ -1761,9 +1772,9 @@ string Map::getMusicFileName()
 /********************************************************************
  *                        setMusicFileName                          *
  ********************************************************************/
-void Map::setMusicFileName(string fileName)
+void Map::setMusicFileName(string fName)
 {
-   music = fileName;
+   music = fName;
 }
 
 /********************************************************************
@@ -1777,9 +1788,9 @@ string Map::getParticlesFileName()
 /********************************************************************
  *                      setParticlesFileName                        *
  ********************************************************************/
-void Map::setParticlesFileName(string fileName)
+void Map::setParticlesFileName(string fName)
 {
-   particlesFileName = fileName;
+   particlesFileName = fName;
 }
 
 /********************************************************************
@@ -1793,9 +1804,9 @@ string Map::getSoundsFileName()
 /********************************************************************
  *                      setSoundsFileName                           *
  ********************************************************************/
-void Map::setSoundsFileName(string fileName)
+void Map::setSoundsFileName(string fName)
 {
-   soundsFileName = fileName;
+   soundsFileName = fName;
 }
 
 /********************************************************************
@@ -1891,8 +1902,8 @@ int Map::open(string arquivo)
    }
 
    /* Define map file Name */
-   arqVelho = name;
-   name = arquivo;
+   arqVelho = fileName;
+   fileName = arquivo;
 
    xInic = -1;
 
@@ -1968,11 +1979,18 @@ int Map::open(string arquivo)
             particlesFileName = nome;
             break;
          }
-         case 'n':
+         case 'n':/* npcs file */
          {
             fgets(buffer, sizeof(buffer),arq);
             sscanf(buffer,"%s",nome);
             npcFileName = nome;
+            break;
+         }
+         case 'N':/* the map's Name */
+         {
+            fgets(buffer, sizeof(buffer),arq);
+            sscanf(buffer,"%s",nome);
+            name = translateDataString(nome);
             break;
          }
          case 'd': /* Define Doors */
@@ -1990,7 +2008,7 @@ int Map::open(string arquivo)
             if(doorAux->obj == NULL)
             {
                /* Not found on list, so insert it! */
-               doorAux->obj = createObject(nome, name);
+               doorAux->obj = createObject(nome, fileName);
                doorAux->obj->xPosition = doorAux->x;
                doorAux->obj->yPosition = 0;
                doorAux->obj->zPosition = doorAux->z;
@@ -2221,7 +2239,7 @@ int Map::open(string arquivo)
                   if(obj == NULL)
                   {
                      /* Insert it */
-                     obj = createObject(nome, name);
+                     obj = createObject(nome, fileName);
                      /* set the object position */
                      obj->xPosition = oX;
                      obj->yPosition = oY;
@@ -2483,6 +2501,9 @@ int Map::save(string arquivo)
    /* Write Dimensions */
    fprintf(arq,"T %dX%d\n",x,z);
    fprintf(arq,"# Made by DccNiTghtmare's MapEditor, %s\n", VERSION);
+
+   /* Write Map's name */
+   fprintf(arq,"NAME gettext(\"%s\")\n", name.c_str());
 
    /* Write fog file name, if exists */
    if( !fog.fileName.empty() )

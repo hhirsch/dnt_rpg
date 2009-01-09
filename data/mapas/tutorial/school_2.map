@@ -1,5 +1,6 @@
 T 5X4
 # Made by DccNiTghtmare's MapEditor, 0.3
+NAME gettext("Bunker School Subterranean")
 npc mapas/tutorial/school_2.map.npc
 MUSICA music/musica7.ogg
 light mapas/tutorial/school_2.map.lgh

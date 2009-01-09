@@ -1,5 +1,6 @@
 T 25X25
 # Made by DccNiTghtmare's MapEditor, 0.3
+NAME gettext("Tyrol Neighborhood")
 npc mapas/tutorial/tyrol.map.npc
 PS mapas/tutorial/tyrol.map.par
 MUSICA music/musica13.ogg

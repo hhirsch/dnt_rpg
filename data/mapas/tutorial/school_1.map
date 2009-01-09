@@ -1,5 +1,6 @@
 T 5X6
 # Made by DccNiTghtmare's MapEditor, 0.3
+NAME gettext("Bunker School")
 MUSICA music/musica9.ogg
 light mapas/tutorial/school_1.map.lgh
 Outdoor: 0

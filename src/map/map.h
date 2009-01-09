@@ -370,36 +370,39 @@ class Map
        * \return map fileName */
       string getFileName();
       /*! Set Map File Name
-       * \param fileName -> New fileName */
-      void setFileName(string fileName);
+       * \param fName -> New fileName */
+      void setFileName(string fName);
+      /*! Get the Map Name
+       * \return -> string with the map's name */
+      string getName();
 
       /*! Get NPC File Name
        * \return NPC fileName */
       string getNpcFileName();
       /*! Set NPC File Name
-       * \param fileName -> New fileName */
-      void setNpcFileName(string fileName);
+       * \param fName -> New fileName */
+      void setNpcFileName(string fName);
 
       /*! Get Music File Name
        * \return music fileName */
       string getMusicFileName();
       /*! Set Music File Name
-       * \param fileName -> New fileName */
-      void setMusicFileName(string fileName);
+       * \param fName -> New fileName */
+      void setMusicFileName(string fName);
 
       /*! Get Sounds File Name
        * \return sounds fileName */
       string getSoundsFileName();
       /*! Set Sounds File Name
-       * \param fileName -> New fileName */
-      void setSoundsFileName(string fileName);
+       * \param fName -> New fileName */
+      void setSoundsFileName(string fName);
 
       /*! Get Particles File Name
        * \return particles fileName */
       string getParticlesFileName();
       /*! Set Particles File Name
-       * \param fileName -> New fileName */
-      void setParticlesFileName(string fileName);
+       * \param fName -> New fileName */
+      void setParticlesFileName(string fName);
 
 
       /*! Get Map Size X
@@ -594,7 +597,8 @@ class Map
       bool outdoor;         /**< If it's an outdoor or indoor map */
       Square** MapSquares;  /**< Internal Map squares */
       string music;         /**< Map Music */
-      string name;          /**< File name of loaded map */
+      string fileName;      /**< File name of loaded map */
+      string name;          /**< The name of the map */
 
       string particlesFileName; /**< File Name of Map Particles Systens */
       string npcFileName;       /**< Static NPC's on map filename */
