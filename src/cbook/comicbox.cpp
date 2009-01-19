@@ -138,6 +138,7 @@ void comicBox::skip()
 
    angle[0] = 0.0;
    angle[1] = 0.0;
+   angle[2] = 0.0;
 
    status = COMIC_BOX_STATUS_DONE;
 }
@@ -169,6 +170,7 @@ void comicBox::activate()
    pos[1] = 0;
    angle[0] = 0;
    angle[1] = 0;
+   angle[2] = 0;
    scale[0] = 1.0;
    scale[1] = 1.0;
 
@@ -179,6 +181,12 @@ void comicBox::activate()
       case COMIC_BOX_EFFECT_SCALE:
          scale[0] = 0.0;
          scale[1] = 0.0;
+      break;
+      /* Rotate/Scale-in Effect */
+      case COMIC_BOX_EFFECT_ROTATE:
+         scale[0] = 0.2;
+         scale[1] = 0.2;
+         angle[2] = 0.0;
       break;
       /* No Effect */
       case COMIC_BOX_EFFECT_NONE:
@@ -210,6 +218,26 @@ void comicBox::update()
             effectType = COMIC_BOX_EFFECT_NONE;
          }
       break;
+      /* Rotate Scale-in Effect */
+      case COMIC_BOX_EFFECT_ROTATE:
+      {
+         angle[2] += 20;
+         scale[0] += 0.1;
+         scale[1] += 0.1;
+         if( (scale[0] >= 1.0) || (scale[1] >= 1.0) )
+         {
+            scale[0] = 1.0;
+            scale[1] = 1.0;
+         }
+         if(angle[2] >= 360)
+         {
+            angle[2] = 0;
+            /* Put the effect state at NONE, to count timeout */
+            timer = SDL_GetTicks(); 
+            effectType = COMIC_BOX_EFFECT_NONE;
+         }
+      }
+      break;
       /* No Effect */
       case COMIC_BOX_EFFECT_NONE:
       default:
@@ -238,6 +266,7 @@ void comicBox::render()
       glTranslatef(center[0], center[1], 0.0);
       glRotatef(angle[0],1,0,0);
       glRotatef(angle[1],0,1,0);
+      glRotatef(angle[2],0,0,1);
       glScalef(scale[0],scale[1],1.0);
       glBegin(GL_QUADS);
          glTexCoord2fv(texCoord[0]);

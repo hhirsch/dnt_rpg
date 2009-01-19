@@ -18,6 +18,7 @@ using namespace std;
 /* Effects */
 #define COMIC_BOX_EFFECT_NONE      0  /**< No Effect */
 #define COMIC_BOX_EFFECT_SCALE     1  /**< Scale the Box to the size effect */
+#define COMIC_BOX_EFFECT_ROTATE    2  /**< Rotate the Box scalling effect */
 
 /*! The comic box is a quad of the comic page, with its show effect,
  * sound and page position */
@@ -91,7 +92,7 @@ class comicBox
       GLfloat center[2];       /**< The center Coordinates */
 
       GLfloat pos[2];        /**< Current Translation */
-      GLfloat angle[2];      /**< Current Rotation */
+      GLfloat angle[3];      /**< Current Rotation */
       GLfloat scale[2];      /**< Current Scale (without scale Factor) */
 
       int effectType;        /**< The effect type */
