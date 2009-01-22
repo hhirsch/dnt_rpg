@@ -1,0 +1,103 @@
+T 5X6
+# Made by DccNiTghtmare's MapEditor, 0.4
+NAME gettext("mapName")
+Outdoor: 0
+t texturas/floor_indoor/burl.png texturas/floor_indoor/burl.png 169 94 57
+t texturas/floor_indoor/wood7.png texturas/floor_indoor/wood7.png 192 98 26
+wall 10.000,121.505,310.000,131.505
+wtf 64,64,64 texturas/floor_indoor/wood7.png
+wtb 64,64,64 texturas/floor_indoor/wood7.png
+wtr 64,64,64 texturas/floor_indoor/wood7.png
+wtl 64,64,64 texturas/floor_indoor/wood7.png
+wall 10.000,0.000,310.000,10.000
+wtf 16,16,16 texturas/floor_indoor/burl.png
+wtb 64,64,64 texturas/floor_indoor/wood7.png
+wtr 16,16,16 texturas/floor_indoor/burl.png
+wtl 16,16,16 texturas/floor_indoor/burl.png
+wall 0.000,0.000,10.000,384.000
+wtf 16,16,16 texturas/floor_indoor/burl.png
+wtb 16,16,16 texturas/floor_indoor/burl.png
+wtr 64,64,64 texturas/floor_indoor/wood7.png
+wtl 16,16,16 texturas/floor_indoor/burl.png
+wall 310.000,0.000,320.000,384.000
+wtf 16,16,16 texturas/floor_indoor/burl.png
+wtb 16,16,16 texturas/floor_indoor/burl.png
+wtr 16,16,16 texturas/floor_indoor/burl.png
+wtl 64,64,64 texturas/floor_indoor/wood7.png
+wall 10.000,374.000,310.000,384.000
+wtf 64,64,64 texturas/floor_indoor/wood7.png
+wtb 16,16,16 texturas/floor_indoor/burl.png
+wtr 16,16,16 texturas/floor_indoor/burl.png
+wtl 16,16,16 texturas/floor_indoor/burl.png
+wall 192.000,128.000,202.000,374.000
+wtf 64,64,64 texturas/floor_indoor/wood7.png
+wtb 64,64,64 texturas/floor_indoor/wood7.png
+wtr 64,64,64 texturas/floor_indoor/wood7.png
+wtl 64,64,64 texturas/floor_indoor/wood7.png
+#Z: 0
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+#Z: 1
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+#Z: 2
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+#Z: 3
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+#Z: 4
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+#Z: 5
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_indoor/wood7.png
+i 160.000,192.000
