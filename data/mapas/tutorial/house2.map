@@ -81,6 +81,7 @@ ut texturas/floor_indoor/wood7.png
 #Z: 4
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood7.png
+uo models/objetos/geral/calendar/calendar.dcc 1:1,5:18.694,38.900,308.650:-89.000:0
 uo models/objetos/geral/tv_hack/tv_hack.dcc 0:1,6:18.239,0.000,329.702:-271.000:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood7.png
@@ -96,14 +97,15 @@ uo models/objetos/geral/cama/cama.dcc 1:5,5:285.237,0.000,314.211:0.000:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood7.png
 uo models/objetos/geral/tv_hack/tv_hack.dcc 1:1,6:18.239,0.000,329.702:-271.000:0
+uo models/objetos/icex/lixo/lixo.dcc 1:1,6:13.142,0.000,368.895:0.000:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood7.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood7.png
-uo models/objetos/geral/sofa2/sofa2.dcc 1:3,6:164.397,0.000,364.831:0.000:0
+uo models/objetos/geral/sofa2/sofa2.dcc 1:3,5:164.397,0.000,364.831:0.000:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood7.png
-uo models/objetos/geral/sofa2/sofa2.dcc 0:3,6:164.397,0.000,364.831:0.000:0
+uo models/objetos/geral/sofa2/sofa2.dcc 0:3,5:164.397,0.000,364.831:0.000:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood7.png
 uo models/objetos/geral/cama/cama.dcc 0:5,5:285.237,0.000,314.211:0.000:0
