@@ -34,7 +34,7 @@
 
 #define ENGINE_WAIT_DIE_DELAY  4000 /**< Value to delay for end die animation */
 
-#define ENGINE_LOADING_IMAGES  2 /**< Total available loading images */
+#define ENGINE_LOADING_IMAGES  4 /**< Total available loading images */
 
 #define DNT_TO_METER   0.5f /**< Constant to multiply to convert meter to DNT.*/
 #define METER_TO_DNT   1.0f / DNT_TO_METER /**< Constant to DNT to Meter value*/
