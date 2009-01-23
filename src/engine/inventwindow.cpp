@@ -678,6 +678,17 @@ int inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                                                    X,
                                                    actualMap->getHeight(X,Z),
                                                    Z);
+                     /* Save its state (to avoid, for example, ammo reload
+                      * after dropping-leaving-return to the map) */
+                     modifState.mapObjectAddAction(
+                                            MODSTATE_ACTION_OBJECT_CHANGE_STATE,
+                                            activeObject->getFileName(),
+                                            actualMap->getFileName(),
+                                            X,
+                                            actualMap->getHeight(X,Z),
+                                            Z,
+                                            activeObject->getState());
+
                      /* Return to the NONE state */
                      activeObject = NULL;
                      state = INVENTORY_STATE_NONE;

@@ -1131,6 +1131,7 @@ bool modMap::removeInverseObjectAction(int action, string target,
                                        string mapFileName, 
                                        GLfloat xPos, GLfloat yPos, GLfloat zPos)
 {
+   modAction* tmp;
 
    if( (action != MODSTATE_ACTION_OBJECT_REMOVE) && 
        (action != MODSTATE_ACTION_OBJECT_ADD) )
@@ -1139,7 +1140,22 @@ bool modMap::removeInverseObjectAction(int action, string target,
       return(false);
    }
 
-   modAction* tmp = search(!action, target, xPos, yPos, zPos);
+   /* If is an remove action, we must verify if no change state actions 
+    * related to the object exists. if one exist, we must remove it,
+    * to avoid Unknow Object to change at modState errors. */
+   if(action == MODSTATE_ACTION_OBJECT_REMOVE)
+   {
+      tmp = search(MODSTATE_ACTION_OBJECT_CHANGE_STATE, target, 
+                   xPos, yPos, zPos);
+      if(tmp != NULL)
+      {
+         //cerr << "DEBUG: found the change state, so removing it!" << endl;
+         removeAction(tmp);
+      }
+   }
+
+   /* Search for the inverse action (remove is the inverse of add) */
+   tmp = search(!action, target, xPos, yPos, zPos);
    if(tmp != NULL)
    {
       /* Found the Inverse, so remove it */
