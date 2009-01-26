@@ -368,9 +368,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="373.90434"
-     inkscape:cy="758.92589"
+     inkscape:zoom="0.7"
+     inkscape:cx="568.11196"
+     inkscape:cy="733.94557"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -617,7 +617,7 @@
     </g>
     <g
        id="g4243"
-       transform="translate(108,0)"
+       transform="translate(131.23351,-17.776644)"
        inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/loading/loading4.png"
        inkscape:export-xdpi="62.249268"
        inkscape:export-ydpi="62.249268">
@@ -639,7 +639,7 @@
     </g>
     <g
        id="g2668"
-       transform="translate(379.63312,2.3595006)"
+       transform="matrix(1.2443142,0,0,1.2443142,420.33883,-65.949478)"
        inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/loading/loading4.png"
        inkscape:export-xdpi="62.249268"
        inkscape:export-ydpi="62.249268">
@@ -823,7 +823,7 @@
     </g>
     <g
        id="g3449"
-       transform="matrix(-1,0,0,1,-14.143453,13.214286)"
+       transform="matrix(-1.2443142,0,0,1.2443142,-69.642699,-52.442719)"
        inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/loading/loading4.png"
        inkscape:export-xdpi="62.249268"
        inkscape:export-ydpi="62.249268">
@@ -954,7 +954,7 @@
     </g>
     <g
        id="g5274"
-       transform="translate(-3.0304576,1.0101525)"
+       transform="translate(-20.203051,-24.847711)"
        inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/loading/loading4.png"
        inkscape:export-xdpi="62.249268"
        inkscape:export-ydpi="62.249268">
@@ -979,7 +979,7 @@
     </g>
     <g
        id="g5429"
-       transform="translate(-646,-4)"
+       transform="matrix(1.2443142,0,0,1.2443142,-855.87044,-73.862683)"
        inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/loading/loading4.png"
        inkscape:export-xdpi="62.249268"
        inkscape:export-ydpi="62.249268">
@@ -1123,7 +1123,7 @@
     </g>
     <g
        id="g4369"
-       transform="translate(-240.15301,10.469182)"
+       transform="translate(-231.06164,-4.2770043)"
        inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/loading/loading4.png"
        inkscape:export-xdpi="62.249268"
        inkscape:export-ydpi="62.249268">
@@ -1148,7 +1148,7 @@
     </g>
     <g
        id="g5291"
-       transform="translate(-6.5659915,12.626907)"
+       transform="translate(29.7995,-21.312178)"
        inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/loading/loading4.png"
        inkscape:export-xdpi="62.249268"
        inkscape:export-ydpi="62.249268">
@@ -1176,10 +1176,11 @@
        id="g5306"
        inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/loading/loading4.png"
        inkscape:export-xdpi="62.249268"
-       inkscape:export-ydpi="62.249268">
+       inkscape:export-ydpi="62.249268"
+       transform="translate(21.213204,-32.928932)">
       <path
          id="path5301"
-         d="M 499.96875 150.375 C 494.47633 150.71686 488.97511 150.94274 483.49175 151.4134 C 478.89806 151.85022 474.30206 152.33738 469.7726 153.24039 C 466.27875 153.91331 462.80579 154.7508 459.46756 155.9962 C 457.15207 156.84243 454.73484 157.76913 453 159.59375 C 452.38281 160.27394 451.78451 161.12251 451.96875 162.08906 C 452.19749 163.67919 453.60105 164.71134 454.87095 165.50879 C 457.37726 167.00066 460.17886 167.89943 462.96725 168.7044 C 466.24481 169.58244 469.58172 170.2157 472.875 171.03125 C 474.02147 171.15054 475.19856 171.78179 475.613 172.91351 C 476.86133 175.25254 476.84086 177.9943 476.56878 180.5621 C 476.57145 180.96237 476.31056 182.36051 476.6875 181.34375 C 477.45834 180.08568 478.79588 179.34093 479.6875 178.1875 C 480.4039 177.05514 480.50612 175.58132 480 174.34375 C 479.61272 173.46948 480.05587 172.2352 481.05669 172.07356 C 482.08591 172.01346 483.11049 172.2475 484.14548 172.2706 C 492.22051 172.95191 500.32811 173.32509 508.43264 173.17963 C 515.78959 172.87616 523.13855 172.33395 530.45605 171.51337 C 535.88908 170.84248 541.27437 169.7308 546.5 168.09375 C 548.23088 167.5275 549.97521 166.96228 551.55455 166.03676 C 552.71591 165.32849 553.85221 164.56207 554.84375 163.625 C 555.62734 162.56047 555.69601 160.9266 554.72672 159.95331 C 553.08082 157.93964 550.54487 157.03351 548.21875 156.0625 C 545.22062 154.90975 542.0657 154.25467 538.94538 153.52852 C 534.3265 152.61347 529.67463 151.82694 524.97403 151.48538 C 519.53371 151.02552 514.08578 150.64211 508.6272 150.49202 C 505.74197 150.39688 502.85573 150.30087 499.96875 150.375 z "
+         d="M 499.96875,150.375 C 494.47633,150.71686 488.97511,150.94274 483.49175,151.4134 C 478.89806,151.85022 474.30206,152.33738 469.7726,153.24039 C 466.27875,153.91331 462.80579,154.7508 459.46756,155.9962 C 457.15207,156.84243 454.73484,157.76913 453,159.59375 C 452.38281,160.27394 451.78451,161.12251 451.96875,162.08906 C 452.19749,163.67919 453.60105,164.71134 454.87095,165.50879 C 457.37726,167.00066 460.17886,167.89943 462.96725,168.7044 C 466.24481,169.58244 469.58172,170.2157 472.875,171.03125 C 474.02147,171.15054 475.19856,171.78179 475.613,172.91351 C 476.86133,175.25254 476.84086,177.9943 476.56878,180.5621 C 476.57145,180.96237 476.31056,182.36051 476.6875,181.34375 C 477.45834,180.08568 478.79588,179.34093 479.6875,178.1875 C 480.4039,177.05514 480.50612,175.58132 480,174.34375 C 479.61272,173.46948 480.05587,172.2352 481.05669,172.07356 C 482.08591,172.01346 483.11049,172.2475 484.14548,172.2706 C 492.22051,172.95191 500.32811,173.32509 508.43264,173.17963 C 515.78959,172.87616 523.13855,172.33395 530.45605,171.51337 C 535.88908,170.84248 541.27437,169.7308 546.5,168.09375 C 548.23088,167.5275 549.97521,166.96228 551.55455,166.03676 C 552.71591,165.32849 553.85221,164.56207 554.84375,163.625 C 555.62734,162.56047 555.69601,160.9266 554.72672,159.95331 C 553.08082,157.93964 550.54487,157.03351 548.21875,156.0625 C 545.22062,154.90975 542.0657,154.25467 538.94538,153.52852 C 534.3265,152.61347 529.67463,151.82694 524.97403,151.48538 C 519.53371,151.02552 514.08578,150.64211 508.6272,150.49202 C 505.74197,150.39688 502.85573,150.30087 499.96875,150.375 z"
          style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1"
          transform="translate(-2.7779195,-0.5050763)" />
       <text
@@ -1195,7 +1196,7 @@
     </g>
     <g
        id="g5332"
-       transform="translate(-422,0)"
+       transform="matrix(1.2443142,0,0,1.2443142,-577.14417,-68.885434)"
        inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/loading/loading4.png"
        inkscape:export-xdpi="62.249268"
        inkscape:export-ydpi="62.249268">
@@ -1326,7 +1327,7 @@
     </g>
     <g
        id="g5372"
-       transform="translate(-358.60415,0.5050763)"
+       transform="matrix(1.2443142,0,0,1.2443142,-498.25991,-68.256954)"
        inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/loading/loading4.png"
        inkscape:export-xdpi="62.249268"
        inkscape:export-ydpi="62.249268">
