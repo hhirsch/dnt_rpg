@@ -1,0 +1,3 @@
+area = Tyrol
+description = gettext("Find Chrono Trigger cartdrige for Logan.")
+script = missions/tutorial/mission1.dsl

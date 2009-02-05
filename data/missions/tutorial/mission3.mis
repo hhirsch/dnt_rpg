@@ -1,0 +1,3 @@
+area = Tyrol
+description = gettext("Install Ruindows at the occupation's notebook for Santa Claws.")
+script = missions/tutorial/mission3.dsl

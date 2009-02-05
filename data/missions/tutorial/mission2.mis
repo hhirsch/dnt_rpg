@@ -1,0 +1,3 @@
+area = Tyrol
+description = gettext("Exterminate all living Creatures at Bunker School.")
+script = missions/tutorial/mission2.dsl
