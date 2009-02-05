@@ -19,9 +19,13 @@ class mission: public iaScript
 {
    public:
       /*! Constructor
-       * \param scriptFile -> fileName of the script
-       * \param usedEngine -> the pointer to the engine used */
-      mission(string scriptFile, void* usedEngine);
+       * \param missionFile -> fileName of the mission's definition
+       *                       or of the mission's script file
+       * \param usedEngine -> the pointer to the engine used
+       * \param loadDefinition -> true if is to load the definition file
+       *                          false if the missionFile is already 
+       *                          the script itself. */
+      mission(string missionFile, void* usedEngine, bool loadDefinition);
 
       /*! Destructor */
       ~mission();
@@ -49,6 +53,22 @@ class mission: public iaScript
        * \param xp -> new xp value */
       void setXp(int xp);
 
+      /*! Get the mission's description
+       * \return -> translated mission description string */
+      string getDescription();
+
+      /*! Set the mission's description
+       * \param desc -> translated mission description string */
+      void setDescription(string desc);
+
+      /*! Get the Area where the mission occurs
+       * \return -> Area Name */
+      string getArea();
+
+      /*! Set the Area where the mission occurs
+       * \param a -> Area Name */
+      void setArea(string a);
+
       /*! Save the current mission status to a file
        * \param file -> pointer to the file to use
        * \note -> this function will save all the stack and script 
@@ -73,6 +93,9 @@ class mission: public iaScript
    protected:
       mission* next;    /**< Next mission list */
       mission* previous;/**< Previous mission on list */
+
+      string area;        /**< Area where mission occurs (ex: Tyrol) */
+      string description; /**< Mission's Description */
 
       int xpValue;      /**< XP received on complete the mission */
 
@@ -99,8 +122,8 @@ class missionsController
       void finish();
 
       /*! A a new mission to the current list
-       * \param scriptFile -> fileName of the script */
-      void addNewMission(string scriptFile);
+       * \param missionFile -> fileName of the definition's file */
+      void addNewMission(string missionFile);
 
       /*! Complete the mission (remove from current and put at completed)
        * \param m -> mission completed.

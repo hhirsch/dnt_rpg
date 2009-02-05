@@ -4,6 +4,7 @@
 #include "../sound/sound.h"
 #include "../etc/dirs.h"
 #include "../etc/message3d.h"
+#include "../lang/translate.h"
 
 #define MISSION_TOKEN_CURRENT_MISSION    "currentMission"
 #define MISSION_TOKEN_XP_VALUE           "xpValue"
@@ -25,10 +26,39 @@
 /************************************************************
  *                        Constructor                       *
  ************************************************************/
-mission::mission(string scriptFile, void* usedEngine):
-         iaScript(scriptFile, usedEngine)
+mission::mission(string missionFile, void* usedEngine, 
+                 bool loadDefinition):
+         iaScript(usedEngine)
 {
    int i;
+   defParser def;
+   string key, value;
+
+   /* Read the information from the definition's file */
+   if(loadDefinition)
+   {
+      def.load(missionFile);
+      while(def.getNextTuple(key, value))
+      {
+         if(key == "script")
+         {
+            fileName = value;
+         }
+         else if(key == "area")
+         {
+            area = value;
+         }
+         else if(key == "description")
+         {
+            description = translateDataString(value);
+         }
+      }
+   }
+
+   /* Call the init for the iaScript! */
+   init();
+
+   /* Ddefine Mission Related things */
    next = NULL;
    previous = NULL;
    type = IASCRIPT_TYPE_MISSION;
@@ -92,6 +122,38 @@ int mission::getXp()
 void mission::setXp(int xp)
 {
    xpValue = xp;
+}
+
+/************************************************************
+ *                        getDescription                    *
+ ************************************************************/
+string mission::getDescription()
+{
+   return(description);
+}
+
+/************************************************************
+ *                        setDescription                    *
+ ************************************************************/
+void mission::setDescription(string desc)
+{
+   description = desc;
+}
+
+/************************************************************
+ *                        getArea                           *
+ ************************************************************/
+string mission::getArea()
+{
+   return(area);
+}
+
+/************************************************************
+ *                        setArea                           *
+ ************************************************************/
+void mission::setArea(string a)
+{
+   area = a;
 }
 
 /************************************************************
@@ -332,9 +394,9 @@ void missionsController::finish()
 /************************************************************
  *                       addNewMission                      *
  ************************************************************/
-void missionsController::addNewMission(string scriptFile)
+void missionsController::addNewMission(string missionFile)
 {
-   mission* m = new mission(scriptFile, pEngine);
+   mission* m = new mission(missionFile, pEngine, true);
 
    addCurrent(m);
 }
@@ -625,7 +687,7 @@ bool missionsController::load(string fName)
       if(key == MISSION_TOKEN_CURRENT_MISSION)
       {
          /* Create the new mission */
-         m = new mission(value, pEngine);
+         m = new mission(value, pEngine, false);
 
          /* Insert as current */
          addCurrent(m);
@@ -636,7 +698,7 @@ bool missionsController::load(string fName)
       else if(key == MISSION_TOKEN_COMPLETED_MISSION)
       {
          /* Create new mission */
-         m = new mission(value, pEngine);
+         m = new mission(value, pEngine, false);
 
          /* Insert as completed */
          addCompleted(m);
