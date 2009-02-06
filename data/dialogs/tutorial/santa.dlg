@@ -94,21 +94,21 @@ dialog(5)
       option
          pre_test = align(FREE_SOFTWARE)
          text = gettext("Never! I am a Free Software Adept and will never touch this evil O.S.")
-         action = add_mission("missions/tutorial/mission3.dsl")
+         action = add_mission("missions/tutorial/mission3.mis")
          action = complete_mission("missions/tutorial/mission3.dsl", 50, 4)
          action = dialog_init(7)
          action = go_to_dialog(6)
       option
          text = gettext("For sure!")
          action = dialog_init(8)
-         action = add_mission("missions/tutorial/mission3.dsl")
+         action = add_mission("missions/tutorial/mission3.mis")
          action = receive_item("models/objetos/icex/ruindows_box/ruindows_box.dcc")
          action = finish_dialog()
       option
          text = gettext("Yes. (but inside you something is telling you to take another action)")
          action = dialog_init(8)
          action = receive_item("models/objetos/icex/ruindows_box/ruindows_box.dcc")
-         action = add_mission("missions/tutorial/mission3.dsl")
+         action = add_mission("missions/tutorial/mission3.mis")
          action = finish_dialog()
    pc_end
 end_dialog

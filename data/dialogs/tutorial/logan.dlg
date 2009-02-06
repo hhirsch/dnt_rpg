@@ -89,7 +89,7 @@ dialog(5)
          action = go_to_dialog(13)
       option
          text = gettext("Ok, I'll search for it")
-         action = add_mission("missions/tutorial/mission1.dsl")
+         action = add_mission("missions/tutorial/mission1.mis")
          action = dialog_init(6)
          action = finish_dialog()
       option
@@ -97,7 +97,7 @@ dialog(5)
          post_test = roll(BLUFF,20)
          # The bluff Worked!
          if_action = dialog_init(9)
-         if_action = add_mission("missions/tutorial/mission1.dsl")
+         if_action = add_mission("missions/tutorial/mission1.mis")
          if_action = complete_mission("missions/tutorial/mission1.dsl", 200, 1)
          if_action = go_to_dialog(11)
          # The bluff failed!
@@ -171,14 +171,14 @@ dialog(9)
    pc_begin
       option 
          text = gettext("Let's see what I can do.")
-         action = add_mission("missions/tutorial/mission2.dsl")
+         action = add_mission("missions/tutorial/mission2.mis")
          action = dialog_init(14)
          action = finish_dialog()
       option
          pre_test = roll(KNOWLEDGE_GENERAL, 12) 
          pre_test = all_alive("mapas/tutorial/school_2.map.npc")
          text = gettext("Hey, have you heard about the Vermin Extermination Services of S.C.O.U.R.G.E ?")
-         action = add_mission("missions/tutorial/mission2.dsl")
+         action = add_mission("missions/tutorial/mission2.mis")
          action = complete_mission("missions/tutorial/mission2.dsl", 300, 1)
          action = kill_all("mapas/tutorial/school_2.map.npc")
          action = dialog_init(16)
@@ -222,7 +222,7 @@ dialog(12)
    pc_begin
       option
          text = gettext("Ok, I'll look for it.")
-         action = add_mission("missions/tutorial/mission1.dsl")
+         action = add_mission("missions/tutorial/mission1.mis")
          action = dialog_init(6)
          action = finish_dialog()
    pc_end
@@ -237,7 +237,7 @@ dialog(13)
    pc_begin
       option
          text = gettext("Ok, I'll look for it.")
-         action = add_mission("missions/tutorial/mission1.dsl")
+         action = add_mission("missions/tutorial/mission1.mis")
          action = dialog_init(6)
          action = finish_dialog()
    pc_end
