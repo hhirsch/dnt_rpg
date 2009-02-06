@@ -9,6 +9,8 @@
 #define MISSION_TOKEN_CURRENT_MISSION    "currentMission"
 #define MISSION_TOKEN_XP_VALUE           "xpValue"
 #define MISSION_TOKEN_TEMP_FLAG          "tempFlag"
+#define MISSION_TOKEN_DESCRIPTION        "description"
+#define MISSION_TOKEN_AREA               "area"
 
 #define MISSION_TOKEN_END_MISSION        "endMission"
 
@@ -34,6 +36,10 @@ mission::mission(string missionFile, void* usedEngine,
    defParser def;
    string key, value;
 
+   /* Clear Values */
+   description = "";
+   area = "";
+
    /* Read the information from the definition's file */
    if(loadDefinition)
    {
@@ -44,11 +50,11 @@ mission::mission(string missionFile, void* usedEngine,
          {
             fileName = value;
          }
-         else if(key == "area")
+         else if(key == MISSION_TOKEN_DESCRIPTION)
          {
             area = value;
          }
-         else if(key == "description")
+         else if(key == MISSION_TOKEN_AREA)
          {
             description = translateDataString(value);
          }
@@ -167,6 +173,12 @@ void mission::saveAsCompleted(ofstream* file)
    /* Completed mission things */
    *file << MISSION_TOKEN_COMPLETED << " = " << completed << endl;
 
+   /* Save Description */
+   *file << MISSION_TOKEN_DESCRIPTION << " = " << description << endl;
+
+   /* Save area Info */
+   *file << MISSION_TOKEN_AREA << " = " << area << endl;
+
    /* Mark End */
    *file << MISSION_TOKEN_END_MISSION << " = " << fileName << endl;
 }
@@ -194,6 +206,16 @@ void mission::loadAsCompleted(defParser* def)
          /* Get the completed state */
          sscanf(value.c_str(),"%d", &completed);
       }
+      else if(key == MISSION_TOKEN_DESCRIPTION)
+      {
+         /* Set the description */
+         description = value;
+      }
+      else if(key == MISSION_TOKEN_AREA)
+      {
+         /* Set the area */
+         area = value;
+      }
       else
       {
          cerr << "Unexpected token '" << key <<"' while loading mission: " 
@@ -220,6 +242,12 @@ void mission::saveAsCurrent(ofstream* file)
    {
       *file << MISSION_TOKEN_TEMP_FLAG << " = " << tempFlag[i] << endl;
    }
+
+   /* Save Description */
+   *file << MISSION_TOKEN_DESCRIPTION << " = " << description << endl;
+
+   /* Save area Info */
+   *file << MISSION_TOKEN_AREA << " = " << area << endl;
 
    /* Save Script Related Things */
 
@@ -289,6 +317,16 @@ void mission::loadAsCurrent(defParser* def)
                cerr << "Warning: Temporary Flags Overflow for: " << fileName 
                     << endl;
             }
+         }
+         else if(key == MISSION_TOKEN_DESCRIPTION)
+         {
+            /* Set the description */
+            description = value;
+         }
+         else if(key == MISSION_TOKEN_AREA)
+         {
+            /* Set the area */
+            area = value;
          }
          /* Actual Line */
          else if(key == MISSION_TOKEN_ACTUAL_LINE)
