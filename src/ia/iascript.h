@@ -30,6 +30,11 @@ class iaScript
 {
    public:
       /*! Constructor
+       * \param usedEngine -> the pointer to the engine used
+       * \note -> if you use this contstructor, you must define latter the
+       * script's fileName and call the init() function. */
+      iaScript(void* usedEngine);
+      /*! Constructor
        * \param scriptFile -> fileName of the script
        * \param usedEngine -> the pointer to the engine used */
       iaScript(string scriptFile, void* usedEngine);

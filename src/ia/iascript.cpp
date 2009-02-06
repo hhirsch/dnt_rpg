@@ -6,6 +6,20 @@
 /***********************************************************************
  *                           Constructor                               *
  ***********************************************************************/
+iaScript::iaScript(void* usedEngine)
+{
+   objectOwner = NULL;
+   characterOwner = NULL;
+   actualMap = NULL;
+   npcs = NULL;
+   pendAction = NULL;
+   actualEngine = usedEngine;
+   type = IASCRIPT_TYPE_DEFAULT;
+}
+
+/***********************************************************************
+ *                           Constructor                               *
+ ***********************************************************************/
 iaScript::iaScript(string scriptFile, void* usedEngine)
 {
    fileName = scriptFile;
