@@ -151,6 +151,22 @@ class missionsController
        * \return -> true if loaded. */
       bool load(string fName);
 
+      /*! Get first mission at the current missions list
+       * \return -> pointer to the first mission at the current list */
+      mission* getFirstCurrentMission();
+
+      /*! Get the next mission on the current list 
+       * \return -> pointer to the next mission or NULL */
+      mission* getNextCurrentMission();
+
+      /*! Get first mission at the completed missions list
+       * \return -> pointer to the first mission at the current list */
+      mission* getFirstCompletedMission();
+      
+      /*! Get the next mission on the completed list 
+       * \return -> pointer to the next mission or NULL */
+      mission* getNextCompletedMission();
+
    protected:
       /*! Remove misssion from current
        * \param m-> mission to remove
@@ -170,10 +186,12 @@ class missionsController
       void addCurrent(mission* m);
 
       static mission* completed;  /**< The List of Completed Missions */
-      static mission* curTreat;   /**< Pointer to the mission to treat next  */
+      static mission* curComp;    /**< Current completed navigation pointer */
       static int totalCompleted;  /**< Total number of Completed Missions */
 
       static mission* current;    /**< The list of Current Missions */
+      static mission* curCur;     /**< Current current navigation pointer */
+      static mission* curTreat;   /**< Pointer to the mission to treat next  */
       static int totalCurrent;    /**< Total number of current missions */
 
       static void* pEngine;       /**< Pointer to the current engine */

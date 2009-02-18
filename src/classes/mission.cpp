@@ -753,6 +753,61 @@ bool missionsController::load(string fName)
    return(true);
 }
 
+/************************************************************
+ *                    getFirstCurrentMission                *
+ ************************************************************/
+mission* missionsController::getFirstCurrentMission()
+{
+   curCur = current;
+   return(curCur);
+}
+
+/************************************************************
+ *                    getNextCurrentMission                 *
+ ************************************************************/
+mission* missionsController::getNextCurrentMission()
+{
+   if(curCur)
+   {
+      curCur = curCur->next;
+      if(curCur != current)
+      {
+         return(curCur);
+      }
+   }
+
+   curCur = NULL;
+   return(NULL);
+}
+
+/************************************************************
+ *                   getFirstCompletedMission               *
+ ************************************************************/
+mission* missionsController::getFirstCompletedMission()
+{
+   curComp = completed;
+   return(curComp);
+}
+
+/************************************************************
+ *                    getNextCompletedMission               *
+ ************************************************************/
+mission* missionsController::getNextCompletedMission()
+{
+   if(curComp)
+   {
+      curComp = curComp->next;
+      if(curComp != completed)
+      {
+         return(curComp);
+      }
+   }
+
+   curComp = NULL;
+   return(NULL);
+}
+
+
 /*************************************************************************
  *                            Static Members                             *
  *************************************************************************/
@@ -760,6 +815,8 @@ mission* missionsController::completed = NULL;
 mission* missionsController::curTreat = NULL;
 int missionsController::totalCompleted = 0;
 mission* missionsController::current = NULL;
+mission* missionsController::curComp = NULL;
+mission* missionsController::curCur = NULL;
 int missionsController::totalCurrent = 0;   
 void* missionsController::pEngine = NULL;
 
