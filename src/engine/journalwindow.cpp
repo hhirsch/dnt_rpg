@@ -123,6 +123,48 @@ journalArea* journalAreas::search(string title)
 }
 
 /***********************************************************************
+ *                               get                                   *
+ ***********************************************************************/
+journalArea* journalAreas::get(int num)
+{
+   int cur = 0;
+   return(get(num, (journalArea*)getRoot(), cur));
+}
+
+/***********************************************************************
+ *                               get                                   *
+ ***********************************************************************/
+journalArea* journalAreas::get(int num, journalArea* curRoot, int& cur)
+{
+   journalArea* ret = NULL;
+
+   /* Initial Condition */
+   if(curRoot == NULL)
+   {
+      return(NULL);
+   }
+
+   /* Return condition: equal indexes */
+   if(num == cur)
+   {
+      return(curRoot);
+   }
+
+   /* Call for left */
+   cur++;
+   ret = get(num, (journalArea*)curRoot->getLeft(), cur);
+
+   /* Call for right */
+   if(!ret)
+   {
+      cur++;
+      ret = get(num, (journalArea*)curRoot->getRight(), cur);
+   }
+
+   return(ret);
+}
+
+/***********************************************************************
  *                        dupplicateCell                               *
  ***********************************************************************/
 bTreeCell* journalAreas::dupplicateCell(bTreeCell* cell)
@@ -204,8 +246,78 @@ void journalWindow::close()
  ***********************************************************************/
 void journalWindow::open(guiInterface* inter)
 {
+   /* Set open position */
+   int centerY = SCREEN_Y / 2;
+   int centerX = SCREEN_X / 2;
+   dntFont fnt;
+
    /* Create (or recreate) the missions info */
    createLists();
+
+   /* Create Window */
+   internalWindow = gui->insertWindow(centerX-128, centerY-128,
+                                      centerX+128, centerY+128,
+                                      gettext("Journal"));
+   
+   missionsText = internalWindow->getObjectsList()->insertRolBar(8,20,248,230,
+                                                                 "");
+   previousButton = internalWindow->getObjectsList()->insertButton(8,231,23,249,
+                                                   fnt.createUnicode(0x25C4),0);
+   areaText = internalWindow->getObjectsList()->insertTextBox(24,231,229,248,1,
+                                                              "");
+   nextButton = internalWindow->getObjectsList()->insertButton(230,231,248,249,
+                                                   fnt.createUnicode(0x25BA),0);
+
+   /* Populate the window */
+   internalWindow->setExternPointer(&internalWindow);
+   gui->openWindow(internalWindow);
+
+   /* Load the info to the window */
+   curArea = 0;
+   showArea();
+}
+
+/***********************************************************************
+ *                             showArea                                *
+ ***********************************************************************/
+void journalWindow::showArea()
+{
+   int i;
+
+   if( (areas) && (isOpen()) )
+   {
+      /* Clear the current text */
+      missionsText->setText("");
+
+      /* Get the desired area */
+      journalArea* area = areas->get(curArea);
+      if(area)
+      {
+         /* Show all area missions */
+         journalDesc* desc = area->descriptions;
+         for(i = 0; i < area->totalDescriptions; i++)
+         {
+            if(!desc->completed)
+            {
+               missionsText->addText(desc->text, DNT_FONT_ARIAL, 10,
+                                     DNT_FONT_ALIGN_LEFT, 
+                                     DNT_FONT_STYLE_BOLD, 240, 120, 0);
+            }
+            else
+            {
+               missionsText->addText(desc->text, DNT_FONT_ARIAL, 10,
+                                     DNT_FONT_ALIGN_LEFT, 
+                                     DNT_FONT_STYLE_ITALIC, 0, 120, 0);
+            }
+
+            desc = desc->next;
+         }
+      }
+      else
+      {
+         cerr << "Error: No Area!" << endl;
+      }
+   }
 }
 
 /***********************************************************************

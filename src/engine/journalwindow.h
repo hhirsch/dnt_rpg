@@ -65,6 +65,18 @@ class journalAreas : public bTree
        * \return -> pointer to the inserted journal area */
       journalArea* search(string title);
 
+      /*! Get the journalArea at the num position
+       * \param num -> position to get
+       * \return -> pointer to the area got */
+      journalArea* get(int num);
+
+      /*! Get the journalArea at the num position
+       * \param num -> position to get
+       * \param curRoot -> current node used as root
+       * \param cur -> current node position 
+       * \return -> pointer to the area got */
+      journalArea* get(int num, journalArea* curRoot, int& cur);
+
       /*! Dupplicate a cell (aka: alloc a new one with same values)
        * \param cell -> pointer to the cell to dupplicate */
       bTreeCell* dupplicateCell(bTreeCell* cell);
@@ -101,7 +113,11 @@ class journalWindow
       /*! Create the Journal missions lists per area */
       void createLists();
 
+      /*! Show current Area missions at the window */
+      void showArea();
+
       journalAreas* areas;       /**< The missions per areas */
+      int curArea;               /**< Current area displayed */
 
       guiInterface* gui;         /**< The gui used */
       window* internalWindow;    /**< The window pointer */
