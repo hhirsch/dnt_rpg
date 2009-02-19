@@ -131,6 +131,8 @@ bTreeCell* journalAreas::dupplicateCell(bTreeCell* cell)
    journalArea* j = new journalArea();
    j->text = cur->text;
    j->descriptions = NULL; // don't dupplicate the list
+
+   return(j);
 }
 
 /***********************************************************************

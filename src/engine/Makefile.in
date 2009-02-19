@@ -42,7 +42,8 @@ $(ENDETC)btreecell.o $(ENDETC)btree.o $(ENDETC)npcfile.o
 OBJS = alignwindow.o aspectwindow.o attwindow.o barterwindow.o briefing.o \
        camera.o character.o charwindow.o classwindow.o collision.o \
 		 culling.o cursor.o dialog.o dccnit.o initial.o inventwindow.o \
-		 itemwindow.o levelup.o minimapwindow.o modstate.o options.o \
+		 itemwindow.o journalwindow.o levelup.o minimapwindow.o \
+		 modstate.o options.o \
 		 racewindow.o savefile.o savewindow.o skillwindow.o shadow.o \
 		 shortcutswindow.o sky.o sun.o teste.o util.o
 BIN = ../../bin/
@@ -134,6 +135,11 @@ inventwindow.o: inventwindow.h inventwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)in
 itemwindow.o: itemwindow.h itemwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)object.h
 	@printf "Making itemwindow.o... "
 	@$(CC) $(CFLAGS) itemwindow.cpp -o itemwindow.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+journalwindow.o: journalwindow.h journalwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)mission.h
+	@printf "Making journalwindow.o... "
+	@$(CC) $(CFLAGS) $(SUPREDE) journalwindow.cpp -o journalwindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 levelup.o: levelup.cpp levelup.h character.h cursor.h classwindow.h skillwindow.h options.h culling.h
