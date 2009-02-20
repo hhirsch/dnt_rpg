@@ -52,11 +52,11 @@ mission::mission(string missionFile, void* usedEngine,
          }
          else if(key == MISSION_TOKEN_DESCRIPTION)
          {
-            area = value;
+            description = translateDataString(value);
          }
          else if(key == MISSION_TOKEN_AREA)
          {
-            description = translateDataString(value);
+            area = value;
          }
       }
    }
