@@ -39,6 +39,7 @@ src/engine/dialog.cpp
 src/engine/initial.cpp
 src/engine/inventwindow.cpp
 src/engine/itemwindow.cpp
+src/engine/journalwindow.cpp
 src/engine/minimapwindow.cpp
 src/engine/modstate.cpp
 src/engine/options.cpp
@@ -234,6 +235,11 @@ data/dialogs/objects/computers.dlg
 data/dialogs/objects/bunker_school_server.dlg
 data/dialogs/tutorial/logan.dlg
 data/dialogs/tutorial/santa.dlg
+
+#missions
+data/missions/tutorial/mission1.mis
+data/missions/tutorial/mission2.mis
+data/missions/tutorial/mission3.mis
 
 #books
 data/models/objetos/books/combat_tutorial/combat_tutorial.dcc
