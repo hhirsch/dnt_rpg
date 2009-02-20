@@ -251,6 +251,9 @@ void journalWindow::open(guiInterface* inter)
    int centerX = SCREEN_X / 2;
    dntFont fnt;
 
+   /* Set the inteface */
+   gui = inter;
+
    /* Create (or recreate) the missions info */
    createLists();
 
@@ -293,6 +296,9 @@ void journalWindow::showArea()
       journalArea* area = areas->get(curArea);
       if(area)
       {
+         /* Set Area text */
+         areaText->setText(area->text);
+
          /* Show all area missions */
          journalDesc* desc = area->descriptions;
          for(i = 0; i < area->totalDescriptions; i++)
@@ -315,7 +321,9 @@ void journalWindow::showArea()
       }
       else
       {
-         cerr << "Error: No Area!" << endl;
+         /* No know missions, so tell it! */
+         areaText->setText(gettext("Unknow Area"));
+         missionsText->setText(gettext("No missions."));
       }
    }
 }
