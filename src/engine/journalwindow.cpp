@@ -268,6 +268,8 @@ void journalWindow::open(guiInterface* inter)
                                                    fnt.createUnicode(0x25C4),0);
    areaText = internalWindow->getObjectsList()->insertTextBox(24,231,229,248,1,
                                                               "");
+   areaText->setFont(DNT_FONT_ARIAL,10,DNT_FONT_ALIGN_CENTER, 
+                     DNT_FONT_STYLE_BOLD);
    nextButton = internalWindow->getObjectsList()->insertButton(230,231,248,249,
                                                    fnt.createUnicode(0x25BA),0);
 
@@ -286,6 +288,8 @@ void journalWindow::open(guiInterface* inter)
 void journalWindow::showArea()
 {
    int i;
+   char buf[8];
+   string text;
 
    if( (areas) && (isOpen()) )
    {
@@ -303,15 +307,17 @@ void journalWindow::showArea()
          journalDesc* desc = area->descriptions;
          for(i = 0; i < area->totalDescriptions; i++)
          {
+            sprintf(buf,"%d - ", i+1);
+            text = buf + desc->text;
             if(!desc->completed)
             {
-               missionsText->addText(desc->text, DNT_FONT_ARIAL, 10,
+               missionsText->addText(text, DNT_FONT_ARIAL, 9,
                                      DNT_FONT_ALIGN_LEFT, 
-                                     DNT_FONT_STYLE_BOLD, 240, 120, 0);
+                                     DNT_FONT_STYLE_NORMAL, 240, 120, 0);
             }
             else
             {
-               missionsText->addText(desc->text, DNT_FONT_ARIAL, 10,
+               missionsText->addText(text, DNT_FONT_ARIAL, 9,
                                      DNT_FONT_ALIGN_LEFT, 
                                      DNT_FONT_STYLE_ITALIC, 0, 120, 0);
             }
