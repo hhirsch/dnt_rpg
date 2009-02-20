@@ -43,6 +43,7 @@
 #include "initial.h"
 #include "inventwindow.h"
 #include "itemwindow.h"
+#include "journalwindow.h"
 #include "minimapwindow.h"
 #include "modstate.h"
 #include "options.h"
@@ -408,7 +409,8 @@ class engine
       charWindow* charInfoWindow;    /**< The character info Window */
       miniMapWindow* mapWindow;      /**< The miniMap window */
       shortcutsWindow* shortcuts;    /**< The shortcuts window */
-   
+      journalWindow* journal;        /**< The journal window */
+
       briefing* brief;               /**< The briefing controller */
 
       SDL_Surface* frontSurface;   /**< Front Buffer Screenshot */

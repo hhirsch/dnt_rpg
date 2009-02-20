@@ -101,6 +101,7 @@ engine::engine()
    /* Create Special Windows */
    infoWindow = new itemWindow(gui);
    charInfoWindow = new charWindow(gui);
+   journal = new journalWindow();
    mapWindow = new miniMapWindow();
    shortcuts = new shortcutsWindow();
 
@@ -247,6 +248,12 @@ engine::~engine()
    if(charInfoWindow)
    {
       delete(charInfoWindow);
+   }
+
+   /* Clear Journal Window */
+   if(journal)
+   {
+      delete(journal);
    }
 
    /* Clear MiniMap Window */
@@ -2472,6 +2479,26 @@ int engine::treatIO(SDL_Surface *screen)
          if(charInfoWindow)
          {
             charInfoWindow->open(PCs->getActiveCharacter());
+         }
+      }
+
+      /* Open Journal Window */
+      if( (keys[SDLK_j]) && 
+            ( (time-lastKeyb >= REFRESH_RATE) || 
+              (lastKey != SDLK_j) ) ) 
+      {
+         lastKey = SDLK_j;
+         lastKeyb = time;
+         if(journal)
+         {
+            if(journal->isOpen())
+            {
+               journal->close();
+            }
+            else
+            {
+               journal->open(gui);
+            }
          }
       }
 
