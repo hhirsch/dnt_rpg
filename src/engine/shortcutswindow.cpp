@@ -54,7 +54,7 @@ void shortcutsWindow::open(guiInterface* gui)
       tb->insertButton(7,40,43,72);/* Attack 1 */
       tb->insertButton(7,75,43,107);/* Attack 7 */
 
-      buttonQuest = tb->insertButton(53,4,89,36);/* Quest Window */
+      buttonJournal = tb->insertButton(53,4,89,36);/* Journal Window */
       tb->insertButton(53,40,89,72);/* Attack 2 */
       tb->insertButton(53,75,89,107);/* Attack 8 */
 
@@ -177,7 +177,7 @@ int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode)
              }  
             return(SHORTCUTS_WINDOW_OTHER); 
          }
-         else if(object == (guiObject*) buttonQuest)
+         else if(object == (guiObject*) buttonJournal)
          {
             thingTxt->setText(gettext("Open Quests Window"));
             return(SHORTCUTS_WINDOW_OTHER);
@@ -244,6 +244,10 @@ int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode)
          {
             return(SHORTCUTS_WINDOW_INVENTORY);
          }
+         else if(object == (guiObject*) buttonJournal)
+         {
+            return(SHORTCUTS_WINDOW_JOURNAL);
+         }
          else if(object == (guiObject*) buttonCharacter)
          {
             return(SHORTCUTS_WINDOW_CHARACTER);
@@ -285,7 +289,7 @@ button* shortcutsWindow::buttonSave = NULL;
 button* shortcutsWindow::buttonLoad = NULL;
 
 oneTabButton* shortcutsWindow::buttonAttackMode = NULL;
-oneTabButton* shortcutsWindow::buttonQuest = NULL;
+oneTabButton* shortcutsWindow::buttonJournal = NULL;
 oneTabButton* shortcutsWindow::buttonMap = NULL;
 oneTabButton* shortcutsWindow::buttonInventory = NULL;
 oneTabButton* shortcutsWindow::buttonAssign = NULL;

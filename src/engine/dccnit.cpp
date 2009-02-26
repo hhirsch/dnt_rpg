@@ -1852,6 +1852,21 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
             }
          }
          break;
+         case SHORTCUTS_WINDOW_JOURNAL:
+         {
+            if(journal)
+            {
+               if(journal->isOpen())
+               {
+                  journal->close();
+               }
+               else
+               {
+                  journal->open(gui);
+               }
+            }
+         }
+         break;
 
          //TODO other results!
       }

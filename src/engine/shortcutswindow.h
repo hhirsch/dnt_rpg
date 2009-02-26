@@ -9,7 +9,7 @@
 #define SHORTCUTS_WINDOW_LOAD        2
 #define SHORTCUTS_WINDOW_SAVE        3
 #define SHORTCUTS_WINDOW_ATTACK_MODE 4
-#define SHORTCUTS_WINDOW_QUESTS      5
+#define SHORTCUTS_WINDOW_JOURNAL     5
 #define SHORTCUTS_WINDOW_MAP         6
 #define SHORTCUTS_WINDOW_INVENTORY   7
 #define SHORTCUTS_WINDOW_ASSIGN      8
@@ -67,7 +67,7 @@ class shortcutsWindow
       static button* buttonSave;             /**< call Save Function */
       static button* buttonLoad;             /**< call Load Function */
       static oneTabButton* buttonAttackMode; /**< Enter on Attack Mode */
-      static oneTabButton* buttonQuest;      /**< Open Quests Window */
+      static oneTabButton* buttonJournal;    /**< Open Journal Window */
       static oneTabButton* buttonMap;        /**< Call MiniMap */
       static oneTabButton* buttonInventory;  /**< Call Inventory */
       static oneTabButton* buttonAssign;     /**< assign attack */
