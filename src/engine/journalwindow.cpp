@@ -266,7 +266,7 @@ void journalWindow::open(guiInterface* inter)
                                                                  "");
    previousButton = internalWindow->getObjectsList()->insertButton(8,231,23,249,
                                                    fnt.createUnicode(0x25C4),0);
-   areaText = internalWindow->getObjectsList()->insertTextBox(24,231,229,248,1,
+   areaText = internalWindow->getObjectsList()->insertTextBox(24,231,229,249,1,
                                                               "");
    areaText->setFont(DNT_FONT_ARIAL,10,DNT_FONT_ALIGN_CENTER, 
                      DNT_FONT_STYLE_BOLD);
