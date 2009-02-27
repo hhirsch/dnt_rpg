@@ -1,0 +1,19 @@
+title = gettext("Esthetic Shock I")
+description = gettext("At his first level, the Administration Student can charge Esthetic Shocks, one time per day, causing 1d4 points of damage, since the target creature fails at an I Am Not A Fool test against the Bizarre Clothes roll . For each 2 levels, the character can use this feat for one more time per day.")
+
+# The Pre-Requisite
+class = ADM
+level = 1
+
+# The base attribute to bonus the d20 roll
+attribute = BIZARRE_CLOTHES
+
+# The Damage/Range Info
+range = 12
+affect = TARGET
+damage = 1*d4+0
+aditionalDice = 0
+quantityPerDay = 1
+aditionalQuantity = 1
+aditionalLevels = 2
+
