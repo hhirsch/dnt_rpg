@@ -1,0 +1,23 @@
+title = gettext("Mass Arthropds Attack")
+description = gettext("The more the graduation passes, the more the Biology Students live together with animals, so they can invoque, 2 times per day, a small arthropds horde to attack their enemies in a 10 meters radius, inflicting 2d8 + 1d6 per Biology Student Level greater than 10.")
+
+# The Pre-Requisite
+class = BIOLOGY
+level = 10
+
+# The ID
+id = MASS_ARTHROPDS_ATTACK
+
+# The base attribute to bonus the d20 roll
+attribute = DEXTERITY
+counterAttribute = CONSTITUTION
+
+# The Damage/Range Info
+range = 10
+affect = ENEMIES
+damage = 2*d8+0
+aditionalDice = 1d6+0
+quantityPerDay = 2
+aditionalQuantity = 0
+aditionalLevels = 1
+
