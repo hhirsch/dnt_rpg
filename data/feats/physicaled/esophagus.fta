@@ -5,6 +5,9 @@ description = gettext("Once a day, and because his muscles have invaded his inte
 class = PHYSICAL_EDUCATION
 level = 15
 
+# The ID
+id = POWERFUL_ESOPHAGUS
+
 # The base attribute to bonus the d20 roll
 attribute = CONSTITUTION
 
