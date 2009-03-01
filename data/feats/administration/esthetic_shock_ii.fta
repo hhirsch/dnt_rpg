@@ -1,0 +1,21 @@
+title = gettext("Esthetic Shock II")
+description = gettext("Due to the cerebral damages made by its graduation, the Administration Student upgrade its capacity to esthetic shock people, causing 1d6 damage, without resistances. The use of this feat consumes one Esthetic Shock I")
+# The Pre-Requisite
+class = ADM
+level = 5
+
+# The ID
+id = ESTHETIC_SHOCK_II
+
+# The base attribute to bonus the d20 roll
+attribute = BIZARRE_CLOTHES
+
+# The Damage/Range Info
+range = 12
+affect = TARGET
+damage = 1*d6+0
+aditionalDice = 0
+quantityPerDay = 1
+aditionalQuantity = 1
+aditionalLevels = 2
+depFeat = 1.0 ESTHETIC_SHOCK_I

@@ -5,6 +5,9 @@ description = gettext("At his first level, the Administration Student can charge
 class = ADM
 level = 1
 
+# The ID
+id = ESTHETIC_SHOCK_II
+
 # The base attribute to bonus the d20 roll
 attribute = BIZARRE_CLOTHES
 
