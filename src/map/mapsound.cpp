@@ -28,6 +28,27 @@ mapSound::~mapSound()
 }
 
 /***********************************************************************
+ *                               newSound                              *
+ ***********************************************************************/
+soundInfo* mapSound::newSound()
+{
+   /* Create the structure */
+   soundInfo* snd = new soundInfo();
+
+   /* Nullify it */
+   snd->fileName = "";
+   snd->x = 0;
+   snd->y = 0;
+   snd->z = 0;
+   snd->loopInterval = 0;
+
+   /* Add to the list */
+   addSound(snd);
+
+   return(snd);
+}
+
+/***********************************************************************
  *                               addSound                              *
  ***********************************************************************/
 void mapSound::addSound(soundInfo* snd)
@@ -68,14 +89,8 @@ bool mapSound::load(string fileName)
          if(key == "sound")
          {
             /* Define a new sound */
-            snd = new soundInfo();
+            snd = newSound();
             snd->fileName = value;
-            snd->x = 0;
-            snd->y = 0;
-            snd->z = 0;
-            snd->loopInterval = 0;
-            /* Add it to the list */
-            addSound(snd);
          }
          else if(snd != NULL)
          {
@@ -106,6 +121,40 @@ bool mapSound::load(string fileName)
    }
 
    return(false);
+}
+
+/***********************************************************************
+ *                                 save                                *
+ ***********************************************************************/
+bool mapSound::save(string fileName)
+{
+   int i;
+   ofstream file;
+
+   /* Open the file to save */
+   file.open(fileName.c_str(), ios::out | ios::binary);
+   if(!file)
+   {
+      cerr << "Error Opening File: " << fileName << endl;
+      return(false);
+   }
+
+   /* Save all sounds to the file */
+   soundInfo* s = sounds;
+   for(i = 0; i < totalSounds; i++)
+   {
+      /* Save sound info */
+      file << "sound = " << s->fileName << endl;
+      file << "posX = " << s->x << endl;
+      file << "posY = " << s->y << endl;
+      file << "posZ = " << s->z << endl;
+      file << "loopInterval = " << s->loopInterval << endl;
+
+      /* Next sound */
+      s = s->next;
+   }
+
+   return(true);
 }
 
 /***********************************************************************

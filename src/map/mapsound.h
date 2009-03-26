@@ -33,8 +33,18 @@ class mapSound
        * \return -> true if load was successfull, falst otherwise */
       bool load(string fileName);
 
+      /*! Save mapSound definition file with the current sound list
+       * \param fileName -> name of the file to save
+       * \return -> true if save was successfull */
+      bool save(string fileName);
+
       /*! Flush Sounds, adding it to the OpenAL sound controller */
       void flush();
+
+      /*! Add a new undefined sound to the definition.
+       * \note -> used at mapEditor
+       * \return -> pointer to the added soundInfo structure */
+      soundInfo* newSound();
 
    protected:
 
