@@ -53,7 +53,7 @@ class sound
        *  \param x -> X position
        *  \param y -> Y position
        *  \param z -> Z position
-       *  \param loop -> if sound will loop at end or not
+       *  \param loop -> sound loop interval ( < 0 won't loop) 
        *  \param fileName -> name of the ogg file to open
        *  \return pointer to the added sound */
       sndfx* addSoundEffect(ALfloat x, ALfloat y, ALfloat z, int loop,
