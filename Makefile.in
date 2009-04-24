@@ -27,10 +27,12 @@ clean:
 
 install: $(BIN)dccnitghtmare
 	@printf "Installing DccNiTghtmare bin files... "
+	@mkdir -p $(bindir)
 	@$(INSTALL) -c -m 755 $(BIN)dccnitghtmare $(bindir)/
 	@printf "\e[0;32mDone.\e[0;0m\n"
 	@printf "Installing DccNiTghtmare data files... "
 	@sh install.sh $(datadir) $(PACKAGE) $(INSTALL)
+	@$(INSTALL) -c -m 644 $(BIN)dcc.opc $(datadir)/$(PACKAGE)
 	@printf "\e[0;32mDone.\e[0;0m\n"
 	@printf "Installing DccNiTghtmare Language files... "
 	@cd ./po && ${MAKE} install > /dev/null ;

@@ -16,6 +16,7 @@
  - Fixed Save Files to save Character Experience points (forgot!);
  - Fixed a bug of lost object when trying to equip a weapon by "using it" 
    when already have another weapon eqquiped;
+ - Fixed a bug on DNT installation of bin directory and default options file;
 
 Working on:
  - Weather effects;
