@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-12-03 17:43-0200\n"
+"POT-Creation-Date: 2009-04-29 14:34-0300\n"
 "PO-Revision-Date: 2009-03-29 15:53+0000\n"
 "Last-Translator: Gothmog <Unknown>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -57,20 +57,20 @@ msgstr "¡Curación crítica!"
 msgid "Critical Hit!"
 msgstr "¡Impacto crítico!"
 
-#: src/classes/feats.cpp:124
+#: src/classes/feats.cpp:125
 msgid "Invalid Talent"
 msgstr "Talento inválido"
 
-#: src/classes/feats.cpp:145
+#: src/classes/feats.cpp:176
 msgid "Not enought points to use!"
 msgstr "¡No tienes suficientes puntos para usarlo!"
 
-#: src/classes/mission.cpp:387 src/engine/dialog.cpp:1077
+#: src/classes/mission.cpp:485 src/engine/dialog.cpp:1077
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "¡Misión completa: %d XP!"
 
-#: src/classes/mission.cpp:400
+#: src/classes/mission.cpp:502 src/classes/mission.cpp:505
 msgid "Mission Failure!"
 msgstr "¡Misión fallida!"
 
@@ -80,14 +80,14 @@ msgstr "Alineamiento"
 
 #: src/engine/alignwindow.cpp:55 src/engine/aspectwindow.cpp:75
 #: src/engine/attwindow.cpp:220 src/engine/classwindow.cpp:97
-#: src/engine/options.cpp:780 src/engine/racewindow.cpp:95
+#: src/engine/options.cpp:829 src/engine/racewindow.cpp:95
 #: src/engine/skillwindow.cpp:137
 msgid "Confirm"
 msgstr "Confirmar"
 
 #: src/engine/alignwindow.cpp:59 src/engine/aspectwindow.cpp:79
 #: src/engine/attwindow.cpp:224 src/engine/barterwindow.cpp:46
-#: src/engine/classwindow.cpp:101 src/engine/options.cpp:784
+#: src/engine/classwindow.cpp:101 src/engine/options.cpp:833
 #: src/engine/racewindow.cpp:99 src/engine/skillwindow.cpp:140
 msgid "Cancel"
 msgstr "Cancelar"
@@ -158,8 +158,8 @@ msgstr "Carisma"
 msgid "Attribute Description"
 msgstr "Descripción de atributo"
 
-#: src/engine/attwindow.cpp:535 src/engine/dccnit.cpp:347
-#: src/engine/options.cpp:992
+#: src/engine/attwindow.cpp:535 src/engine/dccnit.cpp:514
+#: src/engine/inventwindow.cpp:330 src/engine/options.cpp:1032
 msgid "Warning"
 msgstr "Aviso"
 
@@ -167,7 +167,7 @@ msgstr "Aviso"
 msgid "You Need to Assign All Attributes."
 msgstr "Tienes que asignar todos los atributos"
 
-#: src/engine/barterwindow.cpp:30 src/engine/dialog.cpp:1324
+#: src/engine/barterwindow.cpp:30 src/engine/dialog.cpp:1321
 msgid "Barter"
 msgstr "Hacer trueque"
 
@@ -180,7 +180,7 @@ msgid "Impose"
 msgstr "Imponer"
 
 #: src/engine/barterwindow.cpp:72 src/engine/barterwindow.cpp:82
-#: src/engine/inventwindow.cpp:35
+#: src/engine/inventwindow.cpp:36
 msgid "Inventory"
 msgstr "Equipo"
 
@@ -200,7 +200,7 @@ msgstr "El acuerdo impuesto fue aceptado."
 msgid "The barter imposition was rejected."
 msgstr "El acuerdo impuesto fue rechazado."
 
-#: src/engine/barterwindow.cpp:286 src/engine/inventwindow.cpp:182
+#: src/engine/barterwindow.cpp:286 src/engine/inventwindow.cpp:183
 msgid "Remove"
 msgstr "Eliminar"
 
@@ -357,46 +357,66 @@ msgstr "Habilidades de clase"
 msgid "No Skills."
 msgstr "Sin habilidades"
 
-#: src/engine/dccnit.cpp:348
+#: src/engine/dccnit.cpp:455 src/engine/dccnit.cpp:505
+msgid "Error"
+msgstr ""
+
+#: src/engine/dccnit.cpp:455
+msgid "Can't load the saved game!"
+msgstr ""
+
+#: src/engine/dccnit.cpp:500
+msgid "Information"
+msgstr ""
+
+#: src/engine/dccnit.cpp:501
+msgid "The game was saved!"
+msgstr ""
+
+#: src/engine/dccnit.cpp:505
+msgid "Can't save game!"
+msgstr ""
+
+#: src/engine/dccnit.cpp:515
 msgid "Can't save game while fighting!"
 msgstr "¡No puedes salvar el juego mientras estás luchando!"
 
-#: src/engine/dccnit.cpp:466
+#: src/engine/dccnit.cpp:638
 #, c-format
 msgid "Saving Current Map Modifications"
 msgstr "Salvando modificaciones del mapa actual"
 
-#: src/engine/dccnit.cpp:501
+#: src/engine/dccnit.cpp:673
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Cargando mapa: %s..."
 
-#: src/engine/dccnit.cpp:564
+#: src/engine/dccnit.cpp:736
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Cargando PNJ: %s..."
 
-#: src/engine/dccnit.cpp:590
+#: src/engine/dccnit.cpp:776
 msgid "Creating MiniMap"
 msgstr "Creando minimapa..."
 
-#: src/engine/dccnit.cpp:596
+#: src/engine/dccnit.cpp:782
 msgid "Putting GUI on Screen"
 msgstr "Colocando GUI en pantalla..."
 
-#: src/engine/dccnit.cpp:643
+#: src/engine/dccnit.cpp:829
 msgid "Loading Particles"
 msgstr "Cargando partículas..."
 
-#: src/engine/dccnit.cpp:673
+#: src/engine/dccnit.cpp:859
 msgid "Loading Changes..."
 msgstr "Cargando cambios..."
 
-#: src/engine/dccnit.cpp:701
+#: src/engine/dccnit.cpp:887
 msgid "Done!"
 msgstr "¡Hecho!"
 
-#: src/engine/dccnit.cpp:793
+#: src/engine/dccnit.cpp:979
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -408,50 +428,50 @@ msgstr ""
 "DccNiTghtmare está agradecido con la gente que desarrolló estas librerías: "
 "OpenAL, Cal3D, OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 
-#: src/engine/dccnit.cpp:1300
+#: src/engine/dccnit.cpp:1496
 msgid "Too far away for the action!"
 msgstr "¡Demasiado lejos para la acción!"
 
-#: src/engine/dccnit.cpp:1342
+#: src/engine/dccnit.cpp:1541
 msgid "No NPCs in the area."
 msgstr "No hay PNJ's en el área"
 
-#: src/engine/dccnit.cpp:1393
+#: src/engine/dccnit.cpp:1592
 msgid "Surprise Attack Turn."
 msgstr "Turno de ataque por sorpresa"
 
-#: src/engine/dccnit.cpp:1407
+#: src/engine/dccnit.cpp:1606
 msgid "No enemies in the area."
 msgstr "No hay enemigos en el área"
 
-#: src/engine/dccnit.cpp:1584 src/engine/dccnit.cpp:2034
+#: src/engine/dccnit.cpp:1785 src/engine/dccnit.cpp:2251
 #: src/engine/shortcutswindow.cpp:32
 msgid "Nothing"
 msgstr "Nada"
 
-#: src/engine/dccnit.cpp:1782
+#: src/engine/dccnit.cpp:1999
 #, c-format
 msgid "%s taken."
 msgstr "Recogido %s"
 
-#: src/engine/dccnit.cpp:1804
+#: src/engine/dccnit.cpp:2021
 msgid "Inventory is full!"
 msgstr "¡Inventario lleno!"
 
-#: src/engine/dccnit.cpp:1836
+#: src/engine/dccnit.cpp:2053
 msgid "Door"
 msgstr "Puerta"
 
-#: src/engine/dccnit.cpp:1969
+#: src/engine/dccnit.cpp:2186
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s ataca a %s"
 
-#: src/engine/dccnit.cpp:2130
+#: src/engine/dccnit.cpp:2352
 msgid "No more actions. Turn ended."
 msgstr "Sin acciones. Turno finalizado."
 
-#: src/engine/dccnit.cpp:3512
+#: src/engine/dccnit.cpp:3842
 msgid "Exit Battle Mode"
 msgstr "Salir del modo de batalla"
 
@@ -468,7 +488,7 @@ msgstr "Fallo"
 msgid "Not found in dialog: %d\n"
 msgstr "No se encontró en el diálogo: %d\n"
 
-#: src/engine/dialog.cpp:1318
+#: src/engine/dialog.cpp:1315
 msgid "Dialog"
 msgstr "Diálogo"
 
@@ -488,7 +508,7 @@ msgstr "Salvar"
 msgid "Load"
 msgstr "Cargar"
 
-#: src/engine/initial.cpp:76 src/engine/options.cpp:560
+#: src/engine/initial.cpp:76 src/engine/options.cpp:590
 msgid "Options"
 msgstr "Opciones"
 
@@ -499,215 +519,252 @@ msgstr "Opciones"
 msgid "Exit"
 msgstr "Salir"
 
-#: src/engine/inventwindow.cpp:162
+#: src/engine/inventwindow.cpp:163
 msgid "Drop"
 msgstr "Tirar"
 
-#: src/engine/inventwindow.cpp:169
+#: src/engine/inventwindow.cpp:170
 msgid "Buy"
 msgstr "Comprar"
 
-#: src/engine/inventwindow.cpp:169
+#: src/engine/inventwindow.cpp:170
 msgid "Sell"
 msgstr "Vender"
 
-#: src/engine/inventwindow.cpp:176
+#: src/engine/inventwindow.cpp:177
 msgid "Use"
 msgstr "Usar"
 
-#: src/engine/inventwindow.cpp:186
+#: src/engine/inventwindow.cpp:187
 msgid "Info"
 msgstr "Info"
 
-#: src/engine/inventwindow.cpp:190
+#: src/engine/inventwindow.cpp:191
 msgid "Get"
 msgstr "Coger"
 
-#: src/engine/itemwindow.cpp:58
+#: src/engine/inventwindow.cpp:296
+#, c-format
+msgid "%s reloaded %s with %s ammo."
+msgstr ""
+
+#: src/engine/inventwindow.cpp:331
+msgid "No equipped weapons are compatible with this munition type."
+msgstr ""
+
+#: src/engine/itemwindow.cpp:59
 #, c-format
 msgid "Name: %s"
 msgstr "Nombre: %s"
 
-#: src/engine/itemwindow.cpp:63
+#: src/engine/itemwindow.cpp:64
 #, c-format
 msgid "Cost: %.2f"
 msgstr "Precio: %.2f"
 
-#: src/engine/itemwindow.cpp:68
+#: src/engine/itemwindow.cpp:69
 #, c-format
 msgid "Weight: %.2f Kg"
 msgstr "Peso: %.2f Kg"
 
-#: src/engine/itemwindow.cpp:83
+#: src/engine/itemwindow.cpp:84
 msgid "Heal Factor: "
 msgstr "Factor de cura: "
 
-#: src/engine/itemwindow.cpp:93
+#: src/engine/itemwindow.cpp:94
 msgid "Aditional Factor: "
 msgstr "Factor adicional: "
 
-#: src/engine/itemwindow.cpp:115
+#: src/engine/itemwindow.cpp:116
 msgid "Category: "
 msgstr "Categoría: "
 
-#: src/engine/itemwindow.cpp:121
+#: src/engine/itemwindow.cpp:122
 msgid "Damage Dice: "
 msgstr "Dado de daño: "
 
-#: src/engine/itemwindow.cpp:129
+#: src/engine/itemwindow.cpp:130
 msgid "Primary Damage: "
 msgstr "Daño primario: "
 
-#: src/engine/itemwindow.cpp:136
+#: src/engine/itemwindow.cpp:137
 msgid "Secondary Damage: "
 msgstr "Daño secundario: "
 
-#: src/engine/itemwindow.cpp:148
+#: src/engine/itemwindow.cpp:149
 msgid "Range: "
 msgstr "Alcance: "
 
-#: src/engine/itemwindow.cpp:153
+#: src/engine/itemwindow.cpp:154
 msgid "Size: "
 msgstr "Tamaño: "
 
-#: src/engine/itemwindow.cpp:171
+#: src/engine/itemwindow.cpp:167 src/engine/itemwindow.cpp:194
+msgid "Ammo Type:"
+msgstr ""
+
+#: src/engine/itemwindow.cpp:173 src/engine/itemwindow.cpp:200
+msgid "Quantity:"
+msgstr ""
+
+#: src/engine/itemwindow.cpp:218
 msgid "Ok"
 msgstr "Ok"
+
+#: src/engine/journalwindow.cpp:263
+msgid "Journal"
+msgstr ""
+
+#: src/engine/journalwindow.cpp:331
+msgid "Unknow Area"
+msgstr ""
+
+#: src/engine/journalwindow.cpp:332
+msgid "No missions."
+msgstr ""
 
 #: src/engine/minimapwindow.cpp:37
 msgid "Map"
 msgstr "Mapa"
 
-#: src/engine/options.cpp:23
+#: src/engine/options.cpp:24
 msgid "Portuguese"
 msgstr "Portugués"
 
-#: src/engine/options.cpp:24
+#: src/engine/options.cpp:25
 msgid "English"
 msgstr "Inglés"
 
-#: src/engine/options.cpp:25
+#: src/engine/options.cpp:26
 msgid "French"
 msgstr "Francés"
 
-#: src/engine/options.cpp:26
+#: src/engine/options.cpp:27
 msgid "German"
 msgstr "Alemán"
 
-#: src/engine/options.cpp:27
+#: src/engine/options.cpp:28
 msgid "Spanish"
 msgstr "Español"
 
-#: src/engine/options.cpp:28
+#: src/engine/options.cpp:29
 msgid "Italian"
 msgstr "Italiano"
 
-#: src/engine/options.cpp:29
+#: src/engine/options.cpp:30
 msgid "Russian"
 msgstr "Ruso"
 
-#: src/engine/options.cpp:454 data/weapons/types/munitions.dcl:2
+#: src/engine/options.cpp:484 data/weapons/types/munitions.dcl:2
 msgid "None"
 msgstr "Ninguna"
 
-#: src/engine/options.cpp:459
+#: src/engine/options.cpp:489
 msgid "Characters"
 msgstr "Personajes"
 
-#: src/engine/options.cpp:464
+#: src/engine/options.cpp:494
 msgid "All"
 msgstr "Todas"
 
-#: src/engine/options.cpp:480 data/weapons/types/sizes.dcl:3
+#: src/engine/options.cpp:510 data/weapons/types/sizes.dcl:3
 #: data/weapons/types/weights.dcl:3
 msgid "Normal"
 msgstr "Normal"
 
-#: src/engine/options.cpp:483
+#: src/engine/options.cpp:513
 msgid "Pursue"
 msgstr "Perseguir"
 
-#: src/engine/options.cpp:498
+#: src/engine/options.cpp:528
 msgid "Disabled"
 msgstr "Desactivado"
 
-#: src/engine/options.cpp:501
+#: src/engine/options.cpp:531
 msgid "2x"
 msgstr "2x"
 
-#: src/engine/options.cpp:504
+#: src/engine/options.cpp:534
 msgid "4x"
 msgstr "4x"
 
-#: src/engine/options.cpp:570
+#: src/engine/options.cpp:600
 msgid "Audio"
 msgstr "Sonido"
 
-#: src/engine/options.cpp:574
+#: src/engine/options.cpp:604
 msgid "Music Volume:"
 msgstr "Volumen de música"
 
-#: src/engine/options.cpp:591
+#: src/engine/options.cpp:621
 msgid "Effects Volume:"
 msgstr "Volumen de efectos:"
 
-#: src/engine/options.cpp:608
+#: src/engine/options.cpp:638
 msgid "Video"
 msgstr "Vídeo"
 
-#: src/engine/options.cpp:616
+#: src/engine/options.cpp:646
 msgid "Screen Resolution:"
 msgstr "Resolución de pantalla:"
 
-#: src/engine/options.cpp:631
+#: src/engine/options.cpp:661
 msgid "Enable FullScreen"
 msgstr "Habilitar pantalla completa"
 
-#: src/engine/options.cpp:640
+#: src/engine/options.cpp:670
 msgid "Enable Grass Effects (need particles)"
 msgstr "Habilitar efectos de hierba (necesita partículas)"
 
-#: src/engine/options.cpp:649
+#: src/engine/options.cpp:679
 msgid "Enable Particles Effects"
 msgstr "Habilitar efectos de partículas"
 
-#: src/engine/options.cpp:661
+#: src/engine/options.cpp:691
 msgid "Enable MultiTextures"
 msgstr "Habilitar múltiples texturas"
 
-#: src/engine/options.cpp:672
+#: src/engine/options.cpp:701
+msgid "Enable Anisotropic Filter"
+msgstr ""
+
+#: src/engine/options.cpp:712
 msgid "Reflections:"
 msgstr "Reflejos:"
 
-#: src/engine/options.cpp:688
+#: src/engine/options.cpp:728
 msgid "Anti-Aliasing:"
 msgstr "Anti-Aliasing:"
 
-#: src/engine/options.cpp:703
+#: src/engine/options.cpp:743
 msgid "FarView:"
 msgstr "Distancia visible:"
 
-#: src/engine/options.cpp:719
+#: src/engine/options.cpp:759
 msgid "Game"
 msgstr "Juego"
 
-#: src/engine/options.cpp:725
+#: src/engine/options.cpp:765
 msgid "Language:"
 msgstr "Idioma:"
 
-#: src/engine/options.cpp:742
+#: src/engine/options.cpp:782
 msgid "Camera Mode:"
 msgstr "Modo de cámara:"
 
-#: src/engine/options.cpp:758
+#: src/engine/options.cpp:798
 msgid "Auto End Turn"
 msgstr "Fin de turno automático"
 
-#: src/engine/options.cpp:767
+#: src/engine/options.cpp:807
+msgid "Always Run"
+msgstr ""
+
+#: src/engine/options.cpp:816
 msgid "Show Enemy Battle Circle"
 msgstr "Mostrar círculo de batalla enemigo"
 
-#: src/engine/options.cpp:993
+#: src/engine/options.cpp:1033
 msgid "Some changes will only take effect upon restart."
 msgstr "Algunos cambios solo se tendrán en cuenta después de reiniciar"
 
@@ -910,6 +967,123 @@ msgstr "fue Logan."
 #: data/comics/intro/intro.dcb:125
 msgid "And that's how the tale began..."
 msgstr "Y así es como comenzó esta historia..."
+
+#: data/comics/tutorial/combat/combat.dcb:19
+#: data/comics/tutorial/combat/combat.dcb:38
+#: data/comics/tutorial/combat/combat.dcb:110
+#: data/comics/tutorial/combat/combat.dcb:195
+#: data/models/objetos/books/combat_tutorial/combat_tutorial.dcc:1
+msgid "The Combat Book"
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:48
+msgid "The fight mode is an special turn based interaction used to... FIGHT!"
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:58
+msgid "There are two ways to enter Fight Mode:"
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:60
+msgid ""
+"1 - When hostile creatures are nearby, the Fight Mode is automatically "
+"called."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:70
+msgid ""
+"2 - Or, when you desire, press SPACE or the attack icon at shortcuts window "
+"to enter the Fight Mode."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:80
+msgid ""
+"First, each character rolls an initiative check, to define the order each "
+"one will act."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:91
+msgid ""
+"If it was you who started the Fight Mode and the other creatures didn't see "
+"your hostile intentions, you'll receive a first Surprise Attack Turn before "
+"the normal battle."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:120
+msgid "Each turn, a character can take a move action and an attack action."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:130
+msgid "Or, if needed, take a full move action to move further."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:140
+msgid "Your action's range is represented by circles."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:151
+msgid "The yellow circle represents your current attack range."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:153
+msgid "You can only attack creatures inner the yellow circle!"
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:163
+msgid "The blue circle is the area you can move with a move action."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:174
+msgid "The red circle is the area you can move with a full move action."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:176
+msgid ""
+"If a circle isn't shown it's because you can't take that kind of action "
+"anymore at the current turn."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:205
+msgid "You can attack using your current weapon by simple clicking the target."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:215
+msgid "Or use a talent by selecting it and clicking the target."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:226
+msgid ""
+"You can end your turn any time, by pressing SPACE or selecting the End Turn "
+"icon."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:228
+msgid ""
+"You can also set the options to automatically end your turn when no more "
+"available actions."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:238
+msgid ""
+"The fight will end when no more hostile creatures are near or all PCs are "
+"dead."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:249
+msgid "Remember:"
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:251
+msgid "Take or use objects count as an attack action."
+msgstr ""
+
+#: data/comics/tutorial/combat/combat.dcb:253
+msgid "You can't save your game while fighting."
+msgstr "¡No puedes salvar el juego mientras estás luchando!"
+
+#: data/comics/tutorial/combat/combat.dcb:255
+msgid "And you can't leave the current map while in Fight Mode."
+msgstr ""
 
 #: data/alignment/neutrocaotico.ali:1
 msgid "Chaotic Neutral"
@@ -1253,15 +1427,15 @@ msgid ""
 "into some art source, like music. The Music Student is a creature with "
 "extreme patience, needed to learn all the techniques related to ternary "
 "compass atonalisms, has the capacity to create them and a distorted taste "
-"for playing one of the most bizarre and occult musical "
-"instruments.|Creator's Note: 'Based on the idea that musical tastes are "
-"distinct and only the the most open-minded people appreciate distinct "
-"rhythms (obviously all that aren't attempts to kill the musical concept), "
-"the class was made. So, the same sound, Bach for example, can be beautiful "
-"music or terribly boring, depending upon the ear of the listener. Probably a "
-"progressive fan will like Bach, but a fan of Tati-Quebra-Barraco, without "
-"any musical sense, will think Bach is shit. So, the Music Student will be "
-"virtuous and misunderstood.'"
+"for playing one of the most bizarre and occult musical instruments.|"
+"Creator's Note: 'Based on the idea that musical tastes are distinct and only "
+"the the most open-minded people appreciate distinct rhythms (obviously all "
+"that aren't attempts to kill the musical concept), the class was made. So, "
+"the same sound, Bach for example, can be beautiful music or terribly boring, "
+"depending upon the ear of the listener. Probably a progressive fan will like "
+"Bach, but a fan of Tati-Quebra-Barraco, without any musical sense, will "
+"think Bach is shit. So, the Music Student will be virtuous and "
+"misunderstood.'"
 msgstr ""
 
 #: data/classes/music.cls:7
@@ -1742,8 +1916,8 @@ msgstr ""
 msgid ""
 "'Hey, girls from OT, there's a question I've had in my mind since I entered "
 "the University. Can you answer it for me?...| No, we don't know what our "
-"diploma will allow us to do and we're bored by others asking us about "
-"it!'|(Turmalina, Computer Science Student, interviewing three OT Students)"
+"diploma will allow us to do and we're bored by others asking us about it!'|"
+"(Turmalina, Computer Science Student, interviewing three OT Students)"
 msgstr ""
 
 #: data/classes/to.cls:3
@@ -1767,8 +1941,7 @@ msgid ""
 msgstr ""
 
 #: data/classes/to.cls:9
-msgid ""
-"+1 of Wisdom, for the inutiles knowledges obtained watching TV novels."
+msgid "+1 of Wisdom, for the inutiles knowledges obtained watching TV novels."
 msgstr ""
 
 #: data/classes/to.cls:11
@@ -2065,8 +2238,9 @@ msgstr ""
 
 #: data/races/skinhead.rca:6
 msgid ""
-"Since they don't have common sense, Skinhead Maniacs have to be of Alignment "
-"/ Tendency Capitalist Proprietary Software or Chaotic Proprietary Software"
+"Since they don't have common sense, Skinhead Maniacs have to be of "
+"Alignment / Tendency Capitalist Proprietary Software or Chaotic Proprietary "
+"Software"
 msgstr ""
 
 #: data/races/skinhead.rca:12
@@ -2380,8 +2554,8 @@ msgid ""
 "It's the physical strength of the creature, measuring how gross and "
 "potential it is. A creature with too much strength can beat like a Titan and "
 "smash like a Hulk. A creature with low strength can't beat anyone and is "
-"frequently subjugated by others like a little chicken.||Ameiva: Strength "
-"1|Ratazana: Strength 2|Ente: Strength 23"
+"frequently subjugated by others like a little chicken.||Ameiva: Strength 1|"
+"Ratazana: Strength 2|Ente: Strength 23"
 msgstr ""
 
 #: data/skills/furtividade.ski:1
@@ -2553,8 +2727,8 @@ msgid ""
 "Measures the creature' expertise in dealing with any sort of real-life "
 "situation. A very wise organism can do 10 years of post-graduate studies "
 "without any problem. A creature with few wisdom points can get lost on the "
-"way from the university restaurant to the bathroom.||Ameiva: Wisdom "
-"4|Ratazana: Wisdom 6|Ente: Wisdom 12"
+"way from the university restaurant to the bathroom.||Ameiva: Wisdom 4|"
+"Ratazana: Wisdom 6|Ente: Wisdom 12"
 msgstr ""
 
 #: data/skills/semtempo.ski:1
@@ -2669,8 +2843,7 @@ msgid "I am Logan, maintainer of this occupation."
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:23
-msgid ""
-"Occupation? Is this, the cleanest house I've ever seen, an occupation?"
+msgid "Occupation? Is this, the cleanest house I've ever seen, an occupation?"
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:26 data/dialogs/tutorial/logan.dlg:55
@@ -2777,8 +2950,8 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:180
 msgid ""
-"Hey, have you heard about the Vermin Extermination Services of S.C.O.U.R.G.E "
-"?"
+"Hey, have you heard about the Vermin Extermination Services of S.C.O.U.R.G."
+"E ?"
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:193
@@ -2964,12 +3137,27 @@ msgid "Never!"
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:146
-msgid ""
-"I'm waiting for you install the Ruindows on the occupation's notebook!"
+msgid "I'm waiting for you install the Ruindows on the occupation's notebook!"
+msgstr ""
+
+#: data/missions/tutorial/mission1.mis:2
+msgid "Find Chrono Trigger cartdrige for Logan."
+msgstr ""
+
+#: data/missions/tutorial/mission2.mis:2
+msgid "Exterminate all living Creatures at Bunker School."
+msgstr ""
+
+#: data/missions/tutorial/mission3.mis:2
+msgid "Install Ruindows at the occupation's notebook for Santa Claws."
 msgstr ""
 
 #: data/models/objetos/itens/healkit/healkit.dcc:1
 msgid "First Aid Kit"
+msgstr ""
+
+#: data/models/objetos/itens/garrafa1/garrafa1.dcc:1
+msgid "Beer Bottle"
 msgstr ""
 
 #: data/models/objetos/geral/computador/computador.dcc:1
@@ -2978,6 +3166,10 @@ msgstr ""
 
 #: data/models/objetos/geral/notebook/notebook.dcc:1
 msgid "Notebook"
+msgstr ""
+
+#: data/models/objetos/ammo/9mm_pack/9mm_pack.dcc:1
+msgid "9mm Ammo Pack"
 msgstr ""
 
 #: data/weapons/definitions/axe.wcc:1
@@ -3101,18 +3293,15 @@ msgstr ""
 msgid "Santa Claws"
 msgstr ""
 
-#, c-format
 #~ msgid "Error while opening skills list: %s\n"
 #~ msgstr "Error mientras se abría la lista de habilidades: %s\n"
 
-#, c-format
 #~ msgid "Can't open skill file: %s \n"
 #~ msgstr "No se puede abrir el archivo de habilidades: %s \n"
 
 #~ msgid "Charism"
 #~ msgstr "Carisma"
 
-#, c-format
 #~ msgid "Error while writing Options: %s\n"
 #~ msgstr "Error mientras se escribían las opciones: %s\n"
 
@@ -3122,7 +3311,6 @@ msgstr ""
 #~ msgid "Class Description"
 #~ msgstr "Descripción de Clase"
 
-#, c-format
 #~ msgid "Ouch, can't load NPC's file: %s.\n"
 #~ msgstr "Ups, No se pueden cargar los archivos NPC's: %s.\n"
 
@@ -3135,58 +3323,43 @@ msgstr ""
 #~ msgid "Text without any relation!"
 #~ msgstr "Texto sin relación!"
 
-#~ msgid "Unknow Attribute:"
-#~ msgstr "Atributo desconocido:"
-
-#, c-format
 #~ msgid "Can't open font file: %s\n"
 #~ msgstr "No se puede abrir archivo de fuentes: %s\n"
 
-#, c-format
 #~ msgid "Unknow option: %s\n"
 #~ msgstr "Opción Desconocida: %s\n"
 
-#, c-format
 #~ msgid "Can't open skill image: %s\n"
 #~ msgstr "No se puede abrir la imagen de habilidad: %s\n"
 
-#, c-format
 #~ msgid "Error while opening skills list:skills/skills.skl\n"
 #~ msgstr "Error mientras se abría la lista de habilidades:skills/skills.skl\n"
 
-#, c-format
 #~ msgid "Can't Open the options file: %s\n"
 #~ msgstr "No se puede abrir el archivo de opciones: %s\n"
 
-#, c-format
 #~ msgid "No Options File Avaible!\n"
 #~ msgstr "No hay archivo de opciones disponible!\n"
 
-#, c-format
 #~ msgid "Creating Directory: %s : "
 #~ msgstr "Creando Directorio: %s : "
 
-#, c-format
 #~ msgid "Creating Options: %s\n"
 #~ msgstr "Creando Opciones: %s\n"
 
 #~ msgid "Feats"
 #~ msgstr "Características"
 
-#, c-format
 #~ msgid "Can't load mouse cursor: %s\n"
 #~ msgstr "No se puede cargar el cursor del ratón: %s\n"
 
-#, c-format
 #~ msgid "Can't open image: %s\n"
 #~ msgstr "No se puede abrir imagen: %s\n"
 
-#, c-format
 #~ msgid "Warn: Can't Load Picture, may crash soon (out of memory)!\n"
 #~ msgstr ""
 #~ "Advertencia: No se puede cargar la imagen, puede dañarse pronto (falta de "
 #~ "memoria)!\n"
 
-#, c-format
 #~ msgid "Something must be wrong! Try editing ~/.dccnitghtmare/options.cfg\n"
 #~ msgstr "Algo debe estar mal! Trata editando ~/.dccnitghtmare/options.cfg\n"

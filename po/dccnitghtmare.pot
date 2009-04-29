@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2009-02-20 10:16-0300\n"
+"POT-Creation-Date: 2009-04-29 14:34-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -439,34 +439,34 @@ msgstr ""
 msgid "No enemies in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1785 src/engine/dccnit.cpp:2236
+#: src/engine/dccnit.cpp:1785 src/engine/dccnit.cpp:2251
 #: src/engine/shortcutswindow.cpp:32
 msgid "Nothing"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1984
+#: src/engine/dccnit.cpp:1999
 #, c-format
 msgid "%s taken."
 msgstr ""
 
-#: src/engine/dccnit.cpp:2006
+#: src/engine/dccnit.cpp:2021
 msgid "Inventory is full!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2038
+#: src/engine/dccnit.cpp:2053
 msgid "Door"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2171
+#: src/engine/dccnit.cpp:2186
 #, c-format
 msgid "%s attacks %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2337
+#: src/engine/dccnit.cpp:2352
 msgid "No more actions. Turn ended."
 msgstr ""
 
-#: src/engine/dccnit.cpp:3827
+#: src/engine/dccnit.cpp:3842
 msgid "Exit Battle Mode"
 msgstr ""
 
