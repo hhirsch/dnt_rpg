@@ -89,7 +89,7 @@ class camera
        * \param characterZ -> character Z position
        * \param characterOrientation -> character Orientation */
       void updateCamera(GLfloat characterX, GLfloat characterY, 
-                           GLfloat characterZ, GLfloat characterOrientation);
+                        GLfloat characterZ, GLfloat characterOrientation);
 
       /*! Change the minimun zoom value. Usefull for other applications,
        * like the map editor, who needs to be more "far" 

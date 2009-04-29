@@ -21,6 +21,7 @@
 #define GUI_IO_TEXTURE_PREVIOUS     8
 #define GUI_IO_TEXTURE_NEXT         9
 #define GUI_IO_TEXTURE_INSERT      10
+#define GUI_IO_SOUNDS              11
 
 #define TOOL_NONE            0
 
@@ -33,6 +34,7 @@
 #define GUI_IO_STATE_PARTICLES 5
 #define GUI_IO_STATE_NPCS      6
 #define GUI_IO_STATE_MUSIC     7
+#define GUI_IO_STATE_SOUNDS    8 
 
 /**! The Super GUI IO Class, to control things on map Editor! */
 class guiIO 

@@ -27,6 +27,7 @@ using namespace std;
 #define NM_GERMAN     gettext("German")
 #define NM_SPANISH    gettext("Spanish")
 #define NM_ITALIAN    gettext("Italian")
+#define NM_DUTCH      gettext("Dutch")
 #define NM_RUSSIAN    gettext("Russian")
 
 #define FL_PORTUGUESE "pt_BR"
@@ -35,10 +36,12 @@ using namespace std;
 #define FL_GERMAN     "de"
 #define FL_ITALIAN    "it"
 #define FL_SPANISH    "es"
+#define FL_DUTCH      "nl"
 #define FL_RUSSIAN    "ru"
 
 
-#define DNT_LANG_RUSSIAN    6 /**< Russian Language */
+#define DNT_LANG_RUSSIAN    7 /**< Russian Language */
+#define DNT_LANG_DUTCH      6 /**< Dutch Language */
 #define DNT_LANG_ITALIAN    5 /**< Italian Language */
 #define DNT_LANG_GERMAN     4 /**< German Language */
 #define DNT_LANG_PORTUGUESE 3 /**< Portuguese Language */
@@ -46,7 +49,7 @@ using namespace std;
 #define DNT_LANG_FRENCH     1 /**< French Language */
 #define DNT_LANG_ENGLISH    0 /**< English Language */
 
-#define DNT_LANG_LAST  5
+#define DNT_LANG_LAST  6
 #define DNT_LANG_FIRST 0
 
 /****************************************************************
@@ -384,6 +387,11 @@ string options::languageName()
          saux = NM_FRENCH;
          break;
       }
+      case DNT_LANG_DUTCH:
+      {
+         saux = NM_DUTCH;
+         break;
+      }
       case DNT_LANG_GERMAN:
       {
          saux = NM_GERMAN;
@@ -440,7 +448,12 @@ void options::setLanguage()
       {
          saux = FL_FRENCH;
          break;
-      }     
+      }
+      case DNT_LANG_DUTCH:
+      {
+         saux = FL_DUTCH;
+         break;
+      }
       case DNT_LANG_GERMAN:
       {
          saux = FL_GERMAN;
