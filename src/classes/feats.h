@@ -47,6 +47,10 @@ class depFeat
 class featDescription
 {
    public:
+
+      /*! A construction for default values */
+      featDescription();
+
       int internalListNumber;      /**< Number on List */
       int requeridedLevel;         /**< Requerided Character class level */
       factor requeridedFactor;     /**< Requerided Factor (class, race, etc) */

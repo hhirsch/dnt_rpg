@@ -1,17 +1,9 @@
-gettext("Ranged Attack")
-gettext("Character's ranged attack.")
-1
-ALL ALL
-ATTRIBUTE DEXTERITY
-NONE NONE
-ALL ALL
-0*d0+0
-0*d0+0
-0,0,0
-0 ACT_TYPE_NORMAL_ACTION ACT_ATTACK
-0
-NONE 0.0,0
-NONE 0.0,0
-NONE 0.0,0
-NONE 0.0,0
-NONE 0.0,0
+title = gettext("Ranged Attack")
+description = gettext("Character's ranged attack.")
+
+id = RANGED_ATTACK
+
+bonus = ATTRIBUTE DEXTERITY
+
+affect = ALL ALL
+

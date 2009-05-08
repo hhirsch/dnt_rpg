@@ -1,17 +1,8 @@
-gettext("Melee Attack")
-gettext("Character's melee attack.")
-1
-ALL ALL
-ATTRIBUTE STRENGTH
-NONE NONE
-ALL ALL
-0*d0+0
-0*d0+0
-0,0,0
-0 ACT_TYPE_NORMAL_ACTION ACT_ATTACK
-0
-NONE 0.0,0
-NONE 0.0,0
-NONE 0.0,0
-NONE 0.0,0
-NONE 0.0,0
+title = gettext("Melee Attack")
+description = gettext("Character's melee attack.")
+
+id = MELEE_ATTACK
+
+bonus = ATTRIBUTE STRENGTH
+
+affect = ALL ALL

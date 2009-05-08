@@ -16,6 +16,9 @@ using namespace std;
 class factor
 {
    public:
+      /* Default Constructor */
+      factor(){type = "ALL"; id = "ALL";};
+
       string type;    /**< Type of the Factor (ex: Skill, Feat, Class, etc) */
       string id;      /**< ID of the Factor (ex: Intimidation, etc) */
 };

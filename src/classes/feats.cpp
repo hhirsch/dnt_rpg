@@ -4,7 +4,39 @@
 #include "../particle/partcontroller.h"
 #include "../lang/translate.h"
 #include "../etc/dirs.h"
+#include "../etc/defparser.h"
 #include <SDL/SDL_image.h>
+
+/**************************************************************************
+ *                            FEAT_DESCRIPTION                            *
+ **************************************************************************/
+
+/***************************************************************
+ *                       Constructor                           *
+ ***************************************************************/
+featDescription::featDescription()
+{
+   int i;
+
+   internalListNumber = 0;
+   requeridedLevel = 0;
+   quantityPerDay = 0;
+   aditionalQuantity = 0;
+   aditionalLevels = 0;
+   costToUse = 0;
+   actionType = ACT_TYPE_NORMAL_ACTION;
+   action = ACT_ATTACK;
+   range = 0;
+   name = "undefined";
+   idString = "unknow";
+   description = "undefined";
+   image = NULL;
+
+   for(i = 0; i < MAX_DEP_FEATS; i++)
+   {
+      depFeats[i].used = false;
+   }      
+}
 
 /**************************************************************************
  *                                    FEAT                                *
@@ -128,7 +160,7 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
 
    /* Get Ammo from weapon, if needed */
    if( (featNumber == FEAT_RANGED_ATTACK) || 
-         (featNumber == FEAT_MELEE_ATTACK) )
+       (featNumber == FEAT_MELEE_ATTACK) )
    {
       defineWeapon(currentWeapon);
    }
@@ -528,9 +560,7 @@ featsList::featsList(string dir, string arq)
    char buffer[1024];
    char buf2[256];
    char buf3[256];
-   char buf4[256];
    int num;
-   int i;
    int aux;
 
    if(!(file=fopen(arq.c_str(),"r")))
@@ -551,76 +581,159 @@ featsList::featsList(string dir, string arq)
       m_feats = NULL;
    }
 
-   
+   /* Temp variables */
+   string key="", value="";
+   int numberOfDices=0, diceID=0, sumNumber=0;
+   int curDepFeat=0;
+
+   /* Get all Feats from file */
    for(aux = 0; aux < totalFeats; aux++)
    {
       fgets(buffer, sizeof(buffer), file);
-      sscanf(buffer,"%d %s %s %s",&num,&buf2[0],&buf3[0], &buf4[0]);
+      sscanf(buffer,"%d %s %s",&num,&buf2[0],&buf3[0]);
       arqImagem = buf3;
       arqDescricao = buf2;
       arqDescricao = dir+arqDescricao;
-      m_feats[aux].idString = buf4;
 
-      FILE* desc;
-      if(! (desc = fopen(arqDescricao.c_str(), "r")))
+      curDepFeat = 0;
+
+      /* Open the feat's description file */
+      defParser desc;
+      if(!desc.load(arqDescricao))
       {
-         printf("Can't open talent file: %s \n",arqDescricao.c_str() );
+         cerr << "Can't open talent file: " << arqDescricao << endl;
          return;
       }
       m_feats[aux].internalListNumber = aux;
-      fgets(buffer, sizeof(buffer), desc);
-      m_feats[aux].name = translateDataString(buffer);
-      fgets(buffer, sizeof(buffer), desc);
-      m_feats[aux].description = translateDataString(buffer);
-      fscanf(desc,"%d",&m_feats[aux].requeridedLevel);
-      fscanf(desc,"%s %s",&buffer[0], &buf2[0]);
-      m_feats[aux].requeridedFactor.type = buffer;
-      m_feats[aux].requeridedFactor.id = buf2;
-      fscanf(desc,"%s %s",&buffer[0], &buf2[0]);
-      m_feats[aux].conceptBonus.type = buffer;
-      m_feats[aux].conceptBonus.id = buf2;
-      fscanf(desc,"%s %s",&buffer[0], &buf2[0]);
-      m_feats[aux].conceptAgainst.type = buffer;
-      m_feats[aux].conceptAgainst.id = buf2;
-      fscanf(desc,"%s %s",&buffer[0], &buf2[0]);
-      m_feats[aux].conceptTarget.type = buffer;
-      m_feats[aux].conceptTarget.id = buf2;
 
-      /* Get Dices */
-      int numberOfDices=0, diceID=0, sumNumber=0;
-
-      /* Base Dice */
-      fscanf(desc,"%d*d%d+%d",&numberOfDices, &diceID, &sumNumber);
-      m_feats[aux].diceInfo.baseDice.setType(diceID);
-      m_feats[aux].diceInfo.baseDice.setNumberOfDices(numberOfDices);
-      m_feats[aux].diceInfo.baseDice.setSumNumber(sumNumber);
-
-      /* Aditional dice */
-      fscanf(desc,"%d*d%d+%d", &numberOfDices, &diceID, &sumNumber);
-      m_feats[aux].diceInfo.aditionalDice.setType(diceID);
-      m_feats[aux].diceInfo.aditionalDice.setNumberOfDices(numberOfDices);
-      m_feats[aux].diceInfo.aditionalDice.setSumNumber(sumNumber);
-
-      /* Aditional Quantity */
-      fscanf(desc,"%d,%d,%d",&m_feats[aux].quantityPerDay,
-                             &m_feats[aux].aditionalQuantity,
-                             &m_feats[aux].aditionalLevels);
-      fscanf(desc,"%d %s %s",&m_feats[aux].costToUse,
-                             &buf2[0],&buf3[0]);
-      m_feats[aux].actionType = numberActionType(buf2);
-      m_feats[aux].action = numberAction(buf3);
-      fscanf(desc,"%d",&m_feats[aux].range);
-      //Read Dependent Feats
-      for(i=0; i<MAX_DEP_FEATS;i++)
+      /* Now parse all feat tuples */
+      while(desc.getNextTuple(key, value))
       {
-         fscanf(desc,"%s %f,%d",&buf2[0],
-                                &m_feats[aux].depFeats[i].reason,
-                                &num);
-         m_feats[aux].depFeats[i].featIDString = buf2;
-         m_feats[aux].depFeats[i].used = num == 1;
+         /* Text Keys */
+         if(key == "title")
+         {
+            /* Feat Title */
+            m_feats[aux].name = translateDataString(value);
+         }
+         else if(key == "description")
+         {
+            /* Feat Description Text */
+            m_feats[aux].description = translateDataString(value);
+         }
+
+         /* Identifiers */
+         else if(key == "id")
+         {
+            m_feats[aux].idString = value;
+         }
+
+         /* Pre-Requistes */
+         else if(key == "requerided")
+         {
+            /* Requerided factor  */
+            sscanf(value.c_str(), "%s %s", &buffer[0], &buf2[0]);
+            m_feats[aux].requeridedFactor.type = buffer;
+            m_feats[aux].requeridedFactor.id = buf2;
+         }
+         else if(key == "reqValue")
+         {
+            /* requerided value (level) */
+            sscanf(value.c_str(),"%d",&m_feats[aux].requeridedLevel);
+         }
+         else if(key == "range")
+         {
+            /* Feat Range */
+            sscanf(value.c_str(),"%d",&m_feats[aux].range);
+         }
+
+         /* Action definition */
+         else if(key == "actionType")
+         {
+            /* Action Type */
+            m_feats[aux].actionType = numberActionType(value);
+         }
+         else if(key == "action")
+         {
+            /* Action */
+            m_feats[aux].action = numberAction(value);
+         }
+
+         /* Concept Bonus */
+         else if(key == "bonus")
+         {
+            sscanf(value.c_str(), "%s %s", &buffer[0], &buf2[0]);
+            m_feats[aux].conceptBonus.type = buffer;
+            m_feats[aux].conceptBonus.id = buf2;
+         }
+
+         /* Concept Target */
+         else if(key == "affect")
+         {
+            /* Affect */
+            sscanf(value.c_str(), "%s %s", &buffer[0], &buf2[0]);
+            m_feats[aux].conceptTarget.type = buffer;
+            m_feats[aux].conceptTarget.id = buf2;
+         }
+
+         /* Dices! */
+         else if(key == "damage")
+         {
+            /* Base Dice */
+            sscanf(value.c_str(), "%d*d%d+%d",
+                   &numberOfDices, &diceID, &sumNumber);
+            m_feats[aux].diceInfo.baseDice.setType(diceID);
+            m_feats[aux].diceInfo.baseDice.setNumberOfDices(numberOfDices);
+            m_feats[aux].diceInfo.baseDice.setSumNumber(sumNumber);
+         }
+         else if(key == "aditionalDice")
+         {
+            /* Aditional dice */
+            sscanf(value.c_str(), "%d*d%d+%d", 
+                   &numberOfDices, &diceID, &sumNumber);
+            m_feats[aux].diceInfo.aditionalDice.setType(diceID);
+            m_feats[aux].diceInfo.aditionalDice.setNumberOfDices(numberOfDices);
+            m_feats[aux].diceInfo.aditionalDice.setSumNumber(sumNumber);
+         }
+         else if(key == "quantityPerDay")
+         {
+            /* Quantity Per Day */
+            sscanf(value.c_str(),"%d",&m_feats[aux].quantityPerDay);
+         }
+         else if(key == "aditionalQuantity")
+         {
+            /* Aditional Quantity */
+            sscanf(value.c_str(),"%d",&m_feats[aux].aditionalQuantity);
+         }
+         else if(key == "aditionalLevels")
+         {
+            /* Aditional Levels */
+            sscanf(value.c_str(),"%d",&m_feats[aux].aditionalLevels);
+         }
+
+         /* Dependent Feats */
+         else if(key == "depFeat")
+         {
+            if(curDepFeat < MAX_DEP_FEATS)
+            {
+               sscanf(value.c_str(),"%f %s",
+                      &m_feats[aux].depFeats[curDepFeat].reason,
+                      &buf2[0]);
+               m_feats[aux].depFeats[curDepFeat].featIDString = buf2;
+               m_feats[aux].depFeats[curDepFeat].used = true;
+               curDepFeat++;
+            }
+         }
+
+         /* Unknow Key!! */
+         else
+         {
+            cerr << "Warning: Unknow key '" << key << "' at feat file: "
+                 << arqDescricao << endl;
+         }
+
       }
+
       m_feats[aux].image = IMG_Load(dirInfo.getRealFile(arqImagem).c_str());
-      fclose(desc);
    }
 
    fclose(file);

@@ -2,8 +2,8 @@ title = gettext("Aberration")
 description = gettext("The Administration Student's Taylorism is at its maximum capacity after those years of graduation. The student became a natural aberration, a biped ox. It'll receive +2 points on Constitution and on Strenght, +5 of Taylorism, -2 on Charism, -4 on Intelligence and -4 on I Am Not A Fool. ")
 
 # The Pre-Requisite
-class = ADM
-level = 20
+requerided = CLASS ADM
+reqValue = 20
 
 # The ID
 id = ABERRATION
