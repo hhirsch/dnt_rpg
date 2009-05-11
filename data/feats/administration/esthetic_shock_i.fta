@@ -6,7 +6,7 @@ requerided = CLASS ADM
 reqValue = 1
 
 # The ID
-id = ESTHETIC_SHOCK_II
+id = ESTHETIC_SHOCK_I
 
 # The base attribute to bonus the d20 roll
 bonus = ATTRIBUTE BIZARRE_CLOTHES
