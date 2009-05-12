@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2009-04-29 14:39-0300\n"
+"POT-Creation-Date: 2009-05-12 10:00-0300\n"
 "PO-Revision-Date: 2007-11-20 17:24+0000\n"
 "Last-Translator: Sergei Zivukov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -57,11 +57,11 @@ msgstr ""
 msgid "Critical Hit!"
 msgstr "Критический хит!"
 
-#: src/classes/feats.cpp:125
+#: src/classes/feats.cpp:157
 msgid "Invalid Talent"
 msgstr "Неправильный подвиг"
 
-#: src/classes/feats.cpp:176
+#: src/classes/feats.cpp:208
 msgid "Not enought points to use!"
 msgstr "Недостаточно очков для использования!"
 
@@ -158,7 +158,7 @@ msgstr "Харизма"
 msgid "Attribute Description"
 msgstr "Описание атрибута"
 
-#: src/engine/attwindow.cpp:535 src/engine/dccnit.cpp:514
+#: src/engine/attwindow.cpp:535 src/engine/dccnit.cpp:516
 #: src/engine/inventwindow.cpp:330 src/engine/options.cpp:1045
 msgid "Warning"
 msgstr "Предупреждение"
@@ -337,86 +337,86 @@ msgstr "Другие уровни"
 msgid "Class Modifiers"
 msgstr ""
 
-#: src/engine/classwindow.cpp:210 src/engine/racewindow.cpp:150
+#: src/engine/classwindow.cpp:211 src/engine/racewindow.cpp:150
 msgid "No Modifiers."
 msgstr ""
 
-#: src/engine/classwindow.cpp:217
+#: src/engine/classwindow.cpp:218
 msgid "Class Talents"
 msgstr ""
 
-#: src/engine/classwindow.cpp:228 src/engine/racewindow.cpp:168
+#: src/engine/classwindow.cpp:231 src/engine/racewindow.cpp:168
 msgid "No Talents."
 msgstr ""
 
-#: src/engine/classwindow.cpp:236
+#: src/engine/classwindow.cpp:239
 msgid "Class Skills"
 msgstr ""
 
-#: src/engine/classwindow.cpp:255 src/engine/racewindow.cpp:194
+#: src/engine/classwindow.cpp:258 src/engine/racewindow.cpp:194
 msgid "No Skills."
 msgstr "Нет умений."
 
-#: src/engine/dccnit.cpp:455 src/engine/dccnit.cpp:505
+#: src/engine/dccnit.cpp:457 src/engine/dccnit.cpp:507
 msgid "Error"
 msgstr ""
 
-#: src/engine/dccnit.cpp:455
+#: src/engine/dccnit.cpp:457
 msgid "Can't load the saved game!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:500
+#: src/engine/dccnit.cpp:502
 msgid "Information"
 msgstr ""
 
-#: src/engine/dccnit.cpp:501
+#: src/engine/dccnit.cpp:503
 msgid "The game was saved!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:505
+#: src/engine/dccnit.cpp:507
 msgid "Can't save game!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:515
+#: src/engine/dccnit.cpp:517
 msgid "Can't save game while fighting!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:638
+#: src/engine/dccnit.cpp:640
 #, c-format
 msgid "Saving Current Map Modifications"
 msgstr ""
 
-#: src/engine/dccnit.cpp:673
+#: src/engine/dccnit.cpp:675
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Загрузка карты: %s"
 
-#: src/engine/dccnit.cpp:736
+#: src/engine/dccnit.cpp:738
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Загрузка NPC: %s"
 
-#: src/engine/dccnit.cpp:776
+#: src/engine/dccnit.cpp:778
 msgid "Creating MiniMap"
 msgstr ""
 
-#: src/engine/dccnit.cpp:782
+#: src/engine/dccnit.cpp:784
 msgid "Putting GUI on Screen"
 msgstr "Помещение GUI на экран"
 
-#: src/engine/dccnit.cpp:829
+#: src/engine/dccnit.cpp:831
 msgid "Loading Particles"
 msgstr "Загрузка частиц"
 
-#: src/engine/dccnit.cpp:859
+#: src/engine/dccnit.cpp:861
 msgid "Loading Changes..."
 msgstr "Загрузка изменений..."
 
-#: src/engine/dccnit.cpp:887
+#: src/engine/dccnit.cpp:889
 msgid "Done!"
 msgstr "Готово!"
 
-#: src/engine/dccnit.cpp:979
+#: src/engine/dccnit.cpp:981
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -424,50 +424,50 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1496
+#: src/engine/dccnit.cpp:1498
 msgid "Too far away for the action!"
 msgstr "Слишком далеко для действия!"
 
-#: src/engine/dccnit.cpp:1541
+#: src/engine/dccnit.cpp:1543
 msgid "No NPCs in the area."
 msgstr "Нет NPC'ов на арене"
 
-#: src/engine/dccnit.cpp:1592
+#: src/engine/dccnit.cpp:1594
 msgid "Surprise Attack Turn."
 msgstr "Неожиданное нападение."
 
-#: src/engine/dccnit.cpp:1606
+#: src/engine/dccnit.cpp:1608
 msgid "No enemies in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1785 src/engine/dccnit.cpp:2251
+#: src/engine/dccnit.cpp:1787 src/engine/dccnit.cpp:2253
 #: src/engine/shortcutswindow.cpp:32
 msgid "Nothing"
 msgstr "Ничего"
 
-#: src/engine/dccnit.cpp:1999
+#: src/engine/dccnit.cpp:2001
 #, c-format
 msgid "%s taken."
 msgstr "%s взят."
 
-#: src/engine/dccnit.cpp:2021
+#: src/engine/dccnit.cpp:2023
 msgid "Inventory is full!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2053
+#: src/engine/dccnit.cpp:2055
 msgid "Door"
 msgstr "Дверь"
 
-#: src/engine/dccnit.cpp:2186
+#: src/engine/dccnit.cpp:2188
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s атаковал %s"
 
-#: src/engine/dccnit.cpp:2352
+#: src/engine/dccnit.cpp:2354
 msgid "No more actions. Turn ended."
 msgstr ""
 
-#: src/engine/dccnit.cpp:3842
+#: src/engine/dccnit.cpp:3844
 msgid "Exit Battle Mode"
 msgstr "Покинуть режим сражения"
 
@@ -2179,16 +2179,6 @@ msgid ""
 "Carte Blanche."
 msgstr ""
 
-#: data/feats/im_bombadinho.fta:1
-msgid "I am Bombadinho"
-msgstr ""
-
-#: data/feats/im_bombadinho.fta:2
-msgid ""
-"The Student who has frequently gone to the academy, permanently receives +1 "
-"in Strength."
-msgstr ""
-
 #: data/feats/melee_attack.fta:1
 msgid "Melee Attack"
 msgstr ""
@@ -2197,23 +2187,192 @@ msgstr ""
 msgid "Character's melee attack."
 msgstr ""
 
-#: data/feats/powerfull_esophagus.fta:1
-msgid "Powerful Esophagus"
-msgstr ""
-
-#: data/feats/powerfull_esophagus.fta:2
-msgid ""
-"Once a day, and because his muscles have invaded his internal organs, the "
-"Physical Education Student is able to expel a sphere of fire that causes 6d6 "
-"(plus 2d6, for each level above 15) in Damage."
-msgstr ""
-
 #: data/feats/ranged_attack.fta:1
 msgid "Ranged Attack"
 msgstr ""
 
 #: data/feats/ranged_attack.fta:2
 msgid "Character's ranged attack."
+msgstr ""
+
+#: data/feats/administration/aberration.fta:1
+msgid "Aberration"
+msgstr ""
+
+#: data/feats/administration/aberration.fta:2
+msgid ""
+"The Administration Student's Taylorism is at its maximum capacity after "
+"those years of graduation. The student became a natural aberration, a biped "
+"ox. It'll receive +2 points on Constitution and on Strenght, +5 of "
+"Taylorism, -2 on Charism, -4 on Intelligence and -4 on I Am Not A Fool. "
+msgstr ""
+
+#: data/feats/administration/esthetic_shock_i.fta:1
+msgid "Esthetic Shock I"
+msgstr ""
+
+#: data/feats/administration/esthetic_shock_i.fta:2
+msgid ""
+"At his first level, the Administration Student can charge Esthetic Shocks, "
+"one time per day, causing 1d4 points of damage, since the target creature "
+"fails at an I Am Not A Fool test against the Bizarre Clothes roll . For each "
+"2 levels, the character can use this feat for one more time per day."
+msgstr ""
+
+#: data/feats/administration/esthetic_shock_ii.fta:1
+msgid "Esthetic Shock II"
+msgstr ""
+
+#: data/feats/administration/esthetic_shock_ii.fta:2
+msgid ""
+"Due to the cerebral damages made by its graduation, the Administration "
+"Student upgrade its capacity to esthetic shock people, causing 1d6 damage, "
+"without resistances. The use of this feat consumes one Esthetic Shock I"
+msgstr ""
+
+#: data/feats/administration/esthetic_shock_iii.fta:1
+msgid "Esthetic Shock III"
+msgstr ""
+
+#: data/feats/administration/esthetic_shock_iii.fta:2
+msgid ""
+"After lot of time, the cerebral damage is at unimaginable levels. Now the "
+"Administration Student Esthetic Shock inflicts 2d6 of damage. The use of "
+"this feat consumes 2 Esthetic Shocks I"
+msgstr ""
+
+#: data/feats/administration/supreme_esthetic_shock.fta:1
+msgid "Supreme Esthetic Shock"
+msgstr ""
+
+#: data/feats/administration/supreme_esthetic_shock.fta:2
+msgid ""
+"It's the apex of shocking people that a common Administration Student can "
+"achieve. The student capacity to discern what is an watermelon than what is "
+"a cloth is void. For now on, the Esthetic Shock can inflict 3d12 points of "
+"damage. The use of this feat consumes 3 Esthetic Shocks I."
+msgstr ""
+
+#: data/feats/biology/ameivas_worms.fta:1
+msgid "Ameiva's Worms"
+msgstr ""
+
+#: data/feats/biology/ameivas_worms.fta:2
+msgid ""
+"The Biology Student can thrown its bottle of worms collected from ameiva's "
+"bowels, one time per day added by one more time for each level after the "
+"4th, inflicting 1d6+Biology Student Level points of damage."
+msgstr ""
+
+#: data/feats/biology/mass_arthropds_attack.fta:1
+msgid "Mass Arthropds Attack"
+msgstr ""
+
+#: data/feats/biology/mass_arthropds_attack.fta:2
+msgid ""
+"The more the graduation passes, the more the Biology Students live together "
+"with animals, so they can invoque, 2 times per day, a small arthropds horde "
+"to attack their enemies in a 10 meters radius, inflicting 2d8 + 1d6 per "
+"Biology Student Level greater than 10."
+msgstr ""
+
+#: data/feats/gothic/lament_souls.fta:1
+msgid "Laments of One Thousand Souls"
+msgstr ""
+
+#: data/feats/gothic/lament_souls.fta:2
+msgid ""
+"Being adepts of the Romantic Poetry Second Generation, the Gothics are "
+"master on depressive art: they can end the day of the happiest 'Care Bear'. "
+"Making use of a full round action, the Gothic creature do a test of Bluff "
+"against the aim's I Am Not A Fool. In case of success, the aim will be on "
+"deep depression for the next 24 hours, receiving -5 on all Social Tests."
+msgstr ""
+
+#: data/feats/gothic/night_adoration.fta:1
+msgid "Night Adoration"
+msgstr ""
+
+#: data/feats/gothic/night_adoration.fta:2
+msgid ""
+"One time they are typically noturn creatures, Gothics receive some bonuses "
+"when far from the Sun's light: +2 in Intimidate for frighting children and "
+"oldies, +4 in Disguises, du to nobody percept that the stupid guy of other "
+"day is the huge and imponent Gothic of the Night, and +2 on all Combat "
+"relative rolls, since they know the benefities of shades and nocturnal "
+"whispers."
+msgstr ""
+
+#: data/feats/gothic/sun_weakness.fta:1
+msgid "Sun Weakness"
+msgstr ""
+
+#: data/feats/gothic/sun_weakness.fta:2
+msgid ""
+"Sun is a star that brings joy to Common Humans and a debilitation weakness "
+"to Gothics, because it dazes their makeups and reveals their butt faces. "
+"When affected by the Sun's light, Gothics receive -8 on all their Social "
+"Tests and -1 on all Combat relative rolls. They can't use Lament of One "
+"Thousand Souls and any Social Test agains't children will result in an "
+"automatic failure, because the children will think they are clows that want "
+"to play with them."
+msgstr ""
+
+#: data/feats/law/i_am_wrong.fta:1
+msgid "I am Wrong"
+msgstr ""
+
+#: data/feats/law/i_am_wrong.fta:2
+msgid ""
+"At the fourth level, the Law Students is so unbearable at his try to take "
+"advantages of someone else's innocence, that arrives to his first great miss "
+"act: He's fired from his voluntary period of training. After this sad mark, "
+"the students voice is so shrill and loudness that cause, when he scream, 1d4 "
+"points of damage, being able to stun the target for 1d6 turns. Rolls a "
+"fortitude test of all targets in a 30 meters radius against a difficulty of "
+"10 + Law Student Level to avoid being stunned and reduce the damage to a "
+"half."
+msgstr ""
+
+#: data/feats/mandatory/rookie.fta:1
+msgid "Rookie"
+msgstr ""
+
+#: data/feats/mandatory/rookie.fta:2
+msgid ""
+"Every rookie is know by its big ego, its make-new-friends desire and by its "
+"stupid questions."
+msgstr ""
+
+#: data/feats/physicaled/esophagus.fta:1
+msgid "Powerful Esophagus"
+msgstr ""
+
+#: data/feats/physicaled/esophagus.fta:2
+msgid ""
+"Once a day, and because his muscles have invaded his internal organs, the "
+"Physical Education Student is able to expel a sphere of fire that causes 6d6 "
+"(plus 2d6, for each level above 15) in Damage."
+msgstr ""
+
+#: data/feats/physicaled/i_am_a_little_conan.fta:1
+msgid "I'm a little Conan"
+msgstr ""
+
+#: data/feats/physicaled/i_am_a_little_conan.fta:2
+msgid ""
+"Physical Education Students, due to their frequency at the gym, gets +1 "
+"Strength permamently."
+msgstr ""
+
+#: data/feats/physicaled/virtually_invencible.fta:1
+msgid "Virtually Invencible"
+msgstr ""
+
+#: data/feats/physicaled/virtually_invencible.fta:2
+msgid ""
+"Thanks to their constant physical work, the Physical Education Students "
+"receive +5 on Natural Armor and a Damage Resistance of 8/-"
 msgstr ""
 
 #: data/skills/acrobacias.ski:1

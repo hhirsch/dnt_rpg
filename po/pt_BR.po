@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2009-04-29 14:39-0300\n"
+"POT-Creation-Date: 2009-05-12 10:00-0300\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -55,11 +55,11 @@ msgstr "Cura Crítica!"
 msgid "Critical Hit!"
 msgstr "Dano Crítico!"
 
-#: src/classes/feats.cpp:125
+#: src/classes/feats.cpp:157
 msgid "Invalid Talent"
 msgstr "Habilidade Inválida"
 
-#: src/classes/feats.cpp:176
+#: src/classes/feats.cpp:208
 msgid "Not enought points to use!"
 msgstr "Pontos não suficientes para usar!"
 
@@ -156,7 +156,7 @@ msgstr "Carisma"
 msgid "Attribute Description"
 msgstr "Descrição do Atributo"
 
-#: src/engine/attwindow.cpp:535 src/engine/dccnit.cpp:514
+#: src/engine/attwindow.cpp:535 src/engine/dccnit.cpp:516
 #: src/engine/inventwindow.cpp:330 src/engine/options.cpp:1045
 msgid "Warning"
 msgstr "Aviso"
@@ -335,86 +335,86 @@ msgstr "Outros Níveis"
 msgid "Class Modifiers"
 msgstr "Moficadores de Classe"
 
-#: src/engine/classwindow.cpp:210 src/engine/racewindow.cpp:150
+#: src/engine/classwindow.cpp:211 src/engine/racewindow.cpp:150
 msgid "No Modifiers."
 msgstr "Sem Modificadores."
 
-#: src/engine/classwindow.cpp:217
+#: src/engine/classwindow.cpp:218
 msgid "Class Talents"
 msgstr "Habilidades da Classe"
 
-#: src/engine/classwindow.cpp:228 src/engine/racewindow.cpp:168
+#: src/engine/classwindow.cpp:231 src/engine/racewindow.cpp:168
 msgid "No Talents."
 msgstr "Sem Habilidades."
 
-#: src/engine/classwindow.cpp:236
+#: src/engine/classwindow.cpp:239
 msgid "Class Skills"
 msgstr "Perícias da Classe"
 
-#: src/engine/classwindow.cpp:255 src/engine/racewindow.cpp:194
+#: src/engine/classwindow.cpp:258 src/engine/racewindow.cpp:194
 msgid "No Skills."
 msgstr "Sem Perícias"
 
-#: src/engine/dccnit.cpp:455 src/engine/dccnit.cpp:505
+#: src/engine/dccnit.cpp:457 src/engine/dccnit.cpp:507
 msgid "Error"
 msgstr "Erro"
 
-#: src/engine/dccnit.cpp:455
+#: src/engine/dccnit.cpp:457
 msgid "Can't load the saved game!"
 msgstr "Não consegui carregar o jogo salvo!"
 
-#: src/engine/dccnit.cpp:500
+#: src/engine/dccnit.cpp:502
 msgid "Information"
 msgstr "Informação"
 
-#: src/engine/dccnit.cpp:501
+#: src/engine/dccnit.cpp:503
 msgid "The game was saved!"
 msgstr "O jogo foi salvo!"
 
-#: src/engine/dccnit.cpp:505
+#: src/engine/dccnit.cpp:507
 msgid "Can't save game!"
 msgstr "Não consegui salvar o jogo!"
 
-#: src/engine/dccnit.cpp:515
+#: src/engine/dccnit.cpp:517
 msgid "Can't save game while fighting!"
 msgstr "Não é possível salvar o jogo durante uma batalha!"
 
-#: src/engine/dccnit.cpp:638
+#: src/engine/dccnit.cpp:640
 #, c-format
 msgid "Saving Current Map Modifications"
 msgstr "Salvando Modificações"
 
-#: src/engine/dccnit.cpp:673
+#: src/engine/dccnit.cpp:675
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Carregando Mapa: %s"
 
-#: src/engine/dccnit.cpp:736
+#: src/engine/dccnit.cpp:738
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Carregando NPC: %s"
 
-#: src/engine/dccnit.cpp:776
+#: src/engine/dccnit.cpp:778
 msgid "Creating MiniMap"
 msgstr "Criando Mini Mapa"
 
-#: src/engine/dccnit.cpp:782
+#: src/engine/dccnit.cpp:784
 msgid "Putting GUI on Screen"
 msgstr "Colocando as janelas na tela"
 
-#: src/engine/dccnit.cpp:829
+#: src/engine/dccnit.cpp:831
 msgid "Loading Particles"
 msgstr "Carregando Partículas"
 
-#: src/engine/dccnit.cpp:859
+#: src/engine/dccnit.cpp:861
 msgid "Loading Changes..."
 msgstr "Carregando Mudanças..."
 
-#: src/engine/dccnit.cpp:887
+#: src/engine/dccnit.cpp:889
 msgid "Done!"
 msgstr "Pronto!"
 
-#: src/engine/dccnit.cpp:979
+#: src/engine/dccnit.cpp:981
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -426,50 +426,50 @@ msgstr ""
 "mesmos). DccNiTghtmare agradece aos que desenvolveram as bibliotecas: "
 "OpenAL, Cal3D, OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 
-#: src/engine/dccnit.cpp:1496
+#: src/engine/dccnit.cpp:1498
 msgid "Too far away for the action!"
 msgstr "Muito distante para realizar a ação!"
 
-#: src/engine/dccnit.cpp:1541
+#: src/engine/dccnit.cpp:1543
 msgid "No NPCs in the area."
 msgstr "Sem NPCs na área."
 
-#: src/engine/dccnit.cpp:1592
+#: src/engine/dccnit.cpp:1594
 msgid "Surprise Attack Turn."
 msgstr "Turno de ataque surpresa."
 
-#: src/engine/dccnit.cpp:1606
+#: src/engine/dccnit.cpp:1608
 msgid "No enemies in the area."
 msgstr "Sem inimigos na área."
 
-#: src/engine/dccnit.cpp:1785 src/engine/dccnit.cpp:2251
+#: src/engine/dccnit.cpp:1787 src/engine/dccnit.cpp:2253
 #: src/engine/shortcutswindow.cpp:32
 msgid "Nothing"
 msgstr "Nada"
 
-#: src/engine/dccnit.cpp:1999
+#: src/engine/dccnit.cpp:2001
 #, c-format
 msgid "%s taken."
 msgstr "Pegou %s."
 
-#: src/engine/dccnit.cpp:2021
+#: src/engine/dccnit.cpp:2023
 msgid "Inventory is full!"
 msgstr "O inventário está cheio!"
 
-#: src/engine/dccnit.cpp:2053
+#: src/engine/dccnit.cpp:2055
 msgid "Door"
 msgstr "Porta"
 
-#: src/engine/dccnit.cpp:2186
+#: src/engine/dccnit.cpp:2188
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s ataca %s"
 
-#: src/engine/dccnit.cpp:2352
+#: src/engine/dccnit.cpp:2354
 msgid "No more actions. Turn ended."
 msgstr "Sem mais ações: Turno Finalizado."
 
-#: src/engine/dccnit.cpp:3842
+#: src/engine/dccnit.cpp:3844
 msgid "Exit Battle Mode"
 msgstr "Sai do Modo de Batalha"
 
@@ -2648,18 +2648,6 @@ msgstr ""
 "os mesmos. Assim sendo, ele recebe a perícia Passe Livre como perícia de "
 "classe para qualquer classe escolhida."
 
-#: data/feats/im_bombadinho.fta:1
-msgid "I am Bombadinho"
-msgstr "Eu sou Bombadinho"
-
-#: data/feats/im_bombadinho.fta:2
-msgid ""
-"The Student who has frequently gone to the academy, permanently receives +1 "
-"in Strength."
-msgstr ""
-"O Estudante, devido às suas idas frequentes à academia, recebe +1 de força "
-"permanentemente."
-
 #: data/feats/melee_attack.fta:1
 msgid "Melee Attack"
 msgstr "Ataque"
@@ -2668,11 +2656,231 @@ msgstr "Ataque"
 msgid "Character's melee attack."
 msgstr "Este é o ataque base do jogador. Varia com a arma utilizada."
 
-#: data/feats/powerfull_esophagus.fta:1
+#: data/feats/ranged_attack.fta:1
+msgid "Ranged Attack"
+msgstr "Ataque à Distância"
+
+#: data/feats/ranged_attack.fta:2
+msgid "Character's ranged attack."
+msgstr "Ataque à distância base do jogador. Varia com a arma utilizada."
+
+#: data/feats/administration/aberration.fta:1
+msgid "Aberration"
+msgstr "Aberração"
+
+#: data/feats/administration/aberration.fta:2
+msgid ""
+"The Administration Student's Taylorism is at its maximum capacity after "
+"those years of graduation. The student became a natural aberration, a biped "
+"ox. It'll receive +2 points on Constitution and on Strenght, +5 of "
+"Taylorism, -2 on Charism, -4 on Intelligence and -4 on I Am Not A Fool. "
+msgstr ""
+"A capacidade bovina do Estudante é máxima depois destes anos de taylorismo "
+"exarcebado, tornando-se uma aberração natural, um ser bovino andante. Recebe "
+"+2 pontos de Constituição, +2 pontos de Força, +5 pontos de Bovinice de "
+"Taylor}, -2 em Carisma, -4 em Inteligência e -4 Não Sou Bobo."
+
+#: data/feats/administration/esthetic_shock_i.fta:1
+msgid "Esthetic Shock I"
+msgstr "Choque Estético I"
+
+#: data/feats/administration/esthetic_shock_i.fta:2
+msgid ""
+"At his first level, the Administration Student can charge Esthetic Shocks, "
+"one time per day, causing 1d4 points of damage, since the target creature "
+"fails at an I Am Not A Fool test against the Bizarre Clothes roll . For each "
+"2 levels, the character can use this feat for one more time per day."
+msgstr ""
+"Logo de cara um Estudante de Administração é capaz de transferir choques "
+"estéticos, 1 vez ao dia, causando 1d4 + (Roupas Bizarras / 2) de dano, desde "
+"que a criatura alvo falhe num teste de Não Sou Bobo contra o ataque.  A cada "
+"dois níveis, o personagem poderá utilizar mais ( (-1) * modificador de "
+"Carisma) vezes o poder."
+
+#: data/feats/administration/esthetic_shock_ii.fta:1
+msgid "Esthetic Shock II"
+msgstr "Choque Estético II"
+
+#: data/feats/administration/esthetic_shock_ii.fta:2
+msgid ""
+"Due to the cerebral damages made by its graduation, the Administration "
+"Student upgrade its capacity to esthetic shock people, causing 1d6 damage, "
+"without resistances. The use of this feat consumes one Esthetic Shock I"
+msgstr ""
+"Um Estudante de administração, devido aos danos cerebrais decorrentes do "
+"curso, aprimora sua capacidade de chocar esteticamente às pessoas, causando "
+"1d6 + (Roupas Bizarras / 2) de dano, sem resistências. A utilização desta "
+"habilidade consome um Choque Estético I."
+
+#: data/feats/administration/esthetic_shock_iii.fta:1
+msgid "Esthetic Shock III"
+msgstr "Choque Estético III"
+
+#: data/feats/administration/esthetic_shock_iii.fta:2
+msgid ""
+"After lot of time, the cerebral damage is at unimaginable levels. Now the "
+"Administration Student Esthetic Shock inflicts 2d6 of damage. The use of "
+"this feat consumes 2 Esthetic Shocks I"
+msgstr ""
+"Já se vai um bom tempo e os danos cerebrais chegam a níveis inimagináveis a "
+"um ser humano comum. Agora o Estudante passa a causar 1d6 + Roupas Bizarras "
+"de dano, sem resistências. A utilização desta habilidade consome dois "
+"Choques Estéticos I."
+
+#: data/feats/administration/supreme_esthetic_shock.fta:1
+msgid "Supreme Esthetic Shock"
+msgstr "Choque Estético Supremo"
+
+#: data/feats/administration/supreme_esthetic_shock.fta:2
+msgid ""
+"It's the apex of shocking people that a common Administration Student can "
+"achieve. The student capacity to discern what is an watermelon than what is "
+"a cloth is void. For now on, the Esthetic Shock can inflict 3d12 points of "
+"damage. The use of this feat consumes 3 Esthetic Shocks I."
+msgstr ""
+"É o ápice em chocar pessoas que um reles Estudante de Administração pode "
+"conseguir. Sua capacidade de discernir o que é uma melancia do que é uma "
+"roupa é nula. Causa 3d12 + (Roupas Bizarras) de dano, sem resistências. A "
+"utilização desta habilidade consome três Choques Estéticos I."
+
+#: data/feats/biology/ameivas_worms.fta:1
+msgid "Ameiva's Worms"
+msgstr "Vermes de Ameiva"
+
+#: data/feats/biology/ameivas_worms.fta:2
+msgid ""
+"The Biology Student can thrown its bottle of worms collected from ameiva's "
+"bowels, one time per day added by one more time for each level after the "
+"4th, inflicting 1d6+Biology Student Level points of damage."
+msgstr ""
+"O Estudante de Biologia é capaz de jogar o seu vidrinho de vermes coletados "
+"dos órgãos internos de uma ameiva, uma vez ao dia acrescidas de uma vez a "
+"cada nível par acima do quarto nível, causando 1d6 + Nível de Classe de dano."
+
+#: data/feats/biology/mass_arthropds_attack.fta:1
+msgid "Mass Arthropds Attack"
+msgstr "Ataque em Massa de Artrópodes"
+
+#: data/feats/biology/mass_arthropds_attack.fta:2
+msgid ""
+"The more the graduation passes, the more the Biology Students live together "
+"with animals, so they can invoque, 2 times per day, a small arthropds horde "
+"to attack their enemies in a 10 meters radius, inflicting 2d8 + 1d6 per "
+"Biology Student Level greater than 10."
+msgstr ""
+"Com o passar do curso, a convivência com os animais aumenta "
+"consideravelmente, sendo agora possível convocar, 2 vezes ao dia, uma "
+"pequena horda de artrópodes para atacar aos inimigos no raio de 10 metros, "
+"causando 2d8 + 1d6 por nível maior do que 10 de dano."
+
+#: data/feats/gothic/lament_souls.fta:1
+msgid "Laments of One Thousand Souls"
+msgstr "Lamentos das Mil Almas"
+
+#: data/feats/gothic/lament_souls.fta:2
+msgid ""
+"Being adepts of the Romantic Poetry Second Generation, the Gothics are "
+"master on depressive art: they can end the day of the happiest 'Care Bear'. "
+"Making use of a full round action, the Gothic creature do a test of Bluff "
+"against the aim's I Am Not A Fool. In case of success, the aim will be on "
+"deep depression for the next 24 hours, receiving -5 on all Social Tests."
+msgstr ""
+"Por serem adeptos da poesia romântica de segunda geração, os góticos são "
+"mestres na arte de deprimir, podendo acabar com o dia do mais feliz Ursinho "
+"Carinhoso. Utilizando uma ação de rodada completa, o Gótico faz um teste de "
+"Blefar contra Não Sou Bobo do alvo. Caso resulte em um sucesso, o alvo "
+"entrará em depressão profunda pelas próximas 24 horas, recebendo -5 em todos "
+"os seus testes sociais."
+
+#: data/feats/gothic/night_adoration.fta:1
+msgid "Night Adoration"
+msgstr "Adoração da Noite"
+
+#: data/feats/gothic/night_adoration.fta:2
+msgid ""
+"One time they are typically noturn creatures, Gothics receive some bonuses "
+"when far from the Sun's light: +2 in Intimidate for frighting children and "
+"oldies, +4 in Disguises, du to nobody percept that the stupid guy of other "
+"day is the huge and imponent Gothic of the Night, and +2 on all Combat "
+"relative rolls, since they know the benefities of shades and nocturnal "
+"whispers."
+msgstr ""
+"Por serem criaturas noturnas, os góticos recebem diversos benefícios quando "
+"longe da luz do Sol. Eles recebem +2 em Intimidação, por assustarem "
+"criancinhas e velhinhas, +4 em disfarces, já que ninguém nota que o cara de "
+"bunda do outro dia é o grande e imponente gótico da noite e +2 em todas as "
+"suas jogadas relativas a combate, por saberem se beneficiar das sombras e "
+"dos sussurros noturnos."
+
+#: data/feats/gothic/sun_weakness.fta:1
+msgid "Sun Weakness"
+msgstr "Fraqueza ao Sol"
+
+#: data/feats/gothic/sun_weakness.fta:2
+msgid ""
+"Sun is a star that brings joy to Common Humans and a debilitation weakness "
+"to Gothics, because it dazes their makeups and reveals their butt faces. "
+"When affected by the Sun's light, Gothics receive -8 on all their Social "
+"Tests and -1 on all Combat relative rolls. They can't use Lament of One "
+"Thousand Souls and any Social Test agains't children will result in an "
+"automatic failure, because the children will think they are clows that want "
+"to play with them."
+msgstr ""
+"Pelo Sol ser um astro radiante que traz alegria aos Humanos Comuns, este "
+"mesmo astro tras aos Góticos uma debilitante fraqueza, seja por ofuscar suas "
+"maquiagens ou por simplesmente revelar suas caras de bunda. Sob a luz do sol "
+"o Gótico recebe -8 em todos os seus Testes Sociais, além de receber -1 em "
+"todas as suas jogadas relativas a combate. Além disso, eles não podem "
+"utilizar-se do Lamento das Mil Almas, quando em contato com a luz solar. "
+"Qualquer teste social com crianças resultará numa falha automática, pois a "
+"criança o considerará um palhaço e irá querer brincar com ele."
+
+#: data/feats/law/i_am_wrong.fta:1
+msgid "I am Wrong"
+msgstr "Eu Sou Errado"
+
+#: data/feats/law/i_am_wrong.fta:2
+msgid ""
+"At the fourth level, the Law Students is so unbearable at his try to take "
+"advantages of someone else's innocence, that arrives to his first great miss "
+"act: He's fired from his voluntary period of training. After this sad mark, "
+"the students voice is so shrill and loudness that cause, when he scream, 1d4 "
+"points of damage, being able to stun the target for 1d6 turns. Rolls a "
+"fortitude test of all targets in a 30 meters radius against a difficulty of "
+"10 + Law Student Level to avoid being stunned and reduce the damage to a "
+"half."
+msgstr ""
+"Ao adentrar-se no quarto nível, o estudante de direito encontra-se tão "
+"insuportável ao alto de sua busca por aproveitar-se da inocência alheia que "
+"chega ao seu primeiro cúmulo: É demitido de um Estágio Voluntário. É depois "
+"deste marco que a voz do Estudante de Direito passa a ser ouvida a uma "
+"grande distância, causando, quando o mesmo grita, 1d4 pontos de dano, "
+"podendo paralizar o alvo por 1d6 turnos. Rola-se um teste de Fortaleza dos "
+"alvos num raio de 30 metros, contra a dificuldade igual a 10 + Nível do "
+"Estudante de Direito para evitar o atordoamento e reduzir o dano à metade. O "
+"organismo pode utilizar-se desse poder um número igual ao seu (Nível de "
+"Estudante de Direito)/4."
+
+#: data/feats/mandatory/rookie.fta:1
+msgid "Rookie"
+msgstr "Calouro"
+
+#: data/feats/mandatory/rookie.fta:2
+msgid ""
+"Every rookie is know by its big ego, its make-new-friends desire and by its "
+"stupid questions."
+msgstr ""
+"Todo calouro é conhecido por ser desconfiado e cheio de sí, sempre querendo "
+"fazer novos amiguinhos (já que não conhece ninguém) e sempre fazendo as "
+"perguntas mais idiotas possíveis. Enquanto calouro, o personagem recebe +2 "
+"de Pé-no-Saco, +2 nas checagens de Alerta, +2 em Bovinice de Taylor, -2 em "
+"Sem Tempo (calouros são os seres que mais tempo possuem) e -1 em Carisma."
+
+#: data/feats/physicaled/esophagus.fta:1
 msgid "Powerful Esophagus"
 msgstr "Esôfago Poderoso"
 
-#: data/feats/powerfull_esophagus.fta:2
+#: data/feats/physicaled/esophagus.fta:2
 msgid ""
 "Once a day, and because his muscles have invaded his internal organs, the "
 "Physical Education Student is able to expel a sphere of fire that causes 6d6 "
@@ -2682,13 +2890,29 @@ msgstr ""
 "Ed. Física se tornou capaz de cuspir, uma vez ao dia, uma esfera de fogo que "
 "causará 6d6 mais 2d6 para cada nível superior ao 15."
 
-#: data/feats/ranged_attack.fta:1
-msgid "Ranged Attack"
-msgstr "Ataque à Distância"
+#: data/feats/physicaled/i_am_a_little_conan.fta:1
+msgid "I'm a little Conan"
+msgstr "Sou Bombadinho"
 
-#: data/feats/ranged_attack.fta:2
-msgid "Character's ranged attack."
-msgstr "Ataque à distância base do jogador. Varia com a arma utilizada."
+#: data/feats/physicaled/i_am_a_little_conan.fta:2
+msgid ""
+"Physical Education Students, due to their frequency at the gym, gets +1 "
+"Strength permamently."
+msgstr ""
+"O Estudante, devido às suas idas frequentes à academia, recebe +1 de Força "
+"permanente."
+
+#: data/feats/physicaled/virtually_invencible.fta:1
+msgid "Virtually Invencible"
+msgstr "Virtualmente Idestrutível"
+
+#: data/feats/physicaled/virtually_invencible.fta:2
+msgid ""
+"Thanks to their constant physical work, the Physical Education Students "
+"receive +5 on Natural Armor and a Damage Resistance of 8/-"
+msgstr ""
+" Graças ao constante esforço físico, o Estudante de Ed. Física recebe +5 de "
+"Armadura Natural (não cumulativo) e Resistência a Dano de 8/-."
 
 #: data/skills/acrobacias.ski:1
 msgid "Acrobats"
@@ -3861,3 +4085,13 @@ msgstr "Pesada"
 #: data/characters/pcs/santa.pc:1
 msgid "Santa Claws"
 msgstr "Papai Cruel"
+
+#~ msgid "I am Bombadinho"
+#~ msgstr "Eu sou Bombadinho"
+
+#~ msgid ""
+#~ "The Student who has frequently gone to the academy, permanently receives "
+#~ "+1 in Strength."
+#~ msgstr ""
+#~ "O Estudante, devido às suas idas frequentes à academia, recebe +1 de "
+#~ "força permanentemente."

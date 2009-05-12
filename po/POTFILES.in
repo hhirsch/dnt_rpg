@@ -176,10 +176,23 @@ data/races/mutante.rca
 data/races/skinhead.rca
 
 #feats
-data/feats/im_bombadinho.fta
 data/feats/melee_attack.fta
-data/feats/powerfull_esophagus.fta
 data/feats/ranged_attack.fta
+data/feats/administration/aberration.fta
+data/feats/administration/esthetic_shock_i.fta
+data/feats/administration/esthetic_shock_ii.fta
+data/feats/administration/esthetic_shock_iii.fta
+data/feats/administration/supreme_esthetic_shock.fta
+data/feats/biology/ameivas_worms.fta
+data/feats/biology/mass_arthropds_attack.fta
+data/feats/gothic/lament_souls.fta
+data/feats/gothic/night_adoration.fta
+data/feats/gothic/sun_weakness.fta
+data/feats/law/i_am_wrong.fta
+data/feats/mandatory/rookie.fta
+data/feats/physicaled/esophagus.fta
+data/feats/physicaled/i_am_a_little_conan.fta
+data/feats/physicaled/virtually_invencible.fta
 
 #skills
 data/skills/acrobacias.ski
