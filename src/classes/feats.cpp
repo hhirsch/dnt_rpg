@@ -27,6 +27,7 @@ featDescription::featDescription()
    actionType = ACT_TYPE_NORMAL_ACTION;
    action = ACT_ATTACK;
    range = 0;
+   totalEffects = 0;
    name = "undefined";
    idString = "unknow";
    description = "undefined";
@@ -691,6 +692,27 @@ void featsList::init(string dir, string arq)
          {
             /* Aditional Levels */
             sscanf(value.c_str(),"%d",&m_feats[aux].aditionalLevels);
+         }
+
+         /* Feat Modifier Effect */
+         else if(key == "effect")
+         {
+            if(m_feats[aux].totalEffects < MAX_FEAT_EFFECTS)
+            {
+               sscanf(value.c_str(),"%ds %d %s %s",
+                      &m_feats[aux].effects[m_feats[aux].totalEffects].time,
+                      &m_feats[aux].effects[m_feats[aux].totalEffects].mod,
+                      &buf2[0], &buf3[0]);
+               m_feats[aux].effects[m_feats[aux].totalEffects].cause.type=buf2;
+               m_feats[aux].effects[m_feats[aux].totalEffects].cause.id=buf3;
+               
+               m_feats[aux].totalEffects++;
+            }
+            else
+            {
+               cerr << "Warning: Too much effects for feat: "
+                    << arqDescricao << endl;
+            }
          }
 
          /* Dependent Feats */

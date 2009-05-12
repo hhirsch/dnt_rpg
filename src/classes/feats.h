@@ -19,6 +19,7 @@ using namespace std;
 
 #define MAX_FEATS          30 /**< Max number of Feats per Character */
 #define MAX_DEP_FEATS       5 /**< Max number of cost this, cost that feats */
+#define MAX_FEAT_EFFECTS   10 /**< Max number of effects per feats */
 
 #define FEAT_MELEE_ATTACK   0 /**< Melee Attack */
 #define FEAT_RANGED_ATTACK  1 /**< Ranged Attack */
@@ -69,6 +70,8 @@ class featDescription
       string idString;             /**< Feat ID String */
       string description;             /**< Feat Description */
       depFeat depFeats[MAX_DEP_FEATS];/**< Feat Dependency */
+      modEffect effects[MAX_FEAT_EFFECTS]; /**< Vector of feat effects */
+      int totalEffects;               /**< Total feat effects used */
       SDL_Surface* image;             /**< Feat Image */
 };
 

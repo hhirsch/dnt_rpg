@@ -23,7 +23,7 @@ class factor
       string id;      /**< ID of the Factor (ex: Intimidation, etc) */
 };
 
-/**! Default Modifier */
+/*! Default Modifier */
 class modifier
 {
    public:
@@ -31,6 +31,16 @@ class modifier
       factor cause;       /**< Cause of the Modifier */
       factor target;      /**< Target when modifer is valid */
       string description; /**< Modifier Description */
+};
+
+/*! modifier effect */
+class modEffect
+{
+   public:
+      int mod;             /**< The modifier value */
+      factor cause;        /**< Thing to modify */
+      Uint16 init;         /**< Time the effect begins  */
+      int time;            /**< Max Time the effect remains */
 };
 
 /*! Number of Points, based on ATTRIBUTES 
