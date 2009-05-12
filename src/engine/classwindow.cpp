@@ -215,15 +215,22 @@ void classWindow::setCharacteristics()
    }
 
    /* Feats */
+   featDescription* fDesc = NULL;
    textCharac->addText(string(gettext("Class Talents")) + "||",
                        DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
                        DNT_FONT_STYLE_UNDERLINE,
                        86, 161, 32);
    for(i=0; i<classesOrder[curClass]->totalFeats; i++)
    {
-      textCharac->addText(curFeats.featByString(
-                             classesOrder[curClass]->classFeats[i]).name + 
-                             "|");
+      fDesc = curFeats.featByString(classesOrder[curClass]->classFeats[i]);
+      if(fDesc)
+      {
+         textCharac->addText(fDesc->name + "|");
+      }
+      else
+      {
+         textCharac->addText(classesOrder[curClass]->classFeats[i] + "|");
+      }
    }
 
    if(classesOrder[curClass]->totalFeats == 0)

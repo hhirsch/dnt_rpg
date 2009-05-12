@@ -81,23 +81,11 @@ class featDescription
 class feat
 {
    public:
-      int internalListNumber;          /**< Number on List */
-      int requeridedLevel;             /**< Requerided Level to use */
-      int quantityPerDay;              /**< Quantity avaible to use per day*/
-      int aditionalQuantity;       /**< Quantity Added per Aditional Level */
-      int aditionalLevels;         /**< Number of Levels to AditionalQuantity*/
-      int costToUse;                   /**< Cost, in PP to use */
-      int actionType;                  /**< Action Type of the feat */
-      int action;                      /**< Action of the feat */
-      int range;                       /**< Range of Action of the feat */
-      factor conceptBonus;             /**< Concept that bonus the feat */
-      factor conceptAgainst;       /**< Define the concept against the feat */
-      factor conceptTarget;            /**< Define the valid target of feat */
-      float actualQuantity;            /**< Actual quantity to use */
-      diceThing diceInfo;              /**< Defined Dice*/
-      string name;                     /**< Feat Name */
-      string idString;                 /**< Feat ID String */
-      depFeat depFeats[MAX_DEP_FEATS]; /**< Feat Dependency */
+      featDescription* info;       /**< The feat info */
+      float actualQuantity;        /**< Actual quantity to use */
+      float range;                 /**< Actual Range */
+      int costToUse;               /**< Cost, in PP to use the feat */
+      diceThing diceInfo;          /**< Defined Dice*/
 };
 
 
@@ -134,7 +122,7 @@ class feats
        * \param featInsert -> featDescription of feat to insert
        * \return \c true if sucefully inserted.
        ***************************************************************/
-      bool insertFeat(featDescription featInsert);
+      bool insertFeat(featDescription* featInsert);
       /*!
        ************************************************************** 
        * Refresh Quantities to use on a new day to all feats.
@@ -284,7 +272,7 @@ class featsList
        * \param featName -> name of feat to return
        * \return the featDescription struct.
        ***************************************************************/
-      featDescription featByString(string featName);
+      featDescription* featByString(string featName);
 
       /*!
        **************************************************************** 
@@ -292,7 +280,7 @@ class featsList
        * \param featNumber -> number of feat to return
        * \return the featDescription struct.
        ***************************************************************/
-      featDescription featByNumber(int featNumber);
+      featDescription* featByNumber(int featNumber);
 
    private:
       static featDescription* m_feats; /**< Internal Desc Struct */

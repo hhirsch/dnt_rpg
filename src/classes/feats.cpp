@@ -79,7 +79,7 @@ feat* feats::featByString(string featName)
    int i;
    for(i=0;i<totalFeats;i++)
    {
-      if(featName.compare(m_feats[i].idString) == 0)
+      if(featName.compare(m_feats[i].info->idString) == 0)
       {
          return(&m_feats[i]);
       }
@@ -90,34 +90,15 @@ feat* feats::featByString(string featName)
 /***************************************************************
  *                       insertFeat                            *
  ***************************************************************/
-bool feats::insertFeat(featDescription featInsert)
+bool feats::insertFeat(featDescription* featInsert)
 {
-   int i;
-   if(totalFeats < MAX_FEATS)
+   if( (totalFeats < MAX_FEATS) && (featInsert != NULL) )
    {
-      m_feats[totalFeats].internalListNumber = featInsert.internalListNumber; 
-      m_feats[totalFeats].requeridedLevel = featInsert.requeridedLevel;
-      m_feats[totalFeats].quantityPerDay = featInsert.quantityPerDay;
-      m_feats[totalFeats].aditionalQuantity = featInsert.aditionalQuantity;
-      m_feats[totalFeats].aditionalLevels = featInsert.aditionalLevels;
-      m_feats[totalFeats].actualQuantity = featInsert.quantityPerDay;
-      m_feats[totalFeats].costToUse = featInsert.costToUse;
-      m_feats[totalFeats].actionType = featInsert.actionType;
-      m_feats[totalFeats].action = featInsert.action;
-      m_feats[totalFeats].range = featInsert.range;
-      m_feats[totalFeats].name = featInsert.name;
-      m_feats[totalFeats].diceInfo = featInsert.diceInfo;
-      m_feats[totalFeats].conceptBonus = featInsert.conceptBonus;
-      m_feats[totalFeats].conceptAgainst = featInsert.conceptAgainst;
-      m_feats[totalFeats].conceptTarget = featInsert.conceptTarget;
-      m_feats[totalFeats].idString = featInsert.idString;
-      for(i = 0; i < MAX_DEP_FEATS; i++)
-      {
-         m_feats[totalFeats].depFeats[i].reason = featInsert.depFeats[i].reason;
-         m_feats[totalFeats].depFeats[i].featIDString = 
-                                            featInsert.depFeats[i].featIDString;
-         m_feats[totalFeats].depFeats[i].used = featInsert.depFeats[i].used;
-      }
+      m_feats[totalFeats].info = featInsert;
+      m_feats[totalFeats].range = featInsert->range;
+      m_feats[totalFeats].costToUse = featInsert->costToUse;
+      m_feats[totalFeats].actualQuantity = featInsert->quantityPerDay;
+      m_feats[totalFeats].diceInfo = featInsert->diceInfo;
       totalFeats++;
       return(true);
    }
@@ -134,10 +115,11 @@ void feats::useFeat(int featNumber)
    m_feats[featNumber].actualQuantity--;
    for(i=0;i<MAX_DEP_FEATS;i++)
    {
-       if(m_feats[featNumber].depFeats[i].used)
+       if(m_feats[featNumber].info->depFeats[i].used)
        {
-          ft = featByString(m_feats[featNumber].depFeats[i].featIDString);
-          ft->actualQuantity -= 1.0 / m_feats[featNumber].depFeats[i].reason;
+          ft = featByString(m_feats[featNumber].info->depFeats[i].featIDString);
+          ft->actualQuantity -= 1.0 / 
+                                m_feats[featNumber].info->depFeats[i].reason;
        }
    }
 }
@@ -166,17 +148,18 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
    }
 
    /* Show feature name */
-   sprintf(texto,"%s ",m_feats[featNumber].name.c_str());
+   sprintf(texto,"%s ",m_feats[featNumber].info->name.c_str());
    brief.addText(texto);
 
    /* Verify if have the feat points to use it */
-   if( (m_feats[featNumber].actualQuantity >= m_feats[featNumber].costToUse)
-       || (m_feats[featNumber].costToUse) == 0 )
+   if( (m_feats[featNumber].actualQuantity >= 
+        m_feats[featNumber].costToUse) ||
+       (m_feats[featNumber].costToUse) == 0 )
    {
       /* Try to use the feat */
       if(doHealOrAttack(actor, target, 
                         m_feats[featNumber].diceInfo, 
-                        &m_feats[featNumber].conceptBonus,
+                        &m_feats[featNumber].info->conceptBonus,
                         m_feats[featNumber].range, heal))
       {
          /* Yes, we've used it */
@@ -256,7 +239,7 @@ void feats::newDay()
    int i;
    for(i=0;i<totalFeats;i++)
    {
-      m_feats[i].actualQuantity = m_feats[i].quantityPerDay;
+      m_feats[i].actualQuantity = m_feats[i].info->quantityPerDay;
    }
 }
 
@@ -275,7 +258,7 @@ int feats::getRandomNPCAttackFeat(thing* pers, thing* target)
       //FIXME verify if the feat is in range to use!
 
       if( (ft != FEAT_RANGED_ATTACK) && (ft != FEAT_MELEE_ATTACK) &&
-          (m_feats[ft].action == ACT_ATTACK)  && 
+          (m_feats[ft].info->action == ACT_ATTACK)  && 
           ( (m_feats[ft].actualQuantity >= m_feats[ft].costToUse)
           || (m_feats[ft].costToUse) == 0 ))
       {
@@ -332,7 +315,8 @@ int feats::getPowerfullAttackFeat(thing* pers, thing* target)
    {
       /* Verify if is an attack feat and is avaible */
       if( (i != ft) && (i != FEAT_RANGED_ATTACK) && 
-          (i != FEAT_MELEE_ATTACK) && (m_feats[i].action == ACT_ATTACK) && 
+          (i != FEAT_MELEE_ATTACK) && 
+          (m_feats[i].info->action == ACT_ATTACK) && 
           ( (m_feats[i].actualQuantity >= m_feats[i].costToUse)
           || (m_feats[i].costToUse) == 0 ))
       {
@@ -365,7 +349,7 @@ int feats::getFirstHealFeat(thing* pers)
       for(i = 0; i < totalFeats; i++)
       {
          /* Verify if is an attack feat and is avaible */
-         if( (m_feats[i].action == ACT_HEAL) && 
+         if( (m_feats[i].info->action == ACT_HEAL) && 
              ( (m_feats[i].actualQuantity >= m_feats[i].costToUse)
              || (m_feats[i].costToUse) == 0 ))
          {
@@ -389,7 +373,7 @@ int feats::getRandomHealFeat(thing* pers)
       srand(SDL_GetTicks());
       ft = (int)(totalFeats*(rand() / (RAND_MAX + 1.0)));
 
-      if( (m_feats[ft].action == ACT_HEAL)  && 
+      if( (m_feats[ft].info->action == ACT_HEAL)  && 
           ( (m_feats[ft].actualQuantity >= m_feats[ft].costToUse)
           || (m_feats[ft].costToUse) == 0 ))
       {
@@ -419,7 +403,7 @@ int feats::getPowerfullHealFeat(thing* pers)
       for(i = 0; i < totalFeats; i++)
       {
          /* Verify if is an attack feat and is avaible */
-         if( (i != ft) && (m_feats[i].action == ACT_HEAL) && 
+         if( (i != ft) && (m_feats[i].info->action == ACT_HEAL) && 
              ( (m_feats[i].actualQuantity >= m_feats[i].costToUse)
              || (m_feats[i].costToUse) == 0 ))
          {
@@ -752,29 +736,29 @@ void featsList::finish()
 /***************************************************************
  *                        featByName                           *
  ***************************************************************/
-featDescription featsList::featByString(string featName)
+featDescription* featsList::featByString(string featName)
 {
    int i;
    for(i=0; i < totalFeats; i++)
    {
       if(featName == m_feats[i].idString)
       {
-         return(m_feats[i]);
+         return(&m_feats[i]);
       }
    }
-   return(m_feats[0]);
+   return(NULL);
 }
 
 /***************************************************************
  *                        featByNumber                         *
  ***************************************************************/
-featDescription featsList::featByNumber(int featNumber)
+featDescription* featsList::featByNumber(int featNumber)
 {
    if( (featNumber > 0) && (featNumber < totalFeats) )
    {
-      return(m_feats[featNumber]);
+      return(&m_feats[featNumber]);
    }
-   return(m_feats[0]);
+   return(NULL);
 }
 
 /***************************************************************

@@ -1231,7 +1231,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          }
          else if(functionName == IA_FEAT_QUANTITY_PER_DAY)
          {
-            i = ft->quantityPerDay;
+            i = ft->info->quantityPerDay;
          }
          /* Assign the result value */
          assignValue(var, (void*)&i, IA_TYPE_INT);
