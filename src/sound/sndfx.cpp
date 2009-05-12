@@ -19,19 +19,26 @@ sndfx::sndfx(ALfloat centerX, ALfloat centerY, ALfloat centerZ, int lp,
 {
    /* Create the Ogg Stream */ 
    oggSndFx = new(ogg_stream);
-   oggSndFx->open(fileName);
-
-   /* Define Position */
-   alSource3f(oggSndFx->getSource(), AL_POSITION, centerX, centerY, centerZ);
-   alSourcef(oggSndFx->getSource(), AL_REFERENCE_DISTANCE, 160);
-
-   if(!oggSndFx->playback())
+   if(oggSndFx->open(fileName))
    {
-      printf("Can't Play Sound Effect: %s\n",fileName.c_str());
+
+      /* Define Position */
+      alSource3f(oggSndFx->getSource(), AL_POSITION, centerX, centerY, centerZ);
+      alSourcef(oggSndFx->getSource(), AL_REFERENCE_DISTANCE, 160);
+
+      if(!oggSndFx->playback())
+      {
+         printf("Can't Play Sound Effect: %s\n",fileName.c_str());
+      }
+
+      oggName = fileName;
+      setLoop(lp);
    }
-   
-   oggName = fileName;
-   setLoop(lp);
+   else
+   {
+      delete(oggSndFx);
+      oggSndFx = NULL;
+   }
    next = NULL;
    previous = NULL;
 }
@@ -43,18 +50,25 @@ sndfx::sndfx(int lp, string fileName)
 {
    /* Create the Ogg Stream */ 
    oggSndFx = new(ogg_stream);
-   oggSndFx->open(fileName);
-
-   /* Define Position */
-   oggSndFx->defineAsMusic();
-
-   if(!oggSndFx->playback())
-   {
-      printf("Can't Play Sound Effect: %s\n",fileName.c_str());
-   }
    
-   oggName = fileName;
-   setLoop(lp);
+   if(oggSndFx->open(fileName))
+   {
+      /* Define Position */
+      oggSndFx->defineAsMusic();
+
+      if(!oggSndFx->playback())
+      {
+         printf("Can't Play Sound Effect: %s\n",fileName.c_str());
+      }
+
+      oggName = fileName;
+      setLoop(lp);
+   }
+   else
+   {
+      delete(oggSndFx);
+      oggSndFx = NULL;
+   }
    next = NULL;
    previous = NULL;
 }

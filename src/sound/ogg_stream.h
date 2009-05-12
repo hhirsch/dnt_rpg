@@ -17,8 +17,9 @@ class ogg_stream
 {
    public:
       /*! Open Ogg file to use
-       * \param path -> file name of the ogg file to use */
-      void open(string path);
+       * \param path -> file name of the ogg file to use
+       * \return -> true if successfully opened */
+      bool open(string path);
       
       /*! Release all buffers and sources relative to the file */
       void release();         

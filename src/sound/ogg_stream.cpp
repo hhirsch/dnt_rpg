@@ -9,7 +9,7 @@ using namespace std;
 /*************************************************************************
  *                                 open                                  *
  *************************************************************************/
-void ogg_stream::open(string path)
+bool ogg_stream::open(string path)
 {
    dirs dir;
    int result;
@@ -19,7 +19,7 @@ void ogg_stream::open(string path)
    if(!(oggFile = fopen(dir.getRealFile(path).c_str(), "rb")))
    {
        cerr << "Could not open Ogg file: " <<  dir.getRealFile(path) << endl;
-       return;
+       return(false);
    }
    
    #ifdef _MSC_VER
@@ -33,7 +33,7 @@ void ogg_stream::open(string path)
    {
        fclose(oggFile);
        cerr << "Could not open Ogg stream: " << errorString(result) << endl;
-       return;
+       return(false);
    }
 
    vorbisInfo = ov_info(&oggStream, -1);
@@ -54,6 +54,8 @@ void ogg_stream::open(string path)
    check("::open() -> alGenBuffers");
    alGenSources(1, &source);
    check("::open() -> alGenSouces");
+
+   return(true);
 }
 
 /*************************************************************************
