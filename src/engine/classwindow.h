@@ -7,6 +7,7 @@
 
 #include "../gui/farso.h"
 #include "../classes/classes.h"
+#include "../classes/feats.h"
 
 #define CLASSW_CANCEL  0
 #define CLASSW_CONFIRM 1
@@ -18,6 +19,7 @@ class classWindow
    public:
       /*! Constructor 
        * \param inter -> pointer to the GUI
+       * \param ftl -> pointer to the featsList
        * \param retClass -> pointer to the choosed class */
       classWindow(guiInterface* inter, classe** retClass);
 

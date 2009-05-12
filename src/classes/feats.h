@@ -271,12 +271,12 @@ class featsList
        * \param dir -> string with the directory where all feats are
        * \param arq -> file name with the list of avaible feats.
        ***************************************************************/
-      featsList(string dir, string arq);
+      void init(string dir, string arq);
       /*!
        ***************************************************************
        * featsList Destructor
        ***************************************************************/
-      ~featsList();
+      void finish();
 
       /*!
        ************************************************************** 
@@ -295,8 +295,8 @@ class featsList
       featDescription featByNumber(int featNumber);
 
    private:
-      featDescription* m_feats; /**< Internal Desc Struct */
-      int totalFeats;           /**< Total Declared Feats */
+      static featDescription* m_feats; /**< Internal Desc Struct */
+      static int totalFeats;           /**< Total Declared Feats */
 };
 
 #endif

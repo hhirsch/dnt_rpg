@@ -124,7 +124,7 @@ void classWindow::setCharacteristics()
    char c;
    skillDefinition* skTmp;
    skillsDefinitions skDefs;
-
+   featsList curFeats;
 
    sprintf(tmp,": d%d||",classesOrder[curClass]->lifeDiceID);
 
@@ -202,7 +202,8 @@ void classWindow::setCharacteristics()
                        86, 161, 32);
    for(i=0; i<classesOrder[curClass]->totalModifiers; i++)
    {
-      textCharac->addText(classesOrder[curClass]->classModifiers[i].description + "||");
+      textCharac->addText(classesOrder[curClass]->classModifiers[i].description
+                          + "||");
    }
 
    if(classesOrder[curClass]->totalModifiers == 0)
@@ -213,14 +214,16 @@ void classWindow::setCharacteristics()
                           75,147,207);
    }
 
-   //TODO get Feat Name
+   /* Feats */
    textCharac->addText(string(gettext("Class Talents")) + "||",
                        DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
                        DNT_FONT_STYLE_UNDERLINE,
                        86, 161, 32);
    for(i=0; i<classesOrder[curClass]->totalFeats; i++)
    {
-      textCharac->addText(classesOrder[curClass]->classFeats[i] + "|");
+      textCharac->addText(curFeats.featByString(
+                             classesOrder[curClass]->classFeats[i]).name + 
+                             "|");
    }
 
    if(classesOrder[curClass]->totalFeats == 0)

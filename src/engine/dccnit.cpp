@@ -77,8 +77,9 @@ engine::engine()
    skillsList.init();
   
    /* Load Features List */
-   features = new featsList(dir.getRealFile("feats/"),
-                            dir.getRealFile("feats/feats.ftl"));
+   features = new featsList();
+   features->init(dir.getRealFile("feats/"),
+                  dir.getRealFile("feats/feats.ftl"));
 
    /* Load Alignments & Tendecies */
    alignList = new aligns();
@@ -296,6 +297,7 @@ engine::~engine()
    /* Clear Characters Lists */
    alignList->finish();
    delete(alignList);
+   features->finish();
    delete(features);
 
    raceList->finish();

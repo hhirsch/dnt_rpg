@@ -18,8 +18,9 @@ editor::editor()
    particleSystem->init();
    skillsDefinitions skillList;
    skillList.init();
-   features = new featsList(dir.getRealFile("feats/"),
-                            dir.getRealFile("feats/feats.ftl"));
+   features = new featsList();
+   features->init(dir.getRealFile("feats/"),
+                  dir.getRealFile("feats/feats.ftl"));
 
    /* Init things */
    options opt;
@@ -84,6 +85,7 @@ editor::~editor()
    }
    if(features)
    {
+      features->finish();
       delete(features);
    }
    skillsDefinitions skillList;

@@ -551,7 +551,7 @@ void feats::defineWeapon(weapon* w)
 /***************************************************************
  *                       Constructor                           *
  ***************************************************************/
-featsList::featsList(string dir, string arq)
+void featsList::init(string dir, string arq)
 {
    dirs dirInfo;
    FILE* file;
@@ -560,7 +560,6 @@ featsList::featsList(string dir, string arq)
    char buffer[1024];
    char buf2[256];
    char buf3[256];
-   int num;
    int aux;
 
    if(!(file=fopen(arq.c_str(),"r")))
@@ -590,7 +589,7 @@ featsList::featsList(string dir, string arq)
    for(aux = 0; aux < totalFeats; aux++)
    {
       fgets(buffer, sizeof(buffer), file);
-      sscanf(buffer,"%d %s %s",&num,&buf2[0],&buf3[0]);
+      sscanf(buffer,"%s %s",&buf2[0],&buf3[0]);
       arqImagem = buf3;
       arqDescricao = buf2;
       arqDescricao = dir+arqDescricao;
@@ -742,7 +741,7 @@ featsList::featsList(string dir, string arq)
 /***************************************************************
  *                        Destructor                           *
  ***************************************************************/
-featsList::~featsList()
+void featsList::finish()
 {
    if(m_feats)
    {
@@ -777,4 +776,10 @@ featDescription featsList::featByNumber(int featNumber)
    }
    return(m_feats[0]);
 }
+
+/***************************************************************
+ *                       static members                        *
+ ***************************************************************/
+featDescription* featsList::m_feats=NULL;
+int featsList::totalFeats=0;
 
