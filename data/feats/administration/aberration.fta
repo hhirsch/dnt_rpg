@@ -9,10 +9,10 @@ reqValue = 20
 id = ABERRATION
 
 # The Bonuses / Weakness
-effect = 0s +2 CONSTITUTION
-effect = 0s +2 STRENGTH
-effect = 0s +5 TAYLORISM
-effect = 0s -2 CHARISM
-effect = 0s -4 INTELLIGENCE
-effect = 0s -4 I_AM_NOT_A_FOOL
+effect = 0s +2 ATTRIBUTE CONSTITUTION
+effect = 0s +2 ATTRIBUTE STRENGTH
+effect = 0s +5 SKILL TAYLORISM
+effect = 0s -2 ATTRIBUTE CHARISM
+effect = 0s -4 ATTRIBUTE INTELLIGENCE
+effect = 0s -4 SKILL I_AM_NOT_A_FOOL
 
