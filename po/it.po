@@ -2320,9 +2320,8 @@ msgid ""
 msgstr ""
 
 #: data/feats/gothic/night_adoration.fta:1
-#, fuzzy
 msgid "Night Adoration"
-msgstr "Ottenere Informazioni"
+msgstr ""
 
 #: data/feats/gothic/night_adoration.fta:2
 msgid ""
