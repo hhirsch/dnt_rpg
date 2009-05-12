@@ -9,6 +9,7 @@
 #include "../etc/extensions.h"
 #include "../engine/options.h"
 #include "../etc/dirs.h"
+#include "../etc/defparser.h"
 #include "../lang/translate.h"
 
 #ifdef _MSC_VER
@@ -1881,8 +1882,9 @@ void Map::setOutdoor(bool val)
  ********************************************************************/
 int Map::open(string arquivo)
 {
-   FILE* arq;        // file used for the map
-   char buffer[128]; // buffer used to read
+   defParser def;
+   string key="", value="";
+
    char nomeArq[128], nome[128];
    string arqVelho;
    int posX,posZ;    //actual position of last active square
@@ -1892,13 +1894,12 @@ int Map::open(string arquivo)
    int pisavel=0;
    GLuint R,G,B;
    GLuint Ratual,Gatual,Batual;
-   dirs dir; 
   
-   if(!(arq = fopen(dir.getRealFile(arquivo).c_str(),"r")))
+   /* Load the map file defintions */ 
+   if(!def.load(arquivo))
    {
-      printf("Error while opening map file: %s\n",
-             dir.getRealFile(arquivo).c_str());
-	return(0);
+      cerr << "Error while opening map file: " << arquivo << endl;
+      return(0);
    }
 
    /* Define map file Name */
@@ -1907,20 +1908,14 @@ int Map::open(string arquivo)
 
    xInic = -1;
 
-   /* Read size of the map */   
-   fscanf(arq, "%s", buffer);
-   if(buffer[0] == 'T')
+   /* Read size of the map */
+   if( (!def.getNextTuple(key, value)) || (key != "size") )
    {
-      fgets(buffer, sizeof(buffer), arq); 
-      sscanf(buffer,"%dX%d",&x,&z);
-   }
-   else
-   {
-      printf("Map Size not defined: %s\n", arquivo.c_str()); 
-      printf(" Found %s, where espected T iXi\n",buffer);
-      fclose(arq);
+      cerr << "Map Size not defined: " << arquivo << endl;
+      cerr << " Found " << key << " when especting size" << endl;
       return(0);
    }
+   sscanf(value.c_str(),"%dX%d",&x,&z);
 
    /* Alloc all Map Structures */
    alloc();
@@ -1932,360 +1927,272 @@ int Map::open(string arquivo)
    posZ = 0;
 
    /* Read All File */
-   while(fscanf(arq, "%s", buffer) != EOF)
+   while(def.getNextTuple(key, value))
    {
-      switch(buffer[0])
+      /* Define Light File */
+      if(key == "lightsFile")
       {
-         case 'l':
-         
-         switch(buffer[1])
-         {
-            
-            /* Define Light File */
-            case 'i':
-            {
-               fgets(buffer, sizeof(buffer),arq);
-               sscanf(buffer,"%s",nome);
-               lights.Load(nome);
-               break;
-            }
-            /* Add Lake to Map */
-            case 'a':
-            {
-               fgets(buffer, sizeof(buffer),arq);
-               float xa=0, za=0, xb=0, zb=0;
-               float r=0,g=0,b=0,a=0;
-               sscanf(buffer,"%f,%f,%f,%f:%f,%f,%f,%f", 
-                              &xa, &za, &xb, &zb,
-                              &r, &g, &b, &a);
-               lake* l = addLake(xa,za,xb,zb);
-               l->defineColor(r,g,b,a);
-               break;
-            }
-         }
-         break;
+         lights.Load(value);
+      }
+      /* Add Lake to Map */
+      else if(key == "lake")
+      {
+         float xa=0, za=0, xb=0, zb=0;
+         float r=0,g=0,b=0,a=0;
+         sscanf(value.c_str(),"%f,%f,%f,%f:%f,%f,%f,%f", 
+               &xa, &za, &xb, &zb,
+               &r, &g, &b, &a);
+         lake* l = addLake(xa,za,xb,zb);
+         l->defineColor(r,g,b,a);
+      }
+      /* Define Fog File */
+      else if(key == "fogFile")
+      {
+         fog.Load(value);
+      }
+      /* Define Particle System File */
+      else if(key == "particlesFile")
+      {
+         particlesFileName = value;
+      }
+      /* Define npcs file */
+      else if(key == "npcFile")
+      {
+         npcFileName = value;
+      }
+      /* Map's Name */
+      else if(key == "name")
+      {
+         name = translateDataString(value);
+      }
+      /* Door */
+      else if(key == "door")
+      {
+         /* Create and insert the door */
+         doorAux = new(door);
+         insertDoor(doorAux);
 
-         case 'f':/* Define Fog File */
+         /* Read info */
+         sscanf(value.c_str(),"%s %f,%f:%d",nome,&doorAux->x,&doorAux->z,
+               &doorAux->orientation);
+         doorAux->delta = 0;
+         doorAux->obj = objectsList::search(nome, doorAux->x, 0, doorAux->z);
+         if(doorAux->obj == NULL)
          {
-            fgets(buffer, sizeof(buffer),arq);
-            sscanf(buffer,"%s",nome);
-            fog.Load(nome);
-            break;
-         }
-         case 'P':/* Define Particle System File */
-         {
-            fgets(buffer, sizeof(buffer),arq);
-            sscanf(buffer,"%s",nome);
-            particlesFileName = nome;
-            break;
-         }
-         case 'n':/* npcs file */
-         {
-            fgets(buffer, sizeof(buffer),arq);
-            sscanf(buffer,"%s",nome);
-            npcFileName = nome;
-            break;
-         }
-         case 'N':/* the map's Name */
-         {
-            fgets(buffer, sizeof(buffer),arq);
-            sscanf(buffer,"%s",nome);
-            name = translateDataString(nome);
-            break;
-         }
-         case 'd': /* Define Doors */
-         {
-            /* Create and insert the door */
-            doorAux = new(door);
-            insertDoor(doorAux);
-
-            /* Read info */
-            fgets(buffer, sizeof(buffer),arq);
-            sscanf(buffer,"%s %f,%f:%d",nome,&doorAux->x,&doorAux->z,
-                                        &doorAux->orientation);
-            doorAux->delta = 0;
-            doorAux->obj = objectsList::search(nome, doorAux->x, 0, doorAux->z);
-            if(doorAux->obj == NULL)
-            {
-               /* Not found on list, so insert it! */
-               doorAux->obj = createObject(nome, fileName);
-               doorAux->obj->xPosition = doorAux->x;
-               doorAux->obj->yPosition = 0;
-               doorAux->obj->zPosition = doorAux->z;
-               doorAux->obj->orientation = doorAux->orientation;
-            }
-            break;
-         }
-         case 'M': /* Define Music */
-         {
-            fgets(buffer,sizeof(buffer),arq);
-            sscanf(buffer,"%s",nome);
-            music = nome;
-            break;
-         }
-         case 'S':  /* Define Sounds File */
-         {
-            fgets(buffer,sizeof(buffer),arq);
-            sscanf(buffer,"%s",nome);
-            soundsFileName = nome;
-            if(!sounds->load(soundsFileName))
-            {
-               cerr << "Error loading sounds fileName: " 
-                    << soundsFileName << endl;
-            }
-            break;
-         }
-         case 'w': /* Define Walls and Half Walls */
-         {
-            switch(buffer[1])
-            {
-               case 'a': /* Define Wall */
-               {
-                  maux = addWall(0,0,0,0);
-                  fgets(buffer, sizeof(buffer),arq);
-                  sscanf(buffer,"%f,%f,%f,%f",&maux->x1,&maux->z1,
-                                              &maux->x2,&maux->z2);
-                  double tmp;
-                  if(maux->x2 < maux->x1)
-                  {
-                     tmp = maux->x2;
-                     maux->x2 = maux->x1;
-                     maux->x1 = tmp;
-                  }
-                  if(maux->z2 < maux->z1)
-                  {
-                     tmp = maux->z2;
-                     maux->z2 = maux->z1;
-                     maux->z1 = tmp;
-                  }
-                  break;
-               }
-               case 't': /* Define Wall texture */
-               {
-                  char type = buffer[2];
-                  GLuint dX=0, dY=0, dZ=0;
-
-                  /* Get the texture Name */
-                  fgets(buffer, sizeof(buffer), arq);
-                  sscanf(buffer,"%d,%d,%d %s", &dX, &dY, &dZ, nome);
-                  nameMuroTexturaAtual = nome;
-                  IDwallTexturaAtual = getTextureID(nome,R,G,B);
-
-                  /* Get Wich wall side the texture is */
-                  switch(type)
-                  {
-                     case 'f':
-                        maux->frontTexture.setTextureId(IDwallTexturaAtual);
-                        maux->frontTexture.setTextureName(nameMuroTexturaAtual);
-                        maux->frontTexture.setDelta(dX,dY,dZ);
-                     break;
-                     case 'b':
-                        maux->backTexture.setTextureId(IDwallTexturaAtual);
-                        maux->backTexture.setTextureName(nameMuroTexturaAtual);
-                        maux->backTexture.setDelta(dX,dY,dZ);
-                     break;
-                     case 'l':
-                        maux->leftTexture.setTextureId(IDwallTexturaAtual);
-                        maux->leftTexture.setTextureName(nameMuroTexturaAtual);
-                        maux->leftTexture.setDelta(dX,dY,dZ);
-                     break;
-                     case 'r':
-                        maux->rightTexture.setTextureId(IDwallTexturaAtual);
-                        maux->rightTexture.setTextureName(nameMuroTexturaAtual);
-                        maux->rightTexture.setDelta(dX,dY,dZ);
-                     break;
-                  }
-                  break;
-               }
-               case 'e': /* Define Curb */
-               {
-                  maux = new(wall);
-                  fgets(buffer, sizeof(buffer),arq);
-                  sscanf(buffer,"%f,%f,%f,%f",&maux->x1,&maux->z1,
-                                              &maux->x2,&maux->z2);
-
-                  double tmp;
-                  if(maux->x2 < maux->x1)
-                  {
-                     tmp = maux->x2;
-                     maux->x2 = maux->x1;
-                     maux->x1 = tmp;
-                  }
-                  if(maux->z2 < maux->z1)
-                  {
-                     tmp = maux->z2;
-                     maux->z2 = maux->z1;
-                     maux->z1 = tmp;
-                  }  
-                  maux->next = curbs;
-                  curbs = maux;
-                  totalCurbs++;
-                  break;
-               }
-            }
-            break;
-         }
-         case 'i':/* Define initial Character Position */
-         {
-            fgets(buffer, sizeof(buffer), arq); 
-            if(xInic == -1)
-            {
-               sscanf(buffer, "%f,%f",&xInic,&zInic);
-               angleInic = 0;
-               int posX =(int)floor( xInic / (squareSize()));
-               int posZ =(int)floor( zInic / (squareSize()));
-               squareInic = relativeSquare(posX,posZ);
-            }
-            break;
-         }
-         case 'O': /* Define OutDoor */
-         {
-            int a;
-            fgets(buffer, sizeof(buffer), arq);
-            sscanf(buffer, "%d", &a);
-            outdoor = a;
-            break;
-         }
-         case 't': /* Insert Textures */
-         {
-            fgets(buffer, sizeof(buffer), arq);
-            sscanf(buffer, "%s %s %d %d %d",nome,nomeArq,&R,&G,&B);  
-            insertTexture(nomeArq,nome,R,G,B);
-            break;
-         }
-         case 'p': /* Insert new square */
-         {
-            if(posX == (x-1)) //end of the line of squares
-            { 
-                posX = 0;
-                posZ++;
-            }
-            else  //remains in the same line of squares
-            {
-               posX++;
-            }
-            fgets(buffer, sizeof(buffer), arq); 
-            sscanf(buffer, "%d,%f,%f,%f,%f",&pisavel,
-                                 &MapSquares[posX][posZ].h1,
-                                 &MapSquares[posX][posZ].h2,
-                                 &MapSquares[posX][posZ].h3,
-                                 &MapSquares[posX][posZ].h4);
-
-            MapSquares[posX][posZ].setDivisions(); 
-            MapSquares[posX][posZ].x1 = (posX) * squareSize();
-            MapSquares[posX][posZ].x2 = MapSquares[posX][posZ].x1+squareSize();
-            MapSquares[posX][posZ].z1 = (posZ) * squareSize();
-            MapSquares[posX][posZ].z2 = MapSquares[posX][posZ].z1+squareSize(); 
-            MapSquares[posX][posZ].posX = posX;
-            MapSquares[posX][posZ].posZ = posZ;
-            if(pisavel) 
-            {
-               MapSquares[posX][posZ].flags = SQUARE_CAN_WALK;
-            }
-            break;
-         }
-         case 'u':/* Use something already declared */
-         {
-            switch(buffer[1])
-            {
-               case 'c': /* define conection on square */
-               {
-                 fgets(buffer, sizeof(buffer), arq);
-                 sscanf(buffer,"%f,%f,%f,%f:%f:%s",
-                        &MapSquares[posX][posZ].mapConection.x1,
-                        &MapSquares[posX][posZ].mapConection.z1,
-                        &MapSquares[posX][posZ].mapConection.x2,
-                        &MapSquares[posX][posZ].mapConection.z2,
-                        &MapSquares[posX][posZ].mapConection.angle,
-                        nome );
-                 MapSquares[posX][posZ].mapConection.mapName = nome;
-                 MapSquares[posX][posZ].mapConection.active = true;
-
-                 /* If going from a previous file, the initial position
-                  * may be the connection itself */
-                 if(arqVelho == (MapSquares[posX][posZ].mapConection.mapName))
-                 {
-                     squareInic = &MapSquares[posX][posZ];
-                     xInic = (MapSquares[posX][posZ].mapConection.x1 + 
-                              MapSquares[posX][posZ].mapConection.x2) / 2.0;
-                     zInic = (MapSquares[posX][posZ].mapConection.z1 + 
-                              MapSquares[posX][posZ].mapConection.z2) / 2.0;
-                     angleInic = MapSquares[posX][posZ].mapConection.angle;
-                 }
-
-                 break;
-               }
-               case 't': /* Define Square's Textura */
-               {
-                  fgets(buffer, sizeof(buffer), arq);
-                  sscanf(buffer,"%s",nome);
-                  IDtextureAtual = getTextureID(nome,Ratual,Gatual,Batual);
-                  MapSquares[posX][posZ].texture = IDtextureAtual;
-                  MapSquares[posX][posZ].R = Ratual;
-                  MapSquares[posX][posZ].G = Gatual;
-                  MapSquares[posX][posZ].B = Batual;
-                  break;
-               }
-               case 'o': /* Insert Object on Square */
-               {
-                  int des, quadX, quadZ, oPis;
-                  float oX, oY, oZ, oOri;
-                  objSquare* oObj;
-                  fgets(buffer, sizeof(buffer), arq);
-                  sscanf(buffer,"%s %d:%d,%d:%f,%f,%f:%f:%d",nome,
-                         &des, &quadX, &quadZ, &oX, &oY, &oZ, &oOri, &oPis);
-
-                  object* obj = objectsList::search(nome, oX, oY, oZ);
-                  if(obj == NULL)
-                  {
-                     /* Insert it */
-                     obj = createObject(nome, fileName);
-                     /* set the object position */
-                     obj->xPosition = oX;
-                     obj->yPosition = oY;
-                     obj->zPosition = oZ;
-                     obj->orientation = oOri;
-                   }
-
-                  oObj = MapSquares[posX][posZ].addObject(des==1, oX, oY, oZ,
-                                                          oOri, oPis!=1,
-                                                          obj);
-                  if(oObj->draw)
-                  {
-                     if(oObj->obj->isStaticScenery())
-                     {
-                        oObj->obj->addRenderPosition(oX, oY, oZ, oOri);
-                     }
-                  }
-
-                  break;
-               }
-               default:
-               {
-                  cerr << "What the Hell is: " << buffer 
-                       << " on " << arquivo << endl;
-                  break;
-               }
-            }
-            break; 
-         }
-         case '#': //ignore comments
-         {
-             fgets(buffer, sizeof(buffer), arq);
-             break;
-         }
-         default: //something not defined!
-         {
-            cerr << "What is: " << buffer << " on " << arquivo << endl;
-            break;
+            /* Not found on list, so insert it! */
+            doorAux->obj = createObject(nome, fileName);
+            doorAux->obj->xPosition = doorAux->x;
+            doorAux->obj->yPosition = 0;
+            doorAux->obj->zPosition = doorAux->z;
+            doorAux->obj->orientation = doorAux->orientation;
          }
       }
+      /* Music File */
+      else if(key == "musicFile")
+      {
+         music = value;
+      }
+      /* Sounds File */
+      else if(key == "soundsFile")
+      {
+         soundsFileName = value;
+         if(!sounds->load(soundsFileName))
+         {
+            cerr << "Error loading sounds fileName: " 
+               << soundsFileName << endl;
+         }
+      }
+      /* Define Walls */
+      else if(key == "wall")
+      {
+         maux = addWall(0,0,0,0);
+         sscanf(value.c_str(),"%f,%f,%f,%f",&maux->x1,&maux->z1,
+               &maux->x2,&maux->z2);
+         double tmp;
+         if(maux->x2 < maux->x1)
+         {
+            tmp = maux->x2;
+            maux->x2 = maux->x1;
+            maux->x1 = tmp;
+         }
+         if(maux->z2 < maux->z1)
+         {
+            tmp = maux->z2;
+            maux->z2 = maux->z1;
+            maux->z1 = tmp;
+         }
+      }
+      /* Define Current Wall Texture */
+      else if( (key == "wtf") || (key == "wtb") || 
+               (key == "wtl") || (key == "wtr") )
+      {
+         char type = key[2];
+         GLuint dX=0, dY=0, dZ=0;
+
+         /* Get the texture Name */
+         sscanf(value.c_str(),"%d,%d,%d %s", &dX, &dY, &dZ, nome);
+         nameMuroTexturaAtual = nome;
+         IDwallTexturaAtual = getTextureID(nome,R,G,B);
+
+         /* Get Wich wall side the texture is */
+         switch(type)
+         {
+            case 'f':
+               maux->frontTexture.setTextureId(IDwallTexturaAtual);
+               maux->frontTexture.setTextureName(nameMuroTexturaAtual);
+               maux->frontTexture.setDelta(dX,dY,dZ);
+               break;
+            case 'b':
+               maux->backTexture.setTextureId(IDwallTexturaAtual);
+               maux->backTexture.setTextureName(nameMuroTexturaAtual);
+               maux->backTexture.setDelta(dX,dY,dZ);
+               break;
+            case 'l':
+               maux->leftTexture.setTextureId(IDwallTexturaAtual);
+               maux->leftTexture.setTextureName(nameMuroTexturaAtual);
+               maux->leftTexture.setDelta(dX,dY,dZ);
+               break;
+            case 'r':
+               maux->rightTexture.setTextureId(IDwallTexturaAtual);
+               maux->rightTexture.setTextureName(nameMuroTexturaAtual);
+               maux->rightTexture.setDelta(dX,dY,dZ);
+               break;
+         }
+      }
+      /* Define initial Character Position */
+      else if(key == "initial")
+      {
+         if(xInic == -1)
+         {
+            sscanf(value.c_str(), "%f,%f",&xInic,&zInic);
+            angleInic = 0;
+            int posX =(int)floor( xInic / (squareSize()));
+            int posZ =(int)floor( zInic / (squareSize()));
+            squareInic = relativeSquare(posX,posZ);
+         }
+      }
+      /* Outdoor type */
+      else if(key == "outdoor")
+      {
+         int a;
+         sscanf(value.c_str(), "%d", &a);
+         outdoor = a;
+      }
+      /* Texture Definition */
+      else if(key == "texture")
+      {
+         sscanf(value.c_str(), "%s %s %d %d %d",nome,nomeArq,&R,&G,&B);  
+         insertTexture(nomeArq,nome,R,G,B);
+      }
+      /* Square declaration */
+      else if(key == "square")
+      {
+         if(posX == (x-1)) //end of the line of squares
+         { 
+            posX = 0;
+            posZ++;
+         }
+         else  //remains in the same line of squares
+         {
+            posX++;
+         }
+         sscanf(value.c_str(), "%d,%f,%f,%f,%f",&pisavel,
+               &MapSquares[posX][posZ].h1,
+               &MapSquares[posX][posZ].h2,
+               &MapSquares[posX][posZ].h3,
+               &MapSquares[posX][posZ].h4);
+
+         MapSquares[posX][posZ].setDivisions(); 
+         MapSquares[posX][posZ].x1 = (posX) * squareSize();
+         MapSquares[posX][posZ].x2 = MapSquares[posX][posZ].x1+squareSize();
+         MapSquares[posX][posZ].z1 = (posZ) * squareSize();
+         MapSquares[posX][posZ].z2 = MapSquares[posX][posZ].z1+squareSize(); 
+         MapSquares[posX][posZ].posX = posX;
+         MapSquares[posX][posZ].posZ = posZ;
+         if(pisavel) 
+         {
+            MapSquares[posX][posZ].flags = SQUARE_CAN_WALK;
+         }
+      }
+      /* Declare connection */
+      else if(key == "connection")
+      {
+         sscanf(value.c_str(),"%f,%f,%f,%f:%f:%s",
+               &MapSquares[posX][posZ].mapConection.x1,
+               &MapSquares[posX][posZ].mapConection.z1,
+               &MapSquares[posX][posZ].mapConection.x2,
+               &MapSquares[posX][posZ].mapConection.z2,
+               &MapSquares[posX][posZ].mapConection.angle,
+               nome );
+         MapSquares[posX][posZ].mapConection.mapName = nome;
+         MapSquares[posX][posZ].mapConection.active = true;
+
+         /* If going from a previous file, the initial position
+          * may be the connection itself */
+         if(arqVelho == (MapSquares[posX][posZ].mapConection.mapName))
+         {
+            squareInic = &MapSquares[posX][posZ];
+            xInic = (MapSquares[posX][posZ].mapConection.x1 + 
+                  MapSquares[posX][posZ].mapConection.x2) / 2.0;
+            zInic = (MapSquares[posX][posZ].mapConection.z1 + 
+                  MapSquares[posX][posZ].mapConection.z2) / 2.0;
+            angleInic = MapSquares[posX][posZ].mapConection.angle;
+         }
+
+      }
+      /* Square's Texture */
+      else if(key == "useTexture")
+      {
+         IDtextureAtual = getTextureID(value,Ratual,Gatual,Batual);
+         MapSquares[posX][posZ].texture = IDtextureAtual;
+         MapSquares[posX][posZ].R = Ratual;
+         MapSquares[posX][posZ].G = Gatual;
+         MapSquares[posX][posZ].B = Batual;
+      }
+      /* Define Object at the square */
+      else if(key == "useObject")
+      {
+         int des, quadX, quadZ, oPis;
+         float oX, oY, oZ, oOri;
+         objSquare* oObj;
+         sscanf(value.c_str(),"%s %d:%d,%d:%f,%f,%f:%f:%d",nome,
+               &des, &quadX, &quadZ, &oX, &oY, &oZ, &oOri, &oPis);
+
+         object* obj = objectsList::search(nome, oX, oY, oZ);
+         if(obj == NULL)
+         {
+            /* Insert it */
+            obj = createObject(nome, fileName);
+            /* set the object position */
+            obj->xPosition = oX;
+            obj->yPosition = oY;
+            obj->zPosition = oZ;
+            obj->orientation = oOri;
+         }
+
+         oObj = MapSquares[posX][posZ].addObject(des==1, oX, oY, oZ,
+               oOri, oPis!=1,
+               obj);
+         if(oObj->draw)
+         {
+            if(oObj->obj->isStaticScenery())
+            {
+               oObj->obj->addRenderPosition(oX, oY, oZ, oOri);
+            }
+         }
+
+      }
+
+      /* ERROR: Unknow Key! */
+      else
+      {
+         cerr << "What is: " << key << " on " << arquivo << endl;
+      }
    }
-   fclose(arq);
 
    int ax,az;
    
-   /* Now, actualize pointers to the walls */
+   /* Now, update pointers to the walls */
    maux = walls;
    int wNum;
    int inix,iniz,maxx,maxz;
@@ -2499,52 +2406,54 @@ int Map::save(string arquivo)
    removeUnusedTextures();
    
    /* Write Dimensions */
-   fprintf(arq,"T %dX%d\n",x,z);
    fprintf(arq,"# Made by DccNiTghtmare's MapEditor, %s\n", VERSION);
+   fprintf(arq,"size = %dX%d\n",x,z);
 
    /* Write Map's name */
-   fprintf(arq,"NAME gettext(\"%s\")\n", name.c_str());
+   fprintf(arq,"name = gettext(\"%s\")\n", name.c_str());
 
    /* Write fog file name, if exists */
    if( !fog.fileName.empty() )
    {
-      fprintf(arq,"f %s\n",dir.getRelativeFile(fog.fileName).c_str());
+      fprintf(arq,"fogFile = %s\n",dir.getRelativeFile(fog.fileName).c_str());
    }
   
    /* Write NPC file name, if exists */
    if( !npcFileName.empty())
    {
-      fprintf(arq,"npc %s\n",dir.getRelativeFile(npcFileName).c_str());
+      fprintf(arq,"npcFile = %s\n",dir.getRelativeFile(npcFileName).c_str());
    }
 
    /* Write Particles file */
    if(!particlesFileName.empty())
    {
-      fprintf(arq,"PS %s\n",dir.getRelativeFile(particlesFileName).c_str());
+      fprintf(arq,"particlesFile = %s\n",
+                   dir.getRelativeFile(particlesFileName).c_str());
    }
 
  
    /* Write music file name */
    if(!music.empty())
    {
-      fprintf(arq,"MUSICA %s\n",dir.getRelativeFile(music).c_str());
+      fprintf(arq,"musicFile = %s\n",dir.getRelativeFile(music).c_str());
    }
 
    /* Write sounds file name */
    if(!soundsFileName.empty())
    {
-      fprintf(arq,"SOUNDS %s\n",dir.getRelativeFile(soundsFileName).c_str());
+      fprintf(arq,"soundsFile = %s\n",
+              dir.getRelativeFile(soundsFileName).c_str());
    }
 
    /* Write Lights file name */
    if(!lights.getFileName().empty())
    {
-      fprintf(arq,"light %s\n",
+      fprintf(arq,"lightsFile = %s\n",
               dir.getRelativeFile(lights.getFileName()).c_str());
    }
 
    /* Write if is outdoor or not */
-   fprintf(arq,"Outdoor: %d\n", outdoor);
+   fprintf(arq,"outdoor = %d\n", outdoor);
 
    /* Write lakes */
    int i;
@@ -2556,7 +2465,7 @@ int Map::save(string arquivo)
    {
       l->getPosition(xa,za,xb,zb);
       l->getColor(r,g,b,a);
-      fprintf(arq,"lake %.3f,%.3f,%.3f,%.3f:%.3f,%.3f,%.3f,%.3f\n",
+      fprintf(arq,"lake = %.3f,%.3f,%.3f,%.3f:%.3f,%.3f,%.3f,%.3f\n",
                         xa,  za,  xb,  zb,  r,   g,   b,   a);
       l = l->next;
    }
@@ -2570,7 +2479,7 @@ int Map::save(string arquivo)
        * always loaded at alloc() function */
       if(tex->name != "UpperWall")
       {
-         fprintf(arq,"t %s %s %d %d %d\n",tex->name.c_str(),
+         fprintf(arq,"texture = %s %s %d %d %d\n",tex->name.c_str(),
                  dir.getRelativeFile(tex->fileName).c_str(),
                  tex->R,tex->G,tex->B);
       }
@@ -2581,7 +2490,7 @@ int Map::save(string arquivo)
    door* doorAux = (door*)doors;
    while(doorAux != NULL)
    {
-      fprintf(arq,"d %s %.3f,%.3f:%d\n",
+      fprintf(arq,"door = %s %.3f,%.3f:%d\n",
               dir.getRelativeFile(doorAux->obj->getFileName()).c_str(),
               doorAux->x,doorAux->z, doorAux->orientation);
       doorAux = doorAux->next;
@@ -2593,19 +2502,19 @@ int Map::save(string arquivo)
    for(wNum=0; wNum < totalWalls; wNum++)
    {
       GLuint dX=0, dY=0, dZ=0;
-      fprintf(arq,"wall %.3f,%.3f,%.3f,%.3f\n",
+      fprintf(arq,"wall = %.3f,%.3f,%.3f,%.3f\n",
               maux->x1,maux->z1,maux->x2,maux->z2);
       maux->frontTexture.getDelta(dX,dY,dZ);
-      fprintf(arq,"wtf %d,%d,%d %s\n", dX, dY, dZ, 
+      fprintf(arq,"wtf = %d,%d,%d %s\n", dX, dY, dZ, 
                   getTextureName(maux->frontTexture.getTextureId()).c_str());
       maux->backTexture.getDelta(dX,dY,dZ);
-      fprintf(arq,"wtb %d,%d,%d %s\n", dX,dY,dZ,
+      fprintf(arq,"wtb = %d,%d,%d %s\n", dX,dY,dZ,
                   getTextureName(maux->backTexture.getTextureId()).c_str());
       maux->rightTexture.getDelta(dX,dY,dZ);
-      fprintf(arq,"wtr %d,%d,%d %s\n", dX,dY,dZ,
+      fprintf(arq,"wtr = %d,%d,%d %s\n", dX,dY,dZ,
                   getTextureName(maux->rightTexture.getTextureId()).c_str());
       maux->leftTexture.getDelta(dX,dY,dZ);
-      fprintf(arq,"wtl %d,%d,%d %s\n", dX,dY,dZ,
+      fprintf(arq,"wtl = %d,%d,%d %s\n", dX,dY,dZ,
                   getTextureName(maux->leftTexture.getTextureId()).c_str());
       maux = (wall*)maux->next;
    }
@@ -2631,7 +2540,7 @@ int Map::save(string arquivo)
       for(x1=0;x1<x;x1++)
       {
           /* Square Definition */
-          fprintf(arq,"p %d,%f,%f,%f,%f\n",
+          fprintf(arq,"square = %d,%f,%f,%f,%f\n",
                   MapSquares[x1][z1].flags,
                   MapSquares[x1][z1].h1,
                   MapSquares[x1][z1].h2,
@@ -2639,13 +2548,13 @@ int Map::save(string arquivo)
                   MapSquares[x1][z1].h4);
           
           /* Square Texture */
-          fprintf(arq,"ut %s\n",
+          fprintf(arq,"useTexture = %s\n",
                   getTextureName(MapSquares[x1][z1].texture).c_str());
           
           /* Connection */
           if( MapSquares[x1][z1].mapConection.active )
           {
-              fprintf(arq,"uc %f,%f,%f,%f:%f:%s\n",
+              fprintf(arq,"connection = %f,%f,%f,%f:%f:%s\n",
                       MapSquares[x1][z1].mapConection.x1,
                       MapSquares[x1][z1].mapConection.z1,
                       MapSquares[x1][z1].mapConection.x2,
@@ -2664,7 +2573,7 @@ int Map::save(string arquivo)
             {
                x2 = (int)obj->obj->xPosition / squareSize();
                z2 = (int)obj->obj->zPosition / squareSize();
-               fprintf(arq,"uo %s %d:%d,%d:%.3f,%.3f,%.3f:%.3f:%d\n",
+               fprintf(arq,"useObject = %s %d:%d,%d:%.3f,%.3f,%.3f:%.3f:%d\n",
                        dir.getRelativeFile(obj->obj->getFileName()).c_str(),
                        obj->draw, x2 + 1, z2 + 1,
                        obj->x, obj->y, 
@@ -2677,7 +2586,7 @@ int Map::save(string arquivo)
    }
 
    /* Write Initial Character Position */
-   fprintf(arq,"i %.3f,%.3f\n",xInic,zInic);
+   fprintf(arq,"initial = %.3f,%.3f\n",xInic,zInic);
 
    fclose(arq);
    return(1);
