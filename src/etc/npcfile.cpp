@@ -42,7 +42,8 @@ npcFile::~npcFile()
  ***********************************************************************/
 bool npcFile::load(string fileName)
 {
-   FILE* arq;
+   ifstream arq;
+   string strBuffer;
    int i, totalNpcs;
    char name[50];
    char npcFile[255];
@@ -50,24 +51,27 @@ bool npcFile::load(string fileName)
    dirs dir;
    npcFileName = fileName;
 
-   arq = fopen(dir.getRealFile(fileName).c_str(),"r");
-   if(arq == NULL)
+   arq.open(dir.getRealFile(fileName).c_str(), ios::in | ios::binary);
+   if(!arq)
    {
       cerr << "Can't open NPCs File: " << fileName << endl;
       return(false);
    }
 
    /* Get total Npcs defined on the file */
-   fscanf(arq,"%d",&totalNpcs);
+   getline(arq, strBuffer);
+   sscanf(strBuffer.c_str(),"%d",&totalNpcs);
    for(i = 0; i < totalNpcs; i++)
    {
       /* Get each npc definition */
-      fscanf(arq,"%s %s %f %f %f",&name[0],&npcFile[0],&posX,&posZ,&angle);
+      getline(arq, strBuffer);
+      sscanf(strBuffer.c_str(),"%s %s %f %f %f",
+             &name[0],&npcFile[0],&posX,&posZ,&angle);
       insertCharacter(name, npcFile, posX, posZ, angle);
    }
 
    /* Close file */
-   fclose(arq);
+   arq.close();
    return(true);
 }
 

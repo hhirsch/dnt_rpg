@@ -391,24 +391,27 @@ void weaponTypes::finish()
  ************************************************************/
 void weaponTypes::readFile(string fileName)
 {
-   FILE* file;
+   ifstream file;
    int i, index;
-   char buffer[255];
-   char buffer2[255];
+   string strBuffer;
+   string::size_type pos;
 
    int totals;
    wInfo* names = NULL;
 
    /* Open the file */
    dirs dir;
-   if(!(file=fopen(dir.getRealFile(fileName).c_str(),"r")))
+   file.open(dir.getRealFile(fileName).c_str(), ios::in | ios::binary);
+   if(!file)
    {
-       printf("Error while opening definitions file: %s\n",fileName.c_str());
+       cerr << "Error while opening definitions file: " 
+            << fileName << endl;
        return;
    }
 
    /* Read the total number of itens on the file */
-   fscanf(file,"%d", &totals);
+   getline(file, strBuffer);
+   sscanf(strBuffer.c_str(),"%d", &totals);
 
    /* Alloc the vector */
    names = new wInfo[totals];
@@ -446,25 +449,41 @@ void weaponTypes::readFile(string fileName)
    }
    else
    {
-      fclose(file);
-      printf("Unkown definitions file: %s\n", fileName.c_str());
+      file.close();
+      cerr << "Error: Unkown definitions file: " << fileName << endl;
       return;
    }
 
    /* Read All definitions */
    for(i=0; i < totals; i++)
    {
-      fscanf(file, "%d %s ", &index, &buffer[0]);
-      /* eat up the rest of line */
-      fgets(buffer2, sizeof(buffer2), file);
+      getline(file, strBuffer);
 
-      names[index].name = buffer;
+      /* Get the index */
+      sscanf(strBuffer.c_str(), "%d ", &index);
       names[index].index = index;
-      names[index].title = translateDataString(buffer2);
+
+      /* Get the name */
+      pos = strBuffer.find_first_not_of(" \t0123456789");
+      if((pos != string::npos) && (strBuffer[pos] != '\n'))
+      {
+         names[index].name = strBuffer.substr(pos, 
+                                 strBuffer.find_first_of(" \t\n\r", pos) - pos);
+         pos += names[index].name.size();
+      }
+
+      /* Get the title */
+      pos = strBuffer.find_first_not_of(" \t\n\r",pos); 
+      if((pos != string::npos) && (strBuffer[pos] != '\n'))
+      {
+         names[index].title = translateDataString(strBuffer.substr(pos, 
+                               strBuffer.find_first_of("\t\n\r\0", pos) - pos));
+      }
+      
    }
 
    /* Close the file */
-   fclose(file);
+   file.close();
 }
 
 /************************************************************

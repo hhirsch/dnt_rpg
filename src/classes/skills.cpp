@@ -25,11 +25,11 @@ using namespace std;
 void skillsDefinitions::init()
 {
    dirs dir;
-   char buffer[1024];
+   string strBuffer;
    char buf[128];
    char buf2[128];
    int num;
-   FILE* desc;
+   ifstream desc;
    string descFile, imgFile;
 
    defParser def;
@@ -73,22 +73,24 @@ void skillsDefinitions::init()
       imgFile = buf2;
    
       /* Read the Skill Description */
-      if(! (desc = fopen(descFile.c_str(), "r")))
+      desc.open(descFile.c_str(), ios::in | ios::binary);
+      if(!desc)
       {
          cerr << "Error: Can't open skill file: " << descFile << endl;
          return;
       }
-      fgets(buffer, sizeof(buffer), desc);
-      skillsDefs[num].name = translateDataString(buffer);
-      fgets(buffer, sizeof(buffer), desc);
-      skillsDefs[num].description = translateDataString(buffer);
-      fscanf(desc,"%d",&skillsDefs[num].baseAttribute);
+      getline(desc, strBuffer);
+      skillsDefs[num].name = translateDataString(strBuffer);
+      getline(desc, strBuffer);
+      skillsDefs[num].description = translateDataString(strBuffer);
+      getline(desc, strBuffer);
+      sscanf(strBuffer.c_str(),"%d",&skillsDefs[num].baseAttribute);
       skillsDefs[num].image = IMG_Load(dir.getRealFile(imgFile).c_str());
       if(!skillsDefs[num].image)
       {
          cout << "Can't open skill image: " << imgFile << endl;
       }
-      fclose(desc);
+      desc.close();
    }
 }
 
