@@ -17,6 +17,7 @@
  - Fixed a bug of lost object when trying to equip a weapon by "using it" 
    when already have another weapon eqquiped;
  - Fixed a bug on DNT installation of bin directory and default options file;
+ - Fixed a bug when sound effect file doesn't exist;
 
 Working on:
  - Weather effects;
@@ -24,6 +25,8 @@ Working on:
  - Use dntMapEditor to insert sound effects at maps;
  - New models;
  - New effects for comic books;
+ - Capacity of using talents;
+ - Implement 5-15% of the talents defined on DNT Book;
 
 Pending:
  - Define Counter Skills;
@@ -31,9 +34,7 @@ Pending:
  - Extend walls to follow map height;
  - Define paths to improve the A* at outdoor maps;
  - Put Lights on MapEditor;
- - Implement 5-15% of the talents defined on DNT Book;
  - Score at Death Screen;
- - Capacity of using talents;
 
 ================================================
 |               Version 0.3.2                  |
