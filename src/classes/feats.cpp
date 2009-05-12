@@ -539,22 +539,23 @@ void feats::defineWeapon(weapon* w)
 void featsList::init(string dir, string arq)
 {
    dirs dirInfo;
-   FILE* file;
+   ifstream file;
    string arqDescricao;
    string arqImagem;
-   char buffer[1024];
    char buf2[256];
    char buf3[256];
+   string strBuffer;
    int aux;
 
-   if(!(file=fopen(arq.c_str(),"r")))
+   file.open(arq.c_str(), ios::in | ios::binary);
+   if(!file)
    {
-       printf("Error while opening feats list: %s\n",arq.c_str());
+       cerr << "Error while opening feats list: " << arq << endl;
        return;
    }
 
-   fgets(buffer, sizeof(buffer), file);
-   sscanf(buffer, "%d", &totalFeats);
+   getline(file, strBuffer);
+   sscanf(strBuffer.c_str(), "%d", &totalFeats);
 
    if(totalFeats > 0)
    {
@@ -573,8 +574,8 @@ void featsList::init(string dir, string arq)
    /* Get all Feats from file */
    for(aux = 0; aux < totalFeats; aux++)
    {
-      fgets(buffer, sizeof(buffer), file);
-      sscanf(buffer,"%s %s",&buf2[0],&buf3[0]);
+      getline(file, strBuffer);
+      sscanf(strBuffer.c_str(),"%s %s",&buf2[0],&buf3[0]);
       arqImagem = buf3;
       arqDescricao = buf2;
       arqDescricao = dir+arqDescricao;
@@ -615,9 +616,9 @@ void featsList::init(string dir, string arq)
          else if(key == "requerided")
          {
             /* Requerided factor  */
-            sscanf(value.c_str(), "%s %s", &buffer[0], &buf2[0]);
-            m_feats[aux].requeridedFactor.type = buffer;
-            m_feats[aux].requeridedFactor.id = buf2;
+            sscanf(value.c_str(), "%s %s", &buf2[0], &buf3[0]);
+            m_feats[aux].requeridedFactor.type = buf2;
+            m_feats[aux].requeridedFactor.id = buf3;
          }
          else if(key == "reqValue")
          {
@@ -645,18 +646,18 @@ void featsList::init(string dir, string arq)
          /* Concept Bonus */
          else if(key == "bonus")
          {
-            sscanf(value.c_str(), "%s %s", &buffer[0], &buf2[0]);
-            m_feats[aux].conceptBonus.type = buffer;
-            m_feats[aux].conceptBonus.id = buf2;
+            sscanf(value.c_str(), "%s %s", &buf2[0], &buf3[0]);
+            m_feats[aux].conceptBonus.type = buf2;
+            m_feats[aux].conceptBonus.id = buf3;
          }
 
          /* Concept Target */
          else if(key == "affect")
          {
             /* Affect */
-            sscanf(value.c_str(), "%s %s", &buffer[0], &buf2[0]);
-            m_feats[aux].conceptTarget.type = buffer;
-            m_feats[aux].conceptTarget.id = buf2;
+            sscanf(value.c_str(), "%s %s", &buf2[0], &buf3[0]);
+            m_feats[aux].conceptTarget.type = buf2;
+            m_feats[aux].conceptTarget.id = buf3;
          }
 
          /* Dices! */
@@ -741,7 +742,7 @@ void featsList::init(string dir, string arq)
       m_feats[aux].image = IMG_Load(dirInfo.getRealFile(arqImagem).c_str());
    }
 
-   fclose(file);
+   file.close();
 }
 
 /***************************************************************
