@@ -60,6 +60,12 @@ mission::mission(string missionFile, void* usedEngine,
          }
       }
    }
+   else
+   {
+      /* Is loading directly from the script,
+       * usually at loading a saved game. */
+      fileName = missionFile;
+   }
 
    /* Call the init for the iaScript! */
    init();
@@ -269,6 +275,7 @@ void mission::saveAsCurrent(ofstream* file)
    jumpStack->save(file);
 
    //TODO: FIXME: Pending Action!
+   
 
    /* Mark End */
    *file << MISSION_TOKEN_END_MISSION << " = " << fileName << endl;

@@ -197,6 +197,10 @@ void iaScript::run(int maxLines)
 
    iaVariable* iv = NULL;
 
+#ifdef DNT_DEBUG_SCRIPTS
+   cerr << "Interpreting: " << fileName << endl;
+#endif
+
    if(file)
    {
       while(!done)
@@ -211,12 +215,20 @@ void iaScript::run(int maxLines)
             engine* eng = (engine*)actualEngine;
             eng->actionControl->removeAction(pendAction);
             pendAction = NULL;
+
+#ifdef DNT_DEBUG_SCRIPTS
+            cerr << fileName << ": " << "Done Pending Action..." << endl;
+#endif
          }
          else if(pendAction)
          {
             /* The pending action isn't finished, so do nothing */
             done = true;
             interpret = false;
+
+#ifdef DNT_DEBUG_SCRIPTS
+            cerr << fileName << ": " << "Waiting Pending Action..." << endl;
+#endif
          }
          else
          {
@@ -226,6 +238,10 @@ void iaScript::run(int maxLines)
             actualLine++;
             lines++;
             interpret = true;
+
+#ifdef DNT_DEBUG_SCRIPTS
+            cerr << fileName << ": " << strBuffer << endl;
+#endif
          }
 
          if(interpret)
@@ -565,6 +581,10 @@ void iaScript::run(int maxLines)
             symbols->removeTempSymbols();
          }
       }
+   }
+   else
+   {
+      cerr << "Error: Unknow script file to interpret!" << endl;
    }
    return;
 }
