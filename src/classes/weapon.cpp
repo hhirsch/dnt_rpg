@@ -464,7 +464,9 @@ void weaponTypes::readFile(string fileName)
       names[index].index = index;
 
       /* Get the name */
-      pos = strBuffer.find_first_not_of(" \t0123456789");
+      pos = strBuffer.find_first_not_of(" \t");
+      pos = strBuffer.find_first_not_of("0123456789", pos);
+      pos = strBuffer.find_first_not_of(" \t", pos);
       if((pos != string::npos) && (strBuffer[pos] != '\n'))
       {
          names[index].name = strBuffer.substr(pos, 
