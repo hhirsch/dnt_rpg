@@ -1,4 +1,4 @@
-35
+37
 Beer models/objetos/itens/garrafa1/garrafa1.dcc
 Bookshelf models/objetos/geral/bookshelf/bookshelf.dcc
 Briefcase models/objetos/geral/mala/mala.dcc
@@ -28,6 +28,8 @@ Pia models/objetos/geral/pia/pia.dcc
 Pillow models/objetos/geral/pillow/pillow.dcc
 RefMachine models/objetos/geral/refmachine/refmachine.dcc
 Rug models/objetos/geral/rug/rug.dcc
+Rug2 models/objetos/geral/rug2/rug2.dcc
+Rug3 models/objetos/geral/rug3/rug3.dcc
 Sofa models/objetos/geral/sofa/sofa.dcc
 Sofa_2 models/objetos/geral/sofa2/sofa2.dcc
 Stair models/objetos/geral/escada/escada.dcc
