@@ -1254,7 +1254,7 @@ int Map::render(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
                 GLfloat** matriz, GLfloat perX, GLfloat perZ)
 {
    /* Update Lights */
-   lights.actualize(perX, perZ);
+   lights.update(perX, perZ);
 
    glColor3f(1.0,1.0,1.0);
    /* Render Walls */
@@ -1932,7 +1932,7 @@ int Map::open(string arquivo)
       /* Define Light File */
       if(key == "lightsFile")
       {
-         lights.Load(value);
+         lights.load(value);
       }
       /* Add Lake to Map */
       else if(key == "lake")
@@ -1948,7 +1948,7 @@ int Map::open(string arquivo)
       /* Define Fog File */
       else if(key == "fogFile")
       {
-         fog.Load(value);
+         fog.load(value);
       }
       /* Define Particle System File */
       else if(key == "particlesFile")

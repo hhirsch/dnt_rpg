@@ -1,6 +1,10 @@
 #include "mapfog.h"
 #include "../etc/dirs.h"
 
+#include <iostream>
+#include <fstream>
+using namespace std;
+
 /****************************************************************
  *                         Constructor                          *
  ****************************************************************/
@@ -29,24 +33,31 @@ mapFog::~mapFog()
 /****************************************************************
  *                             Load                             *
  ****************************************************************/
-void mapFog::Load(string arq)
+void mapFog::load(string arq)
 {
-   FILE* file;
+   ifstream file;
+   string buffer;
    dirs dir;
 
-   if(!(file=fopen(dir.getRealFile(arq).c_str(),"r")))
+   file.open(dir.getRealFile(arq).c_str(), ios::in | ios::binary);
+
+   if(!file)
    {
-       printf("Error while opening fog: %s\n",arq.c_str());
+       cerr << "Error while opening fog file: " << arq << endl;
        return;
    }
    fileName = arq;
-   fscanf(file,"%f %f %f %f",&color[0],&color[1],&color[2],&color[3]);
-   fscanf(file,"%f",&density);
-   fscanf(file,"%f",&start);
-   fscanf(file,"%f",&end);
+   getline(file, buffer);
+   sscanf(buffer.c_str(),"%f %f %f %f",&color[0],&color[1],&color[2],&color[3]);
+   getline(file, buffer);
+   sscanf(buffer.c_str(),"%f",&density);
+   getline(file, buffer);
+   sscanf(buffer.c_str(),"%f",&start);
+   getline(file, buffer);
+   sscanf(buffer.c_str(),"%f",&end);
    enabled = true;
 
-   fclose(file);
+   file.close();
 }
 
 /****************************************************************

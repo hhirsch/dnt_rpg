@@ -47,7 +47,7 @@ mapLights::~mapLights()
 /************************************************************
  *                            Load                          *
  ************************************************************/
-void mapLights::Load(string arq)
+void mapLights::load(string arq)
 {
    int curLight = -1;
    GLfloat aux0,aux1,aux2,aux3;
@@ -198,7 +198,7 @@ void mapLights::setNearLights(GLfloat posX, GLfloat posZ)
 /************************************************************
  *                         actualize                        *
  ************************************************************/
-void mapLights::actualize(GLfloat posX, GLfloat posZ)
+void mapLights::update(GLfloat posX, GLfloat posZ)
 {
    int i,l;
    int gLight = 0;

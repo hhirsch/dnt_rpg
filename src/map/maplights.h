@@ -54,11 +54,11 @@ class mapLights
       ~mapLights();
       /*! Load Map Lights from file
        * \param arq -> filename of lights file */
-      void Load(string arq);
+      void load(string arq);
       /*! Actualize Map Lights Position
        * \param posX -> active character X position
        * \param posZ -> active character Z position */
-      void actualize(GLfloat posX, GLfloat posZ);
+      void update(GLfloat posX, GLfloat posZ);
 
       /*! Get the Lights File Name
        * \return name of the file */
