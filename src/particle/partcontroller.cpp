@@ -6,6 +6,10 @@
 #include "../etc/dirs.h"
 #include "../etc/extensions.h"
 
+#include <fstream>
+#include <iostream>
+using namespace std;
+
 /**********************************************************************
  *                              init                                  *
  **********************************************************************/
@@ -582,7 +586,8 @@ int partController::numParticles()
 void partController::loadFromFile(string fileName)
 {
    dirs dir;
-   FILE* file; 
+   fstream file;
+   string strBuffer;
    int type; GLfloat X,Y,Z;
    char buffer[150];
    part1* particula;
@@ -592,43 +597,60 @@ void partController::loadFromFile(string fileName)
    float dX, dZ; 
    int inclination;
 
+   /* Clear any previous particles */
    deleteAll();
 
-   if(!(file=fopen(dir.getRealFile(fileName).c_str(),"r")))
+   /* Now, try to load from file */
+   file.open(dir.getRealFile(fileName).c_str(), ios::in | ios::binary);
+
+   if(!file)
    {
-       printf("Error while opening Map particle file: %s\n",
-              dir.getRealFile(fileName).c_str());
+       cerr << "Error while opening Map particle file: "
+            << dir.getRealFile(fileName) << endl;
        return;
    }
-   while(fscanf(file,"%d %f %f %f %s",&type,&X,&Y,&Z,&buffer[0]) != EOF)
+
+   while(!file.eof())
    {
+      getline(file, strBuffer);
+      sscanf(strBuffer.c_str(), "%d %f %f %f %s", &type,&X,&Y,&Z,&buffer[0]);
+      
+      /* Waterfall Extra Info */
       if(type == PART_WATERFALL)
       {
          particula = (part1*) addParticle(type, X, Y, Z, buffer);
-         fscanf(file,"%d", &totalPlanes);
+         getline(file, strBuffer);
+         sscanf(strBuffer.c_str(), "%d", &totalPlanes);
          
          /* read Planes */
          while(totalPlanes > 0)
          {
-            fscanf(file,"%f %f %f %f %f %f %f %f %d",
+            getline(file, strBuffer);
+            sscanf(strBuffer.c_str(), "%f %f %f %f %f %f %f %f %d",
                    &x1, &y1, &z1, &x2, &y2, &z2, &dX, &dZ, &inclination);
             particula->addPlane(x1, y1, z1, x2, y2, z2, dX, dZ, inclination);
             totalPlanes--;
          }
       }
+
+      /* Grass Extra Info */
       else if(type == PART_GRASS)
       {
          GLfloat x2, z2, scale;
          int total;
-         fscanf(file, "%f %f %f %d",&x2, &z2, &scale, &total);
+
+         getline(file, strBuffer);
+         sscanf(strBuffer.c_str(), "%f %f %f %d",&x2, &z2, &scale, &total);
          addParticle(type, X, Z, x2, z2, total, scale, buffer);
       }
+
+      /* Other Particles */
       else
       {
          addParticle(type, X, Y, Z, buffer);
       }
    }
-   fclose(file);
+   file.close();
 }
 
 /**********************************************************************
