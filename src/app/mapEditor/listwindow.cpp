@@ -31,6 +31,10 @@
 #define FILE_INDOOR_TEXTURE   "mapEditor/lists/floor_indoor.lst"
 #define FILE_OUTDOOR_TEXTURE  "mapEditor/lists/floor_outdoor.lst"
 
+#include <fstream>
+#include <iostream>
+using namespace std;
+
 /********************************************************************
  *                             Constructor                          *
  ********************************************************************/
@@ -165,42 +169,48 @@ void listWindow::open()
  ********************************************************************/
 void listWindow::loadFromFile(string fileName)
 {
-   FILE* arq;
-   char buffer[1024];
+   ifstream arq;
+   string buffer;
    char buf2[1024];
    char buf3[1024];
    total = 0;
    int i;
 
+   /* Clear current list, if defined */
    if(listElements != NULL)
    {
       delete [] listElements;
       listElements = NULL;
    }
 
-   if(!(arq=fopen(fileName.c_str(), "r")))
+   /* Let's read the file */
+   arq.open(fileName.c_str(), ios::in | ios::binary);
+   if(!arq)
    {
-      printf("Can't open List file: %s\n", fileName.c_str());
+      cerr << "Can't open List file: " << fileName << endl;
       return;
    }
 
-   fgets(buffer, sizeof(buffer), arq);
-   sscanf(buffer, "%d", &total);
-
+   /* Define total elements */
+   getline(arq, buffer);
+   sscanf(buffer.c_str(), "%d", &total);
    if(total > 0)
    {
       listElements = new listElement[total];
    }
 
+   /* Read all elements */
    for(i = 0; i < total; i++)
    {
-      fgets(buffer, sizeof(buffer), arq);
-      sscanf(buffer, "%s %s", buf2, buf3);
+      getline(arq, buffer);
+      sscanf(buffer.c_str(), "%s %s", buf2, buf3);
       list->insertText(buf2);
       listElements[i].title = buf2;
       listElements[i].fileName = buf3;
    }
-   fclose(arq);
+
+   /* Done */
+   arq.close();
 }
 
 /********************************************************************

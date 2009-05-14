@@ -7,6 +7,7 @@
 #include "../etc/userinfo.h"
 
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 
@@ -100,29 +101,33 @@ aspectWindow::~aspectWindow()
  **************************************************************/
 void aspectWindow::loadImages()
 {
-   FILE* f;
+   ifstream f;
    int i;
-   char buffer[256];
+   string buffer;
 
    totalImages = 0;
 
    dirs dir;
-   if( !(f=fopen(dir.getRealFile("characters/portraits/portraits.lst").c_str(),
-                 "r")) )
+   f.open(dir.getRealFile("characters/portraits/portraits.lst").c_str(),
+          ios::in | ios::binary);
+   
+   if(!f)
    {
       cerr << "Can't open the list with portraits: portraits.lst!" << endl;
       return;
    }
 
-   fscanf(f,"%d", &totalImages);
+   getline(f, buffer);
+   sscanf(buffer.c_str(),"%d", &totalImages);
    images = new portraitImage[totalImages];
 
    for(i = 0; i < totalImages; i++)
    {
-      fscanf(f,"%s", &buffer[0]);
-      images[i].imageFile = buffer;
+      getline(f, images[i].imageFile);
       images[i].image = IMG_Load(dir.getRealFile(images[i].imageFile).c_str());
    }
+
+   f.close();
 }
 
 /**************************************************************
