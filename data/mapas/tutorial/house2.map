@@ -1,6 +1,7 @@
 # Made by DccNiTghtmare's MapEditor, 0.4
 size = 5X6
 name = gettext("mapName")
+npcFile = mapas/tutorial/house2.map.npc
 musicFile = music/musica5.ogg
 lightsFile = mapas/tutorial/house2.map.lgh
 outdoor = 0
