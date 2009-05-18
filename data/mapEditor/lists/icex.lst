@@ -1,4 +1,4 @@
-20
+23
 Black_Board models/objetos/icex/quadro/quadro.dcc
 Chair models/objetos/icex/cadeira/cadeira.dcc
 Chair_Table models/objetos/icex/mesa_braco/mesa_braco.dcc
@@ -19,3 +19,6 @@ Snes_SF2 models/objetos/icex/snes/sf2/snes_sf2.dcc
 Snes_Starfox models/objetos/icex/snes/starfox/snes_starfox.dcc
 Snes_Topgear models/objetos/icex/snes/topgear/snes_topgear.dcc
 Table models/objetos/icex/mesa/mesa.dcc
+Tarsila_1 models/objetos/paints/tarsila_1/tarsila_1.dcc
+Tarsila_2 models/objetos/paints/tarsila_2/tarsila_2.dcc
+Tarsila_3 models/objetos/paints/tarsila_3/tarsila_3.dcc
