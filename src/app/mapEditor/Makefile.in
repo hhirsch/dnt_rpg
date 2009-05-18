@@ -50,7 +50,7 @@ OBJS = area.o editor.o grasswindow.o guiIO.o listwindow.o mapEditor.o message.o 
 
 BIN = ../../../bin/
 
-all: mapEditor
+all: $(BIN)dntMapEditor
 
 area.o: area.cpp area.h
 	@printf "Making area.o... "
@@ -132,7 +132,7 @@ waterwindow.o: waterwindow.cpp waterwindow.h $(ENDPART)partcontroller.h\
 	@$(CC) $(CFLAGS) waterwindow.cpp -o waterwindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-mapEditor: $(OBJSGUI) $(OBJSMAPA) $(OBJS)
+$(BIN)dntMapEditor: $(OBJSGUI) $(OBJSMAPA) $(OBJS)
 	@printf "Linking mapEditor... "
 	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSIA) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) $(OBJSCBOOK) $(OBJS) -o $(BIN)dntMapEditor
 	@printf "\e[0;32mDone.\e[0;0m\n"

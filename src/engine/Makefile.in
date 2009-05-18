@@ -50,7 +50,7 @@ BIN = ../../bin/
 SUPREDE = #-DVIDEO_MODE #-DREDE #comente para nao ter suporte a rede na bagaca
 FIFO = #../etc/fifo.o
 
-all: teste
+all: $(BIN)dccnitghtmare
 
 alignwindow.o: alignwindow.h alignwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)align.h
 	@printf "Making alignwindow.o... "
@@ -213,7 +213,7 @@ util.o: util.cpp util.h $(ENDGUI)farso.h
 	@$(CC) $(CFLAGS) $(SUPREDE) util.cpp -o util.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-teste: $(OBJSGUI) $(OBJSMAPA) $(OBJSNET) $(OBJSETC) $(OBJSCLASSES) $(OBJSLANG) $(OBJSSOUND) $(OBJSPART) $(OBJSFIGHT) $(OBJSCBOOK) $(OBJS)  
+$(BIN)dccnitghtmare: $(OBJSGUI) $(OBJSMAPA) $(OBJSNET) $(OBJSETC) $(OBJSCLASSES) $(OBJSLANG) $(OBJSSOUND) $(OBJSPART) $(OBJSFIGHT) $(OBJSCBOOK) $(OBJS)  
 	@printf "Linking dccnitghtmare... "
 	@$(CC) $(LDFLAGS) $(LIBS) $(EFLAGS) $(OBJSGUI) $(OBJSCLASSES) $(OBJSLANG) $(OBJSNET) $(OBJSETC) $(OBJSIA) $(FIFO) $(OBJSMAPA) $(OBJSCBOOK) $(OBJSSOUND) $(OBJSPART) $(OBJSFIGHT) $(OBJS) $(SUPREDE) -o $(BIN)dccnitghtmare
 	@printf "\e[0;32mDone.\e[0;0m\n"

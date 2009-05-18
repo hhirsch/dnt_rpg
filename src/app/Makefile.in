@@ -55,14 +55,14 @@ BIN = ../../bin/
 
 OBJSFNT = $(OBJSGUI) $(ENDENGINE)culling.o $(ENDENGINE)util.o
 
-all: parts heightmap2dnt
+all: parts $(BIN)heightmap2dnt
 
 heightmap2dnt.o: heightmap2dnt.cpp
 	@printf "Making heightmap2dnt.o... "
 	@$(CC) $(CFLAGS) heightmap2dnt.cpp -o heightmap2dnt.o
 	@printf "\e[0;32mDone.\e[0;0m\n"	
 
-heightmap2dnt: $(OBJSGUI) $(OBJSIA) $(OBJSMAPA) $(OBJSCBOOK) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) heightmap2dnt.o
+$(BIN)heightmap2dnt: $(OBJSGUI) $(OBJSIA) $(OBJSMAPA) $(OBJSCBOOK) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) heightmap2dnt.o
 	@printf "Linking heightmap2dnt... "
 	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSIA) $(OBJSCBOOK) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) heightmap2dnt.o -o $(BIN)heightmap2dnt
 	@printf "\e[0;32mDone.\e[0;0m\n"
