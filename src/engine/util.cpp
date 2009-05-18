@@ -452,3 +452,21 @@ bool screenshot(string fileName, bool thumb)
    return(res);
 }
 
+/******************************************************************
+ *                        replaceSpaces                           *
+ ******************************************************************/
+string replaceSpaces(string s)
+{
+   size_t found;
+   string str = s;
+
+   found = str.find_first_of(" \t");
+   while(found != string::npos)
+   {
+      str[found]='_';
+      found = str.find_first_of(" \t",found+1);
+   }
+
+   return(str);
+}
+

@@ -1,5 +1,7 @@
 #include "npcs.h"
 
+#include "../../engine/util.h"
+
 #define NPCS_STATE_NONE    0
 #define NPCS_STATE_ADD     1
 
@@ -152,6 +154,8 @@ string npcs::getNpcFileName()
 bool npcs::saveFile(string fileName)
 {
    FILE* arq;
+   string saveName;
+
    if(!(arq = fopen(fileName.c_str(),"w")))
    {
       return(false);
@@ -163,7 +167,8 @@ bool npcs::saveFile(string fileName)
       character* per = (character*) NPCs->getFirst();
       for(npc = 0; npc < NPCs->getTotal(); npc++)
       {
-         fprintf(arq,"%s %s %.3f %.3f %.3f\n",per->name.c_str(),
+         saveName = replaceSpaces(per->name);
+         fprintf(arq,"%s %s %.3f %.3f %.3f\n", saveName.c_str(),
                  per->getCharacterFile().c_str(),
                  per->xPosition,per->zPosition, per->orientation);
          per = (character*) per->next;

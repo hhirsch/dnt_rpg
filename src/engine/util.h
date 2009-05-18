@@ -226,4 +226,9 @@ void rotatePoint(GLfloat srcX, GLfloat srcY, GLfloat srcZ, GLfloat theta,
                  GLfloat p2X, GLfloat p2Y, GLfloat p2Z, 
                  GLfloat& resX, GLfloat& resY, GLfloat& resZ);
 
+/*! Replace all space characteres on the string
+ * \param s -> string to replace spaces
+ * \return -> string with '_' at spaces places */
+string replaceSpaces(string s);
+
 #endif
