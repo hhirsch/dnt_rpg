@@ -1,0 +1,49 @@
+############################################################
+#                     Main Dialog                          #
+############################################################
+dialog(0)
+   npc_begin
+      text = gettext("(You see a strange and beautiful paint)")
+   npc_end
+   pc_begin
+      option
+         pre_test = equal(OBJECT_STATE, 0)
+         text = gettext("Look the paint.")
+         post_test = roll(OBSERVATE, 5)
+         if_action = change_object_state(1)
+         if_action = go_to_dialog(1)
+         else_action = go_to_dialog(2)
+
+      option
+         text = gettext("Exit")
+         action = finish_dialog()
+   pc_end
+end_dialog
+
+############################################################
+#                    Found Dialog                          #
+############################################################
+dialog(1)
+   npc_begin
+      text = gettext("(There's nothing here.)")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Exit")
+         action = finish_dialog()
+   pc_end
+end_dialog
+
+############################################################
+#                    Found Dialog                          #
+############################################################
+dialog(2)
+   npc_begin
+      text = gettext("(You failed to find something.)")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Exit")
+         action = finish_dialog()
+   pc_end
+end_dialog
