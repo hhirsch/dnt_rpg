@@ -70,7 +70,8 @@ classWindow::classWindow(guiInterface* inter, classe** retClass)
    classImage->set(classesOrder[curClass]->image);
 
    /* TabBox */
-   tabBox *tab = intWindow->defineTabBox(74,18,345,345);
+   tabBox *tab = (tabBox*)intWindow->getObjectsList()->defineTabBox(74,18,
+                                                                    345,345);
    guiList *listChar = tab->insertOption(gettext("Characteristics"));
    guiList *listDesc = tab->insertOption(gettext("Description"));
 

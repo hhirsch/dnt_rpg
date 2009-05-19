@@ -133,6 +133,13 @@ class guiInterface
        * \param y -> mouse y coordinate
        * \param list -> pointer to the guiList to verify */
       void verifyMouseInObjects(int x, int y, guiList* list);
+      
+      /*! Verify mouse at tab boxes
+       * \param x -> mouse x coordinate
+       * \param y -> mouse y coordinate
+       * \param list -> pointer to the guiList to verify
+       * \return -> tabBox pointer if event got */
+      guiObject* verifyTabBox(int x, int y, guiList* list);
 
       /*! Verify RolBars (after got button pressed events)
        * \param guiList -> list of objects to verify rolBars */

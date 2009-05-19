@@ -9,11 +9,55 @@ using namespace std;
  *  DccNiTghtmare is public domain. Do whatever you want with this code. *
  *************************************************************************/
 
-
-
 #define OPTIONSW_CANCEL  0  /**< Cancel Return Value */
 #define OPTIONSW_CONFIRM 1  /**< Confirm Return Value */
 #define OPTIONSW_OTHER   2  /**< Other Return Value */
+
+
+/*! Keys constants */
+enum 
+{
+   /* Camera Keys */
+   DNT_KEY_CAMERA_UP,
+   DNT_KEY_CAMERA_DOWN,
+   DNT_KEY_CAMERA_LEFT,
+   DNT_KEY_CAMERA_RIGHT,
+   DNT_KEY_CAMERA_ROTATE_LEFT,
+   DNT_KEY_CAMERA_ROTATE_RIGHT,
+   DNT_KEY_CAMERA_ROTATE_UP,
+   DNT_KEY_CAMERA_ROTATE_DOWN,
+   DNT_KEY_CAMERA_ZOOM_UP,
+   DNT_KEY_CAMERA_ZOOM_DOWN,
+   DNT_KEY_CAMERA_TOP,
+   DNT_KEY_CAMERA_BOTTOM,
+   DNT_KEY_CAMERA_MAX_ZOOM,
+   DNT_KEY_CAMERA_MIN_ZOOM,
+
+   /* Character move keys */
+   DNT_KEY_TOGGLE_RUN_1,
+   DNT_KEY_TOGGLE_RUN_2,
+   DNT_KEY_MOVE_RIGHT,
+   DNT_KEY_MOVE_LEFT,
+   DNT_KEY_MOVE_FORWARD,
+   DNT_KEY_MOVE_BACKWARD,
+   DNT_KEY_ROTATE_LEFT,
+   DNT_KEY_ROTATE_RIGHT,
+   DNT_KEY_CHANGE_CHARACTER,
+
+   /* Battle Keys */
+   DNT_KEY_BATTLE_TURN,
+
+   /* Shortcuts keys */
+   DNT_KEY_WINDOW_MINI_MAP,
+   DNT_KEY_WINDOW_SHORTCUTS,
+   DNT_KEY_WINDOW_BRIEFING,
+   DNT_KEY_WINDOW_INVENTORY,
+   DNT_KEY_WINDOW_CHARACTER,
+   DNT_KEY_JOURNAL_WINDOW,
+
+   /* Keys count */
+   DNT_TOTAL_KEYS
+};
 
 /*! Options Class */
 class options

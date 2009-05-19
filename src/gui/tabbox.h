@@ -29,7 +29,7 @@ class tabObj
 /*! The tabBox class is a tabWidget for FarSo. It have a 
  * gui objects list for each tab option, only displaying one
  * per time (that that is selected). 
- * \note Avoid using tabBox inner a tabBox: it should not work. */
+ * \note each guiList can have only one tabBox */
 class tabBox: public guiObject
 {
    public:

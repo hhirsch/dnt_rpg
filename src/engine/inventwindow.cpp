@@ -78,7 +78,8 @@ void inventWindow::init(int xa, int ya, string title,
    leftFingerButton = characterTabButton->insertButton(200,169,219,188);
 
    /* Add Inventory Tab Box */
-   inventoryTabBox = intWindow->defineTabBox(6,272,258,409);
+   inventoryTabBox = (tabBox*)intWindow->getObjectsList()->defineTabBox(6,272,
+                                                                       258,409);
 
    /* Add Each Options */
    guiList* list;

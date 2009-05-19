@@ -4,6 +4,8 @@
 
 #include "guilist.h"
 #include "menu.h"
+#include "tabbox.h"
+
 #include <stdio.h>
 #include <SDL/SDL_image.h>
 
@@ -16,6 +18,7 @@ guiList::guiList()
    first = NULL;
    intMenu = NULL;
    wSurface = NULL;
+   tab = NULL;
 }
 
 /**************************************************************
@@ -33,6 +36,10 @@ guiList::~guiList()
    {
       removeMenu();
    }
+   if(tab)
+   {
+      delete(tab);
+   }
 }
 
 /**************************************************************
@@ -48,6 +55,18 @@ bool guiList::changed()
    {
       result |= obj->changed();
       obj = obj->next;
+   }
+
+   /* Verify tabBox Objects */
+   if(tab != NULL)
+   {
+      tabBox* tb = (tabBox*)tab;
+      result |= tb->changed();
+
+      if(tb->getActiveList() != NULL)
+      {
+         result |= tb->getActiveList()->changed();
+      }
    }
 
    return(result);
@@ -117,6 +136,12 @@ void guiList::draw(SDL_Surface* surface)
        
       } //case
       obj = obj->next;
+   }
+
+   /* TabBox Draw */
+   if(tab != NULL)
+   {
+      tab->draw(surface);
    }
 }
 
@@ -379,6 +404,43 @@ healthBar* guiList::insertHealthBar(int xa, int ya, int xb, int yb, int max)
    insertObject(n);
    n->defineMaxHealth(max);
    return(n);
+}
+
+/*********************************************************************
+ *                          defineTabBox                             *
+ *********************************************************************/
+guiObject* guiList::defineTabBox(int x1, int y1, int x2, int y2)
+{
+   if(tab != NULL)
+   {
+      tabBox* tb = (tabBox*)tab;
+      delete(tb);
+   }
+
+   tab = (guiObject*)new tabBox(x1,y1,x2,y2, wSurface);
+   return(tab);
+}
+
+/*********************************************************************
+ *                            getTabBox                              *
+ *********************************************************************/
+guiObject* guiList::getTabBox()
+{
+   return(tab);
+}
+
+/*********************************************************************
+ *                       getActiveTabBoxList                         *
+ *********************************************************************/
+guiList* guiList::getActiveTabBoxList()
+{
+   if(tab != NULL)
+   {
+      tabBox* tb = (tabBox*)tab;
+      return(tb->getActiveList());
+   }
+
+   return(NULL);
 }
 
 /**************************************************************

@@ -150,6 +150,22 @@ class guiList
        * \param max -> max health value */
       healthBar* insertHealthBar(int xa, int ya, int xb, int yb, int max);
 
+      /*! Define a tabBox for the window
+       * \param x1 -> x first coordinate
+       * \param y1 -> y first coordinate
+       * \param x2 -> x last coordinate
+       * \param y2 -> y last coordinate
+       * \return -> pointer to the defined tabBox */
+      guiObject* defineTabBox(int x1, int y1, int x2, int y2);
+
+      /*! Get the current tabBox 
+       * \return -> pointer to the current tabBox */
+      guiObject* getTabBox();
+  
+      /*! Get the objects list relative to the tabBox (if one)
+       * \return guiList of objects active at the tabBox */
+      guiList* getActiveTabBoxList();
+
       /*! Add a internal Menu to the list
        * \return menu Inserted */
       guiObject* addMenu();
@@ -182,6 +198,7 @@ class guiList
       int total;         /**< Total Itens on List */
       guiObject *first;  /**< Head Node */
       guiObject* intMenu; /**< The internal Menu of the List */
+      guiObject* tab;    /**< Inner tabBox */
 
 };
 

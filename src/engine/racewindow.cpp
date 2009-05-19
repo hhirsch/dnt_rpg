@@ -67,7 +67,7 @@ raceWindow::raceWindow(guiInterface* inter, race** retRace)
    raceImage->set(racesOrder[curRace]->image);
 
    /* TabBox */
-   tabBox *tab = intWindow->defineTabBox(6,18,277,345);
+   tabBox *tab=(tabBox*)intWindow->getObjectsList()->defineTabBox(6,18,277,345);
 
    guiList *listChar = tab->insertOption(gettext("Characteristics"));
    guiList *listDesc = tab->insertOption(gettext("Description"));

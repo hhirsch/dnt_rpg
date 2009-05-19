@@ -21,36 +21,124 @@
 #include <iostream>
 using namespace std;
 
-#define NM_PORTUGUESE gettext("Portuguese")
-#define NM_ENGLISH    gettext("English")
-#define NM_FRENCH     gettext("French")
-#define NM_GERMAN     gettext("German")
-#define NM_SPANISH    gettext("Spanish")
-#define NM_ITALIAN    gettext("Italian")
-#define NM_DUTCH      gettext("Dutch")
-#define NM_RUSSIAN    gettext("Russian")
+/*! The language names */
+string dntLanguageName[] =
+{
+   gettext("English"),
+   gettext("French"),  
+   gettext("Spanish"),
+   gettext("Portuguese"),
+   gettext("German"),
+   gettext("Italian"),
+   gettext("Dutch"),
+   gettext("Russian")
+};
 
-#define FL_PORTUGUESE "pt_BR"
-#define FL_ENGLISH    "en"
-#define FL_FRENCH     "fr"
-#define FL_GERMAN     "de"
-#define FL_ITALIAN    "it"
-#define FL_SPANISH    "es"
-#define FL_DUTCH      "nl"
-#define FL_RUSSIAN    "ru"
+/*! The language code  */
+string dntLanguageCode[] =
+{
+   "en",
+   "fr",
+   "es",
+   "pt_BR",
+   "de",
+   "it",
+   "nl",
+   "ru"
+};
 
+/*! The language numbers */
+enum 
+{
+   DNT_LANG_ENGLISH,
+   DNT_LANG_FRENCH,
+   DNT_LANG_SPANISH,
+   DNT_LANG_PORTUGUESE,
+   DNT_LANG_GERMAN,
+   DNT_LANG_ITALIAN,
+   DNT_LANG_DUTCH,
+   DNT_LANG_LAST
+};
 
-#define DNT_LANG_RUSSIAN    7 /**< Russian Language */
-#define DNT_LANG_DUTCH      6 /**< Dutch Language */
-#define DNT_LANG_ITALIAN    5 /**< Italian Language */
-#define DNT_LANG_GERMAN     4 /**< German Language */
-#define DNT_LANG_PORTUGUESE 3 /**< Portuguese Language */
-#define DNT_LANG_SPANISH    2 /**< Spanish Language */
-#define DNT_LANG_FRENCH     1 /**< French Language */
-#define DNT_LANG_ENGLISH    0 /**< English Language */
+/*! Token for keys at option's file */
+string dntKeyToken[] =
+{
+   /* Camera Keys */
+   "cameraUp",
+   "cameraDown",
+   "cameraLeft",
+   "cameraRight",
+   "cameraRotateLeft",
+   "cameraRotateRight",
+   "cameraRotateUp",
+   "cameraRotateDown",
+   "cameraZoomUp",
+   "cameraZoomDown",
+   "cameraTop",
+   "cameraBottom",
+   "cameraMaxZoom",
+   "cameraMinZoom",
 
-#define DNT_LANG_LAST  6
-#define DNT_LANG_FIRST 0
+   /* Character move keys */
+   "toggleRun1",
+   "toggleRun2",
+   "moveRight",
+   "moveLeft",
+   "moveForward",
+   "moveBackward",
+   "rotateLeft",
+   "rotateRight",
+   "changeCharacter",
+
+   /* Battle Keys */
+   "battleTurn",
+
+   /* Shortcuts keys */
+   "miniMapWindow",
+   "shortcutsWindow",
+   "briefingWindow",
+   "inventoryWindow",
+   "characterWindow",
+   "journalWindow"
+};
+
+/*! the keys descriptions */
+string dntKeyDesc[] = 
+{
+   /* Camera Keys */
+   gettext("Camera Up"),
+   gettext("Camera Down"),
+   gettext("Camera Left"),
+   gettext("Camera Right"),
+   gettext("Camera Rotate Left"),
+   gettext("Camera Rotate Right"),
+   gettext("Camera Rotate Up"),
+   gettext("Camera Rotate Down"),
+   gettext("Camera Zoom Up"),
+   gettext("Camera Zoom Down"),
+   gettext("Camera Top"),
+   gettext("Camera Bottom"),
+   gettext("Camera Zoom Max"),
+   gettext("Camera Zoom Min"),
+   /* Character Move */
+   gettext("Toggle Run(1)"),
+   gettext("Toggle Run(2)"),
+   gettext("Move Right"),
+   gettext("Move Left"),
+   gettext("Move Forward"),
+   gettext("Move Backward"),
+   gettext("Rotate Left"),
+   gettext("Rotate Right"),
+   gettext("Change Character"),
+   /* Battle Keys */
+   gettext("Enter Battle / End Turn"),
+   /* Shortcuts Keys */
+   gettext("Minimap"),
+   gettext("Shortcuts"),
+   gettext("Briefing"),
+   gettext("Character Info"),
+   gettext("Journal")
+};
 
 /****************************************************************
  *                          Constructor                         *
@@ -359,52 +447,11 @@ void options::save()
  ****************************************************************/
 string options::languageName()
 {
-   string saux;
-   switch(langNumber)
+   if( (langNumber >= 0) && (langNumber < DNT_LANG_LAST) )
    {
-      case DNT_LANG_RUSSIAN:
-      {
-         saux = NM_RUSSIAN;
-         break;
-      }
-      case DNT_LANG_ITALIAN:
-      {
-         saux = NM_ITALIAN;
-         break;
-      }
-      case DNT_LANG_PORTUGUESE:
-      {
-         saux = NM_PORTUGUESE;
-         break;
-      }
-      case DNT_LANG_SPANISH:
-      {
-         saux = NM_SPANISH;
-         break;
-      }
-      case DNT_LANG_FRENCH: 
-      {
-         saux = NM_FRENCH;
-         break;
-      }
-      case DNT_LANG_DUTCH:
-      {
-         saux = NM_DUTCH;
-         break;
-      }
-      case DNT_LANG_GERMAN:
-      {
-         saux = NM_GERMAN;
-         break;
-      }
-      case DNT_LANG_ENGLISH:
-      default:
-      {
-         saux = NM_ENGLISH;
-         break;
-      }
+      return(gettext(dntLanguageName[langNumber].c_str()));
    }
-   return(saux);
+   return(gettext(dntLanguageName[DNT_LANG_ENGLISH].c_str()));
 }
 
 /****************************************************************
@@ -412,7 +459,9 @@ string options::languageName()
  ****************************************************************/
 bool options::isLanguageUnicode()
 {
-   return( (langNumber == DNT_LANG_RUSSIAN) );
+   //return( (langNumber == DNT_LANG_RUSSIAN) );
+   //TODO
+   return(false);
 }
 
 /****************************************************************
@@ -420,54 +469,13 @@ bool options::isLanguageUnicode()
  ****************************************************************/
 void options::setLanguage()
 {
-   string saux = "";
-
-   switch(langNumber)
+   string saux = dntLanguageCode[DNT_LANG_ENGLISH];
+   
+   if( (langNumber >= 0) && (langNumber < DNT_LANG_LAST) )
    {
-      case DNT_LANG_RUSSIAN:
-      {
-         saux = FL_RUSSIAN;
-         break;
-      }
-      case DNT_LANG_ITALIAN:
-      {
-         saux = FL_ITALIAN;
-         break;
-      }
-      case DNT_LANG_PORTUGUESE:
-      {
-         saux = FL_PORTUGUESE;
-         break;
-      }
-      case DNT_LANG_SPANISH:
-      {
-         saux = FL_SPANISH;
-         break;
-      }
-      case DNT_LANG_FRENCH: 
-      {
-         saux = FL_FRENCH;
-         break;
-      }
-      case DNT_LANG_DUTCH:
-      {
-         saux = FL_DUTCH;
-         break;
-      }
-      case DNT_LANG_GERMAN:
-      {
-         saux = FL_GERMAN;
-         break;
-      }
-      case DNT_LANG_ENGLISH:
-      default:
-      {
-         saux = FL_ENGLISH;
-         break;
-      }
+      saux = dntLanguageCode[langNumber];
    }
-
-
+   
    if(!saux.empty())
    {
       /* Change language.  */
@@ -599,13 +607,18 @@ void options::displayOptionsScreen(guiInterface* interf)
    int xPos = (int)(SCREEN_X / 2.0);
    int yPos = (int)(SCREEN_Y / 2.0);
 
-   intWindow = interf->insertWindow(xPos-128,yPos-192,xPos+128,yPos+192,
+   intWindow = interf->insertWindow(xPos-138,yPos-192,xPos+138,yPos+192,
                                     gettext("Options"));
 
    /* Insert the Objects TabBox */
-   tabBox* tb = intWindow->defineTabBox(8,27,248,352);
+   tabBox* tb=(tabBox*)intWindow->getObjectsList()->defineTabBox(8,27,268,352);
    guiList* list;
    int posY;
+
+   /************************************************
+    *                Input Options                 *
+    ************************************************/
+   list = tb->insertOption(gettext("Input"));
 
    /************************************************
     *                Audio Options                 *
@@ -838,7 +851,7 @@ void options::displayOptionsScreen(guiInterface* interf)
     *                 Action Buttons               *
     ************************************************/
    /* Confirm Button */
-   buttonConfirm = intWindow->getObjectsList()->insertButton(177,356,247,375,
+   buttonConfirm = intWindow->getObjectsList()->insertButton(197,356,267,375,
                                               gettext("Confirm"),1);
    
    /* Cancel Button */
@@ -911,14 +924,14 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
       /* Language */
       else if(object == (guiObject*) buttonLangSum)
       {
-         if(langNumber < DNT_LANG_LAST)
+         if(langNumber < DNT_LANG_LAST-1)
          {
             langNumber++;
          }
       }
       else if(object == (guiObject*) buttonLangDec)
       {
-         if(langNumber > DNT_LANG_FIRST)
+         if(langNumber > DNT_LANG_ENGLISH)
          {
             langNumber--;
          }

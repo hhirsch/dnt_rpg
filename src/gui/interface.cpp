@@ -78,6 +78,12 @@ void guiInterface::verifyMouseInObjects(int x, int y, guiList* list)
       }
       obj = obj->next;
    }
+
+   /* Verify TabBox, if defined */
+   if(list->getActiveTabBoxList() != NULL)
+   {
+      verifyMouseInObjects(x, y, list->getActiveTabBoxList());
+   }
 }
 
 /*********************************************************************
@@ -151,6 +157,45 @@ void guiInterface::verifyMousePressObjects(int x, int y, guiList* list)
       }
       obj = obj->next;
    }
+
+   /* Verify inner tabbox if defined */
+   if(list->getActiveTabBoxList() != NULL)
+   {
+      verifyMousePressObjects(x,y, list->getActiveTabBoxList());
+   }
+}
+
+/*********************************************************************
+ *                           verifyTabBox                            *
+ *********************************************************************/
+guiObject* guiInterface::verifyTabBox(int x, int y, guiList* list)
+{
+   if(!list)
+   {
+      return(NULL);
+   }
+   window* actWindow = ljan->getActiveWindow();
+
+   /* Verify the tabBox */
+   if(list->getTabBox() != NULL)
+   {
+      tabBox* tb = (tabBox*)list->getTabBox();
+      if(tb->isMouseIn(x - actWindow->getX1(), y - actWindow->getY1()))
+      {
+         if(tb->verifyChanges(x - actWindow->getX1(), y - actWindow->getY1()))
+         {
+            return((guiObject*)tb);
+         }
+      }
+
+      /* Verify Nested Tabbox */
+      if(list->getActiveTabBoxList() != NULL)
+      {
+          return(verifyTabBox(x,y,list->getActiveTabBoxList()));
+      }
+   }
+
+   return(NULL);
 }
 
 /*********************************************************************
@@ -181,6 +226,13 @@ void guiInterface::verifyRolBars(guiList* list)
       }
       obj = obj->next;
    }
+
+   /* Verify Nested tabBox */
+   if(list->getActiveTabBoxList() != NULL)
+   {
+      verifyRolBars(list->getActiveTabBoxList());
+   }
+
 }
 
 /*********************************************************************
@@ -338,7 +390,6 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
             /* Verify All objects */
             window* actWindow = ljan->getActiveWindow();
             verifyMouseInObjects(x,y,actWindow->getObjectsList());
-            verifyMouseInObjects(x,y,actWindow->getActiveTabBoxList());
         }
     }
 
@@ -361,25 +412,17 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
         else if ( (ljan->getActiveWindow() != NULL) &&
                   (ljan->getActiveWindow()->isMouseIn(x,y)))
         {
-             /* Will search at two lists: the widow one and the 
+            /* Will search at two lists: the widow one and the 
              * active tabBox one (if exists) */
             window* actWindow = ljan->getActiveWindow();
             verifyMousePressObjects(x,y,actWindow->getObjectsList());
-            verifyMousePressObjects(x,y,actWindow->getActiveTabBoxList());
 
-            /* Verify the tabBox */
-            if(actWindow->getTabBox() != NULL)
+            guiObject* ot = verifyTabBox(x,y, actWindow->getObjectsList());
+            if(ot)
             {
-               tabBox* tb = actWindow->getTabBox();
-               if(tb->isMouseIn(x - actWindow->getX1(), y - actWindow->getY1()))
-               {
-                  if(tb->verifyChanges(x - actWindow->getX1(),
-                                       y - actWindow->getY1()))
-                  {
-                     eventInfo = TAB_BOX_CHANGED;
-                     return((guiObject*)tb);
-                  }
-               }
+               /* got event on tabbox */
+               eventInfo = TAB_BOX_CHANGED;
+               return(ot);
             }
             
             eventInfo = CLICKED_WINDOW;
@@ -469,7 +512,6 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
            {
               /* Verify RolBar */
               verifyRolBars(ljan->getActiveWindow()->getObjectsList());
-              verifyRolBars(ljan->getActiveWindow()->getActiveTabBoxList());
 
               eventInfo = ON_PRESS_BUTTON;
               return(objAtivo);
