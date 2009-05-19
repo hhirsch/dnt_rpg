@@ -53,6 +53,7 @@ class briefing
    protected:
       static rolBar* briefTxt;       /**< Briefing Text */
       static window* briefWindow;    /**< ShortCuts Window */
+      static Uint32 timeLastAdd;     /**< Ticks when last added text */
 };
 
 #endif

@@ -1,5 +1,7 @@
 #include "briefing.h"
 
+#define DNT_BRIEFING_RATE 500
+
 /***********************************************************************
  *                            Constructor                              *
  ***********************************************************************/
@@ -57,9 +59,12 @@ void briefing::addText(string text)
 {
    if(briefWindow != NULL)
    {
-      /* To avoid same last line */
-      if(briefTxt->getLastLine() != text)
+      /* To avoid same last line for too much mouse press, for example */
+      Uint32 time = SDL_GetTicks(); 
+      if( (briefTxt->getLastLine() != text) ||
+          (time - timeLastAdd > DNT_BRIEFING_RATE) )
       {
+         timeLastAdd = time;
          briefTxt->addText(text);
       }
    }
@@ -95,4 +100,5 @@ void briefing::addText(string text, string font, int size, int style,
  ***********************************************************************/
 rolBar* briefing::briefTxt = NULL;
 window* briefing::briefWindow = NULL;
+Uint32 briefing::timeLastAdd = 0;
 
