@@ -1,7 +1,7 @@
 name = Cuca
 cal3d = models/objetos/paints/tarsila_3/model.cfg
 inventory_sizes = 0 0
-inventory_texture = texturas/na.png
+inventory_texture = models/objetos/paints/tarsila_3/tex_dlg.png
 life_points = 250
 fortitude = 8
 reflex = 0
