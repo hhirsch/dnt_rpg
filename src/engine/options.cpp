@@ -136,6 +136,7 @@ string dntKeyDesc[] =
    gettext("Minimap"),
    gettext("Shortcuts"),
    gettext("Briefing"),
+   gettext("Inventory"),
    gettext("Character Info"),
    gettext("Journal")
 };
@@ -584,6 +585,28 @@ string options::resolutionName()
 }
 
 /****************************************************************
+ *                          insertKeys                          *
+ ****************************************************************/
+void options::insertKeys(int firstKey, int lastKey, guiList* list)
+{
+   int posY = 77;
+   int i;
+
+   if( (firstKey < 0) || (firstKey >= DNT_TOTAL_KEYS) ||
+       (lastKey < 0) || (lastKey >= DNT_TOTAL_KEYS) )
+   {
+      return;
+   }
+
+   for(i = firstKey; i <= lastKey; i++)
+   {
+      list->insertTextBox(14,posY,225,posY+17,0, 
+                          gettext(dntKeyDesc[i].c_str()));
+      posY += 18;
+   }
+}
+
+/****************************************************************
  *                    Open Options Screen                       *
  ****************************************************************/
 void options::displayOptionsScreen(guiInterface* interf)
@@ -619,6 +642,15 @@ void options::displayOptionsScreen(guiInterface* interf)
     *                Input Options                 *
     ************************************************/
    list = tb->insertOption(gettext("Input"));
+   tabBox* inputTab = (tabBox*)list->defineTabBox(10,52,266,350);
+   insertKeys(DNT_KEY_FIRST_WINDOW, DNT_KEY_LAST_WINDOW,
+              inputTab->insertOption(gettext("Windows")));
+
+   insertKeys(DNT_KEY_FIRST_CHARACTER, DNT_KEY_LAST_CHARACTER,
+              inputTab->insertOption(gettext("Character")));
+
+   insertKeys(DNT_KEY_FIRST_CAMERA, DNT_KEY_LAST_CAMERA,
+              inputTab->insertOption(gettext("Camera")));
 
    /************************************************
     *                Audio Options                 *

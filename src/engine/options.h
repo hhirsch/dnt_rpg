@@ -53,11 +53,21 @@ enum
    DNT_KEY_WINDOW_BRIEFING,
    DNT_KEY_WINDOW_INVENTORY,
    DNT_KEY_WINDOW_CHARACTER,
-   DNT_KEY_JOURNAL_WINDOW,
+   DNT_KEY_WINDOW_JOURNAL,
 
    /* Keys count */
    DNT_TOTAL_KEYS
 };
+
+/* Firsts and Lasts for the tabs */
+#define DNT_KEY_FIRST_CAMERA     DNT_KEY_CAMERA_UP
+#define DNT_KEY_LAST_CAMERA      DNT_KEY_CAMERA_MIN_ZOOM
+
+#define DNT_KEY_FIRST_CHARACTER  DNT_KEY_TOGGLE_RUN_1
+#define DNT_KEY_LAST_CHARACTER   DNT_KEY_BATTLE_TURN
+
+#define DNT_KEY_FIRST_WINDOW  DNT_KEY_WINDOW_MINI_MAP
+#define DNT_KEY_LAST_WINDOW   DNT_KEY_WINDOW_JOURNAL
 
 /*! Options Class */
 class options
@@ -160,6 +170,12 @@ class options
       void setFarViewFactor(float factor);
 
    private:
+      /*! Insert Key-Set related Objects at guiList
+       * \param firstKey -> number of first key
+       * \param lastKey -> number of last key
+       * \param list -> pointer to the desired guiList */
+      void insertKeys(int firstKey, int lastKey, guiList* list);
+
       SDL_Rect**   resolutions;    /**< the avaible resolutions */
       textBox* txtLanguage;        /**< Language Text on Window */
       textBox* txtCamera;          /**< Camera Mode Text on Window */

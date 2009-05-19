@@ -27,6 +27,7 @@ Working on:
  - New effects for comic books;
  - Capacity of using talents;
  - Implement 5-15% of the talents defined on DNT Book;
+ - Map keyboard at options;
 
 Pending:
  - Define Counter Skills;
