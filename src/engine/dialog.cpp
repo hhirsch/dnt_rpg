@@ -27,6 +27,7 @@
 #define TALK_ACTION_RECEIVE_XP          11 /* Receive XP ammount */
 #define TALK_ACTION_KILL_ALL            12 /* Kill All NPCs from a map */
 #define TALK_ACTION_RECEIVE_ITEM        13 /* Receive an Item */
+#define TALK_ACTION_MAP_TRAVEL          14 /* Travel to another map */
 
 #define TALK_TEST_TRUE                0  /* Always True */
 #define TALK_TEST_ROLL                1  /* Roll some test */
@@ -72,6 +73,7 @@
 #define TK_ACTION_RECEIVE_XP "receive_xp"
 #define TK_ACTION_KILL_ALL "kill_all"
 #define TK_ACTION_RECEIVE_ITEM "receive_item"
+#define TK_ACTION_MAP_TRAVEL "map_travel"
 
 /* Test Tokens */
 #define TK_TEST_ROLL "roll"
@@ -557,6 +559,10 @@ int conversation::getActionID(string token, string fileName, int line)
    {
       return(TALK_ACTION_KILL_ALL);
    }
+   else if(token == TK_ACTION_MAP_TRAVEL)
+   {
+      return(TALK_ACTION_MAP_TRAVEL);
+   }
 
    printError(fileName, "Unknow action!", line);
    return(-1);
@@ -840,7 +846,8 @@ int conversation::loadFile(string name)
                   }
                   else if( (tact->id == TALK_ACTION_GIVE_ITEM) ||
                            (tact->id == TALK_ACTION_RECEIVE_ITEM) ||
-                           (tact->id == TALK_ACTION_KILL_ALL) )
+                           (tact->id == TALK_ACTION_KILL_ALL) ||
+                           (tact->id == TALK_ACTION_MAP_TRAVEL) )
                   {
                      //get name
                      token = getString(position, buffer, separator);
@@ -1196,6 +1203,14 @@ void conversation::proccessAction(int opcao, void* curEngine)
             {
                npcs.killAll();
             }
+         }
+         break;
+
+         /* Travel to another map */
+         case TALK_ACTION_MAP_TRAVEL:
+         {
+            engine* eng = (engine*)curEngine;
+            eng->loadMap(actions[i].satt);
          }
          break;
       }
