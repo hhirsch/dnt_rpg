@@ -29,7 +29,7 @@ dialog(1)
    pc_begin
       option
          text = gettext("Enter it.")
-         action = map_travel("mapas/tutorial/tyrol.map")
+         action = map_travel("mapas/tutorial/house2_sec.map")
          action = finish_dialog()
       option
          text = gettext("Exit")

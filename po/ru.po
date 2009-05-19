@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2009-05-12 10:00-0300\n"
+"POT-Creation-Date: 2009-05-19 10:15-0300\n"
 "PO-Revision-Date: 2007-11-20 17:24+0000\n"
 "Last-Translator: Sergei Zivukov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -57,20 +57,20 @@ msgstr ""
 msgid "Critical Hit!"
 msgstr "Критический хит!"
 
-#: src/classes/feats.cpp:157
+#: src/classes/feats.cpp:140
 msgid "Invalid Talent"
 msgstr "Неправильный подвиг"
 
-#: src/classes/feats.cpp:208
+#: src/classes/feats.cpp:192
 msgid "Not enought points to use!"
 msgstr "Недостаточно очков для использования!"
 
-#: src/classes/mission.cpp:485 src/engine/dialog.cpp:1077
+#: src/classes/mission.cpp:492 src/engine/dialog.cpp:1084
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "Миссия завершена: %d XP!"
 
-#: src/classes/mission.cpp:502 src/classes/mission.cpp:505
+#: src/classes/mission.cpp:509 src/classes/mission.cpp:512
 msgid "Mission Failure!"
 msgstr ""
 
@@ -78,33 +78,33 @@ msgstr ""
 msgid "Tendency & Alignment"
 msgstr "Стремление и Равнение"
 
-#: src/engine/alignwindow.cpp:55 src/engine/aspectwindow.cpp:75
+#: src/engine/alignwindow.cpp:55 src/engine/aspectwindow.cpp:76
 #: src/engine/attwindow.cpp:220 src/engine/classwindow.cpp:97
 #: src/engine/options.cpp:842 src/engine/racewindow.cpp:95
 #: src/engine/skillwindow.cpp:137
 msgid "Confirm"
 msgstr "Подтвердить"
 
-#: src/engine/alignwindow.cpp:59 src/engine/aspectwindow.cpp:79
+#: src/engine/alignwindow.cpp:59 src/engine/aspectwindow.cpp:80
 #: src/engine/attwindow.cpp:224 src/engine/barterwindow.cpp:46
 #: src/engine/classwindow.cpp:101 src/engine/options.cpp:846
 #: src/engine/racewindow.cpp:99 src/engine/skillwindow.cpp:140
 msgid "Cancel"
 msgstr "Отменить"
 
-#: src/engine/aspectwindow.cpp:31
+#: src/engine/aspectwindow.cpp:32
 msgid "Aspect"
 msgstr "Внешний вид"
 
-#: src/engine/aspectwindow.cpp:49 src/engine/charwindow.cpp:86
+#: src/engine/aspectwindow.cpp:50 src/engine/charwindow.cpp:86
 msgid "Name:"
 msgstr "Имя:"
 
-#: src/engine/aspectwindow.cpp:54 src/engine/charwindow.cpp:89
+#: src/engine/aspectwindow.cpp:55 src/engine/charwindow.cpp:89
 msgid "Age:"
 msgstr "Возраст,"
 
-#: src/engine/aspectwindow.cpp:58 src/engine/charwindow.cpp:104
+#: src/engine/aspectwindow.cpp:59 src/engine/charwindow.cpp:104
 msgid "Sex:"
 msgstr "Пол,"
 
@@ -167,7 +167,7 @@ msgstr "Предупреждение"
 msgid "You Need to Assign All Attributes."
 msgstr ""
 
-#: src/engine/barterwindow.cpp:30 src/engine/dialog.cpp:1321
+#: src/engine/barterwindow.cpp:30 src/engine/dialog.cpp:1336
 msgid "Barter"
 msgstr ""
 
@@ -341,19 +341,19 @@ msgstr ""
 msgid "No Modifiers."
 msgstr ""
 
-#: src/engine/classwindow.cpp:218
+#: src/engine/classwindow.cpp:219
 msgid "Class Talents"
 msgstr ""
 
-#: src/engine/classwindow.cpp:231 src/engine/racewindow.cpp:168
+#: src/engine/classwindow.cpp:238 src/engine/racewindow.cpp:168
 msgid "No Talents."
 msgstr ""
 
-#: src/engine/classwindow.cpp:239
+#: src/engine/classwindow.cpp:246
 msgid "Class Skills"
 msgstr ""
 
-#: src/engine/classwindow.cpp:258 src/engine/racewindow.cpp:194
+#: src/engine/classwindow.cpp:265 src/engine/racewindow.cpp:194
 msgid "No Skills."
 msgstr "Нет умений."
 
@@ -471,20 +471,20 @@ msgstr ""
 msgid "Exit Battle Mode"
 msgstr "Покинуть режим сражения"
 
-#: src/engine/dialog.cpp:251
+#: src/engine/dialog.cpp:253
 msgid "Success"
 msgstr ""
 
-#: src/engine/dialog.cpp:251
+#: src/engine/dialog.cpp:253
 msgid "Failure"
 msgstr ""
 
-#: src/engine/dialog.cpp:923
+#: src/engine/dialog.cpp:930
 #, c-format
 msgid "Not found in dialog: %d\n"
 msgstr "Не найдено в диалоге: %d\n"
 
-#: src/engine/dialog.cpp:1315
+#: src/engine/dialog.cpp:1330
 msgid "Dialog"
 msgstr "Диалог"
 
@@ -512,6 +512,12 @@ msgstr "Настройки"
 #: data/dialogs/objects/bunker_school_server.dlg:22
 #: data/dialogs/objects/bunker_school_server.dlg:36
 #: data/dialogs/objects/bunker_school_server.dlg:50
+#: data/dialogs/objects/house2_paints.dlg:18
+#: data/dialogs/objects/house2_paints.dlg:32
+#: data/dialogs/objects/house2_paints.dlg:46
+#: data/dialogs/objects/house2_ovo.dlg:17
+#: data/dialogs/objects/house2_ovo.dlg:35
+#: data/dialogs/objects/house2_ovo.dlg:49
 msgid "Exit"
 msgstr "Выход"
 
@@ -2916,6 +2922,33 @@ msgstr ""
 msgid ""
 "Subterranean air system down for cleaning... Back in 5, 4, 3, 2, 1... "
 "Subterranean air system cleaned and functional."
+msgstr ""
+
+#: data/dialogs/objects/house2_paints.dlg:6
+#: data/dialogs/objects/house2_ovo.dlg:6
+msgid "(You see a strange and beautiful paint)"
+msgstr ""
+
+#: data/dialogs/objects/house2_paints.dlg:11
+#: data/dialogs/objects/house2_ovo.dlg:10
+msgid "Look the paint."
+msgstr ""
+
+#: data/dialogs/objects/house2_paints.dlg:28
+msgid "(There's nothing here.)"
+msgstr ""
+
+#: data/dialogs/objects/house2_paints.dlg:42
+#: data/dialogs/objects/house2_ovo.dlg:45
+msgid "(You failed to find something.)"
+msgstr ""
+
+#: data/dialogs/objects/house2_ovo.dlg:27
+msgid "(You see a secret passage.)"
+msgstr ""
+
+#: data/dialogs/objects/house2_ovo.dlg:31
+msgid "Enter it."
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:6
