@@ -19,6 +19,7 @@
  - Fixed a bug on DNT installation of bin directory and default options file;
  - Fixed a bug when sound effect file doesn't exist;
  - Define Keyboard keys at options;
+ - Setting the difficulty to use medical itens as AC/2.
 
 Working on:
  - Weather effects;

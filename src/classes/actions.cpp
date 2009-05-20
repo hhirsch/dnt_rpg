@@ -154,6 +154,9 @@ bool doHealOrAttack(thing& actor, thing* target,
    //depending of the attack type!
    targetValue = target->armatureClass;
 
+   /* Defined heal agains't as AC/2.0 */
+   targetValue /= 2.0f;
+
    /* verify critical Hit */
    if(diceValue == DICE_D20)
    {
