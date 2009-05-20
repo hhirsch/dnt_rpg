@@ -18,6 +18,7 @@
    when already have another weapon eqquiped;
  - Fixed a bug on DNT installation of bin directory and default options file;
  - Fixed a bug when sound effect file doesn't exist;
+ - Define Keyboard keys at options;
 
 Working on:
  - Weather effects;
@@ -27,7 +28,7 @@ Working on:
  - New effects for comic books;
  - Capacity of using talents;
  - Implement 5-15% of the talents defined on DNT Book;
- - Map keyboard at options;
+
 
 Pending:
  - Define Counter Skills;

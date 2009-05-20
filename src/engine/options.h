@@ -211,7 +211,8 @@ class options
       static Uint32  keys[DNT_TOTAL_KEYS]; /**< The key values */
 
       window* intWindow;       /**< Options Window Pointer */
-
+      window* keyWindow;       /**< Window to get key */
+ 
       int      prevCamera;         /**< Previous used Camera Mode */
       int      prevMusicVolume;    /**< Previous used Music Volume */
       int      prevSndfxVolume;    /**< Previous Used Sound Effects Volume */
@@ -222,7 +223,9 @@ class options
       int      prevAntiAliasing;   /**< Previous Used AntiAliasing */
       float    prevFarViewFactor;  /**< Previous FarViewFactor */
       int      resPosition;        /**< Resolution Position on Vector */
-
+      int      curKey;             /**< Current Key index to scan */
+      static Uint32 prevKeys[DNT_TOTAL_KEYS]; /**< The previous key values */
+      
       int timeLastOperation;       /**< Ticks when done last operation */
 
       static string fileName;      /**< The current options fileName */            

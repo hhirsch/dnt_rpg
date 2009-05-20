@@ -650,11 +650,21 @@ void options::displayOptionsScreen(guiInterface* interf)
 
    getAvaibleResolutions();
 
+   keyWindow = NULL;
+
+   /* Define Previous Values */
    prevMusicVolume = musicVolume;
    prevSndfxVolume = sndfxVolume;
 
    prevAntiAliasing = antiAliasing;
    prevFarViewFactor = farViewFactor;
+
+   /* Previous Keys values too */
+   int i;
+   for(i=0; i < DNT_TOTAL_KEYS; i++)
+   {
+      prevKeys[i] = keys[i];
+   }
 
    int xPos = (int)(SCREEN_X / 2.0);
    int yPos = (int)(SCREEN_Y / 2.0);
@@ -931,6 +941,29 @@ void options::displayOptionsScreen(guiInterface* interf)
 int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
                    GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
+   int i;
+
+   /* The key window verify */
+   if(keyWindow)
+   {
+      SDL_Event event;
+      while(SDL_PollEvent(&event))
+      {
+         if(event.type == SDL_KEYUP)
+         {
+            /* Redefine the key */
+            keys[curKey] = event.key.keysym.sym;
+            buttonKeys[curKey]->setText(SDL_GetKeyName((SDLKey)keys[curKey]));
+            /* Disable the key event */
+            SDL_EventState(SDL_KEYUP, SDL_IGNORE);
+            /* And close the window */
+            interf->closeWindow(keyWindow);
+         }
+      }
+      return(OPTIONSW_OTHER);
+   }
+
+   /* The other events verify */
    if( (eventInfo == ON_PRESS_BUTTON) && 
          (SDL_GetTicks() - timeLastOperation > 100) )
    {
@@ -1126,8 +1159,9 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          return(OPTIONSW_CONFIRM);
       }
       /* Cancel */
-      if( (object == (guiObject*) buttonCancel) )
+      else if( (object == (guiObject*) buttonCancel) )
       {
+         /* Redo to previous values */
          musicVolume = prevMusicVolume;
          sndfxVolume = prevSndfxVolume;
          langNumber  = prevLanguage;
@@ -1137,8 +1171,44 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          screenHeight = prevHeight;
          antiAliasing = prevAntiAliasing;
          farViewFactor = prevFarViewFactor;
+         
+         /* Keys to previous values too */
+         for(i=0; i < DNT_TOTAL_KEYS; i++)
+         {
+            keys[i] = prevKeys[i];
+         }
+         
          interf->closeWindow(intWindow);
          return(OPTIONSW_CANCEL);
+      }
+      else
+      {
+         /* Verify key buttons, to change state */
+         bool got = false;
+         for(i=0; ((i < DNT_TOTAL_KEYS) && (!got)); i++)
+         {
+            if(object == (guiObject*)buttonKeys[i])
+            {
+               curKey = i;
+               /* Show a modal window until got the key */
+               int xPos = (int)(SCREEN_X / 2.0);
+               int yPos = (int)(SCREEN_Y / 2.0);
+               string s = gettext("Press a key to: ");
+               keyWindow = interf->insertWindow(xPos-138,yPos-243,
+                                                xPos+138,yPos-203,
+                                                gettext("Waiting..."));
+               s += gettext(dntKeyDesc[i].c_str());
+               keyWindow->getObjectsList()->insertTextBox(10,17,270,27,0,s);
+               keyWindow->setExternPointer(&keyWindow);
+               keyWindow->setModal();
+               interf->openWindow(keyWindow);
+
+               /* Enable, temporally, key events to get the key */
+               SDL_EventState(SDL_KEYUP, SDL_ENABLE);
+
+               got = true;
+            }
+         }
       }
    }
    else if(eventInfo == MODIFIED_CX_SEL)
@@ -1405,5 +1475,6 @@ bool   options::enableAnisotropic = true;
 bool   options::alwaysRun = false;
 Uint32 options::keys[DNT_TOTAL_KEYS];
 
+Uint32 options::prevKeys[DNT_TOTAL_KEYS];
 string options::fileName = "";
 
