@@ -1550,6 +1550,7 @@ void engine::enterBattleMode(bool surprisePC)
   {
       //TODO put enemies on groups, when enemy from enemy
       fight->insertNPC(ch, 0);
+      ch->defineWeapon();
       numEnemies++;
       /* Set the state to Idle, if the character is alive */
       if(ch->isAlive())
@@ -1576,11 +1577,14 @@ void engine::enterBattleMode(bool surprisePC)
       for(i = 0; i < PCs->getTotal(); i++)
       {
          fight->insertPC(ch, 0);
-         ch = (character*) ch->next; 
+         ch->defineWeapon();
          /* Set the state to Idle */
          ch->callIdleAnimation();
          /* Remove Move, if it is moving */
          ch->pathFind.clear();
+
+         /* take next */
+         ch = (character*) ch->next; 
          SDL_Delay(1);
       }
                    
