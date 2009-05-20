@@ -2406,9 +2406,9 @@ int engine::treatIO(SDL_Surface *screen)
       }
 
       /* Enter Attack Mode or End Turn */
-      if( (keys[SDLK_SPACE]) && 
+      if( (keys[option->getKey(DNT_KEY_BATTLE_TURN)]) && 
             ( (time-lastKeyb >= REFRESH_RATE) || 
-              (lastKey != SDLK_SPACE) ) )
+              (lastKey != option->getKey(DNT_KEY_BATTLE_TURN)) ) )
       {
          if(engineMode != ENGINE_MODE_TURN_BATTLE)
          {
@@ -2418,7 +2418,7 @@ int engine::treatIO(SDL_Surface *screen)
          {
             endTurn();
          }
-         lastKey = SDLK_SPACE;
+         lastKey = option->getKey(DNT_KEY_BATTLE_TURN);
          lastKeyb = time;
       }
 
@@ -2443,9 +2443,9 @@ int engine::treatIO(SDL_Surface *screen)
       }      
 
       /* Open Minimap */
-      if( (keys[SDLK_m]) && 
+      if( (keys[option->getKey(DNT_KEY_WINDOW_MINI_MAP)]) && 
             ( (time-lastKeyb >= REFRESH_RATE) || 
-              (lastKey != SDLK_m) ) )
+              (lastKey != option->getKey(DNT_KEY_WINDOW_MINI_MAP)) ) )
       {
          if(!mapWindow->isOpened())
          {
@@ -2456,46 +2456,46 @@ int engine::treatIO(SDL_Surface *screen)
             mapWindow->close(gui);
          }
 
-         lastKey = SDLK_m;
+         lastKey = option->getKey(DNT_KEY_WINDOW_MINI_MAP);
          lastKeyb = time;
       }
 
       /* Open ShortCuts */
-      if( (keys[SDLK_n]) && 
+      if( (keys[option->getKey(DNT_KEY_WINDOW_SHORTCUTS)]) && 
             ( (time-lastKeyb >= REFRESH_RATE) || 
-              (lastKey != SDLK_n) ) )
+              (lastKey != option->getKey(DNT_KEY_WINDOW_SHORTCUTS)) ) )
       {
          shortcuts->open(gui);
-         lastKey = SDLK_n;
+         lastKey = option->getKey(DNT_KEY_WINDOW_SHORTCUTS);
          lastKeyb = time;
       }
 
       /* Open Briefing */
-      if( (keys[SDLK_l]) && 
+      if( (keys[option->getKey(DNT_KEY_WINDOW_BRIEFING)]) && 
             ( (time-lastKeyb >= REFRESH_RATE) || 
-              (lastKey != SDLK_n) ) )
+              (lastKey != option->getKey(DNT_KEY_WINDOW_BRIEFING)) ) )
       {
          brief->openWindow(gui);
-         lastKey = SDLK_l;
+         lastKey = option->getKey(DNT_KEY_WINDOW_BRIEFING);
          lastKeyb = time;
       }
 
       /* Open Close Inventory */
-      if( (keys[SDLK_i]) && 
+      if( (keys[option->getKey(DNT_KEY_WINDOW_INVENTORY)]) && 
             ( (time-lastKeyb >= REFRESH_RATE) || 
-              (lastKey != SDLK_i) ) )
+              (lastKey != option->getKey(DNT_KEY_WINDOW_INVENTORY)) ) )
       {
          openCloseInventoryWindow(); 
-         lastKey = SDLK_i;
+         lastKey = option->getKey(DNT_KEY_WINDOW_INVENTORY);
          lastKeyb = time;
       }
 
       /* Open Character Info Window */
-      if( (keys[SDLK_c]) && 
+      if( (keys[option->getKey(DNT_KEY_WINDOW_CHARACTER)]) && 
             ( (time-lastKeyb >= REFRESH_RATE) || 
-              (lastKey != SDLK_c) ) ) 
+              (lastKey != option->getKey(DNT_KEY_WINDOW_CHARACTER)) ) ) 
       {
-         lastKey = SDLK_c;
+         lastKey = option->getKey(DNT_KEY_WINDOW_CHARACTER);
          lastKeyb = time;
          if(charInfoWindow)
          {
@@ -2504,11 +2504,11 @@ int engine::treatIO(SDL_Surface *screen)
       }
 
       /* Open Journal Window */
-      if( (keys[SDLK_j]) && 
+      if( (keys[option->getKey(DNT_KEY_WINDOW_JOURNAL)]) && 
             ( (time-lastKeyb >= REFRESH_RATE) || 
-              (lastKey != SDLK_j) ) ) 
+              (lastKey != option->getKey(DNT_KEY_WINDOW_JOURNAL)) ) ) 
       {
-         lastKey = SDLK_j;
+         lastKey = option->getKey(DNT_KEY_WINDOW_JOURNAL);
          lastKeyb = time;
          if(journal)
          {
@@ -2605,7 +2605,8 @@ int engine::treatIO(SDL_Surface *screen)
       }
 
       /* Toggle Run state */
-      if( (keys[SDLK_LSHIFT]) || (keys[SDLK_RSHIFT]) )
+      if( (keys[option->getKey(DNT_KEY_TOGGLE_RUN_1)]) || 
+          (keys[option->getKey(DNT_KEY_TOGGLE_RUN_2)]) )
       {
          run = !option->getAlwaysRun();
       }
@@ -2622,7 +2623,8 @@ int engine::treatIO(SDL_Surface *screen)
       }
 
       /* Keys to character's movimentation */
-      if(keys[SDLK_q] || keys[SDLK_e])
+      if( (keys[option->getKey(DNT_KEY_MOVE_LEFT)]) || 
+          (keys[option->getKey(DNT_KEY_MOVE_RIGHT)]) )
       {
          walkStatus = ENGINE_WALK_KEYS;
           varX = curWalkInterval * 
@@ -2630,7 +2632,7 @@ int engine::treatIO(SDL_Surface *screen)
           varZ = curWalkInterval * 
                  cos(deg2Rad(activeCharacter->orientation+90.0f));
          // Left walk
-         if(keys[SDLK_q]) 
+         if(keys[option->getKey(DNT_KEY_MOVE_LEFT)]) 
          {
              varX *= -1;
              varZ *= -1;
@@ -2639,14 +2641,15 @@ int engine::treatIO(SDL_Surface *screen)
          walked |= tryWalk(varX, varZ);
         
       }
-      else if(keys[SDLK_w] || keys[SDLK_s])
+      else if( (keys[option->getKey(DNT_KEY_MOVE_FORWARD)]) || 
+               (keys[option->getKey(DNT_KEY_MOVE_BACKWARD)]) )
       { 
          walkStatus = ENGINE_WALK_KEYS;
          varX = curWalkInterval * 
                 sin(deg2Rad(activeCharacter->orientation));
          varZ = curWalkInterval * 
                 cos(deg2Rad(activeCharacter->orientation));
-         if(keys[SDLK_w]) 
+         if(keys[option->getKey(DNT_KEY_MOVE_FORWARD)]) 
          {
               varX *= -1;
               varZ *= -1;
@@ -2655,12 +2658,14 @@ int engine::treatIO(SDL_Surface *screen)
          walked |= tryWalk(varX, varZ);
       }
 
-      if( (keys[SDLK_a]) || (keys[SDLK_d]))
+      if( (keys[option->getKey(DNT_KEY_ROTATE_LEFT)]) || 
+          (keys[option->getKey(DNT_KEY_ROTATE_RIGHT)]))
       {
          GLfloat ori = activeCharacter->orientation;
          walkStatus = ENGINE_WALK_KEYS;
          // CounterClockWise Character turn
-         if((keys[SDLK_a]) && (canWalk(0,0,TURN_VALUE)) )  
+         if( (keys[option->getKey(DNT_KEY_ROTATE_LEFT)]) && 
+             (canWalk(0,0,TURN_VALUE)) )  
          {
             ori += TURN_VALUE;
             if(ori > 360.0f)
@@ -2671,7 +2676,8 @@ int engine::treatIO(SDL_Surface *screen)
             walked = true;
          }
          // Clockwise Character Turn
-         if((keys[SDLK_d]) && (canWalk(0,0,-TURN_VALUE)) )
+         if( (keys[option->getKey(DNT_KEY_ROTATE_RIGHT)]) && 
+             (canWalk(0,0,-TURN_VALUE)) )
          {
             ori -= TURN_VALUE;
             if(ori < 0.0f)
@@ -2682,7 +2688,7 @@ int engine::treatIO(SDL_Surface *screen)
          }
          walked = true;
       }
-      if(keys[SDLK_TAB]) //Activate Character
+      if(keys[option->getKey(DNT_KEY_CHANGE_CHARACTER)]) //Activate Character
       {
          walkStatus = ENGINE_WALK_KEYS;
          if(keys[SDLK_LCTRL]) //Previous Character

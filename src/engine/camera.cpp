@@ -1,5 +1,6 @@
 #include "camera.h"
 #include "util.h"
+#include "options.h"
 
 #define CAMERA_ATENUATION    0.1  /**< The atenuation value of aceleration */
 
@@ -39,44 +40,46 @@ camera::~camera()
  ******************************************************************/
 bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
 {
+   options opt;
+
    /* Keys to Camera Moviments */
-   if(keys[SDLK_UP])  // Increases Zoom
+   if(keys[opt.getKey(DNT_KEY_CAMERA_ZOOM_UP)])
    {
       zoomAc = -(2*varCamera);
    }
-   if(keys[SDLK_DOWN]) // Decreases Zoom
+   if(keys[opt.getKey(DNT_KEY_CAMERA_ZOOM_DOWN)])
    {
       zoomAc = (2*varCamera);
    }
-   if(keys[SDLK_RIGHT]) // Rotate Camera CounterClockWise
+   if(keys[opt.getKey(DNT_KEY_CAMERA_ROTATE_RIGHT)]) 
    {
       phiAc = -varCamera;
    }
-   if(keys[SDLK_LEFT]) // Rotate Camera ClockWise
+   if(keys[opt.getKey(DNT_KEY_CAMERA_ROTATE_LEFT)]) 
    {
       phiAc = varCamera;
    }
-   if((keys[SDLK_PAGEUP]) || (keys[SDLK_KP9])) // Maximize Up Camera
+   if((keys[opt.getKey(DNT_KEY_CAMERA_ROTATE_UP)]) || (keys[SDLK_KP9]))
    {
       thetaAc = varCamera;
    }
-   if((keys[SDLK_PAGEDOWN]) || (keys[SDLK_KP3])) // Minimize Up Camera
+   if((keys[opt.getKey(DNT_KEY_CAMERA_ROTATE_DOWN)]) || (keys[SDLK_KP3]))
    {
       thetaAc = -varCamera;
    }
-   if((keys[SDLK_HOME]) || (keys[SDLK_KP7])) // Maximize zoom
+   if((keys[opt.getKey(DNT_KEY_CAMERA_MAX_ZOOM)]) || (keys[SDLK_KP7]))
    {
       zoomAc = -20;
    }
-   if((keys[SDLK_END]) || (keys[SDLK_KP1])) // Minimize zoom
+   if((keys[opt.getKey(DNT_KEY_CAMERA_MIN_ZOOM)]) || (keys[SDLK_KP1]))
    {
       zoomAc = 20;
    }   
-   if((keys[SDLK_INSERT]) || (keys[SDLK_KP0])) //Up view Max
+   if((keys[opt.getKey(DNT_KEY_CAMERA_TOP)]) || (keys[SDLK_KP0]))
    {
       thetaAc = 10;
    }
-   if(keys[SDLK_DELETE]) //Down view Max
+   if(keys[opt.getKey(DNT_KEY_CAMERA_BOTTOM)])
    {
       thetaAc = -10;
    }

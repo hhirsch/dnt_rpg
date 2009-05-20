@@ -168,7 +168,7 @@ class options
       /*! Get the SDL_Key value for the DNT key
        * \param key -> DNT key constant
        * \return -> SDLK_ constant */
-      int getKey(int key);
+      Uint32 getKey(int key);
 
    private:
       /*! Insert Key-Set related Objects at guiList
@@ -208,7 +208,7 @@ class options
       static bool    autoEndTurn;     /**< If will autoend turn or not */
       static bool    showEnemyCircles; /**< if show enemies battle circles */
       static bool    alwaysRun;        /**< if will always run */
-      static int     keys[DNT_TOTAL_KEYS]; /**< The key values */
+      static Uint32  keys[DNT_TOTAL_KEYS]; /**< The key values */
 
       window* intWindow;       /**< Options Window Pointer */
 

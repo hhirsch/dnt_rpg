@@ -229,6 +229,8 @@ bool options::load()
  ****************************************************************/
 bool options::load(string file)
 {
+   int i;
+   bool got;
    defParser def;
    string key="", value="";
 
@@ -345,13 +347,26 @@ bool options::load(string file)
          /* Read Anisotropi option */
          enableAnisotropic = (value == "true");
       }
-      
-      /**********************************************
-       *                 Unknow Option              *
-       **********************************************/
-      else 
+
+      else
       {
-         cerr << "Warning: Unknow option: " << key << endl;
+         got = false;
+         for(i=0; ((i < DNT_TOTAL_KEYS) && (!got)); i++)
+         {
+            if(key == dntKeyToken[i])
+            {
+               sscanf(value.c_str(), "%d", &keys[i]);
+               got = true;
+            }
+         }
+
+         /**********************************************
+          *                 Unknow Option              *
+          **********************************************/
+         if(!got)
+         {
+            cerr << "Warning: Unknow option: " << key << endl;
+         }
       }
    }
 
@@ -434,6 +449,16 @@ void options::save()
    fprintf(arq, "MultiTexture = %s\n",enableMultiTexture?"true":"false");
    /* Anisotropic Filter */
    fprintf(arq, "Anisotropic = %s\n",enableAnisotropic?"true":"false");
+
+   /**********************************************
+    *                 Keys Options               *
+    **********************************************/
+   fprintf(arq, "# Keyboard Preferences\n");
+   int i;
+   for(i=0; i < DNT_TOTAL_KEYS; i++)
+   {
+      fprintf(arq, "%s = %d\n",dntKeyToken[i].c_str(), keys[i]);
+   }
 
    fclose(arq);
 }
@@ -1308,7 +1333,7 @@ void options::setFarViewFactor(float factor)
 /****************************************************************
  *                          defaultKeys                         *
  ****************************************************************/
-int options::getKey(int key)
+Uint32 options::getKey(int key)
 {
    if((key >= 0) && (key < DNT_TOTAL_KEYS))
    {
@@ -1378,7 +1403,7 @@ bool   options::autoEndTurn = true;
 bool   options::showEnemyCircles = false;
 bool   options::enableAnisotropic = true;
 bool   options::alwaysRun = false;
-int    options::keys[DNT_TOTAL_KEYS];
+Uint32 options::keys[DNT_TOTAL_KEYS];
 
 string options::fileName = "";
 
