@@ -54,6 +54,12 @@ class button: public guiObject
        * \param size -> size of the font to use */
       void defineFont(string fileName, int size);
 
+      /*! Set the text color of the button
+       * \param r -> red
+       * \param g -> green
+       * \param b -> blue */
+      void setTextColor(int r, int g, int b);
+
       void* men;        /**< Button Menu (buttons can have a menu to be 
                                           activated when button presses) */
 

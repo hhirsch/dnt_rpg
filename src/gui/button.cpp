@@ -33,6 +33,16 @@ button::~button()
 }
 
 /***********************************************************
+ *                      setTextColor                       *
+ ***********************************************************/
+void button::setTextColor(int r, int g, int b)
+{
+   Colors.colorText.R = r;
+   Colors.colorText.G = g;
+   Colors.colorText.B = b;
+}
+
+/***********************************************************
  *                           draw                          *
  ***********************************************************/
 void button::draw(SDL_Surface* screen )

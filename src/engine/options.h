@@ -18,10 +18,6 @@ using namespace std;
 enum 
 {
    /* Camera Keys */
-   DNT_KEY_CAMERA_UP,
-   DNT_KEY_CAMERA_DOWN,
-   DNT_KEY_CAMERA_LEFT,
-   DNT_KEY_CAMERA_RIGHT,
    DNT_KEY_CAMERA_ROTATE_LEFT,
    DNT_KEY_CAMERA_ROTATE_RIGHT,
    DNT_KEY_CAMERA_ROTATE_UP,
@@ -60,7 +56,7 @@ enum
 };
 
 /* Firsts and Lasts for the tabs */
-#define DNT_KEY_FIRST_CAMERA     DNT_KEY_CAMERA_UP
+#define DNT_KEY_FIRST_CAMERA     DNT_KEY_CAMERA_ROTATE_LEFT
 #define DNT_KEY_LAST_CAMERA      DNT_KEY_CAMERA_MIN_ZOOM
 
 #define DNT_KEY_FIRST_CHARACTER  DNT_KEY_TOGGLE_RUN_1
@@ -169,12 +165,20 @@ class options
        * \param factor -> new farview factor */
       void setFarViewFactor(float factor);
 
+      /*! Get the SDL_Key value for the DNT key
+       * \param key -> DNT key constant
+       * \return -> SDLK_ constant */
+      int getKey(int key);
+
    private:
       /*! Insert Key-Set related Objects at guiList
        * \param firstKey -> number of first key
        * \param lastKey -> number of last key
        * \param list -> pointer to the desired guiList */
       void insertKeys(int firstKey, int lastKey, guiList* list);
+
+      /*! Set the default keys */
+      void defaultKeys();
 
       SDL_Rect**   resolutions;    /**< the avaible resolutions */
       textBox* txtLanguage;        /**< Language Text on Window */
@@ -204,6 +208,7 @@ class options
       static bool    autoEndTurn;     /**< If will autoend turn or not */
       static bool    showEnemyCircles; /**< if show enemies battle circles */
       static bool    alwaysRun;        /**< if will always run */
+      static int     keys[DNT_TOTAL_KEYS]; /**< The key values */
 
       window* intWindow;       /**< Options Window Pointer */
 
@@ -221,6 +226,7 @@ class options
       int timeLastOperation;       /**< Ticks when done last operation */
 
       static string fileName;      /**< The current options fileName */            
+      button* buttonKeys[DNT_TOTAL_KEYS];
 
       button* buttonMusSum;
       button* buttonMusDec;

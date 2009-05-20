@@ -64,10 +64,6 @@ enum
 string dntKeyToken[] =
 {
    /* Camera Keys */
-   "cameraUp",
-   "cameraDown",
-   "cameraLeft",
-   "cameraRight",
    "cameraRotateLeft",
    "cameraRotateRight",
    "cameraRotateUp",
@@ -106,10 +102,6 @@ string dntKeyToken[] =
 string dntKeyDesc[] = 
 {
    /* Camera Keys */
-   gettext("Camera Up"),
-   gettext("Camera Down"),
-   gettext("Camera Left"),
-   gettext("Camera Right"),
    gettext("Camera Rotate Left"),
    gettext("Camera Rotate Right"),
    gettext("Camera Rotate Up"),
@@ -131,7 +123,7 @@ string dntKeyDesc[] =
    gettext("Rotate Right"),
    gettext("Change Character"),
    /* Battle Keys */
-   gettext("Enter Battle / End Turn"),
+   gettext("End Turn"),
    /* Shortcuts Keys */
    gettext("Minimap"),
    gettext("Shortcuts"),
@@ -171,6 +163,9 @@ void options::getAvaibleResolutions()
 bool options::load()
 {
    string file;
+
+   /* First define default keys */
+   defaultKeys();
    
    /* Try to Load From Users Directory */
    userInfo info;
@@ -591,6 +586,7 @@ void options::insertKeys(int firstKey, int lastKey, guiList* list)
 {
    int posY = 77;
    int i;
+   textBox* tb;
 
    if( (firstKey < 0) || (firstKey >= DNT_TOTAL_KEYS) ||
        (lastKey < 0) || (lastKey >= DNT_TOTAL_KEYS) )
@@ -600,8 +596,16 @@ void options::insertKeys(int firstKey, int lastKey, guiList* list)
 
    for(i = firstKey; i <= lastKey; i++)
    {
-      list->insertTextBox(14,posY,225,posY+17,0, 
-                          gettext(dntKeyDesc[i].c_str()));
+      tb = list->insertTextBox(14,posY,185,posY+17,0, 
+                               gettext(dntKeyDesc[i].c_str()));
+      buttonKeys[i] = list->insertButton(188,posY,262,posY+17,
+                                         SDL_GetKeyName((SDLKey)keys[i]),true);
+      if(i % 2 != 0)
+      {
+         tb->setColor(10, 200, 10);
+         buttonKeys[i]->setTextColor(10, 200, 10);
+      }
+
       posY += 18;
    }
 }
@@ -1302,6 +1306,59 @@ void options::setFarViewFactor(float factor)
 }
 
 /****************************************************************
+ *                          defaultKeys                         *
+ ****************************************************************/
+int options::getKey(int key)
+{
+   if((key >= 0) && (key < DNT_TOTAL_KEYS))
+   {
+      return(keys[key]);
+   }
+
+   return(0);
+}
+
+/****************************************************************
+ *                          defaultKeys                         *
+ ****************************************************************/
+void options::defaultKeys()
+{
+   /* Camera Keys */
+   keys[DNT_KEY_CAMERA_ROTATE_LEFT] = SDLK_LEFT;
+   keys[DNT_KEY_CAMERA_ROTATE_RIGHT] = SDLK_RIGHT;
+   keys[DNT_KEY_CAMERA_ROTATE_UP] = SDLK_PAGEUP;
+   keys[DNT_KEY_CAMERA_ROTATE_DOWN] = SDLK_PAGEDOWN;
+   keys[DNT_KEY_CAMERA_ZOOM_UP] = SDLK_UP;
+   keys[DNT_KEY_CAMERA_ZOOM_DOWN] = SDLK_DOWN;
+   keys[DNT_KEY_CAMERA_TOP] = SDLK_INSERT;
+   keys[DNT_KEY_CAMERA_BOTTOM] = SDLK_DELETE;
+   keys[DNT_KEY_CAMERA_MAX_ZOOM] = SDLK_HOME;
+   keys[DNT_KEY_CAMERA_MIN_ZOOM] = SDLK_END;
+
+   /* Character move keys */
+   keys[DNT_KEY_TOGGLE_RUN_1] = SDLK_LSHIFT; 
+   keys[DNT_KEY_TOGGLE_RUN_2] = SDLK_RSHIFT;
+   keys[DNT_KEY_MOVE_RIGHT] = SDLK_e;
+   keys[DNT_KEY_MOVE_LEFT] = SDLK_q;
+   keys[DNT_KEY_MOVE_FORWARD] = SDLK_w;
+   keys[DNT_KEY_MOVE_BACKWARD] = SDLK_s;
+   keys[DNT_KEY_ROTATE_LEFT] = SDLK_a;
+   keys[DNT_KEY_ROTATE_RIGHT] = SDLK_r;
+   keys[DNT_KEY_CHANGE_CHARACTER] = SDLK_TAB;
+
+   /* Battle Keys */
+   keys[DNT_KEY_BATTLE_TURN] = SDLK_SPACE;
+
+   /* Shortcuts keys */
+   keys[DNT_KEY_WINDOW_MINI_MAP] = SDLK_m;
+   keys[DNT_KEY_WINDOW_SHORTCUTS] = SDLK_n;
+   keys[DNT_KEY_WINDOW_BRIEFING] = SDLK_l;
+   keys[DNT_KEY_WINDOW_INVENTORY] = SDLK_i;
+   keys[DNT_KEY_WINDOW_CHARACTER] = SDLK_c;
+   keys[DNT_KEY_WINDOW_JOURNAL] = SDLK_j;
+}
+
+/****************************************************************
  *                         Static Members                       *
  ****************************************************************/
 int    options::musicVolume = 90;
@@ -1321,6 +1378,7 @@ bool   options::autoEndTurn = true;
 bool   options::showEnemyCircles = false;
 bool   options::enableAnisotropic = true;
 bool   options::alwaysRun = false;
+int    options::keys[DNT_TOTAL_KEYS];
 
 string options::fileName = "";
 
