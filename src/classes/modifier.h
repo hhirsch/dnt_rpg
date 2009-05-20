@@ -41,6 +41,9 @@ class modEffect
       factor cause;        /**< Thing to modify */
       Uint16 init;         /**< Time the effect begins  */
       int time;            /**< Max Time the effect remains */
+
+      modEffect* next;     /**< Next modEffect on list (if any) */
+      modEffect* previous; /**< Previous modEffect on list (if any) */
 };
 
 /*! Number of Points, based on ATTRIBUTES 

@@ -1,10 +1,6 @@
 #ifndef _defs_h
 #define _defs_h
 
-/** \file defs.h
- *  Here is where all game rules definitions resides. Again, some of them are define two times, one with the internal number, other with the definition string.
- */
-
 #include "dices.h"
 #include <string>
 using namespace std;

@@ -19,6 +19,7 @@ using namespace std;
 #include "../ia/astar.h"
 #include "../etc/animodel.h"
 #include "../map/map.h"
+#include "../classes/modifier.h"
 
 #include "itemwindow.h"
 
