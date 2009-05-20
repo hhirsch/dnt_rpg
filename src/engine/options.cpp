@@ -1368,7 +1368,7 @@ void options::defaultKeys()
    keys[DNT_KEY_MOVE_FORWARD] = SDLK_w;
    keys[DNT_KEY_MOVE_BACKWARD] = SDLK_s;
    keys[DNT_KEY_ROTATE_LEFT] = SDLK_a;
-   keys[DNT_KEY_ROTATE_RIGHT] = SDLK_r;
+   keys[DNT_KEY_ROTATE_RIGHT] = SDLK_d;
    keys[DNT_KEY_CHANGE_CHARACTER] = SDLK_TAB;
 
    /* Battle Keys */
