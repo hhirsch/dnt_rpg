@@ -1,0 +1,123 @@
+############################################################
+#                     Main Dialog                          #
+############################################################
+dialog(0)
+   npc_begin
+      text = gettext("(You see a soda machine.)")
+   npc_end
+   pc_begin
+      option
+         # Kicking the machine will broke it!
+         pre_test = lesser(OBJECT_STATE, 2)
+         text = gettext("Kick the machine.")
+         post_test = roll(STRENGTH, 8)
+         if_action = change_object_state(2)
+         if_action = dialog_init(3)
+         if_action = receive_item("models/objetos/itens/lata1/lata1.dcc")
+         if_action = go_to_dialog(2)
+         else_action = dialog_init(3)
+         else_action = go_to_dialog(1)
+
+      option
+         pre_test = lesser(OBJECT_STATE, 1)
+         text = gettext("Study the machine.")
+         post_test = roll(OPERATE_ELETRONIC_OBJECTS, 6)
+         if_action = change_object_state(1)
+         if_action = receive_item("models/objetos/itens/lata1/lata1.dcc")
+         if_action = go_to_dialog(2)
+         else_action = dialog_init(3)
+         else_action = go_to_dialog(1)
+      
+      option
+         pre_test = lesser(OBJECT_STATE, 2)
+         text = gettext("Take money from the machine.")
+         post_test = roll(OPERATE_ELETRONIC_OBJECTS, 15)
+         if_action = change_object_state(3)
+         if_action = go_to_dialog(4)
+         else_action = dialog_init(3)
+         else_action = go_to_dialog(1)
+      
+      option
+         text = gettext("Buy a soda")
+         post_test = have_money(7)
+         if_action = give_money(7)
+         if_action = receive_item("models/objetos/itens/lata1/lata1.dcc")
+         if_action = go_to_dialog(2)
+         else_action = go_to_dialog(5)
+      
+      option
+         text = gettext("Exit")
+         action = finish_dialog()
+   pc_end
+end_dialog
+
+############################################################
+#                     Fail Dialog                          #
+############################################################
+dialog(1)
+   npc_begin
+      text = gettext("(You listened a strange noise. Is the machine alright?)")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Exit")
+         action = finish_dialog()
+   pc_end
+end_dialog
+
+############################################################
+#                     Kick Dialog                          #
+############################################################
+dialog(2)
+   npc_begin
+      text = gettext("(A soda appears to you.)")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Exit")
+         action = finish_dialog()
+   pc_end
+end_dialog
+
+############################################################
+#                   Broken Dialog                          #
+############################################################
+dialog(3)
+   npc_begin
+      text = gettext("(This machine seems to be broken.)")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Exit")
+         action = finish_dialog()
+   pc_end
+end_dialog
+
+############################################################
+#                   Money Taken Dialog                     #
+############################################################
+dialog(4)
+   npc_begin
+      text = gettext("(You've got some coins.)")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Exit")
+         action = finish_dialog()
+   pc_end
+end_dialog
+
+############################################################
+#                    Money Not Enough                      #
+############################################################
+dialog(5)
+   npc_begin
+      text = gettext("(You don't have enough money)")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Exit")
+         action = finish_dialog()
+   pc_end
+end_dialog
+

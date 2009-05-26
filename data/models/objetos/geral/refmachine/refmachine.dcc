@@ -1,7 +1,7 @@
 name = RefMachine
 cal3d = models/objetos/geral/refmachine/model.cfg
 inventory_sizes = 0 0
-inventory_texture = texturas/na.png
+inventory_texture = models/objetos/geral/refmachine/texture_dlg.png
 life_points = 800
 fortitude = 8
 reflex = -2
@@ -10,4 +10,5 @@ displacement = 0
 armature_class = 10
 size_modifier = 0
 cost = 4000
-static_scenery = 1
+static_scenery = 0
+dialog = dialogs/objects/refmachine.dlg
