@@ -81,7 +81,7 @@ bool sun::shadowTime()
  *********************************************************************/
 float sun::getShadowAlpha()
 {
-   float val = (-0.014f*curHour*curHour + 0.334f*curHour - 1.5f);
+   float val = (-0.014f*curHour*curHour + 0.334f*curHour - 1.4f);
    return((val>0.0f)?val:0.0f);
 }
 
