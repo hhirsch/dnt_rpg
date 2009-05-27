@@ -65,7 +65,7 @@ feats::~feats()
  ***************************************************************/
 feat* feats::featByNumber(int featNumber)
 {
-   if( (featNumber > 0) && (featNumber < totalFeats) )
+   if( (featNumber >= 0) && (featNumber < totalFeats) )
    {
       return(&m_feats[featNumber]);
    }
@@ -777,7 +777,7 @@ featDescription* featsList::featByString(string featName)
  ***************************************************************/
 featDescription* featsList::featByNumber(int featNumber)
 {
-   if( (featNumber > 0) && (featNumber < totalFeats) )
+   if( (featNumber >= 0) && (featNumber < totalFeats) )
    {
       return(&m_feats[featNumber]);
    }
