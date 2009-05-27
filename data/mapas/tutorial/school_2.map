@@ -1,6 +1,6 @@
 # Made by DccNiTghtmare's MapEditor, 0.4
 size = 5X4
-name = gettext("Bunk")
+name = gettext("Bunker Down")
 npcFile = mapas/tutorial/school_2.map.npc
 musicFile = music/musica7.ogg
 lightsFile = mapas/tutorial/school_2.map.lgh

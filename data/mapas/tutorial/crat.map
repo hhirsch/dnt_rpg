@@ -1,9 +1,9 @@
 # Made by DccNiTghtmare's MapEditor, 0.4
 size = 18X18
-name = gettext("mapName")
+name = gettext("Cratera")
 outdoor = 1
-texture = texturas/floor_outdoor/ofslayer/058terresable.png texturas/floor_outdoor/ofslayer/058terresable.png 83 59 49
 texture = texturas/floor_outdoor/sand.png texturas/floor_outdoor/sand.png 54 102 49
+texture = texturas/floor_outdoor/ofslayer/058terresable.png texturas/floor_outdoor/ofslayer/058terresable.png 83 59 49
 #Z: 0
 square = 0,382.500000,382.500000,382.500000,382.500000
 useTexture = texturas/floor_outdoor/sand.png

@@ -1,6 +1,6 @@
 # Made by DccNiTghtmare's MapEditor, 0.4
 size = 5X6
-name = gettext("Bunk")
+name = gettext("Bunker School")
 musicFile = music/musica9.ogg
 lightsFile = mapas/tutorial/school_1.map.lgh
 outdoor = 0
