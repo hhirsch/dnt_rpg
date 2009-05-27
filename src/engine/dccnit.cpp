@@ -3000,7 +3000,7 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
 
    bool shadow = ( (option->getShadowType() == SHADOWS_PROJECTIVE) && 
                    (actualMap->isOutdoor()) && 
-                   (gameSun->visibleTime()) );
+                   (gameSun->shadowTime()) );
 
    /* SKY */
    if( (!lightPass) && (actualMap->isOutdoor()) )
