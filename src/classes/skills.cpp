@@ -2,6 +2,7 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code. *
  *************************************************************************/
 
+#include <math.h>
 #include <libintl.h>
 #include <iostream>
 
@@ -91,6 +92,8 @@ void skillsDefinitions::init()
          cout << "Can't open skill image: " << imgFile << endl;
       }
       desc.close();
+      /* Define as Attribute if needed */
+      skillsDefs[num].isAttribute = num <= 6;
    }
 }
 
@@ -280,9 +283,39 @@ int skills::doSkillCheck(skill* sk)
    if(sk != NULL)
    {
       dice d20(DICE_D20);
+      skill* att;
+      int mod = 0;
 
-      //TODO apply modifiers (manly attribute)!
-      return(d20.roll() + sk->points);
+      if(sk->definition->baseAttribute > 0)
+      {
+          att = getSkillByInt(sk->definition->baseAttribute);
+          /* Define the attribute modifier */
+          if(att)
+          {
+             mod = (int)floor((att->points-10) / 2.0);
+          }
+      }
+      else
+      {
+          att = getSkillByInt(-sk->definition->baseAttribute);
+          /* Define the inverse attribute modifier */
+          if(att)
+          {
+             mod = -(int)floor((att->points-10) / 2.0);
+          }
+      }
+
+      /* Finally, roll the dices */
+      if(sk->definition->isAttribute)
+      {
+         /* Is an attribute, the roll is with the modifier then */
+         return(d20.roll() + mod);
+      }
+      else
+      {
+         /* Is an skill, do the normal roll */
+         return(d20.roll() + sk->points + mod);
+      }
    }
    return(0);
 }

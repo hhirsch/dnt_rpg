@@ -26,6 +26,7 @@ class skillDefinition
       SDL_Surface* image;   /**< The Skill's Image */
       string idString;      /**< String Identificator of the Skill */
       int baseAttribute;    /**< Base Attibute */
+      bool isAttribute;     /**< True if the skill is an attribute */
 };
 
 /*! The individual skill */
