@@ -63,10 +63,11 @@ class aniModel:public thing
       void render();
 
       /*! Render the shadow 
-       * \param shadowMatrix -> light shadow matrix used 
+       * \param shadowMatrix -> light shadow matrix used
+       * \param alpha -> alpha of the shadow
        * \note -> need to define the stencil to the projected surface
        * \note -> this function works as renderFromGraphicMemory()  */
-      void renderShadow(GLfloat* shadowMatrix);
+      void renderShadow(GLfloat* shadowMatrix, float alpha);
 
       /*! Calculate the model static bounding box */
       void calculateBoundingBox();

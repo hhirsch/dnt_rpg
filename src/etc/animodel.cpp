@@ -706,7 +706,7 @@ void aniModel::render()
 /*********************************************************************
  *                             RenderShadow                          *
  *********************************************************************/
-void aniModel::renderShadow(GLfloat* shadowMatrix)
+void aniModel::renderShadow(GLfloat* shadowMatrix, float alpha)
 {
    /* Set Changes */
    glEnable(GL_BLEND);
@@ -718,7 +718,7 @@ void aniModel::renderShadow(GLfloat* shadowMatrix)
    glPolygonOffset(-2.0f,-1.0f);
    glEnable(GL_POLYGON_OFFSET_FILL);
    glDisable(GL_LIGHTING);
-   glColor4f(0.0f, 0.0f, 0.0f, 0.5f);
+   glColor4f(0.0f, 0.0f, 0.0f, alpha);
 
    /* Render */
    glPushMatrix();

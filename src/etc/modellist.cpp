@@ -83,7 +83,8 @@ void model3d::addPosition(float x, float y, float z, float angle)
 /********************************************************
  *                        draw                          *
  ********************************************************/
-void model3d::draw(GLfloat** matriz, bool inverted, GLfloat* shadowMatrix)
+void model3d::draw(GLfloat** matriz, bool inverted, GLfloat* shadowMatrix,
+                   float alpha)
 {
    GLfloat min[3], max[3];
    GLfloat X[4], Z[4];
@@ -162,7 +163,7 @@ void model3d::draw(GLfloat** matriz, bool inverted, GLfloat* shadowMatrix)
           {
              orientation = pos->angle;
              glPushMatrix();
-               renderShadow(shadowMatrix);
+               renderShadow(shadowMatrix, alpha);
              glPopMatrix();
           }
 
@@ -401,7 +402,7 @@ void modelList::removeUnusedModels()
  *                        RenderSceneryObjects                      *
  ********************************************************************/
 void modelList::renderSceneryObjects(GLfloat** visibleMatrix, bool inverted,
-                                     GLfloat* shadowMatrix)
+                                     GLfloat* shadowMatrix, float alpha)
 {
    model3d* mdl = getFirst();
    int i;
@@ -410,7 +411,7 @@ void modelList::renderSceneryObjects(GLfloat** visibleMatrix, bool inverted,
       /* Only Render here the Static Scenery Objects */
       if(mdl->isStaticScenery())
       {
-         mdl->draw(visibleMatrix, inverted, shadowMatrix);
+         mdl->draw(visibleMatrix, inverted, shadowMatrix, alpha);
       }
       mdl = mdl->next;
    }

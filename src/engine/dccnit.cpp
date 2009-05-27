@@ -3101,7 +3101,8 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
       /* Draw Projective Shadow */
       if( (shadow) && (gameSun->visibleTime()) )
       {
-         per->renderShadow(gameSun->getShadowMatrix());
+         per->renderShadow(gameSun->getShadowMatrix(), 
+                           gameSun->getShadowAlpha());
       }
 
       /* Unload Model Graphics Memory */
@@ -3193,7 +3194,8 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
               /* Draw Projective Shadow */
               if( (shadow) && (gameSun->visibleTime()) )
               {
-                 per->renderShadow(gameSun->getShadowMatrix());
+                 per->renderShadow(gameSun->getShadowMatrix(),
+                                   gameSun->getShadowAlpha());
               }
          }
          /* Remove the Model From Graphic Memory */
@@ -3223,7 +3225,8 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
    models.renderSceneryObjects(visibleMatrix,
                                (option->getReflexionType() >= REFLEXIONS_ALL) 
                                 && (!actualMap->isOutdoor()),
-                                shadow?gameSun->getShadowMatrix():NULL);
+                                shadow?gameSun->getShadowMatrix():NULL,
+                                shadow?gameSun->getShadowAlpha():NULL);
 
    /* Render Terrain at last for reflexion */
    if(!shadow)

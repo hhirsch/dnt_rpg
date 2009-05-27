@@ -55,8 +55,10 @@ class model3d: public aniModel
        * \param matrix -> visible matrix
        * \param inverted -> if inverted on Y axys. Usefull for reflexion.
        * \param shadowMatrix -> the shadow matrix to render projective
-       *                        shadows (NULL to not render shadows) */
-      void draw(GLfloat** matriz, bool inverted, GLfloat* shadowMatrix=NULL);
+       *                        shadows (NULL to not render shadows) 
+       * \param alpha -> the alpha value for projective shadows */
+      void draw(GLfloat** matriz, bool inverted, GLfloat* shadowMatrix=NULL,
+                float alpha=0.0f);
 
       /*! Increment the used flag */
       void incUsed();
@@ -167,9 +169,10 @@ class modelList
        * \param visibleMatrix -> current visible matrix
        * \param inverted -> if will render XZ reflexions too
        * \param shadowMatrix -> the shadow matrix to render projective
-       *                        shadows (NULL to not render shadows) */
+       *                        shadows (NULL to not render shadows)
+       * \param alpha -> the shadow alpha value */
       void renderSceneryObjects(GLfloat** visibleMatrix, bool inverted,
-                                GLfloat* shadowMatrix=NULL);
+                                GLfloat* shadowMatrix=NULL, float alpha=0.0f);
 
       /*! Print all Models with printf for debug! */
       void printAll();

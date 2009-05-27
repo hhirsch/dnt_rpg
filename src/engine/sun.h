@@ -56,6 +56,10 @@ class sun
       /*! Verifies if the sun is on shadow time (if false, no shadows)
        *  \return true if is in shadow time, false otherwise.*/
       bool shadowTime();
+      
+      /*! Verifies if the sun is on shadow time (if false, no shadows)
+       *  \return true if is in shadow time, false otherwise.*/
+      float getShadowAlpha();
 
    private:
       GLfloat quadricAttenuation;   /**< Quadric Attenuation Light Value */
