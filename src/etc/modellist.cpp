@@ -392,7 +392,9 @@ void modelList::removeUnusedModels()
          mdl = mdl->next;
       }
    }
+#ifdef DEBUG   
    printAll();
+#endif   
 }
 
 /********************************************************************

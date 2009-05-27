@@ -156,7 +156,9 @@ void renderTexture::addQuad(GLfloat x1, GLfloat y1, GLfloat z1,
  ***********************************************************************/
 void renderTexture::increaseBuffers()
 {
+#ifdef DEBUG
    cout << "Calling increaseBuffers for " << textureName << endl;
+#endif   
 
    /* Keep previous buffers */
    GLfloat* prevVertex = vertexBuffer;
