@@ -73,6 +73,9 @@
  *                      Shadow's constants                          *
  ********************************************************************/
 #define SHADOW_MAP_SIZE      512     /**< The Shadow Map Size */
+#define SHADOWS_NONE           0     /**< No Shadows */
+#define SHADOWS_PROJECTIVE     1     /**< Projective Shadows */
+
 #define REFLEXIONS_NONE        0     /**< Don't Do Any Reflexions */
 #define REFLEXIONS_CHARACTERS  1     /**< Do Reflexions only on Characters */
 #define REFLEXIONS_ALL         2     /**< Do All Reflexions */

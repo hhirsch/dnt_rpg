@@ -234,8 +234,6 @@ bool options::load(string file)
    defParser def;
    string key="", value="";
 
-   reflexionType = REFLEXIONS_NONE;
-  
    timeLastOperation = SDL_GetTicks();
 
    /* Try to load the definitions */
@@ -326,6 +324,11 @@ bool options::load(string file)
       {
          /* Read Reflexions Options */
          sscanf(value.c_str(),"%d", &reflexionType);
+      }
+      else if(key == "Shadows")
+      {
+         /* Read Reflexions Options */
+         sscanf(value.c_str(),"%d", &shadowType);
       }
       else if(key == "AntiAliasing")
       {
@@ -441,6 +444,8 @@ void options::save()
    fprintf(arq, "Grass = %s\n",enableGrass?"true":"false");
    /* Reflexion */
    fprintf(arq, "Reflexions = %d\n", reflexionType);
+   /* Shadow */
+   fprintf(arq, "Shadows = %d\n", shadowType);
    /* AntiAliasing */
    fprintf(arq, "AntiAliasing = %d\n",antiAliasing);
    /* FarViewFactor */
@@ -534,6 +539,28 @@ string options::reflexionName()
       case REFLEXIONS_ALL: 
       {
          saux = gettext("All");
+         break;
+      }
+   }
+   return(saux);
+}
+
+/****************************************************************
+ *                          shadowName                          *
+ ****************************************************************/
+string options::shadowName()
+{
+   string saux;
+   switch(shadowType)
+   {
+      case SHADOWS_NONE:
+      {
+         saux = gettext("None");
+         break;
+      }
+      case SHADOWS_PROJECTIVE:
+      {
+         saux = gettext("Projective");
          break;
       }
    }
@@ -820,6 +847,23 @@ void options::displayOptionsScreen(guiInterface* interf)
                     dir.getRealFile("texturas/options/reflexions.png").c_str());
    posY += 25;
 
+   /* Shadows */
+   prevShadow = shadowType;
+   saux = shadowName();
+   qt = list->insertTextBox(12,posY,145,posY+17,0,gettext("Shadows:"));
+   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   buttonShadDec = list->insertButton(121,posY,131,posY+17,
+                                      fnt.createUnicode(0x25C4),0);
+   buttonShadDec->defineFont(DNT_FONT_ARIAL, 9);
+   txtShadow = list->insertTextBox(132,posY,197,posY+17,1,saux.c_str());
+   txtShadow->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   buttonShadSum = list->insertButton(198,posY,208,posY+17,
+                                      fnt.createUnicode(0x25BA),0);
+   buttonShadSum->defineFont(DNT_FONT_ARIAL, 9);
+   list->insertPicture(220,posY,40,220,
+                    dir.getRealFile("texturas/options/shadow.png").c_str());
+   posY += 25;
+
    /* AntiAliasing */                 
    saux = antiAliasingName();
    qt = list->insertTextBox(12,posY,145,posY+17,0,gettext("Anti-Aliasing:"));
@@ -1060,6 +1104,21 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
             reflexionType--;
          }
       }
+      /* Shadow */
+      else if(object == (guiObject*) buttonShadSum)
+      {
+         if(shadowType < SHADOWS_PROJECTIVE)
+         {
+            shadowType++;
+         }
+      }
+      else if(object == (guiObject*) buttonShadDec)
+      {
+         if(shadowType > SHADOWS_NONE)
+         {
+            shadowType--;
+         }
+      }
       /* Resolution */
       else if(object == (guiObject*) buttonResSum)
       {
@@ -1167,6 +1226,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          langNumber  = prevLanguage;
          cameraNumber = prevCamera;
          reflexionType = prevReflexion;
+         shadowType = prevShadow;
          screenWidth = prevWidth;
          screenHeight = prevHeight;
          antiAliasing = prevAntiAliasing;
@@ -1226,6 +1286,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
    txtLanguage->setText(languageName());
    txtCamera->setText(cameraName());
    txtReflexion->setText(reflexionName());
+   txtShadow->setText(shadowName());
    txtResolution->setText(resolutionName());
    txtAntiAliasing->setText(antiAliasingName());
 
@@ -1318,6 +1379,14 @@ bool options::getEnableAnisotropicFilter()
 int options::getReflexionType()
 {
    return(reflexionType);
+}
+
+/****************************************************************
+ *                           getShadowType                      *
+ ****************************************************************/
+int options::getShadowType()
+{
+   return(shadowType);
 }
 
 /****************************************************************
@@ -1463,6 +1532,7 @@ int    options::cameraNumber = 1;
 bool   options::enableParticles = true;
 bool   options::enableGrass = true;
 int    options::reflexionType = 2;
+int    options::shadowType = SHADOWS_PROJECTIVE;
 int    options::screenWidth = 1024;
 int    options::screenHeight = 768; 
 bool   options::enableFullScreen = false;

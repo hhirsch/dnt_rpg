@@ -124,8 +124,11 @@ class options
        * \return -> true if enabled */
       bool getEnableGrass();
       /*! Get the reflexion type
-       * \return -> current reflextion type */
+       * \return -> current reflexion type */
       int getReflexionType();
+      /*! Get the shadow type
+       * \return -> current shadow type */
+      int getShadowType();
       /*! Get the screen width
        * \return -> current screen width */
       int getScreenWidth();
@@ -184,6 +187,7 @@ class options
       textBox* txtLanguage;        /**< Language Text on Window */
       textBox* txtCamera;          /**< Camera Mode Text on Window */
       textBox* txtReflexion;       /**< Reflexion Type Text on Window */
+      textBox* txtShadow;          /**< Shadow Type Text on Window */
       textBox* txtResolution;      /**< Resolution Text on Window */
       textBox* txtAntiAliasing;    /**< AntiAliasing Text on Window */
       
@@ -198,6 +202,7 @@ class options
       static bool    enableParticles; /**< Enable/Disable Particles */
       static bool    enableGrass;     /**< Enable/Disable Grass */
       static int     reflexionType;   /**< Reflexion Type */
+      static int     shadowType;      /**< The Shadow Type to use */
       static int     screenWidth;     /**< Screen Height */
       static int     screenHeight;    /**< Screen Width */
       static bool    enableFullScreen;/**< If fullscreen is defined */
@@ -218,6 +223,7 @@ class options
       int      prevSndfxVolume;    /**< Previous Used Sound Effects Volume */
       int      prevLanguage;       /**< Previous Used Language */
       int      prevReflexion;      /**< Previous Used Reflexion */
+      int      prevShadow;         /**< Previous Used Shadow */
       int      prevWidth;          /**< Previous Used Resolution Width */
       int      prevHeight;         /**< Previous Used Resolution Height */
       int      prevAntiAliasing;   /**< Previous Used AntiAliasing */
@@ -245,6 +251,9 @@ class options
 
       button* buttonReflSum;
       button* buttonReflDec;
+      
+      button* buttonShadSum;
+      button* buttonShadDec;
 
       button* buttonResSum;
       button* buttonResDec;
@@ -281,6 +290,10 @@ class options
       /*! Get the Current Reflexion Type Name
        * \return the name of the reflexion type */
       string reflexionName();
+      
+      /*! Get the Current Shadow Type Name
+       * \return the name of the shadow type */
+      string shadowName();
 
       /*! Get the current resolution name
        * \return the name of the resolution */

@@ -2998,7 +2998,9 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
    GLfloat min[3],max[3];
    GLfloat x[4],z[4];
 
-   bool shadow = false;//actualMap->isOutdoor() && gameSun->visibleTime();
+   bool shadow = ( (option->getShadowType() == SHADOWS_PROJECTIVE) && 
+                   (actualMap->isOutdoor()) && 
+                   (gameSun->visibleTime()) );
 
    /* SKY */
    if( (!lightPass) && (actualMap->isOutdoor()) )
