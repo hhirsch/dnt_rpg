@@ -299,7 +299,7 @@ void inventWindow::verifyUseObject()
                           ammoType->title.c_str());
                   brief.addText(buf);
 
-                  if(activeObject->getState() >= needs)
+                  if(activeObject->getState() > needs)
                   {
                      /* Fully recharge */
                      wp->setCurrentMunition(wp->getMunitionCapacity());
