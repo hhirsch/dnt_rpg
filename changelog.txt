@@ -1,32 +1,35 @@
 ================================================
 |                Version 0.4                   |
 ================================================
+ - New missions;
+ - New maps;
+ - New models;
  - In-game comic book objects (items);
  - Tutorial to the battle system (as a comic book);
- - Fixed a bug at sound controller when exiting game;
- - Fixed a bug at some models reflexion;
  - Way to populate NPCs initial inventories;
  - Balanced Barter Imposition Tests;
  - Ammo for Weapons;
  - Cancel Barter when the character is far;
+ - Using weapon sound effect (if exists) when using it to attack;
+ - Define Keyboard keys at options;
+ - Setting the difficulty to use medical itens as AC/2;
+ - Projective Shadows for outdoor;
+ - Change target enemy color under battle mode;
+ - Fixed a bug at sound controller when exiting game;
+ - Fixed a bug at some models reflexion;
  - Fixed bug when loading game with inventory window opened;
  - Fixed bug that let you use itens without attack actions;
  - Fixed bug at PC orientation angle after loading a game;
- - Using weapon sound effect (if exists) when using it to attack;
  - Fixed Save Files to save Character Experience points (forgot!);
  - Fixed a bug of lost object when trying to equip a weapon by "using it" 
    when already have another weapon eqquiped;
  - Fixed a bug on DNT installation of bin directory and default options file;
  - Fixed a bug when sound effect file doesn't exist;
- - Define Keyboard keys at options;
- - Setting the difficulty to use medical itens as AC/2;
- - Projective Shadows for outdoor;
- - Change target enemy color under battle mode;
+ 
 
 Working on:
  - Weather effects;
  - Use dntMapEditor to insert sound effects at maps;
- - New models;
  - New effects for comic books;
  - Capacity of using talents;
  - Implement 5-15% of the talents defined on DNT Book;
