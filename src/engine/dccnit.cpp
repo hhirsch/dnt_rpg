@@ -1922,6 +1922,9 @@ int engine::verifyMouseActions(Uint8 mButton)
    Uint32 time = SDL_GetTicks();
    activeCharacter = PCs->getActiveCharacter();
 
+   /* Nullify the current target */
+   curTarget = NULL;
+
    /* Create a bounding box for the mouse position */
    GLfloat minMouse[3], maxMouse[3];
    minMouse[0] = xReal-3;  maxMouse[0] = xReal+3;
@@ -1959,6 +1962,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                   0.0, sobj->z, minObj, maxObj);
             if(intercepts( minObj, maxObj, minMouse, maxMouse))
             {
+               curTarget = (thing*)sobj->obj;
                shortcuts->setThing(sobj->obj->getName());
                
                /* The Object Dialog Window Call */
@@ -2057,6 +2061,7 @@ int engine::verifyMouseActions(Uint8 mButton)
          {
             cursors->set(CURSOR_DOOR);
             shortcuts->setThing(gettext("Door")); 
+            //curTarget = porta;
             if( (mButton & SDL_BUTTON(1)) && 
                 (rangeAction(activeCharacter->xPosition, 
                              activeCharacter->zPosition,
@@ -2112,7 +2117,8 @@ int engine::verifyMouseActions(Uint8 mButton)
          if(intercepts( min, max, minMouse, maxMouse))
          {
             cursors->set(CURSOR_INVENTORY);
-            shortcuts->setThing(pers->name); 
+            shortcuts->setThing(pers->name);
+            curTarget = (thing*)pers;
 
             /* Open Inventory when button pressed */
             if( (mButton & SDL_BUTTON(1)) && (!inventoryWindow))
@@ -2148,6 +2154,7 @@ int engine::verifyMouseActions(Uint8 mButton)
 
             if(intercepts( min, max, minMouse, maxMouse))
             {
+               curTarget = (thing*)pers;
                if( engineMode == ENGINE_MODE_REAL_TIME )
                {
                   if(!pers->isAlive())
@@ -3145,6 +3152,17 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
          if(visibleCube(min[0],min[1],min[2],max[0],max[1],max[2],
                         visibleMatrix))
          {
+            if( (curTarget == (thing*)per) &&
+                ( (!per->isAlive()) || 
+                  (engineMode == ENGINE_MODE_TURN_BATTLE)) )
+            {
+               glColor3f(1.0f,0.0f,0.0f);
+            }
+            else
+            {
+               glColor3f(1.0f,1.0f,1.0f);
+            }
+
             glPushMatrix();
               glTranslatef(per->xPosition, per->yPosition,
                            per->zPosition);

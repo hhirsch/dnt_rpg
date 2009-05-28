@@ -455,6 +455,8 @@ class engine
       GLfloat moveCircleX,         /**< The Battle Move Circle X Coordinate */ 
               moveCircleY,         /**< The Battle Move Circle Y Coordinate */
               moveCircleZ;         /**< The Battle Move Circle Z Coordinate */
+      
+      thing* curTarget;            /**< The current target under mouse */
 
 
       /* Combat Things */
