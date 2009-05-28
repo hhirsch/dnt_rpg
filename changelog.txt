@@ -19,17 +19,17 @@
  - Fixed a bug on DNT installation of bin directory and default options file;
  - Fixed a bug when sound effect file doesn't exist;
  - Define Keyboard keys at options;
- - Setting the difficulty to use medical itens as AC/2.
+ - Setting the difficulty to use medical itens as AC/2;
+ - Projective Shadows for outdoor;
+ - Change target enemy color under battle mode;
 
 Working on:
  - Weather effects;
- - Shadows;
  - Use dntMapEditor to insert sound effects at maps;
  - New models;
  - New effects for comic books;
  - Capacity of using talents;
  - Implement 5-15% of the talents defined on DNT Book;
-
 
 Pending:
  - Define Counter Skills;
