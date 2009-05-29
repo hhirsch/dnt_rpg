@@ -107,5 +107,6 @@ void sky::draw(Map* actualMap, GLfloat sunRot)
    glPopMatrix();
 
    glEnable(GL_FOG);
+   glDisable(GL_COLOR_MATERIAL);
 }
 
