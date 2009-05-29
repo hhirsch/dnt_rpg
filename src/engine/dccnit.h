@@ -15,6 +15,7 @@
 #include "../classes/actions.h"
 #include "../classes/pendingaction.h"
 #include "../classes/mission.h"
+#include "../classes/money.h"
 #include "../etc/message3d.h"
 #include "../etc/dirs.h"
 #include "../etc/npcfile.h"

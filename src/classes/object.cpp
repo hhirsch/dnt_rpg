@@ -6,11 +6,15 @@
 #include <SDL/SDL_opengl.h>
 #include "object.h"
 #include "weapon.h"
+#include "money.h"
 
 #include "../engine/util.h"
 #include "../etc/dirs.h"
 #include "../etc/defparser.h"
 #include "../lang/translate.h"
+
+#include <iostream>
+using namespace std;
 
 ////////////////////////////////////////////////////////////////////////////
 //                                                                        //
@@ -57,6 +61,10 @@ int getObjectTypeId(string type)
    {
       return(OBJECT_TYPE_BOOK);
    }
+   else if(type == "money")
+   {
+      return(OBJECT_TYPE_MONEY);
+   }
    else
    {
       cerr << "Warning: Unknow object type: '" << type << "'" << endl;
@@ -85,8 +93,7 @@ object::object(string path, string curMap): thing()
    defParser parser;
    if(!parser.load(path))
    {
-       printf("Error loading object file '%s'\n", 
-              dir.getRealFile(path).c_str());
+       cerr << "Error loading object file " <<  dir.getRealFile(path) << endl;
       return;
    }
 
@@ -193,8 +200,8 @@ object::object(string path, string curMap): thing()
       }
       else
       {
-         printf("Warning: Unknow key '%s' at %s\n", key.c_str(), 
-                                                    path.c_str());
+         cerr << "Warning: Unknow key '" << key << "' at '"
+              << path << "'" << endl;
       }
    }
 
@@ -206,7 +213,7 @@ object::object(string path, string curMap): thing()
    }
    else
    {
-      printf("Error: 3D Model not defined for %s!\n", name.c_str());
+      cerr << "Error: 3D Model not defined for " << name << endl;
    }
 
    /* Add the object to the list */
@@ -633,7 +640,7 @@ void objectsList::removeStaticSceneries()
       {
          /* Just delete, because the destructor will call
           * the remove(oth) for us. */
-         delete(oth);
+         deleteObject(oth);
       }
    }
 }
@@ -656,7 +663,7 @@ void objectsList::removeAll()
 
       /* Just delete, because the destructor will call
        * the remove(oth) for us. */
-      delete(oth);
+      deleteObject(oth);
    }
 
    total = 0;
@@ -705,6 +712,32 @@ object* objectsList::search(string fileName, GLfloat posX, GLfloat posY,
 object* objectsList::first = NULL;
 int objectsList::total = 0;
 
+/********************************************************************
+ *                         deleteObject                             *
+ ********************************************************************/
+void deleteObject(object* obj)
+{
+   switch(obj->getType())
+   {
+      case OBJECT_TYPE_WEAPON:
+      {
+         weapon* wp = (weapon*)obj;
+         delete(wp);
+      }
+      break;
+      case OBJECT_TYPE_MONEY:
+      {
+         money* m = (money*)obj;
+         delete(m);
+      }
+      break;
+      default:
+      {
+         delete(obj);
+      }
+      break;
+   }
+}
 
 /********************************************************************
  *                         createObject                             *
@@ -713,26 +746,33 @@ object* createObject(string arquivo, string mapFileName)
 {
    object* novo = NULL;
 
-   string::size_type loc = arquivo.find( ".dcc", 0 );
-   if( loc != string::npos )
+   if(arquivo == DNT_MONEY_OBJECT)
    {
-      /* It's an Object *.dcc */
-      novo = (object*) new object(arquivo, mapFileName);
    }
+
    else
    {
-      loc = arquivo.find( ".wcc", 0 );
+      string::size_type loc = arquivo.find( ".dcc", 0 );
       if( loc != string::npos )
       {
-         /* It's an weapon Object *.wcc */
-         novo = (object*) new weapon(arquivo);
+         /* It's an Object *.dcc */
+         novo = (object*) new object(arquivo, mapFileName);
+      }
+      else
+      {
+         loc = arquivo.find( ".wcc", 0 );
+         if( loc != string::npos )
+         {
+            /* It's an weapon Object *.wcc */
+            novo = (object*) new weapon(arquivo);
+         }
       }
    }
 
    /* verify if created the pointer */
    if(novo == NULL)
    {
-      printf("Error, cannot define the type of %s\n",arquivo.c_str());
+      cerr << "Error, cannot define the type of " << arquivo << endl;
       return(NULL);
    }
 

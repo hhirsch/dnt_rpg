@@ -220,6 +220,7 @@ engine::~engine()
    {
       delete(NPCs);
    }
+
    if(PCs)
    {
       delete(PCs);
@@ -1320,6 +1321,11 @@ int engine::characterScreen(GLuint idTextura)
          new object("models/objetos/books/combat_tutorial/combat_tutorial.dcc",
                     "");
       activeCharacter->inventories->addObject(curObj);
+
+      /* Insert some money */
+      /*money* m = new money();
+      cerr << activeCharacter->inventories->addObject((object*)m) << endl;
+      m->setQuantity(100);*/
    }
    else
    {

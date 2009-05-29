@@ -1,14 +1,11 @@
 
 #include "money.h"
-
-
-#define DNT_MONEY_MODEL "models/objetos/itens/money/money.dcc"
-
+#include "../engine/util.h"
 
 /***********************************************************************
  *                               Constructor                           *
  ***********************************************************************/
-money::money(): object(DNT_MONEY_MODEL)
+money::money(): object(DNT_MONEY_OBJECT)
 {
    cost = 0;
 }

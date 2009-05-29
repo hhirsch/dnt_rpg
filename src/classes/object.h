@@ -22,6 +22,7 @@ using namespace std;
 #define OBJECT_TYPE_AMMO      6
 #define OBJECT_TYPE_NARCOTIC  7
 
+#define OBJECT_TYPE_MONEY    19
 #define OBJECT_TYPE_BOOK     20
 
 /*! Define Objects of the DNT (an object is almost everything that 
@@ -233,6 +234,10 @@ class objectsList
  * \return -> pointer to the Object created (object* as generic,
  *            but really create the child type, as weapon*, for example) */
 object* createObject(string arquivo, string curMapFileName);
+
+/*! Delete an object, based on its type
+ * \param obj -> pointer to the object to delete */
+void deleteObject(object* obj);
 
 
 #endif

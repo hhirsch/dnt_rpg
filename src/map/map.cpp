@@ -698,17 +698,7 @@ void Map::deleteObjects()
                  /* delete it! */
                  switch(sobj->obj->getType())
                  {
-                    case OBJECT_TYPE_WEAPON:
-                    {
-                       weapon* w = (weapon*)sobj->obj;
-                       delete(w);
-                    }
-                    break;
-                    default:
-                    {
-                       delete(sobj->obj);
-                    }
-                    break;
+                    deleteObject(sobj->obj);
                  }
               }
            }

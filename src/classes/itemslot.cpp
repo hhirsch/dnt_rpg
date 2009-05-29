@@ -50,7 +50,7 @@ itemSlot::~itemSlot()
              (spaces[x][y].origY == y))
          {
             /* Delete the object */
-            delete(spaces[x][y].obj);
+            deleteObject(spaces[x][y].obj);
          }
          spaces[x][y].obj = NULL;
       }
