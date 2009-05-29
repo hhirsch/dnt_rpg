@@ -1,0 +1,9 @@
+name = gettext("Money")
+cal3d = models/objetos/itens/money/model.cfg
+type = money
+state = 0
+inventory_sizes = 2 1
+inventory_texture = models/objetos/itens/money/texture_inv.png
+life_points = 30
+cost = 0
+weight = 0

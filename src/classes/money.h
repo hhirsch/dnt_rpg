@@ -33,6 +33,7 @@ class money: public thing
       void callIdleAnimation(){};
 
    protected:
+
 };
 
 
