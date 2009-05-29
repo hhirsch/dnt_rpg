@@ -232,8 +232,6 @@ engine::~engine()
       delete(gameSun);
    }
 
-   
-
    /* Clear the Inventory too */
    if(inventoryWindow)
    {
@@ -1323,9 +1321,9 @@ int engine::characterScreen(GLuint idTextura)
       activeCharacter->inventories->addObject(curObj);
 
       /* Insert some money */
-      /*money* m = new money();
-      cerr << activeCharacter->inventories->addObject((object*)m) << endl;
-      m->setQuantity(100);*/
+      money* m = new money();
+      activeCharacter->inventories->addObject((object*)m);
+      m->setQuantity(100);
    }
    else
    {

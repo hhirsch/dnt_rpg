@@ -43,6 +43,9 @@ class money: public object
 
    protected:
 
+      /*! Calculate the weight */
+      void calculateWeight();
+
 };
 
 

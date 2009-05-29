@@ -5,7 +5,7 @@
 /***********************************************************************
  *                               Constructor                           *
  ***********************************************************************/
-money::money(): object(DNT_MONEY_OBJECT)
+money::money(): object(DNT_MONEY_OBJECT, "")
 {
    cost = 0;
 }
@@ -34,6 +34,7 @@ bool money::removeQuantity(int qty)
    if(cost > qty)
    {
       cost -= qty;
+      calculateWeight();
       setState(cost);
       return(true);
    }
@@ -46,6 +47,7 @@ bool money::removeQuantity(int qty)
 void money::addQuantity(int qty)
 {
    cost += qty;
+   calculateWeight();
    setState(cost);
 }
 
@@ -55,6 +57,15 @@ void money::addQuantity(int qty)
 void money::setQuantity(int qty)
 {
    cost = qty;
+   calculateWeight();
    setState(cost);
+}
+
+/***********************************************************************
+ *                             calculateWeight                         *
+ ***********************************************************************/
+void money::calculateWeight()
+{
+   weight = (cost / 100.0f);
 }
 
