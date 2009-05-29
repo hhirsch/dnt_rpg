@@ -3,9 +3,10 @@
 #define _dnt_money_h
 
 #include "thing.h"
+#include "object.h"
 
 /*! money class is the money representation on DNT  */
-class money: public thing
+class money: public object
 {
    public:
       /*! Constructor  */
@@ -13,6 +14,10 @@ class money: public thing
 
       /*! Destructor */
       ~money();
+
+      /*! Get the current money quantity (value)
+       * \return -> current money value */
+      int quantity();
 
       /*! Remove quantity from current money
        * \param qty -> quantity to remove 
@@ -22,6 +27,10 @@ class money: public thing
       /*! Add a money quantity to the current money
        * \param qty -> quantity to add to current */
       void addQuantity(int qty);
+
+      /*! Set a money quantity to the current money
+       * \param qty -> quantity to set as current */
+      void setQuantity(int qty);
 
       /*! Virtual method to call dead animation */
       void callDeadAnimation(){};

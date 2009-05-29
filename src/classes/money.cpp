@@ -1,10 +1,14 @@
 
 #include "money.h"
 
+
+#define DNT_MONEY_MODEL "models/objetos/itens/money/money.dcc"
+
+
 /***********************************************************************
  *                               Constructor                           *
  ***********************************************************************/
-money::money(): thing()
+money::money(): object(DNT_MONEY_MODEL)
 {
    cost = 0;
 }
@@ -33,6 +37,7 @@ bool money::removeQuantity(int qty)
    if(cost > qty)
    {
       cost -= qty;
+      setState(cost);
       return(true);
    }
    return(false);
@@ -44,5 +49,15 @@ bool money::removeQuantity(int qty)
 void money::addQuantity(int qty)
 {
    cost += qty;
+   setState(cost);
+}
+
+/***********************************************************************
+ *                               setQuantity                           *
+ ***********************************************************************/
+void money::setQuantity(int qty)
+{
+   cost = qty;
+   setState(cost);
 }
 
