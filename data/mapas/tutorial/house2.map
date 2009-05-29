@@ -179,4 +179,4 @@ square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/mosaic.png
 useObject = models/objetos/geral/cama/cama.dcc 0:5,5:285.237,0.000,314.211:0.000:0
 useObject = models/objetos/geral/cama/cama.dcc 1:5,5:285.893,0.000,358.432:0.000:0
-initial = 160.000,192.000
+initial = 280.000,94.000
