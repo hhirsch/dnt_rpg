@@ -227,6 +227,7 @@ class modInvObj
       int x,                /**< X position on inventory */
           y;                /**< Y position on inventory */
       int invNumber;        /**< The inventory number */
+      int state;            /**< The current object state */
       modInvObj* next;      /**< Next Object */
       modInvObj* previous;  /**< Previous Object */
 };

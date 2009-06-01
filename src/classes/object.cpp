@@ -225,6 +225,9 @@ object::object(string path, string curMap): thing()
  **************************************************************/
 object::object(object* obj): thing()
 {
+   /* First, clean */
+   cleanValues();
+
    /* Define type */
    usedFlag = 0;
    type = obj->type;
@@ -748,6 +751,8 @@ object* createObject(string arquivo, string mapFileName)
 
    if(arquivo == DNT_MONEY_OBJECT)
    {
+      /* It's a money! */
+      novo = (money*) new money();
    }
 
    else

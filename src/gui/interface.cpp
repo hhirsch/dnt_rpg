@@ -331,6 +331,12 @@ guiObject* guiInterface::verifyCompositeEvents(guiObject* actObj,
    {
       warn.close();
    }
+   /* Verify Qty Window */
+   quantityWindow qty;
+   if(qty.isOpened())
+   {
+      qty.verifyEvents(actObj, eventInfo);
+   }
 
    return(actObj);
 }

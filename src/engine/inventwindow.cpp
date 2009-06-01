@@ -7,6 +7,7 @@
 
 #include "../cbook/comicbook.h"
 #include "../classes/actions.h"
+#include "../classes/money.h"
 #include "../etc/dirs.h"
 #include "../gui/dntfont.h"
 #include "../sound/sound.h"
@@ -647,6 +648,18 @@ int inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
 
                   if(activeObject)
                   {
+                     //FIXME
+                     if(activeObject->getType() == OBJECT_TYPE_MONEY)
+                     {
+                        money* m = (money*)activeObject;
+                        quantityWindow qty;
+                        qty.setRange(0.0f, m->quantity());
+                        qty.setValue(m->quantity());
+                        qty.setDelta(1.0f);
+                        qty.show(gettext("Money"), 
+                                 gettext("Define quantity:"), interf); 
+                     }
+
                      if(seller)
                      {
                         /* The Pc is buying from the seller */

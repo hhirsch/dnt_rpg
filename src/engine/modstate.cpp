@@ -5,7 +5,7 @@
 #include "modstate.h"
 #include "character.h"
 #include "../etc/npcfile.h"
-
+#include "../classes/money.h"
 
 #ifdef _MSC_VER
    #include "../config_win.h"
@@ -467,6 +467,15 @@ void modInventory::flush(Map* curMap, inventory* inv)
       if(curObj)
       {
          res = true;
+         /* Set its state */
+         curObj->setState(invObj->state);
+
+         /* Must set money quantity as the state */
+         if(curObj->getType() == OBJECT_TYPE_MONEY)
+         {
+            money* m = (money*)curObj;
+            m->setQuantity(invObj->state);
+         }
 
          if(invObj->invNumber >= 0)
          {
@@ -525,6 +534,7 @@ void modInventory::create(inventory* inv)
          invObj->y = 0;
          invObj->invNumber = -1-curInv;
          invObj->fileName = obj->getFileName();
+         invObj->state = obj->getState();
 
          /* Insert it at the modInventory */
          insert(invObj);
@@ -543,6 +553,7 @@ void modInventory::create(inventory* inv)
          invObj->y = y;
          invObj->invNumber = curInv;
          invObj->fileName = obj->getFileName();
+         invObj->state = obj->getState();
 
          /* Insert it at the modInventory */
          insert(invObj);
@@ -598,7 +609,7 @@ void modInventory::clear()
 }
 
 /************************************************************
- *                           save                           *
+ *                           load                           *
  ************************************************************/
 bool modInventory::load(string file)
 {
@@ -650,7 +661,8 @@ void modInventory::save(ofstream* file)
    {
       *file << MODSTATE_TOKEN_INVENTORY_ITEM << " = " 
             << obj->fileName << " " << obj->x << " " 
-            << obj->y << " " << obj->invNumber << endl;
+            << obj->y << " " << obj->invNumber << " " 
+            << obj->state << endl;
       obj = obj->next;
    }
 }
@@ -664,8 +676,8 @@ void modInventory::insert(string s)
    char fName[256];
 
    /* Get Values */
-   sscanf(s.c_str(), "%s %d %d %d", &fName[0], &obj->x, &obj->y, 
-          &obj->invNumber);
+   sscanf(s.c_str(), "%s %d %d %d %d", &fName[0], &obj->x, &obj->y, 
+          &obj->invNumber, &obj->state);
    obj->fileName = fName;
 
    /* Insert it! */
