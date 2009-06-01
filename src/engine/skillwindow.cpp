@@ -250,7 +250,7 @@ int skillWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
    }
 
    /* Verify Button Events */
-   if(eventInfo == PRESSED_BUTTON)
+   if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
    {
       if( (object == (guiObject*) buttonSum) && (!readOnly))
       {

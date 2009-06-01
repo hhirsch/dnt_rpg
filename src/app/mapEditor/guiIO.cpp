@@ -470,7 +470,7 @@ void guiIO::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
                 bool outdoor)
 {
-   int eventInfo=NOTHING;
+   int eventInfo = FARSO_EVENT_NONE;
    guiObject* object;
 
    /* Get Events */
@@ -478,7 +478,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
 
 
    /* Do Camera IO */
-   if(eventInfo != WROTE_TEXT_BAR)
+   if(eventInfo != FARSO_EVENT_WROTE_TEXT_BAR)
    {
       gameCamera.doIO(keys, mButton, mouseX, mouseY, DELTA_CAMERA );
 
@@ -604,7 +604,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
 
    switch(eventInfo)
    {
-      case ON_PRESS_TAB_BUTTON:
+      case FARSO_EVENT_ON_PRESS_TAB_BUTTON:
       {
          /*  Navigation Buttons  */
          if(object == (guiObject*) upButton)
@@ -679,7 +679,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          }
       break;
       
-      case PRESSED_TAB_BUTTON:
+      case FARSO_EVENT_PRESSED_TAB_BUTTON:
 
          /*  Terrain Buttons  */
          if(object == (guiObject*) terrainUpButton)
@@ -879,7 +879,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
       }
 
       /* File Selectors Things */
-      case FILE_SEL_ACCEPT:
+      case FARSO_EVENT_FILE_SEL_ACCEPT:
       {
          if(fileWindow)
          {
@@ -899,7 +899,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          }
          break;
       }
-      case FILE_SEL_CANCEL:
+      case FARSO_EVENT_FILE_SEL_CANCEL:
       {
          if(fileWindow)
          {
@@ -914,7 +914,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
 
 
       /* Buttons */
-      case PRESSED_BUTTON:
+      case FARSO_EVENT_PRESSED_BUTTON:
       {
          if(object == (guiObject*) exitButton)
          {
@@ -1021,7 +1021,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          break;
       }
    }
-   if(eventInfo == NOTHING)
+   if(eventInfo == FARSO_EVENT_NONE)
    {
       return(GUI_IO_NOTHING);
    }

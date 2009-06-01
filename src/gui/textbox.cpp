@@ -11,7 +11,7 @@ textBox::textBox(int xa, int ya, int xb, int yb, int frameType,
                  SDL_Surface *screen)
 {
    wSurface = screen;
-   type = GUI_TEXT_BOX;
+   type = FARSO_OBJECT_TEXT_BOX;
    x1 = xa;
    y1 = ya;
    x2 = xb;

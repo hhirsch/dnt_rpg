@@ -142,7 +142,7 @@ bool grassWindow::eventGot(int type, guiObject* object)
       return(false);
    }
 
-   if( (type == ON_PRESS_BUTTON) && 
+   if( (type == FARSO_EVENT_ON_PRESS_BUTTON) && 
        (actualTime - lastTime > 100) )
    {  
       lastTime = actualTime;
@@ -211,7 +211,7 @@ bool grassWindow::eventGot(int type, guiObject* object)
          defineValues();
       }
    }
-   else if(type == PRESSED_TAB_BUTTON)
+   else if(type == FARSO_EVENT_PRESSED_TAB_BUTTON)
    {
       if(object == (guiObject*)buttonPrevious)
       {

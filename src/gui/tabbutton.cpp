@@ -11,7 +11,7 @@ tabButton::tabButton(int x,int y,const char* arquivo):picture(x,y,0,0,arquivo)
 {
    numButtons = 0;
    pressed = false;
-   type = GUI_TAB_BUTTON;
+   type = FARSO_OBJECT_TAB_BUTTON;
    current = - 1;
    objectBelow = NULL;
 }
@@ -21,7 +21,7 @@ tabButton::tabButton(int x,int y,const char* arquivo):picture(x,y,0,0,arquivo)
  ***********************************************************/
 tabButton::tabButton(int x, int y, int w, int h):picture(x,y,0,0, NULL)
 {
-   type = GUI_TAB_BUTTON;
+   type = FARSO_OBJECT_TAB_BUTTON;
    numButtons = 0;
    x1 = x;
    y1 = y;

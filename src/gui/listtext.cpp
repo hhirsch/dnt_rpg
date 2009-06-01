@@ -24,7 +24,7 @@ listText::listText(int xa, int ya, int xb, int yb, SDL_Surface* surface,
    fnt.defineFont(DNT_FONT_ARIAL, 10);
 
    /* Init things */
-   type = GUI_LIST_TEXT;
+   type = FARSO_OBJECT_LIST_TEXT;
    x1 = xa;
    y1 = ya;
    x2 = xb;
@@ -194,7 +194,7 @@ bool listText::eventGot(int type, guiObject* object)
    selectedPos = -1;
 
    /* Verify Events */
-   if(type == PRESSED_TAB_BUTTON)
+   if(type == FARSO_EVENT_PRESSED_TAB_BUTTON)
    {
       for(i = 0; i<maxButtons; i++)
       {

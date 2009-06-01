@@ -43,7 +43,7 @@ tabObj::~tabObj()
 tabBox::tabBox(int xa, int ya, int xb, int yb, SDL_Surface* screen)
 {
    /* Define guiObject type */
-   type = GUI_TAB_BOX;
+   type = FARSO_OBJECT_TAB_BOX;
    /* Define Position */
    x1 = xa;
    y1 = ya;

@@ -243,7 +243,7 @@ string listWindow::getFileNameWithTitle(string title)
 bool listWindow::eventGot(int type, guiObject* object)
 {
    selFileName = "";
-   if(type == SELECTED_LIST_TEXT)
+   if(type == FARSO_EVENT_SELECTED_LIST_TEXT)
    {
       if(object == list)
       {

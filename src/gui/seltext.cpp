@@ -14,7 +14,7 @@ selText::selText(int xa,int ya,int xb,int yb, string text0, string text1,
                  string text2, string text3, string text4,
                  SDL_Surface* screen)
 {
-   type = GUI_SEL_TEXT;
+   type = FARSO_OBJECT_SEL_TEXT;
    x1 = xa;
    y1 = ya;
    x2 = xb;

@@ -257,7 +257,7 @@ bool itemWindow::isOpen()
  ********************************************************************/
 int itemWindow::treat(guiObject* object, int eventInfo)
 {
-   if(eventInfo == PRESSED_BUTTON)
+   if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
    {
       if(object == (guiObject*) okButton)
       {

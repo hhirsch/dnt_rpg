@@ -45,7 +45,7 @@ int initialScreen::run(int Status,GLdouble proj[16],
    Uint32 tempoAnterior = 0;
    done = false;
    guiObject* object = NULL;
-   int eventInfo = NOTHING;
+   int eventInfo = FARSO_EVENT_NONE;
    cursor cursors;
    gui = interf;
 
@@ -98,9 +98,9 @@ int initialScreen::run(int Status,GLdouble proj[16],
          Uint8 Mbotao = SDL_GetMouseState(&x,&y);
          
          object = gui->manipulateEvents(x,y,Mbotao,keys, eventInfo);
-         if(eventInfo != NOTHING)
+         if(eventInfo != FARSO_EVENT_NONE)
          {
-             if(eventInfo == PRESSED_BUTTON)
+             if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
              {
                  if(object == (guiObject*) buttonNew)
                  {

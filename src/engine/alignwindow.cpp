@@ -76,7 +76,7 @@ alignWindow::alignWindow(aligns* alg, guiInterface* inter, align** actual)
  ************************************************************************/
 int alignWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
 {
-   if(eventInfo == PRESSED_BUTTON)
+   if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
    {
       if( (object == (guiObject*) buttonNext) || 
           (object == (guiObject*) buttonPrevious))

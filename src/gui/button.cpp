@@ -22,7 +22,7 @@ button::button(int xa,int ya,int xb,int yb, string txt, bool isOval )
    pressed = false;
    avaible = true;
    defineFont(DNT_FONT_ARIAL, 12);
-   type = GUI_BUTTON;
+   type = FARSO_OBJECT_BUTTON;
 }
 
 /***********************************************************

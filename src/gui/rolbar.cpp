@@ -7,6 +7,9 @@
 #include "guilist.h"
 #include "interface.h"
 
+#include <iostream>
+using namespace std;
+
 #define ROLBAR_UPDATE_RATE 50
 
 /*********************************************************************
@@ -19,12 +22,12 @@ rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list,
    lastUpdated = SDL_GetTicks();
    if(!list)
    {
-      printf("Unknow Objects List when inserting rolBar!\n");
+      cerr << "Unknow Objects List when inserting rolBar!" << endl;
       return;
    }
    intList = list;
 
-   type = GUI_ROL_BAR;
+   type = FARSO_OBJECT_ROL_BAR;
    x1 = xa;
    y1 = ya;
    x2 = xb;
@@ -70,7 +73,7 @@ bool rolBar::eventGot(int type, guiObject* object)
    if((SDL_GetTicks() - lastUpdated) >= ROLBAR_UPDATE_RATE)
    {
       lastUpdated = SDL_GetTicks();
-      if(type == ON_PRESS_BUTTON)
+      if(type == FARSO_EVENT_ON_PRESS_BUTTON)
       {
          if(object == (guiObject*)up)
          {

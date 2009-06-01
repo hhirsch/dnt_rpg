@@ -32,7 +32,7 @@ fileSel::fileSel(int x, int y, bool load, string dir, void* list, bool nav)
    x2 = x+250;
    y1 = y;
    y2 = y+155;
-   type = GUI_FILE_SEL;
+   type = FARSO_OBJECT_FILE_SEL;
    curDir = dir;
    lastAction = FILE_SEL_ACTION_NONE;
    lastDir = -1;
@@ -358,7 +358,7 @@ bool fileSel::eventGot(int type, guiObject* object)
    lastAction = FILE_SEL_ACTION_NONE;
    switch(type)
    { 
-      case PRESSED_BUTTON:
+      case FARSO_EVENT_PRESSED_BUTTON:
       {
          /* Pressed Accept Button */
          if( (object == acceptButton) && 
@@ -377,7 +377,7 @@ bool fileSel::eventGot(int type, guiObject* object)
          }
       }
       break;
-      case SELECTED_LIST_TEXT:
+      case FARSO_EVENT_SELECTED_LIST_TEXT:
       {
          /* Selected a file of a directory */
          if(object == textFiles)

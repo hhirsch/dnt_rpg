@@ -23,7 +23,7 @@ textBar::textBar(int xa,int ya,int xb,int yb, string text1, bool cripto,
    pos = 0;
    lastChar='\0';
    cript = cripto;
-   type = GUI_TEXT_BAR;
+   type = FARSO_OBJECT_TEXT_BAR;
    text = text1;
    wSurface = screen;
 }

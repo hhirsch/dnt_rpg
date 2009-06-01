@@ -42,7 +42,7 @@ picture::picture(int x,int y,int w,int h,const char* arquivo)
    y1 = y;
    x2 = x+w;
    y2 = y+h;
-   type = GUI_PICTURE;
+   type = FARSO_OBJECT_PICTURE;
  
    if(arquivo!=NULL)
    {

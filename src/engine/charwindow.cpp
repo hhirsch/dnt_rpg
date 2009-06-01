@@ -309,7 +309,7 @@ int charWindow::treat(guiObject* object, int eventInfo,
       }
    }
 
-   if(eventInfo == PRESSED_BUTTON)
+   if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
    {
       /* Ok Button */
       if(object == (guiObject*)okButton)

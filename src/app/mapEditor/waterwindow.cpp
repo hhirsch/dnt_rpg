@@ -171,7 +171,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
       activeWater->getPosition(wX, wY, wZ);
    }
 
-   if(type == ON_PRESS_TAB_BUTTON)
+   if(type == FARSO_EVENT_ON_PRESS_TAB_BUTTON)
    {
       /* Waterfall Up/Down */
       if(object == (guiObject*)buttonMoveWaterUp)
@@ -368,7 +368,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
 
    }
 
-   else if(type == PRESSED_TAB_BUTTON)
+   else if(type == FARSO_EVENT_PRESSED_TAB_BUTTON)
    {
       /* Waterfall Controller */
       if(object == (guiObject*)buttonNextWater)
@@ -455,7 +455,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          return(true);
       }
    }
-   else if(type == ON_PRESS_BUTTON)
+   else if(type == FARSO_EVENT_ON_PRESS_BUTTON)
    {
       if(object == (guiObject*)dxWaterflowMore)
       {

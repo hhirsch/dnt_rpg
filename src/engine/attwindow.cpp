@@ -518,7 +518,7 @@ int attWindow::treat(guiObject* object, int eventInfo, guiInterface* inter,
    char tmp[5];
    int i;
 
-   if(eventInfo == PRESSED_BUTTON)
+   if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
    {
       /* Confirm */
       if(object == (guiObject*) buttonConfirm)

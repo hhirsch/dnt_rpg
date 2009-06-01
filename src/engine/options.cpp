@@ -1008,7 +1008,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
    }
 
    /* The other events verify */
-   if( (eventInfo == ON_PRESS_BUTTON) && 
+   if( (eventInfo == FARSO_EVENT_ON_PRESS_BUTTON) && 
          (SDL_GetTicks() - timeLastOperation > 100) )
    {
       timeLastOperation = SDL_GetTicks();
@@ -1183,7 +1183,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
 
 
    }
-   else if(eventInfo == PRESSED_BUTTON) 
+   else if(eventInfo == FARSO_EVENT_PRESSED_BUTTON) 
    {
       /* Confirm */
       if( (object == (guiObject*) buttonConfirm) )
@@ -1271,7 +1271,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          }
       }
    }
-   else if(eventInfo == MODIFIED_CX_SEL)
+   else if(eventInfo == FARSO_EVENT_MODIFIED_CX_SEL)
    {
       /* cxSelParticles */
       if( (object == (guiObject*) cxSelParticles) || 

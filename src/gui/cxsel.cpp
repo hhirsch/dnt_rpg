@@ -17,7 +17,7 @@ cxSel::cxSel(int x, int y):guiObject()
    avaible = true;
    selected = false;
    lastChangeTime = SDL_GetTicks();
-   type = GUI_SEL_BOX;
+   type = FARSO_OBJECT_SEL_BOX;
 }
 
 /**********************************************************

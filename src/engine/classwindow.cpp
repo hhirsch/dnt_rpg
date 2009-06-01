@@ -290,7 +290,7 @@ void classWindow::setDescription()
  ********************************************************************/
 int classWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
 {
-   if(eventInfo == PRESSED_BUTTON)
+   if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
    {
       if( (object == (guiObject*) buttonNext) || 
           (object == (guiObject*) buttonPrevious))

@@ -12,7 +12,7 @@ healthBar::healthBar(int x1, int y1, int x2, int y2)
    this->y2 = y2;
    this->maxHealth = 1;
    this->actualHealth = 1;
-   this->type = GUI_HEALTH_BAR;
+   this->type = FARSO_OBJECT_HEALTH_BAR;
 }
 
 /****************************************************************

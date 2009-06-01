@@ -5,24 +5,29 @@
 #ifndef _guiobject_h
 #define _guiobject_h
 
-#define GUI_WINDOW        0
-#define GUI_BUTTON        1
-#define GUI_TEXT_BAR      2
-#define GUI_SEL_BOX       3
-#define GUI_PICTURE       4
-#define GUI_SEL_TEXT      5
-#define GUI_TEXT_BOX      6
-#define GUI_MENU_ITEM     7
-#define GUI_TAB_BUTTON    8
-#define GUI_ROL_BAR       9
-#define GUI_LIST_TEXT    10
-#define GUI_FILE_SEL     11
-#define GUI_HEALTH_BAR   12
-#define GUI_TAB_BOX      13
-
 #include <SDL/SDL.h>
+#include <iostream>
 #include <string>
 using namespace std;
+
+/*! The farso guiObject types */
+enum
+{
+   FARSO_OBJECT_WINDOW,
+   FARSO_OBJECT_BUTTON,
+   FARSO_OBJECT_TEXT_BAR,
+   FARSO_OBJECT_SEL_BOX,
+   FARSO_OBJECT_PICTURE,
+   FARSO_OBJECT_SEL_TEXT,
+   FARSO_OBJECT_TEXT_BOX,
+   FARSO_OBJECT_MENU_ITEM,
+   FARSO_OBJECT_TAB_BUTTON,
+   FARSO_OBJECT_ROL_BAR,
+   FARSO_OBJECT_LIST_TEXT,
+   FARSO_OBJECT_FILE_SEL,
+   FARSO_OBJECT_HEALTH_BAR,
+   FARSO_OBJECT_TAB_BOX
+};
 
 /*! The Class guiObject is a generic interface to all GUI related objects. */
 class guiObject

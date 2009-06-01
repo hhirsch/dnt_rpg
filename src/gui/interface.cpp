@@ -6,6 +6,9 @@
 #include "messages.h"
 #include <SDL/SDL_image.h>
 
+#include <iostream>
+using namespace std;
+
 int mouseX=0,mouseY=0;
 
 /*********************************************************************
@@ -24,7 +27,7 @@ guiInterface::guiInterface(char* arqfundo)
    {
        fundo = NULL;
    }
-   focus = FOCUS_GAME;
+   focus = FARSO_FOCUS_GAME;
 }
 
 /*********************************************************************
@@ -54,7 +57,7 @@ void guiInterface::verifyMouseInObjects(int x, int y, guiList* list)
    for(aux=0; aux < list->getTotal(); aux++)
    {
       /* Test selTexto */
-      if(obj->type == GUI_SEL_TEXT) 
+      if(obj->type == FARSO_OBJECT_SEL_TEXT) 
       {
          selText *st = (selText*) obj;
          int xa,ya,xb,yb;
@@ -62,18 +65,18 @@ void guiInterface::verifyMouseInObjects(int x, int y, guiList* list)
          if(ljan->getActiveWindow()->isMouseIn(x,y))
          {
             objAtivo = st;
-            focus = FOCUS_SEL_TEXT;
+            focus = FARSO_FOCUS_SEL_TEXT;
          }
       }
       /* Verify Button Table */
-      else if(obj->type == GUI_TAB_BUTTON)
+      else if(obj->type == FARSO_OBJECT_TAB_BUTTON)
       {
          tabButton *tb = (tabButton*) obj;
          if(tb->isMouseIn(x-ljan->getActiveWindow()->getX1(),
                   y-ljan->getActiveWindow()->getY1()))
          {
             objAtivo = tb;
-            focus = FOCUS_TAB_BUTTON;
+            focus = FARSO_FOCUS_TAB_BUTTON;
          }
       }
       obj = obj->next;
@@ -103,7 +106,7 @@ void guiInterface::verifyMousePressObjects(int x, int y, guiList* list)
 
    for(aux=0; aux < list->getTotal(); aux++)
    {
-      if(obj->type == GUI_BUTTON)
+      if(obj->type == FARSO_OBJECT_BUTTON)
       {
          /* Verify Click on Button */
          button *bot = (button*) obj;
@@ -112,11 +115,11 @@ void guiInterface::verifyMousePressObjects(int x, int y, guiList* list)
          {
 
             objAtivo = bot;
-            focus = FOCUS_BUTTON;
+            focus = FARSO_FOCUS_BUTTON;
          }
       }
       /* Verify Click on TextBar */ 
-      else if(obj->type == GUI_TEXT_BAR)
+      else if(obj->type == FARSO_OBJECT_TEXT_BAR)
       {
          textBar *bart = (textBar*) obj;
          if(bart->isMouseIn(x-ljan->getActiveWindow()->getX1(),
@@ -126,22 +129,22 @@ void guiInterface::verifyMousePressObjects(int x, int y, guiList* list)
             bart->defineCursorPosition(x-
                   ljan->getActiveWindow()->getX1(),
                   y-ljan->getActiveWindow()->getY1());
-            focus = FOCUS_TEXT_BAR;
+            focus = FARSO_FOCUS_TEXT_BAR;
          }
       }
       /* Verify RadioBoxes */
-      else if(obj->type == GUI_SEL_BOX)
+      else if(obj->type == FARSO_OBJECT_SEL_BOX)
       {
          cxSel* cx = (cxSel*) obj;
          if(cx->isMouseIn(x-ljan->getActiveWindow()->getX1(),
                   y-ljan->getActiveWindow()->getY1()))
          {
             objAtivo = cx;
-            focus = FOCUS_CX_SEL;
+            focus = FARSO_FOCUS_CX_SEL;
          }
       }
       /* Verify Text Select */
-      else if(obj->type == GUI_SEL_TEXT)
+      else if(obj->type == FARSO_OBJECT_SEL_TEXT)
       {
          selText* st = (selText*) obj;
          int xa,ya,xb,yb;
@@ -152,7 +155,7 @@ void guiInterface::verifyMousePressObjects(int x, int y, guiList* list)
                   yb+ljan->getActiveWindow()->getY1(),x,y))
          {
             objAtivo = st;
-            focus = FOCUS_SEL_TEXT;
+            focus = FARSO_FOCUS_SEL_TEXT;
          }
       }
       obj = obj->next;
@@ -215,10 +218,10 @@ void guiInterface::verifyRolBars(guiList* list)
    int aux;
    for(aux=0; aux < list->getTotal(); aux++)
    {
-      if(obj->type == GUI_ROL_BAR)
+      if(obj->type == FARSO_OBJECT_ROL_BAR)
       {
          rolBar* rb = (rolBar*)obj;
-         if(rb->eventGot(ON_PRESS_BUTTON, objAtivo))
+         if(rb->eventGot(FARSO_EVENT_ON_PRESS_BUTTON, objAtivo))
          {
             ljan->getActiveWindow()->draw(0,0);
             rb->redraw();
@@ -243,7 +246,7 @@ guiObject* guiInterface::manipulateEvents(int x, int y, Uint8 Mbotao,
 {
    guiObject* actObj = verifySingleEvents(x,y,Mbotao,tecla, eventInfo);
 
-   if( (eventInfo != NOTHING) && (ljan->getActiveWindow() != NULL) )
+   if( (eventInfo != FARSO_EVENT_NONE) && (ljan->getActiveWindow() != NULL) )
    {
       actObj = verifyCompositeEvents(actObj, eventInfo);
       actObj = verifyFileSelectorsEvents(actObj, eventInfo);
@@ -265,8 +268,8 @@ guiObject* guiInterface::verifyFileSelectorsEvents(guiObject* actObj,
    for(aux=0; aux < ljan->getActiveWindow()->getObjectsList()->getTotal(); 
        aux++)
    {
-      /* Verify GUI_FILE_SEL */
-      if(obj->type == GUI_FILE_SEL)
+      /* Verify FARSO_OBJECT_FILE_SEL */
+      if(obj->type == FARSO_OBJECT_FILE_SEL)
       {
          fileSel* fs = (fileSel*)obj;
          if(fs->eventGot(eventInfo, actObj))
@@ -275,19 +278,19 @@ guiObject* guiInterface::verifyFileSelectorsEvents(guiObject* actObj,
             switch(fs->getLastAction())
             {
                case FILE_SEL_ACTION_ACCEPT:
-                  eventInfo = FILE_SEL_ACCEPT;
+                  eventInfo = FARSO_EVENT_FILE_SEL_ACCEPT;
                break;
                case FILE_SEL_ACTION_CANCEL:
-                  eventInfo = FILE_SEL_CANCEL;
+                  eventInfo = FARSO_EVENT_FILE_SEL_CANCEL;
                break;
                case FILE_SEL_ACTION_SELECT:
-                  eventInfo = FILE_SEL_CHANGED;
+                  eventInfo = FARSO_EVENT_FILE_SEL_CHANGED;
                break;
                default:
-                  eventInfo = NOTHING;
+                  eventInfo = FARSO_EVENT_NONE;
                break;
             }
-            focus = FOCUS_GAME;
+            focus = FARSO_FOCUS_GAME;
          }
       }
       obj = obj->next;
@@ -308,15 +311,15 @@ guiObject* guiInterface::verifyCompositeEvents(guiObject* actObj,
    for(aux=0; aux < ljan->getActiveWindow()->getObjectsList()->getTotal(); 
        aux++)
    {
-      /* Verify GUI_LIST_TEXT */
-      if(obj->type == GUI_LIST_TEXT)
+      /* Verify FARSO_OBJECT_LIST_TEXT */
+      if(obj->type == FARSO_OBJECT_LIST_TEXT)
       {
          listText* lt = (listText*)obj;
          if(lt->eventGot(eventInfo, actObj))
          {
             ljan->getActiveWindow()->draw(0,0);
-            eventInfo = SELECTED_LIST_TEXT;
-            focus = FOCUS_GAME;
+            eventInfo = FARSO_EVENT_SELECTED_LIST_TEXT;
+            focus = FARSO_FOCUS_GAME;
             actObj = obj;
             return(lt);
          }
@@ -326,7 +329,7 @@ guiObject* guiInterface::verifyCompositeEvents(guiObject* actObj,
 
    /* Verify Warning Window */
    warning warn;
-   if( (warn.isOpened()) && (eventInfo == PRESSED_BUTTON) &&
+   if( (warn.isOpened()) && (eventInfo == FARSO_EVENT_PRESSED_BUTTON) &&
        (actObj == warn.getOkButton()) )
    {
       warn.close();
@@ -351,21 +354,21 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
 
     if(!objAtivo)
     {
-       focus = FOCUS_GAME;
+       focus = FARSO_FOCUS_GAME;
     }
 
     if(ljan->getActiveWindow() == NULL)
     {
-       eventInfo = NOTHING;
-       focus = FOCUS_GAME;
+       eventInfo = FARSO_EVENT_NONE;
+       focus = FARSO_FOCUS_GAME;
        return(NULL);
     }
 
     /* Keyboard Events */
-    if ( (tecla[SDLK_ESCAPE]) && (focus != FOCUS_GAME))
+    if ( (tecla[SDLK_ESCAPE]) && (focus != FARSO_FOCUS_GAME))
     {
-       focus = FOCUS_GAME;
-       eventInfo = EXIT;
+       focus = FARSO_FOCUS_GAME;
+       eventInfo = FARSO_EVENT_EXIT;
        return(NULL);
     }
 
@@ -373,19 +376,19 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
     if(ljan->getMenu())
     {
        objAtivo = (guiObject*) ljan->getMenu();
-       focus = FOCUS_MENU;
+       focus = FARSO_FOCUS_MENU;
     }
     else /* Verify Window Super Menu */
     if(ljan->getActiveWindow()->getObjectsList()->getMenu())
     {
        objAtivo = (guiObject*) 
                            ljan->getActiveWindow()->getObjectsList()->getMenu();
-       focus = FOCUS_MENU;
+       focus = FARSO_FOCUS_MENU;
     }
 
     /* Mouse move to change focus */
     if( (x != mouseX || y != mouseY) && 
-        (focus == FOCUS_GAME) )
+        (focus == FARSO_FOCUS_GAME) )
     {
         mouseX = x;
         mouseY = y;
@@ -400,7 +403,7 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
     }
 
     /* Verify mouse button for focus change */
-    if((Mbotao & SDL_BUTTON(1)) &&  (focus == FOCUS_GAME))
+    if((Mbotao & SDL_BUTTON(1)) &&  (focus == FARSO_FOCUS_GAME))
     {
         if( ( (ljan->getActiveWindow() != NULL) && 
               (ljan->getActiveWindow()->canMoveWindow()) ) &&
@@ -413,7 +416,7 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
            ljan->getActiveWindow()->setDiff(x-ljan->getActiveWindow()->getX1(),
                                             y-ljan->getActiveWindow()->getY1());
            objAtivo = (guiObject*) ljan->getActiveWindow();
-           focus = FOCUS_WINDOW_MOVE;
+           focus = FARSO_FOCUS_WINDOW_MOVE;
         }
         else if ( (ljan->getActiveWindow() != NULL) &&
                   (ljan->getActiveWindow()->isMouseIn(x,y)))
@@ -427,16 +430,16 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
             if(ot)
             {
                /* got event on tabbox */
-               eventInfo = TAB_BOX_CHANGED;
+               eventInfo = FARSO_EVENT_TAB_BOX_CHANGED;
                return(ot);
             }
             
-            eventInfo = CLICKED_WINDOW;
+            eventInfo = FARSO_EVENT_CLICKED_WINDOW;
             return((guiObject*) ljan->getActiveWindow());
         }
         else if( (!ljan->getActiveWindow()->isModal()) )
         {
-           /* Test Other Windows Activation (with the current one 
+           /* Test Other Windows Activation (if the current one 
             * isn't a modal window) */
            int aux; 
            window *jaux=(window*)ljan->getFirst();
@@ -446,9 +449,9 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
                    (jaux != ljan->getActiveWindow())  && 
                    (jaux->isMouseIn(x,y)))
                {
-                    focus = FOCUS_GAME;
+                    focus = FARSO_FOCUS_GAME;
                     jaux->activate();
-                    eventInfo = ACTIVATED_WINDOW;
+                    eventInfo = FARSO_EVENT_ACTIVATED_WINDOW;
                     mouseX = -1;
                     return((guiObject*) jaux);
                }
@@ -457,20 +460,20 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
         } 
     }
 
-    /*  FOCUS ON WINDOW MOVIMENTATION  */
-    if(focus == FOCUS_WINDOW_MOVE)
+    /*  FARSO_FOCUS ON WINDOW MOVIMENTATION  */
+    if(focus == FARSO_FOCUS_WINDOW_MOVE)
     {
         if(!(ljan->getActiveWindow()->doMove(fundo,x,y,Mbotao)))
         {
-           focus = FOCUS_GAME;
+           focus = FARSO_FOCUS_GAME;
         }
-        eventInfo = MOVED_WINDOW;
+        eventInfo = FARSO_EVENT_MOVED_WINDOW;
         return(objAtivo);
     }
 
-    /* FOCUS ON BUTTON PRESSED */
+    /* FARSO_FOCUS ON BUTTON PRESSED */
     else
-    if(focus == FOCUS_BUTTON)
+    if(focus == FARSO_FOCUS_BUTTON)
     {
         int pronto;
         button* bot = (button*)objAtivo;
@@ -488,11 +491,11 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
                  men->setPosition(bot->getX1(),bot->getY2()+1);
                  if (!bot->getText().compare("-"))
                  {
-                    focus = FOCUS_WINDOW_MENU;
+                    focus = FARSO_FOCUS_WINDOW_MENU;
                  }
                  else
                  {
-                    focus = FOCUS_MENU;
+                    focus = FARSO_FOCUS_MENU;
                  }                 
               }
               else if (!bot->getText().compare(fnt.createUnicode(0x25CF)))
@@ -502,16 +505,16 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
                   {
                      ljan->removeWindow(ljan->getActiveWindow());
                   }
-                  focus = FOCUS_GAME;
-                  eventInfo = CLOSED_WINDOW;
+                  focus = FARSO_FOCUS_GAME;
+                  eventInfo = FARSO_EVENT_CLOSED_WINDOW;
                   return(NULL);
               }
               else
               {
-                  focus = FOCUS_GAME;
+                  focus = FARSO_FOCUS_GAME;
               }
               
-              eventInfo = PRESSED_BUTTON;
+              eventInfo = FARSO_EVENT_PRESSED_BUTTON;
               return(objAtivo);
            }
            else
@@ -519,21 +522,21 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
               /* Verify RolBar */
               verifyRolBars(ljan->getActiveWindow()->getObjectsList());
 
-              eventInfo = ON_PRESS_BUTTON;
+              eventInfo = FARSO_EVENT_ON_PRESS_BUTTON;
               return(objAtivo);
            }
         }
         else if(pronto)
         {
-           focus = FOCUS_GAME;
+           focus = FARSO_FOCUS_GAME;
         }
-        eventInfo = ON_PRESS_BUTTON;
+        eventInfo = FARSO_EVENT_ON_PRESS_BUTTON;
         return(objAtivo);
     }
  
-    /* FOCUS ON BARTEXT WRITE */
+    /* FARSO_FOCUS ON BARTEXT WRITE */
     else 
-    if (focus == FOCUS_TEXT_BAR)
+    if (focus == FARSO_FOCUS_TEXT_BAR)
     {
         textBar* bart = (textBar*)objAtivo;
         if((bart->doWrite(x - ljan->getActiveWindow()->getX1(),
@@ -541,29 +544,29 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
                           ljan->getActiveWindow()->getSurface(), 
                           Mbotao,tecla)))
         {
-           focus = FOCUS_GAME;
-           eventInfo = WROTE_TEXT_BAR;
+           focus = FARSO_FOCUS_GAME;
+           eventInfo = FARSO_EVENT_WROTE_TEXT_BAR;
            return(objAtivo);
         }
-       eventInfo = WROTE_TEXT_BAR; 
+       eventInfo = FARSO_EVENT_WROTE_TEXT_BAR; 
        return(objAtivo);
     }
     
-    /* FOCUS ON RADIOBOXES */
+    /* FARSO_FOCUS ON RADIOBOXES */
     else 
-    if(focus == FOCUS_CX_SEL)
+    if(focus == FARSO_FOCUS_CX_SEL)
     {
        cxSel* cx = (cxSel*)objAtivo;
        cx->invertSelection();
        cx->draw(ljan->getActiveWindow()->getSurface());
-       focus = FOCUS_GAME;
-       eventInfo = MODIFIED_CX_SEL;
+       focus = FARSO_FOCUS_GAME;
+       eventInfo = FARSO_EVENT_MODIFIED_CX_SEL;
        return(objAtivo);
     }
 
-    /* FOCUS ON MENUS */
+    /* FARSO_FOCUS ON MENUS */
     else
-    if ((focus == FOCUS_MENU) || (focus == FOCUS_WINDOW_MENU))
+    if ((focus == FARSO_FOCUS_MENU) || (focus == FARSO_FOCUS_WINDOW_MENU))
     {
        int pronto;
        menu* men = (menu*)objAtivo;
@@ -573,11 +576,11 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
                           ljan->getActiveWindow()->getX1(),
                           ljan->getActiveWindow()->getY1());
 
-       eventInfo = MODIFIED_MENU;
+       eventInfo = FARSO_EVENT_MODIFIED_MENU;
        ljan->getActiveWindow()->setChanged();
 
         
-       if( (focus == FOCUS_WINDOW_MENU) && 
+       if( (focus == FARSO_FOCUS_WINDOW_MENU) && 
            (res == WINDOW_MENU_CLOSE) && (pronto))
        {
            if(ljan->getActiveWindow()->canCloseWindow())
@@ -588,28 +591,28 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
            {
               ljan->getActiveWindow()->draw(x,y);
            }
-           focus = FOCUS_GAME;
-           eventInfo = CLOSED_WINDOW;
+           focus = FARSO_FOCUS_GAME;
+           eventInfo = FARSO_EVENT_CLOSED_WINDOW;
            return(NULL);
        }
        else if((res) && (pronto)) 
        {
           ljan->getActiveWindow()->draw(x,y);
-          eventInfo = SELECTED_MENU;
-          focus = FOCUS_GAME;
+          eventInfo = FARSO_EVENT_SELECTED_MENU;
+          focus = FARSO_FOCUS_GAME;
        }
        else if(pronto)
        {
           ljan->getActiveWindow()->draw(x,y);
-          focus = FOCUS_GAME;
-          eventInfo = SELECTED_MENU;
+          focus = FARSO_FOCUS_GAME;
+          eventInfo = FARSO_EVENT_SELECTED_MENU;
        }
        return(objAtivo);
     }
 
-    /* FOCUS ON TEXT SELECT  */
+    /* FARSO_FOCUS ON TEXT SELECT  */
     else
-    if ((focus == FOCUS_SEL_TEXT) /*&& (x != mouseX || y != mouseY)*/ )
+    if ((focus == FARSO_FOCUS_SEL_TEXT) /*&& (x != mouseX || y != mouseY)*/ )
     {
         mouseX = x;
         mouseY = y;
@@ -619,27 +622,26 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
                              Mbotao,ljan->getActiveWindow()->getSurface());
         if(res == -1)
         {
-            focus = FOCUS_GAME;
-            eventInfo = NOTHING;
+            focus = FARSO_FOCUS_GAME;
+            eventInfo = FARSO_EVENT_NONE;
             /* Redraw, since the last selected now is -1! */
             //ljan->getActiveWindow()->draw(0,0);
         }
         else if(res < 0)
         {
-          eventInfo = MODIFIED_SEL_TEXT;
-          //ljan->getActiveWindow()->draw(0,0);
+          eventInfo = FARSO_EVENT_MODIFIED_SEL_TEXT;
         }
         else
         {
-          eventInfo = SELECTED_SEL_TEXT;
+          eventInfo = FARSO_EVENT_SELECTED_SEL_TEXT;
         }
 
         return(objAtivo);
     }
 
-    /* FOCUS ON TABBUTTON */
+    /* FARSO_FOCUS ON TABBUTTON */
     else
-    if ((focus == FOCUS_TAB_BUTTON))
+    if ((focus == FARSO_FOCUS_TAB_BUTTON))
     {
        int actType = 0;
        tabButton* tb = (tabButton*) objAtivo;
@@ -654,36 +656,12 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
          if(actType == TABBUTTON_PRESSED)
          {
             bool verified = false;
-#if 0
-            /* Verify List Text */
-            guiObject *obj = 
-                    ljan->getActiveWindow()->getObjectsList()->getFirst();
-            int aux;
-            for(aux=0; 
-                aux < ljan->getActiveWindow()->getObjectsList()->getTotal(); 
-                aux++)
-            {
-               if(obj->type == GUI_LIST_TEXT)
-               {
-                  listText* lt = (listText*)obj;
-                  if(lt->eventGot(PRESSED_TAB_BUTTON, object))
-                  {
-                     ljan->getActiveWindow()->draw(0,0);
-                     verified = true;
-                     eventInfo = SELECTED_LIST_TEXT;
-                     focus = FOCUS_GAME;
-                     return(lt);
-                  }
-               }
-               obj = obj->next;
-            }
-#endif            
             /* Is not a list text pressed, so return calling for treat 
              * the event! */
             if(!verified)
             {
-               focus = FOCUS_GAME;
-               eventInfo = PRESSED_TAB_BUTTON;
+               focus = FARSO_FOCUS_GAME;
+               eventInfo = FARSO_EVENT_PRESSED_TAB_BUTTON;
                /* Change the saved mouse position to can take that it is
                 * inner on a tabButton again. */
                mouseX = -1;
@@ -692,13 +670,13 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
          }
          else if(actType == TABBUTTON_ON_PRESS)
          {
-            eventInfo = ON_PRESS_TAB_BUTTON;
+            eventInfo = FARSO_EVENT_ON_PRESS_TAB_BUTTON;
             return(object);
          }  
          else
          {
             /* Still in focus, but no pressed */
-            eventInfo = ON_FOCUS_TAB_BUTTON;
+            eventInfo = FARSO_EVENT_ON_FOCUS_TAB_BUTTON;
             return(object);
          }
        }
@@ -707,14 +685,12 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
           if(!tb->isMouseIn(x-ljan->getActiveWindow()->getX1(),
                             y-ljan->getActiveWindow()->getY1()))
           {
-             focus = FOCUS_GAME;
+             focus = FARSO_FOCUS_GAME;
           }
        }
     }
          
-
-    /* If here, no actions were made on GUI */
-    eventInfo = NOTHING;
+    eventInfo = FARSO_EVENT_NONE;
     return(NULL);
 }
 
@@ -771,7 +747,7 @@ window* guiInterface::getActiveWindow()
  *********************************************************************/
 void guiInterface::clearActiveObject()
 {
-   focus = FOCUS_GAME;
+   focus = FARSO_FOCUS_GAME;
    objAtivo = NULL;
 }
 

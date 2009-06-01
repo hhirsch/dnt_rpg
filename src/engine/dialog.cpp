@@ -1395,7 +1395,7 @@ bool dialogWindow::treat(guiObject* guiObj, int eventInfo, itemWindow* infoW,
       return(false);
    }
 
-   if(eventInfo == SELECTED_SEL_TEXT)
+   if(eventInfo == FARSO_EVENT_SELECTED_SEL_TEXT)
    {
       if(guiObj == (guiObject*)pcSelText)
       {
@@ -1410,7 +1410,7 @@ bool dialogWindow::treat(guiObject* guiObj, int eventInfo, itemWindow* infoW,
          return(true);
       }
    }
-   else if(eventInfo == PRESSED_BUTTON)
+   else if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
    {
       if(guiObj == (guiObject*)barterButton)
       {

@@ -736,7 +736,7 @@ void editor::updateTexts()
  ************************************************************************/
 void editor::treatGuiEvents()
 {
-   int eventInfo = NOTHING;
+   int eventInfo = FARSO_EVENT_NONE;
 
    done = false;
 
@@ -744,7 +744,7 @@ void editor::treatGuiEvents()
    guiObject* obj = gui->manipulateEvents(mouseX, mouseY, mButton, 
                                           keys, eventInfo);
 
-   if(eventInfo == NOTHING)
+   if(eventInfo == FARSO_EVENT_NONE)
    {
       /* No Event, so must treat Camera Input */
       gameCamera->doIO(keys, mButton, mouseX, mouseY, DELTA_CAMERA);
@@ -759,7 +759,7 @@ void editor::treatGuiEvents()
          }
       }
    }
-   else if(eventInfo == PRESSED_BUTTON)
+   else if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
    {
       /* Exit was pressed! */
       if(obj == buttonExit)
@@ -809,12 +809,12 @@ void editor::treatGuiEvents()
       }
    }
    /* Text Bars Change Events */
-   else if(eventInfo == WROTE_TEXT_BAR)
+   else if(eventInfo == FARSO_EVENT_WROTE_TEXT_BAR)
    {
       treatTextBars(obj);
    }
    /* File Selectors Things */
-   else if(eventInfo == FILE_SEL_ACCEPT)
+   else if(eventInfo == FARSO_EVENT_FILE_SEL_ACCEPT)
    {
       if(fileWindow)
       {
@@ -846,7 +846,7 @@ void editor::treatGuiEvents()
          }
       }
    }
-   else if(eventInfo == FILE_SEL_CANCEL)
+   else if(eventInfo == FARSO_EVENT_FILE_SEL_CANCEL)
    {
       if(fileWindow)
       {

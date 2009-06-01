@@ -65,7 +65,7 @@ guiObject* menu::getItem(int i)
    guiObject* it= (guiObject*) first;
    if(i <= (total-numPictures))
    {
-      while(it->type == GUI_PICTURE)
+      while(it->type == FARSO_OBJECT_PICTURE)
       {
          /* Ignore Pictures */
          it = (guiObject*) it->next;
@@ -75,7 +75,7 @@ guiObject* menu::getItem(int i)
       for(aux=1;((aux < i) && (it));aux++)
       {
          it = (guiObject*) it->next;
-         while(it->type == GUI_PICTURE)
+         while(it->type == FARSO_OBJECT_PICTURE)
          {
             /* Ignore Pictures */
             it = (guiObject*) it->next;
@@ -169,7 +169,7 @@ void menu::draw(int pos, SDL_Surface *screen)
    for (k=0; k < total; k++)
    {
       /* Treat Pictures */
-      if(item->type == GUI_PICTURE)
+      if(item->type == FARSO_OBJECT_PICTURE)
       {
          picture* pic = (picture*)item;
          pic->setCoordinate(xa, ya+med+1, xa+10, ya+10+med+1);
@@ -178,7 +178,7 @@ void menu::draw(int pos, SDL_Surface *screen)
          xa = x1+15;
       }
       /* treat Texts */
-      else if(item->type == GUI_TEXT_BOX)
+      else if(item->type == FARSO_OBJECT_TEXT_BOX)
       {
          color_Set(Colors.colorText.R,
                Colors.colorText.G,

@@ -135,7 +135,7 @@ void aspectWindow::loadImages()
  **************************************************************/
 int aspectWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
 {
-   if(eventInfo == PRESSED_BUTTON)
+   if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
    {
       /* Confirm */
       if(object == (guiObject*) buttonConfirm)
@@ -195,7 +195,7 @@ int aspectWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
          figurePortrait->set(images[curImage].image);
       }
    }
-   else if(eventInfo == MODIFIED_CX_SEL)
+   else if(eventInfo == FARSO_EVENT_MODIFIED_CX_SEL)
    {
       /* Female */
       if(object == (guiObject*) cxSelSexF)

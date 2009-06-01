@@ -429,7 +429,7 @@ int inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
    switch(eventInfo)
    {
       /* Changes to the Current Inventory */
-      case TAB_BOX_CHANGED:
+      case FARSO_EVENT_TAB_BOX_CHANGED:
       {
          if(guiObj == (guiObject*)inventoryTabBox)
          {
@@ -445,7 +445,7 @@ int inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
       break;
 
       /* Accessing inventory or equipment slots! */
-      case PRESSED_TAB_BUTTON:
+      case FARSO_EVENT_PRESSED_TAB_BUTTON:
       {
          /* Inventory Spaces Selected */
          if( (guiObj == (guiObject*) inventoryButton[0]) ||
@@ -608,7 +608,7 @@ int inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
       break;
      
       /* Verify Menu Options */
-      case SELECTED_MENU:
+      case FARSO_EVENT_SELECTED_MENU:
       {
          if(objectMenu)
          {

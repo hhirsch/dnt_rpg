@@ -1065,7 +1065,7 @@ int engine::optionsScreen(GLuint idTextura)
    Uint8* keys;
    int x,y;
    guiObject* object = NULL;
-   int eventInfo = NOTHING;
+   int eventInfo = FARSO_EVENT_NONE;
 
    glDisable(GL_LIGHTING);
 
@@ -1129,7 +1129,7 @@ int engine::characterScreen(GLuint idTextura)
    Uint8* keys;
    int x,y;
    guiObject* guiObj = NULL;
-   int eventInfo = NOTHING;
+   int eventInfo = FARSO_EVENT_NONE;
 
    int mods[6];
 
@@ -2873,8 +2873,6 @@ int engine::treatIO(SDL_Surface *screen)
       object = gui->manipulateEvents(x,y,mButton,keys, guiEvent);
       /* Threat the GUI */
       treatGuiEvents(object, guiEvent);
-
-
       
       /* Verify Mouse Cursor Forbidden (when can't go to position) */
       if(!gui->mouseOnGui(mouseX, mouseY))

@@ -14,43 +14,49 @@
 /********************************************************************
  *                      Return's constants                          *
  ********************************************************************/
-#define NOTHING             -1
-#define EXIT                 0
-#define MODIFIED_SEL_TEXT    1
-#define SELECTED_MENU        2
-#define PRESSED_BUTTON       3
-#define NOT_PRESSED_BUTTON   4
-#define WROTE_TEXT_BAR       5
-#define MODIFIED_CX_SEL      6
-#define CLOSED_WINDOW        7
-#define ACTIVATED_WINDOW     8
-#define MOVED_WINDOW         9
-#define CLICKED_WINDOW      10
-#define PRESSED_TAB_BUTTON  11
-#define ON_PRESS_TAB_BUTTON 12
-#define ON_PRESS_BUTTON     13
-#define MODIFIED_MENU       14
-#define SELECTED_SEL_TEXT   15
-#define SELECTED_LIST_TEXT  16
-#define ON_FOCUS_TAB_BUTTON 17
-#define FILE_SEL_ACCEPT     18
-#define FILE_SEL_CANCEL     19
-#define FILE_SEL_CHANGED    20
-#define TAB_BOX_CHANGED     21
+enum
+{
+   FARSO_EVENT_NONE,
+   FARSO_EVENT_EXIT,
+   FARSO_EVENT_MODIFIED_SEL_TEXT,
+   FARSO_EVENT_SELECTED_MENU,
+   FARSO_EVENT_PRESSED_BUTTON,
+   FARSO_EVENT_NOT_PRESSED_BUTTON,
+   FARSO_EVENT_WROTE_TEXT_BAR,
+   FARSO_EVENT_MODIFIED_CX_SEL,
+   FARSO_EVENT_CLOSED_WINDOW,
+   FARSO_EVENT_ACTIVATED_WINDOW,
+   FARSO_EVENT_MOVED_WINDOW,
+   FARSO_EVENT_CLICKED_WINDOW,
+   FARSO_EVENT_PRESSED_TAB_BUTTON,
+   FARSO_EVENT_ON_PRESS_TAB_BUTTON,
+   FARSO_EVENT_ON_PRESS_BUTTON,
+   FARSO_EVENT_MODIFIED_MENU,
+   FARSO_EVENT_SELECTED_SEL_TEXT,
+   FARSO_EVENT_SELECTED_LIST_TEXT,
+   FARSO_EVENT_ON_FOCUS_TAB_BUTTON,
+   FARSO_EVENT_FILE_SEL_ACCEPT,
+   FARSO_EVENT_FILE_SEL_CANCEL,
+   FARSO_EVENT_FILE_SEL_CHANGED,
+   FARSO_EVENT_TAB_BOX_CHANGED
+};
 
 /********************************************************************
  *                       Focus's constants                          *
  ********************************************************************/
-#define FOCUS_WINDOW         1
-#define FOCUS_TEXT_BAR       2
-#define FOCUS_BUTTON         3
-#define FOCUS_CX_SEL         4
-#define FOCUS_MENU           5
-#define FOCUS_SEL_TEXT       6
-#define FOCUS_WINDOW_MOVE    7
-#define FOCUS_WINDOW_MENU    8
-#define FOCUS_TAB_BUTTON     9
-#define FOCUS_GAME         100
+enum
+{
+   FARSO_FOCUS_WINDOW,
+   FARSO_FOCUS_TEXT_BAR,
+   FARSO_FOCUS_BUTTON,
+   FARSO_FOCUS_CX_SEL,
+   FARSO_FOCUS_MENU,
+   FARSO_FOCUS_SEL_TEXT,
+   FARSO_FOCUS_WINDOW_MOVE,
+   FARSO_FOCUS_WINDOW_MENU,
+   FARSO_FOCUS_TAB_BUTTON,
+   FARSO_FOCUS_GAME
+};
 
 
 /*! guiInterface is the GUI upper level class. Is from it that all GUI events

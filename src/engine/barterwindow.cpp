@@ -341,7 +341,7 @@ bool barterWindow::treat(guiObject* guiObj, int eventInfo, int mouseX,
    /* Gather GUI events */
    switch(eventInfo)
    {
-      case PRESSED_BUTTON:
+      case FARSO_EVENT_PRESSED_BUTTON:
       {
          /* Cancel the Barter */
          if(guiObj == (guiObject*) cancelButton)
@@ -365,7 +365,7 @@ bool barterWindow::treat(guiObject* guiObj, int eventInfo, int mouseX,
       }
       break;
 
-      case PRESSED_TAB_BUTTON:
+      case FARSO_EVENT_PRESSED_TAB_BUTTON:
       {
          /* Inventory Spaces Selected */
          if( (guiObj == (guiObject*) buyerInv) || 
@@ -404,7 +404,7 @@ bool barterWindow::treat(guiObject* guiObj, int eventInfo, int mouseX,
       }
       break;
 
-      case SELECTED_MENU:
+      case FARSO_EVENT_SELECTED_MENU:
       {
          if( (objectMenu) && (activeObject))
          {

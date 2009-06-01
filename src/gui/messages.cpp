@@ -40,7 +40,7 @@ string getStringFromUser(string title, string previous,
 
    while(!quit)
    {
-      int eventInfo = NOTHING;
+      int eventInfo = FARSO_EVENT_NONE;
       SDL_PumpEvents();
       keys = SDL_GetKeyState(NULL);
       mButton = SDL_GetMouseState(&mouseX,&mouseY);
@@ -48,7 +48,7 @@ string getStringFromUser(string title, string previous,
       guiObject* object;
       object = gui->manipulateEvents(mouseX, mouseY, mButton, keys, eventInfo);
 
-      if(eventInfo == PRESSED_BUTTON)
+      if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
       {
          if(object == (guiObject*) okButton)
          {
@@ -140,7 +140,7 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
 
    while(!quit)
    {
-      int eventInfo = NOTHING;
+      int eventInfo = FARSO_EVENT_NONE;
       SDL_PumpEvents();
       keys = SDL_GetKeyState(NULL);
       mButton = SDL_GetMouseState(&mouseX,&mouseY);
@@ -148,7 +148,7 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
       guiObject* object;
       object = gui->manipulateEvents(mouseX, mouseY, mButton, keys, eventInfo);
 
-      if(eventInfo == PRESSED_BUTTON)
+      if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
       {
          if(object == (guiObject*) opt1Button)
          {
@@ -305,7 +305,7 @@ bool quantityWindow::verifyEvents(guiObject* actObj, int eventInfo)
 {
    if(isOpened())
    {
-      if(eventInfo == PRESSED_BUTTON)
+      if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
       {
          if(actObj == okButton)
          {
@@ -314,7 +314,7 @@ bool quantityWindow::verifyEvents(guiObject* actObj, int eventInfo)
             return(true);
          }
       }
-      else if(eventInfo == ON_PRESS_BUTTON)
+      else if(eventInfo == FARSO_EVENT_ON_PRESS_BUTTON)
       {
          if(actObj == moreButton)
          {

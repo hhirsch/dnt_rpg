@@ -214,7 +214,7 @@ window::window(int xa, int ya, int xb, int yb, string title, void* list)
    minMaxButton->defineFont(DNT_FONT_ARIAL, 8);
 
    /* Set the object type as WINDOW! */
-   type = GUI_WINDOW;
+   type = FARSO_OBJECT_WINDOW;
 }
 
 /*********************************************************************

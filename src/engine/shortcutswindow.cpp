@@ -163,7 +163,7 @@ int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode)
    {
       
       /* Show Information about the shortcut */
-      case ON_FOCUS_TAB_BUTTON:
+      case FARSO_EVENT_ON_FOCUS_TAB_BUTTON:
       {
          if(object == (guiObject*) buttonAttackMode)
          {
@@ -223,7 +223,7 @@ int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode)
       break;
 
       /* Treat Shortcuts pressing */
-      case PRESSED_TAB_BUTTON:
+      case FARSO_EVENT_PRESSED_TAB_BUTTON:
       {
          if(object == (guiObject*) buttonAttackMode)
          {
@@ -256,7 +256,7 @@ int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode)
       }
 
       /* And, finally, the tree buttons */
-      case PRESSED_BUTTON:
+      case FARSO_EVENT_PRESSED_BUTTON:
       {
          if(object == (guiObject*) buttonMenu)
          {

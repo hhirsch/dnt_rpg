@@ -83,50 +83,50 @@ void guiList::draw(SDL_Surface* surface)
    {
       switch(obj->type)
       {
-         case GUI_BUTTON:
+         case FARSO_OBJECT_BUTTON:
          {
               button *b = (button*) obj;   
               b->draw(surface);
               break;
          }
-         case GUI_TEXT_BAR:
+         case FARSO_OBJECT_TEXT_BAR:
          {
               textBar *bart = (textBar*) obj; 
               bart->draw(surface);
               break;
          }
-         case GUI_SEL_BOX:
+         case FARSO_OBJECT_SEL_BOX:
          {
               cxSel *cx = (cxSel*) obj;
               cx->draw(surface);
               break;
          }
-         case GUI_SEL_TEXT:
+         case FARSO_OBJECT_SEL_TEXT:
          {
               selText *st = (selText*) obj;
               st->draw(surface);
               break;
          }
-         case GUI_PICTURE:
+         case FARSO_OBJECT_PICTURE:
          {
               picture* fig = (picture*) obj;
               fig->draw(surface);
               break;
          }
-         case GUI_TEXT_BOX:
+         case FARSO_OBJECT_TEXT_BOX:
          {
               textBox *quad = (textBox*) obj;
               quad->draw();
               break;
          }
-         case GUI_TAB_BUTTON:
+         case FARSO_OBJECT_TAB_BUTTON:
          {
               tabButton *bt = (tabButton*) obj; 
               bt->setCurrent(-1);
               bt->draw(surface);
               break;
          }
-         case GUI_HEALTH_BAR:
+         case FARSO_OBJECT_HEALTH_BAR:
          {
               healthBar* hb = (healthBar*) obj;
               hb->draw(surface);
@@ -163,67 +163,67 @@ void guiList::removeObject(guiObject *obj)
    /* Delete the memory used */
    switch (obj->type) 
    {
-      case GUI_BUTTON:
+      case FARSO_OBJECT_BUTTON:
       {
          button* b = (button*) obj;
          delete(b);
          break;
       }
-      case GUI_TEXT_BAR:
+      case FARSO_OBJECT_TEXT_BAR:
       {
          textBar* b = (textBar*) obj;
          delete(b);
          break;
       }
-      case GUI_SEL_BOX:
+      case FARSO_OBJECT_SEL_BOX:
       {
          cxSel* c = (cxSel*) obj;
          delete(c);
          break;
       }
-      case GUI_PICTURE:
+      case FARSO_OBJECT_PICTURE:
       {
          picture* f = (picture*) obj;
          delete(f);
          break;
       }
-      case GUI_SEL_TEXT:
+      case FARSO_OBJECT_SEL_TEXT:
       {
          selText* s = (selText*) obj;
          delete(s);
          break;
       }
-      case GUI_TEXT_BOX:
+      case FARSO_OBJECT_TEXT_BOX:
       {
          textBox* q = (textBox*) obj;
          delete(q);
          break;
       }
-      case GUI_TAB_BUTTON:
+      case FARSO_OBJECT_TAB_BUTTON:
       {
          tabButton* tb = (tabButton*) obj;
          delete(tb);
          break;
       }
-      case GUI_ROL_BAR:
+      case FARSO_OBJECT_ROL_BAR:
       {
          rolBar* b = (rolBar*) obj;
          delete(b);
          break;
       }
-      case GUI_LIST_TEXT:
+      case FARSO_OBJECT_LIST_TEXT:
       {
          listText* lt = (listText*) obj;
          delete(lt);
          break;
       }
-      case GUI_FILE_SEL:
+      case FARSO_OBJECT_FILE_SEL:
       {
          fileSel* fs = (fileSel*)obj;
          delete(fs);
          break;
       }
-      case GUI_HEALTH_BAR:
+      case FARSO_OBJECT_HEALTH_BAR:
       {
          healthBar* hb = (healthBar*)obj;
          delete(hb);
@@ -276,7 +276,6 @@ button* guiList::insertButton(int xa,int ya,int xb,int yb,
 {
    button* novo;
    novo = new button(xa,ya,xb,yb, text, oval);
-   novo->type = GUI_BUTTON;
    insertObject(novo);
    return(novo);
 }

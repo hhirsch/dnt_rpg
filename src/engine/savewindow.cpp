@@ -190,13 +190,13 @@ int saveWindow::run(bool load, GLdouble proj[16],GLdouble modl[16],
          /* Get Events  */
          switch(eventInfo)
          {
-            case FILE_SEL_CHANGED:
+            case FARSO_EVENT_FILE_SEL_CHANGED:
                changeInfo();
             break;
-            case FILE_SEL_CANCEL:
+            case FARSO_EVENT_FILE_SEL_CANCEL:
                state = DNT_SAVE_WINDOW_CANCEL;
             break;
-            case FILE_SEL_ACCEPT:
+            case FARSO_EVENT_FILE_SEL_ACCEPT:
                curFileName = fileSelector->getFileName();
                state = DNT_SAVE_WINDOW_CONFIRM; 
             break;
