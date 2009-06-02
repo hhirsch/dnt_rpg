@@ -54,9 +54,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="505.94115"
-     inkscape:cy="590.4074"
+     inkscape:zoom="0.7"
+     inkscape:cx="570.23762"
+     inkscape:cy="524.75462"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -971,7 +971,7 @@
          style="fill:#9c7a00;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.30000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     </g>
     <g
-       id="g5775"
+       id="g4247"
        inkscape:export-filename="/programacao/dccnitghtmare/data/cursors/g5919.png"
        inkscape:export-xdpi="46"
        inkscape:export-ydpi="46">
@@ -1267,13 +1267,10 @@
            y="420.33243" />
       </g>
       <g
-         inkscape:export-ydpi="46"
-         inkscape:export-xdpi="46"
-         inkscape:export-filename="/programacao/dccnitghtmare/data/cursors/g5694.png"
-         id="g4068">
+         id="g4237">
         <path
            sodipodi:type="spiral"
-           style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="fill:none;fill-opacity:0.75000000000000000;fill-rule:evenodd;stroke:#00cf00;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            id="path4064"
            sodipodi:cx="616.78571"
            sodipodi:cy="522.7193"
@@ -1285,18 +1282,14 @@
            d="M 622.0476,524.59052 C 621.62373,528.32678 617.7439,530.51861 614.23028,529.90519 C 612.75303,529.64729 611.37148,528.94515 610.26745,527.93391"
            transform="matrix(-1.7667675,-0.234351,0.3384666,-1.2232931,1533.515,1311.8313)" />
         <path
-           style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.47892669px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="fill:#00cf00;fill-opacity:1;fill-rule:evenodd;stroke:#00cf00;stroke-width:0.47892668999999999px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            d="M 633.41555,519.99262 L 631.83367,523.69926 L 636.02532,523.88313 L 633.41555,519.99262 z"
            id="path4066" />
       </g>
       <g
-         inkscape:export-ydpi="46"
-         inkscape:export-xdpi="46"
-         inkscape:export-filename="/programacao/dccnitghtmare/data/cursors/g5694.png"
-         transform="matrix(1,0,0,-1,0,1081.4184)"
-         id="g4072">
+         id="g4243">
         <path
-           transform="matrix(-1.7667675,-0.234351,0.3384666,-1.2232931,1533.515,1311.8313)"
+           transform="matrix(-1.7667675,0.234351,0.3384666,1.2232931,1533.515,-230.4129)"
            d="M 622.0476,524.59052 C 621.62373,528.32678 617.7439,530.51861 614.23028,529.90519 C 612.75303,529.64729 611.37148,528.94515 610.26745,527.93391"
            sodipodi:t0="0.66903204"
            sodipodi:argument="-10.237442"
@@ -1306,12 +1299,12 @@
            sodipodi:cy="522.7193"
            sodipodi:cx="616.78571"
            id="path4074"
-           style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="fill:none;fill-opacity:0.75000000000000000;fill-rule:evenodd;stroke:#00cf00;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            sodipodi:type="spiral" />
         <path
            id="path4076"
-           d="M 633.41555,519.99262 L 631.83367,523.69926 L 636.02532,523.88313 L 633.41555,519.99262 z"
-           style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.47892669px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+           d="M 633.41555,561.42578 L 631.83367,557.71914 L 636.02532,557.53527 L 633.41555,561.42578 z"
+           style="fill:#00cf00;fill-opacity:1;fill-rule:evenodd;stroke:#00cf00;stroke-width:0.47892668999999999px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       </g>
     </g>
     <g
@@ -1919,17 +1912,15 @@
       </g>
     </g>
     <g
-       id="g5746"
-       transform="translate(-149.85714,116.85714)"
+       id="g4152"
        inkscape:export-filename="/programacao/dccnitghtmare/data/cursors/g5919.png"
        inkscape:export-xdpi="46"
        inkscape:export-ydpi="46">
       <g
-         transform="translate(-1.25,4.6428572)"
-         id="g5693">
+         id="g4136">
         <path
            sodipodi:type="spiral"
-           style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="fill:none;fill-opacity:0.75000000000000000;fill-rule:evenodd;stroke:#00cf00;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            id="path5687"
            sodipodi:cx="462.14285"
            sodipodi:cy="280.21933"
@@ -1939,37 +1930,36 @@
            sodipodi:argument="-4.0649137"
            sodipodi:t0="0.38437748"
            d="M 461.43812,276.27137 C 464.12599,274.49491 467.55984,276.39394 468.76677,279.03693 C 470.6907,283.25006 467.89396,287.98951 463.80292,289.5192 C 462.00136,290.19282 460.01248,290.29149 458.14292,289.85555"
-           transform="translate(-1.7857143,-0.7142857)" />
+           transform="translate(-152.89285,120.78571)" />
         <path
-           style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.62414122px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           d="M 460.68884,276.99163 L 459.57064,273.57859 L 456.9868,276.47876 L 460.68884,276.99163 z"
+           style="fill:#00cf00;fill-opacity:1;fill-rule:evenodd;stroke:#00cf00;stroke-width:0.62414122000000005px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="M 309.5817,398.49163 L 308.4635,395.07859 L 305.87966,397.97876 L 309.5817,398.49163 z"
            id="path5689" />
       </g>
       <g
-         transform="translate(-4.7982246,0.7576144)"
-         id="g5699">
+         id="g4142">
         <path
            id="path5691"
-           d="M 467.90269,272.68556 L 471.15597,271.16392 L 467.96536,268.94869 L 467.90269,272.68556 z"
-           style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.62414122px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+           d="M 313.24733,390.30031 L 316.50061,388.77867 L 313.31,386.56344 L 313.24733,390.30031 z"
+           style="fill:#00cf00;fill-opacity:1;fill-rule:evenodd;stroke:#00cf00;stroke-width:0.62414122000000005px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
         <path
-           style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           d="M 456.96429,271.29075 C 457.67857,270.93361 468.57143,270.93361 468.57143,270.93361"
+           style="fill:none;fill-opacity:0.75000000000000000;fill-rule:evenodd;stroke:#00cf00;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="M 302.30893,388.9055 C 303.02321,388.54836 313.91607,388.54836 313.91607,388.54836"
            id="path5697" />
       </g>
       <g
-         transform="matrix(0.7266706,-0.6869861,0.6869861,0.7266706,-68.07083,382.76057)"
-         id="g5703">
+         id="g4148">
         <path
-           style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.62414122px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           d="M 467.90269,272.68556 L 471.15597,271.16392 L 467.96536,268.94869 L 467.90269,272.68556 z"
+           style="fill:#00cf00;fill-opacity:1;fill-rule:evenodd;stroke:#00cf00;stroke-width:0.62414122000000005px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="M 309.41435,376.32765 L 310.73307,372.98696 L 306.89271,373.56912 L 309.41435,376.32765 z"
            id="path5705" />
         <path
            id="path5707"
-           d="M 456.96429,271.29075 C 457.67857,270.93361 468.57143,270.93361 468.57143,270.93361"
-           style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+           d="M 300.50752,382.82861 C 300.78122,382.07838 308.69674,374.59514 308.69674,374.59514"
+           style="fill:none;fill-opacity:0.75000000000000000;fill-rule:evenodd;stroke:#00cf00;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       </g>
       <g
+         transform="translate(-149.85714,116.85714)"
          id="g5727">
         <path
            transform="matrix(-3.820293e-2,-0.4846657,-0.4893493,3.7837288e-2,898.06015,672.71976)"
