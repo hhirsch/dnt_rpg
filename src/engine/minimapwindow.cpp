@@ -32,17 +32,25 @@ void miniMapWindow::open(guiInterface* gui, float posX, float posZ,
       winX = 0;
       winY = SCREEN_Y-257;
 
+      width = curMap->getMiniMap()->w;
+      height = curMap->getMiniMap()->h;
+
       /* Create the window */
       mapWindow = gui->insertWindow(winX, winY, winX+185, winY+128,
                                     gettext("Map"));
 
       charPosition = mapWindow->getObjectsList()->insertButton(0,0,1,1,
                                                                "",0);
-      picture* fig = mapWindow->getObjectsList()->insertPicture(6,17,240,105,
-                                                                NULL);
+      fig = mapWindow->getObjectsList()->insertPicture(6,17,width,height,NULL);
  
       /* Draw the minimap at the picture */
       SDL_BlitSurface(curMap->getMiniMap(), NULL, fig->get(), NULL);
+
+      /* Set the visible, if needed */
+      if( (width > 173) || (height > 106) )
+      {
+         fig->setVisibleArea(0,0,173,106);
+      }
 
       /* Finally, open the window */
       mapWindow->setExternPointer(&mapWindow);
@@ -81,41 +89,69 @@ void miniMapWindow::updateCharacterPosition(float posX, float posZ)
 {
    if(mapWindow != NULL)
    {
-      int div2;
+      bool reDraw = false;
+      int iX=0, iY=0;
+      int pX=0, pY=0;
+      GLfloat ratio = (GLfloat)curMap->getSquareMiniSize() / 
+                      (GLfloat)curMap->squareSize();
 
       /* Convert Character position to the MiniMap Coordinates */
-      GLint x = (int) (posX / curMap->squareSize());
-      GLint z = (int) (posZ / curMap->squareSize());
-      if(x > curMap->getSizeX()-1)
+      GLint x = (int) (posX*ratio);
+      GLint z = (int) ((curMap->getSizeZ()*curMap->squareSize()) - posZ)*ratio;
+
+      /* Set the visible, if needed */
+      iX = 0;
+      iY = 0;
+      if( (width > 173) || (height > 106) )
       {
-         x = curMap->getSizeX()-1;
+         iX = x-85;
+         iY = z-53;
+         if(iX < 0)
+         {
+            iX = 0;
+         }
+         else if(iX + 173 > width)
+         {
+            iX = width-173;
+         }
+         if(iY < 0)
+         {
+            iY = 0;
+         }
+         else if(iY + 106 > height)
+         {
+            iY = height-106;
+         }
+         fig->setVisibleArea(iX,iY,iX+173,iY+106);
+         reDraw = true;
       }
-      if( z > curMap->getSizeZ()-1)
+
+      /* Set the position, if needed */
+      pX = x - iX - 1;
+      pY = z - iY - 1;
+      if( ((8+pX) != charPosition->getX1()) || 
+            ((20+pY) != charPosition->getY1()) )
       {
-         z = curMap->getSizeZ()-1;
+         charPosition->setCoordinate(8+x-iX-1, 20+z-iY-1, 
+               8+x-iX+1, 20+z-iY+1);
+         reDraw = true;
       }
 
-      /* Invert Character Z Coordinate (the map image is flipped at Y) */
-      z = (curMap->getSizeZ()-1) - z;
-
-      /* The incredible scale */
-      x = (GLint)(8 + (x*curMap->getSquareMiniSize()));
-      z = (GLint)(20 + (z*curMap->getSquareMiniSize()));
-      div2 = (GLint)(curMap->getSquareMiniSize() / 2);
-
-      /* Only redraw the window if the position is different */
-      if( ((x+div2-1) != charPosition->getX1()) || 
-          ((z+div2-1) != charPosition->getY1()) )
+      /* Redraw the window, if needed */
+      if(reDraw)
       {
-         charPosition->setCoordinate(x+div2-1, z+div2-1, x+div2+1, z+div2+1);
          mapWindow->draw(-1, -1);
       }
+
    }
 }
 
 /***********************************************************************
  *                          Static Fields                              *
  ***********************************************************************/
+int miniMapWindow::width = 0;
+int miniMapWindow::height = 0;
+picture* miniMapWindow::fig = NULL;
 window* miniMapWindow::mapWindow = NULL;
 button* miniMapWindow::charPosition = NULL;
 Map* miniMapWindow::curMap = NULL;

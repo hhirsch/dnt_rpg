@@ -2220,7 +2220,7 @@ int Map::open(string arquivo)
    }
 
    /* Define minimap sizes */
-   squareMiniSize =  105.0 / z;
+   squareMiniSize = 20;
    squareMiniDiv = (squareSize() / squareMiniSize);
 
    /* And create the splats */
@@ -2268,7 +2268,7 @@ void Map::newMap(int X, int Z)
    }
 
    /* Define new minimap sizes */
-   squareMiniSize = 105.0 / z;
+   squareMiniSize = 20.0f;
    squareMiniDiv = (squareSize() / squareMiniSize);
 
    xInic = 1*squareSize();
@@ -2596,24 +2596,57 @@ SDL_Surface* Map::getMiniMap()
 void Map::drawMiniMap()
 {
    modelList models;
+
+   int mapSizeX;
+   int mapSizeZ;
+   GLfloat ratio;
+   GLfloat height;
+
+   /* Define Size to render */
+   mapSizeX = (int)squareMiniSize*(x);
+   mapSizeZ = (int)squareMiniSize*(z);
+   
+   /* Define the scale ratio */
+   if(outdoor)
+   {
+      
+      ratio = 0.009f;
+      if(x > z)
+      {
+         height = (x-7)*3;
+      }
+      else
+      {
+         height = (z-7)*3;
+      }
+   }
+   else
+   {
+      ratio = 0.036f;
+      if(x > z)
+      {
+         height = x*3;
+      }
+      else
+      {
+         height = z*3;
+      }
+   }
+
    /* Setting the View  */
-   int mapSizeX = (int)squareMiniSize*x;
-   int mapSizeZ = (int)squareMiniSize*z;
    glViewport(0,0, mapSizeX, mapSizeZ);
-   glMatrixMode (GL_PROJECTION);
-   glLoadIdentity ();
+   glMatrixMode(GL_PROJECTION);
+   glLoadIdentity();
    gluPerspective(45.0, mapSizeX / (float)mapSizeZ, 1.0, OUTDOOR_FARVIEW);
-   glMatrixMode (GL_MODELVIEW);
+   glMatrixMode(GL_MODELVIEW);
    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-   glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+   glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
    glLoadIdentity();
 
-
    /* Set the look up, at the map's center looking down at Y axys */
-   GLfloat ratio = squareMiniSize / (float)(squareSize() * 7);
    GLfloat posX = ratio*x*squareSize()/2.0; 
    GLfloat posZ = ratio*z*squareSize()/2.0;
-   gluLookAt(posX, 20, posZ, posX, 0.0, posZ, 0, 0, -1);
+   gluLookAt(posX, height, posZ, posX, 0.0, posZ, 0, 0, -1);
 
    /* Put some light */
    GLfloat color[4] = {0.8,0.8,0.8,1.0};
@@ -2621,11 +2654,10 @@ void Map::drawMiniMap()
                        (OUTDOOR_FARVIEW / 2.0)-1 + posX,
                        posZ, 1.0};
    glLightfv(GL_LIGHT0, GL_AMBIENT, color);
-   glLightfv (GL_LIGHT0, GL_POSITION, where);
+   glLightfv(GL_LIGHT0, GL_POSITION, where);
    glEnable(GL_LIGHT0);
    glEnable(GL_LIGHTING);
 
-   /* And finally draw the map, scaling it to the "full viewport" size */
    glPushMatrix();
       glScalef(ratio,ratio,ratio);
       models.renderSceneryObjects(NULL, false);
@@ -2665,11 +2697,10 @@ void Map::drawMiniMap()
    SDL_SetAlpha(miniMap, 0,0);
    SDL_SetColorKey(miniMap, SDL_SRCCOLORKEY, 
                    SDL_MapRGB(miniMap->format, 0, 0, 0));
-
+     
+   /* Reset the View */
    glDisable(GL_LIGHT0);
    glDisable(GL_LIGHTING);
-
-   /* Reset the View */
    glViewport(0,0,SCREEN_X, SCREEN_Y);
    glMatrixMode (GL_PROJECTION);
    glLoadIdentity ();

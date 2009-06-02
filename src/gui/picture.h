@@ -36,9 +36,20 @@ class picture: public guiObject
        * \return -> surface of the picture */
       SDL_Surface* get();
 
+      /*! Set the picture visible area
+       * \param xa -> left
+       * \param ya -> up
+       * \param xb -> right 
+       * \param yb -> bottom */
+      void setVisibleArea(int xa, int ya, int xb, int yb);
+
+      /*! Set the picture as all visible */
+      void setAllVisible();
+
 
    protected:
-      SDL_Surface *fig;     /* A picture em si */
+      SDL_Surface *fig;     /**< A picture surface */
+      SDL_Rect area;        /**< The visible area */
 
 };
 

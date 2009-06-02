@@ -35,6 +35,9 @@ class miniMapWindow
       bool isOpened();
 
    protected:
+      static int width;             /**< Current picture width */
+      static int height;            /**< Current picture height */
+      static picture* fig;          /**< The current minimap picture */
       static window* mapWindow;     /**< MiniMap Window */
       static button* charPosition;  /**< Character MiniMap Button */
       static Map* curMap;           /**< Current Opened Map */

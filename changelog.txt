@@ -25,7 +25,7 @@
    when already have another weapon eqquiped;
  - Fixed a bug on DNT installation of bin directory and default options file;
  - Fixed a bug when sound effect file doesn't exist;
- 
+ - Minimap More closer (and translatable);
 
 Working on:
  - Weather effects;

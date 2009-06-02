@@ -14,8 +14,11 @@ using namespace std;
  ******************************************************/
 picture::~picture()
 {
-   if (fig)
+   if(fig)
+   {
       SDL_FreeSurface(fig);
+   }
+
 }
 
 /******************************************************
@@ -37,6 +40,10 @@ picture::picture(int x,int y,int w,int h,const char* arquivo)
    amask = 0xff000000;
 #endif
 
+   area.x = 0;
+   area.y = 0;
+   area.w = w;
+   area.h = h;
 
    x1 = x;
    y1 = y;
@@ -62,6 +69,8 @@ picture::picture(int x,int y,int w,int h,const char* arquivo)
       SDL_FreeSurface(img);
       x2 = x1 + fig->w;
       y2 = y1 + fig->h;
+      area.w = w;
+      area.h = h;
    }
    else if( (w > 0) && (h > 0) )
    {
@@ -85,7 +94,7 @@ void picture::draw(SDL_Surface *screen)
    SDL_Rect Ret;
    Ret.x = x1;
    Ret.y = y1;
-   SDL_BlitSurface(fig,NULL,screen,&Ret);
+   SDL_BlitSurface(fig,&area,screen,&Ret);
 }
 
 /******************************************************
@@ -94,6 +103,10 @@ void picture::draw(SDL_Surface *screen)
 void picture::set(SDL_Surface* newPicture)
 {
    fig = newPicture;
+   area.x = 0;
+   area.y = 0;
+   area.w = (fig!=NULL)?fig->w:0;
+   area.h = (fig!=NULL)?fig->h:0;
    setChanged();
 }
 
@@ -103,5 +116,27 @@ void picture::set(SDL_Surface* newPicture)
 SDL_Surface* picture::get()
 {
    return(fig);
+}
+
+/******************************************************
+ *                  setVisibleArea                    *
+ ******************************************************/
+void picture::setVisibleArea(int xa, int ya, int xb, int yb)
+{
+   area.x = xa;
+   area.y = ya;
+   area.w = xb-xa;
+   area.h = yb-ya;
+}
+
+/******************************************************
+ *                   setAllVisible                    *
+ ******************************************************/
+void picture::setAllVisible()
+{
+   area.x = 0;
+   area.y = 0;
+   area.w = x2 - x1;
+   area.h = y2 - y1;
 }
 
