@@ -80,6 +80,8 @@ picture::picture(int x,int y,int w,int h,const char* arquivo)
    {
       fig = NULL;
    }
+
+   setAllVisible();
 }
 
 /******************************************************
