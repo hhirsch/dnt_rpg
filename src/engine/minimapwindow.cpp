@@ -106,19 +106,19 @@ void miniMapWindow::updateCharacterPosition(float posX, float posZ)
       {
          iX = x-85;
          iY = z-53;
-         if(iX < 0)
+         if( (iX < 0) || (width <= 173))
          {
             iX = 0;
          }
-         else if(iX + 173 > width)
+         else if( (iX + 173 > width) )
          {
             iX = width-173;
          }
-         if(iY < 0)
+         if( (iY < 0) || (height <= 106))
          {
             iY = 0;
          }
-         else if(iY + 106 > height)
+         else if( (iY + 106 > height) )
          {
             iY = height-106;
          }
