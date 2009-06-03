@@ -149,7 +149,7 @@ class guiInterface
 
       /*! Verify RolBars (after got button pressed events)
        * \param guiList -> list of objects to verify rolBars */
-      void verifyRolBars(guiList* list);
+      bool verifyRolBars(guiList* list);
 
       /*! Verify events occured on gui at single components
        * \param x -> current mouse x

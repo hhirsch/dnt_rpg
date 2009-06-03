@@ -76,12 +76,8 @@ listText::~listText()
       delete(aux);
    }
    totalElements = 0;
-
-   /* Remove GUI elements */
-   /*Tlista* l = (Tlista*)intList;
-   l->Retirar(roll);
-   l->Retirar(table);*/
 }
+
 /**************************************************************
  *                           clear                            *
  **************************************************************/
@@ -103,6 +99,7 @@ void listText::clear()
    first = NULL;
    roll->setText("");
 
+   defineTabButton();
 }
 
 /**************************************************************
@@ -145,6 +142,7 @@ void listText::insertText(string text, int r, int g, int b)
    }
    totalElements++;
    roll->setFirstLine(0);
+   defineTabButton();
 }
 
 /**************************************************************
@@ -174,6 +172,22 @@ void listText::removeText(string text)
       }
       tel = tel->next;
    }
+
+   defineTabButton();
+}
+
+/**************************************************************
+ *                      defineTabButton                       *
+ **************************************************************/
+void listText::defineTabButton()
+{
+   int curInit = roll->getFirstLine();
+   int i;
+
+   for(i = 0; i<maxButtons; i++)
+   {
+      listButtons[i]->setAvailable(i+curInit < totalElements);
+   }
 }
 
 /**************************************************************
@@ -194,13 +208,25 @@ bool listText::eventGot(int type, guiObject* object)
    selectedPos = -1;
 
    /* Verify Events */
-   if(type == FARSO_EVENT_PRESSED_TAB_BUTTON)
+
+   /* RolBar events */
+   if(type == FARSO_EVENT_PRESSED_BUTTON)
+   {
+      if(roll->isOwner(object))
+      {
+         /* Must reconstruct tabbutton avaialability */
+         defineTabButton();
+      }
+   }
+
+   /* TabButton events */
+   else if(type == FARSO_EVENT_PRESSED_TAB_BUTTON)
    {
       for(i = 0; i<maxButtons; i++)
       {
          if(object == (guiObject*)listButtons[i])
          {
-            int pos = roll->getActualInit() + i;
+            int pos = roll->getFirstLine() + i;
             if(pos < totalElements)
             {
                int k;

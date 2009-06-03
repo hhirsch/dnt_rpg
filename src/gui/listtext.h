@@ -71,6 +71,10 @@ class listText: public guiObject
       rolBar* roll;           /**< RolBar of the list */
       tabButton* table;       /**< TabButton of the list */
 
+   protected:
+      /*! Define tabButton buttons avaialabilility */
+      void defineTabButton();
+
    private:
       SDL_Surface* windowSurface; /**< Pointer to the window surface */
       void* intList;              /**< Internal GUI Objects List */

@@ -204,12 +204,12 @@ guiObject* guiInterface::verifyTabBox(int x, int y, guiList* list)
 /*********************************************************************
  *                           verifyRolBars                           *
  *********************************************************************/
-void guiInterface::verifyRolBars(guiList* list)
+bool guiInterface::verifyRolBars(guiList* list)
 {
    /* Verify if list exists */
    if(list == NULL)
    {
-      return;
+      return(false);
    }
 
    /* Now search it for rolBars */
@@ -225,6 +225,7 @@ void guiInterface::verifyRolBars(guiList* list)
          {
             ljan->getActiveWindow()->draw(0,0);
             rb->redraw();
+            return(true);
          }
       }
       obj = obj->next;
@@ -233,8 +234,10 @@ void guiInterface::verifyRolBars(guiList* list)
    /* Verify Nested tabBox */
    if(list->getActiveTabBoxList() != NULL)
    {
-      verifyRolBars(list->getActiveTabBoxList());
+      return(verifyRolBars(list->getActiveTabBoxList()));
    }
+
+   return(false);
 
 }
 
@@ -521,7 +524,6 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
            {
               /* Verify RolBar */
               verifyRolBars(ljan->getActiveWindow()->getObjectsList());
-
               eventInfo = FARSO_EVENT_ON_PRESS_BUTTON;
               return(objAtivo);
            }

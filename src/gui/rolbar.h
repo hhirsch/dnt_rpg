@@ -33,6 +33,11 @@ class rolBar: public guiObject
       /*! Destructor */
       ~rolBar();
 
+      /*! Verify if the rolBar is the owner of aguiObject
+       * \param obj -> pointer to the desired guiObject
+       * \return -> true if obj is from the rolBar (a button, for example) */
+      bool isOwner(guiObject* obj);
+
       /*! Verify if some event is related to the rolBar
        * \param type -> Type of the occurred event
        * \param object -> object of the event 
@@ -86,8 +91,6 @@ class rolBar: public guiObject
       /*! Get last line text on the rolbar
        * /param -> text of the last line */
       string getLastLine();
-
-      int getActualInit(){return(scrollText->getFirstLine());};
 
    private:
       SDL_Surface* wSurface;   /**< Window Surface */

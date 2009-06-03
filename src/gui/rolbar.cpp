@@ -66,6 +66,18 @@ rolBar::~rolBar()
 }
 
 /*********************************************************************
+ *                             isOwner                               *
+ *********************************************************************/
+bool rolBar::isOwner(guiObject* obj)
+{
+   return( (obj == (guiObject*) up) ||
+           (obj == (guiObject*) down) ||
+           (obj == (guiObject*) scrollText) ||
+           (obj == (guiObject*) contorn) ||
+           (obj == (guiObject*) position) );
+}
+
+/*********************************************************************
  *                              eventGot                             *
  *********************************************************************/
 bool rolBar::eventGot(int type, guiObject* object)
