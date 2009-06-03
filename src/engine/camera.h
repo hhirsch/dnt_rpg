@@ -63,6 +63,19 @@ class camera
       /*! Get The Camera D (Zoom)
        * \return Camera D (Zoom) */
       GLfloat getD();
+
+      /*! Set The Camera Phi
+       * \param f -> Camera Phi */
+      void setPhi(GLfloat f);
+      /*! Set The Camera Theta
+       * \param f -> Camera Theta */
+      void setTheta(GLfloat f);
+      /*! Set The Camera DeltaY
+       * \param f -> Camera DeltaY */
+      void setDeltaY(GLfloat f);
+      /*! Set The Camera D (Zoom)
+       * \param f -> Camera D (Zoom) */
+      void setD(GLfloat f);
       
       /*! Get The Camera Center X Postion
        * \return Camera Center X position */

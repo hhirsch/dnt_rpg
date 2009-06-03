@@ -65,6 +65,11 @@ class saveFile
       string pcFile;         /**< The PC file */
       float pcPos[3];        /**< The PC Position */
       float pcAngle;         /**< The PC angle */
+      float hour;            /**< The current game hour */
+      float cameraPhi;       /**< Camera Phi angle */
+      float cameraTheta;     /**< Camera Theta angle */
+      float cameraDeltaY;    /**< Camera DeltaY */
+      float cameraD;         /**< Camera Zoom value */
 
 };
 

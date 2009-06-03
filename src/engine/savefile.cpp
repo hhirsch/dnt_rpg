@@ -23,6 +23,8 @@
 #define DNT_SAVE_TOKEN_PC            "pc"
 #define DNT_SAVE_TOKEN_PC_INVENTORY  "pcInventory"
 #define DNT_SAVE_TOKEN_PC_POSITION   "pcPosition"
+#define DNT_SAVE_TOKEN_HOUR          "hour"
+#define DNT_SAVE_TOKEN_CAMERA_INFO   "cameraInfo"
 
 /***********************************************************************
  *                             Constructor                             *
@@ -41,6 +43,11 @@ saveFile::saveFile()
    pcPos[1] = 0;
    pcPos[2] = 0;
    pcAngle = 0;
+   hour = 9.0f;
+   cameraPhi = 75.75f;
+   cameraTheta = 45.0f;
+   cameraDeltaY = 0.0f;
+   cameraD = 320.0f;
 }
 
 /***********************************************************************
@@ -171,7 +178,13 @@ bool saveFile::save(string saveFile, void* curEngine, SDL_Surface* frontSurface)
                                                << pcPos[1] << "," 
                                                << pcPos[2] << ":" 
                                                << pcAngle << endl;
-   
+   file << DNT_SAVE_TOKEN_CAMERA_INFO << " = " 
+                                      << eng->gameCamera.getPhi() << ":"
+                                      << eng->gameCamera.getTheta() << ":"
+                                      << eng->gameCamera.getDeltaY() << ":"
+                                      << eng->gameCamera.getD() << endl;
+   file << DNT_SAVE_TOKEN_HOUR << " = " << eng->getHour() << endl;
+
    /* Close the file */
    file.close();
 
@@ -220,6 +233,9 @@ bool saveFile::load(void* curEngine)
    {
       return(false);
    }
+
+   /* Set the current hour */
+   eng->setHour(hour);
 
    /* Verify load file version */
    if(version != VERSION)
@@ -284,6 +300,12 @@ bool saveFile::load(void* curEngine)
       /* Load the missions! */
       missions.load(missionsFile);
    }
+
+   /* Finally, reset the camera */
+   eng->gameCamera.setPhi(cameraPhi);
+   eng->gameCamera.setTheta(cameraTheta);
+   eng->gameCamera.setDeltaY(cameraDeltaY);
+   eng->gameCamera.setD(cameraD);
 
    return(true);
 }
@@ -352,6 +374,16 @@ bool saveFile::loadHeader(string fileName)
       {
          /* Define the current map file */
          mapFile = value;
+      }
+      else if(key == DNT_SAVE_TOKEN_CAMERA_INFO)
+      {
+         sscanf(value.c_str(), "%f:%f:%f:%f", &cameraPhi, &cameraTheta,
+                                              &cameraDeltaY, &cameraD);
+      }
+      else if(key == DNT_SAVE_TOKEN_HOUR)
+      {
+         /* Define the current hour */
+         sscanf(value.c_str(), "%f", &hour);
       }
    }
 
