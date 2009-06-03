@@ -37,6 +37,9 @@ class guiObject
       guiObject* next;     /**< Next Object On List */
       guiObject* previous; /**< Previous Object On List */
 
+      /*! Constructor */
+      guiObject(){available=true;text="";};
+
       /*! Virtual Destructor */
       virtual ~guiObject(){};
 
@@ -87,13 +90,13 @@ class guiObject
          x1 = xa; x2 = xb; y1 = ya; y2 = yb;
       };
 
-      /*! Verify if the object is avaible
+      /*! Verify if the object is available
        * return true if is avaible */
-      bool isAvaible() {return(avaible);};
+      bool isAvailable() {return(available);};
 
-      /*! Set if the item is avaible or not
-       * \param av -> true if is avaible, false otherwise */
-      void setAvaible(bool av){avaible = av;};
+      /*! Set if the item is available or not
+       * \param av -> true if is available, false otherwise */
+      void setAvailable(bool av){available = av;};
 
       /*! Verify if the draw state changes */
       bool changed(){bool prev = hadChanged; hadChanged = false;return(prev);};
@@ -106,7 +109,7 @@ class guiObject
           y1,              /**< Coordinate on Window */
           x2,              /**< Coordinate on Window */
           y2;              /**< Coordinate on Window */
-      bool avaible;        /**< Avaible? */
+      bool available;      /**< Available? */
       string text;         /**< Text on the bar */
    
    private:

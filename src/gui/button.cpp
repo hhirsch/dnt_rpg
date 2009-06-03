@@ -20,7 +20,7 @@ button::button(int xa,int ya,int xb,int yb, string txt, bool isOval )
    oval = isOval;
    men = NULL;
    pressed = false;
-   avaible = true;
+   available = true;
    defineFont(DNT_FONT_ARIAL, 12);
    type = FARSO_OBJECT_BUTTON;
 }
@@ -118,7 +118,7 @@ void button::draw(SDL_Surface* screen )
    }
    else
    {
-      if(isAvaible())
+      if(isAvailable())
       {
          font.write(screen,xa,ya+3,getText().c_str(),xa,y1,x2,y2);
       }
@@ -156,7 +156,7 @@ bool button::press(int Xjan, int Yjan, int x, int y, Uint8 Mbotao, int* pronto,
       draw(screen);
    }
 
-   return(pres && isAvaible());
+   return(pres && isAvailable());
 }
 
 /***********************************************************

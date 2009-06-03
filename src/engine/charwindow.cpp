@@ -213,7 +213,7 @@ void charWindow::open(character* pers)
    levelUpButton = intWindow->getObjectsList()->insertButton(5,192,125,211,
                                                             gettext("Level Up"),
                                                              1);
-   levelUpButton->setAvaible(pers->getUpLevels() > 0);
+   levelUpButton->setAvailable(pers->getUpLevels() > 0);
 
    /* Feats Button */
    intWindow->getObjectsList()->insertButton(5,212,125,231,

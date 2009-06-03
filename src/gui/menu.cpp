@@ -43,7 +43,7 @@ void menu::insertItem(string text, string imageFile, bool avaible)
    /* Insert Text Box */
    textBox* novo;
    novo = insertTextBox(x,y,x+200,y+200,0,text);
-   novo->setAvaible(avaible);
+   novo->setAvailable(avaible);
    if(text.length() > maxCharac)
    {
       maxCharac = text.length();
@@ -89,25 +89,25 @@ guiObject* menu::getItem(int i)
 /*********************************************************
  *                      itemAvaible                      *
  *********************************************************/
-bool menu::itemAvaible(int item)
+bool menu::itemAvailable(int item)
 {
    guiObject* it = getItem(item);
    if(!it)
    {
       return(false);
    }
-   return(it->isAvaible());
+   return(it->isAvailable());
 }
 
 /*********************************************************
  *                     setItemAvaible                    *
  *********************************************************/
-void menu::setItemAvaible(int item, bool avaible)
+void menu::setItemAvailable(int item, bool av)
 {
    guiObject* it = getItem(item);
    if(it)
    {
-      it->setAvaible(avaible);
+      it->setAvailable(av);
    }
 }
 
@@ -188,7 +188,7 @@ void menu::draw(int pos, SDL_Surface *screen)
          /* Menu Texts */
          if (item->getText().compare("-"))
          {
-            if (item->isAvaible()) 
+            if (item->isAvailable()) 
             {
                fnt.write(screen,xa,ya+med,item->getText());
             }
@@ -226,7 +226,7 @@ void menu::draw(int pos, SDL_Surface *screen)
  *********************************************************/
 int menu::getActualItem()
 {
-   if(itemAvaible(actualItem))
+   if(itemAvailable(actualItem))
    {
       return(actualItem);
    }

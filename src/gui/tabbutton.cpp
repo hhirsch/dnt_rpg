@@ -119,9 +119,10 @@ guiObject* tabButton::verifyPosition(int mouseX, int mouseY, Uint8 Mbuttons,
    actionType = TABBUTTON_NONE;
    for(i=0;i<numButtons;i++)
    {
-      if(isMouseAt(x1+Buttons[i].x1+Xjan,y1+Buttons[i].y1+Yjan,
-                   x1+Buttons[i].x2+Xjan,y1+Buttons[i].y2+Yjan,
-                   mouseX, mouseY))
+      if( (Buttons[i].isAvailable()) &&
+          (isMouseAt(x1+Buttons[i].x1+Xjan,y1+Buttons[i].y1+Yjan,
+                     x1+Buttons[i].x2+Xjan,y1+Buttons[i].y2+Yjan,
+                     mouseX, mouseY)) )
       {
 
          if(i != current)

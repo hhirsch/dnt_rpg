@@ -14,7 +14,7 @@ cxSel::cxSel(int x, int y):guiObject()
    y1 = y;
    x2 = x+10;
    y2 = y+10;
-   avaible = true;
+   available = true;
    selected = false;
    lastChangeTime = SDL_GetTicks();
    type = FARSO_OBJECT_SEL_BOX;
@@ -33,7 +33,7 @@ void cxSel::draw(SDL_Surface *screen)
    color_Set(Colors.colorCont[2].R,Colors.colorCont[2].G,Colors.colorCont[2].B,
              Colors.colorButton.A);
    rectangle_Fill(screen, x1+1, y1+1, x1+9, y1+9);
-   if( (avaible) && (selected) )
+   if( (available) && (selected) )
    {
       color_Set(Colors.colorBar.R, Colors.colorBar.G, 
                 Colors.colorBar.B, Colors.colorCont[0].A);

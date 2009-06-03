@@ -14,7 +14,7 @@
 #define TABBUTTON_PRESSED   41 /**< Some Button pressed */
 
 /*! oneTabButton is a class to define what is a button on a table of buttons */
-class oneTabButton :guiObject
+class oneTabButton: public guiObject
 {
    public:
       /*! From guiObject. Not used. */

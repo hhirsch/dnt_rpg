@@ -69,15 +69,15 @@ class menu: public guiList
       /*! Get the actual max character */
       int getMaxCharac();
 
-      /*! Verify if the item is avaible
+      /*! Verify if the item is available
        * \param item -> item number on the menu
-       * \return -> true if is avaible, false otherwise */
-      bool itemAvaible(int item);
+       * \return -> true if is available, false otherwise */
+      bool itemAvailable(int item);
 
       /*! Set the item avaible status
        *  \param item -> item number on the menu
-       *  \param avaible -> if avaible or not */
-      void setItemAvaible(int item, bool avaible);
+       *  \param av -> if available or not */
+      void setItemAvailable(int item, bool av);
 
    protected:
       /*! Draw the Menu

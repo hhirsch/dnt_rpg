@@ -805,8 +805,8 @@ void options::displayOptionsScreen(guiInterface* interf)
    cxSelParticles = list->insertCxSel(12, posY+4, enableParticles);
    list->insertPicture(220,posY,40,112,
                      dir.getRealFile("texturas/options/particles.png").c_str());
-   cxSelParticles->setAvaible(getAvaibleParticles());
-   cxSelGrass->setAvaible(getAvaibleParticles() && 
+   cxSelParticles->setAvailable(getAvaibleParticles());
+   cxSelGrass->setAvailable(getAvaibleParticles() && 
                           cxSelParticles->isSelected());
    posY += 25;
 
@@ -817,7 +817,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    cxSelMultiTexture = list->insertCxSel(12,posY+4,getEnableMultiTexture());
    list->insertPicture(220,posY,40,112,
                   dir.getRealFile("texturas/options/multitexture.png").c_str());
-   cxSelMultiTexture->setAvaible(ext.hasMultiTexture());
+   cxSelMultiTexture->setAvailable(ext.hasMultiTexture());
    posY += 25;
 
    /* MultiTexture Enable or Not */
@@ -827,7 +827,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    cxSelAnisotropic = list->insertCxSel(12,posY+4,getEnableAnisotropicFilter());
    list->insertPicture(220,posY,40,112,
                    dir.getRealFile("texturas/options/anisotropic.png").c_str());
-   cxSelAnisotropic->setAvaible(ext.hasAnisotropic());
+   cxSelAnisotropic->setAvailable(ext.hasAnisotropic());
    posY += 35;
 
    /* Reflexions */
@@ -1278,8 +1278,8 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
           (object == (guiObject*) cxSelGrass))
       {
          /* When disable particles, disable the grass */
-         cxSelGrass->setAvaible(getAvaibleParticles() &&
-                                cxSelParticles->isSelected());
+         cxSelGrass->setAvailable(getAvaibleParticles() &&
+                                  cxSelParticles->isSelected());
       }
    }
 

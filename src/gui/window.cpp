@@ -414,7 +414,7 @@ void window::setAttributes(bool close, bool move, bool scale, bool maximize)
 {
    menu* men = (menu*)menuButton->men;
    canClose = close;
-   men->setItemAvaible(WINDOW_MENU_CLOSE, canClose);
+   men->setItemAvailable(WINDOW_MENU_CLOSE, canClose);
    canMove = move;
    canScale = scale;
    canMaximize = maximize;
