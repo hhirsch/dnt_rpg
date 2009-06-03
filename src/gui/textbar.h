@@ -3,8 +3,8 @@
  */
 
 
-#ifndef _textbar_h
-#define _textbar_h
+#ifndef _farso_textbar_h
+#define _farso_textbar_h
 
 #include <stdlib.h>
 #include <string.h>

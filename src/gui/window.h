@@ -2,8 +2,8 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code.
  */
 
-#ifndef _window_h
-#define _window_h
+#ifndef _farso_window_h
+#define _farso_window_h
 
 #include <stdlib.h>
 #include "draw.h"

@@ -2,8 +2,8 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code.
  */
 
-#ifndef _tabbotao_h
-#define _tabbotao_h
+#ifndef _farso_tab_button_h
+#define _farso_tab_button_h
 
 #include "picture.h"
 #include "color.h"

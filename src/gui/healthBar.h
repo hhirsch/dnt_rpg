@@ -1,5 +1,5 @@
-#ifndef _healthBar_h
-#define _healthBar_h
+#ifndef _farso_healthBar_h
+#define _farso_healthBar_h
 
 #include "guiobject.h"
 #include <SDL/SDL.h>

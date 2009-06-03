@@ -1,5 +1,5 @@
-#ifndef _messages_h
-#define _messages_h
+#ifndef _farso_messages_h
+#define _farso_messages_h
 
 #include "farso.h"
 #include <SDL/SDL.h>

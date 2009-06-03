@@ -1,5 +1,5 @@
-#ifndef _dntfont_h
-#define _dntfont_h
+#ifndef _farso_dntfont_h
+#define _farso_dntfont_h
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>

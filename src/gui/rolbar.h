@@ -3,8 +3,8 @@
  */
 
 
-#ifndef _rolbar_h
-#define _rolbar_h
+#ifndef _farso_rolbar_h
+#define _farso_rolbar_h
 
 #include <string>
 using namespace std;

@@ -2,8 +2,8 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code.
  */
 
-#ifndef _guilist_h
-#define _guilist_h
+#ifndef _farso_guilist_h
+#define _farso_guilist_h
 
 #include <string>
 using namespace std;

@@ -3,8 +3,8 @@
  */
 
 
-#ifndef _cores_h
-#define _cores_h
+#ifndef _farso_color_h
+#define _farso_color_h
 
 /*! A color Definition */
 class farso_color

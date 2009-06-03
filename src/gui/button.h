@@ -3,8 +3,8 @@
  */
 
 
-#ifndef _botao_h
-#define _botao_h
+#ifndef _farso_button_h
+#define _farso_button_h
 
 
 #include <string>

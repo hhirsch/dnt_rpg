@@ -2,8 +2,8 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code.
  */
 
-#ifndef _listtext_h
-#define _listtext_h
+#ifndef _farso_listtext_h
+#define _farso_listtext_h
 
 #include "rolbar.h"
 #include "tabbutton.h"

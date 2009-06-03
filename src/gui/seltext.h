@@ -2,8 +2,8 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code.
  */
 
-#ifndef _seltexto_h
-#define _seltexto_h
+#ifndef _farso_seltext_h
+#define _farso_seltext_h
 
 #include <string>
 using namespace std;

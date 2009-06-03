@@ -2,8 +2,8 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code.
  */
 
-#ifndef _mouse_h
-#define _mouse_h
+#ifndef _farso_mouse_h
+#define _farso_mouse_h
 
 /*! Verify if the mouse coordinate is indoor to the are defined
  * \param x1 -> x1 coordinate

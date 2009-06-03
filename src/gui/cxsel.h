@@ -3,8 +3,8 @@
  */
 
 
-#ifndef _cxsel_h
-#define _cxsel_h
+#ifndef _farso_cxsel_h
+#define _farso_cxsel_h
 
 #include "draw.h"
 #include "guiobject.h"

@@ -3,8 +3,8 @@
  */
 
 
-#ifndef _picture_h
-#define _picture_h
+#ifndef _farso_picture_h
+#define _farso_picture_h
 
 #include "draw.h"
 #include "guiobject.h"

@@ -1,5 +1,5 @@
-#ifndef _dnt_farso_tab_box_h
-#define _dnt_farso_tab_box_h
+#ifndef _farso_tab_box_h
+#define _farso_tab_box_h
 
 #include "color.h"
 #include "draw.h"

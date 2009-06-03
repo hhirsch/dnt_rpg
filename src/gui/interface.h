@@ -2,8 +2,8 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code.
  */
 
-#ifndef _guiInterface_h
-#define _guiInterface_h
+#ifndef _farso_interface_h
+#define _farso_interface_h
 
 #include <string.h>
 #include "window.h"

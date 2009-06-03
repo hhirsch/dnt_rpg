@@ -3,8 +3,8 @@
  */
 
 
-#ifndef _desenho_h
-#define _desenho_h
+#ifndef _farso_draw_h
+#define _farso_draw_h
 
 /*! \file draw.h, where defined Surface draw functions. */
 #include <SDL/SDL.h>

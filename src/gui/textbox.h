@@ -2,8 +2,8 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code.
  */
 
-#ifndef _textbox_h
-#define _textbox_h
+#ifndef _farso_textbox_h
+#define _farso_textbox_h
 
 #include "color.h"
 #include "draw.h"
