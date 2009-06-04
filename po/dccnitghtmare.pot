@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2009-05-27 15:24-0300\n"
+"POT-Creation-Date: 2009-06-04 13:51-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -157,8 +157,8 @@ msgstr ""
 msgid "Attribute Description"
 msgstr ""
 
-#: src/engine/attwindow.cpp:535 src/engine/dccnit.cpp:516
-#: src/engine/inventwindow.cpp:331 src/engine/options.cpp:1211
+#: src/engine/attwindow.cpp:535 src/engine/dccnit.cpp:515
+#: src/engine/inventwindow.cpp:332 src/engine/options.cpp:1211
 msgid "Warning"
 msgstr ""
 
@@ -179,7 +179,7 @@ msgid "Impose"
 msgstr ""
 
 #: src/engine/barterwindow.cpp:72 src/engine/barterwindow.cpp:82
-#: src/engine/inventwindow.cpp:36 src/engine/options.cpp:131
+#: src/engine/inventwindow.cpp:37 src/engine/options.cpp:131
 msgid "Inventory"
 msgstr ""
 
@@ -199,7 +199,7 @@ msgstr ""
 msgid "The barter imposition was rejected."
 msgstr ""
 
-#: src/engine/barterwindow.cpp:286 src/engine/inventwindow.cpp:184
+#: src/engine/barterwindow.cpp:286 src/engine/inventwindow.cpp:185
 msgid "Remove"
 msgstr ""
 
@@ -356,66 +356,66 @@ msgstr ""
 msgid "No Skills."
 msgstr ""
 
-#: src/engine/dccnit.cpp:457 src/engine/dccnit.cpp:507
+#: src/engine/dccnit.cpp:456 src/engine/dccnit.cpp:506
 msgid "Error"
 msgstr ""
 
-#: src/engine/dccnit.cpp:457
+#: src/engine/dccnit.cpp:456
 msgid "Can't load the saved game!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:502
+#: src/engine/dccnit.cpp:501
 msgid "Information"
 msgstr ""
 
-#: src/engine/dccnit.cpp:503
+#: src/engine/dccnit.cpp:502
 msgid "The game was saved!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:507
+#: src/engine/dccnit.cpp:506
 msgid "Can't save game!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:517
+#: src/engine/dccnit.cpp:516
 msgid "Can't save game while fighting!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:640
+#: src/engine/dccnit.cpp:639
 #, c-format
 msgid "Saving Current Map Modifications"
 msgstr ""
 
-#: src/engine/dccnit.cpp:675
+#: src/engine/dccnit.cpp:674
 #, c-format
 msgid "Loading Map: %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:738
+#: src/engine/dccnit.cpp:737
 #, c-format
 msgid "Loading NPC: %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:778
+#: src/engine/dccnit.cpp:777
 msgid "Creating MiniMap"
 msgstr ""
 
-#: src/engine/dccnit.cpp:784
+#: src/engine/dccnit.cpp:783
 msgid "Putting GUI on Screen"
 msgstr ""
 
-#: src/engine/dccnit.cpp:831
+#: src/engine/dccnit.cpp:830
 msgid "Loading Particles"
 msgstr ""
 
-#: src/engine/dccnit.cpp:861
+#: src/engine/dccnit.cpp:860
 msgid "Loading Changes..."
 msgstr ""
 
-#: src/engine/dccnit.cpp:889
+#: src/engine/dccnit.cpp:888
 msgid "Done!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:981
+#: src/engine/dccnit.cpp:980
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -423,50 +423,50 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1498
+#: src/engine/dccnit.cpp:1502
 msgid "Too far away for the action!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1543
+#: src/engine/dccnit.cpp:1547
 msgid "No NPCs in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1598
+#: src/engine/dccnit.cpp:1602
 msgid "Surprise Attack Turn."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1612
+#: src/engine/dccnit.cpp:1616
 msgid "No enemies in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1791 src/engine/dccnit.cpp:2257
+#: src/engine/dccnit.cpp:1795 src/engine/dccnit.cpp:2284
 #: src/engine/shortcutswindow.cpp:32
 msgid "Nothing"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2005
+#: src/engine/dccnit.cpp:2029
 #, c-format
 msgid "%s taken."
 msgstr ""
 
-#: src/engine/dccnit.cpp:2027
+#: src/engine/dccnit.cpp:2051
 msgid "Inventory is full!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2059
+#: src/engine/dccnit.cpp:2083
 msgid "Door"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2192
+#: src/engine/dccnit.cpp:2219
 #, c-format
 msgid "%s attacks %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2358
+#: src/engine/dccnit.cpp:2385
 msgid "No more actions. Turn ended."
 msgstr ""
 
-#: src/engine/dccnit.cpp:3856
+#: src/engine/dccnit.cpp:3895
 msgid "Exit Battle Mode"
 msgstr ""
 
@@ -526,37 +526,45 @@ msgstr ""
 msgid "Exit"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:164
+#: src/engine/inventwindow.cpp:165
 msgid "Drop"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:171
+#: src/engine/inventwindow.cpp:172
 msgid "Buy"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:171
+#: src/engine/inventwindow.cpp:172
 msgid "Sell"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:178
+#: src/engine/inventwindow.cpp:179
 msgid "Use"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:188
+#: src/engine/inventwindow.cpp:189
 msgid "Info"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:192
+#: src/engine/inventwindow.cpp:193
 msgid "Get"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:297
+#: src/engine/inventwindow.cpp:298
 #, c-format
 msgid "%s reloaded %s with %s ammo."
 msgstr ""
 
-#: src/engine/inventwindow.cpp:332
+#: src/engine/inventwindow.cpp:333
 msgid "No equipped weapons are compatible with this munition type."
+msgstr ""
+
+#: src/engine/inventwindow.cpp:659 data/models/objetos/itens/money/money.dcc:1
+msgid "Money"
+msgstr ""
+
+#: src/engine/inventwindow.cpp:660
+msgid "Define quantity:"
 msgstr ""
 
 #: src/engine/itemwindow.cpp:59
@@ -630,7 +638,7 @@ msgstr ""
 msgid "No missions."
 msgstr ""
 
-#: src/engine/minimapwindow.cpp:37
+#: src/engine/minimapwindow.cpp:40
 msgid "Map"
 msgstr ""
 
