@@ -1,0 +1,5 @@
+sound = sndfx/objects/et.ogg
+posX = 309.775
+posY = 12.400
+posZ = 257.179
+loopInterval = 2
