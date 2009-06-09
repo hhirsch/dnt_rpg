@@ -34,7 +34,7 @@ syn keyword dntGettext        gettext
 syn keyword dntFunction       go_to_dialog dialog_init finish_dialog
 syn keyword dntFunction       init_fight
 syn keyword dntFunction       add_mission complete_mission
-syn keyword dntFunction       give_item receive_item receive_money
+syn keyword dntFunction       give_item receive_item give_money receive_money
 syn keyword dntFunction       receive_xp change_object_state
 syn keyword dntFunction       kill_all map_travel
 
@@ -43,7 +43,7 @@ syn keyword dntTest           roll
 syn keyword dntTest           greater lesser equal diff 
 syn keyword dntTest           align align_not
 syn keyword dntTest           have_item
-syn keyword dntTest           all_dead all_alive
+syn keyword dntTest           all_dead all_alive have_money
 
 syn sync lines=250
 

@@ -28,6 +28,7 @@
 #define TALK_ACTION_KILL_ALL            12 /* Kill All NPCs from a map */
 #define TALK_ACTION_RECEIVE_ITEM        13 /* Receive an Item */
 #define TALK_ACTION_MAP_TRAVEL          14 /* Travel to another map */
+#define TALK_ACTION_GIVE_MONEY          15 /* Give money quantity */
 
 #define TALK_TEST_TRUE                0  /* Always True */
 #define TALK_TEST_ROLL                1  /* Roll some test */
@@ -40,6 +41,7 @@
 #define TALK_TEST_ALIGN               8  /* Test if align is of a type */
 #define TALK_TEST_ALL_ALIVE           9  /* If all characters are alive */
 #define TALK_TEST_ALL_DEAD           10  /* If all characters are dead */
+#define TALK_TEST_HAVE_MONEY         11  /* If have money */
 
 #define BUFFER_SIZE 512
 
@@ -69,6 +71,7 @@
 #define TK_ACTION_COMPLETE_MISSION "complete_mission"
 #define TK_ACTION_GIVE_ITEM "give_item"
 #define TK_ACTION_RECEIVE_MONEY "receive_money"
+#define TK_ACTION_GIVE_MONEY "give_money"
 #define TK_ACTION_CHANGE_OBJECT_STATE "change_object_state"
 #define TK_ACTION_RECEIVE_XP "receive_xp"
 #define TK_ACTION_KILL_ALL "kill_all"
@@ -86,6 +89,7 @@
 #define TK_TEST_HAVE_ITEM "have_item"
 #define TK_TEST_ALL_ALIVE "all_alive"
 #define TK_TEST_ALL_DEAD "all_dead"
+#define TK_TEST_HAVE_MONEY "have_money"
 
 /* Constant Tokens */
 #define TK_CONST_OBJECT_STATE "OBJECT_STATE"
@@ -184,6 +188,11 @@ bool talkTest::set(string token, string t, string a)
    else if(token == TK_TEST_ALL_ALIVE)
    {
       id = TALK_TEST_ALL_ALIVE;
+   }
+   /* have_money */
+   else if(token == TK_TEST_HAVE_MONEY)
+   {
+      id = TALK_TEST_HAVE_MONEY;
    }
    else
    {
@@ -296,6 +305,19 @@ bool talkTest::doTest(character* pc, thing* owner)
    {
       modState modif;
       return(modif.allCharactersDead(test));
+   }
+
+   /* Have money */
+   else if(id == TALK_TEST_HAVE_MONEY)
+   {
+      money* m = (money*)pc->inventories->getItemByFileName(DNT_MONEY_OBJECT);
+      if(m)
+      {
+         int val=0;
+         sscanf(test.c_str(), "%d", &val);
+         return(m->quantity() >= val);
+      }
+      return(false);
    }
 
 
@@ -546,6 +568,10 @@ int conversation::getActionID(string token, string fileName, int line)
    else if(token == TK_ACTION_RECEIVE_MONEY)
    {
       return(TALK_ACTION_RECEIVE_MONEY);
+   }
+   else if(token == TK_ACTION_GIVE_MONEY)
+   {
+      return(TALK_ACTION_GIVE_MONEY);
    }
    else if(token == TK_ACTION_CHANGE_OBJECT_STATE)
    {
@@ -819,6 +845,7 @@ int conversation::loadFile(string name)
                   if( (tact->id == TALK_ACTION_GO_TO_DIALOG) ||
                       (tact->id == TALK_ACTION_DIALOG_INIT) ||
                       (tact->id == TALK_ACTION_RECEIVE_MONEY) ||
+                      (tact->id == TALK_ACTION_GIVE_MONEY) ||
                       (tact->id == TALK_ACTION_CHANGE_OBJECT_STATE) ||
                       (tact->id == TALK_ACTION_RECEIVE_XP))
                   {
@@ -1168,6 +1195,19 @@ void conversation::proccessAction(int opcao, void* curEngine)
             }
          }
          break;
+
+         /* Give Money */
+         case TALK_ACTION_GIVE_MONEY:
+         {
+            money* m = (money*)actualPC->inventories->getItemByFileName(
+                                                              DNT_MONEY_OBJECT);
+            if(m)
+            {
+               m->removeQuantity(actions[i].att);
+            }
+         }
+         break;
+
          /* Change Object State */
          case TALK_ACTION_CHANGE_OBJECT_STATE:
          {
