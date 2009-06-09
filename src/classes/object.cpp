@@ -229,7 +229,6 @@ object::object(object* obj): thing()
    cleanValues();
 
    /* Define type */
-   usedFlag = 0;
    type = obj->type;
 
    /* Define Inventory things */
@@ -282,7 +281,6 @@ object::object(string path): thing()
 void object::cleanValues()
 {
    state = 0;
-   usedFlag = 0;
    inventSizeX = 0;
    inventSizeY = 0;
    name = "";

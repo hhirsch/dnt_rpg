@@ -164,7 +164,6 @@ class object: public thing
       void setPrevious(object* o);
 
    protected:
-      int usedFlag;         /**< The used flag of an object */
       int inventSizeX,      /**< Size on inventory X axis */
           inventSizeY;      /**< Size on inventory Y axis */
 
@@ -203,12 +202,12 @@ class objectsList
    public:
       /*! Remove an object from the list
        * \param o -> object to remove from the list
-       * \note -> usually called at object's contructor */
+       * \note -> usually called at object's destructor */
       static void remove(object* o);
 
       /*! Insert an object to the list
        * \param o -> object to add to the list
-       * \note -> usually called at object's destructor */
+       * \note -> usually called at object's constructor */
       static void insert(object* o);
 
       /*! Remove all static sceneries from the list,

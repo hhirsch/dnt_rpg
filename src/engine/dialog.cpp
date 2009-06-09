@@ -1156,7 +1156,17 @@ void conversation::proccessAction(int opcao, void* curEngine)
 
          /* Receive Money */
          case TALK_ACTION_RECEIVE_MONEY:
-            //TODO
+         {
+            /* Must load one */
+            money* m = (money*)createObject(DNT_MONEY_OBJECT, "");
+
+            /* Now, put it at the actualCharacter Inventory */
+            if(m != NULL)
+            {
+               m->setQuantity(actions[i].att);
+               actualPC->inventories->addObject(m);
+            }
+         }
          break;
          /* Change Object State */
          case TALK_ACTION_CHANGE_OBJECT_STATE:
