@@ -993,8 +993,8 @@ void engine::splashScreen()
    fnt.defineFont(DNT_FONT_TIMES, 20);
    fnt.defineFontAlign(DNT_FONT_ALIGN_CENTER);
    color_Set(130,130,130,255);
-   fnt.write(img, 52, 424, gettext("DccNiTghtmare is developed under Public "
-                                   "Domain: Feel free to use its source code "
+   fnt.write(img, 52, 424, gettext("DccNiTghtmare is relesead under GPLv3 or "
+                                   "later: Feel free to use its source code "
                                    "and data the way you want (or to blame us "
                                    "the same way). DccNiTghtmare is thankful "
                                    "to the people who developed those "
