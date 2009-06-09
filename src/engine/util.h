@@ -42,8 +42,6 @@
 #define THUMB_X      128  /**< X size of the screenshot */
 #define THUMB_Y       96  /**< Y size of the screenshot */
 
-#define DNT_MONEY_OBJECT "models/objetos/itens/money/money.dcc"
-
 /********************************************************************
  *                          Update constants                        *
  ********************************************************************/

@@ -4,7 +4,7 @@
 
 #include "inventory.h"
 #include "object.h"
-
+#include "money.h"
 
 /**************************************************************
  *                          Constructor                       *
@@ -150,6 +150,28 @@ bool inventory::equipObject(object* obj, int where)
 bool inventory::addObject(object* obj)
 {
    int inv = 0;
+   money* m, *cur;
+
+   if(obj->getType() == OBJECT_TYPE_MONEY)
+   {
+      cur = (money*)obj;
+      /* Search for money already on the inventory */
+      for(inv = 0; inv < INVENTORY_PER_CHARACTER; inv++)
+      {
+         m = (money*)slots[inv]->getItemByFileName(DNT_MONEY_OBJECT);
+         if(m != NULL)
+         {
+            /* Add the money quantity to the current */
+            m->addQuantity(cur->quantity());
+            /* bye current! */
+            delete(cur);
+
+            return(true);
+         }
+      }
+   }
+
+   inv = 0;
    while( (!slots[inv]->addObject(obj) && (inv < INVENTORY_PER_CHARACTER)))
    {
       inv++;

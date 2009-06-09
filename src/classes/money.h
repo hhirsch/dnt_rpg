@@ -5,6 +5,8 @@
 #include "thing.h"
 #include "object.h"
 
+#define DNT_MONEY_OBJECT "models/objetos/itens/money/money.dcc"
+
 /*! money class is the money representation on DNT  */
 class money: public object
 {
