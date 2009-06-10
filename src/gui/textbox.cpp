@@ -186,6 +186,49 @@ void textBox::draw(SDL_Surface* screen)
 /*******************************************************
  *                          draw                       *
  *******************************************************/
+void textBox::draw(int i)
+{
+   int l;
+   textLine* line;
+   dntFont fnt;
+
+   /* No ned to draw if not before first line */
+   if(i < firstLine)
+   {
+      return;
+   }
+
+   if(fullText)
+   {
+      /* Get desired text line */
+      int y = y1+2;
+      line = fullText;
+      for(l = 0; ((l < i) && (line != NULL)); l++)
+      {
+         if(l >= firstLine)
+         {
+            y += line->height;
+         }
+         line = line->next;
+      }
+  
+      /* Draw the desired line */
+      if(line)
+      {
+         color_Set(0,0,0,255);
+         fnt.defineFont(line->fontName, line->fontSize);
+         fnt.defineFontAlign(line->fontAlign);
+         fnt.defineFontStyle(line->fontStyle);
+         fnt.write(wSurface, x1+2, y, line->text, x1+2, y, x2, y2);
+
+         setChanged();
+      }
+   }
+}
+
+/*******************************************************
+ *                          draw                       *
+ *******************************************************/
 int textBox::draw()
 {
    int i;

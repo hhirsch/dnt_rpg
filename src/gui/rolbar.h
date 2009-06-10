@@ -48,7 +48,7 @@ class rolBar: public guiObject
       /*! Destructor */
       ~rolBar();
 
-      /*! Verify if the rolBar is the owner of aguiObject
+      /*! Verify if the rolBar is the owner of a guiObject
        * \param obj -> pointer to the desired guiObject
        * \return -> true if obj is from the rolBar (a button, for example) */
       bool isOwner(guiObject* obj);
@@ -103,6 +103,10 @@ class rolBar: public guiObject
        * \param screen -> window surface */
       void draw(SDL_Surface* screen);
 
+      /*! Render only the active text
+       * \param i -> text number to render */
+      void draw(int i);
+
       /*! Get last line text on the rolbar
        * /param -> text of the last line */
       string getLastLine();
@@ -118,6 +122,7 @@ class rolBar: public guiObject
 
       Uint32 lastUpdated;     /**< Last Time when updated */
       int maxHeight;          /**< Max Height */
+      int style;              /**< Current Style */
       
       void* intList;          /**< Internal GUI Objects List */
 };

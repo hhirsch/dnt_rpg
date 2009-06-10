@@ -26,6 +26,7 @@
  - Fixed a bug on DNT installation of bin directory and default options file;
  - Fixed a bug when sound effect file doesn't exist;
  - Minimap More closer (and translatable);
+ - New tabButton style to listText;
 
 Working on:
  - Weather effects;
@@ -33,6 +34,7 @@ Working on:
  - New effects for comic books;
  - Capacity of using talents;
  - Implement 5-15% of the talents defined on DNT Book;
+ - Money;
 
 Pending:
  - Define Counter Skills;

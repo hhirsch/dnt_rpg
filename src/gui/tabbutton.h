@@ -29,6 +29,12 @@
 #define TABBUTTON_ON_PRESS  40 /**< Some button pressing */
 #define TABBUTTON_PRESSED   41 /**< Some Button pressed */
 
+enum
+{
+   FARSO_TAB_BUTTON_STYLE_NORMAL,
+   FARSO_TAB_BUTTON_STYLE_LIST_TEXT
+};
+
 /*! oneTabButton is a class to define what is a button on a table of buttons */
 class oneTabButton: public guiObject
 {
@@ -85,6 +91,10 @@ class tabButton: public picture
                                 int& actionType);
 
 
+      /*! Set the tabButton style
+       * \param st -> new style */
+      void setStyle(int st);
+
       /*! Set the current button
        * \param i -> current button number */
       void setCurrent(int i);
@@ -98,6 +108,7 @@ class tabButton: public picture
       oneTabButton Buttons[MAX_TABBUTTONS]; /**< Buttons Vector */
       bool pressed;                         /**< Internal Verifier on Treat */
       int current;                          /**< Current Button selected */
+      int style;                            /**< Current Style */
       guiObject* objectBelow;               /**< Object Below */
       farso_colors cor;
 };

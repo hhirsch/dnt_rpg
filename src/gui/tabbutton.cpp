@@ -19,6 +19,8 @@
 */
 
 #include "tabbutton.h"
+#include "textbox.h"
+#include "rolbar.h"
 #include "draw.h"
 #include "mouse.h"
 
@@ -30,6 +32,7 @@ tabButton::tabButton(int x,int y,const char* arquivo):picture(x,y,0,0,arquivo)
    numButtons = 0;
    pressed = false;
    type = FARSO_OBJECT_TAB_BUTTON;
+   style = FARSO_TAB_BUTTON_STYLE_NORMAL;
    current = - 1;
    objectBelow = NULL;
 }
@@ -48,6 +51,7 @@ tabButton::tabButton(int x, int y, int w, int h):picture(x,y,0,0, NULL)
    pressed = false;
    current = -1;
    objectBelow = NULL;
+   style = FARSO_TAB_BUTTON_STYLE_NORMAL;
 }
 
 /***********************************************************
@@ -64,6 +68,14 @@ void tabButton::setObjectBelow(guiObject* obj)
 void tabButton::setCurrent(int i)
 {
    current = i;
+}
+
+/***********************************************************
+ *                        setStyle                         *
+ ***********************************************************/
+void tabButton::setStyle(int st)
+{
+   style = st;
 }
 
 /***********************************************************
@@ -113,14 +125,33 @@ void tabButton::draw(SDL_Surface *screen)
    /* Draw Button Contorns */
    if(current >=0)
    {
-      color_Set(cor.colorCont[0].R, cor.colorCont[0].G,
+      if(style == FARSO_TAB_BUTTON_STYLE_NORMAL)
+      {
+        color_Set(cor.colorCont[0].R, cor.colorCont[0].G,
                 cor.colorCont[0].B, cor.colorCont[0].A);
-      rectangle_2Colors(screen,x1+Buttons[current].x1,
-                               y1+Buttons[current].y1,
-                               x1+Buttons[current].x2,
-                               y1+Buttons[current].y2,
-                        cor.colorCont[1].R, cor.colorCont[1].G,
-                        cor.colorCont[1].B, cor.colorCont[1].A);
+        rectangle_2Colors(screen,x1+Buttons[current].x1,
+                                 y1+Buttons[current].y1,
+                                 x1+Buttons[current].x2,
+                                 y1+Buttons[current].y2,
+                          cor.colorCont[1].R, cor.colorCont[1].G,
+                          cor.colorCont[1].B, cor.colorCont[1].A);
+      }
+      else if(style == FARSO_TAB_BUTTON_STYLE_LIST_TEXT)
+      {
+
+         color_Set(240,120,0,255);
+         rectangle_Fill(screen, x1+Buttons[current].x1,
+               y1+Buttons[current].y1,
+               x1+Buttons[current].x2,
+               y1+Buttons[current].y2);
+
+         if( (objectBelow != NULL) && 
+               (objectBelow->type == FARSO_OBJECT_ROL_BAR) )
+         {
+            rolBar* rb = (rolBar*)objectBelow;
+            rb->draw(current+rb->getFirstLine());
+         }
+      }
    }
    setChanged();
 }

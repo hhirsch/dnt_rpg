@@ -61,6 +61,7 @@ listText::listText(int xa, int ya, int xb, int yb, SDL_Surface* surface,
    
    /* Create the tabButton */
    table = l->insertTabButton(x1, y1, x2-x1-12, y2-y1, NULL);
+   table->setStyle(FARSO_TAB_BUTTON_STYLE_LIST_TEXT);
    for(i = 0; i<maxButtons; i++)
    {
       listButtons[i] = table->insertButton(1, (i*fnt.getHeight())+3,
