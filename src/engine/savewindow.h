@@ -56,7 +56,7 @@ class saveWindow
       void open();
 
       /*! Change the current displayed image and title */
-      void changeInfo();
+      void changeInfo(int mouseX, int mouseY);
 
       string curFileName;       /**< Current FileName selected */
 

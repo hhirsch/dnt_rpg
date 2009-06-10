@@ -107,7 +107,7 @@ void saveWindow::open()
 /***********************************************************************
  *                           changeInfo                                *
  ***********************************************************************/
-void saveWindow::changeInfo()
+void saveWindow::changeInfo(int mouseX, int mouseY)
 {
    saveFile* sav;
    warning warn;
@@ -138,7 +138,7 @@ void saveWindow::changeInfo()
          delete(sav);
       }
 
-      fileWindow->draw(0,0);
+      fileWindow->draw(mouseX, mouseY);
    }
 }
 
@@ -212,7 +212,7 @@ int saveWindow::run(bool load, GLdouble proj[16],GLdouble modl[16],
          switch(eventInfo)
          {
             case FARSO_EVENT_FILE_SEL_CHANGED:
-               changeInfo();
+               changeInfo(x,y);
             break;
             case FARSO_EVENT_FILE_SEL_CANCEL:
                state = DNT_SAVE_WINDOW_CANCEL;
