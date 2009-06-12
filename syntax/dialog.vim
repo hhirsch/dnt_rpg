@@ -37,6 +37,7 @@ syn keyword dntFunction       add_mission complete_mission
 syn keyword dntFunction       give_item receive_item give_money receive_money
 syn keyword dntFunction       receive_xp change_object_state
 syn keyword dntFunction       kill_all map_travel
+syn keyword dntFunction       call_script
 
 " Tests
 syn keyword dntTest           roll

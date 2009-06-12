@@ -44,6 +44,7 @@
 #define TALK_ACTION_RECEIVE_ITEM        13 /* Receive an Item */
 #define TALK_ACTION_MAP_TRAVEL          14 /* Travel to another map */
 #define TALK_ACTION_GIVE_MONEY          15 /* Give money quantity */
+#define TALK_ACTION_CALL_SCRIPT         16 /* Call a one time finish script */
 
 #define TALK_TEST_TRUE                0  /* Always True */
 #define TALK_TEST_ROLL                1  /* Roll some test */
@@ -92,6 +93,7 @@
 #define TK_ACTION_KILL_ALL "kill_all"
 #define TK_ACTION_RECEIVE_ITEM "receive_item"
 #define TK_ACTION_MAP_TRAVEL "map_travel"
+#define TK_ACTION_CALL_SCRIPT "call_script"
 
 /* Test Tokens */
 #define TK_TEST_ROLL "roll"
@@ -564,6 +566,10 @@ int conversation::getActionID(string token, string fileName, int line)
    {
       return(TALK_ACTION_DIALOG_INIT);
    }
+   else if(token == TK_ACTION_CALL_SCRIPT)
+   {
+      return(TALK_ACTION_CALL_SCRIPT);
+   }
    else if(token == TK_ACTION_ADD_MISSION)
    {
       return(TALK_ACTION_ADD_MISSION);
@@ -889,7 +895,8 @@ int conversation::loadFile(string name)
                   else if( (tact->id == TALK_ACTION_GIVE_ITEM) ||
                            (tact->id == TALK_ACTION_RECEIVE_ITEM) ||
                            (tact->id == TALK_ACTION_KILL_ALL) ||
-                           (tact->id == TALK_ACTION_MAP_TRAVEL) )
+                           (tact->id == TALK_ACTION_MAP_TRAVEL) ||
+                           (tact->id == TALK_ACTION_CALL_SCRIPT) )
                   {
                      //get name
                      token = getString(position, buffer, separator);
@@ -1105,6 +1112,37 @@ void conversation::proccessAction(int opcao, void* curEngine)
             setInitialDialog(actions[i].att);
          }
          break;
+         
+         /* Call and run a script */
+         case TALK_ACTION_CALL_SCRIPT:
+         {
+            /* Open the script */
+            iaScript* script = new iaScript(actions[i].satt, curEngine);
+            
+            /* Set the script owner */
+            if(owner)
+            {
+               if(owner->getThingType() == THING_TYPE_OBJECT)
+               {
+                  script->defineObjectOwner((object*)owner);
+               }
+               else if(owner->getThingType() == THING_TYPE_CHARACTER)
+               {
+                  script->defineCharacterOwner((character*)owner);
+               }
+            }
+            /* Define the current map */
+            script->defineMap( ((engine*)curEngine)->getCurrentMap(),
+                               ((engine*)curEngine)->NPCs);
+
+            /* Now, full run the script */
+            script->run(0);
+
+            /* Done with the script */
+            delete(script);
+         }
+         break;
+         
          /* Add a misstion */
          case TALK_ACTION_ADD_MISSION:
          {

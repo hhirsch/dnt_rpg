@@ -1,7 +1,9 @@
 name = Atleticano
 model = models/personagens/atleticano/model.cfg
 portrait = characters/portraits/atleticano.png
+battleScript = ia/script/fight/fight_animal.dsl
 maxLifePoints = 30
+conversationFile = dialogs/tutorial/atleticano.dlg
 class = PHYSICAL_EDUCATION 2
 race = COMMON_HUMAN
 align = CENTER_NEUTRAL
