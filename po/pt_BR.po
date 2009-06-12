@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2009-06-09 17:27-0300\n"
+"POT-Creation-Date: 2009-06-12 15:21-0300\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -63,7 +63,7 @@ msgstr "Habilidade Inválida"
 msgid "Not enought points to use!"
 msgstr "Pontos não suficientes para usar!"
 
-#: src/classes/mission.cpp:512 src/engine/dialog.cpp:1126
+#: src/classes/mission.cpp:512 src/engine/dialog.cpp:1164
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "Missão Cumprida: %d XP!"
@@ -165,7 +165,7 @@ msgstr "Aviso"
 msgid "You Need to Assign All Attributes."
 msgstr "Você precisa definir todos atributos."
 
-#: src/engine/barterwindow.cpp:50 src/engine/dialog.cpp:1401
+#: src/engine/barterwindow.cpp:50 src/engine/dialog.cpp:1439
 msgid "Barter"
 msgstr "Barganha"
 
@@ -473,20 +473,20 @@ msgstr "Sem mais ações: Turno Finalizado."
 msgid "Exit Battle Mode"
 msgstr "Sai do Modo de Batalha"
 
-#: src/engine/dialog.cpp:277
+#: src/engine/dialog.cpp:279
 msgid "Success"
 msgstr "Sucesso"
 
-#: src/engine/dialog.cpp:277
+#: src/engine/dialog.cpp:279
 msgid "Failure"
 msgstr "Falha"
 
-#: src/engine/dialog.cpp:972
+#: src/engine/dialog.cpp:979
 #, c-format
 msgid "Not found in dialog: %d\n"
 msgstr "Não achou no diálogo: %d\n"
 
-#: src/engine/dialog.cpp:1395
+#: src/engine/dialog.cpp:1433
 msgid "Dialog"
 msgstr "Diálogo"
 
@@ -3913,7 +3913,7 @@ msgstr ""
 "Dinheiro, dinheiro! tudo que vocês desejam é dinheiro! Mas... é Chrono... "
 "tome essas moedas..."
 
-#: data/dialogs/tutorial/logan.dlg:159
+#: data/dialogs/tutorial/logan.dlg:159 data/dialogs/tutorial/logan.dlg:286
 msgid "Thanks."
 msgstr "Obrigado."
 
@@ -3995,13 +3995,23 @@ msgstr "Bom."
 
 #: data/dialogs/tutorial/logan.dlg:282
 msgid ""
+"Give this to the Atleticano at the other part of this house and he'll see "
+"that I've sent you. Maybe he can help you."
+msgstr ""
+"Entregue isto ao Atleticano na outra parte desta casa e ele entenderá que eu "
+"te enviei. Talvez ele possa te ajudar."
+
+#: data/dialogs/tutorial/logan.dlg:297
+msgid ""
 "I haven't any more things for you in this DNT version. Come back when "
 "there's a latter version or join DNTeam to help us develop it!"
 msgstr ""
 "Não tenho mais coisas para você para esta versão do DNT. Volte depois numa "
 "nova versão or junte-se ao DNTeam para ajudarnos a desenvolvê-la!"
 
-#: data/dialogs/tutorial/logan.dlg:286
+#: data/dialogs/tutorial/logan.dlg:301 data/dialogs/tutorial/atleticano.dlg:38
+#: data/dialogs/tutorial/atleticano.dlg:51
+#: data/dialogs/tutorial/atleticano.dlg:64
 msgid "Bye."
 msgstr "Adeus."
 
@@ -4140,6 +4150,71 @@ msgstr "Nunca!"
 #: data/dialogs/tutorial/santa.dlg:146
 msgid "I'm waiting for you install the Ruindows on the occupation's notebook!"
 msgstr "Estou esperando que você instale o Ruindows no notebook da ocupação!"
+
+#: data/dialogs/tutorial/atleticano.dlg:6
+msgid "What are you doing here in my house?"
+msgstr "O que vocês está fazendo na minha casa?"
+
+#: data/dialogs/tutorial/atleticano.dlg:11
+msgid "Logan sent this to you."
+msgstr "Logan mandou isto para você."
+
+#: data/dialogs/tutorial/atleticano.dlg:16
+msgid "Just wandering, sorry..."
+msgstr "Só passeando, desculpe-me..."
+
+#: data/dialogs/tutorial/atleticano.dlg:19
+msgid "Not of your concern!"
+msgstr "Não é da sua conta!"
+
+#: data/dialogs/tutorial/atleticano.dlg:25
+msgid "I'm lost."
+msgstr "Estou perdido."
+
+#: data/dialogs/tutorial/atleticano.dlg:34
+msgid "So please, leave this house."
+msgstr "Então, por favor, saia daqui."
+
+#: data/dialogs/tutorial/atleticano.dlg:47
+msgid "Please, don't do anything bad to us!"
+msgstr "Por favor, não faça nada de ruim conosco!"
+
+#: data/dialogs/tutorial/atleticano.dlg:60
+msgid "And so I am."
+msgstr "E também estou eu."
+
+#: data/dialogs/tutorial/atleticano.dlg:73
+msgid "So you're the one Logan found. I need something from you."
+msgstr ""
+"Então você é o tal que o Logan encontrou. Eu preciso que você me faça algo."
+
+#: data/dialogs/tutorial/cruzeirense.dlg:6
+msgid "I'm very busy now."
+msgstr "Estou muito ocupado agora."
+
+#: data/dialogs/tutorial/cruzeirense.dlg:10
+msgid "I'll come back latter"
+msgstr "Voltarei depois."
+
+#: data/dialogs/tutorial/cruzeirense.dlg:21
+msgid "What now?"
+msgstr "Que foi?"
+
+#: data/dialogs/tutorial/cruzeirense.dlg:26
+msgid "I have something for you."
+msgstr "Eu tenho algo para você."
+
+#: data/dialogs/tutorial/cruzeirense.dlg:30
+msgid "Ehr, nothing."
+msgstr "Ehr, nada."
+
+#: data/dialogs/tutorial/cruzeirense.dlg:40
+msgid "Oh, soda!"
+msgstr "Ah, refrigerante!"
+
+#: data/dialogs/tutorial/cruzeirense.dlg:44
+msgid "I need some info from you."
+msgstr "Eu preciso de algumas informações."
 
 #: data/missions/tutorial/mission1.mis:2
 msgid "Find Chrono Trigger cartdrige for Logan."

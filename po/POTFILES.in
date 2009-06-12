@@ -251,6 +251,8 @@ data/dialogs/objects/house2_ovo.dlg
 data/dialogs/objects/refmachine.dlg
 data/dialogs/tutorial/logan.dlg
 data/dialogs/tutorial/santa.dlg
+data/dialogs/tutorial/atleticano.dlg
+data/dialogs/tutorial/cruzeirense.dlg
 
 #missions
 data/missions/tutorial/mission1.mis

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2009-06-09 17:27-0300\n"
+"POT-Creation-Date: 2009-06-12 15:21-0300\n"
 "PO-Revision-Date: 2008-12-05 15:30+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -65,7 +65,7 @@ msgstr "Talento Non Valido"
 msgid "Not enought points to use!"
 msgstr "Non abbastanza punti da usare!"
 
-#: src/classes/mission.cpp:512 src/engine/dialog.cpp:1126
+#: src/classes/mission.cpp:512 src/engine/dialog.cpp:1164
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "Missione Completata: %d Punti Esperienza!"
@@ -167,7 +167,7 @@ msgstr "Avvertimento"
 msgid "You Need to Assign All Attributes."
 msgstr "Devi Assegnare Tutti Gli Attributi."
 
-#: src/engine/barterwindow.cpp:50 src/engine/dialog.cpp:1401
+#: src/engine/barterwindow.cpp:50 src/engine/dialog.cpp:1439
 msgid "Barter"
 msgstr "Baratta"
 
@@ -471,20 +471,20 @@ msgstr "Nessuna azione rimasta. Turno finito."
 msgid "Exit Battle Mode"
 msgstr "Esci Dalla Modalità Battaglia"
 
-#: src/engine/dialog.cpp:277
+#: src/engine/dialog.cpp:279
 msgid "Success"
 msgstr "Successo"
 
-#: src/engine/dialog.cpp:277
+#: src/engine/dialog.cpp:279
 msgid "Failure"
 msgstr "Fallimento"
 
-#: src/engine/dialog.cpp:972
+#: src/engine/dialog.cpp:979
 #, c-format
 msgid "Not found in dialog: %d\n"
 msgstr "Non trovato nel dialogo: %d\n"
 
-#: src/engine/dialog.cpp:1395
+#: src/engine/dialog.cpp:1433
 msgid "Dialog"
 msgstr "Dialogo"
 
@@ -3263,7 +3263,7 @@ msgid ""
 "coins..."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:159
+#: data/dialogs/tutorial/logan.dlg:159 data/dialogs/tutorial/logan.dlg:286
 msgid "Thanks."
 msgstr "Grazie."
 
@@ -3337,11 +3337,19 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:282
 msgid ""
+"Give this to the Atleticano at the other part of this house and he'll see "
+"that I've sent you. Maybe he can help you."
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:297
+msgid ""
 "I haven't any more things for you in this DNT version. Come back when "
 "there's a latter version or join DNTeam to help us develop it!"
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:286
+#: data/dialogs/tutorial/logan.dlg:301 data/dialogs/tutorial/atleticano.dlg:38
+#: data/dialogs/tutorial/atleticano.dlg:51
+#: data/dialogs/tutorial/atleticano.dlg:64
 msgid "Bye."
 msgstr ""
 
@@ -3467,6 +3475,70 @@ msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:146
 msgid "I'm waiting for you install the Ruindows on the occupation's notebook!"
+msgstr ""
+
+#: data/dialogs/tutorial/atleticano.dlg:6
+msgid "What are you doing here in my house?"
+msgstr ""
+
+#: data/dialogs/tutorial/atleticano.dlg:11
+msgid "Logan sent this to you."
+msgstr ""
+
+#: data/dialogs/tutorial/atleticano.dlg:16
+msgid "Just wandering, sorry..."
+msgstr ""
+
+#: data/dialogs/tutorial/atleticano.dlg:19
+msgid "Not of your concern!"
+msgstr ""
+
+#: data/dialogs/tutorial/atleticano.dlg:25
+msgid "I'm lost."
+msgstr ""
+
+#: data/dialogs/tutorial/atleticano.dlg:34
+msgid "So please, leave this house."
+msgstr ""
+
+#: data/dialogs/tutorial/atleticano.dlg:47
+msgid "Please, don't do anything bad to us!"
+msgstr ""
+
+#: data/dialogs/tutorial/atleticano.dlg:60
+msgid "And so I am."
+msgstr ""
+
+#: data/dialogs/tutorial/atleticano.dlg:73
+msgid "So you're the one Logan found. I need something from you."
+msgstr ""
+
+#: data/dialogs/tutorial/cruzeirense.dlg:6
+msgid "I'm very busy now."
+msgstr ""
+
+#: data/dialogs/tutorial/cruzeirense.dlg:10
+msgid "I'll come back latter"
+msgstr ""
+
+#: data/dialogs/tutorial/cruzeirense.dlg:21
+msgid "What now?"
+msgstr ""
+
+#: data/dialogs/tutorial/cruzeirense.dlg:26
+msgid "I have something for you."
+msgstr ""
+
+#: data/dialogs/tutorial/cruzeirense.dlg:30
+msgid "Ehr, nothing."
+msgstr ""
+
+#: data/dialogs/tutorial/cruzeirense.dlg:40
+msgid "Oh, soda!"
+msgstr ""
+
+#: data/dialogs/tutorial/cruzeirense.dlg:44
+msgid "I need some info from you."
 msgstr ""
 
 #: data/missions/tutorial/mission1.mis:2

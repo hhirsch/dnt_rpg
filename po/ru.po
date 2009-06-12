@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2009-06-09 17:27-0300\n"
+"POT-Creation-Date: 2009-06-12 15:21-0300\n"
 "PO-Revision-Date: 2007-11-20 17:24+0000\n"
 "Last-Translator: Sergei Zivukov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -65,7 +65,7 @@ msgstr "Неправильный подвиг"
 msgid "Not enought points to use!"
 msgstr "Недостаточно очков для использования!"
 
-#: src/classes/mission.cpp:512 src/engine/dialog.cpp:1126
+#: src/classes/mission.cpp:512 src/engine/dialog.cpp:1164
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "Миссия завершена: %d XP!"
@@ -167,7 +167,7 @@ msgstr "Предупреждение"
 msgid "You Need to Assign All Attributes."
 msgstr ""
 
-#: src/engine/barterwindow.cpp:50 src/engine/dialog.cpp:1401
+#: src/engine/barterwindow.cpp:50 src/engine/dialog.cpp:1439
 msgid "Barter"
 msgstr ""
 
@@ -471,20 +471,20 @@ msgstr ""
 msgid "Exit Battle Mode"
 msgstr "Покинуть режим сражения"
 
-#: src/engine/dialog.cpp:277
+#: src/engine/dialog.cpp:279
 msgid "Success"
 msgstr ""
 
-#: src/engine/dialog.cpp:277
+#: src/engine/dialog.cpp:279
 msgid "Failure"
 msgstr ""
 
-#: src/engine/dialog.cpp:972
+#: src/engine/dialog.cpp:979
 #, c-format
 msgid "Not found in dialog: %d\n"
 msgstr "Не найдено в диалоге: %d\n"
 
-#: src/engine/dialog.cpp:1395
+#: src/engine/dialog.cpp:1433
 msgid "Dialog"
 msgstr "Диалог"
 
@@ -561,9 +561,8 @@ msgid "No equipped weapons are compatible with this munition type."
 msgstr ""
 
 #: src/engine/inventwindow.cpp:675 data/models/objetos/itens/money/money.dcc:1
-#, fuzzy
 msgid "Money"
-msgstr "Нет"
+msgstr ""
 
 #: src/engine/inventwindow.cpp:676
 msgid "Define quantity:"
@@ -677,42 +676,36 @@ msgid "Russian"
 msgstr ""
 
 #: src/engine/options.cpp:126
-#, fuzzy
 msgid "Camera Rotate Left"
-msgstr "Режим камеры:"
+msgstr ""
 
 #: src/engine/options.cpp:127
 msgid "Camera Rotate Right"
 msgstr ""
 
 #: src/engine/options.cpp:128
-#, fuzzy
 msgid "Camera Rotate Up"
-msgstr "Режим камеры:"
+msgstr ""
 
 #: src/engine/options.cpp:129
-#, fuzzy
 msgid "Camera Rotate Down"
-msgstr "Режим камеры:"
+msgstr ""
 
 #: src/engine/options.cpp:130
-#, fuzzy
 msgid "Camera Zoom Up"
-msgstr "Режим камеры:"
+msgstr ""
 
 #: src/engine/options.cpp:131
 msgid "Camera Zoom Down"
 msgstr ""
 
 #: src/engine/options.cpp:132
-#, fuzzy
 msgid "Camera Top"
-msgstr "Режим камеры:"
+msgstr ""
 
 #: src/engine/options.cpp:133
-#, fuzzy
 msgid "Camera Bottom"
-msgstr "Режим камеры:"
+msgstr ""
 
 #: src/engine/options.cpp:134
 msgid "Camera Zoom Max"
@@ -755,27 +748,24 @@ msgid "Rotate Right"
 msgstr ""
 
 #: src/engine/options.cpp:145
-#, fuzzy
 msgid "Change Character"
-msgstr "Загрузка характера"
+msgstr ""
 
 #: src/engine/options.cpp:147
 msgid "End Turn"
 msgstr ""
 
 #: src/engine/options.cpp:149
-#, fuzzy
 msgid "Minimap"
-msgstr "Карта"
+msgstr ""
 
 #: src/engine/options.cpp:150 src/engine/shortcutswindow.cpp:49
 msgid "Shortcuts"
 msgstr "Мелочь"
 
 #: src/engine/options.cpp:153
-#, fuzzy
 msgid "Character Info"
-msgstr "Характеристики"
+msgstr ""
 
 #: src/engine/options.cpp:552 src/engine/options.cpp:579
 #: data/weapons/types/munitions.dcl:2
@@ -820,19 +810,16 @@ msgid "Input"
 msgstr ""
 
 #: src/engine/options.cpp:734
-#, fuzzy
 msgid "Windows"
-msgstr "Мудрость"
+msgstr ""
 
 #: src/engine/options.cpp:737
-#, fuzzy
 msgid "Character"
-msgstr "Характеристики"
+msgstr ""
 
 #: src/engine/options.cpp:740
-#, fuzzy
 msgid "Camera"
-msgstr "Режим камеры:"
+msgstr ""
 
 #: src/engine/options.cpp:745
 msgid "Audio"
@@ -3243,7 +3230,7 @@ msgid ""
 "coins..."
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:159
+#: data/dialogs/tutorial/logan.dlg:159 data/dialogs/tutorial/logan.dlg:286
 msgid "Thanks."
 msgstr ""
 
@@ -3317,11 +3304,19 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:282
 msgid ""
+"Give this to the Atleticano at the other part of this house and he'll see "
+"that I've sent you. Maybe he can help you."
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:297
+msgid ""
 "I haven't any more things for you in this DNT version. Come back when "
 "there's a latter version or join DNTeam to help us develop it!"
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:286
+#: data/dialogs/tutorial/logan.dlg:301 data/dialogs/tutorial/atleticano.dlg:38
+#: data/dialogs/tutorial/atleticano.dlg:51
+#: data/dialogs/tutorial/atleticano.dlg:64
 msgid "Bye."
 msgstr ""
 
@@ -3447,6 +3442,70 @@ msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:146
 msgid "I'm waiting for you install the Ruindows on the occupation's notebook!"
+msgstr ""
+
+#: data/dialogs/tutorial/atleticano.dlg:6
+msgid "What are you doing here in my house?"
+msgstr ""
+
+#: data/dialogs/tutorial/atleticano.dlg:11
+msgid "Logan sent this to you."
+msgstr ""
+
+#: data/dialogs/tutorial/atleticano.dlg:16
+msgid "Just wandering, sorry..."
+msgstr ""
+
+#: data/dialogs/tutorial/atleticano.dlg:19
+msgid "Not of your concern!"
+msgstr ""
+
+#: data/dialogs/tutorial/atleticano.dlg:25
+msgid "I'm lost."
+msgstr ""
+
+#: data/dialogs/tutorial/atleticano.dlg:34
+msgid "So please, leave this house."
+msgstr ""
+
+#: data/dialogs/tutorial/atleticano.dlg:47
+msgid "Please, don't do anything bad to us!"
+msgstr ""
+
+#: data/dialogs/tutorial/atleticano.dlg:60
+msgid "And so I am."
+msgstr ""
+
+#: data/dialogs/tutorial/atleticano.dlg:73
+msgid "So you're the one Logan found. I need something from you."
+msgstr ""
+
+#: data/dialogs/tutorial/cruzeirense.dlg:6
+msgid "I'm very busy now."
+msgstr ""
+
+#: data/dialogs/tutorial/cruzeirense.dlg:10
+msgid "I'll come back latter"
+msgstr ""
+
+#: data/dialogs/tutorial/cruzeirense.dlg:21
+msgid "What now?"
+msgstr ""
+
+#: data/dialogs/tutorial/cruzeirense.dlg:26
+msgid "I have something for you."
+msgstr ""
+
+#: data/dialogs/tutorial/cruzeirense.dlg:30
+msgid "Ehr, nothing."
+msgstr ""
+
+#: data/dialogs/tutorial/cruzeirense.dlg:40
+msgid "Oh, soda!"
+msgstr ""
+
+#: data/dialogs/tutorial/cruzeirense.dlg:44
+msgid "I need some info from you."
 msgstr ""
 
 #: data/missions/tutorial/mission1.mis:2
@@ -3605,83 +3664,3 @@ msgstr ""
 #: data/characters/pcs/santa.pc:1
 msgid "Santa Claws"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Camera Down"
-#~ msgstr "Режим камеры:"
-
-#, fuzzy
-#~ msgid "Camera Left"
-#~ msgstr "Режим камеры:"
-
-#~ msgid "Charism"
-#~ msgstr "Харизма"
-
-#~ msgid "Ouch, can't load NPC's file: %s.\n"
-#~ msgstr "Ох, не могу загрузить файл NPC: %s.\n"
-
-#~ msgid "Class Description"
-#~ msgstr "Описание класса"
-
-#~ msgid "Race Characteristcs"
-#~ msgstr "Характеристики расы"
-
-#~ msgid "Error while opening skills list: %s\n"
-#~ msgstr "Произошла ошибка пока открывается список скиллов: %s\n"
-
-#~ msgid "Can't open skill file: %s \n"
-#~ msgstr "Не могу открыть файл со скиллом: %s \n"
-
-#~ msgid "Can't open the list with portraits: portraits.lst!\n"
-#~ msgstr "Не могу открыть список с портретами: portraits.lst!\n"
-
-#~ msgid "Error while writing Options: %s\n"
-#~ msgstr "Произошла ошибка пока записывались опции: %s\n"
-
-#~ msgid "Argh! Can't init SDL!\n"
-#~ msgstr "Аргх! Не могу инициализировать SDL!\n"
-
-#~ msgid "Leave"
-#~ msgstr "Сохранить"
-
-#~ msgid "Cannot open File!\n"
-#~ msgstr "Не могу открыть файл!\n"
-
-#~ msgid "Tried to define dialog before end last one!"
-#~ msgstr "Попытка определить диалог до последнего конца!"
-
-#~ msgid "Tried to begin NPC before end something!"
-#~ msgstr "Попытка начать NPC после чего-нибудь конца!"
-
-#~ msgid "Tried to end NPC before begin it!"
-#~ msgstr "Попытка NPC начать до конца!"
-
-#~ msgid "Tried to begin PC before end something!"
-#~ msgstr "Попытка начать PC после чего-нибудь конца!"
-
-#~ msgid "Tried to end PC before begin it!"
-#~ msgstr "Попытка PC начать до конца!"
-
-#~ msgid "Option Text without option!"
-#~ msgstr "Опции текста без опций!"
-
-#~ msgid "Text without any relation!"
-#~ msgstr "Текст без какой-либо связи!"
-
-#~ msgid "Option without begin PC!"
-#~ msgstr "Опции без начала PC!"
-
-#~ msgid "Action isn't yet defined to NPC!"
-#~ msgstr "Действие еще не определено NPC!"
-
-#~ msgid "Option Action without option!"
-#~ msgstr "Опции действия без опции!"
-
-#~ msgid "Action without any relation!\n"
-#~ msgstr "Действие без какой-либо связи!\n"
-
-#~ msgid "%s attacks %s|"
-#~ msgstr "%s атаковал %s|"
-
-#~ msgid "0.2"
-#~ msgstr "0.2"
