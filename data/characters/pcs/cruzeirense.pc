@@ -1,6 +1,8 @@
 name = Cruzeirense
 model = models/personagens/cruzeirense/model.cfg
 portrait = characters/portraits/cruzeirense.png
+generalScript = ia/script/general/cruzeirense.dsl
+battleScript = ia/script/fight/fight_animal.dsl
 maxLifePoints = 27
 class = PHYSICAL_EDUCATION 2
 race = COMMON_HUMAN
