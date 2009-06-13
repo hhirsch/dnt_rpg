@@ -1,0 +1,80 @@
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(0)
+   npc_begin
+      text = gettext("What are you doing here in my house?")
+   npc_end
+   pc_begin
+      option
+         pre_test = have_item("models/objetos/itens/lata1/logan_lata1.dcc")
+         text = gettext("Logan sent this to you.")
+         action = give_item("models/objetos/itens/lata1/logan_lata1.dcc")
+         action = dialog_init(4)
+         action = go_to_dialog(4)
+      option
+         text = gettext("Just wandering, sorry...")
+         action = go_to_dialog(1)
+      option
+         text = gettext("Not of your concern!")
+         post_test = roll(INTIMIDATE, 20)
+         if_action = dialog_init(2)
+         if_action = go_to_dialog(2) 
+         else_action = init_fight()
+      option
+         text = gettext("I'm lost.")
+         action = go_to_dialog(3)
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(1)
+   npc_begin
+      text = gettext("So please, leave this house.")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Bye.")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(2)
+   npc_begin
+      text = gettext("Please, don't do anything bad to us!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Bye.")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(3)
+   npc_begin
+      text = gettext("And so I am.")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Bye.")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(4)
+   npc_begin
+      text = gettext("So you're the one Logan found. I need something from you.")
+   npc_end
+   pc_begin
+      option
+         text = "TODO!!!"
+         action = finish_dialog()
+   pc_end
+end_dialog

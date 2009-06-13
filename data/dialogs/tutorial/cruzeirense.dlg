@@ -1,0 +1,47 @@
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(0)
+   npc_begin
+      text = gettext("I'm very busy now.")
+   npc_end
+   pc_begin
+      option
+         text = gettext("I'll come back latter")
+         action = call_script("ia/script/tutorial/change_cruz_dialog.dsl")
+         action = finish_dialog()
+   pc_end
+end_dialog
+
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(1)
+   npc_begin
+      text = gettext("What now?")
+   npc_end
+   pc_begin
+      option
+         pre_test = have_item("models/objetos/itens/lata1/lata1.dcc")
+         text = gettext("I have something for you.")
+         action = give_item("models/objetos/itens/lata1/lata1.dcc")
+         action = go_to_dialog(2)
+      option
+         text = gettext("Ehr, nothing.")
+         action = finish_dialog()
+   pc_end
+end_dialog
+
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(2)
+   npc_begin
+      text = gettext("Oh, soda!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("I need some info from you.")
+         action = go_to_dialog(3)
+   pc_end
+end_dialog
