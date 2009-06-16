@@ -8,7 +8,6 @@ dialog(0)
    pc_begin
       option
          text = gettext("I'll come back latter")
-         action = call_script("ia/script/tutorial/change_cruz_dialog.dsl")
          action = finish_dialog()
    pc_end
 end_dialog

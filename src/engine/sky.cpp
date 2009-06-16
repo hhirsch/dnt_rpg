@@ -32,6 +32,7 @@
 sky::sky()
 {
    dirs dir;
+   skySize = 0;
    color[0] = 1.0f;
    color[1] = 1.0f;
    color[2] = 1.0f;
@@ -43,6 +44,35 @@ sky::sky()
       setTextureRGBA(img, skyMap);
       SDL_FreeSurface(img);
    }
+
+   /* Box texture */
+#if 0
+   glGenTextures(4,&boxTexture[0]);
+   img = IMG_Load(dir.getRealFile("texturas/sky/box1/ash_hills_fr.png").c_str());
+   if(img != NULL)
+   {
+      setTexture(img, boxTexture[0]);
+      SDL_FreeSurface(img);
+   }
+   img = IMG_Load(dir.getRealFile("texturas/sky/box1/ash_hills_rt.png").c_str());
+   if(img != NULL)
+   {
+      setTexture(img, boxTexture[1]);
+      SDL_FreeSurface(img);
+   }
+   img = IMG_Load(dir.getRealFile("texturas/sky/box1/back.png").c_str());
+   if(img != NULL)
+   {
+      setTextureRGBA(img, boxTexture[2]);
+      SDL_FreeSurface(img);
+   }
+   img = IMG_Load(dir.getRealFile("texturas/sky/box1/right.png").c_str());
+   if(img != NULL)
+   {
+      setTextureRGBA(img, boxTexture[3]);
+      SDL_FreeSurface(img);
+   }
+#endif
 }
 
 /*********************************************************************
@@ -51,6 +81,49 @@ sky::sky()
 sky::~sky()
 {
    glDeleteTextures(1, &skyMap);
+#if 0
+   glDeleteTextures(4, &boxTexture[0]);
+#endif
+}
+
+/*********************************************************************
+ *                              drawBox                              *
+ *********************************************************************/
+void sky::drawBox()
+{
+#if 0
+   glEnable( GL_BLEND );
+   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+   glEnable(GL_TEXTURE_2D);
+
+   glBindTexture(GL_TEXTURE_2D, boxTexture[0]);
+   glBegin(GL_QUADS);
+      glTexCoord2f(0.0f, 1.0f);
+      glVertex3f(-0.5, -0.5f, -0.5);
+      glTexCoord2f(0.0f, 0.0f);
+      glVertex3f(-0.5, 0.5, -0.5);
+      glTexCoord2f(1.0f, 0.0f);
+      glVertex3f(0.5, 0.5, -0.5);
+      glTexCoord2f(1.0f, 1.0f);
+      glVertex3f(0.5, -0.5f, -0.5);
+   glEnd();
+
+   glBindTexture(GL_TEXTURE_2D, boxTexture[1]);
+   glBegin(GL_QUADS);
+      glTexCoord2f(1.0f, 1.0f);
+      glVertex3f(0.5, -0.5f, -0.5);
+      glTexCoord2f(1.0f, 0.0f);
+      glVertex3f(0.5, 0.5, -0.5);
+      glTexCoord2f(0.0f, 0.0f);
+      glVertex3f(0.5, 0.5, 0.5);
+      glTexCoord2f(0.0f, 1.0f);
+      glVertex3f(0.5, -0.5f, 0.5);
+   glEnd();
+
+   glDisable(GL_TEXTURE_2D);
+   glDisable(GL_BLEND);
+#endif
 }
 
 /*********************************************************************
@@ -110,12 +183,12 @@ void sky::drawDome(int lats, int longs)
 void sky::draw(Map* actualMap, GLfloat sunRot)
 {
    options opt;
-   float skySize = (opt.getFarViewFactor()*OUTDOOR_FARVIEW) - 
-                   (opt.getFarViewFactor()*256);
+   skySize = (opt.getFarViewFactor()*OUTDOOR_FARVIEW) - 
+             (opt.getFarViewFactor()*256);
 
 
    solarTime = (sunRot * 24) / 360.0f;
-   
+
    glDisable(GL_FOG);
    glEnable(GL_COLOR_MATERIAL);
    glPushMatrix();
@@ -128,5 +201,13 @@ void sky::draw(Map* actualMap, GLfloat sunRot)
 
    glEnable(GL_FOG);
    glDisable(GL_COLOR_MATERIAL);
+
+   /* Draw the box */
+#if 0
+   glPushMatrix();
+      glScalef(skySize, skySize, skySize);
+      drawBox();
+   glPopMatrix();
+#endif
 }
 

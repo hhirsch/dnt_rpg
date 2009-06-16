@@ -44,11 +44,15 @@ class sky
        * \param lats -> number of latitudes
        * \param longs -> number of longitudes */
       void drawDome(int lats, int longs);
+      /*! Draw a sky box */
+      void drawBox();
 
       GLuint skyMap;
       GLfloat solarTime;
       GLfloat color[3];
 
+      GLuint boxTexture[4];
+      GLfloat skySize;
 };
 
 
