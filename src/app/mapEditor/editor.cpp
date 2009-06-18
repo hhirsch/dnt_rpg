@@ -238,6 +238,7 @@ void editor::openMap()
                 per = NPCs->insertCharacter(arquivo, features, NULL, "");
                 per->xPosition = posX;
                 per->zPosition = posZ;
+                per->yPosition = map->getHeight(posX, posZ);
                 per->orientation = ori;
                 per->update(0); 
                 per->calculateBoundingBox();
