@@ -506,6 +506,9 @@ void partController::setActualMap(void* acMap, collision* col)
 {
    int i;
 
+   /* set the pointer */
+   currentMap = acMap;
+
    /* Collision system */
    colDetect = col;
 
