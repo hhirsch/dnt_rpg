@@ -3048,7 +3048,8 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
    {
       glPushMatrix();
          glTranslatef(gameCamera.getCameraX(), 0.0f, gameCamera.getCameraZ());
-         gameSky->draw(actualMap, gameSun->getRotation());
+         gameSky->draw(actualMap, gameSun->getRotation(), 
+                       !actualMap->getFog().enabled);
       glPopMatrix();
    }
 

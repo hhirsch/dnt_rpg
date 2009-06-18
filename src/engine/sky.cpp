@@ -180,7 +180,7 @@ void sky::drawDome(int lats, int longs)
 /*********************************************************************
  *                                 Draw                              *
  *********************************************************************/
-void sky::draw(Map* actualMap, GLfloat sunRot)
+void sky::draw(Map* actualMap, GLfloat sunRot, bool disFog)
 {
    options opt;
    skySize = (opt.getFarViewFactor()*OUTDOOR_FARVIEW) - 
@@ -189,7 +189,10 @@ void sky::draw(Map* actualMap, GLfloat sunRot)
 
    solarTime = (sunRot * 24) / 360.0f;
 
-   glDisable(GL_FOG);
+   if(disFog)
+   {
+      glDisable(GL_FOG);
+   }
    glEnable(GL_COLOR_MATERIAL);
    glPushMatrix();
       glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, color);
@@ -199,7 +202,10 @@ void sky::draw(Map* actualMap, GLfloat sunRot)
       drawDome(15,15);
    glPopMatrix();
 
-   glEnable(GL_FOG);
+   if(disFog)
+   {
+      glEnable(GL_FOG);
+   }
    glDisable(GL_COLOR_MATERIAL);
 
    /* Draw the box */

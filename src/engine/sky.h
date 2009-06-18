@@ -35,8 +35,9 @@ class sky
 
       /*! Draw Sky Dome 
        * \param actualMap -> pointer to the opened Map 
-       * \param sunRot -> current Sun Rotation */
-      void draw(Map* actualMap, GLfloat sunRot);
+       * \param sunRot -> current Sun Rotation
+       * \param disFog -> true to disable fog */
+      void draw(Map* actualMap, GLfloat sunRot, bool disFog);
 
    private:
 
