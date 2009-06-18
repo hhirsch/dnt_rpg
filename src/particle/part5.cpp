@@ -42,6 +42,7 @@ part5::part5(float cX,float cY,float cZ, string fileName):
    alpha=cY; 
    centerZ=cZ;
    actualParticles = 0;
+   terrainHeight = 0.0f;
    partTexture = loadTexture(dir.getRealFile("particles/part2.png"));
    doneCreation = false;
    setDurationTime(MAX_BLOOD_LIVING_TIME);
@@ -53,6 +54,14 @@ part5::part5(float cX,float cY,float cZ, string fileName):
 part5::~part5()
 {
    glDeleteTextures(1,&partTexture);
+}
+
+/****************************************************************************
+ *                          setTerrainHeight                                *
+ ****************************************************************************/
+void part5::setTerrainHeight(float height)
+{
+   terrainHeight = height;
 }
 
 /****************************************************************************
@@ -130,11 +139,10 @@ void part5::endRender()
  ****************************************************************************/
 void part5::update(particle* part)
 {
-   if(part->posY <= 0 )
+   if(part->posY <= terrainHeight )
    {
-     /* FIXME do it based on map Height, not 0! */
      part->status =  PARTICLE_STATUS_STATIC;
-     part->posY = 0;
+     part->posY = terrainHeight;
    }
    else
    {

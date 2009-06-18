@@ -90,8 +90,15 @@ class part5: public particleSystem
        ***************************************************************/
       int numParticles();
 
+      /*!
+       * Set the terrain height bellow the particle
+       * \param height -> the terrain height */
+      void setTerrainHeight(float height);
+
    private:
       bool doneCreation;  /**< Mark when finished the creation period */
+
+      float terrainHeight; /**< The medium terrain height on blood area */
 };
 
 

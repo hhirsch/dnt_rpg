@@ -41,6 +41,7 @@ void partController::init()
    grassParticles = new particleList();
    meteorParticles = new particleList();
    colDetect = NULL;
+   currentMap = NULL;
 }
 
 /**********************************************************************
@@ -381,6 +382,11 @@ particleSystem* partController::addParticle(int type, GLfloat X, GLfloat Y,
        {
           part5* bl =  new part5(X,Y,Z,fileName);
           blood->addSystem(bl);
+          if(currentMap != NULL)
+          {
+             Map* m = (Map*)currentMap;
+             bl->setTerrainHeight(m->getHeight(X,Z));
+          }
           return(bl);
        }
        break;
@@ -790,5 +796,5 @@ particleList* partController::snow = NULL;
 particleList* partController::grassParticles = NULL;
 particleList* partController::meteorParticles = NULL;
 collision* partController::colDetect = NULL;
-
+void* partController::currentMap = NULL;
 

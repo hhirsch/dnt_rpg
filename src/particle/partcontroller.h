@@ -121,6 +121,7 @@ class partController
       static particleList* grassParticles;   /**< Grass Particles */
       static particleList* meteorParticles;  /**< Meteor Particles */
       static collision* colDetect;           /**< Collision System */
+      static void* currentMap;               /**< Current Map */
 
 };
 
