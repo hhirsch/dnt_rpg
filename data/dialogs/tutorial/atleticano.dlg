@@ -74,7 +74,41 @@ dialog(4)
    npc_end
    pc_begin
       option
-         text = "TODO!!!"
+         text = gettext("What's it?")
+         action = go_to_dialog(5)
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(5)
+   npc_begin
+      text = gettext("The thing is: the Cruzeirense here is having some problems, but he refuses to talk about that. Give him a soda can and let him talk.")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Ok.")
+         action = dialog_init(6)
+         action = call_script("ia/script/tutorial/change_cruz_dialog.dsl")
+         action = finish_dialog()
+      option
+         pre_test = roll(NOT_ENOUGH_TIME, 12)
+         text = gettext("If I have enough time!")
+         action = dialog_init(6)
+         action = call_script("ia/script/tutorial/change_cruz_dialog.dsl")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(6)
+   npc_begin
+      text = gettext("I'm very busy now.")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Ok.")
          action = finish_dialog()
    pc_end
 end_dialog

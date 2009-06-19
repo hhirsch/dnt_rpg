@@ -268,6 +268,11 @@ bool talkTest::doTest(character* pc, thing* owner)
 
       /* Roll the thing! */
       skill* sk = pc->sk.getSkillByString(test);
+      if(!sk)
+      {
+         cerr << "Error: Unknow skill: " << test << endl;
+         return(false);
+      }
       int rollValue = pc->sk.doSkillCheck(sk);
       bool res = (rollValue > value);
 
