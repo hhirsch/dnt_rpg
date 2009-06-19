@@ -1161,6 +1161,9 @@ void characterList::treatGeneralScripts(Map* actualMap, characterList* NPCs)
 {
    int i;
    iaScript* script;
+   dialogWindow dlg;
+   character* ch;
+
    for(i=0; i < CHARACTER_TREAT_SCRIPTS; i++)
    {
       if(total <= 0)
@@ -1179,8 +1182,15 @@ void characterList::treatGeneralScripts(Map* actualMap, characterList* NPCs)
       script = (iaScript*) curTreat->getGeneralScript();
       if( (script) && (curTreat->isAlive()))
       {
-         script->defineMap(actualMap, NPCs);
-         script->run(MAX_SCRIPT_LINES);
+         /* Only treat a character script, if no dialog with it */
+         // TODO barter window too!
+         ch = script->getCharacterOwner();
+         if( (ch == NULL) || 
+             (!dlg.isOpened((conversation*)ch->getConversation())))
+         {
+            script->defineMap(actualMap, NPCs);
+            script->run(MAX_SCRIPT_LINES);
+         }
       }
 
       /* forward on the list */

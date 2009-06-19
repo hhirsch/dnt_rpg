@@ -1543,7 +1543,7 @@ bool dialogWindow::isOpened(conversation* cv)
 {
    if(isOpened())
    {
-      return(cv != conv);
+      return(cv == conv);
    }
 
    return(false);

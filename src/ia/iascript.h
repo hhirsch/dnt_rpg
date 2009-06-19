@@ -73,6 +73,8 @@ class iaScript
       /*! Define the owner of the script as a Character
        * \param owner -> pointer to the character */
       void defineCharacterOwner(character* owner);
+      /*! Get the character owner of the script (if any) */
+      character* getCharacterOwner();
 
       /*! Define the actual openned Map
        * \param acMap -> pointer to the opened map

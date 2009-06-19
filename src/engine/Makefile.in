@@ -213,7 +213,7 @@ util.o: util.cpp util.h $(ENDGUI)farso.h
 	@$(CC) $(CFLAGS) $(SUPREDE) util.cpp -o util.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-$(BIN)dccnitghtmare: $(OBJSGUI) $(OBJSMAPA) $(OBJSNET) $(OBJSETC) $(OBJSCLASSES) $(OBJSLANG) $(OBJSSOUND) $(OBJSPART) $(OBJSFIGHT) $(OBJSCBOOK) $(OBJS)  
+$(BIN)dccnitghtmare: $(OBJSGUI) $(OBJSMAPA) $(OBJSNET) $(OBJSETC) $(OBJSCLASSES) $(OBJSLANG) $(OBJSSOUND) $(OBJSPART) $(OBJSFIGHT) $(OBJSIA) $(OBJSCBOOK) $(OBJS)  
 	@printf "Linking dccnitghtmare... "
 	@$(CC) $(LDFLAGS) $(LIBS) $(EFLAGS) $(OBJSGUI) $(OBJSCLASSES) $(OBJSLANG) $(OBJSNET) $(OBJSETC) $(OBJSIA) $(FIFO) $(OBJSMAPA) $(OBJSCBOOK) $(OBJSSOUND) $(OBJSPART) $(OBJSFIGHT) $(OBJS) $(SUPREDE) -o $(BIN)dccnitghtmare
 	@printf "\e[0;32mDone.\e[0;0m\n"

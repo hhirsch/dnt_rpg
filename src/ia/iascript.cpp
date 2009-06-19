@@ -144,6 +144,14 @@ void iaScript::defineCharacterOwner(character* owner)
 }
 
 /***********************************************************************
+ *                        getCharacterOwner                            *
+ ***********************************************************************/
+character* iaScript::getCharacterOwner()
+{
+   return(characterOwner);
+}
+
+/***********************************************************************
  *                            defineMap                                *
  ***********************************************************************/
 void iaScript::defineMap(Map* acMap, characterList* NPCs)
