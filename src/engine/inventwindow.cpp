@@ -333,6 +333,12 @@ void inventWindow::verifyUseObject()
                      activeObject = NULL;
                      reDraw();
                   }
+
+                  /* Redefine weapon (to pass the current quantity to thing) */
+                  if(owner)
+                  {
+                     owner->defineWeapon();
+                  }
                }
             }
  
