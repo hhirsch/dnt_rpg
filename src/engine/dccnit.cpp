@@ -1565,16 +1565,21 @@ void engine::enterBattleMode(bool surprisePC)
   }
 
   /* Add NPCs to Fight */
+  int curGroup = 0;
   ch =(character*) NPCs->getFirst();
   for(i = 0; i < NPCs->getTotal(); i++)
   {
       //TODO put enemies on groups, when enemy from enemy
-      fight->insertNPC(ch, 0);
-      ch->defineWeapon();
-      numEnemies++;
-      /* Set the state to Idle, if the character is alive */
       if(ch->isAlive())
       {
+         if(!fight->insertNPC(ch, curGroup))
+         {
+            curGroup++;
+            fight->insertNPC(ch, curGroup);
+         }
+         ch->defineWeapon();
+         numEnemies++;
+         /* Set the state to Idle, if the character is alive */
          ch->callIdleAnimation();
          /* Remove Move, if it is moving */
          ch->pathFind.clear();

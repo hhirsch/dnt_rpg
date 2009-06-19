@@ -94,6 +94,7 @@ bool fightSystem::insertNPC(character* pers, int group)
    }
    else
    {
+      cerr << "Error: Invalid group!" << endl;
       return(false); 
    }
 }
