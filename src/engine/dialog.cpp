@@ -1435,8 +1435,10 @@ void dialogWindow::open(guiInterface* gui, character* PC, conversation* cv,
    /* Barter Button (only for characters) */
    if(conv->getOwner()->getThingType() == THING_TYPE_CHARACTER)
    {
+      character* ow = (character*)conv->getOwner();
       barterButton = jan->getObjectsList()->insertButton(5,86,69,104,
                                                          gettext("Barter"),1);
+      barterButton->setAvailable(ow->inventories->getTotalItems() != 0);
    }
    else
    {
