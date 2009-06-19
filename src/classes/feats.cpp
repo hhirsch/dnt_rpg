@@ -498,8 +498,11 @@ void feats::defineWeapon(weapon* w)
    int inUse=0, noUse=0;
 
    /* Must update the current weapon ammo value */
-   flushCurrentMunition();
-   currentWeapon = w;
+   if(currentWeapon != w)
+   {
+      flushCurrentMunition();
+      currentWeapon = w;
+   }
 
    /* Define if is using a Melee or Ranged Weapon */
    if( (w == NULL) || (w->getRangeType()->index == FEAT_MELEE_ATTACK) )
