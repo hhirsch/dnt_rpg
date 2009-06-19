@@ -1462,6 +1462,27 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       }
    }
 
+   ////////////////////////////////////////////////////
+   //                   Map Functions                //
+   ////////////////////////////////////////////////////
+   /* void function(string s)*/
+   else if(functionName == IA_MAP_TRAVEL)
+   {
+      /*! void mapTravel(string mapFile) */
+      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
+      if(iv)
+      {
+         string st = *(string*)iv->value;
+         if(eng)
+         {
+            eng->loadMap(st);
+         }
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+   }
 
    ////////////////////////////////////////////////////
    //                  Fight Functions               //
@@ -1713,6 +1734,43 @@ void iaScript::callFunction(iaVariable* var, string strLine,
             bl = dude->isAlive();
          }
       }
+      assignValue(var, (void*)&bl, IA_TYPE_BOOL);
+   }
+
+   /* Syntax bool function(string s) */
+   else if(functionName == IA_CHARACTER_IS_ALL_DEAD)
+   {
+      string s = "";
+
+      /* Get string */
+      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
+      if(iv != NULL)
+      {
+         s = *(string*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      /* Set the result */
+      bool bl = false;
+      
+      if(!s.empty())
+      {
+         /* Syntax: bool isAllDead(string map) */
+         if(functionName == IA_CHARACTER_IS_ALL_DEAD)
+         {
+            modState modif;
+            /* Make sure have npc file defined */
+            if(s.find(".npc") == string::npos)
+            {
+               s += ".npc";
+            }
+            bl = modif.allCharactersDead(s);
+         }
+      }
+      cout << "s: " << s << " isAllDead: " << bl << endl;
       assignValue(var, (void*)&bl, IA_TYPE_BOOL);
    }
 

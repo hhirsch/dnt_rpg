@@ -1,0 +1,3 @@
+area = Tyrol
+description = gettext("Fight for Cruzeirense.")
+script = missions/tutorial/mission4.dsl

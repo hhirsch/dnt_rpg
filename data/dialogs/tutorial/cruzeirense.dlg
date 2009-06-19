@@ -44,3 +44,48 @@ dialog(2)
          action = go_to_dialog(3)
    pc_end
 end_dialog
+
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(3)
+   npc_begin
+      text = gettext("I can give any information you want, but, first, I need you to do something.")
+   npc_end
+   pc_begin
+      option
+         text = gettext("What's it?")
+         action = go_to_dialog(4)
+   pc_end
+end_dialog
+
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(4)
+   npc_begin
+      text = gettext("Some chickens are threaten me. You must go to the wasteland place they are and finish them!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Now!")
+         action = add_mission("missions/tutorial/mission4.mis")
+         action = map_travel("mapas/tutorial/cruz_local.map")
+         action = finish_dialog()
+   pc_end
+end_dialog
+
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(5)
+   npc_begin
+      text = "TODO"
+   npc_end
+   pc_begin
+      option
+         text = "TODO"
+         action = finish_dialog()
+   pc_end
+end_dialog
+

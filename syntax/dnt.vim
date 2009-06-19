@@ -45,6 +45,7 @@ syn keyword dntFunction       featUseAtCharacter runAwayFromBattle
 syn keyword dntFunction       inventoryHave
 syn keyword dntFunction       dialogSetInitial
 syn keyword dntFunction       getObject getObjectState
+syn keyword dntFunction       isAllDead mapTravel
 
 syn sync lines=250
 

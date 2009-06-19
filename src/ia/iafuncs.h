@@ -201,6 +201,8 @@ using namespace std;
 
 /*! bool isAlive(character c) */
 #define IA_CHARACTER_IS_ALIVE "isAlive"
+/*! bool isAllDead(string mapFile) */
+#define IA_CHARACTER_IS_ALL_DEAD "isAllDead"
 
 /*! int getPsycho(character c)  */
 #define IA_CHARACTER_GET_PSYCHO "getPsycho"
@@ -215,6 +217,11 @@ using namespace std;
 /*! bool characterAtRange(character ref, character target) */
 #define IA_CHARACTER_AT_RANGE "characterAtRange"
 
+////////////////////////////////////////////////////
+//                   Map Functions                //
+////////////////////////////////////////////////////
+/*! void mapTravel(string mapFile) */
+#define IA_MAP_TRAVEL "mapTravel"
 
 ////////////////////////////////////////////////////
 //                Inventory Functions             //

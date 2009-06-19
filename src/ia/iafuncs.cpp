@@ -115,7 +115,8 @@ bool isFunction(string s)
            (s == IA_FIGHT_EXIT) || (s == IA_FIGHT_CAN_ATTACK) ||
            (s == IA_FIGHT_RUN_AWAY_FROM_BATTLE) ||
            (s == IA_GET_OBJECT) || (s == IA_GET_OBJECT_STATE) ||
-           (s == IA_CHARACTER_IS_ALIVE) || (s == IA_CHARACTER_GET_PSYCHO) ||
+           (s == IA_CHARACTER_IS_ALIVE) || (s == IA_CHARACTER_IS_ALL_DEAD) ||
+           (s == IA_CHARACTER_GET_PSYCHO) ||
            (s == IA_CHARACTER_SET_PSYCHO) || (s == IA_CHARACTER_AT_RANGE) || 
            (s == IA_CHARACTER_GET_ACTUAL_LIFE) ||
            (s == IA_CHARACTER_GET_MAX_LIFE) || (s == IA_SELF_OBJECT) ||
@@ -127,7 +128,8 @@ bool isFunction(string s)
            (s == IA_MISSION_IS_ACTIVE) || (s == IA_MISSION_SET_TEMP) ||
            (s == IA_MISSION_GET_TEMP) || (s == IA_MISSION_SET_XP) ||
            (s == IA_INVENTORY_HAVE) || (s == IA_FIGHT_GET_NEAREST_ENEMY) ||
-           (s == IA_DIALOG_SET_INITIAL) || (s == IA_GET_NPC_BY_NAME) );
+           (s == IA_DIALOG_SET_INITIAL) || (s == IA_GET_NPC_BY_NAME) ||
+           (s == IA_MAP_TRAVEL) );
 }
 
 /***********************************************************************
@@ -140,8 +142,9 @@ string functionType(string s)
        (s == IA_MOVE_TO_OBJECT) || (s == IA_FEAT_USE_AT_CHARACTER) ||
        (s == IA_FEAT_USE_AT_OBJECT) || (s == IA_TRUE) || (s == IA_FALSE) ||
        (s == IA_MISSION_IS_ACTIVE) || (s == IA_INVENTORY_HAVE) ||
-       (s == IA_CHARACTER_IS_ALIVE) || (s == IA_CHARACTER_AT_RANGE) || 
-       (s == IA_WAIT) || (s == IA_FIGHT_CAN_ATTACK) )
+       (s == IA_CHARACTER_IS_ALIVE) || (s == IA_CHARACTER_IS_ALL_DEAD) ||
+       (s == IA_CHARACTER_AT_RANGE) || (s == IA_WAIT) || 
+       (s == IA_FIGHT_CAN_ATTACK) )
    {
       return(IA_TYPE_BOOL);
    }
