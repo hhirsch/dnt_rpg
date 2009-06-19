@@ -27,6 +27,7 @@
  - Fixed a bug when sound effect file doesn't exist;
  - Minimap More closer (and translatable);
  - New tabButton style to listText;
+ - Low intelligence character can only speak gibberish;
 
 Working on:
  - Weather effects;

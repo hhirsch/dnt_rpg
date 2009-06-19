@@ -111,6 +111,19 @@
 /* Constant Tokens */
 #define TK_CONST_OBJECT_STATE "OBJECT_STATE"
 
+#define DIALOG_TOTAL_NOISES  30
+
+string dntDialogNoise[] = 
+{
+/*00*/"Argh!", "Ouch!", "Danh branh mafh.", "Montur mon menwn?", "Minean bla!",
+/*05*/"Blergh.", "Monargh truhm dasrg!", "Oxi.", "Uai?", "Manemermo!",
+/*10*/"Hum.", "Hum!", "Hein?", "eh?", "Ah!", 
+/*15*/"Ahm?", "Che!", "Bleh!", "Tsa!", "Bliu!",
+/*20*/"Muns gruns blu.", "Hun glah!", "Oxala!", "Amalaya.", "Vixi.",
+/*25*/"Nussa!", "Comequeeh?", "Irra!", "Hurra!", "Zergs..."
+};
+
+
 ///////////////////////////////////////////////////////////////////////////
 //                                                                       //
 //                              talkAction                               //
@@ -1343,11 +1356,19 @@ void conversation::changeDialog(int numDialog)
    string text;
    char conv[16];
    dialogWindow dlgWindow;
+   int intelligence = 20;
 
    if(numDialog == actual)
    {
       /* No change at the same dialog! */
       return;
+   }
+
+   /* Define the PC intelligence (fallout: dumb pcs can't talk!) */
+   if(actualPC)
+   {
+      skill* sk = actualPC->sk.getSkillByInt(4);
+      intelligence =  sk->points;
    }
 
    /* Get the dialog pointer */
@@ -1387,8 +1408,20 @@ void conversation::changeDialog(int numDialog)
          if(res)
          {
             sprintf(conv, "%d - ", curOpt+1);
-            text = conv + dlg->options[i].postTest.getTestName(actualPC) + 
-               dlg->options[i].text;
+            text = conv + dlg->options[i].postTest.getTestName(actualPC);
+            
+            /* Add the text or some noise */
+            if(intelligence >= 6)
+            {
+               text += dlg->options[i].text;
+            }
+            else
+            {
+               /* Too dumb, only noises! */
+               dice d(DIALOG_TOTAL_NOISES);
+               text += dntDialogNoise[d.roll()-1];
+            }
+
             dlgWindow.addOption(curOpt, text, i);
             curOpt++;
          }
