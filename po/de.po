@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2009-06-12 15:21-0300\n"
+"POT-Creation-Date: 2009-06-19 20:04-0300\n"
 "PO-Revision-Date: 2008-05-18 14:48+0000\n"
 "Last-Translator: pano <Pano_90@gmx.de>\n"
 "Language-Team: German <de@li.org>\n"
@@ -65,7 +65,7 @@ msgstr ""
 msgid "Not enought points to use!"
 msgstr "Nicht genug Punkte um zu benutzen"
 
-#: src/classes/mission.cpp:512 src/engine/dialog.cpp:1164
+#: src/classes/mission.cpp:512 src/engine/dialog.cpp:1169
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr ""
@@ -159,7 +159,7 @@ msgid "Attribute Description"
 msgstr ""
 
 #: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:531
-#: src/engine/inventwindow.cpp:348 src/engine/options.cpp:1232
+#: src/engine/inventwindow.cpp:354 src/engine/options.cpp:1232
 msgid "Warning"
 msgstr "Warnung"
 
@@ -167,7 +167,7 @@ msgstr "Warnung"
 msgid "You Need to Assign All Attributes."
 msgstr ""
 
-#: src/engine/barterwindow.cpp:50 src/engine/dialog.cpp:1439
+#: src/engine/barterwindow.cpp:50 src/engine/dialog.cpp:1445
 msgid "Barter"
 msgstr ""
 
@@ -432,59 +432,59 @@ msgstr ""
 msgid "No NPCs in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1618
+#: src/engine/dccnit.cpp:1623
 msgid "Surprise Attack Turn."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1632
+#: src/engine/dccnit.cpp:1637
 msgid "No enemies in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1811 src/engine/dccnit.cpp:2300
+#: src/engine/dccnit.cpp:1816 src/engine/dccnit.cpp:2305
 #: src/engine/shortcutswindow.cpp:51
 msgid "Nothing"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2045
+#: src/engine/dccnit.cpp:2050
 #, c-format
 msgid "%s taken."
 msgstr ""
 
-#: src/engine/dccnit.cpp:2067
+#: src/engine/dccnit.cpp:2072
 msgid "Inventory is full!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2099
+#: src/engine/dccnit.cpp:2104
 msgid "Door"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2235
+#: src/engine/dccnit.cpp:2240
 #, c-format
 msgid "%s attacks %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2401
+#: src/engine/dccnit.cpp:2406
 msgid "No more actions. Turn ended."
 msgstr ""
 
-#: src/engine/dccnit.cpp:3911
+#: src/engine/dccnit.cpp:3917
 msgid "Exit Battle Mode"
 msgstr ""
 
-#: src/engine/dialog.cpp:279
+#: src/engine/dialog.cpp:284
 msgid "Success"
 msgstr ""
 
-#: src/engine/dialog.cpp:279
+#: src/engine/dialog.cpp:284
 msgid "Failure"
 msgstr ""
 
-#: src/engine/dialog.cpp:979
+#: src/engine/dialog.cpp:984
 #, c-format
 msgid "Not found in dialog: %d\n"
 msgstr ""
 
-#: src/engine/dialog.cpp:1433
+#: src/engine/dialog.cpp:1438
 msgid "Dialog"
 msgstr ""
 
@@ -556,15 +556,15 @@ msgstr ""
 msgid "%s reloaded %s with %s ammo."
 msgstr ""
 
-#: src/engine/inventwindow.cpp:349
+#: src/engine/inventwindow.cpp:355
 msgid "No equipped weapons are compatible with this munition type."
 msgstr ""
 
-#: src/engine/inventwindow.cpp:675 data/models/objetos/itens/money/money.dcc:1
+#: src/engine/inventwindow.cpp:681 data/models/objetos/itens/money/money.dcc:1
 msgid "Money"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:676
+#: src/engine/inventwindow.cpp:682
 msgid "Define quantity:"
 msgstr ""
 
@@ -993,29 +993,29 @@ msgstr ""
 msgid "Cost"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:149
+#: src/fight/fightSystem.cpp:150
 msgid "No more enemies."
 msgstr ""
 
-#: src/fight/fightSystem.cpp:185
+#: src/fight/fightSystem.cpp:186
 #, c-format
 msgid "%s is dead!"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:230
+#: src/fight/fightSystem.cpp:231
 #, c-format
 msgid "%s receive %d XP for killing"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:277 src/fight/fightSystem.cpp:296
+#: src/fight/fightSystem.cpp:278 src/fight/fightSystem.cpp:297
 msgid "New Round"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:282 src/fight/fightSystem.cpp:301
+#: src/fight/fightSystem.cpp:283 src/fight/fightSystem.cpp:302
 msgid "Error: No Characters!"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:329 src/fight/fightSystem.cpp:335
+#: src/fight/fightSystem.cpp:330 src/fight/fightSystem.cpp:336
 #, c-format
 msgid "%s's turn."
 msgstr ""
@@ -3394,7 +3394,8 @@ msgstr ""
 msgid "I won't talk with you, heretic."
 msgstr ""
 
-#: data/dialogs/tutorial/santa.dlg:150
+#: data/dialogs/tutorial/santa.dlg:150 data/dialogs/tutorial/atleticano.dlg:90
+#: data/dialogs/tutorial/atleticano.dlg:111
 msgid "Ok."
 msgstr ""
 
@@ -3480,6 +3481,22 @@ msgstr ""
 msgid "So you're the one Logan found. I need something from you."
 msgstr ""
 
+#: data/dialogs/tutorial/atleticano.dlg:77
+#: data/dialogs/tutorial/cruzeirense.dlg:57
+msgid "What's it?"
+msgstr ""
+
+#: data/dialogs/tutorial/atleticano.dlg:86
+msgid ""
+"The thing is: the Cruzeirense here is having some problems, but he refuses "
+"to talk about that. Give him a soda can and let him talk."
+msgstr ""
+
+#: data/dialogs/tutorial/atleticano.dlg:96
+msgid "If I have enough time!"
+msgstr ""
+
+#: data/dialogs/tutorial/atleticano.dlg:107
 #: data/dialogs/tutorial/cruzeirense.dlg:6
 msgid "I'm very busy now."
 msgstr ""
@@ -3488,24 +3505,39 @@ msgstr ""
 msgid "I'll come back latter"
 msgstr ""
 
-#: data/dialogs/tutorial/cruzeirense.dlg:21
+#: data/dialogs/tutorial/cruzeirense.dlg:20
 msgid "What now?"
 msgstr ""
 
-#: data/dialogs/tutorial/cruzeirense.dlg:26
+#: data/dialogs/tutorial/cruzeirense.dlg:25
 msgid "I have something for you."
 msgstr ""
 
-#: data/dialogs/tutorial/cruzeirense.dlg:30
+#: data/dialogs/tutorial/cruzeirense.dlg:29
 msgid "Ehr, nothing."
 msgstr ""
 
-#: data/dialogs/tutorial/cruzeirense.dlg:40
+#: data/dialogs/tutorial/cruzeirense.dlg:39
 msgid "Oh, soda!"
 msgstr ""
 
-#: data/dialogs/tutorial/cruzeirense.dlg:44
+#: data/dialogs/tutorial/cruzeirense.dlg:43
 msgid "I need some info from you."
+msgstr ""
+
+#: data/dialogs/tutorial/cruzeirense.dlg:53
+msgid ""
+"I can give any information you want, but, first, I need you to do something."
+msgstr ""
+
+#: data/dialogs/tutorial/cruzeirense.dlg:67
+msgid ""
+"Some chickens are threaten me. You must go to the wasteland place they are "
+"and finish them!"
+msgstr ""
+
+#: data/dialogs/tutorial/cruzeirense.dlg:71
+msgid "Now!"
 msgstr ""
 
 #: data/missions/tutorial/mission1.mis:2
