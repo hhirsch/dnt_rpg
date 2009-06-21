@@ -121,7 +121,7 @@ bool doHealOrAttack(thing& actor, thing* target,
 
    /* define its status to hostile */
    target->setPsychoState(PSYCHO_HOSTILE);
-
+   
    /* Show try brief */
    if(!heal)
    {

@@ -71,6 +71,7 @@
  ********************************************************************/
 #define TURN_VALUE (WALK_UPDATE * 125.0f) /**< The turn velocity */
 #define WALK_PER_MOVE_ACTION  60 /**< Distance that can be walked per move */
+#define DNT_BATTLE_RANGE 3*WALK_PER_MOVE_ACTION /**< Range of init/end battle */
 
 /********************************************************************
  *                      Camera's constants                          *

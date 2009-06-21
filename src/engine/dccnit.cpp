@@ -548,23 +548,35 @@ bool engine::loadPC(string pcFile)
 }
 
 /*********************************************************************
- *                       keepNPCInventoryStatus                      *
+ *                           keepNPCStatus                           *
  *********************************************************************/
-void engine::keepNPCInventoryStatus()
+void engine::keepNPCStatus()
 {
    if( (NPCs) && (actualMap))
    {
-      /* Save All Needed Inventory Status */
+      /* Save All Needed Inventory Status And NPC Psycho */
       character* dude = NPCs->getFirst();
       int i;
       for(i = 0; i < NPCs->getTotal(); i++)
       {
+         /* Save inventory */
          if(dude->inventories->getTotalItems() > 0)
          {
             modifState.mapInventoryAdd(dude->inventories, 
                   dude->getCharacterFile(),
                   actualMap->getFileName());
          }
+         /* Save psycho state */
+         modifState.mapCharacterAddAction(
+                                   MODSTATE_ACTION_CHARACTER_CHANGE_STATE,
+                                   dude->getCharacterFile(), 
+                                   actualMap->getFileName(), 
+                                   dude->xPosition,
+                                   dude->yPosition, dude->zPosition,
+                                   dude->getPsychoState(), 
+                                   dude->initialXPosition,
+                                   dude->initialZPosition);
+
          dude = (character*)dude->next;
       }
    }
@@ -656,7 +668,7 @@ int engine::loadMap(string arqMapa, bool loadingGame)
       showLoading(img,&texturaTexto,texturaCarga, texto, progress);
       progress->defineActualHealth(1);
 
-      keepNPCInventoryStatus();
+      keepNPCStatus();
       
       arqVelho = actualMap->getFileName();
       delete(actualMap);
@@ -2382,7 +2394,7 @@ int engine::treatIO(SDL_Surface *screen)
                             (npc->zPosition - activeCharacter->zPosition)*
                             (npc->zPosition - activeCharacter->zPosition));
 
-               if(dist < 3*WALK_PER_MOVE_ACTION)
+               if(dist < DNT_BATTLE_RANGE)
                {
                   //TODO -> do a perception check before enter!
 

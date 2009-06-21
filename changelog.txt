@@ -28,6 +28,8 @@
  - Minimap More closer (and translatable);
  - New tabButton style to listText;
  - Low intelligence character can only speak gibberish;
+ - Exit battle mode when no more enemies in battle range;
+ - Keep NPC Psycho Status at modState;
 
 Working on:
  - Weather effects;

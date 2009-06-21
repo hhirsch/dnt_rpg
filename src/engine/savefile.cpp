@@ -132,7 +132,7 @@ bool saveFile::save(string saveFile, void* curEngine, SDL_Surface* frontSurface)
    }
 
    /* Flush the npcs inventories to the modState */
-   eng->keepNPCInventoryStatus();
+   eng->keepNPCStatus();
    pc = eng->PCs->getActiveCharacter();
    
    /* Define the Save Prefix */

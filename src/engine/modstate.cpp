@@ -193,6 +193,14 @@ GLfloat mapCharacterModAction::getOrientation()
 }
 
 /************************************************************
+ *                      setOrientation                      *
+ ************************************************************/
+void mapCharacterModAction::setOrientation(GLfloat o)
+{
+   oriAngle = o;
+}
+
+/************************************************************
  *                       getInitialX                        *
  ************************************************************/
 GLfloat mapCharacterModAction::getInitialX()
@@ -974,7 +982,8 @@ void modMap::mapCharacterAddAction(int act, string character, string mapFile,
                                    GLfloat initialZ)
 {
    if( (act != MODSTATE_ACTION_CHARACTER_DEAD) && 
-       (act != MODSTATE_ACTION_CHARACTER_MOVE))
+       (act != MODSTATE_ACTION_CHARACTER_MOVE) && 
+       (act != MODSTATE_ACTION_CHARACTER_CHANGE_STATE) )
    {
       cerr << "Invalid modification character action: " <<  act << endl;
    }
@@ -987,6 +996,7 @@ void modMap::mapCharacterAddAction(int act, string character, string mapFile,
    {
       /* Just update the one found */
       n->setPosition(xPos, yPos, zPos);
+      n->setOrientation(orientation);
    }
    else
    {
@@ -1067,7 +1077,8 @@ modAction* modMap::search(int action, string target,
 
 
             if( (action == MODSTATE_ACTION_CHARACTER_DEAD) ||
-                (action == MODSTATE_ACTION_CHARACTER_MOVE) )
+                (action == MODSTATE_ACTION_CHARACTER_MOVE) ||
+                (action == MODSTATE_ACTION_CHARACTER_CHANGE_STATE) )
             {
                /* For Character Ones, verify the initial position */
                mapCharacterModAction* charAct = (mapCharacterModAction*)mod;
@@ -1123,7 +1134,8 @@ void modMap::removeAction(modAction* act)
          delete((mapObjectModAction*)act);
       }
       else if( (act->getAction() == MODSTATE_ACTION_CHARACTER_DEAD) ||
-               (act->getAction() == MODSTATE_ACTION_CHARACTER_MOVE))
+               (act->getAction() == MODSTATE_ACTION_CHARACTER_MOVE) ||
+               (act->getAction() == MODSTATE_ACTION_CHARACTER_CHANGE_STATE) )
       {
          /* Character One */
          delete((mapCharacterModAction*)act);
@@ -1262,7 +1274,8 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs)
       }
 
       /* Character Dead */
-      else if(tmpMobj->getAction() == MODSTATE_ACTION_CHARACTER_DEAD)
+      else if( (tmpMobj->getAction() == MODSTATE_ACTION_CHARACTER_DEAD) ||
+               (tmpMobj->getAction() == MODSTATE_ACTION_CHARACTER_CHANGE_STATE))
       {
          /* Get The character Pointer */
          mapCharacterModAction* charAct = (mapCharacterModAction*)tmpMobj;
@@ -1273,11 +1286,21 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs)
             if( (ch->xPosition == charAct->getInitialX()) &&
                 (ch->zPosition == charAct->getInitialZ()) )
             {
-               /* Put it as dead at the position */
-               ch->instantKill();
-               ch->orientation = charAct->getOrientation();
-               charAct->getPosition(ch->xPosition, ch->yPosition, 
-                     ch->zPosition);
+               if(tmpMobj->getAction() == MODSTATE_ACTION_CHARACTER_DEAD)
+               {
+                  /* Put it as dead at the position */
+                  ch->instantKill();
+                  ch->orientation = charAct->getOrientation();
+                  charAct->getPosition(ch->xPosition, ch->yPosition, 
+                        ch->zPosition);
+               }
+               else if(tmpMobj->getAction() == 
+                                         MODSTATE_ACTION_CHARACTER_CHANGE_STATE)
+               {
+                  /* Change the state to the desired one! */
+                  ch->setPsychoState(charAct->getOrientation());
+               }
+
                done = true;
             }
             else

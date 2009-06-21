@@ -165,9 +165,9 @@ class engine
 
       /*!
        ****************************************************************
-       * Send all NPCs inventories to the modState
+       * Send all NPCs info to the modState
        ****************************************************************/
-      void keepNPCInventoryStatus();
+      void keepNPCStatus();
 
       /*!
        **************************************************************** 

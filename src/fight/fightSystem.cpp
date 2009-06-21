@@ -129,7 +129,8 @@ bool fightSystem::hasEnemies(character* pers)
    for(i=0; i < FIGHT_MAX_PC_GROUPS; i++)
    {
        if( ((isNPC) || (pers->actualFightGroup != i) ) &&
-           (pcGroups[i].anyoneIsAliveAndInRange(false)) )
+           (pcGroups[i].anyoneIsAliveAndInRange(pers->xPosition,
+                                                pers->zPosition,false)) )
        {
            return(true);
        }
@@ -139,7 +140,8 @@ bool fightSystem::hasEnemies(character* pers)
    for(i=0; i < FIGHT_MAX_NPC_GROUPS; i++)
    {
        if( ((!isNPC) || (pers->actualFightGroup != i) ) &&
-           (npcGroups[i].anyoneIsAliveAndInRange(true)) )
+           (npcGroups[i].anyoneIsAliveAndInRange(pers->xPosition,
+                                                 pers->zPosition, true)) )
        {
            //TODO verify if npc group is evil or not to PC.
            /* at last one enemy NPC is alive */

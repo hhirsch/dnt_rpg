@@ -47,11 +47,6 @@ void fightGroup::empty()
    /* mark with NULL all pointers */
    for(i=0;i<FIGHT_MAX_CHARACTERS_PER_GROUP;i++)
    {
-      if(characters[i] != NULL)
-      {
-         /* Remove the enemy status and put as neutral */
-         characters[i]->setPsychoState(PSYCHO_NEUTRAL);
-      }
       characters[i] = NULL;
    }
    actualCharacters = 0;
@@ -142,13 +137,20 @@ character* fightGroup::getNearestEnemy(character* pers)
 /***************************************************************
  *                  anyoneIsAliveAndInRange                    *
  ***************************************************************/
-bool fightGroup::anyoneIsAliveAndInRange(bool onlyHostile)
+bool fightGroup::anyoneIsAliveAndInRange(float posX, float posZ, 
+                                         bool onlyHostile)
 { 
-   //TODO verify range!
+   float dist;
    int i;
    for(i=0;i<actualCharacters;i++)
    {
+      dist = sqrt( (characters[i]->xPosition - posX)*
+                   (characters[i]->xPosition - posX) +
+                   (characters[i]->zPosition - posZ)*
+                   (characters[i]->zPosition - posZ));
+
       if( (characters[i]->isAlive()) && 
+          (dist < DNT_BATTLE_RANGE) &&
           ( (!onlyHostile) || 
             (characters[i]->getPsychoState() == PSYCHO_HOSTILE)) )
       {

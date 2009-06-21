@@ -53,10 +53,12 @@ class fightGroup
      *************************************************************** 
      * Verify if there's any character alive and in range 
      * in the Group  
+     * \param posX -> current character posX
+     * \param posZ -> current character posZ
      * \param onlyHostile -> if true, only accept hostile characters
      * \return true if someone is alive and in range.
      ***************************************************************/
-     bool anyoneIsAliveAndInRange(bool onlyHostile);
+     bool anyoneIsAliveAndInRange(float posX, float posZ, bool onlyHostile);
      /*!
      *************************************************************** 
      * Get nearest character enemy to pers.  

@@ -36,6 +36,8 @@
 
 #define MODSTATE_INVENTORY             6  /**< Inventory "Snapshot" */
 
+#define MODSTATE_ACTION_CHARACTER_CHANGE_STATE 7 /**< Character Change State */
+
 /*! The Generic Modification Action Class */
 class modAction
 {
@@ -142,6 +144,9 @@ class mapCharacterModAction : public modAction
       /*! Get the orientation of the character at action's instant
        * \return character orientation */
       GLfloat getOrientation();
+      /*! Set the orientation of the character at action's instant
+       * \param o -> character orientation */
+      void setOrientation(float o);
 
       /*! Convert the action to a string (usually to save)
        * \return string representing the action */
