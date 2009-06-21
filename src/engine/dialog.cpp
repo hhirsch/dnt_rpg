@@ -1072,6 +1072,8 @@ void conversation::proccessAction(int opcao, void* curEngine)
    dialog* dlg = first->next;
    int i, totalActions = 0;
    talkAction* actions = NULL;
+   briefing brief;
+   char buf[256];
 
    while( (dlg != first) && (dlg->id != numDialog))
    {
@@ -1207,6 +1209,9 @@ void conversation::proccessAction(int opcao, void* curEngine)
                   ownerNPC->inventories->addObject(obj);
                   /* NOTE: The NPC inventory is always saved at modstate when 
                    * the PC leaves the map, and reloaded when it come back */
+               
+                  sprintf(buf,gettext("%s lost."),obj->name.c_str());
+                  brief.addText(buf,206,137,16);
                }
                else
                {
@@ -1248,6 +1253,8 @@ void conversation::proccessAction(int opcao, void* curEngine)
                                            actualPC->xPosition, height,
                                            actualPC->zPosition);
                }
+               sprintf(buf,gettext("Received %s."),obj->name.c_str());
+               brief.addText(buf,240,226,0);
             }
          }
          break;
@@ -1263,6 +1270,8 @@ void conversation::proccessAction(int opcao, void* curEngine)
             {
                m->setQuantity(actions[i].att);
                actualPC->inventories->addObject(m);
+               sprintf(buf,gettext("Received $%d."),actions[i].att);
+               brief.addText(buf,18,191,0);
             }
          }
          break;
@@ -1275,6 +1284,8 @@ void conversation::proccessAction(int opcao, void* curEngine)
             if(m)
             {
                m->removeQuantity(actions[i].att);
+               sprintf(buf,gettext("Lost $%d."),actions[i].att);
+               brief.addText(buf,18,191,0);
             }
          }
          break;

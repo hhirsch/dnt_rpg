@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2009-06-19 20:04-0300\n"
+"POT-Creation-Date: 2009-06-21 17:37-0300\n"
 "PO-Revision-Date: 2008-05-18 14:48+0000\n"
 "Last-Translator: pano <Pano_90@gmx.de>\n"
 "Language-Team: German <de@li.org>\n"
@@ -65,7 +65,7 @@ msgstr ""
 msgid "Not enought points to use!"
 msgstr "Nicht genug Punkte um zu benutzen"
 
-#: src/classes/mission.cpp:512 src/engine/dialog.cpp:1169
+#: src/classes/mission.cpp:512 src/engine/dialog.cpp:1184
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr ""
@@ -167,7 +167,7 @@ msgstr "Warnung"
 msgid "You Need to Assign All Attributes."
 msgstr ""
 
-#: src/engine/barterwindow.cpp:50 src/engine/dialog.cpp:1445
+#: src/engine/barterwindow.cpp:50 src/engine/dialog.cpp:1489
 msgid "Barter"
 msgstr ""
 
@@ -381,42 +381,42 @@ msgstr ""
 msgid "Can't save game while fighting!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:655
+#: src/engine/dccnit.cpp:667
 #, c-format
 msgid "Saving Current Map Modifications"
 msgstr ""
 
-#: src/engine/dccnit.cpp:690
+#: src/engine/dccnit.cpp:702
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Lade Karte: %s"
 
-#: src/engine/dccnit.cpp:753
+#: src/engine/dccnit.cpp:765
 #, c-format
 msgid "Loading NPC: %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:793
+#: src/engine/dccnit.cpp:805
 msgid "Creating MiniMap"
 msgstr ""
 
-#: src/engine/dccnit.cpp:799
+#: src/engine/dccnit.cpp:811
 msgid "Putting GUI on Screen"
 msgstr ""
 
-#: src/engine/dccnit.cpp:846
+#: src/engine/dccnit.cpp:858
 msgid "Loading Particles"
 msgstr ""
 
-#: src/engine/dccnit.cpp:876
+#: src/engine/dccnit.cpp:888
 msgid "Loading Changes..."
 msgstr ""
 
-#: src/engine/dccnit.cpp:904
+#: src/engine/dccnit.cpp:916
 msgid "Done!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:996
+#: src/engine/dccnit.cpp:1008
 msgid ""
 "DccNiTghtmare is relesead under GPLv3 or later: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -424,67 +424,87 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1518
+#: src/engine/dccnit.cpp:1530
 msgid "Too far away for the action!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1563
+#: src/engine/dccnit.cpp:1575
 msgid "No NPCs in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1623
+#: src/engine/dccnit.cpp:1635
 msgid "Surprise Attack Turn."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1637
+#: src/engine/dccnit.cpp:1649
 msgid "No enemies in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1816 src/engine/dccnit.cpp:2305
+#: src/engine/dccnit.cpp:1828 src/engine/dccnit.cpp:2317
 #: src/engine/shortcutswindow.cpp:51
 msgid "Nothing"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2050
+#: src/engine/dccnit.cpp:2062
 #, c-format
 msgid "%s taken."
 msgstr ""
 
-#: src/engine/dccnit.cpp:2072
+#: src/engine/dccnit.cpp:2084
 msgid "Inventory is full!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2104
+#: src/engine/dccnit.cpp:2116
 msgid "Door"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2240
+#: src/engine/dccnit.cpp:2252
 #, c-format
 msgid "%s attacks %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2406
+#: src/engine/dccnit.cpp:2418
 msgid "No more actions. Turn ended."
 msgstr ""
 
-#: src/engine/dccnit.cpp:3917
+#: src/engine/dccnit.cpp:3929
 msgid "Exit Battle Mode"
 msgstr ""
 
-#: src/engine/dialog.cpp:284
+#: src/engine/dialog.cpp:297
 msgid "Success"
 msgstr ""
 
-#: src/engine/dialog.cpp:284
+#: src/engine/dialog.cpp:297
 msgid "Failure"
 msgstr ""
 
-#: src/engine/dialog.cpp:984
+#: src/engine/dialog.cpp:997
 #, c-format
 msgid "Not found in dialog: %d\n"
 msgstr ""
 
-#: src/engine/dialog.cpp:1438
+#: src/engine/dialog.cpp:1213
+#, c-format
+msgid "%s lost."
+msgstr ""
+
+#: src/engine/dialog.cpp:1256
+#, c-format
+msgid "Received %s."
+msgstr ""
+
+#: src/engine/dialog.cpp:1273
+#, c-format
+msgid "Received $%d."
+msgstr ""
+
+#: src/engine/dialog.cpp:1287
+#, c-format
+msgid "Lost $%d."
+msgstr ""
+
+#: src/engine/dialog.cpp:1482
 msgid "Dialog"
 msgstr ""
 
@@ -993,29 +1013,29 @@ msgstr ""
 msgid "Cost"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:150
+#: src/fight/fightSystem.cpp:152
 msgid "No more enemies."
 msgstr ""
 
-#: src/fight/fightSystem.cpp:186
+#: src/fight/fightSystem.cpp:188
 #, c-format
 msgid "%s is dead!"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:231
+#: src/fight/fightSystem.cpp:233
 #, c-format
 msgid "%s receive %d XP for killing"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:278 src/fight/fightSystem.cpp:297
+#: src/fight/fightSystem.cpp:280 src/fight/fightSystem.cpp:299
 msgid "New Round"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:283 src/fight/fightSystem.cpp:302
+#: src/fight/fightSystem.cpp:285 src/fight/fightSystem.cpp:304
 msgid "Error: No Characters!"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:330 src/fight/fightSystem.cpp:336
+#: src/fight/fightSystem.cpp:332 src/fight/fightSystem.cpp:338
 #, c-format
 msgid "%s's turn."
 msgstr ""
