@@ -10,8 +10,8 @@ tarFile=$1
 project="dccnitghtmare"
 workDirs="bin data po src syntax"
 homeFiles="aclocal.m4 configure configure.in DccNiTghtmare.dev \
-           DccNiTghtmare.dsp DccNiTghtmare.dsw DNTMapEditor.dev Doxyfile \
-           install.sh license.txt Makefile.in mapEditor.dsp README \
+           DNTMapEditor.dev Doxyfile \
+           install.sh Makefile.in COPYING README \
            systems.txt torelease.sh config.sub config.guess"
 
 # Verify if file was defined
