@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2009-06-21 17:37-0300\n"
+"POT-Creation-Date: 2009-06-22 11:16-0300\n"
 "PO-Revision-Date: 2008-12-04 18:33+0000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -1018,29 +1018,29 @@ msgstr "Points:"
 msgid "Cost"
 msgstr "Coût"
 
-#: src/fight/fightSystem.cpp:152
+#: src/fight/fightSystem.cpp:151
 msgid "No more enemies."
 msgstr "Plus d'ennemis"
 
-#: src/fight/fightSystem.cpp:188
+#: src/fight/fightSystem.cpp:187
 #, c-format
 msgid "%s is dead!"
 msgstr "%s est mort !"
 
-#: src/fight/fightSystem.cpp:233
+#: src/fight/fightSystem.cpp:232
 #, c-format
 msgid "%s receive %d XP for killing"
 msgstr "%s recois %d XP pour avoir tué"
 
-#: src/fight/fightSystem.cpp:280 src/fight/fightSystem.cpp:299
+#: src/fight/fightSystem.cpp:279 src/fight/fightSystem.cpp:298
 msgid "New Round"
 msgstr "Nouveau tour"
 
-#: src/fight/fightSystem.cpp:285 src/fight/fightSystem.cpp:304
+#: src/fight/fightSystem.cpp:284 src/fight/fightSystem.cpp:303
 msgid "Error: No Characters!"
 msgstr "Erreur : Aucun personnage !"
 
-#: src/fight/fightSystem.cpp:332 src/fight/fightSystem.cpp:338
+#: src/fight/fightSystem.cpp:331 src/fight/fightSystem.cpp:337
 #, c-format
 msgid "%s's turn."
 msgstr "Tour de %s."
@@ -3965,6 +3965,8 @@ msgid ""
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:297
+#: data/dialogs/tutorial/atleticano.dlg:120
+#: data/dialogs/tutorial/cruzeirense.dlg:83
 msgid ""
 "I haven't any more things for you in this DNT version. Come back when "
 "there's a latter version or join DNTeam to help us develop it!"
@@ -3976,6 +3978,7 @@ msgstr ""
 #: data/dialogs/tutorial/logan.dlg:301 data/dialogs/tutorial/atleticano.dlg:38
 #: data/dialogs/tutorial/atleticano.dlg:51
 #: data/dialogs/tutorial/atleticano.dlg:64
+#: data/dialogs/tutorial/atleticano.dlg:124
 msgid "Bye."
 msgstr "Ciao."
 
@@ -4069,6 +4072,7 @@ msgstr "Je n'ai pas l'intention de parler avec vous, hérétique."
 
 #: data/dialogs/tutorial/santa.dlg:150 data/dialogs/tutorial/atleticano.dlg:90
 #: data/dialogs/tutorial/atleticano.dlg:111
+#: data/dialogs/tutorial/cruzeirense.dlg:87
 msgid "Ok."
 msgstr "Ok."
 
