@@ -1770,7 +1770,6 @@ void iaScript::callFunction(iaVariable* var, string strLine,
             bl = modif.allCharactersDead(s);
          }
       }
-      cout << "s: " << s << " isAllDead: " << bl << endl;
       assignValue(var, (void*)&bl, IA_TYPE_BOOL);
    }
 
