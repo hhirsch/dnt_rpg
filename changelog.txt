@@ -1,7 +1,27 @@
 ================================================
+|                Version 0.5                   |
+================================================
+
+Working on:
+ - Weather effects;
+ - Use dntMapEditor to insert sound effects at maps;
+ - New effects for comic books;
+ - Capacity of using talents;
+ - Implement 5-15% of the talents defined on DNT Book;
+ - Money;
+
+Pending:
+ - Define Counter Skills;
+ - Minimap Tags;
+ - Extend walls to follow map height;
+ - Define paths to improve the A* at outdoor maps;
+ - Put Lights on MapEditor;
+ - Score at Death Screen;
+
+================================================
 |                Version 0.4                   |
 ================================================
- - New missions;
+ - New mission;
  - New maps;
  - New models;
  - In-game comic book objects (items);
@@ -30,22 +50,6 @@
  - Low intelligence character can only speak gibberish;
  - Exit battle mode when no more enemies in battle range;
  - Keep NPC Psycho Status at modState;
-
-Working on:
- - Weather effects;
- - Use dntMapEditor to insert sound effects at maps;
- - New effects for comic books;
- - Capacity of using talents;
- - Implement 5-15% of the talents defined on DNT Book;
- - Money;
-
-Pending:
- - Define Counter Skills;
- - Minimap Tags;
- - Extend walls to follow map height;
- - Define paths to improve the A* at outdoor maps;
- - Put Lights on MapEditor;
- - Score at Death Screen;
 
 ================================================
 |               Version 0.3.2                  |

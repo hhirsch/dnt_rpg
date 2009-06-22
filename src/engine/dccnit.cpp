@@ -3296,7 +3296,7 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
                                (option->getReflexionType() >= REFLEXIONS_ALL) 
                                 && (!actualMap->isOutdoor()),
                                 shadow?gameSun->getShadowMatrix():NULL,
-                                shadow?gameSun->getShadowAlpha():NULL);
+                                shadow?gameSun->getShadowAlpha():0.0f);
 
    /* Render Terrain at last for reflexion */
    if(!shadow)

@@ -1,7 +1,7 @@
 [Project]
 FileName=DNTMapEditor.dev
 Name=DNTMapEditor
-UnitCount=269
+UnitCount=271
 Type=0
 Ver=1
 ObjFiles=
@@ -2729,6 +2729,26 @@ BuildCmd=
 
 [Unit269]
 FileName=src\engine\savewindow.cpp
+CompileCpp=1
+Folder=DNTMapEditor
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit270]
+FileName=src\engine\journalwindow.cpp
+CompileCpp=1
+Folder=DNTMapEditor
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit271]
+FileName=src\engine\journalwindow.h
 CompileCpp=1
 Folder=DNTMapEditor
 Compile=1
