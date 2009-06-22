@@ -39,8 +39,9 @@ S=${WORKDIR}/${PN}
 src_install() 
 {
 	dogamesbin bin/${PN} || die "dogamesbin failed"
-	insinto "${GAMES_DATADIR}"/${PN}
+	insinto "${GAMES_DATADIR}"/${PN}	
 	doins -r data/* || die "doins failed"
+	doins bin/dcc.opc bin/options.cfg || die "doins failed"
 	cd "${S}"/po
 	make DESTDIR="${D}" install || "make po install failed"
 	cd "${S}"
