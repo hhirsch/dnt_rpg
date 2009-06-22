@@ -176,7 +176,7 @@ int character::getLevel(classe* cl)
    int i;
    for(i = 0; i < MAX_DISTINCT_CLASSES; i++)
    {
-      if(actualClass[i] != cl)
+      if(actualClass[i] == cl)
       {
          return(classLevels[i]);
       }
