@@ -15,13 +15,14 @@ script()
    string houseMap
    houseMap = "mapas/tutorial/house2.map"
 
-   # define cruzeirense dialog
+   # define cruzeirense character
    string cruz
    cruz = "characters/pcs/cruzeirense.pc"
 
-   # define cruzirense dialog file
-   string cruzDialog
-   cruzDialog = "dialogs/tutorial/cruzeirense.dlg"
+   #define atleticano character
+   string atlet
+   atlet = "characters/pcs/atleticano.pc"
+
 
    # Some variables
    int dialog, state, xp
@@ -32,6 +33,10 @@ script()
            # Set the new cruzeirense dialog
            dialog = 5
            dialogSetInitial(cruz, houseMap, dialog)
+
+           # Set the new atleticano dialog
+           dialog = 7
+           dialogSetInitial(atlet, houseMap, dialog)
 
            # Back to the house map
            mapTravel(houseMap)
