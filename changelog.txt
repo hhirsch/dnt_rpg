@@ -50,6 +50,8 @@ Pending:
  - Low intelligence character can only speak gibberish;
  - Exit battle mode when no more enemies in battle range;
  - Keep NPC Psycho Status at modState;
+ - Use more objects (soda machine, paints, ammo, books);
+ - Missions Journal Window;
 
 ================================================
 |               Version 0.3.2                  |
