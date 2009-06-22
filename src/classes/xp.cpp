@@ -129,8 +129,8 @@ int getXP(character* actualActor, float targetCR)
       if( (targetCR >= 1) && (targetCR <= 20) )
       {
          /* Get directly from table */
-         int tablePos = (int)targetCR;
-         return(xpTable[tablePos][level]);
+         int tablePos = (int)targetCR-1;
+         return(xpTable[tablePos][level-1]);
       }
       else if(targetCR > 20)
       {
