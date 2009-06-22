@@ -11,7 +11,7 @@ DESCRIPTION="a sarcastic 3D single player RPG"
 HOMEPAGE="http://dnt.dnteam.org"
 SRC_URI="mirror://sourceforge/${PN}/${MY_P}_${MY_PV}.tar.bz2"
 
-LICENSE="public-domain"
+LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
