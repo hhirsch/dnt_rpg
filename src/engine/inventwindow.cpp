@@ -670,7 +670,7 @@ int inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
 
                   if(activeObject)
                   {
-                     //FIXME
+                     /* FIXME
                      if(activeObject->getType() == OBJECT_TYPE_MONEY)
                      {
                         money* m = (money*)activeObject;
@@ -680,7 +680,7 @@ int inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                         qty.setDelta(1.0f);
                         qty.show(gettext("Money"), 
                                  gettext("Define quantity:"), interf); 
-                     }
+                     }*/
 
                      if(seller)
                      {
