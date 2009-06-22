@@ -1369,7 +1369,7 @@ void conversation::changeDialog(int numDialog)
    dialogWindow dlgWindow;
    int intelligence = 20;
 
-   if(numDialog == actual)
+   if( (numDialog == actual) || (!dlgWindow.isOpened()) )
    {
       /* No change at the same dialog! */
       return;

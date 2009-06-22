@@ -70,6 +70,7 @@ bool fightGroup::insertCharacter(character* pers)
    {
       /* can insert character */
       characters[actualCharacters] = pers;
+      pers->currentEnemy = NULL;
       actualCharacters++;
       return(true);
    }
