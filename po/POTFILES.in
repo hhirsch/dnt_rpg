@@ -258,6 +258,7 @@ data/dialogs/tutorial/cruzeirense.dlg
 data/missions/tutorial/mission1.mis
 data/missions/tutorial/mission2.mis
 data/missions/tutorial/mission3.mis
+data/missions/tutorial/mission4.mis
 
 #books
 data/models/objetos/books/combat_tutorial/combat_tutorial.dcc

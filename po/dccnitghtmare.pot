@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2009-06-22 11:16-0300\n"
+"POT-Creation-Date: 2009-06-24 11:05-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -577,14 +577,6 @@ msgstr ""
 
 #: src/engine/inventwindow.cpp:355
 msgid "No equipped weapons are compatible with this munition type."
-msgstr ""
-
-#: src/engine/inventwindow.cpp:681 data/models/objetos/itens/money/money.dcc:1
-msgid "Money"
-msgstr ""
-
-#: src/engine/inventwindow.cpp:682
-msgid "Define quantity:"
 msgstr ""
 
 #: src/engine/itemwindow.cpp:78
@@ -3575,6 +3567,10 @@ msgstr ""
 msgid "Install Ruindows at the occupation's notebook for Santa Claws."
 msgstr ""
 
+#: data/missions/tutorial/mission4.mis:2
+msgid "Fight for Cruzeirense."
+msgstr ""
+
 #: data/models/objetos/itens/healkit/healkit.dcc:1
 msgid "First Aid Kit"
 msgstr ""
@@ -3585,6 +3581,10 @@ msgstr ""
 
 #: data/models/objetos/itens/lata1/lata1.dcc:1
 msgid "Soda Can"
+msgstr ""
+
+#: data/models/objetos/itens/money/money.dcc:1
+msgid "Money"
 msgstr ""
 
 #: data/models/objetos/geral/computador/computador.dcc:1
