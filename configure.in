@@ -17,12 +17,12 @@
 #  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
 
 AC_PREREQ(2.61)
-AC_INIT("DccNiTghmare", "0.4", "http://sourceforge.net/projects/dccnitghtmare")
+AC_INIT("DccNiTghmare", "0.5", "http://sourceforge.net/projects/dccnitghtmare")
 #AC_CONFIG_SRCDIR([src/])
 AC_CONFIG_HEADER([src/config.h])
 
 PACKAGE=dccnitghtmare
-VERSION=0.4
+VERSION=0.5
 AC_DEFINE_UNQUOTED(PACKAGE, "$PACKAGE")
 AC_DEFINE_UNQUOTED(VERSION, "$VERSION")
 AC_SUBST(PACKAGE)
