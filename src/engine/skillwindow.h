@@ -69,7 +69,11 @@ class skillWindow
       void setColors();
       /*! Update the info show of the current skill */
       void updateSkillInfo();
-      
+      /*! Set to the previous skill */
+      void previousSkill();
+      /*! Set to the next skill */
+      void nextSkill();
+
       window*      intWindow;     /**< Pointer to the internal window */
       skills*      saveSkill;     /**< Pointer to the edited skill list */
       skill**      skillsOrder;   /**< Sorted skills */
@@ -78,12 +82,13 @@ class skillWindow
       int          curSkill;      /**< Actual Skill */
       int          charLevel;     /**< Character Level */
       bool         readOnly;      /**< True if read only window (no changes) */
-      
+
       rolBar* desc;               /**< Description Text */
       textBox* txtAvaiblePoints;  /**< Avaible Points Text */
       textBox* skillName;         /**< Actual Skill Name */
       textBox* txtPoints;         /**< Actual Points Text */
       textBox* txtCosts;          /**< Actual Cost Text */
+      cxSel* cxOnlyClass;         /**< Only Race/Class skills */
 
       button* buttonSum;          /**< Inc Points Button */
       button* buttonDec;          /**< Dec Points Button */

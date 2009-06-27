@@ -1,6 +1,8 @@
 ================================================
 |                Version 0.5                   |
 ================================================
+ -Radiobox filter to the SkillWindow to only show race/class skills; 
+
 
 Working on:
  - Weather effects;

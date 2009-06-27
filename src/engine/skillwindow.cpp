@@ -69,8 +69,8 @@ skillWindow::skillWindow(skills* savSkill, guiInterface* inter,
    qsort(&skillsOrder[0], totalSkills, sizeof(skill**), cmpSkillFunction);
 
    /* Create Skill Window */
-   intWindow = inter->insertWindow(centerX-132,centerY-128,
-                                   centerX+132,centerY+128,
+   intWindow = inter->insertWindow(centerX-132,centerY-133,
+                                   centerX+132,centerY+133,
                                    gettext("Skills"));
 
    /* Free Points */
@@ -94,9 +94,9 @@ skillWindow::skillWindow(skills* savSkill, guiInterface* inter,
                                                     sk->description.c_str());
 
    /* Contorns */
-   intWindow->getObjectsList()->insertTextBox(8,171,256,224,2,"");
+   intWindow->getObjectsList()->insertTextBox(8,171,256,234,2,"");
    intWindow->getObjectsList()->insertTextBox(8,18,256,37,2,"");
-   intWindow->getObjectsList()->insertTextBox(8,225,256,250,2,"");
+   intWindow->getObjectsList()->insertTextBox(8,235,256,260,2,"");
  
    /* Skill Name & Selectors */
    buttonPrevious = intWindow->getObjectsList()->insertButton(52,175,66,193,
@@ -122,7 +122,12 @@ skillWindow::skillWindow(skills* savSkill, guiInterface* inter,
    txtPoints->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER,
                       DNT_FONT_STYLE_NORMAL);
    txtPoints->setColor(255,255,255);
-   
+
+   /* Show Only Class/Race Skills cxSel */
+   cxOnlyClass = intWindow->getObjectsList()->insertCxSel(52,220,false);
+   intWindow->getObjectsList()->insertTextBox(63,217,248,226,0,
+                                        gettext("Only show race/class skills"));
+
    if(!readOnly)
    {
       buttonSum = intWindow->getObjectsList()->insertButton(134,198,144,216,
@@ -149,17 +154,17 @@ skillWindow::skillWindow(skills* savSkill, guiInterface* inter,
    if(!readOnly)
    {
       /* Confirm Button */
-      buttonConfirm = intWindow->getObjectsList()->insertButton(178,228,248,247,
+      buttonConfirm = intWindow->getObjectsList()->insertButton(178,238,248,257,
             gettext("Confirm"),1);
       /* Cancel Button */
-      buttonCancel = intWindow->getObjectsList()->insertButton(13,228,83,247,
+      buttonCancel = intWindow->getObjectsList()->insertButton(13,238,83,257,
             gettext("Cancel"),1);
    }
    else
    {
       buttonConfirm = NULL;
       /* Cancel Button, with close text at read-only */
-      buttonCancel = intWindow->getObjectsList()->insertButton(92,228,163,247,
+      buttonCancel = intWindow->getObjectsList()->insertButton(92,238,163,257,
             gettext("Close"),1);
    }
 
@@ -255,6 +260,29 @@ void skillWindow::setColors()
 }
 
 /**************************************************************
+ *                     previousSkill                          *
+ **************************************************************/
+void skillWindow::previousSkill()
+{
+   if(curSkill > 0)
+   {
+      curSkill--;
+   }
+   else
+   {
+      curSkill = totalSkills-1;
+   }
+}
+
+/**************************************************************
+ *                        nextSkill                           *
+ **************************************************************/
+void skillWindow::nextSkill()
+{
+   curSkill = (curSkill+1) % totalSkills;
+}
+
+/**************************************************************
  *                             treat                          *
  **************************************************************/
 int skillWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
@@ -265,8 +293,24 @@ int skillWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
       return(SKILLW_OTHER);
    }
 
+   /* Verify cxSel Events */
+   if(eventInfo == FARSO_EVENT_MODIFIED_CX_SEL)
+   {
+      if(object == (guiObject*)cxOnlyClass)
+      {
+         if( (cxOnlyClass->isSelected()) && (skillsOrder[curSkill]->mod != 1))
+         {
+            while(skillsOrder[curSkill]->mod != 1)
+            {
+               nextSkill();
+            }
+            updateSkillInfo();
+         }
+      }
+   }
+
    /* Verify Button Events */
-   if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
+   else if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
    {
       if( (object == (guiObject*) buttonSum) && (!readOnly))
       {
@@ -295,21 +339,29 @@ int skillWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
       /* Show next skill info */
       else if(object == (guiObject*) buttonNext)
       {
-         curSkill = (curSkill+1) % totalSkills;
+         nextSkill();
+         if(cxOnlyClass->isSelected())
+         {
+            while(skillsOrder[curSkill]->mod != 1)
+            {
+               nextSkill();
+            }
+         }
          updateSkillInfo();
       }
 
       /* Show Previous skill info */
       else if(object == (guiObject*) buttonPrevious)
       {
-         if(curSkill > 0)
+         previousSkill();
+         if(cxOnlyClass->isSelected())
          {
-            curSkill--;
+            while(skillsOrder[curSkill]->mod != 1)
+            {
+               previousSkill();
+            }
          }
-         else
-         {
-            curSkill = totalSkills-1;
-         }
+        
          updateSkillInfo();
       }
 
