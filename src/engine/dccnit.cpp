@@ -2070,11 +2070,6 @@ int engine::verifyMouseActions(Uint8 mButton)
 
                            /* Remove object from Map */
                            actualMap->removeObject(sobj->obj);
-
-                           if(inventoryWindow)
-                           {
-                              inventoryWindow->reDraw();
-                           }
                         }
                         else
                         {

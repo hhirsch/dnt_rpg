@@ -21,6 +21,7 @@
 #include "inventory.h"
 #include "object.h"
 #include "money.h"
+#include "../engine/inventwindow.h"
 
 /**************************************************************
  *                          Constructor                       *
@@ -138,7 +139,19 @@ int inventory::getTotalItems()
  **************************************************************/
 bool inventory::addObject(object* obj, int x, int y, int curInv)
 {
-   return(slots[curInv]->addObject(obj, x, y));
+   bool res = false;
+
+   /* Add the object */
+   res = slots[curInv]->addObject(obj, x, y);
+
+   /* Redraw the window if needed */
+   if( (res) && (openedWindow != NULL))
+   {
+      inventWindow* i = (inventWindow*)openedWindow;
+      i->reDraw();
+   }
+
+   return(res);
 }
 
 /**************************************************************
@@ -192,6 +205,14 @@ bool inventory::addObject(object* obj)
    {
       inv++;
    }
+
+   /* Redraw the window if needed */
+   if( (inv < INVENTORY_PER_CHARACTER) && (openedWindow != NULL))
+   {
+      inventWindow* i = (inventWindow*)openedWindow;
+      i->reDraw();
+   }
+
    return(inv < INVENTORY_PER_CHARACTER);
 }
 
