@@ -53,6 +53,11 @@ class miniMapWindow
        * \return -> true if is opened, false otherwise */
       bool isOpened();
 
+      /*! Reopen the Window (if is opened) 
+       * \param gui -> pointer to the used guiInterface 
+       * \param openedMap -> current opened map */
+      void reOpen(guiInterface* gui, Map* openedMap);
+
    protected:
       static int width;             /**< Current picture width */
       static int height;            /**< Current picture height */

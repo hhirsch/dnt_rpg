@@ -73,6 +73,30 @@ void briefing::closeWindow(guiInterface* gui)
 }
 
 /***********************************************************************
+ *                              reOpen                                 *
+ ***********************************************************************/
+void briefing::reOpen(guiInterface* gui)
+{
+   int x1=0, y1=0, x2=0, y2=0;
+   if(isOpened())
+   {
+      /* Retrieve current postion */
+      x1 = briefWindow->getX1();
+      y1 = briefWindow->getY1();
+      x2 = briefWindow->getX2();
+      y2 = briefWindow->getY2();
+      
+      /* Close the window */
+      closeWindow(gui);
+      /* Open the window */
+      openWindow(gui);
+
+      /* Reset the position */
+      briefWindow->setCoordinate(x1, y1, x2, y2);
+   }
+}
+
+/***********************************************************************
  *                              addText                                *
  ***********************************************************************/
 void briefing::addText(string text)

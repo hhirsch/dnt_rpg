@@ -815,18 +815,15 @@ int engine::loadMap(string arqMapa, bool loadingGame)
    /* Reopen, if already opened, some game Windows */
    if(mapWindow->isOpened())
    {
-      mapWindow->close(gui);
-      mapWindow->open(gui,0,0, actualMap);
+      mapWindow->reOpen(gui, actualMap);
    }
    if(shortcuts->isOpened())
    {
-      shortcuts->close(gui);
-      shortcuts->open(gui);
+      shortcuts->reOpen(gui);
    }
    if(brief->isOpened())
    {
-      brief->closeWindow(gui);
-      brief->openWindow(gui);
+      brief->reOpen(gui);
    }
 
    /* Updating the BoundingBoxes for PCs */

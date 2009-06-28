@@ -70,6 +70,10 @@ class briefing
       /*! Clear the briefing text */
       void clear();
 
+      /*! Reopen the Window (if is opened) 
+       * \param gui -> pointer to the used guiInterface */ 
+      void reOpen(guiInterface* gui);
+
    protected:
       static rolBar* briefTxt;       /**< Briefing Text */
       static window* briefWindow;    /**< ShortCuts Window */

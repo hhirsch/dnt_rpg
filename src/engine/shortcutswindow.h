@@ -56,6 +56,9 @@ class shortcutsWindow
       /*! Verify if the window is opened
        * \return -> true if the window is opened */
       bool isOpened();
+      /*! Reopen the Window (if is opened) 
+       * \param gui -> pointer to the used guiInterface */ 
+      void reOpen(guiInterface* gui);
 
       /*! Treat the window events
        * \param object -> current active gui object

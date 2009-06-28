@@ -102,6 +102,30 @@ bool miniMapWindow::isOpened()
 }
 
 /***********************************************************************
+ *                              reOpen                                 *
+ ***********************************************************************/
+void miniMapWindow::reOpen(guiInterface* gui, Map* openedMap)
+{
+   int x1=0, y1=0, x2=0, y2=0;
+   if(isOpened())
+   {
+      /* Retrieve current postion */
+      x1 = mapWindow->getX1();
+      y1 = mapWindow->getY1();
+      x2 = mapWindow->getX2();
+      y2 = mapWindow->getY2();
+      
+      /* Close the window */
+      close(gui);
+      /* Open the window */
+      open(gui, 0,0, openedMap);
+
+      /* Reset the position */
+      mapWindow->setCoordinate(x1, y1, x2, y2);
+   }
+}
+
+/***********************************************************************
  *                      updateCharacterPosition                        *
  ***********************************************************************/
 void miniMapWindow::updateCharacterPosition(float posX, float posZ)
