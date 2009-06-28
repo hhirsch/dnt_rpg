@@ -45,8 +45,10 @@ class collision
       /*! Verify if character can occupy position on Square
        * \param min -> min positions of Bounding Box (translated & rotated)
        * \param max -> max positions of bounding box (translated & rotated)
-       * \param quad -> pointer to the current square */
-      bool verifySquare(GLfloat min[3], GLfloat max[3],Square* quad);
+       * \param quad -> pointer to the current square
+       * \param varHeight -> height variation going in */
+      bool verifySquare(GLfloat min[3], GLfloat max[3],Square* quad,
+                        GLfloat& varHeight);
 
       /*! Verify collision with meios fio
        * \param min -> min positions of Bounding Box (translated & rotated)
