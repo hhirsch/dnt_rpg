@@ -1,7 +1,9 @@
 ================================================
 |                Version 0.5                   |
 ================================================
- -Radiobox filter to the SkillWindow to only show race/class skills; 
+ - Radiobox filter to the SkillWindow to only show race/class skills; 
+ - Fixed a bug: Keep windows positions after map change;
+ - Fixed a bug: Update inventoryWindow after receiveing an item from a dialog;
 
 
 Working on:
@@ -19,6 +21,9 @@ Pending:
  - Define paths to improve the A* at outdoor maps;
  - Put Lights on MapEditor;
  - Score at Death Screen;
+ - Five new missions;
+ - New models;
+ - New maps;
 
 ================================================
 |                Version 0.4                   |

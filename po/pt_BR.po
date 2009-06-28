@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2009-06-24 11:05-0300\n"
+"POT-Creation-Date: 2009-06-28 11:02-0300\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -79,14 +79,14 @@ msgstr "Tendência e Alinhamento"
 #: src/engine/alignwindow.cpp:71 src/engine/aspectwindow.cpp:92
 #: src/engine/attwindow.cpp:236 src/engine/classwindow.cpp:116
 #: src/engine/options.cpp:991 src/engine/racewindow.cpp:116
-#: src/engine/skillwindow.cpp:153
+#: src/engine/skillwindow.cpp:158
 msgid "Confirm"
 msgstr "Confirmar"
 
 #: src/engine/alignwindow.cpp:75 src/engine/aspectwindow.cpp:96
 #: src/engine/attwindow.cpp:240 src/engine/barterwindow.cpp:66
 #: src/engine/classwindow.cpp:120 src/engine/options.cpp:995
-#: src/engine/racewindow.cpp:120 src/engine/skillwindow.cpp:156
+#: src/engine/racewindow.cpp:120 src/engine/skillwindow.cpp:161
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -278,7 +278,7 @@ msgstr "Habilidades"
 msgid "Skills"
 msgstr "Perícias"
 
-#: src/engine/charwindow.cpp:248 src/engine/skillwindow.cpp:163
+#: src/engine/charwindow.cpp:248 src/engine/skillwindow.cpp:168
 #: src/gui/window.cpp:219
 msgid "Close"
 msgstr "Fechar"
@@ -402,19 +402,19 @@ msgstr "Criando Mini Mapa"
 msgid "Putting GUI on Screen"
 msgstr "Colocando as janelas na tela"
 
-#: src/engine/dccnit.cpp:858
+#: src/engine/dccnit.cpp:855
 msgid "Loading Particles"
 msgstr "Carregando Partículas"
 
-#: src/engine/dccnit.cpp:888
+#: src/engine/dccnit.cpp:885
 msgid "Loading Changes..."
 msgstr "Carregando Mudanças..."
 
-#: src/engine/dccnit.cpp:916
+#: src/engine/dccnit.cpp:913
 msgid "Done!"
 msgstr "Pronto!"
 
-#: src/engine/dccnit.cpp:1008
+#: src/engine/dccnit.cpp:1005
 msgid ""
 "DccNiTghtmare is relesead under GPLv3 or later: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -426,50 +426,50 @@ msgstr ""
 "mesmos). DccNiTghtmare agradece aos que desenvolveram as bibliotecas: "
 "OpenAL, Cal3D, OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 
-#: src/engine/dccnit.cpp:1530
+#: src/engine/dccnit.cpp:1527
 msgid "Too far away for the action!"
 msgstr "Muito distante para realizar a ação!"
 
-#: src/engine/dccnit.cpp:1575
+#: src/engine/dccnit.cpp:1572
 msgid "No NPCs in the area."
 msgstr "Sem NPCs na área."
 
-#: src/engine/dccnit.cpp:1635
+#: src/engine/dccnit.cpp:1632
 msgid "Surprise Attack Turn."
 msgstr "Turno de ataque surpresa."
 
-#: src/engine/dccnit.cpp:1649
+#: src/engine/dccnit.cpp:1646
 msgid "No enemies in the area."
 msgstr "Sem inimigos na área."
 
-#: src/engine/dccnit.cpp:1828 src/engine/dccnit.cpp:2317
+#: src/engine/dccnit.cpp:1825 src/engine/dccnit.cpp:2309
 #: src/engine/shortcutswindow.cpp:51
 msgid "Nothing"
 msgstr "Nada"
 
-#: src/engine/dccnit.cpp:2062
+#: src/engine/dccnit.cpp:2059
 #, c-format
 msgid "%s taken."
 msgstr "Pegou %s."
 
-#: src/engine/dccnit.cpp:2084
+#: src/engine/dccnit.cpp:2076
 msgid "Inventory is full!"
 msgstr "O inventário está cheio!"
 
-#: src/engine/dccnit.cpp:2116
+#: src/engine/dccnit.cpp:2108
 msgid "Door"
 msgstr "Porta"
 
-#: src/engine/dccnit.cpp:2252
+#: src/engine/dccnit.cpp:2244
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s ataca %s"
 
-#: src/engine/dccnit.cpp:2418
+#: src/engine/dccnit.cpp:2410
 msgid "No more actions. Turn ended."
 msgstr "Sem mais ações: Turno Finalizado."
 
-#: src/engine/dccnit.cpp:3929
+#: src/engine/dccnit.cpp:3921
 msgid "Exit Battle Mode"
 msgstr "Sai do Modo de Batalha"
 
@@ -947,51 +947,51 @@ msgstr "Perícias da Raça"
 msgid "Menu"
 msgstr "Menu"
 
-#: src/engine/shortcutswindow.cpp:140
+#: src/engine/shortcutswindow.cpp:164
 msgid "Particles"
 msgstr "Partículas"
 
-#: src/engine/shortcutswindow.cpp:153
+#: src/engine/shortcutswindow.cpp:177
 msgid "FPS"
 msgstr "FPS"
 
-#: src/engine/shortcutswindow.cpp:191
+#: src/engine/shortcutswindow.cpp:215
 msgid "Enter Battle Mode"
 msgstr "Entra no Modo de Batalha"
 
-#: src/engine/shortcutswindow.cpp:195
+#: src/engine/shortcutswindow.cpp:219
 msgid "Select Normal Attack"
 msgstr "Seleciona Ataque Normal"
 
-#: src/engine/shortcutswindow.cpp:201
+#: src/engine/shortcutswindow.cpp:225
 msgid "Open Quests Window"
 msgstr "Abre Janela de Missões"
 
-#: src/engine/shortcutswindow.cpp:206
+#: src/engine/shortcutswindow.cpp:230
 msgid "Open Map Window"
 msgstr "Abre MiniMapa"
 
-#: src/engine/shortcutswindow.cpp:213
+#: src/engine/shortcutswindow.cpp:237
 msgid "End Character's Turn"
 msgstr "Finaliza o Turno do Personagen"
 
-#: src/engine/shortcutswindow.cpp:217
+#: src/engine/shortcutswindow.cpp:241
 msgid "Only Available in Battle Mode"
 msgstr "Somente disponível no Modo de Batalha"
 
-#: src/engine/shortcutswindow.cpp:223
+#: src/engine/shortcutswindow.cpp:247
 msgid "Open Inventory Window"
 msgstr "Abre Inventário"
 
-#: src/engine/shortcutswindow.cpp:228
+#: src/engine/shortcutswindow.cpp:252
 msgid "Open Assign Attacks Window"
 msgstr "Abre Seleção de Ataques Rápidos"
 
-#: src/engine/shortcutswindow.cpp:233
+#: src/engine/shortcutswindow.cpp:257
 msgid "View Character Informations"
 msgstr "Ver Informações do Personagem"
 
-#: src/engine/shortcutswindow.cpp:238
+#: src/engine/shortcutswindow.cpp:262
 msgid "Open Group/Party Window"
 msgstr "Abre Janela de Grupo"
 
@@ -1003,7 +1003,11 @@ msgstr "Pontos Livres:"
 msgid "Points:"
 msgstr "Pontos:"
 
-#: src/engine/skillwindow.cpp:143
+#: src/engine/skillwindow.cpp:129
+msgid "Only show race/class skills"
+msgstr "Mostrar só perícias de raça/classe"
+
+#: src/engine/skillwindow.cpp:148
 msgid "Cost"
 msgstr "Custo"
 
