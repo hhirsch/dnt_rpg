@@ -122,7 +122,8 @@ bool collision::verifySquare(GLfloat min[3], GLfloat max[3], Square* quad,
                 if(bounding.y2+sobj->y <= 1.5)
                 {
                    /* Can walk above the object */
-                   varHeight += bounding.y2+sobj->y;
+                   varHeight = ((bounding.y2+sobj->y)>varHeight)?
+                                                  bounding.y2+sobj->y:varHeight;
                 }
                 else
                 {
