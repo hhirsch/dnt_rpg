@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
 "POT-Creation-Date: 2009-06-28 11:02-0300\n"
-"PO-Revision-Date: 2008-05-18 14:48+0000\n"
-"Last-Translator: pano <Pano_90@gmx.de>\n"
+"PO-Revision-Date: 2009-07-05 10:50+0000\n"
+"Last-Translator: Lord Nmancer <necromancer@gmx.net>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-10-14 09:44+0000\n"
+"X-Launchpad-Export-Date: 2009-07-05 12:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: src/classes/actions.cpp:128
@@ -55,11 +55,11 @@ msgstr "kritische HEilung"
 
 #: src/classes/actions.cpp:298 src/classes/actions.cpp:302
 msgid "Critical Hit!"
-msgstr "Kritischer Treffer"
+msgstr "Kritischer Treffer!"
 
 #: src/classes/feats.cpp:160
 msgid "Invalid Talent"
-msgstr ""
+msgstr "ungültiges Talent"
 
 #: src/classes/feats.cpp:212
 msgid "Not enought points to use!"
@@ -72,7 +72,7 @@ msgstr ""
 
 #: src/classes/mission.cpp:529 src/classes/mission.cpp:532
 msgid "Mission Failure!"
-msgstr ""
+msgstr "Auftrag fehlgeschlagen!"
 
 #: src/engine/alignwindow.cpp:46
 msgid "Tendency & Alignment"
@@ -110,7 +110,7 @@ msgstr "Geschlecht:"
 
 #: src/engine/attwindow.cpp:58
 msgid "Attributes"
-msgstr ""
+msgstr "Eigenschaften"
 
 #: src/engine/attwindow.cpp:80
 msgid "Roll"
@@ -132,12 +132,12 @@ msgstr "Stärke"
 #: src/engine/attwindow.cpp:110 src/engine/charwindow.cpp:172
 #: data/skills/destreza.ski:1
 msgid "Dexterity"
-msgstr ""
+msgstr "Geschicklichkeit"
 
 #: src/engine/attwindow.cpp:130 src/engine/charwindow.cpp:177
 #: data/skills/constituicao.ski:1
 msgid "Constitution"
-msgstr ""
+msgstr "Konstitution"
 
 #: src/engine/attwindow.cpp:150 src/engine/charwindow.cpp:182
 #: data/skills/inteligencia.ski:1
@@ -156,7 +156,7 @@ msgstr "Charisma"
 
 #: src/engine/attwindow.cpp:224
 msgid "Attribute Description"
-msgstr ""
+msgstr "Eigenschaftsbeschreibung"
 
 #: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:531
 #: src/engine/inventwindow.cpp:354 src/engine/options.cpp:1232
@@ -165,7 +165,7 @@ msgstr "Warnung"
 
 #: src/engine/attwindow.cpp:552
 msgid "You Need to Assign All Attributes."
-msgstr ""
+msgstr "Sie müssen alle Eigenschaften vergeben"
 
 #: src/engine/barterwindow.cpp:50 src/engine/dialog.cpp:1489
 msgid "Barter"
@@ -210,7 +210,7 @@ msgstr ""
 
 #: src/engine/briefing.cpp:57
 msgid "Welcome to DNT!"
-msgstr ""
+msgstr "Willkommen zu DNT!"
 
 #: src/engine/charwindow.cpp:115
 msgid "Female"
@@ -246,7 +246,7 @@ msgstr "LP"
 
 #: src/engine/charwindow.cpp:144
 msgid "AC"
-msgstr ""
+msgstr "RK"
 
 #: src/engine/charwindow.cpp:205
 msgid "Fortitude"
@@ -254,11 +254,11 @@ msgstr ""
 
 #: src/engine/charwindow.cpp:210
 msgid "Reflex"
-msgstr ""
+msgstr "Reflex"
 
 #: src/engine/charwindow.cpp:214
 msgid "I am Not a Fool"
-msgstr ""
+msgstr "Ich bin kein Narr"
 
 #: src/engine/charwindow.cpp:219
 msgid "Base Attack Modifier"
@@ -274,7 +274,7 @@ msgstr ""
 
 #: src/engine/charwindow.cpp:240
 msgid "Talents"
-msgstr ""
+msgstr "Talente"
 
 #: src/engine/charwindow.cpp:244 src/engine/skillwindow.cpp:74
 msgid "Skills"
@@ -307,7 +307,7 @@ msgstr ""
 
 #: src/engine/classwindow.cpp:83
 msgid "Class"
-msgstr ""
+msgstr "Klasse"
 
 #: src/engine/classwindow.cpp:93 src/engine/racewindow.cpp:93
 msgid "Characteristics"
@@ -315,7 +315,7 @@ msgstr ""
 
 #: src/engine/classwindow.cpp:94 src/engine/racewindow.cpp:94
 msgid "Description"
-msgstr ""
+msgstr "Beschreibung"
 
 #: src/engine/classwindow.cpp:152
 msgid "Life Dice"
@@ -347,11 +347,11 @@ msgstr ""
 
 #: src/engine/classwindow.cpp:257 src/engine/racewindow.cpp:189
 msgid "No Talents."
-msgstr ""
+msgstr "Keine Talente."
 
 #: src/engine/classwindow.cpp:265
 msgid "Class Skills"
-msgstr ""
+msgstr "Klassenfähigkeiten"
 
 #: src/engine/classwindow.cpp:284 src/engine/racewindow.cpp:215
 msgid "No Skills."
@@ -359,7 +359,7 @@ msgstr "Keine Fähigkeiten."
 
 #: src/engine/dccnit.cpp:472 src/engine/dccnit.cpp:522
 msgid "Error"
-msgstr ""
+msgstr "Fehler"
 
 #: src/engine/dccnit.cpp:472
 msgid "Can't load the saved game!"
@@ -367,19 +367,19 @@ msgstr ""
 
 #: src/engine/dccnit.cpp:517
 msgid "Information"
-msgstr ""
+msgstr "Information"
 
 #: src/engine/dccnit.cpp:518
 msgid "The game was saved!"
-msgstr ""
+msgstr "Das Spiel wurde gespeichert."
 
 #: src/engine/dccnit.cpp:522
 msgid "Can't save game!"
-msgstr ""
+msgstr "Das Spiel konnte nicht gespeichert werden."
 
 #: src/engine/dccnit.cpp:532
 msgid "Can't save game while fighting!"
-msgstr ""
+msgstr "Das Spiel kann nicht während eines Kampfes gespeichert werden."
 
 #: src/engine/dccnit.cpp:667
 #, c-format
@@ -414,7 +414,7 @@ msgstr ""
 
 #: src/engine/dccnit.cpp:913
 msgid "Done!"
-msgstr ""
+msgstr "Fertig!"
 
 #: src/engine/dccnit.cpp:1005
 msgid ""
@@ -3727,6 +3727,9 @@ msgstr ""
 
 #~ msgid "Charism"
 #~ msgstr "Charisma"
+
+#~ msgid "Loading Character"
+#~ msgstr "Lade Charakter"
 
 #~ msgid "Error while opening skills list: %s\n"
 #~ msgstr "Fehler beim Öffnen der Fertigkeitenliste: %s\n"

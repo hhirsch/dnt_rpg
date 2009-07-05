@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
 "POT-Creation-Date: 2009-06-28 11:02-0300\n"
-"PO-Revision-Date: 2009-03-29 15:53+0000\n"
-"Last-Translator: Gothmog <Unknown>\n"
+"PO-Revision-Date: 2009-07-04 05:08+0000\n"
+"Last-Translator: dittophantassy <Unknown>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-04-29 17:20+0000\n"
+"X-Launchpad-Export-Date: 2009-07-05 12:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: src/classes/actions.cpp:128
@@ -359,23 +359,23 @@ msgstr "Sin habilidades"
 
 #: src/engine/dccnit.cpp:472 src/engine/dccnit.cpp:522
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 #: src/engine/dccnit.cpp:472
 msgid "Can't load the saved game!"
-msgstr ""
+msgstr "No se puede cargar el juego guardado!"
 
 #: src/engine/dccnit.cpp:517
 msgid "Information"
-msgstr ""
+msgstr "Información"
 
 #: src/engine/dccnit.cpp:518
 msgid "The game was saved!"
-msgstr ""
+msgstr "El juego ha sido guardado!"
 
 #: src/engine/dccnit.cpp:522
 msgid "Can't save game!"
-msgstr ""
+msgstr "No se puede guardar el juego!"
 
 #: src/engine/dccnit.cpp:532
 msgid "Can't save game while fighting!"
@@ -423,10 +423,10 @@ msgid ""
 "is thankful to the people who developed those libraries: OpenAL, Cal3D, "
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
-"DccNiTghtmare está desarrollado bajo la licencia GPLv3: siéntete libre de "
-"usar el código fuente como quieras (o para echarnos la culpa de algo). "
-"DccNiTghtmare está agradecido con la gente que desarrolló estas librerías: "
-"OpenAL, Cal3D, OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
+"DccNiTghtmare está liberado bajo la licencia GPL versión 3 o superior: eres "
+"libre de usar su código fuente y datos de la forma que desees. DccNiTghtmare "
+"está agradecido de toda la gente relacionada en el desarrollo de estas "
+"librerías: OpenAL, Cal3D, OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 
 #: src/engine/dccnit.cpp:1527
 msgid "Too far away for the action!"
@@ -578,11 +578,11 @@ msgstr "Coger"
 #: src/engine/inventwindow.cpp:314
 #, c-format
 msgid "%s reloaded %s with %s ammo."
-msgstr ""
+msgstr "%s recargado %s con %s municiones."
 
 #: src/engine/inventwindow.cpp:355
 msgid "No equipped weapons are compatible with this munition type."
-msgstr ""
+msgstr "Ninguna arma del equipamiento es compatible con este tipo de munición."
 
 #: src/engine/itemwindow.cpp:78
 #, c-format
@@ -633,11 +633,11 @@ msgstr "Tamaño: "
 
 #: src/engine/itemwindow.cpp:186 src/engine/itemwindow.cpp:213
 msgid "Ammo Type:"
-msgstr ""
+msgstr "Tipo de munición:"
 
 #: src/engine/itemwindow.cpp:192 src/engine/itemwindow.cpp:219
 msgid "Quantity:"
-msgstr ""
+msgstr "Cantidad:"
 
 #: src/engine/itemwindow.cpp:237
 msgid "Ok"
@@ -645,15 +645,15 @@ msgstr "Ok"
 
 #: src/engine/journalwindow.cpp:283 src/engine/options.cpp:154
 msgid "Journal"
-msgstr ""
+msgstr "Diario:"
 
 #: src/engine/journalwindow.cpp:351
 msgid "Unknow Area"
-msgstr ""
+msgstr "Area Desconocida"
 
 #: src/engine/journalwindow.cpp:352
 msgid "No missions."
-msgstr ""
+msgstr "Sin Misiones."
 
 #: src/engine/minimapwindow.cpp:59
 msgid "Map"
@@ -685,7 +685,7 @@ msgstr "Italiano"
 
 #: src/engine/options.cpp:54
 msgid "Dutch"
-msgstr ""
+msgstr "Neerlandés"
 
 #: src/engine/options.cpp:55
 msgid "Russian"
@@ -693,43 +693,43 @@ msgstr "Ruso"
 
 #: src/engine/options.cpp:126
 msgid "Camera Rotate Left"
-msgstr ""
+msgstr "Rotar cámara a la izquierda"
 
 #: src/engine/options.cpp:127
 msgid "Camera Rotate Right"
-msgstr ""
+msgstr "Rotar cámara a la derecha"
 
 #: src/engine/options.cpp:128
 msgid "Camera Rotate Up"
-msgstr ""
+msgstr "Rotar cámara hacia arriba"
 
 #: src/engine/options.cpp:129
 msgid "Camera Rotate Down"
-msgstr ""
+msgstr "Rotar cámara hacia abajo"
 
 #: src/engine/options.cpp:130
 msgid "Camera Zoom Up"
-msgstr ""
+msgstr "Acercamiento de cámara"
 
 #: src/engine/options.cpp:131
 msgid "Camera Zoom Down"
-msgstr ""
+msgstr "Alejamiento de cámara"
 
 #: src/engine/options.cpp:132
 msgid "Camera Top"
-msgstr ""
+msgstr "Cámara superior"
 
 #: src/engine/options.cpp:133
 msgid "Camera Bottom"
-msgstr ""
+msgstr "Cámara inferior"
 
 #: src/engine/options.cpp:134
 msgid "Camera Zoom Max"
-msgstr ""
+msgstr "Máximo de zoom de la cámara"
 
 #: src/engine/options.cpp:135
 msgid "Camera Zoom Min"
-msgstr ""
+msgstr "Mínimo de zoom de la cámara"
 
 #: src/engine/options.cpp:137
 msgid "Toggle Run(1)"
@@ -741,39 +741,39 @@ msgstr ""
 
 #: src/engine/options.cpp:139
 msgid "Move Right"
-msgstr ""
+msgstr "Mover a la derecha"
 
 #: src/engine/options.cpp:140
 msgid "Move Left"
-msgstr ""
+msgstr "Mover a la izquierda"
 
 #: src/engine/options.cpp:141
 msgid "Move Forward"
-msgstr ""
+msgstr "Mover hacia adelante"
 
 #: src/engine/options.cpp:142
 msgid "Move Backward"
-msgstr ""
+msgstr "Mover hacia atras"
 
 #: src/engine/options.cpp:143
 msgid "Rotate Left"
-msgstr ""
+msgstr "Rotar a la izquierda"
 
 #: src/engine/options.cpp:144
 msgid "Rotate Right"
-msgstr ""
+msgstr "Rotar a la derecha"
 
 #: src/engine/options.cpp:145
 msgid "Change Character"
-msgstr ""
+msgstr "Cambiar personaje"
 
 #: src/engine/options.cpp:147
 msgid "End Turn"
-msgstr "Fin de turno"
+msgstr "Fin del turno"
 
 #: src/engine/options.cpp:149
 msgid "Minimap"
-msgstr "Mapa"
+msgstr "Minimapa"
 
 #: src/engine/options.cpp:150 src/engine/shortcutswindow.cpp:49
 msgid "Shortcuts"
@@ -781,7 +781,7 @@ msgstr "Atajos"
 
 #: src/engine/options.cpp:153
 msgid "Character Info"
-msgstr ""
+msgstr "Información de personaje"
 
 #: src/engine/options.cpp:552 src/engine/options.cpp:579
 #: data/weapons/types/munitions.dcl:2
@@ -823,11 +823,11 @@ msgstr "4x"
 
 #: src/engine/options.cpp:731
 msgid "Input"
-msgstr ""
+msgstr "Entrada"
 
 #: src/engine/options.cpp:734
 msgid "Windows"
-msgstr "Ventanas"
+msgstr "Ventana"
 
 #: src/engine/options.cpp:737
 msgid "Character"
@@ -835,7 +835,7 @@ msgstr "Personaje"
 
 #: src/engine/options.cpp:740
 msgid "Camera"
-msgstr "Cámara"
+msgstr "Camara"
 
 #: src/engine/options.cpp:745
 msgid "Audio"
@@ -883,7 +883,7 @@ msgstr "Reflejos:"
 
 #: src/engine/options.cpp:874
 msgid "Shadows:"
-msgstr ""
+msgstr "Sombras:"
 
 #: src/engine/options.cpp:890
 msgid "Anti-Aliasing:"
@@ -911,7 +911,7 @@ msgstr "Fin de turno automático"
 
 #: src/engine/options.cpp:969
 msgid "Always Run"
-msgstr ""
+msgstr "Correr siempre"
 
 #: src/engine/options.cpp:978
 msgid "Show Enemy Battle Circle"
@@ -927,7 +927,7 @@ msgstr ""
 
 #: src/engine/options.cpp:1280
 msgid "Waiting..."
-msgstr ""
+msgstr "Esperando..."
 
 #: src/engine/racewindow.cpp:83
 msgid "Race"
@@ -1007,7 +1007,7 @@ msgstr "Puntos:"
 
 #: src/engine/skillwindow.cpp:129
 msgid "Only show race/class skills"
-msgstr ""
+msgstr "Sólamente mostrar habilidades de la clase/raza"
 
 #: src/engine/skillwindow.cpp:148
 msgid "Cost"
@@ -1135,7 +1135,7 @@ msgstr "Y así es como comenzó esta historia..."
 #: data/comics/tutorial/combat/combat.dcb:195
 #: data/models/objetos/books/combat_tutorial/combat_tutorial.dcc:1
 msgid "The Combat Book"
-msgstr ""
+msgstr "El Libro de combate"
 
 #: data/comics/tutorial/combat/combat.dcb:48
 msgid "The fight mode is an special turn based interaction used to... FIGHT!"
@@ -1150,12 +1150,16 @@ msgid ""
 "1 - When hostile creatures are nearby, the Fight Mode is automatically "
 "called."
 msgstr ""
+"1 - Cuando criaturas hostiles están cerca, el Modo de Pelea es llamado "
+"automáticamente."
 
 #: data/comics/tutorial/combat/combat.dcb:70
 msgid ""
 "2 - Or, when you desire, press SPACE or the attack icon at shortcuts window "
 "to enter the Fight Mode."
 msgstr ""
+"2 - O, cuando lo desee, presione ESPACIO o el icono de ataque en la ventana "
+"de atajos para entrar al Modo de Pelea."
 
 #: data/comics/tutorial/combat/combat.dcb:80
 msgid ""
@@ -1180,63 +1184,78 @@ msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:140
 msgid "Your action's range is represented by circles."
-msgstr ""
+msgstr "Tu rango de acción es representado por circulos."
 
 #: data/comics/tutorial/combat/combat.dcb:151
 msgid "The yellow circle represents your current attack range."
-msgstr ""
+msgstr "El circulo amarillo representa tu rango actual de ataque."
 
 #: data/comics/tutorial/combat/combat.dcb:153
 msgid "You can only attack creatures inner the yellow circle!"
-msgstr ""
+msgstr "Solo puedes atacar criaturas dentro del circulo amarillo!"
 
 #: data/comics/tutorial/combat/combat.dcb:163
 msgid "The blue circle is the area you can move with a move action."
 msgstr ""
+"El círculo azul indica la distancia a la que puedes desplazarte con una "
+"acción de movimiento."
 
 #: data/comics/tutorial/combat/combat.dcb:174
 msgid "The red circle is the area you can move with a full move action."
 msgstr ""
+"El círculo rojo indica la distancia a la que puedes desplazarte con una "
+"acción de movimiento completa."
 
 #: data/comics/tutorial/combat/combat.dcb:176
 msgid ""
 "If a circle isn't shown it's because you can't take that kind of action "
 "anymore at the current turn."
 msgstr ""
+"Si no hay ningún círculo visible, es porque ya no puedes tomar ese tipo de "
+"acción en el turno actual."
 
 #: data/comics/tutorial/combat/combat.dcb:205
 msgid "You can attack using your current weapon by simple clicking the target."
 msgstr ""
+"Puedes atacar usando tu arma actual simplemente con un click sobre el "
+"objetivo."
 
 #: data/comics/tutorial/combat/combat.dcb:215
 msgid "Or use a talent by selecting it and clicking the target."
 msgstr ""
+"O usar un talento seleccionandolo y luego haciendo click sobre el objetivo."
 
 #: data/comics/tutorial/combat/combat.dcb:226
 msgid ""
 "You can end your turn any time, by pressing SPACE or selecting the End Turn "
 "icon."
 msgstr ""
+"Puedes terminar tu turno cuando lo desees, presionando la barra espaciadora, "
+"o presionando el botón de fin de turno."
 
 #: data/comics/tutorial/combat/combat.dcb:228
 msgid ""
 "You can also set the options to automatically end your turn when no more "
 "available actions."
 msgstr ""
+"También puedes configurar las opciones para terminar tu turno "
+"automáticamente al no poder realizar más acciones."
 
 #: data/comics/tutorial/combat/combat.dcb:238
 msgid ""
 "The fight will end when no more hostile creatures are near or all PCs are "
 "dead."
 msgstr ""
+"La batalla terminará cuando no queden más criaturas hostiles en el área, o "
+"cuando todos los  jugadores hayan muerto."
 
 #: data/comics/tutorial/combat/combat.dcb:249
 msgid "Remember:"
-msgstr ""
+msgstr "Recuerda:"
 
 #: data/comics/tutorial/combat/combat.dcb:251
 msgid "Take or use objects count as an attack action."
-msgstr ""
+msgstr "Tomar o usar objetos cuentan como una acción de ataque."
 
 #: data/comics/tutorial/combat/combat.dcb:253
 msgid "You can't save your game while fighting."
@@ -1244,7 +1263,7 @@ msgstr "¡No puedes salvar el juego mientras estás luchando!"
 
 #: data/comics/tutorial/combat/combat.dcb:255
 msgid "And you can't leave the current map while in Fight Mode."
-msgstr ""
+msgstr "Y no puedes abandonar el mapa actual mientras estes en modo de pelea."
 
 #: data/alignment/neutrocaotico.ali:1
 msgid "Chaotic Neutral"
@@ -1458,6 +1477,10 @@ msgid ""
 "I've made in Medicine.'|(Mattar, Medician Student answering the provocation "
 "of Wanucia, Physiotherapy Student)"
 msgstr ""
+"'Si hubiera intentado cursar Fisioterapia allí, debería haber terminado "
+"inmediatamente con los puntos que hice en Medicina.'|(Mattar, Estudiante de "
+"Medicina, respondiendo a la provocación de Wanucia, Estudiante de "
+"Fisioterapia)"
 
 #: data/classes/medician.cls:3
 msgid ""
@@ -1506,6 +1529,9 @@ msgid ""
 "Those creatures receive +4 on all Bluff tests. They bluff all the time and "
 "the more ridiculous their bluffing is, the more easily it can be really true."
 msgstr ""
+"Estas criaturas reciben un +4 en las pruebas de fanfarronadas. Ellos "
+"fanfarronean todo el tiempo, y mientras más ridículo sea el fanfarroneo, más "
+"probable es que sea verdad."
 
 #: data/classes/medician.cls:17
 msgid "They Receive +2 of Diplomacy when talking to boys and patys."
@@ -1528,6 +1554,8 @@ msgstr "Estudiante de Biología"
 msgid ""
 "'This place is filled with arthropodes!'|(Bin, that time, a Biology Student)"
 msgstr ""
+"'Este lugar está lleno de artrópodos!'|(Bin, aquella vez, un Estudiante de "
+"Biología)"
 
 #: data/classes/biology.cls:3
 msgid ""
@@ -1538,12 +1566,20 @@ msgid ""
 "them, there are a few doctors, a few hippies, a few computer analysts, a few "
 "hot-dog sellers..."
 msgstr ""
+"Capaz de estar aislado en las montañas por dos semanas de corrido haciendo "
+"su 'Trabajo de campo', emboscando y observando los hábitos alimenticios de "
+"la lagartija ameiva (estos pueden ser confundidos con Hippies en su búsqueda "
+"de Karma),el Estudiante de Biología puede ser de todo: entre ellos hay "
+"algunos doctores, algunos hippies, algunos analistas de computadoras, "
+"algunos vendedores de salchichas..."
 
 #: data/classes/biology.cls:7
 msgid ""
 "+2 of Dexterity, since they always observe and follow the ameivas on "
 "whatever terrain (and also dissect them, to count how many worms they have)."
 msgstr ""
+"+2 a la destreza, ya que ellos siguen y observan las ameivas en cualquier "
+"terreno (y también las diseccionan, para contar sus gusanos)."
 
 #: data/classes/biology.cls:9
 msgid ""
@@ -1564,7 +1600,7 @@ msgstr ""
 
 #: data/classes/biology.cls:13
 msgid "For the same reason, -4 of Carte Blanche."
-msgstr ""
+msgstr "Por la misma razón, -4 a Carte Blanche."
 
 #: data/classes/biology.cls:15
 msgid ""
@@ -1580,7 +1616,7 @@ msgstr "Estudiante de Música"
 msgid ""
 "'Without you I sound nothing.'|(Typical commentary of a Lyric-man to a "
 "Musician)"
-msgstr ""
+msgstr "'Sin ti, no sueno nada'|(típico comentario de un Autor a un Músico)"
 
 #: data/classes/music.cls:3
 msgid ""
@@ -1598,32 +1634,52 @@ msgid ""
 "think Bach is shit. So, the Music Student will be virtuous and "
 "misunderstood.'"
 msgstr ""
+"En un mundo científico, poca gente se aventura a otros conceptos, "
+"dedicándose a alguna fuente de arte, como la música. El Estudiante de Música "
+"es una criatura con extrema paciencia, la cual necesita para aprender todas "
+"las técnica relacionadas con atonalismos de compás ternario, tiene la "
+"capacidad para crearlos, y el gusto distorsionado para tocar alguno de los "
+"instrumentos musicales más bizarros y ocultos. |Nota del creador: 'Basados "
+"en la idea de que los gustos musicales son distintos, y solo las mentes más "
+"abiertas aprecian los distintos ritmos (obviamente solo aquellos que no son "
+"intentos de matar el concepto de música)', se creó esta clase. Así que, el "
+"mismo sonido, Bach por ejemplo, puede se bella música o algo terriblemente "
+"aburrido, dependiendo del oído de quien lo escuche. Probablemente, un fan "
+"progresivo guste de Bach, pero un fan de Tati-Quebra-Barraco, sin ningún "
+"sentido musical, piense que Bach es basura. Así, el Estudiante de Música va "
+"a ser virtuoso e incomprendido.'"
 
 #: data/classes/music.cls:7
 msgid ""
 "-4 of Strength because of the fact that their muscles atrophy since they "
 "aren't used for anything but playing their instruments."
 msgstr ""
+"-4 de Fuerza por el hecho de que sus músculos se atrofian por no ser usados "
+"para nada más que tocar sus instrumentos."
 
 #: data/classes/music.cls:9
 msgid "-1 of Constitution for the hours spent in a closed ambient, playing."
-msgstr ""
+msgstr "-1 de Constitución por las horas pasadas encerrado, tocando."
 
 #: data/classes/music.cls:11
 msgid ""
 "+2 of Dexterity for having the ability to play a Gb7M or a Am#5/7/9 on  "
 "their strange musical instrument."
 msgstr ""
+"+2 de Destreza, por tener la habilidad de tocar un Gb7M o un Am#5/7/9 en su "
+"extraño instrumento musical."
 
 #: data/classes/music.cls:13
 msgid ""
 "+1 of Intelligence for knowing those notes, how they are created and all the "
 "musical theory envolved on their creation."
 msgstr ""
+"+1 de Inteligencia por conocer todas esas notas, como se crean, y la teoría "
+"musical implicada en su creación."
 
 #: data/classes/music.cls:15
 msgid "+2 of Charisma for the capacity to fill people with joy."
-msgstr ""
+msgstr "+2 de Carisma por la capacidad de llenar a la gente de alegría."
 
 #: data/classes/music.cls:17
 msgid ""
@@ -1631,16 +1687,21 @@ msgid ""
 "Music Students have an incredible capacity to play their bizarre "
 "instruments, receiving +8 of bonus when playing them."
 msgstr ""
+"Por su intenso y difícil trabajo desde que eran niños, los Estudiantes de "
+"Música tienen una increíble capacidad para tocar sus bizarros instrumentos, "
+"recibiendo +8 de bonus para tocarlos."
 
 #: data/classes/music.cls:19
 msgid ""
 "The Music Student need to have at least one graduation on Play Instrument, "
 "of one presented at the Bizarre Musical Instruments List."
 msgstr ""
+"El Estudiante de Música necesita al menos un graduación  en Tocar "
+"Instrumento, de una presente en la lista de Instrumentos Musicales Bizarros."
 
 #: data/classes/compsci.cls:1
 msgid "Computer Science Student"
-msgstr ""
+msgstr "Estudiante de Ciencias de la Computación"
 
 #: data/classes/compsci.cls:2
 msgid ""
@@ -1648,6 +1709,9 @@ msgid ""
 "the women, obviously!'|(Gushm, then a CS Student, answering the existential "
 "question of his class)."
 msgstr ""
+"'Realmente no sé porque quiero obtener este diploma...|Eres estúpido? Por "
+"las mujeres, obviamente!'|(Gushm, entonces un estudiante de Ciencias de la "
+"Computación, respondiendo la pregunta existencial de su clase)."
 
 #: data/classes/compsci.cls:3
 msgid ""
@@ -1660,16 +1724,26 @@ msgid ""
 "masters won't look at and appraise it, since CS teachers are disciplined and "
 "will not compromise the worth of the diploma."
 msgstr ""
+"El Estudiante de Ciencias de la Computación es la clase más bizarra en "
+"DccNiTghtmare (y, paradojicamente, la más común). Ellos son conocidos por "
+"sus decisiones suicidas (la primera de ellas, el curso de estudios que "
+"eligieron), su falta de paciencia para atender lo que sus profesores llaman "
+"'clases', el infinito tiempo pasado en Trabajos Prácticos (TPs) y el odio "
+"que sienten cuando sienten que lo que han hecho trabaja perfectamente, pero "
+"sus profesores no lo notan ni lo valoran, ya que el profesor de ciencias de "
+"la computación están disciplinados y no comprometerán el valor del diploma."
 
 #: data/classes/compsci.cls:7
 msgid "Because they have to teach themselves, they receive +2 of Wisdom."
-msgstr ""
+msgstr "Porque deben enseñarse a ellos mismos, reciben +2 de Sabiduría."
 
 #: data/classes/compsci.cls:9
 msgid ""
 "By their natural tendency to be qualified as Geeks, being one or not, they "
 "receive -1 of Charisma."
 msgstr ""
+"Por su tendencia natural a ser calificados como Geeks, siendolo o no, "
+"reciben -1 de Carisma."
 
 #: data/classes/compsci.cls:11
 msgid ""
@@ -1677,20 +1751,25 @@ msgid ""
 "studies that are just a pale imitation of what real computer studies should "
 "be."
 msgstr ""
+"Estudiantes de Ciencias de la Computación reciben +5 de Fortaleza por "
+"sobrevivir sus aburridos estudios que son solo una mala imitación de lo que "
+"los verdaderos estudios de computación deberían ser."
 
 #: data/classes/compsci.cls:13
 msgid ""
 "Also receive -2 of reflexes for the mount of time spent in front of a "
 "computer."
 msgstr ""
+"Además reciben -2 de Reflejos por todo el tiempo pasado frente a una "
+"computadora."
 
 #: data/classes/philosophy.cls:1
 msgid "Philosophy Student"
-msgstr ""
+msgstr "Estudiante de Filosofía"
 
 #: data/classes/philosophy.cls:2
 msgid "'Better die by vodka than by boredom!'|(Vladmir Maiakovsky)"
-msgstr ""
+msgstr "'Mejor morir por vodka que por aburrimiento!'|(Vladmir Maiakovsky)"
 
 #: data/classes/philosophy.cls:3
 msgid ""
@@ -1700,17 +1779,27 @@ msgid ""
 "sharing their time between one and other activity, the Philosophy Student "
 "becomes the perfect bohemian and is full of hot air. "
 msgstr ""
+"No satisfechos con no desear nada con su vida, los Estudiantes de Filosofía "
+"entran a la Universidad con solo un objetivo: perfeccionar esa falta de "
+"voluntad. Porque son adeptos a beber cerveza y a no hacer nada, distribuyen "
+"su tiempo entre una y otra actividad, El Estudiante de Filosofía se vuelve "
+"el perfecto bohemio y está lleno de aire caliente. "
 
 #: data/classes/philosophy.cls:7
 msgid ""
 "Receive +2 of Contitution, because of his monk's body filled with alcohol."
 msgstr ""
+"Recibe +2 de Constitución, porque el cuerpo de este monje está lleno de "
+"alcohol."
 
 #: data/classes/philosophy.cls:9
 msgid ""
 "Since they only study complex things, Philosophy Students easily forget all "
 "the practical and ordinary things of life, receiving -2 of Wisdom."
 msgstr ""
+"Ya que ellos solo estudian cosas complejas, los Estudiantes de Filosofía "
+"fácilmente olvidan todas las cosas prácticas y ordinarias de la vida, "
+"recibiendo -2 de Sabiduría."
 
 #: data/classes/philosophy.cls:11
 msgid ""
@@ -1718,31 +1807,40 @@ msgid ""
 "acquire some kind of aptitude of dealing with others, receiving +2 of "
 "Charisma."
 msgstr ""
+"Por pasar casi toda su vida de estudiante en bares, el Estudiante de "
+"Filosofía adquiere algunas capacidades para tratar con los demás, recibiendo "
+"+2 de Carisma."
 
 #: data/classes/philosophy.cls:13
 msgid ""
 "The Philosophy Student receives +4 of Knowledge (Classic) for the little "
 "they learn at university."
 msgstr ""
+"El Estudiante de Filosofía recibe +4 de Conocimientos (Clásicos) por lo poco "
+"que aprenda en la universidad."
 
 #: data/classes/philosophy.cls:15
 msgid "Receive +4 of Bohemia, obviously."
-msgstr ""
+msgstr "Recibe +4 de Bohemio, obviamente."
 
 #: data/classes/philosophy.cls:17
 msgid ""
 "Receive -4 of all Dexterity-related tests, for they are frequently drunk."
 msgstr ""
+"Recibe -4 para todas las pruebas de Destreza, por estar frecuentemente "
+"ebrios."
 
 #: data/classes/philosophy.cls:19
 msgid ""
 "Because he doesn't attend any (or very few) classes, the Philosophy Student "
 "receives -4 of Not Enough Time."
 msgstr ""
+"Porque no atiende ninguna (o muy pocas) clases, el Estudiante de Filosofía "
+"recibe -4 de Sin Tiempo Suficiente."
 
 #: data/classes/journalism.cls:1
 msgid "Journalism Student"
-msgstr ""
+msgstr "Estudiante de Periodismo"
 
 #: data/classes/journalism.cls:2
 msgid ""
@@ -1750,6 +1848,9 @@ msgid ""
 "isn't God, convinces you that he is'|(Matheus de Paula, ex-Journalism "
 "student)"
 msgstr ""
+"'El juez cree que es Dios, el médico juega a ser Dios. El periodista, si no "
+"es Dios, te convence que lo es'|(Matheus de Paula, ex Estudiante de "
+"Periodismo)"
 
 #: data/classes/journalism.cls:3
 msgid ""
@@ -1760,6 +1861,12 @@ msgid ""
 "them in large groups. But they can easily join the masses, to gather as much "
 "information as possible."
 msgstr ""
+"Cursando en las artes del engaño y el fraude, el Estudiante de Periodismo es "
+"un maestro escritor. Con palabras, puede crear eventos, paralizar a sus "
+"oponentes, estafar a su audiencia y así sucesivamente. A pesar de ser amigos "
+"de amigos de la facultad, estas criaturas maléficas pueden se muy rudas "
+"entre sí, y es raro verlos agrupados. Pero pueden fácilmente mezclarse con "
+"las masas, para obtener tanta información como sea posible."
 
 #: data/classes/journalism.cls:7
 msgid ""
@@ -1767,12 +1874,17 @@ msgid ""
 "find the time or the will to exercise their muscles, receiving -2 of "
 "Strength."
 msgstr ""
+"Como están normalmente envueltos en profundo trabajo mental, estos "
+"organismos no encuentran el tiempo o la voluntad para ejercitar sus "
+"músculos, recibiendo -2 de Fuerza."
 
 #: data/classes/journalism.cls:9
 msgid ""
 "Journalism students have a 'know it all' need, increasing by 2 their "
 "intelligence."
 msgstr ""
+"Los Estudiantes de Periodismo tienen una necesidad de 'sabelotodo', "
+"aumentando su Inteligencia en 2."
 
 #: data/classes/journalism.cls:11
 msgid ""
@@ -1780,6 +1892,9 @@ msgid ""
 "their true nature, being very kind to their audience and information "
 "sources, receiving +1 of Charisma."
 msgstr ""
+"Aunque son críticos muy severos, estos organismos pueden disimular su "
+"verdadera naturaleza, siendo muy amable a sus audiencias e informantes, "
+"recibiendo +1 de Carisma."
 
 #: data/classes/journalism.cls:13
 msgid ""
@@ -1787,28 +1902,37 @@ msgid ""
 "d100. If the result is between 1 and 99, he can't be neutral. Else, he can "
 "be a Journalism Student of any alignment."
 msgstr ""
+"Imparcialidad: Antes de elegir la clase, el Estudiante de Periodismo tira un "
+"d100. si el resultado está entre 1 y 99, el no podrá ser neutral. De lo "
+"contrario, podrá ser de cualquier alineamiento."
 
 #: data/classes/journalism.cls:15
 msgid ""
 "Journalism students neglects any penalties to their social tests, for being "
 "able to survive in turbulent environments."
 msgstr ""
+"Los Estudiantes de Periodismo rechazan cualquier sanción por pruebas "
+"sociales, por ser capaces de sobrevivir en ambientes turbulentos."
 
 #: data/classes/journalism.cls:17
 msgid ""
 "As long as the Journalism Student speaks the targets language, he'll never "
 "be ignored."
 msgstr ""
+"Siempre que el Estudiante de Periodismo hable el idioma del blanco, nunca "
+"será ignorado."
 
 #: data/classes/physicaled.cls:1
 msgid "Physical Education Student"
-msgstr ""
+msgstr "Estudiante de Educación Física"
 
 #: data/classes/physicaled.cls:2
 msgid ""
 "'No! The swimming class is too complex!'|(Typical Physical Education Student "
 "thought)"
 msgstr ""
+"'No! La clase de natación es muy compleja!'|(Típico pensamiento de un "
+"Estudiante de Educación Física)"
 
 #: data/classes/physicaled.cls:3
 msgid ""
@@ -1820,26 +1944,33 @@ msgid ""
 "stars on the soccer field but aren't distinguished students of mathematics "
 "(hardly knowing the fundamentals of numbers)."
 msgstr ""
+"Normalmente toma clases de 'Fútbol' y 'Baloncesto', los dedicados (en el "
+"sentido físico de la palabra) Estudiantes de Educación Física son seres que "
+"aprecian la fuerza muscular sobre todo lo demás. Con demasiados músculos en "
+"el cerebro, estos estudiantes poseen nada menos que una resistencia "
+"sobrenatural en la cabeza (a cambio de algunos puntos de inteligencia). "
+"Finalmente, estos chicos son estrellas de la cancha de fútbol, pero no se "
+"distinguen en matemáticas (a penas conociendo las bases de los números)."
 
 #: data/classes/physicaled.cls:7
 msgid "Receive +3 of Strength, due to all those hours spent kicking a ball."
-msgstr ""
+msgstr "Recibe +3 de Fuerza, por todas esas horas pateando una pelota."
 
 #: data/classes/physicaled.cls:9
 msgid "+2 of Dexterity, due to the hours floating in the water."
-msgstr ""
+msgstr "+2 de Destreza, por las horas flotando en el agua."
 
 #: data/classes/physicaled.cls:11
 msgid "+4 of Constitution for hours running in circles."
-msgstr ""
+msgstr "+4 de Constitución, por las horas corriendo en círculo."
 
 #: data/classes/physicaled.cls:13
 msgid "-6 of Intelligence since they abandoned the books in a remote past."
-msgstr ""
+msgstr "-6 de Inteligencia por todos los libros abandonados en el pasado."
 
 #: data/classes/physicaled.cls:15
 msgid "-6 of Wisdom, for the same reason."
-msgstr ""
+msgstr "-6 de Sabiduría, por la misma razón."
 
 #: data/classes/physicaled.cls:17
 msgid ""
@@ -1847,69 +1978,90 @@ msgid ""
 "Swimming, Soccer, Basketball, finally, sports in general or anything that "
 "radiates physical power."
 msgstr ""
+"El Estudiante de Educación Física recibe +4 a Saltar, Escalar, Montar, "
+"Nadar, Fútbol, Baloncesto, deportes en general, y todo lo que conste de "
+"fuerza física."
 
 #: data/classes/physicaled.cls:19
 msgid ""
 "Receive -5 of Knowledge of any sort at all, simply because that they have no "
 "idea of the meaning of this word."
 msgstr ""
+"Recibe -5 de Conocimientos de cualquier clase, simplemente porque ni saben "
+"que significa esa palabra."
 
 #: data/classes/physicaled.cls:21
 msgid "-4 of Hide, since they are coarse hulks."
-msgstr ""
+msgstr "-4 a Ocultar, ya que son enormes."
 
 #: data/classes/physicaled.cls:23
 msgid "-2 of Listen, since their muscles fill their ear canals."
-msgstr ""
+msgstr "-2 de Escuchar, ya que sus músculos tapan sus canales auditivos."
 
 #: data/classes/physicaled.cls:25
 msgid "The Student receives +1 of Natural Armor."
-msgstr ""
+msgstr "El Estudiante recibe +1 de Armadura Natural."
 
 #: data/classes/physicaled.cls:27
 msgid ""
 "Receive +2 of I Am Not A Fool because their brain stops functioning "
 "sometimes."
 msgstr ""
+"Recibe +2 de No Soy Un Tonto, porque su cerebro deja de funcionar de vez en "
+"cuando."
 
 #: data/classes/physicaled.cls:29
 msgid ""
 "The Student receives -4 in Training Animals, since, because they haven't "
 "absolute control of their muscles, there is a chance of crushing the animal."
 msgstr ""
+"El Estudiante recibe -4 de Entrenar Animales, ya que como no poseen completo "
+"control de sus músculos, hay una posibilidad de que aplasten al animal."
 
 #: data/classes/physicaled.cls:31
 msgid ""
 "Receives -3 in Direction cause they usually get lost among their own muscles."
 msgstr ""
+"Recibe -3 en Sentido de la orientación, porque se pierden en sus propios "
+"músculos."
 
 #: data/classes/physicaled.cls:33
 msgid ""
 "Also they possess -2 of Bluff, for their muscles practically have a life of "
 "their own and easily contradict themselves when they are lying."
 msgstr ""
+"Además poseen -2 de Fanfarronear, porque sus músculos tienen vida propia y "
+"fácilmente se contradicen a si mismos cuando intentan mentir."
 
 #: data/classes/physicaled.cls:35
 msgid ""
 "By the corpulent size of their muscles and the total absence of control, the "
 "Student of Physical  Education  have 0.60 chance to tumble in battle."
 msgstr ""
+"Por el enorme tamaño de sus músculos y su total ausencia de control, el "
+"Estudiante de Educación Física tiene una probabilidad del 0.60 de tropezarse "
+"en batalla."
 
 #: data/classes/physicaled.cls:37
 msgid ""
 "Beyond this, the Student of Physical Education can't buy points on Skills "
 "whose ability key is Intelligence."
 msgstr ""
+"Además de esto, el Estudiante de Educación Física no puede comprar Puntos de "
+"Habilidad cuyo atributo sea Inteligencia."
 
 #: data/classes/physicaled.cls:39
 msgid ""
 "Because his skills are extremely limited, the Physical Education Student "
 "doesn't have any limits concerning how many points he can get in Sports."
 msgstr ""
+"Porque sus habilidades están extremadamente limitadas, el Estudiante de "
+"Educación Física no tiene límites a cuantos Puntos de Habilidad puede "
+"obtener en Deportes."
 
 #: data/classes/lawner.cls:1
 msgid "Law Student"
-msgstr ""
+msgstr "Estudiante de Leyes"
 
 #: data/classes/lawner.cls:2
 msgid ""
@@ -1917,6 +2069,9 @@ msgid ""
 "your background, sneered the lawyer at a witness on the stand.|If I wasn't "
 "under oath, I'd return the compliment, replied the witness."
 msgstr ""
+"Pareces tener una inteligencia por arriba del promedio, dijo burlonamente el "
+"abogado al testigo en el estrado. |Sí no estuviera bajo juramento, le "
+"devolvería el cumplido, respondió el testigo."
 
 #: data/classes/lawner.cls:3
 msgid ""
@@ -1929,40 +2084,58 @@ msgid ""
 "Students, or to be able to take advantage of others, hence avoiding that "
 "looming punishment."
 msgstr ""
+"Viviendo en el Campus disfrazados de pingüinos, los Estudiantes de Leyes son "
+"organismos que, cuando perciben la más mínima probabilidad de obtener "
+"ganancias de cualquier situación que consideren 'jurídica', usarán todo su "
+"vocabulario, retórica y sofismos para tomar ventaja de ella. Es siempre "
+"importante tener un Estudiante de Leyes en tu equipo, sea para evitar ser "
+"aprovechado por otros Estudiantes de Leyes, o para aprovecharse de cualquier "
+"transeúnte desprevenido."
 
 #: data/classes/lawner.cls:7
 msgid ""
 "Because they are usually quite stupid about anything that isn't related to "
 "money, they receive -2 of Intelligence."
 msgstr ""
+"Como son bastante tontos para todo lo que no tiene que ver con dinero, "
+"reciben -2 de Inteligencia"
 
 #: data/classes/lawner.cls:9
 msgid ""
 "Because they are anxious to take the last kopeck from their victims, they "
 "receive -1 of Charisma."
 msgstr ""
+"Porque presionan hasta obtener el último centavo de sus víctimas, reciben -1 "
+"de Carisma"
 
 #: data/classes/lawner.cls:11
 msgid ""
 "Because they can modify any situation to make money from it, they receive +2 "
 "of Wisdom."
 msgstr ""
+"Porque pueden modificar cualquier situación para sacarle dinero, reciben +2 "
+"de Sabiduría."
 
 #: data/classes/lawner.cls:13
 msgid ""
 "Since they know everything about money, the Law Student receives  +1 of "
 "Appraise on their first level."
 msgstr ""
+"Ya que saben todo sobre dinero, el Estudiante de Leyes recibe +1 de tasación "
+"en el primer nivel."
 
 #: data/classes/physiotherapy.cls:1
 msgid "Physiotherapy Student"
-msgstr ""
+msgstr "Estudiante de Fisioterapia"
 
 #: data/classes/physiotherapy.cls:2
 msgid ""
 "'You should have studied more and entered the Federal University!'|(Wanucia, "
 "Pysiotherapy Student angry with Mattar, Medicine Student)"
 msgstr ""
+"'Deberías haber estudiado más y haber entrado a la Universidad Federal!'|"
+"(Wanucia, Estudiante de Fisioterapia enojada con Mattar, Estudiante de "
+"Medicina)"
 
 #: data/classes/physiotherapy.cls:3
 msgid ""
@@ -1974,12 +2147,21 @@ msgid ""
 "Physiotherapy Student usually works in physical academies, the better to "
 "find their victims."
 msgstr ""
+"Los archi-rivales de los Estudiantes de Medicina, los Estudiantes de "
+"Fisioterapia tienen un odio mortal a sus medios hermanos médicos. Los "
+"Estudiantes de Fisioterapia, a pesar de ser algo parecido a los Estudiantes "
+"de Medicina (como los elfos y medio elfos), los odian con todas sus fuerzas, "
+"porque ellos pudieron entrar a la escuela que los Estudiantes de "
+"Fisioterapia siempre desearon. El Estudiante de Fisioterapia normalmente "
+"trabaja en academias físicas, para poder encontrar víctimas fácilmente."
 
 #: data/classes/physiotherapy.cls:7
 msgid ""
 "Because of their diligent study of the mobility of the human body, they can "
 "do some amazing things, receiving +1 of Dexterity."
 msgstr ""
+"Por su diligente estudio de la movilidad del cuerpo humano, ellos pueden "
+"hacer cosas increíbles, recibiendo +1 de Destreza."
 
 #: data/classes/physiotherapy.cls:9
 msgid ""
@@ -1994,6 +2176,9 @@ msgid ""
 "Because of all his wasted efforts to become a Medical Student, the little "
 "Physiotherapist inherits the penalty of -2 of Wisdom."
 msgstr ""
+"Por todos sus esfuerzos malgastados en convertirse en Estudiantes de "
+"Medicina, los pequeños fisioterapeutas tienen la penalización de -2 de "
+"Sabiduría."
 
 #: data/classes/physiotherapy.cls:13
 msgid ""
@@ -2001,12 +2186,17 @@ msgid ""
 "Students receive the class bonus against them, of +1 on all attacks against "
 "Med Students."
 msgstr ""
+"Alimentando su ira hacia sus rivales en medicina, los Estudiantes de "
+"Fisioterapia reciben el bonus de clase contra ellos, haciendo +1 en todos "
+"los ataques en contra de los Estudiantes de Medicina."
 
 #: data/classes/physiotherapy.cls:15
 msgid ""
 "They receive +3 of Listen, Observe, Bluff and I am not a Fool tests when "
 "targeting Medical Students."
 msgstr ""
+"Ellos reciben +3 de Escuchar, Observar, Fanfarronear y No Soy Un Tonto, "
+"cuando están luchando contra Estudiantes de Medicina."
 
 #: data/classes/physiotherapy.cls:17
 msgid ""
@@ -2015,16 +2205,22 @@ msgid ""
 "meters, the Physiotherapy Student will receive -5 of Social Skills. If they "
 "fail a test by 5 or more, they will commit suicide."
 msgstr ""
+"Porque son Estudiantes de Medicina fallidos, siempre que halla una "
+"posibilidad de interacción social con un Estudiante de Medicina en un radio "
+"de 20 metros, el Estudiante de Fisioterapia recibe -5 de Habilidades "
+"Sociales. Sí fallan una prueba por 5 o más puntos, van a suicidarse."
 
 #: data/classes/mechanic.cls:1
 msgid "Mechanical Engineering Student"
-msgstr ""
+msgstr "Estudiante de Ingeniería Mecánica"
 
 #: data/classes/mechanic.cls:2
 msgid ""
 "'Today we'll see the comprex prane pracle probrem!'|(Haroldao, Mechanical "
 "Teacher)"
 msgstr ""
+"'Hoy vamos a ver el comprejo probrema del prano praclo!'|(Haroldao, Maestro "
+"de Mecánica)"
 
 #: data/classes/mechanic.cls:3
 msgid ""
@@ -2039,6 +2235,15 @@ msgid ""
 "in all classes inside the Exacts Institute (ICEX), it is certain that no one "
 "is assured of graduating regularly."
 msgstr ""
+"Los Estudiantes de Ingeniería Mecánica son las personas más frustradas del "
+"Campus. Después de elegir ese curso de estudios con la esperanza de "
+"aprenderlo todo sobre autos, aviones, botes y otras estructuras mecánicas de "
+"gran complejidad, descubren que el mundo puede ser resumido en F = m*a. Con "
+"esa simple ecuación y absurdas cantidades de cálculos inexplicables, los "
+"profesores de física hacen su vida imposible durante su primer año. Pero en "
+"ciertas clases, ellos entienden que la vida era buena durante el ciclo "
+"básico. Generalmente, como cursan en el Instituto de Ciencias Exactas, es "
+"seguro que ninguno se graduará regularmente."
 
 #: data/classes/mechanic.cls:7
 msgid ""
@@ -2046,6 +2251,9 @@ msgid ""
 "their lives than hold bolts while somebody else tightens them, so they "
 "receive +3 of Intelligence."
 msgstr ""
+"Los Estudiantes de Ingeniería Mecánica estudiarán como locos, si quieren "
+"hacer algo más que sostener tornillos mientras alguien los ajusta, así que "
+"reciben +3 de Inteligencia."
 
 #: data/classes/mechanic.cls:9
 msgid ""
@@ -2053,11 +2261,16 @@ msgid ""
 "plants, electronic systems and other things that they are obliged to "
 "swallow, the Students of Mechanics receive +3 of Wisdom."
 msgstr ""
+"Debido a la cantidad de información sobre aceros, tipos de pinturas, "
+"herramientas, sistemas eléctricos, y otras cosas que deben asimilar, los "
+"Estudiantes de Ingeniería Mecánica reciben +3 de Sabiduría."
 
 #: data/classes/mechanic.cls:11
 msgid ""
 "They receive -2 of Strength. After all, the Autocad mouse doesn't weigh much."
 msgstr ""
+"Ellos reciben -2 de Fuerza. Después de todo, mover el mouse para usar "
+"autocad, no cuesta mucho."
 
 #: data/classes/mechanic.cls:13
 msgid ""
@@ -2068,10 +2281,16 @@ msgid ""
 "top of the female. If he fails, the student becomes hysterically frantic and "
 "will try as hard as he can to 'copulate' with her."
 msgstr ""
+"Un Estudiante de Ingeniería Mecánica siempre sufre una penalización de -10 "
+"en cualquier prueba contra cosas del sexo femenino. La total ausencia de "
+"contacto con ellas causa un descontrolado frenesí, que debería hacer una "
+"prueba de No Soy Un Tonto (con la penalización de -10) para no saltar encima "
+"de la mujer. Si falla, el estudiante se volverá frenético y no podrá "
+"controlar sus impulsos frente a ella."
 
 #: data/classes/to.cls:1
 msgid "Occupational Therapy Student"
-msgstr ""
+msgstr "Estudiante de Terapia Ocupacional"
 
 #: data/classes/to.cls:2
 msgid ""
@@ -2080,6 +2299,11 @@ msgid ""
 "diploma will allow us to do and we're bored by others asking us about it!'|"
 "(Turmalina, Computer Science Student, interviewing three OT Students)"
 msgstr ""
+"'Ey, chicas de Terapia Ocupacional, hay una pregunta que tengo en mi mente "
+"desde que entre a la universidad. Ustedes pueden responderla?...|No, "
+"nosotros tampoco sabemos que vamos a poder hacer con nuestro diploma, y "
+"estamos cansados de que nos pregunten!'|(Turmalina, Estudiante de Ciencias "
+"de la Computación, entrevistando a tres Estudiantes de Terapia Ocupacional)"
 
 #: data/classes/to.cls:3
 msgid ""
@@ -2094,22 +2318,37 @@ msgid ""
 "sure do know what happened in the previous chapter of the midday television "
 "soap opera."
 msgstr ""
+"Normalmente pequeños y frágiles, los Estudiantes de Terapia Ocupacional "
+"pueden volverse muy emotivos viendo telenovelas mejicanas. Conocidos por sus "
+"terapias de grupo 'duras', llamadas 'clases académicas', y por las horas que "
+"pasan pintando pequeños pedazos de papel como un niño de tres años (y para "
+"un niño de 3 años), para llamarlo un 'proyecto científico', los Estudiantes "
+"de Terapia Ocupacional no pueden explicar la razón de ser de su diploma (es "
+"uno de los secretos del universo), ni de sus vidas, sus clientes, sus "
+"amigos, sus bajos, el Anamabeka, etc, lo que si saben es que pasó en el "
+"último capítulo de la telenovela de la siesta."
 
 #: data/classes/to.cls:7
 msgid ""
 "Receive -2 of Intelligence, for spending too much time watching soap operas "
 "on TV."
 msgstr ""
+"Reciben -2 de Inteligencia, por pasar demasiado tiempo viendo telenovelas en "
+"TV."
 
 #: data/classes/to.cls:9
 msgid "+1 of Wisdom, for the inutiles knowledges obtained watching TV novels."
 msgstr ""
+"+1 de Sabiduría, por todo el conocimiento inútil adquirido viendo "
+"telenovelas."
 
 #: data/classes/to.cls:11
 msgid ""
 "+3 of Charisma, for not studying at the Exact Sciences Institute (ICEX), and "
 "for usually being very nice."
 msgstr ""
+"+3 de Carisma, por no estudiar en el Instituto de Ciencias Exactas, y por "
+"normalmente, ser muy amables."
 
 #: data/classes/to.cls:13
 msgid ""
@@ -2117,29 +2356,36 @@ msgid ""
 "Students receive +10 on all social tests against Students from that "
 "Institute."
 msgstr ""
+"Porque simbolizan una extraña belleza para los estudiantes del Instituto de "
+"Ciencias Exactas, los Estudiantes de Terapia Ocupacional reciben +10 en "
+"todas las pruebas sociales frente a estudiantes de ese instituto."
 
 #: data/classes/to.cls:15
 msgid ""
 "-12 of Furtive when in a radius of 30 meters of at least one ICEX Student."
 msgstr ""
+"-12 de Furtivo cuando están a 30 metros de al menos un estudiante del "
+"Instituto de Ciencias Exactas."
 
 #: data/classes/to.cls:17
 msgid "-12 of Hide in the same circunstances."
-msgstr ""
+msgstr "-12 de Ocultarse, en las mismas circunstancias."
 
 #: data/classes/to.cls:19
 msgid "And +5 of Intimidate for the same reason."
-msgstr ""
+msgstr "y +5 de Intimidar por la misma razón."
 
 #: data/classes/to.cls:21
 msgid ""
 "OT Students have a tendency to play that musical instrument called a bass, "
 "receiving -4 of Observe."
 msgstr ""
+"Los Estudiantes de Terapia Ocupacional tienen una tendencia de tocar el bajo "
+"en toda ocasión, recibiendo -4 de Observar."
 
 #: data/races/autista.rca:1
 msgid "Strange Autistic"
-msgstr ""
+msgstr "Extraño Autista."
 
 #: data/races/autista.rca:2
 msgid ""
@@ -2148,6 +2394,10 @@ msgid ""
 "vocalist, when watching an Oblongs episode where one infant, with eyes of "
 "different sizes, sawed his bed using a saw)"
 msgstr ""
+"'-Mira a este chico! Él es como vos cuando eras pequeño!|No, Farrer, yo era "
+"un niño normal y feliz.'|(Farrer a un Extraño Autista (Panda),el vocalista "
+"de Anamabeka,mirando el episodio de Oblongs, donde un chico de ojos de "
+"distinto tamaño aserruchaba una cama con una sierra)"
 
 #: data/races/autista.rca:3
 msgid ""
@@ -3799,3 +4049,85 @@ msgstr ""
 #: data/characters/pcs/santa.pc:1
 msgid "Santa Claws"
 msgstr ""
+
+#~ msgid ""
+#~ "DccNiTghtmare is developed under Public Domain: Feel free to use its "
+#~ "source code and data the way you want (or to blame us the same way). "
+#~ "DccNiTghtmare is thankful to the people who developed those libraries: "
+#~ "OpenAL, Cal3D, OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
+#~ msgstr ""
+#~ "DccNiTghtmare está desarrollado bajo el Dominio Público: siéntete libre "
+#~ "de usar el código fuente como quieras (o para echarnos la culpa de algo). "
+#~ "DccNiTghtmare está agradecido con la gente que desarrolló estas "
+#~ "librerías: OpenAL, Cal3D, OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
+
+#~ msgid "Charism"
+#~ msgstr "Carisma"
+
+#~ msgid "Loading Character"
+#~ msgstr "Cargando Caracter"
+
+#~ msgid "Error while opening skills list: %s\n"
+#~ msgstr "Error mientras se abría la lista de habilidades: %s\n"
+
+#~ msgid "Can't open skill file: %s \n"
+#~ msgstr "No se puede abrir el archivo de habilidades: %s \n"
+
+#~ msgid "Error while writing Options: %s\n"
+#~ msgstr "Error mientras se escribían las opciones: %s\n"
+
+#~ msgid "Race Characteristcs"
+#~ msgstr "Características de la Carrera"
+
+#~ msgid "Class Description"
+#~ msgstr "Descripción de Clase"
+
+#~ msgid "Ouch, can't load NPC's file: %s.\n"
+#~ msgstr "Ups, No se pueden cargar los archivos NPC's: %s.\n"
+
+#~ msgid "Cannot open File!\n"
+#~ msgstr "No se puede abrir archivo!\n"
+
+#~ msgid "Text without any relation!"
+#~ msgstr "Texto sin relación!"
+
+#~ msgid "Can't open font file: %s\n"
+#~ msgstr "No se puede abrir archivo de fuentes: %s\n"
+
+#~ msgid "Unknow option: %s\n"
+#~ msgstr "Opción Desconocida: %s\n"
+
+#~ msgid "Can't open skill image: %s\n"
+#~ msgstr "No se puede abrir la imagen de habilidad: %s\n"
+
+#~ msgid "Error while opening skills list:skills/skills.skl\n"
+#~ msgstr "Error mientras se abría la lista de habilidades:skills/skills.skl\n"
+
+#~ msgid "Can't Open the options file: %s\n"
+#~ msgstr "No se puede abrir el archivo de opciones: %s\n"
+
+#~ msgid "No Options File Avaible!\n"
+#~ msgstr "No hay archivo de opciones disponible!\n"
+
+#~ msgid "Creating Directory: %s : "
+#~ msgstr "Creando Directorio: %s : "
+
+#~ msgid "Creating Options: %s\n"
+#~ msgstr "Creando Opciones: %s\n"
+
+#~ msgid "Feats"
+#~ msgstr "Características"
+
+#~ msgid "Can't load mouse cursor: %s\n"
+#~ msgstr "No se puede cargar el cursor del ratón: %s\n"
+
+#~ msgid "Can't open image: %s\n"
+#~ msgstr "No se puede abrir imagen: %s\n"
+
+#~ msgid "Warn: Can't Load Picture, may crash soon (out of memory)!\n"
+#~ msgstr ""
+#~ "Advertencia: No se puede cargar la imagen, puede dañarse pronto (falta de "
+#~ "memoria)!\n"
+
+#~ msgid "Something must be wrong! Try editing ~/.dccnitghtmare/options.cfg\n"
+#~ msgstr "Algo debe estar mal! Trata editando ~/.dccnitghtmare/options.cfg\n"
