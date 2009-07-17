@@ -13,7 +13,7 @@ $instApp -d $datadir/$package
 for directory in $(find $data -type d ); do
   
    # Ignore CVS directories
-   if [[ -z $(echo $directory | grep -i CVS) ]]; then
+   if [ -z $(echo $directory | grep -i CVS) ]; then
      
       
       # Ignore the ./data directory creation itself
