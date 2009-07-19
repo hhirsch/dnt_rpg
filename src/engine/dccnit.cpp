@@ -3737,7 +3737,6 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
       }
    }
 
-
    colisionDetect.defineMap(actualMap, NPCs, PCs);
    result = colisionDetect.canWalk(activeCharacter, varX, 0, varZ, varAlpha, 
                                    varHeight, nx, nz);

@@ -57,7 +57,7 @@ void collision::defineMap(Map* usedMap, characterList* npcs,
  *                           verifySquare                            *
  *********************************************************************/
 bool collision::verifySquare(GLfloat min[3], GLfloat max[3], Square* quad,
-                             GLfloat& varHeight)
+                             GLfloat& varHeight, GLfloat curHeight)
 {
    GLfloat min2[3];
    GLfloat max2[3];
@@ -105,9 +105,10 @@ bool collision::verifySquare(GLfloat min[3], GLfloat max[3], Square* quad,
           Z[2] = bounding.z2;
           X[3] = bounding.x2;
           Z[3] = bounding.z1;
-/* TODO +Yobjects */
-          rotTransBoundingBox(sobj->orientation, X, Z, sobj->x, bounding.y1, 
-                              bounding.y2, sobj->z, min2, max2);
+          
+          rotTransBoundingBox(sobj->orientation, X, Z, sobj->x, 
+                              sobj->y+bounding.y1, 
+                              sobj->y+bounding.y2, sobj->z, min2, max2);
           if(intercepts(min,max,min2,max2))
           {
              /* If the bounding boxes intercepts, we'll need to do a more 
@@ -119,7 +120,7 @@ bool collision::verifySquare(GLfloat min[3], GLfloat max[3], Square* quad,
              {
                 /* So if the depth collision is true, verify if can go up
                  * the position. if can't, the position is 'unwalkable' now! */
-                if(bounding.y2+sobj->y <= 1.5)
+                if( ((bounding.y2+sobj->y) - curHeight) <= 1.5)
                 {
                    /* Can walk above the object */
                    varHeight = ((bounding.y2+sobj->y)>varHeight)?
@@ -258,7 +259,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
    max2[2] = perQuad->z2;
    if(intercepts(min,max,min2,max2))
    {
-      result &= verifySquare(min,max,perQuad, varHeight);
+      result &= verifySquare(min,max,perQuad, varHeight, actor->yPosition);
       if(!result)
       {
          return(false);
@@ -277,7 +278,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
       max2[2] = saux->z2;
       if(intercepts(min,max,min2,max2) )
       {
-         result &= verifySquare(min,max,saux,varHeight);
+         result &= verifySquare(min,max,saux,varHeight, actor->yPosition);
          if(!result)
          {
             return(false);
@@ -293,7 +294,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
          max2[2] = saux->z2;
          if(intercepts(min,max,min2,max2) )
          {
-            result &= verifySquare(min,max,saux,varHeight);
+            result &= verifySquare(min,max,saux,varHeight, actor->yPosition);
             if(!result) 
             {
                return(false);
@@ -310,7 +311,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
          max2[2] = saux->z2;
          if(intercepts(min,max,min2,max2))
          {
-            result &= verifySquare(min,max,saux,varHeight);
+            result &= verifySquare(min,max,saux,varHeight, actor->yPosition);
             if(!result) 
             {
                return(false);
@@ -330,7 +331,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
       max2[2] = saux->z2;
       if(intercepts(min,max,min2,max2))
       {
-         result &= verifySquare(min,max,saux,varHeight);
+         result &= verifySquare(min,max,saux,varHeight, actor->yPosition);
          if(!result) 
          {
             return(false);
@@ -347,7 +348,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
          max2[2] = saux->z2;
          if(intercepts(min,max,min2,max2) )
          {
-            result &= verifySquare(min,max,saux,varHeight);
+            result &= verifySquare(min,max,saux,varHeight, actor->yPosition);
             if(!result) 
             {
                return(false);
@@ -364,7 +365,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
          max2[2] = saux->z2;
          if(intercepts(min,max,min2,max2))
          {
-            result &=verifySquare(min,max,saux,varHeight);
+            result &=verifySquare(min,max,saux,varHeight, actor->yPosition);
             if(!result) 
             {
                return(false);
@@ -384,7 +385,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
       if(intercepts(min,max,min2,max2) )
       { 
          /* south */
-         result &= verifySquare(min,max,saux,varHeight);
+         result &= verifySquare(min,max,saux,varHeight, actor->yPosition);
          if(!result) 
          {
             return(false);
@@ -403,7 +404,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
       if(intercepts(min,max,min2,max2) )
       { 
          /* nort */
-         result &= verifySquare(min,max,saux,varHeight);
+         result &= verifySquare(min,max,saux,varHeight, actor->yPosition);
          if(!result) 
          {
             return(false);

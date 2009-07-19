@@ -48,7 +48,7 @@ class collision
        * \param quad -> pointer to the current square
        * \param varHeight -> height variation going in */
       bool verifySquare(GLfloat min[3], GLfloat max[3],Square* quad,
-                        GLfloat& varHeight);
+                        GLfloat& varHeight, GLfloat curHeight);
 
       /*! Verify if character can walk to the position
        *  \param perX -> character X position
