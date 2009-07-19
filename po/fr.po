@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
 "POT-Creation-Date: 2009-06-28 11:02-0300\n"
-"PO-Revision-Date: 2009-06-26 12:06+0000\n"
-"Last-Translator: LeSanglier <lesanglierdesardennes@gmail.com>\n"
+"PO-Revision-Date: 2009-07-14 14:27+0000\n"
+"Last-Translator: Anthony Guéchoum <Unknown>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-07-05 12:56+0000\n"
+"X-Launchpad-Export-Date: 2009-07-19 12:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: src/classes/actions.cpp:128
@@ -487,22 +487,22 @@ msgstr "Introuvable dans le dialogue : %d\n"
 #: src/engine/dialog.cpp:1213
 #, c-format
 msgid "%s lost."
-msgstr ""
+msgstr "%s perdu."
 
 #: src/engine/dialog.cpp:1256
 #, c-format
 msgid "Received %s."
-msgstr ""
+msgstr "Reçu %s."
 
 #: src/engine/dialog.cpp:1273
 #, c-format
 msgid "Received $%d."
-msgstr ""
+msgstr "%d $ reçus."
 
 #: src/engine/dialog.cpp:1287
 #, c-format
 msgid "Lost $%d."
-msgstr ""
+msgstr "%d $ perdus."
 
 #: src/engine/dialog.cpp:1482
 msgid "Dialog"
@@ -1187,11 +1187,12 @@ msgstr "La portée de l'action est représenté par des cercles"
 
 #: data/comics/tutorial/combat/combat.dcb:151
 msgid "The yellow circle represents your current attack range."
-msgstr ""
+msgstr "Le cercle jaune représente votre portée d'attaque actuelle."
 
 #: data/comics/tutorial/combat/combat.dcb:153
 msgid "You can only attack creatures inner the yellow circle!"
 msgstr ""
+"Vous ne pouvez attaquer que les créatures à l'intérieur du cercle jaune !"
 
 #: data/comics/tutorial/combat/combat.dcb:163
 msgid "The blue circle is the area you can move with a move action."
@@ -1208,6 +1209,8 @@ msgid ""
 "If a circle isn't shown it's because you can't take that kind of action "
 "anymore at the current turn."
 msgstr ""
+"Si l'un des cercles n'est pas représenté, c'est que vous ne pouvez plus "
+"effectuer ce type d'action pendant ce tour."
 
 #: data/comics/tutorial/combat/combat.dcb:205
 msgid "You can attack using your current weapon by simple clicking the target."
@@ -1234,6 +1237,8 @@ msgid ""
 "The fight will end when no more hostile creatures are near or all PCs are "
 "dead."
 msgstr ""
+"Le combat se terminera lorsqu'il n'y aura plus de créatures hostiles à "
+"proximité ou lorsque tous les PJs seront morts."
 
 #: data/comics/tutorial/combat/combat.dcb:249
 msgid "Remember:"
@@ -1241,7 +1246,7 @@ msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:251
 msgid "Take or use objects count as an attack action."
-msgstr ""
+msgstr "Prendre ou utiliser des objets compte comme une action d'attaque."
 
 #: data/comics/tutorial/combat/combat.dcb:253
 msgid "You can't save your game while fighting."
@@ -2947,7 +2952,7 @@ msgstr ""
 
 #: data/feats/law/i_am_wrong.fta:1
 msgid "I am Wrong"
-msgstr ""
+msgstr "J'ai tord"
 
 #: data/feats/law/i_am_wrong.fta:2
 msgid ""
@@ -3722,19 +3727,19 @@ msgstr "(Vous voyez une machine à soda.)"
 
 #: data/dialogs/objects/refmachine.dlg:12
 msgid "Kick the machine."
-msgstr ""
+msgstr "Frapper la machine."
 
 #: data/dialogs/objects/refmachine.dlg:23
 msgid "Study the machine."
-msgstr ""
+msgstr "Examiner la machine."
 
 #: data/dialogs/objects/refmachine.dlg:33
 msgid "Take money from the machine."
-msgstr ""
+msgstr "Prendre de l'argent à la machine."
 
 #: data/dialogs/objects/refmachine.dlg:41
 msgid "Buy a soda"
-msgstr ""
+msgstr "Acheter un soda"
 
 #: data/dialogs/objects/refmachine.dlg:59
 msgid "(You listened a strange noise. Is the machine alright?)"
@@ -3742,7 +3747,7 @@ msgstr ""
 
 #: data/dialogs/objects/refmachine.dlg:73
 msgid "(A soda appears to you.)"
-msgstr ""
+msgstr "(Un soda apparaît devant vous.)"
 
 #: data/dialogs/objects/refmachine.dlg:87
 msgid "(This machine seems to be broken.)"
@@ -3750,7 +3755,7 @@ msgstr "(Cette machine semble être cassé)"
 
 #: data/dialogs/objects/refmachine.dlg:101
 msgid "(You've got some coins.)"
-msgstr ""
+msgstr "(Vous obtenez quelques pièces.)"
 
 #: data/dialogs/objects/refmachine.dlg:115
 msgid "(You don't have enough money)"
@@ -4128,11 +4133,11 @@ msgstr ""
 
 #: data/dialogs/tutorial/atleticano.dlg:6
 msgid "What are you doing here in my house?"
-msgstr ""
+msgstr "Que faîtes-vous dans ma maison ?"
 
 #: data/dialogs/tutorial/atleticano.dlg:11
 msgid "Logan sent this to you."
-msgstr ""
+msgstr "Logan vous envoie ceci."
 
 #: data/dialogs/tutorial/atleticano.dlg:16
 msgid "Just wandering, sorry..."
@@ -4140,7 +4145,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/atleticano.dlg:19
 msgid "Not of your concern!"
-msgstr ""
+msgstr "Cela ne vous regarde pas !"
 
 #: data/dialogs/tutorial/atleticano.dlg:25
 msgid "I'm lost."
@@ -4152,7 +4157,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/atleticano.dlg:47
 msgid "Please, don't do anything bad to us!"
-msgstr ""
+msgstr "S'il vous plaît, ne nous faîtes pas de mal !"
 
 #: data/dialogs/tutorial/atleticano.dlg:60
 msgid "And so I am."
