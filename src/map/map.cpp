@@ -970,6 +970,38 @@ void renderQuad(GLfloat x1, GLfloat z1,
 /********************************************************************
  *                      renderFloorIndoor                           *
  ********************************************************************/
+void Map::renderInvisibleSurface()
+{
+   glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+   glBegin(GL_QUADS);
+ 
+   if(outdoor)
+   {
+      glVertex3f(-OUTDOOR_FARVIEW_D4, -5.0f, -OUTDOOR_FARVIEW_D4);
+      glVertex3f(-OUTDOOR_FARVIEW_D4, -5.0f, 
+            z*OUTDOOR_SQUARE_SIZE+OUTDOOR_FARVIEW_D4);
+      glVertex3f(x*OUTDOOR_SQUARE_SIZE+OUTDOOR_FARVIEW_D4, -5.0f, 
+            z*OUTDOOR_SQUARE_SIZE+OUTDOOR_FARVIEW_D4);
+      glVertex3f(x*OUTDOOR_SQUARE_SIZE+OUTDOOR_FARVIEW_D4, -5.0f, 
+            -OUTDOOR_FARVIEW_D4);
+   }
+   else
+   {
+      glVertex3f(-INDOOR_FARVIEW_D4, -5.0f, -INDOOR_FARVIEW_D4);
+      glVertex3f(-INDOOR_FARVIEW_D4, -5.0f, 
+            z*INDOOR_SQUARE_SIZE+INDOOR_FARVIEW_D4);
+      glVertex3f(x*INDOOR_SQUARE_SIZE+INDOOR_FARVIEW_D4, -5.0f, 
+            z*INDOOR_SQUARE_SIZE+INDOOR_FARVIEW_D4);
+      glVertex3f(x*INDOOR_SQUARE_SIZE+INDOOR_FARVIEW_D4, -5.0f, 
+            -INDOOR_FARVIEW_D4);
+   }
+   glEnd();
+   glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+}
+
+/********************************************************************
+ *                      renderFloorIndoor                           *
+ ********************************************************************/
 void Map::renderFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
                             GLfloat** matriz, bool selectionRender,
                             bool outdoorCompatible)
@@ -986,20 +1018,7 @@ void Map::renderFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    }
    else
    {
-      /* Draw a big plane bellow ground to avoid errors
-       * on indoor map mouse projection */
-      glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
-      glBegin(GL_QUADS);
-         glVertex3f(-INDOOR_FARVIEW_D4, -5.0f, -INDOOR_FARVIEW_D4);
-         glVertex3f(-INDOOR_FARVIEW_D4, -5.0f, 
-                    z*INDOOR_SQUARE_SIZE+INDOOR_FARVIEW_D4);
-         glVertex3f(x*INDOOR_SQUARE_SIZE+INDOOR_FARVIEW_D4, -5.0f, 
-                    z*INDOOR_SQUARE_SIZE+INDOOR_FARVIEW_D4);
-         glVertex3f(x*INDOOR_SQUARE_SIZE+INDOOR_FARVIEW_D4, -5.0f, 
-                    -INDOOR_FARVIEW_D4);
-      glEnd();
-      glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
-
+      renderInvisibleSurface();
       aux = 0;
 
       if(!outdoorCompatible)

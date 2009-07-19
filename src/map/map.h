@@ -257,6 +257,9 @@ class Map
        * \return -> pointer to the initial square */
       Square* getInitialSquare();
 
+      /*! Render an invisible surface only to the unproject */
+      void renderInvisibleSurface();
+
       /*! Render on screen the visible map (using view culling)  
        * \param cameraX -> X coordinate of camera
        * \param cameraY -> Y coordinate of camera

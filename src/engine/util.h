@@ -82,6 +82,7 @@
 #define ZOOM_MIN            500            /**< Min value of Zoom */
 #define OUTDOOR_FARVIEW    8192            /**< FarView constant */
 #define OUTDOOR_FARVIEW_D2 4096            /**< FarView / 2 */
+#define OUTDOOR_FARVIEW_D4 2048            /**< Quarter FarView */
 #define INDOOR_FARVIEW      768            /**< Indoor FarView */
 #define INDOOR_FARVIEW_D2   384            /**< Half Indoor FarView */
 #define INDOOR_FARVIEW_D4   192            /**< Quarter Indoor FarView */
