@@ -252,8 +252,6 @@ Map::Map()
    squareInic = NULL;
    walls = NULL;
    totalWalls = 0;
-   curbs = NULL; 
-   totalCurbs = 0;
    MapSquares = NULL;
    doors = NULL;
    totalDoors = 0;
@@ -893,22 +891,6 @@ void Map::removeWall(wall* w)
 }
 
 /********************************************************************
- *                          getFirstCurb                            *
- ********************************************************************/
-wall* Map::getFirstCurb()
-{
-   return(curbs);
-}
-
-/********************************************************************
- *                          getTotalCurbs                           *
- ********************************************************************/
-int Map::getTotalCurbs()
-{
-   return(totalCurbs);
-}
-      
-/********************************************************************
  *                          getFirstDoor                            *
  ********************************************************************/
 door* Map::getFirstDoor()
@@ -1300,18 +1282,10 @@ void Map::renderWalls(GLfloat cameraX, GLfloat cameraY,
    wall* maux = walls;
    bool visible = false;
    int wNum;
-   int fezMeioFio = 0;
    GLfloat altura = WALL_HEIGHT;
    GLfloat u,v;
    GLuint R=0,G=0,B=0;
    GLuint dX=0, dY=0, dZ=0;
-
-   if(!maux)
-   {
-      maux = curbs;
-      fezMeioFio = 1;
-      altura = CURB_HEIGHT;
-   }
 
    /* Clear the wall renderer buffers */
    wallRenderer->clear();
@@ -1416,12 +1390,6 @@ void Map::renderWalls(GLfloat cameraX, GLfloat cameraY,
                                
       }
       maux = maux->next;
-      if( (!maux) && (!fezMeioFio) )
-      {
-         maux = curbs;
-         fezMeioFio = 1;
-         altura = CURB_HEIGHT;
-      }
    }
 
    /* Now, finally render! */
@@ -2528,20 +2496,6 @@ int Map::save(string arquivo)
       maux = (wall*)maux->next;
    }
 
-   /* Write Half Walls */
-   //FIXME ignoring curbs...
-   /*maux = (wall*)curbs;
-   while(maux)
-   {
-      fprintf(arq,"we %f,%f,%f,%f\n",maux->x1,maux->z1,maux->x2,maux->z2);
-      fprintf(arq,"wtf %s\n", getTextureName(maux->frontTexture).c_str());
-      fprintf(arq,"wtb %s\n", getTextureName(maux->backTexture).c_str());
-      fprintf(arq,"wrt %s\n", getTextureName(maux->rightTexture).c_str());
-      fprintf(arq,"wlt %s\n", getTextureName(maux->leftTexture).c_str());
-      maux = (wall*)maux->next;
-   }*/
-
- 
    /* Write Squares, line per line */
    for(z1=0;z1<z;z1++)
    {

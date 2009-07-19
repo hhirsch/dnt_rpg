@@ -517,13 +517,6 @@ class Map
       /*! Get total Number of walls on map
        * \return total number of walls on map */
       int getTotalWalls();
-      /*! Get the first curbs on the map's list 
-       * \return -> pointer to the first curb */
-      wall* getFirstCurb();
-      /*! Get the total number of curbs on the map's list
-       * \return -> total curbs on map */
-      int getTotalCurbs();
-
       
       /*! Get the first door on the map's list
        * \return -> pointer to the first door or NULL */
@@ -596,8 +589,6 @@ class Map
       int numTextures;      /**< Number of distinct Textures on Map */
       texture* textures;    /**< List of textures on Map */
       Square* squareInic;   /**< Square where PCs starts */
-      wall* curbs;          /**< Map Curbs */
-      int totalCurbs;       /**< Total Curbs */
       door* doors;          /**< Map Doors */
       int totalDoors;       /**< Total Number of doors on the map */
       lake* lakes;          /**< Chain list of lakes on map */
