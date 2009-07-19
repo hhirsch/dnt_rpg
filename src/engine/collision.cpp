@@ -140,32 +140,6 @@ bool collision::verifySquare(GLfloat min[3], GLfloat max[3], Square* quad,
    return(true);
 }
 
-
-/*********************************************************************
- *                             verifyCurb                            *
- *********************************************************************/
-bool collision::verifyCurb(GLfloat min[3],GLfloat max[3], wall* curb)
-{
-    GLfloat min2[3];
-    GLfloat max2[3];
-    wall* maux = curb;
-    while(maux)
-    {
-       min2[0] = maux->x1;
-       max2[0] = maux->x2;
-       min2[1] = 0;
-       max2[1] = CURB_HEIGHT;
-       min2[2] = maux->z1;
-       max2[2] = maux->z2;
-       if( (intercepts(min, max, min2, max2)) )
-       {
-          return(true);
-       }
-       maux = maux->next;
-    }
-    return(false);
-}
-
 /*********************************************************************
  *                              canWalk                              *
  *********************************************************************/
@@ -485,14 +459,6 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
       list = PCs;
    }
 
-   /* Test Curb */
-#if 0   
-   if( verifyCurb( min, max, actualMap->getFirstCurb()) )
-   {
-      varHeight += CURB_HEIGHT+0.1;
-   }
-#endif
-   
    nx = ((min[0] + max[0]) / 2);
    nz = ((min[2] + max[2]) / 2);
       

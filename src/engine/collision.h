@@ -50,12 +50,6 @@ class collision
       bool verifySquare(GLfloat min[3], GLfloat max[3],Square* quad,
                         GLfloat& varHeight);
 
-      /*! Verify collision with meios fio
-       * \param min -> min positions of Bounding Box (translated & rotated)
-       * \param max -> max positions of bounding box (translated & rotated)
-       * \param curb -> pointer to the curbs list */
-      bool verifyCurb(GLfloat min[3],GLfloat max[3], wall* curb);
-      
       /*! Verify if character can walk to the position
        *  \param perX -> character X position
        *  \param perY -> character Y position
