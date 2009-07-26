@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -60,7 +60,9 @@ class modEffect
       int mod;             /**< The modifier value */
       factor cause;        /**< Thing to modify */
       Uint16 init;         /**< Time the effect begins  */
-      int time;            /**< Max Time the effect remains */
+      int time;            /**< Max Time the effect remains (0 for infinity) */
+      int periodicTime;    /**< Periodicity of the effect (with saves), 
+                                0 for non-periodic ones. */
 
       modEffect* next;     /**< Next modEffect on list (if any) */
       modEffect* previous; /**< Previous modEffect on list (if any) */

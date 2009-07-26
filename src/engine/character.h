@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -224,6 +224,9 @@ class character: public aniModel
       SDL_Surface* portraitImage; /**< Character's portrait image */
       GLuint portraitTexture;     /**< The Portrait Texture */
       string inventoryFile;       /**< The inventory file name */
+
+      modEffect effects;          /**< Current character effects */
+      int totalEffects;           /**< Total Effects */
       
       void* generalScript;         /**< Pointer to the general iaScript */
       string generalScriptFileName;/**< The General Script Filename */
