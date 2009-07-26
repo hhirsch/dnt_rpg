@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -245,6 +245,42 @@ bool iaVariable::operator<=(const iaVariable& v)
 bool iaVariable::operator<(const iaVariable& v)
 {
    return(!(operator>=(v)));
+}
+
+/***********************************************************
+ *                           =                             *
+ ***********************************************************/
+void iaVariable::operator=(void* v)
+{
+   if(type == IA_TYPE_BOOL)
+   {
+      bool* va = (bool*)value;
+      bool* vb = (bool*)v;
+      *va = *vb;
+   }
+   else if(type == IA_TYPE_INT)
+   {
+      int* ia = (int*)value;
+      int* ib = (int*)v;
+      *ia = *ib;
+   }
+   else if(type == IA_TYPE_FLOAT)
+   {
+      float* fa = (float*)value;
+      float* fb = (float*)v;
+      *fa = *fb;
+   }
+   else if(type == IA_TYPE_STRING)
+   {
+      string* sa = (string*)value;
+      string* sb = (string*)v;
+      *sa = *sb;
+   }
+   else
+   {  
+      /* Just assign pointers */
+      value = v;
+   }
 }
 
 /***********************************************************

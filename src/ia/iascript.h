@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -66,6 +66,19 @@ class iaScript
 
       /*! Close the iaScript. A closed iaScript can't run. */
       void close();
+
+      /*! Set a script parameter value
+       * \param paramName -> the parameter name (defined at the script's file)
+       * \param value -> pointer to the parameter value or 
+       *                 the value if already is a pointer type. 
+       * \return true if parameter was defined.
+       * \note: to define a character parameter:
+       *    character *c = some_pointer_to_the_character;
+       *    setParameter("name", c);
+       * \note : to define an integer parameter: 
+       *    int val = 50;
+       *    setParameter("nama", &val); */
+      bool setParameter(string paramName, void* value);
    
       /*! Define the owner of the script as a object
        * \param owner -> pointer to the object */
@@ -120,6 +133,10 @@ class iaScript
 
       iaSymbolsTable* symbols;   /**< The script's table of symbols */
       iaStack* jumpStack;        /**< The jump stack (if, else, for) */
+
+      /*! Create all the parameters variables 
+       * \note parameters are defined at script(params) */
+      void createParameters();
 
       /*! Declare a variable at the symbol's table, with the declaration
        * line, if it is with right syntax. The syntax for declaration is

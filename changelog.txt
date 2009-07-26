@@ -5,6 +5,7 @@
  - Fixed a bug: Keep windows positions after map change;
  - Fixed a bug: Update inventoryWindow after receiveing an item from a dialog;
  - Capacity to walk through low height objects;
+ - iaScripts can receive parameters;
 
 Working on:
  - Weather effects;

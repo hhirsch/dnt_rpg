@@ -261,6 +261,11 @@ string nextToken(string s, unsigned int& pos)
       pos++;
    }
 
+   if(pos >= s.length())
+   {  
+      return("");
+   }
+
    cmp = s[pos];
 
    if(isOperator(cmp))

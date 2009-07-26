@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -73,6 +73,53 @@ void iaScript::init()
 
    context = "";
    actualLine = 0;
+
+   createParameters();
+}
+
+/***********************************************************************
+ *                         createParameters                            *
+ ***********************************************************************/
+void iaScript::createParameters()
+{
+   bool done = false;
+   string type, name, token, strBuffer;
+   unsigned int pos = 0;
+
+   if(file)
+   {
+
+      /* Let's search for the script main definition */
+      while( (!done) || (!file.eof()) )
+      {
+         getline(file, strBuffer);
+         pos = 0;
+         token = nextToken(strBuffer, pos);
+
+         if(token == IA_SETENCE_SCRIPT)
+         {
+            /* It's the script */
+            done = true;
+
+            /* Get the '(' */
+            nextToken(strBuffer, pos);
+
+            /* Let's create each parameter */
+            type = nextToken(strBuffer, pos);
+            name = nextToken(strBuffer, pos);
+            while( (!type.empty()) && (!name.empty()) &&
+                  (type != IA_OPERATOR_RPARENTHESIS) )
+            {
+               symbols->addSymbol(type, name);
+               type = nextToken(strBuffer, pos);
+               name = nextToken(strBuffer, pos);
+            }
+         }
+      }
+
+      /* Back to the file's init */
+      file.seekg(0, ios::beg);
+   }
 }
 
 /***********************************************************************
@@ -123,6 +170,24 @@ void iaScript::close()
       delete(jumpStack);
       jumpStack = NULL;
    }
+}
+
+/***********************************************************************
+ *                           setParameter                              *
+ ***********************************************************************/
+bool iaScript::setParameter(string paramName, void* value)
+{
+   iaVariable* iv = symbols->getSymbol(paramName);
+
+   if(iv != NULL)
+   {
+      (*iv) = value;
+      return(true);
+   }
+
+   cerr << "Error: Unknown script parameter '" << paramName 
+        << "' at " << fileName << endl;
+   return(false);
 }
 
 /***********************************************************************

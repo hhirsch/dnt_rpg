@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -59,6 +59,9 @@ class iaVariable
 
       /*! Assign Operator */
       void operator=(const iaVariable& v);
+
+      /*! Assign Operator */
+      void operator=(void* v);
 
       /*! Define the variable value to be the result of the operation on
        * the two variables.
