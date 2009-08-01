@@ -1,5 +1,5 @@
 
-script(character target, int difficulty, int poisonLevel)
+script(character target, int difficulty, int drunkLevel)
 
    string class;
    string fort;
