@@ -2,7 +2,8 @@
 
 prefix = @prefix@
 datadir = @datarootdir@
-localedir = $(datadir)/locale
+datarootdir = @datarootdir@
+localedir = @localedir@
 DEFS = -DLOCALEDIR=\"$(localedir)\"
 
 CFLAGS = @CPPFLAGS@ $(DEFS) -g -c -Wall -O2

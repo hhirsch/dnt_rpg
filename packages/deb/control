@@ -3,7 +3,7 @@ Version: 0.4
 Section: games
 Priority: optional
 Architeture: i386
-Depends: libsdl (>=1.2.13), libsdl-image (>=1.2.6), libogg (>=1.1), libvorbis (>=1.2) libopenal1 (>=1:1.4), libcal3d (>=0.11)
+Depends: libsdl (>=1.2.13), libsdl-image (>=1.2.6), libsdl-ttf2.0-0, libogg (>=1.1), libvorbis (>=1.2) libopenal1 (>=1:1.4), libcal3d (>=0.11)
 Maintainer: DNTeam <dnt@dnteam.org>
 Description: DccNiTghtmare (aka DNT) is a project to make a 
              Free (as in free speech) 3D single player RPG in a 
