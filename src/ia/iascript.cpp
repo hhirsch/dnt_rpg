@@ -804,6 +804,76 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    }
 
    ////////////////////////////////////////////////////
+   //              Random (Dice) Function            //
+   ////////////////////////////////////////////////////
+   
+   /* Syntax: bool roll(character actor, string skill, int difficulty)  */
+   if(functionName == IA_DICE_ROLL)
+   {
+      character* actor = NULL;
+      string sk = "";
+      int difficulty = 0;
+      bool res = false;
+
+      /* Get the character */
+      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
+      if(iv)
+      {
+         actor = (character*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+      /* Get the skill to check */
+      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
+      if(iv)
+      {
+         sk = *(string*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+      /* Get the roll difficulty */
+      iv = getParameter(token, strLine, IA_TYPE_INT, pos);
+      if(iv)
+      {
+         difficulty = *(int*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      /* Finally, let's try the check */
+      if(actor != NULL)
+      {
+         skill* skl = actor->sk.getSkillByString(sk);
+         if(skl != NULL)
+         {
+            res = (actor->sk.doSkillCheck(skl) > difficulty);
+         }
+         else
+         {
+            cerr << "Error: Unknow skill '" << sk << "' at line "
+                 << actualLine << " of the script: " << fileName << endl;
+
+         }
+      }
+      else
+      {
+         cerr << "Error: Tried to access a NULL character at line " 
+              << actualLine << " of the script: " << fileName << endl;
+
+      }
+
+      /* And set the result */
+      assignValue(var, (void*)&res, IA_TYPE_BOOL);
+   }
+
+
+   ////////////////////////////////////////////////////
    //             Movimentation Functions            //
    ////////////////////////////////////////////////////
 

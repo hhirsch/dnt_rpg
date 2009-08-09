@@ -129,7 +129,7 @@ bool isFunction(string s)
            (s == IA_MISSION_GET_TEMP) || (s == IA_MISSION_SET_XP) ||
            (s == IA_INVENTORY_HAVE) || (s == IA_FIGHT_GET_NEAREST_ENEMY) ||
            (s == IA_DIALOG_SET_INITIAL) || (s == IA_GET_NPC_BY_NAME) ||
-           (s == IA_MAP_TRAVEL) );
+           (s == IA_MAP_TRAVEL) || (s == IA_DICE_ROLL) );
 }
 
 /***********************************************************************
@@ -144,7 +144,7 @@ string functionType(string s)
        (s == IA_MISSION_IS_ACTIVE) || (s == IA_INVENTORY_HAVE) ||
        (s == IA_CHARACTER_IS_ALIVE) || (s == IA_CHARACTER_IS_ALL_DEAD) ||
        (s == IA_CHARACTER_AT_RANGE) || (s == IA_WAIT) || 
-       (s == IA_FIGHT_CAN_ATTACK) )
+       (s == IA_FIGHT_CAN_ATTACK) || (s == IA_DICE_ROLL) )
    {
       return(IA_TYPE_BOOL);
    }

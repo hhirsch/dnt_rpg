@@ -108,6 +108,12 @@ using namespace std;
 #define IA_DEBUG_PRINT "print"
 
 ////////////////////////////////////////////////////
+//                  Random (dices)                //
+////////////////////////////////////////////////////
+/*! bool roll(character target, string rollThing, int difficulty) */
+#define IA_DICE_ROLL "roll"
+
+////////////////////////////////////////////////////
 //             Movimentation Functions            //
 ////////////////////////////////////////////////////
 /*! bool moveToPosition(character char, int x, int z) */

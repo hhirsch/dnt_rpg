@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language: DNT Script Language
 " Maintainer: Guilherme Farrer <farrer@dnteam.org>
-" Last Change: 2008 Nov 14
+" Last Change: 2009 Aug 09
 
 syn clear
 
@@ -46,6 +46,7 @@ syn keyword dntFunction       inventoryHave
 syn keyword dntFunction       dialogSetInitial
 syn keyword dntFunction       getObject getObjectState
 syn keyword dntFunction       isAllDead mapTravel
+syn keyword dntFunction       classLevel roll addEffect
 
 syn sync lines=250
 
