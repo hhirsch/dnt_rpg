@@ -1539,7 +1539,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
 
    /* Syntax int function(character c, string s) */
    else if((functionName == IA_SKILL_POINTS) || 
-           (functionName == IA_ATT_MODIFIER) )
+           (functionName == IA_ATT_MODIFIER) ||
+           (functionName == IA_CLASS_LEVEL) )
    {
       character* c = NULL;
       string tmpName = "";
@@ -1574,8 +1575,19 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       /* Run Function */
       if(c != NULL)
       {
+         /* Syntax int classLevel(character c, string className)  */
+         if(functionName == IA_CLASS_LEVEL)
+         {
+            classes clList;
+            classe* cl = clList.getClassByString(tmpName);
+            if(cl != NULL)
+            {
+               int i = c->getLevel(cl);
+               assignValue(var, (void*)&i, IA_TYPE_INT);
+            }
+         }
          /* Syntax int skillPoints(character c, string skillName)  */
-         if(functionName == IA_SKILL_POINTS)
+         else if(functionName == IA_SKILL_POINTS)
          {
             skill* skl = c->sk.getSkillByString(tmpName);
             if(skl != NULL)
