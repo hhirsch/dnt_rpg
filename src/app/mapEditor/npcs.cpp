@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -191,7 +191,7 @@ bool npcs::saveFile(string fileName)
          fprintf(arq,"%s %s %.3f %.3f %.3f\n", saveName.c_str(),
                  per->getCharacterFile().c_str(),
                  per->xPosition,per->zPosition, per->orientation);
-         per = (character*) per->next;
+         per = (character*) per->getNext();
        }
        fclose(arq);
    }

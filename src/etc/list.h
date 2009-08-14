@@ -57,8 +57,13 @@ class dntList
    public:
       /*! Constructor */
       dntList();
-      /*! Destructor */
+      /*! Destructor
+      * \note -> the children class must call clearList for 
+       *          its root at its destructor  */
       virtual ~dntList();
+
+      /*! Clear all list elements */
+      void clearList();
 
       /*! Insert an element on the list
        * \param obj -> object to insert
@@ -74,11 +79,15 @@ class dntList
 
       /*! Free an element (deleting it)
        * \param obj -> object to free */
-      virtual void freeElement(dntListElement* obj);
+      virtual void freeElement(dntListElement* obj)=0;
 
       /*! Get total elements on the list
        * \return total elements on the list */
       int getTotal();
+
+      /*! Get the fisrt element
+       * \return pointer to the first element */
+      dntListElement* getFirst();
 
    protected:
       dntListElement* first;          /**< Pointer to the first list element */

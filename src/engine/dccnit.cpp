@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -555,7 +555,7 @@ void engine::keepNPCStatus()
    if( (NPCs) && (actualMap))
    {
       /* Save All Needed Inventory Status And NPC Psycho */
-      character* dude = NPCs->getFirst();
+      character* dude = (character*)NPCs->getFirst();
       int i;
       for(i = 0; i < NPCs->getTotal(); i++)
       {
@@ -577,7 +577,7 @@ void engine::keepNPCStatus()
                                    dude->initialXPosition,
                                    dude->initialZPosition);
 
-         dude = (character*)dude->next;
+         dude = (character*)dude->getNext();
       }
    }
 }
@@ -834,7 +834,7 @@ int engine::loadMap(string arqMapa, bool loadingGame)
       per->setState(STATE_IDLE);
       per->update(0); 
       per->calculateBoundingBox();  
-      per = (character*) per->next;
+      per = (character*) per->getNext();
    }
 
    /* Updating the BoundingBoxes for NPCs */
@@ -846,7 +846,7 @@ int engine::loadMap(string arqMapa, bool loadingGame)
          per->setState(STATE_IDLE);
          per->update(0); 
          per->calculateBoundingBox();  
-         per = (character*) per->next;
+         per = (character*) per->getNext();
       }
    }
 
@@ -1593,7 +1593,7 @@ void engine::enterBattleMode(bool surprisePC)
          /* Remove Move, if it is moving */
          ch->pathFind.clear();
       }
-      ch = (character*) ch->next; 
+      ch = (character*) ch->getNext();
       SDL_Delay(1);
   }
                  
@@ -1618,7 +1618,7 @@ void engine::enterBattleMode(bool surprisePC)
          ch->pathFind.clear();
 
          /* take next */
-         ch = (character*) ch->next; 
+         ch = (character*) ch->getNext(); 
          SDL_Delay(1);
       }
                    
@@ -1679,7 +1679,7 @@ void engine::doAStar()
       for(aux=0; aux < NPCs->getTotal(); aux++)
       {
          per->pathFind.doCycle((engineMode == ENGINE_MODE_TURN_BATTLE));
-         per = per->next;
+         per = (character*)per->getNext();
       }
    }
 
@@ -1689,7 +1689,7 @@ void engine::doAStar()
       for(aux=0; aux < PCs->getTotal(); aux++)
       {
          per->pathFind.doCycle((engineMode == ENGINE_MODE_TURN_BATTLE));
-         per = per->next;
+         per = (character*)per->getNext();
       }
 
    }
@@ -2172,7 +2172,7 @@ int engine::verifyMouseActions(Uint8 mButton)
             }
             pronto = 1;
          }
-         pers = (character*) pers->next;
+         pers = (character*) pers->getNext();
       }
 
       /* Talk And Attack Events Verification */
@@ -2261,7 +2261,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                   pronto = 1;
                }
             }
-            pers = (character*) pers->next;
+            pers = (character*) pers->getNext();
          }
       }
 
@@ -2373,7 +2373,7 @@ int engine::treatIO(SDL_Surface *screen)
       if( (engineMode != ENGINE_MODE_TURN_BATTLE) && (NPCs != NULL) &&
           (activeCharacter->isAlive()) )
       {
-         character* npc = NPCs->getFirst();
+         character* npc = (character*)NPCs->getFirst();
          for(i = 0; ( (i < NPCs->getTotal()) && 
                       (engineMode != ENGINE_MODE_TURN_BATTLE)); i++)
          {
@@ -2394,7 +2394,7 @@ int engine::treatIO(SDL_Surface *screen)
                   enterBattleMode(false);
                }
             }
-            npc = npc->next;
+            npc = (character*)npc->getNext();
          }
       }
 
@@ -2745,11 +2745,11 @@ int engine::treatIO(SDL_Surface *screen)
          walkStatus = ENGINE_WALK_KEYS;
          if(keys[SDLK_LCTRL]) //Previous Character
          {
-            PCs->setActiveCharacter((character*)activeCharacter->previous);
+            PCs->setActiveCharacter((character*)activeCharacter->getPrevious());
          }
          else //Next Character
          {
-            PCs->setActiveCharacter((character*)activeCharacter->next);
+            PCs->setActiveCharacter((character*)activeCharacter->getNext());
          }
          activeCharacter = PCs->getActiveCharacter();
          gameCamera.updateCamera(activeCharacter->xPosition,
@@ -3159,7 +3159,7 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
       /* Unload Model Graphics Memory */
       per->removeFromGraphicMemory();
 
-      per = (character*) per->next;
+      per = (character*) per->getNext();
    }
    glPopMatrix();
 
@@ -3263,7 +3263,7 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
          /* Remove the Model From Graphic Memory */
          per->removeFromGraphicMemory();
 
-         per = (character*) per->next;
+         per = (character*) per->getNext();
       }
    }
 
@@ -3798,7 +3798,7 @@ void engine::updateAllHealthBars()
    for(i = 0; i < PCs->getTotal(); i++)
    {
       pers->setLifePoints(pers->getLifePoints());
-      pers = (character*) pers->next;
+      pers = (character*) pers->getNext();
    }
 }
 
@@ -3928,7 +3928,7 @@ int engine::run(SDL_Surface *surface, bool commingBack)
               {
                  alive = true;
               }
-              pers = (character*) pers->next;
+              pers = (character*) pers->getNext();
            }
            if(!alive) 
            {

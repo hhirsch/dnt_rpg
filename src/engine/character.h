@@ -32,10 +32,11 @@ using namespace std;
 #include "../classes/classes.h"
 #include "../classes/race.h"
 #include "../classes/inventory.h"
+#include "../classes/modifier.h"
 #include "../ia/astar.h"
 #include "../etc/animodel.h"
+#include "../etc/list.h"
 #include "../map/map.h"
-#include "../classes/modifier.h"
 
 #include "itemwindow.h"
 
@@ -58,7 +59,7 @@ class characterUtilModel
 
 
 /*! Character Class */
-class character: public aniModel
+class character: public aniModel, public dntListElement
 {
    public:
       /*! Constructor
@@ -201,9 +202,6 @@ class character: public aniModel
         * \return range value in meters */ 
        int getActiveFeatRange();
 
-       character* next;             /**< Next Character on List */
-       character* previous;         /**< Previous Character on List */
-
        /*! Get the general script pointer
         * \return genereal iaScript pointer */
        void* getGeneralScript();    
@@ -244,7 +242,7 @@ class character: public aniModel
 
 
 /*! Character's List */
-class characterList
+class characterList: public dntList
 {
    public:
       /*! List Constructor */
@@ -265,7 +263,11 @@ class characterList
       /*!
        * Remove one character from list
        * \param persona -> character pointer to remove */
-      void removeCharacter(character* persona);
+      void removeCharacter(character* dude);
+
+      /*! Call the delete for a character
+       * \param dude -> pointer to the character */
+      void freeElement(dntListElement* dude);
 
       /*!
        * Gets hostile characters from the list
@@ -293,23 +295,13 @@ class characterList
        * \param dude -> pointer to the new active character */
       void setActiveCharacter(character* dude);
 
-      /*! Get the total number of characters on list
-       * \return current number of characters on list */
-      int getTotal(){return(total);};
-
       /*! Treat Character's general scripts
        * \param actualMap -> current opened map
        * \param NPCs -> current NPCs list  */
       void treatGeneralScripts(Map* actualMap, characterList* NPCs);
 
-      /*! Get the first character at the list */
-      character* getFirst();
-
    protected:
-      character* first;            /**< List Node Pointer */
       character* activeCharacter;  /**< Active Character's on list */
-      int total;                   /**< Total Elements on List */
-
       character* curTreat;         /**< Current NPC To treat Scripts */
 
 };

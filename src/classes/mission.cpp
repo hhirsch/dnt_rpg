@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -497,13 +497,13 @@ void missionsController::completeMission(mission* m, int type)
    if(type > 0)
    {
       engine* eng = (engine*)pEngine;
-      character* dude = eng->PCs->getFirst();
+      character* dude = (character*)eng->PCs->getFirst();
       
       /* Add XP to all PC characters */
       for(i = 0; i < eng->PCs->getTotal(); i++)
       {
          dude->addXP(m->xpValue);
-         dude = dude->next;
+         dude = (character*)dude->getNext();
       }
 
       /* Add 3D Message of success */

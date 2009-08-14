@@ -419,7 +419,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
    {
       if(list)
       {
-         character* pers = list->getFirst();
+         character* pers = (character*)list->getFirst();
          for(j = 0; j < list->getTotal(); j++)
          {
             if(pers != actor)
@@ -453,7 +453,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
                   }
                }
             }
-            pers = pers->next;
+            pers = (character*)pers->getNext();
          }
       }
       /* Change from NPC List to PC list */

@@ -796,11 +796,7 @@ bool character::save(string saveFile)
  *********************************************************************/
 characterList::characterList()
 {
-   total = 0;
    curTreat = NULL;
-   first = new character(NULL);
-   first->next = first;
-   first->previous = first;
 }
 
 /*********************************************************************
@@ -808,15 +804,7 @@ characterList::characterList()
  *********************************************************************/
 characterList::~characterList()
 {
-   character* per = first->next;
-   character* ap;
-   while(per != first)
-   {
-      ap = per;
-      per = per->next;
-      delete(ap);
-   }
-   delete(first);
+   clearList();
 }
 
 /*********************************************************************
@@ -1035,12 +1023,10 @@ character* characterList::insertCharacter(string file, featsList* ft,
    /* Load The 3D Model */ 
    novo->loadModel(arqModelo);
 
+   /* Now insert it on the list */
+   insert(novo);
    
-   novo->next = first->next;
-   novo->previous = first;
-   first->next = novo;
-   novo->next->previous = novo;
-   total++;
+   /* And set it as the active character */
    activeCharacter = novo;
 
    return(novo);
@@ -1049,21 +1035,25 @@ character* characterList::insertCharacter(string file, featsList* ft,
 /*********************************************************************
  *                          removeCharacter                          *
  *********************************************************************/
-void characterList::removeCharacter(character* persona)
+void characterList::removeCharacter(character* dude)
 {
-   /* Remove the character from list */
-   persona->previous->next = persona->next;
-   persona->next->previous = persona->previous;
-   total--;
-
    /* Make shure curTreat still exits */
-   if(persona == curTreat)
+   if(dude == curTreat)
    {
       curTreat = NULL;
    }
 
-   /* Delete the Character */
-   delete(persona);
+   /* Remove the character from the list */
+   remove(dude);
+}
+
+/*********************************************************************
+ *                            freeElement                            *
+ *********************************************************************/
+void characterList::freeElement(dntListElement* dude)
+{
+   character* c = (character*)dude;
+   delete(c);
 }
 
 /*********************************************************************
@@ -1083,14 +1073,6 @@ character* characterList::getEnemyCharacter(character* last)
 }
 
 /*********************************************************************
- *                                getFirst                           *
- *********************************************************************/
-character* characterList::getFirst()
-{
-   return(first->next);
-}
-
-/*********************************************************************
  *                           getActiveCharacter                      *
  *********************************************************************/
 character* characterList::getActiveCharacter()
@@ -1103,7 +1085,7 @@ character* characterList::getActiveCharacter()
  *********************************************************************/
 character* characterList::getCharacter(string fileName)
 {
-   character* ch = first->next;
+   character* ch = (character*)first;
    int i;
 
    /* Search the list for it */
@@ -1113,7 +1095,7 @@ character* characterList::getCharacter(string fileName)
       {
          return(ch);
       }
-      ch = ch->next;
+      ch = (character*)ch->getNext();
    }
 
    return(NULL);
@@ -1124,7 +1106,7 @@ character* characterList::getCharacter(string fileName)
  *********************************************************************/
 character* characterList::getNextSameCharacter(character* ch)
 {
-   character* cur = ch->next;
+   character* cur = (character*)ch->getNext();
 
    /* Search the list for it */
    while( (cur != ch) && (cur != first) )
@@ -1133,7 +1115,7 @@ character* characterList::getNextSameCharacter(character* ch)
       {
          return(cur);
       }
-      cur = cur->next;
+      cur = (character*)cur->getNext();
    }
 
    return(NULL);
@@ -1144,14 +1126,7 @@ character* characterList::getNextSameCharacter(character* ch)
  *********************************************************************/
 void characterList::setActiveCharacter(character* dude)
 {
-   if(dude != first)
-   {
-      activeCharacter = dude;
-   }
-   else
-   {
-      activeCharacter = dude->next;
-   }
+   activeCharacter = dude;
 }
 
 /*********************************************************************
@@ -1175,7 +1150,7 @@ void characterList::treatGeneralScripts(Map* actualMap, characterList* NPCs)
       /* Set, if needed the current character to treat */
       if(!curTreat)
       {
-         curTreat = first->next;
+         curTreat = (character*)first;
       }
             
       /* Get and treat script */
@@ -1194,11 +1169,7 @@ void characterList::treatGeneralScripts(Map* actualMap, characterList* NPCs)
       }
 
       /* forward on the list */
-      curTreat = curTreat->next;
-      if(curTreat == first)
-      {
-         curTreat = curTreat->next;
-      }
+      curTreat = (character*)curTreat->getNext();
    }
 }
 

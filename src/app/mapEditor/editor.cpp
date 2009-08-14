@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -794,7 +794,7 @@ void editor::draw()
    /* Draw the NPCs */
    if(NPCs)
    {
-      character* per = NPCs->getFirst();
+      character* per = (character*)NPCs->getFirst();
       int aux;
       GLfloat x[4]; GLfloat z[4];
       GLfloat min[3],max[3];
@@ -836,7 +836,7 @@ void editor::draw()
                glEnd();*/
             glPopMatrix();
          }
-         per = (character*) per->next;
+         per = (character*) per->getNext();
       }
    }
    glColor4f(1.0,1.0,1.0,1.0);
