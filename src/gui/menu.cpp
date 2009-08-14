@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -83,17 +83,17 @@ guiObject* menu::getItem(int i)
       while(it->type == FARSO_OBJECT_PICTURE)
       {
          /* Ignore Pictures */
-         it = (guiObject*) it->next;
+         it = (guiObject*)it->getNext();
       }
 
       int aux;
       for(aux=1;((aux < i) && (it));aux++)
       {
-         it = (guiObject*) it->next;
+         it = (guiObject*)it->getNext();
          while(it->type == FARSO_OBJECT_PICTURE)
          {
             /* Ignore Pictures */
-            it = (guiObject*) it->next;
+            it = (guiObject*)it->getNext();
          }
       }
       return(it);  
@@ -231,7 +231,7 @@ void menu::draw(int pos, SDL_Surface *screen)
          xa = x1+4;
          ya += MENU_ITEM_HEIGHT;
       }
-      item = (guiObject*)item->next;
+      item = (guiObject*)item->getNext();
    }
   
 }

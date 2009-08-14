@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -31,8 +31,6 @@ using namespace std;
 windowList::windowList()
 {
    activeWindow = NULL;
-   total = 0;
-   first = NULL;
    intMenu = NULL;
 }
 
@@ -50,11 +48,21 @@ windowList::~windowList()
    for(i = 0; i < tot; i++)
    {
       tmp = jan;
-      jan = (window*)jan->next;
+      jan = (window*)jan->getNext();
       delete(tmp);
    }
    total = 0;
 } 
+
+/*********************************************************************
+ *                           freeElement                             *
+ *********************************************************************/
+void windowList::freeElement(dntListElement* obj)
+{
+   /* Delete the window */
+   window* w = (window*)obj;
+   delete(w);
+}
  
 /*********************************************************************
  *                           insertWindow                            *
@@ -62,23 +70,10 @@ windowList::~windowList()
 window* windowList::insertWindow(int xa,int ya,int xb,int yb,string text)
 {
    window* novo;
+
+   /* Create and insert the window on the list */
    novo = new window(xa,ya,xb,yb,text,this);
-
-   if(first == NULL)
-   {
-      novo->next = novo;
-      novo->previous = novo;
-   }
-   else
-   {
-      novo->next = first;
-      novo->previous = first->previous;
-      novo->next->previous = novo;
-      novo->previous->next = novo;
-   }
-
-   first = novo;
-   total++;
+   insert(novo);
 
    return(novo);
 } 
@@ -88,16 +83,6 @@ window* windowList::insertWindow(int xa,int ya,int xb,int yb,string text)
  *********************************************************************/
 void windowList::removeWindow(window *jan)
 {
-   /* Verify if not first */
-   if(first == jan)
-   {
-      first = (window*)jan->next;
-   }
-
-   /* Update Pointers */
-   jan->previous->next = jan->next;
-   jan->next->previous = jan->previous;
-
    /* Verify ActiveWindow Pointer */
    if(jan == activeWindow)
    {
@@ -109,16 +94,7 @@ void windowList::removeWindow(window *jan)
       }
    }
 
-   delete(jan);
-   jan = NULL;
-
-   total--;
-
-   /* Verify if list exits */
-   if(total <= 0)
-   {
-      first = NULL;
-   }
+   remove(jan);
 }
 
 /**************************************************************
@@ -504,10 +480,13 @@ int window::doMove(SDL_Surface* backGround, int xinic, int yinic, int Mbotao)
 
    int x,y;         /* Mouse Coordinates */
 
-   if (Mbotao & SDL_BUTTON(1))
+   if(Mbotao & SDL_BUTTON(1))
    {
+      /* Calculate the translation from window (0,0) coordinate */
       x = xinic - difx; 
       y = yinic - dify;
+
+      /* Verify max bounds */
       if(x + dx > SCREEN_X-1)
       { 
          x -= (x + dx) - (SCREEN_X-1);
@@ -516,10 +495,18 @@ int window::doMove(SDL_Surface* backGround, int xinic, int yinic, int Mbotao)
       {
          y -= (y+dy) - (SCREEN_Y-1);
       }
+
+      /* Verify min bounds */
       if(x < 0)
+      {
          x = 0;
-      if(y <0)
+      }
+      if(y < 0)
+      {
          y = 0;
+      }
+
+      /* Set the new values */
       x1 = x;
       x2 = x + dx;
       y1 = y;
@@ -527,10 +514,10 @@ int window::doMove(SDL_Surface* backGround, int xinic, int yinic, int Mbotao)
    }
    else 
    {
-      //No more pressed the mouse button. Finished
+      /* No more pressed the mouse button. Finished */
       return(0);
    }
-   //Button pressed, continue to move
+   /* mouse button still pressed, continue to move */
    return(1);
 }
 

@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -26,6 +26,8 @@
 #include <string>
 using namespace std;
 
+#include "../etc/list.h"
+
 /*! The farso guiObject types */
 enum
 {
@@ -46,12 +48,10 @@ enum
 };
 
 /*! The Class guiObject is a generic interface to all GUI related objects. */
-class guiObject
+class guiObject : public dntListElement
 {
    public:
       int type;            /**< Object Type */ 
-      guiObject* next;     /**< Next Object On List */
-      guiObject* previous; /**< Previous Object On List */
 
       /*! Constructor */
       guiObject(){available=true;text="";};

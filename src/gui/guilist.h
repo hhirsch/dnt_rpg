@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -24,6 +24,8 @@
 #include <string>
 using namespace std;
 
+#include "../etc/list.h"
+
 #include "guiobject.h"
 #include "button.h"
 #include "cxsel.h"
@@ -38,7 +40,7 @@ using namespace std;
 #include "healthBar.h"
 
 /*! The guiList Class: a list for guiObjects. */
-class guiList
+class guiList: public dntList
 {
    public:
       /*! Constructor */
@@ -54,9 +56,9 @@ class guiList
        * \param surface -> SDL_Surface to draw to */
       void draw(SDL_Surface* surface);
 
-      /*! Remove Object From the List
-       * \param obj -> pointer to the object to remove */
-      void removeObject(guiObject* obj);
+      /*! Free Element
+       * \param obj -> pointer to the object to free */
+      void freeElement(dntListElement* obj);
 
       /*! Insert a Button on List
        * \param xa -> x1 coordinate
@@ -196,23 +198,9 @@ class guiList
       /*! Set the window Surface to use */
       void setSurface(SDL_Surface* surface){wSurface=surface;};
 
-      /*! Get the first object on the list
-       * \return pointer to first object on list */
-      guiObject* getFirst(){return(first);};
-
-      /*! Get total objects on list
-       * \return number of objects on the list */
-      int getTotal(){return(total);};
-
    protected:
-      /*! Insert the object on the list, actualizing the pointers
-       * \param obj -> pointer to guiObject to insert */
-      void insertObject(guiObject* obj);
-
       SDL_Surface* wSurface;  /**< window surface used */
-
-      int total;         /**< Total Itens on List */
-      guiObject *first;  /**< Head Node */
+      
       guiObject* intMenu; /**< The internal Menu of the List */
       guiObject* tab;    /**< Inner tabBox */
 

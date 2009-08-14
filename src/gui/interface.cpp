@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -69,7 +69,7 @@ void guiInterface::verifyMouseInObjects(int x, int y, guiList* list)
    }
 
    guiObject *obj;
-   obj = list->getFirst();
+   obj = (guiObject*)list->getFirst();
    for(aux=0; aux < list->getTotal(); aux++)
    {
       /* Test selTexto */
@@ -95,7 +95,7 @@ void guiInterface::verifyMouseInObjects(int x, int y, guiList* list)
             focus = FARSO_FOCUS_TAB_BUTTON;
          }
       }
-      obj = obj->next;
+      obj = (guiObject*)obj->getNext();
    }
 
    /* Verify TabBox, if defined */
@@ -117,7 +117,7 @@ void guiInterface::verifyMousePressObjects(int x, int y, guiList* list)
    }
 
    /* Here are the internal windows clicks verification */
-   guiObject *obj = list->getFirst();
+   guiObject *obj = (guiObject*)list->getFirst();
    int aux;
 
    for(aux=0; aux < list->getTotal(); aux++)
@@ -174,7 +174,7 @@ void guiInterface::verifyMousePressObjects(int x, int y, guiList* list)
             focus = FARSO_FOCUS_SEL_TEXT;
          }
       }
-      obj = obj->next;
+      obj = (guiObject*)obj->getNext();
    }
 
    /* Verify inner tabbox if defined */
@@ -230,7 +230,7 @@ bool guiInterface::verifyRolBars(guiList* list)
 
    /* Now search it for rolBars */
    guiObject *obj;
-   obj = list->getFirst();
+   obj = (guiObject*)list->getFirst();
    int aux;
    for(aux=0; aux < list->getTotal(); aux++)
    {
@@ -244,7 +244,7 @@ bool guiInterface::verifyRolBars(guiList* list)
             return(true);
          }
       }
-      obj = obj->next;
+      obj = (guiObject*)obj->getNext();
    }
 
    /* Verify Nested tabBox */
@@ -281,7 +281,8 @@ guiObject* guiInterface::verifyFileSelectorsEvents(guiObject* actObj,
                                                    int& eventInfo)
 {
    int aux;
-   guiObject *obj = ljan->getActiveWindow()->getObjectsList()->getFirst();
+   guiObject *obj = (guiObject*)
+                          ljan->getActiveWindow()->getObjectsList()->getFirst();
 
    /* pass all objects, treating file selectors */
    for(aux=0; aux < ljan->getActiveWindow()->getObjectsList()->getTotal(); 
@@ -312,7 +313,7 @@ guiObject* guiInterface::verifyFileSelectorsEvents(guiObject* actObj,
             focus = FARSO_FOCUS_GAME;
          }
       }
-      obj = obj->next;
+      obj = (guiObject*)obj->getNext();
    }
    return(actObj);
 }
@@ -324,7 +325,8 @@ guiObject* guiInterface::verifyCompositeEvents(guiObject* actObj,
                                                int& eventInfo)
 {
    int aux;
-   guiObject *obj = ljan->getActiveWindow()->getObjectsList()->getFirst();
+   guiObject *obj = (guiObject*)
+                          ljan->getActiveWindow()->getObjectsList()->getFirst();
 
    /* pass all objects, treating those composited */
    for(aux=0; aux < ljan->getActiveWindow()->getObjectsList()->getTotal(); 
@@ -343,7 +345,7 @@ guiObject* guiInterface::verifyCompositeEvents(guiObject* actObj,
             return(lt);
          }
       }
-      obj = obj->next;
+      obj = (guiObject*)obj->getNext();
    }
 
    /* Verify Warning Window */
@@ -474,7 +476,7 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
                     mouseX = -1;
                     return((guiObject*) jaux);
                }
-               jaux = (window*) jaux->next;
+               jaux = (window*) jaux->getNext();
            }
         } 
     }
@@ -736,7 +738,7 @@ void guiInterface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
          jan->render(depth);
           depth += 0.001;
       }
-      jan = (window*) jan->next;
+      jan = (window*) jan->getNext();
    }
 
    /* Draw Active Window */
@@ -792,7 +794,7 @@ void guiInterface::closeAllWindows()
    for(i = 0; i < total; i++)
    {
       tmp = j;
-      j = (window*)j->next;
+      j = (window*)j->getNext();
       closeWindow(tmp);
    }
    clearActiveObject();
@@ -827,7 +829,7 @@ bool guiInterface::mouseOnGui(int mouseX, int mouseY)
       {
          return(true);
       }
-      jaux = (window*) jaux->next;
+      jaux = (window*) jaux->getNext();
    }
    return(false);
 }
@@ -842,7 +844,7 @@ void guiInterface::hideAll()
    for(aux=0; aux < ljan->getTotal(); aux++)
    {
       jaux->hide();
-      jaux = (window*) jaux->next;
+      jaux = (window*) jaux->getNext();
    }
 }
 
@@ -856,7 +858,7 @@ void guiInterface::showAll()
    for(aux=0; aux < ljan->getTotal(); aux++)
    {
       jaux->show();
-      jaux = (window*) jaux->next;
+      jaux = (window*) jaux->getNext();
    }
 }
 

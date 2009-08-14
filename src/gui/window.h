@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -168,7 +168,7 @@ class window: public guiObject
 };
 
 /*! The List of Windows Class (windowList) */
-class windowList
+class windowList: public dntList
 {
    public:
       /*! Constructor */
@@ -197,16 +197,6 @@ class windowList
        * \param jan -> pointer to the new active window */
       void setActiveWindow(window* jan){activeWindow = jan;};
 
-
-      /*! Get the first window on the list (head Node)
-       * \return pointer to the first list */
-      window* getFirst(){return(first);};
-
-      /*! Get the total number of windows on list
-       * \return number of windows on list */
-      int getTotal(){return(total);};
-
-
       /*! Add a internal Menu to the list
        * \return menu Inserted */
       guiObject* addMenu();
@@ -217,11 +207,14 @@ class windowList
 
       /*! Remove Internal Menu, if exists one. */
       void removeMenu();
+
+      /*! Delete a window pointer
+       * \param obj -> pointer to the window */
+      void freeElement(dntListElement* obj);
+
    protected:
       window* activeWindow;   /**< The Active Window */
-      window* first;          /**< Head Node */
       guiObject* intMenu;     /**< The internal Menu of the List */
-      int total;              /**< Total Windows on the list */
 }; 
 
 

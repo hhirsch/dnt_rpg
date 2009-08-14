@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -42,16 +42,16 @@ guiList::guiList()
  **************************************************************/
 guiList::~guiList()
 {
-   int tot = total;
-   int aux;
-   for(aux = 0; aux < tot;aux++)
-   {
-      removeObject(first);
-   }
+   /* Clear the list */
+   clearList();
+
+   /* Remove internal menu, if any */
    if(intMenu)
    {
       removeMenu();
    }
+
+   /* Remove internal tab, if any */
    if(tab)
    {
       delete(tab);
@@ -65,12 +65,12 @@ bool guiList::changed()
 {
    bool result = false;
 
-   guiObject *obj= first;
+   guiObject *obj = (guiObject*)first;
    int aux;
    for(aux=0; aux < total; aux++)
    {
       result |= obj->changed();
-      obj = obj->next;
+      obj = (guiObject*)obj->getNext();
    }
 
    /* Verify tabBox Objects */
@@ -93,7 +93,7 @@ bool guiList::changed()
  **************************************************************/
 void guiList::draw(SDL_Surface* surface)
 {
-   guiObject *obj = first;
+   guiObject *obj = (guiObject*)first;
    int aux;
    for(aux=0; aux < total; aux++)
    {
@@ -151,7 +151,7 @@ void guiList::draw(SDL_Surface* surface)
          default:break;
        
       } //case
-      obj = obj->next;
+      obj = (guiObject*)obj->getNext();
    }
 
    /* TabBox Draw */
@@ -162,22 +162,14 @@ void guiList::draw(SDL_Surface* surface)
 }
 
 /**************************************************************
- *                         removeObject                       *
+ *                         freeElement                        *
  **************************************************************/
-void guiList::removeObject(guiObject *obj)
+void guiList::freeElement(dntListElement *obj)
 {
-   /* Update first, if needed */
-   if(obj == first)
-   {
-      first = obj->next;
-   }
-
-   /* Update pointers */
-   obj->previous->next = obj->next;
-   obj->next->previous = obj->previous;
+   guiObject* gobj = (guiObject*)obj;
 
    /* Delete the memory used */
-   switch (obj->type) 
+   switch(gobj->type) 
    {
       case FARSO_OBJECT_BUTTON:
       {
@@ -252,36 +244,6 @@ void guiList::removeObject(guiObject *obj)
       }
    }
 
-   /* Decrement things */
-   total--;
-
-   /* Verify if list still exists */
-   if(total <= 0)
-   {
-      first = NULL;
-   }
-}
-
-/**************************************************************
- *                         insertObject                       *
- **************************************************************/
-void guiList::insertObject(guiObject* obj)
-{
-   if(first == NULL)
-   {
-      obj->next = obj;
-      obj->previous = obj;
-   }
-   else
-   {
-      obj->next = first;
-      obj->previous = first->previous;
-      obj->next->previous = obj;
-      obj->previous->next = obj;
-   }
-
-   first = obj;
-   total++;
 }
 
 /**************************************************************
@@ -292,7 +254,7 @@ button* guiList::insertButton(int xa,int ya,int xb,int yb,
 {
    button* novo;
    novo = new button(xa,ya,xb,yb, text, oval);
-   insertObject(novo);
+   insert(novo);
    return(novo);
 }
 
@@ -304,7 +266,7 @@ cxSel* guiList::insertCxSel(int xa,int ya, bool selected)
    cxSel* novo;
    novo = new cxSel(xa, ya);
    novo->setSelection(selected);
-   insertObject(novo);
+   insert(novo);
    return(novo);
 }
 
@@ -315,7 +277,7 @@ picture* guiList::insertPicture(int x,int y,int w,int h,const char* arquivo)
 {
    picture* novo;
    novo = new picture(x,y,w,h,arquivo);
-   insertObject(novo);
+   insert(novo);
    return(novo);
 } 
 
@@ -334,7 +296,7 @@ tabButton* guiList::insertTabButton(int x,int y,int w,int h,const char* arquivo)
    {
       novo = new tabButton(x,y,w,h);
    }
-   insertObject(novo);
+   insert(novo);
    return(novo);
 } 
 
@@ -346,7 +308,7 @@ textBar* guiList::insertTextBar(int xa,int ya,int xb,int yb, string text,
 {
    textBar* novo;
    novo = new textBar(xa,ya,xb,yb, text, cript, wSurface);
-   insertObject(novo);
+   insert(novo);
    return(novo);
 } 
 
@@ -359,7 +321,7 @@ textBox* guiList::insertTextBox(int xa,int ya,int xb,int yb,
    textBox* novo;
    novo = new textBox(xa,ya,xb,yb,frameType,wSurface);
    novo->setText(text);
-   insertObject(novo);
+   insert(novo);
    return(novo);
 } 
 
@@ -373,7 +335,7 @@ selText* guiList::insertSelText(int xa,int ya,int xb,int yb,
 {
    selText* novo;
    novo = new selText(xa,ya,xb,yb,text0,text1,text2,text3,text4,wSurface);
-   insertObject(novo);
+   insert(novo);
    return(novo);
 } 
 
@@ -384,7 +346,7 @@ rolBar* guiList::insertRolBar(int xa,int ya,int xb,int yb,string txt)
 {
    rolBar* novo;
    novo = new rolBar(xa,ya,xb,yb,txt, this, wSurface);
-   insertObject(novo);
+   insert(novo);
    return(novo);
 }
 
@@ -395,7 +357,7 @@ listText* guiList::insertListText(int xa,int ya,int xb,int yb)
 {
    listText* novo;
    novo = new listText(xa,ya,xb,yb, wSurface, this);
-   insertObject(novo);
+   insert(novo);
    return(novo);
 }
 
@@ -406,7 +368,7 @@ fileSel* guiList::insertFileSel(int xa, int ya, bool load,
                                 string dir, bool nav)
 {
    fileSel* n = new fileSel(xa, ya, load, dir, this, nav);
-   insertObject(n);
+   insert(n);
    return(n);
 }
 
@@ -416,7 +378,7 @@ fileSel* guiList::insertFileSel(int xa, int ya, bool load,
 healthBar* guiList::insertHealthBar(int xa, int ya, int xb, int yb, int max)
 {
    healthBar* n = new healthBar(xa, ya, xb, yb);
-   insertObject(n);
+   insert(n);
    n->defineMaxHealth(max);
    return(n);
 }
