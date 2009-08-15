@@ -39,19 +39,7 @@ windowList::windowList()
  *********************************************************************/
 windowList::~windowList()
 {
-   int i;
-   int tot = total;
-   window* jan;
-   window* tmp;
-   jan = (window*)first;
-
-   for(i = 0; i < tot; i++)
-   {
-      tmp = jan;
-      jan = (window*)jan->getNext();
-      delete(tmp);
-   }
-   total = 0;
+   clearList();
 } 
 
 /*********************************************************************
@@ -89,7 +77,7 @@ void windowList::removeWindow(window *jan)
       activeWindow = NULL;
       if((total > 1))
       {
-         window* j = (window*)first;
+         window* j = (window*)jan->getNext();
          j->activate();
       }
    }

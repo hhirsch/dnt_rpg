@@ -785,18 +785,7 @@ void guiInterface::closeWindow(window *jan)
  *********************************************************************/
 void guiInterface::closeAllWindows()
 {
-   int i;
-   int total = ljan->getTotal();
-
-   window* j = (window*)ljan->getFirst();
-   window* tmp;
-
-   for(i = 0; i < total; i++)
-   {
-      tmp = j;
-      j = (window*)j->getNext();
-      closeWindow(tmp);
-   }
+   ljan->clearList();
    clearActiveObject();
 }
 

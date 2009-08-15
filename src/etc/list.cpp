@@ -115,6 +115,9 @@ void dntList::clearList()
       e = e->getNext();
       freeElement(paux);
    }
+
+   first = NULL;
+   total = 0;
 }
 
 /***********************************************************************
