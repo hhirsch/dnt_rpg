@@ -106,12 +106,14 @@ void dntList::clearList()
 {
    int i;
    dntListElement* e = first;
+   dntListElement* paux;
 
    /* Delete all elements */
    for(i=0; i<total; i++)
    {
+      paux = e;
       e = e->getNext();
-      freeElement(e->getPrevious());
+      freeElement(paux);
    }
 }
 
