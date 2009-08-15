@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -21,6 +21,8 @@
 #ifndef _dnt_message3d_h
 #define _dnt_message3d_h
 
+#include "list.h"
+
 #include <SDL/SDL_opengl.h>
 #include <SDL/SDL.h>
 #include <string>
@@ -30,7 +32,7 @@ using namespace std;
 
 /*! It's a message on the 3D world, that will be show, and will 
  * go upwards until time elapsed. */
-class message3d
+class message3d: public dntListElement
 {
    public:
       /*! Constructor
@@ -77,8 +79,22 @@ class message3d
       string message;        /**< the message to show */
       GLuint messageTexture; /**< The texture load by the message */
       int live;              /**< Time living */
-      message3d* next;       /**< Next message on list */
-      message3d* previous;   /**< Previous message on list */
+};
+
+/*! The message 3d list */
+class message3dList: public dntList
+{
+   public:
+      /*! Constructor */
+      message3dList();
+
+      /*! Destructor */
+      ~message3dList();
+
+   protected:
+      /*! Delete a message3d object
+       * \param obj -> pointer to the message3d to delete */
+      void freeElement(dntListElement* obj);
 };
 
 /*! The message3d controller */
@@ -123,16 +139,7 @@ class messageController
 
 
    protected:
-      /*! Remove message from controller
-       * \param msg -> pointer to the message to remove */
-      void removeMessage(message3d* msg);
-
-      /*! Add a message to the controller
-       * \param m -> pointer to the message to add */
-      void addMessage(message3d* m);
-
-      static message3d* first;    /**< The first message on the list */
-      static int total;           /**< Total messages on the list */
+      static message3dList* list;  /**< The messages chain list */
 };
 
 #endif

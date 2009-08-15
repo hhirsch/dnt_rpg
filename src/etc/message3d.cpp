@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -23,6 +23,11 @@
 #include "../gui/draw.h"
 #include "../engine/options.h"
 
+///////////////////////////////////////////////////////////////////////////
+//                                                                       //
+//                              message3d                                //
+//                                                                       //
+///////////////////////////////////////////////////////////////////////////
 
 /***********************************************************
  *                       Constructor                       *
@@ -100,6 +105,43 @@ message3d::~message3d()
    glDeleteTextures(1,&messageTexture);
 }
 
+///////////////////////////////////////////////////////////////////////////
+//                                                                       //
+//                            message3dList                              //
+//                                                                       //
+///////////////////////////////////////////////////////////////////////////
+
+/***********************************************************
+ *                       Constructor                       *
+ ***********************************************************/
+message3dList::message3dList()
+{
+}
+
+/***********************************************************
+ *                        Destructor                       *
+ ***********************************************************/
+message3dList::~message3dList()
+{
+   clearList();
+}
+
+/***********************************************************
+ *                        FreeElement                      *
+ ***********************************************************/
+void message3dList::freeElement(dntListElement* obj)
+{
+   message3d* m = (message3d*)obj;
+   delete(m);
+}
+
+
+///////////////////////////////////////////////////////////////////////////
+//                                                                       //
+//                           messageController                           //
+//                                                                       //
+///////////////////////////////////////////////////////////////////////////
+
 /***********************************************************
  *                       Constructor                       *
  ***********************************************************/
@@ -119,8 +161,7 @@ messageController::~messageController()
  ***********************************************************/
 void messageController::init()
 {
-   first = NULL;
-   total = 0;
+   list = new message3dList();
 }
 
 /***********************************************************
@@ -128,11 +169,10 @@ void messageController::init()
  ***********************************************************/
 void messageController::finish()
 {
-   while(total > 0)
+   if(list)
    {
-      removeMessage(first);
+      delete(list);
    }
-   total = 0;
 }
 
 /***********************************************************
@@ -143,7 +183,7 @@ void messageController::addMessage(GLfloat x, GLfloat y, GLfloat z, string msg)
    if(!msg.empty())
    {
       message3d* m = new message3d(x,y,z,msg);
-      addMessage(m);
+      list->insert(m);
    }
 }
 
@@ -156,53 +196,7 @@ void messageController::addMessage(GLfloat x, GLfloat y, GLfloat z, string msg,
    if(!msg.empty())
    {
       message3d* m = new message3d(x,y,z,msg, R, G, B);
-      addMessage(m);
-   }
-}
-
-/***********************************************************
- *                           add                           *
- ***********************************************************/
-void messageController::addMessage(message3d* m)
-{
-   if(m)
-   {
-      if(first)
-      {
-         m->next = first;
-         m->previous = first->previous;
-         m->next->previous = m;
-         m->previous->next = m;
-      }
-      else
-      {
-         m->next = m;
-         m->previous = m;
-      }
-      first = m;
-      total++;
-   }
-}
-
-/***********************************************************
- *                          remove                         *
- ***********************************************************/
-void messageController::removeMessage(message3d* msg)
-{
-   if(msg)
-   {
-      if(msg == first)
-      {
-         first = first->next;
-      }
-      msg->next->previous = msg->previous;
-      msg->previous->next = msg->next;
-      delete(msg);
-      total--;
-      if(total <= 0)
-      {
-         first = NULL;
-      }
+      list->insert(m);
    }
 }
 
@@ -213,8 +207,8 @@ void messageController::draw(GLdouble modelView[16], GLdouble projection[16],
                              GLint viewPort[4])
 {
    int i;
-   int tot = total;
-   message3d* msg = first;
+   int tot = list->getTotal();
+   message3d* msg = (message3d*)list->getFirst();
    options option;
 
    GLdouble winX=0, winY=0, winZ=0;
@@ -258,12 +252,12 @@ void messageController::draw(GLdouble modelView[16], GLdouble projection[16],
 
       msg->live++;
       msg->posY += 0.5f;
-      msg = msg->next;
+      msg = (message3d*)msg->getNext();
 
       /* Verify if the message elapsed */
-      if(msg->previous->live > MESSAGE3D_MAX_TIME)
+      if(((message3d*)msg->getPrevious())->live > MESSAGE3D_MAX_TIME)
       {
-         removeMessage(msg->previous);
+         list->remove(msg->getPrevious());
       }
    }
 
@@ -276,6 +270,5 @@ void messageController::draw(GLdouble modelView[16], GLdouble projection[16],
 /***********************************************************
  *                   static members                        *
  ***********************************************************/
-message3d* messageController::first = NULL;
-int messageController::total = 0;
+message3dList* messageController::list = NULL;
 
