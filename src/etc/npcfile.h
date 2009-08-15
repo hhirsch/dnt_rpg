@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -25,8 +25,10 @@
 #include <string>
 using namespace std;
 
+#include "list.h"
+
 /*! A temporaly parse struct for npcs */
-class npcParseStruct
+class npcParseStruct: public dntListElement
 {
    public:
       string name;       /**< The NPC name */
@@ -34,15 +36,12 @@ class npcParseStruct
       GLfloat posX,      /**< The NPC Initial X Position */
               posZ,      /**< The NPC Initial Z Position */
               angle;     /**< The NPC Initial Orientation Angle */
-
-      npcParseStruct* next;      /**< Next on the list */
-      npcParseStruct* previous;  /**< Previous on the list */
 };
 
 /*! The NPC file is used to load lists of npcs, with its positions,
  * to later really load its models or just verify its state (allDead, allAlive,
  * etc.) at the modState controller. */
-class npcFile
+class npcFile: public dntList
 {
    public:
       /*! Constructor */
@@ -61,7 +60,7 @@ class npcFile
        * \return -> true if can save, false otherwise */
       bool save(string fileName);
 
-      /*! Get the next character got readed from the file
+      /*! Get the next character readed from the file
        * \param name -> name of the npc
        * \param fileName -> fileName of the character got
        * \param posX -> X position of the character got 
@@ -83,10 +82,13 @@ class npcFile
       /*! Kill All NPCs defined by the NPC file */
       void killAll();
 
-   protected:      
+   protected:
+
+      /*! Delete a npcParseStruct
+       * \param obj -> pointer to delete */
+      void freeElement(dntListElement* obj);
+
       string npcFileName;        /**< Name of the NPC list file opened */
-      npcParseStruct* list;      /**< NPCs definitions list */
-      int total;                 /**< Total NPCs on the list */
       npcParseStruct* current;   /**< Current NPC */
 
 };

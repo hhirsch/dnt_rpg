@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -36,8 +36,6 @@ using namespace std;
 npcFile::npcFile()
 {
    current = NULL;
-   list = NULL;
-   total = 0;
    npcFileName = "";
 }
 
@@ -46,15 +44,16 @@ npcFile::npcFile()
  ***********************************************************************/
 npcFile::~npcFile()
 {
-   int i;
-   current = list;
+   clearList();
+}
 
-   /* Delete all list elements */
-   for(i=0; i < total; i++)
-   {
-      current = current->next;
-      delete(current->previous);
-   }
+/***********************************************************************
+ *                         freeElement                                 *
+ ***********************************************************************/
+void npcFile::freeElement(dntListElement* obj)
+{
+   npcParseStruct* npc = (npcParseStruct*)obj;
+   delete(npc);
 }
 
 /***********************************************************************
@@ -110,6 +109,7 @@ bool npcFile::save(string fileName)
 void npcFile::insertCharacter(string name, string fileName, GLfloat posX, 
                               GLfloat posZ, GLfloat angle)
 {
+   /* create and define the character */
    npcParseStruct* npc = new npcParseStruct();
    npc->name = name;
    npc->fileName = fileName;
@@ -117,22 +117,8 @@ void npcFile::insertCharacter(string name, string fileName, GLfloat posX,
    npc->posZ = posZ;
    npc->angle = angle;
 
-   /* Really insert at the list */
-   if(list)
-   {
-      npc->next = list;
-      npc->previous = list->previous;
-      npc->previous->next = npc;
-      npc->next->previous = npc;
-   }
-   else
-   {
-      npc->next = npc;
-      npc->previous = npc;
-   }
-
-   list = npc;
-   total++;
+   /* insert on the list */
+   insert(npc);
 }
 
 /***********************************************************************
@@ -147,13 +133,13 @@ bool npcFile::getNextCharacter(string& name, string& fileName, GLfloat& posX,
    {
       if(!current)
       {
-         current = list;
+         current = (npcParseStruct*)first;
          res = true;
       }
       else
       {
-         current = current->next;
-         res = (current != list);
+         current = (npcParseStruct*)current->getNext();
+         res = (current != first);
       }
    }
 
@@ -175,7 +161,7 @@ bool npcFile::getNextCharacter(string& name, string& fileName, GLfloat& posX,
  ***********************************************************************/
 void npcFile::killAll()
 {
-   npcParseStruct* npc = list;
+   npcParseStruct* npc = (npcParseStruct*)first;
    int i;
    string mapFileName = "";
    modState modif;
@@ -195,7 +181,7 @@ void npcFile::killAll()
                                   npc->posX, 0.0, npc->posZ, npc->angle,
                                   npc->posX, npc->posZ);
 
-      npc = npc->next;
+      npc = (npcParseStruct*)npc->getNext();
    }
 }
 
