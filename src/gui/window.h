@@ -208,11 +208,13 @@ class windowList: public dntList
       /*! Remove Internal Menu, if exists one. */
       void removeMenu();
 
+   protected:
+
       /*! Delete a window pointer
        * \param obj -> pointer to the window */
       void freeElement(dntListElement* obj);
 
-   protected:
+
       window* activeWindow;   /**< The Active Window */
       guiObject* intMenu;     /**< The internal Menu of the List */
 }; 

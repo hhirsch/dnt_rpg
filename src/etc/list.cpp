@@ -135,18 +135,17 @@ bool dntList::insert(dntListElement* obj)
       /* It's the only element */
       obj->setNext(obj);
       obj->setPrevious(obj);
+      first = obj;
    }
    else
    {
-      /* Insert it before the first */
+      /* Insert it before the first (aka: the last) */
       obj->setNext(first);
       obj->setPrevious(first->getPrevious());
       obj->getNext()->setPrevious(obj);
       obj->getPrevious()->setNext(obj);
    }
 
-   /* Be the first */
-   first = obj;
    total++;
 
    return(true);

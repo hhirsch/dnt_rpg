@@ -265,10 +265,6 @@ class characterList: public dntList
        * \param persona -> character pointer to remove */
       void removeCharacter(character* dude);
 
-      /*! Call the delete for a character
-       * \param dude -> pointer to the character */
-      void freeElement(dntListElement* dude);
-
       /*!
        * Gets hostile characters from the list
        * \param last -> last hostile taken
@@ -301,6 +297,12 @@ class characterList: public dntList
       void treatGeneralScripts(Map* actualMap, characterList* NPCs);
 
    protected:
+   
+      /*! Call the delete for a character
+       * \param dude -> pointer to the character */
+      void freeElement(dntListElement* dude);
+
+
       character* activeCharacter;  /**< Active Character's on list */
       character* curTreat;         /**< Current NPC To treat Scripts */
 

@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -32,8 +32,6 @@
  ***********************************************************************/
 defTuple::defTuple()
 {
-   next = NULL;
-   previous = NULL;
    value = "";
    key = "";
 }
@@ -78,39 +76,6 @@ string defTuple::getKey()
    return(key);
 }
 
-/***********************************************************************
- *                              setNext                                *
- ***********************************************************************/
-void defTuple::setNext(defTuple* n)
-{
-   next = n;
-}
-
-/***********************************************************************
- *                             setPrevious                             *
- ***********************************************************************/
-void defTuple::setPrevious(defTuple* p)
-{
-   previous = p;
-}
-
-/***********************************************************************
- *                              getNext                                *
- ***********************************************************************/
-defTuple* defTuple::getNext()
-{
-   return(next);
-}
-
-/***********************************************************************
- *                             getPrevious                             *
- ***********************************************************************/
-defTuple* defTuple::getPrevious()
-{
-   return(previous);
-}
-
-
 ///////////////////////////////////////////////////////////////////////////
 //                                                                       //
 //                               defParser                               //
@@ -122,8 +87,6 @@ defTuple* defTuple::getPrevious()
  ***********************************************************************/
 defParser::defParser()
 {
-   totalTuples = 0;
-   firstTuple = NULL;
    curTuple = NULL;
 }
 
@@ -132,14 +95,16 @@ defParser::defParser()
  ***********************************************************************/
 defParser::~defParser()
 {
-   int i;
-   defTuple* aux;
-   /* Remove all tuples */
-   for(i=0; i < totalTuples; i++)
-   {
-      aux = firstTuple;
-      firstTuple = firstTuple->getNext();
-   }
+   clearList();
+}
+
+/***********************************************************************
+ *                           freeElement                               *
+ ***********************************************************************/
+void defParser::freeElement(dntListElement* obj)
+{
+   defTuple* tuple = (defTuple*)obj;
+   delete(tuple);
 }
 
 /***********************************************************************
@@ -149,32 +114,11 @@ void defParser::insertTuple(string key, string value)
 {
    defTuple* tuple = new defTuple();
  
-   //cout << "Inserting tuple '" << key << "' value '" << value << "'" << endl;
-
    /* Set tuple values */
    tuple->setKey(key);
    tuple->setValue(value);
 
-   if(firstTuple == NULL)
-   {
-      /* It's the first tuple */
-      firstTuple = tuple;
-
-      tuple->setNext(tuple);
-      tuple->setPrevious(tuple);
-   }
-   else
-   {
-      /* Insert it at list's end */
-      tuple->setNext(firstTuple);
-      tuple->setPrevious(firstTuple->getPrevious());
-
-      tuple->getNext()->setPrevious(tuple);
-      tuple->getPrevious()->setNext(tuple);
-   }
- 
-   /* Inc it */
-   totalTuples++;
+   insert(tuple);
 }
 
 /***********************************************************************
@@ -182,7 +126,7 @@ void defParser::insertTuple(string key, string value)
  ***********************************************************************/
 bool defParser::getNextTuple(string& key, string& value)
 {
-   if(totalTuples <= 0)
+   if(total <= 0)
    {
       /* No tuples to get */
       return(false);
@@ -191,9 +135,9 @@ bool defParser::getNextTuple(string& key, string& value)
    if(curTuple == NULL)
    {
       /* Will get first tuple */
-      curTuple = firstTuple;
+      curTuple = (defTuple*)first;
    }
-   else if(curTuple->getNext() == firstTuple)
+   else if(curTuple->getNext() == first)
    {
       /* No more tuples to get */
       return(false);
@@ -201,7 +145,7 @@ bool defParser::getNextTuple(string& key, string& value)
    else
    {
       /* Get the Next Tuple */
-      curTuple = curTuple->getNext();
+      curTuple = (defTuple*)curTuple->getNext();
    }
 
    /* Set the tuple */

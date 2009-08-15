@@ -77,11 +77,7 @@ class dntList
        * \return true if ok :*/
       bool remove(dntListElement* obj);
 
-      /*! Free an element (deleting it)
-       * \param obj -> object to free */
-      virtual void freeElement(dntListElement* obj)=0;
-
-      /*! Get total elements on the list
+       /*! Get total elements on the list
        * \return total elements on the list */
       int getTotal();
 
@@ -90,6 +86,11 @@ class dntList
       dntListElement* getFirst();
 
    protected:
+
+      /*! Free an element (deleting it)
+       * \param obj -> object to free */
+      virtual void freeElement(dntListElement* obj)=0;
+
       dntListElement* first;          /**< Pointer to the first list element */
       int total;                      /**< Total elements on the list */
 };

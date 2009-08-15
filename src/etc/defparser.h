@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -26,8 +26,10 @@
 #include <fstream>
 using namespace std;
 
+#include "list.h"
+
 /*! The defTuple class is a representaton of a tuple "key = value"  */
-class defTuple
+class defTuple: public dntListElement
 {
    public:
       /*! Constructor */
@@ -49,32 +51,15 @@ class defTuple
        * \return -> current tuple key */
       string getKey();
 
-      /*! Set the next tuple on list
-       * \param n -> pointer to the next tuple */
-      void setNext(defTuple* n);
-      /*! Set the previous tuple on list
-       * \param p -> pointer to the previous tuple */
-      void setPrevious(defTuple* p);
-
-      /*! Get the next tuple on list
-       * \return -> pointer to the next tuple */
-      defTuple* getNext();
-      /*! Get the previous tuple on list
-       * \return -> pointer tot the previous tuple */
-      defTuple* getPrevious();
-
    protected:
       string value;         /**< Tuple Value */
       string key;           /**< Tuple Key */
-
-      defTuple* next;       /**< Next Tuple */
-      defTuple* previous;   /**< Previous Tuple */
 };
 
 /*! The defParser class is the implementation of a definitions
  * file parser (those with "key = value"). It generate tuples of 
  * keys and values to be interpreted by the real file interpreter. */
-class defParser
+class defParser: public dntList
 {
    public:
       /*! Constructor */
@@ -97,14 +82,15 @@ class defParser
 
    protected:
 
+      /*! Free a defTuple object
+       * \param obj -> pointer to the deftuple to free */
+      void freeElement(dntListElement* obj);
+
       /*! Insert a tuple into linked list
        * \param key -> tuple key
        * \param value -> tuple value */
       void insertTuple(string key, string value);
 
-      defTuple* firstTuple;    /**< Tuples Circular Linked List */
-      int totalTuples;         /**< Total Tuples on list */
-      
       defTuple* curTuple;      /**< Current Tuple */
 };
 

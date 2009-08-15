@@ -56,10 +56,6 @@ class guiList: public dntList
        * \param surface -> SDL_Surface to draw to */
       void draw(SDL_Surface* surface);
 
-      /*! Free Element
-       * \param obj -> pointer to the object to free */
-      void freeElement(dntListElement* obj);
-
       /*! Insert a Button on List
        * \param xa -> x1 coordinate
        * \param ya -> y1 coordinate
@@ -199,6 +195,13 @@ class guiList: public dntList
       void setSurface(SDL_Surface* surface){wSurface=surface;};
 
    protected:
+
+      /*! Free Element
+       * \param obj -> pointer to the object to free */
+      void freeElement(dntListElement* obj);
+
+
+
       SDL_Surface* wSurface;  /**< window surface used */
       
       guiObject* intMenu; /**< The internal Menu of the List */
