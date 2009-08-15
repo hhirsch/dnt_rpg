@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -30,7 +30,7 @@
 /***********************************************************************
  *                            Constructor                              *
  ***********************************************************************/
-renderTexture::renderTexture(GLuint id, string name): bTreeCell()
+renderTexture::renderTexture(GLuint id, string name)
 {
    /* Define texture Info */
    textureId = id;
@@ -62,38 +62,6 @@ renderTexture::~renderTexture()
    {
       delete[] normalBuffer;
    }
-}
-
-/***********************************************************************
- *                               setNext                               *
- ***********************************************************************/
-void renderTexture::setNext(renderTexture* rt)
-{
-   next = rt;
-}
-
-/***********************************************************************
- *                             setPrevious                             *
- ***********************************************************************/
-void renderTexture::setPrevious(renderTexture* rt)
-{
-   previous = rt;
-}
-
-/***********************************************************************
- *                              getNext                                *
- ***********************************************************************/
-renderTexture* renderTexture::getNext()
-{
-   return(next);
-}
-
-/***********************************************************************
- *                             getPrevious                             *
- ***********************************************************************/
-renderTexture* renderTexture::getPrevious()
-{
-   return(previous);
 }
 
 /***********************************************************************
@@ -290,10 +258,8 @@ void renderTexture::merge(bTreeCell* cell)
 /***********************************************************************
  *                            Constructor                              *
  ***********************************************************************/
-texRenderer::texRenderer():bTree()
+texRenderer::texRenderer()
 {
-   texList = NULL;
-   totalTextures = 0;
 }
 
 /***********************************************************************
@@ -309,7 +275,7 @@ texRenderer::~texRenderer()
 bTreeCell* texRenderer::dupplicateCell(bTreeCell* cell)
 {
    cerr << "Something called texRenderer::dupplicateCell! It's an error!" 
-        << endl << "Something really BAD will happn soon..." << endl;
+        << endl << "Something really BAD will happen soon..." << endl;
    return(NULL);
 }
 
@@ -323,6 +289,15 @@ void texRenderer::freeCell(bTreeCell* cell)
 }
 
 /***********************************************************************
+ *                              freeElement                            *
+ ***********************************************************************/
+void texRenderer::freeElement(dntListElement* obj)
+{
+   /* Does nothing. the freeCell should clean the pointer,
+    * so the list do not need to delete it. */
+}
+
+/***********************************************************************
  *                           insertTexture                             *
  ***********************************************************************/
 renderTexture* texRenderer::insertTexture(GLuint textureId, string textureName)
@@ -330,24 +305,13 @@ renderTexture* texRenderer::insertTexture(GLuint textureId, string textureName)
    /* Create the renderTexture */
    renderTexture* rt = new renderTexture(textureId, textureName);
 
-   /* Insert it at the chain list */
-   if(!texList)
-   {
-      rt->setNext(rt);
-      rt->setPrevious(rt);
-   }
-   else
-   {
-      rt->setPrevious(texList->getPrevious());
-      rt->setNext(texList);
-      rt->getPrevious()->setNext(rt);
-      rt->getNext()->setPrevious(rt);
-   }
-   texList = rt;
-   totalTextures++;
-
    /* Insert it at the binary tree */
-   return((renderTexture*)insert(rt));
+   rt = (renderTexture*)bTree::insert(rt);
+
+   /* Insert it at the chain list */
+   dntList::insert(rt);
+
+   return(rt);
 }
 
 /***********************************************************************
@@ -416,11 +380,11 @@ void texRenderer::render(bool floorReflexion)
    int i;
 
    /* Render the list (to avoid recursive calls rendering the btree) */
-   renderTexture* rt = texList;
-   for(i = 0; i < totalTextures; i++)
+   renderTexture* rt = (renderTexture*)first;
+   for(i = 0; i < total; i++)
    {
       rt->render(floorReflexion);
-      rt = rt->getNext();
+      rt = (renderTexture*)rt->getNext();
    }
 }
 
@@ -431,12 +395,12 @@ void texRenderer::clear()
 {
    int i;
 
-   /* Render the list (to avoid recursive calls rendering the btree) */
-   renderTexture* rt = texList;
-   for(i = 0; i < totalTextures; i++)
+   /* Clear the buffers of each renderTexture */
+   renderTexture* rt = (renderTexture*)first;
+   for(i = 0; i < total; i++)
    {
       rt->clearBuffers();
-      rt = rt->getNext();
+      rt = (renderTexture*)rt->getNext();
    }
 }
 

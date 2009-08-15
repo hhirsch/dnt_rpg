@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -28,6 +28,8 @@
 #include <string>
 using namespace std;
 
+#include "list.h"
+
 #define TEXTURE_INITIAL_MAX_QUADS   16 /**< Initial Max Quads per texture */
 
 /*! The render texture keeps GL_QUADS related to a texture.
@@ -41,7 +43,7 @@ using namespace std;
  *          the TEXTURE_INITIAL_MAX_QUADS value. 
  * \note -> we keep the renderTexture in a Btree and in a chain list at the 
  * same time, with the same structure */
-class renderTexture: public bTreeCell
+class renderTexture: public bTreeCell, public dntListElement
 {
    public:
       /*! Constructor 
@@ -89,20 +91,6 @@ class renderTexture: public bTreeCell
        * \param cell -> cell to merge the current one with */
       void merge(bTreeCell* cell);
 
-      /*! Set the next texture on the chain list
-       * \param rt -> pointer to the render texture*/
-      void setNext(renderTexture* rt);
-      /*! Set the previous texture on the chain list
-       * \param rt -> pointer to the render texture */
-      void setPrevious(renderTexture* rt);
-
-      /*! Get the next renderTexture on the list
-       * \return -> pointer to the next */
-      renderTexture* getNext();
-      /*! Get the previous renderTexture on the list
-       * \return -> pointer to the previous */
-      renderTexture* getPrevious();
-
    protected:
 
       /*!Increase, when needed, the size of the buffers to keep
@@ -121,14 +109,13 @@ class renderTexture: public bTreeCell
 
       GLuint textureId;       /**< The texture Id */
       string textureName;     /**< The texture Name */
-
-      renderTexture* next;     /**< Next render texture on list */
-      renderTexture* previous; /**< Previous render texture on list */
 };
 
 /*! The texRenderer is used to render GL_QUADS per texture using
- * buffers. It's just a bTree implementation of renderTexture's */
-class texRenderer: public bTree
+ * buffers. It's just a bTree implementation of renderTexture's.
+ * \note: the list is used here to simplify the render function,
+ *        and is just a replication of the btree pointers */
+class texRenderer: public bTree, public dntList
 {
    public:
       /*! Constructor */
@@ -176,9 +163,12 @@ class texRenderer: public bTree
                    GLfloat nX, GLfloat nY, GLfloat nZ);
 
    protected:
-      renderTexture* texList;   /**< The texture list (to do a non-recursive
-                                     rendering) */
-      int totalTextures;        /**< Total Textures on the list */
+      /*! Just to complete the list.
+       * \param obj -> pointer to the element
+       * \note -> this function does nothing, since the FreeCell from
+       *          the bTree already delete the element. */
+      void freeElement(dntListElement* obj);
+
 };
 
 
