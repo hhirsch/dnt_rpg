@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -85,6 +85,7 @@ classWindow::classWindow(guiInterface* inter, classe** retClass)
    /* Class Image */
    intWindow->getObjectsList()->insertTextBox(5,18,73,364,2,"");
    classImage = intWindow->getObjectsList()->insertPicture(7,20,0,0,NULL);   
+   classImage->setSurfaceDeletion(false);
    classImage->set(classesOrder[curClass]->image);
 
    /* TabBox */
@@ -334,14 +335,12 @@ int classWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
       }
       else if(object == (guiObject*) buttonConfirm)
       {
-         classImage->set(NULL);
          *choosedClass = classesOrder[curClass];
          inter->closeWindow(intWindow);
          return(CLASSW_CONFIRM);
       }
       else if(object == (guiObject*) buttonCancel) 
       {
-         classImage->set(NULL); //to not delete classes images
          inter->closeWindow(intWindow);
          *choosedClass = NULL;
          intWindow = NULL;

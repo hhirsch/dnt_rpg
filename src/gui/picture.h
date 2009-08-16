@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -47,6 +47,11 @@ class picture: public guiObject
        * \param newPicture -> surface to set the picture */
       void set(SDL_Surface* newPicture);
 
+      /*! Set surface deletion at object's destructor
+       * \param enable -> true to delete the surface at the destructor
+       * \note Defaut == true. */
+      void setSurfaceDeletion(bool enable);
+
       /*! Get the surface of the picture
        * \return -> surface of the picture */
       SDL_Surface* get();
@@ -65,6 +70,7 @@ class picture: public guiObject
    protected:
       SDL_Surface *fig;     /**< A picture surface */
       SDL_Rect area;        /**< The visible area */
+      bool deleteSurface;   /**< true will delete the surface at destructor */
 
 };
 

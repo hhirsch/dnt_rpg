@@ -229,6 +229,7 @@ void itemWindow::open(object* item)
    int remainY = ((curY-15) - item->get2dModel()->h) / 2;
    fig = intWindow->getObjectsList()->insertPicture(8+remainX,16+remainY,
                                                     0,0,NULL);
+   fig->setSurfaceDeletion(false);
    fig->set(item->get2dModel());
    intWindow->getObjectsList()->insertTextBox(5,15,69,curY-1,1,"");
 
@@ -253,11 +254,6 @@ void itemWindow::close()
 {
    if(intWindow)
    {
-      if(fig)
-      {
-         /* To avoid delete the item image */
-         fig->set(NULL);
-      }
       inter->closeWindow(intWindow);
       intWindow = NULL;
    }

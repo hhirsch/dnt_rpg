@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -85,6 +85,7 @@ raceWindow::raceWindow(guiInterface* inter, race** retRace)
    /* Race Image */
    intWindow->getObjectsList()->insertTextBox(278,18,344,364,2,"");
    raceImage = intWindow->getObjectsList()->insertPicture(279,157,0,0,NULL);   
+   raceImage->setSurfaceDeletion(false);
    raceImage->set(racesOrder[curRace]->image);
 
    /* TabBox */
@@ -252,7 +253,6 @@ int raceWindow::treat(guiObject* object, int eventInfo,
       }
       else if(object == (guiObject*) buttonConfirm)
       {
-         raceImage->set(NULL);
          *choosedRace = racesOrder[curRace];
          inter->closeWindow(intWindow);
          intWindow = NULL;
@@ -260,7 +260,6 @@ int raceWindow::treat(guiObject* object, int eventInfo,
       }
       else if(object == (guiObject*) buttonCancel) 
       {
-         raceImage->set(NULL); //to not delete race images
          inter->closeWindow(intWindow);
          *choosedRace = NULL;
          intWindow = NULL;

@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -30,7 +30,7 @@ using namespace std;
  ******************************************************/
 picture::~picture()
 {
-   if(fig)
+   if( (fig) && (deleteSurface) )
    {
       SDL_FreeSurface(fig);
    }
@@ -66,7 +66,9 @@ picture::picture(int x,int y,int w,int h,const char* arquivo)
    x2 = x+w;
    y2 = y+h;
    type = FARSO_OBJECT_PICTURE;
- 
+
+   deleteSurface = true;
+
    if(arquivo!=NULL)
    {
       SDL_Surface* img = IMG_Load(arquivo);
@@ -98,6 +100,14 @@ picture::picture(int x,int y,int w,int h,const char* arquivo)
    }
 
    setAllVisible();
+}
+
+/******************************************************
+ *               setSurfaceDelettion                  *
+ ******************************************************/
+void picture::setSurfaceDeletion(bool enable)
+{
+   deleteSurface = enable;
 }
 
 /******************************************************

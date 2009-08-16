@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -110,6 +110,7 @@ skillWindow::skillWindow(skills* savSkill, guiInterface* inter,
 
    /* Skill Image */
    skFig = intWindow->getObjectsList()->insertPicture(13,175,0,0,NULL);
+   skFig->setSurfaceDeletion(false);
    skFig->set(sk->image);
  
    /* Skill Points */
@@ -199,7 +200,6 @@ void skillWindow::close(guiInterface* inter)
 {
    if(isOpened())
    {
-      skFig->set(NULL); //to not delete skill images
       inter->closeWindow(intWindow);
       intWindow = NULL;
    }

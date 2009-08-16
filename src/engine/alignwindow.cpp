@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -47,6 +47,7 @@ alignWindow::alignWindow(aligns* alg, guiInterface* inter, align** actual)
 
    /* Align Image */
    alignImage = intWindow->getObjectsList()->insertPicture(113,185,0,0,NULL);   
+   alignImage->setSurfaceDeletion(false);
    alignImage->set(actualAlign->image);
 
    /* Align Description */
@@ -116,14 +117,12 @@ int alignWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
       }
       else if(object == (guiObject*) buttonConfirm)
       {
-         alignImage->set(NULL);
          *choosedAlign = actualAlign;
          inter->closeWindow(intWindow);
          return(ALIGNW_CONFIRM);
       }
       else if(object == (guiObject*) buttonCancel) 
       {
-         alignImage->set(NULL); //to not delete align images
          inter->closeWindow(intWindow);
          *choosedAlign = NULL;
          intWindow = NULL;

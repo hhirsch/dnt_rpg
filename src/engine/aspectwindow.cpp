@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -49,6 +49,7 @@ aspectWindow::aspectWindow(character* dude, guiInterface* inter)
 
    /* Portrait Figure */
    figurePortrait = intWindow->getObjectsList()->insertPicture(10,23,0,0,NULL);
+   figurePortrait->setSurfaceDeletion(false);
    figurePortrait->set(images[curImage].image);
 
    /* Previous Image Button */
@@ -177,7 +178,6 @@ int aspectWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
          sscanf(textAge->getText().c_str(),"%d", &usedCharacter->age);
 
          /* Close Window */
-         figurePortrait->set(NULL);
          inter->closeWindow(intWindow);
          intWindow = NULL;
          return(ASPECTW_CONFIRM);
@@ -185,7 +185,6 @@ int aspectWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
       /* Cancel */
       else if(object == (guiObject*) buttonCancel) 
       {
-         figurePortrait->set(NULL);
          inter->closeWindow(intWindow);
          intWindow = NULL;
          return(ASPECTW_CANCEL);
