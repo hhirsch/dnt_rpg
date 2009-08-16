@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -29,22 +29,57 @@
 using namespace std;
 
 /**********************************************************************
+ *                            constructor                             *
+ **********************************************************************/
+loadedFontList::loadedFontList()
+{
+}
+
+/**********************************************************************
+ *                             destructor                             *
+ **********************************************************************/
+loadedFontList::~loadedFontList()
+{
+   clearList();
+}
+
+/**********************************************************************
+ *                              freeElement                           *
+ **********************************************************************/
+void loadedFontList::freeElement(dntListElement* obj)
+{
+   loadedFont* fnt = (loadedFont*)obj;
+   
+   /* Close the font, before delete */
+   if(fnt->font)
+   {
+      TTF_CloseFont(fnt->font);
+   }
+
+   /* Delete it! */
+   delete(fnt);
+}
+
+/**********************************************************************
  *                               init                                 *
  **********************************************************************/
 void dntFont::init()
 {
    /* Init SDL_ttf */
-    if(TTF_Init() == -1)
-    {
-       cerr << "Can't init SDL_ttf : " << TTF_GetError() << endl;
-       exit(3);
-    }
-    fontsList = NULL;
-    totalFonts = 0;
-    activeFont = NULL;
-    activeFontAlign = DNT_FONT_ALIGN_LEFT;
-    activeFontStyle = DNT_FONT_STYLE_NORMAL;
-    defineFont(DNT_FONT_ARIAL,12);
+   if(TTF_Init() == -1)
+   {
+      cerr << "Can't init SDL_ttf : " << TTF_GetError() << endl;
+      exit(3);
+   }
+
+   /* Create the list */
+   fonts = new loadedFontList();
+
+   /* Define some defaults */
+   activeFont = NULL;
+   activeFontAlign = DNT_FONT_ALIGN_LEFT;
+   activeFontStyle = DNT_FONT_STYLE_NORMAL;
+   defineFont(DNT_FONT_ARIAL,12);
 }
 
 /**********************************************************************
@@ -52,21 +87,11 @@ void dntFont::init()
  **********************************************************************/
 void dntFont::end()
 {
-   int i;
-   loadedFont* fnt = fontsList;
-   loadedFont* tmp;
-
-   /* Close and delete all fonts on the list */
-   for(i = 0; i < totalFonts; i++)
+   if(fonts != NULL)
    {
-      tmp = fnt;
-      fnt = fnt->next;
-      if(tmp->font)
-      {
-         TTF_CloseFont(tmp->font);
-      }
-      delete(tmp);
+      delete(fonts);
    }
+
    /* Quit SDL_ttf */
    TTF_Quit();
 }
@@ -77,15 +102,15 @@ void dntFont::end()
 loadedFont* dntFont::findFont(string fontName, int fontSize)
 {
    int i;
-   loadedFont* fnt = fontsList;
-   for(i = 0; i < totalFonts; i++)
+   loadedFont* fnt = (loadedFont*)fonts->getFirst();
+   for(i = 0; i < fonts->getTotal(); i++)
    {
       if( (fontName == fnt->fontName) && (fontSize == fnt->fontSize) )
       {
          /* Found */
          return(fnt);
       }
-      fnt = fnt->next;
+      fnt = (loadedFont*)fnt->getNext();
    }
    /* Not found */
    return(NULL);
@@ -113,25 +138,11 @@ loadedFont* dntFont::loadFont(string fontName, int fontSize)
       if(!fnt->font)
       {
          cerr << "Can't open font file: " << dir.getRealFile(fontName) << endl;
+         delete(fnt);
          return(NULL);
       }
 
-      if(fontsList == NULL)
-      {
-         fontsList = fnt;
-         fnt->next = fnt;
-         fnt->previous = fnt;
-      }
-      else
-      {
-         fnt->next = fontsList;
-         fnt->previous = fontsList->previous;
-         fnt->next->previous = fnt;
-         fnt->previous->next = fnt;
-         fontsList = fnt;
-      }
-
-      totalFonts++;
+      fonts->insert(fnt);
    }
 
    return(fnt);
@@ -641,9 +652,8 @@ string dntFont::getNextLine(string source, int& lastLinePos,
 }
 
 /* Static Variables */
-loadedFont*  dntFont::activeFont;
-loadedFont*  dntFont::fontsList;
-int          dntFont::totalFonts;
-int          dntFont::activeFontAlign;
-int          dntFont::activeFontStyle;
+loadedFont*      dntFont::activeFont;
+loadedFontList*  dntFont::fonts=NULL;
+int              dntFont::activeFontAlign;
+int              dntFont::activeFontStyle;
 

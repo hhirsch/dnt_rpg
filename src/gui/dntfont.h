@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -42,18 +42,31 @@ using namespace std;
 
 #define MAX_TEXT  8192
 
+#include "../etc/list.h"
+
 /*! Single loaded font */
-class loadedFont
+class loadedFont: public dntListElement
 {
    public:
       string fontName;        /**< The font Name */
       int fontSize;           /**< The font size */
 
       TTF_Font* font;         /**< The loaded TTF font */
+};
 
-      loadedFont* next;       /**< Next font on the chain list */
-      loadedFont* previous;   /**< Previous font on the chain list */
+/*! The loaded fonts */
+class loadedFontList: public dntList
+{
+   public:
+      /*! Constructor */
+      loadedFontList();
+      /*! Destructor */
+      ~loadedFontList();
 
+   protected:
+      /*! Free the loaded font object
+       * \param obj -> loaded font to delete */
+      void freeElement(dntListElement* obj);
 };
 
 /*! The DNT font class. Used to write texts on surfaces with ttf fonts. */
@@ -178,9 +191,7 @@ class dntFont
        *             or NULL, if not found. */
       loadedFont* findFont(string fontName, int fontSize);
       
-
-      static loadedFont* fontsList;  /**< The active Font List */
-      static int totalFonts;         /**< Total Opened fonts on list */
+      static loadedFontList* fonts;  /**< List of loaded fonts */
       static int activeFontAlign;    /**< The active font alignment */
       static int activeFontStyle;    /**< The active Font Style */
       static loadedFont* activeFont; /**< The active font */
