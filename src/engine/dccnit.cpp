@@ -231,6 +231,12 @@ engine::~engine()
    /* Clear ModState */
    modifState.clear();
 
+   /* Clear the Inventory too */
+   if(inventoryWindow)
+   {
+      delete(inventoryWindow);
+   }
+
    /* Clear Characters */
    if(NPCs)
    {
@@ -246,12 +252,6 @@ engine::~engine()
    if(gameSun)
    {
       delete(gameSun);
-   }
-
-   /* Clear the Inventory too */
-   if(inventoryWindow)
-   {
-      delete(inventoryWindow);
    }
 
    /* Clear InfoWindow */
