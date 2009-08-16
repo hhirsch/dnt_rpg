@@ -118,6 +118,7 @@ void iaScript::createParameters()
       }
 
       /* Back to the file's init */
+      file.clear();
       file.seekg(0, ios::beg);
    }
 }

@@ -7,6 +7,7 @@
  - Capacity to walk through low height objects;
  - iaScripts can receive parameters;
  - Fixed a memory leak on bTrees;
+ - Fixed a segfault at itemWindow;
 
 Working on:
  - Weather effects;
