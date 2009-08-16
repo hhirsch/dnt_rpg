@@ -32,7 +32,7 @@ menu::~menu()
 /*********************************************************
  *                      Constructor                      *
  *********************************************************/
-menu::menu(int xa, int ya): guiList()
+menu::menu(int xa, int ya): guiList(DNT_LIST_TYPE_ADD_AT_END)
 {
    x = xa;
    y = ya;

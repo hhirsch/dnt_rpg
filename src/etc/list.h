@@ -21,6 +21,13 @@
 #ifndef _dnt_list_h
 #define _dnt_list_h
 
+/*! The dntList types */
+enum
+{
+   DNT_LIST_TYPE_ADD_AT_BEGIN=0,
+   DNT_LIST_TYPE_ADD_AT_END
+};
+
 /*! The list element is the base class to define an element of a list */
 class dntListElement
 {
@@ -55,8 +62,9 @@ class dntListElement
 class dntList
 {
    public:
-      /*! Constructor */
-      dntList();
+      /*! Constructor 
+       * param t -> list type */
+      dntList(int t=DNT_LIST_TYPE_ADD_AT_BEGIN);
       /*! Destructor
       * \note -> the children class must call clearList for 
        *          its root at its destructor  */
@@ -90,6 +98,8 @@ class dntList
       /*! Free an element (deleting it)
        * \param obj -> object to free */
       virtual void freeElement(dntListElement* obj)=0;
+
+      int type;                       /**< list type (FIFO, LIFO) */
 
       dntListElement* first;          /**< Pointer to the first list element */
       int total;                      /**< Total elements on the list */

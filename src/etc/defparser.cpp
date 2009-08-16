@@ -85,7 +85,7 @@ string defTuple::getKey()
 /***********************************************************************
  *                            Constructor                              *
  ***********************************************************************/
-defParser::defParser()
+defParser::defParser():dntList(DNT_LIST_TYPE_ADD_AT_END)
 {
    curTuple = NULL;
 }

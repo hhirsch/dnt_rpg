@@ -43,8 +43,9 @@ using namespace std;
 class guiList: public dntList
 {
    public:
-      /*! Constructor */
-      guiList();
+      /*! Constructor
+       * \param t -> dntList type */
+      guiList(int t=DNT_LIST_TYPE_ADD_AT_BEGIN);
       /*! Destructor */
       ~guiList();
 

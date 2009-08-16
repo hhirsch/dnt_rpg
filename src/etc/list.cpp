@@ -86,10 +86,11 @@ void dntListElement::setPrevious(dntListElement* obj)
 /***********************************************************************
  *                            Constructor                              *
  ***********************************************************************/
-dntList::dntList()
+dntList::dntList(int t)
 {
    first = NULL;
    total = 0;
+   type = t;
 }
 
 /***********************************************************************
@@ -139,11 +140,17 @@ bool dntList::insert(dntListElement* obj)
    }
    else
    {
-      /* Insert it before the first (aka: the last) */
+      /* Insert it before the first */
       obj->setNext(first);
       obj->setPrevious(first->getPrevious());
       obj->getNext()->setPrevious(obj);
       obj->getPrevious()->setNext(obj);
+   }
+
+   /* Set as the first, if defined */
+   if(type == DNT_LIST_TYPE_ADD_AT_BEGIN)
+   {
+      first = obj;
    }
 
    total++;

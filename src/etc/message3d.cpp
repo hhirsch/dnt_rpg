@@ -114,7 +114,7 @@ message3d::~message3d()
 /***********************************************************
  *                       Constructor                       *
  ***********************************************************/
-message3dList::message3dList()
+message3dList::message3dList():dntList(DNT_LIST_TYPE_ADD_AT_END)
 {
 }
 
