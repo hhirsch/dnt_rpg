@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -24,7 +24,7 @@
  *                       Constructor                   *
  *******************************************************/
 textBox::textBox(int xa, int ya, int xb, int yb, int frameType,
-                 SDL_Surface *screen)
+                 SDL_Surface *screen): dntList(DNT_LIST_TYPE_ADD_AT_END)
 {
    wSurface = screen;
    type = FARSO_OBJECT_TEXT_BOX;
@@ -37,8 +37,6 @@ textBox::textBox(int xa, int ya, int xb, int yb, int frameType,
    fontName = DNT_FONT_ARIAL;
    fontStyle = DNT_FONT_STYLE_NORMAL;
    fontSize = 10;
-   fullText = NULL;
-   totalLines = 0;
    firstLine = 0;
 }
 
@@ -55,16 +53,16 @@ textBox::~textBox()
  *******************************************************/
 void textBox::clear()
 {
-   int i;
-   textLine* tmp;
-   for(i = 0; i < totalLines; i++)
-   {
-      tmp = fullText;
-      fullText = fullText->next;
-      delete(tmp);
-   }
-   fullText = NULL;
-   totalLines = 0;
+   clearList();
+}
+
+/*******************************************************
+ *                     freeElement                     *
+ *******************************************************/
+void textBox::freeElement(dntListElement* obj)
+{
+   textLine* t = (textLine*)obj;
+   delete(t);
 }
 
 /*******************************************************
@@ -73,13 +71,13 @@ void textBox::clear()
 string textBox::getTextLine(int line)
 {
    int i;
-   if(line < totalLines)
+   if(line < total)
    {
       /* Get the line */
-      textLine* tmp = fullText;
+      textLine* tmp = (textLine*)first;
       for(i = 0; i < line; i++)
       {
-         tmp = tmp->next;
+         tmp = (textLine*)tmp->getNext();
       }
       /* Get the text from line */
       return(tmp->text);
@@ -147,29 +145,29 @@ int textBox::lastDrawableLine()
    int height = 0;
 
    /* Verify if exist lines */
-   if(!fullText)
+   if(total <= 0)
    {
       return(0);
    }
 
    /* Get first text line */
-   line = fullText;
+   line = (textLine*)first;
    for(i = 0; i < firstLine; i++)
    {
       height = line->height;
-      line = line->next;
+      line = (textLine*)line->getNext();
    }
    
    int y = y1+2;
    /* Draw the text lines */
-   for(i = firstLine; ( ( (y+height) < y2) && (i < totalLines) ) ; i++)
+   for(i = firstLine; ( ( (y+height) < y2) && (i < total) ) ; i++)
    {
       lastLine = i;
-      if( i < totalLines)
+      if( i < total)
       {
          y += line->height;
          height = line->height;
-         line = line->next;
+         line = (textLine*)line->getNext();
       }
    }
    return(lastLine);
@@ -198,18 +196,18 @@ void textBox::draw(int i)
       return;
    }
 
-   if(fullText)
+   if(total > 0)
    {
       /* Get desired text line */
       int y = y1+2;
-      line = fullText;
+      line = (textLine*) first;
       for(l = 0; ((l < i) && (line != NULL)); l++)
       {
          if(l >= firstLine)
          {
             y += line->height;
          }
-         line = line->next;
+         line = (textLine*)line->getNext();
       }
   
       /* Draw the desired line */
@@ -259,19 +257,18 @@ int textBox::draw()
       }
    }
 
-   if(fullText)
+   if(total > 0)
    {
       /* Get first text line */
-      line = fullText;
+      line = (textLine*)first;
       for(i = 0; i < firstLine; i++)
       {
-         line = line->next;
+         line = (textLine*)line->getNext();
       }
    
       int y = y1+2;
       /* Draw the text lines */
-      for(i = firstLine; 
-          ( (y+height < y2) && (i < totalLines) ) ; i++)
+      for(i = firstLine; ( (y+height < y2) && (i < total) ) ; i++)
       {
          lastLine = i;
          color_Set(line->R,line->G,line->B,255);
@@ -281,7 +278,7 @@ int textBox::draw()
          fnt.write(wSurface, x1+2, y, line->text, x1+2, y, x2, y2);
          y += line->height;
          height = line->height;
-         line = line->next;
+         line = (textLine*)line->getNext();
       }
       setChanged();
    }
@@ -293,7 +290,7 @@ int textBox::draw()
  *******************************************************/
 int textBox::getTotalLines()
 {
-   return(totalLines);
+   return(total);
 }
 
 /*******************************************************
@@ -356,14 +353,14 @@ void textBox::setFont(string name, int size, int align, int style)
 
    /* Change all current Lines */
    int i;
-   textLine* line = fullText;
-   for(i = 0; i < totalLines; i++)
+   textLine* line = (textLine*)first;
+   for(i = 0; i < total; i++)
    {
       line->fontName = fontName;
       line->fontAlign = fontAlign;
       line->fontSize = fontSize;
       line->fontStyle = fontStyle;
-      line = line->next;
+      line = (textLine*)line->getNext();
    }
 }
 
@@ -378,13 +375,13 @@ void textBox::setColor(int R, int G, int B)
 
    /* Change all current Lines */
    int i;
-   textLine* line = fullText;
-   for(i = 0; i < totalLines; i++)
+   textLine* line = (textLine*)first;
+   for(i = 0; i < total; i++)
    {
       line->R = R;
       line->G = G;
       line->B = B;
-      line = line->next;
+      line = (textLine*)line->getNext();
    }
 }
 
@@ -403,20 +400,7 @@ void textBox::setBackColor(int R, int G, int B)
  *******************************************************/
 void textBox::insertLine(textLine* line)
 {
-   if(totalLines == 0)
-   {
-      line->next = line;
-      line->previous = line;
-      fullText = line;
-   }
-   else
-   {
-      line->next = fullText;
-      line->previous = fullText->previous;
-      line->next->previous = line;
-      line->previous->next = line;
-   }
-   totalLines++;
+   insert(line);
 }
 
 /*******************************************************

@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -21,10 +21,13 @@
 #ifndef _farso_textbox_h
 #define _farso_textbox_h
 
+#include "../etc/list.h"
+
 #include "color.h"
 #include "draw.h"
 #include "dntfont.h"
 #include "guiobject.h"
+
 #include <string>
 using namespace std;
 
@@ -35,7 +38,7 @@ using namespace std;
 
 /*! The textLine represents each line of text in the
  * textBox, with his own font parameters and colors */
-class textLine
+class textLine: public dntListElement
 {  
    public:
       string text;         /**< Text of the line */
@@ -47,13 +50,10 @@ class textLine
       int fontAlign;       /**< Align of the font */
       int fontStyle;       /**< Style of the font */
       int height;          /**< Height of the line */
-
-      textLine* next;      /**< Next line */
-      textLine* previous;  /**< Previous Line */
 };
 
 /*! Class of text box representation. */
-class textBox: public guiObject
+class textBox: public guiObject, public dntList
 {
    public:
       /*! Constructor 
@@ -159,6 +159,12 @@ class textBox: public guiObject
        * \param B -> blue color of the font */
       void addText(string txt, string font, int size,
                    int align, int style, int R, int G, int B);
+   
+   protected:
+      /*! Delete the textLine
+       * \param obj -> pointer to the element to delete */
+      void freeElement(dntListElement* obj);
+   
    private:
 
       /*! Clear the lines list */
@@ -175,8 +181,6 @@ class textBox: public guiObject
 
       SDL_Surface* wSurface; /**< Window Surface */
       
-      textLine* fullText;  /**< The full text */
-      int totalLines;      /**< Total Text Lines */
       int firstLine;       /**< Actual Init Line Draw */
 
       int framed;          /**< Type of the frame. 0 for none */
