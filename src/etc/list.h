@@ -99,10 +99,11 @@ class dntList
        * \param obj -> object to free */
       virtual void freeElement(dntListElement* obj)=0;
 
-      int type;                       /**< list type (FIFO, LIFO) */
-
       dntListElement* first;          /**< Pointer to the first list element */
       int total;                      /**< Total elements on the list */
+
+   private:
+      int listType;                   /**< list type (FIFO, LIFO) */
 };
 
 #endif

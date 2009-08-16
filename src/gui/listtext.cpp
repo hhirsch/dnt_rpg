@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -27,12 +27,10 @@
  *                        Constructor                         *
  **************************************************************/
 listText::listText(int xa, int ya, int xb, int yb, SDL_Surface* surface,
-                   void* list)
+                   void* list): dntList(DNT_LIST_TYPE_ADD_AT_END)
 {
    int i;
    /* Nullify elements */
-   first = NULL;
-   totalElements = 0;
    selectedText = ""; 
    selectedPos = -1;  
 
@@ -78,21 +76,18 @@ listText::listText(int xa, int ya, int xb, int yb, SDL_Surface* surface,
  **************************************************************/
 listText::~listText()
 {
-   int i;
-   textElement* tel = first;
-   textElement* aux;
-
    /* Delete the pointers */
    delete [] listButtons;
+   clearList();
+}
 
-   /* Delete All elements */
-   for(i=0; i<totalElements; i++)
-   {
-      aux = tel;
-      tel = tel->next;
-      delete(aux);
-   }
-   totalElements = 0;
+/**************************************************************
+ *                         freeElement                        *
+ **************************************************************/
+void listText::freeElement(dntListElement* obj)
+{
+   textElement* tx = (textElement*)obj;
+   delete(tx);
 }
 
 /**************************************************************
@@ -100,20 +95,7 @@ listText::~listText()
  **************************************************************/
 void listText::clear()
 {
-   int i;
-   textElement* tel = first;
-   textElement* aux = NULL;
-
-   
-   /* Delete All elements */
-   for(i=0; i<totalElements; i++)
-   {
-      aux = tel;
-      tel = tel->next;
-      delete(aux);
-   }
-   totalElements = 0;
-   first = NULL;
+   clearList();
    roll->setText("");
 
    defineTabButton();
@@ -135,19 +117,7 @@ void listText::insertText(string text, int r, int g, int b)
 {
    textElement* tel = new textElement();
    tel->text = text;
-   if(totalElements == 0)
-   {
-      first = tel;
-      first->next = first;
-      first->previous = first;
-   }
-   else
-   {
-      tel->next = first;
-      tel->previous = first->previous;
-      first->previous = tel;
-      tel->previous->next = tel;
-   }
+   insert(tel);
    if(r == -1)
    {
       roll->addText(text);
@@ -157,7 +127,6 @@ void listText::insertText(string text, int r, int g, int b)
       roll->addText(text, DNT_FONT_ARIAL, 10, DNT_FONT_STYLE_NORMAL,
                     DNT_FONT_ALIGN_LEFT, r,g,b);
    }
-   totalElements++;
    roll->setFirstLine(0);
    defineTabButton();
 }
@@ -168,26 +137,17 @@ void listText::insertText(string text, int r, int g, int b)
 void listText::removeText(string text)
 {
    int i;
-   textElement* tel = first;
-   for(i=0; i<totalElements; i++)
+   int prevTotal = total;
+   textElement* tel = (textElement*)first;
+   textElement* taux;
+   for(i=0; i < prevTotal; i++)
    {
+      taux = (textElement*)tel->getNext();
       if(tel->text == text)
       {
-         if(tel == first)
-         {
-            first = first->next;
-         }
-         tel->previous->next = tel->next;
-         tel->next->previous = tel->previous;
-         delete(tel);
-         totalElements--;
-         if(totalElements == 0)
-         {
-            first = NULL;
-         }
-         return;
+         remove(tel);
       }
-      tel = tel->next;
+      tel = taux;
    }
 
    defineTabButton();
@@ -203,7 +163,7 @@ void listText::defineTabButton()
 
    for(i = 0; i<maxButtons; i++)
    {
-      listButtons[i]->setAvailable(i+curInit < totalElements);
+      listButtons[i]->setAvailable(i+curInit < total);
    }
 }
 
@@ -244,13 +204,13 @@ bool listText::eventGot(int type, guiObject* object)
          if(object == (guiObject*)listButtons[i])
          {
             int pos = roll->getFirstLine() + i;
-            if(pos < totalElements)
+            if(pos < total)
             {
                int k;
-               textElement* tel = first;
+               textElement* tel = (textElement*)first;
                for(k = 0; k < pos; k++)
                {
-                  tel = tel->next;
+                  tel = (textElement*)tel->getNext();
                }
                selectedText = tel->text;
                selectedPos = pos;

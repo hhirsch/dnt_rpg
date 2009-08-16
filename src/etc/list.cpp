@@ -90,7 +90,7 @@ dntList::dntList(int t)
 {
    first = NULL;
    total = 0;
-   type = t;
+   listType = t;
 }
 
 /***********************************************************************
@@ -148,7 +148,7 @@ bool dntList::insert(dntListElement* obj)
    }
 
    /* Set as the first, if defined */
-   if(type == DNT_LIST_TYPE_ADD_AT_BEGIN)
+   if(listType == DNT_LIST_TYPE_ADD_AT_BEGIN)
    {
       first = obj;
    }

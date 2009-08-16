@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -21,20 +21,20 @@
 #ifndef _farso_listtext_h
 #define _farso_listtext_h
 
+#include "../etc/list.h"
+
 #include "rolbar.h"
 #include "tabbutton.h"
 
 /*! A element of text on listText */
-class textElement
+class textElement: public dntListElement
 {
    public:
       string text;            /**< The text of the element */
-      textElement* previous;  /**< Pointer to previous on list */
-      textElement* next;      /**< Pointer to next on list */
 };
 
 /*! The listText class. Is a list of texts elements to select one */
-class listText: public guiObject
+class listText: public guiObject, public dntList
 {
    public:
       /*! Constructor 
@@ -91,11 +91,13 @@ class listText: public guiObject
       /*! Define tabButton buttons avaialabilility */
       void defineTabButton();
 
+      /*! Free the textElement
+       * \param obj -> pointer to the text element */
+      void freeElement(dntListElement* dnt);
+
    private:
       SDL_Surface* windowSurface; /**< Pointer to the window surface */
       void* intList;              /**< Internal GUI Objects List */
-      textElement* first;         /**< Pointer to the first element on list */
-      int totalElements;          /**< Total Elements on list */
       oneTabButton** listButtons; /**< Buttons of the List*/
       string selectedText;        /**< Text selected */
       int selectedPos;            /**< Position on list of the selected */
