@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2009-06-28 11:02-0300\n"
-"PO-Revision-Date: 2009-07-14 14:27+0000\n"
-"Last-Translator: Anthony Guéchoum <Unknown>\n"
+"POT-Creation-Date: 2009-08-16 12:27-0300\n"
+"PO-Revision-Date: 2009-08-11 10:09+0000\n"
+"Last-Translator: Yves MATHIEU <ymathieu@moulins-vichy.cci.fr>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-07-19 12:08+0000\n"
+"X-Launchpad-Export-Date: 2009-08-16 15:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: src/classes/actions.cpp:128
@@ -78,17 +78,17 @@ msgstr "Echec de la Mission!"
 msgid "Tendency & Alignment"
 msgstr "Tendance & Alignement"
 
-#: src/engine/alignwindow.cpp:71 src/engine/aspectwindow.cpp:92
-#: src/engine/attwindow.cpp:236 src/engine/classwindow.cpp:116
-#: src/engine/options.cpp:991 src/engine/racewindow.cpp:116
-#: src/engine/skillwindow.cpp:158
+#: src/engine/alignwindow.cpp:72 src/engine/aspectwindow.cpp:93
+#: src/engine/attwindow.cpp:236 src/engine/classwindow.cpp:117
+#: src/engine/options.cpp:991 src/engine/racewindow.cpp:117
+#: src/engine/skillwindow.cpp:159
 msgid "Confirm"
 msgstr "Confirmer"
 
-#: src/engine/alignwindow.cpp:75 src/engine/aspectwindow.cpp:96
+#: src/engine/alignwindow.cpp:76 src/engine/aspectwindow.cpp:97
 #: src/engine/attwindow.cpp:240 src/engine/barterwindow.cpp:66
-#: src/engine/classwindow.cpp:120 src/engine/options.cpp:995
-#: src/engine/racewindow.cpp:120 src/engine/skillwindow.cpp:161
+#: src/engine/classwindow.cpp:121 src/engine/options.cpp:995
+#: src/engine/racewindow.cpp:121 src/engine/skillwindow.cpp:162
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -96,15 +96,15 @@ msgstr "Annuler"
 msgid "Aspect"
 msgstr "Aspect"
 
-#: src/engine/aspectwindow.cpp:66 src/engine/charwindow.cpp:106
+#: src/engine/aspectwindow.cpp:67 src/engine/charwindow.cpp:106
 msgid "Name:"
 msgstr "Nom :"
 
-#: src/engine/aspectwindow.cpp:71 src/engine/charwindow.cpp:109
+#: src/engine/aspectwindow.cpp:72 src/engine/charwindow.cpp:109
 msgid "Age:"
 msgstr "Age :"
 
-#: src/engine/aspectwindow.cpp:75 src/engine/charwindow.cpp:124
+#: src/engine/aspectwindow.cpp:76 src/engine/charwindow.cpp:124
 msgid "Sex:"
 msgstr "Sexe :"
 
@@ -159,7 +159,7 @@ msgid "Attribute Description"
 msgstr "Description des attributs"
 
 #: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:531
-#: src/engine/inventwindow.cpp:354 src/engine/options.cpp:1232
+#: src/engine/inventwindow.cpp:352 src/engine/options.cpp:1232
 msgid "Warning"
 msgstr "Avertissement"
 
@@ -200,7 +200,7 @@ msgstr "L'obligation de troquer fut acceptée."
 msgid "The barter imposition was rejected."
 msgstr "L'obligation de troquer fut refusée."
 
-#: src/engine/barterwindow.cpp:306 src/engine/inventwindow.cpp:201
+#: src/engine/barterwindow.cpp:306 src/engine/inventwindow.cpp:197
 msgid "Remove"
 msgstr "Retirer"
 
@@ -280,8 +280,8 @@ msgstr "Dons"
 msgid "Skills"
 msgstr "Compétences"
 
-#: src/engine/charwindow.cpp:248 src/engine/skillwindow.cpp:168
-#: src/gui/window.cpp:219
+#: src/engine/charwindow.cpp:248 src/engine/skillwindow.cpp:169
+#: src/gui/window.cpp:186
 msgid "Close"
 msgstr "Fermer"
 
@@ -309,51 +309,51 @@ msgstr "Ne s'applique pas"
 msgid "Class"
 msgstr "Classe"
 
-#: src/engine/classwindow.cpp:93 src/engine/racewindow.cpp:93
+#: src/engine/classwindow.cpp:94 src/engine/racewindow.cpp:94
 msgid "Characteristics"
 msgstr "Caractéristiques"
 
-#: src/engine/classwindow.cpp:94 src/engine/racewindow.cpp:94
+#: src/engine/classwindow.cpp:95 src/engine/racewindow.cpp:95
 msgid "Description"
 msgstr "Description"
 
-#: src/engine/classwindow.cpp:152
+#: src/engine/classwindow.cpp:153
 msgid "Life Dice"
 msgstr "Dés de Vie"
 
-#: src/engine/classwindow.cpp:156
+#: src/engine/classwindow.cpp:157
 msgid "Skill Points"
 msgstr "Points d' aptitudes"
 
-#: src/engine/classwindow.cpp:185
+#: src/engine/classwindow.cpp:186
 msgid "First Level"
 msgstr "Premier niveau"
 
-#: src/engine/classwindow.cpp:213
+#: src/engine/classwindow.cpp:214
 msgid "Other Levels"
 msgstr "Autres niveaux"
 
-#: src/engine/classwindow.cpp:218
+#: src/engine/classwindow.cpp:219
 msgid "Class Modifiers"
 msgstr "Modifieur de classe"
 
-#: src/engine/classwindow.cpp:230 src/engine/racewindow.cpp:171
+#: src/engine/classwindow.cpp:231 src/engine/racewindow.cpp:172
 msgid "No Modifiers."
 msgstr "Pas de modifieurs"
 
-#: src/engine/classwindow.cpp:238
+#: src/engine/classwindow.cpp:239
 msgid "Class Talents"
 msgstr "Dons de classe"
 
-#: src/engine/classwindow.cpp:257 src/engine/racewindow.cpp:189
+#: src/engine/classwindow.cpp:258 src/engine/racewindow.cpp:190
 msgid "No Talents."
 msgstr "Pas de dons."
 
-#: src/engine/classwindow.cpp:265
+#: src/engine/classwindow.cpp:266
 msgid "Class Skills"
 msgstr "Compétences de la classe"
 
-#: src/engine/classwindow.cpp:284 src/engine/racewindow.cpp:215
+#: src/engine/classwindow.cpp:285 src/engine/racewindow.cpp:216
 msgid "No Skills."
 msgstr "Pas de Compétences."
 
@@ -467,7 +467,7 @@ msgstr "%s attaques %s"
 msgid "No more actions. Turn ended."
 msgstr "Pas d'action supplémentaires. Fin du tour."
 
-#: src/engine/dccnit.cpp:3921
+#: src/engine/dccnit.cpp:3920
 msgid "Exit Battle Mode"
 msgstr "Quitter le Mode Combat"
 
@@ -547,36 +547,36 @@ msgstr "Options"
 msgid "Exit"
 msgstr "Quitter"
 
-#: src/engine/inventwindow.cpp:181
-msgid "Drop"
-msgstr "Lâcher"
-
-#: src/engine/inventwindow.cpp:188
-msgid "Buy"
-msgstr "Acheter"
-
-#: src/engine/inventwindow.cpp:188
-msgid "Sell"
-msgstr "Vendre"
-
-#: src/engine/inventwindow.cpp:195
-msgid "Use"
-msgstr "Utiliser"
-
-#: src/engine/inventwindow.cpp:205
-msgid "Info"
-msgstr "Informations"
-
-#: src/engine/inventwindow.cpp:209
+#: src/engine/inventwindow.cpp:183
 msgid "Get"
 msgstr "Obtenir"
 
-#: src/engine/inventwindow.cpp:314
+#: src/engine/inventwindow.cpp:186
+msgid "Info"
+msgstr "Informations"
+
+#: src/engine/inventwindow.cpp:191
+msgid "Use"
+msgstr "Utiliser"
+
+#: src/engine/inventwindow.cpp:200
+msgid "Buy"
+msgstr "Acheter"
+
+#: src/engine/inventwindow.cpp:200
+msgid "Sell"
+msgstr "Vendre"
+
+#: src/engine/inventwindow.cpp:205
+msgid "Drop"
+msgstr "Lâcher"
+
+#: src/engine/inventwindow.cpp:312
 #, c-format
 msgid "%s reloaded %s with %s ammo."
-msgstr ""
+msgstr "%s reloaded %s avec %s ammo."
 
-#: src/engine/inventwindow.cpp:355
+#: src/engine/inventwindow.cpp:353
 msgid "No equipped weapons are compatible with this munition type."
 msgstr "Aucune arme équipée n'est compatible avec ce type de munition."
 
@@ -635,7 +635,7 @@ msgstr "Type de Munitions:"
 msgid "Quantity:"
 msgstr "Quantité:"
 
-#: src/engine/itemwindow.cpp:237
+#: src/engine/itemwindow.cpp:238
 msgid "Ok"
 msgstr "Valider"
 
@@ -705,11 +705,11 @@ msgstr "Rotation vers le Bas de la Caméra"
 
 #: src/engine/options.cpp:130
 msgid "Camera Zoom Up"
-msgstr ""
+msgstr "Zoom plus la Camera"
 
 #: src/engine/options.cpp:131
 msgid "Camera Zoom Down"
-msgstr ""
+msgstr "Zoom moins la Camera"
 
 #: src/engine/options.cpp:132
 msgid "Camera Top"
@@ -721,11 +721,11 @@ msgstr "Caméra en Bas"
 
 #: src/engine/options.cpp:134
 msgid "Camera Zoom Max"
-msgstr ""
+msgstr "Zoom Camera au Maximun"
 
 #: src/engine/options.cpp:135
 msgid "Camera Zoom Min"
-msgstr ""
+msgstr "Zoom Camera au Minimun"
 
 #: src/engine/options.cpp:137
 msgid "Toggle Run(1)"
@@ -794,7 +794,7 @@ msgstr "Tous"
 
 #: src/engine/options.cpp:584
 msgid "Projective"
-msgstr ""
+msgstr "Projection"
 
 #: src/engine/options.cpp:600 data/weapons/types/sizes.dcl:3
 #: data/weapons/types/weights.dcl:3
@@ -929,15 +929,15 @@ msgstr "En attente..."
 msgid "Race"
 msgstr "Race"
 
-#: src/engine/racewindow.cpp:159
+#: src/engine/racewindow.cpp:160
 msgid "Race Modifiers"
 msgstr "Modifieurs de  la race"
 
-#: src/engine/racewindow.cpp:177
+#: src/engine/racewindow.cpp:178
 msgid "Race Talents"
 msgstr "Dons de Race"
 
-#: src/engine/racewindow.cpp:196
+#: src/engine/racewindow.cpp:197
 msgid "Race Skills"
 msgstr "Compétences de la race"
 
@@ -997,15 +997,15 @@ msgstr "Ouvrir la fenêtre du Groupe"
 msgid "Total Free Points:"
 msgstr "Total des points restant:"
 
-#: src/engine/skillwindow.cpp:117
+#: src/engine/skillwindow.cpp:118
 msgid "Points:"
 msgstr "Points:"
 
-#: src/engine/skillwindow.cpp:129
+#: src/engine/skillwindow.cpp:130
 msgid "Only show race/class skills"
-msgstr ""
+msgstr "Montrer seulement les caractéristiques de race ou de classe"
 
-#: src/engine/skillwindow.cpp:148
+#: src/engine/skillwindow.cpp:149
 msgid "Cost"
 msgstr "Coût"
 
@@ -1041,7 +1041,7 @@ msgstr "Tour de %s."
 msgid "%s rolls initiative: "
 msgstr "Jet d'initiative de %s : "
 
-#: src/gui/window.cpp:221
+#: src/gui/window.cpp:183
 msgid "Maximize"
 msgstr "Maximiser"
 
@@ -1176,10 +1176,14 @@ msgstr ""
 #: data/comics/tutorial/combat/combat.dcb:120
 msgid "Each turn, a character can take a move action and an attack action."
 msgstr ""
+"A chaque tour, un personnage peut prendre une action déplacement et une "
+"action attaque."
 
 #: data/comics/tutorial/combat/combat.dcb:130
 msgid "Or, if needed, take a full move action to move further."
 msgstr ""
+"ou, si vous souhaitez, faite une action de marche forcée pour vous déplacer "
+"plus loin."
 
 #: data/comics/tutorial/combat/combat.dcb:140
 msgid "Your action's range is represented by circles."
@@ -1203,6 +1207,8 @@ msgstr ""
 #: data/comics/tutorial/combat/combat.dcb:174
 msgid "The red circle is the area you can move with a full move action."
 msgstr ""
+"Le cercle rouge est la zone où vous pouvez bouger avec l'action marche "
+"forcée."
 
 #: data/comics/tutorial/combat/combat.dcb:176
 msgid ""
@@ -1215,16 +1221,20 @@ msgstr ""
 #: data/comics/tutorial/combat/combat.dcb:205
 msgid "You can attack using your current weapon by simple clicking the target."
 msgstr ""
+"Vous pouvez attaquer avec votre armes par défaut par un simple clique sur la "
+"cible."
 
 #: data/comics/tutorial/combat/combat.dcb:215
 msgid "Or use a talent by selecting it and clicking the target."
-msgstr ""
+msgstr "Ou utiliser un talent en le sélectionnant et en cliquant sur la cible."
 
 #: data/comics/tutorial/combat/combat.dcb:226
 msgid ""
 "You can end your turn any time, by pressing SPACE or selecting the End Turn "
 "icon."
 msgstr ""
+"Vouc pouvez finir votre tour à tout moment, en pressant la touche ESPACE ou "
+"en sélectionnant l'icône Fin de Tour."
 
 #: data/comics/tutorial/combat/combat.dcb:228
 msgid ""
@@ -1242,7 +1252,7 @@ msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:249
 msgid "Remember:"
-msgstr ""
+msgstr "Rappel :"
 
 #: data/comics/tutorial/combat/combat.dcb:251
 msgid "Take or use objects count as an attack action."
@@ -2887,7 +2897,7 @@ msgstr ""
 
 #: data/feats/biology/ameivas_worms.fta:1
 msgid "Ameiva's Worms"
-msgstr ""
+msgstr "Les vers d'Ameiva"
 
 #: data/feats/biology/ameivas_worms.fta:2
 msgid ""
@@ -2910,7 +2920,7 @@ msgstr ""
 
 #: data/feats/gothic/lament_souls.fta:1
 msgid "Laments of One Thousand Souls"
-msgstr ""
+msgstr "Lamentations d'un millers d'esprits"
 
 #: data/feats/gothic/lament_souls.fta:2
 msgid ""
@@ -2923,7 +2933,7 @@ msgstr ""
 
 #: data/feats/gothic/night_adoration.fta:1
 msgid "Night Adoration"
-msgstr ""
+msgstr "Adoration de la nuit"
 
 #: data/feats/gothic/night_adoration.fta:2
 msgid ""
@@ -2937,7 +2947,7 @@ msgstr ""
 
 #: data/feats/gothic/sun_weakness.fta:1
 msgid "Sun Weakness"
-msgstr ""
+msgstr "Photosensibilité"
 
 #: data/feats/gothic/sun_weakness.fta:2
 msgid ""
@@ -3003,7 +3013,7 @@ msgstr ""
 
 #: data/feats/physicaled/virtually_invencible.fta:1
 msgid "Virtually Invencible"
-msgstr ""
+msgstr "Virtuellement invincible"
 
 #: data/feats/physicaled/virtually_invencible.fta:2
 msgid ""
@@ -3697,12 +3707,12 @@ msgstr ""
 #: data/dialogs/objects/house2_paints.dlg:6
 #: data/dialogs/objects/house2_ovo.dlg:6
 msgid "(You see a strange and beautiful paint)"
-msgstr ""
+msgstr "(Vous voyez une étrange et manifique peinture)"
 
 #: data/dialogs/objects/house2_paints.dlg:11
 #: data/dialogs/objects/house2_ovo.dlg:10
 msgid "Look the paint."
-msgstr ""
+msgstr "Regarder la peinture."
 
 #: data/dialogs/objects/house2_paints.dlg:28
 msgid "(There's nothing here.)"
@@ -3711,7 +3721,7 @@ msgstr "(Il n'y a rien ici.)"
 #: data/dialogs/objects/house2_paints.dlg:42
 #: data/dialogs/objects/house2_ovo.dlg:45
 msgid "(You failed to find something.)"
-msgstr ""
+msgstr "(Vous échouez dans la recherche de quelque chose.)"
 
 #: data/dialogs/objects/house2_ovo.dlg:27
 msgid "(You see a secret passage.)"
@@ -3719,7 +3729,7 @@ msgstr "(Vous voyez un passage secret.)"
 
 #: data/dialogs/objects/house2_ovo.dlg:31
 msgid "Enter it."
-msgstr ""
+msgstr "Entrez-le."
 
 #: data/dialogs/objects/refmachine.dlg:6
 msgid "(You see a soda machine.)"
@@ -3743,7 +3753,7 @@ msgstr "Acheter un soda"
 
 #: data/dialogs/objects/refmachine.dlg:59
 msgid "(You listened a strange noise. Is the machine alright?)"
-msgstr ""
+msgstr "(Vous entendez un étrange bruit. La machine est-elle prète ?)"
 
 #: data/dialogs/objects/refmachine.dlg:73
 msgid "(A soda appears to you.)"
@@ -4170,7 +4180,7 @@ msgstr ""
 #: data/dialogs/tutorial/atleticano.dlg:77
 #: data/dialogs/tutorial/cruzeirense.dlg:57
 msgid "What's it?"
-msgstr ""
+msgstr "Qu'es-ce-que ceci ?"
 
 #: data/dialogs/tutorial/atleticano.dlg:86
 msgid ""
@@ -4193,7 +4203,7 @@ msgstr "Je reviendrais plus tard"
 
 #: data/dialogs/tutorial/cruzeirense.dlg:20
 msgid "What now?"
-msgstr ""
+msgstr "Et maintenant ?"
 
 #: data/dialogs/tutorial/cruzeirense.dlg:25
 msgid "I have something for you."
@@ -4209,7 +4219,7 @@ msgstr "Oh, du soda !"
 
 #: data/dialogs/tutorial/cruzeirense.dlg:43
 msgid "I need some info from you."
-msgstr ""
+msgstr "Je réclame quelques info de vous."
 
 #: data/dialogs/tutorial/cruzeirense.dlg:53
 msgid ""
@@ -4268,7 +4278,7 @@ msgstr "Ordinateur portable"
 
 #: data/models/objetos/ammo/9mm_pack/9mm_pack.dcc:1
 msgid "9mm Ammo Pack"
-msgstr ""
+msgstr "Paquet d'arme 9mm"
 
 #: data/weapons/definitions/axe.wcc:1
 msgid "Great Axe"
@@ -4391,9 +4401,6 @@ msgstr "Lourd"
 msgid "Santa Claws"
 msgstr "le Père Fouettard"
 
-#~ msgid "I am Bombadinho"
-#~ msgstr "Je suis Bambadinho"
-
 #~ msgid ""
 #~ "DccNiTghtmare is developed under Public Domain: Feel free to use its "
 #~ "source code and data the way you want (or to blame us the same way). "
@@ -4405,6 +4412,9 @@ msgstr "le Père Fouettard"
 #~ "nous critiquer de la même façon). DccNiTghtmare remercie les développeurs "
 #~ "des bibliothèques (librairies) suivantes: OpenAL, Cal3D, OpenGL, SDL, "
 #~ "SDL_image, SDL_ttf, libVorbis."
+
+#~ msgid "I am Bombadinho"
+#~ msgstr "Je suis Bambadinho"
 
 #~ msgid ""
 #~ "The Student who has frequently gone to the academy, permanently receives "

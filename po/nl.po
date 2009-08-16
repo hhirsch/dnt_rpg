@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2009-06-28 11:02-0300\n"
+"POT-Creation-Date: 2009-08-16 12:27-0300\n"
 "PO-Revision-Date: 2009-04-16 21:14+0000\n"
 "Last-Translator: Marcel de Klein <q-bus@home.nl>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -78,17 +78,17 @@ msgstr "Missie gefaalt!"
 msgid "Tendency & Alignment"
 msgstr ""
 
-#: src/engine/alignwindow.cpp:71 src/engine/aspectwindow.cpp:92
-#: src/engine/attwindow.cpp:236 src/engine/classwindow.cpp:116
-#: src/engine/options.cpp:991 src/engine/racewindow.cpp:116
-#: src/engine/skillwindow.cpp:158
+#: src/engine/alignwindow.cpp:72 src/engine/aspectwindow.cpp:93
+#: src/engine/attwindow.cpp:236 src/engine/classwindow.cpp:117
+#: src/engine/options.cpp:991 src/engine/racewindow.cpp:117
+#: src/engine/skillwindow.cpp:159
 msgid "Confirm"
 msgstr "Bevestig"
 
-#: src/engine/alignwindow.cpp:75 src/engine/aspectwindow.cpp:96
+#: src/engine/alignwindow.cpp:76 src/engine/aspectwindow.cpp:97
 #: src/engine/attwindow.cpp:240 src/engine/barterwindow.cpp:66
-#: src/engine/classwindow.cpp:120 src/engine/options.cpp:995
-#: src/engine/racewindow.cpp:120 src/engine/skillwindow.cpp:161
+#: src/engine/classwindow.cpp:121 src/engine/options.cpp:995
+#: src/engine/racewindow.cpp:121 src/engine/skillwindow.cpp:162
 msgid "Cancel"
 msgstr "Annuleren"
 
@@ -96,15 +96,15 @@ msgstr "Annuleren"
 msgid "Aspect"
 msgstr ""
 
-#: src/engine/aspectwindow.cpp:66 src/engine/charwindow.cpp:106
+#: src/engine/aspectwindow.cpp:67 src/engine/charwindow.cpp:106
 msgid "Name:"
 msgstr "Naam:"
 
-#: src/engine/aspectwindow.cpp:71 src/engine/charwindow.cpp:109
+#: src/engine/aspectwindow.cpp:72 src/engine/charwindow.cpp:109
 msgid "Age:"
 msgstr "Leeftijd:"
 
-#: src/engine/aspectwindow.cpp:75 src/engine/charwindow.cpp:124
+#: src/engine/aspectwindow.cpp:76 src/engine/charwindow.cpp:124
 msgid "Sex:"
 msgstr "Geslacht:"
 
@@ -159,7 +159,7 @@ msgid "Attribute Description"
 msgstr "Attribuut beschrijving"
 
 #: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:531
-#: src/engine/inventwindow.cpp:354 src/engine/options.cpp:1232
+#: src/engine/inventwindow.cpp:352 src/engine/options.cpp:1232
 msgid "Warning"
 msgstr "Waarschuwing"
 
@@ -200,7 +200,7 @@ msgstr ""
 msgid "The barter imposition was rejected."
 msgstr ""
 
-#: src/engine/barterwindow.cpp:306 src/engine/inventwindow.cpp:201
+#: src/engine/barterwindow.cpp:306 src/engine/inventwindow.cpp:197
 msgid "Remove"
 msgstr "Verwijder"
 
@@ -280,8 +280,8 @@ msgstr "Talenten"
 msgid "Skills"
 msgstr "Vaardigheden"
 
-#: src/engine/charwindow.cpp:248 src/engine/skillwindow.cpp:168
-#: src/gui/window.cpp:219
+#: src/engine/charwindow.cpp:248 src/engine/skillwindow.cpp:169
+#: src/gui/window.cpp:186
 msgid "Close"
 msgstr ""
 
@@ -309,51 +309,51 @@ msgstr ""
 msgid "Class"
 msgstr "Klasse"
 
-#: src/engine/classwindow.cpp:93 src/engine/racewindow.cpp:93
+#: src/engine/classwindow.cpp:94 src/engine/racewindow.cpp:94
 msgid "Characteristics"
 msgstr "Karakteristieken"
 
-#: src/engine/classwindow.cpp:94 src/engine/racewindow.cpp:94
+#: src/engine/classwindow.cpp:95 src/engine/racewindow.cpp:95
 msgid "Description"
 msgstr "Beschrijving"
 
-#: src/engine/classwindow.cpp:152
+#: src/engine/classwindow.cpp:153
 msgid "Life Dice"
 msgstr "Levensdobbelsteen"
 
-#: src/engine/classwindow.cpp:156
+#: src/engine/classwindow.cpp:157
 msgid "Skill Points"
 msgstr "Vaardigheidspunten"
 
-#: src/engine/classwindow.cpp:185
+#: src/engine/classwindow.cpp:186
 msgid "First Level"
 msgstr "Eerste niveau"
 
-#: src/engine/classwindow.cpp:213
+#: src/engine/classwindow.cpp:214
 msgid "Other Levels"
 msgstr "Overige niveau's"
 
-#: src/engine/classwindow.cpp:218
+#: src/engine/classwindow.cpp:219
 msgid "Class Modifiers"
 msgstr ""
 
-#: src/engine/classwindow.cpp:230 src/engine/racewindow.cpp:171
+#: src/engine/classwindow.cpp:231 src/engine/racewindow.cpp:172
 msgid "No Modifiers."
 msgstr ""
 
-#: src/engine/classwindow.cpp:238
+#: src/engine/classwindow.cpp:239
 msgid "Class Talents"
 msgstr ""
 
-#: src/engine/classwindow.cpp:257 src/engine/racewindow.cpp:189
+#: src/engine/classwindow.cpp:258 src/engine/racewindow.cpp:190
 msgid "No Talents."
 msgstr ""
 
-#: src/engine/classwindow.cpp:265
+#: src/engine/classwindow.cpp:266
 msgid "Class Skills"
 msgstr ""
 
-#: src/engine/classwindow.cpp:284 src/engine/racewindow.cpp:215
+#: src/engine/classwindow.cpp:285 src/engine/racewindow.cpp:216
 msgid "No Skills."
 msgstr ""
 
@@ -467,7 +467,7 @@ msgstr ""
 msgid "No more actions. Turn ended."
 msgstr ""
 
-#: src/engine/dccnit.cpp:3921
+#: src/engine/dccnit.cpp:3920
 msgid "Exit Battle Mode"
 msgstr ""
 
@@ -547,36 +547,36 @@ msgstr ""
 msgid "Exit"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:181
-msgid "Drop"
-msgstr ""
-
-#: src/engine/inventwindow.cpp:188
-msgid "Buy"
-msgstr ""
-
-#: src/engine/inventwindow.cpp:188
-msgid "Sell"
-msgstr ""
-
-#: src/engine/inventwindow.cpp:195
-msgid "Use"
-msgstr ""
-
-#: src/engine/inventwindow.cpp:205
-msgid "Info"
-msgstr ""
-
-#: src/engine/inventwindow.cpp:209
+#: src/engine/inventwindow.cpp:183
 msgid "Get"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:314
+#: src/engine/inventwindow.cpp:186
+msgid "Info"
+msgstr ""
+
+#: src/engine/inventwindow.cpp:191
+msgid "Use"
+msgstr ""
+
+#: src/engine/inventwindow.cpp:200
+msgid "Buy"
+msgstr ""
+
+#: src/engine/inventwindow.cpp:200
+msgid "Sell"
+msgstr ""
+
+#: src/engine/inventwindow.cpp:205
+msgid "Drop"
+msgstr ""
+
+#: src/engine/inventwindow.cpp:312
 #, c-format
 msgid "%s reloaded %s with %s ammo."
 msgstr ""
 
-#: src/engine/inventwindow.cpp:355
+#: src/engine/inventwindow.cpp:353
 msgid "No equipped weapons are compatible with this munition type."
 msgstr ""
 
@@ -635,7 +635,7 @@ msgstr ""
 msgid "Quantity:"
 msgstr ""
 
-#: src/engine/itemwindow.cpp:237
+#: src/engine/itemwindow.cpp:238
 msgid "Ok"
 msgstr ""
 
@@ -929,15 +929,15 @@ msgstr ""
 msgid "Race"
 msgstr ""
 
-#: src/engine/racewindow.cpp:159
+#: src/engine/racewindow.cpp:160
 msgid "Race Modifiers"
 msgstr ""
 
-#: src/engine/racewindow.cpp:177
+#: src/engine/racewindow.cpp:178
 msgid "Race Talents"
 msgstr ""
 
-#: src/engine/racewindow.cpp:196
+#: src/engine/racewindow.cpp:197
 msgid "Race Skills"
 msgstr ""
 
@@ -997,15 +997,15 @@ msgstr ""
 msgid "Total Free Points:"
 msgstr ""
 
-#: src/engine/skillwindow.cpp:117
+#: src/engine/skillwindow.cpp:118
 msgid "Points:"
 msgstr ""
 
-#: src/engine/skillwindow.cpp:129
+#: src/engine/skillwindow.cpp:130
 msgid "Only show race/class skills"
 msgstr ""
 
-#: src/engine/skillwindow.cpp:148
+#: src/engine/skillwindow.cpp:149
 msgid "Cost"
 msgstr ""
 
@@ -1041,7 +1041,7 @@ msgstr ""
 msgid "%s rolls initiative: "
 msgstr ""
 
-#: src/gui/window.cpp:221
+#: src/gui/window.cpp:183
 msgid "Maximize"
 msgstr ""
 
