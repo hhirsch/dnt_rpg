@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -178,18 +178,14 @@ void inventWindow::openMenu(int x, int y, int type, bool seller)
    int xSize;
    menuType = type;
    objectMenu = (menu*) intWindow->getObjectsList()->addMenu();
-   objectMenu->insertItem(gettext("Drop"),
-                          dir.getRealFile("icons/drop.png"),
-                          (menuType == MENU_TYPE_INVENTORY) && 
-                          (!seller) );
-
+ 
+   /* Insert all menu items */
+   objectMenu->insertItem(gettext("Get"),
+                          dir.getRealFile("icons/get.png"), !seller);
    objectMenu->insertItem("-",0);
-
-   objectMenu->insertItem(seller ? gettext("Buy") : gettext("Sell"), 
-                          dir.getRealFile("icons/sell.png"),
-                          tradeWindow.isOpen() && 
-                          (menuType == MENU_TYPE_INVENTORY));
-
+   objectMenu->insertItem(gettext("Info"),
+                          dir.getRealFile("icons/info.png"), 1);
+   objectMenu->insertItem("-",0);
    if(menuType == MENU_TYPE_INVENTORY)
    {
       objectMenu->insertItem(gettext("Use"),
@@ -201,13 +197,15 @@ void inventWindow::openMenu(int x, int y, int type, bool seller)
       objectMenu->insertItem(gettext("Remove"),
                              dir.getRealFile("icons/remove.png"), !seller);
    }
+   objectMenu->insertItem(seller ? gettext("Buy") : gettext("Sell"), 
+                          dir.getRealFile("icons/sell.png"),
+                          tradeWindow.isOpen() && 
+                          (menuType == MENU_TYPE_INVENTORY));
    objectMenu->insertItem("-",0);
-   objectMenu->insertItem(gettext("Info"),
-                          dir.getRealFile("icons/info.png"), 1);
-   objectMenu->insertItem("-",0);
-
-   objectMenu->insertItem(gettext("Get"),
-                          dir.getRealFile("icons/get.png"), !seller);
+   objectMenu->insertItem(gettext("Drop"),
+                          dir.getRealFile("icons/drop.png"),
+                          (menuType == MENU_TYPE_INVENTORY) && 
+                          (!seller) );
 
    fnt.defineFont(DNT_FONT_ARIAL,12);
 
@@ -653,10 +651,12 @@ int inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                   state = INVENTORY_STATE_OBJECT;
                break;
                case 3: /* Info */
+               {
                   if(infoWindow)
                   {
                      infoWindow->open(activeObject);
                   }
+               }
                break;
                case 5: /* Use */
                {

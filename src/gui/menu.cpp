@@ -55,20 +55,21 @@ void menu::insertItem(string text, bool avaible)
  *********************************************************/
 void menu::insertItem(string text, string imageFile, bool avaible)
 {
-   /* Insert Text Box */
    textBox* novo;
-   novo = insertTextBox(x,y,x+200,y+200,0,text);
-   novo->setAvailable(avaible);
-   if(text.length() > maxCharac)
-   {
-      maxCharac = text.length();
-   }
 
    /* Insert Picture */
    if(!imageFile.empty())
    {
       insertPicture(x,y,0,0, imageFile.c_str());
       numPictures++;
+   }
+
+   /* Insert Text Box */
+   novo = insertTextBox(x,y,x+200,y+200,0,text);
+   novo->setAvailable(avaible);
+   if(text.length() > maxCharac)
+   {
+      maxCharac = text.length();
    }
 }
 

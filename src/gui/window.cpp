@@ -180,11 +180,11 @@ window::window(int xa, int ya, int xb, int yb, string title, void* list)
    menuButton = objects->insertButton(3,3,13,12,"-",0);
    menuButton->men = new menu(0,0);
    menu* men = (menu*) menuButton->men;
-   men->insertItem(gettext("Close"), dir.getRealFile("icons/close.png"), 1);
-   men->insertItem("-",0);
    men->insertItem(gettext("Maximize"), 
                    dir.getRealFile("icons/maximize.png") ,0);
-
+   men->insertItem("-",0);
+   men->insertItem(gettext("Close"), dir.getRealFile("icons/close.png"), 1);
+   
    /* Create Close Button */
    closeButton = objects->insertButton(14,3,24,12,fnt.createUnicode(0x25CF),0);
    closeButton->defineFont(DNT_FONT_ARIAL, 10);
