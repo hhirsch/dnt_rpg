@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -21,6 +21,8 @@
 #ifndef _farso_tab_box_h
 #define _farso_tab_box_h
 
+#include "../etc/list.h"
+
 #include "color.h"
 #include "draw.h"
 #include "dntfont.h"
@@ -31,7 +33,7 @@
 using namespace std;
 
 /*! tabObj is used to keep information about a single option at the tabBox */
-class tabObj
+class tabObj: public dntListElement
 {
    public:
       /*! Constructor */
@@ -41,16 +43,13 @@ class tabObj
 
       guiList* list;      /**< The guiList itself */
       string title;       /**< The title */
-
-      tabObj* next;     /**< Pointer to the next */
-      tabObj* previous; /**< Pointer to the previous */
 };
 
 /*! The tabBox class is a tabWidget for FarSo. It have a 
  * gui objects list for each tab option, only displaying one
  * per time (that that is selected). 
  * \note each guiList can have only one tabBox */
-class tabBox: public guiObject
+class tabBox: public guiObject, public dntList
 {
    public:
       /*! Constructor 
@@ -82,10 +81,6 @@ class tabBox: public guiObject
        * \return -> guiList relative to the option or NULL */
       guiList* getList(string title);
 
-      /*! Get the total number of options at the tabBox
-       * \return -> total number of options */
-      int getTotal();
-
       /*! Insert a new option at the tabBox
        * \param title -> unique title for the option 
        * \return -> pointer to th object guiList */
@@ -108,8 +103,10 @@ class tabBox: public guiObject
        * \return -> pointer to the found tabObj or NULL */
       tabObj* getObject(int opt);
 
-      int total;       /**< Total Objects at list */
-      tabObj* first;   /**< tabObj List */
+      /*! Delete a tabObj.
+       * \param obj -> tabObj to delete */
+      void freeElement(dntListElement* obj);
+
       tabObj* active;  /**< The active tabObj */
       SDL_Surface* wSurface; /**< Pointer to the window surface */
 

@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -38,8 +38,6 @@ tabObj::tabObj()
 {
    list = new guiList();
    title = "";
-   next = NULL;
-   previous = NULL;
 }
 
 /***********************************************************************
@@ -71,8 +69,6 @@ tabBox::tabBox(int xa, int ya, int xb, int yb, SDL_Surface* screen)
    wSurface = screen;
 
    /* And nullify the list! */
-   first = NULL;
-   total = 0;
    active = NULL;
 }
 
@@ -81,17 +77,16 @@ tabBox::tabBox(int xa, int ya, int xb, int yb, SDL_Surface* screen)
  ***********************************************************************/
 tabBox::~tabBox()
 {
-   int i;
-   tabObj* obj = first;
+   clearList();
+}
 
-   /* Delete all elements on the list! */
-   for(i = 0; i < total; i++)
-   {
-      active = obj;
-      obj = obj->next;
-      delete(active);
-   }
-   total = 0;
+/***********************************************************************
+ *                             freeElement                             *
+ ***********************************************************************/
+void tabBox::freeElement(dntListElement* obj)
+{
+   tabObj* tb = (tabObj*)obj;
+   delete(tb);
 }
 
 /***********************************************************************
@@ -125,14 +120,14 @@ string tabBox::getActiveTitle()
 tabObj* tabBox::getObject(int opt)
 {
    int i;
-   tabObj* obj = first;
+   tabObj* obj = (tabObj*)first;
 
    /* Search for the element */
    if( (opt < total) && (opt >= 0))
    {
       for(i = 0; i < opt; i++)
       {
-         obj = obj->next;
+         obj = (tabObj*)obj->getNext();
       }
       return(obj);
    }
@@ -161,7 +156,7 @@ guiList* tabBox::getList(int opt)
 guiList* tabBox::getList(string title)
 {
    int i;
-   tabObj* obj = first;
+   tabObj* obj = (tabObj*)first;
 
    /* Search for the element */
    for(i = 0; i < total; i++)
@@ -171,20 +166,11 @@ guiList* tabBox::getList(string title)
          /* Found it! */
          return(obj->list);
       }
-      obj = obj->next;
+      obj = (tabObj*)obj->getNext();
    }
 
    return(NULL);
 }
-
-/***********************************************************************
- *                              getTotal                               *
- ***********************************************************************/
-int tabBox::getTotal()
-{
-   return(total);
-}
-   
 
 /***********************************************************************
  *                              insertOption                           *
@@ -200,25 +186,11 @@ guiList* tabBox::insertOption(string title)
       obj->title = title;
       obj->list->setSurface(wSurface);
 
-      if(first == NULL)
-      {
-         obj->next = obj;
-         obj->previous = obj;
-      }
-      else
-      {
-         obj->next = first;
-         obj->previous = first->previous;
-         obj->next->previous = obj;
-         obj->previous->next = obj;
-      }
-
-      first = obj;
+      /* Insert it */
+      insert(obj);
 
       /* Define the active one */
       active = obj;
-
-      total++;
 
       return(obj->list);
    }
@@ -260,7 +232,7 @@ void tabBox::draw(SDL_Surface* screen)
                      colors.colorCont[1].B, colors.colorCont[1].A);
 
    /* Draw All Titles */
-   obj = first;
+   obj = (tabObj*)first;
    posX = x1;
    for(i = 0; i < total; i++)
    {
@@ -308,7 +280,7 @@ void tabBox::draw(SDL_Surface* screen)
 
       /* Next! */
       posX += incX;
-      obj = obj->next;
+      obj = (tabObj*)obj->getNext();
    }
 
    /* Draw all active objects */
