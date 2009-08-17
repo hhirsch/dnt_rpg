@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -21,31 +21,19 @@
 #ifndef _dnt_comic_page_h
 #define _dnt_comic_page_h
 
+#include "../etc/list.h"
+
 #include "comicbox.h"
 
 /*! The Comic Page is the representation of a page,
  * including all comic boxes and its effects */
-class comicPage
+class comicPage: public dntListElement
 {
    public:
       /*! Constructor */
       comicPage();
       /*! Destructor */
       ~comicPage();
-
-      /*! Set the next page 
-       * \param page -> next page */
-      void setNext(comicPage* page);
-      /*! Set the previous page
-       * \param page -> previous page */
-      void setPrevious(comicPage* page);
-
-      /*! Get the next page 
-       * \return next page */
-      comicPage* getNext();
-      /*! Get the previous page
-       * \return previous page */
-      comicPage* getPrevious();
 
       /*! Insert a comic box at the page
        * \param box -> comicBox to insert */
@@ -101,14 +89,25 @@ class comicPage
 
    protected:
 
-      comicPage* next;     /**< Next Page of the comic book */
-      comicPage* previous; /**< Previous Page of the comic book */
-
       SDL_Surface* texture; /**< Page SDL Texture */
       GLuint tex;           /**< Page OpenGL Texture */
 
-      comicBox* boxes;  /**< Boxes List */
-      int totalBoxes;   /**< Total Boxes on the list */
+      comicBoxList boxes;   /**< Boxes List */
+};
+
+/*! The list of comic pages */
+class comicPageList: public dntList
+{
+   public:
+      /*! Constructor */
+      comicPageList();
+      /*! Destructor */
+      ~comicPageList();
+
+   protected:
+      /*! Free element
+       * \param obj -> pointer to the comicPage to delete */
+      void freeElement(dntListElement* obj);
 };
 
 #endif

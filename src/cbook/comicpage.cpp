@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -30,14 +30,33 @@ using namespace std;
 /***********************************************************************
  *                             Constructor                             *
  ***********************************************************************/
+comicPageList::comicPageList(): dntList(DNT_LIST_TYPE_ADD_AT_END)
+{
+}
+
+/***********************************************************************
+ *                              Destructor                             *
+ ***********************************************************************/
+comicPageList::~comicPageList()
+{
+   clearList();
+}
+
+/***********************************************************************
+ *                            freeElement                              *
+ ***********************************************************************/
+void comicPageList::freeElement(dntListElement* obj)
+{
+   comicPage* page = (comicPage*)obj;
+   delete(page);
+}
+
+/***********************************************************************
+ *                             Constructor                             *
+ ***********************************************************************/
 comicPage::comicPage()
 {
-   boxes = NULL; 
-   totalBoxes = 0;
-   next = NULL;
-   previous = NULL;
    texture = NULL;
-
    glGenTextures(1, &tex);
 }
 
@@ -46,23 +65,11 @@ comicPage::comicPage()
  ***********************************************************************/
 comicPage::~comicPage()
 {
-   int i;
-
    /* Free texture */
    glDeleteTextures(1,&tex);
    if(texture != NULL)
    {
       SDL_FreeSurface(texture);
-   }
-
-   /* Free All Boxes */
-   comicBox* box;
-   for(i = 0; i < totalBoxes; i++)
-   {
-      box = boxes;
-      boxes = boxes->getNext();
-
-      delete(box);
    }
 }
 
@@ -82,7 +89,7 @@ void comicPage::flushTexture()
  ***********************************************************************/
 comicBox* comicPage::getFirstBox()
 {
-   return(boxes);
+   return((comicBox*)boxes.getFirst());
 }
 
 /***********************************************************************
@@ -90,39 +97,7 @@ comicBox* comicPage::getFirstBox()
  ***********************************************************************/
 int comicPage::getTotalBoxes()
 {
-   return(totalBoxes);
-}
-
-/***********************************************************************
- *                               setNext                               *
- ***********************************************************************/
-void comicPage::setNext(comicPage* page)
-{
-   next = page;
-}
-
-/***********************************************************************
- *                               getNext                               *
- ***********************************************************************/
-comicPage* comicPage::getNext()
-{
-   return(next);
-}
-
-/***********************************************************************
- *                             setPrevious                             *
- ***********************************************************************/
-void comicPage::setPrevious(comicPage* page)
-{
-   previous = page;
-}
-
-/***********************************************************************
- *                             getPrevious                             *
- ***********************************************************************/
-comicPage* comicPage::getPrevious()
-{
-   return(previous);
+   return(boxes.getTotal());
 }
 
 /***********************************************************************
@@ -155,7 +130,7 @@ int comicPage::getHeight()
 void comicPage::render()
 {
    int i;
-   comicBox *box = boxes;
+   comicBox* box = (comicBox*)boxes.getFirst();
 
    /* Calculate scale ratio */
    GLfloat ratio = 1.0f;
@@ -189,13 +164,13 @@ void comicPage::render()
    /* Render Page Boxes */
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, tex);
-   for(i = 0; i < totalBoxes; i++)
+   for(i = 0; i < boxes.getTotal(); i++)
    {
       if(box->getStatus() != COMIC_BOX_STATUS_INACTIVE)
       {
          box->render();
       }
-      box = box->getNext();
+      box = (comicBox*)box->getNext();
    }
    glPopMatrix();
 
@@ -208,26 +183,7 @@ void comicPage::render()
  ***********************************************************************/
 void comicPage::insertBox(comicBox* box)
 {
-   if(box)
-   {
-      if(boxes == NULL)
-      {
-         /* First box on the list */
-         box->setNext(box);
-         box->setPrevious(box);
-         boxes = box;
-      }
-      else
-      {
-         /* Put it at the list's end */
-         box->setNext(boxes);
-         box->setPrevious(boxes->getPrevious());
-
-         box->getNext()->setPrevious(box);
-         box->getPrevious()->setNext(box);
-      }
-      totalBoxes++;
-   }
+   boxes.insert(box);
 }
 
 

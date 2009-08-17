@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -25,13 +25,34 @@
 /***********************************************************************
  *                              Constructor                            *
  ***********************************************************************/
+comicBoxList::comicBoxList(): dntList(DNT_LIST_TYPE_ADD_AT_END)
+{
+}
+
+/***********************************************************************
+ *                               Destructor                            *
+ ***********************************************************************/
+comicBoxList::~comicBoxList()
+{
+}
+
+/***********************************************************************
+ *                             freeElement                             *
+ ***********************************************************************/
+void comicBoxList::freeElement(dntListElement* obj)
+{
+   comicBox* box = (comicBox*)obj;
+   delete(box);
+}
+
+/***********************************************************************
+ *                              Constructor                            *
+ ***********************************************************************/
 comicBox::comicBox(string t)
 {
    int i;
 
    /* Set some default values */
-   next = NULL;
-   previous = NULL;
    scaleFactorX = 1.0;
    scaleFactorY = 1.0;
    status = COMIC_BOX_STATUS_INACTIVE;
@@ -78,38 +99,6 @@ void comicBox::setVertex(int vertNumber, GLfloat x, GLfloat y,
       vertex[vertNumber][0] = x * ratio;
       vertex[vertNumber][1] = SCREEN_Y - (y * ratio);
    }
-}
-
-/***********************************************************************
- *                                setNext                              *
- ***********************************************************************/
-void comicBox::setNext(comicBox* box)
-{
-   next = box;
-}
- 
-/***********************************************************************
- *                              setPrevious                            *
- ***********************************************************************/
-void comicBox::setPrevious(comicBox* box)
-{
-   previous = box;
-}
-
-/***********************************************************************
- *                                getNext                              *
- ***********************************************************************/
-comicBox* comicBox::getNext()
-{
-   return(next);
-}
-
-/***********************************************************************
- *                              getPrevious                            *
- ***********************************************************************/
-comicBox* comicBox::getPrevious()
-{
-   return(previous);
 }
 
 /***********************************************************************

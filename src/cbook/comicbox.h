@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -20,6 +20,8 @@
 
 #ifndef _dnt_comic_box_h
 #define _dnt_comic_box_h
+
+#include "../etc/list.h"
 
 #include <SDL/SDL_opengl.h>
 #include <SDL/SDL.h>
@@ -42,7 +44,7 @@ using namespace std;
 
 /*! The comic box is a quad of the comic page, with its show effect,
  * sound and page position */
-class comicBox
+class comicBox: public dntListElement
 {
    public:
       /*! Constructor 
@@ -81,20 +83,6 @@ class comicBox
       /*! Render the box at its current state and effect */
       void render();
 
-      /*! Set the next box 
-       * \param box -> next box */
-      void setNext(comicBox* box);
-      /*! Set the previous box
-       * \param page -> previous box */
-      void setPrevious(comicBox* box);
-
-      /*! Get the next box 
-       * \return next box */
-      comicBox* getNext();
-      /*! Get the previous box
-       * \return previous box */
-      comicBox* getPrevious();
-
       /*! Get the box title
        * \return -> title string */
       string getTitle();
@@ -123,9 +111,21 @@ class comicBox
       Uint32 timeout;        /**< Box Wait time */
 
       string title;          /**< title  */
+};
 
-      comicBox* next;        /**< Next Box on list */
-      comicBox* previous;    /**< Previous Box on list */
+/*! The chain list of comic boxes */
+class comicBoxList: public dntList
+{
+   public:
+      /*! Constructor */
+      comicBoxList();
+      /*! Destructor */
+      ~comicBoxList();
+
+   protected:
+      /*! Delete a comicBox pointer
+       * \paramn obj -> pointer to the comicBox */
+      void freeElement(dntListElement* obj);
 };
 
 #endif

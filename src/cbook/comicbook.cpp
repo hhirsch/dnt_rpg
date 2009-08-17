@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -39,8 +39,6 @@ comicBook::comicBook()
    dirs dir;
    /* Default Values */
    title = "";
-   pages = NULL;
-   totalPages = 0;
    skipScale = 1.0;
    skipSum = -0.05;
    exit = false;
@@ -67,7 +65,6 @@ comicBook::comicBook()
 comicBook::~comicBook()
 {
    empty();
-
    glDeleteTextures(1, &skipTexture);
 }
 
@@ -76,15 +73,7 @@ comicBook::~comicBook()
  ***********************************************************************/
 void comicBook::empty()
 {
-   int i;
-   comicPage* pag;
-   /* Empty the book, deleting each page */
-   for(i = 0; i < totalPages; i++)
-   {
-      pag = pages;
-      pages = pages->getNext();
-      delete(pag);
-   }
+   pages.clearList();
 }
 
 /***********************************************************************
@@ -93,24 +82,7 @@ void comicBook::empty()
 comicPage* comicBook::insertPage(string t)
 {
    comicPage* page = new comicPage();
-   if(pages == NULL)
-   {
-      /* Is the first page */
-      pages = page;
-      page->setNext(page);
-      page->setPrevious(page);
-   }
-   else
-   {
-      /* Insert at linked list end */
-      page->setNext(pages);
-      page->setPrevious(pages->getPrevious());
-
-      page->getNext()->setPrevious(page);
-      page->getPrevious()->setNext(page);
-   }
-
-   totalPages++;
+   pages.insert(page);
    return(page);
 }
 
@@ -297,11 +269,11 @@ bool comicBook::load(string bookFile)
 void comicBook::run()
 {
    int p;
-   comicPage *curPage = pages;
+   comicPage* curPage = (comicPage*)pages.getFirst();
    exit = false;
 
    /* Treat all book pages */
-   for(p = 0; ((p < totalPages) && (!exit)); p++)
+   for(p = 0; ((p < pages.getTotal()) && (!exit)); p++)
    {
       int b;
       comicBox* curBox = curPage->getFirstBox();
@@ -325,7 +297,7 @@ void comicBook::run()
                }
             }
          }
-         curBox = curBox->getNext();
+         curBox = (comicBox*)curBox->getNext();
       }
 
       /* Render the page with a scale-out effect */
@@ -336,7 +308,7 @@ void comicBook::run()
          scale -= 0.04;
       }
 
-      curPage = curPage->getNext();
+      curPage = (comicPage*)curPage->getNext();
    }
 }
 
