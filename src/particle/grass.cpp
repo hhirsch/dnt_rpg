@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -39,7 +39,7 @@ grass::grass(float cX1,float cZ1, float cX2, float cZ2, int total,
    
    /* NOTE: althought the constructor says PARTICLE_DRAW_INDIVIDUAL,
     * the grass is rendered as glArrays, at the endRender() function.
-    * It was done at this way since the arrays sizes of the grass is
+    * It's done this way since the array sizes of the grass is
     * distinct of the normal particles array sizes (grass = 4 points,
     * normal particles = 1 point). */
 
@@ -55,6 +55,7 @@ grass::grass(float cX1,float cZ1, float cX2, float cZ2, int total,
    pcY = -1;
    pcZ = -1;
 
+   type = DNT_PARTICLE_TYPE_GRASS;
 
    /* Load Texture */
    grassFileName = fileName;
@@ -330,11 +331,11 @@ void grass::nextStep(GLfloat** matriz,
 }
 
 /**************************************************************************
- *                             numParticles                               *
+ *                               NextStep                                 *
  **************************************************************************/
-int grass::numParticles()
+void grass::nextStep(GLfloat** matriz)
 {
-   return(actualParticles);
+  /* Not used */
 }
 
 /**************************************************************************

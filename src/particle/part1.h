@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -116,12 +116,6 @@ class part1: public particleSystem
        * \param matriz -> View Frustum Matrix
        ***************************************************************/
       void nextStep(GLfloat** matriz);
-      /*!
-       ***************************************************************
-       * Gets the number of actual active particles
-       * \return number of actual living particles. 
-       ***************************************************************/
-      int numParticles();
       /*!
        ***************************************************************
        * Add one plane to internal Planes

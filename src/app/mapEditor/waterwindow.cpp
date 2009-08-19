@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -395,7 +395,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
       {
          if(activeWater)
          {
-            activeWater = (part1*)activeWater->next;
+            activeWater = (part1*)activeWater->getNext();
             activePlane = activeWater->getLastPlane();
             defineValues();
          }
@@ -405,7 +405,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
       {
          if(activeWater)
          {
-            activeWater = (part1*)activeWater->previous;
+            activeWater = (part1*)activeWater->getPrevious();
             activePlane = activeWater->getLastPlane();
             defineValues();
          }
@@ -416,16 +416,16 @@ bool waterWindow::eventGot(int type, guiObject* object)
          if((activeWater) && (pSystem))
          {
             part1* tmpWater = NULL;
-            if(activeWater != (part1*)activeWater->previous)
+            if(activeWater != (part1*)activeWater->getPrevious())
             {
-               tmpWater = (part1*)activeWater->previous;
+               tmpWater = (part1*)activeWater->getPrevious();
                activePlane = tmpWater->getLastPlane();
             }
             else
             {
                activePlane = NULL;
             }
-            pSystem->removeParticle(PART_WATERFALL, activeWater);
+            pSystem->removeParticle(activeWater);
             activeWater = tmpWater;
             defineValues();
          }

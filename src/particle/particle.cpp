@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -35,17 +35,18 @@
 particleSystem::particleSystem(int total, int mode)
 {
    init(total, mode);
+   type = DNT_PARTICLE_TYPE_NONE;
    strFileName = "";
-   next = NULL;
-   previous = NULL;
 }
 
+/***************************************************************
+ *                 Particle System Constructor                 *
+ ***************************************************************/
 particleSystem::particleSystem()
 {
    init(1,PARTICLE_DRAW_INDIVIDUAL);
    strFileName = "";
-   next = NULL;
-   previous = NULL;
+   type = DNT_PARTICLE_TYPE_NONE;
 }
 
 /***************************************************************
@@ -58,8 +59,7 @@ particleSystem::particleSystem(string fileName, int mode)
    string aux;
    char aux2[20];
 
-   next = NULL;
-   previous = NULL;
+   type = DNT_PARTICLE_TYPE_NONE;
 
    strFileName = fileName;
    file.open(dir.getRealFile(fileName).c_str(),
@@ -457,6 +457,14 @@ void particleSystem::getPosition(GLfloat& x, GLfloat &y, GLfloat& z)
 int particleSystem::getMaxParticles()
 {
    return(maxParticles);
+}
+
+/***********************************************************
+ *                     numParticles                        *
+ ***********************************************************/
+int particleSystem::numParticles()
+{
+   return(actualParticles);
 }
 
 /***********************************************************

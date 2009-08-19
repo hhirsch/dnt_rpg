@@ -163,7 +163,8 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
 
             GLfloat povValue = 700.0;
             int total = (int)floor((z2-z1)*(x2-x1) / povValue);
-            grass* gr = (grass*) pS->addParticle(PART_GRASS, x1, z1, x2, z2, 
+            grass* gr = (grass*) pS->addParticle(DNT_PARTICLE_TYPE_GRASS, 
+                                                 x1, z1, x2, z2, 
                                                  total, 3.0, selectedText); 
             grWindow->setGrass(gr);
             state = TOOL_PARTICLE_GRASS;
@@ -174,7 +175,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       else
       {
          state = TOOL_PARTICLE_GRASS;
-         particleType = PART_GRASS;
+         particleType = DNT_PARTICLE_TYPE_GRASS;
       }
       
    }
@@ -228,7 +229,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
    else if( (tool == TOOL_PARTICLE_FIRE) && (!actualParticle) )
    {
       state = TOOL_PARTICLE_FIRE; 
-      particleType = PART_FIRE;
+      particleType = DNT_PARTICLE_TYPE_FIRE;
       part2* tmpPart = NULL;
       string fileToOpen = selectedText;
       if(fileToOpen != "../data/particles/")
@@ -253,7 +254,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
    else if( (tool == TOOL_PARTICLE_SMOKE) && (!actualParticle) )
    {
       state = TOOL_PARTICLE_SMOKE; 
-      particleType = PART_SMOKE;
+      particleType = DNT_PARTICLE_TYPE_SMOKE;
       part4* tmpPart = NULL;
       string fileToOpen = selectedText;
       if(fileToOpen != "../data/particles/")
@@ -277,7 +278,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
    /* Waterfall */
    else if( (tool == TOOL_PARTICLE_WATERFALL) && (!actualParticle) )
    {
-      particleType = PART_WATERFALL;
+      particleType = DNT_PARTICLE_TYPE_WATERFALL;
       state = TOOL_PARTICLE_WATERFALL; 
       part1* tmpPart = NULL;
       string fileToOpen = selectedText;
@@ -303,7 +304,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
    else if( (tool == TOOL_PARTICLE_SNOW) && (!actualParticle) )
    {
       state = TOOL_PARTICLE_SNOW; 
-      particleType = PART_SNOW;
+      particleType = DNT_PARTICLE_TYPE_SNOW;
       part7* tmpPart = NULL;
       string fileToOpen = selectedText;
       if(fileToOpen != "../data/particles/")

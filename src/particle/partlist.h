@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -21,24 +21,18 @@
 #ifndef _dnt_partlist_h
 #define _dnt_partlist_h
 
+#include "../etc/list.h"
+
 #include "particle.h"
 
 /*! List of particles Systems  */
-class particleList
+class particleList: public dntList
 {
    public:
       /*! Constructor  */
       particleList();
       /*! Destructor */
       ~particleList();
-
-      /*! Get the first element on the list
-       * \return -> pointer to the first element on the list */
-      particleSystem* getFirst();
-
-      /*! Get the total systems on the list
-       * \return -> total elements on the list */
-      int getTotal();
 
       /*! Add a particle System to the list
        * \param part -> system to add */
@@ -50,8 +44,9 @@ class particleList
       void removeSystem(particleSystem* part);
 
    protected:
-      particleSystem* first;     /**< First Element on the list */
-      int total;                 /**< Total Elements on the list */
+      /*! Delete a particleSystem
+       * \param obj -> pointer to the particle system to delete */
+      void freeElement(dntListElement* obj);
 };
 
 #endif

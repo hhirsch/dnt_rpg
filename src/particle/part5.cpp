@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -38,6 +38,8 @@ part5::part5(float cX,float cY,float cZ, string fileName):
                                particleSystem(fileName,PARTICLE_DRAW_GROUPS)
 {
    dirs dir;
+
+   type = DNT_PARTICLE_TYPE_BLOOD;
    centerX = cX; 
    alpha=cY; 
    centerZ=cZ;
@@ -234,13 +236,5 @@ void part5::createParticle(particle* part)
 void part5::nextStep(GLfloat** matriz)
 {
    doStep(matriz);
-}
-
-/****************************************************************************
- *                             numParticles                                 *
- ****************************************************************************/
-int part5::numParticles()
-{
-   return(actualParticles);
 }
 

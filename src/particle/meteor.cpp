@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -47,6 +47,8 @@ meteor::meteor(float cX, float cY, float cZ, float vX, float vY, float vZ,
    targX = tX;
    targY = tY;
    targZ = tZ;
+
+   type = DNT_PARTICLE_TYPE_METEOR;
 
    setDurationTime(METEOR_STATIC_LIVING_TIME);
 
@@ -143,11 +145,6 @@ void meteor::nextStep(GLfloat** matriz)
    initRender();
    intFire->nextStep(matriz);
    endRender();
-}
-
-int meteor::numParticles()
-{
-   return(intFire->numParticles());
 }
 
 void meteor::render(particle* p)

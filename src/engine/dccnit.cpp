@@ -2585,7 +2585,8 @@ int engine::treatIO(SDL_Surface *screen)
          lastKeyb = time;
          if(!effect)
          {
-            effect = (part2*)particleController.addParticle(PART_FIRE,
+            effect = (part2*)particleController.addParticle(
+                  DNT_PARTICLE_TYPE_FIRE,
                   activeCharacter->xPosition,0,
                   activeCharacter->zPosition,
                   "particles/effect1.par");
@@ -2596,7 +2597,7 @@ int engine::treatIO(SDL_Surface *screen)
          }
          else
          {
-            particleController.removeParticle(PART_FIRE, effect);
+            particleController.removeParticle(effect);
             effect = NULL;
          }
       }
@@ -2606,7 +2607,7 @@ int engine::treatIO(SDL_Surface *screen)
       {
          lastKey = SDLK_t;
          lastKeyb = time;
-         particleController.addParticle(PART_METEOR,
+         particleController.addParticle(DNT_PARTICLE_TYPE_METEOR,
                activeCharacter->xPosition,
                MAX_HEIGHT+100,
                activeCharacter->zPosition,
@@ -2625,7 +2626,7 @@ int engine::treatIO(SDL_Surface *screen)
          lastKey = SDLK_u;
          GLfloat incZ = -cos(deg2Rad(activeCharacter->orientation));
          GLfloat incX = -sin(deg2Rad(activeCharacter->orientation));
-         particleController.addParticle(PART_METEOR,
+         particleController.addParticle(DNT_PARTICLE_TYPE_METEOR,
                activeCharacter->xPosition,
                activeCharacter->yPosition + 15,
                activeCharacter->zPosition,
@@ -2641,7 +2642,7 @@ int engine::treatIO(SDL_Surface *screen)
       {
          lastKey = SDLK_l;
          lastKeyb = time;
-         particleController.addParticle(PART_LIGHTNING,
+         particleController.addParticle(DNT_PARTICLE_TYPE_LIGHTNING,
                activeCharacter->xPosition,250,
                activeCharacter->zPosition,
                "particles/lightning1.par");

@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -26,8 +26,9 @@
 #include <string>
 using namespace std;
 
-#include "../etc/extensions.h"
 #include "../etc/dirs.h"
+#include "../etc/extensions.h"
+#include "../etc/list.h"
 
 #define PARTICLE_STATUS_DEAD   0  /**< Say that a particle is dead */
 #define PARTICLE_STATUS_ALIVE  1  /**< Say that a particle is alive */
@@ -35,6 +36,21 @@ using namespace std;
 
 #define PARTICLE_DRAW_GROUPS     0 /**< Draw particles as vertex group */
 #define PARTICLE_DRAW_INDIVIDUAL 1 /**< Draw each particle individually */
+
+/*! The particle system types */
+enum
+{
+    DNT_PARTICLE_TYPE_NONE=0,
+    DNT_PARTICLE_TYPE_WATERFALL,
+    DNT_PARTICLE_TYPE_FIRE,
+    DNT_PARTICLE_TYPE_WATER_SURFACE,
+    DNT_PARTICLE_TYPE_SMOKE,
+    DNT_PARTICLE_TYPE_BLOOD,
+    DNT_PARTICLE_TYPE_LIGHTNING,
+    DNT_PARTICLE_TYPE_SNOW,
+    DNT_PARTICLE_TYPE_GRASS,
+    DNT_PARTICLE_TYPE_METEOR
+};
 
 /*! Number of actualizations to stabilize a system */
 #define PART_STABILIZE_LOOP 600 
@@ -55,7 +71,7 @@ class particle
 };
 
 /*! The Particle System */
-class particleSystem
+class particleSystem: public dntListElement
 {
    public:
       /*!
@@ -105,7 +121,12 @@ class particleSystem
        ***************************************************************/
       bool save( string fileName);
 
-
+      /*!
+       ***************************************************************
+       * Do a step on system after sec seconds
+       * \param matriz -> View Frustum Matrix
+       ***************************************************************/
+      virtual void nextStep(GLfloat** matriz)=0;
       /*!
        ***************************************************************
        * Render one particle on screen     
@@ -193,6 +214,13 @@ class particleSystem
       int getMaxParticles();
 
       /*!
+       ***************************************************************
+       * Get the number of actual active particles
+       * \return number of actual living particles. 
+       ***************************************************************/
+      int numParticles();
+
+      /*!
        *************************************************************** 
        * Set if the particleSystem will follow the PC or not
        * \param follow -> true to follow pc, false to not follow  
@@ -207,14 +235,12 @@ class particleSystem
        ***************************************************************/
       void setDurationTime(int time);
 
-
-      particleSystem* next;     /**< Next Particle System on the List */
-      particleSystem* previous; /**< Previous Particle System on the list */
-
       friend class partController;  /**< The controller is our friend */
       friend class particleList;    /**< The list is our friend too */
 
    protected:
+
+      int type;                  /**< The particle type constant */
 
       int systemInitialLiveTime; /**< Time the Particle start live  */
       int systemMaxLiveTime;     /**< Max living time, in ms. 0 is infinity */

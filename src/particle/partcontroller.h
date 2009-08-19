@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -34,16 +34,6 @@
 #include "partlist.h"
 #include <string>
 using namespace std;
-
-#define PART_WATERFALL     1  /**< Waterfall ID */
-#define PART_FIRE          2  /**< Fire ID */
-#define PART_WATER_SURFACE 3  /**< Water Surface ID */
-#define PART_SMOKE         4  /**< Smoke ID */
-#define PART_BLOOD         5  /**< Blood ID */
-#define PART_LIGHTNING     6  /**< Lightnig ID */
-#define PART_SNOW          7  /**< Snow ID */
-#define PART_GRASS         8  /**< Grass ID */
-#define PART_METEOR        9  /**< Meteor ID */
 
 /*! The partController class controls all particles systens, 
     make their updates, renders, deaths, etc. */
@@ -82,9 +72,8 @@ class partController
                           string fileName);
 
       /*! Remove an particle system from the system
-       * \param type -> the type of the System (PART_BLOOD, PART_FIRE)
        * \param part -> address of the Particle */
-      void removeParticle(int type, void* part);
+      void removeParticle(particleSystem* part);
 
       /*! Gets the total numbers of particles
        * \return Total Number of particles on system, from all systems */
@@ -111,15 +100,8 @@ class partController
 
 
    private:
-      static particleList* waterfall;        /**< Waterfall Particles */
-      static particleList* fire;             /**< Fire Particles */
-      static particleList* waterSurface;     /**< WaterSurfaces Particles */
-      static particleList* smoke;            /**< Smoke Particles */
-      static particleList* blood;            /**< Blood Particles */
-      static particleList* lightning;        /**< Lightning Particles */
-      static particleList* snow;             /**< Snow Particles */
-      static particleList* grassParticles;   /**< Grass Particles */
-      static particleList* meteorParticles;  /**< Meteor Particles */
+      static particleList* particles;        /**< Waterfall Particles */
+      
       static collision* colDetect;           /**< Collision System */
       static void* currentMap;               /**< Current Map */
 

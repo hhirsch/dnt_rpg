@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -20,14 +20,21 @@
 
 #include "partlist.h"
 
+#include "part1.h"
+#include "part2.h"
+#include "part3.h"
+#include "part4.h"
+#include "part5.h"
+#include "part6.h"
+#include "part7.h"
+#include "grass.h"
+#include "meteor.h"
 
 /***************************************************************************
  *                             Constructor                                 *
  ***************************************************************************/
-particleList::particleList()
+particleList::particleList(): dntList(DNT_LIST_TYPE_ADD_AT_BEGIN)
 {
-   total = 0;
-   first = NULL;
 }
 
 /***************************************************************************
@@ -35,34 +42,9 @@ particleList::particleList()
  ***************************************************************************/
 particleList::~particleList()
 {
-   int i;
-   particleSystem* part = first;
    /* Remove the remaining systens. Usually, no systems are at the
     * destructor time, cause the remove here can make a memory leack. */
-   for(i = 0; i < total; i++)
-   {
-      first = part;
-      part = part->next;
-      delete(first);
-   }
-}
-
-
-/***************************************************************************
- *                               getFirst                                  *
- ***************************************************************************/
-particleSystem* particleList::getFirst()
-{
-   return(first);
-}
-
-
-/***************************************************************************
- *                              getTotal                                   *
- ***************************************************************************/
-int particleList::getTotal()
-{
-   return(total);
+   clearList();
 }
 
 /***************************************************************************
@@ -70,20 +52,7 @@ int particleList::getTotal()
  ***************************************************************************/
 void particleList::addSystem(particleSystem* part)
 {
-   if(first == NULL)
-   {
-      part->next = part;
-      part->previous = part;
-   }
-   else
-   {
-      part->next = first;
-      part->previous = first->previous;
-      part->next->previous = part;
-      part->previous->next = part;
-   }
-   first = part;
-   total++;
+   insert(part);
 }
 
 
@@ -92,16 +61,79 @@ void particleList::addSystem(particleSystem* part)
  ***************************************************************************/
 void particleList::removeSystem(particleSystem* part)
 {
-   if(part == first)
+   remove(part);
+}
+
+/***************************************************************************
+ *                             freeElement                                 *
+ ***************************************************************************/
+void particleList::freeElement(dntListElement* obj)
+{
+   particleSystem* part = (particleSystem*)obj;
+
+   /* let's delete by type */
+   switch(part->type)
    {
-      first = part->next;
-   }
-   part->previous->next = part->next;
-   part->next->previous = part->previous;
-   total--;
-   if(total == 0)
-   {
-      first = NULL;
+      case DNT_PARTICLE_TYPE_NONE:
+      default:
+      {
+         delete(part);
+      }
+      break;
+      case DNT_PARTICLE_TYPE_WATERFALL:
+      {
+         part1* p1 = (part1*)part;
+         delete(p1);
+      }
+      break;
+      case DNT_PARTICLE_TYPE_FIRE:
+      {
+         part2* p2 = (part2*)part;
+         delete(p2);
+      }
+      break;
+      case DNT_PARTICLE_TYPE_WATER_SURFACE:
+      {
+         part3* p3 = (part3*)part;
+         delete(p3);
+      }
+      break;
+      case DNT_PARTICLE_TYPE_SMOKE:
+      {
+         part4* p4 = (part4*)part;
+         delete(p4);
+      }
+      break;
+      case DNT_PARTICLE_TYPE_BLOOD:
+      {
+         part5* p5 = (part5*)part;
+         delete(p5);
+      }
+      break;
+      case DNT_PARTICLE_TYPE_LIGHTNING:
+      {
+         part6* p6 = (part6*)part;
+         delete(p6);
+      }
+      break;
+      case DNT_PARTICLE_TYPE_SNOW:
+      {
+         part7* p7 = (part7*)part;
+         delete(p7);
+      }
+      break;
+      case DNT_PARTICLE_TYPE_GRASS:
+      {
+         grass* gr = (grass*)part;
+         delete(gr);
+      }
+      break;
+      case DNT_PARTICLE_TYPE_METEOR:
+      {
+         meteor* m = (meteor*)part;
+         delete(m);
+      }
+      break;
    }
 }
 

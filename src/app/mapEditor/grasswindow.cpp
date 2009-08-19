@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -237,7 +237,7 @@ bool grassWindow::eventGot(int type, guiObject* object)
       {
          if(actualGrass)
          {
-            actualGrass = (grass*)actualGrass->previous;
+            actualGrass = (grass*)actualGrass->getPrevious();
             defineValues();
          }
          treated = true;
@@ -246,7 +246,7 @@ bool grassWindow::eventGot(int type, guiObject* object)
       {
          if(actualGrass)
          {
-            actualGrass = (grass*)actualGrass->next;
+            actualGrass = (grass*)actualGrass->getNext();
             defineValues();
          }
          treated = true;
@@ -256,11 +256,11 @@ bool grassWindow::eventGot(int type, guiObject* object)
          if( (pSystem) && (actualGrass) )
          {
             grass* tmpGrass = NULL;
-            if(actualGrass != (grass*)actualGrass->previous)
+            if(actualGrass != (grass*)actualGrass->getPrevious())
             {
-               tmpGrass = (grass*)actualGrass->previous;
+               tmpGrass = (grass*)actualGrass->getPrevious();
             }
-            pSystem->removeParticle(PART_GRASS, actualGrass);
+            pSystem->removeParticle(actualGrass);
             actualGrass = tmpGrass;
             defineValues();
          }
