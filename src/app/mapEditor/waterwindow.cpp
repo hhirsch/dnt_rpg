@@ -447,7 +447,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
       {
          if(activePlane)
          {
-            activePlane = activePlane->next;
+            activePlane = (interPlane*)activePlane->getNext();
          }
          return(true);
       }
@@ -455,7 +455,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
       {
          if(activePlane)
          {
-            activePlane = activePlane->previous;
+            activePlane = (interPlane*)activePlane->getPrevious();
          }
          return(true);
       }
@@ -464,9 +464,9 @@ bool waterWindow::eventGot(int type, guiObject* object)
          if((activeWater) && (activePlane))
          {
             interPlane* tmpPlane = NULL;
-            if(activePlane != activePlane->previous)
+            if(activePlane != activePlane->getPrevious())
             {
-               tmpPlane = activePlane->previous;
+               tmpPlane = (interPlane*)activePlane->getPrevious();
             }
             activeWater->removePlane(activePlane);
             activePlane = tmpPlane;

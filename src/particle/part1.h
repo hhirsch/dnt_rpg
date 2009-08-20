@@ -32,7 +32,7 @@
 #define PLANE_INCLINATION_Z  2 /**< Inclination on Z axis */
 
 /*! Intersection Plane */
-class interPlane
+class interPlane: public dntListElement
 {
    public:
       float x1,        /**< X coordinate of plane */
@@ -44,10 +44,22 @@ class interPlane
       float dX,        /**< Variation X of water on plane */
             dZ;        /**< Variation Z of water on plane */
       int inclination; /**< Inclination Type of plane */
+};
 
-      interPlane* next;       /**< Next Plane on List */
-      interPlane* previous;   /**< Previous Plane on List */
-}; 
+/*! The list of intersection planes */
+class interPlaneList: public dntList
+{
+   public:
+      /*! Constructor */
+      interPlaneList();
+      /*! Destructor */
+      ~interPlaneList();
+
+   protected:
+      /*! Free the interPlane memory
+       * \param obj -> pointer to the obj to free */
+      void freeElement(dntListElement* obj);
+};
 
 /*! WaterFalls Particle */
 class part1: public particleSystem
@@ -178,11 +190,7 @@ class part1: public particleSystem
 
    private:
       float seconds;         /**< Actual Time on particle */
-
-      interPlane* intersections; /**< The internal Planes */
-      int actualPlanes;      /**< actual number of planes */
-
-      
+      interPlaneList intersections; /**< The internal Planes */
 };
 
 

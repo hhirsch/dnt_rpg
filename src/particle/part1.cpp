@@ -28,6 +28,30 @@
 /****************************************************************************
  *                               Constuctor                                 *
  ****************************************************************************/
+interPlaneList::interPlaneList():dntList(DNT_LIST_TYPE_ADD_AT_END)
+{
+}
+
+/****************************************************************************
+ *                               Destuctor                                  *
+ ****************************************************************************/
+interPlaneList::~interPlaneList()
+{
+   clearList();
+}
+
+/****************************************************************************
+ *                              freeElement                                 *
+ ****************************************************************************/
+void interPlaneList::freeElement(dntListElement* obj)
+{
+   interPlane* pl = (interPlane*)obj;
+   delete(pl);
+}
+
+/****************************************************************************
+ *                               Constuctor                                 *
+ ****************************************************************************/
 part1::part1(float cX,float cY,float cZ, string fileName):
                               particleSystem(fileName, PARTICLE_DRAW_GROUPS)
 {
@@ -36,8 +60,6 @@ part1::part1(float cX,float cY,float cZ, string fileName):
    centerY = cY; 
    centerZ = cZ;
    actualParticles = 0;
-   actualPlanes = 0;
-   intersections = NULL;
    type = DNT_PARTICLE_TYPE_WATERFALL;
    partTexture = loadTexture(dir.getRealFile("particles/water.png"));
 }
@@ -173,9 +195,6 @@ bool part1::continueLive(particle* part)
  ****************************************************************************/
 int part1::needCreate()
 {
-   /*return((int) ((maxParticles / maxLive)*0.8) + 
-          (rand() % (int) ((maxParticles / maxLive))));*/
-
    return( (int)( 1+(maxParticles / maxLive)*(rand() / (RAND_MAX + 1.0)) ));
 }
 
@@ -218,6 +237,8 @@ interPlane* part1::addPlane(float x1, float y1, float z1,
                             float dX, float dZ, int inclination)
 {
    interPlane* ip = new interPlane;
+
+   /* Set values */
    ip->x1 = x1;
    ip->y1 = y1;
    ip->z1 = z1;
@@ -228,21 +249,9 @@ interPlane* part1::addPlane(float x1, float y1, float z1,
    ip->dZ = dZ;
    ip->inclination = inclination;
 
-   if(actualPlanes == 0)
-   {
-      ip->next = ip;
-      ip->previous = ip;
-   }
-   else
-   {
-      ip->next = intersections;
-      ip->previous = intersections->previous;
-      ip->next->previous = ip;
-      ip->previous->next = ip;
-   }
+   /* Insert at the list */
+   intersections.insert(ip);
 
-   intersections = ip;
-   actualPlanes++;
    return(ip);
 }
 
@@ -254,8 +263,10 @@ bool part1::intersectPlanes(particle* part, float* dX, float* dZ)
    int i;
    float yOnPlane = 0;
    float size;
-   interPlane* ip = intersections;
-   for(i = 0; i < actualPlanes; i++)
+   
+   interPlane* ip = (interPlane*)intersections.getFirst();
+
+   for(i = 0; i < intersections.getTotal(); i++)
    {
       if( (part->posX <= ip->x2) && 
           (part->posX >= ip->x1) &&
@@ -289,18 +300,8 @@ bool part1::intersectPlanes(particle* part, float* dX, float* dZ)
             *dZ = ip->dZ;
             return(true);
          }
-         /*else if (((part->posY <= yOnPlane +1) && (part->prvY >= yOnPlane -1) ))
-         {
-            printf("Alguem\n");
-            part->posY = yOnPlane;
-            *dX = ip->dX;
-            *dZ = ip->dZ;
-            return(true);
-         }*/
-         /*else
-         { printf("prv: %.3f act: %.3f onP: %.3f",part->prvY,part->posY,yOnPlane); }*/
       }
-      ip = ip->next;
+      ip = (interPlane*)ip->getNext();
    }
    return(false);
 }
@@ -310,21 +311,7 @@ bool part1::intersectPlanes(particle* part, float* dX, float* dZ)
  ****************************************************************************/
 void part1::removePlane(interPlane* ip)
 {
-   if(ip)
-   {
-      if(intersections == ip)
-      {
-         intersections = ip->next;
-      }
-      ip->next->previous = ip->previous;
-      ip->previous->next = ip->next;
-      delete(ip);
-      actualPlanes--;
-      if(actualPlanes == 0)
-      {
-         intersections = NULL;
-      }
-   }
+   intersections.remove(ip);
 }
 
 /****************************************************************************
@@ -335,7 +322,7 @@ void part1::removeCharacterPlanes()
    int i;
    for(i=0; i < 4; i++)
    {
-      removePlane(intersections);
+      removeLastPlane();
    }
 }
 
@@ -344,7 +331,15 @@ void part1::removeCharacterPlanes()
  ****************************************************************************/
 void part1::removeLastPlane()
 {
-   removePlane(intersections);
+   interPlane* first;
+   interPlane* last;
+  
+   first = (interPlane*)intersections.getFirst();
+   if(first)
+   {
+      last = (interPlane*)first->getPrevious();
+      removePlane(last);
+   }
 }
 
 /****************************************************************************
@@ -352,7 +347,7 @@ void part1::removeLastPlane()
  ****************************************************************************/
 int part1::getTotalPlanes()
 {
-   return(actualPlanes);
+   return(intersections.getTotal());
 }
 
 /****************************************************************************
@@ -360,7 +355,17 @@ int part1::getTotalPlanes()
  ****************************************************************************/
 interPlane* part1::getLastPlane()
 {
-   return(intersections);
+   interPlane* first; 
+   interPlane* last; 
+
+   first = (interPlane*)intersections.getFirst();
+   if(first)
+   {
+      last = (interPlane*)first->getPrevious();
+      return(last);
+   }
+
+   return(NULL);
 }
 
 

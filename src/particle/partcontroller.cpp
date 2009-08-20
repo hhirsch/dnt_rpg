@@ -417,7 +417,7 @@ void partController::saveToFile(string fileName)
                         plane->x1, plane->y1, plane->z1, 
                         plane->x2, plane->y2, plane->z2, 
                         plane->dX, plane->dZ, plane->inclination);
-                  plane = plane->next;
+                  plane = (interPlane*)plane->getNext();
                }
             }
             break;
