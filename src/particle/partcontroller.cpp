@@ -104,7 +104,7 @@ void partController::updateAll(float PCposX, float PCposY, float PCposZ,
             (time - part->systemInitialLiveTime >= part->systemMaxLiveTime) )
       {
          part = (particleSystem*)part->getNext();
-         particles->removeSystem(part);
+         particles->removeSystem((particleSystem*)part->getPrevious());
       }
       else
       {
