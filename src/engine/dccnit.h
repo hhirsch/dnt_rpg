@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -318,6 +318,7 @@ class engine
        *  Update the Mouse Coordinates on World
        ****************************************************************/
       void updateMouseWorldPos(); 
+      void updateMouseFloorPos();
 
       /*!
        ***********************************************************************
@@ -428,7 +429,8 @@ class engine
       double xReal,                /**< Actual mouse X coordinates on World */
              zReal,                /**< Actual mouse Z coordinates on World */
              yReal;                /**< Actual mouse Y coordinates on World */
-
+      double xFloor,               /**< Mouse floor X intersection */
+             zFloor;               /**< Mouse floor Z intersection */
      
       character* activeCharacter;    /**< Pointer to the PC active */
 

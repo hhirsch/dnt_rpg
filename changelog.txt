@@ -9,6 +9,7 @@
  - Fixed a memory leak on bTrees;
  - Fixed a segfault at itemWindow;
  - Better cxSel selection/deselection;
+ - Fixed continuous mouse move angle;
 
 Working on:
  - Weather effects;

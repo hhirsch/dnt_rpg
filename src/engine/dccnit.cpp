@@ -50,6 +50,12 @@ engine::engine()
    walkPressTime = 0;
    walkDistance = 0;
 
+   xFloor = 0;
+   zFloor = 0;
+   xReal = 0;
+   yReal = 0;
+   zReal = 0;
+
    imgNumber = 0;
    actualScreen = NULL;
 
@@ -1955,11 +1961,45 @@ void engine::updateMouseWorldPos()
    /* Define Mouse OpenGL Window Coordinate */
    wx = mouseX; wy = SCREEN_Y - mouseY; 
   
-   /* Get the Z position of the mouse */
+   /* Get the Zbuffer position of the mouse */
    glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
 
    /* Get the world coordinate of the mouse position */
    gluUnProject(wx,wy,wz,modl,proj,viewPort,&xReal,&yReal,&zReal);
+
+   /* Also, update the mouse floor */
+   updateMouseFloorPos();
+}
+
+/*********************************************************************
+ *                         updateMouseFloorPos                       *
+ *********************************************************************/
+void engine::updateMouseFloorPos()
+{
+   GLfloat wx = mouseX,
+           wy = SCREEN_Y - mouseY;
+
+   GLdouble cX=0, cY=0, cZ=0;
+   GLdouble fX=0, fY=0, fZ=0;
+
+   GLfloat t=0, vd=0;
+
+   /* Get at camera */
+   gluUnProject(wx, wy, 0, modl, proj, viewPort, &cX, &cY, &cZ);
+
+   /* Get at far */
+   gluUnProject(wx, wy, 0.9, modl, proj, viewPort, &fX, &fY, &fZ);
+
+   /* Calculate */
+   vd = fY - cY;
+   if(vd == 0)
+   {
+      /* Vector Paralell to the floor */
+      return;
+   }
+   t = (-cY / vd);
+   xFloor = cX + t*(fX-cX);
+   zFloor = cZ + t*(fZ-cZ);
 }
 
 /*********************************************************************
@@ -2808,14 +2848,14 @@ int engine::treatIO(SDL_Surface *screen)
          {
             /* Set character orientation (if mouse is far from character,
              * because if it is too near, some weird angles appears) */
-            dist = sqrt( (xReal - activeCharacter->xPosition) *
-                         (xReal - activeCharacter->xPosition) +
-                         (zReal - activeCharacter->zPosition) *
-                         (zReal - activeCharacter->zPosition) );
+            dist = sqrt( (xFloor - activeCharacter->xPosition) *
+                         (xFloor - activeCharacter->xPosition) +
+                         (zFloor - activeCharacter->zPosition) *
+                         (zFloor - activeCharacter->zPosition) );
             
             walkAngle = getAngle(activeCharacter->xPosition,
                                  activeCharacter->zPosition,
-                                 xReal, zReal);
+                                 xFloor, zFloor);
             if(dist > 8)
             {
                /* Try to change the angle */
