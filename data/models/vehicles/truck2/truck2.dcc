@@ -1,0 +1,11 @@
+name = Truck2
+cal3d = models/vehicles/truck2/model.cfg
+inventory_sizes = 0 0
+inventory_texture = texturas/na.png
+life_points = 2000
+fortitude = 30
+reflex = 0
+will = 0
+displacement = 0
+armature_class = 15
+cost = 2800
