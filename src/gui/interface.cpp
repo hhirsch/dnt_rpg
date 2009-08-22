@@ -577,10 +577,15 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
     if(focus == FARSO_FOCUS_CX_SEL)
     {
        cxSel* cx = (cxSel*)objAtivo;
-       cx->invertSelection();
-       cx->draw(ljan->getActiveWindow()->getSurface());
-       focus = FARSO_FOCUS_GAME;
-       eventInfo = FARSO_EVENT_MODIFIED_CX_SEL;
+       if(cx->doPress(Mbotao))
+       {
+          focus = FARSO_FOCUS_GAME;
+          eventInfo = FARSO_EVENT_MODIFIED_CX_SEL;
+       }
+       else
+       {
+          eventInfo = FARSO_EVENT_MODIFYING_CX_SEL;
+       }
        return(objAtivo);
     }
 

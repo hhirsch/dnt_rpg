@@ -8,6 +8,7 @@
  - iaScripts can receive parameters;
  - Fixed a memory leak on bTrees;
  - Fixed a segfault at itemWindow;
+ - Better cxSel selection/deselection;
 
 Working on:
  - Weather effects;

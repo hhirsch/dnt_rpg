@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -31,7 +31,7 @@ cxSel::cxSel(int x, int y):guiObject()
    y2 = y+10;
    available = true;
    selected = false;
-   lastChangeTime = SDL_GetTicks();
+   pressing = false;
    type = FARSO_OBJECT_SEL_BOX;
 }
 
@@ -74,13 +74,7 @@ bool cxSel::isSelected()
  **********************************************************/
 void cxSel::invertSelection()
 {
-   GLuint actualTime = SDL_GetTicks();
-   if((actualTime - lastChangeTime) >= 100)
-   {
-      setChanged();
-      selected = !selected;
-      lastChangeTime = actualTime;
-   }
+   setSelection(!selected);
 }
 
 /**********************************************************
@@ -90,5 +84,29 @@ void cxSel::setSelection(bool value)
 {
    setChanged();
    selected = value;
+}
+
+/**********************************************************
+ *                         doPress                        *
+ **********************************************************/
+bool cxSel::doPress(Uint8 mouseButton)
+{
+   if(mouseButton & SDL_BUTTON(1))
+   {
+      pressing = true;
+      return(false);
+   }
+
+   if(pressing)
+   {
+      if(!(mouseButton & SDL_BUTTON(1)))
+      {
+         /* finished pressing, must invert selection and done */
+         invertSelection();
+         return(true);
+      }
+   }
+
+   return(false);
 }
 

@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -49,11 +49,16 @@ class cxSel: public guiObject
        * \param value -> new value of the selection */
       void setSelection(bool value);
 
+      /*! Do the cxSel press
+       * \param mouseButton -> current mouse button state
+       * \return true when the pressing is finished */
+      bool doPress(Uint8 mouseButton);
+
    private:
       farso_colors Colors;   /**< Colors of the object */
       bool selected;         /**< True if selected, false otherwise  */
-      GLuint lastChangeTime; /**< Last time when box was changed */
 
+      bool pressing;         /**< mouse is currently pressing it */
 };
 
 #endif
