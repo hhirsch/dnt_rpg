@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -24,10 +24,8 @@
 /***********************************************************************
  *                             Constructor                             *
  ***********************************************************************/
-mapSound::mapSound()
+mapSound::mapSound():dntList()
 {
-   sounds = NULL;
-   totalSounds = 0;
 }
 
 /***********************************************************************
@@ -35,16 +33,6 @@ mapSound::mapSound()
  ***********************************************************************/
 mapSound::~mapSound()
 {
-   int i;
-   soundInfo* aux;
-
-   /* Delete all soundInfos on the list */
-   for(i = 0; i < totalSounds; i++)
-   {
-      aux = sounds;
-      sounds = sounds->next;
-      delete(aux);
-   }
 }
 
 /***********************************************************************
@@ -63,34 +51,9 @@ soundInfo* mapSound::newSound()
    snd->loopInterval = 0;
 
    /* Add to the list */
-   addSound(snd);
+   insert(snd);
 
    return(snd);
-}
-
-/***********************************************************************
- *                               addSound                              *
- ***********************************************************************/
-void mapSound::addSound(soundInfo* snd)
-{
-   if(sounds == NULL)
-   {
-      /* The only on the list */
-      snd->next = snd;
-      snd->previous = snd;
-   }
-   else
-   {
-      /* set it pointers */
-      snd->next = sounds;
-      snd->previous = sounds->previous;
-      snd->next->previous = snd;
-      snd->previous->next = snd;
-   }
-
-   /* Put at the first */
-   sounds = snd;
-   totalSounds++;
 }
 
 /***********************************************************************
@@ -160,8 +123,8 @@ bool mapSound::save(string fileName)
    }
 
    /* Save all sounds to the file */
-   soundInfo* s = sounds;
-   for(i = 0; i < totalSounds; i++)
+   soundInfo* s = (soundInfo*)first;
+   for(i = 0; i < total; i++)
    {
       /* Save sound info */
       file << "sound = " << s->fileName << endl;
@@ -171,10 +134,19 @@ bool mapSound::save(string fileName)
       file << "loopInterval = " << s->loopInterval << endl;
 
       /* Next sound */
-      s = s->next;
+      s = (soundInfo*)s->getNext();
    }
 
    return(true);
+}
+
+/***********************************************************************
+ *                            freeElement                              *
+ ***********************************************************************/
+void mapSound::freeElement(dntListElement* obj)
+{
+   soundInfo* s = (soundInfo*)obj;
+   delete(s);
 }
 
 /***********************************************************************
@@ -186,11 +158,11 @@ void mapSound::flush()
    int i;
 
    /* Add all sounds to the sound controller */
-   soundInfo* s = sounds;
-   for(i = 0; i < totalSounds; i++)
+   soundInfo* s = (soundInfo*)first;
+   for(i = 0; i < total; i++)
    {
       snd.addSoundEffect(s->x, s->y, s->z, s->loopInterval, s->fileName);
-      s = s->next;
+      s = (soundInfo*)s->getNext();
    }
 }
 

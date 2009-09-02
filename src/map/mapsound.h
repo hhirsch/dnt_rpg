@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -21,10 +21,11 @@
 #ifndef _dnt_map_sound_h
 #define _dnt_map_sound_h
 
+#include "../etc/list.h"
 #include "../sound/sound.h"
 
 /*! The soundInfo class keeps informations about a sound on a map */
-class soundInfo
+class soundInfo: public dntListElement
 {
    public:
       string fileName;   /**< Ogg File Name */
@@ -32,14 +33,11 @@ class soundInfo
               y,         /**< Sound Y Position */
               z;         /**< Sound Z Position */
       int loopInterval;  /**< Sound Loop Interval */
-
-      soundInfo* next;     /**< Next Sound Info */
-      soundInfo* previous; /**< Previous Sound Info */
 };
 
 /*! The mapSound class contains information of all sounds related to the 
  * current map (position, ogg file, etc.) */
-class mapSound
+class mapSound: public dntList
 {
    public:
       /*! Constructor */
@@ -67,13 +65,9 @@ class mapSound
       soundInfo* newSound();
 
    protected:
-
-      /*! Add sound to the soundMap
-       * \param snd -> pointer to the soundInfo to add */
-      void addSound(soundInfo* snd);
-
-      soundInfo* sounds;  /**< soundInfo List */
-      int totalSounds;    /**< Total Sounds on the list */
+      /*! Free a sound (deleting it)
+       * \param obj -> sound to delete */
+      void freeElement(dntListElement* obj);
 };
 
 #endif
