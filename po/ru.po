@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2009-08-16 12:27-0300\n"
+"POT-Creation-Date: 2009-09-05 09:34-0300\n"
 "PO-Revision-Date: 2007-11-20 17:24+0000\n"
 "Last-Translator: Sergei Zivukov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -158,8 +158,8 @@ msgstr "Харизма"
 msgid "Attribute Description"
 msgstr "Описание атрибута"
 
-#: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:531
-#: src/engine/inventwindow.cpp:352 src/engine/options.cpp:1232
+#: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:537
+#: src/engine/inventwindow.cpp:364 src/engine/options.cpp:1232
 msgid "Warning"
 msgstr "Предупреждение"
 
@@ -200,7 +200,7 @@ msgstr ""
 msgid "The barter imposition was rejected."
 msgstr ""
 
-#: src/engine/barterwindow.cpp:306 src/engine/inventwindow.cpp:197
+#: src/engine/barterwindow.cpp:306 src/engine/inventwindow.cpp:209
 msgid "Remove"
 msgstr "Удалить"
 
@@ -357,66 +357,66 @@ msgstr ""
 msgid "No Skills."
 msgstr "Нет умений."
 
-#: src/engine/dccnit.cpp:472 src/engine/dccnit.cpp:522
+#: src/engine/dccnit.cpp:478 src/engine/dccnit.cpp:528
 msgid "Error"
 msgstr ""
 
-#: src/engine/dccnit.cpp:472
+#: src/engine/dccnit.cpp:478
 msgid "Can't load the saved game!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:517
+#: src/engine/dccnit.cpp:523
 msgid "Information"
 msgstr ""
 
-#: src/engine/dccnit.cpp:518
+#: src/engine/dccnit.cpp:524
 msgid "The game was saved!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:522
+#: src/engine/dccnit.cpp:528
 msgid "Can't save game!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:532
+#: src/engine/dccnit.cpp:538
 msgid "Can't save game while fighting!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:667
+#: src/engine/dccnit.cpp:673
 #, c-format
 msgid "Saving Current Map Modifications"
 msgstr ""
 
-#: src/engine/dccnit.cpp:702
+#: src/engine/dccnit.cpp:708
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Загрузка карты: %s"
 
-#: src/engine/dccnit.cpp:765
+#: src/engine/dccnit.cpp:771
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Загрузка NPC: %s"
 
-#: src/engine/dccnit.cpp:805
+#: src/engine/dccnit.cpp:811
 msgid "Creating MiniMap"
 msgstr ""
 
-#: src/engine/dccnit.cpp:811
+#: src/engine/dccnit.cpp:817
 msgid "Putting GUI on Screen"
 msgstr "Помещение GUI на экран"
 
-#: src/engine/dccnit.cpp:855
+#: src/engine/dccnit.cpp:861
 msgid "Loading Particles"
 msgstr "Загрузка частиц"
 
-#: src/engine/dccnit.cpp:885
+#: src/engine/dccnit.cpp:891
 msgid "Loading Changes..."
 msgstr "Загрузка изменений..."
 
-#: src/engine/dccnit.cpp:913
+#: src/engine/dccnit.cpp:919
 msgid "Done!"
 msgstr "Готово!"
 
-#: src/engine/dccnit.cpp:1005
+#: src/engine/dccnit.cpp:1011
 msgid ""
 "DccNiTghtmare is relesead under GPLv3 or later: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -424,50 +424,50 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1527
+#: src/engine/dccnit.cpp:1533
 msgid "Too far away for the action!"
 msgstr "Слишком далеко для действия!"
 
-#: src/engine/dccnit.cpp:1572
+#: src/engine/dccnit.cpp:1578
 msgid "No NPCs in the area."
 msgstr "Нет NPC'ов на арене"
 
-#: src/engine/dccnit.cpp:1632
+#: src/engine/dccnit.cpp:1638
 msgid "Surprise Attack Turn."
 msgstr "Неожиданное нападение."
 
-#: src/engine/dccnit.cpp:1646
+#: src/engine/dccnit.cpp:1652
 msgid "No enemies in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1825 src/engine/dccnit.cpp:2309
+#: src/engine/dccnit.cpp:1831 src/engine/dccnit.cpp:2349
 #: src/engine/shortcutswindow.cpp:51
 msgid "Nothing"
 msgstr "Ничего"
 
-#: src/engine/dccnit.cpp:2059
+#: src/engine/dccnit.cpp:2099
 #, c-format
 msgid "%s taken."
 msgstr "%s взят."
 
-#: src/engine/dccnit.cpp:2076
+#: src/engine/dccnit.cpp:2116
 msgid "Inventory is full!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2108
+#: src/engine/dccnit.cpp:2148
 msgid "Door"
 msgstr "Дверь"
 
-#: src/engine/dccnit.cpp:2244
+#: src/engine/dccnit.cpp:2284
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s атаковал %s"
 
-#: src/engine/dccnit.cpp:2410
+#: src/engine/dccnit.cpp:2450
 msgid "No more actions. Turn ended."
 msgstr ""
 
-#: src/engine/dccnit.cpp:3920
+#: src/engine/dccnit.cpp:3961
 msgid "Exit Battle Mode"
 msgstr "Покинуть режим сражения"
 
@@ -547,36 +547,44 @@ msgstr "Настройки"
 msgid "Exit"
 msgstr "Выход"
 
-#: src/engine/inventwindow.cpp:183
+#: src/engine/inventwindow.cpp:184
 msgid "Get"
 msgstr "Получить"
 
-#: src/engine/inventwindow.cpp:186
+#: src/engine/inventwindow.cpp:187
 msgid "Info"
 msgstr "Информация"
 
-#: src/engine/inventwindow.cpp:191
+#: src/engine/inventwindow.cpp:195
+msgid "Read"
+msgstr ""
+
+#: src/engine/inventwindow.cpp:198
+msgid "Reload Weapon"
+msgstr ""
+
+#: src/engine/inventwindow.cpp:201
 msgid "Use"
 msgstr "Использовать"
 
-#: src/engine/inventwindow.cpp:200
+#: src/engine/inventwindow.cpp:212
 msgid "Buy"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:200
+#: src/engine/inventwindow.cpp:212
 msgid "Sell"
 msgstr "Продать"
 
-#: src/engine/inventwindow.cpp:205
+#: src/engine/inventwindow.cpp:217
 msgid "Drop"
 msgstr "Бросить"
 
-#: src/engine/inventwindow.cpp:312
+#: src/engine/inventwindow.cpp:324
 #, c-format
 msgid "%s reloaded %s with %s ammo."
 msgstr ""
 
-#: src/engine/inventwindow.cpp:353
+#: src/engine/inventwindow.cpp:365
 msgid "No equipped weapons are compatible with this munition type."
 msgstr ""
 
