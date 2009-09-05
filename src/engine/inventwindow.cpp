@@ -176,6 +176,7 @@ void inventWindow::openMenu(int x, int y, int type, bool seller)
    dntFont fnt;
    dirs dir;
    int xSize;
+   string text="";
    menuType = type;
    objectMenu = (menu*) intWindow->getObjectsList()->addMenu();
  
@@ -188,8 +189,19 @@ void inventWindow::openMenu(int x, int y, int type, bool seller)
    objectMenu->insertItem("-",0);
    if(menuType == MENU_TYPE_INVENTORY)
    {
-      objectMenu->insertItem(gettext("Use"),
-                             dir.getRealFile("icons/use.png"), 
+      switch(activeObject->getType())
+      {
+         case OBJECT_TYPE_BOOK:
+            text = gettext("Read");
+         break;
+         case OBJECT_TYPE_AMMO:
+            text = gettext("Reload Weapon");
+         break;
+         default:
+            text = gettext("Use");
+         break;
+      }
+      objectMenu->insertItem(text, dir.getRealFile("icons/use.png"), 
                              (!seller) && (activeObject->isUsable()) );
    }
    else
