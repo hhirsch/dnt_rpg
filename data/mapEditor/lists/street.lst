@@ -1,8 +1,10 @@
-12
+14
 Barrel models/objetos/geral/barrel/barrel.dcc
 Barrel_Santa models/objetos/geral/santa_barrel/santa_barrel.dcc
 Bench1 models/street/bench1/bench1.dcc
 Bench2 models/street/bench2/bench2.dcc
+Fence1 models/street/log_fence1/log_fence1.dcc
+Fence2 models/street/log_fence2/log_fence2.dcc
 Fountain1 models/street/fountain1/fountain1.dcc
 Fountain2 models/street/fountain2/fountain2.dcc
 Hydrant models/street/hydrant/hydrant.dcc
