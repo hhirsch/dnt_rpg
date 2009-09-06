@@ -25,7 +25,7 @@ texture = comics/other/mjack.png
 
     # The hat box
     box = "6,236,509,454"
-    vertex - 6,236
+    vertex = 6,236
     vertex = 6,454
     vertex = 509,454
     vertex = 509,236
