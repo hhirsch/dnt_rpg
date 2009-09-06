@@ -1,4 +1,4 @@
-name = gettext("The Combat Book")
+name = gettext("Monster Book Fragment")
 cal3d = models/objetos/books/mjack/model.cfg
 related_info = comics/other/mjack/mjack.dcb
 type = book
