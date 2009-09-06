@@ -1,4 +1,4 @@
-39
+40
 Beer models/objetos/itens/garrafa1/garrafa1.dcc
 Bookshelf models/objetos/geral/bookshelf/bookshelf.dcc
 Briefcase models/objetos/geral/mala/mala.dcc
@@ -21,6 +21,7 @@ LCD_Monitor models/objetos/geral/monitor/monitor.dcc
 LCD_Bunker_School models/objetos/geral/monitor/monitor_bunker_school.dcc
 Letto models/objetos/geral/letto/letto.dcc
 Meuble models/objetos/geral/meuble/meuble.dcc
+Mjack_Book models/objetos/books/mjack/mjack.dcc
 Money models/objetos/itens/money/money.dcc
 Notebook models/objetos/geral/notebook/notebook.dcc
 PC_Chair models/objetos/geral/pc_chair/pc_chair.dcc

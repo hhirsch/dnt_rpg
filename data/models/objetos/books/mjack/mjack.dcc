@@ -1,0 +1,14 @@
+name = gettext("The Combat Book")
+cal3d = models/objetos/books/mjack/model.cfg
+related_info = comics/other/mjack/mjack.dcb
+type = book
+inventory_sizes = 2 2
+inventory_texture = models/objetos/books/mjack/texture_inv.png
+life_points = 5
+fortitude = 1
+reflex = 0
+will = 0
+displacement = 0
+armature_class = 1
+size_modifier = 0
+cost = 25

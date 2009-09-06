@@ -1,0 +1,59 @@
+book = "Monster Book Fragment - Michael J."
+
+page = "Michael J."
+texture = comics/other/mjack.png
+
+   # Initial Box
+   box = "6,15,254,235"
+   vertex = 6,15
+   vertex = 6,235
+   vertex = 254,235
+   vertex = 6,235
+   effect = 1
+   textbox = 14,23,275,45
+   text = gettext("One of those terrible monsters: a 18th level Music Student mixed with a single (and incredible) Administration Student level: Michael J.")
+  
+    # The clone box
+    box = "255,15,509,235"
+    vertex = 255,15
+    vertex = 255,245
+    vertex = 509,245
+    vertex = 509,15
+    effect = 1
+    textbox = 262,24,459,58
+    text = gettext("Originated by a failed Simulacrum proccess of an ancient J-5 member,")
+
+    # The hat box
+    box = "6,236,509,454"
+    vertex - 6,236
+    vertex = 6,454
+    vertex = 509,454
+    vertex = 509,236
+    effect = 1
+    textbox = 16,246,212,280
+    text = gettext("it used a hat, Supedohat. Apparently a common white hat,")
+    textbox = 288,413,504,447
+    text = gettext("but, actually, a metamorphosical throwning thriller weapon.")
+
+    # The 3rd world box
+    box = "6,455,255,706"
+    vertex = 6,455
+    vertex = 6,706
+    vertex = 255,706
+    vertex = 255,455
+    effect = 1
+    textbox = 14,464,212,484
+    text = gettext("As all monsters, it had weak points:")
+    textbox = 51,676,256,696
+    text = gettext("An obsessed fear of 3rd world diseases")
+
+    # The debt box
+    box = "255,455,509,706"
+    vertex = 255,455
+    vertex = 255,706
+    vertex = 509,706
+    vertex = 509,455
+    effect = 1
+    textbox = 264,464,461,484
+    text = gettext("and more than US$200 million debt.")
+
