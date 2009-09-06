@@ -10,7 +10,7 @@ texture = comics/other/mjack/mjack.png
    vertex = 255,235
    vertex = 255,15
    effect = 1
-   textbox = 14,19,234,45
+   textbox = 14,23,246,100
    textsize = 12
    text = gettext("One of those terrible monsters: a 18th level Music Student mixed with a single (and incredible) Administration Student level: Michael J.")
   
@@ -21,7 +21,7 @@ texture = comics/other/mjack/mjack.png
     vertex = 510,235
     vertex = 510,15
     effect = 1
-    textbox = 262,24,459,58
+    textbox = 262,24,480,72
     textsize = 12
     text = gettext("Originated by a failed Simulacrum proccess of an ancient J-5 member,")
 
@@ -32,10 +32,10 @@ texture = comics/other/mjack/mjack.png
     vertex = 510,454
     vertex = 510,235
     effect = 1
-    textbox = 16,246,212,280
+    textbox = 16,246,246,292
     textsize = 12
     text = gettext("it used a hat, Supedohat. Apparently a common white hat,")
-    textbox = 288,413,504,447
+    textbox = 250,413,504,448
     textsize = 12
     text = gettext("but, actually, a metamorphosical throwning thriller weapon.")
 
@@ -46,10 +46,10 @@ texture = comics/other/mjack/mjack.png
     vertex = 255,706
     vertex = 255,454
     effect = 1
-    textbox = 14,464,212,484
+    textbox = 14,464,212,495
     textsize = 12
     text = gettext("As all monsters, it had weak points:")
-    textbox = 51,676,256,696
+    textbox = 34,661,249,696
     textsize = 12
     text = gettext("An obsessed fear of 3rd world diseases")
 
@@ -60,7 +60,7 @@ texture = comics/other/mjack/mjack.png
     vertex = 510,706
     vertex = 510,454
     effect = 1
-    textbox = 264,464,461,484
+    textbox = 263,464,474,495
     textsize = 12
     text = gettext("and more than US$200 million debt.")
 
