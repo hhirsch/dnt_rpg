@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2009-09-05 09:34-0300\n"
+"POT-Creation-Date: 2009-09-06 12:49-0300\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -1136,6 +1136,38 @@ msgstr "foi Logan."
 #: data/comics/intro/intro.dcb:125
 msgid "And that's how the tale began..."
 msgstr "E foi assim que a lenda começou..."
+
+#: data/comics/other/mjack/mjack.dcb:15
+msgid ""
+"One of those terrible monsters: a 18th level Music Student mixed with a "
+"single (and incredible) Administration Student level: Michael J."
+msgstr ""
+"Um destes terríveis monstors: uma mistura de Estudante de Música de 18º "
+"nível com um único e incrível nível de Estudante de Administração: Michael J."
+
+#: data/comics/other/mjack/mjack.dcb:26
+msgid "Originated by a failed Simulacrum proccess of an ancient J-5 member,"
+msgstr "Originado no processo de Simulacrum de um antigo membro da orda J-5,"
+
+#: data/comics/other/mjack/mjack.dcb:37
+msgid "it used a hat, Supedohat. Apparently a common white hat,"
+msgstr "ele usava um chapéu, Supedohat. Aparentemente um chapéu branco comum,"
+
+#: data/comics/other/mjack/mjack.dcb:40
+msgid "but, actually, a metamorphosical throwning thriller weapon."
+msgstr "mas, na realidade, uma arma de arremesmo metamórfica."
+
+#: data/comics/other/mjack/mjack.dcb:51
+msgid "As all monsters, it had weak points:"
+msgstr "Como todos monstros, ele tinha pontos fracos:"
+
+#: data/comics/other/mjack/mjack.dcb:54
+msgid "An obsessed fear of 3rd world diseases"
+msgstr "Um medo obcessivo de doenças do 3º mundo"
+
+#: data/comics/other/mjack/mjack.dcb:65
+msgid "and more than US$200 million debt."
+msgstr "e mais de 2 bilhões de dólares em dívidas."
 
 #: data/comics/tutorial/combat/combat.dcb:19
 #: data/comics/tutorial/combat/combat.dcb:38
@@ -4298,6 +4330,10 @@ msgstr "Instalar Ruindows no notebook da ocupação para o Papai Cruel."
 msgid "Fight for Cruzeirense."
 msgstr "Brigar para o Cruzeirense."
 
+#: data/models/objetos/books/mjack/mjack.dcc:1
+msgid "Monster Book Fragment"
+msgstr "Fragmento do Livro dos Monstros"
+
 #: data/models/objetos/itens/healkit/healkit.dcc:1
 msgid "First Aid Kit"
 msgstr "Caixa de Primeiros Socorros"
@@ -4309,6 +4345,10 @@ msgstr "Garrafa de Cerveja"
 #: data/models/objetos/itens/lata1/lata1.dcc:1
 msgid "Soda Can"
 msgstr "Lata de Refrigerante"
+
+#: data/models/objetos/itens/lata1/logan_lata1.dcc:1
+msgid "Logan's Soda Can"
+msgstr "Lata de Refrigerante do Logan"
 
 #: data/models/objetos/itens/money/money.dcc:1
 msgid "Money"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2009-09-05 09:34-0300\n"
+"POT-Creation-Date: 2009-09-06 12:49-0300\n"
 "PO-Revision-Date: 2009-04-16 21:14+0000\n"
 "Last-Translator: Marcel de Klein <q-bus@home.nl>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -1123,6 +1123,36 @@ msgstr ""
 
 #: data/comics/intro/intro.dcb:125
 msgid "And that's how the tale began..."
+msgstr ""
+
+#: data/comics/other/mjack/mjack.dcb:15
+msgid ""
+"One of those terrible monsters: a 18th level Music Student mixed with a "
+"single (and incredible) Administration Student level: Michael J."
+msgstr ""
+
+#: data/comics/other/mjack/mjack.dcb:26
+msgid "Originated by a failed Simulacrum proccess of an ancient J-5 member,"
+msgstr ""
+
+#: data/comics/other/mjack/mjack.dcb:37
+msgid "it used a hat, Supedohat. Apparently a common white hat,"
+msgstr ""
+
+#: data/comics/other/mjack/mjack.dcb:40
+msgid "but, actually, a metamorphosical throwning thriller weapon."
+msgstr ""
+
+#: data/comics/other/mjack/mjack.dcb:51
+msgid "As all monsters, it had weak points:"
+msgstr ""
+
+#: data/comics/other/mjack/mjack.dcb:54
+msgid "An obsessed fear of 3rd world diseases"
+msgstr ""
+
+#: data/comics/other/mjack/mjack.dcb:65
+msgid "and more than US$200 million debt."
 msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:19
@@ -3584,6 +3614,10 @@ msgstr ""
 msgid "Fight for Cruzeirense."
 msgstr ""
 
+#: data/models/objetos/books/mjack/mjack.dcc:1
+msgid "Monster Book Fragment"
+msgstr ""
+
 #: data/models/objetos/itens/healkit/healkit.dcc:1
 msgid "First Aid Kit"
 msgstr ""
@@ -3594,6 +3628,10 @@ msgstr ""
 
 #: data/models/objetos/itens/lata1/lata1.dcc:1
 msgid "Soda Can"
+msgstr ""
+
+#: data/models/objetos/itens/lata1/logan_lata1.dcc:1
+msgid "Logan's Soda Can"
 msgstr ""
 
 #: data/models/objetos/itens/money/money.dcc:1

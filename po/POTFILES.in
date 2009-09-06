@@ -137,6 +137,7 @@ src/sound/sound.cpp
 
 #comic books
 data/comics/intro/intro.dcb
+data/comics/other/mjack/mjack.dcb
 data/comics/tutorial/combat/combat.dcb
 
 #alignments
@@ -262,11 +263,13 @@ data/missions/tutorial/mission4.mis
 
 #books
 data/models/objetos/books/combat_tutorial/combat_tutorial.dcc
+data/models/objetos/books/mjack/mjack.dcc
 
 #objects
 data/models/objetos/itens/healkit/healkit.dcc
 data/models/objetos/itens/garrafa1/garrafa1.dcc
 data/models/objetos/itens/lata1/lata1.dcc
+data/models/objetos/itens/lata1/logan_lata1.dcc
 data/models/objetos/itens/money/money.dcc
 data/models/objetos/geral/computador/computador.dcc
 data/models/objetos/geral/notebook/notebook.dcc
