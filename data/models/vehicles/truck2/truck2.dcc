@@ -9,3 +9,4 @@ will = 0
 displacement = 0
 armature_class = 15
 cost = 2800
+static_scenery = 1
