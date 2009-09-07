@@ -1,0 +1,12 @@
+name = Mixer
+cal3d = models/street/mixer/model.cfg
+inventory_texture = texturas/na.png
+inventory_sizes = 0 0
+life_points = 300
+fortitude = 12
+reflex = 2
+will = 0
+displacement = 0
+armature_class = 25
+cost = 90
+static_scenery = 1
