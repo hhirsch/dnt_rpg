@@ -1,0 +1,13 @@
+name = Barrel2_2
+cal3d = models/objetos/geral/barrels/barrel2/model_2.cfg
+inventory_sizes = 0 0
+inventory_texture = texturas/na.png
+life_points = 400
+fortitude = 5
+reflex = 2
+will = 0
+displacement = 0
+armature_class = 10
+size_modifier = 0
+cost = 350
+static_scenery = 1
