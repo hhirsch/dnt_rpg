@@ -1,5 +1,7 @@
-4
+6
 Bus models/vehicles/onibus/onibus.dcc
+Golf_Brown models/vehicles/golf/golf_b.dcc
+Golf_Red models/vehicles/golf/golf_r.dcc
 Truck2 models/vehicles/truck2/truck2.dcc
 Texugo_Back_Fuel_Truck models/vehicles/carreta/carreta.dcc
 Hell_Back_Fuel_Truck models/vehicles/carreta/carreta_hell.dcc
