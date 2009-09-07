@@ -33,7 +33,7 @@
 /***************************************************************************
  *                             Constructor                                 *
  ***************************************************************************/
-particleList::particleList(): dntList(DNT_LIST_TYPE_ADD_AT_BEGIN)
+particleList::particleList(): dntList(DNT_LIST_TYPE_ADD_AT_END)
 {
 }
 
@@ -42,7 +42,7 @@ particleList::particleList(): dntList(DNT_LIST_TYPE_ADD_AT_BEGIN)
  ***************************************************************************/
 particleList::~particleList()
 {
-   /* Remove the remaining systens. Usually, no systems are at the
+   /* Remove the remaining systems. Usually, no systems are at the
     * destructor time, cause the remove here can make a memory leack. */
    clearList();
 }
