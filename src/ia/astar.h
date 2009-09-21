@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -22,11 +22,13 @@
 #define _dnt_astar_h
 
 #include "../map/map.h"
+#include "../etc/list.h"
 #include "pattAgent.h"
+
 #include <SDL/SDL_opengl.h>
 
 /*! The A* Point Class */
-class pointStar
+class pointStar: public dntListElement
 {
    public:
       GLfloat x,           /**< Way Point X Coordinate */
@@ -35,12 +37,10 @@ class pointStar
       GLfloat gone;        /**< How much percorred to this point */
       GLfloat parentX,     /**< Node parent X position */
               parentZ;     /**< Node parent Z position */
-      pointStar* next;     /**< Next Point */
-      pointStar* previous; /**< Previous Point */
 };
 
 /*! The A* Point List Class */
-class listStar
+class listStar: public dntList
 {
    public:
       /*! Constructor */
@@ -55,7 +55,7 @@ class listStar
        * \param heuristic -> heuristic to the goal 
        * \param parentX -> X position of the parent
        * \param parentZ -> Z position of the parent */
-      pointStar*  insert(GLfloat x, GLfloat z, GLfloat gone, GLfloat heuristic,
+      pointStar* insert(GLfloat x, GLfloat z, GLfloat gone, GLfloat heuristic,
                          GLfloat parentX, GLfloat parentZ);
       /*! Remove Node from list 
        * \param node -> node to be removed */
@@ -70,13 +70,15 @@ class listStar
       pointStar* findLowest();
       /*! Verify if the list is empty
        * \return true if empty, false otherwise */
-      bool isEmpty(){return(totalNodes <= 0);};
+      bool isEmpty(){return(total <= 0);};
       /*! return the size of the List */
-      int size(){return(totalNodes);};
+      int size(){return(total);};
 
-   private:
-      pointStar* first;       /**< First Point in the list */
-      int totalNodes;         /**< Total Nodes in the list */
+   protected:
+      /*! Free an element (deleting it)
+       * \param obj -> object to free */
+      void freeElement(dntListElement* obj);
+
 };
 
 #define ASTAR_STATE_OTHER     0  /**< A* Other State */

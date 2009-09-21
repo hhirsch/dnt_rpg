@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -583,8 +583,6 @@ int aStar::getState()
  ****************************************************************/
 listStar::listStar()
 {
-   first = NULL;
-   totalNodes = 0;
 }
 
 /****************************************************************
@@ -592,10 +590,16 @@ listStar::listStar()
  ****************************************************************/
 listStar::~listStar()
 {
-   while(totalNodes > 0)
-   {
-      remove(first);
-   }
+   clearList();
+}
+
+/****************************************************************
+ *                         freeElement                          *
+ ****************************************************************/
+void listStar::freeElement(dntListElement* obj)
+{
+   pointStar* pst = (pointStar*) obj;
+   delete(pst);
 }
 
 /****************************************************************
@@ -617,6 +621,8 @@ pointStar* listStar::insert(GLfloat x, GLfloat z, GLfloat gone,
       }
       return(newWay);
    }
+
+   /* Not found, create a new */
    newWay = new(pointStar);
    newWay->x = x;
    newWay->z = z;
@@ -624,21 +630,10 @@ pointStar* listStar::insert(GLfloat x, GLfloat z, GLfloat gone,
    newWay->heuristic = heuristic;
    newWay->parentX = parentX;
    newWay->parentZ = parentZ;
-   if(first == NULL)
-   {
-      newWay->next = newWay;
-      newWay->previous = newWay;
-   }
-   else
-   {
-      newWay->previous = first->previous;
-      newWay->next = first;
-      newWay->previous->next = newWay;
-      newWay->next->previous = newWay;
-   }
-   first = newWay;
 
-   totalNodes++;
+   /* Really insert on list */
+   ((dntList*)this)->insert(newWay);
+
    return(newWay);
 }
 
@@ -649,18 +644,7 @@ void listStar::remove(pointStar* node)
 {
    if(node)
    {
-      node->previous->next = node->next;
-      node->next->previous = node->previous;
-      if(node == first)
-      {
-         first = node->next;
-      }
-      delete(node);
-      totalNodes--;
-      if(totalNodes <= 0)
-      {
-         first = NULL;
-      }
+      ((dntList*)this)->remove(node);
    }
    else
    {
@@ -674,14 +658,14 @@ void listStar::remove(pointStar* node)
 pointStar* listStar::find(GLfloat x, GLfloat z)
 {
    int aux;
-   pointStar* tmp = first;
-   for(aux = 0; aux < totalNodes; aux++)
+   pointStar* tmp = (pointStar*)first;
+   for(aux = 0; aux < total; aux++)
    {
       if( (tmp->x == x) && (tmp->z == z))
       {
          return(tmp);
       }
-      tmp = tmp->next;
+      tmp = (pointStar*)tmp->getNext();
    }
    return(NULL);
 }
@@ -692,21 +676,21 @@ pointStar* listStar::find(GLfloat x, GLfloat z)
 pointStar* listStar::findLowest()
 {
    int aux;
-   pointStar* tmp = first;
-   pointStar* lowest = first;
+   pointStar* tmp = (pointStar*)first;
+   pointStar* lowest = (pointStar*)first;
 
-   if(totalNodes <= 0)
+   if(total <= 0)
    {
       return(NULL);
    }
    
-   for(aux = 0; aux < totalNodes; aux++)
+   for(aux = 0; aux < total; aux++)
    {
       if( (tmp->gone + tmp->heuristic) <= (lowest->gone+lowest->heuristic) )
       {
          lowest = tmp;
       }
-      tmp = tmp->next;
+      tmp = (pointStar*)tmp->getNext();
    }
    return(lowest);
 }
