@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -30,9 +30,10 @@ using namespace std;
 #include <vorbis/vorbisfile.h>
 
 #include "ogg_stream.h"
+#include "../etc/list.h"
 
 /*! Sound Effect Manipulation and Definitions */
-class sndfx
+class sndfx: public dntListElement
 {
    public:
       /*! Constructor of NULL class (for head node) */
@@ -95,14 +96,27 @@ class sndfx
        * \param volume -> volume value [0 - 128]*/
       void changeVolume(int volume);
 
-
-      sndfx* next;            /**< Pointer to next element on list */
-      sndfx* previous;        /**< Pointer to previous element on list */
-
    private:
       int loopInterval;       /**< The sound loop interval */
       ogg_stream* oggSndFx;   /**< The Ogg stream of the Sound */
       string oggName;         /**< File Name of the Ogg Used */
+};
+
+/*! List of sound effects */
+class sndfxList: public dntList
+{
+   public:
+      /*! Constructor */
+      sndfxList();
+      /*! Destructor */
+      ~sndfxList();
+
+   protected:
+
+      /*! Free an element (deleting it)
+       * \param obj -> object to free */
+      void freeElement(dntListElement* obj);
+
 };
 
 #endif

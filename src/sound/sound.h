@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -114,8 +114,7 @@ class sound
       static SDL_Thread* soundThread;   /**< The Sound Paralel Thread */
       static SDL_mutex* soundMutex;     /**< The Sound Mutex */
 
-      static sndfx sndfxList;           /**< Head Node of sndFx List */
-      static int totalSndfx;            /**< Total Sound Effects on List */
+      static sndfxList sndList;         /**< Head Node of sndFx List */
 
       static int musicVolume;           /**< The Music volume */
       static int sndfxVolume;           /**< The SndFxVolume */

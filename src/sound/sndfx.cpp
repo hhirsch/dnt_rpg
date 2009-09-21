@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -27,8 +27,6 @@
 sndfx::sndfx()
 {
    oggSndFx = NULL;
-   next = NULL;
-   previous = NULL;
 }
 
 /*************************************************************************
@@ -200,4 +198,28 @@ void sndfx::changeVolume(int volume)
    }
 }
 
+
+/*************************************************************************
+ *                             Constructor                               *
+ *************************************************************************/
+sndfxList::sndfxList():dntList()
+{
+}
+
+/*************************************************************************
+ *                              Destructor                               *
+ *************************************************************************/
+sndfxList::~sndfxList()
+{
+   clearList();
+}
+
+/*************************************************************************
+ *                             freeElement                               *
+ *************************************************************************/
+void sndfxList::freeElement(dntListElement* obj)
+{
+   sndfx* snd = (sndfx*)obj;
+   delete(snd);
+}
 

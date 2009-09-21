@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -100,11 +100,6 @@ void sound::init()
    
    /* None current Opened Music */
    backMusic = NULL;
-
-   /* Initialize the Sound Effects Double Linked List with head Node */
-   sndfxList.next = &sndfxList;
-   sndfxList.previous = &sndfxList;
-   totalSndfx = 0;
 
    musicVolume = 128;
    sndfxVolume = 128;
@@ -228,7 +223,8 @@ bool sound::loadMusic(string fileName)
  *************************************************************************/
 void sound::flush()
 {
-   sndfx* snd;
+   sndfx* snd, *tmp;
+   int i, total;
 
    if(!enabled)
    {
@@ -246,17 +242,21 @@ void sound::flush()
    }
 
    /* Sound Effects Update */
-   snd = sndfxList.next;
-   while(snd != &sndfxList)
+   total = sndList.getTotal();
+   snd = (sndfx*)sndList.getFirst();
+   for(i=0; i < total; i++)
    {
       if(!snd->update())
       {
          /* Remove Sound */
-         sndfx* tmp = snd;
-         snd = snd->previous;
+         tmp = snd;
+         snd = (sndfx*)snd->getNext();
          removeSoundEffect(tmp);
       }
-      snd = snd->next;
+      else
+      {
+         snd = (sndfx*)snd->getNext();
+      }
    }
 }
 
@@ -266,20 +266,21 @@ void sound::flush()
 sndfx* sound::addSoundEffect(ALfloat x, ALfloat y, ALfloat z, int loop,
                              string fileName)
 {
+   sndfx* snd = NULL;
+
    if(enabled)
    {
-     lock();
-      sndfx* snd = new sndfx(x,y,z,loop, fileName);
+      /* Create it */
+      snd = new sndfx(x,y,z,loop, fileName);
       snd->changeVolume(sndfxVolume);
-      snd->next = sndfxList.next;
-      snd->previous = &sndfxList;
-      snd->next->previous = snd;
-      snd->previous->next = snd;
-      totalSndfx++;
-     unLock();
-     return(snd);
+
+      /* Insert on the list */
+      lock();
+         sndList.insert(snd);
+      unLock();
    }
-   return(NULL);
+
+   return(snd);
 }
 
 /*************************************************************************
@@ -287,20 +288,21 @@ sndfx* sound::addSoundEffect(ALfloat x, ALfloat y, ALfloat z, int loop,
  *************************************************************************/
 sndfx* sound::addSoundEffect(int loop, string fileName)
 {
+   sndfx* snd = NULL;
+
    if(enabled)
    {
-    lock();
-      sndfx* snd = new sndfx(loop, fileName);
+      /* Create it */
+      snd = new sndfx(loop, fileName);
       snd->changeVolume(sndfxVolume);
-      snd->next = sndfxList.next;
-      snd->previous = &sndfxList;
-      snd->next->previous = snd;
-      snd->previous->next = snd;
-      totalSndfx++;
-    unLock();
-    return(snd);
+
+      /* Insert on the list */
+      lock();
+         sndList.insert(snd);
+      unLock();
    }
-   return(NULL);
+
+   return(snd);
 }
 
 
@@ -309,17 +311,11 @@ sndfx* sound::addSoundEffect(int loop, string fileName)
  *************************************************************************/
 void sound::removeSoundEffect(sndfx* snd)
 {
-   if(enabled)
+   if( (enabled) && (snd != NULL) )
    {
-    lock();
-      if( (snd) && (snd != &sndfxList))
-      {
-         snd->previous->next = snd->next;
-         snd->next->previous = snd->previous;
-         delete(snd);
-         totalSndfx--;
-      }
-    unLock();
+      lock();
+         sndList.remove(snd);
+      unLock();
    }
 }
 
@@ -329,15 +325,9 @@ void sound::removeSoundEffect(sndfx* snd)
 void sound::removeAllSoundEffects()
 {
    /* Clear all opened Sound Effects */
-   sndfx* snd = sndfxList.next;
-   sndfx* tmp;
-   while(totalSndfx > 0)
-   {
-      tmp = snd;
-      snd = snd->previous;
-      removeSoundEffect(tmp);
-      snd= snd->next;
-   }
+   lock();
+      sndList.clearList();
+   unLock();
 }
 
 
@@ -347,25 +337,30 @@ void sound::removeAllSoundEffects()
 void sound::changeVolume(int music, int sndV)
 {
    sndfx* snd;
+   int i;
    
    if(enabled)
    {
-    lock();
-      musicVolume = music;
-      sndfxVolume = sndV;
-      if(backMusic)
-      {
-         backMusic->changeVolume(musicVolume);
-      }
+      lock();
+         /* Updata values */
+         musicVolume = music;
+         sndfxVolume = sndV;
 
-      snd = sndfxList.next;
-      while(snd != &sndfxList)
-      {
-         snd->changeVolume(sndfxVolume);
-         snd = snd->next;
-      }
+         /* Update backmusic */
+         if(backMusic)
+         {
+            backMusic->changeVolume(musicVolume);
+         }
 
-    unLock();
+         /* Update all current sounds */
+         snd = (sndfx*)sndList.getFirst();
+         for(i=0; i < sndList.getTotal(); i++)
+         {
+            snd->changeVolume(sndfxVolume);
+            snd = (sndfx*)snd->getNext();
+         }
+
+      unLock();
    }
 }
 
@@ -381,8 +376,7 @@ bool sound::enabled;              /**< If Sound is Enabled or Not */
 SDL_Thread* sound::soundThread;   /**< The Sound Paralel Thread */
 SDL_mutex* sound::soundMutex;     /**< The Sound Mutex */
 
-sndfx sound::sndfxList;           /**< Head Node of sndFx List */
-int sound::totalSndfx;            /**< Total Sound Effects on List */
+sndfxList sound::sndList;         /**< sndFx List */
 
 int sound::musicVolume;           /**< The Music volume */
 int sound::sndfxVolume;           /**< The SndFxVolume */
