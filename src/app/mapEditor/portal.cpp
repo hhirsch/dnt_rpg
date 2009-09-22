@@ -151,7 +151,7 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
               doorWall = m;
            }
 
-           m = m->next;
+           m = (wall*)m->getNext();
       }
 
       //Coloca X ou Z da porta fixo nele

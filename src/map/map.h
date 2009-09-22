@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -111,7 +111,7 @@ class wallTexture
 };
 
 /*! A map Wall. Just a wall usually used in indoor maps */
-class wall
+class wall: public dntListElement
 {
    public:
       GLfloat x1,          /**< X min coordinates */
@@ -123,8 +123,20 @@ class wall
       wallTexture backTexture;     /**< Back Texture ID */
       wallTexture rightTexture;    /**< Right Texture ID */
       wallTexture leftTexture;     /**< Left Texture ID */
-      wall* next;          /**< Next on list */
-      wall* previous;      /**< Previous on List */
+};
+
+/*! The list of walls */
+class wallList: public dntList
+{
+   public:
+      /*! Constructor */
+      wallList();
+      /*! Destructor */
+      ~wallList();
+
+   protected:
+      /*! Free the wall memory */
+      void freeElement(dntListElement* obj);
 };
 
 /*! Definition of a texture used for the map */
@@ -600,8 +612,8 @@ class Map
       mapSound* sounds;      /**< Map Sound Effects */
       string soundsFileName; /**< Sound Info File Name */
 
-      wall* walls;          /**< Map Walls */
-      int totalWalls;       /**< Total Map Walls */
+      wallList walls;        /**< Map Walls */
+
       int x,                /**< Map X dimension (in squares) */
           z;                /**< Map Z Dimension (in squares) */
       bool outdoor;         /**< If it's an outdoor or indoor map */

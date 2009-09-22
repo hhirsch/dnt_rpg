@@ -79,7 +79,7 @@ wall* wallController::getWall()
       {
          return(aux);
       }
-      aux = aux->next;
+      aux = (wall*)aux->getNext();
    }
    return(NULL);
 }
@@ -150,7 +150,7 @@ void wallController::verifyAction(GLfloat mouseX, GLfloat mouseY,
    {
       if(actualWall)
       {
-         actualWall = actualWall->next;
+         actualWall = (wall*)actualWall->getNext();
       }
       state = WALL_STATE_OTHER;
       tool = TOOL_NONE;
@@ -161,7 +161,7 @@ void wallController::verifyAction(GLfloat mouseX, GLfloat mouseY,
    {
       if(actualWall)
       {
-         actualWall = actualWall->previous;
+         actualWall = (wall*)actualWall->getPrevious();
       }
       state = WALL_STATE_OTHER;
       tool = TOOL_NONE;

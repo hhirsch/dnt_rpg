@@ -1,6 +1,23 @@
-/*************************************************************************
- * DccNiTghtmare is Public Domain - Do whatever you want with this code. *
- *************************************************************************/
+/* 
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+ 
+  This file is part of DccNiTghtmare.
+ 
+  DccNiTghtmare is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  DccNiTghtmare is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 
 #include "map.h"
 
@@ -235,6 +252,36 @@ void wallTexture::setDelta(GLuint x, GLuint y, GLuint z)
 
 //////////////////////////////////////////////////////////////////////////////
 //                                                                          //
+//                                 wallList                                 //
+//                                                                          //
+//////////////////////////////////////////////////////////////////////////////
+
+/********************************************************************
+ *                            constructor                           *
+ ********************************************************************/
+wallList::wallList(): dntList()
+{
+}
+
+/********************************************************************
+ *                             Destructor                           *
+ ********************************************************************/
+wallList::~wallList()
+{
+   clearList();
+}
+
+/********************************************************************
+ *                            freeElement                           *
+ ********************************************************************/
+void wallList::freeElement(dntListElement* obj)
+{
+   wall* w = (wall*)obj;
+   delete(w);
+}
+
+//////////////////////////////////////////////////////////////////////////////
+//                                                                          //
 //                                  MAP                                     //
 //                                                                          //
 //////////////////////////////////////////////////////////////////////////////
@@ -250,8 +297,6 @@ Map::Map()
    fileName = "oxi!";
    name = "mapName";
    squareInic = NULL;
-   walls = NULL;
-   totalWalls = 0;
    MapSquares = NULL;
    doors = NULL;
    totalDoors = 0;
@@ -321,15 +366,7 @@ Map::~Map()
    }
    
    /* Delete all Walls */
-   wall* m = walls;
-   wall* am =NULL;
-   int wNum;
-   for(wNum = 0; wNum < totalWalls; wNum++)
-   {
-      am = m;
-      m = m->next;
-      delete(am);
-   }
+   walls.clearList();
 
    /* Deleting wall Doors */
    door* door1 = doors;
@@ -622,14 +659,14 @@ void Map::removeUnusedTextures()
       used |= (getTexture(getTextureID("UpperWall", R,G,B)) == tex);
 
       /* Verify use of texture at Walls  */
-      w = walls;
-      for(x1 = 0; ((x1 < totalWalls) && (!used)); x1++)
+      w = (wall*)walls.getFirst();
+      for(x1 = 0; ((x1 < walls.getTotal()) && (!used)); x1++)
       {
          used |= (getTexture(w->frontTexture.getTextureId()) == tex);
          used |= (getTexture(w->backTexture.getTextureId()) == tex);
          used |= (getTexture(w->rightTexture.getTextureId()) == tex);
          used |= (getTexture(w->leftTexture.getTextureId()) == tex);
-         w = w->next;
+         w = (wall*)w->getNext();
       }
 
       if(!used)
@@ -830,25 +867,16 @@ void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal,
  ********************************************************************/
 wall* Map::addWall(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2)
 {
+   /* Create and define the wall */
    wall* maux = new(wall);
    maux->x1 = x1;
    maux->x2 = x2;
    maux->z1 = z1;
    maux->z2 = z2;
-   if(walls)
-   {
-      maux->next = walls;
-      maux->previous = walls->previous;
-      maux->next->previous = maux;
-      maux->previous->next = maux;
-   }
-   else
-   {
-      maux->next = maux;
-      maux->previous = maux;
-   }
-   totalWalls++;
-   walls = maux;
+
+   /* Add it to the list */
+   walls.insert(maux);
+   
    return(maux);
 }
 
@@ -857,7 +885,7 @@ wall* Map::addWall(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2)
  ********************************************************************/
 wall* Map::getFirstWall()
 {
-   return(walls);
+   return((wall*)walls.getFirst());
 }
 
 /********************************************************************
@@ -865,7 +893,7 @@ wall* Map::getFirstWall()
  ********************************************************************/
 int Map::getTotalWalls()
 {
-   return(totalWalls);
+   return(walls.getTotal());
 }
 
 /********************************************************************
@@ -875,18 +903,7 @@ void Map::removeWall(wall* w)
 {
    if(w)
    {
-      if(walls == w)
-      {
-         walls = w->next;
-      }
-      w->next->previous = w->previous;
-      w->previous->next = w->next;
-      delete(w);
-      totalWalls--;
-      if(totalWalls == 0)
-      {
-         walls = NULL;
-      }
+      walls.remove(w);
    }
 }
 
@@ -1279,7 +1296,7 @@ void Map::renderWalls(GLfloat cameraX, GLfloat cameraY,
                       bool inverted)
 {
    glColor3f(1.0,1.0,1.0);
-   wall* maux = walls;
+   wall* maux = (wall*)walls.getFirst();
    bool visible = false;
    int wNum;
    GLfloat altura = WALL_HEIGHT;
@@ -1291,7 +1308,7 @@ void Map::renderWalls(GLfloat cameraX, GLfloat cameraY,
    wallRenderer->clear();
 
    /* Render All Walls and Curbs */
-   for(wNum=0;wNum<totalWalls;wNum++ )
+   for(wNum=0; wNum < walls.getTotal(); wNum++)
    {
       if(inverted)
       {
@@ -1389,7 +1406,7 @@ void Map::renderWalls(GLfloat cameraX, GLfloat cameraY,
                                0, 1, 0);
                                
       }
-      maux = maux->next;
+      maux = (wall*)maux->getNext();
    }
 
    /* Now, finally render! */
@@ -2170,14 +2187,14 @@ int Map::open(string arquivo)
    int ax,az;
    
    /* Now, update pointers to the walls */
-   maux = walls;
+   maux = (wall*)walls.getFirst();
    int wNum;
    int inix,iniz,maxx,maxz;
    int indexMuro;
    Square* aux;
    float ssize = squareSize();
    
-   for(wNum = 0; wNum < totalWalls; wNum++)
+   for(wNum = 0; wNum < walls.getTotal(); wNum++)
    {
       inix = (int)floor(maux->x1 / ssize);
       iniz = (int)floor(maux->z1 / ssize);
@@ -2203,7 +2220,7 @@ int Map::open(string arquivo)
                           indexMuro);
           }
       }
-      maux = maux->next;
+      maux = (wall*)maux->getNext();
    }
 
    /* Define minimap sizes */
@@ -2274,12 +2291,12 @@ void Map::newMap(int X, int Z)
 void Map::optimize()
 {
     /* Verify Wall Superposition */
-    wall* maux = walls;
+    wall* maux = (wall*)walls.getFirst();
     int wNum, wNum2;
-    for(wNum = 0; wNum < totalWalls; wNum++)
+    for(wNum = 0; wNum < walls.getTotal(); wNum++)
     {
-        wall* maux2 = walls;
-        for(wNum2 = 0; wNum2 < totalWalls; wNum2++)
+        wall* maux2 = (wall*)walls.getFirst();
+        for(wNum2 = 0; wNum2 < walls.getTotal(); wNum2++)
         {
             if(maux != maux2)
             {
@@ -2352,9 +2369,9 @@ void Map::optimize()
                     }
                 }
             }
-            maux2 = maux2->next;
+            maux2 = (wall*)maux2->getNext();
         }
-        maux = maux->next;
+        maux = (wall*)maux->getNext();
     }
 
    /* Verify Object Occupied Squares */
@@ -2474,9 +2491,9 @@ int Map::save(string arquivo)
    }
    
    /* Write Walls */
-   wall* maux = (wall*)walls;
+   wall* maux = (wall*)walls.getFirst();
    int x1,z1,x2,z2,wNum;
-   for(wNum=0; wNum < totalWalls; wNum++)
+   for(wNum=0; wNum < walls.getTotal(); wNum++)
    {
       GLuint dX=0, dY=0, dZ=0;
       fprintf(arq,"wall = %.3f,%.3f,%.3f,%.3f\n",
@@ -2493,7 +2510,7 @@ int Map::save(string arquivo)
       maux->leftTexture.getDelta(dX,dY,dZ);
       fprintf(arq,"wtl = %d,%d,%d %s\n", dX,dY,dZ,
                   getTextureName(maux->leftTexture.getTextureId()).c_str());
-      maux = (wall*)maux->next;
+      maux = (wall*)maux->getNext();
    }
 
    /* Write Squares, line per line */
