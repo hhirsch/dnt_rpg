@@ -241,7 +241,7 @@ class mapTalkModAction: public modAction
 
 /*! The modInvObj is just a structure to keep inventory objects
  * status. It is only used for modInventory. */
-class modInvObj
+class modInvObj: public dntListElement
 {
    public:
       string fileName;      /**< The Object Filename */
@@ -249,8 +249,6 @@ class modInvObj
           y;                /**< Y position on inventory */
       int invNumber;        /**< The inventory number */
       int state;            /**< The current object state */
-      modInvObj* next;      /**< Next Object */
-      modInvObj* previous;  /**< Previous Object */
 };
 
 /*! The modInventory class is a inventory state keeper,
@@ -259,7 +257,7 @@ class modInvObj
  *          already exists) for each NPC when the PC exits the map.
  *          When the PC is back, each NPC's inventory is then populated
  *          by its previously modInventory. */
-class modInventory: public modAction
+class modInventory: public modAction, public dntList
 {
    public:
       /*! Constructor
@@ -311,8 +309,9 @@ class modInventory: public modAction
        * \param obj -> pointer of object to insert */
       void insert(modInvObj* obj);
 
-      modInvObj* objects;      /**< The objects on inventory list */
-      int totalObjects;        /**< Total Objects on the list */
+      /*! Free modInvObj memory
+       * \param obj -> modInvObj to delete */
+      void freeElement(dntListElement* obj);
 };
 
 /*! modMap have all modifications done for a specified map */

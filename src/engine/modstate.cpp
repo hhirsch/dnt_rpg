@@ -474,10 +474,6 @@ void mapTalkModAction::fromString(string s)
 modInventory::modInventory(inventory* inv, string owner, string mapFile)
              : modAction(MODSTATE_INVENTORY, owner, mapFile, -1, -1, -1)
 {
-   /* Default Initial Values */
-   objects = NULL;
-   totalObjects = 0;
-
    /* Create the list from the inventory */
    if(inv != NULL)
    {
@@ -495,17 +491,26 @@ modInventory::~modInventory()
 }
 
 /************************************************************
+ *                       freeElement                        *
+ ************************************************************/
+void modInventory::freeElement(dntListElement* obj)
+{
+   modInvObj* i = (modInvObj*)obj;
+   delete(i);
+}
+
+/************************************************************
  *                            flush                         *
  ************************************************************/
 void modInventory::flush(Map* curMap, inventory* inv)
 {
-   modInvObj* invObj = objects;
+   modInvObj* invObj = (modInvObj*)first;
    object* curObj = NULL;
    int i, invNumber;
    bool res;
 
    /* Insert all objects at its previous positions */
-   for(i = 0; i < totalObjects; i++)
+   for(i = 0; i < total; i++)
    {
       /* Try get object from map object list */
       curObj = objectsList::search(invObj->fileName, -1, -1, -1);
@@ -557,7 +562,7 @@ void modInventory::flush(Map* curMap, inventory* inv)
       }
 
       /* Let's do the next */
-      invObj = invObj->next;
+      invObj = (modInvObj*)invObj->getNext();
    }
 }
 
@@ -621,23 +626,8 @@ void modInventory::create(inventory* inv)
  ************************************************************/
 void modInventory::insert(modInvObj* obj)
 {
-   /* Set next/previous pointers */
-   if(objects == NULL)
-   {
-      obj->next = obj;
-      obj->previous = obj;
-   }
-   else
-   {
-      obj->next = objects;
-      obj->previous = objects->previous;
-      obj->next->previous = obj;
-      obj->previous->next = obj;
-   }
-
-   /* Set it as the initial node on list */
-   objects = obj;
-   totalObjects++;
+   /* Insert on list */
+   dntList::insert(obj);
 }
 
 /************************************************************
@@ -645,19 +635,7 @@ void modInventory::insert(modInvObj* obj)
  ************************************************************/
 void modInventory::clear()
 {
-   int i;
-   modInvObj* cur = objects;
-   modInvObj* aux = NULL;
-
-   /* Free all objects */
-   for(i = 0; i < totalObjects; i++)
-   {
-      aux = cur;
-      cur  = cur->next;
-      delete(aux);
-   }
-
-   totalObjects = 0;
+   clearList();
 }
 
 /************************************************************
@@ -708,14 +686,14 @@ void modInventory::save(ofstream* file)
    *file << MODSTATE_TOKEN_MOD_INVENTORY << " = " << target << endl;
 
    /* Save all objects here */
-   obj = objects;
-   for(i = 0; i < totalObjects; i++)
+   obj = (modInvObj*)getFirst();
+   for(i = 0; i < total; i++)
    {
       *file << MODSTATE_TOKEN_INVENTORY_ITEM << " = " 
             << obj->fileName << " " << obj->x << " " 
             << obj->y << " " << obj->invNumber << " " 
             << obj->state << endl;
-      obj = obj->next;
+      obj = (modInvObj*)obj->getNext();
    }
 }
 
