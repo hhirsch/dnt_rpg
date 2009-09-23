@@ -23,6 +23,7 @@
 
 #include "iafuncs.h"
 #include "../etc/defparser.h"
+#include "../etc/list.h"
 
 #include <string>
 #include <iostream>
@@ -31,7 +32,7 @@ using namespace std;
 
 
 /*! iaVariable Class. It's just a variable to use at ia scripts */
-class iaVariable
+class iaVariable: public dntListElement
 {
    public:
       /*! Constructor */
@@ -83,12 +84,10 @@ class iaVariable
       string type;   /**< The type string id of the variable */
       string name;   /**< The name of the variable */
 
-      iaVariable* next;       /**< Next variable on the list */
-      iaVariable* previous;   /**< Previous variable on the list */
 };
 
 /*! The symbols table of the language */
-class iaSymbolsTable
+class iaSymbolsTable: public dntList
 {
    public:
       /*! Constructor */
@@ -136,8 +135,10 @@ class iaSymbolsTable
       void load(defParser* def, void* curEngine);
 
    protected:
-      iaVariable* first;   /**< First element on the list */
-      int total;           /**< Total symbols on the list */
+      /*! Delete the variable memory
+       * \param obj -> iaVariable to delete */
+      void freeElement(dntListElement* obj);
+
       int tempSymbol;      /**< The next temporary symbol number */
 };
 

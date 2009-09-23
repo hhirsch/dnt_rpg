@@ -653,8 +653,6 @@ void iaVariable::fromString(string s, void* curEngine)
  ***********************************************************/
 iaSymbolsTable::iaSymbolsTable()
 {
-   first = NULL;
-   total = 0;
    tempSymbol = 0;
 }
 
@@ -663,10 +661,16 @@ iaSymbolsTable::iaSymbolsTable()
  ***********************************************************/
 iaSymbolsTable::~iaSymbolsTable()
 {
-   while(first)
-   {
-      removeSymbol(first);
-   }
+   clearList();
+}
+
+/***********************************************************
+ *                      freeElement                        *
+ ***********************************************************/
+void iaSymbolsTable::freeElement(dntListElement* obj)
+{
+   iaVariable* iv = (iaVariable*)obj;
+   delete(iv);
 }
 
 /***********************************************************
@@ -674,22 +678,11 @@ iaSymbolsTable::~iaSymbolsTable()
  ***********************************************************/
 iaVariable* iaSymbolsTable::addSymbol(string type, string name)
 {
+   /* Create the variable */
    iaVariable* iv = new iaVariable(type, name);
-
-   if(first)
-   {
-      iv->next = first;
-      iv->previous = first->previous;
-      first->previous = iv;
-      iv->previous->next = iv;
-   }
-   else
-   {
-      iv->next = iv;
-      iv->previous = iv;
-   }
-   first = iv;
-   total++;
+   
+   /* Insert it on the list */
+   insert(iv);
 
    return(iv);
 }
@@ -714,15 +707,14 @@ void iaSymbolsTable::removeTempSymbols()
    int i;
    int initialTotal = total;
 
-   iaVariable* symbol = first;
+   iaVariable* symbol = (iaVariable*)first;
    iaVariable* tmp;
 
    for(i=0; i<initialTotal; i++)
    {
       tmp = symbol;
-      symbol = symbol->next;
-      if( (tmp->name[0] == '&') && (tmp->name[1] == 't') &&
-          (tmp->name[2] == 'm') && (tmp->name[3] == 'p') )
+      symbol = (iaVariable*)symbol->getNext();
+      if( isTemp(tmp) )
       {
          removeSymbol(tmp);
          tempSymbol--;
@@ -768,18 +760,7 @@ void iaSymbolsTable::removeSymbol(iaVariable* symbol)
 {
    if(symbol)
    {
-      if(symbol == first)
-      {
-         first = first->next;
-      }
-      symbol->next->previous = symbol->previous;
-      symbol->previous->next = symbol->next;
-      delete(symbol);
-      total--;
-      if(total == 0)
-      {
-         first = NULL;
-      }
+      remove(symbol);
    }
    else
    {
@@ -792,7 +773,7 @@ void iaSymbolsTable::removeSymbol(iaVariable* symbol)
  ***********************************************************/
 iaVariable* iaSymbolsTable::getSymbol(string name)
 {
-   iaVariable* iv = first;
+   iaVariable* iv = (iaVariable*)first;
    int i;
    for(i=0; i<total; i++)
    {
@@ -800,7 +781,7 @@ iaVariable* iaSymbolsTable::getSymbol(string name)
       {
          return(iv);
       }
-      iv = iv->next;
+      iv = (iaVariable*)iv->getNext();
    }
    return(NULL);
 }
@@ -810,7 +791,7 @@ iaVariable* iaSymbolsTable::getSymbol(string name)
  ***********************************************************/
 void iaSymbolsTable::save(ofstream* file)
 {
-   iaVariable* iv = first;
+   iaVariable* iv = (iaVariable*)first;
    int i;
 
    /* Save All Variables */
@@ -826,7 +807,7 @@ void iaSymbolsTable::save(ofstream* file)
          /* Current Value */
          *file << IA_SYMBOLS_TOKEN_VALUE << " = " << iv->toString() << endl;
       }
-      iv = iv->next;
+      iv = (iaVariable*)iv->getNext();
    }
 
    /* Mark Stack End */
