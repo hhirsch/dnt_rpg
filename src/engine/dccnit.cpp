@@ -2127,7 +2127,8 @@ int engine::verifyMouseActions(Uint8 mButton)
 
       /* Doors Verification */
       door* porta = actualMap->getFirstDoor();
-      while( (porta != NULL) && (!pronto) )
+      int d;
+      for(d=0; ( (d < actualMap->getTotalDoors()) && (!pronto) ); d++)
       {
          boundingBox bound = porta->obj->getBoundingBox();
          GLfloat X[4]; GLfloat Z[4];
@@ -2177,7 +2178,7 @@ int engine::verifyMouseActions(Uint8 mButton)
             }
             pronto = 1;
          }
-         porta = porta->next;
+         porta = (door*)porta->getNext();
       }
 
       /* Inventory Verification */

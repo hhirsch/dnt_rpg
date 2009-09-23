@@ -150,6 +150,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
                         GLfloat& nz, bool usePosition)
 {
    bool result = true;
+   int i, j;
    Square* saux;
 
    varHeight = 0.0;
@@ -224,7 +225,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
 
    /* Test Doors */
    door* door1 = actualMap->getFirstDoor();
-   while( door1 != NULL )
+   for(i=0; i < actualMap->getTotalDoors(); i++)
    {
       GLfloat minObj[3], maxObj[3];
       boundingBox boundPorta = door1->obj->getBoundingBox();
@@ -247,7 +248,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
       {
          return(false);
       }
-      door1 = door1->next;
+      door1 = (door*)door1->getNext();
    }
 
    /* Test the actual square, since is BIG ! */
@@ -413,7 +414,6 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
    }
 
    /* Test colision with npcs and pcs */
-   int i,j;
    characterList* list = NPCs;
    for(i = 0; i <=1; i++)
    {

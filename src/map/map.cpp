@@ -258,6 +258,36 @@ void wallList::freeElement(dntListElement* obj)
 
 //////////////////////////////////////////////////////////////////////////////
 //                                                                          //
+//                                 doorList                                 //
+//                                                                          //
+//////////////////////////////////////////////////////////////////////////////
+
+/********************************************************************
+ *                            constructor                           *
+ ********************************************************************/
+doorList::doorList(): dntList()
+{
+}
+
+/********************************************************************
+ *                             Destructor                           *
+ ********************************************************************/
+doorList::~doorList()
+{
+   clearList();
+}
+
+/********************************************************************
+ *                            freeElement                           *
+ ********************************************************************/
+void doorList::freeElement(dntListElement* obj)
+{
+   door* d = (door*)obj;
+   delete(d);
+}
+
+//////////////////////////////////////////////////////////////////////////////
+//                                                                          //
 //                               mapTexture                                 //
 //                                                                          //
 //////////////////////////////////////////////////////////////////////////////
@@ -345,8 +375,6 @@ Map::Map()
    name = "mapName";
    squareInic = NULL;
    MapSquares = NULL;
-   doors = NULL;
-   totalDoors = 0;
    music = "";
    npcFileName = "";
    particlesFileName = "";
@@ -391,14 +419,7 @@ Map::~Map()
    walls.clearList();
 
    /* Deleting wall Doors */
-   door* door1 = doors;
-   door* door2 =NULL;
-   while(door1)
-   {
-      door2 = door1;
-      door1 = door1->next;
-      delete(door2);
-   }
+   doors.clearList();
 
    /* Delete all Buffers */
    if(vertexBuffer != NULL)
@@ -706,11 +727,11 @@ void Map::deleteObjects()
    objectsList::removeStaticSceneries();
 
    /* Now, all doors Objects */
-   door* dor = doors;
-   for(o = 0; o < totalDoors; o++)
+   door* dor = (door*)doors.getFirst();
+   for(o = 0; o < doors.getTotal(); o++)
    {
       delete(dor->obj);
-      dor = dor->next;
+      dor = (door*)dor->getNext();
    }
 
    /* and finally, search all squares for non sceneries objects */
@@ -910,7 +931,7 @@ void Map::removeWall(wall* w)
  ********************************************************************/
 door* Map::getFirstDoor()
 {
-   return(doors);
+   return((door*)doors.getFirst());
 }
 
 /********************************************************************
@@ -918,7 +939,7 @@ door* Map::getFirstDoor()
  ********************************************************************/
 int Map::getTotalDoors()
 {
-   return(totalDoors);
+   return(doors.getTotal());
 }
 
 /********************************************************************
@@ -926,11 +947,12 @@ int Map::getTotalDoors()
  ********************************************************************/
 void Map::insertDoor(door* newDoor)
 {
-   newDoor->next = doors;
-   doors = newDoor;
+   /* Insert on list */
+   doors.insert(newDoor);
+
+   /* Set values */
    newDoor->status = DOOR_STATUS_CLOSED;
    newDoor->delta = 0;
-   totalDoors++;
 }
 
 /********************************************************************
@@ -1421,7 +1443,7 @@ void Map::renderObjects(GLfloat cameraX, GLfloat cameraY,
                       GLfloat cameraZ, GLfloat** matriz,
                       bool inverted)
 {
-   int o;
+   int o, i;
    int Xaux, Zaux;
    GLfloat distancia;
    GLfloat deltaX, deltaZ;
@@ -1490,8 +1512,8 @@ void Map::renderObjects(GLfloat cameraX, GLfloat cameraY,
    }
 
    /* Draw Doors */
-   door* dor = doors;
-   while(dor != NULL)
+   door* dor = (door*)doors.getFirst();
+   for(i=0; i < doors.getTotal(); i++)
    {
       if(dor->obj != NULL)
       {
@@ -1514,7 +1536,7 @@ void Map::renderObjects(GLfloat cameraX, GLfloat cameraY,
          /* Draw it */
          dor->obj->draw(inverted);
       }
-      dor = dor->next;
+      dor = (door*)dor->getNext();
    }
 }
 
@@ -2479,13 +2501,13 @@ int Map::save(string arquivo)
    }
 
    /* Write Doors */
-   door* doorAux = (door*)doors;
+   door* doorAux = (door*)doors.getFirst();
    while(doorAux != NULL)
    {
       fprintf(arq,"door = %s %.3f,%.3f:%d\n",
               dir.getRelativeFile(doorAux->obj->getFileName()).c_str(),
               doorAux->x,doorAux->z, doorAux->orientation);
-      doorAux = doorAux->next;
+      doorAux = (door*)doorAux->getNext();
    }
    
    /* Write Walls */

@@ -176,7 +176,7 @@ class mapTextureList: public dntList
 };
 
 /*! A door is an object that, obviously, opens and close passages */
-class door
+class door: public dntListElement
 {
    public:
       object* obj;             /**< pointer to door object */
@@ -186,7 +186,21 @@ class door
       GLfloat delta;           /**< current orientation delta
                                     (is inc or dec by the current status,
                                      from 0 to 90) */
-      door* next;      /**< pointer to next door on map */
+};
+
+/*! List of doors */
+class doorList: public dntList
+{
+   public:
+      /*! Constructor */
+      doorList();
+      /*! Destructor */
+      ~doorList();
+
+   protected:
+      /*! Free the door memory
+       * \param obj -> door to delete */
+      void freeElement(dntListElement* obj);
 };
 
 /*! An object that is inner a map's square definition */
@@ -617,8 +631,7 @@ class Map
       //mapRoad* roads;     /**< Map's Roads */
       mapTextureList textures; /**< List of textures on Map */
       Square* squareInic;   /**< Square where PCs starts */
-      door* doors;          /**< Map Doors */
-      int totalDoors;       /**< Total Number of doors on the map */
+      doorList doors;       /**< List of Map Doors */
       lake* lakes;          /**< Chain list of lakes on map */
       int totalLakes;       /**< Total lakes on map */
 
