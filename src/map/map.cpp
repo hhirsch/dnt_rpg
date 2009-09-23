@@ -66,8 +66,6 @@ Square::Square()
    {
      walls[aux] = NULL;
    }
-   objList = NULL;
-   totalObjects = 0;
 }
 
 /********************************************************************
@@ -75,12 +73,7 @@ Square::Square()
  ********************************************************************/
 Square::~Square()
 {
-   /* Remove all objects on the list */
-   while(totalObjects > 0)
-   {
-      removeObject(objList);
-   }
-   return;
+   clearList();
 }
 
 /********************************************************************
@@ -89,6 +82,7 @@ Square::~Square()
 objSquare* Square::addObject(bool draw, GLfloat x, GLfloat y, GLfloat z,
                              GLfloat orientation, bool colision, object* obj)
 {
+   /* Define the new objSquare */
    objSquare* n = new objSquare;
    n->draw = draw;
    n->status = 0;
@@ -99,21 +93,8 @@ objSquare* Square::addObject(bool draw, GLfloat x, GLfloat y, GLfloat z,
    n->colision = colision;
    n->obj = obj;
 
-   if(totalObjects == 0)
-   {
-      n->next = n;
-      n->previous = n;
-   }
-   else
-   {
-      n->next = objList;
-      n->previous = objList->previous;
-      objList->previous->next = n;
-      objList->previous = n;
-   }
-   objList = n;
-
-   totalObjects++;
+   /* Add it to the list */
+   insert(n);
 
    return(n);
 }
@@ -123,21 +104,16 @@ objSquare* Square::addObject(bool draw, GLfloat x, GLfloat y, GLfloat z,
  ********************************************************************/
 void Square::removeObject(objSquare* obj)
 {
-   if(obj == objList)
-   {
-      objList = obj->next;
-   }
-   obj->previous->next = obj->next;
-   obj->next->previous = obj->previous;
+   remove(obj);
+}
 
-   /* Delete the internal squareObject reference */
-   delete(obj);
-
-   totalObjects--;
-   if(totalObjects == 0)
-   {
-      objList = NULL;
-   }
+/********************************************************************
+ *                          freeElement                             *
+ ********************************************************************/
+void Square::freeElement(dntListElement* obj)
+{
+   objSquare* o = (objSquare*)obj;
+   delete(o);
 }
 
 /********************************************************************
@@ -145,7 +121,7 @@ void Square::removeObject(objSquare* obj)
  ********************************************************************/
 objSquare* Square::getFirstObject()
 {
-   return(objList);
+   return((objSquare*)first);
 }
 
 /********************************************************************
@@ -153,7 +129,7 @@ objSquare* Square::getFirstObject()
  ********************************************************************/
 int Square::getTotalObjects()
 {
-   return(totalObjects);
+   return(total);
 }
 
 /********************************************************************
@@ -724,7 +700,7 @@ void Map::deleteObjects()
         sobj = MapSquares[Xaux][Zaux].getFirstObject();
         for(o=0; o < MapSquares[Xaux][Zaux].getTotalObjects(); o++)
         {
-           next = sobj->next;
+           next = (objSquare*)sobj->getNext();
            if(sobj != NULL) 
            {
               /* If will draw here and isn't scenery */
@@ -762,7 +738,7 @@ void Map::removeObject(object* obj)
         sobj = MapSquares[Xaux][Zaux].getFirstObject();
         for(o=0; o < MapSquares[Xaux][Zaux].getTotalObjects(); o++)
         {
-           next = sobj->next;
+           next = (objSquare*)sobj->getNext();
            if(sobj != NULL) 
            {
               if(sobj->obj == obj)
@@ -1486,7 +1462,7 @@ void Map::renderObjects(GLfloat cameraX, GLfloat cameraY,
                obj->obj->draw(inverted);
             }
          }
-         obj = obj->next;
+         obj = (objSquare*)obj->getNext();
       }
       MapSquares[Xaux][Zaux].visible = 0;
    }
@@ -2560,7 +2536,7 @@ int Map::save(string arquivo)
                        obj->z, obj->orientation, 
                        !obj->colision);
             }
-            obj = obj->next;
+            obj = (objSquare*)obj->getNext();
           }
       }
    }

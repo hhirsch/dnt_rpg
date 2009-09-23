@@ -134,7 +134,7 @@ bool collision::verifySquare(GLfloat min[3], GLfloat max[3], Square* quad,
           }
         }
         ob++;
-        sobj = sobj->next;
+        sobj = (objSquare*)sobj->getNext();
       }
    }
 

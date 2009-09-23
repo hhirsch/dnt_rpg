@@ -171,7 +171,7 @@ class door
 };
 
 /*! An object that is inner a map's square definition */
-class objSquare
+class objSquare : public dntListElement
 {
    public:
       bool draw;           /**< If is to draw the object (true if
@@ -189,16 +189,13 @@ class objSquare
       int status;          /**< The status of the object */
       bool colision;       /**< If the collision is enable to this object */
       object* obj;         /**< The pointer to the object used */
-
-      objSquare* next;     /**< Next object on the list */
-      objSquare* previous; /**< Previous object on the list */
 };
 
 /*! The square definition. A square is the atom of the map, with
- * its texture, objects, etc
+ * its texture, objects, etc. Also its a list of objSquares too.
  * \note -> an object can be om more than one square at the same time 
  * \note -> the square's act like the map's BSP */
-class Square
+class Square: public dntList
 {
    public:
       Square();         /**< Constructor */
@@ -240,8 +237,9 @@ class Square
       int getTotalObjects();
 
    protected:
-      objSquare* objList;     /**< List of Objects on the square */
-      int totalObjects;       /**< Total objects on the list */
+      /*! Free the objSquare memory
+       * \param obj -> pointer to the objSquare to delete */
+      void freeElement(dntListElement* obj);
 
 };
 

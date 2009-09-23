@@ -298,7 +298,7 @@ void camera::lookAt(Map* acMap)
                }
             }
             ob++;
-            sobj = sobj->next;
+            sobj = (objSquare*)sobj->getNext();
          }
 
          /* Put the camera at the maximun SumY got, if one  */

@@ -2122,7 +2122,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                pronto = 1;
             }
          }
-         sobj = sobj->next;
+         sobj = (objSquare*)sobj->getNext();
       }
 
       /* Doors Verification */
