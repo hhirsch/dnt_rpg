@@ -30,6 +30,8 @@
 #define MAX_PRE_TESTS 2 /**< Max number of preTests per option */
 
 #include "../gui/farso.h"
+#include "../etc/list.h"
+
 #include "character.h"
 #include <string>
 using namespace std;
@@ -102,20 +104,17 @@ class dialogOption
 };
 
 /*! Dialog Struct */
-class dialog
+class dialog: public dntListElement
 {
    public:
       string npcText;                     /**< NPC text */
       dialogOption options[MAX_OPTIONS];  /**< PC options to talk */
       int id;                             /**< Identificator */
-
-      dialog* next;                       /**< Next dialog on chain list */
-      dialog* previous;                   /**< Previous Dialog on chain list */
 };
 
 /*! Conversation Class. A conversation is a set of dialogs, usually for
  * a NPC character or an object. */
-class conversation
+class conversation: public dntList
 {
    public:
       /*! conversation Constructor */
@@ -179,8 +178,15 @@ class conversation
       void changeDialog();
 
    protected:
-      dialog* first;        /**< Head Node */
-      int total;            /**< Total Dialogs */
+      /*! Free the dialog's memory
+       * \param obj -> pointer to the dialog to clean */
+      void freeElement(dntListElement* obj);
+
+      /*! Get the dialog pointer
+       * \param id -> id of the dialog to get
+       * \return pointer to the dialog or NULL */
+      dialog* getDialog(int id);
+
       int actual;           /**< Actual active Dialog */
       int initialDialog;    /**< First dialog to show */
       character* actualPC;  /**< The Actual PC */

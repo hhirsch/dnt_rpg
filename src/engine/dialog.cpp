@@ -442,11 +442,6 @@ dialogOption::dialogOption()
  *************************************************************************/
 conversation::conversation()
 {
-   first = new(dialog);
-   first->next = first;
-   first->previous = first;
-   first->id = 0;
-   total = 0;
    actualPC = NULL;
    owner = NULL;
    ownerMap = "";
@@ -459,14 +454,16 @@ conversation::conversation()
  *************************************************************************/
 conversation::~conversation()
 {
-   dialog* dlg;
-   while(total>0)
-   {
-       dlg = first->next;
-       removeDialog(dlg->id);
-   }
-   delete(first);
-   total = -1;
+   clearList();
+}
+
+/*************************************************************************
+ *                              freeElement                              *
+ *************************************************************************/
+void conversation::freeElement(dntListElement* obj)
+{
+   dialog* d = (dialog*)obj;
+   delete(d);
 }
 
 /*************************************************************************
@@ -965,20 +962,38 @@ int conversation::saveFile(string name)
 }
 
 /*************************************************************************
+ *                               getDialog                               *
+ *************************************************************************/
+dialog* conversation::getDialog(int id)
+{
+   int i;
+   dialog* dlg = (dialog*)first;
+
+   for(i = 0; i < total; i++)
+   {
+      if(dlg->id == id)
+      {
+         return(dlg);
+      }
+      dlg = (dialog*)dlg->getNext();
+   }
+
+   return(NULL);
+}
+
+/*************************************************************************
  *                             insertDialog                              *
  *************************************************************************/
 dialog* conversation::insertDialog()
 {
+   /* Create the dialog */
    dialog* dlg = new (dialog);
-   dlg->next = first->next;
-   dlg->previous = first;
-   dlg->next->previous = dlg;
-   dlg->id = dlg->next->id+1;
-   first->next = dlg;
-
+   dlg->id = total;
    dlg->npcText = "";
 
-   total++;
+   /* Insert it on the list */
+   insert(dlg);
+   
    return(dlg);
 }
 
@@ -987,21 +1002,15 @@ dialog* conversation::insertDialog()
  *************************************************************************/
 void conversation::removeDialog(int num)
 {
-   dialog *dlg = first->next;
-   while((dlg != first) && (dlg->id != num))
+   dialog *dlg = getDialog(num);
+  
+   if(dlg != NULL)
    {
-       dlg = dlg->next;
-   }
-   if(dlg == first)
-   {
-      printf(gettext("Not found in dialog: %d\n"),num);
+      remove(dlg);
    }
    else
    {
-      dlg->next->previous = dlg->previous;
-      dlg->previous->next = dlg->next;
-      total--;
-      delete(dlg);
+      printf(gettext("Not found in dialog: %d\n"),num);
    }
 }
 
@@ -1069,18 +1078,16 @@ void conversation::proccessAction(int opcao, void* curEngine)
    /* Get dialog on list */
    int numDialog = actual;
    dialogWindow dlgWindow;
-   dialog* dlg = first->next;
+   dialog* dlg = (dialog*)first;
    int i, totalActions = 0;
    talkAction* actions = NULL;
    briefing brief;
    char buf[256];
 
-   while( (dlg != first) && (dlg->id != numDialog))
+   dlg = getDialog(numDialog);
+   if(dlg == NULL)
    {
-      dlg = dlg->next;
-   }
-   if(dlg == first)
-   {
+      cerr << "Dialog not found: " << numDialog << endl;
       return;
    }
 
@@ -1367,6 +1374,7 @@ void conversation::changeDialog(int numDialog)
    string text;
    char conv[16];
    dialogWindow dlgWindow;
+   dialog* dlg;
    int intelligence = 20;
 
    if( (numDialog == actual) || (!dlgWindow.isOpened()) )
@@ -1383,13 +1391,10 @@ void conversation::changeDialog(int numDialog)
    }
 
    /* Get the dialog pointer */
-   dialog* dlg = first->next;
-   while( (dlg != first) && (dlg->id != numDialog))
+   dlg = getDialog(numDialog);
+   if(dlg == NULL)
    {
-      dlg = dlg->next;
-   }
-   if(dlg == first)
-   {
+      cerr << "Couldn't find dialog: " << numDialog << endl;
       return;
    }
 
