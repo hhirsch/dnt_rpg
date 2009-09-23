@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -113,36 +113,64 @@ void modAction::setPosition(GLfloat posX, GLfloat posY, GLfloat posZ)
    z = posZ;
 }
 
+////////////////////////////////////////////////////////////////////////////
+//                                                                        //
+//                             modActionList                              //
+//                                                                        //
+////////////////////////////////////////////////////////////////////////////
+
 /************************************************************
- *                          getNext                         *
+ *                       Constructor                        *
  ************************************************************/
-modAction* modAction::getNext()
+modActionList::modActionList()
 {
-   return(next);
 }
 
 /************************************************************
- *                        getPrevious                       *
+ *                        Destructor                        *
  ************************************************************/
-modAction* modAction::getPrevious()
+modActionList::~modActionList()
 {
-   return(previous);
+   clearList();
 }
 
 /************************************************************
- *                          setNext                         *
+ *                       freeElement                        *
  ************************************************************/
-void modAction::setNext(modAction* act)
+void modActionList::freeElement(dntListElement* obj)
 {
-   next = act;
-}
+   modAction* m = (modAction*)obj;
 
-/************************************************************
- *                        setPrevious                       *
- ************************************************************/
-void modAction::setPrevious(modAction* act)
-{
-   previous = act;
+   if( (m->getAction() == MODSTATE_ACTION_OBJECT_REMOVE) ||
+       (m->getAction() == MODSTATE_ACTION_OBJECT_ADD) ||
+       (m->getAction() == MODSTATE_ACTION_OBJECT_CHANGE_STATE) )
+   {
+      mapObjectModAction* mobj = (mapObjectModAction*)m;
+      delete(mobj);
+   }
+   else if( (m->getAction() == MODSTATE_ACTION_CHARACTER_DEAD) ||
+            (m->getAction() == MODSTATE_ACTION_CHARACTER_MOVE) ||
+            (m->getAction() == MODSTATE_ACTION_CHARACTER_CHANGE_STATE) )
+   {
+      mapCharacterModAction* mchar = (mapCharacterModAction*)m;
+      delete(mchar);
+   }
+   else if( (m->getAction() == MODSTATE_TALK_ENTER_VALUE) )
+   {
+      mapTalkModAction* mtalk = (mapTalkModAction*)m;
+      delete(mtalk);
+   }
+   else if( (m->getAction() == MODSTATE_INVENTORY) )
+   {
+      modInventory* minv = (modInventory*)m;
+      delete(minv);
+   }
+   else
+   {
+      cerr << "Warning: deleting an unknown modAction: " << m->getAction() 
+           << "!" << endl;
+      delete(m);
+   }
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -739,8 +767,6 @@ modMap::modMap(string fileName)
    mapFileName = fileName;
    next = NULL;
    previous = NULL;
-   modActionsList = NULL;
-   totalModActions = 0;
 }
 
 /************************************************************
@@ -751,37 +777,6 @@ modMap::~modMap()
    clear();
 }
 
-/************************************************************
- *                          getNext                         *
- ************************************************************/
-modMap* modMap::getNext()
-{
-   return(next);
-}
-
-/************************************************************
- *                         getPrevious                      *
- ************************************************************/
-modMap* modMap::getPrevious()
-{
-   return(previous);
-}
-
-/************************************************************
- *                         setNext                          *
- ************************************************************/
-void modMap::setNext(modMap* n)
-{
-   next = n;
-}
-
-/************************************************************
- *                       setPrevious                        *
- ************************************************************/
-void modMap::setPrevious(modMap* p)
-{
-   previous = p;
-}
 /************************************************************
  *                      getMapFileName                      *
  ************************************************************/
@@ -795,19 +790,7 @@ string modMap::getMapFileName()
  ************************************************************/
 void modMap::clear()
 {
-   int i;
-   int total = totalModActions;
-
-   /* Free all map objects from list */
-   for(i = 0; i < total; i++)
-   {
-      if(modActionsList)
-      {
-         removeAction(modActionsList);
-      }
-   }
-   modActionsList = NULL;
-   totalModActions = 0;
+   modList.clearList();
 }
 
 /************************************************************
@@ -877,8 +860,8 @@ void modMap::save(ofstream* file)
    *file << MODSTATE_TOKEN_MAP << " = " << mapFileName << endl;
 
    /* Now save each modAction */
-   act = modActionsList;
-   for(i = 0; i < totalModActions; i++)
+   act = (modAction*)modList.getFirst();
+   for(i = 0; i < modList.getTotal(); i++)
    {
       /* Save normal actions */
       if(act->getAction() != MODSTATE_INVENTORY)
@@ -892,7 +875,7 @@ void modMap::save(ofstream* file)
          inv = (modInventory*)act;
          inv->save(file);
       }
-      act = act->getNext();
+      act = (modAction*)act->getNext();
    }
 
    /* Mark end of map */
@@ -904,22 +887,7 @@ void modMap::save(ofstream* file)
  ************************************************************/
 void modMap::addAction(modAction* act)
 {
-   if(!modActionsList)
-   {
-      /* Add the only one! */
-      modActionsList = act;
-      modActionsList->setNext(modActionsList);
-      modActionsList->setPrevious(modActionsList);
-   }
-   else
-   {
-      /* Add at first */
-      act->setNext(modActionsList);
-      act->setPrevious(modActionsList->getPrevious());
-      modActionsList->setPrevious((modAction*)act);
-      act->getPrevious()->setNext((modAction*)act);
-   }
-   totalModActions++;
+   modList.insert(act);
 }
 
 /************************************************************
@@ -1064,8 +1032,8 @@ modAction* modMap::search(int action, string target,
                           GLfloat xPos, GLfloat yPos, GLfloat zPos)
 {
    int i;
-   modAction* mod = modActionsList;
-   for(i = 0; (i < totalModActions); i++)
+   modAction* mod = (modAction*)modList.getFirst();
+   for(i = 0; (i < modList.getTotal()); i++)
    {
       if( (mod->getAction() == action) && 
           (mod->getTarget() == target) )
@@ -1104,7 +1072,7 @@ modAction* modMap::search(int action, string target,
             return(mod);
          }
       }
-      mod = mod->getNext();
+      mod = (modAction*)mod->getNext();
    }
 
    /* No ModActions found */
@@ -1118,49 +1086,7 @@ void modMap::removeAction(modAction* act)
 {
    if(act != NULL)
    {
-      if(modActionsList == act)
-      {
-         modActionsList = act->getNext();
-      }
-      act->getNext()->setPrevious(act->getPrevious());
-      act->getPrevious()->setNext(act->getNext());
-
-
-      /* Delete the correct struct */
-      if( (act->getAction() == MODSTATE_ACTION_OBJECT_REMOVE) ||
-          (act->getAction() == MODSTATE_ACTION_OBJECT_ADD))
-      {
-         /* Object One */
-         delete((mapObjectModAction*)act);
-      }
-      else if( (act->getAction() == MODSTATE_ACTION_CHARACTER_DEAD) ||
-               (act->getAction() == MODSTATE_ACTION_CHARACTER_MOVE) ||
-               (act->getAction() == MODSTATE_ACTION_CHARACTER_CHANGE_STATE) )
-      {
-         /* Character One */
-         delete((mapCharacterModAction*)act);
-      }
-      else if( (act->getAction() == MODSTATE_TALK_ENTER_VALUE) )
-      {
-         /* Talk One */
-         delete((mapTalkModAction*)act);
-      }
-      else if( (act->getAction() == MODSTATE_INVENTORY) )
-      {
-         /* Inventory One */
-         delete((modInventory*)act);
-      }
-      else
-      {
-         /* Generic One */
-         delete(act);
-      }
-
-      totalModActions--;
-      if(totalModActions <= 0)
-      {
-         modActionsList = NULL;
-      }
+      modList.remove(act);
    }
 }
 
@@ -1214,8 +1140,8 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs)
    characterList* npcs = (characterList*) NPCs;
    character* ch  = NULL;
    GLfloat x=0, y=0, z=0;
-   modAction* tmpMobj = modActionsList;
-   for(i = 0; i < totalModActions; i++)
+   modAction* tmpMobj = (modAction*)modList.getFirst();
+   for(i = 0; i < modList.getTotal(); i++)
    {
       tmpMobj->getPosition(x,y,z);
 
@@ -1354,7 +1280,7 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs)
                tmpMobj->getAction(), i);
       }
       
-      tmpMobj = tmpMobj->getNext();
+      tmpMobj = (modAction*)tmpMobj->getNext();
    }
 
 }
@@ -1417,6 +1343,36 @@ bool modMap::allCharactersAlive(string npcFileName)
 
    /*  No one found (or no one defined), so all alive! */
    return(true);
+}
+
+////////////////////////////////////////////////////////////////////////////
+//                                                                        //
+//                              modMapList                                //
+//                                                                        //
+////////////////////////////////////////////////////////////////////////////
+
+/************************************************************
+ *                       Constructor                        *
+ ************************************************************/
+modMapList::modMapList()
+{
+}
+
+/************************************************************
+ *                        Destructor                        *
+ ************************************************************/
+modMapList::~modMapList()
+{
+   clearList();
+}
+
+/************************************************************
+ *                        freeElement                       *
+ ************************************************************/
+void modMapList::freeElement(dntListElement* obj)
+{
+   modMap* m = (modMap*)obj;
+   delete(m);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -1511,11 +1467,11 @@ bool modState::saveState(string file)
    f << MODSTATE_TOKEN_VERSION << " = " << VERSION << endl;
 
    /* Now call to save each modMap */
-   cur = modMapList;
-   for(i = 0; i < totalModMaps; i++)
+   cur = (modMap*)modList.getFirst();
+   for(i = 0; i < modList.getTotal(); i++)
    {
       cur->save(&f);
-      cur = cur->getNext();
+      cur = (modMap*)cur->getNext();
    }
 
    /* Close the file and done! */
@@ -1529,15 +1485,15 @@ bool modState::saveState(string file)
 bool modState::haveMap(string fileName)
 {
    int i;
-   modMap* mod = modMapList;
-   for(i = 0; i < totalModMaps; i++)
+   modMap* mod = (modMap*)modList.getFirst();
+   for(i = 0; i < modList.getTotal(); i++)
    {
       if(mod->getMapFileName() == fileName)
       {
          /* Found it! */
          return(true);
       }
-      mod = mod->getNext();
+      mod = (modMap*)mod->getNext();
    }
 
    return(false);
@@ -1549,15 +1505,15 @@ bool modState::haveMap(string fileName)
 modMap* modState::findModMap(string fileName)
 {
   int i;
-  modMap* mod = modMapList;
-  for(i = 0; i < totalModMaps; i++)
+  modMap* mod = (modMap*)modList.getFirst();
+  for(i = 0; i < modList.getTotal(); i++)
   {
      if(mod->getMapFileName() == fileName)
      {
         /* Found it! */
         return(mod);
      }
-     mod = mod->getNext();
+     mod = (modMap*)mod->getNext();
   }
   /* None found, must create one */
   return(createModMap(fileName));
@@ -1570,25 +1526,8 @@ modMap* modState::createModMap(string fileName)
 {
    modMap* m = new modMap(fileName);
 
-   /* Set next/previous pointers */
-   if(modMapList == NULL)
-   {
-      m->setNext(m);
-      m->setPrevious(m);
-   }
-   else
-   {
-      m->setNext(modMapList);
-      m->setPrevious(modMapList->getPrevious());
-      m->getNext()->setPrevious(m);
-      m->getPrevious()->setNext(m);
-   }
-
-   /* Define as the list head */
-   modMapList = m;
-
-   /* And increment elements counter */
-   totalModMaps++;
+   /* Insert it at the list */
+   modList.insert(m);
 
    return(m);
 }
@@ -1668,20 +1607,7 @@ void modState::doMapModifications(Map* actualMap, void* NPCs)
  ************************************************************/
 void modState::clear()
 {
-   int i;
-   modMap* m = modMapList;
-   modMap* aux = NULL;
-
-   /* Delete each map List */
-   for(i = 0; i < totalModMaps; i++)
-   {
-      aux = m;
-      m = m->getNext();
-      delete(aux);
-   }
-
-   modMapList = NULL;
-   totalModMaps = 0;
+   modList.clearList();
 }
 
 /************************************************************
@@ -1731,6 +1657,5 @@ bool modState::allCharactersAlive(string npcFileName)
 /************************************************************
  *                      static fields                       *
  ************************************************************/
-modMap* modState::modMapList = NULL;
-int modState::totalModMaps = 0;
+modMapList modState::modList;
 

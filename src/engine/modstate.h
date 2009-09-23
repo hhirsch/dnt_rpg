@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -23,6 +23,7 @@
 
 #include "../classes/inventory.h"
 #include "../etc/defparser.h"
+#include "../etc/list.h"
 #include "../map/map.h"
 
 #define MODSTATE_ACTION_OBJECT_REMOVE  0  /**< Removed object from map */
@@ -39,7 +40,7 @@
 #define MODSTATE_ACTION_CHARACTER_CHANGE_STATE 7 /**< Character Change State */
 
 /*! The Generic Modification Action Class */
-class modAction
+class modAction: public dntListElement
 {
    public:
       /*! Constructor
@@ -76,20 +77,6 @@ class modAction
        * \param posZ -> Z position */
       void setPosition(GLfloat posX, GLfloat posY, GLfloat posZ);
 
-      /*! Get next action on list 
-       * \return pointer to next action on list */
-      modAction* getNext();
-      /*! Get previous action on list 
-       * \return pointer to previous action on list */
-      modAction* getPrevious();
-
-      /*! Set next action on list
-       * \param act -> pointer to next action */
-      void setNext(modAction* act);
-      /*! Set Previous action on list
-       * \param act -> pointer to previous action */
-      void setPrevious(modAction* act);
-
       /*! Convert the action to a string (usually to save)
        * \return string representing the action */
       virtual string toString()=0;
@@ -104,8 +91,21 @@ class modAction
       GLfloat y;                /**< Y Position on map */
       GLfloat z;                /**< Z position on map */
       string target;            /**< target of the action (fileName) */
-      modAction* next;          /**< next action on list */
-      modAction* previous;      /**< previous action on list */
+};
+
+/*! The list of modActions */
+class modActionList: public dntList
+{
+   public:
+      /*! Costructor */
+      modActionList();
+      /*! Destructor */
+      ~modActionList();
+
+   protected:
+      /*! Free the modMap object memory
+       * \param obj -> modMap to free */
+      void freeElement(dntListElement* obj);
 };
 
 /*! A Modification Action made to (or by) a character on map */
@@ -316,7 +316,7 @@ class modInventory: public modAction
 };
 
 /*! modMap have all modifications done for a specified map */
-class modMap
+class modMap: public dntListElement
 {
    public:
       /*! Constructor 
@@ -383,19 +383,6 @@ class modMap
       /*! Clear All the modifications states (usually called after death) */
       void clear();      
 
-      /*! Get the next modMap pointer
-       * \return -> next modMap */
-      modMap* getNext();
-      /*! Get the previous modMap pointer
-       * \return -> previous modMap */
-      modMap* getPrevious();
-      /*! Set the next modMap pointer
-       * \param n -> pointer to the next modMap */
-      void setNext(modMap* n);
-      /*! Set the previous modMap pointer
-       * \param p -> pointer to the previous modMap */
-      void setPrevious(modMap* p);
-      
       /*! Get the mapFileName */
       string getMapFileName();
 
@@ -438,10 +425,22 @@ class modMap
                         GLfloat xPos=-1, GLfloat yPos=-1, GLfloat zPos=-1);
 
       string mapFileName;          /**< The map file name */
-      modMap* next;                /**< Next modMap on list */
-      modMap* previous;            /**< Previous modMap on list */
-      modAction* modActionsList;   /**< List of map modification actions */
-      int totalModActions;         /**< Total Actions on the list */
+      modActionList modList;       /**< List of map modification actions */
+};
+
+/*! The list of modMaps */
+class modMapList: public dntList
+{
+   public:
+      /*! Constructor */
+      modMapList();
+      /*! Destructor */
+      ~modMapList();
+
+   protected:
+      /*! Free modMap memory
+       * \param obj -> modMap to delete */
+      void freeElement(dntListElement* obj);
 };
 
 /*! All modifications made by users on game are armazened here. It is also
@@ -542,8 +541,7 @@ class modState
        * \note -> if not found a modMap this function create a new one */
       modMap* findModMap(string fileName);
       
-      static modMap* modMapList;   /**< List of maps */
-      static int totalModMaps;     /**< Total modMaps on list */
+      static modMapList modList;   /**< List of mod maps */
 };
 
 #endif
