@@ -208,8 +208,8 @@ void editor::openMap()
       wallEditor = new wallController(map);
       objectEditor = new objects(map);
       particleEditor = new particles(map);
-      curTexture = map->textures->index;
-      curTextureName = map->textures->name;
+      curTexture = ((mapTexture*)map->textures.getFirst())->index;
+      curTextureName = ((mapTexture*)map->textures.getFirst())->name;
 
       /* Open NPCs */
       if(NPCs)
@@ -407,6 +407,8 @@ void editor::newMap()
       }
    }
 
+   int index = ((mapTexture*)map->textures.getFirst())->index;
+
    /* Get map Z size */
    while( (sizeZ <= 0) || (sizeZ > 30))
    {
@@ -447,33 +449,33 @@ void editor::newMap()
       map->newMap(sizeX,sizeZ);
       /* Insert walls */
       wall* actualWall = map->addWall(0,0,(sizeX)*map->squareSize(),10);
-      actualWall->frontTexture.setTextureId(map->textures->index);
-      actualWall->backTexture.setTextureId(map->textures->index);
-      actualWall->leftTexture.setTextureId(map->textures->index);
-      actualWall->rightTexture.setTextureId(map->textures->index);
+      actualWall->frontTexture.setTextureId(index);
+      actualWall->backTexture.setTextureId(index);
+      actualWall->leftTexture.setTextureId(index);
+      actualWall->rightTexture.setTextureId(index);
 
 
       actualWall = map->addWall(0,0,10,(sizeZ)*map->squareSize());
-      actualWall->frontTexture.setTextureId(map->textures->index);
-      actualWall->backTexture.setTextureId(map->textures->index);
-      actualWall->leftTexture.setTextureId(map->textures->index);
-      actualWall->rightTexture.setTextureId(map->textures->index);
+      actualWall->frontTexture.setTextureId(index);
+      actualWall->backTexture.setTextureId(index);
+      actualWall->leftTexture.setTextureId(index);
+      actualWall->rightTexture.setTextureId(index);
       
       actualWall = map->addWall((sizeX)*map->squareSize()-10,0,
                                 (sizeX)*map->squareSize(), 
                                 (sizeZ)*map->squareSize());
-      actualWall->frontTexture.setTextureId(map->textures->index);
-      actualWall->backTexture.setTextureId(map->textures->index);
-      actualWall->leftTexture.setTextureId(map->textures->index);
-      actualWall->rightTexture.setTextureId(map->textures->index);
+      actualWall->frontTexture.setTextureId(index);
+      actualWall->backTexture.setTextureId(index);
+      actualWall->leftTexture.setTextureId(index);
+      actualWall->rightTexture.setTextureId(index);
       
       actualWall = map->addWall(0,(sizeZ)*map->squareSize()-10,
                                 (sizeX)*map->squareSize(),
                                 (sizeZ)*map->squareSize());
-      actualWall->frontTexture.setTextureId(map->textures->index);
-      actualWall->backTexture.setTextureId(map->textures->index);
-      actualWall->leftTexture.setTextureId(map->textures->index);
-      actualWall->rightTexture.setTextureId(map->textures->index);
+      actualWall->frontTexture.setTextureId(index);
+      actualWall->backTexture.setTextureId(index);
+      actualWall->leftTexture.setTextureId(index);
+      actualWall->rightTexture.setTextureId(index);
       
       /* Define Position */
       map->setInitialPosition( ((sizeX)*map->squareSize() / 2.0),
@@ -486,8 +488,8 @@ void editor::newMap()
    wallEditor = new wallController(map);
    objectEditor = new objects(map);
    particleEditor = new particles(map);
-   curTexture = map->textures->index;
-   curTextureName = map->textures->name;
+   curTexture = index;
+   curTextureName = ((mapTexture*)map->textures.getFirst())->name;
    NPCs = new (characterList);
    npcController = new npcs(map, NPCs, features);
    gui->showMessage("Created New Game Map!");
@@ -553,21 +555,21 @@ void editor::verifyPosition()
 int editor::previousTexture()
 {
    int aux=0;
-   texture* tex = map->textures;
-   while(aux < map->numTextures)
+   mapTexture* tex = (mapTexture*)map->textures.getFirst();
+   while(aux < map->textures.getTotal())
    {
       if(tex->index == curTexture)
       {
-         curTexture = tex->previous->index;
-         curTextureName = tex->previous->name;
-         return(tex->previous->index);
+         curTexture = ((mapTexture*)tex->getPrevious())->index;
+         curTextureName = ((mapTexture*)tex->getPrevious())->name;
+         return(((mapTexture*)tex->getPrevious())->index);
       }
-      tex = tex->next;
+      tex = (mapTexture*)tex->getNext();
       aux++;
    }
-   curTexture = map->textures->index;
-   curTextureName = map->textures->name;
-   return(map->textures->index);
+   curTexture = ((mapTexture*)map->textures.getFirst())->index;
+   curTextureName = ((mapTexture*)map->textures.getFirst())->name;
+   return(((mapTexture*)map->textures.getFirst())->index);
 }
 
 /************************************************************************
@@ -576,25 +578,25 @@ int editor::previousTexture()
 int editor::nextTexture()
 {
    int aux=0;
-   texture* tex = map->textures;
-   while(aux < map->numTextures)
+   mapTexture* tex = (mapTexture*)map->textures.getFirst();
+   while(aux < map->textures.getTotal())
    {
       if(tex->index == curTexture)
       {
-         curTexture = tex->next->index;
-         curTextureName = tex->next->name;
-         return(tex->next->index);
+         curTexture = ((mapTexture*)tex->getNext())->index;
+         curTextureName = ((mapTexture*)tex->getNext())->name;
+         return(((mapTexture*)tex->getNext())->index);
       }
-      tex = tex->next;
+      tex = (mapTexture*)tex->getNext();
       aux++;
    }
-   curTexture = map->textures->index;
-   curTextureName = map->textures->name;
-   return(map->textures->index);
+   curTexture = ((mapTexture*)map->textures.getFirst())->index;
+   curTextureName = ((mapTexture*)map->textures.getFirst())->name;
+   return(((mapTexture*)map->textures.getFirst())->index);
 }
 
 /************************************************************************
- *             Insere Textura na Lista de textures                      *
+ *                            insertTexture                             *
  ************************************************************************/
 int editor::insertTexture(string textureFile)
 {

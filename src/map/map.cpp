@@ -258,6 +258,79 @@ void wallList::freeElement(dntListElement* obj)
 
 //////////////////////////////////////////////////////////////////////////////
 //                                                                          //
+//                               mapTexture                                 //
+//                                                                          //
+//////////////////////////////////////////////////////////////////////////////
+
+/********************************************************************
+ *                            constructor                           *
+ ********************************************************************/
+mapTexture::mapTexture()
+{
+   alphaValues = NULL;
+   definedAlpha = false;
+   mapX = -1;
+}
+
+/********************************************************************
+ *                             destructor                           *
+ ********************************************************************/
+mapTexture::~mapTexture()
+{
+   int i;
+
+   if(mapX != -1)
+   {
+      /* Delete the OpenGL Texture */
+      glDeleteTextures(1,&index);
+
+      /* Delete the alpha Texture */
+      if(definedAlpha)
+      {
+         glDeleteTextures(1,&(alphaTexture));
+      }
+
+      /* Delete the Alpha Matrix */
+      for(i = 0; i < (mapX*ALPHA_TEXTURE_INC); i++)
+      {
+         delete[] (alphaValues[i]);
+      }
+      delete[] alphaValues;
+   }
+}
+
+//////////////////////////////////////////////////////////////////////////////
+//                                                                          //
+//                             mapTextureList                               //
+//                                                                          //
+//////////////////////////////////////////////////////////////////////////////
+
+/********************************************************************
+ *                            constructor                           *
+ ********************************************************************/
+mapTextureList::mapTextureList()
+{
+}
+
+/********************************************************************
+ *                             destructor                           *
+ ********************************************************************/
+mapTextureList::~mapTextureList()
+{
+   clearList();
+}
+
+/********************************************************************
+ *                            freeElement                           *
+ ********************************************************************/
+void mapTextureList::freeElement(dntListElement* obj)
+{
+   mapTexture* tex = (mapTexture*)obj;
+   delete(tex);
+}
+
+//////////////////////////////////////////////////////////////////////////////
+//                                                                          //
 //                                  MAP                                     //
 //                                                                          //
 //////////////////////////////////////////////////////////////////////////////
@@ -268,8 +341,6 @@ void wallList::freeElement(dntListElement* obj)
 Map::Map()
 {
    miniMap = NULL;
-   numTextures = 0;
-   textures = NULL;
    fileName = "oxi!";
    name = "mapName";
    squareInic = NULL;
@@ -308,38 +379,13 @@ Map::Map()
  ********************************************************************/
 Map::~Map()
 {
+   int i;
+
    /* Deleting all related objects */
    deleteObjects();
 
    /* Delete All Textures */
-   texture* tex = textures;
-   texture* au;
-   int i;
-   int aux;
-   for(i=0;i<numTextures;i++)
-   {
-      au = tex;
-      tex = tex->next;
-
-      /* Delete the OpenGL Texture */
-      glDeleteTextures(1,&(au->index));
-
-      /* Delete the alpha Texture */
-      if(au->definedAlpha)
-      {
-         glDeleteTextures(1,&(au->alphaTexture));
-      }
-
-      /* Delete the Alpha Matrix */
-      for(aux = 0; aux < (x*ALPHA_TEXTURE_INC); aux++)
-      {
-         delete[] (au->alphaValues[aux]);
-      }
-      delete[] au->alphaValues;
-
-      /* Delete the texture struct */
-      delete(au);
-   }
+   textures.clearList();
    
    /* Delete all Walls */
    walls.clearList();
@@ -440,59 +486,55 @@ void Map::alloc()
 }
 
 /********************************************************************
- *                             Texture ID                           *
+ *                            getTextureID                          *
  ********************************************************************/
 int Map::getTextureID(string textureName, GLuint& R, GLuint& G, GLuint& B)
 {
    /* search for texture */
    int aux=0;
-   texture* tex = textures;
-   while(aux < numTextures)
+   mapTexture* tex = (mapTexture*)textures.getFirst();
+
+   while(aux < textures.getTotal())
    {
       if(!(tex->name.compare(textureName)) )
       {
+         /* Found! */
          R = tex->R; G = tex->G; B = tex->B;
-         return(tex->index); //texture found 
+         return(tex->index); 
       }
-      tex = tex->next;
+      tex = (mapTexture*)tex->getNext();
       aux++;
    }
    return(-1);
 }
 
 /*********************************************************************
- *                   Returns texture's name                          *
+ *                         getTextureName                            *
  *********************************************************************/
 string Map::getTextureName(GLuint ID)
 {
-   int aux=0;
-   texture* tex = textures;
-   while(aux < numTextures)
+   mapTexture* tex = getTexture(ID);
+   if(tex)
    {
-      if(tex->index == ID)
-      {
-         return(tex->name);
-      }
-      tex = tex->next;
-      aux++;
+      return(tex->name);
    }
-   return(NULL);
+   return("");
 }
 
 /*********************************************************************
- *                      Returns texture                              *
+ *                           getTexture                              *
  *********************************************************************/
-texture* Map::getTexture(GLuint id)
+mapTexture* Map::getTexture(GLuint id)
 {
    int aux=0;
-   texture* tex = textures;
-   while(aux < numTextures)
+   mapTexture* tex = (mapTexture*)textures.getFirst();
+   while(aux < textures.getTotal())
    {
       if(tex->index == id)
       {
          return(tex);
       }
-      tex = tex->next;
+      tex = (mapTexture*)tex->getNext();
       aux++;
    }
    return(NULL);
@@ -505,7 +547,7 @@ GLuint Map::insertTexture(string arq, string name, GLuint R, GLuint G, GLuint B)
 {
    dirs dir;
    options opt;
-   texture* tex;
+   mapTexture* tex;
    int aux;
 
    /* Verify if the texture is already inserted */
@@ -534,28 +576,19 @@ GLuint Map::insertTexture(string arq, string name, GLuint R, GLuint G, GLuint B)
    }
 
    /* Create the Texture Structs */ 
-   tex = new(texture);
-   if(numTextures == 0)
-   {
-      textures = tex;
-      tex->next = tex;
-      tex->previous = tex;
-   }
-   else
-   {
-      tex->next = textures;
-      tex->previous = textures->previous;
-      tex->next->previous = tex;
-      tex->previous->next = tex;
-      textures = tex;
-   }
+   tex = new(mapTexture);
 
+   /* Insert it at the list */
+   textures.insert(tex);
+ 
+   /* Define it */
    tex->fileName = arq.c_str();
    tex->name = name.c_str();
 
    tex->R = R;
    tex->G = G;
    tex->B = B;
+   tex->mapX = getSizeX();
 
    tex->definedAlpha = false;
 
@@ -595,8 +628,6 @@ GLuint Map::insertTexture(string arq, string name, GLuint R, GLuint G, GLuint B)
                      img->h, GL_RGB, GL_UNSIGNED_BYTE, 
                      img->pixels );
 
-   numTextures++;
-
    /* Free the image */
    SDL_FreeSurface(img);
 
@@ -611,10 +642,10 @@ void Map::removeUnusedTextures()
    /* For Each texture, verify if some square is using it. */
    int aux=0;
    int x1,z1;
-   texture* tex = textures;
-   texture* rmTex = NULL;
+   mapTexture* tex = (mapTexture*)textures.getFirst();
+   mapTexture* rmTex = NULL;
    bool used = false;
-   int total = numTextures;
+   int total = textures.getTotal();
    wall* w;
    for(aux = 0; aux < total; aux++)
    {
@@ -647,26 +678,17 @@ void Map::removeUnusedTextures()
 
       if(!used)
       {
-         /* Remove it from the linked list */
+         /* Set pointers */
          rmTex = tex;
-         tex = tex->next;
-         rmTex->next->previous = rmTex->previous;
-         rmTex->previous->next = rmTex->next;
-         numTextures--;
-         if(rmTex == textures)
-         {
-            textures = rmTex->next;
-         }
-         if(numTextures == 0)
-         {
-            textures = NULL;
-         }
-         printf("Removed: %s\n", rmTex->name.c_str());
-         delete(rmTex);
+         tex = (mapTexture*)tex->getNext();
+         
+         cout << "Will remove texture: " << rmTex->name << endl;
+         /* Remove it from the linked list */
+         textures.remove(rmTex);
       }
       else
       {
-         tex = tex->next;
+         tex = (mapTexture*)tex->getNext();
       }
    }
 }
@@ -983,12 +1005,12 @@ void Map::renderFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 {
    int aux = 0;
    int x1, z1;
-   texture* tex;
+   mapTexture* tex;
 
    if(selectionRender)
    {
       /* At Selection Mode, no need for textures */
-      aux = numTextures - 1;
+      aux = textures.getTotal() - 1;
       glColor4f(1.0,1.0,1.0,1.0);
    }
    else
@@ -1011,8 +1033,8 @@ void Map::renderFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
       glEnable(GL_TEXTURE_2D);
    }
 
-   tex = textures;
-   while(aux < numTextures)
+   tex = (mapTexture*)textures.getFirst();
+   while(aux < textures.getTotal())
    {
       /* Bind the texture */
 
@@ -1054,7 +1076,7 @@ void Map::renderFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 
       glEnd();
 
-      tex = tex->next;
+      tex = (mapTexture*)tex->getNext();
       aux++;
    }
 
@@ -1073,7 +1095,7 @@ void Map::renderFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 {
    extensions ext;
    int aux = 0;
-   texture* tex;
+   mapTexture* tex;
 
    /* Create the buffers with visible squares */
    createBuffers(matriz);
@@ -1117,7 +1139,7 @@ void Map::renderFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
       glEnableClientState(GL_TEXTURE_COORD_ARRAY);
    }
 
-   tex = textures;
+   tex = (mapTexture*)textures.getFirst();
    if(ext.hasMultiTexture())
    {
       /* Define Blend Status */
@@ -1127,7 +1149,7 @@ void Map::renderFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
       glEnable(GL_BLEND);
       glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
       
-      while(aux < numTextures)
+      while(aux < textures.getTotal())
       {
          /* Only Draw texture with floor count > 0 */
          if(tex->count > 0)
@@ -1166,7 +1188,7 @@ void Map::renderFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
             glDrawArrays(GL_QUADS, 0, (int)totalVertex / (int)3);
          
          }
-         tex = tex->next;
+         tex = (mapTexture*)tex->getNext();
          aux++;
       }
 
@@ -2441,9 +2463,9 @@ int Map::save(string arquivo)
    }
 
    /* Write used Textures */
-   texture* tex = (texture*)textures;
+   mapTexture* tex = (mapTexture*)textures.getFirst();
    int t;
-   for(t = 0; t < numTextures; t++)
+   for(t = 0; t < textures.getTotal(); t++)
    {
       /* Don't save UpperWall texture, because it will
        * always loaded at alloc() function */
@@ -2453,7 +2475,7 @@ int Map::save(string arquivo)
                  dir.getRelativeFile(tex->fileName).c_str(),
                  tex->R,tex->G,tex->B);
       }
-      tex = (texture*)tex->next;
+      tex = (mapTexture*)tex->getNext();
    }
 
    /* Write Doors */
@@ -2780,7 +2802,7 @@ void Map::createAlpha(int x1, int z1)
    float incCoord = 1.0 / (float)ALPHA_TEXTURE_INC;
    float actualCoordX = x1, actualCoordZ = z1;
    int neigX, neigZ;
-   texture* tex;
+   mapTexture* tex;
 
    for(z2 = z1*ALPHA_TEXTURE_INC; z2 < (z1+1)*ALPHA_TEXTURE_INC; z2++)
    {
@@ -2791,11 +2813,11 @@ void Map::createAlpha(int x1, int z1)
 
          /* Clear Alpha Values */
          aux = 0;
-         tex = textures;
-         while(aux < numTextures)
+         tex = (mapTexture*)textures.getFirst();
+         while(aux < textures.getTotal())
          {
             tex->alphaValues[x2][z2] = 0;
-            tex = tex->next;
+            tex = (mapTexture*)tex->getNext();
             aux++;
          }
 
@@ -2845,11 +2867,11 @@ void Map::createAlpha(int x1, int z1)
          if(outdoor)
          {
             aux = 0;
-            tex = textures;
-            while(aux < numTextures)
+            tex = (mapTexture*)textures.getFirst();
+            while(aux < textures.getTotal())
             {
                tex->alphaValues[x2][z2] = tex->alphaValues[x2][z2] / total;
-               tex = tex->next;
+               tex = (mapTexture*)tex->getNext();
                aux++;
             }
          }
@@ -2866,14 +2888,14 @@ void Map::createAlpha(int x1, int z1)
 void Map::updateAlphaTextures()
 {
    int aux = 0;
-   texture* tex = textures;
+   mapTexture* tex = (mapTexture*)textures.getFirst();
    int x1, z1;
    SDL_Surface* img = SDL_CreateRGBSurface(SDL_SWSURFACE,
                                      smallestPowerOfTwo(x*ALPHA_TEXTURE_INC),
                                      smallestPowerOfTwo(z*ALPHA_TEXTURE_INC),
                                      32,0x000000FF,0x0000FF00,
                                      0x00FF0000,0xFF000000);
-   while(aux < numTextures)
+   while(aux < textures.getTotal())
    {
       if(tex->definedAlpha)
       {
@@ -2903,7 +2925,7 @@ void Map::updateAlphaTextures()
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-      tex = tex->next;
+      tex = (mapTexture*)tex->getNext();
       aux++;
    }
    SDL_FreeSurface(img);
@@ -2914,14 +2936,14 @@ void Map::updateAlphaTextures()
  ********************************************************************/
 void Map::defineCommonTexture()
 {
-   texture* actualCommon = textures;
+   mapTexture* actualCommon = (mapTexture*)textures.getFirst();
    /* Zero the Count of each texture */
    int x1,z1,aux = 0;
-   texture* tex = textures;
-   while(aux < numTextures)
+   mapTexture* tex = (mapTexture*)textures.getFirst();
+   while(aux < textures.getTotal())
    {
       tex->count = 0;
-      tex = tex->next;
+      tex = (mapTexture*)tex->getNext();
       aux++;
    }
 

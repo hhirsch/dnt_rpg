@@ -140,9 +140,14 @@ class wallList: public dntList
 };
 
 /*! Definition of a texture used for the map */
-class texture
+class mapTexture: public dntListElement
 {
    public:
+      /*! Constructor */
+      mapTexture();
+      /*! Destructor */
+      ~mapTexture();
+
       string name;              /**< Name */
       string fileName;          /**< File Name */
       GLuint index;             /**< Texture ID */
@@ -150,10 +155,24 @@ class texture
       GLuint R,G,B;             /**< Colors to MINIMAP */
       GLuint alphaTexture;      /**< The Alpha Texture */
       int count;                /**< The count of the texture */
+      int mapX;                 /**< mapX size */
       float** alphaValues;      /**< The Alpha Values Matrix */
       bool definedAlpha;        /**< If the alpha is defined */
-      texture* next;            /**< Next on List */
-      texture* previous;        /**< Previous on List */
+};
+
+/*! The list of mapTextures */
+class mapTextureList: public dntList
+{
+   public:
+      /*! Constructor */
+      mapTextureList();
+      /*! Destructor */
+      ~mapTextureList();
+
+   protected:
+      /*! Free a mapTexture
+       * \param obj -> pointer to the mapTexture to delete */
+      void freeElement(dntListElement* obj);
 };
 
 /*! A door is an object that, obviously, opens and close passages */
@@ -498,7 +517,7 @@ class Map
       /*! Get the texture
        * \param id -> integer ID of the texture
        * \return texture pointer */
-      texture* getTexture(GLuint id);
+      mapTexture* getTexture(GLuint id);
       /*! Insert the texture on the map
        * \param arq -> fileName of the texture
        * \param name -> Name of the texture
@@ -596,8 +615,7 @@ class Map
       mapFog fog;           /**< Map's Fog */
       mapLights lights;     /**< Map's Lights */
       //mapRoad* roads;     /**< Map's Roads */
-      int numTextures;      /**< Number of distinct Textures on Map */
-      texture* textures;    /**< List of textures on Map */
+      mapTextureList textures; /**< List of textures on Map */
       Square* squareInic;   /**< Square where PCs starts */
       door* doors;          /**< Map Doors */
       int totalDoors;       /**< Total Number of doors on the map */
