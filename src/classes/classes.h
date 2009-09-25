@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -23,15 +23,18 @@
 
 #include <string>
 using namespace std;
+
 #include "skills.h"
 #include "feats.h"
 #include "defs.h"
 #include "modifier.h"
 
+#include "../etc/list.h"
+
 #define MAX_DEFINED_LEVEL 20
 
 /*! Single Character Class Definition */
-class classe
+class classe: public dntListElement
 {
    public:
       /*! Constructor */
@@ -77,12 +80,24 @@ class classe
       points otherLevelsSP;      /**< Other Levels Skill Points */
 
       bonusAndSaves bonus[MAX_DEFINED_LEVEL]; /**< Bonus per Level */
-      
-      classe* previous;          /**< Previous Class on list */
-      classe* next;              /**< Next Class on list */
 };
 
-/**! The List of Classes */
+/*! A classes list implementation  */
+class classeList: public dntList
+{
+   public:
+      /*! Constructor */
+      classeList();
+      /*! Destructor */
+      ~classeList();
+
+   protected:
+      /*! Free classe memory 
+       * \param obj -> classe to delete */
+      void freeElement(dntListElement* obj);
+};
+
+/**! The Static List of Classes */
 class classes
 {
    public:
@@ -105,8 +120,7 @@ class classes
       int getTotalClasses();
       
    private:
-      static int totalClasses;        /**< Total Classes on List */
-      static classe* first;           /**< First Class on List */
+      static classeList* list;           /**< Class List */
 
       /*! Insert a class on List
        * \param fileName -> file name of the class to insert 

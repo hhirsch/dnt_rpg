@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -136,6 +136,30 @@ void classe::getAttModifiers(int mods[6], bool sum, skills* sk)
 /******************************************************************
  *                            Constructor                         *
  ******************************************************************/
+classeList::classeList()
+{
+}
+
+/******************************************************************
+ *                             Destructor                         *
+ ******************************************************************/
+classeList::~classeList()
+{
+   clearList();
+}
+
+/******************************************************************
+ *                            freeElement                         *
+ ******************************************************************/
+void classeList::freeElement(dntListElement* obj)
+{
+   classe* c = (classe*)obj;
+   delete(c);
+}
+
+/******************************************************************
+ *                                init                            *
+ ******************************************************************/
 void classes::init()
 {
    defParser def;
@@ -143,8 +167,7 @@ void classes::init()
    char classFile[256], imgFile[256];
    string key="", value="";
 
-   totalClasses = 0;
-   first = NULL;
+   list =  new classeList();
 
    /* Open the list */
    if(!def.load("classes/classes.lst"))
@@ -163,17 +186,13 @@ void classes::init()
 }
 
 /******************************************************************
- *                            Destructor                          *
+ *                              finish                            *
  ******************************************************************/
 void classes::finish()
 {
-   int i;
-   classe* aux;
-   for(i=0; i< totalClasses; i++)
+   if(list)
    {
-      aux = first;
-      first = first->next;
-      delete(aux);
+      delete(list);
    }
 }
 
@@ -340,22 +359,8 @@ void classes::insertClass(string fileName, string imgFile, string idString,
       }
    }
 
-   /* Pointers */
-   if(first == NULL)
-   {
-      first = ins;
-      ins->next = ins;
-      ins->previous = ins;
-   }
-   else
-   {
-      ins->next = first;
-      ins->previous = first->previous;
-      first->previous = ins;
-      ins->previous->next = ins;
-   }
-
-   totalClasses++;
+   /* Insert on list */
+   list->insert(ins);
 }
 
 /******************************************************************
@@ -363,15 +368,15 @@ void classes::insertClass(string fileName, string imgFile, string idString,
  ******************************************************************/
 classe* classes::getClassByInteger(int id)
 {
-   classe* ret = first;
+   classe* ret = (classe*)list->getFirst();
    int i;
-   for(i = 0; i<totalClasses; i++)
+   for(i = 0; i < list->getTotal(); i++)
    {
       if(ret->intID == id)
       {
          return(ret);
       }
-      ret = ret->next;
+      ret = (classe*)ret->getNext();
    }
 
    return(NULL);
@@ -382,15 +387,15 @@ classe* classes::getClassByInteger(int id)
  ******************************************************************/
 classe* classes::getClassByString(string id)
 {
-   classe* ret = first;
+   classe* ret = (classe*)list->getFirst();
    int i;
-   for(i = 0; i<totalClasses; i++)
+   for(i = 0; i < list->getTotal(); i++)
    {
       if(ret->strID == id)
       {
          return(ret);
       }
-      ret = ret->next;
+      ret = (classe*)ret->getNext();
    }
 
    return(NULL);
@@ -401,12 +406,11 @@ classe* classes::getClassByString(string id)
  ******************************************************************/
 int classes::getTotalClasses()
 {
-   return(totalClasses);
+   return(list->getTotal());
 }
 
 /******************************************************************
  *                          static members                        *
  ******************************************************************/
-int classes::totalClasses = 0;
-classe* classes::first = NULL;
+classeList* classes::list = NULL;
 
