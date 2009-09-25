@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -30,6 +30,30 @@ using namespace std;
 /******************************************************************
  *                            Constructor                         *
  ******************************************************************/
+alignList::alignList()
+{
+}
+
+/******************************************************************
+ *                            Destructor                          *
+ ******************************************************************/
+alignList::~alignList()
+{
+   clearList();
+}
+
+/******************************************************************
+ *                           freeElement                          *
+ ******************************************************************/
+void alignList::freeElement(dntListElement* obj)
+{
+   align* a = (align*)obj;
+   delete(a);
+}
+
+/******************************************************************
+ *                                init                            *
+ ******************************************************************/
 void aligns::init()
 {
    defParser def;
@@ -37,15 +61,15 @@ void aligns::init()
    char alignFile[256];
    string key="", value="";
 
-   totalAlignments = 0;
-   first = NULL;
-
-   /* Open the list */
+   /* Open the list file */
    if(!def.load("alignment/alignment.lst"))
    {
       cerr << "Error opening alignment list file!" << endl;
       return;
    }
+
+   /* Create the list */
+   list = new alignList();
 
    /* Get and Insert All Aligns */
    while(def.getNextTuple(key, value))
@@ -57,17 +81,13 @@ void aligns::init()
 }
 
 /******************************************************************
- *                            Destructor                          *
+ *                              finish                            *
  ******************************************************************/
 void aligns::finish()
 {
-   int i;
-   align* aux;
-   for(i=0; i< totalAlignments; i++)
+   if(list)
    {
-      aux = first;
-      first = first->next;
-      delete(aux);
+      delete(list);
    }
 }
 
@@ -117,22 +137,8 @@ void aligns::insertAlign(string fileName, string idString, int idInt)
       }
    }
 
-   /* Pointers */
-   if(first == NULL)
-   {
-      first = ins;
-      ins->next = ins;
-      ins->previous = ins;
-   }
-   else
-   {
-      ins->next = first;
-      ins->previous = first->previous;
-      first->previous = ins;
-      ins->previous->next = ins;
-   }
-
-   totalAlignments++;
+   /* Really insert on list */
+   list->insert(ins);
 }
 
 
@@ -141,15 +147,15 @@ void aligns::insertAlign(string fileName, string idString, int idInt)
  ******************************************************************/
 align* aligns::getAlignByInteger(int id)
 {
-   align* ret = first;
+   align* ret = (align*)list->getFirst();
    int i;
-   for(i = 0; i<totalAlignments; i++)
+   for(i = 0; i < list->getTotal(); i++)
    {
       if(ret->intID == id)
       {
          return(ret);
       }
-      ret = ret->next;
+      ret = (align*)ret->getNext();
    }
 
    return(NULL);
@@ -160,15 +166,15 @@ align* aligns::getAlignByInteger(int id)
  ******************************************************************/
 align* aligns::getAlignByString(string id)
 {
-   align* ret = first;
+   align* ret = (align*)list->getFirst();
    int i;
-   for(i = 0; i<totalAlignments; i++)
+   for(i = 0; i < list->getTotal(); i++)
    {
       if(ret->strID == id)
       {
          return(ret);
       }
-      ret = ret->next;
+      ret = (align*)ret->getNext();
    }
 
    return(NULL);
@@ -177,6 +183,5 @@ align* aligns::getAlignByString(string id)
 /******************************************************************
  *                           Static Members                       *
  ******************************************************************/
-int aligns::totalAlignments = 0;
-align* aligns::first = NULL;
+alignList* aligns::list = NULL;
 

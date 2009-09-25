@@ -100,11 +100,11 @@ int alignWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
       {
          if(object == (guiObject*) buttonNext)
          {
-            actualAlign = actualAlign->next;
+            actualAlign = (align*)actualAlign->getNext();
          }
          else
          {
-            actualAlign = actualAlign->previous;
+            actualAlign = (align*)actualAlign->getPrevious();
          }
          textName->setText(actualAlign->name);
          textDesc->setText("");

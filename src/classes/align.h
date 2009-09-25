@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -25,10 +25,12 @@
 #include <SDL/SDL_image.h>
 #include <string>
 using namespace std;
+
 #include "../etc/dirs.h"
+#include "../etc/list.h"
 
 /*! Single Alignment Definition */
-class align
+class align: public dntListElement
 {
    public:
       int intID;              /**< Integer Identifier of the alignment */
@@ -37,12 +39,24 @@ class align
       
       string name;            /**< Name of the Aligment */
       string description;     /**< Description of the Aligment */
-      
-      align* previous;        /**< Previous Aligment on list */
-      align* next;            /**< Next Aligment on list */
 };
 
-/**! The List of Alignments Class */
+/*! List of aligns */
+class alignList: public dntList
+{
+   public:
+      /*! Constructor */
+      alignList();
+      /*! Destructor */
+      ~alignList();
+   protected:
+      /*! Free the align mememory
+       * \param obj -> pointer to the align to free */
+      void freeElement(dntListElement* obj);
+      
+};
+
+/**! The Static List of Alignments */
 class aligns
 {
    public:
@@ -61,8 +75,7 @@ class aligns
       align* getAlignByString(string id);
       
    private:
-      static int totalAlignments;          /**< Total Alignments on List */
-      static align* first;                 /**< First Alignment on List */
+      static alignList* list;
 
       /*! Insert an alignment on List
        * \param fileName -> fileName of the alignment to insert 
