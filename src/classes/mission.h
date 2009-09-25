@@ -23,6 +23,7 @@
 
 #include "../ia/iascript.h"
 #include "../etc/defparser.h"
+#include "../etc/list.h"
 
 #include <iostream>
 using namespace std;
@@ -35,7 +36,7 @@ using namespace std;
 
 /*! A mission definition. The mission is basically a main script
  * with temporary and a completed variables. */
-class mission: public iaScript
+class mission: public iaScript, public dntListElement
 {
    public:
       /*! Constructor
@@ -111,9 +112,6 @@ class mission: public iaScript
       friend class missionsController;
 
    protected:
-      mission* next;    /**< Next mission list */
-      mission* previous;/**< Previous mission on list */
-
       string area;        /**< Area where mission occurs (ex: Tyrol) */
       string description; /**< Mission's Description */
 
@@ -123,6 +121,19 @@ class mission: public iaScript
 
       int tempFlag[MISSION_TEMP_FLAGS];  /**< Temporary flags to controll
                                                the mission at script. */
+};
+
+/*! List of missions */
+class missionList: public dntList
+{
+   public:
+      /*! Contructor */
+      missionList();
+      /*! Destructor */
+      ~missionList();
+   protected:
+      /*! Free mission memory */
+      void freeElement(dntListElement* obj);
 };
 
 /*! The controller of missions */
@@ -205,14 +216,12 @@ class missionsController
        * \param m -> pointer to the mission to add */
       void addCurrent(mission* m);
 
-      static mission* completed;  /**< The List of Completed Missions */
+      static missionList* completed;  /**< The List of Completed Missions */
       static mission* curComp;    /**< Current completed navigation pointer */
-      static int totalCompleted;  /**< Total number of Completed Missions */
 
-      static mission* current;    /**< The list of Current Missions */
+      static missionList* current;    /**< The list of Current Missions */
       static mission* curCur;     /**< Current current navigation pointer */
       static mission* curTreat;   /**< Pointer to the mission to treat next  */
-      static int totalCurrent;    /**< Total number of current missions */
 
       static void* pEngine;       /**< Pointer to the current engine */
 };

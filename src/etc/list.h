@@ -81,9 +81,14 @@ class dntList
       /*! Remove an element from the list
        * \param obj -> element to remove
        * \note This function will delete the element
-       *       calling freeElement.
-       * \return true if ok :*/
+       *       calling freeElement when returning true.
+       * \return true if ok */
       bool remove(dntListElement* obj);
+
+      /*! Only remove the element from the list, without deleting it
+       * \param obj -> obj to remove
+       * \return true if ok */
+      bool removeWithoutDelete(dntListElement* obj);
 
        /*! Get total elements on the list
        * \return total elements on the list */

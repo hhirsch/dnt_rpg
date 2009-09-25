@@ -159,9 +159,9 @@ bool dntList::insert(dntListElement* obj)
 }
 
 /***********************************************************************
- *                               remove                                *
+ *                        removeWithoutDelete                          *
  ***********************************************************************/
-bool dntList::remove(dntListElement* obj)
+bool dntList::removeWithoutDelete(dntListElement* obj)
 {
    if(obj == NULL)
    {
@@ -175,11 +175,8 @@ bool dntList::remove(dntListElement* obj)
    if(first == obj)
    {
       first = first->getNext();
-   }
-
-   /* Really remove it */
-   freeElement(obj);
-
+   } 
+   
    /* And dec */
    total--;
    if(total == 0)
@@ -188,6 +185,21 @@ bool dntList::remove(dntListElement* obj)
    }
 
    return(true);
+}
+
+/***********************************************************************
+ *                               remove                                *
+ ***********************************************************************/
+bool dntList::remove(dntListElement* obj)
+{
+   if(removeWithoutDelete(obj))
+   {
+      /* Really remove it */
+      freeElement(obj);
+      return(true);
+   }
+
+   return(false);
 }
 
 /***********************************************************************

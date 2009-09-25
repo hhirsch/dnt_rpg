@@ -403,6 +403,36 @@ void mission::loadAsCurrent(defParser* def)
 
 }
 
+///////////////////////////////////////////////////////////////////////
+//                                                                   //
+//                            missionList                            //
+//                                                                   //
+///////////////////////////////////////////////////////////////////////
+
+/************************************************************
+ *                        Constructor                       *
+ ************************************************************/
+missionList::missionList()
+{
+}
+
+/************************************************************
+ *                         Destructor                       *
+ ************************************************************/
+missionList::~missionList()
+{
+   clearList();
+}
+
+/************************************************************
+ *                          freeElement                     *
+ ************************************************************/
+void missionList::freeElement(dntListElement* obj)
+{
+   mission* m = (mission*)obj;
+   delete(m);
+}
+
 
 ///////////////////////////////////////////////////////////////////////
 //                                                                   //
@@ -422,12 +452,11 @@ missionsController::missionsController()
  ************************************************************/
 void missionsController::init(void* usedEngine)
 {
-   totalCompleted = 0;
-   completed = NULL;
-   totalCurrent = 0;
-   current = NULL;
    curTreat = NULL;
    pEngine = usedEngine;
+
+   current = new missionList();
+   completed = new missionList();
 }
 
 /************************************************************
@@ -442,18 +471,8 @@ missionsController::~missionsController()
  ************************************************************/
 void missionsController::finish()
 {
-   /* Empty current list */
-   while(current)
-   {
-      removeFromCurrent(current, true);
-   }
-
-   /* Empty completed list */
-   while(completed)
-   {
-      removeFromCompleted(completed);
-   }
-
+   delete(current);
+   delete(completed);
 }
 
 /************************************************************
@@ -541,26 +560,13 @@ void missionsController::completeMission(mission* m, int type)
  ************************************************************/
 void missionsController::removeFromCurrent(mission* m, bool del)
 {
-   if(m)
+   if(del)
    {
-      if(current == m)
-      {
-         current = m->next;
-      }
-
-      m->next->previous = m->previous;
-      m->previous->next = m->next;
-
-      if(del)
-      {
-         delete(m);
-      }
-
-      totalCurrent--;
-      if(totalCurrent <= 0)
-      {
-         current = NULL;
-      }
+      current->remove(m);
+   }
+   else
+   {
+      current->removeWithoutDelete(m);
    }
 }
 
@@ -569,20 +575,7 @@ void missionsController::removeFromCurrent(mission* m, bool del)
  ************************************************************/
 void missionsController::addCurrent(mission* m)
 {
-   if(current)
-   {
-      m->next = current;
-      m->previous = current->previous;
-      m->next->previous = m;
-      m->previous->next = m;
-   }
-   else
-   {
-      m->next = m;
-      m->previous = m;
-   }
-   current = m;
-   totalCurrent++;
+   current->insert(m);
 }
 
 /************************************************************
@@ -590,20 +583,7 @@ void missionsController::addCurrent(mission* m)
  ************************************************************/
 void missionsController::addCompleted(mission* m)
 {
-   if(completed)
-   {
-      m->next = completed;
-      m->previous = completed->previous;
-      m->previous->next = m;
-      m->next->previous = m;
-   }
-   else
-   {
-      m->next = m;
-      m->previous = m;
-   }
-   completed  = m;
-   totalCompleted++;
+   completed->insert(m);
 }
 
 /************************************************************
@@ -611,24 +591,7 @@ void missionsController::addCompleted(mission* m)
  ************************************************************/
 void missionsController::removeFromCompleted(mission* m)
 {
-   if(m)
-   {
-      if(completed == m)
-      {
-         completed = m->next;
-      }
-
-      m->next->previous = m->previous;
-      m->previous->next = m->next;
-
-      delete(m);
-
-      totalCompleted--;
-      if(totalCompleted <= 0)
-      {
-         completed = NULL;
-      }
-   }
+   completed->remove(m);
 }
 
 /************************************************************
@@ -637,14 +600,14 @@ void missionsController::removeFromCompleted(mission* m)
 mission* missionsController::getCurrentMission(string scriptFile)
 {
    int i;
-   mission* m = current;
-   for(i = 0; i < totalCurrent; i++)
+   mission* m = (mission*)current->getFirst();
+   for(i = 0; i < current->getTotal(); i++)
    {
       if(m->fileName == scriptFile)
       {
          return(m);
       }
-      m = m->next;
+      m = (mission*)m->getNext();
    }
    return(NULL);
 }
@@ -662,7 +625,7 @@ void missionsController::treat(Map* acMap, characterList* NPCs)
       /* Set the curTreat, if needed */
       if(!curTreat)
       {
-         curTreat = current;
+         curTreat = (mission*)current->getFirst();
          if(!curTreat)
          {
             /* No current missions -> nothing to do! */
@@ -677,12 +640,13 @@ void missionsController::treat(Map* acMap, characterList* NPCs)
       /* Since it can be completed at run with complete mission function */
       if(curTreat)
       {
-         curTreat = curTreat->next;
+         curTreat = (mission*)curTreat->getNext();
 
          /* Verify if finished the script file. */
-         if(curTreat->previous->finished())
+         if(((mission*)curTreat->getPrevious())->finished())
          {
-            completeMission(curTreat->previous, MISSION_COMPLETION_FINISHED);
+            completeMission((mission*)curTreat->getPrevious(),
+                  MISSION_COMPLETION_FINISHED);
          }
       }
    }
@@ -706,19 +670,19 @@ bool missionsController::save(string fName)
    }
 
    /* Call to save each completed mission */
-   m = completed;
-   for(i = 0; i < totalCompleted; i++)
+   m = (mission*)completed->getFirst();
+   for(i = 0; i < completed->getTotal(); i++)
    {
       m->saveAsCompleted(&f);
-      m = m->next;
+      m = (mission*)m->getNext();
    }
 
    /* And Call to save each current mission */
-   m = current;
-   for(i = 0; i < totalCurrent; i++)
+   m = (mission*)current->getFirst();
+   for(i = 0; i < current->getTotal(); i++)
    {
       m->saveAsCurrent(&f);
-      m = m->next;
+      m = (mission*)m->getNext();
    }
 
    /* Close the file and done! */
@@ -785,7 +749,7 @@ bool missionsController::load(string fName)
  ************************************************************/
 mission* missionsController::getFirstCurrentMission()
 {
-   curCur = current;
+   curCur = (mission*)current->getFirst();
    return(curCur);
 }
 
@@ -796,8 +760,8 @@ mission* missionsController::getNextCurrentMission()
 {
    if(curCur)
    {
-      curCur = curCur->next;
-      if(curCur != current)
+      curCur = (mission*)curCur->getNext();
+      if(curCur != (mission*)current->getFirst())
       {
          return(curCur);
       }
@@ -812,7 +776,7 @@ mission* missionsController::getNextCurrentMission()
  ************************************************************/
 mission* missionsController::getFirstCompletedMission()
 {
-   curComp = completed;
+   curComp = (mission*)completed->getFirst();
    return(curComp);
 }
 
@@ -823,8 +787,8 @@ mission* missionsController::getNextCompletedMission()
 {
    if(curComp)
    {
-      curComp = curComp->next;
-      if(curComp != completed)
+      curComp = (mission*)curComp->getNext();
+      if(curComp != (mission*)completed->getFirst())
       {
          return(curComp);
       }
@@ -838,12 +802,10 @@ mission* missionsController::getNextCompletedMission()
 /*************************************************************************
  *                            Static Members                             *
  *************************************************************************/
-mission* missionsController::completed = NULL;
+missionList* missionsController::completed = NULL;
 mission* missionsController::curTreat = NULL;
-int missionsController::totalCompleted = 0;
-mission* missionsController::current = NULL;
+missionList* missionsController::current = NULL;
 mission* missionsController::curComp = NULL;
 mission* missionsController::curCur = NULL;
-int missionsController::totalCurrent = 0;   
 void* missionsController::pEngine = NULL;
 
