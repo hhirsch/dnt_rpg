@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -23,28 +23,21 @@
 
 #include "../gui/farso.h"
 #include "../etc/btree.h"
+#include "../etc/list.h"
 
 /*! The journalDesc keeps information about a single mission */
-class journalDesc
+class journalDesc: public dntListElement
 {
    public:
       string text;    /**< Description Text */
       bool completed; /**< If completed or not */
-
-      journalDesc* next;     /**< Next on list */
-      journalDesc* previous; /**< Previous on list */
 };
 
 /*! The journalArea keeps information about
  * all missions on an specific area */
-class journalArea : public bTreeCell
+class journalArea : public bTreeCell, public dntList
 {
    public:
-      string text;  /**< Area text */
-
-      journalDesc* descriptions; /**< Descriptions list */
-      int totalDescriptions;     /**< Total Descriptions */
-
       /*! Constructor */
       journalArea();
 
@@ -64,6 +57,22 @@ class journalArea : public bTreeCell
        * \param desc -> mission description
        * \param comp -> true if completed */
       void insertMission(string desc, bool comp);
+
+      /*! Get the area name
+       * \return string with area's name */
+      string getName();
+
+      /*! Set the area name
+       * \param n -> new area's name */
+      void setName(string n);
+
+   protected:
+      /*! Free area description memory
+       * \parma obj -> areaDesc to delete */
+      void freeElement(dntListElement* obj);
+
+
+      string name;  /**< Area Name */
 };
 
 /*! The journalAreas keeps all journalArea informations */

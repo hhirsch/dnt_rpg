@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -33,9 +33,7 @@
  ***********************************************************************/
 journalArea::journalArea()
 {
-   text = "";
-   descriptions = NULL;
-   totalDescriptions = 0;
+   name = "";
 }
 
 /***********************************************************************
@@ -43,16 +41,33 @@ journalArea::journalArea()
  ***********************************************************************/
 journalArea::~journalArea()
 {
-   int i;
-   journalDesc* desc;
-
    /* Delete all the descriptions */
-   for(i = 0; i < totalDescriptions; i++)
-   {
-      desc = descriptions;
-      descriptions = descriptions->next;
-      delete(desc);
-   }
+   clearList();
+}
+
+/***********************************************************************
+ *                             freeElement                             *
+ ***********************************************************************/
+void journalArea::freeElement(dntListElement* obj)
+{
+   journalDesc* desc = (journalDesc*)obj;
+   delete(desc);
+}
+
+/***********************************************************************
+ *                                getName                              *
+ ***********************************************************************/
+string journalArea::getName()
+{
+   return(name);
+}
+
+/***********************************************************************
+ *                                setName                              *
+ ***********************************************************************/
+void journalArea::setName(string n)
+{
+   name = n;
 }
 
 /***********************************************************************
@@ -60,25 +75,12 @@ journalArea::~journalArea()
  ***********************************************************************/
 void journalArea::insertMission(string desc, bool comp)
 {
+   /* Create and define the description */
    journalDesc* d = new journalDesc();
    d->text = desc;
    d->completed = comp;
-
-   if(!descriptions)
-   {
-      d->next = d;
-      d->previous = d;
-   }
-   else
-   {
-      d->next = descriptions;
-      d->previous = descriptions->previous;
-      d->next->previous = d;
-      d->previous->next = d;
-   }
-
-   descriptions = d;
-   totalDescriptions++;
+   /* Insert it on the list */
+   insert(d);
 }
 
 /***********************************************************************
@@ -88,7 +90,7 @@ int journalArea::compare(bTreeCell* cell)
 {
    journalArea* c = (journalArea*)cell;
 
-   return(text.compare(c->text));
+   return(name.compare(c->getName()));
 }
 
 /***********************************************************************
@@ -126,7 +128,7 @@ journalAreas::~journalAreas()
 journalArea* journalAreas::insert(string title)
 {
    journalArea* area = new journalArea();
-   area->text = title;
+   area->setName(title);
 
    return( (journalArea*)bTree::insert(area) );
 }
@@ -137,7 +139,7 @@ journalArea* journalAreas::insert(string title)
 journalArea* journalAreas::search(string title)
 {
    journalArea area;
-   area.text = title;
+   area.setName(title);
 
    return( (journalArea*)bTree::search(&area) );
 }
@@ -191,8 +193,8 @@ bTreeCell* journalAreas::dupplicateCell(bTreeCell* cell)
 {
    journalArea* cur = (journalArea*)cell;
    journalArea* j = new journalArea();
-   j->text = cur->text;
-   j->descriptions = NULL; // don't dupplicate the list
+   j->setName(cur->getName());
+   j->clearList(); // don't dupplicate the list
 
    return(j);
 }
@@ -321,11 +323,11 @@ void journalWindow::showArea()
       if(area)
       {
          /* Set Area text */
-         areaText->setText(area->text);
+         areaText->setText(area->getName());
 
          /* Show all area missions */
-         journalDesc* desc = area->descriptions;
-         for(i = 0; i < area->totalDescriptions; i++)
+         journalDesc* desc = (journalDesc*)area->getFirst();
+         for(i = 0; i < area->getTotal(); i++)
          {
             sprintf(buf,"%d - ", i+1);
             text = buf + desc->text;
@@ -342,7 +344,7 @@ void journalWindow::showArea()
                                      DNT_FONT_STYLE_ITALIC, 0, 120, 0);
             }
 
-            desc = desc->next;
+            desc = (journalDesc*)desc->getNext();
          }
       }
       else
