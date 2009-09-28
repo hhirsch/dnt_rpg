@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -76,8 +76,6 @@ void pendingAction::init(string strLine, int type, character* act, thing* tgt,
    target = tgt;
    targetX = tgtX;
    targetZ = tgtZ;
-   next = NULL;
-   previous = NULL;
    value = v;
    initedTime = SDL_GetTicks();
    missionAction = false;
@@ -192,6 +190,36 @@ string pendingAction::getScriptLine()
 
 /////////////////////////////////////////////////////////////////////////////
 //                                                                         //
+//                           pendingActionList                             //
+//                                                                         //
+/////////////////////////////////////////////////////////////////////////////
+
+/************************************************************
+ *                        Constructor                       *
+ ************************************************************/
+pendingActionList::pendingActionList()
+{
+}
+
+/************************************************************
+ *                         Destructor                       *
+ ************************************************************/
+pendingActionList::~pendingActionList()
+{
+   clearList();
+}
+
+/************************************************************
+ *                        freeElement                       *
+ ************************************************************/
+void pendingActionList::freeElement(dntListElement* obj)
+{
+   pendingAction* pa = (pendingAction*)obj;
+   delete(pa);
+}
+
+/////////////////////////////////////////////////////////////////////////////
+//                                                                         //
 //                       pendingActionController                           //
 //                                                                         //
 /////////////////////////////////////////////////////////////////////////////
@@ -202,8 +230,6 @@ string pendingAction::getScriptLine()
  ************************************************************/
 pendingActionController::pendingActionController()
 {
-   first = NULL;
-   total = 0;
    NPCs = NULL;
    PCs = NULL;
 }
@@ -214,6 +240,7 @@ pendingActionController::pendingActionController()
 pendingActionController::~pendingActionController()
 {
    removeAllActions(true);
+   actions.clearList();
 }
 
 /************************************************************
@@ -232,13 +259,13 @@ void pendingActionController::setCharacterLists(characterList* npcs,
 void pendingActionController::abortAllActions()
 {
    int i;
-   pendingAction* ac = first;
-   for(i = 0; i < total; i++)
+   pendingAction* ac = (pendingAction*)actions.getFirst();
+   for(i = 0; i < actions.getTotal(); i++)
    {
       if(!ac->isMissionAction())
       {
          ac->setAsEnded(false);
-         ac = ac->next;
+         ac = (pendingAction*)ac->getNext();
       }
    }
 }
@@ -248,16 +275,16 @@ void pendingActionController::abortAllActions()
  ************************************************************/
 void pendingActionController::removeAllActions(bool mission)
 {
-   int curTotal = total;
+   int curTotal = actions.getTotal();
    int i;
-   pendingAction* act = first;
+   pendingAction* act = (pendingAction*)actions.getFirst();
    pendingAction* ract;
 
    /* Remove all Actions */
    for(i = 0; i < curTotal; i++)
    {
       ract = act;
-      act = act->next;
+      act = (pendingAction*)act->getNext();
       /* Only if is not a missionAction or 
        * if is to delete missions actions too */
       if( (mission) || (!ract->isMissionAction()))
@@ -272,18 +299,8 @@ void pendingActionController::removeAllActions(bool mission)
  ************************************************************/
 void pendingActionController::removeAction(pendingAction* act)
 {
-   act->next->previous = act->previous;
-   act->previous->next = act->next;
-   if(act == first)
-   {
-      first = act->next;
-   }
-   delete(act);
-   total--;
-   if(total <= 0)
-   {
-      first = NULL;
-   }
+   /* Remove from list */
+   actions.remove(act);
 }
 
 /************************************************************
@@ -294,22 +311,8 @@ pendingAction* pendingActionController::addAction(pendingAction* act,
 {
    if(act)
    {
-      if(first != NULL)
-      {
-         act->next = first;
-         act->previous = first->previous;
-      }
-      else
-      {
-         act->next = act;
-         act->previous = act;
-      }
-      act->next->previous = act;
-      act->previous->next = act;
-      act->done = false;
-      act->toggle = false;
-      first = act;
-      total++;
+      /* Insert on list */
+      actions.insert(act);
 
       /* Do the related trigger pendingAction to the one defined */
       if(act->actionType == ACT_MOVE )
@@ -432,7 +435,7 @@ pendingAction* pendingActionController::addAction(string strLine, int type,
  ************************************************************/
 int pendingActionController::getTotal()
 {
-   return(total);
+   return(actions.getTotal());
 }
 
 /************************************************************
@@ -440,7 +443,7 @@ int pendingActionController::getTotal()
  ************************************************************/
 pendingAction* pendingActionController::getFirst()
 {
-   return(first);
+   return((pendingAction*)actions.getFirst());
 }
 
 /************************************************************
@@ -533,7 +536,7 @@ void pendingActionController::treatActions(Map* actualMap, bool fightMode)
       {
          //TODO
       }
-      act = act->next;
+      act = (pendingAction*)act->getNext();
    }
 }
 

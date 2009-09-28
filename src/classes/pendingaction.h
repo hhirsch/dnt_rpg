@@ -1,16 +1,38 @@
+/* 
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+ 
+  This file is part of DccNiTghtmare.
+ 
+  DccNiTghtmare is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  DccNiTghtmare is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #ifndef _dnt_pending_actions_h
 #define _dnt_pending_actions_h
 
 #include <string>
 using namespace std;
 
+#include "../etc/list.h"
 #include "../engine/character.h"
+
 #include "thing.h"
 #include "actions.h"
 
 /*! A pending action. Usually used with a script. When the script got a more
  * than one cycle function */
-class pendingAction
+class pendingAction: public dntListElement
 {
    public:
       /*! Constructor
@@ -108,9 +130,6 @@ class pendingAction
        *            temporary variable. */
       string getScriptLine();
 
-      pendingAction* next;       /**< Next action on the list */
-      pendingAction* previous;   /**< Previous action on the list */
-
    private:
       string scriptLine;   /**< The line of the script that calls the more than
                                 one cycle function. */
@@ -137,6 +156,21 @@ class pendingAction
 
       bool missionAction; /**< True if is a mission action (that can't
                                be stopped) */
+};
+
+/*! List of pending actions */
+class pendingActionList: public dntList
+{
+   public:
+      /*! Constructor */
+      pendingActionList();
+      /*! Destructor */
+      ~pendingActionList();
+
+   protected:
+      /*! Delete a pending action memory
+       * \param obj -> pointer to the pendingAction to delete */
+      void freeElement(dntListElement* obj);
 };
 
 /*! the controller of actions taked by characters on the game */
@@ -218,8 +252,7 @@ class pendingActionController
       void setCharacterLists(characterList* npcs, characterList* pcs);
 
    private:
-      pendingAction* first;   /**< First action on the list */
-      int total;              /**< Total actions on the list */
+      pendingActionList actions; /**< Pending Actions List */
 
       characterList* NPCs;    /**< Current PCs List */
       characterList* PCs;     /**< Current NPCs List */
