@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -22,6 +22,33 @@
 #include "../engine/culling.h"
 #include "../engine/util.h"
 
+/*************************************************************************
+ *                           sceneryRenderList                           *
+ *************************************************************************/
+
+/********************************************************
+ *                     Constructor                      *
+ ********************************************************/
+sceneryRenderList::sceneryRenderList()
+{
+}
+
+/********************************************************
+ *                     Destructor                       *
+ ********************************************************/
+sceneryRenderList::~sceneryRenderList()
+{
+   clearList();
+}
+
+/********************************************************
+ *                     freeElement                      *
+ ********************************************************/
+void sceneryRenderList::freeElement(dntListElement* obj)
+{
+   sceneryRenderPosition* pos = (sceneryRenderPosition*)obj;
+   delete(pos);
+}
 
 /*************************************************************************
  *                               model3D                                 *
@@ -36,8 +63,7 @@ model3d::model3d(string path, string texturePath, bool staticScenery)
    loadModel(path);
    usedFlag = 0;
    staticFlag = staticScenery;
-   positions = NULL;
-   totalPositions = 0;
+   positions = new sceneryRenderList();
 }
 
 /********************************************************
@@ -45,17 +71,10 @@ model3d::model3d(string path, string texturePath, bool staticScenery)
  ********************************************************/
 model3d::~model3d()
 {
-   int i;
-
-   /* Clear Positions List */
-   sceneryRenderPosition* aux;
-   for(i=0; i < totalPositions; i++)
+   if(positions != NULL)
    {
-      aux = positions;
-      positions = positions->next;
-      delete(aux);
+      delete(positions);
    }
-   positions = NULL;
 }
 
 /********************************************************
@@ -79,21 +98,7 @@ void model3d::addPosition(float x, float y, float z, float angle)
    pos->angle = angle;
 
    /* Add it to the list */
-   if(positions == NULL)
-   {
-      pos->next = pos;
-      pos->previous = pos;
-   }
-   else
-   {
-      pos->next = positions;
-      pos->previous = positions->previous;
-      pos->next->previous = pos;
-      pos->previous->next = positions;
-   }
-
-   positions = pos;
-   totalPositions++;
+   positions->insert(pos);
 }
 
 /********************************************************
@@ -105,90 +110,87 @@ void model3d::draw(GLfloat** matriz, bool inverted, GLfloat* shadowMatrix,
    GLfloat min[3], max[3];
    GLfloat X[4], Z[4];
    boundingBox bound;
+   int i;
+   
+   sceneryRenderPosition* pos = (sceneryRenderPosition*)positions->getFirst();
 
-   if(positions)
+   /* Load Model To Graphic Card Memory */
+   loadToGraphicMemory();
+
+   /* Render All Models */
+   for(i=0; i < positions->getTotal(); i++)
    {
-      int i;
-      sceneryRenderPosition* pos = positions;
+      xPosition = pos->x;
+      yPosition = pos->y;
+      zPosition = pos->z;
+      orientation = pos->angle;
 
-      /* Load Model To Graphic Card Memory */
-      loadToGraphicMemory();
-
-      /* Render All Models */
-      for(i=0; i<totalPositions; i++)
+      /* Do View Frustum Culling */
+      bound = getBoundingBox();
+      X[0] = bound.x1;
+      Z[0] = bound.z1;
+      X[1] = bound.x1;
+      Z[1] = bound.z2; 
+      X[2] = bound.x2;
+      Z[2] = bound.z2;
+      X[3] = bound.x2;
+      Z[3] = bound.z1;
+      rotTransBoundingBox(pos->angle, X, Z, pos->x, 
+            pos->y+bound.y1, pos->y+bound.y2, 
+            pos->z, min, max );
+      if( (matriz == NULL) ||
+            (visibleCube(min[0],min[1],min[2],max[0],max[1],max[2],
+                         matriz)) )
       {
-         xPosition = pos->x;
-         yPosition = pos->y;
-         zPosition = pos->z;
-         orientation = pos->angle;
-
-         /* Do View Frustum Culling */
-         bound = getBoundingBox();
-         X[0] = bound.x1;
-         Z[0] = bound.z1;
-         X[1] = bound.x1;
-         Z[1] = bound.z2; 
-         X[2] = bound.x2;
-         Z[2] = bound.z2;
-         X[3] = bound.x2;
-         Z[3] = bound.z1;
-         rotTransBoundingBox(pos->angle, X, Z, pos->x, 
-                             pos->y+bound.y1, pos->y+bound.y2, 
-                             pos->z, min, max );
-         if( (matriz == NULL) ||
-             (visibleCube(min[0],min[1],min[2],max[0],max[1],max[2],
-                           matriz)) )
-         {
-            /* Is visible, so render */
-            glPushMatrix();
-               glTranslatef(xPosition, yPosition, zPosition);
-               glRotatef(orientation, 0, 1, 0);
-               renderFromGraphicMemory();
-            glPopMatrix();
-         }
-
-         /* Reflected Draw */
-         if( (inverted) && (pos->y >= 0) )
-         {
-            /* Do Clulling */
-            rotTransBoundingBox(pos->angle, X, Z, pos->x, 
-                                pos->y-bound.y2, pos->y-bound.y1, 
-                                pos->z, min, max);
-            if(visibleCube(min[0],min[1],min[2],max[0],max[1],max[2],
-                           matriz))
-            {
-               /* Is visible, so render the reflexion */
-               glEnable(GL_STENCIL_TEST);
-               glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
-               glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
-               glEnable(GL_NORMALIZE);
-               glPushMatrix();
-                  glTranslatef(xPosition, -yPosition, zPosition);
-                  glRotatef(orientation, 0, 1, 0);
-                  glScalef(1.0,-1.0,1.0);
-                  renderFromGraphicMemory();
-               glPopMatrix();
-               glDisable(GL_NORMALIZE);
-               glDisable(GL_STENCIL_TEST);
-            }
-         }
-          
-          /* Do Projective Shadow */
-          //FIXME: apply culling too!
-          if(shadowMatrix != NULL)
-          {
-             orientation = pos->angle;
-             glPushMatrix();
-               renderShadow(shadowMatrix, alpha);
-             glPopMatrix();
-          }
-
-          pos = pos->next;
+         /* Is visible, so render */
+         glPushMatrix();
+         glTranslatef(xPosition, yPosition, zPosition);
+         glRotatef(orientation, 0, 1, 0);
+         renderFromGraphicMemory();
+         glPopMatrix();
       }
 
-      /* remove Model from graphic card memory */
-      removeFromGraphicMemory();
+      /* Reflected Draw */
+      if( (inverted) && (pos->y >= 0) )
+      {
+         /* Do Clulling */
+         rotTransBoundingBox(pos->angle, X, Z, pos->x, 
+               pos->y-bound.y2, pos->y-bound.y1, 
+               pos->z, min, max);
+         if(visibleCube(min[0],min[1],min[2],max[0],max[1],max[2],
+                  matriz))
+         {
+            /* Is visible, so render the reflexion */
+            glEnable(GL_STENCIL_TEST);
+            glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
+            glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+            glEnable(GL_NORMALIZE);
+            glPushMatrix();
+            glTranslatef(xPosition, -yPosition, zPosition);
+            glRotatef(orientation, 0, 1, 0);
+            glScalef(1.0,-1.0,1.0);
+            renderFromGraphicMemory();
+            glPopMatrix();
+            glDisable(GL_NORMALIZE);
+            glDisable(GL_STENCIL_TEST);
+         }
+      }
+
+      /* Do Projective Shadow */
+      //FIXME: apply culling too!
+      if(shadowMatrix != NULL)
+      {
+         orientation = pos->angle;
+         glPushMatrix();
+         renderShadow(shadowMatrix, alpha);
+         glPopMatrix();
+      }
+
+      pos = (sceneryRenderPosition*)pos->getNext();
    }
+
+   /* remove Model from graphic card memory */
+   removeFromGraphicMemory();
 }
 
 /********************************************************

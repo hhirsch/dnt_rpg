@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -38,16 +38,27 @@ class boundingBox
 };
 
 /*! A render Positon of a Scenery Static Model Object */
-class sceneryRenderPosition
+class sceneryRenderPosition: public dntListElement
 {
    public:
       GLfloat x,        /**< x coordinate */
               y,        /**< y coordinate */
               z;        /**< z coordinate */
       GLfloat angle;    /**< scenery angle */
+};
 
-      sceneryRenderPosition* next;     /**< Next position on list */
-      sceneryRenderPosition* previous; /**< Previous position on list */
+/*! List of sceneryRenderPositions */
+class sceneryRenderList: public dntList
+{
+   public:
+      /*! Constructor */
+      sceneryRenderList();
+      /*! Destructor */
+      ~sceneryRenderList();
+   protected:
+      /*! Free sceneryRenderPosition memory
+       * \param obj -> pointer to free */
+      void freeElement(dntListElement* obj);
 };
 
 /*! The 3D model of an object */
@@ -140,10 +151,7 @@ class model3d: public aniModel
                               \note -> this flag is only used for non-pickeable 
                               scenery objects and optimize a lot their render*/
 
-      sceneryRenderPosition* positions;  /**< Positions List for the 
-                                              statics objects */
-      int totalPositions;                /**< Total Positions current on list */
-
+      sceneryRenderList* positions;  /**< Positions List for 'static' objects */
 };
 
 /*! List of all 3D GLM models actually on game */
