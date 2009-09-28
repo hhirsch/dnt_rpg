@@ -62,7 +62,7 @@ class sceneryRenderList: public dntList
 };
 
 /*! The 3D model of an object */
-class model3d: public aniModel
+class model3d: public aniModel, public dntListElement
 {
    public:
       /*! Constructor
@@ -131,9 +131,6 @@ class model3d: public aniModel
        /*! Just for thing compatibility  */
        void updateHealthBar();
       
-      model3d* next;     /**< next model on list */
-      model3d* previous; /**< previous model on list */
-
    protected:
       string fileName;   /**< Nome of the Model's file */
 
@@ -154,7 +151,21 @@ class model3d: public aniModel
       sceneryRenderList* positions;  /**< Positions List for 'static' objects */
 };
 
-/*! List of all 3D GLM models actually on game */
+/*! Implementation of a model3d list */
+class model3dList: public dntList
+{
+   public:
+      /*! Constructor */
+      model3dList();
+      /*! Destructor */
+      ~model3dList();
+
+   protected:
+      /*! Delete a model3 */
+      void freeElement(dntListElement* obj);
+};
+
+/*! List of all 3D models actually on game */
 class modelList
 {
    public:
@@ -187,7 +198,7 @@ class modelList
 
       /*! Get Total Models on list
        * \return -> number of models on the list */
-      int getTotalModels(){return(totalModels);}
+      int getTotalModels();
 
       /*! Render all Scenery Objects
        * \param visibleMatrix -> current visible matrix
@@ -202,8 +213,7 @@ class modelList
       void printAll();
 
    protected:
-      static model3d* first;      /**< First Model on List */
-      static int totalModels;     /**< Number of Models on List */
+      static model3dList* list;      /**< List of model3d */
 };
 
 #endif

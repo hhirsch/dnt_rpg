@@ -653,7 +653,7 @@ void editor::renderSceneryObjects()
       {
          mdl->draw(visibleMatrix, false);
       }
-      mdl = mdl->next;
+      mdl = (model3d*)mdl->getNext();
    }
 }
 

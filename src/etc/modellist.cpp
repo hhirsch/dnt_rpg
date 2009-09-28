@@ -51,6 +51,34 @@ void sceneryRenderList::freeElement(dntListElement* obj)
 }
 
 /*************************************************************************
+ *                              model3dList                              *
+ *************************************************************************/
+
+/********************************************************
+ *                     Constructor                      *
+ ********************************************************/
+model3dList::model3dList()
+{
+}
+
+/********************************************************
+ *                      Destructor                      *
+ ********************************************************/
+model3dList::~model3dList()
+{
+   clearList();
+}
+
+/********************************************************
+ *                     freeElement                      *
+ ********************************************************/
+void model3dList::freeElement(dntListElement* obj)
+{
+   model3d* m = (model3d*)obj;
+   delete(m);
+}
+
+/*************************************************************************
  *                               model3D                                 *
  *************************************************************************/
 
@@ -286,8 +314,7 @@ void model3d::updateHealthBar()
  ********************************************************/
 void modelList::init()
 {
-   first = NULL;
-   totalModels = 0;
+   list = new model3dList();
 }
 
 /********************************************************
@@ -295,9 +322,9 @@ void modelList::init()
  ********************************************************/
 void modelList::finish()
 {
-   while(first)
+   if(list)
    {
-      removeModel(first);
+      delete(list);
    }
 }
 
@@ -306,15 +333,15 @@ void modelList::finish()
  ********************************************************/
 model3d* modelList::findModel(string path)
 {
-   model3d* mdl = first;
+   model3d* mdl = (model3d*)list->getFirst();
    int i;
-   for(i=0; i<totalModels;i++)
+   for(i=0; i < list->getTotal(); i++)
    {
       if(mdl->getFileName() == path)
       {
          return(mdl);
       }
-      mdl = mdl->next;
+      mdl = (model3d*)mdl->getNext();
    }
    return(NULL);
 }
@@ -335,23 +362,8 @@ model3d* modelList::addModel(string path, string texturePath,
    /* Create model */
    mdl = new model3d(path, texturePath, staticScenery);
 
-
-   if(totalModels == 0)
-   {
-      first = mdl;
-      mdl->next = first;
-      mdl->previous = first;
-   }
-   else
-   {
-      mdl->next = first;
-      mdl->previous = first->previous;
-      mdl->previous->next = mdl;
-      mdl->next->previous = mdl;
-      first = mdl; 
-   }
-
-   totalModels++;
+   /* Insert it on the list */
+   list->insert(mdl);
 
    return(mdl);
 }
@@ -363,19 +375,7 @@ void modelList::removeModel(model3d* mdl)
 {
    if(mdl != NULL)
    {
-
-      if(mdl == first)
-      {
-         first = mdl->next;
-      }
-      mdl->next->previous = mdl->previous;
-      mdl->previous->next = mdl->next;
-      delete(mdl);
-      totalModels--;
-      if(totalModels == 0)
-      {
-         first = NULL;
-      }
+      list->remove(mdl);
    }
 }
 
@@ -384,7 +384,15 @@ void modelList::removeModel(model3d* mdl)
  ********************************************************/
 model3d* modelList::getFirst()
 {
-   return(first);
+   return((model3d*)list->getFirst());
+}
+
+/********************************************************
+ *                    getTotalModels                    *
+ ********************************************************/
+int modelList::getTotalModels()
+{
+   return(list->getTotal());
 }
 
 /********************************************************
@@ -392,23 +400,23 @@ model3d* modelList::getFirst()
  ********************************************************/
 void modelList::removeUnusedModels()
 {
-   model3d* mdl = first;
+   model3d* mdl = (model3d*)list->getFirst();
    model3d* aux = NULL;
    int i, total;
 
-   total = totalModels;
+   total = list->getTotal();
    
    for(i = 0; i < total; i++)
    {
       if(mdl->getUsedFlag() <= 0)
       {
          aux = mdl;
-         mdl = mdl->next;
+         mdl = (model3d*)mdl->getNext();
          removeModel(aux);
       }
       else
       {
-         mdl = mdl->next;
+         mdl = (model3d*)mdl->getNext();
       }
    }
 #ifdef DEBUG   
@@ -431,7 +439,7 @@ void modelList::renderSceneryObjects(GLfloat** visibleMatrix, bool inverted,
       {
          mdl->draw(visibleMatrix, inverted, shadowMatrix, alpha);
       }
-      mdl = mdl->next;
+      mdl = (model3d*)mdl->getNext();
    }
 }
 
@@ -441,14 +449,14 @@ void modelList::renderSceneryObjects(GLfloat** visibleMatrix, bool inverted,
 void modelList::printAll()
 {
    int i;
-   model3d* mdl = first;
+   model3d* mdl = (model3d*)list->getFirst();
    printf("*****************************************************\n");
    printf("*              Current Models on List               *\n");
-   for(i = 0; i < totalModels; i++)
+   for(i = 0; i < list->getTotal(); i++)
    {
       printf("* Obj: %s\n*\tUsed for: %d\n", mdl->getFileName().c_str(), 
                                              mdl->getUsedFlag());
-      mdl = mdl->next;
+      mdl = (model3d*)mdl->getNext();
    }
    printf("*****************************************************\n\n");
 }
@@ -456,6 +464,5 @@ void modelList::printAll()
 /********************************************************
  *                   static members                     *
  ********************************************************/
-model3d* modelList::first = NULL;
-int modelList::totalModels = 0;
+model3dList* modelList::list = NULL;
 
