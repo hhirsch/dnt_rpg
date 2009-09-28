@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -21,10 +21,12 @@
 #ifndef _dnt_fuzzyvariable_h
 #define _dnt_fuzzyvariable_h
 
+#include "../etc/list.h"
+
 #include "fuzzyfunction.h"
 
 /*! Fuzzy Variable (usually destiny one of a rule) */
-class fuzzyVariable
+class fuzzyVariable: public dntListElement
 {
    public:
       /*! Constructor 
@@ -51,12 +53,24 @@ class fuzzyVariable
        * \return value of the function at point x */
       float evaluteFunction(float x);
 
-      fuzzyVariable* next;
-      fuzzyVariable* previous;
-      
    private:
       float value;             /**< value of the variable */
       fuzzyFunction* function; /**< function of the variable */
+};
+
+/*! List of fuzzy variables */
+class fuzzyVariableList: public dntList
+{
+   public:
+      /*! Constructor */
+      fuzzyVariableList();
+      /*! Destructor */
+      ~fuzzyVariableList();
+
+   protected:
+      /*! Free the fuzzy variable
+       * \param obj -> pointer to the object to delete */
+      void freeElement(dntListElement* obj);
 };
 
 #endif

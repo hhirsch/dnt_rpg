@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -70,15 +70,9 @@ class fuzzy
        float defuzzyfication();
 
    private:
-      fuzzyRule* rules;         /**< FuzzyRules List */
-      int totalRules;           /**< Total Fuzzy Rules */
-
-      fuzzyFunction* functions; /**< Fuzzy Functions List */
-      int totalFunctions;       /**< Total Fuzzy Rules */
-
-      fuzzyVariable* variables; /**< Fuzzy Variables List */
-      int totalVariables;       /**< Total Fuzzy Rules */
-
+      fuzzyRuleList ruleList;   /**< fuzzyRules list */
+      fuzzyFunctionList funcList; /**< Fuzzy Functions List */
+      fuzzyVariableList varList; /**< Fuzzy Variables List */
 };
 
 

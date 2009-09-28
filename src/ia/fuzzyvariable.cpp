@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -25,12 +25,34 @@
 /***************************************************************
  *                           Constructor                       *
  ***************************************************************/
+fuzzyVariableList::fuzzyVariableList()
+{
+}
+
+/***************************************************************
+ *                            Destructor                       *
+ ***************************************************************/
+fuzzyVariableList::~fuzzyVariableList()
+{
+   clearList();
+}
+
+/***************************************************************
+ *                           freeElement                       *
+ ***************************************************************/
+void fuzzyVariableList::freeElement(dntListElement* obj)
+{
+   fuzzyVariable* var = (fuzzyVariable*)obj;
+   delete(var);
+}
+
+/***************************************************************
+ *                           Constructor                       *
+ ***************************************************************/
 fuzzyVariable::fuzzyVariable(int func, float xa, float xb, float xc, float xd)
 {
    function = new fuzzyFunction(func, xa, xb, xc, xd);
    clearValue();
-   next = NULL;
-   previous = NULL;
 }
 
 /***************************************************************
@@ -72,11 +94,10 @@ void fuzzyVariable::setValue(float val)
    else
    {
       /* Already started, so calculate */
-      //value = ((value + val) / 2.0);
+      /* value = ((value + val) / 2.0); */
       /* Or another Formula */
       value = (value+val) - (value*val);
    }
-   //printf("value: %.3f\n",value);
    function->setLimit(value);
 }
 

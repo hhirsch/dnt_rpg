@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -22,6 +22,31 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+
+/***************************************************************
+ *                           Constructor                       *
+ ***************************************************************/
+fuzzyFunctionList::fuzzyFunctionList()
+{
+}
+
+/***************************************************************
+ *                            Destructor                       *
+ ***************************************************************/
+fuzzyFunctionList::~fuzzyFunctionList()
+{
+   clearList();
+}
+
+/***************************************************************
+ *                           freeElement                       *
+ ***************************************************************/
+void fuzzyFunctionList::freeElement(dntListElement* obj)
+{
+   fuzzyFunction* f = (fuzzyFunction*)obj;
+   delete(f);
+}
+
 /***************************************************************
  *                           Constructor                       *
  ***************************************************************/
@@ -32,8 +57,6 @@ fuzzyFunction::fuzzyFunction(int func, float xa, float xb, float xc, float xd)
    x2 = xb;
    x3 = xc;
    x4 = xd;
-   next = NULL;
-   previous = NULL;
    crispValue = -1;
    upperValue = 1;
 }
@@ -164,7 +187,7 @@ float fuzzyFunction::evalute()
       }
       break;
    }
-   //printf("Function: %.3f\n",ret);
+   
    return(ret);
 }
 

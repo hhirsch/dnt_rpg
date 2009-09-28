@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -21,6 +21,8 @@
 #ifndef _dnt_fuzzyrule_h
 #define _dnt_fuzzyrule_h
 
+#include "../etc/list.h"
+
 #include "fuzzyfunction.h"
 #include "fuzzyvariable.h"
 
@@ -31,7 +33,7 @@
 #define FUZZY_OPERATOR_OR_NOT  4
 
 /*! A Rule in the Fuzzy Class */
-class fuzzyRule
+class fuzzyRule: public dntListElement
 {
    public:
       /*! Constructor
@@ -52,9 +54,6 @@ class fuzzyRule
       /*! Evalute The Rule, setting the return Variable */
       void evalute();
 
-      fuzzyRule* next;
-      fuzzyRule* previous;
-      
    private:
       int totalMembers;              /**< Total Members that rule will need */
       int numberOfMembers;           /**< Number of Members in Rule */
@@ -72,10 +71,24 @@ class fuzzyRule
        * \param op1 -> first operator
        * \param op2 -> second operator
        * \return -> fuzzy Or Value */
-      float orValue(float op1, float op2);
-
-      
+      float orValue(float op1, float op2); 
 };
+
+/*! List of fuzzy rules */
+class fuzzyRuleList: public dntList
+{
+   public:
+      /*! Constructor */
+      fuzzyRuleList();
+      /*! Destructor */
+      ~fuzzyRuleList();
+
+   protected:
+      /*! Free the fuzzy variable
+       * \param obj -> pointer to the object to delete */
+      void freeElement(dntListElement* obj);
+};
+
 
 
 #endif

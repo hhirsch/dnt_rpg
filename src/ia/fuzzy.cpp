@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -26,17 +26,6 @@
  ***************************************************************/
 fuzzy::fuzzy()
 {
-   /* Define Rules */
-   rules = NULL;
-   totalRules = 0;
-
-   /* Define Functions */
-   functions = NULL;
-   totalFunctions = 0;
-
-   /* Define Variables */
-   variables = NULL;
-   totalVariables = 0;
 }
 
 /***************************************************************
@@ -44,38 +33,14 @@ fuzzy::fuzzy()
  ***************************************************************/
 fuzzy::~fuzzy()
 {
-   int i;
-
    /* Delete All Rules */
-   fuzzyRule* fr = rules;
-   fuzzyRule* tr;
-   for(i=0; i < totalRules; i++)
-   {
-      tr = fr;
-      fr = fr->next;
-      delete(tr);
-   }
+   ruleList.clearList();
 
    /* Delete All Variables */
-   fuzzyVariable* fv = variables;
-   fuzzyVariable* tv;
-   for(i=0; i < totalVariables; i++)
-   {
-      tv = fv;
-      fv = fv->next;
-      delete(tv);
-   }
+   varList.clearList();
 
    /* Delete All Functions */
-   fuzzyFunction* ff = functions;
-   fuzzyFunction* tf;
-   for(i=0; i < totalFunctions; i++)
-   {
-      tf = ff;
-      ff = ff->next;
-      delete(tf);
-   }
-   
+   funcList.clearList();
 }
 
 /***************************************************************
@@ -85,20 +50,8 @@ fuzzyVariable* fuzzy::addVariable(int functionType,
                                   float xa, float xb, float xc, float xd)
 {
    fuzzyVariable* fv = new fuzzyVariable(functionType, xa, xb, xc, xd);
-   if(variables)
-   {
-      fv->next = variables->next;
-      fv->previous = variables;
-      fv->previous->next = fv;
-      fv->next->previous = fv;
-   }
-   else
-   {
-      fv->next = fv;
-      fv->previous = fv;
-      variables = fv;
-   }
-   totalVariables++;
+   varList.insert(fv);
+
    return(fv);
 }
 
@@ -108,20 +61,8 @@ fuzzyVariable* fuzzy::addVariable(int functionType,
 fuzzyRule* fuzzy::addRule(int numberOfOperators)
 {
    fuzzyRule* fr = new fuzzyRule(numberOfOperators);
-   if(rules)
-   {
-      fr->next = rules->next;
-      fr->previous = rules;
-      fr->previous->next = fr;
-      fr->next->previous = fr;
-   }
-   else
-   {
-      fr->next = fr;
-      fr->previous = fr;
-      rules = fr;
-   }
-   totalRules++;
+   ruleList.insert(fr);
+
    return(fr);
 }
 
@@ -132,20 +73,8 @@ fuzzyFunction* fuzzy::addFunction(int functionType,
                                   float xa, float xb, float xc, float xd)
 {
    fuzzyFunction* ff = new fuzzyFunction(functionType, xa, xb, xc, xd);
-   if(functions)
-   {
-      ff->next = functions->next;
-      ff->previous = functions;
-      ff->previous->next = ff;
-      ff->next->previous = ff;
-   }
-   else
-   {
-      ff->next = ff;
-      ff->previous = ff;
-      functions = ff;
-   }
-   totalFunctions++;
+   funcList.insert(ff);
+   
    return(ff);
 
 }
@@ -158,19 +87,19 @@ void fuzzy::evalute()
    int i;
 
    /* Clear All Variables */
-   fuzzyVariable* fv = variables;
-   for(i=0; i < totalVariables; i++)
+   fuzzyVariable* fv = (fuzzyVariable*)varList.getFirst();
+   for(i=0; i < varList.getTotal(); i++)
    {
       fv->clearValue();
-      fv = fv->next;
+      fv = (fuzzyVariable*)fv->getNext();
    }
 
    /* Evalute all Rules */
-   fuzzyRule* fr = rules;
-   for(i=0; i < totalRules; i++)
+   fuzzyRule* fr = (fuzzyRule*)ruleList.getFirst();
+   for(i=0; i < ruleList.getTotal(); i++)
    {
       fr->evalute();
-      fr = fr->next;
+      fr = (fuzzyRule*)fr->getNext();
    }
 
 }
@@ -187,8 +116,8 @@ float fuzzy::defuzzyfication()
    float b = 0;
    
    /* Using the Centroid Method to Calculate Value */
-   fuzzyVariable* fv = variables;
-   for(i=0; i < totalVariables; i++)
+   fuzzyVariable* fv = (fuzzyVariable*)varList.getFirst();
+   for(i=0; i < varList.getTotal(); i++)
    {
       for(k=0; k<=1; k+= 0.1)
       {
@@ -196,7 +125,7 @@ float fuzzy::defuzzyfication()
          a += k*funcValue;
          b += funcValue;
       }
-      fv = fv->next;
+      fv = (fuzzyVariable*)fv->getNext();
    }
 
    return((a / b));

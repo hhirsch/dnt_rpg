@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -27,8 +27,10 @@
 #define FUZZY_FUNCTION_TRIANGULAR    3
 #define FUZZY_FUNCTION_TRAPEZOIDAL   4
 
+#include "../etc/list.h"
+
 /*! A Function in the Fuzzy Class */
-class fuzzyFunction
+class fuzzyFunction: public dntListElement
 {
    public:
       /*! Constructor
@@ -55,9 +57,6 @@ class fuzzyFunction
        * \param value -> limit value to set */
       void setLimit(float value);
 
-      fuzzyFunction* next;      /**< Next Fuzzy Rule on List */
-      fuzzyFunction* previous;  /**< Previous Fuzzy on List */
-
    private:
       int function;         /**< Membership Function of The Rule */
       float x1,             /**< First Used Coordinate */
@@ -67,6 +66,22 @@ class fuzzyFunction
       float crispValue;     /**< Actual Crisp Value */
       float upperValue;     /**< Actual Upper Value */
 };
+
+/*! List of fuzzy functions */
+class fuzzyFunctionList: public dntList
+{
+   public:
+      /*! Constructor */
+      fuzzyFunctionList();
+      /*! Destructor */
+      ~fuzzyFunctionList();
+
+   protected:
+      /*! Free the fuzzy variable
+       * \param obj -> pointer to the object to delete */
+      void freeElement(dntListElement* obj);
+};
+
 
 
 #endif
