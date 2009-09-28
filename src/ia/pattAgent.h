@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -21,19 +21,32 @@
 #ifndef _dnt_pattAgent_h
 #define _dnt_pattAgent_h
 
+#include "../etc/list.h"
+
 #include "agent.h"
 
 /*! Way Point Definition */
-class wayPoint
+class wayPoint: public dntListElement
 {
    public:
       GLfloat x,           /**< Way Point X Coordinate */
               z;           /**< Way Point Z Coordinate */
 
       GLfloat angle;       /**< Angle for the wayPoint to previous one */
+};
 
-      wayPoint* next;      /**< Next Way Point on list */
-      wayPoint* previous;  /**< Previous Way point on list */
+/*! List of way points */
+class wayPointList: public dntList
+{
+   public:
+      /*! Constructor */
+      wayPointList();
+      /*! Destructor */
+      ~wayPointList();
+   protected:
+      /*! Free wayPoint memory
+       * \param opj -> wayPoint to delete */
+       void freeElement(dntListElement* obj);
 };
 
 /*! Pattern Agent */
@@ -70,20 +83,22 @@ class pattAgent: public agent
       void drawWayPoints();
       void drawWayPointsLinear();
 
-      /*! Return the number of Way Points  */
-      int getTotalWayPoints(){return(totalWayPoints);};
+      /*! Get total wayPoints defined to the pattAgent
+       * \return -> number of wayPoints */
+      int getTotalWayPoints();
 
-      float getTotalWalked(){return(totalWalked);};
+      /*! Return the number of units current walked by the agent
+       * \return current (meters) walked by the agent */
+      float getTotalWalked();
 
-      /*! Get WayPoints List. Only for save on editor. */
-      wayPoint* getWayPoints(){return(wayPoints);};
-
-      wayPoint* getActualWayPoint(){return(actualWayPoint);};
+      /*! Get current wayPoint of the pattern agent
+       * \return pointer to the wayPoint where the pattAgent is going to. */
+      wayPoint* getActualWayPoint();
 
       pattAgent* next;              /**< Next Agent on List */
       
    protected:
-      wayPoint* wayPoints;          /**< List of Way Points */
+      wayPointList list;            /**< List of wayPoints */
       wayPoint* actualWayPoint;     /**< Current Way Point Objective */
 
       int totalWayPoints;           /**< Total WayPoints on List */

@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -31,11 +31,33 @@ using namespace std;
 /********************************************************************
  *                         Constructor                              *
  ********************************************************************/
+wayPointList::wayPointList()
+{
+}
+
+/********************************************************************
+ *                          Destructor                              *
+ ********************************************************************/
+wayPointList::~wayPointList()
+{
+   clearList();
+}
+
+/********************************************************************
+ *                         freeElement                              *
+ ********************************************************************/
+void wayPointList::freeElement(dntListElement* obj)
+{
+   wayPoint* w = (wayPoint*)obj;
+   delete(w);
+}
+
+/********************************************************************
+ *                         Constructor                              *
+ ********************************************************************/
 pattAgent::pattAgent(bool oriented):agent(oriented)
 {
-   wayPoints = NULL;
    actualWayPoint = NULL;
-   totalWayPoints = 0;
    totalWalked = 0;
    origX = 0;
    origZ = 0;
@@ -46,16 +68,31 @@ pattAgent::pattAgent(bool oriented):agent(oriented)
  ********************************************************************/
 pattAgent::~pattAgent()
 {
-   /* Delete Way Points List */
-   wayPoint* aux;
-   actualWayPoint = wayPoints;
-   int wp;
-   for(wp = 0; wp < totalWayPoints; wp++)
-   {
-      aux = actualWayPoint;
-      actualWayPoint = actualWayPoint->next;
-      delete(aux);
-   }
+   list.clearList();
+}
+
+/********************************************************************
+ *                         getTotalWayPoints                        *
+ ********************************************************************/
+int pattAgent::getTotalWayPoints()
+{
+   return(list.getTotal());
+}
+
+/********************************************************************
+ *                        getTotalWalked                            *
+ ********************************************************************/
+float pattAgent::getTotalWalked()
+{
+   return(totalWalked);
+}
+
+/********************************************************************
+ *                      getActualWayPoint                           *
+ ********************************************************************/
+wayPoint* pattAgent::getActualWayPoint()
+{
+   return(actualWayPoint);
 }
 
 /********************************************************************
@@ -87,15 +124,16 @@ bool pattAgent::defineNextPosition()
 
    if(!actualWayPoint)
    {
-      return(false); //not defined yet the way points, so stay static.
+      /* No wayPoints defined. don't move. */
+      return(false); 
    }
 
    if( (actualX == actualWayPoint->x) && (actualZ == actualWayPoint->z))
    {
-      //Arrived at the actual Way Point, so change to next!
+      /* Arrived at the actual Way Point, so change to next! */
       changeToNextWayPoint();
       
-      //calculate angle
+      /* calculate angle */
       desiredAngle = actualWayPoint->angle;
       if(doAngle())
       {
@@ -148,29 +186,27 @@ void pattAgent::addWayPoint(GLfloat x, GLfloat z)
    wayPoint* newWay = new(wayPoint);
    newWay->x = x;
    newWay->z = z;
-   if(wayPoints == NULL)
+   
+   /* insert at the list */
+   list.insertAtEnd(newWay);
+
+   /* Calculate the orientation angle */
+   if( (newWay) != (newWay->getPrevious()))
    {
-      newWay->next = newWay;
-      newWay->previous = newWay;
-      wayPoints = newWay;
-      newWay->angle = orientation;
+      /* Calculate angle between this wayPoint and the previous one  */
+      calculateAngle(newWay, (wayPoint*)newWay->getPrevious());
    }
    else
    {
-      newWay->previous = wayPoints->previous;
-      newWay->previous->next = newWay;
-      newWay->next = wayPoints;
-      wayPoints->previous = newWay;
-      calculateAngle(newWay, newWay->previous);
+      /* First wayPoint, so orientation is equal to current */
+      newWay->angle = orientation;
    }
 
-   totalWayPoints++;
-   
+   /* Set the current, if not defined */
    if(actualWayPoint == NULL)
    {
       actualWayPoint = newWay;
    }
-
 }
 
 /********************************************************************
@@ -181,27 +217,24 @@ void pattAgent::addWayPointFirst(GLfloat x, GLfloat z)
    wayPoint* newWay = new(wayPoint);
    newWay->x = x;
    newWay->z = z;
-   if(wayPoints == NULL)
+
+   /* insert at the list */
+   list.insertAtBegin(newWay);
+
+   /* Calculate the orientation angle */
+   if( (newWay) != (newWay->getNext()))
    {
-      newWay->next = newWay;
-      newWay->previous = newWay;
-      wayPoints = newWay;
-      newWay->angle = orientation;
+      /* Calculate angle between the next wayPoint and this one  */
+      calculateAngle((wayPoint*)newWay->getNext(), newWay);
    }
    else
    {
-      newWay->previous = wayPoints->previous;
-      newWay->previous->next = newWay;
-      newWay->next = wayPoints;
-      newWay->next->previous = newWay;
-      wayPoints = newWay;
-      calculateAngle(newWay->next, newWay);
+      /* First wayPoint, so orientation is equal to current */
+      newWay->angle = orientation;
    }
 
-   totalWayPoints++;
-   
+   /* Always set the current */
    actualWayPoint = newWay;
-
 }
 
 /********************************************************************
@@ -211,17 +244,19 @@ void pattAgent::removeWayPoint(wayPoint* way)
 {
    if(way)
    {
-      if(way == wayPoints)
+      /* Update the current */
+      if(way == actualWayPoint)
       {
-         wayPoints = wayPoints->next;
+         actualWayPoint = (wayPoint*)actualWayPoint->getNext();
       }
-      way->next->previous = way->previous;
-      way->previous->next = way->next;
-      delete(way);
-      totalWayPoints--;
-      if(totalWayPoints <= 0)
+
+      /* Remove from list */
+      list.remove(way);
+
+      /* Verify if has more elements */
+      if(list.getTotal() == 0)
       {
-         wayPoints = NULL;
+         actualWayPoint = NULL;
       }
    }
 }
@@ -232,17 +267,17 @@ void pattAgent::removeWayPoint(wayPoint* way)
 void pattAgent::removeLinearWayPoints()
 {
    /* note: Only can't remove the first and the last wayPoints. */
-   int total = totalWayPoints;
+   int total = list.getTotal();
    int i;
-   wayPoint* way = wayPoints;
+   wayPoint* way = (wayPoint*)list.getFirst();
    wayPoint* oth;
    for(i = 0; i<total; i++)
    {
       oth = way;
-      way = way->next;
-      if( (oth != wayPoints) && (oth != wayPoints->previous) )
+      way = (wayPoint*)way->getNext();
+      if( (oth != list.getFirst()) && (oth != list.getFirst()->getPrevious()) )
       {
-         if(oth->angle == oth->next->angle)
+         if(oth->angle == ((wayPoint*)oth->getNext())->angle)
          {
             /* Can remove the wayPoint */
             removeWayPoint(oth);
@@ -262,7 +297,7 @@ void pattAgent::changeToNextWayPoint()
    {
       return; //not defined yet the way points, so stay static.
    }
-   actualWayPoint = actualWayPoint->next;
+   actualWayPoint = (wayPoint*)actualWayPoint->getNext();
 
    if(actualWayPoint)
    {
@@ -290,18 +325,18 @@ void pattAgent::changeToNextWayPoint()
  ********************************************************************/
 void pattAgent::drawWayPoints()
 {
-   wayPoint* tmp = wayPoints;
+   wayPoint* tmp = (wayPoint*)list.getFirst();
    int aux = 0;
    if(tmp)
    {
       glDisable(GL_LIGHTING);
       glLineWidth(3);
       glBegin(GL_LINE_LOOP);
-      while(aux < totalWayPoints)
+      while(aux < list.getTotal())
       {
          glVertex3f(tmp->x, 0.1, tmp->z);
          aux++;
-         tmp = tmp->next;
+         tmp = (wayPoint*)tmp->getNext();
       }
       glEnd();
       glLineWidth(1);
@@ -309,20 +344,23 @@ void pattAgent::drawWayPoints()
    }
 }
 
+/********************************************************************
+ *                            drawWayLinear                         *
+ ********************************************************************/
 void pattAgent::drawWayPointsLinear()
 {
-   wayPoint* tmp = wayPoints;
+   wayPoint* tmp = (wayPoint*)list.getFirst();
    int aux = 0;
    if(tmp)
    {
       glDisable(GL_LIGHTING);
       glLineWidth(3);
       glBegin(GL_LINE_STRIP);
-      while(aux < totalWayPoints)
+      while(aux < list.getTotal())
       {
          glVertex3f(tmp->x, 0.1, tmp->z);
          aux++;
-         tmp = tmp->next;
+         tmp = (wayPoint*)tmp->getNext();
       }
       glEnd();
       glLineWidth(1);

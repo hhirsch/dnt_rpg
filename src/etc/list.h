@@ -73,10 +73,20 @@ class dntList
       /*! Clear all list elements */
       void clearList();
 
-      /*! Insert an element on the list
+      /*! Insert an element on the list, at the default position
        * \param obj -> object to insert
        * \return true if ok */
       bool insert(dntListElement* obj);
+
+      /*! Insert element at the list's begin 
+       * \param obj -> object to insert
+       * \return true if ok */
+      bool insertAtBegin(dntListElement* obj);
+
+      /*! Insert element at list's end 
+       * \param obj -> object to insert
+       * \return true if ok */
+      bool insertAtEnd(dntListElement* obj);
 
       /*! Remove an element from the list
        * \param obj -> element to remove

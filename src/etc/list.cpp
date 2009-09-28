@@ -131,6 +131,46 @@ bool dntList::insert(dntListElement* obj)
       return(false);
    }
 
+   if(listType == DNT_LIST_TYPE_ADD_AT_BEGIN)
+   {
+      return(insertAtBegin(obj));
+   }
+   /* Else */
+   return(insertAtEnd(obj));
+}
+
+/***********************************************************************
+ *                         insertAtBegin                               *
+ ***********************************************************************/
+bool dntList::insertAtBegin(dntListElement* obj)
+{
+   if(total == 0)
+   {
+      /* It's the only element */
+      obj->setNext(obj);
+      obj->setPrevious(obj);
+   }
+   else
+   {
+      /* Insert it before the first */
+      obj->setNext(first);
+      obj->setPrevious(first->getPrevious());
+      obj->getNext()->setPrevious(obj);
+      obj->getPrevious()->setNext(obj);
+   }
+
+   /* Set as the first */
+   first = obj;
+   total++;
+
+   return(true);
+}
+
+/***********************************************************************
+ *                               insert                                *
+ ***********************************************************************/
+bool dntList::insertAtEnd(dntListElement* obj)
+{
    if(total == 0)
    {
       /* It's the only element */
@@ -147,16 +187,11 @@ bool dntList::insert(dntListElement* obj)
       obj->getPrevious()->setNext(obj);
    }
 
-   /* Set as the first, if defined */
-   if(listType == DNT_LIST_TYPE_ADD_AT_BEGIN)
-   {
-      first = obj;
-   }
-
    total++;
 
    return(true);
 }
+
 
 /***********************************************************************
  *                        removeWithoutDelete                          *
