@@ -95,8 +95,6 @@ class pattAgent: public agent
        * \return pointer to the wayPoint where the pattAgent is going to. */
       wayPoint* getActualWayPoint();
 
-      pattAgent* next;              /**< Next Agent on List */
-      
    protected:
       wayPointList list;            /**< List of wayPoints */
       wayPoint* actualWayPoint;     /**< Current Way Point Objective */
