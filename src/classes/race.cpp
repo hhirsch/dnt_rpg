@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -26,6 +26,12 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
+
+////////////////////////////////////////////////////////////////////////
+//                                                                    //
+//                               race                                 //
+//                                                                    //
+////////////////////////////////////////////////////////////////////////
 
 /******************************************************************
  *                            Constructor                         *
@@ -132,6 +138,42 @@ void race::getAttModifiers(int mods[6], bool sum, skills* sk)
 
 }
 
+////////////////////////////////////////////////////////////////////////
+//                                                                    //
+//                            raceList                                //
+//                                                                    //
+////////////////////////////////////////////////////////////////////////
+
+/******************************************************************
+ *                            Constructor                         *
+ ******************************************************************/
+raceList::raceList()
+{
+}
+
+/******************************************************************
+ *                             Destructor                         *
+ ******************************************************************/
+raceList::~raceList()
+{
+   clearList();
+}
+
+/******************************************************************
+ *                           freeElement                          *
+ ******************************************************************/
+void raceList::freeElement(dntListElement* obj)
+{
+   race* r = (race*)obj;
+   delete(r);
+}
+
+////////////////////////////////////////////////////////////////////////
+//                                                                    //
+//                              races                                 //
+//                                                                    //
+////////////////////////////////////////////////////////////////////////
+
 /******************************************************************
  *                            Constructor                         *
  ******************************************************************/
@@ -142,8 +184,7 @@ void races::init()
    char raceFile[256], imgFile[256];
    string key="", value="";
 
-   totalRaces = 0;
-   first = NULL;
+   list = new raceList();
 
    /* Open the list */
    if(!def.load("races/races.lst"))
@@ -166,13 +207,9 @@ void races::init()
  ******************************************************************/
 void races::finish()
 {
-   int i;
-   race* aux;
-   for(i=0; i< totalRaces; i++)
+   if(list != NULL)
    {
-      aux = first;
-      first = first->next;
-      delete(aux);
+      delete(list);
    }
 }
 
@@ -292,22 +329,7 @@ void races::insertRace(string fileName,string imgFile,string idString,int idInt)
       }
    }
 
-   /* Pointers */
-   if(first == NULL)
-   {
-      first = ins;
-      ins->next = ins;
-      ins->previous = ins;
-   }
-   else
-   {
-      ins->next = first;
-      ins->previous = first->previous;
-      first->previous = ins;
-      ins->previous->next = ins;
-   }
-
-   totalRaces++;
+   list->insert(ins);
 }
 
 /******************************************************************
@@ -315,15 +337,15 @@ void races::insertRace(string fileName,string imgFile,string idString,int idInt)
  ******************************************************************/
 race* races::getRaceByInteger(int id)
 {
-   race* ret = first;
+   race* ret = (race*)list->getFirst();
    int i;
-   for(i = 0; i<totalRaces; i++)
+   for(i = 0; i < list->getTotal(); i++)
    {
       if(ret->intID == id)
       {
          return(ret);
       }
-      ret = ret->next;
+      ret = (race*)ret->getNext();
    }
 
    return(NULL);
@@ -334,15 +356,15 @@ race* races::getRaceByInteger(int id)
  ******************************************************************/
 race* races::getRaceByString(string id)
 {
-   race* ret = first;
+   race* ret = (race*)list->getFirst();
    int i;
-   for(i = 0; i<totalRaces; i++)
+   for(i = 0; i < list->getTotal(); i++)
    {
       if(ret->strID == id)
       {
          return(ret);
       }
-      ret = ret->next;
+      ret = (race*)ret->getNext();
    }
 
    return(NULL);
@@ -353,12 +375,11 @@ race* races::getRaceByString(string id)
  ******************************************************************/
 int races::getTotalRaces()
 {
-   return(totalRaces);
+   return(list->getTotal());
 }
 
 /******************************************************************
  *                          Static Members                        *
  ******************************************************************/
-int races::totalRaces = 0; 
-race* races::first = NULL;
+raceList* races::list = NULL;
 

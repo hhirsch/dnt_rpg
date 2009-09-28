@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -24,13 +24,16 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <string>
+
+#include "../etc/list.h"
+
 #include "modifier.h"
 #include "feats.h"
 #include "skills.h"
 using namespace std;
 
 /*! Single Race Definition */
-class race
+class race: public dntListElement
 {
    public:
       race();
@@ -68,9 +71,21 @@ class race
       int totalSkills;           /**< Total Race Skills */
       string* raceSkills;        /**< Race Skills */
       string* raceSkillsJustify; /**< Justify of the Skill */
-      
-      race* previous;        /**< Previous Race on list */
-      race* next;            /**< Next Race on list */
+};
+
+/**! List of races */
+class raceList: public dntList
+{
+   public:
+      /*! Constructor */
+      raceList();
+      /*! Destructor */
+      ~raceList();
+
+   protected:
+      /*! Delete race memory
+       * \param obj -> pointer to the race to delete */
+      void freeElement(dntListElement* obj);
 };
 
 /**! The List of Races Class */
@@ -96,8 +111,7 @@ class races
       int getTotalRaces();
 
    private:
-      static int totalRaces;              /**< Total Races on List */
-      static race* first;                 /**< First Race on List */
+      static raceList* list;        /**< List of races */
 
       /*! Insert an race on List
        * \param fileName -> file name of the race to insert 
