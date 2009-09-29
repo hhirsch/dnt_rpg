@@ -50,7 +50,8 @@ OBJSCLASSES = $(ENDCLASSES)classes.o $(ENDCLASSES)race.o \
               $(ENDCLASSES)itemslot.o $(ENDCLASSES)inventory.o \
               $(ENDCLASSES)barter.o $(ENDCLASSES)weapon.o \
               $(ENDCLASSES)mission.o $(ENDCLASSES)xp.o \
-              $(ENDCLASSES)pendingaction.o $(ENDCLASSES)money.o
+              $(ENDCLASSES)pendingaction.o $(ENDCLASSES)money.o \
+              $(ENDCLASSES)modeffect.o
 OBJSSOUND = $(ENDSOUND)ogg_stream.o  $(ENDSOUND)sound.o $(ENDSOUND)sndfx.o
 OBJSLANG = $(ENDLANG)translate.o
 OBJSPART = $(ENDPART)part1.o $(ENDPART)part2.o $(ENDPART)part3.o \

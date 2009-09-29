@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -47,16 +47,24 @@ featDescription::featDescription()
    actionType = ACT_TYPE_NORMAL_ACTION;
    action = ACT_ATTACK;
    range = 0;
-   totalEffects = 0;
    name = "undefined";
    idString = "unknow";
    description = "undefined";
    image = NULL;
+   effects = new modEffectList();
 
    for(i = 0; i < MAX_DEP_FEATS; i++)
    {
       depFeats[i].used = false;
    }      
+}
+
+/***************************************************************
+ *                        Destructor                           *
+ ***************************************************************/
+featDescription::~featDescription()
+{
+   delete(effects);
 }
 
 /**************************************************************************
@@ -721,22 +729,17 @@ void featsList::init(string dir, string arq)
          /* Feat Modifier Effect */
          else if(key == "effect")
          {
-            if(m_feats[aux].totalEffects < MAX_FEAT_EFFECTS)
-            {
-               sscanf(value.c_str(),"%ds %d %s %s",
-                      &m_feats[aux].effects[m_feats[aux].totalEffects].time,
-                      &m_feats[aux].effects[m_feats[aux].totalEffects].mod,
-                      &buf2[0], &buf3[0]);
-               m_feats[aux].effects[m_feats[aux].totalEffects].cause.type=buf2;
-               m_feats[aux].effects[m_feats[aux].totalEffects].cause.id=buf3;
-               
-               m_feats[aux].totalEffects++;
-            }
-            else
-            {
-               cerr << "Warning: Too much effects for feat: "
-                    << arqDescricao << endl;
-            }
+            /* Create the new modEffect */
+            modEffect* effect = new modEffect();
+
+            /* Define its values */
+            sscanf(value.c_str(),"%ds %d %s %s", 
+                  &effect->time, &effect->mod, &buf2[0], &buf3[0]);
+            effect->cause.type = buf2;
+            effect->cause.id = buf3;
+
+            /* Insert it on the list */
+            m_feats[aux].effects->insert(effect);
          }
 
          /* Dependent Feats */

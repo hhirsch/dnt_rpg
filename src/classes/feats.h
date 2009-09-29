@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -29,7 +29,9 @@ using namespace std;
 
 #include "thing.h"
 #include "modifier.h"
+#include "modeffect.h"
 #include "weapon.h"
+
 #include "../etc/message3d.h"
 #include "../engine/briefing.h"
 
@@ -64,9 +66,10 @@ class depFeat
 class featDescription
 {
    public:
-
-      /*! A construction for default values */
+      /*! Constructor */
       featDescription();
+      /*! Destructor */
+      ~featDescription();
 
       int internalListNumber;      /**< Number on List */
       int requeridedLevel;         /**< Requerided Character class level */
@@ -86,9 +89,9 @@ class featDescription
       string idString;             /**< Feat ID String */
       string description;             /**< Feat Description */
       depFeat depFeats[MAX_DEP_FEATS];/**< Feat Dependency */
-      modEffect effects[MAX_FEAT_EFFECTS]; /**< Vector of feat effects */
-      int totalEffects;               /**< Total feat effects used */
-      SDL_Surface* image;             /**< Feat Image */
+      
+      modEffectList* effects;      /**< List of effects */
+      SDL_Surface* image;          /**< Feat Image */
 };
 
 /*!

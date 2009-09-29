@@ -53,21 +53,6 @@ class modifier
       string description; /**< Modifier Description */
 };
 
-/*! modifier effect */
-class modEffect
-{
-   public:
-      int mod;             /**< The modifier value */
-      factor cause;        /**< Thing to modify */
-      Uint16 init;         /**< Time the effect begins  */
-      int time;            /**< Max Time the effect remains (0 for infinity) */
-      int periodicTime;    /**< Periodicity of the effect (with saves), 
-                                0 for non-periodic ones. */
-
-      modEffect* next;     /**< Next modEffect on list (if any) */
-      modEffect* previous; /**< Previous modEffect on list (if any) */
-};
-
 /*! Number of Points, based on ATTRIBUTES 
  * the formula is (sum SIGNAL ATTModifier)*mult */
 class points

@@ -11,9 +11,10 @@ ENDENGINE = ../engine/
 ENDFIGHT = ../fight/
 ENDIA = ../ia/
 ENDETC=../etc/
-OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)quadtexto.o $(ENDGUI)seltexto.o $(ENDGUI)tabbotao.o
-OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSystem.o $(ENDENGINE)personagens.o $(OBJSGUI)
-objetos = actions.o align.o barter.o classes.o defs.o dices.o feats.o inventory.o itemslot.o mission.o money.o object.o pendingaction.o race.o skills.o thing.o weapon.o xp.o
+
+objetos = actions.o align.o barter.o classes.o defs.o dices.o feats.o \
+          inventory.o itemslot.o mission.o modeffect.o money.o object.o \
+          pendingaction.o race.o skills.o thing.o weapon.o xp.o
 
 
 all: $(objetos)
@@ -68,6 +69,11 @@ mission.o: mission.h mission.cpp $(ENDIA)iascript.h
 	@$(CPP) $(CFLAGS) mission.cpp -o mission.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
+modeffect.o: modeffect.cpp modeffect.h
+	@printf "Making modeffect.o... "
+	@$(CC) $(CFLAGS) modeffect.cpp -o modeffect.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
 money.o: money.h money.cpp object.h thing.h
 	@printf "Making money.o... "
 	@$(CPP) $(CFLAGS) money.cpp -o money.o
@@ -107,9 +113,6 @@ xp.o: xp.h xp.cpp $(ENDENGINE)character.h
 	@printf "Making xp.o... "
 	@$(CPP) $(CFLAGS) xp.cpp -o xp.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
-
-teste: $(objetos) $(OBJSFIGHT) teste.cpp
-	g++ -g -Wall $(CLIBS) teste.cpp $(objetos) $(OBJSFIGHT) ../gui/healthBar.o ../lang/lang.o -o teste
 
 clean: 
 	@printf  "Cleaning Classes Bin Files... "
