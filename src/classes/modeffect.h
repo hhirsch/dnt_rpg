@@ -30,12 +30,41 @@
 class modEffect: public dntListElement
 {
    public:
+
+      /*! Constructor
+       * \param mod -> modifier value
+       * \param time -> time to expire (0 to not expire)
+       * \param periodicTime -> time to apply the modEffect again 
+       *                        (0 to not apply)
+       * \param factorId -> id of the target factor (see: factor)
+       * \param factorType -> type of the target factor (see: factor) */
+      modEffect(int mod, int time, int periodicTime, 
+            string factorId, string factorType);
+      /*! Constructor 
+       * \param obj -> modEffect to use as base */
+      modEffect(modEffect* obj);
+      /*! Destructor */
+      ~modEffect();
+
+      /*! Apply the modEffect to the character
+       * \param actor -> pointer to the character to apply the modEffect */
+      void apply(void* actor);
+
+      /*! Unapply the modEffect to the character
+       * \param actor -> pointer to the character to deapply the modEffect */
+      void unApply(void* actor);
+
+      friend class modEffectList;
+
+   protected:
+
       int mod;             /**< The modifier value */
       factor cause;        /**< Thing to modify */
-      Uint16 init;         /**< Time the effect begins  */
+      Uint16 init;         /**< Time the effect begins  */      
       int time;            /**< Max Time the effect remains (0 for infinity) */
       int periodicTime;    /**< Periodicity of the effect (with saves), 
                                 0 for non-periodic ones. */
+      Uint16 lastApply;    /**< Time when last applied the modEffect */
 };
 
 /*! List of modEffects */
@@ -51,6 +80,16 @@ class modEffectList: public dntList
       /*! Set the character owner of the modEffect list
        * \param actor -> pointer to the character owner of the list */
       void setOwner(void* actor);
+
+      /*! Insert a copy of the modEffect on the list 
+       * (applying it to the owner character)
+       * \param obj -> pointer to modEffect to insert a copy
+       * \return true on success */
+      bool insertCopy(modEffect* obj);
+
+      /*! Remove all expired modEffects from the list (unappling it to 
+       * the owner character) and apply all periodic modEffects when needed */
+      void doStep();
 
    protected:
       /*! Free modEffect used memory

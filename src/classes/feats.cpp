@@ -729,14 +729,14 @@ void featsList::init(string dir, string arq)
          /* Feat Modifier Effect */
          else if(key == "effect")
          {
-            /* Create the new modEffect */
-            modEffect* effect = new modEffect();
+            int time=0, mod=0, periodic=0;
 
-            /* Define its values */
+            /* Define its values TODO: get peridicity! */
             sscanf(value.c_str(),"%ds %d %s %s", 
-                  &effect->time, &effect->mod, &buf2[0], &buf3[0]);
-            effect->cause.type = buf2;
-            effect->cause.id = buf3;
+                  &time, &mod, &buf2[0], &buf3[0]);
+
+            /* Create the new modEffect */
+            modEffect* effect = new modEffect(mod, time, periodic, buf3, buf2);
 
             /* Insert it on the list */
             m_feats[aux].effects->insert(effect);

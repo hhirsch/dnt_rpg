@@ -75,6 +75,9 @@ character::character(featsList* ft)
       actualFeats.insertFeat(ft->featByNumber(FEAT_RANGED_ATTACK));
    }
 
+   /* Effects */
+   effects = new modEffectList();
+
    /* Scripts */
    generalScript = NULL;
    generalScriptFileName = "";
@@ -106,7 +109,10 @@ character::character(featsList* ft)
  *********************************************************************/
 character::~character()
 {
-   delete(lifeBar);
+   if(lifeBar)
+   {
+      delete(lifeBar);
+   }
    if(conv != NULL)
    {
       conversation* cs = (conversation*)conv;
@@ -127,6 +133,10 @@ character::~character()
       iaScript* isc = (iaScript*)generalScript;
       delete(isc);
       generalScript = NULL;
+   }
+   if(effects)
+   {
+      delete(effects);
    }
 }
 

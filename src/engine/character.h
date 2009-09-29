@@ -223,8 +223,7 @@ class character: public aniModel, public dntListElement
       GLuint portraitTexture;     /**< The Portrait Texture */
       string inventoryFile;       /**< The inventory file name */
 
-      modEffect effects;          /**< Current character effects */
-      int totalEffects;           /**< Total Effects */
+      modEffectList* effects;     /**< Current character effects */
       
       void* generalScript;         /**< Pointer to the general iaScript */
       string generalScriptFileName;/**< The General Script Filename */
