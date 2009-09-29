@@ -126,6 +126,30 @@ void modEffectList::setOwner(void* actor)
 }
 
 /***********************************************************************
+ *                                insert                               *
+ ***********************************************************************/
+bool modEffectList::insert(modEffect* obj)
+{
+   if(obj)
+   {
+      /* Insert it on list */
+      dntList::insert(obj);
+      
+      /* Set its initial timer to now */
+      obj->init = SDL_GetTicks();
+
+      /* Apply the effect, if owner is defined */
+      if(owner != NULL)
+      {
+         obj->apply(owner);
+      }
+      return(true);
+   }
+
+   return(false);
+}
+
+/***********************************************************************
  *                              insertCopy                             *
  ***********************************************************************/
 bool modEffectList::insertCopy(modEffect* obj)
@@ -137,19 +161,8 @@ bool modEffectList::insertCopy(modEffect* obj)
       /* Create the copy */
       eff = new modEffect(obj);
       
-      /* Set its initial timer to now */
-      eff->init = SDL_GetTicks();
-
       /* Insert on list */
-      insert(eff);
-
-      /* Apply the effect, if owner is defined */
-      if(owner != NULL)
-      {
-         eff->apply(owner);
-      }
-
-      return(true);
+      return(insert(eff));
    }
 
    return(false);

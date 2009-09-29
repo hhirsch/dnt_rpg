@@ -81,6 +81,11 @@ class modEffectList: public dntList
        * \param actor -> pointer to the character owner of the list */
       void setOwner(void* actor);
 
+      /*! Insert the modEffect to the list
+       * \param obj -> modEffect to insert
+       * \return true on success */
+      bool insert(modEffect* obj);
+
       /*! Insert a copy of the modEffect on the list 
        * (applying it to the owner character)
        * \param obj -> pointer to modEffect to insert a copy
