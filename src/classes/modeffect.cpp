@@ -75,7 +75,8 @@ modEffect::~modEffect()
  ***********************************************************************/
 void modEffect::apply(void* actor)
 {
-   /* TODO */
+   /* Apply */
+   doApply(actor, mod);
 }
 
 /***********************************************************************
@@ -83,7 +84,39 @@ void modEffect::apply(void* actor)
  ***********************************************************************/
 void modEffect::unApply(void* actor)
 {
-   /* TODO */
+   /* Apply with inverse value */
+   doApply(actor, -mod);
+}
+
+/***********************************************************************
+ *                               doApply                               *
+ ***********************************************************************/
+void modEffect::doApply(void* actor, int value)
+{
+   character* c = (character*)actor;
+   skill* s = NULL;
+
+   if(c != NULL)
+   {
+      /* Define the type */
+      if( (cause.type == MOD_TYPE_ATT) || (cause.type == MOD_TYPE_SKILL) )
+      {
+         s = c->sk.getSkillByString(cause.id);
+         if(s)
+         {
+            s->points += value;
+         }
+         else
+         {
+            cerr << "Unknow Skill: " << cause.id << endl;
+         }
+      }
+      else
+      {
+         /* TODO */
+         cerr << "TODO: unknow type: " << cause.type << endl;
+      }
+   }
 }
 
 //////////////////////////////////////////////////////////////////////////

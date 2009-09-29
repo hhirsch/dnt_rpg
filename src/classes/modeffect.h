@@ -57,6 +57,10 @@ class modEffect: public dntListElement
       friend class modEffectList;
 
    protected:
+      /*! Do the apply on actor, with predefined value
+       * \param actor -> character to apply the modEffect to
+       * \param value -> value to use as modifier (instead of current mod) */
+      void doApply(void* actor, int value);
 
       int mod;             /**< The modifier value */
       factor cause;        /**< Thing to modify */
