@@ -68,6 +68,13 @@ editor::editor()
    models.init();
    wTypes.init();
 
+   aligns al;
+   al.init();
+   classes cl;
+   cl.init();
+   races rc;
+   rc.init();
+
    terrainEditor = NULL;
    portalEditor = NULL;
    wallEditor = NULL;
@@ -110,6 +117,12 @@ editor::~editor()
    }
    skillsDefinitions skillList;
    skillList.finish();
+   aligns al;
+   al.finish();
+   classes cl;
+   cl.finish();
+   races rc;
+   rc.finish();
    delete(gui);
    models.finish();
    wTypes.finish();
