@@ -79,6 +79,8 @@ void pendingAction::init(string strLine, int type, character* act, thing* tgt,
    value = v;
    initedTime = SDL_GetTicks();
    missionAction = false;
+   done = false;
+   toggle = false;
 }
 
 /************************************************************
@@ -103,6 +105,10 @@ void pendingAction::setAsEnded(bool result)
 {
    done = true;
    returnValue = result;
+
+#ifdef DNT_DEBUG_PENDING_ACTION
+   cerr << "Action: set as ended with result: " << result << endl;
+#endif
 }
 
 /************************************************************
@@ -159,6 +165,9 @@ bool pendingAction::getToggle()
  ************************************************************/
 void pendingAction::setToggle(bool b)
 {
+#ifdef DNT_DEBUG_PENDING_ACTION
+   cerr << "setToggle: " << b << endl;
+#endif
    toggle = b;
 }
 
@@ -456,14 +465,24 @@ void pendingActionController::treatActions(Map* actualMap, bool fightMode)
    Uint32 curTime = SDL_GetTicks();
    dialogWindow dlgWindow;
 
+#ifdef DNT_DEBUG_PENDING_ACTION
+   cerr << "treatActions: total = " << getTotal() << endl;
+#endif
+
    for(i = 0; i < getTotal(); i++)
    {
       if(!act->isRunning())
       {
-         //do nothing.
+         /* do nothing. */ 
+#ifdef DNT_DEBUG_PENDING_ACTION
+         cerr << "Warning: Actions isn't running!" << endl;
+#endif
       }
       else if(act->getType() == ACT_WAIT)
       {
+#ifdef DNT_DEBUG_PENDING_ACTION
+         cerr << "Pending Actions: ACT_WAIT" << endl;
+#endif
          /* Verify if the wait period ended */
          if(curTime - act->initedTime >= (Uint32)act->value)
          {
@@ -472,9 +491,15 @@ void pendingActionController::treatActions(Map* actualMap, bool fightMode)
       }
       else if(act->getType() == ACT_MOVE)
       {
+#ifdef DNT_DEBUG_PENDING_ACTION
+         cerr << "Pending Action: ACT_MOVE" << endl;
+#endif
          if(act->getTargetThing() != NULL)
          {
             /* TODO Verify if the target moves */
+#ifdef DNT_DEBUG_PENDING_ACTION
+            cerr << "Move to a target!" << endl;
+#endif
          }
 
          character* actor = act->getActor();
@@ -482,13 +507,22 @@ void pendingActionController::treatActions(Map* actualMap, bool fightMode)
              (!dlgWindow.isOpened((conversation*)actor->getConversation())))
          {
             int state = actor->pathFind.getState();
+#ifdef DNT_DEBUG_PENDING_ACTION
+            cerr << "pathFind state: " << state << endl;
+#endif
             if(state == ASTAR_STATE_FOUND)
             {
+#ifdef DNT_DEBUG_PENDING_ACTION
+               cerr << "ASTAR_FOUND!" << endl;
+#endif
                actor->setState(STATE_WALK);
                act->setToggle(true);
             }
             else if(state == ASTAR_STATE_NOT_FOUND)
             {
+#ifdef DNT_DEBUG_PENDING_ACTION
+               cerr << "ASTAR_NOT_FOUND!" << endl;
+#endif
                /* The move ended, since not found a path */
                act->setAsEnded(false);
                actor->setState(STATE_IDLE);
@@ -497,17 +531,26 @@ void pendingActionController::treatActions(Map* actualMap, bool fightMode)
             /* If the toggle is seted, the path was found */
             if(act->getToggle())
             {
+#ifdef DNT_DEBUG_PENDING_ACTION
+               cerr << "Toggle: true!" << endl;
+#endif
                if(!actor->pathFind.getNewPosition(actor->xPosition,
                                                   actor->zPosition,
                                                   actor->orientation,
                                                   fightMode))
-               {  
+               {
+#ifdef DNT_DEBUG_PENDING_ACTION
+                  cerr << "No new position. Move ended!" << endl;
+#endif
                   /* The move ended */
                   act->setAsEnded(true);
                   actor->setState(STATE_IDLE);
                }
                else
                {
+#ifdef DNT_DEBUG_PENDING_ACTION
+                  cerr << "New position got." << endl;
+#endif
                   /* Define New Occuped Square */
                   int posX =(int)floor(actor->xPosition / 
                                        actualMap->squareSize());
@@ -523,11 +566,17 @@ void pendingActionController::treatActions(Map* actualMap, bool fightMode)
          }
          else if(!actor->isAlive())
          {
+#ifdef DNT_DEBUG_PENDING_ACTION
+            cerr << "actor is Dead!" << endl;
+#endif
             /* Dead Characters can't walk. */
             act->setAsEnded(false);
          }
          else
          {
+#ifdef DNT_DEBUG_PENDING_ACTION
+            cerr << "Talk is opened!" << endl;
+#endif
             /* Talk window is opened, so Idle. */
             actor->setState(STATE_IDLE);
          }
