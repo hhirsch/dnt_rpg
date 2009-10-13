@@ -996,24 +996,6 @@ character* characterList::insertCharacter(string file, featsList* ft,
          novo->inventoryFile = value;
       }
 
-      //TODO
-      /*else if(key == "lifeDice")
-      {
-         sscanf(value.c_str(), "d%d", &novo->lifeDice);
-      }
-      else if(key == "race")
-      {
-         novo->race = numberConstant(value);
-      }
-      else if(key == "class")
-      {
-         novo->cclass = numberConstant(value);
-      }
-      else if(key == "tendency")
-      {
-         novo->tendency = numberConstant(value);
-      }*/
-
       /* Psycho State */
       else if(key == "psychoState")
       {
