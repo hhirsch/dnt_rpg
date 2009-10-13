@@ -64,10 +64,68 @@ modEffect::modEffect(int mod, int time, int periodicTime,
 }
 
 /***********************************************************************
+ *                             Constructor                             *
+ ***********************************************************************/
+modEffect::modEffect(string saveTxt)
+{
+   fromSaveText(saveTxt);
+}
+
+/***********************************************************************
  *                              Destructor                             *
  ***********************************************************************/
 modEffect::~modEffect()
 {
+}
+
+/***********************************************************************
+ *                             toSaveText                              *
+ ***********************************************************************/
+string modEffect::toSaveText()
+{
+   char buf[512];
+
+   sprintf(buf, "%d,%hu,%hu,%d,%d,%s,%s", 
+         mod, init, lastApply, time, periodicTime, 
+         cause.id.c_str(), cause.type.c_str());
+   return(buf);
+}
+
+/***********************************************************************
+ *                            fromSaveText                             *
+ ***********************************************************************/
+void modEffect::fromSaveText(string txt)
+{
+   char i[64], t[64];
+   if(sscanf(txt.c_str(), "%d,%hu,%hu,%d,%d,%s,%s", 
+         &mod, &init, &lastApply, &time, &periodicTime, 
+         i, t) != 7)
+   {
+      cerr << "modEffect: invalid text to load from: '" 
+         << txt << "' !" << endl;
+   }
+}
+
+/***********************************************************************
+ *                          toReadableText                             *
+ ***********************************************************************/
+string modEffect::toReadableText(void* actor)
+{
+   char buf[128];
+
+   character* c = (character*)actor;
+   skill* s;
+
+   s = c->sk.getSkillByString(cause.id);
+
+   if(s)
+   {
+      sprintf(buf, "%s: %d", s->definition->name.c_str(), mod);
+      return(buf);
+   }
+
+
+   return(gettext("Invalid Modifier!"));
 }
 
 /***********************************************************************

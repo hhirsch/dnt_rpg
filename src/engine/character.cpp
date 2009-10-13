@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -805,6 +805,14 @@ bool character::save(string saveFile)
       }
    }
 
+   /* And all active modifiers */
+   modEffect* meff = (modEffect*)effects->getFirst();
+   for(i = 0; i < effects->getTotal(); i++)
+   {
+      file << "modEffect = " << meff->toSaveText() << endl;
+      meff = (modEffect*)meff->getNext();
+   }
+
    /* TODO, save all feats! */
 
    /* Close the file and return */
@@ -1020,6 +1028,12 @@ character* characterList::insertCharacter(string file, featsList* ft,
       else if(key == "age")
       {
          sscanf(value.c_str(), "%d", &novo->age);
+      }
+      /* ModifierEffects */
+      else if(key == "modEffect")
+      {
+         modEffect* m = new modEffect(value);
+         novo->effects->insert(m);
       }
 
       /* Some Skill or Attribute definition */

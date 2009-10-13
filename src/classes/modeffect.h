@@ -43,6 +43,9 @@ class modEffect: public dntListElement
       /*! Constructor 
        * \param obj -> modEffect to use as base */
       modEffect(modEffect* obj);
+      /*! Constructor
+       * \param saveTxt -> saveText with modEffect info to load from */
+      modEffect(string saveTxt);
       /*! Destructor */
       ~modEffect();
 
@@ -53,6 +56,19 @@ class modEffect: public dntListElement
       /*! Unapply the modEffect to the character
        * \param actor -> pointer to the character to deapply the modEffect */
       void unApply(void* actor);
+
+      /*! Get a string describing the modEffect
+       * \param actor -> pointer to the character "owner" of the effect
+       * \return -> representative string of the modEffect */
+      string toReadableText(void* actor);
+
+      /*! Get a string to save the modEffect
+       * \return -> string with modEffect Info */
+      string toSaveText();
+
+      /*! Load the modEffect from the save string
+       * \param txt -> saveString with modEffect info */
+      void fromSaveText(string txt);
 
       friend class modEffectList;
 
