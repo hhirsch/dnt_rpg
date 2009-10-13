@@ -120,7 +120,14 @@ string modEffect::toReadableText(void* actor)
 
    if(s)
    {
-      sprintf(buf, "%s: %d", s->definition->name.c_str(), mod);
+      if(mod <= 0)
+      {
+         sprintf(buf, "%s: %d", s->definition->name.c_str(), mod);
+      }
+      else
+      {
+         sprintf(buf, "%s: +%d", s->definition->name.c_str(), mod);
+      }
       return(buf);
    }
 
