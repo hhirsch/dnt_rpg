@@ -18,6 +18,7 @@ Working on:
  - Capacity of using talents;
  - Implement 5-15% of the talents defined on DNT Book;
  - Money;
+ - Added modifier effects (actions): drink
 
 Pending:
  - Define Counter Skills;
