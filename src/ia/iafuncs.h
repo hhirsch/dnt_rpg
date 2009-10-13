@@ -218,6 +218,10 @@ using namespace std;
 /*! bool isAllDead(string mapFile) */
 #define IA_CHARACTER_IS_ALL_DEAD "isAllDead"
 
+/*! void addEffect(character c, int mod, int time, int periodicTime,
+ *                 string factorId, string factorType) */
+#define IA_CHARACTER_ADD_EFFECT "addEffect"
+
 /*! int getPsycho(character c)  */
 #define IA_CHARACTER_GET_PSYCHO "getPsycho"
 /*! void setPsycho(character c, int psychoState)  */

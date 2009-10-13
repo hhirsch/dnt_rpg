@@ -18,7 +18,7 @@ script(character target, int difficulty, int drunkLevel)
       else
          # Non-philosophy, calculate the effect
          periodicTime = 0
-         modValue = rollDice(drunkLevel) + 2
+         modValue = (-1)*(rollDice(drunkLevel) + 2)
          time = (rollDice(drunkLevel)+2) * 200
 
          # and add it!

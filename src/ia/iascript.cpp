@@ -734,6 +734,135 @@ iaVariable* iaScript::getParameter(string& token, string strLine,
 }
 
 /***********************************************************************
+ *                          getParameteri                              *
+ ***********************************************************************/
+int iaScript::getParameteri(string& token, string strLine, unsigned int& pos)
+{
+   iaVariable* iv = NULL;
+   int val = 0;
+
+   /* Try to get the parameter */
+   iv = getParameter(token, strLine, IA_TYPE_INT, pos);
+   if(iv)
+   {
+      /* Copy the value */
+      val = (*(int*)iv->value);
+
+      /* Delete temporary variable (if is temporary) */
+      if(isFunction(token))
+      {
+         delete(iv);
+      }
+   }
+
+   return(val);
+}
+
+/***********************************************************************
+ *                          getParameterf                              *
+ ***********************************************************************/
+float iaScript::getParameterf(string& token, string strLine, unsigned int& pos)
+{
+   iaVariable* iv = NULL;
+   float val = 0.0f;
+
+   /* Try to get the parameter */
+   iv = getParameter(token, strLine, IA_TYPE_FLOAT, pos);
+   if(iv)
+   {
+      /* Copy the value */
+      if(iv->type == IA_TYPE_FLOAT)
+      {
+         val = *(float*)iv->value;
+      }
+      else
+      {
+         val = *(int*)iv->value;
+      }
+
+      /* Delete temporary variable (if is temporary) */
+      if(isFunction(token))
+      {
+         delete(iv);
+      }
+   }
+
+   return(val);
+}
+
+/***********************************************************************
+ *                          getParameters                              *
+ ***********************************************************************/
+string iaScript::getParameters(string& token, string strLine, unsigned int& pos)
+{
+   iaVariable* iv = NULL;
+   string st = "";
+
+   /* Try to get the parameter */
+   iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
+   if(iv)
+   {
+      /* Copy the string to return */
+      st = *(string*)iv->value;
+
+      /* Delete the temporary variable, if any */
+      if(isFunction(token))
+      {
+         delete(iv);
+      }
+   }
+
+   /* Return the string got */
+   return(st);
+}
+
+/***********************************************************************
+ *                          getParameterc                              *
+ ***********************************************************************/
+character* iaScript::getParameterc(string& token, string strLine, 
+      unsigned int& pos)
+{
+   iaVariable* iv = NULL;
+   character* dude = NULL;
+
+   /* Get character */
+   iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
+   if(iv != NULL)
+   {
+      dude = (character*)iv->value;
+      if(isFunction(token))
+      {
+         delete(iv);
+      }
+   }
+
+   return(dude);
+}
+
+/***********************************************************************
+ *                          getParametero                              *
+ ***********************************************************************/
+object* iaScript::getParametero(string& token, string strLine, 
+      unsigned int& pos)
+{
+   iaVariable* iv = NULL;
+   object* obj = NULL;
+
+   /* Get character */
+   iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
+   if(iv != NULL)
+   {
+      obj = (object*)iv->value;
+      if(isFunction(token))
+      {
+         delete(iv);
+      }
+   }
+
+   return(obj);
+}
+
+/***********************************************************************
  *                           assignValue                               *
  ***********************************************************************/
 void iaScript::assignValue(iaVariable* var, void* value, string type)
@@ -778,7 +907,6 @@ void iaScript::callFunction(iaVariable* var, string strLine,
                             string functionName, unsigned int& pos)
 {
    string token = "";
-   iaVariable* iv = NULL;
    engine* eng = (engine*)actualEngine;
 
    string varName = "";
@@ -791,17 +919,10 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    /* Syntax: void print(string message)  */
    if(functionName == IA_DEBUG_PRINT)
    {
-      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
-      if(iv)
-      {
-         string st = *(string*)iv->value;
-         /* Print the message */
-         cout << st << endl;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      string st = getParameters(token, strLine, pos);
+      
+      /* Print the message */
+      cout << st << endl;
    }
 
    ////////////////////////////////////////////////////
@@ -812,18 +933,12 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    else if(functionName == IA_ROLL_DICE)
    {
       dice dX;
+      int diceFaces;
       int res = 0;
 
       /* Get the dice faces */
-      iv = getParameter(token, strLine, IA_TYPE_INT, pos);
-      if(iv)
-      {
-         dX.setType(*(int*)iv->value);
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      diceFaces = getParameteri(token, strLine, pos);
+      dX.setType(diceFaces);
 
       /* And Roll the dice */
       res = dX.roll();
@@ -839,35 +954,13 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       bool res = false;
 
       /* Get the character */
-      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
-      if(iv)
-      {
-         actor = (character*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      actor = getParameterc(token, strLine, pos);
+      
       /* Get the skill to check */
-      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
-      if(iv)
-      {
-         sk = *(string*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      sk = getParameters(token, strLine, pos);
+      
       /* Get the roll difficulty */
-      iv = getParameter(token, strLine, IA_TYPE_INT, pos);
-      if(iv)
-      {
-         difficulty = *(int*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      difficulty = getParameteri(token, strLine, pos);
 
       /* Finally, let's try the check */
       if(actor != NULL)
@@ -912,51 +1005,13 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       GLfloat Z = 0;
 
       /* Get the character */
-      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
-      if(iv != NULL)
-      {
-         dude = (character*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      dude = getParameterc(token, strLine, pos);
 
       /* Get the X */
-      iv = getParameter(token, strLine, IA_TYPE_FLOAT, pos);
-      if(iv != NULL)
-      {
-         if(iv->type == IA_TYPE_FLOAT)
-         {
-            X = *(float*)iv->value;
-         }
-         else
-         {
-            X = *(int*)iv->value;
-         }
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      X = getParameterf(token, strLine, pos);
 
       /* Get the Z */
-      iv = getParameter(token, strLine, IA_TYPE_FLOAT, pos);
-      if(iv != NULL)
-      {
-         if(iv->type == IA_TYPE_FLOAT)
-         {
-            Z = *(float*)iv->value;
-         }
-         else
-         {
-            Z = *(int*)iv->value;
-         }
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      Z = getParameterf(token, strLine, pos);
 
       if(dude)
       {
@@ -966,7 +1021,6 @@ void iaScript::callFunction(iaVariable* var, string strLine,
                                                (type == IASCRIPT_TYPE_MISSION));
       }
    }
-
 
    /* Move to Character */
    else if(functionName == IA_MOVE_TO_CHARACTER)
@@ -979,27 +1033,12 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       character* tgt = NULL;
 
       /* Get the character */
-      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
-      if(iv != NULL)
-      {
-         dude = (character*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      dude = getParameterc(token, strLine, pos);
 
       /* Get the Target Character */
-      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
-      if(iv != NULL)
-      {
-         tgt = (character*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      tgt = getParameterc(token, strLine, pos);
 
+      /* Do it */
       if( (dude) && (tgt) )
       {
          dude->pathFind.defineMap(actualMap);
@@ -1021,27 +1060,12 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       object* obj = NULL;
 
       /* Get the character */
-      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
-      if(iv != NULL)
-      {
-         dude = (character*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      dude = getParameterc(token, strLine, pos);
 
       /* Get the Object */
-      iv = getParameter(token, strLine, IA_TYPE_OBJECT, pos);
-      if(iv != NULL)
-      {
-         obj = (object*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      obj = getParametero(token, strLine, pos);
 
+      /* Do the move */
       if( (dude) && (obj) )
       {
          dude->pathFind.defineMap(actualMap);
@@ -1056,23 +1080,15 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    if(functionName == IA_SET_IDLE)
    {
       /* Syntax void setIdle(character char) */
-      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
-      if(iv != NULL)
+      character* c = getParameterc(token, strLine, pos);
+      if(c != NULL)
       {
-         character* c = (character*)iv->value;
-         if(c != NULL)
-         {
-            c->setState(STATE_IDLE);
-         }
-         else
-         {
-            cerr << "Error: Tried to access a NULL character at line " 
-                 << actualLine << " of the script: " << fileName << endl;
-         }
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
+         c->setState(STATE_IDLE);
+      }
+      else
+      {
+         cerr << "Error: Tried to access a NULL character at line " 
+            << actualLine << " of the script: " << fileName << endl;
       }
    }
 
@@ -1086,20 +1102,10 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       varName = symbols->addTempSymbol(IA_TYPE_BOOL);
       string line = changeFrom(strLine, functionName, 1, varName);
 
-      int seconds = 0;
-      iv = getParameter(token, strLine, IA_TYPE_INT, pos);
-      if(iv != NULL)
-      {
-         seconds = *(int*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-         /* Set the pending action (note: time is in mseconds) */
-         pendAction = eng->actionControl->addAction(line, ACT_WAIT, 
-                                                    seconds*1000,
-                                               (type == IASCRIPT_TYPE_MISSION));
-      }
+      int seconds = getParameteri(token, strLine, pos);
+      /* Set the pending action (note: time is in mseconds) */
+      pendAction = eng->actionControl->addAction(line, ACT_WAIT, seconds*1000,
+            (type == IASCRIPT_TYPE_MISSION));
    }
 
 
@@ -1111,45 +1117,34 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    else if(functionName == IA_MISSION_ADD)
    {
       /*! void missionAdd(string missionFile) */
-      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
-      if(iv)
+      missionsController missions;
+      string st = getParameters(token, strLine, pos);
+         
+      /* Add the mission to the engine */
+      if(!st.empty())
       {
-         string st = *(string*)iv->value;
-         /* Add the mission to the engine */
-         missionsController missions;
          missions.addNewMission(st);
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
       }
    }
 
    /* Mission Abort */
    else if(functionName == IA_MISSION_ABORT)
    {
+      missionsController missions;
+
       /*! void missionAbort(string missionFile) */
-      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
-      if(iv)
+      string st = getParameters(token, strLine, pos);
+      /* Search for the mission to the engine */
+      mission* m = missions.getCurrentMission(st);
+      if(m)
       {
-         string st = *(string*)iv->value;
-         /* Search for the mission to the engine */
-         missionsController missions;
-         mission* m = missions.getCurrentMission(st);
-         if(m)
-         {
-            /*! Do the Abort */
-            missions.completeMission(m, -1);
-         }
-         else
-         {
-            cerr << "Error: No current mission " << st 
-                 << " at " << strLine << " on script: " << fileName << endl;
-         }
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
+         /*! Do the Abort */
+         missions.completeMission(m, -1);
+      }
+      else
+      {
+         cerr << "Error: No current mission '" << st 
+            << "' at " << strLine << " on script: " << fileName << endl;
       }
    }
 
@@ -1158,40 +1153,25 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    else if(functionName == IA_MISSION_COMPLETE)
    {
       /*! void missionComplete(string missionFile, int ctype) */
-      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
-      if(iv)
+      string st = getParameters(token, strLine, pos);
+      /* Add the mission to the engine */
+      missionsController missions;
+      mission* m = missions.getCurrentMission(st);
+      if(m)
       {
-         string st = *(string*)iv->value;
-         /* Add the mission to the engine */
-         missionsController missions;
-         mission* m = missions.getCurrentMission(st);
-         if(m)
-         {
-            int cType = 1;
-            /* Get the cType */
-            string nt = "";
-            iaVariable* iav = getParameter(nt, strLine, IA_TYPE_INT, pos);
-            if(iav)
-            {
-               cType = *(int*)iav->value;
-               if(isFunction(nt))
-               {
-                  delete(iav);
-               }
-            }
-            
-            /*! Do the Completion */
-            missions.completeMission(m, cType);
-         }
-         else
-         {
-            cerr << "Error: No current mission " << st 
-                 << " at " << strLine << " on script: " << fileName << endl;
-         }
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
+         int cType;
+
+         /* Get the cType */
+         string nt = "";
+         cType = getParameteri(nt, strLine, pos);
+
+         /*! Do the Completion */
+         missions.completeMission(m, cType);
+      }
+      else
+      {
+         cerr << "Error: No current mission '" << st 
+            << "' at " << strLine << " on script: " << fileName << endl;
       }
    }
 
@@ -1200,22 +1180,15 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    else if(functionName == IA_MISSION_IS_ACTIVE)
    {
       /*! bool missionIsActive(string missionFile) */
-      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
-      if(iv)
-      {
-         string st = *(string*)iv->value;
-         /* Add the mission to the engine */
-         missionsController missions;
-         mission* m = missions.getCurrentMission(st);
-         bool bl = (m != NULL);
+      string st = getParameters(token, strLine, pos);
 
-         assignValue(var, (void*)&bl, IA_TYPE_BOOL);
+      /* Add the mission to the engine */
+      missionsController missions;
+      mission* m = missions.getCurrentMission(st);
+      bool bl = (m != NULL);
 
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      assignValue(var, (void*)&bl, IA_TYPE_BOOL);
+
    }
 
 
@@ -1225,44 +1198,21 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       mission* m = NULL;
       int tmpNumber = 0;
       int newValue = 0;
+      missionsController missions;
       string missionFile = "";
+
       /*! void missionSetTemp(string missionfile, int tmpNumber, int value) */
 
       /* Get mission */
-      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
-      if(iv)
-      {
-         missionFile = *(string*)iv->value;
-         /* get the mission */
-         missionsController missions;
-         m = missions.getCurrentMission(missionFile);
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      missionFile = getParameters(token, strLine, pos);
+      /* get the mission */
+      m = missions.getCurrentMission(missionFile);
       
       /* get temp number */
-      iv = getParameter(token, strLine, IA_TYPE_INT, pos);
-      if(iv)
-      {
-         tmpNumber = *(int*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      tmpNumber = getParameteri(token, strLine, pos);
 
       /* get value */
-      iv = getParameter(token, strLine, IA_TYPE_INT, pos);
-      if(iv)
-      {
-         newValue = *(int*)iv->value;
-         if(isFunction(token))
-         {
-           delete(iv);
-         }
-      }
+      newValue = getParameteri(token, strLine, pos);
 
       /* Run the function */
       if(m)
@@ -1282,32 +1232,16 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       mission* m = NULL;
       int tmpNumber = 0;
       string missionFile = "";
+      missionsController missions;
+
       /* int missionGetTemp(string missionFile, int tmpNumber) */
 
       /* Get mission */
-      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
-      if(iv)
-      {
-         missionFile = *(string*)iv->value;
-         /* get the mission */
-         missionsController missions;
-         m = missions.getCurrentMission(missionFile);
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      missionFile = getParameters(token, strLine, pos);
+      m = missions.getCurrentMission(missionFile);
 
       /* get temp number */
-      iv = getParameter(token, strLine, IA_TYPE_INT, pos);
-      if(iv)
-      {
-         tmpNumber = *(int*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      tmpNumber = getParameteri(token, strLine, pos);
 
       /* Run the function */
       if(m)
@@ -1329,32 +1263,15 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       mission* m = NULL;
       int xpValue = 0;
       string missionFile = "";
+      missionsController missions;
       /* void missionSetXp(string missionFile, int xpValue) */
 
       /* Get mission */
-      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
-      if(iv)
-      {
-         missionFile = *(string*)iv->value;
-         /* get the mission */
-         missionsController missions;
-         m = missions.getCurrentMission(missionFile);
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      missionFile = getParameters(token, strLine, pos);
+      m = missions.getCurrentMission(missionFile);
 
       /* get xp value */
-      iv = getParameter(token, strLine, IA_TYPE_INT, pos);
-      if(iv)
-      {
-         xpValue = *(int*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      xpValue = getParameteri(token, strLine, pos);
 
       /* Run the function */
       if(m)
@@ -1382,25 +1299,17 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       feat* ft = NULL;
 
       /* Get feat */
-      iv = getParameter(token, strLine, IA_TYPE_INT, pos);
-      if(iv)
+      featID = getParameteri(token, strLine, pos);
+      if(characterOwner)
       {
-         featID = *(int*)iv->value;
-         if(characterOwner)
-         {
-            /* Get really the feat */
-            ft = characterOwner->actualFeats.featByNumber(featID);
-         }
-         else
-         {
-            cerr << "Error: No character owner defined for function: " << 
-                    functionName << " at " << strLine << " on Script " << 
-                    fileName << endl;
-         }
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
+         /* Get really the feat */
+         ft = characterOwner->actualFeats.featByNumber(featID);
+      }
+      else
+      {
+         cerr << "Error: No character owner defined for function: " << 
+            functionName << " at " << strLine << " on Script " << 
+            fileName << endl;
       }
 
       if(ft)
@@ -1440,15 +1349,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          int ft = -1;
 
          /* Get character */
-         iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
-         if(iv != NULL)
-         {
-            dude = (character*)iv->value;
-            if(isFunction(token))
-            {
-               delete(iv);
-            }
-         }
+         dude = getParameterc(token, strLine, pos);
 
          if(dude != NULL)
          {
@@ -1498,26 +1399,10 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       int featId = -1;
 
       /* Get feat */
-      iv = getParameter(token, strLine, IA_TYPE_INT, pos);
-      if(iv != NULL)
-      {
-         featId = (*(int*)iv->value);
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      featId = getParameteri(token, strLine, pos);
 
       /* Get character */
-      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
-      if(iv != NULL)
-      {
-         dude = (character*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      dude = getParameterc(token, strLine, pos);
 
       /* call the function */
       if(dude != NULL)
@@ -1569,31 +1454,15 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       string tmpName = "";
 
       /* Get Character */
-      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
-      if(iv != NULL)
+      c = getParameterc(token, strLine, pos);
+      if(c == NULL)
       {
-         character* c = (character*)iv->value;
-         if(c == NULL)
-         {
-            cerr << "Error: Tried to access a NULL character at line " 
-                 << actualLine << " of the script: " << fileName << endl;
-         }
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
+         cerr << "Error: Tried to access a NULL character at line " 
+            << actualLine << " of the script: " << fileName << endl;
       }
 
       /* Get Name */
-      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
-      if(iv)
-      {
-         tmpName = *(string*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      tmpName = getParameters(token, strLine, pos);
 
       /* Run Function */
       if(c != NULL)
@@ -1639,18 +1508,10 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    else if(functionName == IA_MAP_TRAVEL)
    {
       /*! void mapTravel(string mapFile) */
-      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
-      if(iv)
+      string st = getParameters(token, strLine, pos);
+      if(eng)
       {
-         string st = *(string*)iv->value;
-         if(eng)
-         {
-            eng->loadMap(st);
-         }
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
+         eng->loadMap(st);
       }
    }
 
@@ -1730,15 +1591,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       character* dude = NULL;
 
       /* Get character */
-      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
-      if(iv != NULL)
-      {
-         dude = (character*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      dude = getParameterc(token, strLine, pos);
 
       if(dude != NULL)
       {
@@ -1765,48 +1618,16 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       float posX=0, posY=0, posZ=0;
 
       /* Get the name */
-      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
-      if(iv != NULL)
-      {
-         objName = *(string*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      objName = getParameters(token, strLine, pos);
 
       /* Get the X position */
-      iv = getParameter(token, strLine, IA_TYPE_FLOAT, pos);
-      if(iv != NULL)
-      {
-         posX = *(float*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      posX = getParameterf(token, strLine, pos);
 
       /* Get the Y position */
-      iv = getParameter(token, strLine, IA_TYPE_FLOAT, pos);
-      if(iv != NULL)
-      {
-         posY = *(float*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      posY = getParameterf(token, strLine, pos);
 
       /* Get the Z position */
-      iv = getParameter(token, strLine, IA_TYPE_FLOAT, pos);
-      if(iv != NULL)
-      {
-         posZ = *(float*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      posZ = getParameterf(token, strLine, pos);
 
       /* object getObject(string fileName, float posX, float posZ) */
       object* obj = NULL;
@@ -1820,15 +1641,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       object* obj = NULL;
 
       /* Get object */
-      iv = getParameter(token, strLine, IA_TYPE_OBJECT, pos);
-      if(iv != NULL)
-      {
-         obj = (object*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      obj = getParametero(token, strLine, pos);
 
       /* Set the result */
       int res = -1;
@@ -1858,15 +1671,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       string charName = "";
 
       /* Get the name */
-      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
-      if(iv != NULL)
-      {
-         charName = *(string*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      charName = getParameters(token, strLine, pos);
 
       /* character getNPCByName(string s) */
       character* dude = NULL;
@@ -1883,15 +1688,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       character* dude = NULL;
 
       /* Get character */
-      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
-      if(iv != NULL)
-      {
-         dude = (character*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      dude = getParameterc(token, strLine, pos);
 
       /* Set the result */
       bool bl = true;
@@ -1913,15 +1710,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       string s = "";
 
       /* Get string */
-      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
-      if(iv != NULL)
-      {
-         s = *(string*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      s = getParameters(token, strLine, pos);
 
       /* Set the result */
       bool bl = false;
@@ -1943,6 +1732,36 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       assignValue(var, (void*)&bl, IA_TYPE_BOOL);
    }
 
+   /* Syntax: addEffect(character c, int mod, int time, int periodicTime,
+    *                   string factorId, string factorType) */
+   else if(functionName == IA_CHARACTER_ADD_EFFECT)
+   {
+      character* dude = NULL;
+      int mod=0, time=0, periodicTime=0;
+      string factorId="", factorType="";
+      
+      /* Get character */
+      dude = getParameterc(token, strLine, pos);
+
+      /* Get Values */
+      mod = getParameteri(token, strLine, pos);
+      time = getParameteri(token, strLine, pos);
+      periodicTime = getParameteri(token, strLine, pos);
+      factorId = getParameters(token, strLine, pos);
+      factorType = getParameters(token, strLine, pos);
+
+      /* Add the effect to the character */
+      if(dude)
+      {
+         dude->addModEffect(mod, time, periodicTime, factorId, factorType);
+      }
+      else
+      {
+         cerr << "Error: Tried to access a NULL character at line " 
+            << actualLine << " of the script: " << fileName << endl;
+      }
+   }
+
    /* Syntax void function(character c, int i) */
    else if(functionName == IA_CHARACTER_SET_PSYCHO)
    {
@@ -1950,26 +1769,10 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       int psy = 0;
 
       /* Get character */
-      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
-      if(iv != NULL)
-      {
-         dude = (character*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      dude = getParameterc(token, strLine, pos);
 
       /* Get psycho */
-      iv = getParameter(token, strLine, IA_TYPE_INT, pos);
-      if(iv != NULL)
-      {
-         psy = (*(int*)iv->value);
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      psy = getParameteri(token, strLine, pos);
 
       /* Set the things */
       if(dude != NULL)
@@ -1989,39 +1792,31 @@ void iaScript::callFunction(iaVariable* var, string strLine,
             (functionName == IA_CHARACTER_GET_MAX_LIFE) ||
             (functionName == IA_CHARACTER_GET_PSYCHO) )
    {
-      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
-      if(iv != NULL)
+      character* c = getParameterc(token, strLine, pos);
+      if(c != NULL)
       {
-         character* c = (character*)iv->value;
-         if(c != NULL)
+         int i = 0;
+         /* Syntax int getActualLife(character c)  */
+         if(functionName == IA_CHARACTER_GET_ACTUAL_LIFE)
          {
-            int i = 0;
-            /* Syntax int getActualLife(character c)  */
-            if(functionName == IA_CHARACTER_GET_ACTUAL_LIFE)
-            {
-               i = c->getLifePoints();
-            }
-            /* Syntax int getMaxLife(character c)  */
-            else if(functionName == IA_CHARACTER_GET_MAX_LIFE)
-            {
-               i = c->getMaxLifePoints();
-            }
-            /* Syntax int getPsycho(character c)  */
-            else if(functionName == IA_CHARACTER_GET_PSYCHO)
-            {
-               i = c->getPsychoState();
-            }
-            assignValue(var, (void*)&i, IA_TYPE_INT);
+            i = c->getLifePoints();
          }
-         else
+         /* Syntax int getMaxLife(character c)  */
+         else if(functionName == IA_CHARACTER_GET_MAX_LIFE)
          {
-            cerr << "Error: Tried to access a NULL character at line " 
-                 << actualLine << " of the script: " << fileName << endl;
+            i = c->getMaxLifePoints();
          }
-         if(isFunction(token))
+         /* Syntax int getPsycho(character c)  */
+         else if(functionName == IA_CHARACTER_GET_PSYCHO)
          {
-            delete(iv);
+            i = c->getPsychoState();
          }
+         assignValue(var, (void*)&i, IA_TYPE_INT);
+      }
+      else
+      {
+         cerr << "Error: Tried to access a NULL character at line " 
+            << actualLine << " of the script: " << fileName << endl;
       }
    }
 
@@ -2032,26 +1827,10 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       character* tgt = NULL;
 
       /* get ref character */
-      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
-      if(iv != NULL)
-      {
-         ref = (character*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      ref = getParameterc(token, strLine, pos);
 
       /* get target character */
-      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
-      if(iv != NULL)
-      {
-         tgt = (character*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      tgt = getParameterc(token, strLine, pos);
 
       if( (tgt != NULL) && (ref != NULL) )
       {
@@ -2082,26 +1861,10 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       string objectFile = "";
 
       /* Get character */
-      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
-      if(iv != NULL)
-      {
-         dude = (character*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      dude = getParameterc(token, strLine, pos);
 
       /* Get Object FileName */
-      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
-      if(iv != NULL)
-      {
-         objectFile = *(string*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      objectFile = getParameters(token, strLine, pos);
 
       /* Set the result */
       bool bl = false;
@@ -2121,40 +1884,13 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    else if(functionName == IA_DIALOG_SET_INITIAL)
    {
       /* Get Character FileName */
-      string charFile = "";
-      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
-      if(iv != NULL)
-      {
-         charFile = *(string*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      string charFile = getParameters(token, strLine, pos);
 
       /* Get Map FileName */
-      string mapFile = "";
-      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
-      if(iv != NULL)
-      {
-         mapFile = *(string*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      string mapFile = getParameters(token, strLine, pos);
 
       /* Get Dialog Number */
-      int dialogNum = -1;
-      iv = getParameter(token, strLine, IA_TYPE_INT, pos);
-      if(iv != NULL)
-      {
-         dialogNum = *(int*)iv->value;
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
+      int dialogNum = getParameteri(token, strLine, pos);
 
       if( (dialogNum != -1) && (!charFile.empty()) &&
           (!mapFile.empty()) )

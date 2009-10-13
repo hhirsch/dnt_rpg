@@ -119,7 +119,8 @@ bool isFunction(string s)
            (s == IA_CHARACTER_GET_PSYCHO) ||
            (s == IA_CHARACTER_SET_PSYCHO) || (s == IA_CHARACTER_AT_RANGE) || 
            (s == IA_CHARACTER_GET_ACTUAL_LIFE) ||
-           (s == IA_CHARACTER_GET_MAX_LIFE) || (s == IA_SELF_OBJECT) ||
+           (s == IA_CHARACTER_GET_MAX_LIFE) || (s == IA_CHARACTER_ADD_EFFECT) ||
+           (s == IA_SELF_OBJECT) ||
            (s == IA_SELF_CHARACTER) || (s == IA_SELF_MISSION) ||
            (s == IA_ACTIVE_CHARACTER) ||
            (s == IA_ACTUAL_MAP) || (s == IA_TRUE) || (s == IA_FALSE) ||

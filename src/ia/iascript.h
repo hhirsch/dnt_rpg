@@ -165,6 +165,11 @@ class iaScript
        *            error occurs. */
       iaVariable* getParameter(string& token, string strLine, 
                                string paramType, unsigned int& pos);
+      int getParameteri(string& token, string strLine, unsigned int& pos);
+      float getParameterf(string& token, string strLine, unsigned int& pos);
+      character* getParameterc(string& token, string strLine,unsigned int& pos);
+      object* getParametero(string& token, string strLine,unsigned int& pos);
+      string getParameters(string& token, string strLine, unsigned int& pos);
 
       /*! Assign the value to the variable
        * \param var -> pointer to a variable
