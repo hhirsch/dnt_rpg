@@ -5,6 +5,7 @@ script(character target, int difficulty, int drunkLevel)
    string fort;
 
    int modValue, time, periodicTime
+   string factorId, factorType
 
    class = "PHILOSOPHY"
    fort = "FORTITUDE"
@@ -16,15 +17,28 @@ script(character target, int difficulty, int drunkLevel)
       if(classLevel(target, class) >= 1)
          # TODO Some philosophy level, must do the specific class things
       else
-         # Non-philosophy, calculate the effect
+         # Non-philosophy, calculate duration time
          periodicTime = 0
-         modValue = (-1)*(rollDice(drunkLevel) + 2)
          time = (rollDice(drunkLevel)+2) * 200
 
-         # and add it!
-         #addEffect(target, 
-      end
+         # add modEffect to inteligence
+         factorId = "INTELLIGENCE"
+         factorType = "ATTRIBUTE"
+         modValue = (-1)*(rollDice(drunkLevel) + 2)
+         addEffect(target, modValue, time, periodicTime, factorId, factorType)
 
+         # add modEffect to balance
+         factorId = "BALANCE"
+         factorType = "SKILL"
+         modValue = (-1)*(rollDice(drunkLevel)
+         addEffect(target, modValue, time, periodicTime, factorId, factorType)
+
+         # add drinking saturation
+         factorId = "DRINKING"
+         factorType = "SKILL"
+         modValue = -1
+         addEffect(target, modValue, time, periodicTime, factorId, factorType)
+      end
 
    end
 
