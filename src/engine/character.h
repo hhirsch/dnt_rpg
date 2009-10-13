@@ -52,9 +52,9 @@ class characterUtilModel
    public:
       int meshID;          /**< The cal3D mesh id loaded */
       string modelName;    /**< The name of the model loaded (for example, 
-                                it is the weapon name, or the armor name) */
+                             it is the weapon name, or the armor name) */
       string soundFile;    /**< The sound file (ogg). It's the sound that
-                                will be played when actions on the UtilModel. */
+                             will be played when actions on the UtilModel. */
 };
 
 
@@ -139,6 +139,74 @@ class character: public aniModel, public dntListElement
       /*! Clear Skills */
       void clearSkills();
 
+      /*! Set character orientation value
+       * \param ori -> new orientation value */
+      void setOrientation(GLfloat ori);
+
+      /*! Kill the character without calling dead animation
+       * \note this is usually used at modState  */
+      void instantKill();
+
+      /*! Call the thing dead animation */
+      void callDeadAnimation();
+
+      /*! Call the thing attack animation */
+      void callAttackAnimation();
+
+      /*! Call the thing attack animation */
+      void callIdleAnimation();
+
+      /*! Delete the Existed Inventory and Create a new One. 
+       *  Usually called after death*/
+      void newInventory();
+
+      /*! Apply all Race and Classes Skills Costs */
+      void applySkillCosts();
+
+      /*! Apply Bonus And Saves from Classes to the character */
+      void applyBonusAndSaves();
+
+      /*! Get the character filename
+       * \return -> the character filename */
+      string getCharacterFile(){return(characterFile);};
+
+      /*! Set the character file
+       * \param fileName -> new fileName of the character */
+      void setCharacterFile(string fileName){characterFile = fileName;}
+
+      /*! Save the character to a new file 
+       * \param fileName -> name of the file to save
+       * \return-> true if can save, false otherwise */
+      bool save(string fileName);
+
+      /*! Get the range type of the active attack feat
+       * \return range type of the actual attack feat */
+      int getActiveFeatRangeType();
+
+      /*! Get the active attack feat range
+       * \return range value in meters */ 
+      int getActiveFeatRange();
+
+      /*! Get the general script pointer
+       * \return genereal iaScript pointer */
+      void* getGeneralScript();
+
+      /*! Add a modEffect to the character
+       * \param mod -> modifier value
+       * \param time -> time to expire (0 == forever)
+       * \param periodicTime -> time to apply the modEffect again 
+       *                        (0 to not re-apply)
+       * \param factorId -> id of the target factor
+       * \param factorType -> type of the target factor */
+      void addModEffect(int mod, int time, int periodicTime,
+            string factorId, string factorType);
+
+      /*! Remove all modEffects from the character */
+      void removeAllModEffects();
+
+      /*! Define the character list as friend class */
+      friend class characterList;
+
       classe* actualClass[MAX_DISTINCT_CLASSES]; /**< Pointer to each class */
       int classLevels[MAX_DISTINCT_CLASSES]; /**< Current level of each class */
       race* actualRace;         /**< Pointer to Race */
@@ -154,61 +222,6 @@ class character: public aniModel, public dntListElement
 
       inventory* inventories;   /**< Inventory */
 
-      /*! Set character orientation value
-       * \param ori -> new orientation value */
-      void setOrientation(GLfloat ori);
-   
-      /*! Kill the character without calling dead animation
-       * \note this is usually used at modState  */
-      void instantKill();
-
-      /*! Call the thing dead animation */
-      void callDeadAnimation();
-
-      /*! Call the thing attack animation */
-      void callAttackAnimation();
-
-      /*! Call the thing attack animation */
-      void callIdleAnimation();
-
-       /*! Delete the Existed Inventory and Create a new One. 
-        *  Usually called after death*/
-       void newInventory();
-
-       /*! Apply all Race and Classes Skills Costs */
-       void applySkillCosts();
-
-       /*! Apply Bonus And Saves from Classes to the character */
-       void applyBonusAndSaves();
-
-       /*! Get the character filename
-        * \return -> the character filename */
-       string getCharacterFile(){return(characterFile);};
-   
-       /*! Set the character file
-        * \param fileName -> new fileName of the character */
-       void setCharacterFile(string fileName){characterFile = fileName;}
-
-       /*! Save the character to a new file 
-        * \param fileName -> name of the file to save
-        * \return-> true if can save, false otherwise */
-       bool save(string fileName);
-
-       /*! Get the range type of the active attack feat
-        * \return range type of the actual attack feat */
-       int getActiveFeatRangeType();
-      
-       /*! Get the active attack feat range
-        * \return range value in meters */ 
-       int getActiveFeatRange();
-
-       /*! Get the general script pointer
-        * \return genereal iaScript pointer */
-       void* getGeneralScript();    
-
-       /*! Define the character list as friend class */
-       friend class characterList;
-       
    protected:
       /*! Get points based on calculation
        * \param pt -> calculation info
@@ -224,7 +237,7 @@ class character: public aniModel, public dntListElement
       string inventoryFile;       /**< The inventory file name */
 
       modEffectList* effects;     /**< Current character effects */
-      
+
       void* generalScript;         /**< Pointer to the general iaScript */
       string generalScriptFileName;/**< The General Script Filename */
 
@@ -257,8 +270,8 @@ class characterList: public dntList
        * \param curMap -> fileName of the current map
        * \return pointer to opened character*/
       character* insertCharacter(string file, featsList* ft, 
-                                 void* pEngine, string curMap);
-                                    
+            void* pEngine, string curMap);
+
       /*!
        * Remove one character from list
        * \param persona -> character pointer to remove */
@@ -296,7 +309,7 @@ class characterList: public dntList
       void treatGeneralScripts(Map* actualMap, characterList* NPCs);
 
    protected:
-   
+
       /*! Call the delete for a character
        * \param dude -> pointer to the character */
       void freeElement(dntListElement* dude);

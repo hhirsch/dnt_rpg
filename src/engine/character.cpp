@@ -693,6 +693,24 @@ void character::getNewClassLevel(classe* cl)
 }
 
 /*********************************************************************
+ *                          addModEffect                             *
+ *********************************************************************/
+void character::addModEffect(int mod, int time, int periodicTime,
+      string factorId, string factorType)
+{
+   modEffect* m = new modEffect(mod, time, periodicTime, factorId, factorType);
+   effects->insert(m);
+}
+
+/*********************************************************************
+ *                        removeAllModEffects                        *
+ *********************************************************************/
+void character::removeAllModEffects()
+{
+   effects->clearList();
+}
+
+/*********************************************************************
  *                                save                               *
  *********************************************************************/
 bool character::save(string saveFile)
