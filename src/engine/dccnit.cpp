@@ -3821,7 +3821,7 @@ void engine::openCloseInventoryWindow()
    if(!inventoryWindow)
    {
       inventoryWindow=new inventWindow(PCs->getActiveCharacter(),
-                                       gui, infoWindow); 
+                                       gui, infoWindow, this); 
    }
    else
    {

@@ -47,8 +47,10 @@ class inventWindow
       /*! Constructor
        * \param invent -> pointer to the character whose inventories will show
        * \param inter -> GUI interface to use 
-       * \param itemWindow -> pointer to the info window used */
-      inventWindow(character *invent, guiInterface* inter, itemWindow* infoW);
+       * \param itemWindow -> pointer to the info window used
+       * \param usedEngine -> pointer to the engine used */
+      inventWindow(character *invent, guiInterface* inter, itemWindow* infoW,
+            void* usedEngine);
 
       /*! Constructor
        * \param xa -> position X to open the window
@@ -56,10 +58,11 @@ class inventWindow
        * \param title -> title of the inventory window
        * \param invent -> pointer to the character whose inventories will show
        * \param inter -> GUI interface to use 
-       * \param itemWindow -> pointer to the info window used */
+       * \param itemWindow -> pointer to the info window used
+       * \param usedEngine -> pointer to the engine used */
       inventWindow(int xa, int ya, string title, 
                    character *invent, guiInterface* inter,
-                   itemWindow* infoW);
+                   itemWindow* infoW, void* usedEngine);
 
       /*! Destructor */
       ~inventWindow();
@@ -87,7 +90,7 @@ class inventWindow
 
       /*! Init the window */
       void init(int xa, int ya, string title, character *invent,
-                guiInterface* inter, itemWindow* infoW);
+                guiInterface* inter, itemWindow* infoW, void* usedEngine);
 
       /*! Open the Inventory Object Menu  */
       void openMenu(int x, int y, int type, bool seller);
@@ -96,6 +99,8 @@ class inventWindow
       void verifyUseObject();
 
       itemWindow* infoWindow;         /**< The item window to show object's */
+
+      void* curEngine;                /**< Pointer to the current engine */
 
       inventory* inventories;         /**< Extern Inventories*/
       character* owner;               /**< The inventories owner */

@@ -1585,7 +1585,7 @@ bool dialogWindow::treat(guiObject* guiObj, int eventInfo, itemWindow* infoW,
          /* Open the trade. If trade button is avalaible, the
           * owner is, for sure, a character. */
          tradeWindow.open((character*)conv->getOwner(), conv->getPC(), 
-                          usedGui, infoW);
+                          usedGui, infoW, curEngine);
 
       }
    }

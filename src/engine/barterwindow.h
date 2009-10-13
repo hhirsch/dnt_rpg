@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -41,9 +41,10 @@ class barterWindow
       /*! Open the barter window 
        * \param s -> pointer to the seller character
        * \param b -> pointer to the buyer character 
-       * \param inter -> GUI interface used */
+       * \param inter -> GUI interface used 
+       * \param usedEngine -> pointer to the engine used */
       void open(character *s, character* b,
-                guiInterface* inter, itemWindow* infoW);
+                guiInterface* inter, itemWindow* infoW, void* usedEngine);
 
       /*! Close / Remove structures from the barter window */
       void close();
@@ -138,6 +139,8 @@ class barterWindow
       static menu* objectMenu;          /**< The object menu */
 
       static itemWindow* infoWindow;    /**< Pointer to the item window used */
+
+      static void* curEngine;           /**< Pointer to the current engine */
 };
 
 

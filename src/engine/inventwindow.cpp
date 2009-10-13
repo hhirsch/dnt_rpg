@@ -21,6 +21,8 @@
 #include "inventwindow.h"
 #include "barterwindow.h"
 
+#include "dccnit.h"
+
 #include "../cbook/comicbook.h"
 #include "../classes/actions.h"
 #include "../classes/money.h"
@@ -39,18 +41,18 @@
  **************************************************************/
 inventWindow::inventWindow(int xa, int ya, string title, 
                            character* invent, guiInterface* inter,
-                           itemWindow* infoW)
+                           itemWindow* infoW, void* usedEngine)
 {
-   init(xa,ya,title,invent,inter, infoW);
+   init(xa,ya,title,invent,inter, infoW, usedEngine);
 }
 
 /**************************************************************
  *                          Constructor                       *
  **************************************************************/
 inventWindow::inventWindow(character *invent, guiInterface* inter,
-                           itemWindow* infoW)
+                           itemWindow* infoW, void* usedEngine)
 {
-   init(0,1, gettext("Inventory"), invent, inter, infoW);
+   init(0,1, gettext("Inventory"), invent, inter, infoW, usedEngine);
 }
 
 /**************************************************************
@@ -58,7 +60,7 @@ inventWindow::inventWindow(character *invent, guiInterface* inter,
  **************************************************************/
 void inventWindow::init(int xa, int ya, string title, 
                        character *invent,guiInterface* inter,
-                       itemWindow* infoW)
+                       itemWindow* infoW, void* usedEngine)
 {
    int i;
    char buf[8];
@@ -66,6 +68,9 @@ void inventWindow::init(int xa, int ya, string title,
    dirs dir;
    objectMenu = NULL;
    previousCursor = -1;
+
+   /* Set engine */
+   curEngine = usedEngine;
 
    /* Copy Interface Pointer */
    interf = inter;
@@ -365,6 +370,41 @@ void inventWindow::verifyUseObject()
                       gettext("No equipped weapons are compatible with this "
                               "munition type."), interf);
          }
+      }
+
+      /* narcotic objects */
+      else if(activeObject->getType() == OBJECT_TYPE_NARCOTIC)
+      {
+         /* TODO -> get the narcotic target (currently 
+          * doing always on the inventory owner) */
+         character* target = owner;
+
+         /* Create the script */
+         iaScript* useScript = new iaScript(activeObject->getRelatedInfo(), 
+               curEngine); 
+
+         /* Define params and owner */
+         useScript->init();
+         useScript->defineObjectOwner(activeObject);
+         useScript->setParameter("target", target);
+         useScript->setParameter("difficulty", 
+               &activeObject->curBonusAndSaves.iAmNotAFool);
+         useScript->setParameter("drunkLevel", 
+               &activeObject->curBonusAndSaves.fortitude);
+
+         /* Run it to the end! */
+         useScript->run(0);
+
+         /* Done, close it */
+         useScript->close();
+         delete(useScript);
+
+         /* And discard the object */
+         inventories->removeFromInventory(objX,objY, 
+               currentInventory);
+         delete(activeObject);
+         activeObject = NULL;
+         reDraw();
       }
 
    }

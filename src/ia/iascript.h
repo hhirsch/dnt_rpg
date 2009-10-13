@@ -77,7 +77,7 @@ class iaScript
        *    setParameter("name", c);
        * \note : to define an integer parameter: 
        *    int val = 50;
-       *    setParameter("nama", &val); */
+       *    setParameter("name", &val); */
       bool setParameter(string paramName, void* value);
    
       /*! Define the owner of the script as a object

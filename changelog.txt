@@ -10,6 +10,8 @@
  - Fixed a segfault at itemWindow;
  - Better cxSel selection/deselection;
  - Fixed continuous mouse move angle;
+ - Added modifier effects (drink);
+ - Use of new objects (narcotics);
 
 Working on:
  - Weather effects;
@@ -18,7 +20,7 @@ Working on:
  - Capacity of using talents;
  - Implement 5-15% of the talents defined on DNT Book;
  - Money;
- - Added modifier effects (actions): drink
+
 
 Pending:
  - Define Counter Skills;
