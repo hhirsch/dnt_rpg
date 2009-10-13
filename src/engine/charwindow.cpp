@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -224,7 +224,25 @@ void charWindow::open(character* pers)
       sprintf(buf,"%s: %d", gettext("Size Modifier"), pers->sizeModifier);
       infoBar->addText(buf);
 
-      /* TODO List all Effects affecting the character */
+      /* List all Effects affecting the character */
+      int total = pers->getEffects()->getTotal();
+      modEffect* meff = (modEffect*)pers->getEffects()->getFirst();
+      for(i=0; i < total; i++)
+      {
+         if(meff->getValue() > 0)
+         {
+            /* green text */
+            infoBar->addText(meff->toReadableText(pers), DNT_FONT_ARIAL, 10, 
+                  DNT_FONT_STYLE_ITALIC, DNT_FONT_ALIGN_LEFT, 20, 200, 12);
+         }
+         else
+         {
+            /* red text */
+            infoBar->addText(meff->toReadableText(pers), DNT_FONT_ARIAL, 10, 
+                  DNT_FONT_STYLE_ITALIC, DNT_FONT_ALIGN_LEFT, 200, 20, 12);
+         }
+         meff = (modEffect*)pers->getNext();
+      }
 
       /* Put bar at init */
       infoBar->setFirstLine(0);

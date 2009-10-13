@@ -204,6 +204,10 @@ class character: public aniModel, public dntListElement
       /*! Remove all modEffects from the character */
       void removeAllModEffects();
 
+      /*! Get the modEffectList pointer
+       * \return pointer to the modEffectList */
+      modEffectList* getEffects();
+
       /*! Define the character list as friend class */
       friend class characterList;
 

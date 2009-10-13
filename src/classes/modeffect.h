@@ -70,6 +70,9 @@ class modEffect: public dntListElement
        * \param txt -> saveString with modEffect info */
       void fromSaveText(string txt);
 
+      /*! Get modification value */
+      int getValue();
+
       friend class modEffectList;
 
    protected:
