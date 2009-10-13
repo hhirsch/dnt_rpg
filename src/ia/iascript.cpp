@@ -807,9 +807,31 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    ////////////////////////////////////////////////////
    //              Random (Dice) Function            //
    ////////////////////////////////////////////////////
-   
+
+   /* Syntax: int rollDice(int diceFaces) */ 
+   else if(functionName == IA_ROLL_DICE)
+   {
+      dice dX;
+      int res = 0;
+
+      /* Get the dice faces */
+      iv = getParameter(token, strLine, IA_TYPE_INT, pos);
+      if(iv)
+      {
+         dX.setType(*(int*)iv->value);
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      /* And Roll the dice */
+      res = dX.roll();
+      assignValue(var, (void*)&res, IA_TYPE_INT);
+   }
+
    /* Syntax: bool roll(character actor, string skill, int difficulty)  */
-   if(functionName == IA_DICE_ROLL)
+   else if(functionName == IA_DICE_ROLL)
    {
       character* actor = NULL;
       string sk = "";

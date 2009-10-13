@@ -4,6 +4,8 @@ script(character target, int difficulty, int drunkLevel)
    string class;
    string fort;
 
+   int modValue, time, periodicTime
+
    class = "PHILOSOPHY"
    fort = "FORTITUDE"
 
@@ -13,10 +15,17 @@ script(character target, int difficulty, int drunkLevel)
       # couldn't save, affected!
       if(classLevel(target, class) >= 1)
          # TODO Some philosophy level, must do the specific class things
+      else
+         # Non-philosophy, calculate the effect
+         periodicTime = 0
+         modValue = rollDice(drunkLevel) + 2
+         time = (rollDice(drunkLevel)+2) * 200
+
+         # and add it!
+         #addEffect(target, 
       end
 
-      # TODO set the effects
-      # addEffect(target, 
+
    end
 
 end

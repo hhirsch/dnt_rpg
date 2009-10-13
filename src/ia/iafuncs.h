@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -112,6 +112,8 @@ using namespace std;
 ////////////////////////////////////////////////////
 /*! bool roll(character target, string rollThing, int difficulty) */
 #define IA_DICE_ROLL "roll"
+/*! int rollDice(int diceFaces) */
+#define IA_ROLL_DICE "rollDice"
 
 ////////////////////////////////////////////////////
 //             Movimentation Functions            //
