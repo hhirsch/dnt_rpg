@@ -1,3 +1,8 @@
+#
+# The drunk script: Add drunk effects to a character, based on the drunkLevel
+#
+# Usually called when using a 'narcotic-type' object
+#
 
 script(character target, int difficulty, int drunkLevel)
 
