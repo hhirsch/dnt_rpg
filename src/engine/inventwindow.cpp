@@ -384,7 +384,6 @@ void inventWindow::verifyUseObject()
                curEngine); 
 
          /* Define params and owner */
-         useScript->init();
          useScript->defineObjectOwner(activeObject);
          useScript->setParameter("target", target);
          useScript->setParameter("difficulty", 

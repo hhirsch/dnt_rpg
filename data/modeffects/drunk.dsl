@@ -44,8 +44,7 @@ script(character target, int difficulty, int drunkLevel)
          modValue = -1
          addEffect(target, modValue, time, periodicTime, factorId, factorType)
       end
-
    end
-
 end
+
 

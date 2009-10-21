@@ -61,7 +61,7 @@ void iaScript::init()
 {
    dirs dir;
    file.open(dir.getRealFile(fileName).c_str(), 
-             ios::in | ios::binary);
+             ifstream::in);
    if(!file)
    {
       cerr << "Failed to open the script: "
