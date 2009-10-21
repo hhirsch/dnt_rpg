@@ -109,7 +109,8 @@ AC_CHECK_FUNCS([atexit floor sqrt strrchr strstr])
 
 AC_DEFINE_DIR([DATADIR], [datadir], [Where data are placed to.])
 
-AC_CONFIG_FILES([Makefile  
+AC_CONFIG_FILES([Doxyfile
+                 Makefile  
                  po/Makefile.in
                  src/Makefile
                  src/app/Makefile
