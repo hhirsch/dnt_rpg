@@ -272,7 +272,7 @@ bool bonusAndSaves::doCheck(string stateToCheck, int difficulty,
    {
       value = iAmNotAFool;
       canCheck = true;
-      stateName = gettext("I am not a Fool");
+      stateName = gettext("I am Not a Fool");
    }
 
    /* Do the check, if defined */

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2009-09-06 12:49-0300\n"
+"POT-Creation-Date: 2009-10-22 15:37-0300\n"
 "PO-Revision-Date: 2009-07-05 05:08+0000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -57,20 +57,36 @@ msgstr "¡Curación crítica!"
 msgid "Critical Hit!"
 msgstr "¡Impacto crítico!"
 
-#: src/classes/feats.cpp:160
+#: src/classes/defs.cpp:256
+msgid "Level"
+msgstr "Nivel"
+
+#: src/classes/defs.cpp:262 src/engine/charwindow.cpp:210
+msgid "Fortitude"
+msgstr "Fortaleza"
+
+#: src/classes/defs.cpp:268 src/engine/charwindow.cpp:215
+msgid "Reflexes"
+msgstr "Reflejos"
+
+#: src/classes/defs.cpp:275 src/engine/charwindow.cpp:220
+msgid "I am Not a Fool"
+msgstr "No soy idiota"
+
+#: src/classes/feats.cpp:168
 msgid "Invalid Talent"
 msgstr "Talento inválido"
 
-#: src/classes/feats.cpp:212
+#: src/classes/feats.cpp:220
 msgid "Not enought points to use!"
 msgstr "¡No tienes suficientes puntos para usarlo!"
 
-#: src/classes/mission.cpp:512 src/engine/dialog.cpp:1184
+#: src/classes/mission.cpp:531 src/engine/dialog.cpp:1167
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "¡Misión completa: %d XP!"
 
-#: src/classes/mission.cpp:529 src/classes/mission.cpp:532
+#: src/classes/mission.cpp:548 src/classes/mission.cpp:551
 msgid "Mission Failure!"
 msgstr "¡Misión fallida!"
 
@@ -86,7 +102,7 @@ msgid "Confirm"
 msgstr "Confirmar"
 
 #: src/engine/alignwindow.cpp:76 src/engine/aspectwindow.cpp:97
-#: src/engine/attwindow.cpp:240 src/engine/barterwindow.cpp:66
+#: src/engine/attwindow.cpp:240 src/engine/barterwindow.cpp:68
 #: src/engine/classwindow.cpp:121 src/engine/options.cpp:995
 #: src/engine/racewindow.cpp:121 src/engine/skillwindow.cpp:162
 msgid "Cancel"
@@ -159,7 +175,7 @@ msgid "Attribute Description"
 msgstr "Descripción de atributo"
 
 #: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:537
-#: src/engine/inventwindow.cpp:364 src/engine/options.cpp:1232
+#: src/engine/inventwindow.cpp:369 src/engine/options.cpp:1232
 msgid "Warning"
 msgstr "Aviso"
 
@@ -167,40 +183,40 @@ msgstr "Aviso"
 msgid "You Need to Assign All Attributes."
 msgstr "Tienes que asignar todos los atributos"
 
-#: src/engine/barterwindow.cpp:50 src/engine/dialog.cpp:1489
+#: src/engine/barterwindow.cpp:52 src/engine/dialog.cpp:1470
 msgid "Barter"
 msgstr "Trueque"
 
-#: src/engine/barterwindow.cpp:62
+#: src/engine/barterwindow.cpp:64
 msgid "Offer"
 msgstr "Ofrecer"
 
-#: src/engine/barterwindow.cpp:64
+#: src/engine/barterwindow.cpp:66
 msgid "Impose"
 msgstr "Imponer"
 
-#: src/engine/barterwindow.cpp:92 src/engine/barterwindow.cpp:102
-#: src/engine/inventwindow.cpp:53 src/engine/options.cpp:152
+#: src/engine/barterwindow.cpp:94 src/engine/barterwindow.cpp:104
+#: src/engine/inventwindow.cpp:55 src/engine/options.cpp:152
 msgid "Inventory"
 msgstr "Equipo"
 
-#: src/engine/barterwindow.cpp:257
+#: src/engine/barterwindow.cpp:259
 msgid "The barter was accepted."
 msgstr "El acuerdo se ha aceptado."
 
-#: src/engine/barterwindow.cpp:262
+#: src/engine/barterwindow.cpp:264
 msgid "The barter was rejected."
 msgstr "El acuerdo se ha rechazado"
 
-#: src/engine/barterwindow.cpp:282
+#: src/engine/barterwindow.cpp:284
 msgid "The barter imposition was accepted."
 msgstr "El acuerdo impuesto fue aceptado."
 
-#: src/engine/barterwindow.cpp:287
+#: src/engine/barterwindow.cpp:289
 msgid "The barter imposition was rejected."
 msgstr "El acuerdo impuesto fue rechazado."
 
-#: src/engine/barterwindow.cpp:306 src/engine/inventwindow.cpp:209
+#: src/engine/barterwindow.cpp:308 src/engine/inventwindow.cpp:214
 msgid "Remove"
 msgstr "Eliminar"
 
@@ -211,6 +227,14 @@ msgstr "Mensajes"
 #: src/engine/briefing.cpp:57
 msgid "Welcome to DNT!"
 msgstr "¡Bienvenido a DNT!"
+
+#: src/engine/briefing.cpp:153
+msgid "Success"
+msgstr "Éxito"
+
+#: src/engine/briefing.cpp:153
+msgid "Failure"
+msgstr "Fallo"
 
 #: src/engine/charwindow.cpp:115
 msgid "Female"
@@ -249,59 +273,51 @@ msgid "AC"
 msgstr "CA"
 
 #: src/engine/charwindow.cpp:205
-msgid "Fortitude"
-msgstr "Fortaleza"
+msgid "Total Level"
+msgstr "Nivel Total"
 
-#: src/engine/charwindow.cpp:210
-msgid "Reflex"
-msgstr "Reflejos"
-
-#: src/engine/charwindow.cpp:214
-msgid "I am Not a Fool"
-msgstr "No soy idiota"
-
-#: src/engine/charwindow.cpp:219
+#: src/engine/charwindow.cpp:225
 msgid "Base Attack Modifier"
 msgstr "Modificador de ataque base"
 
-#: src/engine/charwindow.cpp:224
+#: src/engine/charwindow.cpp:230
 msgid "Size Modifier"
 msgstr "Modificador de tamaño"
 
-#: src/engine/charwindow.cpp:234
+#: src/engine/charwindow.cpp:258
 msgid "Level Up"
 msgstr "Subir nivel"
 
-#: src/engine/charwindow.cpp:240
+#: src/engine/charwindow.cpp:264
 msgid "Talents"
 msgstr "Dotes"
 
-#: src/engine/charwindow.cpp:244 src/engine/skillwindow.cpp:74
+#: src/engine/charwindow.cpp:268 src/engine/skillwindow.cpp:74
 msgid "Skills"
 msgstr "Habilidades"
 
-#: src/engine/charwindow.cpp:248 src/engine/skillwindow.cpp:169
+#: src/engine/charwindow.cpp:272 src/engine/skillwindow.cpp:169
 #: src/gui/window.cpp:186
 msgid "Close"
 msgstr "Cerrar"
 
-#: src/engine/charwindow.cpp:379
+#: src/engine/charwindow.cpp:403
 msgid "Main Weapon"
 msgstr "Arma principal"
 
-#: src/engine/charwindow.cpp:383
+#: src/engine/charwindow.cpp:407
 msgid "Secondary Weapon"
 msgstr "Arma secundaria"
 
-#: src/engine/charwindow.cpp:387
+#: src/engine/charwindow.cpp:411
 msgid "Weapon"
 msgstr "Arma"
 
-#: src/engine/charwindow.cpp:399
+#: src/engine/charwindow.cpp:423
 msgid "Unarmed"
 msgstr "Desarmado"
 
-#: src/engine/charwindow.cpp:405
+#: src/engine/charwindow.cpp:429
 msgid "Not Applicable"
 msgstr "No aplicable"
 
@@ -444,7 +460,7 @@ msgstr "Turno de ataque por sorpresa"
 msgid "No enemies in the area."
 msgstr "No hay enemigos en el área"
 
-#: src/engine/dccnit.cpp:1831 src/engine/dccnit.cpp:2349
+#: src/engine/dccnit.cpp:1831 src/engine/dccnit.cpp:2350
 #: src/engine/shortcutswindow.cpp:51
 msgid "Nothing"
 msgstr "Nada"
@@ -458,57 +474,49 @@ msgstr "Recogido %s"
 msgid "Inventory is full!"
 msgstr "¡Inventario lleno!"
 
-#: src/engine/dccnit.cpp:2148
+#: src/engine/dccnit.cpp:2149
 msgid "Door"
 msgstr "Puerta"
 
-#: src/engine/dccnit.cpp:2284
+#: src/engine/dccnit.cpp:2285
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s ataca a %s"
 
-#: src/engine/dccnit.cpp:2450
+#: src/engine/dccnit.cpp:2451
 msgid "No more actions. Turn ended."
 msgstr "Sin acciones. Turno finalizado."
 
-#: src/engine/dccnit.cpp:3961
+#: src/engine/dccnit.cpp:3962
 msgid "Exit Battle Mode"
 msgstr "Salir del modo de batalla"
 
-#: src/engine/dialog.cpp:297
-msgid "Success"
-msgstr "Éxito"
-
-#: src/engine/dialog.cpp:297
-msgid "Failure"
-msgstr "Fallo"
-
-#: src/engine/dialog.cpp:997
+#: src/engine/dialog.cpp:989
 #, c-format
 msgid "Not found in dialog: %d\n"
 msgstr "No se encontró en el diálogo: %d\n"
 
-#: src/engine/dialog.cpp:1213
+#: src/engine/dialog.cpp:1196
 #, c-format
 msgid "%s lost."
 msgstr "Perdió %s."
 
-#: src/engine/dialog.cpp:1256
+#: src/engine/dialog.cpp:1239
 #, c-format
 msgid "Received %s."
 msgstr "Recibió %s."
 
-#: src/engine/dialog.cpp:1273
+#: src/engine/dialog.cpp:1256
 #, c-format
 msgid "Received $%d."
 msgstr "Recibió $%d."
 
-#: src/engine/dialog.cpp:1287
+#: src/engine/dialog.cpp:1270
 #, c-format
 msgid "Lost $%d."
 msgstr "Perdió $%d."
 
-#: src/engine/dialog.cpp:1482
+#: src/engine/dialog.cpp:1463
 msgid "Dialog"
 msgstr "Diálogo"
 
@@ -551,44 +559,44 @@ msgstr "Opciones"
 msgid "Exit"
 msgstr "Salir"
 
-#: src/engine/inventwindow.cpp:184
+#: src/engine/inventwindow.cpp:189
 msgid "Get"
 msgstr "Coger"
 
-#: src/engine/inventwindow.cpp:187
+#: src/engine/inventwindow.cpp:192
 msgid "Info"
 msgstr "Info"
 
-#: src/engine/inventwindow.cpp:195
+#: src/engine/inventwindow.cpp:200
 msgid "Read"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:198
+#: src/engine/inventwindow.cpp:203
 msgid "Reload Weapon"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:201
+#: src/engine/inventwindow.cpp:206
 msgid "Use"
 msgstr "Usar"
 
-#: src/engine/inventwindow.cpp:212
+#: src/engine/inventwindow.cpp:217
 msgid "Buy"
 msgstr "Comprar"
 
-#: src/engine/inventwindow.cpp:212
+#: src/engine/inventwindow.cpp:217
 msgid "Sell"
 msgstr "Vender"
 
-#: src/engine/inventwindow.cpp:217
+#: src/engine/inventwindow.cpp:222
 msgid "Drop"
 msgstr "Tirar"
 
-#: src/engine/inventwindow.cpp:324
+#: src/engine/inventwindow.cpp:329
 #, c-format
 msgid "%s reloaded %s with %s ammo."
 msgstr "%s recargado %s con %s municiones."
 
-#: src/engine/inventwindow.cpp:365
+#: src/engine/inventwindow.cpp:370
 msgid "No equipped weapons are compatible with this munition type."
 msgstr "Ninguna arma del equipamiento es compatible con este tipo de munición."
 
@@ -651,15 +659,15 @@ msgstr "Cantidad:"
 msgid "Ok"
 msgstr "Ok"
 
-#: src/engine/journalwindow.cpp:283 src/engine/options.cpp:154
+#: src/engine/journalwindow.cpp:285 src/engine/options.cpp:154
 msgid "Journal"
 msgstr "Diario:"
 
-#: src/engine/journalwindow.cpp:351
+#: src/engine/journalwindow.cpp:353
 msgid "Unknow Area"
 msgstr "Area Desconocida"
 
-#: src/engine/journalwindow.cpp:352
+#: src/engine/journalwindow.cpp:354
 msgid "No missions."
 msgstr "Sin Misiones."
 
@@ -4095,85 +4103,3 @@ msgstr ""
 #: data/characters/pcs/santa.pc:1
 msgid "Santa Claws"
 msgstr ""
-
-#~ msgid ""
-#~ "DccNiTghtmare is developed under Public Domain: Feel free to use its "
-#~ "source code and data the way you want (or to blame us the same way). "
-#~ "DccNiTghtmare is thankful to the people who developed those libraries: "
-#~ "OpenAL, Cal3D, OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
-#~ msgstr ""
-#~ "DccNiTghtmare está desarrollado bajo el Dominio Público: siéntete libre "
-#~ "de usar el código fuente como quieras (o para echarnos la culpa de algo). "
-#~ "DccNiTghtmare está agradecido con la gente que desarrolló estas "
-#~ "librerías: OpenAL, Cal3D, OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
-
-#~ msgid "Charism"
-#~ msgstr "Carisma"
-
-#~ msgid "Loading Character"
-#~ msgstr "Cargando Caracter"
-
-#~ msgid "Error while opening skills list: %s\n"
-#~ msgstr "Error mientras se abría la lista de habilidades: %s\n"
-
-#~ msgid "Can't open skill file: %s \n"
-#~ msgstr "No se puede abrir el archivo de habilidades: %s \n"
-
-#~ msgid "Error while writing Options: %s\n"
-#~ msgstr "Error mientras se escribían las opciones: %s\n"
-
-#~ msgid "Race Characteristcs"
-#~ msgstr "Características de la Carrera"
-
-#~ msgid "Class Description"
-#~ msgstr "Descripción de Clase"
-
-#~ msgid "Ouch, can't load NPC's file: %s.\n"
-#~ msgstr "Ups, No se pueden cargar los archivos NPC's: %s.\n"
-
-#~ msgid "Cannot open File!\n"
-#~ msgstr "No se puede abrir archivo!\n"
-
-#~ msgid "Text without any relation!"
-#~ msgstr "Texto sin relación!"
-
-#~ msgid "Can't open font file: %s\n"
-#~ msgstr "No se puede abrir archivo de fuentes: %s\n"
-
-#~ msgid "Unknow option: %s\n"
-#~ msgstr "Opción Desconocida: %s\n"
-
-#~ msgid "Can't open skill image: %s\n"
-#~ msgstr "No se puede abrir la imagen de habilidad: %s\n"
-
-#~ msgid "Error while opening skills list:skills/skills.skl\n"
-#~ msgstr "Error mientras se abría la lista de habilidades:skills/skills.skl\n"
-
-#~ msgid "Can't Open the options file: %s\n"
-#~ msgstr "No se puede abrir el archivo de opciones: %s\n"
-
-#~ msgid "No Options File Avaible!\n"
-#~ msgstr "No hay archivo de opciones disponible!\n"
-
-#~ msgid "Creating Directory: %s : "
-#~ msgstr "Creando Directorio: %s : "
-
-#~ msgid "Creating Options: %s\n"
-#~ msgstr "Creando Opciones: %s\n"
-
-#~ msgid "Feats"
-#~ msgstr "Características"
-
-#~ msgid "Can't load mouse cursor: %s\n"
-#~ msgstr "No se puede cargar el cursor del ratón: %s\n"
-
-#~ msgid "Can't open image: %s\n"
-#~ msgstr "No se puede abrir imagen: %s\n"
-
-#~ msgid "Warn: Can't Load Picture, may crash soon (out of memory)!\n"
-#~ msgstr ""
-#~ "Advertencia: No se puede cargar la imagen, puede dañarse pronto (falta de "
-#~ "memoria)!\n"
-
-#~ msgid "Something must be wrong! Try editing ~/.dccnitghtmare/options.cfg\n"
-#~ msgstr "Algo debe estar mal! Trata editando ~/.dccnitghtmare/options.cfg\n"
