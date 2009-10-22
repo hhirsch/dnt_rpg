@@ -12,6 +12,7 @@
  - Fixed continuous mouse move angle;
  - Added modifier effects (drink);
  - Use of new objects (narcotics);
+ - New roll tests;
 
 Working on:
  - Weather effects;
