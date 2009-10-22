@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -66,6 +66,12 @@ class briefing
        * \param B -> blue color of the font */
       void addText(string text, string font, int size, int style,
                    int align, int R, int G, int B);
+
+      /*! Add a check text to the briefieng
+       * \param testName -> name of the state tested
+       * \param value -> result tested value
+       * \param difficulty -> difficulty tested against */
+      void addCheckText(string testName, int value, int difficulty);
 
       /*! Clear the briefing text */
       void clear();

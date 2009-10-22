@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -137,6 +137,32 @@ void briefing::addText(string text, string font, int size, int style,
          briefTxt->addText(text, font, size, style, align, R, G, B);
       }
    }
+}
+
+/***********************************************************************
+ *                           addCheckText                              *
+ ***********************************************************************/
+void briefing::addCheckText(string testName, int value, int difficulty)
+{
+   char buffer[512];
+   bool res = (value >= difficulty);
+
+   /* Buffer it */
+   sprintf(&buffer[0], "%s: %d x %d: %s.",
+         testName.c_str(), value, difficulty,
+         res?gettext("Success"):gettext("Failure"));
+
+   if(res)
+   {
+      /* With blue color */
+      addText(buffer, 27, 169, 245);
+   }
+   else
+   {
+      /* With red color */
+      addText(buffer, 233, 0, 5);
+   }
+
 }
 
 /***********************************************************************

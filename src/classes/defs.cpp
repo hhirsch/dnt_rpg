@@ -19,6 +19,7 @@
 */
 
 #include "defs.h"
+#include "../engine/briefing.h"
 
 #include <stdio.h>
 
@@ -242,6 +243,8 @@ bool bonusAndSaves::doCheck(string stateToCheck, int difficulty,
    bool checkRes = false;
    int value = 0;
    int checkType = DNT_CHECK_ROLL;
+   string stateName = "";
+   briefing brief;
    dice d20(DICE_D20);
 
    /* Let's get the state (if defined) */
@@ -250,27 +253,32 @@ bool bonusAndSaves::doCheck(string stateToCheck, int difficulty,
       checkType = DNT_CHECK_COMPARE;
       canCheck = true;
       value = level;
+      stateName = gettext("Level");
    }
    else if(stateToCheck == DNT_BS_FORTITUDE)
    {
       value = fortitude;
       canCheck = true;
+      stateName = gettext("Fortitude");
    }
    else if(stateToCheck == DNT_BS_REFLEXES)
    {
       value = reflexes;
       canCheck = true;
+      stateName = gettext("Reflexes");
    }
    else if( (stateToCheck == DNT_BS_I_AM_NOT_A_FOOL) ||
             (stateToCheck == DNT_BS_WILL))
    {
       value = iAmNotAFool;
       canCheck = true;
+      stateName = gettext("I am not a Fool");
    }
 
    /* Do the check, if defined */
    if(canCheck)
    {
+      brief.addCheckText(stateName, value, difficulty);
       if(checkType == DNT_CHECK_COMPARE)
       {
          checkRes = value >= difficulty;

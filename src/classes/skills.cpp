@@ -301,7 +301,6 @@ bool skills::doSkillCheck(skill* sk, int difficulty)
    dice d20(DICE_D20);
    skill* att;
    int mod = 0;
-   char buffer[512];
    int value = 0;
    briefing brief;
 
@@ -339,23 +338,10 @@ bool skills::doSkillCheck(skill* sk, int difficulty)
       }
    }
 
-   res = (value > difficulty);
+   res = (value >= difficulty);
 
    /* Brief the result */
-   sprintf(&buffer[0], "%s: %d x %d: %s.",
-         sk->definition->name.c_str(), value, difficulty,
-         res?gettext("Success"):gettext("Failure"));
-
-   if(res)
-   {
-      /* With blue color */
-      brief.addText(buffer, 27, 169, 245);
-   }
-   else
-   {
-      /* With red color */
-      brief.addText(buffer, 233, 0, 5);
-   }
+   brief.addCheckText(sk->definition->name, value, difficulty);
 
    /* Done */
    return(res);
