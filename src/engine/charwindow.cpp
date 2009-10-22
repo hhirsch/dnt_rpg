@@ -201,13 +201,19 @@ void charWindow::open(character* pers)
       writeAboutWeapon(INVENTORY_RIGHT_HAND);
       writeAboutWeapon(INVENTORY_LEFT_HAND);
 
+      /* Total level */
+      sprintf(buf,"%s: %d", gettext("Total Level"), 
+              pers->curBonusAndSaves.level);
+      infoBar->addText(buf);
+
       /* Fortitude */
       sprintf(buf,"%s: %d", gettext("Fortitude"), 
               pers->curBonusAndSaves.fortitude);
       infoBar->addText(buf);
 
-      /* Reflex */
-      sprintf(buf,"%s: %d", gettext("Reflex"), pers->curBonusAndSaves.reflex);
+      /* Reflexes */
+      sprintf(buf,"%s: %d", gettext("Reflexes"), 
+            pers->curBonusAndSaves.reflexes);
       infoBar->addText(buf);
 
       /* IAmNotAFool */

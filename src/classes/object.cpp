@@ -167,9 +167,9 @@ object::object(string path, string curMap): thing()
       {
          sscanf(value.c_str(),"%d",&curBonusAndSaves.fortitude);
       }
-      else if(key == "reflex")
+      else if( (key == "reflex") || (key == "reflexes"))
       {
-         sscanf(value.c_str(),"%d",&curBonusAndSaves.reflex);
+         sscanf(value.c_str(),"%d",&curBonusAndSaves.reflexes);
       }
       else if((key == "will") || (key == "i_am_not_a_fool") )
       {
@@ -268,7 +268,7 @@ object::object(object* obj): thing()
    maxLifePoints = obj->maxLifePoints;
    lifePoints = maxLifePoints;
    curBonusAndSaves.fortitude = obj->curBonusAndSaves.fortitude;
-   curBonusAndSaves.reflex = obj->curBonusAndSaves.reflex;
+   curBonusAndSaves.reflexes = obj->curBonusAndSaves.reflexes;
    curBonusAndSaves.iAmNotAFool = obj->curBonusAndSaves.iAmNotAFool;
    armatureClass = obj->armatureClass;
    sizeModifier = obj->sizeModifier;

@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -165,6 +165,35 @@ int thing::getBonusValue(factor something)
    }
    
    return(0);
+}
+
+/***********************************************************************
+ *                                doCheck                              *
+ ***********************************************************************/
+bool thing::doCheck(string stateToCheck, int difficulty)
+{
+   skill* skl;
+   bool couldCheck = false;
+   bool res;
+
+   /* First, let's test as skill */
+   skl = sk.getSkillByString(stateToCheck);
+   if(skl != NULL)
+   {
+      return(sk.doSkillCheck(skl, difficulty));
+   }
+
+   /* Nope, so let's test as a bonus and Save */
+   res = curBonusAndSaves.doCheck(stateToCheck, difficulty, &couldCheck);
+   if(couldCheck)
+   {
+      return(res);
+   }
+
+   /* Unknow! */
+   cerr << "thing::doCheck - Unknown state to check: '" << stateToCheck 
+        << "'" << endl;
+   return(false);
 }
 
 /******************************************************

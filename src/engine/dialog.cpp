@@ -276,36 +276,12 @@ bool talkTest::doTest(character* pc, thing* owner)
    }
    else if(id == TALK_TEST_ROLL)
    {
-      /* Get the value */
+      /* Get the difficulty value */
       sscanf(against.c_str(), "%d", &value);
 
       /* Roll the thing! */
-      skill* sk = pc->sk.getSkillByString(test);
-      if(!sk)
-      {
-         cerr << "Error: Unknow skill: " << test << endl;
-         return(false);
-      }
-      int rollValue = pc->sk.doSkillCheck(sk);
-      bool res = (rollValue > value);
+      bool res = pc->doCheck(test, value);
 
-      /* Brief the result */
-      char buffer[512];
-      briefing brief;
-      sprintf(&buffer[0], "%s: %d x %d: %s.",
-              sk->definition->name.c_str(), rollValue, value, 
-              res?gettext("Success"):gettext("Failure"));
-      if(res)
-      {
-         /* With blue color */
-         brief.addText(buffer, 27, 169, 245);
-      }
-      else
-      {
-         /* With red color */
-         brief.addText(buffer, 233, 0, 5);
-      }
-      
       /* Return what got */
       return(res);
    }

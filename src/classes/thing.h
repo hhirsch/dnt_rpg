@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -154,7 +154,12 @@ class thing
       //                 Skills and States Functions                      //
       //                                                                  //
       //////////////////////////////////////////////////////////////////////
- 
+
+      /*! Do a check (skill, saves, etc) against the difficulty.
+       * \param difficulty -> Difficulty of the check
+       * \return true if succed, false if failed. */
+      bool doCheck(string stateToCheck, int difficulty);
+
       /*! Get the thing type 
        * \return -> type of the thing */
       int getThingType();

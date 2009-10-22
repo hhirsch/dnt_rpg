@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -121,14 +121,16 @@ class skills
       /*! Do a skill check (getting the value got at the check,
        *  to compare latter with another skill check or a fixed value) 
        *  \param idString -> String identifier of the skill
-       *  \return -> skill check result value */
-      int doSkillCheck(string idString);
+       *  \param difficulty -> check difficulty
+       *  \return -> true if success, false if fail */
+      bool doSkillCheck(string idString, int difficulty);
 
       /*! Do a skill check (getting the value got at the check,
        *  to compare latter with another skill check or a fixed value) 
        *  \param sk -> pointer to the skill to check 
-       *  \return -> skill check result value */
-      int doSkillCheck(skill* sk);
+       *  \param difficulty -> check difficulty
+       *  \return -> true if succes, false if fail */
+      bool doSkillCheck(skill* sk, int difficulty);
 
       /*! set avaible points
        * \param points -> avaiblePoints */

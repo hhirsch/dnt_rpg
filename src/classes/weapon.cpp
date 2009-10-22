@@ -116,9 +116,9 @@ weapon::weapon(string path): object(path)
       {
          sscanf(value.c_str(),"%d",&curBonusAndSaves.fortitude);
       }
-      else if(key == "reflex")
+      else if( (key == "reflex") || (key == "reflexes"))
       {
-         sscanf(value.c_str(),"%d",&curBonusAndSaves.reflex);
+         sscanf(value.c_str(),"%d",&curBonusAndSaves.reflexes);
       }
       else if( (key == "will") || (key == "i_am_not_a_fool") )
       {

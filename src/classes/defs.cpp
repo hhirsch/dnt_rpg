@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -199,7 +199,7 @@ void bonusAndSaves::clear()
 {
    level = 0;
    iAmNotAFool = 0;
-   reflex = 0;
+   reflexes = 0;
    fortitude = 0;
    baseAttackBonus.clear();
 }
@@ -212,7 +212,7 @@ bonusAndSaves bonusAndSaves::operator+(const bonusAndSaves& b)
    bonusAndSaves res;
    res.level = level + b.level;
    res.iAmNotAFool = iAmNotAFool + b.iAmNotAFool;
-   res.reflex = reflex + b.reflex;
+   res.reflexes = reflexes + b.reflexes;
    res.fortitude = fortitude + b.fortitude;
    res.baseAttackBonus = baseAttackBonus + b.baseAttackBonus;
 
@@ -226,9 +226,66 @@ bonusAndSaves& bonusAndSaves::operator=(const bonusAndSaves& b)
 {
    level = b.level;
    iAmNotAFool = b.iAmNotAFool;
-   reflex = b.reflex;
+   reflexes = b.reflexes;
    fortitude = b.fortitude;
    baseAttackBonus = b.baseAttackBonus;
    return(*this);
+}
+
+/***********************************************************************
+ *                               doCheck                               *
+ ***********************************************************************/
+bool bonusAndSaves::doCheck(string stateToCheck, int difficulty,
+      bool* couldCheck)
+{
+   bool canCheck = false;
+   bool checkRes = false;
+   int value = 0;
+   int checkType = DNT_CHECK_ROLL;
+   dice d20(DICE_D20);
+
+   /* Let's get the state (if defined) */
+   if(stateToCheck == DNT_BS_LEVEL)
+   {
+      checkType = DNT_CHECK_COMPARE;
+      canCheck = true;
+      value = level;
+   }
+   else if(stateToCheck == DNT_BS_FORTITUDE)
+   {
+      value = fortitude;
+      canCheck = true;
+   }
+   else if(stateToCheck == DNT_BS_REFLEXES)
+   {
+      value = reflexes;
+      canCheck = true;
+   }
+   else if( (stateToCheck == DNT_BS_I_AM_NOT_A_FOOL) ||
+            (stateToCheck == DNT_BS_WILL))
+   {
+      value = iAmNotAFool;
+      canCheck = true;
+   }
+
+   /* Do the check, if defined */
+   if(canCheck)
+   {
+      if(checkType == DNT_CHECK_COMPARE)
+      {
+         checkRes = value >= difficulty;
+      }
+      else if(checkType == DNT_CHECK_ROLL)
+      {
+         checkRes = (d20.roll() + value >= difficulty);
+      }
+   }
+
+   /* Set the flag */
+   if(couldCheck != NULL)
+   {
+      *couldCheck = canCheck;
+   }
+   return(checkRes);
 }
 

@@ -348,7 +348,7 @@ void classes::insertClass(string fileName, string imgFile, string idString,
                &ins->bonus[curBonus].level,
                &tmpBonus,
                &ins->bonus[curBonus].fortitude,
-               &ins->bonus[curBonus].reflex, 
+               &ins->bonus[curBonus].reflexes, 
                &ins->bonus[curBonus].iAmNotAFool);
          ins->bonus[curBonus].baseAttackBonus = attackBonus(tmpBonus);
       }

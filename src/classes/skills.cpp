@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -29,6 +29,7 @@ using namespace std;
 #include "../lang/translate.h"
 #include "../etc/dirs.h"
 #include "../etc/defparser.h"
+#include "../engine/briefing.h"
 
 ///////////////////////////////////////////////////////////////////////////
 //                                                                       //
@@ -286,22 +287,26 @@ int skills::getSkillIntByString(string idString)
 /*************************************************************
  *                       doSkillCheck                        *
  *************************************************************/
-int skills::doSkillCheck(string idString)
+bool skills::doSkillCheck(string idString, int difficulty)
 {
-   return(doSkillCheck(getSkillByString(idString)));
+   return(doSkillCheck(getSkillByString(idString), difficulty));
 }
 
 /*************************************************************
  *                       doSkillCheck                        *
  *************************************************************/
-int skills::doSkillCheck(skill* sk)
+bool skills::doSkillCheck(skill* sk, int difficulty)
 {
+   int res = 0;
+   dice d20(DICE_D20);
+   skill* att;
+   int mod = 0;
+   char buffer[512];
+   int value = 0;
+   briefing brief;
+
    if(sk != NULL)
    {
-      dice d20(DICE_D20);
-      skill* att;
-      int mod = 0;
-
       if(sk->definition->baseAttribute > 0)
       {
           att = getSkillByInt(sk->definition->baseAttribute);
@@ -325,15 +330,35 @@ int skills::doSkillCheck(skill* sk)
       if(sk->definition->isAttribute)
       {
          /* Is an attribute, the roll is with the modifier then */
-         return(d20.roll() + mod);
+         value = d20.roll() + mod;
       }
       else
       {
          /* Is an skill, do the normal roll */
-         return(d20.roll() + sk->points + mod);
+         value = d20.roll() + sk->points + mod;
       }
    }
-   return(0);
+
+   res = (value > difficulty);
+
+   /* Brief the result */
+   sprintf(&buffer[0], "%s: %d x %d: %s.",
+         sk->definition->name.c_str(), value, difficulty,
+         res?gettext("Success"):gettext("Failure"));
+
+   if(res)
+   {
+      /* With blue color */
+      brief.addText(buffer, 27, 169, 245);
+   }
+   else
+   {
+      /* With red color */
+      brief.addText(buffer, 233, 0, 5);
+   }
+
+   /* Done */
+   return(res);
 }
 
 /*************************************************************

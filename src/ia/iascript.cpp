@@ -949,15 +949,15 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    else if(functionName == IA_DICE_ROLL)
    {
       character* actor = NULL;
-      string sk = "";
+      string param = "";
       int difficulty = 0;
       bool res = false;
 
       /* Get the character */
       actor = getParameterc(token, strLine, pos);
       
-      /* Get the skill to check */
-      sk = getParameters(token, strLine, pos);
+      /* Get the state to check */
+      param = getParameters(token, strLine, pos);
       
       /* Get the roll difficulty */
       difficulty = getParameteri(token, strLine, pos);
@@ -965,17 +965,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       /* Finally, let's try the check */
       if(actor != NULL)
       {
-         skill* skl = actor->sk.getSkillByString(sk);
-         if(skl != NULL)
-         {
-            res = (actor->sk.doSkillCheck(skl) > difficulty);
-         }
-         else
-         {
-            cerr << "Error: Unknow skill '" << sk << "' at line "
-                 << actualLine << " of the script: " << fileName << endl;
-
-         }
+         res = actor->doCheck(param, difficulty);
       }
       else
       {

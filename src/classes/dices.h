@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -31,6 +31,9 @@
 #define DICE_D10  10     /**< Ten Faces Dice */
 #define DICE_D12  12     /**< Twelve Faces Dice */
 #define DICE_D20  20     /**< Twenty Faces Dice */
+
+#define DNT_CHECK_ROLL     0   /**< Roll a dice check */
+#define DNT_CHECK_COMPARE  1   /**< Compare values check */
 
 /******************************************************************
  *                           DICE STRUCT                          *

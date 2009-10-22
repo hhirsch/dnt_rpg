@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -111,6 +111,11 @@ class attackBonus
       int bonus[MAX_ATTACKS];  /**< The Bonuses itself */
 };
 
+#define DNT_BS_LEVEL           "LEVEL"
+#define DNT_BS_FORTITUDE       "FORTITUDE"
+#define DNT_BS_REFLEXES        "REFLEXES"
+#define DNT_BS_I_AM_NOT_A_FOOL "I_AM_NOT_A_FOOL"
+#define DNT_BS_WILL            "WILL"
 
 /*! Per Level Bonus and Saves */
 class bonusAndSaves
@@ -124,6 +129,14 @@ class bonusAndSaves
       /*! Clear Values */
       void clear();
 
+      /*! Do a check of a bonus or a save.
+       * \param stateToCheck -> state to check constant
+       * \param difficulty -> difficulty of the test
+       * \param couldCheck -> will be true if the stateToCheck is valid here,
+       *                      or false if it is invalid (not a bonus or a save)
+       * \return true if success, false if failed. */
+      bool doCheck(string stateToCheck, int difficulty, bool* couldCheck=NULL);
+
       /*! = Operator */
       bonusAndSaves& operator=(const bonusAndSaves& b);
 
@@ -133,7 +146,7 @@ class bonusAndSaves
       int level;                          /**< Class Level */
       attackBonus baseAttackBonus;        /**< Base Attack Bonus */
       int fortitude;                      /**< Fortitude Save Bonus */
-      int reflex;                         /**< Reflex Save Bonus */
+      int reflexes;                       /**< Reflexes Save Bonus */
       int iAmNotAFool;                    /**< I Am Not A Fool Bonus */
 };
 
