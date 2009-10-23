@@ -356,16 +356,29 @@ void engine::quitCurrentGame()
    btWindow.close();
    dlgWindow.close();
 
+   /* Close info Window, character window and journal window too */
+   if(infoWindow->isOpen())
+   {
+      infoWindow->close();
+   }
+   if(charInfoWindow->isOpen())
+   {
+      charInfoWindow->close();
+   }
+   if(journal->isOpen())
+   {
+      journal->close();
+   }
+
+   /* Close default windows */
    if(mapWindow)
    {
       mapWindow->close(gui);
    }
-
    if(shortcuts)
    {
       shortcuts->close(gui);
    }
-
    if(brief)
    {
       brief->closeWindow(gui);

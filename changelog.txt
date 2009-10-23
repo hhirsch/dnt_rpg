@@ -13,6 +13,7 @@
  - Added modifier effects (drink);
  - Use of new objects (narcotics);
  - New roll tests;
+ - Fixed segfault when loading game with characterWindow opened;
 
 Working on:
  - Weather effects;
