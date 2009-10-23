@@ -384,6 +384,13 @@ void engine::quitCurrentGame()
       brief->closeWindow(gui);
    }
 
+   /* Close inventory */
+   if(inventoryWindow)
+   {
+      delete(inventoryWindow);
+      inventoryWindow = NULL;
+   }
+
    /* Clear Modifications */
    modifState.clear();
    engineMode = ENGINE_MODE_REAL_TIME;
