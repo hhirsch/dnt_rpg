@@ -278,15 +278,12 @@ bool bonusAndSaves::doCheck(string stateToCheck, int difficulty,
    /* Do the check, if defined */
    if(canCheck)
    {
+      if(checkType == DNT_CHECK_ROLL)
+      {
+         value += d20.roll();
+      }
       brief.addCheckText(stateName, value, difficulty);
-      if(checkType == DNT_CHECK_COMPARE)
-      {
-         checkRes = value >= difficulty;
-      }
-      else if(checkType == DNT_CHECK_ROLL)
-      {
-         checkRes = (d20.roll() + value >= difficulty);
-      }
+      checkRes = (value >= difficulty);
    }
 
    /* Set the flag */
