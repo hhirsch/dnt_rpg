@@ -29,19 +29,19 @@ script(character target, int difficulty, int drunkLevel)
          # add modEffect to inteligence
          factorId = "INTELLIGENCE"
          factorType = "ATTRIBUTE"
-         modValue = (-1)*(rollDice(drunkLevel) + 2)
+         modValue = (0-1)*(rollDice(drunkLevel) + 2)
          addEffect(target, modValue, time, periodicTime, factorId, factorType)
 
          # add modEffect to balance
          factorId = "BALANCE"
          factorType = "SKILL"
-         modValue = (-1)*(rollDice(drunkLevel))
+         modValue = (0-1)*(rollDice(drunkLevel))
          addEffect(target, modValue, time, periodicTime, factorId, factorType)
 
          # add drinking saturation
          factorId = "DRINKING"
          factorType = "SKILL"
-         modValue = -1
+         modValue = 0-1
          addEffect(target, modValue, time, periodicTime, factorId, factorType)
       end
    end

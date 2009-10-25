@@ -116,6 +116,12 @@ string modEffect::toReadableText(void* actor)
    character* c = (character*)actor;
    skill* s;
 
+   if(actor == NULL)
+   {
+      cerr << "modEffect::toReadableText: NULL actor!" << endl;
+      return("");
+   }
+
    s = c->sk.getSkillByString(cause.id);
 
    if(s)

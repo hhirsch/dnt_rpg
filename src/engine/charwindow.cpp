@@ -247,7 +247,7 @@ void charWindow::open(character* pers)
             infoBar->addText(meff->toReadableText(pers), DNT_FONT_ARIAL, 10, 
                   DNT_FONT_STYLE_ITALIC, DNT_FONT_ALIGN_LEFT, 200, 20, 12);
          }
-         meff = (modEffect*)pers->getNext();
+         meff = (modEffect*)meff->getNext();
       }
 
       /* Put bar at init */
