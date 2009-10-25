@@ -77,6 +77,7 @@ character::character(featsList* ft)
 
    /* Effects */
    effects = new modEffectList();
+   effects->setOwner(this);
 
    /* Scripts */
    generalScript = NULL;
