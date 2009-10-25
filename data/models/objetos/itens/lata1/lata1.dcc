@@ -1,6 +1,5 @@
 name = gettext("Soda Can")
 cal3d = models/objetos/itens/lata1/model.cfg
-type = narcotic
 base_dice = 1*d3+2
 inventory_sizes = 1 1
 inventory_texture = models/objetos/itens/lata1/texture_inv.png
