@@ -1940,6 +1940,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
 
       /* Get parameters */
       partType = getParameteri(token, strLine, pos);
+      partFile = getParameters(token, strLine, pos);
       c = getParameterc(token, strLine, pos);
       if(c)
       {
@@ -1947,7 +1948,6 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          posY = c->max[1];
          posZ = c->zPosition;
       }
-      partFile = getParameters(token, strLine, pos);
       duration = getParameteri(token, strLine, pos);
 
       /* Add system */

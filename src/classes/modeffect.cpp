@@ -183,9 +183,7 @@ void modEffect::doApply(void* actor, int value)
          s = c->sk.getSkillByString(cause.id);
          if(s)
          {
-            cerr << "Was: " << s->points << endl;
             s->points += value;
-            cerr << "Is: " << s->points << endl;
          }
          else
          {

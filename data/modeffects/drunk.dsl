@@ -12,6 +12,9 @@ script(character target, int difficulty, int drunkLevel)
    int modValue, time, periodicTime
    string factorId, factorType
 
+   string partFile
+   int partType
+
    class = "PHILOSOPHY"
    fort = "FORTITUDE"
 
@@ -43,6 +46,11 @@ script(character target, int difficulty, int drunkLevel)
          factorType = "SKILL"
          modValue = 0-1
          addEffect(target, modValue, time, periodicTime, factorId, factorType)
+      
+         # Add particle effect
+         partFile = "particles/drunk.par"
+         partType = 2;
+         particleAddToCharacter(partType, partFile, target, time)
       end
    end
 end
