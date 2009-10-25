@@ -28,7 +28,7 @@ syn keyword dntOperator       void bool int float string character
 syn keyword dntOperator       true false
 
 " Functions
-syn keyword dntFunction       wait print 
+syn keyword dntFunction       wait print briefing 
 syn keyword dntFunction       moveToPosition moveToCharacter
 syn keyword dntFunction       moveToObject setIdle
 syn keyword dntFunction       missionAdd missionComplete missionIsActive

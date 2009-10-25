@@ -926,6 +926,20 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    }
 
    ////////////////////////////////////////////////////
+   //               Briefing Functions               //
+   ////////////////////////////////////////////////////
+   
+   /* Syntax: void briefing(string message)  */
+   if(functionName == IA_BRIEFING)
+   {
+      briefing brief;
+      string st = getParameters(token, strLine, pos);
+      
+      /* Print the message */
+      brief.addText(st);
+   }
+
+   ////////////////////////////////////////////////////
    //              Random (Dice) Function            //
    ////////////////////////////////////////////////////
 
