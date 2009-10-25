@@ -3166,6 +3166,7 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
       if(updateAnimations)
       {
          per->update(WALK_UPDATE);
+         per->getEffects()->doStep();
       }
 
       /* Load the Model */
@@ -3235,6 +3236,7 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
          if(updateAnimations)
          {
             per->update(WALK_UPDATE);
+            per->getEffects()->doStep();
          }
  
          /* Load the Model */
