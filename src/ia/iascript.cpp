@@ -1922,6 +1922,42 @@ void iaScript::callFunction(iaVariable* var, string strLine,
 
    }
 
+   ////////////////////////////////////////////////////
+   //                Particle Functions              //
+   ////////////////////////////////////////////////////
+   /* particleAddToCharacter */
+   else if(functionName == IA_PARTICLE_ADD_TO_CHARACTER)
+   {
+      /* Syntax: void particleAddToCharacter(int partType, string fileName,
+       *                                     character* c, int duration) */
+      int partType=0;
+      character* c;
+      float posX=0, posY=0, posZ=0;
+      string partFile="";
+      int duration = 0;
+      particleSystem* ps = NULL;
+      partController particles;
+
+      /* Get parameters */
+      partType = getParameteri(token, strLine, pos);
+      c = getParameterc(token, strLine, pos);
+      if(c)
+      {
+         posX = c->xPosition;
+         posY = c->max[1];
+         posZ = c->zPosition;
+      }
+      partFile = getParameters(token, strLine, pos);
+      duration = getParameteri(token, strLine, pos);
+
+      /* Add system */
+      ps = particles.addParticle(partType, posX, posY, posZ, partFile);
+      if(ps != NULL)
+      {
+         ps->setFollowPC(true);
+         ps->setDurationTime(duration);
+      }
+   }
 
    ////////////////////////////////////////////////////
    //                Quick Pointers                  //

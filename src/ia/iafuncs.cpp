@@ -134,7 +134,8 @@ bool isFunction(string s)
            (s == IA_DICE_ROLL) || (s == IA_ROLL_DICE)  || 
            (s == IA_CLASS_LEVEL) ||
            (s == IA_OWNER_HEIGHT) || (s == IA_OWNER_POSX) ||
-           (s == IA_OWNER_POSZ) );
+           (s == IA_OWNER_POSZ) || 
+           (s == IA_PARTICLE_ADD_TO_CHARACTER) );
 }
 
 /***********************************************************************

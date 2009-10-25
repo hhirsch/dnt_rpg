@@ -266,6 +266,13 @@ using namespace std;
 /*! void dialogSetInitial(character owner, string map, int dialogNumber) */
 #define IA_DIALOG_SET_INITIAL "dialogSetInitial"
 
+////////////////////////////////////////////////////
+//                Particle Functions              //
+////////////////////////////////////////////////////
+/*! void particleAddToCharacter(int partType, string fileName, character* c,
+ *                              int duration) */
+#define IA_PARTICLE_ADD_TO_CHARACTER "particleAddToCharacter"
+
 /*! Convert the infix string to a postfix one
  * \param infix -> infix expression 
  * \return -> postfix expression */

@@ -48,6 +48,7 @@ syn keyword dntFunction       dialogSetInitial
 syn keyword dntFunction       getObject getObjectState
 syn keyword dntFunction       isAllDead mapTravel
 syn keyword dntFunction       classLevel roll rollDice addEffect
+syn keyword dntFunction       particleAddToCharacter
 
 syn sync lines=250
 
