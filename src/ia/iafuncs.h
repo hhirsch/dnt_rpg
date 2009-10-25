@@ -96,6 +96,13 @@ using namespace std;
 #define IA_FALSE "false"   /**< Boolean FALSE value */
 
 ////////////////////////////////////////////////////
+//                 Quick Values                   //
+////////////////////////////////////////////////////
+#define IA_OWNER_HEIGHT "OWNER_HEIGHT"
+#define IA_OWNER_POSX   "OWNER_POSX"
+#define IA_OWNER_POSZ   "OWNER_POSZ"
+
+////////////////////////////////////////////////////
 //                  Time Functions                //
 ////////////////////////////////////////////////////
 /*! bool wait(int seconds) */

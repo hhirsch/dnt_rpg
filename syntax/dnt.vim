@@ -23,6 +23,7 @@ syn keyword dntTodo          contained TODO FIXME XXX NOTE
 " Operators and Types
 syn keyword dntOperator       SELF_OBJECT SELF_CHARACTER ACTIVE_CHARACTER
 syn keyword dntOperator       ACTUAL_MAP SELF_MISSION
+syn keyword dntOperator       OWNER_HEIGHT OWNER_POSX OWNER_POSZ
 syn keyword dntOperator       void bool int float string character
 syn keyword dntOperator       true false
 

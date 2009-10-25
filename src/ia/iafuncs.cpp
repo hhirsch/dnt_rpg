@@ -132,7 +132,9 @@ bool isFunction(string s)
            (s == IA_DIALOG_SET_INITIAL) || (s == IA_GET_NPC_BY_NAME) ||
            (s == IA_MAP_TRAVEL) || 
            (s == IA_DICE_ROLL) || (s == IA_ROLL_DICE)  || 
-           (s == IA_CLASS_LEVEL) );
+           (s == IA_CLASS_LEVEL) ||
+           (s == IA_OWNER_HEIGHT) || (s == IA_OWNER_POSX) ||
+           (s == IA_OWNER_POSZ) );
 }
 
 /***********************************************************************
@@ -166,6 +168,12 @@ string functionType(string s)
             (s == IA_ROLL_DICE) )
    {
       return(IA_TYPE_INT);
+   }
+   /* Float functions */
+   else if((s == IA_OWNER_HEIGHT) || (s == IA_OWNER_POSX) ||
+           (s == IA_OWNER_POSZ) )
+   {
+      return(IA_TYPE_FLOAT);
    }
    /* String Functions */
    else if( (s == IA_SELF_MISSION) || (s == IA_ACTUAL_MAP) )

@@ -1965,6 +1965,48 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       }
    }
 
+   /* float function */
+   else if( (functionName == IA_OWNER_HEIGHT) || 
+            (functionName == IA_OWNER_POSX) ||
+            (functionName == IA_OWNER_POSZ) )
+   {
+      if(var)
+      {
+         float v = 0.0;
+         thing* t = NULL;
+
+         /* Get the right pointer */
+         if(objectOwner != NULL)
+         {
+            t = objectOwner;
+         }
+         else if(characterOwner != NULL)
+         {
+            t = characterOwner;
+         }
+
+         /* Get the desired value */
+         if(t != NULL)
+         {
+            if(functionName == IA_OWNER_HEIGHT)
+            {
+               v = t->max[1];
+            }
+            else if(functionName == IA_OWNER_POSX)
+            {
+               v = t->xPosition;
+            }
+            else if(functionName == IA_OWNER_POSZ)
+            {
+               v = t->zPosition;
+            }
+         }
+
+         /* Return it */
+         assignValue(var, (void*)&v, IA_TYPE_FLOAT);
+      }
+   }
+
 
    ////////////////////////////////////////////////////
    //              Imediate Expressions              //
