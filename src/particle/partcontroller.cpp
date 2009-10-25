@@ -71,7 +71,7 @@ void partController::updateAll(float PCposX, float PCposY, float PCposZ,
       /* Apply PC position change */
       if(part->followPC)
       {
-         part->definePosition(PCposX, PCposY, PCposZ);
+         part->definePosition(PCposX, PCposZ);
       }
 
       /* Do the next step */
