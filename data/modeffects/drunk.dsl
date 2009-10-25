@@ -27,7 +27,7 @@ script(character target, int difficulty, int drunkLevel)
       else
          # Non-philosophy, calculate duration time
          periodicTime = 0
-         time = (rollDice(drunkLevel)+2) * 200
+         time = (rollDice(drunkLevel)+2) * 200000
 
          # add modEffect to inteligence
          factorId = "INTELLIGENCE"
