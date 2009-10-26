@@ -709,8 +709,48 @@ iaVariable* iaScript::getParameter(string& token, string strLine,
    if(isFunction(token))
    {
       /* Get the function value */
-      iv = new iaVariable(paramType,"param");
+      iv = new iaVariable(paramType, "__param__");
       callFunction(iv,strLine,token,pos);
+   }
+   else if(!iv)
+   {
+      /* no variable found, must be a literal constant. 
+       * let's create a temporary variable to it */
+      if( (paramType == IA_TYPE_INT) && (isInteger(token)) )
+      {
+         /* Create the integer value at the stack */
+         int ti;
+         sscanf(token.c_str(),"%d",&ti);
+         iv = new iaVariable(IA_TYPE_INT, "__param__");
+         *(int*)iv->value = ti;
+      }
+      else if( (paramType == IA_TYPE_FLOAT) && 
+               (isInteger(token)) || (isFloat(token)) )
+      {
+         /* Create the float value at the stack */
+         float tf;
+         sscanf(token.c_str(),"%f",&tf);
+         iv = new iaVariable(IA_TYPE_FLOAT, "__param__");
+         *(float*)iv->value = tf;
+      }
+      else if( (paramType == IA_TYPE_STRING) && (isString(token)) )
+      {
+         /* Create the string value on the stack */
+         iv = new iaVariable(IA_TYPE_STRING, "__param__");
+
+         /* remove the first and the last " */
+         token.erase(0,1);
+         token.erase(token.length()-1,1);
+
+         *(string*)iv->value = token;
+      }
+      else
+      {
+         cerr << "Error: unknow token '" << token << "' at " << strLine
+            << " on script " << fileName << " line " << actualLine
+            << endl;
+         return(NULL);
+      }
    }
 
    /* Verify type compatibility */
@@ -749,7 +789,7 @@ int iaScript::getParameteri(string& token, string strLine, unsigned int& pos)
       val = (*(int*)iv->value);
 
       /* Delete temporary variable (if is temporary) */
-      if(isFunction(token))
+      if(iv->name == "__param__")
       {
          delete(iv);
       }
@@ -781,7 +821,7 @@ float iaScript::getParameterf(string& token, string strLine, unsigned int& pos)
       }
 
       /* Delete temporary variable (if is temporary) */
-      if(isFunction(token))
+      if(iv->name == "__param__")
       {
          delete(iv);
       }
@@ -806,7 +846,7 @@ string iaScript::getParameters(string& token, string strLine, unsigned int& pos)
       st = *(string*)iv->value;
 
       /* Delete the temporary variable, if any */
-      if(isFunction(token))
+      if(iv->name == "__param__")
       {
          delete(iv);
       }
@@ -830,7 +870,7 @@ character* iaScript::getParameterc(string& token, string strLine,
    if(iv != NULL)
    {
       dude = (character*)iv->value;
-      if(isFunction(token))
+      if(iv->name == "__param__")
       {
          delete(iv);
       }
@@ -853,7 +893,7 @@ object* iaScript::getParametero(string& token, string strLine,
    if(iv != NULL)
    {
       obj = (object*)iv->value;
-      if(isFunction(token))
+      if(iv->name == "__param__")
       {
          delete(iv);
       }
