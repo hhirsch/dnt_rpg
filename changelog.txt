@@ -14,6 +14,8 @@
  - Use of new objects (narcotics);
  - New roll tests;
  - Fixed segfault when loading game with characterWindow opened;
+ - iaScripts: accepting the use of - operator as 'signal change';
+ - iaScripts: accepting literals as functions parameter;
 
 Working on:
  - Weather effects;
