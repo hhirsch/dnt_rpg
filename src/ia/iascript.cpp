@@ -2149,14 +2149,28 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine,
                 (token == IA_OPERATOR_DIVISION) ||
                 (token == IA_OPERATOR_MODULUS) )
             {
-               /* Pop the two variables */
-               if(varPos < 2)
+
+               if( (varPos == 1) && (token == IA_OPERATOR_SUBTRACTION) )
                {
-                  cerr << "Error: operator " << token << " needs two variables"
-                       << endl;
+                  /* Just change the variable signal */
+                  if( (varStack[0]->type == IA_TYPE_FLOAT) ||
+                      (varStack[0]->type == IA_TYPE_INT) )
+                  {
+                     varStack[0]->changeSignal();
+                  }
+                  else
+                  {
+                     cerr << "Error: operator '-' must be int or float" << endl;
+                  }
+               }
+               else if(varPos < 2)
+               {
+                  cerr << "Error: operator '" << token 
+                       << "' needs two variables" << endl;
                }
                else
                {
+                  /* Pop the two variables */
                   var1 = varStack[varPos-1];
                   var2 = varStack[varPos-2];
                   varPos -= 2;

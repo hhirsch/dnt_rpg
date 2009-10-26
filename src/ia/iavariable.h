@@ -71,6 +71,9 @@ class iaVariable: public dntListElement
        * \param v2 -> pointer to the second variable (NULL on NOT !)*/
       void receiveOperation(string operation, iaVariable* v1, iaVariable* v2);
 
+      /*! Change the signal of the current variable value */
+      void changeSignal();
+
       /*!  Convert the variable value to a string one
        * \return -> string representing the variable value */
       string toString();

@@ -342,6 +342,21 @@ void iaVariable::operator=(const iaVariable& v)
 }
 
 /***********************************************************
+ *                    changeSignal                         *
+ ***********************************************************/
+void iaVariable::changeSignal()
+{
+   if(type == IA_TYPE_INT)
+   {
+      *(int*)value = -(*(int*)value);
+   }
+   else if(type == IA_TYPE_FLOAT)
+   {
+      *(float*)value = -(*(float*)value);
+   }
+}
+
+/***********************************************************
  *                  receiveOperation                       *
  ***********************************************************/
 void iaVariable::receiveOperation(string operation, iaVariable* v1,
