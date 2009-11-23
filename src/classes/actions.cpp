@@ -175,7 +175,10 @@ bool doHealOrAttack(thing& actor, thing* target,
    targetValue = target->armatureClass;
 
    /* Defined heal agains't as AC/2.0 */
-   targetValue /= 2.0f;
+   if(heal)
+   {
+      targetValue /= 2.0f;
+   }
 
    /* verify critical Hit */
    if(diceValue == DICE_D20)
@@ -283,7 +286,7 @@ bool doHealOrAttack(thing& actor, thing* target,
       target->addLifePoints(-damage);
    }
 
-   if( criticalHit)
+   if(criticalHit)
    {
       if(heal)
       {
