@@ -17,8 +17,8 @@ script(character target)
    if(level >= 15)
 
       # Calculate the aditional dice, based on class level
-      numDices =  level-15;
-      setAditionalDice(d, numDices, "2*d6"); 
+      numDices = level-15;
+      setAditionalDice(d, numDices, "2*d6+0"); 
       
       # TODO: call esophagus animation
 

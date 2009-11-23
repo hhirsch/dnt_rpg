@@ -274,6 +274,14 @@ using namespace std;
  *                              int duration) */
 #define IA_PARTICLE_ADD_TO_CHARACTER "particleAddToCharacter"
 
+////////////////////////////////////////////////////
+//                Dice Functions                  //
+////////////////////////////////////////////////////
+/*! void setBaseDice(dice d, string diceInfo) */
+#define IA_SET_BASE_DICE "setBaseDice"
+/*! void setAditionalDice(dice d, int numberOfDices, string diceInfo) */
+#define IA_SET_ADITIONAL_DICE "setAditionalDice"
+
 /*! Convert the infix string to a postfix one
  * \param infix -> infix expression 
  * \return -> postfix expression */

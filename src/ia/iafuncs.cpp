@@ -92,7 +92,7 @@ bool isType(string s)
    return( (s == IA_TYPE_VOID) || (s == IA_TYPE_BOOL) ||
            (s == IA_TYPE_INT) || (s == IA_TYPE_FLOAT) ||
            (s == IA_TYPE_STRING) || (s == IA_TYPE_CHARACTER) ||  
-           (s == IA_TYPE_OBJECT) );
+           (s == IA_TYPE_OBJECT) || (s == IA_TYPE_DICE) );
 
 }
 
@@ -135,7 +135,8 @@ bool isFunction(string s)
            (s == IA_CLASS_LEVEL) ||
            (s == IA_OWNER_HEIGHT) || (s == IA_OWNER_POSX) ||
            (s == IA_OWNER_POSZ) || 
-           (s == IA_PARTICLE_ADD_TO_CHARACTER) );
+           (s == IA_PARTICLE_ADD_TO_CHARACTER) || 
+           (s == IA_SET_BASE_DICE) || (s == IA_SET_ADITIONAL_DICE) );
 }
 
 /***********************************************************************

@@ -903,6 +903,29 @@ object* iaScript::getParametero(string& token, string strLine,
 }
 
 /***********************************************************************
+ *                          getParameterd                              *
+ ***********************************************************************/
+diceThing* iaScript::getParameterd(string& token, string strLine, 
+      unsigned int& pos)
+{
+   iaVariable* iv = NULL;
+   diceThing* dice = NULL;
+
+   /* Get character */
+   iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
+   if(iv != NULL)
+   {
+      dice = (diceThing*)iv->value;
+      if(iv->name == "__param__")
+      {
+         delete(iv);
+      }
+   }
+
+   return(dice);
+}
+
+/***********************************************************************
  *                           assignValue                               *
  ***********************************************************************/
 void iaScript::assignValue(iaVariable* var, void* value, string type)
@@ -924,6 +947,10 @@ void iaScript::assignValue(iaVariable* var, void* value, string type)
       else if(type == IA_TYPE_STRING)
       {
          (*(string*)var->value) = *(string*)value;
+      }
+      else if(type == IA_TYPE_DICE)
+      {
+         cerr << "Error: Invalid dice assign on script!" << endl;
       }
       else
       {
@@ -1996,6 +2023,43 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       {
          ps->setFollowPC(true);
          ps->setDurationTime(duration);
+      }
+   }
+
+   ////////////////////////////////////////////////////
+   //                  Dice Functions                //
+   ////////////////////////////////////////////////////
+   /* void setBaseDice */
+   else if(functionName == IA_SET_BASE_DICE)
+   {
+      diceThing* d = getParameterd(token, strLine, pos);
+      string diceInfo = getParameters(token, strLine, pos);
+      int dType = DICE_D2;
+      int numDices = 0;
+      int sum = 0;
+      if(d)
+      {
+         sscanf(diceInfo.c_str(), "%d*d%d+%d", &numDices, &dType, &sum);
+         d->baseDice.setType(dType);
+         d->baseDice.setNumberOfDices(numDices);
+         d->baseDice.setSumNumber(sum);
+      }
+   }
+   /* void setAditionalDice */
+   else if(functionName == IA_SET_ADITIONAL_DICE)
+   {
+      diceThing* d = getParameterd(token, strLine, pos);
+      int multDices = getParameteri(token, strLine, pos);
+      string diceInfo = getParameters(token, strLine, pos);
+      int dType = DICE_D2;
+      int numDices = 0;
+      int sum = 0;
+      if(d)
+      {
+         sscanf(diceInfo.c_str(), "%d*d%d+%d", &numDices, &dType, &sum);
+         d->aditionalDice.setType(dType);
+         d->aditionalDice.setNumberOfDices(numDices*multDices);
+         d->aditionalDice.setSumNumber(sum);
       }
    }
 

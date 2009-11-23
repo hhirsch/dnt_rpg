@@ -27,6 +27,7 @@
 
 #include "../engine/character.h"
 #include "../classes/object.h"
+#include "../classes/dices.h"
 #include "../classes/feats.h"
 #include "../classes/skills.h"
 #include "../map/map.h"
@@ -168,8 +169,9 @@ class iaScript
       int getParameteri(string& token, string strLine, unsigned int& pos);
       float getParameterf(string& token, string strLine, unsigned int& pos);
       character* getParameterc(string& token, string strLine,unsigned int& pos);
-      object* getParametero(string& token, string strLine,unsigned int& pos);
+      object* getParametero(string& token, string strLine, unsigned int& pos);
       string getParameters(string& token, string strLine, unsigned int& pos);
+      diceThing* getParameterd(string& token, string strLine,unsigned int& pos);
 
       /*! Assign the value to the variable
        * \param var -> pointer to a variable
