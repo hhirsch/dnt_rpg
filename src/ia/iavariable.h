@@ -30,6 +30,7 @@
 #include <fstream>
 using namespace std;
 
+/* \todo IA_TYPE_DICE toString and from string to save!*/
 
 /*! iaVariable Class. It's just a variable to use at ia scripts */
 class iaVariable: public dntListElement

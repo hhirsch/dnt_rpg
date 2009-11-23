@@ -67,6 +67,7 @@ using namespace std;
 #define IA_TYPE_INT "int" 
 #define IA_TYPE_FLOAT "float"
 #define IA_TYPE_STRING "string"
+#define IA_TYPE_DICE "dice"
 #define IA_TYPE_CHARACTER "character"
 #define IA_TYPE_OBJECT "object"
 

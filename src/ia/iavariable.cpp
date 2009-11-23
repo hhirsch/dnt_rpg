@@ -23,6 +23,7 @@
 #include "../engine/character.h"
 #include "../engine/dccnit.h"
 #include "../classes/object.h"
+#include "../classes/dices.h"
 
 #define IA_SYMBOLS_TOKEN_VARIABLE   "variable"
 #define IA_SYMBOLS_TOKEN_VALUE      "value"
@@ -59,6 +60,10 @@ iaVariable::iaVariable(string varType, string varName)
    else if(type == IA_TYPE_STRING)
    {
       value = new string;
+   }
+   else if(type == IA_TYPE_DICE)
+   {
+      value = new diceThing;
    }
    else if( (type == IA_TYPE_CHARACTER) || (type == IA_TYPE_OBJECT) )
    {
@@ -98,6 +103,12 @@ iaVariable::~iaVariable()
          string* s = (string*)value;
          delete(s);
       }
+      else if(type == IA_TYPE_DICE)
+      {
+         diceThing* d = (diceThing*)value;
+         delete(d);
+      }
+
       /* else don't do anything, since it's only a pointer. */
    }
 }
@@ -276,6 +287,10 @@ void iaVariable::operator=(void* v)
       string* sb = (string*)v;
       *sa = *sb;
    }
+   else if(type == IA_TYPE_DICE)
+   {
+      cerr << "Invalid call to dice assign on the script!" << endl;
+   }
    else
    {  
       /* Just assign pointers */
@@ -313,6 +328,10 @@ void iaVariable::operator=(const iaVariable& v)
          string* sa = (string*)value;
          string* sb = (string*)v.value;
          *sa = *sb;
+      }
+      else if(type == IA_TYPE_DICE)
+      {
+         cerr << "Invalid call to dice assign on the script!" << endl;
       }
       else
       {  
@@ -585,6 +604,10 @@ string iaVariable::toString()
    {
       return(*(string*)value);
    }
+   else if(type == IA_TYPE_DICE)
+   {
+      /* TODO! diceThing* d = (diceThing*)value; */
+   }
    else if(type == IA_TYPE_CHARACTER)
    {
       character* chr = (character*)value;
@@ -648,6 +671,10 @@ void iaVariable::fromString(string s, void* curEngine)
       /* Get the NPC with the file */
       engine* eng = (engine*)curEngine;
       value = (void*)eng->NPCs->getCharacter(s);
+   }
+   else if(type == IA_TYPE_DICE)
+   {
+      /* TODO! */
    }
    else if(type == IA_TYPE_OBJECT)
    {
