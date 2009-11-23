@@ -1677,6 +1677,24 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       }
    }
 
+   /* Syntax:
+      bool doAttack(character actor, character target, dice d, string base) */
+   else if(functionName == IA_FIGHT_DO_ATTACK)
+   {
+      character* actor = getParameterc(token, strLine, pos);
+      character* target = getParameterc(token, strLine, pos);
+      diceThing* d = getParameterd(token, strLine, pos);
+      string baseBonus = getParameters(token, strLine, pos);
+      bool res = false;
+
+      if( (actor) && (target) && (d) )
+      {
+         // TODO doHealOrAttack(actor, target, *d, 
+      }
+
+      assignValue(var, (void*)res, IA_TYPE_BOOL);
+   }
+
    
    ////////////////////////////////////////////////////
    //                 Object Functions               //
