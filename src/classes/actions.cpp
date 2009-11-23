@@ -190,6 +190,7 @@ bool doHealOrAttack(thing& actor, thing* target,
       }
    }
    else
+   {
       /* verify critical Miss */
       if( diceValue == 1)  
       {
@@ -200,6 +201,7 @@ bool doHealOrAttack(thing& actor, thing* target,
             criticalMiss = true;
          }
       }
+   }
 
    /* Put Dice Values on Briefing */
    char txtBonus[32];
