@@ -378,9 +378,15 @@ pendingAction* pendingActionController::addAction(pendingAction* act,
                                           NPCs, PCs, true);
          }
       }
+      else if(act->actionType == ACT_WAIT)
+      {
+         /* Nothing! */
+      }
       else
       {
-         //TODO
+         /* TODO */
+         cerr << "Warning: Pending action of type '" << act->actionType 
+              << "' not yet implemented!" << endl;
       }
 
    }
