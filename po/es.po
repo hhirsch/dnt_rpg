@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2009-10-22 15:37-0300\n"
-"PO-Revision-Date: 2009-07-05 05:08+0000\n"
-"Last-Translator: farrer <farrer@gmail.com>\n"
+"POT-Creation-Date: 2009-12-28 10:35-0200\n"
+"PO-Revision-Date: 2009-11-20 22:48+0000\n"
+"Last-Translator: someone <someoneigna@hotmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-07-05 12:56+0000\n"
+"X-Launchpad-Export-Date: 2009-12-23 14:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: src/classes/actions.cpp:128
@@ -31,35 +31,35 @@ msgstr "%s intenta curar a %s"
 msgid "Too far away for action!"
 msgstr "¡Muy lejos para la acción!"
 
-#: src/classes/actions.cpp:231 src/classes/actions.cpp:254
+#: src/classes/actions.cpp:236 src/classes/actions.cpp:259
 msgid "Miss."
 msgstr "Fallo."
 
-#: src/classes/actions.cpp:234 src/classes/actions.cpp:238
+#: src/classes/actions.cpp:239 src/classes/actions.cpp:243
 msgid "Critical Miss!"
 msgstr "¡Fallo crítico!"
 
-#: src/classes/actions.cpp:267
+#: src/classes/actions.cpp:272
 #, c-format
 msgid "Healed %d points."
 msgstr "%d puntos de vida restaurados."
 
-#: src/classes/actions.cpp:271
+#: src/classes/actions.cpp:276
 #, c-format
 msgid "Hit for %d points."
 msgstr "%d puntos de impacto."
 
-#: src/classes/actions.cpp:290 src/classes/actions.cpp:293
+#: src/classes/actions.cpp:295 src/classes/actions.cpp:298
 msgid "Critical Heal!"
 msgstr "¡Curación crítica!"
 
-#: src/classes/actions.cpp:298 src/classes/actions.cpp:302
+#: src/classes/actions.cpp:303 src/classes/actions.cpp:307
 msgid "Critical Hit!"
 msgstr "¡Impacto crítico!"
 
 #: src/classes/defs.cpp:256
 msgid "Level"
-msgstr "Nivel"
+msgstr ""
 
 #: src/classes/defs.cpp:262 src/engine/charwindow.cpp:210
 msgid "Fortitude"
@@ -67,7 +67,7 @@ msgstr "Fortaleza"
 
 #: src/classes/defs.cpp:268 src/engine/charwindow.cpp:215
 msgid "Reflexes"
-msgstr "Reflejos"
+msgstr ""
 
 #: src/classes/defs.cpp:275 src/engine/charwindow.cpp:220
 msgid "I am Not a Fool"
@@ -174,10 +174,10 @@ msgstr "Carisma"
 msgid "Attribute Description"
 msgstr "Descripción de atributo"
 
-#: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:537
+#: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:557
 #: src/engine/inventwindow.cpp:369 src/engine/options.cpp:1232
 msgid "Warning"
-msgstr "Aviso"
+msgstr "Advertencia"
 
 #: src/engine/attwindow.cpp:552
 msgid "You Need to Assign All Attributes."
@@ -198,7 +198,7 @@ msgstr "Imponer"
 #: src/engine/barterwindow.cpp:94 src/engine/barterwindow.cpp:104
 #: src/engine/inventwindow.cpp:55 src/engine/options.cpp:152
 msgid "Inventory"
-msgstr "Equipo"
+msgstr "Inventario"
 
 #: src/engine/barterwindow.cpp:259
 msgid "The barter was accepted."
@@ -274,7 +274,7 @@ msgstr "CA"
 
 #: src/engine/charwindow.cpp:205
 msgid "Total Level"
-msgstr "Nivel Total"
+msgstr ""
 
 #: src/engine/charwindow.cpp:225
 msgid "Base Attack Modifier"
@@ -373,66 +373,66 @@ msgstr "Habilidades de clase"
 msgid "No Skills."
 msgstr "Sin habilidades"
 
-#: src/engine/dccnit.cpp:478 src/engine/dccnit.cpp:528
+#: src/engine/dccnit.cpp:498 src/engine/dccnit.cpp:548
 msgid "Error"
 msgstr "Error"
 
-#: src/engine/dccnit.cpp:478
+#: src/engine/dccnit.cpp:498
 msgid "Can't load the saved game!"
 msgstr "No se puede cargar el juego guardado!"
 
-#: src/engine/dccnit.cpp:523
+#: src/engine/dccnit.cpp:543
 msgid "Information"
 msgstr "Información"
 
-#: src/engine/dccnit.cpp:524
+#: src/engine/dccnit.cpp:544
 msgid "The game was saved!"
 msgstr "El juego ha sido guardado!"
 
-#: src/engine/dccnit.cpp:528
+#: src/engine/dccnit.cpp:548
 msgid "Can't save game!"
 msgstr "No se puede guardar el juego!"
 
-#: src/engine/dccnit.cpp:538
+#: src/engine/dccnit.cpp:558
 msgid "Can't save game while fighting!"
 msgstr "¡No puedes salvar el juego mientras estás luchando!"
 
-#: src/engine/dccnit.cpp:673
+#: src/engine/dccnit.cpp:693
 #, c-format
 msgid "Saving Current Map Modifications"
 msgstr "Salvando modificaciones del mapa actual"
 
-#: src/engine/dccnit.cpp:708
+#: src/engine/dccnit.cpp:728
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Cargando mapa: %s..."
 
-#: src/engine/dccnit.cpp:771
+#: src/engine/dccnit.cpp:791
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Cargando PNJ: %s..."
 
-#: src/engine/dccnit.cpp:811
+#: src/engine/dccnit.cpp:831
 msgid "Creating MiniMap"
 msgstr "Creando minimapa..."
 
-#: src/engine/dccnit.cpp:817
+#: src/engine/dccnit.cpp:837
 msgid "Putting GUI on Screen"
 msgstr "Colocando GUI en pantalla..."
 
-#: src/engine/dccnit.cpp:861
+#: src/engine/dccnit.cpp:881
 msgid "Loading Particles"
 msgstr "Cargando partículas..."
 
-#: src/engine/dccnit.cpp:891
+#: src/engine/dccnit.cpp:911
 msgid "Loading Changes..."
 msgstr "Cargando cambios..."
 
-#: src/engine/dccnit.cpp:919
+#: src/engine/dccnit.cpp:939
 msgid "Done!"
 msgstr "¡Hecho!"
 
-#: src/engine/dccnit.cpp:1011
+#: src/engine/dccnit.cpp:1031
 msgid ""
 "DccNiTghtmare is relesead under GPLv3 or later: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -444,50 +444,50 @@ msgstr ""
 "está agradecido de toda la gente relacionada en el desarrollo de estas "
 "librerías: OpenAL, Cal3D, OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 
-#: src/engine/dccnit.cpp:1533
+#: src/engine/dccnit.cpp:1553
 msgid "Too far away for the action!"
 msgstr "¡Demasiado lejos para la acción!"
 
-#: src/engine/dccnit.cpp:1578
+#: src/engine/dccnit.cpp:1598
 msgid "No NPCs in the area."
 msgstr "No hay PNJ's en el área"
 
-#: src/engine/dccnit.cpp:1638
+#: src/engine/dccnit.cpp:1658
 msgid "Surprise Attack Turn."
 msgstr "Turno de ataque por sorpresa"
 
-#: src/engine/dccnit.cpp:1652
+#: src/engine/dccnit.cpp:1672
 msgid "No enemies in the area."
 msgstr "No hay enemigos en el área"
 
-#: src/engine/dccnit.cpp:1831 src/engine/dccnit.cpp:2350
+#: src/engine/dccnit.cpp:1851 src/engine/dccnit.cpp:2370
 #: src/engine/shortcutswindow.cpp:51
 msgid "Nothing"
 msgstr "Nada"
 
-#: src/engine/dccnit.cpp:2099
+#: src/engine/dccnit.cpp:2119
 #, c-format
 msgid "%s taken."
 msgstr "Recogido %s"
 
-#: src/engine/dccnit.cpp:2116
+#: src/engine/dccnit.cpp:2136
 msgid "Inventory is full!"
 msgstr "¡Inventario lleno!"
 
-#: src/engine/dccnit.cpp:2149
+#: src/engine/dccnit.cpp:2169
 msgid "Door"
 msgstr "Puerta"
 
-#: src/engine/dccnit.cpp:2285
+#: src/engine/dccnit.cpp:2305
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s ataca a %s"
 
-#: src/engine/dccnit.cpp:2451
+#: src/engine/dccnit.cpp:2471
 msgid "No more actions. Turn ended."
 msgstr "Sin acciones. Turno finalizado."
 
-#: src/engine/dccnit.cpp:3962
+#: src/engine/dccnit.cpp:3984
 msgid "Exit Battle Mode"
 msgstr "Salir del modo de batalla"
 
@@ -569,11 +569,11 @@ msgstr "Info"
 
 #: src/engine/inventwindow.cpp:200
 msgid "Read"
-msgstr ""
+msgstr "Leer"
 
 #: src/engine/inventwindow.cpp:203
 msgid "Reload Weapon"
-msgstr ""
+msgstr "Recargar arma"
 
 #: src/engine/inventwindow.cpp:206
 msgid "Use"
@@ -1150,30 +1150,35 @@ msgid ""
 "One of those terrible monsters: a 18th level Music Student mixed with a "
 "single (and incredible) Administration Student level: Michael J."
 msgstr ""
+"Uno de esos terroríficos monstruos: un Estudiante de Música de nivel 18 "
+"mezclado con un único (e increíble) Estudiante de Administración: Michael J."
 
 #: data/comics/other/mjack/mjack.dcb:26
 msgid "Originated by a failed Simulacrum proccess of an ancient J-5 member,"
 msgstr ""
+"Originado a partir de un proceso de Simulacro fallido en un antiguo miembro "
+"de J-5."
 
 #: data/comics/other/mjack/mjack.dcb:37
 msgid "it used a hat, Supedohat. Apparently a common white hat,"
 msgstr ""
+"Solía ser un sombrero, Supedohat. Apararentemente un sombrero blanco común,"
 
 #: data/comics/other/mjack/mjack.dcb:40
 msgid "but, actually, a metamorphosical throwning thriller weapon."
-msgstr ""
+msgstr "pero, en realidad, un arma metamórfica punzante arrojadiza."
 
 #: data/comics/other/mjack/mjack.dcb:51
 msgid "As all monsters, it had weak points:"
-msgstr ""
+msgstr "Como todos los monstruos, tiene puntos débiles:"
 
 #: data/comics/other/mjack/mjack.dcb:54
 msgid "An obsessed fear of 3rd world diseases"
-msgstr ""
+msgstr "Un miedo obsesivo por las enfermedades del 3er mundo"
 
 #: data/comics/other/mjack/mjack.dcb:65
 msgid "and more than US$200 million debt."
-msgstr ""
+msgstr "y una deuda de más de 200 millones de dólares."
 
 #: data/comics/tutorial/combat/combat.dcb:19
 #: data/comics/tutorial/combat/combat.dcb:38
@@ -1186,10 +1191,11 @@ msgstr "El Libro de combate"
 #: data/comics/tutorial/combat/combat.dcb:48
 msgid "The fight mode is an special turn based interaction used to... FIGHT!"
 msgstr ""
+"El modo lucha es un tipo especial de interacción por turnos para... ¡LUCHAR!"
 
 #: data/comics/tutorial/combat/combat.dcb:58
 msgid "There are two ways to enter Fight Mode:"
-msgstr ""
+msgstr "Hay dos formas de activar el Modo Lucha:"
 
 #: data/comics/tutorial/combat/combat.dcb:60
 msgid ""
@@ -1212,6 +1218,8 @@ msgid ""
 "First, each character rolls an initiative check, to define the order each "
 "one will act."
 msgstr ""
+"Primero, cada personaje realiza una tirada de comprobación, para decidir el "
+"orden de acción."
 
 #: data/comics/tutorial/combat/combat.dcb:91
 msgid ""
@@ -1219,14 +1227,21 @@ msgid ""
 "your hostile intentions, you'll receive a first Surprise Attack Turn before "
 "the normal battle."
 msgstr ""
+"Si fuiste tú quien inició el Modo Lucha, y las otras criaturas no vieron tus "
+"intenciones hostiles, recibirás un turno de ataque sorpresa antes de "
+"comenzar la lucha normal."
 
 #: data/comics/tutorial/combat/combat.dcb:120
 msgid "Each turn, a character can take a move action and an attack action."
 msgstr ""
+"Un personaje puede realizar una acción de movimiento y una acción de ataque "
+"en cada turno."
 
 #: data/comics/tutorial/combat/combat.dcb:130
 msgid "Or, if needed, take a full move action to move further."
 msgstr ""
+"O, si es necesario, puede realizar una acción completa de movimiento para "
+"desplazarse aún más lejos."
 
 #: data/comics/tutorial/combat/combat.dcb:140
 msgid "Your action's range is represented by circles."
@@ -1537,6 +1552,13 @@ msgid ""
 "be able to behave in a hideous manner: drowning hookies, public perversion, "
 "among other activities that result in death."
 msgstr ""
+"El Estudiante de Medicina es una persona que ha dejado de lado su vida "
+"social a cambio de una dedicación anormal a sus estudios, creyendo que "
+"llegará a ser algo en la vida. Estas criaturas carecen de astucia, y basan "
+"sus vidas en teorías y más teorías. Para ser uno de esta clase, el personaje "
+"necesita comportarse de una forma horrible: evitar faltas, realizar actos "
+"perversos en público, entre otras actividades que pueden resultar en la "
+"muerte."
 
 #: data/classes/medician.cls:7
 msgid ""
@@ -1569,6 +1591,10 @@ msgid ""
 "all I am not a Fool tests (diminished to -6 when the target is their father "
 "or mother)."
 msgstr ""
+"El Estudiante de Medicina está tan inmerso en sus estudios que se ha "
+"olvidado de crecer, siendo muy susceptible a los interrogatorios; recibe -3 "
+"en todas las pruebas de estupidez (reduciéndose a -6 cuando el blanco es su "
+"padre o madre)."
 
 #: data/classes/medician.cls:15
 msgid ""
@@ -1653,6 +1679,8 @@ msgid ""
 "For the hard work observing ameivas, the Biology Student receives +2 of "
 "furtivity."
 msgstr ""
+"Debido al arduo trabajo de observar lagartijas, el Estudiante de Biología "
+"recibe +2 en furtividad."
 
 #: data/classes/music.cls:1
 msgid "Music Student"
@@ -2457,12 +2485,23 @@ msgid ""
 "autism be a world of wars and shots, fights and samurais, Latin American "
 "culture or styles of swords and drums."
 msgstr ""
+"Aunque, desde lejos, parezca una persona normal y corriente, este "
+"atormentado organismo sufre severas disfunciones psicológicas y tiene un "
+"comportamiento singular. Estas creaturas tienen el poder de externalizar "
+"todos los elementos que existen en su propio mundo, en ocasiones "
+"confundiendo a otras razas. Temido por muchos e incomprendido por todos, "
+"este organismo dirigirá su vida como cualquier otro, sin ponerse a sí mismo "
+"o a otros en riesgo. Hay un poco de Autista Extraño dentro de todos, ya sea "
+"un mundo de guerras y disparos, luchas y samurais, cultura latinoamericana o "
+"tipos de espadas y tambores."
 
 #: data/races/autista.rca:6
 msgid ""
 "Being far too strange in someone else's eyes, the Strange Autistic receives -"
 "4 on all Social Tests when dealing with a target of opposite tendencies."
 msgstr ""
+"Al ser tan extraño a ojos de los demás, el Autista Extraño recibe -4 en "
+"todos los Test Sociales al tratar con un blanco de tendencias opuestas."
 
 #: data/races/autista.rca:8
 msgid ""
@@ -2470,16 +2509,21 @@ msgid ""
 "her, the Strange Autistic receives a bonus of + 2 on all Social Tests when "
 "dealing with a target of compatible tendencies."
 msgstr ""
+"Entender el hecho de que todos somos también un poco autistas, otorga al "
+"Autista Extraño +2 en todos los Test Sociales cuando trata con un blanco de "
+"tendencias similares."
 
 #: data/races/boy.rca:1
 msgid "Boy / Paty"
-msgstr ""
+msgstr "Boy / Paty"
 
 #: data/races/boy.rca:2
 msgid ""
 "'Ah friend, I can't, 'cause I'll do some biceps exercises today'|(Tico "
 "Bombadinho)"
 msgstr ""
+"'Ah amigo, no puedo, porque hoy tengo que hacer algunos ejercicios de "
+"musculación'|(Tico Bombadinho)"
 
 #: data/races/boy.rca:3
 msgid ""
@@ -2490,6 +2534,13 @@ msgid ""
 "themselves, and although they have a great capacity for affection, this race "
 "is always the target of mockeries and jokes by other races."
 msgstr ""
+"Los Boys, y sus versiones femeninas, las Patys, son criaturas dotadas de una "
+"extraña afición por el culto al cuerpo. Aunque siempre quieren estar "
+"delgados, para poder ir a fiestas de la alta sociedad y frotarse con sus "
+"equivalentes de sexo opuesto, normalmente ignoran a sus amigos de otras "
+"razas. Pero cuanto más distinguidos se consideran, a pesar de su gran "
+"capacidad afectiva, esta raza tiende a ser el objetivo de burlas y chistes "
+"por las otras razas."
 
 #: data/races/boy.rca:6
 msgid ""
@@ -2497,10 +2548,14 @@ msgid ""
 "their bodies. As terribly horrendous as she was, she is able to alter "
 "herself 'magically' in just a few hours."
 msgstr ""
+"Las Patys tienen +1 en Diplomancia por exhibir habitualmente los atributos "
+"de su cuerpo. Es capaz de modificarse a sí misma 'mágicamente' en solo unas "
+"pocas horas, por muy horrible que luciera anteriormente."
 
 #: data/races/boy.rca:8
 msgid "For the aforesaid reasons, the Patys also receive + 2 of Disguises."
 msgstr ""
+"A causa de las razones expuestas, las Patys también reciben +2 en Camuflaje."
 
 #: data/races/boy.rca:10
 msgid ""
@@ -2508,20 +2563,26 @@ msgid ""
 "spend at body academies. If they no longer go there, they'll lose this bonus "
 "and automatically become the butt of jokes among others of their own race."
 msgstr ""
+"Los Boys y las Patys reciben +1 en Constitución debido al tiempo que "
+"invierten continuamente en el gimnasio. Si dejan de ir allí, perderán este "
+"bonus y automáticamente se convertirán en el hazmerreír entre los miembros "
+"de su propia raza."
 
 #: data/races/boy.rca:13
 msgid ""
 "Boys have Driver as class skill, since they are distinguished offenders of "
 "traffic laws."
 msgstr ""
+"Los Boys tienen Conducción como habilidad de clase, ya que son distinguidos "
+"infractores de las leyes de tráfico."
 
 #: data/races/gotico.rca:1
 msgid "Gothic"
-msgstr ""
+msgstr "Gótico"
 
 #: data/races/gotico.rca:2
 msgid "'I have a problem...'|(Creepy Susie)"
-msgstr ""
+msgstr "'Tengo un problema...'|(Creepy Susie)"
 
 #: data/races/gotico.rca:3
 msgid ""
@@ -2543,13 +2604,15 @@ msgstr ""
 
 #: data/races/hippie.rca:1
 msgid "Hippie"
-msgstr ""
+msgstr "Hippie"
 
 #: data/races/hippie.rca:2
 msgid ""
 "'They say that they want to save nature, but the only thing they do is  "
 "smoke maryjane and it smells bad!'|(Eric Cartman)"
 msgstr ""
+"'Ellos dicen que quieren salvar la naturaleza, pero lo unico que hacen es "
+"fumar marihuana y eso huele mal!'(Eric Cartman)"
 
 #: data/races/hippie.rca:3
 msgid ""
@@ -2576,7 +2639,7 @@ msgstr ""
 
 #: data/races/humano.rca:1
 msgid "Common Human"
-msgstr ""
+msgstr "Humano Común"
 
 #: data/races/humano.rca:2
 msgid ""
@@ -2593,6 +2656,12 @@ msgid ""
 "Human is so normal and so common that he has neither any extraordinary "
 "qualities nor any extraordinary defects."
 msgstr ""
+"También conocido como Homo Sapiens Sapiens. Un humano es un humano es un "
+"humano! Encuentra el resto en tu libro de D&D porque estoy muy ocupado como "
+"para escribir cosas normales. Nosotros realmente esperamos que nadie se "
+"apropie de la patente del nombre 'humano' y debemos usar otro termino para "
+"esta raza por razones de violación de copyright. El Hombre común es tan "
+"normal y corriente que no posee ni cualidades extraordinarias ni defectos."
 
 #: data/races/llama.rca:1
 msgid "Human Lama"
@@ -2674,7 +2743,7 @@ msgstr ""
 
 #: data/races/skinhead.rca:1
 msgid "Skinhead Maniac"
-msgstr ""
+msgstr "Cabeza Rapada Maníaco"
 
 #: data/races/skinhead.rca:2
 msgid ""
@@ -2709,23 +2778,23 @@ msgstr ""
 
 #: data/feats/melee_attack.fta:1
 msgid "Melee Attack"
-msgstr ""
+msgstr "Ataque Cuerpo a Cuerpo"
 
 #: data/feats/melee_attack.fta:2
 msgid "Character's melee attack."
-msgstr ""
+msgstr "Ataque cuerpo a cuerpo del personaje."
 
 #: data/feats/ranged_attack.fta:1
 msgid "Ranged Attack"
-msgstr ""
+msgstr "Ataque a distancia"
 
 #: data/feats/ranged_attack.fta:2
 msgid "Character's ranged attack."
-msgstr ""
+msgstr "Ataque a distancia del personaje."
 
 #: data/feats/administration/aberration.fta:1
 msgid "Aberration"
-msgstr ""
+msgstr "Aberración"
 
 #: data/feats/administration/aberration.fta:2
 msgid ""
@@ -2737,7 +2806,7 @@ msgstr ""
 
 #: data/feats/administration/esthetic_shock_i.fta:1
 msgid "Esthetic Shock I"
-msgstr ""
+msgstr "Shock estético I"
 
 #: data/feats/administration/esthetic_shock_i.fta:2
 msgid ""
@@ -2749,7 +2818,7 @@ msgstr ""
 
 #: data/feats/administration/esthetic_shock_ii.fta:1
 msgid "Esthetic Shock II"
-msgstr ""
+msgstr "Shock estético II"
 
 #: data/feats/administration/esthetic_shock_ii.fta:2
 msgid ""
@@ -2760,7 +2829,7 @@ msgstr ""
 
 #: data/feats/administration/esthetic_shock_iii.fta:1
 msgid "Esthetic Shock III"
-msgstr ""
+msgstr "Shock estético III"
 
 #: data/feats/administration/esthetic_shock_iii.fta:2
 msgid ""
@@ -2771,7 +2840,7 @@ msgstr ""
 
 #: data/feats/administration/supreme_esthetic_shock.fta:1
 msgid "Supreme Esthetic Shock"
-msgstr ""
+msgstr "Shock estético supremo"
 
 #: data/feats/administration/supreme_esthetic_shock.fta:2
 msgid ""
@@ -2794,7 +2863,7 @@ msgstr ""
 
 #: data/feats/biology/mass_arthropds_attack.fta:1
 msgid "Mass Arthropds Attack"
-msgstr ""
+msgstr "Ataque masivo de artrópodos"
 
 #: data/feats/biology/mass_arthropds_attack.fta:2
 msgid ""
@@ -4014,23 +4083,23 @@ msgstr ""
 
 #: data/weapons/definitions/sw39.wcc:1
 msgid "S&W 39"
-msgstr ""
+msgstr "S&W 39"
 
 #: data/weapons/definitions/uzi.wcc:1
 msgid "Uzi"
-msgstr ""
+msgstr "Uzi"
 
 #: data/weapons/types/categories.dcl:2
 msgid "Martial"
-msgstr ""
+msgstr "Marcial"
 
 #: data/weapons/types/categories.dcl:3
 msgid "Exotic"
-msgstr ""
+msgstr "Exotico"
 
 #: data/weapons/types/categories.dcl:4
 msgid "Throwing"
-msgstr ""
+msgstr "Arrojables"
 
 #: data/weapons/types/categories.dcl:5
 msgid "Simple"
@@ -4046,15 +4115,15 @@ msgstr ""
 
 #: data/weapons/types/categories.dcl:8
 msgid "Rifle"
-msgstr ""
+msgstr "Rifle"
 
 #: data/weapons/types/damages.dcl:2
 msgid "Piercing"
-msgstr ""
+msgstr "Perforante"
 
 #: data/weapons/types/damages.dcl:3
 msgid "Slashing"
-msgstr ""
+msgstr "Cortante"
 
 #: data/weapons/types/damages.dcl:4
 msgid "Bludgeoning"
@@ -4066,15 +4135,15 @@ msgstr ""
 
 #: data/weapons/types/munitions.dcl:4
 msgid ".223"
-msgstr ""
+msgstr ".223"
 
 #: data/weapons/types/munitions.dcl:5
 msgid "M74"
-msgstr ""
+msgstr "M74"
 
 #: data/weapons/types/munitions.dcl:6
 msgid "M43"
-msgstr ""
+msgstr "M43"
 
 #: data/weapons/types/ranges.dcl:2
 msgid "Melee"
@@ -4102,4 +4171,86 @@ msgstr ""
 
 #: data/characters/pcs/santa.pc:1
 msgid "Santa Claws"
-msgstr ""
+msgstr "Santa Claws"
+
+#~ msgid ""
+#~ "DccNiTghtmare is developed under Public Domain: Feel free to use its "
+#~ "source code and data the way you want (or to blame us the same way). "
+#~ "DccNiTghtmare is thankful to the people who developed those libraries: "
+#~ "OpenAL, Cal3D, OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
+#~ msgstr ""
+#~ "DccNiTghtmare está desarrollado bajo el Dominio Público: siéntete libre "
+#~ "de usar el código fuente como quieras (o para echarnos la culpa de algo). "
+#~ "DccNiTghtmare está agradecido con la gente que desarrolló estas "
+#~ "librerías: OpenAL, Cal3D, OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
+
+#~ msgid "Error while opening skills list: %s\n"
+#~ msgstr "Error mientras se abría la lista de habilidades: %s\n"
+
+#~ msgid "Can't open skill file: %s \n"
+#~ msgstr "No se puede abrir el archivo de habilidades: %s \n"
+
+#~ msgid "Charism"
+#~ msgstr "Carisma"
+
+#~ msgid "Error while writing Options: %s\n"
+#~ msgstr "Error mientras se escribían las opciones: %s\n"
+
+#~ msgid "Race Characteristcs"
+#~ msgstr "Características de la Carrera"
+
+#~ msgid "Class Description"
+#~ msgstr "Descripción de Clase"
+
+#~ msgid "Ouch, can't load NPC's file: %s.\n"
+#~ msgstr "Ups, No se pueden cargar los archivos NPC's: %s.\n"
+
+#~ msgid "Loading Character"
+#~ msgstr "Cargando Caracter"
+
+#~ msgid "Cannot open File!\n"
+#~ msgstr "No se puede abrir archivo!\n"
+
+#~ msgid "Text without any relation!"
+#~ msgstr "Texto sin relación!"
+
+#~ msgid "Can't open font file: %s\n"
+#~ msgstr "No se puede abrir archivo de fuentes: %s\n"
+
+#~ msgid "Unknow option: %s\n"
+#~ msgstr "Opción Desconocida: %s\n"
+
+#~ msgid "Can't open skill image: %s\n"
+#~ msgstr "No se puede abrir la imagen de habilidad: %s\n"
+
+#~ msgid "Error while opening skills list:skills/skills.skl\n"
+#~ msgstr "Error mientras se abría la lista de habilidades:skills/skills.skl\n"
+
+#~ msgid "Can't Open the options file: %s\n"
+#~ msgstr "No se puede abrir el archivo de opciones: %s\n"
+
+#~ msgid "No Options File Avaible!\n"
+#~ msgstr "No hay archivo de opciones disponible!\n"
+
+#~ msgid "Creating Directory: %s : "
+#~ msgstr "Creando Directorio: %s : "
+
+#~ msgid "Creating Options: %s\n"
+#~ msgstr "Creando Opciones: %s\n"
+
+#~ msgid "Feats"
+#~ msgstr "Características"
+
+#~ msgid "Can't load mouse cursor: %s\n"
+#~ msgstr "No se puede cargar el cursor del ratón: %s\n"
+
+#~ msgid "Can't open image: %s\n"
+#~ msgstr "No se puede abrir imagen: %s\n"
+
+#~ msgid "Warn: Can't Load Picture, may crash soon (out of memory)!\n"
+#~ msgstr ""
+#~ "Advertencia: No se puede cargar la imagen, puede dañarse pronto (falta de "
+#~ "memoria)!\n"
+
+#~ msgid "Something must be wrong! Try editing ~/.dccnitghtmare/options.cfg\n"
+#~ msgstr "Algo debe estar mal! Trata editando ~/.dccnitghtmare/options.cfg\n"

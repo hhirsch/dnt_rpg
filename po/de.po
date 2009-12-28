@@ -7,53 +7,53 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2009-10-22 15:37-0300\n"
-"PO-Revision-Date: 2009-07-05 10:50+0000\n"
-"Last-Translator: Lord Nmancer <necromancer@gmx.net>\n"
+"POT-Creation-Date: 2009-12-28 10:35-0200\n"
+"PO-Revision-Date: 2009-12-10 17:04+0000\n"
+"Last-Translator: ucn| <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-07-05 12:56+0000\n"
+"X-Launchpad-Export-Date: 2009-12-23 14:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: src/classes/actions.cpp:128
 #, c-format
 msgid "%s try to attack %s"
-msgstr ""
+msgstr "%s versucht %s zu attackieren"
 
 #: src/classes/actions.cpp:133
 #, c-format
 msgid "%s try to heal %s"
-msgstr ""
+msgstr "%s versucht %s zu heilen"
 
 #: src/classes/actions.cpp:143
 msgid "Too far away for action!"
 msgstr "Zu weit entfernt zum Agieren!"
 
-#: src/classes/actions.cpp:231 src/classes/actions.cpp:254
+#: src/classes/actions.cpp:236 src/classes/actions.cpp:259
 msgid "Miss."
 msgstr "Fehlschlag."
 
-#: src/classes/actions.cpp:234 src/classes/actions.cpp:238
+#: src/classes/actions.cpp:239 src/classes/actions.cpp:243
 msgid "Critical Miss!"
 msgstr "Kritischer Fehlschlag!"
 
-#: src/classes/actions.cpp:267
+#: src/classes/actions.cpp:272
 #, c-format
 msgid "Healed %d points."
-msgstr "%d Punkte geheilt"
+msgstr "%d Punkte geheilt."
 
-#: src/classes/actions.cpp:271
+#: src/classes/actions.cpp:276
 #, c-format
 msgid "Hit for %d points."
 msgstr ""
 
-#: src/classes/actions.cpp:290 src/classes/actions.cpp:293
+#: src/classes/actions.cpp:295 src/classes/actions.cpp:298
 msgid "Critical Heal!"
-msgstr "kritische HEilung"
+msgstr "Kritische Heilung!"
 
-#: src/classes/actions.cpp:298 src/classes/actions.cpp:302
+#: src/classes/actions.cpp:303 src/classes/actions.cpp:307
 msgid "Critical Hit!"
 msgstr "Kritischer Treffer!"
 
@@ -79,12 +79,12 @@ msgstr "ungültiges Talent"
 
 #: src/classes/feats.cpp:220
 msgid "Not enought points to use!"
-msgstr "Nicht genug Punkte um zu benutzen"
+msgstr "Nicht genug Punkte zum Benutzen"
 
 #: src/classes/mission.cpp:531 src/engine/dialog.cpp:1167
 #, c-format
 msgid "Mission Completed: %d XP!"
-msgstr ""
+msgstr "Auftrag erledigt: %d XP erhalten."
 
 #: src/classes/mission.cpp:548 src/classes/mission.cpp:551
 msgid "Mission Failure!"
@@ -130,7 +130,7 @@ msgstr "Eigenschaften"
 
 #: src/engine/attwindow.cpp:80
 msgid "Roll"
-msgstr ""
+msgstr "Würfeln"
 
 #: src/engine/attwindow.cpp:83
 msgid "Clear"
@@ -174,7 +174,7 @@ msgstr "Charisma"
 msgid "Attribute Description"
 msgstr "Eigenschaftsbeschreibung"
 
-#: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:537
+#: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:557
 #: src/engine/inventwindow.cpp:369 src/engine/options.cpp:1232
 msgid "Warning"
 msgstr "Warnung"
@@ -218,11 +218,11 @@ msgstr ""
 
 #: src/engine/barterwindow.cpp:308 src/engine/inventwindow.cpp:214
 msgid "Remove"
-msgstr ""
+msgstr "Entfernen"
 
 #: src/engine/briefing.cpp:55 src/engine/options.cpp:151
 msgid "Briefing"
-msgstr ""
+msgstr "Anweisungen"
 
 #: src/engine/briefing.cpp:57
 msgid "Welcome to DNT!"
@@ -230,11 +230,11 @@ msgstr "Willkommen zu DNT!"
 
 #: src/engine/briefing.cpp:153
 msgid "Success"
-msgstr ""
+msgstr "Erfolg"
 
 #: src/engine/briefing.cpp:153
 msgid "Failure"
-msgstr ""
+msgstr "Fehlschlag"
 
 #: src/engine/charwindow.cpp:115
 msgid "Female"
@@ -355,11 +355,11 @@ msgstr ""
 
 #: src/engine/classwindow.cpp:231 src/engine/racewindow.cpp:172
 msgid "No Modifiers."
-msgstr ""
+msgstr "Keine Modifikatoren."
 
 #: src/engine/classwindow.cpp:239
 msgid "Class Talents"
-msgstr ""
+msgstr "Klassentalente"
 
 #: src/engine/classwindow.cpp:258 src/engine/racewindow.cpp:190
 msgid "No Talents."
@@ -373,66 +373,66 @@ msgstr "Klassenfähigkeiten"
 msgid "No Skills."
 msgstr "Keine Fähigkeiten."
 
-#: src/engine/dccnit.cpp:478 src/engine/dccnit.cpp:528
+#: src/engine/dccnit.cpp:498 src/engine/dccnit.cpp:548
 msgid "Error"
 msgstr "Fehler"
 
-#: src/engine/dccnit.cpp:478
+#: src/engine/dccnit.cpp:498
 msgid "Can't load the saved game!"
-msgstr ""
+msgstr "Der Spielstand konnte nicht geladen werden!"
 
-#: src/engine/dccnit.cpp:523
+#: src/engine/dccnit.cpp:543
 msgid "Information"
 msgstr "Information"
 
-#: src/engine/dccnit.cpp:524
+#: src/engine/dccnit.cpp:544
 msgid "The game was saved!"
 msgstr "Das Spiel wurde gespeichert."
 
-#: src/engine/dccnit.cpp:528
+#: src/engine/dccnit.cpp:548
 msgid "Can't save game!"
 msgstr "Das Spiel konnte nicht gespeichert werden."
 
-#: src/engine/dccnit.cpp:538
+#: src/engine/dccnit.cpp:558
 msgid "Can't save game while fighting!"
 msgstr "Das Spiel kann nicht während eines Kampfes gespeichert werden."
 
-#: src/engine/dccnit.cpp:673
+#: src/engine/dccnit.cpp:693
 #, c-format
 msgid "Saving Current Map Modifications"
 msgstr ""
 
-#: src/engine/dccnit.cpp:708
+#: src/engine/dccnit.cpp:728
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Lade Karte: %s"
 
-#: src/engine/dccnit.cpp:771
+#: src/engine/dccnit.cpp:791
 #, c-format
 msgid "Loading NPC: %s"
-msgstr ""
+msgstr "Lade NPC: %s"
 
-#: src/engine/dccnit.cpp:811
+#: src/engine/dccnit.cpp:831
 msgid "Creating MiniMap"
-msgstr ""
+msgstr "Erstelle Minikarte"
 
-#: src/engine/dccnit.cpp:817
+#: src/engine/dccnit.cpp:837
 msgid "Putting GUI on Screen"
 msgstr ""
 
-#: src/engine/dccnit.cpp:861
+#: src/engine/dccnit.cpp:881
 msgid "Loading Particles"
-msgstr ""
+msgstr "Lade Partikel"
 
-#: src/engine/dccnit.cpp:891
+#: src/engine/dccnit.cpp:911
 msgid "Loading Changes..."
-msgstr ""
+msgstr "Lade Veränderungen..."
 
-#: src/engine/dccnit.cpp:919
+#: src/engine/dccnit.cpp:939
 msgid "Done!"
 msgstr "Fertig!"
 
-#: src/engine/dccnit.cpp:1011
+#: src/engine/dccnit.cpp:1031
 msgid ""
 "DccNiTghtmare is relesead under GPLv3 or later: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -440,50 +440,50 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1533
+#: src/engine/dccnit.cpp:1553
 msgid "Too far away for the action!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1578
+#: src/engine/dccnit.cpp:1598
 msgid "No NPCs in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1638
+#: src/engine/dccnit.cpp:1658
 msgid "Surprise Attack Turn."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1652
+#: src/engine/dccnit.cpp:1672
 msgid "No enemies in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1831 src/engine/dccnit.cpp:2350
+#: src/engine/dccnit.cpp:1851 src/engine/dccnit.cpp:2370
 #: src/engine/shortcutswindow.cpp:51
 msgid "Nothing"
-msgstr ""
+msgstr "Nichts"
 
-#: src/engine/dccnit.cpp:2099
+#: src/engine/dccnit.cpp:2119
 #, c-format
 msgid "%s taken."
 msgstr ""
 
-#: src/engine/dccnit.cpp:2116
+#: src/engine/dccnit.cpp:2136
 msgid "Inventory is full!"
-msgstr ""
+msgstr "Inventar ist voll!"
 
-#: src/engine/dccnit.cpp:2149
+#: src/engine/dccnit.cpp:2169
 msgid "Door"
-msgstr ""
+msgstr "Tür"
 
-#: src/engine/dccnit.cpp:2285
+#: src/engine/dccnit.cpp:2305
 #, c-format
 msgid "%s attacks %s"
-msgstr ""
+msgstr "%s attackiert %s"
 
-#: src/engine/dccnit.cpp:2451
+#: src/engine/dccnit.cpp:2471
 msgid "No more actions. Turn ended."
 msgstr ""
 
-#: src/engine/dccnit.cpp:3962
+#: src/engine/dccnit.cpp:3984
 msgid "Exit Battle Mode"
 msgstr ""
 
@@ -495,7 +495,7 @@ msgstr ""
 #: src/engine/dialog.cpp:1196
 #, c-format
 msgid "%s lost."
-msgstr ""
+msgstr "%s hat verloren."
 
 #: src/engine/dialog.cpp:1239
 #, c-format
@@ -514,27 +514,27 @@ msgstr ""
 
 #: src/engine/dialog.cpp:1463
 msgid "Dialog"
-msgstr ""
+msgstr "Dialog"
 
 #: src/engine/initial.cpp:79
 msgid "New"
-msgstr ""
+msgstr "Neu"
 
 #: src/engine/initial.cpp:84
 msgid "Continue"
-msgstr ""
+msgstr "Fortsetzen"
 
 #: src/engine/initial.cpp:87 src/engine/shortcutswindow.cpp:58
 msgid "Save"
-msgstr ""
+msgstr "Speichern"
 
 #: src/engine/initial.cpp:90 src/engine/shortcutswindow.cpp:63
 msgid "Load"
-msgstr ""
+msgstr "Laden"
 
 #: src/engine/initial.cpp:92 src/engine/options.cpp:721
 msgid "Options"
-msgstr ""
+msgstr "Einstellungen"
 
 #: src/engine/initial.cpp:94 data/dialogs/objects/computers.dlg:21
 #: data/dialogs/objects/bunker_school_server.dlg:22
@@ -553,7 +553,7 @@ msgstr ""
 #: data/dialogs/objects/refmachine.dlg:105
 #: data/dialogs/objects/refmachine.dlg:119
 msgid "Exit"
-msgstr ""
+msgstr "Beenden"
 
 #: src/engine/inventwindow.cpp:189
 msgid "Get"
@@ -561,7 +561,7 @@ msgstr ""
 
 #: src/engine/inventwindow.cpp:192
 msgid "Info"
-msgstr ""
+msgstr "Informationen"
 
 #: src/engine/inventwindow.cpp:200
 msgid "Read"
@@ -569,7 +569,7 @@ msgstr ""
 
 #: src/engine/inventwindow.cpp:203
 msgid "Reload Weapon"
-msgstr ""
+msgstr "Waffe nachladen"
 
 #: src/engine/inventwindow.cpp:206
 msgid "Use"
@@ -577,15 +577,15 @@ msgstr ""
 
 #: src/engine/inventwindow.cpp:217
 msgid "Buy"
-msgstr ""
+msgstr "Kaufen"
 
 #: src/engine/inventwindow.cpp:217
 msgid "Sell"
-msgstr ""
+msgstr "Verkaufen"
 
 #: src/engine/inventwindow.cpp:222
 msgid "Drop"
-msgstr ""
+msgstr "Wegwerfen"
 
 #: src/engine/inventwindow.cpp:329
 #, c-format
@@ -599,7 +599,7 @@ msgstr ""
 #: src/engine/itemwindow.cpp:78
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "Name: %s"
 
 #: src/engine/itemwindow.cpp:83
 #, c-format
@@ -621,7 +621,7 @@ msgstr ""
 
 #: src/engine/itemwindow.cpp:135
 msgid "Category: "
-msgstr ""
+msgstr "Kategorie: "
 
 #: src/engine/itemwindow.cpp:141
 msgid "Damage Dice: "
@@ -637,7 +637,7 @@ msgstr ""
 
 #: src/engine/itemwindow.cpp:168
 msgid "Range: "
-msgstr ""
+msgstr "Reichweite: "
 
 #: src/engine/itemwindow.cpp:173
 msgid "Size: "
@@ -653,7 +653,7 @@ msgstr ""
 
 #: src/engine/itemwindow.cpp:238
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 #: src/engine/journalwindow.cpp:285 src/engine/options.cpp:154
 msgid "Journal"
@@ -669,39 +669,39 @@ msgstr ""
 
 #: src/engine/minimapwindow.cpp:59
 msgid "Map"
-msgstr ""
+msgstr "Karte"
 
 #: src/engine/options.cpp:48
 msgid "English"
-msgstr ""
+msgstr "Englisch"
 
 #: src/engine/options.cpp:49
 msgid "French"
-msgstr ""
+msgstr "Französisch"
 
 #: src/engine/options.cpp:50
 msgid "Spanish"
-msgstr ""
+msgstr "Spanisch"
 
 #: src/engine/options.cpp:51
 msgid "Portuguese"
-msgstr ""
+msgstr "Portugiesisch"
 
 #: src/engine/options.cpp:52
 msgid "German"
-msgstr ""
+msgstr "Deutsch"
 
 #: src/engine/options.cpp:53
 msgid "Italian"
-msgstr ""
+msgstr "Italienisch"
 
 #: src/engine/options.cpp:54
 msgid "Dutch"
-msgstr ""
+msgstr "Niederländisch"
 
 #: src/engine/options.cpp:55
 msgid "Russian"
-msgstr ""
+msgstr "Russisch"
 
 #: src/engine/options.cpp:126
 msgid "Camera Rotate Left"
@@ -781,11 +781,11 @@ msgstr ""
 
 #: src/engine/options.cpp:147
 msgid "End Turn"
-msgstr ""
+msgstr "Runde beenden"
 
 #: src/engine/options.cpp:149
 msgid "Minimap"
-msgstr ""
+msgstr "Minikarte"
 
 #: src/engine/options.cpp:150 src/engine/shortcutswindow.cpp:49
 msgid "Shortcuts"
@@ -815,7 +815,7 @@ msgstr ""
 #: src/engine/options.cpp:600 data/weapons/types/sizes.dcl:3
 #: data/weapons/types/weights.dcl:3
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: src/engine/options.cpp:603
 msgid "Pursue"
@@ -827,11 +827,11 @@ msgstr ""
 
 #: src/engine/options.cpp:621
 msgid "2x"
-msgstr ""
+msgstr "2x"
 
 #: src/engine/options.cpp:624
 msgid "4x"
-msgstr ""
+msgstr "4x"
 
 #: src/engine/options.cpp:731
 msgid "Input"
@@ -847,7 +847,7 @@ msgstr ""
 
 #: src/engine/options.cpp:740
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
 #: src/engine/options.cpp:745
 msgid "Audio"
@@ -855,11 +855,11 @@ msgstr ""
 
 #: src/engine/options.cpp:749
 msgid "Music Volume:"
-msgstr ""
+msgstr "Musiklautstärke:"
 
 #: src/engine/options.cpp:766
 msgid "Effects Volume:"
-msgstr ""
+msgstr "Geräuschlautstärke"
 
 #: src/engine/options.cpp:783
 msgid "Video"
@@ -867,11 +867,11 @@ msgstr ""
 
 #: src/engine/options.cpp:791
 msgid "Screen Resolution:"
-msgstr ""
+msgstr "Bildschirmauflösung:"
 
 #: src/engine/options.cpp:806
 msgid "Enable FullScreen"
-msgstr ""
+msgstr "Vollbild aktiveren"
 
 #: src/engine/options.cpp:815
 msgid "Enable Grass Effects (need particles)"
@@ -879,7 +879,7 @@ msgstr ""
 
 #: src/engine/options.cpp:824
 msgid "Enable Particles Effects"
-msgstr ""
+msgstr "Partikeleffekte aktivieren"
 
 #: src/engine/options.cpp:836
 msgid "Enable MultiTextures"
@@ -887,7 +887,7 @@ msgstr ""
 
 #: src/engine/options.cpp:846
 msgid "Enable Anisotropic Filter"
-msgstr ""
+msgstr "Anisotropische Filterugn aktivieren"
 
 #: src/engine/options.cpp:857
 msgid "Reflections:"
@@ -895,11 +895,11 @@ msgstr ""
 
 #: src/engine/options.cpp:874
 msgid "Shadows:"
-msgstr ""
+msgstr "Schatten:"
 
 #: src/engine/options.cpp:890
 msgid "Anti-Aliasing:"
-msgstr ""
+msgstr "Kantenglättung:"
 
 #: src/engine/options.cpp:905
 msgid "FarView:"
@@ -911,11 +911,11 @@ msgstr ""
 
 #: src/engine/options.cpp:927
 msgid "Language:"
-msgstr ""
+msgstr "Sprache:"
 
 #: src/engine/options.cpp:944
 msgid "Camera Mode:"
-msgstr ""
+msgstr "Kameramodus"
 
 #: src/engine/options.cpp:960
 msgid "Auto End Turn"
@@ -931,7 +931,7 @@ msgstr ""
 
 #: src/engine/options.cpp:1233
 msgid "Some changes will only take effect upon restart."
-msgstr ""
+msgstr "Manche Änderungen werden erst nach einem Neustart wirksam."
 
 #: src/engine/options.cpp:1277
 msgid "Press a key to: "
@@ -939,11 +939,11 @@ msgstr ""
 
 #: src/engine/options.cpp:1280
 msgid "Waiting..."
-msgstr ""
+msgstr "Warte…"
 
 #: src/engine/racewindow.cpp:83
 msgid "Race"
-msgstr ""
+msgstr "Rasse"
 
 #: src/engine/racewindow.cpp:160
 msgid "Race Modifiers"
@@ -951,23 +951,23 @@ msgstr ""
 
 #: src/engine/racewindow.cpp:178
 msgid "Race Talents"
-msgstr ""
+msgstr "Rassentalente"
 
 #: src/engine/racewindow.cpp:197
 msgid "Race Skills"
-msgstr ""
+msgstr "Rassenfähigkeiten"
 
 #: src/engine/shortcutswindow.cpp:60
 msgid "Menu"
-msgstr ""
+msgstr "Menü"
 
 #: src/engine/shortcutswindow.cpp:164
 msgid "Particles"
-msgstr ""
+msgstr "Partikel"
 
 #: src/engine/shortcutswindow.cpp:177
 msgid "FPS"
-msgstr ""
+msgstr "FPS"
 
 #: src/engine/shortcutswindow.cpp:215
 msgid "Enter Battle Mode"
@@ -995,7 +995,7 @@ msgstr ""
 
 #: src/engine/shortcutswindow.cpp:247
 msgid "Open Inventory Window"
-msgstr ""
+msgstr "Inventarfenster öffnen"
 
 #: src/engine/shortcutswindow.cpp:252
 msgid "Open Assign Attacks Window"
@@ -1003,7 +1003,7 @@ msgstr ""
 
 #: src/engine/shortcutswindow.cpp:257
 msgid "View Character Informations"
-msgstr ""
+msgstr "Zeige Charakterinformationen"
 
 #: src/engine/shortcutswindow.cpp:262
 msgid "Open Group/Party Window"
@@ -1015,7 +1015,7 @@ msgstr ""
 
 #: src/engine/skillwindow.cpp:118
 msgid "Points:"
-msgstr ""
+msgstr "Punkte:"
 
 #: src/engine/skillwindow.cpp:130
 msgid "Only show race/class skills"
@@ -1023,7 +1023,7 @@ msgstr ""
 
 #: src/engine/skillwindow.cpp:149
 msgid "Cost"
-msgstr ""
+msgstr "Kosten"
 
 #: src/fight/fightSystem.cpp:151
 msgid "No more enemies."
@@ -1032,7 +1032,7 @@ msgstr ""
 #: src/fight/fightSystem.cpp:187
 #, c-format
 msgid "%s is dead!"
-msgstr ""
+msgstr "%s ist tot!"
 
 #: src/fight/fightSystem.cpp:232
 #, c-format
@@ -1041,11 +1041,11 @@ msgstr ""
 
 #: src/fight/fightSystem.cpp:279 src/fight/fightSystem.cpp:298
 msgid "New Round"
-msgstr ""
+msgstr "Neue Runde"
 
 #: src/fight/fightSystem.cpp:284 src/fight/fightSystem.cpp:303
 msgid "Error: No Characters!"
-msgstr ""
+msgstr "Fehler: Keine Charaktere"
 
 #: src/fight/fightSystem.cpp:331 src/fight/fightSystem.cpp:337
 #, c-format
@@ -1059,7 +1059,7 @@ msgstr ""
 
 #: src/gui/window.cpp:183
 msgid "Maximize"
-msgstr ""
+msgstr "Maximieren"
 
 #: data/comics/intro/intro.dcb:15
 msgid "Once Upon a time, there was a happy university called UFMG..."
@@ -2785,7 +2785,7 @@ msgstr ""
 
 #: data/skills/disfarces.ski:1
 msgid "Disguises"
-msgstr ""
+msgstr "Verkleidungen"
 
 #: data/skills/disfarces.ski:2
 msgid ""
@@ -2794,7 +2794,7 @@ msgstr ""
 
 #: data/skills/equilibrio.ski:1
 msgid "Balance"
-msgstr ""
+msgstr "Balance"
 
 #: data/skills/equilibrio.ski:2
 msgid ""
@@ -2804,7 +2804,7 @@ msgstr ""
 
 #: data/skills/escalar.ski:1
 msgid "Climbing"
-msgstr ""
+msgstr "Klettern"
 
 #: data/skills/escalar.ski:2
 msgid "Measure the organism's capacity to climb very steep surfaces."
@@ -2822,7 +2822,7 @@ msgstr ""
 
 #: data/skills/falaridioma.ski:1
 msgid "Foreign Languages"
-msgstr ""
+msgstr "Fremdsprachen"
 
 #: data/skills/falaridioma.ski:2
 msgid ""
@@ -2851,7 +2851,7 @@ msgstr ""
 
 #: data/skills/furtividade.ski:1
 msgid "Stealth"
-msgstr ""
+msgstr "Tarnen"
 
 #: data/skills/furtividade.ski:2
 msgid ""
@@ -2882,7 +2882,7 @@ msgstr ""
 
 #: data/skills/montar.ski:1
 msgid "Riding"
-msgstr ""
+msgstr "Reiten"
 
 #: data/skills/montar.ski:2
 msgid ""
@@ -2892,7 +2892,7 @@ msgstr ""
 
 #: data/skills/nadar.ski:1
 msgid "Sports"
-msgstr ""
+msgstr "Sport"
 
 #: data/skills/nadar.ski:2
 msgid ""
@@ -2903,15 +2903,15 @@ msgstr ""
 
 #: data/skills/notused.ski:1
 msgid "Not Used"
-msgstr ""
+msgstr "Nicht verwendet"
 
 #: data/skills/notused.ski:2
 msgid "This Skill Place is Avaible for new skills in the future."
-msgstr ""
+msgstr "Dieser Fähigkeitsplatz wird für zukünftige Fähigkeiten verfügbar sein."
 
 #: data/skills/observar.ski:1
 msgid "Observe"
-msgstr ""
+msgstr "Beobachten"
 
 #: data/skills/observar.ski:2
 msgid ""
@@ -2922,13 +2922,15 @@ msgstr ""
 
 #: data/skills/obterinf.ski:1
 msgid "Get Information"
-msgstr ""
+msgstr "Informationen beschaffen"
 
 #: data/skills/obterinf.ski:2
 msgid ""
 "This skill is used to gain restricted information. It's not so hard to "
 "understand."
 msgstr ""
+"Diese Fähigkeit wird benutzt um geheime Informationen zu erhalten. Es ist "
+"nicht so schwer zu verstehen."
 
 #: data/skills/opobjele.ski:1
 msgid "Operates Eletronic Object"
@@ -2953,7 +2955,7 @@ msgstr ""
 
 #: data/skills/ouvir.ski:1
 msgid "Hearing"
-msgstr ""
+msgstr "Gehör"
 
 #: data/skills/ouvir.ski:2
 msgid ""
@@ -2974,7 +2976,7 @@ msgstr ""
 
 #: data/skills/penosaco.ski:1
 msgid "Mental Castration"
-msgstr ""
+msgstr "geistige Kastration"
 
 #: data/skills/penosaco.ski:2
 msgid ""
@@ -2995,7 +2997,7 @@ msgstr ""
 
 #: data/skills/prestidig.ski:1
 msgid "Prestidigitation"
-msgstr ""
+msgstr "Fingerfertigkeit"
 
 #: data/skills/prestidig.ski:2
 msgid ""
@@ -3024,7 +3026,7 @@ msgstr ""
 
 #: data/skills/semtempo.ski:1
 msgid "Not Enough Time"
-msgstr ""
+msgstr "Nicht genug Zeit"
 
 #: data/skills/semtempo.ski:2
 msgid ""
@@ -3034,7 +3036,7 @@ msgstr ""
 
 #: data/skills/suborno.ski:1
 msgid "Bribery"
-msgstr ""
+msgstr "Bestechung"
 
 #: data/skills/suborno.ski:2
 msgid ""
@@ -3062,7 +3064,7 @@ msgstr ""
 
 #: data/dialogs/objects/computers.dlg:31
 msgid "What Operating System do you wish to install?"
-msgstr ""
+msgstr "Welches Betriebssystem möchtest du installieren?"
 
 #: data/dialogs/objects/computers.dlg:39
 msgid "Install Pirate Ruindows"
@@ -3074,16 +3076,16 @@ msgstr ""
 
 #: data/dialogs/objects/computers.dlg:59
 msgid "Install Ubuntu Linux"
-msgstr ""
+msgstr "Ubuntu Linux installieren"
 
 #: data/dialogs/objects/computers.dlg:69
 msgid "Install Gentoo Linux"
-msgstr ""
+msgstr "Gentoo Linux installieren"
 
 #: data/dialogs/objects/computers.dlg:78 data/dialogs/objects/computers.dlg:93
 #: data/dialogs/objects/computers.dlg:107
 msgid "Back"
-msgstr ""
+msgstr "Zurück"
 
 #: data/dialogs/objects/computers.dlg:89
 msgid "Operational System successfully installed."
@@ -3101,7 +3103,7 @@ msgstr ""
 
 #: data/dialogs/objects/computers.dlg:121
 msgid "Restart"
-msgstr ""
+msgstr "Neustart"
 
 #: data/dialogs/objects/bunker_school_server.dlg:6
 msgid "(You see the bunker school server main screen)"
@@ -3194,7 +3196,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:10 data/dialogs/tutorial/santa.dlg:10
 msgid "Who are you?"
-msgstr ""
+msgstr "Wer bist du?"
 
 #: data/dialogs/tutorial/logan.dlg:19
 msgid "I am Logan, maintainer of this occupation."
@@ -3206,7 +3208,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:26 data/dialogs/tutorial/logan.dlg:55
 msgid "What am I doing here?"
-msgstr ""
+msgstr "Was mache ich hier?"
 
 #: data/dialogs/tutorial/logan.dlg:35
 msgid ""
@@ -3222,7 +3224,7 @@ msgstr ""
 #: data/dialogs/tutorial/logan.dlg:42 data/dialogs/tutorial/logan.dlg:58
 #: data/dialogs/tutorial/logan.dlg:74
 msgid "What do you want of me?"
-msgstr ""
+msgstr "Was willst du von mir?"
 
 #: data/dialogs/tutorial/logan.dlg:51
 msgid ""
@@ -3232,7 +3234,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:61
 msgid "Shut up and die!"
-msgstr ""
+msgstr "Halt den Mund und stirb!"
 
 #: data/dialogs/tutorial/logan.dlg:70
 msgid "Our ideal? It's not the time to tell you about that."
@@ -3294,7 +3296,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:159 data/dialogs/tutorial/logan.dlg:286
 msgid "Thanks."
-msgstr ""
+msgstr "Danke."
 
 #: data/dialogs/tutorial/logan.dlg:169
 msgid ""
@@ -3304,7 +3306,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:173
 msgid "Let's see what I can do."
-msgstr ""
+msgstr "Ich werde sehen, was ich tun kann."
 
 #: data/dialogs/tutorial/logan.dlg:180
 msgid ""
@@ -3318,7 +3320,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:197
 msgid "Bye!"
-msgstr ""
+msgstr "Auf Wiedersehen!"
 
 #: data/dialogs/tutorial/logan.dlg:206
 msgid "That damned Lavos! So, we must forget about Chrono..."
@@ -3350,7 +3352,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:254
 msgid "Not yet."
-msgstr ""
+msgstr "Noch nicht."
 
 #: data/dialogs/tutorial/logan.dlg:258
 msgid "Yes, there's no living thing there..."
@@ -3362,7 +3364,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:273
 msgid "Great."
-msgstr ""
+msgstr "Großartig."
 
 #: data/dialogs/tutorial/logan.dlg:282
 msgid ""
@@ -3383,7 +3385,7 @@ msgstr ""
 #: data/dialogs/tutorial/atleticano.dlg:64
 #: data/dialogs/tutorial/atleticano.dlg:124
 msgid "Bye."
-msgstr ""
+msgstr "Auf Wiedersehen."
 
 #: data/dialogs/tutorial/santa.dlg:6
 msgid "Wanna some milk, kid?"
@@ -3419,7 +3421,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:75 data/dialogs/tutorial/santa.dlg:172
 msgid "Yes."
-msgstr ""
+msgstr "Ja."
 
 #: data/dialogs/tutorial/santa.dlg:78
 msgid "What kind of favor?"
@@ -3427,7 +3429,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:81
 msgid "No."
-msgstr ""
+msgstr "Nein."
 
 #: data/dialogs/tutorial/santa.dlg:91
 msgid ""
@@ -3441,7 +3443,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:102
 msgid "For sure!"
-msgstr ""
+msgstr "Aber sicher!"
 
 #: data/dialogs/tutorial/santa.dlg:108
 msgid "Yes. (but inside you something is telling you to take another action)"
@@ -3449,11 +3451,11 @@ msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:120
 msgid "So get out of here!"
-msgstr ""
+msgstr "Los, raus hier!"
 
 #: data/dialogs/tutorial/santa.dlg:124 data/dialogs/tutorial/santa.dlg:137
 msgid "(Close dialog)"
-msgstr ""
+msgstr "(Dialog schliessen)"
 
 #: data/dialogs/tutorial/santa.dlg:133
 msgid "I won't talk with you, heretic."
@@ -3463,7 +3465,7 @@ msgstr ""
 #: data/dialogs/tutorial/atleticano.dlg:111
 #: data/dialogs/tutorial/cruzeirense.dlg:87
 msgid "Ok."
-msgstr ""
+msgstr "Ok."
 
 #: data/dialogs/tutorial/santa.dlg:153
 msgid "Ok. (you look suspiciously at Santa Claws' notebook)"
@@ -3475,11 +3477,11 @@ msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:167 data/dialogs/tutorial/santa.dlg:213
 msgid "Amen, brother!"
-msgstr ""
+msgstr "Amen, Bruder!"
 
 #: data/dialogs/tutorial/santa.dlg:177
 msgid "Maybe."
-msgstr ""
+msgstr "Vielleicht"
 
 #: data/dialogs/tutorial/santa.dlg:188
 msgid ""
@@ -3505,7 +3507,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:219
 msgid "Never!"
-msgstr ""
+msgstr "Niemals!"
 
 #: data/dialogs/tutorial/santa.dlg:146
 msgid "I'm waiting for you install the Ruindows on the occupation's notebook!"
@@ -3628,15 +3630,15 @@ msgstr ""
 
 #: data/models/objetos/itens/healkit/healkit.dcc:1
 msgid "First Aid Kit"
-msgstr ""
+msgstr "Erste-Hilfe-Set"
 
 #: data/models/objetos/itens/garrafa1/garrafa1.dcc:1
 msgid "Beer Bottle"
-msgstr ""
+msgstr "Bierflasche"
 
 #: data/models/objetos/itens/lata1/lata1.dcc:1
 msgid "Soda Can"
-msgstr ""
+msgstr "Erste-Hilfe-Set"
 
 #: data/models/objetos/itens/lata1/logan_lata1.dcc:1
 msgid "Logan's Soda Can"
@@ -3644,15 +3646,15 @@ msgstr ""
 
 #: data/models/objetos/itens/money/money.dcc:1
 msgid "Money"
-msgstr ""
+msgstr "Geld"
 
 #: data/models/objetos/geral/computador/computador.dcc:1
 msgid "Computer"
-msgstr ""
+msgstr "Computer"
 
 #: data/models/objetos/geral/notebook/notebook.dcc:1
 msgid "Notebook"
-msgstr ""
+msgstr "Notebook"
 
 #: data/models/objetos/ammo/9mm_pack/9mm_pack.dcc:1
 msgid "9mm Ammo Pack"
@@ -3664,11 +3666,11 @@ msgstr ""
 
 #: data/weapons/definitions/dagger.wcc:1
 msgid "Dagger"
-msgstr ""
+msgstr "Dolch"
 
 #: data/weapons/definitions/beretta92.wcc:1
 msgid "Beretta 92"
-msgstr ""
+msgstr "Beretta 92"
 
 #: data/weapons/definitions/kalashnikov_small.wcc:1
 #: data/weapons/definitions/kalashnikov.wcc:1
@@ -3681,7 +3683,7 @@ msgstr ""
 
 #: data/weapons/definitions/knife.wcc:1
 msgid "Knife"
-msgstr ""
+msgstr "Messer"
 
 #: data/weapons/definitions/scimitar.wcc:1
 msgid "Scimitar"
@@ -3709,7 +3711,7 @@ msgstr ""
 
 #: data/weapons/types/categories.dcl:5
 msgid "Simple"
-msgstr ""
+msgstr "Einfach"
 
 #: data/weapons/types/categories.dcl:6
 msgid "Two Handed"
@@ -3761,26 +3763,23 @@ msgstr ""
 
 #: data/weapons/types/sizes.dcl:2
 msgid "Tiny"
-msgstr ""
+msgstr "Klein"
 
 #: data/weapons/types/sizes.dcl:4
 msgid "Large"
-msgstr ""
+msgstr "Groß"
 
 #: data/weapons/types/weights.dcl:2
 msgid "Light"
-msgstr ""
+msgstr "Leicht"
 
 #: data/weapons/types/weights.dcl:4
 msgid "Heavy"
-msgstr ""
+msgstr "Schwer"
 
 #: data/characters/pcs/santa.pc:1
 msgid "Santa Claws"
 msgstr ""
-
-#~ msgid "I am not a Fool"
-#~ msgstr "Ich bin kein Narr"
 
 #~ msgid "Charism"
 #~ msgstr "Charisma"

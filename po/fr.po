@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2009-10-22 15:37-0300\n"
+"POT-Creation-Date: 2009-12-28 10:35-0200\n"
 "PO-Revision-Date: 2009-08-11 10:09+0000\n"
 "Last-Translator: Yves MATHIEU <ymathieu@moulins-vichy.cci.fr>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -31,29 +31,29 @@ msgstr "%s essayer de soigner %s"
 msgid "Too far away for action!"
 msgstr "Trop loin pour cette action !"
 
-#: src/classes/actions.cpp:231 src/classes/actions.cpp:254
+#: src/classes/actions.cpp:236 src/classes/actions.cpp:259
 msgid "Miss."
 msgstr "Loupé."
 
-#: src/classes/actions.cpp:234 src/classes/actions.cpp:238
+#: src/classes/actions.cpp:239 src/classes/actions.cpp:243
 msgid "Critical Miss!"
 msgstr "Echec Critique !"
 
-#: src/classes/actions.cpp:267
+#: src/classes/actions.cpp:272
 #, c-format
 msgid "Healed %d points."
 msgstr "Guéri %d points."
 
-#: src/classes/actions.cpp:271
+#: src/classes/actions.cpp:276
 #, c-format
 msgid "Hit for %d points."
 msgstr "Touche de %d points."
 
-#: src/classes/actions.cpp:290 src/classes/actions.cpp:293
+#: src/classes/actions.cpp:295 src/classes/actions.cpp:298
 msgid "Critical Heal!"
 msgstr "Guérison critique !"
 
-#: src/classes/actions.cpp:298 src/classes/actions.cpp:302
+#: src/classes/actions.cpp:303 src/classes/actions.cpp:307
 msgid "Critical Hit!"
 msgstr "Touche Critique !"
 
@@ -174,7 +174,7 @@ msgstr "Charisme"
 msgid "Attribute Description"
 msgstr "Description des attributs"
 
-#: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:537
+#: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:557
 #: src/engine/inventwindow.cpp:369 src/engine/options.cpp:1232
 msgid "Warning"
 msgstr "Avertissement"
@@ -373,66 +373,66 @@ msgstr "Compétences de la classe"
 msgid "No Skills."
 msgstr "Pas de Compétences."
 
-#: src/engine/dccnit.cpp:478 src/engine/dccnit.cpp:528
+#: src/engine/dccnit.cpp:498 src/engine/dccnit.cpp:548
 msgid "Error"
 msgstr "Erreur"
 
-#: src/engine/dccnit.cpp:478
+#: src/engine/dccnit.cpp:498
 msgid "Can't load the saved game!"
 msgstr "Ne peux pas charger le jeu!"
 
-#: src/engine/dccnit.cpp:523
+#: src/engine/dccnit.cpp:543
 msgid "Information"
 msgstr "Information"
 
-#: src/engine/dccnit.cpp:524
+#: src/engine/dccnit.cpp:544
 msgid "The game was saved!"
 msgstr "Le jeu a été sauvé!"
 
-#: src/engine/dccnit.cpp:528
+#: src/engine/dccnit.cpp:548
 msgid "Can't save game!"
 msgstr "Ne peux pas sauver le jeu!"
 
-#: src/engine/dccnit.cpp:538
+#: src/engine/dccnit.cpp:558
 msgid "Can't save game while fighting!"
 msgstr "Sauvegarde du jeu impossible pendant combats!"
 
-#: src/engine/dccnit.cpp:673
+#: src/engine/dccnit.cpp:693
 #, c-format
 msgid "Saving Current Map Modifications"
 msgstr "Sauvegarde des Changements apportés à la Carte"
 
-#: src/engine/dccnit.cpp:708
+#: src/engine/dccnit.cpp:728
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Chargement de la Carte : %s"
 
-#: src/engine/dccnit.cpp:771
+#: src/engine/dccnit.cpp:791
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Chargement du PNJ : %s"
 
-#: src/engine/dccnit.cpp:811
+#: src/engine/dccnit.cpp:831
 msgid "Creating MiniMap"
 msgstr "Création d'une Carte miniature"
 
-#: src/engine/dccnit.cpp:817
+#: src/engine/dccnit.cpp:837
 msgid "Putting GUI on Screen"
 msgstr "Affichage par interface graphique"
 
-#: src/engine/dccnit.cpp:861
+#: src/engine/dccnit.cpp:881
 msgid "Loading Particles"
 msgstr "Chargement des Particules"
 
-#: src/engine/dccnit.cpp:891
+#: src/engine/dccnit.cpp:911
 msgid "Loading Changes..."
 msgstr "Chargement des modifications..."
 
-#: src/engine/dccnit.cpp:919
+#: src/engine/dccnit.cpp:939
 msgid "Done!"
 msgstr "Terminé !"
 
-#: src/engine/dccnit.cpp:1011
+#: src/engine/dccnit.cpp:1031
 msgid ""
 "DccNiTghtmare is relesead under GPLv3 or later: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -440,50 +440,50 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1533
+#: src/engine/dccnit.cpp:1553
 msgid "Too far away for the action!"
 msgstr "Trop loin pour cette action !"
 
-#: src/engine/dccnit.cpp:1578
+#: src/engine/dccnit.cpp:1598
 msgid "No NPCs in the area."
 msgstr "Pas de PNJ dans la zone"
 
-#: src/engine/dccnit.cpp:1638
+#: src/engine/dccnit.cpp:1658
 msgid "Surprise Attack Turn."
 msgstr "Tour des attaques surprises."
 
-#: src/engine/dccnit.cpp:1652
+#: src/engine/dccnit.cpp:1672
 msgid "No enemies in the area."
 msgstr "Pas d'ennemis dans la zone."
 
-#: src/engine/dccnit.cpp:1831 src/engine/dccnit.cpp:2350
+#: src/engine/dccnit.cpp:1851 src/engine/dccnit.cpp:2370
 #: src/engine/shortcutswindow.cpp:51
 msgid "Nothing"
 msgstr "Rien"
 
-#: src/engine/dccnit.cpp:2099
+#: src/engine/dccnit.cpp:2119
 #, c-format
 msgid "%s taken."
 msgstr "%s pris."
 
-#: src/engine/dccnit.cpp:2116
+#: src/engine/dccnit.cpp:2136
 msgid "Inventory is full!"
 msgstr "L'inventaire est plein!"
 
-#: src/engine/dccnit.cpp:2149
+#: src/engine/dccnit.cpp:2169
 msgid "Door"
 msgstr "Porte"
 
-#: src/engine/dccnit.cpp:2285
+#: src/engine/dccnit.cpp:2305
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s attaques %s"
 
-#: src/engine/dccnit.cpp:2451
+#: src/engine/dccnit.cpp:2471
 msgid "No more actions. Turn ended."
 msgstr "Pas d'action supplémentaires. Fin du tour."
 
-#: src/engine/dccnit.cpp:3962
+#: src/engine/dccnit.cpp:3984
 msgid "Exit Battle Mode"
 msgstr "Quitter le Mode Combat"
 
