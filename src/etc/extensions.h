@@ -37,12 +37,12 @@ class extensions
       static PFNGLPOINTPARAMETERFVARBPROC arbPointParameterfv;
 
       /* Multi Textures Functions */
-      static PFNGLACTIVETEXTUREPROC arbActiveTexture;
-      static PFNGLCLIENTACTIVETEXTUREPROC arbClientActiveTexture;
-      static PFNGLMULTITEXCOORD2FPROC arbMultiTexCoord2f;
-      static PFNGLMULTITEXCOORD2FVPROC arbMultiTexCoord2fv;
-      static PFNGLMULTITEXCOORD2DPROC arbMultiTexCoord2d;
-      static PFNGLMULTITEXCOORD2DVPROC arbMultiTexCoord2dv;
+      static PFNGLACTIVETEXTUREARBPROC arbActiveTexture;
+      static PFNGLCLIENTACTIVETEXTUREARBPROC arbClientActiveTexture;
+      static PFNGLMULTITEXCOORD2FARBPROC arbMultiTexCoord2f;
+      static PFNGLMULTITEXCOORD2FVARBPROC arbMultiTexCoord2fv;
+      static PFNGLMULTITEXCOORD2DARBPROC arbMultiTexCoord2d;
+      static PFNGLMULTITEXCOORD2DVARBPROC arbMultiTexCoord2dv;
 
       /* Render Frame Buffer Object Functions */
       static PFNGLGENFRAMEBUFFERSEXTPROC extGenFramebuffers;

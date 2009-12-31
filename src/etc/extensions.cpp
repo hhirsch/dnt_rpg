@@ -113,17 +113,17 @@ void extensions::defineMultiTexture(string ext)
 {
    if(ext.find("GL_ARB_multitexture") != string::npos)
    {
-      arbActiveTexture = (PFNGLACTIVETEXTUREPROC) 
+      arbActiveTexture = (PFNGLACTIVETEXTUREARBPROC) 
                                               getFunction("glActiveTextureARB");
-      arbClientActiveTexture = (PFNGLCLIENTACTIVETEXTUREPROC) 
+      arbClientActiveTexture = (PFNGLCLIENTACTIVETEXTUREARBPROC) 
                                         getFunction("glClientActiveTextureARB");
-      arbMultiTexCoord2d = (PFNGLMULTITEXCOORD2DPROC)
+      arbMultiTexCoord2d = (PFNGLMULTITEXCOORD2DARBPROC)
                                             getFunction("glMultiTexCoord2dARB");
-      arbMultiTexCoord2f = (PFNGLMULTITEXCOORD2FPROC)
+      arbMultiTexCoord2f = (PFNGLMULTITEXCOORD2FARBPROC)
                                             getFunction("glMultiTexCoord2fARB");
-      arbMultiTexCoord2dv = (PFNGLMULTITEXCOORD2DVPROC)
+      arbMultiTexCoord2dv = (PFNGLMULTITEXCOORD2DVARBPROC)
                                            getFunction("glMultiTexCoord2dvARB");
-      arbMultiTexCoord2fv = (PFNGLMULTITEXCOORD2FVPROC)
+      arbMultiTexCoord2fv = (PFNGLMULTITEXCOORD2FVARBPROC)
                                            getFunction("glMultiTexCoord2fvARB");
    }
    else
@@ -310,12 +310,12 @@ PFNGLPOINTPARAMETERFARBPROC extensions::arbPointParameterf = NULL;
 PFNGLPOINTPARAMETERFVARBPROC extensions::arbPointParameterfv = NULL;
 
 /* Multi Textures Functions */
-PFNGLACTIVETEXTUREPROC extensions::arbActiveTexture = NULL;
-PFNGLCLIENTACTIVETEXTUREPROC extensions::arbClientActiveTexture = NULL;
-PFNGLMULTITEXCOORD2FPROC extensions::arbMultiTexCoord2f = NULL;
-PFNGLMULTITEXCOORD2FVPROC extensions::arbMultiTexCoord2fv = NULL;
-PFNGLMULTITEXCOORD2DPROC extensions::arbMultiTexCoord2d = NULL;
-PFNGLMULTITEXCOORD2DVPROC extensions::arbMultiTexCoord2dv = NULL;
+PFNGLACTIVETEXTUREARBPROC extensions::arbActiveTexture = NULL;
+PFNGLCLIENTACTIVETEXTUREARBPROC extensions::arbClientActiveTexture = NULL;
+PFNGLMULTITEXCOORD2FARBPROC extensions::arbMultiTexCoord2f = NULL;
+PFNGLMULTITEXCOORD2FVARBPROC extensions::arbMultiTexCoord2fv = NULL;
+PFNGLMULTITEXCOORD2DARBPROC extensions::arbMultiTexCoord2d = NULL;
+PFNGLMULTITEXCOORD2DVARBPROC extensions::arbMultiTexCoord2dv = NULL;
 
 /* Render Frame Buffer Object Functions */
 PFNGLGENFRAMEBUFFERSEXTPROC extensions::extGenFramebuffers = NULL;
