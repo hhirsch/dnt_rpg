@@ -725,7 +725,7 @@ iaVariable* iaScript::getParameter(string& token, string strLine,
          *(int*)iv->value = ti;
       }
       else if( (paramType == IA_TYPE_FLOAT) && 
-               (isInteger(token)) || (isFloat(token)) )
+               ( (isInteger(token)) || (isFloat(token)) ) )
       {
          /* Create the float value at the stack */
          float tf;
