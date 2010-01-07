@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -23,6 +23,9 @@
 #include "../etc/dirs.h"
 #include "../etc/defparser.h"
 #include "../sound/sound.h"
+
+#include <iostream>
+using namespace std;
 
 /************************************************************
  *                        Constructor                       *
@@ -69,19 +72,13 @@ weapon::weapon(string path): object(path)
    defParser parser;
    if(!parser.load(path))
    {
-       printf("Error on open object %s\n",
-              dir.getRealFile(path).c_str());
+       cerr << "Error openning object " <<  dir.getRealFile(path) << endl;
        return;
    }
    fileName = path;
 
    while(parser.getNextTuple(key,value))
    {
-      if(value == "")
-      {
-         printf("at file: %s\n",path.c_str());
-      }
-
       /* Tokenize the first key */
       if(key == "name")
       {
@@ -103,8 +100,9 @@ weapon::weapon(string path): object(path)
          model2d = IMG_Load(dir.getRealFile(model2dName).c_str());
          if(!model2d)
          {
-            printf("Can't open image: %s\nWill Crash Soon!\n", 
-                   dir.getRealFile(model2dName).c_str());
+            cerr << "Couldn't open inventory image: " 
+               << dir.getRealFile(model2dName) 
+               << "! Will crash soon!\n" << endl;
          }
       }
       else if(key == "life_points")
@@ -213,8 +211,7 @@ weapon::weapon(string path): object(path)
       }
       else
       {
-         printf("Warning: Unknow key '%s' at %s\n", key.c_str(), 
-                                                      path.c_str());
+         cerr << "Warning: Unknow key '" << key << "' at " << path << endl;
       }
    }
 
@@ -571,7 +568,7 @@ wInfo* weaponTypes::getThing(wInfo* thing, int total, string name)
          return(&thing[i]);
       }
    }
-   printf("Can't found weapon definition type of: %s\n", name.c_str());
+   cerr << "Couldn't find weapon definition type of " << name << endl;
    return(NULL);
 }
 

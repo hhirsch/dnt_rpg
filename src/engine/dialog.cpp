@@ -27,6 +27,9 @@
 #include "barterwindow.h"
 #include "modstate.h"
 
+#include <iostream>
+using namespace std;
+
 /* The Functions */
 #define TALK_ACTION_GO_TO_DIALOG         0 /* Go To some conversation point */
 #define TALK_ACTION_INIT_FIGHT           1 /* End talk and initiate a fight */
@@ -531,8 +534,9 @@ string conversation::getString(int& initialPosition, string buffer,
  *************************************************************************/
 void conversation::printError(string fileName, string error, int lineNumber)
 {
-   printf("Conversation: %s Error on line: %d\n", fileName.c_str(), lineNumber);
-   printf("\t%s\n",error.c_str());
+   cerr << "Conversation: " << fileName 
+        << " Error on line: " << lineNumber << endl;
+   cerr << "    " << error << endl;
 }
 
 /*************************************************************************
@@ -986,7 +990,7 @@ void conversation::removeDialog(int num)
    }
    else
    {
-      printf(gettext("Not found in dialog: %d\n"),num);
+      cerr << "Not found in dialog: " << num << endl;
    }
 }
 

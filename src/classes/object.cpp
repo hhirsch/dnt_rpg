@@ -154,8 +154,8 @@ object::object(string path, string curMap): thing()
          model2d = IMG_Load(dir.getRealFile(model2dName).c_str());
          if(!model2d)
          {
-            printf("Can't open image: %s\nWill Crash Soon!\n", 
-                   dir.getRealFile(model2dName).c_str());
+            cerr << "Couldn't open image: " <<  dir.getRealFile(model2dName)
+                 << "! Will crash soon." << endl;
          }
       }
       else if(key == "life_points")

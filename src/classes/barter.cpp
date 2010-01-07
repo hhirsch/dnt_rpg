@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -21,6 +21,8 @@
 #include "barter.h"
 #include "../engine/inventwindow.h"
 
+#include <iostream>
+using namespace std;
 
 #define SELL_SIZE_X   6  /**< Size of Sell Slots */
 #define SELL_SIZE_Y  10  /**< Size of Sell Slots */
@@ -60,7 +62,7 @@ barter::barter(character* s, character* b)
                        dir.getRealFile("texturas/inventory/trade.png").c_str());
    if(!barterImage)
    {
-      printf("Can't Load Barter Image!\n");
+      cerr << "Can't Load Barter Image!" << endl;
    }
 }
 

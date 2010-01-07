@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -47,7 +47,7 @@ sun::sun(float hour, float farViewX, float farViewZ)
    SDL_Surface* img = IMG_Load(dir.getRealFile("texturas/sky/sun.png").c_str());
    if(!img)
    {
-      printf("Failed to open Sun Texture!\n");
+      cerr << "Failed to open Sun Texture!" << endl;
    }
    else
    {
@@ -59,7 +59,7 @@ sun::sun(float hour, float farViewX, float farViewZ)
    img = IMG_Load(dir.getRealFile("texturas/sky/moon.png").c_str());
    if(!img)
    {
-      printf("Failed to open Moon Texture!\n");
+      cerr << "Failed to open Moon Texture!" << endl;
    }
    else
    {

@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -64,13 +64,13 @@ inventory::inventory()
                    dir.getRealFile("texturas/inventory/inventory.png").c_str());
    if(!inventoryImage)
    {
-      printf("Can't Load Inventory Image!\n");
+      cerr << "Couldn't Load Inventory Image!" << endl;
    }
    equipedImage = IMG_Load(
                        dir.getRealFile("texturas/inventory/equip.png").c_str());
    if(!inventoryImage)
    {
-      printf("Can't Load Equiped Inventory Image!\n");
+      cerr << "Couldn't Load Equiped Inventory Image!" << endl;
    }
 }
 
@@ -296,16 +296,17 @@ void inventory::removeFromInventory(object* obj)
  **************************************************************/
 void inventory::print()
 {
-   /* Printf, for debug, when needed, uncomment */
+   /* Print, for debug, when needed, uncomment */
    /*int x,y;
-   printf("\n****************************************\n");
+   cerr << endl;
+   cerr << "****************************************" << endl;
    for(y=0; y < INVENTORY_SIZE_Y; y++)
    {
       for(x=0; x < INVENTORY_SIZE_X; x++)
       {
-         printf("%p\t", spaces[x][y].obj);
+         cerr << spaces[x][y].obj "\t";
       }
-      printf("\n");
+      cerr << endl;
    }*/
 }
 

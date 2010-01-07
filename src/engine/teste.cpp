@@ -24,6 +24,8 @@
 #include <SDL/SDL.h>
 #include <stdlib.h>
 #include <libintl.h>
+#include <iostream>
+using namespace std;
 
 #include "../etc/userinfo.h"
 #include "../etc/dirs.h"
@@ -61,10 +63,10 @@ int main(int argc, char **argv)
    opt.load();
    
    #ifdef REDE
-      printf("Server IP or Name: ");
+      cout << "Server IP or Name: ";
       char* server = (char*) malloc(55*sizeof(char));
       scanf("%s",server);
-      printf("I'll conect to %s\n",server);
+      cout << "I'll conect to " << server << endl;
    #endif
 
    Farso_Init(&screen,"DccNiTghtmare", opt.getScreenWidth(), 

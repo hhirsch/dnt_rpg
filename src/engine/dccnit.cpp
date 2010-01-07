@@ -1450,7 +1450,7 @@ void engine::init(SDL_Surface *screen)
              dir.getRealFile("texturas/fightMode/normalMovCircle.png").c_str());
    if(!img)
    {
-      printf("Error: can't Load Texure: fightMode/normalMovCircle.png\n");
+      cerr << "Error: can't Load Texure: fightMode/normalMovCircle.png" << endl;
    }
    glGenTextures(1, &normalMoveCircle);
 
@@ -1467,7 +1467,7 @@ void engine::init(SDL_Surface *screen)
                dir.getRealFile("texturas/fightMode/fullMovCircle.png").c_str());
    if(!img)
    {
-      printf("Error: can't Load Texure: fightMode/fullMovCircle.png\n");
+      cerr << "Error: can't Load Texure: fightMode/fullMovCircle.png" << endl;
    }
 
    glGenTextures(1, &fullMoveCircle);
@@ -1486,7 +1486,7 @@ void engine::init(SDL_Surface *screen)
              dir.getRealFile("texturas/fightMode/featRangeCircle.png").c_str());
    if(!img)
    {
-      printf("Error: can't Load Texure: fightMode/featRangeCircle.png\n");
+      cerr << "Error: can't Load Texure: fightMode/featRangeCircle.png" << endl;
    }
 
    glGenTextures(1, &featRangeCircle);
@@ -1504,7 +1504,7 @@ void engine::init(SDL_Surface *screen)
    img = IMG_Load(dir.getRealFile("texturas/walk/range.png").c_str());
    if(!img)
    {
-      printf("Error: can't Load Texure: walk/range.png\n");
+      cerr << "Error: can't Load Texure: walk/range.png" << endl;
    }
 
    glGenTextures(1, &rangeCircle);
@@ -1523,7 +1523,7 @@ void engine::init(SDL_Surface *screen)
    img = IMG_Load(dir.getRealFile("texturas/walk/destino.png").c_str());
    if(!img)
    {
-      printf("Error: can't Load Texture: destino.png\n");
+      cerr << "Error: can't Load Texture: destino.png" << endl;
    }
 
    glGenTextures(1, &destinyImage);
