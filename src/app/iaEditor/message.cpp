@@ -92,7 +92,7 @@ string messageForTool(int tool)
 string getStringFromUser(string title, string previous,
                          GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
-   guiInterface* gui = new guiInterface(NULL);
+   guiInterface* gui = new guiInterface("");
    janela* getWindow;
    botao* okButton;
    botao* cancelButton;

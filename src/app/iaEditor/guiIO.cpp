@@ -7,7 +7,7 @@
  ****************************************************************/
 guiIO::guiIO()
 {
-   gui = new guiInterface(NULL);
+   gui = new guiInterface("");
 
    state = GUI_IO_STATE_INITIAL;
    tool = TOOL_NONE;

@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -106,7 +106,7 @@ string getStringFromUser(string title, string previous,
    cursor cursors;
    cursors.set(CURSOR_WALK);
 
-   guiInterface* gui = new guiInterface(NULL);
+   guiInterface* gui = new guiInterface("");
    window* getWindow;
    button* okButton;
    button* cancelButton;
@@ -196,7 +196,7 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
    cursor cursors;
    cursors.set(CURSOR_WALK);
 
-   guiInterface* gui = new guiInterface(NULL);
+   guiInterface* gui = new guiInterface("");
    window* getWindow;
    button* opt1Button;
    button* opt2Button;

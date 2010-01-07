@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -26,7 +26,7 @@
  ****************************************************************/
 guiIO::guiIO()
 {
-   gui = new guiInterface(NULL);
+   gui = new guiInterface("");
 
    state = GUI_IO_STATE_INITIAL;
    tool = TOOL_NONE;

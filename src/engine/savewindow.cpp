@@ -163,7 +163,7 @@ int saveWindow::run(bool load, GLdouble proj[16],GLdouble modl[16],
    windowIsLoad = load;
 
    /* Create the GUI */
-   gui = new guiInterface(NULL);
+   gui = new guiInterface("");
 
    /* Create the background */
    GLuint tituloId;

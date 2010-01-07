@@ -38,7 +38,7 @@ engine::engine()
 
    effect = NULL;
    /* Initialize internal lists */
-   gui  = new guiInterface(NULL);
+   gui  = new guiInterface("");
    actualMap = NULL;
    PCs = NULL;
    NPCs = NULL;

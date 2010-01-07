@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -82,9 +82,9 @@ class guiInterface
 {
    public:
       /*! Constructor
-       * \param arqFundo -> name of a image file to be the background. 
+       * \param backImage -> name of a image file to be the background. 
        *                    NULL if no background is used*/
-      guiInterface(char* arqFundo);
+      guiInterface(string backImage="");
       /*! Destructor  */
       ~guiInterface();
 
@@ -192,12 +192,12 @@ class guiInterface
        *  \return -> new active object or the current one. */
       guiObject* verifyFileSelectorsEvents(guiObject* actObj, int& eventInfo);
 
-      int focus;              /**< Current GUI focus */
-      SDL_Surface* fundo;     /**< background surface, if has one */
-      guiList* objects;       /**< some no window objects */
-      windowList* ljan;       /**< windows list */
-      guiObject* objAtivo;    /**< pointer to the actived object */
-      guiObject* chamador;    /**< pointer to the caller object */
+      int focus;                /**< Current GUI focus */
+      SDL_Surface* background;  /**< background surface, if has one */
+      guiList* objects;         /**< some no window objects */
+      windowList* lwindows;     /**< windows list */
+      guiObject* activeObject;  /**< pointer to the actived object */
+      guiObject* callerObject;  /**< pointer to the caller object */
 
 };
 
