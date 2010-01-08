@@ -83,7 +83,7 @@ class inventWindow
        * \return true if window is openned, false otherwise */
       bool isOpen();
 
-      /*! Redraw the Inventory Window, to actualize things on it. */
+      /*! Redraw the Inventory Window, to update things on it. */
       void reDraw();
 
    private:

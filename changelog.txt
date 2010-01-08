@@ -1,7 +1,7 @@
 ================================================
 |                Version 0.5                   |
 ================================================
- - Radiobox filter to the SkillWindow to only show race/class skills; 
+ - Radiobox filter at SkillWindow to only show race/class skills; 
  - Fixed a bug: Keep windows positions after map change;
  - Fixed a bug: Update inventoryWindow after receiveing an item from a dialog;
  - Capacity to walk through low height objects;
