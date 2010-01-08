@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -19,6 +19,8 @@
 */
 
 #include "wall.h"
+#include <iostream>
+using namespace std;
 
 #define WALL_STATE_OTHER     0
 #define WALL_STATE_ADD_INIT  1
@@ -40,7 +42,7 @@ wallController::wallController(Map* acMap)
    SDL_Surface* img = IMG_Load(dir.getRealFile("cursors/Walk.png").c_str());
    if(!img)
    {
-      printf("Can't open cursors/Walk.png !\n");
+      cerr << "Couldn't open 'cursors/Walk.png'!" << endl;
       return;
    }
    glGenTextures(1,&markTexture);

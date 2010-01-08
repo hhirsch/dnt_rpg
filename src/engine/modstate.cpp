@@ -29,6 +29,9 @@
    #include "../config.h"
 #endif
 
+#include <iostream>
+using namespace std;
+
 
 
 #define MODSTATE_TOKEN_MAP                  "map"
@@ -1254,8 +1257,8 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs)
       /* Unknow */
       else
       {
-         printf("Unknow saved action: %d, at %d element!\n", 
-               tmpMobj->getAction(), i);
+         cerr << "Unknow saved action: " << tmpMobj->getAction()
+              << " at " << i << " element!\n" << endl;
       }
       
       tmpMobj = (modAction*)tmpMobj->getNext();

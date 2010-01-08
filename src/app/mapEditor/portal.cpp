@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -21,6 +21,9 @@
 #include "portal.h"
 #include "../../gui/farso.h"
 #include "../../gui/messages.h"
+
+#include <iostream>
+using namespace std;
 
 #define PORTAL_STATE_OTHER     0
 #define PORTAL_STATE_ADD_INIT  1
@@ -246,7 +249,8 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
          novaPorta->obj = actualDoor;
          
          actualMap->insertDoor(novaPorta);
-         printf("Added Door: %.3f %.3f %d\n",doorX,doorZ, doorOrientation);
+         cerr << "Added Door: " << doorX << " " << doorZ << " " 
+              << doorOrientation << endl;
          while(mButton & SDL_BUTTON(1))
          {
             //Wait for Mouse Button Release

@@ -222,14 +222,8 @@ void messageController::draw(GLdouble modelView[16], GLdouble projection[16],
    glEnable(GL_BLEND);
    for(i = 0; i < tot; i++)
    {
-      if(! (gluProject(msg->posX, msg->posY, msg->posZ,
-                       modelView, projection, viewPort,
-                       &winX, &winY, &winZ) ) )
-      {
-         /* Just for debug!  */
-         printf("no!\n");
-      }
-
+      gluProject(msg->posX, msg->posY, msg->posZ, modelView, projection, 
+            viewPort, &winX, &winY, &winZ);
       
       /* Calculate Texture factor */
       factor = (float)(msg->size) / (float)(smallestPowerOfTwo(msg->size));

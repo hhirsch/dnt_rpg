@@ -19,6 +19,8 @@
 */
 
 #include "editor.h"
+#include <iostream>
+using namespace std;
 
 ////////////////////////////////////////////////////////////////////////////
 //                                                                        //
@@ -231,7 +233,7 @@ bool editor::createParticle(int partType)
 
       default:
       {
-         printf("What the hell is type %d???\n",type);
+         cerr << "What the hell is type " << type << "?!??" << endl;
          return(false);
          break;
       }

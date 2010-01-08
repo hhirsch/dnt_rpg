@@ -247,7 +247,7 @@ void character::definePortrait(string portraitFile)
    SDL_Surface* img = IMG_Load(dir.getRealFile(portraitFile).c_str());
    if(!img)
    {
-      printf("Can't Load Portrait File: %s\n", portraitFile.c_str());
+      cerr << "Can't Load Portrait File: " << portraitFile << endl;
       return;
    }
 
@@ -256,7 +256,7 @@ void character::definePortrait(string portraitFile)
    if(!border)
    {
       SDL_FreeSurface(img);
-      printf("Can't Load Border File: %s\n", BORDER_FILE);
+      cerr << "Can't Load Border File: " << BORDER_FILE << endl;
       return;
    }
 

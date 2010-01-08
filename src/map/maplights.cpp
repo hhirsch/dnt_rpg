@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -22,6 +22,8 @@
 #include "../engine/util.h"
 #include "../etc/dirs.h"
 #include <math.h>
+#include <iostream>
+using namespace std;
 
 /************************************************************
  *                        Constructor                       *
@@ -78,8 +80,8 @@ void mapLights::load(string arq)
 
    if(!(file=fopen(dir.getRealFile(arq).c_str(),"r")))
    {
-       printf("Error while opening lights: %s\n",
-              dir.getRealFile(arq).c_str());
+       cerr << "Error while opening lights file: " 
+            << dir.getRealFile(arq) << endl;
        return;
    }
 
@@ -91,7 +93,7 @@ void mapLights::load(string arq)
             curLight++;
             if(curLight > MAX_LIGHTS_PER_MAP)
             {
-               printf("Error: Lights Overflow!\n");
+               cerr << "Error: Lights Overflow!" << endl;
             }
             light[curLight].enableLight = true;
          break;

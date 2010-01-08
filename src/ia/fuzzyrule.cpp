@@ -166,7 +166,5 @@ void fuzzyRule::evalute()
    {
       returnVariable->setValue(result);
    }
-
-   //printf("result of Rule: %.3f\n",result);
 }
 

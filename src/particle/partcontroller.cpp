@@ -381,7 +381,7 @@ void partController::saveToFile(string fileName)
 
    if(!(file=fopen(fileName.c_str(),"w")))
    {
-       printf("Error while opening Map particle file: %s\n",fileName.c_str());
+       cerr << "Error while opening Map particle file: " << fileName << endl;
        return;
    }
 

@@ -21,6 +21,9 @@
 #include "sndfx.h"
 #include "../etc/dirs.h"
 
+#include <iostream>
+using namespace std;
+
 /*************************************************************************
  *                             Constructor                               *
  *************************************************************************/
@@ -46,7 +49,7 @@ sndfx::sndfx(ALfloat centerX, ALfloat centerY, ALfloat centerZ, int lp,
 
       if(!oggSndFx->playback())
       {
-         printf("Can't Play Sound Effect: %s\n",fileName.c_str());
+         cerr << "Couldn't play sound effect: " << fileName << endl;
       }
 
       oggName = fileName;
@@ -76,7 +79,7 @@ sndfx::sndfx(int lp, string fileName)
 
       if(!oggSndFx->playback())
       {
-         printf("Can't Play Sound Effect: %s\n",fileName.c_str());
+         cerr << "Couldn't play sound effect: " << fileName << endl;
       }
 
       oggName = fileName;

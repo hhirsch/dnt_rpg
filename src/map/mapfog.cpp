@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -91,7 +91,7 @@ bool mapFog::save()
 
    if(!(file=fopen(fileName.c_str(),"w")))
    {
-       printf("Error while opening fog: %s\n",fileName.c_str());
+       cerr << "Error while opening fog: " << fileName << endl;
        return(false);
    }
    fprintf(file,"%f %f %f %f\n",color[0],color[1],color[2],color[3]);

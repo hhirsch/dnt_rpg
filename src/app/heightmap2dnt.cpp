@@ -25,6 +25,7 @@
 #include <stdlib.h>
 
 #include <string>
+#include <iostream>
 using namespace std;
 
 #include "../map/map.h"
@@ -45,7 +46,7 @@ bool doConversion(string imgFile, string mapFile)
    /* Verify Opened Image */
    if(!img)
    {
-      printf("Can't load image input file!\n");
+      cerr << "Couldn't load image input file!" << endl;
       return(false);
    }
 
@@ -101,7 +102,7 @@ bool doConversion(string imgFile, string mapFile)
       delete(dntMap);
       SDL_FreeSurface(img);
 
-      printf("Can't save map!\n");
+      cerr << "Couldn't save map!" << endl;
 
       return(false);
    }
@@ -117,12 +118,12 @@ bool doConversion(string imgFile, string mapFile)
  ***********************************************************************/
 void showHelp()
 {
-   printf("heightmap2dnt - create a dnt map from an heightmap image\n"
-          "Usage:\n"
-          "\theightmap2dnt -i image -o mapname\n"
-          "Description:\n"
-          "\t-i\tDefine image to use as heightmap\n"
-          "\t-o\tDefine output map filename to create\n");
+   cout << "heightmap2dnt - create a dnt map from an heightmap image" << endl
+        << "Usage:" << endl
+        << "\theightmap2dnt -i image -o mapname" << endl
+        << "Description:" << endl
+        << "\t-i\tDefine image to use as heightmap" << endl
+        << "\t-o\tDefine output map filename to create" << endl;
    exit(-1);
 }
 
@@ -176,7 +177,7 @@ int main(int argc, char** argv)
    /* Init the SDL */
    if( SDL_Init(SDL_INIT_VIDEO) < 0 ) 
    {
-      printf("Argh! Can't init SDL!\n");
+      cerr << "Argh! Couldn't init SDL!" << endl;
       exit(-2);
    }
    atexit(SDL_Quit);
@@ -185,7 +186,7 @@ int main(int argc, char** argv)
    SDL_Surface* screen = SDL_SetVideoMode(16, 16, 32, SDL_DOUBLEBUF | SDL_OPENGL);
    if(!screen)
    {
-      printf("Can't init screen\n");
+      cerr << "Couldn't init screen" << endl;
       exit(-3);
    }
 
@@ -196,11 +197,11 @@ int main(int argc, char** argv)
 
    if(doConversion(imgFile, mapFile))
    {
-      printf("Conversion Done.\n");
+      cout << "Done." << endl;
    }
    else
    {
-      printf("Conversion Failed\n");
+      cout << "Failed." << endl;
    }
 
 

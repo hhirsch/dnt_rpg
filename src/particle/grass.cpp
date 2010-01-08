@@ -24,6 +24,9 @@
 #include "../engine/util.h"
 #include "../etc/dirs.h"
 
+#include <iostream>
+using namespace std;
+
 #define ROT_STEP 0.5
 #define ROT_MAX  deg2Rad(4)
 
@@ -62,8 +65,8 @@ grass::grass(float cX1,float cZ1, float cX2, float cZ2, int total,
    img = IMG_Load(dir.getRealFile(fileName).c_str());
    if(!img)
    {
-      printf("Error when loading grass! Maybe Crash Soon!\n File: %s\n",
-             dir.getRealFile(fileName).c_str());
+      cerr << "Couldn't load grass! Will Crash Soon!" << endl;
+      cerr << "Grass file was: " << dir.getRealFile(fileName) << endl;
    }
    glGenTextures(1, &(grassTexture));
    glBindTexture(GL_TEXTURE_2D, grassTexture);

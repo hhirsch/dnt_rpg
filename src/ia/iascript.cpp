@@ -18,6 +18,9 @@
   along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <iostream>
+using namespace std;
+
 #include "iascript.h"
 #include "../engine/dccnit.h"
 #include "../etc/dirs.h"
@@ -347,7 +350,9 @@ void iaScript::run(int maxLines)
             }
             else
             {
-               //printf("Interpreting: %s\n", strBuffer.c_str());
+#ifdef DNT_DEBUG_SCRIPTS
+               cerr << "Interpreting: " << strBuffer << endl;
+#endif
 
                /* get the first token */
                token = nextToken(strBuffer, pos);

@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -22,6 +22,8 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <iostream>
+using namespace std;
 
 #ifdef _MSC_VER
    #include "../config_win.h"
@@ -61,8 +63,8 @@ void dirs::findDataDirectories()
       }
       else
       {
-         printf("Error: Couldn't define the data directories!\n");
-         printf("Tried: %s and %s\n","../data/", file.c_str());
+         cerr << "Error: Couldn't define the data directories!" << endl;
+         cerr << "Tried: '../data' and " << file << endl;
          exit(-3);
       }
    }

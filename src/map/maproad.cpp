@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -17,6 +17,9 @@
   You should have received a copy of the GNU General Public License
   along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+#include <iostream>
+using namespace std;
 
 #include "maproad.h"
 #include "map.h"
@@ -48,7 +51,8 @@ mapRoad::mapRoad(int numX, int numZ)
    glBindTexture(GL_TEXTURE_2D, roadTexture);
    if(!img)
    {
-      printf("Fail: ../data/texturas/roads/dirt.png\nShould Crash Soon.\n");
+      cerr << "Couldn't load : ../data/texturas/roads/dirt.png" << endl;
+      cerr << "Will Crash Soon." << endl;
    }
    else
    {
@@ -76,7 +80,8 @@ mapRoad::mapRoad(int numX, int numZ)
    glBindTexture(GL_TEXTURE_2D, roadCurveTexture);
    if(!img)
    {
-      printf("Fail: ../data/texturas/roads/dirt_curve.png\nWill Crash Soon.\n");
+      cerr << "Couldn't load: ../data/texturas/roads/dirt_curve.png" << endl;
+      cerr << "Will Crash Soon." << endl;
    }
    else
    {

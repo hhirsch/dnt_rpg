@@ -41,6 +41,8 @@
 #include <SDL/SDL_opengl.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
+#include <iostream>
+using namespace std;
 
 #define VIS_DELTA 64  /**< Delta to Visible Culling */
 
@@ -582,8 +584,7 @@ GLuint Map::insertTexture(string arq, string name, GLuint R, GLuint G, GLuint B)
    SDL_Surface* img = IMG_Load(dir.getRealFile(arq).c_str());
    if(!img)
    {
-      printf("Error Opening Texture: %s\n",
-             dir.getRealFile(arq).c_str());
+      cerr << "Error Opening Texture: " << dir.getRealFile(arq) << endl;
       return(0);
    }
 
@@ -877,7 +878,7 @@ void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal,
    }
    else
    {
-      printf("Warn: Try to insert object out of Map's Limits!\n");
+      cerr << "Warn: Try to insert object out of Map's Limits!" << endl;
    }
 }
 
@@ -2236,8 +2237,11 @@ int Map::open(string arquivo)
                  aux->walls[indexMuro] = maux;
               }
               else if(indexMuro >= MAX_WALLS)
-                 printf("Quad: %d %d has more walls than permitted: %d\n",ax,az,
-                          indexMuro);
+              {
+                 cerr << "Quad: " << ax << "x" << az 
+                      << "has more walls than permitted: " 
+                      << indexMuro << endl;
+              }
           }
       }
       maux = (wall*)maux->getNext();
@@ -2411,8 +2415,7 @@ int Map::save(string arquivo)
 
    if(!(arq = fopen(dir.getRealFile(arquivo).c_str(),"w")))
    {
-      printf("Error while creating: %s to save\n",
-             dir.getRealFile(arquivo).c_str());
+      cerr << "Error while creating: " << dir.getRealFile(arquivo) << endl;
 	return(0);
    }
 

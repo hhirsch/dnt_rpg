@@ -23,6 +23,9 @@
 #include <SDL/SDL.h>
 #include "../engine/util.h"
 
+#include <iostream>
+using namespace std;
+
 sound* actualSound;
 bool running = true;
 
@@ -48,7 +51,7 @@ void sound::lock()
 {
    if(SDL_mutexP(soundMutex) != 0)
    {
-      printf("Error while Sound Mutex Lock\n");
+      cerr << "Error while Sound Mutex Lock" << endl;
    }
 }
 
@@ -59,7 +62,7 @@ void sound::unLock()
 {
    if(SDL_mutexV(soundMutex) != 0)
    {
-      printf("Error while Sound Mutex UnLock\n");
+      cerr << "Error while Sound Mutex UnLock\n" << endl;
    }
 }
 
@@ -89,13 +92,13 @@ void sound::init()
       }
       else
       {
-         printf("Can't Create OpenAL Context\n");
+         cerr << "Couldn't create OpenAL context" << endl;
       }
 
    }
    else
    {
-      printf("No OpenAL Device Avaible!\n");
+      cerr << "No OpenAL device available!" << endl;
    }
    
    /* None current Opened Music */
@@ -204,7 +207,7 @@ bool sound::loadMusic(string fileName)
 
    if(!backMusic->playback())
    {
-      printf("Can't Play Ogg File: %s\n",fileName.c_str());
+      cerr << "Couldn't play ogg file: " << fileName << endl;
       delete(backMusic);
       backMusic = NULL;
       return(false);
@@ -237,7 +240,7 @@ void sound::flush()
       if(!backMusic->update()) 
       {
          //backMusic->rewind();
-         printf("error while playing music\n");
+         cerr << "Error while playing music" << endl;
       }
    }
 

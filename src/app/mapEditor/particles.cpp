@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -20,6 +20,9 @@
 
 #include "particles.h"
 #include "../../gui/messages.h"
+
+#include <iostream>
+using namespace std;
 
 #define STATE_PLANES     800
 #define STATE_GRASS_INIT 801
@@ -238,7 +241,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
          tmpPart = new part2(mouseX, height, mouseZ, fileToOpen);
          if(!tmpPart)
          {
-            printf("Error opening: %s\n", fileToOpen.c_str());
+            cerr << "Error opening: " << fileToOpen << endl;
             actualParticle = NULL;
             return;
          }
@@ -263,7 +266,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
          tmpPart = new part4(mouseX, height, mouseZ, fileToOpen);
          if(!tmpPart)
          {
-            printf("Error opening: %s\n", fileToOpen.c_str());
+            cerr << "Error opening: " << fileToOpen << endl;
             actualParticle = NULL;
             return;
          }
@@ -288,7 +291,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
          tmpPart = new part1(mouseX, height, mouseZ, fileToOpen);
          if(!tmpPart)
          {
-            printf("Error opening: %s\n", fileToOpen.c_str());
+            cerr << "Error opening: " << fileToOpen << endl;
             actualParticle = NULL;
             return;
          }
@@ -313,7 +316,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
          tmpPart = new part7(mouseX, height, mouseZ, fileToOpen);
          if(!tmpPart)
          {
-            printf("Error opening: %s\n", fileToOpen.c_str());
+            cerr << "Error opening: " << fileToOpen << endl;
             actualParticle = NULL;
             return;
          }

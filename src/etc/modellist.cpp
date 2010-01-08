@@ -18,6 +18,9 @@
   along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <iostream>
+using namespace std;
+
 #include "modellist.h"
 #include "../engine/culling.h"
 #include "../engine/util.h"
@@ -229,7 +232,7 @@ void model3d::draw()
    render();
    if(staticFlag)
    {
-      //printf("Warning: Rendering Static as Non Static!\n");
+      cerr << "Warning: Rendering Static as Non Static!" << endl;
    }
 }
 
@@ -249,7 +252,7 @@ void model3d::decUsed()
    usedFlag--;
    if(usedFlag < 0)
    {
-      printf("Used flag for model %s is underflow!\n", fileName.c_str());
+      cerr << "Used flag for model '" << fileName << "' is underflow!" << endl;
    }
 }
 
@@ -450,15 +453,15 @@ void modelList::printAll()
 {
    int i;
    model3d* mdl = (model3d*)list->getFirst();
-   printf("*****************************************************\n");
-   printf("*              Current Models on List               *\n");
+   cerr << "*****************************************************" << endl;
+   cerr << "*              Current Models on List               *" << endl;
    for(i = 0; i < list->getTotal(); i++)
    {
-      printf("* Obj: %s\n*\tUsed for: %d\n", mdl->getFileName().c_str(), 
-                                             mdl->getUsedFlag());
+      cerr << "* Obj: "<< mdl->getFileName() << endl;
+      cerr << "* Used for: " << mdl->getUsedFlag() << endl;
       mdl = (model3d*)mdl->getNext();
    }
-   printf("*****************************************************\n\n");
+   cerr << "*****************************************************"<<endl<<endl;
 }
 
 /********************************************************

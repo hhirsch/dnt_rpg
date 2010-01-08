@@ -28,6 +28,7 @@
 
 #include <iostream>
 #include <fstream>
+using namespace std;
 
 /***************************************************************
  *                 Particle System Constructor                 *
@@ -69,8 +70,8 @@ particleSystem::particleSystem(string fileName, int mode)
    if(!file)
    {
       init(maxParticles, mode);
-      printf("Error while opening particle file: %s\n",
-             dir.getRealFile(fileName).c_str());
+      cerr << "Error while opening particle file: " 
+           << dir.getRealFile(fileName) << endl;
       return;
    }
 
