@@ -70,28 +70,24 @@ void splitWindow::open()
    close();
 
    /* Create the window */
-   intWindow = interf->insertWindow(sX-110,sY-46,sX+110,sY+46, 
+   intWindow = interf->insertWindow(sX-110,sY-36,sX+110,sY+36, 
          gettext("Quantity"));
    list = intWindow->getObjectsList();
 
    /* Ok Button */
-   okButton = list->insertButton(92,57,150,75,gettext("Ok"),1);
-   cancelButton = list->insertButton(92,57,150,75,gettext("Cancel"),1);
+   okButton = list->insertButton(42,47,110,65,gettext("Ok"),1);
+   cancelButton = list->insertButton(122,47,180,65,gettext("Cancel"),1);
    
-   /* Message */
-   textBox* quadText = list->insertTextBox(5,17,215,33,0,"Quantity:");
-   quadText->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
-
    /* Quantity */
-   posY = 37;
-   lessButton = list->insertButton(79,posY,89,posY+17,
-                                   fnt.createUnicode(0x25C4),0);
-   lessButton->defineFont(DNT_FONT_ARIAL, 9);
-   qtyText = list->insertTextBox(78,posY,138,posY+17,1,"");
-   qtyText->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
-   moreButton = list->insertButton(139,posY,149,posY+17,
-                                   fnt.createUnicode(0x25BA),0);
-   moreButton->defineFont(DNT_FONT_ARIAL, 9);
+   posY = 17;
+   lessButton = list->insertButton(139,posY,151,posY+11,
+                                   fnt.createUnicode(0x25BC),0);
+   lessButton->defineFont(DNT_FONT_ARIAL, 8);
+   qtyText = list->insertTextBox(78,posY,138,posY+33,1,"");
+   qtyText->setFont(DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER);
+   moreButton = list->insertButton(139,posY+12,151,posY+33,
+                                   fnt.createUnicode(0x25B2),0);
+   moreButton->defineFont(DNT_FONT_ARIAL, 8);
 
    /* Set the window and open */
    intWindow->setModal();
@@ -100,8 +96,6 @@ void splitWindow::open()
 
    /* Do the text update */
    updateText();
-
-
 }
 
 /***********************************************************************
@@ -139,8 +133,6 @@ void splitWindow::updateText()
  ***********************************************************************/
 bool splitWindow::treat(guiObject* guiObj, int eventInfo, GLfloat X, GLfloat Z)
 {
-   bool ret = false;
-
    /* TODO: delta change! */
 
    if(isOpen())
@@ -204,15 +196,13 @@ bool splitWindow::treat(guiObject* guiObj, int eventInfo, GLfloat X, GLfloat Z)
             updateText();
             return(true);
         }
-        else
-        {
-           /* Put the delta back to the usual */
-           delta = 1;
-        }
       }
    }
 
-   return(ret);
+   /* Put the delta back to the usual, since no event got here. */
+   delta = 1;
+
+   return(false);
 }
 
 /***********************************************************************
