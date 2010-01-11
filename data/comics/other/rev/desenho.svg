@@ -330,7 +330,7 @@
          id="image10462"
          height="50.088051"
          width="47.289532"
-         xlink:href="file:///projetos/dccnitghtmare/data/comics/other/rev/mart.png"
+         xlink:href="mart.png"
          transform="matrix(0.75331562,0.65765916,-0.77050219,0.63743734,0,0)" />
       <g
          transform="matrix(0.42753672,0.90399798,-0.90399798,0.42753672,802.0668,-550.55925)"
@@ -450,7 +450,7 @@
          d="m 892.88059,326.35114 9.6774,30.60293"
          style="fill:none;stroke:#000000;stroke-width:1.42369139px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <image
-         sodipodi:absref="/projetos/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
+         sodipodi:absref="../msoftlivre/kalashnikov_inv.png"
          xlink:href="../msoftlivre/kalashnikov_inv.png"
          transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
          width="38.000004"
@@ -600,7 +600,7 @@
          d="m -115.87733,160.30689 9.67746,30.60293"
          id="path2569" />
       <image
-         sodipodi:absref="/projetos/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
+         sodipodi:absref="../msoftlivre/kalashnikov_inv.png"
          xlink:href="../msoftlivre/kalashnikov_inv.png"
          y="-134.7252"
          x="184.09911"
@@ -733,7 +733,7 @@
          d="m 797.01037,256.86707 c 0,1.95262 -1.13066,3.53553 -2.52538,3.53553 -1.39473,0 -2.52539,-1.58291 -2.52539,-3.53553 0,-1.95263 1.13066,-3.53554 2.52539,-3.53554 1.39472,0 2.52538,1.58291 2.52538,3.53554 z"
          transform="matrix(0.82503656,0,0,0.48027241,264.69393,286.28301)" />
       <image
-         xlink:href="file:///projetos/dccnitghtmare/data/comics/other/rev/revoots.png"
+         xlink:href="revoots.png"
          width="24.501085"
          height="26.412428"
          id="image6277"
@@ -817,7 +817,7 @@
          id="image6048"
          height="52.142857"
          width="44.285717"
-         xlink:href="file:///projetos/dccnitghtmare/data/comics/other/rev/foice.png"
+         xlink:href="foice.png"
          transform="matrix(0.96828631,0.24984319,-0.24984319,0.96828631,0,0)" />
       <g
          transform="matrix(0.72573703,-0.68797221,0.68797221,0.72573703,731.18231,71.603216)"
@@ -984,7 +984,7 @@
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <image
          transform="matrix(0.04428565,-0.99901891,0.99901891,0.04428565,0,0)"
-         xlink:href="file:///projetos/dccnitghtmare/data/comics/other/rev/pa.png"
+         xlink:href="pa.png"
          width="93.933983"
          height="95.954292"
          id="image4711"
@@ -1092,7 +1092,7 @@
          d="m -141.30548,340.43632 7.85869,25.58922"
          style="fill:none;stroke:#000000;stroke-width:1.17316031px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <image
-         sodipodi:absref="/projetos/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
+         sodipodi:absref="../msoftlivre/kalashnikov_inv.png"
          xlink:href="../msoftlivre/kalashnikov_inv.png"
          transform="matrix(-0.21913921,0.9756936,0.97279825,0.23165397,0,0)"
          width="31.728558"
@@ -1250,7 +1250,7 @@
          d="m 1007.1663,504.92258 9.6774,30.60293"
          id="path9494" />
       <image
-         sodipodi:absref="/projetos/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
+         sodipodi:absref="../msoftlivre/kalashnikov_inv.png"
          xlink:href="../msoftlivre/kalashnikov_inv.png"
          y="1037.0879"
          x="266.80994"
@@ -1424,7 +1424,7 @@
          d="m 892.88059,326.35114 9.6774,30.60293"
          id="path9658" />
       <image
-         sodipodi:absref="/projetos/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
+         sodipodi:absref="../msoftlivre/kalashnikov_inv.png"
          xlink:href="../msoftlivre/kalashnikov_inv.png"
          y="885.50549"
          x="118.5812"
@@ -2177,7 +2177,7 @@
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <image
          transform="matrix(0.97134715,0.23766513,-0.23766513,0.97134715,0,0)"
-         xlink:href="file:///projetos/dccnitghtmare/data/models/objetos/armas/scimitar/scimitar_inv.png"
+         xlink:href="../../../models/objetos/armas/scimitar/scimitar_inv.png"
          width="27.645937"
          height="60.595173"
          id="image10401"
@@ -2298,7 +2298,7 @@
          id="image9730"
          height="22.285715"
          width="23.357143"
-         xlink:href="file:///projetos/dccnitghtmare/data/models/objetos/armas/sw39/sw39_inv.png" />
+         xlink:href="../../../models/objetos/armas/sw39/sw39_inv.png" />
       <path
          id="path9732"
          d="m 907.0361,373.59427 c 2.62965,-4.72165 -4.63049,-4.32127 -4.63049,-4.32127"
@@ -2601,7 +2601,7 @@
          id="image9186"
          height="52.142857"
          width="44.285717"
-         xlink:href="file:///projetos/dccnitghtmare/data/comics/other/rev/foice.png"
+         xlink:href="foice.png"
          transform="matrix(0.87342443,0.48695972,-0.48695972,0.87342443,0,0)" />
       <g
          transform="matrix(0.72573703,-0.68797221,0.68797221,0.72573703,710.97925,0.892535)"
@@ -2621,7 +2621,7 @@
       </g>
       <image
          transform="matrix(0.34553985,-0.93840408,0.93840408,0.34553985,0,0)"
-         xlink:href="file:///projetos/dccnitghtmare/data/comics/other/rev/foice.png"
+         xlink:href="foice.png"
          width="44.285717"
          height="52.142857"
          id="image9196"
@@ -2717,7 +2717,7 @@
          d="m 1007.1663,504.92258 9.6774,30.60293"
          style="fill:none;stroke:#000000;stroke-width:1.42369139px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <image
-         sodipodi:absref="/projetos/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
+         sodipodi:absref="../msoftlivre/kalashnikov_inv.png"
          xlink:href="../msoftlivre/kalashnikov_inv.png"
          transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
          width="38.000004"
@@ -2819,7 +2819,7 @@
          id="image6680"
          height="95.954292"
          width="93.933983"
-         xlink:href="file:///projetos/dccnitghtmare/data/comics/other/rev/pa.png"
+         xlink:href="pa.png"
          transform="matrix(0.31512091,-0.94905153,0.94905153,0.31512091,0,0)" />
       <g
          id="g7314">
@@ -3100,7 +3100,7 @@
          id="image8476"
          height="50.088051"
          width="47.289532"
-         xlink:href="file:///projetos/dccnitghtmare/data/comics/other/rev/mart.png"
+         xlink:href="mart.png"
          transform="matrix(0.87958568,0.47574051,-0.61131976,0.79138369,0,0)" />
       <g
          id="g8478"
@@ -3243,7 +3243,7 @@
          id="path5689" />
       <image
          transform="matrix(0.87342443,0.48695972,-0.48695972,0.87342443,0,0)"
-         xlink:href="file:///projetos/dccnitghtmare/data/comics/other/rev/foice.png"
+         xlink:href="foice.png"
          width="44.285717"
          height="52.142857"
          id="image5988"
@@ -3271,7 +3271,7 @@
          id="image5992"
          height="52.142857"
          width="44.285717"
-         xlink:href="file:///projetos/dccnitghtmare/data/comics/other/rev/foice.png"
+         xlink:href="foice.png"
          transform="matrix(0.34553985,-0.93840408,0.93840408,0.34553985,0,0)" />
       <path
          id="path5730"
@@ -3408,7 +3408,7 @@
       </g>
       <image
          transform="matrix(0.75331562,0.65765916,-0.77050219,0.63743734,0,0)"
-         xlink:href="file:///projetos/dccnitghtmare/data/comics/other/rev/mart.png"
+         xlink:href="mart.png"
          width="47.289532"
          height="50.088051"
          id="image6595"
@@ -3440,7 +3440,7 @@
          id="image8355"
          height="95.954292"
          width="93.933983"
-         xlink:href="file:///projetos/dccnitghtmare/data/comics/other/rev/pa.png"
+         xlink:href="pa.png"
          transform="matrix(0.45293196,-0.89154509,0.89154509,0.45293196,0,0)" />
       <g
          transform="matrix(1.1255853,0,0,1,-104.65928,0)"
@@ -3740,7 +3740,7 @@
          id="path9290" />
       <image
          transform="matrix(-0.7812738,0.62418847,0.62418847,0.7812738,0,0)"
-         xlink:href="file:///projetos/dccnitghtmare/data/models/objetos/armas/axe/axe_inv.png"
+         xlink:href="../../../models/objetos/armas/axe/axe_inv.png"
          width="29.428572"
          height="170.71428"
          id="image9424"
@@ -3865,7 +3865,7 @@
          id="path8254" />
       <image
          transform="matrix(0.96828631,0.24984319,-0.24984319,0.96828631,0,0)"
-         xlink:href="file:///projetos/dccnitghtmare/data/comics/other/rev/foice.png"
+         xlink:href="foice.png"
          width="44.285717"
          height="52.142857"
          id="image8256"
@@ -4035,7 +4035,7 @@
          d="m 944.06542,500.81319 18.11322,-1.05194"
          style="fill:none;stroke:#000000;stroke-width:1.3624891px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <image
-         xlink:href="file:///projetos/dccnitghtmare/data/models/objetos/armas/sw39/sw39_inv.png"
+         xlink:href="../../../models/objetos/armas/sw39/sw39_inv.png"
          width="23.357143"
          height="22.285715"
          id="image9129"
@@ -4245,7 +4245,7 @@
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <image
          transform="matrix(0.94590106,0.3244552,-0.3244552,0.94590106,0,0)"
-         xlink:href="file:///projetos/dccnitghtmare/data/models/objetos/armas/dark_katana/dark_katana_inv.png"
+         xlink:href="../../../models/objetos/armas/dark_katana/dark_katana_inv.png"
          width="38"
          height="76"
          id="image10103"
@@ -4265,7 +4265,7 @@
          id="image9828"
          height="95.954292"
          width="93.933983"
-         xlink:href="file:///projetos/dccnitghtmare/data/comics/other/rev/pa.png"
+         xlink:href="pa.png"
          transform="matrix(0.34354319,-0.93913688,0.93913688,0.34354319,0,0)" />
       <g
          id="g9867">
