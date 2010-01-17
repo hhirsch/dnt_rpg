@@ -20,6 +20,7 @@
 
 #include "inventwindow.h"
 #include "barterwindow.h"
+#include "splitwindow.h"
 
 #include "dccnit.h"
 
@@ -753,6 +754,12 @@ int inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                case 8: /* Drop */
                   if(objWhere == INVENTORY_INVENTORY)
                   {
+                     if(activeObject->getType() == OBJECT_TYPE_MONEY)
+                     {
+                        splitWindow spWindow;
+                        spWindow.open(interf, activeObject, curEngine, X, Z); 
+                     }
+
                      /* Only can drop if it is on the inventory */
                      inventories->removeFromInventory(objX,objY, 
                                                       currentInventory);

@@ -80,12 +80,12 @@ void splitWindow::open()
    
    /* Quantity */
    posY = 17;
-   lessButton = list->insertButton(139,posY,151,posY+11,
+   lessButton = list->insertButton(139,posY+12,151,posY+23,
                                    fnt.createUnicode(0x25BC),0);
    lessButton->defineFont(DNT_FONT_ARIAL, 8);
-   qtyText = list->insertTextBox(78,posY,138,posY+33,1,"");
-   qtyText->setFont(DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER);
-   moreButton = list->insertButton(139,posY+12,151,posY+33,
+   qtyText = list->insertTextBox(78,posY,138,posY+23,1,"");
+   qtyText->setFont(DNT_FONT_ARIAL, 16, DNT_FONT_ALIGN_CENTER);
+   moreButton = list->insertButton(139,posY,151,posY+11,
                                    fnt.createUnicode(0x25B2),0);
    moreButton->defineFont(DNT_FONT_ARIAL, 8);
 
