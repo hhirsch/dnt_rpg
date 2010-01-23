@@ -2497,8 +2497,9 @@ int engine::treatIO(SDL_Surface *screen)
 
       /* Exit Engine */
       if( ( keys[SDLK_ESCAPE] ) && 
-            ( (time-lastKeyb >= REFRESH_RATE) || 
-              (lastKey != SDLK_ESCAPE) ) )
+          ( (time-lastKeyb >= REFRESH_RATE) || 
+            (lastKey != SDLK_ESCAPE) ) &&
+          (!gui->getActiveWindow()->isModal()) )
       {
          defineFrontSurface();
          lastKey = SDLK_ESCAPE;
