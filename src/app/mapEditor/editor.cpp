@@ -397,6 +397,7 @@ void editor::newMap()
    sizeX = -1, sizeZ = -1;
    string s;
    int type = -1;
+   int index = 0;
 
    /* Get map type */
    while( type == -1 )
@@ -420,8 +421,6 @@ void editor::newMap()
       }
    }
 
-   int index = ((mapTexture*)map->textures.getFirst())->index;
-
    /* Get map Z size */
    while( (sizeZ <= 0) || (sizeZ > 30))
    {
@@ -439,6 +438,7 @@ void editor::newMap()
    if(map->isOutdoor())
    {
       map->newMap(sizeX+14, sizeZ+14);
+      index = ((mapTexture*)map->textures.getFirst())->index;
       int k, l;
       Square* saux;
       for(k = 0; k < sizeX+14; k++)
@@ -460,6 +460,7 @@ void editor::newMap()
    else
    {
       map->newMap(sizeX,sizeZ);
+      index = ((mapTexture*)map->textures.getFirst())->index;
       /* Insert walls */
       wall* actualWall = map->addWall(0,0,(sizeX)*map->squareSize(),10);
       actualWall->frontTexture.setTextureId(index);
