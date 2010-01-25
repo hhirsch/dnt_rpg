@@ -23,6 +23,7 @@
 #include "util.h"
 #include "savefile.h"
 #include "savewindow.h"
+#include "splitwindow.h"
 
 #include <math.h>
 #include <SDL/SDL_image.h>
@@ -191,12 +192,7 @@ engine::~engine()
       delete(snd);
    }
 
-   /* Close the static windows, if needed */
-   barterWindow tradeWindow;
-   dialogWindow dlgWindow;
-   tradeWindow.close();
-   dlgWindow.close();
-
+   closeWindows();
 
    /* Finish particles */
    particleController.finish();
@@ -337,24 +333,18 @@ engine::~engine()
    delete[] visibleMatrix;
 }
 
-
 /*********************************************************************
- *                         quitCurrentGame                           *
+ *                           closeWindows                            *
  *********************************************************************/
-void engine::quitCurrentGame()
+void engine::closeWindows()
 {
-   /* Remove All Sound Effects */
-   if(snd)
-   {
-      snd->removeAllSoundEffects();
-   }
-   walkSound = NULL;
-
-   /* Close the Dialog or Barter windows, if opened */
-   barterWindow btWindow;
+   /* Close the static windows, if needed */
+   barterWindow tradeWindow;
    dialogWindow dlgWindow;
-   btWindow.close();
+   splitWindow spWindow;
+   tradeWindow.close();
    dlgWindow.close();
+   spWindow.close();
 
    /* Close info Window, character window and journal window too */
    if(infoWindow->isOpen())
@@ -390,6 +380,23 @@ void engine::quitCurrentGame()
       delete(inventoryWindow);
       inventoryWindow = NULL;
    }
+
+}
+
+/*********************************************************************
+ *                         quitCurrentGame                           *
+ *********************************************************************/
+void engine::quitCurrentGame()
+{
+   /* Remove All Sound Effects */
+   if(snd)
+   {
+      snd->removeAllSoundEffects();
+   }
+   walkSound = NULL;
+
+   /* Close all engine related windows */
+   closeWindows();
 
    /* Clear Modifications */
    modifState.clear();

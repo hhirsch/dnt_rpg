@@ -274,6 +274,12 @@ class engine
 
       /*!
        *************************************************************** 
+       * Close all related windows  
+       ***************************************************************/
+      void closeWindows();
+
+      /*!
+       *************************************************************** 
        * Define Screen to actual Screen Size  
        * \param screen -> Pointer to the Screen's Surface
        * \param actualFarView -> FarView Value
