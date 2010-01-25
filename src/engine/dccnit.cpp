@@ -1796,6 +1796,7 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
 {
    barterWindow tradeWindow;
    dialogWindow dlgWindow;
+   splitWindow spWindow;
    
    /* Verify if Inventory Window is opened */
    if(inventoryWindow)
@@ -1812,6 +1813,9 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
 
    /* Verify Dialog Windows */
    dlgWindow.treat(object, eventInfo, infoWindow, this);
+
+   /* Verify Split window */
+   spWindow.treat(object, eventInfo);
 
    /* Verify Inventory Window Actions */
    if( (inventoryWindow) )

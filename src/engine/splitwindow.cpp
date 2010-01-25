@@ -131,7 +131,7 @@ void splitWindow::updateText()
 /***********************************************************************
  *                                treat                                *
  ***********************************************************************/
-bool splitWindow::treat(guiObject* guiObj, int eventInfo, GLfloat X, GLfloat Z)
+bool splitWindow::treat(guiObject* guiObj, int eventInfo)
 {
    /* TODO: delta change! */
 

@@ -58,10 +58,8 @@ class splitWindow
       /*! Treat Events on Window. 
        * \param guiObj -> last GUI object
        * \param eventInfo -> last GUI Event 
-       * \param X -> character that own the object X position
-       * \param Z ->     "       "   "    "      "     Z    "  
        * \return true if event got, false otherwise. */
-      bool treat(guiObject* guiObj, int eventInfo, GLfloat X, GLfloat Z);
+      bool treat(guiObject* guiObj, int eventInfo);
 
    protected:
 
@@ -70,6 +68,12 @@ class splitWindow
 
       /*! Update the quantity text */
       void updateText();
+
+      /*! Do the split */
+      void apply();
+
+      /*! Cancel the split */
+      void cancel();
 
       static object* obj;            /**< The object to split */
       static GLfloat posX;           /**< X position to throw object */
