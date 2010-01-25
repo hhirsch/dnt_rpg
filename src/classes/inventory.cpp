@@ -22,6 +22,9 @@
 #include "object.h"
 #include "money.h"
 #include "../engine/inventwindow.h"
+#include "../engine/modstate.h"
+#include "../sound/sound.h"
+
 
 /**************************************************************
  *                          Constructor                       *
@@ -171,6 +174,35 @@ bool inventory::equipObject(object* obj, int where)
       }
    }
    return(false);
+}
+
+/***********************************************************************
+ *                              dropObject                             *
+ ***********************************************************************/
+void inventory::dropObject(object* obj, int x, int y, int inv,
+      Map* actualMap, GLfloat X, GLfloat Z)
+{
+   modState modifState;
+   sound snd;
+
+   /* Only can drop if it is on the inventory */
+   removeFromInventory(x, y, inv);
+
+   /* Add it to the map */
+   actualMap->insertObject(X, actualMap->getHeight(X,Z), Z, 0, obj, 0);
+   modifState.mapObjectAddAction(MODSTATE_ACTION_OBJECT_ADD,
+         obj->getFileName(), actualMap->getFileName(),
+         X, actualMap->getHeight(X,Z), Z);
+
+   /* Save its state (to avoid, for example, ammo reload
+    * after dropping-leaving-return to the map) */
+   modifState.mapObjectAddAction(MODSTATE_ACTION_OBJECT_CHANGE_STATE,
+         obj->getFileName(), actualMap->getFileName(),
+         X, actualMap->getHeight(X,Z), Z, obj->getState());
+
+   /* Play Drop Sound */
+   snd.addSoundEffect(X, actualMap->getHeight(X,Z), Z, SOUND_NO_LOOP,
+         "sndfx/objects/drop_item.ogg");
 }
 
 /**************************************************************

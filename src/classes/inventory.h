@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -24,6 +24,8 @@
 #include "object.h"
 #include "itemslot.h"
 #include "../etc/dirs.h"
+#include "../map/map.h"
+
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
@@ -74,6 +76,17 @@ class inventory
        * \param where -> ID of the place to equip
        * \return -> true if equipped, false, if can't equip */
       bool equipObject(object* obj, int where);
+
+      /* Drop object from the inventory (puting it on the floor X,Z)
+       * \param obj -> object to drop from the inventory
+       * \param x -> x position of the object on inventory
+       * \param y -> y position of the object at inventory
+       * \param inv -> inventory where object lies
+       * \param actualMap -> pointer to the current map
+       * \param X -> x position to drop object to
+       * \param Z -> z position to drop object to */
+      void dropObject(object* obj, int x, int y, int inv,
+            Map* actualMap, GLfloat X, GLfloat Z);
 
       /*! Get object from iventory position
        * \param x -> x space position on inventory

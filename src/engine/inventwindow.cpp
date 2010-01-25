@@ -426,6 +426,7 @@ void inventWindow::verifyUseObject()
    }
 }
 
+
 /**************************************************************
  *                             treat                          *
  **************************************************************/
@@ -759,38 +760,18 @@ int inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                         splitWindow spWindow;
                         spWindow.open(interf, activeObject, curEngine, X, Z); 
                      }
-
-                     /* Only can drop if it is on the inventory */
-                     inventories->removeFromInventory(objX,objY, 
-                                                      currentInventory);
-                     /* Add it to the map */
-                     actualMap->insertObject(X, actualMap->getHeight(X,Z), Z,
-                                             0, activeObject, 0);
-                     modifState.mapObjectAddAction(MODSTATE_ACTION_OBJECT_ADD,
-                                                   activeObject->getFileName(),
-                                                   actualMap->getFileName(),
-                                                   X,
-                                                   actualMap->getHeight(X,Z),
-                                                   Z);
-                     /* Save its state (to avoid, for example, ammo reload
-                      * after dropping-leaving-return to the map) */
-                     modifState.mapObjectAddAction(
-                                            MODSTATE_ACTION_OBJECT_CHANGE_STATE,
-                                            activeObject->getFileName(),
-                                            actualMap->getFileName(),
-                                            X,
-                                            actualMap->getHeight(X,Z),
-                                            Z,
-                                            activeObject->getState());
+                     else
+                     {
+                        /* drop the object */
+                        inventories->dropObject(activeObject, objX, objY, 
+                              currentInventory, actualMap, X, Z);
+                        reDraw();
+                     }
 
                      /* Return to the NONE state */
                      activeObject = NULL;
                      state = INVENTORY_STATE_NONE;
-                     reDraw();
-                     /* Play Drop Sound */
-                     snd.addSoundEffect(X, actualMap->getHeight(X,Z), Z,
-                                        SOUND_NO_LOOP,
-                                        "sndfx/objects/drop_item.ogg");
+                     
                      act = INVENTORY_ACTION_REMOVE_ITEM;
                   }
                break;
