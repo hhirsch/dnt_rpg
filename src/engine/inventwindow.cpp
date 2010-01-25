@@ -765,7 +765,6 @@ int inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                         /* drop the object */
                         inventories->dropObject(activeObject, objX, objY, 
                               currentInventory, actualMap, X, Z);
-                        reDraw();
                      }
 
                      /* Return to the NONE state */

@@ -203,6 +203,13 @@ void inventory::dropObject(object* obj, int x, int y, int inv,
    /* Play Drop Sound */
    snd.addSoundEffect(X, actualMap->getHeight(X,Z), Z, SOUND_NO_LOOP,
          "sndfx/objects/drop_item.ogg");
+
+   /* Redraw the window, if opened */
+   if( (inv < INVENTORY_PER_CHARACTER) && (openedWindow != NULL))
+   {
+      inventWindow* i = (inventWindow*)openedWindow;
+      i->reDraw();
+   }
 }
 
 /**************************************************************
