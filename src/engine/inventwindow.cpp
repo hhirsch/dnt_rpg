@@ -433,9 +433,6 @@ void inventWindow::verifyUseObject()
 int inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                         Map* actualMap, GLfloat X, GLfloat Z, bool seller)
 {
-   modState modifState;
-
-   sound snd;
    if(!isOpen())
    {
       /* Window is no more opened */
