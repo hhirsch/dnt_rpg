@@ -755,7 +755,7 @@ int inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                      if(activeObject->getType() == OBJECT_TYPE_MONEY)
                      {
                         splitWindow spWindow;
-                        spWindow.open(interf, activeObject, curEngine, X, Z); 
+                        spWindow.open(interf, activeObject, curEngine, owner); 
                      }
                      else
                      {

@@ -38,15 +38,16 @@ class splitWindow
        * \param inter -> pointer to the used guiInterface 
        * \param o -> pointer to the object to split
        * \param usedEngine -> pointer to the current in-use engine
-       * \param pX -> X coordinate to put the object
-       * \param pZ -> Z coordinate to put the object */
+       * \param c -> character owner of the object */
       void open(guiInterface* inter, object* o, void* usedEngine, 
-            GLfloat pX, GLfloat pZ);
+            character* c);
       /*! Constructor to give the desired object quantity to a character. 
        * \param inter -> pointer to the used guiInterface 
        * \param o -> pointer to the object to split
+       * \param c -> pointer to the character owner of the object
        * \param t -> pointer to the character to receive the object */
-      void open(guiInterface* inter, object* o, character* t);
+      void open(guiInterface* inter, object* o, void* usedEngine,
+            character* c, character* t);
 
       /*! Close the window, if is opened */
       void close();
@@ -76,8 +77,7 @@ class splitWindow
       void cancel();
 
       static object* obj;            /**< The object to split */
-      static GLfloat posX;           /**< X position to throw object */
-      static GLfloat posZ;           /**< Z position to throw object */
+      static character* owner;       /**< Character owner of the object */
       static character* target;      /**< Character to receive the object */
 
       static int curQty;             /**< Current quantity */

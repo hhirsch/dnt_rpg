@@ -24,14 +24,13 @@
  *                               open                                  *
  ***********************************************************************/
 void splitWindow::open(guiInterface* inter, object* o, void* usedEngine, 
-      GLfloat pX, GLfloat pZ)
+      character* c)
 {
    /* Set things */
    interf = inter;
    obj = o;
    curEngine = usedEngine;
-   posX = pX;
-   posZ = pZ;
+   owner = c;
    target = NULL;
 
    /* (re)open the window */
@@ -41,14 +40,14 @@ void splitWindow::open(guiInterface* inter, object* o, void* usedEngine,
 /***********************************************************************
  *                                 open                                *
  ***********************************************************************/
-void splitWindow::open(guiInterface* inter, object* o, character* t)
+void splitWindow::open(guiInterface* inter, object* o, void* usedEngine,
+      character* c, character* t)
 {
    /* Set things */
    interf = inter;
    obj = o;
-   curEngine = NULL;
-   posX = -1;
-   posZ = -1;
+   curEngine = usedEngine;
+   owner = c;
    target = t;
 
    /* (re)open the window */
@@ -209,11 +208,10 @@ bool splitWindow::treat(guiObject* guiObj, int eventInfo)
  *                               static                                *
  ***********************************************************************/
 object* splitWindow::obj = NULL;
-GLfloat splitWindow::posX = -1;
-GLfloat splitWindow::posZ = -1;
 int splitWindow::curQty = 0;
 int splitWindow::delta = 1;
 character* splitWindow::target = NULL;
+character* splitWindow::owner = NULL;
 void* splitWindow::curEngine = NULL;
 guiInterface* splitWindow::interf = NULL;
 window* splitWindow::intWindow = NULL;
