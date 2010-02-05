@@ -16,6 +16,8 @@
  - Fixed segfault when loading game with characterWindow opened;
  - iaScripts: accepting the use of - operator as 'signal change';
  - iaScripts: accepting literals as function parameters;
+ - Setting initial animation state of models to a random value;
+ - Always run option 'true' by default;
 
 Working on:
  - Weather effects;

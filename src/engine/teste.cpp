@@ -114,7 +114,7 @@ int main(int argc, char **argv)
              cBook->load("comics/intro/intro.dcb");
              cBook->run();
 
-             gameEngine->loadMap("mapas/tutorial/cruz_local.map");
+             gameEngine->loadMap("mapas/tutorial/house1.map");
           }
        }
        
