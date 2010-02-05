@@ -48,6 +48,10 @@ class aniModel:public thing
        * \param pos -> time of the animation */
       void update(GLfloat pos);
 
+      /*! Get the model current pos time
+       * \return current model pos time */
+      GLfloat getCurrentPos();
+
       /*! Load the cal3D model to be this character's body and animations.
        * \param strFilename -> \c string with the cal3d file name.
        * \return true if success on load. */
@@ -120,6 +124,7 @@ class aniModel:public thing
       float m_motionBlend[3];        /**< Cal3D motion blend */
       float m_renderScale;           /**< Cal3D scale on render */
       float m_lodLevel;              /**< Cal3D Level of Detail to render */
+      float curPos;                  /**< current time pos */
       string m_path;                 /**< Path to cal3D model */
       string modelFileName;          /**< Filename of the model */
 

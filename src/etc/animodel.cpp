@@ -317,10 +317,11 @@ bool aniModel::loadModel(const string& strFilename)
   m_calModel->setMaterialSet(0);
 
   // set initial animation state
+  curPos =  11 + (int)(30 * (rand() / (RAND_MAX + 1.0))); 
   m_state = -1;
   setState(STATE_IDLE);
 
-  m_calModel->update(10);
+  m_calModel->update(curPos);
 
    /* End of CAL3D LOAD */
    return(true);
@@ -804,7 +805,16 @@ int aniModel::getState()
  *********************************************************************/
 void aniModel::update(GLfloat pos)
 {
+   curPos = pos;
    m_calModel->update(pos);
+}
+
+/*********************************************************************
+ *                            getCurrentPos                          *
+ *********************************************************************/
+GLfloat aniModel::getCurrentPos()
+{
+   return(curPos); 
 }
 
 /*********************************************************************

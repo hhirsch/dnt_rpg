@@ -634,6 +634,8 @@ int engine::loadMap(string arqMapa, bool loadingGame)
    SDL_Surface* img;    /* Text surface*/
    GLuint texturaTexto; /* Text texture */
 
+   GLfloat prevPos;
+
    char texto[512];
    string arqVelho = "nada";
 
@@ -864,9 +866,11 @@ int engine::loadMap(string arqMapa, bool loadingGame)
    per = (character*) PCs->getFirst();
    for(aux=0;aux < PCs->getTotal();aux++)
    {
+      prevPos = per->getCurrentPos();
       per->setState(STATE_IDLE);
       per->update(0); 
-      per->calculateBoundingBox();  
+      per->calculateBoundingBox();
+      per->update(prevPos);
       per = (character*) per->getNext();
    }
 
@@ -876,9 +880,11 @@ int engine::loadMap(string arqMapa, bool loadingGame)
       per = (character*) NPCs->getFirst();
       for(aux=0; aux < NPCs->getTotal();aux++)
       {
+         prevPos = per->getCurrentPos();
          per->setState(STATE_IDLE);
          per->update(0); 
          per->calculateBoundingBox();  
+         per->update(prevPos);
          per = (character*) per->getNext();
       }
    }
