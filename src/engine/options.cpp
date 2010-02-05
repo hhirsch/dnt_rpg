@@ -1563,7 +1563,7 @@ bool   options::enableMultiTexture = true;
 bool   options::autoEndTurn = true;
 bool   options::showEnemyCircles = false;
 bool   options::enableAnisotropic = true;
-bool   options::alwaysRun = false;
+bool   options::alwaysRun = true;
 Uint32 options::keys[DNT_TOTAL_KEYS];
 
 Uint32 options::prevKeys[DNT_TOTAL_KEYS];
