@@ -18,6 +18,7 @@
  - iaScripts: accepting literals as function parameters;
  - Setting initial animation state of models to a random value;
  - Always run option 'true' by default;
+ - Fixed run toggle for A*;
 
 Working on:
  - Weather effects;

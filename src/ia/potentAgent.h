@@ -29,9 +29,10 @@ class potentAgent: public agent
       potentAgent(bool oriented);
       ~potentAgent();
 
-      /*! Defines Next Agent position. Virtual. 
+      /*! Defines Next Agent position.
+       * \param run -> true if running, false if walking. NOT used here.
        * \return true if position was defined */
-      bool defineNextPosition();
+      bool defineNextPosition(bool run);
 
       /*! Defines the agent Constants
        * \param a -> Atraction constant

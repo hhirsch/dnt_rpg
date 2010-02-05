@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -51,7 +51,7 @@ potentAgent::~potentAgent()
 /********************************************************************
  *                    define Next Position                          *
  ********************************************************************/
-bool potentAgent::defineNextPosition()
+bool potentAgent::defineNextPosition(bool run)
 {
    int aux;
    GLfloat min1[3], min2[3], max1[3], max2[3];

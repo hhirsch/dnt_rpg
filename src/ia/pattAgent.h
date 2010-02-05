@@ -58,9 +58,10 @@ class pattAgent: public agent
       /*! Destructor */
       ~pattAgent();
 
-      /*! Defines Next Agent position. Virtual. 
+      /*! Defines Next Agent position.
+       * \param run -> if character is running or walking
        * \return true if position was defined */
-      bool defineNextPosition();
+      bool defineNextPosition(bool run);
 
       /*! Set the pattern origin
        * \param x -> origin X position

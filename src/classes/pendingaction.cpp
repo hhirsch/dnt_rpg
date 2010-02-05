@@ -543,7 +543,7 @@ void pendingActionController::treatActions(Map* actualMap, bool fightMode)
                if(!actor->pathFind.getNewPosition(actor->xPosition,
                                                   actor->zPosition,
                                                   actor->orientation,
-                                                  fightMode))
+                                                  fightMode, false))
                {
 #ifdef DNT_DEBUG_PENDING_ACTION
                   cerr << "No new position. Move ended!" << endl;

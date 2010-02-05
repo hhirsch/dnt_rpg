@@ -2864,19 +2864,9 @@ int engine::treatIO(SDL_Surface *screen)
 
          activeCharacter->pathFind.defineMap(actualMap);
 
-         if(option->getAlwaysRun())
-         {
-            activeCharacter->pathFind.findPath(activeCharacter, xReal, zReal, 
-                  activeCharacter->walk_interval * ENGINE_RUN_MULTIPLIER, 
-                  NPCs, PCs, 
-                  engineMode == ENGINE_MODE_TURN_BATTLE);
-         }
-         else
-         {
-            activeCharacter->pathFind.findPath(activeCharacter, xReal, zReal, 
-                  activeCharacter->walk_interval, NPCs, PCs, 
-                  engineMode == ENGINE_MODE_TURN_BATTLE);
-         }
+         activeCharacter->pathFind.findPath(activeCharacter, xReal, zReal, 
+               activeCharacter->walk_interval, NPCs, PCs, 
+               engineMode == ENGINE_MODE_TURN_BATTLE);
       }
 
       /* Verify Continuous Walk with Mouse */
@@ -2951,7 +2941,8 @@ int engine::treatIO(SDL_Surface *screen)
                                         activeCharacter->xPosition,
                                         activeCharacter->zPosition,
                                         activeCharacter->orientation,
-                                        engineMode == ENGINE_MODE_TURN_BATTLE))
+                                        engineMode == ENGINE_MODE_TURN_BATTLE,
+                                        run))
             {
                walkStatus = ENGINE_WALK_KEYS;
             }

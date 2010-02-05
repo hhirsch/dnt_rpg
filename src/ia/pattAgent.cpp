@@ -19,6 +19,8 @@
 */
 
 #include "pattAgent.h"
+#include "../engine/util.h"
+
 #include <iostream>
 #include <math.h>
 
@@ -118,9 +120,21 @@ void pattAgent::calculateAngle(wayPoint* way, wayPoint* previous)
 /********************************************************************
  *                    define Next Position                          *
  ********************************************************************/
-bool pattAgent::defineNextPosition()
+bool pattAgent::defineNextPosition(bool run)
 {
    float varX=0, varZ=0;
+   float xIncCur, zIncCur;
+
+   if(run)
+   {
+      xIncCur = xInc*ENGINE_RUN_MULTIPLIER;
+      zIncCur = zInc*ENGINE_RUN_MULTIPLIER;
+   }
+   else
+   {
+      xIncCur = xInc;
+      zIncCur = zInc;
+   }
 
    if(!actualWayPoint)
    {
@@ -148,26 +162,26 @@ bool pattAgent::defineNextPosition()
 
   
    /* Update position, making sure that goes exactly to the waypoint */
-   if( ((xInc > 0) && (actualX + xInc > actualWayPoint->x)) ||
-       ((xInc < 0) && (actualX + xInc < actualWayPoint->x)) ||
-       (xInc == 0))
+   if( ((xIncCur > 0) && (actualX + xIncCur > actualWayPoint->x)) ||
+       ((xIncCur < 0) && (actualX + xIncCur < actualWayPoint->x)) ||
+       (xIncCur == 0))
    {
       actualX = actualWayPoint->x;
    }
    else
    {
-      actualX += xInc;
+      actualX += xIncCur;
    }
 
-   if( ((zInc > 0) && (actualZ + zInc > actualWayPoint->z)) ||
-       ((zInc < 0) && (actualZ + zInc < actualWayPoint->z)) ||
-       (zInc == 0))
+   if( ((zIncCur > 0) && (actualZ + zIncCur > actualWayPoint->z)) ||
+       ((zIncCur < 0) && (actualZ + zIncCur < actualWayPoint->z)) ||
+       (zIncCur == 0))
    {
       actualZ = actualWayPoint->z;
    }
    else
    {
-      actualZ += zInc;
+      actualZ += zIncCur;
    }
 
    /* Calculate the linear distance to the orign */ 

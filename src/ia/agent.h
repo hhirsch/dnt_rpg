@@ -105,9 +105,10 @@ class agent
 
       /* Virtual Methods */
 
-      /*! Defines Next Agent position. Virtual. 
+      /*! Defines Next Agent position. Virtual.
+       * \param run -> true if running, false if walking
        * \return true if position was defined */
-      virtual bool defineNextPosition()=0;
+      virtual bool defineNextPosition(bool run)=0;
 
    protected:
 

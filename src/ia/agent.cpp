@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -116,7 +116,7 @@ void agent::getSight(GLfloat& sightDist, GLfloat& sightAng)
  ********************************************************************/
 void agent::actualize()
 {
-   defineNextPosition();
+   defineNextPosition(false);
 }
 
 /********************************************************************
