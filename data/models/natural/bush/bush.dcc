@@ -1,0 +1,12 @@
+name = Bush
+cal3d = models/natural/bush/model.cfg
+inventory_texture = texturas/na.png
+inventory_sizes = 0 0
+life_points = 300
+fortitude = 5
+reflex = 2
+will = 0
+displacement = 0
+armature_class = 15
+cost = 10
+static_scenery = 1
