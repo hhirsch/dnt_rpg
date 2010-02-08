@@ -1,0 +1,12 @@
+name = Bananeira
+cal3d = models/natural/arvores/bananeira/model.cfg
+inventory_texture = texturas/na.png
+inventory_sizes = 0 0
+life_points = 600
+fortitude = 8
+reflex = 2
+will = 0
+displacement = 0
+armature_class = 25
+cost = 40
+static_scenery = 1
