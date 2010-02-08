@@ -1,4 +1,4 @@
-42
+43
 Beer models/objetos/itens/garrafa1/garrafa1.dcc
 Bookshelf models/objetos/geral/bookshelf/bookshelf.dcc
 Briefcase models/objetos/geral/mala/mala.dcc
@@ -26,6 +26,7 @@ Microwave models/objetos/geral/microwave/microwave.dcc
 Mjack_Book models/objetos/books/mjack/mjack.dcc
 Money models/objetos/itens/money/money.dcc
 Notebook models/objetos/geral/notebook/notebook.dcc
+Oven models/objetos/geral/oven/oven.dcc
 PC_Chair models/objetos/geral/pc_chair/pc_chair.dcc
 PC_Table models/objetos/geral/pc_table/pc_table.dcc
 Pia models/objetos/geral/pia/pia.dcc
