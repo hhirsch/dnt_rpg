@@ -2409,9 +2409,12 @@ void Map::optimize()
  ********************************************************************/
 int Map::save(string arquivo)
 {
-   optimize();
    FILE* arq;
    dirs dir;
+   int i;
+
+   /* Optimeze the map before save */
+   optimize();
 
    if(!(arq = fopen(dir.getRealFile(arquivo).c_str(),"w")))
    {
@@ -2473,7 +2476,6 @@ int Map::save(string arquivo)
    fprintf(arq,"outdoor = %d\n", outdoor);
 
    /* Write lakes */
-   int i;
    float xa=0,za=0,xb=0,zb=0;
    float r=0,g=0,b=0,a=0;
 
@@ -2505,7 +2507,7 @@ int Map::save(string arquivo)
 
    /* Write Doors */
    door* doorAux = (door*)doors.getFirst();
-   while(doorAux != NULL)
+   for(i=0; i < doors.getTotal(); i++)
    {
       fprintf(arq,"door = %s %.3f,%.3f:%d\n",
               dir.getRelativeFile(doorAux->obj->getFileName()).c_str(),
