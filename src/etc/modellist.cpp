@@ -232,7 +232,7 @@ void model3d::draw()
    render();
    if(staticFlag)
    {
-      cerr << "Warning: Rendering Static as Non Static!" << endl;
+      /*cerr << "Warning: Rendering Static as Non Static!" << endl;*/
    }
 }
 
