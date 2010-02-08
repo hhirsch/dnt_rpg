@@ -1,10 +1,11 @@
-41
+42
 Beer models/objetos/itens/garrafa1/garrafa1.dcc
 Bookshelf models/objetos/geral/bookshelf/bookshelf.dcc
 Briefcase models/objetos/geral/mala/mala.dcc
 Calendar models/objetos/geral/calendar/calendar.dcc
 Cama models/objetos/geral/cama/cama.dcc
 Cap models/objetos/geral/cap/cap.dcc
+Chair models/objetos/geral/chair/chair.dcc
 Colarinho models/objetos/geral/colarinho_e_oculos/colarinho_e_oculos.dcc
 Combat_Book models/objetos/books/combat_tutorial/combat_tutorial.dcc
 Computer models/objetos/geral/computador/computador.dcc
