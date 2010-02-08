@@ -1,0 +1,12 @@
+name = Scrap1
+cal3d = models/junk/scrap1/model.cfg
+inventory_texture = texturas/na.png
+inventory_sizes = 0 0
+life_points = 100
+fortitude = 3
+reflex = 2
+will = 0
+displacement = 0
+armature_class = 25
+cost = 2
+static_scenery = 1
