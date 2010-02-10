@@ -87,6 +87,10 @@ class model3d: public aniModel, public dntListElement
       void draw(GLfloat** matriz, bool inverted, GLfloat* shadowMatrix=NULL,
                 float alpha=0.0f);
 
+      /*! Draw All Visible Static Scenery Objects bounding boxes
+       * \param matrix -> visible matrix */
+      void drawBoundingBoxes(GLfloat** matriz);
+
       /*! Increment the used flag */
       void incUsed();
 

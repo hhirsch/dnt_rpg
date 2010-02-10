@@ -133,6 +133,71 @@ void model3d::addPosition(float x, float y, float z, float angle)
 }
 
 /********************************************************
+ *                   drawBoundingBoxes                  *
+ ********************************************************/
+void model3d::drawBoundingBoxes(GLfloat** matriz) 
+{
+   GLfloat min[3], max[3];
+   GLfloat X[4], Z[4];
+   boundingBox bound;
+   int i;
+   
+   sceneryRenderPosition* pos = (sceneryRenderPosition*)positions->getFirst();
+
+   glBegin(GL_QUADS);
+   glColor4f(1.0,0.0,0.0,0.5);
+
+   /* Render All Models */
+   for(i=0; i < positions->getTotal(); i++)
+   {
+      xPosition = pos->x;
+      yPosition = pos->y;
+      zPosition = pos->z;
+      orientation = pos->angle;
+
+      /* Do View Frustum Culling */
+      bound = getBoundingBox();
+      X[0] = bound.x1;
+      Z[0] = bound.z1;
+      X[1] = bound.x1;
+      Z[1] = bound.z2; 
+      X[2] = bound.x2;
+      Z[2] = bound.z2;
+      X[3] = bound.x2;
+      Z[3] = bound.z1;
+      rotTransBoundingBox(pos->angle, X, Z, pos->x, 
+            pos->y+bound.y1, pos->y+bound.y2, 
+            pos->z, min, max );
+
+      if( (matriz == NULL) ||
+            (visibleCube(min[0],min[1],min[2],max[0],max[1],max[2],
+                         matriz)) )
+      {
+         /* Is visible, so render */
+         glVertex3f(min[0], min[1], min[2]);
+         glVertex3f(min[0], min[1], max[2]);
+         glVertex3f(max[0], min[1], max[2]);
+         glVertex3f(max[0], min[1], min[2]);
+
+         glVertex3f(min[0], max[1], min[2]);
+         glVertex3f(min[0], max[1], max[2]);
+         glVertex3f(max[0], max[1], max[2]);
+         glVertex3f(max[0], max[1], min[2]);
+
+         /*glPushMatrix();
+         glTranslatef(xPosition, yPosition, zPosition);
+         glRotatef(orientation, 0, 1, 0);
+         renderBoundingBox();
+         glPopMatrix();*/
+      }
+
+      pos = (sceneryRenderPosition*)pos->getNext();
+   }
+
+   glEnd();
+}
+
+/********************************************************
  *                        draw                          *
  ********************************************************/
 void model3d::draw(GLfloat** matriz, bool inverted, GLfloat* shadowMatrix,

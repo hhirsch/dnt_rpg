@@ -144,6 +144,7 @@ void aniModel::calculateBoundingBox()
            min[0] = -p[aux2].x; max[0] = -p[aux2].x; 
            min[1] = p[aux2].z; max[1] = p[aux2].z;
            min[2] = p[aux2].y; max[2] = p[aux2].y;
+
            computed = 1;
         }
         else
@@ -514,57 +515,56 @@ void aniModel::removeFromGraphicMemory()
  *********************************************************************/
 void aniModel::renderBoundingBox()
 {  
-
    CalSkeleton *pCalSkeleton = m_calModel->getSkeleton();
 
    std::vector<CalBone*> &vectorCoreBone = pCalSkeleton->getVectorBone();
 
-   glColor3f(1.0f, 1.0f, 0.5f);
+   glColor4f(1.0f, 1.0f, 0.5f, 0.5f);
    glBegin(GL_LINES);      
 
    for(size_t boneId=0;boneId<vectorCoreBone.size();++boneId)
    {
       CalBoundingBox &calBoundingBox = vectorCoreBone[boneId]->getBoundingBox();
 
-	  CalVector p[8];
-	  calBoundingBox.computePoints(p);
+      CalVector p[8];
+      calBoundingBox.computePoints(p);
 
-	  
-	  glVertex3f(p[0].x,p[0].y,p[0].z);
-	  glVertex3f(p[1].x,p[1].y,p[1].z);
 
-	  glVertex3f(p[0].x,p[0].y,p[0].z);
-	  glVertex3f(p[2].x,p[2].y,p[2].z);
+      glVertex3f(p[0].x,p[0].y,p[0].z);
+      glVertex3f(p[1].x,p[1].y,p[1].z);
 
-	  glVertex3f(p[1].x,p[1].y,p[1].z);
-	  glVertex3f(p[3].x,p[3].y,p[3].z);
+      glVertex3f(p[0].x,p[0].y,p[0].z);
+      glVertex3f(p[2].x,p[2].y,p[2].z);
 
-	  glVertex3f(p[2].x,p[2].y,p[2].z);
-	  glVertex3f(p[3].x,p[3].y,p[3].z);
+      glVertex3f(p[1].x,p[1].y,p[1].z);
+      glVertex3f(p[3].x,p[3].y,p[3].z);
 
-  	  glVertex3f(p[4].x,p[4].y,p[4].z);
-	  glVertex3f(p[5].x,p[5].y,p[5].z);
+      glVertex3f(p[2].x,p[2].y,p[2].z);
+      glVertex3f(p[3].x,p[3].y,p[3].z);
 
-	  glVertex3f(p[4].x,p[4].y,p[4].z);
-	  glVertex3f(p[6].x,p[6].y,p[6].z);
+      glVertex3f(p[4].x,p[4].y,p[4].z);
+      glVertex3f(p[5].x,p[5].y,p[5].z);
 
-	  glVertex3f(p[5].x,p[5].y,p[5].z);
-	  glVertex3f(p[7].x,p[7].y,p[7].z);
+      glVertex3f(p[4].x,p[4].y,p[4].z);
+      glVertex3f(p[6].x,p[6].y,p[6].z);
 
-	  glVertex3f(p[6].x,p[6].y,p[6].z);
-	  glVertex3f(p[7].x,p[7].y,p[7].z);
+      glVertex3f(p[5].x,p[5].y,p[5].z);
+      glVertex3f(p[7].x,p[7].y,p[7].z);
 
-	  glVertex3f(p[0].x,p[0].y,p[0].z);
-	  glVertex3f(p[4].x,p[4].y,p[4].z);
+      glVertex3f(p[6].x,p[6].y,p[6].z);
+      glVertex3f(p[7].x,p[7].y,p[7].z);
 
-	  glVertex3f(p[1].x,p[1].y,p[1].z);
-	  glVertex3f(p[5].x,p[5].y,p[5].z);
+      glVertex3f(p[0].x,p[0].y,p[0].z);
+      glVertex3f(p[4].x,p[4].y,p[4].z);
 
-	  glVertex3f(p[2].x,p[2].y,p[2].z);
-	  glVertex3f(p[6].x,p[6].y,p[6].z);
+      glVertex3f(p[1].x,p[1].y,p[1].z);
+      glVertex3f(p[5].x,p[5].y,p[5].z);
 
-	  glVertex3f(p[3].x,p[3].y,p[3].z);
-	  glVertex3f(p[7].x,p[7].y,p[7].z);  
+      glVertex3f(p[2].x,p[2].y,p[2].z);
+      glVertex3f(p[6].x,p[6].y,p[6].z);
+
+      glVertex3f(p[3].x,p[3].y,p[3].z);
+      glVertex3f(p[7].x,p[7].y,p[7].z);  
 
    }
 

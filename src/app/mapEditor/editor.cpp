@@ -658,17 +658,7 @@ int editor::insertTexture(string textureFile)
  ********************************************************************/
 void editor::renderSceneryObjects()
 {
-   model3d* mdl = models.getFirst();
-   int i;
-   for(i = 0; i< models.getTotalModels(); i++)
-   {
-      /* Only Render here the Static Scenery Objects */
-      if(mdl->isStaticScenery())
-      {
-         mdl->draw(visibleMatrix, false);
-      }
-      mdl = (model3d*)mdl->getNext();
-   }
+   models.renderSceneryObjects(visibleMatrix, false);
 }
 
 /*********************************************************************

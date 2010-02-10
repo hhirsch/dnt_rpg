@@ -162,7 +162,7 @@ waterwindow.o: waterwindow.cpp waterwindow.h $(ENDPART)partcontroller.h\
 	@$(CC) $(CFLAGS) waterwindow.cpp -o waterwindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-$(BIN)dntMapEditor: $(OBJSGUI) $(OBJSMAPA) $(OBJS)
+$(BIN)dntMapEditor: $(OBJSGUI) $(OBJSMAPA) $(OBJSENGINE) $(OBJSETC) $(OBJS)
 	@printf "Linking mapEditor... "
 	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSIA) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) $(OBJSCBOOK) $(OBJS) -o $(BIN)dntMapEditor
 	@printf "\e[0;32mDone.\e[0;0m\n"

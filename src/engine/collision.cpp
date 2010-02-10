@@ -111,6 +111,7 @@ bool collision::verifySquare(GLfloat min[3], GLfloat max[3], Square* quad,
                               sobj->y+bounding.y2, sobj->z, min2, max2);
           if(intercepts(min,max,min2,max2))
           {
+             cout << "collided: " << sobj->obj->name << endl;
              /* If the bounding boxes intercepts, we'll need to do a more 
               * depth collision verify, so it is */
              if(sobj->obj->depthCollision(sobj->orientation, sobj->x, 
@@ -118,6 +119,7 @@ bool collision::verifySquare(GLfloat min[3], GLfloat max[3], Square* quad,
                                           actualMap->getHeight(sobj->x,sobj->z),
                                           sobj->z,min,max))
              {
+                cout << "still collided: " << sobj->obj->name << endl;
                 /* So if the depth collision is true, verify if can go up
                  * the position. if can't, the position is 'unwalkable' now! */
                 if( ((bounding.y2+sobj->y) - curHeight) <= 1.5)
