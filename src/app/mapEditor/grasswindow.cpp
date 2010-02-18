@@ -64,20 +64,18 @@ void grassWindow::openWindow()
    
    actualWindow->getObjectsList()->insertTextBox(7,24,87,41,0,"Emptiness:");
    buttonPovoationLess = actualWindow->getObjectsList()->insertButton(88,23,
-                                                                      98,40,
-                                                            fnt.createUnicode(0x25C4),0);
+         98,40, fnt.createUnicode(0x25C4),0);
    textPovoation = actualWindow->getObjectsList()->insertTextBox(99,23,150,40,
                                                                  1,"20.0");
    buttonPovoationMore = actualWindow->getObjectsList()->insertButton(151,23,
-                                                                      161,40,
-                                                            fnt.createUnicode(0x25BA),0);
+         161,40, fnt.createUnicode(0x25BA),0);
    actualWindow->getObjectsList()->insertTextBox(7,44,87,61,0,"ScaleFactor:");
    buttonSizeLess = actualWindow->getObjectsList()->insertButton(88,43,98,60,
-                                                            fnt.createUnicode(0x25C4),0);
+         fnt.createUnicode(0x25C4),0);
    textSize = actualWindow->getObjectsList()->insertTextBox(99,43,150,60,
-                                                            1,"1.0");
+         1,"1.0");
    buttonSizeMore = actualWindow->getObjectsList()->insertButton(151,43,161,60,
-                                                            fnt.createUnicode(0x25BA),0);
+         fnt.createUnicode(0x25BA),0);
 
    navigationTab = actualWindow->getObjectsList()->insertTabButton(65,70,0,0,
                                  dir.getRealFile("mapEditor/nav2.png").c_str());
