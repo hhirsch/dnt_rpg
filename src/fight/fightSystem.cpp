@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -289,7 +289,10 @@ int fightSystem::doTurn()
          /* don't play with dead characters or not Hostile Ones */
          while( (!actualActor->isAlive()) || 
                 ( (!isPC(actualActor)) && 
-                  (actualActor->getPsychoState() != PSYCHO_HOSTILE)) )
+                  ( (actualActor->getPsychoState() != PSYCHO_HOSTILE) ||
+                    (!pcGroups[0].anyoneIsAliveAndInRange(false, 
+                         actualActor->xPosition, actualActor->zPosition,
+                         2*DNT_BATTLE_RANGE) ) ) ))
          {
             actualActor = charsInitiatives.nextCharacter();
             if(actualActor == NULL)

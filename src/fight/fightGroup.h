@@ -56,9 +56,11 @@ class fightGroup
      * \param posX -> current character posX
      * \param posZ -> current character posZ
      * \param onlyHostile -> if true, only accept hostile characters
+     * \param range -> max range value
      * \return true if someone is alive and in range.
      ***************************************************************/
-     bool anyoneIsAliveAndInRange(bool onlyHostile,float posX=-1,float posZ=-1);
+     bool anyoneIsAliveAndInRange(bool onlyHostile,
+           float posX=-1, float posZ=-1, float range=DNT_BATTLE_RANGE);
      /*!
      *************************************************************** 
      * Get nearest character enemy to pers.  

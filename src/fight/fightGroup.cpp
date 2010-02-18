@@ -139,7 +139,7 @@ character* fightGroup::getNearestEnemy(character* pers)
  *                  anyoneIsAliveAndInRange                    *
  ***************************************************************/
 bool fightGroup::anyoneIsAliveAndInRange(bool onlyHostile, float posX, 
-                                         float posZ)
+      float posZ, float range)
                                          
 { 
    int i;
@@ -147,7 +147,7 @@ bool fightGroup::anyoneIsAliveAndInRange(bool onlyHostile, float posX,
    {
       /* Verify status */
       if( (characters[i]->isAlive()) && 
-          (characters[i]->atRange(posX, posZ, DNT_BATTLE_RANGE)) &&
+          (characters[i]->atRange(posX, posZ, range)) &&
           ( (!onlyHostile) || 
             (characters[i]->getPsychoState() == PSYCHO_HOSTILE)) )
       {

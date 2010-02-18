@@ -19,6 +19,7 @@
  - Setting initial animation state of models to a random value;
  - Always run option 'true' by default;
  - Fixed run toggle for A*;
+ - Avoid too far away enemy NPCs act at a distant fight;
 
 Working on:
  - Weather effects;
