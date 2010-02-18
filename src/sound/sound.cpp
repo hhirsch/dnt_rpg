@@ -78,8 +78,10 @@ sound::sound()
  *************************************************************************/
 void sound::init()
 {
-   // Initialize Open AL
    enabled = false;
+   soundMutex = SDL_CreateMutex();
+   
+   /* Initialize Open AL */
    device = alcOpenDevice(NULL); 
    
    if (device != NULL) 
@@ -110,7 +112,6 @@ void sound::init()
    actualSound = this;
    if(enabled)
    {
-      soundMutex = SDL_CreateMutex();
       soundThread  = SDL_CreateThread((&runParalelSound), NULL);   
    }
 }
@@ -145,14 +146,14 @@ void sound::finish()
 
       /* Clear all opened Sound Effects */
       removeAllSoundEffects();
-
-      /* Destroy the Mutex */
-      SDL_DestroyMutex(soundMutex);
    
       /* Clear OpenAL Context and Device */
       alcDestroyContext(context);
       alcCloseDevice(device);
    }
+
+   /* Destroy the Mutex */
+   SDL_DestroyMutex(soundMutex);
 }
 
 /*************************************************************************
