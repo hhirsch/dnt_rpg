@@ -142,26 +142,12 @@ bool fightGroup::anyoneIsAliveAndInRange(bool onlyHostile, float posX,
                                          float posZ)
                                          
 { 
-   float dist;
    int i;
    for(i=0;i<actualCharacters;i++)
    {
-      /* Calculate, if needed the distance */
-      if((posX != -1) && (posZ != -1))
-      {
-         dist = sqrt( (characters[i]->xPosition - posX)*
-                      (characters[i]->xPosition - posX) +
-                      (characters[i]->zPosition - posZ)*
-                      (characters[i]->zPosition - posZ));
-      }
-      else
-      {
-         dist = 0;
-      }
-
       /* Verify status */
       if( (characters[i]->isAlive()) && 
-          (dist < DNT_BATTLE_RANGE) &&
+          (characters[i]->atRange(posX, posZ, DNT_BATTLE_RANGE)) &&
           ( (!onlyHostile) || 
             (characters[i]->getPsychoState() == PSYCHO_HOSTILE)) )
       {

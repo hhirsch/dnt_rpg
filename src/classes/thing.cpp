@@ -441,3 +441,22 @@ void thing::setInitialConversation(int i)
    }
 }
 
+/*********************************************************************
+ *                                atRange                            *
+ *********************************************************************/
+bool thing::atRange(float posX, float posZ, float range)
+{ 
+   float dist=0;
+   
+   /* Calculate, if needed the distance */
+   if((posX != -1) && (posZ != -1))
+   {
+      dist = sqrt( (xPosition - posX) * (xPosition - posX) +
+            (zPosition - posZ) * (zPosition - posZ));
+   }
+
+   /* Verify status */
+   return(dist < range);
+}
+
+

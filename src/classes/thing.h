@@ -231,6 +231,13 @@ class thing
        * \param can -> true if can, false if can't*/
       void setCanMove(bool can);
 
+      /* Verify if the point posX,posZ is at range
+       * \param posX -> x coordinate
+       * \param posZ -> z coordinate 
+       * \param range -> max range 
+       * return true if at range */
+      bool atRange(float posX, float posZ, float range);
+
 
       //////////////////////////////////////////////////////////////////////
       //                                                                  //
