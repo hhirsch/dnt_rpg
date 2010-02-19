@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2009-12-28 10:35-0200\n"
+"POT-Creation-Date: 2010-02-19 17:01-0200\n"
 "PO-Revision-Date: 2009-11-20 22:48+0000\n"
 "Last-Translator: someone <someoneigna@hotmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -77,11 +77,15 @@ msgstr "No soy idiota"
 msgid "Invalid Talent"
 msgstr "Talento inválido"
 
-#: src/classes/feats.cpp:220
+#: src/classes/feats.cpp:222
+msgid "Out of ammo!"
+msgstr ""
+
+#: src/classes/feats.cpp:227
 msgid "Not enought points to use!"
 msgstr "¡No tienes suficientes puntos para usarlo!"
 
-#: src/classes/mission.cpp:531 src/engine/dialog.cpp:1167
+#: src/classes/mission.cpp:531 src/engine/dialog.cpp:1171
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "¡Misión completa: %d XP!"
@@ -174,8 +178,8 @@ msgstr "Carisma"
 msgid "Attribute Description"
 msgstr "Descripción de atributo"
 
-#: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:557
-#: src/engine/inventwindow.cpp:369 src/engine/options.cpp:1232
+#: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:564
+#: src/engine/inventwindow.cpp:370 src/engine/options.cpp:1232
 msgid "Warning"
 msgstr "Advertencia"
 
@@ -183,7 +187,7 @@ msgstr "Advertencia"
 msgid "You Need to Assign All Attributes."
 msgstr "Tienes que asignar todos los atributos"
 
-#: src/engine/barterwindow.cpp:52 src/engine/dialog.cpp:1470
+#: src/engine/barterwindow.cpp:52 src/engine/dialog.cpp:1474
 msgid "Barter"
 msgstr "Trueque"
 
@@ -196,7 +200,7 @@ msgid "Impose"
 msgstr "Imponer"
 
 #: src/engine/barterwindow.cpp:94 src/engine/barterwindow.cpp:104
-#: src/engine/inventwindow.cpp:55 src/engine/options.cpp:152
+#: src/engine/inventwindow.cpp:56 src/engine/options.cpp:152
 msgid "Inventory"
 msgstr "Inventario"
 
@@ -216,7 +220,7 @@ msgstr "El acuerdo impuesto fue aceptado."
 msgid "The barter imposition was rejected."
 msgstr "El acuerdo impuesto fue rechazado."
 
-#: src/engine/barterwindow.cpp:308 src/engine/inventwindow.cpp:214
+#: src/engine/barterwindow.cpp:308 src/engine/inventwindow.cpp:215
 msgid "Remove"
 msgstr "Eliminar"
 
@@ -373,66 +377,66 @@ msgstr "Habilidades de clase"
 msgid "No Skills."
 msgstr "Sin habilidades"
 
-#: src/engine/dccnit.cpp:498 src/engine/dccnit.cpp:548
+#: src/engine/dccnit.cpp:505 src/engine/dccnit.cpp:555
 msgid "Error"
 msgstr "Error"
 
-#: src/engine/dccnit.cpp:498
+#: src/engine/dccnit.cpp:505
 msgid "Can't load the saved game!"
 msgstr "No se puede cargar el juego guardado!"
 
-#: src/engine/dccnit.cpp:543
+#: src/engine/dccnit.cpp:550
 msgid "Information"
 msgstr "Información"
 
-#: src/engine/dccnit.cpp:544
+#: src/engine/dccnit.cpp:551
 msgid "The game was saved!"
 msgstr "El juego ha sido guardado!"
 
-#: src/engine/dccnit.cpp:548
+#: src/engine/dccnit.cpp:555
 msgid "Can't save game!"
 msgstr "No se puede guardar el juego!"
 
-#: src/engine/dccnit.cpp:558
+#: src/engine/dccnit.cpp:565
 msgid "Can't save game while fighting!"
 msgstr "¡No puedes salvar el juego mientras estás luchando!"
 
-#: src/engine/dccnit.cpp:693
+#: src/engine/dccnit.cpp:702
 #, c-format
 msgid "Saving Current Map Modifications"
 msgstr "Salvando modificaciones del mapa actual"
 
-#: src/engine/dccnit.cpp:728
+#: src/engine/dccnit.cpp:737
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Cargando mapa: %s..."
 
-#: src/engine/dccnit.cpp:791
+#: src/engine/dccnit.cpp:800
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Cargando PNJ: %s..."
 
-#: src/engine/dccnit.cpp:831
+#: src/engine/dccnit.cpp:838
 msgid "Creating MiniMap"
 msgstr "Creando minimapa..."
 
-#: src/engine/dccnit.cpp:837
+#: src/engine/dccnit.cpp:844
 msgid "Putting GUI on Screen"
 msgstr "Colocando GUI en pantalla..."
 
-#: src/engine/dccnit.cpp:881
+#: src/engine/dccnit.cpp:892
 msgid "Loading Particles"
 msgstr "Cargando partículas..."
 
-#: src/engine/dccnit.cpp:911
+#: src/engine/dccnit.cpp:922
 msgid "Loading Changes..."
 msgstr "Cargando cambios..."
 
-#: src/engine/dccnit.cpp:939
+#: src/engine/dccnit.cpp:950
 msgid "Done!"
 msgstr "¡Hecho!"
 
-#: src/engine/dccnit.cpp:1031
+#: src/engine/dccnit.cpp:1042
 msgid ""
 "DccNiTghtmare is relesead under GPLv3 or later: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -444,79 +448,74 @@ msgstr ""
 "está agradecido de toda la gente relacionada en el desarrollo de estas "
 "librerías: OpenAL, Cal3D, OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 
-#: src/engine/dccnit.cpp:1553
+#: src/engine/dccnit.cpp:1564
 msgid "Too far away for the action!"
 msgstr "¡Demasiado lejos para la acción!"
 
-#: src/engine/dccnit.cpp:1598
+#: src/engine/dccnit.cpp:1609
 msgid "No NPCs in the area."
 msgstr "No hay PNJ's en el área"
 
-#: src/engine/dccnit.cpp:1658
+#: src/engine/dccnit.cpp:1669
 msgid "Surprise Attack Turn."
 msgstr "Turno de ataque por sorpresa"
 
-#: src/engine/dccnit.cpp:1672
+#: src/engine/dccnit.cpp:1683
 msgid "No enemies in the area."
 msgstr "No hay enemigos en el área"
 
-#: src/engine/dccnit.cpp:1851 src/engine/dccnit.cpp:2370
+#: src/engine/dccnit.cpp:1866 src/engine/dccnit.cpp:2385
 #: src/engine/shortcutswindow.cpp:51
 msgid "Nothing"
 msgstr "Nada"
 
-#: src/engine/dccnit.cpp:2119
+#: src/engine/dccnit.cpp:2134
 #, c-format
 msgid "%s taken."
 msgstr "Recogido %s"
 
-#: src/engine/dccnit.cpp:2136
+#: src/engine/dccnit.cpp:2151
 msgid "Inventory is full!"
 msgstr "¡Inventario lleno!"
 
-#: src/engine/dccnit.cpp:2169
+#: src/engine/dccnit.cpp:2184
 msgid "Door"
 msgstr "Puerta"
 
-#: src/engine/dccnit.cpp:2305
+#: src/engine/dccnit.cpp:2320
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s ataca a %s"
 
-#: src/engine/dccnit.cpp:2471
+#: src/engine/dccnit.cpp:2486
 msgid "No more actions. Turn ended."
 msgstr "Sin acciones. Turno finalizado."
 
-#: src/engine/dccnit.cpp:3984
+#: src/engine/dccnit.cpp:3987
 msgid "Exit Battle Mode"
 msgstr "Salir del modo de batalla"
 
-#: src/engine/dialog.cpp:989
-#, c-format
-msgid "Not found in dialog: %d\n"
-msgstr "No se encontró en el diálogo: %d\n"
-
-#: src/engine/dialog.cpp:1196
+#: src/engine/dialog.cpp:1200
 #, c-format
 msgid "%s lost."
 msgstr "Perdió %s."
 
-#: src/engine/dialog.cpp:1239
+#: src/engine/dialog.cpp:1243
 #, c-format
 msgid "Received %s."
 msgstr "Recibió %s."
 
-#: src/engine/dialog.cpp:1256
+#: src/engine/dialog.cpp:1260
 #, c-format
 msgid "Received $%d."
 msgstr "Recibió $%d."
 
-#: src/engine/dialog.cpp:1270
+#: src/engine/dialog.cpp:1274
 #, c-format
 msgid "Lost $%d."
 msgstr "Perdió $%d."
 
-#: src/engine/dialog.cpp:1463
+#: src/engine/dialog.cpp:1467
 msgid "Dialog"
 msgstr "Diálogo"
 
@@ -559,44 +558,44 @@ msgstr "Opciones"
 msgid "Exit"
 msgstr "Salir"
 
-#: src/engine/inventwindow.cpp:189
+#: src/engine/inventwindow.cpp:190
 msgid "Get"
 msgstr "Coger"
 
-#: src/engine/inventwindow.cpp:192
+#: src/engine/inventwindow.cpp:193
 msgid "Info"
 msgstr "Info"
 
-#: src/engine/inventwindow.cpp:200
+#: src/engine/inventwindow.cpp:201
 msgid "Read"
 msgstr "Leer"
 
-#: src/engine/inventwindow.cpp:203
+#: src/engine/inventwindow.cpp:204
 msgid "Reload Weapon"
 msgstr "Recargar arma"
 
-#: src/engine/inventwindow.cpp:206
+#: src/engine/inventwindow.cpp:207
 msgid "Use"
 msgstr "Usar"
 
-#: src/engine/inventwindow.cpp:217
+#: src/engine/inventwindow.cpp:218
 msgid "Buy"
 msgstr "Comprar"
 
-#: src/engine/inventwindow.cpp:217
+#: src/engine/inventwindow.cpp:218
 msgid "Sell"
 msgstr "Vender"
 
-#: src/engine/inventwindow.cpp:222
+#: src/engine/inventwindow.cpp:223
 msgid "Drop"
 msgstr "Tirar"
 
-#: src/engine/inventwindow.cpp:329
+#: src/engine/inventwindow.cpp:330
 #, c-format
 msgid "%s reloaded %s with %s ammo."
 msgstr "%s recargado %s con %s municiones."
 
-#: src/engine/inventwindow.cpp:370
+#: src/engine/inventwindow.cpp:371
 msgid "No equipped weapons are compatible with this munition type."
 msgstr "Ninguna arma del equipamiento es compatible con este tipo de munición."
 
@@ -1043,15 +1042,15 @@ msgstr "¡%s está muerto!"
 msgid "%s receive %d XP for killing"
 msgstr "%s recibe %d XP por matar"
 
-#: src/fight/fightSystem.cpp:279 src/fight/fightSystem.cpp:298
+#: src/fight/fightSystem.cpp:279 src/fight/fightSystem.cpp:301
 msgid "New Round"
 msgstr "Nuevo asalto"
 
-#: src/fight/fightSystem.cpp:284 src/fight/fightSystem.cpp:303
+#: src/fight/fightSystem.cpp:284 src/fight/fightSystem.cpp:306
 msgid "Error: No Characters!"
 msgstr "Error: ¡No hay personajes!"
 
-#: src/fight/fightSystem.cpp:331 src/fight/fightSystem.cpp:337
+#: src/fight/fightSystem.cpp:334 src/fight/fightSystem.cpp:340
 #, c-format
 msgid "%s's turn."
 msgstr "Turno de %s"
@@ -4172,6 +4171,9 @@ msgstr ""
 #: data/characters/pcs/santa.pc:1
 msgid "Santa Claws"
 msgstr "Santa Claws"
+
+#~ msgid "Not found in dialog: %d\n"
+#~ msgstr "No se encontró en el diálogo: %d\n"
 
 #~ msgid ""
 #~ "DccNiTghtmare is developed under Public Domain: Feel free to use its "

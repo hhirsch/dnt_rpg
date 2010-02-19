@@ -176,15 +176,15 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
       defineWeapon(currentWeapon);
    }
 
-   /* Show feature name */
-   sprintf(texto,"%s ",m_feats[featNumber].info->name.c_str());
-   brief.addText(texto);
-
    /* Verify if have the feat points to use it */
    if( (m_feats[featNumber].actualQuantity >= 
         m_feats[featNumber].costToUse) ||
        (m_feats[featNumber].costToUse) == 0 )
    {
+      /* Show feature name */
+      sprintf(texto,"%s ",m_feats[featNumber].info->name.c_str());
+      brief.addText(texto);
+
       /* Try to use the feat */
       if(doHealOrAttack(actor, target, 
                         m_feats[featNumber].diceInfo, 
@@ -216,8 +216,16 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
       }
    }
 
-   /* Can't use due to points! */
-   brief.addText(gettext("Not enought points to use!"), 255, 10, 10);
+   if((featNumber == FEAT_RANGED_ATTACK) || (featNumber == FEAT_MELEE_ATTACK))
+   {
+      /* Can't use due to ammo! */
+      brief.addText(gettext("Out of ammo!"), 255, 10, 10);
+   }
+   else
+   {
+      /* Can't use due to points! */
+      brief.addText(gettext("Not enought points to use!"), 255, 10, 10);
+   }
    return(false);
 }
 
