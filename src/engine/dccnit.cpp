@@ -901,7 +901,7 @@ int engine::loadMap(string arqMapa, bool loadingGame)
    }
    else
    {
-      particleController.deleteAll();
+      particleController.deleteAll(true);
    }
    
 

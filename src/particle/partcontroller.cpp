@@ -47,12 +47,16 @@ void partController::finish()
 /**********************************************************************
  *                              deleteAll                             *
  **********************************************************************/
-void partController::deleteAll()
+void partController::deleteAll(bool keepPCRelated)
 {
-   /* Delete all Lists */
-   finish();
-   /* Recreate all lists */
-   init();
+   if(keepPCRelated)
+   {
+      particles->removeNonPCs();
+   }
+   else
+   {
+      particles->clearList();
+   }
 }
 
 /**********************************************************************
@@ -314,7 +318,7 @@ void partController::loadFromFile(string fileName)
    int inclination;
 
    /* Clear any previous particles */
-   deleteAll();
+   deleteAll(true);
 
    /* Now, try to load from file */
    file.open(dir.getRealFile(fileName).c_str(), ios::in | ios::binary);

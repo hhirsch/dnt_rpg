@@ -42,9 +42,27 @@ particleList::particleList(): dntList(DNT_LIST_TYPE_ADD_AT_END)
  ***************************************************************************/
 particleList::~particleList()
 {
-   /* Remove the remaining systems. Usually, no systems are at the
-    * destructor time, cause the remove here can make a memory leack. */
    clearList();
+}
+
+/***************************************************************************
+ *                            removeNonPCs                                 *
+ ***************************************************************************/
+void particleList::removeNonPCs()
+{
+   int i, t = total;
+   particleSystem* part = (particleSystem*)first;
+   particleSystem* aux;
+
+   for(i = 0; i < t; i++)
+   {
+      aux = part;
+      part = (particleSystem*)part->next;
+      if(!aux->followPC)
+      {
+         removeSystem(aux);
+      }
+   }
 }
 
 /***************************************************************************

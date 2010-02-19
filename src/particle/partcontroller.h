@@ -90,8 +90,10 @@ class partController
        * \param fileName -> name of the file to be saved. */
       void saveToFile(string fileName);
 
-      /*! Remove all particle systens from the system */
-      void deleteAll();
+      /*! Remove all particle systens from the system
+       * \param keepPCRelated -> true to keep all particles related to the 
+       *                         character */
+      void deleteAll(bool keepPCRelated=false);
 
       /*! Define the opened map
        * \param acMap -> pointer to the opened map

@@ -43,6 +43,9 @@ class particleList: public dntList
        * \param part -> system to remove */
       void removeSystem(particleSystem* part);
 
+      /*! Remove all systems not related with the PC */
+      void removeNonPCs();
+
    protected:
       /*! Delete a particleSystem
        * \param obj -> pointer to the particle system to delete */
