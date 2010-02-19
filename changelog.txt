@@ -21,6 +21,7 @@
  - Fixed run toggle for A*;
  - Avoid too far away enemy NPCs act at a distant fight;
  - Fixed the save of NPCs position;
+ - Keeping character related particles between maps;
 
 Working on:
  - Weather effects;
