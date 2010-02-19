@@ -1190,8 +1190,8 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs)
          bool done = false;
          while( (ch != NULL) && (!done) )
          {
-            if( (ch->xPosition == charAct->getInitialX()) &&
-                (ch->zPosition == charAct->getInitialZ()) )
+            if( (ch->initialXPosition == charAct->getInitialX()) &&
+                (ch->initialZPosition == charAct->getInitialZ()) )
             {
                if(tmpMobj->getAction() == MODSTATE_ACTION_CHARACTER_DEAD)
                {
@@ -1200,12 +1200,17 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs)
                   ch->orientation = charAct->getOrientation();
                   charAct->getPosition(ch->xPosition, ch->yPosition, 
                         ch->zPosition);
+                  ch->defineOcSquare(actualMap);
                }
                else if(tmpMobj->getAction() == 
                                          MODSTATE_ACTION_CHARACTER_CHANGE_STATE)
                {
                   /* Change the state to the desired one! */
                   ch->setPsychoState(charAct->getOrientation());
+                  /* Set the character position */
+                  charAct->getPosition(ch->xPosition, ch->yPosition,
+                        ch->zPosition);
+                  ch->defineOcSquare(actualMap);
                }
 
                done = true;
@@ -1221,12 +1226,6 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs)
          {
             cerr << "Not found Character: " << charAct->getTarget() << endl;
          }
-      }
-
-      /* Character Move */
-      else if(tmpMobj->getAction() == MODSTATE_ACTION_CHARACTER_MOVE)
-      {
-         //TODO
       }
 
       /* Talk Initial Dialog */

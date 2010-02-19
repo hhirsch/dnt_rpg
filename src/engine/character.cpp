@@ -720,6 +720,17 @@ modEffectList* character::getEffects()
 }
 
 /*********************************************************************
+ *                          defineOcSquare                           *
+ *********************************************************************/
+void character::defineOcSquare(Map* curMap)
+{
+   int posX =(int)floor(xPosition / curMap->squareSize());
+   int posZ =(int)floor(zPosition / curMap->squareSize());
+   
+   ocSquare = curMap->relativeSquare(posX, posZ);
+}
+
+/*********************************************************************
  *                                save                               *
  *********************************************************************/
 bool character::save(string saveFile)

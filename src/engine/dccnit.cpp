@@ -809,9 +809,7 @@ int engine::loadMap(string arqMapa, bool loadingGame)
            per->zPosition = posZ;
            per->yPosition = actualMap->getHeight(posX, posZ);
            /* Define Occuped Square */
-           int posX =(int)floor(per->xPosition / actualMap->squareSize());
-           int posZ =(int)floor(per->zPosition / actualMap->squareSize());
-           per->ocSquare = actualMap->relativeSquare(posX,posZ);
+           per->defineOcSquare(actualMap);
 
            /* Load its inventory (only when not loading game
             * and not having the map at modif state. those restrictions
@@ -2949,12 +2947,8 @@ int engine::treatIO(SDL_Surface *screen)
             else
             {
                /* Define New Occuped Square */
-               int posX =(int)floor(activeCharacter->xPosition /
-                                    actualMap->squareSize());
-               int posZ =(int)floor(activeCharacter->zPosition / 
-                                    actualMap->squareSize());
-               activeCharacter->ocSquare = 
-                                         actualMap->relativeSquare(posX,posZ);
+               activeCharacter->defineOcSquare(actualMap);
+               
                /* Define New Height */
                defineCharacterHeight(activeCharacter, 
                                      activeCharacter->xPosition,

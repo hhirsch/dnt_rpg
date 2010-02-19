@@ -208,6 +208,10 @@ class character: public aniModel, public dntListElement
        * \return pointer to the modEffectList */
       modEffectList* getEffects();
 
+      /*! Define the current occuped square by the character
+       * \param curMap -> pointer to the current map opened */
+      void defineOcSquare(Map* curMap);
+
       /*! Define the character list as friend class */
       friend class characterList;
 
