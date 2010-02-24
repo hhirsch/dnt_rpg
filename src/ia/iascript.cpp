@@ -894,7 +894,7 @@ object* iaScript::getParametero(string& token, string strLine,
    object* obj = NULL;
 
    /* Get character */
-   iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
+   iv = getParameter(token, strLine, IA_TYPE_OBJECT, pos);
    if(iv != NULL)
    {
       obj = (object*)iv->value;
@@ -917,7 +917,7 @@ diceThing* iaScript::getParameterd(string& token, string strLine,
    diceThing* dice = NULL;
 
    /* Get character */
-   iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
+   iv = getParameter(token, strLine, IA_TYPE_DICE, pos);
    if(iv != NULL)
    {
       dice = (diceThing*)iv->value;
@@ -1726,6 +1726,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       /* object getObject(string fileName, float posX, float posZ) */
       object* obj = NULL;
       obj = objectsList::search(objName, posX, posY, posZ);
+
       assignValue(var, (void*)obj, IA_TYPE_OBJECT);
    }
 
