@@ -3434,7 +3434,7 @@ void engine::renderNoShadowThings()
                   moveCircleZ-2*WALK_PER_MOVE_ACTION,
                   moveCircleX+2*WALK_PER_MOVE_ACTION, 
                   moveCircleZ+2*WALK_PER_MOVE_ACTION,
-                  0.1f,12);
+                  0.3f,12);
          }
          /* Normal Circle */
          actualMap->renderSurfaceOnMap(normalMoveCircle,
@@ -3442,7 +3442,7 @@ void engine::renderNoShadowThings()
                moveCircleZ-WALK_PER_MOVE_ACTION,
                moveCircleX+WALK_PER_MOVE_ACTION, 
                moveCircleZ+WALK_PER_MOVE_ACTION,
-               0.2f,20);
+               0.4f,20);
       }
       if( (turnCharacter->getCanAttack()) && 
           (walkDistance < WALK_PER_MOVE_ACTION) )
@@ -3454,7 +3454,7 @@ void engine::renderNoShadowThings()
                turnCharacter->zPosition-rangeValue, 
                turnCharacter->xPosition+rangeValue, 
                turnCharacter->zPosition+rangeValue, 
-               0.3f,20);
+               0.5f,20);
       }
 
    }
