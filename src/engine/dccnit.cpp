@@ -2534,6 +2534,18 @@ int engine::treatIO(SDL_Surface *screen)
          lastKeyb = time;
       }
 
+      /* Show info about occ square */
+      if(keys[SDLK_F6])
+      {
+         Square* sq = PCs->getActiveCharacter()->ocSquare;
+         cerr << "occ: " << sq << endl;
+         if(sq)
+         {
+            cerr << sq->posX << " " << sq->posZ << endl;
+            cerr << sq->flags << endl;
+         }
+      }
+
       /* Enter Attack Mode or End Turn */
       if( (keys[option->getKey(DNT_KEY_BATTLE_TURN)]) && 
             ( (time-lastKeyb >= REFRESH_RATE) || 
