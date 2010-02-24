@@ -512,16 +512,11 @@ void modInventory::flush(Map* curMap, inventory* inv)
    int i, invNumber;
    bool res;
 
-   /* Insert all objects at its previous positions */
+   /* Insert all objects at its previous inventory positions */
    for(i = 0; i < total; i++)
    {
-      /* Try get object from map object list */
-      curObj = objectsList::search(invObj->fileName, -1, -1, -1);
-      if(!curObj)
-      {
-         /* It's not on the list, so must insert it */
-         curObj = createObject(invObj->fileName, curMap->getFileName());
-      }
+      /* create the object object, as each one in inventory is a new one */
+      curObj = createObject(invObj->fileName, curMap->getFileName());
 
       /* Now insert it at the inventory */
       if(curObj)
