@@ -119,6 +119,9 @@ class modEffectList: public dntList
        * the owner character) and apply all periodic modEffects when needed */
       void doStep();
 
+      /*! Do the rest to the modEffects list (removing all timed effects) */
+      void rest();
+
    protected:
       /*! Free modEffect used memory
        * \param obj -> modEffect to delete */

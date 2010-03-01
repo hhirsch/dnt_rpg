@@ -280,6 +280,19 @@ class engine
 
       /*!
        *************************************************************** 
+       * Put all pc characters to rest (if no enemies)
+       ***************************************************************/
+      void rest();
+
+      /*!
+       *************************************************************** 
+       * Verify if there are alive enemies at the current map
+       * \return true if one or more enemies
+       ***************************************************************/
+      bool hasEnemies();
+
+      /*!
+       *************************************************************** 
        * Define Screen to actual Screen Size  
        * \param screen -> Pointer to the Screen's Surface
        * \param actualFarView -> FarView Value

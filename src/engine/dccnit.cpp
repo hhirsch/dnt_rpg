@@ -1568,6 +1568,42 @@ bool engine::rangeAction(GLfloat posX, GLfloat posZ,
 }
 
 /*********************************************************************
+ *                                 rest                              *
+ *********************************************************************/
+void engine::rest()
+{
+   int i;
+   int h;
+   character* ch;
+
+   if(hasEnemies())
+   {
+      brief->addText(gettext("Enemies nearby."), 220, 20, 20);
+      return;
+   }
+
+   ch = (character*)PCs->getFirst();
+   for(i=0; i < PCs->getTotal(); i++)
+   {
+      /* Heal Life Points */
+      ch->setLifePoints(ch->getMaxLifePoints());
+      ch->updateHealthBar();
+
+      /* Do the rest to effects */
+      ch->getEffects()->rest();
+
+      ch = (character*)ch->getNext();
+   }
+
+   /* Pass time */
+   h = hour;
+   hour -= h;
+   h = (h+8) % 24;
+   hour += h;
+   hourToTxt();
+}
+
+/*********************************************************************
  *                           exitBattleMode                          *
  *********************************************************************/
 void engine::exitBattleMode()
@@ -1580,6 +1616,31 @@ void engine::exitBattleMode()
 
    /* Abort All pending Actions */
    actionControl->abortAllActions();
+}
+
+
+/*********************************************************************
+ *                            hasEnemies                             *
+ *********************************************************************/
+bool engine::hasEnemies()
+{
+   int i;
+
+   if(!NPCs)
+   {
+      return(false);
+   }
+
+   character* ch = (character*)NPCs->getFirst();
+   for(i = 0; i < NPCs->getTotal(); i++)
+   {
+      if(ch->isAlive())
+      {
+         return(true);
+      }
+   }
+
+   return(false);
 }
 
 /*********************************************************************
@@ -2422,7 +2483,7 @@ int engine::treatIO(SDL_Surface *screen)
       /* Update Time */
       seconds = varTempo / 1000.0f;
 
-      hour = (hour + seconds / 100.0f );
+      hour = (hour + (seconds / 100.0f) );
       if(hour > 23.99f)
       {
          hour = 0.0f;
@@ -2520,6 +2581,16 @@ int engine::treatIO(SDL_Surface *screen)
          lastKey = SDLK_ESCAPE;
          lastKeyb = time;
          return(0);
+      }
+
+      /* Rest */
+      if( ( keys[SDLK_r] ) &&
+          ( (time-lastKeyb >= REFRESH_RATE) ||
+            (lastKey != SDLK_ESCAPE) ) &&
+          (!gui->getActiveWindow()->isModal()) )
+      {
+         rest();
+         lastKey = keys[SDLK_r];
       }
 
       /* Screenshot */

@@ -285,6 +285,38 @@ bool modEffectList::insertCopy(modEffect* obj)
 }
 
 /***********************************************************************
+ *                                  rest                               *
+ ***********************************************************************/
+void modEffectList::rest()
+{
+   int i;
+   int curTotal = total;
+   modEffect* eff = (modEffect*)first;
+   modEffect* efaux;
+
+   /* Search the list for expired modEffects */
+   for(i = 0; i < curTotal; i++)
+   {
+      /* Getting the next to not lose the pointer */
+      efaux = eff;
+      eff = (modEffect*)eff->getNext();
+
+      /* Verify if is timed */
+      if(efaux->time != 0)
+      {
+         /* Must deapply it */
+         if(owner != NULL)
+         {
+            efaux->unApply(owner);
+         }
+
+         /* remove it from the list */
+         remove(efaux);
+      }
+   }
+}
+
+/***********************************************************************
  *                                 doStep                              *
  ***********************************************************************/
 void modEffectList::doStep()
