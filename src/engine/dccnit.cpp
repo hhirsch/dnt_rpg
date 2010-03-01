@@ -2640,7 +2640,7 @@ int engine::treatIO(SDL_Surface *screen)
               (lastKey != SDLK_r) ) )
       {
          showRange = !showRange;
-         lastKey = SDLK_r;
+         lastKey = SDLK_k;
          lastKeyb = time;
       }
 
