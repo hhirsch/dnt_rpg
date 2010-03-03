@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
 "POT-Creation-Date: 2010-03-03 15:23-0300\n"
-"PO-Revision-Date: 2008-12-05 15:30+0000\n"
-"Last-Translator: Guybrush88 <Unknown>\n"
+"PO-Revision-Date: 2010-01-25 11:17+0000\n"
+"Last-Translator: Edoardo Maria Elidoro <edoardo.elidoro@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-12-16 17:52+0000\n"
+"X-Launchpad-Export-Date: 2010-03-03 19:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: src/classes/actions.cpp:128
@@ -29,7 +29,7 @@ msgstr "%s prova a curare %s"
 
 #: src/classes/actions.cpp:143
 msgid "Too far away for action!"
-msgstr "Troppo lontano per compiere un azione!"
+msgstr "Troppo lontano per agire!"
 
 #: src/classes/actions.cpp:236 src/classes/actions.cpp:259
 msgid "Miss."
@@ -788,11 +788,11 @@ msgstr ""
 
 #: src/engine/options.cpp:147
 msgid "End Turn"
-msgstr "Finisci Turno"
+msgstr ""
 
 #: src/engine/options.cpp:149
 msgid "Minimap"
-msgstr "Mappa"
+msgstr ""
 
 #: src/engine/options.cpp:150 src/engine/shortcutswindow.cpp:49
 msgid "Shortcuts"
@@ -3817,4 +3817,10 @@ msgstr "Pesante"
 
 #: data/characters/pcs/santa.pc:1
 msgid "Santa Claws"
-msgstr ""
+msgstr "Babbo Nachele"
+
+#~ msgid "Not found in dialog: %d\n"
+#~ msgstr "Non trovato nel dialogo: %d\n"
+
+#~ msgid "I am Bombadinho"
+#~ msgstr "Io sono Bombadinho"
