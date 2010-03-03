@@ -22,6 +22,7 @@
  - Avoid too far away enemy NPCs act at a distant fight;
  - Fixed the save of NPCs position;
  - Keeping character related particles between maps;
+ - 'Rest' action for party;
 
 Working on:
  - Weather effects;

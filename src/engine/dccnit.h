@@ -119,16 +119,18 @@ class engine
       /*!
        **************************************************************** 
        * Draws the Engine without Shadow
+       * \param flush -> if will call glFlush or not
        * \note Need to run \b SDL_GL_SwapBuffers() after;
        ***************************************************************/
-      void drawWithoutShadows();
+      void drawWithoutShadows(bool flush=true);
 
       /*!
        **************************************************************** 
        * Draws the Engine with all Shadows  
+       * \param flush -> if will call glFlush or not
        * \note Need to run \b SDL_GL_SwapBuffers() after;
        ***************************************************************/
-      void drawWithShadows();
+      void drawWithShadows(bool flush=true);
 
       /*!
        **************************************************************** 
@@ -190,6 +192,12 @@ class engine
        * Load Splash Screen
        ****************************************************************/
        void splashScreen();
+
+       /*! Fade in effect to current map */
+       void fadeIn();
+
+       /*! Fade out effect from current map */
+       void fadeOut();
 
        /*! Fade in Some Texture on screen */
        void fadeInTexture(GLuint id, int x1, int y1, int x2, int y2,

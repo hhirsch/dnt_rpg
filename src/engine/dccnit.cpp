@@ -954,10 +954,6 @@ int engine::loadMap(string arqMapa, bool loadingGame)
    fadeOutTexture(texturaCarga,centerX-midW,centerY-midH,
                   centerX+midW,centerY+midH, 256,128);
 
-   /* Free Loading Textures */
-   SDL_FreeSurface(img);
-   glDeleteTextures(1,&texturaTexto);
-
    /* Set the Farview to indoor or outdoor */
    if(actualMap->isOutdoor())
    {
@@ -968,9 +964,138 @@ int engine::loadMap(string arqMapa, bool loadingGame)
       redefineWindow(actualScreen, INDOOR_FARVIEW);
    }
 
+   /* Free Loading Textures */
+   SDL_FreeSurface(img);
+   glDeleteTextures(1,&texturaTexto);
+
    glEnable(GL_LIGHTING);
 
    return(1);
+}
+
+/*********************************************************************
+ *                               fadeIn                              *
+ *********************************************************************/
+void engine::fadeIn()
+{
+   int i;
+   for(i=0; i < 50; i++)
+   {
+      glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT
+              | GL_STENCIL_BUFFER_BIT);
+
+      /* Draw things */
+      if(shadowMap.isEnable())
+      {
+         drawWithShadows(false);
+      }
+      else
+      {
+         drawWithoutShadows(false);
+      }
+
+      draw2DMode();
+
+      glDisable(GL_LIGHTING);
+      glDisable(GL_FOG);
+      glDisable(GL_DEPTH_TEST);
+
+      glEnable(GL_BLEND);
+      glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+      glEnable(GL_COLOR_MATERIAL);
+
+      glColor4f(i/50.0f, i/50.0f, i/50.0f, (50-i)/50.0f);
+
+      glBegin(GL_QUADS);
+         glVertex3f(0, 0, 0);
+         glVertex3f(SCREEN_X, 0, 0);
+         glVertex3f(SCREEN_X, SCREEN_Y, 0);
+         glVertex3f(0, SCREEN_Y, 0);
+      glEnd();
+      glDisable(GL_COLOR_MATERIAL);
+      glDisable(GL_BLEND);
+      glEnable(GL_LIGHTING);
+      glEnable(GL_DEPTH_TEST);
+      glEnable(GL_FOG);
+
+
+      /* Rdefine 3D Mode */
+      if((actualMap != NULL) && (actualMap->isOutdoor()))
+      {
+         draw3DMode(option->getFarViewFactor()*OUTDOOR_FARVIEW);
+      }
+      else
+      {
+         draw3DMode(INDOOR_FARVIEW);
+      }
+      glFlush();
+      SDL_GL_SwapBuffers();
+      SDL_Delay(10);
+   }
+   glColor3f(1.0,1.0f,1.0f);
+
+}
+
+/*********************************************************************
+ *                              fadeOut                              *
+ *********************************************************************/
+void engine::fadeOut()
+{
+   int i;
+   for(i=49; i >= 0; i--)
+   {
+      glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT
+              | GL_STENCIL_BUFFER_BIT);
+
+      /* Draw things */
+      if(shadowMap.isEnable())
+      {
+         drawWithShadows(false);
+      }
+      else
+      {
+         drawWithoutShadows(false);
+      }
+
+      draw2DMode();
+
+      glDisable(GL_LIGHTING);
+      glDisable(GL_FOG);
+      glDisable(GL_DEPTH_TEST);
+
+      glEnable(GL_BLEND);
+      glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+      glEnable(GL_COLOR_MATERIAL);
+
+      glColor4f(i/50.0f, i/50.0f, i/50.0f, (50-i)/50.0f);
+
+      glBegin(GL_QUADS);
+         glVertex3f(0, 0, 0);
+         glVertex3f(SCREEN_X, 0, 0);
+         glVertex3f(SCREEN_X, SCREEN_Y, 0);
+         glVertex3f(0, SCREEN_Y, 0);
+      glEnd();
+      glDisable(GL_COLOR_MATERIAL);
+      glDisable(GL_BLEND);
+      glEnable(GL_LIGHTING);
+      glEnable(GL_FOG);
+      glEnable(GL_DEPTH_TEST);
+
+
+      /* Rdefine 3D Mode */
+      if((actualMap != NULL) && (actualMap->isOutdoor()))
+      {
+         draw3DMode(option->getFarViewFactor()*OUTDOOR_FARVIEW);
+      }
+      else
+      {
+         draw3DMode(INDOOR_FARVIEW);
+      }
+      glFlush();
+      SDL_GL_SwapBuffers();
+      SDL_Delay(10);
+   }
+   glColor3f(1.0,1.0f,1.0f);
 }
 
 /*********************************************************************
@@ -1582,6 +1707,10 @@ void engine::rest()
       return;
    }
 
+   /* Fade out map */
+   fadeOut();
+   SDL_Delay(100);
+
    ch = (character*)PCs->getFirst();
    for(i=0; i < PCs->getTotal(); i++)
    {
@@ -1601,6 +1730,8 @@ void engine::rest()
    h = (h+8) % 24;
    hour += h;
    hourToTxt();
+
+   fadeIn();
 }
 
 /*********************************************************************
@@ -3672,7 +3803,7 @@ void engine::renderGUI()
 /*********************************************************************
  *                         drawWithShadow                            *
  *********************************************************************/
-void engine::drawWithShadows()
+void engine::drawWithShadows(bool flush)
 {
    // FIXME: shadows for indoor maps
    GLfloat sunPos[4];
@@ -3717,17 +3848,20 @@ void engine::drawWithShadows()
    renderNoShadowThings();
    renderGUI();
    
-   /* Flush */
-   glFlush();
-   SDL_GL_SwapBuffers();
+   if(flush)
+   {
+      /* Flush */
+      glFlush();
+      SDL_GL_SwapBuffers();
 
-   printOpenGLErrors();
+      printOpenGLErrors();
+   }
 }
 
 /*********************************************************************
  *                       Draw Scene Function                         *
  *********************************************************************/
-void engine::drawWithoutShadows()
+void engine::drawWithoutShadows(bool flush)
 {
    /* Clear and update things before render */
    updateBeforeRender();
@@ -3740,10 +3874,13 @@ void engine::drawWithoutShadows()
    renderGUI();
 
    /* Flush */
-   glFlush();
-   SDL_GL_SwapBuffers();
+   if(flush)
+   {
+      glFlush();
+      SDL_GL_SwapBuffers();
 
-   printOpenGLErrors();
+      printOpenGLErrors();
+   }
 }
 
 /*********************************************************************
