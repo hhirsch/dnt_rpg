@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -106,6 +106,7 @@ string dntKeyToken[] =
    "rotateLeft",
    "rotateRight",
    "changeCharacter",
+   "rest",
 
    /* Battle Keys */
    "battleTurn",
@@ -143,6 +144,7 @@ string dntKeyDesc[] =
    gettext("Rotate Left"),
    gettext("Rotate Right"),
    gettext("Change Character"),
+   gettext("Rest"),
    /* Battle Keys */
    gettext("End Turn"),
    /* Shortcuts Keys */
@@ -1530,6 +1532,7 @@ void options::defaultKeys()
    keys[DNT_KEY_ROTATE_LEFT] = SDLK_a;
    keys[DNT_KEY_ROTATE_RIGHT] = SDLK_d;
    keys[DNT_KEY_CHANGE_CHARACTER] = SDLK_TAB;
+   keys[DNT_KEY_REST] = SDLK_r;
 
    /* Battle Keys */
    keys[DNT_KEY_BATTLE_TURN] = SDLK_SPACE;

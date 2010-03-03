@@ -2721,13 +2721,13 @@ int engine::treatIO(SDL_Surface *screen)
       }
 
       /* Rest */
-      if( ( keys[SDLK_r] ) &&
+      if( ( keys[option->getKey(DNT_KEY_REST)] ) &&
           ( (time-lastKeyb >= REFRESH_RATE) ||
-            (lastKey != SDLK_ESCAPE) ) &&
+            (lastKey != option->getKey(DNT_KEY_REST)) ) &&
           (!gui->getActiveWindow()->isModal()) )
       {
          rest();
-         lastKey = keys[SDLK_r];
+         lastKey = option->getKey(DNT_KEY_REST);
       }
 
       /* Screenshot */

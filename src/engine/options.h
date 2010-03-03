@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -55,6 +55,7 @@ enum
    DNT_KEY_ROTATE_LEFT,
    DNT_KEY_ROTATE_RIGHT,
    DNT_KEY_CHANGE_CHARACTER,
+   DNT_KEY_REST,
 
    /* Battle Keys */
    DNT_KEY_BATTLE_TURN,
