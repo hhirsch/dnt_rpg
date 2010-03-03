@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-02-19 17:01-0200\n"
+"POT-Creation-Date: 2010-03-03 15:23-0300\n"
 "PO-Revision-Date: 2009-12-10 17:04+0000\n"
 "Last-Translator: ucn| <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
@@ -436,7 +436,7 @@ msgstr "Lade Veränderungen..."
 msgid "Done!"
 msgstr "Fertig!"
 
-#: src/engine/dccnit.cpp:1042
+#: src/engine/dccnit.cpp:1167
 msgid ""
 "DccNiTghtmare is relesead under GPLv3 or later: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -444,50 +444,58 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1564
+#: src/engine/dccnit.cpp:1689
 msgid "Too far away for the action!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1609
+#: src/engine/dccnit.cpp:1706
+msgid "Couldn't rest at battle mode."
+msgstr ""
+
+#: src/engine/dccnit.cpp:1712
+msgid "Enemies nearby."
+msgstr ""
+
+#: src/engine/dccnit.cpp:1807
 msgid "No NPCs in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1669
+#: src/engine/dccnit.cpp:1867
 msgid "Surprise Attack Turn."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1683
+#: src/engine/dccnit.cpp:1881
 msgid "No enemies in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1866 src/engine/dccnit.cpp:2385
+#: src/engine/dccnit.cpp:2064 src/engine/dccnit.cpp:2583
 #: src/engine/shortcutswindow.cpp:51
 msgid "Nothing"
 msgstr "Nichts"
 
-#: src/engine/dccnit.cpp:2134
+#: src/engine/dccnit.cpp:2332
 #, c-format
 msgid "%s taken."
 msgstr ""
 
-#: src/engine/dccnit.cpp:2151
+#: src/engine/dccnit.cpp:2349
 msgid "Inventory is full!"
 msgstr "Inventar ist voll!"
 
-#: src/engine/dccnit.cpp:2184
+#: src/engine/dccnit.cpp:2382
 msgid "Door"
 msgstr "Tür"
 
-#: src/engine/dccnit.cpp:2320
+#: src/engine/dccnit.cpp:2518
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s attackiert %s"
 
-#: src/engine/dccnit.cpp:2486
+#: src/engine/dccnit.cpp:2684
 msgid "No more actions. Turn ended."
 msgstr ""
 
-#: src/engine/dccnit.cpp:3987
+#: src/engine/dccnit.cpp:4213
 msgid "Exit Battle Mode"
 msgstr ""
 

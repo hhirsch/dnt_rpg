@@ -1701,6 +1701,12 @@ void engine::rest()
    int h;
    character* ch;
 
+   if(engineMode == ENGINE_MODE_TURN_BATTLE)
+   {
+      brief->addText(gettext("Couldn't rest at battle mode."), 220, 20, 20);
+      return;
+   }
+
    if(hasEnemies())
    {
       brief->addText(gettext("Enemies nearby."), 220, 20, 20);
@@ -1765,7 +1771,7 @@ bool engine::hasEnemies()
    character* ch = (character*)NPCs->getFirst();
    for(i = 0; i < NPCs->getTotal(); i++)
    {
-      if(ch->isAlive())
+      if( (ch->isAlive()) && (ch->getPsychoState() == PSYCHO_HOSTILE))
       {
          return(true);
       }
