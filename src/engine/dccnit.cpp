@@ -2774,7 +2774,7 @@ int engine::treatIO(SDL_Surface *screen)
       /* Enable / Disable The Range Draw */
       if( (keys[SDLK_k]) && 
             ( (time-lastKeyb >= REFRESH_RATE) || 
-              (lastKey != SDLK_r) ) )
+              (lastKey != SDLK_k) ) )
       {
          showRange = !showRange;
          lastKey = SDLK_k;
