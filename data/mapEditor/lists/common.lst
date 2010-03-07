@@ -1,4 +1,4 @@
-44
+45
 Beer models/objetos/itens/garrafa1/garrafa1.dcc
 Bookshelf models/objetos/geral/bookshelf/bookshelf.dcc
 Briefcase models/objetos/geral/mala/mala.dcc
@@ -13,6 +13,7 @@ Computer models/objetos/geral/computador/computador.dcc
 Dinner_Chair models/objetos/geral/dinner_chair/dinner_chair.dcc
 Dinner_Table models/objetos/geral/dinner_table/dinner_table.dcc
 Escrivaninha models/objetos/geral/escrivaninha/escrivaninha.dcc
+Estante models/objetos/geral/estante/estante.dcc
 Et models/objetos/geral/et/et.dcc
 Exclamation models/objetos/geral/exclamacao/exclamacao.dcc
 Fridge models/objetos/geral/fridge/fridge.dcc
