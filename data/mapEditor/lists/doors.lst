@@ -1,4 +1,4 @@
-7
+8
 Door_1 models/objetos/geral/porta/porta.dcc
 Door_2 models/objetos/geral/porta2/porta2.dcc
 Door_3 models/objetos/geral/porta3/porta3.dcc
@@ -6,3 +6,4 @@ Door_4 models/objetos/geral/porta4/porta4.dcc
 Door_5 models/objetos/geral/porta5/porta5.dcc
 Door_6 models/objetos/geral/porta6/porta6.dcc
 Door_7 models/objetos/geral/porta7/porta7.dcc
+Door_8 models/objetos/geral/porta8/porta8.dcc
