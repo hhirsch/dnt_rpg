@@ -158,6 +158,9 @@ class options
       /*! Verify if the multitexture is enabled (and avalaible) 
        * \return true if enabled */
       bool getEnableMultiTexture();
+      /*! Enable/disable the multitexture 
+       * \param val -> true to enable */
+      void setEnableMultiTexture(bool val);
       /*! Verify if the anisotropic filter is enabled (and available)
        * \return true if enabled */
       bool getEnableAnisotropicFilter();

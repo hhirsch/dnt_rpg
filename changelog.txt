@@ -23,6 +23,7 @@
  - Fixed the save of NPCs position;
  - Keeping character related particles between maps;
  - 'Rest' action for party;
+ - dntMapEditor: Key to toggle multitexture;
 
 Working on:
  - Weather effects;

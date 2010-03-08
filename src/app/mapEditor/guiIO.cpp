@@ -38,6 +38,8 @@ guiIO::guiIO()
    actualFog = NULL;
    fileWindow = NULL;
 
+   invertMultiTexture = false;
+
    /* Change the minimun Zoom */
    gameCamera.defineMinZoom(2*ZOOM_MIN);
 
@@ -483,6 +485,13 @@ void guiIO::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
    glEnable(GL_DEPTH_TEST);
 }
 
+/****************************************************************
+ *                     getInvertMultiTexture                    *
+ ****************************************************************/
+bool guiIO::getInvertMultiTexture()
+{
+   return(invertMultiTexture);
+}
 
 /****************************************************************
  *                             DoIO                             *
@@ -495,6 +504,9 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
 
    /* Get Events */
    object = gui->manipulateEvents(mouseX, mouseY, mButton, keys, eventInfo);
+   
+   /* Multitexture toggle */
+   invertMultiTexture = (keys[SDLK_i] != 0);
 
 
    /* Do Camera IO */

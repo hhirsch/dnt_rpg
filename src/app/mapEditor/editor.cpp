@@ -666,6 +666,7 @@ void editor::renderSceneryObjects()
  *********************************************************************/
 void editor::draw()
 {
+   options opt;
    GLenum errorCode;
    GLdouble x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4;
 
@@ -673,6 +674,11 @@ void editor::draw()
    glLoadIdentity();
    glClearColor(0.0,0.0,0.0,1.0);
 
+   /* Invert multitexture if desired */
+   if(gui->getInvertMultiTexture())
+   {
+      opt.setEnableMultiTexture(!opt.getEnableMultiTexture());
+   }
 
    /* Redefine camera position */
    gui->cameraPos(map);
@@ -916,6 +922,12 @@ void editor::draw()
    }
 
    SDL_GL_SwapBuffers();
+
+   /* Invert multitexture if desired */
+   if(gui->getInvertMultiTexture())
+   {
+      opt.setEnableMultiTexture(!opt.getEnableMultiTexture());
+   }
 }
 
 /*********************************************************************

@@ -1379,6 +1379,14 @@ bool options::getEnableGrass()
 }
 
 /****************************************************************
+ *                     setEnableMultiTexture                    *
+ ****************************************************************/
+void options::setEnableMultiTexture(bool val)
+{
+   enableMultiTexture = val;
+}
+
+/****************************************************************
  *                     getEnableMultiTexture                    *
  ****************************************************************/
 bool options::getEnableMultiTexture()

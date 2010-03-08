@@ -117,6 +117,10 @@ class guiIO
        * \return pointer to the water window */
       waterWindow* getWaterWindow();
 
+      /*! Get if is to invert the multitexture display
+       * \return true or false */
+      bool getInvertMultiTexture();
+
       camera gameCamera;               /**< The Game Camera */
 
       guiInterface* getGui(){return(gui);};
@@ -131,6 +135,7 @@ class guiIO
 
       int state;            /**< Internal State */
       int tool;             /**< Selected Tool */
+      bool invertMultiTexture; /**< Invert multi texture display or not */
       string selectedText;  /**< Last selected text with list window */
       string curFileName;   /**< Current File Name */
 
