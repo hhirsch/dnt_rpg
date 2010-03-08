@@ -418,11 +418,12 @@ class cal3dMaterial:
       # Set all textures
       for tex in obj.texture_slots:
          if(tex != None):
-            self.textures.append(tex.name)
-            #print(tex.name)
-            #texObj = texList.getTexture(tex.name)
-            #if(texObj != None):
-            #   self.textures.append(texObj.fileName)
+            #self.textures.append(tex.name)
+            print(tex.name)
+            texObj = texList.getTexture(tex.name)
+            if(texObj != None):
+               print(texObj.name + " " + texObj.fileName)
+               self.textures.append(texObj.fileName)
 
    ##################################################################
    # Save material to the file
@@ -437,7 +438,7 @@ class cal3dMaterial:
       f.write("<?xml version=\"1.0\"?>\n")
       f.write("<HEADER MAGIC=\"XRF\" VERSION=\"1200\"/>\n")
 
-      f.write("<MATERIAL NUMMAPS\"" + str(len(self.textures)) + "\">\n")
+      f.write("<MATERIAL NUMMAPS=\"" + str(len(self.textures)) + "\">\n")
       f.write("   <AMBIENT>" + str(self.ambient[0]) + " " + 
               str(self.ambient[1]) + " " + str(self.ambient[2]) + " " +
               str(self.ambient[3]) + "</AMBIENT>\n")
@@ -487,7 +488,7 @@ class cal3dFile:
    def getModel(self):
 
       # Pass all textures
-      #self.textures = cal3dTextures()
+      self.textures = cal3dTextures()
 
       # Pass all materials
       cur = -1
