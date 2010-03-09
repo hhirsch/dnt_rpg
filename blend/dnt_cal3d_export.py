@@ -5,7 +5,11 @@
 #   Author: Farrer <farrer@dnteam.org>
 #   Website: http://dnt.dnteam.org
 #
+#   FIXME-list:
+#      - Texture uvmap;
+#
 #   TODO-list:
+#      - Accept more than one UV map per vertex
 #
 ########################################################################
 
@@ -63,7 +67,7 @@ class cal3dVertex:
    def __init__(self):
       self.pos = cal3dCoordinate()
       self.normal = cal3dCoordinate()
-      self.texcoord = cal3dCoordinate()
+      self.uv = cal3dCoordinate()
       self.index = 0
       self.influences = []
 
@@ -119,7 +123,6 @@ class cal3dMesh:
          v.normal.x = vert.normal[0]
          v.normal.y = vert.normal[1]
          v.normal.z = vert.normal[2]
-         # TODO: Define its texture coordinate
          # TODO: Define its influences
 
       # Define all faces
@@ -133,6 +136,26 @@ class cal3dMesh:
          else:
             # TODO: abort
             print("Warning: Ignoring a non triangle face.")
+
+      # Define all uvs for each vertex
+      for uv_tex in objMesh.uv_textures:
+         faceIndex = 0
+         for uv in  uv_tex.data:
+            # Get Vertices
+            face = self.face[faceIndex]
+            vert1 = self.vertex[face.indexA]
+            vert2 = self.vertex[face.indexB]
+            vert3 = self.vertex[face.indexC]
+
+            # Set their uv's
+            vert1.uv.x = uv.uv1[0]
+            vert1.uv.y = uv.uv1[1]
+            vert2.uv.x = uv.uv2[0]
+            vert2.uv.y = uv.uv2[1]
+            vert3.uv.x = uv.uv3[0]
+            vert3.uv.y = uv.uv3[1]
+
+            faceIndex += 1
 
 
    ##################################################################
@@ -172,8 +195,8 @@ class cal3dMesh:
          meshFile.write("         <NORM>" + str(vert.normal.x) + " " +
                         str(vert.normal.y) + " " + 
                         str(vert.normal.z) + " </NORM>\n")
-         meshFile.write("         <TEXCOORD>" + str(vert.texcoord.x) + " " +
-                        str(vert.texcoord.y) + " </TEXCOORD>\n")
+         meshFile.write("         <TEXCOORD>" + str(vert.uv.x) + " " +
+                        str(vert.uv.y) + " </TEXCOORD>\n")
          # Write each vertex influences
          for infl in self.influences:
             meshFile.write("         <INFLUENCE ID=\"" + str(infl.boneIndex) +
@@ -338,6 +361,7 @@ class cal3dTexture:
    def __init__(self):
       self.name = ""
       self.fileName = ""
+      self.imageName = ""
 
 ########################################################################
 # The cal3D Texture list
@@ -350,8 +374,6 @@ class cal3dTextures:
    def __init__(self):
       self.textures = []
 
-      print("total textures: ", len(bpy.data.textures))
-
       for t in bpy.data.textures:
          # Create the cal3d related
          tex = cal3dTexture()
@@ -360,10 +382,9 @@ class cal3dTextures:
          # Populate it
          tex.name = t.name
 
-         print("We got: ", tex.name)
-
-         if(t.library != None):
-            tex.fileName = t.library.filename
+         if(t.image != None):
+            tex.fileName = t.image.filename
+            tex.imageName = t.image.name
 
    ##################################################################
    # Get a texture from the list
@@ -371,9 +392,7 @@ class cal3dTextures:
    # \return texture got or None
    ##################################################################
    def getTexture(self, name):
-      print("searching for: ", name)
       for t in self.textures:
-         print("comp: ", t.name, " with ", name)
          if(t.name == name):
             # Found it!
             return(t)
@@ -415,14 +434,11 @@ class cal3dMaterial:
       self.specular = [obj.specular_color[0], obj.specular_color[1],
                        obj.specular_color[2], alphaValue]
 
-      # Set all textures
+      # Set all textures related to the material
       for tex in obj.texture_slots:
          if(tex != None):
-            #self.textures.append(tex.name)
-            print(tex.name)
             texObj = texList.getTexture(tex.name)
             if(texObj != None):
-               print(texObj.name + " " + texObj.fileName)
                self.textures.append(texObj.fileName)
 
    ##################################################################
