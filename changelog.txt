@@ -47,6 +47,7 @@ Pending:
 
 ================================================
 |                Version 0.4                   |
+|            Released: 2009-06-22              |
 ================================================
  - New mission;
  - New maps;
@@ -82,6 +83,7 @@ Pending:
 
 ================================================
 |               Version 0.3.2                  |
+|            Released: 2008-08-17              |
 ================================================
  - Fixed a bug on saveWindow when saving over an existent save file;
  - Fixed a bug on script's interpreter of "else if" jumps;
@@ -96,12 +98,14 @@ Pending:
 
 ================================================
 |               Version 0.3.1                  |
+|            Released: 2008-08-15              |
 ================================================
  - Running Animation/Action/Option for Playable Characters;
  - Anisotropic Texture Filtering;
 
 ================================================
 |                Version 0.3                   |
+|            Released: 2008-08-12              |
 ================================================
  - Briefing now has its own window; 
  - Added icons to menus;
@@ -156,6 +160,7 @@ Pending:
 
 ================================================
 |                Version 0.2                   |
+|            Released: 2008-06-08              |
 ================================================
  - Meteors and FireSpheres
  - Indoor Reflections
@@ -206,6 +211,7 @@ Pending:
 
 ================================================
 |               Version 0.1.1                  |
+|            Released: 2007-05-20              |
 ================================================
  - Fixed Bug on Makefiles (they aren't using
    things defined at the autoconf);
@@ -220,6 +226,7 @@ Pending:
 
 ================================================
 |                Version 0.1                   |
+|            Released: 2007-05-11              |
 ================================================
  - Fight System;
  - Particles System;
@@ -260,6 +267,7 @@ Pending:
  
 ================================================
 |               Version 0.0.2                  |
+|            Released: 2006-03-17              |
 ================================================
  - Support for Cal3D format for character models;
  - Support for sound and music (SDL_Mixer);
@@ -291,6 +299,7 @@ Pending:
  
 ================================================
 |               Version 0.0.1                  |
+|            Released: 2005-05-30              |
 ================================================
  - First Release of DccNiTghtmare;
  - View Frustum Culling;
