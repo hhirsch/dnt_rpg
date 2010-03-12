@@ -1,4 +1,4 @@
-48
+49
 Beer models/objetos/itens/garrafa1/garrafa1.dcc
 Bookshelf models/objetos/geral/bookshelf/bookshelf.dcc
 Briefcase models/objetos/geral/mala/mala.dcc
@@ -19,6 +19,7 @@ Et models/objetos/geral/et/et.dcc
 Exclamation models/objetos/geral/exclamacao/exclamacao.dcc
 Fridge models/objetos/geral/fridge/fridge.dcc
 Gabinete models/objetos/geral/gabinete/gabinete.dcc
+Galinheiro models/objetos/geral/galinheiro/galinheiro.dcc
 Guitar models/objetos/geral/guitarra/guitarra.dcc
 Healkit models/objetos/itens/healkit/healkit.dcc
 LCD_Monitor models/objetos/geral/monitor/monitor.dcc
