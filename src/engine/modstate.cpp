@@ -1201,7 +1201,7 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs)
                                          MODSTATE_ACTION_CHARACTER_CHANGE_STATE)
                {
                   /* Change the state to the desired one! */
-                  ch->setPsychoState(charAct->getOrientation());
+                  ch->setPsychoState((int)charAct->getOrientation());
                   /* Set the character position */
                   charAct->getPosition(ch->xPosition, ch->yPosition,
                         ch->zPosition);

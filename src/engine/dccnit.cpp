@@ -1731,7 +1731,7 @@ void engine::rest()
    }
 
    /* Pass time */
-   h = hour;
+   h = (int)hour;
    hour -= h;
    h = (h+8) % 24;
    hour += h;
