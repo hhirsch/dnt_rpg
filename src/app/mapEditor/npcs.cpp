@@ -188,9 +188,10 @@ bool npcs::saveFile(string fileName)
       for(npc = 0; npc < NPCs->getTotal(); npc++)
       {
          saveName = replaceSpaces(per->name);
-         fprintf(arq,"%s %s %.3f %.3f %.3f\n", saveName.c_str(),
+         fprintf(arq,"%s %s %.3f %.3f %.3f %d\n", saveName.c_str(),
                  per->getCharacterFile().c_str(),
-                 per->xPosition,per->zPosition, per->orientation);
+                 per->xPosition,per->zPosition, per->orientation,
+                 per->getPsychoState());
          per = (character*) per->getNext();
        }
        fclose(arq);

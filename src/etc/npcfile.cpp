@@ -63,7 +63,7 @@ bool npcFile::load(string fileName)
 {
    ifstream arq;
    string strBuffer;
-   int i, totalNpcs;
+   int i, totalNpcs, psycho;
    char name[50];
    char npcFile[255];
    GLfloat posX, posZ, angle;
@@ -84,9 +84,9 @@ bool npcFile::load(string fileName)
    {
       /* Get each npc definition */
       getline(arq, strBuffer);
-      sscanf(strBuffer.c_str(),"%s %s %f %f %f",
-             &name[0],&npcFile[0],&posX,&posZ,&angle);
-      insertCharacter(name, npcFile, posX, posZ, angle);
+      sscanf(strBuffer.c_str(),"%s %s %f %f %f %d",
+             &name[0],&npcFile[0],&posX,&posZ,&angle, &psycho);
+      insertCharacter(name, npcFile, posX, posZ, angle, psycho);
    }
 
    /* Close file */
@@ -107,7 +107,7 @@ bool npcFile::save(string fileName)
  *                          insertCharacter                            *
  ***********************************************************************/
 void npcFile::insertCharacter(string name, string fileName, GLfloat posX, 
-                              GLfloat posZ, GLfloat angle)
+                              GLfloat posZ, GLfloat angle, int psycho)
 {
    /* create and define the character */
    npcParseStruct* npc = new npcParseStruct();
@@ -116,6 +116,7 @@ void npcFile::insertCharacter(string name, string fileName, GLfloat posX,
    npc->posX = posX;
    npc->posZ = posZ;
    npc->angle = angle;
+   npc->psycho = psycho;
 
    /* insert on the list */
    insert(npc);
@@ -125,7 +126,7 @@ void npcFile::insertCharacter(string name, string fileName, GLfloat posX,
  *                           getNextCharacter                          *
  ***********************************************************************/
 bool npcFile::getNextCharacter(string& name, string& fileName, GLfloat& posX, 
-                               GLfloat& posZ, GLfloat& angle)
+                               GLfloat& posZ, GLfloat& angle, int& psycho)
 {
    bool res = false;
    
@@ -151,6 +152,7 @@ bool npcFile::getNextCharacter(string& name, string& fileName, GLfloat& posX,
       posX = current->posX;
       posZ = current->posZ;
       angle = current->angle;
+      psycho = current->psycho;
    }
 
    return(res);

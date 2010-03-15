@@ -36,6 +36,7 @@ class npcParseStruct: public dntListElement
       GLfloat posX,      /**< The NPC Initial X Position */
               posZ,      /**< The NPC Initial Z Position */
               angle;     /**< The NPC Initial Orientation Angle */
+      int psycho;        /**< The NPC Initial Psycho state */
 };
 
 /*! The NPC file is used to load lists of npcs, with its positions,
@@ -65,19 +66,21 @@ class npcFile: public dntList
        * \param fileName -> fileName of the character got
        * \param posX -> X position of the character got 
        * \param posZ -> Z position of the character got
-       * \param ange -> Orientation angle of the character got 
+       * \param ange -> Orientation angle of the character got
+       * \param psycho -> Psycho state of the character got
        * \return -> true if can get the next character, false otherwise */
       bool getNextCharacter(string& name, string& fileName, GLfloat& posX, 
-                            GLfloat& posZ, GLfloat& angle);
+                            GLfloat& posZ, GLfloat& angle, int& psycho);
 
       /* Insert a character at the list
        * \param name -> name of the npc
        * \param fileName -> fileName of the character got
        * \param posX -> X position of the character got 
        * \param posZ -> Z position of the character got
-       * \param ange -> Orientation angle of the character got */
+       * \param angle -> Orientation angle of the character got
+       * \param psycho -> Character psycho state */
       void insertCharacter(string name, string fileName, GLfloat posX, 
-                           GLfloat posZ, GLfloat angle);
+                           GLfloat posZ, GLfloat angle, int psycho);
 
       /*! Kill All NPCs defined by the NPC file */
       void killAll();

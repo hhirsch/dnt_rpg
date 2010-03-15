@@ -789,13 +789,15 @@ int engine::loadMap(string arqMapa, bool loadingGame)
    {
       string npcFileName="", name="";
       GLfloat posX=0, posZ=0, ori=0;
+      int psycho=0;
 
       npcFile* arq = new npcFile();
       NPCs = new (characterList);
 
       if(arq->load(actualMap->getNpcFileName()))
       { 
-         while(arq->getNextCharacter(name, npcFileName, posX, posZ, ori))
+         while(arq->getNextCharacter(name, npcFileName, posX, posZ, 
+                  ori, psycho))
          {
            sprintf(texto, gettext("Loading NPC: %s"), name.c_str());
            showLoading(img,&texturaTexto,texturaCarga,
@@ -808,6 +810,7 @@ int engine::loadMap(string arqMapa, bool loadingGame)
            per->xPosition = posX;
            per->zPosition = posZ;
            per->yPosition = actualMap->getHeight(posX, posZ);
+           per->setPsychoState(psycho);
            /* Define Occuped Square */
            per->defineOcSquare(actualMap);
 

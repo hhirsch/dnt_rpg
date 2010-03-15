@@ -246,7 +246,8 @@ void editor::openMap()
          {
             string name="", arquivo="";
             GLfloat posX=0, posZ=0, ori=0;
-            while(arq->getNextCharacter(name, arquivo, posX, posZ, ori))
+            int psycho=0;
+            while(arq->getNextCharacter(name, arquivo, posX, posZ, ori, psycho))
             {
                 per = NPCs->insertCharacter(arquivo, features, NULL, "");
                 per->xPosition = posX;
@@ -255,6 +256,7 @@ void editor::openMap()
                 per->orientation = ori;
                 per->update(0); 
                 per->calculateBoundingBox();
+                per->setPsychoState(psycho);
             }            
          }
          delete(arq);

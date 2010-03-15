@@ -1268,6 +1268,7 @@ bool modMap::allCharactersDead(string npcFileName)
    npcFile npcs;
    string name="", arq ="";
    GLfloat posX=0, posZ=0, angle=0;
+   int psycho=0;
 
    if(!npcs.load(npcFileName))
    {
@@ -1276,7 +1277,7 @@ bool modMap::allCharactersDead(string npcFileName)
    }
 
    /* Try to search for all characters dead definition here */
-   while(npcs.getNextCharacter(name, arq, posX, posZ, angle))
+   while(npcs.getNextCharacter(name, arq, posX, posZ, angle, psycho))
    {
       /* If one isn't found, not all character are dead, so exit! */
       if(search(MODSTATE_ACTION_CHARACTER_DEAD, arq, posX, 0, posZ) == NULL)
@@ -1298,6 +1299,7 @@ bool modMap::allCharactersAlive(string npcFileName)
    npcFile npcs;
    string name="", arq ="";
    GLfloat posX=0, posZ=0, angle=0;
+   int psycho=0;
 
    if(!npcs.load(npcFileName))
    {
@@ -1306,7 +1308,7 @@ bool modMap::allCharactersAlive(string npcFileName)
    }
 
    /* Try to search for all characters dead definition here */
-   while(npcs.getNextCharacter(name, arq, posX, posZ, angle))
+   while(npcs.getNextCharacter(name, arq, posX, posZ, angle, psycho))
    {
       /* If one is found, not all character are alive, so exit! */
       if(search(MODSTATE_ACTION_CHARACTER_DEAD, arq, posX, 0, posZ) != NULL)
