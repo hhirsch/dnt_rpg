@@ -121,7 +121,7 @@ end_dialog
 ############################################################
 dialog(7)
    npc_begin
-      text = gettext("I need some kind of crazy ration to my chickens. But The Farm refuses to git it to me. Can you get some for me? But remember: without blood!")
+      text = gettext("I need some kind of crazy ration to my chickens. But The Farm refuses to give it to me. Can you get some for me? But remember: without blood!")
    npc_end
    pc_begin
       option

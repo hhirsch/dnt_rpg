@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-03-18 14:48-0300\n"
+"POT-Creation-Date: 2010-03-18 17:10-0300\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -4079,6 +4079,7 @@ msgstr ""
 #: data/dialogs/tutorial/logan.dlg:297
 #: data/dialogs/tutorial/atleticano.dlg:120
 #: data/dialogs/tutorial/cruzeirense.dlg:83
+#: data/dialogs/tutorial/hippie.dlg:205
 msgid ""
 "I haven't any more things for you in this DNT version. Come back when "
 "there's a latter version or join DNTeam to help us develop it!"
@@ -4091,6 +4092,7 @@ msgstr ""
 #: data/dialogs/tutorial/atleticano.dlg:64
 #: data/dialogs/tutorial/atleticano.dlg:124
 #: data/dialogs/tutorial/hippie.dlg:13 data/dialogs/tutorial/hippie.dlg:53
+#: data/dialogs/tutorial/hippie.dlg:89 data/dialogs/tutorial/hippie.dlg:209
 msgid "Bye."
 msgstr "Adeus."
 
@@ -4158,7 +4160,7 @@ msgstr ""
 "Nunca! Eu sou um Adepto de Software Livre e nunca irei colocar minhas mãos "
 "neste S.O. do mal!"
 
-#: data/dialogs/tutorial/santa.dlg:102
+#: data/dialogs/tutorial/santa.dlg:102 data/dialogs/tutorial/hippie.dlg:194
 msgid "For sure!"
 msgstr "Com certeza!"
 
@@ -4171,6 +4173,7 @@ msgid "So get out of here!"
 msgstr "Então caia fora!"
 
 #: data/dialogs/tutorial/santa.dlg:124 data/dialogs/tutorial/santa.dlg:137
+#: data/dialogs/tutorial/hippie.dlg:115 data/dialogs/tutorial/hippie.dlg:181
 msgid "(Close dialog)"
 msgstr "(Fechar Diálogo)"
 
@@ -4361,6 +4364,87 @@ msgstr "Cadê o zoológico?"
 #: data/dialogs/tutorial/hippie.dlg:49
 msgid "Ouch... another freak out!"
 msgstr "Oxi... outra viagem errada!"
+
+#: data/dialogs/tutorial/hippie.dlg:62
+msgid "Bro, I need things from you... Or we'll be wasted!"
+msgstr "Bicho, preciso de algumas coisas... Ou estarei fudido!"
+
+#: data/dialogs/tutorial/hippie.dlg:66
+msgid "Right."
+msgstr "Certo."
+
+#: data/dialogs/tutorial/hippie.dlg:69
+msgid "No way!"
+msgstr "Sem chance!"
+
+#: data/dialogs/tutorial/hippie.dlg:79
+msgid "I heard what you've done to Logan's notebook, square!"
+msgstr "Fiquei sabendo do que você fez ao notebook do Logan, facista!"
+
+#: data/dialogs/tutorial/hippie.dlg:83
+msgid "Sorry."
+msgstr "Desculpa."
+
+#: data/dialogs/tutorial/hippie.dlg:86
+msgid "Die heretic!"
+msgstr "Morra herege!"
+
+#: data/dialogs/tutorial/hippie.dlg:98
+msgid "Hahaha! Linux at Santa's notebook!"
+msgstr "Hahaha! Linux no notebook to Papai Cruel!"
+
+#: data/dialogs/tutorial/hippie.dlg:102
+msgid "Right right right!"
+msgstr "Isso, isso, isso."
+
+#: data/dialogs/tutorial/hippie.dlg:111
+msgid "No talk to you. What a drag!"
+msgstr "Não falo contigo. Que porquera!"
+
+#: data/dialogs/tutorial/hippie.dlg:124
+msgid ""
+"I need some kind of crazy ration to my chickens. But The Farm refuses to "
+"give it to me. Can you get some for me? But remember: without blood!"
+msgstr ""
+"Preciso duma espécie de ração muito louca para minhas galinhas. Mas a "
+"fazenda se recusa a me arrumar. Você pode conseguir para mim? Mas lembre-se: "
+"sem sangue!"
+
+#: data/dialogs/tutorial/hippie.dlg:128
+msgid "For sure."
+msgstr "Com certeza."
+
+#: data/dialogs/tutorial/hippie.dlg:133
+msgid "I can't! I love bloody works!"
+msgstr "Não posso! Eu adora trabalhos sangrentos!"
+
+#: data/dialogs/tutorial/hippie.dlg:143
+msgid "I'm waiting for my thing, bro."
+msgstr "Estou esperando minhas coisas, bicho."
+
+#: data/dialogs/tutorial/hippie.dlg:147
+msgid "I'll get it."
+msgstr "Vou conseguir."
+
+#: data/dialogs/tutorial/hippie.dlg:150
+msgid "They're out of stock!"
+msgstr "Está fora de estoque!"
+
+#: data/dialogs/tutorial/hippie.dlg:164
+msgid "Oh, really bad rap!"
+msgstr "Grande merda!"
+
+#: data/dialogs/tutorial/hippie.dlg:168
+msgid "Sure, that is."
+msgstr "Com certeza."
+
+#: data/dialogs/tutorial/hippie.dlg:177
+msgid "Don't lie to me, bro!"
+msgstr "Não minta para mim, bicho!"
+
+#: data/dialogs/tutorial/hippie.dlg:190
+msgid "Oh, you got it. A peak experience waits!"
+msgstr "Oh, você conseguiu. Psicodelia nos espera!"
 
 #: data/missions/tutorial/mission1.mis:2
 msgid "Find Chrono Trigger cartdrige for Logan."

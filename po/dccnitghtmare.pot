@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-03-18 14:48-0300\n"
+"POT-Creation-Date: 2010-03-18 17:10-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3383,6 +3383,7 @@ msgstr ""
 #: data/dialogs/tutorial/logan.dlg:297
 #: data/dialogs/tutorial/atleticano.dlg:120
 #: data/dialogs/tutorial/cruzeirense.dlg:83
+#: data/dialogs/tutorial/hippie.dlg:205
 msgid ""
 "I haven't any more things for you in this DNT version. Come back when "
 "there's a latter version or join DNTeam to help us develop it!"
@@ -3393,6 +3394,7 @@ msgstr ""
 #: data/dialogs/tutorial/atleticano.dlg:64
 #: data/dialogs/tutorial/atleticano.dlg:124
 #: data/dialogs/tutorial/hippie.dlg:13 data/dialogs/tutorial/hippie.dlg:53
+#: data/dialogs/tutorial/hippie.dlg:89 data/dialogs/tutorial/hippie.dlg:209
 msgid "Bye."
 msgstr ""
 
@@ -3450,7 +3452,7 @@ msgstr ""
 msgid "Never! I am a Free Software Adept and will never touch this evil O.S."
 msgstr ""
 
-#: data/dialogs/tutorial/santa.dlg:102
+#: data/dialogs/tutorial/santa.dlg:102 data/dialogs/tutorial/hippie.dlg:194
 msgid "For sure!"
 msgstr ""
 
@@ -3463,6 +3465,7 @@ msgid "So get out of here!"
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:124 data/dialogs/tutorial/santa.dlg:137
+#: data/dialogs/tutorial/hippie.dlg:115 data/dialogs/tutorial/hippie.dlg:181
 msgid "(Close dialog)"
 msgstr ""
 
@@ -3643,6 +3646,84 @@ msgstr ""
 
 #: data/dialogs/tutorial/hippie.dlg:49
 msgid "Ouch... another freak out!"
+msgstr ""
+
+#: data/dialogs/tutorial/hippie.dlg:62
+msgid "Bro, I need things from you... Or we'll be wasted!"
+msgstr ""
+
+#: data/dialogs/tutorial/hippie.dlg:66
+msgid "Right."
+msgstr ""
+
+#: data/dialogs/tutorial/hippie.dlg:69
+msgid "No way!"
+msgstr ""
+
+#: data/dialogs/tutorial/hippie.dlg:79
+msgid "I heard what you've done to Logan's notebook, square!"
+msgstr ""
+
+#: data/dialogs/tutorial/hippie.dlg:83
+msgid "Sorry."
+msgstr ""
+
+#: data/dialogs/tutorial/hippie.dlg:86
+msgid "Die heretic!"
+msgstr ""
+
+#: data/dialogs/tutorial/hippie.dlg:98
+msgid "Hahaha! Linux at Santa's notebook!"
+msgstr ""
+
+#: data/dialogs/tutorial/hippie.dlg:102
+msgid "Right right right!"
+msgstr ""
+
+#: data/dialogs/tutorial/hippie.dlg:111
+msgid "No talk to you. What a drag!"
+msgstr ""
+
+#: data/dialogs/tutorial/hippie.dlg:124
+msgid ""
+"I need some kind of crazy ration to my chickens. But The Farm refuses to "
+"give it to me. Can you get some for me? But remember: without blood!"
+msgstr ""
+
+#: data/dialogs/tutorial/hippie.dlg:128
+msgid "For sure."
+msgstr ""
+
+#: data/dialogs/tutorial/hippie.dlg:133
+msgid "I can't! I love bloody works!"
+msgstr ""
+
+#: data/dialogs/tutorial/hippie.dlg:143
+msgid "I'm waiting for my thing, bro."
+msgstr ""
+
+#: data/dialogs/tutorial/hippie.dlg:147
+msgid "I'll get it."
+msgstr ""
+
+#: data/dialogs/tutorial/hippie.dlg:150
+msgid "They're out of stock!"
+msgstr ""
+
+#: data/dialogs/tutorial/hippie.dlg:164
+msgid "Oh, really bad rap!"
+msgstr ""
+
+#: data/dialogs/tutorial/hippie.dlg:168
+msgid "Sure, that is."
+msgstr ""
+
+#: data/dialogs/tutorial/hippie.dlg:177
+msgid "Don't lie to me, bro!"
+msgstr ""
+
+#: data/dialogs/tutorial/hippie.dlg:190
+msgid "Oh, you got it. A peak experience waits!"
 msgstr ""
 
 #: data/missions/tutorial/mission1.mis:2
