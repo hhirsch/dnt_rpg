@@ -1,0 +1,3 @@
+area = Tyrol
+description = gettext("Install Ruindows at the hippie's computer.")
+script = missions/tutorial/santa2.dsl

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-03-18 17:10-0300\n"
+"POT-Creation-Date: 2010-03-18 18:00-0300\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -4135,6 +4135,7 @@ msgstr ""
 "te pedir um favor?"
 
 #: data/dialogs/tutorial/santa.dlg:75 data/dialogs/tutorial/santa.dlg:172
+#: data/dialogs/tutorial/santa.dlg:247
 msgid "Yes."
 msgstr "Sim."
 
@@ -4160,7 +4161,8 @@ msgstr ""
 "Nunca! Eu sou um Adepto de Software Livre e nunca irei colocar minhas mãos "
 "neste S.O. do mal!"
 
-#: data/dialogs/tutorial/santa.dlg:102 data/dialogs/tutorial/hippie.dlg:194
+#: data/dialogs/tutorial/santa.dlg:102 data/dialogs/tutorial/santa.dlg:212
+#: data/dialogs/tutorial/hippie.dlg:194
 msgid "For sure!"
 msgstr "Com certeza!"
 
@@ -4181,7 +4183,12 @@ msgstr "(Fechar Diálogo)"
 msgid "I won't talk with you, heretic."
 msgstr "Eu não tenho nada para conversar com você, herege!"
 
-#: data/dialogs/tutorial/santa.dlg:150 data/dialogs/tutorial/atleticano.dlg:90
+#: data/dialogs/tutorial/santa.dlg:146
+msgid "I'm waiting for you install the Ruindows on the occupation's notebook!"
+msgstr "Estou esperando que você instale o Ruindows no notebook da ocupação!"
+
+#: data/dialogs/tutorial/santa.dlg:150 data/dialogs/tutorial/santa.dlg:228
+#: data/dialogs/tutorial/atleticano.dlg:90
 #: data/dialogs/tutorial/atleticano.dlg:111
 #: data/dialogs/tutorial/cruzeirense.dlg:87
 msgid "Ok."
@@ -4191,11 +4198,12 @@ msgstr "Ok."
 msgid "Ok. (you look suspiciously at Santa Claws' notebook)"
 msgstr "Ok. (você olha suspeitosamente para o notebook do Papai Cruel)"
 
-#: data/dialogs/tutorial/santa.dlg:162
+#: data/dialogs/tutorial/santa.dlg:162 data/dialogs/tutorial/santa.dlg:237
 msgid "So you've installed it! Soon the blue screen will rule the world!"
 msgstr "Então você instalou! Logo a tela azul vai controlar o mundo!"
 
-#: data/dialogs/tutorial/santa.dlg:167 data/dialogs/tutorial/santa.dlg:213
+#: data/dialogs/tutorial/santa.dlg:167 data/dialogs/tutorial/santa.dlg:242
+#: data/dialogs/tutorial/santa.dlg:263
 msgid "Amen, brother!"
 msgstr "Amém, irmão!"
 
@@ -4220,20 +4228,24 @@ msgid "Linux rocks!"
 msgstr "Linux é o que há!"
 
 #: data/dialogs/tutorial/santa.dlg:208
+msgid "Now, Ruindows at the Hippie's computer!"
+msgstr "Agora, Ruindows no computador do Hippie!"
+
+#: data/dialogs/tutorial/santa.dlg:224
+msgid "I'm waiting for you install the Ruindows on the hippie's computer!"
+msgstr "Estou esperando que você instale o Ruindows no computador do hippie!"
+
+#: data/dialogs/tutorial/santa.dlg:258
 msgid "Follow the frozen blue screen path, brother!"
 msgstr "Siga o caminho congelante da tela azul, irmão!"
 
-#: data/dialogs/tutorial/santa.dlg:216
+#: data/dialogs/tutorial/santa.dlg:266
 msgid "I will try to!"
 msgstr "Eu tentarei!"
 
-#: data/dialogs/tutorial/santa.dlg:219
+#: data/dialogs/tutorial/santa.dlg:269
 msgid "Never!"
 msgstr "Nunca!"
-
-#: data/dialogs/tutorial/santa.dlg:146
-msgid "I'm waiting for you install the Ruindows on the occupation's notebook!"
-msgstr "Estou esperando que você instale o Ruindows no notebook da ocupação!"
 
 #: data/dialogs/tutorial/atleticano.dlg:6
 msgid "What are you doing here in my house?"
@@ -4461,6 +4473,14 @@ msgstr "Instalar Ruindows no notebook da ocupação para o Papai Cruel."
 #: data/missions/tutorial/mission4.mis:2
 msgid "Fight for Cruzeirense."
 msgstr "Brigar para o Cruzeirense."
+
+#: data/missions/tutorial/hippie1.mis:2
+msgid "Get some psychedelic ration for F.S.C. Hippie"
+msgstr "Arrumar ração psicodélica para o Hippie da I.S.L."
+
+#: data/missions/tutorial/santa2.mis:2
+msgid "Install Ruindows at the hippie's computer."
+msgstr "Instalar Ruindows no computador do Hippie."
 
 #: data/models/objetos/books/mjack/mjack.dcc:1
 msgid "Monster Book Fragment"

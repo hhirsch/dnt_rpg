@@ -143,7 +143,7 @@ end_dialog
 ############################################################
 dialog(8)
    npc_begin
-      text = gettext("I'm waiting for you install the Ruindows on the occupation's notebook!"
+      text = gettext("I'm waiting for you install the Ruindows on the occupation's notebook!")
    npc_end
    pc_begin
       option
@@ -204,6 +204,56 @@ end_dialog
 #                          Dialog                          #
 ############################################################
 dialog(11)
+   npc_begin
+      text = gettext("Now, Ruindows at the Hippie's computer!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("For sure!")
+         action = dialog_init(12)
+         action = add_mission("missions/tutorial/santa2.mis")
+         action = receive_item("models/objetos/icex/ruindows_box/ruindows_box.dcc")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(12)
+   npc_begin
+      text = gettext("I'm waiting for you install the Ruindows on the hippie's computer!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Ok.")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(13)
+   npc_begin
+      text = gettext("So you've installed it! Soon the blue screen will rule the world!")
+   npc_end
+   pc_begin
+      option
+         pre_test = align(PROPRIETARY_SOFTWARE)
+         text = gettext("Amen, brother!")
+         action = complete_mission("missions/tutorial/santa2.dsl", 120, 1)
+         action = dialog_init(14)
+         action = go_to_dialog(14)
+      option
+         text = gettext("Yes.")
+         action = complete_mission("missions/tutorial/santa2.dsl", 120, 2)
+         action = dialog_init(14)
+         action = go_to_dialog(14)
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(14)
    npc_begin
       text = gettext("Follow the frozen blue screen path, brother!")
    npc_end

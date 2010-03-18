@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-03-18 17:10-0300\n"
+"POT-Creation-Date: 2010-03-18 18:00-0300\n"
 "PO-Revision-Date: 2010-01-25 11:17+0000\n"
 "Last-Translator: Edoardo Maria Elidoro <edoardo.elidoro@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -3465,6 +3465,7 @@ msgid ""
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:75 data/dialogs/tutorial/santa.dlg:172
+#: data/dialogs/tutorial/santa.dlg:247
 msgid "Yes."
 msgstr ""
 
@@ -3486,7 +3487,8 @@ msgstr ""
 msgid "Never! I am a Free Software Adept and will never touch this evil O.S."
 msgstr ""
 
-#: data/dialogs/tutorial/santa.dlg:102 data/dialogs/tutorial/hippie.dlg:194
+#: data/dialogs/tutorial/santa.dlg:102 data/dialogs/tutorial/santa.dlg:212
+#: data/dialogs/tutorial/hippie.dlg:194
 msgid "For sure!"
 msgstr ""
 
@@ -3507,7 +3509,12 @@ msgstr ""
 msgid "I won't talk with you, heretic."
 msgstr ""
 
-#: data/dialogs/tutorial/santa.dlg:150 data/dialogs/tutorial/atleticano.dlg:90
+#: data/dialogs/tutorial/santa.dlg:146
+msgid "I'm waiting for you install the Ruindows on the occupation's notebook!"
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:150 data/dialogs/tutorial/santa.dlg:228
+#: data/dialogs/tutorial/atleticano.dlg:90
 #: data/dialogs/tutorial/atleticano.dlg:111
 #: data/dialogs/tutorial/cruzeirense.dlg:87
 msgid "Ok."
@@ -3517,11 +3524,12 @@ msgstr ""
 msgid "Ok. (you look suspiciously at Santa Claws' notebook)"
 msgstr ""
 
-#: data/dialogs/tutorial/santa.dlg:162
+#: data/dialogs/tutorial/santa.dlg:162 data/dialogs/tutorial/santa.dlg:237
 msgid "So you've installed it! Soon the blue screen will rule the world!"
 msgstr ""
 
-#: data/dialogs/tutorial/santa.dlg:167 data/dialogs/tutorial/santa.dlg:213
+#: data/dialogs/tutorial/santa.dlg:167 data/dialogs/tutorial/santa.dlg:242
+#: data/dialogs/tutorial/santa.dlg:263
 msgid "Amen, brother!"
 msgstr ""
 
@@ -3544,19 +3552,23 @@ msgid "Linux rocks!"
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:208
+msgid "Now, Ruindows at the Hippie's computer!"
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:224
+msgid "I'm waiting for you install the Ruindows on the hippie's computer!"
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:258
 msgid "Follow the frozen blue screen path, brother!"
 msgstr ""
 
-#: data/dialogs/tutorial/santa.dlg:216
+#: data/dialogs/tutorial/santa.dlg:266
 msgid "I will try to!"
 msgstr ""
 
-#: data/dialogs/tutorial/santa.dlg:219
+#: data/dialogs/tutorial/santa.dlg:269
 msgid "Never!"
-msgstr ""
-
-#: data/dialogs/tutorial/santa.dlg:146
-msgid "I'm waiting for you install the Ruindows on the occupation's notebook!"
 msgstr ""
 
 #: data/dialogs/tutorial/atleticano.dlg:6
@@ -3774,6 +3786,14 @@ msgstr ""
 
 #: data/missions/tutorial/mission4.mis:2
 msgid "Fight for Cruzeirense."
+msgstr ""
+
+#: data/missions/tutorial/hippie1.mis:2
+msgid "Get some psychedelic ration for F.S.C. Hippie"
+msgstr ""
+
+#: data/missions/tutorial/santa2.mis:2
+msgid "Install Ruindows at the hippie's computer."
 msgstr ""
 
 #: data/models/objetos/books/mjack/mjack.dcc:1
