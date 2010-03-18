@@ -1,0 +1,3 @@
+area = Tyrol
+description = gettext("Get some psychedelic ration for F.S.C. Hippie")
+script = missions/tutorial/hippie1.dsl

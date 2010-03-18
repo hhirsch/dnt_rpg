@@ -54,3 +54,159 @@ dialog(2)
          action = finish_dialog()
    pc_end
 end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(3)
+   npc_begin
+      text = gettext("Bro, I need things from you... Or we'll be wasted!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Right.")
+         action = go_to_dialog(7)
+      option
+         text = gettext("No way!")
+         action = dialog_init(6)
+         action = go_to_dialog(6)
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(4)
+   npc_begin
+      text = gettext("I heard what you've done to Logan's notebook, square!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Sorry.")
+         action = finish_dialog()
+      option
+         text = gettext("Die heretic!")
+         action = init_fight()
+      option
+         text = gettext("Bye.")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(5)
+   npc_begin
+      text = gettext("Hahaha! Linux at Santa's notebook!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Right right right!")
+         action = go_to_dialog(3)
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(6)
+   npc_begin
+      text = gettext("No talk to you. What a drag!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("(Close dialog)")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(7)
+   npc_begin
+      text = gettext("I need some kind of crazy ration to my chickens. But The Farm refuses to git it to me. Can you get some for me? But remember: without blood!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("For sure.")
+         action = dialog_init(8)
+         action = add_mission("missions/tutorial/hippie1.mis")
+         action = finish_dialog()
+      option
+         text = gettext("I can't! I love bloody works!")
+         action = dialog_init(6)
+         action = go_to_dialog(6)
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(8)
+   npc_begin
+      text = gettext("I'm waiting for my thing, bro.")
+   npc_end
+   pc_begin
+      option
+         text = gettext("I'll get it.")
+         action = finish_dialog()
+      option
+         text = gettext("They're out of stock!")
+         post_test = roll(BLUFF, 22)
+         if_action = complete_mission("missions/tutorial/hippie1.dsl", 200, 2)
+         if_action = dialog_init(12)
+         if_action = go_to_dialog(9)
+         else_action = go_to_dialog(10)
+   pc_end
+end_dialog
+
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(9)
+   npc_begin
+      text = gettext("Oh, really bad rap!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Sure, that is.")
+         action = go_to_dialog(12)
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(10)
+   npc_begin
+      text = gettext("Don't lie to me, bro!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("(Close dialog)")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(11)
+   npc_begin
+      text = gettext("Oh, you got it. A peak experience waits!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("For sure!")
+         action = complete_mission("missions/tutorial/hippie1.dsl", 200, 2)
+         action = dialog_init(12)
+         action = go_to_dialog(12)
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(12)
+   npc_begin
+      text = gettext("I haven't any more things for you in this DNT version. Come back when there's a latter version or join DNTeam to help us develop it!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Bye.")
+         action = finish_dialog()
+   pc_end
+end_dialog
