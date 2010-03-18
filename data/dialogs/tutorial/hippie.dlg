@@ -1,0 +1,56 @@
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(0)
+   npc_begin
+      text = gettext("Welcome to the F.S.C.")
+   npc_end
+   pc_begin
+      option
+         text = gettext("F.S.C.?")
+         action = go_to_dialog(1)
+      option
+         text = gettext("Bye.")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(1)
+   npc_begin
+      text = gettext("Free Software Church. Do you dig it, bro?")
+   npc_end
+   pc_begin
+      option
+         pre_test = align(FREE_SOFTWARE)
+         text = gettext("Oh, great!")
+         action = go_to_dialog(3)
+      option
+         pre_test = align(PROPRIETARY_SOFTWARE)
+         text = gettext("Oh, great!")
+         post_test = roll(BLUFF, 25)
+         if_action = go_to_dialog(3)
+         else_action = go_to_dialog(2)
+      option
+         pre_test = align(PROPRIETARY_SOFTWARE)
+         text = gettext("No, it's a piece of shit!")
+         action = go_to_dialog(2)
+      option
+         text = gettext("Where's the shovel?")
+         action = go_to_dialog(2)
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(2)
+   npc_begin
+      text = gettext("Ouch... another freak out!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Bye.")
+         action = finish_dialog()
+   pc_end
+end_dialog
