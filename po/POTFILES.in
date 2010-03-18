@@ -254,6 +254,7 @@ data/dialogs/tutorial/logan.dlg
 data/dialogs/tutorial/santa.dlg
 data/dialogs/tutorial/atleticano.dlg
 data/dialogs/tutorial/cruzeirense.dlg
+data/dialogs/tutorial/hippie.dlg
 
 #missions
 data/missions/tutorial/mission1.mis

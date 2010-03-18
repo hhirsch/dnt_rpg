@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-03-03 17:10-0300\n"
+"POT-Creation-Date: 2010-03-18 14:48-0300\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -409,32 +409,32 @@ msgstr "Salvando Modificações"
 msgid "Loading Map: %s"
 msgstr "Carregando Mapa: %s"
 
-#: src/engine/dccnit.cpp:800
+#: src/engine/dccnit.cpp:802
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Carregando NPC: %s"
 
-#: src/engine/dccnit.cpp:838
+#: src/engine/dccnit.cpp:841
 msgid "Creating MiniMap"
 msgstr "Criando Mini Mapa"
 
-#: src/engine/dccnit.cpp:844
+#: src/engine/dccnit.cpp:847
 msgid "Putting GUI on Screen"
 msgstr "Colocando as janelas na tela"
 
-#: src/engine/dccnit.cpp:892
+#: src/engine/dccnit.cpp:895
 msgid "Loading Particles"
 msgstr "Carregando Partículas"
 
-#: src/engine/dccnit.cpp:922
+#: src/engine/dccnit.cpp:925
 msgid "Loading Changes..."
 msgstr "Carregando Mudanças..."
 
-#: src/engine/dccnit.cpp:950
+#: src/engine/dccnit.cpp:953
 msgid "Done!"
 msgstr "Pronto!"
 
-#: src/engine/dccnit.cpp:1167
+#: src/engine/dccnit.cpp:1170
 msgid ""
 "DccNiTghtmare is relesead under GPLv3 or later: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -446,58 +446,58 @@ msgstr ""
 "mesmos). DccNiTghtmare agradece aos que desenvolveram as bibliotecas: "
 "OpenAL, Cal3D, OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 
-#: src/engine/dccnit.cpp:1689
+#: src/engine/dccnit.cpp:1692
 msgid "Too far away for the action!"
 msgstr "Muito distante para realizar a ação!"
 
-#: src/engine/dccnit.cpp:1706
+#: src/engine/dccnit.cpp:1709
 msgid "Couldn't rest at battle mode."
 msgstr "Não é possível descansar no modo de batalha."
 
-#: src/engine/dccnit.cpp:1712
+#: src/engine/dccnit.cpp:1715
 msgid "Enemies nearby."
 msgstr "Inimigos próximos."
 
-#: src/engine/dccnit.cpp:1807
+#: src/engine/dccnit.cpp:1810
 msgid "No NPCs in the area."
 msgstr "Sem NPCs na área."
 
-#: src/engine/dccnit.cpp:1867
+#: src/engine/dccnit.cpp:1870
 msgid "Surprise Attack Turn."
 msgstr "Turno de ataque surpresa."
 
-#: src/engine/dccnit.cpp:1881
+#: src/engine/dccnit.cpp:1884
 msgid "No enemies in the area."
 msgstr "Sem inimigos na área."
 
-#: src/engine/dccnit.cpp:2064 src/engine/dccnit.cpp:2583
+#: src/engine/dccnit.cpp:2067 src/engine/dccnit.cpp:2586
 #: src/engine/shortcutswindow.cpp:51
 msgid "Nothing"
 msgstr "Nada"
 
-#: src/engine/dccnit.cpp:2332
+#: src/engine/dccnit.cpp:2335
 #, c-format
 msgid "%s taken."
 msgstr "Pegou %s."
 
-#: src/engine/dccnit.cpp:2349
+#: src/engine/dccnit.cpp:2352
 msgid "Inventory is full!"
 msgstr "O inventário está cheio!"
 
-#: src/engine/dccnit.cpp:2382
+#: src/engine/dccnit.cpp:2385
 msgid "Door"
 msgstr "Porta"
 
-#: src/engine/dccnit.cpp:2518
+#: src/engine/dccnit.cpp:2521
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s ataca %s"
 
-#: src/engine/dccnit.cpp:2684
+#: src/engine/dccnit.cpp:2687
 msgid "No more actions. Turn ended."
 msgstr "Sem mais ações: Turno Finalizado."
 
-#: src/engine/dccnit.cpp:4213
+#: src/engine/dccnit.cpp:4216
 msgid "Exit Battle Mode"
 msgstr "Sai do Modo de Batalha"
 
@@ -4090,6 +4090,7 @@ msgstr ""
 #: data/dialogs/tutorial/atleticano.dlg:51
 #: data/dialogs/tutorial/atleticano.dlg:64
 #: data/dialogs/tutorial/atleticano.dlg:124
+#: data/dialogs/tutorial/hippie.dlg:13 data/dialogs/tutorial/hippie.dlg:53
 msgid "Bye."
 msgstr "Adeus."
 
@@ -4332,6 +4333,34 @@ msgstr ""
 #: data/dialogs/tutorial/cruzeirense.dlg:71
 msgid "Now!"
 msgstr "Agora!"
+
+#: data/dialogs/tutorial/hippie.dlg:6
+msgid "Welcome to the F.S.C."
+msgstr "Bem-Vindo à I.S.L."
+
+#: data/dialogs/tutorial/hippie.dlg:10
+msgid "F.S.C.?"
+msgstr "I.S.L.?"
+
+#: data/dialogs/tutorial/hippie.dlg:22
+msgid "Free Software Church. Do you dig it, bro?"
+msgstr "Igreja do Software Livre. Pegou essa, bicho?"
+
+#: data/dialogs/tutorial/hippie.dlg:27 data/dialogs/tutorial/hippie.dlg:31
+msgid "Oh, great!"
+msgstr "Oh, ótimo!"
+
+#: data/dialogs/tutorial/hippie.dlg:37
+msgid "No, it's a piece of shit!"
+msgstr "Não, isso é uma porcaria!"
+
+#: data/dialogs/tutorial/hippie.dlg:40
+msgid "Where's the shovel?"
+msgstr "Cadê o zoológico?"
+
+#: data/dialogs/tutorial/hippie.dlg:49
+msgid "Ouch... another freak out!"
+msgstr "Oxi... outra viagem errada!"
 
 #: data/missions/tutorial/mission1.mis:2
 msgid "Find Chrono Trigger cartdrige for Logan."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-03-03 17:10-0300\n"
+"POT-Creation-Date: 2010-03-18 14:48-0300\n"
 "PO-Revision-Date: 2007-11-20 17:24+0000\n"
 "Last-Translator: Sergei Zivukov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -411,32 +411,32 @@ msgstr ""
 msgid "Loading Map: %s"
 msgstr "Загрузка карты: %s"
 
-#: src/engine/dccnit.cpp:800
+#: src/engine/dccnit.cpp:802
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Загрузка NPC: %s"
 
-#: src/engine/dccnit.cpp:838
+#: src/engine/dccnit.cpp:841
 msgid "Creating MiniMap"
 msgstr ""
 
-#: src/engine/dccnit.cpp:844
+#: src/engine/dccnit.cpp:847
 msgid "Putting GUI on Screen"
 msgstr "Помещение GUI на экран"
 
-#: src/engine/dccnit.cpp:892
+#: src/engine/dccnit.cpp:895
 msgid "Loading Particles"
 msgstr "Загрузка частиц"
 
-#: src/engine/dccnit.cpp:922
+#: src/engine/dccnit.cpp:925
 msgid "Loading Changes..."
 msgstr "Загрузка изменений..."
 
-#: src/engine/dccnit.cpp:950
+#: src/engine/dccnit.cpp:953
 msgid "Done!"
 msgstr "Готово!"
 
-#: src/engine/dccnit.cpp:1167
+#: src/engine/dccnit.cpp:1170
 msgid ""
 "DccNiTghtmare is relesead under GPLv3 or later: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -444,58 +444,58 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1689
+#: src/engine/dccnit.cpp:1692
 msgid "Too far away for the action!"
 msgstr "Слишком далеко для действия!"
 
-#: src/engine/dccnit.cpp:1706
+#: src/engine/dccnit.cpp:1709
 msgid "Couldn't rest at battle mode."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1712
+#: src/engine/dccnit.cpp:1715
 msgid "Enemies nearby."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1807
+#: src/engine/dccnit.cpp:1810
 msgid "No NPCs in the area."
 msgstr "Нет NPC'ов на арене"
 
-#: src/engine/dccnit.cpp:1867
+#: src/engine/dccnit.cpp:1870
 msgid "Surprise Attack Turn."
 msgstr "Неожиданное нападение."
 
-#: src/engine/dccnit.cpp:1881
+#: src/engine/dccnit.cpp:1884
 msgid "No enemies in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:2064 src/engine/dccnit.cpp:2583
+#: src/engine/dccnit.cpp:2067 src/engine/dccnit.cpp:2586
 #: src/engine/shortcutswindow.cpp:51
 msgid "Nothing"
 msgstr "Ничего"
 
-#: src/engine/dccnit.cpp:2332
+#: src/engine/dccnit.cpp:2335
 #, c-format
 msgid "%s taken."
 msgstr "%s взят."
 
-#: src/engine/dccnit.cpp:2349
+#: src/engine/dccnit.cpp:2352
 msgid "Inventory is full!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2382
+#: src/engine/dccnit.cpp:2385
 msgid "Door"
 msgstr "Дверь"
 
-#: src/engine/dccnit.cpp:2518
+#: src/engine/dccnit.cpp:2521
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s атаковал %s"
 
-#: src/engine/dccnit.cpp:2684
+#: src/engine/dccnit.cpp:2687
 msgid "No more actions. Turn ended."
 msgstr ""
 
-#: src/engine/dccnit.cpp:4213
+#: src/engine/dccnit.cpp:4216
 msgid "Exit Battle Mode"
 msgstr "Покинуть режим сражения"
 
@@ -3393,6 +3393,7 @@ msgstr ""
 #: data/dialogs/tutorial/atleticano.dlg:51
 #: data/dialogs/tutorial/atleticano.dlg:64
 #: data/dialogs/tutorial/atleticano.dlg:124
+#: data/dialogs/tutorial/hippie.dlg:13 data/dialogs/tutorial/hippie.dlg:53
 msgid "Bye."
 msgstr ""
 
@@ -3615,6 +3616,34 @@ msgstr ""
 
 #: data/dialogs/tutorial/cruzeirense.dlg:71
 msgid "Now!"
+msgstr ""
+
+#: data/dialogs/tutorial/hippie.dlg:6
+msgid "Welcome to the F.S.C."
+msgstr ""
+
+#: data/dialogs/tutorial/hippie.dlg:10
+msgid "F.S.C.?"
+msgstr ""
+
+#: data/dialogs/tutorial/hippie.dlg:22
+msgid "Free Software Church. Do you dig it, bro?"
+msgstr ""
+
+#: data/dialogs/tutorial/hippie.dlg:27 data/dialogs/tutorial/hippie.dlg:31
+msgid "Oh, great!"
+msgstr ""
+
+#: data/dialogs/tutorial/hippie.dlg:37
+msgid "No, it's a piece of shit!"
+msgstr ""
+
+#: data/dialogs/tutorial/hippie.dlg:40
+msgid "Where's the shovel?"
+msgstr ""
+
+#: data/dialogs/tutorial/hippie.dlg:49
+msgid "Ouch... another freak out!"
 msgstr ""
 
 #: data/missions/tutorial/mission1.mis:2
