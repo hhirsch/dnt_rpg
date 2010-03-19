@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-03-19 17:15-0300\n"
+"POT-Creation-Date: 2010-03-19 18:10-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3788,6 +3788,10 @@ msgstr ""
 
 #: data/models/objetos/itens/lata1/logan_lata1.dcc:1
 msgid "Logan's Soda Can"
+msgstr ""
+
+#: data/models/objetos/itens/racao/racao.dcc:1
+msgid "Chicken Ration"
 msgstr ""
 
 #: data/models/objetos/itens/money/money.dcc:1

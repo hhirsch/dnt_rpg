@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-03-19 17:15-0300\n"
+"POT-Creation-Date: 2010-03-19 18:10-0300\n"
 "PO-Revision-Date: 2010-02-23 00:22+0000\n"
 "Last-Translator: someone <someoneigna@hotmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -4191,6 +4191,10 @@ msgstr ""
 
 #: data/models/objetos/itens/lata1/logan_lata1.dcc:1
 msgid "Logan's Soda Can"
+msgstr ""
+
+#: data/models/objetos/itens/racao/racao.dcc:1
+msgid "Chicken Ration"
 msgstr ""
 
 #: data/models/objetos/itens/money/money.dcc:1
