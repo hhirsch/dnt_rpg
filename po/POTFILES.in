@@ -269,6 +269,7 @@ data/models/objetos/books/combat_tutorial/combat_tutorial.dcc
 data/models/objetos/books/mjack/mjack.dcc
 
 #objects
+data/models/natural/cogumelo/cogumelo.dcc
 data/models/objetos/itens/healkit/healkit.dcc
 data/models/objetos/itens/garrafa1/garrafa1.dcc
 data/models/objetos/itens/lata1/lata1.dcc

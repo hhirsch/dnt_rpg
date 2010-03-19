@@ -1,0 +1,11 @@
+name = gettext("Mushroom")
+cal3d = models/natural/cogumelo/model.cfg
+type = narcotic
+base_dice = 4*d4+2
+inventory_sizes = 1 1
+inventory_texture = models/natural/cogumelo/texture_inv.png
+life_points = 12
+armature_class = 10
+will = 40
+cost = 50
+weight = 0.2
