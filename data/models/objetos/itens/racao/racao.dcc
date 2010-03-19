@@ -1,0 +1,9 @@
+name = gettext("Chicken Ration")
+cal3d = models/objetos/itens/racao/model.cfg
+base_dice = 1*d3+2
+inventory_sizes = 1 2
+inventory_texture = models/objetos/itens/racao/texture_inv.png
+life_points = 12
+armature_class = 10
+cost = 7
+weight = 0.5

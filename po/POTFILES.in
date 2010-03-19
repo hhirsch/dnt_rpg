@@ -270,6 +270,7 @@ data/models/objetos/books/mjack/mjack.dcc
 
 #objects
 data/models/natural/cogumelo/cogumelo.dcc
+data/models/natural/ovo/ovo.dcc
 data/models/objetos/itens/healkit/healkit.dcc
 data/models/objetos/itens/garrafa1/garrafa1.dcc
 data/models/objetos/itens/lata1/lata1.dcc

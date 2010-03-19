@@ -1,4 +1,4 @@
-49
+50
 Beer models/objetos/itens/garrafa1/garrafa1.dcc
 Bookshelf models/objetos/geral/bookshelf/bookshelf.dcc
 Briefcase models/objetos/geral/mala/mala.dcc
@@ -37,6 +37,7 @@ PC_Chair models/objetos/geral/pc_chair/pc_chair.dcc
 PC_Table models/objetos/geral/pc_table/pc_table.dcc
 Pia models/objetos/geral/pia/pia.dcc
 Pillow models/objetos/geral/pillow/pillow.dcc
+Racao models/objetos/itens/racao/racao.dcc
 RefMachine models/objetos/geral/refmachine/refmachine.dcc
 Rug models/objetos/geral/rug/rug.dcc
 Rug2 models/objetos/geral/rug2/rug2.dcc
