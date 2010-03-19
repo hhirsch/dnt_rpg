@@ -4,6 +4,7 @@ type = narcotic
 base_dice = 4*d4+2
 inventory_sizes = 1 1
 inventory_texture = models/natural/cogumelo/texture_inv.png
+related_info = modeffects/drunk.dsl
 life_points = 12
 armature_class = 10
 will = 40
