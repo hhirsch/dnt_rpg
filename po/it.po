@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-03-19 18:10-0300\n"
+"POT-Creation-Date: 2010-03-20 17:52-0300\n"
 "PO-Revision-Date: 2010-01-25 11:17+0000\n"
 "Last-Translator: Edoardo Maria Elidoro <edoardo.elidoro@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -3234,6 +3234,7 @@ msgid "Ah, so finally you awake!"
 msgstr "Ah, finalmente ti sei svegliato!"
 
 #: data/dialogs/tutorial/logan.dlg:10 data/dialogs/tutorial/santa.dlg:10
+#: data/dialogs/tutorial/dona.dlg:13
 msgid "Who are you?"
 msgstr "Chi sei?"
 
@@ -3465,7 +3466,7 @@ msgid ""
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:75 data/dialogs/tutorial/santa.dlg:172
-#: data/dialogs/tutorial/santa.dlg:247
+#: data/dialogs/tutorial/santa.dlg:247 data/dialogs/tutorial/dona.dlg:58
 msgid "Yes."
 msgstr ""
 
@@ -3473,7 +3474,7 @@ msgstr ""
 msgid "What kind of favor?"
 msgstr ""
 
-#: data/dialogs/tutorial/santa.dlg:81
+#: data/dialogs/tutorial/santa.dlg:81 data/dialogs/tutorial/dona.dlg:61
 msgid "No."
 msgstr ""
 
@@ -3502,6 +3503,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:124 data/dialogs/tutorial/santa.dlg:137
 #: data/dialogs/tutorial/hippie.dlg:115 data/dialogs/tutorial/hippie.dlg:181
+#: data/dialogs/tutorial/dona.dlg:90 data/dialogs/tutorial/dona.dlg:103
 msgid "(Close dialog)"
 msgstr ""
 
@@ -3770,6 +3772,62 @@ msgstr ""
 
 #: data/dialogs/tutorial/hippie.dlg:190
 msgid "Oh, you got it. A peak experience waits!"
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:6
+msgid "Hello stranger!"
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:10
+msgid "Where am I?"
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:22
+msgid "At the farm."
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:26
+msgid "What is the farm?"
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:29
+msgid "The farm?"
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:38
+msgid "I'm a simple farmer."
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:42
+msgid "A simple farmer?"
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:45
+msgid "But what's your name?"
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:54
+msgid "Are you a piggy cop?"
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:70
+msgid "F-A-R-M, farm, the farm."
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:74
+msgid "But what is a farm?"
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:77
+msgid "I got it!"
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:86
+msgid "Pig!"
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:99
+msgid "Neither I."
 msgstr ""
 
 #: data/missions/tutorial/mission1.mis:2

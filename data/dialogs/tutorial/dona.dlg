@@ -1,0 +1,106 @@
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(0)
+   npc_begin
+      text = gettext("Hello stranger!")
+   npc_end
+   pc_begin
+      option 
+         text = gettext("Where am I?")
+         action = go_to_dialog(1)
+      option
+         text = gettext("Who are you?")
+         action = go_to_dialog(2)
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(1)
+   npc_begin
+      text = gettext("At the farm.")
+   npc_end
+   pc_begin
+      option
+         text = gettext("What is the farm?")
+         action = go_to_dialog(3)
+      option
+         text = gettext("The farm?")
+         action = go_to_dialog(4)
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(2)
+   npc_begin
+      text = gettext("I'm a simple farmer.")
+   npc_end
+   pc_begin
+      option
+         text = gettext("A simple farmer?")
+         action = go_to_dialog(3)
+      option
+         text = gettext("But what's your name?")
+         action = go_to_dialog(3)
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(3)
+   npc_begin
+      text = gettext("Are you a piggy cop?")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Yes.")
+         action = go_to_dialog(5)
+      option
+         text = gettext("No.")
+         action = go_to_dialog(6)
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(4)
+   npc_begin
+      text = gettext("F-A-R-M, farm, the farm.")
+   npc_end
+   pc_begin
+      option
+         text = gettext("But what is a farm?")
+         action = go_to_dialog(3)
+      option
+         text = gettext("I got it!")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(5)
+   npc_begin
+      text = gettext("Pig!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("(Close dialog)")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(6)
+   npc_begin
+      text = gettext("Neither I.")
+   npc_end
+   pc_begin
+      option
+         text = gettext("(Close dialog)")
+         action = finish_dialog()
+   pc_end
+end_dialog

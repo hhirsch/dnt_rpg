@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-03-19 18:10-0300\n"
+"POT-Creation-Date: 2010-03-20 17:52-0300\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -3878,6 +3878,7 @@ msgid "Ah, so finally you awake!"
 msgstr "Ah, então você finalmente acordou!"
 
 #: data/dialogs/tutorial/logan.dlg:10 data/dialogs/tutorial/santa.dlg:10
+#: data/dialogs/tutorial/dona.dlg:13
 msgid "Who are you?"
 msgstr "Quem é você?"
 
@@ -4135,7 +4136,7 @@ msgstr ""
 "te pedir um favor?"
 
 #: data/dialogs/tutorial/santa.dlg:75 data/dialogs/tutorial/santa.dlg:172
-#: data/dialogs/tutorial/santa.dlg:247
+#: data/dialogs/tutorial/santa.dlg:247 data/dialogs/tutorial/dona.dlg:58
 msgid "Yes."
 msgstr "Sim."
 
@@ -4143,7 +4144,7 @@ msgstr "Sim."
 msgid "What kind of favor?"
 msgstr "Que tipo de favor?"
 
-#: data/dialogs/tutorial/santa.dlg:81
+#: data/dialogs/tutorial/santa.dlg:81 data/dialogs/tutorial/dona.dlg:61
 msgid "No."
 msgstr "Não."
 
@@ -4176,6 +4177,7 @@ msgstr "Então caia fora!"
 
 #: data/dialogs/tutorial/santa.dlg:124 data/dialogs/tutorial/santa.dlg:137
 #: data/dialogs/tutorial/hippie.dlg:115 data/dialogs/tutorial/hippie.dlg:181
+#: data/dialogs/tutorial/dona.dlg:90 data/dialogs/tutorial/dona.dlg:103
 msgid "(Close dialog)"
 msgstr "(Fechar Diálogo)"
 
@@ -4458,6 +4460,62 @@ msgstr "Não minta para mim, bicho!"
 msgid "Oh, you got it. A peak experience waits!"
 msgstr "Oh, você conseguiu. Psicodelia nos espera!"
 
+#: data/dialogs/tutorial/dona.dlg:6
+msgid "Hello stranger!"
+msgstr "Olá, estranho!"
+
+#: data/dialogs/tutorial/dona.dlg:10
+msgid "Where am I?"
+msgstr "Onde estamos?"
+
+#: data/dialogs/tutorial/dona.dlg:22
+msgid "At the farm."
+msgstr "Na fazenda."
+
+#: data/dialogs/tutorial/dona.dlg:26
+msgid "What is the farm?"
+msgstr "O que é a fazenda?"
+
+#: data/dialogs/tutorial/dona.dlg:29
+msgid "The farm?"
+msgstr "Fazenda?"
+
+#: data/dialogs/tutorial/dona.dlg:38
+msgid "I'm a simple farmer."
+msgstr "Sou uma simples fazendeira."
+
+#: data/dialogs/tutorial/dona.dlg:42
+msgid "A simple farmer?"
+msgstr "Uma simples fazendeira?"
+
+#: data/dialogs/tutorial/dona.dlg:45
+msgid "But what's your name?"
+msgstr "Mas qual é o seu nome?"
+
+#: data/dialogs/tutorial/dona.dlg:54
+msgid "Are you a piggy cop?"
+msgstr "Você é um porco da polícia?"
+
+#: data/dialogs/tutorial/dona.dlg:70
+msgid "F-A-R-M, farm, the farm."
+msgstr "F-A-Z-E-N-D-A, fazenda, a fazenda."
+
+#: data/dialogs/tutorial/dona.dlg:74
+msgid "But what is a farm?"
+msgstr "Mas o que é uma fazenda?"
+
+#: data/dialogs/tutorial/dona.dlg:77
+msgid "I got it!"
+msgstr "Entendi!"
+
+#: data/dialogs/tutorial/dona.dlg:86
+msgid "Pig!"
+msgstr "Porco!"
+
+#: data/dialogs/tutorial/dona.dlg:99
+msgid "Neither I."
+msgstr "Nem eu."
+
 #: data/missions/tutorial/mission1.mis:2
 msgid "Find Chrono Trigger cartdrige for Logan."
 msgstr "Encontrar o cartucho do Chrono Trigger para o Logan."
@@ -4650,6 +4708,10 @@ msgstr "Pesada"
 #: data/characters/pcs/santa.pc:1
 msgid "Santa Claws"
 msgstr "Papai Cruel"
+
+#, fuzzy
+#~ msgid "Close dialog)"
+#~ msgstr "(Fechar Diálogo)"
 
 #~ msgid "Not found in dialog: %d\n"
 #~ msgstr "Não achou no diálogo: %d\n"
