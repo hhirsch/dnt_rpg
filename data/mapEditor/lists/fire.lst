@@ -1,6 +1,7 @@
-5
+6
 Effect_1 particles/effect1.par
 Fire_1 particles/fire1.par
 Fire_2 particles/fire2.par
 Fire_3 particles/fire3.par
 Fire_Scimitar particles/firescimitar.par
+Gas particles/gas.par
