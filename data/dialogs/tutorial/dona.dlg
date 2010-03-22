@@ -6,6 +6,10 @@ dialog(0)
       text = gettext("Hello stranger!")
    npc_end
    pc_begin
+      option
+         pre_test = mission_active("missions/tutorial/hippie1.dsl")
+         text = gettext("I need some chicken ration.")
+         action = go_to_dialog(7)
       option 
          text = gettext("Where am I?")
          action = go_to_dialog(1)

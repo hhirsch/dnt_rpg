@@ -45,6 +45,7 @@ syn keyword dntTest           greater lesser equal diff
 syn keyword dntTest           align align_not
 syn keyword dntTest           have_item
 syn keyword dntTest           all_dead all_alive have_money
+syn keyword dntTest           mission_active
 
 syn sync lines=250
 

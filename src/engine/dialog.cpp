@@ -61,6 +61,7 @@ using namespace std;
 #define TALK_TEST_ALL_ALIVE           9  /* If all characters are alive */
 #define TALK_TEST_ALL_DEAD           10  /* If all characters are dead */
 #define TALK_TEST_HAVE_MONEY         11  /* If have money */
+#define TALK_TEST_MISSION_ACTIVE     12  /* If some mission is active or not */
 
 #define BUFFER_SIZE 512
 
@@ -110,6 +111,7 @@ using namespace std;
 #define TK_TEST_ALL_ALIVE "all_alive"
 #define TK_TEST_ALL_DEAD "all_dead"
 #define TK_TEST_HAVE_MONEY "have_money"
+#define TK_TEST_MISSION_ACTIVE "mission_active"
 
 /* Constant Tokens */
 #define TK_CONST_OBJECT_STATE "OBJECT_STATE"
@@ -227,6 +229,10 @@ bool talkTest::set(string token, string t, string a)
    {
       id = TALK_TEST_HAVE_MONEY;
    }
+   else if(token == TK_TEST_MISSION_ACTIVE)
+   {
+      id = TALK_TEST_MISSION_ACTIVE;
+   }
    else
    {
       /* Unknow test function! */
@@ -332,6 +338,14 @@ bool talkTest::doTest(character* pc, thing* owner)
          return(m->quantity() >= val);
       }
       return(false);
+   }
+
+   /* Mission active */
+   else if(id == TALK_TEST_MISSION_ACTIVE)
+   {
+      /* Verify if mission is at current state */
+      missionsController missions;
+      return(missions.getCurrentMission(test) != NULL);
    }
 
 
