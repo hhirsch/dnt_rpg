@@ -24,24 +24,7 @@
  - Keeping character related particles between maps;
  - 'Rest' action for party;
  - dntMapEditor: Key to toggle multitexture;
-
-Working on:
- - Weather effects;
- - Use dntMapEditor to insert sound effects at maps;
- - New effects for comic books;
- - Capacity of using talents;
- - Implement 5-15% of the talents defined on DNT Book;
- - Money;
-
-
-Pending:
- - Define Counter Skills;
- - Minimap Tags;
- - Extend walls to follow map height;
- - Define paths to improve the A* at outdoor maps;
- - Put Lights on MapEditor;
- - Score at Death Screen;
- - Five new missions;
+ - Two new missions;
  - New models;
  - New maps;
 
