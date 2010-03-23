@@ -60,6 +60,14 @@ void partController::deleteAll(bool keepPCRelated)
 }
 
 /**********************************************************************
+ *                         deleteAllPCRelated                         *
+ **********************************************************************/
+void partController::deleteAllPCRelated()
+{
+   particles->removePCs();
+}
+
+/**********************************************************************
  *                               updateAll                            *
  **********************************************************************/
 void partController::updateAll(float PCposX, float PCposY, float PCposZ, 

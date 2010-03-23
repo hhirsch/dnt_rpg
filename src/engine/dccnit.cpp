@@ -1723,6 +1723,9 @@ void engine::rest()
    fadeOut();
    SDL_Delay(100);
 
+   /* Remove all pc related particles */
+   particleController.deleteAllPCRelated();
+
    ch = (character*)PCs->getFirst();
    for(i=0; i < PCs->getTotal(); i++)
    {

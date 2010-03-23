@@ -66,6 +66,26 @@ void particleList::removeNonPCs()
 }
 
 /***************************************************************************
+ *                              removePCs                                  *
+ ***************************************************************************/
+void particleList::removePCs()
+{
+   int i, t = total;
+   particleSystem* part = (particleSystem*)first;
+   particleSystem* aux;
+
+   for(i = 0; i < t; i++)
+   {
+      aux = part;
+      part = (particleSystem*)part->next;
+      if(aux->followPC)
+      {
+         removeSystem(aux);
+      }
+   }
+}
+
+/***************************************************************************
  *                              addSystem                                  *
  ***************************************************************************/
 void particleList::addSystem(particleSystem* part)

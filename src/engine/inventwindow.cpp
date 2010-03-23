@@ -752,17 +752,19 @@ int inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                case 8: /* Drop */
                   if(objWhere == INVENTORY_INVENTORY)
                   {
+                  #if 0
                      if(activeObject->getType() == OBJECT_TYPE_MONEY)
                      {
                         splitWindow spWindow;
                         spWindow.open(interf, activeObject, curEngine, owner); 
                      }
                      else
-                     {
+                   #endif
+                   //  {
                         /* drop the object */
                         inventories->dropObject(activeObject, objX, objY, 
                               currentInventory, actualMap, X, Z);
-                     }
+                   //  }
 
                      /* Return to the NONE state */
                      activeObject = NULL;
