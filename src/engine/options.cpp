@@ -1557,7 +1557,7 @@ void options::defaultKeys()
 /****************************************************************
  *                         Static Members                       *
  ****************************************************************/
-int    options::musicVolume = 90;
+int    options::musicVolume = 50;
 int    options::sndfxVolume = 128;
 int    options::langNumber = 0;
 int    options::cameraNumber = 1;
