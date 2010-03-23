@@ -10,7 +10,7 @@ tarFile=$1
 project="dccnitghtmare"
 workDirs="bin data po src syntax"
 homeFiles="aclocal.m4 configure configure.in DccNiTghtmare.dev \
-           DNTMapEditor.dev Doxyfile \
+           DNTMapEditor.dev Doxyfile.in \
            install.sh Makefile.in COPYING README \
            systems.txt torelease.sh config.sub config.guess"
 
@@ -46,7 +46,9 @@ for directory in $workDirs; do
          for f in $curDir/*;do
             if [[ -f $f ]]; then
                if [ "$f" != "$curDir/*" ]; then
-                  cp $f $project/$f
+                  if [ "$f" != "$curDir/Makefile" ]; then
+                     cp $f $project/$f
+                  fi
                fi
             fi
          done
