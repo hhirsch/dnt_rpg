@@ -1,5 +1,6 @@
 ================================================
 |                Version 0.5                   |
+|            Released: 2010-03-23              |
 ================================================
  - Radiobox filter at SkillWindow to only show race/class skills; 
  - Fixed a bug: Keep windows positions after map change;
