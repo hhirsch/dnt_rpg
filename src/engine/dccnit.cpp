@@ -402,6 +402,9 @@ void engine::quitCurrentGame()
    modifState.clear();
    engineMode = ENGINE_MODE_REAL_TIME;
 
+   /* Delete all particles */
+   particleController.deleteAll();
+
    /* Delete all NPCs */
    if(NPCs)
    {
