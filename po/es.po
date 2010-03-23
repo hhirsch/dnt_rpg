@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-03-20 17:52-0300\n"
+"POT-Creation-Date: 2010-03-23 11:01-0300\n"
 "PO-Revision-Date: 2010-02-23 00:22+0000\n"
 "Last-Translator: someone <someoneigna@hotmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -85,7 +85,7 @@ msgstr ""
 msgid "Not enought points to use!"
 msgstr "¡No tienes suficientes puntos para usarlo!"
 
-#: src/classes/mission.cpp:531 src/engine/dialog.cpp:1171
+#: src/classes/mission.cpp:531 src/engine/dialog.cpp:1185
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "¡Misión completa: %d XP!"
@@ -187,7 +187,7 @@ msgstr "Advertencia"
 msgid "You Need to Assign All Attributes."
 msgstr "Tienes que asignar todos los atributos"
 
-#: src/engine/barterwindow.cpp:52 src/engine/dialog.cpp:1474
+#: src/engine/barterwindow.cpp:52 src/engine/dialog.cpp:1488
 msgid "Barter"
 msgstr "Trueque"
 
@@ -503,27 +503,27 @@ msgstr "Sin acciones. Turno finalizado."
 msgid "Exit Battle Mode"
 msgstr "Salir del modo de batalla"
 
-#: src/engine/dialog.cpp:1200
+#: src/engine/dialog.cpp:1214
 #, c-format
 msgid "%s lost."
 msgstr "Perdió %s."
 
-#: src/engine/dialog.cpp:1243
+#: src/engine/dialog.cpp:1257
 #, c-format
 msgid "Received %s."
 msgstr "Recibió %s."
 
-#: src/engine/dialog.cpp:1260
+#: src/engine/dialog.cpp:1274
 #, c-format
 msgid "Received $%d."
 msgstr "Recibió $%d."
 
-#: src/engine/dialog.cpp:1274
+#: src/engine/dialog.cpp:1288
 #, c-format
 msgid "Lost $%d."
 msgstr "Perdió $%d."
 
-#: src/engine/dialog.cpp:1467
+#: src/engine/dialog.cpp:1481
 msgid "Dialog"
 msgstr "Diálogo"
 
@@ -3606,7 +3606,7 @@ msgid "Ah, so finally you awake!"
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:10 data/dialogs/tutorial/santa.dlg:10
-#: data/dialogs/tutorial/dona.dlg:13
+#: data/dialogs/tutorial/dona.dlg:17
 msgid "Who are you?"
 msgstr ""
 
@@ -3762,7 +3762,8 @@ msgstr ""
 msgid "About the extermination, have you done it?"
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:254
+#: data/dialogs/tutorial/logan.dlg:254 data/dialogs/tutorial/dona.dlg:208
+#: data/dialogs/tutorial/dona.dlg:241
 msgid "Not yet."
 msgstr ""
 
@@ -3787,7 +3788,7 @@ msgstr ""
 #: data/dialogs/tutorial/logan.dlg:297
 #: data/dialogs/tutorial/atleticano.dlg:120
 #: data/dialogs/tutorial/cruzeirense.dlg:83
-#: data/dialogs/tutorial/hippie.dlg:205
+#: data/dialogs/tutorial/hippie.dlg:205 data/dialogs/tutorial/dona.dlg:283
 msgid ""
 "I haven't any more things for you in this DNT version. Come back when "
 "there's a latter version or join DNTeam to help us develop it!"
@@ -3799,6 +3800,8 @@ msgstr ""
 #: data/dialogs/tutorial/atleticano.dlg:124
 #: data/dialogs/tutorial/hippie.dlg:13 data/dialogs/tutorial/hippie.dlg:53
 #: data/dialogs/tutorial/hippie.dlg:89 data/dialogs/tutorial/hippie.dlg:209
+#: data/dialogs/tutorial/dona.dlg:152 data/dialogs/tutorial/dona.dlg:261
+#: data/dialogs/tutorial/dona.dlg:274 data/dialogs/tutorial/dona.dlg:287
 msgid "Bye."
 msgstr ""
 
@@ -3835,7 +3838,8 @@ msgid ""
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:75 data/dialogs/tutorial/santa.dlg:172
-#: data/dialogs/tutorial/santa.dlg:247 data/dialogs/tutorial/dona.dlg:58
+#: data/dialogs/tutorial/santa.dlg:247 data/dialogs/tutorial/dona.dlg:62
+#: data/dialogs/tutorial/dona.dlg:168
 msgid "Yes."
 msgstr ""
 
@@ -3843,7 +3847,8 @@ msgstr ""
 msgid "What kind of favor?"
 msgstr ""
 
-#: data/dialogs/tutorial/santa.dlg:81 data/dialogs/tutorial/dona.dlg:61
+#: data/dialogs/tutorial/santa.dlg:81 data/dialogs/tutorial/dona.dlg:65
+#: data/dialogs/tutorial/dona.dlg:165
 msgid "No."
 msgstr ""
 
@@ -3872,7 +3877,8 @@ msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:124 data/dialogs/tutorial/santa.dlg:137
 #: data/dialogs/tutorial/hippie.dlg:115 data/dialogs/tutorial/hippie.dlg:181
-#: data/dialogs/tutorial/dona.dlg:90 data/dialogs/tutorial/dona.dlg:103
+#: data/dialogs/tutorial/hippie.dlg:221 data/dialogs/tutorial/dona.dlg:94
+#: data/dialogs/tutorial/dona.dlg:107
 msgid "(Close dialog)"
 msgstr ""
 
@@ -4119,7 +4125,8 @@ msgstr ""
 msgid "I'm waiting for my thing, bro."
 msgstr ""
 
-#: data/dialogs/tutorial/hippie.dlg:147
+#: data/dialogs/tutorial/hippie.dlg:147 data/dialogs/tutorial/dona.dlg:194
+#: data/dialogs/tutorial/dona.dlg:227
 msgid "I'll get it."
 msgstr ""
 
@@ -4143,60 +4150,134 @@ msgstr ""
 msgid "Oh, you got it. A peak experience waits!"
 msgstr ""
 
+#: data/dialogs/tutorial/hippie.dlg:218
+msgid "You killed her! Pig!"
+msgstr ""
+
 #: data/dialogs/tutorial/dona.dlg:6
 msgid "Hello stranger!"
 msgstr ""
 
-#: data/dialogs/tutorial/dona.dlg:10
+#: data/dialogs/tutorial/dona.dlg:11
+msgid "I need some chicken ration."
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:14
 msgid "Where am I?"
 msgstr ""
 
-#: data/dialogs/tutorial/dona.dlg:22
+#: data/dialogs/tutorial/dona.dlg:26
 msgid "At the farm."
 msgstr ""
 
-#: data/dialogs/tutorial/dona.dlg:26
+#: data/dialogs/tutorial/dona.dlg:30
 msgid "What is the farm?"
 msgstr ""
 
-#: data/dialogs/tutorial/dona.dlg:29
+#: data/dialogs/tutorial/dona.dlg:33
 msgid "The farm?"
 msgstr ""
 
-#: data/dialogs/tutorial/dona.dlg:38
+#: data/dialogs/tutorial/dona.dlg:42
 msgid "I'm a simple farmer."
 msgstr ""
 
-#: data/dialogs/tutorial/dona.dlg:42
+#: data/dialogs/tutorial/dona.dlg:46
 msgid "A simple farmer?"
 msgstr ""
 
-#: data/dialogs/tutorial/dona.dlg:45
+#: data/dialogs/tutorial/dona.dlg:49
 msgid "But what's your name?"
 msgstr ""
 
-#: data/dialogs/tutorial/dona.dlg:54
+#: data/dialogs/tutorial/dona.dlg:58
 msgid "Are you a piggy cop?"
 msgstr ""
 
-#: data/dialogs/tutorial/dona.dlg:70
+#: data/dialogs/tutorial/dona.dlg:74
 msgid "F-A-R-M, farm, the farm."
 msgstr ""
 
-#: data/dialogs/tutorial/dona.dlg:74
+#: data/dialogs/tutorial/dona.dlg:78
 msgid "But what is a farm?"
 msgstr ""
 
-#: data/dialogs/tutorial/dona.dlg:77
+#: data/dialogs/tutorial/dona.dlg:81
 msgid "I got it!"
 msgstr ""
 
-#: data/dialogs/tutorial/dona.dlg:86
+#: data/dialogs/tutorial/dona.dlg:90
 msgid "Pig!"
 msgstr ""
 
-#: data/dialogs/tutorial/dona.dlg:99
+#: data/dialogs/tutorial/dona.dlg:103
 msgid "Neither I."
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:116
+msgid "Ch... ch.. chicken ration? What are you talking about?"
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:120
+msgid "The F.S.C. Hippie told me you have some."
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:124
+msgid "I'm an enthusiast of chicken rations."
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:132
+msgid "Because I want!"
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:145
+msgid "I won't sell anything more to that lazy hippie."
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:149
+msgid "Maybe if I do some favor to you?"
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:161
+msgid "Don't lie to me! It's for the hippie!"
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:177
+msgid "An enthusiast? You'll love it!"
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:181
+msgid "Sure."
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:190
+msgid ""
+"Uhm, there's something I'll want latter from you. But first, I'll need some "
+"ingredients for the ration. A mushroom..."
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:204
+msgid "Have you got the mushroom?"
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:212 data/dialogs/tutorial/dona.dlg:245
+msgid "Here it is."
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:223
+msgid "Great. Now I want an egg"
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:237
+msgid "Have you got the egg?"
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:257
+msgid "Done. Come back latter to do me your favor."
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:270
+msgid "What a world! Threats, threats and more threats..."
 msgstr ""
 
 #: data/missions/tutorial/mission1.mis:2

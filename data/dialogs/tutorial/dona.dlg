@@ -108,3 +108,183 @@ dialog(6)
          action = finish_dialog()
    pc_end
 end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(7)
+   npc_begin
+      text = gettext("Ch... ch.. chicken ration? What are you talking about?")
+   npc_end
+   pc_begin
+      option
+         text = gettext("The F.S.C. Hippie told me you have some.")
+         action = dialog_init(8)
+         action = go_to_dialog(8)
+      option
+         text = gettext("I'm an enthusiast of chicken rations.")
+         post_test = roll(BLUFF, 18)
+         if_action = receive_item("models/objetos/itens/racao/racao.dcc")
+         if_action = dialog_init(17)
+         if_action = go_to_dialog(10)
+         else_action = dialog_init(8)
+         else_action = go_to_dialog(9)
+      option
+         text = gettext("Because I want!")
+         post_test = roll(INTIMIDATE, 14)
+         if_action = receive_item("models/objetos/itens/racao/racao.dcc")
+         if_action = dialog_init(17)
+         if_action = go_to_dialog(16)
+         else_action = init_fight()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(8)
+   npc_begin
+      text = gettext("I won't sell anything more to that lazy hippie.")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Maybe if I do some favor to you?")
+         action = go_to_dialog(11)
+      option
+         text = gettext("Bye.")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(9)
+   npc_begin
+      text = gettext("Don't lie to me! It's for the hippie!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("No.")
+         action = go_to_dialog(8)
+      option
+         text = gettext("Yes.")
+         action = go_to_dialog(8)
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(10)
+   npc_begin
+      text = gettext("An enthusiast? You'll love it!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Sure.")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(11)
+   npc_begin
+      text = gettext("Uhm, there's something I'll want latter from you. But first, I'll need some ingredients for the ration. A mushroom...")
+   npc_end
+   pc_begin
+      option
+         text = gettext("I'll get it.")
+         action = dialog_init(12)
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(12)
+   npc_begin
+      text = gettext("Have you got the mushroom?")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Not yet.")
+         action = finish_dialog()
+      option
+         pre_test = have_item("models/natural/cogumelo/cogumelo.dcc")
+         text = gettext("Here it is.")
+         action = give_item("models/natural/cogumelo/cogumelo.dcc")
+         action = dialog_init(14)
+         action = go_to_dialog(13)
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(13)
+   npc_begin
+      text = gettext("Great. Now I want an egg")
+   npc_end
+   pc_begin
+      option
+         text = gettext("I'll get it.")
+         action = dialog_init(14)
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(14)
+   npc_begin
+      text = gettext("Have you got the egg?")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Not yet.")
+         action = finish_dialog()
+      option
+         pre_test = have_item("models/natural/ovo/ovo.dcc")
+         text = gettext("Here it is.")
+         action = give_item("models/natural/ovo/ovo.dcc")
+         action = receive_item("models/objetos/itens/racao/racao.dcc")
+         action = dialog_init(17)
+         action = go_to_dialog(15)
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(15)
+   npc_begin
+      text = gettext("Done. Come back latter to do me your favor.")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Bye.")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(16)
+   npc_begin
+      text = gettext("What a world! Threats, threats and more threats...")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Bye.")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                         Dialog                           #
+############################################################
+dialog(17)
+   npc_begin
+      text = gettext("I haven't any more things for you in this DNT version. Come back when there's a latter version or join DNTeam to help us develop it!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Bye.")
+         action = finish_dialog()
+   pc_end
+end_dialog

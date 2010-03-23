@@ -1773,6 +1773,11 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       if(eng->NPCs != NULL)
       {
          dude = eng->NPCs->getCharacter(charName);
+         if(dude == NULL)
+         {
+            cerr << "Warning: NULL character for getNPCByName(\""
+                 << charName << "\")" << endl;
+         }
       }
       assignValue(var, (void*)dude, IA_TYPE_CHARACTER);
    }

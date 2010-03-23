@@ -8,11 +8,15 @@ script()
 
    # create the object fileName, since can't have a literal parameter
    string objFile
-   objFile = "models/objetos/itens/ration/ration.dcc"
+   objFile = "models/objetos/itens/racao/racao.dcc"
 
    # define hippie character
    string hippie
    hippie = "characters/pcs/hippie.pc"
+
+   # define dona character
+   string dona
+   dona = "characters/pcs/dona.pc"
 
    # define map where hippie is
    string mapa
@@ -32,17 +36,17 @@ script()
 
          if(inventoryHave(ACTIVE_CHARACTER, objFile)) 
             if(dialog == 8)
-               # Have the cartridge, set logan talk to get it!
+               # Have the cartridge, set hippie talk to get it!
                dialog = 11
-               dialogSetInitial(logan, mapa, dialog)            
+               dialogSetInitial(hippie, mapa, dialog)
             end
          else 
             if(dialog != 8)
-               # Haven't the cartridge, set the logan talk to wait.
+               # Haven't the ration, set the talk to wait.
                dialog = 8
-               dialogSetInitial(logan, mapa, dialog)
+               dialogSetInitial(hippie, mapa, dialog)
             else
-               # Verify if hippie has the cartdrige: if you bartered with him
+               # Verify if hippie has the ration: if you bartered with him
                if(inventoryHave(getNPCByName(hippie),objFile))
                   # Set the dialog to next one
                   dialog = 12
@@ -54,6 +58,12 @@ script()
                end
 
             end   
+         end
+      else if(ACTUAL_MAP == "mapas/tutorial/faz_inner.map")
+         # Verify if dona is still alive (if dead, mission failed!)
+         if(!isAlive(getNPCByName(dona)))
+            dialogSetInitial(hippie, mapa, 13)
+            missionAbort(SELF_MISSION)
          end
       end
 

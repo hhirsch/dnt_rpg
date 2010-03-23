@@ -192,6 +192,7 @@ dialog(11)
    pc_begin
       option
          text = gettext("For sure!")
+         action = give_item("models/objetos/itens/racao/racao.dcc")
          action = complete_mission("missions/tutorial/hippie1.dsl", 200, 2)
          action = dialog_init(12)
          action = go_to_dialog(12)
@@ -207,6 +208,19 @@ dialog(12)
    pc_begin
       option
          text = gettext("Bye.")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(13)
+   npc_begin
+      text = gettext("You killed her! Pig!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("(Close dialog)")
          action = finish_dialog()
    pc_end
 end_dialog
