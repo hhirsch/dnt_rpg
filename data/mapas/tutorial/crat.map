@@ -1,6 +1,7 @@
 # Made by DccNiTghtmare's MapEditor, 0.5
 size = 18X18
 name = gettext("Cratera")
+musicFile = music/musica6.ogg
 npcFile = mapas/tutorial/crat.map.npc
 outdoor = 1
 texture = texturas/floor_outdoor/sand.png texturas/floor_outdoor/sand.png 54 102 49

@@ -2,6 +2,7 @@
 size = 4X3
 name = gettext("mapName")
 npcFile = mapas/tutorial/barraco2.map.npc
+musicFile = music/musica10.ogg
 lightsFile = mapas/tutorial/barraco2.map.lgh
 outdoor = 0
 texture = texturas/floor_indoor/carpete.png texturas/floor_indoor/carpete.png 186 161 126

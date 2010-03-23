@@ -1,6 +1,7 @@
 # Made by DccNiTghtmare's MapEditor, 0.5
 size = 18X17
 name = gettext("mapName")
+musicFile = music/musica2.ogg
 fogFile = mapas/tutorial/cruz_local.map.fog
 npcFile = mapas/tutorial/cruz_local.map.npc
 particlesFile = mapas/tutorial/cruz_local.map.par

@@ -1,6 +1,7 @@
 # Made by DccNiTghtmare's MapEditor, 0.5
 size = 6X8
 name = gettext("mapName")
+musicFile = music/musica3.ogg
 npcFile = mapas/tutorial/faz_inner.map.npc
 particlesFile = mapas/tutorial/faz_inner.map.par
 lightsFile = mapas/tutorial/faz_inner.map.lgh

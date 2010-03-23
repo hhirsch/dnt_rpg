@@ -1,7 +1,7 @@
 # Made by DccNiTghtmare's MapEditor, 0.5
 size = 3X4
 name = gettext("Hut")
-musicFile = music/musica6.ogg
+musicFile = music/musica4.ogg
 lightsFile = mapas/tutorial/barraco1.map.lgh
 outdoor = 0
 texture = texturas/floor_indoor/carpete.png texturas/floor_indoor/carpete.png 186 161 126

@@ -1,6 +1,7 @@
 # Made by DccNiTghtmare's MapEditor, 0.5
 size = 18X20
 name = gettext("mapName")
+musicFile = music/musica11.ogg
 npcFile = mapas/tutorial/fazenda.map.npc
 particlesFile = mapas/tutorial/fazenda.map.par
 outdoor = 1
