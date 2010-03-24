@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-03-23 11:01-0300\n"
+"POT-Creation-Date: 2010-03-24 15:17-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -177,7 +177,7 @@ msgstr ""
 msgid "Attribute Description"
 msgstr ""
 
-#: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:564
+#: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:567
 #: src/engine/inventwindow.cpp:370 src/engine/options.cpp:1234
 msgid "Warning"
 msgstr ""
@@ -376,66 +376,66 @@ msgstr ""
 msgid "No Skills."
 msgstr ""
 
-#: src/engine/dccnit.cpp:505 src/engine/dccnit.cpp:555
+#: src/engine/dccnit.cpp:508 src/engine/dccnit.cpp:558
 msgid "Error"
 msgstr ""
 
-#: src/engine/dccnit.cpp:505
+#: src/engine/dccnit.cpp:508
 msgid "Can't load the saved game!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:550
+#: src/engine/dccnit.cpp:553
 msgid "Information"
 msgstr ""
 
-#: src/engine/dccnit.cpp:551
+#: src/engine/dccnit.cpp:554
 msgid "The game was saved!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:555
+#: src/engine/dccnit.cpp:558
 msgid "Can't save game!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:565
+#: src/engine/dccnit.cpp:568
 msgid "Can't save game while fighting!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:702
+#: src/engine/dccnit.cpp:705
 #, c-format
 msgid "Saving Current Map Modifications"
 msgstr ""
 
-#: src/engine/dccnit.cpp:737
+#: src/engine/dccnit.cpp:740
 #, c-format
 msgid "Loading Map: %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:802
+#: src/engine/dccnit.cpp:805
 #, c-format
 msgid "Loading NPC: %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:841
+#: src/engine/dccnit.cpp:844
 msgid "Creating MiniMap"
 msgstr ""
 
-#: src/engine/dccnit.cpp:847
+#: src/engine/dccnit.cpp:850
 msgid "Putting GUI on Screen"
 msgstr ""
 
-#: src/engine/dccnit.cpp:895
+#: src/engine/dccnit.cpp:898
 msgid "Loading Particles"
 msgstr ""
 
-#: src/engine/dccnit.cpp:925
+#: src/engine/dccnit.cpp:928
 msgid "Loading Changes..."
 msgstr ""
 
-#: src/engine/dccnit.cpp:953
+#: src/engine/dccnit.cpp:956
 msgid "Done!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1170
+#: src/engine/dccnit.cpp:1173
 msgid ""
 "DccNiTghtmare is relesead under GPLv3 or later: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -443,58 +443,58 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1692
+#: src/engine/dccnit.cpp:1695
 msgid "Too far away for the action!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1709
+#: src/engine/dccnit.cpp:1712
 msgid "Couldn't rest at battle mode."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1715
+#: src/engine/dccnit.cpp:1718
 msgid "Enemies nearby."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1810
+#: src/engine/dccnit.cpp:1816
 msgid "No NPCs in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1870
+#: src/engine/dccnit.cpp:1876
 msgid "Surprise Attack Turn."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1884
+#: src/engine/dccnit.cpp:1890
 msgid "No enemies in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:2067 src/engine/dccnit.cpp:2586
+#: src/engine/dccnit.cpp:2073 src/engine/dccnit.cpp:2592
 #: src/engine/shortcutswindow.cpp:51
 msgid "Nothing"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2335
+#: src/engine/dccnit.cpp:2341
 #, c-format
 msgid "%s taken."
 msgstr ""
 
-#: src/engine/dccnit.cpp:2352
+#: src/engine/dccnit.cpp:2358
 msgid "Inventory is full!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2385
+#: src/engine/dccnit.cpp:2391
 msgid "Door"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2521
+#: src/engine/dccnit.cpp:2527
 #, c-format
 msgid "%s attacks %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2687
+#: src/engine/dccnit.cpp:2693
 msgid "No more actions. Turn ended."
 msgstr ""
 
-#: src/engine/dccnit.cpp:4216
+#: src/engine/dccnit.cpp:4222
 msgid "Exit Battle Mode"
 msgstr ""
 
@@ -3385,7 +3385,7 @@ msgstr ""
 #: data/dialogs/tutorial/logan.dlg:297
 #: data/dialogs/tutorial/atleticano.dlg:120
 #: data/dialogs/tutorial/cruzeirense.dlg:83
-#: data/dialogs/tutorial/hippie.dlg:205 data/dialogs/tutorial/dona.dlg:283
+#: data/dialogs/tutorial/hippie.dlg:206 data/dialogs/tutorial/dona.dlg:283
 msgid ""
 "I haven't any more things for you in this DNT version. Come back when "
 "there's a latter version or join DNTeam to help us develop it!"
@@ -3396,7 +3396,7 @@ msgstr ""
 #: data/dialogs/tutorial/atleticano.dlg:64
 #: data/dialogs/tutorial/atleticano.dlg:124
 #: data/dialogs/tutorial/hippie.dlg:13 data/dialogs/tutorial/hippie.dlg:53
-#: data/dialogs/tutorial/hippie.dlg:89 data/dialogs/tutorial/hippie.dlg:209
+#: data/dialogs/tutorial/hippie.dlg:89 data/dialogs/tutorial/hippie.dlg:210
 #: data/dialogs/tutorial/dona.dlg:152 data/dialogs/tutorial/dona.dlg:261
 #: data/dialogs/tutorial/dona.dlg:274 data/dialogs/tutorial/dona.dlg:287
 msgid "Bye."
@@ -3474,7 +3474,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:124 data/dialogs/tutorial/santa.dlg:137
 #: data/dialogs/tutorial/hippie.dlg:115 data/dialogs/tutorial/hippie.dlg:181
-#: data/dialogs/tutorial/hippie.dlg:221 data/dialogs/tutorial/dona.dlg:94
+#: data/dialogs/tutorial/hippie.dlg:223 data/dialogs/tutorial/dona.dlg:94
 #: data/dialogs/tutorial/dona.dlg:107
 msgid "(Close dialog)"
 msgstr ""
@@ -3747,7 +3747,7 @@ msgstr ""
 msgid "Oh, you got it. A peak experience waits!"
 msgstr ""
 
-#: data/dialogs/tutorial/hippie.dlg:218
+#: data/dialogs/tutorial/hippie.dlg:219
 msgid "You killed her! Pig!"
 msgstr ""
 
