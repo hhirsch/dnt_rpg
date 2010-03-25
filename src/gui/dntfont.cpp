@@ -466,13 +466,6 @@ Uint16* dntFont::convertToUnicode(Uint16 *unicode, const char *text, int len)
    options opt;
    if(opt.isLanguageUnicode())
    {
-      /*for( i=0; i < (len / 2); ++i ) 
-      {
-         unicode[i] = text[i];
-      }
-      unicode[i] = 0;*/
-      /**/
-
       for ( i = 0, j = 0; i < len; ++i, ++j ) 
       {
          ch = ( ( const unsigned char * )text)[i];
@@ -576,11 +569,39 @@ string unicodeToString(Uint16* unicode, int size)
 {
    int i;
    string res = "";
-   //FIXME, when is UTF8, not Latin!
-   for(i = 0; i < size; i++)
+   Uint16 c;
+   options opt;
+   
+   if(opt.isLanguageUnicode())
    {
-      res += (char)unicode[i];
+      for(i = 0; i < size; i++) 
+      {
+         c =  unicode[i];
+         if( (c >= 0x0001) && (c <= 0x007F) )
+         {
+            res += (char)(c);
+         }
+         else if(c > 0x07FF) 
+         {
+            res += (char)(0xE0 | ((c >> 12) & 0x0F));
+            res += (char)(0x80 | ((c >>  6) & 0x3F));
+            res += (char)(0x80 | ((c >>  0) & 0x3F));
+         } 
+         else 
+         {
+            res += (char)(0xC0 | ((c >>  6) & 0x1F));
+            res += (char)(0x80 | ((c >>  0) & 0x3F));
+         }
+      }
    }
+   else
+   {
+      for(i = 0; i < size; i++)
+      {
+         res += (char)unicode[i];
+      }
+   }
+
    return(res);
 }
 

@@ -163,6 +163,7 @@ string dntKeyDesc[] =
 options::options()
 {
    timeLastOperation = SDL_GetTicks();
+   intWindow = NULL;
 }
 
 /****************************************************************
