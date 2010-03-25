@@ -45,8 +45,8 @@ int main(int argc, char **argv)
    /* Set locale */
    setlocale (LC_CTYPE, "");
    setlocale(LC_MESSAGES, "");
-   bindtextdomain (PACKAGE, LOCALEDIR);
-   textdomain (PACKAGE);
+   bindtextdomain(PACKAGE, LOCALEDIR);
+   textdomain(PACKAGE);
 
    SDL_Surface *screen;
 

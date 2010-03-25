@@ -78,6 +78,7 @@ enum
    DNT_LANG_GERMAN,
    DNT_LANG_ITALIAN,
    DNT_LANG_DUTCH,
+   DNT_LANG_RUSSIAN,
    DNT_LANG_LAST
 };
 
@@ -508,9 +509,7 @@ string options::languageName()
  ****************************************************************/
 bool options::isLanguageUnicode()
 {
-   //return( (langNumber == DNT_LANG_RUSSIAN) );
-   //TODO
-   return(false);
+   return( (langNumber == DNT_LANG_RUSSIAN) );
 }
 
 /****************************************************************
@@ -523,6 +522,15 @@ void options::setLanguage()
    if( (langNumber >= 0) && (langNumber < DNT_LANG_LAST) )
    {
       saux = dntLanguageCode[langNumber];
+   }
+
+   if(isLanguageUnicode())
+   {
+      bind_textdomain_codeset(PACKAGE, "UTF-8");
+   }
+   else
+   {
+      bind_textdomain_codeset(PACKAGE, "ISO-8859-1");
    }
    
    if(!saux.empty())

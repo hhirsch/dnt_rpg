@@ -460,16 +460,45 @@ string dntFont::createUnicode(Uint16 character)
  ***********************************************************************/
 Uint16* dntFont::convertToUnicode(Uint16 *unicode, const char *text, int len)
 {
-   int i;
+   int i,j;
+   Uint16 ch;
 
    options opt;
    if(opt.isLanguageUnicode())
    {
-      for( i=0; i < (len / 2); ++i ) 
+      /*for( i=0; i < (len / 2); ++i ) 
       {
          unicode[i] = text[i];
       }
-      unicode[i] = 0;
+      unicode[i] = 0;*/
+      /**/
+
+      for ( i = 0, j = 0; i < len; ++i, ++j ) 
+      {
+         ch = ( ( const unsigned char * )text)[i];
+         if ( ch >= 0xF0 ) 
+         {
+            ch  =  ( Uint16 )( text[i] & 0x07 ) << 18;
+            ch |=  ( Uint16 )( text[++i] & 0x3F ) << 12;
+            ch |=  ( Uint16 )( text[++i] & 0x3F ) << 6;
+            ch |=  ( Uint16 )( text[++i] & 0x3F );
+         } 
+         else if ( ch >= 0xE0 ) 
+         {
+            ch  =  ( Uint16 )( text[i] & 0x0F ) << 12;
+            ch |=  ( Uint16 )( text[++i] & 0x3F ) << 6;
+            ch |=  ( Uint16 )( text[++i] & 0x3F );
+         } 
+         else if ( ch >= 0xC0 ) 
+         {
+            ch  =  ( Uint16 )( text[i] & 0x1F ) << 6;
+            ch |=  ( Uint16 )( text[++i] & 0x3F );
+         }
+         unicode[j] = ch;
+      }
+      unicode[j] = 0;
+
+      return(unicode);
    }
    else
    {
