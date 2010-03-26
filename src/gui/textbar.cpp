@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -27,6 +27,7 @@
  ********************************************************************/
 textBar::textBar(int xa,int ya,int xb,int yb, string text1, bool cripto,
                  SDL_Surface* screen)
+        :guiObject(screen)
 {
    lastWrite = 0;
    x1 = xa;
@@ -40,7 +41,6 @@ textBar::textBar(int xa,int ya,int xb,int yb, string text1, bool cripto,
    cript = cripto;
    type = FARSO_OBJECT_TEXT_BAR;
    text = text1;
-   wSurface = screen;
 }
 
 /********************************************************************
@@ -53,7 +53,7 @@ textBar::~textBar()
 /********************************************************************
  *                            putText                               *
  ********************************************************************/
-void textBar::putText(unsigned int pos, int marca, SDL_Surface *screen)
+void textBar::putText(unsigned int pos, int marca)
 {
    dntFont fnt;
    fnt.defineFont(DNT_FONT_ARIAL,12);
@@ -62,7 +62,7 @@ void textBar::putText(unsigned int pos, int marca, SDL_Surface *screen)
 
    color_Set(Colors.colorCont[2].R, Colors.colorCont[2].G,
              Colors.colorCont[2].B, Colors.colorCont[2].A);
-   rectangle_Fill(screen,x1+1, y1+1, x2-1, y2-1);
+   rectangle_Fill(wSurface,x1+1, y1+1, x2-1, y2-1);
    color_Set(Colors.colorCont[1].R, Colors.colorCont[1].G,
              Colors.colorCont[1].B, Colors.colorCont[1].A);
 
@@ -86,16 +86,14 @@ void textBar::putText(unsigned int pos, int marca, SDL_Surface *screen)
       }
    }
 
-
-
-   fnt.write(screen, x1+3, y1+1, writeText);
+   fnt.write(wSurface, x1+3, y1+1, writeText);
 
    if (marca)
    {
       /* Define mark position */
       string s = text.substr(init,init+pos);
       int x = x1 + 2 + fnt.getStringWidth(s);
-      line_Draw(screen,x,y1+3,x,y2-3);
+      line_Draw(wSurface,x,y1+3,x,y2-3);
    }
    setChanged();
 }
@@ -106,20 +104,20 @@ void textBar::putText(unsigned int pos, int marca, SDL_Surface *screen)
 void textBar::setText(string txt)
 {
    text = txt;
-   draw(wSurface);
+   draw();
 }
 
 /********************************************************************
  *                              draw                                *
  ********************************************************************/
-void textBar::draw(SDL_Surface *screen)
+void textBar::draw()
 {
    color_Set(Colors.colorCont[0].R, Colors.colorCont[0].G,
              Colors.colorCont[0].B, Colors.colorCont[0].A);
-   rectangle_2Colors(screen,x1,y1,x2,y2, Colors.colorCont[1].R,
+   rectangle_2Colors(wSurface,x1,y1,x2,y2, Colors.colorCont[1].R,
                      Colors.colorCont[1].G,Colors.colorCont[1].B,
                      Colors.colorCont[1].A);
-   putText(0,0,screen);
+   putText(0,0);
    setChanged();
 }
 
@@ -150,8 +148,7 @@ void textBar::defineCursorPosition(int mouseX, int mouseY)
 /********************************************************************
  *                             Write                                *
  ********************************************************************/
-int textBar::doWrite(int mouseX, int mouseY, SDL_Surface *screen, 
-                     Uint8 Mbotao, Uint8* teclas)
+int textBar::doWrite(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclas)
 {
    string c;
    c = "";
@@ -590,7 +587,7 @@ int textBar::doWrite(int mouseX, int mouseY, SDL_Surface *screen,
        {
            /* Calculate the New Position */
            defineCursorPosition(mouseX, mouseY);
-           putText(pos,1,screen);
+           putText(pos,1);
        }
        else
        {
@@ -600,11 +597,11 @@ int textBar::doWrite(int mouseX, int mouseY, SDL_Surface *screen,
 
   if(!pronto)
   {
-    putText(pos,1,screen);
+    putText(pos,1);
   }
   else
   {
-    putText(0,0,screen);
+    putText(0,0);
   }
 
   return(pronto);

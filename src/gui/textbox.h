@@ -74,15 +74,14 @@ class textBox: public guiObject, public dntList
 
       /*! Draw in the Surface the text bar
        * \return -> number of the last writed line */
-      int draw();
+      int draw2();
 
       /*! Draw only the line number 'i'
        * \param i -> number of the line to draw */
       void draw(int i);
 
-      /*! Draw the textbar (from guiObject)
-       * \param screen -> ignored. */
-      void draw(SDL_Surface* screen);
+      /*! Draw the textbar */
+      void draw();
       
       /*! Define the Font
        * \param name -> font file name

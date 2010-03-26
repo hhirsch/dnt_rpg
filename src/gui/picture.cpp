@@ -40,7 +40,8 @@ picture::~picture()
 /******************************************************
  *                     Constructor                    *
  ******************************************************/
-picture::picture(int x,int y,int w,int h,const char* arquivo)
+picture::picture(int x,int y,int w,int h,const char* arquivo, 
+      SDL_Surface* surface): guiObject(surface)
 {
    /* Define Machine Bit Order */
    Uint32 rmask, gmask, bmask, amask;
@@ -113,7 +114,7 @@ void picture::setSurfaceDeletion(bool enable)
 /******************************************************
  *                        draw                        *
  ******************************************************/
-void picture::draw(SDL_Surface *screen)
+void picture::draw()
 {
    if(fig == NULL)
    {
@@ -122,7 +123,7 @@ void picture::draw(SDL_Surface *screen)
    SDL_Rect Ret;
    Ret.x = x1;
    Ret.y = y1;
-   SDL_BlitSurface(fig,&area,screen,&Ret);
+   SDL_BlitSurface(fig,&area,wSurface,&Ret);
 }
 
 /******************************************************

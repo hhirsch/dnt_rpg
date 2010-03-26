@@ -1055,6 +1055,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
              {
                 musicVolume = 255;
              }
+             barMusicVolume->defineActualHealth(musicVolume);
          }
       }
       else if(object == (guiObject*) buttonMusDec) 
@@ -1066,6 +1067,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
              {
                 musicVolume = 0;
              }
+             barMusicVolume->defineActualHealth(musicVolume);
          }
       }
       /* Sound Effects */
@@ -1078,6 +1080,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
              {
                 sndfxVolume = 255;
              }
+             barSndfxVolume->defineActualHealth(sndfxVolume);
          }
       }
       else if(object == (guiObject*) buttonSndDec) 
@@ -1089,6 +1092,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
              {
                 sndfxVolume = 0;
              }
+             barSndfxVolume->defineActualHealth(sndfxVolume);
          }
       }
       /* Language */
@@ -1098,6 +1102,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          {
             langNumber++;
          }
+         txtLanguage->setText(languageName());
       }
       else if(object == (guiObject*) buttonLangDec)
       {
@@ -1105,6 +1110,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          {
             langNumber--;
          }
+         txtLanguage->setText(languageName());
       }
       /* Camera */
       else if(object == (guiObject*) buttonCamSum)
@@ -1128,6 +1134,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          {
             reflexionType++;
          }
+         txtReflexion->setText(reflexionName());
       }
       else if(object == (guiObject*) buttonReflDec)
       {
@@ -1135,6 +1142,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          {
             reflexionType--;
          }
+         txtReflexion->setText(reflexionName());
       }
       /* Shadow */
       else if(object == (guiObject*) buttonShadSum)
@@ -1143,6 +1151,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          {
             shadowType++;
          }
+         txtShadow->setText(shadowName());
       }
       else if(object == (guiObject*) buttonShadDec)
       {
@@ -1150,6 +1159,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          {
             shadowType--;
          }
+         txtShadow->setText(shadowName());
       }
       /* Resolution */
       else if(object == (guiObject*) buttonResSum)
@@ -1165,6 +1175,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
                screenWidth = resolutions[resPosition]->w;
                screenHeight = resolutions[resPosition]->h;
             }
+            txtResolution->setText(resolutionName());
          }
       }
       else if(object == (guiObject*) buttonResDec)
@@ -1179,6 +1190,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
                screenWidth = resolutions[resPosition]->w;
                screenHeight = resolutions[resPosition]->h;
             }
+            txtResolution->setText(resolutionName());
          }
       }
 
@@ -1189,6 +1201,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          {
              antiAliasing += 2;
          }
+         txtAntiAliasing->setText(antiAliasingName());
       }
       else if(object == (guiObject*) buttonAliasDec) 
       {
@@ -1196,6 +1209,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          {
              antiAliasing -= 2;
          }
+         txtAntiAliasing->setText(antiAliasingName());
       }
       /* FarView Factor */
       else if(object == (guiObject*) buttonFarViewSum) 
@@ -1203,6 +1217,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          if(farViewFactor < 1.0)
          {
             farViewFactor += 0.1;
+            barFarView->defineActualHealth((int)floor(farViewFactor*9));
          }
       }
       else if(object == (guiObject*) buttonFarViewDec) 
@@ -1210,9 +1225,9 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          if(farViewFactor > 0.4)
          {
             farViewFactor -= 0.1;
+            barFarView->defineActualHealth((int)floor(farViewFactor*9));
          }
       }
-
 
    }
    else if(eventInfo == FARSO_EVENT_PRESSED_BUTTON) 
@@ -1315,18 +1330,6 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
       }
    }
 
-   txtLanguage->setText(languageName());
-   txtCamera->setText(cameraName());
-   txtReflexion->setText(reflexionName());
-   txtShadow->setText(shadowName());
-   txtResolution->setText(resolutionName());
-   txtAntiAliasing->setText(antiAliasingName());
-
-   barMusicVolume->defineActualHealth(musicVolume);
-   barSndfxVolume->defineActualHealth(sndfxVolume);
-   barFarView->defineActualHealth((int)floor(farViewFactor*9));                                                          
-
-   intWindow->draw(0,0);
    return(OPTIONSW_OTHER);
 } 
 

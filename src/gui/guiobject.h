@@ -53,15 +53,15 @@ class guiObject : public dntListElement
    public:
       int type;            /**< Object Type */ 
 
-      /*! Constructor */
-      guiObject(){available=true;text="";};
+      /*! Constructor 
+       * \param surface -> SDL_Surface to draw to */
+      guiObject(SDL_Surface* surface){available=true;text="";wSurface=surface;};
 
       /*! Virtual Destructor */
       virtual ~guiObject(){};
 
-      /*! Virtual Draw Function
-       * \param screen -> screen to draw the object to. */
-      virtual void draw(SDL_Surface* screen)=0;
+      /*! Virtual Draw Function */
+      virtual void draw()=0;
 
       /*! Verify if the mouse is in the object or not
        * \param mouseX -> mouse X Coordinate
@@ -120,6 +120,9 @@ class guiObject : public dntListElement
       /*! Set the window as changed */
       void setChanged(){hadChanged = true;};
 
+      /*! Set the surface used */
+      void setSurface(SDL_Surface* surface){wSurface = surface;};
+
    protected:
       int x1,              /**< Coordinate on Window */
           y1,              /**< Coordinate on Window */
@@ -127,6 +130,7 @@ class guiObject : public dntListElement
           y2;              /**< Coordinate on Window */
       bool available;      /**< Available? */
       string text;         /**< Text on the bar */
+      SDL_Surface* wSurface; /**< Screen surface */
    
    private:
       bool hadChanged;     /**< Flag if the had changed its draw state */

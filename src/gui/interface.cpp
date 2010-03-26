@@ -33,7 +33,8 @@ int mouseX=0,mouseY=0;
 guiInterface::guiInterface(string backImage)
 {
    lwindows = new windowList;
-   objects = new guiList;
+   /* No surface, as will only has windows */
+   objects = new guiList(NULL);
    if(!backImage.empty())
    {
       background = IMG_Load(backImage.c_str());
@@ -395,13 +396,7 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
        return(NULL);
     }
 
-    /* Verify Main Super Menu */
-    if(lwindows->getMenu())
-    {
-       activeObject = (guiObject*) lwindows->getMenu();
-       focus = FARSO_FOCUS_MENU;
-    }
-    else /* Verify Window Super Menu */
+    /* Verify Window Super Menu */
     if(lwindows->getActiveWindow()->getObjectsList()->getMenu())
     {
        activeObject = (guiObject*) 
@@ -501,10 +496,9 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
     {
         int pronto;
         button* bot = (button*)activeObject;
-        if (bot->press(lwindows->getActiveWindow()->getX1(), 
-                       lwindows->getActiveWindow()->getY1(), x, y, 
-                       Mbotao, &pronto, 
-                       lwindows->getActiveWindow()->getSurface()))
+        if(bot->press(lwindows->getActiveWindow()->getX1(), 
+                      lwindows->getActiveWindow()->getY1(), x, y, 
+                      Mbotao, &pronto))
         {
            if(pronto)
            {
@@ -565,7 +559,6 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
         textBar* bart = (textBar*)activeObject;
         if((bart->doWrite(x - lwindows->getActiveWindow()->getX1(),
                           y - lwindows->getActiveWindow()->getY1(),
-                          lwindows->getActiveWindow()->getSurface(), 
                           Mbotao,tecla)))
         {
            focus = FARSO_FOCUS_GAME;
@@ -583,7 +576,7 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
        cxSel* cx = (cxSel*)activeObject;
        if(cx->doPress(Mbotao))
        {
-          cx->draw(lwindows->getActiveWindow()->getSurface());
+          cx->draw();
           focus = FARSO_FOCUS_GAME;
           eventInfo = FARSO_EVENT_MODIFIED_CX_SEL;
        }
@@ -601,8 +594,7 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
        int pronto;
        menu* men = (menu*)activeObject;
       
-       int res = men->run(x,y,Mbotao,tecla,
-                          lwindows->getActiveWindow()->getSurface(),&pronto,
+       int res = men->run(x,y,Mbotao,tecla, &pronto,
                           lwindows->getActiveWindow()->getX1(),
                           lwindows->getActiveWindow()->getY1());
 
@@ -649,7 +641,7 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
         selText *st = (selText*)activeObject;
         int res = st->treat(x-lwindows->getActiveWindow()->getX1(),
                              y-lwindows->getActiveWindow()->getY1(),
-                             Mbotao,lwindows->getActiveWindow()->getSurface());
+                             Mbotao);
         if(res == -1)
         {
             focus = FARSO_FOCUS_GAME;
@@ -678,7 +670,6 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
        guiObject* object = tb->verifyPosition(x,y,Mbotao,
                                      lwindows->getActiveWindow()->getX1(),
                                      lwindows->getActiveWindow()->getY1(),
-                                     lwindows->getActiveWindow()->getSurface(),
                                      actType);
        if( object != NULL )
        {

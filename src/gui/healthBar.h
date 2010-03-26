@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -33,8 +33,9 @@ class healthBar: public guiObject
        * \param x1 -> coordinate on surface 
        * \param y1 -> coordinate on surface
        * \param x2 -> coordinate on surface
-       * \param y2 -> coordinate on surface*/
-      healthBar(int x1, int y1, int x2, int y2);
+       * \param y2 -> coordinate on surface
+       * \param surface -> window where the bar is */
+      healthBar(int x1, int y1, int x2, int y2, SDL_Surface* surface);
       /*! Destructor */
       ~healthBar();
 
@@ -46,9 +47,8 @@ class healthBar: public guiObject
        * \param health -> health value to be the actual */
       void defineActualHealth(int health);
 
-      /*! Draws the healthBar to Surface.
-       * \param surface -> surface to draw to */
-      void draw(SDL_Surface* surface);
+      /*! Draws the healthBar to Surface. */
+      void draw();
 
    private:
 

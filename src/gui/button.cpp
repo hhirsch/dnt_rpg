@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -26,7 +26,8 @@
 /***********************************************************
  *                       Constructor                       *
  ***********************************************************/
-button::button(int xa,int ya,int xb,int yb, string txt, bool isOval )
+button::button(int xa,int ya,int xb,int yb, string txt, bool isOval, 
+      SDL_Surface* surface): guiObject(surface)
 {
    x1 = xa; 
    y1 = ya;
@@ -61,7 +62,7 @@ void button::setTextColor(int r, int g, int b)
 /***********************************************************
  *                           draw                          *
  ***********************************************************/
-void button::draw(SDL_Surface* screen )
+void button::draw()
 {
    dntFont font;
    int R1,R2,G1,G2,B1,B2,A1,A2; 
@@ -92,15 +93,15 @@ void button::draw(SDL_Surface* screen )
              Colors.colorButton.G,
              Colors.colorButton.B,
              Colors.colorButton.A);
-   rectangle_Fill(screen,x1+1,y1+1,x2-1,y2-1);
+   rectangle_Fill(wSurface,x1+1,y1+1,x2-1,y2-1);
    color_Set(R1,G1,B1,A1);
    if(oval)
    {
-      rectangle_Oval(screen,x1,y1,x2,y2,R2,B2,G2,A2);
+      rectangle_Oval(wSurface,x1,y1,x2,y2,R2,B2,G2,A2);
    }
    else
    {
-      rectangle_2Colors(screen,x1,y1,x2,y2,R2,B2,G2,A2);
+      rectangle_2Colors(wSurface,x1,y1,x2,y2,R2,B2,G2,A2);
    }
 
    /* Write the Text */
@@ -122,30 +123,30 @@ void button::draw(SDL_Surface* screen )
    if( (text == font.createUnicode(0x25B2)) ||
        (text == font.createUnicode(0x25BC)) )
    {
-      font.write(screen,xa+1,ya,getText().c_str(),xa+1,y1,x2+1,y2);
+      font.write(wSurface,xa+1,ya,getText().c_str(),xa+1,y1,x2+1,y2);
    }
    else if(text == font.createUnicode(0x25CF))
    {
-      font.write(screen,xa+2,ya-2,getText().c_str(),xa+2,y1,x2+2,y2);
+      font.write(wSurface,xa+2,ya-2,getText().c_str(),xa+2,y1,x2+2,y2);
    }
    else if(text == "-")
    {
-      font.write(screen,xa+2,ya-2,getText().c_str(),xa+2,y1,x2+2,y2);
+      font.write(wSurface,xa+2,ya-2,getText().c_str(),xa+2,y1,x2+2,y2);
    }
    else
    {
       if(isAvailable())
       {
-         font.write(screen,xa,ya+3,getText().c_str(),xa,y1,x2,y2);
+         font.write(wSurface,xa,ya+3,getText().c_str(),xa,y1,x2,y2);
       }
       else
       {
          color_Set(Colors.colorCont[2].R, Colors.colorCont[2].G,
                    Colors.colorCont[2].B, Colors.colorCont[2].A);
-         font.write(screen,xa+1,ya+4, getText(),xa,y1,x2,y2);
+         font.write(wSurface,xa+1,ya+4, getText(),xa,y1,x2,y2);
          color_Set(Colors.colorCont[1].R, Colors.colorCont[1].G,
                    Colors.colorCont[1].B, Colors.colorCont[1].A);
-         font.write(screen,xa,ya+3, getText(), xa,y1,x2,y2);
+         font.write(wSurface,xa,ya+3, getText(), xa,y1,x2,y2);
       }
    }
    setChanged();
@@ -154,8 +155,7 @@ void button::draw(SDL_Surface* screen )
 /***********************************************************
  *                           press                         *
  ***********************************************************/
-bool button::press(int Xjan, int Yjan, int x, int y, Uint8 Mbotao, int* pronto,
-                  SDL_Surface* screen)
+bool button::press(int Xjan, int Yjan, int x, int y, Uint8 Mbotao, int* pronto)
 {
    *pronto = 0;
    bool pres;
@@ -169,7 +169,7 @@ bool button::press(int Xjan, int Yjan, int x, int y, Uint8 Mbotao, int* pronto,
    if( (pres && (Mbotao & SDL_BUTTON(1))) != pressed)
    {
       pressed = pres && (Mbotao & SDL_BUTTON(1));
-      draw(screen);
+      draw();
    }
 
    return(pres && isAvailable());

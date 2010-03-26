@@ -99,9 +99,8 @@ class rolBar: public guiObject
       /*! Redraw the bar when scrolling text */
       void redraw();
 
-      /*! Draw the RolBar (from guiObject)
-       * \param screen -> window surface */
-      void draw(SDL_Surface* screen);
+      /*! Draw the RolBar (from guiObject) */
+      void draw();
 
       /*! Render only the active text
        * \param i -> text number to render */
@@ -112,7 +111,6 @@ class rolBar: public guiObject
       string getLastLine();
 
    private:
-      SDL_Surface* wSurface;   /**< Window Surface */
       button* up;              /**< Up Button */
       button* down;            /**< Down Button */
       button* actualPressed;   /**< Actual Pressed Button */

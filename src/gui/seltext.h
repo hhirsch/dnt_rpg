@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -68,16 +68,14 @@ class selText: public guiObject
       void getCoordinate(int& xa, int& ya, int& xb, int& yb);
 
 
-      /*! Draw the seltext on a surface
-       * \param screen -> surface to draw */
-      void draw(SDL_Surface *screen);
+      /*! Draw the seltext on a surface */
+      void draw();
 
       /*! Treat the selText
-       * \param screen  -> surface where the selText is
        * \param xa -> mouse X coordinate
        * \param ya -> mouse Y coordinate
        * \param Mbotao -> mouse button state*/
-      int treat(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen);
+      int treat(int xa,int ya, Uint8 Mbotao);
 
       /*! Get the last selected item 
        * \param info -> pointer to a integer to get the info or NULL
@@ -97,9 +95,8 @@ class selText: public guiObject
 
    private:
       /*! Write to the surface the selected item on differente color.
-       * \param selectItem -> number of the selected text
-       * \param screen -> surface to draw */
-      void writeSelected(int selectItem, SDL_Surface *screen);
+       * \param selectItem -> number of the selected text */
+      void writeSelected(int selectItem);
 
       /*! based on y, get the seleted item
        * \param ya -> mouse y coordinate
@@ -113,9 +110,6 @@ class selText: public guiObject
       int selec;                   /**< last item selected */
       farso_colors Cores;          /**< colors */
       bool pressed;                /**< while pressed == true */
-      SDL_Surface* windowScreen;   /**< Pointer to the window screen */
-
-
 };
 
 #endif

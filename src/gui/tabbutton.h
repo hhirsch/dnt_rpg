@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -39,8 +39,10 @@ enum
 class oneTabButton: public guiObject
 {
    public:
-      /*! From guiObject. Not used. */
-      void draw(SDL_Surface* screen){};
+      /*! Constructor */
+      oneTabButton():guiObject(NULL){};
+      /*! From guiObject */
+      void draw(){};
 
       int x1,  /**< X Coordinate */
           y1,  /**< Y Coordinate */
@@ -56,14 +58,16 @@ class tabButton: public picture
       /*! Constructor 
        * \param x -> x position of the tab button
        * \param y -> y position of the tab button
-       * \param arquivo -> fileName of the image to Load */
-      tabButton(int x,int y,const char* arquivo);
+       * \param arquivo -> fileName of the image to Load 
+       * \param surface -> window surface where object is */
+      tabButton(int x,int y,const char* arquivo, SDL_Surface* surface);
       /*! Constructor without Image
        * \param x -> x position of the tab button
        * \param y -> y position of the tab button
        * \param w -> width of the tab button
-       * \param h -> heigh of the tab button */
-      tabButton(int x, int y, int w, int h);
+       * \param h -> heigh of the tab button 
+       * \param surface -> window surface where object is */
+      tabButton(int x, int y, int w, int h, SDL_Surface* surface);
       /*! Destructor */
       ~tabButton(){};
       /*! insert Button in the table of buttons
@@ -73,22 +77,18 @@ class tabButton: public picture
        * \param y2 -> Y Coordinate 
        * \return Pointer to the oneTableButton Created */
       oneTabButton* insertButton(int x1, int y1, int x2, int y2); 
-      /*! Draws the table button to the surface
-       * \param screen -> pointer to the surface where the table will be 
-       *                  draw (usually an window).  */
-      void draw(SDL_Surface *screen);
+      /*! Draws the table button to the surface */
+      void draw();
       /*! Verify Mouse Press on Buttons 
        * \param mouseX -> mouse X position
        * \param mouseY -> mouse Y position
        * \param Mbuttons -> SDL mouse buttons state
        * \param Xjan -> window X coordinate
        * \param Yjan -> window Y coordinate
-       * \param screen -> surface where will draw
        * \param actionType -> ID of action done
        * \return Pointer to the button pressed.*/
       guiObject* verifyPosition(int mouseX, int mouseY, Uint8 Mbuttons, 
-                                int Xjan, int Yjan, SDL_Surface *screen,
-                                int& actionType);
+                                int Xjan, int Yjan, int& actionType);
 
 
       /*! Set the tabButton style

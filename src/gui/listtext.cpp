@@ -27,7 +27,8 @@
  *                        Constructor                         *
  **************************************************************/
 listText::listText(int xa, int ya, int xb, int yb, SDL_Surface* surface,
-                   void* list): dntList(DNT_LIST_TYPE_ADD_AT_END)
+                   void* list)
+         : guiObject(surface), dntList(DNT_LIST_TYPE_ADD_AT_END)
 {
    int i;
    /* Nullify elements */
@@ -43,7 +44,6 @@ listText::listText(int xa, int ya, int xb, int yb, SDL_Surface* surface,
    y1 = ya;
    x2 = xb;
    y2 = yb;
-   windowSurface = surface;
 
    /* Alloc tabButtons pointers */
    maxButtons = ((yb-ya-2) / fnt.getHeight());
@@ -170,7 +170,7 @@ void listText::defineTabButton()
 /**************************************************************
  *                            draw                            *
  **************************************************************/
-void listText::draw(SDL_Surface* screen)
+void listText::draw()
 {
    //Actually nothing to do here
 }

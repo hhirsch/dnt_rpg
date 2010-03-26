@@ -68,7 +68,7 @@ class listText: public guiObject, public dntList
       void removeText(string text);
 
       /*! Draw the listText to the surface */
-      void draw(SDL_Surface* screen);
+      void draw();
 
       /*! Verify if some event is related to the listText
        * \param type -> Type of the occurred event
@@ -96,7 +96,6 @@ class listText: public guiObject, public dntList
       void freeElement(dntListElement* dnt);
 
    private:
-      SDL_Surface* windowSurface; /**< Pointer to the window surface */
       void* intList;              /**< Internal GUI Objects List */
       oneTabButton** listButtons; /**< Buttons of the List*/
       string selectedText;        /**< Text selected */

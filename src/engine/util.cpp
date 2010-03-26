@@ -44,7 +44,7 @@ void showLoading(SDL_Surface* img, GLuint* texturaTexto,
    fnt.defineFont(DNT_FONT_TIMES,12);
    fnt.defineFontAlign(DNT_FONT_ALIGN_CENTER);
    fnt.write(img,128,0,texto);
-   progress->draw(img);
+   progress->draw();
    glGenTextures(1,texturaTexto);
    setTextureRGBA(img,*texturaTexto);
 

@@ -32,9 +32,8 @@ using namespace std;
  *                            Constructor                            *
  *********************************************************************/
 rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list,
-               SDL_Surface* surface)
+               SDL_Surface* surface):guiObject(surface)
 {
-   wSurface = surface;
    lastUpdated = SDL_GetTicks();
    if(!list)
    {
@@ -143,14 +142,14 @@ void rolBar::draw(int i)
 /*********************************************************************
  *                                draw                               *
  *********************************************************************/
-void rolBar::draw(SDL_Surface* screen)
+void rolBar::draw()
 {
    /* Redraw the TextBox and Bar */
    redraw();
 
    /* Redraw Buttons */
-   up->draw(screen);
-   down->draw(screen);
+   up->draw();
+   down->draw();
 }
 
 /*********************************************************************
@@ -161,7 +160,7 @@ void rolBar::redraw()
    int actualInit = scrollText->getFirstLine();
 
    contorn->draw();
-   int end = scrollText->draw();
+   int end = scrollText->draw2();
 
    if(scrollText->getTotalLines() != 0)
    {

@@ -37,7 +37,7 @@ class tabObj: public dntListElement
 {
    public:
       /*! Constructor */
-      tabObj();
+      tabObj(SDL_Surface* surface);
       /*! Destructor */
       ~tabObj();
 
@@ -86,9 +86,8 @@ class tabBox: public guiObject, public dntList
        * \return -> pointer to th object guiList */
       guiList* insertOption(string title);
 
-      /*! Draw the tabBox
-       * \param screen -> pointer to the surface to draw to */
-      void draw(SDL_Surface* screen);
+      /*! Draw the tabBox */
+      void draw();
 
       /*! Verify changes to the active option
        * \param mouseX -> current mouseX position relative to window 
@@ -108,8 +107,6 @@ class tabBox: public guiObject, public dntList
       void freeElement(dntListElement* obj);
 
       tabObj* active;  /**< The active tabObj */
-      SDL_Surface* wSurface; /**< Pointer to the window surface */
-
 };
 
 #endif

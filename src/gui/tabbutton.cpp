@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -27,7 +27,8 @@
 /***********************************************************
  *                       Constructor                       *
  ***********************************************************/
-tabButton::tabButton(int x,int y,const char* arquivo):picture(x,y,0,0,arquivo)
+tabButton::tabButton(int x,int y,const char* arquivo, SDL_Surface* surface)
+          :picture(x,y,0,0, arquivo, surface)
 {
    numButtons = 0;
    pressed = false;
@@ -40,7 +41,8 @@ tabButton::tabButton(int x,int y,const char* arquivo):picture(x,y,0,0,arquivo)
 /***********************************************************
  *                       Constructor                       *
  ***********************************************************/
-tabButton::tabButton(int x, int y, int w, int h):picture(x,y,0,0, NULL)
+tabButton::tabButton(int x, int y, int w, int h, SDL_Surface* surface)
+          :picture(x,y,0,0, NULL, surface)
 {
    type = FARSO_OBJECT_TAB_BUTTON;
    numButtons = 0;
@@ -98,17 +100,17 @@ oneTabButton* tabButton::insertButton(int x1, int y1, int x2, int y2)
 /***********************************************************
  *                           draw                          *
  ***********************************************************/
-void tabButton::draw(SDL_Surface *screen)
+void tabButton::draw()
 { 
    /* Clear Below */
    color_Set(cor.colorWindow.R, cor.colorWindow.G, 
              cor.colorWindow.B, cor.colorWindow.A);
-   rectangle_Fill(screen, x1,y1, x2, y2);
+   rectangle_Fill(wSurface, x1,y1, x2, y2);
 
    /* Draw below Object, if exists */
    if(objectBelow)
    {
-      objectBelow->draw(screen);
+      objectBelow->draw();
    }
 
    /* Draw Picture (if one) */
@@ -119,7 +121,7 @@ void tabButton::draw(SDL_Surface *screen)
       Ret.y = y1;
       Ret.w = fig->w;
       Ret.h = fig->h;
-      SDL_BlitSurface(fig,NULL,screen,&Ret);
+      SDL_BlitSurface(fig,NULL,wSurface,&Ret);
    }
 
    /* Draw Button Contorns */
@@ -129,7 +131,7 @@ void tabButton::draw(SDL_Surface *screen)
       {
         color_Set(cor.colorCont[0].R, cor.colorCont[0].G,
                 cor.colorCont[0].B, cor.colorCont[0].A);
-        rectangle_2Colors(screen,x1+Buttons[current].x1,
+        rectangle_2Colors(wSurface,x1+Buttons[current].x1,
                                  y1+Buttons[current].y1,
                                  x1+Buttons[current].x2,
                                  y1+Buttons[current].y2,
@@ -140,7 +142,7 @@ void tabButton::draw(SDL_Surface *screen)
       {
 
          color_Set(240,120,0,255);
-         rectangle_Fill(screen, x1+Buttons[current].x1,
+         rectangle_Fill(wSurface, x1+Buttons[current].x1,
                y1+Buttons[current].y1,
                x1+Buttons[current].x2,
                y1+Buttons[current].y2);
@@ -160,8 +162,7 @@ void tabButton::draw(SDL_Surface *screen)
  *                      verifyPosition                     *
  ***********************************************************/
 guiObject* tabButton::verifyPosition(int mouseX, int mouseY, Uint8 Mbuttons, 
-                                   int Xjan, int Yjan, SDL_Surface *screen,
-                                   int &actionType)
+                                   int Xjan, int Yjan, int &actionType)
 {
    int i;
    bool atButton = false;
@@ -178,7 +179,7 @@ guiObject* tabButton::verifyPosition(int mouseX, int mouseY, Uint8 Mbuttons,
          {
             current = i;
             atButton = true;
-            draw(screen);
+            draw();
          }
 
          if(Mbuttons & SDL_BUTTON(1))
@@ -208,7 +209,7 @@ guiObject* tabButton::verifyPosition(int mouseX, int mouseY, Uint8 Mbuttons,
    if((!atButton) && (current != -1))
    {
       current = -1;
-      draw(screen);
+      draw();
    }
 
    return(NULL);

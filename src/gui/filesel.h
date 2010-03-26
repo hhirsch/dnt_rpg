@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -52,15 +52,16 @@ class fileSel: public guiObject
        *                is a saving one. 
        * \param dir -> directory to display
        * \param list -> pointer to the GUI objects list
+       * \param surface -> surface to draw to
        * \param nav -> if will show directories to navigate or not */
-      fileSel(int x, int y, bool load, string dir, void* list, bool nav=true);
+      fileSel(int x, int y, bool load, string dir, void* list, 
+            SDL_Surface* surface, bool nav=true);
 
       /*! Destructor */
       ~fileSel();
 
-      /*! Not used, only for compatibility with guiObject
-       * \param s -> ignored */
-      void draw(SDL_Surface* s);
+      /*! Not used, only for compatibility with guiObject */
+      void draw();
 
       /*! Verify if some event is related to the listText
        * \param type -> Type of the occurred event

@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -47,19 +47,16 @@ class textBar: public guiObject
       ~textBar();
       
       /*!
-       * Draw the text bar on a surface
-       * \param screen > suface to draw */
-      void draw(SDL_Surface *screen);
+       * Draw the text bar on a surface */
+      void draw();
 
       /*!
        * Make the write thing on text bar
        * \param mouseX -> mouse X coordinate
        * \param mouseY -> mouse Y coordinate
-       * \param screen -> surface to draw the text bar
        * \param Mbotao -> SDL mouse buttons state info
        * \param teclas -> SDL keyboard state info */
-      int doWrite(int mouseX,int mouseY, SDL_Surface *screen, 
-                Uint8 Mbotao, Uint8* teclas);
+      int doWrite(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclas);
 
       /*! Set the current text at the bar
        * \param txt -> new text to the bar */
@@ -74,9 +71,8 @@ class textBar: public guiObject
    private:
       /*! Put the text on the surface
        * \param pos -> current text position
-       * \param marca -> current mark position 
-       * \param screen -> surface to draw */
-      void putText(unsigned int pos, int marca, SDL_Surface *screen);
+       * \param marca -> current mark position */
+      void putText(unsigned int pos, int marca);
 
       bool cript;           /**< Pseudo-criptography? */
       int init,             /**< Actual first visible character on string */
@@ -84,7 +80,6 @@ class textBar: public guiObject
       unsigned int pos;     /**< Current cursor position */
       int lastWrite;        /**< Last time when write */
       string lastChar;      /**< Last Character writed */
-      SDL_Surface* wSurface;/**< Window Surface to draw to */
       farso_colors Colors;  /**< Internal Colors */   
 };
  

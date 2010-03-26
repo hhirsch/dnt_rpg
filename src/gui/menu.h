@@ -39,8 +39,9 @@ class menu: public guiList
    public:
       /*! Constructor
        * \param xa -> x coordinate
-       * \param ya -> y coordinate */
-      menu(int xa, int ya);
+       * \param ya -> y coordinate
+       * \param surface -> surface where the menu is */
+      menu(int xa, int ya, SDL_Surface* surface);
 
       /*! Destructor */
       ~menu();
@@ -67,12 +68,11 @@ class menu: public guiList
        * \param mouseY -> Y mouse coordinate
        * \param Mbotao -> mouse button state
        * \param teclado -> keyboard state
-       * \param screen -> superface where the menu is
        * \param pronto -> it will be 1 when the execution ends 
        * \param Xjan -> x coordinate of the window
        * \param Yjan -> y coordinate of the window */
       int run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
-              SDL_Surface *screen, int* pronto, int Xjan, int Yjan);
+              int* pronto, int Xjan, int Yjan);
 
       /*! Get a item
        * \param i -> position of the item on menu
@@ -97,9 +97,8 @@ class menu: public guiList
 
    protected:
       /*! Draw the Menu
-       * \param pos -> menu position selected 
-       * \param screen -> surface to draw */
-      void draw(int pos, SDL_Surface *screen);
+       * \param pos -> menu position selected  */
+      void draw(int pos);
 
       int x,                   /**< Menu X Coordinate */
           y;                   /**< Menu Y Coordinate */   
@@ -108,6 +107,7 @@ class menu: public guiList
       int numPictures;         /**< Number of pictures at the menu */
       int actualItem;          /**< Actual Selected item */
       bool pressed;            /**< Control to take the release button press */
+      SDL_Surface* wSurface;   /**< Surface where the menu is */
 
 };
 

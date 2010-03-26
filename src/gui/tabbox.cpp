@@ -34,9 +34,9 @@ using namespace std;
 /***********************************************************************
  *                              Constructor                            *
  ***********************************************************************/
-tabObj::tabObj()
+tabObj::tabObj(SDL_Surface* surface)
 {
-   list = new guiList();
+   list = new guiList(surface);
    title = "";
 }
 
@@ -58,6 +58,7 @@ tabObj::~tabObj()
  *                              Constructor                            *
  ***********************************************************************/
 tabBox::tabBox(int xa, int ya, int xb, int yb, SDL_Surface* screen)
+       :guiObject(screen)
 {
    /* Define guiObject type */
    type = FARSO_OBJECT_TAB_BOX;
@@ -66,7 +67,6 @@ tabBox::tabBox(int xa, int ya, int xb, int yb, SDL_Surface* screen)
    y1 = ya;
    x2 = xb;
    y2 = yb;
-   wSurface = screen;
 
    /* And nullify the list! */
    active = NULL;
@@ -182,9 +182,8 @@ guiList* tabBox::insertOption(string title)
    /* Only insert if not found! */
    if(getList(title) == NULL)
    {
-      obj = new tabObj;
+      obj = new tabObj(wSurface);
       obj->title = title;
-      obj->list->setSurface(wSurface);
 
       /* Insert it */
       insert(obj);
@@ -201,7 +200,7 @@ guiList* tabBox::insertOption(string title)
 /***********************************************************************
  *                                 draw                                *
  ***********************************************************************/
-void tabBox::draw(SDL_Surface* screen)
+void tabBox::draw()
 {
    if(total == 0)
    {
@@ -224,10 +223,10 @@ void tabBox::draw(SDL_Surface* screen)
    /* Draw Limitators */
    color_Set(colors.colorButton.R, colors.colorButton.G,
              colors.colorButton.B, colors.colorButton.A);
-   rectangle_Fill(screen, x1, y1, x2, y2);
+   rectangle_Fill(wSurface, x1, y1, x2, y2);
    color_Set(colors.colorCont[0].R, colors.colorCont[0].G,
              colors.colorCont[0].B, colors.colorCont[0].A);
-   rectangle_2Colors(screen, x1, y1+18, x2, y2,
+   rectangle_2Colors(wSurface, x1, y1+18, x2, y2,
                      colors.colorCont[1].R, colors.colorCont[1].G,
                      colors.colorCont[1].B, colors.colorCont[1].A);
 
@@ -251,23 +250,23 @@ void tabBox::draw(SDL_Surface* screen)
          /* Draw some contorn */
          color_Set(colors.colorCont[0].R, colors.colorCont[0].G,
                    colors.colorCont[0].B, colors.colorCont[0].A);
-         line_Draw(screen, posX, y1, posX, y1+18);
-         line_Draw(screen, posX, y1, endPos, y1);
+         line_Draw(wSurface, posX, y1, posX, y1+18);
+         line_Draw(wSurface, posX, y1, endPos, y1);
          color_Set(colors.colorCont[1].R, colors.colorCont[1].G,
                    colors.colorCont[1].B, colors.colorCont[1].A);
-         line_Draw(screen, endPos, y1, endPos, y1+18);
+         line_Draw(wSurface, endPos, y1, endPos, y1+18);
 
          /* Without Line separator bellow */
          color_Set(colors.colorButton.R, colors.colorButton.G,
                    colors.colorButton.B, colors.colorButton.A);
-         rectangle_Fill(screen, posX+1, y1+17, endPos-1, y1+19);
+         rectangle_Fill(wSurface, posX+1, y1+17, endPos-1, y1+19);
       }
       else
       {
          /* Draw some pressed contorn */
          color_Set(colors.colorCont[1].R, colors.colorCont[1].G,
                    colors.colorCont[1].B, colors.colorCont[1].A);
-         rectangle_2Colors(screen, posX, y1, endPos, y1+17,
+         rectangle_2Colors(wSurface, posX, y1, endPos, y1+17,
                            colors.colorCont[0].R, colors.colorCont[0].G,
                            colors.colorCont[0].B, colors.colorCont[0].A);
       }
@@ -276,7 +275,7 @@ void tabBox::draw(SDL_Surface* screen)
       /* Draw the title text */
       color_Set(colors.colorText.R, colors.colorText.G,
                 colors.colorText.B, colors.colorText.A);
-      fnt.write(screen, posX+2, y1+2, obj->title, posX, y1, endPos, y1+17);
+      fnt.write(wSurface, posX+2, y1+2, obj->title, posX, y1, endPos, y1+17);
 
       /* Next! */
       posX += incX;
@@ -286,7 +285,7 @@ void tabBox::draw(SDL_Surface* screen)
    /* Draw all active objects */
    if(active)
    {
-      active->list->draw(screen);
+      active->list->draw();
    }
 }
 
@@ -311,7 +310,7 @@ bool tabBox::verifyChanges(int mouseX, int mouseY)
       if( (obj != NULL) && (obj != active))
       {
          active = obj;
-         draw(wSurface);
+         draw();
          setChanged();
          return(true);
       }

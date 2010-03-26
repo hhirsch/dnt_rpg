@@ -32,7 +32,8 @@ menu::~menu()
 /*********************************************************
  *                      Constructor                      *
  *********************************************************/
-menu::menu(int xa, int ya): guiList(DNT_LIST_TYPE_ADD_AT_END)
+menu::menu(int xa, int ya, SDL_Surface* surface)
+     :guiList(surface, DNT_LIST_TYPE_ADD_AT_END)
 {
    x = xa;
    y = ya;
@@ -40,6 +41,7 @@ menu::menu(int xa, int ya): guiList(DNT_LIST_TYPE_ADD_AT_END)
    maxCharac = 0;
    numPictures = 0;
    pressed = false;
+   wSurface = surface;
 }
 
 /*********************************************************
@@ -140,7 +142,7 @@ void menu::setPosition(int xa, int ya)
 /*********************************************************
  *                          draw                         *
  *********************************************************/
-void menu::draw(int pos, SDL_Surface *screen)
+void menu::draw(int pos)
 {
    dntFont fnt;
    fnt.defineFont(DNT_FONT_ARIAL, 10);
@@ -155,24 +157,24 @@ void menu::draw(int pos, SDL_Surface *screen)
                                          y1 + 5; /* bizarre from DOS version */
    
    /* Verify Sides */
-   if (x2 > screen->w-1)
+   if (x2 > wSurface->w-1)
    {
-      x1 = (screen->w-1) - (x2 - x1);
-      x2 = screen->w-1;
+      x1 = (wSurface->w-1) - (x2 - x1);
+      x2 = wSurface->w-1;
    }
-   if (y2 > screen->h-1)
+   if (y2 > wSurface->h-1)
    {
-      y1 = (screen->h-1) - (y2 - y1);
-      y2 = screen->h-1;
+      y1 = (wSurface->h-1) - (y2 - y1);
+      y2 = wSurface->h-1;
    }
 
    /* Draw the Menu */
    color_Set(Colors.colorMenu.R, Colors.colorMenu.G,
              Colors.colorMenu.B, Colors.colorMenu.A);
-   rectangle_Fill(screen,x1+1,y1+1,x2-1,y2-1);
+   rectangle_Fill(wSurface,x1+1,y1+1,x2-1,y2-1);
    color_Set(Colors.colorCont[2].R, Colors.colorCont[2].G,
              Colors.colorCont[2].B, Colors.colorCont[2].A);
-   rectangle_Oval(screen,x1,y1,x2,y2,Colors.colorCont[1].R,
+   rectangle_Oval(wSurface,x1,y1,x2,y2,Colors.colorCont[1].R,
                   Colors.colorCont[1].G, Colors.colorCont[1].B,
                   Colors.colorCont[1].A);
    
@@ -189,7 +191,7 @@ void menu::draw(int pos, SDL_Surface *screen)
       {
          picture* pic = (picture*)item;
          pic->setCoordinate(xa, ya+med+1, xa+10, ya+10+med+1);
-         pic->draw(screen);
+         pic->draw();
          /* The next text will be translated right */
          xa = x1+15;
       }
@@ -206,16 +208,16 @@ void menu::draw(int pos, SDL_Surface *screen)
          {
             if (item->isAvailable()) 
             {
-               fnt.write(screen,xa,ya+med,item->getText());
+               fnt.write(wSurface,xa,ya+med,item->getText());
             }
             else
             {
                color_Set(Colors.colorCont[2].R, Colors.colorCont[2].G,
                      Colors.colorCont[2].B, Colors.colorCont[2].A);
-               fnt.write(screen,xa+1,ya+med+1,item->getText());
+               fnt.write(wSurface,xa+1,ya+med+1,item->getText());
                color_Set(Colors.colorCont[1].R, Colors.colorCont[1].G,
                      Colors.colorCont[1].B, Colors.colorCont[1].A);
-               fnt.write(screen,xa,ya+med,item->getText());
+               fnt.write(wSurface,xa,ya+med,item->getText());
             }
          } 
 
@@ -224,7 +226,7 @@ void menu::draw(int pos, SDL_Surface *screen)
          {
             color_Set(Colors.colorCont[1].R, Colors.colorCont[1].G,
                   Colors.colorCont[1].B, Colors.colorCont[1].A);
-            rectangle_2Colors(screen,xa-2,ya+6,x2-2,ya+7,
+            rectangle_2Colors(wSurface,xa-2,ya+6,x2-2,ya+7,
                   Colors.colorCont[0].R,
                   Colors.colorCont[0].G,Colors.colorCont[0].B,
                   Colors.colorCont[0].A);
@@ -262,13 +264,13 @@ int menu::getMaxCharac()
  *                          run                          *
  *********************************************************/
 int menu::run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
-              SDL_Surface *screen, int *pronto, int Xjan, int Yjan)
+              int *pronto, int Xjan, int Yjan)
 {
    dntFont fnt;
    fnt.defineFont(DNT_FONT_ARIAL, 10);
 
    /* Draws */
-   draw(0,screen);
+   draw(0);
    int altura = ((total-numPictures)*MENU_ITEM_HEIGHT)+6;
    int largura = (maxCharac)*(fnt.getIncCP()+1)+5;
 
@@ -324,7 +326,7 @@ int menu::run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
             Colors.colorCont[1].G,
             Colors.colorCont[1].B,
             Colors.colorCont[1].A);
-      rectangle_Oval(screen,x+2,(actualItem-1)*MENU_ITEM_HEIGHT+y+4,
+      rectangle_Oval(wSurface,x+2,(actualItem-1)*MENU_ITEM_HEIGHT+y+4,
             x+largura-2,(actualItem)*MENU_ITEM_HEIGHT+y+4,
             Colors.colorCont[2].R, Colors.colorCont[2].G,
             Colors.colorCont[2].B, Colors.colorCont[2].A);

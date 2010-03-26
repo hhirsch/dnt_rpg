@@ -31,12 +31,12 @@ class cxSel: public guiObject
    public:
       /*! Constructor
        * \param x -> x position
-       * \param y -> y position */
-      cxSel(int x, int y);
+       * \param y -> y position
+       * \param surface -> SDL_Surface where cxSel is */
+      cxSel(int x, int y, SDL_Surface* surface);
 
-      /*! Draws the Selected Box
-       * \param screen -> surface */
-      void draw(SDL_Surface *screen);
+      /*! Draws the Selected Box */
+      void draw();
 
       /*! Verify if the cxSel is selected 
        * \return true if the cxsel is selected */

@@ -44,8 +44,9 @@ class guiList: public dntList
 {
    public:
       /*! Constructor
+       * \param surface -> pointer to the surface where list is
        * \param t -> dntList type */
-      guiList(int t=DNT_LIST_TYPE_ADD_AT_BEGIN);
+      guiList(SDL_Surface* surface, int t=DNT_LIST_TYPE_ADD_AT_BEGIN);
       /*! Destructor */
       ~guiList();
 
@@ -53,9 +54,8 @@ class guiList: public dntList
        * \return -> true if something changed, false if not */
       bool changed();
 
-      /*! Draw All objects at the list
-       * \param surface -> SDL_Surface to draw to */
-      void draw(SDL_Surface* surface);
+      /*! Draw All objects at the list */
+      void draw();
 
       /*! Insert a Button on List
        * \param xa -> x1 coordinate
@@ -191,9 +191,6 @@ class guiList: public dntList
 
       /*! Remove Internal Menu, if exists one. */
       void removeMenu();
-
-      /*! Set the window Surface to use */
-      void setSurface(SDL_Surface* surface){wSurface=surface;};
 
    protected:
 

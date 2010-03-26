@@ -49,7 +49,7 @@ character::character(featsList* ft)
    thingType = THING_TYPE_CHARACTER;
 
    /* Create the Health Bar */
-   lifeBar = new healthBar(5,64,59,74);
+   lifeBar = new healthBar(5,64,59,74,NULL);
 
    for(i=0; i<MAX_DISTINCT_CLASSES; i++)
    {
@@ -287,6 +287,9 @@ void character::definePortrait(string portraitFile)
 
    /* Define fileName */
    talkPortrait = portraitFile;
+
+   /* Define surface to the health bar */
+   lifeBar->setSurface(portraitImage);
 }
 
 /*********************************************************************
@@ -304,7 +307,6 @@ void character::updateHealthBar()
 {
   lifeBar->defineMaxHealth(maxLifePoints);
   lifeBar->defineActualHealth(lifePoints);
-  lifeBar->draw(portraitImage);
   setTextureRGBA(portraitImage, portraitTexture);
 }
 

@@ -28,12 +28,12 @@
 /**************************************************************
  *                         Constructor                        *
  **************************************************************/
-guiList::guiList(int t):dntList(t)
+guiList::guiList(SDL_Surface* surface, int t):dntList(t)
 {
    total = 0;
    first = NULL;
    intMenu = NULL;
-   wSurface = NULL;
+   wSurface = surface;
    tab = NULL;
 }
 
@@ -91,7 +91,7 @@ bool guiList::changed()
 /**************************************************************
  *                            draw                            *
  **************************************************************/
-void guiList::draw(SDL_Surface* surface)
+void guiList::draw()
 {
    guiObject *obj = (guiObject*)first;
    int aux;
@@ -102,31 +102,31 @@ void guiList::draw(SDL_Surface* surface)
          case FARSO_OBJECT_BUTTON:
          {
               button *b = (button*) obj;   
-              b->draw(surface);
+              b->draw();
               break;
          }
          case FARSO_OBJECT_TEXT_BAR:
          {
               textBar *bart = (textBar*) obj; 
-              bart->draw(surface);
+              bart->draw();
               break;
          }
          case FARSO_OBJECT_SEL_BOX:
          {
               cxSel *cx = (cxSel*) obj;
-              cx->draw(surface);
+              cx->draw();
               break;
          }
          case FARSO_OBJECT_SEL_TEXT:
          {
               selText *st = (selText*) obj;
-              st->draw(surface);
+              st->draw();
               break;
          }
          case FARSO_OBJECT_PICTURE:
          {
               picture* fig = (picture*) obj;
-              fig->draw(surface);
+              fig->draw();
               break;
          }
          case FARSO_OBJECT_TEXT_BOX:
@@ -139,13 +139,13 @@ void guiList::draw(SDL_Surface* surface)
          {
               tabButton *bt = (tabButton*) obj; 
               bt->setCurrent(-1);
-              bt->draw(surface);
+              bt->draw();
               break;
          }
          case FARSO_OBJECT_HEALTH_BAR:
          {
               healthBar* hb = (healthBar*) obj;
-              hb->draw(surface);
+              hb->draw();
               break;
          }
          default:break;
@@ -157,7 +157,7 @@ void guiList::draw(SDL_Surface* surface)
    /* TabBox Draw */
    if(tab != NULL)
    {
-      tab->draw(surface);
+      tab->draw();
    }
 }
 
@@ -253,7 +253,7 @@ button* guiList::insertButton(int xa,int ya,int xb,int yb,
                            string text, bool oval)
 {
    button* novo;
-   novo = new button(xa,ya,xb,yb, text, oval);
+   novo = new button(xa,ya,xb,yb, text, oval, wSurface);
    insert(novo);
    return(novo);
 }
@@ -264,7 +264,7 @@ button* guiList::insertButton(int xa,int ya,int xb,int yb,
 cxSel* guiList::insertCxSel(int xa,int ya, bool selected)
 {
    cxSel* novo;
-   novo = new cxSel(xa, ya);
+   novo = new cxSel(xa, ya, wSurface);
    novo->setSelection(selected);
    insert(novo);
    return(novo);
@@ -276,7 +276,7 @@ cxSel* guiList::insertCxSel(int xa,int ya, bool selected)
 picture* guiList::insertPicture(int x,int y,int w,int h,const char* arquivo)
 {
    picture* novo;
-   novo = new picture(x,y,w,h,arquivo);
+   novo = new picture(x,y,w,h,arquivo,wSurface);
    insert(novo);
    return(novo);
 } 
@@ -290,11 +290,11 @@ tabButton* guiList::insertTabButton(int x,int y,int w,int h,const char* arquivo)
 
    if(arquivo)
    {
-      novo = new tabButton(x,y,arquivo);
+      novo = new tabButton(x,y,arquivo,wSurface);
    }
    else
    {
-      novo = new tabButton(x,y,w,h);
+      novo = new tabButton(x,y,w,h, wSurface);
    }
    insert(novo);
    return(novo);
@@ -367,7 +367,7 @@ listText* guiList::insertListText(int xa,int ya,int xb,int yb)
 fileSel* guiList::insertFileSel(int xa, int ya, bool load, 
                                 string dir, bool nav)
 {
-   fileSel* n = new fileSel(xa, ya, load, dir, this, nav);
+   fileSel* n = new fileSel(xa, ya, load, dir, this, wSurface, nav);
    insert(n);
    return(n);
 }
@@ -377,7 +377,7 @@ fileSel* guiList::insertFileSel(int xa, int ya, bool load,
  **************************************************************/
 healthBar* guiList::insertHealthBar(int xa, int ya, int xb, int yb, int max)
 {
-   healthBar* n = new healthBar(xa, ya, xb, yb);
+   healthBar* n = new healthBar(xa, ya, xb, yb, wSurface);
    insert(n);
    n->defineMaxHealth(max);
    return(n);
@@ -429,7 +429,7 @@ guiObject* guiList::addMenu()
    {
       removeMenu();
    }
-   intMenu = (guiObject*)new menu(0,0);
+   intMenu = (guiObject*)new menu(0,0, wSurface);
    return(intMenu);
 }
 

@@ -31,7 +31,6 @@ using namespace std;
 windowList::windowList()
 {
    activeWindow = NULL;
-   intMenu = NULL;
 }
 
 /*********************************************************************
@@ -85,44 +84,11 @@ void windowList::removeWindow(window *jan)
    remove(jan);
 }
 
-/**************************************************************
- *                            addMenu                         *
- **************************************************************/
-guiObject* windowList::addMenu()
-{
-   if(intMenu)
-   {
-      removeMenu();
-   }
-   intMenu = (guiObject*)new menu(0,0);
-   return(intMenu);
-}
-
-/**************************************************************
- *                           getMenu                          *
- **************************************************************/
-guiObject* windowList::getMenu()
-{
-   return(intMenu);
-}
-
-/**************************************************************
- *                          removeMenu                        *
- **************************************************************/
-void windowList::removeMenu()
-{
-   if(intMenu)
-   {
-      menu* men = (menu*)intMenu;
-      delete(men);
-   }
-   intMenu = NULL;
-}
-
 /*********************************************************************
  *                             Constructor                           *
  *********************************************************************/
 window::window(int xa, int ya, int xb, int yb, string title, void* list)
+       :guiObject(NULL)
 {
    dntFont fnt;
    dirs dir;
@@ -173,12 +139,11 @@ window::window(int xa, int ya, int xb, int yb, string title, void* list)
    propY = (float)(yb-ya) / (float)smallestPowerOfTwo(yb-ya);
 
    /* Create Objects List */
-   objects = new guiList;
-   objects->setSurface(surface);
+   objects = new guiList(surface);
 
    /* Create Menu Button */
    menuButton = objects->insertButton(3,3,13,12,"-",0);
-   menuButton->men = new menu(0,0);
+   menuButton->men = new menu(0,0,surface);
    menu* men = (menu*) menuButton->men;
    men->insertItem(gettext("Maximize"), 
                    dir.getRealFile("icons/maximize.png") ,0);
@@ -214,7 +179,7 @@ window::~window()
 /*********************************************************************
  *                                draw                               *
  *********************************************************************/
-void window::draw(SDL_Surface* screen)
+void window::draw()
 {
    draw(-1,-1, true);
 }
@@ -262,7 +227,7 @@ void window::draw(int mouseX, int mouseY, bool drawBar)
    }
 
    /* Objects Draw */
-   objects->draw(surface);
+   objects->draw();
    
    setChanged();
 }

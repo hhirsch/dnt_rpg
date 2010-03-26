@@ -59,9 +59,8 @@ class window: public guiObject
        * \param drawBar -> if will draw the bar or not */
       void draw(int mouseX, int mouseY, bool drawBar=true);
 
-      /*! Draw, from guiObject
-       * \param screen -> ignored. */
-      void draw(SDL_Surface* screen);
+      /*! Draw, from guiObject */
+      void draw();
 
       /*! Activate the Window */
       void activate();
@@ -197,26 +196,13 @@ class windowList: public dntList
        * \param jan -> pointer to the new active window */
       void setActiveWindow(window* jan){activeWindow = jan;};
 
-      /*! Add a internal Menu to the list
-       * \return menu Inserted */
-      guiObject* addMenu();
-
-      /*! Get the Internal Menu of The List
-       * \return internal menu */
-      guiObject* getMenu();
-
-      /*! Remove Internal Menu, if exists one. */
-      void removeMenu();
-
    protected:
 
       /*! Delete a window pointer
        * \param obj -> pointer to the window */
       void freeElement(dntListElement* obj);
 
-
       window* activeWindow;   /**< The Active Window */
-      guiObject* intMenu;     /**< The internal Menu of the List */
 }; 
 
 

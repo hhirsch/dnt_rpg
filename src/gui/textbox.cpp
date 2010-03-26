@@ -24,7 +24,8 @@
  *                       Constructor                   *
  *******************************************************/
 textBox::textBox(int xa, int ya, int xb, int yb, int frameType,
-                 SDL_Surface *screen): dntList(DNT_LIST_TYPE_ADD_AT_END)
+                 SDL_Surface *screen): 
+                 guiObject(screen),dntList(DNT_LIST_TYPE_ADD_AT_END)
 {
    wSurface = screen;
    type = FARSO_OBJECT_TEXT_BOX;
@@ -176,9 +177,9 @@ int textBox::lastDrawableLine()
 /*******************************************************
  *                          draw                       *
  *******************************************************/
-void textBox::draw(SDL_Surface* screen)
+void textBox::draw()
 {
-   draw();
+   draw2();
 }
 
 /*******************************************************
@@ -227,7 +228,7 @@ void textBox::draw(int i)
 /*******************************************************
  *                          draw                       *
  *******************************************************/
-int textBox::draw()
+int textBox::draw2()
 {
    int i;
    textLine* line;

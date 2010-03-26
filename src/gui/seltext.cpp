@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -28,14 +28,13 @@ using namespace std;
  ***************************************************************************/
 selText::selText(int xa,int ya,int xb,int yb, string text0, string text1,
                  string text2, string text3, string text4,
-                 SDL_Surface* screen)
+                 SDL_Surface* screen):guiObject(screen)
 {
    type = FARSO_OBJECT_SEL_TEXT;
    x1 = xa;
    y1 = ya;
    x2 = xb;
    y2 = yb;
-   windowScreen = screen;
    
    optText[0] = text0;
    optInfo[0] = 0;
@@ -87,7 +86,7 @@ void selText::getCoordinate(int& xa,int& ya,int& xb,int& yb)
 /***************************************************************************
  *                                draw                                     *
  ***************************************************************************/
-void selText::draw(SDL_Surface *screen)
+void selText::draw()
 {
    int ya = y1+3;
    int aux;
@@ -101,10 +100,10 @@ void selText::draw(SDL_Surface *screen)
    /* Clear the current */
    color_Set(Cores.colorWindow.R, Cores.colorWindow.G, 
              Cores.colorWindow.B, Cores.colorWindow.A);
-   rectangle_Fill(screen,x1,y1,x2,y2);
+   rectangle_Fill(wSurface,x1,y1,x2,y2);
    color_Set(Cores.colorCont[1].R, Cores.colorCont[1].G,
              Cores.colorCont[1].B, Cores.colorCont[1].A);
-   rectangle_2Colors(screen,x1,y1,x2,y2, Cores.colorCont[0].R,
+   rectangle_2Colors(wSurface,x1,y1,x2,y2, Cores.colorCont[0].R,
                      Cores.colorCont[0].G, Cores.colorCont[0].B,
                      Cores.colorCont[0].A);
 
@@ -122,7 +121,8 @@ void selText::draw(SDL_Surface *screen)
             color_Set(Cores.colorSelText.R, Cores.colorSelText.G,
                       Cores.colorSelText.B, Cores.colorSelText.A);
          }
-         ya=fnt.write(screen,4+x1,ya,optText[aux].c_str(),x1+1,y1+1,x2-1,y2-1);
+         ya=fnt.write(wSurface,4+x1,ya,
+               optText[aux].c_str(),x1+1,y1+1,x2-1,y2-1);
      }
      y[aux] = ya;
      ya += height;
@@ -132,10 +132,10 @@ void selText::draw(SDL_Surface *screen)
 /***************************************************************************
  *                           writeSelected                                 *
  ***************************************************************************/
-void selText::writeSelected(int selectedItem, SDL_Surface *screen)
+void selText::writeSelected(int selectedItem)
 {
    selec = selectedItem;
-   draw(screen);
+   draw();
 }
 
 /***************************************************************************
@@ -173,7 +173,7 @@ int selText::getSelectedItem(int ya )
 /***************************************************************************
  *                                 treat                                   *
  ***************************************************************************/
-int selText::treat(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen)
+int selText::treat(int xa,int ya, Uint8 Mbotao)
 {
    int lastSelec = selec;
    selec = -1;
@@ -183,7 +183,7 @@ int selText::treat(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen)
       /* Redraw, if needed */
       if(lastSelec != -1)
       {
-         draw(screen);
+         draw();
          setChanged();
       }
       return(-1);
@@ -203,7 +203,7 @@ int selText::treat(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen)
    /* Redraw, if needed */
    if(lastSelec != selec)
    {
-      draw(screen);
+      draw();
       setChanged();
    }
 
@@ -243,7 +243,7 @@ void selText::setText(int opt, string txt, int info)
       optText[opt] = txt;
       optInfo[opt] = info;
 
-      draw(windowScreen);
+      draw();
       setChanged();
    }
 }
@@ -258,7 +258,7 @@ void selText::clearText()
    {
       optText[i] = "";
    }
-   draw(windowScreen);
+   draw();
    setChanged();
 }
 

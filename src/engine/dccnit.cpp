@@ -664,33 +664,30 @@ int engine::loadMap(string arqMapa, bool loadingGame)
    if(!fig)
    {
       cerr << "Faled to load 'loading texture'!" << endl;
-      /* create default size progress bar */
-      progress = new healthBar(2,20,253,30);
-      progress->defineMaxHealth(10);
-      progress->defineActualHealth(0);
    }
    else
    {
       /* Set halfs */
       midW = fig->w / 2;
       midH = fig->h / 2;
-      
-      /* create the progress bar */
-      progress = new healthBar(2,20,fig->w-3,30);
-      progress->defineMaxHealth(11);
-      progress->defineActualHealth(0);
-      
+            
       /* Load the texture to opengl */
       setTexture(fig,texturaCarga);
       SDL_FreeSurface(fig);
-   }
-
+   }  
+   
    /* Create the text surface/texture */
    img = SDL_CreateRGBSurface(SDL_SWSURFACE, 2*midW,32,32,
                               0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
    color_Set(0,0,0,255);
    rectangle_Fill(img,0,0,255,31);
-  
+
+   /* create the progress bar */
+   progress = new healthBar(2,20,(midW*2)-3,30, img);
+   progress->defineMaxHealth(11);
+   progress->defineActualHealth(0);
+
+
 
    /* Fadein the loading image effect */
    fadeInTexture(texturaCarga, centerX-midW, centerY-midH, 

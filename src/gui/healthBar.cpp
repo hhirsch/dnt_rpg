@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -24,7 +24,8 @@
 /****************************************************************
  *                        Constructor                           *
  ****************************************************************/
-healthBar::healthBar(int x1, int y1, int x2, int y2)
+healthBar::healthBar(int x1, int y1, int x2, int y2, SDL_Surface* surface)
+          :guiObject(surface)
 {
    this->x1 = x1;
    this->y1 = y1;
@@ -56,26 +57,30 @@ void healthBar::defineMaxHealth(int health)
 void healthBar::defineActualHealth(int health)
 {
    actualHealth = health;
+   draw();
 }
 
 /****************************************************************
  *                            draw                              *
  ****************************************************************/
-void healthBar::draw(SDL_Surface* surface)
+void healthBar::draw()
 {
-   color_Set(223,223,223,255);
-   rectangle_Fill(surface, x1,y1,x2,y2);
-   color_Set(153,51,51,255);
-
-   /* Defines the percentual colored of the bar */
-   double perc = actualHealth / (double) maxHealth;
-   if(perc <= 0)
+   if(wSurface != NULL)
    {
-      /* Don't draw the red bar when no health! */
-      return;
+      color_Set(223,223,223,255);
+      rectangle_Fill(wSurface, x1,y1,x2,y2);
+      color_Set(153,51,51,255);
+
+      /* Defines the percentual colored of the bar */
+      double perc = actualHealth / (double) maxHealth;
+      if(perc <= 0)
+      {
+         /* Don't draw the red bar when no health! */
+         return;
+      }
+      int mx2 = (int) (perc * (x2-x1-4)) + x1+2;
+      rectangle_Fill(wSurface, x1+2, y1+2, mx2, y2-2);
+      setChanged();
    }
-   int mx2 = (int) (perc * (x2-x1-4)) + x1+2;
-   rectangle_Fill(surface, x1+2, y1+2, mx2, y2-2);
-   setChanged();
 }
 

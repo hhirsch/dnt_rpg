@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -46,7 +46,8 @@ using namespace std;
 /***********************************************************************
  *                             Constructor                             *
  ***********************************************************************/
-fileSel::fileSel(int x, int y, bool load, string dir, void* list, bool nav)
+fileSel::fileSel(int x, int y, bool load, string dir, void* list, 
+      SDL_Surface* surface,  bool nav):guiObject(surface)
 {
    x1 = x;
    x2 = x+250;
@@ -102,7 +103,7 @@ fileSel::~fileSel()
 /***********************************************************************
  *                                draw                                 *
  ***********************************************************************/
-void fileSel::draw(SDL_Surface* s)
+void fileSel::draw()
 {
 }
 

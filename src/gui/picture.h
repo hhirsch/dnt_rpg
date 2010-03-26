@@ -36,12 +36,13 @@ class picture: public guiObject
        * \param y -> y initial coordinate
        * \param w -> width of the picture
        * \param h -> height of the picture
+       * \param surface -> surface to draw to
        * \param arquivo -> fileName to opwn or NULL to not open a file */
-      picture(int x,int y,int w,int h,const char* arquivo);
+      picture(int x,int y,int w,int h,const char* arquivo, 
+            SDL_Surface* surface);
 
-      /*! Draw the Picture on the surface
-       * \param screen  -> surface to draw the picture */
-      void draw(SDL_Surface *screen);
+      /*! Draw the Picture on the surface */
+      void draw();
 
       /*! Set the picture to the surface
        * \param newPicture -> surface to set the picture */

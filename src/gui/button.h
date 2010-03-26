@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -41,27 +41,25 @@ class button: public guiObject
        * \param yb -> y2 coordinate 
        * \param txt -> button text
        * \param isOval -> if the button is oval or rectangular */
-      button(int xa,int ya,int xb,int yb, string txt, bool isOval );
+      button(int xa,int ya,int xb,int yb, string txt, bool isOval, 
+            SDL_Surface* surface);
 
       /*! Destructor */
       ~button();
 
-      /*!Draws the Button on Surface
-       * \param screen -> surface where will draw the button */
-      void draw(SDL_Surface* screen );
+      /*! Draw the Button on wSurface */
+      void draw();
 
       /*! Do the press proccess of the button.
        * \param Xjan -> window x1 coordinate 
        * \param Yjan -> window y1 coordinate
        * \param x -> mouseX coordinate
        * \param y -> mouseY coordinate
-       * \param screen -> surface where the button is.
        * \param pronto -> will be != 0 when end the proccess
        * \param screen -> surface where draws the button
        * \param Mbotao -> mouse button state
        * \return true when pressed, false if not pressed. */
-       bool press(int Xjan, int Yjan, int x, int y, Uint8 Mbotao, int* pronto,
-                  SDL_Surface* screen);
+       bool press(int Xjan, int Yjan, int x, int y, Uint8 Mbotao, int* pronto);
 
 
       /*! Define the font to use for the button
