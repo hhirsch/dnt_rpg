@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -130,7 +130,7 @@ int getXP(character* actualActor, float targetCR)
       {
          /* Get directly from table */
          int tablePos = (int)targetCR-1;
-         return(xpTable[tablePos][level-1]);
+         return(xpTable[level-1][tablePos]);
       }
       else if(targetCR > 20)
       {

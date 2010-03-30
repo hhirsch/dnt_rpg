@@ -8,6 +8,7 @@
 - Lowered delay times for battles;
 - Applying skill and attribute modifier to damage and heal points;
 - Fixed a possible hang up when character dies;
+- Fixed XP ammount received when killing (was inverted);
 
 ================================================
 |                Version 0.5                   |
