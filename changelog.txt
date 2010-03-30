@@ -5,6 +5,7 @@
 - UTF-8 support for languages;
 - Russian translation added;
 - Optimized text render code;
+- Lowered delay times for battles;
 
 ================================================
 |                Version 0.5                   |

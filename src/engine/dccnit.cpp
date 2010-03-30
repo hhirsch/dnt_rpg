@@ -1895,7 +1895,7 @@ void engine::endTurn()
 {
    if( (engineMode == ENGINE_MODE_TURN_BATTLE) &&
        (fightStatus == FIGHT_PC_TURN)  && 
-       ((SDL_GetTicks() - lastTurnTime) > 200) )
+       ((SDL_GetTicks() - lastTurnTime) > ENGINE_WAIT_TURN_DELAY) )
    {
       fightStatus = FIGHT_CONTINUE;
    }

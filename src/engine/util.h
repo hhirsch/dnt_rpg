@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -49,6 +49,8 @@
 #define ENGINE_RUN_MULTIPLIER    2.2f /**< How run is faster than  walk */
 
 #define ENGINE_WAIT_DIE_DELAY  4000 /**< Value to delay for end die animation */
+
+#define ENGINE_WAIT_TURN_DELAY  100 /**< Value to delay between turns */
 
 #define ENGINE_LOADING_IMAGES  6 /**< Total available loading images */
 

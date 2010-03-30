@@ -43,7 +43,7 @@
 #define FIGHT_NPC_TURN 2
 #define FIGHT_CONTINUE 3
 
-#define FIGHT_ANIMATION_DELAY  2000  /**< Delay for animations */
+#define FIGHT_ANIMATION_DELAY  1000  /**< Delay for animations */
 
 /*! The fight System Implementation */
 class fightSystem
