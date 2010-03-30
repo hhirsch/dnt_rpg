@@ -120,14 +120,21 @@ void button::draw()
 
    //xa = ((xa+x2) /2);
    
-   if( (text == font.createUnicode(0x25B2)) ||
-       (text == font.createUnicode(0x25BC)) )
+   if(text == font.createUnicode(0x25B2)) /* up */
    {
-      font.write(wSurface,xa+1,ya,getText().c_str(),xa+1,y1,x2+1,y2);
+      font.write(wSurface,xa+2,ya,getText().c_str(),xa+2,y1,x2+2,y2);
    }
-   else if(text == font.createUnicode(0x25CF))
+   else if(text == font.createUnicode(0x25BC)) /* down */
+   {
+      font.write(wSurface,xa+4,ya,getText().c_str(),xa+4,y1,x2+4,y2);
+   }
+   else if(text == font.createUnicode(0x25CF)) /* Close */
    {
       font.write(wSurface,xa+2,ya-2,getText().c_str(),xa+2,y1,x2+2,y2);
+   }
+   else if(text == font.createUnicode(0x25BA)) /* right */
+   {
+      font.write(wSurface,xa+2,ya+3,getText().c_str(),xa+2,y1,x2+2,y2);
    }
    else if(text == "-")
    {
