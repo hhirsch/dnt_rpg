@@ -107,6 +107,12 @@ class dntFont
        * \return string width */
       int getStringWidth(string s);
 
+      /*! Get the string width
+       * \param s -> string to calculate width
+       * \param isUtf8 -> if string in utf8
+       * \return string width */
+      int getStringWidth(string s, bool isUtf8);
+
       /*! Write the Text on the Surface
        * \param screen -> surface where write the text
        * \param x -> X coordinate of the text
@@ -153,6 +159,18 @@ class dntFont
       int write(SDL_Surface *screen,int x,int y,string text,int init,
                 int end, int x1,int y1,int x2,int y2, bool solid=false);
 
+      /*! Write the Text on the Surface, with limit area, at a single area
+       * \param screen -> surface where write the text
+       * \param x -> X coordinate of the text
+       * \param y -> Y coordinate of the text
+       * \param text -> text to write
+       * \param x1 -> X1 limit
+       * \param y1 -> Y1 limit
+       * \param x2 -> X2 limit
+       * \param y2 -> Y2 limit */
+      void writeSingleLine(SDL_Surface* screen, int x, int y, 
+            string text, int x1, int y1, int x2, int y2, bool solid=false);
+
       /*! Write the Text on the Surface
        * \param screen -> surface where write the text
        * \param x -> X coordinate of the text
@@ -173,11 +191,6 @@ class dntFont
        * \return -> the desired line got. */
       string getNextLine(string source, int& lastLinePos, int maxWidth);
 
-      
-      Uint16* convertToUnicode(Uint16 *unicode, const char *text, int len);
-
-      Uint16* copyUnicode(Uint16 *uni, int len);
-
    protected:
 
       /*! Load a font to the list, if it not already there
@@ -191,14 +204,24 @@ class dntFont
        * \return -> loadedFont pointer with the founded font, 
        *             or NULL, if not found. */
       loadedFont* findFont(string fontName, int fontSize);
+
+      /*! Render text to a new surface
+       * \param str -> text to render
+       * \param color -> color to render text
+       * \param isUtf8 -> if text in utf8 */
+      SDL_Surface* renderText(string str, SDL_Color color, bool isUtf8);
+
+      /*! Blit the text to the screen surface*/
+      void blitText(SDL_Surface *screen, SDL_Surface* writeSurface, 
+            int x,int y, string text, int x1,int y1,int x2,int y2, bool solid, 
+            bool isUtf8);
       
       static loadedFontList* fonts;  /**< List of loaded fonts */
       static int activeFontAlign;    /**< The active font alignment */
       static int activeFontStyle;    /**< The active Font Style */
       static loadedFont* activeFont; /**< The active font */
+      static SDL_Rect rect; /**< rectangle */
 
-      Uint16 curUnicode[MAX_TEXT];
-      Uint16 strLine[MAX_TEXT];
 };
 
 

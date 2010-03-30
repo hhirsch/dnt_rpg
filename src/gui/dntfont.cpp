@@ -178,6 +178,54 @@ void dntFont::defineFontStyle(int style)
    activeFontStyle = style;
 }
 
+/**********************************************************************
+ *                            renderText                              *
+ **********************************************************************/
+SDL_Surface* dntFont::renderText(string str, SDL_Color color, bool isUtf8)
+{
+   SDL_Surface* writeSurface = NULL;
+
+   if(isUtf8)
+   {
+      writeSurface = TTF_RenderUTF8_Blended(activeFont->font, 
+            str.c_str(), color);
+   }
+   else
+   {
+      writeSurface = TTF_RenderText_Blended(activeFont->font,
+            str.c_str(), color);
+   }
+
+   return(writeSurface);
+}
+
+/***********************************************************************
+ *                             blitText                                *
+ ***********************************************************************/
+void dntFont::blitText(SDL_Surface *screen, SDL_Surface* writeSurface, 
+      int x,int y, string text, int x1,int y1,int x2,int y2, bool solid, 
+      bool isUtf8)
+{
+   /* Define Position */
+   if(activeFontAlign == DNT_FONT_ALIGN_CENTER)
+   {
+      rect.x = ((x2 + x1) / 2) - 
+         (getStringWidth(text, isUtf8) / 2)-1;
+   }
+   else
+   {
+      rect.x = x;
+   }
+   rect.y = y;
+
+   /* Blit the result surface to the desired one on the desired 
+    * position  */
+   if(solid)
+   {
+      SDL_SetAlpha(writeSurface, 0, 0);
+   }
+   SDL_BlitSurface(writeSurface, NULL, screen, &rect);
+}
 
 /***********************************************************************
  *                               write                                 *
@@ -185,21 +233,24 @@ void dntFont::defineFontStyle(int style)
 int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
                    int end, int x1,int y1,int x2,int y2, bool solid)
 {
-   int aux, k, curY, w = 0;
-   int maxWidth = x2 - x1;
-   int uni = 0;
-   int last = -1, lastSpace = -1;
-   strLine[0] = 0;
-
-   Uint16* unicodeText;
+   options opt;
 
    SDL_Color color;
    Uint8 a=0;
 
-   SDL_Rect rect;
+   int curY;
+   int i;
+   int maxWidth = x2 - x1;
+
+   bool isUtf8 = false;
+
    SDL_Surface* writeSurface = NULL;
 
    int height = getHeight();
+
+   string curLine = "";
+   string potLine = "";
+   string renderedText = "";
 
    /* Verify if avaible */
    if(!activeFont)
@@ -214,175 +265,115 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
       }
    }
 
-   /* Convert to unicode, if needed */
-   unicodeText = convertToUnicode(curUnicode, text.c_str(), text.length());
-
    /* Verify if is on unicode special DNT button */
    if( (text[0] == '\\') )
    {
       text.erase(0,1);
 
-      //FIXME Put it to work at this function, not calling another one!
-      unicodeText = (Uint16*)text.c_str();
       if(activeFontAlign == DNT_FONT_ALIGN_CENTER)
       {
-         TTF_SizeUNICODE(activeFont->font, unicodeText, &w, NULL);
-         x = ((x2 + x1) / 2) - (w / 2)-1;
+         x = ((x2 + x1) / 2) - (getStringWidth(text, true) / 2)-1;
       }
       writeUnicode(screen, x, y, text, solid);
       return(1);
    }
 
+   /* Verify language code */
+   isUtf8 = opt.isLanguageUnicode();
+
    /* Init things */
    color_Get(&color.r,&color.g, &color.b, &a);
    curY = y;
-   rect.x = x;
-   rect.y = y;
 
-   for(aux=init;(aux<=end);aux++)
+   for(i = init; i <= end ;i++)
    {
-      if(unicodeText[aux] != '|')
+      if(text[i] != '|')
       {
-         if(unicodeText[aux] == ' ')
+         /* Normal character */
+         if(text[i] == ' ')
          {
-            lastSpace = uni;
+            /* Space */
+            curLine += potLine;
+            potLine = "";
          }
-         strLine[uni] = unicodeText[aux];
-         strLine[uni+1] = 0;
-         uni++;
-         TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
-         if(w >= maxWidth)
+
+         /* Try to put character on the string */
+         potLine += text[i];
+         if(getStringWidth(curLine + potLine + text[i], isUtf8) > maxWidth)
          {
-            /* So, if the width is bigger, write the string without 
-             * the characters after the last space, or without the last 
-             * character */
-            if(lastSpace != -1)
-            {
-               last = uni;
-               strLine[lastSpace] = 0;
-            }
-            else
-            {
-               /* Ignore the last character */
-               strLine[uni] = 0;
-            }
-
-            writeSurface = TTF_RenderUNICODE_Blended(activeFont->font,
-                                                     strLine, color);
-
-            /* Define Position */
-            if(activeFontAlign == DNT_FONT_ALIGN_CENTER)
-            {
-               TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
-               rect.x = ((x2 + x1) / 2) - (w / 2)-1;
-            }
-            else
-            {
-               rect.x = x;
-            }
-            rect.y = curY;
-
-            /* Put the character */
-            if(lastSpace != -1)
-            {
-               /* Copy all characters from the last space to the position */
-               uni = 0;
-               for(k=lastSpace+1; k < last; k++)
-               {
-                  strLine[uni] = strLine[k];
-                  uni++;
-               }
-               strLine[uni] = 0;
-            }
-            else
-            {
-               /* Copy only the last character */
-               strLine[0] = unicodeText[aux];
-               uni = 1;
-               strLine[uni] = 0;
-            }
-            lastSpace = -1;
-
-            /* Blit the result surface to the desired one on the desired 
-             * position  */
-            if(solid)
-            {
-               SDL_SetAlpha(writeSurface, 0, 0);
-            }
-            SDL_BlitSurface(writeSurface, NULL, screen, &rect);
-
-            /* Avoid memory leacks */
-            SDL_FreeSurface(writeSurface);
-
-            curY += height;
+            /* Write the current thing  */
+            renderedText = curLine;
+            writeSurface = renderText(curLine, color, isUtf8);
+            curLine = potLine;
+            potLine = "";
          }
-         
       }
       else
       {
-         TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
-         /* | breaks a line */
+         /* Got an line break */
+         renderedText = curLine + potLine;
+         writeSurface = renderText(curLine + potLine, color, isUtf8);
+         curLine = "";
+         potLine = "";
+      }
 
-         writeSurface = TTF_RenderUNICODE_Blended(activeFont->font,strLine,
-                                                  color);
-
-         /* Define Align */
-         if(activeFontAlign == DNT_FONT_ALIGN_CENTER)
-         {
-            TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
-            rect.x = ((x2 + x1) / 2) - (w / 2)-1;
-         }
-         else
-         {
-            rect.x = x;
-         }
-         rect.y = curY;
-
-         /* Blit the result surface to the desired one on the desired
-          * position  */
-         if(solid)
-         {
-            SDL_SetAlpha(writeSurface, 0, 0);
-         }
-         uni = 0;
-         strLine[uni] = 0;
-         SDL_BlitSurface(writeSurface, NULL, screen, &rect);
-
+      if(writeSurface != NULL)
+      {
+         /* Blit the text */
+         blitText(screen, writeSurface, x, curY, renderedText, x1, y1, x2, y2, 
+               solid, isUtf8);
+         
          /* Avoid memory leacks */
          SDL_FreeSurface(writeSurface);
+         writeSurface = NULL;
 
+         /* Next line! */
          curY += height;
       }
    }
 
-   if(uni != 0)
+   if((!potLine.empty()) || (!curLine.empty()))
    {
-      TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
-      writeSurface = TTF_RenderUNICODE_Blended(activeFont->font, strLine,
-                                               color);
+      renderedText = curLine + potLine;
+      writeSurface = renderText(curLine + potLine, color, isUtf8);
 
-      /* Blit the result surface to the desired one on the desired position  */
-      rect.y = curY;
-      if(activeFontAlign == DNT_FONT_ALIGN_CENTER)
-      {
-         TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
-         rect.x = ((x2 + x1) / 2) - (w / 2)-1;
-      }
-      else
-      {
-         rect.x = x;
-      }
-      if(solid)
-      {
-         SDL_SetAlpha(writeSurface, 0, 0);
-      }
-      SDL_BlitSurface(writeSurface, NULL, screen, &rect);
+      /* Blit the text */
+      blitText(screen, writeSurface, x, curY, renderedText, x1, y1, x2, y2, 
+            solid, isUtf8);  
 
       /* Avoid memory leacks */
       SDL_FreeSurface(writeSurface);
+      writeSurface = NULL;
    }
 
    return(curY);
+}
+
+/***********************************************************************
+ *                               write                                 *
+ ***********************************************************************/
+void dntFont::writeSingleLine(SDL_Surface* screen, int x, int y, string text,
+                              int x1, int y1, int x2, int y2, bool solid)
+{
+   options opt;
+   SDL_Surface* writeSurface; 
+   SDL_Color color;
+   Uint8 a=0;
+   bool isUtf8=false;
+
+   /* get color */
+   color_Get(&color.r,&color.g, &color.b, &a);
+   isUtf8 = opt.isLanguageUnicode();
+
+   /* Write to a new surface */
+   writeSurface = renderText(text, color, isUtf8);
+
+   /* Blit the text */
+   blitText(screen, writeSurface, x, y, text, x1, y1, x2, y2, 
+         solid, isUtf8);  
+
+   /* Avoid memory leacks */
+   SDL_FreeSurface(writeSurface);
 }
 
 /***********************************************************************
@@ -456,82 +447,30 @@ string dntFont::createUnicode(Uint16 character)
 }
 
 /***********************************************************************
- *                         convertToUnicode                            *
- ***********************************************************************/
-Uint16* dntFont::convertToUnicode(Uint16 *unicode, const char *text, int len)
-{
-   int i,j;
-   Uint16 ch;
-
-   options opt;
-   if(opt.isLanguageUnicode())
-   {
-      for ( i = 0, j = 0; i < len; ++i, ++j ) 
-      {
-         ch = ( ( const unsigned char * )text)[i];
-         if ( ch >= 0xF0 ) 
-         {
-            ch  =  ( Uint16 )( text[i] & 0x07 ) << 18;
-            ch |=  ( Uint16 )( text[++i] & 0x3F ) << 12;
-            ch |=  ( Uint16 )( text[++i] & 0x3F ) << 6;
-            ch |=  ( Uint16 )( text[++i] & 0x3F );
-         } 
-         else if ( ch >= 0xE0 ) 
-         {
-            ch  =  ( Uint16 )( text[i] & 0x0F ) << 12;
-            ch |=  ( Uint16 )( text[++i] & 0x3F ) << 6;
-            ch |=  ( Uint16 )( text[++i] & 0x3F );
-         } 
-         else if ( ch >= 0xC0 ) 
-         {
-            ch  =  ( Uint16 )( text[i] & 0x1F ) << 6;
-            ch |=  ( Uint16 )( text[++i] & 0x3F );
-         }
-         unicode[j] = ch;
-      }
-      unicode[j] = 0;
-
-      return(unicode);
-   }
-   else
-   {
-       // this is the LATIN1 to unicode. Put the others convertions
-      for( i=0; i < len; ++i ) 
-      {
-         unicode[i] = ((const unsigned char *)text)[i];
-      }
-      unicode[i] = 0;
-   }
-
-   //FIXME the size of the string returned!
-   return(unicode);
-}
-
-/***********************************************************************
- *                             copyUnicode                             *
- ***********************************************************************/
-Uint16* dntFont::copyUnicode(Uint16 *uni, int len)
-{
-   int i;
-   for( i=0; i < len; ++i ) 
-   {
-      curUnicode[i] = uni[i];
-   }
-   curUnicode[i] = 0;
-   return(curUnicode);
-}
-
-
-/***********************************************************************
  *                          getStringWidth                             *
  ***********************************************************************/
 int dntFont::getStringWidth(string s)
 {
+   options opt;
+   return(getStringWidth(s, opt.isLanguageUnicode()));
+}
+
+/***********************************************************************
+ *                          getStringWidth                             *
+ ***********************************************************************/
+int dntFont::getStringWidth(string s, bool isUtf8)
+{
    int w = 0;
-   Uint16* uniStr = convertToUnicode(curUnicode, s.c_str(), s.length());
    if(activeFont != NULL)
    {
-      TTF_SizeUNICODE(activeFont->font, uniStr, &w, NULL);
+      if(isUtf8)
+      {
+         TTF_SizeUTF8(activeFont->font, s.c_str(), &w, NULL);
+      }
+      else
+      {
+         TTF_SizeText(activeFont->font, s.c_str(), &w, NULL);
+      }
    }
    return(w);
 }
@@ -563,60 +502,20 @@ int dntFont::getHeight()
 }
 
 /***********************************************************************
- *                          unicodeToString                            *
- ***********************************************************************/
-string unicodeToString(Uint16* unicode, int size)
-{
-   int i;
-   string res = "";
-   Uint16 c;
-   options opt;
-   
-   if(opt.isLanguageUnicode())
-   {
-      for(i = 0; i < size; i++) 
-      {
-         c =  unicode[i];
-         if( (c >= 0x0001) && (c <= 0x007F) )
-         {
-            res += (char)(c);
-         }
-         else if(c > 0x07FF) 
-         {
-            res += (char)(0xE0 | ((c >> 12) & 0x0F));
-            res += (char)(0x80 | ((c >>  6) & 0x3F));
-            res += (char)(0x80 | ((c >>  0) & 0x3F));
-         } 
-         else 
-         {
-            res += (char)(0xC0 | ((c >>  6) & 0x1F));
-            res += (char)(0x80 | ((c >>  0) & 0x3F));
-         }
-      }
-   }
-   else
-   {
-      for(i = 0; i < size; i++)
-      {
-         res += (char)unicode[i];
-      }
-   }
-
-   return(res);
-}
-
-/***********************************************************************
  *                            getNextLine                              *
  ***********************************************************************/
 string dntFont::getNextLine(string source, int& lastLinePos,
                             int maxWidth)
 {
+   options opt;
+
+   int i, lastSpace=-1;
+
+   bool isUtf8 = false;
+
+   string curLine = "";
+   string potLine = "";
    string result = "";
-   Uint16* unicodeText;
-   int w, uni = 0;
-   int last = -1, lastSpace = -1;
-   int lastRealSpacePos = -1;
-   bool lineGot = false;
 
    /* Verify if avaible */
    if(!activeFont)
@@ -629,76 +528,57 @@ string dntFont::getNextLine(string source, int& lastLinePos,
       {
          TTF_SetFontStyle(activeFont->font, activeFontStyle);
       }
-   }    
+   }
 
+   /* Verify language code */
+   isUtf8 = opt.isLanguageUnicode();
 
-
-   /* Convert to unicode, if needed */
-   unicodeText = convertToUnicode(curUnicode, source.c_str(), source.length());
-
-   int aux;
-   for(aux=lastLinePos; 
-       ( (aux < (int)source.length()) && (!lineGot) ); aux++)
+   for(i = lastLinePos; i < (int)source.length();i++)
    {
-      if(unicodeText[aux] != '|')
+      if(source[i] != '|')
       {
-         if(unicodeText[aux] == ' ')
+         /* Normal character */
+         if(source[i] == ' ')
          {
-            lastSpace = uni;
-            lastRealSpacePos = aux;
+            /* Space */
+            curLine += potLine;
+            potLine = "";
+            lastSpace = i;
          }
-         strLine[uni] = unicodeText[aux];
-         strLine[uni+1] = 0;
-         uni++;
-         TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
-         if(w >= maxWidth)
+
+         /* Try to put character on the string */
+         potLine += source[i];
+         if(getStringWidth(curLine + potLine + source[i], isUtf8) > maxWidth)
          {
-            /* So, if the width is bigger, write the string without 
-             * the characters after the last space, or without the last 
-             * character */
-            if(lastSpace != -1)
+            /* Width overflow, got a line! */
+            if(lastSpace >= 0)
             {
-               lastLinePos = lastRealSpacePos+1;
-               last = uni;
-               strLine[lastSpace] = 0;
-               result += unicodeToString(strLine, lastSpace);
+               lastLinePos = lastSpace;
+               return(curLine);
             }
             else
             {
-               lastLinePos = aux;
-               /* Ignore the last character */
-               strLine[uni] = 0;
-               result += unicodeToString(strLine, uni);
+               /* Can't write! */
+               lastLinePos = source.length();
+               return("");
             }
-            lineGot = true;
-
-            lastSpace = -1;
          }
-         
       }
       else
       {
-         TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
-         /* | breaks a line */
-
-         result += unicodeToString(strLine, uni);
-         /* Jump the | */
-         lastLinePos = aux+1;
-         lineGot = true;
-         uni = 0;
-         //strLine[uni] = 0;
+         /* Got an line break */
+         lastLinePos = i+1;
+         return(curLine + potLine);
       }
    }
 
-   if( (!lineGot) && (uni != 0))
+   if((!potLine.empty()) || (!curLine.empty()))
    {
-      TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
-      result += unicodeToString(strLine, uni);
-      lastLinePos = aux;
+      lastLinePos = source.length();
+      return(curLine + potLine);
    }
-
-
-   return(result);
+   
+   return("");
 }
 
 /* Static Variables */
@@ -706,4 +586,5 @@ loadedFont*      dntFont::activeFont;
 loadedFontList*  dntFont::fonts=NULL;
 int              dntFont::activeFontAlign;
 int              dntFont::activeFontStyle;
+SDL_Rect         dntFont::rect;
 

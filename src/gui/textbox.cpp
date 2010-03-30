@@ -218,7 +218,7 @@ void textBox::draw(int i)
          fnt.defineFont(line->fontName, line->fontSize);
          fnt.defineFontAlign(line->fontAlign);
          fnt.defineFontStyle(line->fontStyle);
-         fnt.write(wSurface, x1+2, y, line->text, x1+2, y, x2, y2);
+         fnt.writeSingleLine(wSurface, x1+2, y, line->text, x1+2, y, x2, y2);
 
          setChanged();
       }
@@ -276,7 +276,7 @@ int textBox::draw2()
          fnt.defineFont(line->fontName, line->fontSize);
          fnt.defineFontAlign(line->fontAlign);
          fnt.defineFontStyle(line->fontStyle);
-         fnt.write(wSurface, x1+2, y, line->text, x1+2, y, x2, y2);
+         fnt.writeSingleLine(wSurface, x1+2, y, line->text, x1+2, y, x2, y2);
          y += line->height;
          height = line->height;
          line = (textLine*)line->getNext();
