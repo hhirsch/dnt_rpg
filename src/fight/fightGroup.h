@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2010 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -61,6 +61,10 @@ class fightGroup
      ***************************************************************/
      bool anyoneIsAliveAndInRange(bool onlyHostile,
            float posX=-1, float posZ=-1, float range=DNT_BATTLE_RANGE);
+
+     /*! Verify if at lat one character is alive at the group */
+     bool isAnyoneAlive();
+
      /*!
      *************************************************************** 
      * Get nearest character enemy to pers.  

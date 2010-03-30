@@ -294,6 +294,12 @@ int fightSystem::doTurn()
                          actualActor->xPosition, actualActor->zPosition,
                          2*DNT_BATTLE_RANGE) ) ) ))
          {
+            /* Verify pcs */
+            if(!pcGroups[0].isAnyoneAlive())
+            {
+               return(FIGHT_END);
+            }
+
             actualActor = charsInitiatives.nextCharacter();
             if(actualActor == NULL)
             {
