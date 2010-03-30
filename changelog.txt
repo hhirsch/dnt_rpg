@@ -6,6 +6,7 @@
 - Russian translation added;
 - Optimized text render code;
 - Lowered delay times for battles;
+- Applying skill and attribute modifier to damage and heal points;
 
 ================================================
 |                Version 0.5                   |

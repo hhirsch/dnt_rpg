@@ -21,6 +21,8 @@
 #include "dices.h"
 #include <SDL/SDL.h>
 #include <stdlib.h>
+#include <iostream>
+using namespace std;
 
 //////////////////////////////////////////////////////////////////////////
 //                                                                      //

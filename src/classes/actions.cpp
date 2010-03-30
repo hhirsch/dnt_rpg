@@ -265,6 +265,12 @@ bool doHealOrAttack(thing& actor, thing* target,
    /* Apply Base Damage Dices */
    damage += diceInfo.baseDice.roll(criticalHit);
 
+   /* Apply Damage/Heal modifiers bonus */
+   if(conceptBonus)
+   {
+      damage += actor.getBonusValue(*conceptBonus);
+   }
+
    /*TODO apply aditional dices */
 
    if(heal)
