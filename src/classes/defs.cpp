@@ -294,3 +294,41 @@ bool bonusAndSaves::doCheck(string stateToCheck, int difficulty,
    return(checkRes);
 }
 
+/***********************************************************************
+ *                            setIAmNotAFool                           *
+ ***********************************************************************/
+void bonusAndSaves::setIAmNotAFool(int i)
+{
+   iAmNotAFool = i;
+}
+
+/***********************************************************************
+ *                              setReflexes                            *
+ ***********************************************************************/
+void bonusAndSaves::setReflexes(int i)
+{
+   reflexes = i;
+}
+
+/***********************************************************************
+*                              setFortitude                            *
+ ***********************************************************************/
+void bonusAndSaves::setFortitude(int i)
+{
+   fortitude = i;
+}
+
+/***********************************************************************
+ *                             setBaseAttack                           *
+ ***********************************************************************/
+void bonusAndSaves::setBaseAttack(int i)
+{
+   int aux;
+
+   for(aux = 1; aux <= MAX_ATTACKS; aux++)
+   {
+      baseAttackBonus.setBonus(aux, i);
+   }
+}
+
+

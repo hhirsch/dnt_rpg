@@ -242,12 +242,19 @@ class feats
        ***************************************************************/
       int getAttackFeatRange();
 
+      /*! Set the bare hands damage dice
+       * \param dices -> number of dices
+       * \param diceId -> number of faces
+       * \param sum -> integer to sum to the result
+       * \param crit -> critical multiplier */
+      void setBareHandsDamage(int dices, int diceId, int sum, int crit);
 
    private:
 
       weapon* currentWeapon;    /**< The current weapon */
       feat m_feats[MAX_FEATS];  /**< Internal Feats Struct */
       int  totalFeats;          /**< Actual Number of Feats */
+      diceThing bareHandsDice;  /**< Damage by bare hands */
 
       /*!
        **************************************************************** 

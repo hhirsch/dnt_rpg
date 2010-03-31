@@ -78,6 +78,23 @@ feats::feats()
 {
    totalFeats = 0;
    currentWeapon = NULL;
+   bareHandsDice.baseDice.setType(DICE_D2);
+   bareHandsDice.baseDice.setNumberOfDices(1);
+   bareHandsDice.baseDice.setSumNumber(0);
+   bareHandsDice.baseDice.setCriticalMultiplier(1);
+   bareHandsDice.initialLevel = 1;
+}
+
+/***************************************************************
+ *                      setBareHandsDamage                     *
+ ***************************************************************/
+void feats::setBareHandsDamage(int dices, int diceId, int sum, int crit)
+{
+   bareHandsDice.baseDice.setType(diceId);
+   bareHandsDice.baseDice.setNumberOfDices(dices);
+   bareHandsDice.baseDice.setSumNumber(sum);
+   bareHandsDice.baseDice.setCriticalMultiplier(crit);
+   bareHandsDice.initialLevel = 1;
 }
 
 /***************************************************************
@@ -545,13 +562,7 @@ void feats::defineWeapon(weapon* w)
    else
    {
       /* Using bare hands */
-      diceThing dc;
-      dc.baseDice.setType(DICE_D2);
-      dc.baseDice.setNumberOfDices(1);
-      dc.baseDice.setSumNumber(0);
-      dc.baseDice.setCriticalMultiplier(1);
-      dc.initialLevel = 1;
-      m_feats[inUse].diceInfo = dc;
+      m_feats[inUse].diceInfo = bareHandsDice;
       m_feats[inUse].range = (int)(WALK_PER_MOVE_ACTION * DNT_TO_METER);
    }
 

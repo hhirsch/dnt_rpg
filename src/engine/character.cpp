@@ -881,6 +881,9 @@ character* characterList::insertCharacter(string file, featsList* ft,
    char buf[256];
    int lvl;
    int curClass = 0;
+   int tmp=0;
+
+   bool definedBonusAndSave = false;
   
    /* Create the Character */ 
    character* novo;
@@ -1033,6 +1036,40 @@ character* characterList::insertCharacter(string file, featsList* ft,
       {
          sscanf(value.c_str(), "%d", &novo->age);
       }
+      /* Fortitude */
+      else if(key == "fortitude")
+      {
+         definedBonusAndSave = true;
+         sscanf(value.c_str(), "%d", &tmp);
+         novo->curBonusAndSaves.setFortitude(tmp);
+      }
+      /* Reflexes */
+      else if(key == "reflexes")
+      {
+         definedBonusAndSave = true;
+         sscanf(value.c_str(), "%d", &tmp);
+         novo->curBonusAndSaves.setReflexes(tmp);
+      }
+      /* iAmNotAFool */
+      else if(key == "iAmNotAFool")
+      {
+         definedBonusAndSave = true;
+         sscanf(value.c_str(), "%d", &tmp);
+         novo->curBonusAndSaves.setIAmNotAFool(tmp);
+      }
+      /* attack bonus */
+      else if(key == "attackBonus")
+      {
+         definedBonusAndSave = true;
+         sscanf(value.c_str(), "%d", &tmp);
+         novo->curBonusAndSaves.setBaseAttack(tmp);
+      }
+      else if(key == "baseDamage")
+      {
+         int dices=0, diceId=1, sum=0, crit=1;
+         sscanf(value.c_str(), "%dd%d+%dx%d", &dices, &diceId, &sum, &crit);
+         novo->actualFeats.setBareHandsDamage(dices, diceId, sum, crit);
+      }
       /* ModifierEffects */
       else if(key == "modEffect")
       {
@@ -1062,8 +1099,14 @@ character* characterList::insertCharacter(string file, featsList* ft,
    /* Define AC TODO others values to sum here*/ 
    novo->armatureClass = 10+novo->sizeModifier+novo->attBonus(ATT_DEXTERITY);
 
-   /* Apply Saves and Bonus and Costs */
-   novo->applyBonusAndSaves();
+   /* Apply Saves and Bonus, if not yet defined (some npcs without classes
+    * defines its bonus on .npc file) */
+   if(!definedBonusAndSave)
+   {
+      novo->applyBonusAndSaves();
+   }
+
+   /* Apply cost to skills */
    novo->applySkillCosts();
    
    /* Load The 3D Model */ 

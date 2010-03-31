@@ -143,6 +143,15 @@ class bonusAndSaves
       /*! + Operator */
       bonusAndSaves operator+(const bonusAndSaves& b);
 
+      /*! Set the I am Not a fool value*/
+      void setIAmNotAFool(int i);
+      /*! Set reflexes value */
+      void setReflexes(int i);
+      /*! Set the fortitude value */
+      void setFortitude(int i);
+      /*! Set the base attack value */
+      void setBaseAttack(int i);
+
       int level;                          /**< Class Level */
       attackBonus baseAttackBonus;        /**< Base Attack Bonus */
       int fortitude;                      /**< Fortitude Save Bonus */
