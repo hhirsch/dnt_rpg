@@ -76,17 +76,17 @@ fileSel::fileSel(int x, int y, bool load, string dir, void* list,
    /* Create the current file text */
    if(loading)
    {
-      textCurFile = l->insertTextBox(x,y, x+220, y+16, 1, "");
+      textCurFile = l->insertTextBox(x,y, x+217, y+16, 1, "");
       editCurFile = NULL;
    }
    else
    {
       textCurFile = NULL;
-      editCurFile = l->insertTextBar(x,y,x+220, y+16, "", 0);
+      editCurFile = l->insertTextBar(x,y,x+217, y+16, "", 0);
    }
 
    /* Create the current filter text */
-   textFilter = l->insertTextBox(x+220, y, x+250, y+16, 1, "*");
+   textFilter = l->insertTextBox(x+218, y, x+250, y+16, 1, "*");
 
    /* Put it at initial dir */
    changeCurDir(dir);
