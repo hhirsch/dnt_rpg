@@ -140,10 +140,10 @@ void charWindow::open(character* pers)
    /* Life Points And AC */
    sprintf(buf,"%s: %d/%d", gettext("HP"), pers->getLifePoints(), 
                             pers->getMaxLifePoints());
-   intWindow->getObjectsList()->insertTextBox(8,77,62,87,0,buf);
+   intWindow->getObjectsList()->insertTextBox(8,77,90,87,0,buf);
    sprintf(buf,"%s: %d", gettext("AC"), pers->armatureClass);
-   intWindow->getObjectsList()->insertTextBox(8,88,62,98,0,buf);
-   intWindow->getObjectsList()->insertTextBox(5,76,65,116,2,"");
+   intWindow->getObjectsList()->insertTextBox(8,88,90,98,0,buf);
+   intWindow->getObjectsList()->insertTextBox(5,76,92,116,2,"");
 
 
    /* Character Classes */
@@ -154,11 +154,11 @@ void charWindow::open(character* pers)
       {
          sprintf(buf,"%s(%d)", pers->actualClass[i]->name.c_str(),
                                pers->classLevels[i]);
-         intWindow->getObjectsList()->insertTextBox(68,posY,335,posY+10,0,buf);
+         intWindow->getObjectsList()->insertTextBox(96,posY,335,posY+10,0,buf);
          posY += 11;
       }
    }
-   intWindow->getObjectsList()->insertTextBox(65,76,335,116,2,"");
+   intWindow->getObjectsList()->insertTextBox(93,76,335,116,2,"");
 
    /* Character Attributes */
    skill* sk;
@@ -394,39 +394,40 @@ void charWindow::writeAboutWeapon(int inventoryPlace)
 {
    weapon* wp;
    char buf[512];
+   string title;
 
    wp = (weapon*)current->inventories->getFromPlace(inventoryPlace);
 
    /* Define of what type of weapon talking */
    if(inventoryPlace == INVENTORY_RIGHT_HAND)
    {
-      sprintf(buf, "%s", gettext("Main Weapon"));
+      title = gettext("Main Weapon");
    }
    else if(inventoryPlace == INVENTORY_LEFT_HAND)
    {
-      sprintf(buf, "%s", gettext("Secondary Weapon"));
+      title = gettext("Secondary Weapon");
    }
    else
    {
-      sprintf(buf, "%s", gettext("Weapon"));
+      title = gettext("Weapon");
    }
 
    if(wp)
    {
       /* Write about the weapon */
-      sprintf(buf, "%s: %s", buf, wp->getName().c_str());
+      sprintf(buf, "%s: %s", title.c_str(), wp->getName().c_str());
       infoBar->addText(buf);
    }
    else if(inventoryPlace == INVENTORY_RIGHT_HAND)
    {
       /* Write about unarmed */
-      sprintf(buf, "%s: %s", buf, gettext("Unarmed"));
+      sprintf(buf, "%s: %s", title.c_str(), gettext("Unarmed"));
       infoBar->addText(buf);
    }
    else
    {
       /* Not Applicable */
-      sprintf(buf, "%s: %s", buf, gettext("Not Applicable"));
+      sprintf(buf, "%s: %s", title.c_str(), gettext("Not Applicable"));
       infoBar->addText(buf);
    }
 
