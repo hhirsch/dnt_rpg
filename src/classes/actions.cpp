@@ -271,6 +271,12 @@ bool doHealOrAttack(thing& actor, thing* target,
       damage += actor.getBonusValue(*conceptBonus);
    }
 
+   /* Make sure damage value is at last 1 */
+   if(damage <= 0)
+   {
+      damage = 1;
+   }
+
    /*TODO apply aditional dices */
 
    if(heal)
