@@ -1058,7 +1058,7 @@ character* characterList::insertCharacter(string file, featsList* ft,
          novo->curBonusAndSaves.setIAmNotAFool(tmp);
       }
       /* attack bonus */
-      else if(key == "attackBonus")
+      else if( (key == "attackBonus") || (key == "baseAttack"))
       {
          definedBonusAndSave = true;
          sscanf(value.c_str(), "%d", &tmp);
