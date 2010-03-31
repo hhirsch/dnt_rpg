@@ -304,7 +304,7 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
             /* Write the current thing  */
             renderedText = curLine;
             writeSurface = renderText(curLine, color, isUtf8);
-            curLine = potLine;
+            curLine = potLine.substr(1, potLine.length());
             potLine = "";
          }
       }
@@ -553,7 +553,7 @@ string dntFont::getNextLine(string source, int& lastLinePos,
             /* Width overflow, got a line! */
             if(lastSpace >= 0)
             {
-               lastLinePos = lastSpace;
+               lastLinePos = lastSpace+1;
                return(curLine);
             }
             else
