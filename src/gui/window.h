@@ -28,8 +28,8 @@
 #include "guiobject.h"
 #include "guilist.h"
 #include "tabbox.h"
+#include "../lang/translate.h"
 
-#include <libintl.h>
 #include <string>
 using namespace std;
 

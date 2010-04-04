@@ -23,7 +23,6 @@
 
 #include <SDL/SDL.h>
 #include "defs.h"
-#include <libintl.h>
 #include <string>
 using namespace std;
 
@@ -34,6 +33,7 @@ using namespace std;
 
 #include "../etc/message3d.h"
 #include "../engine/briefing.h"
+#include "../lang/translate.h"
 
 #define MAX_FEATS          30 /**< Max number of Feats per Character */
 #define MAX_DEP_FEATS       5 /**< Max number of cost this, cost that feats */

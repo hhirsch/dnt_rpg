@@ -21,7 +21,7 @@
 #ifndef _dnt_split_window
 #define _dnt_split_window
 
-#include <libintl.h>
+#include "../lang/translate.h"
 #include "../classes/inventory.h"
 #include "../gui/farso.h"
 #include "character.h"

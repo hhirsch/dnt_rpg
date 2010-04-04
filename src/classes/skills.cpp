@@ -19,7 +19,6 @@
 */
 
 #include <math.h>
-#include <libintl.h>
 #include <iostream>
 
 using namespace std;

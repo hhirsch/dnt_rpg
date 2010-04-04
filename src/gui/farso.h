@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -22,7 +22,6 @@
 #define _farso_h
 
 
-#include <libintl.h>
 #include <stdlib.h>
 #include <SDL/SDL.h>
 #include "draw.h"
@@ -44,6 +43,7 @@
 #include "mouse.h"
 #include "tabbutton.h"
 #include "messages.h"
+#include "../lang/translate.h"
 
 /*! Init the SDL/OpenGL Context
  * \param screen -> pointer to the pointer to the surface used as screen

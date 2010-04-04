@@ -25,10 +25,10 @@
 
 #include "fightGroup.h"
 #include "initiative.h"
-#include <libintl.h>
 #include "../etc/message3d.h"
 #include "../particle/partcontroller.h"
 #include "../engine/briefing.h"
+#include "../lang/translate.h"
 #include <SDL/SDL.h>
 
 

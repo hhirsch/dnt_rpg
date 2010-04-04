@@ -23,8 +23,8 @@
 #include "draw.h"
 #include "../engine/options.h"
 #include "../etc/dirs.h"
+#include "../lang/translate.h"
 
-#include <libintl.h>
 #include <iostream>
 using namespace std;
 

@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -18,9 +18,9 @@
   along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <libintl.h>
 #include "initial.h"
 #include "util.h"
+#include "../lang/translate.h"
 #include <SDL/SDL_image.h>
 
 #ifdef _MSC_VER

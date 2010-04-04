@@ -20,8 +20,8 @@
 
 #include "picture.h"
 
+#include "../lang/translate.h"
 #include <SDL/SDL_image.h>
-#include <libintl.h>
 #include <iostream>
 using namespace std;
 

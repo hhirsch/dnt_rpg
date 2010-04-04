@@ -21,7 +21,7 @@
 #ifndef _dnt_invent_window
 #define _dnt_invent_window
 
-#include <libintl.h>
+#include "../lang/translate.h"
 #include "../classes/inventory.h"
 #include "../map/map.h"
 #include "character.h"

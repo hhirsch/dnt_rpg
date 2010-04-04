@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -26,7 +26,7 @@
 using namespace std;
 #include "../engine/character.h"
 #include "../engine/briefing.h"
-#include <libintl.h>
+#include "../lang/translate.h"
 
 /*! Implementation of the Struct of Initiative */
 class initiativeStruct
