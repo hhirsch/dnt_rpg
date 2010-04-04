@@ -43,10 +43,12 @@ using namespace std;
 int main(int argc, char **argv)
 {
    /* Set locale */
+#ifdef HAVE_INTL
    setlocale (LC_CTYPE, "");
    setlocale(LC_MESSAGES, "");
    bindtextdomain(PACKAGE, LOCALEDIR);
    textdomain(PACKAGE);
+#endif
 
    SDL_Surface *screen;
 

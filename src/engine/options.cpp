@@ -525,6 +525,7 @@ void options::setLanguage()
       saux = dntLanguageCode[langNumber];
    }
 
+#ifdef HAVE_INTL
    if(isLanguageUnicode())
    {
       bind_textdomain_codeset(PACKAGE, "UTF-8");
@@ -533,6 +534,7 @@ void options::setLanguage()
    {
       bind_textdomain_codeset(PACKAGE, "ISO-8859-1");
    }
+#endif
    
    if(!saux.empty())
    {

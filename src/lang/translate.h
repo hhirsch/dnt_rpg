@@ -21,7 +21,13 @@
 #ifndef _dnt_translate_h
 #define _dnt_translate_h
 
-#include <libintl.h>
+#ifdef HAVE_INTL
+   #include <libintl.h>
+#else
+   /* Define a gettext ignore function */
+   inline const char* gettext(const char* s){return(s);};
+#endif
+
 #include <string>
 using namespace std;
 

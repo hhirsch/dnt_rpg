@@ -699,7 +699,7 @@ int engine::loadMap(string arqMapa, bool loadingGame)
       /* Show the "Saving Map Status" */
       color_Set(200,20,20,255);
       fnt.defineFont(DNT_FONT_TIMES,10);
-      sprintf(texto,gettext("Saving Current Map Modifications"));
+      sprintf(texto,"%s", gettext("Saving Current Map Modifications"));
       showLoading(img,&texturaTexto,texturaCarga, texto, progress);
       progress->defineActualHealth(1);
 

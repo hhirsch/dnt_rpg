@@ -96,6 +96,7 @@ AC_CHECK_HEADER(GL/glu.h, [], [AC_MSG_ERROR(Couldn't find OPENGL headers. Run ./
 AC_CHECK_HEADER(SDL/SDL_opengl.h, [], [AC_MSG_ERROR(Couldn't find SDL headers. Run ./configure CPPFLAGS=-Ipath_to_sdl_headers. For Example: ./configure CPPFLAGS=-I/usr/local/include/)])
 AC_CHECK_HEADER(SDL/SDL.h, [], [AC_MSG_ERROR(Couldn't find SDL headers. Run ./configure CPPFLAGS=-Ipath_to_sdl_headers. For Example: ./configure CPPFLAGS=-I/usr/local/include/)])
 AC_CHECK_HEADER(SDL/SDL_image.h, [], [AC_MSG_ERROR(Couldn't find SDL headers. Run ./configure CPPFLAGS=-Ipath_to_sdl_headers. For Example: ./configure CPPFLAGS=-I/usr/local/include/)])
+AC_CHECK_HEADER([libintl.h], [AC_DEFINE(HAVE_INTL, 1)], [])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_HEADER_STDBOOL
