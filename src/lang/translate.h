@@ -21,7 +21,13 @@
 #ifndef _dnt_translate_h
 #define _dnt_translate_h
 
-#ifdef HAVE_INTL
+#ifdef _MSC_VER
+   #include "../config_win.h"
+#else
+   #include "../config.h"
+#endif
+
+#if ENABLE_NLS == 1
    #include <libintl.h>
 #else
    /* Define a gettext ignore function */

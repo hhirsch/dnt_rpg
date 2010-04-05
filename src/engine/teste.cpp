@@ -43,7 +43,7 @@ using namespace std;
 int main(int argc, char **argv)
 {
    /* Set locale */
-#ifdef HAVE_INTL
+#if ENABLE_NLS == 1
    setlocale (LC_CTYPE, "");
    setlocale(LC_MESSAGES, "");
    bindtextdomain(PACKAGE, LOCALEDIR);
