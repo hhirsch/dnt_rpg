@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -404,6 +404,11 @@ bool screenshot(SDL_Surface* screen, string fileName, bool thumb)
    bmask = 0x00ff0000;
    amask = 0xff000000;
 #endif
+
+   if(screen == NULL)
+   {
+      return(false);
+   }
 
    /* Create the destiny surface */
    if(thumb)
