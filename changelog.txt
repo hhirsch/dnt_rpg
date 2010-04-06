@@ -1,5 +1,5 @@
 ================================================
-|                Version 0.6                   |
+|               Version 0.5.1                  |
 |                                              |
 ================================================
 - UTF-8 support for languages;
@@ -9,6 +9,7 @@
 - Applying skill and attribute modifier to damage and heal points;
 - Fixed a possible hang up when character dies;
 - Fixed XP ammount received when killing (was inverted);
+- Fixed a bug when saving files without images;
 
 ================================================
 |                Version 0.5                   |

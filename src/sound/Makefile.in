@@ -4,8 +4,9 @@ LDFLAGS = @LDFLAGS@
 LIBS= @LIBS@
 EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 
+objs = ogg_stream.o sound.o sndfx.o
 
-all: ogg_stream.o sound.o sndfx.o
+all: $(objs)
 
 ogg_stream.o: ogg_stream.cpp ogg_stream.h
 	@printf "Making ogg_stream.o... "
@@ -22,7 +23,12 @@ sndfx.o: sndfx.cpp sndfx.h ogg_stream.h
 	@$(CC) $(CFLAGS) sndfx.cpp -o sndfx.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
+testsound: $(objs) testsound.cpp
+	@printf "Making testsound... "
+	@$(CC) $(EFLAGS) testsound.cpp $(objs) ../etc/list.o ../etc/dirs.o $(LDFLAGS) -o testsound
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
 clean: 
 	@printf "Cleaning Sound Bin Files... "
-	@\rm -rf *.o *.e
+	@\rm -rf *.o *.e testsound
 	@printf "\e[0;32mDone.\e[0;0m\n"
