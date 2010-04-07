@@ -180,6 +180,17 @@ void options::getAvaibleResolutions()
 {
    /* Get available fullscreen/hardware modes */
    resolutions=SDL_ListModes(NULL,SDL_FULLSCREEN | SDL_DOUBLEBUF | SDL_OPENGL);
+
+   if(resolutions == (SDL_Rect**)0)
+   {
+      cerr << "Couldn't get available screen resolutions!" << endl;
+      resolutions = NULL;
+   }
+   else if(resolutions == (SDL_Rect**)1)
+   {
+      cerr << "Got all resolutions available." << endl;
+      resolutions = NULL;
+   }
 }
 
 /****************************************************************
@@ -654,12 +665,16 @@ string options::resolutionName()
    int i;
 
    resPosition = 0;
-   for(i = 0; resolutions[i]; i++)
+
+   if(resolutions != NULL)
    {
-      if( (resolutions[i]->w == screenWidth) &&
-          (resolutions[i]->h == screenHeight) )
+      for(i = 0; resolutions[i]; i++)
       {
-         resPosition = i;
+         if( (resolutions[i]->w == screenWidth) &&
+             (resolutions[i]->h == screenHeight) )
+         {
+            resPosition = i;
+         }
       }
    }
    return(saux);
@@ -1171,7 +1186,8 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
             resPosition--;
             
             /* Only accept resolutions >= 800x600 */
-            if( (resolutions[resPosition]->w >= 800) && 
+            if( (resolutions != NULL) && 
+                (resolutions[resPosition]->w >= 800) && 
                 (resolutions[resPosition]->h >= 600) )
             {
                screenWidth = resolutions[resPosition]->w;
@@ -1182,7 +1198,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
       }
       else if(object == (guiObject*) buttonResDec)
       {
-         if(resolutions[resPosition+1])
+         if((resolutions != NULL) && (resolutions[resPosition+1]))
          {
             resPosition++;
             /* Only accept resolutions >= 800x600 */
