@@ -26,7 +26,11 @@
 
 #define DATADIR @datadir@
 
-#define ENABLE_NLS @ENABLE_NLS@
+#if defined (__amigaos4__)
+   #define ENABLE_NLS  0
+#else
+   #define ENABLE_NLS @ENABLE_NLS@
+#endif
 
 #endif
 
