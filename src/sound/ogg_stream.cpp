@@ -237,7 +237,8 @@ bool ogg_stream::stream(ALuint buffer, bool rewind)
  
     while( (size < BUFFER_SIZE) && (result != 0))
     {
-        result = ov_read(&oggStream,data+size,BUFFER_SIZE-size,0,2,1,&section);
+        result = ov_read(&oggStream,data+size,BUFFER_SIZE-size,
+              (SDL_BYTEORDER == SDL_BIG_ENDIAN),2,1,&section);
     
         if(result > 0)
         {

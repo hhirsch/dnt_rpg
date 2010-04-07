@@ -10,6 +10,7 @@
 - Fixed a possible hang up when character dies;
 - Fixed XP ammount received when killing (was inverted);
 - Fixed a bug when saving files without images;
+- Fixed a bug when playing ogg files at big-endian systems;
 
 ================================================
 |                Version 0.5                   |
