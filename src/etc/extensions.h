@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -26,6 +26,21 @@
 
 /*! Print all openGL errors on cache */
 void printOpenGLErrors(string where="");
+
+/* some declarations for AmigaOS4 */
+#if defined (__amigaos4__)
+   typedef void (APIENTRYP PFNGLACTIVETEXTUREARBPROC) (GLenum texture);
+   typedef void (APIENTRYP PFNGLCLIENTACTIVETEXTUREARBPROC) (GLenum texture);
+   typedef void (APIENTRYP PFNGLMULTITEXCOORD2FARBPROC) (GLenum target, 
+                                                         GLfloat s, GLfloat t);
+   typedef void (APIENTRYP PFNGLMULTITEXCOORD2FVARBPROC) (GLenum target, 
+                                                          const GLfloat *v);
+   typedef void (APIENTRYP PFNGLMULTITEXCOORD2DARBPROC) (GLenum target, 
+                                                        GLdouble s, GLdouble t);
+   typedef void (APIENTRYP PFNGLMULTITEXCOORD2DVARBPROC) (GLenum target, 
+                                                          const GLdouble *v);
+#endif
+
 
 /*! The extensons class load, if avalaible, openGL extensions
  * functions used by DNT. */

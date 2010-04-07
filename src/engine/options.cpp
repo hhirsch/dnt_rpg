@@ -534,7 +534,6 @@ void options::setLanguage()
    {
       bind_textdomain_codeset(PACKAGE, "ISO-8859-1");
    }
-#endif
    
    if(!saux.empty())
    {
@@ -550,6 +549,7 @@ void options::setLanguage()
          }
       #endif
    }
+#endif
 }
 
 /****************************************************************
