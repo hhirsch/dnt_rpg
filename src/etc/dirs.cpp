@@ -38,6 +38,13 @@ void dirs::findDataDirectories()
 {
    FILE* arq;
    string file;
+   string dataDir = DATADIR;
+   dataDir += "/";
+   dataDir += PACKAGE;
+
+#if defined (__amigaos4__)
+   dataDir = "PROGDIR:data";
+#endif
 
    /* Try to open locally */
    file = "../data/fnt/arial.ttf";
@@ -49,15 +56,11 @@ void dirs::findDataDirectories()
    else
    {
       /* Try to open at defined datadir */
-      file = DATADIR;
-      file += "/";
-      file += PACKAGE;
+      file = dataDir;
       file += "/fnt/arial.ttf";
       if((arq = fopen(file.c_str(),"r")))
       {
-         dataPath = DATADIR;
-         dataPath += "/";
-         dataPath += PACKAGE;
+         dataPath = dataDir;
          dataPath += "/";
          fclose(arq);
       }
