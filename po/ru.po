@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-04-05 10:06-0300\n"
+"POT-Creation-Date: 2010-04-11 14:22-0300\n"
 "PO-Revision-Date: 2010-03-30 18:39+0000\n"
 "Last-Translator: Peter Belyaev <kapone2002@yandex.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -100,14 +100,14 @@ msgstr "Стремление и Равнение"
 
 #: src/engine/alignwindow.cpp:72 src/engine/aspectwindow.cpp:93
 #: src/engine/attwindow.cpp:236 src/engine/classwindow.cpp:117
-#: src/engine/options.cpp:1004 src/engine/racewindow.cpp:117
+#: src/engine/options.cpp:1034 src/engine/racewindow.cpp:117
 #: src/engine/skillwindow.cpp:159
 msgid "Confirm"
 msgstr "Подтвердить"
 
 #: src/engine/alignwindow.cpp:76 src/engine/aspectwindow.cpp:97
 #: src/engine/attwindow.cpp:240 src/engine/barterwindow.cpp:68
-#: src/engine/classwindow.cpp:121 src/engine/options.cpp:1008
+#: src/engine/classwindow.cpp:121 src/engine/options.cpp:1038
 #: src/engine/racewindow.cpp:121 src/engine/skillwindow.cpp:162
 msgid "Cancel"
 msgstr "Отменить"
@@ -179,7 +179,7 @@ msgid "Attribute Description"
 msgstr "Описание атрибута"
 
 #: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:567
-#: src/engine/inventwindow.cpp:370 src/engine/options.cpp:1260
+#: src/engine/inventwindow.cpp:370 src/engine/options.cpp:1292
 msgid "Warning"
 msgstr "Предупреждение"
 
@@ -467,34 +467,34 @@ msgstr "Неожиданное нападение."
 msgid "No enemies in the area."
 msgstr "Нет врагов в зоне."
 
-#: src/engine/dccnit.cpp:2070 src/engine/dccnit.cpp:2589
+#: src/engine/dccnit.cpp:2075 src/engine/dccnit.cpp:2594
 #: src/engine/shortcutswindow.cpp:51
 msgid "Nothing"
 msgstr "Ничего"
 
-#: src/engine/dccnit.cpp:2338
+#: src/engine/dccnit.cpp:2343
 #, c-format
 msgid "%s taken."
 msgstr "%s взят."
 
-#: src/engine/dccnit.cpp:2355
+#: src/engine/dccnit.cpp:2360
 msgid "Inventory is full!"
 msgstr "Инвентарь полон!"
 
-#: src/engine/dccnit.cpp:2388
+#: src/engine/dccnit.cpp:2393
 msgid "Door"
 msgstr "Дверь"
 
-#: src/engine/dccnit.cpp:2524
+#: src/engine/dccnit.cpp:2529
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s атакует %s"
 
-#: src/engine/dccnit.cpp:2690
+#: src/engine/dccnit.cpp:2695
 msgid "No more actions. Turn ended."
 msgstr "Больше никаких действий. Конец хода."
 
-#: src/engine/dccnit.cpp:4219
+#: src/engine/dccnit.cpp:4224
 msgid "Exit Battle Mode"
 msgstr "Выйти из боевого режима"
 
@@ -538,7 +538,7 @@ msgstr "Сохранить"
 msgid "Load"
 msgstr "Загрузка"
 
-#: src/engine/initial.cpp:92 src/engine/options.cpp:734
+#: src/engine/initial.cpp:92 src/engine/options.cpp:755
 msgid "Options"
 msgstr "Настройки"
 
@@ -805,149 +805,153 @@ msgstr "Ярлыки"
 msgid "Character Info"
 msgstr "Характеристики персонажа"
 
-#: src/engine/options.cpp:565 src/engine/options.cpp:592
+#: src/engine/options.cpp:582 src/engine/options.cpp:609
 #: data/weapons/types/munitions.dcl:2
 msgid "None"
 msgstr "Ничего"
 
-#: src/engine/options.cpp:570
+#: src/engine/options.cpp:587
 msgid "Characters"
 msgstr "Персонажи"
 
-#: src/engine/options.cpp:575
+#: src/engine/options.cpp:592
 msgid "All"
 msgstr "Все"
 
-#: src/engine/options.cpp:597
+#: src/engine/options.cpp:614
 msgid "Projective"
 msgstr ""
 
-#: src/engine/options.cpp:613 data/weapons/types/sizes.dcl:3
+#: src/engine/options.cpp:630 data/weapons/types/sizes.dcl:3
 #: data/weapons/types/weights.dcl:3
 msgid "Normal"
 msgstr "Обычный"
 
-#: src/engine/options.cpp:616
+#: src/engine/options.cpp:633
 msgid "Pursue"
 msgstr "Следовать"
 
-#: src/engine/options.cpp:631
+#: src/engine/options.cpp:648
 msgid "Disabled"
 msgstr "Отключено"
 
-#: src/engine/options.cpp:634
+#: src/engine/options.cpp:651
 msgid "2x"
 msgstr "2x"
 
-#: src/engine/options.cpp:637
+#: src/engine/options.cpp:654
 msgid "4x"
 msgstr "4x"
 
-#: src/engine/options.cpp:744
+#: src/engine/options.cpp:765
 msgid "Input"
 msgstr "Ввод"
 
-#: src/engine/options.cpp:747
+#: src/engine/options.cpp:768
 msgid "Windows"
 msgstr "Окна"
 
-#: src/engine/options.cpp:750
+#: src/engine/options.cpp:771
 msgid "Character"
 msgstr "Персонаж"
 
-#: src/engine/options.cpp:753
+#: src/engine/options.cpp:774
 msgid "Camera"
 msgstr "Камера"
 
-#: src/engine/options.cpp:758
+#: src/engine/options.cpp:779
 msgid "Audio"
 msgstr "Звук"
 
-#: src/engine/options.cpp:762
+#: src/engine/options.cpp:783
 msgid "Music Volume:"
 msgstr "Громкость музыки:"
 
-#: src/engine/options.cpp:779
+#: src/engine/options.cpp:800
 msgid "Effects Volume:"
 msgstr "Громкость эффектов:"
 
-#: src/engine/options.cpp:796
+#: src/engine/options.cpp:817
 msgid "Video"
 msgstr "Видео"
 
-#: src/engine/options.cpp:804
+#: src/engine/options.cpp:825
 msgid "Screen Resolution:"
 msgstr "Разрешение экрана:"
 
-#: src/engine/options.cpp:819
+#: src/engine/options.cpp:840
 msgid "Enable FullScreen"
 msgstr "Включить полноэкранный режим"
 
-#: src/engine/options.cpp:828
+#: src/engine/options.cpp:849
 msgid "Enable Grass Effects (need particles)"
 msgstr "Включить эффекты травы (требует включить частицы)"
 
-#: src/engine/options.cpp:837
+#: src/engine/options.cpp:858
 msgid "Enable Particles Effects"
 msgstr "Включить эффекты частиц"
 
-#: src/engine/options.cpp:849
+#: src/engine/options.cpp:870
 msgid "Enable MultiTextures"
 msgstr "Включить мультитекстурирование"
 
-#: src/engine/options.cpp:859
+#: src/engine/options.cpp:880
 msgid "Enable Anisotropic Filter"
 msgstr "Включить Анизатропную фильтрацию"
 
-#: src/engine/options.cpp:870
+#: src/engine/options.cpp:891
 msgid "Reflections:"
 msgstr "Отражения:"
 
-#: src/engine/options.cpp:887
+#: src/engine/options.cpp:908
 msgid "Shadows:"
 msgstr "Тени:"
 
-#: src/engine/options.cpp:903
+#: src/engine/options.cpp:924
 msgid "Anti-Aliasing:"
 msgstr "Сглаживание:"
 
-#: src/engine/options.cpp:918
+#: src/engine/options.cpp:939
 msgid "FarView:"
 msgstr "Дальность прорисовки"
 
-#: src/engine/options.cpp:934
+#: src/engine/options.cpp:955
 msgid "Game"
 msgstr "Геймплей"
 
-#: src/engine/options.cpp:940
+#: src/engine/options.cpp:961
 msgid "Language:"
 msgstr "Язык:"
 
-#: src/engine/options.cpp:957
+#: src/engine/options.cpp:978
 msgid "Camera Mode:"
 msgstr "Режим камеры:"
 
-#: src/engine/options.cpp:973
+#: src/engine/options.cpp:994
 msgid "Auto End Turn"
 msgstr "Авто-конец хода"
 
-#: src/engine/options.cpp:982
+#: src/engine/options.cpp:1003
 msgid "Always Run"
 msgstr "Всегда бежать"
 
-#: src/engine/options.cpp:991
+#: src/engine/options.cpp:1012
 msgid "Show Enemy Battle Circle"
 msgstr "Показать боевой круг врага"
 
-#: src/engine/options.cpp:1261
+#: src/engine/options.cpp:1021
+msgid "Highlight current enemy"
+msgstr ""
+
+#: src/engine/options.cpp:1293
 msgid "Some changes will only take effect upon restart."
 msgstr "Для некоторых изменений требуется перезагрузка"
 
-#: src/engine/options.cpp:1305
+#: src/engine/options.cpp:1337
 msgid "Press a key to: "
 msgstr "Нажать кнопку: "
 
-#: src/engine/options.cpp:1308
+#: src/engine/options.cpp:1340
 msgid "Waiting..."
 msgstr "Ожидание..."
 

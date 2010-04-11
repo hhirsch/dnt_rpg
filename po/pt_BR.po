@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-04-05 10:06-0300\n"
+"POT-Creation-Date: 2010-04-11 14:22-0300\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -98,14 +98,14 @@ msgstr "Tendência e Alinhamento"
 
 #: src/engine/alignwindow.cpp:72 src/engine/aspectwindow.cpp:93
 #: src/engine/attwindow.cpp:236 src/engine/classwindow.cpp:117
-#: src/engine/options.cpp:1004 src/engine/racewindow.cpp:117
+#: src/engine/options.cpp:1034 src/engine/racewindow.cpp:117
 #: src/engine/skillwindow.cpp:159
 msgid "Confirm"
 msgstr "Confirmar"
 
 #: src/engine/alignwindow.cpp:76 src/engine/aspectwindow.cpp:97
 #: src/engine/attwindow.cpp:240 src/engine/barterwindow.cpp:68
-#: src/engine/classwindow.cpp:121 src/engine/options.cpp:1008
+#: src/engine/classwindow.cpp:121 src/engine/options.cpp:1038
 #: src/engine/racewindow.cpp:121 src/engine/skillwindow.cpp:162
 msgid "Cancel"
 msgstr "Cancelar"
@@ -177,7 +177,7 @@ msgid "Attribute Description"
 msgstr "Descrição do Atributo"
 
 #: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:567
-#: src/engine/inventwindow.cpp:370 src/engine/options.cpp:1260
+#: src/engine/inventwindow.cpp:370 src/engine/options.cpp:1292
 msgid "Warning"
 msgstr "Aviso"
 
@@ -469,34 +469,34 @@ msgstr "Turno de ataque surpresa."
 msgid "No enemies in the area."
 msgstr "Sem inimigos na área."
 
-#: src/engine/dccnit.cpp:2070 src/engine/dccnit.cpp:2589
+#: src/engine/dccnit.cpp:2075 src/engine/dccnit.cpp:2594
 #: src/engine/shortcutswindow.cpp:51
 msgid "Nothing"
 msgstr "Nada"
 
-#: src/engine/dccnit.cpp:2338
+#: src/engine/dccnit.cpp:2343
 #, c-format
 msgid "%s taken."
 msgstr "Pegou %s."
 
-#: src/engine/dccnit.cpp:2355
+#: src/engine/dccnit.cpp:2360
 msgid "Inventory is full!"
 msgstr "O inventário está cheio!"
 
-#: src/engine/dccnit.cpp:2388
+#: src/engine/dccnit.cpp:2393
 msgid "Door"
 msgstr "Porta"
 
-#: src/engine/dccnit.cpp:2524
+#: src/engine/dccnit.cpp:2529
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s ataca %s"
 
-#: src/engine/dccnit.cpp:2690
+#: src/engine/dccnit.cpp:2695
 msgid "No more actions. Turn ended."
 msgstr "Sem mais ações: Turno Finalizado."
 
-#: src/engine/dccnit.cpp:4219
+#: src/engine/dccnit.cpp:4224
 msgid "Exit Battle Mode"
 msgstr "Sai do Modo de Batalha"
 
@@ -540,7 +540,7 @@ msgstr "Salvar"
 msgid "Load"
 msgstr "Carregar"
 
-#: src/engine/initial.cpp:92 src/engine/options.cpp:734
+#: src/engine/initial.cpp:92 src/engine/options.cpp:755
 msgid "Options"
 msgstr "Opções"
 
@@ -807,149 +807,153 @@ msgstr "Atalhos"
 msgid "Character Info"
 msgstr "Personagem"
 
-#: src/engine/options.cpp:565 src/engine/options.cpp:592
+#: src/engine/options.cpp:582 src/engine/options.cpp:609
 #: data/weapons/types/munitions.dcl:2
 msgid "None"
 msgstr "Nenhuma"
 
-#: src/engine/options.cpp:570
+#: src/engine/options.cpp:587
 msgid "Characters"
 msgstr "Personagens"
 
-#: src/engine/options.cpp:575
+#: src/engine/options.cpp:592
 msgid "All"
 msgstr "Todas"
 
-#: src/engine/options.cpp:597
+#: src/engine/options.cpp:614
 msgid "Projective"
 msgstr "Projetiva"
 
-#: src/engine/options.cpp:613 data/weapons/types/sizes.dcl:3
+#: src/engine/options.cpp:630 data/weapons/types/sizes.dcl:3
 #: data/weapons/types/weights.dcl:3
 msgid "Normal"
 msgstr "Normal"
 
-#: src/engine/options.cpp:616
+#: src/engine/options.cpp:633
 msgid "Pursue"
 msgstr "Perseguir"
 
-#: src/engine/options.cpp:631
+#: src/engine/options.cpp:648
 msgid "Disabled"
 msgstr "Desligado"
 
-#: src/engine/options.cpp:634
+#: src/engine/options.cpp:651
 msgid "2x"
 msgstr "2x"
 
-#: src/engine/options.cpp:637
+#: src/engine/options.cpp:654
 msgid "4x"
 msgstr "4x"
 
-#: src/engine/options.cpp:744
+#: src/engine/options.cpp:765
 msgid "Input"
 msgstr "Teclas"
 
-#: src/engine/options.cpp:747
+#: src/engine/options.cpp:768
 msgid "Windows"
 msgstr "Janelas"
 
-#: src/engine/options.cpp:750
+#: src/engine/options.cpp:771
 msgid "Character"
 msgstr "Personagem"
 
-#: src/engine/options.cpp:753
+#: src/engine/options.cpp:774
 msgid "Camera"
 msgstr "Câmera"
 
-#: src/engine/options.cpp:758
+#: src/engine/options.cpp:779
 msgid "Audio"
 msgstr "Áudio"
 
-#: src/engine/options.cpp:762
+#: src/engine/options.cpp:783
 msgid "Music Volume:"
 msgstr "Volume da Música:"
 
-#: src/engine/options.cpp:779
+#: src/engine/options.cpp:800
 msgid "Effects Volume:"
 msgstr "Volume dos Efeitos:"
 
-#: src/engine/options.cpp:796
+#: src/engine/options.cpp:817
 msgid "Video"
 msgstr "Vídeo"
 
-#: src/engine/options.cpp:804
+#: src/engine/options.cpp:825
 msgid "Screen Resolution:"
 msgstr "Resolução da Tela:"
 
-#: src/engine/options.cpp:819
+#: src/engine/options.cpp:840
 msgid "Enable FullScreen"
 msgstr "Habilitar Tela Cheia"
 
-#: src/engine/options.cpp:828
+#: src/engine/options.cpp:849
 msgid "Enable Grass Effects (need particles)"
 msgstr "Habilitar Vegetação"
 
-#: src/engine/options.cpp:837
+#: src/engine/options.cpp:858
 msgid "Enable Particles Effects"
 msgstr "Habilitar Partículas"
 
-#: src/engine/options.cpp:849
+#: src/engine/options.cpp:870
 msgid "Enable MultiTextures"
 msgstr "Habilitar Múltiplas Texturas"
 
-#: src/engine/options.cpp:859
+#: src/engine/options.cpp:880
 msgid "Enable Anisotropic Filter"
 msgstr "Habilitar Filtro Anisotrópico"
 
-#: src/engine/options.cpp:870
+#: src/engine/options.cpp:891
 msgid "Reflections:"
 msgstr "Reflexões:"
 
-#: src/engine/options.cpp:887
+#: src/engine/options.cpp:908
 msgid "Shadows:"
 msgstr "Sombras:"
 
-#: src/engine/options.cpp:903
+#: src/engine/options.cpp:924
 msgid "Anti-Aliasing:"
 msgstr "Anti-Aliasing:"
 
-#: src/engine/options.cpp:918
+#: src/engine/options.cpp:939
 msgid "FarView:"
 msgstr "Distância Visível"
 
-#: src/engine/options.cpp:934
+#: src/engine/options.cpp:955
 msgid "Game"
 msgstr "Jogo"
 
-#: src/engine/options.cpp:940
+#: src/engine/options.cpp:961
 msgid "Language:"
 msgstr "Língua:"
 
-#: src/engine/options.cpp:957
+#: src/engine/options.cpp:978
 msgid "Camera Mode:"
 msgstr "Modo da Câmera:"
 
-#: src/engine/options.cpp:973
+#: src/engine/options.cpp:994
 msgid "Auto End Turn"
 msgstr "Término Automático de Turnos"
 
-#: src/engine/options.cpp:982
+#: src/engine/options.cpp:1003
 msgid "Always Run"
 msgstr "Sempre Correr"
 
-#: src/engine/options.cpp:991
+#: src/engine/options.cpp:1012
 msgid "Show Enemy Battle Circle"
 msgstr "Mostrar Cículos de Luta Inimigo"
 
-#: src/engine/options.cpp:1261
+#: src/engine/options.cpp:1021
+msgid "Highlight current enemy"
+msgstr "Ressaltar inimigo em ação"
+
+#: src/engine/options.cpp:1293
 msgid "Some changes will only take effect upon restart."
 msgstr "Algumas alterações só terão efeito após o reinício do programa."
 
-#: src/engine/options.cpp:1305
+#: src/engine/options.cpp:1337
 msgid "Press a key to: "
 msgstr "Pressione uma tecla para: "
 
-#: src/engine/options.cpp:1308
+#: src/engine/options.cpp:1340
 msgid "Waiting..."
 msgstr "Esperando..."
 
