@@ -327,6 +327,10 @@ bool options::load(string file)
          /* Read Show Enemy Circles options */
          showEnemyCircles = (value == "true");
       }
+      else if(key == "HighlightEnemy")
+      {
+         highlightEnemy = (value == "true");
+      }
       else if(key == "AlwaysRun")
       {
          /* If will always run or not */
@@ -463,6 +467,8 @@ void options::save()
    fprintf(arq, "AutoEndTurn = %s\n", autoEndTurn?"true":"false");
    /* Show Enemy Circles */
    fprintf(arq, "ShowEnemyCircles = %s\n", showEnemyCircles?"true":"false");
+   /* HighLight Enemy */
+   fprintf(arq, "HighlightEnemy = %s\n", highlightEnemy?"true":"false");
    /* Always Run */
    fprintf(arq, "AlwaysRun = %s\n", alwaysRun?"true":"false");
 
@@ -1010,6 +1016,15 @@ void options::displayOptionsScreen(guiInterface* interf)
               dir.getRealFile("texturas/options/showenemycircles.png").c_str());
    posY += 25;
 
+   /* ShowEnemyCircles or or Not */
+   qt = list->insertTextBox(24,posY,219,posY+34,0,
+                            gettext("Highlight current enemy"));
+   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   cxSelHighlightEnemy = list->insertCxSel(12,posY+4,highlightEnemy);
+   list->insertPicture(220,posY,40,112,
+              dir.getRealFile("texturas/options/highlightenemy.png").c_str());
+   posY += 25;
+
 
    /************************************************
     *                 Action Buttons               *
@@ -1260,6 +1275,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          autoEndTurn = cxSelAutoEndTurn->isSelected();
          alwaysRun = cxSelAlwaysRun->isSelected();
          showEnemyCircles = cxSelShowEnemyCircles->isSelected();
+         highlightEnemy = cxSelHighlightEnemy->isSelected();
 
          bool prevFullScreen = enableFullScreen;
          enableFullScreen = cxSelFullScreen->isSelected();
@@ -1491,6 +1507,14 @@ bool options::getShowEnemyCircles()
 }
 
 /****************************************************************
+ *                     getHighLightEnemy                        *
+ ****************************************************************/
+bool options::getHighlightEnemy()
+{
+   return(highlightEnemy);
+}
+
+/****************************************************************
  *                        getAlwaysRun                          *
  ****************************************************************/
 bool options::getAlwaysRun()
@@ -1603,6 +1627,7 @@ float  options::farViewFactor = 1.0;
 bool   options::enableMultiTexture = true;
 bool   options::autoEndTurn = true;
 bool   options::showEnemyCircles = false;
+bool   options::highlightEnemy = true;
 bool   options::enableAnisotropic = true;
 bool   options::alwaysRun = true;
 Uint32 options::keys[DNT_TOTAL_KEYS];

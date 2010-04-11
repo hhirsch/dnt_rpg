@@ -1966,6 +1966,11 @@ void engine::treatScripts()
          character* npc = fight->actualCharacterTurn();
          if(npc)
          {
+            /* Hightklight the enemy, if desired */
+            if(option->getHighlightEnemy())
+            {
+               curTarget = npc;
+            }
             iaScript* script = (iaScript*) npc->getBattleScript();
             if( (script) && (npc->isAlive()))
             {

@@ -8,6 +8,7 @@ Language = 0
 Camera = 1
 AutoEndTurn = true
 ShowEnemyCircles = false
+HighlightEnemy = true
 AlwaysRun = false
 # Video Preferences
 Resolution = 1024x768

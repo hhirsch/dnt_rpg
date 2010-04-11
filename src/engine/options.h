@@ -172,6 +172,9 @@ class options
       /*! Verify if will show enemies circles at battle
        * \return true if will show, false if not. */
       bool getShowEnemyCircles();
+      /*! Verify if is to hightlight in-action enemy at battles
+       * \return true to highlight or falst */
+      bool getHighlightEnemy();
       /*! Verify if playable characters will always run or not
        * \return -> true if will always run */
       bool getAlwaysRun();
@@ -232,6 +235,7 @@ class options
       static bool    enableAnisotropic; /**< If anisotropic filter is used */
       static bool    autoEndTurn;     /**< If will autoend turn or not */
       static bool    showEnemyCircles; /**< if show enemies battle circles */
+      static bool    highlightEnemy;  /**< if highlight enemy at battle */
       static bool    alwaysRun;        /**< if will always run */
       static Uint32  keys[DNT_TOTAL_KEYS]; /**< The key values */
 
@@ -293,6 +297,7 @@ class options
       cxSel* cxSelAnisotropic;
 
       cxSel* cxSelShowEnemyCircles;
+      cxSel* cxSelHighlightEnemy;
       cxSel* cxSelAutoEndTurn;
       cxSel* cxSelAlwaysRun;
 

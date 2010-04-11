@@ -7,6 +7,7 @@
 - Optimized text render code;
 - Lowered delay times for battles;
 - Applying skill and attribute modifier to damage and heal points;
+- Option to highlight current enemy in action at battles;
 - Fixed a possible hang up when character dies;
 - Fixed XP ammount received when killing (was inverted);
 - Fixed a bug when saving files without images;
