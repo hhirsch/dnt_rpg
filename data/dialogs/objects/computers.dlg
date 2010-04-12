@@ -60,6 +60,7 @@ dialog(1)
          post_test = roll(OPERATE_ELETRONIC_OBJECTS, 5)
          if_action = change_object_state(3)
          if_action = receive_xp(25)
+         if_action = dialog_init(5)
          if_action = go_to_dialog(2)
          else_action = go_to_dialog(3)
 
@@ -70,6 +71,7 @@ dialog(1)
          post_test = roll(OPERATE_ELETRONIC_OBJECTS, 15)
          if_action = change_object_state(2)
          if_action = receive_xp(50)
+         if_action = dialog_init(6)
          if_action = go_to_dialog(2)
          else_action = go_to_dialog(3)
 
@@ -90,8 +92,8 @@ dialog(2)
    npc_end
    pc_begin
       option
-         text = gettext("Back")
-         action = go_to_dialog(0)
+         text = gettext("Exit")
+         action = finish_dialog()
    pc_end
 end_dialog
 
@@ -120,5 +122,31 @@ dialog(4)
       option
          text = gettext("Restart")
          action = go_to_dialog(0)
+   pc_end
+end_dialog
+############################################################
+#                    Ubuntu Dialog                         #
+############################################################
+dialog(5)
+   npc_begin
+      text = gettext("(You see a debian-like aptitude at the computer's main screen)")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Exit")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                    Gentoo Dialog                         #
+############################################################
+dialog(6)
+   npc_begin
+      text = gettext("(You see a pacman-like figure at computer's main screen)")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Exit")
+         action = finish_dialog()
    pc_end
 end_dialog

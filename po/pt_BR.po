@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-04-11 14:22-0300\n"
+"POT-Creation-Date: 2010-04-12 09:39-0300\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -545,6 +545,9 @@ msgid "Options"
 msgstr "Opções"
 
 #: src/engine/initial.cpp:94 data/dialogs/objects/computers.dlg:21
+#: data/dialogs/objects/computers.dlg:95
+#: data/dialogs/objects/computers.dlg:136
+#: data/dialogs/objects/computers.dlg:149
 #: data/dialogs/objects/bunker_school_server.dlg:22
 #: data/dialogs/objects/bunker_school_server.dlg:36
 #: data/dialogs/objects/bunker_school_server.dlg:50
@@ -3760,24 +3763,24 @@ msgstr "Instalar Ruindows Original"
 msgid "Install Ubuntu Linux"
 msgstr "Instalar Ubuntu Linux"
 
-#: data/dialogs/objects/computers.dlg:69
+#: data/dialogs/objects/computers.dlg:70
 msgid "Install Gentoo Linux"
 msgstr "Instalar Gentoo Linux"
 
-#: data/dialogs/objects/computers.dlg:78 data/dialogs/objects/computers.dlg:93
-#: data/dialogs/objects/computers.dlg:107
+#: data/dialogs/objects/computers.dlg:80
+#: data/dialogs/objects/computers.dlg:109
 msgid "Back"
 msgstr "Voltar"
 
-#: data/dialogs/objects/computers.dlg:89
+#: data/dialogs/objects/computers.dlg:91
 msgid "Operational System successfully installed."
 msgstr "Sistema Operacional instalado com sucesso."
 
-#: data/dialogs/objects/computers.dlg:103
+#: data/dialogs/objects/computers.dlg:105
 msgid "You have failed to install an Operational System"
 msgstr "Você falhou na instalação do Sistema Operacional"
 
-#: data/dialogs/objects/computers.dlg:117
+#: data/dialogs/objects/computers.dlg:119
 msgid ""
 "(You see a blue screen with some hexadecimal codes. There's nothing you can "
 "do except restart the system.)"
@@ -3785,9 +3788,19 @@ msgstr ""
 "(Você vê uma tela azul com alguns códigos hexadecimais. Não há nada a fazer "
 "exceto reiniciar o sistema.)"
 
-#: data/dialogs/objects/computers.dlg:121
+#: data/dialogs/objects/computers.dlg:123
 msgid "Restart"
 msgstr "Reiniciar"
+
+#: data/dialogs/objects/computers.dlg:132
+msgid "(You see a debian-like aptitude at the computer's main screen)"
+msgstr "(Você vê um aptitude tipo debian na tela principal do computador)"
+
+#: data/dialogs/objects/computers.dlg:145
+msgid "(You see a pacman-like figure at computer's main screen)"
+msgstr ""
+"(Você vê o desenho d'uma figura estilo pacman na tela principal "
+"do computador)"
 
 #: data/dialogs/objects/bunker_school_server.dlg:6
 msgid "(You see the bunker school server main screen)"

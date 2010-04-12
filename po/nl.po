@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-04-11 14:22-0300\n"
+"POT-Creation-Date: 2010-04-12 09:39-0300\n"
 "PO-Revision-Date: 2009-04-16 21:14+0000\n"
 "Last-Translator: Marcel de Klein <q-bus@home.nl>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -543,6 +543,9 @@ msgid "Options"
 msgstr ""
 
 #: src/engine/initial.cpp:94 data/dialogs/objects/computers.dlg:21
+#: data/dialogs/objects/computers.dlg:95
+#: data/dialogs/objects/computers.dlg:136
+#: data/dialogs/objects/computers.dlg:149
 #: data/dialogs/objects/bunker_school_server.dlg:22
 #: data/dialogs/objects/bunker_school_server.dlg:36
 #: data/dialogs/objects/bunker_school_server.dlg:50
@@ -3090,31 +3093,39 @@ msgstr ""
 msgid "Install Ubuntu Linux"
 msgstr ""
 
-#: data/dialogs/objects/computers.dlg:69
+#: data/dialogs/objects/computers.dlg:70
 msgid "Install Gentoo Linux"
 msgstr ""
 
-#: data/dialogs/objects/computers.dlg:78 data/dialogs/objects/computers.dlg:93
-#: data/dialogs/objects/computers.dlg:107
+#: data/dialogs/objects/computers.dlg:80
+#: data/dialogs/objects/computers.dlg:109
 msgid "Back"
 msgstr ""
 
-#: data/dialogs/objects/computers.dlg:89
+#: data/dialogs/objects/computers.dlg:91
 msgid "Operational System successfully installed."
 msgstr ""
 
-#: data/dialogs/objects/computers.dlg:103
+#: data/dialogs/objects/computers.dlg:105
 msgid "You have failed to install an Operational System"
 msgstr ""
 
-#: data/dialogs/objects/computers.dlg:117
+#: data/dialogs/objects/computers.dlg:119
 msgid ""
 "(You see a blue screen with some hexadecimal codes. There's nothing you can "
 "do except restart the system.)"
 msgstr ""
 
-#: data/dialogs/objects/computers.dlg:121
+#: data/dialogs/objects/computers.dlg:123
 msgid "Restart"
+msgstr ""
+
+#: data/dialogs/objects/computers.dlg:132
+msgid "(You see a debian-like aptitude at the computer's main screen)"
+msgstr ""
+
+#: data/dialogs/objects/computers.dlg:145
+msgid "(You see a pacman-like figure at computer's main screen)"
 msgstr ""
 
 #: data/dialogs/objects/bunker_school_server.dlg:6
