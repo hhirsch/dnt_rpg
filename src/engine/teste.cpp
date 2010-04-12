@@ -81,21 +81,14 @@ int main(int argc, char **argv)
 
    SDL_ShowCursor(SDL_DISABLE);
 
-   GLuint tituloID;
    /* Call Splash Screen  */
    gameEngine->splashScreen();
 
-   /* Load backImage */
-   SDL_Surface* img = IMG_Load(
-                        dir.getRealFile("texturas/general/inicio.png").c_str());
-   glGenTextures(1,&tituloID);
-   setTexture(img,tituloID);
-   SDL_FreeSurface(img);
-
    /* Call Initial Screen */
    glDisable(GL_LIGHTING);
-   gameEngine->fadeInTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
-   int result = gameEngine->menuScreen(ON_INIT,tituloID,true);
+   gameEngine->fadeInTexture(gameEngine->idTextura,
+         0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
+   int result = gameEngine->menuScreen(ON_INIT,true);
    int estado = ON_INIT;
    int charCreation = 0;
    bool reloadMusic;
@@ -105,12 +98,12 @@ int main(int argc, char **argv)
        reloadMusic = false;
        if(result == NEW_GAME)
        {
-          charCreation = gameEngine->characterScreen(tituloID);
+          charCreation = gameEngine->characterScreen();
           if( charCreation == CHAR_CONFIRM)
           {
              glDisable(GL_LIGHTING);
-             gameEngine->fadeOutTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1, 
-                                    800, 600);
+             glDisable(GL_FOG);
+             gameEngine->mainScreenEffect();
 
              comicBook* cBook = new comicBook();
              cBook->load("comics/intro/intro.dcb");
@@ -139,7 +132,7 @@ int main(int argc, char **argv)
        
        if(result == OPTIONS)
        {
-          gameEngine->optionsScreen(tituloID);
+          gameEngine->optionsScreen();
        }
        #ifdef REDE
           gameEngine->server = server;
@@ -152,8 +145,8 @@ int main(int argc, char **argv)
          if(result == CONTINUE_GAME)
          {
             glDisable(GL_LIGHTING);
-            gameEngine->fadeOutTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1,
-                                       800,600);
+            gameEngine->fadeOutTexture(gameEngine->idTextura,
+                  0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
          }
          if(gameEngine->run(screen, (result == CONTINUE_GAME)) == 1)
          {
@@ -166,13 +159,13 @@ int main(int argc, char **argv)
          reloadMusic = true;
          glDisable(GL_LIGHTING);
 	      glDisable(GL_FOG);
-         gameEngine->fadeInTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1, 
-                                   800, 600);
-         result = gameEngine->menuScreen(estado,tituloID,reloadMusic);
+         gameEngine->fadeInTexture(gameEngine->idTextura,
+               0,0,SCREEN_X-1,SCREEN_Y-1, 800, 600);
+         result = gameEngine->menuScreen(estado,reloadMusic);
       }
       else
       {
-         result = gameEngine->menuScreen(estado,tituloID,reloadMusic);
+         result = gameEngine->menuScreen(estado,reloadMusic);
       }
       charCreation = CHAR_OTHER;
        
@@ -182,9 +175,8 @@ int main(int argc, char **argv)
    }
 
    glDisable(GL_LIGHTING);
-   gameEngine->fadeOutTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
-
-   glDeleteTextures(1,&tituloID); 
+   gameEngine->fadeOutTexture(gameEngine->idTextura,
+         0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
 
    delete(gameEngine);
 

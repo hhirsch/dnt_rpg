@@ -145,8 +145,8 @@ void saveWindow::changeInfo(int mouseX, int mouseY)
 /***********************************************************************
  *                                 run                                 *
  ***********************************************************************/
-int saveWindow::run(bool load, GLdouble proj[16],GLdouble modl[16],
-                    GLint viewPort[4])
+int saveWindow::run(bool load, GLuint tituloId, 
+      GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    int state = -1;
    guiObject* obj;
@@ -155,7 +155,6 @@ int saveWindow::run(bool load, GLdouble proj[16],GLdouble modl[16],
    int x,y;
    int time=0, lastTime=0;
    int eventInfo;
-   dirs dir;
    options option;
    cursor cursors;
 
@@ -164,14 +163,6 @@ int saveWindow::run(bool load, GLdouble proj[16],GLdouble modl[16],
 
    /* Create the GUI */
    gui = new guiInterface("");
-
-   /* Create the background */
-   GLuint tituloId;
-   SDL_Surface* img = IMG_Load(
-         dir.getRealFile("texturas/general/inicio.png").c_str());
-   glGenTextures(1,&tituloId);
-   setTexture(img,tituloId);
-   SDL_FreeSurface(img);
 
    /* Open the window */
    open();
@@ -231,7 +222,6 @@ int saveWindow::run(bool load, GLdouble proj[16],GLdouble modl[16],
 
    /* Delete the gui and textures */
    delete(gui);
-   glDeleteTextures(1, &tituloId);
 
    glEnable(GL_LIGHTING);
    glEnable(GL_FOG);

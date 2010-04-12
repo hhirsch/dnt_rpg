@@ -229,6 +229,7 @@ engine::~engine()
    glDeleteTextures(1, &destinyImage);
    glDeleteTextures(1, &rangeCircle);
    glDeleteTextures(1, &featRangeCircle);
+   glDeleteTextures(1, &idTextura);
 
    /* Clear ModState */
    modifState.clear();
@@ -470,12 +471,16 @@ bool engine::loadGame()
 
    /* create and run the load/save window */
    saveWindow *savWindow = new saveWindow();
-   if(savWindow->run(true, proj, modl, viewPort) == DNT_SAVE_WINDOW_CONFIRM)
+   if(savWindow->run(true, idTextura, 
+            proj, modl, viewPort) == DNT_SAVE_WINDOW_CONFIRM)
    {
       saveFile *sav = new saveFile();
 
       if(sav->loadHeader(savWindow->getSelectedFileName()))
       {
+         glDisable(GL_LIGHTING);
+         glDisable(GL_FOG);
+         mainScreenEffect();
          /* Quit from the current map, if is in one */
          quitCurrentGame();
 
@@ -542,7 +547,8 @@ void engine::saveGame()
    {
       /* create and run the load/save window */
       saveWindow *savWindow = new saveWindow();
-      if(savWindow->run(false, proj, modl, viewPort) == DNT_SAVE_WINDOW_CONFIRM)
+      if(savWindow->run(false, idTextura, 
+               proj, modl, viewPort) == DNT_SAVE_WINDOW_CONFIRM)
       {
          saveFile *sav = new saveFile();
 
@@ -1225,7 +1231,7 @@ void engine::splashScreen()
 /*********************************************************************
  *                       Call Initial Game Menu                      *
  *********************************************************************/
-int engine::menuScreen(int Status, GLuint idTextura, bool reloadMusic)
+int engine::menuScreen(int Status, bool reloadMusic)
 {
    /* Reload Music, if needed */
    if(reloadMusic)
@@ -1245,9 +1251,38 @@ int engine::menuScreen(int Status, GLuint idTextura, bool reloadMusic)
 }
 
 /*********************************************************************
+ *                          mainScreenEffect                         *
+ *********************************************************************/
+void engine::mainScreenEffect()
+{
+   GLfloat scale = 1.0f;
+   glColor3f(1.0f, 1.0f, 1.0f);
+
+   while(scale > 0)
+   {
+      glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+      glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
+      draw2DMode();
+      glPushMatrix();
+      glScalef(scale, scale, scale);
+         textureToScreen(idTextura,0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
+      glPopMatrix();
+      draw3DMode(option->getFarViewFactor()*OUTDOOR_FARVIEW);
+
+      glFlush();
+      SDL_GL_SwapBuffers();
+
+      scale -= 0.04f;
+
+      SDL_Delay(30);
+   }
+}
+
+/*********************************************************************
  *                       Call Options Game Screen                    *
  *********************************************************************/
-int engine::optionsScreen(GLuint idTextura)
+int engine::optionsScreen()
 {
    int optionW = OPTIONSW_OTHER;
    int time = SDL_GetTicks();
@@ -1258,6 +1293,7 @@ int engine::optionsScreen(GLuint idTextura)
    int eventInfo = FARSO_EVENT_NONE;
 
    glDisable(GL_LIGHTING);
+   glDisable(GL_FOG);
 
    option->displayOptionsScreen(gui);
 
@@ -1311,7 +1347,7 @@ int engine::optionsScreen(GLuint idTextura)
 /*********************************************************************
  *              Call Screens to Create, Evolute Character            *
  *********************************************************************/
-int engine::characterScreen(GLuint idTextura)
+int engine::characterScreen()
 {
    int charCreation = CHAR_OTHER;
    int time = SDL_GetTicks();
@@ -1673,8 +1709,14 @@ void engine::init(SDL_Surface *screen)
 
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
    SDL_FreeSurface(img);
+
+   /* Main screen texture */
+   img = IMG_Load(dir.getRealFile("texturas/general/inicio.png").c_str());
+   glGenTextures(1,&idTextura);
+   setTexture(img, idTextura);
+   SDL_FreeSurface(img);
+
 
     /* ShadowMap */
    shadowMap.init();
@@ -3347,6 +3389,13 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
    bool shadow = ( (option->getShadowType() == SHADOWS_PROJECTIVE) && 
                    (actualMap->isOutdoor()) && 
                    (gameSun->shadowTime()) );
+
+   /* Renable fog */
+   if(!lightPass)
+   {
+      glEnable(GL_LIGHTING);
+      glEnable(GL_FOG);
+   }
 
    /* SKY */
    if( (!lightPass) && (actualMap->isOutdoor()) )

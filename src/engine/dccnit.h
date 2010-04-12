@@ -98,6 +98,7 @@ class engine
       GLdouble modl[16];               /**< ModelView Matrix  */
       GLfloat camProj[16];             /**< Camera Projection */
       GLint viewPort[4];               /**< ViewPort Matrix */
+      GLuint idTextura;            /**< Main screen back texture */
 
       /*!
        **************************************************************** 
@@ -207,31 +208,31 @@ class engine
        void fadeOutTexture(GLuint id, int x1, int y1, int x2, int y2,
                            int sizeX, int sizeY);
 
+       /*! Do an effect to the main screen */
+      void mainScreenEffect();
+
       /*!
        **************************************************************** 
        * Load Initial Menu
        * \param Status -> ON_INIT or IN_GAME
-       * \param idTextura -> loaded initial screen texture
        * \param reloadMusic -> true to reload the music
        * \return initialScreen return Values
        ***************************************************************/
-      int menuScreen(int Status, GLuint idTextura, bool reloadMusic);
+      int menuScreen(int Status, bool reloadMusic);
 
       /*!
        **************************************************************** 
        * Load Character's Screens
-       * \param idTextura -> loaded initial screen texture
        * \return CharacterScreens return values
        ***************************************************************/
-      int characterScreen(GLuint idTextura);
+      int characterScreen();
 
       /*!
        *************************************************************** 
        * Load Options Screen
-       * \param idTextura -> loaded initial screen texture
        * \return Options Screen Return Value.
        ***************************************************************/
-      int optionsScreen(GLuint idTextura);
+      int optionsScreen();
 
       /*!
        *************************************************************** 

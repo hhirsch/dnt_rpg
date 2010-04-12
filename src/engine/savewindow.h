@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -40,11 +40,13 @@ class saveWindow
 
       /*! Run the Save/Load Window
        * \param load -> true if the window is a loading one
+       * \param tituloId -> the main screen texture
        * \param proj -> projection matrix
        * \param modl -> model view matrix
        * \param viewPort -> viewPort vector
        * \return -> DNT_SAVE_WINDOW_CANCEL or DNT_SAVE_WINDOW_CONFIRM */
-      int run(bool load, GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
+      int run(bool load, GLuint tituloId, 
+            GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
 
       /*! Get the selected fileName
        * \return selected fileName (if one) */
