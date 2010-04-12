@@ -229,7 +229,9 @@ int saveWindow::run(bool load, GLdouble proj[16],GLdouble modl[16],
       }
    }
 
+   /* Delete the gui and textures */
    delete(gui);
+   glDeleteTextures(1, &tituloId);
 
    glEnable(GL_LIGHTING);
    glEnable(GL_FOG);
