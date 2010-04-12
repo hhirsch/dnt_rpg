@@ -676,7 +676,8 @@ string options::resolutionName()
    {
       for(i = 0; resolutions[i]; i++)
       {
-         if( (resolutions[i]->w == screenWidth) &&
+         if( (resolutions[i] != NULL) &&
+             (resolutions[i]->w == screenWidth) &&
              (resolutions[i]->h == screenHeight) )
          {
             resPosition = i;
