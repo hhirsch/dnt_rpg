@@ -12,6 +12,7 @@
 - Fixed XP ammount received when killing (was inverted);
 - Fixed a bug when saving files without images;
 - Fixed a bug when playing ogg files at big-endian systems;
+- When closing an window, activate previous one (not next one);
 
 ================================================
 |                Version 0.5                   |

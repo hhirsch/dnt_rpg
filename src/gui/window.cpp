@@ -76,7 +76,7 @@ void windowList::removeWindow(window *jan)
       activeWindow = NULL;
       if((total > 1))
       {
-         window* j = (window*)jan->getNext();
+         window* j = (window*)jan->getPrevious();
          j->activate();
       }
    }
