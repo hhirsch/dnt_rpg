@@ -174,12 +174,16 @@ options::~options()
 }
 
 /****************************************************************
- *                     getAvaibleResolutions                    *
+ *                   getAvailableResolutions                    *
  ****************************************************************/
-void options::getAvaibleResolutions()
+void options::getAvailableResolutions()
 {
    /* Get available fullscreen/hardware modes */
+#if defined (__amigaos4__)
+   resolutions = SDL_ListModes(NULL,SDL_FULLSCREEN|SDL_HWSURFACE);
+#else
    resolutions=SDL_ListModes(NULL,SDL_FULLSCREEN | SDL_DOUBLEBUF | SDL_OPENGL);
+#endif
 
    if(resolutions == (SDL_Rect**)0)
    {
@@ -757,7 +761,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    string saux;
    textBox* qt;
 
-   getAvaibleResolutions();
+   getAvailableResolutions();
 
    keyWindow = NULL;
 
@@ -1709,6 +1713,7 @@ int    options::reflexionType = 2;
 int    options::shadowType = SHADOWS_PROJECTIVE;
 int    options::screenWidth = 1024;
 int    options::screenHeight = 768; 
+SDL_Rect** options::resolutions = NULL;
 bool   options::enableFullScreen = false;
 int    options::antiAliasing = 4;
 int    options::stencilBufferSize = 8;

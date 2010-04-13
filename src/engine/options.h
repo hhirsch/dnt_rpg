@@ -112,8 +112,8 @@ class options
       /*! Set language to one defined at the option's file */
       void setLanguage();
 
-      /*! Get all avaible resolutions at fullscreen mode */
-      void getAvaibleResolutions();
+      /*! Get all available resolutions at fullscreen mode */
+      void getAvailableResolutions();
 
       /*! Verify if the current language is an Unicode One (like russian,
        * japanese, chinese, etc.) */
@@ -209,7 +209,6 @@ class options
       /*! Set the default keys */
       void defaultKeys();
 
-      SDL_Rect**   resolutions;    /**< the avaible resolutions */
       textBox* txtLanguage;        /**< Language Text on Window */
       textBox* txtCamera;          /**< Camera Mode Text on Window */
       textBox* txtReflexion;       /**< Reflexion Type Text on Window */
@@ -222,6 +221,7 @@ class options
       healthBar* barSndfxVolume;   /**< Sound Effects Volume Text on Window*/
       healthBar* barFarView;       /**< FarViewFactor Text on Window */
 
+      static SDL_Rect** resolutions;  /**< the available resolutions */
       static int     musicVolume;     /**< Current Music Volume */
       static int     sndfxVolume;     /**< Current Sound Effects Volume */
       static int     langNumber;      /**< Current Language Number */
