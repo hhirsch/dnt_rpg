@@ -15,6 +15,7 @@ Resolution = 1024x768
 FullScreen = false
 Particles = true
 Grass = true
+StencilBufferSize = 8
 Reflexions = 2
 Shadows = 1
 AntiAliasing = 4
