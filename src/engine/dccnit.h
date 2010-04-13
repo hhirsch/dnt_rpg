@@ -281,6 +281,9 @@ class engine
 
    private:
 
+      /*! do the opengl clear with needd flags */
+      void clearOpenGL();
+
       /*!
        *************************************************************** 
        * Close all related windows  

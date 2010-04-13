@@ -360,6 +360,11 @@ bool options::load(string file)
          /* Read Grass Options */
          enableGrass = (value == "true");
       }
+      else if(key == "StencilBufferSize")
+      {
+         /* Read Stencil buffer size Option */
+         sscanf(value.c_str(), "%d", &stencilBufferSize);
+      }
       else if(key == "Reflexions")
       {
          /* Read Reflexions Options */
@@ -484,6 +489,8 @@ void options::save()
    fprintf(arq, "Particles = %s\n",enableParticles?"true":"false");
    /* Grass */
    fprintf(arq, "Grass = %s\n",enableGrass?"true":"false");
+   /* Stencil Buffer */
+   fprintf(arq, "StencilBufferSize = %d\n", stencilBufferSize);
    /* Reflexion */
    fprintf(arq, "Reflexions = %d\n", reflexionType);
    /* Shadow */
@@ -637,11 +644,31 @@ string options::cameraName()
 }
 
 /****************************************************************
+ *                    stencilBufferSizeName                     *
+ ****************************************************************/
+string options::stencilBufferSizeName()
+{
+   string saux="";
+   char buf[8];
+   switch(stencilBufferSize)
+   {
+      case 0:
+         saux = gettext("Disabled");
+      break;
+      default:
+         sprintf(buf, "%d", stencilBufferSize);
+         saux = buf;
+      break;
+   }
+   return(saux);
+}
+
+/****************************************************************
  *                       AntiAliasingName                       *
  ****************************************************************/
 string options::antiAliasingName()
 {
-   string saux;
+   string saux="";
    switch(antiAliasing)
    {
       case 0:
@@ -739,6 +766,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    prevSndfxVolume = sndfxVolume;
 
    prevAntiAliasing = antiAliasing;
+   prevStencilBufferSize = stencilBufferSize;
    prevFarViewFactor = farViewFactor;
 
    /* Previous Keys values too */
@@ -884,6 +912,23 @@ void options::displayOptionsScreen(guiInterface* interf)
                    dir.getRealFile("texturas/options/anisotropic.png").c_str());
    cxSelAnisotropic->setAvailable(ext.hasAnisotropic());
    posY += 35;
+
+   /* Stncil Buffer Size */
+   prevStencilBufferSize = stencilBufferSize;
+   saux = stencilBufferSizeName();
+   qt = list->insertTextBox(12,posY,145,posY+17,0,gettext("Stencil Buffer:"));
+   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   buttonStencilDec = list->insertButton(121,posY,131,posY+17,
+                                      fnt.createUnicode(0x25C4),0);
+   buttonStencilDec->defineFont(DNT_FONT_ARIAL, 9);
+   txtStencil = list->insertTextBox(132,posY,197,posY+17,1,saux.c_str());
+   txtStencil->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   buttonStencilSum = list->insertButton(198,posY,208,posY+17,
+                                      fnt.createUnicode(0x25BA),0);
+   buttonStencilSum->defineFont(DNT_FONT_ARIAL, 9);
+   list->insertPicture(220,posY,40,220,
+                  dir.getRealFile("texturas/options/stencil_size.png").c_str());
+   posY += 25;
 
    /* Reflexions */
    prevReflexion = reflexionType;
@@ -1162,7 +1207,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
       /* Reflexion */
       else if(object == (guiObject*) buttonReflSum)
       {
-         if(reflexionType < REFLEXIONS_ALL)
+         if((reflexionType < REFLEXIONS_ALL) && (stencilBufferSize > 0))
          {
             reflexionType++;
          }
@@ -1179,7 +1224,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
       /* Shadow */
       else if(object == (guiObject*) buttonShadSum)
       {
-         if(shadowType < SHADOWS_PROJECTIVE)
+         if( (shadowType < SHADOWS_PROJECTIVE) && (stencilBufferSize > 0))
          {
             shadowType++;
          }
@@ -1225,6 +1270,40 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
             }
             txtResolution->setText(resolutionName());
          }
+      }
+
+      /* Stencil Buffer Size */
+      else if(object == (guiObject*) buttonStencilSum) 
+      {
+         if(stencilBufferSize == 0)
+         {
+            stencilBufferSize = 2;
+         }
+         else if(stencilBufferSize < 8)
+         {
+             stencilBufferSize *= 2;
+         }
+         txtStencil->setText(stencilBufferSizeName());
+      }
+      else if(object == (guiObject*) buttonStencilDec) 
+      {
+         if(stencilBufferSize == 2)
+         {
+            stencilBufferSize = 0;
+         }
+         else if(stencilBufferSize > 0)
+         {
+             stencilBufferSize /= 2;
+         }
+
+         if(stencilBufferSize == 0)
+         {
+            shadowType = 0;
+            txtShadow->setText(shadowName());
+            reflexionType = 0;
+            txtReflexion->setText(reflexionName());
+         }
+         txtStencil->setText(stencilBufferSizeName());
       }
 
       /* Anti Aliasing */
@@ -1286,6 +1365,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          if( (screenWidth != prevWidth) || (screenHeight != prevHeight) ||
              (prevFullScreen != enableFullScreen) || 
              (antiAliasing != prevAntiAliasing) ||
+             (stencilBufferSize != prevStencilBufferSize) ||
              (langNumber != prevLanguage) )
          {
             warning warn;
@@ -1523,6 +1603,14 @@ bool options::getAlwaysRun()
 }
 
 /****************************************************************
+ *                     getStencilBufferSize                     *
+ ****************************************************************/
+int options::getStencilBufferSize()
+{
+   return(stencilBufferSize);
+}
+
+/****************************************************************
  *                        getAntiAliasing                       *
  ****************************************************************/
 int options::getAntiAliasing()
@@ -1623,6 +1711,7 @@ int    options::screenWidth = 1024;
 int    options::screenHeight = 768; 
 bool   options::enableFullScreen = false;
 int    options::antiAliasing = 4;
+int    options::stencilBufferSize = 8;
 float  options::farViewFactor = 1.0;
 bool   options::enableMultiTexture = true;
 bool   options::autoEndTurn = true;

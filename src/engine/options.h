@@ -181,6 +181,9 @@ class options
       /*! Get the current antialiasing
        * \return -> current antialiasing*/
       int getAntiAliasing();
+      /*! Get the size of stencil buffer to use
+       * \return size of the stencil buffer */
+      int getStencilBufferSize();
       /*! Set the current antialiasing
        * \param alias -> new antialiasing*/
       void setAntiAliasing(int alias);
@@ -211,6 +214,7 @@ class options
       textBox* txtCamera;          /**< Camera Mode Text on Window */
       textBox* txtReflexion;       /**< Reflexion Type Text on Window */
       textBox* txtShadow;          /**< Shadow Type Text on Window */
+      textBox* txtStencil;         /**< Stencil buffer size Text on Window */
       textBox* txtResolution;      /**< Resolution Text on Window */
       textBox* txtAntiAliasing;    /**< AntiAliasing Text on Window */
       
@@ -230,6 +234,7 @@ class options
       static int     screenHeight;    /**< Screen Width */
       static bool    enableFullScreen;/**< If fullscreen is defined */
       static int     antiAliasing;    /**< Current Anti-Aliasing */
+      static int     stencilBufferSize; /**< Current Stencil buffer size */
       static float   farViewFactor;   /**< Current FarView Factor */
       static bool    enableMultiTexture; /**< If terrain multi texture */
       static bool    enableAnisotropic; /**< If anisotropic filter is used */
@@ -250,6 +255,7 @@ class options
       int      prevShadow;         /**< Previous Used Shadow */
       int      prevWidth;          /**< Previous Used Resolution Width */
       int      prevHeight;         /**< Previous Used Resolution Height */
+      int      prevStencilBufferSize; /**< Previous stencil buffer size */
       int      prevAntiAliasing;   /**< Previous Used AntiAliasing */
       float    prevFarViewFactor;  /**< Previous FarViewFactor */
       int      resPosition;        /**< Resolution Position on Vector */
@@ -284,6 +290,9 @@ class options
 
       button* buttonAliasSum;
       button* buttonAliasDec;
+
+      button* buttonStencilSum;
+      button* buttonStencilDec;
 
       button* buttonFarViewSum;
       button* buttonFarViewDec;
@@ -327,6 +336,10 @@ class options
       /*! Get the Current antiAliasing Name
        * \return name of the antiAliasing */
       string antiAliasingName();
+
+      /*! Get the stencil buffer size name
+       * \return name of the stencil buffer size */
+      string stencilBufferSizeName();
 
 };
 

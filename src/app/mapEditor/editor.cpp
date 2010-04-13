@@ -46,7 +46,7 @@ editor::editor()
    options opt;
    Farso_Init(&screen,"DccNiTghtmare Map Editor", opt.getScreenWidth(),
               opt.getScreenHeight(),  opt.getEnableFullScreen(),
-              opt.getAntiAliasing());
+              opt.getAntiAliasing(), opt.getStencilBufferSize());
 
    init();
 

@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -27,7 +27,7 @@ using namespace std;
  *                        Farso_Init                        *
  ************************************************************/
 void Farso_Init(SDL_Surface **screen, string title, int width, int height,
-                bool fullScreen, int antiAliasingSamples)
+                bool fullScreen, int antiAliasingSamples, int stencilBufferSize)
 {
     /* Start Openning the screen  */
     if ( SDL_Init(SDL_INIT_VIDEO) < 0 ) 
@@ -39,7 +39,7 @@ void Farso_Init(SDL_Surface **screen, string title, int width, int height,
 
     /* Define the resolution */
     Farso_DefineResolution(screen, title, width, height, fullScreen,
-                           antiAliasingSamples);
+                           antiAliasingSamples, stencilBufferSize);
     
     /* Define ignored events */
     SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,SDL_DEFAULT_REPEAT_INTERVAL);
@@ -69,10 +69,15 @@ void Farso_Init(SDL_Surface **screen, string title, int width, int height,
  ************************************************************/
 void Farso_DefineResolution(SDL_Surface **screen, string title, 
                             int width, int height,
-                            bool fullScreen, int antiAliasingSamples)
+                            bool fullScreen, int antiAliasingSamples,
+                            int stencilBufferSize)
 {
     SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
-    SDL_GL_SetAttribute( SDL_GL_STENCIL_SIZE, 8);
+
+    if(stencilBufferSize > 0)
+    {
+       SDL_GL_SetAttribute( SDL_GL_STENCIL_SIZE, stencilBufferSize);
+    }
 
     if(antiAliasingSamples > 0)
     {
@@ -80,12 +85,6 @@ void Farso_DefineResolution(SDL_Surface **screen, string title,
        SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, antiAliasingSamples);
     }
    
-    /*SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 5);
-    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 5);
-    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 5 );
-    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16 );
-    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1 );*/
-
     int flags = SDL_DOUBLEBUF | SDL_OPENGL;
 
     if(fullScreen)
@@ -101,13 +100,23 @@ void Farso_DefineResolution(SDL_Surface **screen, string title,
     {
        cerr << "Oxi! Can't ajust video mode: " << SDL_GetError() << endl;
 
-       if(antiAliasingSamples > 0)
+       if(stencilBufferSize > 8)
+       {
+          cerr << "Trying again with lesser stencil." << endl;
+          /* Quit the SDL  */
+          SDL_Quit();
+          /* Restart it  */
+          Farso_Init(screen, title, width, height, fullScreen, 
+                antiAliasingSamples, 8);
+       }
+       else if(antiAliasingSamples > 0)
        {
           cerr << "Trying again without AntiAliasing." << endl;
           /* Quit the SDL  */
           SDL_Quit();
           /* Restart it  */
-          Farso_Init(screen, title, width, height, fullScreen, 0);
+          Farso_Init(screen, title, width, height, fullScreen, 
+                0, stencilBufferSize);
        }
        else
        {

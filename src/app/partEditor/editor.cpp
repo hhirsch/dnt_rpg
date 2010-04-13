@@ -46,7 +46,7 @@ editor::editor()
    dir.findDataDirectories();
 
    /* Initialize SDL/Farso/etc */
-   Farso_Init(&screen,"DccNiTghtmare's Particle Editor", 800, 600, false, 0);   
+   Farso_Init(&screen,"DccNiTghtmare's Particle Editor", 800, 600, false, 0, 8);
 
    /* Get OpenGL Extensions */
    ext.defineAllExtensions();

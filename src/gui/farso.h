@@ -51,9 +51,10 @@
  * \param width -> screen width
  * \param height -> screen height
  * \param fullScreen -> true if is fullscreen
- * \param antiAliasingSample -> number of Antialising used (0 == disabled) */
+ * \param antiAliasingSample -> number of Antialising used (0 == disabled)
+ * \param stencilBufferSize -> number of stencil buffers */
 void Farso_Init(SDL_Surface **screen, string title, int width, int height,
-                bool fullScreen, int antiAliasingSample);
+                bool fullScreen, int antiAliasingSample, int stencilBufferSize);
 
 /*! Define the SDL/OpenGL Context Resolution
  * \param screen -> pointer to the pointer to the surface used as screen
@@ -64,7 +65,8 @@ void Farso_Init(SDL_Surface **screen, string title, int width, int height,
  * \param antiAliasingSample -> number of Antialising used (0 == disabled) */
 void Farso_DefineResolution(SDL_Surface **screen, string title, 
                             int width, int height,
-                            bool fullScreen, int antiAliasingSample);
+                            bool fullScreen, int antiAliasingSample, 
+                            int stencilBufferSize);
 
 /*! End the SDL/OpenGL Context
  * \param screen -> surface used as screen */

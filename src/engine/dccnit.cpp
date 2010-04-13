@@ -990,8 +990,7 @@ void engine::fadeIn()
    int i;
    for(i=0; i < 50; i++)
    {
-      glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT
-              | GL_STENCIL_BUFFER_BIT);
+      clearOpenGL();
 
       /* Draw things */
       if(shadowMap.isEnable())
@@ -1053,9 +1052,7 @@ void engine::fadeOut()
    int i;
    for(i=49; i >= 0; i--)
    {
-      glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT
-              | GL_STENCIL_BUFFER_BIT);
-
+      clearOpenGL();
       /* Draw things */
       if(shadowMap.isEnable())
       {
@@ -1116,8 +1113,7 @@ void engine::fadeInTexture(GLuint id, int x1, int y1, int x2, int y2,
    int i;
    for(i=0; i < 50; i++)
    {
-      glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT
-              | GL_STENCIL_BUFFER_BIT);
+      clearOpenGL();
       draw2DMode();
       glColor3f(i/50.0f, i/50.0f, i/50.0f);
       textureToScreen(id,x1,y1,x2,y2,sizeX,sizeY);
@@ -1138,8 +1134,7 @@ void engine::fadeOutTexture(GLuint id, int x1, int y1, int x2, int y2,
    int i;
    for(i=49; i >= 0; i--)
    {
-      glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT
-              | GL_STENCIL_BUFFER_BIT);
+      clearOpenGL();
       draw2DMode();
       glColor3f(i/50.0f, i/50.0f, i/50.0f);
       textureToScreen(id,x1,y1,x2,y2,sizeX,sizeY);
@@ -1163,7 +1158,7 @@ void engine::splashScreen()
    bool done = false;
    int x,y;
    Uint32 time = SDL_GetTicks();
-   glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+   clearOpenGL();
    updateFrustum(visibleMatrix,proj,modl);
    SDL_Surface* img;
    img = IMG_Load(dir.getRealFile("texturas/general/inicio1.png").c_str()); 
@@ -1192,9 +1187,7 @@ void engine::splashScreen()
    /* Wait until Mouse Button pressed or time passed */
    while( !done )
    {
-
-      glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT
-              | GL_STENCIL_BUFFER_BIT);
+      clearOpenGL();
       draw2DMode();
       glColor3f(1.0f, 1.0f, 1.0f);
       textureToScreen(id, 0, 0, SCREEN_X-1, SCREEN_Y-1, 800, 600);
@@ -3379,6 +3372,22 @@ int engine::treatIO(SDL_Surface *screen)
 }
 
 /********************************************************************
+ *                            clearOpenGL                           *
+ ********************************************************************/
+void engine::clearOpenGL()
+{
+   if(option->getStencilBufferSize() > 0)
+   {
+      glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | 
+            GL_STENCIL_BUFFER_BIT);
+   }
+   else
+   {
+      glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+   }
+}
+
+/********************************************************************
  *                            RenderScene                           *
  ********************************************************************/
 void engine::renderScene(bool lightPass, bool updateAnimations)
@@ -3409,7 +3418,7 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
 
    glPushMatrix();
 
-   if(!lightPass)
+   if((!lightPass) && (option->getStencilBufferSize() > 0))
    {
       /* Draw The Floor with Stencil Buffer */
       if( ((option->getReflexionType() != REFLEXIONS_NONE) && 
@@ -3474,7 +3483,8 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
 
       /* Draw Reflection */
       if( (option->getReflexionType() >= REFLEXIONS_CHARACTERS) && 
-            (!actualMap->isOutdoor()) )
+          (!actualMap->isOutdoor()) &&
+          (option->getStencilBufferSize() > 0) )
       {
          glEnable(GL_STENCIL_TEST);
          glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
@@ -3581,7 +3591,8 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
 
               /* Draw Reflection */
               if( (option->getReflexionType() >= REFLEXIONS_CHARACTERS) && 
-                  (!actualMap->isOutdoor()) )
+                  (!actualMap->isOutdoor()) &&
+                  (option->getStencilBufferSize() > 0))
               {
                  glEnable(GL_STENCIL_TEST);
                  glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
@@ -3616,7 +3627,8 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
 
    /* Draw the Map Objects with Reflexions */
    if( (option->getReflexionType() >= REFLEXIONS_ALL) && 
-       (!actualMap->isOutdoor()) )
+       (!actualMap->isOutdoor()) &&
+       (option->getStencilBufferSize()))
    {
       glEnable(GL_STENCIL_TEST);
       glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
@@ -3632,8 +3644,9 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
    }
 
    models.renderSceneryObjects(visibleMatrix,
-                               (option->getReflexionType() >= REFLEXIONS_ALL) 
-                                && (!actualMap->isOutdoor()),
+                               ( (option->getReflexionType() >= REFLEXIONS_ALL) 
+                                && (option->getStencilBufferSize() > 0)
+                                && (!actualMap->isOutdoor())),
                                 shadow?gameSun->getShadowMatrix():NULL,
                                 shadow?gameSun->getShadowAlpha():0.0f);
 
@@ -3900,7 +3913,7 @@ void engine::drawWithShadows(bool flush)
    glGetIntegerv(GL_VIEWPORT, viewPort);
    glGetFloatv(GL_MODELVIEW_MATRIX, camProj);
    glMatrixMode(GL_MODELVIEW);
-   glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+   clearOpenGL();
    glLoadIdentity();
    gameCamera.lookAt(actualMap);
    updateFrustum(visibleMatrix,proj,modl);
@@ -3954,7 +3967,7 @@ void engine::drawWithoutShadows(bool flush)
  *********************************************************************/
 void engine::updateBeforeRender()
 {
-   glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+   clearOpenGL();
    glLoadIdentity();
 
    /* Redefine camera position */
@@ -4178,8 +4191,7 @@ void engine::showImage(string fileName)
       int x,y;
       mButton = SDL_GetMouseState(&x,&y);
 
-      glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT
-              | GL_STENCIL_BUFFER_BIT);
+      clearOpenGL();
       draw2DMode();
       glColor3f(1.0f, 1.0f, 1.0f);
       textureToScreen(id, 0, 0, SCREEN_X-1, SCREEN_Y-1, 800, 600);
