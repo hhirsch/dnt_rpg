@@ -323,8 +323,7 @@ void comicBook::render(comicPage* curPage, float scale)
    mButton = SDL_GetMouseState(&mouseX, &mouseY);
 
    /* Clear screen */
-   glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | 
-           GL_STENCIL_BUFFER_BIT);
+   glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
    draw2DMode();
    

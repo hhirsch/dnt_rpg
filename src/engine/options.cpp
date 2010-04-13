@@ -1249,10 +1249,10 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          {
             resPosition--;
             
-            /* Only accept resolutions >= 800x600 */
+            /* Only accept resolutions >= 640x480 */
             if( (resolutions != NULL) && 
-                (resolutions[resPosition]->w >= 800) && 
-                (resolutions[resPosition]->h >= 600) )
+                (resolutions[resPosition]->w >= 640) && 
+                (resolutions[resPosition]->h >= 480) )
             {
                screenWidth = resolutions[resPosition]->w;
                screenHeight = resolutions[resPosition]->h;
@@ -1265,9 +1265,9 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          if((resolutions != NULL) && (resolutions[resPosition+1]))
          {
             resPosition++;
-            /* Only accept resolutions >= 800x600 */
-            if( (resolutions[resPosition]->w >= 800) && 
-                (resolutions[resPosition]->h >= 600) )
+            /* Only accept resolutions >= 640x480 */
+            if( (resolutions[resPosition]->w >= 640) && 
+                (resolutions[resPosition]->h >= 480) )
             {
                screenWidth = resolutions[resPosition]->w;
                screenHeight = resolutions[resPosition]->h;

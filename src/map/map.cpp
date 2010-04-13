@@ -2616,6 +2616,7 @@ void Map::drawMiniMap()
    int mapSizeZ;
    GLfloat ratio;
    GLfloat height;
+   options opt;
 
    /* Define Size to render */
    mapSizeX = (int)squareMiniSize*(x);
@@ -2655,7 +2656,15 @@ void Map::drawMiniMap()
    gluPerspective(45.0, mapSizeX / (float)mapSizeZ, 1.0, OUTDOOR_FARVIEW);
    glMatrixMode(GL_MODELVIEW);
    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-   glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+   if(opt.getStencilBufferSize() > 0)
+   {
+      glClear(GL_DEPTH_BUFFER_BIT |GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+   }
+   else
+   {
+      glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+   }
    glLoadIdentity();
 
    /* Set the look up, at the map's center looking down at Y axys */
