@@ -1,6 +1,6 @@
 ================================================
 |               Version 0.5.1                  |
-|                                              |
+|            Released: 2010-04-13              |
 ================================================
 - UTF-8 support for languages;
 - Russian translation added;
@@ -14,6 +14,7 @@
 - Fixed a bug when saving files without images;
 - Fixed a bug when playing ogg files at big-endian systems;
 - When closing an window, activate previous one (not next one);
+- Changes to support AmigaOS4;
 
 ================================================
 |                Version 0.5                   |
