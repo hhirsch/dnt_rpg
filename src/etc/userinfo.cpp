@@ -61,7 +61,7 @@ void userInfo::getValuesFromSystem()
          userHome = "./"; 
       }
    #elif defined (__amigaos4__)
-      usrName = "Don Ramon";
+      userName = "Don Ramon";
       userHome = "PROGDIR:data/userdata/";
    #else
       /* Get all Current User´s Info (so more clean, isn´t it?) */
