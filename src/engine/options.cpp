@@ -1395,6 +1395,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          screenWidth = prevWidth;
          screenHeight = prevHeight;
          antiAliasing = prevAntiAliasing;
+         stencilBufferSize = prevStencilBufferSize;
          farViewFactor = prevFarViewFactor;
          
          /* Keys to previous values too */
