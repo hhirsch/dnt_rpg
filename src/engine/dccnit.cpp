@@ -3149,7 +3149,7 @@ int engine::treatIO(SDL_Surface *screen)
             walkAngle = getAngle(activeCharacter->xPosition,
                                  activeCharacter->zPosition,
                                  xFloor, zFloor);
-            if(dist > 8)
+            if(dist > 4)
             {
                /* Try to change the angle */
                if(canWalk(0,0, walkAngle - activeCharacter->orientation))
