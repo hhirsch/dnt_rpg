@@ -34,9 +34,8 @@ bool running = true;
  *************************************************************************/
 int runParalelSound(void* param)
 {
-   if(actualSound->initOpenAL())
+   if(!actualSound->initOpenAL())
    {
-      running = false;
       return(0);
    }
 
@@ -86,7 +85,7 @@ sound::sound()
  *************************************************************************/
 void sound::init()
 {
-   enabled = false;
+   enabled = true;
    soundMutex = SDL_CreateMutex();
       
    /* None current Opened Music */
@@ -127,6 +126,7 @@ bool sound::initOpenAL()
    {
       cerr << "No OpenAL device available!" << endl;
    }
+   enabled = false;
    return(false);
 }
 
