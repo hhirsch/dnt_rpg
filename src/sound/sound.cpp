@@ -34,6 +34,12 @@ bool running = true;
  *************************************************************************/
 int runParalelSound(void* param)
 {
+   if(actualSound->initOpenAL())
+   {
+      running = false;
+      return(0);
+   }
+
    while(running)
    {
       actualSound->lock();
@@ -41,6 +47,8 @@ int runParalelSound(void* param)
       actualSound->unLock();
       SDL_Delay(50);
    }
+   actualSound->finishOpenAL();
+
    return(1);
 }
 
@@ -80,7 +88,23 @@ void sound::init()
 {
    enabled = false;
    soundMutex = SDL_CreateMutex();
-   
+      
+   /* None current Opened Music */
+   backMusic = NULL;
+
+   musicVolume = 128;
+   sndfxVolume = 128;
+
+   /* Create the sound thread */
+   actualSound = this;
+   soundThread  = SDL_CreateThread((&runParalelSound), NULL);   
+}
+
+/*************************************************************************
+ *                             initOpenAL                                *
+ *************************************************************************/
+bool sound::initOpenAL()
+{
    /* Initialize Open AL */
    device = alcOpenDevice(NULL); 
    
@@ -91,6 +115,7 @@ void sound::init()
       {
          alcMakeContextCurrent(context);
          enabled = true;
+         return(true);
       }
       else
       {
@@ -102,18 +127,7 @@ void sound::init()
    {
       cerr << "No OpenAL device available!" << endl;
    }
-   
-   /* None current Opened Music */
-   backMusic = NULL;
-
-   musicVolume = 128;
-   sndfxVolume = 128;
-
-   actualSound = this;
-   if(enabled)
-   {
-      soundThread  = SDL_CreateThread((&runParalelSound), NULL);   
-   }
+   return(false);
 }
 
 /*************************************************************************
@@ -135,25 +149,31 @@ void sound::finish()
       running = false;
       unLock();
       SDL_WaitThread(soundThread, NULL);
-
-      /* Clear the Opened Music */
-      if(backMusic)
-      {
-         backMusic->release();
-         delete(backMusic);
-         backMusic = NULL;
-      }
-
-      /* Clear all opened Sound Effects */
-      removeAllSoundEffects();
-   
-      /* Clear OpenAL Context and Device */
-      alcDestroyContext(context);
-      alcCloseDevice(device);
    }
 
    /* Destroy the Mutex */
    SDL_DestroyMutex(soundMutex);
+}
+
+/*************************************************************************
+ *                            finishOpenAL                               *
+ *************************************************************************/
+void sound::finishOpenAL()
+{
+   /* Clear the Opened Music */
+   if(backMusic)
+   {
+      backMusic->release();
+      delete(backMusic);
+      backMusic = NULL;
+   }
+
+   /* Clear all opened Sound Effects */
+   removeAllSoundEffects();
+
+   /* Clear OpenAL Context and Device */
+   alcDestroyContext(context);
+   alcCloseDevice(device);
 }
 
 /*************************************************************************

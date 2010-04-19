@@ -104,7 +104,15 @@ class sound
        *  \param sndV -> sound effects volume */
       void changeVolume(int music, int sndV); 
 
+      /*! init the OpenAL device
+       * \return true if successfull */
+      bool initOpenAL();
+
+      /*! finish the openAL device and related sounds */
+      void finishOpenAL();
+
    private:
+
       static ALCdevice* device;         /**< Active AL device */
       static ALCcontext* context;       /**< Active AL context */
       static ogg_stream* backMusic;     /**< Active BackGround Music */
