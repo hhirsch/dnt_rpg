@@ -2797,6 +2797,7 @@ int engine::treatIO(SDL_Surface *screen)
          {
             cerr << sq->posX << " " << sq->posZ << endl;
             cerr << sq->flags << endl;
+            cerr << (sq->flags & SQUARE_REFLECT) << endl;
          }
       }
 
@@ -3252,7 +3253,7 @@ int engine::treatIO(SDL_Surface *screen)
          int posX = (int) floor(xReal / actualMap->squareSize());
          int posZ = (int) floor(zReal / actualMap->squareSize());
          Square* sq = actualMap->relativeSquare(posX, posZ);
-         if( (sq == NULL) || (sq->flags == 0))
+         if( (sq == NULL) || (!(sq->flags & SQUARE_CAN_WALK)))
          {
             cursors->set(CURSOR_FORBIDDEN);
          }

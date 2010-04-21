@@ -35,7 +35,8 @@
 using namespace std;
 
 /* Flag masks */
-#define SQUARE_CAN_WALK 1   /**< If a Square is walkable or not. */
+#define SQUARE_CAN_WALK      1   /**< If a Square is walkable or not. */
+#define SQUARE_REFLECT       2   /**< If the square reflect or not */
 
 /* Constraints */
 #define OUTDOOR_SQUARE_SIZE      256      /**< Size of the Outdoor Square */
@@ -244,7 +245,6 @@ class Square: public dntList
       GLuint R,G,B;                     /**< Square Color to MINIMAP */
       conection mapConection;           /**< Conection to other map */
       int divisions;                    /**< Number of Divisions */
-      int reflect;                      /**< True if reflect, false otherwise */
 
       /*! Set the Number of Divisions, based on Square Heights */
       void setDivisions();

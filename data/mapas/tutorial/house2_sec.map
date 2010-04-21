@@ -29,22 +29,22 @@ wtb = 16,16,16 texturas/floor_indoor/burl.png
 wtr = 16,16,16 texturas/floor_indoor/burl.png
 wtl = 16,16,16 texturas/floor_indoor/burl.png
 #Z: 0
-square = 1,0.000000,0.000000,0.000000,0.000000
+square = 3,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/mosaic2.png
 useObject = models/objetos/itens/healkit/healkit.dcc 1:1,1:18.872,16.900,17.612:-423.000:0
 useObject = models/objetos/itens/garrafa1/garrafa1.dcc 1:1,1:23.441,16.900,25.724:-501.000:0
 useObject = models/objetos/geral/notebook/notebook.dcc 1:1,1:23.028,16.900,32.124:-453.000:0
 useObject = models/objetos/geral/pc_chair/pc_chair.dcc 1:1,1:29.432,0.000,31.257:-456.000:0
 useObject = models/objetos/geral/escrivaninha/escrivaninha.dcc 1:1,1:21.127,0.000,26.066:-541.000:0
-square = 1,0.000000,0.000000,0.000000,0.000000
+square = 3,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/mosaic2.png
 #Z: 1
-square = 1,0.000000,0.000000,0.000000,0.000000
+square = 3,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/mosaic2.png
 useObject = models/objetos/icex/lixo/lixo.dcc 1:1,2:17.981,0.000,109.120:-721.000:0
 useObject = models/objetos/geral/tv42/tv42.dcc 1:1,2:59.238,16.300,112.892:-721.000:0
 useObject = models/objetos/geral/tv_hack/tv_hack.dcc 1:1,2:60.887,0.000,111.527:-540.000:0
-square = 1,0.000000,0.000000,0.000000,0.000000
+square = 3,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/mosaic2.png
 connection = 92.465729,73.160080,115.773804,88.507530:90.000000:mapas/tutorial/house2.map
 useObject = models/objetos/geral/escada/escada.dcc 1:2,2:116.250,9.600,78.615:87.000:0

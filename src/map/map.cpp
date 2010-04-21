@@ -63,7 +63,6 @@ Square::Square()
    mapConection.mapName = "Nothing";
    mapConection.angle = 0.0;
    divisions = 1;
-   reflect = 1;
    int aux;
    for(aux=0; aux < MAX_WALLS; aux++)
    {
@@ -1092,7 +1091,9 @@ void Map::renderFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
                              MAX_HEIGHT,
                              MapSquares[x1][z1].z2 + VIS_DELTA, matriz)) ))
             {
-               if( (!selectionRender) || (MapSquares[x1][z1].reflect) )
+               /* At selection mode, only render if reflect */
+               if( (!selectionRender) || 
+                   (MapSquares[x1][z1].flags & SQUARE_REFLECT) )
                {
                   renderQuad(MapSquares[x1][z1].x1, MapSquares[x1][z1].z1,
                              MapSquares[x1][z1].x2, MapSquares[x1][z1].z2,
@@ -2121,7 +2122,8 @@ int Map::open(string arquivo)
          {
             posX++;
          }
-         sscanf(value.c_str(), "%d,%f,%f,%f,%f",&pisavel,
+         sscanf(value.c_str(), "%d,%f,%f,%f,%f",
+               &MapSquares[posX][posZ].flags,
                &MapSquares[posX][posZ].h1,
                &MapSquares[posX][posZ].h2,
                &MapSquares[posX][posZ].h3,
@@ -2136,7 +2138,7 @@ int Map::open(string arquivo)
          MapSquares[posX][posZ].posZ = posZ;
          if(pisavel) 
          {
-            MapSquares[posX][posZ].flags = SQUARE_CAN_WALK;
+
          }
       }
       /* Declare connection */
@@ -2297,7 +2299,7 @@ void Map::newMap(int X, int Z)
           saux->z2 = saux->z1+squareSize(); 
           saux->posX = auxX;
           saux->posZ = auxZ;
-          saux->flags = SQUARE_CAN_WALK;
+          saux->flags |= SQUARE_CAN_WALK;
           saux->texture = IDtexture;
           saux->R = 130;
           saux->G = 148;
