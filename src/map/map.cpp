@@ -63,6 +63,7 @@ Square::Square()
    mapConection.mapName = "Nothing";
    mapConection.angle = 0.0;
    divisions = 1;
+   reflect = 1;
    int aux;
    for(aux=0; aux < MAX_WALLS; aux++)
    {
@@ -988,7 +989,7 @@ void renderQuad(GLfloat x1, GLfloat z1,
 }
 
 /********************************************************************
- *                      renderFloorIndoor                           *
+ *                     renderInvisibleSurface                       *
  ********************************************************************/
 void Map::renderInvisibleSurface()
 {
@@ -1024,7 +1025,7 @@ void Map::renderInvisibleSurface()
  ********************************************************************/
 void Map::renderFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
                             GLfloat** matriz, bool selectionRender,
-                            bool outdoorCompatible)
+                            bool outdoorCompatible, bool enableReflexion)
 {
    int aux = 0;
    int x1, z1;
@@ -1051,8 +1052,11 @@ void Map::renderFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
       }
 
       /* For Reflexions */
-      glEnable(GL_BLEND);
-      glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+      if(enableReflexion)
+      {
+         glEnable(GL_BLEND);
+         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+      }
       glEnable(GL_TEXTURE_2D);
    }
 
@@ -1106,7 +1110,10 @@ void Map::renderFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    if(!selectionRender)
    {
       glDisable(GL_TEXTURE_2D);
-      glDisable(GL_BLEND);
+      if(enableReflexion)
+      {
+         glDisable(GL_BLEND);
+      }
    }
 }
 
@@ -1257,7 +1264,7 @@ void Map::renderFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    else
    {
       renderFloorIndoor(cameraX, cameraY, cameraZ, matriz, selectionRender, 
-                        outdoor);
+                        outdoor, opt.getReflexionType() > 0);
    }
 
 

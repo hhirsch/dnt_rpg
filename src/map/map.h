@@ -244,6 +244,7 @@ class Square: public dntList
       GLuint R,G,B;                     /**< Square Color to MINIMAP */
       conection mapConection;           /**< Conection to other map */
       int divisions;                    /**< Number of Divisions */
+      int reflect;                      /**< True if reflect, false otherwise */
 
       /*! Set the Number of Divisions, based on Square Heights */
       void setDivisions();
@@ -322,7 +323,7 @@ class Map
        * \param selectionRender -> true if renderng at SELECTION mode
        * \return 1 if success. */
       void renderFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
-                       GLfloat** matriz, bool selectionRender=false);
+                       GLfloat** matriz, bool selectionRender=false); 
       /*! Render the map objects on screen (using view culling)  
        * \param cameraX -> X coordinate of camera
        * \param cameraY -> Y coordinate of camera
@@ -615,10 +616,11 @@ class Map
        * \param selectionRender -> true if renderng at SELECTION mode
        * \param outdoorCompatible -> true if is rendering an outdoor map
        *                             at compatible mode (without multitextures)
+       * \param enableReflexion -> true if reflexions are enabled
        * \return 1 if success. */
       void renderFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
-                             GLfloat** matriz, bool selectionRender=false,
-                             bool outdoorCompatible=false);
+                             GLfloat** matriz, bool selectionRender,
+                             bool outdoorCompatible, bool enableReflexion);
 
       /*! Delete all remaining objects on the map */
       void deleteObjects();
