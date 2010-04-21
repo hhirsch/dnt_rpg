@@ -1092,11 +1092,14 @@ void Map::renderFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
                              MAX_HEIGHT,
                              MapSquares[x1][z1].z2 + VIS_DELTA, matriz)) ))
             {
-               renderQuad(MapSquares[x1][z1].x1, MapSquares[x1][z1].z1,
-                          MapSquares[x1][z1].x2, MapSquares[x1][z1].z2,
-                          MapSquares[x1][z1].h1, MapSquares[x1][z1].h2, 
-                          MapSquares[x1][z1].h3, MapSquares[x1][z1].h4,
-                          0.0, 0.0, 1.0, 1.0);
+               if( (!selectionRender) || (MapSquares[x1][z1].reflect) )
+               {
+                  renderQuad(MapSquares[x1][z1].x1, MapSquares[x1][z1].z1,
+                             MapSquares[x1][z1].x2, MapSquares[x1][z1].z2,
+                             MapSquares[x1][z1].h1, MapSquares[x1][z1].h2, 
+                             MapSquares[x1][z1].h3, MapSquares[x1][z1].h4,
+                             0.0, 0.0, 1.0, 1.0);
+               }
             }
          }
       }
