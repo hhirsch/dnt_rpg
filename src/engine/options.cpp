@@ -52,6 +52,7 @@ string dntLanguageName[] =
    gettext("German"),
    gettext("Italian"),
    gettext("Dutch"),
+   gettext("Catalan"),
    gettext("Russian")
 };
 
@@ -65,6 +66,7 @@ string dntLanguageCode[] =
    "de",
    "it",
    "nl",
+   "ca",
    "ru"
 };
 
@@ -79,6 +81,7 @@ enum
    DNT_LANG_ITALIAN,
    DNT_LANG_DUTCH,
    DNT_LANG_RUSSIAN,
+   DNT_LANG_CATALAN,
    DNT_LANG_LAST
 };
 
