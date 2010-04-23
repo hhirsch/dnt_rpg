@@ -211,9 +211,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="773.83856"
-     inkscape:cy="298.77447"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="979.01261"
+     inkscape:cy="188.66394"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -403,12 +403,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/mart.png"
          xlink:href="mart.png"
-         y="-285.35522"
-         x="756.71039"
-         id="image10462"
-         height="50.088051"
+         transform="matrix(0.75331562,0.65765916,-0.77050219,0.63743734,0,0)"
          width="47.289532"
-         transform="matrix(0.75331562,0.65765916,-0.77050219,0.63743734,0,0)" />
+         height="50.088051"
+         id="image10462"
+         x="756.71039"
+         y="-285.35522" />
       <g
          transform="matrix(0.42753672,0.90399798,-0.90399798,0.42753672,802.0668,-550.55925)"
          id="g10501">
@@ -529,12 +529,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
          xlink:href="../msoftlivre/kalashnikov_inv.png"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
-         width="38.000004"
-         height="76.000008"
-         id="image9552"
+         y="885.50549"
          x="118.5812"
-         y="885.50549" />
+         id="image9552"
+         height="76.000008"
+         width="38.000004"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
       <path
          style="fill:none;stroke:#000000;stroke-width:0.91376841px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 900.18499,345.54216 c 0,0 1.9164,2.60676 -0.4724,4.38497 -2.4256,2.0131 -4.7237,-0.32774 -4.7237,-0.32774"
@@ -679,12 +679,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
          xlink:href="../msoftlivre/kalashnikov_inv.png"
-         y="-134.7252"
-         x="184.09911"
-         id="image2571"
-         height="76.000008"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
          width="38.000004"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
+         height="76.000008"
+         id="image2571"
+         x="184.09911"
+         y="-134.7252" />
       <path
          id="path2573"
          d="m -108.5729,179.49791 c 0,0 1.91644,2.60676 -0.47244,4.38497 -2.42559,2.0131 -4.72361,-0.32774 -4.72361,-0.32774"
@@ -812,11 +812,11 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/revoots.png"
          xlink:href="revoots.png"
-         width="24.501085"
-         height="26.412428"
-         id="image6277"
+         y="442.16486"
          x="908.67419"
-         y="442.16486" />
+         id="image6277"
+         height="26.412428"
+         width="24.501085" />
       <path
          sodipodi:type="arc"
          style="fill:#800000;stroke:#000000;stroke-width:2.94199991;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -892,12 +892,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/foice.png"
          xlink:href="foice.png"
-         y="174.10638"
-         x="936.71228"
-         id="image6048"
-         height="52.142857"
+         transform="matrix(0.96828631,0.24984319,-0.24984319,0.96828631,0,0)"
          width="44.285717"
-         transform="matrix(0.96828631,0.24984319,-0.24984319,0.96828631,0,0)" />
+         height="52.142857"
+         id="image6048"
+         x="936.71228"
+         y="174.10638" />
       <g
          transform="matrix(0.72573703,-0.68797221,0.68797221,0.72573703,731.18231,71.603216)"
          id="g6050">
@@ -1064,12 +1064,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/pa.png"
          xlink:href="pa.png"
-         transform="matrix(0.04428565,-0.99901891,0.99901891,0.04428565,0,0)"
-         width="93.933983"
-         height="95.954292"
-         id="image4711"
+         y="-157.29272"
          x="-415.10236"
-         y="-157.29272" />
+         id="image4711"
+         height="95.954292"
+         width="93.933983"
+         transform="matrix(0.04428565,-0.99901891,0.99901891,0.04428565,0,0)" />
       <g
          transform="matrix(0.72573703,-0.68797221,0.68797221,0.72573703,-278.3635,-1.2452147)"
          id="g4567">
@@ -1174,12 +1174,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
          xlink:href="../msoftlivre/kalashnikov_inv.png"
-         transform="matrix(-0.21913921,0.9756936,0.97279825,0.23165397,0,0)"
-         width="31.728558"
-         height="61.811008"
-         id="image4770"
+         y="-110.40227"
          x="365.44708"
-         y="-110.40227" />
+         id="image4770"
+         height="61.811008"
+         width="31.728558"
+         transform="matrix(-0.21913921,0.9756936,0.97279825,0.23165397,0,0)" />
       <path
          style="fill:none;stroke:#000000;stroke-width:0.75296998px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m -135.37384,356.48325 c 0,0 1.55627,2.1797 -0.38365,3.66658 -1.96972,1.68329 -3.83586,-0.27405 -3.83586,-0.27405"
@@ -1332,12 +1332,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
          xlink:href="../msoftlivre/kalashnikov_inv.png"
-         y="1037.0879"
-         x="266.80994"
-         id="image9496"
-         height="76.000008"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
          width="38.000004"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
+         height="76.000008"
+         id="image9496"
+         x="266.80994"
+         y="1037.0879" />
       <path
          id="path9498"
          d="m 1014.4707,524.1136 c 0,0 1.9164,2.60676 -0.4724,4.38497 -2.4256,2.0131 -4.7237,-0.32774 -4.7237,-0.32774"
@@ -1506,12 +1506,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
          xlink:href="../msoftlivre/kalashnikov_inv.png"
-         y="885.50549"
-         x="118.5812"
-         id="image9660"
-         height="76.000008"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
          width="38.000004"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
+         height="76.000008"
+         id="image9660"
+         x="118.5812"
+         y="885.50549" />
       <path
          id="path9662"
          d="m 900.18499,345.54216 c 0,0 1.9164,2.60676 -0.4724,4.38497 -2.4256,2.0131 -4.7237,-0.32774 -4.7237,-0.32774"
@@ -2258,12 +2258,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/../../../models/objetos/armas/scimitar/scimitar_inv.png"
          xlink:href="../../../models/objetos/armas/scimitar/scimitar_inv.png"
-         transform="matrix(0.97134715,0.23766513,-0.23766513,0.97134715,0,0)"
-         width="27.645937"
-         height="60.595173"
-         id="image10401"
+         y="84.529015"
          x="1007.2947"
-         y="84.529015" />
+         id="image10401"
+         height="60.595173"
+         width="27.645937"
+         transform="matrix(0.97134715,0.23766513,-0.23766513,0.97134715,0,0)" />
     </g>
     <g
        id="g9768"
@@ -2376,11 +2376,11 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/../../../models/objetos/armas/sw39/sw39_inv.png"
          xlink:href="../../../models/objetos/armas/sw39/sw39_inv.png"
-         y="357.6131"
-         x="884.43085"
-         id="image9730"
+         width="23.357143"
          height="22.285715"
-         width="23.357143" />
+         id="image9730"
+         x="884.43085"
+         y="357.6131" />
       <path
          id="path9732"
          d="m 907.0361,373.59427 c 2.62965,-4.72165 -4.63049,-4.32127 -4.63049,-4.32127"
@@ -2680,12 +2680,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/foice.png"
          xlink:href="foice.png"
-         y="-131.54108"
-         x="905.95197"
-         id="image9186"
-         height="52.142857"
+         transform="matrix(0.87342443,0.48695972,-0.48695972,0.87342443,0,0)"
          width="44.285717"
-         transform="matrix(0.87342443,0.48695972,-0.48695972,0.87342443,0,0)" />
+         height="52.142857"
+         id="image9186"
+         x="905.95197"
+         y="-131.54108" />
       <g
          transform="matrix(0.72573703,-0.68797221,0.68797221,0.72573703,710.97925,0.892535)"
          id="g9188">
@@ -2705,12 +2705,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/foice.png"
          xlink:href="foice.png"
-         transform="matrix(0.34553985,-0.93840408,0.93840408,0.34553985,0,0)"
-         width="44.285717"
-         height="52.142857"
-         id="image9196"
+         y="960.30133"
          x="-75.484634"
-         y="960.30133" />
+         id="image9196"
+         height="52.142857"
+         width="44.285717"
+         transform="matrix(0.34553985,-0.93840408,0.93840408,0.34553985,0,0)" />
       <path
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 918.67923,366.802 5.71428,17.85714"
@@ -2803,12 +2803,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
          xlink:href="../msoftlivre/kalashnikov_inv.png"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
-         width="38.000004"
-         height="76.000008"
-         id="image8136"
+         y="1037.0879"
          x="266.80994"
-         y="1037.0879" />
+         id="image8136"
+         height="76.000008"
+         width="38.000004"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
       <path
          style="fill:none;stroke:#000000;stroke-width:0.91376841px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 1014.4707,524.1136 c 0,0 1.9164,2.60676 -0.4724,4.38497 -2.4256,2.0131 -4.7237,-0.32774 -4.7237,-0.32774"
@@ -2900,12 +2900,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/pa.png"
          xlink:href="pa.png"
-         y="887.23053"
-         x="-167.07343"
-         id="image6680"
-         height="95.954292"
+         transform="matrix(0.31512091,-0.94905153,0.94905153,0.31512091,0,0)"
          width="93.933983"
-         transform="matrix(0.31512091,-0.94905153,0.94905153,0.31512091,0,0)" />
+         height="95.954292"
+         id="image6680"
+         x="-167.07343"
+         y="887.23053" />
       <g
          id="g7314">
         <rect
@@ -3182,12 +3182,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/mart.png"
          xlink:href="mart.png"
-         y="-187.81512"
-         x="959.44806"
-         id="image8476"
-         height="50.088051"
+         transform="matrix(0.87958568,0.47574051,-0.61131976,0.79138369,0,0)"
          width="47.289532"
-         transform="matrix(0.87958568,0.47574051,-0.61131976,0.79138369,0,0)" />
+         height="50.088051"
+         id="image8476"
+         x="959.44806"
+         y="-187.81512" />
       <g
          id="g8478"
          transform="matrix(-0.97239759,0.23333009,-0.23333009,-0.97239759,975.87001,764.71871)">
@@ -3330,12 +3330,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/foice.png"
          xlink:href="foice.png"
-         transform="matrix(0.87342443,0.48695972,-0.48695972,0.87342443,0,0)"
-         width="44.285717"
-         height="52.142857"
-         id="image5988"
+         y="282.2659"
          x="-3.0649734"
-         y="282.2659" />
+         id="image5988"
+         height="52.142857"
+         width="44.285717"
+         transform="matrix(0.87342443,0.48695972,-0.48695972,0.87342443,0,0)" />
       <g
          id="g5693"
          transform="matrix(0.72573703,-0.68797221,0.68797221,0.72573703,-284.48569,-80.332984)">
@@ -3355,12 +3355,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/foice.png"
          xlink:href="foice.png"
-         y="-1.9136939"
-         x="-343.23508"
-         id="image5992"
-         height="52.142857"
+         transform="matrix(0.34553985,-0.93840408,0.93840408,0.34553985,0,0)"
          width="44.285717"
-         transform="matrix(0.34553985,-0.93840408,0.93840408,0.34553985,0,0)" />
+         height="52.142857"
+         id="image5992"
+         x="-343.23508"
+         y="-1.9136939" />
       <path
          id="path5730"
          d="m -76.785714,285.57648 5.714286,17.85714"
@@ -3497,12 +3497,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/mart.png"
          xlink:href="mart.png"
-         transform="matrix(0.75331562,0.65765916,-0.77050219,0.63743734,0,0)"
-         width="47.289532"
-         height="50.088051"
-         id="image6595"
+         y="-252.10837"
          x="828.93262"
-         y="-252.10837" />
+         id="image6595"
+         height="50.088051"
+         width="47.289532"
+         transform="matrix(0.75331562,0.65765916,-0.77050219,0.63743734,0,0)" />
       <g
          transform="matrix(-0.97239759,0.23333009,-0.23333009,-0.97239759,825.32842,841.8021)"
          id="g6341">
@@ -3526,12 +3526,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/pa.png"
          xlink:href="pa.png"
-         y="867.06598"
-         x="-1.0774404"
-         id="image8355"
-         height="95.954292"
+         transform="matrix(0.45293196,-0.89154509,0.89154509,0.45293196,0,0)"
          width="93.933983"
-         transform="matrix(0.45293196,-0.89154509,0.89154509,0.45293196,0,0)" />
+         height="95.954292"
+         id="image8355"
+         x="-1.0774404"
+         y="867.06598" />
       <g
          transform="matrix(1.1255853,0,0,1,-104.65928,0)"
          id="g8394">
@@ -3831,12 +3831,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/../../../models/objetos/armas/axe/axe_inv.png"
          xlink:href="../../../models/objetos/armas/axe/axe_inv.png"
-         transform="matrix(-0.7812738,0.62418847,0.62418847,0.7812738,0,0)"
-         width="29.428572"
-         height="170.71428"
-         id="image9424"
+         y="733.63019"
          x="-409.15195"
-         y="733.63019" />
+         id="image9424"
+         height="170.71428"
+         width="29.428572"
+         transform="matrix(-0.7812738,0.62418847,0.62418847,0.7812738,0,0)" />
     </g>
     <g
        id="g8296"
@@ -3957,12 +3957,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/foice.png"
          xlink:href="foice.png"
-         transform="matrix(0.96828631,0.24984319,-0.24984319,0.96828631,0,0)"
-         width="44.285717"
-         height="52.142857"
-         id="image8256"
+         y="144.40353"
          x="939.26849"
-         y="144.40353" />
+         id="image8256"
+         height="52.142857"
+         width="44.285717"
+         transform="matrix(0.96828631,0.24984319,-0.24984319,0.96828631,0,0)" />
       <g
          id="g8258"
          transform="matrix(0.72573703,-0.68797221,0.68797221,0.72573703,741.43564,43.909568)">
@@ -4129,11 +4129,11 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/../../../models/objetos/armas/sw39/sw39_inv.png"
          xlink:href="../../../models/objetos/armas/sw39/sw39_inv.png"
-         width="23.357143"
-         height="22.285715"
-         id="image9129"
+         y="508.36221"
          x="910.28571"
-         y="508.36221" />
+         id="image9129"
+         height="22.285715"
+         width="23.357143" />
       <path
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 932.89098,524.34339 c 2.62965,-4.72165 -4.63049,-4.32127 -4.63049,-4.32127"
@@ -4339,12 +4339,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/../../../models/objetos/armas/dark_katana/dark_katana_inv.png"
          xlink:href="../../../models/objetos/armas/dark_katana/dark_katana_inv.png"
-         transform="matrix(0.94590106,0.3244552,-0.3244552,0.94590106,0,0)"
-         width="38"
-         height="76"
-         id="image10103"
+         y="32.606907"
          x="902.11108"
-         y="32.606907" />
+         id="image10103"
+         height="76"
+         width="38"
+         transform="matrix(0.94590106,0.3244552,-0.3244552,0.94590106,0,0)" />
       <path
          id="path10153"
          d="m 871.29404,373.64372 c 1.0714,0.17857 14.4643,-1.07143 14.4643,-1.07143"
@@ -4356,12 +4356,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/pa.png"
          xlink:href="pa.png"
-         y="1020.8542"
-         x="-50.86607"
-         id="image9828"
-         height="95.954292"
+         transform="matrix(0.34354319,-0.93913688,0.93913688,0.34354319,0,0)"
          width="93.933983"
-         transform="matrix(0.34354319,-0.93913688,0.93913688,0.34354319,0,0)" />
+         height="95.954292"
+         id="image9828"
+         x="-50.86607"
+         y="1020.8542" />
       <g
          id="g9867">
         <rect
@@ -4690,12 +4690,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/mart.png"
          xlink:href="mart.png"
-         transform="matrix(0.75331562,0.65765916,-0.77050219,0.63743734,0,0)"
-         width="47.289532"
-         height="50.088051"
-         id="image5082"
+         y="-285.35522"
          x="756.71039"
-         y="-285.35522" />
+         id="image5082"
+         height="50.088051"
+         width="47.289532"
+         transform="matrix(0.75331562,0.65765916,-0.77050219,0.63743734,0,0)" />
       <g
          id="g5084"
          transform="matrix(0.42753672,0.90399798,-0.90399798,0.42753672,802.0668,-550.55925)">
@@ -4816,12 +4816,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
          xlink:href="../msoftlivre/kalashnikov_inv.png"
-         y="885.50549"
-         x="118.5812"
-         id="image5120"
-         height="76.000008"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
          width="38.000004"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
+         height="76.000008"
+         id="image5120"
+         x="118.5812"
+         y="885.50549" />
       <path
          id="path5122"
          d="m 900.18499,345.54216 c 0,0 1.9164,2.60676 -0.4724,4.38497 -2.4256,2.0131 -4.7237,-0.32774 -4.7237,-0.32774"
@@ -4966,12 +4966,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
          xlink:href="../msoftlivre/kalashnikov_inv.png"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
-         width="38.000004"
-         height="76.000008"
-         id="image5164"
+         y="-134.7252"
          x="184.09911"
-         y="-134.7252" />
+         id="image5164"
+         height="76.000008"
+         width="38.000004"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
       <path
          style="fill:none;stroke:#000000;stroke-width:0.91376841px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m -108.5729,179.49791 c 0,0 1.91644,2.60676 -0.47244,4.38497 -2.42559,2.0131 -4.72361,-0.32774 -4.72361,-0.32774"
@@ -5099,11 +5099,11 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/revoots.png"
          xlink:href="revoots.png"
-         y="442.16486"
-         x="908.67419"
-         id="image5208"
+         width="24.501085"
          height="26.412428"
-         width="24.501085" />
+         id="image5208"
+         x="908.67419"
+         y="442.16486" />
       <path
          sodipodi:end="3.1578779"
          sodipodi:start="0"
@@ -5179,12 +5179,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/foice.png"
          xlink:href="foice.png"
-         transform="matrix(0.96828631,0.24984319,-0.24984319,0.96828631,0,0)"
-         width="44.285717"
-         height="52.142857"
-         id="image5228"
+         y="174.10638"
          x="936.71228"
-         y="174.10638" />
+         id="image5228"
+         height="52.142857"
+         width="44.285717"
+         transform="matrix(0.96828631,0.24984319,-0.24984319,0.96828631,0,0)" />
       <g
          id="g5230"
          transform="matrix(0.72573703,-0.68797221,0.68797221,0.72573703,731.18231,71.603216)">
@@ -5351,12 +5351,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/pa.png"
          xlink:href="pa.png"
-         y="-157.29272"
-         x="-415.10236"
-         id="image5280"
-         height="95.954292"
+         transform="matrix(0.04428565,-0.99901891,0.99901891,0.04428565,0,0)"
          width="93.933983"
-         transform="matrix(0.04428565,-0.99901891,0.99901891,0.04428565,0,0)" />
+         height="95.954292"
+         id="image5280"
+         x="-415.10236"
+         y="-157.29272" />
       <g
          id="g5282"
          transform="matrix(0.72573703,-0.68797221,0.68797221,0.72573703,-278.3635,-1.2452147)">
@@ -5377,164 +5377,6 @@
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m -66.670068,370.00414 3.282996,9.59645 -13.637059,3.78807"
          id="path5290" />
-    </g>
-    <g
-       transform="matrix(1.233493,0,0,1.1278221,270.54227,460.34417)"
-       id="g5292">
-      <rect
-         style="fill:#aa0000;fill-opacity:1;stroke:#000000;stroke-width:2.21523762;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-         id="rect5294"
-         width="26.997644"
-         height="42.429562"
-         x="-167.24054"
-         y="329.18939" />
-      <path
-         sodipodi:type="arc"
-         style="fill:#195516;fill-opacity:1;stroke:#000000;stroke-width:2.94199991;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-         id="path5296"
-         sodipodi:cx="60.104076"
-         sodipodi:cy="152.82133"
-         sodipodi:rx="24.748737"
-         sodipodi:ry="22.728432"
-         d="m 84.852814,152.82133 c 0,12.55257 -11.080387,22.72844 -24.748738,22.72844 -13.66835,0 -24.748737,-10.17587 -24.748737,-22.72844 0,-12.55256 11.080387,-22.72843 24.748737,-22.72843 13.668351,0 24.748738,10.17587 24.748738,22.72843 z"
-         transform="matrix(0.74239737,0,0,0.76369313,-198.00293,200.55434)" />
-      <path
-         sodipodi:type="arc"
-         style="fill:#ff0000;stroke:#f6d72b;stroke-width:2.94199991;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-         id="path5298"
-         sodipodi:cx="794.48499"
-         sodipodi:cy="256.86707"
-         sodipodi:rx="2.5253813"
-         sodipodi:ry="3.5355339"
-         d="m 797.01037,256.86707 c 0,1.95262 -1.13066,3.53553 -2.52538,3.53553 -1.39473,0 -2.52539,-1.58291 -2.52539,-3.53553 0,-1.95263 1.13066,-3.53554 2.52539,-3.53554 1.39472,0 2.52538,1.58291 2.52538,3.53554 z"
-         transform="matrix(0.55864108,0,0,0.38304923,-607.97228,214.3813)" />
-      <path
-         transform="matrix(0.55864108,0,0,0.38304923,-597.6006,214.3813)"
-         d="m 797.01037,256.86707 c 0,1.95262 -1.13066,3.53553 -2.52538,3.53553 -1.39473,0 -2.52539,-1.58291 -2.52539,-3.53553 0,-1.95263 1.13066,-3.53554 2.52539,-3.53554 1.39472,0 2.52538,1.58291 2.52538,3.53554 z"
-         sodipodi:ry="3.5355339"
-         sodipodi:rx="2.5253813"
-         sodipodi:cy="256.86707"
-         sodipodi:cx="794.48499"
-         id="path5300"
-         style="fill:#ff0000;stroke:#f6d72b;stroke-width:2.94199991;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-         sodipodi:type="arc" />
-      <path
-         sodipodi:end="3.1578779"
-         sodipodi:start="0"
-         transform="matrix(-0.56043582,0.13724311,-0.12076289,-0.52505733,305.17884,296.53462)"
-         d="m 781.49232,119.1479 c 0,5.72065 -4.6656,10.35815 -10.42091,10.35815 -5.75531,0 -10.42091,-4.6375 -10.42091,-10.35815 0,-0.0562 4.6e-4,-0.11245 0.001,-0.16867 l 10.41953,0.16867 z"
-         sodipodi:ry="10.358145"
-         sodipodi:rx="10.420911"
-         sodipodi:cy="119.1479"
-         sodipodi:cx="771.07141"
-         id="path5302"
-         style="fill:#800000;stroke:#000000;stroke-width:2.94199991;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-         sodipodi:type="arc" />
-      <path
-         sodipodi:type="arc"
-         style="fill:#550000;stroke:#000000;stroke-width:2.94199991;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-         id="path5304"
-         sodipodi:cx="771.07141"
-         sodipodi:cy="119.1479"
-         sodipodi:rx="10.420911"
-         sodipodi:ry="10.358145"
-         d="m 781.49232,119.1479 c 0,5.72065 -4.6656,10.35815 -10.42091,10.35815 -5.75531,0 -10.42091,-4.6375 -10.42091,-10.35815 0,-0.0562 4.6e-4,-0.11245 0.001,-0.16867 l 10.41953,0.16867 z"
-         transform="matrix(-0.36668695,-0.45725012,0.40402034,-0.34388022,69.095625,733.38757)"
-         sodipodi:start="0"
-         sodipodi:end="3.1578779" />
-      <path
-         style="fill:none;stroke:#000000;stroke-width:0.54882562px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         d="m -165.42157,340.0203 -9.10254,7.58299"
-         id="path5306" />
-      <path
-         style="fill:none;stroke:#000000;stroke-width:0.82402718px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         d="m -159.06537,372.43792 -6.97261,14.14803 -9.02336,-5.06795"
-         id="path5308" />
-      <path
-         style="fill:none;stroke:#000000;stroke-width:0.82402718px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         d="m -147.58109,372.22676 3.28123,8.65775 -8.20307,7.1796"
-         id="path5310" />
-      <path
-         style="fill:none;stroke:#000000;stroke-width:1.17316031px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         d="m -141.30548,340.43632 7.85869,25.58922"
-         id="path5312" />
-      <image
-         sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
-         xlink:href="../msoftlivre/kalashnikov_inv.png"
-         y="-110.40227"
-         x="365.44708"
-         id="image5314"
-         height="61.811008"
-         width="31.728558"
-         transform="matrix(-0.21913921,0.9756936,0.97279825,0.23165397,0,0)" />
-      <path
-         id="path5316"
-         d="m -135.37384,356.48325 c 0,0 1.55627,2.1797 -0.38365,3.66658 -1.96972,1.68329 -3.83586,-0.27405 -3.83586,-0.27405"
-         style="fill:none;stroke:#000000;stroke-width:0.75296998px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-      <path
-         style="fill:none;stroke:#000000;stroke-width:0.75296998px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         d="m -177.72072,343.39254 c 0,0 0.78675,2.58146 3.09825,1.85013 2.48291,-0.63992 2.05352,-3.34716 2.05352,-3.34716"
-         id="path5318" />
-      <path
-         id="path5320"
-         d="m -175.16388,342.45255 0.82031,4.96238"
-         style="fill:none;stroke:#000000;stroke-width:0.82402718px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-      <path
-         id="path5322"
-         d="m -133.43081,365.68066 -4.30661,-7.91867"
-         style="fill:none;stroke:#000000;stroke-width:0.82402718px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-      <path
-         transform="matrix(0.81206153,0,0,-0.83616909,-689.20463,771.32539)"
-         sodipodi:end="3.1578779"
-         sodipodi:start="0"
-         d="m 678.82253,556.37726 c 0,7.81048 -8.36683,14.14213 -18.68783,14.14213 -10.32099,0 -18.68782,-6.33165 -18.68782,-14.14213 0,-0.0768 8.3e-4,-0.15354 0.002,-0.2303 l 18.68534,0.2303 z"
-         sodipodi:ry="14.142136"
-         sodipodi:rx="18.687822"
-         sodipodi:cy="556.37726"
-         sodipodi:cx="660.1347"
-         id="path5324"
-         style="fill:#aa0000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-         sodipodi:type="arc" />
-      <g
-         id="g5326"
-         transform="matrix(0.86809411,0.49639965,-0.49639965,0.86809411,137.70957,118.06422)">
-        <path
-           id="path5328"
-           d="m -158.05809,295.3371 c 3.18611,-13.07111 15.09462,-16.50239 15.09462,-16.50239"
-           style="fill:none;stroke:#000000;stroke-width:0.82402718px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-        <path
-           sodipodi:type="arc"
-           style="fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:#f6d72b;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:0;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-           id="path5330"
-           sodipodi:cx="-114.02097"
-           sodipodi:cy="87.792778"
-           sodipodi:rx="4.4194174"
-           sodipodi:ry="3.914341"
-           d="m -109.60156,87.792778 c 0,2.161831 -1.97864,3.914341 -4.41941,3.914341 -2.44078,0 -4.41942,-1.75251 -4.41942,-3.914341 0,-2.161831 1.97864,-3.914341 4.41942,-3.914341 2.44077,0 4.41941,1.75251 4.41941,3.914341 z"
-           transform="matrix(0.81206153,0,0,0.83616909,-50.692261,205.54799)" />
-      </g>
-      <g
-         id="g5332"
-         transform="matrix(0.90704839,-0.42102639,0.42102639,0.90704839,-157.67136,-31.25495)">
-        <path
-           style="fill:none;stroke:#000000;stroke-width:0.82402718px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           d="m -144.82237,296.16751 c 7.58783,-10.98056 19.89242,-9.71357 19.89242,-9.71357"
-           id="path5334" />
-        <path
-           transform="matrix(0.81206153,0,0,0.83616909,-31.840833,212.71516)"
-           d="m -109.60156,87.792778 c 0,2.161831 -1.97864,3.914341 -4.41941,3.914341 -2.44078,0 -4.41942,-1.75251 -4.41942,-3.914341 0,-2.161831 1.97864,-3.914341 4.41942,-3.914341 2.44077,0 4.41941,1.75251 4.41941,3.914341 z"
-           sodipodi:ry="3.914341"
-           sodipodi:rx="4.4194174"
-           sodipodi:cy="87.792778"
-           sodipodi:cx="-114.02097"
-           id="path5336"
-           style="fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:#f6d72b;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:0;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-           sodipodi:type="arc" />
-      </g>
-      <path
-         style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         d="m -160.86679,327.07266 12.6269,-3.78807"
-         id="path5338" />
     </g>
     <g
        id="g5340"
@@ -5619,12 +5461,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
          xlink:href="../msoftlivre/kalashnikov_inv.png"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
-         width="38.000004"
-         height="76.000008"
-         id="image5362"
+         y="1037.0879"
          x="266.80994"
-         y="1037.0879" />
+         id="image5362"
+         height="76.000008"
+         width="38.000004"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
       <path
          style="fill:none;stroke:#000000;stroke-width:0.91376841px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 1014.4707,524.1136 c 0,0 1.9164,2.60676 -0.4724,4.38497 -2.4256,2.0131 -4.7237,-0.32774 -4.7237,-0.32774"
@@ -5793,12 +5635,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
          xlink:href="../msoftlivre/kalashnikov_inv.png"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
-         width="38.000004"
-         height="76.000008"
-         id="image5418"
+         y="885.50549"
          x="118.5812"
-         y="885.50549" />
+         id="image5418"
+         height="76.000008"
+         width="38.000004"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
       <path
          style="fill:none;stroke:#000000;stroke-width:0.91376841px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 900.18499,345.54216 c 0,0 1.9164,2.60676 -0.4724,4.38497 -2.4256,2.0131 -4.7237,-0.32774 -4.7237,-0.32774"
@@ -6589,12 +6431,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/../../../models/objetos/armas/scimitar/scimitar_inv.png"
          xlink:href="../../../models/objetos/armas/scimitar/scimitar_inv.png"
-         y="84.529015"
-         x="1007.2947"
-         id="image5698"
-         height="60.595173"
+         transform="matrix(0.97134715,0.23766513,-0.23766513,0.97134715,0,0)"
          width="27.645937"
-         transform="matrix(0.97134715,0.23766513,-0.23766513,0.97134715,0,0)" />
+         height="60.595173"
+         id="image5698"
+         x="1007.2947"
+         y="84.529015" />
     </g>
     <g
        transform="translate(-557.67012,519.90103)"
@@ -6707,11 +6549,11 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/../../../models/objetos/armas/sw39/sw39_inv.png"
          xlink:href="../../../models/objetos/armas/sw39/sw39_inv.png"
-         width="23.357143"
-         height="22.285715"
-         id="image5730"
+         y="357.6131"
          x="884.43085"
-         y="357.6131" />
+         id="image5730"
+         height="22.285715"
+         width="23.357143" />
       <path
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 907.0361,373.59427 c 2.62965,-4.72165 -4.63049,-4.32127 -4.63049,-4.32127"
@@ -6889,12 +6731,12 @@
     <image
        sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/foice.png"
        xlink:href="foice.png"
-       y="970.7973"
-       x="92.98539"
-       id="image5817"
-       height="52.142857"
+       transform="matrix(0.91036976,-0.41379573,0.41379573,0.91036976,0,0)"
        width="44.285717"
-       transform="matrix(0.91036976,-0.41379573,0.41379573,0.91036976,0,0)" />
+       height="52.142857"
+       id="image5817"
+       x="92.98539"
+       y="970.7973" />
     <g
        transform="translate(-760.57142,345.71428)"
        id="g5833">
@@ -6978,12 +6820,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
          xlink:href="../msoftlivre/kalashnikov_inv.png"
-         y="1037.0879"
-         x="266.80994"
-         id="image5855"
-         height="76.000008"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
          width="38.000004"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
+         height="76.000008"
+         id="image5855"
+         x="266.80994"
+         y="1037.0879" />
       <path
          id="path5857"
          d="m 1014.4707,524.1136 c 0,0 1.9164,2.60676 -0.4724,4.38497 -2.4256,2.0131 -4.7237,-0.32774 -4.7237,-0.32774"
@@ -7083,12 +6925,12 @@
           <image
              sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/pa.png"
              xlink:href="pa.png"
-             y="-60.144348"
-             x="636.43536"
-             id="image5891"
-             height="95.954292"
+             transform="matrix(0.82776115,0.56108063,-0.56108063,0.82776115,0,0)"
              width="93.933983"
-             transform="matrix(0.82776115,0.56108063,-0.56108063,0.82776115,0,0)" />
+             height="95.954292"
+             id="image5891"
+             x="636.43536"
+             y="-60.144348" />
           <g
              id="g5666">
             <g
@@ -7259,6 +7101,15 @@
         </g>
       </g>
     </g>
+    <image
+       sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
+       xlink:href="../msoftlivre/kalashnikov_inv.png"
+       y="810.46051"
+       x="764.12073"
+       id="image5314"
+       height="75.907204"
+       width="35.952324"
+       transform="matrix(-0.28910686,0.95729683,0.96461787,0.26365196,0,0)" />
     <g
        transform="translate(-731.28571,544.28571)"
        id="g5939">
@@ -7386,12 +7237,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/mart.png"
          xlink:href="mart.png"
-         transform="matrix(0.87958568,0.47574051,-0.61131976,0.79138369,0,0)"
-         width="47.289532"
-         height="50.088051"
-         id="image5973"
+         y="-187.81512"
          x="959.44806"
-         y="-187.81512" />
+         id="image5973"
+         height="50.088051"
+         width="47.289532"
+         transform="matrix(0.87958568,0.47574051,-0.61131976,0.79138369,0,0)" />
       <g
          transform="matrix(-0.97239759,0.23333009,-0.23333009,-0.97239759,975.87001,764.71871)"
          id="g5975">
@@ -7534,12 +7385,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/foice.png"
          xlink:href="foice.png"
-         y="282.2659"
-         x="-3.0649734"
-         id="image6013"
-         height="52.142857"
+         transform="matrix(0.87342443,0.48695972,-0.48695972,0.87342443,0,0)"
          width="44.285717"
-         transform="matrix(0.87342443,0.48695972,-0.48695972,0.87342443,0,0)" />
+         height="52.142857"
+         id="image6013"
+         x="-3.0649734"
+         y="282.2659" />
       <g
          transform="matrix(0.72573703,-0.68797221,0.68797221,0.72573703,-284.48569,-80.332984)"
          id="g6015">
@@ -7559,12 +7410,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/foice.png"
          xlink:href="foice.png"
-         transform="matrix(0.34553985,-0.93840408,0.93840408,0.34553985,0,0)"
-         width="44.285717"
-         height="52.142857"
-         id="image6023"
+         y="-1.9136939"
          x="-343.23508"
-         y="-1.9136939" />
+         id="image6023"
+         height="52.142857"
+         width="44.285717"
+         transform="matrix(0.34553985,-0.93840408,0.93840408,0.34553985,0,0)" />
       <path
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m -76.785714,285.57648 5.714286,17.85714"
@@ -7701,12 +7552,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/mart.png"
          xlink:href="mart.png"
-         y="-252.10837"
-         x="828.93262"
-         id="image6063"
-         height="50.088051"
+         transform="matrix(0.75331562,0.65765916,-0.77050219,0.63743734,0,0)"
          width="47.289532"
-         transform="matrix(0.75331562,0.65765916,-0.77050219,0.63743734,0,0)" />
+         height="50.088051"
+         id="image6063"
+         x="828.93262"
+         y="-252.10837" />
       <g
          id="g6065"
          transform="matrix(-0.97239759,0.23333009,-0.23333009,-0.97239759,825.32842,841.8021)">
@@ -7730,12 +7581,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/pa.png"
          xlink:href="pa.png"
-         transform="matrix(0.45293196,-0.89154509,0.89154509,0.45293196,0,0)"
-         width="93.933983"
-         height="95.954292"
-         id="image6075"
+         y="867.06598"
          x="-1.0774404"
-         y="867.06598" />
+         id="image6075"
+         height="95.954292"
+         width="93.933983"
+         transform="matrix(0.45293196,-0.89154509,0.89154509,0.45293196,0,0)" />
       <g
          id="g6077"
          transform="matrix(1.1255853,0,0,1,-104.65928,0)">
@@ -8035,12 +7886,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/../../../models/objetos/armas/axe/axe_inv.png"
          xlink:href="../../../models/objetos/armas/axe/axe_inv.png"
-         y="733.63019"
-         x="-409.15195"
-         id="image6165"
-         height="170.71428"
+         transform="matrix(-0.7812738,0.62418847,0.62418847,0.7812738,0,0)"
          width="29.428572"
-         transform="matrix(-0.7812738,0.62418847,0.62418847,0.7812738,0,0)" />
+         height="170.71428"
+         id="image6165"
+         x="-409.15195"
+         y="733.63019" />
     </g>
     <g
        transform="translate(-745.57143,556.42857)"
@@ -8161,12 +8012,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/foice.png"
          xlink:href="foice.png"
-         y="144.40353"
-         x="939.26849"
-         id="image6197"
-         height="52.142857"
+         transform="matrix(0.96828631,0.24984319,-0.24984319,0.96828631,0,0)"
          width="44.285717"
-         transform="matrix(0.96828631,0.24984319,-0.24984319,0.96828631,0,0)" />
+         height="52.142857"
+         id="image6197"
+         x="939.26849"
+         y="144.40353" />
       <g
          transform="matrix(0.72573703,-0.68797221,0.68797221,0.72573703,741.43564,43.909568)"
          id="g6199">
@@ -8319,11 +8170,11 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/../../../models/objetos/armas/sw39/sw39_inv.png"
          xlink:href="../../../models/objetos/armas/sw39/sw39_inv.png"
-         y="508.36221"
-         x="910.28571"
-         id="image6245"
+         width="23.357143"
          height="22.285715"
-         width="23.357143" />
+         id="image6245"
+         x="910.28571"
+         y="508.36221" />
       <path
          id="path6247"
          d="m 932.89098,524.34339 c 2.62965,-4.72165 -4.63049,-4.32127 -4.63049,-4.32127"
@@ -8484,12 +8335,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/../../../models/objetos/armas/dark_katana/dark_katana_inv.png"
          xlink:href="../../../models/objetos/armas/dark_katana/dark_katana_inv.png"
-         y="32.606907"
-         x="902.11108"
-         id="image6297"
-         height="76"
+         transform="matrix(0.94590106,0.3244552,-0.3244552,0.94590106,0,0)"
          width="38"
-         transform="matrix(0.94590106,0.3244552,-0.3244552,0.94590106,0,0)" />
+         height="76"
+         id="image6297"
+         x="902.11108"
+         y="32.606907" />
       <path
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 871.29404,373.64372 c 1.0714,0.17857 14.4643,-1.07143 14.4643,-1.07143"
@@ -8501,12 +8352,12 @@
       <image
          sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/pa.png"
          xlink:href="pa.png"
-         transform="matrix(0.34354319,-0.93913688,0.93913688,0.34354319,0,0)"
-         width="93.933983"
-         height="95.954292"
-         id="image6303"
+         y="1020.8542"
          x="-50.86607"
-         y="1020.8542" />
+         id="image6303"
+         height="95.954292"
+         width="93.933983"
+         transform="matrix(0.34354319,-0.93913688,0.93913688,0.34354319,0,0)" />
       <g
          id="g6305">
         <rect
@@ -8819,11 +8670,180 @@
     <image
        sodipodi:absref="/programacao/dccnitghtmare/data/comics/other/rev/foice.png"
        xlink:href="foice.png"
-       transform="matrix(-0.98998418,0.14117836,-0.14117836,-0.98998418,0,0)"
-       width="44.285717"
-       height="52.142857"
-       id="image5827"
+       y="-1028.554"
        x="-433.96365"
-       y="-1028.554" />
+       id="image5827"
+       height="52.142857"
+       width="44.285717"
+       transform="matrix(-0.98998418,0.14117836,-0.14117836,-0.98998418,0,0)" />
+    <path
+       style="fill:none;stroke:#f30000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 642.32143,930.93361 c 0.23099,0.0577 0.4833,-0.0578 0.71429,0 0.12912,0.0323 0.23809,0.11905 0.35714,0.17857 0.11905,0.0595 0.26303,0.0845 0.35714,0.17857 0.0941,0.0941 0.0678,0.28332 0.17857,0.35715 0.0991,0.066 0.24165,-0.0289 0.35715,0 0.95238,0.23809 -0.17858,0.0595 0.53571,0.53571 0.0991,0.066 0.25809,-0.066 0.35714,0 0.11075,0.0738 0.0678,0.28331 0.17857,0.35714 0.0991,0.066 0.24165,-0.0289 0.35715,0 0.63492,0.15873 0.13889,0.13889 0.53571,0.53572 0.71429,0.71428 0.0595,-0.41667 0.53572,0.53571"
+       id="path4199" />
+    <path
+       style="fill:none;stroke:#ee0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 636.78572,957.71933 c -0.49025,0 -0.25067,-0.0532 -0.71429,0.17857 -0.11905,0.0595 -0.28331,0.0678 -0.35714,0.17857 -0.066,0.0991 0.0842,0.27296 0,0.35714 -0.0842,0.0842 -0.27297,-0.0842 -0.35715,0 -0.0842,0.0842 0.066,0.25809 0,0.35714 -0.86831,1.30248 0.005,-0.91215 -0.35714,0.53572 -0.0295,0.11786 -0.35955,0.5333 -0.17857,0.71428 0.0842,0.0842 0.25809,-0.066 0.35714,0 0.11075,0.0738 0.0845,0.26303 0.17857,0.35715 0.0941,0.0941 0.35715,0.0455 0.35715,0.17857 0,0.1331 -0.28332,0.0678 -0.35715,0.17857 -0.0276,0.0414 0.0252,0.61369 0,0.71429 -0.23809,0.95238 -0.0595,-0.17858 -0.53571,0.53571 -0.066,0.0991 0.0289,0.24165 0,0.35714 -0.0323,0.12913 -0.11905,0.2381 -0.17857,0.35715 -0.16307,0.32613 -0.45479,0.68084 -0.35714,1.07142 0.23809,0.95238 0.0595,-0.17857 0.53571,0.53572 0.066,0.0991 -0.066,0.25809 0,0.35714 0.0738,0.11075 0.28331,0.0678 0.35714,0.17857 0.066,0.0991 0,0.2381 0,0.35715 0,0.1857 0.0351,0.93096 0,1.07142 -0.0295,0.11786 -0.35955,0.53331 -0.17857,0.71429 0.0842,0.0842 0.2381,0 0.35714,0"
+       id="path4973" />
+    <g
+       id="g5044"
+       transform="matrix(0.98533504,0.17063075,-0.17063075,0.98533504,-316.85668,-65.004408)">
+      <rect
+         transform="matrix(0,1,-1,0,0,0)"
+         style="fill:#aa0000;fill-opacity:1;stroke:#000000;stroke-width:2.61281681;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         id="rect5294"
+         width="33.301407"
+         height="47.852997"
+         x="878.01337"
+         y="-1024.0924" />
+      <path
+         id="path5042"
+         d="m 992.5,889.86219 c 0,1.80983 0.21296,-0.31944 -0.71429,1.07143 -0.13207,0.1981 0.13207,0.51617 0,0.71428 -0.14766,0.22149 -0.56662,0.13565 -0.71428,0.35714 -0.13208,0.19811 0,0.47619 0,0.71429 0,0.23809 0,0.47619 0,0.71429 0,1.19047 0,2.38095 0,3.57142 0,0.2381 0,0.47619 0,0.71429 0,0.23809 0.16835,0.54593 0,0.71429 -0.16836,0.16835 -0.54593,-0.16836 -0.71429,0 -0.16836,0.16835 0.13207,0.51617 0,0.71428 -0.18633,0.2795 -1.95652,0.79193 -2.14286,1.07143 -0.13207,0.19811 0.16836,0.54593 0,0.71429 -0.16836,0.16835 -0.54592,-0.16836 -0.71428,0 -0.16836,0.16835 0.0577,0.48329 0,0.71428 -0.0646,0.25825 -0.29258,0.45604 -0.35715,0.71429 -0.0577,0.23098 0.13208,0.51618 0,0.71428 -0.14766,0.22149 -0.56662,0.13565 -0.71428,0.35715 -0.26414,0.39621 0.26414,1.03235 0,1.42857 -0.14766,0.22149 -0.52606,0.16891 -0.71429,0.35714 -0.18823,0.18823 -0.13565,0.56662 -0.35714,0.71429 -0.19811,0.13207 -0.51618,-0.13208 -0.71429,0 -1.42857,0.95238 0.83334,0.59523 -1.07142,1.07142 -0.29326,0.0733 -1.34199,-0.0866 -1.42858,0 -0.16835,0.16836 0.0578,0.4833 0,0.71429 -0.46362,1.85449 -0.35714,-0.38127 -0.35714,1.42857 0,0.2381 -0.16836,0.54593 0,0.71429 0.16836,0.16836 0.71429,-0.2381 0.71429,0 0,0.23809 -0.92725,-0.10648 -0.71429,0 0.43903,0.21951 1.00768,0.1046 1.42857,0.35714 0.22827,0.13696 0.16891,0.52605 0.35715,0.71429 0.37646,0.37646 1.05211,0.33782 1.42857,0.71428 0.29448,0.29448 0.4198,1.13409 0.71428,1.42857 0.37646,0.37646 1.05211,0.33783 1.42857,0.71429 0.18823,0.18823 0.13566,0.56662 0.35715,0.71428 0.1981,0.13208 0.51618,-0.13207 0.71428,0 0.22149,0.14766 0.16891,0.52606 0.35715,0.71429 0.18823,0.18823 0.47619,0.23809 0.71428,0.35714 0.11905,0.2381 0.16891,0.52606 0.35714,0.71429 0.67449,0.67448 0.67416,0.16854 1.42858,0.35714 2.02345,1.01173 -0.5324,-0.1331 1.42857,0.35714 0.86448,0.21612 0.71702,0.53777 1.42857,1.07143 0.21296,0.15972 0.47619,0.2381 0.71428,0.35715 0.2381,0.11904 0.45604,0.29258 0.71429,0.35714 0.23099,0.0577 0.4833,-0.0577 0.71429,0 0.25825,0.0646 0.47619,0.23809 0.71428,0.35714 0.3802,0.1901 1.04837,0.52419 1.42857,0.71429 0.2381,0.11904 0.45604,0.29258 0.71429,0.35714 0.23098,0.0577 0.48334,-0.0578 0.71424,0 0.2583,0.0646 0.47619,0.23809 0.71429,0.35714 0.3802,0.1901 1.0484,0.52419 1.4286,0.71429 0.7143,0.35714 1.4286,0.71428 2.1429,1.07143 0.2381,0.11904 0.456,0.29258 0.7142,0.35714 0.231,0.0577 0.4833,-0.0578 0.7143,0 0.2583,0.0646 0.4762,0.23809 0.7143,0.35714 0.2381,0.11905 0.4762,0.2381 0.7143,0.35715 0.2381,0.11904 0.5261,0.16891 0.7143,0.35714 0.1882,0.18823 0.3571,0.98048 0.3571,0.71428 0,-0.49084 -0.1376,-0.98954 -0.3571,-1.42857 -0.1065,-0.21296 -0.058,0.4833 0,0.71429 0.065,0.25825 0.1974,0.50133 0.3571,0.71428 0.2381,0.2381 0.4762,0.47619 0.7143,0.71429 0,0.23809 -0.1321,0.51618 0,0.71429 0.1477,0.22149 0.5666,0.13565 0.7143,0.35714 0.1321,0.19811 -0.1321,0.51618 0,0.71428 0.1477,0.22149 0.4762,0.2381 0.7143,0.35715 0.119,0.23809 0.2381,0.47619 0.3571,0.71428 0.1191,0.2381 0.2381,0.47619 0.3572,0.71429 0.119,0.23809 0.1689,0.52605 0.3571,0.71428 0.1882,0.18823 0.5666,0.13566 0.7143,0.35715 0.1321,0.1981 -0.1321,0.51618 0,0.71428 0.1266,0.18988 1.8441,0.84733 2.1429,1.07143 0.2693,0.20203 0.4449,0.51226 0.7142,0.71429 0.6286,0.47143 1.5143,0.6 2.1429,1.07143 0.2694,0.20203 0.4131,0.5637 0.7143,0.71428 0.2129,0.10648 0.4833,-0.0578 0.7143,0 0.2582,0.0646 0.4762,0.2381 0.7143,0.35714 0.2381,0.11905 0.526,0.16892 0.7142,0.35715 0.1883,0.18823 0.2381,0.47619 0.3572,0.71428 0.119,0.2381 0.2926,0.45604 0.3571,0.71429 0.07,0.28093 0,1.77145 0,2.14286 0,0.23809 0,0.47619 0,0.71428 0,0.2381 0.1321,0.51618 0,0.71429 -0.1476,0.22149 -0.5666,0.13565 -0.7143,0.35714 -0.132,0.19811 0.1684,0.54593 0,0.71429 -0.1683,0.16835 -0.5459,-0.16836 -0.7142,0 -0.1684,0.16835 0,0.47619 0,0.71428 0,0.2381 0,0.47619 0,0.71429 0,0.23809 -0.1321,0.51618 0,0.71428 0.1476,0.22149 0.526,0.16891 0.7142,0.35715 0.1883,0.18823 0.1357,0.56662 0.3572,0.71428 0.1981,0.13207 0.4833,-0.0578 0.7143,0 0.2582,0.0646 0.4762,0.2381 0.7143,0.35714 0.2381,0.11905 0.4761,0.2381 0.7142,0.35715 0.2381,0.11904 0.4561,0.29258 0.7143,0.35714 0.231,0.0577 0.4884,-0.0753 0.7143,0 0.5051,0.16836 0.9235,0.54593 1.4286,0.71429 0.2259,0.0753 0.478,-0.0295 0.7143,0 0.7185,0.0898 1.4243,0.26732 2.1428,0.35714 0.4725,0.0591 0.9589,-0.0783 1.4286,0 0.4842,0.0807 0.9444,0.27645 1.4286,0.35714 0.4697,0.0783 0.9666,-0.11549 1.4285,0 0.2583,0.0646 0.4561,0.29258 0.7143,0.35714 0.2875,0.0719 2.7484,0 2.8572,0 0.2381,0 0.4762,0 0.7143,0 0.2381,0 0.4833,0.0577 0.7142,0 0.2583,-0.0646 0.4762,-0.23809 0.7143,-0.35714 0.2381,-0.11905 0.5261,-0.16891 0.7143,-0.35714 1.7288,-1.72881 -0.7745,0.26885 0.3572,-1.42857 0.1476,-0.22149 0.5666,-0.13566 0.7142,-0.35715 0.1321,-0.1981 0,-0.47619 0,-0.71428 0,-0.2381 0,-0.47619 0,-0.71429 0,-0.71428 0,-1.42857 0,-2.14285 0,-0.2381 0,-0.4762 0,-0.71429 0,-0.2381 0.058,-0.4833 0,-0.71429 -0.064,-0.25825 -0.2925,-0.45603 -0.3571,-0.71428 -0.155,-0.62009 0.155,-1.52277 0,-2.14286 -0.096,-0.38288 -0.6862,-0.93498 -0.3571,-1.42857 0.1476,-0.22149 0.526,-0.16891 0.7142,-0.35714 0.1883,-0.18823 0.1357,-0.56663 0.3572,-0.71429 0.1981,-0.13207 0.4833,0.0577 0.7143,0 2.0234,-1.01173 -0.5324,0.1331 1.4285,-0.35714 0.2583,-0.0646 0.4561,-0.29258 0.7143,-0.35714 0.231,-0.0578 0.4833,0.0577 0.7143,0 0.2583,-0.0646 0.4561,-0.29258 0.7143,-0.35715 0.231,-0.0577 0.4762,0 0.7143,0 0.2381,0 0.4762,0 0.7143,0 1.1904,0 2.3809,0 3.5714,0 0.2346,0 2.0364,0.071 2.1429,0 0.2214,-0.14766 0.1689,-0.52605 0.3571,-0.71428 0.1882,-0.18823 0.5261,-0.16892 0.7143,-0.35715 0.07,-0.0703 1.0395,-2.01537 1.0714,-2.14285 0.058,-0.23099 -0.058,-0.4833 0,-0.71429 0.065,-0.25825 0.2926,-0.45603 0.3572,-0.71428 0.058,-0.23099 -0.058,-0.4833 0,-0.71429 0.064,-0.25825 0.2925,-0.45604 0.3571,-0.71429 0.4902,-1.96096 -0.6546,0.59489 0.3571,-1.42857 0.2381,-0.47619 0.4762,-0.95238 0.7143,-1.42857 0.1191,-0.23809 0.2926,-0.45603 0.3572,-0.71428 0.058,-0.23099 0,-0.4762 0,-0.71429 0,-0.2381 0.1683,-0.54593 0,-0.71429 -0.1684,-0.16835 -0.546,0.16836 -0.7143,0 -0.1684,-0.16835 0.058,-0.4833 0,-0.71428 -0.1291,-0.5165 -0.5852,-0.91207 -0.7143,-1.42857 -0.058,-0.23099 0,-0.47619 0,-0.71429 0,-0.23809 -0.1321,-0.51618 0,-0.71428 0.1477,-0.2215 0.5666,-0.13566 0.7143,-0.35715 0.1321,-0.1981 0,-0.47619 0,-0.71428 0.2381,-0.11905 0.526,-0.16892 0.7143,-0.35715 0.3562,-0.35619 0.7152,-1.78665 1.0714,-2.14285 0.1882,-0.18823 0.5666,-0.13566 0.7143,-0.35715 1.1316,-1.69742 -1.3717,0.30024 0.3571,-1.42857 0.1883,-0.18823 0.5667,-0.13565 0.7143,-0.35714 0.1321,-0.19811 0,-0.47619 0,-0.71429 0.2381,-0.11904 0.5261,-0.16891 0.7143,-0.35714 0.07,-0.0703 1.0396,-2.01537 1.0714,-2.14286 0.077,-0.30778 -0.1002,-1.99253 0,-2.14285 0.1477,-0.22149 0.5667,-0.13566 0.7143,-0.35715 0.1321,-0.1981 -0.058,-0.4833 0,-0.71428 0.1291,-0.5165 0.5852,-0.91207 0.7143,-1.42857 0.058,-0.23099 0,-0.47619 0,-0.71429 0,-0.23809 0.1321,-0.51618 0,-0.71428 -0.1477,-0.2215 -0.5261,-0.16892 -0.7143,-0.35715 -0.1882,-0.18823 -0.1356,-0.56662 -0.3571,-0.71428 -0.1981,-0.13207 -0.4762,0 -0.7143,0 -0.2381,0 -0.4833,-0.0578 -0.7143,0 -0.7092,0.17731 -1.4336,0.89411 -2.1429,1.07143 -0.2309,0.0577 -0.4833,-0.0578 -0.7142,0 -0.2583,0.0646 -0.4762,0.23809 -0.7143,0.35714 -0.2381,0.11905 -0.5667,0.13565 -0.7143,0.35714 -0.1321,0.19811 0.1683,0.54593 0,0.71429 -0.1684,0.16836 -0.4833,-0.0578 -0.7143,0 -0.7092,0.17731 -1.4336,0.89411 -2.1429,1.07143 -0.4619,0.11549 -0.9666,-0.1155 -1.4285,0 -0.2583,0.0646 -0.4561,0.29258 -0.7143,0.35714 -0.231,0.0577 -0.5162,-0.13207 -0.7143,0 -0.2215,0.14766 -0.1357,0.56662 -0.3571,0.71428 -0.1981,0.13208 -0.5162,-0.13207 -0.7143,0 -0.2215,0.14766 -0.1689,0.52606 -0.3572,0.71429 -0.1882,0.18823 -0.4762,0.23809 -0.7143,0.35714 -0.2381,0.11905 -0.456,0.29258 -0.7142,0.35715 -0.6201,0.15502 -1.5228,-0.15503 -2.1429,0 -0.8428,0.21069 -0.5237,0.58337 -1.4286,0.35714 -0.2582,-0.0646 -0.456,-0.29258 -0.7143,-0.35714 -0.2309,-0.0578 -0.4761,0 -0.7142,0 -0.2381,0 -0.4762,0 -0.7143,0 -1.1905,0 -2.381,0 -3.5715,0 -0.2381,0 -0.4761,0 -0.7142,0 -0.2381,0 -0.4833,0.0577 -0.7143,0 -0.8645,-0.21612 -0.7171,-0.53777 -1.4286,-1.07143 -0.213,-0.15972 -0.5261,-0.16892 -0.7143,-0.35715 -0.1882,-0.18823 -0.1356,-0.56662 -0.3571,-0.71428 -0.3962,-0.26414 -1.0324,0.26414 -1.4286,0 -0.2215,-0.14766 -0.1357,-0.56663 -0.3571,-0.71429 -0.1981,-0.13207 -0.4762,0 -0.7143,0 -0.3714,0 -1.862,0.0702 -2.1429,0 -0.2582,-0.0646 -0.456,-0.29258 -0.7143,-0.35714 -0.231,-0.0578 -0.4833,0.0577 -0.7143,0 -2.0234,-1.01173 0.5324,0.1331 -1.4285,-0.35714 -0.5165,-0.12913 -0.9121,-0.58516 -1.4286,-0.71429 -0.585,-0.14624 -1.4286,0.24087 -1.4286,0 0,-0.23809 0.9524,0 0.7143,0 -0.9524,0 -1.9047,0 -2.8571,0 -1.1905,0 -2.381,0 -3.5715,0 -0.2381,0 -0.4761,0 -0.7142,0 -0.2381,0 -0.4833,0.0577 -0.7143,0 -0.2583,-0.0646 -0.4561,-0.29258 -0.7143,-0.35714 -0.462,-0.11549 -0.9666,0.11549 -1.4286,0 -0.2582,-0.0646 -0.456,-0.29258 -0.7143,-0.35714 -0.3078,-0.077 -1.9925,0.10021 -2.1428,0 -0.2215,-0.14767 -0.1357,-0.56663 -0.3572,-0.71429 -0.1981,-0.13207 -0.4762,0 -0.7143,0 -0.2381,0 -0.4761,0 -0.7142,0 -0.2381,0 -0.4762,0 -0.7143,0 -0.2381,0 -0.4833,0.0577 -0.7143,0 -0.2583,-0.0646 -0.456,-0.29258 -0.7143,-0.35714 -0.7544,-0.18861 -0.7541,0.31734 -1.4286,-0.35715 -0.1882,-0.18823 -0.1689,-0.52605 -0.3571,-0.71428 -0.1882,-0.18823 -0.5261,-0.16891 -0.7143,-0.35714 -0.3765,-0.37647 -0.3378,-1.05211 -0.7143,-1.42858 -0.1882,-0.18823 -0.526,-0.16891 -0.7143,-0.35714 -0.1882,-0.18823 -0.1689,-0.52605 -0.3571,-0.71428 -0.1882,-0.18824 -0.5261,-0.16892 -0.7143,-0.35715 -0.3765,-0.37646 -0.3378,-1.05211 -0.7143,-1.42857 -0.1882,-0.18823 -0.5666,-0.13565 -0.7143,-0.35714 -0.1002,-0.15032 0.077,-1.83507 0,-2.14286 -0.065,-0.25825 -0.2926,-0.45603 -0.3571,-0.71428 -0.058,-0.23099 0.1321,-0.51618 0,-0.71429 -0.14769,-0.22149 -0.52609,-0.16891 -0.71429,-0.35714 -0.18823,-0.18823 -0.16891,-0.52606 -0.35714,-0.71429 -0.3562,-0.3562 -1.78666,-0.71523 -2.14286,-1.07143 -0.18823,-0.18823 -0.13565,-0.56662 -0.35714,-0.71428 -0.19811,-0.13207 -0.49544,0.0938 -0.71429,0 -0.63803,-0.27345 -1.19047,-0.71429 -3.21428,0 z"
+         style="fill:#ff0000;stroke:none" />
+      <path
+         sodipodi:type="arc"
+         style="fill:#195516;fill-opacity:1;stroke:#000000;stroke-width:2.94199991;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         id="path5296"
+         sodipodi:cx="60.104076"
+         sodipodi:cy="152.82133"
+         sodipodi:rx="24.748737"
+         sodipodi:ry="22.728432"
+         d="m 84.852814,152.82133 c 0,12.55257 -11.080387,22.72844 -24.748738,22.72844 -13.66835,0 -24.748737,-10.17587 -24.748737,-22.72844 0,-12.55256 11.080387,-22.72843 24.748737,-22.72843 13.668351,0 24.748738,10.17587 24.748738,22.72843 z"
+         transform="matrix(0,0.91574196,-0.86130999,0,1169.1699,840.06817)" />
+      <path
+         sodipodi:type="arc"
+         style="fill:#ff0000;stroke:#f6d72b;stroke-width:2.94199991;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         id="path5298"
+         sodipodi:cx="794.48499"
+         sodipodi:cy="256.86707"
+         sodipodi:rx="2.5253813"
+         sodipodi:ry="3.5355339"
+         d="m 797.01037,256.86707 c 0,1.95262 -1.13066,3.53553 -2.52538,3.53553 -1.39473,0 -2.52539,-1.58291 -2.52539,-3.53553 0,-1.95263 1.13066,-3.53554 2.52539,-3.53554 1.39472,0 2.52538,1.58291 2.52538,3.53554 z"
+         transform="matrix(0,0.68907986,-0.43201139,0,1153.5755,334.37385)" />
+      <path
+         transform="matrix(0,0.68907986,-0.43201139,0,1153.5755,347.16724)"
+         d="m 797.01037,256.86707 c 0,1.95262 -1.13066,3.53553 -2.52538,3.53553 -1.39473,0 -2.52539,-1.58291 -2.52539,-3.53553 0,-1.95263 1.13066,-3.53554 2.52539,-3.53554 1.39472,0 2.52538,1.58291 2.52538,3.53554 z"
+         sodipodi:ry="3.5355339"
+         sodipodi:rx="2.5253813"
+         sodipodi:cy="256.86707"
+         sodipodi:cx="794.48499"
+         id="path5300"
+         style="fill:#ff0000;stroke:#f6d72b;stroke-width:2.94199991;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         sodipodi:type="arc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.97191924px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 975.31578,888.09738 -15.95646,-8.60067 5.71575,-11.13025"
+         id="path5308" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.97191924px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 975.55393,902.26316 -9.7644,4.04737 -8.09731,-10.11843"
+         id="path5310" />
+      <g
+         transform="matrix(0.39952254,-0.91672337,0.91672337,0.39952254,-201.32184,1481.9043)"
+         id="g5033">
+        <path
+           id="path5318"
+           d="m 1008.0738,865.08614 c 0,0 -2.9114,0.97045 -2.0866,3.82167 0.7217,3.06265 3.775,2.533 3.775,2.533"
+           style="fill:none;stroke:#000000;stroke-width:0.88810909px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+        <g
+           id="g5028">
+          <path
+             sodipodi:type="arc"
+             style="fill:#550000;stroke:#000000;stroke-width:2.94199991;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             id="path5304"
+             sodipodi:cx="771.07141"
+             sodipodi:cy="119.1479"
+             sodipodi:rx="10.420911"
+             sodipodi:ry="10.358145"
+             d="m 781.49232,119.1479 c 0,5.72065 -4.6656,10.35815 -10.42091,10.35815 -5.75531,0 -10.42091,-4.6375 -10.42091,-10.35815 0,-0.0562 4.6e-4,-0.11245 0.001,-0.16867 l 10.41953,0.16867 z"
+             transform="matrix(0.51569679,-0.45230579,0.38783571,0.49835626,568.22879,1169.5324)"
+             sodipodi:start="0"
+             sodipodi:end="3.1578779" />
+          <path
+             style="fill:none;stroke:#000000;stroke-width:0.64732593px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+             d="m 1011.8771,880.25705 -8.5523,-11.22792"
+             id="path5306" />
+          <path
+             id="path5320"
+             d="m 1009.1339,868.23998 -5.5966,1.01185"
+             style="fill:none;stroke:#000000;stroke-width:0.97191924px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+        </g>
+      </g>
+      <path
+         transform="matrix(0,1.0016722,0.94304998,0,525.44168,234.17431)"
+         sodipodi:end="3.1578779"
+         sodipodi:start="0"
+         d="m 678.82253,556.37726 c 0,7.81048 -8.36683,14.14213 -18.68783,14.14213 -10.32099,0 -18.68782,-6.33165 -18.68782,-14.14213 0,-0.0768 8.3e-4,-0.15354 0.002,-0.2303 l 18.68534,0.2303 z"
+         sodipodi:ry="14.142136"
+         sodipodi:rx="18.687822"
+         sodipodi:cy="556.37726"
+         sodipodi:cx="660.1347"
+         id="path5324"
+         style="fill:#aa0000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         sodipodi:type="arc" />
+      <g
+         id="g5326"
+         transform="matrix(-0.5598505,1.070788,-0.97905572,-0.61230549,1262.2041,1254.1672)">
+        <path
+           id="path5328"
+           d="m -158.05809,295.3371 c 3.18611,-13.07111 15.09462,-16.50239 15.09462,-16.50239"
+           style="fill:none;stroke:#000000;stroke-width:0.82402718px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+        <path
+           sodipodi:type="arc"
+           style="fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:#f6d72b;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:0;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+           id="path5330"
+           sodipodi:cx="-114.02097"
+           sodipodi:cy="87.792778"
+           sodipodi:rx="4.4194174"
+           sodipodi:ry="3.914341"
+           d="m -109.60156,87.792778 c 0,2.161831 -1.97864,3.914341 -4.41941,3.914341 -2.44078,0 -4.41942,-1.75251 -4.41942,-3.914341 0,-2.161831 1.97864,-3.914341 4.41942,-3.914341 2.44077,0 4.41941,1.75251 4.41941,3.914341 z"
+           transform="matrix(0.81206153,0,0,0.83616909,-50.692261,205.54799)" />
+      </g>
+      <g
+         id="g5332"
+         transform="matrix(0.47484287,1.1188378,-1.0229892,0.5193331,1430.6095,889.81688)">
+        <path
+           style="fill:none;stroke:#000000;stroke-width:0.82402718px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m -144.82237,296.16751 c 7.58783,-10.98056 19.89242,-9.71357 19.89242,-9.71357"
+           id="path5334" />
+        <path
+           transform="matrix(0.81206153,0,0,0.83616909,-31.840833,212.71516)"
+           d="m -109.60156,87.792778 c 0,2.161831 -1.97864,3.914341 -4.41941,3.914341 -2.44078,0 -4.41942,-1.75251 -4.41942,-3.914341 0,-2.161831 1.97864,-3.914341 4.41942,-3.914341 2.44077,0 4.41941,1.75251 4.41941,3.914341 z"
+           sodipodi:ry="3.914341"
+           sodipodi:rx="4.4194174"
+           sodipodi:cy="87.792778"
+           sodipodi:cx="-114.02097"
+           id="path5336"
+           style="fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:#f6d72b;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:0;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+           sodipodi:type="arc" />
+      </g>
+      <path
+         style="fill:none;stroke:#000000;stroke-width:1.17947471px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 1026.4797,885.87534 4.2723,15.57519"
+         id="path5338" />
+      <g
+         transform="matrix(0.67358065,-0.73911373,0.73911373,0.67358065,-347.5623,1014.6301)"
+         id="g5023">
+        <path
+           sodipodi:type="arc"
+           style="fill:#800000;stroke:#000000;stroke-width:2.94199991;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           id="path5302"
+           sodipodi:cx="771.07141"
+           sodipodi:cy="119.1479"
+           sodipodi:rx="10.420911"
+           sodipodi:ry="10.358145"
+           d="m 781.49232,119.1479 c 0,5.72065 -4.6656,10.35815 -10.42091,10.35815 -5.75531,0 -10.42091,-4.6375 -10.42091,-10.35815 0,-0.0562 4.6e-4,-0.11245 0.001,-0.16867 l 10.41953,0.16867 z"
+           transform="matrix(-0.15478581,-0.69129366,0.59217126,-0.14896018,1060.9212,1460.7394)"
+           sodipodi:start="0"
+           sodipodi:end="3.1578779" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:0.88810909px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m 988.70624,912.55278 c 0,0 2.68097,-1.59397 4.04244,0.99144 1.57656,2.64985 -0.90387,4.65465 -0.90387,4.65465"
+           id="path5316" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m 1011.4286,910.21933 c -5.7143,0.35714 -22.50003,5.35714 -22.50003,5.35714"
+           id="path5021" />
+      </g>
+    </g>
   </g>
 </svg>
