@@ -56,8 +56,9 @@ class rolBar: public guiObject
       /*! Verify if some event is related to the rolBar
        * \param type -> Type of the occurred event
        * \param object -> object of the event 
+       * \param mouseY -> mouse Y coordinate
        * \return -> true if event is related (and threated) by the rolBar */
-      bool eventGot(int type, guiObject* object);
+      bool eventGot(int type, guiObject* object, int y);
 
       /*! Set The Text of the Bar, putting them on top
        * \param txt -> desired text */
@@ -116,11 +117,14 @@ class rolBar: public guiObject
       button* actualPressed;   /**< Actual Pressed Button */
       textBox* scrollText;     /**< Text of The Scroll */
       textBox* contorn;        /**< Contorn of the Scroll */
-      textBox* position;       /**< Contorn Text Position */
+      button* position;        /**< Contorn Text Position */
 
       Uint32 lastUpdated;     /**< Last Time when updated */
       int maxHeight;          /**< Max Height */
       int style;              /**< Current Style */
+      float deltaY;           /**< Current deltaY of the position button */
+      int sizeY;              /**< The size of position button */
+      int lastMouseY;         /**< Last mouse Y */
       
       void* intList;          /**< Internal GUI Objects List */
 };

@@ -228,7 +228,7 @@ guiObject* guiInterface::verifyTabBox(int x, int y, guiList* list)
 /*********************************************************************
  *                           verifyRolBars                           *
  *********************************************************************/
-bool guiInterface::verifyRolBars(guiList* list)
+bool guiInterface::verifyRolBars(int x, int y, guiList* list)
 {
    /* Verify if list exists */
    if(list == NULL)
@@ -245,7 +245,7 @@ bool guiInterface::verifyRolBars(guiList* list)
       if(obj->type == FARSO_OBJECT_ROL_BAR)
       {
          rolBar* rb = (rolBar*)obj;
-         if(rb->eventGot(FARSO_EVENT_ON_PRESS_BUTTON, activeObject))
+         if(rb->eventGot(FARSO_EVENT_ON_PRESS_BUTTON, activeObject, y))
          {
             lwindows->getActiveWindow()->draw(0,0);
             rb->redraw();
@@ -258,7 +258,7 @@ bool guiInterface::verifyRolBars(guiList* list)
    /* Verify Nested tabBox */
    if(list->getActiveTabBoxList() != NULL)
    {
-      return(verifyRolBars(list->getActiveTabBoxList()));
+      return(verifyRolBars(x, y, list->getActiveTabBoxList()));
    }
 
    return(false);
@@ -539,7 +539,8 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
            else
            {
               /* Verify RolBar */
-              verifyRolBars(lwindows->getActiveWindow()->getObjectsList());
+              verifyRolBars(x, y, 
+                    lwindows->getActiveWindow()->getObjectsList());
               eventInfo = FARSO_EVENT_ON_PRESS_BUTTON;
               return(activeObject);
            }
