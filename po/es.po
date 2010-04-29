@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
 "POT-Creation-Date: 2010-04-22 20:27-0300\n"
-"PO-Revision-Date: 2010-04-22 00:18+0000\n"
+"PO-Revision-Date: 2010-04-28 16:14+0000\n"
 "Last-Translator: zer berros <Unknown>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-22 23:24+0000\n"
+"X-Launchpad-Export-Date: 2010-04-29 19:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: src/classes/actions.cpp:128
@@ -2955,7 +2955,7 @@ msgstr ""
 
 #: data/feats/law/i_am_wrong.fta:1
 msgid "I am Wrong"
-msgstr ""
+msgstr "Estoy equivocado."
 
 #: data/feats/law/i_am_wrong.fta:2
 msgid ""
@@ -3002,17 +3002,19 @@ msgstr ""
 
 #: data/feats/physicaled/virtually_invencible.fta:1
 msgid "Virtually Invencible"
-msgstr ""
+msgstr "Virtualmente invencible."
 
 #: data/feats/physicaled/virtually_invencible.fta:2
 msgid ""
 "Thanks to their constant physical work, the Physical Education Students "
 "receive +5 on Natural Armor and a Damage Resistance of 8/-"
 msgstr ""
+"Gracias a su trabajo físico, constante, los estudiantes de educación física, "
+"reciben +5 en armadura natural, y en resistencia al daño de 8/-"
 
 #: data/skills/acrobacias.ski:1
 msgid "Acrobats"
-msgstr ""
+msgstr "Acróbatas."
 
 #: data/skills/acrobacias.ski:2
 msgid ""
@@ -3384,6 +3386,7 @@ msgid ""
 "Is the capacity to operate or fix mechanical objects without the loss of a "
 "finger or a hand."
 msgstr ""
+"Es la capacidad de arreglar objetos mecánicos sin perder un dedo o una mano."
 
 #: data/skills/ouvir.ski:1
 msgid "Hearing"
@@ -3485,6 +3488,8 @@ msgid ""
 "Is the capacity to play a musical instrument. The instrument is anything "
 "that can produce at last 7 distinct notes."
 msgstr ""
+"Es la capacidad de tocar un instrumento musical. El instrumento puede ser "
+"cualquier cosa capaz de producir al menos 7 notas diferentes."
 
 #: data/dialogs/objects/computers.dlg:6
 msgid "(You see the computer main screen)"
@@ -3697,7 +3702,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:91
 msgid "Ok, I'll search for it"
-msgstr ""
+msgstr "Ok, lo voy a buscar."
 
 #: data/dialogs/tutorial/logan.dlg:96
 msgid ""
@@ -3798,7 +3803,7 @@ msgstr ""
 #: data/dialogs/tutorial/logan.dlg:254 data/dialogs/tutorial/dona.dlg:208
 #: data/dialogs/tutorial/dona.dlg:241
 msgid "Not yet."
-msgstr ""
+msgstr "Todavía no."
 
 #: data/dialogs/tutorial/logan.dlg:258
 msgid "Yes, there's no living thing there..."
@@ -3939,6 +3944,7 @@ msgstr ""
 #: data/dialogs/tutorial/santa.dlg:162 data/dialogs/tutorial/santa.dlg:237
 msgid "So you've installed it! Soon the blue screen will rule the world!"
 msgstr ""
+"Así que has instalado eso! Pronto el pantallazo azul dominará el mundo.!"
 
 #: data/dialogs/tutorial/santa.dlg:167 data/dialogs/tutorial/santa.dlg:242
 #: data/dialogs/tutorial/santa.dlg:263
@@ -4049,7 +4055,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/cruzeirense.dlg:25
 msgid "I have something for you."
-msgstr ""
+msgstr "Tengo algo para ti."
 
 #: data/dialogs/tutorial/cruzeirense.dlg:29
 msgid "Ehr, nothing."
@@ -4061,7 +4067,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/cruzeirense.dlg:43
 msgid "I need some info from you."
-msgstr ""
+msgstr "Necesito más información tuya."
 
 #: data/dialogs/tutorial/cruzeirense.dlg:53
 msgid ""

@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
 "POT-Creation-Date: 2010-04-22 20:27-0300\n"
-"PO-Revision-Date: 2010-04-22 19:41+0000\n"
+"PO-Revision-Date: 2010-04-29 12:41+0000\n"
 "Last-Translator: Dani Cases <danicases@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-22 23:24+0000\n"
+"X-Launchpad-Export-Date: 2010-04-29 19:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: src/classes/actions.cpp:128
@@ -1093,11 +1093,11 @@ msgstr "Maximitza"
 
 #: data/comics/intro/intro.dcb:15
 msgid "Once Upon a time, there was a happy university called UFMG..."
-msgstr "Hi havia una vegada una universitat feliç anomenada UFMG..."
+msgstr ""
 
 #: data/comics/intro/intro.dcb:25
 msgid "People there used to live peacefull lives"
-msgstr "Aquí la gent acostumava a tenir una vida pacífica"
+msgstr "on la gent acostumava a tenir una vida pacífica"
 
 #: data/comics/intro/intro.dcb:35
 msgid ""
@@ -1139,8 +1139,7 @@ msgstr "i les rates van començar a tenir sed de sang"
 msgid ""
 "From this chaotic scene, emerged the main race that would dominate the land:"
 msgstr ""
-"D'aquest entorn caòtic en va sorgir la principal raça que hauria de dominar "
-"la terra:"
+"D'aquest entorn caòtic en va sorgir la raça que hauria de dominar la terra:"
 
 #: data/comics/intro/intro.dcb:87
 msgid "UNIVERSITY STUDENTS!"
@@ -1150,8 +1149,7 @@ msgstr "ESTUDIANTS UNIVERSITARIS!"
 msgid ""
 "who desired to, at all costs, obtain their legendary levels of knowledge."
 msgstr ""
-"que desitjaven, a tota costa, obtenir els seus llegendaris nivells de "
-"coneixement."
+"que desitjaven obtenir, a tota costa, nivells llegendaris de coneixement."
 
 #: data/comics/intro/intro.dcb:103
 msgid ""
@@ -1159,11 +1157,11 @@ msgid ""
 "spread by word of mouth, saying that"
 msgstr ""
 "En aquest món condemnat, gràcies al sorgiment dels periodistes, corrien "
-"històries escampades boca a boca, dient que"
+"històries boca a boca, dient que"
 
 #: data/comics/intro/intro.dcb:113
 msgid "the first man who came and proclaimed his right to graduate"
-msgstr "el primer home que va arribar i va proclamar el seu dret de graduar-se"
+msgstr "el primer home que va arribar i va proclamar el seu dret a graduar-se"
 
 #: data/comics/intro/intro.dcb:123
 msgid "was Logan."
@@ -1171,37 +1169,41 @@ msgstr "va ser en Logan."
 
 #: data/comics/intro/intro.dcb:125
 msgid "And that's how the tale began..."
-msgstr "I així és com comença la història..."
+msgstr "I així és com començà la història..."
 
 #: data/comics/other/mjack/mjack.dcb:15
 msgid ""
 "One of those terrible monsters: a 18th level Music Student mixed with a "
 "single (and incredible) Administration Student level: Michael J."
-msgstr "Un d'aquests monstres terribles: un estudiant de música de 18è nivell"
+msgstr ""
+"Un d'aquests monstres terribles: un estudiant de música de 18è nivell "
+"mesclat amb un sol (i increïble) nivell d'estudis Administratius: Michael J."
 
 #: data/comics/other/mjack/mjack.dcb:26
 msgid "Originated by a failed Simulacrum proccess of an ancient J-5 member,"
-msgstr ""
+msgstr "Creat per un procés de simulacre fallit d'un antic membre del J-5"
 
 #: data/comics/other/mjack/mjack.dcb:37
 msgid "it used a hat, Supedohat. Apparently a common white hat,"
 msgstr ""
+"feia servir un barret, Supedohat. Aparentment un barret blanc normal i "
+"corrent"
 
 #: data/comics/other/mjack/mjack.dcb:40
 msgid "but, actually, a metamorphosical throwning thriller weapon."
-msgstr ""
+msgstr "però en realitat, una arma llancívola punxant metamorfòsica"
 
 #: data/comics/other/mjack/mjack.dcb:51
 msgid "As all monsters, it had weak points:"
-msgstr ""
+msgstr "Com tots els monstres, tenia els seus punts dèbils:"
 
 #: data/comics/other/mjack/mjack.dcb:54
 msgid "An obsessed fear of 3rd world diseases"
-msgstr ""
+msgstr "Una por obsessiva a les malalties del 3er món"
 
 #: data/comics/other/mjack/mjack.dcb:65
 msgid "and more than US$200 million debt."
-msgstr ""
+msgstr "i un deute de més de 200 milions de dòlars."
 
 #: data/comics/tutorial/combat/combat.dcb:19
 #: data/comics/tutorial/combat/combat.dcb:38
@@ -1209,33 +1211,40 @@ msgstr ""
 #: data/comics/tutorial/combat/combat.dcb:195
 #: data/models/objetos/books/combat_tutorial/combat_tutorial.dcc:1
 msgid "The Combat Book"
-msgstr ""
+msgstr "Manual de Combat"
 
 #: data/comics/tutorial/combat/combat.dcb:48
 msgid "The fight mode is an special turn based interaction used to... FIGHT!"
 msgstr ""
+"El mode Lluita és una interacció especial per torns usada per.. LLUITAR!"
 
 #: data/comics/tutorial/combat/combat.dcb:58
 msgid "There are two ways to enter Fight Mode:"
-msgstr ""
+msgstr "Hi han dues maneres d'entrar en mode Lluita:"
 
 #: data/comics/tutorial/combat/combat.dcb:60
 msgid ""
 "1 - When hostile creatures are nearby, the Fight Mode is automatically "
 "called."
 msgstr ""
+"1 - Quan hi ha criatures hostils properes, s'activa el mode lluita "
+"automàticament."
 
 #: data/comics/tutorial/combat/combat.dcb:70
 msgid ""
 "2 - Or, when you desire, press SPACE or the attack icon at shortcuts window "
 "to enter the Fight Mode."
 msgstr ""
+"2 - O, quan vulguis, prem ESPAI o la icona d'atac a la finestra de dreceres "
+"per entrar en el mode Lluita."
 
 #: data/comics/tutorial/combat/combat.dcb:80
 msgid ""
 "First, each character rolls an initiative check, to define the order each "
 "one will act."
 msgstr ""
+"Primer, cada personatge tira per iniciativa, per establir l'ordre en que "
+"cadascú actuarà."
 
 #: data/comics/tutorial/combat/combat.dcb:91
 msgid ""
@@ -1243,48 +1252,59 @@ msgid ""
 "your hostile intentions, you'll receive a first Surprise Attack Turn before "
 "the normal battle."
 msgstr ""
+"Si tu has activat el mode Lluita i les altres criatures no s'han adonat de "
+"les teves intencions hostils, rebràs un primer Torn d'Atac Sorpresa abans de "
+"la batalla normal."
 
 #: data/comics/tutorial/combat/combat.dcb:120
 msgid "Each turn, a character can take a move action and an attack action."
 msgstr ""
+"Cada torn, un personatge pot fer una acció de moure's i una acció d'atacar."
 
 #: data/comics/tutorial/combat/combat.dcb:130
 msgid "Or, if needed, take a full move action to move further."
 msgstr ""
+"O, si és necessari, realitzar una acció de moviment complet per desplaçar-se "
+"més."
 
 #: data/comics/tutorial/combat/combat.dcb:140
 msgid "Your action's range is represented by circles."
-msgstr ""
+msgstr "L'abast de les teves accions està representat per cercles."
 
 #: data/comics/tutorial/combat/combat.dcb:151
 msgid "The yellow circle represents your current attack range."
-msgstr ""
+msgstr "El cercle groc representa l'abast actual del teu atac."
 
 #: data/comics/tutorial/combat/combat.dcb:153
 msgid "You can only attack creatures inner the yellow circle!"
-msgstr ""
+msgstr "Només pots atacar criatures dins el cercle groc!"
 
 #: data/comics/tutorial/combat/combat.dcb:163
 msgid "The blue circle is the area you can move with a move action."
 msgstr ""
+"El cercle blau és l'àrea fins on et pots moure amb una acció de moviment."
 
 #: data/comics/tutorial/combat/combat.dcb:174
 msgid "The red circle is the area you can move with a full move action."
 msgstr ""
+"El cercle roig és l'àrea fins on et pots moure amb una acció de moviment "
+"complet."
 
 #: data/comics/tutorial/combat/combat.dcb:176
 msgid ""
 "If a circle isn't shown it's because you can't take that kind of action "
 "anymore at the current turn."
 msgstr ""
+"Si un dels cercles no es mostra és perquè ja no pots realitzar aquesta acció "
+"en el torn actual."
 
 #: data/comics/tutorial/combat/combat.dcb:205
 msgid "You can attack using your current weapon by simple clicking the target."
-msgstr ""
+msgstr "Pots atacar amb l'arma equipada simplement clicant sobre l'objectiu."
 
 #: data/comics/tutorial/combat/combat.dcb:215
 msgid "Or use a talent by selecting it and clicking the target."
-msgstr ""
+msgstr "O fer servir un talent seleccionant-lo i clicant sobre l'objectiu."
 
 #: data/comics/tutorial/combat/combat.dcb:226
 msgid ""
@@ -1297,42 +1317,49 @@ msgid ""
 "You can also set the options to automatically end your turn when no more "
 "available actions."
 msgstr ""
+"També pots configurar les opcions per acabar el torn automàticament quan no "
+"es puguin fer més accions."
 
 #: data/comics/tutorial/combat/combat.dcb:238
 msgid ""
 "The fight will end when no more hostile creatures are near or all PCs are "
 "dead."
 msgstr ""
+"La lluita acabarà quan no quedin més criatures hostils aprop o tots els PJ "
+"siguin morts."
 
 #: data/comics/tutorial/combat/combat.dcb:249
 msgid "Remember:"
-msgstr ""
+msgstr "Recorda:"
 
 #: data/comics/tutorial/combat/combat.dcb:251
 msgid "Take or use objects count as an attack action."
-msgstr ""
+msgstr "Agafar o usar objectes compta com una acció d'atac."
 
 #: data/comics/tutorial/combat/combat.dcb:253
 msgid "You can't save your game while fighting."
-msgstr ""
+msgstr "No es pot guardar la partida mentre es lluita."
 
 #: data/comics/tutorial/combat/combat.dcb:255
 msgid "And you can't leave the current map while in Fight Mode."
-msgstr ""
+msgstr "I no es pot abandonar el mapa actual en mode Lluita."
 
 #: data/alignment/neutrocaotico.ali:1
 msgid "Chaotic Neutral"
-msgstr ""
+msgstr "Caòtic Neutral"
 
 #: data/alignment/neutrocaotico.ali:2
 msgid ""
 "   Chaotic Neutral creatures sometimes are free software adepts, sometimes "
 "proprietary software adepts, depending on their daily humor."
 msgstr ""
+"   Les criatures Caòtiques Neutrals de vegades són adeptes del software "
+"lliure, de vegades adeptes del software propietari, segons l'humor amb què "
+"s'aixequin"
 
 #: data/alignment/sllibertario.ali:1
 msgid "Libertarian Free-Software Adept"
-msgstr ""
+msgstr "Adepte al Software-lliure Llibertari"
 
 #: data/alignment/sllibertario.ali:2
 msgid ""
@@ -1341,30 +1368,39 @@ msgid ""
 "governments, private groups or individuals. Usually they are adepts of "
 "public-domain software."
 msgstr ""
+"   Els Adeptes Llibertaris al Software-lliure acostumen a ser criatures que "
+"creuen en la lliure circulació del coneixement, sense cap mena "
+"d'intervenció, ni dels governs, ni de grups privats o individus. Normalment "
+"són adeptes al software de domini públic."
 
 #: data/alignment/neutrocentrista.ali:1
 msgid "Center Neutral"
-msgstr ""
+msgstr "Centre Neutral"
 
 #: data/alignment/neutrocentrista.ali:2
 msgid ""
 "   They are the fence-sitters of the DNT universe, having tendency to be "
 "favorable to what people near them are."
 msgstr ""
+"   Són els indecisos de l'univers DNT, amb tendència a ser favorables al que "
+"sigui la gent propera a ells."
 
 #: data/alignment/spcaotico.ali:1
 msgid "Chaotic Proprietary-Software Adept"
-msgstr ""
+msgstr "Adepte Caòtic al Software-propietari"
 
 #: data/alignment/spcaotico.ali:2
 msgid ""
 "   Wealth and uncle Portoe$ sometimes interests them, sometimes not, "
 "although they consider all Free-Software Adepts as crazy guys."
 msgstr ""
+"   La riquesa i l'oncle Porte$ de vegades els interessen, i de vegades no, "
+"però sí que consideren que tots els adeptes al Software-lliure estan "
+"malament del cap."
 
 #: data/alignment/neutrofuncional.ali:1
 msgid "Functional Neutral"
-msgstr ""
+msgstr "Funcional Neutral"
 
 #: data/alignment/neutrofuncional.ali:2
 msgid ""
@@ -1372,10 +1408,13 @@ msgid ""
 "licenses. They are adepts of software that works correctly (and this concept "
 "is very vague)."
 msgstr ""
+"   Les criatures Funcional Neutrals no tenen una posició sòlida en quant a "
+"llicències de software. Són adeptes del software que funciona correctament "
+"(i aquest concepte és molt vague)"
 
 #: data/alignment/spcapitalista.ali:1
 msgid "Capitalist Proprietary-Software Adept"
-msgstr ""
+msgstr "Adepte Capitalista al Software-propietari"
 
 #: data/alignment/spcapitalista.ali:2
 msgid ""
@@ -1383,10 +1422,14 @@ msgid ""
 "big idol. They want to be rich with the software they make, although, most "
 "of the time, their work is only explored by national software factories."
 msgstr ""
+"   Els Adeptes Capitalistes al Software-propietari tenen en l'oncle Bill "
+"Porte$ el seu gran ídol. Voldrien fer-se rics amb el software que fan, "
+"encara que, la major part del temps, la seva feina només és apreciada en les "
+"empreses de software nacionals."
 
 #: data/alignment/slcaotico.ali:1
 msgid "Chaotic Free-Software Adept"
-msgstr ""
+msgstr "Adepte Caòtic al Software-lliure"
 
 #: data/alignment/slcaotico.ali:2
 msgid ""

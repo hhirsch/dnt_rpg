@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
 "POT-Creation-Date: 2010-04-22 20:27-0300\n"
-"PO-Revision-Date: 2009-12-10 17:04+0000\n"
-"Last-Translator: ucn| <Unknown>\n"
+"PO-Revision-Date: 2010-04-28 16:01+0000\n"
+"Last-Translator: Good Will Translator <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-12-23 14:00+0000\n"
+"X-Launchpad-Export-Date: 2010-04-29 19:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: src/classes/actions.cpp:128
@@ -63,11 +63,11 @@ msgstr ""
 
 #: src/classes/defs.cpp:262 src/engine/charwindow.cpp:210
 msgid "Fortitude"
-msgstr ""
+msgstr "Tapferkeit"
 
 #: src/classes/defs.cpp:268 src/engine/charwindow.cpp:215
 msgid "Reflexes"
-msgstr ""
+msgstr "Reflexe"
 
 #: src/classes/defs.cpp:275 src/engine/charwindow.cpp:220
 msgid "I am Not a Fool"
@@ -79,7 +79,7 @@ msgstr "ungültiges Talent"
 
 #: src/classes/feats.cpp:239
 msgid "Out of ammo!"
-msgstr ""
+msgstr "Munition verbraucht!"
 
 #: src/classes/feats.cpp:244
 msgid "Not enought points to use!"
@@ -96,7 +96,7 @@ msgstr "Auftrag fehlgeschlagen!"
 
 #: src/engine/alignwindow.cpp:46
 msgid "Tendency & Alignment"
-msgstr ""
+msgstr "Absicht & Ausrichtung"
 
 #: src/engine/alignwindow.cpp:72 src/engine/aspectwindow.cpp:93
 #: src/engine/attwindow.cpp:236 src/engine/classwindow.cpp:117
@@ -142,7 +142,7 @@ msgstr "Leeren"
 
 #: src/engine/attwindow.cpp:87
 msgid "Auto"
-msgstr ""
+msgstr "Automatisch"
 
 #: src/engine/attwindow.cpp:90 src/engine/charwindow.cpp:167
 #: data/skills/forca.ski:1
@@ -189,15 +189,15 @@ msgstr "Sie müssen alle Eigenschaften vergeben"
 
 #: src/engine/barterwindow.cpp:52 src/engine/dialog.cpp:1488
 msgid "Barter"
-msgstr ""
+msgstr "Tausch-händler"
 
 #: src/engine/barterwindow.cpp:64
 msgid "Offer"
-msgstr ""
+msgstr "Angebot"
 
 #: src/engine/barterwindow.cpp:66
 msgid "Impose"
-msgstr ""
+msgstr "Erzwingen"
 
 #: src/engine/barterwindow.cpp:94 src/engine/barterwindow.cpp:104
 #: src/engine/inventwindow.cpp:56 src/engine/options.cpp:158
@@ -206,19 +206,19 @@ msgstr "Inventar"
 
 #: src/engine/barterwindow.cpp:259
 msgid "The barter was accepted."
-msgstr ""
+msgstr "Der Tausch wurde akzeptiert."
 
 #: src/engine/barterwindow.cpp:264
 msgid "The barter was rejected."
-msgstr ""
+msgstr "Der Tausch wurde abgelehnt."
 
 #: src/engine/barterwindow.cpp:284
 msgid "The barter imposition was accepted."
-msgstr ""
+msgstr "Der Tauschzwang wurde akzeptiert."
 
 #: src/engine/barterwindow.cpp:289
 msgid "The barter imposition was rejected."
-msgstr ""
+msgstr "Der Tauschzwang wurde abgelehnt."
 
 #: src/engine/barterwindow.cpp:308 src/engine/inventwindow.cpp:215
 msgid "Remove"
@@ -278,19 +278,19 @@ msgstr "RK"
 
 #: src/engine/charwindow.cpp:205
 msgid "Total Level"
-msgstr ""
+msgstr "Stufe gesamt"
 
 #: src/engine/charwindow.cpp:225
 msgid "Base Attack Modifier"
-msgstr ""
+msgstr "Grundattackenmodifikator"
 
 #: src/engine/charwindow.cpp:230
 msgid "Size Modifier"
-msgstr ""
+msgstr "Größenmodifikator"
 
 #: src/engine/charwindow.cpp:258
 msgid "Level Up"
-msgstr ""
+msgstr "Stufenaufstieg!"
 
 #: src/engine/charwindow.cpp:264
 msgid "Talents"
@@ -298,7 +298,7 @@ msgstr "Talente"
 
 #: src/engine/charwindow.cpp:268 src/engine/skillwindow.cpp:74
 msgid "Skills"
-msgstr "Fähigkeiten"
+msgstr "Fertigkeiten"
 
 #: src/engine/charwindow.cpp:272 src/engine/skillwindow.cpp:169
 #: src/gui/window.cpp:151
@@ -307,11 +307,11 @@ msgstr "schließen"
 
 #: src/engine/charwindow.cpp:404
 msgid "Main Weapon"
-msgstr "Haupt Waffe"
+msgstr "Hauptwaffe"
 
 #: src/engine/charwindow.cpp:408
 msgid "Secondary Weapon"
-msgstr "sekundäre waffe"
+msgstr "Sekundärwaffe"
 
 #: src/engine/charwindow.cpp:412
 msgid "Weapon"
@@ -323,7 +323,7 @@ msgstr "Unbewaffnet"
 
 #: src/engine/charwindow.cpp:430
 msgid "Not Applicable"
-msgstr ""
+msgstr "Nicht einsetzbar"
 
 #: src/engine/classwindow.cpp:83
 msgid "Class"
@@ -331,7 +331,7 @@ msgstr "Klasse"
 
 #: src/engine/classwindow.cpp:94 src/engine/racewindow.cpp:94
 msgid "Characteristics"
-msgstr ""
+msgstr "Charakteristiken"
 
 #: src/engine/classwindow.cpp:95 src/engine/racewindow.cpp:95
 msgid "Description"
@@ -339,11 +339,11 @@ msgstr "Beschreibung"
 
 #: src/engine/classwindow.cpp:153
 msgid "Life Dice"
-msgstr ""
+msgstr "Lebenswürfel"
 
 #: src/engine/classwindow.cpp:157
 msgid "Skill Points"
-msgstr ""
+msgstr "Fähigkeitspunkte"
 
 #: src/engine/classwindow.cpp:186
 msgid "First Level"
@@ -351,11 +351,11 @@ msgstr "Erste Stufe"
 
 #: src/engine/classwindow.cpp:214
 msgid "Other Levels"
-msgstr ""
+msgstr "Andere Orte"
 
 #: src/engine/classwindow.cpp:219
 msgid "Class Modifiers"
-msgstr ""
+msgstr "Klassenmodifikatoren"
 
 #: src/engine/classwindow.cpp:231 src/engine/racewindow.cpp:172
 msgid "No Modifiers."
@@ -403,7 +403,7 @@ msgstr "Das Spiel kann nicht während eines Kampfes gespeichert werden."
 
 #: src/engine/dccnit.cpp:708
 msgid "Saving Current Map Modifications"
-msgstr ""
+msgstr "Speichere aktuelle Kartenmodifikatoren"
 
 #: src/engine/dccnit.cpp:743
 #, c-format
@@ -421,7 +421,7 @@ msgstr "Erstelle Minikarte"
 
 #: src/engine/dccnit.cpp:853
 msgid "Putting GUI on Screen"
-msgstr ""
+msgstr "Zeige GUI an"
 
 #: src/engine/dccnit.cpp:901
 msgid "Loading Particles"
@@ -442,30 +442,35 @@ msgid ""
 "is thankful to the people who developed those libraries: OpenAL, Cal3D, "
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
+"DccNiTghtmare wird unter der GPLv3 oder neuer veröffentlicht: Fühlen Sie "
+"sich frei den Quelltext und die Dateien nach Belieben zu verwenden (oder uns "
+"auf gleicher Weise zu beschuldigen). DccNiTghtmare dankt all den Leuten die "
+"diese Libraries entwickelt haben: OpenAL, Cal3D, OpenGL, SDL, SDL_image, "
+"SDL_ttf, libVorbis."
 
 #: src/engine/dccnit.cpp:1727
 msgid "Too far away for the action!"
-msgstr ""
+msgstr "Zu weit entfernt zum Agieren!"
 
 #: src/engine/dccnit.cpp:1744
 msgid "Couldn't rest at battle mode."
-msgstr ""
+msgstr "Kann nicht im Kampfmodus ausrasten!"
 
 #: src/engine/dccnit.cpp:1750
 msgid "Enemies nearby."
-msgstr ""
+msgstr "Feinde in der Nähe"
 
 #: src/engine/dccnit.cpp:1848
 msgid "No NPCs in the area."
-msgstr ""
+msgstr "Keine NPCs in der Nähe."
 
 #: src/engine/dccnit.cpp:1908
 msgid "Surprise Attack Turn."
-msgstr ""
+msgstr "Überraschungsangriff."
 
 #: src/engine/dccnit.cpp:1922
 msgid "No enemies in the area."
-msgstr ""
+msgstr "Keine Feinde in der Nähe."
 
 #: src/engine/dccnit.cpp:2110 src/engine/dccnit.cpp:2629
 #: src/engine/shortcutswindow.cpp:51
@@ -475,7 +480,7 @@ msgstr "Nichts"
 #: src/engine/dccnit.cpp:2378
 #, c-format
 msgid "%s taken."
-msgstr ""
+msgstr "%s genommen."
 
 #: src/engine/dccnit.cpp:2395
 msgid "Inventory is full!"
@@ -492,11 +497,11 @@ msgstr "%s attackiert %s"
 
 #: src/engine/dccnit.cpp:2730
 msgid "No more actions. Turn ended."
-msgstr ""
+msgstr "Keine Aktionen mehr.  Runde beendet."
 
 #: src/engine/dccnit.cpp:4286
 msgid "Exit Battle Mode"
-msgstr ""
+msgstr "Beende Kampfmodus"
 
 #: src/engine/dialog.cpp:1214
 #, c-format
@@ -506,17 +511,17 @@ msgstr "%s hat verloren."
 #: src/engine/dialog.cpp:1257
 #, c-format
 msgid "Received %s."
-msgstr ""
+msgstr "Erhalte %s"
 
 #: src/engine/dialog.cpp:1274
 #, c-format
 msgid "Received $%d."
-msgstr ""
+msgstr "Erhalte %d"
 
 #: src/engine/dialog.cpp:1288
 #, c-format
 msgid "Lost $%d."
-msgstr ""
+msgstr "Verlor %d"
 
 #: src/engine/dialog.cpp:1481
 msgid "Dialog"
@@ -540,7 +545,7 @@ msgstr "Laden"
 
 #: src/engine/initial.cpp:92 src/engine/options.cpp:790
 msgid "Options"
-msgstr "Einstellungen"
+msgstr "Optionen"
 
 #: src/engine/initial.cpp:94 data/dialogs/objects/computers.dlg:21
 #: data/dialogs/objects/computers.dlg:95
@@ -566,7 +571,7 @@ msgstr "Beenden"
 
 #: src/engine/inventwindow.cpp:190
 msgid "Get"
-msgstr ""
+msgstr "Hole"
 
 #: src/engine/inventwindow.cpp:193
 msgid "Info"
@@ -574,7 +579,7 @@ msgstr "Informationen"
 
 #: src/engine/inventwindow.cpp:201
 msgid "Read"
-msgstr ""
+msgstr "Lese"
 
 #: src/engine/inventwindow.cpp:204
 msgid "Reload Weapon"
@@ -582,7 +587,7 @@ msgstr "Waffe nachladen"
 
 #: src/engine/inventwindow.cpp:207
 msgid "Use"
-msgstr ""
+msgstr "Benutze"
 
 #: src/engine/inventwindow.cpp:218
 msgid "Buy"
@@ -594,16 +599,16 @@ msgstr "Verkaufen"
 
 #: src/engine/inventwindow.cpp:223
 msgid "Drop"
-msgstr "Wegwerfen"
+msgstr "Fallenlassen"
 
 #: src/engine/inventwindow.cpp:330
 #, c-format
 msgid "%s reloaded %s with %s ammo."
-msgstr ""
+msgstr "%s lädt %s mit %s Munition"
 
 #: src/engine/inventwindow.cpp:371
 msgid "No equipped weapons are compatible with this munition type."
-msgstr ""
+msgstr "Keine ausgerüsteten Waffen sind mit diesem Munitionstyp kompatibel."
 
 #: src/engine/itemwindow.cpp:78
 #, c-format
@@ -613,20 +618,20 @@ msgstr "Name: %s"
 #: src/engine/itemwindow.cpp:83
 #, c-format
 msgid "Cost: %.2f"
-msgstr ""
+msgstr "Kosten: %.2f"
 
 #: src/engine/itemwindow.cpp:88
 #, c-format
 msgid "Weight: %.2f Kg"
-msgstr ""
+msgstr "Gewicht: %.2f Kg"
 
 #: src/engine/itemwindow.cpp:103
 msgid "Heal Factor: "
-msgstr ""
+msgstr "Heil Faktor: "
 
 #: src/engine/itemwindow.cpp:113
 msgid "Aditional Factor: "
-msgstr ""
+msgstr "Zusätzlicher Faktor: "
 
 #: src/engine/itemwindow.cpp:135
 msgid "Category: "
@@ -634,15 +639,15 @@ msgstr "Kategorie: "
 
 #: src/engine/itemwindow.cpp:141
 msgid "Damage Dice: "
-msgstr ""
+msgstr "Schadenswürfel: "
 
 #: src/engine/itemwindow.cpp:149
 msgid "Primary Damage: "
-msgstr ""
+msgstr "Primärschaden: "
 
 #: src/engine/itemwindow.cpp:156
 msgid "Secondary Damage: "
-msgstr ""
+msgstr "Sekundärschaden: "
 
 #: src/engine/itemwindow.cpp:168
 msgid "Range: "
@@ -650,15 +655,15 @@ msgstr "Reichweite: "
 
 #: src/engine/itemwindow.cpp:173
 msgid "Size: "
-msgstr ""
+msgstr "Größe: "
 
 #: src/engine/itemwindow.cpp:186 src/engine/itemwindow.cpp:213
 msgid "Ammo Type:"
-msgstr ""
+msgstr "Munitionstyp:"
 
 #: src/engine/itemwindow.cpp:192 src/engine/itemwindow.cpp:219
 msgid "Quantity:"
-msgstr ""
+msgstr "Menge:"
 
 #: src/engine/itemwindow.cpp:238
 msgid "Ok"
@@ -666,15 +671,15 @@ msgstr "Ok"
 
 #: src/engine/journalwindow.cpp:285 src/engine/options.cpp:160
 msgid "Journal"
-msgstr ""
+msgstr "Protokoll"
 
 #: src/engine/journalwindow.cpp:353
 msgid "Unknow Area"
-msgstr ""
+msgstr "Unbekanntes Gebiet"
 
 #: src/engine/journalwindow.cpp:354
 msgid "No missions."
-msgstr ""
+msgstr "Keine Missionen"
 
 #: src/engine/minimapwindow.cpp:59
 msgid "Map"
@@ -718,11 +723,11 @@ msgstr "Russisch"
 
 #: src/engine/options.cpp:131
 msgid "Camera Rotate Left"
-msgstr ""
+msgstr "Kamera rechtsherum drehen"
 
 #: src/engine/options.cpp:132
 msgid "Camera Rotate Right"
-msgstr ""
+msgstr "Kamera linksherum drehen"
 
 #: src/engine/options.cpp:133
 msgid "Camera Rotate Up"
@@ -734,11 +739,11 @@ msgstr ""
 
 #: src/engine/options.cpp:135
 msgid "Camera Zoom Up"
-msgstr ""
+msgstr "Kamera hinaufzoomen"
 
 #: src/engine/options.cpp:136
 msgid "Camera Zoom Down"
-msgstr ""
+msgstr "Kamera herabzoomen"
 
 #: src/engine/options.cpp:137
 msgid "Camera Top"
@@ -750,51 +755,51 @@ msgstr ""
 
 #: src/engine/options.cpp:139
 msgid "Camera Zoom Max"
-msgstr ""
+msgstr "Kamera Maximaler Zoom"
 
 #: src/engine/options.cpp:140
 msgid "Camera Zoom Min"
-msgstr ""
+msgstr "Kamera Minimaler Zoom"
 
 #: src/engine/options.cpp:142
 msgid "Toggle Run(1)"
-msgstr ""
+msgstr "Umschalten Rennen(1)"
 
 #: src/engine/options.cpp:143
 msgid "Toggle Run(2)"
-msgstr ""
+msgstr "Umschalten Rennen(2)"
 
 #: src/engine/options.cpp:144
 msgid "Move Right"
-msgstr ""
+msgstr "Nach rechts bewegen"
 
 #: src/engine/options.cpp:145
 msgid "Move Left"
-msgstr ""
+msgstr "Nach links bewegen"
 
 #: src/engine/options.cpp:146
 msgid "Move Forward"
-msgstr ""
+msgstr "Nach vorne bewegen"
 
 #: src/engine/options.cpp:147
 msgid "Move Backward"
-msgstr ""
+msgstr "Nach hinten bewegen"
 
 #: src/engine/options.cpp:148
 msgid "Rotate Left"
-msgstr ""
+msgstr "Links drehen"
 
 #: src/engine/options.cpp:149
 msgid "Rotate Right"
-msgstr ""
+msgstr "Rechts drehen"
 
 #: src/engine/options.cpp:150
 msgid "Change Character"
-msgstr ""
+msgstr "Charakter ändern"
 
 #: src/engine/options.cpp:151
 msgid "Rest"
-msgstr ""
+msgstr "Rasten"
 
 #: src/engine/options.cpp:153
 msgid "End Turn"
@@ -806,28 +811,28 @@ msgstr "Minikarte"
 
 #: src/engine/options.cpp:156 src/engine/shortcutswindow.cpp:49
 msgid "Shortcuts"
-msgstr ""
+msgstr "Tastenkombinationen"
 
 #: src/engine/options.cpp:159
 msgid "Character Info"
-msgstr ""
+msgstr "Charakter Informationen"
 
 #: src/engine/options.cpp:596 src/engine/options.cpp:623
 #: data/weapons/types/munitions.dcl:2
 msgid "None"
-msgstr ""
+msgstr "Keine"
 
 #: src/engine/options.cpp:601
 msgid "Characters"
-msgstr ""
+msgstr "Charaktere"
 
 #: src/engine/options.cpp:606
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 #: src/engine/options.cpp:628
 msgid "Projective"
-msgstr ""
+msgstr "projektiv"
 
 #: src/engine/options.cpp:644 data/weapons/types/sizes.dcl:3
 #: data/weapons/types/weights.dcl:3
@@ -836,11 +841,11 @@ msgstr "Normal"
 
 #: src/engine/options.cpp:647
 msgid "Pursue"
-msgstr ""
+msgstr "Verfolgen"
 
 #: src/engine/options.cpp:663 src/engine/options.cpp:682
 msgid "Disabled"
-msgstr ""
+msgstr "Deaktiviert"
 
 #: src/engine/options.cpp:685
 msgid "2x"
@@ -852,15 +857,15 @@ msgstr "4x"
 
 #: src/engine/options.cpp:800
 msgid "Input"
-msgstr ""
+msgstr "Eingabe"
 
 #: src/engine/options.cpp:803
 msgid "Windows"
-msgstr ""
+msgstr "Fenster"
 
 #: src/engine/options.cpp:806
 msgid "Character"
-msgstr ""
+msgstr "Charakter"
 
 #: src/engine/options.cpp:809
 msgid "Camera"
@@ -868,7 +873,7 @@ msgstr "Kamera"
 
 #: src/engine/options.cpp:814
 msgid "Audio"
-msgstr ""
+msgstr "Audio"
 
 #: src/engine/options.cpp:818
 msgid "Music Volume:"
@@ -880,7 +885,7 @@ msgstr "Geräuschlautstärke"
 
 #: src/engine/options.cpp:852
 msgid "Video"
-msgstr ""
+msgstr "Video"
 
 #: src/engine/options.cpp:860
 msgid "Screen Resolution:"
@@ -892,7 +897,7 @@ msgstr "Vollbild aktiveren"
 
 #: src/engine/options.cpp:884
 msgid "Enable Grass Effects (need particles)"
-msgstr ""
+msgstr "Graseffekt aktivieren (benötigt Partikel)"
 
 #: src/engine/options.cpp:893
 msgid "Enable Particles Effects"
@@ -900,11 +905,11 @@ msgstr "Partikeleffekte aktivieren"
 
 #: src/engine/options.cpp:905
 msgid "Enable MultiTextures"
-msgstr ""
+msgstr "Mehrfache Texturen aktivieren"
 
 #: src/engine/options.cpp:915
 msgid "Enable Anisotropic Filter"
-msgstr "Anisotropische Filterugn aktivieren"
+msgstr "Anisotropische Filterung aktivieren"
 
 #: src/engine/options.cpp:926
 msgid "Stencil Buffer:"
@@ -912,7 +917,7 @@ msgstr ""
 
 #: src/engine/options.cpp:943
 msgid "Reflections:"
-msgstr ""
+msgstr "Reflexionen:"
 
 #: src/engine/options.cpp:960
 msgid "Shadows:"
@@ -924,11 +929,11 @@ msgstr "Kantenglättung:"
 
 #: src/engine/options.cpp:991
 msgid "FarView:"
-msgstr ""
+msgstr "Weitsicht"
 
 #: src/engine/options.cpp:1007
 msgid "Game"
-msgstr ""
+msgstr "Spiel"
 
 #: src/engine/options.cpp:1013
 msgid "Language:"
@@ -940,19 +945,19 @@ msgstr "Kameramodus"
 
 #: src/engine/options.cpp:1046
 msgid "Auto End Turn"
-msgstr ""
+msgstr "Automatisch Zug beenden"
 
 #: src/engine/options.cpp:1055
 msgid "Always Run"
-msgstr ""
+msgstr "Immer Rennen"
 
 #: src/engine/options.cpp:1064
 msgid "Show Enemy Battle Circle"
-msgstr ""
+msgstr "Feindlichen Kampfkreis anzeigen"
 
 #: src/engine/options.cpp:1073
 msgid "Highlight current enemy"
-msgstr ""
+msgstr "Aktuellen Feind markieren"
 
 #: src/engine/options.cpp:1380
 msgid "Some changes will only take effect upon restart."
@@ -960,7 +965,7 @@ msgstr "Manche Änderungen werden erst nach einem Neustart wirksam."
 
 #: src/engine/options.cpp:1425
 msgid "Press a key to: "
-msgstr ""
+msgstr "Knopf drücken: "
 
 #: src/engine/options.cpp:1428
 msgid "Waiting..."
@@ -972,7 +977,7 @@ msgstr "Rasse"
 
 #: src/engine/racewindow.cpp:160
 msgid "Race Modifiers"
-msgstr ""
+msgstr "Rassenmodifikator"
 
 #: src/engine/racewindow.cpp:178
 msgid "Race Talents"
@@ -992,31 +997,31 @@ msgstr "Partikel"
 
 #: src/engine/shortcutswindow.cpp:177
 msgid "FPS"
-msgstr "FPS"
+msgstr "BPS (Bilder pro Sekunde)"
 
 #: src/engine/shortcutswindow.cpp:215
 msgid "Enter Battle Mode"
-msgstr ""
+msgstr "Kampfmodus aktivieren"
 
 #: src/engine/shortcutswindow.cpp:219
 msgid "Select Normal Attack"
-msgstr ""
+msgstr "Wähle normale Attacke"
 
 #: src/engine/shortcutswindow.cpp:225
 msgid "Open Quests Window"
-msgstr ""
+msgstr "Questfenster öffnen"
 
 #: src/engine/shortcutswindow.cpp:230
 msgid "Open Map Window"
-msgstr ""
+msgstr "Kartenfenster öffnen"
 
 #: src/engine/shortcutswindow.cpp:237
 msgid "End Character's Turn"
-msgstr ""
+msgstr "Beende aktuellen Zug"
 
 #: src/engine/shortcutswindow.cpp:241
 msgid "Only Available in Battle Mode"
-msgstr ""
+msgstr "Nur im Kampfmodus verfügbar"
 
 #: src/engine/shortcutswindow.cpp:247
 msgid "Open Inventory Window"
@@ -1024,7 +1029,7 @@ msgstr "Inventarfenster öffnen"
 
 #: src/engine/shortcutswindow.cpp:252
 msgid "Open Assign Attacks Window"
-msgstr ""
+msgstr "Attackenzuweisungsfenster öffnen"
 
 #: src/engine/shortcutswindow.cpp:257
 msgid "View Character Informations"
@@ -1032,11 +1037,11 @@ msgstr "Zeige Charakterinformationen"
 
 #: src/engine/shortcutswindow.cpp:262
 msgid "Open Group/Party Window"
-msgstr ""
+msgstr "Gruppenfenster öffnen"
 
 #: src/engine/skillwindow.cpp:82
 msgid "Total Free Points:"
-msgstr ""
+msgstr "Gesamte freie Punkte:"
 
 #: src/engine/skillwindow.cpp:118
 msgid "Points:"
@@ -1044,7 +1049,7 @@ msgstr "Punkte:"
 
 #: src/engine/skillwindow.cpp:130
 msgid "Only show race/class skills"
-msgstr ""
+msgstr "Nur Rassen/Klassenfähigkeiten anzeigen"
 
 #: src/engine/skillwindow.cpp:149
 msgid "Cost"
@@ -1052,7 +1057,7 @@ msgstr "Kosten"
 
 #: src/fight/fightSystem.cpp:151
 msgid "No more enemies."
-msgstr ""
+msgstr "Keine Gegner mehr."
 
 #: src/fight/fightSystem.cpp:187
 #, c-format
@@ -1062,7 +1067,7 @@ msgstr "%s ist tot!"
 #: src/fight/fightSystem.cpp:232
 #, c-format
 msgid "%s receive %d XP for killing"
-msgstr ""
+msgstr "%s bekommt %d EP für Tötung"
 
 #: src/fight/fightSystem.cpp:279 src/fight/fightSystem.cpp:307
 msgid "New Round"
@@ -1070,17 +1075,17 @@ msgstr "Neue Runde"
 
 #: src/fight/fightSystem.cpp:284 src/fight/fightSystem.cpp:312
 msgid "Error: No Characters!"
-msgstr "Fehler: Keine Charaktere"
+msgstr "Fehler: Keine Charaktere!"
 
 #: src/fight/fightSystem.cpp:340 src/fight/fightSystem.cpp:346
 #, c-format
 msgid "%s's turn."
-msgstr ""
+msgstr "%s's Zug."
 
 #: src/fight/initiative.cpp:56
 #, c-format
 msgid "%s rolls initiative: "
-msgstr ""
+msgstr "%s würfelt Initiative: "
 
 #: src/gui/window.cpp:148
 msgid "Maximize"
@@ -1088,63 +1093,69 @@ msgstr "Maximieren"
 
 #: data/comics/intro/intro.dcb:15
 msgid "Once Upon a time, there was a happy university called UFMG..."
-msgstr ""
+msgstr "Es war einmal eine glückliche Universität mit Namen UFMG..."
 
 #: data/comics/intro/intro.dcb:25
 msgid "People there used to live peacefull lives"
-msgstr ""
+msgstr "Die Leute lebten ein friedliches Leben"
 
 #: data/comics/intro/intro.dcb:35
 msgid ""
 "(except the medical students who had the habit of sacrificing one rookie per "
 "year)"
 msgstr ""
+"(ausgenommen die Medizinstudenten die jedes Jahr einen Anfänger opfern)"
 
 #: data/comics/intro/intro.dcb:45
 msgid "When something happened..."
-msgstr ""
+msgstr "Als plötzlich..."
 
 #: data/comics/intro/intro.dcb:47
 msgid "a big explosion, with unknown causes."
-msgstr ""
+msgstr "eine große Explosion, aus unbekanntem  Grund."
 
 #: data/comics/intro/intro.dcb:61
 msgid ""
 "It made the happy and peacefull city called Belo Horizonte be known as "
 "Horrivel Horizonte."
 msgstr ""
+"Es machte die glückliche und friedliche Stadt Belo Horizonte zu Horrivel "
+"Horizonte."
 
 #: data/comics/intro/intro.dcb:71
 msgid "Trees became alive,"
-msgstr ""
+msgstr "Bäume wurden lebendig,"
 
 #: data/comics/intro/intro.dcb:73
 msgid "Ameivas became agressive"
-msgstr ""
+msgstr "Ameivas wurden agressiv"
 
 #: data/comics/intro/intro.dcb:75
 msgid "and rats became blood thirsty."
-msgstr ""
+msgstr "und Ratten wurden Blutdurstig"
 
 #: data/comics/intro/intro.dcb:85
 msgid ""
 "From this chaotic scene, emerged the main race that would dominate the land:"
 msgstr ""
+"Aus diesem Chaos tauchte eine neue Rasse auf die das Land dominieren sollte:"
 
 #: data/comics/intro/intro.dcb:87
 msgid "UNIVERSITY STUDENTS!"
-msgstr ""
+msgstr "UNIVERSITÄTS STUDENTEN!"
 
 #: data/comics/intro/intro.dcb:89
 msgid ""
 "who desired to, at all costs, obtain their legendary levels of knowledge."
-msgstr ""
+msgstr "die unter allen Umständen legedäres Wissen erreichen wollen."
 
 #: data/comics/intro/intro.dcb:103
 msgid ""
 "On this doomed world, thanks to the risen journalists, tales were told and "
 "spread by word of mouth, saying that"
 msgstr ""
+"In dieer dem Untergang geweihten Welt, wurde durch Journalisten die "
+"Nachricht überbracht, dass"
 
 #: data/comics/intro/intro.dcb:113
 msgid "the first man who came and proclaimed his right to graduate"
@@ -1152,11 +1163,11 @@ msgstr ""
 
 #: data/comics/intro/intro.dcb:123
 msgid "was Logan."
-msgstr ""
+msgstr "war Logan."
 
 #: data/comics/intro/intro.dcb:125
 msgid "And that's how the tale began..."
-msgstr ""
+msgstr "Und so begann die Geschichte..."
 
 #: data/comics/other/mjack/mjack.dcb:15
 msgid ""
@@ -4094,10 +4105,6 @@ msgstr "Schwer"
 #: data/characters/pcs/santa.pc:1
 msgid "Santa Claws"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Close dialog)"
-#~ msgstr "(Dialog schliessen)"
 
 #~ msgid "Charism"
 #~ msgstr "Charisma"
