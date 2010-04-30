@@ -340,42 +340,44 @@ void partController::loadFromFile(string fileName)
 
    while(!file.eof())
    {
-      getline(file, strBuffer);
-      sscanf(strBuffer.c_str(), "%d %f %f %f %s", &type,&X,&Y,&Z,&buffer[0]);
-      
-      /* Waterfall Extra Info */
-      if(type == DNT_PARTICLE_TYPE_WATERFALL)
+      if(getline(file, strBuffer) > 0)
       {
-         particula = (part1*) addParticle(type, X, Y, Z, buffer);
-         getline(file, strBuffer);
-         sscanf(strBuffer.c_str(), "%d", &totalPlanes);
-         
-         /* read Planes */
-         while(totalPlanes > 0)
+         sscanf(strBuffer.c_str(), "%d %f %f %f %s", &type,&X,&Y,&Z,&buffer[0]);
+
+         /* Waterfall Extra Info */
+         if(type == DNT_PARTICLE_TYPE_WATERFALL)
          {
+            particula = (part1*) addParticle(type, X, Y, Z, buffer);
             getline(file, strBuffer);
-            sscanf(strBuffer.c_str(), "%f %f %f %f %f %f %f %f %d",
-                   &x1, &y1, &z1, &x2, &y2, &z2, &dX, &dZ, &inclination);
-            particula->addPlane(x1, y1, z1, x2, y2, z2, dX, dZ, inclination);
-            totalPlanes--;
+            sscanf(strBuffer.c_str(), "%d", &totalPlanes);
+
+            /* read Planes */
+            while(totalPlanes > 0)
+            {
+               getline(file, strBuffer);
+               sscanf(strBuffer.c_str(), "%f %f %f %f %f %f %f %f %d",
+                     &x1, &y1, &z1, &x2, &y2, &z2, &dX, &dZ, &inclination);
+               particula->addPlane(x1, y1, z1, x2, y2, z2, dX, dZ, inclination);
+               totalPlanes--;
+            }
          }
-      }
 
-      /* Grass Extra Info */
-      else if(type == DNT_PARTICLE_TYPE_GRASS)
-      {
-         GLfloat x2, z2, scale;
-         int total;
+         /* Grass Extra Info */
+         else if(type == DNT_PARTICLE_TYPE_GRASS)
+         {
+            GLfloat x2, z2, scale;
+            int total;
 
-         getline(file, strBuffer);
-         sscanf(strBuffer.c_str(), "%f %f %f %d",&x2, &z2, &scale, &total);
-         addParticle(type, X, Z, x2, z2, total, scale, buffer);
-      }
+            getline(file, strBuffer);
+            sscanf(strBuffer.c_str(), "%f %f %f %d",&x2, &z2, &scale, &total);
+            addParticle(type, X, Z, x2, z2, total, scale, buffer);
+         }
 
-      /* Other Particles */
-      else
-      {
-         addParticle(type, X, Y, Z, buffer);
+         /* Other Particles */
+         else
+         {
+            addParticle(type, X, Y, Z, buffer);
+         }
       }
    }
    file.close();
@@ -399,6 +401,7 @@ void partController::saveToFile(string fileName)
 
    /* Save all particles */
    particleSystem* part = (particleSystem*)particles->getFirst();
+   cerr << particles->getTotal() << endl;
    for(i = 0; i < particles->getTotal(); i++)
    {
       /* Don't save blood and lightning */
