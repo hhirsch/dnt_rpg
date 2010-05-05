@@ -1,0 +1,12 @@
+name = Ruin_House
+cal3d = models/building/ruin_house6/model.cfg
+inventory_texture = texturas/na.png
+inventory_sizes = 0 0
+life_points = 250
+fortitude = 10
+reflex = 2
+will = 0
+displacement = 0
+armature_class = 25
+cost = 8200
+static_scenery = 1
