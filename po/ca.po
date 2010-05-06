@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-04-22 20:27-0300\n"
+"POT-Creation-Date: 2010-05-06 10:49-0300\n"
 "PO-Revision-Date: 2010-04-29 12:41+0000\n"
 "Last-Translator: Dani Cases <danicases@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
@@ -100,14 +100,14 @@ msgstr "Tendència i Alineament"
 
 #: src/engine/alignwindow.cpp:72 src/engine/aspectwindow.cpp:93
 #: src/engine/attwindow.cpp:236 src/engine/classwindow.cpp:117
-#: src/engine/options.cpp:1086 src/engine/racewindow.cpp:117
+#: src/engine/options.cpp:1089 src/engine/racewindow.cpp:117
 #: src/engine/skillwindow.cpp:159
 msgid "Confirm"
 msgstr "Confirma"
 
 #: src/engine/alignwindow.cpp:76 src/engine/aspectwindow.cpp:97
 #: src/engine/attwindow.cpp:240 src/engine/barterwindow.cpp:68
-#: src/engine/classwindow.cpp:121 src/engine/options.cpp:1090
+#: src/engine/classwindow.cpp:121 src/engine/options.cpp:1093
 #: src/engine/racewindow.cpp:121 src/engine/skillwindow.cpp:162
 msgid "Cancel"
 msgstr "Cancel·la"
@@ -179,7 +179,7 @@ msgid "Attribute Description"
 msgstr "Descripció de l'Atribut"
 
 #: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:573
-#: src/engine/inventwindow.cpp:370 src/engine/options.cpp:1379
+#: src/engine/inventwindow.cpp:370 src/engine/options.cpp:1382
 msgid "Warning"
 msgstr "Atenció"
 
@@ -200,7 +200,7 @@ msgid "Impose"
 msgstr "rcanvi s'ha refusatImposa"
 
 #: src/engine/barterwindow.cpp:94 src/engine/barterwindow.cpp:104
-#: src/engine/inventwindow.cpp:56 src/engine/options.cpp:158
+#: src/engine/inventwindow.cpp:56 src/engine/options.cpp:161
 msgid "Inventory"
 msgstr "Inventari"
 
@@ -224,7 +224,7 @@ msgstr "La imposició de l'intercanvi s'ha refusat."
 msgid "Remove"
 msgstr "Elimina"
 
-#: src/engine/briefing.cpp:55 src/engine/options.cpp:157
+#: src/engine/briefing.cpp:55 src/engine/options.cpp:160
 msgid "Briefing"
 msgstr "Informació"
 
@@ -543,7 +543,7 @@ msgstr "Guarda"
 msgid "Load"
 msgstr "Carrega"
 
-#: src/engine/initial.cpp:92 src/engine/options.cpp:790
+#: src/engine/initial.cpp:92 src/engine/options.cpp:793
 msgid "Options"
 msgstr "Opcions"
 
@@ -669,7 +669,7 @@ msgstr "Quantitat:"
 msgid "Ok"
 msgstr "Ok"
 
-#: src/engine/journalwindow.cpp:285 src/engine/options.cpp:160
+#: src/engine/journalwindow.cpp:285 src/engine/options.cpp:163
 msgid "Journal"
 msgstr "Diari"
 
@@ -718,256 +718,260 @@ msgid "Catalan"
 msgstr ""
 
 #: src/engine/options.cpp:56
+msgid "Occitan"
+msgstr ""
+
+#: src/engine/options.cpp:57
 msgid "Russian"
 msgstr "Rus"
 
-#: src/engine/options.cpp:131
+#: src/engine/options.cpp:134
 msgid "Camera Rotate Left"
 msgstr "Gira càmera a l'esquerra"
 
-#: src/engine/options.cpp:132
+#: src/engine/options.cpp:135
 msgid "Camera Rotate Right"
 msgstr "Gira càmera a la dreta"
 
-#: src/engine/options.cpp:133
+#: src/engine/options.cpp:136
 msgid "Camera Rotate Up"
 msgstr "Gira càmera amunt"
 
-#: src/engine/options.cpp:134
+#: src/engine/options.cpp:137
 msgid "Camera Rotate Down"
 msgstr "Gira càmera avall"
 
-#: src/engine/options.cpp:135
+#: src/engine/options.cpp:138
 msgid "Camera Zoom Up"
 msgstr "Apropar càmera"
 
-#: src/engine/options.cpp:136
+#: src/engine/options.cpp:139
 msgid "Camera Zoom Down"
 msgstr "Allunyar càmera"
 
-#: src/engine/options.cpp:137
+#: src/engine/options.cpp:140
 msgid "Camera Top"
 msgstr "Càmera sobre"
 
-#: src/engine/options.cpp:138
+#: src/engine/options.cpp:141
 msgid "Camera Bottom"
 msgstr "Càmera sota"
 
-#: src/engine/options.cpp:139
+#: src/engine/options.cpp:142
 msgid "Camera Zoom Max"
 msgstr "Càmera Zoom màxim"
 
-#: src/engine/options.cpp:140
+#: src/engine/options.cpp:143
 msgid "Camera Zoom Min"
 msgstr "Càmera Zoom mínim"
 
-#: src/engine/options.cpp:142
+#: src/engine/options.cpp:145
 msgid "Toggle Run(1)"
 msgstr "Activa Córrer(1)"
 
-#: src/engine/options.cpp:143
+#: src/engine/options.cpp:146
 msgid "Toggle Run(2)"
 msgstr "Activa Córrer(2)"
 
-#: src/engine/options.cpp:144
+#: src/engine/options.cpp:147
 msgid "Move Right"
 msgstr "Ves a la dreta"
 
-#: src/engine/options.cpp:145
+#: src/engine/options.cpp:148
 msgid "Move Left"
 msgstr "Ves a l'esquerra"
 
-#: src/engine/options.cpp:146
+#: src/engine/options.cpp:149
 msgid "Move Forward"
 msgstr "Ves endavant"
 
-#: src/engine/options.cpp:147
+#: src/engine/options.cpp:150
 msgid "Move Backward"
 msgstr "Ves enrere"
 
-#: src/engine/options.cpp:148
+#: src/engine/options.cpp:151
 msgid "Rotate Left"
 msgstr "Gira a l'esquerra"
 
-#: src/engine/options.cpp:149
+#: src/engine/options.cpp:152
 msgid "Rotate Right"
 msgstr "Gira a la dreta"
 
-#: src/engine/options.cpp:150
+#: src/engine/options.cpp:153
 msgid "Change Character"
 msgstr "Canvia de Personatge"
 
-#: src/engine/options.cpp:151
+#: src/engine/options.cpp:154
 msgid "Rest"
 msgstr "Descansa"
 
-#: src/engine/options.cpp:153
+#: src/engine/options.cpp:156
 msgid "End Turn"
 msgstr "Finalitza torn"
 
-#: src/engine/options.cpp:155
+#: src/engine/options.cpp:158
 msgid "Minimap"
 msgstr "Minimapa"
 
-#: src/engine/options.cpp:156 src/engine/shortcutswindow.cpp:49
+#: src/engine/options.cpp:159 src/engine/shortcutswindow.cpp:49
 msgid "Shortcuts"
 msgstr "Dreceres"
 
-#: src/engine/options.cpp:159
+#: src/engine/options.cpp:162
 msgid "Character Info"
 msgstr "Info de Personatge"
 
-#: src/engine/options.cpp:596 src/engine/options.cpp:623
+#: src/engine/options.cpp:599 src/engine/options.cpp:626
 #: data/weapons/types/munitions.dcl:2
 msgid "None"
 msgstr "Cap"
 
-#: src/engine/options.cpp:601
+#: src/engine/options.cpp:604
 msgid "Characters"
 msgstr "Personatges"
 
-#: src/engine/options.cpp:606
+#: src/engine/options.cpp:609
 msgid "All"
 msgstr "Tots"
 
-#: src/engine/options.cpp:628
+#: src/engine/options.cpp:631
 msgid "Projective"
 msgstr "Descriptiu"
 
-#: src/engine/options.cpp:644 data/weapons/types/sizes.dcl:3
+#: src/engine/options.cpp:647 data/weapons/types/sizes.dcl:3
 #: data/weapons/types/weights.dcl:3
 msgid "Normal"
 msgstr "Normal"
 
-#: src/engine/options.cpp:647
+#: src/engine/options.cpp:650
 msgid "Pursue"
 msgstr "Persegueix"
 
-#: src/engine/options.cpp:663 src/engine/options.cpp:682
+#: src/engine/options.cpp:666 src/engine/options.cpp:685
 msgid "Disabled"
 msgstr "Inhabilitat"
 
-#: src/engine/options.cpp:685
+#: src/engine/options.cpp:688
 msgid "2x"
 msgstr "2x"
 
-#: src/engine/options.cpp:688
+#: src/engine/options.cpp:691
 msgid "4x"
 msgstr "4x"
 
-#: src/engine/options.cpp:800
+#: src/engine/options.cpp:803
 msgid "Input"
 msgstr "Entrada"
 
-#: src/engine/options.cpp:803
+#: src/engine/options.cpp:806
 msgid "Windows"
 msgstr "Finestres"
 
-#: src/engine/options.cpp:806
+#: src/engine/options.cpp:809
 msgid "Character"
 msgstr "Personatge"
 
-#: src/engine/options.cpp:809
+#: src/engine/options.cpp:812
 msgid "Camera"
 msgstr "Càmera"
 
-#: src/engine/options.cpp:814
+#: src/engine/options.cpp:817
 msgid "Audio"
 msgstr "Àudio"
 
-#: src/engine/options.cpp:818
+#: src/engine/options.cpp:821
 msgid "Music Volume:"
 msgstr "Volum de música:"
 
-#: src/engine/options.cpp:835
+#: src/engine/options.cpp:838
 msgid "Effects Volume:"
 msgstr "Volum d'efectes:"
 
-#: src/engine/options.cpp:852
+#: src/engine/options.cpp:855
 msgid "Video"
 msgstr "Vídeo"
 
-#: src/engine/options.cpp:860
+#: src/engine/options.cpp:863
 msgid "Screen Resolution:"
 msgstr "Resolució de pantalla:"
 
-#: src/engine/options.cpp:875
+#: src/engine/options.cpp:878
 msgid "Enable FullScreen"
 msgstr "Activa pantalla completa"
 
-#: src/engine/options.cpp:884
+#: src/engine/options.cpp:887
 msgid "Enable Grass Effects (need particles)"
 msgstr "Activa efectes de gespa (necessita Partícules)"
 
-#: src/engine/options.cpp:893
+#: src/engine/options.cpp:896
 msgid "Enable Particles Effects"
 msgstr "Activa efectes de Partícules"
 
-#: src/engine/options.cpp:905
+#: src/engine/options.cpp:908
 msgid "Enable MultiTextures"
 msgstr "Activa MultiTextures"
 
-#: src/engine/options.cpp:915
+#: src/engine/options.cpp:918
 msgid "Enable Anisotropic Filter"
 msgstr "Activa filtre Anisotròpic"
 
-#: src/engine/options.cpp:926
+#: src/engine/options.cpp:929
 msgid "Stencil Buffer:"
 msgstr ""
 
-#: src/engine/options.cpp:943
+#: src/engine/options.cpp:946
 msgid "Reflections:"
 msgstr "Reflexos:"
 
-#: src/engine/options.cpp:960
+#: src/engine/options.cpp:963
 msgid "Shadows:"
 msgstr "Ombres:"
 
-#: src/engine/options.cpp:976
+#: src/engine/options.cpp:979
 msgid "Anti-Aliasing:"
 msgstr ""
 
-#: src/engine/options.cpp:991
+#: src/engine/options.cpp:994
 msgid "FarView:"
 msgstr ""
 
-#: src/engine/options.cpp:1007
+#: src/engine/options.cpp:1010
 msgid "Game"
 msgstr "Joc"
 
-#: src/engine/options.cpp:1013
+#: src/engine/options.cpp:1016
 msgid "Language:"
 msgstr "Idioma:"
 
-#: src/engine/options.cpp:1030
+#: src/engine/options.cpp:1033
 msgid "Camera Mode:"
 msgstr "Mode de càmera:"
 
-#: src/engine/options.cpp:1046
+#: src/engine/options.cpp:1049
 msgid "Auto End Turn"
 msgstr "Auto finalitza torn"
 
-#: src/engine/options.cpp:1055
+#: src/engine/options.cpp:1058
 msgid "Always Run"
 msgstr "Córrer sempre"
 
-#: src/engine/options.cpp:1064
+#: src/engine/options.cpp:1067
 msgid "Show Enemy Battle Circle"
 msgstr "Mostra el cercle de lluita enemic"
 
-#: src/engine/options.cpp:1073
+#: src/engine/options.cpp:1076
 msgid "Highlight current enemy"
 msgstr "Remarca l'enemic actual"
 
-#: src/engine/options.cpp:1380
+#: src/engine/options.cpp:1383
 msgid "Some changes will only take effect upon restart."
 msgstr "Alguns canvis només s'aplicaran després de reiniciar."
 
-#: src/engine/options.cpp:1425
+#: src/engine/options.cpp:1428
 msgid "Press a key to: "
 msgstr "Prem una tecla per a: "
 
-#: src/engine/options.cpp:1428
+#: src/engine/options.cpp:1431
 msgid "Waiting..."
 msgstr "Esperant..."
 
