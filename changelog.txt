@@ -3,6 +3,7 @@
 ================================================
 - Map reflexion is now enabled per square;
 - Fixed a bug on particles load that was duplicating the last;
+- Faster run velocity;
 
 ================================================
 |               Version 0.5.1                  |

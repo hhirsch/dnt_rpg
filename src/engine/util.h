@@ -46,7 +46,7 @@
                                            continuous mouse action */
 #define ENGINE_CONTINUOUS_RUN_DISTANCE 60 /**< Distance to toggle walk/run
                                                in continuous mouse state */
-#define ENGINE_RUN_MULTIPLIER    2.2f /**< How run is faster than  walk */
+#define ENGINE_RUN_MULTIPLIER    2.8f /**< How run is faster than  walk */
 
 #define ENGINE_WAIT_DIE_DELAY  4000 /**< Value to delay for end die animation */
 
