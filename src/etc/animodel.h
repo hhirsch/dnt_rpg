@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -110,6 +110,16 @@ class aniModel:public thing
        *  \return -> true if one or more meshes colides, false otherwise */
       bool depthCollision(GLfloat angle, GLfloat pX, GLfloat pY, GLfloat pZ,
                           GLfloat colMin[3], GLfloat colMax[3]);
+
+
+      /*! Get the current position of bone "bName"
+       * \param bName -> name of the bone to get position from
+       * \param bX -> will receive the bone X position 
+       * \param bY -> will receive the bone Y position 
+       * \param bZ -> will receive the bone Z position
+       * \return true when bone "bName" was found, false otherwise */
+      bool getBonePosition(string bName, 
+            GLfloat& bX, GLfloat& bY, GLfloat& bZ);
 
    protected:
       int m_state;                   /**< current animation state */

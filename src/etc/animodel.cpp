@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -815,6 +815,36 @@ void aniModel::update(GLfloat pos)
 GLfloat aniModel::getCurrentPos()
 {
    return(curPos); 
+}
+
+/*********************************************************************
+ *                          getBonePosition                          *
+ *********************************************************************/
+bool aniModel::getBonePosition(string bName, 
+            GLfloat& bX, GLfloat& bY, GLfloat& bZ)
+{ 
+   Uint16 i;
+   CalSkeleton *pCalSkeleton = m_calModel->getSkeleton();
+   std::vector<CalBone *>& vectorBone = pCalSkeleton->getVectorBone();
+   CalCoreBone* coreBone;
+
+
+   if(!pCalSkeleton)
+   {
+      return(false);
+   }
+
+   for(i=0; i < vectorBone.size(); i++)
+   {
+      coreBone = vectorBone[i]->getCoreBone();
+      if( (coreBone) && (coreBone->getName() == bName))
+      {
+         cerr  << "got" << endl;
+      }
+   }
+
+
+   return(false);
 }
 
 /*********************************************************************
