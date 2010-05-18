@@ -324,6 +324,9 @@ bool aniModel::loadModel(const string& strFilename)
 
   m_calModel->update(curPos);
 
+   /* Define all key vertices */
+   defineKeyVertex();
+
    /* End of CAL3D LOAD */
    return(true);
 }
@@ -818,33 +821,81 @@ GLfloat aniModel::getCurrentPos()
 }
 
 /*********************************************************************
- *                          getBonePosition                          *
+ *                             getBoneId                             *
  *********************************************************************/
-bool aniModel::getBonePosition(string bName, 
-            GLfloat& bX, GLfloat& bY, GLfloat& bZ)
-{ 
+int aniModel::getBoneId(string bName)
+{
    Uint16 i;
    CalSkeleton *pCalSkeleton = m_calModel->getSkeleton();
    std::vector<CalBone *>& vectorBone = pCalSkeleton->getVectorBone();
    CalCoreBone* coreBone;
-
-
-   if(!pCalSkeleton)
-   {
-      return(false);
-   }
 
    for(i=0; i < vectorBone.size(); i++)
    {
       coreBone = vectorBone[i]->getCoreBone();
       if( (coreBone) && (coreBone->getName() == bName))
       {
-         cerr  << "got" << endl;
+         return(i);
       }
    }
+   return(-1);
+}
 
+/*********************************************************************
+ *                         getInfluencedVertex                       *
+ *********************************************************************/
+bool aniModel::getInfluencedVertex(int boneId, vertexInfo& inf)
+{
+   Uint16 i, j, v, c;
+   CalCoreMesh* mesh;
+   CalCoreSubmesh* subMesh;
+   std::vector<CalCoreSubmesh::Vertex> vert;
 
+   for(i=0; i < m_calCoreModel->getCoreMeshCount(); i++)
+   {
+      mesh = m_calCoreModel->getCoreMesh(i);
+      for(j=0; j < mesh->getCoreSubmeshCount(); j++)
+      {
+         subMesh = mesh->getCoreSubmesh(j);
+         vert = subMesh->getVectorVertex();
+         for(v=0; v < subMesh->getVertexCount(); v++)
+         {
+            for(c=0; c < vert[v].vectorInfluence.size(); c++)
+            {
+               if(vert[v].vectorInfluence[c].boneId == boneId)
+               {
+                  inf.meshId = i;
+                  inf.subMeshId = j;
+                  inf.vertexId = c;
+                  return(true);
+               }
+            }
+         }
+      }
+   }
    return(false);
+}
+
+/*********************************************************************
+ *                          defineKeyVertex                          *
+ *********************************************************************/
+void aniModel::defineKeyVertex()
+{
+   int boneId = -1;
+
+   /* Get left hand */
+   boneId = getBoneId("left_hand");
+   if((boneId == -1) || (!getInfluencedVertex(boneId, leftHand)))
+   {
+      leftHand.vertexId = -1;
+   }
+
+   /* Get right hand */
+   boneId = getBoneId("right_hand");
+   if((boneId == -1) || (!getInfluencedVertex(boneId, leftHand)))
+   {
+      leftHand.vertexId = -1;
+   }
 }
 
 /*********************************************************************

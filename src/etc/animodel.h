@@ -39,6 +39,15 @@ using namespace std;
 class aniModel:public thing
 {
    public:
+
+      /*! Vertex info for some key vertices */
+      struct vertexInfo
+      {
+         int vertexId;   /**< Id of the vertex */
+         int subMeshId;  /**< Id of the subMesh the vertex is */
+         int meshId;     /**< Id of the mesh the vertex is */
+      };
+
       /*! Constructor */
       aniModel();
       /*! Destructor */
@@ -111,15 +120,19 @@ class aniModel:public thing
       bool depthCollision(GLfloat angle, GLfloat pX, GLfloat pY, GLfloat pZ,
                           GLfloat colMin[3], GLfloat colMax[3]);
 
+      /*! Define all key vertices (left and right hand, for example) */
+      void defineKeyVertex();
 
-      /*! Get the current position of bone "bName"
-       * \param bName -> name of the bone to get position from
-       * \param bX -> will receive the bone X position 
-       * \param bY -> will receive the bone Y position 
-       * \param bZ -> will receive the bone Z position
-       * \return true when bone "bName" was found, false otherwise */
-      bool getBonePosition(string bName, 
-            GLfloat& bX, GLfloat& bY, GLfloat& bZ);
+      /*! Get the first vertex id influenced by a bone
+       * \param boneId -> id of the bone
+       * \param inf -> will receive the vertex indexes
+       * \return true if found */
+      bool getInfluencedVertex(int boneId, vertexInfo& inf);
+
+      /*! Get the Id of a bone
+       * \param bName name of the bone to get its it
+       * \return bone's ID or -1 if not found */
+      int getBoneId(string bName);
 
    protected:
       int m_state;                   /**< current animation state */
@@ -137,6 +150,9 @@ class aniModel:public thing
       float curPos;                  /**< current time pos */
       string m_path;                 /**< Path to cal3D model */
       string modelFileName;          /**< Filename of the model */
+
+      vertexInfo leftHand;           /**< Base vertex at left hand */
+      vertexInfo rightHand;          /**< Base vextex at right hand */
 
       CalRenderer *pCalRenderer;     /**< Pointer to themodel renderer */
       static float meshVertices[30000][3]; /**< Model Vertices */

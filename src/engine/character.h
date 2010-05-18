@@ -39,6 +39,7 @@ using namespace std;
 #include "../map/map.h"
 
 #include "itemwindow.h"
+#include "sun.h"
 
 #define POSRETX 8   /**< X screen portrait position */
 #define POSRETY 20  /**< Y screen portrait position */
@@ -211,6 +212,14 @@ class character: public aniModel, public dntListElement
       /*! Define the current occuped square by the character
        * \param curMap -> pointer to the current map opened */
       void defineOcSquare(Map* curMap);
+
+      /*! Render the character
+       * \param updateAnimations -> true to update animation state
+       * \param reflexion -> true to render reflexion
+       * \param shadow -> tru to render shadow
+       * \param gameSun -> pointer to the sun */
+      void render(bool updateAnimations, bool reflexion, bool shadow,
+            sun* gameSun);
 
       /*! Define the character list as friend class */
       friend class characterList;

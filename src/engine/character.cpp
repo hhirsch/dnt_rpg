@@ -142,6 +142,58 @@ character::~character()
 }
 
 /*********************************************************************
+ *                             render                                *
+ *********************************************************************/
+void character::render(bool updateAnimations, bool relexion, bool shadow, 
+                       sun* gameSun)
+{
+   /* Update the model */
+   if(updateAnimations)
+   {
+      update(WALK_UPDATE);
+      effects->doStep();
+   }
+
+   /* Load the Model */
+   loadToGraphicMemory();
+
+   /* Draw Character */
+   glPushMatrix();
+      /* Set position and orientation */
+      glTranslatef(xPosition, yPosition, zPosition);
+      glRotatef(orientation, 0.0f, 1.0f, 0.0f);
+      renderFromGraphicMemory();
+   glPopMatrix();
+
+   /* Draw Reflection */
+   if(relexion)
+   {
+      glEnable(GL_STENCIL_TEST);
+      glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
+      glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+      glEnable(GL_NORMALIZE);
+
+      glPushMatrix();
+         glTranslatef(xPosition, yPosition, zPosition);
+         glRotatef(orientation, 0.0f, 1.0f, 0.0f);
+         glScalef(1.0f, -1.0f, 1.0f);
+         renderFromGraphicMemory();
+      glPopMatrix();
+      glDisable(GL_NORMALIZE);
+      glDisable(GL_STENCIL_TEST);
+   }
+
+   /* Draw Projective Shadow */
+   if(shadow)
+   {
+      renderShadow(gameSun->getShadowMatrix(), gameSun->getShadowAlpha());
+   }
+
+   /* Unload Model Graphics Memory */
+   removeFromGraphicMemory();
+}
+
+/*********************************************************************
  *                         getAttModifiers                           *
  *********************************************************************/
 void character::getAttModifiers(int mods[6])

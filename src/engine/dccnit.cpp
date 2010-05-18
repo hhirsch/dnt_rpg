@@ -3455,67 +3455,15 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
 
    for(aux=0;aux < PCs->getTotal();aux++)
    {
-      /* Update the model */
-      if(updateAnimations)
-      {
-         per->update(WALK_UPDATE);
-         per->getEffects()->doStep();
-      }
-
-      /* Load the Model */
-      per->loadToGraphicMemory();
-
-      /* Draw Character */
-      glPushMatrix();
-      glTranslatef(per->xPosition, per->yPosition,
-            per->zPosition);
-      glRotatef(per->orientation, 0.0f, 1.0f, 0.0f);
-      per->renderFromGraphicMemory();
-
-      //per->renderBoundingBox();
-      /*glColor3f(1.0,0.1,0.1);
-        glBegin(GL_QUADS);
-        glVertex3f(per->min[0],per->min[1]+1,per->min[2]);
-        glVertex3f(per->min[0],per->min[1]+1,per->max[2]);
-        glVertex3f(per->max[0],per->min[1]+1,per->max[2]);
-        glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
-        glEnd();*/
-      glPopMatrix();
-
-      /* Draw Reflection */
-      if( (option->getReflexionType() >= REFLEXIONS_CHARACTERS) && 
-          (!actualMap->isOutdoor()) &&
-          (option->getStencilBufferSize() > 0) )
-      {
-         glEnable(GL_STENCIL_TEST);
-         glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
-         glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
-         glEnable(GL_NORMALIZE);
-
-         //glCullFace(GL_FRONT);
-
-         glPushMatrix();
-         glTranslatef(per->xPosition, per->yPosition,
-               per->zPosition);
-         glRotatef(per->orientation, 0.0f, 1.0f, 0.0f);
-         glScalef(1.0f, -1.0f, 1.0f);
-         per->renderFromGraphicMemory();
-         glPopMatrix();
-         glDisable(GL_NORMALIZE);
-         //glCullFace(GL_FRONT);
-         glDisable(GL_STENCIL_TEST);
-      }
-
-      /* Draw Projective Shadow */
-      if( (shadow) && (gameSun->visibleTime()) )
-      {
-         per->renderShadow(gameSun->getShadowMatrix(), 
-                           gameSun->getShadowAlpha());
-      }
-
-      /* Unload Model Graphics Memory */
-      per->removeFromGraphicMemory();
-
+      per->render(updateAnimations, 
+                  /* Enable reflexion */
+                  ((option->getReflexionType() >= REFLEXIONS_CHARACTERS) && 
+                   (!actualMap->isOutdoor()) &&
+                   (option->getStencilBufferSize() > 0)),
+                  /* Enable Projective Shadow */
+                  ((shadow) && (gameSun->visibleTime())),
+                  gameSun);
+      /* Next */            
       per = (character*) per->getNext();
    }
    glPopMatrix();
