@@ -147,6 +147,8 @@ character::~character()
 void character::render(bool updateAnimations, bool relexion, bool shadow, 
                        sun* gameSun)
 {
+   object* obj;
+
    /* Update the model */
    if(updateAnimations)
    {
@@ -192,13 +194,25 @@ void character::render(bool updateAnimations, bool relexion, bool shadow,
    /* Unload Model Graphics Memory */
    removeFromGraphicMemory();
 
-   /* Render weapon */
-   glBegin(GL_QUADS);
-      glVertex3f(leftHand.x-10, leftHand.y, leftHand.z-10);
-      glVertex3f(leftHand.x-10, leftHand.y, leftHand.z+10);
-      glVertex3f(leftHand.x+10, leftHand.y, leftHand.z+10);
-      glVertex3f(leftHand.x+10, leftHand.y, leftHand.z-10);
-   glEnd();
+   /* Render objects at hands */
+   obj = inventories->getFromPlace(INVENTORY_LEFT_HAND);
+   if(obj)
+   {
+      obj->xPosition = leftHand.x;
+      obj->yPosition = leftHand.y;
+      obj->zPosition = leftHand.z;
+      obj->orientation = orientation;
+      obj->draw(false);
+   }
+   obj = inventories->getFromPlace(INVENTORY_RIGHT_HAND);
+   if(obj)
+   {
+      obj->xPosition = rightHand.x;
+      obj->yPosition = rightHand.y;
+      obj->zPosition = rightHand.z;
+      obj->orientation = orientation;
+      obj->draw(false);
+   }
 }
 
 /*********************************************************************
