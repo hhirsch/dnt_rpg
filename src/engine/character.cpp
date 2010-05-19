@@ -184,7 +184,7 @@ void character::render(bool updateAnimations, bool relexion, bool shadow,
       obj->yPosition = leftHand.y;
       obj->zPosition = leftHand.z;
       obj->orientation = orientation;
-      obj->draw(false);
+      obj->draw(false, true);
    }
    obj = inventories->getFromPlace(INVENTORY_RIGHT_HAND);
    if(obj)
@@ -193,7 +193,7 @@ void character::render(bool updateAnimations, bool relexion, bool shadow,
       obj->yPosition = rightHand.y;
       obj->zPosition = rightHand.z;
       obj->orientation = orientation;
-      obj->draw(false);
+      obj->draw(false, true);
    }
 }
 

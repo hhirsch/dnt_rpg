@@ -21,3 +21,4 @@ weight_value = 0.960
 main_damage_type = piercing
 main_attack_sound = sndfx/guns/pistols/leve_1.ogg
 damage_dice = 1*d6+0x2
+eqAngles = -90,0,-90

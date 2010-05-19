@@ -138,6 +138,10 @@ weapon::weapon(string path): object(path)
       {
          sscanf(value.c_str(),"%f",&cost);
       }
+      else if(key == "eqAngles")
+      {
+         sscanf(value.c_str(),"%f,%f,%f",&eqAngleX, &eqAngleY, &eqAngleZ);
+      }
 
       /* The weapons definitions */
       else if( (key == "category") || (key == "category_type"))

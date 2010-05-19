@@ -66,8 +66,9 @@ class object: public thing
 
       /*!
        * Draws the object
-       * \param inverted -> to invert the Y position */
-      void draw(bool inverted);
+       * \param inverted -> to invert the Y position
+       * \param equiped -> true if the object is equipped */
+      void draw(bool inverted, bool equiped=false);
 
       /*! Draw the 2D Model to Surface
        * \param x -> x value on surface
@@ -182,6 +183,10 @@ class object: public thing
    protected:
       int inventSizeX,      /**< Size on inventory X axis */
           inventSizeY;      /**< Size on inventory Y axis */
+
+      float eqAngleX,       /**< X angle when equipped */
+            eqAngleY,       /**< Y angle when equipped */
+            eqAngleZ;       /**< Z angle when equipped */
 
       diceThing diceInfo;   /**< The object's dice for action */
 

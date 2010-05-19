@@ -191,6 +191,10 @@ object::object(string path, string curMap): thing()
       {
          sscanf(value.c_str(),"%f",&cost);
       }
+      else if(key == "eqAngles")
+      {
+         sscanf(value.c_str(),"%f,%f,%f",&eqAngleX, &eqAngleY, &eqAngleZ);
+      }
       else if(key == "static_scenery")
       {
          sscanf(value.c_str(),"%d", &aux);
@@ -299,6 +303,9 @@ void object::cleanValues()
    state = 0;
    inventSizeX = 0;
    inventSizeY = 0;
+   eqAngleX = 0.0f;
+   eqAngleY = 0.0f;
+   eqAngleZ = 0.0f;
    name = "";
    fileName = "";
    relatedInfo = "";
@@ -370,13 +377,23 @@ void object::setPrevious(object* o)
 /**************************************************************
  *                            draw                            *
  **************************************************************/
-void object::draw(bool inverted)
+void object::draw(bool inverted, bool equiped)
 {
    /* Draw the defined model */
    glEnable(GL_COLOR_MATERIAL);
    glPushMatrix();
       glTranslatef(xPosition, (inverted?-yPosition:yPosition), zPosition);
-      glRotatef(orientation,0,1,0);
+      if(equiped)
+      {
+         glRotatef(orientation, 0,1,0);
+         glRotatef(eqAngleX, 1,0,0);
+         glRotatef(eqAngleZ, 0,0,1);
+         glRotatef(eqAngleY, 0,1,0);
+      }
+      else
+      {
+         glRotatef(orientation,0,1,0);
+      }
       if(inverted)
       {
          glScalef(1.0, -1.0, 1.0);
