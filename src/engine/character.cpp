@@ -526,34 +526,22 @@ void character::setOrientation(GLfloat ori)
  *********************************************************************/
 void character::defineWeapon()
 {
-   object* obj = inventories->getFromPlace(INVENTORY_LEFT_HAND);
+   object* obj = inventories->getFromPlace(INVENTORY_RIGHT_HAND);
    weapon* wp = (weapon*) obj;
-   
-   /* Load the Left Hand Weapon, if one is, and if is different than the
-    * current one. */
-   if(obj)
+   if(wp != actualFeats.getCurrentWeapon())
    {
       /* Define the weapon */
       actualFeats.defineWeapon(wp);
+      return;
    }
-   else
-   {
-      /* Define as without weapons */
-      actualFeats.defineWeapon(NULL);
-   }   
 
-   obj = inventories->getFromPlace(INVENTORY_RIGHT_HAND);
+   obj = inventories->getFromPlace(INVENTORY_LEFT_HAND);
    wp = (weapon*) obj;
-   if(obj)
+   if(wp != actualFeats.getCurrentWeapon())
    {
       /* Define the weapon */
       actualFeats.defineWeapon(wp);
    }
-   else
-   {
-      actualFeats.defineWeapon(NULL);
-   }
-
 }
 
 /*********************************************************************

@@ -222,6 +222,9 @@ class feats
        * \param w -> the weapon used.
        ***************************************************************/
       void defineWeapon(weapon* w);
+      /*! Get the current defined weapon
+       * \return -> current weapon */
+      weapon* getCurrentWeapon();
       /*!
        **************************************************************** 
        * Flush the Current munition to the current defined weapon
