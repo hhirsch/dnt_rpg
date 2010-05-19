@@ -839,7 +839,7 @@ void editor::draw()
                glTranslatef(per->xPosition, per->yPosition,
                             per->zPosition);
                glRotatef(per->orientation,0,1,0);
-               per->render();
+               ((aniModel*)per)->render();
              /*per->RenderBoundingBox();
                glColor3f(0.6,0.1,0.1);
                glBegin(GL_POLYGON);

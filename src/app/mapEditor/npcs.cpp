@@ -123,7 +123,7 @@ void npcs::drawTemporary()
                       actualNpc->yPosition,
                       actualNpc->zPosition);
          glRotatef(actualNpc->orientation,0,1,0);
-         actualNpc->render();
+         ((aniModel*)actualNpc)->render();
       glPopMatrix();
    }
 }
