@@ -332,23 +332,6 @@ bool aniModel::loadModel(const string& strFilename)
 }
 
 /*********************************************************************
- *                              addModel                             *
- *********************************************************************/
-void aniModel::addModel(aniModel* mdl)
-{
-#if 0
-   /* Attach the mesh */
-   int id = m_calCoreModel->addCoreMesh(mdl->m_calCoreModel->getCoreMesh(0));
-   if(id > 0)
-   {
-      m_calModel->attachMesh(id);
-   }
-
-   /* TODO Add bone influence to all vertexes of the new mesh */
-#endif
-}
-
-/*********************************************************************
  *                        loadToGraphicMemory                        *
  *********************************************************************/
 void aniModel::loadToGraphicMemory(bool useTexture)

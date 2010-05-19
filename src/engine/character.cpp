@@ -83,24 +83,6 @@ character::character(featsList* ft)
    generalScript = NULL;
    generalScriptFileName = "";
 
-   /* Clear Models */
-   headModel.modelName = "";
-   headModel.meshID = -1;
-   leftHandModel.modelName = "";
-   leftHandModel.meshID = -1;
-   rightHandModel.modelName = "";
-   rightHandModel.meshID = -1;
-   leftFingerModel.modelName = "";
-   leftFingerModel.meshID = -1;
-   rightFingerModel.modelName = "";
-   rightFingerModel.meshID = -1;
-   neckModel.modelName = "";
-   neckModel.meshID = -1;
-   footModel.modelName = "";
-   footModel.meshID = -1;
-   bodyModel.modelName = "";
-   bodyModel.meshID = -1;
-
    /* Define the weapon */
    defineWeapon();
 }
@@ -551,94 +533,25 @@ void character::defineWeapon()
     * current one. */
    if(obj)
    {
-      if( (obj->getName()) != (leftHandModel.modelName))
-      {
-         leftHandModel.modelName = obj->getName();
-         /* Detach the mesh */
-         //TODO
-
-         /* Attach the mesh */
-         //TODO the big problem to attach the mesh now, is that we have
-         //     a new cal3d model for each weapon, and the attach function
-         //     of the cal3d only attachs meshes to the model (can't attach
-         //     models to the model). So, the possibly solution is:
-         //     1- Reload the mesh from the file, the materials, and its
-         //        bones, than put them as a child of another bone, update
-         //        all id values of the weapon and so it is on the model.
-         //        It's a not so beautyful way to do it, and is a lot of 
-         //        work to be done;
-         //     2- Maybe, trying to use the 
-         //           addCoreMaterial(CalCoreMaterial *pCoreMaterial);
-         //           int addCoreMesh(CalCoreMesh *pCoreMesh);
-         //        and so on. Will try that latter, when have more patience.
-         addModel(obj->get3dModel());
-
-         /* Define the weapon */
-         actualFeats.defineWeapon(wp);
-      }
+      /* Define the weapon */
+      actualFeats.defineWeapon(wp);
    }
    else
    {
-      if(leftHandModel.modelName != "Bare Hands")
-      {
-         leftHandModel.modelName = "Bare Hands";
-         if(!inventories->getFromPlace(INVENTORY_RIGHT_HAND))
-         {
-            /* Detach the mesh */
-            //TODO
-
-            /* Define as without weapons */
-            actualFeats.defineWeapon(NULL);
-         }
-      }
+      /* Define as without weapons */
+      actualFeats.defineWeapon(NULL);
    }   
 
    obj = inventories->getFromPlace(INVENTORY_RIGHT_HAND);
    wp = (weapon*) obj;
-   /* Load the Right Hand Weapon, if one is, and if is different than the
-    * current one. */
    if(obj)
    {
-      if( (obj->getName()) != (rightHandModel.modelName))
-      {
-         rightHandModel.modelName = obj->getName();
-         /* Detach the mesh */
-         //TODO
-
-         /* Attach the mesh */
-         //TODO the big problem to attach the mesh now, is that we have
-         //     a new cal3d model for each weapon, and the attach function
-         //     of the cal3d only attachs meshes to the model (can't attach
-         //     models to the model). So, the possibly solution is:
-         //     1- Reload the mesh from the file, the materials, and its
-         //        bones, than put them as a child of another bone, update
-         //        all id values of the weapon and so it is on the model.
-         //        It's a not so beautyful way to do it, and is a lot of 
-         //        work to be done;
-         //     2- Maybe, trying to use the 
-         //           addCoreMaterial(CalCoreMaterial *pCoreMaterial);
-         //           int addCoreMesh(CalCoreMesh *pCoreMesh);
-         //        and so on. Will try that latter, when have more patience.
-         addModel(obj->get3dModel());
-
-         /* Define the weapon */
-         actualFeats.defineWeapon(wp);
-      }
+      /* Define the weapon */
+      actualFeats.defineWeapon(wp);
    }
    else
    {
-      /* Detach the mesh */
-      //TODO
-      
-      /* Define the weapon to bare hands */
-      if(rightHandModel.modelName != "Bare Hands")
-      {
-         rightHandModel.modelName = "Bare Hands";
-         if(!inventories->getFromPlace(INVENTORY_LEFT_HAND))
-         {
-            actualFeats.defineWeapon(NULL);
-         }
-      }
+      actualFeats.defineWeapon(NULL);
    }
 
 }
