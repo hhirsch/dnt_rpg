@@ -195,6 +195,16 @@ object::object(string path, string curMap): thing()
       {
          sscanf(value.c_str(),"%f,%f,%f",&eqAngleX, &eqAngleY, &eqAngleZ);
       }
+      else if(key == "eqTrans1")
+      {
+         sscanf(value.c_str(),"%f,%f,%f",
+                &eqTrans1[0], &eqTrans1[1], &eqTrans1[2]);
+      }
+      else if(key == "eqTrans2")
+      {
+         sscanf(value.c_str(),"%f,%f,%f",
+                &eqTrans2[0], &eqTrans2[1], &eqTrans2[2]);
+      }
       else if(key == "static_scenery")
       {
          sscanf(value.c_str(),"%d", &aux);
@@ -306,6 +316,12 @@ void object::cleanValues()
    eqAngleX = 0.0f;
    eqAngleY = 0.0f;
    eqAngleZ = 0.0f;
+   eqTrans1[0] = 0.0f;
+   eqTrans1[1] = 0.0f;
+   eqTrans1[2] = 0.0f;
+   eqTrans2[0] = 0.0f;
+   eqTrans2[1] = 0.0f;
+   eqTrans2[2] = 0.0f;
    name = "";
    fileName = "";
    relatedInfo = "";
@@ -377,7 +393,7 @@ void object::setPrevious(object* o)
 /**************************************************************
  *                            draw                            *
  **************************************************************/
-void object::draw(bool inverted, bool equiped)
+void object::draw(bool inverted, int equiped)
 {
    /* Draw the defined model */
    glEnable(GL_COLOR_MATERIAL);
@@ -386,6 +402,15 @@ void object::draw(bool inverted, bool equiped)
       if(equiped)
       {
          glRotatef(orientation, 0,1,0);
+         if(equiped == 1)
+         {
+            glTranslatef(eqTrans1[0], eqTrans1[1], eqTrans1[2]);
+         }
+         else
+         {
+            glTranslatef(eqTrans2[0], eqTrans2[1], eqTrans2[2]);
+         }
+
          glRotatef(eqAngleX, 1,0,0);
          glRotatef(eqAngleZ, 0,0,1);
          glRotatef(eqAngleY, 0,1,0);

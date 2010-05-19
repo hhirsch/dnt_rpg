@@ -67,8 +67,10 @@ class object: public thing
       /*!
        * Draws the object
        * \param inverted -> to invert the Y position
-       * \param equiped -> true if the object is equipped */
-      void draw(bool inverted, bool equiped=false);
+       * \param equiped -> 0 if the object isn't equipped, 
+       *                   1 if equipped at first possible place,
+       *                   2 if equipped at second possible place */
+      void draw(bool inverted, int equiped=0);
 
       /*! Draw the 2D Model to Surface
        * \param x -> x value on surface
@@ -187,6 +189,9 @@ class object: public thing
       float eqAngleX,       /**< X angle when equipped */
             eqAngleY,       /**< Y angle when equipped */
             eqAngleZ;       /**< Z angle when equipped */
+
+      float eqTrans1[3],    /**< Translation when equipped at first place */
+            eqTrans2[3];    /**< Translation when equipped at second place */
 
       diceThing diceInfo;   /**< The object's dice for action */
 

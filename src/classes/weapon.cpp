@@ -142,6 +142,17 @@ weapon::weapon(string path): object(path)
       {
          sscanf(value.c_str(),"%f,%f,%f",&eqAngleX, &eqAngleY, &eqAngleZ);
       }
+      else if(key == "eqTrans1")
+      {
+         sscanf(value.c_str(),"%f,%f,%f",
+               &eqTrans1[0], &eqTrans1[1], &eqTrans1[2]);
+      }
+      else if(key == "eqTrans2")
+      {
+         sscanf(value.c_str(),"%f,%f,%f",
+               &eqTrans2[0], &eqTrans2[1], &eqTrans2[2]);
+      }
+
 
       /* The weapons definitions */
       else if( (key == "category") || (key == "category_type"))
