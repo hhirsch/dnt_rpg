@@ -22,3 +22,6 @@ main_attack_sound = sndfx/weapons/piercing_tiny.ogg
 second_damage_type = slashing
 second_attack_sound = sndfx/weapons/slashing_tiny.ogg
 damage_dice = 1*d2+0x2
+eqAngles = -90,0,90
+eqTrans1 = -0.5,-0.5,0
+eqTrans2 = -0.2,0,0
