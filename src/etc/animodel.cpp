@@ -810,6 +810,8 @@ void aniModel::update(GLfloat pos)
 {
    curPos = pos;
    m_calModel->update(pos);
+   updateKeyVertex(leftHand);
+   updateKeyVertex(rightHand);
 }
 
 /*********************************************************************
@@ -863,10 +865,10 @@ bool aniModel::getInfluencedVertex(int boneId, vertexInfo& inf)
             for(c=0; c < vert[v].vectorInfluence.size(); c++)
             {
                if(vert[v].vectorInfluence[c].boneId == boneId)
-               {
+               { 
                   inf.meshId = i;
                   inf.subMeshId = j;
-                  inf.vertexId = c;
+                  inf.vertexId = v;
                   return(true);
                }
             }
@@ -884,17 +886,55 @@ void aniModel::defineKeyVertex()
    int boneId = -1;
 
    /* Get left hand */
-   boneId = getBoneId("left_hand");
+   boneId = getBoneId("hand_left");
    if((boneId == -1) || (!getInfluencedVertex(boneId, leftHand)))
    {
       leftHand.vertexId = -1;
    }
 
    /* Get right hand */
-   boneId = getBoneId("right_hand");
-   if((boneId == -1) || (!getInfluencedVertex(boneId, leftHand)))
+   boneId = getBoneId("hand_right");
+   if((boneId == -1) || (!getInfluencedVertex(boneId, rightHand)))
    {
-      leftHand.vertexId = -1;
+      rightHand.vertexId = -1;
+   }
+}
+
+/*********************************************************************
+ *                          updateKeyVertex                          *
+ *********************************************************************/
+void aniModel::updateKeyVertex(vertexInfo& v)
+{
+   /* Calculate the sin and cos of the angle */
+   float angleSin = sin(deg2Rad(orientation));
+   float angleCos = cos(deg2Rad(orientation));
+   
+   /* Get the model renderer */ 
+   pCalRenderer = m_calModel->getRenderer();
+
+   if(v.vertexId != -1)
+   {
+      /* Define the mesh/submesh and get its vertices */
+      pCalRenderer->selectMeshSubmesh(v.meshId, v.subMeshId);
+      pCalRenderer->getVertices(&meshVertices[0][0]);
+
+      /* Translate and rotate the coordinates.
+       * NOTE: Do not forget that if the blender coordinate system is
+       * (x,y,z), the DNT system is (-x,z,y) */
+      v.x = xPosition + 
+            ((-meshVertices[v.vertexId][0])*angleCos*m_renderScale) +
+            ((meshVertices[v.vertexId][1])*angleSin*m_renderScale);
+      v.y = yPosition + meshVertices[v.vertexId][2]*m_renderScale;
+      v.z = zPosition + 
+            ((meshVertices[v.vertexId][0]*angleSin*m_renderScale)) +
+            ((meshVertices[v.vertexId][1]*angleCos*m_renderScale));
+   }
+   else
+   {
+      /* Key vertex not defined */
+      v.x = 0;
+      v.y = 0;
+      v.z = 0;
    }
 }
 

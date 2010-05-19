@@ -46,6 +46,10 @@ class aniModel:public thing
          int vertexId;   /**< Id of the vertex */
          int subMeshId;  /**< Id of the subMesh the vertex is */
          int meshId;     /**< Id of the mesh the vertex is */
+
+         float x;  /**< Current x position */
+         float y;  /**< Current y position */
+         float z;  /**< current z position */
       };
 
       /*! Constructor */
@@ -122,6 +126,9 @@ class aniModel:public thing
 
       /*! Define all key vertices (left and right hand, for example) */
       void defineKeyVertex();
+
+      /*! Update the vertex info */
+      void updateKeyVertex(vertexInfo& v);
 
       /*! Get the first vertex id influenced by a bone
        * \param boneId -> id of the bone

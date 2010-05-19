@@ -191,6 +191,14 @@ void character::render(bool updateAnimations, bool relexion, bool shadow,
 
    /* Unload Model Graphics Memory */
    removeFromGraphicMemory();
+
+   /* Render weapon */
+   glBegin(GL_QUADS);
+      glVertex3f(leftHand.x-10, leftHand.y, leftHand.z-10);
+      glVertex3f(leftHand.x-10, leftHand.y, leftHand.z+10);
+      glVertex3f(leftHand.x+10, leftHand.y, leftHand.z+10);
+      glVertex3f(leftHand.x+10, leftHand.y, leftHand.z-10);
+   glEnd();
 }
 
 /*********************************************************************
@@ -483,9 +491,9 @@ void character::callDeadAnimation()
    setState(STATE_DIE);
 }
 
-/******************************************************
- *                    instantKill                     *
- ******************************************************/
+/*********************************************************************
+ *                              instantKill                          *
+ *********************************************************************/
 void character::instantKill()
 {
    dead = true;
