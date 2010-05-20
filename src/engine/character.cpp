@@ -126,7 +126,7 @@ character::~character()
 /*********************************************************************
  *                             render                                *
  *********************************************************************/
-void character::render(bool updateAnimations, bool relexion, bool shadow, 
+void character::render(bool updateAnimations, bool reflexion, bool shadow, 
                        sun* gameSun)
 {
    object* obj;
@@ -150,7 +150,7 @@ void character::render(bool updateAnimations, bool relexion, bool shadow,
    glPopMatrix();
 
    /* Draw Reflection */
-   if(relexion)
+   if(reflexion)
    {
       renderReflexion();
    }
@@ -168,20 +168,16 @@ void character::render(bool updateAnimations, bool relexion, bool shadow,
    obj = inventories->getFromPlace(INVENTORY_LEFT_HAND);
    if(obj)
    {
-      obj->xPosition = leftHand.x;
-      obj->yPosition = leftHand.y;
-      obj->zPosition = leftHand.z;
-      obj->orientation = orientation;
-      obj->draw(false, 2);
+      obj->renderEquipped(2, leftHand.x, leftHand.y, leftHand.z, orientation,
+            reflexion, shadow, gameSun->getShadowMatrix(), 
+            gameSun->getShadowAlpha());
    }
    obj = inventories->getFromPlace(INVENTORY_RIGHT_HAND);
    if(obj)
    {
-      obj->xPosition = rightHand.x;
-      obj->yPosition = rightHand.y;
-      obj->zPosition = rightHand.z;
-      obj->orientation = orientation;
-      obj->draw(false, 1);
+      obj->renderEquipped(2, rightHand.x, rightHand.y, rightHand.z, 
+            orientation, reflexion, shadow, gameSun->getShadowMatrix(), 
+            gameSun->getShadowAlpha());
    }
 }
 

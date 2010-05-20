@@ -66,11 +66,20 @@ class object: public thing
 
       /*!
        * Draws the object
-       * \param inverted -> to invert the Y position
-       * \param equiped -> 0 if the object isn't equipped, 
-       *                   1 if equipped at first possible place,
-       *                   2 if equipped at second possible place */
-      void draw(bool inverted, int equiped=0);
+       * \param inverted -> to invert the Y position */
+      void draw(bool inverted);
+
+      /*! Render the object as equipped at the character
+       * \param type -> type of equiped [1,2]
+       * \param pX -> x position
+       * \param pY -> y position
+       * \param pZ -> z position
+       * \param angle -> object angle
+       * \param reflexion -> true to render reflexion too
+       * \param shadow -> true to render shadow too*/
+      void renderEquipped(int type, float pX, float pY, float pZ, float angle,
+          bool reflexion, bool shadow, GLfloat* shadowMatrix, 
+          float shadowAlpha);
 
       /*! Draw the 2D Model to Surface
        * \param x -> x value on surface
@@ -217,6 +226,11 @@ class object: public thing
       /*! Init the values (all with null or zero). Usually called
        * at begining of the constructors. */
       void cleanValues();
+
+    private:
+
+      /*! Do the equipped object transforms */
+      void equippedTransforms(int type);
 
 };
 

@@ -393,32 +393,13 @@ void object::setPrevious(object* o)
 /**************************************************************
  *                            draw                            *
  **************************************************************/
-void object::draw(bool inverted, int equiped)
+void object::draw(bool inverted)
 {
    /* Draw the defined model */
    glEnable(GL_COLOR_MATERIAL);
    glPushMatrix();
       glTranslatef(xPosition, (inverted?-yPosition:yPosition), zPosition);
-      if(equiped)
-      {
-         glRotatef(orientation, 0,1,0);
-         if(equiped == 1)
-         {
-            glTranslatef(eqTrans1[0], eqTrans1[1], eqTrans1[2]);
-         }
-         else
-         {
-            glTranslatef(eqTrans2[0], eqTrans2[1], eqTrans2[2]);
-         }
-
-         glRotatef(eqAngleX, 1,0,0);
-         glRotatef(eqAngleZ, 0,0,1);
-         glRotatef(eqAngleY, 0,1,0);
-      }
-      else
-      {
-         glRotatef(orientation,0,1,0);
-      }
+      glRotatef(orientation,0,1,0);
       if(inverted)
       {
          glScalef(1.0, -1.0, 1.0);
@@ -427,6 +408,99 @@ void object::draw(bool inverted, int equiped)
       model3D->draw();
    glPopMatrix();
    glDisable(GL_COLOR_MATERIAL);
+}
+
+/**************************************************************
+ *                        equippedMods                        *
+ **************************************************************/
+void object::equippedTransforms(int type)
+{
+   if(type == 1)
+   {
+      glTranslatef(eqTrans1[0], eqTrans1[1], eqTrans1[2]);
+   }
+   else
+   {
+      glTranslatef(eqTrans2[0], eqTrans2[1], eqTrans2[2]);
+   }
+
+   glRotatef(eqAngleX, 1,0,0);
+   glRotatef(eqAngleZ, 0,0,1);
+   glRotatef(eqAngleY, 0,1,0);
+}
+
+/**************************************************************
+ *                        renderEquipped                      *
+ **************************************************************/
+void object::renderEquipped(int type, float pX, float pY, 
+      float pZ, float angle, bool reflexion, bool shadow, 
+      GLfloat* shadowMatrix, float shadowAlpha)
+{
+   /* Update model (if animated) */
+   model3D->update(WALK_UPDATE);
+
+   /* Put it at graphic's memory */
+   model3D->loadToGraphicMemory();
+
+   /* Draw the defined model */
+   glEnable(GL_COLOR_MATERIAL);
+   glPushMatrix();
+      glTranslatef(pX, pY, pZ);
+      glRotatef(angle, 0,1,0);
+      equippedTransforms(type);
+      model3D->renderFromGraphicMemory();
+   glPopMatrix();
+   glDisable(GL_COLOR_MATERIAL);
+
+   /* Render its reflexion */
+   if(reflexion)
+   {
+       glPushMatrix();
+         glScalef(1.0f, -1.0f, 1.0f);
+         glTranslatef(pX, pY, pZ);
+         glRotatef(angle, 0,1,0);
+         equippedTransforms(type);
+         model3D->renderReflexion(0,0,0,0);
+      glPopMatrix();
+   }
+
+   /* Render its shadow */
+   if(shadow)
+   {
+      /* FIXME: some workaround to use the renderShadow,
+       * instead of redoing it here (the problem is with the equipped
+       * transforms). */
+      glEnable(GL_BLEND);
+      glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+      glDisable(GL_TEXTURE_2D);
+      glEnable(GL_STENCIL_TEST);
+      glStencilFunc(GL_EQUAL, 1, 0xffffffff);
+      glStencilOp(GL_KEEP, GL_KEEP, GL_INCR);
+      glPolygonOffset(-2.0f,-1.0f);
+      glEnable(GL_POLYGON_OFFSET_FILL);
+      glDisable(GL_LIGHTING);
+      glColor4f(0.0f, 0.0f, 0.0f, shadowAlpha);
+
+      glPushMatrix();
+         glMultMatrixf(shadowMatrix);
+         glPushMatrix();
+            glTranslatef(pX, pY, pZ);
+            glRotatef(angle, 0,1,0);
+            equippedTransforms(type);
+            model3D->renderFromGraphicMemory();
+         glPopMatrix();
+      glPopMatrix();
+ 
+      glEnable(GL_LIGHTING);
+      glDisable(GL_POLYGON_OFFSET_FILL);
+      glDisable(GL_STENCIL_TEST);
+      glEnable(GL_TEXTURE_2D);
+      glDisable(GL_BLEND);
+      glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+   }
+
+   /* Remove it from graphic's memory */
+   model3D->removeFromGraphicMemory();
 }
 
 /**************************************************************

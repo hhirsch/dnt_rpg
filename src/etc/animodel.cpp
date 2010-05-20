@@ -756,6 +756,7 @@ void aniModel::renderShadow(GLfloat* shadowMatrix, float alpha)
    glDisable(GL_STENCIL_TEST);
    glEnable(GL_TEXTURE_2D);
    glDisable(GL_BLEND);
+   glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
 /*********************************************************************
