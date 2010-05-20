@@ -447,6 +447,23 @@ void aniModel::loadToGraphicMemory(bool useTexture)
 /*********************************************************************
  *                       renderFromGraphicMemory                     *
  *********************************************************************/
+void aniModel::renderFromGraphicMemory(float pX, float pY, float pZ, 
+      float angle, bool inverted)
+{
+   glPushMatrix();
+      glTranslatef(pX, pY, pZ);
+      glRotatef(angle, 0.0f, 1.0f, 0.0f);
+      if(inverted)
+      {
+         glScalef(1.0f, -1.0f, 1.0f);
+      }
+      renderFromGraphicMemory();
+   glPopMatrix();
+}
+
+/*********************************************************************
+ *                       renderFromGraphicMemory                     *
+ *********************************************************************/
 void aniModel::renderFromGraphicMemory()
 {
   glPushMatrix();
@@ -739,6 +756,30 @@ void aniModel::renderShadow(GLfloat* shadowMatrix, float alpha)
    glDisable(GL_STENCIL_TEST);
    glEnable(GL_TEXTURE_2D);
    glDisable(GL_BLEND);
+}
+
+/*********************************************************************
+ *                           renderReflexion                         *
+ *********************************************************************/
+void aniModel::renderReflexion()
+{
+   renderReflexion(xPosition, yPosition, zPosition, orientation);
+}
+
+/*********************************************************************
+ *                           renderReflexion                         *
+ *********************************************************************/
+void aniModel::renderReflexion(float pX, float pY, float pZ, float angle)
+{
+   glEnable(GL_STENCIL_TEST);
+   glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
+   glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+   glEnable(GL_NORMALIZE);
+
+   renderFromGraphicMemory(pX, pY, pZ, angle, true);
+
+   glDisable(GL_NORMALIZE);
+   glDisable(GL_STENCIL_TEST);
 }
 
 /*********************************************************************

@@ -152,19 +152,7 @@ void character::render(bool updateAnimations, bool relexion, bool shadow,
    /* Draw Reflection */
    if(relexion)
    {
-      glEnable(GL_STENCIL_TEST);
-      glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
-      glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
-      glEnable(GL_NORMALIZE);
-
-      glPushMatrix();
-         glTranslatef(xPosition, yPosition, zPosition);
-         glRotatef(orientation, 0.0f, 1.0f, 0.0f);
-         glScalef(1.0f, -1.0f, 1.0f);
-         renderFromGraphicMemory();
-      glPopMatrix();
-      glDisable(GL_NORMALIZE);
-      glDisable(GL_STENCIL_TEST);
+      renderReflexion();
    }
 
    /* Draw Projective Shadow */

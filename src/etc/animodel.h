@@ -87,6 +87,14 @@ class aniModel:public thing
 
       /*! Render the loaded Graphic Memory to screen */
       void renderFromGraphicMemory();
+      /*! Render the loaded Graphic Memory to screen at the position
+       * \param pX -> x position
+       * \param pY -> y position
+       * \param pZ -> z position
+       * \param angle -> orientation angle
+       * \param inverted -> if will invert Y axys */
+      void renderFromGraphicMemory(float pX, float pY, float pZ, float angle,
+            bool inverted);
 
       /*! End the renderer State (unLoad the model from videocard).
        * \note -> must be called after all renderFromGraphicMemory */
@@ -101,6 +109,15 @@ class aniModel:public thing
        * \note -> need to define the stencil to the projected surface
        * \note -> this function works as renderFromGraphicMemory()  */
       void renderShadow(GLfloat* shadowMatrix, float alpha);
+
+      /*! Render the model reflexion on floor axys */
+      void renderReflexion();
+      /*! Render the model reflexion on floor axys
+       * \param pX -> x position
+       * \param pY -> y position
+       * \param pZ -> z position
+       * \param angle -> orientation angle */
+      void renderReflexion(float pX, float pY, float pZ, float angle);
 
       /*! Calculate the model static bounding box */
       void calculateBoundingBox();
