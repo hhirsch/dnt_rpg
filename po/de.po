@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-05-06 10:49-0300\n"
-"PO-Revision-Date: 2010-04-30 17:31+0000\n"
-"Last-Translator: Good Will Translator <Unknown>\n"
+"POT-Creation-Date: 2010-05-29 11:46-0300\n"
+"PO-Revision-Date: 2010-05-25 22:18+0000\n"
+"Last-Translator: Christian Sturm <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-06 13:44+0000\n"
+"X-Launchpad-Export-Date: 2010-05-29 14:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: src/classes/actions.cpp:128
@@ -499,7 +499,7 @@ msgstr "%s attackiert %s"
 msgid "No more actions. Turn ended."
 msgstr "Keine Aktionen mehr.  Runde beendet."
 
-#: src/engine/dccnit.cpp:4286
+#: src/engine/dccnit.cpp:4234
 msgid "Exit Battle Mode"
 msgstr "Beende Kampfmodus"
 
@@ -1146,7 +1146,7 @@ msgstr ""
 
 #: data/comics/intro/intro.dcb:87
 msgid "UNIVERSITY STUDENTS!"
-msgstr "UNIVERSITÄTS STUDENTEN!"
+msgstr "UNIVERSITÄTSSTUDENTEN!"
 
 #: data/comics/intro/intro.dcb:89
 msgid ""
@@ -1511,7 +1511,7 @@ msgstr ""
 
 #: data/classes/medician.cls:1
 msgid "Medical Student"
-msgstr ""
+msgstr "Medizinstudent"
 
 #: data/classes/medician.cls:2
 msgid ""
@@ -1568,7 +1568,7 @@ msgstr ""
 
 #: data/classes/medician.cls:19
 msgid "They receive -2 of Diplomacy when talking to other races."
-msgstr ""
+msgstr "Sie erhalten -2 Diplomatie, wenn sie mit anderen Rassen reden."
 
 #: data/classes/medician.cls:21
 msgid "They receive -4 of Diplomacy when talking to Physiotherapy Students."
@@ -1576,7 +1576,7 @@ msgstr ""
 
 #: data/classes/biology.cls:1
 msgid "Biology Student"
-msgstr ""
+msgstr "Biologiestudent"
 
 #: data/classes/biology.cls:2
 msgid ""
@@ -1598,18 +1598,24 @@ msgid ""
 "+2 of Dexterity, since they always observe and follow the ameivas on "
 "whatever terrain (and also dissect them, to count how many worms they have)."
 msgstr ""
+"+2 Geschicklichkeit, weil sie Ameisen auf jedem Terrain verfolgen und "
+"beobachten (und sie auch sezieren, um zu sehen, wie viele Würmer sie haben)."
 
 #: data/classes/biology.cls:9
 msgid ""
 "-1 of Strength, cause their muscles atrophy after spending 12 hours "
 "motionless, observing the ameiva's coupling rituals. "
 msgstr ""
+"-1 Stärke, weil ihre Muskeln nach zwölf Stunden, in denen sie Paarungsritual "
+"der Ameisen regungslos beobachten verkümmern. "
 
 #: data/classes/biology.cls:11
 msgid ""
 "Since they are commonly mistaken for hippies, Biology Students receive +6 of "
 "Disguises when disguised as hippies (and when not of this race)"
 msgstr ""
+"Da man Biologiestudenten leicht mit Hippies verwechselt erhalten sie +6 in "
+"Maskieren, wenn sie sich als Hippies verkleiden (aber keine Hippies sind)."
 
 #: data/classes/biology.cls:13
 msgid "For the same reason, -4 of Carte Blanche."
@@ -1623,7 +1629,7 @@ msgstr ""
 
 #: data/classes/music.cls:1
 msgid "Music Student"
-msgstr ""
+msgstr "Musikstudent"
 
 #: data/classes/music.cls:2
 msgid ""
@@ -1689,7 +1695,7 @@ msgstr ""
 
 #: data/classes/compsci.cls:1
 msgid "Computer Science Student"
-msgstr ""
+msgstr "Informatikstudent"
 
 #: data/classes/compsci.cls:2
 msgid ""
@@ -1697,6 +1703,9 @@ msgid ""
 "the women, obviously!'|(Gushm, then a CS Student, answering the existential "
 "question of his class)."
 msgstr ""
+"'Ich weiß wirklich nicht, warum ich dieses Studium mache...|Spinnst du? Um "
+"Frauen zu beeindrucken, natürlich!'|(Gushm, dann ein IT Student, welcher die "
+"existentielle Frage über sein Studium beantwortet)."
 
 #: data/classes/compsci.cls:3
 msgid ""
@@ -1712,7 +1721,7 @@ msgstr ""
 
 #: data/classes/compsci.cls:7
 msgid "Because they have to teach themselves, they receive +2 of Wisdom."
-msgstr ""
+msgstr "Weil sie sich alles selbst beibringen müssen erhalten sie +2 Wissen."
 
 #: data/classes/compsci.cls:9
 msgid ""
@@ -1791,7 +1800,7 @@ msgstr ""
 
 #: data/classes/journalism.cls:1
 msgid "Journalism Student"
-msgstr ""
+msgstr "Publizistikstudent"
 
 #: data/classes/journalism.cls:2
 msgid ""

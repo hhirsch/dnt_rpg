@@ -50,6 +50,13 @@ class aniModel:public thing
          float x;  /**< Current x position */
          float y;  /**< Current y position */
          float z;  /**< current z position */
+
+         float iX; /**< Initial x position */
+         float iY; /**< Initial y position */
+         float iZ; /**< Initial z position */
+
+         float angleXY; /**< current X/Y angle */
+         float angleYZ; /**< current Y/Z angle */
       };
 
       /*! Constructor */

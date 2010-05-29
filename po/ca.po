@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-05-06 10:49-0300\n"
-"PO-Revision-Date: 2010-04-29 12:41+0000\n"
+"POT-Creation-Date: 2010-05-29 11:46-0300\n"
+"PO-Revision-Date: 2010-05-27 16:34+0000\n"
 "Last-Translator: Dani Cases <danicases@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-29 19:52+0000\n"
+"X-Launchpad-Export-Date: 2010-05-29 14:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: src/classes/actions.cpp:128
@@ -47,7 +47,7 @@ msgstr "Curats %d punts."
 #: src/classes/actions.cpp:288
 #, c-format
 msgid "Hit for %d points."
-msgstr ""
+msgstr "%d punts de mal."
 
 #: src/classes/actions.cpp:307 src/classes/actions.cpp:310
 msgid "Critical Heal!"
@@ -499,7 +499,7 @@ msgstr "%s ataca a %s"
 msgid "No more actions. Turn ended."
 msgstr "No queden accions. Torn finalitzat."
 
-#: src/engine/dccnit.cpp:4286
+#: src/engine/dccnit.cpp:4234
 msgid "Exit Battle Mode"
 msgstr "Surt del Mode lluita"
 
@@ -715,11 +715,11 @@ msgstr "Holandès"
 
 #: src/engine/options.cpp:55
 msgid "Catalan"
-msgstr ""
+msgstr "Català"
 
 #: src/engine/options.cpp:56
 msgid "Occitan"
-msgstr ""
+msgstr "Occità"
 
 #: src/engine/options.cpp:57
 msgid "Russian"
@@ -1097,7 +1097,7 @@ msgstr "Maximitza"
 
 #: data/comics/intro/intro.dcb:15
 msgid "Once Upon a time, there was a happy university called UFMG..."
-msgstr ""
+msgstr "Hi havia una vegada una universitat feliç anomenada UFMG..."
 
 #: data/comics/intro/intro.dcb:25
 msgid "People there used to live peacefull lives"
@@ -1443,7 +1443,7 @@ msgstr ""
 
 #: data/alignment/spneutro.ali:1
 msgid "Neutral Proprietary-Software Adept"
-msgstr ""
+msgstr "Adepte Neutral al Software-propietari"
 
 #: data/alignment/spneutro.ali:2
 msgid ""
@@ -1453,7 +1453,7 @@ msgstr ""
 
 #: data/alignment/slcentrista.ali:1
 msgid "Center Free-Software Adept"
-msgstr ""
+msgstr "Adepte de Centre al Software-lliure"
 
 #: data/alignment/slcentrista.ali:2
 msgid ""
@@ -1466,7 +1466,7 @@ msgstr ""
 
 #: data/classes/administration.cls:1
 msgid "Administration Student"
-msgstr ""
+msgstr "Estudiant d'Administració"
 
 #: data/classes/administration.cls:2
 msgid "'Steel with steel is bad...'|(Zamboy, future Administration Student)"
@@ -1488,30 +1488,41 @@ msgid ""
 "Administration students are very definitely not known for their intellectual "
 "capacities. (Am I wrong, Elis Regina?). So, they receive -2 of Intelligence."
 msgstr ""
+"Els estudiants d'Administració definitivament no són coneguts per les seves "
+"capacitats intelectuals. (M'equivoco, Elis Regina?). Per tant, reben -2 "
+"d'Intel·ligència"
 
 #: data/classes/administration.cls:9
 msgid ""
 "It's a real turn-off to find some of those dumb asses in a group. -4 of "
 "Charisma."
 msgstr ""
+"Realment talla el rollo trobar-se amb un d'aquests ximples en un grup. -4 de "
+"Carisma."
 
 #: data/classes/administration.cls:11
 msgid ""
 "The works of Taylor are a common part of the Administration Students' course "
 "of study. +2 for Constitution."
 msgstr ""
+"Els treballs d'en Taylor són una part comú dels estudis d'Administració. +2 "
+"de Constitució"
 
 #: data/classes/administration.cls:13
 msgid ""
 "Since they are Taylor's faithful disciples, they receive +4 of Taylorism "
 "Skill."
 msgstr ""
+"Com que són els deixebles creients d'en Taylor, reben +4 en l'Habilitat "
+"Taylorisme."
 
 #: data/classes/administration.cls:15
 msgid ""
 "In their dogmatic cult to Taylor they found bizarre things (with maximun "
 "financial efficiency) to be their 'clothes', receiving +4 of Bizarre Clothes."
 msgstr ""
+"En el seu culte dogmàtic a Taylor han descobert coses excèntriques (amb la "
+"màxima eficiència econòmica) per a 'vestir-se', rebent +4 en Roba Extravagant"
 
 #: data/classes/administration.cls:17
 msgid ""
@@ -1519,10 +1530,13 @@ msgid ""
 "assimilation of other's opinions, and also to ask in a concise way some "
 "question, so they receive -6 of Listen."
 msgstr ""
+"Tothom sap que els estudiants d'Administració tenen moltes dificultats "
+"assimilant la opinió dels demés, i també per formular preguntes concises "
+"sobre qualsevol cosa, per això reben un -6 en Escoltar"
 
 #: data/classes/medician.cls:1
 msgid "Medical Student"
-msgstr ""
+msgstr "Estudiant de Medicina"
 
 #: data/classes/medician.cls:2
 msgid ""
@@ -1558,6 +1572,8 @@ msgid ""
 "Since their attention is only for the books, these creatures haven't any "
 "cleverness, receiving -4 of Wisdom."
 msgstr ""
+"Com que només paren atenció als llibres, aquestes criatures no són gens "
+"espavilades, rebent -4 en Saviesa"
 
 #: data/classes/medician.cls:13
 msgid ""

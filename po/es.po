@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-05-06 10:49-0300\n"
-"PO-Revision-Date: 2010-04-29 20:37+0000\n"
-"Last-Translator: farrer <farrer@gmail.com>\n"
+"POT-Creation-Date: 2010-05-29 11:46-0300\n"
+"PO-Revision-Date: 2010-05-19 18:54+0000\n"
+"Last-Translator: zer berros <Unknown>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-06 13:44+0000\n"
+"X-Launchpad-Export-Date: 2010-05-29 14:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: src/classes/actions.cpp:128
@@ -498,7 +498,7 @@ msgstr "%s ataca a %s"
 msgid "No more actions. Turn ended."
 msgstr "Sin acciones. Turno finalizado."
 
-#: src/engine/dccnit.cpp:4286
+#: src/engine/dccnit.cpp:4234
 msgid "Exit Battle Mode"
 msgstr "Salir del modo de batalla"
 
@@ -714,7 +714,7 @@ msgstr "Neerlandés"
 
 #: src/engine/options.cpp:55
 msgid "Catalan"
-msgstr ""
+msgstr "Catalán"
 
 #: src/engine/options.cpp:56
 msgid "Occitan"
@@ -2652,6 +2652,12 @@ msgid ""
 "watching little earthworms enter their bodies, when they have taken high "
 "doses of LSD."
 msgstr ""
+"Amantes de las plantas, animales, hongos, gusanos, aire, viento, agua, "
+"brisas, fuego, calor, en otras palabras, todo lo que emane de alguna forma "
+"naturaleza y pueden transmitir a ellos energía o karma ( no, no estamos "
+"hablando de los Elfos Druidas ), los hippies pueden pasar horas escuchando a "
+"la voz del viento o mirando pequeños gusanos de tierra entrando en sus "
+"cuerpos, cuando han tomado altas dosis de LSD."
 
 #: data/races/hippie.rca:6
 msgid ""
@@ -2717,10 +2723,12 @@ msgid ""
 "For having sociopathic tendencies, the Human Lammas receive -4 on all social "
 "tests."
 msgstr ""
+"Por tener tendencias psicópatas, los LLamas Humanos reciben -4 a todas las "
+"pruebas sociales"
 
 #: data/races/llama.rca:8
 msgid "Human lamas receive +2 of Intelligence."
-msgstr ""
+msgstr "Las Llamas Humanas reciben +2 a la Inteligencia"
 
 #: data/races/metaleiro.rca:1
 msgid "Headbanger"
@@ -3057,6 +3065,8 @@ msgid ""
 "A person whose talent is the Art of the Escape is able to escape from the "
 "most diverse, ordinary conditions of imprisonment."
 msgstr ""
+"Una persona cuyo talento es el Arte de Escapar, es capaz de salir en las más "
+"diversas condiciones, de prisión."
 
 #: data/skills/avaliar.ski:1
 msgid "Appraisal"
@@ -3186,7 +3196,7 @@ msgstr ""
 
 #: data/skills/desmentir.ski:1
 msgid "See Lies"
-msgstr ""
+msgstr "Ver mentiras"
 
 #: data/skills/desmentir.ski:2
 msgid ""
@@ -3249,10 +3259,11 @@ msgstr "Alpinismo"
 #: data/skills/escalar.ski:2
 msgid "Measure the organism's capacity to climb very steep surfaces."
 msgstr ""
+"Medir la capacidad del organismo para escalar superficies muy inclinadas."
 
 #: data/skills/esconder.ski:1
 msgid "Concealment"
-msgstr ""
+msgstr "Ocultación."
 
 #: data/skills/esconder.ski:2
 msgid ""
@@ -3291,12 +3302,14 @@ msgstr ""
 
 #: data/skills/furtividade.ski:1
 msgid "Stealth"
-msgstr ""
+msgstr "Sigilo"
 
 #: data/skills/furtividade.ski:2
 msgid ""
 "Is the organism's capacity to pass through some areas without making sounds."
 msgstr ""
+"Es la capacidad del organismo de pasar a través de algunas zonas sin hacer "
+"ruido."
 
 #: data/skills/inteligencia.ski:2
 msgid ""
@@ -3369,6 +3382,8 @@ msgid ""
 "This skill is used to gain restricted information. It's not so hard to "
 "understand."
 msgstr ""
+"Esta habilidad se utiliza para obtener información restringida. No es tan "
+"dificil de entender."
 
 #: data/skills/opobjele.ski:1
 msgid "Operates Eletronic Object"
@@ -3601,7 +3616,7 @@ msgstr ""
 
 #: data/dialogs/objects/house2_ovo.dlg:31
 msgid "Enter it."
-msgstr ""
+msgstr "Entrar."
 
 #: data/dialogs/objects/refmachine.dlg:6
 msgid "(You see a soda machine.)"
@@ -3645,7 +3660,7 @@ msgstr "(No tienes mucho dinero)"
 
 #: data/dialogs/tutorial/logan.dlg:6
 msgid "Ah, so finally you awake!"
-msgstr ""
+msgstr "Ah, asi que, ¡finalmente, te has levantado!"
 
 #: data/dialogs/tutorial/logan.dlg:10 data/dialogs/tutorial/santa.dlg:10
 #: data/dialogs/tutorial/dona.dlg:17
@@ -3702,7 +3717,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:88
 msgid "Where it can be?"
-msgstr ""
+msgstr "¿Dónde puede estar?"
 
 #: data/dialogs/tutorial/logan.dlg:91
 msgid "Ok, I'll search for it"
@@ -3724,7 +3739,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:120
 msgid "I'm still looking..."
-msgstr ""
+msgstr "Todavía estoy buscando..."
 
 #: data/dialogs/tutorial/logan.dlg:123
 msgid "Oh, Chrono Trigger! This name resounds good memories in my head."
@@ -3789,6 +3804,8 @@ msgid ""
 "No, you are wrong. Chrono is lost somewhere in the Bunker School. Go take a "
 "look..."
 msgstr ""
+"No, estás equivocado. Chrono está perdido en alguna parte de la Escuela "
+"Bunker. Ve a echar un vistazo."
 
 #: data/dialogs/tutorial/logan.dlg:224 data/dialogs/tutorial/logan.dlg:239
 msgid "Ok, I'll look for it."
@@ -3802,7 +3819,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:250
 msgid "About the extermination, have you done it?"
-msgstr ""
+msgstr "Sobre el exterminio, ¿Lo has hecho?"
 
 #: data/dialogs/tutorial/logan.dlg:254 data/dialogs/tutorial/dona.dlg:208
 #: data/dialogs/tutorial/dona.dlg:241
@@ -3811,7 +3828,7 @@ msgstr "Todavía no."
 
 #: data/dialogs/tutorial/logan.dlg:258
 msgid "Yes, there's no living thing there..."
-msgstr ""
+msgstr "Sí, no hay ningún ser vivo allí..."
 
 #: data/dialogs/tutorial/logan.dlg:269
 msgid "The Heroes of Lesser Renown? That's true, I'll call them."
@@ -3917,7 +3934,7 @@ msgstr "SI. (Pero hay algo dentro de ti que dice que hagas otra cosa)"
 
 #: data/dialogs/tutorial/santa.dlg:120
 msgid "So get out of here!"
-msgstr ""
+msgstr "Así que, ¡sal de aquí!"
 
 #: data/dialogs/tutorial/santa.dlg:124 data/dialogs/tutorial/santa.dlg:137
 #: data/dialogs/tutorial/hippie.dlg:115 data/dialogs/tutorial/hippie.dlg:181
@@ -3932,7 +3949,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:146
 msgid "I'm waiting for you install the Ruindows on the occupation's notebook!"
-msgstr ""
+msgstr "¡Estoy esperando a que me instales Ruindows en mi portatil de trabajo!"
 
 #: data/dialogs/tutorial/santa.dlg:150 data/dialogs/tutorial/santa.dlg:228
 #: data/dialogs/tutorial/atleticano.dlg:90
@@ -3943,7 +3960,7 @@ msgstr "Aceptar."
 
 #: data/dialogs/tutorial/santa.dlg:153
 msgid "Ok. (you look suspiciously at Santa Claws' notebook)"
-msgstr ""
+msgstr "Ok. (miras con recelo el portatil de Santa Claus)"
 
 #: data/dialogs/tutorial/santa.dlg:162 data/dialogs/tutorial/santa.dlg:237
 msgid "So you've installed it! Soon the blue screen will rule the world!"
@@ -3971,15 +3988,15 @@ msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:197
 msgid "Linux rocks!"
-msgstr ""
+msgstr "¡Linux manda!"
 
 #: data/dialogs/tutorial/santa.dlg:208
 msgid "Now, Ruindows at the Hippie's computer!"
-msgstr ""
+msgstr "Ahora, ¡Ruindows en los ordenadores hippis!"
 
 #: data/dialogs/tutorial/santa.dlg:224
 msgid "I'm waiting for you install the Ruindows on the hippie's computer!"
-msgstr ""
+msgstr "¡Estoy esperando a que instales Ruindows en el ordenadorde los hippis!"
 
 #: data/dialogs/tutorial/santa.dlg:258
 msgid "Follow the frozen blue screen path, brother!"
@@ -3995,11 +4012,11 @@ msgstr ""
 
 #: data/dialogs/tutorial/atleticano.dlg:6
 msgid "What are you doing here in my house?"
-msgstr ""
+msgstr "¿Qué estás haciendo en mi casa?"
 
 #: data/dialogs/tutorial/atleticano.dlg:11
 msgid "Logan sent this to you."
-msgstr ""
+msgstr "Logan te envia ésto."
 
 #: data/dialogs/tutorial/atleticano.dlg:16
 msgid "Just wandering, sorry..."
@@ -4007,7 +4024,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/atleticano.dlg:19
 msgid "Not of your concern!"
-msgstr ""
+msgstr "¡No te importa!"
 
 #: data/dialogs/tutorial/atleticano.dlg:25
 msgid "I'm lost."
@@ -4019,7 +4036,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/atleticano.dlg:47
 msgid "Please, don't do anything bad to us!"
-msgstr ""
+msgstr "Por favor, ¡no nos hagas nada malo!"
 
 #: data/dialogs/tutorial/atleticano.dlg:60
 msgid "And so I am."
@@ -4042,7 +4059,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/atleticano.dlg:96
 msgid "If I have enough time!"
-msgstr ""
+msgstr "¡Si tuviese más tiempo!"
 
 #: data/dialogs/tutorial/atleticano.dlg:107
 #: data/dialogs/tutorial/cruzeirense.dlg:6
@@ -4055,7 +4072,7 @@ msgstr "Volveré más tarde."
 
 #: data/dialogs/tutorial/cruzeirense.dlg:20
 msgid "What now?"
-msgstr ""
+msgstr "¿Y ahora, qué?"
 
 #: data/dialogs/tutorial/cruzeirense.dlg:25
 msgid "I have something for you."
@@ -4063,7 +4080,7 @@ msgstr "Tengo algo para ti."
 
 #: data/dialogs/tutorial/cruzeirense.dlg:29
 msgid "Ehr, nothing."
-msgstr ""
+msgstr "pues, nada."
 
 #: data/dialogs/tutorial/cruzeirense.dlg:39
 msgid "Oh, soda!"
@@ -4077,16 +4094,20 @@ msgstr "Necesito más información tuya."
 msgid ""
 "I can give any information you want, but, first, I need you to do something."
 msgstr ""
+"Puedo darte la información que quieres, pero, primero, necesito que hagas "
+"una cosa."
 
 #: data/dialogs/tutorial/cruzeirense.dlg:67
 msgid ""
 "Some chickens are threaten me. You must go to the wasteland place they are "
 "and finish them!"
 msgstr ""
+"Algunos pollos me están amenazando. Tienes que ir a la esplanada donde están "
+"y acabar con ellos."
 
 #: data/dialogs/tutorial/cruzeirense.dlg:71
 msgid "Now!"
-msgstr ""
+msgstr "¡Ahora!"
 
 #: data/dialogs/tutorial/hippie.dlg:6
 msgid "Welcome to the F.S.C."
@@ -4371,11 +4392,11 @@ msgstr "Litrona."
 
 #: data/models/objetos/itens/lata1/lata1.dcc:1
 msgid "Soda Can"
-msgstr ""
+msgstr "Lata de refresco."
 
 #: data/models/objetos/itens/lata1/logan_lata1.dcc:1
 msgid "Logan's Soda Can"
-msgstr ""
+msgstr "Refresco de Logan."
 
 #: data/models/objetos/itens/racao/racao.dcc:1
 msgid "Chicken Ration"
@@ -4395,11 +4416,11 @@ msgstr ""
 
 #: data/models/objetos/ammo/9mm_pack/9mm_pack.dcc:1
 msgid "9mm Ammo Pack"
-msgstr ""
+msgstr "Munición de 9mm."
 
 #: data/weapons/definitions/axe.wcc:1
 msgid "Great Axe"
-msgstr ""
+msgstr "Gran hacha."
 
 #: data/weapons/definitions/dagger.wcc:1
 msgid "Dagger"

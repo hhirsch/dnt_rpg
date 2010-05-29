@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-05-06 10:49-0300\n"
+"POT-Creation-Date: 2010-05-29 11:46-0300\n"
 "PO-Revision-Date: 2009-04-16 21:14+0000\n"
 "Last-Translator: Marcel de Klein <q-bus@home.nl>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -494,7 +494,7 @@ msgstr ""
 msgid "No more actions. Turn ended."
 msgstr ""
 
-#: src/engine/dccnit.cpp:4286
+#: src/engine/dccnit.cpp:4234
 msgid "Exit Battle Mode"
 msgstr ""
 

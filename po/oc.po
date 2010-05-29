@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-05-06 10:49-0300\n"
+"POT-Creation-Date: 2010-05-29 11:46-0300\n"
 "PO-Revision-Date: 2010-05-06 06:48+0000\n"
 "Last-Translator: Cédric VALMARY (Tot en òc) <cvalmary@yahoo.fr>\n"
 "Language-Team: Occitan (post 1500) <oc@li.org>\n"
@@ -494,7 +494,7 @@ msgstr "%s atacs %s"
 msgid "No more actions. Turn ended."
 msgstr "Pas d'accions suplementàrias. Fin del torn."
 
-#: src/engine/dccnit.cpp:4286
+#: src/engine/dccnit.cpp:4234
 msgid "Exit Battle Mode"
 msgstr "Quitar lo Mòde Combat"
 

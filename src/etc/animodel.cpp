@@ -894,6 +894,10 @@ bool aniModel::getInfluencedVertex(int boneId, vertexInfo& inf)
                   inf.meshId = i;
                   inf.subMeshId = j;
                   inf.vertexId = v;
+                  /* DNT coordinates: (-x, z, y) */
+                  inf.iX = -vert[v].position.x;
+                  inf.iY = vert[v].position.z;
+                  inf.iZ = vert[v].position.y;
                   return(true);
                }
             }
@@ -931,8 +935,8 @@ void aniModel::defineKeyVertex()
 void aniModel::updateKeyVertex(vertexInfo& v)
 {
    /* Calculate the sin and cos of the angle */
-   float angleSin = sin(deg2Rad(orientation));
-   float angleCos = cos(deg2Rad(orientation));
+   float angleSin = sinf(deg2Rad(orientation));
+   float angleCos = cosf(deg2Rad(orientation));
    
    /* Get the model renderer */ 
    pCalRenderer = m_calModel->getRenderer();
@@ -942,6 +946,12 @@ void aniModel::updateKeyVertex(vertexInfo& v)
       /* Define the mesh/submesh and get its vertices */
       pCalRenderer->selectMeshSubmesh(v.meshId, v.subMeshId);
       pCalRenderer->getVertices(&meshVertices[0][0]);
+
+      /* Calculate angles TODO */
+      v.angleXY = atanf( (meshVertices[v.vertexId][2] - v.iY) /
+                         (-meshVertices[v.vertexId][0] - v.iX) );
+      v.angleYZ = atanf( (meshVertices[v.vertexId][2] - v.iY) /
+                         (meshVertices[v.vertexId][1] - v.iZ) );
 
       /* Translate and rotate the coordinates.
        * NOTE: Do not forget that if the blender coordinate system is
@@ -970,8 +980,8 @@ bool aniModel::depthCollision(GLfloat angle, GLfloat pX, GLfloat pY, GLfloat pZ,
                               GLfloat colMin[3],GLfloat colMax[3])
 {
    /* Calculate the sin and cos of the angle */
-   float angleSin = sin(deg2Rad(angle));
-   float angleCos = cos(deg2Rad(angle));
+   float angleSin = sinf(deg2Rad(angle));
+   float angleCos = cosf(deg2Rad(angle));
 
    GLushort* facesShort = NULL;
    GLuint* facesInt = NULL;
