@@ -948,10 +948,13 @@ void aniModel::updateKeyVertex(vertexInfo& v)
       pCalRenderer->getVertices(&meshVertices[0][0]);
 
       /* Calculate angles TODO */
-      v.angleXY = atanf( (meshVertices[v.vertexId][2] - v.iY) /
-                         (-meshVertices[v.vertexId][0] - v.iX) );
-      v.angleYZ = atanf( (meshVertices[v.vertexId][2] - v.iY) /
-                         (meshVertices[v.vertexId][1] - v.iZ) );
+      v.angleXY = (atanf( (meshVertices[v.vertexId][2] - v.iY) /
+                                 (-meshVertices[v.vertexId][0] - v.iX) ));
+      v.angleYZ = (atanf( (meshVertices[v.vertexId][2] - v.iY) /
+                                 (meshVertices[v.vertexId][1] - v.iZ) ));
+
+      v.angleXY = rad2Deg(v.angleXY);
+      v.angleYZ = rad2Deg(v.angleYZ);
 
       /* Translate and rotate the coordinates.
        * NOTE: Do not forget that if the blender coordinate system is

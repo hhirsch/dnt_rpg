@@ -135,6 +135,7 @@
 #define PID4   M_PI / 4.0   /**< PI / 4 definition */ 
 #define PID2   M_PI / 2.0   /**< PI / 2 definition */
 #define PID180 M_PI / 180.0 /**< PI / 180 definition */
+#define PID180I 180.0 / M_PI /**< 180 / PI */
 
 /********************************************************************
  *                            Functions                             *
@@ -143,7 +144,11 @@
 /*! degree to radians converter.
  * \param x -> angle in degrees to convert.
  * \return angle in radians. */
-inline double deg2Rad(double x){return PID180 * x;}
+inline double deg2Rad(double x){return(PID180 * x);}
+/*! radian to degree converter
+ * \param y -> angle in radians 
+ * \return angle in degree */
+inline double rad2Deg(double y){return(y * PID180I);}
 
 /*! actualize loading thing on loading briefing screen 
  * \param img -> surface containing the surface to be edited

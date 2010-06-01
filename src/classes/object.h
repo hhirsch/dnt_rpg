@@ -75,11 +75,14 @@ class object: public thing
        * \param pY -> y position
        * \param pZ -> z position
        * \param angle -> object angle
+       * \param angleXY -> object X,Y angle
+       * \param angleYZ -> object Y,Z angle
        * \param reflexion -> true to render reflexion too
        * \param shadow -> true to render shadow too*/
-      void renderEquipped(int type, float pX, float pY, float pZ, float angle,
-          bool reflexion, bool shadow, GLfloat* shadowMatrix, 
-          float shadowAlpha);
+      void renderEquipped(int type, float pX, float pY, float pZ, 
+            float angle, float angleXY, float angleYZ,
+            bool reflexion, bool shadow, GLfloat* shadowMatrix, 
+            float shadowAlpha);
 
       /*! Draw the 2D Model to Surface
        * \param x -> x value on surface

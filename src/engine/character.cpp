@@ -169,6 +169,7 @@ void character::render(bool updateAnimations, bool reflexion, bool shadow,
    if(obj)
    {
       obj->renderEquipped(2, leftHand.x, leftHand.y, leftHand.z, orientation,
+            leftHand.angleXY, leftHand.angleYZ,
             reflexion, shadow, gameSun->getShadowMatrix(), 
             gameSun->getShadowAlpha());
    }
@@ -176,7 +177,8 @@ void character::render(bool updateAnimations, bool reflexion, bool shadow,
    if(obj)
    {
       obj->renderEquipped(2, rightHand.x, rightHand.y, rightHand.z, 
-            orientation, reflexion, shadow, gameSun->getShadowMatrix(), 
+            orientation,rightHand.angleXY, rightHand.angleYZ,
+            reflexion, shadow, gameSun->getShadowMatrix(), 
             gameSun->getShadowAlpha());
    }
 }

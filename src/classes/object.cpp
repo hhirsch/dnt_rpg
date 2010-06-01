@@ -433,7 +433,8 @@ void object::equippedTransforms(int type)
  *                        renderEquipped                      *
  **************************************************************/
 void object::renderEquipped(int type, float pX, float pY, 
-      float pZ, float angle, bool reflexion, bool shadow, 
+      float pZ, float angle, float angleXY, float angleYZ,
+      bool reflexion, bool shadow, 
       GLfloat* shadowMatrix, float shadowAlpha)
 {
    /* Update model (if animated) */
