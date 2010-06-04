@@ -5,5 +5,7 @@ id = RANGED_ATTACK
 
 bonus = ATTRIBUTE DEXTERITY
 
+range = 120
+
 affect = ALL ALL
 
