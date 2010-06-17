@@ -3475,14 +3475,14 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
       for(aux=0;aux < NPCs->getTotal();aux++)
       {
          /* Update the model */
-         if(updateAnimations)
+         /*if(updateAnimations)
          {
             per->update(WALK_UPDATE);
             per->getEffects()->doStep();
-         }
+         }*/
  
          /* Load the Model */
-         per->loadToGraphicMemory();
+         //per->loadToGraphicMemory();
 
          /* Verify Bounding Box */
          x[0] = per->min[0];
@@ -3513,6 +3513,20 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
                glColor3f(1.0f,1.0f,1.0f);
             }
 
+            glPushMatrix();
+
+            per->render(updateAnimations, 
+                  /* Enable reflexion */
+                  ((option->getReflexionType() >= REFLEXIONS_CHARACTERS) && 
+                   (!actualMap->isOutdoor()) &&
+                   (option->getStencilBufferSize() > 0)),
+                  /* Enable Projective Shadow */
+                  ((shadow) && (gameSun->visibleTime())),
+                  gameSun);
+
+            glPopMatrix();
+
+#if 0
             glPushMatrix();
               glTranslatef(per->xPosition, per->yPosition,
                            per->zPosition);
@@ -3566,10 +3580,10 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
                  per->renderShadow(gameSun->getShadowMatrix(),
                                    gameSun->getShadowAlpha());
               }
+#endif
          }
          /* Remove the Model From Graphic Memory */
-         per->removeFromGraphicMemory();
-
+         //per->removeFromGraphicMemory();
          per = (character*) per->getNext();
       }
    }
