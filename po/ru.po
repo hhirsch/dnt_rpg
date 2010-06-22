@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-05-29 11:46-0300\n"
+"POT-Creation-Date: 2010-06-22 18:20-0300\n"
 "PO-Revision-Date: 2010-03-30 18:39+0000\n"
 "Last-Translator: Peter Belyaev <kapone2002@yandex.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -494,7 +495,7 @@ msgstr "%s атакует %s"
 msgid "No more actions. Turn ended."
 msgstr "Больше никаких действий. Конец хода."
 
-#: src/engine/dccnit.cpp:4234
+#: src/engine/dccnit.cpp:4248
 msgid "Exit Battle Mode"
 msgstr "Выйти из боевого режима"
 
@@ -2258,8 +2259,8 @@ msgstr ""
 
 #: data/races/autista.rca:6
 msgid ""
-"Being far too strange in someone else's eyes, the Strange Autistic receives -"
-"4 on all Social Tests when dealing with a target of opposite tendencies."
+"Being far too strange in someone else's eyes, the Strange Autistic receives "
+"-4 on all Social Tests when dealing with a target of opposite tendencies."
 msgstr ""
 
 #: data/races/autista.rca:8

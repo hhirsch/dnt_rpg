@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-05-29 11:46-0300\n"
+"POT-Creation-Date: 2010-06-22 18:20-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -493,7 +494,7 @@ msgstr ""
 msgid "No more actions. Turn ended."
 msgstr ""
 
-#: src/engine/dccnit.cpp:4234
+#: src/engine/dccnit.cpp:4248
 msgid "Exit Battle Mode"
 msgstr ""
 
@@ -2163,8 +2164,8 @@ msgstr ""
 
 #: data/races/autista.rca:6
 msgid ""
-"Being far too strange in someone else's eyes, the Strange Autistic receives -"
-"4 on all Social Tests when dealing with a target of opposite tendencies."
+"Being far too strange in someone else's eyes, the Strange Autistic receives "
+"-4 on all Social Tests when dealing with a target of opposite tendencies."
 msgstr ""
 
 #: data/races/autista.rca:8
