@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
 "POT-Creation-Date: 2010-06-22 18:20-0300\n"
-"PO-Revision-Date: 2010-06-27 14:57+0000\n"
+"PO-Revision-Date: 2010-06-29 09:49+0000\n"
 "Last-Translator: gugand <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-27 17:00+0000\n"
+"X-Launchpad-Export-Date: 2010-07-02 18:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: src/classes/actions.cpp:128
@@ -572,7 +572,7 @@ msgstr "Esci"
 
 #: src/engine/inventwindow.cpp:190
 msgid "Get"
-msgstr "Ottieni"
+msgstr "Prendi"
 
 #: src/engine/inventwindow.cpp:193
 msgid "Info"
@@ -664,7 +664,7 @@ msgstr "Tipo di Munizione:"
 
 #: src/engine/itemwindow.cpp:192 src/engine/itemwindow.cpp:219
 msgid "Quantity:"
-msgstr "Quantita:"
+msgstr "Quantità:"
 
 #: src/engine/itemwindow.cpp:238
 msgid "Ok"
@@ -898,7 +898,7 @@ msgstr "Risoluzione Schermo:"
 
 #: src/engine/options.cpp:878
 msgid "Enable FullScreen"
-msgstr "Abilita SchermoIntero"
+msgstr "Abilita Tutto Schermo"
 
 #: src/engine/options.cpp:887
 msgid "Enable Grass Effects (need particles)"
@@ -1162,8 +1162,8 @@ msgid ""
 "On this doomed world, thanks to the risen journalists, tales were told and "
 "spread by word of mouth, saying that"
 msgstr ""
-"In questo mondo dannato, raccontano  le leggende raccontate e diffuse "
-"oralmente grazie a rinati giornalisti,"
+"In questo mondo dannato, dicono le leggende raccontate e diffuse oralmente "
+"grazie a rinati giornalisti,"
 
 #: data/comics/intro/intro.dcb:113
 msgid "the first man who came and proclaimed his right to graduate"
@@ -1192,7 +1192,7 @@ msgstr "Originato dal fallito processo Simulacrum di un antico membro J-5,"
 
 #: data/comics/other/mjack/mjack.dcb:37
 msgid "it used a hat, Supedohat. Apparently a common white hat,"
-msgstr "usò un cappello, Supedohat. Apparentemente un comune cappello bianco"
+msgstr "aveva un cappello, Supedohat. Apparentemente un comune cappello bianco"
 
 #: data/comics/other/mjack/mjack.dcb:40
 msgid "but, actually, a metamorphosical throwning thriller weapon."
@@ -3710,7 +3710,7 @@ msgid ""
 "that can produce at last 7 distinct notes."
 msgstr ""
 "E' la capacità di suonare uno strumento musicale. Lo strumento è qualunque "
-"cosa che può produre almeno 7 note distinte."
+"cosa che può generare almeno 7 note distinte."
 
 #: data/dialogs/objects/computers.dlg:6
 msgid "(You see the computer main screen)"
@@ -3747,7 +3747,7 @@ msgstr "Indietro"
 
 #: data/dialogs/objects/computers.dlg:91
 msgid "Operational System successfully installed."
-msgstr "Systema Operativo Installato con successo"
+msgstr "Sistema Operativo Installato con successo"
 
 #: data/dialogs/objects/computers.dlg:105
 msgid "You have failed to install an Operational System"
@@ -3773,7 +3773,7 @@ msgstr ""
 #: data/dialogs/objects/computers.dlg:145
 msgid "(You see a pacman-like figure at computer's main screen)"
 msgstr ""
-"(Vedi delle figure simili a pacman nelle schermo principale del computer)"
+"(Vedi delle figure simili a pacman nello schermo principale del computer)"
 
 #: data/dialogs/objects/bunker_school_server.dlg:6
 msgid "(You see the bunker school server main screen)"
@@ -4118,7 +4118,7 @@ msgstr "Signor Santa Claws di Cica Cula? Ow..."
 
 #: data/dialogs/tutorial/santa.dlg:58
 msgid "Yes, the great Santa Claws! (I was named in honour of him)."
-msgstr "Si, il grande Sante Claws! (Ho il suo nome in suo onore)."
+msgstr "Si, il grande Santa Claws! (Ho il suo nome in suo onore)."
 
 #: data/dialogs/tutorial/santa.dlg:71
 msgid ""
@@ -4234,7 +4234,7 @@ msgstr "Sto aspettando che installi Ruindows nei computer degli Hippie!"
 
 #: data/dialogs/tutorial/santa.dlg:258
 msgid "Follow the frozen blue screen path, brother!"
-msgstr "Segui la viao dello schermo blue, fratello"
+msgstr "Segui la via dello schermo blue, fratello"
 
 #: data/dialogs/tutorial/santa.dlg:266
 msgid "I will try to!"
@@ -4387,7 +4387,7 @@ msgstr "Mai!"
 
 #: data/dialogs/tutorial/hippie.dlg:79
 msgid "I heard what you've done to Logan's notebook, square!"
-msgstr "Ho sentito quello che hai fato al computer di Logan!"
+msgstr "Ho sentito quello che hai fatto al computer di Logan!"
 
 #: data/dialogs/tutorial/hippie.dlg:83
 msgid "Sorry."
@@ -4414,245 +4414,250 @@ msgid ""
 "I need some kind of crazy ration to my chickens. But The Farm refuses to "
 "give it to me. Can you get some for me? But remember: without blood!"
 msgstr ""
+"Mi serve una sorta di becchime particolare per le mie galline. Ma La "
+"Fattoria si rifiuta di darmela. Puoi ottenerne un po' per me? Ma ricorda: "
+"senza sangue!"
 
 #: data/dialogs/tutorial/hippie.dlg:128
 msgid "For sure."
-msgstr ""
+msgstr "Sicuro."
 
 #: data/dialogs/tutorial/hippie.dlg:133
 msgid "I can't! I love bloody works!"
-msgstr ""
+msgstr "Non posso! Adoro i lavori sanguinari!"
 
 #: data/dialogs/tutorial/hippie.dlg:143
 msgid "I'm waiting for my thing, bro."
-msgstr ""
+msgstr "Sto aspettando la mia cosa, fratello."
 
 #: data/dialogs/tutorial/hippie.dlg:147 data/dialogs/tutorial/dona.dlg:194
 #: data/dialogs/tutorial/dona.dlg:227
 msgid "I'll get it."
-msgstr ""
+msgstr "Lo prenderò."
 
 #: data/dialogs/tutorial/hippie.dlg:150
 msgid "They're out of stock!"
-msgstr ""
+msgstr "Sono finite!"
 
 #: data/dialogs/tutorial/hippie.dlg:164
 msgid "Oh, really bad rap!"
-msgstr ""
+msgstr "Oh, davvero una brutta storia!"
 
 #: data/dialogs/tutorial/hippie.dlg:168
 msgid "Sure, that is."
-msgstr ""
+msgstr "Sicuro, lo è."
 
 #: data/dialogs/tutorial/hippie.dlg:177
 msgid "Don't lie to me, bro!"
-msgstr ""
+msgstr "Non mentirmi, fratello!"
 
 #: data/dialogs/tutorial/hippie.dlg:190
 msgid "Oh, you got it. A peak experience waits!"
-msgstr ""
+msgstr "Oh, l'hai avuta. Ti aspetta un'esperienza unica!"
 
 #: data/dialogs/tutorial/hippie.dlg:219
 msgid "You killed her! Pig!"
-msgstr ""
+msgstr "L'hai uccisa! Maiale!"
 
 #: data/dialogs/tutorial/dona.dlg:6
 msgid "Hello stranger!"
-msgstr ""
+msgstr "Salve straniero!"
 
 #: data/dialogs/tutorial/dona.dlg:11
 msgid "I need some chicken ration."
-msgstr ""
+msgstr "Mi serve del becchime per polli."
 
 #: data/dialogs/tutorial/dona.dlg:14
 msgid "Where am I?"
-msgstr ""
+msgstr "Dove sono?"
 
 #: data/dialogs/tutorial/dona.dlg:26
 msgid "At the farm."
-msgstr ""
+msgstr "Alla fattoria."
 
 #: data/dialogs/tutorial/dona.dlg:30
 msgid "What is the farm?"
-msgstr ""
+msgstr "Cos'è la fattoria?"
 
 #: data/dialogs/tutorial/dona.dlg:33
 msgid "The farm?"
-msgstr ""
+msgstr "La fattoria?"
 
 #: data/dialogs/tutorial/dona.dlg:42
 msgid "I'm a simple farmer."
-msgstr ""
+msgstr "Sono un semplice contadino."
 
 #: data/dialogs/tutorial/dona.dlg:46
 msgid "A simple farmer?"
-msgstr ""
+msgstr "Un semplice contadino?"
 
 #: data/dialogs/tutorial/dona.dlg:49
 msgid "But what's your name?"
-msgstr ""
+msgstr "Ma qual'è il tuo nome?"
 
 #: data/dialogs/tutorial/dona.dlg:58
 msgid "Are you a piggy cop?"
-msgstr ""
+msgstr "Sei uno sporco poliziotto?"
 
 #: data/dialogs/tutorial/dona.dlg:74
 msgid "F-A-R-M, farm, the farm."
-msgstr ""
+msgstr "F-A-T-T-O-R-I-A, fattoria, la fattoria."
 
 #: data/dialogs/tutorial/dona.dlg:78
 msgid "But what is a farm?"
-msgstr ""
+msgstr "Ma cos'è una fattoria?"
 
 #: data/dialogs/tutorial/dona.dlg:81
 msgid "I got it!"
-msgstr ""
+msgstr "L'ho capito!"
 
 #: data/dialogs/tutorial/dona.dlg:90
 msgid "Pig!"
-msgstr ""
+msgstr "Maiale!"
 
 #: data/dialogs/tutorial/dona.dlg:103
 msgid "Neither I."
-msgstr ""
+msgstr "Nemmeno io"
 
 #: data/dialogs/tutorial/dona.dlg:116
 msgid "Ch... ch.. chicken ration? What are you talking about?"
-msgstr ""
+msgstr "Becchime per po... po... polli? Di cosa stai parlando?"
 
 #: data/dialogs/tutorial/dona.dlg:120
 msgid "The F.S.C. Hippie told me you have some."
-msgstr ""
+msgstr "L'Hippie F.S.C. mi ha detto che ne hai un po'."
 
 #: data/dialogs/tutorial/dona.dlg:124
 msgid "I'm an enthusiast of chicken rations."
-msgstr ""
+msgstr "Sono entusiasta del becchime per polli."
 
 #: data/dialogs/tutorial/dona.dlg:132
 msgid "Because I want!"
-msgstr ""
+msgstr "Perché voglio!"
 
 #: data/dialogs/tutorial/dona.dlg:145
 msgid "I won't sell anything more to that lazy hippie."
-msgstr ""
+msgstr "Non venderò più nulla a quel pigro hippie."
 
 #: data/dialogs/tutorial/dona.dlg:149
 msgid "Maybe if I do some favor to you?"
-msgstr ""
+msgstr "E se facessi qualche lavoretto per te?"
 
 #: data/dialogs/tutorial/dona.dlg:161
 msgid "Don't lie to me! It's for the hippie!"
-msgstr ""
+msgstr "Non mentirmi! È per l'hippie!"
 
 #: data/dialogs/tutorial/dona.dlg:177
 msgid "An enthusiast? You'll love it!"
-msgstr ""
+msgstr "Un entusiasta? Lo amerai!"
 
 #: data/dialogs/tutorial/dona.dlg:181
 msgid "Sure."
-msgstr ""
+msgstr "Sicuro."
 
 #: data/dialogs/tutorial/dona.dlg:190
 msgid ""
 "Uhm, there's something I'll want latter from you. But first, I'll need some "
 "ingredients for the ration. A mushroom..."
 msgstr ""
+"Uhm, c'è qualcosa che vorrò dopo da te. Ma prima, mi servono alcuni "
+"ingredienti per la razione. Un fungo..."
 
 #: data/dialogs/tutorial/dona.dlg:204
 msgid "Have you got the mushroom?"
-msgstr ""
+msgstr "Hai il fungo?"
 
 #: data/dialogs/tutorial/dona.dlg:212 data/dialogs/tutorial/dona.dlg:245
 msgid "Here it is."
-msgstr ""
+msgstr "Eccolo."
 
 #: data/dialogs/tutorial/dona.dlg:223
 msgid "Great. Now I want an egg"
-msgstr ""
+msgstr "Ottimo. Adesso voglio un uovo."
 
 #: data/dialogs/tutorial/dona.dlg:237
 msgid "Have you got the egg?"
-msgstr ""
+msgstr "Hai l'uovo?"
 
 #: data/dialogs/tutorial/dona.dlg:257
 msgid "Done. Come back latter to do me your favor."
-msgstr ""
+msgstr "Fatto. Torna dopo per farmi il tuo lavoretto"
 
 #: data/dialogs/tutorial/dona.dlg:270
 msgid "What a world! Threats, threats and more threats..."
-msgstr ""
+msgstr "Che mondo! Minacce, minacce e ancora altre minacce..."
 
 #: data/missions/tutorial/mission1.mis:2
 msgid "Find Chrono Trigger cartdrige for Logan."
-msgstr ""
+msgstr "Trova la cartuccia di Chrono Trigger per Logan."
 
 #: data/missions/tutorial/mission2.mis:2
 msgid "Exterminate all living Creatures at Bunker School."
-msgstr ""
+msgstr "Stermina tutte le Creature viventi nel Bunker della Scuola"
 
 #: data/missions/tutorial/mission3.mis:2
 msgid "Install Ruindows at the occupation's notebook for Santa Claws."
-msgstr ""
+msgstr "Installa Ruindows sul portatile di lavoro di Santa Claws."
 
 #: data/missions/tutorial/mission4.mis:2
 msgid "Fight for Cruzeirense."
-msgstr ""
+msgstr "Combatti per Cruzeirense."
 
 #: data/missions/tutorial/hippie1.mis:2
 msgid "Get some psychedelic ration for F.S.C. Hippie"
-msgstr ""
+msgstr "Procurati un po' di razione psichedelica per l'Hippie della C.S.L."
 
 #: data/missions/tutorial/santa2.mis:2
 msgid "Install Ruindows at the hippie's computer."
-msgstr ""
+msgstr "Installa Ruindows sul computer dell'hippie."
 
 #: data/models/objetos/books/mjack/mjack.dcc:1
 msgid "Monster Book Fragment"
-msgstr ""
+msgstr "Frammento Del Libro Del Mostro"
 
 #: data/models/natural/cogumelo/cogumelo.dcc:1
 msgid "Mushroom"
-msgstr ""
+msgstr "Fungo"
 
 #: data/models/natural/ovo/ovo.dcc:1
 msgid "Egg"
-msgstr ""
+msgstr "Uovo"
 
 #: data/models/objetos/itens/healkit/healkit.dcc:1
 msgid "First Aid Kit"
-msgstr ""
+msgstr "Kit Di Primo Soccorso"
 
 #: data/models/objetos/itens/garrafa1/garrafa1.dcc:1
 msgid "Beer Bottle"
-msgstr ""
+msgstr "Bottiglia Di Birra"
 
 #: data/models/objetos/itens/lata1/lata1.dcc:1
 msgid "Soda Can"
-msgstr ""
+msgstr "Lattina Di Soda"
 
 #: data/models/objetos/itens/lata1/logan_lata1.dcc:1
 msgid "Logan's Soda Can"
-msgstr ""
+msgstr "Lattina Di Soda Di Logan"
 
 #: data/models/objetos/itens/racao/racao.dcc:1
 msgid "Chicken Ration"
-msgstr ""
+msgstr "Becchime Per Polli"
 
 #: data/models/objetos/itens/money/money.dcc:1
 msgid "Money"
-msgstr ""
+msgstr "Denaro"
 
 #: data/models/objetos/geral/computador/computador.dcc:1
 msgid "Computer"
-msgstr ""
+msgstr "Computer"
 
 #: data/models/objetos/geral/notebook/notebook.dcc:1
 msgid "Notebook"
-msgstr ""
+msgstr "Notebook"
 
 #: data/models/objetos/ammo/9mm_pack/9mm_pack.dcc:1
 msgid "9mm Ammo Pack"
-msgstr ""
+msgstr "Pacchetto Di Munizioni 9mm"
 
 #: data/weapons/definitions/axe.wcc:1
 msgid "Great Axe"
@@ -4701,7 +4706,7 @@ msgstr "Esotico"
 
 #: data/weapons/types/categories.dcl:4
 msgid "Throwing"
-msgstr ""
+msgstr "Lancio"
 
 #: data/weapons/types/categories.dcl:5
 msgid "Simple"
@@ -4761,7 +4766,7 @@ msgstr "Minuscolo"
 
 #: data/weapons/types/sizes.dcl:4
 msgid "Large"
-msgstr "Largo"
+msgstr "Grande"
 
 #: data/weapons/types/weights.dcl:2
 msgid "Light"
@@ -4773,7 +4778,7 @@ msgstr "Pesante"
 
 #: data/characters/pcs/santa.pc:1
 msgid "Santa Claws"
-msgstr "Babbo Nachele"
+msgstr "Santa Claws"
 
 #~ msgid "I am Bombadinho"
 #~ msgstr "Io sono Bombadinho"
