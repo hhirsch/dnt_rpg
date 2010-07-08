@@ -521,6 +521,8 @@ void character::defineWeapon()
       return;
    }
 
+   /* FIXME: Double weapon use! */
+#if 0
    obj = inventories->getFromPlace(INVENTORY_LEFT_HAND);
    wp = (weapon*) obj;
    if(wp != actualFeats.getCurrentWeapon())
@@ -528,6 +530,7 @@ void character::defineWeapon()
       /* Define the weapon */
       actualFeats.defineWeapon(wp);
    }
+#endif
 }
 
 /*********************************************************************
