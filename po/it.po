@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-06-22 18:20-0300\n"
-"PO-Revision-Date: 2010-06-29 09:49+0000\n"
+"POT-Creation-Date: 2010-07-10 17:21-0300\n"
+"PO-Revision-Date: 2010-07-09 07:28+0000\n"
 "Last-Translator: gugand <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
-"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-07-02 18:44+0000\n"
+"X-Launchpad-Export-Date: 2010-07-10 20:16+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
+"Language: it\n"
 
 #: src/classes/actions.cpp:128
 #, c-format
@@ -72,7 +72,7 @@ msgstr "Riflessi"
 
 #: src/classes/defs.cpp:275 src/engine/charwindow.cpp:220
 msgid "I am Not a Fool"
-msgstr "Non Sono un Folle"
+msgstr "Non Sono uno Scemo"
 
 #: src/classes/feats.cpp:185
 msgid "Invalid Talent"
@@ -744,11 +744,11 @@ msgstr "Telecamera Ruota in Basso"
 
 #: src/engine/options.cpp:138
 msgid "Camera Zoom Up"
-msgstr "Telecamera Aumenta Zoom"
+msgstr "Telecamera dall'alto ravvicinata"
 
 #: src/engine/options.cpp:139
 msgid "Camera Zoom Down"
-msgstr "Telecamera Diminuisce Zoom"
+msgstr "Telecamera dal basso in lontananza"
 
 #: src/engine/options.cpp:140
 msgid "Camera Top"
@@ -792,11 +792,11 @@ msgstr "Movimento Indietro"
 
 #: src/engine/options.cpp:151
 msgid "Rotate Left"
-msgstr "Gira a Sinistra"
+msgstr "Ruota a sinistra"
 
 #: src/engine/options.cpp:152
 msgid "Rotate Right"
-msgstr "Gira a Destra"
+msgstr "Ruota a destra"
 
 #: src/engine/options.cpp:153
 msgid "Change Character"
@@ -938,7 +938,7 @@ msgstr "VistaLontana:"
 
 #: src/engine/options.cpp:1010
 msgid "Game"
-msgstr "Gioco"
+msgstr "Partita"
 
 #: src/engine/options.cpp:1016
 msgid "Language:"
@@ -1618,8 +1618,8 @@ msgid ""
 msgstr ""
 "Lo Studente di Medicina è così immerso nei suoi studi che spesso ha "
 "dimenticato di crescere, diventando molto suscettibile alle domande, "
-"ricevendo -3 su tutti i test di Non Sono un Folle (che scende a -6 quando il "
-"bersaglio è suo padre o sua madre)"
+"ricevendo -3 su tutti i test di Non Sono uno Scemo (che scende a -6 quando "
+"il bersaglio è suo padre o sua madre)"
 
 #: data/classes/medician.cls:15
 msgid ""
@@ -2289,7 +2289,7 @@ msgid ""
 "They receive +3 of Listen, Observe, Bluff and I am not a Fool tests when "
 "targeting Medical Students."
 msgstr ""
-"Ricevono +3 ai test di Ascoltare, Osservare, Bluff e Non Sono un Folle "
+"Ricevono +3 ai test di Ascoltare, Osservare, Bluff e Non Sono  uno Scemo "
 "quando il bersaglio è uno Studente di Medicina"
 
 #: data/classes/physiotherapy.cls:17
@@ -2378,7 +2378,7 @@ msgstr ""
 "Uno Studente di Ingegneria Meccanica soffre una penalità di -10 in ogni tipo "
 "di test contro qualcosa di sesso femminile. L'assenza totale di contatto con "
 "questo tipo di organismo causa una mal controllata frenesia nello studente, "
-"che deve fare un test di Non Sono un Folle (con penalità -10) per non "
+"che deve fare un test di Non Sono  uno Scemo (con penalità -10) per non "
 "saltare selvaggiamente sulla femmina. Se fallisce lo studente diventa "
 "istericamente agitato e proverà in tutti i modi di 'copulare' con lei."
 
@@ -2517,8 +2517,8 @@ msgstr ""
 
 #: data/races/autista.rca:6
 msgid ""
-"Being far too strange in someone else's eyes, the Strange Autistic receives "
-"-4 on all Social Tests when dealing with a target of opposite tendencies."
+"Being far too strange in someone else's eyes, the Strange Autistic receives -"
+"4 on all Social Tests when dealing with a target of opposite tendencies."
 msgstr ""
 "Essendo troppo strano agli occhi di chiunque, lo Strano Autistico riceve -4 "
 "su tutti i test Sociali quando il bersaglio è di tendenza opposta."
@@ -2885,8 +2885,8 @@ msgid ""
 msgstr ""
 "Il Taylorsmo degli Studenti di Amministrazione è alla sua massima efficacia "
 "dopo anni di corso. Lo studente diventa una aberrazione naturale, un bue "
-"bipede. Riceve +2 a Costituzione e Forza, +5 di Taylorismo, -2 in Carisma, "
-"-4 ad Intelligenza e a Non Sono un Folle. "
+"bipede. Riceve +2 a Costituzione e Forza, +5 di Taylorismo, -2 in Carisma, -"
+"4 ad Intelligenza e a Non Sono  uno Scemo. "
 
 #: data/feats/administration/esthetic_shock_i.fta:1
 msgid "Esthetic Shock I"
@@ -2901,7 +2901,7 @@ msgid ""
 msgstr ""
 "Al suo primo livello, lo Studente di Amministrazione può lanciare Shock "
 "Estetico una volta al giorno causando 1d4 danni se il bersaglio fallisce un "
-"test di Non Sono un Folle contro un tiro di Vestiti Bizzari."
+"test di Non Sono uno Scemo contro un tiro di Vestiti Bizzari."
 
 #: data/feats/administration/esthetic_shock_ii.fta:1
 msgid "Esthetic Shock II"
@@ -2994,7 +2994,7 @@ msgstr ""
 "Essendo adepti della Poesia Romantica di Seconda Generazione, i Gotici sono "
 "maestri nell'arte depressiva: possono mettere fine al giorno più felice. "
 "Usando un intero round la creatura Gotica fa un test di Bluff contro Non "
-"Sono un Folle del bersaglio. In caso di successo il bersaglio cadrà in "
+"Sono uno Scemo del bersaglio. In caso di successo il bersaglio cadrà in "
 "profonda depressione per ne prossime 24 ore, ricevendo -5 a tutti i test "
 "Sociali."
 
@@ -4780,8 +4780,133 @@ msgstr "Pesante"
 msgid "Santa Claws"
 msgstr "Santa Claws"
 
-#~ msgid "I am Bombadinho"
-#~ msgstr "Io sono Bombadinho"
+#~ msgid "Error while opening team file: %s\n"
+#~ msgstr "Errore mentre si sta tentando di aprire il file delle squadre: %s\n"
 
-#~ msgid "Not found in dialog: %d\n"
-#~ msgstr "Non trovato nel dialogo: %d\n"
+#~ msgid "This disk doesn't have more consecutive plays!"
+#~ msgstr "Questo giocatore non puo' essere toccato più volte!"
+
+#~ msgid "Remaining Touches: %d"
+#~ msgstr "Numero di Tocchi rimasti: %d"
+
+#~ msgid ""
+#~ "Xut is developed under GPL license: Feel free to use its source code and "
+#~ "data the way you want (or to blame us the same way). Xut is thankful to "
+#~ "the people who developed those libraries: OpenAL, Cal3D, OpenGL, SDL, "
+#~ "SDL_image, SDL_ttf, libVorbis."
+#~ msgstr ""
+#~ "Xut è sviluppato sotto lincenza GPL: Sentiti libero di usare il codice "
+#~ "sorgente e i dati nel modo che vuoi. Xut è grata alle persone che "
+#~ "sviluppano queste librerie: OpenAL, Cal3D, OpenGL, SDL, SDL_image, "
+#~ "SDL_ttf, libVorbis."
+
+#~ msgid "The Match Begins!"
+#~ msgstr "Si Parte!"
+
+#~ msgid "Invalid Goal!"
+#~ msgstr "Gol non valido!"
+
+#~ msgid "Foul!"
+#~ msgstr "Fallo!"
+
+#~ msgid "Throw in!"
+#~ msgstr "Rimessa laterale!"
+
+#~ msgid "Goal Kick"
+#~ msgstr "Rivio"
+
+#~ msgid "Corner Kick"
+#~ msgstr "Calcio d'angolo"
+
+#~ msgid "No remaining moves!"
+#~ msgstr "Non ti rimangono più mosse!"
+
+#~ msgid "Can't load mouse cursor: %s\n"
+#~ msgstr "Non posso caricare il cursore: %s\n"
+
+#~ msgid "Danish"
+#~ msgstr "Danese"
+
+#~ msgid "Couldn't load texture: %s\n"
+#~ msgstr "Non posso caricare le texture: %s\n"
+
+#~ msgid "Global Touches: %d"
+#~ msgstr "Tocchi totali: %d"
+
+#~ msgid "Turn:"
+#~ msgstr "Turno"
+
+#~ msgid "Graphics"
+#~ msgstr "Grafica"
+
+#~ msgid "Sound"
+#~ msgstr "Audio"
+
+#~ msgid "Keys"
+#~ msgstr "Tasti"
+
+#~ msgid "Language"
+#~ msgstr "Lingua"
+
+#~ msgid "Waiting for key..."
+#~ msgstr "Premi un tasto per continuare"
+
+#~ msgid "AntiAliasing"
+#~ msgstr "AntiAliasing"
+
+#~ msgid "Resolution"
+#~ msgstr "Risoluzione"
+
+#~ msgid "FullScreen"
+#~ msgstr "A Tutto Schermo"
+
+#~ msgid "Enabled"
+#~ msgstr "Abilitato"
+
+#~ msgid "Field Detail"
+#~ msgstr "Dettagli del campo"
+
+#~ msgid "Low"
+#~ msgstr "Bassa"
+
+#~ msgid "High"
+#~ msgstr "Alta"
+
+#~ msgid "Camera Type"
+#~ msgstr "Tipo di Camera"
+
+#~ msgid "Static"
+#~ msgstr "Statica"
+
+#~ msgid "Follow Ball"
+#~ msgstr "Segue il Pallone"
+
+#~ msgid "Sound Volume"
+#~ msgstr "Volume dell'Audio"
+
+#~ msgid "Camera Up"
+#~ msgstr "Camera dall'alto"
+
+#~ msgid "Camera Down"
+#~ msgstr "Camera dal basso"
+
+#~ msgid "Camera Left"
+#~ msgstr "Camera a sinistra"
+
+#~ msgid "Camera Right"
+#~ msgstr "Camera a destra"
+
+#~ msgid "Will Shoot"
+#~ msgstr "Sta per tirare.."
+
+#~ msgid "Replay"
+#~ msgstr "Replay"
+
+#~ msgid "Couldn't Load Team Logo Image: %s\n"
+#~ msgstr "Non posso caricare il logo della squadra: %s\n"
+
+#~ msgid "Select Team A"
+#~ msgstr "Seleziona la squadra A"
+
+#~ msgid "Select Team B"
+#~ msgstr "Seleziona la squadra B"
