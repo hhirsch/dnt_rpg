@@ -1838,6 +1838,12 @@ void engine::enterBattleMode(bool surprisePC)
   
 
   activeCharacter = PCs->getActiveCharacter();
+
+  /* Couldn't enter battle mode with a dead character */
+  if(!activeCharacter->isAlive())
+  {
+     return;
+  }
   
   /* clear fight status */
   fight->empty();

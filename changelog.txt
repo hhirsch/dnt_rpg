@@ -9,6 +9,7 @@
 - New mouse cursors;
 - Particles now can follow NPCs too;
 - Blood will follow character's head when needed;
+- Fixed a bug that let a dead PC enter the battle mode;
 
 ================================================
 |               Version 0.5.1                  |
