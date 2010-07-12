@@ -2936,7 +2936,7 @@ int engine::treatIO(SDL_Surface *screen)
                   "particles/effect1.par");
             if(effect)
             {
-               effect->setFollowPC(true);
+               effect->setFollowCharacter(activeCharacter,true);
             }
          }
          else
@@ -2990,6 +2990,22 @@ int engine::treatIO(SDL_Surface *screen)
                activeCharacter->xPosition,250,
                activeCharacter->zPosition,
                "particles/lightning1.par");
+      }
+      if( (keys[SDLK_o]) && 
+            ( (time-lastKeyb >= REFRESH_RATE) || 
+              (lastKey != SDLK_o) ) )
+      {
+         lastKey = SDLK_o;
+         lastKeyb = time;
+         part5* eff = (part5*)particleController.addParticle(
+               DNT_PARTICLE_TYPE_BLOOD,
+               activeCharacter->xPosition,0,
+               activeCharacter->zPosition,
+               "particles/blood1.par");
+         if(eff)
+         {
+            eff->setFollowCharacter(activeCharacter, true);
+         }
       }
 
       if( (keys[SDLK_0]) && 
@@ -3766,10 +3782,7 @@ void engine::renderNoShadowThings()
    if(option->getEnableParticles())
    {
       glPushMatrix();
-         particleController.updateAll(activeCharacter->xPosition,
-                                   activeCharacter->yPosition,
-                                   activeCharacter->zPosition, 
-                                   visibleMatrix, option->getEnableGrass());
+         particleController.updateAll(visibleMatrix, option->getEnableGrass());
       glPopMatrix();
    }
 

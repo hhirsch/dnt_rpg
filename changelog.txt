@@ -7,6 +7,8 @@
 - Render objects when equipped;
 - New logo;
 - New mouse cursors;
+- Particles now can follow NPCs too;
+- Blood will follow character's head when needed;
 
 ================================================
 |               Version 0.5.1                  |

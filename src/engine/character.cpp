@@ -1175,6 +1175,27 @@ character* characterList::getNextSameCharacter(character* ch)
 }
 
 /*********************************************************************
+ *                            isCharacterIn                          *
+ *********************************************************************/
+bool characterList::isCharacterIn(character* ch)
+{
+   character* c = (character*)first;
+   int i;
+
+   /* Search the list for it */
+   for(i = 0; i < total; i++)
+   {
+      if(c == ch)
+      {
+         return(true);
+      }
+      c = (character*)c->getNext();
+   }
+
+   return(false);
+}
+
+/*********************************************************************
  *                           setActiveCharacter                      *
  *********************************************************************/
 void characterList::setActiveCharacter(character* dude)

@@ -303,6 +303,11 @@ class characterList: public dntList
        * \param NPCs -> current NPCs list  */
       void treatGeneralScripts(Map* actualMap, characterList* NPCs);
 
+      /*! Verify if the character is in the list
+       * \paarm ch -> pointer to the character
+       * \return -> true if the character is in the list */
+      bool isCharacterIn(character* ch);
+
    protected:
 
       /*! Call the delete for a character

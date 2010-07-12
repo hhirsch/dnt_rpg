@@ -46,13 +46,9 @@ class partController
       void finish();
 
       /*! Update and Render all Active Systems
-       * \param PCposX -> position X of the PC.
-       * \param PCposY -> position Y of the PC
-       * \param PCposZ -> position Z of the PC.
        * \param matriz -> View Frustum Matrix.
        * \param enableGrass -> true if grass is enable. */
-      void updateAll(float PCposX, float PCposY, float PCposZ, 
-                     GLfloat** matriz, bool enableGrass);
+      void updateAll(GLfloat** matriz, bool enableGrass);
 
       /*! Add a Particle System to the System
        * \param type -> the type of the System (PART_BLOOD, PART_FIRE)

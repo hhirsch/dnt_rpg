@@ -21,6 +21,7 @@
 #include "partcontroller.h"
 #include "../etc/dirs.h"
 #include "../etc/extensions.h"
+#include "../engine/character.h"
 
 #include <fstream>
 #include <iostream>
@@ -70,20 +71,30 @@ void partController::deleteAllPCRelated()
 /**********************************************************************
  *                               updateAll                            *
  **********************************************************************/
-void partController::updateAll(float PCposX, float PCposY, float PCposZ, 
-                              GLfloat** matriz, bool enableGrass)
+void partController::updateAll(GLfloat** matriz, bool enableGrass)
 {
    int i, total;
    int time = SDL_GetTicks();
+   character* chr = NULL;
 
    particleSystem* part = (particleSystem*)particles->getFirst();
+
    total = particles->getTotal();
    for(i = 0; i < total; i++)
    {
-      /* Apply PC position change */
-      if(part->followPC)
+      chr = (character*)part->followCharacter;
+      /* Apply character "influence" position change */
+      if(chr != NULL)
       {
-         part->definePosition(PCposX, PCposZ);
+         if( (part->type == DNT_PARTICLE_TYPE_BLOOD) && 
+             (chr->head.vertexId != -1) )
+         {
+            part->definePosition(chr->head.x, chr->head.y, chr->head.z);
+         }
+         else
+         {
+            part->definePosition(chr->xPosition, chr->zPosition);
+         }
       }
 
       /* Do the next step */
@@ -101,7 +112,16 @@ void partController::updateAll(float PCposX, float PCposY, float PCposZ,
       {
          /* FIXME: wind! */
          grass* gr = (grass*)part;
-         gr->nextStep(matriz, PCposX, PCposY, PCposZ, NULL);
+
+         if(chr)
+         {
+            gr->nextStep(matriz, 
+                  chr->xPosition, chr->yPosition, chr->zPosition, NULL);
+         }
+         else
+         {
+            gr->nextStep(matriz, 0, 0, 0, NULL);
+         }
       }
 
       if( (part->type == DNT_PARTICLE_TYPE_FIRE) || 
@@ -250,7 +270,7 @@ void partController::stabilizeAll()
    for(i=0; i< PART_STABILIZE_LOOP;i++)
    {
       /* Actualize All, except the grass, whose isn't need to stabilize */
-      updateAll(0,0,0,matriz, false);
+      updateAll(matriz, false);
    }
 }
 

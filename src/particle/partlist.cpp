@@ -58,7 +58,7 @@ void particleList::removeNonPCs()
    {
       aux = part;
       part = (particleSystem*)part->next;
-      if(!aux->followPC)
+      if( (aux->followCharacter == NULL) || (!aux->followIsPC) )
       {
          removeSystem(aux);
       }
@@ -78,7 +78,7 @@ void particleList::removePCs()
    {
       aux = part;
       part = (particleSystem*)part->next;
-      if(aux->followPC)
+      if( (aux->followCharacter != NULL) && (aux->followIsPC))
       {
          removeSystem(aux);
       }

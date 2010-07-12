@@ -163,7 +163,8 @@ void particleSystem::init(int total, int mode)
       vertexArray = NULL;
       colorArray = NULL;
    }
-   followPC = false;
+   followCharacter = NULL;
+   followIsPC = false;
    windAffect = false;
 }
 
@@ -471,9 +472,10 @@ int particleSystem::numParticles()
 /***********************************************************
  *                      setFollowPC                        *
  ***********************************************************/
-void particleSystem::setFollowPC(bool follow)
+void particleSystem::setFollowCharacter(void* follow, bool isPC)
 {
-   followPC = follow;
+   followCharacter = follow;
+   followIsPC = isPC;
 }
 
 /***********************************************************

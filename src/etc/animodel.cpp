@@ -837,6 +837,7 @@ void aniModel::update(GLfloat pos)
    m_calModel->update(pos);
    updateKeyVertex(leftHand);
    updateKeyVertex(rightHand);
+   updateKeyVertex(head);
 }
 
 /*********************************************************************
@@ -926,6 +927,13 @@ void aniModel::defineKeyVertex()
    if((boneId == -1) || (!getInfluencedVertex(boneId, rightHand)))
    {
       rightHand.vertexId = -1;
+   }
+
+   /* Get head */
+   boneId = getBoneId("head");
+   if((boneId == -1) || (!getInfluencedVertex(boneId, head)))
+   {
+      head.vertexId = -1;
    }
 }
 

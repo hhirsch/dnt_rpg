@@ -25,6 +25,8 @@
 #include <stdio.h>
 #include <math.h>
 #include <SDL/SDL_image.h>
+#include <iostream>
+using namespace std;
 
 #define MAX_BLOOD_LIVING  1200 /**< Max Iterations that the blood continues */
 #define BLOOD_REMOVING     200 /**< Time for removing blood particles */
@@ -41,8 +43,8 @@ part5::part5(float cX,float cY,float cZ, string fileName):
 
    type = DNT_PARTICLE_TYPE_BLOOD;
    centerX = cX; 
-   alpha=cY; 
-   centerZ=cZ;
+   centerY = cY; 
+   centerZ = cZ;
    actualParticles = 0;
    terrainHeight = 0.0f;
    partTexture = loadTexture(dir.getRealFile("particles/part2.png"));
@@ -212,7 +214,7 @@ void part5::createParticle(particle* part)
    part->posX = (dMultCenter[0]*(rand() / ((double)RAND_MAX + 1))+dSumCenter[0])
                 + centerX;
    part->posY = (dMultCenter[1]*(rand() / ((double)RAND_MAX + 1))+dSumCenter[1])
-                + alpha + centerY;
+                + centerY;
    part->posZ = (dMultCenter[2]*(rand() / ((double)RAND_MAX + 1))+dSumCenter[2])
                 + centerZ;
    part->prvX = part->posX;

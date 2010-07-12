@@ -2050,7 +2050,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       ps = particles.addParticle(partType, posX, posY, posZ, partFile);
       if(ps != NULL)
       {
-         ps->setFollowPC(true);
+         ps->setFollowCharacter(c,eng->PCs->isCharacterIn(c));
          ps->setDurationTime(duration);
       }
    }

@@ -161,6 +161,10 @@ class aniModel:public thing
        * \return bone's ID or -1 if not found */
       int getBoneId(string bName);
 
+      vertexInfo leftHand;           /**< Base vertex at left hand */
+      vertexInfo rightHand;          /**< Base vextex at right hand */
+      vertexInfo head;               /**< Base vertex at head */
+
    protected:
       int m_state;                   /**< current animation state */
       CalCoreModel* m_calCoreModel;  /**< Cal3D Core Model of character */
@@ -177,9 +181,6 @@ class aniModel:public thing
       float curPos;                  /**< current time pos */
       string m_path;                 /**< Path to cal3D model */
       string modelFileName;          /**< Filename of the model */
-
-      vertexInfo leftHand;           /**< Base vertex at left hand */
-      vertexInfo rightHand;          /**< Base vextex at right hand */
 
       CalRenderer *pCalRenderer;     /**< Pointer to themodel renderer */
       static float meshVertices[30000][3]; /**< Model Vertices */

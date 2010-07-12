@@ -857,7 +857,7 @@ void editor::draw()
 
    /* Draw Particles */
    glPushMatrix();
-     particleSystem->updateAll(xReal,yReal,zReal,visibleMatrix, true);
+     particleSystem->updateAll(visibleMatrix, true);
    glPopMatrix();
    glDisable(GL_FOG);
 

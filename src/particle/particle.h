@@ -119,7 +119,7 @@ class particleSystem: public dntListElement
        * \param fileName -> name of file to save
        * \return -> true if can save the particle
        ***************************************************************/
-      bool save( string fileName);
+      bool save(string fileName);
 
       /*!
        ***************************************************************
@@ -223,9 +223,10 @@ class particleSystem: public dntListElement
       /*!
        *************************************************************** 
        * Set if the particleSystem will follow the PC or not
-       * \param follow -> true to follow pc, false to not follow  
+       * \param follow -> pointer to the character to follow
+       * \param isPC -> true if follow character is a PC
        ***************************************************************/
-      void setFollowPC(bool follow);
+      void setFollowCharacter(void* follow, bool isPC);
 
       /*!
        *************************************************************** 
@@ -247,7 +248,8 @@ class particleSystem: public dntListElement
 
       int actualParticles;     /**< Number of actual alive particles */
       int drawMode;            /**< DrawMode of the system */
-      bool followPC;           /**< If the orign of System Follows PC */
+      void* followCharacter;   /**< If the orign of System Follows a charactr */
+      bool followIsPC;         /**< If the follow character is a PC */
       bool windAffect;         /**< If Wind Affects the System */
 
       string strFileName;      /**< Name of the File */
