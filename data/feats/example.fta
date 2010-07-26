@@ -1,0 +1,21 @@
+# *.fta: Feat definition file
+
+# Title of the feat 
+# title = gettext("Feat Title")
+
+# Feat description
+# descripton = gettext("This is the feat's description")
+
+# Feat identifier
+# id = UNIQUE_STRING_ID
+
+# Feat's range (in dnters), if applyes
+# range = 6
+
+# Feats type ( FEAT_TYPE_PERMANENT for all "effects-type" feats 
+#              or FEAT_TYPE_ON_USE for "target-type" ones )
+# type = FEAT_TYPE_ON_USE
+
+# Feat script file (with the feat application in-fact)
+# script = feat_script.dsl
+
