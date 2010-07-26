@@ -27,6 +27,45 @@
 #include "../etc/defparser.h"
 #include <SDL/SDL_image.h>
 
+string dntFeatTypeName[] =
+{
+   "FEAT_TYPE_PERMANENT",
+   "FEAT_TYPE_ON_TARGET",
+   "FEAT_TYPE_ON_AREA"
+};
+
+/***********************************************************************
+ *                            ~depFeatList                             *
+ ***********************************************************************/
+depFeatList::~depFeatList()
+{
+   clearList();
+}
+
+/***********************************************************************
+ *                             freeElement                             *
+ ***********************************************************************/
+void depFeatList::freeElement(dntListElement* obj)
+{
+   delete((depFeat*)obj);
+};
+
+/***********************************************************************
+ *                          ~reqFactorList                             *
+ ***********************************************************************/
+reqFactorList::~reqFactorList()
+{
+   clearList();
+}
+
+/***********************************************************************
+ *                             freeElement                             *
+ ***********************************************************************/
+void reqFactorList::freeElement(dntListElement* obj)
+{
+   delete((reqFactor*)obj);
+};
+
 /**************************************************************************
  *                            FEAT_DESCRIPTION                            *
  **************************************************************************/
@@ -36,27 +75,16 @@
  ***************************************************************/
 featDescription::featDescription()
 {
-   int i;
-
    internalListNumber = 0;
-   requeridedLevel = 0;
    quantityPerDay = 0;
    aditionalQuantity = 0;
-   aditionalLevels = 0;
-   costToUse = 0;
-   actionType = ACT_TYPE_NORMAL_ACTION;
-   action = ACT_ATTACK;
+   aditionalLevel = 0;
+   type = 0;
    range = 0;
    name = "undefined";
    idString = "unknow";
    description = "undefined";
    image = NULL;
-   effects = new modEffectList();
-
-   for(i = 0; i < MAX_DEP_FEATS; i++)
-   {
-      depFeats[i].used = false;
-   }      
 }
 
 /***************************************************************
@@ -64,7 +92,6 @@ featDescription::featDescription()
  ***************************************************************/
 featDescription::~featDescription()
 {
-   delete(effects);
 }
 
 /**************************************************************************
@@ -142,9 +169,7 @@ bool feats::insertFeat(featDescription* featInsert)
    {
       m_feats[totalFeats].info = featInsert;
       m_feats[totalFeats].range = featInsert->range;
-      m_feats[totalFeats].costToUse = featInsert->costToUse;
       m_feats[totalFeats].actualQuantity = featInsert->quantityPerDay;
-      m_feats[totalFeats].diceInfo = featInsert->diceInfo;
       totalFeats++;
       return(true);
    }
@@ -194,9 +219,8 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
    }
 
    /* Verify if have the feat points to use it */
-   if( (m_feats[featNumber].actualQuantity >= 
-        m_feats[featNumber].costToUse) ||
-       (m_feats[featNumber].costToUse) == 0 )
+   if( (m_feats[featNumber].actualQuantity > 0) ||
+       (featNumber == FEAT_MELEE_ATTACK) )
    {
       /* Show feature name */
       sprintf(texto,"%s ",m_feats[featNumber].info->name.c_str());
@@ -313,8 +337,7 @@ int feats::getRandomNPCAttackFeat(thing* pers, thing* target)
 
       if( (ft != FEAT_RANGED_ATTACK) && (ft != FEAT_MELEE_ATTACK) &&
           (m_feats[ft].info->action == ACT_ATTACK)  && 
-          ( (m_feats[ft].actualQuantity >= m_feats[ft].costToUse)
-          || (m_feats[ft].costToUse) == 0 ))
+          (m_feats[ft].actualQuantity > 0) )
       {
           /* is avaible */
           return(ft);
@@ -371,8 +394,7 @@ int feats::getPowerfullAttackFeat(thing* pers, thing* target)
       if( (i != ft) && (i != FEAT_RANGED_ATTACK) && 
           (i != FEAT_MELEE_ATTACK) && 
           (m_feats[i].info->action == ACT_ATTACK) && 
-          ( (m_feats[i].actualQuantity >= m_feats[i].costToUse)
-          || (m_feats[i].costToUse) == 0 ))
+          (m_feats[i].actualQuantity > 0) )
       {
          /* verify if is powerfull */
          tmpPower = m_feats[i].diceInfo.baseDice.getType() * 
@@ -402,10 +424,9 @@ int feats::getFirstHealFeat(thing* pers)
       /* Run over all feats searching for a heal one */
       for(i = 0; i < totalFeats; i++)
       {
-         /* Verify if is an attack feat and is avaible */
+         /* Verify if is an heal feat and is avaible */
          if( (m_feats[i].info->action == ACT_HEAL) && 
-             ( (m_feats[i].actualQuantity >= m_feats[i].costToUse)
-             || (m_feats[i].costToUse) == 0 ))
+             (m_feats[i].actualQuantity > 0))
          {
             return(i);
          }
@@ -428,8 +449,7 @@ int feats::getRandomHealFeat(thing* pers)
       ft = (int)(totalFeats*(rand() / (RAND_MAX + 1.0)));
 
       if( (m_feats[ft].info->action == ACT_HEAL)  && 
-          ( (m_feats[ft].actualQuantity >= m_feats[ft].costToUse)
-          || (m_feats[ft].costToUse) == 0 ))
+          (m_feats[ft].actualQuantity > 0))
       {
           /* is avaible */
           return(ft);
@@ -456,10 +476,9 @@ int feats::getPowerfullHealFeat(thing* pers)
       /* Run over all feats searching for a powerfull heal one */
       for(i = 0; i < totalFeats; i++)
       {
-         /* Verify if is an attack feat and is avaible */
+         /* Verify if is an heal feat and is available */
          if( (i != ft) && (m_feats[i].info->action == ACT_HEAL) && 
-             ( (m_feats[i].actualQuantity >= m_feats[i].costToUse)
-             || (m_feats[i].costToUse) == 0 ))
+             (m_feats[i].actualQuantity > 0))
          {
             /* Verify if is powerfull */
             tmpPower = m_feats[i].diceInfo.baseDice.getType() * 
@@ -578,12 +597,10 @@ void feats::defineWeapon(weapon* w)
    if( (w != NULL) && (w->getMunitionType()->index != 0) )
    {
       m_feats[inUse].actualQuantity = w->getCurrentMunition();
-      m_feats[inUse].costToUse = 1;
    }
    else
    {
       m_feats[inUse].actualQuantity = 0;
-      m_feats[inUse].costToUse = 0;
    }
 }
 

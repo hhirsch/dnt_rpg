@@ -14,8 +14,9 @@
 # id = UNIQUE_STRING_ID
 
 # Feats type ( FEAT_TYPE_PERMANENT for all "effects-type" feats 
-#              or FEAT_TYPE_ON_USE for "target-type" ones )
-# type = FEAT_TYPE_ON_USE
+#              or FEAT_TYPE_ON_TARGET for "target-type" feats
+#              or FEAT_TYPE_ON_AREA for "area-target" ones)
+# type = FEAT_TYPE_ON_TARGET
 
 # Feat icon (image representing the feat)
 # icon = feat_icon.png

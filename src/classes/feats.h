@@ -32,12 +32,19 @@ using namespace std;
 #include "weapon.h"
 
 #include "../etc/message3d.h"
+#include "../etc/list.h"
 #include "../engine/briefing.h"
 #include "../lang/translate.h"
 
 #define MAX_FEATS          30 /**< Max number of Feats per Character */
-#define MAX_DEP_FEATS       5 /**< Max number of cost this, cost that feats */
-#define MAX_FEAT_EFFECTS   10 /**< Max number of effects per feats */
+
+enum
+{
+   FEAT_TYPE_PERMANENT=0,  /**< Permanent feat (infinite modEffect type) */
+   FEAT_TYPE_ON_TARGET,    /**< Use-on-target feat */
+   FEAT_TYPE_ON_AREA       /**< Use-on-area feat */
+};
+
 
 #define FEAT_MELEE_ATTACK   0 /**< Melee Attack */
 #define FEAT_RANGED_ATTACK  1 /**< Ranged Attack */
@@ -48,20 +55,47 @@ using namespace std;
  *  when use actual feat. \par
  * For Example, when use \e ameivasII you'll can do -2 \e ameivaI. (1/2 reason).
  *************************************************************************/
-class depFeat
+class depFeat: public dntListElement
 {
    public:
       float  reason;       /**< Dependence Reason (1/1, 1/2, 1/3, 2/1, etc) */
       string featIDString; /**< ID String of the Feat */
-      bool   used;         /**< Dependence used or not? */
+};
+/*! The dependence feat list (depFeat) */
+class depFeatList: public dntList
+{
+   public:
+       /*! Destructor */
+       ~depFeatList();
+   protected:
+      /*! Free Element
+       * \param obj -> pointer to the depFeat to delete */
+      void freeElement(dntListElement* obj);
+      
+};
+/*! Required factor */
+class reqFactor: public dntListElement
+{
+   public:
+      factor requiredFactor;  /**< Factor required */
+      int requiredLevel;      /**< Factor level required */
+};
+/*! The required factor list (reqFactor) */
+class reqFactorList: public dntList
+{
+   public:
+       /*! Destructor */
+       ~reqFactorList();
+   protected:
+      /*! Free Element
+       * \param obj -> pointer to the depFeat to delete */
+      void freeElement(dntListElement* obj);
+      
 };
 
 /*!
  ******************************************************************************
- * This is a definition based on an attack feature. If the feature is
- * an aditional concept feature, the numbers in quantityPerDay, 
- * aditionalQuantity and aditionalLevels refers to, respectively, the concepts
- * described on conceptBonus, conceptAgainst and conceptTarget.               
+ * The feature definitions
  ******************************************************************************/
 class featDescription
 {
@@ -71,26 +105,25 @@ class featDescription
       /*! Destructor */
       ~featDescription();
 
-      int internalListNumber;      /**< Number on List */
-      int requeridedLevel;         /**< Requerided Character class level */
-      factor requeridedFactor;     /**< Requerided Factor (class, race, etc) */
-      int quantityPerDay;          /**< Quantity avaible to use per day*/
-      int aditionalQuantity;       /**< Quantity Added per AditionalLevel */
-      int aditionalLevels;         /**< Number of Levels to AditionalQuantity */
-      int costToUse;               /**< Cost, in PP to use the feat */
-      int actionType;              /**< Action Type of the feat */
-      int action;                  /**< Defined Action of the feat */
-      int range;                   /**< Range action of the feat */
-      factor conceptBonus;         /**< The concept that bonus the feat */
-      factor conceptAgainst;       /**< Define the concept against the feat */
-      factor conceptTarget;        /**< Define the valid target of feat */
-      diceThing diceInfo;          /**< Defined Dice*/
+      int type;                    /**< Feature type constant */
+
       string name;                 /**< Feat Name */
       string idString;             /**< Feat ID String */
-      string description;             /**< Feat Description */
-      depFeat depFeats[MAX_DEP_FEATS];/**< Feat Dependency */
+      string description;          /**< Feat Description */
+
+      int internalListNumber;      /**< Number on List */
+      reqFactorList reqFactors;    /**< List of required factors */
       
-      modEffectList* effects;      /**< List of effects */
+      int quantityPerDay;          /**< Quantity avaible to use per day*/
+      int aditionalQuantity;       /**< Quantity Added per AditionalLevel */
+      int aditionalLevel;          /**< Number of Levels to AditionalQuantity */
+      int aditionalDiv;            /**< The division factor */
+      factor aditionalFactor;      /**< The factor that will allows aditional */
+
+      int range;                   /**< Range action of the feat */
+
+      depFeatList depFeats;        /**< Feat Dependency */
+      
       SDL_Surface* image;          /**< Feat Image */
 };
 
@@ -106,7 +139,6 @@ class feat
       featDescription* info;       /**< The feat info */
       float actualQuantity;        /**< Actual quantity to use */
       float range;                 /**< Actual Range */
-      int costToUse;               /**< Cost, in PP to use the feat */
       diceThing diceInfo;          /**< Defined Dice*/
 };
 
