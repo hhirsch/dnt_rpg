@@ -7,4 +7,5 @@ bonus = ATTRIBUTE STRENGTH
 
 range = 60
 
-affect = ALL ALL
+type = FEAT_TYPE_ON_USE
+

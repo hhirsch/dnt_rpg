@@ -1,5 +1,9 @@
 # *.fta: Feat definition file
 
+##########################################################################
+#                            Titles and IDs                              #
+##########################################################################
+
 # Title of the feat 
 # title = gettext("Feat Title")
 
@@ -9,12 +13,41 @@
 # Feat identifier
 # id = UNIQUE_STRING_ID
 
-# Feat's range (in dnters), if applyes
-# range = 6
-
 # Feats type ( FEAT_TYPE_PERMANENT for all "effects-type" feats 
 #              or FEAT_TYPE_ON_USE for "target-type" ones )
 # type = FEAT_TYPE_ON_USE
+
+# Feat icon (image representing the feat)
+# icon = feat_icon.png
+
+##########################################################################
+#                            Pre-requisites                              #
+##########################################################################
+
+# Use as many pre-requisites as you like, in a list of
+# required = TYPE TYPE_ID LEVEL
+#
+# for example:
+# 
+# required = CLASS PHISICAL_EDUCATION 15
+# required = ATTRIBUTE STRENGHT 14
+
+##########################################################################
+#                           General Infos                                #
+##########################################################################
+
+# Feat's range (in dnters), if applyes
+# range = 60
+
+# Feat quantity per day
+# quantity = 10
+
+# Feat aditional quantity
+# aditionalQuantity = CLASS_ID CLASS_BASE_LEVEL DIV_FACTOR
+#
+# for example, 1 aditional each 2 levels beyond 15 on PHYSICAL EDUCATION
+# aditionalQuantity = PHYSICAL_EDUCATION 15 2
+#
 
 # Feat script file (with the feat application in-fact)
 # script = feat_script.dsl
