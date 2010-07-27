@@ -1397,7 +1397,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          }
          else if(functionName == IA_FEAT_COST)
          {
-            i = ft->costToUse;
+            i = ft->info->costToUse;
          }
          else if(functionName == IA_FEAT_QUANTITY_PER_DAY)
          {
@@ -1488,18 +1488,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          {
             if( (characterOwner) && (characterOwner->getCanAttack()) )
             {
-               /* Verify if at range */
-               if(actionInRange(characterOwner->xPosition, 
-                                characterOwner->zPosition,  
-                                dude->xPosition, dude->zPosition,
-                                characterOwner->getActiveFeatRange() * 
-                                METER_TO_DNT))
-               {
-                  //TODO verify if is an attack and break before call!
-                  characterOwner->actualFeats.applyAttackAndBreakFeat(
-                                                           *characterOwner,
+               characterOwner->actualFeats.useFeatAtTarget(*characterOwner,
                                                            featId, dude);
-               }
             }
          }
       }

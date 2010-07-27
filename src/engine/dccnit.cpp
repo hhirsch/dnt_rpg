@@ -1868,7 +1868,6 @@ void engine::enterBattleMode(bool surprisePC)
             curGroup++;
             fight->insertNPC(ch, curGroup);
          }
-         ch->defineWeapon();
          numEnemies++;
          /* Set the state to Idle, if the character is alive */
          ch->callIdleAnimation();
@@ -1893,7 +1892,6 @@ void engine::enterBattleMode(bool surprisePC)
       for(i = 0; i < PCs->getTotal(); i++)
       {
          fight->insertPC(ch, 0);
-         ch->defineWeapon();
          /* Set the state to Idle */
          ch->callIdleAnimation();
          /* Remove Move, if it is moving */
@@ -1917,7 +1915,6 @@ void engine::enterBattleMode(bool surprisePC)
       {
          fightStatus = FIGHT_CONTINUE;
       }
-      attackFeat = activeCharacter->getActiveFeatRangeType();
 
       /* Abort All pending Actions */
       actionControl->abortAllActions();
@@ -2084,9 +2081,6 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
                                          PCs->getActiveCharacter()->zPosition); 
          if(act > INVENTORY_ACTION_INTERNAL)
          {
-            /* Redefine, if need, the weapons */
-            PCs->getActiveCharacter()->defineWeapon();
-
             /* Menu Use count as an action */
             PCs->getActiveCharacter()->setCanAttack(false);
 
@@ -2572,10 +2566,9 @@ int engine::verifyMouseActions(Uint8 mButton)
                              pers->name.c_str());
                      brief->addText(buf);
                      activeCharacter->setCanAttack(
-                                             !activeCharacter->actualFeats.
-                                                   applyAttackAndBreakFeat(
-                                                          *activeCharacter,
-                                                          attackFeat, pers));
+                        !activeCharacter->actualFeats.useFeatAtTarget(
+                           *activeCharacter, 
+                           activeCharacter->getActiveFeat(), pers));
 
                      fight->verifyDeads();
 
@@ -4298,7 +4291,6 @@ int engine::run(SDL_Surface *surface, bool commingBack)
                {
                   PCs->setActiveCharacter(fight->actualCharacterTurn());
                   activeCharacter = PCs->getActiveCharacter();
-                  attackFeat = activeCharacter->getActiveFeatRangeType();
 
                   moveCircleX = activeCharacter->xPosition;
                   moveCircleY = activeCharacter->yPosition;

@@ -79,8 +79,11 @@ featDescription::featDescription()
    quantityPerDay = 0;
    aditionalQuantity = 0;
    aditionalLevel = 0;
+   costToUse = 0;
+   powerLevel = 0;
    type = 0;
    range = 0;
+   scriptFile = "";
    name = "undefined";
    idString = "unknow";
    description = "undefined";
@@ -92,6 +95,11 @@ featDescription::featDescription()
  ***************************************************************/
 featDescription::~featDescription()
 {
+   /* Clear the image */
+   if(image != NULL)
+   {
+      SDL_FreeSurface(image);
+   }
 }
 
 /**************************************************************************
@@ -104,24 +112,6 @@ featDescription::~featDescription()
 feats::feats()
 {
    totalFeats = 0;
-   currentWeapon = NULL;
-   bareHandsDice.baseDice.setType(DICE_D2);
-   bareHandsDice.baseDice.setNumberOfDices(1);
-   bareHandsDice.baseDice.setSumNumber(0);
-   bareHandsDice.baseDice.setCriticalMultiplier(1);
-   bareHandsDice.initialLevel = 1;
-}
-
-/***************************************************************
- *                      setBareHandsDamage                     *
- ***************************************************************/
-void feats::setBareHandsDamage(int dices, int diceId, int sum, int crit)
-{
-   bareHandsDice.baseDice.setType(diceId);
-   bareHandsDice.baseDice.setNumberOfDices(dices);
-   bareHandsDice.baseDice.setSumNumber(sum);
-   bareHandsDice.baseDice.setCriticalMultiplier(crit);
-   bareHandsDice.initialLevel = 1;
 }
 
 /***************************************************************
@@ -168,7 +158,6 @@ bool feats::insertFeat(featDescription* featInsert)
    if( (totalFeats < MAX_FEATS) && (featInsert != NULL) )
    {
       m_feats[totalFeats].info = featInsert;
-      m_feats[totalFeats].range = featInsert->range;
       m_feats[totalFeats].actualQuantity = featInsert->quantityPerDay;
       totalFeats++;
       return(true);
@@ -183,18 +172,52 @@ void feats::useFeat(int featNumber)
 {
    int i;
    feat* ft;
-   m_feats[featNumber].actualQuantity--;
-   for(i=0;i<MAX_DEP_FEATS;i++)
+   depFeat* dft;
+   
+   /* Apply Cost */
+   if(m_feats[featNumber].info->costToUse > 0)
    {
-       if(m_feats[featNumber].info->depFeats[i].used)
-       {
-          ft = featByString(m_feats[featNumber].info->depFeats[i].featIDString);
-          ft->actualQuantity -= 1.0 / 
-                                m_feats[featNumber].info->depFeats[i].reason;
-       }
+      /* Decrement its avaiable quantity */
+      m_feats[featNumber].actualQuantity -= m_feats[featNumber].info->costToUse;
+
+      /* Decrement avaiable quantity of dependent feats */
+      dft = (depFeat*)m_feats[featNumber].info->depFeats.getFirst();
+
+      for(i=0; i < m_feats[featNumber].info->depFeats.getTotal(); i++)
+      {
+         ft = featByString(dft->featId);
+         ft->actualQuantity -= m_feats[featNumber].info->costToUse / 
+                               dft->reason;
+
+         /* next dependency */
+         dft = (depFeat*)dft->getNext();
+      }
    }
 }
 
+/***************************************************************
+ *                       useFeatAtTarget                       *
+ ***************************************************************/
+bool feats::useFeatAtTarget(thing& actor, int featNumber, thing* target)
+{
+}
+
+/***************************************************************
+ *                       useFeatAtArea                         *
+ ***************************************************************/
+bool feats::useFeatAtArea(thing& actor, int featNumber, 
+             float x, float y, float z)
+{
+}
+
+/***************************************************************
+ *                      applyPermanentFeat                     *
+ ***************************************************************/
+bool feats::applyPermanentFeat(thing* actor, int featNumber)
+{
+}
+
+#if 0
 /***************************************************************
  *                   applyHealOrAttackFeat                     *
  ***************************************************************/
@@ -269,45 +292,7 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
    }
    return(false);
 }
-
-/***************************************************************
- *                   applyHealAndFixFeat                       *
- ***************************************************************/
-bool feats::applyHealAndFixFeat(thing& attacker, int featNumber, 
-                                thing* target)
-{
-   return(applyHealOrAttackFeat(attacker, featNumber, target, true));
-}
-
-/***************************************************************
- *                     applyPsychoFeat                         *
- ***************************************************************/
-bool feats::applyPsychoFeat(thing& attacker, int featNumber, 
-                            thing* target)
-{
-   //TODO
-   return(false);
-}
-
-/***************************************************************
- *                   applyInvocationFeat                       *
- ***************************************************************/
-bool feats::applyInvocationFeat(thing& attacker, int featNumber, 
-                                thing* target)
-{
-   //TODO
-   return(false);
-}
-
-
-/***************************************************************
- *                 applyAttackAndBreakFeat                     *
- ***************************************************************/
-bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber, 
-                                    thing* target)
-{
-   return(applyHealOrAttackFeat(attacker, featNumber, target, false));
-}
+#endif
 
 /***************************************************************
  *                         New Day                             *
@@ -335,24 +320,17 @@ int feats::getRandomNPCAttackFeat(thing* pers, thing* target)
 
       //FIXME verify if the feat is in range to use!
 
-      if( (ft != FEAT_RANGED_ATTACK) && (ft != FEAT_MELEE_ATTACK) &&
+      if( (ft != FEAT_WEAPON_ATTACK) &&
           (m_feats[ft].info->action == ACT_ATTACK)  && 
-          (m_feats[ft].actualQuantity > 0) )
+          (m_feats[ft].actualQuantity - m_feats[ft].info->costToUse >= 0) )
       {
           /* is avaible */
           return(ft);
       }
       else
       {
-          /* otherwise, use base attack (melee or ranged) */
-          if(m_feats[FEAT_RANGED_ATTACK].diceInfo.initialLevel == 0)
-          {
-              return(FEAT_MELEE_ATTACK);
-          }
-          else
-          {
-             return(FEAT_RANGED_ATTACK);
-          }
+          /* otherwise, use base weapon attack (melee or ranged) */
+         return(FEAT_WEAPON_ATTACK);
       }
    }
    
@@ -366,45 +344,28 @@ int feats::getPowerfullAttackFeat(thing* pers, thing* target)
 {
    int ft = -1;
    int power = 0;
-   int tmpPower = 0;
    int i;
 
    /* FIXME test range of the feats! */
 
-   /* FIXME calculate the power with the level of the user and the
-    * aditional levels dices! */
-
    /* Take the initial feat */
-   if(m_feats[FEAT_RANGED_ATTACK].diceInfo.initialLevel == 0)
-   {
-      ft = FEAT_MELEE_ATTACK;
-   }
-   else
-   {
-      ft = FEAT_RANGED_ATTACK;
-   }
-   power = m_feats[ft].diceInfo.baseDice.getType() * 
-           m_feats[ft].diceInfo.baseDice.getNumberOfDices() +
-           m_feats[ft].diceInfo.baseDice.getSumNumber();
+   ft = FEAT_WEAPON_ATTACK;
+   power = m_feats[ft].info->powerLevel;
 
    /* Run over all feats searching for a powerfull one */
    for(i = 0; i < totalFeats; i++)
    {
       /* Verify if is an attack feat and is avaible */
-      if( (i != ft) && (i != FEAT_RANGED_ATTACK) && 
-          (i != FEAT_MELEE_ATTACK) && 
+      if( (i != ft) && (i != FEAT_WEAPON_ATTACK) && 
           (m_feats[i].info->action == ACT_ATTACK) && 
-          (m_feats[i].actualQuantity > 0) )
+          (m_feats[i].actualQuantity - m_feats[i].info->costToUse >= 0) )
       {
          /* verify if is powerfull */
-         tmpPower = m_feats[i].diceInfo.baseDice.getType() * 
-                    m_feats[i].diceInfo.baseDice.getNumberOfDices() +
-                    m_feats[i].diceInfo.baseDice.getSumNumber();
-         if(tmpPower > power)
+         if(m_feats[i].info->powerLevel > power)
          {
             /* Is powerfull, take the feat */
             ft = i;
-            power = tmpPower;
+            power = m_feats[i].info->powerLevel;
          }
       }
    }
@@ -424,9 +385,9 @@ int feats::getFirstHealFeat(thing* pers)
       /* Run over all feats searching for a heal one */
       for(i = 0; i < totalFeats; i++)
       {
-         /* Verify if is an heal feat and is avaible */
+         /* Verify if is an heal feat and is available */
          if( (m_feats[i].info->action == ACT_HEAL) && 
-             (m_feats[i].actualQuantity > 0))
+             (m_feats[i].actualQuantity-m_feats[i].info->costToUse >= 0))
          {
             return(i);
          }
@@ -449,7 +410,7 @@ int feats::getRandomHealFeat(thing* pers)
       ft = (int)(totalFeats*(rand() / (RAND_MAX + 1.0)));
 
       if( (m_feats[ft].info->action == ACT_HEAL)  && 
-          (m_feats[ft].actualQuantity > 0))
+          (m_feats[ft].actualQuantity-m_feats[ft].info->costToUse >= 0))
       {
           /* is avaible */
           return(ft);
@@ -468,25 +429,16 @@ int feats::getPowerfullHealFeat(thing* pers)
 
    if( (pers) && (ft != -1) )
    {
-      int tmpPower = 0;
-      int power = m_feats[ft].diceInfo.baseDice.getType() * 
-                  m_feats[ft].diceInfo.baseDice.getNumberOfDices() +
-                  m_feats[ft].diceInfo.baseDice.getSumNumber();
-
       /* Run over all feats searching for a powerfull heal one */
       for(i = 0; i < totalFeats; i++)
       {
          /* Verify if is an heal feat and is available */
          if( (i != ft) && (m_feats[i].info->action == ACT_HEAL) && 
-             (m_feats[i].actualQuantity > 0))
+             (m_feats[i].actualQuantity - m_feats[i].info->costToUse >= 0))
          {
             /* Verify if is powerfull */
-            tmpPower = m_feats[i].diceInfo.baseDice.getType() * 
-                       m_feats[i].diceInfo.baseDice.getNumberOfDices() +
-                       m_feats[i].diceInfo.baseDice.getSumNumber();
-            if(tmpPower > power)
+            if(m_feats[i].info->powerLevel > m_feats[ft].info->powerLevel)
             {
-               power = tmpPower;
                ft = i;
             }
          }
@@ -494,114 +446,6 @@ int feats::getPowerfullHealFeat(thing* pers)
    }
 
    return(ft);
-}
-
-/***************************************************************
- *                   getAttackFeatRangeType                    *
- ***************************************************************/
-int feats::getAttackFeatRangeType()
-{
-   if(m_feats[FEAT_RANGED_ATTACK].diceInfo.initialLevel == 0)
-   {
-      return(FEAT_MELEE_ATTACK);
-   }
-   return(FEAT_RANGED_ATTACK);
-}
-
-/***************************************************************
- *                     getAttackFeatRange                      *
- ***************************************************************/
-int feats::getAttackFeatRange()
-{
-   int value =  m_feats[FEAT_RANGED_ATTACK].range;
-   if(m_feats[FEAT_RANGED_ATTACK].diceInfo.initialLevel == 0)
-   {
-      value = m_feats[FEAT_MELEE_ATTACK].range;
-   }
-   return(value);
-}
-
-/***************************************************************
- *                     flushCurrentMunition                    *
- ***************************************************************/
-void feats::flushCurrentMunition()
-{
-   if(currentWeapon)
-   {
-      /* Get the actual quantity for its type */
-      if(currentWeapon->getRangeType()->index == FEAT_MELEE_ATTACK)
-      {
-         currentWeapon->setCurrentMunition( 
-                                     m_feats[FEAT_MELEE_ATTACK].actualQuantity);
-      }
-      else
-      {
-         currentWeapon->setCurrentMunition( 
-                                    m_feats[FEAT_RANGED_ATTACK].actualQuantity);
-      }
-   }
-}
-
-/***************************************************************
- *                      getCurrentWeapon                       *
- ***************************************************************/
-weapon* feats::getCurrentWeapon()
-{
-   return(currentWeapon);
-}
-
-/***************************************************************
- *                         defineWeapon                        *
- ***************************************************************/
-void feats::defineWeapon(weapon* w)
-{ 
-   int inUse=0, noUse=0;
-
-   /* Must update the current weapon ammo value */
-   if(currentWeapon != w)
-   {
-      flushCurrentMunition();
-      currentWeapon = w;
-   }
-
-   /* Define if is using a Melee or Ranged Weapon */
-   if( (w == NULL) || (w->getRangeType()->index == FEAT_MELEE_ATTACK) )
-   {
-      inUse = FEAT_MELEE_ATTACK;
-      noUse = FEAT_RANGED_ATTACK;
-   }
-   else
-   {
-      inUse = FEAT_RANGED_ATTACK;
-      noUse = FEAT_MELEE_ATTACK;
-   }
-
-   /* Disable "noUse" Attacks */
-   m_feats[noUse].diceInfo.initialLevel = 0;
-   m_feats[noUse].range = 0;
-
-   /* Enable "inUse" Attacks */
-   if(w != NULL)
-   {
-      m_feats[inUse].diceInfo = w->getDice();
-      m_feats[inUse].range = w->getRange();      
-   }
-   else
-   {
-      /* Using bare hands */
-      m_feats[inUse].diceInfo = bareHandsDice;
-      m_feats[inUse].range = (int)(WALK_PER_MOVE_ACTION * DNT_TO_METER);
-   }
-
-   /* If Ammo not None, must use it */
-   if( (w != NULL) && (w->getMunitionType()->index != 0) )
-   {
-      m_feats[inUse].actualQuantity = w->getCurrentMunition();
-   }
-   else
-   {
-      m_feats[inUse].actualQuantity = 0;
-   }
 }
 
 /**************************************************************************
@@ -616,9 +460,9 @@ void featsList::init(string dir, string arq)
    dirs dirInfo;
    ifstream file;
    string arqDescricao;
-   string arqImagem;
    char buf2[256];
    char buf3[256];
+   reqFactor* req;
    string strBuffer;
    int aux;
 
@@ -643,19 +487,14 @@ void featsList::init(string dir, string arq)
 
    /* Temp variables */
    string key="", value="";
-   int numberOfDices=0, diceID=0, sumNumber=0;
-   int curDepFeat=0;
 
    /* Get all Feats from file */
    for(aux = 0; aux < totalFeats; aux++)
    {
       getline(file, strBuffer);
-      sscanf(strBuffer.c_str(),"%s %s",&buf2[0],&buf3[0]);
-      arqImagem = buf3;
+      sscanf(strBuffer.c_str(),"%s",&buf2[0]);
       arqDescricao = buf2;
       arqDescricao = dir+arqDescricao;
-
-      curDepFeat = 0;
 
       /* Open the feat's description file */
       defParser desc;
@@ -686,118 +525,76 @@ void featsList::init(string dir, string arq)
          {
             m_feats[aux].idString = value;
          }
+         /* Action */
+         else if(key == "action")
+         {
+            m_feats[aux].action = numberAction(value);
+         }
+         /* Icon */
+         else if(key == "icon")
+         {
+            m_feats[aux].image = IMG_Load(dirInfo.getRealFile(value).c_str());
+         }
+
+         /* Power Level */
+         else if(key == "powerLevel")
+         {
+            sscanf(value.c_str(), "%d", &m_feats[aux].powerLevel);
+         }
 
          /* Pre-Requistes */
          else if(key == "requerided")
          {
-            /* Requerided factor  */
-            sscanf(value.c_str(), "%s %s", &buf2[0], &buf3[0]);
-            m_feats[aux].requeridedFactor.type = buf2;
-            m_feats[aux].requeridedFactor.id = buf3;
+            req = new(reqFactor);
+            sscanf(value.c_str(), "%s %s %d", 
+                  &buf2[0], &buf3[0], &req->requiredLevel);
+            req->requiredFactor.type = buf2;
+            req->requiredFactor.id = buf3;
+            m_feats[aux].reqFactors.insertAtEnd(req);
          }
-         else if(key == "reqValue")
-         {
-            /* requerided value (level) */
-            sscanf(value.c_str(),"%d",&m_feats[aux].requeridedLevel);
-         }
+
+         /* Range */
          else if(key == "range")
          {
-            /* Feat Range */
             sscanf(value.c_str(),"%d",&m_feats[aux].range);
          }
 
-         /* Action definition */
-         else if(key == "actionType")
+         /* Cost To Use */
+         else if(key == "costToUse")
          {
-            /* Action Type */
-            m_feats[aux].actionType = numberActionType(value);
-         }
-         else if(key == "action")
-         {
-            /* Action */
-            m_feats[aux].action = numberAction(value);
+            sscanf(value.c_str(), "%d", &m_feats[aux].costToUse);
          }
 
-         /* Concept Bonus */
-         else if(key == "bonus")
+         /* Quantity Per Day */
+         else if( (key == "quantityPerDay") || (key == "quantity") )
          {
-            sscanf(value.c_str(), "%s %s", &buf2[0], &buf3[0]);
-            m_feats[aux].conceptBonus.type = buf2;
-            m_feats[aux].conceptBonus.id = buf3;
-         }
-
-         /* Concept Target */
-         else if(key == "affect")
-         {
-            /* Affect */
-            sscanf(value.c_str(), "%s %s", &buf2[0], &buf3[0]);
-            m_feats[aux].conceptTarget.type = buf2;
-            m_feats[aux].conceptTarget.id = buf3;
-         }
-
-         /* Dices! */
-         else if(key == "damage")
-         {
-            /* Base Dice */
-            sscanf(value.c_str(), "%d*d%d+%d",
-                   &numberOfDices, &diceID, &sumNumber);
-            m_feats[aux].diceInfo.baseDice.setType(diceID);
-            m_feats[aux].diceInfo.baseDice.setNumberOfDices(numberOfDices);
-            m_feats[aux].diceInfo.baseDice.setSumNumber(sumNumber);
-         }
-         else if(key == "aditionalDice")
-         {
-            /* Aditional dice */
-            sscanf(value.c_str(), "%d*d%d+%d", 
-                   &numberOfDices, &diceID, &sumNumber);
-            m_feats[aux].diceInfo.aditionalDice.setType(diceID);
-            m_feats[aux].diceInfo.aditionalDice.setNumberOfDices(numberOfDices);
-            m_feats[aux].diceInfo.aditionalDice.setSumNumber(sumNumber);
-         }
-         else if(key == "quantityPerDay")
-         {
-            /* Quantity Per Day */
             sscanf(value.c_str(),"%d",&m_feats[aux].quantityPerDay);
          }
+         /* Aditional Quantity */
          else if(key == "aditionalQuantity")
          {
-            /* Aditional Quantity */
-            sscanf(value.c_str(),"%d",&m_feats[aux].aditionalQuantity);
+            sscanf("%s %d %d %d", 
+                   &buf2[0], &m_feats[aux].aditionalQuantity,
+                   &m_feats[aux].aditionalLevel,
+                   &m_feats[aux].aditionalDiv);
+            m_feats[aux].aditionalFactor.id = buf2;
+            m_feats[aux].aditionalFactor.type = "CLASS";
          }
-         else if(key == "aditionalLevels")
+
+         /* Script */
+         else if(key == "script")
          {
-            /* Aditional Levels */
-            sscanf(value.c_str(),"%d",&m_feats[aux].aditionalLevels);
-         }
-
-         /* Feat Modifier Effect */
-         else if(key == "effect")
-         {
-            int time=0, mod=0, periodic=0;
-
-            /* Define its values TODO: get peridicity! */
-            sscanf(value.c_str(),"%ds %d %s %s", 
-                  &time, &mod, &buf2[0], &buf3[0]);
-
-            /* Create the new modEffect */
-            modEffect* effect = new modEffect(mod, time, periodic, buf3, buf2);
-
-            /* Insert it on the list */
-            m_feats[aux].effects->insert(effect);
+            m_feats[aux].scriptFile = value;
          }
 
          /* Dependent Feats */
          else if(key == "depFeat")
          {
-            if(curDepFeat < MAX_DEP_FEATS)
-            {
-               sscanf(value.c_str(),"%f %s",
-                      &m_feats[aux].depFeats[curDepFeat].reason,
-                      &buf2[0]);
-               m_feats[aux].depFeats[curDepFeat].featIDString = buf2;
-               m_feats[aux].depFeats[curDepFeat].used = true;
-               curDepFeat++;
-            }
+            depFeat* dp = new depFeat();
+
+            sscanf(value.c_str(),"%f %s", &dp->reason, &buf2[0]);
+            dp->featId = buf2;
+            m_feats[aux].depFeats.insert(dp);
          }
 
          /* Unknow Key!! */
@@ -808,8 +605,6 @@ void featsList::init(string dir, string arq)
          }
 
       }
-
-      m_feats[aux].image = IMG_Load(dirInfo.getRealFile(arqImagem).c_str());
    }
 
    file.close();

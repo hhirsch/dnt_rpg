@@ -397,8 +397,7 @@ void fightSystem::doNPCAction(character* pers)
 
    if( (pers->currentEnemy != NULL) && (attackFeat != -1))
    {
-      pers->actualFeats.applyAttackAndBreakFeat(*pers,attackFeat,
-                                                pers->currentEnemy);
+      pers->actualFeats.useFeatAtTarget(*pers,attackFeat, pers->currentEnemy);
       verifyDeads();   
    }
 

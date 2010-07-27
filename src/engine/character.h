@@ -71,6 +71,10 @@ class character: public aniModel, public dntListElement
        * \return -> number of lvels the character has on class cl */
       int getLevel(classe* cl);
 
+      /*! Get the current active (selected) feat for the character
+       * \return current active feat number */
+      int getActiveFeat();
+
       /*! Verify if the character alignment is of type represented by al
        * \param al -> string with align type
        * \return -> true if the align string identifier have the string al
@@ -120,11 +124,6 @@ class character: public aniModel, public dntListElement
        *          and can take a level at the specified class */
       void getNewClassLevel(classe* cl);
 
-      /*! Define the character weapon, based on the current one at
-       * the inventory. If none is there, the current weapon is bare
-       * hands. */
-      void defineWeapon();
-
       /*! Clear Skills */
       void clearSkills();
 
@@ -167,10 +166,6 @@ class character: public aniModel, public dntListElement
        * \param fileName -> name of the file to save
        * \return-> true if can save, false otherwise */
       bool save(string fileName);
-
-      /*! Get the range type of the active attack feat
-       * \return range type of the actual attack feat */
-      int getActiveFeatRangeType();
 
       /*! Get the active attack feat range
        * \return range value in meters */ 
@@ -240,6 +235,10 @@ class character: public aniModel, public dntListElement
       SDL_Surface* portraitImage; /**< Character's portrait image */
       GLuint portraitTexture;     /**< The Portrait Texture */
       string inventoryFile;       /**< The inventory file name */
+
+      int activeFeat;             /**< The character active feat */
+      
+      diceThing bareHandsDice;    /**< Damage by bare hands */
 
       modEffectList* effects;     /**< Current character effects */
 

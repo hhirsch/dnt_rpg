@@ -530,7 +530,6 @@ class engine
 
       Uint32 lastTurnTime;        /**< Time when last calls for turn */
       int fightStatus;            /**< Current Fight Status */
-      int attackFeat;             /**< attack feat to use. */
 
       conection* curConection;    /**< Current Mouse Conection */
 

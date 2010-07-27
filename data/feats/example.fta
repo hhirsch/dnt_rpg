@@ -18,6 +18,9 @@
 #              or FEAT_TYPE_ON_AREA for "area-target" ones)
 # type = FEAT_TYPE_ON_TARGET
 
+# Feat action (as described at src/classes/actions.h
+# action = ACT_ATTACK
+
 # Feat icon (image representing the feat)
 # icon = feat_icon.png
 
@@ -43,13 +46,25 @@
 # Feat quantity per day
 # quantity = 10
 
+# Cost at the quantity  to use the feat
+# costToUse = 1
+
 # Feat aditional quantity
-# aditionalQuantity = CLASS_ID CLASS_BASE_LEVEL DIV_FACTOR
+# aditionalQuantity = CLASS_ID QUANTITY CLASS_BASE_LEVEL DIV_FACTOR
 #
 # for example, 1 aditional each 2 levels beyond 15 on PHYSICAL EDUCATION
-# aditionalQuantity = PHYSICAL_EDUCATION 15 2
-#
+# aditionalQuantity = PHYSICAL_EDUCATION 1 15 2
+
+# Feat Power Level (used to measure powerfull feats, etc)
+# powerLevel = 4
 
 # Feat script file (with the feat application in-fact)
 # script = feat_script.dsl
 
+##########################################################################
+#                          Dependents Feats                              #
+##########################################################################
+
+# List of dependent feats as
+# depFeat = FEAT_ID REASON example:
+# depFeat = ESTHETIC_SHOCK_I 1

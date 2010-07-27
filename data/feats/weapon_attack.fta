@@ -1,0 +1,9 @@
+title = gettext("Weapon Attack")
+description = gettext("Character's weapon attack.")
+
+id = WEAPON_ATTACK
+
+range = 60
+
+type = FEAT_TYPE_ON_TARGET
+

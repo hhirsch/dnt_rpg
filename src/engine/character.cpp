@@ -71,9 +71,17 @@ character::character(featsList* ft)
    /* Feat Details */
    if(ft != NULL)
    {
-      actualFeats.insertFeat(ft->featByNumber(FEAT_MELEE_ATTACK));
-      actualFeats.insertFeat(ft->featByNumber(FEAT_RANGED_ATTACK));
+      actualFeats.insertFeat(ft->featByNumber(FEAT_WEAPON_ATTACK));
    }
+   activeFeat = FEAT_WEAPON_ATTACK;
+
+   /* Bare hands damage dice */
+   bareHandsDice.baseDice.setType(DICE_D2);
+   bareHandsDice.baseDice.setNumberOfDices(1);
+   bareHandsDice.baseDice.setSumNumber(0);
+   bareHandsDice.baseDice.setCriticalMultiplier(1);
+   bareHandsDice.initialLevel = 1;
+
 
    /* Effects */
    effects = new modEffectList();
@@ -83,8 +91,6 @@ character::character(featsList* ft)
    generalScript = NULL;
    generalScriptFileName = "";
 
-   /* Define the weapon */
-   defineWeapon();
 }
 
 /*********************************************************************
@@ -235,6 +241,14 @@ int character::getLevel(classe* cl)
       }
    }
    return(0);
+}
+
+/*********************************************************************
+ *                           getActiveFeat                           *
+ *********************************************************************/
+int character::getActiveFeat()
+{
+   return(activeFeat);
 }
 
 /*********************************************************************
@@ -508,45 +522,25 @@ void character::setOrientation(GLfloat ori)
 }
 
 /*********************************************************************
- *                             defineWeapon                          *
- *********************************************************************/
-void character::defineWeapon()
-{
-   object* obj = inventories->getFromPlace(INVENTORY_RIGHT_HAND);
-   weapon* wp = (weapon*) obj;
-   if(wp != actualFeats.getCurrentWeapon())
-   {
-      /* Define the weapon */
-      actualFeats.defineWeapon(wp);
-      return;
-   }
-
-   /* FIXME: Double weapon use! */
-#if 0
-   obj = inventories->getFromPlace(INVENTORY_LEFT_HAND);
-   wp = (weapon*) obj;
-   if(wp != actualFeats.getCurrentWeapon())
-   {
-      /* Define the weapon */
-      actualFeats.defineWeapon(wp);
-   }
-#endif
-}
-
-/*********************************************************************
- *                       getActiveFeatRangeType                      *
- *********************************************************************/
-int character::getActiveFeatRangeType()
-{
-   return(actualFeats.getAttackFeatRangeType());
-}
-
-/*********************************************************************
  *                         getActiveFeatRange                        *
  *********************************************************************/
 int character::getActiveFeatRange()
 {
-   return(actualFeats.getAttackFeatRange());
+   if(activeFeat == FEAT_WEAPON_ATTACK)
+   {
+       /* Get the weapons range */
+       /* TODO */
+   }
+   else
+   {
+      feat* ft = actualFeats.featByNumber(activeFeat);
+      if(ft)
+      {
+         return(ft->info->range);
+      }
+   }
+
+   return(0);
 }
 
 
@@ -1032,7 +1026,11 @@ character* characterList::insertCharacter(string file, featsList* ft,
       {
          int dices=0, diceId=1, sum=0, crit=1;
          sscanf(value.c_str(), "%dd%d+%dx%d", &dices, &diceId, &sum, &crit);
-         novo->actualFeats.setBareHandsDamage(dices, diceId, sum, crit);
+         novo->bareHandsDice.baseDice.setType(diceId);
+         novo->bareHandsDice.baseDice.setNumberOfDices(dices);
+         novo->bareHandsDice.baseDice.setSumNumber(sum);
+         novo->bareHandsDice.baseDice.setCriticalMultiplier(crit);
+         novo->bareHandsDice.initialLevel = 1;
       }
       /* ModifierEffects */
       else if(key == "modEffect")

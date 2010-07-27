@@ -46,20 +46,18 @@ enum
 };
 
 
-#define FEAT_MELEE_ATTACK   0 /**< Melee Attack */
-#define FEAT_RANGED_ATTACK  1 /**< Ranged Attack */
+#define FEAT_WEAPON_ATTACK   0 /**< Weapon Attack */
 
-/*!
- ************************************************************************
- * Dependence Feats are feats that has number of uses affected  
- *  when use actual feat. \par
- * For Example, when use \e ameivasII you'll can do -2 \e ameivaI. (1/2 reason).
- *************************************************************************/
+/*! Dependence Feats are feats that its quantity is affected by the use of 
+ * the owner feat. \par
+ *
+ * For Example: 
+ * when use \e ameivasII you'll can do -2 \e ameivaI. (1/2 reason). */
 class depFeat: public dntListElement
 {
    public:
       float  reason;       /**< Dependence Reason (1/1, 1/2, 1/3, 2/1, etc) */
-      string featIDString; /**< ID String of the Feat */
+      string featId;       /**< ID String of the Feat */
 };
 /*! The dependence feat list (depFeat) */
 class depFeatList: public dntList
@@ -93,10 +91,7 @@ class reqFactorList: public dntList
       
 };
 
-/*!
- ******************************************************************************
- * The feature definitions
- ******************************************************************************/
+/*! The feature general definitions */
 class featDescription
 {
    public:
@@ -106,14 +101,20 @@ class featDescription
       ~featDescription();
 
       int type;                    /**< Feature type constant */
+      int action;                  /**< Feat action (as <actions.h>) */
 
       string name;                 /**< Feat Name */
       string idString;             /**< Feat ID String */
       string description;          /**< Feat Description */
 
+      string scriptFile;           /**< FileName of the script to run */
+
       int internalListNumber;      /**< Number on List */
       reqFactorList reqFactors;    /**< List of required factors */
+
+      int powerLevel;              /**< Feat power level (to compare them) */
       
+      int costToUse;               /**< Cost (in quantity) to use the feat */
       int quantityPerDay;          /**< Quantity avaible to use per day*/
       int aditionalQuantity;       /**< Quantity Added per AditionalLevel */
       int aditionalLevel;          /**< Number of Levels to AditionalQuantity */
@@ -127,27 +128,19 @@ class featDescription
       SDL_Surface* image;          /**< Feat Image */
 };
 
-/*!
- *************************************************************
- * The feat is the internal feat definition per characters,
+/*! The feat is the internal feat definition per characters,
  * with only the requerided fields to avoid loss memory with
- * unnecessary data.
- *************************************************************/
+ * unnecessary data. */
 class feat
 {
    public:
       featDescription* info;       /**< The feat info */
       float actualQuantity;        /**< Actual quantity to use */
-      float range;                 /**< Actual Range */
-      diceThing diceInfo;          /**< Defined Dice*/
 };
 
 
-/*!
- *************************************************
- * the class feats defines the Character's Feats,
- * and its functions to actualize, use, etc. 
- *************************************************/
+/*! the class feats defines the Character's Feats,
+ * and its functions to up-to-date, use, etc. */
 class feats               
 {
    public:
@@ -156,161 +149,83 @@ class feats
       /*! feats Destructior */
       ~feats();
  
-      /*!
-       *************************************************************** 
-       * Return the feat with number featNumber  
+      /*! Return the feat with number featNumber  
        * \param featNumber -> internal number of feat to return
-       * \return the feat struct with internal number.
-       ***************************************************************/
+       * \return the feat struct with internal number. */
       feat* featByNumber(int featNumber);
-      /*!
-       **************************************************************** 
-       * Return the feat with name featName
-       * \param featName -> name of feat to return
-       * \return return the feat struct that has the name.
-       ***************************************************************/
-      feat* featByString(string featName);
-      /*!
-       **************************************************************** 
-       * Insert a feat on Character's Feats.
-       * \param featInsert -> featDescription of feat to insert
-       * \return \c true if sucefully inserted.
-       ***************************************************************/
-      bool insertFeat(featDescription* featInsert);
-      /*!
-       ************************************************************** 
-       * Refresh Quantities to use on a new day to all feats.
-       ***************************************************************/
-      void newDay();
-      /*!
-       **************************************************************** 
-       * Apply an attack or break feat.
-       * \param attacker -> thing that will attack
-       * \param featNumber -> Number of Feat on List
-       * \param target -> target to use the Feat
-       * \return \c true if the feat was used.
-       ***************************************************************/
-      bool applyAttackAndBreakFeat(thing& attacker, int featNumber, 
-                                   thing* target);
-      /*!
-       **************************************************************** 
-       * Apply a heal or fix feat.
-       * \param attacker -> thing that will attack
-       * \param featNumber -> Number of Feat on List
-       * \param target -> target to use the Feat
-       * \return \c true if the feat was used.
-       ***************************************************************/
-      bool applyHealAndFixFeat(thing& attacker, int featNumber, 
-                               thing* target);
-      /*!
-       **************************************************************** 
-       * Apply a psycho feat.
-       * \param attacker -> thing that will attack
-       * \param featNumber -> Number of Feat on List
-       * \param target -> target to use the Feat
-       * \return \c true if the feat was used.
-       ***************************************************************/
-      bool applyPsychoFeat(thing& attacker, int featNumber, 
-                           thing* target);
-      /*!
-       **************************************************************** 
-       * Apply an invocation feat.
-       * \param attacker -> thing that will attack
-       * \param featNumber -> Number of Feat on List
-       * \param target -> target to use the Feat
-       * \return \c true if the feat was used.
-       ***************************************************************/
-      bool applyInvocationFeat(thing& attacker, int featNumber, 
-                               thing* target);
 
-      /*!
-       **************************************************************** 
-       * Get a random attack feat that can be used.
+      /*! Return the feat with name featName
+       * \param featName -> name of feat to return
+       * \return return the feat struct that has the name. */
+      feat* featByString(string featName);
+
+      /*! Insert a feat on Character's Feats.
+       * \param featInsert -> featDescription of feat to insert
+       * \return \c true if sucefully inserted. */
+      bool insertFeat(featDescription* featInsert);
+
+      /*! Refresh Quantities to use on a new day to all feats. */
+      void newDay();
+
+      /*! Get a random attack feat that can be used.
        * \param pers -> character that will use the feat
        * \param target -> thing that will receive the feat.
-       * \return \c number of the feat got
-       ***************************************************************/
+       * \return \c number of the feat got */
       int getRandomNPCAttackFeat(thing* pers, thing* target);
 
-      /*!
-       **************************************************************** 
-       * Get the powerfull attack feat that can be used.
+      /*! Get the powerfull attack feat that can be used.
        * \param pers -> character that will use the feat
        * \param target -> thing that will receive the feat.
-       * \return \c number of the feat got
-       ***************************************************************/
+       * \return \c number of the feat got */
       int getPowerfullAttackFeat(thing* pers, thing* target);
 
-
+      /*! Get the first heal feat available
+       * \param pers -> thing owner of the feat
+       * \return feat Number or -1 if not found */
       int getFirstHealFeat(thing* pers);
 
+      /*! Get a random heal feat available
+       * \param pers -> thing owner of the feat
+       * \return feat Number or -1 if not found */
       int getRandomHealFeat(thing* pers);
 
-      int getPowerfullHealFeat(thing* feat);
+      /*! Get the powerfull heal feat available
+       * \param pers -> thing owner of the feat
+       * \return feat Number or -1 if not found */
+      int getPowerfullHealFeat(thing* pers);
 
-      /*!
-       **************************************************************** 
-       * Define the active character's base attack to a weapon.
-       * \param w -> the weapon used.
-       ***************************************************************/
-      void defineWeapon(weapon* w);
-      /*! Get the current defined weapon
-       * \return -> current weapon */
-      weapon* getCurrentWeapon();
-      /*!
-       **************************************************************** 
-       * Flush the Current munition to the current defined weapon
-       ***************************************************************/
-      void flushCurrentMunition();
+      /*! Use a feat at a target thing
+       * \param actor -> thing owner of the feat
+       * \param featNumber -> number of the feat to use
+       * \param target -> target to use the feat 
+       * \return true if used the feat, false if couldn't */
+      bool useFeatAtTarget(thing& actor, int featNumber, thing* target);
 
-      /*!
-       **************************************************************** 
-       * Get the range type of the attack feat
-       * \return range Type of the attack feat
-       ***************************************************************/
-      int getAttackFeatRangeType();
+      /*! Use a feat at a target area
+       * \param actor -> thing owner of the feat
+       * \param featNumber -> number of the feat to use
+       * \param x -> X coordinate to use the feat
+       * \param y -> Y coordinate to use the feat
+       * \param z -> Z coordinate to use the feat
+       * \return true if used the feat, false if couldn't */
+      bool useFeatAtArea(thing& actor, int featNumber, 
+             float x, float y, float z);
 
-      /*!
-       **************************************************************** 
-       * Get the range of the attack feat
-       * \return range of the attack feat
-       ***************************************************************/
-      int getAttackFeatRange();
-
-      /*! Set the bare hands damage dice
-       * \param dices -> number of dices
-       * \param diceId -> number of faces
-       * \param sum -> integer to sum to the result
-       * \param crit -> critical multiplier */
-      void setBareHandsDamage(int dices, int diceId, int sum, int crit);
+      /*! Apply a permanent feat to the owner
+       * \param actor -> thing owner of the feat
+       * \param featNumber -> number of the feat to use
+       * \return true if used the feat, false if couldn't */
+      bool applyPermanentFeat(thing* actor, int featNumber);
 
    private:
 
-      weapon* currentWeapon;    /**< The current weapon */
       feat m_feats[MAX_FEATS];  /**< Internal Feats Struct */
       int  totalFeats;          /**< Actual Number of Feats */
-      diceThing bareHandsDice;  /**< Damage by bare hands */
 
-      /*!
-       **************************************************************** 
-       * Use a quantity of the feat and propagate to other dependent 
+      /*! Use a quantity of the feat and propagate to other dependent 
        * feats.
-       * \param featNumber -> feat to use
-       ***************************************************************/
+       * \param featNumber -> feat to use */
        void useFeat(int featNumber);
-
-       /*!
-       **************************************************************** 
-       * Apply feats that will afect the Life Points of the Target
-       * \param attacker -> thing that will attack
-       * \param featNumber -> Number of Feat on List
-       * \param target -> target to use the Feat
-       * \param heal -> true if is a heal/fix feat, 
-       *                false if is an attack/break one.
-       * \return \c true if the feat was used.
-       ***************************************************************/
-       bool applyHealOrAttackFeat(thing& actor, int featNumber, 
-                                  thing* target, bool heal);
 };
 
 /*! List of All Feats on Game */
