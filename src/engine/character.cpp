@@ -544,7 +544,7 @@ int character::getActiveFeatRange()
        }
 
        /* Bare Hands */
-       return(60);
+       return(30);
    }
    else
    {
