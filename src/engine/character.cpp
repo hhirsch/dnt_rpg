@@ -522,6 +522,14 @@ void character::setOrientation(GLfloat ori)
 }
 
 /*********************************************************************
+ *                         getEquipedWeapon                          *
+ *********************************************************************/
+weapon* character::getEquipedWeapon()
+{
+   return((weapon*)inventories->getFromPlace(INVENTORY_RIGHT_HAND));
+}
+
+/*********************************************************************
  *                         getActiveFeatRange                        *
  *********************************************************************/
 int character::getActiveFeatRange()
@@ -529,7 +537,14 @@ int character::getActiveFeatRange()
    if(activeFeat == FEAT_WEAPON_ATTACK)
    {
        /* Get the weapons range */
-       /* TODO */
+       weapon* wp = getEquipedWeapon();
+       if(wp)
+       {
+          return(wp->getRange());
+       }
+
+       /* Bare Hands */
+       return(60);
    }
    else
    {

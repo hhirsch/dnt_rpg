@@ -75,6 +75,10 @@ class character: public aniModel, public dntListElement
        * \return current active feat number */
       int getActiveFeat();
 
+      /*! Get the equiped character weapon (if any)
+       * \return poitner to the equiped weapon (or NULL) */
+      weapon* getEquipedWeapon();
+
       /*! Verify if the character alignment is of type represented by al
        * \param al -> string with align type
        * \return -> true if the align string identifier have the string al
