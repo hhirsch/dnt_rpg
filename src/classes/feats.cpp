@@ -247,7 +247,6 @@ bool feats::useFeatAtTarget(thing* actor, int featNumber, thing* target)
    {
       /* Init the script to use */
       sc = new iaScript(m_feats[featNumber].info->scriptFile, uEngine);
-      sc->init();
 
       /* Set infos */
       sc->defineCharacterOwner((character*)actor);
@@ -260,7 +259,6 @@ bool feats::useFeatAtTarget(thing* actor, int featNumber, thing* target)
       sc->run(0);
 
       /* Finish with the script */
-      sc->close();
       delete(sc);
 
       return(true);
