@@ -743,11 +743,18 @@ iaVariable* iaScript::getParameter(string& token, string strLine,
          /* Create the string value on the stack */
          iv = new iaVariable(IA_TYPE_STRING, "__param__");
 
-         /* remove the first and the last " */
-         token.erase(0,1);
-         token.erase(token.length()-1,1);
-
-         *(string*)iv->value = token;
+         if(token[0] == '\"')
+         {
+            /* remove the first and the last " */
+            token.erase(0,1);
+            token.erase(token.length()-1,1);
+            *(string*)iv->value = token;
+         }
+         else
+         {
+            /* Do the i18n */
+            *(string*)iv->value = translateDataString(token);
+         }
       }
       else
       {
@@ -931,6 +938,29 @@ diceThing* iaScript::getParameterd(string& token, string strLine,
 }
 
 /***********************************************************************
+ *                          getParameterw                              *
+ ***********************************************************************/
+weapon* iaScript::getParameterw(string& token, string strLine, 
+      unsigned int& pos)
+{
+   iaVariable* iv = NULL;
+   weapon* wp = NULL;
+
+   /* Get character */
+   iv = getParameter(token, strLine, IA_TYPE_WEAPON, pos);
+   if(iv != NULL)
+   {
+      wp = (weapon*)iv->value;
+      if(iv->name == "__param__")
+      {
+         delete(iv);
+      }
+   }
+
+   return(wp);
+}
+
+/***********************************************************************
  *                           assignValue                               *
  ***********************************************************************/
 void iaScript::assignValue(iaVariable* var, void* value, string type)
@@ -998,11 +1028,20 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    }
 
    ////////////////////////////////////////////////////
+   //             Script Related Functions           //
+   ////////////////////////////////////////////////////
+   else if(functionName == IA_EXIT)
+   {
+      /* Put the script file at EOF */
+      file.seekg (0, ios::end);
+   }
+
+   ////////////////////////////////////////////////////
    //               Briefing Functions               //
    ////////////////////////////////////////////////////
    
    /* Syntax: void briefing(string message)  */
-   if(functionName == IA_BRIEFING)
+   else if(functionName == IA_BRIEFING)
    {
       briefing brief;
       string st = getParameters(token, strLine, pos);
@@ -1747,6 +1786,98 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    }
 
    ////////////////////////////////////////////////////
+   //                Weapons Functions               //
+   ////////////////////////////////////////////////////
+
+   /* Syntax weapon function(character c) */
+   else if(functionName == IA_GET_EQUIPED_WEAPON)
+   {
+      character* dude = NULL;
+
+      /* Get character */
+      dude = getParameterc(token, strLine, pos);
+
+      /* Set the result */
+      weapon* wp = NULL;
+      
+      if(dude != NULL)
+      {
+         /* Syntax: weapon getEquipedWeapon(character c) */
+         if(functionName == IA_GET_EQUIPED_WEAPON)
+         {
+            wp = dude->getEquipedWeapon();
+         }
+      }
+      assignValue(var, (void*)wp, IA_TYPE_WEAPON);
+   }
+
+   /* Syntax int function(weapon w) */
+   else if( (functionName == IA_WEAPON_GET_AMMO) || 
+            (functionName == IA_WEAPON_GET_RANGE) )
+   {
+      weapon* wp = NULL;
+      
+      /* Get weapon */
+      wp = getParameterw(token, strLine, pos);
+
+      /* Set the result */
+      int vl = 0;
+      
+      if(wp != NULL)
+      {
+         /* Syntax: int weaponGetAmmo(weapon wp) */
+         if(functionName == IA_WEAPON_GET_AMMO)
+         {
+            vl = wp->getCurrentMunition(); 
+         }
+         /* Syntax: int weaponGetRange(weapon wp) */
+         else if(functionName == IA_WEAPON_GET_RANGE)
+         {
+            vl = wp->getRange();
+         }
+      }
+      assignValue(var, (void*)&vl, IA_TYPE_INT);
+   }
+
+   /* Syntax string function(s) */
+   else if( (functionName == IA_WEAPON_GET_AMMO_TYPE) ||
+            (functionName == IA_WEAPON_GET_RANGE_TYPE) )
+   {
+      weapon* wp = NULL;
+      wInfo* wi = NULL;
+      
+      /* Get weapon */
+      wp = getParameterw(token, strLine, pos);
+
+      /* Set the result */
+      string vl = "";
+      
+      if(wp != NULL)
+      {
+         /* Syntax: int weaponGetAmmo(weapon wp) */
+         if(functionName == IA_WEAPON_GET_AMMO)
+         {
+            wi = wp->getMunitionType();
+            if(wi)
+            {
+               vl = wi->name; 
+            }
+         }
+         /* Syntax: int weaponGetRange(weapon wp) */
+         else if(functionName == IA_WEAPON_GET_RANGE)
+         {
+            wi = wp->getRangeType();
+            if(wi)
+            {
+               vl = wi->name;
+            }
+         }
+      }
+      assignValue(var, (void*)&vl, IA_TYPE_STRING);
+   }
+
+
+   ////////////////////////////////////////////////////
    //                Character Functions             //
    ////////////////////////////////////////////////////
 
@@ -1773,7 +1904,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    }
 
    /* Syntax bool function(character c) */
-   else if(functionName == IA_CHARACTER_IS_ALIVE)
+   else if( (functionName == IA_CHARACTER_IS_ALIVE) ||
+            (functionName == IA_WEAPON_EQUIPED) )
    {
       character* dude = NULL;
 
@@ -1789,6 +1921,11 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          if(functionName == IA_CHARACTER_IS_ALIVE)
          {
             bl = dude->isAlive();
+         }
+         /* Syntax: bool weaponEquiped(character c) */
+         else if(functionName == IA_WEAPON_EQUIPED)
+         {
+            bl = (dude->getEquipedWeapon() != NULL);
          }
       }
       assignValue(var, (void*)&bl, IA_TYPE_BOOL);

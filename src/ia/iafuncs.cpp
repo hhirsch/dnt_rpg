@@ -92,7 +92,8 @@ bool isType(string s)
    return( (s == IA_TYPE_VOID) || (s == IA_TYPE_BOOL) ||
            (s == IA_TYPE_INT) || (s == IA_TYPE_FLOAT) ||
            (s == IA_TYPE_STRING) || (s == IA_TYPE_CHARACTER) ||  
-           (s == IA_TYPE_OBJECT) || (s == IA_TYPE_DICE) );
+           (s == IA_TYPE_OBJECT) || (s == IA_TYPE_DICE) ||
+           (s == IA_TYPE_WEAPON) );
 
 }
 
@@ -104,7 +105,7 @@ bool isFunction(string s)
    return( (s == IA_DEBUG_PRINT) || (s == IA_BRIEFING) || 
            (s == IA_MOVE_TO_POSITION) || (s == IA_MOVE_TO_CHARACTER) ||
            (s == IA_MOVE_TO_OBJECT) || (s == IA_SET_IDLE) ||
-           (s == IA_WAIT) ||
+           (s == IA_WAIT) || (s == IA_EXIT) ||
            (s == IA_FEAT_ACTUAL_QUANTITY) || (s == IA_FEAT_QUANTITY_PER_DAY) ||
            (s == IA_FEAT_COST) || (s == IA_FEAT_USE_AT_CHARACTER) ||
            (s == IA_FEAT_USE_AT_OBJECT) || (s == IA_FEAT_GET_RANDOM_ATTACK) ||
@@ -136,7 +137,10 @@ bool isFunction(string s)
            (s == IA_OWNER_HEIGHT) || (s == IA_OWNER_POSX) ||
            (s == IA_OWNER_POSZ) || 
            (s == IA_PARTICLE_ADD_TO_CHARACTER) || 
-           (s == IA_SET_BASE_DICE) || (s == IA_SET_ADITIONAL_DICE) );
+           (s == IA_SET_BASE_DICE) || (s == IA_SET_ADITIONAL_DICE) ||
+           (s == IA_WEAPON_EQUIPED) || (s == IA_GET_EQUIPED_WEAPON) ||
+           (s == IA_WEAPON_GET_AMMO_TYPE) || (s == IA_WEAPON_GET_AMMO) ||
+           (s == IA_WEAPON_GET_RANGE_TYPE) || (s == IA_WEAPON_GET_RANGE) );
 }
 
 /***********************************************************************
@@ -152,7 +156,7 @@ string functionType(string s)
        (s == IA_CHARACTER_IS_ALIVE) || (s == IA_CHARACTER_IS_ALL_DEAD) ||
        (s == IA_CHARACTER_AT_RANGE) || (s == IA_WAIT) || 
        (s == IA_FIGHT_CAN_ATTACK) || (s == IA_DICE_ROLL) ||
-       (s == IA_FIGHT_DO_ATTACK) )
+       (s == IA_FIGHT_DO_ATTACK) || (s == IA_WEAPON_EQUIPED) ) 
    {
       return(IA_TYPE_BOOL);
    }
@@ -168,7 +172,8 @@ string functionType(string s)
             (s == IA_FEAT_GET_RANDOM_HEAL) ||
             (s == IA_FEAT_GET_POWERFULL_HEAL) ||
             (s == IA_GET_OBJECT_STATE) || (s == IA_CLASS_LEVEL) ||
-            (s == IA_ROLL_DICE) )
+            (s == IA_ROLL_DICE) ||
+            (s == IA_WEAPON_GET_AMMO) || (s == IA_WEAPON_GET_RANGE))
    {
       return(IA_TYPE_INT);
    }
@@ -179,7 +184,8 @@ string functionType(string s)
       return(IA_TYPE_FLOAT);
    }
    /* String Functions */
-   else if( (s == IA_SELF_MISSION) || (s == IA_ACTUAL_MAP) )
+   else if( (s == IA_SELF_MISSION) || (s == IA_ACTUAL_MAP) ||
+            (s == IA_WEAPON_GET_AMMO_TYPE) || (s == IA_WEAPON_GET_RANGE_TYPE))
    {
       return(IA_TYPE_STRING);
    }
@@ -193,6 +199,11 @@ string functionType(string s)
    else if( (s == IA_SELF_OBJECT) || (s == IA_GET_OBJECT) )
    {
       return(IA_TYPE_OBJECT);
+   }
+   /* Weapon Function */
+   else if( (s == IA_GET_EQUIPED_WEAPON) )
+   {
+      return(IA_TYPE_WEAPON);
    }
    /* Void Functions */
    return(IA_TYPE_VOID);

@@ -25,10 +25,11 @@ syn keyword dntOperator       SELF_OBJECT SELF_CHARACTER ACTIVE_CHARACTER
 syn keyword dntOperator       ACTUAL_MAP SELF_MISSION
 syn keyword dntOperator       OWNER_HEIGHT OWNER_POSX OWNER_POSZ
 syn keyword dntOperator       void bool int float string dice character
+syn keyword dntOperator       object weapon
 syn keyword dntOperator       true false
 
 " Functions
-syn keyword dntFunction       wait print briefing 
+syn keyword dntFunction       wait print briefing exit
 syn keyword dntFunction       moveToPosition moveToCharacter
 syn keyword dntFunction       moveToObject setIdle
 syn keyword dntFunction       missionAdd missionComplete missionIsActive
@@ -51,6 +52,9 @@ syn keyword dntFunction       classLevel roll rollDice addEffect
 syn keyword dntFunction       particleAddToCharacter
 syn keyword dntFunction       setBaseDice setAditionalDice
 syn keyword dntFunction       doAttack featDec
+syn keyword dntFunction       weaponEquiped getEquipedWeapon
+syn keyword dntFunction       weaponGetAmmoType weaponGetAmmo
+syn keyword dntFunction       weaponGetRangeType weaponGetRange
 
 syn sync lines=250
 

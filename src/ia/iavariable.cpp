@@ -65,7 +65,8 @@ iaVariable::iaVariable(string varType, string varName)
    {
       value = new diceThing;
    }
-   else if( (type == IA_TYPE_CHARACTER) || (type == IA_TYPE_OBJECT) )
+   else if( (type == IA_TYPE_CHARACTER) || (type == IA_TYPE_OBJECT) ||
+            (type == IA_TYPE_WEAPON) )
    {
       /* It'll be only a pointer, so NULL for now. */
       value = NULL;
@@ -636,6 +637,10 @@ string iaVariable::toString()
          return("NULL");
       }
    }
+   else if(type == IA_TYPE_WEAPON)
+   {
+      /* TODO! */
+   }
    else
    {
       sprintf(buffer,"%p",value);
@@ -686,6 +691,10 @@ void iaVariable::fromString(string s, void* curEngine)
 
       /* Get the object defined! */
       value = objectsList::search(fName, pX, pY, pZ);
+   }
+   else if(type == IA_TYPE_WEAPON)
+   {
+      /* TODO! */
    }
 }
 

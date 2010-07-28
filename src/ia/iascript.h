@@ -172,6 +172,7 @@ class iaScript
       object* getParametero(string& token, string strLine, unsigned int& pos);
       string getParameters(string& token, string strLine, unsigned int& pos);
       diceThing* getParameterd(string& token, string strLine,unsigned int& pos);
+      weapon* getParameterw(string& token, string strLine,unsigned int& pos);
 
       /*! Assign the value to the variable
        * \param var -> pointer to a variable

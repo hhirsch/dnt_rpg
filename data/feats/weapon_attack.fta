@@ -2,8 +2,16 @@ title = gettext("Weapon Attack")
 description = gettext("Character's weapon attack.")
 
 id = WEAPON_ATTACK
+type = FEAT_TYPE_ON_TARGET
+action = ACT_ATTACK
+icon = feats/Img/melee_attack.png
 
 range = 60
+quantity = 1
+costToUse = 0
+powerLevel = 1
 
-type = FEAT_TYPE_ON_TARGET
+script = feats/weapon_attack.dsl
+
+
 

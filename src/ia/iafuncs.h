@@ -70,6 +70,7 @@ using namespace std;
 #define IA_TYPE_DICE "dice"
 #define IA_TYPE_CHARACTER "character"
 #define IA_TYPE_OBJECT "object"
+#define IA_TYPE_WEAPON "weapon"
 
 /* Setences */
 #define IA_SETENCE_SCRIPT "script"
@@ -102,6 +103,12 @@ using namespace std;
 #define IA_OWNER_HEIGHT "OWNER_HEIGHT"
 #define IA_OWNER_POSX   "OWNER_POSX"
 #define IA_OWNER_POSZ   "OWNER_POSZ"
+
+////////////////////////////////////////////////////
+//                Script-related                  //
+////////////////////////////////////////////////////
+/*! void exit() */
+#define IA_EXIT "exit"
 
 ////////////////////////////////////////////////////
 //                  Time Functions                //
@@ -222,6 +229,21 @@ using namespace std;
 /*! int getObjectState(object obj) */
 #define IA_GET_OBJECT_STATE "getObjectState"
 
+////////////////////////////////////////////////////
+//                Weapons Functions               //
+////////////////////////////////////////////////////
+/*! bool weaponEquiped(character c) */
+#define IA_WEAPON_EQUIPED "weaponEquiped"
+/*! weapon getEquipedWeapon(character c) */
+#define IA_GET_EQUIPED_WEAPON "getEquipedWeapon"
+/*! string weaponGetAmmoType(weapon w) */
+#define IA_WEAPON_GET_AMMO_TYPE "weaponGetAmmoType"
+/*! int weaponGetAmmo(weapon w) */
+#define IA_WEAPON_GET_AMMO "weaponGetAmmo"
+/*! string weaponGetRangeType(weapon w) */
+#define IA_WEAPON_GET_RANGE_TYPE "weaponGetRangeType"
+/*! int weaponGetRange(weapon w) */
+#define IA_WEAPON_GET_RANGE "weaponGetRange"
 
 ////////////////////////////////////////////////////
 //                Character Functions             //
