@@ -1051,6 +1051,18 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       /* Print the message */
       brief.addText(st);
    }
+   /* Syntax: void briefingColor(string message, int r, int g, int b)  */
+   else if(functionName == IA_BRIEFING_COLOR)
+   {
+      briefing brief;
+      string st = getParameters(token, strLine, pos);
+      int r = getParameteri(token, strLine, pos);
+      int g = getParameteri(token, strLine, pos);
+      int b = getParameteri(token, strLine, pos);
+      
+      /* Print the message */
+      brief.addText(st, r, g, b);
+   }
 
    ////////////////////////////////////////////////////
    //              Random (Dice) Function            //

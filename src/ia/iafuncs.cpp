@@ -103,6 +103,7 @@ bool isType(string s)
 bool isFunction(string s)
 {
    return( (s == IA_DEBUG_PRINT) || (s == IA_BRIEFING) || 
+           (s == IA_BRIEFING_COLOR) ||
            (s == IA_MOVE_TO_POSITION) || (s == IA_MOVE_TO_CHARACTER) ||
            (s == IA_MOVE_TO_OBJECT) || (s == IA_SET_IDLE) ||
            (s == IA_WAIT) || (s == IA_EXIT) ||

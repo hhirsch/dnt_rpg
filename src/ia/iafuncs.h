@@ -127,6 +127,8 @@ using namespace std;
 ////////////////////////////////////////////////////
 /*! void briefing(string msg) */
 #define IA_BRIEFING "briefing"
+/*! void briefingColor(string msg, int red, int green, int blue) */
+#define IA_BRIEFING_COLOR "briefingColor"
 
 ////////////////////////////////////////////////////
 //                  Random (dices)                //

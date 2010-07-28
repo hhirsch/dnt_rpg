@@ -29,7 +29,7 @@ syn keyword dntOperator       object weapon
 syn keyword dntOperator       true false
 
 " Functions
-syn keyword dntFunction       wait print briefing exit
+syn keyword dntFunction       wait print briefing briefingColor exit
 syn keyword dntFunction       moveToPosition moveToCharacter
 syn keyword dntFunction       moveToObject setIdle
 syn keyword dntFunction       missionAdd missionComplete missionIsActive
