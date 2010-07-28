@@ -31,7 +31,7 @@ script(character target)
       d = weaponGetDice(curWeapon)
 
       # Do the attack
-      if(doAttack(SELF_CHARACTER, target, d, concept))
+      if(doAttack(SELF_CHARACTER, target, d, "ATTRIBUTE", concept))
          # Apply the ammo - 1, if needed
          if(weaponGetAmmoType(curWeapon) != "none")
             weaponDecAmmo(curWeapon)
