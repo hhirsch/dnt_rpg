@@ -985,7 +985,9 @@ void iaScript::assignValue(iaVariable* var, void* value, string type)
       }
       else if(type == IA_TYPE_DICE)
       {
-         cerr << "Error: Invalid dice assign on script!" << endl;
+         diceThing* varD = (diceThing*)var->value;
+         diceThing* parD = (diceThing*)value;
+         varD->populate(parD);
       }
       else
       {

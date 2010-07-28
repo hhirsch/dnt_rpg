@@ -175,4 +175,33 @@ diceThing::diceThing()
    aditionalDice.setNumberOfDices(0);
 }
 
+/***********************************************************************
+ *                              Populate                               *
+ ***********************************************************************/
+void diceThing::populate(diceThing* d)
+{
+   if(!d)
+   {
+      cerr << "diceThing::populate received NULL diceThing!" << endl;
+      return;
+   }
+
+   /* Set base dice */
+   baseDice.setType(d->baseDice.getType());
+   baseDice.setNumberOfDices(d->baseDice.getNumberOfDices());
+   baseDice.setSumNumber(d->baseDice.getSumNumber());
+   baseDice.setCriticalMultiplier(d->baseDice.getCriticalMultiplier());
+
+   
+   /* Set aditional dice */
+   aditionalDice.setType(d->aditionalDice.getType());
+   aditionalDice.setNumberOfDices(d->aditionalDice.getNumberOfDices());
+   aditionalDice.setSumNumber(d->aditionalDice.getSumNumber());
+   aditionalDice.setCriticalMultiplier(
+         d->aditionalDice.getCriticalMultiplier());
+   
+   /* Set aditional info */
+   aditionalLevels = d->aditionalLevels;
+   initialLevel = d->initialLevel;
+}
 

@@ -111,6 +111,10 @@ class diceThing
       /*! Constructor */
       diceThing();
 
+      /*! Populate the diceThing with dice d
+       * \param d -> pointer to the dice to copy values from */
+      void populate(diceThing* d);
+
       dice baseDice;         /**< Basic Dice. */
       dice aditionalDice;    /**< Aditional Dice per Level. */
       int aditionalLevels;   /**< Number of Levels per Aditional Dices. */
