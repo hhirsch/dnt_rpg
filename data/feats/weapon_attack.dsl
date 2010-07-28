@@ -46,7 +46,7 @@ script(character target)
       d = getBaredHandsDice(SELF_CHARACTER)
 
       # Do the attack
-      doAttack(SELF_CHARACTER, target, d, concept)
+      doAttack(SELF_CHARACTER, target, d, "ATTRIBUTE", concept)
    end
 
 end
