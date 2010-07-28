@@ -219,7 +219,8 @@ using namespace std;
 #define IA_FIGHT_GET_NEAREST_ENEMY "getNearestEnemy"
 /*! bool canAttack() */
 #define IA_FIGHT_CAN_ATTACK "canAttack"
-/*! bool doAttack(character actor, character target, dice d, string base) */
+/*! bool doAttack(character actor, character target, dice d, string factorType,
+ * string factorId) */
 #define IA_FIGHT_DO_ATTACK "doAttack"
 
 ////////////////////////////////////////////////////

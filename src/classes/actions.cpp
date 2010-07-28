@@ -137,9 +137,10 @@ bool doHealOrAttack(thing& actor, thing* target,
    brief.addText(texto);
 
    /* Verify Action Range */
-   if(!actionInRange(actor.xPosition, actor.zPosition, 
+   if( (range != 0) && 
+       (!actionInRange(actor.xPosition, actor.zPosition, 
                      target->xPosition, target->zPosition,
-                     range*METER_TO_DNT))
+                     range*METER_TO_DNT)))
    {
       brief.addText(gettext("Too far away for action!"), 225, 20, 20);
       return(false);

@@ -100,7 +100,8 @@ int numberActionType(string buffer);
  * \param target -> target of the action
  * \param diceInfo -> the action dice
  * \param conceptBonus -> pointer to the concept bonus (if one), or NULL
- * \param range -> action range
+ * \param range -> action range (==0 to not verify range: usually when already
+ *                               verified)
  * \param heal -> true if is a heal/fix feat, 
  *                false if is an attack/break one.
  * \return \c true if the feat was used.

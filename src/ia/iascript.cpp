@@ -1726,18 +1726,21 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    }
 
    /* Syntax:
-      bool doAttack(character actor, character target, dice d, string base) */
+      bool doAttack(character actor, character target, dice d, 
+                    string factorType, string factorId) */
    else if(functionName == IA_FIGHT_DO_ATTACK)
    {
       character* actor = getParameterc(token, strLine, pos);
       character* target = getParameterc(token, strLine, pos);
       diceThing* d = getParameterd(token, strLine, pos);
-      string baseBonus = getParameters(token, strLine, pos);
+      factor f;
+      f.type = getParameters(token, strLine, pos);
+      f.id = getParameters(token, strLine, pos);
       bool res = false;
 
       if( (actor) && (target) && (d) )
       {
-         // TODO doHealOrAttack(actor, target, *d, 
+         res = doHealOrAttack(*actor, target, *d, &f, 0, false); 
       }
 
       assignValue(var, (void*)&res, IA_TYPE_BOOL);

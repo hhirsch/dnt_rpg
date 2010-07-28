@@ -240,11 +240,21 @@ void feats::useFeat(int featNumber)
  ***************************************************************/
 bool feats::useFeatAtTarget(thing* actor, int featNumber, thing* target)
 {
+   briefing brief;
    iaScript* sc;
    engine* eng = (engine*)uEngine;
 
    if( (canUse(featNumber)) && (!m_feats[featNumber].info->scriptFile.empty()))
    {
+      /* Verify range */
+      if(!actionInRange(actor->xPosition, actor->zPosition, 
+               target->xPosition, target->zPosition,
+               m_feats[featNumber].info->range*METER_TO_DNT))
+      {
+         brief.addText(gettext("Too far away for action!"), 225, 20, 20);
+         return(false);
+      }
+
       /* Init the script to use */
       sc = new iaScript(m_feats[featNumber].info->scriptFile, uEngine);
 
