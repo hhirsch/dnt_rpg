@@ -103,7 +103,7 @@ bool isType(string s)
 bool isFunction(string s)
 {
    return( (s == IA_DEBUG_PRINT) || (s == IA_BRIEFING) || 
-           (s == IA_BRIEFING_COLOR) ||
+           (s == IA_BRIEFING_COLOR) || (s == IA_GET_TEXT) ||
            (s == IA_MOVE_TO_POSITION) || (s == IA_MOVE_TO_CHARACTER) ||
            (s == IA_MOVE_TO_OBJECT) || (s == IA_SET_IDLE) ||
            (s == IA_WAIT) || (s == IA_EXIT) ||
@@ -188,7 +188,8 @@ string functionType(string s)
    }
    /* String Functions */
    else if( (s == IA_SELF_MISSION) || (s == IA_ACTUAL_MAP) ||
-            (s == IA_WEAPON_GET_AMMO_TYPE) || (s == IA_WEAPON_GET_RANGE_TYPE))
+            (s == IA_WEAPON_GET_AMMO_TYPE) || (s == IA_WEAPON_GET_RANGE_TYPE) ||
+            (s == IA_GET_TEXT) )
    {
       return(IA_TYPE_STRING);
    }

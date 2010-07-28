@@ -30,6 +30,7 @@ syn keyword dntOperator       true false
 
 " Functions
 syn keyword dntFunction       wait print briefing briefingColor exit
+syn keyword dntFunction       gettext
 syn keyword dntFunction       moveToPosition moveToCharacter
 syn keyword dntFunction       moveToObject setIdle
 syn keyword dntFunction       missionAdd missionComplete missionIsActive

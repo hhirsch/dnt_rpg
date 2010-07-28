@@ -743,18 +743,10 @@ iaVariable* iaScript::getParameter(string& token, string strLine,
          /* Create the string value on the stack */
          iv = new iaVariable(IA_TYPE_STRING, "__param__");
 
-         if(token[0] == '\"')
-         {
-            /* remove the first and the last " */
-            token.erase(0,1);
-            token.erase(token.length()-1,1);
-            *(string*)iv->value = token;
-         }
-         else
-         {
-            /* Do the i18n */
-            *(string*)iv->value = translateDataString(token);
-         }
+         /* remove the first and the last " */
+         token.erase(0,1);
+         token.erase(token.length()-1,1);
+         *(string*)iv->value = token;
       }
       else
       {
@@ -1036,6 +1028,21 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    {
       /* Put the script file at EOF */
       file.seekg (0, ios::end);
+   }
+   /* Syntax string function(string s) */
+   else if( (functionName == IA_GET_TEXT) )
+   {
+      string st = getParameters(token, strLine, pos);
+
+      /* Set the result */
+      string vl = "";
+      
+      /* Syntax: string gettext(string s) */
+      if(functionName == IA_GET_TEXT)
+      {
+         vl = gettext(st.c_str()); 
+      }
+      assignValue(var, (void*)&vl, IA_TYPE_STRING);
    }
 
    ////////////////////////////////////////////////////
@@ -1863,7 +1870,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       assignValue(var, (void*)&vl, IA_TYPE_INT);
    }
 
-   /* Syntax string function(s) */
+   /* Syntax string function(weapon w) */
    else if( (functionName == IA_WEAPON_GET_AMMO_TYPE) ||
             (functionName == IA_WEAPON_GET_RANGE_TYPE) )
    {

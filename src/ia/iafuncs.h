@@ -109,6 +109,8 @@ using namespace std;
 ////////////////////////////////////////////////////
 /*! void exit() */
 #define IA_EXIT "exit"
+/*! string gettext(string) */
+#define IA_GET_TEXT "gettext"
 
 ////////////////////////////////////////////////////
 //                  Time Functions                //
