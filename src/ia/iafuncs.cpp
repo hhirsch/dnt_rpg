@@ -141,6 +141,7 @@ bool isFunction(string s)
            (s == IA_SET_BASE_DICE) || (s == IA_SET_ADITIONAL_DICE) ||
            (s == IA_WEAPON_EQUIPED) || (s == IA_GET_EQUIPED_WEAPON) ||
            (s == IA_WEAPON_GET_AMMO_TYPE) || (s == IA_WEAPON_GET_AMMO) ||
+           (s == IA_WEAPON_DEC_AMMO) ||
            (s == IA_WEAPON_GET_RANGE_TYPE) || (s == IA_WEAPON_GET_RANGE) );
 }
 
@@ -173,7 +174,7 @@ string functionType(string s)
             (s == IA_FEAT_GET_RANDOM_HEAL) ||
             (s == IA_FEAT_GET_POWERFULL_HEAL) ||
             (s == IA_GET_OBJECT_STATE) || (s == IA_CLASS_LEVEL) ||
-            (s == IA_ROLL_DICE) ||
+            (s == IA_ROLL_DICE) || (s == IA_WEAPON_DEC_AMMO) ||
             (s == IA_WEAPON_GET_AMMO) || (s == IA_WEAPON_GET_RANGE))
    {
       return(IA_TYPE_INT);

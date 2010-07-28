@@ -53,7 +53,7 @@ syn keyword dntFunction       particleAddToCharacter
 syn keyword dntFunction       setBaseDice setAditionalDice
 syn keyword dntFunction       doAttack featDec
 syn keyword dntFunction       weaponEquiped getEquipedWeapon
-syn keyword dntFunction       weaponGetAmmoType weaponGetAmmo
+syn keyword dntFunction       weaponGetAmmoType weaponGetAmmo weaponDecAmmo
 syn keyword dntFunction       weaponGetRangeType weaponGetRange
 
 syn sync lines=250

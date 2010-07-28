@@ -1827,6 +1827,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
 
    /* Syntax int function(weapon w) */
    else if( (functionName == IA_WEAPON_GET_AMMO) || 
+            (functionName == IA_WEAPON_DEC_AMMO) ||
             (functionName == IA_WEAPON_GET_RANGE) )
    {
       weapon* wp = NULL;
@@ -1842,6 +1843,12 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          /* Syntax: int weaponGetAmmo(weapon wp) */
          if(functionName == IA_WEAPON_GET_AMMO)
          {
+            vl = wp->getCurrentMunition(); 
+         }
+         /* Syntax: int weaponDecAmmo(weapon wp) */
+         else if(functionName == IA_WEAPON_DEC_AMMO)
+         {
+            wp->setCurrentMunition(wp->getCurrentMunition()-1);
             vl = wp->getCurrentMunition(); 
          }
          /* Syntax: int weaponGetRange(weapon wp) */

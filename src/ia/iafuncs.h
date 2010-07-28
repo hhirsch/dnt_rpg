@@ -242,6 +242,8 @@ using namespace std;
 #define IA_WEAPON_GET_AMMO_TYPE "weaponGetAmmoType"
 /*! int weaponGetAmmo(weapon w) */
 #define IA_WEAPON_GET_AMMO "weaponGetAmmo"
+/*! int weaponDecAmmo(weapon w) */
+#define IA_WEAPON_DEC_AMMO "weaponDecAmmo"
 /*! string weaponGetRangeType(weapon w) */
 #define IA_WEAPON_GET_RANGE_TYPE "weaponGetRangeType"
 /*! int weaponGetRange(weapon w) */
