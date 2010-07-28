@@ -1379,7 +1379,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       if(characterOwner)
       {
          /* Get really the feat */
-         ft = characterOwner->actualFeats.featByNumber(featID);
+         ft = characterOwner->actualFeats->featByNumber(featID);
       }
       else
       {
@@ -1432,25 +1432,25 @@ void iaScript::callFunction(iaVariable* var, string strLine,
             /* Syntax: int getRandomAttackFeat() */
             if(functionName == IA_FEAT_GET_RANDOM_ATTACK)
             {
-               ft = characterOwner->actualFeats.getRandomNPCAttackFeat(
+               ft = characterOwner->actualFeats->getRandomNPCAttackFeat(
                                                            characterOwner,dude);
             }
             /* Syntax: int getPowerfullAttackFeat() */
             else if(functionName == IA_FEAT_GET_POWERFULL_ATTACK)
             {
-               ft = characterOwner->actualFeats.getPowerfullAttackFeat(
+               ft = characterOwner->actualFeats->getPowerfullAttackFeat(
                                                            characterOwner,dude);
             }
             /* Syntax: int getRandomHealFeat() */
             else if(functionName == IA_FEAT_GET_RANDOM_HEAL)
             {
-               ft = characterOwner->actualFeats.getRandomHealFeat(
+               ft = characterOwner->actualFeats->getRandomHealFeat(
                                                                 characterOwner);
             }
             /* Syntax: int getPowerfullHealFeat() */
             else if(functionName == IA_FEAT_GET_POWERFULL_HEAL)
             {
-               ft=characterOwner->actualFeats.getPowerfullHealFeat(
+               ft=characterOwner->actualFeats->getPowerfullHealFeat(
                                                                 characterOwner);
             }
 
@@ -1488,7 +1488,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          {
             if( (characterOwner) && (characterOwner->getCanAttack()) )
             {
-               characterOwner->actualFeats.useFeatAtTarget(*characterOwner,
+               characterOwner->actualFeats->useFeatAtTarget(characterOwner,
                                                            featId, dude);
             }
          }

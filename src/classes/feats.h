@@ -145,7 +145,7 @@ class feats
 {
    public:
       /*! feats Constuctor */
-      feats();
+      feats(void* usedEngine);
       /*! feats Destructior */
       ~feats();
  
@@ -199,7 +199,7 @@ class feats
        * \param featNumber -> number of the feat to use
        * \param target -> target to use the feat 
        * \return true if used the feat, false if couldn't */
-      bool useFeatAtTarget(thing& actor, int featNumber, thing* target);
+      bool useFeatAtTarget(thing* actor, int featNumber, thing* target);
 
       /*! Use a feat at a target area
        * \param actor -> thing owner of the feat
@@ -208,7 +208,7 @@ class feats
        * \param y -> Y coordinate to use the feat
        * \param z -> Z coordinate to use the feat
        * \return true if used the feat, false if couldn't */
-      bool useFeatAtArea(thing& actor, int featNumber, 
+      bool useFeatAtArea(thing* actor, int featNumber, 
              float x, float y, float z);
 
       /*! Apply a permanent feat to the owner
@@ -221,11 +221,17 @@ class feats
 
       feat m_feats[MAX_FEATS];  /**< Internal Feats Struct */
       int  totalFeats;          /**< Actual Number of Feats */
+      void* uEngine;            /**< Pointer to the used engine */
 
       /*! Use a quantity of the feat and propagate to other dependent 
        * feats.
        * \param featNumber -> feat to use */
        void useFeat(int featNumber);
+
+       /*! Verify if can use the feat
+        * \para featNumber -> number of the feat
+        * \return true if can use */
+       bool canUse(int featNumber);
 };
 
 /*! List of All Feats on Game */

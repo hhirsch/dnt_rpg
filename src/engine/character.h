@@ -52,8 +52,9 @@ class character: public aniModel, public dntListElement
 {
    public:
       /*! Constructor
-       * \param ft -> pointer to all feats list */
-      character(featsList* ft);
+       * \param ft -> pointer to all feats list
+       * \param usedEngine -> pointer to the current engine */
+      character(featsList* ft, void* usedEngine);
       /*! Destructor */
       ~character();
 
@@ -215,7 +216,7 @@ class character: public aniModel, public dntListElement
       int classLevels[MAX_DISTINCT_CLASSES]; /**< Current level of each class */
       race* actualRace;         /**< Pointer to Race */
       align* actualAlign;       /**< Pointer to Align */
-      feats actualFeats;        /**< Feats owned by character */      
+      feats* actualFeats;       /**< Feats owned by character */      
 
       int actualFightGroup;     /**< fightGroup of character, used on battles*/
 

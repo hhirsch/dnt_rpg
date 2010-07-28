@@ -397,7 +397,7 @@ void fightSystem::doNPCAction(character* pers)
 
    if( (pers->currentEnemy != NULL) && (attackFeat != -1))
    {
-      pers->actualFeats.useFeatAtTarget(*pers,attackFeat, pers->currentEnemy);
+      pers->actualFeats->useFeatAtTarget(pers, attackFeat, pers->currentEnemy);
       verifyDeads();   
    }
 
@@ -413,7 +413,7 @@ int fightSystem::getNPCAttackFeat(character* pers, thing* target)
 {
    if( (target != NULL) && (pers != NULL))
    { 
-       return(pers->actualFeats.getRandomNPCAttackFeat(pers,
+       return(pers->actualFeats->getRandomNPCAttackFeat(pers,
                                                        (character*)target));
    }
    

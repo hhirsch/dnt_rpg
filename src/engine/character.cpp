@@ -41,7 +41,7 @@ using namespace std;
 /*********************************************************************
  *                             constructor                           *
  *********************************************************************/
-character::character(featsList* ft)
+character::character(featsList* ft, void* usedEngine)
 {
    int i;
 
@@ -50,6 +50,9 @@ character::character(featsList* ft)
 
    /* Create the Health Bar */
    lifeBar = new healthBar(5,64,59,74,NULL);
+
+   /* Create the feats list */
+   actualFeats = new feats(usedEngine);
 
    for(i=0; i<MAX_DISTINCT_CLASSES; i++)
    {
@@ -71,7 +74,7 @@ character::character(featsList* ft)
    /* Feat Details */
    if(ft != NULL)
    {
-      actualFeats.insertFeat(ft->featByNumber(FEAT_WEAPON_ATTACK));
+      actualFeats->insertFeat(ft->featByNumber(FEAT_WEAPON_ATTACK));
    }
    activeFeat = FEAT_WEAPON_ATTACK;
 
@@ -126,6 +129,10 @@ character::~character()
    if(effects)
    {
       delete(effects);
+   }
+   if(actualFeats)
+   {
+      delete(actualFeats);
    }
 }
 
@@ -548,7 +555,7 @@ int character::getActiveFeatRange()
    }
    else
    {
-      feat* ft = actualFeats.featByNumber(activeFeat);
+      feat* ft = actualFeats->featByNumber(activeFeat);
       if(ft)
       {
          return(ft->info->range);
@@ -860,7 +867,7 @@ character* characterList::insertCharacter(string file, featsList* ft,
   
    /* Create the Character */ 
    character* novo;
-   novo = new character(ft);
+   novo = new character(ft, pEngine);
    novo->orientation = 0.0f;
    novo->xPosition = 0.0f;
    novo->zPosition = 0.0f;

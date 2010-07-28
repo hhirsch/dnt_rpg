@@ -21,6 +21,8 @@
 #include "feats.h" 
 #include "actions.h"
 #include "../engine/util.h"
+#include "../engine/dccnit.h"
+#include "../ia/iascript.h"
 #include "../particle/partcontroller.h"
 #include "../lang/translate.h"
 #include "../etc/dirs.h"
@@ -109,9 +111,10 @@ featDescription::~featDescription()
 /***************************************************************
  *                       Constructor                           *
  ***************************************************************/
-feats::feats()
+feats::feats(void* usedEngine)
 {
    totalFeats = 0;
+   uEngine = usedEngine;
 }
 
 /***************************************************************
@@ -166,6 +169,43 @@ bool feats::insertFeat(featDescription* featInsert)
 }
 
 /***************************************************************
+ *                            canUse                           *
+ ***************************************************************/
+bool feats::canUse(int featNumber)
+{
+   char texto[255];
+   briefing brief;
+
+   /* Verify if the feat is valid */
+   if( (featNumber < 0) || (featNumber >= totalFeats) )
+   {
+      brief.addText(gettext("Invalid Talent"), 255, 0, 0);
+      return(false);
+   }
+
+   /* Verify if have the feat points to use it */
+   if(m_feats[featNumber].actualQuantity - 
+         m_feats[featNumber].info->costToUse >= 0)
+   {
+      /* Show feature name */
+      if(featNumber != FEAT_WEAPON_ATTACK)
+      {
+         sprintf(texto,"%s ",m_feats[featNumber].info->name.c_str());
+         brief.addText(texto); 
+      }
+
+      return(true);
+   }
+   else
+   {
+      /* Can't use due to points! */
+      brief.addText(gettext("Not enought points to use!"), 255, 10, 10);
+   }
+
+   return(false);
+}
+
+/***************************************************************
  *                          useFeat                            *
  ***************************************************************/
 void feats::useFeat(int featNumber)
@@ -198,16 +238,79 @@ void feats::useFeat(int featNumber)
 /***************************************************************
  *                       useFeatAtTarget                       *
  ***************************************************************/
-bool feats::useFeatAtTarget(thing& actor, int featNumber, thing* target)
+bool feats::useFeatAtTarget(thing* actor, int featNumber, thing* target)
 {
+   iaScript* sc;
+   engine* eng = (engine*)uEngine;
+
+   if( (canUse(featNumber)) && (!m_feats[featNumber].info->scriptFile.empty()))
+   {
+      /* Init the script to use */
+      sc = new iaScript(m_feats[featNumber].info->scriptFile, uEngine);
+      sc->init();
+
+      /* Set infos */
+      sc->defineCharacterOwner((character*)actor);
+      sc->defineMap(eng->getCurrentMap(), eng->NPCs);
+
+      /* Set parameters */
+      sc->setParameter("target", target);
+
+      /* Run it! */
+      sc->run(0);
+
+      /* Finish with the script */
+      sc->close();
+      delete(sc);
+
+      return(true);
+   }
+
+   return(false);
+
+#if 0
+      /* Try to use the feat */
+      if(doHealOrAttack(actor, target, 
+                        m_feats[featNumber].diceInfo, 
+                        &m_feats[featNumber].info->conceptBonus,
+                        m_feats[featNumber].range, heal))
+      {
+         /* Yes, we've used it */
+         useFeat(featNumber);
+
+         /* Apply Ammo for weapon, if needed */
+         if( (featNumber == FEAT_RANGED_ATTACK) || 
+             (featNumber == FEAT_MELEE_ATTACK) )
+         {
+            flushCurrentMunition();
+            /* Do the sound realted to the weapon, if one */
+            if(currentWeapon)
+            {
+               currentWeapon->playMainAttackSound(actor.xPosition, 
+                  actor.yPosition, actor.zPosition);
+            }
+         }
+
+         /* Yes, used the feat! */
+         return(true);
+      }
+      else
+      {
+         return(false);
+      }
+
+   /* Can't use due to ammo! */
+   /*brief.addText(gettext("Out of ammo!"), 255, 10, 10);*/
+#endif
 }
 
 /***************************************************************
  *                       useFeatAtArea                         *
  ***************************************************************/
-bool feats::useFeatAtArea(thing& actor, int featNumber, 
+bool feats::useFeatAtArea(thing* actor, int featNumber, 
              float x, float y, float z)
 {
+   /* TODO */
 }
 
 /***************************************************************
@@ -215,6 +318,7 @@ bool feats::useFeatAtArea(thing& actor, int featNumber,
  ***************************************************************/
 bool feats::applyPermanentFeat(thing* actor, int featNumber)
 {
+   /* TODO */
 }
 
 #if 0

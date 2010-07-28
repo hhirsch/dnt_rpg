@@ -2566,8 +2566,8 @@ int engine::verifyMouseActions(Uint8 mButton)
                              pers->name.c_str());
                      brief->addText(buf);
                      activeCharacter->setCanAttack(
-                        !activeCharacter->actualFeats.useFeatAtTarget(
-                           *activeCharacter, 
+                        !activeCharacter->actualFeats->useFeatAtTarget(
+                           activeCharacter, 
                            activeCharacter->getActiveFeat(), pers));
 
                      fight->verifyDeads();
