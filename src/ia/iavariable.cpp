@@ -334,7 +334,9 @@ void iaVariable::operator=(const iaVariable& v)
       }
       else if(type == IA_TYPE_DICE)
       {
-         cerr << "Invalid call to dice assign on the script!" << endl;
+         diceThing* varD = (diceThing*)value;
+         diceThing* parD = (diceThing*)v.value;
+         varD->populate(parD);
       }
       else
       {  

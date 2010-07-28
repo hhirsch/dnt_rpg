@@ -1740,7 +1740,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          // TODO doHealOrAttack(actor, target, *d, 
       }
 
-      assignValue(var, (void*)res, IA_TYPE_BOOL);
+      assignValue(var, (void*)&res, IA_TYPE_BOOL);
    }
 
    
@@ -1895,6 +1895,28 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          }
       }
       assignValue(var, (void*)&vl, IA_TYPE_STRING);
+   }
+   
+   /* Syntax dice function(weapon w) */
+   else if( (functionName == IA_WEAPON_GET_DICE) )
+   {
+      weapon* wp = NULL;
+      
+      /* Get weapon */
+      wp = getParameterw(token, strLine, pos);
+
+      /* Set the result */
+      diceThing vl;
+      
+      if(wp != NULL)
+      {
+         /* Syntax: dice weaponGetDice(weapon wp) */
+         if(functionName == IA_WEAPON_GET_DICE)
+         {
+            vl = wp->getDice(); 
+         }
+      }
+      assignValue(var, (void*)&vl, IA_TYPE_DICE);
    }
 
 

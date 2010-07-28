@@ -141,7 +141,7 @@ bool isFunction(string s)
            (s == IA_SET_BASE_DICE) || (s == IA_SET_ADITIONAL_DICE) ||
            (s == IA_WEAPON_EQUIPED) || (s == IA_GET_EQUIPED_WEAPON) ||
            (s == IA_WEAPON_GET_AMMO_TYPE) || (s == IA_WEAPON_GET_AMMO) ||
-           (s == IA_WEAPON_DEC_AMMO) ||
+           (s == IA_WEAPON_DEC_AMMO) || (s == IA_WEAPON_GET_DICE) ||
            (s == IA_WEAPON_GET_RANGE_TYPE) || (s == IA_WEAPON_GET_RANGE) );
 }
 
@@ -190,6 +190,11 @@ string functionType(string s)
             (s == IA_WEAPON_GET_AMMO_TYPE) || (s == IA_WEAPON_GET_RANGE_TYPE))
    {
       return(IA_TYPE_STRING);
+   }
+   /* Dice Functions */
+   else if( (s == IA_WEAPON_GET_DICE) )
+   {
+      return(IA_TYPE_DICE);
    }
    /* Character Functions */
    else if( (s == IA_SELF_CHARACTER) || (s == IA_ACTIVE_CHARACTER) ||

@@ -54,7 +54,7 @@ syn keyword dntFunction       setBaseDice setAditionalDice
 syn keyword dntFunction       doAttack featDec
 syn keyword dntFunction       weaponEquiped getEquipedWeapon
 syn keyword dntFunction       weaponGetAmmoType weaponGetAmmo weaponDecAmmo
-syn keyword dntFunction       weaponGetRangeType weaponGetRange
+syn keyword dntFunction       weaponGetRangeType weaponGetRange weaponGetDice
 
 syn sync lines=250
 

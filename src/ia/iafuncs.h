@@ -248,6 +248,8 @@ using namespace std;
 #define IA_WEAPON_GET_RANGE_TYPE "weaponGetRangeType"
 /*! int weaponGetRange(weapon w) */
 #define IA_WEAPON_GET_RANGE "weaponGetRange"
+/*! dice weaponGetDice(weapon w) */
+#define IA_WEAPON_GET_DICE "weaponGetDice"
 
 ////////////////////////////////////////////////////
 //                Character Functions             //
