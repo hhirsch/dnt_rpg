@@ -6,7 +6,9 @@ script(character target)
    dice d
    int curAmmo
    weapon curWeapon
-   string concept = "STRENGTH"
+   string concept
+   
+   concept = "STRENGTH"
 
    # Verify if is an weapon attack or unarmed
    if(weaponEquiped(SELF_CHARACTER) == true)

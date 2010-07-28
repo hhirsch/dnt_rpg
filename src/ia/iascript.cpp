@@ -1743,6 +1743,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       factor f;
       f.type = getParameters(token, strLine, pos);
       f.id = getParameters(token, strLine, pos);
+
       bool res = false;
 
       if( (actor) && (target) && (d) )
