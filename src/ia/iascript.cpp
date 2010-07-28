@@ -2265,6 +2265,28 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       }
    }
 
+   /* Syntax dice function(character c) */
+   else if( (functionName == IA_GET_BARED_HANDS_DICE) )
+   {
+      character* dude = NULL;
+      
+      /* Get character */
+      dude = getParameterc(token, strLine, pos);
+
+      /* Set the result */
+      diceThing vl;
+      
+      if(dude != NULL)
+      {
+         /* Syntax: dice getBaredHandsDice(weapon wp) */
+         if(functionName == IA_GET_BARED_HANDS_DICE)
+         {
+            vl = dude->getBaredHandsDice(); 
+         }
+      }
+      assignValue(var, (void*)&vl, IA_TYPE_DICE);
+   }
+
    ////////////////////////////////////////////////////
    //                Quick Pointers                  //
    ////////////////////////////////////////////////////

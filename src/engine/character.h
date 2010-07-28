@@ -209,6 +209,10 @@ class character: public aniModel, public dntListElement
       void render(bool updateAnimations, bool reflexion, bool shadow,
             sun* gameSun);
 
+      /*! Get the damage dice of character 'empty hands'
+       * \return bared hands damage dice */
+      diceThing getBaredHandsDice();
+
       /*! Define the character list as friend class */
       friend class characterList;
 
