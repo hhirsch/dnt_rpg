@@ -1854,8 +1854,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       
       if(wp != NULL)
       {
-         /* Syntax: int weaponGetAmmo(weapon wp) */
-         if(functionName == IA_WEAPON_GET_AMMO)
+         /* Syntax: string weaponGetAmmoType(weapon wp) */
+         if(functionName == IA_WEAPON_GET_AMMO_TYPE)
          {
             wi = wp->getMunitionType();
             if(wi)
@@ -1863,8 +1863,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
                vl = wi->name; 
             }
          }
-         /* Syntax: int weaponGetRange(weapon wp) */
-         else if(functionName == IA_WEAPON_GET_RANGE)
+         /* Syntax: string weaponGetRangeType(weapon wp) */
+         else if(functionName == IA_WEAPON_GET_RANGE_TYPE)
          {
             wi = wp->getRangeType();
             if(wi)
