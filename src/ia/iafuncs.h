@@ -227,6 +227,8 @@ using namespace std;
 /*! bool doAttackAgainst(character actor, character target, dice d, 
  * string factorType, string factorId, string againstType, string againstId) */
 #define IA_FIGHT_DO_ATTACK_AGAINST "doAttackAgainst"
+/*! bool doAttackWithoutResistence(character actor, character target, dice d) */
+#define IA_FIGHT_DO_ATTACK_WITHOUT_RESISTENCE "doAttackWithoutResistence"
 
 ////////////////////////////////////////////////////
 //                 Object Functions               //

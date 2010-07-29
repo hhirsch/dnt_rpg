@@ -117,6 +117,7 @@ bool isFunction(string s)
            (s == IA_FIGHT_EXIT) || (s == IA_FIGHT_CAN_ATTACK) ||
            (s == IA_FIGHT_RUN_AWAY_FROM_BATTLE) || (s == IA_FIGHT_DO_ATTACK) ||
            (s == IA_FIGHT_DO_ATTACK_AGAINST) ||
+           (s == IA_FIGHT_DO_ATTACK_WITHOUT_RESISTENCE) ||
            (s == IA_GET_OBJECT) || (s == IA_GET_OBJECT_STATE) ||
            (s == IA_CHARACTER_IS_ALIVE) || (s == IA_CHARACTER_IS_ALL_DEAD) ||
            (s == IA_CHARACTER_GET_PSYCHO) ||
@@ -161,7 +162,8 @@ string functionType(string s)
        (s == IA_CHARACTER_IS_ALIVE) || (s == IA_CHARACTER_IS_ALL_DEAD) ||
        (s == IA_CHARACTER_AT_RANGE) || (s == IA_WAIT) || 
        (s == IA_FIGHT_CAN_ATTACK) || (s == IA_DICE_ROLL) ||
-       (s == IA_FIGHT_DO_ATTACK) || (s == IA_FIGHT_DO_ATTACK_AGAINST) || 
+       (s == IA_FIGHT_DO_ATTACK) || (s == IA_FIGHT_DO_ATTACK_AGAINST) ||
+       (s == IA_FIGHT_DO_ATTACK_WITHOUT_RESISTENCE) || 
        (s == IA_WEAPON_EQUIPED) ) 
    {
       return(IA_TYPE_BOOL);

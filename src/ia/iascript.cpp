@@ -1736,6 +1736,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       bool doAttack(character actor, character target, dice d, 
                     string factorType, string factorId) */
    else if( (functionName == IA_FIGHT_DO_ATTACK) ||
+            (functionName == IA_FIGHT_DO_ATTACK_WITHOUT_RESISTENCE) ||
             (functionName == IA_FIGHT_DO_ATTACK_AGAINST) )
    {
       character* actor = getParameterc(token, strLine, pos);
@@ -1743,8 +1744,12 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       diceThing* d = getParameterd(token, strLine, pos);
       factor f;
       factor against;
-      f.type = getParameters(token, strLine, pos);
-      f.id = getParameters(token, strLine, pos);
+
+      if(functionName != IA_FIGHT_DO_ATTACK_WITHOUT_RESISTENCE)
+      {
+         f.type = getParameters(token, strLine, pos);
+         f.id = getParameters(token, strLine, pos);
+      }
 
       /* against concept factor, if needed */
       if(functionName == IA_FIGHT_DO_ATTACK_AGAINST)
@@ -1761,9 +1766,13 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          {
             res = doHealOrAttack(*actor, target, *d, &f, 0, false); 
          }
+         else if(functionName == IA_FIGHT_DO_ATTACK_WITHOUT_RESISTENCE)
+         {
+            res = doHealOrAttack(*actor, target, *d, NULL, NULL, 0, false); 
+         }
          else if(functionName == IA_FIGHT_DO_ATTACK_AGAINST)
          {
-            res = doHealOrAttack(*actor, target, *d, &f, against,
+            res = doHealOrAttack(*actor, target, *d, &f, &against,
                   0, false); 
          }
       }
