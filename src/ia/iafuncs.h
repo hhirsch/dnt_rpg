@@ -253,6 +253,10 @@ using namespace std;
 #define IA_WEAPON_GET_RANGE "weaponGetRange"
 /*! dice weaponGetDice(weapon w) */
 #define IA_WEAPON_GET_DICE "weaponGetDice"
+/*! void weaponSoundAtCharacter(weapon w, character dude) */
+#define IA_WEAPON_SOUND_AT_CHARACTER "weaponSoundAtCharacter"
+/*! void weaponSound(weapon w, float x, float y, float z) */
+#define IA_WEAPON_SOUND "weaponSound"
 
 ////////////////////////////////////////////////////
 //                Character Functions             //

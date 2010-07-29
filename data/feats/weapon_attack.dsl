@@ -34,6 +34,8 @@ script(character target)
 
       # Do the attack
       if(doAttack(SELF_CHARACTER, target, d, "ATTRIBUTE", concept))
+         # Make the weapon's sound
+         weaponSoundAtCharacter(curWeapon, SELF_CHARACTER)
          # Apply the ammo - 1, if needed
          if(weaponGetAmmoType(curWeapon) != "none")
             weaponDecAmmo(curWeapon)

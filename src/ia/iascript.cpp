@@ -1930,6 +1930,42 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       assignValue(var, (void*)&vl, IA_TYPE_DICE);
    }
 
+   /* syntax void function(weapon w, character dude) */
+   /* syntax void function(weapon w, float x, float y, float z) */
+   else if( (functionName == IA_WEAPON_SOUND) ||
+            (functionName == IA_WEAPON_SOUND_AT_CHARACTER) )
+   {
+      weapon* wp;
+      float x=0.0f, y=0.0f, z=0.0f;
+      /* Get weapon */
+      wp = getParameterw(token, strLine, pos);
+
+      if(functionName == IA_WEAPON_SOUND)
+      {
+         /* get the position */
+         x = getParameterf(token, strLine, pos);
+         y = getParameterf(token, strLine, pos);
+         z = getParameterf(token, strLine, pos);
+      }
+      else
+      {
+         /* Get the charater position */
+         character* dude = getParameterc(token, strLine, pos);
+         if(dude)
+         {
+            x = dude->xPosition;
+            y = dude->yPosition;
+            z = dude->zPosition;
+         }
+      }
+     
+      /* Finally, play the sound at the desired position */
+      if(wp)
+      {
+         wp->playMainAttackSound(x, y, z);
+      }
+   }
+
 
    ////////////////////////////////////////////////////
    //                Character Functions             //

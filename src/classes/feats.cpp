@@ -275,41 +275,6 @@ bool feats::useFeatAtTarget(thing* actor, int featNumber, thing* target)
    }
 
    return(false);
-
-#if 0
-      /* Try to use the feat */
-      if(doHealOrAttack(actor, target, 
-                        m_feats[featNumber].diceInfo, 
-                        &m_feats[featNumber].info->conceptBonus,
-                        m_feats[featNumber].range, heal))
-      {
-         /* Yes, we've used it */
-         useFeat(featNumber);
-
-         /* Apply Ammo for weapon, if needed */
-         if( (featNumber == FEAT_RANGED_ATTACK) || 
-             (featNumber == FEAT_MELEE_ATTACK) )
-         {
-            flushCurrentMunition();
-            /* Do the sound realted to the weapon, if one */
-            if(currentWeapon)
-            {
-               currentWeapon->playMainAttackSound(actor.xPosition, 
-                  actor.yPosition, actor.zPosition);
-            }
-         }
-
-         /* Yes, used the feat! */
-         return(true);
-      }
-      else
-      {
-         return(false);
-      }
-
-   /* Can't use due to ammo! */
-   /*brief.addText(gettext("Out of ammo!"), 255, 10, 10);*/
-#endif
 }
 
 /***************************************************************
