@@ -5,7 +5,7 @@ description = gettext("Due to the cerebral damages made by its graduation, the A
 id = ESTHETIC_SHOCK_II
 type = FEAT_TYPE_ON_TARGET
 action = ACT_ATTACK
-icon feats/Img/esthetic_shock_II.png
+icon = feats/Img/esthetic_shock_ii.png
 
 # Pre-requisites
 required = CLASS ADM 5

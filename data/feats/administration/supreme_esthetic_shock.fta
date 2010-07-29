@@ -5,7 +5,7 @@ description = gettext("It's the apex of shocking people that a common Administra
 id = SUPREME_ESTHETIC_SHOCK
 type = FEAT_TYPE_ON_TARGET
 action = ACT_ATTACK
-icon feats/Img/supreme_esthetic_shock.png
+icon = feats/Img/supreme_esthetic_shock.png
 
 # Pre-requisites
 required = CLASS ADM 20

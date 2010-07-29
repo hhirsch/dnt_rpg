@@ -42,7 +42,8 @@ enum
 {
    FEAT_TYPE_PERMANENT=0,  /**< Permanent feat (infinite modEffect type) */
    FEAT_TYPE_ON_TARGET,    /**< Use-on-target feat */
-   FEAT_TYPE_ON_AREA       /**< Use-on-area feat */
+   FEAT_TYPE_ON_AREA,      /**< Use-on-area feat */
+   FEAT_TYPE_TOTAL
 };
 
 

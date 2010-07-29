@@ -5,7 +5,7 @@ description = gettext("At his first level, the Administration Student can charge
 id = ESTHETIC_SHOCK_I
 type = FEAT_TYPE_ON_TARGET
 action = ACT_ATTACK
-icon feats/Img/esthetic_shock_i.png
+icon = feats/Img/esthetic_shock_i.png
 
 # Pre-requisites
 required = CLASS ADM 1

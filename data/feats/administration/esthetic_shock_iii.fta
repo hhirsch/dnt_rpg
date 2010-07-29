@@ -5,7 +5,7 @@ description = gettext("After lot of time, the cerebral damage is at unimaginable
 id = ESTHETIC_SHOCK_III
 type = FEAT_TYPE_ON_TARGET
 action = ACT_ATTACK
-icon feats/Img/esthetic_shock_iii.png
+icon = feats/Img/esthetic_shock_iii.png
 
 # Pre-requisites
 required = CLASS ADM 7

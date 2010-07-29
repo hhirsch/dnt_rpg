@@ -294,83 +294,6 @@ bool feats::applyPermanentFeat(thing* actor, int featNumber)
    /* TODO */
 }
 
-#if 0
-/***************************************************************
- *                   applyHealOrAttackFeat                     *
- ***************************************************************/
-bool feats::applyHealOrAttackFeat(thing& actor, int featNumber, 
-                                  thing* target, bool heal)
-{
-   char texto[255];
-   briefing brief;
-
-   /* Verify if the feat is valid */
-   if( (featNumber < 0) || (featNumber >= totalFeats) )
-   {
-      brief.addText(gettext("Invalid Talent"), 255, 0, 0);
-      return(false);
-   }
-
-   /* Get Ammo from weapon, if needed */
-   if( (featNumber == FEAT_RANGED_ATTACK) || 
-       (featNumber == FEAT_MELEE_ATTACK) )
-   {
-      defineWeapon(currentWeapon);
-   }
-
-   /* Verify if have the feat points to use it */
-   if( (m_feats[featNumber].actualQuantity > 0) ||
-       (featNumber == FEAT_MELEE_ATTACK) )
-   {
-      /* Show feature name */
-      sprintf(texto,"%s ",m_feats[featNumber].info->name.c_str());
-      brief.addText(texto);
-
-      /* Try to use the feat */
-      if(doHealOrAttack(actor, target, 
-                        m_feats[featNumber].diceInfo, 
-                        &m_feats[featNumber].info->conceptBonus,
-                        m_feats[featNumber].range, heal))
-      {
-         /* Yes, we've used it */
-         useFeat(featNumber);
-
-         /* Apply Ammo for weapon, if needed */
-         if( (featNumber == FEAT_RANGED_ATTACK) || 
-             (featNumber == FEAT_MELEE_ATTACK) )
-         {
-            flushCurrentMunition();
-            /* Do the sound realted to the weapon, if one */
-            if(currentWeapon)
-            {
-               currentWeapon->playMainAttackSound(actor.xPosition, 
-                  actor.yPosition, actor.zPosition);
-            }
-         }
-
-         /* Yes, used the feat! */
-         return(true);
-      }
-      else
-      {
-         return(false);
-      }
-   }
-
-   if((featNumber == FEAT_RANGED_ATTACK) || (featNumber == FEAT_MELEE_ATTACK))
-   {
-      /* Can't use due to ammo! */
-      brief.addText(gettext("Out of ammo!"), 255, 10, 10);
-   }
-   else
-   {
-      /* Can't use due to points! */
-      brief.addText(gettext("Not enought points to use!"), 255, 10, 10);
-   }
-   return(false);
-}
-#endif
-
 /***************************************************************
  *                         New Day                             *
  ***************************************************************/
@@ -541,7 +464,7 @@ void featsList::init(string dir, string arq)
    char buf3[256];
    reqFactor* req;
    string strBuffer;
-   int aux;
+   int aux, i;
 
    file.open(arq.c_str(), ios::in | ios::binary);
    if(!file)
@@ -602,6 +525,18 @@ void featsList::init(string dir, string arq)
          {
             m_feats[aux].idString = value;
          }
+         /* Type */
+         else if(key == "type")
+         {
+            for(i = 0; i < FEAT_TYPE_TOTAL; i++)
+            {
+               if(value == dntFeatTypeName[i])
+               {
+                  m_feats[aux].type = i;
+                  break;
+               }
+            }
+         }
          /* Action */
          else if(key == "action")
          {
@@ -620,7 +555,7 @@ void featsList::init(string dir, string arq)
          }
 
          /* Pre-Requistes */
-         else if(key == "requerided")
+         else if(key == "required")
          {
             req = new(reqFactor);
             sscanf(value.c_str(), "%s %s %d", 
