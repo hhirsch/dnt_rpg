@@ -97,6 +97,21 @@ bool doHealOrAttack(thing& actor, thing* target,
                     diceThing diceInfo, factor* conceptBonus,
                     int range, bool heal)
 {
+   factor against;
+
+   against.type = MOD_TYPE_THING;
+   against.id = THING_ARMATURE_CLASS;
+   return(doHealOrAttack(actor, target, diceInfo, conceptBonus, against,
+                         range, heal));
+}
+
+/***************************************************************
+ *                       doHealOrAttack                        *
+ ***************************************************************/
+bool doHealOrAttack(thing& actor, thing* target, 
+                    diceThing diceInfo, factor* conceptBonus,
+                    factor& conceptAgainst, int range, bool heal)
+{
    partController pSystem;
    int diceValue;
    int criticalRoll = -1;
@@ -174,9 +189,9 @@ bool doHealOrAttack(thing& actor, thing* target,
 
    //TODO apply reflexes bonus, esquive bonus, etc, to target,
    //depending of the attack type!
-   targetValue = target->armatureClass;
+   targetValue = target->getBonusValue(conceptAgainst);
 
-   /* Defined heal agains't as AC/2.0 */
+   /* Defined heal agains't as half difficult */
    if(heal)
    {
       targetValue /= 2.0f;

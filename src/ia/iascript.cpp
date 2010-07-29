@@ -1735,20 +1735,37 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    /* Syntax:
       bool doAttack(character actor, character target, dice d, 
                     string factorType, string factorId) */
-   else if(functionName == IA_FIGHT_DO_ATTACK)
+   else if( (functionName == IA_FIGHT_DO_ATTACK) ||
+            (functionName == IA_FIGHT_DO_ATTACK_AGAINST) )
    {
       character* actor = getParameterc(token, strLine, pos);
       character* target = getParameterc(token, strLine, pos);
       diceThing* d = getParameterd(token, strLine, pos);
       factor f;
+      factor against;
       f.type = getParameters(token, strLine, pos);
       f.id = getParameters(token, strLine, pos);
+
+      /* against concept factor, if needed */
+      if(functionName == IA_FIGHT_DO_ATTACK_AGAINST)
+      {
+         against.type = getParameters(token, strLine, pos);
+         against.id = getParameters(token, strLine, pos);
+      }
 
       bool res = false;
 
       if( (actor) && (target) && (d) )
       {
-         res = doHealOrAttack(*actor, target, *d, &f, 0, false); 
+         if(functionName == IA_FIGHT_DO_ATTACK)
+         {
+            res = doHealOrAttack(*actor, target, *d, &f, 0, false); 
+         }
+         else if(functionName == IA_FIGHT_DO_ATTACK_AGAINST)
+         {
+            res = doHealOrAttack(*actor, target, *d, &f, against,
+                  0, false); 
+         }
       }
 
       assignValue(var, (void*)&res, IA_TYPE_BOOL);

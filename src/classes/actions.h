@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -104,11 +104,27 @@ int numberActionType(string buffer);
  *                               verified)
  * \param heal -> true if is a heal/fix feat, 
  *                false if is an attack/break one.
- * \return \c true if the feat was used.
+ * \note -> this wil use armatureClass as against concept
+ * \return \c true if could attack
  ***************************************************************/
 bool doHealOrAttack(thing& actor, thing* target, 
                     diceThing diceInfo, factor* conceptBonus,
                     int range, bool heal);
+
+/*! Do an action that will affect the Life Points of the Target
+ * \param actor -> thing that will act
+ * \param target -> target of the action
+ * \param diceInfo -> the action dice
+ * \param conceptBonus -> pointer to the concept bonus (if one), or NULL
+ * \param conceptAgainst -> the target's concept to roll against
+ * \param range -> action range (==0 to not verify range: usually when already
+ *                               verified)
+ * \param heal -> true if is a heal/fix feat, 
+ *                false if is an attack/break one.
+ * \return \c true if could attack */
+bool doHealOrAttack(thing& actor, thing* target, 
+                    diceThing diceInfo, factor* conceptBonus,
+                    factor& conceptAgainst, int range, bool heal);
 
 #endif
 
