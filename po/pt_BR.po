@@ -7,52 +7,52 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-07-10 17:21-0300\n"
+"POT-Creation-Date: 2010-07-29 17:39-0300\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 
-#: src/classes/actions.cpp:128
+#: src/classes/actions.cpp:144
 #, c-format
 msgid "%s try to attack %s"
 msgstr "%s tenta atacar %s"
 
-#: src/classes/actions.cpp:133
+#: src/classes/actions.cpp:149
 #, c-format
 msgid "%s try to heal %s"
 msgstr "%s tenta medicar %s"
 
-#: src/classes/actions.cpp:143
+#: src/classes/actions.cpp:160 src/classes/feats.cpp:254
 msgid "Too far away for action!"
 msgstr "Muito distante para realizar ação!"
 
-#: src/classes/actions.cpp:236 src/classes/actions.cpp:259
+#: src/classes/actions.cpp:257 src/classes/actions.cpp:280
 msgid "Miss."
 msgstr "Falha."
 
-#: src/classes/actions.cpp:239 src/classes/actions.cpp:243
+#: src/classes/actions.cpp:260 src/classes/actions.cpp:264
 msgid "Critical Miss!"
 msgstr "Falha Crítica!"
 
-#: src/classes/actions.cpp:284
+#: src/classes/actions.cpp:307
 #, c-format
 msgid "Healed %d points."
 msgstr "Curou %d pontos."
 
-#: src/classes/actions.cpp:288
+#: src/classes/actions.cpp:311
 #, c-format
 msgid "Hit for %d points."
 msgstr "Acertou para %d pontos."
 
-#: src/classes/actions.cpp:307 src/classes/actions.cpp:310
+#: src/classes/actions.cpp:330 src/classes/actions.cpp:333
 msgid "Critical Heal!"
 msgstr "Cura Crítica!"
 
-#: src/classes/actions.cpp:315 src/classes/actions.cpp:319
+#: src/classes/actions.cpp:338 src/classes/actions.cpp:342
 msgid "Critical Hit!"
 msgstr "Dano Crítico!"
 
@@ -72,15 +72,11 @@ msgstr "Reflexos"
 msgid "I am Not a Fool"
 msgstr "Não Sou Bobo"
 
-#: src/classes/feats.cpp:185
+#: src/classes/feats.cpp:182
 msgid "Invalid Talent"
 msgstr "Habilidade Inválida"
 
-#: src/classes/feats.cpp:239
-msgid "Out of ammo!"
-msgstr "Sem munição!"
-
-#: src/classes/feats.cpp:244
+#: src/classes/feats.cpp:202
 msgid "Not enought points to use!"
 msgstr "Pontos não suficientes para usar!"
 
@@ -178,7 +174,7 @@ msgid "Attribute Description"
 msgstr "Descrição do Atributo"
 
 #: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:573
-#: src/engine/inventwindow.cpp:370 src/engine/options.cpp:1382
+#: src/engine/inventwindow.cpp:364 src/engine/options.cpp:1382
 msgid "Warning"
 msgstr "Aviso"
 
@@ -458,19 +454,19 @@ msgstr "Não é possível descansar no modo de batalha."
 msgid "Enemies nearby."
 msgstr "Inimigos próximos."
 
-#: src/engine/dccnit.cpp:1848
+#: src/engine/dccnit.cpp:1854
 msgid "No NPCs in the area."
 msgstr "Sem NPCs na área."
 
-#: src/engine/dccnit.cpp:1908
+#: src/engine/dccnit.cpp:1912
 msgid "Surprise Attack Turn."
 msgstr "Turno de ataque surpresa."
 
-#: src/engine/dccnit.cpp:1922
+#: src/engine/dccnit.cpp:1925
 msgid "No enemies in the area."
 msgstr "Sem inimigos na área."
 
-#: src/engine/dccnit.cpp:2110 src/engine/dccnit.cpp:2629
+#: src/engine/dccnit.cpp:2110 src/engine/dccnit.cpp:2628
 #: src/engine/shortcutswindow.cpp:51
 msgid "Nothing"
 msgstr "Nada"
@@ -493,11 +489,11 @@ msgstr "Porta"
 msgid "%s attacks %s"
 msgstr "%s ataca %s"
 
-#: src/engine/dccnit.cpp:2730
+#: src/engine/dccnit.cpp:2729
 msgid "No more actions. Turn ended."
 msgstr "Sem mais ações: Turno Finalizado."
 
-#: src/engine/dccnit.cpp:4248
+#: src/engine/dccnit.cpp:4260
 msgid "Exit Battle Mode"
 msgstr "Sai do Modo de Batalha"
 
@@ -604,7 +600,7 @@ msgstr "Descartar"
 msgid "%s reloaded %s with %s ammo."
 msgstr "%s carregou %s com munição %s."
 
-#: src/engine/inventwindow.cpp:371
+#: src/engine/inventwindow.cpp:365
 msgid "No equipped weapons are compatible with this munition type."
 msgstr "Nenhuma arma em uso é compatível com este tipo de munição."
 
@@ -2542,8 +2538,8 @@ msgstr ""
 
 #: data/races/autista.rca:6
 msgid ""
-"Being far too strange in someone else's eyes, the Strange Autistic receives -"
-"4 on all Social Tests when dealing with a target of opposite tendencies."
+"Being far too strange in someone else's eyes, the Strange Autistic receives "
+"-4 on all Social Tests when dealing with a target of opposite tendencies."
 msgstr ""
 "Sendo estranho demais para os olhos alheios, o Autista Estranho recebe -4 em "
 "todos os Testes Sociais quando lidam com alvos de tendências opostas à sua."
@@ -2883,21 +2879,21 @@ msgstr ""
 "os mesmos. Assim sendo, ele recebe a perícia Passe Livre como perícia de "
 "classe para qualquer classe escolhida."
 
-#: data/feats/melee_attack.fta:1
-msgid "Melee Attack"
-msgstr "Ataque"
+#: data/feats/weapon_attack.fta:1
+msgid "Common Attack"
+msgstr "Ataque Comum"
 
-#: data/feats/melee_attack.fta:2
-msgid "Character's melee attack."
-msgstr "Este é o ataque base do jogador. Varia com a arma utilizada."
+#: data/feats/weapon_attack.fta:2
+msgid "Character's common attack."
+msgstr "Ataque base do jogador. Varia com a arma utilizada."
 
-#: data/feats/ranged_attack.fta:1
-msgid "Ranged Attack"
-msgstr "Ataque à Distância"
+#: data/feats/weapon_attack.dsl:22
+msgid "Out of ammo!"
+msgstr "Sem munição!"
 
-#: data/feats/ranged_attack.fta:2
-msgid "Character's ranged attack."
-msgstr "Ataque à distância base do jogador. Varia com a arma utilizada."
+#: data/feats/weapon_attack.dsl:44
+msgid "No more ammo. Reload your weapon!"
+msgstr ""
 
 #: data/feats/administration/aberration.fta:1
 msgid "Aberration"
@@ -4820,3 +4816,9 @@ msgstr "Pesada"
 #: data/characters/pcs/santa.pc:1
 msgid "Santa Claws"
 msgstr "Papai Cruel"
+
+#~ msgid "Melee Attack"
+#~ msgstr "Ataque"
+
+#~ msgid "Character's melee attack."
+#~ msgstr "Este é o ataque base do jogador. Varia com a arma utilizada."

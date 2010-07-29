@@ -8,51 +8,52 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-07-10 17:21-0300\n"
+"POT-Creation-Date: 2010-07-29 17:39-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/classes/actions.cpp:128
+#: src/classes/actions.cpp:144
 #, c-format
 msgid "%s try to attack %s"
 msgstr ""
 
-#: src/classes/actions.cpp:133
+#: src/classes/actions.cpp:149
 #, c-format
 msgid "%s try to heal %s"
 msgstr ""
 
-#: src/classes/actions.cpp:143
+#: src/classes/actions.cpp:160 src/classes/feats.cpp:254
 msgid "Too far away for action!"
 msgstr ""
 
-#: src/classes/actions.cpp:236 src/classes/actions.cpp:259
+#: src/classes/actions.cpp:257 src/classes/actions.cpp:280
 msgid "Miss."
 msgstr ""
 
-#: src/classes/actions.cpp:239 src/classes/actions.cpp:243
+#: src/classes/actions.cpp:260 src/classes/actions.cpp:264
 msgid "Critical Miss!"
 msgstr ""
 
-#: src/classes/actions.cpp:284
+#: src/classes/actions.cpp:307
 #, c-format
 msgid "Healed %d points."
 msgstr ""
 
-#: src/classes/actions.cpp:288
+#: src/classes/actions.cpp:311
 #, c-format
 msgid "Hit for %d points."
 msgstr ""
 
-#: src/classes/actions.cpp:307 src/classes/actions.cpp:310
+#: src/classes/actions.cpp:330 src/classes/actions.cpp:333
 msgid "Critical Heal!"
 msgstr ""
 
-#: src/classes/actions.cpp:315 src/classes/actions.cpp:319
+#: src/classes/actions.cpp:338 src/classes/actions.cpp:342
 msgid "Critical Hit!"
 msgstr ""
 
@@ -72,15 +73,11 @@ msgstr ""
 msgid "I am Not a Fool"
 msgstr ""
 
-#: src/classes/feats.cpp:185
+#: src/classes/feats.cpp:182
 msgid "Invalid Talent"
 msgstr ""
 
-#: src/classes/feats.cpp:239
-msgid "Out of ammo!"
-msgstr ""
-
-#: src/classes/feats.cpp:244
+#: src/classes/feats.cpp:202
 msgid "Not enought points to use!"
 msgstr ""
 
@@ -178,7 +175,7 @@ msgid "Attribute Description"
 msgstr ""
 
 #: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:573
-#: src/engine/inventwindow.cpp:370 src/engine/options.cpp:1382
+#: src/engine/inventwindow.cpp:364 src/engine/options.cpp:1382
 msgid "Warning"
 msgstr ""
 
@@ -454,19 +451,19 @@ msgstr ""
 msgid "Enemies nearby."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1848
+#: src/engine/dccnit.cpp:1854
 msgid "No NPCs in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1908
+#: src/engine/dccnit.cpp:1912
 msgid "Surprise Attack Turn."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1922
+#: src/engine/dccnit.cpp:1925
 msgid "No enemies in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:2110 src/engine/dccnit.cpp:2629
+#: src/engine/dccnit.cpp:2110 src/engine/dccnit.cpp:2628
 #: src/engine/shortcutswindow.cpp:51
 msgid "Nothing"
 msgstr ""
@@ -489,11 +486,11 @@ msgstr ""
 msgid "%s attacks %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2730
+#: src/engine/dccnit.cpp:2729
 msgid "No more actions. Turn ended."
 msgstr ""
 
-#: src/engine/dccnit.cpp:4248
+#: src/engine/dccnit.cpp:4260
 msgid "Exit Battle Mode"
 msgstr ""
 
@@ -600,7 +597,7 @@ msgstr ""
 msgid "%s reloaded %s with %s ammo."
 msgstr ""
 
-#: src/engine/inventwindow.cpp:371
+#: src/engine/inventwindow.cpp:365
 msgid "No equipped weapons are compatible with this munition type."
 msgstr ""
 
@@ -2163,8 +2160,8 @@ msgstr ""
 
 #: data/races/autista.rca:6
 msgid ""
-"Being far too strange in someone else's eyes, the Strange Autistic receives -"
-"4 on all Social Tests when dealing with a target of opposite tendencies."
+"Being far too strange in someone else's eyes, the Strange Autistic receives "
+"-4 on all Social Tests when dealing with a target of opposite tendencies."
 msgstr ""
 
 #: data/races/autista.rca:8
@@ -2410,20 +2407,20 @@ msgid ""
 "Carte Blanche."
 msgstr ""
 
-#: data/feats/melee_attack.fta:1
-msgid "Melee Attack"
+#: data/feats/weapon_attack.fta:1
+msgid "Common Attack"
 msgstr ""
 
-#: data/feats/melee_attack.fta:2
-msgid "Character's melee attack."
+#: data/feats/weapon_attack.fta:2
+msgid "Character's common attack."
 msgstr ""
 
-#: data/feats/ranged_attack.fta:1
-msgid "Ranged Attack"
+#: data/feats/weapon_attack.dsl:22
+msgid "Out of ammo!"
 msgstr ""
 
-#: data/feats/ranged_attack.fta:2
-msgid "Character's ranged attack."
+#: data/feats/weapon_attack.dsl:44
+msgid "No more ammo. Reload your weapon!"
 msgstr ""
 
 #: data/feats/administration/aberration.fta:1

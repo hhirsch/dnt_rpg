@@ -1,5 +1,5 @@
-title = gettext("Weapon Attack")
-description = gettext("Character's weapon attack.")
+title = gettext("Common Attack")
+description = gettext("Character's common attack.")
 
 id = WEAPON_ATTACK
 type = FEAT_TYPE_ON_TARGET

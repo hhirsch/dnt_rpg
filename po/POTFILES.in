@@ -177,8 +177,8 @@ data/races/mutante.rca
 data/races/skinhead.rca
 
 #feats
-data/feats/melee_attack.fta
-data/feats/ranged_attack.fta
+data/feats/weapon_attack.fta
+data/feats/weapon_attack.dsl
 data/feats/administration/aberration.fta
 data/feats/administration/esthetic_shock_i.fta
 data/feats/administration/esthetic_shock_ii.fta
