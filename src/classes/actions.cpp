@@ -101,7 +101,7 @@ bool doHealOrAttack(thing& actor, thing* target,
 
    against.type = MOD_TYPE_THING;
    against.id = THING_ARMATURE_CLASS;
-   return(doHealOrAttack(actor, target, diceInfo, conceptBonus, against,
+   return(doHealOrAttack(actor, target, diceInfo, conceptBonus, &against,
                          range, heal));
 }
 
@@ -110,7 +110,7 @@ bool doHealOrAttack(thing& actor, thing* target,
  ***************************************************************/
 bool doHealOrAttack(thing& actor, thing* target, 
                     diceThing diceInfo, factor* conceptBonus,
-                    factor& conceptAgainst, int range, bool heal)
+                    factor* conceptAgainst, int range, bool heal)
 {
    partController pSystem;
    int diceValue;
@@ -175,108 +175,113 @@ bool doHealOrAttack(thing& actor, thing* target,
    //TODO verify if can use or not based on target thing
 
 
-   /* Apply Bonuses */
-   //FIXME get fromm the relative attack, not always of the first!
-   bonus = actor.sizeModifier + 
-           actor.curBonusAndSaves.baseAttackBonus.getBonus(1);
-   if(conceptBonus)
-   { 
-      bonus += actor.getBonusValue(*conceptBonus);
-   }
-
-   dice d20;
-   diceValue = d20.roll();
-
-   //TODO apply reflexes bonus, esquive bonus, etc, to target,
-   //depending of the attack type!
-   targetValue = target->getBonusValue(conceptAgainst);
-
-   /* Defined heal agains't as half difficult */
-   if(heal)
+   /* If no concept test, always hit! */
+   if(conceptAgainst)
    {
-      targetValue /= 2.0f;
-   }
-
-   /* verify critical Hit */
-   if(diceValue == DICE_D20)
-   {
-      criticalRoll = d20.roll();
-      if( (criticalRoll + bonus - targetValue) > 0)
-      {
-         criticalHit = true;
+      /* Apply Bonuses */
+      //FIXME get fromm the relative attack, not always of the first!
+      bonus = actor.sizeModifier + 
+         actor.curBonusAndSaves.baseAttackBonus.getBonus(1);
+      if(conceptBonus)
+      { 
+         bonus += actor.getBonusValue(*conceptBonus);
       }
-   }
-   else
-   {
-      /* verify critical Miss */
-      if( diceValue == 1)  
+
+      dice d20;
+      diceValue = d20.roll();
+
+      //TODO apply reflexes bonus, esquive bonus, etc, to target,
+      //depending of the attack type!
+      targetValue = target->getBonusValue(*conceptAgainst);
+
+      /* Defined heal agains't as half difficult */
+      if(heal)
       {
-         miss = true;
+         targetValue /= 2.0f;
+      }
+
+      /* verify critical Hit */
+      if(diceValue == DICE_D20)
+      {
          criticalRoll = d20.roll();
-         if( (criticalRoll + bonus - targetValue) <= 0 )
+         if( (criticalRoll + bonus - targetValue) > 0)
          {
-            criticalMiss = true;
-         }
-      }
-   }
-
-   /* Put Dice Values on Briefing */
-   char txtBonus[32];
-   if(bonus >= 0)
-   {
-      sprintf(txtBonus,"+%d",bonus);
-   }
-   else
-   {
-      sprintf(txtBonus,"%d",bonus);
-   }
-
-   if(criticalRoll != -1)
-   {
-      sprintf(texto,"%d(%s) & (%d%s) x %d : ",diceValue,txtBonus,
-            criticalRoll,
-            txtBonus,targetValue);
-   }
-   else
-   {
-      sprintf(texto,"%d(%s) x %d : ",diceValue,txtBonus,targetValue);
-   }
-   diceText = texto;
-
-   //apply bonus (skill bonus)
-   diceValue += bonus;
-
-   /*TODO apply resistances  */
-
-   if( (diceValue - targetValue <= 0) || (criticalMiss) || (miss) )
-   {
-      brief.addText(diceText + gettext("Miss."));
-      if( criticalMiss )
-      {
-         brief.addText(gettext("Critical Miss!"), 220, 0, 0);
-         controller.addMessage(actor.xPosition,
-               actor.yPosition+actor.max[1],
-               actor.zPosition,
-               gettext("Critical Miss!"),
-               0.92,0.41,0.14);
-         if(heal)
-         {
-            /* Damage the target with ??? ! */
-            //TODO
-         }
-         else
-         {
-            //TODO lose weapon;
+            criticalHit = true;
          }
       }
       else
       {
-         controller.addMessage(actor.xPosition,
-               actor.yPosition+actor.max[1],
-               actor.zPosition,gettext("Miss."),
-               0.92,0.41,0.14);
+         /* verify critical Miss */
+         if( diceValue == 1)  
+         {
+            miss = true;
+            criticalRoll = d20.roll();
+            if( (criticalRoll + bonus - targetValue) <= 0 )
+            {
+               criticalMiss = true;
+            }
+         }
       }
-      return(true);
+
+      /* Put Dice Values on Briefing */
+      char txtBonus[32];
+      if(bonus >= 0)
+      {
+         sprintf(txtBonus,"+%d",bonus);
+      }
+      else
+      {
+         sprintf(txtBonus,"%d",bonus);
+      }
+
+      if(criticalRoll != -1)
+      {
+         sprintf(texto,"%d(%s) & (%d%s) x %d : ",diceValue,txtBonus,
+               criticalRoll,
+               txtBonus,targetValue);
+      }
+      else
+      {
+         sprintf(texto,"%d(%s) x %d : ",diceValue,txtBonus,targetValue);
+      }
+      diceText = texto;
+
+      //apply bonus (skill bonus)
+      diceValue += bonus;
+
+      /*TODO apply resistances  */
+
+      if( (diceValue - targetValue <= 0) || (criticalMiss) || (miss) )
+      {
+         brief.addText(diceText + gettext("Miss."));
+         if( criticalMiss )
+         {
+            brief.addText(gettext("Critical Miss!"), 220, 0, 0);
+            controller.addMessage(actor.xPosition,
+                  actor.yPosition+actor.max[1],
+                  actor.zPosition,
+                  gettext("Critical Miss!"),
+                  0.92,0.41,0.14);
+            if(heal)
+            {
+               /* Damage the target with ??? ! */
+               //TODO
+            }
+            else
+            {
+               //TODO lose weapon;
+            }
+         }
+         else
+         {
+            controller.addMessage(actor.xPosition,
+                  actor.yPosition+actor.max[1],
+                  actor.zPosition,gettext("Miss."),
+                  0.92,0.41,0.14);
+         }
+         return(true);
+      }
+
    }
 
    /* Apply Base Damage Dices */
@@ -379,5 +384,4 @@ bool doHealOrAttack(thing& actor, thing* target,
 
    return(true);
 }
-
 

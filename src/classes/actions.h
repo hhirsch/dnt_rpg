@@ -116,7 +116,8 @@ bool doHealOrAttack(thing& actor, thing* target,
  * \param target -> target of the action
  * \param diceInfo -> the action dice
  * \param conceptBonus -> pointer to the concept bonus (if one), or NULL
- * \param conceptAgainst -> the target's concept to roll against
+ * \param conceptAgainst -> the target's concept to roll against (NULL for no
+ * resistence test)
  * \param range -> action range (==0 to not verify range: usually when already
  *                               verified)
  * \param heal -> true if is a heal/fix feat, 
@@ -124,7 +125,7 @@ bool doHealOrAttack(thing& actor, thing* target,
  * \return \c true if could attack */
 bool doHealOrAttack(thing& actor, thing* target, 
                     diceThing diceInfo, factor* conceptBonus,
-                    factor& conceptAgainst, int range, bool heal);
+                    factor* conceptAgainst, int range, bool heal);
 
 #endif
 
