@@ -1,4 +1,4 @@
-# Esthetic Shock I Talent
+# Esthetic Shock II Talent
 # for 1st level ADM
 script(character target)
    dice d
@@ -8,7 +8,7 @@ script(character target)
    sumValue = skillPoints(SELF_CHARACTER, "BIZARRE_CLOTHES") / 2;
 
    # Define the base damage
-   setBaseDice3i(d, 1, 4, sumValue);
+   setBaseDice3i(d, 1, 6, sumValue);
 
    # Do the attack
    doAttackAgainst(SELF_CHARACTER, target, d, "SKILL", "BIZARRE_CLOTHES", "THING", "I_AM_NOT_A_FOOL");

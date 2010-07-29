@@ -1,24 +1,22 @@
 title = gettext("Supreme Esthetic Shock")
 description = gettext("It's the apex of shocking people that a common Administration Student can achieve. The student capacity to discern what is an watermelon than what is a cloth is void. For now on, the Esthetic Shock can inflict 3d12 points of damage. The use of this feat consumes 3 Esthetic Shocks I.")
 
-# The Pre-Requisite
-requerided = CLASS ADM
-reqValue = 20
-
 # The ID
 id = SUPREME_ESTHETIC_SHOCK
+type = FEAT_TYPE_ON_TARGET
+action = ACT_ATTACK
+icon feats/Img/supreme_esthetic_shock.png
 
-# The base attribute to bonus the d20 roll
-bonus = ATTRIBUTE BIZARRE_CLOTHES
+# Pre-requisites
+required = CLASS ADM 20
 
-# The Damage/Range Info
-range = 12
-affect = TARGET
-damage = 2*d6+0
-aditionalDice = 0
-quantityPerDay = 1
-aditionalQuantity = 1
-aditionalLevels = 2
-depFeat = 3.0 ESTHETIC_SHOCK_I
-depFeat = 3.0 ESTHETIC_SHOCK_II
-depFeat = 2.0 ESTHETIC_SHOCK_III
+range = 30
+
+# Quantities
+quantity = 1
+costToUse = 1
+aditionalQuantity = ADM 20 1 2
+
+powerLevel = 10
+script = supreme_esthetic_shock.dsl
+

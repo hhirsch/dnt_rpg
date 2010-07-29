@@ -3,9 +3,9 @@ description = gettext("At his first level, the Administration Student can charge
 
 # The ID
 id = ESTHETIC_SHOCK_I
-type = FAT_TYPE_ON_TARGET
+type = FEAT_TYPE_ON_TARGET
 action = ACT_ATTACK
-icon feats/Img/esthetic_shock_I.png
+icon feats/Img/esthetic_shock_i.png
 
 # Pre-requisites
 required = CLASS ADM 1
@@ -19,10 +19,5 @@ aditionalQuantity = ADM 1 1 2
 
 powerLevel = 3
 script = esthetic_shock_i.dsl
-
-# Dep Feats
-depFeat = ESTHETIC_SHOCK_II 1
-depFeat = ESTHETIC_SHOCK_III 0.5
-depFeat = SUPREME_ESTHETIC_SHOCK 0.33
 
 

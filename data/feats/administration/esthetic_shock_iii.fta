@@ -1,23 +1,21 @@
 title = gettext("Esthetic Shock III")
 description = gettext("After lot of time, the cerebral damage is at unimaginable levels. Now the Administration Student Esthetic Shock inflicts 2d6 of damage. The use of this feat consumes 2 Esthetic Shocks I")
 
-# The Pre-Requisite
-requerided = CLASS ADM
-reqValue = 15
-
 # The ID
 id = ESTHETIC_SHOCK_III
+type = FEAT_TYPE_ON_TARGET
+action = ACT_ATTACK
+icon feats/Img/esthetic_shock_iii.png
 
-# The base attribute to bonus the d20 roll
-bonus = ATTRIBUTE BIZARRE_CLOTHES
+# Pre-requisites
+required = CLASS ADM 7
 
-# The Damage/Range Info
-range = 12
-affect = TARGET
-damage = 2*d6+0
-aditionalDice = 0
-quantityPerDay = 1
-aditionalQuantity = 1
-aditionalLevels = 2
-depFeat = 2.0 ESTHETIC_SHOCK_I
-depFeat = 2.0 ESTHETIC_SHOCK_II
+range = 30
+
+# Quantities
+quantity = 1
+costToUse = 1
+aditionalQuantity = ADM 15 1 2
+
+powerLevel = 7
+script = esthetic_shock_iii.dsl
