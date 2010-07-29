@@ -2893,7 +2893,7 @@ msgstr "Sem munição!"
 
 #: data/feats/weapon_attack.dsl:44
 msgid "No more ammo. Reload your weapon!"
-msgstr ""
+msgstr "A munição acabou. Recarrege sua arma!"
 
 #: data/feats/administration/aberration.fta:1
 msgid "Aberration"
