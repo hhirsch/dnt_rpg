@@ -31,6 +31,7 @@ using namespace std;
 
 #define MOD_TYPE_ATT   "ATTRIBUTE"
 #define MOD_TYPE_SKILL "SKILL"
+#define MOD_TYPE_THING "THING"
 
 /**! Actuation Factor */
 class factor

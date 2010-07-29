@@ -163,6 +163,17 @@ int thing::getBonusValue(factor something)
          cerr << "Unknow Skill: " << something.id << endl;
       }
    }
+   else if(something.type == MOD_TYPE_THING)
+   {
+      if(something.id == THING_ARMATURE_CLASS)
+      {
+         return(armatureClass);
+      }
+      else if(something.id == THING_SIZE_MODIFIER)
+      {
+         return(sizeModifier);
+      }
+   }
    
    return(0);
 }
