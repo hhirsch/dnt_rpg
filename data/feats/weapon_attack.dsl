@@ -38,10 +38,11 @@ script(character target)
          weaponSoundAtCharacter(curWeapon, SELF_CHARACTER)
          # Apply the ammo - 1, if needed
          if(weaponGetAmmoType(curWeapon) != "none")
-            weaponDecAmmo(curWeapon)
-
-            # Show a message if no more ammo, to allow pc reload
-            briefing(gettext("No more ammo. Reload your weapon!"))
+            
+            if(weaponDecAmmo(curWeapon) <= 0)
+               # Show a message if no more ammo, to allow pc reload
+               briefing(gettext("No more ammo. Reload your weapon!"))
+            end
          end
       end
 
