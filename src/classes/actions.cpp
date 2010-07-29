@@ -251,7 +251,8 @@ bool doHealOrAttack(thing& actor, thing* target,
 
       /*TODO apply resistances  */
 
-      if( (diceValue - targetValue <= 0) || (criticalMiss) || (miss) )
+      if( ( (diceValue - targetValue <= 0) || (criticalMiss) || (miss) ) &&
+          (criticalHit) )
       {
          brief.addText(diceText + gettext("Miss."));
          if( criticalMiss )
