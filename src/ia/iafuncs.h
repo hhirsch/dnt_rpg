@@ -319,6 +319,8 @@ using namespace std;
 ////////////////////////////////////////////////////
 /*! void setBaseDice(dice d, string diceInfo) */
 #define IA_SET_BASE_DICE "setBaseDice"
+/*! void setBaseDice3i(dice, int numDices, int diceId, int sum) */
+#define IA_SET_BASE_DICE_3I "setBaseDice3i"
 /*! void setAditionalDice(dice d, int numberOfDices, string diceInfo) */
 #define IA_SET_ADITIONAL_DICE "setAditionalDice"
 /*! dice getBaredHandsDice(character c) */

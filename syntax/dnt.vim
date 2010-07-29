@@ -52,6 +52,7 @@ syn keyword dntFunction       isAllDead mapTravel
 syn keyword dntFunction       classLevel roll rollDice addEffect
 syn keyword dntFunction       particleAddToCharacter
 syn keyword dntFunction       setBaseDice setAditionalDice getBaredHandsDice
+syn keyword dntFunction       setBaseDice3i
 syn keyword dntFunction       doAttack doAttackAgainst featDec
 syn keyword dntFunction       weaponEquiped getEquipedWeapon
 syn keyword dntFunction       weaponGetAmmoType weaponGetAmmo weaponDecAmmo

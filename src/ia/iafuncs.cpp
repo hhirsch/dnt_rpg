@@ -140,7 +140,7 @@ bool isFunction(string s)
            (s == IA_OWNER_POSZ) || 
            (s == IA_PARTICLE_ADD_TO_CHARACTER) || 
            (s == IA_SET_BASE_DICE) || (s == IA_SET_ADITIONAL_DICE) ||
-           (s == IA_GET_BARED_HANDS_DICE) ||
+           (s == IA_GET_BARED_HANDS_DICE) || (s == IA_SET_BASE_DICE_3I) ||
            (s == IA_WEAPON_EQUIPED) || (s == IA_GET_EQUIPED_WEAPON) ||
            (s == IA_WEAPON_GET_AMMO_TYPE) || (s == IA_WEAPON_GET_AMMO) ||
            (s == IA_WEAPON_DEC_AMMO) || (s == IA_WEAPON_GET_DICE) ||
