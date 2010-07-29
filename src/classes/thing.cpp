@@ -173,6 +173,27 @@ int thing::getBonusValue(factor something)
       {
          return(sizeModifier);
       }
+      else if(something.id == DNT_BS_LEVEL)
+      {
+         return(curBonusAndSaves.level);
+      }
+      else if(something.id == DNT_BS_FORTITUDE)
+      {
+         return(curBonusAndSaves.fortitude);
+      }
+      else if(something.id == DNT_BS_REFLEXES)
+      {
+         return(curBonusAndSaves.reflexes);
+      }
+      else if( (something.id == DNT_BS_I_AM_NOT_A_FOOL) ||
+               (something.id == DNT_BS_WILL) )
+      {
+         return(curBonusAndSaves.iAmNotAFool);
+      }
+      else
+      {
+         cerr << "Unknow thing: " << something.id << endl;
+      }
    }
    
    return(0);
