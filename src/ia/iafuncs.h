@@ -202,6 +202,8 @@ using namespace std;
 #define IA_SKILL_POINTS "skillPoints"
 /*! int attModifier(character c, string attID) */
 #define IA_ATT_MODIFIER "attModifier"
+/*! int thingValue(character c, string thingID) */
+#define IA_THING_VALUE "thingValue"
 
 ////////////////////////////////////////////////////
 //                  Class Functions               //

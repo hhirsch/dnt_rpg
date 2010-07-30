@@ -39,7 +39,7 @@ syn keyword dntFunction       missionSetTemp missionGetTemp missionSetXp
 syn keyword dntFunction       featActualQuantity featCost featQuantityPerDay
 syn keyword dntFunction       getRandomAttackFeat getPowerfullAttackFeat
 syn keyword dntFunction       getRandomHealFeat getPowerfullHealFeat
-syn keyword dntFunction       skillPoints attModifier
+syn keyword dntFunction       skillPoints attModifier thingValue
 syn keyword dntFunction       combatEnter getNearestEnemy
 syn keyword dntFunction       getNPCByName isAlive
 syn keyword dntFunction       getPsycho setPsycho getActualLife getMaxLife

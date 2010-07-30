@@ -1574,6 +1574,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    /* Syntax int function(character c, string s) */
    else if((functionName == IA_SKILL_POINTS) || 
            (functionName == IA_ATT_MODIFIER) ||
+           (functionName == IA_THING_VALUE) ||
            (functionName == IA_CLASS_LEVEL) )
    {
       character* c = NULL;
@@ -1623,6 +1624,14 @@ void iaScript::callFunction(iaVariable* var, string strLine,
                int i = c->attBonus(skl);
                assignValue(var, (void*)&i, IA_TYPE_INT);
             }
+         }
+         else if(functionName == IA_THING_VALUE)
+         {
+            factor th;
+            th.type = MOD_TYPE_THING;
+            th.id = tmpName;
+            int i = c->getBonusValue(th);
+            assignValue(var, (void*)&i, IA_TYPE_INT);
          }
       }
    }
