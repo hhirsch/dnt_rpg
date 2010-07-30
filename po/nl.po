@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-07-29 17:39-0300\n"
+"POT-Creation-Date: 2010-07-30 11:27-0300\n"
 "PO-Revision-Date: 2009-04-16 21:14+0000\n"
 "Last-Translator: Marcel de Klein <q-bus@home.nl>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -2491,6 +2491,21 @@ msgid ""
 "The Biology Student can thrown its bottle of worms collected from ameiva's "
 "bowels, one time per day added by one more time for each level after the "
 "4th, inflicting 1d6+Biology Student Level points of damage."
+msgstr ""
+
+#: data/feats/biology/arc_impulse.fta:1
+msgid "Arc Impulse"
+msgstr ""
+
+#: data/feats/biology/arc_impulse.fta:2
+msgid ""
+"At this time, the Biology Student can two times per day do a great combo "
+"with his Ameiva and a Formica, this way: The formica goes up to the ameiva's "
+"tail, and when the ameiva strikes the enemy with its tail, throws the little "
+"insect directly to enemy's eyes (a Fortitude test is needed to avoid "
+"confusion, with a difficulty of 1d6+ Biology Student Level), followed by an "
+"incredible Biology Student's strike. This feat will cause 1d6 + Biology "
+"Student Level points of damage."
 msgstr ""
 
 #: data/feats/biology/mass_arthropds_attack.fta:1
