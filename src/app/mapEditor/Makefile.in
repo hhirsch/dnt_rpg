@@ -71,7 +71,7 @@ OBJSENGINE = $(ENDENGINE)alignwindow.o $(ENDENGINE)aspectwindow.o \
 				 $(ENDENGINE)modstate.o $(ENDENGINE)options.o \
 				 $(ENDENGINE)character.o $(ENDENGINE)racewindow.o \
 				 $(ENDENGINE)savefile.o  $(ENDENGINE)savewindow.o \
-				 $(ENDENGINE)skillwindow.o \
+				 $(ENDENGINE)skillwindow.o $(ENDENGINE)featsel.o \
 				 $(ENDENGINE)shadow.o $(ENDENGINE)shortcutswindow.o \
 				 $(ENDENGINE)sky.o $(ENDENGINE)sun.o $(ENDENGINE)util.o
 OBJS = area.o editor.o grasswindow.o guiIO.o listwindow.o mapEditor.o \
