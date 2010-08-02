@@ -129,6 +129,12 @@ class character: public aniModel, public dntListElement
        *          and can take a level at the specified class */
       void getNewClassLevel(classe* cl);
 
+      /*! Verify if a character can have a feat or not (based on its
+       * pre-requisites)
+       * \param f -> pointer to the feat to verify
+       * \return true if can  */
+      bool canHaveFeat(feat* f);
+
       /*! Clear Skills */
       void clearSkills();
 

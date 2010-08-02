@@ -251,6 +251,47 @@ int character::getLevel(classe* cl)
 }
 
 /*********************************************************************
+ *                            canHaveFeat                            *
+ *********************************************************************/
+bool character::canHaveFeat(feat* f)
+{
+   int i;
+   reqFactor* req;
+
+   if(f != NULL)
+   {
+      req = (reqFactor*)f->info->reqFactors.getFirst();
+      for(i = 0; i < f->info->reqFactors.getTotal(); i++)
+      {
+         if(req->requiredFactor.type == MOD_TYPE_ATT)
+         {
+            /* Att, since if call getBonusValue will only receive 
+             * the bonus, not the attribute*/
+            skill* ski = sk.getSkillByString(req->requiredFactor.id);
+            if(ski)
+            {
+               if(ski->points < req->requiredLevel)
+               {
+                  return(false);
+               }
+            }
+         }
+         else
+         {
+            if(getBonusValue(req->requiredFactor) < req->requiredLevel)
+            {
+               return(false);
+            }
+         }
+         req = (reqFactor*)req->getNext();
+      }
+      return(true);
+   }
+
+   return(false);
+}
+
+/*********************************************************************
  *                           getActiveFeat                           *
  *********************************************************************/
 int character::getActiveFeat()
