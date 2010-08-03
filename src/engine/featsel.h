@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2010 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -26,6 +26,9 @@
 
 #define TALENT_WINDOW_CANCEL     0
 #define TALENT_WINDOW_CONFIRM    1
+#define TALENT_WINDOW_OTHER      2
+
+#define FEATS_PER_PAGE  5
 
 /*! The featSelWindow defines a window where the user can select new
  * available talents to its character */
@@ -53,8 +56,7 @@ class featSelWindow
        * \param object -> last GUI object
        * \param eventInfo -> last GUI Event
        * \return != 0 if event is gathered */
-      int treat(guiObject* object, int eventInfo,
-                GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
+      int treat(guiObject* object, int eventInfo);
 
       /*! Verify if the window is openned
        * \return true if opened, false otherwise. */
@@ -89,6 +91,10 @@ class featSelWindow
 
       /*! Define all available feats for the current character */
       void defineAvailableFeats();
+
+      /*! Draw all related gui with feats
+       * \param f -> feat to show description */
+      void drawThings(fSelFeat* f);
      
       window* intWindow;         /**< Pointer to the internal window */
       guiInterface* inter;       /**< Current GUI interface */
@@ -97,6 +103,23 @@ class featSelWindow
       featsList* allFeats;         /**< List of all feats in game */
       fSelFeatList availableFeats; /**< List of available feats */
       fSelFeatList selectedFeats;  /**< List of selected feats */
+
+      textBox* textAvail[FEATS_PER_PAGE];  /**< Available feats text */
+      picture* picAvail[FEATS_PER_PAGE];   /**< Available feats picture */
+      button* buttonInsert[FEATS_PER_PAGE];/**< Insert Available feat buttons */
+      button* nextAvailButton;             /**< Next Page Button on available */
+      textBox* textAvailPage;              /**< Page of available feats */
+      button* prevAvailButton;         /**< Previous Page Button on available */
+      textBox* textSel[FEATS_PER_PAGE];    /**< Selected feats text */
+      picture* picSel[FEATS_PER_PAGE];     /**< Selected feats picture */
+      button* buttonRemove[FEATS_PER_PAGE];/**< Remove Selected feat buttons */
+      button* nextSelButton;               /**< Next Page button on selected */
+      textBox* textSelPage;                /**< Page of selected feats */
+      button* prevSelButton;            /**< Previous page button on selected */
+
+      textBox* textTitle;             /**< Feat title */
+      rolBar* textDescription;        /**< Feat description */
+      picture* picFeat;               /**< Feat image */
 
 
       button* okButton;          /**< The ok Button */

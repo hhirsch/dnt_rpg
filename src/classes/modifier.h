@@ -33,6 +33,10 @@ using namespace std;
 #define MOD_TYPE_SKILL "SKILL"
 #define MOD_TYPE_THING "THING"
 
+#define MOD_TYPE_CLASS "CLASS"
+#define MOD_TYPE_RACE  "RACE"
+#define MOD_TYPE_ALIGN "ALIGN"
+
 /**! Actuation Factor */
 class factor
 {

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2010 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -139,15 +139,10 @@ void featSelWindow::defineAvailableFeats()
  ********************************************************************/
 void featSelWindow::open(character* pers, featsList* fList, int total)
 {
-   dirs dir;
-   int i;
-
-   /* Set open position */
-   int posY = 1;
-   int posX = 0;
-
-   char buf[512];
-   string tmpStr = "";
+   int i, y;
+   int centerY = SCREEN_Y / 2;
+   int centerX = SCREEN_X / 2;
+   dntFont fnt;
 
    /* Ignore, if pers or fList not defined */
    if( (!pers) || (!fList) )
@@ -163,13 +158,78 @@ void featSelWindow::open(character* pers, featsList* fList, int total)
    defineAvailableFeats();
 
    /* Create Window */
-   intWindow = inter->insertWindow(posX, posY, posX+340, posY+278,
-                                   pers->name);
+   intWindow = inter->insertWindow(centerX-200, centerY-200, 
+         centerX+200, centerY+200, gettext("Talents"));
+
+   intWindow->getObjectsList()->insertTextBox(10, 18, 194, 36, 1, 
+         gettext("Available"))->setFont(DNT_FONT_ARIAL,12,
+         DNT_FONT_ALIGN_CENTER, DNT_FONT_STYLE_BOLD);
+
+   intWindow->getObjectsList()->insertTextBox(195, 18, 390, 36, 1, 
+         gettext("Selected"))->setFont(DNT_FONT_ARIAL,12,
+         DNT_FONT_ALIGN_CENTER, DNT_FONT_STYLE_BOLD);
+
+   /* Each Feat */
+   y = 37;
+   for(i=0; i < FEATS_PER_PAGE; i++)
+   {
+      buttonInsert[i] = intWindow->getObjectsList()->insertButton(176, y+9, 
+            190, y+27, fnt.createUnicode(0x25BA),0);
+      buttonRemove[i] =  intWindow->getObjectsList()->insertButton(200, y+9, 
+            214, y+27, fnt.createUnicode(0x25C4),0); 
+
+      y += 34;
+   }
+
+   /* Contorn */
+   intWindow->getObjectsList()->insertTextBox(10, 37, 194, y+5, 1, "");
+   intWindow->getObjectsList()->insertTextBox(195, 37, 390, y+5, 1, "");
+
+   /* Available page selectors */
+   prevAvailButton = intWindow->getObjectsList()->insertButton(10, y+6,
+                                    25, y+24, fnt.createUnicode(0x25C4),0);
+   textAvailPage = intWindow->getObjectsList()->insertTextBox(26, y+6, 
+                                   178, y+24, 1, "0/0");
+   textAvailPage->setFont(DNT_FONT_ARIAL,10,DNT_FONT_ALIGN_CENTER,
+                          DNT_FONT_STYLE_BOLD);
+   nextAvailButton = intWindow->getObjectsList()->insertButton(179, y+6,
+                                    194, y+24, fnt.createUnicode(0x25BA),0);
+
+   /* Selected page selectors */ 
+   prevSelButton = intWindow->getObjectsList()->insertButton(195, y+6,
+                                    210, y+24, fnt.createUnicode(0x25C4),0);
+   textSelPage = intWindow->getObjectsList()->insertTextBox(211, y+6, 
+                                   374, y+24, 1, "0/0");
+   textSelPage->setFont(DNT_FONT_ARIAL,10,DNT_FONT_ALIGN_CENTER,
+                          DNT_FONT_STYLE_BOLD);
+   nextSelButton = intWindow->getObjectsList()->insertButton(375, y+6,
+                                   390, y+24, fnt.createUnicode(0x25BA),0);
+
+   /* Title & Description */
+   textTitle = intWindow->getObjectsList()->insertTextBox(10, y+25, 390, y+43,
+         1, "");
+   textTitle->setFont(DNT_FONT_ARIAL,10,DNT_FONT_ALIGN_CENTER,
+         DNT_FONT_STYLE_BOLD);
+   textDescription = intWindow->getObjectsList()->insertRolBar(10, y+44, 
+                                   390, 350, "");
+   picFeat = intWindow->getObjectsList()->insertPicture(184,354,0,0,NULL);
+   picFeat->setSurfaceDeletion(false);
+
+   /* Ok Button */
+   okButton = intWindow->getObjectsList()->insertButton(320,370,390,389,
+         gettext("Confirm"),1);
+
+   /* Cancel Button */
+   cancelButton = intWindow->getObjectsList()->insertButton(10,370,80,389,
+         gettext("Cancel"),1);
 
    /* Open Window */
    intWindow->setExternPointer(&intWindow);
    intWindow->setAttributes(true,true,false,false);
    inter->openWindow(intWindow);
+
+   /* Draw things */
+   drawThings(NULL);
 }
 
 /********************************************************************
@@ -195,19 +255,52 @@ bool featSelWindow::isOpen()
 }
 
 /********************************************************************
+ *                          drawThings                              *
+ ********************************************************************/
+void featSelWindow::drawThings(fSelFeat* f)
+{
+   if(f == NULL)
+   {
+      f = (fSelFeat*)availableFeats.getFirst();
+      if(f == NULL)
+      {
+         f = (fSelFeat*)selectedFeats.getFirst();
+         if(f == NULL)
+         {
+            return;
+         }
+      }
+   }
+
+
+   /* Set selected feat title and description */
+   textTitle->setText(f->desc->name);
+   textDescription->setText(f->desc->description);
+   picFeat->set(f->desc->image);
+   intWindow->draw(0,0);
+}
+
+/********************************************************************
  *                              treat                               *
  ********************************************************************/
-int featSelWindow::treat(guiObject* object, int eventInfo,
-                      GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
+int featSelWindow::treat(guiObject* object, int eventInfo)
 {
    if(!isOpen())
    {
-      return(0);
+      return(TALENT_WINDOW_CANCEL);
    }
 
    if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
    {
+      if(object == (guiObject*)okButton)
+      {
+         return(TALENT_WINDOW_CONFIRM);
+      }
+      else if(object == (guiObject*)cancelButton)
+      {
+         return(TALENT_WINDOW_CANCEL);
+      }
    }
-   return(0);
+   return(TALENT_WINDOW_OTHER);
 }
 

@@ -56,6 +56,7 @@
 #include "collision.h"
 #include "cursor.h"
 #include "dialog.h"
+#include "featsel.h"
 #include "initial.h"
 #include "inventwindow.h"
 #include "itemwindow.h"

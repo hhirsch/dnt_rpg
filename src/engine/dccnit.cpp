@@ -1369,6 +1369,9 @@ int engine::characterScreen()
    /* Class Window */
    classWindow* clWindow = NULL;
 
+   /* Feature select window */
+   featSelWindow* talentWindow = NULL;
+
    /* Aspect Window */
    aspectWindow* aspWindow = NULL;
 
@@ -1379,7 +1382,7 @@ int engine::characterScreen()
    activeCharacter = PCs->getActiveCharacter();
    raceWindow* rcWindow = new raceWindow(gui, &activeCharacter->actualRace);
 
-   while( (status != 6) )
+   while( (status != 7) )
    {
       time = SDL_GetTicks();
       if(time - timeAnterior >= UPDATE_RATE) 
@@ -1419,7 +1422,7 @@ int engine::characterScreen()
             }
             else if(charCreation == RACEW_CANCEL)
             {
-               status = 6;
+               status = 7;
                delete(rcWindow);
                charCreation = CHAR_CANCEL;
             }
@@ -1489,7 +1492,8 @@ int engine::characterScreen()
             {
                status = 5;
                delete(skWindow);
-               aspWindow = new aspectWindow(activeCharacter, gui);
+               talentWindow = new featSelWindow(gui);
+               talentWindow->open(activeCharacter, features, 2);
             }
             else if(charCreation == SKILLW_CANCEL)
             {
@@ -1499,22 +1503,40 @@ int engine::characterScreen()
                atWindow = new attWindow(&activeCharacter->sk, gui, mods, true);
             }
          }
-         /* Aspect Window Opened */
+         /* Talent Window */
          else if(status == 5)
+         {
+            charCreation = talentWindow->treat(guiObj, eventInfo);
+            if(charCreation == TALENT_WINDOW_CONFIRM)
+            {
+               status = 6;
+               delete(talentWindow);
+               aspWindow = new aspectWindow(activeCharacter, gui);
+            }
+            else if(charCreation == TALENT_WINDOW_CANCEL)
+            {
+               status = 4;
+               delete(talentWindow);
+               skWindow = new skillWindow(&activeCharacter->sk,
+                                          gui, activeCharacter->getLevel());
+            }
+         }
+         /* Aspect Window Opened */
+         else if(status == 6)
          {
             charCreation = aspWindow->treat(guiObj, eventInfo, gui);
             if(charCreation == ASPECTW_CONFIRM)
             {
-               status = 6;
+               status = 7;
                delete(aspWindow);
                charCreation = CHAR_CONFIRM;
             }
             else if(charCreation == ASPECTW_CANCEL)
             {
-               status = 4;
+               status = 5;
                delete(aspWindow);
-               skWindow = new skillWindow(&activeCharacter->sk,
-                                          gui, activeCharacter->getLevel());
+               talentWindow = new featSelWindow(gui);
+               talentWindow->open(activeCharacter, features, 2);
             }
          }         
       }
