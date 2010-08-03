@@ -68,6 +68,11 @@ class character: public aniModel, public dntListElement
       int getLevel();
 
       /*! Get the character level for a specific class
+       * \param classId -> id of the class
+       * \return -> number of levels the character has on class */
+      int getLevel(string classId);
+
+      /*! Get the character level for a specific class
        * \param cl -> clas to get how many levels the character has
        * \return -> number of lvels the character has on class cl */
       int getLevel(classe* cl);

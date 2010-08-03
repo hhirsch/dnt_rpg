@@ -251,6 +251,22 @@ int character::getLevel(classe* cl)
 }
 
 /*********************************************************************
+ *                             getLevel                              *
+ *********************************************************************/
+int character::getLevel(string classId)
+{
+   int i;
+   for(i = 0; i < MAX_DISTINCT_CLASSES; i++)
+   {
+      if((actualClass[i] != NULL) && (actualClass[i]->strID == classId))
+      {
+         return(classLevels[i]);
+      }
+   }
+   return(0);
+}
+
+/*********************************************************************
  *                            canHaveFeat                            *
  *********************************************************************/
 bool character::canHaveFeat(featDescription* f)
@@ -274,6 +290,27 @@ bool character::canHaveFeat(featDescription* f)
                {
                   return(false);
                }
+            }
+         }
+         else if(MOD_TYPE_CLASS)
+         {
+            if(getLevel(req->requiredFactor.id) < req->requiredLevel)
+            {
+               return(false);
+            }
+         }
+         else if(MOD_TYPE_ALIGN)
+         {
+            if(actualAlign->strID != req->requiredFactor.id)
+            {
+               return(false);
+            }
+         }
+         else if(MOD_TYPE_RACE)
+         {
+            if(actualRace->strID != req->requiredFactor.id)
+            {
+               return(false);
             }
          }
          else
