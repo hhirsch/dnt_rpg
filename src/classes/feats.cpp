@@ -662,6 +662,14 @@ featDescription* featsList::featByNumber(int featNumber)
 }
 
 /***************************************************************
+ *                          getTotal                           *
+ ***************************************************************/
+int featsList::getTotal()
+{
+   return(totalFeats);
+}
+
+/***************************************************************
  *                       static members                        *
  ***************************************************************/
 featDescription* featsList::m_feats=NULL;

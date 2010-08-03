@@ -38,6 +38,25 @@ void featSelWindow::fSelFeatList::freeElement(dntListElement* obj)
 }
 
 /********************************************************************
+ *                             getFeat                              *
+ ********************************************************************/
+featSelWindow::fSelFeat* featSelWindow::fSelFeatList::getFeat(string featId)
+{
+   int i;
+   featSelWindow::fSelFeat* f = (featSelWindow::fSelFeat*)getFirst();
+   for(i=0; i < total; i++)
+   {
+      if(f->desc->idString == featId)
+      {
+         return(f);
+      }
+      f = (featSelWindow::fSelFeat*)f->getNext();
+   }
+
+   return(NULL);
+}
+
+/********************************************************************
  *                           Constructor                            *
  ********************************************************************/
 featSelWindow::featSelWindow(guiInterface* interf)
@@ -55,6 +74,64 @@ featSelWindow::featSelWindow(guiInterface* interf)
 featSelWindow::~featSelWindow()
 {
    close();
+}
+
+/********************************************************************
+ *                       defineAvailableFeats                       *
+ ********************************************************************/
+void featSelWindow::defineAvailableFeats()
+{
+   int i, j;
+   featDescription* def;
+   fSelFeat* fSel;
+
+   /* Verify all available feats */
+   for(i=0; i < allFeats->getTotal(); i++)
+   {
+      def = allFeats->featByNumber(i);
+      if( (current->canHaveFeat(def)) && (!current->haveFeat(def->idString)) )
+      {
+         /* Available: Insert it at list */
+         fSel = new(fSelFeat);
+         fSel->desc = def;
+         fSel->classFeat = false;
+         availableFeats.insert(fSel);
+      }
+   }
+   
+   /* Define all race feats */
+   if(current->actualRace)
+   {
+      for(j = 0; j < current->actualRace->totalFeats; j++)
+      {
+         fSel = availableFeats.getFeat(current->actualRace->raceFeats[j]);
+         if(fSel)
+         {
+            fSel->classFeat = true;
+            availableFeats.removeWithoutDelete(fSel);
+            selectedFeats.insert(fSel); 
+         }
+      }
+   }
+
+   /* Define all class feats (already putting it at the selected) */
+   for(i=0; i < MAX_DISTINCT_CLASSES; i++)
+   {
+      if(current->actualClass[i])
+      {
+         /* Verify all class feats */
+         for(j = 0; j < current->actualClass[i]->totalFeats; j++)
+         {
+            fSel=availableFeats.getFeat(current->actualClass[i]->classFeats[j]);
+            if(fSel)
+            {
+               fSel->classFeat = true;
+               availableFeats.removeWithoutDelete(fSel);
+               selectedFeats.insert(fSel); 
+            }
+         }
+      }
+   }
 }
 
 /********************************************************************
@@ -80,6 +157,10 @@ void featSelWindow::open(character* pers, featsList* fList, int total)
 
    /* Set Current */
    current = pers;
+   allFeats = fList;
+
+   /* Define Available Feats */
+   defineAvailableFeats();
 
    /* Create Window */
    intWindow = inter->insertWindow(posX, posY, posX+340, posY+278,

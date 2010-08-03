@@ -24,6 +24,9 @@
 #include "../gui/farso.h"
 #include "character.h"
 
+#define TALENT_WINDOW_CANCEL     0
+#define TALENT_WINDOW_CONFIRM    1
+
 /*! The featSelWindow defines a window where the user can select new
  * available talents to its character */
 class featSelWindow
@@ -73,17 +76,25 @@ class featSelWindow
          public:
             /*! Destructor */
             ~fSelFeatList();
+            /*! Get the fSelFeat from list
+             * \param featId -> Id of the feat to get
+             * \return poiter to the feat got (or NULL) */
+            fSelFeat* getFeat(string featId);
          protected:
             /*! Free Element
              * \param obj -> pointer to the
              * depFeat to delete */
             void freeElement(dntListElement* obj);
       };
+
+      /*! Define all available feats for the current character */
+      void defineAvailableFeats();
      
       window* intWindow;         /**< Pointer to the internal window */
       guiInterface* inter;       /**< Current GUI interface */
       character* current;        /**< Current opened character */
 
+      featsList* allFeats;         /**< List of all feats in game */
       fSelFeatList availableFeats; /**< List of available feats */
       fSelFeatList selectedFeats;  /**< List of selected feats */
 

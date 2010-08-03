@@ -253,15 +253,15 @@ int character::getLevel(classe* cl)
 /*********************************************************************
  *                            canHaveFeat                            *
  *********************************************************************/
-bool character::canHaveFeat(feat* f)
+bool character::canHaveFeat(featDescription* f)
 {
    int i;
    reqFactor* req;
 
    if(f != NULL)
    {
-      req = (reqFactor*)f->info->reqFactors.getFirst();
-      for(i = 0; i < f->info->reqFactors.getTotal(); i++)
+      req = (reqFactor*)f->reqFactors.getFirst();
+      for(i = 0; i < f->reqFactors.getTotal(); i++)
       {
          if(req->requiredFactor.type == MOD_TYPE_ATT)
          {
@@ -289,6 +289,14 @@ bool character::canHaveFeat(feat* f)
    }
 
    return(false);
+}
+
+/*********************************************************************
+ *                              haveFeat                             *
+ *********************************************************************/
+bool character::haveFeat(string featId)
+{
+   return(actualFeats->featByString(featId) != NULL);
 }
 
 /*********************************************************************

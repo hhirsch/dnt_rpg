@@ -131,9 +131,14 @@ class character: public aniModel, public dntListElement
 
       /*! Verify if a character can have a feat or not (based on its
        * pre-requisites)
-       * \param f -> pointer to the feat to verify
+       * \param f -> pointer to the featDescription to verify
        * \return true if can  */
-      bool canHaveFeat(feat* f);
+      bool canHaveFeat(featDescription* f);
+
+      /*! Verify if already have a feat
+       * \param featId -> identifier of the feat
+       * \return true if already have the feat */
+      bool haveFeat(string featId);
 
       /*! Clear Skills */
       void clearSkills();

@@ -268,6 +268,9 @@ class featsList
        ***************************************************************/
       featDescription* featByNumber(int featNumber);
 
+      /*! Get the total number of feats */
+      int getTotal();
+
    private:
       static featDescription* m_feats; /**< Internal Desc Struct */
       static int totalFeats;           /**< Total Declared Feats */
