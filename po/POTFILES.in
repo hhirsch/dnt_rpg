@@ -36,6 +36,7 @@ src/engine/culling.cpp
 src/engine/cursor.cpp
 src/engine/dccnit.cpp
 src/engine/dialog.cpp
+src/engine/featsel.cpp
 src/engine/initial.cpp
 src/engine/inventwindow.cpp
 src/engine/itemwindow.cpp
@@ -195,6 +196,7 @@ data/feats/mandatory/rookie.fta
 data/feats/physicaled/esophagus.fta
 data/feats/physicaled/i_am_a_little_conan.fta
 data/feats/physicaled/virtually_invencible.fta
+data/feats/elective/strong_will.fta
 
 #skills
 data/skills/acrobacias.ski

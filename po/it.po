@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-07-30 11:27-0300\n"
+"POT-Creation-Date: 2010-08-04 11:10-0300\n"
 "PO-Revision-Date: 2010-07-09 07:28+0000\n"
 "Last-Translator: gugand <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -97,15 +97,16 @@ msgstr "Tendenza & Allineamento"
 
 #: src/engine/alignwindow.cpp:72 src/engine/aspectwindow.cpp:93
 #: src/engine/attwindow.cpp:236 src/engine/classwindow.cpp:117
-#: src/engine/options.cpp:1089 src/engine/racewindow.cpp:117
-#: src/engine/skillwindow.cpp:159
+#: src/engine/featsel.cpp:231 src/engine/options.cpp:1089
+#: src/engine/racewindow.cpp:117 src/engine/skillwindow.cpp:159
 msgid "Confirm"
 msgstr "Conferma"
 
 #: src/engine/alignwindow.cpp:76 src/engine/aspectwindow.cpp:97
 #: src/engine/attwindow.cpp:240 src/engine/barterwindow.cpp:68
-#: src/engine/classwindow.cpp:121 src/engine/options.cpp:1093
-#: src/engine/racewindow.cpp:121 src/engine/skillwindow.cpp:162
+#: src/engine/classwindow.cpp:121 src/engine/featsel.cpp:235
+#: src/engine/options.cpp:1093 src/engine/racewindow.cpp:121
+#: src/engine/skillwindow.cpp:162
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -289,7 +290,7 @@ msgstr "Modificatore Dimensione"
 msgid "Level Up"
 msgstr "Avanzamento di Livello"
 
-#: src/engine/charwindow.cpp:264
+#: src/engine/charwindow.cpp:264 src/engine/featsel.cpp:162
 msgid "Talents"
 msgstr "Talenti"
 
@@ -445,58 +446,58 @@ msgstr ""
 "hanno sviluppato queste librerie: OpenAL, Cal3D, OpenGL, SDL, SDL_image, "
 "SDL_ttf, libVorbis."
 
-#: src/engine/dccnit.cpp:1727
+#: src/engine/dccnit.cpp:1749
 msgid "Too far away for the action!"
 msgstr "Troppo lontano per l'azione!"
 
-#: src/engine/dccnit.cpp:1744
+#: src/engine/dccnit.cpp:1766
 msgid "Couldn't rest at battle mode."
 msgstr "Non ci si può riposare in modalità di combattimento"
 
-#: src/engine/dccnit.cpp:1750
+#: src/engine/dccnit.cpp:1772
 msgid "Enemies nearby."
 msgstr "Nemici nei paraggi"
 
-#: src/engine/dccnit.cpp:1854
+#: src/engine/dccnit.cpp:1876
 msgid "No NPCs in the area."
 msgstr "Nessun NPC nell'area"
 
-#: src/engine/dccnit.cpp:1912
+#: src/engine/dccnit.cpp:1934
 msgid "Surprise Attack Turn."
 msgstr "Turno Di Attacco A Sorpresa."
 
-#: src/engine/dccnit.cpp:1925
+#: src/engine/dccnit.cpp:1947
 msgid "No enemies in the area."
 msgstr "Nessun nemico nell'area."
 
-#: src/engine/dccnit.cpp:2110 src/engine/dccnit.cpp:2628
+#: src/engine/dccnit.cpp:2132 src/engine/dccnit.cpp:2650
 #: src/engine/shortcutswindow.cpp:51
 msgid "Nothing"
 msgstr "Niente"
 
-#: src/engine/dccnit.cpp:2378
+#: src/engine/dccnit.cpp:2400
 #, c-format
 msgid "%s taken."
 msgstr "%s preso"
 
-#: src/engine/dccnit.cpp:2395
+#: src/engine/dccnit.cpp:2417
 msgid "Inventory is full!"
 msgstr "L'inventario è pieno!"
 
-#: src/engine/dccnit.cpp:2428
+#: src/engine/dccnit.cpp:2450
 msgid "Door"
 msgstr "Porta"
 
-#: src/engine/dccnit.cpp:2564
+#: src/engine/dccnit.cpp:2586
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s attacca %s"
 
-#: src/engine/dccnit.cpp:2729
+#: src/engine/dccnit.cpp:2751
 msgid "No more actions. Turn ended."
 msgstr "Nessuna azione rimasta. Turno finito."
 
-#: src/engine/dccnit.cpp:4260
+#: src/engine/dccnit.cpp:4282
 msgid "Exit Battle Mode"
 msgstr "Esci Dalla Modalità di Combatimento"
 
@@ -523,6 +524,14 @@ msgstr "Perso $%d"
 #: src/engine/dialog.cpp:1481
 msgid "Dialog"
 msgstr "Dialogo"
+
+#: src/engine/featsel.cpp:165
+msgid "Available"
+msgstr ""
+
+#: src/engine/featsel.cpp:169
+msgid "Selected"
+msgstr ""
 
 #: src/engine/initial.cpp:79
 msgid "New"
@@ -3125,6 +3134,17 @@ msgstr ""
 "Grazie al costante lavoro fisico, gli Studenti di Educazione Fisica ricevono "
 "+5 alla loro Armatura Naturale e Resistenza ai Danni di 8/-"
 
+#: data/feats/elective/strong_will.fta:3
+msgid "Strong Will"
+msgstr ""
+
+#: data/feats/elective/strong_will.fta:4
+msgid ""
+"The creature has a will practically unshakeable, being extremally difficult "
+"to affect his mentality status. System: The creature receives +3 on all his "
+"I Am Not A Fool tests."
+msgstr ""
+
 #: data/skills/acrobacias.ski:1
 msgid "Acrobats"
 msgstr "Acrobazie"
@@ -4921,9 +4941,6 @@ msgstr "Santa Claws"
 
 #~ msgid "Couldn't Load Team Logo Image: %s\n"
 #~ msgstr "Non posso caricare il logo della squadra: %s\n"
-
-#~ msgid "Select Team A"
-#~ msgstr "Seleziona la squadra A"
 
 #~ msgid "Select Team B"
 #~ msgstr "Seleziona la squadra B"
