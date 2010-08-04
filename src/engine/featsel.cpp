@@ -342,6 +342,8 @@ void featSelWindow::drawThings(fSelFeat* f)
  ********************************************************************/
 int featSelWindow::treat(guiObject* object, int eventInfo)
 {
+   int i;
+
    if(!isOpen())
    {
       return(TALENT_WINDOW_CANCEL);
@@ -356,6 +358,22 @@ int featSelWindow::treat(guiObject* object, int eventInfo)
       else if(object == (guiObject*)cancelButton)
       {
          return(TALENT_WINDOW_CANCEL);
+      }
+   }
+   else if(eventInfo == FARSO_EVENT_ON_PRESS_TEXT_BOX)
+   {
+      for(i=0; i < FEATS_PER_PAGE; i++)
+      {
+         if(object == textAvail[i])
+         {
+            drawThings(curAvail[i]);
+            return(TALENT_WINDOW_OTHER);
+         }
+         else if(object == textSel[i])
+         {
+            drawThings(curSel[i]);
+            return(TALENT_WINDOW_OTHER);
+         }
       }
    }
    return(TALENT_WINDOW_OTHER);
