@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-08-04 11:44-0300\n"
+"POT-Creation-Date: 2010-08-04 14:56-0300\n"
 "PO-Revision-Date: 2010-03-30 18:39+0000\n"
 "Last-Translator: Peter Belyaev <kapone2002@yandex.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -97,14 +97,14 @@ msgstr "Стремление и Равнение"
 
 #: src/engine/alignwindow.cpp:72 src/engine/aspectwindow.cpp:93
 #: src/engine/attwindow.cpp:236 src/engine/classwindow.cpp:117
-#: src/engine/featsel.cpp:231 src/engine/options.cpp:1089
+#: src/engine/featsel.cpp:233 src/engine/options.cpp:1089
 #: src/engine/racewindow.cpp:117 src/engine/skillwindow.cpp:159
 msgid "Confirm"
 msgstr "Подтвердить"
 
 #: src/engine/alignwindow.cpp:76 src/engine/aspectwindow.cpp:97
 #: src/engine/attwindow.cpp:240 src/engine/barterwindow.cpp:68
-#: src/engine/classwindow.cpp:121 src/engine/featsel.cpp:235
+#: src/engine/classwindow.cpp:121 src/engine/featsel.cpp:237
 #: src/engine/options.cpp:1093 src/engine/racewindow.cpp:121
 #: src/engine/skillwindow.cpp:162
 msgid "Cancel"
@@ -2789,6 +2789,27 @@ msgstr ""
 msgid ""
 "The creature is extremally resistent, being able to bear easily stressfull "
 "tasks. System: The creature receives +3 on all his Fortitude tests."
+msgstr ""
+
+#: data/feats/elective/quick_thought.fta:3
+msgid "Quick Thought"
+msgstr ""
+
+#: data/feats/elective/quick_thought.fta:4
+msgid ""
+"With this feat, the creature can react quickly to the danger. System: At the "
+"initiative tests, the creature receives +5 to his result."
+msgstr ""
+
+#: data/feats/elective/cant_touch_me.fta:3
+msgid "Can't Touch Me"
+msgstr ""
+
+#: data/feats/elective/cant_touch_me.fta:4
+msgid ""
+"The creature is clever than the others, being able to avoid more easily from "
+"attacks. System: The creature will receive +2 in his Armature Class all the "
+"times that Dexterity is used to avoid hits."
 msgstr ""
 
 #: data/skills/acrobacias.ski:1

@@ -199,6 +199,8 @@ data/feats/physicaled/virtually_invencible.fta
 data/feats/elective/strong_will.fta
 data/feats/elective/feline.fta
 data/feats/elective/rough.fta
+data/feats/elective/quick_thought.fta
+data/feats/elective/cant_touch_me.fta
 
 #skills
 data/skills/acrobacias.ski
