@@ -10,4 +10,4 @@ icon = feats/Img/webdesign.png
 # Pre-requisites
 required = CLASS ADM 10
 
-script = webdesign.dsl
+script = feats/administration/webdesign.dsl
