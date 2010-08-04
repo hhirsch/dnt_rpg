@@ -158,6 +158,14 @@ class textBox: public guiObject, public dntList
        * \param B -> blue color of the font */
       void addText(string txt, string font, int size,
                    int align, int style, int R, int G, int B);
+
+      /*! Verify if the text box receives events or not
+       * \return true if receive events*/
+      bool receiveEvents();
+
+      /*! Set if the text box receive events
+       * \param b _> true to receive events*/
+      void setReceiveEvents(bool b);
    
    protected:
       /*! Delete the textLine
@@ -181,6 +189,8 @@ class textBox: public guiObject, public dntList
       SDL_Surface* wSurface; /**< Window Surface */
       
       int firstLine;       /**< Actual Init Line Draw */
+
+      bool recEvents;      /**< If receive events or not */
 
       int framed;          /**< Type of the frame. 0 for none */
       string fontName;     /**< Font FileName */

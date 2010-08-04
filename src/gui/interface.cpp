@@ -186,15 +186,18 @@ void guiInterface::verifyMousePressObjects(int x, int y, guiList* list)
       else if(obj->type == FARSO_OBJECT_TEXT_BOX)
       {
          textBox* tb = (textBox*)obj;
-         int xa,ya,xb,yb;
-         tb->getCoordinate(xa,ya,xb,yb);
-         if(isMouseAt(xa+lwindows->getActiveWindow()->getX1(),
-                  ya+lwindows->getActiveWindow()->getY1(),
-                  xb+lwindows->getActiveWindow()->getX1(),
-                  yb+lwindows->getActiveWindow()->getY1(),x,y))
+         if(tb->receiveEvents())
          {
-            activeObject = tb;
-            focus = FARSO_FOCUS_TEXT_BOX;
+            int xa,ya,xb,yb;
+            tb->getCoordinate(xa,ya,xb,yb);
+            if(isMouseAt(xa+lwindows->getActiveWindow()->getX1(),
+                     ya+lwindows->getActiveWindow()->getY1(),
+                     xb+lwindows->getActiveWindow()->getX1(),
+                     yb+lwindows->getActiveWindow()->getY1(),x,y))
+            {
+               activeObject = tb;
+               focus = FARSO_FOCUS_TEXT_BOX;
+            }
          }
       }
       obj = (guiObject*)obj->getNext();

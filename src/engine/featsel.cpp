@@ -178,6 +178,7 @@ void featSelWindow::open(character* pers, featsList* fList, int total)
       picAvail[i]->setSurfaceDeletion(false);
       textAvail[i] = intWindow->getObjectsList()->insertTextBox(46,y,175,y+34,
             0, "");
+      textAvail[i]->setReceiveEvents(true);
       buttonInsert[i] = intWindow->getObjectsList()->insertButton(176, y+9, 
             190, y+27, fnt.createUnicode(0x25BA),0);
 
@@ -188,6 +189,7 @@ void featSelWindow::open(character* pers, featsList* fList, int total)
       picSel[i]->setSurfaceDeletion(false);
       textSel[i] = intWindow->getObjectsList()->insertTextBox(250,y,388,y+34,
             0, "");
+      textSel[i]->setReceiveEvents(true);
 
       y += 34;
    }

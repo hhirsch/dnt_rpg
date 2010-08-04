@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2010 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -39,6 +39,7 @@ textBox::textBox(int xa, int ya, int xb, int yb, int frameType,
    fontStyle = DNT_FONT_STYLE_NORMAL;
    fontSize = 10;
    firstLine = 0;
+   recEvents = false;
 }
 
 /*******************************************************
@@ -394,6 +395,22 @@ void textBox::setBackColor(int R, int G, int B)
    Colors.colorButton.R = R;
    Colors.colorButton.G = G;
    Colors.colorButton.B = B;
+}
+
+/*******************************************************
+ *                    receiveEvents                    *
+ *******************************************************/
+bool textBox::receiveEvents()
+{
+   return(recEvents);
+}
+
+/*******************************************************
+ *                    setReceiveEvents                 *
+ *******************************************************/
+void textBox::setReceiveEvents(bool b)
+{
+   recEvents = b;
 }
 
 /*******************************************************
