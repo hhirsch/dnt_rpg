@@ -107,12 +107,14 @@ class featSelWindow
       textBox* textAvail[FEATS_PER_PAGE];  /**< Available feats text */
       picture* picAvail[FEATS_PER_PAGE];   /**< Available feats picture */
       button* buttonInsert[FEATS_PER_PAGE];/**< Insert Available feat buttons */
+      fSelFeat* curAvail[FEATS_PER_PAGE];  /**< Current available feats */
       button* nextAvailButton;             /**< Next Page Button on available */
       textBox* textAvailPage;              /**< Page of available feats */
       button* prevAvailButton;         /**< Previous Page Button on available */
       textBox* textSel[FEATS_PER_PAGE];    /**< Selected feats text */
       picture* picSel[FEATS_PER_PAGE];     /**< Selected feats picture */
       button* buttonRemove[FEATS_PER_PAGE];/**< Remove Selected feat buttons */
+      fSelFeat* curSel[FEATS_PER_PAGE];    /**< Current selected feats */
       button* nextSelButton;               /**< Next Page button on selected */
       textBox* textSelPage;                /**< Page of selected feats */
       button* prevSelButton;            /**< Previous page button on selected */

@@ -173,10 +173,21 @@ void featSelWindow::open(character* pers, featsList* fList, int total)
    y = 37;
    for(i=0; i < FEATS_PER_PAGE; i++)
    {
+      /* Available */
+      picAvail[i] = intWindow->getObjectsList()->insertPicture(12,y+2,0,0,NULL);
+      picAvail[i]->setSurfaceDeletion(false);
+      textAvail[i] = intWindow->getObjectsList()->insertTextBox(46,y,175,y+34,
+            0, "");
       buttonInsert[i] = intWindow->getObjectsList()->insertButton(176, y+9, 
             190, y+27, fnt.createUnicode(0x25BA),0);
+
+      /* Selected */
       buttonRemove[i] =  intWindow->getObjectsList()->insertButton(200, y+9, 
             214, y+27, fnt.createUnicode(0x25C4),0); 
+      picSel[i] = intWindow->getObjectsList()->insertPicture(216,y+2,0,0,NULL);
+      picSel[i]->setSurfaceDeletion(false);
+      textSel[i] = intWindow->getObjectsList()->insertTextBox(250,y,388,y+34,
+            0, "");
 
       y += 34;
    }
@@ -259,6 +270,10 @@ bool featSelWindow::isOpen()
  ********************************************************************/
 void featSelWindow::drawThings(fSelFeat* f)
 {
+   int i;
+   fSelFeat* ft;
+
+   /* Set the feat, if isn't yet defined */
    if(f == NULL)
    {
       f = (fSelFeat*)availableFeats.getFirst();
@@ -269,6 +284,48 @@ void featSelWindow::drawThings(fSelFeat* f)
          {
             return;
          }
+      }
+   }
+
+   /* Set the available feats */
+   ft = (fSelFeat*)availableFeats.getFirst();
+   for(i = 0; i < FEATS_PER_PAGE; i++)
+   {
+      if(i < availableFeats.getTotal())
+      {
+         picAvail[i]->set(ft->desc->image);
+         textAvail[i]->setText(ft->desc->name);
+         buttonInsert[i]->setAvailable(true);
+         curAvail[i] = ft;
+         ft = (fSelFeat*)ft->getNext();
+      }
+      else
+      {
+         curAvail[i] = NULL;
+         picAvail[i]->set(NULL);
+         textAvail[i]->setText("");
+         buttonInsert[i]->setAvailable(false);
+      }
+   }
+
+   /* Set the selected feats */
+   ft = (fSelFeat*)selectedFeats.getFirst();
+   for(i = 0; i < FEATS_PER_PAGE; i++)
+   {
+      if(i < selectedFeats.getTotal())
+      {
+         picSel[i]->set(ft->desc->image);
+         textSel[i]->setText(ft->desc->name);
+         buttonRemove[i]->setAvailable(true);
+         curSel[i] = ft;
+         ft = (fSelFeat*)ft->getNext();
+      }
+      else
+      {
+         curSel[i] = NULL;
+         picSel[i]->set(NULL);
+         textSel[i]->setText("");
+         buttonRemove[i]->setAvailable(false);
       }
    }
 
