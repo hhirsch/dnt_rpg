@@ -1,4 +1,4 @@
-14
+15
 weapon_attack.fta
 administration/esthetic_shock_i.fta
 administration/esthetic_shock_ii.fta
@@ -11,5 +11,6 @@ biology/arc_impulse.fta
 biology/mass_arthropds_attack.fta
 elective/cant_touch_me.fta
 elective/feline.fta
+elective/quick_thought.fta
 elective/rough.fta
 elective/strong_will.fta
