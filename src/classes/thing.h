@@ -37,6 +37,7 @@
 
 #define THING_ARMATURE_CLASS "ARMATURE_CLASS"
 #define THING_SIZE_MODIFIER  "SIZE_MODIFIER"
+#define THING_INITIATIVE_BONUS "INITIATIVE"
 
 /*! Define what is a thing on game, in other words, what is the base fields
  * for characters and map objects.*/
@@ -54,6 +55,7 @@ class thing
       int armatureClass;      /**< Thing's Armature Class (AC) */
       int displacement;       /**< Thing's Displacement (in meters) */
       int sizeModifier;       /**< Thing's Size Modifier */
+      int initiativeBonus;    /**< Thing's initiative bonus value */
 
       float orientation;      /**< Thing's orientation (angle) */
       float xPosition;        /**< Thing's X Position */

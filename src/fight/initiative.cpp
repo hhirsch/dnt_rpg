@@ -61,7 +61,8 @@ void initiative::insertCharacter(character* pers)
    {
       first = new(initiativeStruct);
       first->next = NULL;
-      first->initiativeValue = d20.roll() + pers->attBonus(ATT_DEXTERITY);
+      first->initiativeValue = d20.roll() + pers->attBonus(ATT_DEXTERITY) +
+         pers->initiativeBonus;
       sprintf(buffer, "%d.",first->initiativeValue);
       text += buffer;
       brief.addText(text);

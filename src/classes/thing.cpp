@@ -173,6 +173,10 @@ int thing::getBonusValue(factor something)
       {
          return(sizeModifier);
       }
+      else if(something.id == THING_INITIATIVE_BONUS)
+      {
+         return(initiativeBonus);
+      }
       else if(something.id == DNT_BS_LEVEL)
       {
          return(curBonusAndSaves.level);
