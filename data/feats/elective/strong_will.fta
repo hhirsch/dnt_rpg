@@ -11,7 +11,7 @@ action = ACT_FREE
 icon = feats/Img/strong_will.png
 
 # Pre-requisites
-required = ATT WISDOM 10
+required = ATTRIBUTE WISDOM 10
 
 script = feats/elective/strong_will.dsl
 
