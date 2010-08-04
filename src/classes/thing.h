@@ -195,6 +195,11 @@ class thing
        *  \return bonus. */
       int getBonusValue(factor something);
 
+      /*! Get the pointer to a factor value
+       * \param something -> factor info
+       * \return pointer to the factor value */
+      int* getFactorValuePointer(factor something);
+
 
       //////////////////////////////////////////////////////////////////////
       //                                                                  //

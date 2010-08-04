@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2010 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -173,27 +173,14 @@ void modEffect::unApply(void* actor)
 void modEffect::doApply(void* actor, int value)
 {
    character* c = (character*)actor;
-   skill* s = NULL;
+   int* v = NULL;
 
    if(c != NULL)
    {
-      /* Define the type */
-      if( (cause.type == MOD_TYPE_ATT) || (cause.type == MOD_TYPE_SKILL) )
+      v = c->getFactorValuePointer(cause);
+      if(v)
       {
-         s = c->sk.getSkillByString(cause.id);
-         if(s)
-         {
-            s->points += value;
-         }
-         else
-         {
-            cerr << "modEffect::doApply: Unknow Skill: " << cause.id << endl;
-         }
-      }
-      else
-      {
-         /* TODO */
-         cerr << "modEffect::doApply:TODO: unknow type: " << cause.type << endl;
+         *v += value;
       }
    }
    else

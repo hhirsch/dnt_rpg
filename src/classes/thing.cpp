@@ -132,6 +132,64 @@ int thing::attBonus(int curAttribute)
    return(attBonus(sk.getSkillByInt(curAttribute)));
 }
 
+/******************************************************
+ *               getFactorValuePointer                *
+ ******************************************************/
+int* thing::getFactorValuePointer(factor something)
+{
+   skill* s = NULL;
+   if( (something.type == MOD_TYPE_ATT) || 
+       (something.type == MOD_TYPE_SKILL) )
+   {
+      s = sk.getSkillByString(something.id);
+      if(s)
+      {
+         return(&s->points);
+      }
+      else
+      {
+         cerr << "Unknow Attribute: " << something.id << endl;
+      }
+   }
+   else if(something.type == MOD_TYPE_THING)
+   {
+      if(something.id == THING_ARMATURE_CLASS)
+      {
+         return(&armatureClass);
+      }
+      else if(something.id == THING_SIZE_MODIFIER)
+      {
+         return(&sizeModifier);
+      }
+      else if(something.id == THING_INITIATIVE_BONUS)
+      {
+         return(&initiativeBonus);
+      }
+      else if(something.id == DNT_BS_LEVEL)
+      {
+         return(&curBonusAndSaves.level);
+      }
+      else if(something.id == DNT_BS_FORTITUDE)
+      {
+         return(&curBonusAndSaves.fortitude);
+      }
+      else if(something.id == DNT_BS_REFLEXES)
+      {
+         return(&curBonusAndSaves.reflexes);
+      }
+      else if( (something.id == DNT_BS_I_AM_NOT_A_FOOL) ||
+               (something.id == DNT_BS_WILL) )
+      {
+         return(&curBonusAndSaves.iAmNotAFool);
+      }
+      else
+      {
+         cerr << "Unknow thing: " << something.id << endl;
+      }
+   }
+   
+   return(NULL);
+}
 
 /******************************************************
  *                   getBonusValue                    *
@@ -139,6 +197,8 @@ int thing::attBonus(int curAttribute)
 int thing::getBonusValue(factor something)
 {
    skill* s = NULL;
+   int* v = NULL;
+
    if(something.type == MOD_TYPE_ATT)
    {
       s = sk.getSkillByString(something.id);
@@ -163,40 +223,12 @@ int thing::getBonusValue(factor something)
          cerr << "Unknow Skill: " << something.id << endl;
       }
    }
-   else if(something.type == MOD_TYPE_THING)
+   else
    {
-      if(something.id == THING_ARMATURE_CLASS)
+      v = getFactorValuePointer(something);
+      if(v)
       {
-         return(armatureClass);
-      }
-      else if(something.id == THING_SIZE_MODIFIER)
-      {
-         return(sizeModifier);
-      }
-      else if(something.id == THING_INITIATIVE_BONUS)
-      {
-         return(initiativeBonus);
-      }
-      else if(something.id == DNT_BS_LEVEL)
-      {
-         return(curBonusAndSaves.level);
-      }
-      else if(something.id == DNT_BS_FORTITUDE)
-      {
-         return(curBonusAndSaves.fortitude);
-      }
-      else if(something.id == DNT_BS_REFLEXES)
-      {
-         return(curBonusAndSaves.reflexes);
-      }
-      else if( (something.id == DNT_BS_I_AM_NOT_A_FOOL) ||
-               (something.id == DNT_BS_WILL) )
-      {
-         return(curBonusAndSaves.iAmNotAFool);
-      }
-      else
-      {
-         cerr << "Unknow thing: " << something.id << endl;
+         return(*v);
       }
    }
    
