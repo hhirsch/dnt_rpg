@@ -197,6 +197,8 @@ data/feats/physicaled/esophagus.fta
 data/feats/physicaled/i_am_a_little_conan.fta
 data/feats/physicaled/virtually_invencible.fta
 data/feats/elective/strong_will.fta
+data/feats/elective/feline.fta
+data/feats/elective/rough.fta
 
 #skills
 data/skills/acrobacias.ski

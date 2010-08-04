@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-08-04 11:10-0300\n"
+"POT-Creation-Date: 2010-08-04 11:44-0300\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -3189,6 +3189,32 @@ msgstr ""
 "O organismo possui uma vontade praticamente inabalável, sendo mais difícil "
 "afetá-lo mentalmente. Sistema: O organismo recebe +3 em todos os seus testes "
 "de Não Sou Bobo."
+
+#: data/feats/elective/feline.fta:3
+msgid "Feline"
+msgstr "Felino"
+
+#: data/feats/elective/feline.fta:4
+msgid ""
+"The creature has reflexes like a cat, being able to deviate instinctively. "
+"System: The creature receives +3 on all his Reflexes tests."
+msgstr ""
+"O organismo tem reflexos como os de um gato, conseguindo desviar "
+"instintivamente em uma frequência elevada. Sistema: O organismo recebe +3 em "
+"todos os seus testes de Reflexos."
+
+#: data/feats/elective/rough.fta:3
+msgid "Rough"
+msgstr "Bruto"
+
+#: data/feats/elective/rough.fta:4
+msgid ""
+"The creature is extremally resistent, being able to bear easily stressfull "
+"tasks. System: The creature receives +3 on all his Fortitude tests."
+msgstr ""
+"O organismo é extremamente resistente, conseguindo suportar mais facilmente "
+"tarefas que exijam físico. Sistema: O organismo recebe +3 em todos os seus "
+"testes de Fortaleza"
 
 #: data/skills/acrobacias.ski:1
 msgid "Acrobats"

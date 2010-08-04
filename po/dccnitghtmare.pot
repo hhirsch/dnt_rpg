@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-08-04 11:10-0300\n"
+"POT-Creation-Date: 2010-08-04 11:44-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2636,6 +2636,26 @@ msgid ""
 "The creature has a will practically unshakeable, being extremally difficult "
 "to affect his mentality status. System: The creature receives +3 on all his "
 "I Am Not A Fool tests."
+msgstr ""
+
+#: data/feats/elective/feline.fta:3
+msgid "Feline"
+msgstr ""
+
+#: data/feats/elective/feline.fta:4
+msgid ""
+"The creature has reflexes like a cat, being able to deviate instinctively. "
+"System: The creature receives +3 on all his Reflexes tests."
+msgstr ""
+
+#: data/feats/elective/rough.fta:3
+msgid "Rough"
+msgstr ""
+
+#: data/feats/elective/rough.fta:4
+msgid ""
+"The creature is extremally resistent, being able to bear easily stressfull "
+"tasks. System: The creature receives +3 on all his Fortitude tests."
 msgstr ""
 
 #: data/skills/acrobacias.ski:1
