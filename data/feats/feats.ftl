@@ -1,4 +1,4 @@
-10
+11
 weapon_attack.fta
 administration/esthetic_shock_i.fta
 administration/esthetic_shock_ii.fta
@@ -9,3 +9,4 @@ administration/aberration.fta
 biology/ameivas_worms.fta
 biology/arc_impulse.fta
 biology/mass_arthropds_attack.fta
+elective/strong_will.fta
