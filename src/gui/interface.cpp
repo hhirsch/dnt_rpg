@@ -190,6 +190,7 @@ void guiInterface::verifyMousePressObjects(int x, int y, guiList* list)
          {
             int xa,ya,xb,yb;
             tb->getCoordinate(xa,ya,xb,yb);
+
             if(isMouseAt(xa+lwindows->getActiveWindow()->getX1(),
                      ya+lwindows->getActiveWindow()->getY1(),
                      xb+lwindows->getActiveWindow()->getX1(),
@@ -736,6 +737,7 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
     {
        focus = FARSO_FOCUS_GAME;
        eventInfo = FARSO_EVENT_ON_PRESS_TEXT_BOX;
+       return(activeObject);
     }
          
     eventInfo = FARSO_EVENT_NONE;
