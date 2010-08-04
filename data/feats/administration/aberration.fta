@@ -10,4 +10,4 @@ icon = feats/Img/aberration.png
 # Pre-requisites
 required = CLASS ADM 20
 
-script = aberration.dsl
+script = feats/administration/aberration.dsl

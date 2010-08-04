@@ -18,5 +18,5 @@ costToUse = 1
 aditionalQuantity = ADM 20 1 2
 
 powerLevel = 10
-script = supreme_esthetic_shock.dsl
+script = feats/administration/supreme_esthetic_shock.dsl
 
