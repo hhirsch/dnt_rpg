@@ -136,6 +136,10 @@ void picture::set(SDL_Surface* newPicture)
    area.y = 0;
    area.w = (fig!=NULL)?fig->w:0;
    area.h = (fig!=NULL)?fig->h:0;
+
+   x2 = x1+area.w;
+   y2 = y1+area.h;
+
    setChanged();
 }
 

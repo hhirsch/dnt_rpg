@@ -201,6 +201,22 @@ void guiInterface::verifyMousePressObjects(int x, int y, guiList* list)
             }
          }
       }
+      /* Verify pictures */
+      else if(obj->type == FARSO_OBJECT_PICTURE)
+      {
+         picture* p = (picture*)obj;
+         int xa,ya,xb,yb;
+         p->getCoordinate(xa,ya,xb,yb);
+
+         if(isMouseAt(xa+lwindows->getActiveWindow()->getX1(),
+                  ya+lwindows->getActiveWindow()->getY1(),
+                  xb+lwindows->getActiveWindow()->getX1(),
+                  yb+lwindows->getActiveWindow()->getY1(),x,y))
+         {
+            activeObject = p;
+            focus = FARSO_FOCUS_PICTURE;
+         }
+      }
       obj = (guiObject*)obj->getNext();
    }
 
@@ -737,6 +753,15 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
     {
        focus = FARSO_FOCUS_GAME;
        eventInfo = FARSO_EVENT_ON_PRESS_TEXT_BOX;
+       return(activeObject);
+    }
+
+    /* Focus on PICTURE */
+    else
+    if(focus == FARSO_FOCUS_PICTURE)
+    {
+       focus = FARSO_FOCUS_GAME;
+       eventInfo = FARSO_EVENT_ON_PRESS_PICTURE;
        return(activeObject);
     }
          

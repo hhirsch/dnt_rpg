@@ -362,6 +362,7 @@ int featSelWindow::treat(guiObject* object, int eventInfo)
          return(TALENT_WINDOW_CANCEL);
       }
    }
+   /* Verify text press */
    else if(eventInfo == FARSO_EVENT_ON_PRESS_TEXT_BOX)
    {
       for(i=0; i < FEATS_PER_PAGE; i++)
@@ -377,6 +378,24 @@ int featSelWindow::treat(guiObject* object, int eventInfo)
             return(TALENT_WINDOW_OTHER);
          }
       }
+   }
+   /* Verify picture press */
+   else if(eventInfo == FARSO_EVENT_ON_PRESS_PICTURE)
+   {
+      for(i=0; i < FEATS_PER_PAGE; i++)
+      {
+         if(object == picAvail[i])
+         {
+            drawThings(curAvail[i]);
+            return(TALENT_WINDOW_OTHER);
+         }
+         else if(object == picSel[i])
+         {
+            drawThings(curSel[i]);
+            return(TALENT_WINDOW_OTHER);
+         }
+      }
+
    }
    return(TALENT_WINDOW_OTHER);
 }
