@@ -106,6 +106,16 @@ class guiObject : public dntListElement
          x1 = xa; x2 = xb; y1 = ya; y2 = yb;
       };
 
+      /*! Get Object Coordinate
+       * \param xa -> x1 coordinate
+       * \param ya -> y1 coordinate
+       * \param xb -> x2 coordinate
+       * \param yb -> y2 coordinate */
+      void getCoordinate(int& xa, int& ya, int& xb, int& yb)
+      {
+         xa = x1; xb = x2; ya = y1; yb = y2;
+      };
+
       /*! Verify if the object is available
        * return true if is avaible */
       bool isAvailable() {return(available);};

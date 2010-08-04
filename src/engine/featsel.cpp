@@ -219,7 +219,7 @@ void featSelWindow::open(character* pers, featsList* fList, int total)
    /* Title & Description */
    textTitle = intWindow->getObjectsList()->insertTextBox(10, y+25, 390, y+43,
          1, "");
-   textTitle->setFont(DNT_FONT_ARIAL,10,DNT_FONT_ALIGN_CENTER,
+   textTitle->setFont(DNT_FONT_ARIAL,11,DNT_FONT_ALIGN_CENTER,
          DNT_FONT_STYLE_BOLD);
    textDescription = intWindow->getObjectsList()->insertRolBar(10, y+44, 
                                    390, 350, "");
