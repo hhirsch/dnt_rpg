@@ -109,6 +109,7 @@ void button::draw()
              Colors.colorText.B, Colors.colorText.A);
    int ya=y1;
    int xa=x1;
+   int xb=x2;
    if(pressed) 
    {
      ya++;
@@ -118,43 +119,52 @@ void button::draw()
    font.defineFontAlign(DNT_FONT_ALIGN_CENTER);
    font.defineFontStyle(DNT_FONT_STYLE_NORMAL);
 
-   //xa = ((xa+x2) /2);
-   
    if(text == font.createUnicode(0x25B2)) /* up */
    {
-      font.write(wSurface,xa+2,ya,getText().c_str(),xa+2,y1,x2+2,y2);
+      xa += 2;
+      xb += 2;
    }
    else if(text == font.createUnicode(0x25BC)) /* down */
    {
-      font.write(wSurface,xa+4,ya,getText().c_str(),xa+4,y1,x2+4,y2);
+      xa += 4;
+      xb += 4;
    }
    else if(text == font.createUnicode(0x25CF)) /* Close */
    {
-      font.write(wSurface,xa+2,ya-2,getText().c_str(),xa+2,y1,x2+2,y2);
+      xa += 2;
+      xb += 2;
+      ya -= 2;
    }
    else if(text == font.createUnicode(0x25BA)) /* right */
    {
-      font.write(wSurface,xa+2,ya+3,getText().c_str(),xa+2,y1,x2+2,y2);
+      xa += 2;
+      xb += 2;
+      ya += 3;
    }
    else if(text == "-")
    {
-      font.write(wSurface,xa+2,ya-2,getText().c_str(),xa+2,y1,x2+2,y2);
+      xa += 2;
+      xb += 2;
+      ya -= 2;
    }
    else
    {
-      if(isAvailable())
-      {
-         font.write(wSurface,xa,ya+3,getText().c_str(),xa,y1,x2,y2);
-      }
-      else
-      {
-         color_Set(Colors.colorCont[2].R, Colors.colorCont[2].G,
-                   Colors.colorCont[2].B, Colors.colorCont[2].A);
-         font.write(wSurface,xa+1,ya+4, getText(),xa,y1,x2,y2);
-         color_Set(Colors.colorCont[1].R, Colors.colorCont[1].G,
-                   Colors.colorCont[1].B, Colors.colorCont[1].A);
-         font.write(wSurface,xa,ya+3, getText(), xa,y1,x2,y2);
-      }
+      ya += 3;
+   }
+
+   /* Draw the text */
+   if(isAvailable())
+   {
+      font.write(wSurface,xa,ya,getText().c_str(),xa,y1,xb,y2);
+   }
+   else
+   {
+      color_Set(Colors.colorCont[2].R, Colors.colorCont[2].G,
+            Colors.colorCont[2].B, Colors.colorCont[2].A);
+      font.write(wSurface,xa+1,ya+1, getText(),xa,y1,xb,y2);
+      color_Set(Colors.colorCont[1].R, Colors.colorCont[1].G,
+            Colors.colorCont[1].B, Colors.colorCont[1].A);
+      font.write(wSurface,xa,ya, getText(), xa,y1,xb,y2);
    }
    setChanged();
 }
