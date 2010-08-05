@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-08-04 14:56-0300\n"
+"POT-Creation-Date: 2010-08-05 14:24-0300\n"
 "PO-Revision-Date: 2010-05-27 16:34+0000\n"
 "Last-Translator: Dani Cases <danicases@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
@@ -97,14 +97,14 @@ msgstr "Tendència i Alineament"
 
 #: src/engine/alignwindow.cpp:72 src/engine/aspectwindow.cpp:93
 #: src/engine/attwindow.cpp:236 src/engine/classwindow.cpp:117
-#: src/engine/featsel.cpp:233 src/engine/options.cpp:1089
+#: src/engine/featsel.cpp:234 src/engine/options.cpp:1089
 #: src/engine/racewindow.cpp:117 src/engine/skillwindow.cpp:159
 msgid "Confirm"
 msgstr "Confirma"
 
 #: src/engine/alignwindow.cpp:76 src/engine/aspectwindow.cpp:97
 #: src/engine/attwindow.cpp:240 src/engine/barterwindow.cpp:68
-#: src/engine/classwindow.cpp:121 src/engine/featsel.cpp:237
+#: src/engine/classwindow.cpp:121 src/engine/featsel.cpp:238
 #: src/engine/options.cpp:1093 src/engine/racewindow.cpp:121
 #: src/engine/skillwindow.cpp:162
 msgid "Cancel"
@@ -290,7 +290,7 @@ msgstr "Modificador de Mida"
 msgid "Level Up"
 msgstr "Puja de Nivell"
 
-#: src/engine/charwindow.cpp:264 src/engine/featsel.cpp:162
+#: src/engine/charwindow.cpp:264 src/engine/featsel.cpp:163
 msgid "Talents"
 msgstr "Talents"
 
@@ -525,11 +525,11 @@ msgstr "Perds $%d."
 msgid "Dialog"
 msgstr "Conversa"
 
-#: src/engine/featsel.cpp:165
+#: src/engine/featsel.cpp:166
 msgid "Available"
 msgstr ""
 
-#: src/engine/featsel.cpp:169
+#: src/engine/featsel.cpp:170
 msgid "Selected"
 msgstr ""
 
