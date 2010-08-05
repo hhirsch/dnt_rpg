@@ -153,6 +153,7 @@ void featSelWindow::open(character* pers, featsList* fList, int total)
    /* Set Current */
    current = pers;
    allFeats = fList;
+   curTotal = total;
 
    /* Define Available Feats */
    defineAvailableFeats();
@@ -225,8 +226,12 @@ void featSelWindow::open(character* pers, featsList* fList, int total)
          DNT_FONT_STYLE_BOLD);
    textDescription = intWindow->getObjectsList()->insertRolBar(10, y+44, 
                                    390, 350, "");
-   picFeat = intWindow->getObjectsList()->insertPicture(184,354,0,0,NULL);
+   picFeat = intWindow->getObjectsList()->insertPicture(84,354,0,0,NULL);
    picFeat->setSurfaceDeletion(false);
+   textTotal = intWindow->getObjectsList()->insertTextBox(120, 360, 310, 380,
+       0, "");
+   textTotal->setFont(DNT_FONT_ARIAL,13,DNT_FONT_ALIGN_LEFT, 
+         DNT_FONT_STYLE_BOLD);
 
    /* Ok Button */
    okButton = intWindow->getObjectsList()->insertButton(320,370,390,389,
@@ -274,6 +279,7 @@ void featSelWindow::drawThings(fSelFeat* f)
 {
    int i;
    fSelFeat* ft;
+   char buf[128];
 
    /* Set the feat, if isn't yet defined */
    if(f == NULL)
@@ -318,7 +324,7 @@ void featSelWindow::drawThings(fSelFeat* f)
       {
          picSel[i]->set(ft->desc->image);
          textSel[i]->setText(ft->desc->name);
-         buttonRemove[i]->setAvailable(true);
+         buttonRemove[i]->setAvailable(!ft->classFeat);
          curSel[i] = ft;
          ft = (fSelFeat*)ft->getNext();
       }
@@ -331,6 +337,9 @@ void featSelWindow::drawThings(fSelFeat* f)
       }
    }
 
+   /* set the total text */
+   sprintf(buf, "%s: (%d)", gettext("Remaining"), curTotal);
+   textTotal->setText(buf);
 
    /* Set selected feat title and description */
    textTitle->setText(f->desc->name);
@@ -353,13 +362,47 @@ int featSelWindow::treat(guiObject* object, int eventInfo)
 
    if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
    {
+      /* Ok */
       if(object == (guiObject*)okButton)
       {
          return(TALENT_WINDOW_CONFIRM);
       }
+      /* Cancel */
       else if(object == (guiObject*)cancelButton)
       {
          return(TALENT_WINDOW_CANCEL);
+      }
+      /* Insert/Delete Buttons */
+      else
+      {
+         for(i=0; i < FEATS_PER_PAGE; i++)
+         {
+            if(object == buttonInsert[i])
+            {
+               if(curTotal > 0)
+               {
+                  /* Insert at selected */
+                  availableFeats.removeWithoutDelete(curAvail[i]);
+                  selectedFeats.insert(curAvail[i]);
+                  curTotal--;
+                  drawThings(curAvail[i]);
+               }
+               else
+               {
+                  warning w;
+                  w.show(gettext("Warning"), 
+                         gettext("You can't select more talents"), inter);
+               }
+            }
+            else if(object == buttonRemove[i])
+            {
+               /* Remove from selected */
+               selectedFeats.removeWithoutDelete(curSel[i]);
+               availableFeats.insert(curSel[i]);
+               curTotal++;
+               drawThings(curAvail[i]);
+            }
+         }
       }
    }
    /* Verify text press */

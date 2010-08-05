@@ -99,6 +99,7 @@ class featSelWindow
       window* intWindow;         /**< Pointer to the internal window */
       guiInterface* inter;       /**< Current GUI interface */
       character* current;        /**< Current opened character */
+      int curTotal;              /**< Current total */
 
       featsList* allFeats;         /**< List of all feats in game */
       fSelFeatList availableFeats; /**< List of available feats */
@@ -118,6 +119,7 @@ class featSelWindow
       button* nextSelButton;               /**< Next Page button on selected */
       textBox* textSelPage;                /**< Page of selected feats */
       button* prevSelButton;            /**< Previous page button on selected */
+      textBox* textTotal;                  /**< Total remaining text */
 
       textBox* textTitle;             /**< Feat title */
       rolBar* textDescription;        /**< Feat description */
