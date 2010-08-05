@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-08-05 14:24-0300\n"
+"POT-Creation-Date: 2010-08-05 17:11-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -96,14 +96,14 @@ msgstr ""
 
 #: src/engine/alignwindow.cpp:72 src/engine/aspectwindow.cpp:93
 #: src/engine/attwindow.cpp:236 src/engine/classwindow.cpp:117
-#: src/engine/featsel.cpp:234 src/engine/options.cpp:1089
+#: src/engine/featsel.cpp:238 src/engine/options.cpp:1089
 #: src/engine/racewindow.cpp:117 src/engine/skillwindow.cpp:159
 msgid "Confirm"
 msgstr ""
 
 #: src/engine/alignwindow.cpp:76 src/engine/aspectwindow.cpp:97
 #: src/engine/attwindow.cpp:240 src/engine/barterwindow.cpp:68
-#: src/engine/classwindow.cpp:121 src/engine/featsel.cpp:238
+#: src/engine/classwindow.cpp:121 src/engine/featsel.cpp:242
 #: src/engine/options.cpp:1093 src/engine/racewindow.cpp:121
 #: src/engine/skillwindow.cpp:162
 msgid "Cancel"
@@ -176,7 +176,8 @@ msgid "Attribute Description"
 msgstr ""
 
 #: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:573
-#: src/engine/inventwindow.cpp:364 src/engine/options.cpp:1382
+#: src/engine/featsel.cpp:393 src/engine/inventwindow.cpp:364
+#: src/engine/options.cpp:1382
 msgid "Warning"
 msgstr ""
 
@@ -525,6 +526,14 @@ msgstr ""
 
 #: src/engine/featsel.cpp:170
 msgid "Selected"
+msgstr ""
+
+#: src/engine/featsel.cpp:341
+msgid "Remaining"
+msgstr ""
+
+#: src/engine/featsel.cpp:394
+msgid "You can't select more talents"
 msgstr ""
 
 #: src/engine/initial.cpp:79
