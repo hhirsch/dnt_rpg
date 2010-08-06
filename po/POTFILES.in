@@ -201,6 +201,7 @@ data/feats/elective/feline.fta
 data/feats/elective/rough.fta
 data/feats/elective/quick_thought.fta
 data/feats/elective/cant_touch_me.fta
+data/feats/elective/hasty.fta
 
 #skills
 data/skills/acrobacias.ski

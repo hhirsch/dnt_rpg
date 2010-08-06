@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-08-05 17:11-0300\n"
+"POT-Creation-Date: 2010-08-06 14:56-0300\n"
 "PO-Revision-Date: 2010-03-30 18:39+0000\n"
 "Last-Translator: Peter Belyaev <kapone2002@yandex.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -2819,6 +2819,17 @@ msgid ""
 "The creature is clever than the others, being able to avoid more easily from "
 "attacks. System: The creature will receive +2 in his Armature Class all the "
 "times that Dexterity is used to avoid hits."
+msgstr ""
+
+#: data/feats/elective/hasty.fta:3
+msgid "Hasty"
+msgstr ""
+
+#: data/feats/elective/hasty.fta:4
+msgid ""
+"The creature has an abnormal velocity, being able to run quickly. System: "
+"The creature can walk and run at a proportion 20 percent higher than its "
+"base displacement."
 msgstr ""
 
 #: data/skills/acrobacias.ski:1

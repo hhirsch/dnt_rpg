@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-08-05 17:11-0300\n"
+"POT-Creation-Date: 2010-08-06 14:56-0300\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -3252,6 +3252,20 @@ msgstr ""
 "uma facilidade maior. Sistema: O organismo possuidor desse talento receberá "
 "+2 em sua Classe de Armadura sempre que puder se beneficiar de sua Destreza "
 "para não levar pancada."
+
+#: data/feats/elective/hasty.fta:3
+msgid "Hasty"
+msgstr "Ligeiro"
+
+#: data/feats/elective/hasty.fta:4
+msgid ""
+"The creature has an abnormal velocity, being able to run quickly. System: "
+"The creature can walk and run at a proportion 20 percent higher than its "
+"base displacement."
+msgstr ""
+"O organismo é dotado de uma velocidade fora do comum, conseguindo correr "
+"mais do que seria normal para seu ser. Sistema: O organismo poderá deslocar-"
+"se a uma proporção 20 porcento superior ao seu deslocamento básico."
 
 #: data/skills/acrobacias.ski:1
 msgid "Acrobats"
