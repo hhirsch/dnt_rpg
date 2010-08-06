@@ -292,21 +292,21 @@ bool character::canHaveFeat(featDescription* f)
                }
             }
          }
-         else if(MOD_TYPE_CLASS)
+         else if(req->requiredFactor.type == MOD_TYPE_CLASS)
          {
             if(getLevel(req->requiredFactor.id) < req->requiredLevel)
             {
                return(false);
             }
          }
-         else if(MOD_TYPE_ALIGN)
+         else if(req->requiredFactor.type == MOD_TYPE_ALIGN)
          {
             if(actualAlign->strID != req->requiredFactor.id)
             {
                return(false);
             }
          }
-         else if(MOD_TYPE_RACE)
+         else if(req->requiredFactor.type == MOD_TYPE_RACE)
          {
             if(actualRace->strID != req->requiredFactor.id)
             {
