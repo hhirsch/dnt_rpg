@@ -165,6 +165,10 @@ int* thing::getFactorValuePointer(factor something)
       {
          return(&initiativeBonus);
       }
+      else if(something.id == THING_DISPLACEMENT)
+      {
+         return(&displacement);
+      }
       else if(something.id == DNT_BS_LEVEL)
       {
          return(&curBonusAndSaves.level);

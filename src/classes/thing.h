@@ -38,6 +38,7 @@
 #define THING_ARMATURE_CLASS "ARMATURE_CLASS"
 #define THING_SIZE_MODIFIER  "SIZE_MODIFIER"
 #define THING_INITIATIVE_BONUS "INITIATIVE"
+#define THING_DISPLACEMENT   "DISPLACEMENT"
 
 /*! Define what is a thing on game, in other words, what is the base fields
  * for characters and map objects.*/
