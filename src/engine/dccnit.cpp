@@ -2364,7 +2364,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                       (rangeAction(activeCharacter->xPosition, 
                                    activeCharacter->zPosition,
                                    sobj->x, sobj->z,
-                                   WALK_PER_MOVE_ACTION)) )
+                                   activeCharacter->displacement)) )
                   {
                      dialogWindow dlgWindow;
                      dlgWindow.open(gui, activeCharacter, 
@@ -2380,7 +2380,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                       (rangeAction(activeCharacter->xPosition, 
                                    activeCharacter->zPosition,
                                    sobj->x, sobj->z,
-                                   WALK_PER_MOVE_ACTION) ) )
+                                   activeCharacter->displacement) ) )
                   {
                      if( (engineMode != ENGINE_MODE_TURN_BATTLE) ||
                            (activeCharacter->getCanAttack() ) )
@@ -2453,7 +2453,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                 (rangeAction(activeCharacter->xPosition, 
                              activeCharacter->zPosition,
                              porta->x, porta->z,
-                             WALK_PER_MOVE_ACTION) ) )
+                             activeCharacter->displacement) ) )
             {
                lastMousePression = time;
                if(porta->status)
@@ -2557,7 +2557,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                          (rangeAction(activeCharacter->xPosition, 
                                       activeCharacter->zPosition,
                                       pers->xPosition, pers->zPosition,
-                                      WALK_PER_MOVE_ACTION)) )
+                                      activeCharacter->displacement)) )
                      {
                         dialogWindow dlgWindow;
                         dlgWindow.open(gui, activeCharacter, 
@@ -2633,7 +2633,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                 (rangeAction(activeCharacter->xPosition, 
                              activeCharacter->zPosition,
                              xReal, zReal,
-                             WALK_PER_MOVE_ACTION) ) )
+                             activeCharacter->displacement) ) )
             {
                loadMap(quaux->mapConection.mapName);
                return(1);
@@ -3378,7 +3378,7 @@ int engine::treatIO(SDL_Surface *screen)
             activeCharacter->setCanMove(false);
 
             /* And verify if can attack */
-            if(walkDistance > WALK_PER_MOVE_ACTION)
+            if(walkDistance > activeCharacter->displacement)
             {
                activeCharacter->setCanAttack(false);
             }
@@ -3695,13 +3695,13 @@ void engine::renderNoShadowThings()
        /* Range Circle */
        actualMap->renderSurfaceOnMap(rangeCircle,
                                      activeCharacter->xPosition - 
-                                                           WALK_PER_MOVE_ACTION,
+                                                  activeCharacter->displacement,
                                      activeCharacter->zPosition - 
-                                                           WALK_PER_MOVE_ACTION,
+                                                  activeCharacter->displacement,
                                      activeCharacter->xPosition + 
-                                                           WALK_PER_MOVE_ACTION,
+                                                  activeCharacter->displacement,
                                      activeCharacter->zPosition + 
-                                                           WALK_PER_MOVE_ACTION,
+                                                  activeCharacter->displacement,
                                      0.05f, 20);
    }
 
@@ -3723,22 +3723,22 @@ void engine::renderNoShadowThings()
          if(turnCharacter->getCanAttack())
          {
             actualMap->renderSurfaceOnMap(fullMoveCircle,
-                  moveCircleX-2*WALK_PER_MOVE_ACTION,
-                  moveCircleZ-2*WALK_PER_MOVE_ACTION,
-                  moveCircleX+2*WALK_PER_MOVE_ACTION, 
-                  moveCircleZ+2*WALK_PER_MOVE_ACTION,
+                  moveCircleX-2*turnCharacter->displacement,
+                  moveCircleZ-2*turnCharacter->displacement,
+                  moveCircleX+2*turnCharacter->displacement, 
+                  moveCircleZ+2*turnCharacter->displacement,
                   0.3f,12);
          }
          /* Normal Circle */
          actualMap->renderSurfaceOnMap(normalMoveCircle,
-               moveCircleX-WALK_PER_MOVE_ACTION,
-               moveCircleZ-WALK_PER_MOVE_ACTION,
-               moveCircleX+WALK_PER_MOVE_ACTION, 
-               moveCircleZ+WALK_PER_MOVE_ACTION,
+               moveCircleX-turnCharacter->displacement,
+               moveCircleZ-turnCharacter->displacement,
+               moveCircleX+turnCharacter->displacement, 
+               moveCircleZ+turnCharacter->displacement,
                0.4f,20);
       }
       if( (turnCharacter->getCanAttack()) && 
-          (walkDistance < WALK_PER_MOVE_ACTION) )
+          (walkDistance < turnCharacter->displacement) )
       {
          /* Feat Range Circle */
          float rangeValue = turnCharacter->getActiveFeatRange()*METER_TO_DNT;
@@ -4092,9 +4092,9 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 
       /* Verify walk limits at FightMode */
       if( ( (activeCharacter->getCanAttack()) && 
-            (walkDistance > 2*WALK_PER_MOVE_ACTION) ) || 
+            (walkDistance > 2*activeCharacter->displacement) ) || 
           ( (!activeCharacter->getCanAttack()) &&
-            (walkDistance > WALK_PER_MOVE_ACTION) )  )
+            (walkDistance > activeCharacter->displacement) )  )
       {
          return(false);
       }

@@ -1688,9 +1688,9 @@ void iaScript::callFunction(iaVariable* var, string strLine,
                                       characterOwner->currentEnemy->xPosition,
                                       characterOwner->currentEnemy->zPosition);
                posX = characterOwner->xPosition - 
-                      (cos(deg2Rad(angle))*2*WALK_PER_MOVE_ACTION);
+                      (cos(deg2Rad(angle))*2*characterOwner->displacement);
                posZ = characterOwner->zPosition - 
-                      (sin(deg2Rad(angle))*2*WALK_PER_MOVE_ACTION);
+                      (sin(deg2Rad(angle))*2*characterOwner->displacement);
 
                //cout << "Angle: " << angle << " X: " << posX << " Z: " << posZ 
                //     << endl;

@@ -43,7 +43,7 @@ thing::thing()
    lifePoints = 0;
    maxLifePoints = 0;
    armatureClass = 0;
-   displacement = 0;
+   displacement = WALK_PER_MOVE_ACTION;
    sizeModifier = 0;
    psychoState = PSYCHO_NEUTRAL;
    xPosition = 0;

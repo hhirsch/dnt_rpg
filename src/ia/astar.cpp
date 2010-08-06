@@ -194,7 +194,7 @@ void aStar::findPath(void* actor, GLfloat x, GLfloat z, GLfloat stepSize,
       if( (destinyX < 0) || (destinyZ < 0) || 
           (destinyX >= actualMap->getSizeX()*actualMap->squareSize()) ||
           (destinyZ >= actualMap->getSizeZ()*actualMap->squareSize()) ||
-          (dist > 4*WALK_PER_MOVE_ACTION ) )
+          (dist > 4*((character*)actor)->displacement ) )
       {
          state = ASTAR_STATE_NOT_FOUND;
          return;
@@ -491,7 +491,7 @@ bool aStar::getNewPosition(GLfloat& posX, GLfloat& posZ, GLfloat& ori,
       if(fightMode)
       {
          /* Verify if overflow the max normal walk */
-         if( (patt->getTotalWalked() > WALK_PER_MOVE_ACTION) &&
+         if( (patt->getTotalWalked() > ((character*)curActor)->displacement) &&
              ( !((character*)curActor)->getCanAttack() ) )
          {
             /* Can't do a full move, so stop here */
@@ -501,7 +501,8 @@ bool aStar::getNewPosition(GLfloat& posX, GLfloat& posZ, GLfloat& ori,
          }
 
          /* Verify if overflow the max full walk */
-         else if( patt->getTotalWalked() >= 2*WALK_PER_MOVE_ACTION)
+         else if( patt->getTotalWalked() >= 
+               2*((character*)curActor)->displacement)
          {
             ((character*)curActor)->setCanAttack(false);
             ((character*)curActor)->setCanMove(false);
@@ -513,7 +514,7 @@ bool aStar::getNewPosition(GLfloat& posX, GLfloat& posZ, GLfloat& ori,
          else if( (posX == destinyX) && (posZ == destinyZ) )
          {
             /* Update the booleans */
-            if(patt->getTotalWalked() > WALK_PER_MOVE_ACTION)
+            if(patt->getTotalWalked() > ((character*)curActor)->displacement)
             {
                ((character*)curActor)->setCanAttack(false);
             }

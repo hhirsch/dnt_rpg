@@ -880,6 +880,8 @@ bool character::save(string saveFile)
    file << "age = " << age << endl;
    /* Experience Points */
    file << "xp = " << xp << endl;
+   /* Displacement */
+   file << "displacement" << displacement << endl;
    /* Up Levels */
    file << "upLevels = " << upLevels << endl;
    /* Inventory File */
@@ -1094,7 +1096,11 @@ character* characterList::insertCharacter(string file, featsList* ft,
       {
          novo->inventoryFile = value;
       }
-
+      /* Displacement */
+      else if(key == "displacement")
+      {
+         sscanf(value.c_str(),"%d", &novo->displacement);
+      }
       /* Psycho State */
       else if(key == "psychoState")
       {

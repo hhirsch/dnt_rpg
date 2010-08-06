@@ -10,6 +10,7 @@
 - Particles now can follow NPCs too;
 - Blood will follow character's head when needed;
 - Fixed a bug that let a dead PC enter the battle mode;
+- Applying Character's displacement;
 
 ================================================
 |               Version 0.5.1                  |
