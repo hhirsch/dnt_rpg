@@ -153,6 +153,9 @@ class feats
       /*! Clear all feats */
       void clear();
 
+      /*! Get total feats */
+      int getTotal();
+
       /*! Return the feat with number featNumber  
        * \param featNumber -> internal number of feat to return
        * \return the feat struct with internal number. */

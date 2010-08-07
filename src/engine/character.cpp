@@ -919,7 +919,14 @@ bool character::save(string saveFile)
       meff = (modEffect*)meff->getNext();
    }
 
-   /* TODO, save all feats! */
+   /* Save all feats! */
+   feat* ft;
+   for(i = 0; i < actualFeats->getTotal(); i++)
+   {
+      ft = actualFeats->featByNumber(i);
+      file << "feat = " << ft->info->idString << endl;
+      file << "featQuantity = " << ft->actualQuantity << endl;
+   }
 
    /* Close the file and return */
    file.close();
@@ -966,6 +973,7 @@ character* characterList::insertCharacter(string file, featsList* ft,
    int lvl;
    int curClass = 0;
    int tmp=0;
+   feat* cFeat = NULL;
 
    bool definedBonusAndSave = false;
   
@@ -1167,6 +1175,33 @@ character* characterList::insertCharacter(string file, featsList* ft,
       {
          modEffect* m = new modEffect(value);
          novo->effects->insert(m);
+      }
+      /* Feat (and feat quantity) */
+      else if(key == "feat")
+      {
+         featDescription* fDesc = ft->featByString(value);
+         if(fDesc)
+         {
+            novo->actualFeats->insertFeat(fDesc);
+            cFeat = novo->actualFeats->featByString(value);
+         }
+         else
+         {
+            cerr << "Error: Couldn't found feat '" << value << "' "
+                 << "while loading character: " << file << endl;
+         }
+      }
+      else if(key == "featQuantity")
+      {
+         if(cFeat != NULL)
+         {
+            sscanf(value.c_str(), "%f", &cFeat->actualQuantity);
+         }
+         else
+         {
+            cerr << "Error: Got featQuantity without feats for character: "
+                 << file << endl;
+         }
       }
 
       /* Some Skill or Attribute definition */
