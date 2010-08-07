@@ -889,7 +889,7 @@ bool character::save(string saveFile)
    /* Experience Points */
    file << "xp = " << xp << endl;
    /* Displacement */
-   file << "displacement" << displacement << endl;
+   file << "displacement = " << displacement << endl;
    /* Up Levels */
    file << "upLevels = " << upLevels << endl;
    /* Inventory File */
