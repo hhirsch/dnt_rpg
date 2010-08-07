@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2010 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -46,9 +46,10 @@ class charWindow
 
       /*! Treat Events on Window. 
        * \param object -> last GUI object
+       * \param features -> current talents on game
        * \param eventInfo -> last GUI Event
        * \return != 0 if event is gathered */
-      int treat(guiObject* object, int eventInfo,
+      int treat(guiObject* object, int eventInfo, featsList* features,
                 GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
 
       /*! Verify if the window is openned

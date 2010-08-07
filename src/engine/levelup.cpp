@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2010 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -22,6 +22,7 @@
 #include "levelup.h"
 #include "classwindow.h"
 #include "skillwindow.h"
+#include "featsel.h"
 #include "culling.h"
 #include "cursor.h"
 #include "options.h"
@@ -30,16 +31,17 @@
 #define LEVEL_UP_CANCEL         0
 #define LEVEL_UP_CLASS_WINDOW   1
 #define LEVEL_UP_SKILL_WINDOW   2
-#define LEVEL_UP_FINISHED       3
+#define LEVEL_UP_TALENT_WINDOW  3
+#define LEVEL_UP_FINISHED       4
 
-//TODO new feats choose/get!
 
 /***********************************************************************
  *                            Constructor                              *
  ***********************************************************************/
-levelUp::levelUp(character* c)
+levelUp::levelUp(character* c, featsList* ft)
 {
    current = c;
+   features = ft;
 }
 
 /***********************************************************************
@@ -65,6 +67,7 @@ void levelUp::doLevelUp(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
    int eventInfo, res;
    cursor cursors;
 
+   featSelWindow* talentWindow = NULL;
    classWindow *clWindow = NULL;
    skillWindow *skWindow = NULL;
    classe* selClass = current->actualClass[0];
@@ -165,8 +168,18 @@ void levelUp::doLevelUp(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
                res = skWindow->treat(obj, eventInfo, gui);
                if(res == SKILLW_CONFIRM)
                {
+                  int totalNewTalents = 0;
+                  int totalLevel = current->getLevel()+1;
+                  if( ((totalLevel % 5) == 0) ||
+                      ((totalLevel % 5) == 3) )
+                  {
+                     totalNewTalents = 1;
+                  }
                   delete(skWindow);
-                  state = LEVEL_UP_FINISHED;
+                  state = LEVEL_UP_TALENT_WINDOW;
+                  talentWindow = new featSelWindow(gui);
+
+                  talentWindow->open(current, features, totalNewTalents); 
                }
                else if(res == SKILLW_CANCEL)
                {
@@ -178,6 +191,25 @@ void levelUp::doLevelUp(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
                   delete(skWindow);
                   state = LEVEL_UP_CLASS_WINDOW;
                   clWindow = new classWindow(gui, &selClass);
+               }
+            }
+            break;
+            /* Treat featSel Window */
+            case LEVEL_UP_TALENT_WINDOW:
+            {
+               res = talentWindow->treat(obj, eventInfo);
+               if(res == TALENT_WINDOW_CONFIRM)
+               {
+                  /* Done with level up */
+                  delete(talentWindow);
+                  state = LEVEL_UP_FINISHED;
+               }
+               else if(res == TALENT_WINDOW_CANCEL)
+               {
+                  /* Go back to the skills window */
+                  skWindow = new skillWindow(&current->sk, gui, 
+                                             current->getLevel(selClass)+1);
+                  state = LEVEL_UP_SKILL_WINDOW;
                }
             }
             break;

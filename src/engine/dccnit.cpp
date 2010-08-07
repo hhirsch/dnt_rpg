@@ -2123,7 +2123,7 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
    /* Verify Character Window */
    if( (charInfoWindow->isOpen()) || (charInfoWindow->hasChildrenWindows()) )
    {
-      charInfoWindow->treat(object, eventInfo, proj, modl, viewPort);
+      charInfoWindow->treat(object, eventInfo, features, proj, modl, viewPort);
    }
 
    /* Verify ShortCutsWindow */

@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2010 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -24,13 +24,15 @@
 #include "character.h"
 
 /*! The levelUp class is used to level up characters when its
- * experience points reached enought level. */
+ * experience points reached enought level.
+ * \note Will receive a new talent every time totaLevels() % 5 == 0 or == 3 */
 class levelUp
 {
    public:
       /*! Constructor
-       * \param c -> pointer to character to level up */
-      levelUp(character* c);
+       * \param c -> pointer to character to level up
+       * \param ft -> pointer to the current talents on game */
+      levelUp(character* c, featsList* ft);
       /*! Destructor */
       ~levelUp();
 
@@ -39,6 +41,7 @@ class levelUp
 
    protected:
       character* current;
+      featsList* features;
       int state;
 };
 

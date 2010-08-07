@@ -321,7 +321,7 @@ bool charWindow::hasChildrenWindows()
 /********************************************************************
  *                              treat                               *
  ********************************************************************/
-int charWindow::treat(guiObject* object, int eventInfo,
+int charWindow::treat(guiObject* object, int eventInfo, featsList* features,
                       GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    if(!isOpen())
@@ -374,7 +374,7 @@ int charWindow::treat(guiObject* object, int eventInfo,
       else if(object == (guiObject*)levelUpButton)
       {
          /* Call Level Up for Character */
-         levelUp* lvlUp = new levelUp(current);
+         levelUp* lvlUp = new levelUp(current, features);
          lvlUp->doLevelUp(proj,modl,viewPort);
          delete(lvlUp);
 
