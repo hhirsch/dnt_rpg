@@ -149,7 +149,10 @@ class feats
       feats(void* usedEngine);
       /*! feats Destructior */
       ~feats();
- 
+      
+      /*! Clear all feats */
+      void clear();
+
       /*! Return the feat with number featNumber  
        * \param featNumber -> internal number of feat to return
        * \return the feat struct with internal number. */

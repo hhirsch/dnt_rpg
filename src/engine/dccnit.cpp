@@ -1535,6 +1535,9 @@ int engine::characterScreen()
             {
                status = 5;
                delete(aspWindow);
+               /* Clear all current Talents */
+               activeCharacter->actualFeats->clear();
+               activeCharacter->insertDefaultNeededFeats(features);
                talentWindow = new featSelWindow(gui);
                talentWindow->open(activeCharacter, features, 2);
             }

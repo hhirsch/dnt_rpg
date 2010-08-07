@@ -365,6 +365,14 @@ int featSelWindow::treat(guiObject* object, int eventInfo)
       /* Ok */
       if(object == (guiObject*)okButton)
       {
+         /* Add All selected feats to the character */
+         fSelFeat* ft = (fSelFeat*)selectedFeats.getFirst();
+         for(i=0; i < selectedFeats.getTotal(); i++)
+         {
+            current->actualFeats->insertFeat(ft->desc);
+            ft = (fSelFeat*)ft->getNext();
+         }
+
          return(TALENT_WINDOW_CONFIRM);
       }
       /* Cancel */
