@@ -72,10 +72,7 @@ character::character(featsList* ft, void* usedEngine)
    inventories = new inventory;
 
    /* Feat Details */
-   if(ft != NULL)
-   {
-      actualFeats->insertFeat(ft->featByNumber(FEAT_WEAPON_ATTACK));
-   }
+   insertDefaultNeededFeats(ft);
    activeFeat = FEAT_WEAPON_ATTACK;
 
    /* Bare hands damage dice */
@@ -94,6 +91,17 @@ character::character(featsList* ft, void* usedEngine)
    generalScript = NULL;
    generalScriptFileName = "";
 
+}
+
+/*********************************************************************
+ *                      insertDefaultNeededFeats                     *
+ *********************************************************************/
+void character::insertDefaultNeededFeats(featsList* ft)
+{
+   if(ft != NULL)
+   {
+      actualFeats->insertFeat(ft->featByNumber(FEAT_WEAPON_ATTACK));
+   }
 }
 
 /*********************************************************************

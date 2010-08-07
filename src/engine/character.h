@@ -192,6 +192,10 @@ class character: public aniModel, public dntListElement
        * \return range value in meters */ 
       int getActiveFeatRange();
 
+      /*! Insert the default needed feats (for example: base attack feat)
+       * \param ft -> pointer to all available feats on game */
+      void insertDefaultNeededFeats(featsList* ft);
+
       /*! Get the general script pointer
        * \return genereal iaScript pointer */
       void* getGeneralScript();
