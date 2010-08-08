@@ -200,6 +200,8 @@ void levelUp::doLevelUp(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
                res = talentWindow->treat(obj, eventInfo);
                if(res == TALENT_WINDOW_CONFIRM)
                {
+                  /* Apply all new permanent feats */
+                  talentWindow->applyAllNewPermanentFeats();
                   /* Done with level up */
                   delete(talentWindow);
                   state = LEVEL_UP_FINISHED;

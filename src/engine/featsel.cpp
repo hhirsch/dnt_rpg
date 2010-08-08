@@ -260,7 +260,6 @@ void featSelWindow::close()
    {
       inter->closeWindow(intWindow);
       intWindow = NULL;
-      current = NULL;
    }
 }
 
@@ -348,6 +347,7 @@ void featSelWindow::drawThings(fSelFeat* f)
    intWindow->draw(0,0);
 }
 
+
 /********************************************************************
  *                              treat                               *
  ********************************************************************/
@@ -372,12 +372,14 @@ int featSelWindow::treat(guiObject* object, int eventInfo)
             current->actualFeats->insertFeat(ft->desc);
             ft = (fSelFeat*)ft->getNext();
          }
-
+ 
+         close();
          return(TALENT_WINDOW_CONFIRM);
       }
       /* Cancel */
       else if(object == (guiObject*)cancelButton)
       {
+         close();
          return(TALENT_WINDOW_CANCEL);
       }
       /* Insert/Delete Buttons */
@@ -449,5 +451,31 @@ int featSelWindow::treat(guiObject* object, int eventInfo)
 
    }
    return(TALENT_WINDOW_OTHER);
+}
+
+/********************************************************************
+ *                  applyAllNewPermanentFeats                       *
+ ********************************************************************/
+void featSelWindow::applyAllNewPermanentFeats()
+{
+   int i;
+   feat* f = NULL;
+
+   /* Search on all permanent feats */
+   fSelFeat* ft = (fSelFeat*)selectedFeats.getFirst();
+   for(i=0; i < selectedFeats.getTotal(); i++)
+   {
+      if(ft->desc->type == FEAT_TYPE_PERMANENT)
+      {
+         f = current->actualFeats->featByString(ft->desc->idString);
+         if(f)
+         {
+            /* Apply it */
+            current->actualFeats->applyPermanentFeat(current, f->featNumber);
+         }
+      }
+
+      ft = (fSelFeat*)ft->getNext();
+   }
 }
 

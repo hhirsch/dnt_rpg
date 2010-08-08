@@ -62,6 +62,9 @@ class featSelWindow
        * \return true if opened, false otherwise. */
       bool isOpen();
 
+      /*! Apply all new permanent feat */
+      void applyAllNewPermanentFeats();
+
    protected:
 
       /*! The feat at selection */

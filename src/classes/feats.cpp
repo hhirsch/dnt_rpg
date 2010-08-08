@@ -190,6 +190,7 @@ bool feats::insertFeat(featDescription* featInsert)
    if(totalFeats < MAX_FEATS)
    {
       /* Really insert it */
+      m_feats[totalFeats].featNumber = totalFeats;
       m_feats[totalFeats].info = featInsert;
       m_feats[totalFeats].actualQuantity = featInsert->quantityPerDay;
       totalFeats++;
@@ -357,11 +358,16 @@ bool feats::useFeatAtArea(thing* actor, int featNumber,
 bool feats::applyPermanentFeat(thing* actor, int featNumber)
 {
    iaScript* sc;
+   engine* eng = (engine*)uEngine;
 
    if( (canUse(featNumber)) && (!m_feats[featNumber].info->scriptFile.empty()))
    {
       /* Init the script to use */
       sc = new iaScript(m_feats[featNumber].info->scriptFile, uEngine);
+
+      /* Set infos */
+      sc->defineCharacterOwner((character*)actor);
+      sc->defineMap(eng->getCurrentMap(), eng->NPCs);
 
       /* Run it! */
       sc->run(0);

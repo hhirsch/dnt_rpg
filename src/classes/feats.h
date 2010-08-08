@@ -137,6 +137,7 @@ class feat
    public:
       featDescription* info;       /**< The feat info */
       float actualQuantity;        /**< Actual quantity to use */
+      int featNumber;              /**< Number on feats */
 };
 
 

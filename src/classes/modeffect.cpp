@@ -122,22 +122,69 @@ string modEffect::toReadableText(void* actor)
       return("");
    }
 
-   s = c->sk.getSkillByString(cause.id);
-
-   if(s)
+   /* Attribute and skills */
+   if((cause.type == MOD_TYPE_ATT) || (cause.type == MOD_TYPE_SKILL)) 
    {
+      s = c->sk.getSkillByString(cause.id);
+
+      if(s)
+      {
+         if(mod <= 0)
+         {
+            sprintf(buf, "%s: %d", s->definition->name.c_str(), mod);
+         }
+         else
+         {
+            sprintf(buf, "%s: +%d", s->definition->name.c_str(), mod);
+         }
+         return(buf);
+      }
+   }
+   else if(cause.type == MOD_TYPE_THING)
+   {
+      string text = cause.id;
+      if(cause.id == THING_ARMATURE_CLASS)
+      {
+         text = gettext("Armature Class");
+      }
+      else if(cause.id == THING_SIZE_MODIFIER)
+      {
+         text = gettext("Size Modifier");
+      }
+      else if(cause.id == THING_INITIATIVE_BONUS)
+      {
+         text = gettext("Initiative");
+      }
+      else if(cause.id == THING_DISPLACEMENT)
+      {
+         text = gettext("Displacement");
+      }
+      else if(cause.id == DNT_BS_FORTITUDE)
+      {
+         text = gettext("Fortitude");
+      }
+      else if(cause.id == DNT_BS_REFLEXES)
+      {
+         text = gettext("Reflexes");
+      }
+      else if( (cause.id == DNT_BS_I_AM_NOT_A_FOOL) ||
+               (cause.id == DNT_BS_WILL) )
+      {
+         text = gettext("I Am Not A Fool");
+      }
+      
       if(mod <= 0)
       {
-         sprintf(buf, "%s: %d", s->definition->name.c_str(), mod);
+         sprintf(buf, "%s: %d", text.c_str(), mod);
       }
       else
       {
-         sprintf(buf, "%s: +%d", s->definition->name.c_str(), mod);
+         sprintf(buf, "%s: +%d", text.c_str(), mod);
       }
       return(buf);
    }
 
-
+   cerr << "Invalid: " << cause.type << " " << cause.id << endl;
    return(gettext("Invalid Modifier!"));
 }
 

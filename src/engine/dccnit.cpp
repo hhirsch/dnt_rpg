@@ -1510,7 +1510,6 @@ int engine::characterScreen()
             if(charCreation == TALENT_WINDOW_CONFIRM)
             {
                status = 6;
-               delete(talentWindow);
                aspWindow = new aspectWindow(activeCharacter, gui);
             }
             else if(charCreation == TALENT_WINDOW_CANCEL)
@@ -1527,7 +1526,12 @@ int engine::characterScreen()
             charCreation = aspWindow->treat(guiObj, eventInfo, gui);
             if(charCreation == ASPECTW_CONFIRM)
             {
+               /* Apply all permanent feats */
+               talentWindow->applyAllNewPermanentFeats();
                status = 7;
+
+               /* Done with character creation */
+               delete(talentWindow);
                delete(aspWindow);
                charCreation = CHAR_CONFIRM;
             }
@@ -1535,6 +1539,7 @@ int engine::characterScreen()
             {
                status = 5;
                delete(aspWindow);
+               delete(talentWindow);
                /* Clear all current Talents */
                activeCharacter->actualFeats->clear();
                activeCharacter->insertDefaultNeededFeats(features);
