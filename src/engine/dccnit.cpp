@@ -1526,12 +1526,9 @@ int engine::characterScreen()
             charCreation = aspWindow->treat(guiObj, eventInfo, gui);
             if(charCreation == ASPECTW_CONFIRM)
             {
-               /* Apply all permanent feats */
-               talentWindow->applyAllNewPermanentFeats();
                status = 7;
 
                /* Done with character creation */
-               delete(talentWindow);
                delete(aspWindow);
                charCreation = CHAR_CONFIRM;
             }
@@ -1573,6 +1570,10 @@ int engine::characterScreen()
       money* m = new money();
       activeCharacter->inventories->addObject((object*)m);
       m->setQuantity(100);
+
+      /* Apply all permanent feats */
+      talentWindow->applyAllNewPermanentFeats();
+      delete(talentWindow);
    }
    else
    {
