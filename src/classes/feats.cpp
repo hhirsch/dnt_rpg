@@ -313,7 +313,42 @@ bool feats::useFeatAtTarget(thing* actor, int featNumber, thing* target)
 bool feats::useFeatAtArea(thing* actor, int featNumber, 
              float x, float y, float z)
 {
-   /* TODO */
+   briefing brief;
+   iaScript* sc;
+   engine* eng = (engine*)uEngine;
+
+   if( (canUse(featNumber)) && (!m_feats[featNumber].info->scriptFile.empty()))
+   {
+      /* Verify range */
+      if(!actionInRange(actor->xPosition, actor->zPosition, x, z,
+               m_feats[featNumber].info->range*METER_TO_DNT))
+      {
+         brief.addText(gettext("Too far away for action!"), 225, 20, 20);
+         return(false);
+      }
+
+      /* Init the script to use */
+      sc = new iaScript(m_feats[featNumber].info->scriptFile, uEngine);
+
+      /* Set infos */
+      sc->defineCharacterOwner((character*)actor);
+      sc->defineMap(eng->getCurrentMap(), eng->NPCs);
+
+      /* Set parameters */
+      sc->setParameter("x", &x);
+      sc->setParameter("y", &y);
+      sc->setParameter("z", &z);
+
+      /* Run it! */
+      sc->run(0);
+
+      /* Finish with the script */
+      delete(sc);
+
+      return(true);
+   }
+
+   return(false);
 }
 
 /***************************************************************
