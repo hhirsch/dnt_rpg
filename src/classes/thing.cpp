@@ -191,6 +191,10 @@ int* thing::getFactorValuePointer(factor something)
          cerr << "Unknow thing: " << something.id << endl;
       }
    }
+   else
+   {
+      cerr << "Unknow modType: " << something.type << endl;
+   }
    
    return(NULL);
 }
