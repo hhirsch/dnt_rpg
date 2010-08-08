@@ -321,7 +321,24 @@ bool feats::useFeatAtArea(thing* actor, int featNumber,
  ***************************************************************/
 bool feats::applyPermanentFeat(thing* actor, int featNumber)
 {
-   /* TODO */
+   iaScript* sc;
+
+   if( (canUse(featNumber)) && (!m_feats[featNumber].info->scriptFile.empty()))
+   {
+      /* Init the script to use */
+      sc = new iaScript(m_feats[featNumber].info->scriptFile, uEngine);
+
+      /* Run it! */
+      sc->run(0);
+
+      /* Finish with the script */
+      delete(sc);
+
+      return(true);
+   }
+
+   return(false);
+
 }
 
 /***************************************************************
