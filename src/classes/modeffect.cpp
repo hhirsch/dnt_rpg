@@ -231,7 +231,7 @@ void modEffectList::setOwner(void* actor)
 /***********************************************************************
  *                                insert                               *
  ***********************************************************************/
-bool modEffectList::insert(modEffect* obj)
+bool modEffectList::insert(modEffect* obj, bool applyEffect)
 {
    if(obj)
    {
@@ -242,7 +242,7 @@ bool modEffectList::insert(modEffect* obj)
       obj->init = SDL_GetTicks();
 
       /* Apply the effect, if owner is defined */
-      if(owner != NULL)
+      if( (owner != NULL) && (applyEffect) )
       {
          obj->apply(owner);
       }
@@ -255,7 +255,7 @@ bool modEffectList::insert(modEffect* obj)
 /***********************************************************************
  *                              insertCopy                             *
  ***********************************************************************/
-bool modEffectList::insertCopy(modEffect* obj)
+bool modEffectList::insertCopy(modEffect* obj, bool applyEffect)
 {
    modEffect* eff;
 
@@ -265,7 +265,7 @@ bool modEffectList::insertCopy(modEffect* obj)
       eff = new modEffect(obj);
       
       /* Insert on list */
-      return(insert(eff));
+      return(insert(eff, applyEffect));
    }
 
    return(false);

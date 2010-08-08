@@ -784,7 +784,7 @@ void character::addModEffect(int mod, int time, int periodicTime,
       string factorId, string factorType)
 {
    modEffect* m = new modEffect(mod, time, periodicTime, factorId, factorType);
-   effects->insert(m);
+   effects->insert(m, true);
 }
 
 /*********************************************************************
@@ -1174,7 +1174,9 @@ character* characterList::insertCharacter(string file, featsList* ft,
       else if(key == "modEffect")
       {
          modEffect* m = new modEffect(value);
-         novo->effects->insert(m);
+         /* Only insert, don't apply, since it's already at applied the
+          * loaded values from file. */
+         novo->effects->insert(m, false);
       }
       /* Feat (and feat quantity) */
       else if(key == "feat")

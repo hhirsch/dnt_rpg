@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2010 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -106,14 +106,16 @@ class modEffectList: public dntList
 
       /*! Insert the modEffect to the list
        * \param obj -> modEffect to insert
+       * \param applyEffect -> true to apply the effect to character
        * \return true on success */
-      bool insert(modEffect* obj);
+      bool insert(modEffect* obj, bool applyEffect);
 
       /*! Insert a copy of the modEffect on the list 
        * (applying it to the owner character)
        * \param obj -> pointer to modEffect to insert a copy
+       * \param applyEffect -> true to apply the effect to character
        * \return true on success */
-      bool insertCopy(modEffect* obj);
+      bool insertCopy(modEffect* obj, bool applyEffect);
 
       /*! Remove all expired modEffects from the list (unappling it to 
        * the owner character) and apply all periodic modEffects when needed */
