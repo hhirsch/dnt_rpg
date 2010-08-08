@@ -33,19 +33,19 @@ script(character target, int difficulty, int drunkLevel)
          factorId = "INTELLIGENCE"
          factorType = "ATTRIBUTE"
          modValue = -1*(rollDice(drunkLevel) + 2)
-         addEffect(target, modValue, time, periodicTime, factorId, factorType)
+         addEffect(target, modValue, time, periodicTime, factorType, factorId)
 
          # add modEffect to balance
          factorId = "BALANCE"
          factorType = "SKILL"
          modValue = -1*(rollDice(drunkLevel))
-         addEffect(target, modValue, time, periodicTime, factorId, factorType)
+         addEffect(target, modValue, time, periodicTime, factorType, factorId)
 
          # add drinking saturation
          factorId = "DRINKING"
          factorType = "SKILL"
          modValue = -1
-         addEffect(target, modValue, time, periodicTime, factorId, factorType)
+         addEffect(target, modValue, time, periodicTime, factorType, factorId)
       
          # Add particle effect
          partFile = "particles/drunk.par"

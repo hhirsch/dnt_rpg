@@ -2085,7 +2085,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    }
 
    /* Syntax: addEffect(character c, int mod, int time, int periodicTime,
-    *                   string factorId, string factorType) */
+    *                   string factorType, string factorId) */
    else if(functionName == IA_CHARACTER_ADD_EFFECT)
    {
       character* dude = NULL;
@@ -2099,8 +2099,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       mod = getParameteri(token, strLine, pos);
       time = getParameteri(token, strLine, pos);
       periodicTime = getParameteri(token, strLine, pos);
-      factorId = getParameters(token, strLine, pos);
       factorType = getParameters(token, strLine, pos);
+      factorId = getParameters(token, strLine, pos);
 
       /* Add the effect to the character */
       if(dude)

@@ -277,7 +277,7 @@ using namespace std;
 #define IA_CHARACTER_IS_ALL_DEAD "isAllDead"
 
 /*! void addEffect(character c, int mod, int time, int periodicTime,
- *                 string factorId, string factorType) */
+ *                 string factorType, string factorId) */
 #define IA_CHARACTER_ADD_EFFECT "addEffect"
 
 /*! int getPsycho(character c)  */
