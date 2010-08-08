@@ -5,7 +5,7 @@ script()
    int sumV
 
    # Get the current displacement
-   curDis = thingValue(SELF_CHARACTER, 
+   curDis = thingValue(SELF_CHARACTER, "DISPLACEMENT") 
 
    # Calculate its sum value
    sumV = ( (20 * curDis) / 100 );
