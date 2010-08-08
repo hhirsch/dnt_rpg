@@ -24,6 +24,7 @@
 #include "../gui/farso.h"
 #include "character.h"
 #include "skillwindow.h"
+#include "featswindow.h"
 
 /*! The character window displays information about a
  * character current states. */
@@ -69,6 +70,7 @@ class charWindow
 
       window* intWindow;         /**< Pointer to the internal window */
       skillWindow* skWindow;     /**< Skill Window used */
+      featsWindow* talentsWindow;/**< Talents window */
 
       character* current;        /**< Current character */
 
@@ -76,6 +78,7 @@ class charWindow
       button* okButton;          /**< The ok Button */
       button* levelUpButton;     /**< The Level Up Button */
       button* skillsButton;      /**< The Skills Button */
+      button* talentsButton;     /**< The talents button */
       rolBar* infoBar;           /**< The Info Bar */
 };
 

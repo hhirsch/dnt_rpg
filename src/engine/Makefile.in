@@ -71,7 +71,7 @@ OBJSETC = $(ENDETC)animodel.o $(ENDETC)extensions.o $(ENDETC)message3d.o \
 OBJS = alignwindow.o aspectwindow.o attwindow.o barterwindow.o briefing.o \
        camera.o character.o charwindow.o classwindow.o collision.o \
 		 culling.o cursor.o dialog.o dccnit.o featsel.o \
-		 initial.o inventwindow.o \
+		 featswindow.o initial.o inventwindow.o \
 		 itemwindow.o journalwindow.o levelup.o minimapwindow.o \
 		 modstate.o options.o \
 		 racewindow.o savefile.o savewindow.o skillwindow.o shadow.o \
@@ -152,10 +152,16 @@ dccnit.o: dccnit.h dccnit.cpp util.h $(ENDETC)userinfo.h $(ENDCLASSES)skills.h $
 	@$(CC) $(CFLAGS) $(SUPREDE) dccnit.cpp -o dccnit.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-featsel.o: featsel.h featsel.cpp character.h $(ENDGUI)farso.h
+featsel.o: featsel.h featsel.cpp character.h $(ENDGUI)farso.h $(ENDCLASSES)feats.h
 	@printf "Making featsel.o... "
 	@$(CC) $(CFLAGS) featsel.cpp -o featsel.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
+
+featswindow.o: featswindow.h featswindow.cpp character.h $(ENDGUI)farso.h $(ENDCLASSES)feats.h
+	@printf "Making featswindow.o... "
+	@$(CC) $(CFLAGS) featswindow.cpp -o featswindow.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
 
 initial.o: initial.h initial.cpp $(ENDGUI)farso.h $(ENDSOUND)sound.h ../config.h
 	@printf "Making initial.o... "

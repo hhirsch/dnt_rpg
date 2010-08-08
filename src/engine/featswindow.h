@@ -1,0 +1,83 @@
+/* 
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2010 DNTeam <dnt@dnteam.org>
+ 
+  This file is part of DccNiTghtmare.
+ 
+  DccNiTghtmare is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  DccNiTghtmare is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#ifndef _dnt_featswindow_h
+#define _dnt_featswindow_h
+
+#include "../gui/farso.h"
+#include "../classes/classes.h"
+#include "../classes/feats.h"
+
+#include "character.h"
+#include "featsel.h"
+
+/*! The feats selector window/class */
+class featsWindow
+{
+   public:
+      /*! Constructor
+       * \param interf -> gui interface to open the window */
+      featsWindow(guiInterface* interf);
+
+      /*! Destructor */
+      ~featsWindow();
+
+      /*! Open the window of available feats for a character
+       * \param pers -> character to put feats to
+       * \param selectFeat -> if the window will be opened to select a feat */
+      void open(character* pers, bool selectFeat=false);
+
+      /*! Close the window (if opened) */
+      void close();
+
+      /*! Treat Events on Window. 
+       * \param object -> last GUI object
+       * \param eventInfo -> last GUI Event
+       * \return != 0 if event is gathered */
+      int treat(guiObject* object, int eventInfo);
+
+      /*! Verify if the window is openned
+       * \return true if opened, false otherwise. */
+      bool isOpen();
+
+      /*! Return the last selected feat */
+      feat* getLastSelectedFeat();
+
+   protected:
+      /*! Write about the feat */
+      void writeAboutFeat();
+
+      guiInterface* usedGui;   /**< Pointer to the gui used */
+      character* curCharacter; /**< Current character to show feats */
+      int curFeat;             /**< Current displayed feat */
+      bool selectFeatMode;     /**< If is at select feat mode */
+
+      window* intWindow;        /**< Window used */
+      picture* featIcon;        /**< The feature Image */
+      textBox* featTitle;       /**< Feat title text */
+      rolBar* featDescription;  /**< Feat desciprion text */
+      button* buttonNext;       /**< Next Feat button */
+      button* buttonPrevious;   /**< Prevous Feat Button */
+      button* buttonClose;      /**< Close Window button */
+};
+
+
+#endif
+

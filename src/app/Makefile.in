@@ -73,6 +73,7 @@ OBJSENGINE = $(ENDENGINE)alignwindow.o $(ENDENGINE)aspectwindow.o \
 				 $(ENDENGINE)character.o $(ENDENGINE)racewindow.o \
 				 $(ENDENGINE)savefile.o $(ENDENGINE)savewindow.o \
 				 $(ENDENGINE)skillwindow.o $(ENDENGINE)featsel.o\
+				 $(ENDENGINE)featswindow.o \
 				 $(ENDENGINE)shadow.o $(ENDENGINE)shortcutswindow.o \
 				 $(ENDENGINE)sky.o $(ENDENGINE)sun.o $(ENDENGINE)util.o
 

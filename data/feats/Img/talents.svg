@@ -101,6 +101,13 @@
        inkscape:vp_y="0 : 1000 : 0"
        inkscape:vp_x="0 : 0.5 : 1"
        sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective5356"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -111,7 +118,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
      inkscape:cx="326.63791"
-     inkscape:cy="536.37215"
+     inkscape:cy="415.15385"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -1075,7 +1082,7 @@
          x="478.30725"
          y="490.21228">Can't touch me</tspan></text>
     <g
-       id="g4118">
+       id="g5493">
       <g
          transform="translate(-512.18779,45.91472)"
          id="g3292">
@@ -1175,23 +1182,23 @@
            style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       </g>
       <image
-         sodipodi:absref="/programacao/dccnitghtmare/data/feats/Img/../../comics/tutorial/combat/d20.png"
+         sodipodi:absref="/projetos/dccnitghtmare/data/feats/Img/../../comics/tutorial/combat/d20.png"
          xlink:href="../../comics/tutorial/combat/d20.png"
-         transform="matrix(-0.1027925,0.99470282,-0.99470282,-0.1027925,0,0)"
-         y="-319.80255"
-         x="531.61902"
-         id="image3024"
+         width="25.137032"
          height="26.045658"
-         width="25.137032" />
+         id="image3024"
+         x="531.61902"
+         y="-319.80255"
+         transform="matrix(-0.1027925,0.99470282,-0.99470282,-0.1027925,0,0)" />
       <image
-         sodipodi:absref="/programacao/dccnitghtmare/data/feats/Img/../../comics/tutorial/combat/scimitar.png"
+         sodipodi:absref="/projetos/dccnitghtmare/data/feats/Img/../../comics/tutorial/combat/scimitar.png"
          xlink:href="../../comics/tutorial/combat/scimitar.png"
-         y="519.84967"
-         x="-353.5946"
-         id="image3026"
-         height="76"
+         transform="scale(-1,1)"
          width="38"
-         transform="scale(-1,1)" />
+         height="76"
+         id="image3026"
+         x="-353.5946"
+         y="519.84967" />
       <path
          id="path5131"
          d="m 277.14286,530.21933 c -13.6883,-9.65661 -28.73923,-4.8322 -37.85715,4.28571"
@@ -1475,14 +1482,14 @@
            id="path6352" />
       </g>
       <image
-         sodipodi:absref="/programacao/dccnitghtmare/data/feats/Img/../../comics/tutorial/combat/scimitar.png"
+         sodipodi:absref="/projetos/dccnitghtmare/data/feats/Img/../../comics/tutorial/combat/scimitar.png"
          xlink:href="../../comics/tutorial/combat/scimitar.png"
-         y="456.20728"
-         x="-753.50256"
-         id="image2745"
-         height="76"
+         transform="matrix(-0.95803367,-0.28665569,-0.28665569,0.95803367,0,0)"
          width="38"
-         transform="matrix(-0.95803367,-0.28665569,-0.28665569,0.95803367,0,0)" />
+         height="76"
+         id="image2745"
+         x="-753.50256"
+         y="456.20728" />
       <path
          id="path6391"
          d="m 555.43931,647.30225 c 31.07143,3.92858 22.14286,24.64286 22.14286,24.64286"
@@ -1677,5 +1684,164 @@
          id="tspan4116"
          x="109.60155"
          y="600.31891">Voluntary Autism</tspan></text>
+    <g
+       id="g5518"
+       inkscape:export-filename="/projetos/dccnitghtmare/data/feats/Img/melee_attack.png"
+       inkscape:export-xdpi="72.516518"
+       inkscape:export-ydpi="72.516518">
+      <rect
+         style="fill:#0066ff;stroke:#000000;stroke-width:0.94218963;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         id="rect3641"
+         width="11.415722"
+         height="18.152109"
+         x="-129.09384"
+         y="657.07019"
+         transform="scale(-1,1)" />
+      <path
+         sodipodi:type="arc"
+         style="fill:#ffccaa;stroke:#000000;stroke-width:2.94199991;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         id="path6275"
+         sodipodi:cx="60.104076"
+         sodipodi:cy="152.82133"
+         sodipodi:rx="24.748737"
+         sodipodi:ry="22.728432"
+         d="m 84.852814,152.82133 c 0,12.55257 -11.080387,22.72844 -24.748738,22.72844 -13.66835,0 -24.748737,-10.17587 -24.748737,-22.72844 0,-12.55256 11.080387,-22.72843 24.748737,-22.72843 13.668351,0 24.748738,10.17587 24.748738,22.72843 z"
+         transform="matrix(-0.31391632,0,0,0.32672126,142.10144,602.03781)" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.3202548px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 126.36129,675.17728 0.11211,6.41774 5.82988,-0.11668"
+         id="path3645" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.3202548px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 120.2175,675.76072 0,5.71762 5.2693,-0.11669"
+         id="path3647" />
+      <path
+         sodipodi:type="arc"
+         style="fill:#000000;stroke:#000000;stroke-width:2.94199991;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         id="path3649"
+         sodipodi:cx="794.48499"
+         sodipodi:cy="256.86707"
+         sodipodi:rx="2.5253813"
+         sodipodi:ry="3.5355339"
+         d="m 797.01037,256.86707 c 0,1.95262 -1.13066,3.53553 -2.52538,3.53553 -1.39473,0 -2.52539,-1.58291 -2.52539,-3.53553 0,-1.95263 1.13066,-3.53554 2.52539,-3.53554 1.39472,0 2.52538,1.58291 2.52538,3.53554 z"
+         transform="matrix(-0.23828907,0,0,0.31073476,316.29942,570.03463)" />
+      <path
+         transform="matrix(-0.23828907,0,0,0.31073476,312.56814,570.03463)"
+         d="m 797.01037,256.86707 c 0,1.95262 -1.13066,3.53553 -2.52538,3.53553 -1.39473,0 -2.52539,-1.58291 -2.52539,-3.53553 0,-1.95263 1.13066,-3.53554 2.52539,-3.53554 1.39472,0 2.52538,1.58291 2.52538,3.53554 z"
+         sodipodi:ry="3.5355339"
+         sodipodi:rx="2.5253813"
+         sodipodi:cy="256.86707"
+         sodipodi:cx="794.48499"
+         id="path3651"
+         style="fill:#000000;stroke:#000000;stroke-width:2.94199991;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         sodipodi:type="arc" />
+      <g
+         transform="matrix(0.7215666,0,0,0.7354782,-109.92783,455.48409)"
+         id="g3653">
+        <path
+           sodipodi:type="arc"
+           style="fill:#00aa44;fill-opacity:1;stroke:#000000;stroke-width:2.94199991;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           id="path3655"
+           sodipodi:cx="771.07141"
+           sodipodi:cy="119.1479"
+           sodipodi:rx="10.420911"
+           sodipodi:ry="10.358145"
+           d="m 781.49232,119.1479 c 0,5.72065 -4.6656,10.35815 -10.42091,10.35815 -5.75531,0 -10.42091,-4.6375 -10.42091,-10.35815 0,-0.0562 4.6e-4,-0.11245 0.001,-0.16867 l 10.41953,0.16867 z"
+           transform="matrix(0.3214358,-0.113344,-0.09730313,-0.295318,80.404022,405.49816)"
+           sodipodi:start="0"
+           sodipodi:end="3.1578779" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:0.43961501px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m 320.84559,292.50042 c 0,0 -0.35395,-1.52132 -1.73979,-1.17715 -1.48256,0.28537 -1.34338,1.86725 -1.34338,1.86725"
+           id="path3657" />
+        <path
+           id="path3659"
+           d="m 316.86442,283.09751 2.6131,10.5342"
+           style="fill:none;stroke:#000000;stroke-width:0.48110116px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      </g>
+      <g
+         id="g3661"
+         transform="matrix(0.63719952,-0.34510571,0.33857803,0.64948454,-177.25216,592.80881)">
+        <path
+           sodipodi:end="3.1578779"
+           sodipodi:start="0"
+           transform="matrix(0.3082245,-0.1543495,-0.1395446,-0.2738779,109.54456,433.84265)"
+           d="m 781.49232,119.1479 c 0,5.72065 -4.6656,10.35815 -10.42091,10.35815 -5.75531,0 -10.42091,-4.6375 -10.42091,-10.35815 0,-0.0562 4.6e-4,-0.11245 0.001,-0.16867 l 10.41953,0.16867 z"
+           sodipodi:ry="10.358145"
+           sodipodi:rx="10.420911"
+           sodipodi:cy="119.1479"
+           sodipodi:cx="771.07141"
+           id="path3663"
+           style="fill:#00aa44;fill-opacity:1;stroke:#000000;stroke-width:2.94199991;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           sodipodi:type="arc" />
+        <path
+           id="path3665"
+           d="m 333.07653,291.71929 c 0,0 -0.52585,-1.44731 0.83361,-1.94661 1.4094,-0.60207 2.14987,0.77379 2.14987,0.77379"
+           style="fill:none;stroke:#000000;stroke-width:0.43961504px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+        <path
+           id="path3667"
+           d="m 330.53314,282.37383 4.3816,9.25238"
+           style="fill:none;stroke:#000000;stroke-width:0.48110119px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      </g>
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.35047698px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 126.9317,654.95986 -5.2029,0.18069"
+         id="path3669" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.72848922px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 118.52531,647.92041 c -0.29297,0.0589 -1.2985,-1.05916 -2.06162,-1.70736"
+         id="path3671" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.72848922px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 119.29842,647.00106 c -0.004,-0.37795 -1.25313,-1.93396 -1.93277,-2.62671"
+         id="path3673" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.72848922px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 120.84463,646.34439 c 0.0416,-0.44552 -0.87967,-2.27319 -1.15966,-3.41472"
+         id="path3675" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.72848922px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 122.39085,646.08171 c 0.1153,-0.36763 0.18942,-2.47178 0.38655,-3.67739"
+         id="path3677" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.72848922px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 124.19476,645.68771 c 0.0489,-0.29911 0.26569,-2.13393 0.51541,-3.15205"
+         id="path3679" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.72848922px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 125.99868,645.81904 c 0.0533,-0.32593 0.47158,-2.09604 0.64425,-3.15204"
+         id="path3681" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.72848922px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 126.77179,646.47572 c -0.323,-0.82304 1.02843,-1.43984 1.41736,-2.2327"
+         id="path3683" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.72848922px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 128.0603,647.52641 c 0.13587,-0.27698 1.2232,-1.57423 1.67506,-2.49538"
+         id="path3685" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.72848922px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 129.21996,648.97109 c 0.0992,-0.20229 0.95901,-1.63417 1.54621,-2.2327"
+         id="path3687" />
+      <image
+         sodipodi:absref="/projetos/dccnitghtmare/data/feats/Img/../../comics/tutorial/combat/scimitar.png"
+         xlink:href="../../comics/tutorial/combat/scimitar.png"
+         y="660.66528"
+         x="34.177406"
+         id="image3689"
+         height="18.572414"
+         width="11.457736"
+         transform="matrix(-0.96263917,0.27078743,0.26134599,0.96524519,0,0)" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Garamond;-inkscape-font-specification:Garamond Bold Italic"
+       x="101.52032"
+       y="692.74786"
+       id="text5545"><tspan
+         sodipodi:role="line"
+         id="tspan5547"
+         x="101.52032"
+         y="692.74786">base attack</tspan></text>
   </g>
 </svg>

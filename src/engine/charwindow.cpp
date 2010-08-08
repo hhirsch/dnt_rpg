@@ -37,6 +37,7 @@ charWindow::charWindow(guiInterface* interf)
    intWindow = NULL;
    current = NULL;
    skWindow = NULL;
+   talentsWindow = NULL;
    okButton = NULL;
    levelUpButton = NULL;
    skillsButton = NULL;
@@ -260,8 +261,8 @@ void charWindow::open(character* pers)
    levelUpButton->setAvailable(pers->getUpLevels() > 0);
 
    /* Feats Button */
-   intWindow->getObjectsList()->insertButton(5,212,125,231,
-                                             gettext("Talents"),1);
+   talentsButton = intWindow->getObjectsList()->insertButton(5,212,125,231,
+         gettext("Talents"),1);
 
    /* Skill Button */
    skillsButton = intWindow->getObjectsList()->insertButton(5,232,125,251,
@@ -300,6 +301,17 @@ void charWindow::close()
      delete(skWindow);
      skWindow = NULL;
    }
+
+   /* Close and delete talents window */
+   if(talentsWindow)
+   {
+      if(talentsWindow->isOpen())
+      {
+         talentsWindow->close();
+      }
+      delete(talentsWindow);
+      talentsWindow = NULL;
+   }
 }
 
 /********************************************************************
@@ -315,7 +327,7 @@ bool charWindow::isOpen()
  ********************************************************************/
 bool charWindow::hasChildrenWindows()
 {
-   return(skWindow != NULL);
+   return( (skWindow != NULL) || (talentsWindow != NULL) );
 }
 
 /********************************************************************
@@ -347,7 +359,25 @@ int charWindow::treat(guiObject* object, int eventInfo, featsList* features,
       }
 
       /* If event treated by Skill Window, must return */
-      if(res != SKILLW_OTHER)
+      if(res == SKILLW_OTHER)
+      {
+         return(res);
+      }
+   }
+
+   /* Verify Talent window */
+   if(talentsWindow)
+   {
+      int res = talentsWindow->treat(object, eventInfo);
+
+      if( (res == TALENT_WINDOW_CONFIRM) || (res == TALENT_WINDOW_CANCEL) )
+      {
+         /* Done with window */
+         delete(talentsWindow);
+         talentsWindow = NULL;
+      }
+
+      if(res == TALENT_WINDOW_OTHER)
       {
          return(res);
       }
@@ -368,6 +398,15 @@ int charWindow::treat(guiObject* object, int eventInfo, featsList* features,
          {
             skWindow = new skillWindow(&current->sk,
                                        inter, current->getLevel(), true );
+         }
+      }
+      /* Talents Button */
+      else if(object == (guiObject*)talentsButton)
+      {
+         if(talentsWindow == NULL)
+         {
+            talentsWindow = new featsWindow(inter);
+            talentsWindow->open(current);
          }
       }
       /* Level Up Button */
