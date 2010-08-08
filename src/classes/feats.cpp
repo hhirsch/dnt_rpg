@@ -174,8 +174,22 @@ feat* feats::featByString(string featName)
  ***************************************************************/
 bool feats::insertFeat(featDescription* featInsert)
 {
-   if( (totalFeats < MAX_FEATS) && (featInsert != NULL) )
+   if(featInsert == NULL)
    {
+      return(false);
+   }
+
+   /* Verify if already inserted */
+   if(featByString(featInsert->idString))
+   {
+      /* Already insert. No need for duplicate */
+      return(true);
+   }
+
+   /* Verify if not max */
+   if(totalFeats < MAX_FEATS)
+   {
+      /* Really insert it */
       m_feats[totalFeats].info = featInsert;
       m_feats[totalFeats].actualQuantity = featInsert->quantityPerDay;
       totalFeats++;
