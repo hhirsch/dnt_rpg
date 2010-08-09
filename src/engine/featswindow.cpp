@@ -75,7 +75,7 @@ void featsWindow::open(character* pers, bool selectFeat)
 
    /* title and selectors */
    featTitle = intWindow->getObjectsList()->insertTextBox(59,191,230,209,
-         1, gettext("No talents."));
+         1, gettext("No Talents."));
    featTitle->setFont(DNT_FONT_ARIAL,10,DNT_FONT_ALIGN_CENTER,
          DNT_FONT_STYLE_BOLD);
    buttonPrevious = intWindow->getObjectsList()->insertButton(44,191,58,209,

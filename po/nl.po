@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-08-06 14:56-0300\n"
+"POT-Creation-Date: 2010-08-09 12:01-0300\n"
 "PO-Revision-Date: 2009-04-16 21:14+0000\n"
 "Last-Translator: Marcel de Klein <q-bus@home.nl>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -28,7 +28,8 @@ msgstr "%s probeer aan te vallen %s"
 msgid "%s try to heal %s"
 msgstr "%s probeer te genezen %s"
 
-#: src/classes/actions.cpp:160 src/classes/feats.cpp:254
+#: src/classes/actions.cpp:160 src/classes/feats.cpp:285
+#: src/classes/feats.cpp:327
 msgid "Too far away for action!"
 msgstr "Te ver weg voor actie!"
 
@@ -62,23 +63,23 @@ msgstr ""
 msgid "Level"
 msgstr "Niveau"
 
-#: src/classes/defs.cpp:262 src/engine/charwindow.cpp:210
+#: src/classes/defs.cpp:262 src/engine/charwindow.cpp:211
 msgid "Fortitude"
 msgstr "Kracht"
 
-#: src/classes/defs.cpp:268 src/engine/charwindow.cpp:215
+#: src/classes/defs.cpp:268 src/engine/charwindow.cpp:216
 msgid "Reflexes"
 msgstr "Reflex"
 
-#: src/classes/defs.cpp:275 src/engine/charwindow.cpp:220
+#: src/classes/defs.cpp:275 src/engine/charwindow.cpp:221
 msgid "I am Not a Fool"
 msgstr "Ik ben niet gek"
 
-#: src/classes/feats.cpp:182
+#: src/classes/feats.cpp:213
 msgid "Invalid Talent"
 msgstr ""
 
-#: src/classes/feats.cpp:202
+#: src/classes/feats.cpp:233
 msgid "Not enought points to use!"
 msgstr "Niet genoeg punten om te gebruiken!"
 
@@ -114,15 +115,15 @@ msgstr "Annuleren"
 msgid "Aspect"
 msgstr ""
 
-#: src/engine/aspectwindow.cpp:67 src/engine/charwindow.cpp:106
+#: src/engine/aspectwindow.cpp:67 src/engine/charwindow.cpp:107
 msgid "Name:"
 msgstr "Naam:"
 
-#: src/engine/aspectwindow.cpp:72 src/engine/charwindow.cpp:109
+#: src/engine/aspectwindow.cpp:72 src/engine/charwindow.cpp:110
 msgid "Age:"
 msgstr "Leeftijd:"
 
-#: src/engine/aspectwindow.cpp:76 src/engine/charwindow.cpp:124
+#: src/engine/aspectwindow.cpp:76 src/engine/charwindow.cpp:125
 msgid "Sex:"
 msgstr "Geslacht:"
 
@@ -142,32 +143,32 @@ msgstr ""
 msgid "Auto"
 msgstr ""
 
-#: src/engine/attwindow.cpp:90 src/engine/charwindow.cpp:167
+#: src/engine/attwindow.cpp:90 src/engine/charwindow.cpp:168
 #: data/skills/forca.ski:1
 msgid "Strength"
 msgstr "Kracht"
 
-#: src/engine/attwindow.cpp:110 src/engine/charwindow.cpp:172
+#: src/engine/attwindow.cpp:110 src/engine/charwindow.cpp:173
 #: data/skills/destreza.ski:1
 msgid "Dexterity"
 msgstr "Vaardigheid"
 
-#: src/engine/attwindow.cpp:130 src/engine/charwindow.cpp:177
+#: src/engine/attwindow.cpp:130 src/engine/charwindow.cpp:178
 #: data/skills/constituicao.ski:1
 msgid "Constitution"
 msgstr "Gezondheid"
 
-#: src/engine/attwindow.cpp:150 src/engine/charwindow.cpp:182
+#: src/engine/attwindow.cpp:150 src/engine/charwindow.cpp:183
 #: data/skills/inteligencia.ski:1
 msgid "Intelligence"
 msgstr "Intelligentie"
 
-#: src/engine/attwindow.cpp:171 src/engine/charwindow.cpp:187
+#: src/engine/attwindow.cpp:171 src/engine/charwindow.cpp:188
 #: data/skills/sabedoria.ski:1
 msgid "Wisdom"
 msgstr "Wijsheid"
 
-#: src/engine/attwindow.cpp:192 src/engine/charwindow.cpp:192
+#: src/engine/attwindow.cpp:192 src/engine/charwindow.cpp:193
 #: data/skills/carisma.ski:1
 msgid "Charisma"
 msgstr "Charisma"
@@ -177,7 +178,7 @@ msgid "Attribute Description"
 msgstr "Attribuut beschrijving"
 
 #: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:573
-#: src/engine/featsel.cpp:393 src/engine/inventwindow.cpp:364
+#: src/engine/featsel.cpp:403 src/engine/inventwindow.cpp:364
 #: src/engine/options.cpp:1382
 msgid "Warning"
 msgstr "Waarschuwing"
@@ -239,88 +240,89 @@ msgstr ""
 msgid "Failure"
 msgstr ""
 
-#: src/engine/charwindow.cpp:115
+#: src/engine/charwindow.cpp:116
 msgid "Female"
 msgstr "Vrouw"
 
-#: src/engine/charwindow.cpp:118
+#: src/engine/charwindow.cpp:119
 msgid "Male"
 msgstr "Man"
 
-#: src/engine/charwindow.cpp:121
+#: src/engine/charwindow.cpp:122
 msgid "Undefined"
 msgstr "Ongedefinieerd"
 
-#: src/engine/charwindow.cpp:127
+#: src/engine/charwindow.cpp:128
 msgid "Race:"
 msgstr "Ras:"
 
-#: src/engine/charwindow.cpp:130
+#: src/engine/charwindow.cpp:131
 msgid "Alignment:"
 msgstr "Uitlijning:"
 
-#: src/engine/charwindow.cpp:134
+#: src/engine/charwindow.cpp:135
 msgid "XP"
 msgstr "XP"
 
-#: src/engine/charwindow.cpp:135
+#: src/engine/charwindow.cpp:136
 msgid "Next Level"
 msgstr "Volgend niveau"
 
-#: src/engine/charwindow.cpp:141
+#: src/engine/charwindow.cpp:142
 msgid "HP"
 msgstr "HP"
 
-#: src/engine/charwindow.cpp:144
+#: src/engine/charwindow.cpp:145
 msgid "AC"
 msgstr "AC"
 
-#: src/engine/charwindow.cpp:205
+#: src/engine/charwindow.cpp:206
 msgid "Total Level"
 msgstr ""
 
-#: src/engine/charwindow.cpp:225
+#: src/engine/charwindow.cpp:226
 msgid "Base Attack Modifier"
 msgstr ""
 
-#: src/engine/charwindow.cpp:230
+#: src/engine/charwindow.cpp:231
 msgid "Size Modifier"
 msgstr ""
 
-#: src/engine/charwindow.cpp:258
+#: src/engine/charwindow.cpp:259
 msgid "Level Up"
 msgstr ""
 
-#: src/engine/charwindow.cpp:264 src/engine/featsel.cpp:163
+#: src/engine/charwindow.cpp:265 src/engine/featsel.cpp:163
+#: src/engine/featswindow.cpp:68
 msgid "Talents"
 msgstr "Talenten"
 
-#: src/engine/charwindow.cpp:268 src/engine/skillwindow.cpp:74
+#: src/engine/charwindow.cpp:269 src/engine/skillwindow.cpp:74
 msgid "Skills"
 msgstr "Vaardigheden"
 
-#: src/engine/charwindow.cpp:272 src/engine/skillwindow.cpp:169
-#: src/gui/window.cpp:151
+#: src/engine/charwindow.cpp:273 src/engine/featswindow.cpp:88
+#: src/engine/skillwindow.cpp:169 src/gui/window.cpp:151
 msgid "Close"
 msgstr ""
 
-#: src/engine/charwindow.cpp:404
+#: src/engine/charwindow.cpp:443
 msgid "Main Weapon"
 msgstr "Hoofd wapen"
 
-#: src/engine/charwindow.cpp:408
+#: src/engine/charwindow.cpp:447
 msgid "Secondary Weapon"
 msgstr "Secundair wapen"
 
-#: src/engine/charwindow.cpp:412
+#: src/engine/charwindow.cpp:451
 msgid "Weapon"
 msgstr "Wapen"
 
-#: src/engine/charwindow.cpp:424
+#: src/engine/charwindow.cpp:463
 msgid "Unarmed"
 msgstr "Ongewapend"
 
-#: src/engine/charwindow.cpp:430
+#: src/engine/charwindow.cpp:469
 msgid "Not Applicable"
 msgstr ""
 
@@ -364,7 +366,8 @@ msgstr ""
 msgid "Class Talents"
 msgstr ""
 
-#: src/engine/classwindow.cpp:258 src/engine/racewindow.cpp:190
+#: src/engine/classwindow.cpp:258 src/engine/featswindow.cpp:78
+#: src/engine/racewindow.cpp:190
 msgid "No Talents."
 msgstr ""
 
@@ -442,58 +445,58 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1749
+#: src/engine/dccnit.cpp:1758
 msgid "Too far away for the action!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1766
+#: src/engine/dccnit.cpp:1775
 msgid "Couldn't rest at battle mode."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1772
+#: src/engine/dccnit.cpp:1781
 msgid "Enemies nearby."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1876
+#: src/engine/dccnit.cpp:1885
 msgid "No NPCs in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1934
+#: src/engine/dccnit.cpp:1943
 msgid "Surprise Attack Turn."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1947
+#: src/engine/dccnit.cpp:1956
 msgid "No enemies in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:2132 src/engine/dccnit.cpp:2650
+#: src/engine/dccnit.cpp:2141 src/engine/dccnit.cpp:2659
 #: src/engine/shortcutswindow.cpp:51
 msgid "Nothing"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2400
+#: src/engine/dccnit.cpp:2409
 #, c-format
 msgid "%s taken."
 msgstr ""
 
-#: src/engine/dccnit.cpp:2417
+#: src/engine/dccnit.cpp:2426
 msgid "Inventory is full!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2450
+#: src/engine/dccnit.cpp:2459
 msgid "Door"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2586
+#: src/engine/dccnit.cpp:2595
 #, c-format
 msgid "%s attacks %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2751
+#: src/engine/dccnit.cpp:2760
 msgid "No more actions. Turn ended."
 msgstr ""
 
-#: src/engine/dccnit.cpp:4282
+#: src/engine/dccnit.cpp:4291
 msgid "Exit Battle Mode"
 msgstr ""
 
@@ -529,12 +532,16 @@ msgstr ""
 msgid "Selected"
 msgstr ""
 
-#: src/engine/featsel.cpp:341
+#: src/engine/featsel.cpp:340
 msgid "Remaining"
 msgstr ""
 
-#: src/engine/featsel.cpp:394
+#: src/engine/featsel.cpp:404
 msgid "You can't select more talents"
+msgstr ""
+
+#: src/engine/featswindow.cpp:91
+msgid "Select"
 msgstr ""
 
 #: src/engine/initial.cpp:79
@@ -4189,3 +4196,7 @@ msgstr "Zwaar"
 #: data/characters/pcs/santa.pc:1
 msgid "Santa Claws"
 msgstr ""
+
+#, fuzzy
+#~ msgid "No talents"
+#~ msgstr "Talenten"

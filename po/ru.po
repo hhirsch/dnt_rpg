@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-08-06 14:56-0300\n"
+"POT-Creation-Date: 2010-08-09 12:01-0300\n"
 "PO-Revision-Date: 2010-03-30 18:39+0000\n"
 "Last-Translator: Peter Belyaev <kapone2002@yandex.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -28,7 +28,8 @@ msgstr "%s попытка нападения %s"
 msgid "%s try to heal %s"
 msgstr "%s попытка лечения %s"
 
-#: src/classes/actions.cpp:160 src/classes/feats.cpp:254
+#: src/classes/actions.cpp:160 src/classes/feats.cpp:285
+#: src/classes/feats.cpp:327
 msgid "Too far away for action!"
 msgstr "Слишком далеко для действия!"
 
@@ -62,23 +63,23 @@ msgstr "Критический удар"
 msgid "Level"
 msgstr "Уровень"
 
-#: src/classes/defs.cpp:262 src/engine/charwindow.cpp:210
+#: src/classes/defs.cpp:262 src/engine/charwindow.cpp:211
 msgid "Fortitude"
 msgstr "Удача"
 
-#: src/classes/defs.cpp:268 src/engine/charwindow.cpp:215
+#: src/classes/defs.cpp:268 src/engine/charwindow.cpp:216
 msgid "Reflexes"
 msgstr "Рефлексы"
 
-#: src/classes/defs.cpp:275 src/engine/charwindow.cpp:220
+#: src/classes/defs.cpp:275 src/engine/charwindow.cpp:221
 msgid "I am Not a Fool"
 msgstr "Я не дурак"
 
-#: src/classes/feats.cpp:182
+#: src/classes/feats.cpp:213
 msgid "Invalid Talent"
 msgstr "Неверный талант"
 
-#: src/classes/feats.cpp:202
+#: src/classes/feats.cpp:233
 msgid "Not enought points to use!"
 msgstr "Недостаточно очков для использования!"
 
@@ -114,15 +115,15 @@ msgstr "Отменить"
 msgid "Aspect"
 msgstr "Внешний вид"
 
-#: src/engine/aspectwindow.cpp:67 src/engine/charwindow.cpp:106
+#: src/engine/aspectwindow.cpp:67 src/engine/charwindow.cpp:107
 msgid "Name:"
 msgstr "Имя:"
 
-#: src/engine/aspectwindow.cpp:72 src/engine/charwindow.cpp:109
+#: src/engine/aspectwindow.cpp:72 src/engine/charwindow.cpp:110
 msgid "Age:"
 msgstr "Возраст:"
 
-#: src/engine/aspectwindow.cpp:76 src/engine/charwindow.cpp:124
+#: src/engine/aspectwindow.cpp:76 src/engine/charwindow.cpp:125
 msgid "Sex:"
 msgstr "Пол:"
 
@@ -142,32 +143,32 @@ msgstr "Очистить"
 msgid "Auto"
 msgstr "Автоматически"
 
-#: src/engine/attwindow.cpp:90 src/engine/charwindow.cpp:167
+#: src/engine/attwindow.cpp:90 src/engine/charwindow.cpp:168
 #: data/skills/forca.ski:1
 msgid "Strength"
 msgstr "Сила"
 
-#: src/engine/attwindow.cpp:110 src/engine/charwindow.cpp:172
+#: src/engine/attwindow.cpp:110 src/engine/charwindow.cpp:173
 #: data/skills/destreza.ski:1
 msgid "Dexterity"
 msgstr "Ловкость"
 
-#: src/engine/attwindow.cpp:130 src/engine/charwindow.cpp:177
+#: src/engine/attwindow.cpp:130 src/engine/charwindow.cpp:178
 #: data/skills/constituicao.ski:1
 msgid "Constitution"
 msgstr "Телосложение"
 
-#: src/engine/attwindow.cpp:150 src/engine/charwindow.cpp:182
+#: src/engine/attwindow.cpp:150 src/engine/charwindow.cpp:183
 #: data/skills/inteligencia.ski:1
 msgid "Intelligence"
 msgstr "Интеллект"
 
-#: src/engine/attwindow.cpp:171 src/engine/charwindow.cpp:187
+#: src/engine/attwindow.cpp:171 src/engine/charwindow.cpp:188
 #: data/skills/sabedoria.ski:1
 msgid "Wisdom"
 msgstr "Мудрость"
 
-#: src/engine/attwindow.cpp:192 src/engine/charwindow.cpp:192
+#: src/engine/attwindow.cpp:192 src/engine/charwindow.cpp:193
 #: data/skills/carisma.ski:1
 msgid "Charisma"
 msgstr "Привлекательность"
@@ -177,7 +178,7 @@ msgid "Attribute Description"
 msgstr "Описание атрибута"
 
 #: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:573
-#: src/engine/featsel.cpp:393 src/engine/inventwindow.cpp:364
+#: src/engine/featsel.cpp:403 src/engine/inventwindow.cpp:364
 #: src/engine/options.cpp:1382
 msgid "Warning"
 msgstr "Предупреждение"
@@ -239,88 +240,89 @@ msgstr "Успешно"
 msgid "Failure"
 msgstr "Неудача"
 
-#: src/engine/charwindow.cpp:115
+#: src/engine/charwindow.cpp:116
 msgid "Female"
 msgstr "Женщина"
 
-#: src/engine/charwindow.cpp:118
+#: src/engine/charwindow.cpp:119
 msgid "Male"
 msgstr "Мужчина"
 
-#: src/engine/charwindow.cpp:121
+#: src/engine/charwindow.cpp:122
 msgid "Undefined"
 msgstr "Неопределено"
 
-#: src/engine/charwindow.cpp:127
+#: src/engine/charwindow.cpp:128
 msgid "Race:"
 msgstr "Раса:"
 
-#: src/engine/charwindow.cpp:130
+#: src/engine/charwindow.cpp:131
 msgid "Alignment:"
 msgstr "Выравнивание:"
 
-#: src/engine/charwindow.cpp:134
+#: src/engine/charwindow.cpp:135
 msgid "XP"
 msgstr "Опыт"
 
-#: src/engine/charwindow.cpp:135
+#: src/engine/charwindow.cpp:136
 msgid "Next Level"
 msgstr "Следующий уровень"
 
-#: src/engine/charwindow.cpp:141
+#: src/engine/charwindow.cpp:142
 msgid "HP"
 msgstr "Здоровье"
 
-#: src/engine/charwindow.cpp:144
+#: src/engine/charwindow.cpp:145
 msgid "AC"
 msgstr "Питание"
 
-#: src/engine/charwindow.cpp:205
+#: src/engine/charwindow.cpp:206
 msgid "Total Level"
 msgstr "Суммарный уровень"
 
-#: src/engine/charwindow.cpp:225
+#: src/engine/charwindow.cpp:226
 msgid "Base Attack Modifier"
 msgstr "Модификатор базовой атаки"
 
-#: src/engine/charwindow.cpp:230
+#: src/engine/charwindow.cpp:231
 msgid "Size Modifier"
 msgstr "Модификатор размера"
 
-#: src/engine/charwindow.cpp:258
+#: src/engine/charwindow.cpp:259
 msgid "Level Up"
 msgstr "Следующий уровень"
 
-#: src/engine/charwindow.cpp:264 src/engine/featsel.cpp:163
+#: src/engine/charwindow.cpp:265 src/engine/featsel.cpp:163
+#: src/engine/featswindow.cpp:68
 msgid "Talents"
 msgstr "Таланты"
 
-#: src/engine/charwindow.cpp:268 src/engine/skillwindow.cpp:74
+#: src/engine/charwindow.cpp:269 src/engine/skillwindow.cpp:74
 msgid "Skills"
 msgstr "Умения"
 
-#: src/engine/charwindow.cpp:272 src/engine/skillwindow.cpp:169
-#: src/gui/window.cpp:151
+#: src/engine/charwindow.cpp:273 src/engine/featswindow.cpp:88
+#: src/engine/skillwindow.cpp:169 src/gui/window.cpp:151
 msgid "Close"
 msgstr "Закрыть"
 
-#: src/engine/charwindow.cpp:404
+#: src/engine/charwindow.cpp:443
 msgid "Main Weapon"
 msgstr "Основное оружие"
 
-#: src/engine/charwindow.cpp:408
+#: src/engine/charwindow.cpp:447
 msgid "Secondary Weapon"
 msgstr "Дополнительное оружие"
 
-#: src/engine/charwindow.cpp:412
+#: src/engine/charwindow.cpp:451
 msgid "Weapon"
 msgstr "Оружие"
 
-#: src/engine/charwindow.cpp:424
+#: src/engine/charwindow.cpp:463
 msgid "Unarmed"
 msgstr "Безоружный"
 
-#: src/engine/charwindow.cpp:430
+#: src/engine/charwindow.cpp:469
 msgid "Not Applicable"
 msgstr "Неприменимо"
 
@@ -364,7 +366,8 @@ msgstr "Нет модификаторов."
 msgid "Class Talents"
 msgstr "Таланты класса"
 
-#: src/engine/classwindow.cpp:258 src/engine/racewindow.cpp:190
+#: src/engine/classwindow.cpp:258 src/engine/featswindow.cpp:78
+#: src/engine/racewindow.cpp:190
 msgid "No Talents."
 msgstr "Нет талантов."
 
@@ -442,58 +445,58 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1749
+#: src/engine/dccnit.cpp:1758
 msgid "Too far away for the action!"
 msgstr "Слишком далеко для действия!"
 
-#: src/engine/dccnit.cpp:1766
+#: src/engine/dccnit.cpp:1775
 msgid "Couldn't rest at battle mode."
 msgstr "Нельзя отдыхать во время битвы."
 
-#: src/engine/dccnit.cpp:1772
+#: src/engine/dccnit.cpp:1781
 msgid "Enemies nearby."
 msgstr "Враги близко."
 
-#: src/engine/dccnit.cpp:1876
+#: src/engine/dccnit.cpp:1885
 msgid "No NPCs in the area."
 msgstr "Нет NPC'ов в зоне"
 
-#: src/engine/dccnit.cpp:1934
+#: src/engine/dccnit.cpp:1943
 msgid "Surprise Attack Turn."
 msgstr "Неожиданное нападение."
 
-#: src/engine/dccnit.cpp:1947
+#: src/engine/dccnit.cpp:1956
 msgid "No enemies in the area."
 msgstr "Нет врагов в зоне."
 
-#: src/engine/dccnit.cpp:2132 src/engine/dccnit.cpp:2650
+#: src/engine/dccnit.cpp:2141 src/engine/dccnit.cpp:2659
 #: src/engine/shortcutswindow.cpp:51
 msgid "Nothing"
 msgstr "Ничего"
 
-#: src/engine/dccnit.cpp:2400
+#: src/engine/dccnit.cpp:2409
 #, c-format
 msgid "%s taken."
 msgstr "%s взят."
 
-#: src/engine/dccnit.cpp:2417
+#: src/engine/dccnit.cpp:2426
 msgid "Inventory is full!"
 msgstr "Инвентарь полон!"
 
-#: src/engine/dccnit.cpp:2450
+#: src/engine/dccnit.cpp:2459
 msgid "Door"
 msgstr "Дверь"
 
-#: src/engine/dccnit.cpp:2586
+#: src/engine/dccnit.cpp:2595
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s атакует %s"
 
-#: src/engine/dccnit.cpp:2751
+#: src/engine/dccnit.cpp:2760
 msgid "No more actions. Turn ended."
 msgstr "Больше никаких действий. Конец хода."
 
-#: src/engine/dccnit.cpp:4282
+#: src/engine/dccnit.cpp:4291
 msgid "Exit Battle Mode"
 msgstr "Выйти из боевого режима"
 
@@ -529,12 +532,16 @@ msgstr ""
 msgid "Selected"
 msgstr ""
 
-#: src/engine/featsel.cpp:341
+#: src/engine/featsel.cpp:340
 msgid "Remaining"
 msgstr ""
 
-#: src/engine/featsel.cpp:394
+#: src/engine/featsel.cpp:404
 msgid "You can't select more talents"
+msgstr ""
+
+#: src/engine/featswindow.cpp:91
+msgid "Select"
 msgstr ""
 
 #: src/engine/initial.cpp:79
@@ -4359,6 +4366,10 @@ msgstr "Тяжелый"
 #: data/characters/pcs/santa.pc:1
 msgid "Santa Claws"
 msgstr "Дед Отмороз"
+
+#, fuzzy
+#~ msgid "No talents"
+#~ msgstr "Нет талантов."
 
 #~ msgid "Melee Attack"
 #~ msgstr "Ближний бой"

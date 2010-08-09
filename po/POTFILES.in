@@ -37,6 +37,7 @@ src/engine/cursor.cpp
 src/engine/dccnit.cpp
 src/engine/dialog.cpp
 src/engine/featsel.cpp
+src/engine/featswindow.cpp
 src/engine/initial.cpp
 src/engine/inventwindow.cpp
 src/engine/itemwindow.cpp
