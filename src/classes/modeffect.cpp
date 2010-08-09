@@ -85,7 +85,7 @@ string modEffect::toSaveText()
 {
    char buf[512];
 
-   sprintf(buf, "%d,%hu,%hu,%d,%d,%s,%s", 
+   sprintf(buf, "%d,%hu,%hu,%d,%d,%s %s", 
          mod, init, lastApply, time, periodicTime, 
          cause.id.c_str(), cause.type.c_str());
    return(buf);
@@ -97,13 +97,12 @@ string modEffect::toSaveText()
 void modEffect::fromSaveText(string txt)
 {
    char i[64], t[64];
-   if(sscanf(txt.c_str(), "%d,%hu,%hu,%d,%d,%s,%s", 
+   sscanf(txt.c_str(), "%d,%hu,%hu,%d,%d,%s %s", 
          &mod, &init, &lastApply, &time, &periodicTime, 
-         i, t) != 7)
-   {
-      cerr << "modEffect: invalid text to load from: '" 
-         << txt << "' !" << endl;
-   }
+         i, t);
+
+   cause.id = i;
+   cause.type = t;
 }
 
 /***********************************************************************
