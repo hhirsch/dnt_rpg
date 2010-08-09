@@ -890,8 +890,23 @@ bool character::save(string saveFile)
    file << "xp = " << xp << endl;
    /* Displacement */
    file << "displacement = " << displacement << endl;
+   /* Initiative bonus */
+   file << "initiativeBonus = " << initiativeBonus << endl;
+   /* Armature class */
+   file << "armatureClass = " << armatureClass << endl;
+   /* Fortitude */
+   file << "fortitude = " << curBonusAndSaves.fortitude << endl;
+   /* Reflexes */
+   file << "reflexes = " << curBonusAndSaves.reflexes << endl;
+   /* iAmNotAFool */
+   file << "iAmNotAFool = " << curBonusAndSaves.iAmNotAFool << endl;
+   /* attack bonus */
+   file << "attackBonus = " << curBonusAndSaves.baseAttackBonus.toInt() << endl;
    /* Up Levels */
    file << "upLevels = " << upLevels << endl;
+   /* Bonus and saves */
+   file << "totalLevels = " <<  curBonusAndSaves.level << endl;
+
    /* Inventory File */
    if(!inventoryFile.empty())
    {
@@ -1117,6 +1132,16 @@ character* characterList::insertCharacter(string file, featsList* ft,
       {
          sscanf(value.c_str(),"%d", &novo->displacement);
       }
+      /* Initiative bonus */
+      else if(key == "initiativeBonus")
+      {
+         sscanf(value.c_str(),"%d", &novo->initiativeBonus);
+      }
+      /* Armature class */
+      else if(key == "armatureClass")
+      {
+         sscanf(value.c_str(),"%d", &novo->armatureClass);
+      }
       /* Psycho State */
       else if(key == "psychoState")
       {
@@ -1159,6 +1184,13 @@ character* characterList::insertCharacter(string file, featsList* ft,
          definedBonusAndSave = true;
          sscanf(value.c_str(), "%d", &tmp);
          novo->curBonusAndSaves.setBaseAttack(tmp);
+      }
+      /* total level */
+      else if(key == "totalLevel")
+      {
+         definedBonusAndSave = true;
+         sscanf(value.c_str(), "%d", &tmp);
+         novo->curBonusAndSaves.level = tmp;
       }
       else if(key == "baseDamage")
       {
@@ -1220,13 +1252,16 @@ character* characterList::insertCharacter(string file, featsList* ft,
             /* No skill?? So unknow Token! */
             cout << "Unknow token '" << key << "' at file: " << file << endl;
          }
-         //TODO FEATS.
       }
 
    }
-  
-   /* Define AC TODO others values to sum here*/ 
-   novo->armatureClass = 10+novo->sizeModifier+novo->attBonus(ATT_DEXTERITY);
+
+   /* Define the AC if not yet defined at the file */
+   if(novo->armatureClass == 0)
+   {
+      /* Define AC TODO others values to sum here*/ 
+      novo->armatureClass = 10+novo->sizeModifier+novo->attBonus(ATT_DEXTERITY);
+   }
 
    /* Apply Saves and Bonus, if not yet defined (some npcs without classes
     * defines its bonus on .npc file) */
