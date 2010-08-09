@@ -51,6 +51,7 @@ thing::thing()
    zPosition = 0;
    initialXPosition = 0;
    initialZPosition = 0;
+   initiativeBonus = 0;
    xp = 0;
    upLevels = 0;
    cr = 1;
