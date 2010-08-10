@@ -54,6 +54,11 @@ void featsWindow::open(character* pers, bool selectFeat)
    curCharacter = pers;
    curFeat = 0;
 
+   if(selectFeatMode)
+   {
+      curFeat = getUsableFeat(-1);
+   }
+
 
    /* Close, if already opened */
    if(isOpen())
@@ -127,6 +132,76 @@ void featsWindow::close()
 }
 
 /***********************************************************************
+ *                          getUsableFeat                              *
+ ***********************************************************************/
+int featsWindow::getUsableFeat(int prev)
+{
+   int i, initial=0;
+   feat* f;
+
+   /* Set where to begin the search */
+   if(prev != -1)
+   {
+      initial = prev+1;
+   }
+
+   for(i=initial; i < curCharacter->actualFeats->getTotal(); i++)
+   {
+      f = (feat*)curCharacter->actualFeats->featByNumber(i);
+      if( (f->info->type == FEAT_TYPE_ON_TARGET) || 
+          (f->info->type == FEAT_TYPE_ON_AREA) )
+      {
+         /* Found! */
+         return(i);
+      }
+   }
+
+   if(prev != -1)
+   {
+      /* Search again at the init */
+      return(getUsableFeat(-1));
+   }
+
+   /* None Found */
+   return(-1);
+}
+
+/***********************************************************************
+ *                       getPreviousUsableFeat                         *
+ ***********************************************************************/
+int featsWindow::getPreviousUsableFeat(int prev)
+{
+   int i, initial=curCharacter->actualFeats->getTotal()-1;
+   feat* f;
+
+   /* Set where to begin the search */
+   if(prev != -1)
+   {
+      initial = prev-1;
+   }
+
+   for(i=initial; i >= 0; i--)
+   {
+      f = (feat*)curCharacter->actualFeats->featByNumber(i);
+      if( (f->info->type == FEAT_TYPE_ON_TARGET) || 
+          (f->info->type == FEAT_TYPE_ON_AREA) )
+      {
+         /* Found! */
+         return(i);
+      }
+   }
+
+   if(prev != -1)
+   {
+      /* Search again at the init */
+      return(getPreviousUsableFeat(-1));
+   }
+
+   /* None Found */
+   return(-1);
+}
+
+/***********************************************************************
  *                               treat                                 *
  ***********************************************************************/
 int featsWindow::treat(guiObject* object, int eventInfo)
@@ -148,20 +223,34 @@ int featsWindow::treat(guiObject* object, int eventInfo)
       /* Next */
       else if(object == buttonNext)
       {
-         curFeat++;
-         if(curFeat >= curCharacter->actualFeats->getTotal())
+         if(selectFeatMode)
          {
-            curFeat = 0;
+            curFeat = getUsableFeat(curFeat);
+         }
+         else
+         {
+            curFeat++;
+            if(curFeat >= curCharacter->actualFeats->getTotal())
+            {
+               curFeat = 0;
+            }
          }
          writeAboutFeat();
       }
       /* Previous */
       else if(object == buttonPrevious)
       {
-         curFeat--;
-         if(curFeat < 0)
+         if(selectFeatMode)
          {
-            curFeat = curCharacter->actualFeats->getTotal()-1;
+            curFeat = getPreviousUsableFeat(curFeat);
+         }
+         else
+         {
+            curFeat--;
+            if(curFeat < 0)
+            {
+               curFeat = curCharacter->actualFeats->getTotal()-1;
+            }
          }
          writeAboutFeat();
       }

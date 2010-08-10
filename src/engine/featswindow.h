@@ -64,6 +64,16 @@ class featsWindow
       /*! Write about the feat */
       void writeAboutFeat();
 
+      /*! Get an usable feat (ON_TARGET or ON_AREA)
+       * \param prev -> previous usable feat got
+       * \return usable feat number or -1 */
+      int getUsableFeat(int prev);
+
+      /*! Same as getUsableFeat, but search backwards
+       * \param prev -> previous usable feat got
+       * \return feat number or -1 */
+      int getPreviousUsableFeat(int prev);
+
       guiInterface* usedGui;   /**< Pointer to the gui used */
       character* curCharacter; /**< Current character to show feats */
       int curFeat;             /**< Current displayed feat */
