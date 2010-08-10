@@ -154,6 +154,8 @@ void featSelWindow::open(character* pers, featsList* fList, int total)
    current = pers;
    allFeats = fList;
    curTotal = total;
+   curSelPage = 1;
+   curAvailPage = 1;
 
    /* Define Available Feats */
    defineAvailableFeats();
@@ -294,11 +296,20 @@ void featSelWindow::drawThings(fSelFeat* f)
       }
    }
 
+   sprintf(buf, "%d/%d", curAvailPage, 
+         ((availableFeats.getTotal()-1) / FEATS_PER_PAGE)+1);
+   textAvailPage->setText(buf);
    /* Set the available feats */
    ft = (fSelFeat*)availableFeats.getFirst();
+   /* Get to the page */
+   for(i=0; i < (FEATS_PER_PAGE*(curAvailPage-1)); i++)
+   {
+      ft = (fSelFeat*)ft->getNext();
+   }
+   /* Insert it */
    for(i = 0; i < FEATS_PER_PAGE; i++)
    {
-      if(i < availableFeats.getTotal())
+      if(i+(curAvailPage-1)*FEATS_PER_PAGE < availableFeats.getTotal())
       {
          picAvail[i]->set(ft->desc->image);
          textAvail[i]->setText(ft->desc->name);
@@ -315,11 +326,19 @@ void featSelWindow::drawThings(fSelFeat* f)
       }
    }
 
+   sprintf(buf, "%d/%d", curSelPage, 
+         ((selectedFeats.getTotal()-1) / FEATS_PER_PAGE)+1);
+   textSelPage->setText(buf);
    /* Set the selected feats */
    ft = (fSelFeat*)selectedFeats.getFirst();
+   /* Get to the page */
+   for(i=0; i < (FEATS_PER_PAGE*(curSelPage-1)); i++)
+   {
+      ft = (fSelFeat*)ft->getNext();
+   }
    for(i = 0; i < FEATS_PER_PAGE; i++)
    {
-      if(i < selectedFeats.getTotal())
+      if(i+(curSelPage-1)*FEATS_PER_PAGE < selectedFeats.getTotal())
       {
          picSel[i]->set(ft->desc->image);
          textSel[i]->setText(ft->desc->name);
@@ -381,6 +400,52 @@ int featSelWindow::treat(guiObject* object, int eventInfo)
       {
          close();
          return(TALENT_WINDOW_CANCEL);
+      }
+      /* Next Avail Button */
+      else if(object == (guiObject*)nextAvailButton)
+      {
+         if((((availableFeats.getTotal()-1) / FEATS_PER_PAGE)+1) > curAvailPage)
+         {
+            curAvailPage += 1;
+         }
+         else
+         {
+            curAvailPage = 1;
+         }
+         drawThings(NULL);
+      }
+      /* Previous Avail Button */
+      else if(object == (guiObject*)prevAvailButton)
+      {
+         curAvailPage--;
+         if(curAvailPage <= 0)
+         {
+            curAvailPage = ((availableFeats.getTotal()-1) / FEATS_PER_PAGE)+1;
+         }
+         drawThings(NULL);
+      }
+      /* Next Selected Button */
+      else if(object == (guiObject*)nextSelButton)
+      {
+         if((((selectedFeats.getTotal()-1) / FEATS_PER_PAGE)+1) > curSelPage)
+         {
+            curSelPage += 1;
+         }
+         else
+         {
+            curSelPage = 1;
+         }
+         drawThings(NULL);
+      }
+      /* Previous Selected Button */
+      else if(object == (guiObject*)prevSelButton)
+      {
+         curSelPage--;
+         if(curSelPage <= 0)
+         {
+            curSelPage = ((selectedFeats.getTotal()-1) / FEATS_PER_PAGE)+1;
+         }
+         drawThings(NULL);
       }
       /* Insert/Delete Buttons */
       else

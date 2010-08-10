@@ -124,6 +124,9 @@ class featSelWindow
       button* prevSelButton;            /**< Previous page button on selected */
       textBox* textTotal;                  /**< Total remaining text */
 
+      int curSelPage;                      /**< Current selected page */
+      int curAvailPage;                    /**< Current available page */
+
       textBox* textTitle;             /**< Feat title */
       rolBar* textDescription;        /**< Feat description */
       picture* picFeat;               /**< Feat image */
