@@ -375,6 +375,26 @@ int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode,
             thingTxt->setText(gettext("Open Group/Party Window"));
             return(SHORTCUTS_WINDOW_OTHER);
          }
+         else
+         {
+            /* Let's see if is under a quick feat */
+            for(i=0; i < QUICK_FEATS; i++)
+            {
+               if(object == (guiObject*)buttonQuickFeat[i])
+               {
+                  if(quickFeat[i] != NULL)
+                  {
+                     thingTxt->setText(quickFeat[i]->info->name);
+                     return(SHORTCUTS_WINDOW_OTHER);
+                  }
+                  else
+                  {
+                     thingTxt->setText(gettext("Click to select a talent"));
+                     return(SHORTCUTS_WINDOW_OTHER);
+                  }
+               }
+            }
+         }
       }
       break;
 
