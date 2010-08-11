@@ -2229,8 +2229,18 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
             rest();
          }
          break;
+         case SHORTCUTS_WINDOW_SELECTED_TALENT:
+         {
+            feat* acFeat = shortcuts->getSelectedTalent();
+            activeCharacter->setActiveFeat(acFeat);
 
-         //TODO other results!
+            if( (engineMode == ENGINE_MODE_REAL_TIME) && 
+                (acFeat->info->action == ACT_ATTACK) )
+            {
+               enterBattleMode(true);
+            }
+         }
+         break;
       }
   }  
 

@@ -130,7 +130,14 @@ int thing::attBonus(skill* curAttribute)
  ******************************************************/
 int thing::attBonus(int curAttribute)
 {
-   return(attBonus(sk.getSkillByInt(curAttribute)));
+   if(curAttribute >= 0)
+   {
+      return(attBonus(sk.getSkillByInt(curAttribute)));
+   }
+   else
+   {
+      return(-attBonus(sk.getSkillByInt(-curAttribute)));
+   }
 }
 
 /******************************************************

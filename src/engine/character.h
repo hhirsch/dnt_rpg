@@ -81,6 +81,18 @@ class character: public aniModel, public dntListElement
        * \return current active feat number */
       int getActiveFeat();
 
+      /*! Get the current active feat pointer
+       * \return pointer to the active feat */
+      feat* getActiveFeatPtr();
+
+      /*! Set the current character active feat
+       * \param f -> pointer to the feat to active */
+      void setActiveFeat(feat* f);
+
+      /*! Set the current character active feat
+       * \param f -> number of the feat to active */
+      void setActiveFeat(int f);
+
       /*! Get the equiped character weapon (if any)
        * \return poitner to the equiped weapon (or NULL) */
       weapon* getEquipedWeapon();

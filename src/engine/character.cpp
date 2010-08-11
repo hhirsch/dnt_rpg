@@ -343,13 +343,58 @@ bool character::haveFeat(string featId)
 {
    return(actualFeats->featByString(featId) != NULL);
 }
-
 /*********************************************************************
  *                           getActiveFeat                           *
  *********************************************************************/
 int character::getActiveFeat()
 {
    return(activeFeat);
+}
+
+/*********************************************************************
+ *                         getActiveFeatPtr                          *
+ *********************************************************************/
+feat* character::getActiveFeatPtr()
+{
+   return(actualFeats->featByNumber(activeFeat));
+}
+
+/*********************************************************************
+ *                           setActiveFeat                           *
+ *********************************************************************/
+void character::setActiveFeat(int f)
+{
+   if((f >= 0) && (f < actualFeats->getTotal()))
+   {
+      activeFeat = f;
+   }
+
+   activeFeat = FEAT_WEAPON_ATTACK;
+}
+
+/*********************************************************************
+ *                           setActiveFeat                           *
+ *********************************************************************/
+void character::setActiveFeat(feat* f)
+{
+   int i;
+   feat* cf;
+
+   for(i=0; i<actualFeats->getTotal(); i++)
+   {
+      cf = (feat*)actualFeats->featByNumber(i);
+      if(cf == f)
+      {
+         /* here it is */
+         activeFeat = i;
+         return;
+      }
+   }
+
+   /* None found */
+   cerr << "Warning: character has no feat '" 
+        << f->info->name << "' !" << endl;
+   activeFeat = FEAT_WEAPON_ATTACK;
 }
 
 /*********************************************************************
