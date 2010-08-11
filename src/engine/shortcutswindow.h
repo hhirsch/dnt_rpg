@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2010 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -22,6 +22,9 @@
 #define _dnt_shortcutswindow_h
 
 #include "../gui/farso.h"
+#include "../classes/feats.h"
+
+#include "featswindow.h"
 
 #define SHORTCUTS_WINDOW_NONE       -1
 #define SHORTCUTS_WINDOW_OTHER       0
@@ -36,6 +39,8 @@
 #define SHORTCUTS_WINDOW_GROUP       9
 #define SHORTCUTS_WINDOW_CHARACTER  10
 #define SHORTCUTS_WINDOW_END_TURN   11
+
+#define QUICK_FEATS    10
 
 /*! The shortcuts window, if quick access buttons and some
  * text infos. */
@@ -64,8 +69,10 @@ class shortcutsWindow
        * \param object -> current active gui object
        * \param eventInfo -> current event 
        * \param engineMode -> current engine mode
+       * \param activeCharacter -> pointer to the current active Character
        * \return -> shortcutsWindow return value constant */
-      int treat(guiObject* object, int eventInfo, int engineMode);
+      int treat(guiObject* object, int eventInfo, int engineMode,
+            character* activeCharacter);
 
       /*! Set the thing bellow mouse
        * \param thingName -> the name of the thing */
@@ -81,6 +88,8 @@ class shortcutsWindow
       void setHour(string hour);
 
    protected:
+      static guiInterface* guiUsed;          /**< the used guiInterface */
+
       static textBox* fpsTxt;                /**< shows FPS */
       static textBox* partTxt;               /**< shows Particles count */
       static textBox* thingTxt;              /**< shows thing at mouse */
@@ -97,6 +106,14 @@ class shortcutsWindow
       static oneTabButton* buttonGroup;      /**< open group window */
       static oneTabButton* buttonCharacter;  /**< open Character Window */
       static oneTabButton* buttonEndTurn;    /**< End Turn Button */
+
+      static oneTabButton* buttonQuickFeat[QUICK_FEATS];  /**< Feats buttons */
+      static picture* picQuickFeat[QUICK_FEATS];  /**< Feats icons */
+      static feat* quickFeat[QUICK_FEATS];   /**< Quick access feats */
+
+      static featsWindow* talentWindow;      /**< Window to select talent */
+      static int curDefinedTalent;           /**< Current quick talent to 
+                                                  define at talentWindow */
 
       static window* shortCutsWindow;        /**< ShortCuts Window */
 };

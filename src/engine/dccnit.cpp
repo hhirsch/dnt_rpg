@@ -2135,7 +2135,8 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
    /* Verify ShortCutsWindow */
    if(shortcuts->isOpened())
    {
-      int res = shortcuts->treat(object, eventInfo, engineMode);
+      int res = shortcuts->treat(object, eventInfo, engineMode, 
+            PCs->getActiveCharacter());
       if( (res == SHORTCUTS_WINDOW_NONE) && (gui->mouseOnGui(mouseX, mouseY)) )
       {
          shortcuts->setThing(gettext("Nothing"));

@@ -30,12 +30,18 @@
 tabButton::tabButton(int x,int y,const char* arquivo, SDL_Surface* surface)
           :picture(x,y,0,0, arquivo, surface)
 {
+   int i;
+
    numButtons = 0;
    pressed = false;
    type = FARSO_OBJECT_TAB_BUTTON;
    style = FARSO_TAB_BUTTON_STYLE_NORMAL;
    current = - 1;
-   objectBelow = NULL;
+
+   for(i=0; i < TABBUTTON_BELLOW; i++)
+   {
+      objectsBelow[i] = NULL;
+   }
 }
 
 /***********************************************************
@@ -44,6 +50,8 @@ tabButton::tabButton(int x,int y,const char* arquivo, SDL_Surface* surface)
 tabButton::tabButton(int x, int y, int w, int h, SDL_Surface* surface)
           :picture(x,y,0,0, NULL, surface)
 {
+   int i;
+
    type = FARSO_OBJECT_TAB_BUTTON;
    numButtons = 0;
    x1 = x;
@@ -52,7 +60,10 @@ tabButton::tabButton(int x, int y, int w, int h, SDL_Surface* surface)
    y2 = y+h;
    pressed = false;
    current = -1;
-   objectBelow = NULL;
+   for(i=0; i < TABBUTTON_BELLOW; i++)
+   {
+      objectsBelow[i] = NULL;
+   }
    style = FARSO_TAB_BUTTON_STYLE_NORMAL;
 }
 
@@ -61,7 +72,18 @@ tabButton::tabButton(int x, int y, int w, int h, SDL_Surface* surface)
  ***********************************************************/
 void tabButton::setObjectBelow(guiObject* obj)
 {
-   objectBelow = obj;
+   int i;
+
+   for(i=0; i < TABBUTTON_BELLOW; i++)
+   {
+      if(objectsBelow[i] == NULL)
+      {
+         objectsBelow[i] = obj;
+         return;
+      }
+   }
+
+   cerr << "WARNING: tabButon: max objects bellow reached!" << endl;
 }
 
 /***********************************************************
@@ -102,15 +124,21 @@ oneTabButton* tabButton::insertButton(int x1, int y1, int x2, int y2)
  ***********************************************************/
 void tabButton::draw()
 { 
+   int i;
+
    /* Clear Below */
    color_Set(cor.colorWindow.R, cor.colorWindow.G, 
              cor.colorWindow.B, cor.colorWindow.A);
    rectangle_Fill(wSurface, x1,y1, x2, y2);
 
    /* Draw below Object, if exists */
-   if(objectBelow)
+   for(i=0; i < TABBUTTON_BELLOW; i++)
    {
-      objectBelow->draw();
+      if(!objectsBelow[i])
+      {
+         break;
+      }
+      objectsBelow[i]->draw();
    }
 
    /* Draw Picture (if one) */
@@ -147,10 +175,10 @@ void tabButton::draw()
                x1+Buttons[current].x2,
                y1+Buttons[current].y2);
 
-         if( (objectBelow != NULL) && 
-               (objectBelow->type == FARSO_OBJECT_ROL_BAR) )
+         if( (objectsBelow[0] != NULL) && 
+               (objectsBelow[0]->type == FARSO_OBJECT_ROL_BAR) )
          {
-            rolBar* rb = (rolBar*)objectBelow;
+            rolBar* rb = (rolBar*)objectsBelow[0];
             rb->draw(current+rb->getFirstLine());
          }
       }

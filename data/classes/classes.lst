@@ -9,4 +9,3 @@ PHYSIOTERAPHY = 7 physiotherapy.cls classes/Img/fisioterapia.png
 JOURNALISM = 8 journalism.cls classes/Img/jornalismo.png
 MEDICAL =  9 medician.cls classes/Img/medicina.png
 MUSIC = 10 music.cls classes/Img/musica.png
-TO = 11 to.cls classes/Img/to.png

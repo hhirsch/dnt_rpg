@@ -28,6 +28,7 @@
 #define TABBUTTON_NONE       0 /**< No Action */
 #define TABBUTTON_ON_PRESS  40 /**< Some button pressing */
 #define TABBUTTON_PRESSED   41 /**< Some Button pressed */
+#define TABBUTTON_BELLOW    32 /**< Max guiObject bellow */
 
 enum
 {
@@ -109,7 +110,7 @@ class tabButton: public picture
       bool pressed;                         /**< Internal Verifier on Treat */
       int current;                          /**< Current Button selected */
       int style;                            /**< Current Style */
-      guiObject* objectBelow;               /**< Object Below */
+      guiObject* objectsBelow[TABBUTTON_BELLOW];  /**< Object Below */
       farso_colors cor;
 };
 
