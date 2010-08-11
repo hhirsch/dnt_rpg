@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-08-09 12:01-0300\n"
+"POT-Creation-Date: 2010-08-11 15:38-0300\n"
 "PO-Revision-Date: 2010-07-09 07:28+0000\n"
 "Last-Translator: gugand <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -98,14 +98,14 @@ msgstr "Tendenza & Allineamento"
 
 #: src/engine/alignwindow.cpp:72 src/engine/aspectwindow.cpp:93
 #: src/engine/attwindow.cpp:236 src/engine/classwindow.cpp:117
-#: src/engine/featsel.cpp:238 src/engine/options.cpp:1089
+#: src/engine/featsel.cpp:240 src/engine/options.cpp:1089
 #: src/engine/racewindow.cpp:117 src/engine/skillwindow.cpp:159
 msgid "Confirm"
 msgstr "Conferma"
 
 #: src/engine/alignwindow.cpp:76 src/engine/aspectwindow.cpp:97
 #: src/engine/attwindow.cpp:240 src/engine/barterwindow.cpp:68
-#: src/engine/classwindow.cpp:121 src/engine/featsel.cpp:242
+#: src/engine/classwindow.cpp:121 src/engine/featsel.cpp:244
 #: src/engine/options.cpp:1093 src/engine/racewindow.cpp:121
 #: src/engine/skillwindow.cpp:162
 msgid "Cancel"
@@ -178,7 +178,7 @@ msgid "Attribute Description"
 msgstr "Descrizione Attributo"
 
 #: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:573
-#: src/engine/featsel.cpp:403 src/engine/inventwindow.cpp:364
+#: src/engine/featsel.cpp:468 src/engine/inventwindow.cpp:364
 #: src/engine/options.cpp:1382
 msgid "Warning"
 msgstr "Attenzione"
@@ -292,8 +292,8 @@ msgstr "Modificatore Dimensione"
 msgid "Level Up"
 msgstr "Avanzamento di Livello"
 
-#: src/engine/charwindow.cpp:265 src/engine/featsel.cpp:163
-#: src/engine/featswindow.cpp:68
+#: src/engine/charwindow.cpp:265 src/engine/featsel.cpp:165
+#: src/engine/featswindow.cpp:73
 msgid "Talents"
 msgstr "Talenti"
 
@@ -301,7 +301,7 @@ msgstr "Talenti"
 msgid "Skills"
 msgstr "Abilità"
 
-#: src/engine/charwindow.cpp:273 src/engine/featswindow.cpp:88
+#: src/engine/charwindow.cpp:273 src/engine/featswindow.cpp:93
 #: src/engine/skillwindow.cpp:169 src/gui/window.cpp:151
 msgid "Close"
 msgstr "Chiudi"
@@ -366,7 +366,7 @@ msgstr "Nessun Modificatore."
 msgid "Class Talents"
 msgstr "Talenti Di Classe"
 
-#: src/engine/classwindow.cpp:258 src/engine/featswindow.cpp:78
+#: src/engine/classwindow.cpp:258 src/engine/featswindow.cpp:83
 #: src/engine/racewindow.cpp:190
 msgid "No Talents."
 msgstr "Nessun Talento."
@@ -474,34 +474,34 @@ msgstr "Turno Di Attacco A Sorpresa."
 msgid "No enemies in the area."
 msgstr "Nessun nemico nell'area."
 
-#: src/engine/dccnit.cpp:2141 src/engine/dccnit.cpp:2659
-#: src/engine/shortcutswindow.cpp:51
+#: src/engine/dccnit.cpp:2142 src/engine/dccnit.cpp:2665
+#: src/engine/shortcutswindow.cpp:61
 msgid "Nothing"
 msgstr "Niente"
 
-#: src/engine/dccnit.cpp:2409
+#: src/engine/dccnit.cpp:2415
 #, c-format
 msgid "%s taken."
 msgstr "%s preso"
 
-#: src/engine/dccnit.cpp:2426
+#: src/engine/dccnit.cpp:2432
 msgid "Inventory is full!"
 msgstr "L'inventario è pieno!"
 
-#: src/engine/dccnit.cpp:2459
+#: src/engine/dccnit.cpp:2465
 msgid "Door"
 msgstr "Porta"
 
-#: src/engine/dccnit.cpp:2595
+#: src/engine/dccnit.cpp:2601
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s attacca %s"
 
-#: src/engine/dccnit.cpp:2760
+#: src/engine/dccnit.cpp:2766
 msgid "No more actions. Turn ended."
 msgstr "Nessuna azione rimasta. Turno finito."
 
-#: src/engine/dccnit.cpp:4291
+#: src/engine/dccnit.cpp:4297
 msgid "Exit Battle Mode"
 msgstr "Esci Dalla Modalità di Combatimento"
 
@@ -529,23 +529,23 @@ msgstr "Perso $%d"
 msgid "Dialog"
 msgstr "Dialogo"
 
-#: src/engine/featsel.cpp:166
+#: src/engine/featsel.cpp:168
 msgid "Available"
 msgstr ""
 
-#: src/engine/featsel.cpp:170
+#: src/engine/featsel.cpp:172
 msgid "Selected"
 msgstr ""
 
-#: src/engine/featsel.cpp:340
+#: src/engine/featsel.cpp:359
 msgid "Remaining"
 msgstr ""
 
-#: src/engine/featsel.cpp:404
+#: src/engine/featsel.cpp:469
 msgid "You can't select more talents"
 msgstr ""
 
-#: src/engine/featswindow.cpp:91
+#: src/engine/featswindow.cpp:96
 msgid "Select"
 msgstr ""
 
@@ -557,11 +557,11 @@ msgstr "Nuovo"
 msgid "Continue"
 msgstr "Continua"
 
-#: src/engine/initial.cpp:87 src/engine/shortcutswindow.cpp:58
+#: src/engine/initial.cpp:87 src/engine/shortcutswindow.cpp:68
 msgid "Save"
 msgstr "Salva"
 
-#: src/engine/initial.cpp:90 src/engine/shortcutswindow.cpp:63
+#: src/engine/initial.cpp:90 src/engine/shortcutswindow.cpp:73
 msgid "Load"
 msgstr "Carica"
 
@@ -823,7 +823,7 @@ msgstr "Ruota a destra"
 msgid "Change Character"
 msgstr "Cambia Personaggio"
 
-#: src/engine/options.cpp:154
+#: src/engine/options.cpp:154 src/engine/shortcutswindow.cpp:365
 msgid "Rest"
 msgstr "Riposa"
 
@@ -835,7 +835,7 @@ msgstr "Fine turno"
 msgid "Minimap"
 msgstr "Mini mappa"
 
-#: src/engine/options.cpp:159 src/engine/shortcutswindow.cpp:49
+#: src/engine/options.cpp:159 src/engine/shortcutswindow.cpp:59
 msgid "Shortcuts"
 msgstr "Scorciatoie"
 
@@ -1013,57 +1013,57 @@ msgstr "Talenti di Razza"
 msgid "Race Skills"
 msgstr "Abilità di Razza"
 
-#: src/engine/shortcutswindow.cpp:60
+#: src/engine/shortcutswindow.cpp:70
 msgid "Menu"
 msgstr "Menù"
 
-#: src/engine/shortcutswindow.cpp:164
+#: src/engine/shortcutswindow.cpp:246
 msgid "Particles"
 msgstr "Particelle"
 
-#: src/engine/shortcutswindow.cpp:177
+#: src/engine/shortcutswindow.cpp:259
 msgid "FPS"
 msgstr "FPS"
 
-#: src/engine/shortcutswindow.cpp:215
+#: src/engine/shortcutswindow.cpp:328
 msgid "Enter Battle Mode"
 msgstr "Entra in Modalità Di Battaglia"
 
-#: src/engine/shortcutswindow.cpp:219
+#: src/engine/shortcutswindow.cpp:332
 msgid "Select Normal Attack"
 msgstr "Seleziona Attacco Normale"
 
-#: src/engine/shortcutswindow.cpp:225
+#: src/engine/shortcutswindow.cpp:338
 msgid "Open Quests Window"
 msgstr "Apri Finestra Delle Missioni"
 
-#: src/engine/shortcutswindow.cpp:230
+#: src/engine/shortcutswindow.cpp:343
 msgid "Open Map Window"
 msgstr "Apri Finestra Della Mappa"
 
-#: src/engine/shortcutswindow.cpp:237
+#: src/engine/shortcutswindow.cpp:350
 msgid "End Character's Turn"
 msgstr "Finisci Turno Del Personaggio"
 
-#: src/engine/shortcutswindow.cpp:241
+#: src/engine/shortcutswindow.cpp:354
 msgid "Only Available in Battle Mode"
 msgstr "Disponiblile Solamente in Modalità di Combattimento"
 
-#: src/engine/shortcutswindow.cpp:247
+#: src/engine/shortcutswindow.cpp:360
 msgid "Open Inventory Window"
 msgstr "Apri Finestra Inventario"
 
-#: src/engine/shortcutswindow.cpp:252
-msgid "Open Assign Attacks Window"
-msgstr "Apri Finestra Assegna Attacchi"
-
-#: src/engine/shortcutswindow.cpp:257
+#: src/engine/shortcutswindow.cpp:370
 msgid "View Character Informations"
 msgstr "Visualizza Informazioni Personaggio"
 
-#: src/engine/shortcutswindow.cpp:262
+#: src/engine/shortcutswindow.cpp:375
 msgid "Open Group/Party Window"
 msgstr "Apri Finestra Gruppo/Party"
+
+#: src/engine/shortcutswindow.cpp:392
+msgid "Click to select a talent"
+msgstr ""
 
 #: src/engine/skillwindow.cpp:82
 msgid "Total Free Points:"
@@ -4878,6 +4878,9 @@ msgstr "Pesante"
 #: data/characters/pcs/santa.pc:1
 msgid "Santa Claws"
 msgstr "Santa Claws"
+
+#~ msgid "Open Assign Attacks Window"
+#~ msgstr "Apri Finestra Assegna Attacchi"
 
 #, fuzzy
 #~ msgid "No talents"
