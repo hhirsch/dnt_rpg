@@ -149,7 +149,10 @@ void shortcutsWindow::open(guiInterface* gui)
             434,54,0,0, NULL);
       picQuickFeat[4]->setSurfaceDeletion(false);
       tb->setObjectBelow(picQuickFeat[4]);
-      buttonAssign = tb->insertButton(180,75,216,107);/* Assign Attacks */
+      buttonRest = tb->insertButton(180,75,216,107);/* Rest */
+      tb->setObjectBelow(shortCutsWindow->getObjectsList()->insertPicture(
+            434, 89, 0,0, 
+            dir.getRealFile("texturas/shortcutsw/rest.png").c_str()));
 
       buttonCharacter = tb->insertButton(220,4,256,36);/* Character */
       tb->setObjectBelow(shortCutsWindow->getObjectsList()->insertPicture(
@@ -357,9 +360,9 @@ int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode,
             thingTxt->setText(gettext("Open Inventory Window"));
             return(SHORTCUTS_WINDOW_OTHER);
          }
-         else if(object == (guiObject*) buttonAssign)
+         else if(object == (guiObject*) buttonRest)
          {
-            thingTxt->setText(gettext("Open Assign Attacks Window"));
+            thingTxt->setText(gettext("Rest"));
             return(SHORTCUTS_WINDOW_OTHER);
          }
          else if(object == (guiObject*) buttonCharacter)
@@ -400,6 +403,10 @@ int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode,
          else if(object == (guiObject*) buttonJournal)
          {
             return(SHORTCUTS_WINDOW_JOURNAL);
+         }
+         else if(object == (guiObject*) buttonRest)
+         {
+            return(SHORTCUTS_WINDOW_REST);
          }
          else if(object == (guiObject*) buttonCharacter)
          {
@@ -476,7 +483,7 @@ oneTabButton* shortcutsWindow::buttonAttackMode = NULL;
 oneTabButton* shortcutsWindow::buttonJournal = NULL;
 oneTabButton* shortcutsWindow::buttonMap = NULL;
 oneTabButton* shortcutsWindow::buttonInventory = NULL;
-oneTabButton* shortcutsWindow::buttonAssign = NULL;
+oneTabButton* shortcutsWindow::buttonRest = NULL;
 oneTabButton* shortcutsWindow::buttonGroup = NULL;
 oneTabButton* shortcutsWindow::buttonCharacter = NULL;
 oneTabButton* shortcutsWindow::buttonEndTurn = NULL;

@@ -35,7 +35,7 @@
 #define SHORTCUTS_WINDOW_JOURNAL     5
 #define SHORTCUTS_WINDOW_MAP         6
 #define SHORTCUTS_WINDOW_INVENTORY   7
-#define SHORTCUTS_WINDOW_ASSIGN      8
+#define SHORTCUTS_WINDOW_REST        8
 #define SHORTCUTS_WINDOW_GROUP       9
 #define SHORTCUTS_WINDOW_CHARACTER  10
 #define SHORTCUTS_WINDOW_END_TURN   11
@@ -102,7 +102,7 @@ class shortcutsWindow
       static oneTabButton* buttonJournal;    /**< Open Journal Window */
       static oneTabButton* buttonMap;        /**< Call MiniMap */
       static oneTabButton* buttonInventory;  /**< Call Inventory */
-      static oneTabButton* buttonAssign;     /**< assign attack */
+      static oneTabButton* buttonRest;       /**< Call Rest Function */
       static oneTabButton* buttonGroup;      /**< open group window */
       static oneTabButton* buttonCharacter;  /**< open Character Window */
       static oneTabButton* buttonEndTurn;    /**< End Turn Button */

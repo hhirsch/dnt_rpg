@@ -2224,6 +2224,11 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
             }
          }
          break;
+         case SHORTCUTS_WINDOW_REST:
+         {
+            rest();
+         }
+         break;
 
          //TODO other results!
       }

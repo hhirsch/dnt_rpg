@@ -7,6 +7,7 @@
 - Fixed a bug on particles load that was duplicating the last;
 - Faster run velocity;
 - Render objects when equipped;
+- Inserted rest button at shortcuts window;
 - New logo;
 - New mouse cursors;
 - Particles now can follow NPCs too;
