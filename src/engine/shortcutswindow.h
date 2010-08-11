@@ -26,19 +26,20 @@
 
 #include "featswindow.h"
 
-#define SHORTCUTS_WINDOW_NONE       -1
-#define SHORTCUTS_WINDOW_OTHER       0
-#define SHORTCUTS_WINDOW_MENU        1
-#define SHORTCUTS_WINDOW_LOAD        2
-#define SHORTCUTS_WINDOW_SAVE        3
-#define SHORTCUTS_WINDOW_ATTACK_MODE 4
-#define SHORTCUTS_WINDOW_JOURNAL     5
-#define SHORTCUTS_WINDOW_MAP         6
-#define SHORTCUTS_WINDOW_INVENTORY   7
-#define SHORTCUTS_WINDOW_REST        8
-#define SHORTCUTS_WINDOW_GROUP       9
-#define SHORTCUTS_WINDOW_CHARACTER  10
-#define SHORTCUTS_WINDOW_END_TURN   11
+#define SHORTCUTS_WINDOW_NONE              -1
+#define SHORTCUTS_WINDOW_OTHER              0
+#define SHORTCUTS_WINDOW_MENU               1
+#define SHORTCUTS_WINDOW_LOAD               2
+#define SHORTCUTS_WINDOW_SAVE               3
+#define SHORTCUTS_WINDOW_ATTACK_MODE        4
+#define SHORTCUTS_WINDOW_JOURNAL            5
+#define SHORTCUTS_WINDOW_MAP                6
+#define SHORTCUTS_WINDOW_INVENTORY          7
+#define SHORTCUTS_WINDOW_REST               8
+#define SHORTCUTS_WINDOW_GROUP              9
+#define SHORTCUTS_WINDOW_CHARACTER         10
+#define SHORTCUTS_WINDOW_END_TURN          11
+#define SHORTCUTS_WINDOW_SELECTED_TALENT   12
 
 #define QUICK_FEATS    10
 
@@ -87,6 +88,12 @@ class shortcutsWindow
        * \param hour -> new hour text */
       void setHour(string hour);
 
+      /*! Get the current selected quick talent (if any)
+       * \return pointer to the selected talent or NULL */
+      feat* getSelectedTalent();
+      /*! Clear th current selected talent */
+      void clearSelectedTalent();
+
    protected:
       static guiInterface* guiUsed;          /**< the used guiInterface */
 
@@ -114,6 +121,8 @@ class shortcutsWindow
       static featsWindow* talentWindow;      /**< Window to select talent */
       static int curDefinedTalent;           /**< Current quick talent to 
                                                   define at talentWindow */
+      static int curSelectedTalent;          /**< Current talent 
+                                                  selected to use */
 
       static window* shortCutsWindow;        /**< ShortCuts Window */
 };

@@ -273,6 +273,27 @@ void shortcutsWindow::setHour(string hour)
 }
 
 /***********************************************************************
+ *                         getSelectedTalent                           *
+ ***********************************************************************/
+feat* shortcutsWindow::getSelectedTalent()
+{
+   if((curSelectedTalent >=0) && (curSelectedTalent < QUICK_FEATS))
+   {
+      return(quickFeat[curSelectedTalent]);
+   }
+
+   return(NULL);
+}
+
+/***********************************************************************
+ *                        clearSelectedTalent                          *
+ ***********************************************************************/
+void shortcutsWindow::clearSelectedTalent()
+{
+   curSelectedTalent = -1;
+}
+
+/***********************************************************************
  *                                treat                                *
  ***********************************************************************/
 int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode,
@@ -453,10 +474,13 @@ int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode,
                      talentWindow->open(activeCharacter, true);
 
                      curDefinedTalent = i;
+                     return(SHORTCUTS_WINDOW_OTHER);
                   }
                   else
                   {
                      /* Selected a feat to use */
+                     curSelectedTalent = i;
+                     return(SHORTCUTS_WINDOW_SELECTED_TALENT);
                   }
                }
             }
@@ -514,6 +538,7 @@ feat* shortcutsWindow::quickFeat[QUICK_FEATS];
 
 featsWindow* shortcutsWindow::talentWindow = NULL;
 int shortcutsWindow::curDefinedTalent = -1;
+int shortcutsWindow::curSelectedTalent = -1;
 
 window* shortcutsWindow::shortCutsWindow = NULL;
 
