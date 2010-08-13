@@ -302,6 +302,9 @@ bool feats::useFeatAtTarget(thing* actor, int featNumber, thing* target)
       /* Finish with the script */
       delete(sc);
 
+      /* Apply costs */
+      useFeat(featNumber);
+ 
       return(true);
    }
 
@@ -345,6 +348,9 @@ bool feats::useFeatAtArea(thing* actor, int featNumber,
 
       /* Finish with the script */
       delete(sc);
+
+      /* Apply costs */
+      useFeat(featNumber);
 
       return(true);
    }
