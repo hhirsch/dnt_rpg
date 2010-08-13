@@ -488,6 +488,33 @@ int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode,
          break;
       }
 
+      /* Right press tabbutton */
+      case FARSO_EVENT_RIGHT_PRESSED_TAB_BUTTON:
+      {
+         /* Let's see if selectd a quick feat */
+         for(i=0; i < QUICK_FEATS; i++)
+         {
+            if(object == (guiObject*)buttonQuickFeat[i])
+            {
+               /* call to define it */
+               if(!talentWindow)
+               {
+                  talentWindow = new featsWindow(guiUsed);
+               }
+               else
+               {
+                  talentWindow->close();
+               }
+               talentWindow->open(activeCharacter, true);
+
+               curDefinedTalent = i;
+               curSelectedTalent = -1;
+               return(SHORTCUTS_WINDOW_OTHER);
+            }
+         }
+      }
+      break;
+
       /* And, finally, the tree buttons */
       case FARSO_EVENT_PRESSED_BUTTON:
       {
