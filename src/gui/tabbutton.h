@@ -26,8 +26,10 @@
 
 #define MAX_TABBUTTONS      20 /**< Max Buttons per table of buttons */
 #define TABBUTTON_NONE       0 /**< No Action */
-#define TABBUTTON_ON_PRESS  40 /**< Some button pressing */
-#define TABBUTTON_PRESSED   41 /**< Some Button pressed */
+#define TABBUTTON_ON_PRESS       40 /**< Some button pressing */
+#define TABBUTTON_PRESSED        41 /**< Some Button pressed */
+#define TABBUTTON_ON_RIGHT_PRESS 42 /**< Right pressing some button */
+#define TABBUTTON_RIGHT_PRESSED  43 /**< Some Button right pressed */
 #define TABBUTTON_BELLOW    32 /**< Max guiObject bellow */
 
 enum
@@ -108,6 +110,7 @@ class tabButton: public picture
       int numButtons;                       /**< Number of active buttons */
       oneTabButton Buttons[MAX_TABBUTTONS]; /**< Buttons Vector */
       bool pressed;                         /**< Internal Verifier on Treat */
+      bool rightPressed;                    /**< Internal Verifier on Treat */
       int current;                          /**< Current Button selected */
       int style;                            /**< Current Style */
       guiObject* objectsBelow[TABBUTTON_BELLOW];  /**< Object Below */

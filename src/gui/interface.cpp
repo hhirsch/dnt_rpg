@@ -710,26 +710,33 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
        if( object != NULL )
        {
          //selectObject = &object;
-         if(actType == TABBUTTON_PRESSED)
+         if( (actType == TABBUTTON_PRESSED) || 
+             (actType == TABBUTTON_RIGHT_PRESSED) )
          {
-            bool verified = false;
-            /* Is not a list text pressed, so return calling for treat 
-             * the event! */
-            if(!verified)
+            focus = FARSO_FOCUS_GAME;
+            if(actType == TABBUTTON_PRESSED)
             {
-               focus = FARSO_FOCUS_GAME;
                eventInfo = FARSO_EVENT_PRESSED_TAB_BUTTON;
-               /* Change the saved mouse position to can take that it is
-                * inner on a tabButton again. */
-               mouseX = -1;
-               return(object);
             }
+            else
+            {
+               eventInfo = FARSO_EVENT_RIGHT_PRESSED_TAB_BUTTON;
+            }
+            /* Change the saved mouse position to can take that it is
+             * inner on a tabButton again. */
+            mouseX = -1;
+            return(object);
          }
          else if(actType == TABBUTTON_ON_PRESS)
          {
             eventInfo = FARSO_EVENT_ON_PRESS_TAB_BUTTON;
             return(object);
-         }  
+         }
+         else if(actType == TABBUTTON_ON_RIGHT_PRESS)
+         {
+            eventInfo = FARSO_EVENT_ON_RIGHT_PRESS_TAB_BUTTON;
+            return(object);
+         }
          else
          {
             /* Still in focus, but no pressed */

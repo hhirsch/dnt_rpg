@@ -2637,6 +2637,7 @@ int engine::verifyMouseActions(Uint8 mButton)
 
                      /* Clear the current selected feat */
                      activeCharacter->setActiveFeat(FEAT_WEAPON_ATTACK);
+                     shortcuts->clearSelectedTalent();
 
                      fight->verifyDeads();
 

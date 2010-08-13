@@ -34,6 +34,7 @@ tabButton::tabButton(int x,int y,const char* arquivo, SDL_Surface* surface)
 
    numButtons = 0;
    pressed = false;
+   rightPressed = false;
    type = FARSO_OBJECT_TAB_BUTTON;
    style = FARSO_TAB_BUTTON_STYLE_NORMAL;
    current = - 1;
@@ -59,6 +60,7 @@ tabButton::tabButton(int x, int y, int w, int h, SDL_Surface* surface)
    x2 = x+w;
    y2 = y+h;
    pressed = false;
+   rightPressed = false;
    current = -1;
    for(i=0; i < TABBUTTON_BELLOW; i++)
    {
@@ -217,12 +219,25 @@ guiObject* tabButton::verifyPosition(int mouseX, int mouseY, Uint8 Mbuttons,
             pressed = true;  
             return((guiObject*) &Buttons[i]);
          }
+         else if(Mbuttons & SDL_BUTTON(3))
+         {
+            /* Only return when released the mouse button! */
+            actionType = TABBUTTON_ON_RIGHT_PRESS;
+            rightPressed = true;  
+            return((guiObject*) &Buttons[i]);
+         }
          else
          {
             if(pressed)
             {
                actionType = TABBUTTON_PRESSED;
                pressed = false;
+               return((guiObject*) &Buttons[i]);
+            }
+            else if(rightPressed)
+            {
+               actionType = TABBUTTON_RIGHT_PRESSED;
+               rightPressed = false;
                return((guiObject*) &Buttons[i]);
             }
             else
