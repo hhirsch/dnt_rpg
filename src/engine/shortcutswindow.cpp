@@ -20,6 +20,7 @@
 
 #include "shortcutswindow.h"
 #include "../etc/dirs.h"
+#include "../etc/defparser.h"
 #include "util.h"
 
 /***********************************************************************
@@ -46,14 +47,22 @@ void shortcutsWindow::open(guiInterface* gui)
 
    guiUsed = gui;
 
-   if(shortCutsWindow == NULL)
+   /* Clear talents */
+   if(!clearedTalents)
    {
-      curDefinedTalent = -1;
       for(i=0; i < QUICK_FEATS; i++)
       {
          buttonQuickFeat[i] = 0;
-         quickFeat[i] = 0;
+         quickFeat[i] = NULL;
       }
+      clearedTalents = true;
+   }
+
+   /* Open the window */
+   if(shortCutsWindow == NULL)
+   {
+      curDefinedTalent = -1;
+      curSelectedTalent = -1;
   
       shortCutsWindow = gui->insertWindow(0,SCREEN_Y-129,512,SCREEN_Y-1,
                                           gettext("Shortcuts"));
@@ -171,6 +180,16 @@ void shortcutsWindow::open(guiInterface* gui)
       shortCutsWindow->setExternPointer(&shortCutsWindow);
       gui->openWindow(shortCutsWindow);
    }
+
+   /* Redefine images */
+   for(i=0; i < QUICK_FEATS; i++)
+   {
+      if(quickFeat[i])
+      {
+         picQuickFeat[i]->set(quickFeat[i]->info->image);
+      }
+   }
+   shortCutsWindow->draw(0,0);
 }
 
 /***********************************************************************
@@ -222,6 +241,14 @@ void shortcutsWindow::reOpen(guiInterface* gui)
       /* Reset the position */
       shortCutsWindow->setCoordinate(x1, y1, x2, y2);
    }
+}
+
+/***********************************************************************
+ *                          setClearedTalents                          *
+ ***********************************************************************/
+void shortcutsWindow::setClearedTalents(bool b)
+{
+   clearedTalents = b;
 }
 
 /***********************************************************************
@@ -537,6 +564,81 @@ int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode,
 }
 
 /***********************************************************************
+ *                       loadQuickTalents                              *
+ ***********************************************************************/
+bool shortcutsWindow::loadQuickTalents(string fileName, 
+      character* activeCharacter)
+{
+   defParser parser;
+   string key, value;
+   int i = 0;
+
+   if(!parser.load(fileName))
+   {
+      return(false);
+   }
+   /* No need to clear them */
+   clearedTalents = true;
+
+   /* Define each one */
+   while(parser.getNextTuple(key, value))
+   {
+      if(key == "quickTalent")
+      {
+         if(value == "NONE")
+         {
+            quickFeat[i] = NULL;
+         }
+         else
+         {
+            quickFeat[i] = activeCharacter->actualFeats->featByString(value);
+            if(shortCutsWindow)
+            {
+               picQuickFeat[curDefinedTalent]->set(
+                     quickFeat[curDefinedTalent]->info->image);
+               shortCutsWindow->draw(0,0);
+            }
+         }
+         i++;
+      }
+   }
+
+   return(true);
+}
+
+/***********************************************************************
+ *                        saveQuickTalents                             *
+ ***********************************************************************/
+bool shortcutsWindow::saveQuickTalents(string fileName)
+{
+   ofstream file;
+   int i;
+
+   file.open(fileName.c_str(), ios::out | ios::binary);
+   if(!file)
+   {
+      cerr << "Error while opening file: " << fileName << endl;
+      return(false);
+   }
+
+   for(i=0; i < QUICK_FEATS; i++)
+   {
+      if(quickFeat[i] != NULL)
+      {
+         file << "quickTalent = " << quickFeat[i]->info->idString << endl;
+      }
+      else
+      {
+         file << "quickTalent = NONE" << endl;
+      }
+   }
+
+   file.close();
+
+   return(true);
+}
+
+/***********************************************************************
  *                            Static Fields                            *
  ***********************************************************************/
 guiInterface* shortcutsWindow::guiUsed = NULL;
@@ -566,6 +668,8 @@ feat* shortcutsWindow::quickFeat[QUICK_FEATS];
 featsWindow* shortcutsWindow::talentWindow = NULL;
 int shortcutsWindow::curDefinedTalent = -1;
 int shortcutsWindow::curSelectedTalent = -1;
+
+bool shortcutsWindow::clearedTalents = false;
 
 window* shortcutsWindow::shortCutsWindow = NULL;
 

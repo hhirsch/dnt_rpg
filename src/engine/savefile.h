@@ -71,25 +71,28 @@ class saveFile
       /*! Get the current PC filename
        * \return -> saved character filename */
       string getCharacterFile();
-
+      /*! Get quick talents filename
+       * \return -> quick talents filename */
+      string getQuickTalentsFile();
 
    protected:
 
-      string title;          /**< The save File title*/
-      string version;        /**< The DNT version who created the save */
-      string imageFile;      /**< The screenshot file */
-      string invFile;        /**< The inventory file */
-      string mapFile;        /**< The current map file */
-      string modStateFile;   /**< The modState file */
-      string missionsFile;   /**< The missions file */
-      string pcFile;         /**< The PC file */
-      float pcPos[3];        /**< The PC Position */
-      float pcAngle;         /**< The PC angle */
-      float hour;            /**< The current game hour */
-      float cameraPhi;       /**< Camera Phi angle */
-      float cameraTheta;     /**< Camera Theta angle */
-      float cameraDeltaY;    /**< Camera DeltaY */
-      float cameraD;         /**< Camera Zoom value */
+      string title;            /**< The save File title*/
+      string version;          /**< The DNT version who created the save */
+      string imageFile;        /**< The screenshot file */
+      string invFile;          /**< The inventory file */
+      string mapFile;          /**< The current map file */
+      string modStateFile;     /**< The modState file */
+      string missionsFile;     /**< The missions file */
+      string quickTalentsFile; /**< Quick talents file */
+      string pcFile;           /**< The PC file */
+      float pcPos[3];          /**< The PC Position */
+      float pcAngle;           /**< The PC angle */
+      float hour;              /**< The current game hour */
+      float cameraPhi;         /**< Camera Phi angle */
+      float cameraTheta;       /**< Camera Theta angle */
+      float cameraDeltaY;      /**< Camera DeltaY */
+      float cameraD;           /**< Camera Zoom value */
 
 };
 

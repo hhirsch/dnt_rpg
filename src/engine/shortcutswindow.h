@@ -94,6 +94,20 @@ class shortcutsWindow
       /*! Clear th current selected talent */
       void clearSelectedTalent();
 
+      /*! load quick talents defined from file
+       * \param fileName -> file to open
+       * \param activeCharacter -> pointer to the active character
+       * \return true if successfull */
+      bool loadQuickTalents(string fileName, character* activeCharacter);
+      /*! Save quick talents defined to file
+       * \param fileName -> file to save to
+       * \return true if successfull */
+      bool saveQuickTalents(string fileName);
+
+      /*! set the cleared talents flag
+       * \param b -> new clearedTalents flag */
+      void setClearedTalents(bool b);
+
    protected:
       static guiInterface* guiUsed;          /**< the used guiInterface */
 
@@ -125,6 +139,8 @@ class shortcutsWindow
                                                   selected to use */
 
       static window* shortCutsWindow;        /**< ShortCuts Window */
+
+      static bool clearedTalents;            /**< flag to clear talents */
 };
 
 #endif

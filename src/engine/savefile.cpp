@@ -27,6 +27,7 @@
 #include "../classes/mission.h"
 
 #include "dccnit.h"
+#include "shortcutswindow.h"
 #include "util.h"
 
 #ifdef _MSC_VER
@@ -46,6 +47,7 @@
 #define DNT_SAVE_TOKEN_PC_POSITION   "pcPosition"
 #define DNT_SAVE_TOKEN_HOUR          "hour"
 #define DNT_SAVE_TOKEN_CAMERA_INFO   "cameraInfo"
+#define DNT_SAVE_TOKEN_QUICK_TALENTS "quickTalents"
 
 /***********************************************************************
  *                             Constructor                             *
@@ -111,6 +113,14 @@ string saveFile::getCharacterFile()
 }
 
 /***********************************************************************
+ *                         getQuickTalentsFile                         *
+ ***********************************************************************/
+string saveFile::getQuickTalentsFile()
+{
+   return(quickTalentsFile);
+}
+
+/***********************************************************************
  *                               save                                  *
  ***********************************************************************/
 bool saveFile::save(string saveFile, void* curEngine, SDL_Surface* frontSurface)
@@ -124,6 +134,7 @@ bool saveFile::save(string saveFile, void* curEngine, SDL_Surface* frontSurface)
    modInventory* inv;
    character* pc;
    missionsController missions;
+   shortcutsWindow scWindow;
 
    /* Verify if we got an engine */
    if(eng == NULL)
@@ -171,6 +182,7 @@ bool saveFile::save(string saveFile, void* curEngine, SDL_Surface* frontSurface)
    mapFile = eng->getCurrentMap()->getFileName();
    modStateFile = prefix + ".mod";
    missionsFile = prefix + ".mis";
+   quickTalentsFile = prefix + ".qck";
    pcFile = prefix + ".pc";
    invFile = prefix + ".inv";
    pcPos[0] = pc->xPosition;
@@ -192,6 +204,8 @@ bool saveFile::save(string saveFile, void* curEngine, SDL_Surface* frontSurface)
    file << DNT_SAVE_TOKEN_MOD_STATE << " = " << modStateFile << endl;
    /* Save the Mission Status File */
    file << DNT_SAVE_TOKEN_MISSIONS << " = " << missionsFile << endl;
+   /* Save the quick talents file  */
+   file << DNT_SAVE_TOKEN_QUICK_TALENTS << " = " << quickTalentsFile << endl;
    /* Save the Current PC Status File */
    file << DNT_SAVE_TOKEN_PC << " = " << pcFile << endl;
    file << DNT_SAVE_TOKEN_PC_INVENTORY << " = " << invFile << endl;
@@ -233,6 +247,9 @@ bool saveFile::save(string saveFile, void* curEngine, SDL_Surface* frontSurface)
    /* Save the Missions */
    missions.save(missionsFile);
 
+   /* Save quick talents */
+   scWindow.saveQuickTalents(quickTalentsFile);
+
    /* Save the Screenshot */
    screenshot(frontSurface, imageFile, true);
 
@@ -248,6 +265,7 @@ bool saveFile::load(void* curEngine)
    modState modif;
    modInventory* inv;
    missionsController missions;
+   shortcutsWindow scWindow;
 
    /* Verify if we got a valid engine */
    if(eng == NULL)
@@ -322,6 +340,18 @@ bool saveFile::load(void* curEngine)
       missions.load(missionsFile);
    }
 
+   scWindow.setClearedTalents(false);
+   if(!quickTalentsFile.empty())
+   {
+      /* Set quick talents */
+      character* pc = eng->PCs->getActiveCharacter();
+
+      if(pc)
+      {
+         scWindow.loadQuickTalents(quickTalentsFile, pc);
+      }
+   }
+
    /* Finally, reset the camera */
    eng->gameCamera.setPhi(cameraPhi);
    eng->gameCamera.setTheta(cameraTheta);
@@ -374,6 +404,11 @@ bool saveFile::loadHeader(string fileName)
       {
          /* Define the missions file */
          missionsFile = value;
+      }
+      else if(key == DNT_SAVE_TOKEN_QUICK_TALENTS)
+      {
+         /* Define quick talents file */
+         quickTalentsFile = value;
       }
       else if(key == DNT_SAVE_TOKEN_PC)
       {
