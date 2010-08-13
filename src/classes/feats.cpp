@@ -204,7 +204,6 @@ bool feats::insertFeat(featDescription* featInsert)
  ***************************************************************/
 bool feats::canUse(int featNumber)
 {
-   char texto[255];
    briefing brief;
 
    /* Verify if the feat is valid */
@@ -214,17 +213,19 @@ bool feats::canUse(int featNumber)
       return(false);
    }
 
-   /* Verify if have the feat points to use it */
-   if(m_feats[featNumber].actualQuantity - 
-         m_feats[featNumber].info->costToUse >= 0)
-   {
-      /* Show feature name */
-      if(featNumber != FEAT_WEAPON_ATTACK)
-      {
-         sprintf(texto,"%s ",m_feats[featNumber].info->name.c_str());
-         brief.addText(texto); 
-      }
+   return(canUse(&m_feats[featNumber]));
+}
 
+/***************************************************************
+ *                            canUse                           *
+ ***************************************************************/
+bool feats::canUse(feat* f)
+{
+   briefing brief;
+
+   /* Verify if have the feat points to use it */
+   if(f->actualQuantity - f->info->costToUse >= 0)
+   {
       return(true);
    }
    else
@@ -272,11 +273,19 @@ void feats::useFeat(int featNumber)
 bool feats::useFeatAtTarget(thing* actor, int featNumber, thing* target)
 {
    briefing brief;
+   char texto[255];
    iaScript* sc;
    engine* eng = (engine*)uEngine;
 
    if( (canUse(featNumber)) && (!m_feats[featNumber].info->scriptFile.empty()))
    {
+      /* Show feature name */
+      if(featNumber != FEAT_WEAPON_ATTACK)
+      {
+         sprintf(texto,"%s ",m_feats[featNumber].info->name.c_str());
+         brief.addText(texto); 
+      }
+
       /* Verify range */
       if(!actionInRange(actor->xPosition, actor->zPosition, 
                target->xPosition, target->zPosition,
@@ -318,11 +327,19 @@ bool feats::useFeatAtArea(thing* actor, int featNumber,
              float x, float y, float z)
 {
    briefing brief;
+   char texto[255];
    iaScript* sc;
    engine* eng = (engine*)uEngine;
 
    if( (canUse(featNumber)) && (!m_feats[featNumber].info->scriptFile.empty()))
    {
+      /* Show feature name */
+      if(featNumber != FEAT_WEAPON_ATTACK)
+      {
+         sprintf(texto,"%s ",m_feats[featNumber].info->name.c_str());
+         brief.addText(texto); 
+      }
+
       /* Verify range */
       if(!actionInRange(actor->xPosition, actor->zPosition, x, z,
                m_feats[featNumber].info->range*METER_TO_DNT))

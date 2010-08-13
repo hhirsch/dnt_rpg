@@ -2232,12 +2232,22 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
          case SHORTCUTS_WINDOW_SELECTED_TALENT:
          {
             feat* acFeat = shortcuts->getSelectedTalent();
-            activeCharacter->setActiveFeat(acFeat);
 
-            if( (engineMode == ENGINE_MODE_REAL_TIME) && 
-                (acFeat->info->action == ACT_ATTACK) )
+            if(!activeCharacter->actualFeats->canUse(acFeat))
             {
-               enterBattleMode(true);
+               warning warn;
+               warn.show(gettext("Warning"), 
+                         gettext("Not enought points to use!"), gui);
+            }
+            else
+            {
+               activeCharacter->setActiveFeat(acFeat);
+
+               if( (engineMode == ENGINE_MODE_REAL_TIME) && 
+                     (acFeat->info->action == ACT_ATTACK) )
+               {
+                  enterBattleMode(true);
+               }
             }
          }
          break;

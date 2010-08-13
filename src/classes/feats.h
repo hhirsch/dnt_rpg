@@ -225,6 +225,15 @@ class feats
        * \return true if used the feat, false if couldn't */
       bool applyPermanentFeat(thing* actor, int featNumber);
 
+      /*! Verify if can use the feat
+       * \param featNumber -> number of the feat
+       * \return true if can use */
+      bool canUse(int featNumber);
+      /*! verify if can use the feat
+       * \param f -> feat pointer to test
+       * \return true if can use */
+      bool canUse(feat* f);
+
    private:
 
       feat m_feats[MAX_FEATS];  /**< Internal Feats Struct */
@@ -235,11 +244,6 @@ class feats
        * feats.
        * \param featNumber -> feat to use */
        void useFeat(int featNumber);
-
-       /*! Verify if can use the feat
-        * \para featNumber -> number of the feat
-        * \return true if can use */
-       bool canUse(int featNumber);
 };
 
 /*! List of All Feats on Game */
