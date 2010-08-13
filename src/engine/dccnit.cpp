@@ -2598,7 +2598,15 @@ int engine::verifyMouseActions(Uint8 mButton)
                         (activeCharacter->getCanAttack()) &&
                         (fightStatus == FIGHT_PC_TURN) )
                {
-                  cursors->set(CURSOR_ATTACK);
+                  if(activeCharacter->getActiveFeat() == FEAT_WEAPON_ATTACK)
+                  {
+                     cursors->set(CURSOR_ATTACK);
+                  }
+                  else
+                  {
+                     feat* f = activeCharacter->getActiveFeatPtr();
+                     cursors->set(f->info->image);
+                  }
                   shortcuts->setThing(pers->name); 
 
                   if( (mButton & SDL_BUTTON(1)) &&
