@@ -2617,6 +2617,9 @@ int engine::verifyMouseActions(Uint8 mButton)
                            activeCharacter, 
                            activeCharacter->getActiveFeat(), pers));
 
+                     /* Clear the current selected feat */
+                     activeCharacter->setActiveFeat(FEAT_WEAPON_ATTACK);
+
                      fight->verifyDeads();
 
                      if( pers->getPsychoState() != PSYCHO_HOSTILE)
