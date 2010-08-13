@@ -1231,7 +1231,7 @@ character* characterList::insertCharacter(string file, featsList* ft,
          novo->curBonusAndSaves.setBaseAttack(tmp);
       }
       /* total level */
-      else if(key == "totalLevel")
+      else if(key == "totalLevels")
       {
          definedBonusAndSave = true;
          sscanf(value.c_str(), "%d", &tmp);
