@@ -8,7 +8,7 @@ administration/supreme_esthetic_shock.fta
 administration/aberration.fta
 biology/ameivas_worms.fta
 biology/arc_impulse.fta
-biology/mass_arthropds_attack.fta
+compsci/world_conception.fta 
 headbanger/voluntary_autism.fta
 elective/cant_touch_me.fta
 elective/hasty.fta
