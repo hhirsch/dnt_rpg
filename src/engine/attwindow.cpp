@@ -90,7 +90,7 @@ attWindow::attWindow(skills* savSkill, guiInterface* inter,
    intWindow->getObjectsList()->insertTextBox(9,50,85,63,0,gettext("Strength"));
    attPoints[0] = intWindow->getObjectsList()->insertTextBox(103,48,122,65,
                                                              1,"");
-   attPoints[0]->setFont(DNT_FONT_ARIAL, 11, 0);
+   attPoints[0]->setFont(DNT_FONT_PALLADIO, 10, DNT_FONT_ALIGN_CENTER);
    attButtonPrev[0] = intWindow->getObjectsList()->insertButton(92,48,102,65,
                                                   fnt.createUnicode(0x25C4),0);
    attButtonPrev[0]->defineFont(DNT_FONT_ARIAL, 9);
@@ -110,7 +110,7 @@ attWindow::attWindow(skills* savSkill, guiInterface* inter,
                                               gettext("Dexterity"));
    attPoints[1] = intWindow->getObjectsList()->insertTextBox(103,82,122,99,
                                                              1,"");
-   attPoints[1]->setFont(DNT_FONT_ARIAL, 11, 0);
+   attPoints[1]->setFont(DNT_FONT_PALLADIO, 10, DNT_FONT_ALIGN_CENTER);
    attButtonPrev[1] = intWindow->getObjectsList()->insertButton(92,82,102,99,
                                                   fnt.createUnicode(0x25C4),0);
    attButtonPrev[1]->defineFont(DNT_FONT_ARIAL, 9);
@@ -130,7 +130,7 @@ attWindow::attWindow(skills* savSkill, guiInterface* inter,
                                               gettext("Constitution"));
    attPoints[2] = intWindow->getObjectsList()->insertTextBox(103,118,122,135,1,
                                                              "");
-   attPoints[2]->setFont(DNT_FONT_ARIAL, 10, 0);
+   attPoints[2]->setFont(DNT_FONT_PALLADIO, 10, DNT_FONT_ALIGN_CENTER);
    attButtonPrev[2] = intWindow->getObjectsList()->insertButton(92,118,102,135,
                                                    fnt.createUnicode(0x25C4),0);
    attButtonNext[2] = intWindow->getObjectsList()->insertButton(123,118,133,135,
@@ -150,7 +150,7 @@ attWindow::attWindow(skills* savSkill, guiInterface* inter,
                                               gettext("Intelligence"));
    attPoints[3] = intWindow->getObjectsList()->insertTextBox(103,152,122,169,
                                                              1,"");
-   attPoints[3]->setFont(DNT_FONT_ARIAL, 10, 0);
+   attPoints[3]->setFont(DNT_FONT_PALLADIO, 10, DNT_FONT_ALIGN_CENTER);
    attButtonPrev[3] = intWindow->getObjectsList()->insertButton(92,152,102,169,
                                                   fnt.createUnicode(0x25C4),0);
    attButtonNext[3] = intWindow->getObjectsList()->insertButton(123,152,
@@ -171,7 +171,7 @@ attWindow::attWindow(skills* savSkill, guiInterface* inter,
                                               gettext("Wisdom"));
    attPoints[4] = intWindow->getObjectsList()->insertTextBox(103,186,122,203,
                                                              1,"");
-   attPoints[4]->setFont(DNT_FONT_ARIAL, 10, 0);
+   attPoints[4]->setFont(DNT_FONT_PALLADIO, 10, DNT_FONT_ALIGN_CENTER);
    attButtonPrev[4] = intWindow->getObjectsList()->insertButton(92,186,102,203,
                                                   fnt.createUnicode(0x25C4),0);
    attButtonNext[4] = intWindow->getObjectsList()->insertButton(123,186,
@@ -192,7 +192,7 @@ attWindow::attWindow(skills* savSkill, guiInterface* inter,
                                               gettext("Charisma"));
    attPoints[5] = intWindow->getObjectsList()->insertTextBox(103,220,122,237,1,
                                                              "");
-   attPoints[5]->setFont(DNT_FONT_ARIAL, 10, 0);
+   attPoints[5]->setFont(DNT_FONT_PALLADIO, 10, DNT_FONT_ALIGN_CENTER);
    attButtonPrev[5] = intWindow->getObjectsList()->insertButton(92,220,102,237,
                                                   fnt.createUnicode(0x25C4),0);
    attButtonNext[5] = intWindow->getObjectsList()->insertButton(123,220,
@@ -520,7 +520,7 @@ int attWindow::assignAttMod(int att)
 
    attTotals[att]->setText(total);
    attMods[att]->setText(tmpMod);
-   attMods[att]->setFont(DNT_FONT_ARIAL,14,0);
+   attMods[att]->setFont(DNT_FONT_PALLADIO,12,0);
 
    return(attBonus);
 }
