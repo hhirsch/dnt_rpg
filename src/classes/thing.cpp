@@ -177,6 +177,10 @@ int* thing::getFactorValuePointer(factor something)
       {
          return(&displacement);
       }
+      else if(something.id == THING_MAX_LIFE_POINTS)
+      {
+         return(&maxLifePoints);
+      }
       else if(something.id == DNT_BS_LEVEL)
       {
          return(&curBonusAndSaves.level);
