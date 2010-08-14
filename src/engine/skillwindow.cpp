@@ -175,6 +175,7 @@ skillWindow::skillWindow(skills* savSkill, guiInterface* inter,
    intWindow->setExternPointer(&intWindow);
    intWindow->setAttributes(false,true,false,false);
    inter->openWindow(intWindow);
+   updateSkillInfo();
 }
 
 /**************************************************************
@@ -211,6 +212,7 @@ void skillWindow::close(guiInterface* inter)
 void skillWindow::updateSkillInfo()
 {
    string saux;  
+   skill* att;
    char tmp[5];
 
    /* Set Point Color */
@@ -220,6 +222,30 @@ void skillWindow::updateSkillInfo()
    skillDefinition* sk = skillsOrder[curSkill]->definition;
    skillName->setText(sk->name.c_str());
    desc->setText(sk->description.c_str());
+   desc->addText("|");
+   if(sk->baseAttribute >= 0)
+   {
+      att = saveSkill->getSkillByInt(sk->baseAttribute);
+   }
+   else
+   {
+      att = saveSkill->getSkillByInt(-sk->baseAttribute);
+   }
+   saux = gettext("Base Attribute:") + string(" ");
+   if(att)
+   {
+      if(sk->baseAttribute < 0)
+      {
+         saux += "-";
+      }
+      saux += att->definition->name;
+   }
+   else
+   {
+      saux += gettext("Unknow!");
+   }
+   desc->addText(saux, DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
+         DNT_FONT_STYLE_NORMAL, 86, 161, 3);
 
    /* Set Current Image */
    skFig->set(sk->image);
