@@ -10,5 +10,8 @@ type = FEAT_TYPE_PERMANENT
 action = ACT_FREE
 icon = feats/Img/world_conception.png
 
+
+required = CLASS COMP 9
+
 script = feats/compsci/world_conception.dsl
 
