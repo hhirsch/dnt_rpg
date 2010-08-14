@@ -154,6 +154,10 @@ string modEffect::toReadableText(void* actor)
       {
          text = gettext("Initiative");
       }
+      else if(cause.id == THING_MAX_LIFE_POINTS)
+      {
+         text = gettext("Life Points");
+      }
       else if(cause.id == THING_DISPLACEMENT)
       {
          text = gettext("Displacement");
