@@ -1,4 +1,4 @@
-17
+18
 weapon_attack.fta
 administration/esthetic_shock_i.fta
 administration/esthetic_shock_ii.fta
@@ -14,5 +14,6 @@ elective/cant_touch_me.fta
 elective/hasty.fta
 elective/quick_thought.fta
 elective/feline.fta
+elective/fugitive.fta
 elective/rough.fta
 elective/strong_will.fta
