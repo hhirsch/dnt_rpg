@@ -1,7 +1,7 @@
 # Fugitive Talent
 
 title = gettext("Fugitive")
-description = gettext("The fugitive creature can escape more easily of captivity situations, receiveing +2 in Art of the Escape")
+description = gettext("The fugitive creature can escape more easily of captivity situations, receiving +2 in Art of the Escape")
 
 id = FUGITIVE
 

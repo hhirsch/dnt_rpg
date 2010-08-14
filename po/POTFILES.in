@@ -189,6 +189,7 @@ data/feats/administration/supreme_esthetic_shock.fta
 data/feats/biology/ameivas_worms.fta
 data/feats/biology/arc_impulse.fta
 data/feats/biology/mass_arthropds_attack.fta
+data/feats/compsci/world_conception.fta
 data/feats/gothic/lament_souls.fta
 data/feats/gothic/night_adoration.fta
 data/feats/gothic/sun_weakness.fta
@@ -199,6 +200,7 @@ data/feats/physicaled/i_am_a_little_conan.fta
 data/feats/physicaled/virtually_invencible.fta
 data/feats/elective/strong_will.fta
 data/feats/elective/feline.fta
+data/feats/elective/fugitive.fta
 data/feats/elective/rough.fta
 data/feats/elective/quick_thought.fta
 data/feats/elective/cant_touch_me.fta

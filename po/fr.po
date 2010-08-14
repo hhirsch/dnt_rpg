@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-08-11 15:38-0300\n"
+"POT-Creation-Date: 2010-08-14 15:08-0300\n"
 "PO-Revision-Date: 2009-08-11 10:09+0000\n"
 "Last-Translator: Yves MATHIEU <ymathieu@moulins-vichy.cci.fr>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -28,8 +28,8 @@ msgstr "%s essayer d'attaquer %s"
 msgid "%s try to heal %s"
 msgstr "%s essayer de soigner %s"
 
-#: src/classes/actions.cpp:160 src/classes/feats.cpp:285
-#: src/classes/feats.cpp:327
+#: src/classes/actions.cpp:160 src/classes/feats.cpp:294
+#: src/classes/feats.cpp:347
 msgid "Too far away for action!"
 msgstr "Trop loin pour cette action !"
 
@@ -75,11 +75,11 @@ msgstr "Réflexe"
 msgid "I am Not a Fool"
 msgstr "Je ne suis Pas un idiot"
 
-#: src/classes/feats.cpp:213
+#: src/classes/feats.cpp:212
 msgid "Invalid Talent"
 msgstr "Don non valide"
 
-#: src/classes/feats.cpp:233
+#: src/classes/feats.cpp:234 src/engine/dccnit.cpp:2240
 msgid "Not enought points to use!"
 msgstr "Vous ne pouvez pas utiliser vos points - il n'y en a pas assez !"
 
@@ -178,8 +178,8 @@ msgid "Attribute Description"
 msgstr "Description des attributs"
 
 #: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:573
-#: src/engine/featsel.cpp:468 src/engine/inventwindow.cpp:364
-#: src/engine/options.cpp:1382
+#: src/engine/dccnit.cpp:2239 src/engine/featsel.cpp:468
+#: src/engine/inventwindow.cpp:364 src/engine/options.cpp:1382
 msgid "Warning"
 msgstr "Avertissement"
 
@@ -474,34 +474,34 @@ msgstr "Tour des attaques surprises."
 msgid "No enemies in the area."
 msgstr "Pas d'ennemis dans la zone."
 
-#: src/engine/dccnit.cpp:2142 src/engine/dccnit.cpp:2665
-#: src/engine/shortcutswindow.cpp:61
+#: src/engine/dccnit.cpp:2142 src/engine/dccnit.cpp:2697
+#: src/engine/shortcutswindow.cpp:70
 msgid "Nothing"
 msgstr "Rien"
 
-#: src/engine/dccnit.cpp:2415
+#: src/engine/dccnit.cpp:2435
 #, c-format
 msgid "%s taken."
 msgstr "%s pris."
 
-#: src/engine/dccnit.cpp:2432
+#: src/engine/dccnit.cpp:2452
 msgid "Inventory is full!"
 msgstr "L'inventaire est plein!"
 
-#: src/engine/dccnit.cpp:2465
+#: src/engine/dccnit.cpp:2485
 msgid "Door"
 msgstr "Porte"
 
-#: src/engine/dccnit.cpp:2601
+#: src/engine/dccnit.cpp:2629
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s attaques %s"
 
-#: src/engine/dccnit.cpp:2766
+#: src/engine/dccnit.cpp:2798
 msgid "No more actions. Turn ended."
 msgstr "Pas d'action supplémentaires. Fin du tour."
 
-#: src/engine/dccnit.cpp:4297
+#: src/engine/dccnit.cpp:4329
 msgid "Exit Battle Mode"
 msgstr "Quitter le Mode Combat"
 
@@ -557,11 +557,11 @@ msgstr "Nouveau"
 msgid "Continue"
 msgstr "Continuer"
 
-#: src/engine/initial.cpp:87 src/engine/shortcutswindow.cpp:68
+#: src/engine/initial.cpp:87 src/engine/shortcutswindow.cpp:77
 msgid "Save"
 msgstr "Enregistrer"
 
-#: src/engine/initial.cpp:90 src/engine/shortcutswindow.cpp:73
+#: src/engine/initial.cpp:90 src/engine/shortcutswindow.cpp:82
 msgid "Load"
 msgstr "Charger"
 
@@ -823,7 +823,7 @@ msgstr "Rotation à Droite"
 msgid "Change Character"
 msgstr "Changer de personnage"
 
-#: src/engine/options.cpp:154 src/engine/shortcutswindow.cpp:365
+#: src/engine/options.cpp:154 src/engine/shortcutswindow.cpp:413
 msgid "Rest"
 msgstr "Reposer"
 
@@ -835,7 +835,7 @@ msgstr "Fin de Tour"
 msgid "Minimap"
 msgstr "Carte"
 
-#: src/engine/options.cpp:159 src/engine/shortcutswindow.cpp:59
+#: src/engine/options.cpp:159 src/engine/shortcutswindow.cpp:68
 msgid "Shortcuts"
 msgstr "Raccourcis"
 
@@ -1013,55 +1013,55 @@ msgstr "Dons de Race"
 msgid "Race Skills"
 msgstr "Compétences de la race"
 
-#: src/engine/shortcutswindow.cpp:70
+#: src/engine/shortcutswindow.cpp:79
 msgid "Menu"
 msgstr "Menu"
 
-#: src/engine/shortcutswindow.cpp:246
+#: src/engine/shortcutswindow.cpp:273
 msgid "Particles"
 msgstr "Particules"
 
-#: src/engine/shortcutswindow.cpp:259
+#: src/engine/shortcutswindow.cpp:286
 msgid "FPS"
 msgstr "IPS"
 
-#: src/engine/shortcutswindow.cpp:328
+#: src/engine/shortcutswindow.cpp:376
 msgid "Enter Battle Mode"
 msgstr "Démarrer Mode bataille"
 
-#: src/engine/shortcutswindow.cpp:332
+#: src/engine/shortcutswindow.cpp:380
 msgid "Select Normal Attack"
 msgstr "Choisir l'attaque normal"
 
-#: src/engine/shortcutswindow.cpp:338
+#: src/engine/shortcutswindow.cpp:386
 msgid "Open Quests Window"
 msgstr "Ouvrir la fenêtre des Quètes"
 
-#: src/engine/shortcutswindow.cpp:343
+#: src/engine/shortcutswindow.cpp:391
 msgid "Open Map Window"
 msgstr "Ouvrir la fenêtre de la Carte"
 
-#: src/engine/shortcutswindow.cpp:350
+#: src/engine/shortcutswindow.cpp:398
 msgid "End Character's Turn"
 msgstr "Fin de tour du personnage"
 
-#: src/engine/shortcutswindow.cpp:354
+#: src/engine/shortcutswindow.cpp:402
 msgid "Only Available in Battle Mode"
 msgstr "Disponible uniquement en mode combat."
 
-#: src/engine/shortcutswindow.cpp:360
+#: src/engine/shortcutswindow.cpp:408
 msgid "Open Inventory Window"
 msgstr "Ouvrir la fenêtre d'inventaire"
 
-#: src/engine/shortcutswindow.cpp:370
+#: src/engine/shortcutswindow.cpp:418
 msgid "View Character Informations"
 msgstr "Voir les caractéristiques du personnage"
 
-#: src/engine/shortcutswindow.cpp:375
+#: src/engine/shortcutswindow.cpp:423
 msgid "Open Group/Party Window"
 msgstr "Ouvrir la fenêtre du Groupe"
 
-#: src/engine/shortcutswindow.cpp:392
+#: src/engine/shortcutswindow.cpp:440
 msgid "Click to select a talent"
 msgstr ""
 
@@ -1080,6 +1080,14 @@ msgstr "Montrer seulement les caractéristiques de race ou de classe"
 #: src/engine/skillwindow.cpp:149
 msgid "Cost"
 msgstr "Coût"
+
+#: src/engine/skillwindow.cpp:234
+msgid "Base Attribute:"
+msgstr ""
+
+#: src/engine/skillwindow.cpp:245
+msgid "Unknow!"
+msgstr ""
 
 #: src/fight/fightSystem.cpp:151
 msgid "No more enemies."
@@ -3035,6 +3043,16 @@ msgid ""
 "Biology Student Level greater than 10."
 msgstr ""
 
+#: data/feats/compsci/world_conception.fta:3
+msgid "World Conception"
+msgstr ""
+
+#: data/feats/compsci/world_conception.fta:4
+msgid ""
+"For knowing its profession is called 'the future', Computer Science Students "
+"received +2 in I Am Not A Fool."
+msgstr ""
+
 #: data/feats/gothic/lament_souls.fta:1
 msgid "Laments of One Thousand Souls"
 msgstr "Lamentations d'un millers d'esprits"
@@ -3157,6 +3175,16 @@ msgstr ""
 msgid ""
 "The creature has reflexes like a cat, being able to deviate instinctively. "
 "System: The creature receives +3 on all his Reflexes tests."
+msgstr ""
+
+#: data/feats/elective/fugitive.fta:3
+msgid "Fugitive"
+msgstr ""
+
+#: data/feats/elective/fugitive.fta:4
+msgid ""
+"The fugitive creature can escape more easily of captivity situations, "
+"receiving +2 in Art of the Escape"
 msgstr ""
 
 #: data/feats/elective/rough.fta:3
