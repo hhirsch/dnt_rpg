@@ -1,6 +1,8 @@
 ================================================
 |                Version 0.6                   |
+|            Released: 2010-08-15              |
 ================================================
+- Use of talents;
 - Select new talents at character creation and level up;
 - Assign quick talents to shortcuts window;
 - Map reflexion is now enabled per square;
