@@ -2330,8 +2330,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    else if(functionName == IA_SET_BASE_DICE_3I)
    {
       diceThing* d = getParameterd(token, strLine, pos);
-      int dType = getParameteri(token, strLine, pos);
       int numDices = getParameteri(token, strLine, pos);
+      int dType = getParameteri(token, strLine, pos);
       int sum = getParameteri(token, strLine, pos);
       if(d)
       {
