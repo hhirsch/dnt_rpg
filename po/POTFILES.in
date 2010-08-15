@@ -207,6 +207,7 @@ data/feats/elective/cant_touch_me.fta
 data/feats/elective/hasty.fta
 data/feats/elective/bolivian_blood.fta
 data/feats/elective/pinocchios_aura.fta
+data/feats/elective/coward_touch.fta
 
 #skills
 data/skills/acrobacias.ski

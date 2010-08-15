@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-08-15 11:43-0300\n"
+"POT-Creation-Date: 2010-08-15 14:57-0300\n"
 "PO-Revision-Date: 2010-08-13 04:05+0000\n"
 "Last-Translator: zer berros <Unknown>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -545,9 +545,8 @@ msgid "You can't select more talents"
 msgstr "No puedes escoger más talentos"
 
 #: src/engine/featswindow.cpp:96
-#, fuzzy
 msgid "Select"
-msgstr "Seleccionado"
+msgstr ""
 
 #: src/engine/initial.cpp:79
 msgid "New"
@@ -1062,9 +1061,8 @@ msgid "Open Group/Party Window"
 msgstr "Abrir ventana de grupo"
 
 #: src/engine/shortcutswindow.cpp:440
-#, fuzzy
 msgid "Click to select a talent"
-msgstr "No puedes escoger más talentos"
+msgstr ""
 
 #: src/engine/skillwindow.cpp:82
 msgid "Total Free Points:"
@@ -1083,14 +1081,12 @@ msgid "Cost"
 msgstr "Coste"
 
 #: src/engine/skillwindow.cpp:234
-#, fuzzy
 msgid "Base Attribute:"
-msgstr "Atributos"
+msgstr ""
 
 #: src/engine/skillwindow.cpp:245
-#, fuzzy
 msgid "Unknow!"
-msgstr "Area Desconocida"
+msgstr ""
 
 #: src/fight/fightSystem.cpp:151
 msgid "No more enemies."
@@ -3204,6 +3200,17 @@ msgid ""
 "Watching too much Pinocchio on its childhood - but sleeping every time "
 "before the movie's end -, the creature has an easy way to tell lies, "
 "receiving +2 in Bluff."
+msgstr ""
+
+#: data/feats/elective/coward_touch.fta:1
+msgid "Coward Touch"
+msgstr ""
+
+#: data/feats/elective/coward_touch.fta:2
+msgid ""
+"The creature with Coward Touch can do, 3 times per day, an attack that do "
+"not follow clean-fight rules, inflicting 1d3+character level points of "
+"damage."
 msgstr ""
 
 #: data/skills/acrobacias.ski:1

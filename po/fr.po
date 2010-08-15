@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-08-15 11:43-0300\n"
+"POT-Creation-Date: 2010-08-15 14:57-0300\n"
 "PO-Revision-Date: 2009-08-11 10:09+0000\n"
 "Last-Translator: Yves MATHIEU <ymathieu@moulins-vichy.cci.fr>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -3248,6 +3248,17 @@ msgid ""
 "Watching too much Pinocchio on its childhood - but sleeping every time "
 "before the movie's end -, the creature has an easy way to tell lies, "
 "receiving +2 in Bluff."
+msgstr ""
+
+#: data/feats/elective/coward_touch.fta:1
+msgid "Coward Touch"
+msgstr ""
+
+#: data/feats/elective/coward_touch.fta:2
+msgid ""
+"The creature with Coward Touch can do, 3 times per day, an attack that do "
+"not follow clean-fight rules, inflicting 1d3+character level points of "
+"damage."
 msgstr ""
 
 #: data/skills/acrobacias.ski:1
