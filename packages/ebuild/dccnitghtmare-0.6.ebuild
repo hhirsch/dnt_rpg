@@ -4,11 +4,11 @@
 inherit games
 
 MY_P="dccnitghtmare"
-MY_PV="0_6"
+MY_PV="0.6"
 
 DESCRIPTION="a sarcastic 3D single player RPG"
 HOMEPAGE="http://dnt.dnteam.org"
-SRC_URI="mirror://sourceforge/${PN}/${MY_P}_${MY_PV}.tar.bz2"
+SRC_URI="mirror://sourceforge/${PN}/${MY_P}-${MY_PV}.tar.bz2"
 
 LICENSE="GPL-3"
 SLOT="0"
