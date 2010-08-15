@@ -173,6 +173,8 @@ diceThing::diceThing()
 {
    /* Default is no aditional dices */
    aditionalDice.setNumberOfDices(0);
+   aditionalLevels = 0;
+   initialLevel = 0;
 }
 
 /***********************************************************************
