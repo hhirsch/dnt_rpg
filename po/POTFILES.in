@@ -205,6 +205,8 @@ data/feats/elective/rough.fta
 data/feats/elective/quick_thought.fta
 data/feats/elective/cant_touch_me.fta
 data/feats/elective/hasty.fta
+data/feats/elective/bolivian_blood.fta
+data/feats/elective/pinocchios_aura.fta
 
 #skills
 data/skills/acrobacias.ski
