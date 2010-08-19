@@ -1,4 +1,4 @@
-27
+30
 Ametista texturas/floor_indoor/ametista.png
 Burl texturas/floor_indoor/burl.png
 Carpete texturas/floor_indoor/carpete.png
@@ -18,6 +18,9 @@ StoneDiag texturas/floor_indoor/stone_diag.png
 Tile1_1 texturas/floor_indoor/tile1_1.png
 Tile1_2 texturas/floor_indoor/tile1_2.png
 Tile2 texturas/floor_indoor/tile2.png
+OldWood1 texturas/floor_indoor/oldwood1.png
+OldWood2 texturas/floor_indoor/oldwood2.png
+OldWood3 texturas/floor_indoor/oldwood3.png
 Wood texturas/floor_indoor/wood.png
 Wood2 texturas/floor_indoor/wood2.png
 Wood3 texturas/floor_indoor/wood3.png

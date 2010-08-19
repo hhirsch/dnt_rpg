@@ -3,18 +3,18 @@ All Textures used in DNT are free (as in free speech).
 Here are the licenses for those at the current directory.
 
 ===========================================================================
-DNTeam Public Domain Textures
+DNTeam GPLv3 Textures
 
 ametista.png, carpete.png, steel1.png, steel3.png, stone2.png, 
 stone_diag.png, stone.png, wood5.png
 
 ===========================================================================
 
-OpenFrag and Lemog3D C-C-BY Textures
+OpenFrag and Lemog3D CC-BY Textures
 
 burl.png, corrosive.png, gold.png, gold2.png, mosaic1.png, mosaic2.png,
 steel2.png, steel3.png, stonetile.png, wood.png, wood3.png, wood6.png, 
-wood7.png
+wood7.png oldwood1.png oldwood2.png oldwood3.png
 
 ===========================================================================
 
