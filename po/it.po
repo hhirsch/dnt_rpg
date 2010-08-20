@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-08-15 14:57-0300\n"
-"PO-Revision-Date: 2010-07-09 07:28+0000\n"
-"Last-Translator: gugand <Unknown>\n"
+"POT-Creation-Date: 2010-08-20 16:22-0300\n"
+"PO-Revision-Date: 2010-08-20 13:21+0000\n"
+"Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-07-10 20:16+0000\n"
+"X-Launchpad-Export-Date: 2010-08-20 19:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: src/classes/actions.cpp:144
@@ -98,7 +98,7 @@ msgstr "Tendenza & Allineamento"
 
 #: src/engine/alignwindow.cpp:72 src/engine/aspectwindow.cpp:93
 #: src/engine/attwindow.cpp:236 src/engine/classwindow.cpp:117
-#: src/engine/featsel.cpp:240 src/engine/options.cpp:1089
+#: src/engine/featsel.cpp:240 src/engine/options.cpp:1093
 #: src/engine/racewindow.cpp:117 src/engine/skillwindow.cpp:159
 msgid "Confirm"
 msgstr "Conferma"
@@ -106,7 +106,7 @@ msgstr "Conferma"
 #: src/engine/alignwindow.cpp:76 src/engine/aspectwindow.cpp:97
 #: src/engine/attwindow.cpp:240 src/engine/barterwindow.cpp:68
 #: src/engine/classwindow.cpp:121 src/engine/featsel.cpp:244
-#: src/engine/options.cpp:1093 src/engine/racewindow.cpp:121
+#: src/engine/options.cpp:1097 src/engine/racewindow.cpp:121
 #: src/engine/skillwindow.cpp:162
 msgid "Cancel"
 msgstr "Annulla"
@@ -179,7 +179,7 @@ msgstr "Descrizione Attributo"
 
 #: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:573
 #: src/engine/dccnit.cpp:2239 src/engine/featsel.cpp:468
-#: src/engine/inventwindow.cpp:364 src/engine/options.cpp:1382
+#: src/engine/inventwindow.cpp:364 src/engine/options.cpp:1386
 msgid "Warning"
 msgstr "Attenzione"
 
@@ -200,7 +200,7 @@ msgid "Impose"
 msgstr "Imponi"
 
 #: src/engine/barterwindow.cpp:94 src/engine/barterwindow.cpp:104
-#: src/engine/inventwindow.cpp:56 src/engine/options.cpp:161
+#: src/engine/inventwindow.cpp:56 src/engine/options.cpp:164
 msgid "Inventory"
 msgstr "Inventario"
 
@@ -224,7 +224,7 @@ msgstr "L'imposizione del baratto è stata rifiutata."
 msgid "Remove"
 msgstr "Rimuovi"
 
-#: src/engine/briefing.cpp:55 src/engine/options.cpp:160
+#: src/engine/briefing.cpp:55 src/engine/options.cpp:163
 msgid "Briefing"
 msgstr "Informazioni"
 
@@ -531,23 +531,23 @@ msgstr "Dialogo"
 
 #: src/engine/featsel.cpp:168
 msgid "Available"
-msgstr ""
+msgstr "Disponibile"
 
 #: src/engine/featsel.cpp:172
 msgid "Selected"
-msgstr ""
+msgstr "Selezionato"
 
 #: src/engine/featsel.cpp:359
 msgid "Remaining"
-msgstr ""
+msgstr "Restante"
 
 #: src/engine/featsel.cpp:469
 msgid "You can't select more talents"
-msgstr ""
+msgstr "Non puoi selezionare altri talenti"
 
 #: src/engine/featswindow.cpp:96
 msgid "Select"
-msgstr ""
+msgstr "Seleziona"
 
 #: src/engine/initial.cpp:79
 msgid "New"
@@ -565,7 +565,7 @@ msgstr "Salva"
 msgid "Load"
 msgstr "Carica"
 
-#: src/engine/initial.cpp:92 src/engine/options.cpp:793
+#: src/engine/initial.cpp:92 src/engine/options.cpp:797
 msgid "Options"
 msgstr "Opzioni"
 
@@ -691,7 +691,7 @@ msgstr "Quantità:"
 msgid "Ok"
 msgstr "Ok"
 
-#: src/engine/journalwindow.cpp:285 src/engine/options.cpp:163
+#: src/engine/journalwindow.cpp:285 src/engine/options.cpp:166
 msgid "Journal"
 msgstr "Diario"
 
@@ -747,253 +747,257 @@ msgstr "Occitana"
 msgid "Russian"
 msgstr "Russo"
 
-#: src/engine/options.cpp:134
+#: src/engine/options.cpp:58
+msgid "Japanese"
+msgstr "Giapponese"
+
+#: src/engine/options.cpp:137
 msgid "Camera Rotate Left"
 msgstr "Telecamera Ruota a Sinistra"
 
-#: src/engine/options.cpp:135
+#: src/engine/options.cpp:138
 msgid "Camera Rotate Right"
 msgstr "Telecamera Ruota a Destra"
 
-#: src/engine/options.cpp:136
+#: src/engine/options.cpp:139
 msgid "Camera Rotate Up"
 msgstr "Telecamera Ruota in Alto"
 
-#: src/engine/options.cpp:137
+#: src/engine/options.cpp:140
 msgid "Camera Rotate Down"
 msgstr "Telecamera Ruota in Basso"
 
-#: src/engine/options.cpp:138
+#: src/engine/options.cpp:141
 msgid "Camera Zoom Up"
 msgstr "Telecamera dall'alto ravvicinata"
 
-#: src/engine/options.cpp:139
+#: src/engine/options.cpp:142
 msgid "Camera Zoom Down"
 msgstr "Telecamera dal basso in lontananza"
 
-#: src/engine/options.cpp:140
+#: src/engine/options.cpp:143
 msgid "Camera Top"
 msgstr "Telecamera In Alto"
 
-#: src/engine/options.cpp:141
+#: src/engine/options.cpp:144
 msgid "Camera Bottom"
 msgstr "Telecamera in Fondo"
 
-#: src/engine/options.cpp:142
+#: src/engine/options.cpp:145
 msgid "Camera Zoom Max"
 msgstr "Telecamera Massimo Zoom"
 
-#: src/engine/options.cpp:143
+#: src/engine/options.cpp:146
 msgid "Camera Zoom Min"
 msgstr "Telecamera Minimo Zoom"
 
-#: src/engine/options.cpp:145
+#: src/engine/options.cpp:148
 msgid "Toggle Run(1)"
 msgstr "Commuta Corsa(1)"
 
-#: src/engine/options.cpp:146
+#: src/engine/options.cpp:149
 msgid "Toggle Run(2)"
 msgstr "Commuta Corsa(2)"
 
-#: src/engine/options.cpp:147
+#: src/engine/options.cpp:150
 msgid "Move Right"
 msgstr "Movimento a Destra"
 
-#: src/engine/options.cpp:148
+#: src/engine/options.cpp:151
 msgid "Move Left"
 msgstr "Movimento a Sinistra"
 
-#: src/engine/options.cpp:149
+#: src/engine/options.cpp:152
 msgid "Move Forward"
 msgstr "Movimento in Avanti"
 
-#: src/engine/options.cpp:150
+#: src/engine/options.cpp:153
 msgid "Move Backward"
 msgstr "Movimento Indietro"
 
-#: src/engine/options.cpp:151
+#: src/engine/options.cpp:154
 msgid "Rotate Left"
 msgstr "Ruota a sinistra"
 
-#: src/engine/options.cpp:152
+#: src/engine/options.cpp:155
 msgid "Rotate Right"
 msgstr "Ruota a destra"
 
-#: src/engine/options.cpp:153
+#: src/engine/options.cpp:156
 msgid "Change Character"
 msgstr "Cambia Personaggio"
 
-#: src/engine/options.cpp:154 src/engine/shortcutswindow.cpp:413
+#: src/engine/options.cpp:157 src/engine/shortcutswindow.cpp:413
 msgid "Rest"
 msgstr "Riposa"
 
-#: src/engine/options.cpp:156
+#: src/engine/options.cpp:159
 msgid "End Turn"
 msgstr "Fine turno"
 
-#: src/engine/options.cpp:158
+#: src/engine/options.cpp:161
 msgid "Minimap"
 msgstr "Mini mappa"
 
-#: src/engine/options.cpp:159 src/engine/shortcutswindow.cpp:68
+#: src/engine/options.cpp:162 src/engine/shortcutswindow.cpp:68
 msgid "Shortcuts"
 msgstr "Scorciatoie"
 
-#: src/engine/options.cpp:162
+#: src/engine/options.cpp:165
 msgid "Character Info"
 msgstr "Informazioni Personaggio"
 
-#: src/engine/options.cpp:599 src/engine/options.cpp:626
+#: src/engine/options.cpp:603 src/engine/options.cpp:630
 #: data/weapons/types/munitions.dcl:2
 msgid "None"
 msgstr "Niente"
 
-#: src/engine/options.cpp:604
+#: src/engine/options.cpp:608
 msgid "Characters"
 msgstr "Personaggi"
 
-#: src/engine/options.cpp:609
+#: src/engine/options.cpp:613
 msgid "All"
 msgstr "Tutto"
 
-#: src/engine/options.cpp:631
+#: src/engine/options.cpp:635
 msgid "Projective"
 msgstr "Proiettivo"
 
-#: src/engine/options.cpp:647 data/weapons/types/sizes.dcl:3
+#: src/engine/options.cpp:651 data/weapons/types/sizes.dcl:3
 #: data/weapons/types/weights.dcl:3
 msgid "Normal"
 msgstr "Normale"
 
-#: src/engine/options.cpp:650
+#: src/engine/options.cpp:654
 msgid "Pursue"
 msgstr "Inseguire"
 
-#: src/engine/options.cpp:666 src/engine/options.cpp:685
+#: src/engine/options.cpp:670 src/engine/options.cpp:689
 msgid "Disabled"
 msgstr "Disabilitato"
 
-#: src/engine/options.cpp:688
+#: src/engine/options.cpp:692
 msgid "2x"
 msgstr "2x"
 
-#: src/engine/options.cpp:691
+#: src/engine/options.cpp:695
 msgid "4x"
 msgstr "4x"
 
-#: src/engine/options.cpp:803
+#: src/engine/options.cpp:807
 msgid "Input"
 msgstr "Inserimento"
 
-#: src/engine/options.cpp:806
+#: src/engine/options.cpp:810
 msgid "Windows"
 msgstr "Finestre"
 
-#: src/engine/options.cpp:809
+#: src/engine/options.cpp:813
 msgid "Character"
 msgstr "Personaggio"
 
-#: src/engine/options.cpp:812
+#: src/engine/options.cpp:816
 msgid "Camera"
 msgstr "Telecamera"
 
-#: src/engine/options.cpp:817
+#: src/engine/options.cpp:821
 msgid "Audio"
 msgstr "Audio"
 
-#: src/engine/options.cpp:821
+#: src/engine/options.cpp:825
 msgid "Music Volume:"
 msgstr "Volume Musica:"
 
-#: src/engine/options.cpp:838
+#: src/engine/options.cpp:842
 msgid "Effects Volume:"
 msgstr "Volume Effetti:"
 
-#: src/engine/options.cpp:855
+#: src/engine/options.cpp:859
 msgid "Video"
 msgstr "Video"
 
-#: src/engine/options.cpp:863
+#: src/engine/options.cpp:867
 msgid "Screen Resolution:"
 msgstr "Risoluzione Schermo:"
 
-#: src/engine/options.cpp:878
+#: src/engine/options.cpp:882
 msgid "Enable FullScreen"
 msgstr "Abilita Tutto Schermo"
 
-#: src/engine/options.cpp:887
+#: src/engine/options.cpp:891
 msgid "Enable Grass Effects (need particles)"
 msgstr "Abilita Effetti Erba (necessitano particelle)"
 
-#: src/engine/options.cpp:896
+#: src/engine/options.cpp:900
 msgid "Enable Particles Effects"
 msgstr "Abilita Effetti Particelle"
 
-#: src/engine/options.cpp:908
+#: src/engine/options.cpp:912
 msgid "Enable MultiTextures"
 msgstr "Abilita MultiTexture"
 
-#: src/engine/options.cpp:918
+#: src/engine/options.cpp:922
 msgid "Enable Anisotropic Filter"
 msgstr "Abilita Filtro Anisotropico"
 
-#: src/engine/options.cpp:929
+#: src/engine/options.cpp:933
 msgid "Stencil Buffer:"
 msgstr "Stencil Buffer:"
 
-#: src/engine/options.cpp:946
+#: src/engine/options.cpp:950
 msgid "Reflections:"
 msgstr "Riflessioni"
 
-#: src/engine/options.cpp:963
+#: src/engine/options.cpp:967
 msgid "Shadows:"
 msgstr "Ombre:"
 
-#: src/engine/options.cpp:979
+#: src/engine/options.cpp:983
 msgid "Anti-Aliasing:"
 msgstr "Anti-Aliasing:"
 
-#: src/engine/options.cpp:994
+#: src/engine/options.cpp:998
 msgid "FarView:"
 msgstr "VistaLontana:"
 
-#: src/engine/options.cpp:1010
+#: src/engine/options.cpp:1014
 msgid "Game"
 msgstr "Partita"
 
-#: src/engine/options.cpp:1016
+#: src/engine/options.cpp:1020
 msgid "Language:"
 msgstr "Lingua:"
 
-#: src/engine/options.cpp:1033
+#: src/engine/options.cpp:1037
 msgid "Camera Mode:"
 msgstr "Modalità Telecamera:"
 
-#: src/engine/options.cpp:1049
+#: src/engine/options.cpp:1053
 msgid "Auto End Turn"
 msgstr "Finisci Turno Automaticamente"
 
-#: src/engine/options.cpp:1058
+#: src/engine/options.cpp:1062
 msgid "Always Run"
 msgstr "Corsa sempre attiva"
 
-#: src/engine/options.cpp:1067
+#: src/engine/options.cpp:1071
 msgid "Show Enemy Battle Circle"
 msgstr "Mostra Cerchio Di Battaglia Del Nemico"
 
-#: src/engine/options.cpp:1076
+#: src/engine/options.cpp:1080
 msgid "Highlight current enemy"
 msgstr "Evidenzia nemico attuale"
 
-#: src/engine/options.cpp:1383
+#: src/engine/options.cpp:1387
 msgid "Some changes will only take effect upon restart."
 msgstr "Alcuni cambiamenti avranno effetto dopo il riavvio"
 
-#: src/engine/options.cpp:1428
+#: src/engine/options.cpp:1432
 msgid "Press a key to: "
 msgstr "Premere un tasto: "
 
-#: src/engine/options.cpp:1431
+#: src/engine/options.cpp:1435
 msgid "Waiting..."
 msgstr "In attesa..."
 
@@ -1063,7 +1067,7 @@ msgstr "Apri Finestra Gruppo/Party"
 
 #: src/engine/shortcutswindow.cpp:440
 msgid "Click to select a talent"
-msgstr ""
+msgstr "Clicca per selezionare un talento"
 
 #: src/engine/skillwindow.cpp:82
 msgid "Total Free Points:"
@@ -1083,11 +1087,11 @@ msgstr "Costo"
 
 #: src/engine/skillwindow.cpp:234
 msgid "Base Attribute:"
-msgstr ""
+msgstr "Attributo base:"
 
 #: src/engine/skillwindow.cpp:245
 msgid "Unknow!"
-msgstr ""
+msgstr "Sconosciuto!"
 
 #: src/fight/fightSystem.cpp:151
 msgid "No more enemies."
@@ -2887,11 +2891,11 @@ msgstr ""
 
 #: data/feats/weapon_attack.fta:1
 msgid "Common Attack"
-msgstr ""
+msgstr "Attacco Comune"
 
 #: data/feats/weapon_attack.fta:2
 msgid "Character's common attack."
-msgstr ""
+msgstr "Attacco comune del personaggio."
 
 #: data/feats/weapon_attack.dsl:22
 msgid "Out of ammo!"
@@ -2899,7 +2903,7 @@ msgstr "Munizioni esaurite!"
 
 #: data/feats/weapon_attack.dsl:44
 msgid "No more ammo. Reload your weapon!"
-msgstr ""
+msgstr "Finite le munizioni. Ricarica la tua arma!"
 
 #: data/feats/administration/aberration.fta:1
 msgid "Aberration"
@@ -2994,7 +2998,7 @@ msgstr ""
 
 #: data/feats/biology/arc_impulse.fta:1
 msgid "Arc Impulse"
-msgstr ""
+msgstr "Impulso dell'arca"
 
 #: data/feats/biology/arc_impulse.fta:2
 msgid ""
@@ -3006,6 +3010,14 @@ msgid ""
 "incredible Biology Student's strike. This feat will cause 1d6 + Biology "
 "Student Level points of damage."
 msgstr ""
+"A questo punto, lo Studente di Biologia può effettuare due volte al giorno "
+"una potente combinazione con la sua Ameiva e una Formica, in questo modo: La "
+"formica va sulla coda dell'ameiva, e quando l'ameiva colpisce il nemico con "
+"la sua coda, lancia il piccolo insetto direttaente negli occhi del nemico "
+"(una prova di Tempra è necessaria per evitare la confusione, con una "
+"difficoltà di 1d6 + il Livello dello Studente di Biologia), seguita da un "
+"incrdibile colpo dello Studente di Biologia. Questa abilità causerà 1d6 + "
+"Livello dello Studente di Biologia danni."
 
 #: data/feats/biology/mass_arthropds_attack.fta:1
 msgid "Mass Arthropds Attack"
@@ -3025,13 +3037,15 @@ msgstr ""
 
 #: data/feats/compsci/world_conception.fta:3
 msgid "World Conception"
-msgstr ""
+msgstr "Concezione del mondo"
 
 #: data/feats/compsci/world_conception.fta:4
 msgid ""
 "For knowing its profession is called 'the future', Computer Science Students "
 "received +2 in I Am Not A Fool."
 msgstr ""
+"Sapendo che la propria professione viene chiamata 'il futuro', lo Studente "
+"di Informatica riceve +2 in Non Sono Un Pazzo."
 
 #: data/feats/gothic/lament_souls.fta:1
 msgid "Laments of One Thousand Souls"
@@ -3170,7 +3184,7 @@ msgstr ""
 
 #: data/feats/elective/strong_will.fta:3
 msgid "Strong Will"
-msgstr ""
+msgstr "Forte Volontà"
 
 #: data/feats/elective/strong_will.fta:4
 msgid ""
@@ -3178,50 +3192,62 @@ msgid ""
 "to affect his mentality status. System: The creature receives +3 on all his "
 "I Am Not A Fool tests."
 msgstr ""
+"La creatura ha una volontà praticamente irremovibile, il che rende "
+"estremamente difficile intaccare il suo stato mentale. Sistema: La creatura "
+"riceve +3 in tutte le sue prove di Non Sono Un Pazzo."
 
 #: data/feats/elective/feline.fta:3
 msgid "Feline"
-msgstr ""
+msgstr "Felino"
 
 #: data/feats/elective/feline.fta:4
 msgid ""
 "The creature has reflexes like a cat, being able to deviate instinctively. "
 "System: The creature receives +3 on all his Reflexes tests."
 msgstr ""
+"La creatura ha i riflessi di un gatto, che la rendono abile nel deviare "
+"d'istinto. Sistema: La creatura riceve +3 in tutte le prove di Riflessi."
 
 #: data/feats/elective/fugitive.fta:3
 msgid "Fugitive"
-msgstr ""
+msgstr "Fuggitivo"
 
 #: data/feats/elective/fugitive.fta:4
 msgid ""
 "The fugitive creature can escape more easily of captivity situations, "
 "receiving +2 in Art of the Escape"
 msgstr ""
+"La creatura fuggitiva può scappare più facilmente dalle situazioni di "
+"reclusione, ricevendo +2 in Arte della Fuga."
 
 #: data/feats/elective/rough.fta:3
 msgid "Rough"
-msgstr ""
+msgstr "Grezzo"
 
 #: data/feats/elective/rough.fta:4
 msgid ""
 "The creature is extremally resistent, being able to bear easily stressfull "
 "tasks. System: The creature receives +3 on all his Fortitude tests."
 msgstr ""
+"La creatura è estremamente resistente, il ché la rende abile a concludere "
+"facilmente compiti pesanti. Sistema: La creatura riceve +3 in tutte le prove "
+"di Resistenza."
 
 #: data/feats/elective/quick_thought.fta:3
 msgid "Quick Thought"
-msgstr ""
+msgstr "Mente Svelta"
 
 #: data/feats/elective/quick_thought.fta:4
 msgid ""
 "With this feat, the creature can react quickly to the danger. System: At the "
 "initiative tests, the creature receives +5 to his result."
 msgstr ""
+"Con questa abilità, la creatura può reagire velocemente al pericolo. "
+"Sistema: Alla prova di iniziativa, la creatura aggiunge +5 al suo risultato."
 
 #: data/feats/elective/cant_touch_me.fta:3
 msgid "Can't Touch Me"
-msgstr ""
+msgstr "Non Mi Puoi Toccare"
 
 #: data/feats/elective/cant_touch_me.fta:4
 msgid ""
@@ -3229,10 +3255,13 @@ msgid ""
 "attacks. System: The creature will receive +2 in his Armature Class all the "
 "times that Dexterity is used to avoid hits."
 msgstr ""
+"La creatura è più astuta delle altre, essendo capace di evitare più "
+"facilmente gli attacchi. Sistema: La creatura riceve +2 alla Classe Armatura "
+"ogni volta che la Destrezza viene usata per evitare gli attacchi."
 
 #: data/feats/elective/hasty.fta:3
 msgid "Hasty"
-msgstr ""
+msgstr "Rapido"
 
 #: data/feats/elective/hasty.fta:4
 msgid ""
@@ -3240,20 +3269,25 @@ msgid ""
 "The creature can walk and run at a proportion 20 percent higher than its "
 "base displacement."
 msgstr ""
+"La creatura ha una velocità anormale, che la rende capace di correre "
+"velocemente. Sistema: La creautra può camminare e correre il 20 percento più "
+"velocemente della sua velocità di base."
 
 #: data/feats/elective/bolivian_blood.fta:3
 msgid "Bolivian Blood"
-msgstr ""
+msgstr "Sangue Boliviano"
 
 #: data/feats/elective/bolivian_blood.fta:4
 msgid ""
 "The creature has the blood as if he lives in the bolivian's mountains, "
 "receiving +10 Life Points"
 msgstr ""
+"La creatura ha il sangue degli abitanti dei monti boliviani, ricevendo +10 "
+"Punti Ferita."
 
 #: data/feats/elective/pinocchios_aura.fta:3
 msgid "Pinocchio's Aura"
-msgstr ""
+msgstr "Aura di Pinocchio"
 
 #: data/feats/elective/pinocchios_aura.fta:4
 msgid ""
@@ -3261,10 +3295,13 @@ msgid ""
 "before the movie's end -, the creature has an easy way to tell lies, "
 "receiving +2 in Bluff."
 msgstr ""
+"Avendo guardato troppe volte Pinocchio nella sua infanzia - ma essendosi "
+"addormentata sempre prima della fine del film -, la creatura dice facilmente "
+"bugie, ricevendo +2 in Ingannare."
 
 #: data/feats/elective/coward_touch.fta:1
 msgid "Coward Touch"
-msgstr ""
+msgstr "Tocco del Codardo"
 
 #: data/feats/elective/coward_touch.fta:2
 msgid ""
@@ -3272,6 +3309,9 @@ msgid ""
 "not follow clean-fight rules, inflicting 1d3+character level points of "
 "damage."
 msgstr ""
+"La creatura con Tocco del Codardo può, 3 volte al giorno, fare un attacco "
+"che non segue le regole del combattimento pulito, infliggendo 1d3 + Livello "
+"del Personaggio danni."
 
 #: data/skills/acrobacias.ski:1
 msgid "Acrobats"
@@ -4942,15 +4982,17 @@ msgstr "Santa Claws"
 #~ msgid "Open Assign Attacks Window"
 #~ msgstr "Apri Finestra Assegna Attacchi"
 
-#, fuzzy
-#~ msgid "No talents"
-#~ msgstr "Nessun Talento."
-
 #~ msgid "Melee Attack"
 #~ msgstr "Attacco in Mischia"
 
+#~ msgid "Character's ranged attack."
+#~ msgstr "L'Attacco a distanza del personaggio."
+
 #~ msgid "Character's melee attack."
 #~ msgstr "Attacco in mischia del personaggio."
+
+#~ msgid "Ranged Attack"
+#~ msgstr "Attacco a Distanza"
 
 #~ msgid "Error while opening team file: %s\n"
 #~ msgstr "Errore mentre si sta tentando di aprire il file delle squadre: %s\n"
@@ -5076,3 +5118,9 @@ msgstr "Santa Claws"
 
 #~ msgid "Couldn't Load Team Logo Image: %s\n"
 #~ msgstr "Non posso caricare il logo della squadra: %s\n"
+
+#~ msgid "Select Team A"
+#~ msgstr "Seleziona la squadra A"
+
+#~ msgid "Select Team B"
+#~ msgstr "Seleziona la squadra B"

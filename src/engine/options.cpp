@@ -54,7 +54,8 @@ string dntLanguageName[] =
    gettext("Dutch"),
    gettext("Catalan"),
    gettext("Occitan"),
-   gettext("Russian")
+   gettext("Russian"),
+   gettext("Japanese")
 };
 
 /*! The language code  */
@@ -69,7 +70,8 @@ string dntLanguageCode[] =
    "nl",
    "ca",
    "oc",
-   "ru"
+   "ru",
+   "ja"
 };
 
 /*! The language numbers */
@@ -85,6 +87,7 @@ enum
    DNT_LANG_CATALAN,
    DNT_LANG_OCCITAN,
    DNT_LANG_RUSSIAN,
+   DNT_LANG_JAPANESE,
    DNT_LANG_LAST
 };
 
@@ -544,7 +547,8 @@ string options::languageName()
  ****************************************************************/
 bool options::isLanguageUnicode()
 {
-   return( (langNumber == DNT_LANG_RUSSIAN) );
+   return( (langNumber == DNT_LANG_RUSSIAN) || 
+           (langNumber == DNT_LANG_JAPANESE) );
 }
 
 /****************************************************************

@@ -1,107 +1,107 @@
-# German translation for dccnitghtmare
-# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# Japanese translation for dccnitghtmare
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the dccnitghtmare package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
 "POT-Creation-Date: 2010-08-20 16:22-0300\n"
-"PO-Revision-Date: 2010-05-25 22:18+0000\n"
-"Last-Translator: Christian Sturm <Unknown>\n"
-"Language-Team: German <de@li.org>\n"
-"Language: de\n"
+"PO-Revision-Date: 2010-08-20 15:50+0000\n"
+"Last-Translator: Guybrush88 <Unknown>\n"
+"Language-Team: Japanese <ja@li.org>\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-29 14:44+0000\n"
+"X-Launchpad-Export-Date: 2010-08-20 19:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: src/classes/actions.cpp:144
 #, c-format
 msgid "%s try to attack %s"
-msgstr "%s versucht %s zu attackieren"
+msgstr ""
 
 #: src/classes/actions.cpp:149
 #, c-format
 msgid "%s try to heal %s"
-msgstr "%s versucht %s zu heilen"
+msgstr ""
 
 #: src/classes/actions.cpp:160 src/classes/feats.cpp:294
 #: src/classes/feats.cpp:347
 msgid "Too far away for action!"
-msgstr "Zu weit entfernt zum Agieren!"
+msgstr "遠く離れて行動する！"
 
 #: src/classes/actions.cpp:257 src/classes/actions.cpp:280
 msgid "Miss."
-msgstr "Fehlschlag."
+msgstr "ミス."
 
 #: src/classes/actions.cpp:260 src/classes/actions.cpp:264
 msgid "Critical Miss!"
-msgstr "Kritischer Fehlschlag!"
+msgstr "重要なのミス！"
 
 #: src/classes/actions.cpp:307
 #, c-format
 msgid "Healed %d points."
-msgstr "%d Punkte geheilt."
+msgstr ""
 
 #: src/classes/actions.cpp:311
 #, c-format
 msgid "Hit for %d points."
-msgstr "Schlage für %d Punkte."
+msgstr ""
 
 #: src/classes/actions.cpp:330 src/classes/actions.cpp:333
 msgid "Critical Heal!"
-msgstr "Kritische Heilung!"
+msgstr "重要なのヒール！"
 
 #: src/classes/actions.cpp:338 src/classes/actions.cpp:342
 msgid "Critical Hit!"
-msgstr "Kritischer Treffer!"
+msgstr "クリティカルヒット！"
 
 #: src/classes/defs.cpp:256
 msgid "Level"
-msgstr "Level"
+msgstr "レベル"
 
 #: src/classes/defs.cpp:262 src/engine/charwindow.cpp:211
 msgid "Fortitude"
-msgstr "Tapferkeit"
+msgstr "不屈の精神"
 
 #: src/classes/defs.cpp:268 src/engine/charwindow.cpp:216
 msgid "Reflexes"
-msgstr "Reflexe"
+msgstr "反射神経"
 
 #: src/classes/defs.cpp:275 src/engine/charwindow.cpp:221
 msgid "I am Not a Fool"
-msgstr "Ich bin kein Narr"
+msgstr "私はバカしない午前"
 
 #: src/classes/feats.cpp:212
 msgid "Invalid Talent"
-msgstr "ungültiges Talent"
+msgstr "無効なタレント"
 
 #: src/classes/feats.cpp:234 src/engine/dccnit.cpp:2240
 msgid "Not enought points to use!"
-msgstr "Nicht genug Punkte zum Benutzen"
+msgstr "まだたくさん集まればポイントを使用する！"
 
 #: src/classes/mission.cpp:531 src/engine/dialog.cpp:1185
 #, c-format
 msgid "Mission Completed: %d XP!"
-msgstr "Auftrag erledigt: %d XP erhalten."
+msgstr "ミッションが完了しました： %d XP！"
 
 #: src/classes/mission.cpp:548 src/classes/mission.cpp:551
 msgid "Mission Failure!"
-msgstr "Auftrag fehlgeschlagen!"
+msgstr "ミッション失敗！"
 
 #: src/engine/alignwindow.cpp:46
 msgid "Tendency & Alignment"
-msgstr "Absicht & Ausrichtung"
+msgstr "傾向＆アライメント"
 
 #: src/engine/alignwindow.cpp:72 src/engine/aspectwindow.cpp:93
 #: src/engine/attwindow.cpp:236 src/engine/classwindow.cpp:117
 #: src/engine/featsel.cpp:240 src/engine/options.cpp:1093
 #: src/engine/racewindow.cpp:117 src/engine/skillwindow.cpp:159
 msgid "Confirm"
-msgstr "Bestätigen"
+msgstr "確認"
 
 #: src/engine/alignwindow.cpp:76 src/engine/aspectwindow.cpp:97
 #: src/engine/attwindow.cpp:240 src/engine/barterwindow.cpp:68
@@ -109,333 +109,333 @@ msgstr "Bestätigen"
 #: src/engine/options.cpp:1097 src/engine/racewindow.cpp:121
 #: src/engine/skillwindow.cpp:162
 msgid "Cancel"
-msgstr "Abbrechen"
+msgstr "キャンセル"
 
 #: src/engine/aspectwindow.cpp:48
 msgid "Aspect"
-msgstr "Seitenverhältnis"
+msgstr "縦横比"
 
 #: src/engine/aspectwindow.cpp:67 src/engine/charwindow.cpp:107
 msgid "Name:"
-msgstr "Name:"
+msgstr "名前："
 
 #: src/engine/aspectwindow.cpp:72 src/engine/charwindow.cpp:110
 msgid "Age:"
-msgstr "Alter:"
+msgstr "経過時間:"
 
 #: src/engine/aspectwindow.cpp:76 src/engine/charwindow.cpp:125
 msgid "Sex:"
-msgstr "Geschlecht:"
+msgstr "性別:"
 
 #: src/engine/attwindow.cpp:58
 msgid "Attributes"
-msgstr "Eigenschaften"
+msgstr "属性"
 
 #: src/engine/attwindow.cpp:80
 msgid "Roll"
-msgstr "Würfeln"
+msgstr "振り"
 
 #: src/engine/attwindow.cpp:83
 msgid "Clear"
-msgstr "Leeren"
+msgstr "消去"
 
 #: src/engine/attwindow.cpp:87
 msgid "Auto"
-msgstr "Automatisch"
+msgstr "自動"
 
 #: src/engine/attwindow.cpp:90 src/engine/charwindow.cpp:168
 #: data/skills/forca.ski:1
 msgid "Strength"
-msgstr "Stärke"
+msgstr "強度"
 
 #: src/engine/attwindow.cpp:110 src/engine/charwindow.cpp:173
 #: data/skills/destreza.ski:1
 msgid "Dexterity"
-msgstr "Geschicklichkeit"
+msgstr "器用さ"
 
 #: src/engine/attwindow.cpp:130 src/engine/charwindow.cpp:178
 #: data/skills/constituicao.ski:1
 msgid "Constitution"
-msgstr "Konstitution"
+msgstr "憲法"
 
 #: src/engine/attwindow.cpp:150 src/engine/charwindow.cpp:183
 #: data/skills/inteligencia.ski:1
 msgid "Intelligence"
-msgstr "Intelligenz"
+msgstr "知能"
 
 #: src/engine/attwindow.cpp:171 src/engine/charwindow.cpp:188
 #: data/skills/sabedoria.ski:1
 msgid "Wisdom"
-msgstr "Weisheit"
+msgstr "知恵"
 
 #: src/engine/attwindow.cpp:192 src/engine/charwindow.cpp:193
 #: data/skills/carisma.ski:1
 msgid "Charisma"
-msgstr "Charisma"
+msgstr "カリスマ"
 
 #: src/engine/attwindow.cpp:224
 msgid "Attribute Description"
-msgstr "Eigenschaftsbeschreibung"
+msgstr "属性説明"
 
 #: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:573
 #: src/engine/dccnit.cpp:2239 src/engine/featsel.cpp:468
 #: src/engine/inventwindow.cpp:364 src/engine/options.cpp:1386
 msgid "Warning"
-msgstr "Warnung"
+msgstr "警告"
 
 #: src/engine/attwindow.cpp:552
 msgid "You Need to Assign All Attributes."
-msgstr "Sie müssen alle Eigenschaften vergeben"
+msgstr "あなたはすべての属性を割り当てる必要があります。"
 
 #: src/engine/barterwindow.cpp:52 src/engine/dialog.cpp:1488
 msgid "Barter"
-msgstr "Tausch-händler"
+msgstr "バーター"
 
 #: src/engine/barterwindow.cpp:64
 msgid "Offer"
-msgstr "Angebot"
+msgstr "オファー"
 
 #: src/engine/barterwindow.cpp:66
 msgid "Impose"
-msgstr "Erzwingen"
+msgstr "強制"
 
 #: src/engine/barterwindow.cpp:94 src/engine/barterwindow.cpp:104
 #: src/engine/inventwindow.cpp:56 src/engine/options.cpp:164
 msgid "Inventory"
-msgstr "Inventar"
+msgstr "アイテム"
 
 #: src/engine/barterwindow.cpp:259
 msgid "The barter was accepted."
-msgstr "Der Tausch wurde akzeptiert."
+msgstr "物々交換が承認されました。"
 
 #: src/engine/barterwindow.cpp:264
 msgid "The barter was rejected."
-msgstr "Der Tausch wurde abgelehnt."
+msgstr "物々交換が拒否されました。"
 
 #: src/engine/barterwindow.cpp:284
 msgid "The barter imposition was accepted."
-msgstr "Der Tauschzwang wurde akzeptiert."
+msgstr "バーター賦課が受け入れられた。"
 
 #: src/engine/barterwindow.cpp:289
 msgid "The barter imposition was rejected."
-msgstr "Der Tauschzwang wurde abgelehnt."
+msgstr "バーター賦課が拒否されました。"
 
 #: src/engine/barterwindow.cpp:308 src/engine/inventwindow.cpp:215
 msgid "Remove"
-msgstr "Entfernen"
+msgstr "削除"
 
 #: src/engine/briefing.cpp:55 src/engine/options.cpp:163
 msgid "Briefing"
-msgstr "Anweisungen"
+msgstr "ブリーフィング"
 
 #: src/engine/briefing.cpp:57
 msgid "Welcome to DNT!"
-msgstr "Willkommen zu DNT!"
+msgstr "ようこそDNTのに！"
 
 #: src/engine/briefing.cpp:153
 msgid "Success"
-msgstr "Erfolg"
+msgstr "成功"
 
 #: src/engine/briefing.cpp:153
 msgid "Failure"
-msgstr "Fehlschlag"
+msgstr "失敗"
 
 #: src/engine/charwindow.cpp:116
 msgid "Female"
-msgstr "Weiblich"
+msgstr "女性"
 
 #: src/engine/charwindow.cpp:119
 msgid "Male"
-msgstr "Männlich"
+msgstr "男性"
 
 #: src/engine/charwindow.cpp:122
 msgid "Undefined"
-msgstr "Undefiniert"
+msgstr "未定義"
 
 #: src/engine/charwindow.cpp:128
 msgid "Race:"
-msgstr "Rasse"
+msgstr "レース："
 
 #: src/engine/charwindow.cpp:131
 msgid "Alignment:"
-msgstr "Ausrichtung:"
+msgstr "位置合わせ:"
 
 #: src/engine/charwindow.cpp:135
 msgid "XP"
-msgstr "EP"
+msgstr "XP"
 
 #: src/engine/charwindow.cpp:136
 msgid "Next Level"
-msgstr "Nächste Stufe"
+msgstr "次のレベル"
 
 #: src/engine/charwindow.cpp:142
 msgid "HP"
-msgstr "LP"
+msgstr "HP"
 
 #: src/engine/charwindow.cpp:145
 msgid "AC"
-msgstr "RK"
+msgstr "電源"
 
 #: src/engine/charwindow.cpp:206
 msgid "Total Level"
-msgstr "Stufe gesamt"
+msgstr "合計レベル"
 
 #: src/engine/charwindow.cpp:226
 msgid "Base Attack Modifier"
-msgstr "Grundattackenmodifikator"
+msgstr "基本攻撃修飾子"
 
 #: src/engine/charwindow.cpp:231
 msgid "Size Modifier"
-msgstr "Größenmodifikator"
+msgstr "サイズ修飾子"
 
 #: src/engine/charwindow.cpp:259
 msgid "Level Up"
-msgstr "Stufenaufstieg!"
+msgstr "レベルアップ"
 
 #: src/engine/charwindow.cpp:265 src/engine/featsel.cpp:165
 #: src/engine/featswindow.cpp:73
 msgid "Talents"
-msgstr "Talente"
+msgstr "人材"
 
 #: src/engine/charwindow.cpp:269 src/engine/skillwindow.cpp:74
 msgid "Skills"
-msgstr "Fertigkeiten"
+msgstr "スキル"
 
 #: src/engine/charwindow.cpp:273 src/engine/featswindow.cpp:93
 #: src/engine/skillwindow.cpp:169 src/gui/window.cpp:151
 msgid "Close"
-msgstr "schließen"
+msgstr "閉じる"
 
 #: src/engine/charwindow.cpp:443
 msgid "Main Weapon"
-msgstr "Hauptwaffe"
+msgstr "メイン武器"
 
 #: src/engine/charwindow.cpp:447
 msgid "Secondary Weapon"
-msgstr "Sekundärwaffe"
+msgstr "補助火器"
 
 #: src/engine/charwindow.cpp:451
 msgid "Weapon"
-msgstr "Waffe"
+msgstr "武器"
 
 #: src/engine/charwindow.cpp:463
 msgid "Unarmed"
-msgstr "Unbewaffnet"
+msgstr "武器を使わない"
 
 #: src/engine/charwindow.cpp:469
 msgid "Not Applicable"
-msgstr "Nicht einsetzbar"
+msgstr "該当なし"
 
 #: src/engine/classwindow.cpp:83
 msgid "Class"
-msgstr "Klasse"
+msgstr "クラス"
 
 #: src/engine/classwindow.cpp:94 src/engine/racewindow.cpp:94
 msgid "Characteristics"
-msgstr "Charakteristiken"
+msgstr "特性"
 
 #: src/engine/classwindow.cpp:95 src/engine/racewindow.cpp:95
 msgid "Description"
-msgstr "Beschreibung"
+msgstr "説明"
 
 #: src/engine/classwindow.cpp:153
 msgid "Life Dice"
-msgstr "Lebenswürfel"
+msgstr "ライフダイス"
 
 #: src/engine/classwindow.cpp:157
 msgid "Skill Points"
-msgstr "Fähigkeitspunkte"
+msgstr "スキルポイント"
 
 #: src/engine/classwindow.cpp:186
 msgid "First Level"
-msgstr "Erste Stufe"
+msgstr "第1レベル"
 
 #: src/engine/classwindow.cpp:214
 msgid "Other Levels"
-msgstr "Andere Orte"
+msgstr "その他のレベル"
 
 #: src/engine/classwindow.cpp:219
 msgid "Class Modifiers"
-msgstr "Klassenmodifikatoren"
+msgstr "クラスの修飾子"
 
 #: src/engine/classwindow.cpp:231 src/engine/racewindow.cpp:172
 msgid "No Modifiers."
-msgstr "Keine Modifikatoren."
+msgstr "いいえ修飾子。"
 
 #: src/engine/classwindow.cpp:239
 msgid "Class Talents"
-msgstr "Klassentalente"
+msgstr "クラス人材"
 
 #: src/engine/classwindow.cpp:258 src/engine/featswindow.cpp:83
 #: src/engine/racewindow.cpp:190
 msgid "No Talents."
-msgstr "Keine Talente."
+msgstr "いいえ人材。"
 
 #: src/engine/classwindow.cpp:266
 msgid "Class Skills"
-msgstr "Klassenfähigkeiten"
+msgstr "クラススキル"
 
 #: src/engine/classwindow.cpp:285 src/engine/racewindow.cpp:216
 msgid "No Skills."
-msgstr "Keine Fähigkeiten."
+msgstr "いいえスキル。"
 
 #: src/engine/dccnit.cpp:513 src/engine/dccnit.cpp:564
 msgid "Error"
-msgstr "Fehler"
+msgstr "エラー"
 
 #: src/engine/dccnit.cpp:513
 msgid "Can't load the saved game!"
-msgstr "Der Spielstand konnte nicht geladen werden!"
+msgstr "することができます保存したゲームを読み込むことが！"
 
 #: src/engine/dccnit.cpp:559
 msgid "Information"
-msgstr "Information"
+msgstr "情報"
 
 #: src/engine/dccnit.cpp:560
 msgid "The game was saved!"
-msgstr "Das Spiel wurde gespeichert."
+msgstr "ゲームが保存されて！"
 
 #: src/engine/dccnit.cpp:564
 msgid "Can't save game!"
-msgstr "Das Spiel konnte nicht gespeichert werden."
+msgstr "することはできませんゲームを保存！"
 
 #: src/engine/dccnit.cpp:574
 msgid "Can't save game while fighting!"
-msgstr "Das Spiel kann nicht während eines Kampfes gespeichert werden."
+msgstr "戦闘することはできませんゲームを保存しながら！"
 
 #: src/engine/dccnit.cpp:708
 msgid "Saving Current Map Modifications"
-msgstr "Speichere aktuelle Kartenmodifikatoren"
+msgstr "現在の地図の変更を保存する"
 
 #: src/engine/dccnit.cpp:743
 #, c-format
 msgid "Loading Map: %s"
-msgstr "Lade Karte: %s"
+msgstr "地図を読み込んでいます： %s"
 
 #: src/engine/dccnit.cpp:808
 #, c-format
 msgid "Loading NPC: %s"
-msgstr "Lade NPC: %s"
+msgstr "読み込んでいますNPCは: %s"
 
 #: src/engine/dccnit.cpp:847
 msgid "Creating MiniMap"
-msgstr "Erstelle Minikarte"
+msgstr "作成ミニマップ"
 
 #: src/engine/dccnit.cpp:853
 msgid "Putting GUI on Screen"
-msgstr "Zeige GUI an"
+msgstr "画面上のGUIを置く"
 
 #: src/engine/dccnit.cpp:901
 msgid "Loading Particles"
-msgstr "Lade Partikel"
+msgstr "読み込んでいます粒子"
 
 #: src/engine/dccnit.cpp:931
 msgid "Loading Changes..."
-msgstr "Lade Veränderungen..."
+msgstr "変更を読み込んでいます..."
 
 #: src/engine/dccnit.cpp:959
 msgid "Done!"
-msgstr "Fertig!"
+msgstr "完了！"
 
 #: src/engine/dccnit.cpp:1171
 msgid ""
@@ -444,90 +444,89 @@ msgid ""
 "is thankful to the people who developed those libraries: OpenAL, Cal3D, "
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
-"DccNiTghtmare wird unter der GPLv3 oder neuer veröffentlicht: Fühlen Sie "
-"sich frei den Quelltext und die Dateien nach Belieben zu verwenden (oder uns "
-"auf gleicher Weise zu beschuldigen). DccNiTghtmare dankt all den Leuten die "
-"diese Libraries entwickelt haben: OpenAL, Cal3D, OpenGL, SDL, SDL_image, "
-"SDL_ttf, libVorbis."
+"DccNiTghtmareは下でリリースさGPLv3のまたはそれ以降：フィール、そのソースコー"
+"ドとデータの方法は、（またはしたい私たちと同じように非難する）自由に使用す"
+"る。 DccNiTghtmareこれらのライブラリを：OpenALを、Cal3D、OpenGLのは、SDL、"
+"SDL_image、SDL_ttf、libvorbisの開発の人々に感謝している。"
 
 #: src/engine/dccnit.cpp:1758
 msgid "Too far away for the action!"
-msgstr "Zu weit entfernt zum Agieren!"
+msgstr "遠く離れて行動する！"
 
 #: src/engine/dccnit.cpp:1775
 msgid "Couldn't rest at battle mode."
-msgstr "Kann nicht im Kampfmodus ausrasten!"
+msgstr "戦闘モードで休むことができませんでした。"
 
 #: src/engine/dccnit.cpp:1781
 msgid "Enemies nearby."
-msgstr "Feinde in der Nähe"
+msgstr "敵近くにあります。"
 
 #: src/engine/dccnit.cpp:1885
 msgid "No NPCs in the area."
-msgstr "Keine NPCs in der Nähe."
+msgstr "地域ではNPCに。"
 
 #: src/engine/dccnit.cpp:1943
 msgid "Surprise Attack Turn."
-msgstr "Überraschungsangriff."
+msgstr "サプライズ攻撃ターン。"
 
 #: src/engine/dccnit.cpp:1956
 msgid "No enemies in the area."
-msgstr "Keine Feinde in der Nähe."
+msgstr "地域では敵。"
 
 #: src/engine/dccnit.cpp:2142 src/engine/dccnit.cpp:2697
 #: src/engine/shortcutswindow.cpp:70
 msgid "Nothing"
-msgstr "Nichts"
+msgstr "なし"
 
 #: src/engine/dccnit.cpp:2435
 #, c-format
 msgid "%s taken."
-msgstr "%s genommen."
+msgstr ""
 
 #: src/engine/dccnit.cpp:2452
 msgid "Inventory is full!"
-msgstr "Inventar ist voll!"
+msgstr "インベントリがいっぱいです！"
 
 #: src/engine/dccnit.cpp:2485
 msgid "Door"
-msgstr "Tür"
+msgstr "ドア"
 
 #: src/engine/dccnit.cpp:2629
 #, c-format
 msgid "%s attacks %s"
-msgstr "%s attackiert %s"
+msgstr ""
 
 #: src/engine/dccnit.cpp:2798
 msgid "No more actions. Turn ended."
-msgstr "Keine Aktionen mehr.  Runde beendet."
+msgstr "これ以上のアクション。ターンが終了しました。"
 
 #: src/engine/dccnit.cpp:4329
 msgid "Exit Battle Mode"
-msgstr "Beende Kampfmodus"
+msgstr "終了バトルモード"
 
 #: src/engine/dialog.cpp:1214
 #, c-format
 msgid "%s lost."
-msgstr "%s hat verloren."
+msgstr ""
 
 #: src/engine/dialog.cpp:1257
 #, c-format
 msgid "Received %s."
-msgstr "Erhalte %s"
+msgstr ""
 
 #: src/engine/dialog.cpp:1274
 #, c-format
 msgid "Received $%d."
-msgstr "Erhalte %d"
+msgstr ""
 
 #: src/engine/dialog.cpp:1288
 #, c-format
 msgid "Lost $%d."
-msgstr "Verlor %d"
+msgstr ""
 
 #: src/engine/dialog.cpp:1481
 msgid "Dialog"
-msgstr "Dialog"
+msgstr ""
 
 #: src/engine/featsel.cpp:168
 msgid "Available"
@@ -551,23 +550,23 @@ msgstr ""
 
 #: src/engine/initial.cpp:79
 msgid "New"
-msgstr "Neu"
+msgstr ""
 
 #: src/engine/initial.cpp:84
 msgid "Continue"
-msgstr "Fortsetzen"
+msgstr ""
 
 #: src/engine/initial.cpp:87 src/engine/shortcutswindow.cpp:77
 msgid "Save"
-msgstr "Speichern"
+msgstr ""
 
 #: src/engine/initial.cpp:90 src/engine/shortcutswindow.cpp:82
 msgid "Load"
-msgstr "Laden"
+msgstr ""
 
 #: src/engine/initial.cpp:92 src/engine/options.cpp:797
 msgid "Options"
-msgstr "Optionen"
+msgstr ""
 
 #: src/engine/initial.cpp:94 data/dialogs/objects/computers.dlg:21
 #: data/dialogs/objects/computers.dlg:95
@@ -589,155 +588,155 @@ msgstr "Optionen"
 #: data/dialogs/objects/refmachine.dlg:105
 #: data/dialogs/objects/refmachine.dlg:119
 msgid "Exit"
-msgstr "Beenden"
+msgstr ""
 
 #: src/engine/inventwindow.cpp:190
 msgid "Get"
-msgstr "Hole"
+msgstr ""
 
 #: src/engine/inventwindow.cpp:193
 msgid "Info"
-msgstr "Informationen"
+msgstr ""
 
 #: src/engine/inventwindow.cpp:201
 msgid "Read"
-msgstr "Lese"
+msgstr ""
 
 #: src/engine/inventwindow.cpp:204
 msgid "Reload Weapon"
-msgstr "Waffe nachladen"
+msgstr ""
 
 #: src/engine/inventwindow.cpp:207
 msgid "Use"
-msgstr "Benutze"
+msgstr ""
 
 #: src/engine/inventwindow.cpp:218
 msgid "Buy"
-msgstr "Kaufen"
+msgstr ""
 
 #: src/engine/inventwindow.cpp:218
 msgid "Sell"
-msgstr "Verkaufen"
+msgstr ""
 
 #: src/engine/inventwindow.cpp:223
 msgid "Drop"
-msgstr "Fallenlassen"
+msgstr ""
 
 #: src/engine/inventwindow.cpp:330
 #, c-format
 msgid "%s reloaded %s with %s ammo."
-msgstr "%s lädt %s mit %s Munition"
+msgstr ""
 
 #: src/engine/inventwindow.cpp:365
 msgid "No equipped weapons are compatible with this munition type."
-msgstr "Keine ausgerüsteten Waffen sind mit diesem Munitionstyp kompatibel."
+msgstr ""
 
 #: src/engine/itemwindow.cpp:78
 #, c-format
 msgid "Name: %s"
-msgstr "Name: %s"
+msgstr ""
 
 #: src/engine/itemwindow.cpp:83
 #, c-format
 msgid "Cost: %.2f"
-msgstr "Kosten: %.2f"
+msgstr ""
 
 #: src/engine/itemwindow.cpp:88
 #, c-format
 msgid "Weight: %.2f Kg"
-msgstr "Gewicht: %.2f Kg"
+msgstr ""
 
 #: src/engine/itemwindow.cpp:103
 msgid "Heal Factor: "
-msgstr "Heil Faktor: "
+msgstr ""
 
 #: src/engine/itemwindow.cpp:113
 msgid "Aditional Factor: "
-msgstr "Zusätzlicher Faktor: "
+msgstr ""
 
 #: src/engine/itemwindow.cpp:135
 msgid "Category: "
-msgstr "Kategorie: "
+msgstr ""
 
 #: src/engine/itemwindow.cpp:141
 msgid "Damage Dice: "
-msgstr "Schadenswürfel: "
+msgstr ""
 
 #: src/engine/itemwindow.cpp:149
 msgid "Primary Damage: "
-msgstr "Primärschaden: "
+msgstr ""
 
 #: src/engine/itemwindow.cpp:156
 msgid "Secondary Damage: "
-msgstr "Sekundärschaden: "
+msgstr ""
 
 #: src/engine/itemwindow.cpp:168
 msgid "Range: "
-msgstr "Reichweite: "
+msgstr ""
 
 #: src/engine/itemwindow.cpp:173
 msgid "Size: "
-msgstr "Größe: "
+msgstr ""
 
 #: src/engine/itemwindow.cpp:186 src/engine/itemwindow.cpp:213
 msgid "Ammo Type:"
-msgstr "Munitionstyp:"
+msgstr ""
 
 #: src/engine/itemwindow.cpp:192 src/engine/itemwindow.cpp:219
 msgid "Quantity:"
-msgstr "Menge:"
+msgstr ""
 
 #: src/engine/itemwindow.cpp:238
 msgid "Ok"
-msgstr "Ok"
+msgstr ""
 
 #: src/engine/journalwindow.cpp:285 src/engine/options.cpp:166
 msgid "Journal"
-msgstr "Protokoll"
+msgstr ""
 
 #: src/engine/journalwindow.cpp:353
 msgid "Unknow Area"
-msgstr "Unbekanntes Gebiet"
+msgstr ""
 
 #: src/engine/journalwindow.cpp:354
 msgid "No missions."
-msgstr "Keine Missionen"
+msgstr ""
 
 #: src/engine/minimapwindow.cpp:59
 msgid "Map"
-msgstr "Karte"
+msgstr ""
 
 #: src/engine/options.cpp:48
 msgid "English"
-msgstr "Englisch"
+msgstr ""
 
 #: src/engine/options.cpp:49
 msgid "French"
-msgstr "Französisch"
+msgstr ""
 
 #: src/engine/options.cpp:50
 msgid "Spanish"
-msgstr "Spanisch"
+msgstr ""
 
 #: src/engine/options.cpp:51
 msgid "Portuguese"
-msgstr "Portugiesisch"
+msgstr ""
 
 #: src/engine/options.cpp:52
 msgid "German"
-msgstr "Deutsch"
+msgstr ""
 
 #: src/engine/options.cpp:53
 msgid "Italian"
-msgstr "Italienisch"
+msgstr ""
 
 #: src/engine/options.cpp:54
 msgid "Dutch"
-msgstr "Niederländisch"
+msgstr ""
 
 #: src/engine/options.cpp:55
 msgid "Catalan"
-msgstr "Katalanisch"
+msgstr ""
 
 #: src/engine/options.cpp:56
 msgid "Occitan"
@@ -745,7 +744,7 @@ msgstr ""
 
 #: src/engine/options.cpp:57
 msgid "Russian"
-msgstr "Russisch"
+msgstr ""
 
 #: src/engine/options.cpp:58
 msgid "Japanese"
@@ -753,11 +752,11 @@ msgstr ""
 
 #: src/engine/options.cpp:137
 msgid "Camera Rotate Left"
-msgstr "Kamera rechtsherum drehen"
+msgstr ""
 
 #: src/engine/options.cpp:138
 msgid "Camera Rotate Right"
-msgstr "Kamera linksherum drehen"
+msgstr ""
 
 #: src/engine/options.cpp:139
 msgid "Camera Rotate Up"
@@ -769,11 +768,11 @@ msgstr ""
 
 #: src/engine/options.cpp:141
 msgid "Camera Zoom Up"
-msgstr "Kamera hinaufzoomen"
+msgstr ""
 
 #: src/engine/options.cpp:142
 msgid "Camera Zoom Down"
-msgstr "Kamera herabzoomen"
+msgstr ""
 
 #: src/engine/options.cpp:143
 msgid "Camera Top"
@@ -785,285 +784,285 @@ msgstr ""
 
 #: src/engine/options.cpp:145
 msgid "Camera Zoom Max"
-msgstr "Kamera Maximaler Zoom"
+msgstr ""
 
 #: src/engine/options.cpp:146
 msgid "Camera Zoom Min"
-msgstr "Kamera Minimaler Zoom"
+msgstr ""
 
 #: src/engine/options.cpp:148
 msgid "Toggle Run(1)"
-msgstr "Umschalten Rennen(1)"
+msgstr ""
 
 #: src/engine/options.cpp:149
 msgid "Toggle Run(2)"
-msgstr "Umschalten Rennen(2)"
+msgstr ""
 
 #: src/engine/options.cpp:150
 msgid "Move Right"
-msgstr "Nach rechts bewegen"
+msgstr ""
 
 #: src/engine/options.cpp:151
 msgid "Move Left"
-msgstr "Nach links bewegen"
+msgstr ""
 
 #: src/engine/options.cpp:152
 msgid "Move Forward"
-msgstr "Nach vorne bewegen"
+msgstr ""
 
 #: src/engine/options.cpp:153
 msgid "Move Backward"
-msgstr "Nach hinten bewegen"
+msgstr ""
 
 #: src/engine/options.cpp:154
 msgid "Rotate Left"
-msgstr "Links drehen"
+msgstr ""
 
 #: src/engine/options.cpp:155
 msgid "Rotate Right"
-msgstr "Rechts drehen"
+msgstr ""
 
 #: src/engine/options.cpp:156
 msgid "Change Character"
-msgstr "Charakter ändern"
+msgstr ""
 
 #: src/engine/options.cpp:157 src/engine/shortcutswindow.cpp:413
 msgid "Rest"
-msgstr "Rasten"
+msgstr ""
 
 #: src/engine/options.cpp:159
 msgid "End Turn"
-msgstr "Runde beenden"
+msgstr ""
 
 #: src/engine/options.cpp:161
 msgid "Minimap"
-msgstr "Minikarte"
+msgstr ""
 
 #: src/engine/options.cpp:162 src/engine/shortcutswindow.cpp:68
 msgid "Shortcuts"
-msgstr "Tastenkombinationen"
+msgstr ""
 
 #: src/engine/options.cpp:165
 msgid "Character Info"
-msgstr "Charakter Informationen"
+msgstr ""
 
 #: src/engine/options.cpp:603 src/engine/options.cpp:630
 #: data/weapons/types/munitions.dcl:2
 msgid "None"
-msgstr "Keine"
+msgstr ""
 
 #: src/engine/options.cpp:608
 msgid "Characters"
-msgstr "Charaktere"
+msgstr ""
 
 #: src/engine/options.cpp:613
 msgid "All"
-msgstr "Alle"
+msgstr ""
 
 #: src/engine/options.cpp:635
 msgid "Projective"
-msgstr "projektiv"
+msgstr ""
 
 #: src/engine/options.cpp:651 data/weapons/types/sizes.dcl:3
 #: data/weapons/types/weights.dcl:3
 msgid "Normal"
-msgstr "Normal"
+msgstr ""
 
 #: src/engine/options.cpp:654
 msgid "Pursue"
-msgstr "Verfolgen"
+msgstr ""
 
 #: src/engine/options.cpp:670 src/engine/options.cpp:689
 msgid "Disabled"
-msgstr "Deaktiviert"
+msgstr ""
 
 #: src/engine/options.cpp:692
 msgid "2x"
-msgstr "2x"
+msgstr ""
 
 #: src/engine/options.cpp:695
 msgid "4x"
-msgstr "4x"
+msgstr ""
 
 #: src/engine/options.cpp:807
 msgid "Input"
-msgstr "Eingabe"
+msgstr ""
 
 #: src/engine/options.cpp:810
 msgid "Windows"
-msgstr "Fenster"
+msgstr ""
 
 #: src/engine/options.cpp:813
 msgid "Character"
-msgstr "Charakter"
+msgstr ""
 
 #: src/engine/options.cpp:816
 msgid "Camera"
-msgstr "Kamera"
+msgstr ""
 
 #: src/engine/options.cpp:821
 msgid "Audio"
-msgstr "Audio"
+msgstr ""
 
 #: src/engine/options.cpp:825
 msgid "Music Volume:"
-msgstr "Musiklautstärke:"
+msgstr ""
 
 #: src/engine/options.cpp:842
 msgid "Effects Volume:"
-msgstr "Geräuschlautstärke"
+msgstr ""
 
 #: src/engine/options.cpp:859
 msgid "Video"
-msgstr "Video"
+msgstr ""
 
 #: src/engine/options.cpp:867
 msgid "Screen Resolution:"
-msgstr "Bildschirmauflösung:"
+msgstr ""
 
 #: src/engine/options.cpp:882
 msgid "Enable FullScreen"
-msgstr "Vollbild aktiveren"
+msgstr ""
 
 #: src/engine/options.cpp:891
 msgid "Enable Grass Effects (need particles)"
-msgstr "Graseffekt aktivieren (benötigt Partikel)"
+msgstr ""
 
 #: src/engine/options.cpp:900
 msgid "Enable Particles Effects"
-msgstr "Partikeleffekte aktivieren"
+msgstr ""
 
 #: src/engine/options.cpp:912
 msgid "Enable MultiTextures"
-msgstr "Mehrfache Texturen aktivieren"
+msgstr ""
 
 #: src/engine/options.cpp:922
 msgid "Enable Anisotropic Filter"
-msgstr "Anisotropische Filterung aktivieren"
+msgstr ""
 
 #: src/engine/options.cpp:933
 msgid "Stencil Buffer:"
-msgstr "Stencil Buffer:"
+msgstr ""
 
 #: src/engine/options.cpp:950
 msgid "Reflections:"
-msgstr "Reflexionen:"
+msgstr ""
 
 #: src/engine/options.cpp:967
 msgid "Shadows:"
-msgstr "Schatten:"
+msgstr ""
 
 #: src/engine/options.cpp:983
 msgid "Anti-Aliasing:"
-msgstr "Kantenglättung:"
+msgstr ""
 
 #: src/engine/options.cpp:998
 msgid "FarView:"
-msgstr "Weitsicht"
+msgstr ""
 
 #: src/engine/options.cpp:1014
 msgid "Game"
-msgstr "Spiel"
+msgstr ""
 
 #: src/engine/options.cpp:1020
 msgid "Language:"
-msgstr "Sprache:"
+msgstr ""
 
 #: src/engine/options.cpp:1037
 msgid "Camera Mode:"
-msgstr "Kameramodus"
+msgstr ""
 
 #: src/engine/options.cpp:1053
 msgid "Auto End Turn"
-msgstr "Automatisch Zug beenden"
+msgstr ""
 
 #: src/engine/options.cpp:1062
 msgid "Always Run"
-msgstr "Immer Rennen"
+msgstr ""
 
 #: src/engine/options.cpp:1071
 msgid "Show Enemy Battle Circle"
-msgstr "Feindlichen Kampfkreis anzeigen"
+msgstr ""
 
 #: src/engine/options.cpp:1080
 msgid "Highlight current enemy"
-msgstr "Aktuellen Feind markieren"
+msgstr ""
 
 #: src/engine/options.cpp:1387
 msgid "Some changes will only take effect upon restart."
-msgstr "Manche Änderungen werden erst nach einem Neustart wirksam."
+msgstr ""
 
 #: src/engine/options.cpp:1432
 msgid "Press a key to: "
-msgstr "Knopf drücken: "
+msgstr ""
 
 #: src/engine/options.cpp:1435
 msgid "Waiting..."
-msgstr "Warte…"
+msgstr ""
 
 #: src/engine/racewindow.cpp:83
 msgid "Race"
-msgstr "Rasse"
+msgstr ""
 
 #: src/engine/racewindow.cpp:160
 msgid "Race Modifiers"
-msgstr "Rassenmodifikator"
+msgstr ""
 
 #: src/engine/racewindow.cpp:178
 msgid "Race Talents"
-msgstr "Rassentalente"
+msgstr ""
 
 #: src/engine/racewindow.cpp:197
 msgid "Race Skills"
-msgstr "Rassenfähigkeiten"
+msgstr ""
 
 #: src/engine/shortcutswindow.cpp:79
 msgid "Menu"
-msgstr "Menü"
+msgstr ""
 
 #: src/engine/shortcutswindow.cpp:273
 msgid "Particles"
-msgstr "Partikel"
+msgstr ""
 
 #: src/engine/shortcutswindow.cpp:286
 msgid "FPS"
-msgstr "BPS (Bilder pro Sekunde)"
+msgstr ""
 
 #: src/engine/shortcutswindow.cpp:376
 msgid "Enter Battle Mode"
-msgstr "Kampfmodus aktivieren"
+msgstr ""
 
 #: src/engine/shortcutswindow.cpp:380
 msgid "Select Normal Attack"
-msgstr "Wähle normale Attacke"
+msgstr ""
 
 #: src/engine/shortcutswindow.cpp:386
 msgid "Open Quests Window"
-msgstr "Questfenster öffnen"
+msgstr ""
 
 #: src/engine/shortcutswindow.cpp:391
 msgid "Open Map Window"
-msgstr "Kartenfenster öffnen"
+msgstr ""
 
 #: src/engine/shortcutswindow.cpp:398
 msgid "End Character's Turn"
-msgstr "Beende aktuellen Zug"
+msgstr ""
 
 #: src/engine/shortcutswindow.cpp:402
 msgid "Only Available in Battle Mode"
-msgstr "Nur im Kampfmodus verfügbar"
+msgstr ""
 
 #: src/engine/shortcutswindow.cpp:408
 msgid "Open Inventory Window"
-msgstr "Inventarfenster öffnen"
+msgstr ""
 
 #: src/engine/shortcutswindow.cpp:418
 msgid "View Character Informations"
-msgstr "Zeige Charakterinformationen"
+msgstr ""
 
 #: src/engine/shortcutswindow.cpp:423
 msgid "Open Group/Party Window"
-msgstr "Gruppenfenster öffnen"
+msgstr ""
 
 #: src/engine/shortcutswindow.cpp:440
 msgid "Click to select a talent"
@@ -1071,19 +1070,19 @@ msgstr ""
 
 #: src/engine/skillwindow.cpp:82
 msgid "Total Free Points:"
-msgstr "Gesamte freie Punkte:"
+msgstr ""
 
 #: src/engine/skillwindow.cpp:118
 msgid "Points:"
-msgstr "Punkte:"
+msgstr ""
 
 #: src/engine/skillwindow.cpp:130
 msgid "Only show race/class skills"
-msgstr "Nur Rassen/Klassenfähigkeiten anzeigen"
+msgstr ""
 
 #: src/engine/skillwindow.cpp:149
 msgid "Cost"
-msgstr "Kosten"
+msgstr ""
 
 #: src/engine/skillwindow.cpp:234
 msgid "Base Attribute:"
@@ -1095,105 +1094,99 @@ msgstr ""
 
 #: src/fight/fightSystem.cpp:151
 msgid "No more enemies."
-msgstr "Keine Gegner mehr."
+msgstr ""
 
 #: src/fight/fightSystem.cpp:187
 #, c-format
 msgid "%s is dead!"
-msgstr "%s ist tot!"
+msgstr ""
 
 #: src/fight/fightSystem.cpp:232
 #, c-format
 msgid "%s receive %d XP for killing"
-msgstr "%s bekommt %d EP für Tötung"
+msgstr ""
 
 #: src/fight/fightSystem.cpp:279 src/fight/fightSystem.cpp:307
 msgid "New Round"
-msgstr "Neue Runde"
+msgstr ""
 
 #: src/fight/fightSystem.cpp:284 src/fight/fightSystem.cpp:312
 msgid "Error: No Characters!"
-msgstr "Fehler: Keine Charaktere!"
+msgstr ""
 
 #: src/fight/fightSystem.cpp:340 src/fight/fightSystem.cpp:346
 #, c-format
 msgid "%s's turn."
-msgstr "%s's Zug."
+msgstr ""
 
 #: src/fight/initiative.cpp:56
 #, c-format
 msgid "%s rolls initiative: "
-msgstr "%s würfelt Initiative: "
+msgstr ""
 
 #: src/gui/window.cpp:148
 msgid "Maximize"
-msgstr "Maximieren"
+msgstr ""
 
 #: data/comics/intro/intro.dcb:15
 msgid "Once Upon a time, there was a happy university called UFMG..."
-msgstr "Es war einmal eine glückliche Universität mit Namen UFMG..."
+msgstr ""
 
 #: data/comics/intro/intro.dcb:25
 msgid "People there used to live peacefull lives"
-msgstr "Die Leute lebten ein friedliches Leben"
+msgstr ""
 
 #: data/comics/intro/intro.dcb:35
 msgid ""
 "(except the medical students who had the habit of sacrificing one rookie per "
 "year)"
 msgstr ""
-"(ausgenommen die Medizinstudenten die jedes Jahr einen Anfänger opfern)"
 
 #: data/comics/intro/intro.dcb:45
 msgid "When something happened..."
-msgstr "Als plötzlich..."
+msgstr ""
 
 #: data/comics/intro/intro.dcb:47
 msgid "a big explosion, with unknown causes."
-msgstr "eine große Explosion, aus unbekanntem  Grund."
+msgstr ""
 
 #: data/comics/intro/intro.dcb:61
 msgid ""
 "It made the happy and peacefull city called Belo Horizonte be known as "
 "Horrivel Horizonte."
 msgstr ""
-"Es machte die glückliche und friedliche Stadt Belo Horizonte zu Horrivel "
-"Horizonte."
 
 #: data/comics/intro/intro.dcb:71
 msgid "Trees became alive,"
-msgstr "Bäume wurden lebendig,"
+msgstr ""
 
 #: data/comics/intro/intro.dcb:73
 msgid "Ameivas became agressive"
-msgstr "Ameivas wurden agressiv"
+msgstr ""
 
 #: data/comics/intro/intro.dcb:75
 msgid "and rats became blood thirsty."
-msgstr "und Ratten wurden Blutdurstig"
+msgstr ""
 
 #: data/comics/intro/intro.dcb:85
 msgid ""
 "From this chaotic scene, emerged the main race that would dominate the land:"
 msgstr ""
-"Aus diesem Chaos tauchte eine neue Rasse auf die das Land dominieren sollte:"
 
 #: data/comics/intro/intro.dcb:87
 msgid "UNIVERSITY STUDENTS!"
-msgstr "UNIVERSITÄTSSTUDENTEN!"
+msgstr ""
 
 #: data/comics/intro/intro.dcb:89
 msgid ""
 "who desired to, at all costs, obtain their legendary levels of knowledge."
-msgstr "die unter allen Umständen legedäres Wissen erreichen wollen."
+msgstr ""
 
 #: data/comics/intro/intro.dcb:103
 msgid ""
 "On this doomed world, thanks to the risen journalists, tales were told and "
 "spread by word of mouth, saying that"
 msgstr ""
-"In dieer dem Untergang geweihten Welt, wurde durch Journalisten die "
-"Nachricht überbracht, dass"
 
 #: data/comics/intro/intro.dcb:113
 msgid "the first man who came and proclaimed his right to graduate"
@@ -1201,46 +1194,41 @@ msgstr ""
 
 #: data/comics/intro/intro.dcb:123
 msgid "was Logan."
-msgstr "war Logan."
+msgstr ""
 
 #: data/comics/intro/intro.dcb:125
 msgid "And that's how the tale began..."
-msgstr "Und so begann die Geschichte..."
+msgstr ""
 
 #: data/comics/other/mjack/mjack.dcb:15
 msgid ""
 "One of those terrible monsters: a 18th level Music Student mixed with a "
 "single (and incredible) Administration Student level: Michael J."
 msgstr ""
-"Eines dieser schrecklichen Monster: ein Level 18 Musik Student als auch ein "
-"einzelner (und unglaublicher) Administator Studentenstufe: Michael J."
 
 #: data/comics/other/mjack/mjack.dcb:26
 msgid "Originated by a failed Simulacrum proccess of an ancient J-5 member,"
 msgstr ""
-"Entstanden durch einen fehlgeschlagenen Simulacrum Prozess eines alten J-M "
-"Mitgleids,"
 
 #: data/comics/other/mjack/mjack.dcb:37
 msgid "it used a hat, Supedohat. Apparently a common white hat,"
 msgstr ""
-"es benutzt einen Hut, Supedohut. Offenbar einen gewöhnlichen weissen Hut."
 
 #: data/comics/other/mjack/mjack.dcb:40
 msgid "but, actually, a metamorphosical throwning thriller weapon."
-msgstr "aber tatsächlich eine gefährliche Gestaltverändernde Waffe."
+msgstr ""
 
 #: data/comics/other/mjack/mjack.dcb:51
 msgid "As all monsters, it had weak points:"
-msgstr "Wie alle Monster hat es auch Schwachstellen:"
+msgstr ""
 
 #: data/comics/other/mjack/mjack.dcb:54
 msgid "An obsessed fear of 3rd world diseases"
-msgstr "Eine riesige Angst vor Dritte-Welt-Krankheiten"
+msgstr ""
 
 #: data/comics/other/mjack/mjack.dcb:65
 msgid "and more than US$200 million debt."
-msgstr "und mehr als 200 millionen Dollar Schulden."
+msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:19
 #: data/comics/tutorial/combat/combat.dcb:38
@@ -1248,40 +1236,33 @@ msgstr "und mehr als 200 millionen Dollar Schulden."
 #: data/comics/tutorial/combat/combat.dcb:195
 #: data/models/objetos/books/combat_tutorial/combat_tutorial.dcc:1
 msgid "The Combat Book"
-msgstr "Das Kampf Buch"
+msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:48
 msgid "The fight mode is an special turn based interaction used to... FIGHT!"
 msgstr ""
-"Der Kampfmodus ist eine spezielle rundenbasierte Aktion um zu... KÄMPFEN!"
 
 #: data/comics/tutorial/combat/combat.dcb:58
 msgid "There are two ways to enter Fight Mode:"
-msgstr "Es gibt zwei Wege zum Kampfmodus:"
+msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:60
 msgid ""
 "1 - When hostile creatures are nearby, the Fight Mode is automatically "
 "called."
 msgstr ""
-"1 - Wenn feindliche Kreaturen in der Nähe sind, wird der Kampfmodus "
-"automatisch aktiviert."
 
 #: data/comics/tutorial/combat/combat.dcb:70
 msgid ""
 "2 - Or, when you desire, press SPACE or the attack icon at shortcuts window "
 "to enter the Fight Mode."
 msgstr ""
-"2 - Oder, wenn du willst, drücke LEERTASTE oder das Angriffs-Icon im "
-"Schnellbefehl Fenster um in den Kampfmodus zu gelangen."
 
 #: data/comics/tutorial/combat/combat.dcb:80
 msgid ""
 "First, each character rolls an initiative check, to define the order each "
 "one will act."
 msgstr ""
-"Zuerst würfelt jeder Charakter einen Initatiative-Wurf, um die Reihenfolge "
-"der Charaktere zu ermitteln."
 
 #: data/comics/tutorial/combat/combat.dcb:91
 msgid ""
@@ -1289,111 +1270,96 @@ msgid ""
 "your hostile intentions, you'll receive a first Surprise Attack Turn before "
 "the normal battle."
 msgstr ""
-"Wenn du den Kampfmodus gestartet hast und die anderen Kreaturen deinen "
-"Angriffsversuch nicht gesehen haben, bekommst du einen "
-"Überraschungsangriffswurf vor dem normalen Kampf."
 
 #: data/comics/tutorial/combat/combat.dcb:120
 msgid "Each turn, a character can take a move action and an attack action."
-msgstr "Jede Runde kann ein Charakter sich einmal Bewegen und Angreifen."
+msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:130
 msgid "Or, if needed, take a full move action to move further."
-msgstr "Oder falls nötig NUR Bewegen um weiter zu kommen."
+msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:140
 msgid "Your action's range is represented by circles."
-msgstr "Dein Aktionsradius wird durch Kreise dargestellt."
+msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:151
 msgid "The yellow circle represents your current attack range."
-msgstr "Der gelbe Kreis stellt deinen Angriffsradius dar."
+msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:153
 msgid "You can only attack creatures inner the yellow circle!"
-msgstr "Du kannst nur Kreaturen innerhalb des gelben Kreises angreifen!"
+msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:163
 msgid "The blue circle is the area you can move with a move action."
-msgstr "Der blaue Kreis ist das Gebiet in dem du dich bewegen kannst."
+msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:174
 msgid "The red circle is the area you can move with a full move action."
 msgstr ""
-"Der rote Kreis ist das Gebiet in dem du dich mit einer reinen "
-"Bewegungsaktion bewegen kannst."
 
 #: data/comics/tutorial/combat/combat.dcb:176
 msgid ""
 "If a circle isn't shown it's because you can't take that kind of action "
 "anymore at the current turn."
 msgstr ""
-"Wenn ein Kreis nicht angezeigt wird, heisst dass, dass diese Aktion in "
-"diesem Zug nicht möglich ist."
 
 #: data/comics/tutorial/combat/combat.dcb:205
 msgid "You can attack using your current weapon by simple clicking the target."
 msgstr ""
-"Du kannst mit deiner Waffe mit einem einfachen Klick auf dein Ziel angreifen."
 
 #: data/comics/tutorial/combat/combat.dcb:215
 msgid "Or use a talent by selecting it and clicking the target."
-msgstr "Oder du benutzt ein Talent duch auswählen und Klick auf das Ziel."
+msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:226
 msgid ""
 "You can end your turn any time, by pressing SPACE or selecting the End Turn "
 "icon."
 msgstr ""
-"Du kannst deine Runde jederzeit durch drücken der LEERTASTE oder dem Zug-"
-"beendet-Icon beenden."
 
 #: data/comics/tutorial/combat/combat.dcb:228
 msgid ""
 "You can also set the options to automatically end your turn when no more "
 "available actions."
 msgstr ""
-"Du kannst auch in den Optionen das automatische beenden der Runde bei keiner "
-"mehr möglichen Aktion aktivieren."
 
 #: data/comics/tutorial/combat/combat.dcb:238
 msgid ""
 "The fight will end when no more hostile creatures are near or all PCs are "
 "dead."
 msgstr ""
-"Der Kampf wird beendet wenn keine Feinde mehr in der Nähe oder alle tot sind."
 
 #: data/comics/tutorial/combat/combat.dcb:249
 msgid "Remember:"
-msgstr "Nochmals:"
+msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:251
 msgid "Take or use objects count as an attack action."
-msgstr "Objekte nehmen oder benutzen zählt als Angriffsaktion."
+msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:253
 msgid "You can't save your game while fighting."
-msgstr "Du kannst während eines Kampfes nicht speichern."
+msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:255
 msgid "And you can't leave the current map while in Fight Mode."
-msgstr "Und du kannst im Kampfmodus die Karte nicht verlassen."
+msgstr ""
 
 #: data/alignment/neutrocaotico.ali:1
 msgid "Chaotic Neutral"
-msgstr "Chaotisch neutral"
+msgstr ""
 
 #: data/alignment/neutrocaotico.ali:2
 msgid ""
 "   Chaotic Neutral creatures sometimes are free software adepts, sometimes "
 "proprietary software adepts, depending on their daily humor."
 msgstr ""
-"   Chaotisch neutrale Charaktere sind manchmal freie-Software-erfahren, "
-"manchmal geschützte-Software-erfahren, abhängig von ihrem täglichen Gesinnen."
 
 #: data/alignment/sllibertario.ali:1
 msgid "Libertarian Free-Software Adept"
-msgstr "Liberaler Freie-Software-Erfahrener"
+msgstr ""
 
 #: data/alignment/sllibertario.ali:2
 msgid ""
@@ -1402,37 +1368,30 @@ msgid ""
 "governments, private groups or individuals. Usually they are adepts of "
 "public-domain software."
 msgstr ""
-"   Liberale Freie-Software-erfahrene glauben and die Freie Verbreitung von "
-"Wissen, ohne Einmischung der Regierung, privaten Gruppen oder Individuen. "
-"Normalerweise sind sie erfahren in Public-domain-Software."
 
 #: data/alignment/neutrocentrista.ali:1
 msgid "Center Neutral"
-msgstr "Mittig Neutral"
+msgstr ""
 
 #: data/alignment/neutrocentrista.ali:2
 msgid ""
 "   They are the fence-sitters of the DNT universe, having tendency to be "
 "favorable to what people near them are."
 msgstr ""
-"   Sie sind normalerweise ausgestossene des DNT universums, mit der Tendenz "
-"Leute in der Nähe nachzueifern."
 
 #: data/alignment/spcaotico.ali:1
 msgid "Chaotic Proprietary-Software Adept"
-msgstr "Chaotischer Geschütze-Software-Erfahrener"
+msgstr ""
 
 #: data/alignment/spcaotico.ali:2
 msgid ""
 "   Wealth and uncle Portoe$ sometimes interests them, sometimes not, "
 "although they consider all Free-Software Adepts as crazy guys."
 msgstr ""
-"   Wohlstand und der liebe Zaster interessiert sie manchmal, manchmal nicht, "
-"trotzdem finden sie alle Freie-Software-Erfahrene als durchgedreht."
 
 #: data/alignment/neutrofuncional.ali:1
 msgid "Functional Neutral"
-msgstr "Funktionell Neutral"
+msgstr ""
 
 #: data/alignment/neutrofuncional.ali:2
 msgid ""
@@ -1440,8 +1399,6 @@ msgid ""
 "licenses. They are adepts of software that works correctly (and this concept "
 "is very vague)."
 msgstr ""
-"   Funktionell Neutrale haben keine Grunghaltung an Softwarelizenzen. Sie "
-"sind erfahren in Sotware die funktioniert (und dieses Konzept ist sehr vage)."
 
 #: data/alignment/spcapitalista.ali:1
 msgid "Capitalist Proprietary-Software Adept"
@@ -1545,7 +1502,7 @@ msgstr ""
 
 #: data/classes/medician.cls:1
 msgid "Medical Student"
-msgstr "Medizinstudent"
+msgstr ""
 
 #: data/classes/medician.cls:2
 msgid ""
@@ -1602,7 +1559,7 @@ msgstr ""
 
 #: data/classes/medician.cls:19
 msgid "They receive -2 of Diplomacy when talking to other races."
-msgstr "Sie erhalten -2 Diplomatie, wenn sie mit anderen Rassen reden."
+msgstr ""
 
 #: data/classes/medician.cls:21
 msgid "They receive -4 of Diplomacy when talking to Physiotherapy Students."
@@ -1610,7 +1567,7 @@ msgstr ""
 
 #: data/classes/biology.cls:1
 msgid "Biology Student"
-msgstr "Biologiestudent"
+msgstr ""
 
 #: data/classes/biology.cls:2
 msgid ""
@@ -1632,24 +1589,18 @@ msgid ""
 "+2 of Dexterity, since they always observe and follow the ameivas on "
 "whatever terrain (and also dissect them, to count how many worms they have)."
 msgstr ""
-"+2 Geschicklichkeit, weil sie Ameisen auf jedem Terrain verfolgen und "
-"beobachten (und sie auch sezieren, um zu sehen, wie viele Würmer sie haben)."
 
 #: data/classes/biology.cls:9
 msgid ""
 "-1 of Strength, cause their muscles atrophy after spending 12 hours "
 "motionless, observing the ameiva's coupling rituals. "
 msgstr ""
-"-1 Stärke, weil ihre Muskeln nach zwölf Stunden, in denen sie Paarungsritual "
-"der Ameisen regungslos beobachten verkümmern. "
 
 #: data/classes/biology.cls:11
 msgid ""
 "Since they are commonly mistaken for hippies, Biology Students receive +6 of "
 "Disguises when disguised as hippies (and when not of this race)"
 msgstr ""
-"Da man Biologiestudenten leicht mit Hippies verwechselt erhalten sie +6 in "
-"Maskieren, wenn sie sich als Hippies verkleiden (aber keine Hippies sind)."
 
 #: data/classes/biology.cls:13
 msgid "For the same reason, -4 of Carte Blanche."
@@ -1663,7 +1614,7 @@ msgstr ""
 
 #: data/classes/music.cls:1
 msgid "Music Student"
-msgstr "Musikstudent"
+msgstr ""
 
 #: data/classes/music.cls:2
 msgid ""
@@ -1729,7 +1680,7 @@ msgstr ""
 
 #: data/classes/compsci.cls:1
 msgid "Computer Science Student"
-msgstr "Informatikstudent"
+msgstr ""
 
 #: data/classes/compsci.cls:2
 msgid ""
@@ -1737,9 +1688,6 @@ msgid ""
 "the women, obviously!'|(Gushm, then a CS Student, answering the existential "
 "question of his class)."
 msgstr ""
-"'Ich weiß wirklich nicht, warum ich dieses Studium mache...|Spinnst du? Um "
-"Frauen zu beeindrucken, natürlich!'|(Gushm, dann ein IT Student, welcher die "
-"existentielle Frage über sein Studium beantwortet)."
 
 #: data/classes/compsci.cls:3
 msgid ""
@@ -1755,7 +1703,7 @@ msgstr ""
 
 #: data/classes/compsci.cls:7
 msgid "Because they have to teach themselves, they receive +2 of Wisdom."
-msgstr "Weil sie sich alles selbst beibringen müssen erhalten sie +2 Wissen."
+msgstr ""
 
 #: data/classes/compsci.cls:9
 msgid ""
@@ -1834,7 +1782,7 @@ msgstr ""
 
 #: data/classes/journalism.cls:1
 msgid "Journalism Student"
-msgstr "Publizistikstudent"
+msgstr ""
 
 #: data/classes/journalism.cls:2
 msgid ""
@@ -2511,7 +2459,7 @@ msgstr ""
 
 #: data/feats/weapon_attack.dsl:22
 msgid "Out of ammo!"
-msgstr "Munition verbraucht!"
+msgstr ""
 
 #: data/feats/weapon_attack.dsl:44
 msgid "No more ammo. Reload your weapon!"
@@ -3034,7 +2982,7 @@ msgstr ""
 
 #: data/skills/disfarces.ski:1
 msgid "Disguises"
-msgstr "Verkleidungen"
+msgstr ""
 
 #: data/skills/disfarces.ski:2
 msgid ""
@@ -3043,7 +2991,7 @@ msgstr ""
 
 #: data/skills/equilibrio.ski:1
 msgid "Balance"
-msgstr "Balance"
+msgstr ""
 
 #: data/skills/equilibrio.ski:2
 msgid ""
@@ -3053,7 +3001,7 @@ msgstr ""
 
 #: data/skills/escalar.ski:1
 msgid "Climbing"
-msgstr "Klettern"
+msgstr ""
 
 #: data/skills/escalar.ski:2
 msgid "Measure the organism's capacity to climb very steep surfaces."
@@ -3071,7 +3019,7 @@ msgstr ""
 
 #: data/skills/falaridioma.ski:1
 msgid "Foreign Languages"
-msgstr "Fremdsprachen"
+msgstr ""
 
 #: data/skills/falaridioma.ski:2
 msgid ""
@@ -3100,7 +3048,7 @@ msgstr ""
 
 #: data/skills/furtividade.ski:1
 msgid "Stealth"
-msgstr "Tarnen"
+msgstr ""
 
 #: data/skills/furtividade.ski:2
 msgid ""
@@ -3131,7 +3079,7 @@ msgstr ""
 
 #: data/skills/montar.ski:1
 msgid "Riding"
-msgstr "Reiten"
+msgstr ""
 
 #: data/skills/montar.ski:2
 msgid ""
@@ -3141,7 +3089,7 @@ msgstr ""
 
 #: data/skills/nadar.ski:1
 msgid "Sports"
-msgstr "Sport"
+msgstr ""
 
 #: data/skills/nadar.ski:2
 msgid ""
@@ -3152,15 +3100,15 @@ msgstr ""
 
 #: data/skills/notused.ski:1
 msgid "Not Used"
-msgstr "Nicht verwendet"
+msgstr ""
 
 #: data/skills/notused.ski:2
 msgid "This Skill Place is Avaible for new skills in the future."
-msgstr "Dieser Fähigkeitsplatz wird für zukünftige Fähigkeiten verfügbar sein."
+msgstr ""
 
 #: data/skills/observar.ski:1
 msgid "Observe"
-msgstr "Beobachten"
+msgstr ""
 
 #: data/skills/observar.ski:2
 msgid ""
@@ -3171,15 +3119,13 @@ msgstr ""
 
 #: data/skills/obterinf.ski:1
 msgid "Get Information"
-msgstr "Informationen beschaffen"
+msgstr ""
 
 #: data/skills/obterinf.ski:2
 msgid ""
 "This skill is used to gain restricted information. It's not so hard to "
 "understand."
 msgstr ""
-"Diese Fähigkeit wird benutzt um geheime Informationen zu erhalten. Es ist "
-"nicht so schwer zu verstehen."
 
 #: data/skills/opobjele.ski:1
 msgid "Operates Eletronic Object"
@@ -3204,7 +3150,7 @@ msgstr ""
 
 #: data/skills/ouvir.ski:1
 msgid "Hearing"
-msgstr "Gehör"
+msgstr ""
 
 #: data/skills/ouvir.ski:2
 msgid ""
@@ -3225,7 +3171,7 @@ msgstr ""
 
 #: data/skills/penosaco.ski:1
 msgid "Mental Castration"
-msgstr "geistige Kastration"
+msgstr ""
 
 #: data/skills/penosaco.ski:2
 msgid ""
@@ -3246,7 +3192,7 @@ msgstr ""
 
 #: data/skills/prestidig.ski:1
 msgid "Prestidigitation"
-msgstr "Fingerfertigkeit"
+msgstr ""
 
 #: data/skills/prestidig.ski:2
 msgid ""
@@ -3275,7 +3221,7 @@ msgstr ""
 
 #: data/skills/semtempo.ski:1
 msgid "Not Enough Time"
-msgstr "Nicht genug Zeit"
+msgstr ""
 
 #: data/skills/semtempo.ski:2
 msgid ""
@@ -3285,7 +3231,7 @@ msgstr ""
 
 #: data/skills/suborno.ski:1
 msgid "Bribery"
-msgstr "Bestechung"
+msgstr ""
 
 #: data/skills/suborno.ski:2
 msgid ""
@@ -3313,7 +3259,7 @@ msgstr ""
 
 #: data/dialogs/objects/computers.dlg:31
 msgid "What Operating System do you wish to install?"
-msgstr "Welches Betriebssystem möchtest du installieren?"
+msgstr ""
 
 #: data/dialogs/objects/computers.dlg:39
 msgid "Install Pirate Ruindows"
@@ -3325,16 +3271,16 @@ msgstr ""
 
 #: data/dialogs/objects/computers.dlg:59
 msgid "Install Ubuntu Linux"
-msgstr "Ubuntu Linux installieren"
+msgstr ""
 
 #: data/dialogs/objects/computers.dlg:70
 msgid "Install Gentoo Linux"
-msgstr "Gentoo Linux installieren"
+msgstr ""
 
 #: data/dialogs/objects/computers.dlg:80
 #: data/dialogs/objects/computers.dlg:109
 msgid "Back"
-msgstr "Zurück"
+msgstr ""
 
 #: data/dialogs/objects/computers.dlg:91
 msgid "Operational System successfully installed."
@@ -3352,7 +3298,7 @@ msgstr ""
 
 #: data/dialogs/objects/computers.dlg:123
 msgid "Restart"
-msgstr "Neustart"
+msgstr ""
 
 #: data/dialogs/objects/computers.dlg:132
 msgid "(You see a debian-like aptitude at the computer's main screen)"
@@ -3454,7 +3400,7 @@ msgstr ""
 #: data/dialogs/tutorial/logan.dlg:10 data/dialogs/tutorial/santa.dlg:10
 #: data/dialogs/tutorial/dona.dlg:17
 msgid "Who are you?"
-msgstr "Wer bist du?"
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:19
 msgid "I am Logan, maintainer of this occupation."
@@ -3466,7 +3412,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:26 data/dialogs/tutorial/logan.dlg:55
 msgid "What am I doing here?"
-msgstr "Was mache ich hier?"
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:35
 msgid ""
@@ -3482,7 +3428,7 @@ msgstr ""
 #: data/dialogs/tutorial/logan.dlg:42 data/dialogs/tutorial/logan.dlg:58
 #: data/dialogs/tutorial/logan.dlg:74
 msgid "What do you want of me?"
-msgstr "Was willst du von mir?"
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:51
 msgid ""
@@ -3492,7 +3438,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:61
 msgid "Shut up and die!"
-msgstr "Halt den Mund und stirb!"
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:70
 msgid "Our ideal? It's not the time to tell you about that."
@@ -3554,7 +3500,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:159 data/dialogs/tutorial/logan.dlg:286
 msgid "Thanks."
-msgstr "Danke."
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:169
 msgid ""
@@ -3564,7 +3510,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:173
 msgid "Let's see what I can do."
-msgstr "Ich werde sehen, was ich tun kann."
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:180
 msgid ""
@@ -3578,7 +3524,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:197
 msgid "Bye!"
-msgstr "Auf Wiedersehen!"
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:206
 msgid "That damned Lavos! So, we must forget about Chrono..."
@@ -3611,7 +3557,7 @@ msgstr ""
 #: data/dialogs/tutorial/logan.dlg:254 data/dialogs/tutorial/dona.dlg:208
 #: data/dialogs/tutorial/dona.dlg:241
 msgid "Not yet."
-msgstr "Noch nicht."
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:258
 msgid "Yes, there's no living thing there..."
@@ -3623,7 +3569,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:273
 msgid "Great."
-msgstr "Großartig."
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:282
 msgid ""
@@ -3649,7 +3595,7 @@ msgstr ""
 #: data/dialogs/tutorial/dona.dlg:152 data/dialogs/tutorial/dona.dlg:261
 #: data/dialogs/tutorial/dona.dlg:274 data/dialogs/tutorial/dona.dlg:287
 msgid "Bye."
-msgstr "Auf Wiedersehen."
+msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:6
 msgid "Wanna some milk, kid?"
@@ -3687,7 +3633,7 @@ msgstr ""
 #: data/dialogs/tutorial/santa.dlg:247 data/dialogs/tutorial/dona.dlg:62
 #: data/dialogs/tutorial/dona.dlg:168
 msgid "Yes."
-msgstr "Ja."
+msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:78
 msgid "What kind of favor?"
@@ -3696,7 +3642,7 @@ msgstr ""
 #: data/dialogs/tutorial/santa.dlg:81 data/dialogs/tutorial/dona.dlg:65
 #: data/dialogs/tutorial/dona.dlg:165
 msgid "No."
-msgstr "Nein."
+msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:91
 msgid ""
@@ -3711,7 +3657,7 @@ msgstr ""
 #: data/dialogs/tutorial/santa.dlg:102 data/dialogs/tutorial/santa.dlg:212
 #: data/dialogs/tutorial/hippie.dlg:194
 msgid "For sure!"
-msgstr "Aber sicher!"
+msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:108
 msgid "Yes. (but inside you something is telling you to take another action)"
@@ -3719,14 +3665,14 @@ msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:120
 msgid "So get out of here!"
-msgstr "Los, raus hier!"
+msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:124 data/dialogs/tutorial/santa.dlg:137
 #: data/dialogs/tutorial/hippie.dlg:115 data/dialogs/tutorial/hippie.dlg:181
 #: data/dialogs/tutorial/hippie.dlg:223 data/dialogs/tutorial/dona.dlg:94
 #: data/dialogs/tutorial/dona.dlg:107
 msgid "(Close dialog)"
-msgstr "(Dialog schliessen)"
+msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:133
 msgid "I won't talk with you, heretic."
@@ -3741,7 +3687,7 @@ msgstr ""
 #: data/dialogs/tutorial/atleticano.dlg:111
 #: data/dialogs/tutorial/cruzeirense.dlg:87
 msgid "Ok."
-msgstr "Ok."
+msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:153
 msgid "Ok. (you look suspiciously at Santa Claws' notebook)"
@@ -3754,11 +3700,11 @@ msgstr ""
 #: data/dialogs/tutorial/santa.dlg:167 data/dialogs/tutorial/santa.dlg:242
 #: data/dialogs/tutorial/santa.dlg:263
 msgid "Amen, brother!"
-msgstr "Amen, Bruder!"
+msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:177
 msgid "Maybe."
-msgstr "Vielleicht"
+msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:188
 msgid ""
@@ -3792,7 +3738,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:269
 msgid "Never!"
-msgstr "Niemals!"
+msgstr ""
 
 #: data/dialogs/tutorial/atleticano.dlg:6
 msgid "What are you doing here in my house?"
@@ -4018,248 +3964,246 @@ msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:30
 msgid "What is the farm?"
-msgstr "Was ist die Farm"
+msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:33
 msgid "The farm?"
-msgstr "Die Farm?"
+msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:42
 msgid "I'm a simple farmer."
-msgstr "Ich bin ein einfacher Farmer."
+msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:46
 msgid "A simple farmer?"
-msgstr "Ein einfacher Farmer?"
+msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:49
 msgid "But what's your name?"
-msgstr "Aber wie heißt du?"
+msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:58
 msgid "Are you a piggy cop?"
-msgstr "Bist du ein Schweine Polizist?"
+msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:74
 msgid "F-A-R-M, farm, the farm."
-msgstr "F-A-R-M, Farm, die Farm."
+msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:78
 msgid "But what is a farm?"
-msgstr "Aber was ist eine Farm?"
+msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:81
 msgid "I got it!"
-msgstr "Jetzt hab ichs!"
+msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:90
 msgid "Pig!"
-msgstr "Schwein!"
+msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:103
 msgid "Neither I."
-msgstr "Ich auch nicht."
+msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:116
 msgid "Ch... ch.. chicken ration? What are you talking about?"
-msgstr "Hü....Hü....Hühnchen Ration? Was meinst du?"
+msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:120
 msgid "The F.S.C. Hippie told me you have some."
-msgstr "Der F.S.C. Hippe hat mir erzählt du hast welche."
+msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:124
 msgid "I'm an enthusiast of chicken rations."
-msgstr "Ich lmag Hühnchen Rationen."
+msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:132
 msgid "Because I want!"
-msgstr "Weil ich will!"
+msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:145
 msgid "I won't sell anything more to that lazy hippie."
-msgstr "Ich verkaufe nichts mehr an diesen faulen hippie."
+msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:149
 msgid "Maybe if I do some favor to you?"
-msgstr "Und wenn ich dir einen Gefallen tue?"
+msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:161
 msgid "Don't lie to me! It's for the hippie!"
-msgstr "Lüg mich nicht an! Es ist für den Hippie!"
+msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:177
 msgid "An enthusiast? You'll love it!"
-msgstr "Du magst es? Du wirst es lieben!"
+msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:181
 msgid "Sure."
-msgstr "Sicher."
+msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:190
 msgid ""
 "Uhm, there's something I'll want latter from you. But first, I'll need some "
 "ingredients for the ration. A mushroom..."
 msgstr ""
-"Ähem, eine letzte Bitte hätte ich noch. Aber zuerst bräuchte ich eine "
-"Zutaten für die Ration. Einen Pilz..."
 
 #: data/dialogs/tutorial/dona.dlg:204
 msgid "Have you got the mushroom?"
-msgstr "Hast du den Pilz bekommen?"
+msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:212 data/dialogs/tutorial/dona.dlg:245
 msgid "Here it is."
-msgstr "Hier sind sie."
+msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:223
 msgid "Great. Now I want an egg"
-msgstr "Großartig. Nun will ich ein Ei"
+msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:237
 msgid "Have you got the egg?"
-msgstr "Hast du das Ei bekommen?"
+msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:257
 msgid "Done. Come back latter to do me your favor."
-msgstr "Fertig. Komm später wieder für einen Gefallen."
+msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:270
 msgid "What a world! Threats, threats and more threats..."
-msgstr "Was für eine Welt! Gefahren, Gefahren, und noch mehr Gefahren...."
+msgstr ""
 
 #: data/missions/tutorial/mission1.mis:2
 msgid "Find Chrono Trigger cartdrige for Logan."
-msgstr "Finde die Chrono Trigger Kassette für Logan."
+msgstr ""
 
 #: data/missions/tutorial/mission2.mis:2
 msgid "Exterminate all living Creatures at Bunker School."
-msgstr "Töte alle lebenden Kreaturen in der Bunker Schule."
+msgstr ""
 
 #: data/missions/tutorial/mission3.mis:2
 msgid "Install Ruindows at the occupation's notebook for Santa Claws."
-msgstr "Installiere Ruindows am Arbeits-Notebook für Santa Claws."
+msgstr ""
 
 #: data/missions/tutorial/mission4.mis:2
 msgid "Fight for Cruzeirense."
-msgstr "Kämpfe für Cruzeirense,"
+msgstr ""
 
 #: data/missions/tutorial/hippie1.mis:2
 msgid "Get some psychedelic ration for F.S.C. Hippie"
-msgstr "Hole Psychedelische Ration für den F.S.C. Hippie"
+msgstr ""
 
 #: data/missions/tutorial/santa2.mis:2
 msgid "Install Ruindows at the hippie's computer."
-msgstr "Installiere Ruindows auf Hippie's Computer."
+msgstr ""
 
 #: data/models/objetos/books/mjack/mjack.dcc:1
 msgid "Monster Book Fragment"
-msgstr "Monster Buch Fragment"
+msgstr ""
 
 #: data/models/natural/cogumelo/cogumelo.dcc:1
 msgid "Mushroom"
-msgstr "Pilz"
+msgstr ""
 
 #: data/models/natural/ovo/ovo.dcc:1
 msgid "Egg"
-msgstr "Ei"
+msgstr ""
 
 #: data/models/objetos/itens/healkit/healkit.dcc:1
 msgid "First Aid Kit"
-msgstr "Erste-Hilfe-Set"
+msgstr ""
 
 #: data/models/objetos/itens/garrafa1/garrafa1.dcc:1
 msgid "Beer Bottle"
-msgstr "Bierflasche"
+msgstr ""
 
 #: data/models/objetos/itens/lata1/lata1.dcc:1
 msgid "Soda Can"
-msgstr "Soda Flasche"
+msgstr ""
 
 #: data/models/objetos/itens/lata1/logan_lata1.dcc:1
 msgid "Logan's Soda Can"
-msgstr "Logan's Soda Flasche"
+msgstr ""
 
 #: data/models/objetos/itens/racao/racao.dcc:1
 msgid "Chicken Ration"
-msgstr "Hühnchen Ration"
+msgstr ""
 
 #: data/models/objetos/itens/money/money.dcc:1
 msgid "Money"
-msgstr "Geld"
+msgstr ""
 
 #: data/models/objetos/geral/computador/computador.dcc:1
 msgid "Computer"
-msgstr "Computer"
+msgstr ""
 
 #: data/models/objetos/geral/notebook/notebook.dcc:1
 msgid "Notebook"
-msgstr "Notebook"
+msgstr ""
 
 #: data/models/objetos/ammo/9mm_pack/9mm_pack.dcc:1
 msgid "9mm Ammo Pack"
-msgstr "9mm Munitionskiste"
+msgstr ""
 
 #: data/weapons/definitions/axe.wcc:1
 msgid "Great Axe"
-msgstr "Große Axt"
+msgstr ""
 
 #: data/weapons/definitions/dagger.wcc:1
 msgid "Dagger"
-msgstr "Dolch"
+msgstr ""
 
 #: data/weapons/definitions/beretta92.wcc:1
 msgid "Beretta 92"
-msgstr "Beretta 92"
+msgstr ""
 
 #: data/weapons/definitions/kalashnikov_small.wcc:1
 #: data/weapons/definitions/kalashnikov.wcc:1
 msgid "Kalashnikov"
-msgstr "Kalashnikov"
+msgstr ""
 
 #: data/weapons/definitions/katana.wcc:1
 msgid "Katana"
-msgstr "Katana"
+msgstr ""
 
 #: data/weapons/definitions/knife.wcc:1
 msgid "Knife"
-msgstr "Messer"
+msgstr ""
 
 #: data/weapons/definitions/scimitar.wcc:1
 msgid "Scimitar"
-msgstr "Krummsäbel"
+msgstr ""
 
 #: data/weapons/definitions/sw39.wcc:1
 msgid "S&W 39"
-msgstr "S&W 39"
+msgstr ""
 
 #: data/weapons/definitions/uzi.wcc:1
 msgid "Uzi"
-msgstr "Uzi"
+msgstr ""
 
 #: data/weapons/types/categories.dcl:2
 msgid "Martial"
-msgstr "Kriegerisch"
+msgstr ""
 
 #: data/weapons/types/categories.dcl:3
 msgid "Exotic"
-msgstr "Exotisch"
+msgstr ""
 
 #: data/weapons/types/categories.dcl:4
 msgid "Throwing"
-msgstr "Werfen"
+msgstr ""
 
 #: data/weapons/types/categories.dcl:5
 msgid "Simple"
-msgstr "Einfach"
+msgstr ""
 
 #: data/weapons/types/categories.dcl:6
 msgid "Two Handed"
-msgstr "Zwei-Händig"
+msgstr ""
 
 #: data/weapons/types/categories.dcl:7
 msgid "Gun"
-msgstr "Kanone"
+msgstr ""
 
 #: data/weapons/types/categories.dcl:8
 msgid "Rifle"
@@ -4279,63 +4223,44 @@ msgstr ""
 
 #: data/weapons/types/munitions.dcl:3
 msgid "9mm"
-msgstr "9mm"
+msgstr ""
 
 #: data/weapons/types/munitions.dcl:4
 msgid ".223"
-msgstr ".223"
+msgstr ""
 
 #: data/weapons/types/munitions.dcl:5
 msgid "M74"
-msgstr "M74"
+msgstr ""
 
 #: data/weapons/types/munitions.dcl:6
 msgid "M43"
-msgstr "M43"
+msgstr ""
 
 #: data/weapons/types/ranges.dcl:2
 msgid "Melee"
-msgstr "Handgemenge"
+msgstr ""
 
 #: data/weapons/types/ranges.dcl:3
 msgid "Ranged"
-msgstr "aufgereiht"
+msgstr ""
 
 #: data/weapons/types/sizes.dcl:2
 msgid "Tiny"
-msgstr "Klein"
+msgstr ""
 
 #: data/weapons/types/sizes.dcl:4
 msgid "Large"
-msgstr "Groß"
+msgstr ""
 
 #: data/weapons/types/weights.dcl:2
 msgid "Light"
-msgstr "Leicht"
+msgstr ""
 
 #: data/weapons/types/weights.dcl:4
 msgid "Heavy"
-msgstr "Schwer"
+msgstr ""
 
 #: data/characters/pcs/santa.pc:1
 msgid "Santa Claws"
-msgstr "Santa Claws"
-
-#~ msgid "Open Assign Attacks Window"
-#~ msgstr "Attackenzuweisungsfenster öffnen"
-
-#, fuzzy
-#~ msgid "No talents"
-#~ msgstr "Keine Talente."
-
-#~ msgid "Charism"
-#~ msgstr "Charisma"
-
-#~ msgid "Loading Character"
-#~ msgstr "Lade Charakter"
-
-#~ msgid "Error while opening skills list: %s\n"
-#~ msgstr "Fehler beim Öffnen der Fertigkeitenliste: %s\n"
-
-#~ msgid "Can't open skill file: %s \n"
-#~ msgstr "Kann die Fertigkeitendatei nicht öffnen: %s \n"
+msgstr ""
