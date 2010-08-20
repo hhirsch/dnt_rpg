@@ -2056,6 +2056,24 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       assignValue(var, (void*)&bl, IA_TYPE_BOOL);
    }
 
+   /* Syntax void function(character c, string s) */
+   else if( (functionName == IA_CHARACTER_SHOW_TEXT) )
+   {
+      character* dude = NULL;
+      string text;
+
+      /* Get character */
+      dude = getParameterc(token, strLine, pos);
+      text = getParameters(token, strLine, pos);
+
+      if(dude != NULL)
+      {
+         messageController msgCtl;
+         msgCtl.addMessage(dude->xPosition, dude->yPosition+dude->max[1],
+                            dude->zPosition, text);
+      }
+   }
+
    /* Syntax bool function(string s) */
    else if(functionName == IA_CHARACTER_IS_ALL_DEAD)
    {

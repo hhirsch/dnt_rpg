@@ -280,6 +280,9 @@ using namespace std;
  *                 string factorType, string factorId) */
 #define IA_CHARACTER_ADD_EFFECT "addEffect"
 
+/*! void showText(character c, text string) */
+#define IA_CHARACTER_SHOW_TEXT  "showText"
+
 /*! int getPsycho(character c)  */
 #define IA_CHARACTER_GET_PSYCHO "getPsycho"
 /*! void setPsycho(character c, int psychoState)  */
