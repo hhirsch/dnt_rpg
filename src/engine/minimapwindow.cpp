@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -137,6 +137,8 @@ void miniMapWindow::updateCharacterPosition(float posX, float posZ)
       int pX=0, pY=0;
       GLfloat ratio = (GLfloat)curMap->getSquareMiniSize() / 
                       (GLfloat)curMap->squareSize();
+
+      cerr << ratio << endl;
 
       /* Convert Character position to the MiniMap Coordinates */
       GLint x = (int) (posX*ratio);
