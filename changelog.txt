@@ -1,46 +1,46 @@
 ================================================
 |                Version 0.7                   |
 ================================================
-- Default walls texture repeat to 64 (instead of 16);
-- Don't render shadow for low height sceneries at floor;
+ - Default walls texture repeat to 64 (instead of 16);
+ - Don't render shadow for low height sceneries at floor;
 
 ================================================
 |                Version 0.6                   |
 |            Released: 2010-08-15              |
 ================================================
-- Use of talents;
-- Select new talents at character creation and level up;
-- Assign quick talents to shortcuts window;
-- Map reflexion is now enabled per square;
-- Fixed a bug on particles load that was duplicating the last;
-- Faster run velocity;
-- Render objects when equipped;
-- Inserted rest button at shortcuts window;
-- New logo;
-- New mouse cursors;
-- Particles now can follow NPCs too;
-- Blood will follow character's head when needed;
-- Fixed a bug that let a dead PC enter the battle mode;
-- Applying Character's displacement;
-- Showing base attribute at skill's window;
+ - Use of talents;
+ - Select new talents at character creation and level up;
+ - Assign quick talents to shortcuts window;
+ - Map reflexion is now enabled per square;
+ - Fixed a bug on particles load that was duplicating the last;
+ - Faster run velocity;
+ - Render objects when equipped;
+ - Inserted rest button at shortcuts window;
+ - New logo;
+ - New mouse cursors;
+ - Particles now can follow NPCs too;
+ - Blood will follow character's head when needed;
+ - Fixed a bug that let a dead PC enter the battle mode;
+ - Applying Character's displacement;
+ - Showing base attribute at skill's window;
 
 ================================================
 |               Version 0.5.1                  |
 |            Released: 2010-04-13              |
 ================================================
-- UTF-8 support for languages;
-- Russian translation added;
-- Optimized text render code;
-- Lowered delay times for battles;
-- Applying skill and attribute modifier to damage and heal points;
-- Option to highlight current enemy in action at battles;
-- Added stencil buffer size as option;
-- Fixed a possible hang up when character dies;
-- Fixed XP ammount received when killing (was inverted);
-- Fixed a bug when saving files without images;
-- Fixed a bug when playing ogg files at big-endian systems;
-- When closing an window, activate previous one (not next one);
-- Changes to support AmigaOS4;
+ - UTF-8 support for languages;
+ - Russian translation added;
+ - Optimized text render code;
+ - Lowered delay times for battles;
+ - Applying skill and attribute modifier to damage and heal points;
+ - Option to highlight current enemy in action at battles;
+ - Added stencil buffer size as option;
+ - Fixed a possible hang up when character dies;
+ - Fixed XP ammount received when killing (was inverted);
+ - Fixed a bug when saving files without images;
+ - Fixed a bug when playing ogg files at big-endian systems;
+ - When closing an window, activate previous one (not next one);
+ - Changes to support AmigaOS4;
 
 ================================================
 |                Version 0.5                   |
