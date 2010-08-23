@@ -2,6 +2,7 @@
 |                Version 0.7                   |
 ================================================
 - Default walls texture repeat to 64 (instead of 16);
+- Don't render shadow for low height sceneries at floor;
 
 ================================================
 |                Version 0.6                   |

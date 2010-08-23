@@ -274,7 +274,8 @@ void model3d::draw(GLfloat** matriz, bool inverted, GLfloat* shadowMatrix,
 
       /* Do Projective Shadow */
       //FIXME: apply culling too!
-      if(shadowMatrix != NULL)
+      if( (shadowMatrix != NULL) && 
+          ( (pos->y > 0) || ( (pos->y == 0) && (max[1] > 2) ) ) )
       {
          orientation = pos->angle;
          glPushMatrix();
