@@ -157,7 +157,7 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
            m = (wall*)m->getNext();
       }
 
-      //Coloca X ou Z da porta fixo nele
+      /* Set door X or Z on wall */
       if( (doorWall->x2 - doorWall->x1) == 10)
       {
           if(doorMode)
@@ -216,6 +216,8 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
          mz1 = doorWall->z1;
          mz2 = doorWall->z2;
          wall* novoMuro;
+
+         /* "Break" the wall to door come in */
          novoMuro = actualMap->addWall(0,0,0,0);
          boundingBox bounds = actualDoor->getBoundingBox();
          if( doorOrientation == 0 )
@@ -238,10 +240,8 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
          novoMuro->backTexture = doorWall->backTexture;
          novoMuro->leftTexture = doorWall->leftTexture;
          novoMuro->rightTexture = doorWall->rightTexture;
-         //Coloca a Porta no Mapa
-         /*inserirObjetoMapa(doorX, doorZ, doorOrientation, porta, 
-                            (int)(doorX / actualMap->squareSize()), 
-                            (int)(doorZ / actualMap->squareSize()) );*/
+         
+         /* Add the new door to the map */
          door* novaPorta = new(door);
          novaPorta->x = doorX;
          novaPorta->z = doorZ;
@@ -253,7 +253,7 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
               << doorOrientation << endl;
          while(mButton & SDL_BUTTON(1))
          {
-            //Wait for Mouse Button Release
+            /* Wait for Mouse Button Release */
             SDL_PumpEvents();
             int x,y;
             mButton = SDL_GetMouseState(&x,&y);
@@ -268,7 +268,7 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
          doorMode = !doorMode;
          while(mButton & SDL_BUTTON(3))
          {
-            //Wait for Mouse Button Release
+            /* Wait for Mouse Button Release */
             SDL_PumpEvents();
             int x,y;
             mButton = SDL_GetMouseState(&x,&y);
@@ -359,48 +359,49 @@ void portal::addPortal(int qx, int qz, string where)
    Square* s = actualMap->relativeSquare(qx,qz);
    if(s)
    {
-       if(initmX > mX)
-       {
-           GLfloat tmp = initmX;
-           initmX = mX;
-           mX = tmp;
-       }    
-       if(initmZ > mZ)
-       {
-           GLfloat tmp = initmZ;
-           initmZ = mZ;
-           mZ = tmp;
-       } 
-       s->mapConection.x1 = initmX;
-       s->mapConection.x2 = mX;
-       s->mapConection.z1 = initmZ;
-       s->mapConection.z2 = mZ;
-       s->mapConection.mapName = where; 
-       s->mapConection.active = true;
-       portalList->addArea(initmX, initmZ, mX, mZ, where);
-      
-       int minqx, minqz, maxqx, maxqz;
-       minqx = (int)(initmX) / actualMap->squareSize();
-       minqz = (int)(initmZ) / actualMap->squareSize();
-       maxqx = (int)(mX) / actualMap->squareSize();
-       maxqz = (int)(mZ) / actualMap->squareSize(); 
-       int X1, Z1;
-       Square* q;
-       for(X1 = minqx; X1<=maxqx; X1++)
-       {
-          for(Z1 = minqz; Z1 <=maxqz; Z1++) 
-          {
-             q = actualMap->relativeSquare(X1,Z1);
-             if((q) && (q != s))
-             {
-                q->mapConection.x1 = initmX;
-                q->mapConection.x2 = mX;
-                q->mapConection.z1 = initmZ;
-                q->mapConection.z2 = mZ;
-                q->mapConection.mapName = where; 
-                q->mapConection.active = true;
-             }
-          }
+      /* Set portal square */
+      if(initmX > mX)
+      {
+         GLfloat tmp = initmX;
+         initmX = mX;
+         mX = tmp;
+      }    
+      if(initmZ > mZ)
+      {
+         GLfloat tmp = initmZ;
+         initmZ = mZ;
+         mZ = tmp;
+      } 
+      s->mapConection.x1 = initmX;
+      s->mapConection.x2 = mX;
+      s->mapConection.z1 = initmZ;
+      s->mapConection.z2 = mZ;
+      s->mapConection.mapName = where; 
+      s->mapConection.active = true;
+      portalList->addArea(initmX, initmZ, mX, mZ, where);
+
+      int minqx, minqz, maxqx, maxqz;
+      minqx = (int)(initmX) / actualMap->squareSize();
+      minqz = (int)(initmZ) / actualMap->squareSize();
+      maxqx = (int)(mX) / actualMap->squareSize();
+      maxqz = (int)(mZ) / actualMap->squareSize(); 
+      int X1, Z1;
+      Square* q;
+      for(X1 = minqx; X1<=maxqx; X1++)
+      {
+         for(Z1 = minqz; Z1 <=maxqz; Z1++) 
+         {
+            q = actualMap->relativeSquare(X1,Z1);
+            if((q) && (q != s))
+            {
+               q->mapConection.x1 = initmX;
+               q->mapConection.x2 = mX;
+               q->mapConection.z1 = initmZ;
+               q->mapConection.z2 = mZ;
+               q->mapConection.mapName = where; 
+               q->mapConection.active = true;
+            }
+         }
       }
    }
 }
@@ -415,16 +416,16 @@ void portal::doAddPortal()
 
    if( (state == PORTAL_STATE_OTHER) && (mB & SDL_BUTTON(1)) )
    {
-      //Init portal Select Area
+      /* Init portal Select Area */
       state = PORTAL_STATE_ADD_INIT;
       initmX = mX;
       initmZ = mZ;
    }
    else if( (state == PORTAL_STATE_ADD_INIT) && !(mB & SDL_BUTTON(1)) )
    {
-      //Add Portal
+      /* Add Portal */
       state = PORTAL_STATE_OTHER;
-      addPortal(qx,qz, "TODO");
+      addPortal(qx,qz, "mapFileName");
    }
 }
 
