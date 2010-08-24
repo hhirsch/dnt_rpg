@@ -1,6 +1,5 @@
-5
-Fountain particles/fountain1.par
-Rain particles/rain.par
-Waterfall_1 particles/waterfall1.par
-Waterfall_2 particles/waterfall2.par
-Waterfall_3 particles/waterfall3.par
+Fountain = particles/fountain1.par
+Rain = particles/rain.par
+Waterfall_1 = particles/waterfall1.par
+Waterfall_2 = particles/waterfall2.par
+Waterfall_3 = particles/waterfall3.par

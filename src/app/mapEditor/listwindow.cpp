@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -55,6 +55,33 @@
 #include <iostream>
 using namespace std;
 
+#include "../../etc/defparser.h"
+
+/********************************************************************
+ *                             Constructor                          *
+ ********************************************************************/
+tupleList::tupleList():dntList(DNT_LIST_TYPE_ADD_AT_END)
+{
+}
+/********************************************************************
+ *                              Destructor                          *
+ ********************************************************************/
+tupleList::~tupleList()
+{
+   clearList();
+}
+/********************************************************************
+ *                             freeElement                          *
+ ********************************************************************/
+void tupleList::freeElement(dntListElement* obj)
+{
+   tuple* t = (tuple*)obj;
+   if(t)
+   {
+      delete(t);
+   }
+}
+
 /********************************************************************
  *                             Constructor                          *
  ********************************************************************/
@@ -64,7 +91,6 @@ listWindow::listWindow(guiInterface* gui)
    state = -1;
    list = NULL;
    intWindow = NULL;
-   listElements = NULL;
 }
 
 /********************************************************************
@@ -189,48 +215,28 @@ void listWindow::open()
  ********************************************************************/
 void listWindow::loadFromFile(string fileName)
 {
-   ifstream arq;
-   string buffer;
-   char buf2[1024];
-   char buf3[1024];
-   total = 0;
-   int i;
+   defParser f;
+   string key="", value="";
+   tuple* t;
 
-   /* Clear current list, if defined */
-   if(listElements != NULL)
-   {
-      delete [] listElements;
-      listElements = NULL;
-   }
+   /* Clear current list */
+   tuples.clearList();
 
    /* Let's read the file */
-   arq.open(fileName.c_str(), ios::in | ios::binary);
-   if(!arq)
+   if(!f.load(fileName, true))
    {
-      cerr << "Can't open List file: " << fileName << endl;
+      cerr << "Failed to load list file: " << fileName << endl;
       return;
    }
 
-   /* Define total elements */
-   getline(arq, buffer);
-   sscanf(buffer.c_str(), "%d", &total);
-   if(total > 0)
+   while(f.getNextTuple(key, value))
    {
-      listElements = new listElement[total];
+      t = new tuple();
+      t->title = key;
+      t->fileName = value;
+      list->insertText(key);
+      tuples.insert(t);
    }
-
-   /* Read all elements */
-   for(i = 0; i < total; i++)
-   {
-      getline(arq, buffer);
-      sscanf(buffer.c_str(), "%s %s", buf2, buf3);
-      list->insertText(buf2);
-      listElements[i].title = buf2;
-      listElements[i].fileName = buf3;
-   }
-
-   /* Done */
-   arq.close();
 }
 
 /********************************************************************
@@ -247,12 +253,15 @@ string listWindow::getFileName()
 string listWindow::getFileNameWithTitle(string title)
 {
    int i;
-   for(i = 0; i < total; i++)
+   tuple* t = (tuple*)tuples.getFirst();
+
+   for(i = 0; i < tuples.getTotal(); i++)
    {
-      if(listElements[i].title == title)
+      if(t->title == title)
       {
-         return(listElements[i].fileName);
+         return(t->fileName);
       }
+      t = (tuple*)t->getNext();
    }
    return("");
 }

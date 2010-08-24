@@ -1,7 +1,6 @@
-6
-Grass_1 models/natural/matos/grass.png
-Grass_2 models/natural/matos/grass2.png
-Grass_4 models/natural/matos/grass4.png
-Grass_5 models/natural/matos/grass5.png
-Bitter_Grass models/natural/matos/bittergrass.png
-Ducktail models/natural/matos/ducktail.png
+Grass_1 = models/natural/matos/grass.png
+Grass_2 = models/natural/matos/grass2.png
+Grass_4 = models/natural/matos/grass4.png
+Grass_5 = models/natural/matos/grass5.png
+Bitter_Grass = models/natural/matos/bittergrass.png
+Ducktail = models/natural/matos/ducktail.png

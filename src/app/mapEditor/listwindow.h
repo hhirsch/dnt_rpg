@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -22,6 +22,7 @@
 #define _dnt_map_editor_list_window_h
 
 #include "../../gui/farso.h"
+#include "../../etc/list.h"
 
 /* NPCs */
 #define STATE_CHARACTERS   1
@@ -53,12 +54,26 @@
 #define STATE_INDOOR_TEXTURE   50
 #define STATE_OUTDOOR_TEXTURE  51
 
-/*! Element on the list */
-class listElement
+/*! Tuple (title, file) on the list */
+class tuple: public dntListElement
 {
    public:
       string title;            /**< The Title of the element */
       string fileName;         /**< The name of the file of the element */
+};
+
+/*! List of tuples */
+class tupleList: public dntList
+{
+   public:
+      /*! Constructor */
+      tupleList();
+      /*! Destructor */
+      ~tupleList();
+
+   protected:
+      /*! Free tuple memory */
+      void freeElement(dntListElement* obj);
 };
 
 /*! The list Window, for selecting objects */
@@ -107,8 +122,7 @@ class listWindow
       window* intWindow;         /**< Pointer to the window */
       guiInterface* intGui;      /**< Pointer to the interface */
       listText* list;            /**< Pointer to the listText */
-      listElement* listElements; /**< Elements on the list */
-      int total;                 /**< Total elements on list */
+      tupleList tuples;          /**< Current Tuples */
       string selFileName;        /**< Last Selected fileName */
 
 };

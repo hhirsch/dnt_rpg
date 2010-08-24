@@ -1,52 +1,51 @@
-51
-Beer models/objetos/itens/garrafa1/garrafa1.dcc
-Bookshelf models/objetos/geral/bookshelf/bookshelf.dcc
-Briefcase models/objetos/geral/mala/mala.dcc
-Cadeira models/objetos/geral/cadeira/cadeira.dcc
-Calendar models/objetos/geral/calendar/calendar.dcc
-Cama models/objetos/geral/cama/cama.dcc
-Cap models/objetos/geral/cap/cap.dcc
-Chair models/objetos/geral/chair/chair.dcc
-Colarinho models/objetos/geral/colarinho_e_oculos/colarinho_e_oculos.dcc
-Combat_Book models/objetos/books/combat_tutorial/combat_tutorial.dcc
-Comoda models/objetos/geral/comoda/comoda.dcc
-Computer models/objetos/geral/computador/computador.dcc
-Dinner_Chair models/objetos/geral/dinner_chair/dinner_chair.dcc
-Dinner_Table models/objetos/geral/dinner_table/dinner_table.dcc
-Escrivaninha models/objetos/geral/escrivaninha/escrivaninha.dcc
-Estante models/objetos/geral/estante/estante.dcc
-Et models/objetos/geral/et/et.dcc
-Exclamation models/objetos/geral/exclamacao/exclamacao.dcc
-Fogao_lenha models/objetos/geral/fogaoalenha/fogaoalenha.dcc
-Fridge models/objetos/geral/fridge/fridge.dcc
-Gabinete models/objetos/geral/gabinete/gabinete.dcc
-Galinheiro models/objetos/geral/galinheiro/galinheiro.dcc
-Guitar models/objetos/geral/guitarra/guitarra.dcc
-Healkit models/objetos/itens/healkit/healkit.dcc
-LCD_Monitor models/objetos/geral/monitor/monitor.dcc
-LCD_Bunker_School models/objetos/geral/monitor/monitor_bunker_school.dcc
-Letto models/objetos/geral/letto/letto.dcc
-Mesa_Grande models/objetos/geral/mesa_grande/mesa_grande.dcc
-Mesa_Redonda models/objetos/geral/mesa_redonda/mesa_redonda.dcc
-Meuble models/objetos/geral/meuble/meuble.dcc
-Microwave models/objetos/geral/microwave/microwave.dcc
-Mjack_Book models/objetos/books/mjack/mjack.dcc
-Money models/objetos/itens/money/money.dcc
-Notebook models/objetos/geral/notebook/notebook.dcc
-Oven models/objetos/geral/oven/oven.dcc
-PC_Chair models/objetos/geral/pc_chair/pc_chair.dcc
-PC_Table models/objetos/geral/pc_table/pc_table.dcc
-Pia models/objetos/geral/pia/pia.dcc
-Pillow models/objetos/geral/pillow/pillow.dcc
-Racao models/objetos/itens/racao/racao.dcc
-RefMachine models/objetos/geral/refmachine/refmachine.dcc
-Rug models/objetos/geral/rug/rug.dcc
-Rug2 models/objetos/geral/rug2/rug2.dcc
-Rug3 models/objetos/geral/rug3/rug3.dcc
-Soda_Can models/objetos/itens/lata1/lata1.dcc
-Sofa models/objetos/geral/sofa/sofa.dcc
-Sofa_2 models/objetos/geral/sofa2/sofa2.dcc
-Stair models/objetos/geral/escada/escada.dcc
-TV_42 models/objetos/geral/tv42/tv42.dcc
-TV_Hack models/objetos/geral/tv_hack/tv_hack.dcc
-Wardrobe models/objetos/geral/wardrobe/wardrobe.dcc
+Beer = models/objetos/itens/garrafa1/garrafa1.dcc
+Bookshelf = models/objetos/geral/bookshelf/bookshelf.dcc
+Briefcase = models/objetos/geral/mala/mala.dcc
+Cadeira = models/objetos/geral/cadeira/cadeira.dcc
+Calendar = models/objetos/geral/calendar/calendar.dcc
+Cama = models/objetos/geral/cama/cama.dcc
+Cap = models/objetos/geral/cap/cap.dcc
+Chair = models/objetos/geral/chair/chair.dcc
+Colarinho = models/objetos/geral/colarinho_e_oculos/colarinho_e_oculos.dcc
+Combat_Book = models/objetos/books/combat_tutorial/combat_tutorial.dcc
+Comoda = models/objetos/geral/comoda/comoda.dcc
+Computer = models/objetos/geral/computador/computador.dcc
+Dinner_Chair = models/objetos/geral/dinner_chair/dinner_chair.dcc
+Dinner_Table = models/objetos/geral/dinner_table/dinner_table.dcc
+Escrivaninha = models/objetos/geral/escrivaninha/escrivaninha.dcc
+Estante = models/objetos/geral/estante/estante.dcc
+Et = models/objetos/geral/et/et.dcc
+Exclamation = models/objetos/geral/exclamacao/exclamacao.dcc
+Fogao_lenha = models/objetos/geral/fogaoalenha/fogaoalenha.dcc
+Fridge = models/objetos/geral/fridge/fridge.dcc
+Gabinete = models/objetos/geral/gabinete/gabinete.dcc
+Galinheiro = models/objetos/geral/galinheiro/galinheiro.dcc
+Guitar = models/objetos/geral/guitarra/guitarra.dcc
+Healkit = models/objetos/itens/healkit/healkit.dcc
+LCD_Monitor = models/objetos/geral/monitor/monitor.dcc
+LCD_Bunker_School = models/objetos/geral/monitor/monitor_bunker_school.dcc
+Letto = models/objetos/geral/letto/letto.dcc
+Mesa_Grande = models/objetos/geral/mesa_grande/mesa_grande.dcc
+Mesa_Redonda = models/objetos/geral/mesa_redonda/mesa_redonda.dcc
+Meuble = models/objetos/geral/meuble/meuble.dcc
+Microwave = models/objetos/geral/microwave/microwave.dcc
+Mjack_Book = models/objetos/books/mjack/mjack.dcc
+Money = models/objetos/itens/money/money.dcc
+Notebook = models/objetos/geral/notebook/notebook.dcc
+Oven = models/objetos/geral/oven/oven.dcc
+PC_Chair = models/objetos/geral/pc_chair/pc_chair.dcc
+PC_Table = models/objetos/geral/pc_table/pc_table.dcc
+Pia = models/objetos/geral/pia/pia.dcc
+Pillow = models/objetos/geral/pillow/pillow.dcc
+Racao = models/objetos/itens/racao/racao.dcc
+RefMachine = models/objetos/geral/refmachine/refmachine.dcc
+Rug = models/objetos/geral/rug/rug.dcc
+Rug2 = models/objetos/geral/rug2/rug2.dcc
+Rug3 = models/objetos/geral/rug3/rug3.dcc
+Soda_Can = models/objetos/itens/lata1/lata1.dcc
+Sofa = models/objetos/geral/sofa/sofa.dcc
+Sofa_2 = models/objetos/geral/sofa2/sofa2.dcc
+Stair = models/objetos/geral/escada/escada.dcc
+TV_42 = models/objetos/geral/tv42/tv42.dcc
+TV_Hack = models/objetos/geral/tv_hack/tv_hack.dcc
+Wardrobe = models/objetos/geral/wardrobe/wardrobe.dcc

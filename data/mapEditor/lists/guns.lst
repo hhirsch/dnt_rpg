@@ -1,12 +1,11 @@
-11
-Ammo_9mm models/objetos/ammo/9mm_pack/9mm_pack.dcc
-Axe weapons/definitions/axe.wcc
-Beretta92 weapons/definitions/beretta92.wcc
-Dagger weapons/definitions/dagger.wcc
-Kalashnikov weapons/definitions/kalashnikov.wcc
-Kalashnikov_2 weapons/definitions/kalashnikov_small.wcc
-Katana weapons/definitions/katana.wcc
-Knife weapons/definitions/knife.wcc
-Scimitar weapons/definitions/scimitar.wcc
-Sw39 weapons/definitions/sw39.wcc
-Uzi weapons/definitions/uzi.wcc
+Ammo_9mm = models/objetos/ammo/9mm_pack/9mm_pack.dcc
+Axe = weapons/definitions/axe.wcc
+Beretta92 = weapons/definitions/beretta92.wcc
+Dagger = weapons/definitions/dagger.wcc
+Kalashnikov = weapons/definitions/kalashnikov.wcc
+Kalashnikov_2 = weapons/definitions/kalashnikov_small.wcc
+Katana = weapons/definitions/katana.wcc
+Knife = weapons/definitions/knife.wcc
+Scimitar = weapons/definitions/scimitar.wcc
+Sw39 = weapons/definitions/sw39.wcc
+Uzi = weapons/definitions/uzi.wcc

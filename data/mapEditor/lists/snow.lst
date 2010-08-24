@@ -1,3 +1,2 @@
-2
-Snow_1 particles/snow1.par
-Po_Diamante particles/podiamante.par
+Snow_1 = particles/snow1.par
+Po_Diamante = particles/podiamante.par

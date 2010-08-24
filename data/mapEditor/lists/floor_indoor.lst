@@ -1,31 +1,30 @@
-30
-Ametista texturas/floor_indoor/ametista.png
-Burl texturas/floor_indoor/burl.png
-Carpete texturas/floor_indoor/carpete.png
-Corrosive texturas/floor_indoor/corrosive.png
-Gold texturas/floor_indoor/gold.png
-Gold2 texturas/floor_indoor/gold2.png
-Mosaic texturas/floor_indoor/mosaic.png
-Mosaic2 texturas/floor_indoor/mosaic2.png
-Steel1 texturas/floor_indoor/steel1.png
-Steel2 texturas/floor_indoor/steel2.png
-Steel3 texturas/floor_indoor/steel3.png
-Steel4 texturas/floor_indoor/steel4.png
-Stone texturas/floor_indoor/stone.png
-Stone2 texturas/floor_indoor/stone2.png
-StoneTile texturas/floor_indoor/stonetile.png
-StoneDiag texturas/floor_indoor/stone_diag.png
-Tile1_1 texturas/floor_indoor/tile1_1.png
-Tile1_2 texturas/floor_indoor/tile1_2.png
-Tile2 texturas/floor_indoor/tile2.png
-OldWood1 texturas/floor_indoor/oldwood1.png
-OldWood2 texturas/floor_indoor/oldwood2.png
-OldWood3 texturas/floor_indoor/oldwood3.png
-Wood texturas/floor_indoor/wood.png
-Wood2 texturas/floor_indoor/wood2.png
-Wood3 texturas/floor_indoor/wood3.png
-Wood4 texturas/floor_indoor/wood4.png
-Wood5 texturas/floor_indoor/wood5.png
-Wood6 texturas/floor_indoor/wood6.png
-Wood7 texturas/floor_indoor/wood7.png
-Wood8 texturas/floor_indoor/wood8.png
+Ametista = texturas/floor_indoor/ametista.png
+Burl = texturas/floor_indoor/burl.png
+Carpete = texturas/floor_indoor/carpete.png
+Corrosive = texturas/floor_indoor/corrosive.png
+Gold = texturas/floor_indoor/gold.png
+Gold2 = texturas/floor_indoor/gold2.png
+Mosaic = texturas/floor_indoor/mosaic.png
+Mosaic2 = texturas/floor_indoor/mosaic2.png
+Steel1 = texturas/floor_indoor/steel1.png
+Steel2 = texturas/floor_indoor/steel2.png
+Steel3 = texturas/floor_indoor/steel3.png
+Steel4 = texturas/floor_indoor/steel4.png
+Stone = texturas/floor_indoor/stone.png
+Stone2 = texturas/floor_indoor/stone2.png
+StoneTile = texturas/floor_indoor/stonetile.png
+StoneDiag = texturas/floor_indoor/stone_diag.png
+Tile1_1 = texturas/floor_indoor/tile1_1.png
+Tile1_2 = texturas/floor_indoor/tile1_2.png
+Tile2 = texturas/floor_indoor/tile2.png
+OldWood1 = texturas/floor_indoor/oldwood1.png
+OldWood2 = texturas/floor_indoor/oldwood2.png
+OldWood3 = texturas/floor_indoor/oldwood3.png
+Wood = texturas/floor_indoor/wood.png
+Wood2 = texturas/floor_indoor/wood2.png
+Wood3 = texturas/floor_indoor/wood3.png
+Wood4 = texturas/floor_indoor/wood4.png
+Wood5 = texturas/floor_indoor/wood5.png
+Wood6 = texturas/floor_indoor/wood6.png
+Wood7 = texturas/floor_indoor/wood7.png
+Wood8 = texturas/floor_indoor/wood8.png
