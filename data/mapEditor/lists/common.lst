@@ -9,6 +9,7 @@ Chair = models/objetos/geral/chair/chair.dcc
 Colarinho = models/objetos/geral/colarinho_e_oculos/colarinho_e_oculos.dcc
 Combat_Book = models/objetos/books/combat_tutorial/combat_tutorial.dcc
 Comoda = models/objetos/geral/comoda/comoda.dcc
+Compdeck = models/objetos/industrial/compdeck/compdeck.dcc
 Computer = models/objetos/geral/computador/computador.dcc
 Dinner_Chair = models/objetos/geral/dinner_chair/dinner_chair.dcc
 Dinner_Table = models/objetos/geral/dinner_table/dinner_table.dcc
