@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
 "POT-Creation-Date: 2010-08-20 16:22-0300\n"
-"PO-Revision-Date: 2010-03-30 18:39+0000\n"
-"Last-Translator: Peter Belyaev <kapone2002@yandex.ru>\n"
+"PO-Revision-Date: 2010-09-08 20:45+0000\n"
+"Last-Translator: Dmitriy Bobylev <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-05 12:44+0000\n"
+"X-Launchpad-Export-Date: 2010-09-19 20:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: src/classes/actions.cpp:144
@@ -824,7 +824,7 @@ msgstr "Сменить персонаж"
 
 #: src/engine/options.cpp:157 src/engine/shortcutswindow.cpp:413
 msgid "Rest"
-msgstr ""
+msgstr "Отдых"
 
 #: src/engine/options.cpp:159
 msgid "End Turn"
@@ -1062,7 +1062,7 @@ msgstr "Открыть окно группы"
 
 #: src/engine/shortcutswindow.cpp:440
 msgid "Click to select a talent"
-msgstr ""
+msgstr "Кликните, чтобы выбрать талант"
 
 #: src/engine/skillwindow.cpp:82
 msgid "Total Free Points:"
@@ -1901,6 +1901,8 @@ msgid ""
 "Journalism students have a 'know it all' need, increasing by 2 their "
 "intelligence."
 msgstr ""
+"Студенты Журналисты обладают непомерной жаждой новой информации, что "
+"повышает их Интеллект на 2."
 
 #: data/classes/journalism.cls:11
 msgid ""
@@ -2077,6 +2079,7 @@ msgid ""
 "Because they can modify any situation to make money from it, they receive +2 "
 "of Wisdom."
 msgstr ""
+"За способность срубить бабло в любой ситуации, они получают +2 к Мудрости."
 
 #: data/classes/lawner.cls:13
 msgid ""
@@ -4434,9 +4437,11 @@ msgstr "Дед Отмороз"
 #~ msgid "Open Assign Attacks Window"
 #~ msgstr "Открыть расстановку атак"
 
-#, fuzzy
-#~ msgid "No talents"
-#~ msgstr "Нет талантов."
-
 #~ msgid "Melee Attack"
 #~ msgstr "Ближний бой"
+
+#~ msgid "Character's ranged attack."
+#~ msgstr "Дистанционная атака персонажа"
+
+#~ msgid "Ranged Attack"
+#~ msgstr "Дистанционная атака"
