@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
 "POT-Creation-Date: 2010-08-20 16:22-0300\n"
-"PO-Revision-Date: 2010-08-13 04:05+0000\n"
-"Last-Translator: zer berros <Unknown>\n"
+"PO-Revision-Date: 2010-09-15 14:17+0000\n"
+"Last-Translator: zer berros <cerverros@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-08-15 14:36+0000\n"
+"X-Launchpad-Export-Date: 2010-09-19 20:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: src/classes/actions.cpp:144
@@ -538,7 +538,7 @@ msgstr "Seleccionado"
 
 #: src/engine/featsel.cpp:359
 msgid "Remaining"
-msgstr ""
+msgstr "Restante"
 
 #: src/engine/featsel.cpp:469
 msgid "You can't select more talents"
@@ -546,7 +546,7 @@ msgstr "No puedes escoger más talentos"
 
 #: src/engine/featswindow.cpp:96
 msgid "Select"
-msgstr ""
+msgstr "Seleccionar"
 
 #: src/engine/initial.cpp:79
 msgid "New"
@@ -740,7 +740,7 @@ msgstr "Catalán"
 
 #: src/engine/options.cpp:56
 msgid "Occitan"
-msgstr ""
+msgstr "Occitano"
 
 #: src/engine/options.cpp:57
 msgid "Russian"
@@ -748,7 +748,7 @@ msgstr "Ruso"
 
 #: src/engine/options.cpp:58
 msgid "Japanese"
-msgstr ""
+msgstr "Japonés"
 
 #: src/engine/options.cpp:137
 msgid "Camera Rotate Left"
@@ -1066,7 +1066,7 @@ msgstr "Abrir ventana de grupo"
 
 #: src/engine/shortcutswindow.cpp:440
 msgid "Click to select a talent"
-msgstr ""
+msgstr "Haz click para seleccionar un talento."
 
 #: src/engine/skillwindow.cpp:82
 msgid "Total Free Points:"
@@ -1086,11 +1086,11 @@ msgstr "Coste"
 
 #: src/engine/skillwindow.cpp:234
 msgid "Base Attribute:"
-msgstr ""
+msgstr "Base de atributos."
 
 #: src/engine/skillwindow.cpp:245
 msgid "Unknow!"
-msgstr ""
+msgstr "¡Desconocido!"
 
 #: src/fight/fightSystem.cpp:151
 msgid "No more enemies."
@@ -2673,6 +2673,8 @@ msgid ""
 "Since Boys / Patys are highly emotional, Gothics receive +2 in intimidation "
 "against them."
 msgstr ""
+"Como Boys / Partys son altamente emocionales, Los Góticos reciven +2 en "
+"intimidación contra ellos."
 
 #: data/races/hippie.rca:1
 msgid "Hippie"
@@ -2780,11 +2782,11 @@ msgstr "Las Llamas Humanas reciben +2 a la Inteligencia"
 
 #: data/races/metaleiro.rca:1
 msgid "Headbanger"
-msgstr ""
+msgstr "Heavy"
 
 #: data/races/metaleiro.rca:2
 msgid "'Dark...'|(Anamatheus Iskurium)"
-msgstr ""
+msgstr "'Oscuro...'|(Anamatheus Iskurium)"
 
 #: data/races/metaleiro.rca:3
 msgid ""
@@ -2802,15 +2804,17 @@ msgstr ""
 "este tipo de ropas para 'ser diferentes', aunque todos ellos visten lo "
 "mismo. A ellos les encanta jugar con todo lo que encuentran, pensando que es "
 "un platillo, y cantando la letra de la música que aman. Usualmente "
-"categorizados como autistas, estas creaturias caminan con otros headbangers "
-"(de 2 a 5) y tienen la necesida de mostrar a otros su 'rebeldía'.  Son "
-"atraídos facilmente por todo lo que luce 'maligno', cuanto mas rudo mejor."
+"categorizados como autistas, estas creaturias caminan con otros Heavys (de 2 "
+"a 5) y tienen la necesida de mostrar a otros su 'rebeldía'.  Son atraídos "
+"facilmente por todo lo que luce 'maligno', cuanto mas rudo mejor."
 
 #: data/races/metaleiro.rca:6
 msgid ""
 "Since Boys / Patys are highly emotional, Headbangers receive +2 of "
 "intimidation against them."
 msgstr ""
+"Desde que los Boys / Patys son altamente emocionales, los Heavys reciben +2 "
+"en intimidación contra ellos."
 
 #: data/races/mutante.rca:1
 msgid "Mutant Human Cricket"
@@ -2834,6 +2838,8 @@ msgid ""
 "Since they eat Crickets, Human Crickets receive -4 on all social tests when "
 "dealing with someone of their race or insects."
 msgstr ""
+"Desde que ellos comen grillos, los Grillados Humanos reciben -4 en todas las "
+"pruebas sociales con insectos o criaturas de se especie."
 
 #: data/races/mutante.rca:8
 msgid "By obvious reasons, the Human Cricket receive + 6 of Jump."
@@ -2859,6 +2865,11 @@ msgid ""
 "way possible. Alone in the world, they aren't able to make friends with any "
 "other race and they always want to put a definite end to those they dislike."
 msgstr ""
+"Los Cabeza Rapada Maniaticos son una rara raza en el campus. Sin ningún "
+"sentido común, son criaturas que no pierden el tiempo en conseguir sus metas "
+"de manera rápida. Sólos en el mundo, son incapaces de hacer amigos que no "
+"sean de su misma raza, y siempre quieren terminar definitivamente con todo "
+"lo que no les gusta."
 
 #: data/races/skinhead.rca:6
 msgid ""
@@ -2961,6 +2972,10 @@ msgid ""
 "bowels, one time per day added by one more time for each level after the "
 "4th, inflicting 1d6+Biology Student Level points of damage."
 msgstr ""
+"Los Estudiantes de Biología pueden arrojar una botella llena de los gusanos "
+"recogidos en los intestinos de las lagartijas, una vez al día y una vez más "
+"por cada nivel superior al 4º. Inflige 1d6 + el Nivel del Estudiante de "
+"Biología, en puntos de daño."
 
 #: data/feats/biology/arc_impulse.fta:1
 msgid "Arc Impulse"
@@ -2976,6 +2991,14 @@ msgid ""
 "incredible Biology Student's strike. This feat will cause 1d6 + Biology "
 "Student Level points of damage."
 msgstr ""
+"En este momento, el Estudiante de Biología puede hacer 2 veces al día un "
+"gran combo con una lagartija y un fornicido de la siguiente manera: El "
+"fornicido se sube a la cola de la lagartija, y cuando la lagartija golpea al "
+"enemigo con su cola, lanza al pequeño insecto directamente a los ojos del "
+"enemigo (es necesario pasar una prueba de fortaleza para evitar la "
+"confusión, con una dificultad de 1d6 + el Nivel del Estudiante de Biología),"
+"seguido de un increíble golpedel Estudiante de Biología. Ésta hazaña causa "
+"1d6 + el Nvel del Estudiante de Biología en puntos de daño."
 
 #: data/feats/biology/mass_arthropds_attack.fta:1
 msgid "Mass Arthropds Attack"
@@ -2988,6 +3011,11 @@ msgid ""
 "to attack their enemies in a 10 meters radius, inflicting 2d8 + 1d6 per "
 "Biology Student Level greater than 10."
 msgstr ""
+"Cuantos más niveles pasan, más Estudiantes de Biología se van a vivir con "
+"los animales, así que pueden invocar, 2 veces al día, una pequeña horda de "
+"artrópodos para atacar a los enemigos situados en un radio de 10 metros, "
+"infligiendo 2d8 + 1d6 por cada Nivel del Estudiante de Biología superior a "
+"10."
 
 #: data/feats/compsci/world_conception.fta:3
 msgid "World Conception"
@@ -3001,7 +3029,7 @@ msgstr ""
 
 #: data/feats/gothic/lament_souls.fta:1
 msgid "Laments of One Thousand Souls"
-msgstr ""
+msgstr "Lamentos de las Mil Almas"
 
 #: data/feats/gothic/lament_souls.fta:2
 msgid ""
@@ -3056,6 +3084,15 @@ msgid ""
 "10 + Law Student Level to avoid being stunned and reduce the damage to a "
 "half."
 msgstr ""
+"En el cuarto nivel, los Estudiantes de Derecho, son tan insoportables que "
+"tratan de aprovecharse de cualquier persona inocente, ésto provoca su "
+"primera derrota: El estudiante es despedido de su periodo de entrenamiento "
+"voluntario. Después de esta mancha, la voz de los estudiantes se vuelve tan "
+"aguda y sonora que causa, cuando gritan, 1d4 puntos de daño, siendo capaz de "
+"aturdir al enemigo durante 1d6 turnos. Pasan una prueba de fortaleza todos "
+"los enemigos en un radio de 30 metros con una dificultad de 10 + el nivel "
+"del Estudiante de Derecho, para evitar ser sorprendidos y reducir el daño a "
+"la mitad."
 
 #: data/feats/mandatory/rookie.fta:1
 msgid "Rookie"
@@ -3079,6 +3116,9 @@ msgid ""
 "Physical Education Student is able to expel a sphere of fire that causes 6d6 "
 "(plus 2d6, for each level above 15) in Damage."
 msgstr ""
+"Una vez al día, y porque sus músculos han invadido sus órganos internos, los "
+"estudiantes de Educación Física son capaces de expulsar una bola de fuego "
+"que causa 6d6 (y 2d6 por cada nivel por encima de 15) en daños."
 
 #: data/feats/physicaled/i_am_a_little_conan.fta:1
 msgid "I'm a little Conan"
@@ -3114,6 +3154,9 @@ msgid ""
 "to affect his mentality status. System: The creature receives +3 on all his "
 "I Am Not A Fool tests."
 msgstr ""
+"La criatura tiene una voluntad prácticamente inquebrantable, siendo "
+"extremadamente dificil de modificar su mentalidad. Regla: La criatura recibe "
+"+3 en todas las pruebas de 'Yo no soy Idiota'."
 
 #: data/feats/elective/feline.fta:3
 msgid "Feline"
@@ -3130,7 +3173,7 @@ msgstr ""
 
 #: data/feats/elective/fugitive.fta:3
 msgid "Fugitive"
-msgstr ""
+msgstr "Fugitivo."
 
 #: data/feats/elective/fugitive.fta:4
 msgid ""
@@ -3159,6 +3202,8 @@ msgid ""
 "With this feat, the creature can react quickly to the danger. System: At the "
 "initiative tests, the creature receives +5 to his result."
 msgstr ""
+"Con ésta habilidad, la criatura puede reaccionar rápidamente al peligro. "
+"Regla: En las pruebas de iniciativa, la criatura recibe + 5 en el resultado."
 
 #: data/feats/elective/cant_touch_me.fta:3
 msgid "Can't Touch Me"
@@ -3170,6 +3215,9 @@ msgid ""
 "attacks. System: The creature will receive +2 in his Armature Class all the "
 "times that Dexterity is used to avoid hits."
 msgstr ""
+"La criatura es más inteligente que el resto, siendo capaz de evitar más "
+"fácilmente los ataques. Regla: La criatura recibe +2 en su armadura, todas "
+"las veces que se use la destreza para evitar golpes."
 
 #: data/feats/elective/hasty.fta:3
 msgid "Hasty"
@@ -3187,17 +3235,19 @@ msgstr ""
 
 #: data/feats/elective/bolivian_blood.fta:3
 msgid "Bolivian Blood"
-msgstr ""
+msgstr "Sangre Boliviana"
 
 #: data/feats/elective/bolivian_blood.fta:4
 msgid ""
 "The creature has the blood as if he lives in the bolivian's mountains, "
 "receiving +10 Life Points"
 msgstr ""
+"La criatura tiene la sangre como si viviera en las montañas de Bolivia, "
+"recibe +10 puntos de vida."
 
 #: data/feats/elective/pinocchios_aura.fta:3
 msgid "Pinocchio's Aura"
-msgstr ""
+msgstr "Aura de Pinocho."
 
 #: data/feats/elective/pinocchios_aura.fta:4
 msgid ""
@@ -3208,7 +3258,7 @@ msgstr ""
 
 #: data/feats/elective/coward_touch.fta:1
 msgid "Coward Touch"
-msgstr ""
+msgstr "Golpe Bajo."
 
 #: data/feats/elective/coward_touch.fta:2
 msgid ""
@@ -3216,6 +3266,8 @@ msgid ""
 "not follow clean-fight rules, inflicting 1d3+character level points of "
 "damage."
 msgstr ""
+"La criatura con Golpe Bajo, puede hacer, 3 veces al día, un ataque sucio, "
+"infligiendo 1d3 + el nivel de carácter, en puntos de daño."
 
 #: data/skills/acrobacias.ski:1
 msgid "Acrobats"
@@ -3228,6 +3280,10 @@ msgid ""
 "enemy areas without suffering Coward Attacks or fall from high places "
 "without being hurt and also make an impression on little girls."
 msgstr ""
+"El organismo acrobático, es capaz de realizar verdaderas hazañas, como "
+"cortar alcaparras, vailar Capoeira. Con ésta habilidad, es capaz de "
+"atravesar zonas del enemigo sin sufrir Golpes Bajos, o caer desde lugares "
+"altos sin sufrir daños, y también impresionar a las niñas."
 
 #: data/skills/adestrarbichos.ski:1
 msgid "Training Animals"
@@ -3243,7 +3299,7 @@ msgstr ""
 
 #: data/skills/arrombar.ski:1
 msgid "Burglary"
-msgstr ""
+msgstr "Robo con fuerza"
 
 #: data/skills/arrombar.ski:2
 msgid ""
@@ -3279,7 +3335,7 @@ msgstr ""
 
 #: data/skills/beber.ski:1
 msgid "Drinking"
-msgstr ""
+msgstr "Beber"
 
 #: data/skills/beber.ski:2
 msgid ""
@@ -3291,7 +3347,7 @@ msgstr ""
 
 #: data/skills/blefar.ski:1
 msgid "Bluff"
-msgstr ""
+msgstr "Tirar Faroles."
 
 #: data/skills/blefar.ski:2
 msgid ""
@@ -3347,7 +3403,7 @@ msgstr ""
 
 #: data/skills/cnhsofrimento.ski:1
 msgid "Knowledge: (Suffering)"
-msgstr ""
+msgstr "Conocimiento: (Sufrimiento)."
 
 #: data/skills/cnhsofrimento.ski:2
 msgid ""
@@ -3411,6 +3467,8 @@ msgid ""
 "This skill is tested when the creature is being cheated. You can resist a "
 "Bluff with this feature."
 msgstr ""
+"Ésta habilidad es puesta a prueba cuando la criatura está siendo engañada. "
+"Puedes resistir Faroles con ésta cara característica."
 
 #: data/skills/destreza.ski:2
 msgid ""
@@ -3457,7 +3515,7 @@ msgstr ""
 
 #: data/skills/equilibrio.ski:1
 msgid "Balance"
-msgstr ""
+msgstr "Equilibrio"
 
 #: data/skills/equilibrio.ski:2
 msgid ""
@@ -3486,6 +3544,8 @@ msgid ""
 "Is the skill of putting yourself in a bush or hiding in the shadows, with "
 "the aim of not being spotted."
 msgstr ""
+"Es la habilidad de esconderse en un arbusto u ocultarse entre las sombras, "
+"con el objetivo de no ser vistos."
 
 #: data/skills/falaridioma.ski:1
 msgid "Foreign Languages"
@@ -3738,6 +3798,8 @@ msgid ""
 "This skill measures how good you are at 'buying' people, getting some favors "
 "in exchange for money or other material stuff."
 msgstr ""
+"Ésta habilidad mide cómo es de bueno 'comprando' a la gente, conseguir "
+"favores a cambio de dinero, y chanchullos del estilo."
 
 #: data/skills/tocarinst.ski:1
 msgid "Play Instrument"
@@ -4198,7 +4260,7 @@ msgstr "Así que, ¡sal de aquí!"
 #: data/dialogs/tutorial/hippie.dlg:223 data/dialogs/tutorial/dona.dlg:94
 #: data/dialogs/tutorial/dona.dlg:107
 msgid "(Close dialog)"
-msgstr ""
+msgstr "(Fin del diálogo)"
 
 #: data/dialogs/tutorial/santa.dlg:133
 msgid "I won't talk with you, heretic."
@@ -4227,7 +4289,7 @@ msgstr ""
 #: data/dialogs/tutorial/santa.dlg:167 data/dialogs/tutorial/santa.dlg:242
 #: data/dialogs/tutorial/santa.dlg:263
 msgid "Amen, brother!"
-msgstr ""
+msgstr "¡Amen, tronco!"
 
 #: data/dialogs/tutorial/santa.dlg:177
 msgid "Maybe."
@@ -4370,11 +4432,11 @@ msgstr "¡Ahora!"
 
 #: data/dialogs/tutorial/hippie.dlg:6
 msgid "Welcome to the F.S.C."
-msgstr ""
+msgstr "Bienvenido a la I.S.L."
 
 #: data/dialogs/tutorial/hippie.dlg:10
 msgid "F.S.C.?"
-msgstr ""
+msgstr "¿I.S.L.?"
 
 #: data/dialogs/tutorial/hippie.dlg:22
 msgid "Free Software Church. Do you dig it, bro?"
@@ -4406,7 +4468,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/hippie.dlg:69
 msgid "No way!"
-msgstr ""
+msgstr "¡De ninguna manera!"
 
 #: data/dialogs/tutorial/hippie.dlg:79
 msgid "I heard what you've done to Logan's notebook, square!"
@@ -4430,7 +4492,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/hippie.dlg:111
 msgid "No talk to you. What a drag!"
-msgstr ""
+msgstr "¡No te hablaba a tí, pesado!"
 
 #: data/dialogs/tutorial/hippie.dlg:124
 msgid ""
@@ -4440,7 +4502,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/hippie.dlg:128
 msgid "For sure."
-msgstr ""
+msgstr "Por supuesto."
 
 #: data/dialogs/tutorial/hippie.dlg:133
 msgid "I can't! I love bloody works!"
@@ -4453,7 +4515,7 @@ msgstr ""
 #: data/dialogs/tutorial/hippie.dlg:147 data/dialogs/tutorial/dona.dlg:194
 #: data/dialogs/tutorial/dona.dlg:227
 msgid "I'll get it."
-msgstr ""
+msgstr "Voy a por ello."
 
 #: data/dialogs/tutorial/hippie.dlg:150
 msgid "They're out of stock!"
@@ -4465,11 +4527,11 @@ msgstr ""
 
 #: data/dialogs/tutorial/hippie.dlg:168
 msgid "Sure, that is."
-msgstr ""
+msgstr "Claro, eso es."
 
 #: data/dialogs/tutorial/hippie.dlg:177
 msgid "Don't lie to me, bro!"
-msgstr ""
+msgstr "¡No me mientas, tron!"
 
 #: data/dialogs/tutorial/hippie.dlg:190
 msgid "Oh, you got it. A peak experience waits!"
@@ -4481,7 +4543,7 @@ msgstr "¡Le has matado! ¡Cerdo!"
 
 #: data/dialogs/tutorial/dona.dlg:6
 msgid "Hello stranger!"
-msgstr ""
+msgstr "¡Hola forastero!"
 
 #: data/dialogs/tutorial/dona.dlg:11
 msgid "I need some chicken ration."
@@ -4517,7 +4579,7 @@ msgstr "Pero, ¿cómo te llamas?"
 
 #: data/dialogs/tutorial/dona.dlg:58
 msgid "Are you a piggy cop?"
-msgstr ""
+msgstr "¿Eres un cerdo policía?"
 
 #: data/dialogs/tutorial/dona.dlg:74
 msgid "F-A-R-M, farm, the farm."
@@ -4537,7 +4599,7 @@ msgstr "¡Cerdo!"
 
 #: data/dialogs/tutorial/dona.dlg:103
 msgid "Neither I."
-msgstr ""
+msgstr "Ni yo."
 
 #: data/dialogs/tutorial/dona.dlg:116
 msgid "Ch... ch.. chicken ration? What are you talking about?"
@@ -4553,7 +4615,7 @@ msgstr "Me encanta el pollo."
 
 #: data/dialogs/tutorial/dona.dlg:132
 msgid "Because I want!"
-msgstr ""
+msgstr "¡Porque quiero!"
 
 #: data/dialogs/tutorial/dona.dlg:145
 msgid "I won't sell anything more to that lazy hippie."
@@ -4561,11 +4623,11 @@ msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:149
 msgid "Maybe if I do some favor to you?"
-msgstr ""
+msgstr "Tal vez, ¿si te hago un favor?"
 
 #: data/dialogs/tutorial/dona.dlg:161
 msgid "Don't lie to me! It's for the hippie!"
-msgstr ""
+msgstr "¡No me mientas!, ¡Es para el hippie!"
 
 #: data/dialogs/tutorial/dona.dlg:177
 msgid "An enthusiast? You'll love it!"
@@ -4603,7 +4665,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:270
 msgid "What a world! Threats, threats and more threats..."
-msgstr ""
+msgstr "¡Vaya sitio!, Amenazas, amenazas y más amenazas..."
 
 #: data/missions/tutorial/mission1.mis:2
 msgid "Find Chrono Trigger cartdrige for Logan."
@@ -4623,7 +4685,7 @@ msgstr ""
 
 #: data/missions/tutorial/hippie1.mis:2
 msgid "Get some psychedelic ration for F.S.C. Hippie"
-msgstr ""
+msgstr "Consigue algunas raciones psycodélicas de la I.S.L. hippie."
 
 #: data/missions/tutorial/santa2.mis:2
 msgid "Install Ruindows at the hippie's computer."
@@ -4631,7 +4693,7 @@ msgstr "Instala Ruindown en el ordenador del hippie."
 
 #: data/models/objetos/books/mjack/mjack.dcc:1
 msgid "Monster Book Fragment"
-msgstr ""
+msgstr "Fragmento del Libro de Mounstruos."
 
 #: data/models/natural/cogumelo/cogumelo.dcc:1
 msgid "Mushroom"
@@ -4643,7 +4705,7 @@ msgstr "Huevo."
 
 #: data/models/objetos/itens/healkit/healkit.dcc:1
 msgid "First Aid Kit"
-msgstr ""
+msgstr "Botiquín de primeros auxilios."
 
 #: data/models/objetos/itens/garrafa1/garrafa1.dcc:1
 msgid "Beer Bottle"
@@ -4798,11 +4860,11 @@ msgstr "Pesado"
 msgid "Santa Claws"
 msgstr "Santa Claws"
 
-#~ msgid "Open Assign Attacks Window"
-#~ msgstr "Abrir ventana de asignación de ataque"
-
 #~ msgid "Not found in dialog: %d\n"
 #~ msgstr "No se encontró en el diálogo: %d\n"
+
+#~ msgid "Open Assign Attacks Window"
+#~ msgstr "Abrir ventana de asignación de ataque"
 
 #~ msgid ""
 #~ "DccNiTghtmare is developed under Public Domain: Feel free to use its "
