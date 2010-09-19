@@ -8,14 +8,13 @@ msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
 "POT-Creation-Date: 2010-08-20 16:22-0300\n"
-"PO-Revision-Date: 2010-05-25 22:18+0000\n"
-"Last-Translator: Christian Sturm <Unknown>\n"
+"PO-Revision-Date: 2010-09-06 15:31+0000\n"
+"Last-Translator: firefoxx11 <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
-"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-29 14:44+0000\n"
+"X-Launchpad-Export-Date: 2010-09-19 20:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: src/classes/actions.cpp:144
@@ -531,23 +530,23 @@ msgstr "Dialog"
 
 #: src/engine/featsel.cpp:168
 msgid "Available"
-msgstr ""
+msgstr "Verfügbar"
 
 #: src/engine/featsel.cpp:172
 msgid "Selected"
-msgstr ""
+msgstr "Ausgewählt"
 
 #: src/engine/featsel.cpp:359
 msgid "Remaining"
-msgstr ""
+msgstr "Verbleibend"
 
 #: src/engine/featsel.cpp:469
 msgid "You can't select more talents"
-msgstr ""
+msgstr "Sie können nicht mehr Talente sehen"
 
 #: src/engine/featswindow.cpp:96
 msgid "Select"
-msgstr ""
+msgstr "Auswählen"
 
 #: src/engine/initial.cpp:79
 msgid "New"
@@ -741,7 +740,7 @@ msgstr "Katalanisch"
 
 #: src/engine/options.cpp:56
 msgid "Occitan"
-msgstr ""
+msgstr "Okzitanisch"
 
 #: src/engine/options.cpp:57
 msgid "Russian"
@@ -749,7 +748,7 @@ msgstr "Russisch"
 
 #: src/engine/options.cpp:58
 msgid "Japanese"
-msgstr ""
+msgstr "Japanisch"
 
 #: src/engine/options.cpp:137
 msgid "Camera Rotate Left"
@@ -761,11 +760,11 @@ msgstr "Kamera linksherum drehen"
 
 #: src/engine/options.cpp:139
 msgid "Camera Rotate Up"
-msgstr ""
+msgstr "Kamera nach oben drehen"
 
 #: src/engine/options.cpp:140
 msgid "Camera Rotate Down"
-msgstr ""
+msgstr "Kamera nach unten drehen"
 
 #: src/engine/options.cpp:141
 msgid "Camera Zoom Up"
@@ -777,11 +776,11 @@ msgstr "Kamera herabzoomen"
 
 #: src/engine/options.cpp:143
 msgid "Camera Top"
-msgstr ""
+msgstr "Kamera oben"
 
 #: src/engine/options.cpp:144
 msgid "Camera Bottom"
-msgstr ""
+msgstr "Kamera unten"
 
 #: src/engine/options.cpp:145
 msgid "Camera Zoom Max"
@@ -1067,7 +1066,7 @@ msgstr "Gruppenfenster öffnen"
 
 #: src/engine/shortcutswindow.cpp:440
 msgid "Click to select a talent"
-msgstr ""
+msgstr "Klicken Sie, um ein Talent auszuwählen"
 
 #: src/engine/skillwindow.cpp:82
 msgid "Total Free Points:"
@@ -1091,7 +1090,7 @@ msgstr ""
 
 #: src/engine/skillwindow.cpp:245
 msgid "Unknow!"
-msgstr ""
+msgstr "Unbekannt!"
 
 #: src/fight/fightSystem.cpp:151
 msgid "No more enemies."
@@ -1332,7 +1331,8 @@ msgstr ""
 "diesem Zug nicht möglich ist."
 
 #: data/comics/tutorial/combat/combat.dcb:205
-msgid "You can attack using your current weapon by simple clicking the target."
+msgid ""
+"You can attack using your current weapon by simple clicking the target."
 msgstr ""
 "Du kannst mit deiner Waffe mit einem einfachen Klick auf dein Ziel angreifen."
 
@@ -1677,15 +1677,15 @@ msgid ""
 "into some art source, like music. The Music Student is a creature with "
 "extreme patience, needed to learn all the techniques related to ternary "
 "compass atonalisms, has the capacity to create them and a distorted taste "
-"for playing one of the most bizarre and occult musical instruments.|"
-"Creator's Note: 'Based on the idea that musical tastes are distinct and only "
-"the the most open-minded people appreciate distinct rhythms (obviously all "
-"that aren't attempts to kill the musical concept), the class was made. So, "
-"the same sound, Bach for example, can be beautiful music or terribly boring, "
-"depending upon the ear of the listener. Probably a progressive fan will like "
-"Bach, but a fan of Tati-Quebra-Barraco, without any musical sense, will "
-"think Bach is shit. So, the Music Student will be virtuous and "
-"misunderstood.'"
+"for playing one of the most bizarre and occult musical "
+"instruments.|Creator's Note: 'Based on the idea that musical tastes are "
+"distinct and only the the most open-minded people appreciate distinct "
+"rhythms (obviously all that aren't attempts to kill the musical concept), "
+"the class was made. So, the same sound, Bach for example, can be beautiful "
+"music or terribly boring, depending upon the ear of the listener. Probably a "
+"progressive fan will like Bach, but a fan of Tati-Quebra-Barraco, without "
+"any musical sense, will think Bach is shit. So, the Music Student will be "
+"virtuous and misunderstood.'"
 msgstr ""
 
 #: data/classes/music.cls:7
@@ -2167,8 +2167,8 @@ msgstr ""
 msgid ""
 "'Hey, girls from OT, there's a question I've had in my mind since I entered "
 "the University. Can you answer it for me?...| No, we don't know what our "
-"diploma will allow us to do and we're bored by others asking us about it!'|"
-"(Turmalina, Computer Science Student, interviewing three OT Students)"
+"diploma will allow us to do and we're bored by others asking us about "
+"it!'|(Turmalina, Computer Science Student, interviewing three OT Students)"
 msgstr ""
 
 #: data/classes/to.cls:3
@@ -2192,7 +2192,8 @@ msgid ""
 msgstr ""
 
 #: data/classes/to.cls:9
-msgid "+1 of Wisdom, for the inutiles knowledges obtained watching TV novels."
+msgid ""
+"+1 of Wisdom, for the inutiles knowledges obtained watching TV novels."
 msgstr ""
 
 #: data/classes/to.cls:11
@@ -2254,8 +2255,8 @@ msgstr ""
 
 #: data/races/autista.rca:6
 msgid ""
-"Being far too strange in someone else's eyes, the Strange Autistic receives "
-"-4 on all Social Tests when dealing with a target of opposite tendencies."
+"Being far too strange in someone else's eyes, the Strange Autistic receives -"
+"4 on all Social Tests when dealing with a target of opposite tendencies."
 msgstr ""
 
 #: data/races/autista.rca:8
@@ -2489,9 +2490,8 @@ msgstr ""
 
 #: data/races/skinhead.rca:6
 msgid ""
-"Since they don't have common sense, Skinhead Maniacs have to be of "
-"Alignment / Tendency Capitalist Proprietary Software or Chaotic Proprietary "
-"Software"
+"Since they don't have common sense, Skinhead Maniacs have to be of Alignment "
+"/ Tendency Capitalist Proprietary Software or Chaotic Proprietary Software"
 msgstr ""
 
 #: data/races/skinhead.rca:12
@@ -3094,8 +3094,8 @@ msgid ""
 "It's the physical strength of the creature, measuring how gross and "
 "potential it is. A creature with too much strength can beat like a Titan and "
 "smash like a Hulk. A creature with low strength can't beat anyone and is "
-"frequently subjugated by others like a little chicken.||Ameiva: Strength 1|"
-"Ratazana: Strength 2|Ente: Strength 23"
+"frequently subjugated by others like a little chicken.||Ameiva: Strength "
+"1|Ratazana: Strength 2|Ente: Strength 23"
 msgstr ""
 
 #: data/skills/furtividade.ski:1
@@ -3156,7 +3156,8 @@ msgstr "Nicht verwendet"
 
 #: data/skills/notused.ski:2
 msgid "This Skill Place is Avaible for new skills in the future."
-msgstr "Dieser Fähigkeitsplatz wird für zukünftige Fähigkeiten verfügbar sein."
+msgstr ""
+"Dieser Fähigkeitsplatz wird für zukünftige Fähigkeiten verfügbar sein."
 
 #: data/skills/observar.ski:1
 msgid "Observe"
@@ -3269,8 +3270,8 @@ msgid ""
 "Measures the creature' expertise in dealing with any sort of real-life "
 "situation. A very wise organism can do 10 years of post-graduate studies "
 "without any problem. A creature with few wisdom points can get lost on the "
-"way from the university restaurant to the bathroom.||Ameiva: Wisdom 4|"
-"Ratazana: Wisdom 6|Ente: Wisdom 12"
+"way from the university restaurant to the bathroom.||Ameiva: Wisdom "
+"4|Ratazana: Wisdom 6|Ente: Wisdom 12"
 msgstr ""
 
 #: data/skills/semtempo.ski:1
@@ -3461,7 +3462,8 @@ msgid "I am Logan, maintainer of this occupation."
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:23
-msgid "Occupation? Is this, the cleanest house I've ever seen, an occupation?"
+msgid ""
+"Occupation? Is this, the cleanest house I've ever seen, an occupation?"
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:26 data/dialogs/tutorial/logan.dlg:55
@@ -3568,8 +3570,8 @@ msgstr "Ich werde sehen, was ich tun kann."
 
 #: data/dialogs/tutorial/logan.dlg:180
 msgid ""
-"Hey, have you heard about the Vermin Extermination Services of S.C.O.U.R.G."
-"E ?"
+"Hey, have you heard about the Vermin Extermination Services of S.C.O.U.R.G.E "
+"?"
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:193
@@ -3733,7 +3735,8 @@ msgid "I won't talk with you, heretic."
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:146
-msgid "I'm waiting for you install the Ruindows on the occupation's notebook!"
+msgid ""
+"I'm waiting for you install the Ruindows on the occupation's notebook!"
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:150 data/dialogs/tutorial/santa.dlg:228
@@ -4321,13 +4324,6 @@ msgstr "Schwer"
 msgid "Santa Claws"
 msgstr "Santa Claws"
 
-#~ msgid "Open Assign Attacks Window"
-#~ msgstr "Attackenzuweisungsfenster öffnen"
-
-#, fuzzy
-#~ msgid "No talents"
-#~ msgstr "Keine Talente."
-
 #~ msgid "Charism"
 #~ msgstr "Charisma"
 
@@ -4339,3 +4335,6 @@ msgstr "Santa Claws"
 
 #~ msgid "Can't open skill file: %s \n"
 #~ msgstr "Kann die Fertigkeitendatei nicht öffnen: %s \n"
+
+#~ msgid "Open Assign Attacks Window"
+#~ msgstr "Attackenzuweisungsfenster öffnen"
