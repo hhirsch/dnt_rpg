@@ -1,17 +1,17 @@
-# Russian translation for dccnitghtmare
-# Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
+# Arabic translation for dccnitghtmare
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the dccnitghtmare package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
 "POT-Creation-Date: 2010-08-20 16:22-0300\n"
-"PO-Revision-Date: 2010-10-05 06:31+0000\n"
-"Last-Translator: Alexander 'FONTER' Zinin <spore_09@mail.ru>\n"
-"Language-Team: Russian <ru@li.org>\n"
-"Language: ru\n"
+"PO-Revision-Date: 2010-10-30 23:07+0000\n"
+"Last-Translator: Ahmed Mohammed <Unknown>\n"
+"Language-Team: Arabic <ar@li.org>\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,87 +21,87 @@ msgstr ""
 #: src/classes/actions.cpp:144
 #, c-format
 msgid "%s try to attack %s"
-msgstr "%s попытка нападения %s"
+msgstr "%s جرب الهجوم على %s"
 
 #: src/classes/actions.cpp:149
 #, c-format
 msgid "%s try to heal %s"
-msgstr "%s попытка лечения %s"
+msgstr "%s جرب معالجة %s"
 
 #: src/classes/actions.cpp:160 src/classes/feats.cpp:294
 #: src/classes/feats.cpp:347
 msgid "Too far away for action!"
-msgstr "Слишком далеко для действия!"
+msgstr ""
 
 #: src/classes/actions.cpp:257 src/classes/actions.cpp:280
 msgid "Miss."
-msgstr "Промах."
+msgstr "أخطأت."
 
 #: src/classes/actions.cpp:260 src/classes/actions.cpp:264
 msgid "Critical Miss!"
-msgstr "Критическая ошибка!"
+msgstr "خطأ حاسم!"
 
 #: src/classes/actions.cpp:307
 #, c-format
 msgid "Healed %d points."
-msgstr "Вылечено %d здоровья"
+msgstr ""
 
 #: src/classes/actions.cpp:311
 #, c-format
 msgid "Hit for %d points."
-msgstr "Хит %d очков!"
+msgstr "اضرب لأجل %d نقاط."
 
 #: src/classes/actions.cpp:330 src/classes/actions.cpp:333
 msgid "Critical Heal!"
-msgstr "Удачное лечение!"
+msgstr ""
 
 #: src/classes/actions.cpp:338 src/classes/actions.cpp:342
 msgid "Critical Hit!"
-msgstr "Критический удар"
+msgstr ""
 
 #: src/classes/defs.cpp:256
 msgid "Level"
-msgstr "Уровень"
+msgstr "مستوى"
 
 #: src/classes/defs.cpp:262 src/engine/charwindow.cpp:211
 msgid "Fortitude"
-msgstr "Удача"
+msgstr ""
 
 #: src/classes/defs.cpp:268 src/engine/charwindow.cpp:216
 msgid "Reflexes"
-msgstr "Рефлексы"
+msgstr ""
 
 #: src/classes/defs.cpp:275 src/engine/charwindow.cpp:221
 msgid "I am Not a Fool"
-msgstr "Я не дурак"
+msgstr "أنا لست غبيا"
 
 #: src/classes/feats.cpp:212
 msgid "Invalid Talent"
-msgstr "Неверный талант"
+msgstr "موهبة غير فاعلة"
 
 #: src/classes/feats.cpp:234 src/engine/dccnit.cpp:2240
 msgid "Not enought points to use!"
-msgstr "Недостаточно очков для использования!"
+msgstr ""
 
 #: src/classes/mission.cpp:531 src/engine/dialog.cpp:1185
 #, c-format
 msgid "Mission Completed: %d XP!"
-msgstr "Миссия завершена: получено %d опыта!"
+msgstr "تمت المهمة: %d XP !"
 
 #: src/classes/mission.cpp:548 src/classes/mission.cpp:551
 msgid "Mission Failure!"
-msgstr "Миссия провалена!"
+msgstr "فشلت المهمة!"
 
 #: src/engine/alignwindow.cpp:46
 msgid "Tendency & Alignment"
-msgstr "Стремление и Равнение"
+msgstr ""
 
 #: src/engine/alignwindow.cpp:72 src/engine/aspectwindow.cpp:93
 #: src/engine/attwindow.cpp:236 src/engine/classwindow.cpp:117
 #: src/engine/featsel.cpp:240 src/engine/options.cpp:1093
 #: src/engine/racewindow.cpp:117 src/engine/skillwindow.cpp:159
 msgid "Confirm"
-msgstr "Подтвердить"
+msgstr "تأكيد"
 
 #: src/engine/alignwindow.cpp:76 src/engine/aspectwindow.cpp:97
 #: src/engine/attwindow.cpp:240 src/engine/barterwindow.cpp:68
@@ -109,333 +109,333 @@ msgstr "Подтвердить"
 #: src/engine/options.cpp:1097 src/engine/racewindow.cpp:121
 #: src/engine/skillwindow.cpp:162
 msgid "Cancel"
-msgstr "Отменить"
+msgstr "إلغاء"
 
 #: src/engine/aspectwindow.cpp:48
 msgid "Aspect"
-msgstr "Внешний вид"
+msgstr ""
 
 #: src/engine/aspectwindow.cpp:67 src/engine/charwindow.cpp:107
 msgid "Name:"
-msgstr "Имя:"
+msgstr "الاسم:"
 
 #: src/engine/aspectwindow.cpp:72 src/engine/charwindow.cpp:110
 msgid "Age:"
-msgstr "Возраст:"
+msgstr "العمر:"
 
 #: src/engine/aspectwindow.cpp:76 src/engine/charwindow.cpp:125
 msgid "Sex:"
-msgstr "Пол:"
+msgstr "النوع:"
 
 #: src/engine/attwindow.cpp:58
 msgid "Attributes"
-msgstr "Атрибуты"
+msgstr "خواص"
 
 #: src/engine/attwindow.cpp:80
 msgid "Roll"
-msgstr "Бросок"
+msgstr ""
 
 #: src/engine/attwindow.cpp:83
 msgid "Clear"
-msgstr "Очистить"
+msgstr "مسح"
 
 #: src/engine/attwindow.cpp:87
 msgid "Auto"
-msgstr "Автоматически"
+msgstr "تلقائي"
 
 #: src/engine/attwindow.cpp:90 src/engine/charwindow.cpp:168
 #: data/skills/forca.ski:1
 msgid "Strength"
-msgstr "Сила"
+msgstr "المقدرة"
 
 #: src/engine/attwindow.cpp:110 src/engine/charwindow.cpp:173
 #: data/skills/destreza.ski:1
 msgid "Dexterity"
-msgstr "Ловкость"
+msgstr ""
 
 #: src/engine/attwindow.cpp:130 src/engine/charwindow.cpp:178
 #: data/skills/constituicao.ski:1
 msgid "Constitution"
-msgstr "Телосложение"
+msgstr "الدستور"
 
 #: src/engine/attwindow.cpp:150 src/engine/charwindow.cpp:183
 #: data/skills/inteligencia.ski:1
 msgid "Intelligence"
-msgstr "Интеллект"
+msgstr "استخبارات"
 
 #: src/engine/attwindow.cpp:171 src/engine/charwindow.cpp:188
 #: data/skills/sabedoria.ski:1
 msgid "Wisdom"
-msgstr "Мудрость"
+msgstr "حكمة"
 
 #: src/engine/attwindow.cpp:192 src/engine/charwindow.cpp:193
 #: data/skills/carisma.ski:1
 msgid "Charisma"
-msgstr "Привлекательность"
+msgstr "جاذبية"
 
 #: src/engine/attwindow.cpp:224
 msgid "Attribute Description"
-msgstr "Описание атрибута"
+msgstr "وصف الظاهرة"
 
 #: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:573
 #: src/engine/dccnit.cpp:2239 src/engine/featsel.cpp:468
 #: src/engine/inventwindow.cpp:364 src/engine/options.cpp:1386
 msgid "Warning"
-msgstr "Предупреждение"
+msgstr "إنذار"
 
 #: src/engine/attwindow.cpp:552
 msgid "You Need to Assign All Attributes."
-msgstr "Вы должны распределить все параметры"
+msgstr "عليك تعيين كافة الظواهر."
 
 #: src/engine/barterwindow.cpp:52 src/engine/dialog.cpp:1488
 msgid "Barter"
-msgstr "Обмен"
+msgstr "مقايضة"
 
 #: src/engine/barterwindow.cpp:64
 msgid "Offer"
-msgstr "Предложение"
+msgstr "عرض"
 
 #: src/engine/barterwindow.cpp:66
 msgid "Impose"
-msgstr "Завершить"
+msgstr "فرض"
 
 #: src/engine/barterwindow.cpp:94 src/engine/barterwindow.cpp:104
 #: src/engine/inventwindow.cpp:56 src/engine/options.cpp:164
 msgid "Inventory"
-msgstr "Инвентарь"
+msgstr "مخزن"
 
 #: src/engine/barterwindow.cpp:259
 msgid "The barter was accepted."
-msgstr "Готов к обмену."
+msgstr "تم قبول المقايضة."
 
 #: src/engine/barterwindow.cpp:264
 msgid "The barter was rejected."
-msgstr "Обмен был отклонён."
+msgstr "تم رفض المقايضة."
 
 #: src/engine/barterwindow.cpp:284
 msgid "The barter imposition was accepted."
-msgstr "Согласен с завершением обмена"
+msgstr "تم قبول القايضة المفروضة."
 
 #: src/engine/barterwindow.cpp:289
 msgid "The barter imposition was rejected."
-msgstr "Завершение обмена отклонено"
+msgstr "تم رفض القايضة المفروضة."
 
 #: src/engine/barterwindow.cpp:308 src/engine/inventwindow.cpp:215
 msgid "Remove"
-msgstr "Убрать"
+msgstr "إزالة"
 
 #: src/engine/briefing.cpp:55 src/engine/options.cpp:163
 msgid "Briefing"
-msgstr "Брифинг"
+msgstr "إحاطة"
 
 #: src/engine/briefing.cpp:57
 msgid "Welcome to DNT!"
-msgstr "Добро пожаловать в DNT!"
+msgstr "أهلا في DNT!"
 
 #: src/engine/briefing.cpp:153
 msgid "Success"
-msgstr "Успешно"
+msgstr "نجاح"
 
 #: src/engine/briefing.cpp:153
 msgid "Failure"
-msgstr "Неудача"
+msgstr "فشل"
 
 #: src/engine/charwindow.cpp:116
 msgid "Female"
-msgstr "Женщина"
+msgstr "أنثى"
 
 #: src/engine/charwindow.cpp:119
 msgid "Male"
-msgstr "Мужчина"
+msgstr "ذكر"
 
 #: src/engine/charwindow.cpp:122
 msgid "Undefined"
-msgstr "Неопределено"
+msgstr "غير معرّف"
 
 #: src/engine/charwindow.cpp:128
 msgid "Race:"
-msgstr "Раса:"
+msgstr "أصل:"
 
 #: src/engine/charwindow.cpp:131
 msgid "Alignment:"
-msgstr "Выравнивание:"
+msgstr "محاذاة:"
 
 #: src/engine/charwindow.cpp:135
 msgid "XP"
-msgstr "Опыт"
+msgstr "XP"
 
 #: src/engine/charwindow.cpp:136
 msgid "Next Level"
-msgstr "Следующий уровень"
+msgstr "المستوى التالي"
 
 #: src/engine/charwindow.cpp:142
 msgid "HP"
-msgstr "Здоровье"
+msgstr ""
 
 #: src/engine/charwindow.cpp:145
 msgid "AC"
-msgstr "Питание"
+msgstr ""
 
 #: src/engine/charwindow.cpp:206
 msgid "Total Level"
-msgstr "Суммарный уровень"
+msgstr "مجموع المستوى"
 
 #: src/engine/charwindow.cpp:226
 msgid "Base Attack Modifier"
-msgstr "Модификатор базовой атаки"
+msgstr ""
 
 #: src/engine/charwindow.cpp:231
 msgid "Size Modifier"
-msgstr "Модификатор размера"
+msgstr ""
 
 #: src/engine/charwindow.cpp:259
 msgid "Level Up"
-msgstr "Следующий уровень"
+msgstr ""
 
 #: src/engine/charwindow.cpp:265 src/engine/featsel.cpp:165
 #: src/engine/featswindow.cpp:73
 msgid "Talents"
-msgstr "Таланты"
+msgstr "مواهب"
 
 #: src/engine/charwindow.cpp:269 src/engine/skillwindow.cpp:74
 msgid "Skills"
-msgstr "Умения"
+msgstr "مهارات"
 
 #: src/engine/charwindow.cpp:273 src/engine/featswindow.cpp:93
 #: src/engine/skillwindow.cpp:169 src/gui/window.cpp:151
 msgid "Close"
-msgstr "Закрыть"
+msgstr "إغلاق"
 
 #: src/engine/charwindow.cpp:443
 msgid "Main Weapon"
-msgstr "Основное оружие"
+msgstr "سلاح رئيسي"
 
 #: src/engine/charwindow.cpp:447
 msgid "Secondary Weapon"
-msgstr "Дополнительное оружие"
+msgstr "سلاح ثانوي"
 
 #: src/engine/charwindow.cpp:451
 msgid "Weapon"
-msgstr "Оружие"
+msgstr "سلاح"
 
 #: src/engine/charwindow.cpp:463
 msgid "Unarmed"
-msgstr "Безоружный"
+msgstr "غير مدرع"
 
 #: src/engine/charwindow.cpp:469
 msgid "Not Applicable"
-msgstr "Неприменимо"
+msgstr "غير ممكن"
 
 #: src/engine/classwindow.cpp:83
 msgid "Class"
-msgstr "Класс"
+msgstr "تصنيف"
 
 #: src/engine/classwindow.cpp:94 src/engine/racewindow.cpp:94
 msgid "Characteristics"
-msgstr "Характеристики"
+msgstr ""
 
 #: src/engine/classwindow.cpp:95 src/engine/racewindow.cpp:95
 msgid "Description"
-msgstr "Описание"
+msgstr "توصيف"
 
 #: src/engine/classwindow.cpp:153
 msgid "Life Dice"
-msgstr "Кубик Жизни"
+msgstr ""
 
 #: src/engine/classwindow.cpp:157
 msgid "Skill Points"
-msgstr "Очки умений"
+msgstr "نقاط المهارة"
 
 #: src/engine/classwindow.cpp:186
 msgid "First Level"
-msgstr "Первый уровень"
+msgstr "المستوى الاول"
 
 #: src/engine/classwindow.cpp:214
 msgid "Other Levels"
-msgstr "Другие уровни"
+msgstr "مستويات اخرى"
 
 #: src/engine/classwindow.cpp:219
 msgid "Class Modifiers"
-msgstr "Модификаторы класса"
+msgstr "تصنيف تعديلات"
 
 #: src/engine/classwindow.cpp:231 src/engine/racewindow.cpp:172
 msgid "No Modifiers."
-msgstr "Нет модификаторов."
+msgstr "لا تعديلات."
 
 #: src/engine/classwindow.cpp:239
 msgid "Class Talents"
-msgstr "Таланты класса"
+msgstr "تصنيف مواهب"
 
 #: src/engine/classwindow.cpp:258 src/engine/featswindow.cpp:83
 #: src/engine/racewindow.cpp:190
 msgid "No Talents."
-msgstr "Нет талантов."
+msgstr "لا مواهب."
 
 #: src/engine/classwindow.cpp:266
 msgid "Class Skills"
-msgstr "Навыки класса"
+msgstr "تصنيف مهارات"
 
 #: src/engine/classwindow.cpp:285 src/engine/racewindow.cpp:216
 msgid "No Skills."
-msgstr "Нет умений."
+msgstr "لا مهارات."
 
 #: src/engine/dccnit.cpp:513 src/engine/dccnit.cpp:564
 msgid "Error"
-msgstr "Ошибка"
+msgstr "خطأ"
 
 #: src/engine/dccnit.cpp:513
 msgid "Can't load the saved game!"
-msgstr "Не удалось загрузить сохранненую игру!"
+msgstr "تعذر تحميل اللعبة المحفوظة!"
 
 #: src/engine/dccnit.cpp:559
 msgid "Information"
-msgstr "Информация"
+msgstr "معلومات"
 
 #: src/engine/dccnit.cpp:560
 msgid "The game was saved!"
-msgstr "Игра сохранена!"
+msgstr "تم حفظ اللعبة!"
 
 #: src/engine/dccnit.cpp:564
 msgid "Can't save game!"
-msgstr "Не удалось сохранить игру!"
+msgstr "تعذر حفظ اللعبة!"
 
 #: src/engine/dccnit.cpp:574
 msgid "Can't save game while fighting!"
-msgstr "Невозможно сохранить игру во время битвы!"
+msgstr "يتعذر حفظ اللعبة أثناء العراك!"
 
 #: src/engine/dccnit.cpp:708
 msgid "Saving Current Map Modifications"
-msgstr "Сохраняю изменения текущей карты"
+msgstr ""
 
 #: src/engine/dccnit.cpp:743
 #, c-format
 msgid "Loading Map: %s"
-msgstr "Загружаю карту: %s"
+msgstr ""
 
 #: src/engine/dccnit.cpp:808
 #, c-format
 msgid "Loading NPC: %s"
-msgstr "Загружаю NPC: %s"
+msgstr ""
 
 #: src/engine/dccnit.cpp:847
 msgid "Creating MiniMap"
-msgstr "Создание миникарты"
+msgstr ""
 
 #: src/engine/dccnit.cpp:853
 msgid "Putting GUI on Screen"
-msgstr "Размещаю GUI на экране"
+msgstr ""
 
 #: src/engine/dccnit.cpp:901
 msgid "Loading Particles"
-msgstr "Загружаю частицы"
+msgstr ""
 
 #: src/engine/dccnit.cpp:931
 msgid "Loading Changes..."
-msgstr "Загружаю изменения..."
+msgstr ""
 
 #: src/engine/dccnit.cpp:959
 msgid "Done!"
-msgstr "Готово!"
+msgstr ""
 
 #: src/engine/dccnit.cpp:1171
 msgid ""
@@ -444,101 +444,97 @@ msgid ""
 "is thankful to the people who developed those libraries: OpenAL, Cal3D, "
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
-"DccNiTghtmare поставляется под GPLv3 или более поздней версии: Не "
-"стесняйтесь использовать его исходный код и данные, как вы хотите. "
-"DccNiTghtmare благодарен людям, которые разработали эти библиотеки: OpenAL, "
-"cal3d, OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 
 #: src/engine/dccnit.cpp:1758
 msgid "Too far away for the action!"
-msgstr "Слишком далеко для действия!"
+msgstr ""
 
 #: src/engine/dccnit.cpp:1775
 msgid "Couldn't rest at battle mode."
-msgstr "Нельзя отдыхать во время битвы."
+msgstr ""
 
 #: src/engine/dccnit.cpp:1781
 msgid "Enemies nearby."
-msgstr "Враги близко."
+msgstr ""
 
 #: src/engine/dccnit.cpp:1885
 msgid "No NPCs in the area."
-msgstr "Нет NPC'ов в зоне"
+msgstr ""
 
 #: src/engine/dccnit.cpp:1943
 msgid "Surprise Attack Turn."
-msgstr "Неожиданное нападение."
+msgstr ""
 
 #: src/engine/dccnit.cpp:1956
 msgid "No enemies in the area."
-msgstr "Нет врагов в зоне."
+msgstr ""
 
 #: src/engine/dccnit.cpp:2142 src/engine/dccnit.cpp:2697
 #: src/engine/shortcutswindow.cpp:70
 msgid "Nothing"
-msgstr "Ничего"
+msgstr ""
 
 #: src/engine/dccnit.cpp:2435
 #, c-format
 msgid "%s taken."
-msgstr "%s взят."
+msgstr ""
 
 #: src/engine/dccnit.cpp:2452
 msgid "Inventory is full!"
-msgstr "Инвентарь полон!"
+msgstr ""
 
 #: src/engine/dccnit.cpp:2485
 msgid "Door"
-msgstr "Дверь"
+msgstr ""
 
 #: src/engine/dccnit.cpp:2629
 #, c-format
 msgid "%s attacks %s"
-msgstr "%s атакует %s"
+msgstr ""
 
 #: src/engine/dccnit.cpp:2798
 msgid "No more actions. Turn ended."
-msgstr "Больше никаких действий. Конец хода."
+msgstr ""
 
 #: src/engine/dccnit.cpp:4329
 msgid "Exit Battle Mode"
-msgstr "Выйти из боевого режима"
+msgstr ""
 
 #: src/engine/dialog.cpp:1214
 #, c-format
 msgid "%s lost."
-msgstr "%s потеряно."
+msgstr ""
 
 #: src/engine/dialog.cpp:1257
 #, c-format
 msgid "Received %s."
-msgstr "Отправлено %s."
+msgstr ""
 
 #: src/engine/dialog.cpp:1274
 #, c-format
 msgid "Received $%d."
-msgstr "Получено $%d."
+msgstr ""
 
 #: src/engine/dialog.cpp:1288
 #, c-format
 msgid "Lost $%d."
-msgstr "Потеряно $%d."
+msgstr ""
 
 #: src/engine/dialog.cpp:1481
 msgid "Dialog"
-msgstr "Диалог"
+msgstr ""
 
 #: src/engine/featsel.cpp:168
 msgid "Available"
-msgstr "Доступные"
+msgstr ""
 
 #: src/engine/featsel.cpp:172
 msgid "Selected"
-msgstr "Выбранные"
+msgstr ""
 
 #: src/engine/featsel.cpp:359
 msgid "Remaining"
-msgstr "Остальные"
+msgstr ""
 
 #: src/engine/featsel.cpp:469
 msgid "You can't select more talents"
@@ -546,27 +542,27 @@ msgstr ""
 
 #: src/engine/featswindow.cpp:96
 msgid "Select"
-msgstr "Выберите"
+msgstr ""
 
 #: src/engine/initial.cpp:79
 msgid "New"
-msgstr "Новый"
+msgstr ""
 
 #: src/engine/initial.cpp:84
 msgid "Continue"
-msgstr "Продолжить"
+msgstr ""
 
 #: src/engine/initial.cpp:87 src/engine/shortcutswindow.cpp:77
 msgid "Save"
-msgstr "Сохранить"
+msgstr ""
 
 #: src/engine/initial.cpp:90 src/engine/shortcutswindow.cpp:82
 msgid "Load"
-msgstr "Загрузка"
+msgstr ""
 
 #: src/engine/initial.cpp:92 src/engine/options.cpp:797
 msgid "Options"
-msgstr "Настройки"
+msgstr ""
 
 #: src/engine/initial.cpp:94 data/dialogs/objects/computers.dlg:21
 #: data/dialogs/objects/computers.dlg:95
@@ -588,276 +584,276 @@ msgstr "Настройки"
 #: data/dialogs/objects/refmachine.dlg:105
 #: data/dialogs/objects/refmachine.dlg:119
 msgid "Exit"
-msgstr "Выход"
+msgstr ""
 
 #: src/engine/inventwindow.cpp:190
 msgid "Get"
-msgstr "Получить"
+msgstr ""
 
 #: src/engine/inventwindow.cpp:193
 msgid "Info"
-msgstr "Информация"
+msgstr ""
 
 #: src/engine/inventwindow.cpp:201
 msgid "Read"
-msgstr "Прочесть"
+msgstr ""
 
 #: src/engine/inventwindow.cpp:204
 msgid "Reload Weapon"
-msgstr "Перезарядить оружие"
+msgstr ""
 
 #: src/engine/inventwindow.cpp:207
 msgid "Use"
-msgstr "Использовать"
+msgstr ""
 
 #: src/engine/inventwindow.cpp:218
 msgid "Buy"
-msgstr "Купить"
+msgstr ""
 
 #: src/engine/inventwindow.cpp:218
 msgid "Sell"
-msgstr "Продать"
+msgstr ""
 
 #: src/engine/inventwindow.cpp:223
 msgid "Drop"
-msgstr "Бросить"
+msgstr ""
 
 #: src/engine/inventwindow.cpp:330
 #, c-format
 msgid "%s reloaded %s with %s ammo."
-msgstr "%s перезаряжено %s с %s боеприпасами."
+msgstr ""
 
 #: src/engine/inventwindow.cpp:365
 msgid "No equipped weapons are compatible with this munition type."
-msgstr "Нет оружия, совместимого с этими боеприпасами."
+msgstr ""
 
 #: src/engine/itemwindow.cpp:78
 #, c-format
 msgid "Name: %s"
-msgstr "Имя: %s"
+msgstr ""
 
 #: src/engine/itemwindow.cpp:83
 #, c-format
 msgid "Cost: %.2f"
-msgstr "Цена: %.2f"
+msgstr ""
 
 #: src/engine/itemwindow.cpp:88
 #, c-format
 msgid "Weight: %.2f Kg"
-msgstr "Вес: %.2f кг"
+msgstr ""
 
 #: src/engine/itemwindow.cpp:103
 msgid "Heal Factor: "
-msgstr "Фактор лечения "
+msgstr ""
 
 #: src/engine/itemwindow.cpp:113
 msgid "Aditional Factor: "
-msgstr "Дополнительный фактор "
+msgstr ""
 
 #: src/engine/itemwindow.cpp:135
 msgid "Category: "
-msgstr "Категория: "
+msgstr ""
 
 #: src/engine/itemwindow.cpp:141
 msgid "Damage Dice: "
-msgstr "Кубик Урона "
+msgstr ""
 
 #: src/engine/itemwindow.cpp:149
 msgid "Primary Damage: "
-msgstr "Основной урон: "
+msgstr ""
 
 #: src/engine/itemwindow.cpp:156
 msgid "Secondary Damage: "
-msgstr "Дополнительный урон: "
+msgstr ""
 
 #: src/engine/itemwindow.cpp:168
 msgid "Range: "
-msgstr "Расстояние: "
+msgstr ""
 
 #: src/engine/itemwindow.cpp:173
 msgid "Size: "
-msgstr "Размер: "
+msgstr ""
 
 #: src/engine/itemwindow.cpp:186 src/engine/itemwindow.cpp:213
 msgid "Ammo Type:"
-msgstr "Тип боеприпасов:"
+msgstr ""
 
 #: src/engine/itemwindow.cpp:192 src/engine/itemwindow.cpp:219
 msgid "Quantity:"
-msgstr "Количество:"
+msgstr ""
 
 #: src/engine/itemwindow.cpp:238
 msgid "Ok"
-msgstr "Ok"
+msgstr ""
 
 #: src/engine/journalwindow.cpp:285 src/engine/options.cpp:166
 msgid "Journal"
-msgstr "Журнал"
+msgstr ""
 
 #: src/engine/journalwindow.cpp:353
 msgid "Unknow Area"
-msgstr "Неизвестная зона"
+msgstr ""
 
 #: src/engine/journalwindow.cpp:354
 msgid "No missions."
-msgstr "Нет миссий"
+msgstr ""
 
 #: src/engine/minimapwindow.cpp:59
 msgid "Map"
-msgstr "Карта"
+msgstr ""
 
 #: src/engine/options.cpp:48
 msgid "English"
-msgstr "Английский"
+msgstr ""
 
 #: src/engine/options.cpp:49
 msgid "French"
-msgstr "Французский"
+msgstr ""
 
 #: src/engine/options.cpp:50
 msgid "Spanish"
-msgstr "Испанский"
+msgstr ""
 
 #: src/engine/options.cpp:51
 msgid "Portuguese"
-msgstr "Португальский"
+msgstr ""
 
 #: src/engine/options.cpp:52
 msgid "German"
-msgstr "Немецкий"
+msgstr ""
 
 #: src/engine/options.cpp:53
 msgid "Italian"
-msgstr "Итальянский"
+msgstr ""
 
 #: src/engine/options.cpp:54
 msgid "Dutch"
-msgstr "Голландский"
+msgstr ""
 
 #: src/engine/options.cpp:55
 msgid "Catalan"
-msgstr "Каталонский"
+msgstr ""
 
 #: src/engine/options.cpp:56
 msgid "Occitan"
-msgstr "Окситанский"
+msgstr ""
 
 #: src/engine/options.cpp:57
 msgid "Russian"
-msgstr "Русский"
+msgstr ""
 
 #: src/engine/options.cpp:58
 msgid "Japanese"
-msgstr "Японский"
+msgstr ""
 
 #: src/engine/options.cpp:137
 msgid "Camera Rotate Left"
-msgstr "Поворот камеры вправо"
+msgstr ""
 
 #: src/engine/options.cpp:138
 msgid "Camera Rotate Right"
-msgstr "Поворот камеры влево"
+msgstr ""
 
 #: src/engine/options.cpp:139
 msgid "Camera Rotate Up"
-msgstr "Поворот камеры вверх"
+msgstr ""
 
 #: src/engine/options.cpp:140
 msgid "Camera Rotate Down"
-msgstr "Поворот камеры вниз"
+msgstr ""
 
 #: src/engine/options.cpp:141
 msgid "Camera Zoom Up"
-msgstr "Приблизить камеру"
+msgstr ""
 
 #: src/engine/options.cpp:142
 msgid "Camera Zoom Down"
-msgstr "Отдалить камеру"
+msgstr ""
 
 #: src/engine/options.cpp:143
 msgid "Camera Top"
-msgstr "Движение камеры вверх"
+msgstr ""
 
 #: src/engine/options.cpp:144
 msgid "Camera Bottom"
-msgstr "Движение камеры вниз"
+msgstr ""
 
 #: src/engine/options.cpp:145
 msgid "Camera Zoom Max"
-msgstr "Максимальное приближение камеры"
+msgstr ""
 
 #: src/engine/options.cpp:146
 msgid "Camera Zoom Min"
-msgstr "Максимальное отдаление камеры"
+msgstr ""
 
 #: src/engine/options.cpp:148
 msgid "Toggle Run(1)"
-msgstr "Включить бег(1)"
+msgstr ""
 
 #: src/engine/options.cpp:149
 msgid "Toggle Run(2)"
-msgstr "Включить бег(2)"
+msgstr ""
 
 #: src/engine/options.cpp:150
 msgid "Move Right"
-msgstr "Вправо"
+msgstr ""
 
 #: src/engine/options.cpp:151
 msgid "Move Left"
-msgstr "Влево"
+msgstr ""
 
 #: src/engine/options.cpp:152
 msgid "Move Forward"
-msgstr "Вперед"
+msgstr ""
 
 #: src/engine/options.cpp:153
 msgid "Move Backward"
-msgstr "Назад"
+msgstr ""
 
 #: src/engine/options.cpp:154
 msgid "Rotate Left"
-msgstr "Повернуть Влево"
+msgstr ""
 
 #: src/engine/options.cpp:155
 msgid "Rotate Right"
-msgstr "Повернуть Вправо"
+msgstr ""
 
 #: src/engine/options.cpp:156
 msgid "Change Character"
-msgstr "Сменить персонаж"
+msgstr ""
 
 #: src/engine/options.cpp:157 src/engine/shortcutswindow.cpp:413
 msgid "Rest"
-msgstr "Отдых"
+msgstr ""
 
 #: src/engine/options.cpp:159
 msgid "End Turn"
-msgstr "Конец хода"
+msgstr ""
 
 #: src/engine/options.cpp:161
 msgid "Minimap"
-msgstr "миникарта"
+msgstr ""
 
 #: src/engine/options.cpp:162 src/engine/shortcutswindow.cpp:68
 msgid "Shortcuts"
-msgstr "Ярлыки"
+msgstr ""
 
 #: src/engine/options.cpp:165
 msgid "Character Info"
-msgstr "Характеристики персонажа"
+msgstr ""
 
 #: src/engine/options.cpp:603 src/engine/options.cpp:630
 #: data/weapons/types/munitions.dcl:2
 msgid "None"
-msgstr "Ничего"
+msgstr ""
 
 #: src/engine/options.cpp:608
 msgid "Characters"
-msgstr "Персонажи"
+msgstr ""
 
 #: src/engine/options.cpp:613
 msgid "All"
-msgstr "Все"
+msgstr ""
 
 #: src/engine/options.cpp:635
 msgid "Projective"
@@ -866,123 +862,123 @@ msgstr ""
 #: src/engine/options.cpp:651 data/weapons/types/sizes.dcl:3
 #: data/weapons/types/weights.dcl:3
 msgid "Normal"
-msgstr "Обычный"
+msgstr ""
 
 #: src/engine/options.cpp:654
 msgid "Pursue"
-msgstr "Следовать"
+msgstr ""
 
 #: src/engine/options.cpp:670 src/engine/options.cpp:689
 msgid "Disabled"
-msgstr "Отключено"
+msgstr ""
 
 #: src/engine/options.cpp:692
 msgid "2x"
-msgstr "2x"
+msgstr ""
 
 #: src/engine/options.cpp:695
 msgid "4x"
-msgstr "4x"
+msgstr ""
 
 #: src/engine/options.cpp:807
 msgid "Input"
-msgstr "Ввод"
+msgstr ""
 
 #: src/engine/options.cpp:810
 msgid "Windows"
-msgstr "Окна"
+msgstr ""
 
 #: src/engine/options.cpp:813
 msgid "Character"
-msgstr "Персонаж"
+msgstr ""
 
 #: src/engine/options.cpp:816
 msgid "Camera"
-msgstr "Камера"
+msgstr ""
 
 #: src/engine/options.cpp:821
 msgid "Audio"
-msgstr "Звук"
+msgstr ""
 
 #: src/engine/options.cpp:825
 msgid "Music Volume:"
-msgstr "Громкость музыки:"
+msgstr ""
 
 #: src/engine/options.cpp:842
 msgid "Effects Volume:"
-msgstr "Громкость эффектов:"
+msgstr ""
 
 #: src/engine/options.cpp:859
 msgid "Video"
-msgstr "Видео"
+msgstr ""
 
 #: src/engine/options.cpp:867
 msgid "Screen Resolution:"
-msgstr "Разрешение экрана:"
+msgstr ""
 
 #: src/engine/options.cpp:882
 msgid "Enable FullScreen"
-msgstr "Включить полноэкранный режим"
+msgstr ""
 
 #: src/engine/options.cpp:891
 msgid "Enable Grass Effects (need particles)"
-msgstr "Включить эффекты травы (требует включить частицы)"
+msgstr ""
 
 #: src/engine/options.cpp:900
 msgid "Enable Particles Effects"
-msgstr "Включить эффекты частиц"
+msgstr ""
 
 #: src/engine/options.cpp:912
 msgid "Enable MultiTextures"
-msgstr "Включить мультитекстурирование"
+msgstr ""
 
 #: src/engine/options.cpp:922
 msgid "Enable Anisotropic Filter"
-msgstr "Включить Анизатропную фильтрацию"
+msgstr ""
 
 #: src/engine/options.cpp:933
 msgid "Stencil Buffer:"
-msgstr "Трафаретный буфер:"
+msgstr ""
 
 #: src/engine/options.cpp:950
 msgid "Reflections:"
-msgstr "Отражения:"
+msgstr ""
 
 #: src/engine/options.cpp:967
 msgid "Shadows:"
-msgstr "Тени:"
+msgstr ""
 
 #: src/engine/options.cpp:983
 msgid "Anti-Aliasing:"
-msgstr "Сглаживание:"
+msgstr ""
 
 #: src/engine/options.cpp:998
 msgid "FarView:"
-msgstr "Дальность прорисовки"
+msgstr ""
 
 #: src/engine/options.cpp:1014
 msgid "Game"
-msgstr "Геймплей"
+msgstr ""
 
 #: src/engine/options.cpp:1020
 msgid "Language:"
-msgstr "Язык:"
+msgstr ""
 
 #: src/engine/options.cpp:1037
 msgid "Camera Mode:"
-msgstr "Режим камеры:"
+msgstr ""
 
 #: src/engine/options.cpp:1053
 msgid "Auto End Turn"
-msgstr "Авто-конец хода"
+msgstr ""
 
 #: src/engine/options.cpp:1062
 msgid "Always Run"
-msgstr "Всегда бежать"
+msgstr ""
 
 #: src/engine/options.cpp:1071
 msgid "Show Enemy Battle Circle"
-msgstr "Показать боевой круг врага"
+msgstr ""
 
 #: src/engine/options.cpp:1080
 msgid "Highlight current enemy"
@@ -990,103 +986,103 @@ msgstr ""
 
 #: src/engine/options.cpp:1387
 msgid "Some changes will only take effect upon restart."
-msgstr "Для некоторых изменений требуется перезагрузка"
+msgstr ""
 
 #: src/engine/options.cpp:1432
 msgid "Press a key to: "
-msgstr "Нажать кнопку: "
+msgstr ""
 
 #: src/engine/options.cpp:1435
 msgid "Waiting..."
-msgstr "Ожидание..."
+msgstr ""
 
 #: src/engine/racewindow.cpp:83
 msgid "Race"
-msgstr "Раса"
+msgstr ""
 
 #: src/engine/racewindow.cpp:160
 msgid "Race Modifiers"
-msgstr "Модификаторы расы"
+msgstr ""
 
 #: src/engine/racewindow.cpp:178
 msgid "Race Talents"
-msgstr "Таланты расы"
+msgstr ""
 
 #: src/engine/racewindow.cpp:197
 msgid "Race Skills"
-msgstr "Навыки расы"
+msgstr ""
 
 #: src/engine/shortcutswindow.cpp:79
 msgid "Menu"
-msgstr "Меню"
+msgstr ""
 
 #: src/engine/shortcutswindow.cpp:273
 msgid "Particles"
-msgstr "Частицы"
+msgstr ""
 
 #: src/engine/shortcutswindow.cpp:286
 msgid "FPS"
-msgstr "FPS"
+msgstr ""
 
 #: src/engine/shortcutswindow.cpp:376
 msgid "Enter Battle Mode"
-msgstr "Войти в боевой режим"
+msgstr ""
 
 #: src/engine/shortcutswindow.cpp:380
 msgid "Select Normal Attack"
-msgstr "Выбрать обычную атаку"
+msgstr ""
 
 #: src/engine/shortcutswindow.cpp:386
 msgid "Open Quests Window"
-msgstr "Открыть список заданий"
+msgstr ""
 
 #: src/engine/shortcutswindow.cpp:391
 msgid "Open Map Window"
-msgstr "Открыть карту"
+msgstr ""
 
 #: src/engine/shortcutswindow.cpp:398
 msgid "End Character's Turn"
-msgstr "Завершить ход персонажа"
+msgstr ""
 
 #: src/engine/shortcutswindow.cpp:402
 msgid "Only Available in Battle Mode"
-msgstr "Доступно только в боевом режиме"
+msgstr ""
 
 #: src/engine/shortcutswindow.cpp:408
 msgid "Open Inventory Window"
-msgstr "Открыть инвентарь"
+msgstr ""
 
 #: src/engine/shortcutswindow.cpp:418
 msgid "View Character Informations"
-msgstr "Просмотр информации о персонаже"
+msgstr ""
 
 #: src/engine/shortcutswindow.cpp:423
 msgid "Open Group/Party Window"
-msgstr "Открыть окно группы"
+msgstr ""
 
 #: src/engine/shortcutswindow.cpp:440
 msgid "Click to select a talent"
-msgstr "Кликните, чтобы выбрать талант"
+msgstr ""
 
 #: src/engine/skillwindow.cpp:82
 msgid "Total Free Points:"
-msgstr "Все свободные очки:"
+msgstr ""
 
 #: src/engine/skillwindow.cpp:118
 msgid "Points:"
-msgstr "Очки:"
+msgstr ""
 
 #: src/engine/skillwindow.cpp:130
 msgid "Only show race/class skills"
-msgstr "Показывать только рассовые/классовые навыки"
+msgstr ""
 
 #: src/engine/skillwindow.cpp:149
 msgid "Cost"
-msgstr "Цена"
+msgstr ""
 
 #: src/engine/skillwindow.cpp:234
 msgid "Base Attribute:"
-msgstr "База атрибутов:"
+msgstr ""
 
 #: src/engine/skillwindow.cpp:245
 msgid "Unknow!"
@@ -1094,128 +1090,117 @@ msgstr ""
 
 #: src/fight/fightSystem.cpp:151
 msgid "No more enemies."
-msgstr "Больше нет врагов."
+msgstr ""
 
 #: src/fight/fightSystem.cpp:187
 #, c-format
 msgid "%s is dead!"
-msgstr "%s мертв!"
+msgstr ""
 
 #: src/fight/fightSystem.cpp:232
 #, c-format
 msgid "%s receive %d XP for killing"
-msgstr "%s получил %d XP за убийство"
+msgstr ""
 
 #: src/fight/fightSystem.cpp:279 src/fight/fightSystem.cpp:307
 msgid "New Round"
-msgstr "Новый раунд"
+msgstr ""
 
 #: src/fight/fightSystem.cpp:284 src/fight/fightSystem.cpp:312
 msgid "Error: No Characters!"
-msgstr "Ошибка: Нет персонажей!"
+msgstr ""
 
 #: src/fight/fightSystem.cpp:340 src/fight/fightSystem.cpp:346
 #, c-format
 msgid "%s's turn."
-msgstr "Очередь ходить для %s"
+msgstr ""
 
 #: src/fight/initiative.cpp:56
 #, c-format
 msgid "%s rolls initiative: "
-msgstr "%s перехватывает инициативу: "
+msgstr ""
 
 #: src/gui/window.cpp:148
 msgid "Maximize"
-msgstr "Развернуть"
+msgstr ""
 
 #: data/comics/intro/intro.dcb:15
 msgid "Once Upon a time, there was a happy university called UFMG..."
 msgstr ""
-"Однажды, жил-был один счастливый университет, который назывался UFMG..."
 
 #: data/comics/intro/intro.dcb:25
 msgid "People there used to live peacefull lives"
-msgstr "Люди вели там мирную жизнь"
+msgstr ""
 
 #: data/comics/intro/intro.dcb:35
 msgid ""
 "(except the medical students who had the habit of sacrificing one rookie per "
 "year)"
 msgstr ""
-"(кроме студентов-медиков, у которых была традиция приносить в жертву по "
-"одному новичку в год)"
 
 #: data/comics/intro/intro.dcb:45
 msgid "When something happened..."
-msgstr "Но что-то случилось..."
+msgstr ""
 
 #: data/comics/intro/intro.dcb:47
 msgid "a big explosion, with unknown causes."
-msgstr "большой взрыв, по неизвестным причинам."
+msgstr ""
 
 #: data/comics/intro/intro.dcb:61
 msgid ""
 "It made the happy and peacefull city called Belo Horizonte be known as "
 "Horrivel Horizonte."
 msgstr ""
-"Он превратил счастливый и мирный город Красивый Горизонт в то, что стало "
-"известным как Горизонт Ужаса."
 
 #: data/comics/intro/intro.dcb:71
 msgid "Trees became alive,"
-msgstr "Деревья ожили,"
+msgstr ""
 
 #: data/comics/intro/intro.dcb:73
 msgid "Ameivas became agressive"
-msgstr "Ящерицы стали агрессивными"
+msgstr ""
 
 #: data/comics/intro/intro.dcb:75
 msgid "and rats became blood thirsty."
-msgstr "и крысы жаждали крови."
+msgstr ""
 
 #: data/comics/intro/intro.dcb:85
 msgid ""
 "From this chaotic scene, emerged the main race that would dominate the land:"
 msgstr ""
-"В этом хаосе возникла основная раса, которая будет доминировать на земле:"
 
 #: data/comics/intro/intro.dcb:87
 msgid "UNIVERSITY STUDENTS!"
-msgstr "СТУДЕНТЫ!"
+msgstr ""
 
 #: data/comics/intro/intro.dcb:89
 msgid ""
 "who desired to, at all costs, obtain their legendary levels of knowledge."
-msgstr "желающие любым путём получиь их легендарный уровень знаний."
+msgstr ""
 
 #: data/comics/intro/intro.dcb:103
 msgid ""
 "On this doomed world, thanks to the risen journalists, tales were told and "
 "spread by word of mouth, saying that"
 msgstr ""
-"В этом обреченном мире, благодаря восставшим журналистам, из уст в уста "
-"ходили сказания о том, что"
 
 #: data/comics/intro/intro.dcb:113
 msgid "the first man who came and proclaimed his right to graduate"
-msgstr "первым человеком, пытающимся доказать своё право на индивидуальность"
+msgstr ""
 
 #: data/comics/intro/intro.dcb:123
 msgid "was Logan."
-msgstr "был Логан."
+msgstr ""
 
 #: data/comics/intro/intro.dcb:125
 msgid "And that's how the tale began..."
-msgstr "То была присказка, теперь сказка начнется..."
+msgstr ""
 
 #: data/comics/other/mjack/mjack.dcb:15
 msgid ""
 "One of those terrible monsters: a 18th level Music Student mixed with a "
 "single (and incredible) Administration Student level: Michael J."
 msgstr ""
-"Один из этих жутких монстров - помесь Студента Музыканта 18 уровня со "
-"Студентом Управленцем первого (но между тем невероятного мощного) уровня - "
-"Миха Ж."
 
 #: data/comics/other/mjack/mjack.dcb:26
 msgid "Originated by a failed Simulacrum proccess of an ancient J-5 member,"
@@ -1223,23 +1208,23 @@ msgstr ""
 
 #: data/comics/other/mjack/mjack.dcb:37
 msgid "it used a hat, Supedohat. Apparently a common white hat,"
-msgstr "он использует шапку, Superdohat. С виду это обычная белая шапка,"
+msgstr ""
 
 #: data/comics/other/mjack/mjack.dcb:40
 msgid "but, actually, a metamorphosical throwning thriller weapon."
-msgstr "но на деле - это страшное метательное оружие-метаморф."
+msgstr ""
 
 #: data/comics/other/mjack/mjack.dcb:51
 msgid "As all monsters, it had weak points:"
-msgstr "Как и все монстры, у него есть слабые места:"
+msgstr ""
 
 #: data/comics/other/mjack/mjack.dcb:54
 msgid "An obsessed fear of 3rd world diseases"
-msgstr "Одержимость проблемами и болезнями стран третьего мира"
+msgstr ""
 
 #: data/comics/other/mjack/mjack.dcb:65
 msgid "and more than US$200 million debt."
-msgstr "и долг в 200 млн долларов."
+msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:19
 #: data/comics/tutorial/combat/combat.dcb:38
@@ -1247,38 +1232,33 @@ msgstr "и долг в 200 млн долларов."
 #: data/comics/tutorial/combat/combat.dcb:195
 #: data/models/objetos/books/combat_tutorial/combat_tutorial.dcc:1
 msgid "The Combat Book"
-msgstr "Боевая книга"
+msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:48
 msgid "The fight mode is an special turn based interaction used to... FIGHT!"
-msgstr "Боевой режим - это специальный пошаговый режим, используемый.. В БОЮ!"
+msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:58
 msgid "There are two ways to enter Fight Mode:"
-msgstr "Есть два способа попасть в Боевой режим:"
+msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:60
 msgid ""
 "1 - When hostile creatures are nearby, the Fight Mode is automatically "
 "called."
 msgstr ""
-"1 - Когда поблизости находятся враждебные существа, режим боя влючается "
-"автоматически."
 
 #: data/comics/tutorial/combat/combat.dcb:70
 msgid ""
 "2 - Or, when you desire, press SPACE or the attack icon at shortcuts window "
 "to enter the Fight Mode."
 msgstr ""
-"2 - Или, по вашей воли, при нажатии  пробела или иконки атаки на панели "
-"ярлыков."
 
 #: data/comics/tutorial/combat/combat.dcb:80
 msgid ""
 "First, each character rolls an initiative check, to define the order each "
 "one will act."
 msgstr ""
-"Сначала каждый персонаж делает бросает кубик, чтобы определить порядок ходов."
 
 #: data/comics/tutorial/combat/combat.dcb:91
 msgid ""
@@ -1289,109 +1269,93 @@ msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:120
 msgid "Each turn, a character can take a move action and an attack action."
-msgstr "Каждый ход персонаж может переместиться и атаковать."
+msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:130
 msgid "Or, if needed, take a full move action to move further."
 msgstr ""
-"Или, если нужно, затратить весь ход на движение чтоб переместиться дальше."
 
 #: data/comics/tutorial/combat/combat.dcb:140
 msgid "Your action's range is represented by circles."
-msgstr "Ваша область действия обозначена кругами."
+msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:151
 msgid "The yellow circle represents your current attack range."
-msgstr "Желтый круг - это ваша текущая область атаки."
+msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:153
 msgid "You can only attack creatures inner the yellow circle!"
 msgstr ""
-"Вы можете атаковать только тех существ, которые находятся внутри желтого "
-"круга!"
 
 #: data/comics/tutorial/combat/combat.dcb:163
 msgid "The blue circle is the area you can move with a move action."
-msgstr "Синий круг - это облать, внутри которой вы можете перемещаться"
+msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:174
 msgid "The red circle is the area you can move with a full move action."
 msgstr ""
-"Красный круг - это область, на перемещение в которой у вас уйдет полный ход."
 
 #: data/comics/tutorial/combat/combat.dcb:176
 msgid ""
 "If a circle isn't shown it's because you can't take that kind of action "
 "anymore at the current turn."
 msgstr ""
-"Если один из кругов не показан, значит вы не можете совершить данное "
-"действие в этот ход."
 
 #: data/comics/tutorial/combat/combat.dcb:205
 msgid "You can attack using your current weapon by simple clicking the target."
 msgstr ""
-"Для того, чтобы атаковать оружием, имеющимся у вас в руках, просто нажмите "
-"мышью на цель."
 
 #: data/comics/tutorial/combat/combat.dcb:215
 msgid "Or use a talent by selecting it and clicking the target."
-msgstr "Или используйте способность путем ее выбора и указания мышью цели."
+msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:226
 msgid ""
 "You can end your turn any time, by pressing SPACE or selecting the End Turn "
 "icon."
 msgstr ""
-"Вы можете закончить ход в любой момент, нажав на пробел или выбрав картинку "
-"\"Конец хода\" (\"End Turn\")."
 
 #: data/comics/tutorial/combat/combat.dcb:228
 msgid ""
 "You can also set the options to automatically end your turn when no more "
 "available actions."
 msgstr ""
-"Вы также можете настроить в опциях автоматическое завершение хода в случае, "
-"когда не осталось доступных действий."
 
 #: data/comics/tutorial/combat/combat.dcb:238
 msgid ""
 "The fight will end when no more hostile creatures are near or all PCs are "
 "dead."
 msgstr ""
-"Бой заканчивается, когда вокруг не осталось враждебных существ или все "
-"персонажи мертвы."
 
 #: data/comics/tutorial/combat/combat.dcb:249
 msgid "Remember:"
-msgstr "Помните:"
+msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:251
 msgid "Take or use objects count as an attack action."
-msgstr "Взятие или использование предмета засчитывается за действие атаки."
+msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:253
 msgid "You can't save your game while fighting."
-msgstr "Вы не можете сохранить игру во время боя."
+msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:255
 msgid "And you can't leave the current map while in Fight Mode."
-msgstr "И вы не можете покинуть карту, находясь в режиме боя."
+msgstr ""
 
 #: data/alignment/neutrocaotico.ali:1
 msgid "Chaotic Neutral"
-msgstr "Хаотичный нейтрал"
+msgstr ""
 
 #: data/alignment/neutrocaotico.ali:2
 msgid ""
 "   Chaotic Neutral creatures sometimes are free software adepts, sometimes "
 "proprietary software adepts, depending on their daily humor."
 msgstr ""
-"   Хаотичные Нейтралы - это существа, которые исповедуют то Свободное "
-"Программное Обеспечение, то Проприетарное, в зависимости от настроения."
 
 #: data/alignment/sllibertario.ali:1
 msgid "Libertarian Free-Software Adept"
-msgstr "Свободолюбивые адепты Свободного Программного Обеспечения"
+msgstr ""
 
 #: data/alignment/sllibertario.ali:2
 msgid ""
@@ -1400,38 +1364,30 @@ msgid ""
 "governments, private groups or individuals. Usually they are adepts of "
 "public-domain software."
 msgstr ""
-"   Свободолюбивые адепты Свободного Программного Обеспечения обычно являются "
-"существами, которые верят в свободный круговорот знаний, без всяких наездов, "
-"вне государств, частных груп или лиц. Обычно они исповедуют Публичное "
-"Программное Обеспечение."
 
 #: data/alignment/neutrocentrista.ali:1
 msgid "Center Neutral"
-msgstr "Центральные Нейтралы"
+msgstr ""
 
 #: data/alignment/neutrocentrista.ali:2
 msgid ""
 "   They are the fence-sitters of the DNT universe, having tendency to be "
 "favorable to what people near them are."
 msgstr ""
-"   Они находятся на границе мира DNT, склоняясь к взглядам окружающих их "
-"людей."
 
 #: data/alignment/spcaotico.ali:1
 msgid "Chaotic Proprietary-Software Adept"
-msgstr "Хаотичные адепты Проприетарного Программного Обеспечения"
+msgstr ""
 
 #: data/alignment/spcaotico.ali:2
 msgid ""
 "   Wealth and uncle Portoe$ sometimes interests them, sometimes not, "
 "although they consider all Free-Software Adepts as crazy guys."
 msgstr ""
-"   Деньги иногда интересют их, иногда нет, и все же они считают адептов "
-"Свободного Программного Обеспечения сумасшедшими."
 
 #: data/alignment/neutrofuncional.ali:1
 msgid "Functional Neutral"
-msgstr "Функциональные Нейтралы"
+msgstr ""
 
 #: data/alignment/neutrofuncional.ali:2
 msgid ""
@@ -1439,13 +1395,10 @@ msgid ""
 "licenses. They are adepts of software that works correctly (and this concept "
 "is very vague)."
 msgstr ""
-"   Функциональные нейтралы - это существа, у которых нет твердой позиции в "
-"плане выбора лицензии. Они исповедуют то программное обеспечение, которое "
-"работает без сбоев (и это понятие очень расплывчато)."
 
 #: data/alignment/spcapitalista.ali:1
 msgid "Capitalist Proprietary-Software Adept"
-msgstr "Капиталистические адепты Проприетарного Программного Обеспечения"
+msgstr ""
 
 #: data/alignment/spcapitalista.ali:2
 msgid ""
@@ -1453,39 +1406,30 @@ msgid ""
 "big idol. They want to be rich with the software they make, although, most "
 "of the time, their work is only explored by national software factories."
 msgstr ""
-"   Капиталистические адепты Проприетарного Программного Обеспечения "
-"поклоняются Деньгам, как идолу. Они хотят разбогатеть благодаря тому "
-"программному обеспечению, что они пишут, однако, в большинстве случаев, их "
-"работами интересуются только национальные софтверные корпорацие."
 
 #: data/alignment/slcaotico.ali:1
 msgid "Chaotic Free-Software Adept"
-msgstr "Жуткий Адепт Свободного Программного Обеспечения"
+msgstr ""
 
 #: data/alignment/slcaotico.ali:2
 msgid ""
 "   Chaotic Free-Software adepts are more permissive about software license, "
 "since it is without charge and allows full access to the source code."
 msgstr ""
-"   Жуткий Адепт Свободного Программного Обеспечения терпимо относится к "
-"лицензиям на ПО до тех пор, пока они бесплатны и дают полный доступ к "
-"исходному коду."
 
 #: data/alignment/spneutro.ali:1
 msgid "Neutral Proprietary-Software Adept"
-msgstr "Спокойный Адепт Проприетарного Программного Обеспечения"
+msgstr ""
 
 #: data/alignment/spneutro.ali:2
 msgid ""
 "   Neutral Proprietary Software Adepts want to make money with their "
 "programs, but distrust the absence of security of their Ruindow$."
 msgstr ""
-"   Спокойный Адепт Проприетарного Программного Обеспечения желает получать "
-"деньги за свои программы, но беспокоиться за надежность защиты своих поделок."
 
 #: data/alignment/slcentrista.ali:1
 msgid "Center Free-Software Adept"
-msgstr "Нормальный Адепт Свободного Программного Обеспечения"
+msgstr ""
 
 #: data/alignment/slcentrista.ali:2
 msgid ""
@@ -1495,16 +1439,10 @@ msgid ""
 "point of fact, just as free - or not - as it originally was. Usually they "
 "are only adepts of GPL licences."
 msgstr ""
-"   Нормальные Адепты Свободного Программного Обеспечения тоже верят в "
-"свободный круговорот знаний, но эта свобода весьма относительна и \"чуть "
-"менее свободна\" чем Публичное Программное Обеспечение. Сюда относится ПО, "
-"которое не может быть свободным, или, точнее, столь же свободно (или "
-"проприетарно), сколь оно было изначально. Обычно к этой категории относятся "
-"адепты лицензии GPL."
 
 #: data/classes/administration.cls:1
 msgid "Administration Student"
-msgstr "Студент Управленец"
+msgstr ""
 
 #: data/classes/administration.cls:2
 msgid "'Steel with steel is bad...'|(Zamboy, future Administration Student)"
@@ -1520,13 +1458,6 @@ msgid ""
 "firmly believe that what they are doing is useful to others and to "
 "themselves."
 msgstr ""
-"Также известных как \"мальчики Тайлора\", Студентов Управленцов можно часто "
-"встретить ошивающимися в районе полок с самоучителями в книжных магазинах. "
-"Они еще не определились с курсом обучения, поскольку на деле мало "
-"представляют чему собираются посвятить жизнь (точным наукам, социологии, "
-"психологии масс), и вообще говоря, зачастую им в принципе НЕЧЕМ управлять, "
-"но зато они искренне верят, что делают нечто невероятно полезное для себя и "
-"окружающих."
 
 #: data/classes/administration.cls:7
 msgid ""
@@ -1539,7 +1470,6 @@ msgid ""
 "It's a real turn-off to find some of those dumb asses in a group. -4 of "
 "Charisma."
 msgstr ""
-"Реально отвратно найти пару этих придурков у себя в группе. -4 к Харизме."
 
 #: data/classes/administration.cls:11
 msgid ""
@@ -1568,7 +1498,7 @@ msgstr ""
 
 #: data/classes/medician.cls:1
 msgid "Medical Student"
-msgstr "Студент Медик"
+msgstr ""
 
 #: data/classes/medician.cls:2
 msgid ""
@@ -1586,12 +1516,6 @@ msgid ""
 "be able to behave in a hideous manner: drowning hookies, public perversion, "
 "among other activities that result in death."
 msgstr ""
-"Студент Медик - личность, принесшая свою личную жизнь в жертву науки, он "
-"верит, что станет кем-то в этой жизни. Эти существа лишены мудрости, они "
-"основывают свою жизнь на теориях и БОЛЬШИХ ТЕОРИЯХ. Будучи одним из их числа "
-"Вам понадобиться  вести себя омерзительно: подавлять желание прогула, "
-"публичные извращения среди другой деятельности, что в конечном итоге "
-"приведет к смерти."
 
 #: data/classes/medician.cls:7
 msgid ""
@@ -1603,7 +1527,7 @@ msgstr ""
 msgid ""
 "By the dedication to the studies, the Medicine Student receive +2 of "
 "Intelligence."
-msgstr "За любовь к знаниям, Студент Медик получает +2 к Интеллекту."
+msgstr ""
 
 #: data/classes/medician.cls:11
 msgid ""
@@ -1618,9 +1542,6 @@ msgid ""
 "all I am not a Fool tests (diminished to -6 when the target is their father "
 "or mother)."
 msgstr ""
-"Погруженный в обучение Студент Медик часто забывает подрости, будучи очень "
-"обидчивым получает -3 по всем тестам \"Я не Дурак\" (уменьшается до -6, если "
-"целью были его отец или мать)"
 
 #: data/classes/medician.cls:15
 msgid ""
@@ -1634,17 +1555,15 @@ msgstr ""
 
 #: data/classes/medician.cls:19
 msgid "They receive -2 of Diplomacy when talking to other races."
-msgstr "Они получают -2 очка дипломатии когда разговаривают с другими расами."
+msgstr ""
 
 #: data/classes/medician.cls:21
 msgid "They receive -4 of Diplomacy when talking to Physiotherapy Students."
 msgstr ""
-"Они получают -4 очка дипломатии когда разговаривают со студентами-"
-"физиотерапевтами."
 
 #: data/classes/biology.cls:1
 msgid "Biology Student"
-msgstr "Студент-биолог"
+msgstr ""
 
 #: data/classes/biology.cls:2
 msgid ""
@@ -1672,16 +1591,12 @@ msgid ""
 "-1 of Strength, cause their muscles atrophy after spending 12 hours "
 "motionless, observing the ameiva's coupling rituals. "
 msgstr ""
-"-1 к Силе, поскольку их мышцы атрофировались от просиживания 12 часов без "
-"движения в наблюдении за брачными играми ящериц. "
 
 #: data/classes/biology.cls:11
 msgid ""
 "Since they are commonly mistaken for hippies, Biology Students receive +6 of "
 "Disguises when disguised as hippies (and when not of this race)"
 msgstr ""
-"Поскольку их часто принимают за хиппи, Студенты Биологи получают +6 к "
-"Маскировке когда замаскированы под хиппи (если не относятся к этой расе)"
 
 #: data/classes/biology.cls:13
 msgid "For the same reason, -4 of Carte Blanche."
@@ -1692,18 +1607,16 @@ msgid ""
 "For the hard work observing ameivas, the Biology Student receives +2 of "
 "furtivity."
 msgstr ""
-"За тяжкий труд по наблюдению за ящерицами, Студент Биолог получает +2 к "
-"Скрытности."
 
 #: data/classes/music.cls:1
 msgid "Music Student"
-msgstr "Студент-музыкант"
+msgstr ""
 
 #: data/classes/music.cls:2
 msgid ""
 "'Without you I sound nothing.'|(Typical commentary of a Lyric-man to a "
 "Musician)"
-msgstr "'Без тебя я не звучу.'|(Типичный комментарий композитора музыканту)"
+msgstr ""
 
 #: data/classes/music.cls:3
 msgid ""
@@ -1727,8 +1640,6 @@ msgid ""
 "-4 of Strength because of the fact that their muscles atrophy since they "
 "aren't used for anything but playing their instruments."
 msgstr ""
-"-4 к Силе, поскольку их мышцы полоностью атрофировались, т.к. они ничего не "
-"делают кроме игры на инструменте."
 
 #: data/classes/music.cls:9
 msgid "-1 of Constitution for the hours spent in a closed ambient, playing."
@@ -1739,8 +1650,6 @@ msgid ""
 "+2 of Dexterity for having the ability to play a Gb7M or a Am#5/7/9 on  "
 "their strange musical instrument."
 msgstr ""
-"+2 очка ловкости, поскольку они умеют поставить аккорды Gb7M и Am#5/7/9 на "
-"их странном инструменте."
 
 #: data/classes/music.cls:13
 msgid ""
@@ -1767,7 +1676,7 @@ msgstr ""
 
 #: data/classes/compsci.cls:1
 msgid "Computer Science Student"
-msgstr "Студент-компьютерщик"
+msgstr ""
 
 #: data/classes/compsci.cls:2
 msgid ""
@@ -1790,7 +1699,7 @@ msgstr ""
 
 #: data/classes/compsci.cls:7
 msgid "Because they have to teach themselves, they receive +2 of Wisdom."
-msgstr "Поскольку они учатся сами, они получают +2 к Мудрости."
+msgstr ""
 
 #: data/classes/compsci.cls:9
 msgid ""
@@ -1810,16 +1719,14 @@ msgid ""
 "Also receive -2 of reflexes for the mount of time spent in front of a "
 "computer."
 msgstr ""
-"Также они получают -2 к Рефлексам ввиду непрерывного сидения перед "
-"компьютером."
 
 #: data/classes/philosophy.cls:1
 msgid "Philosophy Student"
-msgstr "Студент-философ"
+msgstr ""
 
 #: data/classes/philosophy.cls:2
 msgid "'Better die by vodka than by boredom!'|(Vladmir Maiakovsky)"
-msgstr "'Лучше уж от водки умереть, чем от скуки!'|(Владимир Маяковский)"
+msgstr ""
 
 #: data/classes/philosophy.cls:3
 msgid ""
@@ -1861,7 +1768,7 @@ msgstr ""
 #: data/classes/philosophy.cls:17
 msgid ""
 "Receive -4 of all Dexterity-related tests, for they are frequently drunk."
-msgstr "Получают -4 ко всем тестам на ловкость, поскольку они обычно пьяны."
+msgstr ""
 
 #: data/classes/philosophy.cls:19
 msgid ""
@@ -1871,7 +1778,7 @@ msgstr ""
 
 #: data/classes/journalism.cls:1
 msgid "Journalism Student"
-msgstr "Студент-журналист"
+msgstr ""
 
 #: data/classes/journalism.cls:2
 msgid ""
@@ -1879,9 +1786,6 @@ msgid ""
 "isn't God, convinces you that he is'|(Matheus de Paula, ex-Journalism "
 "student)"
 msgstr ""
-"'Судья считает что он Бог, медик играет Бога. Журналист, даже если он не "
-"Бог, убеждает вас что именно им он и является'|(Мэтью де Паула, бывший "
-"Студент Журналист)"
 
 #: data/classes/journalism.cls:3
 msgid ""
@@ -1905,8 +1809,6 @@ msgid ""
 "Journalism students have a 'know it all' need, increasing by 2 their "
 "intelligence."
 msgstr ""
-"Студенты Журналисты обладают непомерной жаждой новой информации, что "
-"повышает их Интеллект на 2."
 
 #: data/classes/journalism.cls:11
 msgid ""
@@ -1969,11 +1871,11 @@ msgstr ""
 
 #: data/classes/physicaled.cls:13
 msgid "-6 of Intelligence since they abandoned the books in a remote past."
-msgstr "-6 к Интеллекту ввиду того, что они забросили книги много лет назад."
+msgstr ""
 
 #: data/classes/physicaled.cls:15
 msgid "-6 of Wisdom, for the same reason."
-msgstr "-6 к Мудрости по той же причине."
+msgstr ""
 
 #: data/classes/physicaled.cls:17
 msgid ""
@@ -1987,8 +1889,6 @@ msgid ""
 "Receive -5 of Knowledge of any sort at all, simply because that they have no "
 "idea of the meaning of this word."
 msgstr ""
-"Получают -5 к Знаниям любого типа, просто потому что они не знают такого "
-"слова."
 
 #: data/classes/physicaled.cls:21
 msgid "-4 of Hide, since they are coarse hulks."
@@ -1996,7 +1896,7 @@ msgstr ""
 
 #: data/classes/physicaled.cls:23
 msgid "-2 of Listen, since their muscles fill their ear canals."
-msgstr "-2 к Слуху из-за того, что мышцы забили их ушные раковины."
+msgstr ""
 
 #: data/classes/physicaled.cls:25
 msgid "The Student receives +1 of Natural Armor."
@@ -2045,7 +1945,7 @@ msgstr ""
 
 #: data/classes/lawner.cls:1
 msgid "Law Student"
-msgstr "Студент Юрист"
+msgstr ""
 
 #: data/classes/lawner.cls:2
 msgid ""
@@ -2083,7 +1983,6 @@ msgid ""
 "Because they can modify any situation to make money from it, they receive +2 "
 "of Wisdom."
 msgstr ""
-"За способность срубить бабло в любой ситуации, они получают +2 к Мудрости."
 
 #: data/classes/lawner.cls:13
 msgid ""
@@ -2093,7 +1992,7 @@ msgstr ""
 
 #: data/classes/physiotherapy.cls:1
 msgid "Physiotherapy Student"
-msgstr "Студент-физиотерапевт"
+msgstr ""
 
 #: data/classes/physiotherapy.cls:2
 msgid ""
@@ -2153,7 +2052,7 @@ msgstr ""
 
 #: data/classes/mechanic.cls:1
 msgid "Mechanical Engineering Student"
-msgstr "Студент Инженер"
+msgstr ""
 
 #: data/classes/mechanic.cls:2
 msgid ""
@@ -2356,7 +2255,7 @@ msgstr ""
 
 #: data/races/gotico.rca:1
 msgid "Gothic"
-msgstr "Гот"
+msgstr ""
 
 #: data/races/gotico.rca:2
 msgid "'I have a problem...'|(Creepy Susie)"
@@ -2382,15 +2281,13 @@ msgstr ""
 
 #: data/races/hippie.rca:1
 msgid "Hippie"
-msgstr "Хиппи"
+msgstr ""
 
 #: data/races/hippie.rca:2
 msgid ""
 "'They say that they want to save nature, but the only thing they do is  "
 "smoke maryjane and it smells bad!'|(Eric Cartman)"
 msgstr ""
-"'Они говорят что хотят спасти природу, но их единственное занятие - курить "
-"дурь, от которой жутко воняет!'|(Эрик Картман)"
 
 #: data/races/hippie.rca:3
 msgid ""
@@ -2417,7 +2314,7 @@ msgstr ""
 
 #: data/races/humano.rca:1
 msgid "Common Human"
-msgstr "Нормальный человек"
+msgstr ""
 
 #: data/races/humano.rca:2
 msgid ""
@@ -2515,7 +2412,7 @@ msgstr ""
 
 #: data/races/skinhead.rca:1
 msgid "Skinhead Maniac"
-msgstr "Бритоголовый маньяк"
+msgstr ""
 
 #: data/races/skinhead.rca:2
 msgid ""
@@ -2533,11 +2430,6 @@ msgid ""
 "way possible. Alone in the world, they aren't able to make friends with any "
 "other race and they always want to put a definite end to those they dislike."
 msgstr ""
-"Бритоголовые редко появляются на кампусе. Лишенные даже малой доли здравого "
-"смысла, эти существа всегда стараются не теряя времени добиться своей цели "
-"наиболее прямым путем. Одинокие по жизни, они не способны подружиться с "
-"представителями других рас и зачастую стремятся их уничтожить, поскольку те "
-"им не нравятся."
 
 #: data/races/skinhead.rca:6
 msgid ""
@@ -2552,9 +2444,6 @@ msgid ""
 "heavy guns and walk around freely with them. Their class skill is obviously "
 "Carte Blanche."
 msgstr ""
-"Ввиду наличия друзей в армии, бритоголовые могут достать любое тяжелое "
-"вооружение и спокойно гулять с ним в руках. Их классовый навык, разумеется, "
-"Карт Бланш."
 
 #: data/feats/weapon_attack.fta:1
 msgid "Common Attack"
@@ -2566,7 +2455,7 @@ msgstr ""
 
 #: data/feats/weapon_attack.dsl:22
 msgid "Out of ammo!"
-msgstr "Кончились патроны!"
+msgstr ""
 
 #: data/feats/weapon_attack.dsl:44
 msgid "No more ammo. Reload your weapon!"
@@ -2586,7 +2475,7 @@ msgstr ""
 
 #: data/feats/administration/esthetic_shock_i.fta:1
 msgid "Esthetic Shock I"
-msgstr "Культурный шок I"
+msgstr ""
 
 #: data/feats/administration/esthetic_shock_i.fta:2
 msgid ""
@@ -2595,15 +2484,10 @@ msgid ""
 "fails at an I Am Not A Fool test against the Bizarre Clothes roll . For each "
 "2 levels, the character can use this feat for one more time per day."
 msgstr ""
-"На первом уровне Студент Управленец способен вызвать культурный шок 1 раз в "
-"день, нанося при этом 1d4 урона, если противник хоть раз провалился на тесте "
-"\"Я Не Дурак\" из-за чрезмерно Экзотической Одежды. Каждые 2 уровня персонаж "
-"получает возможность использовать эту способность еще 1 дополнительный раз в "
-"день."
 
 #: data/feats/administration/esthetic_shock_ii.fta:1
 msgid "Esthetic Shock II"
-msgstr "Культурный шок II"
+msgstr ""
 
 #: data/feats/administration/esthetic_shock_ii.fta:2
 msgid ""
@@ -2611,14 +2495,10 @@ msgid ""
 "Student upgrade its capacity to esthetic shock people, causing 1d6 damage, "
 "without resistances. The use of this feat consumes one Esthetic Shock I"
 msgstr ""
-"Из-за значительных повреждений мозга, полученных во время получения диплома "
-"(или, точнее, вовремя последующей пьянки), Студент Управленец улучшает свою "
-"способность вызывать у людей культурный шок, нанося 1d6 урона, независимо от "
-"сопротивляемости цели. Стоимость использования навыка - один Культурный шок I"
 
 #: data/feats/administration/esthetic_shock_iii.fta:1
 msgid "Esthetic Shock III"
-msgstr "Культурный шок III"
+msgstr ""
 
 #: data/feats/administration/esthetic_shock_iii.fta:2
 msgid ""
@@ -2626,9 +2506,6 @@ msgid ""
 "Administration Student Esthetic Shock inflicts 2d6 of damage. The use of "
 "this feat consumes 2 Esthetic Shocks I"
 msgstr ""
-"Спустя некоторое время повреждение мозга у Студента Управленца достигает "
-"невероятных масштабов. Теперь вызываемый им культурный шок наносит 2d6 "
-"урона. Стоимость использования навыка - два Культурных шока I"
 
 #: data/feats/administration/supreme_esthetic_shock.fta:1
 msgid "Supreme Esthetic Shock"
@@ -2644,7 +2521,7 @@ msgstr ""
 
 #: data/feats/biology/ameivas_worms.fta:1
 msgid "Ameiva's Worms"
-msgstr "Глисты"
+msgstr ""
 
 #: data/feats/biology/ameivas_worms.fta:2
 msgid ""
@@ -2652,9 +2529,6 @@ msgid ""
 "bowels, one time per day added by one more time for each level after the "
 "4th, inflicting 1d6+Biology Student Level points of damage."
 msgstr ""
-"Студент Биолог может кидаться банкой с глистами, собранными из кишков "
-"ящериц, один раз в день, плюс один дополнительный раз за каждый уровень "
-"после четвертого, нанося 1d6+(уровень персонажа) урона."
 
 #: data/feats/biology/arc_impulse.fta:1
 msgid "Arc Impulse"
@@ -2673,7 +2547,7 @@ msgstr ""
 
 #: data/feats/biology/mass_arthropds_attack.fta:1
 msgid "Mass Arthropds Attack"
-msgstr "Массированная атака членистоногими"
+msgstr ""
 
 #: data/feats/biology/mass_arthropds_attack.fta:2
 msgid ""
@@ -2682,10 +2556,6 @@ msgid ""
 "to attack their enemies in a 10 meters radius, inflicting 2d8 + 1d6 per "
 "Biology Student Level greater than 10."
 msgstr ""
-"Чем дольше Студенты Биологи учатся, тем дольше они живут вместе с животными, "
-"что позволяет им 2 раза в день натравить небольшую стаю членистоногих на их "
-"противников, находящихся в радиусе 10 метров, нанося при этом 2d8 урона + "
-"1d6 за каждый уровень Студента Биолога выше 10-ого."
 
 #: data/feats/compsci/world_conception.fta:3
 msgid "World Conception"
@@ -2699,7 +2569,7 @@ msgstr ""
 
 #: data/feats/gothic/lament_souls.fta:1
 msgid "Laments of One Thousand Souls"
-msgstr "Плач тысячи душ"
+msgstr ""
 
 #: data/feats/gothic/lament_souls.fta:2
 msgid ""
@@ -2712,7 +2582,7 @@ msgstr ""
 
 #: data/feats/gothic/night_adoration.fta:1
 msgid "Night Adoration"
-msgstr "Поклонение ночи"
+msgstr ""
 
 #: data/feats/gothic/night_adoration.fta:2
 msgid ""
@@ -2726,7 +2596,7 @@ msgstr ""
 
 #: data/feats/gothic/sun_weakness.fta:1
 msgid "Sun Weakness"
-msgstr "Уязвимость к солнцу"
+msgstr ""
 
 #: data/feats/gothic/sun_weakness.fta:2
 msgid ""
@@ -2738,13 +2608,6 @@ msgid ""
 "automatic failure, because the children will think they are clows that want "
 "to play with them."
 msgstr ""
-"Солнце - это звезда, дарящая радость Нормальным Людям и опустошающую "
-"слабость Готам, поскольку оно плавит их косметику и открывает тем самым их "
-"кривые рожи. Когда Готы подвергаются воздействию солнечного света, они "
-"получают -8 на всех социальных тестах и -1 ко всему, что касается боя. Они "
-"не могут использовать Плач Тысячи Душ, а любые социальные тесты против детей "
-"окончатся фейлом, поскольку дети решат, что это клоуны, решившие с ними "
-"поиграть."
 
 #: data/feats/law/i_am_wrong.fta:1
 msgid "I am Wrong"
@@ -2764,15 +2627,13 @@ msgstr ""
 
 #: data/feats/mandatory/rookie.fta:1
 msgid "Rookie"
-msgstr "Нуб"
+msgstr ""
 
 #: data/feats/mandatory/rookie.fta:2
 msgid ""
 "Every rookie is know by its big ego, its make-new-friends desire and by its "
 "stupid questions."
 msgstr ""
-"Нубы славятся их раздутой самооценкой, желанием заиметь кучу новых друзей и "
-"их тупыми вопросами."
 
 #: data/feats/physicaled/esophagus.fta:1
 msgid "Powerful Esophagus"
@@ -2787,7 +2648,7 @@ msgstr ""
 
 #: data/feats/physicaled/i_am_a_little_conan.fta:1
 msgid "I'm a little Conan"
-msgstr "Я маленький Конан"
+msgstr ""
 
 #: data/feats/physicaled/i_am_a_little_conan.fta:2
 msgid ""
@@ -2912,7 +2773,7 @@ msgstr ""
 
 #: data/skills/acrobacias.ski:1
 msgid "Acrobats"
-msgstr "Акробатика"
+msgstr ""
 
 #: data/skills/acrobacias.ski:2
 msgid ""
@@ -2921,72 +2782,56 @@ msgid ""
 "enemy areas without suffering Coward Attacks or fall from high places "
 "without being hurt and also make an impression on little girls."
 msgstr ""
-"Навык акробатики позволяет выполнять по-настоящему поразительные трюки, "
-"вроде резки огурцов налету, различных вращений и элементов капоэйры. С этим "
-"навыком персонаж может бродить по вражеским территория не опасаясь внезапных "
-"атак, падать с высоких уступов без ущерба здоровью и конечно производить "
-"впечатление на девушек."
 
 #: data/skills/adestrarbichos.ski:1
 msgid "Training Animals"
-msgstr "Дрессировщик"
+msgstr ""
 
 #: data/skills/adestrarbichos.ski:2
 msgid ""
 "The organism graduated with this skill is able to teach and be likeable with "
 "animals and/or similars."
 msgstr ""
-"Этот навык позволяет дрессировать и находить общий язык с животными и лицами "
-"их заменяющими."
 
 #: data/skills/arrombar.ski:1
 msgid "Burglary"
-msgstr "Воровство"
+msgstr ""
 
 #: data/skills/arrombar.ski:2
 msgid ""
 "The organism graduated in this skill is able to burglarize locks, unlock "
 "doors, safes and similars."
 msgstr ""
-"Благодаря этому навыку можно взламывать замки, открывать запертые двери, "
-"сейфы, запертый на ночь буфет и т.п."
 
 #: data/skills/artedoescape.ski:1
 msgid "Art of the Escape"
-msgstr "Искусство сматываться"
+msgstr ""
 
 #: data/skills/artedoescape.ski:2
 msgid ""
 "A person whose talent is the Art of the Escape is able to escape from the "
 "most diverse, ordinary conditions of imprisonment."
 msgstr ""
-"Человек, владеющий искусством сматываться способен удрать из большинства "
-"мест лишения свободы."
 
 #: data/skills/avaliar.ski:1
 msgid "Appraisal"
-msgstr "Оценщик"
+msgstr ""
 
 #: data/skills/avaliar.ski:2
 msgid ""
 "Usually used to estimate the price of that 486 processor sold by that "
 "smuggler or of those poisoned chips given to your beloved teacher."
 msgstr ""
-"Навык обычно используется чтобы прикинуть цену 486 процессора (судя по виду "
-"торговца ворованного) или узнать цену отравленных чипов, подаренных любимому "
-"преподавателю."
 
 #: data/skills/beber.ski:1
 msgid "Drinking"
-msgstr "Умение пить"
+msgstr ""
 
 #: data/skills/beber.ski:2
 msgid ""
 "It's the ability to get really drunk without throwing up. Drinking is a good "
 "way to get more extroverted and social."
 msgstr ""
-"Умение стоять на ногах после матча по литр-болу. Выпивка - отличный способ "
-"стать более общительным."
 
 #: data/skills/blefar.ski:1
 msgid "Bluff"
@@ -3031,7 +2876,7 @@ msgstr ""
 
 #: data/skills/cnhgeral.ski:1
 msgid "Knowledge: (General)"
-msgstr "Знания: (общие)"
+msgstr ""
 
 #: data/skills/cnhgeral.ski:2
 msgid ""
@@ -3039,9 +2884,6 @@ msgid ""
 "'(General)' must be replaced by the specific type of knowledge. Each type of "
 "knowledge affects the tests related to it."
 msgstr ""
-"Указывает общее число очков знаний во всех областях. Слово \"общие\" может "
-"быть заменено на какую-нибудь конкретную область. Каждый тип знаний влияет "
-"на относящиеся к нему тесты."
 
 #: data/skills/cnhsofrimento.ski:1
 msgid "Knowledge: (Suffering)"
@@ -3055,7 +2897,7 @@ msgstr ""
 
 #: data/skills/cnhtagmedicinal.ski:1
 msgid "Medical 'Loud Mouth'"
-msgstr "Ходячий медицинский справочник"
+msgstr ""
 
 #: data/skills/cnhtagmedicinal.ski:2
 msgid ""
@@ -3063,21 +2905,16 @@ msgid ""
 "skill can't understand a word he's saying because he uses only words from "
 "the Dictionary for Little Med Students."
 msgstr ""
-"Персонаж разговаривает так, что лица, не обладающие этим навыком, не "
-"способны понять ни слова из его бред, поскольку он разговаривает "
-"исключительно фразами из Настольной Книги Начинающего Медика."
 
 #: data/skills/conducao.ski:1
 msgid "Driving (Vehicles)"
-msgstr "Вождение (транспорт)"
+msgstr ""
 
 #: data/skills/conducao.ski:2
 msgid ""
 "It's the organism's capacity to drive vehicles. The player must specify the "
 "type of vehicle he is good at driving."
 msgstr ""
-"Способность управлять средствами передвижения. Игрок должен указать чем "
-"именно он хорошо управляет."
 
 #: data/skills/constituicao.ski:2
 msgid ""
@@ -3091,7 +2928,7 @@ msgstr ""
 
 #: data/skills/curar.ski:1
 msgid "Healing"
-msgstr "Лечение"
+msgstr ""
 
 #: data/skills/curar.ski:2
 msgid ""
@@ -3102,7 +2939,7 @@ msgstr ""
 
 #: data/skills/desmentir.ski:1
 msgid "See Lies"
-msgstr "Детектор лжи"
+msgstr ""
 
 #: data/skills/desmentir.ski:2
 msgid ""
@@ -3121,7 +2958,7 @@ msgstr ""
 
 #: data/skills/diplomacia.ski:1
 msgid "Diplomacy"
-msgstr "Дипломатия"
+msgstr ""
 
 #: data/skills/diplomacia.ski:2
 msgid ""
@@ -3133,7 +2970,7 @@ msgstr ""
 
 #: data/skills/discursoprof.ski:1
 msgid "Professional Speech"
-msgstr "Профессиональный сленг"
+msgstr ""
 
 #: data/skills/discursoprof.ski:2
 msgid "Measures the fluency and eloquency of the character's usual words."
@@ -3141,32 +2978,30 @@ msgstr ""
 
 #: data/skills/disfarces.ski:1
 msgid "Disguises"
-msgstr "Маскировка"
+msgstr ""
 
 #: data/skills/disfarces.ski:2
 msgid ""
 "Measures the creature's ability to disguise himself (and be unrecognizable)."
-msgstr "Определяет способность существа маскироваться (и быть неузнаваемым)."
+msgstr ""
 
 #: data/skills/equilibrio.ski:1
 msgid "Balance"
-msgstr "Чувство равновесия"
+msgstr ""
 
 #: data/skills/equilibrio.ski:2
 msgid ""
 "Is the organism's capacity not to fall from a wall when walking on it, or to "
 "walk on a tightrope in an attempt to obtain money for lunch."
 msgstr ""
-"Гарантирует что туша не свалится со стены если будет бродить по ней. Также "
-"позволяет корчить из себя эквилибриста чтобы заработать денег на еду."
 
 #: data/skills/escalar.ski:1
 msgid "Climbing"
-msgstr "Скалолазанье"
+msgstr ""
 
 #: data/skills/escalar.ski:2
 msgid "Measure the organism's capacity to climb very steep surfaces."
-msgstr "Отражает способность поднимать свою тушу по отвесной стене."
+msgstr ""
 
 #: data/skills/esconder.ski:1
 msgid "Concealment"
@@ -3180,27 +3015,23 @@ msgstr ""
 
 #: data/skills/falaridioma.ski:1
 msgid "Foreign Languages"
-msgstr "Лингвистика"
+msgstr ""
 
 #: data/skills/falaridioma.ski:2
 msgid ""
 "The organism with this skill is able to talk an aditional language for each "
 "point on it."
 msgstr ""
-"Персонаж с этим навыком волшебным образом выучивает один дополнительный язык "
-"за каждое очко навыка."
 
 #: data/skills/falsificar.ski:1
 msgid "Counterfeit"
-msgstr "Подделка документов"
+msgstr ""
 
 #: data/skills/falsificar.ski:2
 msgid ""
 "Is used to make false copies of something, like director's signatures or "
 "teacher's grade books."
 msgstr ""
-"Используется для создания левых копий чего-нибудь нужного, вроде подписи "
-"ректора на приказе или росчерка препода в зачетке."
 
 #: data/skills/forca.ski:2
 msgid ""
@@ -3218,7 +3049,7 @@ msgstr ""
 #: data/skills/furtividade.ski:2
 msgid ""
 "Is the organism's capacity to pass through some areas without making sounds."
-msgstr "Определяет способность втихую шастать по округе."
+msgstr ""
 
 #: data/skills/inteligencia.ski:2
 msgid ""
@@ -3244,7 +3075,7 @@ msgstr ""
 
 #: data/skills/montar.ski:1
 msgid "Riding"
-msgstr "Верховая езда"
+msgstr ""
 
 #: data/skills/montar.ski:2
 msgid ""
@@ -3254,7 +3085,7 @@ msgstr ""
 
 #: data/skills/nadar.ski:1
 msgid "Sports"
-msgstr "Атлет"
+msgstr ""
 
 #: data/skills/nadar.ski:2
 msgid ""
@@ -3265,11 +3096,11 @@ msgstr ""
 
 #: data/skills/notused.ski:1
 msgid "Not Used"
-msgstr "Вакантное место"
+msgstr ""
 
 #: data/skills/notused.ski:2
 msgid "This Skill Place is Avaible for new skills in the future."
-msgstr "Свободное место в мозгах, пригодное к заселению новыми навыками."
+msgstr ""
 
 #: data/skills/observar.ski:1
 msgid "Observe"
@@ -3565,7 +3396,7 @@ msgstr ""
 #: data/dialogs/tutorial/logan.dlg:10 data/dialogs/tutorial/santa.dlg:10
 #: data/dialogs/tutorial/dona.dlg:17
 msgid "Who are you?"
-msgstr "Ты кто?"
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:19
 msgid "I am Logan, maintainer of this occupation."
@@ -3577,7 +3408,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:26 data/dialogs/tutorial/logan.dlg:55
 msgid "What am I doing here?"
-msgstr "Что я тут делаю?"
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:35
 msgid ""
@@ -3588,12 +3419,12 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:39
 msgid "For the sake of your ideals? What ideals?!"
-msgstr "Во имя идеалов? Каких еще идеалов?!"
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:42 data/dialogs/tutorial/logan.dlg:58
 #: data/dialogs/tutorial/logan.dlg:74
 msgid "What do you want of me?"
-msgstr "Чего ты от меня хочешь?"
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:51
 msgid ""
@@ -3603,7 +3434,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:61
 msgid "Shut up and die!"
-msgstr "Заткнись и сдохни!"
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:70
 msgid "Our ideal? It's not the time to tell you about that."
@@ -3614,36 +3445,32 @@ msgid ""
 "Ah, some time ago I've lost our Chrono Trigger Snes cartridge, just find it "
 "for us."
 msgstr ""
-"Ох, некоторое время назад я потерял картридж Chrono Trigger для Денди, найди "
-"мне его."
 
 #: data/dialogs/tutorial/logan.dlg:88
 msgid "Where it can be?"
-msgstr "И где он может быть?"
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:91
 msgid "Ok, I'll search for it"
-msgstr "Ок. Я поищу его"
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:96
 msgid ""
 "But everyone knows that Chrono is lost in time! It's impossible to take him "
 "from Lavos!"
 msgstr ""
-"Но все знают что Chrono потерялся во времени! Его невозможно вытащить из лап "
-"Lavos'а!"
 
 #: data/dialogs/tutorial/logan.dlg:107
 msgid "Never! Chrono took 3 years from me! I'll kill you!"
-msgstr "Никогда! Chrono забрал у меня 3 года! Я тебя прибью!"
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:116
 msgid "You still haven't found our Chrono Trigger Snes cartridge!"
-msgstr "Ты еще не нашел наш картридж для нинтендо с Chrono Trigger!"
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:120
 msgid "I'm still looking..."
-msgstr "Я еще ищу..."
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:123
 msgid "Oh, Chrono Trigger! This name resounds good memories in my head."
@@ -3659,7 +3486,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:142
 msgid "Its yours, but I want some money!"
-msgstr "Он твой, но мне нужны деньги!"
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:155
 msgid ""
@@ -3669,7 +3496,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:159 data/dialogs/tutorial/logan.dlg:286
 msgid "Thanks."
-msgstr "Спасибо."
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:169
 msgid ""
@@ -3689,39 +3516,35 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:193
 msgid "Chrono... Chrono... Chrono!"
-msgstr "Chrono... Chrono... Chrono!"
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:197
 msgid "Bye!"
-msgstr "Пока!"
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:206
 msgid "That damned Lavos! So, we must forget about Chrono..."
-msgstr "Чертов Lavos! Все, мы должны забыть о Chrono..."
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:210
 msgid "Yes, let's forget about him..."
-msgstr "Да, давайте о нем забудем..."
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:220
 msgid ""
 "No, you are wrong. Chrono is lost somewhere in the Bunker School. Go take a "
 "look..."
 msgstr ""
-"Нет, ты ошибаешься. Картридж с Chrono потерялся где-то в Школьном Бункере. "
-"Сходи поищи..."
 
 #: data/dialogs/tutorial/logan.dlg:224 data/dialogs/tutorial/logan.dlg:239
 msgid "Ok, I'll look for it."
-msgstr "Ок. Я поищу его."
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:235
 msgid ""
 "Ahm, last time I saw him was in the Bunker School, when I was riping it to "
 "play online with zsnes."
 msgstr ""
-"А, последний раз я видел его в Школьном Бункере, когда сдирал его образ чтоб "
-"поиграть по сетке на эмуляторе нинтендо."
 
 #: data/dialogs/tutorial/logan.dlg:250
 msgid "About the extermination, have you done it?"
@@ -3730,7 +3553,7 @@ msgstr ""
 #: data/dialogs/tutorial/logan.dlg:254 data/dialogs/tutorial/dona.dlg:208
 #: data/dialogs/tutorial/dona.dlg:241
 msgid "Not yet."
-msgstr "Еще нет."
+msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:258
 msgid "Yes, there's no living thing there..."
@@ -3768,7 +3591,7 @@ msgstr ""
 #: data/dialogs/tutorial/dona.dlg:152 data/dialogs/tutorial/dona.dlg:261
 #: data/dialogs/tutorial/dona.dlg:274 data/dialogs/tutorial/dona.dlg:287
 msgid "Bye."
-msgstr "Пока."
+msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:6
 msgid "Wanna some milk, kid?"
@@ -3806,16 +3629,16 @@ msgstr ""
 #: data/dialogs/tutorial/santa.dlg:247 data/dialogs/tutorial/dona.dlg:62
 #: data/dialogs/tutorial/dona.dlg:168
 msgid "Yes."
-msgstr "Да."
+msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:78
 msgid "What kind of favor?"
-msgstr "Что за услуга?"
+msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:81 data/dialogs/tutorial/dona.dlg:65
 #: data/dialogs/tutorial/dona.dlg:165
 msgid "No."
-msgstr "Нет."
+msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:91
 msgid ""
@@ -3830,7 +3653,7 @@ msgstr ""
 #: data/dialogs/tutorial/santa.dlg:102 data/dialogs/tutorial/santa.dlg:212
 #: data/dialogs/tutorial/hippie.dlg:194
 msgid "For sure!"
-msgstr "Конечно!"
+msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:108
 msgid "Yes. (but inside you something is telling you to take another action)"
@@ -3838,18 +3661,18 @@ msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:120
 msgid "So get out of here!"
-msgstr "Теперь убирайся!"
+msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:124 data/dialogs/tutorial/santa.dlg:137
 #: data/dialogs/tutorial/hippie.dlg:115 data/dialogs/tutorial/hippie.dlg:181
 #: data/dialogs/tutorial/hippie.dlg:223 data/dialogs/tutorial/dona.dlg:94
 #: data/dialogs/tutorial/dona.dlg:107
 msgid "(Close dialog)"
-msgstr "(Закончить диалог)"
+msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:133
 msgid "I won't talk with you, heretic."
-msgstr "Я не собираюсь с тобой разговаривать, еретик."
+msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:146
 msgid "I'm waiting for you install the Ruindows on the occupation's notebook!"
@@ -3860,7 +3683,7 @@ msgstr ""
 #: data/dialogs/tutorial/atleticano.dlg:111
 #: data/dialogs/tutorial/cruzeirense.dlg:87
 msgid "Ok."
-msgstr "Ok."
+msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:153
 msgid "Ok. (you look suspiciously at Santa Claws' notebook)"
@@ -3873,11 +3696,11 @@ msgstr ""
 #: data/dialogs/tutorial/santa.dlg:167 data/dialogs/tutorial/santa.dlg:242
 #: data/dialogs/tutorial/santa.dlg:263
 msgid "Amen, brother!"
-msgstr "Аминь, брат!"
+msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:177
 msgid "Maybe."
-msgstr "Может быть."
+msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:188
 msgid ""
@@ -3907,39 +3730,39 @@ msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:266
 msgid "I will try to!"
-msgstr "Я попробую!"
+msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:269
 msgid "Never!"
-msgstr "Никогда!"
+msgstr ""
 
 #: data/dialogs/tutorial/atleticano.dlg:6
 msgid "What are you doing here in my house?"
-msgstr "Что ты делаешь в моем доме?"
+msgstr ""
 
 #: data/dialogs/tutorial/atleticano.dlg:11
 msgid "Logan sent this to you."
-msgstr "Логан передавал это тебе."
+msgstr ""
 
 #: data/dialogs/tutorial/atleticano.dlg:16
 msgid "Just wandering, sorry..."
-msgstr "Просто интересно, извини..."
+msgstr ""
 
 #: data/dialogs/tutorial/atleticano.dlg:19
 msgid "Not of your concern!"
-msgstr "Не твое дело!"
+msgstr ""
 
 #: data/dialogs/tutorial/atleticano.dlg:25
 msgid "I'm lost."
-msgstr "Я заблудился."
+msgstr ""
 
 #: data/dialogs/tutorial/atleticano.dlg:34
 msgid "So please, leave this house."
-msgstr "Так что, пожалуйста, покинь этот дом."
+msgstr ""
 
 #: data/dialogs/tutorial/atleticano.dlg:47
 msgid "Please, don't do anything bad to us!"
-msgstr "Пожалуйста, не делай нам ничего плохого!"
+msgstr ""
 
 #: data/dialogs/tutorial/atleticano.dlg:60
 msgid "And so I am."
@@ -3952,7 +3775,7 @@ msgstr ""
 #: data/dialogs/tutorial/atleticano.dlg:77
 #: data/dialogs/tutorial/cruzeirense.dlg:57
 msgid "What's it?"
-msgstr "Что это?"
+msgstr ""
 
 #: data/dialogs/tutorial/atleticano.dlg:86
 msgid ""
@@ -3962,24 +3785,24 @@ msgstr ""
 
 #: data/dialogs/tutorial/atleticano.dlg:96
 msgid "If I have enough time!"
-msgstr "Если бы у меня было время!"
+msgstr ""
 
 #: data/dialogs/tutorial/atleticano.dlg:107
 #: data/dialogs/tutorial/cruzeirense.dlg:6
 msgid "I'm very busy now."
-msgstr "Сейчас я очень занят."
+msgstr ""
 
 #: data/dialogs/tutorial/cruzeirense.dlg:10
 msgid "I'll come back latter"
-msgstr "Я вернусь позже."
+msgstr ""
 
 #: data/dialogs/tutorial/cruzeirense.dlg:20
 msgid "What now?"
-msgstr "Что еще?"
+msgstr ""
 
 #: data/dialogs/tutorial/cruzeirense.dlg:25
 msgid "I have something for you."
-msgstr "У меня для тебя кое-что есть."
+msgstr ""
 
 #: data/dialogs/tutorial/cruzeirense.dlg:29
 msgid "Ehr, nothing."
@@ -4006,7 +3829,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/cruzeirense.dlg:71
 msgid "Now!"
-msgstr "Сейчас!"
+msgstr ""
 
 #: data/dialogs/tutorial/hippie.dlg:6
 msgid "Welcome to the F.S.C."
@@ -4247,11 +4070,11 @@ msgstr ""
 
 #: data/missions/tutorial/mission1.mis:2
 msgid "Find Chrono Trigger cartdrige for Logan."
-msgstr "Найди картридж Chrono Trigger для Логана."
+msgstr ""
 
 #: data/missions/tutorial/mission2.mis:2
 msgid "Exterminate all living Creatures at Bunker School."
-msgstr "Уничтожь всех живых созданий в Школьном Бункере."
+msgstr ""
 
 #: data/missions/tutorial/mission3.mis:2
 msgid "Install Ruindows at the occupation's notebook for Santa Claws."
@@ -4259,7 +4082,7 @@ msgstr ""
 
 #: data/missions/tutorial/mission4.mis:2
 msgid "Fight for Cruzeirense."
-msgstr "Бой для Крузейренса"
+msgstr ""
 
 #: data/missions/tutorial/hippie1.mis:2
 msgid "Get some psychedelic ration for F.S.C. Hippie"
@@ -4283,15 +4106,15 @@ msgstr ""
 
 #: data/models/objetos/itens/healkit/healkit.dcc:1
 msgid "First Aid Kit"
-msgstr "Аптечка"
+msgstr ""
 
 #: data/models/objetos/itens/garrafa1/garrafa1.dcc:1
 msgid "Beer Bottle"
-msgstr "Пивная бутылка"
+msgstr ""
 
 #: data/models/objetos/itens/lata1/lata1.dcc:1
 msgid "Soda Can"
-msgstr "Банка газировки"
+msgstr ""
 
 #: data/models/objetos/itens/lata1/logan_lata1.dcc:1
 msgid "Logan's Soda Can"
@@ -4303,56 +4126,56 @@ msgstr ""
 
 #: data/models/objetos/itens/money/money.dcc:1
 msgid "Money"
-msgstr "Деньги"
+msgstr ""
 
 #: data/models/objetos/geral/computador/computador.dcc:1
 msgid "Computer"
-msgstr "ПЭВМ"
+msgstr ""
 
 #: data/models/objetos/geral/notebook/notebook.dcc:1
 msgid "Notebook"
-msgstr "Блокнот"
+msgstr ""
 
 #: data/models/objetos/ammo/9mm_pack/9mm_pack.dcc:1
 msgid "9mm Ammo Pack"
-msgstr "Патроны 9 мм"
+msgstr ""
 
 #: data/weapons/definitions/axe.wcc:1
 msgid "Great Axe"
-msgstr "Большой топор"
+msgstr ""
 
 #: data/weapons/definitions/dagger.wcc:1
 msgid "Dagger"
-msgstr "Кинжал"
+msgstr ""
 
 #: data/weapons/definitions/beretta92.wcc:1
 msgid "Beretta 92"
-msgstr "Беретта 92"
+msgstr ""
 
 #: data/weapons/definitions/kalashnikov_small.wcc:1
 #: data/weapons/definitions/kalashnikov.wcc:1
 msgid "Kalashnikov"
-msgstr "АК-47"
+msgstr ""
 
 #: data/weapons/definitions/katana.wcc:1
 msgid "Katana"
-msgstr "Катана"
+msgstr ""
 
 #: data/weapons/definitions/knife.wcc:1
 msgid "Knife"
-msgstr "Нож"
+msgstr ""
 
 #: data/weapons/definitions/scimitar.wcc:1
 msgid "Scimitar"
-msgstr "Скимитар"
+msgstr ""
 
 #: data/weapons/definitions/sw39.wcc:1
 msgid "S&W 39"
-msgstr "Smith&Wesson 39"
+msgstr ""
 
 #: data/weapons/definitions/uzi.wcc:1
 msgid "Uzi"
-msgstr "Узи"
+msgstr "اوزي"
 
 #: data/weapons/types/categories.dcl:2
 msgid "Martial"
@@ -4364,39 +4187,39 @@ msgstr ""
 
 #: data/weapons/types/categories.dcl:4
 msgid "Throwing"
-msgstr "Метательный"
+msgstr ""
 
 #: data/weapons/types/categories.dcl:5
 msgid "Simple"
-msgstr "Простой"
+msgstr "بسيط"
 
 #: data/weapons/types/categories.dcl:6
 msgid "Two Handed"
-msgstr "Двуручный"
+msgstr ""
 
 #: data/weapons/types/categories.dcl:7
 msgid "Gun"
-msgstr "Пушка"
+msgstr "بندقية"
 
 #: data/weapons/types/categories.dcl:8
 msgid "Rifle"
-msgstr "Ружье"
+msgstr ""
 
 #: data/weapons/types/damages.dcl:2
 msgid "Piercing"
-msgstr "Колющее"
+msgstr "متبصر"
 
 #: data/weapons/types/damages.dcl:3
 msgid "Slashing"
-msgstr "Рубящее"
+msgstr "جرح بوحشية"
 
 #: data/weapons/types/damages.dcl:4
 msgid "Bludgeoning"
-msgstr ""
+msgstr "ضرب بهراوة"
 
 #: data/weapons/types/munitions.dcl:3
 msgid "9mm"
-msgstr "9мм"
+msgstr "9ملم"
 
 #: data/weapons/types/munitions.dcl:4
 msgid ".223"
@@ -4408,44 +4231,32 @@ msgstr "M74"
 
 #: data/weapons/types/munitions.dcl:6
 msgid "M43"
-msgstr "М43"
+msgstr "M43"
 
 #: data/weapons/types/ranges.dcl:2
 msgid "Melee"
-msgstr "Контактный"
+msgstr "شجار"
 
 #: data/weapons/types/ranges.dcl:3
 msgid "Ranged"
-msgstr "Дистанционный"
+msgstr "يتراوح"
 
 #: data/weapons/types/sizes.dcl:2
 msgid "Tiny"
-msgstr "Крошечный"
+msgstr "صغير"
 
 #: data/weapons/types/sizes.dcl:4
 msgid "Large"
-msgstr "Большой"
+msgstr "كبير"
 
 #: data/weapons/types/weights.dcl:2
 msgid "Light"
-msgstr "Легкий"
+msgstr "خفيف"
 
 #: data/weapons/types/weights.dcl:4
 msgid "Heavy"
-msgstr "Тяжелый"
+msgstr "ثقيل"
 
 #: data/characters/pcs/santa.pc:1
 msgid "Santa Claws"
-msgstr "Дед Отмороз"
-
-#~ msgid "Open Assign Attacks Window"
-#~ msgstr "Открыть расстановку атак"
-
-#~ msgid "Melee Attack"
-#~ msgstr "Ближний бой"
-
-#~ msgid "Character's ranged attack."
-#~ msgstr "Дистанционная атака персонажа"
-
-#~ msgid "Ranged Attack"
-#~ msgstr "Дистанционная атака"
+msgstr "سانتا كلوز"
