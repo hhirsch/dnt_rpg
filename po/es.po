@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
 "POT-Creation-Date: 2010-08-20 16:22-0300\n"
-"PO-Revision-Date: 2010-10-22 17:13+0000\n"
+"PO-Revision-Date: 2010-12-04 11:03+0000\n"
 "Last-Translator: zer berros <cerverros@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-01 11:41+0000\n"
+"X-Launchpad-Export-Date: 2010-12-08 14:21+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: src/classes/actions.cpp:144
@@ -2863,6 +2863,11 @@ msgid ""
 "for good!'|(Corrente, Skinhead Maniac, answering Gordo, frustrated "
 "Mechanical Engineering Student)"
 msgstr ""
+"- Es porque hay unos capullos en frente de mi casa que se dedican a hacer "
+"ruido a todo volumen los fines de semana... | - No te preocupes, por  500$ y "
+"te consigo una granada de fragmentación para que acabes con sus fiestas de "
+"una vez por todas! | (Corrente, un Maniaco Cabezarapada, aconsejando al "
+"Gordo, un Estudiante de Ingieneria Mecánica frustrado.)"
 
 #: data/races/skinhead.rca:3
 msgid ""
@@ -2988,6 +2993,11 @@ msgid ""
 "a cloth is void. For now on, the Esthetic Shock can inflict 3d12 points of "
 "damage. The use of this feat consumes 3 Esthetic Shocks I."
 msgstr ""
+"Es el mayor Shock que la gente puede recibir de un Estudiante de "
+"Administración común. La capacidad para distinguir entre una sandia y un "
+"trozo de tela es nula. A partir de ahora, el Shock Estético puede causar "
+"3d12 puntos en daño. El uso de ésta habilidad consume 3 Shocks Estéticos de "
+"nivel I."
 
 #: data/feats/biology/ameivas_worms.fta:1
 msgid "Ameiva's Worms"
@@ -3068,6 +3078,12 @@ msgid ""
 "against the aim's I Am Not A Fool. In case of success, the aim will be on "
 "deep depression for the next 24 hours, receiving -5 on all Social Tests."
 msgstr ""
+"Siendo adeptos a la poesia del romanticismo, los Góticos son maestros en el "
+"arte de la depresión: ellos pueden acabar con el día más feliz de cualquier "
+"persona. Haciendo uso de un turno entero, los Góticos realizan una prueba de "
+"Tirarse Faroles contra una de No soy Idiota del objetivo. En caso de éxtio, "
+"el objetivo estará en profunda depresión durante las siguientes 24 horas, "
+"recibiendo -5 en todas las pruebas sociales."
 
 #: data/feats/gothic/night_adoration.fta:1
 msgid "Night Adoration"
@@ -4146,10 +4162,12 @@ msgid ""
 "But everyone knows that Chrono is lost in time! It's impossible to take him "
 "from Lavos!"
 msgstr ""
+"¡Pero si todo el mundo sabe que el Chrono lleva descatalogado años y años! "
+"¡Jamás podrás volver a luchar contra Lavos!"
 
 #: data/dialogs/tutorial/logan.dlg:107
 msgid "Never! Chrono took 3 years from me! I'll kill you!"
-msgstr ""
+msgstr "¡Jamás! ¡Chrono lleva 3 años conmigo! ¡Te mataré!"
 
 #: data/dialogs/tutorial/logan.dlg:116
 msgid "You still haven't found our Chrono Trigger Snes cartridge!"
@@ -4165,7 +4183,7 @@ msgstr "Oh, ¡Chrono Trigger! Ese nombre me trae buenos recuerdos a la cabeza."
 
 #: data/dialogs/tutorial/logan.dlg:132
 msgid "Here! Chrono is here! Let me play it!"
-msgstr ""
+msgstr "¡Ajá! ¡Tienes el Chrono! ¡Déjame echar una partida!"
 
 #: data/dialogs/tutorial/logan.dlg:136
 msgid "Its all yours..."
@@ -4204,6 +4222,7 @@ msgid ""
 "Hey, have you heard about the Vermin Extermination Services of S.C.O.U.R.G."
 "E ?"
 msgstr ""
+"Hey, ¿has oido hablar del Servivio de Exterminio de Alimañas S.C.O.U.R.G.E.?"
 
 #: data/dialogs/tutorial/logan.dlg:193
 msgid "Chrono... Chrono... Chrono!"
@@ -4215,7 +4234,7 @@ msgstr "¡Adiós!"
 
 #: data/dialogs/tutorial/logan.dlg:206
 msgid "That damned Lavos! So, we must forget about Chrono..."
-msgstr ""
+msgstr "¡El maldito Lavos! será mejor que me olvide del Chrono..."
 
 #: data/dialogs/tutorial/logan.dlg:210
 msgid "Yes, let's forget about him..."
@@ -4256,7 +4275,7 @@ msgstr "Sí, no hay ningún ser vivo allí..."
 
 #: data/dialogs/tutorial/logan.dlg:269
 msgid "The Heroes of Lesser Renown? That's true, I'll call them."
-msgstr ""
+msgstr "¿Los Héroes de Lesser Renown? Es verdad, voy a darles un toque."
 
 #: data/dialogs/tutorial/logan.dlg:273
 msgid "Great."
@@ -4267,6 +4286,8 @@ msgid ""
 "Give this to the Atleticano at the other part of this house and he'll see "
 "that I've sent you. Maybe he can help you."
 msgstr ""
+"Dale ésto al hincha del Atlético Mineiro, en la otra casa, y dile que te he "
+"enviado. Quizás él pueda ayudarte."
 
 #: data/dialogs/tutorial/logan.dlg:297
 #: data/dialogs/tutorial/atleticano.dlg:120
@@ -4288,7 +4309,7 @@ msgstr ""
 #: data/dialogs/tutorial/dona.dlg:152 data/dialogs/tutorial/dona.dlg:261
 #: data/dialogs/tutorial/dona.dlg:274 data/dialogs/tutorial/dona.dlg:287
 msgid "Bye."
-msgstr ""
+msgstr "Adiós."
 
 #: data/dialogs/tutorial/santa.dlg:6
 msgid "Wanna some milk, kid?"
@@ -4314,7 +4335,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:46
 msgid "Mr. Santa Claws of Cica Cula? Ow..."
-msgstr ""
+msgstr "¿El Viejo Noël de Pota Cola? Oh..."
 
 #: data/dialogs/tutorial/santa.dlg:58
 msgid "Yes, the great Santa Claws! (I was named in honour of him)."
@@ -4454,7 +4475,7 @@ msgstr "Logan te envia ésto."
 
 #: data/dialogs/tutorial/atleticano.dlg:16
 msgid "Just wandering, sorry..."
-msgstr ""
+msgstr "Sólo deambulaba, lo siento."
 
 #: data/dialogs/tutorial/atleticano.dlg:19
 msgid "Not of your concern!"
@@ -4474,7 +4495,7 @@ msgstr "Por favor, ¡no nos hagas nada malo!"
 
 #: data/dialogs/tutorial/atleticano.dlg:60
 msgid "And so I am."
-msgstr ""
+msgstr "Y lo soy."
 
 #: data/dialogs/tutorial/atleticano.dlg:73
 msgid "So you're the one Logan found. I need something from you."
@@ -4491,6 +4512,8 @@ msgid ""
 "The thing is: the Cruzeirense here is having some problems, but he refuses "
 "to talk about that. Give him a soda can and let him talk."
 msgstr ""
+"La cosa está así: El hincha del Cruzeiro está teniendo algunos problemas, "
+"pero no quiere hablar de ello. Dale un refresco a ver si se explaya."
 
 #: data/dialogs/tutorial/atleticano.dlg:96
 msgid "If I have enough time!"
@@ -4570,7 +4593,7 @@ msgstr "¿Dónde está la pala?"
 
 #: data/dialogs/tutorial/hippie.dlg:49
 msgid "Ouch... another freak out!"
-msgstr ""
+msgstr "¡Mierda, otro friki!"
 
 #: data/dialogs/tutorial/hippie.dlg:62
 msgid "Bro, I need things from you... Or we'll be wasted!"
@@ -4613,6 +4636,9 @@ msgid ""
 "I need some kind of crazy ration to my chickens. But The Farm refuses to "
 "give it to me. Can you get some for me? But remember: without blood!"
 msgstr ""
+"Necesito un pienso alucinógeno para los pollos, pero la granjera se niega a "
+"proporcionármelo. ¿Puedes conseguirlo para mi?, pero recuerda, ¡nada de "
+"sangre!"
 
 #: data/dialogs/tutorial/hippie.dlg:128
 msgid "For sure."
@@ -4756,6 +4782,8 @@ msgid ""
 "Uhm, there's something I'll want latter from you. But first, I'll need some "
 "ingredients for the ration. A mushroom..."
 msgstr ""
+"Uhm, hay algo que quiero pedirte, pero primero necesito unos ingredientes "
+"para el pienso. Unos monguis..."
 
 #: data/dialogs/tutorial/dona.dlg:204
 msgid "Have you got the mushroom?"
@@ -4795,7 +4823,7 @@ msgstr "Instalar Ruindows en el portatil de Santa Wärrous."
 
 #: data/missions/tutorial/mission4.mis:2
 msgid "Fight for Cruzeirense."
-msgstr ""
+msgstr "Lucha por el hincha del Cruzeiro."
 
 #: data/missions/tutorial/hippie1.mis:2
 msgid "Get some psychedelic ration for F.S.C. Hippie"
@@ -4952,7 +4980,7 @@ msgstr "Cuerpo a cuerpo"
 
 #: data/weapons/types/ranges.dcl:3
 msgid "Ranged"
-msgstr ""
+msgstr "A distancia"
 
 #: data/weapons/types/sizes.dcl:2
 msgid "Tiny"
@@ -4972,7 +5000,7 @@ msgstr "Pesado"
 
 #: data/characters/pcs/santa.pc:1
 msgid "Santa Claws"
-msgstr "Santa Claws"
+msgstr "El viejo Nöel"
 
 #~ msgid "Not found in dialog: %d\n"
 #~ msgstr "No se encontró en el diálogo: %d\n"
