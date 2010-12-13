@@ -1,6 +1,7 @@
 ================================================
 |                Version 0.7                   |
 ================================================
+ - Fixed the outdoor minimap scale ratio;
  - Default walls texture repeat to 64 (instead of 16);
  - Don't render shadow for low height sceneries at floor;
  - dntMapEditor: Using dntList and defParser for list of files;

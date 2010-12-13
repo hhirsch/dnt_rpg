@@ -138,8 +138,6 @@ void miniMapWindow::updateCharacterPosition(float posX, float posZ)
       GLfloat ratio = (GLfloat)curMap->getSquareMiniSize() / 
                       (GLfloat)curMap->squareSize();
 
-      cerr << ratio << endl;
-
       /* Convert Character position to the MiniMap Coordinates */
       GLint x = (int) (posX*ratio);
       GLint z = (int) ((curMap->getSizeZ()*curMap->squareSize()) - posZ)*ratio;

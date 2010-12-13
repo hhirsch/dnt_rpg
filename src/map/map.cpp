@@ -2641,11 +2641,11 @@ void Map::drawMiniMap()
       ratio = 0.009f;
       if(x > z)
       {
-         height = (x-7)*3;
+         height = (x)*3;
       }
       else
       {
-         height = (z-7)*3;
+         height = (z)*3;
       }
    }
    else
