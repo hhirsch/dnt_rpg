@@ -2431,7 +2431,7 @@ int Map::save(string arquivo)
    if(!(arq = fopen(dir.getRealFile(arquivo).c_str(),"w")))
    {
       cerr << "Error while creating: " << dir.getRealFile(arquivo) << endl;
-	return(0);
+      return(0);
    }
 
    /* Remove Unused Textures */

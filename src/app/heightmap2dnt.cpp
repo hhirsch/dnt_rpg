@@ -114,6 +114,153 @@ bool doConversion(string imgFile, string mapFile)
 }
 
 /***********************************************************************
+ *                              doIndoor                               *
+ ***********************************************************************/
+bool doIndoor(string imgFile, string mapFile)
+{
+   SDL_Surface* img = IMG_Load(imgFile.c_str());
+   Map* dntMap;
+   int sizeX=0, sizeZ=0;
+   int k,l;
+   Uint32 color;
+   Uint8 R, G, B;
+   float wx1 = -1;
+   float wz1 = -1;
+   float wx2 = -1;
+   float wz2 = -1;
+
+   /* Verify Opened Image */
+   if(!img)
+   {
+      cerr << "Couldn't load image input file!" << endl;
+      return(false);
+   }
+
+   /* Create Map, based on image size */
+   dntMap = new Map();
+   sizeX = img->w / 10;
+   sizeZ = img->h / 10;
+   dntMap->newMap(sizeX, sizeZ);
+   dntMap->setOutdoor(false);
+
+   /* Add vertical walls */
+   for(k = 0; k < img->w; k++)
+   {
+      for(l=0; l < img->h; l++)
+      {
+         color = pixel_Get(img, k, l);
+         SDL_GetRGB(color, img->format, &R, &G, &B);
+         if(R == 0)
+         {
+            /* Wall */
+            if(wx1 == -1)
+            {
+               wx1 = k*INDOOR_SQUARE_SIZE/10.0f;
+               wz1 = l*INDOOR_SQUARE_SIZE/10.0f;
+            }
+            else
+            {
+               wx2 = k*INDOOR_SQUARE_SIZE/10.0f;
+               wz2 = l*INDOOR_SQUARE_SIZE/10.0f;
+            }
+         }
+         else
+         {
+            /* No Wall */
+            if((wx1 != -1) && (wx2 != -1))
+            {
+               /* Add it */
+               dntMap->addWall(wx1, wz1, wx1+10, wz2+10);
+            }
+
+            /* Empty buffer */
+            wx1 = -1; wz1 = -1;
+            wx2 = -1; wz2 = -1;
+         }
+      }
+
+      /* If have wall at end of line, must add it */
+      if((wx1 != -1) && (wx2 != -1))
+      {
+         /* Add it */
+         dntMap->addWall(wx1, wz1, wx1+10, wz2+10);
+      }
+
+      /* Empty buffer */
+      wx1 = -1; wz1 = -1;
+      wx2 = -1; wz2 = -1;
+   }
+
+   /* Add horizontal walls */
+   for(l = 0; l < img->h; l++)
+   {
+      for(k=0; k < img->w; k++)
+      {
+         color = pixel_Get(img, k, l);
+         SDL_GetRGB(color, img->format, &R, &G, &B);
+         if(R == 0)
+         {
+            /* Wall */
+            if(wx1 == -1)
+            {
+               wx1 = k*INDOOR_SQUARE_SIZE/10.0f;
+               wz1 = l*INDOOR_SQUARE_SIZE/10.0f;
+            }
+            else
+            {
+               wx2 = k*INDOOR_SQUARE_SIZE/10.0f;
+               wz2 = l*INDOOR_SQUARE_SIZE/10.0f;
+            }
+         }
+         else
+         {
+            /* No Wall */
+            if((wx1 != -1) && (wx2 != -1))
+            {
+               /* Add it */
+               dntMap->addWall(wx1, wz1, wx2+10, wz1+10);
+            }
+
+            /* Empty buffer */
+            wx1 = -1; wz1 = -1;
+            wx2 = -1; wz2 = -1;
+         }
+      }
+
+      /* If have wall at end of line, must add it */
+      if((wx1 != -1) && (wx2 != -1))
+      {
+         /* Add it */
+         dntMap->addWall(wx1, wz1, wx2+10, wz1+10);
+      }
+
+      /* Empty buffer */
+      wx1 = -1; wz1 = -1;
+      wx2 = -1; wz2 = -1;
+   }
+
+   dntMap->setInitialPosition((sizeX*dntMap->squareSize() / 2.0),
+                              (sizeZ*dntMap->squareSize() / 2.0));
+
+
+   /* Save the Map */
+   if(!dntMap->save(mapFile))
+   {
+      delete(dntMap);
+      SDL_FreeSurface(img);
+
+      cerr << "Couldn't save map!" << endl;
+
+      return(false);
+   }
+
+   cout << "saved as: " << mapFile << endl;
+   delete(dntMap);
+   SDL_FreeSurface(img);
+   return(true);
+}
+
+/***********************************************************************
  *                              showHelp                               *
  ***********************************************************************/
 void showHelp()
@@ -123,7 +270,8 @@ void showHelp()
         << "\theightmap2dnt -i image -o mapname" << endl
         << "Description:" << endl
         << "\t-i\tDefine image to use as heightmap" << endl
-        << "\t-o\tDefine output map filename to create" << endl;
+        << "\t-o\tDefine output map filename to create" << endl
+        << "\t-w\tTo set the map as indoor" << endl;
    exit(-1);
 }
 
@@ -134,9 +282,10 @@ int main(int argc, char** argv)
 {
    char option;
    string mapFile="", imgFile="";
+   bool indoorMap = false;
 
    /* get the parameters  */
-   while( (option = getopt(argc,argv,"i:o:") ) != -1)
+   while( (option = getopt(argc,argv,"i:o:w") ) != -1)
    {
       switch(option)
       {
@@ -160,6 +309,12 @@ int main(int argc, char** argv)
             {
                showHelp();
             }
+         break;
+         
+         case 'w': /* Indoor Map */
+         {
+            indoorMap = true;
+         }
          break;
 
          default:  /* Unknow */
@@ -194,8 +349,18 @@ int main(int argc, char** argv)
    dirs dir;
    dir.findDataDirectories();
 
-
-   if(doConversion(imgFile, mapFile))
+   if(indoorMap)
+   {
+      if(doIndoor(imgFile, mapFile))
+      {
+         cout << "Done." << endl;
+      }
+      else
+      {
+         cout << "Failed." << endl;
+      }
+   }
+   else if(doConversion(imgFile, mapFile))
    {
       cout << "Done." << endl;
    }
