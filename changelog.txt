@@ -5,7 +5,7 @@
  - Default walls texture repeat to 64 (instead of 16);
  - Don't render shadow for low height sceneries at floor;
  - dntMapEditor: Using dntList and defParser for list of files;
- - (heightmap2dnt) Added indoor map import (with walls);
+ - heightmap2dnt: Added indoor map import (with walls);
 
 
 ================================================
