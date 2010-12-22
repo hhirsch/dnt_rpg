@@ -1,4 +1,4 @@
-# Made by DccNiTghtmare's MapEditor, 0.7
+# Made by DccNiTghtmare's MapEditor, 0.6
 size = 10X10
 name = gettext("Base")
 outdoor = 0
@@ -222,10 +222,20 @@ square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/steel3.png
 square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/steel3.png
+useObject = models/objetos/geral/sofa2/sofa2.dcc 1:8,1:482.856,0.000,36.781:-91.000:0
+useObject = models/objetos/geral/mesa_redonda/mesa_redonda.dcc 0:9,1:526.617,0.000,38.504:-91.000:0
 square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/steel3.png
+useObject = models/objetos/geral/mesa_redonda/mesa_redonda.dcc 1:9,1:526.617,0.000,38.504:-91.000:0
+useObject = models/objetos/books/mjack/mjack.dcc 1:9,1:518.009,10.200,38.957:-127.000:0
+useObject = models/objetos/itens/healkit/healkit.dcc 1:9,1:530.766,10.200,36.203:-48.000:0
+useObject = models/objetos/itens/garrafa1/garrafa1.dcc 1:9,1:522.917,10.200,45.264:-164.000:0
+useObject = models/objetos/itens/garrafa1/garrafa1.dcc 1:9,1:523.735,10.200,32.420:-164.000:0
+useObject = models/objetos/icex/snes/dk/snes_dk.dcc 1:9,1:532.414,10.200,45.070:-155.000:0
+useObject = models/natural/cogumelo/cogumelo.dcc 1:9,1:527.957,10.200,29.513:-155.000:0
 square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/steel3.png
+useObject = models/objetos/industrial/compdeck/compdeck.dcc 0:10,2:624.219,4.900,64.523:-270.000:0
 #Z: 1
 square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/steel3.png
@@ -243,10 +253,13 @@ square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/steel3.png
 square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/steel3.png
+useObject = models/objetos/geral/sofa2/sofa2.dcc 0:8,1:482.856,0.000,36.781:-91.000:0
 square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/steel3.png
 square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/steel3.png
+connection = 622.922791,117.384361,638.675232,135.716751:0.000000:mapas/tutorial/tyrol.map
+useObject = models/objetos/industrial/compdeck/compdeck.dcc 1:10,2:624.219,4.900,64.523:-270.000:0
 #Z: 2
 square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/steel3.png
@@ -264,10 +277,16 @@ square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/steel3.png
 square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/steel3.png
+useObject = models/objetos/geral/refmachine/refmachine.dcc 1:8,3:482.030,0.000,154.403:91.000:0
 square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/steel3.png
 square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/steel3.png
+connection = 622.922791,117.384361,638.675232,135.716751:0.000000:mapas/tutorial/tyrol.map
+useObject = models/junk/pneu/pneu.dcc 1:10,3:626.319,0.000,166.311:-155.000:0
+useObject = models/junk/pneu/pneu.dcc 1:10,3:612.534,0.000,164.797:-155.000:0
+useObject = models/junk/pneu/pneu.dcc 1:10,3:617.850,0.000,150.524:-155.000:0
+useObject = models/junk/pneu/pneu.dcc 1:10,3:619.639,4.900,159.526:-155.000:0
 #Z: 3
 square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/steel3.png
