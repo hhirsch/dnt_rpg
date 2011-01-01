@@ -1,0 +1,18 @@
+tools_gnarly.blend
+  author: pfunked
+  license: GPLv3 
+  source: http://opengameart.org/content/gnarly-tools
+
+apple_crate.blend crate.png
+  author: pfunked
+  license: GPLv3 
+  source: http://opengameart.org/content/wood-apple-crate
+
+dinnerware.blend terracotta_d.png terracotta_n.png silver_d.png silver_n.png
+wood_d.png
+  author: pfunked
+  license: GPLv3 
+  source: http://opengameart.org/content/dinnerware
+
+Some modifications and adjusts by DNTeam, GPLv3 or later.
+  
