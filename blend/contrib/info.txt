@@ -1,3 +1,5 @@
   Here are the models not made by the DNTeam (or only modified by DNTeam). 
+  
   For information about their license, just read license.txt file at model's
-directory.
+directory. All of them are compatible with free (as in libre) licenses.
+
