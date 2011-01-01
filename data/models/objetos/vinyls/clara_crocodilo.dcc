@@ -1,0 +1,13 @@
+name = Arrigo Barnabé - Clara Crocodilo
+cal3d = models/objetos/vinyls/clara_crocodilo.cfg
+inventory_sizes = 2 2
+inventory_texture = models/objetos/vinyls/clara_crocodilo_inv.png
+life_points = 250
+fortitude = 8
+reflex = 0
+will = 0
+displacement = 0
+armature_class = 10
+size_modifier = -1
+cost = 12
+static_scenery = 0
