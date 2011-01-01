@@ -88,7 +88,7 @@ end_dialog
 ############################################################
 dialog(5)
    npc_begin
-      text = gettext("I need you to install a Ruindows on the occupation's notebook. Will you do it?")
+      text = gettext("I need you to install a Ruindows on the squatter's notebook. Will you do it?")
    npc_end
    pc_begin
       option
@@ -143,7 +143,7 @@ end_dialog
 ############################################################
 dialog(8)
    npc_begin
-      text = gettext("I'm waiting for you install the Ruindows on the occupation's notebook!")
+      text = gettext("I'm waiting for you install the Ruindows at the squatter's notebook!")
    npc_end
    pc_begin
       option

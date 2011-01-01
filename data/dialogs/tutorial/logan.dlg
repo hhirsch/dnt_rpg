@@ -16,11 +16,11 @@ end_dialog
 ############################################################
 dialog(1)
    npc_begin
-      text = gettext("I am Logan, maintainer of this occupation.")
+      text = gettext("I am Logan, maintainer of this squatter.")
    npc_end
    pc_begin
       option
-         text = gettext("Occupation? Is this, the cleanest house I've ever seen, an occupation?")
+         text = gettext("Squatter? Is this, the cleanest house I've ever seen, an squatter?")
          action = go_to_dialog(3)
       option
          text = gettext("What am I doing here?")
@@ -48,7 +48,7 @@ end_dialog
 ############################################################
 dialog(3)
    npc_begin
-      text = gettext("Yes, occupation. A clean and sweet ocupation that also serves as a healing clinic for people with big tongues and no gratitude!")
+      text = gettext("Yes, squatter. A clean and sweet squatter that also serves as a healing clinic for people with big tongues and no gratitude!")
    npc_end
    pc_begin
       option

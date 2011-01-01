@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2010-08-20 16:22-0300\n"
+"POT-Creation-Date: 2011-01-01 14:12-0200\n"
 "PO-Revision-Date: 2010-08-20 13:21+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -4072,11 +4072,11 @@ msgid "Who are you?"
 msgstr "Chi sei?"
 
 #: data/dialogs/tutorial/logan.dlg:19
-msgid "I am Logan, maintainer of this occupation."
+msgid "I am Logan, maintainer of this squatter."
 msgstr "Sono Logan, il custode di questa catapecchia"
 
 #: data/dialogs/tutorial/logan.dlg:23
-msgid "Occupation? Is this, the cleanest house I've ever seen, an occupation?"
+msgid "Squatter? Is this, the cleanest house I've ever seen, an squatter?"
 msgstr ""
 "Catapecchia? Questa, la casa più pulità io abbia mai visto, è una "
 "catapecchia?"
@@ -4106,7 +4106,7 @@ msgstr "Cosa vuoi da me?"
 
 #: data/dialogs/tutorial/logan.dlg:51
 msgid ""
-"Yes, occupation. A clean and sweet ocupation that also serves as a healing "
+"Yes, squatter. A clean and sweet squatter that also serves as a healing "
 "clinic for people with big tongues and no gratitude!"
 msgstr ""
 "Si, catapecchia. Una catapecchia pulita e gioiosa usata anche come clinica "
@@ -4344,8 +4344,7 @@ msgstr "No."
 
 #: data/dialogs/tutorial/santa.dlg:91
 msgid ""
-"I need you to install a Ruindows on the occupation's notebook. Will you do "
-"it?"
+"I need you to install a Ruindows on the squatter's notebook. Will you do it?"
 msgstr ""
 "Ho bisogno che mi installi Ruindows sul notebook del lavoro. Lo puoi fare?"
 
@@ -4380,7 +4379,7 @@ msgid "I won't talk with you, heretic."
 msgstr "Non parlero con te, eretico!"
 
 #: data/dialogs/tutorial/santa.dlg:146
-msgid "I'm waiting for you install the Ruindows on the occupation's notebook!"
+msgid "I'm waiting for you install the Ruindows at the squatter's notebook!"
 msgstr "Sto aspettando che mi installi Ruindows sul notebook del lavoro!"
 
 #: data/dialogs/tutorial/santa.dlg:150 data/dialogs/tutorial/santa.dlg:228
@@ -4795,7 +4794,7 @@ msgid "Exterminate all living Creatures at Bunker School."
 msgstr "Stermina tutte le Creature viventi nel Bunker della Scuola"
 
 #: data/missions/tutorial/mission3.mis:2
-msgid "Install Ruindows at the occupation's notebook for Santa Claws."
+msgid "Install Ruindows at the squatter's notebook for Santa Claws."
 msgstr "Installa Ruindows sul portatile di lavoro di Santa Claws."
 
 #: data/missions/tutorial/mission4.mis:2
