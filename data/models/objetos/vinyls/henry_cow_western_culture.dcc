@@ -1,0 +1,13 @@
+name = Henry Cow - Western Culture Vinyl
+cal3d = models/objetos/vinyls/henry_cow_western_culture.cfg
+inventory_sizes = 2 2
+inventory_texture = models/objetos/vinyls/henry_cow_western_culture_inv.png
+life_points = 250
+fortitude = 8
+reflex = 0
+will = 0
+displacement = 0
+armature_class = 10
+size_modifier = -1
+cost = 800
+static_scenery = 0
