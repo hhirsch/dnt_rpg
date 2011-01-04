@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
 "POT-Creation-Date: 2011-01-01 14:12-0200\n"
-"PO-Revision-Date: 2009-08-11 10:09+0000\n"
+"PO-Revision-Date: 2011-01-02 14:37+0000\n"
 "Last-Translator: Yves MATHIEU <ymathieu@moulins-vichy.cci.fr>\n"
 "Language-Team: French <fr@li.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-08-16 15:28+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-01-04 11:12+0000\n"
+"X-Generator: Launchpad (build 12138)\n"
 
 #: src/classes/actions.cpp:144
 #, c-format
@@ -531,23 +531,23 @@ msgstr "Dialogue"
 
 #: src/engine/featsel.cpp:168
 msgid "Available"
-msgstr ""
+msgstr "Disponible"
 
 #: src/engine/featsel.cpp:172
 msgid "Selected"
-msgstr ""
+msgstr "Sélectionné"
 
 #: src/engine/featsel.cpp:359
 msgid "Remaining"
-msgstr ""
+msgstr "Restant"
 
 #: src/engine/featsel.cpp:469
 msgid "You can't select more talents"
-msgstr ""
+msgstr "Vous ne pouvez sélectionner plus de talents"
 
 #: src/engine/featswindow.cpp:96
 msgid "Select"
-msgstr ""
+msgstr "Sélectionner"
 
 #: src/engine/initial.cpp:79
 msgid "New"
@@ -737,11 +737,11 @@ msgstr "Allemand"
 
 #: src/engine/options.cpp:55
 msgid "Catalan"
-msgstr ""
+msgstr "Catalan"
 
 #: src/engine/options.cpp:56
 msgid "Occitan"
-msgstr ""
+msgstr "Occitan"
 
 #: src/engine/options.cpp:57
 msgid "Russian"
@@ -749,7 +749,7 @@ msgstr "Russe"
 
 #: src/engine/options.cpp:58
 msgid "Japanese"
-msgstr ""
+msgstr "Japonais"
 
 #: src/engine/options.cpp:137
 msgid "Camera Rotate Left"
@@ -943,7 +943,7 @@ msgstr "Activer le Filtrage Anisotropique"
 
 #: src/engine/options.cpp:933
 msgid "Stencil Buffer:"
-msgstr ""
+msgstr "Stencil Buffer :"
 
 #: src/engine/options.cpp:950
 msgid "Reflections:"
@@ -1067,7 +1067,7 @@ msgstr "Ouvrir la fenêtre du Groupe"
 
 #: src/engine/shortcutswindow.cpp:440
 msgid "Click to select a talent"
-msgstr ""
+msgstr "Cliquez pour sélectionner un talent"
 
 #: src/engine/skillwindow.cpp:82
 msgid "Total Free Points:"
@@ -1087,11 +1087,11 @@ msgstr "Coût"
 
 #: src/engine/skillwindow.cpp:234
 msgid "Base Attribute:"
-msgstr ""
+msgstr "Attributs de Base:"
 
 #: src/engine/skillwindow.cpp:245
 msgid "Unknow!"
-msgstr ""
+msgstr "Inconnu!"
 
 #: src/fight/fightSystem.cpp:151
 msgid "No more enemies."
@@ -1215,30 +1215,32 @@ msgid ""
 "One of those terrible monsters: a 18th level Music Student mixed with a "
 "single (and incredible) Administration Student level: Michael J."
 msgstr ""
+"Un de ces terribles montres: Un étudiant en musique de niveau 18 mélangé à "
+"un simple (et incroyable) étudiant administratif: Michael J."
 
 #: data/comics/other/mjack/mjack.dcb:26
 msgid "Originated by a failed Simulacrum proccess of an ancient J-5 member,"
-msgstr ""
+msgstr "Issu d'un simulacre de processus d'un ancien membre du J-5"
 
 #: data/comics/other/mjack/mjack.dcb:37
 msgid "it used a hat, Supedohat. Apparently a common white hat,"
-msgstr ""
+msgstr "Il utilise un chapeau, Supedoaht. D'apparence un chapeau blanc commun,"
 
 #: data/comics/other/mjack/mjack.dcb:40
 msgid "but, actually, a metamorphosical throwning thriller weapon."
-msgstr ""
+msgstr "but, en réalité, une arme exaltante métamorphique lançable."
 
 #: data/comics/other/mjack/mjack.dcb:51
 msgid "As all monsters, it had weak points:"
-msgstr ""
+msgstr "Comme tous les monstres, Il avait des points faibles:"
 
 #: data/comics/other/mjack/mjack.dcb:54
 msgid "An obsessed fear of 3rd world diseases"
-msgstr ""
+msgstr "Une peur obsessionnelle des maladies du 3ème monde"
 
 #: data/comics/other/mjack/mjack.dcb:65
 msgid "and more than US$200 million debt."
-msgstr ""
+msgstr "et plus de 200 milliards de $ US de dette."
 
 #: data/comics/tutorial/combat/combat.dcb:19
 #: data/comics/tutorial/combat/combat.dcb:38
@@ -1279,6 +1281,8 @@ msgid ""
 "First, each character rolls an initiative check, to define the order each "
 "one will act."
 msgstr ""
+"En premier, chaque personnage effectue un jeté d'initiative, pour définir "
+"l'ordre dans lequel chacun agira."
 
 #: data/comics/tutorial/combat/combat.dcb:91
 msgid ""
@@ -3037,7 +3041,7 @@ msgstr ""
 
 #: data/feats/biology/mass_arthropds_attack.fta:1
 msgid "Mass Arthropds Attack"
-msgstr ""
+msgstr "Attaque massive d'arthropodes"
 
 #: data/feats/biology/mass_arthropds_attack.fta:2
 msgid ""

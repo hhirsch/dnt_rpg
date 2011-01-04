@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
 "POT-Creation-Date: 2011-01-01 14:12-0200\n"
-"PO-Revision-Date: 2010-09-06 15:31+0000\n"
-"Last-Translator: firefoxx11 <Unknown>\n"
+"PO-Revision-Date: 2011-01-02 14:31+0000\n"
+"Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: German <de@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-19 20:08+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-01-04 11:12+0000\n"
+"X-Generator: Launchpad (build 12138)\n"
 
 #: src/classes/actions.cpp:144
 #, c-format
@@ -1087,7 +1087,7 @@ msgstr "Kosten"
 
 #: src/engine/skillwindow.cpp:234
 msgid "Base Attribute:"
-msgstr ""
+msgstr "Basis Attribute:"
 
 #: src/engine/skillwindow.cpp:245
 msgid "Unknow!"
@@ -1445,7 +1445,7 @@ msgstr ""
 
 #: data/alignment/spcapitalista.ali:1
 msgid "Capitalist Proprietary-Software Adept"
-msgstr ""
+msgstr "Kapitalistischer Proprietär-Software Experte"
 
 #: data/alignment/spcapitalista.ali:2
 msgid ""
@@ -1453,30 +1453,37 @@ msgid ""
 "big idol. They want to be rich with the software they make, although, most "
 "of the time, their work is only explored by national software factories."
 msgstr ""
+"   Kapitalistische Proprietär-Software Experten habein in Onkel Bill (Gates) "
+"ihr großes Idol gefunden. Sie wollen mit ihrer Sotware reich werden, obwohl "
+"ihre Arbeit meistens auf nationalen Softwarefirmen basiert."
 
 #: data/alignment/slcaotico.ali:1
 msgid "Chaotic Free-Software Adept"
-msgstr ""
+msgstr "Chaotischer Freie-Software Experte"
 
 #: data/alignment/slcaotico.ali:2
 msgid ""
 "   Chaotic Free-Software adepts are more permissive about software license, "
 "since it is without charge and allows full access to the source code."
 msgstr ""
+"   Chaotische Freie-Software Experten sind toleranter über Software "
+"Lizenzen, seit es sie ohne Strafen und vollem Zugang zum Source Code gibt."
 
 #: data/alignment/spneutro.ali:1
 msgid "Neutral Proprietary-Software Adept"
-msgstr ""
+msgstr "Neutraler Proprietäre-Software Experte"
 
 #: data/alignment/spneutro.ali:2
 msgid ""
 "   Neutral Proprietary Software Adepts want to make money with their "
 "programs, but distrust the absence of security of their Ruindow$."
 msgstr ""
+"   Neutrale Proprietäre-Software Experten wollen mit ihren Programmen Geld "
+"verdienen, aber Misstrauen dem Fehler der Sicherheit ihres Ruindow$"
 
 #: data/alignment/slcentrista.ali:1
 msgid "Center Free-Software Adept"
-msgstr ""
+msgstr "Zentraler freie-Software Experte"
 
 #: data/alignment/slcentrista.ali:2
 msgid ""
@@ -1486,6 +1493,11 @@ msgid ""
 "point of fact, just as free - or not - as it originally was. Usually they "
 "are only adepts of GPL licences."
 msgstr ""
+"   Zentrale freie-Software Experten glauben and die Freie Verfügung von "
+"Wissen, aber auch das Freiheit nur Relativ ist und nicht so frei wie in "
+"Gemeinfreiheit. Hier ist die Software frei, oder, in Fakt, nur so Frei - "
+"oder nicht - als es normalerweise war. Üblicherweise sind sie nur Experten "
+"von GPL Lizenzen."
 
 #: data/classes/administration.cls:1
 msgid "Administration Student"
@@ -1505,36 +1517,54 @@ msgid ""
 "firmly believe that what they are doing is useful to others and to "
 "themselves."
 msgstr ""
+"Auch bekannt als Taylor's kleine Jungs, Verwaltungs-Studenten sind oft in "
+"der Selbsthilfeabteiler kommrzieller Buchläden vorzufinden. Sie haben sich "
+"dieses Studiengebiet ausgesucht, weil sie nichts mit ihrem Leben anzufangen "
+"wissen (exakte Wissenschaften, Naturwissenschaften, Gruppendynamik?) und, "
+"obwohl sie meistens nichts zu verwalten haben, glauben sie fest daran, dass "
+"das was sie tun gut für die Menschheit ist."
 
 #: data/classes/administration.cls:7
 msgid ""
 "Administration students are very definitely not known for their intellectual "
 "capacities. (Am I wrong, Elis Regina?). So, they receive -2 of Intelligence."
 msgstr ""
+"Verwaltungs-Studenten sind definitiv nicht gerade bekannt für ihren "
+"Intellekt. (Oder nicht, Elis Regina?). Dadurch bekommen sie ein -2 auf "
+"Intelligenz."
 
 #: data/classes/administration.cls:9
 msgid ""
 "It's a real turn-off to find some of those dumb asses in a group. -4 of "
 "Charisma."
 msgstr ""
+"Es ist ein richtiger Abtörner diese Idioten in Gruppen zu sehen. -4 auf "
+"Charisma."
 
 #: data/classes/administration.cls:11
 msgid ""
 "The works of Taylor are a common part of the Administration Students' course "
 "of study. +2 for Constitution."
 msgstr ""
+"Die Arbeiten von Taylor sind ein wichtiger Teil des Studiengebiets von "
+"Verwaltungs-Studenten. +2 für Konstitution"
 
 #: data/classes/administration.cls:13
 msgid ""
 "Since they are Taylor's faithful disciples, they receive +4 of Taylorism "
 "Skill."
 msgstr ""
+"Weil sie Taylor's vertauensvolle Schüler sind, bekommen sie +4 auf "
+"Taylorismische Fähigkeit."
 
 #: data/classes/administration.cls:15
 msgid ""
 "In their dogmatic cult to Taylor they found bizarre things (with maximun "
 "financial efficiency) to be their 'clothes', receiving +4 of Bizarre Clothes."
 msgstr ""
+"In ihrm Dogmatischen Kult zu Taylor fanden sie bizarre Dinge (mit Maximaler "
+"Finanzieller Effizienz)als ihre Kleidung, erhalten dafür +4 auf Bizarre "
+"Kleidung."
 
 #: data/classes/administration.cls:17
 msgid ""
@@ -1598,7 +1628,7 @@ msgstr ""
 
 #: data/classes/medician.cls:17
 msgid "They Receive +2 of Diplomacy when talking to boys and patys."
-msgstr ""
+msgstr "Sie erhalten +2 Diplomatie, wenn sie mit boys and patys reden."
 
 #: data/classes/medician.cls:19
 msgid "They receive -2 of Diplomacy when talking to other races."
@@ -1712,7 +1742,7 @@ msgstr ""
 
 #: data/classes/music.cls:15
 msgid "+2 of Charisma for the capacity to fill people with joy."
-msgstr ""
+msgstr "+2 auf Charisma durch das Erreichen von Leuten zu erfreuen."
 
 #: data/classes/music.cls:17
 msgid ""
@@ -1762,6 +1792,8 @@ msgid ""
 "By their natural tendency to be qualified as Geeks, being one or not, they "
 "receive -1 of Charisma."
 msgstr ""
+"Durch ihre natürliche Tendenz zum Geek, sein oder auch nicht, erhalten sie "
+"-1 auf Charisma."
 
 #: data/classes/compsci.cls:11
 msgid ""
@@ -1775,14 +1807,17 @@ msgid ""
 "Also receive -2 of reflexes for the mount of time spent in front of a "
 "computer."
 msgstr ""
+"Auch erhalten sie -2 auf Reflexe durch die lange Zeit, die sie vor dem "
+"Computer verbringen."
 
 #: data/classes/philosophy.cls:1
 msgid "Philosophy Student"
-msgstr ""
+msgstr "Philosophie Student"
 
 #: data/classes/philosophy.cls:2
 msgid "'Better die by vodka than by boredom!'|(Vladmir Maiakovsky)"
 msgstr ""
+"\"Besser wegen Wodka sterben als durch Langeweile!\"|(Vladimir Maiakovsky)"
 
 #: data/classes/philosophy.cls:3
 msgid ""
