@@ -280,7 +280,7 @@ void shortcutsWindow::setParticlesNumber(int total)
  ***********************************************************************/
 void shortcutsWindow::setFPS(float fps)
 {
-   char txt[32];
+   char txt[128];
    if(shortCutsWindow != NULL)
    {
       sprintf(txt, "%s: %.2f", gettext("FPS"), fps);
