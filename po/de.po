@@ -1027,7 +1027,7 @@ msgstr "Partikel"
 
 #: src/engine/shortcutswindow.cpp:286
 msgid "FPS"
-msgstr "BPS (Bilder pro Sekunde)"
+msgstr "BPS"
 
 #: src/engine/shortcutswindow.cpp:376
 msgid "Enter Battle Mode"
