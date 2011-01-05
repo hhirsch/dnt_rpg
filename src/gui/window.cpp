@@ -54,12 +54,13 @@ void windowList::freeElement(dntListElement* obj)
 /*********************************************************************
  *                           insertWindow                            *
  *********************************************************************/
-window* windowList::insertWindow(int xa,int ya,int xb,int yb,string text)
+window* windowList::insertWindow(int xa,int ya,int xb,int yb,string text,
+      bool empty)
 {
    window* novo;
 
    /* Create and insert the window on the list */
-   novo = new window(xa,ya,xb,yb,text,this);
+   novo = new window(xa,ya,xb,yb,text,this, empty);
    insert(novo);
 
    return(novo);
@@ -87,8 +88,8 @@ void windowList::removeWindow(window *jan)
 /*********************************************************************
  *                             Constructor                           *
  *********************************************************************/
-window::window(int xa, int ya, int xb, int yb, string title, void* list)
-       :guiObject(NULL)
+window::window(int xa, int ya, int xb, int yb, string title, void* list,
+      bool empty):guiObject(NULL)
 {
    dntFont fnt;
    dirs dir;
@@ -107,6 +108,7 @@ window::window(int xa, int ya, int xb, int yb, string title, void* list)
    canClose = true;
    canMove = true;
    modal = false;
+   hasSelfDraw = !empty;
    visible = true;
    externPointer = NULL;
 
@@ -131,7 +133,7 @@ window::window(int xa, int ya, int xb, int yb, string title, void* list)
                                   smallestPowerOfTwo(xb-xa),
                                   smallestPowerOfTwo(yb-ya),32,
                                   rmask,gmask,bmask,amask);
-   color_Set(255, 255, 255, 255);
+   color_Set(255, 255, 255, hasSelfDraw?255:0);
    rectangle_Fill(surface, 0,0, smallestPowerOfTwo(xb-xa)-1,
                   smallestPowerOfTwo(yb-ya)-1);
 
@@ -141,22 +143,36 @@ window::window(int xa, int ya, int xb, int yb, string title, void* list)
    /* Create Objects List */
    objects = new guiList(surface);
 
-   /* Create Menu Button */
-   menuButton = objects->insertButton(3,3,13,12,"-",0);
-   menuButton->men = new menu(0,0,surface);
-   menu* men = (menu*) menuButton->men;
-   men->insertItem(gettext("Maximize"), 
-                   dir.getRealFile("icons/maximize.png") ,0);
-   men->insertItem("-",0);
-   men->insertItem(gettext("Close"), dir.getRealFile("icons/close.png"), 1);
-   
-   /* Create Close Button */
-   closeButton = objects->insertButton(14,3,24,12,fnt.createUnicode(0x25CF),0);
-   closeButton->defineFont(DNT_FONT_ARIAL, 10);
 
-   /* Create Minimize Maximize Button */
-   minMaxButton = objects->insertButton(25,3,35,12,fnt.createUnicode(0x25B2),0);
-   minMaxButton->defineFont(DNT_FONT_ARIAL, 8);
+   /* Create title bar things */
+   if(hasSelfDraw)
+   {
+      /* Create Menu Button */
+      menuButton = objects->insertButton(3,3,13,12,"-",0);
+      menuButton->men = new menu(0,0,surface);
+      menu* men = (menu*) menuButton->men;
+      men->insertItem(gettext("Maximize"), 
+            dir.getRealFile("icons/maximize.png") ,0);
+      men->insertItem("-",0);
+      men->insertItem(gettext("Close"), dir.getRealFile("icons/close.png"), 1);
+
+      /* Create Close Button */
+      closeButton = objects->insertButton(14,3,24,12,
+            fnt.createUnicode(0x25CF),0);
+      closeButton->defineFont(DNT_FONT_ARIAL, 10);
+
+      /* Create Minimize Maximize Button */
+      minMaxButton = objects->insertButton(25,3,35,12,
+            fnt.createUnicode(0x25B2),0);
+      minMaxButton->defineFont(DNT_FONT_ARIAL, 8);
+   }
+   else
+   {
+      /* No title bar */
+      menuButton = NULL;
+      closeButton = NULL;
+      minMaxButton = NULL;
+   }
 
    /* Set the object type as WINDOW! */
    type = FARSO_OBJECT_WINDOW;
@@ -192,37 +208,40 @@ void window::draw(int mouseX, int mouseY, bool drawBar)
    int dx = x2 - x1;
    int dy = y2 - y1;
 
-   color_Set(Colors.colorWindow.R, Colors.colorWindow.G,
-             Colors.colorWindow.B, Colors.colorWindow.A);
-   rectangle_Fill(surface, 3,3,dx-3,dy-3);
-   color_Set(Colors.colorCont[0].R, Colors.colorCont[0].G,
-             Colors.colorCont[0].B, Colors.colorCont[0].A);
-   rectangle_Draw(surface,0,0,dx-1,dy-1);
-   color_Set(Colors.colorButton.R, Colors.colorButton.G, 
-             Colors.colorButton.B, Colors.colorButton.A);
-   rectangle_Draw(surface,1,1,dx-2,dy-2);
-   color_Set(Colors.colorCont[2].R, Colors.colorCont[2].G,
-             Colors.colorCont[2].B, Colors.colorCont[2].A);
-   line_Draw(surface,2,13,dx-4,13);
-   color_Set(Colors.colorCont[0].R, Colors.colorCont[0].G,
-             Colors.colorCont[0].B, Colors.colorCont[0].A);
-   rectangle_2Colors(surface,2,2,dx-3,dy-3,Colors.colorCont[2].R,
-                     Colors.colorCont[2].G,Colors.colorCont[2].B,
-                     Colors.colorCont[2].A);
-
-
-   /* Draw the bar */
-   windowList* lst = (windowList*)intList;
-
-   if(drawBar)
+   if(hasSelfDraw)
    {
-      if(this == lst->getActiveWindow())
+      color_Set(Colors.colorWindow.R, Colors.colorWindow.G,
+            Colors.colorWindow.B, Colors.colorWindow.A);
+      rectangle_Fill(surface, 3,3,dx-3,dy-3);
+      color_Set(Colors.colorCont[0].R, Colors.colorCont[0].G,
+            Colors.colorCont[0].B, Colors.colorCont[0].A);
+      rectangle_Draw(surface,0,0,dx-1,dy-1);
+      color_Set(Colors.colorButton.R, Colors.colorButton.G, 
+            Colors.colorButton.B, Colors.colorButton.A);
+      rectangle_Draw(surface,1,1,dx-2,dy-2);
+      color_Set(Colors.colorCont[2].R, Colors.colorCont[2].G,
+            Colors.colorCont[2].B, Colors.colorCont[2].A);
+      line_Draw(surface,2,13,dx-4,13);
+      color_Set(Colors.colorCont[0].R, Colors.colorCont[0].G,
+            Colors.colorCont[0].B, Colors.colorCont[0].A);
+      rectangle_2Colors(surface,2,2,dx-3,dy-3,Colors.colorCont[2].R,
+            Colors.colorCont[2].G,Colors.colorCont[2].B,
+            Colors.colorCont[2].A);
+
+
+      /* Draw the bar */
+      windowList* lst = (windowList*)intList;
+
+      if(drawBar)
       {
-         drawActiveBar();
-      }
-      else
-      {
-         drawInactiveBar();
+         if(this == lst->getActiveWindow())
+         {
+            drawActiveBar();
+         }
+         else
+         {
+            drawInactiveBar();
+         }
       }
    }
 
@@ -243,16 +262,19 @@ void window::drawInactiveBar()
    /* Redraw All window, removing the mouse from it */
    draw(-1,-1, false);
 
-   /* Redraw the Inactive Bar */
-   color_Set(Colors.colorWindow.R, Colors.colorWindow.G,
-             Colors.colorWindow.B, Colors.colorWindow.A);
-   rectangle_Fill(surface,36,3,dx-3,12);
-   color_Set(Colors.colorBar.R+100, Colors.colorBar.G,
-             Colors.colorBar.B, Colors.colorBar.A);
-   fnt.defineFont(DNT_FONT_ARIAL,10);
-   fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
-   fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
-   fnt.write(surface,39,1,text);
+   if(hasSelfDraw)
+   {
+      /* Redraw the Inactive Bar */
+      color_Set(Colors.colorWindow.R, Colors.colorWindow.G,
+            Colors.colorWindow.B, Colors.colorWindow.A);
+      rectangle_Fill(surface,36,3,dx-3,12);
+      color_Set(Colors.colorBar.R+100, Colors.colorBar.G,
+            Colors.colorBar.B, Colors.colorBar.A);
+      fnt.defineFont(DNT_FONT_ARIAL,10);
+      fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
+      fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
+      fnt.write(surface,39,1,text);
+   }
    setChanged();
 }
 
@@ -263,16 +285,20 @@ void window::drawActiveBar()
 {
    dntFont fnt;
    int dx = x2-x1;
-   color_Set(Colors.colorBar.R, Colors.colorBar.G,
-             Colors.colorBar.B, Colors.colorBar.A);
-   rectangle_Fill(surface,36,3,dx-3,12);
-   color_Set(Colors.colorText.R, Colors.colorText.G,
-             Colors.colorText.B, Colors.colorText.A);
-   fnt.defineFont(DNT_FONT_ARIAL,10);
-   fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
-   fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
-   fnt.write(surface,39,1,text);
-   setChanged();
+
+   if(hasSelfDraw)
+   {
+      color_Set(Colors.colorBar.R, Colors.colorBar.G,
+            Colors.colorBar.B, Colors.colorBar.A);
+      rectangle_Fill(surface,36,3,dx-3,12);
+      color_Set(Colors.colorText.R, Colors.colorText.G,
+            Colors.colorText.B, Colors.colorText.A);
+      fnt.defineFont(DNT_FONT_ARIAL,10);
+      fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
+      fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
+      fnt.write(surface,39,1,text);
+      setChanged();
+   }
 }
 
 /*********************************************************************

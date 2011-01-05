@@ -47,8 +47,10 @@ class window: public guiObject
        * \param xb -> x2 coordinate
        * \param yb -> y2 coordinate 
        * \param title -> title of the window
-       * \param list -> guiList pointer to the list where the window is */
-      window(int xa, int ya, int xb, int yb, string title, void* list);
+       * \param list -> guiList pointer to the list where the window is 
+       * \param empty -> with window is without any self draw */ 
+      window(int xa, int ya, int xb, int yb, string title, void* list, 
+             bool empty=false);
 
       /*! Destructor */
       ~window();
@@ -159,6 +161,8 @@ class window: public guiObject
       button* menuButton;     /**< Button to open Window Menu */
       button* minMaxButton;   /**< Button to minimize, maximize the window */
 
+      bool hasSelfDraw;          /**< If has title bar or not */
+
       /*! Draw the Title Bar as Inactive */
       void drawInactiveBar();
 
@@ -181,8 +185,10 @@ class windowList: public dntList
        * \param ya -> y1 coordinate
        * \param xb -> x2 coordinate
        * \param yb -> y2 coordinate 
-       * \param text -> title of the window */
-      window* insertWindow(int xa,int ya,int xb,int yb,string text);
+       * \param text -> title of the window
+       * \param empty -> with window is without any self draw */ 
+      window* insertWindow(int xa,int ya,int xb,int yb,string text, 
+            bool empty=false);
 
       /*! Remove a window from the list
        * \param jan -> pointer to window to remove */

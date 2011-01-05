@@ -7,6 +7,7 @@
  - Don't render shadow for low height sceneries at floor;
  - dntMapEditor: Using dntList and defParser for list of files;
  - heightmap2dnt: Added indoor map import (with walls);
+ - Capacity to create empty (without decorations) windows;
 
 
 ================================================

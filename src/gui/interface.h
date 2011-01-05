@@ -128,8 +128,10 @@ class guiInterface
        * \param xb -> x2 window posiiton 
        * \param yb -> y2 window position
        * \param text -> title of the window 
+       * \param empty -> with window is without any self draw 
        * \return -> pointer to the inserted window */
-      window* insertWindow(int xa,int ya,int xb,int yb,string text);
+      window* insertWindow(int xa,int ya,int xb,int yb,string text,
+            bool empty=false);
       /*! Open a Window
        * \param jan -> pointer to the window opened */
       void openWindow(window* jan);

@@ -854,9 +854,10 @@ void guiInterface::closeAllWindows()
 /*********************************************************************
  *                            insertWindow                           *
  *********************************************************************/
-window* guiInterface::insertWindow(int xa,int ya,int xb,int yb, string text)
+window* guiInterface::insertWindow(int xa,int ya,int xb,int yb, string text,
+            bool empty)
 {
-   return(lwindows->insertWindow(xa,ya,xb,yb,text));
+   return(lwindows->insertWindow(xa,ya,xb,yb,text, empty));
 }
 
 /*********************************************************************
