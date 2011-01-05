@@ -103,10 +103,10 @@ window::window(int xa, int ya, int xb, int yb, string title, void* list,
    minY = 15;
    minX = 50;
    text = title;
-   canMaximize = true;
-   canScale = true;
-   canClose = true;
-   canMove = true;
+   canMaximize = !empty;
+   canScale = !empty;
+   canClose = !empty;
+   canMove = !empty;
    modal = false;
    hasSelfDraw = !empty;
    visible = true;
