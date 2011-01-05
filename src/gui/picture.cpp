@@ -173,3 +173,13 @@ void picture::setAllVisible()
    area.h = y2 - y1;
 }
 
+/******************************************************
+ *                   setAllVisible                    *
+ ******************************************************/
+void picture::setUseAlphaFromSource()
+{
+   if(fig)
+   {
+      SDL_SetAlpha(fig, 0, 0);
+   }
+}

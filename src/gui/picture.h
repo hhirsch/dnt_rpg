@@ -67,11 +67,15 @@ class picture: public guiObject
       /*! Set the picture as all visible */
       void setAllVisible();
 
+      /*! Set to use the alpha from source insted from dest */
+      void setUseAlphaFromSource();
+
 
    protected:
       SDL_Surface *fig;     /**< A picture surface */
       SDL_Rect area;        /**< The visible area */
       bool deleteSurface;   /**< true will delete the surface at destructor */
+      bool useAlphaFromSource; /**< to use alpha from source */
 
 };
 
