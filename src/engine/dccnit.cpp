@@ -2148,6 +2148,7 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
          {
             /* Go back to the game menu */
             exitEngine = 1;
+            cursors->setTextOver("");
          }
          break;
          case SHORTCUTS_WINDOW_SAVE:
@@ -2831,6 +2832,7 @@ int engine::treatIO(SDL_Surface *screen)
          defineFrontSurface();
          lastKey = SDLK_ESCAPE;
          lastKeyb = time;
+         cursors->setTextOver("");
          return(0);
       }
 
