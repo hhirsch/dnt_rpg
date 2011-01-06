@@ -19,6 +19,7 @@
 */
 
 #include "shortcutswindow.h"
+#include "cursor.h"
 #include "../etc/dirs.h"
 #include "../etc/defparser.h"
 #include "util.h"
@@ -44,6 +45,7 @@ void shortcutsWindow::open(guiInterface* gui)
 {
    dirs dir;
    int i;
+   int midX=SCREEN_X/2;
 
    guiUsed = gui;
 
@@ -63,11 +65,47 @@ void shortcutsWindow::open(guiInterface* gui)
    {
       curDefinedTalent = -1;
       curSelectedTalent = -1;
-  
-      shortCutsWindow = gui->insertWindow(0,SCREEN_Y-129,512,SCREEN_Y-1,
+ 
+      /* Open Shortcuts Window */
+      shortCutsWindow = gui->insertWindow(midX-247,SCREEN_Y-88,
+            midX+247,SCREEN_Y-1, "", true);
+      picture* pic = shortCutsWindow->getObjectsList()->insertPicture(80,0,0,0,
+            dir.getRealFile("texturas/shortcutsw/shortcuts.png").c_str());
+      tabButton* tb;
+      tb = shortCutsWindow->getObjectsList()->insertTabButton(80,0,334,43,NULL);
+      tb->setObjectBelow(pic);
+      buttonAttackMode = tb->insertButton(11,5,44,38);/* Attack Mode */
+      buttonJournal = tb->insertButton(51,5,84,38);/* Journal Window */
+      buttonInventory = tb->insertButton(91,5,124,38);/* Inventory */
+      buttonMap = tb->insertButton(131,5,164,38);/* Map */
+      buttonGroup = tb->insertButton(171,5,204,38);/* Party/Group */
+      buttonRest = tb->insertButton(211,5,244,38);/* Rest */
+      buttonCharacter = tb->insertButton(251,5,284,38);/* Character */
+      buttonEndTurn = tb->insertButton(291,5,324,38);/* End Turn */
+
+      /* Quick Attacks Window */
+      int i;
+      pic = shortCutsWindow->getObjectsList()->insertPicture(0,44,0,0,
+            dir.getRealFile("texturas/shortcutsw/quickattacks.png").c_str());
+      tb = shortCutsWindow->getObjectsList()->insertTabButton(0,44,494,87,
+            NULL);
+
+      tb->setObjectBelow(pic);
+      for(i=0; i<12; i++)
+      {
+         buttonQuickFeat[i] = tb->insertButton(11+i*40,5,44+i*40,38);
+         picQuickFeat[i] = shortCutsWindow->getObjectsList()->insertPicture(
+                     11+i*40,44+i*40,0,0, NULL);
+         picQuickFeat[i]->setSurfaceDeletion(false);
+         tb->setObjectBelow(picQuickFeat[i]);
+      }
+
+      gui->openWindow(shortCutsWindow);
+     
+      /* Old! */
+      shortCutsWindow = gui->insertWindow(0,SCREEN_Y-129,257,SCREEN_Y-1,
                                           gettext("Shortcuts"));
-      thingTxt = shortCutsWindow->getObjectsList()->insertTextBox(8,20,249,35,1,
-                                                            gettext("Nothing"));
+
       fpsTxt = shortCutsWindow->getObjectsList()->insertTextBox(8,36,128,51,1,
                                                                 "FPS:");
       partTxt = shortCutsWindow->getObjectsList()->insertTextBox(129,36,
@@ -84,98 +122,6 @@ void shortcutsWindow::open(guiInterface* gui)
                                                                  249,120,1,
                                                                  "00:00");
       hourTxt->setFont(DNT_FONT_TIMES,11,DNT_FONT_ALIGN_CENTER);
-
-
-      tabButton* tb;
-      tb = shortCutsWindow->getObjectsList()->insertTabButton(252,14,256,110,
-            NULL);
-      buttonAttackMode = tb->insertButton(7,4,43,36);/* Attack Mode */
-      tb->setObjectBelow(shortCutsWindow->getObjectsList()->insertPicture(
-            261, 18, 0,0, 
-            dir.getRealFile("texturas/shortcutsw/attack.png").c_str()));
-      buttonQuickFeat[0] = tb->insertButton(7,40,43,72);/* Attack 1 */
-      picQuickFeat[0] = shortCutsWindow->getObjectsList()->insertPicture(
-            261,54,0,0, NULL);
-      picQuickFeat[0]->setSurfaceDeletion(false);
-      tb->setObjectBelow(picQuickFeat[0]);
-      buttonQuickFeat[6] = tb->insertButton(7,75,43,107);/* Attack 7 */
-      picQuickFeat[6] = shortCutsWindow->getObjectsList()->insertPicture(
-            261,89,0,0, NULL);
-      picQuickFeat[6]->setSurfaceDeletion(false);
-      tb->setObjectBelow(picQuickFeat[6]);
-
-      buttonJournal = tb->insertButton(53,4,89,36);/* Journal Window */
-      tb->setObjectBelow(shortCutsWindow->getObjectsList()->insertPicture(
-            307, 18, 0,0, 
-            dir.getRealFile("texturas/shortcutsw/quests.png").c_str()));
-      buttonQuickFeat[1] = tb->insertButton(53,40,89,72);/* Attack 2 */
-      picQuickFeat[1] = shortCutsWindow->getObjectsList()->insertPicture(
-            307,54,0,0, NULL);
-      picQuickFeat[1]->setSurfaceDeletion(false);
-      tb->setObjectBelow(picQuickFeat[1]);
-      buttonQuickFeat[7] = tb->insertButton(53,75,89,107);/* Attack 8 */
-      picQuickFeat[7] = shortCutsWindow->getObjectsList()->insertPicture(
-            307,89,0,0, NULL);
-      picQuickFeat[7]->setSurfaceDeletion(false);
-      tb->setObjectBelow(picQuickFeat[7]);
-
-      buttonInventory = tb->insertButton(99,4,135,36);/* Inventory */
-      tb->setObjectBelow(shortCutsWindow->getObjectsList()->insertPicture(
-            353, 18, 0,0, 
-            dir.getRealFile("texturas/shortcutsw/inventory.png").c_str()));
-      buttonQuickFeat[2] = tb->insertButton(99,40,135,72);/* Attack 3 */
-      picQuickFeat[2] = shortCutsWindow->getObjectsList()->insertPicture(
-            353,54,0,0, NULL);
-      picQuickFeat[2]->setSurfaceDeletion(false);
-      tb->setObjectBelow(picQuickFeat[2]);
-      buttonQuickFeat[8] = tb->insertButton(99,75,135,107);/* Attack 9 */
-      picQuickFeat[8] = shortCutsWindow->getObjectsList()->insertPicture(
-            353,89,0,0, NULL);
-      picQuickFeat[8]->setSurfaceDeletion(false);
-      tb->setObjectBelow(picQuickFeat[8]);
-
-      buttonMap = tb->insertButton(141,4,177,36);/* Map */
-      tb->setObjectBelow(shortCutsWindow->getObjectsList()->insertPicture(
-            395, 18, 0,0, 
-            dir.getRealFile("texturas/shortcutsw/map.png").c_str()));
-      buttonQuickFeat[3] = tb->insertButton(141,40,177,72);/* Attack 4 */
-      picQuickFeat[3] = shortCutsWindow->getObjectsList()->insertPicture(
-            395,54,0,0, NULL);
-      picQuickFeat[3]->setSurfaceDeletion(false);
-      tb->setObjectBelow(picQuickFeat[3]);
-      buttonQuickFeat[9] = tb->insertButton(141,75,177,107);/* Attack 10 */
-      picQuickFeat[9] = shortCutsWindow->getObjectsList()->insertPicture(
-            395,89,0,0, NULL);
-      picQuickFeat[9]->setSurfaceDeletion(false);
-      tb->setObjectBelow(picQuickFeat[9]);
-
-      buttonGroup = tb->insertButton(180,4,216,36);/* Party/Group */
-      tb->setObjectBelow(shortCutsWindow->getObjectsList()->insertPicture(
-            434, 18, 0,0, 
-            dir.getRealFile("texturas/shortcutsw/group.png").c_str()));
-      buttonQuickFeat[4] = tb->insertButton(180,40,216,72);/* Attack 5 */
-      picQuickFeat[4] = shortCutsWindow->getObjectsList()->insertPicture(
-            434,54,0,0, NULL);
-      picQuickFeat[4]->setSurfaceDeletion(false);
-      tb->setObjectBelow(picQuickFeat[4]);
-      buttonRest = tb->insertButton(180,75,216,107);/* Rest */
-      tb->setObjectBelow(shortCutsWindow->getObjectsList()->insertPicture(
-            434, 89, 0,0, 
-            dir.getRealFile("texturas/shortcutsw/rest.png").c_str()));
-
-      buttonCharacter = tb->insertButton(220,4,256,36);/* Character */
-      tb->setObjectBelow(shortCutsWindow->getObjectsList()->insertPicture(
-            474, 18, 0,0, 
-            dir.getRealFile("texturas/shortcutsw/charinfo.png").c_str()));
-      buttonQuickFeat[5] = tb->insertButton(220,40,256,72);/* Attack 6 */
-      picQuickFeat[5] = shortCutsWindow->getObjectsList()->insertPicture(
-            474,54,0,0, NULL);
-      picQuickFeat[5]->setSurfaceDeletion(false);
-      tb->setObjectBelow(picQuickFeat[5]);
-      buttonEndTurn = tb->insertButton(220,75,256,107);/* End Turn */
-      tb->setObjectBelow(shortCutsWindow->getObjectsList()->insertPicture(
-            471, 89, 0,0, 
-            dir.getRealFile("texturas/shortcutsw/endturn.png").c_str()));
 
       shortCutsWindow->setExternPointer(&shortCutsWindow);
       gui->openWindow(shortCutsWindow);
@@ -252,17 +198,6 @@ void shortcutsWindow::setClearedTalents(bool b)
 }
 
 /***********************************************************************
- *                             setThing                                *
- ***********************************************************************/
-void shortcutsWindow::setThing(string thingName)
-{
-   if(shortCutsWindow != NULL)
-   {
-      thingTxt->setText(thingName);
-   }
-}
-
-/***********************************************************************
  *                        setParticlesNumber                           *
  ***********************************************************************/
 void shortcutsWindow::setParticlesNumber(int total)
@@ -327,6 +262,7 @@ int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode,
       character* activeCharacter)
 {
    int i, res;
+   cursor mouseCursor;
 
    /* No opened window => No Events */
    if(shortCutsWindow == NULL)
@@ -373,54 +309,55 @@ int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode,
          {
             if(engineMode != ENGINE_MODE_TURN_BATTLE)
              {
-                thingTxt->setText(gettext("Enter Battle Mode"));
+                mouseCursor.setTextOver(gettext("Enter Battle Mode"));
              }
              else
              {
-                thingTxt->setText(gettext("Select Normal Attack"));
+                mouseCursor.setTextOver(gettext("Select Normal Attack"));
              }  
             return(SHORTCUTS_WINDOW_OTHER); 
          }
          else if(object == (guiObject*) buttonJournal)
          {
-            thingTxt->setText(gettext("Open Quests Window"));
+            mouseCursor.setTextOver(gettext("Open Quests Window"));
             return(SHORTCUTS_WINDOW_OTHER);
          }
          else if(object == (guiObject*) buttonMap)
          {
-            thingTxt->setText(gettext("Open Map Window"));
+            mouseCursor.setTextOver(gettext("Open Map Window"));
             return(SHORTCUTS_WINDOW_OTHER);
          }
          else if(object == (guiObject*) buttonEndTurn)
          {
             if(engineMode == ENGINE_MODE_TURN_BATTLE)
             {
-               thingTxt->setText(gettext("End Character's Turn"));
+               mouseCursor.setTextOver(gettext("End Character's Turn"));
             }
             else
             {
-               thingTxt->setText(gettext("Only Available in Battle Mode"));
+               mouseCursor.setTextOver(
+                     gettext("Only Available in Battle Mode"));
             }
             return(SHORTCUTS_WINDOW_OTHER);
          }
          else if(object == (guiObject*) buttonInventory)
          {
-            thingTxt->setText(gettext("Open Inventory Window"));
+            mouseCursor.setTextOver(gettext("Open Inventory Window"));
             return(SHORTCUTS_WINDOW_OTHER);
          }
          else if(object == (guiObject*) buttonRest)
          {
-            thingTxt->setText(gettext("Rest"));
+            mouseCursor.setTextOver(gettext("Rest"));
             return(SHORTCUTS_WINDOW_OTHER);
          }
          else if(object == (guiObject*) buttonCharacter)
          {
-            thingTxt->setText(gettext("View Character Informations"));
+            mouseCursor.setTextOver(gettext("View Character Informations"));
             return(SHORTCUTS_WINDOW_OTHER);
          }
          else if(object == (guiObject*) buttonGroup)
          {
-            thingTxt->setText(gettext("Open Group/Party Window"));
+            mouseCursor.setTextOver(gettext("Open Group/Party Window"));
             return(SHORTCUTS_WINDOW_OTHER);
          }
          else
@@ -432,12 +369,13 @@ int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode,
                {
                   if(quickFeat[i] != NULL)
                   {
-                     thingTxt->setText(quickFeat[i]->info->name);
+                     mouseCursor.setTextOver(quickFeat[i]->info->name);
                      return(SHORTCUTS_WINDOW_OTHER);
                   }
                   else
                   {
-                     thingTxt->setText(gettext("Click to select a talent"));
+                     mouseCursor.setTextOver(
+                           gettext("Click to select a talent"));
                      return(SHORTCUTS_WINDOW_OTHER);
                   }
                }
@@ -645,7 +583,6 @@ guiInterface* shortcutsWindow::guiUsed = NULL;
 
 textBox* shortcutsWindow::fpsTxt = NULL;
 textBox* shortcutsWindow::partTxt = NULL;
-textBox* shortcutsWindow::thingTxt = NULL;
 textBox* shortcutsWindow::hourTxt = NULL;
 
 button* shortcutsWindow::buttonMenu = NULL;

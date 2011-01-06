@@ -41,7 +41,7 @@
 #define SHORTCUTS_WINDOW_END_TURN          11
 #define SHORTCUTS_WINDOW_SELECTED_TALENT   12
 
-#define QUICK_FEATS    10
+#define QUICK_FEATS    12
 
 /*! The shortcuts window, if quick access buttons and some
  * text infos. */
@@ -75,9 +75,6 @@ class shortcutsWindow
       int treat(guiObject* object, int eventInfo, int engineMode,
             character* activeCharacter);
 
-      /*! Set the thing bellow mouse
-       * \param thingName -> the name of the thing */
-      void setThing(string thingName);
       /*! Set the total number of particles active
        * \param total -> number of particles */
       void setParticlesNumber(int total);
@@ -113,7 +110,6 @@ class shortcutsWindow
 
       static textBox* fpsTxt;                /**< shows FPS */
       static textBox* partTxt;               /**< shows Particles count */
-      static textBox* thingTxt;              /**< shows thing at mouse */
       static textBox* hourTxt;               /**< shows Hour */
 
       static button* buttonMenu;             /**< call Menu */

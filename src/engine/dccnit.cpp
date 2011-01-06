@@ -2139,7 +2139,7 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
             PCs->getActiveCharacter());
       if( (res == SHORTCUTS_WINDOW_NONE) && (gui->mouseOnGui(mouseX, mouseY)) )
       {
-         shortcuts->setThing(gettext("Nothing"));
+         cursors->setTextOver(/*gettext("Nothing")*/"");
       }
       /* Now call the functions */
       switch(res)
@@ -2389,7 +2389,7 @@ int engine::verifyMouseActions(Uint8 mButton)
             if(intercepts( minObj, maxObj, minMouse, maxMouse))
             {
                curTarget = (thing*)sobj->obj;
-               shortcuts->setThing(sobj->obj->getName());
+               cursors->setTextOver(sobj->obj->getName());
                
                /* The Object Dialog Window Call */
                if(!sobj->obj->getConversationFile().empty())
@@ -2410,7 +2410,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                else
                {
                   cursors->set(CURSOR_GET);
-                  shortcuts->setThing(sobj->obj->getName()); 
+                  cursors->setTextOver(sobj->obj->getName()); 
                   if( (mButton & SDL_BUTTON(1)) && 
                       (rangeAction(activeCharacter->xPosition, 
                                    activeCharacter->zPosition,
@@ -2482,7 +2482,7 @@ int engine::verifyMouseActions(Uint8 mButton)
          if(intercepts( minObj, maxObj, minMouse, maxMouse))
          {
             cursors->set(CURSOR_DOOR);
-            shortcuts->setThing(gettext("Door")); 
+            cursors->setTextOver(gettext("Door")); 
             //curTarget = porta;
             if( (mButton & SDL_BUTTON(1)) && 
                 (rangeAction(activeCharacter->xPosition, 
@@ -2539,7 +2539,7 @@ int engine::verifyMouseActions(Uint8 mButton)
          if(intercepts( min, max, minMouse, maxMouse))
          {
             cursors->set(CURSOR_INVENTORY);
-            shortcuts->setThing(pers->name);
+            cursors->setTextOver(pers->name);
             curTarget = (thing*)pers;
 
             /* Open Inventory when button pressed */
@@ -2600,7 +2600,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                                        pers->getPortraitFileName());
                      }
                   }
-                  shortcuts->setThing(pers->name); 
+                  cursors->setTextOver(pers->name); 
                   pronto = 1;
                }
                /* Verify attacks */
@@ -2617,7 +2617,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                      feat* f = activeCharacter->getActiveFeatPtr();
                      cursors->set(f->info->image);
                   }
-                  shortcuts->setThing(pers->name); 
+                  cursors->setTextOver(pers->name); 
 
                   if( (mButton & SDL_BUTTON(1)) &&
                       (rangeAction(activeCharacter->xPosition, 
@@ -2671,7 +2671,7 @@ int engine::verifyMouseActions(Uint8 mButton)
          minMouse[2] = zReal-2;  maxMouse[2] = zReal+2;
          if( intercepts( minCon, maxCon, minMouse, maxMouse ) )
          {
-            shortcuts->setThing(quaux->mapConection.mapName); 
+            cursors->setTextOver(quaux->mapConection.mapName); 
 
             curConection = &quaux->mapConection;
             cursors->set(CURSOR_MAPTRAVEL);
@@ -2694,7 +2694,7 @@ int engine::verifyMouseActions(Uint8 mButton)
 
       if( (!pronto) )
       {
-         shortcuts->setThing(gettext("Nothing")); 
+         cursors->setTextOver(/*gettext("Nothing")*/""); 
       }
    }
    return(0);

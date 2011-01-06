@@ -36,7 +36,7 @@ using namespace std;
  ***********************************************************************/
 tabObj::tabObj(SDL_Surface* surface)
 {
-   list = new guiList(surface);
+   list = new guiList(surface, true);
    title = "";
 }
 

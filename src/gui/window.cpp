@@ -141,7 +141,7 @@ window::window(int xa, int ya, int xb, int yb, string title, void* list,
    propY = (float)(yb-ya) / (float)smallestPowerOfTwo(yb-ya);
 
    /* Create Objects List */
-   objects = new guiList(surface);
+   objects = new guiList(surface, hasSelfDraw);
 
 
    /* Create title bar things */

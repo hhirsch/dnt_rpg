@@ -28,12 +28,13 @@
 /**************************************************************
  *                         Constructor                        *
  **************************************************************/
-guiList::guiList(SDL_Surface* surface, int t):dntList(t)
+guiList::guiList(SDL_Surface* surface, bool hasDecor, int t):dntList(t)
 {
    total = 0;
    first = NULL;
    intMenu = NULL;
    wSurface = surface;
+   wHasDecor = hasDecor;
    tab = NULL;
 }
 
@@ -277,6 +278,11 @@ picture* guiList::insertPicture(int x,int y,int w,int h,const char* arquivo)
 {
    picture* novo;
    novo = new picture(x,y,w,h,arquivo,wSurface);
+   /* Use alpha from source at empty windows */
+   if(!wHasDecor)
+   {
+      novo->setUseAlphaFromSource();
+   }
    insert(novo);
    return(novo);
 } 
