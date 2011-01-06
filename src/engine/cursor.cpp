@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -83,6 +83,12 @@ void cursor::init()
    loadCursor(dir.getRealFile("cursors/use.png"), CURSOR_USE);
    hotSpot[CURSOR_USE][0] = 15;
    hotSpot[CURSOR_USE][1] = 15;
+
+   /* Text over */
+   textOver = "";
+   glGenTextures(1, &textOverTexture);
+   textOverWidth=0;
+   textOverHeight=0;
    
    currentCursor = CURSOR_WALK;
 }
@@ -94,6 +100,7 @@ void cursor::finish()
 {
    /* Free Cursors Textures */
    glDeleteTextures(CURSOR_TOTAL,texture);
+   glDeleteTextures(1,&textOverTexture);
 }
 
 /*****************************************************************
@@ -153,6 +160,71 @@ int cursor::get()
    return(currentCursor);
 }
 
+/*****************************************************************
+ *                      setTextOver                              *
+ *****************************************************************/
+void cursor::setTextOver(string txt)
+{
+   /* Define Machine Bit Order */
+   Uint32 rmask, gmask, bmask, amask;
+  
+   if(txt != textOver)
+   {
+      textOver = txt;
+      if(!textOver.empty())
+      {
+         /* Recreate the texture */
+         dntFont fnt;
+         farso_colors curColor;
+         
+         fnt.defineFont(DNT_FONT_PALLADIO, 12);
+         fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
+         fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
+         textOverHeight = fnt.getHeight()+4;
+         textOverWidth = fnt.getStringWidth(textOver)+8;
+
+         #if SDL_BYTEORDER == SDL_BIG_ENDIAN
+            rmask = 0xff000000;
+            gmask = 0x00ff0000;
+            bmask = 0x0000ff00;
+            amask = 0x000000ff;
+         #else
+            rmask = 0x000000ff;
+            gmask = 0x0000ff00;
+            bmask = 0x00ff0000;
+            amask = 0xff000000;
+         #endif
+
+         SDL_Surface* s = SDL_CreateRGBSurface(SDL_SWSURFACE,
+                  smallestPowerOfTwo(textOverWidth),
+                  smallestPowerOfTwo(textOverHeight),
+                  32, rmask, gmask, bmask, amask);
+         
+         /* Do some details */
+         color_Set(curColor.colorButton.R, curColor.colorButton.G, 
+               curColor.colorButton.B, curColor.colorButton.A);
+         rectangle_Fill(s,1,1,textOverWidth-2,textOverHeight-2);
+         color_Set(curColor.colorCont[0].R, curColor.colorCont[0].G, 
+               curColor.colorCont[0].B, curColor.colorCont[0].A);
+         rectangle_Oval(s,0,0,textOverWidth-1, textOverHeight-1, 
+               curColor.colorCont[0].R, curColor.colorCont[0].G,
+               curColor.colorCont[0].B, curColor.colorCont[0].A);
+
+         /* Write the text */
+         color_Set(255,255,255,255);
+         fnt.defineFontAlign(DNT_FONT_ALIGN_CENTER);
+         fnt.write(s, 2, 3,
+               textOver.c_str(),
+               0, 0, textOverWidth, textOverHeight);
+
+
+         glGenTextures(1,&textOverTexture);
+         setTextureRGBA(s, textOverTexture);
+
+         SDL_FreeSurface(s);
+      }
+   }
+}
 
 /*****************************************************************
  *                             Draw                              *
@@ -165,6 +237,7 @@ void cursor::draw(int mouseX, int mouseY, float angle,
 
    glDisable(GL_DEPTH_TEST);
 
+   /* Render the cursor */
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, texture[currentCursor]);
    glPushMatrix();
@@ -187,6 +260,19 @@ void cursor::draw(int mouseX, int mouseY, float angle,
       glEnd();
    glPopMatrix();
 
+   /* Render the text over cursor, if defined */
+   if(!textOver.empty())
+   {
+      int tx1, ty1;
+      tx1 = mouseX - hotSpot[currentCursor][0];
+      ty1 = mouseY - hotSpot[currentCursor][1]-textOverHeight-2;
+
+      glPushMatrix();
+         textureToScreen(textOverTexture, tx1, ty1, textOverWidth+tx1, 
+               ty1+textOverHeight, textOverWidth, textOverHeight);
+      glPopMatrix();
+   }
+
    glEnable(GL_DEPTH_TEST);
 
    glDisable(GL_BLEND);
@@ -204,4 +290,7 @@ float cursor::propY[CURSOR_TOTAL];    /**< Y Proportion */
 float cursor::hotSpot[CURSOR_TOTAL][2]; /**< HotSpot */
 float cursor::scaleFactor[CURSOR_TOTAL]; 
 int cursor::currentCursor;
-
+string cursor::textOver;
+GLuint cursor::textOverTexture;
+int cursor::textOverWidth;
+int cursor::textOverHeight;

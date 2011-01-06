@@ -8,6 +8,7 @@
  - dntMapEditor: Using dntList and defParser for list of files;
  - heightmap2dnt: Added indoor map import (with walls);
  - Capacity to create empty (without decorations) windows;
+ - Text over cursor;
 
 
 ================================================

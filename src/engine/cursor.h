@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -73,6 +73,10 @@ class cursor
       /*! Gets the actual mouse cursor
        * \return -> pointer to the surface of the mouse cursor */
       int get();
+
+      /*! Set the text over the cursor
+       * \param txt -> text to show or "" for no text */
+      void setTextOver(string txt);
       
    private:
       static GLuint texture[CURSOR_TOTAL]; /**< Cursors Textures */
@@ -84,6 +88,11 @@ class cursor
       static float scaleFactor[CURSOR_TOTAL]; /**< Scale Factor */
       static int currentCursor;            /**< Current Cursor Index */
       
+      static string textOver;              /**< Text over cursor */
+      static GLuint textOverTexture;       /**< Texture of text over */
+      static int textOverWidth;            /**< Width of text over texture */
+      static int textOverHeight;           /**< Height of text over texture */
+
       /*! Load Cursor file 
        * \param fileName -> file name of cursor
        * \param index -> internal cursor index */
