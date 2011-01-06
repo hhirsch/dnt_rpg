@@ -168,6 +168,18 @@ void tabButton::draw()
                           cor.colorCont[1].R, cor.colorCont[1].G,
                           cor.colorCont[1].B, cor.colorCont[1].A);
       }
+      else if(style == FARSO_TAB_BUTTON_STYLE_HIGH)
+      {
+         color_Set(240,120,0,255);
+         rectangle_Draw(wSurface,x1+Buttons[current].x1,
+                                 y1+Buttons[current].y1,
+                                 x1+Buttons[current].x2,
+                                 y1+Buttons[current].y2);
+         rectangle_Draw(wSurface,x1+Buttons[current].x1+1,
+                                 y1+Buttons[current].y1+1,
+                                 x1+Buttons[current].x2-1,
+                                 y1+Buttons[current].y2-1);
+      }
       else if(style == FARSO_TAB_BUTTON_STYLE_LIST_TEXT)
       {
 

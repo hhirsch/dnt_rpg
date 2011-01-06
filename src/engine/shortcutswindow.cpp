@@ -74,6 +74,7 @@ void shortcutsWindow::open(guiInterface* gui)
       tabButton* tb;
       tb = shortCutsWindow->getObjectsList()->insertTabButton(80,0,334,43,NULL);
       tb->setObjectBelow(pic);
+      tb->setStyle(FARSO_TAB_BUTTON_STYLE_HIGH);
       buttonAttackMode = tb->insertButton(11,5,44,38);/* Attack Mode */
       buttonJournal = tb->insertButton(51,5,84,38);/* Journal Window */
       buttonInventory = tb->insertButton(91,5,124,38);/* Inventory */
@@ -90,6 +91,7 @@ void shortcutsWindow::open(guiInterface* gui)
       tb = shortCutsWindow->getObjectsList()->insertTabButton(0,44,494,87,
             NULL);
 
+      tb->setStyle(FARSO_TAB_BUTTON_STYLE_HIGH);
       tb->setObjectBelow(pic);
       for(i=0; i<12; i++)
       {
