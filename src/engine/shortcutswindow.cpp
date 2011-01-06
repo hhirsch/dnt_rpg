@@ -97,7 +97,7 @@ void shortcutsWindow::open(guiInterface* gui)
       {
          buttonQuickFeat[i] = tb->insertButton(11+i*40,5,44+i*40,38);
          picQuickFeat[i] = shortCutsWindow->getObjectsList()->insertPicture(
-                     11+i*40,44+i*40,0,0, NULL);
+                     11+i*40,5,0,0, NULL);
          picQuickFeat[i]->setSurfaceDeletion(false);
          tb->setObjectBelow(picQuickFeat[i]);
       }

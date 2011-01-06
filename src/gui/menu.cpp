@@ -33,7 +33,7 @@ menu::~menu()
  *                      Constructor                      *
  *********************************************************/
 menu::menu(int xa, int ya, SDL_Surface* surface)
-     :guiList(surface, DNT_LIST_TYPE_ADD_AT_END)
+     :guiList(surface, true, DNT_LIST_TYPE_ADD_AT_END)
 {
    x = xa;
    y = ya;
