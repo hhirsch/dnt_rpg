@@ -84,7 +84,7 @@ void shortcutsWindow::open(guiInterface* gui)
       buttonCharacter = tb->insertButton(251,5,284,38);/* Character */
       buttonEndTurn = tb->insertButton(291,5,324,38);/* End Turn */
 
-      /* Quick Attacks Window */
+
       int i;
       pic = shortCutsWindow->getObjectsList()->insertPicture(0,44,0,0,
             dir.getRealFile("texturas/shortcutsw/quickattacks.png").c_str());
@@ -93,38 +93,23 @@ void shortcutsWindow::open(guiInterface* gui)
 
       tb->setStyle(FARSO_TAB_BUTTON_STYLE_HIGH);
       tb->setObjectBelow(pic);
-      for(i=0; i<12; i++)
+
+      /* Load / Save / Menu */
+      buttonMenu = tb->insertButton(11, 5, 44, 38);
+      buttonLoad = tb->insertButton(50, 5, 84, 38);
+      buttonSave = tb->insertButton(90, 5, 124, 38);
+
+      /* Quick Attacks  */
+      for(i=0; i<QUICK_FEATS; i++)
       {
-         buttonQuickFeat[i] = tb->insertButton(11+i*40,5,44+i*40,38);
+         buttonQuickFeat[i] = tb->insertButton(130+i*40,5,164+i*40,38);
          picQuickFeat[i] = shortCutsWindow->getObjectsList()->insertPicture(
-                     11+i*40,5,0,0, NULL);
+                     131+i*40,49,0,0, NULL);
          picQuickFeat[i]->setSurfaceDeletion(false);
          tb->setObjectBelow(picQuickFeat[i]);
       }
 
-      gui->openWindow(shortCutsWindow);
-     
-      /* Old! */
-      shortCutsWindow = gui->insertWindow(0,SCREEN_Y-129,257,SCREEN_Y-1,
-                                          gettext("Shortcuts"));
-
-      fpsTxt = shortCutsWindow->getObjectsList()->insertTextBox(8,36,128,51,1,
-                                                                "FPS:");
-      partTxt = shortCutsWindow->getObjectsList()->insertTextBox(129,36,
-                                                                 249,51,1,
-                                                                 "Part:");
-      buttonSave=shortCutsWindow->getObjectsList()->insertButton(8,102,76,120,
-                                                             gettext("Save"),0);
-      buttonMenu=shortCutsWindow->getObjectsList()->insertButton(77,102,140,120,
-                                                             gettext("Menu"),0);
-      buttonLoad = shortCutsWindow->getObjectsList()->insertButton(141,102,
-                                                                   209,120,
-                                                             gettext("Load"),0);
-      hourTxt = shortCutsWindow->getObjectsList()->insertTextBox(210,102,
-                                                                 249,120,1,
-                                                                 "00:00");
-      hourTxt->setFont(DNT_FONT_TIMES,11,DNT_FONT_ALIGN_CENTER);
-
+      /* Finally, open the window */
       shortCutsWindow->setExternPointer(&shortCutsWindow);
       gui->openWindow(shortCutsWindow);
    }
@@ -197,43 +182,6 @@ void shortcutsWindow::reOpen(guiInterface* gui)
 void shortcutsWindow::setClearedTalents(bool b)
 {
    clearedTalents = b;
-}
-
-/***********************************************************************
- *                        setParticlesNumber                           *
- ***********************************************************************/
-void shortcutsWindow::setParticlesNumber(int total)
-{
-   char part[32];
-   if(shortCutsWindow != NULL)
-   {
-      sprintf(part, "%s: %d", gettext("Particles"), total);
-      partTxt->setText(part);
-   }
-}
-
-/***********************************************************************
- *                               setFPS                                *
- ***********************************************************************/
-void shortcutsWindow::setFPS(float fps)
-{
-   char txt[128];
-   if(shortCutsWindow != NULL)
-   {
-      sprintf(txt, "%s: %.2f", gettext("FPS"), fps);
-      fpsTxt->setText(txt);
-   }
-}
-
-/***********************************************************************
- *                              setHour                                *
- ***********************************************************************/
-void shortcutsWindow::setHour(string hour)
-{
-   if(shortCutsWindow != NULL)
-   {
-      hourTxt->setText(hour);
-   }
 }
 
 /***********************************************************************
@@ -362,6 +310,21 @@ int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode,
             mouseCursor.setTextOver(gettext("Open Group/Party Window"));
             return(SHORTCUTS_WINDOW_OTHER);
          }
+         else if(object == (guiObject*) buttonMenu)
+         {
+            mouseCursor.setTextOver(gettext("Menu"));
+            return(SHORTCUTS_WINDOW_OTHER);
+         }
+         else if(object == (guiObject*) buttonSave)
+         {
+            mouseCursor.setTextOver(gettext("Save"));
+            return(SHORTCUTS_WINDOW_OTHER);
+         }
+         else if(object == (guiObject*) buttonLoad)
+         {
+            mouseCursor.setTextOver(gettext("Load"));
+            return(SHORTCUTS_WINDOW_OTHER);
+         }
          else
          {
             /* Let's see if is under a quick feat */
@@ -419,6 +382,18 @@ int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode,
          else if(object == (guiObject*) buttonCharacter)
          {
             return(SHORTCUTS_WINDOW_CHARACTER);
+         }
+         else if(object == (guiObject*) buttonMenu)
+         {
+            return(SHORTCUTS_WINDOW_MENU);
+         }
+         else if(object == (guiObject*) buttonSave)
+         {
+            return(SHORTCUTS_WINDOW_SAVE);
+         }
+         else if(object == (guiObject*) buttonLoad)
+         {
+            return(SHORTCUTS_WINDOW_LOAD);
          }
          else
          {
@@ -481,24 +456,6 @@ int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode,
          }
       }
       break;
-
-      /* And, finally, the tree buttons */
-      case FARSO_EVENT_PRESSED_BUTTON:
-      {
-         if(object == (guiObject*) buttonMenu)
-         {
-            return(SHORTCUTS_WINDOW_MENU);
-         }
-         else if(object == (guiObject*) buttonSave)
-         {
-            return(SHORTCUTS_WINDOW_SAVE);
-         }
-         else if(object == (guiObject*) buttonLoad)
-         {
-            return(SHORTCUTS_WINDOW_LOAD);
-         }
-         break;
-      }
    }
    return(SHORTCUTS_WINDOW_NONE);
 }
@@ -583,13 +540,9 @@ bool shortcutsWindow::saveQuickTalents(string fileName)
  ***********************************************************************/
 guiInterface* shortcutsWindow::guiUsed = NULL;
 
-textBox* shortcutsWindow::fpsTxt = NULL;
-textBox* shortcutsWindow::partTxt = NULL;
-textBox* shortcutsWindow::hourTxt = NULL;
-
-button* shortcutsWindow::buttonMenu = NULL;
-button* shortcutsWindow::buttonSave = NULL;
-button* shortcutsWindow::buttonLoad = NULL;
+oneTabButton* shortcutsWindow::buttonMenu = NULL;
+oneTabButton* shortcutsWindow::buttonSave = NULL;
+oneTabButton* shortcutsWindow::buttonLoad = NULL;
 
 oneTabButton* shortcutsWindow::buttonAttackMode = NULL;
 oneTabButton* shortcutsWindow::buttonJournal = NULL;

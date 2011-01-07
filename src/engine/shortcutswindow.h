@@ -41,7 +41,7 @@
 #define SHORTCUTS_WINDOW_END_TURN          11
 #define SHORTCUTS_WINDOW_SELECTED_TALENT   12
 
-#define QUICK_FEATS    12
+#define QUICK_FEATS    9
 
 /*! The shortcuts window, if quick access buttons and some
  * text infos. */
@@ -75,16 +75,6 @@ class shortcutsWindow
       int treat(guiObject* object, int eventInfo, int engineMode,
             character* activeCharacter);
 
-      /*! Set the total number of particles active
-       * \param total -> number of particles */
-      void setParticlesNumber(int total);
-      /*! Set the current FPS value
-       * \param fps -> current FPS value */
-      void setFPS(float fps);
-      /*! Set the hour text
-       * \param hour -> new hour text */
-      void setHour(string hour);
-
       /*! Get the current selected quick talent (if any)
        * \return pointer to the selected talent or NULL */
       feat* getSelectedTalent();
@@ -108,13 +98,9 @@ class shortcutsWindow
    protected:
       static guiInterface* guiUsed;          /**< the used guiInterface */
 
-      static textBox* fpsTxt;                /**< shows FPS */
-      static textBox* partTxt;               /**< shows Particles count */
-      static textBox* hourTxt;               /**< shows Hour */
-
-      static button* buttonMenu;             /**< call Menu */
-      static button* buttonSave;             /**< call Save Function */
-      static button* buttonLoad;             /**< call Load Function */
+      static oneTabButton* buttonMenu;       /**< call Menu */
+      static oneTabButton* buttonSave;       /**< call Save Function */
+      static oneTabButton* buttonLoad;       /**< call Load Function */
       static oneTabButton* buttonAttackMode; /**< Enter on Attack Mode */
       static oneTabButton* buttonJournal;    /**< Open Journal Window */
       static oneTabButton* buttonMap;        /**< Call MiniMap */

@@ -2284,8 +2284,6 @@ void engine::hourToTxt()
    int imin = (int) (( hour - ihour ) * 60 );
    
    sprintf(&htmp[0],"%.2d:%.2d", ihour, imin);
-
-   shortcuts->setHour(htmp);
 }
 
 /*********************************************************************
@@ -3367,9 +3365,8 @@ int engine::treatIO(SDL_Surface *screen)
       /* Show it! */
       if( time-lastFPS >= 500 )
       {
+         /* FIXME -> reshow FPS! */
          lastFPS = time;
-         shortcuts->setFPS(actualFPS);
-         shortcuts->setParticlesNumber(particleController.numParticles());
       }
       
       /* Verify Sounds FIXME -> for npc sounds! */
