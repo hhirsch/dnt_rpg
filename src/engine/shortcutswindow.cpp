@@ -86,14 +86,11 @@ void shortcutsWindow::open(guiInterface* gui)
 
 
       int i;
-      pic = shortCutsWindow->getObjectsList()->insertPicture(0,44,0,0,
-            dir.getRealFile("texturas/shortcutsw/quickattacks.png").c_str());
       tb = shortCutsWindow->getObjectsList()->insertTabButton(0,44,494,87,
             NULL);
 
       tb->setStyle(FARSO_TAB_BUTTON_STYLE_HIGH);
-      tb->setObjectBelow(pic);
-
+      
       /* Load / Save / Menu */
       buttonMenu = tb->insertButton(11, 5, 44, 38);
       buttonLoad = tb->insertButton(50, 5, 84, 38);
@@ -108,6 +105,10 @@ void shortcutsWindow::open(guiInterface* gui)
          picQuickFeat[i]->setSurfaceDeletion(false);
          tb->setObjectBelow(picQuickFeat[i]);
       }
+      pic = shortCutsWindow->getObjectsList()->insertPicture(0,44,0,0,
+            dir.getRealFile("texturas/shortcutsw/quickattacks.png").c_str());
+      tb->setObjectBelow(pic);
+
 
       /* Finally, open the window */
       shortCutsWindow->setExternPointer(&shortCutsWindow);

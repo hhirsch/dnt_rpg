@@ -115,6 +115,7 @@ class tabButton: public picture
       int current;                          /**< Current Button selected */
       int style;                            /**< Current Style */
       guiObject* objectsBelow[TABBUTTON_BELLOW];  /**< Object Below */
+      int curBelow;                         /**< Current objects below */
       farso_colors cor;
 };
 

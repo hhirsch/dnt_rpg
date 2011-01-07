@@ -43,6 +43,7 @@ tabButton::tabButton(int x,int y,const char* arquivo, SDL_Surface* surface)
    {
       objectsBelow[i] = NULL;
    }
+   curBelow = -1;
 }
 
 /***********************************************************
@@ -66,6 +67,7 @@ tabButton::tabButton(int x, int y, int w, int h, SDL_Surface* surface)
    {
       objectsBelow[i] = NULL;
    }
+   curBelow = -1;
    style = FARSO_TAB_BUTTON_STYLE_NORMAL;
 }
 
@@ -74,15 +76,11 @@ tabButton::tabButton(int x, int y, int w, int h, SDL_Surface* surface)
  ***********************************************************/
 void tabButton::setObjectBelow(guiObject* obj)
 {
-   int i;
-
-   for(i=0; i < TABBUTTON_BELLOW; i++)
+   if(curBelow+1 < TABBUTTON_BELLOW)
    {
-      if(objectsBelow[i] == NULL)
-      {
-         objectsBelow[i] = obj;
-         return;
-      }
+      curBelow++;
+      objectsBelow[curBelow] = obj;
+      return;
    }
 
    cerr << "WARNING: tabButon: max objects bellow reached!" << endl;
@@ -134,12 +132,8 @@ void tabButton::draw()
    rectangle_Fill(wSurface, x1,y1, x2, y2);
 
    /* Draw below Object, if exists */
-   for(i=0; i < TABBUTTON_BELLOW; i++)
+   for(i=curBelow; i >= 0; i--)
    {
-      if(!objectsBelow[i])
-      {
-         break;
-      }
       objectsBelow[i]->draw();
    }
 
