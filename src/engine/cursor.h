@@ -42,6 +42,8 @@ using namespace std;
 #define CURSOR_USER_IMAGE  11 /**< Any user image seted as cursor */
 #define CURSOR_TOTAL       12 /**< Total number of mouse cursors */
 
+#define DNT_CURSOR_MAX_TEXT_OVER_TIME  60   /**< After 60ms if no update */
+
 /*! A mouse cursor class.*/
 class cursor
 {
@@ -92,6 +94,7 @@ class cursor
       static GLuint textOverTexture;       /**< Texture of text over */
       static int textOverWidth;            /**< Width of text over texture */
       static int textOverHeight;           /**< Height of text over texture */
+      static Uint32 textOverInit;          /**< Time inited the display */
 
       /*! Load Cursor file 
        * \param fileName -> file name of cursor

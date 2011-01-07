@@ -89,6 +89,7 @@ void cursor::init()
    glGenTextures(1, &textOverTexture);
    textOverWidth=0;
    textOverHeight=0;
+   textOverInit = 0;
    
    currentCursor = CURSOR_WALK;
 }
@@ -167,7 +168,11 @@ void cursor::setTextOver(string txt)
 {
    /* Define Machine Bit Order */
    Uint32 rmask, gmask, bmask, amask;
-  
+ 
+   /* Rese the timer */
+   textOverInit = SDL_GetTicks();
+
+   /* Reset things if needed */
    if(txt != textOver)
    {
       textOver = txt;
@@ -271,6 +276,13 @@ void cursor::draw(int mouseX, int mouseY, float angle,
          textureToScreen(textOverTexture, tx1, ty1, textOverWidth+tx1, 
                ty1+textOverHeight, textOverWidth, textOverHeight);
       glPopMatrix();
+
+      /* Verify max display time */
+      if((SDL_GetTicks() - textOverInit) > DNT_CURSOR_MAX_TEXT_OVER_TIME)
+      {
+         /* Expired */
+         setTextOver("");
+      }
    }
 
    glEnable(GL_DEPTH_TEST);
@@ -294,3 +306,4 @@ string cursor::textOver;
 GLuint cursor::textOverTexture;
 int cursor::textOverWidth;
 int cursor::textOverHeight;
+Uint32 cursor::textOverInit;          /**< Time inited the display */
