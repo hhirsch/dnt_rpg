@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -504,6 +504,31 @@ int inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                currentInventory = inv-1;
                reDraw();
             }
+         }
+      }
+      break;
+
+      /* Show Thing's name */
+      case FARSO_EVENT_ON_FOCUS_TAB_BUTTON:
+      {
+         /* Inventory Spaces Selected */
+         if( (guiObj == (guiObject*) inventoryButton[0]) ||
+             (guiObj == (guiObject*) inventoryButton[1]) ||
+             (guiObj == (guiObject*) inventoryButton[2]) ||
+             (guiObj == (guiObject*) inventoryButton[3]))
+         {
+            /* Open Menu For Object if one is avaible */
+            object* o;
+            o = inventories->getFromPosition(posX, posY,currentInventory);
+            if(o)
+            {
+               mouseCursor->setTextOver(o->getName());
+            }
+            else
+            {
+               mouseCursor->setTextOver("");
+            }
+            return(INVENTORY_ACTION_INTERNAL);
          }
       }
       break;

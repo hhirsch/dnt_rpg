@@ -42,7 +42,7 @@ using namespace std;
 #define CURSOR_USER_IMAGE  11 /**< Any user image seted as cursor */
 #define CURSOR_TOTAL       12 /**< Total number of mouse cursors */
 
-#define DNT_CURSOR_MAX_TEXT_OVER_TIME  60   /**< After 60ms if no update */
+#define DNT_CURSOR_MAX_TEXT_OVER_TIME  220   /**< After 60ms if no update */
 
 /*! A mouse cursor class.*/
 class cursor

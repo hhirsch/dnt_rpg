@@ -2137,10 +2137,7 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
    {
       int res = shortcuts->treat(object, eventInfo, engineMode, 
             PCs->getActiveCharacter());
-      if( (res == SHORTCUTS_WINDOW_NONE) && (gui->mouseOnGui(mouseX, mouseY)) )
-      {
-         cursors->setTextOver(/*gettext("Nothing")*/"");
-      }
+
       /* Now call the functions */
       switch(res)
       {
@@ -2254,7 +2251,6 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
          break;
       }
   }  
-
 
 }
 
