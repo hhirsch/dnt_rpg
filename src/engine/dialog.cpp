@@ -1454,6 +1454,7 @@ void dialogWindow::open(guiInterface* gui, character* PC, conversation* cv,
                         string pictureFile)
 {
    dirs dir;
+   int midX = SCREEN_X / 2;
 
    /* Do not open NULL conversations */
    if(!cv)
@@ -1478,7 +1479,7 @@ void dialogWindow::open(guiInterface* gui, character* PC, conversation* cv,
    conv->setPC(PC);
 
    /* Create the Window */
-   jan = gui->insertWindow(280,100,605,355,gettext("Dialog"));
+   jan = gui->insertWindow(midX-162,100,midX+163,355,gettext("Dialog"));
    
    /* Barter Button (only for characters) */
    if(conv->getOwner()->getThingType() == THING_TYPE_CHARACTER)
