@@ -3,9 +3,9 @@ All Textures used in DNT are free (as in free speech).
 Here are the licenses for those at the current directory.
 
 ===========================================================================
-DNTeam Public Domain Textures
+DNTeam Textures (GPLv3)
 
-carregar.png  dnt_icon.png  inicio1.xcf  inicio.xcf
+brief.png  dnt_icon.png  inicio1.xcf  inicio.xcf
 inicio1.png   inicio.png
 
 ===========================================================================

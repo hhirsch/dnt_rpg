@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -19,6 +19,7 @@
 */
 
 #include "briefing.h"
+#include "../etc/dirs.h"
 
 #define DNT_BRIEFING_RATE 500
 
@@ -49,12 +50,16 @@ bool briefing::isOpened()
  ***********************************************************************/
 void briefing::openWindow(guiInterface* gui)
 {
+   dirs dir;
+
    if(briefWindow == NULL)
    {
-      briefWindow = gui->insertWindow(186,SCREEN_Y-257, 512, SCREEN_Y-129,
-                                      gettext("Briefing"));
-      briefTxt = briefWindow->getObjectsList()->insertRolBar(8,18,318,121,
+      briefWindow = gui->insertWindow(0,0, 320, 160,
+                                      gettext("Briefing"), true);
+      briefTxt = briefWindow->getObjectsList()->insertRolBar(7,7,310,154,
                                      gettext("Welcome to DNT!"));
+      briefWindow->getObjectsList()->insertPicture(0,0,0,0,
+            dir.getRealFile("texturas/general/brief.png").c_str());
       briefWindow->setExternPointer(&briefWindow);
       gui->openWindow(briefWindow);
    }
