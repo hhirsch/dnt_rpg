@@ -47,9 +47,9 @@ void miniMapWindow::open(guiInterface* gui, float posX, float posZ,
    {
       int winX=0, winY=0;
 
-      /* Align Up of Shortcuts */
+      /* Align */
       winX = 0;
-      winY = SCREEN_Y-257;
+      winY = 161;
 
       width = curMap->getMiniMap()->w;
       height = curMap->getMiniMap()->h;
