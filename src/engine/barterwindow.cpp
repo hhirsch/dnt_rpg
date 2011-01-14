@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -41,6 +41,8 @@ void barterWindow::open(character* s, character* b,
    infoWindow = infoW;
    curEngine = usedEngine;
 
+   int midX = SCREEN_X / 2;
+
    /* Set characters */
    seller = s;
    buyer = b;
@@ -49,7 +51,7 @@ void barterWindow::open(character* s, character* b,
    barterInventory = new barter(seller, buyer);
    
    /* Create Window */
-   intWindow = gui->insertWindow(268,0,531,288,gettext("Barter"));
+   intWindow = gui->insertWindow(midX-132,0,midX+132,288,gettext("Barter"));
 
    /* Totals */
    buyerTotals = intWindow->getObjectsList()->insertTextBox(30,236,128,252,
@@ -91,7 +93,7 @@ void barterWindow::open(character* s, character* b,
    /* Verify if the buyer and seller windows are opened. If not open them */
    if(seller->inventories->getOpenedWindow() == NULL)
    {
-      sellerWindow = new inventWindow(536,0,gettext("Inventory"),
+      sellerWindow = new inventWindow(midX+133,0,gettext("Inventory"),
                                       seller, inter, infoWindow, curEngine);
    }
    else
@@ -101,7 +103,7 @@ void barterWindow::open(character* s, character* b,
 
    if(buyer->inventories->getOpenedWindow() == NULL)
    {
-      buyerWindow = new inventWindow(0,0,gettext("Inventory"),
+      buyerWindow = new inventWindow(midX-400,0,gettext("Inventory"),
                                      buyer, inter, infoWindow, curEngine);
    }
    else
