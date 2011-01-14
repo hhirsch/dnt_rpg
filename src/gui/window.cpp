@@ -86,6 +86,18 @@ void windowList::removeWindow(window *jan)
 }
 
 /*********************************************************************
+ *                         setActiveWindow                           *
+ *********************************************************************/
+void windowList::setActiveWindow(window* jan)
+{
+   activeWindow = jan;
+   /* Reinsert it at the end, to be last draw (aka on top)
+    * after de-activated */
+   removeWithoutDelete(jan);
+   insertAtEnd(jan);
+}
+
+/*********************************************************************
  *                             Constructor                           *
  *********************************************************************/
 window::window(int xa, int ya, int xb, int yb, string title, void* list,

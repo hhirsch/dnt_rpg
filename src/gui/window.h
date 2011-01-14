@@ -200,7 +200,7 @@ class windowList: public dntList
 
       /*! Get the active window
        * \param jan -> pointer to the new active window */
-      void setActiveWindow(window* jan){activeWindow = jan;};
+      void setActiveWindow(window* jan);
 
    protected:
 
