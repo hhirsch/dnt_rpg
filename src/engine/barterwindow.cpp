@@ -19,6 +19,7 @@
 */
 
 #include "barterwindow.h"
+#include "cursor.h"
 #include "../etc/dirs.h"
 
 /***************************************************************
@@ -337,6 +338,7 @@ bool barterWindow::treat(guiObject* guiObj, int eventInfo, int mouseX,
    bool res = false;
    int posX = -1;
    int posY = -1;
+   cursor curMouse;
 
    if(!isOpen() && (barterInventory != NULL))
    {
@@ -390,6 +392,7 @@ bool barterWindow::treat(guiObject* guiObj, int eventInfo, int mouseX,
       break;
 
       case FARSO_EVENT_PRESSED_TAB_BUTTON:
+      case FARSO_EVENT_ON_FOCUS_TAB_BUTTON:
       {
          /* Inventory Spaces Selected */
          if( (guiObj == (guiObject*) buyerInv) || 
@@ -418,10 +421,18 @@ bool barterWindow::treat(guiObject* guiObj, int eventInfo, int mouseX,
             {
                activeObject = barterInventory->getFromPosition(posX,posY,curInv,
                                                                sellerObj);
-               objX = posX;
-               objY = posY;
 
-               openMenu(mouseX, mouseY);
+               if(eventInfo == FARSO_EVENT_PRESSED_TAB_BUTTON)
+               {
+                  objX = posX;
+                  objY = posY;
+
+                  openMenu(mouseX, mouseY);
+               }
+               else
+               {
+                  curMouse.setTextOver(activeObject->name);
+               }
             }
             res = true;
          }
