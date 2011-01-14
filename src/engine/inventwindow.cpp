@@ -53,7 +53,7 @@ inventWindow::inventWindow(int xa, int ya, string title,
 inventWindow::inventWindow(character *invent, guiInterface* inter,
                            itemWindow* infoW, void* usedEngine)
 {
-   init(0,1, gettext("Inventory"), invent, inter, infoW, usedEngine);
+   init(321,0, gettext("Inventory"), invent, inter, infoW, usedEngine);
 }
 
 /**************************************************************
