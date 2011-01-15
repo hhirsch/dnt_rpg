@@ -15,6 +15,7 @@ Steel3 = texturas/floor_indoor/steel3.png
 Steel3_Dirty = texturas/floor_indoor/steel3_dirty.png
 Steel3_Dirty2 = texturas/floor_indoor/steel3_dirty2.png
 Steel4 = texturas/floor_indoor/steel4.png
+Steel4_dirty1 = texturas/floor_indoor/steel4_dirty1.png
 Stone = texturas/floor_indoor/stone.png
 Stone2 = texturas/floor_indoor/stone2.png
 StoneTile = texturas/floor_indoor/stonetile.png
