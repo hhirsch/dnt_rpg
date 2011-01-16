@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -36,6 +36,9 @@ using namespace std;
 
 #define PARTICLE_DRAW_GROUPS     0 /**< Draw particles as vertex group */
 #define PARTICLE_DRAW_INDIVIDUAL 1 /**< Draw each particle individually */
+
+#define PARTICLE_LIFE_CYCLE_ALWAYS_MOVE          0 /**< Particles will move */
+#define PARTICLE_LIFE_CYCLE_STATIC_AT_COLLISION  1 /**< Stop at collision */
 
 /*! The particle system types */
 enum
