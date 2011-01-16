@@ -2572,6 +2572,16 @@ int engine::verifyMouseActions(Uint8 mButton)
             if(intercepts( min, max, minMouse, maxMouse))
             {
                curTarget = (thing*)pers;
+               if(pers->isAlive())
+               {
+                  cursors->setTextOver(pers->name);
+               }
+               else
+               {
+                  cursors->setTextOver(pers->name + string(" (") + 
+                        string(gettext("dead")) + string(")"));
+               }
+
                if( engineMode == ENGINE_MODE_REAL_TIME )
                {
                   if(!pers->isAlive())
@@ -2595,7 +2605,6 @@ int engine::verifyMouseActions(Uint8 mButton)
                                        pers->getPortraitFileName());
                      }
                   }
-                  cursors->setTextOver(pers->name); 
                   pronto = 1;
                }
                /* Verify attacks */
@@ -2612,7 +2621,6 @@ int engine::verifyMouseActions(Uint8 mButton)
                      feat* f = activeCharacter->getActiveFeatPtr();
                      cursors->set(f->info->image);
                   }
-                  cursors->setTextOver(pers->name); 
 
                   if( (mButton & SDL_BUTTON(1)) &&
                       (rangeAction(activeCharacter->xPosition, 
