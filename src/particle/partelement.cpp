@@ -28,8 +28,6 @@ dntPartElement::dntPartElement()
 {
    initialValue = 0.0f;
    finalValue = 0.0f;
-   curValue = 0.0f;
-   lastValue = 0.0f;
 
    lowerLimit = 0.0f;
    upperLimit = 0.0f;
@@ -78,9 +76,9 @@ void dntPartElement::setLimits(float lower, float upper)
 /***********************************************************************
  *                           updateValue                               *
  ***********************************************************************/
-bool dntPartElement::updateValue()
+bool dntPartElement::updateValue(float& curValue)
 {
-   lastValue = curValue;
+   float lastValue = curValue;
    isStatic = false;
    switch(type)
    {
@@ -126,14 +124,6 @@ bool dntPartElement::updateValue()
    isStatic = (lastValue == curValue);
 
    return(true);
-}
-
-/***********************************************************************
- *                           getCurrentValue                           *
- ***********************************************************************/
-float dntPartElement::getCurrentValue()
-{
-   return(curValue);
 }
 
 /***********************************************************************

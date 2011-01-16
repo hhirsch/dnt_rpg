@@ -55,12 +55,9 @@ class dntPartElement
       void setLimits(float lower, float upper);
 
       /*! Update current value, based on definitions
+       * \param curValue -> current value (will receive the new one)
        * \return true on success */
-      bool updateValue();
-
-      /*! Get the current element value
-       * \return -> current value */
-      float getCurrentValue();
+      bool updateValue(float& curValue);
 
       /*! Get if the element is currently static
        * \return true if no variation on last iteration */
@@ -69,8 +66,6 @@ class dntPartElement
    protected:
       float initialValue;     /**< Initial element value */
       float finalValue;       /**< Final Value (used at linear type) */
-      float curValue;         /**< Current Value */
-      float lastValue;        /**< Last Value */
 
       float lowerLimit;       /**< Lower value limit */
       float upperLimit;       /**< Upper value limit */
