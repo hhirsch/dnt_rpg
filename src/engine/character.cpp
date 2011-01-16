@@ -67,7 +67,7 @@ character::character(featsList* ft, void* usedEngine)
    portraitImage = NULL;
    conversationFile = "";
    conv = NULL;
-   cr = 0;
+   cr = 1;
 
    inventories = new inventory;
 

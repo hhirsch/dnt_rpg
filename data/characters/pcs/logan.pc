@@ -4,6 +4,7 @@ portrait = characters/portraits/logan.png
 battleScript = ia/script/fight/fight_animal.dsl
 inventory = characters/pcs/logan.inv
 maxLifePoints = 87
+challengeRating = 24
 class = COM 20
 race = MUTANT_HUMAN_CRICKET
 align = CHAOTIC_FREE_SOFTWARE
