@@ -9,7 +9,10 @@
  - heightmap2dnt: Added indoor map import (with walls);
  - Capacity to create empty (without decorations) windows;
  - Text over cursor;
-
+ - Added instantKill percentual to weapons (aka: probability
+   of killing the target in a single strike);
+ - Added instantKilled percentual to characters (aka: probability
+   of get killed in a single strike);
 
 ================================================
 |                Version 0.6                   |

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -244,6 +244,10 @@ class thing
        * \param can -> true if can, false if can't*/
       void setCanMove(bool can);
 
+      /*! Get the probability of been killed with a single strike
+       * \return probability value [0, 100] */
+      int getInstantKilled();
+
       /* Verify if the point posX,posZ is at range
        * \param posX -> x coordinate
        * \param posZ -> z coordinate 
@@ -276,6 +280,9 @@ class thing
       
       int lifePoints;         /**< Thing's Life points */
       int maxLifePoints;      /**< Thing's Max Life Points */
+
+      int instantKilled;      /**< Probability of been killed 
+                                   with a single shoot */
       
       int psychoState;        /**< Thing's Psycho State */
       bool dead;           /**< Dead state or not (if dead is only a corpse) */

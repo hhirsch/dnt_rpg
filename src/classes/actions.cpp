@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -308,7 +308,20 @@ bool doHealOrAttack(thing& actor, thing* target,
    }
    else
    {
-      sprintf(texto,gettext("Hit for %d points."),damage);
+      /* Verify instant killing the target */
+      int instantKill = diceInfo.instantKill /* + target->getInstantKilled() */;
+      dice d100(100);
+      if(d100.roll() < instantKill)
+      {
+         /* Got an instantaneous death here! */
+         damage = target->getMaxLifePoints();
+         sprintf(texto, gettext("Hit at a vital area, inflicting %d points "
+                               "of damage."), damage);
+      }
+      else
+      {
+         sprintf(texto,gettext("Hit for %d points."),damage);
+      }
    }
    brief.addText(diceText + texto);
 

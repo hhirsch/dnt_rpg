@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -54,7 +54,8 @@ class dice
       /*! Roll the dices
        * \param critical -> true if is a critical roll
        * \note -> at critical rolls, the dices are 
-       *          rerolled criticalMultiplier times */
+       *          rerolled criticalMultiplier times
+       * \return -> sum of value got by the dices */
       int roll(bool critical=false);
 
       /*! Set the dice type
@@ -119,6 +120,8 @@ class diceThing
       dice aditionalDice;    /**< Aditional Dice per Level. */
       int aditionalLevels;   /**< Number of Levels per Aditional Dices. */
       int initialLevel;      /**< Initial Level to use this diceThing. */
+      int instantKill;       /**< Percentual of instant killing with a
+                                  single strike [0-100] */
 };
 
 

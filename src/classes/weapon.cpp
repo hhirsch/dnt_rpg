@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -223,6 +223,10 @@ weapon::weapon(string path): object(path)
          damageDice.aditionalDice.setCriticalMultiplier(0);
          damageDice.initialLevel = 1;
          damageDice.aditionalLevels = 0;
+      }
+      else if(key == "instant_kill")
+      {
+         sscanf(value.c_str(), "%d", &damageDice.instantKill);
       }
       else
       {

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -947,9 +947,11 @@ bool character::save(string saveFile)
    file << "iAmNotAFool = " << curBonusAndSaves.iAmNotAFool << endl;
    /* attack bonus */
    file << "attackBonus = " << curBonusAndSaves.baseAttackBonus.toInt() << endl;
+   /* InstantKilled */
+   file << "instantKilled = " <<  instantKilled << endl;
    /* Up Levels */
    file << "upLevels = " << upLevels << endl;
-   /* Bonus and saves */
+   /* Total Levels */
    file << "totalLevels = " <<  curBonusAndSaves.level << endl;
 
    /* Inventory File */
@@ -1163,9 +1165,15 @@ character* characterList::insertCharacter(string file, featsList* ft,
       {
          sscanf(value.c_str(),"%d", &novo->xp);
       }
+      /* Up Levels */
       else if(key == "upLevels")
       {
          sscanf(value.c_str(),"%d", &novo->upLevels);
+      }
+      /* Instant Killed */
+      else if(key == "instantKilled")
+      {
+         sscanf(value.c_str(), "%d", &novo->instantKilled);
       }
       /* Inventory Population */
       else if(key == "inventory")

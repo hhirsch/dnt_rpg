@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -42,6 +42,7 @@ thing::thing()
    sexType = SEX_MALE;
    lifePoints = 0;
    maxLifePoints = 0;
+   instantKilled = 0;
    armatureClass = 0;
    displacement = WALK_PER_MOVE_ACTION;
    sizeModifier = 0;
@@ -430,6 +431,14 @@ void thing::setMaxLifePoints(int points)
    maxLifePoints = points;
    lifePoints = maxLifePoints;
    updateHealthBar();
+}
+
+/******************************************************
+ *                  getInstantKilled                  *
+ ******************************************************/
+int thing::getInstantKilled()
+{
+   return(instantKilled);
 }
 
 /******************************************************

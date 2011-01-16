@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -175,6 +175,7 @@ diceThing::diceThing()
    aditionalDice.setNumberOfDices(0);
    aditionalLevels = 0;
    initialLevel = 0;
+   instantKill = 0;
 }
 
 /***********************************************************************
@@ -205,5 +206,6 @@ void diceThing::populate(diceThing* d)
    /* Set aditional info */
    aditionalLevels = d->aditionalLevels;
    initialLevel = d->initialLevel;
+   instantKill = d->instantKill;
 }
 
