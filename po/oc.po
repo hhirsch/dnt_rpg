@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2011-01-01 14:12-0200\n"
+"POT-Creation-Date: 2011-01-16 15:17-0200\n"
 "PO-Revision-Date: 2010-05-06 06:48+0000\n"
 "Last-Translator: Cédric VALMARY (Tot en òc) <cvalmary@yahoo.fr>\n"
 "Language-Team: Occitan (post 1500) <oc@li.org>\n"
@@ -46,16 +46,21 @@ msgstr "Fracàs Critic !"
 msgid "Healed %d points."
 msgstr ""
 
-#: src/classes/actions.cpp:311
+#: src/classes/actions.cpp:318
+#, c-format
+msgid "Hit at a vital area, inflicting %d points of damage."
+msgstr ""
+
+#: src/classes/actions.cpp:323
 #, c-format
 msgid "Hit for %d points."
 msgstr "Tòca de %d punts."
 
-#: src/classes/actions.cpp:330 src/classes/actions.cpp:333
+#: src/classes/actions.cpp:343 src/classes/actions.cpp:346
 msgid "Critical Heal!"
 msgstr ""
 
-#: src/classes/actions.cpp:338 src/classes/actions.cpp:342
+#: src/classes/actions.cpp:351 src/classes/actions.cpp:355
 msgid "Critical Hit!"
 msgstr "Tòca Critica !"
 
@@ -79,7 +84,7 @@ msgstr "Soi pas un piòt"
 msgid "Invalid Talent"
 msgstr "Don invalid"
 
-#: src/classes/feats.cpp:234 src/engine/dccnit.cpp:2240
+#: src/classes/feats.cpp:234 src/engine/dccnit.cpp:2238
 msgid "Not enought points to use!"
 msgstr ""
 
@@ -104,7 +109,7 @@ msgid "Confirm"
 msgstr "Confirmar"
 
 #: src/engine/alignwindow.cpp:76 src/engine/aspectwindow.cpp:97
-#: src/engine/attwindow.cpp:240 src/engine/barterwindow.cpp:68
+#: src/engine/attwindow.cpp:240 src/engine/barterwindow.cpp:71
 #: src/engine/classwindow.cpp:121 src/engine/featsel.cpp:244
 #: src/engine/options.cpp:1097 src/engine/racewindow.cpp:121
 #: src/engine/skillwindow.cpp:162
@@ -178,7 +183,7 @@ msgid "Attribute Description"
 msgstr "Descripcion dels atributs"
 
 #: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:573
-#: src/engine/dccnit.cpp:2239 src/engine/featsel.cpp:468
+#: src/engine/dccnit.cpp:2237 src/engine/featsel.cpp:468
 #: src/engine/inventwindow.cpp:364 src/engine/options.cpp:1386
 msgid "Warning"
 msgstr "Avertiment"
@@ -187,56 +192,56 @@ msgstr "Avertiment"
 msgid "You Need to Assign All Attributes."
 msgstr "Vos cal distribuir totes los atributs."
 
-#: src/engine/barterwindow.cpp:52 src/engine/dialog.cpp:1488
+#: src/engine/barterwindow.cpp:55 src/engine/dialog.cpp:1489
 msgid "Barter"
 msgstr "Tròc"
 
-#: src/engine/barterwindow.cpp:64
+#: src/engine/barterwindow.cpp:67
 msgid "Offer"
 msgstr "Ofrir"
 
-#: src/engine/barterwindow.cpp:66
+#: src/engine/barterwindow.cpp:69
 msgid "Impose"
 msgstr "Impausar"
 
-#: src/engine/barterwindow.cpp:94 src/engine/barterwindow.cpp:104
+#: src/engine/barterwindow.cpp:97 src/engine/barterwindow.cpp:107
 #: src/engine/inventwindow.cpp:56 src/engine/options.cpp:164
 msgid "Inventory"
 msgstr "Inventari"
 
-#: src/engine/barterwindow.cpp:259
+#: src/engine/barterwindow.cpp:262
 msgid "The barter was accepted."
 msgstr "Lo tròc es estat acceptat."
 
-#: src/engine/barterwindow.cpp:264
+#: src/engine/barterwindow.cpp:267
 msgid "The barter was rejected."
 msgstr "Lo tròc es estat refusat."
 
-#: src/engine/barterwindow.cpp:284
+#: src/engine/barterwindow.cpp:287
 msgid "The barter imposition was accepted."
 msgstr ""
 
-#: src/engine/barterwindow.cpp:289
+#: src/engine/barterwindow.cpp:292
 msgid "The barter imposition was rejected."
 msgstr ""
 
-#: src/engine/barterwindow.cpp:308 src/engine/inventwindow.cpp:215
+#: src/engine/barterwindow.cpp:311 src/engine/inventwindow.cpp:215
 msgid "Remove"
 msgstr "Suprimir"
 
-#: src/engine/briefing.cpp:55 src/engine/options.cpp:163
+#: src/engine/briefing.cpp:58 src/engine/options.cpp:163
 msgid "Briefing"
 msgstr "Acamp d'informacion"
 
-#: src/engine/briefing.cpp:57
+#: src/engine/briefing.cpp:60
 msgid "Welcome to DNT!"
 msgstr "Benvenguda sus DNT !"
 
-#: src/engine/briefing.cpp:153
+#: src/engine/briefing.cpp:158
 msgid "Success"
 msgstr "Succès"
 
-#: src/engine/briefing.cpp:153
+#: src/engine/briefing.cpp:158
 msgid "Failure"
 msgstr "Fracàs"
 
@@ -302,7 +307,7 @@ msgid "Skills"
 msgstr "Competéncias"
 
 #: src/engine/charwindow.cpp:273 src/engine/featswindow.cpp:93
-#: src/engine/skillwindow.cpp:169 src/gui/window.cpp:151
+#: src/engine/skillwindow.cpp:169 src/gui/window.cpp:169
 msgid "Close"
 msgstr "Tampar"
 
@@ -469,34 +474,33 @@ msgstr ""
 msgid "No enemies in the area."
 msgstr "Pas d'enemics dins la zòna."
 
-#: src/engine/dccnit.cpp:2142 src/engine/dccnit.cpp:2697
-#: src/engine/shortcutswindow.cpp:70
-msgid "Nothing"
-msgstr "Pas res"
-
-#: src/engine/dccnit.cpp:2435
+#: src/engine/dccnit.cpp:2430
 #, c-format
 msgid "%s taken."
 msgstr "%s pres."
 
-#: src/engine/dccnit.cpp:2452
+#: src/engine/dccnit.cpp:2447
 msgid "Inventory is full!"
 msgstr "L'inventari es comol !"
 
-#: src/engine/dccnit.cpp:2485
+#: src/engine/dccnit.cpp:2480
 msgid "Door"
 msgstr "Pòrta"
 
-#: src/engine/dccnit.cpp:2629
+#: src/engine/dccnit.cpp:2582
+msgid "dead"
+msgstr ""
+
+#: src/engine/dccnit.cpp:2632
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s atacs %s"
 
-#: src/engine/dccnit.cpp:2798
+#: src/engine/dccnit.cpp:2801
 msgid "No more actions. Turn ended."
 msgstr "Pas d'accions suplementàrias. Fin del torn."
 
-#: src/engine/dccnit.cpp:4329
+#: src/engine/dccnit.cpp:4332
 msgid "Exit Battle Mode"
 msgstr "Quitar lo Mòde Combat"
 
@@ -520,7 +524,7 @@ msgstr "%d $ recebuts."
 msgid "Lost $%d."
 msgstr "%d $ perduts."
 
-#: src/engine/dialog.cpp:1481
+#: src/engine/dialog.cpp:1482
 msgid "Dialog"
 msgstr "Dialòg"
 
@@ -552,11 +556,11 @@ msgstr "Novèl"
 msgid "Continue"
 msgstr "Contunhar"
 
-#: src/engine/initial.cpp:87 src/engine/shortcutswindow.cpp:77
+#: src/engine/initial.cpp:87 src/engine/shortcutswindow.cpp:321
 msgid "Save"
 msgstr "Salvar"
 
-#: src/engine/initial.cpp:90 src/engine/shortcutswindow.cpp:82
+#: src/engine/initial.cpp:90 src/engine/shortcutswindow.cpp:326
 msgid "Load"
 msgstr "Cargar"
 
@@ -822,7 +826,7 @@ msgstr "Pivotar cap a drecha"
 msgid "Change Character"
 msgstr "Cambiar de personatge"
 
-#: src/engine/options.cpp:157 src/engine/shortcutswindow.cpp:413
+#: src/engine/options.cpp:157 src/engine/shortcutswindow.cpp:301
 msgid "Rest"
 msgstr "Repausar"
 
@@ -834,7 +838,7 @@ msgstr "Fin del torn"
 msgid "Minimap"
 msgstr "Minimapa"
 
-#: src/engine/options.cpp:162 src/engine/shortcutswindow.cpp:68
+#: src/engine/options.cpp:162
 msgid "Shortcuts"
 msgstr "Acorchis de clavièr"
 
@@ -1012,55 +1016,47 @@ msgstr "Dons de Raça"
 msgid "Race Skills"
 msgstr "Competéncias de la raça"
 
-#: src/engine/shortcutswindow.cpp:79
-msgid "Menu"
-msgstr "Menut"
-
-#: src/engine/shortcutswindow.cpp:273
-msgid "Particles"
-msgstr "Particulas"
-
-#: src/engine/shortcutswindow.cpp:286
-msgid "FPS"
-msgstr "FPS"
-
-#: src/engine/shortcutswindow.cpp:376
+#: src/engine/shortcutswindow.cpp:263
 msgid "Enter Battle Mode"
 msgstr ""
 
-#: src/engine/shortcutswindow.cpp:380
+#: src/engine/shortcutswindow.cpp:267
 msgid "Select Normal Attack"
 msgstr "Causir l'atac normal"
 
-#: src/engine/shortcutswindow.cpp:386
+#: src/engine/shortcutswindow.cpp:273
 msgid "Open Quests Window"
 msgstr "Dobrir la fenèstra de las Quèstas"
 
-#: src/engine/shortcutswindow.cpp:391
+#: src/engine/shortcutswindow.cpp:278
 msgid "Open Map Window"
 msgstr ""
 
-#: src/engine/shortcutswindow.cpp:398
+#: src/engine/shortcutswindow.cpp:285
 msgid "End Character's Turn"
 msgstr "Fin de torn del personatge"
 
-#: src/engine/shortcutswindow.cpp:402
+#: src/engine/shortcutswindow.cpp:290
 msgid "Only Available in Battle Mode"
 msgstr ""
 
-#: src/engine/shortcutswindow.cpp:408
+#: src/engine/shortcutswindow.cpp:296
 msgid "Open Inventory Window"
 msgstr "Dobrir la fenèstra d'inventari"
 
-#: src/engine/shortcutswindow.cpp:418
+#: src/engine/shortcutswindow.cpp:306
 msgid "View Character Informations"
 msgstr "Veire las caracteristicas del personatge"
 
-#: src/engine/shortcutswindow.cpp:423
+#: src/engine/shortcutswindow.cpp:311
 msgid "Open Group/Party Window"
 msgstr "Dobrir la fenèstra del Grop"
 
-#: src/engine/shortcutswindow.cpp:440
+#: src/engine/shortcutswindow.cpp:316
+msgid "Menu"
+msgstr "Menut"
+
+#: src/engine/shortcutswindow.cpp:344
 msgid "Click to select a talent"
 msgstr ""
 
@@ -1120,7 +1116,7 @@ msgstr "Torn de %s."
 msgid "%s rolls initiative: "
 msgstr ""
 
-#: src/gui/window.cpp:148
+#: src/gui/window.cpp:166
 msgid "Maximize"
 msgstr "Maximizar"
 
@@ -4259,6 +4255,15 @@ msgstr "Pesuc"
 #: data/characters/pcs/santa.pc:1
 msgid "Santa Claws"
 msgstr ""
+
+#~ msgid "Nothing"
+#~ msgstr "Pas res"
+
+#~ msgid "Particles"
+#~ msgstr "Particulas"
+
+#~ msgid "FPS"
+#~ msgstr "FPS"
 
 #, fuzzy
 #~ msgid "No talents"
