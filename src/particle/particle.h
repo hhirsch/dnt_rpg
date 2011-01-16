@@ -26,33 +26,25 @@
 #include <string>
 using namespace std;
 
+#include "partelement.h"
+#include "partorigin.h"
+
 #include "../etc/dirs.h"
 #include "../etc/extensions.h"
 #include "../etc/list.h"
 
-#define PARTICLE_STATUS_DEAD   0  /**< Say that a particle is dead */
-#define PARTICLE_STATUS_ALIVE  1  /**< Say that a particle is alive */
-#define PARTICLE_STATUS_STATIC 2  /**< Says a particle don't change anymore */
+#define PARTICLE_STATUS_DEAD    0  /**< Say that a particle is dead */
+#define PARTICLE_STATUS_ALIVE   1  /**< Say that a particle is alive */
+#define PARTICLE_STATUS_STATIC  2  /**< Says a particle don't change anymore */
 
 #define PARTICLE_DRAW_GROUPS     0 /**< Draw particles as vertex group */
 #define PARTICLE_DRAW_INDIVIDUAL 1 /**< Draw each particle individually */
 
-#define PARTICLE_LIFE_CYCLE_ALWAYS_MOVE          0 /**< Particles will move */
-#define PARTICLE_LIFE_CYCLE_STATIC_AT_COLLISION  1 /**< Stop at collision */
-
 /*! The particle system types */
 enum
 {
-    DNT_PARTICLE_TYPE_NONE=0,
-    DNT_PARTICLE_TYPE_WATERFALL,
-    DNT_PARTICLE_TYPE_FIRE,
-    DNT_PARTICLE_TYPE_WATER_SURFACE,
-    DNT_PARTICLE_TYPE_SMOKE,
-    DNT_PARTICLE_TYPE_BLOOD,
-    DNT_PARTICLE_TYPE_LIGHTNING,
-    DNT_PARTICLE_TYPE_SNOW,
-    DNT_PARTICLE_TYPE_GRASS,
-    DNT_PARTICLE_TYPE_METEOR
+    DNT_PARTICLE_TYPE_DEFAULT=0,
+    DNT_PARTICLE_TYPE_WATERFALL
 };
 
 /*! Number of actualizations to stabilize a system */
@@ -63,11 +55,9 @@ class particle
 {
    public:
       float posX, posY, posZ;    /**< Position */
-      float prvX, prvY, prvZ;    /**< Previous Position */
       float velX, velY, velZ;    /**< Velocity */
       float size;                /**< Size */
       float R,G,B;               /**< Color */
-      float prvR, prvG, prvB;    /**< Previous Color */
       int age;                   /**< Age */
       int status;                /**< Actual Status */
       int internalNumber;        /**< Internal Number */
@@ -244,64 +234,42 @@ class particleSystem: public dntListElement
 
    protected:
 
-      int type;                  /**< The particle type constant */
+      /* Internal things */
+      int type;               /**< The particle type constant */
+      int maxParticles;       /**< Max number of particles */
+      int actualParticles;    /**< Number of actual alive particles */
+      void* followCharacter;  /**< If the orign of System Follows a character */
+      bool followIsPC;        /**< If the follow character is a PC */
+      bool windAffect;        /**< If Wind Affects the System */
+      string strFileName;     /**< Name of the File */
+      particle* particles;    /**< Internal Particles Vector */
+      GLuint partTexture;     /**< Current particle texture */
+      extensions ext;         /**< The OpenGL Extensions */
 
+      /* Life related */
       int systemInitialLiveTime; /**< Time the Particle start live  */
       int systemMaxLiveTime;     /**< Max living time, in ms. 0 is infinity */
+      int maxLive;               /**< Max live of a particle  */
 
-      int actualParticles;     /**< Number of actual alive particles */
+      /* Render related things */
       int drawMode;            /**< DrawMode of the system */
-      void* followCharacter;   /**< If the orign of System Follows a charactr */
-      bool followIsPC;         /**< If the follow character is a PC */
-      bool windAffect;         /**< If Wind Affects the System */
-
-      string strFileName;      /**< Name of the File */
-      int maxLive;             /**< Max live of a particle  */
-      int maxParticles;        /**< Max number of particles */
       float* vertexArray;      /**< Vertex array to draw */
       float* colorArray;       /**< Color array to draw */
-      float centerX,           /**< X initial position */
-            centerY,           /**< Y initial position */
-            centerZ;           /**< Z initial position */
-      float gravity;           /**< Force of Gravity */
-      float initR,             /**< Initial Red Color */ 
-            initG,             /**< Initial Green Color */
-            initB;             /**< Initial Blue Color */
-      float finalR,            /**< Final Red Color */
-            finalG,            /**< Final Green Color */
-            finalB;            /**< Final Blue Color */
-      float alpha;             /**< Global Alpha Value */
-
-      float initVelX,          /**< Initial Velocity at X */
-            initVelY,          /**< Initial Velocity at Y */
-            initVelZ;          /**< Initial Velocity at Z */
-
+     
+      /* System specific elements */
+      dntPartOrigin origin;       /**< Particle System Origin */
+      float gravity;              /**< Force of Gravity */
+      dntPartElement color[4];    /**< Color element controller */
+      dntPartElement velocity[3]; /**< Velocity element controller */
+      dntPartElement position[3]; /**< Position variation element */
+      
+      /* System Bounding Box */
       float boundX1;           /**< Bounding Box */
       float boundX2;           /**< Bounding Box */
       float boundY1;           /**< Bounding Box */
       float boundY2;           /**< Bounding Box */
       float boundZ1;           /**< Bounding Box */
       float boundZ2;           /**< Bounding Box */
-
-      /* Probability Values */
- 
-      float dMultCenter[3];    /**< Multiply values to Center Position */
-      float dSumCenter[3];     /**< Sum Values to Center Position */
-
-      float dMultPos[3];       /**< Multiply values to Actual Position */
-      float dSumPos[3];        /**< Sum Values to Actual Position */
-
-      float dMultColor[3];     /**< Multiply values to inital Color */
-      float dSumColor[3];      /**< Sum Values to initial Color */
-
-      float dMultVel[3];       /**< Multiply values to Actual Velocity */
-      float dSumVel[3];        /**< Sum Values to Actual Velocity */
-
-      particle* particles;     /**< Internal Particles Vector */
-
-      GLuint partTexture;      /**< Current particle texture */
-      
-      extensions ext;          /**< The OpenGL Extensions */
 
 
       /*!
