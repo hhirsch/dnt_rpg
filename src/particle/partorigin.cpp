@@ -21,6 +21,8 @@
 #include "partorigin.h"
 #include <stdlib.h>
 #include <math.h>
+#include <iostream>
+using namespace std;
 
 /***********************************************************************
  *                               Constructor                           *
@@ -154,6 +156,37 @@ bool dntPartOrigin::generateNewInitialPosition(float& x, float& y, float& z)
          return(false);
       }
       break;
+   }
+
+   return(true);
+}
+
+/***********************************************************************
+ *                                toString                             *
+ ***********************************************************************/
+string dntPartOrigin::toString()
+{
+   char buf[256];
+   string res;
+
+   sprintf(&buf[0], "%d %.3f %.3f %.3f %.3f %.3f %.3f %.3f",
+                    type, p[0], p[1], p[2], sum[0], sum[1], sum[2],
+                    radius);
+   res = buf;
+   return(res);
+}
+
+/***********************************************************************
+ *                               fromString                            *
+ ***********************************************************************/
+bool dntPartOrigin::fromString(string s)
+{
+   if(sscanf(s.c_str(), "%d %f %f %f %f %f %f %f", 
+                        &type, &p[0], &p[1], &p[2],
+                        &sum[0], &sum[1], &sum[2], &radius) != 8)
+   {
+      cerr << "Error: unknow dntPartOrigin string: '" << s << "'" << endl;
+      return(false);
    }
 
    return(true);

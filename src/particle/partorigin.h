@@ -67,6 +67,15 @@ class dntPartOrigin
        * \return true on success. */
       bool generateNewInitialPosition(float& x, float& y, float& z);
 
+      /*! Convert the dntPartOrigin to an string
+       * \return string with origin info */
+      string toString();
+
+      /*! Populate the dntPartOrigin with a descriptive string
+       * \param s -> string with origin info 
+       * \return true if success */
+      bool fromString(string s);
+
    protected:
       float p[3];          /**< Reference Point */
       float sum[3];        /**< Sum values (used at quad) */
