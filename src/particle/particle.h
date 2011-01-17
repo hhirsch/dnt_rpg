@@ -247,12 +247,13 @@ class particleSystem: public dntListElement
       extensions ext;         /**< The OpenGL Extensions */
 
       /* Life related */
-      int systemInitialLiveTime; /**< Time the Particle start live  */
-      int systemMaxLiveTime;     /**< Max living time, in ms. 0 is infinity */
-      int maxLive;               /**< Max live of a particle  */
+      int initialLifeTime;       /**< Time the Particle start to live  */
+      int maxLiveTime;           /**< Max life time, in ms. 0 is infinity */
+      int maxParticleLifeTime;   /**< Max live of a particle  */
 
       /* Render related things */
       int drawMode;            /**< DrawMode of the system */
+      int renderMode;          /**< Types of render */
       float* vertexArray;      /**< Vertex array to draw */
       float* colorArray;       /**< Color array to draw */
      

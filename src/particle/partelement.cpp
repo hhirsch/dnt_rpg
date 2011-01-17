@@ -20,6 +20,8 @@
 
 #include "partelement.h"
 #include <stdlib.h>
+#include <iostream>
+using namespace std;
 
 /***********************************************************************
  *                            Constructor                              *
@@ -38,6 +40,7 @@ dntPartElement::dntPartElement()
 
    type = DNT_PART_ELEMENT_LINEAR;
 
+   used = false;
    isStatic = true;
 }
 
@@ -50,6 +53,7 @@ void dntPartElement::setLinear(float i, float f, int maxSteps)
    finalValue = f;
    sum = ((finalValue - initialValue) / ((float)maxSteps));
    type = DNT_PART_ELEMENT_LINEAR;
+   used = true;
 }
 
 /***********************************************************************
@@ -61,6 +65,7 @@ void dntPartElement::setRandom(float i, float m, float s)
    mult = m;
    sum = s;
    type = DNT_PART_ELEMENT_RANDOM;
+   used = true;
 }
 
 /***********************************************************************
@@ -71,6 +76,7 @@ void dntPartElement::setLimits(float lower, float upper)
    lowerLimit = lower;
    upperLimit = upper;
    limitsDefined = true;
+   used = true;
 }
 
 /***********************************************************************
@@ -80,6 +86,13 @@ bool dntPartElement::updateValue(float& curValue)
 {
    float lastValue = curValue;
    isStatic = false;
+
+   if(!used)
+   {
+      isStatic = true;
+      return(false);
+   }
+
    switch(type)
    {
       case DNT_PART_ELEMENT_LINEAR:
@@ -134,5 +147,90 @@ bool dntPartElement::getIsStatic()
    return(isStatic);
 }
 
+/***********************************************************************
+ *                            isUsed                                   *
+ ***********************************************************************/
+bool dntPartElement::isUsed()
+{
+   return(used);
+}
 
+/***********************************************************************
+ *                         fromString                                  *
+ ***********************************************************************/
+bool dntPartElement::fromString(string s)
+{
+   char buf[256];
+   string typeString="";
+   float aux=0.0f;
+   int flag=0;
+
+   if(sscanf(s.c_str(), "%s %f %f %f %i %f %f",
+                      &buf[0], &initialValue, &aux, &sum, 
+                      &flag, &lowerLimit, &upperLimit) == 7)
+   {
+      typeString = buf;
+      if(typeString == "linear")
+      {
+         finalValue = aux;
+      }
+      else if(typeString == "random")
+      {
+         mult = aux;
+      }
+      else
+      {
+         cerr << "Error: Unknow dntPartElement type: '" 
+              << typeString << "'" << endl;
+         return(false);
+      }
+      limitsDefined = (flag != 0);
+      return(true);
+   }
+   
+   cerr << "Error: unknow part element string: '" << s << "'" << endl;
+   return(false);
+
+}
+
+/***********************************************************************
+ *                           toString                                  *
+ ***********************************************************************/
+string dntPartElement::toString()
+{
+   char buf[256];
+   string res="";
+
+   if(!used)
+   {
+      return("");
+   }
+
+   switch(type)
+   {
+      case DNT_PART_ELEMENT_LINEAR:
+      {
+         /* linear initialValue finalValue sum useLimits 
+          *        lowerLimit upperLimit */
+         res = "linear ";
+         sprintf(buf, "%.3f %.3f %.3f %i %.3f %.3f", 
+                       initialValue, finalValue, sum,
+                       limitsDefined, lowerLimit, upperLimit);
+         res += buf;
+      }
+      break;
+      case DNT_PART_ELEMENT_RANDOM:
+      {
+         /* random initialValue mult sum useLimits lowerLimit upperLimit */
+         res = "random ";
+         sprintf(buf, "%.3f %.3f %.3f %i %.3f %.3f", 
+                      initialValue, mult, sum, 
+                      limitsDefined, lowerLimit, upperLimit);
+         res += buf;
+      }
+      break;
+   }
+
+   return(res);
+}
 

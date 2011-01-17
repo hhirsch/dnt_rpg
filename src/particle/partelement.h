@@ -54,6 +54,16 @@ class dntPartElement
        * \param upper -> upper limit value */
       void setLimits(float lower, float upper);
 
+      /*! Populate the dntPartElement from an string
+       * \param s -> string with dntPartElement info
+       * \return true -> if could populate */
+      bool fromString(string s);
+
+      /*! Convert the dntPartElement to an string (used to save it on files)
+       * \return string containing the dntPartElement info or empty, 
+       *         if not used */
+      string toString();
+
       /*! Update current value, based on definitions
        * \param curValue -> current value (will receive the new one)
        * \return true on success */
@@ -62,6 +72,10 @@ class dntPartElement
       /*! Get if the element is currently static
        * \return true if no variation on last iteration */
       bool getIsStatic();
+
+      /*! Get if the dntPartElement is used or not
+       * \return true if used */
+      bool isUsed();
 
    protected:
       float initialValue;     /**< Initial element value */
@@ -73,6 +87,8 @@ class dntPartElement
 
       float mult;             /**< Multiplier factor (used at random type) */
       float sum;              /**< Sum factor */
+
+      bool used;              /**< If the element is used or not */
 
       int type;               /**< Element variation type */
 
