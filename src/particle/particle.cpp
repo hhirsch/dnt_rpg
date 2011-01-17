@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -25,6 +25,7 @@
 #include <SDL/SDL_image.h>
 
 #include "../engine/culling.h"
+#include "../etc/defparser.h"
 
 #include <iostream>
 #include <fstream>
@@ -33,166 +34,234 @@ using namespace std;
 /***************************************************************
  *                 Particle System Constructor                 *
  ***************************************************************/
-particleSystem::particleSystem(int total, int mode)
-{
-   init(total, mode);
-   type = DNT_PARTICLE_TYPE_NONE;
-   strFileName = "";
-}
-
-/***************************************************************
- *                 Particle System Constructor                 *
- ***************************************************************/
 particleSystem::particleSystem()
 {
-   init(1,PARTICLE_DRAW_INDIVIDUAL);
+   /* Default values */
+   drawMode = DNT_PARTICLE_DRAW_INDIVIDUAL;
+   renderMode = DNT_PARTSYSTEM_RENDER_DEFAULT;
+   colorArray = NULL;
+   vertexArray = NULL;
+
+   gravity = 10;
+   initialLifeTime = 0;
+   maxLifeTime = 0;
+   maxParticleLifeTime = 0;
+
+   type = DNT_PARTSYSTEM_TYPE_DEFAULT;
+   maxParticles = 0;
+   actualParticles = 0;
+   followCharacter = NULL;
+   followIsPC = false;
+   windAffect = false;
    strFileName = "";
-   type = DNT_PARTICLE_TYPE_NONE;
+   particles = NULL;
 }
 
 /***************************************************************
- *                 Particle System Constructor                 *
+ *                          destructor                         *
  ***************************************************************/
-particleSystem::particleSystem(string fileName, int mode)
+particleSystem::~particleSystem()
 {
-   dirs dir;
-   std::ifstream file;
-   string aux;
-   char aux2[20];
-
-   type = DNT_PARTICLE_TYPE_NONE;
-
-   strFileName = fileName;
-   file.open(dir.getRealFile(fileName).c_str(),
-             ios::in | ios::binary);
-
-
-   if(!file)
+   if(particles)
    {
-      init(maxParticles, mode);
-      cerr << "Error while opening particle file: " 
-           << dir.getRealFile(fileName) << endl;
-      return;
+      delete []particles; 
+      particles = NULL;
    }
 
-   getline(file, aux);
-   sscanf(aux.c_str(), "%s %d",&aux2[0], &maxLive);
-   getline(file, aux);
-   sscanf(aux.c_str(), "%s %d",&aux2[0], &maxParticles);
-   getline(file, aux);
-   sscanf(aux.c_str(), "%s %f",&aux2[0], &centerX);
-   getline(file, aux);
-   sscanf(aux.c_str(), "%s %f",&aux2[0], &centerY);
-   getline(file, aux);
-   sscanf(aux.c_str(), "%s %f",&aux2[0], &centerZ);
-   getline(file, aux);
-   sscanf(aux.c_str(), "%s %f",&aux2[0], &gravity);
-   getline(file, aux);
-   sscanf(aux.c_str(), "%s %f",&aux2[0], &initR);
-   getline(file, aux);
-   sscanf(aux.c_str(), "%s %f",&aux2[0], &initG);
-   getline(file, aux);
-   sscanf(aux.c_str(), "%s %f",&aux2[0], &initB);
-   getline(file, aux);
-   sscanf(aux.c_str(), "%s %f",&aux2[0], &finalR);
-   getline(file, aux);
-   sscanf(aux.c_str(), "%s %f",&aux2[0], &finalG);
-   getline(file, aux);
-   sscanf(aux.c_str(), "%s %f",&aux2[0], &finalB);
-   getline(file, aux);
-   sscanf(aux.c_str(), "%s %f",&aux2[0], &alpha);
-   getline(file, aux);
-   sscanf(aux.c_str(), "%s %f %f %f",&aux2[0], &dMultCenter[0],
-                             &dMultCenter[1], &dMultCenter[2] );
-   getline(file, aux);
-   sscanf(aux.c_str(), "%s %f %f %f",&aux2[0], &dSumCenter[0],
-                             &dSumCenter[1], &dSumCenter[2] );
-   getline(file, aux);
-   sscanf(aux.c_str(), "%s %f %f %f",&aux2[0], &dMultPos[0],
-                             &dMultPos[1], &dMultPos[2] );
-   getline(file, aux);
-   sscanf(aux.c_str(), "%s %f %f %f",&aux2[0], &dSumPos[0],
-                             &dSumPos[1], &dSumPos[2] );
-   getline(file, aux);
-   sscanf(aux.c_str(), "%s %f %f %f",&aux2[0], &dMultColor[0],
-                             &dMultColor[1], &dMultColor[2] );
-   getline(file, aux);
-   sscanf(aux.c_str(), "%s %f %f %f",&aux2[0], &dSumColor[0],
-                             &dSumColor[1], &dSumColor[2] );
-   getline(file, aux);
-   sscanf(aux.c_str(), "%s %f %f %f",&aux2[0], &dMultVel[0],
-                             &dMultVel[1], &dMultVel[2] );
-   getline(file, aux);
-   sscanf(aux.c_str(), "%s %f %f %f",&aux2[0], &dSumVel[0],
-                             &dSumVel[1], &dSumVel[2] );
+   if(vertexArray)
+   {
+      delete[] vertexArray;
+      vertexArray = NULL;
+   }
 
-   getline(file, aux);
-   sscanf(aux.c_str(), "%s %f %f %f",&aux2[0], &initVelX, &initVelY, &initVelZ);
+   if(colorArray)
+   {
+      delete[] colorArray;
+      colorArray = NULL;
+   }
 
-   file.close();
+   if(!textureFileName.empty())
+   {
+      glDeleteTextures(1, &(partTexture));
+   }
+}
 
-   init(maxParticles, mode);
-  
+/***************************************************************
+ *                              load                           *
+ ***************************************************************/
+bool particleSystem::load(string fileName)
+{
+   defParser def;
+   string key="", value="";
+
+   type = DNT_PARTICLE_TYPE_DEFAULT;
+
+   strFileName = fileName;
+   if(!def.load(fileName))
+   {
+      cerr << "Couldn't load particle system " << fileName << endl;
+      return(false);
+   }
+
+   /* Get each tuple */
+   while(def.getNextTuple(key, value))
+   {
+      /* drawMode */
+      if(key == "drawMode")
+      {
+          if(value == "individual")
+          {
+             drawMode = DNT_PARTICLE_DRAW_INDIVIDUAL;
+          }
+          else if(value == "group")
+          {
+             drawMode = DNT_PARTICLE_DRAW_GROUP;
+          }
+      }
+      /* renderMode */
+      else if(key == "renderMode")
+      {
+         if(value == "default")
+         {
+            renderMode = DNT_PARTSYSTEM_RENDER_DEFAULT;
+         }
+      }
+      /* type */
+      else if(key == "type")
+      {
+         sscanf(value.c_str(), "%d", &type);
+      }
+      /* max particles */
+      else if(key == "maxParticles")
+      {
+         sscanf(value.c_str(), "%d", &maxParticles);
+      }
+      /* wind affect */
+      else if(key == "windAffect")
+      {
+         windAffect = (value == "true");
+      }
+      /* texture file name */
+      else if(key == "texture")
+      {
+         textureFileName = value;
+      }
+      /* maxLifeTime */
+      else if(key == "maxLifeTime")
+      {
+         sscanf(value.c_str(), "%d", &maxLifeTime);
+      }
+      /* maxParticleLifeTime */
+      else if(key == "maxParticleLifeTime")
+      {
+         sscanf(value.c_str(), "%d", &maxParticleLifeTime);
+      }
+      /* gravity */
+      else if(key == "gravity")
+      {
+         sscanf(value.c_str(), "%f", &gravity);
+      }
+      /* origin */
+      else if(key == "origin")
+      {
+         origin.fromString(value);
+      }
+      /* colorRed */
+      else if(key == "colorRed")
+      {
+         color[0].fromString(value);
+      }
+      /* colorGreen */
+      else if(key == "colorGreen")
+      {
+         color[1].fromString(value);
+      }
+      /* colorBlue */
+      else if(key == "colorBlue")
+      {
+         color[2].fromString(value);
+      }
+      /* colorAlpha */
+      else if(key == "colorAlpha")
+      {
+         color[3].fromString(value);
+      }
+      /* velocityX */
+      else if(key == "velocityX")
+      {
+         velocity[0].fromString(value);
+      }
+      /* velocityY */
+      else if(key == "velocityY")
+      {
+         velocity[1].fromString(value);
+      }
+      /* velocityZ */
+      else if(key == "velocityZ")
+      {
+         velocity[2].fromString(value);
+      }
+      /* positionX */
+      else if(key == "positionX")
+      {
+         position[0].fromString(value);
+      }
+      /* positionY */
+      else if(key == "positionY")
+      {
+         position[1].fromString(value);
+      }
+      /* positionZ */
+      else if(key == "positionZ")
+      {
+         position[2].fromString(value);
+      }
+   }
+
+   /* Init the ParticleSystem with loaded values */
+   init();
+
+   return(true);
 }
 
 /***************************************************************
  *                Particle System Initialization               *
  ***************************************************************/
-void particleSystem::init(int total, int mode)
+void particleSystem::init()
 {
-   systemInitialLiveTime = SDL_GetTicks();
-   systemMaxLiveTime = 0;
-   actualParticles = 0;
-   particles = (particle*) new particle[total];
-   maxParticles = total;
-
    int n;
+
+   /* Verify total particles */
+   if(maxParticles <= 0)
+   {
+      cerr << "Couldn't init partSystem (" << strFileName << ") with "
+           << "maxParticles = " << maxParticles << endl;
+      return;
+   }
+
+   /* Reset the timer */
+   initialLifeTime = SDL_GetTicks();
+
+   /* Create particle vector, and initialize it */
+   particles = (particle*) new particle[maxParticles];
    for(n = 0; n < maxParticles; n++ )
    {
       particles[n].status = PARTICLE_STATUS_DEAD;
       particles[n].internalNumber = n;
    }
-   drawMode =  mode;
-   if(drawMode == PARTICLE_DRAW_GROUPS)
-   {
-      vertexArray = (float*) new float[total*3];
-      colorArray = (float*) new float[total*3];
-   }
-   else
-   {
-      vertexArray = NULL;
-      colorArray = NULL;
-   }
-   followCharacter = NULL;
-   followIsPC = false;
-   windAffect = false;
-}
 
-/***************************************************************
- *                            finish                           *
- ***************************************************************/
-void particleSystem::finish()
-{
-   if(particles)
+   /* Create render arrays if needed */
+   if(drawMode == DNT_PARTICLE_DRAW_GROUP)
    {
-      delete []particles; 
-      if(drawMode == PARTICLE_DRAW_GROUPS)
-      {
-         delete[] vertexArray;
-         vertexArray = NULL;
-         delete[] colorArray;
-         colorArray = NULL;
-      }
+      vertexArray = (float*) new float[maxParticles*3];
+      colorArray = (float*) new float[maxParticles*3];
    }
-   particles = NULL;
-}
 
-/***************************************************************
- *                 Particle System Destructor                  *
- ***************************************************************/
-particleSystem::~particleSystem()
-{
-   finish();
+   /* Load the texture */
+   if(!textureFileName.empty())
+   {
+      loadTexture();
+   }
 }
 
 /***************************************************************
@@ -399,13 +468,13 @@ bool particleSystem::save( string fileName)
 /****************************************************************************
  *                              LoadTexture                                 *
  ****************************************************************************/
-GLuint particleSystem::loadTexture(string fileName)
+void particleSystem::loadTexture()
 {
-   GLuint indice;
-   SDL_Surface* img = IMG_Load(fileName.c_str());
+   dirs dir;
+   SDL_Surface* img = IMG_Load(dir.getRealFile(fileName).c_str());
 
-   glGenTextures(1, &(indice));
-   glBindTexture(GL_TEXTURE_2D, indice);
+   glGenTextures(1, &(partTexture));
+   glBindTexture(GL_TEXTURE_2D, partTexture);
    glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
                 0,GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
 
@@ -413,7 +482,6 @@ GLuint particleSystem::loadTexture(string fileName)
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
    SDL_FreeSurface(img);
-   return(indice);
 }
 
 /***********************************************************

@@ -37,14 +37,14 @@ using namespace std;
 #define PARTICLE_STATUS_ALIVE   1  /**< Say that a particle is alive */
 #define PARTICLE_STATUS_STATIC  2  /**< Says a particle don't change anymore */
 
-#define PARTICLE_DRAW_GROUPS     0 /**< Draw particles as vertex group */
-#define PARTICLE_DRAW_INDIVIDUAL 1 /**< Draw each particle individually */
+#define DNT_PARTICLE_DRAW_GROUP      0 /**< Draw particles as vertex group */
+#define DNT_PARTICLE_DRAW_INDIVIDUAL 1 /**< Draw each particle individually */
 
 /*! The particle system types */
 enum
 {
-    DNT_PARTICLE_TYPE_DEFAULT=0,
-    DNT_PARTICLE_TYPE_WATERFALL
+    DNT_PARTSYSTEM_TYPE_DEFAULT=0,
+    DNT_PARTSYSTEM_TYPE_WATERFALL
 };
 
 /*! Number of actualizations to stabilize a system */
@@ -67,44 +67,15 @@ class particle
 class particleSystem: public dntListElement
 {
    public:
-      /*!
-       ***************************************************************
-       * Construct internal structs                                  *
-       * \param total -> max particles to create                     *
-       * \param mode -> draw mode                                    *
-       ***************************************************************/
-      particleSystem(int total, int mode);
-      /*!
-       ***************************************************************
-       * Construct internal structs with default values              *
-       ***************************************************************/
+      /*! Construct internal structs with default values */
       particleSystem();
-      /*!
-       ***************************************************************
-       * Construct internal structs                                  *
-       * \param fileName -> particle FileName to load                *
-       * \param mode -> draw mode                                    *
-       ***************************************************************/
-      particleSystem(string fileName, int mode);
-      /*!
-       ***************************************************************
-       * Destroy internal structs                                    *
-       ***************************************************************/
-      virtual ~particleSystem();
+      /*! Destructor */
+      ~particleSystem();
 
-      /*!
-       ***************************************************************
-       * Init the System                                             
-       * \param total -> total particles 
-       * \param mode -> draw mode
-       ***************************************************************/
-      void init(int total, int mode);
-      
-       /*!
-       ***************************************************************
-       * Finish the System                                             
-       ***************************************************************/
-      void finish();
+      /*! Load the partSystem from a file
+       * \param fileName -> fileName of the particle system to load 
+       * \return true if loaded. */
+      bool load(string fileName);
       
       /*!
        ***************************************************************
@@ -243,12 +214,13 @@ class particleSystem: public dntListElement
       bool windAffect;        /**< If Wind Affects the System */
       string strFileName;     /**< Name of the File */
       particle* particles;    /**< Internal Particles Vector */
+      string textureFileName; /**< Filename of the texture */
       GLuint partTexture;     /**< Current particle texture */
       extensions ext;         /**< The OpenGL Extensions */
 
       /* Life related */
       int initialLifeTime;       /**< Time the Particle start to live  */
-      int maxLiveTime;           /**< Max life time, in ms. 0 is infinity */
+      int maxLifeTime;           /**< Max life time, in ms. 0 is infinity */
       int maxParticleLifeTime;   /**< Max live of a particle  */
 
       /* Render related things */
@@ -272,19 +244,14 @@ class particleSystem: public dntListElement
       float boundZ1;           /**< Bounding Box */
       float boundZ2;           /**< Bounding Box */
 
+      /*! Init the System after all values defined */
+      void init();
 
-      /*!
-       ***************************************************************
-       * Reset The Bounding Box
-       ***************************************************************/
+      /*! Reset The Bounding Box */
       void resetBoundingBox();
 
-      /*!
-       **************************************************************
-       * Load the particle texture file
-       * \param fileName -> texture file name;
-       ***************************************************************/
-      GLuint loadTexture(string fileName);
+      /*! Load the particle texture file */
+      void loadTexture();
 
 };
 
