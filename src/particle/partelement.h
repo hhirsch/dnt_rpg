@@ -26,8 +26,10 @@
 #include <string>
 using namespace std;
 
+#define DNT_PART_ELEMENT_CONSTANT   0    /**< Constant (only the initial) */
 #define DNT_PART_ELEMENT_RANDOM     1    /**< Randomically changes over time */
 #define DNT_PART_ELEMENT_LINEAR     2    /**< Linear variation over time */
+#define DNT_PART_ELEMENT_RANDOM_INITIAL 3 /*< Random at init and constant */
 
 /*! Define a single element that will variate at a particle system
  *  (for example, position, color, scale factor, etc.) */
@@ -37,14 +39,24 @@ class dntPartElement
       /*! Constructor */
       dntPartElement();
 
+      /*! Set the element constant over time
+       * \param i -> constant value of the element */
+      void setConstant(float i);
+
       /*! Set the element as linear variation
        * \param i -> initial value 
        * \param f -> end value 
        * \param maxSteps -> number of steps */
       void setLinear(float i, float f, int maxSteps);
 
+      /*! Set the element to be random at its init and constant over time
+       * \param i -> base value 
+       * \param m -> multiplier to the random
+       * \param s -> sum to the random value */
+      void setRandomInitial(float i, float m, float s);
+
       /*! Set the element as random variation
-       * \param i -> initial value 
+       * \param i -> base value 
        * \param m -> multiplier to the random
        * \param s -> sum to the random value */
       void setRandom(float i, float m, float s);
@@ -76,6 +88,10 @@ class dntPartElement
       /*! Get if the dntPartElement is used or not
        * \return true if used */
       bool isUsed();
+
+      /*! Get initial value of the element, based on type rule
+       * \return -> initial value */
+      float getInitialValue();
 
    protected:
       float initialValue;     /**< Initial element value */

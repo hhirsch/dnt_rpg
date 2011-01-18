@@ -38,10 +38,20 @@ dntPartElement::dntPartElement()
    mult = 0.0f;
    sum = 0.0f;
 
-   type = DNT_PART_ELEMENT_LINEAR;
+   type = DNT_PART_ELEMENT_CONSTANT;
 
    used = false;
    isStatic = true;
+}
+
+/***********************************************************************
+ *                            setConstant                              *
+ ***********************************************************************/
+void dntPartElement::setConstant(float i)
+{
+   initialValue = i;
+   used = true;
+   type = DNT_PART_ELEMENT_CONSTANT;
 }
 
 /***********************************************************************
@@ -53,6 +63,18 @@ void dntPartElement::setLinear(float i, float f, int maxSteps)
    finalValue = f;
    sum = ((finalValue - initialValue) / ((float)maxSteps));
    type = DNT_PART_ELEMENT_LINEAR;
+   used = true;
+}
+
+/***********************************************************************
+ *                         setRandomInitial                            *
+ ***********************************************************************/
+void dntPartElement::setRandomInitial(float i, float m, float s)
+{
+   initialValue = i;
+   mult = m;
+   sum = s;
+   type = DNT_PART_ELEMENT_RANDOM_INITIAL;
    used = true;
 }
 
@@ -87,8 +109,11 @@ bool dntPartElement::updateValue(float& curValue)
    float lastValue = curValue;
    isStatic = false;
 
-   if(!used)
+   if( (!used) || 
+       (type == DNT_PART_ELEMENT_CONSTANT) ||
+       (type == DNT_PART_ELEMENT_RANDOM_INITIAL) )
    {
+      /* No need to update */
       isStatic = true;
       return(false);
    }
@@ -140,6 +165,31 @@ bool dntPartElement::updateValue(float& curValue)
 }
 
 /***********************************************************************
+ *                       getInitialValue                               *
+ ***********************************************************************/
+float dntPartElement::getInitialValue()
+{
+   switch(type)
+   {
+       /* Return the defined initial */
+       case DNT_PART_ELEMENT_CONSTANT:
+       case DNT_PART_ELEMENT_LINEAR:
+       {
+          return(initialValue);
+       }
+       break;
+       /* Return the random generated */
+       case DNT_PART_ELEMENT_RANDOM_INITIAL:
+       case DNT_PART_ELEMENT_RANDOM:
+       {
+          return(mult*((rand() / ((double)RAND_MAX+1))) + sum + initialValue);
+       }
+       break;
+   }
+   return(0.0f);
+}
+
+/***********************************************************************
  *                         getIsStatic                                 *
  ***********************************************************************/
 bool dntPartElement::getIsStatic()
@@ -170,13 +220,24 @@ bool dntPartElement::fromString(string s)
                       &flag, &lowerLimit, &upperLimit) == 7)
    {
       typeString = buf;
-      if(typeString == "linear")
+      if(typeString == "constant")
+      {
+         type = DNT_PART_ELEMENT_CONSTANT;
+      }
+      else if(typeString == "linear")
       {
          finalValue = aux;
+         type = DNT_PART_ELEMENT_LINEAR;
       }
       else if(typeString == "random")
       {
          mult = aux;
+         type = DNT_PART_ELEMENT_RANDOM;
+      }
+      else if(typeString == "randomInitial")
+      {
+         mult = aux;
+         type = DNT_PART_ELEMENT_RANDOM_INITIAL;
       }
       else
       {
@@ -208,11 +269,19 @@ string dntPartElement::toString()
 
    switch(type)
    {
+      case DNT_PART_ELEMENT_CONSTANT:
       case DNT_PART_ELEMENT_LINEAR:
       {
          /* linear initialValue finalValue sum useLimits 
           *        lowerLimit upperLimit */
-         res = "linear ";
+         if(type == DNT_PART_ELEMENT_LINEAR)
+         {
+            res = "linear ";
+         }
+         else
+         {
+            res = "constant";
+         }
          sprintf(buf, "%.3f %.3f %.3f %i %.3f %.3f", 
                        initialValue, finalValue, sum,
                        limitsDefined, lowerLimit, upperLimit);
@@ -220,9 +289,17 @@ string dntPartElement::toString()
       }
       break;
       case DNT_PART_ELEMENT_RANDOM:
+      case DNT_PART_ELEMENT_RANDOM_INITIAL:
       {
          /* random initialValue mult sum useLimits lowerLimit upperLimit */
-         res = "random ";
+         if(type == DNT_PART_ELEMENT_RANDOM)
+         {
+            res = "random ";
+         }
+         else
+         {
+            res = "randomInitial";
+         }
          sprintf(buf, "%.3f %.3f %.3f %i %.3f %.3f", 
                       initialValue, mult, sum, 
                       limitsDefined, lowerLimit, upperLimit);
