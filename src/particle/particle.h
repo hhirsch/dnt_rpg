@@ -41,6 +41,7 @@ using namespace std;
 #define DNT_PARTICLE_DRAW_INDIVIDUAL 1 /**< Draw each particle individually */
 
 #define DNT_PARTICLE_RENDER_DEFAULT  0  /**< Default renderer */
+#define DNT_PARTICLE_RENDER_GLOW     1  /**< Glow renderer (for fire) */
 
 /*! The particle system types */
 enum
@@ -230,6 +231,7 @@ class particleSystem: public dntListElement
       int renderMode;          /**< Types of render */
       float* vertexArray;      /**< Vertex array to draw */
       float* colorArray;       /**< Color array to draw */
+      int pointSize;           /**< Render Point Size */
      
       /* System specific elements */
       dntPartOrigin origin;       /**< Particle System Origin */

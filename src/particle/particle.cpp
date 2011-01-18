@@ -55,6 +55,7 @@ particleSystem::particleSystem()
    windAffect = false;
    strFileName = "";
    particles = NULL;
+   pointSize = 8;
 }
 
 /***************************************************************
@@ -114,6 +115,11 @@ bool particleSystem::load(string fileName)
             type = DNT_PARTICLE_SYSTEM_TYPE_DEFAULT;
          }
       }
+      /* pointSize */
+      else if(key == "pointSize")
+      {
+         sscanf(value.c_str(), "%d", &pointSize);
+      }
       /* drawMode */
       else if(key == "drawMode")
       {
@@ -132,6 +138,10 @@ bool particleSystem::load(string fileName)
          if(value == "default")
          {
             renderMode = DNT_PARTICLE_RENDER_DEFAULT;
+         }
+         else if(value == "glow")
+         {
+            renderMode = DNT_PARTICLE_RENDER_GLOW;
          }
       }
       /* max particles */
@@ -276,6 +286,11 @@ bool particleSystem::save( string fileName)
    /* renderMode */
    switch(renderMode)
    {
+      case DNT_PARTICLE_RENDER_GLOW:
+      {
+         file << "renderMode = glow" << endl;
+      }
+      break;
       case DNT_PARTICLE_RENDER_DEFAULT:
       default:
       {
@@ -283,6 +298,8 @@ bool particleSystem::save( string fileName)
       }
       break;
    }
+   /* pointSize */
+   file << "pointSize = " << pointSize << endl;
    /* max particles */
    file << "maxParticles = " << maxParticles << endl;
    /* wind affect */
@@ -402,6 +419,88 @@ void particleSystem::createParticle(particle* part)
 
    /* Set its initial size */
    part->size = scale.getInitialValue();
+}
+
+/***************************************************************
+ *                          initRender                         *
+ ***************************************************************/
+void particleSystem::initRender()
+{
+   float maxPointSize = 0;
+   float quadratic[] =  { 0.01f, 0.01f, 0.0f };
+
+   glDisable(GL_LIGHTING);
+   glEnable(GL_DEPTH_TEST);
+   glDepthFunc(GL_LESS);
+   glDepthMask(GL_FALSE);
+   glEnable(GL_CULL_FACE);
+
+   /* Verify extensions */
+   if(!ext.hasPointTexture())
+   {
+      /* No extensions, simple color and point. */
+      glEnable(GL_COLOR);
+      glPointSize(1);
+      return;
+   }
+
+   glEnable(GL_TEXTURE_2D);
+   glEnable(GL_BLEND);
+
+   switch(renderMode)
+   {
+      /* Default Rendererd */
+      case DNT_PARTICLE_RENDER_DEFAULT:
+      {
+         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+      }
+      break;
+      /* Glow (fire) renderer */
+      case DNT_PARTICLE_RENDER_GLOW:
+      {
+         glBlendFunc(GL_DST_ALPHA,GL_SRC_ALPHA);
+         glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+      }
+      break;
+   }
+
+   /* point extension things */
+   glGetFloatv(GL_POINT_SIZE_MAX_ARB, &maxPointSize);
+   ext.arbPointParameterfv(GL_POINT_DISTANCE_ATTENUATION_ARB, quadratic);
+   ext.arbPointParameterf(GL_POINT_SIZE_MIN_ARB, 2.0f);
+   ext.arbPointParameterf(GL_POINT_SIZE_MAX_ARB, maxPointSize);
+
+   glPointSize(pointSize);
+
+   /* set the texture */
+   glBindTexture(GL_TEXTURE_2D, partTexture);
+   glTexEnvf(GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE);
+   glEnable(GL_POINT_SPRITE_ARB);
+}
+
+/***************************************************************
+ *                           endRender                         *
+ ***************************************************************/
+void particleSystem::endRender()
+{
+   glDisable(GL_CULL_FACE);
+   glEnable(GL_DEPTH_TEST);
+   glDepthFunc(GL_LESS);
+   glDepthMask(GL_TRUE);
+   glBlendFunc(GL_SRC_ALPHA,GL_SRC_ALPHA);
+   glDisable(GL_TEXTURE_2D);
+   if( ext.hasPointTexture() )
+   {
+      glDisable(GL_POINT_SPRITE_ARB);
+   }
+   else
+   {
+      glDisable(GL_COLOR);
+      glDisable(GL_POINT_SMOOTH);
+   }
+
+   glEnable(GL_LIGHTING);
+   glDisable( GL_BLEND );
 }
 
 /***************************************************************
