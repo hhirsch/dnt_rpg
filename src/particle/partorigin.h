@@ -67,6 +67,23 @@ class dntPartOrigin
        * \return true on success. */
       bool generateNewInitialPosition(float& x, float& y, float& z);
 
+      /*! Update the defined origin to the desired point
+       * \param x -> origin new X
+       * \param y -> origin new Y
+       * \param z -> origin new Z */
+      void update(float x, float y, float z);
+
+      /*! Update the defined origin to the desired point
+       * \param x -> origin new X
+       * \param y -> origin new Y */
+      void update(float x, float y);
+
+      /*! Get the current base position of the origin
+       * \param x -> will receive X coordinate 
+       * \param y -> will receive Y coordinate 
+       * \param z -> will receive Z coordinate */
+      void getPosition(float& x, float& y, float& z);
+
       /*! Convert the dntPartOrigin to an string
        * \return string with origin info */
       string toString();

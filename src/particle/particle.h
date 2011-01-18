@@ -40,11 +40,13 @@ using namespace std;
 #define DNT_PARTICLE_DRAW_GROUP      0 /**< Draw particles as vertex group */
 #define DNT_PARTICLE_DRAW_INDIVIDUAL 1 /**< Draw each particle individually */
 
+#define DNT_PARTICLE_RENDER_DEFAULT  0  /**< Default renderer */
+
 /*! The particle system types */
 enum
 {
-    DNT_PARTSYSTEM_TYPE_DEFAULT=0,
-    DNT_PARTSYSTEM_TYPE_WATERFALL
+    DNT_PARTICLE_SYSTEM_TYPE_DEFAULT=0,
+    DNT_PARTICLE_SYSTEM_TYPE_WATERFALL
 };
 
 /*! Number of actualizations to stabilize a system */
@@ -57,7 +59,7 @@ class particle
       float posX, posY, posZ;    /**< Position */
       float velX, velY, velZ;    /**< Velocity */
       float size;                /**< Size */
-      float R,G,B;               /**< Color */
+      float R,G,B,A;             /**< Color */
       int age;                   /**< Age */
       int status;                /**< Actual Status */
       int internalNumber;        /**< Internal Number */
@@ -90,48 +92,48 @@ class particleSystem: public dntListElement
        * Do a step on system after sec seconds
        * \param matriz -> View Frustum Matrix
        ***************************************************************/
-      virtual void nextStep(GLfloat** matriz)=0;
+      void nextStep(GLfloat** matriz);
       /*!
        ***************************************************************
        * Render one particle on screen     
        *  \param part -> particle to render
        ***************************************************************/
-      virtual void render(particle* part)=0;
+      void render(particle* part);
       /*!
        ***************************************************************
        * Do things before render (like glBegin)    
        ***************************************************************/ 
-      virtual void initRender()=0;
+      void initRender();
       /*!
        ***************************************************************
        * Do things after render (like glEnd)  
        ***************************************************************/ 
-      virtual void endRender()=0;
+      void endRender();
       /*!
        ***************************************************************
        * update particles attributes (with global independent
        *         forces and influentions). 
        * \param part -> particle to actualize
        ***************************************************************/
-      virtual void update(particle* part)=0;
+      void update(particle* part);
       /*!
        ***************************************************************
        * Vertifies if a particle continue live or not
        * \param part -> particle to verify  
        * \return  true if particle continue live, false, otherwise.
        ***************************************************************/
-      virtual bool continueLive(particle* part)=0;
+      bool continueLive(particle* part);
       /*!
        ***************************************************************
        * Total Particles needed to create on this step
        ***************************************************************/
-      virtual int needCreate()=0;
+      int needCreate();
       /*!
        ***************************************************************
        * Create a particle (its position, color, etc); 
        * \param part -> particle struct that will have the new created;
        ***************************************************************/
-      virtual void createParticle(particle* part)=0;
+      void createParticle(particle* part);
       /*!
        ***************************************************************
        * Actualize and render all particles  
@@ -235,6 +237,7 @@ class particleSystem: public dntListElement
       dntPartElement color[4];    /**< Color element controller */
       dntPartElement velocity[3]; /**< Velocity element controller */
       dntPartElement position[3]; /**< Position variation element */
+      dntPartElement scale;       /**< Scale variation element */
       
       /* System Bounding Box */
       float boundX1;           /**< Bounding Box */

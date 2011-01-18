@@ -38,7 +38,7 @@ particleSystem::particleSystem()
 {
    /* Default values */
    drawMode = DNT_PARTICLE_DRAW_INDIVIDUAL;
-   renderMode = DNT_PARTSYSTEM_RENDER_DEFAULT;
+   renderMode = DNT_PARTICLE_RENDER_DEFAULT;
    colorArray = NULL;
    vertexArray = NULL;
 
@@ -47,7 +47,7 @@ particleSystem::particleSystem()
    maxLifeTime = 0;
    maxParticleLifeTime = 0;
 
-   type = DNT_PARTSYSTEM_TYPE_DEFAULT;
+   type = DNT_PARTICLE_SYSTEM_TYPE_DEFAULT;
    maxParticles = 0;
    actualParticles = 0;
    followCharacter = NULL;
@@ -62,24 +62,26 @@ particleSystem::particleSystem()
  ***************************************************************/
 particleSystem::~particleSystem()
 {
+   /* Delete all particles */
    if(particles)
    {
       delete []particles; 
       particles = NULL;
    }
 
+   /* Delete all created arrays */
    if(vertexArray)
    {
       delete[] vertexArray;
       vertexArray = NULL;
    }
-
    if(colorArray)
    {
       delete[] colorArray;
       colorArray = NULL;
    }
 
+   /* Delete the particles texture */
    if(!textureFileName.empty())
    {
       glDeleteTextures(1, &(partTexture));
@@ -94,8 +96,6 @@ bool particleSystem::load(string fileName)
    defParser def;
    string key="", value="";
 
-   type = DNT_PARTICLE_TYPE_DEFAULT;
-
    strFileName = fileName;
    if(!def.load(fileName))
    {
@@ -106,8 +106,16 @@ bool particleSystem::load(string fileName)
    /* Get each tuple */
    while(def.getNextTuple(key, value))
    {
+      /* Type */
+      if(key == "type")
+      {
+         if(value == "default")
+         {
+            type = DNT_PARTICLE_SYSTEM_TYPE_DEFAULT;
+         }
+      }
       /* drawMode */
-      if(key == "drawMode")
+      else if(key == "drawMode")
       {
           if(value == "individual")
           {
@@ -123,13 +131,8 @@ bool particleSystem::load(string fileName)
       {
          if(value == "default")
          {
-            renderMode = DNT_PARTSYSTEM_RENDER_DEFAULT;
+            renderMode = DNT_PARTICLE_RENDER_DEFAULT;
          }
-      }
-      /* type */
-      else if(key == "type")
-      {
-         sscanf(value.c_str(), "%d", &type);
       }
       /* max particles */
       else if(key == "maxParticles")
@@ -216,11 +219,108 @@ bool particleSystem::load(string fileName)
       {
          position[2].fromString(value);
       }
+      /* scale */
+      else if(key == "scale")
+      {
+         scale.fromString(value);
+      }
    }
 
    /* Init the ParticleSystem with loaded values */
    init();
 
+   return(true);
+}
+
+/***********************************************************
+ *                         Save                            *
+ ***********************************************************/
+bool particleSystem::save( string fileName)
+{
+   std::ofstream file;
+   string aux;
+
+   file.open(fileName.c_str(), ios::out | ios::binary);
+
+
+   if(!file)
+   {
+      return(false);
+   }
+
+   /* Type */
+   switch(type)
+   {
+      default:
+      case DNT_PARTICLE_SYSTEM_TYPE_DEFAULT:
+      {
+         file << "type = default" << endl;
+      }
+      break;
+   }
+   /* drawMode */
+   switch(drawMode)
+   {
+      case DNT_PARTICLE_DRAW_INDIVIDUAL:
+      {
+         file << "drawMode = individual" << endl;
+      }
+      break;
+      case DNT_PARTICLE_DRAW_GROUP:
+      default:
+      {
+         file << "drawMode = group" << endl;
+      }
+      break;
+   }
+   /* renderMode */
+   switch(renderMode)
+   {
+      case DNT_PARTICLE_RENDER_DEFAULT:
+      default:
+      {
+         file << "renderMode = default" << endl;
+      }
+      break;
+   }
+   /* max particles */
+   file << "maxParticles = " << maxParticles << endl;
+   /* wind affect */
+   file << "windAffect = " << ((windAffect)?"true":"false") << endl;
+   /* texture file name */
+   file << "texture = " << textureFileName << endl;
+   /* maxLifeTime */
+   file << "maxLifeTime = " << maxLifeTime << endl;
+   /* maxParticleLifeTime */
+   file << "maxParticleLifeTime = " << maxParticleLifeTime << endl;
+   /* gravity */
+   file << "gravity = " << gravity << endl;
+   /* origin */
+   file << "origin = " << origin.toString() << endl;
+   /* colorRed */
+   file << "colorRed = " << color[0].toString() << endl;
+   /* colorGreen */
+   file << "colorGreen = " << color[1].toString() << endl;
+   /* colorBlue */
+   file << "colorBlue = " << color[2].toString() << endl;
+   /* colorAlpha */
+   file << "colorAlpha = " << color[3].toString() << endl;
+   /* velocityX */
+   file << "velocityX = " << velocity[0].toString() << endl;
+   /* velocityY */
+   file << "velocityY = " << velocity[1].toString() << endl;
+   /* velocityZ */
+   file << "velocityZ = " << velocity[2].toString() << endl;
+   /* positionX */
+   file << "positionX = " << position[0].toString() << endl;
+   /* positionY */
+   file << "positionY = " << position[1].toString() << endl;
+   /* positionZ */
+   file << "positionZ = " << position[2].toString() << endl;
+   /* scale */
+   file << "scale = " << scale.toString() << endl;
+
+   file.close();
    return(true);
 }
 
@@ -278,6 +378,33 @@ void particleSystem::resetBoundingBox()
 }
 
 /***************************************************************
+ *                       createParticle                        *
+ ***************************************************************/
+void particleSystem::createParticle(particle* part)
+{
+   /* Set State */
+   part->status = PARTICLE_STATUS_ALIVE;
+   part->age = 0;
+
+   /* Set initial position */
+   origin.generateNewInitialPosition(part->posX, part->posY, part->posZ);
+   
+   /* Set its initial velocity */
+   part->velX = velocity[0].getInitialValue();
+   part->velY = velocity[1].getInitialValue();
+   part->velZ = velocity[2].getInitialValue();
+
+   /* Set its initial color */
+   part->R = color[0].getInitialValue();
+   part->G = color[1].getInitialValue();
+   part->B = color[2].getInitialValue();
+   part->A = color[3].getInitialValue();
+
+   /* Set its initial size */
+   part->size = scale.getInitialValue();
+}
+
+/***************************************************************
  *                 Do a step to Particle System                *
  ***************************************************************/
 void particleSystem::doStep(GLfloat** matriz)
@@ -304,13 +431,7 @@ void particleSystem::doStep(GLfloat** matriz)
           }
           /* Create a new particle */
           createParticle(&particles[n]);
-          /* Set State */
-          particles[n].status = PARTICLE_STATUS_ALIVE;
-          particles[n].age = 0;
-          /* Add the initial velocity to it */
-          particles[n].velX += initVelX;
-          particles[n].velY += initVelY;
-          particles[n].velZ += initVelZ;
+
           /* Decrement the number of pending to create particles */
           pendingCreate--;
       }
@@ -332,7 +453,7 @@ void particleSystem::doStep(GLfloat** matriz)
       if( particles[n].status != PARTICLE_STATUS_DEAD)
       {
          
-         /* Actualize Bounding Box */
+         /* Update Bounding Box */
          if( boundX1 == -1 )
          {
             /* First Particle top take */
@@ -372,7 +493,8 @@ void particleSystem::doStep(GLfloat** matriz)
             }
          }
          
-         if(drawMode == PARTICLE_DRAW_GROUPS)
+         /* Insert at the arrays, if defined */
+         if(drawMode == DNT_PARTICLE_DRAW_GROUP)
          {
             vertexArray[alive] = particles[n].posX;
             vertexArray[alive+1] = particles[n].posY;
@@ -381,8 +503,9 @@ void particleSystem::doStep(GLfloat** matriz)
             colorArray[aliveColor] = particles[n].R;
             colorArray[aliveColor+1] = particles[n].G;
             colorArray[aliveColor+2] = particles[n].B;
-            //colorArray[aliveColor+3] = 1.0;
+            colorArray[aliveColor+3] = particles[n].A;
          }
+         /* Or render individually, if visible */
          else if((matriz == NULL) ||
                  (visibleCube(boundX1, boundY1, boundZ1, boundX2, 
                                  boundY2, boundZ2,matriz)))
@@ -390,18 +513,20 @@ void particleSystem::doStep(GLfloat** matriz)
             render(&particles[n]);
          }
          alive += 3;
-         aliveColor += 3;
+         aliveColor += 4;
       }
 
    }
 
-   if( (drawMode == PARTICLE_DRAW_GROUPS) && (aliveColor > 0) && (alive > 0) &&
+   /* Render the arrays, if defined as group and visible */
+   if( (drawMode == DNT_PARTICLE_DRAW_GROUP) && 
+       (aliveColor > 0) && (alive > 0) &&
        ( (matriz == NULL) || 
          (visibleCube(boundX1, boundY1, boundZ1, boundX2, boundY2, boundZ2,
                            matriz))))
    {
       glEnableClientState(GL_COLOR_ARRAY);
-      glColorPointer(3, GL_FLOAT, 0, colorArray);
+      glColorPointer(4, GL_FLOAT, 0, colorArray);
       glEnableClientState(GL_VERTEX_ARRAY);
       glVertexPointer(3, GL_FLOAT, 0, vertexArray);
       glDrawArrays(GL_POINTS, 0, (int)alive / (int)3);
@@ -413,67 +538,22 @@ void particleSystem::doStep(GLfloat** matriz)
 
 }
 
-/***********************************************************
- *                         Save                            *
- ***********************************************************/
-bool particleSystem::save( string fileName)
-{
-   std::ofstream file;
-   string aux;
-
-   file.open(fileName.c_str(), ios::out | ios::binary);
-
-
-   if(!file)
-   {
-      return(false);
-   }
-
-   file << "MAXLIVE " << maxLive << "\n";
-   file << "MAXPARTICLES " << maxParticles << "\n";
-   file << "CENTERX " << centerX << "\n";
-   file << "CENTERY " << centerY << "\n"; 
-   file << "CENTERZ " << centerZ << "\n";
-   file << "GRAVITY " << gravity << "\n";
-   file << "INITR " << initR << "\n";
-   file << "INITG " << initG << "\n";
-   file << "INITB " << initB << "\n";
-   file << "FINALR " << finalR << "\n";
-   file << "FINALG " << finalG << "\n";
-   file << "FINALB " << finalB << "\n";
-   file << "ALPHA " << alpha << "\n";
-   file << "DMULTCENTER " << dMultCenter[0] << " " << dMultCenter[1] << " " << 
-                             dMultCenter[2] << "\n";
-   file << "DSUMCENTER " << dSumCenter[0] << " " <<  dSumCenter[1] << " " <<  
-                            dSumCenter[2] << "\n";
-   file << "DMULTPOS " << dMultPos[0] << " " <<  dMultPos[1] << " " << 
-                          dMultPos[2] << "\n";
-   file << "DSUMPOS " << dSumPos[0] << " " <<  dSumPos[1] << " " << 
-                         dSumPos[2] << "\n";
-   file << "DMULTCOLOR " << dMultColor[0] << " " <<  dMultColor[1] << " " <<  
-                            dMultColor[2] << "\n";
-   file << "DSUMCOLOR " << dSumColor[0] << " " << dSumColor[1] << " " <<  
-                           dSumColor[2] << "\n";
-   file << "DMULTVEL " << dMultVel[0] << " " <<  dMultVel[1] << " " << 
-                             dMultVel[2] << "\n";
-   file << "DSUMVEL " << dSumVel[0] << " " <<  dSumVel[1] << " " << 
-                           dSumVel[2] << "\n";
-   file << "INITIALVEL " << initVelX << " " << initVelY << " " <<
-                           initVelZ << "\n";
-
-   file.close();
-   return(true);
-}
-
 /****************************************************************************
  *                              LoadTexture                                 *
  ****************************************************************************/
 void particleSystem::loadTexture()
 {
    dirs dir;
-   SDL_Surface* img = IMG_Load(dir.getRealFile(fileName).c_str());
-
+   SDL_Surface* img = IMG_Load(dir.getRealFile(textureFileName).c_str());
    glGenTextures(1, &(partTexture));
+
+   if(!img)
+   {
+      cerr << "Error: couldn't load particle texture: "
+           << textureFileName << endl;
+      return;
+   }
+
    glBindTexture(GL_TEXTURE_2D, partTexture);
    glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
                 0,GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
@@ -489,8 +569,7 @@ void particleSystem::loadTexture()
  ***********************************************************/
 void particleSystem::definePosition(float cX, float cZ)
 {
-   centerX = cX;
-   centerZ = cZ;
+   origin.update(cX, cZ);
 }
 
 /***********************************************************
@@ -498,9 +577,7 @@ void particleSystem::definePosition(float cX, float cZ)
  ***********************************************************/
 void particleSystem::definePosition(float cX, float cY, float cZ)
 {
-   centerX = cX;
-   centerY = cY;
-   centerZ = cZ;
+   origin.update(cX, cY, cZ);
 }
 
 /***********************************************************
@@ -516,9 +593,7 @@ string particleSystem::getFileName()
  ***********************************************************/
 void particleSystem::getPosition(GLfloat& x, GLfloat &y, GLfloat& z)
 {
-   x=centerX;
-   y=centerY;
-   z=centerZ;
+   origin.getPosition(x, y, z);
 }
 
 /***********************************************************
@@ -551,6 +626,6 @@ void particleSystem::setFollowCharacter(void* follow, bool isPC)
  ***********************************************************/
 void particleSystem::setDurationTime(int time)
 {
-   systemMaxLiveTime = time;
+   maxLifeTime = time;
 }
 
