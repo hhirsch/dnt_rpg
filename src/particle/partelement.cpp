@@ -246,6 +246,7 @@ bool dntPartElement::fromString(string s)
          return(false);
       }
       limitsDefined = (flag != 0);
+      used = true;
       return(true);
    }
    
@@ -282,7 +283,7 @@ string dntPartElement::toString()
          {
             res = "constant ";
          }
-         sprintf(buf, "%.3f %.3f %.3f %i %.3f %.3f", 
+         sprintf(buf, "%.3f %.3f %.5f %i %.3f %.3f", 
                        initialValue, finalValue, sum,
                        limitsDefined, lowerLimit, upperLimit);
          res += buf;
