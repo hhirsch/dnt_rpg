@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -317,7 +317,7 @@ using namespace std;
 ////////////////////////////////////////////////////
 //                Particle Functions              //
 ////////////////////////////////////////////////////
-/*! void particleAddToCharacter(int partType, string fileName, character* c,
+/*! void particleAddToCharacter(string fileName, character* c,
  *                              int duration) */
 #define IA_PARTICLE_ADD_TO_CHARACTER "particleAddToCharacter"
 

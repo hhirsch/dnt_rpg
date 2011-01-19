@@ -423,6 +423,14 @@ void particleSystem::createParticle(particle* part)
    part->size = scale.getInitialValue();
 }
 
+/**************************************************************
+ *                       renderIndividual                     *
+ **************************************************************/
+void particleSystem::render(particle* part)
+{
+   /* TODO: render individual */
+}
+
 /***************************************************************
  *                          initRender                         *
  ***************************************************************/
@@ -536,6 +544,14 @@ bool particleSystem::continueLive(particle& part)
    }
    
    return(part.age <= maxParticleLifeTime);
+}
+
+/***************************************************************
+ *                            update                           *
+ ***************************************************************/
+void particleSystem::update(particle* part)
+{
+   /* TODO */
 }
 
 /***************************************************************

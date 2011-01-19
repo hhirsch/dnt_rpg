@@ -125,7 +125,7 @@ bool doHealOrAttack(thing& actor, thing* target,
    string diceText;
    briefing brief;
    messageController controller;
-   part5* bloodPart;
+   particleSystem* bloodPart;
 
    /* Define Actor orientation
     * FIXME -> call rotate animation! */
@@ -384,15 +384,14 @@ bool doHealOrAttack(thing& actor, thing* target,
       GLfloat cs = cos(deg2Rad(target->orientation));
       GLfloat sn = sin(deg2Rad(target->orientation));
 
-      bloodPart = (part5*) pSystem.addParticle(DNT_PARTICLE_TYPE_BLOOD, 
-            target->xPosition - (sn*2),
+      bloodPart = pSystem.addParticle(target->xPosition - (sn*2),
             target->yPosition + target->bloodPosition,
             target->zPosition - (cs*2), target->bloodFileName);
 
       /* Set the blood follow character if needed */
       if(target->getThingType() == THING_TYPE_CHARACTER)
       {
-         bloodPart->setFollowCharacter(target, false);
+         bloodPart->setFollowCharacter(target, DNT_PARTICLE_SYSTEM_FOLLOW_HEAD);
       }
    }
 

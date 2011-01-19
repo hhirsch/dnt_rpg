@@ -2294,9 +2294,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    /* particleAddToCharacter */
    else if(functionName == IA_PARTICLE_ADD_TO_CHARACTER)
    {
-      /* Syntax: void particleAddToCharacter(int partType, string fileName,
+      /* Syntax: void particleAddToCharacter(string fileName,
        *                                     character* c, int duration) */
-      int partType=0;
       character* c;
       float posX=0, posY=0, posZ=0;
       string partFile="";
@@ -2305,7 +2304,6 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       partController particles;
 
       /* Get parameters */
-      partType = getParameteri(token, strLine, pos);
       partFile = getParameters(token, strLine, pos);
       c = getParameterc(token, strLine, pos);
       if(c)
@@ -2317,7 +2315,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       duration = getParameteri(token, strLine, pos);
 
       /* Add system */
-      ps = particles.addParticle(partType, posX, posY, posZ, partFile);
+      ps = particles.addParticle(posX, posY, posZ, partFile);
       if(ps != NULL)
       {
          ps->setFollowCharacter(c,eng->PCs->isCharacterIn(c));

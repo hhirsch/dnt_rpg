@@ -537,8 +537,6 @@ class engine
       Uint32 walkPressTime;       /**< Ticks when pressed walk mouse button */
       GLfloat walkDistance;       /**< The current walk distance travelled */
 
-      part2* effect;
-
       sky* gameSky;               /**< The internal sky reference */
       sun* gameSun;               /**< The internal sun reference */
       GLfloat hour;               /**< Hour on day time */

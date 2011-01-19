@@ -6,7 +6,7 @@ EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 ENDENGINE=../engine/
 ENDETC=../etc/
 
-OBJS = particle.o partcontroller.o partelement.o partlist.o partorigin.o
+OBJS = lake.o particle.o partcontroller.o partelement.o partlist.o partorigin.o
 
 all: $(OBJS)
 

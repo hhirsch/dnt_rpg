@@ -37,7 +37,6 @@ engine::engine()
 {
    int i;
 
-   effect = NULL;
    /* Initialize internal lists */
    gui  = new guiInterface("");
    actualMap = NULL;
@@ -2992,94 +2991,7 @@ int engine::treatIO(SDL_Surface *screen)
       }
 
 
-      /* FIXME Remove all temporary tests from here */
-      if( (keys[SDLK_y]) && 
-            ( (time-lastKeyb >= REFRESH_RATE) || 
-              (lastKey != SDLK_y) ) )
-      {
-         lastKey = SDLK_y;
-         lastKeyb = time;
-         if(!effect)
-         {
-            effect = (part2*)particleController.addParticle(
-                  DNT_PARTICLE_TYPE_FIRE,
-                  activeCharacter->xPosition,0,
-                  activeCharacter->zPosition,
-                  "particles/effect1.par");
-            if(effect)
-            {
-               effect->setFollowCharacter(activeCharacter,true);
-            }
-         }
-         else
-         {
-            particleController.removeParticle(effect);
-            effect = NULL;
-         }
-      }
-      if( (keys[SDLK_t]) && 
-            ( (time-lastKeyb >= REFRESH_RATE) || 
-              (lastKey != SDLK_t) ) )
-      {
-         lastKey = SDLK_t;
-         lastKeyb = time;
-         particleController.addParticle(DNT_PARTICLE_TYPE_METEOR,
-               activeCharacter->xPosition,
-               MAX_HEIGHT+100,
-               activeCharacter->zPosition,
-               0.0, -1.0, 0.0,
-               activeCharacter->xPosition,
-               actualMap->getHeight(
-                  activeCharacter->xPosition,
-                  activeCharacter->zPosition),
-               activeCharacter->zPosition,
-               "particles/fire1.par");
-      }
-      if( (keys[SDLK_u]) && 
-            ( (time-lastKeyb >= REFRESH_RATE) || 
-              (lastKey != SDLK_u) ) )
-      {
-         lastKey = SDLK_u;
-         GLfloat incZ = -cos(deg2Rad(activeCharacter->orientation));
-         GLfloat incX = -sin(deg2Rad(activeCharacter->orientation));
-         particleController.addParticle(DNT_PARTICLE_TYPE_METEOR,
-               activeCharacter->xPosition,
-               activeCharacter->yPosition + 15,
-               activeCharacter->zPosition,
-               2*incX, 0.0, 2*incZ,
-               activeCharacter->xPosition + 800*incX,
-               activeCharacter->yPosition + 15,
-               activeCharacter->zPosition + 800*incZ,
-               "particles/fire1.par");
-      }
-      if( (keys[SDLK_l]) && 
-            ( (time-lastKeyb >= REFRESH_RATE) || 
-              (lastKey != SDLK_l) ) )
-      {
-         lastKey = SDLK_l;
-         lastKeyb = time;
-         particleController.addParticle(DNT_PARTICLE_TYPE_LIGHTNING,
-               activeCharacter->xPosition,250,
-               activeCharacter->zPosition,
-               "particles/lightning1.par");
-      }
-      if( (keys[SDLK_o]) && 
-            ( (time-lastKeyb >= REFRESH_RATE) || 
-              (lastKey != SDLK_o) ) )
-      {
-         lastKey = SDLK_o;
-         lastKeyb = time;
-         part5* eff = (part5*)particleController.addParticle(
-               DNT_PARTICLE_TYPE_BLOOD,
-               activeCharacter->xPosition,0,
-               activeCharacter->zPosition,
-               "particles/blood1.par");
-         if(eff)
-         {
-            eff->setFollowCharacter(activeCharacter, true);
-         }
-      }
-
+      /* Pass time */
       if( (keys[SDLK_0]) && 
             ( (time-lastKeyb >= REFRESH_RATE) || 
               (lastKey != SDLK_0) ) )
