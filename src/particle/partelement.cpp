@@ -210,7 +210,7 @@ bool dntPartElement::isUsed()
  ***********************************************************************/
 bool dntPartElement::fromString(string s)
 {
-   char buf[256];
+   char buf[512];
    string typeString="";
    float aux=0.0f;
    int flag=0;
@@ -280,7 +280,7 @@ string dntPartElement::toString()
          }
          else
          {
-            res = "constant";
+            res = "constant ";
          }
          sprintf(buf, "%.3f %.3f %.3f %i %.3f %.3f", 
                        initialValue, finalValue, sum,
@@ -298,7 +298,7 @@ string dntPartElement::toString()
          }
          else
          {
-            res = "randomInitial";
+            res = "randomInitial ";
          }
          sprintf(buf, "%.3f %.3f %.3f %i %.3f %.3f", 
                       initialValue, mult, sum, 

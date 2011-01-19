@@ -1,22 +1,19 @@
-MAXLIVE 100
-MAXPARTICLES 200
-CENTERX 50
-CENTERY 0
-CENTERZ 120
-GRAVITY 15
-INITR 0.957031
-INITG 0.957031
-INITB 0.957031
-FINALR 0.957031
-FINALG 0.957031
-FINALB 0.957031
-ALPHA 0.8
-DMULTCENTER 4 4 4
-DSUMCENTER -2 -2 -2
-DMULTPOS 0.2 0.2 0.2
-DSUMPOS -0.1 -0.1 -0.1
-DMULTCOLOR 1 1 1
-DSUMCOLOR 0 0 0
-DMULTVEL 0.5 0 0.5
-DSUMVEL -0.25 0.3 -0.25
-INITIALVEL 0 0 0
+type = default
+drawMode = group
+renderMode = default
+pointSize = 8
+maxParticles = 400
+windAffect = true
+texture = particles/smoke5.png
+maxLifeTime = 0
+maxParticleLifeTime = 100
+gravity = -0.005
+origin = 1 -2 -2 -2 4 4 4 0
+needCreate = random 0.0 8 0.0 0 0.0 0.0
+colorRed = constant 0.957 0.957 0.0 0 0.0 0.0
+colorGreen = constant 0.957 0.957 0.0 0 0.0 0.0
+colorBlue = constant 0.957 0.957 0.0 0 0.0 0.0
+colorAlpha = constant 0.8 0.8 0.0 0 0.8 0.8
+velocityX = randomInitial 0.0 0.05 -0.025 0 0.0 0.0
+velocityY = randomInitial 0.0 0.02 -0.01 0 0.0 0.0
+velocityZ = randomInitial 0.0 0.05 -0.025 0 0.0 0.0

@@ -184,6 +184,8 @@ class particleSystem: public dntListElement
       /* System specific elements */
       dntPartOrigin origin;       /**< Particle System Origin */
       float gravity;              /**< Force of Gravity */
+      int numParticlesToCreate;         /**< total particles to create */
+      dntPartElement particlesToCreate; /**< particles to create elemtent */
       dntPartElement color[4];    /**< Color element controller */
       dntPartElement velocity[3]; /**< Velocity element controller */
       dntPartElement position[3]; /**< Position variation element */

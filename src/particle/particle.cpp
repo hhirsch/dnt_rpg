@@ -47,6 +47,7 @@ particleSystem::particleSystem()
    initialLifeTime = 0;
    maxLifeTime = 0;
    maxParticleLifeTime = 0;
+   numParticlesToCreate = 0;
 
    type = DNT_PARTICLE_SYSTEM_TYPE_DEFAULT;
    maxParticles = 0;
@@ -180,6 +181,11 @@ bool particleSystem::load(string fileName)
       else if(key == "origin")
       {
          origin.fromString(value);
+      }
+      /* needCreate */
+      else if(key == "needCreate")
+      {
+         particlesToCreate.fromString(value);
       }
       /* colorRed */
       else if(key == "colorRed")
@@ -316,28 +322,63 @@ bool particleSystem::save( string fileName)
    file << "gravity = " << gravity << endl;
    /* origin */
    file << "origin = " << origin.toString() << endl;
+   /* need create */
+   file << "needCreate = " << particlesToCreate.toString() << endl;
    /* colorRed */
-   file << "colorRed = " << color[0].toString() << endl;
+   if(color[0].isUsed())
+   {
+      file << "colorRed = " << color[0].toString() << endl;
+   }
    /* colorGreen */
-   file << "colorGreen = " << color[1].toString() << endl;
+   if(color[1].isUsed())
+   {
+      file << "colorGreen = " << color[1].toString() << endl;
+   }
    /* colorBlue */
-   file << "colorBlue = " << color[2].toString() << endl;
+   if(color[2].isUsed())
+   {
+      file << "colorBlue = " << color[2].toString() << endl;
+   }
    /* colorAlpha */
-   file << "colorAlpha = " << color[3].toString() << endl;
+   if(color[3].isUsed())
+   {
+      file << "colorAlpha = " << color[3].toString() << endl;
+   }
    /* velocityX */
-   file << "velocityX = " << velocity[0].toString() << endl;
+   if(velocity[0].isUsed())
+   {
+      file << "velocityX = " << velocity[0].toString() << endl;
+   }
    /* velocityY */
-   file << "velocityY = " << velocity[1].toString() << endl;
+   if(velocity[1].isUsed())
+   {
+      file << "velocityY = " << velocity[1].toString() << endl;
+   }
    /* velocityZ */
-   file << "velocityZ = " << velocity[2].toString() << endl;
+   if(velocity[2].isUsed())
+   {
+      file << "velocityZ = " << velocity[2].toString() << endl;
+   }
    /* positionX */
-   file << "positionX = " << position[0].toString() << endl;
+   if(position[0].isUsed())
+   {
+      file << "positionX = " << position[0].toString() << endl;
+   }
    /* positionY */
-   file << "positionY = " << position[1].toString() << endl;
+   if(position[1].isUsed())
+   {
+      file << "positionY = " << position[1].toString() << endl;
+   }
    /* positionZ */
-   file << "positionZ = " << position[2].toString() << endl;
+   if(position[2].isUsed())
+   {
+      file << "positionZ = " << position[2].toString() << endl;
+   }
    /* scale */
-   file << "scale = " << scale.toString() << endl;
+   if(scale.isUsed())
+   {
+      file << "scale = " << scale.toString() << endl;
+   }
 
    file.close();
    return(true);
@@ -357,6 +398,9 @@ void particleSystem::init()
            << "maxParticles = " << maxParticles << endl;
       return;
    }
+   
+   /* Set initial create */
+   numParticlesToCreate = (int)particlesToCreate.getInitialValue();
 
    /* Reset the timer */
    initialLifeTime = SDL_GetTicks();
@@ -407,7 +451,7 @@ void particleSystem::createParticle(particle* part)
 
    /* Set initial position */
    origin.generateNewInitialPosition(part->posX, part->posY, part->posZ);
-   
+
    /* Set its initial velocity */
    part->velX = velocity[0].getInitialValue();
    part->velY = velocity[1].getInitialValue();
@@ -520,17 +564,10 @@ void particleSystem::endRender()
  ***************************************************************/
 int particleSystem::needCreate()
 {
-   if(maxLifeTime > 0)
-   {
-      return((int)(1+(maxParticles / maxLifeTime)*(rand() / (RAND_MAX+1.0))));
-   }
-   else if((actualParticles < maxParticles) && (!doneCreation))
-   {
-      return(rand() % 30);
-   }
-   
-   doneCreation = true;
-   return(0);
+   float aux = numParticlesToCreate;
+   particlesToCreate.updateValue(aux);
+   numParticlesToCreate = (int)floor(aux);
+   return(numParticlesToCreate);
 }
 
 /***************************************************************
@@ -542,7 +579,7 @@ bool particleSystem::continueLive(particle& part)
    {
       return(true);
    }
-   
+
    return(part.age <= maxParticleLifeTime);
 }
 
@@ -551,7 +588,43 @@ bool particleSystem::continueLive(particle& part)
  ***************************************************************/
 void particleSystem::update(particle* part)
 {
-   /* TODO */
+   /* Update Color */
+   color[0].updateValue(part->R);
+   color[1].updateValue(part->G);
+   color[2].updateValue(part->B);
+   color[3].updateValue(part->A);
+
+   /* Update Position */
+   if(position[0].isUsed())
+   {
+      position[0].updateValue(part->posX);
+      position[1].updateValue(part->posY);
+      position[2].updateValue(part->posZ);
+   }
+   else
+   {
+      /* Update Velocity */
+      velocity[0].updateValue(part->velX);
+      velocity[1].updateValue(part->velY);
+      velocity[2].updateValue(part->velZ);
+
+      /* Apply gravity */
+      part->velY += -gravity;
+
+      part->posX += part->velX;
+      part->posY += part->velY;
+      part->posZ += part->velZ;
+      
+      /* TODO: stop at map height limit.... */
+   }
+
+   /* Update scale */
+   scale.updateValue(part->size);
+
+   /* Make it old */
+   part->age++;
+
+   /* TODO: collision detection, when desired */
 }
 
 /***************************************************************
@@ -693,7 +766,7 @@ void particleSystem::doStep(GLfloat** matriz)
             colorArray[aliveColor] = particles[n].R;
             colorArray[aliveColor+1] = particles[n].G;
             colorArray[aliveColor+2] = particles[n].B;
-            colorArray[aliveColor+3] = particles[n].A;
+            //colorArray[aliveColor+3] = particles[n].A;
          }
          /* Or render individually, if visible */
          else if((matriz == NULL) ||
@@ -703,7 +776,7 @@ void particleSystem::doStep(GLfloat** matriz)
             render(&particles[n]);
          }
          alive += 3;
-         aliveColor += 4;
+         aliveColor += 3;
       }
 
    }
@@ -716,7 +789,7 @@ void particleSystem::doStep(GLfloat** matriz)
                            matriz))))
    {
       glEnableClientState(GL_COLOR_ARRAY);
-      glColorPointer(4, GL_FLOAT, 0, colorArray);
+      glColorPointer(3, GL_FLOAT, 0, colorArray);
       glEnableClientState(GL_VERTEX_ARRAY);
       glVertexPointer(3, GL_FLOAT, 0, vertexArray);
       glDrawArrays(GL_POINTS, 0, (int)alive / (int)3);
