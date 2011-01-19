@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -75,65 +75,17 @@ void partController::updateAll(GLfloat** matriz, bool enableGrass)
 {
    int i, total;
    int time = SDL_GetTicks();
-   character* chr = NULL;
-
    particleSystem* part = (particleSystem*)particles->getFirst();
 
    total = particles->getTotal();
    for(i = 0; i < total; i++)
    {
-      chr = (character*)part->followCharacter;
-      /* Apply character "influence" position change */
-      if(chr != NULL)
-      {
-         if( (part->type == DNT_PARTICLE_TYPE_BLOOD) && 
-             (chr->head.vertexId != -1) )
-         {
-            part->definePosition(chr->head.x, chr->head.y, chr->head.z);
-         }
-         else
-         {
-            part->definePosition(chr->xPosition, chr->zPosition);
-         }
-      }
-
       /* Do the next step */
-      if( (part->type == DNT_PARTICLE_TYPE_FIRE) || 
-          (part->type == DNT_PARTICLE_TYPE_METEOR) )
-      {
-         glDisable(GL_FOG);
-      }
-
-      if(part->type != DNT_PARTICLE_TYPE_GRASS)
-      {
-         part->nextStep(matriz);
-      }
-      else
-      {
-         /* FIXME: wind! */
-         grass* gr = (grass*)part;
-
-         if(chr)
-         {
-            gr->nextStep(matriz, 
-                  chr->xPosition, chr->yPosition, chr->zPosition, NULL);
-         }
-         else
-         {
-            gr->nextStep(matriz, 0, 0, 0, NULL);
-         }
-      }
-
-      if( (part->type == DNT_PARTICLE_TYPE_FIRE) || 
-          (part->type == DNT_PARTICLE_TYPE_METEOR) )
-      {
-         glEnable(GL_FOG);
-      }
-
+      part->doStep(matriz);
 
       /* Verify Living */
-      if( (part->systemMaxLiveTime != 0) && 
-            (time - part->systemInitialLiveTime >= part->systemMaxLiveTime) )
+      if( (part->maxLifeTime != 0) && 
+            (time - part->initialLifeTime >= part->maxLifeTime) )
       {
          part = (particleSystem*)part->getNext();
          particles->removeSystem((particleSystem*)part->getPrevious());
@@ -150,103 +102,17 @@ void partController::updateAll(GLfloat** matriz, bool enableGrass)
 /**********************************************************************
  *                            addParticle                             *
  **********************************************************************/
-particleSystem* partController::addParticle(int type, GLfloat x1, GLfloat z1,
-                                        GLfloat x2, GLfloat z2, int total,
-                                        GLfloat scale, string fileName)
-{
-   switch(type)
-   {
-      case DNT_PARTICLE_TYPE_GRASS:
-      {
-         grass* gr = new grass(x1,z1,x2,z2,total, scale, fileName);
-         particles->addSystem(gr);
-         return(gr);
-      }
-      break;
-   }
-   return(NULL);
-}
-
-/**********************************************************************
- *                            addParticle                             *
- **********************************************************************/
-meteor* partController::addParticle(int type, GLfloat X, GLfloat Y, GLfloat Z,
-                                GLfloat varX, GLfloat varY, GLfloat varZ,
-                                GLfloat targX, GLfloat targY, GLfloat targZ,
-                                string fileName)
-{
-   switch(type)
-   {
-      case DNT_PARTICLE_TYPE_METEOR:
-      {
-         meteor* mt = new meteor(X, Y, Z, varX, varY, varZ,
-                                 targX, targY, targZ, fileName);
-         particles->addSystem(mt);
-         mt->defineCollision(colDetect);
-         return(mt);
-      }
-      break;
-   }
-   return(NULL);
-}
-
-/**********************************************************************
- *                            addParticle                             *
- **********************************************************************/
-particleSystem* partController::addParticle(int type, GLfloat X, GLfloat Y, 
+particleSystem* partController::addParticle(GLfloat X, GLfloat Y, 
                                         GLfloat Z, string fileName )
 { 
-   particleSystem* part = NULL;
+   /* Create and load particle system */
+   particleSystem* part =new particleSystem();
+   part->load(fileName);
+   /* Set position on map */
+   part->definePosition(X, Y, Z);
 
-   switch(type)
-   {
-       case DNT_PARTICLE_TYPE_WATERFALL:
-       {
-          part = new part1(X,Y,Z,fileName);
-       }
-       break;
-       case DNT_PARTICLE_TYPE_FIRE:
-       {
-          part = new part2(X,Y,Z,fileName);
-       }
-       break;
-       case DNT_PARTICLE_TYPE_WATER_SURFACE:
-       {
-          part = new part3(X,Y,Z);
-       }
-       break;
-       case DNT_PARTICLE_TYPE_SMOKE:
-       {
-          part = new part4(X,Y,Z,fileName);
-       }
-       break;
-       case DNT_PARTICLE_TYPE_BLOOD:
-       {
-          part5* bl = new part5(X,Y,Z,fileName);
-          if(currentMap != NULL)
-          {
-             Map* m = (Map*)currentMap;
-             bl->setTerrainHeight(m->getHeight(X,Z));
-          }
-          part = bl;
-       }
-       break;
-       case DNT_PARTICLE_TYPE_LIGHTNING:
-       {
-          part = new part6(X,Y,Z,fileName);
-       }
-       break;
-       case DNT_PARTICLE_TYPE_SNOW:
-       {
-          part = new part7(X,Y,Z,fileName);
-       }
-       break;
-   }
-
-   if(part != NULL)
-   {
-      particles->addSystem(part);
-   }
+   /* Add to the list */
+   particles->addSystem(part);
 
    return(part);
 }
@@ -281,8 +147,6 @@ void partController::setActualMap(void* acMap, collision* col)
 {
    int i;
    particleSystem* part;
-   grass* gr;
-   meteor* mt;
 
    /* set the pointer */
    currentMap = acMap;
@@ -294,18 +158,10 @@ void partController::setActualMap(void* acMap, collision* col)
    part = (particleSystem*)particles->getFirst();
    for(i = 0; i < particles->getTotal(); i++)
    {
-      /* Grass needs map */
-      if(part->type == DNT_PARTICLE_TYPE_GRASS)
-      {
-         gr = (grass*)part;
-         gr->defineMap(acMap);
-      }
-      /* Meteor needs coldetect */
-      else if(part->type == DNT_PARTICLE_TYPE_METEOR)
-      {
-         mt = (meteor*)part;
-         mt->defineCollision(colDetect);
-      }
+      /* FIXME: Define map and collision detection */
+      //gr->defineMap(acMap);
+      //mt->defineCollision(colDetect);
+
       part = (particleSystem*)part->getNext();
    }
 }
@@ -338,7 +194,7 @@ void partController::loadFromFile(string fileName)
    string strBuffer;
    int type; GLfloat X,Y,Z;
    char buffer[150];
-   part1* particula;
+   
    int totalPlanes = 0;
    float x1, y1, z1; 
    float x2, y2, z2;
@@ -364,10 +220,10 @@ void partController::loadFromFile(string fileName)
       {
          sscanf(strBuffer.c_str(), "%d %f %f %f %s", &type,&X,&Y,&Z,&buffer[0]);
 
-         /* Waterfall Extra Info */
-         if(type == DNT_PARTICLE_TYPE_WATERFALL)
+         /* FIXME: Waterfall Extra Info */
+         if(type == DNT_PARTICLE_SYSTEM_TYPE_WATERFALL)
          {
-            particula = (part1*) addParticle(type, X, Y, Z, buffer);
+            //particula = (part1*) addParticle(type, X, Y, Z, buffer);
             getline(file, strBuffer);
             sscanf(strBuffer.c_str(), "%d", &totalPlanes);
 
@@ -377,26 +233,14 @@ void partController::loadFromFile(string fileName)
                getline(file, strBuffer);
                sscanf(strBuffer.c_str(), "%f %f %f %f %f %f %f %f %d",
                      &x1, &y1, &z1, &x2, &y2, &z2, &dX, &dZ, &inclination);
-               particula->addPlane(x1, y1, z1, x2, y2, z2, dX, dZ, inclination);
+               //particula->addPlane(x1, y1, z1, x2, y2, z2, dX, dZ, inclination);
                totalPlanes--;
             }
          }
-
-         /* Grass Extra Info */
-         else if(type == DNT_PARTICLE_TYPE_GRASS)
-         {
-            GLfloat x2, z2, scale;
-            int total;
-
-            getline(file, strBuffer);
-            sscanf(strBuffer.c_str(), "%f %f %f %d",&x2, &z2, &scale, &total);
-            addParticle(type, X, Z, x2, z2, total, scale, buffer);
-         }
-
          /* Other Particles */
          else
          {
-            addParticle(type, X, Y, Z, buffer);
+            addParticle(X, Y, Z, buffer);
          }
       }
    }
@@ -410,8 +254,8 @@ void partController::saveToFile(string fileName)
 {
    FILE* file; 
    GLfloat X,Y,Z;
-   int i, p;
-   interPlane* plane;
+   int i;
+   //interPlane* plane;
 
    if(!(file=fopen(fileName.c_str(),"w")))
    {
@@ -424,17 +268,13 @@ void partController::saveToFile(string fileName)
    cerr << particles->getTotal() << endl;
    for(i = 0; i < particles->getTotal(); i++)
    {
-      /* Don't save blood and lightning */
-      if( (part->type != DNT_PARTICLE_TYPE_BLOOD) && 
-          (part->type != DNT_PARTICLE_TYPE_LIGHTNING) && 
-          (part->type != DNT_PARTICLE_TYPE_GRASS))
-      {
-         /* Save the general info */
-         part->getPosition(X, Y, Z);
-         fprintf(file,"%d %f %f %f %s\n", part->type, X, Y, Z,
+      /* Save the general info */
+      part->getPosition(X, Y, Z);
+      fprintf(file,"%d %f %f %f %s\n", part->type, X, Y, Z,
                part->getFileName().c_str());
 
-         /* Save some specific info */
+      /* TODO Save some specific info */
+#if 0
          switch(part->type)
          {
             case DNT_PARTICLE_TYPE_WATERFALL:
@@ -470,6 +310,7 @@ void partController::saveToFile(string fileName)
          fprintf(file,"%f %f %f %d\n", x2, z2, gr->getScaleFactor(),
                gr->getMaxParticles());
       }
+#endif
 
       part = (particleSystem*)part->getNext();
    }

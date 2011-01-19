@@ -43,6 +43,10 @@ using namespace std;
 #define DNT_PARTICLE_RENDER_DEFAULT  0  /**< Default renderer */
 #define DNT_PARTICLE_RENDER_GLOW     1  /**< Glow renderer (for fire) */
 
+#define DNT_PARTICLE_SYSTEM_FOLLOW_NONE   0
+#define DNT_PARTICLE_SYSTEM_FOLLOW_HEAD   1
+#define DNT_PARTICLE_SYSTEM_FOLLOW_PC     2
+
 /*! The particle system types */
 enum
 {
@@ -88,73 +92,19 @@ class particleSystem: public dntListElement
        ***************************************************************/
       bool save(string fileName);
 
-      /*!
-       ***************************************************************
-       * Do a step on system after sec seconds
-       * \param matriz -> View Frustum Matrix
-       ***************************************************************/
-      void nextStep(GLfloat** matriz);
-      /*!
-       ***************************************************************
-       * Render one particle on screen     
-       *  \param part -> particle to render
-       ***************************************************************/
-      void render(particle* part);
-      /*!
-       ***************************************************************
-       * Do things before render (like glBegin)    
-       ***************************************************************/ 
-      void initRender();
-      /*!
-       ***************************************************************
-       * Do things after render (like glEnd)  
-       ***************************************************************/ 
-      void endRender();
-      /*!
-       ***************************************************************
-       * update particles attributes (with global independent
-       *         forces and influentions). 
-       * \param part -> particle to actualize
-       ***************************************************************/
-      void update(particle* part);
-      /*!
-       ***************************************************************
-       * Vertifies if a particle continue live or not
-       * \param part -> particle to verify  
-       * \return  true if particle continue live, false, otherwise.
-       ***************************************************************/
-      bool continueLive(particle* part);
-      /*!
-       ***************************************************************
-       * Total Particles needed to create on this step
-       ***************************************************************/
-      int needCreate();
-      /*!
-       ***************************************************************
-       * Create a particle (its position, color, etc); 
-       * \param part -> particle struct that will have the new created;
-       ***************************************************************/
-      void createParticle(particle* part);
-      /*!
-       ***************************************************************
-       * Actualize and render all particles  
-       * \param matriz -> viewFrustum Matrix
-       ***************************************************************/
+      /*! Update and render all particles  
+       * \param matriz -> the viewFrustum Matrix */
       void doStep(GLfloat** matriz); 
-      /*!
-       ***************************************************************
-       * Define XZ position
+      
+      /*! Define XZ position of the syste origin
        * \param cX -> X position
-       * \param cZ -> Z position
-       ***************************************************************/
+       * \param cZ -> Z position */
       void definePosition(float cX, float cZ);
       /*!
-       ***************************************************************
-       * Define XZ position
+       * Define XYZ position of the system origin
        * \param cX -> X position
        * \param cY -> Y position
-       * \param cZ -> Z position
-       ***************************************************************/
+       * \param cZ -> Z position */
       void definePosition(float cX, float cY, float cZ);
 
       /*!
@@ -187,13 +137,10 @@ class particleSystem: public dntListElement
        ***************************************************************/
       int numParticles();
 
-      /*!
-       *************************************************************** 
-       * Set if the particleSystem will follow the PC or not
+      /*! Set if the particleSystem will follow the PC or not
        * \param follow -> pointer to the character to follow
-       * \param isPC -> true if follow character is a PC
-       ***************************************************************/
-      void setFollowCharacter(void* follow, bool isPC);
+       * \param t -> floow type constant */
+      void setFollowCharacter(void* follow, int type);
 
       /*!
        *************************************************************** 
@@ -213,13 +160,14 @@ class particleSystem: public dntListElement
       int maxParticles;       /**< Max number of particles */
       int actualParticles;    /**< Number of actual alive particles */
       void* followCharacter;  /**< If the orign of System Follows a character */
-      bool followIsPC;        /**< If the follow character is a PC */
+      int followType;         /**< If the follow character is a PC */
       bool windAffect;        /**< If Wind Affects the System */
       string strFileName;     /**< Name of the File */
       particle* particles;    /**< Internal Particles Vector */
       string textureFileName; /**< Filename of the texture */
       GLuint partTexture;     /**< Current particle texture */
       extensions ext;         /**< The OpenGL Extensions */
+      bool doneCreation;      /**< true when is no more to create particles */
 
       /* Life related */
       int initialLifeTime;       /**< Time the Particle start to live  */
@@ -257,6 +205,34 @@ class particleSystem: public dntListElement
 
       /*! Load the particle texture file */
       void loadTexture();
+
+      /*! Total Particles needed to create on this step */
+      int needCreate();
+      
+      /*! Create a particle (its position, color, etc); 
+       * \param part -> particle struct that will have the new created; */
+      void createParticle(particle* part);
+
+      /*! Verify if a particle continue alive or not
+       * \param part- > particle to verify
+       * \reuturn true if is time to kill the particle. */
+      bool continueLive(particle& part);
+
+      /*! Render one particle on screen     
+       *  \param part -> particle to render */
+      void render(particle* part);
+      /*! Do things before render (like glBegin) */
+      void initRender();
+      /*! Do things after render (like glEnd)  */
+      void endRender();
+      /*! update particles attributes (with global independent
+       *         forces and influentions). 
+       * \param part -> particle to update */
+      void update(particle* part);
+
+      /*! update by the character position (if follow is defined) */
+      void updateByCharacter();
+
 
 };
 

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -19,16 +19,6 @@
 */
 
 #include "partlist.h"
-
-#include "part1.h"
-#include "part2.h"
-#include "part3.h"
-#include "part4.h"
-#include "part5.h"
-#include "part6.h"
-#include "part7.h"
-#include "grass.h"
-#include "meteor.h"
 
 /***************************************************************************
  *                             Constructor                                 *
@@ -58,7 +48,8 @@ void particleList::removeNonPCs()
    {
       aux = part;
       part = (particleSystem*)part->next;
-      if( (aux->followCharacter == NULL) || (!aux->followIsPC) )
+      if( (aux->followCharacter == NULL) || 
+          (aux->followType != DNT_PARTICLE_SYSTEM_FOLLOW_PC) )
       {
          removeSystem(aux);
       }
@@ -78,7 +69,8 @@ void particleList::removePCs()
    {
       aux = part;
       part = (particleSystem*)part->next;
-      if( (aux->followCharacter != NULL) && (aux->followIsPC))
+      if( (aux->followCharacter != NULL) && 
+          (aux->followType == DNT_PARTICLE_SYSTEM_FOLLOW_PC))
       {
          removeSystem(aux);
       }
@@ -108,70 +100,6 @@ void particleList::removeSystem(particleSystem* part)
 void particleList::freeElement(dntListElement* obj)
 {
    particleSystem* part = (particleSystem*)obj;
-
-   /* let's delete by type */
-   switch(part->type)
-   {
-      case DNT_PARTICLE_TYPE_NONE:
-      default:
-      {
-         delete(part);
-      }
-      break;
-      case DNT_PARTICLE_TYPE_WATERFALL:
-      {
-         part1* p1 = (part1*)part;
-         delete(p1);
-      }
-      break;
-      case DNT_PARTICLE_TYPE_FIRE:
-      {
-         part2* p2 = (part2*)part;
-         delete(p2);
-      }
-      break;
-      case DNT_PARTICLE_TYPE_WATER_SURFACE:
-      {
-         part3* p3 = (part3*)part;
-         delete(p3);
-      }
-      break;
-      case DNT_PARTICLE_TYPE_SMOKE:
-      {
-         part4* p4 = (part4*)part;
-         delete(p4);
-      }
-      break;
-      case DNT_PARTICLE_TYPE_BLOOD:
-      {
-         part5* p5 = (part5*)part;
-         delete(p5);
-      }
-      break;
-      case DNT_PARTICLE_TYPE_LIGHTNING:
-      {
-         part6* p6 = (part6*)part;
-         delete(p6);
-      }
-      break;
-      case DNT_PARTICLE_TYPE_SNOW:
-      {
-         part7* p7 = (part7*)part;
-         delete(p7);
-      }
-      break;
-      case DNT_PARTICLE_TYPE_GRASS:
-      {
-         grass* gr = (grass*)part;
-         delete(gr);
-      }
-      break;
-      case DNT_PARTICLE_TYPE_METEOR:
-      {
-         meteor* m = (meteor*)part;
-         delete(m);
-      }
-      break;
-   }
+   delete(part);
 }
 

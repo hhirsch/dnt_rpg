@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -22,16 +22,10 @@
 #define _dnt_partController_h
 
 #include "particle.h"
-#include "part1.h"
-#include "part2.h"
-#include "part3.h"
-#include "part4.h"
-#include "part5.h"
-#include "part6.h"
-#include "part7.h"
-#include "grass.h"
-#include "meteor.h"
 #include "partlist.h"
+
+#include "../engine/collision.h"
+
 #include <string>
 using namespace std;
 
@@ -51,21 +45,13 @@ class partController
       void updateAll(GLfloat** matriz, bool enableGrass);
 
       /*! Add a Particle System to the System
-       * \param type -> the type of the System (PART_BLOOD, PART_FIRE)
        * \param X -> X coordinate
        * \param Y -> Y coordinate
        * \param Z -> Z coordinate
        * \param fileName -> name of the file containing the definition
        * \return particle pointer; */
-      particleSystem* addParticle(int type, GLfloat X, GLfloat Y, GLfloat Z,
+      particleSystem* addParticle(GLfloat X, GLfloat Y, GLfloat Z,
                                   string fileName );
-      particleSystem* addParticle(int type, GLfloat x1, GLfloat z1,
-                                  GLfloat x2, GLfloat z2, int total,
-                                  GLfloat scale, string fileName);
-      meteor* addParticle(int type, GLfloat X, GLfloat Y, GLfloat Z,
-                          GLfloat varX, GLfloat varY, GLfloat varZ,
-                          GLfloat targX, GLfloat targY, GLfloat targZ,
-                          string fileName);
 
       /*! Remove an particle system from the system
        * \param part -> address of the Particle */

@@ -25,6 +25,7 @@
 #include <SDL/SDL_image.h>
 
 #include "../engine/culling.h"
+#include "../engine/character.h"
 #include "../etc/defparser.h"
 
 #include <iostream>
@@ -51,8 +52,9 @@ particleSystem::particleSystem()
    maxParticles = 0;
    actualParticles = 0;
    followCharacter = NULL;
-   followIsPC = false;
+   followType = DNT_PARTICLE_SYSTEM_FOLLOW_NONE;
    windAffect = false;
+   doneCreation = false;
    strFileName = "";
    particles = NULL;
    pointSize = 8;
@@ -458,6 +460,7 @@ void particleSystem::initRender()
       /* Glow (fire) renderer */
       case DNT_PARTICLE_RENDER_GLOW:
       {
+         glDisable(GL_FOG);
          glBlendFunc(GL_DST_ALPHA,GL_SRC_ALPHA);
          glBlendFunc(GL_SRC_ALPHA, GL_ONE);
       }
@@ -500,7 +503,76 @@ void particleSystem::endRender()
    }
 
    glEnable(GL_LIGHTING);
+   glEnable(GL_FOG);
    glDisable( GL_BLEND );
+}
+
+/***************************************************************
+ *                           needCreate                        *
+ ***************************************************************/
+int particleSystem::needCreate()
+{
+   if(maxLifeTime > 0)
+   {
+      return((int)(1+(maxParticles / maxLifeTime)*(rand() / (RAND_MAX+1.0))));
+   }
+   else if((actualParticles < maxParticles) && (!doneCreation))
+   {
+      return(rand() % 30);
+   }
+   
+   doneCreation = true;
+   return(0);
+}
+
+/***************************************************************
+ *                          continueLive                       *
+ ***************************************************************/
+bool particleSystem::continueLive(particle& part)
+{
+   if(maxParticleLifeTime == 0)
+   {
+      return(true);
+   }
+   
+   return(part.age <= maxParticleLifeTime);
+}
+
+/***************************************************************
+ *                       updateByCharacter                     *
+ ***************************************************************/
+void particleSystem::updateByCharacter()
+{
+   character* chr;
+
+   if( (!followCharacter) || (followType == DNT_PARTICLE_SYSTEM_FOLLOW_NONE))
+   {
+      /* No character to follow */
+      return;
+   }
+
+   chr = (character*)followCharacter;
+   switch(followType)
+   {
+      case DNT_PARTICLE_SYSTEM_FOLLOW_HEAD:
+      {
+         if(chr->head.vertexId != -1)
+         {
+            /* head bone defined, so put particle system origin there */
+            definePosition(chr->head.x, chr->head.y, chr->head.z);
+         }
+         else
+         {
+             definePosition(chr->xPosition, chr->zPosition);
+         }
+      }
+      break;
+      case DNT_PARTICLE_SYSTEM_FOLLOW_PC:
+      {
+         definePosition(chr->xPosition, chr->zPosition);
+      }
+      break;
+   }
 }
 
 /***************************************************************
@@ -513,6 +585,9 @@ void particleSystem::doStep(GLfloat** matriz)
    int alive = 0;
    int aliveColor = 0;
 
+   /* Set new origin, if character to follow is defined */
+   updateByCharacter();
+
    resetBoundingBox();
 
    initRender();
@@ -522,7 +597,7 @@ void particleSystem::doStep(GLfloat** matriz)
       /* Recreate new ones on dead bodies (or on things that is about to die) */
       particles[n].age++;
       if( ( (particles[n].status == PARTICLE_STATUS_DEAD) || 
-            (!continueLive(&particles[n])) ) && (pendingCreate > 0)  )
+            (!continueLive(particles[n])) ) && (pendingCreate > 0) )
       {
           if(particles[n].status == PARTICLE_STATUS_DEAD)
           {
@@ -534,7 +609,7 @@ void particleSystem::doStep(GLfloat** matriz)
           /* Decrement the number of pending to create particles */
           pendingCreate--;
       }
-      else if( (!continueLive(&particles[n])) && 
+      else if( (!continueLive(particles[n])) && 
                (particles[n].status != PARTICLE_STATUS_DEAD) )
           /* kill particle and not use "body" */
       {
@@ -714,10 +789,10 @@ int particleSystem::numParticles()
 /***********************************************************
  *                      setFollowPC                        *
  ***********************************************************/
-void particleSystem::setFollowCharacter(void* follow, bool isPC)
+void particleSystem::setFollowCharacter(void* follow, int t)
 {
    followCharacter = follow;
-   followIsPC = isPC;
+   followType = t;
 }
 
 /***********************************************************

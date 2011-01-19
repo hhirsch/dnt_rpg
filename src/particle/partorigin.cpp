@@ -174,10 +174,10 @@ void dntPartOrigin::update(float x, float y, float z)
 /***********************************************************************
  *                             updateOrigin                            *
  ***********************************************************************/
-void dntPartOrigin::update(float x, float y)
+void dntPartOrigin::update(float x, float z)
 {
    p[0] = x;
-   p[1] = y;
+   p[2] = z;
 }
 
 /***********************************************************************
