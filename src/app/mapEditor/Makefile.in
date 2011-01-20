@@ -45,12 +45,8 @@ OBJSCLASSES = $(ENDCLASSES)classes.o $(ENDCLASSES)race.o \
               $(ENDCLASSES)modeffect.o
 OBJSSOUND = $(ENDSOUND)ogg_stream.o  $(ENDSOUND)sound.o $(ENDSOUND)sndfx.o
 OBJSLANG = $(ENDLANG)translate.o
-OBJSPART = $(ENDPART)part1.o $(ENDPART)part2.o $(ENDPART)part3.o \
-           $(ENDPART)part4.o $(ENDPART)part5.o $(ENDPART)part6.o \
-           $(ENDPART)part7.o $(ENDPART)particle.o \
-           $(ENDPART)partcontroller.o $(ENDPART)wave.o $(ENDPART)grass.o \
-           $(ENDPART)meteor.o $(ENDPART)partlist.o $(ENDPART)wind.o \
-           $(ENDPART)lake.o
+OBJSPART = $(ENDPART)partcontroller.o $(ENDPART)lake.o $(ENDPART)partorigin.o \
+           $(ENDPART)partelement.o $(ENDPART)partlist.o $(ENDPART)particle.o 
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o \
             $(ENDFIGHT)fightSystem.o
 OBJSETC = $(ENDETC)animodel.o $(ENDETC)extensions.o $(ENDETC)message3d.o \

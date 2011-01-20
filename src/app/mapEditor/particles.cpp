@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -58,35 +58,9 @@ particles::~particles()
 void particles::deleteParticle()
 {
    if(actualParticle)
-   { 
-      /* Waterfall */
-      if(state == TOOL_PARTICLE_WATERFALL)
-      {
-         part1* tmp = (part1*) actualParticle;
-         delete(tmp);
-         actualParticle = NULL;
-      }
-      /* Fire */
-      else if(state == TOOL_PARTICLE_FIRE)
-      {
-         part2* tmp = (part2*) actualParticle;
-         delete(tmp);
-         actualParticle = NULL;
-      }
-      /* Smoke */
-      else if(state == TOOL_PARTICLE_SMOKE)
-      {
-         part4* tmp = (part4*) actualParticle;
-         delete(tmp);
-         actualParticle = NULL;
-      }
-      /* Snow */
-      else if(state == TOOL_PARTICLE_SNOW)
-      {
-         part7* tmp = (part7*) actualParticle;
-         delete(tmp);
-         actualParticle = NULL;
-      }
+   {
+      delete(actualParticle);
+      actualParticle = NULL;
    }
 }
 
@@ -107,7 +81,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
    /* Set the system controller to the windows */
    if(grWindow)
    {
-      grWindow->setPartSystem(pS);
+      //grWindow->setPartSystem(pS);
    }
    if(wtWindow)
    {
@@ -164,6 +138,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
                z1 = tmp;
             }
 
+#if 0            
             GLfloat povValue = 700.0;
             int total = (int)floor((z2-z1)*(x2-x1) / povValue);
             grass* gr = (grass*) pS->addParticle(DNT_PARTICLE_TYPE_GRASS, 
@@ -171,6 +146,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
                                                  total, 3.0, selectedText); 
             grWindow->setGrass(gr);
             state = TOOL_PARTICLE_GRASS;
+#endif
          }
          x2 = mouseX;
          z2 = mouseZ;
@@ -178,7 +154,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       else
       {
          state = TOOL_PARTICLE_GRASS;
-         particleType = DNT_PARTICLE_TYPE_GRASS;
+         //particleType = DNT_PARTICLE_TYPE_GRASS;
       }
       
    }
@@ -229,48 +205,26 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
    }
 
    /* fire TOOL */
-   else if( (tool == TOOL_PARTICLE_FIRE) && (!actualParticle) )
+   else if( ( (tool == TOOL_PARTICLE_FIRE) ||
+              (tool == TOOL_PARTICLE_SMOKE) ||
+              (tool == TOOL_PARTICLE_SNOW) ) &&
+              (!actualParticle) )
    {
       state = TOOL_PARTICLE_FIRE; 
-      particleType = DNT_PARTICLE_TYPE_FIRE;
-      part2* tmpPart = NULL;
+      particleType = DNT_PARTICLE_SYSTEM_TYPE_DEFAULT;
       string fileToOpen = selectedText;
       if(fileToOpen != "../data/particles/")
       {
          height = 0;
-         tmpPart = new part2(mouseX, height, mouseZ, fileToOpen);
-         if(!tmpPart)
+         actualParticle = new particleSystem();
+         if(!actualParticle->load(fileToOpen))
          {
             cerr << "Error opening: " << fileToOpen << endl;
+            delete(actualParticle);
             actualParticle = NULL;
             return;
          }
-         actualParticle = (particleSystem*) tmpPart;
-      }
-      else
-      {
-         actualParticle = NULL;
-      }
-   }
-
-   /* Smoke */
-   else if( (tool == TOOL_PARTICLE_SMOKE) && (!actualParticle) )
-   {
-      state = TOOL_PARTICLE_SMOKE; 
-      particleType = DNT_PARTICLE_TYPE_SMOKE;
-      part4* tmpPart = NULL;
-      string fileToOpen = selectedText;
-      if(fileToOpen != "../data/particles/")
-      {
-         height = 0;
-         tmpPart = new part4(mouseX, height, mouseZ, fileToOpen);
-         if(!tmpPart)
-         {
-            cerr << "Error opening: " << fileToOpen << endl;
-            actualParticle = NULL;
-            return;
-         }
-         actualParticle = (particleSystem*) tmpPart;
+         actualParticle->definePosition(mouseX, height, mouseZ);
       }
       else
       {
@@ -279,6 +233,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
    }
 
    /* Waterfall */
+#if 0   
    else if( (tool == TOOL_PARTICLE_WATERFALL) && (!actualParticle) )
    {
       particleType = DNT_PARTICLE_TYPE_WATERFALL;
@@ -302,31 +257,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
          actualParticle = NULL;
       }
    }
-   
-   /* Snow */
-   else if( (tool == TOOL_PARTICLE_SNOW) && (!actualParticle) )
-   {
-      state = TOOL_PARTICLE_SNOW; 
-      particleType = DNT_PARTICLE_TYPE_SNOW;
-      part7* tmpPart = NULL;
-      string fileToOpen = selectedText;
-      if(fileToOpen != "../data/particles/")
-      {
-         height = 0;
-         tmpPart = new part7(mouseX, height, mouseZ, fileToOpen);
-         if(!tmpPart)
-         {
-            cerr << "Error opening: " << fileToOpen << endl;
-            actualParticle = NULL;
-            return;
-         }
-         actualParticle = (particleSystem*) tmpPart;
-      }
-      else
-      {
-         actualParticle = NULL;
-      }
-   }
+#endif
    
    /* Default particle Actions (Up, down, etc) */
    if( (actualParticle) )
@@ -346,6 +277,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       {
          if( (tool != TOOL_PARTICLE_GRASS) && (tool != TOOL_PARTICLE_LAKE))
          {
+#if 0         
             particleSystem* p = pS->addParticle(particleType, 
                                                 mouseX, height, mouseZ,
                                                 actualParticle->getFileName());
@@ -353,12 +285,12 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
             /* Set the waterfall window */
             if(tool == TOOL_PARTICLE_WATERFALL)
             {
-               wtWindow->setWater((part1*)p);
+               wtWindow->setWater(p);
             }
             deleteParticle();
+#endif
             gui->setTool(TOOL_NONE);
             actualParticle = NULL;
-
          }
          while(mButton & SDL_BUTTON(1))
          {
@@ -402,35 +334,7 @@ void particles::drawTemporary(GLfloat** matriz)
    }
    else if(actualParticle != NULL)
    {
-      if(state == TOOL_PARTICLE_FIRE)
-      {
-         glPushMatrix();
-            part2* tmp = (part2*) actualParticle;
-            tmp->nextStep(matriz);
-         glPopMatrix();
-      }
-      else if(state == TOOL_PARTICLE_SMOKE)
-      {
-         glPushMatrix();
-            part4* tmp = (part4*) actualParticle;
-            tmp->nextStep(matriz);
-         glPopMatrix();
-      }
-      else if(state == TOOL_PARTICLE_WATERFALL)
-      {
-         glPushMatrix();
-            part1* tmp = (part1*) actualParticle;
-            tmp->nextStep(matriz);
-         glPopMatrix();
-      }
-      else if(state == TOOL_PARTICLE_SNOW)
-      {
-         glPushMatrix();
-            part6* tmp = (part6*) actualParticle;
-            tmp->nextStep(matriz);
-         glPopMatrix();
-      }
-
+      actualParticle->doStep(NULL);
    }
 }
 

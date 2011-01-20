@@ -26,11 +26,13 @@
  **********************************************************/
 grassWindow::grassWindow(guiInterface* actualGui)
 {
+#if 0
    actualWindow = NULL;
    actualGrass = NULL;
    pSystem = NULL;
    gui = actualGui;
    lastTime = 0;
+#endif
 }
 
 /**********************************************************
@@ -40,6 +42,7 @@ grassWindow::~grassWindow()
 {
 }
 
+#if 0
 /**********************************************************
  *                        setGrass                        *
  **********************************************************/
@@ -269,3 +272,4 @@ bool grassWindow::eventGot(int type, guiObject* object)
    return(treated);
 }
 
+#endif

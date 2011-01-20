@@ -70,7 +70,7 @@ class particles
               x2,                      /**< X2 coordinate for grass */
               z2;                      /**< Z2 coordinate for grass */
 
-      interPlane* actualPlane;         /**< actual Plane */
+      //interPlane* actualPlane;         /**< actual Plane */
 };
 
 #endif

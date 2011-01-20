@@ -788,7 +788,7 @@ void editor::draw()
             grassWindow* gr = gui->getGrassWindow();
             if(gr)
             {
-               gr->drawTemporary();
+               //gr->drawTemporary();
             }
             waterWindow* wt = gui->getWaterWindow();
             if(wt)

@@ -21,7 +21,7 @@
 #ifndef _dnt_map_editor_grass_window_h
 #define _dnt_map_editor_grass_window_h
 
-#include "../../particle/grass.h"
+//#include "../../particle/grass.h"
 #include "../../gui/farso.h"
 #include "../../particle/partcontroller.h"
 
@@ -34,7 +34,7 @@ class grassWindow
       grassWindow(guiInterface* actualGui);
       /*! Destructor */
       ~grassWindow();
-
+#if 0      
       /*! Set the current grass (and open the window, if it is closed)
        * \param gr -> grass to show params. */
       void setGrass(grass* gr);
@@ -75,6 +75,7 @@ class grassWindow
       oneTabButton* buttonNext;     /**< Next Button */
       oneTabButton* buttonPrevious; /**< Previous Button */
       oneTabButton* buttonDestroy;  /**< Destroy Button */
+#endif
 };
 
 #endif

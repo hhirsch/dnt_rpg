@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -31,7 +31,7 @@ waterWindow::waterWindow(guiInterface* actualGui)
 {
    gui = actualGui;
    activeWater = NULL;
-   activePlane = NULL;
+   //activePlane = NULL;
    intWindow = NULL;
 }
 
@@ -45,7 +45,7 @@ waterWindow::~waterWindow()
 /***********************************************************************
  *                              setWater                               *
  ***********************************************************************/
-void waterWindow::setWater(part1* water)
+void waterWindow::setWater(particleSystem* water)
 {
    activeWater = water;
    if(!intWindow)
@@ -54,6 +54,7 @@ void waterWindow::setWater(part1* water)
    }
 }
 
+#if 0
 /***********************************************************************
  *                              setPlane                               *
  ***********************************************************************/
@@ -65,6 +66,7 @@ void waterWindow::setPlane(interPlane* pl)
       openWindow();
    }
 }
+#endif
 
 /***********************************************************************
  *                              setPlane                               *
@@ -182,6 +184,7 @@ void waterWindow::openWindow()
  ***********************************************************************/
 bool waterWindow::eventGot(int type, guiObject* object)
 {
+#if 0
    GLfloat wX = 0, wY = 0, wZ = 0;
 
    if(!intWindow)
@@ -505,7 +508,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          return(true);
       }
    }
-
+#endif
    return(false);
 }
 
@@ -514,6 +517,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
  ***********************************************************************/
 void waterWindow::defineValues()
 {
+#if 0
    char tmp[8];
    if(activePlane)
    {
@@ -523,6 +527,7 @@ void waterWindow::defineValues()
       dzWaterflowText->setText(tmp);
       intWindow->draw(0,0);
    }
+#endif
 }
 
 /***********************************************************************
@@ -530,6 +535,7 @@ void waterWindow::defineValues()
  ***********************************************************************/
 void waterWindow::drawTemporary()
 {
+#if 0
    if(activePlane != NULL)
    {
       glDisable(GL_LIGHTING);
@@ -560,6 +566,6 @@ void waterWindow::drawTemporary()
       glEnd();
       glEnable(GL_LIGHTING);
    }
-
+#endif
 }
 
