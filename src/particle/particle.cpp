@@ -609,11 +609,11 @@ void particleSystem::update(particle* part)
       velocity[2].updateValue(part->velZ);
 
       /* Apply gravity */
-      part->velY += -gravity;
+      part->velY += -0.02*gravity;
 
-      part->posX += part->velX;
-      part->posY += part->velY;
-      part->posZ += part->velZ;
+      part->posX += 0.02*part->velX;
+      part->posY += 0.02*part->velY;
+      part->posZ += 0.02*part->velZ;
       
       /* TODO: stop at map height limit.... */
    }
