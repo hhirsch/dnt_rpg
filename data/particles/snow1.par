@@ -1,22 +1,19 @@
-MAXLIVE 500
-MAXPARTICLES 250
-CENTERX 50
-CENTERY 80
-CENTERZ 120
-GRAVITY -5
-INITR 1
-INITG 1
-INITB 1
-FINALR 1
-FINALG 1
-FINALB 1
-ALPHA 2
-DMULTCENTER 30.2 0 30.2
-DSUMCENTER -1.1 0 -1.1
-DMULTPOS 5 1 1
-DSUMPOS 0 0 0
-DMULTCOLOR 1 1 1
-DSUMCOLOR 0 0 0
-DMULTVEL -20 0 -20
-DSUMVEL 10 0 10
-INITIALVEL 0.0 0.0 0.0
+type = default
+drawMode = group
+renderMode = default
+pointSize = 8
+windAffect = true
+maxParticles = 250
+texture = particles/snow.png
+maxLifeTime = 0
+maxParticleLifeTime = 500
+gravity = 0.005
+origin = 1 0 80 0 30 0 30 0
+needCreate = random 0.0 3 0.0 0 0.0 0.0
+colorRed = constant 1.0 1.0 0 0 0.0 0.0
+colorGreen = constant 1.0 1.0 0 0 0.0 0.0
+colorBlue = constant 1.0 1.0 0 0 0.0 0.0
+colorAlpha = constant 1.0 1.0 0.0 0 1.0 1.0
+velocityX = random 0.0 0.002 0.01 0 0.0 0.0
+velocityY = randomInitial 0.0 -0.001 0.0 0 0.0 0.0
+velocityZ = random 0.0 0.002 -0.001 0 0.0 0.0
