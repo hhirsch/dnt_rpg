@@ -1,22 +1,20 @@
-MAXLIVE 100
-MAXPARTICLES 300
-CENTERX 0.0
-CENTERY 0.0
-CENTERZ 0.0
-GRAVITY -40.0
-INITR 1.0
-INITG 0.0
-INITB 0.0
-FINALR 0.6
-FINALG 0.2
-FINALB 0.2
-ALPHA 0.0
-DMULTCENTER 2 2 2
-DSUMCENTER -1 -1 -1
-DMULTPOS 10.0 10.0 10.0
-DSUMPOS -5.0 -5.0 -5.0
-DMULTCOLOR 1.0 1.0 1.0
-DSUMCOLOR 0.0 0.0 0.0
-DMULTVEL 2.0 2.0 2.0
-DSUMVEL -1.0 -1.0 -1.0
-INITIALVEL 0.0 0.0 0.0
+type = default
+drawMode = group
+renderMode = default
+pointSize = 8
+windAffect = true
+maxParticles = 300
+texture = particles/part2.png
+maxLifeTime = 36000
+maxParticleLifeTime = 0
+gravity = 40
+origin = 1 2 0.0 2 -1 0 -1 0
+needCreate = random 0.0 30 0.0 0 0.0 0.0
+colorRed = constant 0.7 0.0 0 0 0.0 0.0
+colorGreen = constant 0.2 1.0 0 0 0.0 0.0
+colorBlue = constant 0.2 1.0 0 0 0.0 0.0
+colorAlpha = constant 1.0 1.0 0.0 0 1.0 1.0
+velocityX = randomInitial 0.0 2 -1 0 0.0 0.0
+velocityY = randomInitial 0.0 2 -1 0 0.0 0.0
+velocityZ = randomInitial 0.0 2 -1 0 0.0 0.0
+
