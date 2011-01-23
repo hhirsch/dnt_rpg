@@ -84,12 +84,9 @@ class particleSystem: public dntListElement
        * \return true if loaded. */
       bool load(string fileName);
       
-      /*!
-       ***************************************************************
-       * Save the system to a file
+      /*! Save the system to a file
        * \param fileName -> name of file to save
-       * \return -> true if can save the particle
-       ***************************************************************/
+       * \return -> true if can save the particle */
       bool save(string fileName);
 
       /*! Update and render all particles  
@@ -100,41 +97,28 @@ class particleSystem: public dntListElement
        * \param cX -> X position
        * \param cZ -> Z position */
       void definePosition(float cX, float cZ);
-      /*!
-       * Define XYZ position of the system origin
+      /*! Define XYZ position of the system origin
        * \param cX -> X position
        * \param cY -> Y position
        * \param cZ -> Z position */
       void definePosition(float cX, float cY, float cZ);
 
-      /*!
-       *************************************************************** 
-       * Get the FileName of the particleSystem
-       * \return -> particleSystem fileName 
-       ***************************************************************/
+      /*! Get the FileName of the particleSystem
+       * \return -> particleSystem fileName  */
       string getFileName();
 
-      /*!
-       *************************************************************** 
-       * Get the current position of the particleSystem
+      /*! Get the current position of the particleSystem
        * \param x -> current X position
        * \param y -> current Y position
-       * \param z -> current Z position  
-       ***************************************************************/      
+       * \param z -> current Z position   */
       void getPosition(GLfloat& x, GLfloat &y, GLfloat& z);
       
-      /*!
-       *************************************************************** 
-       * Get the max number of particles on the system
-       * \return -> max number of particles on the system 
-       ***************************************************************/
+      /*! Get the max number of particles on the system
+       * \return -> max number of particles on the system */
       int getMaxParticles();
 
-      /*!
-       ***************************************************************
-       * Get the number of actual active particles
-       * \return number of actual living particles. 
-       ***************************************************************/
+      /*! Get the number of actual active particles
+       * \return number of actual living particles. */
       int numParticles();
 
       /*! Set if the particleSystem will follow the PC or not
@@ -142,12 +126,13 @@ class particleSystem: public dntListElement
        * \param t -> floow type constant */
       void setFollowCharacter(void* follow, int type);
 
-      /*!
-       *************************************************************** 
-       * Set the duration time to the system be deleted 
+      /*! Define the opened map
+       * \param actualMap -> pointer to the opened map */
+      void defineMap(void* actualMap);
+
+      /*! Set the duration time to the system be deleted 
        * from controller
-       * \param time -> duration time in ms. 0 for infinity duration  
-       ***************************************************************/
+       * \param time -> duration time in ms. 0 for infinity duration */ 
       void setDurationTime(int time);
 
       friend class partController;  /**< The controller is our friend */
@@ -162,12 +147,14 @@ class particleSystem: public dntListElement
       void* followCharacter;  /**< If the orign of System Follows a character */
       int followType;         /**< If the follow character is a PC */
       bool windAffect;        /**< If Wind Affects the System */
+      bool floorCollision;    /**< If collide with map's floor or not */
       string strFileName;     /**< Name of the File */
       particle* particles;    /**< Internal Particles Vector */
       string textureFileName; /**< Filename of the texture */
       GLuint partTexture;     /**< Current particle texture */
       extensions ext;         /**< The OpenGL Extensions */
       bool doneCreation;      /**< true when is no more to create particles */
+      void* curMap;           /**< the current map used */
 
       /* Life related */
       int initialLifeTime;       /**< Time the Particle start to live  */

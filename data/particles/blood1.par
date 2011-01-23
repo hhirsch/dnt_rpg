@@ -3,6 +3,7 @@ drawMode = group
 renderMode = default
 pointSize = 8
 windAffect = true
+floorCollision = true
 maxParticles = 300
 texture = particles/part2.png
 maxLifeTime = 36000

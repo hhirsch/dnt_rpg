@@ -108,8 +108,9 @@ particleSystem* partController::addParticle(GLfloat X, GLfloat Y,
    /* Create and load particle system */
    particleSystem* part =new particleSystem();
    part->load(fileName);
-   /* Set position on map */
+   /* Set position and map */
    part->definePosition(X, Y, Z);
+   part->defineMap(currentMap);
 
    /* Add to the list */
    particles->addSystem(part);
@@ -158,9 +159,9 @@ void partController::setActualMap(void* acMap, collision* col)
    part = (particleSystem*)particles->getFirst();
    for(i = 0; i < particles->getTotal(); i++)
    {
-      /* FIXME: Define map and collision detection */
-      //gr->defineMap(acMap);
-      //mt->defineCollision(colDetect);
+      /* Define map */
+      part->defineMap(acMap);
+      /* FIXME: mt->defineCollision(colDetect); */
 
       part = (particleSystem*)part->getNext();
    }

@@ -26,6 +26,7 @@
 
 #include "../engine/culling.h"
 #include "../engine/character.h"
+#include "../map/map.h"
 #include "../etc/defparser.h"
 
 #include <iostream>
@@ -42,6 +43,7 @@ particleSystem::particleSystem()
    renderMode = DNT_PARTICLE_RENDER_DEFAULT;
    colorArray = NULL;
    vertexArray = NULL;
+   curMap = NULL;
 
    gravity = 10;
    initialLifeTime = 0;
@@ -56,6 +58,7 @@ particleSystem::particleSystem()
    followType = DNT_PARTICLE_SYSTEM_FOLLOW_NONE;
    windAffect = false;
    doneCreation = false;
+   floorCollision = false;
    strFileName = "";
    particles = NULL;
    pointSize = 8;
@@ -156,6 +159,11 @@ bool particleSystem::load(string fileName)
       else if(key == "windAffect")
       {
          windAffect = (value == "true");
+      }
+      /* floor collision */
+      else if(key == "floorCollision")
+      {
+         floorCollision = (value == "true");
       }
       /* texture file name */
       else if(key == "texture")
@@ -312,6 +320,8 @@ bool particleSystem::save( string fileName)
    file << "maxParticles = " << maxParticles << endl;
    /* wind affect */
    file << "windAffect = " << ((windAffect)?"true":"false") << endl;
+   /* floor collision */
+   file << "floorCollision = " << ((floorCollision)?"true":"false") << endl;
    /* texture file name */
    file << "texture = " << textureFileName << endl;
    /* maxLifeTime */
@@ -588,6 +598,15 @@ bool particleSystem::continueLive(particle& part)
  ***************************************************************/
 void particleSystem::update(particle* part)
 {
+   /* Make it old */
+   part->age++;
+
+   if(part->status == PARTICLE_STATUS_STATIC)
+   {
+      /* No need to update static particles. */
+      return;
+   }
+
    /* Update Color */
    color[0].updateValue(part->R);
    color[1].updateValue(part->G);
@@ -614,17 +633,29 @@ void particleSystem::update(particle* part)
       part->posX += 0.02*part->velX;
       part->posY += 0.02*part->velY;
       part->posZ += 0.02*part->velZ;
-      
-      /* TODO: stop at map height limit.... */
    }
 
    /* Update scale */
    scale.updateValue(part->size);
 
-   /* Make it old */
-   part->age++;
 
-   /* TODO: collision detection, when desired */
+   /* Verify floor collision */
+   if( (floorCollision) && (part->status != PARTICLE_STATUS_STATIC)) 
+   {
+      Map* m = (Map*)curMap;
+      float height=0.0f;
+      if(m != NULL)
+      {
+         height = m->getHeight(part->posX, part->posZ);
+         if(part->posY < height)
+         {
+            part->posY = height;
+            part->status = PARTICLE_STATUS_STATIC;
+         }
+      }
+   }
+   
+   /* TODO: collision detection with all objects, when desired */
 }
 
 /***************************************************************
@@ -841,6 +872,14 @@ void particleSystem::definePosition(float cX, float cZ)
 void particleSystem::definePosition(float cX, float cY, float cZ)
 {
    origin.update(cX, cY, cZ);
+}
+
+/***********************************************************
+ *                      defineMap                          *
+ ***********************************************************/
+void particleSystem::defineMap(void* actualMap)
+{
+   curMap = actualMap;
 }
 
 /***********************************************************
