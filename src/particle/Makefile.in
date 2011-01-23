@@ -5,6 +5,7 @@ LIBS= @LIBS@
 EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 ENDENGINE=../engine/
 ENDETC=../etc/
+ENDMAP=../map/
 
 OBJS = lake.o particle.o partcontroller.o partelement.o partlist.o partorigin.o
 
@@ -20,51 +21,12 @@ lake.o: lake.cpp lake.h
 	@$(CC) $(CFLAGS) lake.cpp -o lake.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-meteor.o: meteor.cpp meteor.h part2.h $(ENDENGINE)collision.h
-	@printf "Making meteor.o... "
-	@$(CC) $(CFLAGS) meteor.cpp -o meteor.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
 particle.o: particle.cpp particle.h partelement.h partorigin.h \
             $(ENDETC)defparser.h $(ENDETC)extensions.h \
-            $(ENDETC)dirs.h $(ENDENGINE)culling.h
+            $(ENDETC)dirs.h $(ENDENGINE)culling.h $(ENDETC)list.h \
+				$(ENDMAP)map.h $(ENDENGINE)character.h
 	@printf "Making particle.o... "
 	@$(CC) $(CFLAGS) particle.cpp -o particle.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-part1.o: part1.cpp part1.h particle.h
-	@printf "Making part1.o (Waterfall)... "
-	@$(CC) $(CFLAGS) part1.cpp -o part1.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-part2.o: part2.cpp part2.h particle.h
-	@printf "Making part2.o (Fire)... "
-	@$(CC) $(CFLAGS) part2.cpp -o part2.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-part3.o: part3.cpp part3.h particle.h
-	@printf "Making part3.o (Water Surface)... "
-	@$(CC) $(CFLAGS) part3.cpp -o part3.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-part4.o: part4.cpp part4.h particle.h
-	@printf "Making part4.o (Smoke)... "
-	@$(CC) $(CFLAGS) part4.cpp -o part4.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-part5.o: part5.cpp part5.h particle.h
-	@printf "Making part5.o (Blood)... "
-	@$(CC) $(CFLAGS) part5.cpp -o part5.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-part6.o: part6.cpp part6.h particle.h
-	@printf "Making part6.o (Lightning)... "
-	@$(CC) $(CFLAGS) part6.cpp -o part6.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-part7.o: part7.cpp part7.h particle.h
-	@printf "Making part7.o (Snow)... "
-	@$(CC) $(CFLAGS) part7.cpp -o part7.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 wave.o: wave.cpp wave.h
@@ -82,7 +44,7 @@ partelement.o: partelement.cpp partelement.h
 	@$(CC) $(CFLAGS) partelement.cpp -o partelement.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-partlist.o: partlist.cpp partlist.h particle.h
+partlist.o: partlist.cpp partlist.h particle.h $(ENDETC)list.h
 	@printf "Making partlist.o..."
 	@$(CC) $(CFLAGS) partlist.cpp -o partlist.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -92,7 +54,9 @@ partorigin.o: partorigin.cpp partorigin.h
 	@$(CC) $(CFLAGS) partorigin.cpp -o partorigin.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-partcontroller.o: partcontroller.cpp partcontroller.h particle.h part1.h part2.h part3.h part4.h part5.h part6.h part7.h grass.h meteor.h partlist.h
+partcontroller.o: partcontroller.cpp partcontroller.h particle.h \
+                  partlist.h $(ENDENGINE)collision.h $(ENDENGINE)character.h \
+						$(ENDETC)dirs.h $(ENDETC)extensions.h
 	@printf "Making partcontroller.o..."
 	@$(CC) $(CFLAGS) partcontroller.cpp -o partcontroller.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
