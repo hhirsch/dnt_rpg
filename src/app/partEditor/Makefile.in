@@ -45,11 +45,9 @@ OBJSCLASSES = $(ENDCLASSES)classes.o $(ENDCLASSES)race.o \
               $(ENDCLASSES)modeffect.o
 OBJSSOUND = $(ENDSOUND)ogg_stream.o $(ENDSOUND)sound.o $(ENDSOUND)sndfx.o
 OBJSLANG = $(ENDLANG)translate.o
-OBJSPART = $(ENDPART)part1.o $(ENDPART)part2.o $(ENDPART)part3.o \
-           $(ENDPART)part4.o $(ENDPART)part5.o $(ENDPART)part6.o \
-           $(ENDPART)part7.o $(ENDPART)particle.o $(ENDPART)partcontroller.o \
-           $(ENDPART)wave.o $(ENDPART)grass.o $(ENDPART)meteor.o \
-           $(ENDPART)partlist.o $(ENDPART)wind.o $(ENDPART)lake.o
+OBJSPART = $(ENDPART)particle.o $(ENDPART)partcontroller.o \
+           $(ENDPART)partorigin.o \
+           $(ENDPART)partlist.o $(ENDPART)lake.o $(ENDPART)partelement.o 
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o \
             $(ENDFIGHT)fightSystem.o
 OBJSETC = $(ENDETC)animodel.o $(ENDETC)extensions.o $(ENDETC)message3d.o \
@@ -90,7 +88,7 @@ editor.o: editor.cpp editor.h partaux.h
 	@$(CC) $(CFLAGS) editor.cpp -o editor.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-partaux.o: partaux.cpp partaux.h
+partaux.o: partaux.cpp partaux.h $(ENDPART)particle.h
 	@printf "Making partaux.o... "
 	@$(CC) $(CFLAGS) partaux.cpp -o partaux.o
 	@printf "\e[0;32mDone.\e[0;0m\n"

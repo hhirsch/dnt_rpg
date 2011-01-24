@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -20,389 +20,235 @@
 
 #include "partaux.h"
 
-////////////////////////////////////////////////////////////////////////////
-//                                                                        //
-//                                part                                    //
-//                                                                        //
-////////////////////////////////////////////////////////////////////////////
+#include <string>
+#include <iostream>
+using namespace std;
 
-int partAux::getDrawMode()
+/***********************************************************************
+ *                               Constructor                           *
+ ***********************************************************************/
+partAux::partAux()
 {
-   return(drawMode);
-}
-
-void partAux::setMaxLive(int mLive)
-{
-   maxLive = mLive;
 }
 
-int partAux::getMaxLive()
+/***********************************************************************
+ *                               Destructor                            *
+ ***********************************************************************/
+partAux::~partAux()
 {
-   return(maxLive);
 }
 
-void partAux::setMaxParticles(int mLive)
+/***********************************************************************
+ *                             getIntPtr                               *
+ ***********************************************************************/
+int* partAux::getIntPtr(string i)
 {
-   maxParticles = mLive;
+   if(i == DNT_PART_AUX_TYPE)
+   {
+      return(&type);
+   }
+   else if(i == DNT_PART_AUX_MAX_PARTICLES)
+   {
+      return(&maxParticles);
+   }
+   else if(i == DNT_PART_AUX_MAX_LIFE_TIME)
+   {
+      return(&maxLifeTime);
+   }
+   else if(i == DNT_PART_AUX_MAX_PARTICLE_LIFE_TIME)
+   {
+      return(&maxParticleLifeTime);
+   }
+   else if(i == DNT_PART_AUX_DRAW_MODE)
+   {
+      return(&drawMode);
+   }
+   else if(i == DNT_PART_AUX_RENDER_MODE)
+   {
+      return(&renderMode);
+   }
+   else if(i == DNT_PART_AUX_POINT_SIZE)
+   {
+      return(&pointSize);
+   }
+  
+   cerr << "Not found: " << i << endl;
+   return(NULL);
 }
 
-int partAux::getMaxParticles()
+/***********************************************************************
+ *                              getInt                                 *
+ ***********************************************************************/
+int partAux::getInt(string i)
 {
-   return(maxParticles);
+   int* p = getIntPtr(i);
+   if(p)
+   {
+      return(*p);
+   }
+
+   return(0);
+}
+ 
+/***********************************************************************
+ *                              setInt                                 *
+ ***********************************************************************/     
+void partAux::setInt(string i, int value)
+{
+   int* p = getIntPtr(i);
+   if(p)
+   {
+      *p = value;
+   }
 }
 
-void partAux::setCenterX(float center)
+/***********************************************************************
+ *                            getFloatPtr                              *
+ ***********************************************************************/
+float* partAux::getFloatPtr(string f)
 {
-   centerX = center;
+   /* None! */
+   cerr << "Not found: " << f << endl;
+   return(NULL);
 }
 
-float partAux::getCenterX()
+/***********************************************************************
+ *                             getFloat                                *
+ ***********************************************************************/
+float partAux::getFloat(string f)
 {
-   return(centerX);
+   float* p = getFloatPtr(f);
+   if(p)
+   {
+      return(*p);
+   }
+
+   return(0.0f);
+}
+ 
+/***********************************************************************
+ *                             setFloat                                *
+ ***********************************************************************/     
+void partAux::setFloat(string f, float value)
+{
+   float* p = getFloatPtr(f);
+   if(p)
+   {
+      *p = value;
+   }
 }
 
-void partAux::setCenterY(float center)
+/***********************************************************************
+ *                            getBoolPtr                               *
+ ***********************************************************************/
+bool* partAux::getBoolPtr(string b)
 {
-   centerY = center;
+   if(b == DNT_PART_AUX_WIND_AFFECT)
+   {
+      return(&windAffect);
+   }
+   else if(b == DNT_PART_AUX_FLOOR_COLLISION)
+   {
+      return(&floorCollision);
+   }
+
+   /* Unknow */
+   cerr << "Not found: " << b << endl;
+   return(NULL);
 }
 
-float partAux::getCenterY()
+/***********************************************************************
+ *                             getBool                                 *
+ ***********************************************************************/
+bool partAux::getBool(string b)
 {
-   return(centerY);
+   bool* p = getBoolPtr(b);
+   if(p)
+   {
+      return(*p);
+   }
+
+   return(false);
+}
+ 
+/***********************************************************************
+ *                              setBool                                *
+ ***********************************************************************/     
+void partAux::setBool(string b, bool value)
+{
+   bool* p = getBoolPtr(b);
+   if(p)
+   {
+      *p = value;
+   }
 }
 
-void partAux::setCenterZ(float center)
+
+/***********************************************************************
+ *                             getElement                              *
+ ***********************************************************************/
+dntPartElement* partAux::getElement(string e)
 {
-   centerZ = center;
+   if(e == DNT_PART_AUX_PARTICLES_TO_CREATE)
+   {
+      return(&particlesToCreate);
+   }
+   else if(e == DNT_PART_AUX_RED)
+   {
+      return(&color[0]);
+   }
+   else if(e == DNT_PART_AUX_BLUE)
+   {
+      return(&color[2]);
+   }
+   else if(e == DNT_PART_AUX_GREEN)
+   {
+      return(&color[1]);
+   }
+   else if(e == DNT_PART_AUX_ALPHA)
+   {
+      return(&color[3]);
+   }
+   else if(e == DNT_PART_AUX_VELX)
+   {
+      return(&velocity[0]);
+   }
+   else if(e == DNT_PART_AUX_VELY)
+   {
+      return(&velocity[1]);
+   }
+   else if(e == DNT_PART_AUX_VELZ)
+   {
+      return(&velocity[2]);
+   }
+   else if(e == DNT_PART_AUX_POSX)
+   {
+      return(&position[0]);
+   }
+   else if(e == DNT_PART_AUX_POSY)
+   {
+      return(&position[1]);
+   }
+   else if(e == DNT_PART_AUX_POSZ)
+   {
+      return(&position[2]);
+   }
+   else if(e == DNT_PART_AUX_SCALE)
+   {
+      return(&scale);
+   }
+
+
+
+   cerr << "Not found: " << e << endl;
+   return(NULL);
 }
 
-float partAux::getCenterZ()
-{
-   return(centerZ);
-}
-
-
-void partAux::setGravity(float grv)
-{
-   gravity = grv;
-}
-
-float partAux::getGravity()
-{
-   return(gravity);
-}
-
-
-void partAux::setInitR(float cor)
-{
-   initR = cor;
-}
-
-float partAux::getInitR()
-{
-  return(initR);
-}
-
-void partAux::setInitG(float cor)
-{
-   initG = cor;
-}
-
-float partAux::getInitG()
-{
-  return(initG);
-}
-
-void partAux::setInitB(float cor)
-{
-   initB = cor;
-}
-
-float partAux::getInitB()
-{
-  return(initB);
-}
-
-void partAux::setFinalR(float cor)
-{
-   finalR = cor;
-}
-
-float partAux::getFinalR()
-{
-  return(finalR);
-}
-
-void partAux::setFinalG(float cor)
-{
-   finalG = cor;
-}
-
-float partAux::getFinalG()
-{
-  return(finalG);
-}
-
-void partAux::setFinalB(float cor)
-{
-   finalB = cor;
-}
-
-float partAux::getFinalB()
-{
-  return(finalB);
-}
-
-void partAux::setAlpha(float a)
-{
-  alpha = a;
-}
-
-float partAux::getAlpha()
-{
-  return(alpha);
-}
-
-void partAux::setDMultCenterX(float d)
-{
-   dMultCenter[0] = d;
-}
-float partAux::getDMultCenterX()
-{
-   return(dMultCenter[0]);
-}
-
-void partAux::setDMultCenterY(float d)
-{
-   dMultCenter[1] = d;
-}
-float partAux::getDMultCenterY()
-{
-   return(dMultCenter[1]);
-}
-
-void partAux::setDMultCenterZ(float d)
-{
-   dMultCenter[2] = d;
-}
-float partAux::getDMultCenterZ()
-{
-   return(dMultCenter[2]);
-}
-
-void partAux::setDSumCenterX(float d)
-{
-   dSumCenter[0] = d;
-}
-float partAux::getDSumCenterX()
-{
-   return(dSumCenter[0]);
-}
-
-void partAux::setDSumCenterY(float d)
-{
-   dSumCenter[1] = d;
-}
-float partAux::getDSumCenterY()
-{
-   return(dSumCenter[1]);
-}
-
-void partAux::setDSumCenterZ(float d)
-{
-   dSumCenter[2] = d;
-}
-float partAux::getDSumCenterZ()
-{
-   return(dSumCenter[2]);
-}
-
-void partAux::setDMultPosX(float d)
-{
-   dMultPos[0] = d;
-}
-float partAux::getDMultPosX()
-{
-   return(dMultPos[0]);
-}
-
-void partAux::setDMultPosY(float d)
-{
-   dMultPos[1] = d;
-}
-float partAux::getDMultPosY()
-{
-   return(dMultPos[1]);
-}
-
-void partAux::setDMultPosZ(float d)
-{
-   dMultPos[2] = d;
-}
-float partAux::getDMultPosZ()
-{
-   return(dMultPos[2]);
-}
-
-void partAux::setDSumPosX(float d)
-{
-   dSumPos[0] = d;
-}
-float partAux::getDSumPosX()
-{
-   return(dSumPos[0]);
-}
-
-void partAux::setDSumPosY(float d)
-{
-   dSumPos[1] = d;
-}
-float partAux::getDSumPosY()
-{
-   return(dSumPos[1]);
-}
-
-void partAux::setDSumPosZ(float d)
-{
-   dSumPos[2] = d;
-}
-float partAux::getDSumPosZ()
-{
-   return(dSumPos[2]);
-}
-
-void partAux::setDMultVelX(float d)
-{
-   dMultVel[0] = d;
-}
-float partAux::getDMultVelX()
-{
-   return(dMultVel[0]);
-}
-
-void partAux::setDMultVelY(float d)
-{
-   dMultVel[1] = d;
-}
-float partAux::getDMultVelY()
-{
-   return(dMultVel[1]);
-}
-
-void partAux::setDMultVelZ(float d)
-{
-   dMultVel[2] = d;
-}
-float partAux::getDMultVelZ()
-{
-   return(dMultVel[2]);
-}
-
-void partAux::setDSumVelX(float d)
-{
-   dSumVel[0] = d;
-}
-float partAux::getDSumVelX()
-{
-   return(dSumVel[0]);
-}
-
-void partAux::setDSumVelY(float d)
-{
-   dSumVel[1] = d;
-}
-float partAux::getDSumVelY()
-{
-   return(dSumVel[1]);
-}
-
-void partAux::setDSumVelZ(float d)
-{
-   dSumVel[2] = d;
-}
-float partAux::getDSumVelZ()
-{
-   return(dSumVel[2]);
-}
-
-void partAux::setDMultColorR(float d)
-{
-   dMultColor[0] = d;
-}
-float partAux::getDMultColorR()
-{
-   return(dMultColor[0]);
-}
-
-void partAux::setDMultColorG(float d)
-{
-   dMultColor[1] = d;
-}
-float partAux::getDMultColorG()
-{
-   return(dMultColor[1]);
-}
-
-void partAux::setDMultColorB(float d)
-{
-   dMultColor[2] = d;
-}
-float partAux::getDMultColorB()
-{
-   return(dMultColor[2]);
-}
-
-void partAux::setDSumColorR(float d)
-{
-   dSumColor[0] = d;
-}
-float partAux::getDSumColorR()
-{
-   return(dSumColor[0]);
-}
-
-void partAux::setDSumColorG(float d)
-{
-   dSumColor[1] = d;
-}
-float partAux::getDSumColorG()
-{
-   return(dSumColor[1]);
-}
-
-void partAux::setDSumColorB(float d)
-{
-   dSumColor[2] = d;
-}
-float partAux::getDSumColorB()
-{
-   return(dSumColor[2]);
-}
-
-void partAux::setInitVelX(float d)
-{
-   initVelX = d;
-}
-float partAux::getInitVelX()
-{
-   return(initVelX);
-}
-
-void partAux::setInitVelY(float d)
-{
-   initVelY = d;
-}
-float partAux::getInitVelY()
-{
-   return(initVelY);
-}
-
-void partAux::setInitVelZ(float d)
-{
-   initVelZ = d;
-}
-float partAux::getInitVelZ()
-{
-   return(initVelZ);
+/***********************************************************************
+ *                             getOrigin                               *
+ ***********************************************************************/
+dntPartOrigin* partAux::getOrigin()
+{
+   return(&origin);
 }
 

@@ -24,6 +24,31 @@
 
 #include "../../particle/particle.h"
 
+/* Integers */
+#define DNT_PART_AUX_TYPE                      "type"
+#define DNT_PART_AUX_MAX_PARTICLES             "maxParticles"
+#define DNT_PART_AUX_MAX_LIFE_TIME             "maxLifeTime"
+#define DNT_PART_AUX_MAX_PARTICLE_LIFE_TIME    "particleLifeTime"
+#define DNT_PART_AUX_DRAW_MODE                 "drawMode"
+#define DNT_PART_AUX_RENDER_MODE               "renderMode"
+#define DNT_PART_AUX_POINT_SIZE                "pointSize"
+/* Booleans */
+#define DNT_PART_AUX_WIND_AFFECT               "windAffect"
+#define DNT_PART_AUX_FLOOR_COLLISION           "floorCollision"
+/* Elements */
+#define DNT_PART_AUX_PARTICLES_TO_CREATE       "particlesToCreate"
+#define DNT_PART_AUX_RED                       "red"
+#define DNT_PART_AUX_BLUE                      "blue"
+#define DNT_PART_AUX_GREEN                     "green"
+#define DNT_PART_AUX_ALPHA                     "alpha"
+#define DNT_PART_AUX_VELX                      "velocityX"
+#define DNT_PART_AUX_VELY                      "velocityY"
+#define DNT_PART_AUX_VELZ                      "velocityZ"
+#define DNT_PART_AUX_POSX                      "posX"
+#define DNT_PART_AUX_POSY                      "posY"
+#define DNT_PART_AUX_POSZ                      "posZ"
+#define DNT_PART_AUX_SCALE                     "scale"
+
 
 /*! The partAux class represents a particleSystem. It is defined
  * to have access to some particleSystem methods, only usefull for
@@ -33,108 +58,53 @@ class partAux: public particleSystem
 {
    public:
       /*! Constructor */
-      partAux():particleSystem(0,0){};
+      partAux();
       /*! Destructor */
-      ~partAux(){};
+      ~partAux();
 
-      int getDrawMode();
+      /*! Get integer parameter
+       * \param i -> parameter name 
+       * \return paramater value */
+      int getInt(string i);
+      /*! Set integer parameter
+       * \param i -> parameter name
+       * \param value -> parameter value */
+      void setInt(string i, int value);
 
-      void setMaxLive(int mLive);
-      int getMaxLive();
+      /*! Get float parameter
+       * \param f -> parameter name 
+       * \return paramater value */
+      float getFloat(string f);
+      /*! Set float parameter
+       * \param f -> parameter name
+       * \param value -> parameter value */
+      void setFloat(string f, float value);
 
-      void setMaxParticles(int mLive);
-      int getMaxParticles();
+      /*! Get boolean parameter
+       * \param b -> parameter name 
+       * \return paramater value */
+      bool getBool(string b);
+      /*! Set boolean parameter
+       * \param b -> parameter name
+       * \param value -> parameter value */
+      void setBool(string b, bool value);
 
-      void setCenterX(float center);
-      float getCenterX();
-      void setCenterY(float center);
-      float getCenterY();
-      void setCenterZ(float center);
-      float getCenterZ();
-       
-      void setGravity(float grv);
-      float getGravity();
+      /*! Get particle element
+       * \param e -> element name
+       * \return pointer to the particle element got */
+      dntPartElement* getElement(string e);
 
-      void setInitR(float cor);
-      float getInitR();
-      void setInitG(float cor);
-      float getInitG();
-      void setInitB(float cor);
-      float getInitB();
+      /*! Get the particle origin
+       * \return pointer to the particle origin */
+      dntPartOrigin* getOrigin();
 
-      void setFinalR(float cor);
-      float getFinalR();
-      void setFinalG(float cor);
-      float getFinalG();
-      void setFinalB(float cor);
-      float getFinalB();
-
-      void setAlpha(float a);
-      float getAlpha();
-
-      void setDMultCenterX(float d);
-      float getDMultCenterX();
-      void setDMultCenterY(float d);
-      float getDMultCenterY();
-      void setDMultCenterZ(float d);
-      float getDMultCenterZ();
-   
-      void setDSumCenterX(float d);
-      float getDSumCenterX();
-      void setDSumCenterY(float d);
-      float getDSumCenterY();
-      void setDSumCenterZ(float d);
-      float getDSumCenterZ();
-
-      void setDMultPosX(float d);
-      float getDMultPosX();
-      void setDMultPosY(float d);
-      float getDMultPosY();
-      void setDMultPosZ(float d);
-      float getDMultPosZ();
-   
-      void setDSumPosX(float d);
-      float getDSumPosX();
-      void setDSumPosY(float d);
-      float getDSumPosY();
-      void setDSumPosZ(float d);
-      float getDSumPosZ();
-
-      void setDMultColorR(float d);
-      float getDMultColorR();
-      void setDMultColorG(float d);
-      float getDMultColorG();
-      void setDMultColorB(float d);
-      float getDMultColorB();
-   
-      void setDSumColorR(float d);
-      float getDSumColorR();
-      void setDSumColorG(float d);
-      float getDSumColorG();
-      void setDSumColorB(float d);
-      float getDSumColorB();
-
-      void setDMultVelX(float d);
-      float getDMultVelX();
-      void setDMultVelY(float d);
-      float getDMultVelY();
-      void setDMultVelZ(float d);
-      float getDMultVelZ();
-   
-      void setDSumVelX(float d);
-      float getDSumVelX();
-      void setDSumVelY(float d);
-      float getDSumVelY();
-      void setDSumVelZ(float d);
-      float getDSumVelZ();
-
-      void setInitVelX(float d);
-      float getInitVelX();
-      void setInitVelY(float d);
-      float getInitVelY();
-      void setInitVelZ(float d);
-      float getInitVelZ();
-
+   private:
+      /*! Get the pointer to an internal integer */
+      int* getIntPtr(string i);
+      /*! Get the pointer to an internal boolean */
+      bool* getBoolPtr(string b);
+      /*! Get the pointer to an internal float */
+      float* getFloatPtr(string f);
 };
 
 

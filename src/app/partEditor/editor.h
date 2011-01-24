@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -22,13 +22,7 @@
 #define _dnt_part_editor_h
 
 #include "../../gui/farso.h"
-#include "../../particle/part1.h"
-#include "../../particle/part2.h"
-#include "../../particle/part3.h"
-#include "../../particle/part4.h"
-#include "../../particle/part5.h"
-#include "../../particle/part6.h"
-#include "../../particle/part7.h"
+#include "../../particle/particle.h"
 #include "../../engine/culling.h"
 #include "../../etc/dirs.h"
 #include "../../engine/camera.h"
@@ -60,19 +54,13 @@ class editor
       /*! Treat GUI Related Events */
       void treatGuiEvents();
 
-      /*! Treat text bars
-       * \param obj -> text bar object where the event occurs */
-      void treatTextBars(guiObject* obj);
-
       /*! create (or Update) the viewPort
        * \param screen -> screen used */
       void createView(SDL_Surface *screen);
 
       /*! Create a Particle to edit
-       * \param input -> particle filename from input 
-       * \param partType -> particle type
        * \return -> true if can create, false otherwise */
-      bool createParticle(int partType);
+      bool createParticle();
 
       /*! Delete the current particle */
       void deleteParticle();
@@ -82,10 +70,6 @@ class editor
 
       /*! Render things */
       void render();
-
-      /*! Update all text bars when loading a particle */
-      void updateTexts();
-
 
       int type;    /**< Current particle type */
       partAux* p;  /**< The Current Particle */
@@ -117,70 +101,12 @@ class editor
       void openFileWindow(bool load);
 
 
-      /**********************Type*Window*******************************/
-      window* typeWindow;       /**< Particle Type Window */
-      button* waterButton;      /**< Water Type */
-      button* fireButton;       /**< Fire Type */
-      button* smokeButton;      /**< Smoke Type */
-      button* bloodButton;      /**< Blood Type */
-      button* lightningButton;  /**< Lightning Type */
-      button* snowButton;       /**< Snow Type */
-      void openTypeWindow();
-
       string curFileName;      /**< Filename of Current Particle Open */
 
       GLfloat** viewMatrix;      /**< Current Visible Matrix */
       GLdouble proj[16];         /**< Current Projection Matrix */
       GLdouble modl[16];         /**< Current Model View Matrix */
       GLint viewPort[4];         /**< Current View Port Vector */
-
-      
-      /**********************Edit*Window*******************************/
-      /* One billion text bars...  */
-      textBar* maxLiveEdit;
-      textBar* maxPartsEdit;
-      textBar* centerXEdit;
-      textBar* centerYEdit;
-      textBar* centerZEdit;
-      textBar* gravityEdit;
-      textBar* initREdit;
-      textBar* initGEdit;
-      textBar* initBEdit;
-      textBar* finalREdit;
-      textBar* finalGEdit;
-      textBar* finalBEdit;
-      textBar* alphaEdit;
-      textBar* mCntXEdit;
-      textBar* mCntYEdit;
-      textBar* mCntZEdit;
-      textBar* sCntXEdit;
-      textBar* sCntYEdit;
-      textBar* sCntZEdit;
-      textBar* mPosXEdit;
-      textBar* mPosYEdit;
-      textBar* mPosZEdit;
-      textBar* sPosXEdit;
-      textBar* sPosYEdit;
-      textBar* sPosZEdit;
-
-
-      /**********************Edit*2*Window*****************************/
-      /* Two billion text bars... */
-      textBar* dMColorREdit;
-      textBar* dMColorGEdit;
-      textBar* dMColorBEdit;
-      textBar* dSColorREdit;
-      textBar* dSColorGEdit;
-      textBar* dSColorBEdit;
-      textBar* dMVelXEdit;
-      textBar* dMVelYEdit;
-      textBar* dMVelZEdit;
-      textBar* dSVelXEdit;
-      textBar* dSVelYEdit;
-      textBar* dSVelZEdit;
-      textBar* initVelXEdit;
-      textBar* initVelYEdit;
-      textBar* initVelZEdit;
 };
 
 #endif

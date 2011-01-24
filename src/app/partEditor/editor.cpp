@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -123,66 +123,17 @@ void editor::createView(SDL_Surface *screen)
  ************************************************************************/
 void editor::deleteParticle()
 {
-   if(!p)
+   if(p)
    {
-      /* No particle to delete, so */
-      return;
+      delete(p);
    }
-
-   /* Delete the particle, by its type */
-   switch(type)
-   {
-      case 1:
-      {
-         part1* p1 = (part1*)p;
-         delete(p1);
-         break;
-      }
-      case 2:
-      {
-         part2* p2 = (part2*)p;
-         delete(p2);
-         break;
-      }
-      case 3:
-      {
-         part3* p3 = (part3*)p;
-         delete(p3);
-         break;
-      }
-      case 4:
-      {         
-         part4* p4 = (part4*)p;
-         delete(p4);
-         break;
-      }
-      case 5:
-      {          
-         part5* p5 = (part5*)p;
-         delete(p5);
-         break;
-      }
-      case 6:
-      {         
-         part6* p6 = (part6*)p;
-         delete(p6);
-         break;
-      }
-      case 7:
-      {         
-         part7* p7 = (part7*)p;
-         delete(p7);
-         break;
-      }
-   }
-
    p = NULL;
 }
 
 /************************************************************************
  *                          createParticle                              *
  ************************************************************************/
-bool editor::createParticle(int partType)
+bool editor::createParticle()
 {
    if(p)
    {
@@ -190,56 +141,8 @@ bool editor::createParticle(int partType)
       deleteParticle();
    }
 
-   /* Create the particle, by its type */
-   type = partType;
+   p = new partAux();
 
-   switch(type)
-   {
-      case 1:
-      { 
-         p = (partAux*) new part1(50,60,120,curFileName);
-         break;
-      }
-      case 2:
-      {
-         p = (partAux*) new part2(50,0,120,curFileName);
-         break;
-      }
-      case 3:
-      {
-         p = (partAux*) new part3(50,20,120);
-         break;
-      }
-      case 4:
-      {
-         p = (partAux*) new part4(50,0,120,curFileName);
-         break;
-      }
-      case 5:
-      {
-         p = (partAux*) new part5(50,30,120,curFileName);
-         break;
-      }
-      case 6:
-      {
-         p = (partAux*) new part6(50,250,120,curFileName);
-         break;
-      }
-      case 7:
-      {
-         p = (partAux*) new part7(50,80,120,curFileName);
-         break;
-      }
-
-      default:
-      {
-         cerr << "What the hell is type " << type << "?!??" << endl;
-         return(false);
-         break;
-      }
-   }
-
-   updateTexts();
    return(true);
 }
 
@@ -254,75 +157,7 @@ void editor::updateParticle()
       return;
    }
 
-   /* Has so update it, by its type */
-   switch(type)
-   {
-      case 1:
-      {         
-         part1* p1 = (part1*)p;
-         p1->nextStep(viewMatrix);
-         break;
-      }
-      case 2:
-      {
-         part2* p2 = (part2*)p;
-         p2->nextStep(viewMatrix);
-         break;
-      }
-      case  3:
-      {      
-         part3* p3 = (part3*)p;
-         p3->nextStep(viewMatrix);
-         break;
-      }
-      case 4:
-      {
-         part4* p4 = (part4*)p;
-         p4->nextStep(viewMatrix);
-         break;
-      }
-      case 5:
-      {
-         part5* p5 = (part5*)p;
-         p5->nextStep(viewMatrix);
-         break;
-      }
-      case 6:
-      {         
-         part6* p6 = (part6*)p;
-         p6->nextStep(viewMatrix);
-         break;
-      }
-      case 7:
-      {         
-         part7* p7 = (part7*)p;
-         p7->nextStep(viewMatrix);
-         break;
-      }
-   }
-}
-
-/****************************************************************
- *                       Open Type Window                       *
- ****************************************************************/
-void editor::openTypeWindow()
-{
-   typeWindow = gui->insertWindow(200,100,320,285,"Particle Type");
-
-   waterButton = typeWindow->getObjectsList()->insertButton(15,27,105,45,
-                                                            "Waterfall",0);
-   fireButton = typeWindow->getObjectsList()->insertButton(15,47,105,65,
-                                                           "Fire",0);
-   smokeButton = typeWindow->getObjectsList()->insertButton(15,67,105,85,
-                                                            "Smoke",0);
-   bloodButton = typeWindow->getObjectsList()->insertButton(15,87,105,105,
-                                                            "Blood",0);
-   lightningButton = typeWindow->getObjectsList()->insertButton(15,107,105,125,
-                                                                "Lightning",0);
-   snowButton = typeWindow->getObjectsList()->insertButton(15,127,105,145,
-                                                            "Snow",0);
-   typeWindow->setExternPointer(&typeWindow);
-   gui->openWindow(typeWindow);
+   p->doStep(NULL);
 }
 
 /****************************************************************
@@ -356,7 +191,7 @@ void editor::openFileWindow(bool load)
  ************************************************************************/
 void editor::createWindows()
 {
-   window* actWindow, *editWindow, *edit2Window;
+   window* actWindow;
 
    /* Actions Window */
    actWindow = gui->insertWindow(0,0,127,63,"Actions");
@@ -365,392 +200,6 @@ void editor::createWindows()
    buttonExit = actWindow->getObjectsList()->insertButton(83,27,122,45,
                                                           "Exit",0);
    gui->openWindow(actWindow);
-
-   /* Edit Window */
-   editWindow = gui->insertWindow(0,64,127,575,"Edit");
-   editWindow->getObjectsList()->insertTextBox(3,17,60,33,0,"MaxLive");
-   maxLiveEdit = editWindow->getObjectsList()->insertTextBar(60,17,123,33,"",0);
-   editWindow->getObjectsList()->insertTextBox(3,37,60,53,0,"MaxParts");
-   maxPartsEdit = editWindow->getObjectsList()->insertTextBar(60,37,123,53,
-                                                              "",0);
-   editWindow->getObjectsList()->insertTextBox(3,57,60,73,0,"CenterX");
-   centerXEdit = editWindow->getObjectsList()->insertTextBar(60,57,123,73,"",0);
-   editWindow->getObjectsList()->insertTextBox(3,77,60,93,0,"CenterY");
-   centerYEdit = editWindow->getObjectsList()->insertTextBar(60,77,123,93,"",0);
-   editWindow->getObjectsList()->insertTextBox(3,97,60,113,0,"CenterZ");
-   centerZEdit = editWindow->getObjectsList()->insertTextBar(60,97,123,113,
-                                                             "",0);
-   editWindow->getObjectsList()->insertTextBox(3,117,60,133,0,"Gravity");
-   gravityEdit = editWindow->getObjectsList()->insertTextBar(60,117,123,133,
-                                                              "",0);
-   editWindow->getObjectsList()->insertTextBox(3,137,60,153,0,"InitR");
-   initREdit = editWindow->getObjectsList()->insertTextBar(60,137,123,153,"",0);
-   editWindow->getObjectsList()->insertTextBox(3,157,60,173,0,"InitG");
-   initGEdit = editWindow->getObjectsList()->insertTextBar(60,157,123,173,"",0);
-   editWindow->getObjectsList()->insertTextBox(3,177,60,193,0,"InitB");
-   initBEdit = editWindow->getObjectsList()->insertTextBar(60,177,123,193,"",0);
-   editWindow->getObjectsList()->insertTextBox(3,197,60,213,0,"FinalR");
-   finalREdit = editWindow->getObjectsList()->insertTextBar(60,197,123,213,
-                                                            "",0);
-   editWindow->getObjectsList()->insertTextBox(3,217,60,233,0,"FinalG");
-   finalGEdit = editWindow->getObjectsList()->insertTextBar(60,217,123,233,
-                                                            "",0);
-   editWindow->getObjectsList()->insertTextBox(3,237,60,253,0,"FinalB");
-   finalBEdit = editWindow->getObjectsList()->insertTextBar(60,237,123,253,
-                                                            "",0);
-   editWindow->getObjectsList()->insertTextBox(3,257,60,273,0,"Alpha");
-   alphaEdit = editWindow->getObjectsList()->insertTextBar(60,257,123,273,"",0);
-   editWindow->getObjectsList()->insertTextBox(3,277,60,293,0,"MCntX");
-   mCntXEdit = editWindow->getObjectsList()->insertTextBar(60,277,123,293,"",0);
-   editWindow->getObjectsList()->insertTextBox(3,297,60,313,0,"MCntY");
-   mCntYEdit = editWindow->getObjectsList()->insertTextBar(60,297,123,313,"",0);
-   editWindow->getObjectsList()->insertTextBox(3,317,60,333,0,"MCntZ");
-   mCntZEdit = editWindow->getObjectsList()->insertTextBar(60,317,123,333,"",0);
-   editWindow->getObjectsList()->insertTextBox(3,337,60,353,0,"SCntX");
-   sCntXEdit = editWindow->getObjectsList()->insertTextBar(60,337,123,353,"",0);
-   editWindow->getObjectsList()->insertTextBox(3,357,60,373,0,"SCntY");
-   sCntYEdit = editWindow->getObjectsList()->insertTextBar(60,357,123,373,"",0);
-   editWindow->getObjectsList()->insertTextBox(3,377,60,393,0,"SCntZ");
-   sCntZEdit = editWindow->getObjectsList()->insertTextBar(60,377,123,393,"",0);
-   editWindow->getObjectsList()->insertTextBox(3,397,60,413,0,"MPosX");
-   mPosXEdit = editWindow->getObjectsList()->insertTextBar(60,397,123,413,"",0);
-   editWindow->getObjectsList()->insertTextBox(3,417,60,433,0,"MPosY");
-   mPosYEdit = editWindow->getObjectsList()->insertTextBar(60,417,123,433,"",0);
-   editWindow->getObjectsList()->insertTextBox(3,437,60,453,0,"MPosZ");
-   mPosZEdit = editWindow->getObjectsList()->insertTextBar(60,437,123,453,"",0);
-   editWindow->getObjectsList()->insertTextBox(3,457,60,473,0,"SPosX");
-   sPosXEdit = editWindow->getObjectsList()->insertTextBar(60,457,123,473,"",0);
-   editWindow->getObjectsList()->insertTextBox(3,474,60,490,0,"SPosY");
-   sPosYEdit = editWindow->getObjectsList()->insertTextBar(60,474,123,490,"",0);
-   editWindow->getObjectsList()->insertTextBox(3,491,60,505,0,"SPosZ");
-   sPosZEdit = editWindow->getObjectsList()->insertTextBar(60,491,123,505,"",0);
-   gui->openWindow(editWindow);
-
-   /* Second Edit Window */
-   edit2Window = gui->insertWindow(672,64,799,575,"Edit-2");
-   edit2Window->getObjectsList()->insertTextBox(3,17,60,33,0,"DMColorR");
-   dMColorREdit = edit2Window->getObjectsList()->insertTextBar(60,17,123,33,
-                                                               "",0);
-   edit2Window->getObjectsList()->insertTextBox(3,37,60,53,0,"DMColorG");
-   dMColorGEdit = edit2Window->getObjectsList()->insertTextBar(60,37,123,53,
-                                                               "",0);
-   edit2Window->getObjectsList()->insertTextBox(3,57,60,73,0,"DMColorB");
-   dMColorBEdit = edit2Window->getObjectsList()->insertTextBar(60,57,123,73,
-                                                               "",0);
-   edit2Window->getObjectsList()->insertTextBox(3,77,60,93,0,"DSColorR");
-   dSColorREdit = edit2Window->getObjectsList()->insertTextBar(60,77,123,93,
-                                                               "",0);
-   edit2Window->getObjectsList()->insertTextBox(3,97,60,113,0,"DSColorG");
-   dSColorGEdit = edit2Window->getObjectsList()->insertTextBar(60,97,123,113,
-                                                               "",0);
-   edit2Window->getObjectsList()->insertTextBox(3,117,60,133,0,"DSColorB");
-   dSColorBEdit = edit2Window->getObjectsList()->insertTextBar(60,117,123,133,
-                                                               "",0);
-   edit2Window->getObjectsList()->insertTextBox(3,137,60,153,0,"DMVelX");
-   dMVelXEdit = edit2Window->getObjectsList()->insertTextBar(60,137,123,153,
-                                                             "",0);
-   edit2Window->getObjectsList()->insertTextBox(3,157,60,173,0,"DMVelY");
-   dMVelYEdit = edit2Window->getObjectsList()->insertTextBar(60,157,123,173,
-                                                             "",0);
-   edit2Window->getObjectsList()->insertTextBox(3,177,60,193,0,"DMVelZ");
-   dMVelZEdit = edit2Window->getObjectsList()->insertTextBar(60,177,123,193,
-                                                             "",0);
-   edit2Window->getObjectsList()->insertTextBox(3,197,60,213,0,"DSVelX");
-   dSVelXEdit = edit2Window->getObjectsList()->insertTextBar(60,197,123,213,
-                                                             "",0);
-   edit2Window->getObjectsList()->insertTextBox(3,217,60,233,0,"DSVelY");
-   dSVelYEdit = edit2Window->getObjectsList()->insertTextBar(60,217,123,233,
-                                                             "",0);
-   edit2Window->getObjectsList()->insertTextBox(3,237,60,253,0,"DSVelZ");
-   dSVelZEdit = edit2Window->getObjectsList()->insertTextBar(60,237,123,253,
-                                                             "",0);
-   edit2Window->getObjectsList()->insertTextBox(3,257,60,273,0,"initVelX");
-   initVelXEdit = edit2Window->getObjectsList()->insertTextBar(60,257,123,273,
-                                                             "",0);
-   edit2Window->getObjectsList()->insertTextBox(3,277,60,293,0,"initVelY");
-   initVelYEdit = edit2Window->getObjectsList()->insertTextBar(60,277,123,293,
-                                                             "",0);
-   edit2Window->getObjectsList()->insertTextBox(3,297,60,313,0,"initVelZ");
-   initVelZEdit = edit2Window->getObjectsList()->insertTextBar(60,297,123,313,
-                                                             "",0);
-   gui->openWindow(edit2Window);
-}
-
-/************************************************************************
- *                           treatTextBars                              *
- ************************************************************************/
-void editor::treatTextBars(guiObject* obj)
-{
-   if(!p)
-   {
-      /* No need to treat text bars if no 
-       * particle was opened */
-      return;
-   }
-
-   /* Get the value */
-   float value = 0;
-   sscanf(obj->getText().c_str(), "%f", &value);
-
-   if(obj == maxLiveEdit)
-   {
-      p->setMaxLive((int)value);
-   }
-   else if(obj == maxPartsEdit)
-   {
-      if(value == 0)
-      {
-         value = 1;
-      }
-      p->setMaxParticles((int)value);
-      p->finish();
-      p->init((int)value, p->getDrawMode());
-   }
-   else if(obj == centerXEdit)
-   {
-      p->setCenterX(value);
-   }
-   else if(obj == centerYEdit)
-   {
-      p->setCenterY(value);
-   }
-   else if(obj == centerZEdit)
-   {
-      p->setCenterZ(value);
-   }
-   else if(obj == gravityEdit)
-   {
-      p->setGravity(value);
-   }
-   else if(obj == initREdit)
-   {
-      p->setInitR(value);
-   }
-   else if(obj == initGEdit)
-   {
-      p->setInitG(value);
-   }
-   else if(obj == initBEdit)
-   {
-      p->setInitB(value);
-   }
-   else if(obj == finalREdit)
-   {
-      p->setFinalR(value);
-   }
-   else if(obj == finalGEdit)
-   {
-      p->setFinalG(value);
-   }
-   else if(obj == finalBEdit)
-   {
-      p->setFinalB(value);
-   }
-   else if(obj == alphaEdit)
-   {
-      p->setAlpha(value);
-   }
-   else if(obj == mCntXEdit)
-   {
-      p->setDMultCenterX(value);
-   }
-   else if(obj == mCntYEdit)
-   {
-      p->setDMultCenterY(value);
-   }
-   else if(obj == mCntZEdit)
-   {
-      p->setDMultCenterZ(value);
-   }
-   else if(obj == sCntXEdit)
-   {
-      p->setDSumCenterX(value);
-   }
-   else if(obj == sCntYEdit)
-   {
-      p->setDSumCenterY(value);
-   }
-   else if(obj == sCntZEdit)
-   {
-      p->setDSumCenterZ(value);
-   }
-   else if(obj == mPosXEdit)
-   {
-      p->setDMultPosX(value);
-   }
-   else if(obj == mPosYEdit)
-   {
-      p->setDMultPosY(value);
-   }
-   else if(obj == mPosZEdit)
-   {
-      p->setDMultPosZ(value);
-   }
-   else if(obj == sPosXEdit)
-   {
-      p->setDSumPosX(value);
-   }
-   else if(obj == sPosYEdit)
-   {
-      p->setDSumPosY(value);
-   }
-   else if(obj == sPosZEdit)
-   {
-      p->setDSumPosZ(value);
-   }
-
-   /**********************Edit*2*Window*****************************/
-   else if(obj == dMColorREdit)
-   {
-      p->setDMultColorR(value);
-   }
-   else if(obj == dMColorGEdit)
-   {
-      p->setDMultColorG(value);
-   }
-   else if(obj == dMColorBEdit)
-   {
-      p->setDMultColorB(value);
-   }
-   else if(obj == dSColorREdit)
-   {
-      p->setDSumColorR(value);
-   }
-   else if(obj == dSColorGEdit)
-   {
-      p->setDSumColorG(value);
-   }
-   else if(obj == dSColorBEdit)
-   {
-      p->setDSumColorB(value);
-   }
-   else if(obj == dMVelXEdit)
-   {
-      p->setDMultVelX(value);
-   }
-   else if(obj == dMVelYEdit)
-   {
-      p->setDMultVelY(value);
-   }
-   else if(obj == dMVelZEdit)
-   {
-      p->setDMultVelZ(value);
-   }
-   else if(obj == dSVelXEdit)
-   {
-      p->setDSumVelX(value);
-   }
-   else if(obj == dSVelYEdit)
-   {
-      p->setDSumVelY(value);
-   }
-   else if(obj == dSVelZEdit)
-   {
-      p->setDSumVelZ(value);
-   }
-   else if(obj == initVelXEdit)
-   {
-      p->setInitVelX(value);
-   }
-   else if(obj == initVelYEdit)
-   {
-      p->setInitVelY(value);
-   }
-   else if(obj == initVelZEdit)
-   {
-      p->setInitVelZ(value);
-   }
-}
-
-/************************************************************************
- *                            updateTexts                               *
- ************************************************************************/
-void editor::updateTexts()
-{
-   char aux[10];
-  
-   sprintf(aux,"%d", p->getMaxLive());
-   maxLiveEdit->setText(aux);
-   sprintf(aux,"%d", p->getMaxParticles());
-   maxPartsEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getCenterX());
-   centerXEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getCenterY());
-   centerYEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getCenterZ());
-   centerZEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getGravity());
-   gravityEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getInitR());
-   initREdit->setText(aux);
-   sprintf(aux,"%.3f", p->getInitG());
-   initGEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getInitB());
-   initBEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getFinalR());
-   finalREdit->setText(aux);
-   sprintf(aux,"%.3f", p->getFinalG());
-   finalGEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getFinalB());
-   finalBEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getAlpha());
-   alphaEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getDMultCenterX());
-   mCntXEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getDMultCenterY());
-   mCntYEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getDMultCenterZ());
-   mCntZEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getDSumCenterX());
-   sCntXEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getDSumCenterY());
-   sCntYEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getDSumCenterZ());
-   sCntZEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getDMultPosX());
-   mPosXEdit->setText(aux);  
-   sprintf(aux,"%.3f", p->getDMultPosY());
-   mPosYEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getDMultPosZ());
-   mPosZEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getDSumPosX());
-   sPosXEdit->setText(aux);  
-   sprintf(aux,"%.3f", p->getDSumPosY());
-   sPosYEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getDSumPosZ());
-   sPosZEdit->setText(aux);
-
-   /**********************Edit*2*Window*****************************/ 
-   sprintf(aux,"%.3f", p->getDMultColorR());
-   dMColorREdit->setText(aux);
-   sprintf(aux,"%.3f", p->getDMultColorG());
-   dMColorGEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getDMultColorB());
-   dMColorBEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getDSumColorR());
-   dSColorREdit->setText(aux);
-   sprintf(aux,"%.3f", p->getDSumColorG());
-   dSColorGEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getDSumColorB());
-   dSColorBEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getDMultVelX());
-   dMVelXEdit->setText(aux); 
-   sprintf(aux,"%.3f", p->getDMultVelY());
-   dMVelYEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getDMultVelZ());
-   dMVelZEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getDSumVelX());
-   dSVelXEdit->setText(aux); 
-   sprintf(aux,"%.3f", p->getDSumVelY());
-   dSVelYEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getDSumVelZ());
-   dSVelZEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getInitVelX());
-   initVelXEdit->setText(aux); 
-   sprintf(aux,"%.3f", p->getInitVelY());
-   initVelYEdit->setText(aux);
-   sprintf(aux,"%.3f", p->getInitVelZ());
-   initVelZEdit->setText(aux);
 }
 
 /************************************************************************
@@ -777,7 +226,7 @@ void editor::treatGuiEvents()
          if(p)
          {
             deleteParticle();
-            createParticle(type);
+            createParticle();
          }
       }
    }
@@ -796,44 +245,6 @@ void editor::treatGuiEvents()
       {
          openFileWindow(true);
       }
-      else if(typeWindow != NULL)
-      {
-         if(obj == waterButton)
-         {
-            createParticle(1);
-            gui->closeWindow(typeWindow);
-         }
-         else if(obj == fireButton)
-         {
-            createParticle(2);
-            gui->closeWindow(typeWindow);
-         }
-         else if(obj == smokeButton)
-         {
-            createParticle(4);
-            gui->closeWindow(typeWindow);
-         }
-         else if(obj == bloodButton)
-         {
-            createParticle(5);
-            gui->closeWindow(typeWindow);
-         }
-         else if(obj == lightningButton)
-         {
-            createParticle(6);
-            gui->closeWindow(typeWindow);
-         }
-         else if(obj == snowButton)
-         {
-            createParticle(7);
-            gui->closeWindow(typeWindow);
-         }
-      }
-   }
-   /* Text Bars Change Events */
-   else if(eventInfo == FARSO_EVENT_WROTE_TEXT_BAR)
-   {
-      treatTextBars(obj);
    }
    /* File Selectors Things */
    else if(eventInfo == FARSO_EVENT_FILE_SEL_ACCEPT)
@@ -846,8 +257,8 @@ void editor::treatGuiEvents()
             gui->closeWindow(fileWindow);
             if(fileLoading)
             {
-               /* Get Particle Type */
-               openTypeWindow();
+               createParticle();
+               p->load(curFileName);
             }
             else
             {
@@ -925,6 +336,8 @@ void editor::run()
    Uint32 lastUpdate = 0;
    Uint32 varTime = 0;
    Uint32 time = 0;
+
+   done = false;
 
    while(!done)
    {

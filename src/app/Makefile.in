@@ -73,7 +73,7 @@ OBJSENGINE = $(ENDENGINE)alignwindow.o $(ENDENGINE)aspectwindow.o \
 				 $(ENDENGINE)shadow.o $(ENDENGINE)shortcutswindow.o \
 				 $(ENDENGINE)sky.o $(ENDENGINE)sun.o $(ENDENGINE)util.o
 
-SUBSYSTEMS = mapEditor #partEditor
+SUBSYSTEMS = mapEditor partEditor
 
 OBJS = DlgEditor.o
 BIN = ../../bin/
