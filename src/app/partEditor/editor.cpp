@@ -336,9 +336,13 @@ void editor::run()
    Uint32 lastUpdate = 0;
    Uint32 varTime = 0;
    Uint32 time = 0;
-
    done = false;
 
+   /* Set the initial camera position for partEditor */
+   gameCamera->setTheta(0);
+   gameCamera->setD(80);
+
+   /* Main loop */
    while(!done)
    {
       time = SDL_GetTicks();
