@@ -73,7 +73,7 @@ OBJSENGINE = $(ENDENGINE)alignwindow.o $(ENDENGINE)aspectwindow.o \
 				 $(ENDENGINE)shadow.o $(ENDENGINE)shortcutswindow.o \
 				 $(ENDENGINE)sky.o $(ENDENGINE)sun.o $(ENDENGINE)util.o
 
-OBJS = editor.o main.o partaux.o partelementwindow.o
+OBJS = editor.o main.o partaux.o partelementwindow.o partwindow.o
 
 BIN = ../../../bin/
 
@@ -95,10 +95,18 @@ partaux.o: partaux.cpp partaux.h $(ENDPART)particle.h
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 partelementwindow.o: partelementwindow.h partelementwindow.cpp \
-                     $(ENDPART)partelement.h $(ENDGUI)farso.h
+                     $(ENDPART)partelement.h $(ENDGUI)farso.h \
+							$(ENDPART)particle.h
 	@printf "Making partelementwindow.o... "
 	@$(CC) $(CFLAGS) partelementwindow.cpp -o partelementwindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
+
+partwindow.o: partwindow.h partwindow.cpp partaux.h partelementwindow.h \
+                     $(ENDPART)particle.h $(ENDGUI)farso.h
+	@printf "Making partwindow.o... "
+	@$(CC) $(CFLAGS) partwindow.cpp -o partwindow.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
 
 $(BIN)dntPartEditor: $(OBJSGUI) $(OBJSMAPA) $(OBJSPART) $(OBJS)
 	@printf "Linking partEditor... "
