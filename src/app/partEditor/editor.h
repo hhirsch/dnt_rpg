@@ -95,6 +95,7 @@ class editor
       button* buttonSave; /**< Save Button */
       button* buttonExit; /**< Exit Button */
 
+      window* actWindow;
       partElementWindow* elementWindow;  /**< Window to edit partElements */
 
       /**********************File*Window*******************************/

@@ -78,6 +78,7 @@ editor::editor()
    p = NULL;
    fileWindow = NULL;
    elementWindow = NULL;
+   actWindow = NULL;
    curFileName = "";
 }
 
@@ -196,10 +197,9 @@ void editor::openFileWindow(bool load)
  ************************************************************************/
 void editor::createWindows()
 {
-   window* actWindow;
-
    /* Actions Window */
    actWindow = gui->insertWindow(0,0,127,63,"Actions");
+   actWindow->setExternPointer(&actWindow);
    buttonSave = actWindow->getObjectsList()->insertButton(5,27,43,45,"Save",0);
    buttonLoad = actWindow->getObjectsList()->insertButton(44,27,82,45,"Load",0);
    buttonExit = actWindow->getObjectsList()->insertButton(83,27,122,45,
@@ -358,6 +358,12 @@ void editor::run()
    /* Main loop */
    while(!done)
    {
+      if(actWindow == NULL)
+      {
+         /* exit when actWindow is closed */
+         done = true;
+      }
+
       time = SDL_GetTicks();
       varTime = (time - lastUpdate);
       if(varTime >= UPDATE_RATE)

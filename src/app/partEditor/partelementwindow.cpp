@@ -128,6 +128,7 @@ void partElementWindow::openWindow()
 
    /* Finally open the window */
    gui->openWindow(curWindow);
+   curWindow->setExternPointer(&curWindow);
 
    /* Set it */
    setTexts();
