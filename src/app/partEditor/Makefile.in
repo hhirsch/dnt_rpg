@@ -100,7 +100,7 @@ partelementwindow.o: partelementwindow.h partelementwindow.cpp \
 	@$(CC) $(CFLAGS) partelementwindow.cpp -o partelementwindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-$(BIN)dntPartEditor: $(OBJSGUI) $(OBJSMAPA) $(OBJS)
+$(BIN)dntPartEditor: $(OBJSGUI) $(OBJSMAPA) $(OBJSPART) $(OBJS)
 	@printf "Linking partEditor... "
 	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSIA) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) $(OBJSCBOOK) $(OBJS) -o $(BIN)dntPartEditor
 	@printf "\e[0;32mDone.\e[0;0m\n"

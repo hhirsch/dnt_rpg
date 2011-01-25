@@ -931,3 +931,10 @@ void particleSystem::setDurationTime(int time)
    maxLifeTime = time;
 }
 
+/***********************************************************
+ *                  getMaxParticleLifeTime                 *
+ ***********************************************************/
+int particleSystem::getMaxParticleLifeTime()
+{
+   return(maxParticleLifeTime);
+}

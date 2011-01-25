@@ -93,6 +93,10 @@ editor::~editor()
    {
       deleteParticle();
    }
+   if(elementWindow)
+   {
+      delete(elementWindow);
+   }
    /* Free GUI */
    delete(gui);
    /* And free the camera */
@@ -203,7 +207,6 @@ void editor::createWindows()
    gui->openWindow(actWindow);
 
    elementWindow = new partElementWindow(gui);
-   elementWindow->openWindow();
 }
 
 /************************************************************************
@@ -234,63 +237,69 @@ void editor::treatGuiEvents()
          }
       }
    }
-   else if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
+   else
    {
-      /* Exit was pressed! */
-      if(obj == buttonExit)
+      if(elementWindow->treat(obj, eventInfo))
       {
-         done = true;
       }
-      else if(obj == buttonSave)
+      else if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
       {
-         openFileWindow(false);
-      }
-      else if(obj == buttonLoad)
-      {
-         openFileWindow(true);
-      }
-   }
-   /* File Selectors Things */
-   else if(eventInfo == FARSO_EVENT_FILE_SEL_ACCEPT)
-   {
-      if(fileWindow)
-      {
-         if(obj == (guiObject*)fileSelector) 
+         /* Exit was pressed! */
+         if(obj == buttonExit)
          {
-            curFileName = fileSelector->getFileName();
-            gui->closeWindow(fileWindow);
-            if(fileLoading)
+            done = true;
+         }
+         else if(obj == buttonSave)
+         {
+            openFileWindow(false);
+         }
+         else if(obj == buttonLoad)
+         {
+            openFileWindow(true);
+         }
+      }
+      /* File Selectors Things */
+      else if(eventInfo == FARSO_EVENT_FILE_SEL_ACCEPT)
+      {
+         if(fileWindow)
+         {
+            if(obj == (guiObject*)fileSelector) 
             {
-               createParticle();
-               p->load(curFileName);
-            }
-            else
-            {
-               /* Save the Particle with desired fileName */
-               if(p)
+               curFileName = fileSelector->getFileName();
+               gui->closeWindow(fileWindow);
+               if(fileLoading)
                {
-                  warning warn;
-                  if(p->save(curFileName))
+                  createParticle();
+                  p->load(curFileName);
+               }
+               else
+               {
+                  /* Save the Particle with desired fileName */
+                  if(p)
                   {
-                     warn.show("Message", "File was saved!", gui);
-                  }
-                  else
-                  {
-                     warn.show("Error", "Can't save file!", gui);
+                     warning warn;
+                     if(p->save(curFileName))
+                     {
+                        warn.show("Message", "File was saved!", gui);
+                     }
+                     else
+                     {
+                        warn.show("Error", "Can't save file!", gui);
+                     }
                   }
                }
             }
          }
       }
-   }
-   else if(eventInfo == FARSO_EVENT_FILE_SEL_CANCEL)
-   {
-      if(fileWindow)
+      else if(eventInfo == FARSO_EVENT_FILE_SEL_CANCEL)
       {
-         /* Just close the window */
-         if(obj == (guiObject*)fileSelector) 
+         if(fileWindow)
          {
-            gui->closeWindow(fileWindow);
+            /* Just close the window */
+            if(obj == (guiObject*)fileSelector) 
+            {
+               gui->closeWindow(fileWindow);
+            }
          }
       }
    }

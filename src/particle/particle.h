@@ -135,6 +135,10 @@ class particleSystem: public dntListElement
        * \param time -> duration time in ms. 0 for infinity duration */ 
       void setDurationTime(int time);
 
+      /*! Get max life time of a single particle
+       * \return max life time of a single particle*/
+      int getMaxParticleLifeTime();
+
       friend class partController;  /**< The controller is our friend */
       friend class particleList;    /**< The list is our friend too */
 

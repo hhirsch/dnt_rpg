@@ -26,6 +26,7 @@ using namespace std;
 
 #include "../../gui/farso.h"
 #include "../../particle/partelement.h"
+#include "../../particle/particle.h"
 
 class partElementWindow
 {
@@ -39,8 +40,9 @@ class partElementWindow
       /*! Set the element to display, opening the window 
        * if not already opened.
        * \param e -> new element to display
-       * \param text -> name of the element to display */
-      void setElement(dntPartElement* e, string text);
+       * \param text -> name of the element to display
+       * \param p -> pointer to the particleSystem on edition */
+      void setElement(dntPartElement* e, string text, particleSystem* p);
 
       /*! Treat the window events
        * \param object -> guiObject where event occurred
@@ -51,19 +53,28 @@ class partElementWindow
       /*! Verify if window is open
        * \return true if open */
       bool isOpen();
-      void openWindow();
 
    protected:
       /*! Open the window with current element */
-
+      void openWindow();
 
       /*! Close the window */
       void closeWindow();
+
+      /*! Set things on window related to the current type  */
+      void setTypeThings();
+
+      /*! Set all texts */
+      void setTexts();
+
+      /*! Reset the element, to update it with new values */
+      void resetElement();
 
       guiInterface* gui;        /**< Gui used */
       window* curWindow;        /**< Current in use window */
       dntPartElement* element;  /**< Current in-edition element */
       string elementName;       /**< Current element's name */
+      particleSystem* part;     /**< Current particle system edited */
 
       button* nextType;         /**< To select next type */
       button* previousType;     /**< To select previous type */

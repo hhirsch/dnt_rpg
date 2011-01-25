@@ -283,7 +283,7 @@ string dntPartElement::toString()
          {
             res = "constant ";
          }
-         sprintf(buf, "%.3f %.3f %.5f %i %.3f %.3f", 
+         sprintf(buf, "%f %f %f %i %f %f", 
                        initialValue, finalValue, sum,
                        limitsDefined, lowerLimit, upperLimit);
          res += buf;
@@ -301,7 +301,7 @@ string dntPartElement::toString()
          {
             res = "randomInitial ";
          }
-         sprintf(buf, "%.3f %.3f %.3f %i %.3f %.3f", 
+         sprintf(buf, "%f %f %f %i %f %f", 
                       initialValue, mult, sum, 
                       limitsDefined, lowerLimit, upperLimit);
          res += buf;

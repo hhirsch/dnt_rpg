@@ -93,6 +93,9 @@ class dntPartElement
        * \return -> initial value */
       float getInitialValue();
 
+      /*! As friend to avoid useless functions */
+      friend class partElementWindow;
+
    protected:
       float initialValue;     /**< Initial element value */
       float finalValue;       /**< Final Value (used at linear type) */
