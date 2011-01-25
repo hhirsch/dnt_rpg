@@ -60,11 +60,28 @@ void textBar::putText(unsigned int pos, int marca)
    fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
    fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
 
-   color_Set(Colors.colorCont[2].R, Colors.colorCont[2].G,
-             Colors.colorCont[2].B, Colors.colorCont[2].A);
+   if(available)
+   {
+      color_Set(Colors.colorCont[2].R, Colors.colorCont[2].G,
+                Colors.colorCont[2].B, Colors.colorCont[2].A);
+   }
+   else
+   {
+      color_Set(Colors.colorCont[0].R, Colors.colorCont[0].G,
+                Colors.colorCont[0].B, Colors.colorCont[0].A);
+   }
    rectangle_Fill(wSurface,x1+1, y1+1, x2-1, y2-1);
-   color_Set(Colors.colorCont[1].R, Colors.colorCont[1].G,
-             Colors.colorCont[1].B, Colors.colorCont[1].A);
+
+   if(available)
+   {
+      color_Set(Colors.colorCont[1].R, Colors.colorCont[1].G,
+            Colors.colorCont[1].B, Colors.colorCont[1].A);
+   }
+   else
+   {
+      color_Set(Colors.colorText.R, Colors.colorText.G,
+            Colors.colorText.B, Colors.colorText.A);
+   }
 
    init = 0;
    end = text.length();
@@ -156,6 +173,11 @@ int textBar::doWrite(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclas)
    int ult = SDL_GetTicks();
    int maiuscula = (teclas[SDLK_CAPSLOCK] || teclas[SDLK_LSHIFT] || 
                     teclas[SDLK_RSHIFT]);
+
+   if(!available)
+   {
+      return(1);
+   }
 
    /* End Edition Keys */
    if(teclas[SDLK_ESCAPE] || teclas[SDLK_RETURN] || teclas[SDLK_KP_ENTER])

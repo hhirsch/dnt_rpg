@@ -77,6 +77,7 @@ editor::editor()
    /* Nullify elements */
    p = NULL;
    fileWindow = NULL;
+   elementWindow = NULL;
    curFileName = "";
 }
 
@@ -200,6 +201,9 @@ void editor::createWindows()
    buttonExit = actWindow->getObjectsList()->insertButton(83,27,122,45,
                                                           "Exit",0);
    gui->openWindow(actWindow);
+
+   elementWindow = new partElementWindow(gui);
+   elementWindow->openWindow();
 }
 
 /************************************************************************

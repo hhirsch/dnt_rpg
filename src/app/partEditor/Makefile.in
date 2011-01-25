@@ -72,7 +72,8 @@ OBJSENGINE = $(ENDENGINE)alignwindow.o $(ENDENGINE)aspectwindow.o \
 				 $(ENDENGINE)skillwindow.o $(ENDENGINE)splitwindow.o \
 				 $(ENDENGINE)shadow.o $(ENDENGINE)shortcutswindow.o \
 				 $(ENDENGINE)sky.o $(ENDENGINE)sun.o $(ENDENGINE)util.o
-OBJS = editor.o main.o partaux.o
+
+OBJS = editor.o main.o partaux.o partelementwindow.o
 
 BIN = ../../../bin/
 
@@ -91,6 +92,12 @@ editor.o: editor.cpp editor.h partaux.h
 partaux.o: partaux.cpp partaux.h $(ENDPART)particle.h
 	@printf "Making partaux.o... "
 	@$(CC) $(CFLAGS) partaux.cpp -o partaux.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+partelementwindow.o: partelementwindow.h partelementwindow.cpp \
+                     $(ENDPART)partelement.h $(ENDGUI)farso.h
+	@printf "Making partelementwindow.o... "
+	@$(CC) $(CFLAGS) partelementwindow.cpp -o partelementwindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 $(BIN)dntPartEditor: $(OBJSGUI) $(OBJSMAPA) $(OBJS)

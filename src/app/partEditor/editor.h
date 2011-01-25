@@ -28,6 +28,7 @@
 #include "../../engine/camera.h"
 
 #include "partaux.h"
+#include "partelementwindow.h"
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
@@ -93,6 +94,8 @@ class editor
       button* buttonLoad; /**< Load Button */
       button* buttonSave; /**< Save Button */
       button* buttonExit; /**< Exit Button */
+
+      partElementWindow* elementWindow;  /**< Window to edit partElements */
 
       /**********************File*Window*******************************/
       window* fileWindow;      /**< File Selector Window (for load/save) */
