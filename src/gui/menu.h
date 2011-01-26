@@ -40,8 +40,13 @@ class menu: public guiList
       /*! Constructor
        * \param xa -> x coordinate
        * \param ya -> y coordinate
-       * \param surface -> surface where the menu is */
-      menu(int xa, int ya, SDL_Surface* surface);
+       * \param sWidth -> width usefull of the surface 
+       * \param sHeight -> height usefull of the surface
+       * \param surface -> surface where the menu is
+       * \note: the usefull width and height are due that an window surface
+       *        is greater of the window itself (as OpenGL powerOfTwo 
+       *        textures restriction) */
+      menu(int xa, int ya, int sWidth, int sHeight, SDL_Surface* surface);
 
       /*! Destructor */
       ~menu();
@@ -108,6 +113,8 @@ class menu: public guiList
       int actualItem;          /**< Actual Selected item */
       bool pressed;            /**< Control to take the release button press */
       SDL_Surface* wSurface;   /**< Surface where the menu is */
+      int wWidth;              /**< Usefull Surface Width */
+      int wHeight;             /**< Usefull Surface Height */
 
 };
 

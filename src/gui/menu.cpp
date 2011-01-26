@@ -32,8 +32,8 @@ menu::~menu()
 /*********************************************************
  *                      Constructor                      *
  *********************************************************/
-menu::menu(int xa, int ya, SDL_Surface* surface)
-     :guiList(surface, true, DNT_LIST_TYPE_ADD_AT_END)
+menu::menu(int xa, int ya, int sWidth, int sHeight, SDL_Surface* surface)
+     :guiList(sWidth, sHeight, surface, true, DNT_LIST_TYPE_ADD_AT_END)
 {
    x = xa;
    y = ya;
@@ -42,6 +42,8 @@ menu::menu(int xa, int ya, SDL_Surface* surface)
    numPictures = 0;
    pressed = false;
    wSurface = surface;
+   wWidth = sWidth;
+   wHeight = sHeight;
 }
 
 /*********************************************************
@@ -161,11 +163,13 @@ void menu::draw(int pos)
    {
       x1 = (wSurface->w-1) - (x2 - x1);
       x2 = wSurface->w-1;
+      x = x1;
    }
    if (y2 > wSurface->h-1)
    {
       y1 = (wSurface->h-1) - (y2 - y1);
       y2 = wSurface->h-1;
+      y = y1;
    }
 
    /* Draw the Menu */
@@ -177,7 +181,6 @@ void menu::draw(int pos)
    rectangle_Oval(wSurface,x1,y1,x2,y2,Colors.colorCont[1].R,
                   Colors.colorCont[1].G, Colors.colorCont[1].B,
                   Colors.colorCont[1].A);
-   
       /*itens*/  
    int xa = x1+4;
    int ya = y1+3;

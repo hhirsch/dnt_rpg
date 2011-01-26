@@ -37,7 +37,7 @@ class tabObj: public dntListElement
 {
    public:
       /*! Constructor */
-      tabObj(SDL_Surface* surface);
+      tabObj(int w, int h, SDL_Surface* surface);
       /*! Destructor */
       ~tabObj();
 

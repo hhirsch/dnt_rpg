@@ -34,7 +34,7 @@ guiInterface::guiInterface(string backImage)
 {
    lwindows = new windowList;
    /* No surface, as will only has windows */
-   objects = new guiList(NULL, true);
+   objects = new guiList(0,0, NULL, true);
    if(!backImage.empty())
    {
       background = IMG_Load(backImage.c_str());

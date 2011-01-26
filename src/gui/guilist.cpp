@@ -28,12 +28,15 @@
 /**************************************************************
  *                         Constructor                        *
  **************************************************************/
-guiList::guiList(SDL_Surface* surface, bool hasDecor, int t):dntList(t)
+guiList::guiList(int sWidth, int sHeight, SDL_Surface* surface, 
+                 bool hasDecor, int t):dntList(t)
 {
    total = 0;
    first = NULL;
    intMenu = NULL;
    wSurface = surface;
+   wWidth = sWidth;
+   wHeight = sHeight;
    wHasDecor = hasDecor;
    tab = NULL;
 }
@@ -435,7 +438,7 @@ guiObject* guiList::addMenu()
    {
       removeMenu();
    }
-   intMenu = (guiObject*)new menu(0,0, wSurface);
+   intMenu = (guiObject*)new menu(0,0,wWidth, wHeight, wSurface);
    return(intMenu);
 }
 

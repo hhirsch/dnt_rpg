@@ -34,9 +34,9 @@ using namespace std;
 /***********************************************************************
  *                              Constructor                            *
  ***********************************************************************/
-tabObj::tabObj(SDL_Surface* surface)
+tabObj::tabObj(int w, int h, SDL_Surface* surface)
 {
-   list = new guiList(surface, true);
+   list = new guiList(w, h, surface, true);
    title = "";
 }
 
@@ -182,7 +182,7 @@ guiList* tabBox::insertOption(string title)
    /* Only insert if not found! */
    if(getList(title) == NULL)
    {
-      obj = new tabObj(wSurface);
+      obj = new tabObj(x2-x1, y2-y1, wSurface);
       obj->title = title;
 
       /* Insert it */

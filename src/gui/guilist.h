@@ -44,10 +44,12 @@ class guiList: public dntList
 {
    public:
       /*! Constructor
+       * \param sWidth -> usefull width of the surface
+       * \param sHeight -> usefull height of the surface (see menu)
        * \param surface -> pointer to the surface where list is
        * \param hasDecor -> if window has decor or not
        * \param t -> dntList type */
-      guiList(SDL_Surface* surface, bool hasDecor,
+      guiList(int sWidth, int sHeight, SDL_Surface* surface, bool hasDecor,
             int t=DNT_LIST_TYPE_ADD_AT_BEGIN);
       /*! Destructor */
       ~guiList();
@@ -203,6 +205,8 @@ class guiList: public dntList
 
 
       SDL_Surface* wSurface;  /**< window surface used */
+      int wWidth,             /**< Window width */
+          wHeight;            /**< Window Height */
       bool wHasDecor;         /**< true if window has decor */
       
       guiObject* intMenu; /**< The internal Menu of the List */

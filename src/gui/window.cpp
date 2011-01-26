@@ -153,7 +153,7 @@ window::window(int xa, int ya, int xb, int yb, string title, void* list,
    propY = (float)(yb-ya) / (float)smallestPowerOfTwo(yb-ya);
 
    /* Create Objects List */
-   objects = new guiList(surface, hasSelfDraw);
+   objects = new guiList(x2-x1, y2-y1, surface, hasSelfDraw);
 
 
    /* Create title bar things */
@@ -161,7 +161,7 @@ window::window(int xa, int ya, int xb, int yb, string title, void* list,
    {
       /* Create Menu Button */
       menuButton = objects->insertButton(3,3,13,12,"-",0);
-      menuButton->men = new menu(0,0,surface);
+      menuButton->men = new menu(0,0,x2-x1, y2-y1, surface);
       menu* men = (menu*) menuButton->men;
       men->insertItem(gettext("Maximize"), 
             dir.getRealFile("icons/maximize.png") ,0);
