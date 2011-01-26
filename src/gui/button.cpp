@@ -22,6 +22,7 @@
 #include "draw.h"
 #include "window.h"
 #include "dntfont.h"
+#include "menu.h"
 
 /***********************************************************
  *                       Constructor                       *
@@ -47,6 +48,11 @@ button::button(int xa,int ya,int xb,int yb, string txt, bool isOval,
  ***********************************************************/
 button::~button()
 {
+   if(men)
+   {
+      menu* m = (menu*)men;
+      delete(m);
+   }
 }
 
 /***********************************************************
