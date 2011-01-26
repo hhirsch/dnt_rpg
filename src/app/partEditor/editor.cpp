@@ -77,7 +77,7 @@ editor::editor()
    /* Nullify elements */
    p = NULL;
    fileWindow = NULL;
-   elementWindow = NULL;
+   particleWindow = NULL;
    actWindow = NULL;
    curFileName = "";
 }
@@ -94,9 +94,9 @@ editor::~editor()
    {
       deleteParticle();
    }
-   if(elementWindow)
+   if(particleWindow)
    {
-      delete(elementWindow);
+      delete(particleWindow);
    }
    /* Free GUI */
    delete(gui);
@@ -206,7 +206,7 @@ void editor::createWindows()
                                                           "Exit",0);
    gui->openWindow(actWindow);
 
-   elementWindow = new partElementWindow(gui);
+   particleWindow = new partWindow(gui);
 }
 
 /************************************************************************
@@ -226,20 +226,10 @@ void editor::treatGuiEvents()
    {
       /* No Event, so must treat Camera Input */
       gameCamera->doIO(keys, mButton, mouseX, mouseY, DELTA_CAMERA);
-
-      if(keys[SDLK_r])
-      {
-         /* Reload Current Particle */
-         if(p)
-         {
-            deleteParticle();
-            createParticle();
-         }
-      }
    }
    else
    {
-      if(elementWindow->treat(obj, eventInfo))
+      if(particleWindow->treat(obj, eventInfo))
       {
       }
       else if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
@@ -271,6 +261,7 @@ void editor::treatGuiEvents()
                {
                   createParticle();
                   p->load(curFileName);
+                  particleWindow->set(p);
                }
                else
                {

@@ -46,6 +46,11 @@ partElementWindow::~partElementWindow()
 void partElementWindow::setElement(dntPartElement* e, string text, 
       particleSystem* p)
 {
+   if(!e)
+   {
+      return;
+   }
+
    if( (e != element) || (!isOpen()) )
    {
       elementName = text;
@@ -85,11 +90,12 @@ void partElementWindow::openWindow()
                                 elementName); 
 
    /* Type things */
-   previousType = curWindow->getObjectsList()->insertButton(25, 20, 35, 37, 
+   previousType = curWindow->getObjectsList()->insertButton(10, 20, 20, 37, 
          fnt.createUnicode(0x25C4),0);
    previousType->defineFont(DNT_FONT_ARIAL, 9);
-   type = curWindow->getObjectsList()->insertTextBox(36, 20, 115, 37, 1, "");
-   nextType = curWindow->getObjectsList()->insertButton(116, 20, 126, 37, 
+   type = curWindow->getObjectsList()->insertTextBox(21, 20, 130, 37, 1, "");
+   type->setFont(DNT_FONT_ARIAL, 9, DNT_FONT_ALIGN_CENTER);
+   nextType = curWindow->getObjectsList()->insertButton(131, 20, 141, 37, 
          fnt.createUnicode(0x25BA),0);
    nextType->defineFont(DNT_FONT_ARIAL, 9);
 
@@ -184,7 +190,7 @@ void partElementWindow::setTypeThings()
       break;
       case DNT_PART_ELEMENT_RANDOM_INITIAL:
       {
-         type->setText("Random");
+         type->setText("Random Initial");
          mult->setAvailable(true);
          sum->setAvailable(true);
          finalValue->setAvailable(false);
@@ -193,6 +199,7 @@ void partElementWindow::setTypeThings()
       }
       break;
    }
+   curWindow->draw();
 }
 
 /***********************************************************************

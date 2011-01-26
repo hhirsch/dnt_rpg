@@ -29,6 +29,7 @@
 
 #include "partaux.h"
 #include "partelementwindow.h"
+#include "partwindow.h"
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
@@ -96,7 +97,7 @@ class editor
       button* buttonExit; /**< Exit Button */
 
       window* actWindow;
-      partElementWindow* elementWindow;  /**< Window to edit partElements */
+      partWindow* particleWindow;        /**< Window to edit particle */
 
       /**********************File*Window*******************************/
       window* fileWindow;      /**< File Selector Window (for load/save) */

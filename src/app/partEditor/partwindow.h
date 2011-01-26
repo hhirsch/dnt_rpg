@@ -27,6 +27,9 @@ using namespace std;
 #include "../../gui/farso.h"
 #include "../../particle/particle.h"
 
+#include "partaux.h"
+#include "partelementwindow.h"
+
 /*! The particle editor window! */
 class partWindow
 {
@@ -37,6 +40,10 @@ class partWindow
 
       /*! Destructor */
       ~partWindow();
+      
+      /*! Set the currentparticle to edit
+       * \param p -> current particleSystem to edit */
+      void set(partAux* p);
 
       /*! Treat the window events
        * \param object -> guiObject where event occurred
@@ -52,13 +59,19 @@ class partWindow
       /*! Open the window with current element */
       void openWindow();
 
+
       /*! Close the window */
       void closeWindow();
+
+      /* Set all texts */
+      void setTextValues();
+
+      partElementWindow* elementWindow; /**< The window to edit elements */
 
       window* curWindow;       /**< Internal window */
       guiInterface* gui;       /**< The guiInterface used */
 
-      particleSystem* part;    /**< The particle system to edit */
+      partAux* part;           /**< The particle system to edit */
 
       textBar* maxParticles;
       textBar* maxLifeTime;
@@ -77,9 +90,8 @@ class partWindow
       cxSel* windAffect;
       cxSel* floorCollision;
 
-      /* Elements */
       button* element;
-      menu* elementsMenu;
+      button* origin;
 
 };
 
