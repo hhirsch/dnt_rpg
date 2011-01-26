@@ -159,16 +159,16 @@ void menu::draw(int pos)
                                          y1 + 5; /* bizarre from DOS version */
    
    /* Verify Sides */
-   if (x2 > wSurface->w-1)
+   if(x2 > wWidth-1)
    {
-      x1 = (wSurface->w-1) - (x2 - x1);
-      x2 = wSurface->w-1;
+      x1 = (wWidth-1) - (x2 - x1);
+      x2 = wWidth-1;
       x = x1;
    }
-   if (y2 > wSurface->h-1)
+   if(y2 > wHeight-1)
    {
-      y1 = (wSurface->h-1) - (y2 - y1);
-      y2 = wSurface->h-1;
+      y1 = (wHeight-1) - (y2 - y1);
+      y2 = wHeight-1;
       y = y1;
    }
 
