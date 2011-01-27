@@ -65,6 +65,9 @@ class partWindow
 
       /* Set all texts */
       void setTextValues();
+   
+      /* Set mode names */
+      void setModeNames();
 
       partElementWindow* elementWindow; /**< The window to edit elements */
 

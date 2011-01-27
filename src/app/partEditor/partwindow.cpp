@@ -183,6 +183,8 @@ void partWindow::setTextValues()
       return;
    }
 
+   setModeNames();
+
    /* Max Particles */
    sprintf(buf, "%d", part->getMaxParticles());
    maxParticles->setText(buf);
@@ -206,6 +208,40 @@ void partWindow::setTextValues()
    floorCollision->setSelection(part->getBool(DNT_PART_AUX_FLOOR_COLLISION));
 
    curWindow->draw();
+}
+
+/***********************************************************************
+ *                           setModeNames                              *
+ ***********************************************************************/
+void partWindow::setModeNames()
+{
+   /* drawMode */
+   switch(part->getInt(DNT_PART_AUX_DRAW_MODE))
+   {
+      case DNT_PARTICLE_DRAW_GROUP:
+      {
+         drawMode->setText("Group");
+      }
+      break;
+      case DNT_PARTICLE_DRAW_INDIVIDUAL:
+      {
+         drawMode->setText("Individual");
+      }
+   }
+
+   /* renderMode */
+   switch(part->getInt(DNT_PART_AUX_RENDER_MODE))
+   {
+      case DNT_PARTICLE_RENDER_DEFAULT:
+      {
+         renderMode->setText("Default");
+      }
+      break;
+      case DNT_PARTICLE_RENDER_GLOW:
+      {
+         renderMode->setText("Glow");
+      }
+   }
 }
 
 /***********************************************************************
@@ -239,22 +275,70 @@ bool partWindow::treat(guiObject* object, int eventInfo)
       {
          sscanf(maxParticles->getText().c_str(), "%i", &i);
          part->setInt(DNT_PART_AUX_MAX_PARTICLES, i);
+         return(true);
       }
       else if(object == (guiObject*)maxLifeTime)
       {
          sscanf(maxLifeTime->getText().c_str(), "%i", &i);
          part->setInt(DNT_PART_AUX_MAX_LIFE_TIME, i);
+         return(true);
       }
       else if(object == (guiObject*)particleLifeTime)
       {
          sscanf(particleLifeTime->getText().c_str(), "%i", &i);
          part->setInt(DNT_PART_AUX_MAX_PARTICLE_LIFE_TIME, i);
+         return(true);
       }
       else if(object == (guiObject*)pointSize)
       {
          sscanf(pointSize->getText().c_str(), "%i", &i);
          part->setInt(DNT_PART_AUX_POINT_SIZE, i);
+         return(true);
       }
+   }
+   else if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
+   {
+      if(object == (guiObject*)nextRenderMode)
+      {
+         if(part->getInt(DNT_PART_AUX_RENDER_MODE) < DNT_PARTICLE_RENDER_GLOW)
+         {
+            part->setInt(DNT_PART_AUX_RENDER_MODE,
+                  part->getInt(DNT_PART_AUX_RENDER_MODE)+1);
+            setModeNames();
+         }
+         return(true);
+      }
+      else if(object == (guiObject*)previousRenderMode)
+      {
+         if(part->getInt(DNT_PART_AUX_RENDER_MODE) > 0)
+         {
+            part->setInt(DNT_PART_AUX_RENDER_MODE,
+                  part->getInt(DNT_PART_AUX_RENDER_MODE)-1);
+            setModeNames();
+         }
+         return(true);
+      }
+      else if(object == (guiObject*)nextDrawMode)
+      {
+         if(part->getInt(DNT_PART_AUX_DRAW_MODE) < DNT_PARTICLE_DRAW_INDIVIDUAL)
+         {
+            part->setInt(DNT_PART_AUX_DRAW_MODE,
+                  part->getInt(DNT_PART_AUX_DRAW_MODE)+1);
+            setModeNames();
+         }
+         return(true);
+      }
+      else if(object == (guiObject*)previousDrawMode)
+      {
+         if(part->getInt(DNT_PART_AUX_DRAW_MODE) > 0)
+         {
+            part->setInt(DNT_PART_AUX_DRAW_MODE,
+                  part->getInt(DNT_PART_AUX_DRAW_MODE)-1);
+            setModeNames();
+         }
+         return(true);
+      }
+
    }
 
    return(false);
