@@ -105,6 +105,8 @@ class partAux: public particleSystem
       bool* getBoolPtr(string b);
       /*! Get the pointer to an internal float */
       float* getFloatPtr(string f);
+      /*! Delete all buffers */
+      void deleteBuffers();
 };
 
 

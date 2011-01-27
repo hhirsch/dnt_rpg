@@ -89,6 +89,29 @@ int partAux::getInt(string i)
 
    return(0);
 }
+
+/***********************************************************************
+ *                          deleteBuffers                              *
+ ***********************************************************************/
+void partAux::deleteBuffers()
+{
+   /* Delete any previous buffer (as INDIVIDUAL doesn't need) */
+   if(vertexArray)
+   {
+      delete[] vertexArray;
+      vertexArray = NULL;
+   }
+   if(colorArray)
+   {
+      delete[] colorArray;
+      colorArray = NULL;
+   }
+   if(particles)
+   {
+      delete[] particles;
+      particles = NULL;
+   }
+}
  
 /***********************************************************************
  *                              setInt                                 *
@@ -104,23 +127,8 @@ void partAux::setInt(string i, int value)
    /* Special things for drawMode (create or not buffers) */
    if(i == DNT_PART_AUX_DRAW_MODE)
    {
-      /* Delete any previous buffer (as INDIVIDUAL doesn't need) */
-      if(vertexArray)
-      {
-         delete[] vertexArray;
-         vertexArray = NULL;
-      }
-      if(colorArray)
-      {
-         delete[] colorArray;
-         colorArray = NULL;
-      }
-      if( (value == DNT_PARTICLE_DRAW_GROUP) && (maxParticles > 0) )
-      {
-         /* Must create the buffers */
-         vertexArray = (float*) new float[maxParticles*3];
-         colorArray = (float*) new float[maxParticles*3];
-      }
+      deleteBuffers();
+      init();
    }
    /* Max particles changed, must recreate buffers (when used) */
    else if(i == DNT_PART_AUX_MAX_PARTICLES)
@@ -130,22 +138,8 @@ void partAux::setInt(string i, int value)
       {
          maxParticles = 1;
       }
-
-      if(drawMode == DNT_PARTICLE_DRAW_GROUP)
-      {
-         if(vertexArray)
-         {
-            delete[] vertexArray;
-            vertexArray = NULL;
-         }
-         if(colorArray)
-         {
-            delete[] colorArray;
-            colorArray = NULL;
-         }         
-         vertexArray = (float*) new float[maxParticles*3];
-         colorArray = (float*) new float[maxParticles*3];
-      }
+      deleteBuffers();
+      init();
    }
    /* Special things needed when changing maxParticleLife  */
    else if(i == DNT_PART_AUX_MAX_PARTICLE_LIFE_TIME)
