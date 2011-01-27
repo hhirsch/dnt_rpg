@@ -98,6 +98,9 @@ class partAux: public particleSystem
        * \return pointer to the particle origin */
       dntPartOrigin* getOrigin();
 
+      /*! Reset the particle system, returning to inital state */
+      void reset();
+
    private:
       /*! Get the pointer to an internal integer */
       int* getIntPtr(string i);
