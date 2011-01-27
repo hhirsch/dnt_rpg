@@ -100,6 +100,58 @@ void partAux::setInt(string i, int value)
    {
       *p = value;
    }
+
+   /* Special things for drawMode (create or not buffers) */
+   if(i == DNT_PART_AUX_DRAW_MODE)
+   {
+      /* Delete any previous buffer (as INDIVIDUAL doesn't need) */
+      if(vertexArray)
+      {
+         delete[] vertexArray;
+         vertexArray = NULL;
+      }
+      if(colorArray)
+      {
+         delete[] colorArray;
+         colorArray = NULL;
+      }
+      if( (value == DNT_PARTICLE_DRAW_GROUP) && (maxParticles > 0) )
+      {
+         /* Must create the buffers */
+         vertexArray = (float*) new float[maxParticles*3];
+         colorArray = (float*) new float[maxParticles*3];
+      }
+   }
+   /* Max particles changed, must recreate buffers (when used) */
+   else if(i == DNT_PART_AUX_MAX_PARTICLES)
+   {
+      /* Avoid particle system without particles */
+      if(maxParticles <= 0)
+      {
+         maxParticles = 1;
+      }
+
+      if(drawMode == DNT_PARTICLE_DRAW_GROUP)
+      {
+         if(vertexArray)
+         {
+            delete[] vertexArray;
+            vertexArray = NULL;
+         }
+         if(colorArray)
+         {
+            delete[] colorArray;
+            colorArray = NULL;
+         }         
+         vertexArray = (float*) new float[maxParticles*3];
+         colorArray = (float*) new float[maxParticles*3];
+      }
+   }
+   /* Special things needed when changing maxParticleLife  */
+   else if(i == DNT_PART_AUX_MAX_PARTICLE_LIFE_TIME)
+   {
+      /* TODO: Must recalculate all LINEAR elements */
+   }
 }
 
 /***********************************************************************

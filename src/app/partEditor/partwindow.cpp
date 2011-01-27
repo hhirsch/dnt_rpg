@@ -270,11 +270,17 @@ bool partWindow::treat(guiObject* object, int eventInfo)
    }
    else if(eventInfo == FARSO_EVENT_WROTE_TEXT_BAR)
    {
-      int i;
+      int i=0;
       if(object == (guiObject*)maxParticles)
       {
-         sscanf(maxParticles->getText().c_str(), "%i", &i);
-         part->setInt(DNT_PART_AUX_MAX_PARTICLES, i);
+         if(!maxParticles->getText().empty())
+         {
+            sscanf(maxParticles->getText().c_str(), "%i", &i);
+         }
+         if(i > 0)
+         {
+            part->setInt(DNT_PART_AUX_MAX_PARTICLES, i);
+         }
          return(true);
       }
       else if(object == (guiObject*)maxLifeTime)
