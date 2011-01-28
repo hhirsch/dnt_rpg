@@ -133,7 +133,8 @@ void partWindow::openWindow()
    curWindow->getObjectsList()->insertTextBox(21,181,121,198,0,
          "Floor Collision");
 
-   element = curWindow->getObjectsList()->insertButton(10, 204, 80, 221, 
+   /* Elements */
+   element = curWindow->getObjectsList()->insertButton(20, 204, 97, 221, 
          "Elements", true);
    menu* men = new menu(80, 204, 193, 272, curWindow->getSurface());
    men->insertItem(DNT_PART_AUX_PARTICLES_TO_CREATE, true);
@@ -154,7 +155,7 @@ void partWindow::openWindow()
    men->insertItem(DNT_PART_AUX_SCALE, true);
    element->men = (void*)men;
 
-   origin = curWindow->getObjectsList()->insertButton(90, 204, 160, 221, 
+   origin = curWindow->getObjectsList()->insertButton(103, 204, 173, 221, 
          "Origin", true);
 
    /* Gravity */
@@ -164,7 +165,7 @@ void partWindow::openWindow()
          "", 0);
 
    /* Texture select */
-   texture = curWindow->getObjectsList()->insertButton(10, 250, 80, 267, 
+   texture = curWindow->getObjectsList()->insertButton(60, 250, 133, 267, 
          "Texture", true);
 
 
