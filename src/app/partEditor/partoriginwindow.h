@@ -18,38 +18,34 @@
   along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef _dnt_part_editor_part_window
-#define _dnt_part_editor_part_window
+#ifndef _dnt_part_editor_part_origin_window
+#define _dnt_part_editor_part_origin_window
 
 #include <string>
 using namespace std;
 
 #include "../../gui/farso.h"
-#include "../../particle/particle.h"
-
+#include "../../particle/partorigin.h"
 #include "partaux.h"
-#include "partelementwindow.h"
-#include "partoriginwindow.h"
 
-/*! The particle editor window! */
-class partWindow
+class partOriginWindow
 {
    public:
       /*! Constructor 
        * \param interf -> pointer to the current guiInterface */
-      partWindow(guiInterface* interf);
-
+      partOriginWindow(guiInterface* interf);
       /*! Destructor */
-      ~partWindow();
-      
-      /*! Set the currentparticle to edit
-       * \param p -> current particleSystem to edit */
-      void set(partAux* p);
+      ~partOriginWindow();
+
+      /*! Set the particle to display origin, opening the window 
+       * if not already opened.
+       * \param p -> the particle to display */
+      void setParticle(partAux* p);
 
       /*! Treat the window events
        * \param object -> guiObject where event occurred
        * \param eventInfo -> info about the happened event
-       * \return true when event is related to partWindow */
+       * \return true when event is related to partElement window */
       bool treat(guiObject* object, int eventInfo);
 
       /*! Verify if window is open
@@ -60,48 +56,31 @@ class partWindow
       /*! Open the window with current element */
       void openWindow();
 
-
       /*! Close the window */
       void closeWindow();
 
-      /* Set all texts */
-      void setTextValues();
-   
-      /* Set mode names */
-      void setModeNames();
+      /*! Set things on window related to the current type  */
+      void setTypeThings();
 
-      partElementWindow* elementWindow; /**< The window to edit elements */
-      partOriginWindow* originWindow;   /**< The window to edit origin */
+      /*! Set all texts */
+      void setTexts();
 
-      window* curWindow;       /**< Internal window */
-      guiInterface* gui;       /**< The guiInterface used */
+      /*! Reset the element, to update it with new values */
+      void resetElement();
 
-      partAux* part;           /**< The particle system to edit */
+      guiInterface* gui;        /**< Gui used */
+      window* curWindow;        /**< Current in use window */
+      partAux* part;            /**< Current particle system edited */
 
-      textBar* maxParticles;
-      textBar* maxLifeTime;
-      textBar* particleLifeTime;
-      textBar* gravity;
+      button* nextType;         /**< To select next type */
+      button* previousType;     /**< To select previous type */
+      textBox* type;            /**< Current type text */
 
-      button* previousDrawMode;
-      textBox* drawMode;
-      button* nextDrawMode;
+      textBox* text[3];         /**< Desc text */
 
-      button* texture;
-      button* restart;
-
-      button* previousRenderMode;
-      textBox* renderMode;
-      button* nextRenderMode;
-
-      textBar* pointSize;
-
-      cxSel* windAffect;
-      cxSel* floorCollision;
-
-      button* element;
-      button* origin;
-
+      textBar* pos1[3];          /**< Lower Position edition */
+      textBar* pos2[3];          /**< Upper Position edition (only for quad) */
+      textBar* radius;           /**< Radius (only for sphere) */
 };
 
 #endif

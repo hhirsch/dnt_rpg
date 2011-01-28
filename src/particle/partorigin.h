@@ -93,6 +93,9 @@ class dntPartOrigin
        * \return true if success */
       bool fromString(string s);
 
+      /*! As friend to avoid useless functions */
+      friend class partOriginWindow;
+
    protected:
       float p[3];          /**< Reference Point */
       float sum[3];        /**< Sum values (used at quad) */

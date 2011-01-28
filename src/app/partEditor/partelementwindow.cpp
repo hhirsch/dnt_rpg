@@ -73,8 +73,8 @@ bool partElementWindow::isOpen()
  ***********************************************************************/
 void partElementWindow::openWindow()
 {
-   int curPosX = 240;
-   int curPosY = 40;
+   int curPosX = 194;
+   int curPosY = 64;
    dntFont fnt;
 
    /* Close it if already opened */
@@ -293,6 +293,7 @@ bool partElementWindow::treat(guiObject* object, int eventInfo)
             element->type++;
             resetElement();
             setTypeThings();
+            return(true);
          }
       }
       else if(object == (guiObject*)previousType)
@@ -302,6 +303,7 @@ bool partElementWindow::treat(guiObject* object, int eventInfo)
             element->type--;
             resetElement();
             setTypeThings();
+            return(true);
          }
       }
    }
@@ -324,29 +326,35 @@ bool partElementWindow::treat(guiObject* object, int eventInfo)
       {
          sscanf(initialValue->getText().c_str(), "%f", &element->initialValue);
          resetElement();
+         return(true);
       }
       else if(object == (guiObject*)finalValue)
       {
          sscanf(finalValue->getText().c_str(), "%f", &element->finalValue);
          resetElement();
+         return(true);
       }
       else if(object == (guiObject*)mult)
       {
          sscanf(mult->getText().c_str(), "%f", &element->mult);
          resetElement();
+         return(true);
       }
       else if(object == (guiObject*)sum)
       {
          sscanf(sum->getText().c_str(), "%f", &element->sum);
          resetElement();
+         return(true);
       }
       else if(object == (guiObject*)lowerLimit)
       {
          sscanf(lowerLimit->getText().c_str(), "%f", &element->lowerLimit);
+         return(true);
       }
       else if(object == (guiObject*)upperLimit)
       {
          sscanf(upperLimit->getText().c_str(), "%f", &element->upperLimit);
+         return(true);
       }
 
    }

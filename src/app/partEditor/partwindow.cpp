@@ -29,6 +29,7 @@ partWindow::partWindow(guiInterface* interf)
    part = NULL;
    gui = interf;
    elementWindow = new partElementWindow(interf);
+   originWindow = new partOriginWindow(interf);
 }
 
 /***********************************************************************
@@ -37,6 +38,7 @@ partWindow::partWindow(guiInterface* interf)
 partWindow::~partWindow()
 {
    delete(elementWindow);
+   delete(originWindow);
    closeWindow();
 }
 
@@ -224,7 +226,7 @@ void partWindow::setTextValues()
    /* Floor Collision */
    floorCollision->setSelection(part->getBool(DNT_PART_AUX_FLOOR_COLLISION));
 
-   /* Gravtiy */
+   /* Gravity */
    sprintf(buf, "%f", part->getGravity());
    gravity->setText(buf);
 
@@ -274,6 +276,15 @@ bool partWindow::treat(guiObject* object, int eventInfo)
    {
       /* Treat element window */
       if(elementWindow->treat(object, eventInfo))
+      {
+         return(true);
+      }
+   }
+
+   if(originWindow->isOpen())
+   {
+      /* Treat origin window */
+      if(originWindow->treat(object, eventInfo))
       {
          return(true);
       }
@@ -375,6 +386,10 @@ bool partWindow::treat(guiObject* object, int eventInfo)
       else if(object == (guiObject*)restart)
       {
          part->reset();
+      }
+      else if(object == (guiObject*)origin)
+      {
+         originWindow->setParticle(part);
       }
 
    }
