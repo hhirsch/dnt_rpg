@@ -97,7 +97,7 @@ void partOriginWindow::openWindow()
 
    /* Lower Value */
    text[0] = curWindow->getObjectsList()->insertTextBox(10, 43, 80, 60, 0, 
-         "LowerPos:");
+         "Pos1:");
    for(i=0; i<3; i++)
    {
       pos1[i] = curWindow->getObjectsList()->insertTextBar(81+33*i, 43, 
@@ -105,7 +105,7 @@ void partOriginWindow::openWindow()
    }
    /* Upper Value */
    text[1] = curWindow->getObjectsList()->insertTextBox(10, 66, 80, 83, 0, 
-         "UpperPos:");
+         "Pos2:");
    for(i=0; i<3; i++)
    {
       pos2[i] = curWindow->getObjectsList()->insertTextBar(81+33*i, 66, 
@@ -161,7 +161,7 @@ void partOriginWindow::setTypeThings()
          pos2[1]->setAvailable(true);
          pos2[2]->setAvailable(true);
          radius->setAvailable(false);
-         text[0]->setText("LowerPos:");
+         text[0]->setText("Pos1:");
       }
       break;
       case DNT_PART_ORIGIN_SPHERE:
@@ -194,7 +194,7 @@ void partOriginWindow::setTexts()
       sprintf(buf, "%f", o->p[i]);
       pos1[i]->setText(buf);
       /* Upper */
-      sprintf(buf, "%f", o->p[i]+o->sum[i]);
+      sprintf(buf, "%f", (o->p[i]+o->sum[i]));
       pos2[i]->setText(buf);
    }
 
