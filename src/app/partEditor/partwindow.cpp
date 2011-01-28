@@ -57,6 +57,9 @@ void partWindow::set(partAux* p)
 {
    part = p;
    openWindow();
+   /* Close element and origin windows to avoid edit previous particle */
+   elementWindow->closeWindow();
+   originWindow->closeWindow();
 }
 
 /***********************************************************************

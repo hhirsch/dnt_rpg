@@ -52,12 +52,12 @@ class partOriginWindow
        * \return true if open */
       bool isOpen();
 
+      /*! Close the window */
+      void closeWindow();
+
    protected:
       /*! Open the window with current element */
       void openWindow();
-
-      /*! Close the window */
-      void closeWindow();
 
       /*! Set things on window related to the current type  */
       void setTypeThings();
