@@ -75,7 +75,7 @@ void partWindow::openWindow()
    }
 
    /* Create the window */
-   curWindow = gui->insertWindow(posX, posY, posX+193, posY+275,
+   curWindow = gui->insertWindow(posX, posY, posX+193, posY+298,
                                 "Particle"); 
    curWindow->setExternPointer(&curWindow);
 
@@ -136,7 +136,7 @@ void partWindow::openWindow()
    /* Elements */
    element = curWindow->getObjectsList()->insertButton(20, 204, 97, 221, 
          "Elements", true);
-   menu* men = new menu(80, 204, 193, 272, curWindow->getSurface());
+   menu* men = new menu(80, 204, 192, 295, curWindow->getSurface());
    men->insertItem(DNT_PART_AUX_PARTICLES_TO_CREATE, true);
    men->insertItem("-", false);
    men->insertItem(DNT_PART_AUX_RED, true);
@@ -168,7 +168,9 @@ void partWindow::openWindow()
    texture = curWindow->getObjectsList()->insertButton(60, 250, 133, 267, 
          "Texture", true);
 
-
+   /* Restart the system */
+   restart = curWindow->getObjectsList()->insertButton(60, 273, 133, 290,
+         "Restart", true);
 
 
    /* Finally, open the window */
@@ -369,6 +371,10 @@ bool partWindow::treat(guiObject* object, int eventInfo)
             setModeNames();
          }
          return(true);
+      }
+      else if(object == (guiObject*)restart)
+      {
+         part->reset();
       }
 
    }

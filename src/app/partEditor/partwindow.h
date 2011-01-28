@@ -86,6 +86,7 @@ class partWindow
       button* nextDrawMode;
 
       button* texture;
+      button* restart;
 
       button* previousRenderMode;
       textBox* renderMode;
