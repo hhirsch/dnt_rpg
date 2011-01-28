@@ -79,10 +79,13 @@ class partWindow
       textBar* maxParticles;
       textBar* maxLifeTime;
       textBar* particleLifeTime;
+      textBar* gravity;
 
       button* previousDrawMode;
       textBox* drawMode;
       button* nextDrawMode;
+
+      button* texture;
 
       button* previousRenderMode;
       textBox* renderMode;

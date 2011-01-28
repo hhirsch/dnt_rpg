@@ -98,6 +98,12 @@ class partAux: public particleSystem
        * \return pointer to the particle origin */
       dntPartOrigin* getOrigin();
 
+      /*! Get the current gravity value */
+      float getGravity();
+      /*! Set the gravity value
+       * \param g -> new gravity value */
+      void setGravity(float g);
+
       /*! Reset the particle system, returning to inital state */
       void reset();
 

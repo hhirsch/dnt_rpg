@@ -75,7 +75,7 @@ void partWindow::openWindow()
    }
 
    /* Create the window */
-   curWindow = gui->insertWindow(posX, posY, posX+193, posY+241,
+   curWindow = gui->insertWindow(posX, posY, posX+193, posY+275,
                                 "Particle"); 
    curWindow->setExternPointer(&curWindow);
 
@@ -135,7 +135,7 @@ void partWindow::openWindow()
 
    element = curWindow->getObjectsList()->insertButton(10, 204, 80, 221, 
          "Elements", true);
-   menu* men = new menu(80, 204, 193, 241, curWindow->getSurface());
+   menu* men = new menu(80, 204, 193, 272, curWindow->getSurface());
    men->insertItem(DNT_PART_AUX_PARTICLES_TO_CREATE, true);
    men->insertItem("-", false);
    men->insertItem(DNT_PART_AUX_RED, true);
@@ -156,6 +156,18 @@ void partWindow::openWindow()
 
    origin = curWindow->getObjectsList()->insertButton(90, 204, 160, 221, 
          "Origin", true);
+
+   /* Gravity */
+   curWindow->getObjectsList()->insertTextBox(10,227,90,244,0,
+         "Gravity:");
+   gravity = curWindow->getObjectsList()->insertTextBar(81,227,141,244,
+         "", 0);
+
+   /* Texture select */
+   texture = curWindow->getObjectsList()->insertButton(10, 250, 80, 267, 
+         "Texture", true);
+
+
 
 
    /* Finally, open the window */
@@ -208,6 +220,10 @@ void partWindow::setTextValues()
 
    /* Floor Collision */
    floorCollision->setSelection(part->getBool(DNT_PART_AUX_FLOOR_COLLISION));
+
+   /* Gravtiy */
+   sprintf(buf, "%f", part->getGravity());
+   gravity->setText(buf);
 
    curWindow->draw();
 }
@@ -301,6 +317,13 @@ bool partWindow::treat(guiObject* object, int eventInfo)
       {
          sscanf(pointSize->getText().c_str(), "%i", &i);
          part->setInt(DNT_PART_AUX_POINT_SIZE, i);
+         return(true);
+      }
+      else if(object == (guiObject*)gravity)
+      {
+         float g=0.0f;
+         sscanf(gravity->getText().c_str(), "%f", &g);
+         part->setGravity(g);
          return(true);
       }
    }
