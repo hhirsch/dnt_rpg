@@ -102,6 +102,7 @@ void partWindow::openWindow()
    previousDrawMode->defineFont(DNT_FONT_ARIAL, 9);
    drawMode = curWindow->getObjectsList()->insertTextBox(92, 89, 172, 106, 
          1, "");
+   drawMode->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
    nextDrawMode = curWindow->getObjectsList()->insertButton(173, 89, 183, 106, 
          fnt.createUnicode(0x25BA),0);
    nextDrawMode->defineFont(DNT_FONT_ARIAL, 9);
@@ -113,6 +114,7 @@ void partWindow::openWindow()
    previousRenderMode->defineFont(DNT_FONT_ARIAL, 9);
    renderMode = curWindow->getObjectsList()->insertTextBox(92,112,172,129, 
          1, "");
+   renderMode->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
    nextRenderMode = curWindow->getObjectsList()->insertButton(173,112,183,129, 
          fnt.createUnicode(0x25BA),0);
    nextRenderMode->defineFont(DNT_FONT_ARIAL, 9);
