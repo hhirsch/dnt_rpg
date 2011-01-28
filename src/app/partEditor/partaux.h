@@ -107,6 +107,13 @@ class partAux: public particleSystem
       /*! Reset the particle system, returning to inital state */
       void reset();
 
+      /*! Get the texture filename
+       * \return filename of the texture used */
+      string getTextureFileName();
+
+      /*! Set the filename of the texture to use */
+      void setTextureFileName(string f);
+
    private:
       /*! Get the pointer to an internal integer */
       int* getIntPtr(string i);

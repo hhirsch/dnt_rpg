@@ -26,6 +26,7 @@
 partWindow::partWindow(guiInterface* interf)
 {
    curWindow = NULL;
+   textureWindow = NULL;
    part = NULL;
    gui = interf;
    elementWindow = new partElementWindow(interf);
@@ -40,6 +41,27 @@ partWindow::~partWindow()
    delete(elementWindow);
    delete(originWindow);
    closeWindow();
+}
+
+/***********************************************************************
+ *                           openTextureWindow                         *
+ ***********************************************************************/
+void partWindow::openTextureWindow()
+{
+   if(textureWindow)
+   {
+      /* Close the current one */
+      gui->closeWindow(textureWindow);
+   }
+
+   textureWindow = gui->insertWindow(200,100,460,285,"File");
+   fileSelector = textureWindow->getObjectsList()->insertFileSel(5,18, true,
+         "../data/particles/");
+   fileSelector->setFilter(".png");
+   /*fileSelector->setFileName(part->getTextureFileName());*/
+   textureWindow->setAttributes(false,true,false,false);
+   textureWindow->setExternPointer(&textureWindow);
+   gui->openWindow(textureWindow);
 }
 
 /***********************************************************************
@@ -394,7 +416,27 @@ bool partWindow::treat(guiObject* object, int eventInfo)
       {
          originWindow->setParticle(part);
       }
-
+      else if(object == (guiObject*)texture)
+      {
+         openTextureWindow();
+      }
+   }
+   /* Texture Load things */
+   else if(eventInfo == FARSO_EVENT_FILE_SEL_ACCEPT)
+   {
+      if( (textureWindow) && (object == (guiObject*)fileSelector) )
+      {
+         part->setTextureFileName(fileSelector->getFileName());
+         gui->closeWindow(textureWindow);
+      }
+   }
+   else if(eventInfo == FARSO_EVENT_FILE_SEL_CANCEL)
+   {
+      if((textureWindow) && (object == (guiObject*)fileSelector))
+      {
+         /* Just close the window */
+         gui->closeWindow(textureWindow);
+      }
    }
 
    return(false);

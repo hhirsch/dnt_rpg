@@ -60,9 +60,11 @@ class partWindow
       /*! Open the window with current element */
       void openWindow();
 
-
       /*! Close the window */
       void closeWindow();
+
+      /*! Open the window to select texture */
+      void openTextureWindow();
 
       /* Set all texts */
       void setTextValues();
@@ -72,6 +74,9 @@ class partWindow
 
       partElementWindow* elementWindow; /**< The window to edit elements */
       partOriginWindow* originWindow;   /**< The window to edit origin */
+
+      window* textureWindow;            /**< The window to select textures */
+      fileSel* fileSelector;            /**< The texture file selector */
 
       window* curWindow;       /**< Internal window */
       guiInterface* gui;       /**< The guiInterface used */

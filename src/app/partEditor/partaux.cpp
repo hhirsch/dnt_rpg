@@ -127,6 +127,8 @@ void partAux::deleteBuffers()
       delete[] particles;
       particles = NULL;
    }
+   /* Delete the texture too, as will recreate with init */
+   glDeleteTextures(1, &partTexture);
 }
 
 /***********************************************************************
@@ -152,8 +154,7 @@ void partAux::setInt(string i, int value)
    /* Special things for drawMode (create or not buffers) */
    if(i == DNT_PART_AUX_DRAW_MODE)
    {
-      deleteBuffers();
-      init();
+      reset();
    }
    /* Max particles changed, must recreate buffers (when used) */
    else if(i == DNT_PART_AUX_MAX_PARTICLES)
@@ -163,8 +164,7 @@ void partAux::setInt(string i, int value)
       {
          maxParticles = 1;
       }
-      deleteBuffers();
-      init();
+      reset();
    }
    /* Special things needed when changing maxParticleLife  */
    else if(i == DNT_PART_AUX_MAX_PARTICLE_LIFE_TIME)
@@ -321,5 +321,22 @@ dntPartElement* partAux::getElement(string e)
 dntPartOrigin* partAux::getOrigin()
 {
    return(&origin);
+}
+
+/***********************************************************************
+ *                       getTextureFileName                            *
+ ***********************************************************************/
+string partAux::getTextureFileName()
+{
+   return(textureFileName);
+}
+
+/***********************************************************************
+ *                       setTextureFileName                            *
+ ***********************************************************************/
+void partAux::setTextureFileName(string f)
+{
+   textureFileName = f;
+   reset();
 }
 
