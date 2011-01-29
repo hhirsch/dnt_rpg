@@ -85,6 +85,8 @@ class partWindow
       guiInterface* gui;       /**< The guiInterface used */
 
       partAux* part;           /**< The particle system to edit */
+      int max;                 /**< Max number of particles got for current
+                                    particle system */
 
       textBox* curParticles;   /**< Current number of particles */
 

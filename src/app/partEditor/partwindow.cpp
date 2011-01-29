@@ -28,6 +28,7 @@ partWindow::partWindow(guiInterface* interf)
    curWindow = NULL;
    textureWindow = NULL;
    part = NULL;
+   max = 0;
    gui = interf;
    elementWindow = new partElementWindow(interf);
    originWindow = new partOriginWindow(interf);
@@ -78,6 +79,7 @@ bool partWindow::isOpen()
 void partWindow::set(partAux* p)
 {
    part = p;
+   max = 0;
    openWindow();
    /* Close element and origin windows to avoid edit previous particle */
    elementWindow->closeWindow();
@@ -200,7 +202,7 @@ void partWindow::openWindow()
          "Restart", true);
 
    /* Current number of particles */
-   curParticles = curWindow->getObjectsList()->insertTextBox(10,296,160,313,3,
+   curParticles = curWindow->getObjectsList()->insertTextBox(10,296,183,313,3,
          "Current Particles: ");
 
    /* Finally, open the window */
@@ -300,12 +302,16 @@ void partWindow::setModeNames()
  ***********************************************************************/
 void partWindow::writeCurParticles()
 {
-   char buf[128];
+   char buf[256];
 
    /* Rewrite number of current particles */
    if( (part) && (isOpen()))
    {
-      sprintf(buf, "Current Particles: %d", part->numParticles()); 
+      if(part->numParticles() > max)
+      {
+         max = part->numParticles();
+      }
+      sprintf(buf, "Current: %d Max: %d", part->numParticles(), max); 
       curParticles->setText(buf);
    }
 }
