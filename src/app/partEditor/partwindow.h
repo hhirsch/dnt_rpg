@@ -56,6 +56,9 @@ class partWindow
        * \return true if open */
       bool isOpen();
 
+      /*! Write current number of particles */
+      void writeCurParticles();
+
    protected:
       /*! Open the window with current element */
       void openWindow();
@@ -82,6 +85,8 @@ class partWindow
       guiInterface* gui;       /**< The guiInterface used */
 
       partAux* part;           /**< The particle system to edit */
+
+      textBox* curParticles;   /**< Current number of particles */
 
       textBar* maxParticles;
       textBar* maxLifeTime;

@@ -102,7 +102,7 @@ void partWindow::openWindow()
    }
 
    /* Create the window */
-   curWindow = gui->insertWindow(posX, posY, posX+193, posY+298,
+   curWindow = gui->insertWindow(posX, posY, posX+193, posY+321,
                                 "Particle"); 
    curWindow->setExternPointer(&curWindow);
 
@@ -163,7 +163,7 @@ void partWindow::openWindow()
    /* Elements */
    element = curWindow->getObjectsList()->insertButton(20, 204, 97, 221, 
          "Elements", true);
-   menu* men = new menu(80, 204, 192, 295, curWindow->getSurface());
+   menu* men = new menu(80, 204, 192, 318, curWindow->getSurface());
    men->insertItem(DNT_PART_AUX_PARTICLES_TO_CREATE, true);
    men->insertItem("-", false);
    men->insertItem(DNT_PART_AUX_RED, true);
@@ -199,6 +199,9 @@ void partWindow::openWindow()
    restart = curWindow->getObjectsList()->insertButton(60, 273, 133, 290,
          "Restart", true);
 
+   /* Current number of particles */
+   curParticles = curWindow->getObjectsList()->insertTextBox(10,296,160,313,3,
+         "Current Particles: ");
 
    /* Finally, open the window */
    gui->openWindow(curWindow);
@@ -291,6 +294,22 @@ void partWindow::setModeNames()
       }
    }
 }
+
+/***********************************************************************
+ *                          writeCurParticles                          *
+ ***********************************************************************/
+void partWindow::writeCurParticles()
+{
+   char buf[128];
+
+   /* Rewrite number of current particles */
+   if( (part) && (isOpen()))
+   {
+      sprintf(buf, "Current Particles: %d", part->numParticles()); 
+      curParticles->setText(buf);
+   }
+}
+
 
 /***********************************************************************
  *                               treat                                 *

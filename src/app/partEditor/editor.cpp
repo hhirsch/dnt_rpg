@@ -222,6 +222,9 @@ void editor::treatGuiEvents()
    guiObject* obj = gui->manipulateEvents(mouseX, mouseY, mButton, 
                                           keys, eventInfo);
 
+   /* Write current number of particles */
+   particleWindow->writeCurParticles();
+
    if(eventInfo == FARSO_EVENT_NONE)
    {
       /* No Event, so must treat Camera Input */

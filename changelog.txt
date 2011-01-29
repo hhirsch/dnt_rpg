@@ -13,6 +13,7 @@
    of killing the target in a single strike);
  - Added instantKilled percentual to characters (aka: probability
    of get killed in a single strike);
+ - Rewrote the dntParticleEditor to be more intuitive;
 
 ================================================
 |                Version 0.6                   |
