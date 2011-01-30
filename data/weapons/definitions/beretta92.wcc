@@ -1,4 +1,5 @@
 name = gettext("Beretta 92")
+description = gettext("The exact copy of your ancient ball gun, but with real bullets.")
 cal3d = models/objetos/armas/beretta92/model.cfg
 inventory_sizes = 2 2
 inventory_texture = models/objetos/armas/beretta92/beretta_inv.png

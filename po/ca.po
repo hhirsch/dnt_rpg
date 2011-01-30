@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2011-01-30 17:54-0200\n"
+"POT-Creation-Date: 2011-01-30 18:48-0200\n"
 "PO-Revision-Date: 2010-05-27 16:34+0000\n"
 "Last-Translator: Dani Cases <danicases@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
@@ -4322,12 +4322,24 @@ msgstr ""
 msgid "Great Axe"
 msgstr ""
 
+#: data/weapons/definitions/axe.wcc:2
+msgid "It's heavy. Pretty heavy. Maybe a bull could handle it."
+msgstr ""
+
 #: data/weapons/definitions/dagger.wcc:1
 msgid "Dagger"
 msgstr ""
 
+#: data/weapons/definitions/dagger.wcc:2
+msgid "The common, simple and little dagger."
+msgstr ""
+
 #: data/weapons/definitions/beretta92.wcc:1
 msgid "Beretta 92"
+msgstr ""
+
+#: data/weapons/definitions/beretta92.wcc:2
+msgid "The exact copy of your ancient ball gun, but with real bullets."
 msgstr ""
 
 #: data/weapons/definitions/kalashnikov_small.wcc:1
@@ -4335,8 +4347,20 @@ msgstr ""
 msgid "Kalashnikov"
 msgstr ""
 
+#: data/weapons/definitions/kalashnikov_small.wcc:2
+msgid "The most insurgent weapon of the Asia in exact size to hide on a coat."
+msgstr ""
+
+#: data/weapons/definitions/kalashnikov.wcc:2
+msgid "The most insurgent weapon of the Asia."
+msgstr ""
+
 #: data/weapons/definitions/katana.wcc:1
 msgid "Katana"
+msgstr ""
+
+#: data/weapons/definitions/katana.wcc:2
+msgid "A katana used on eastern martial arts."
 msgstr ""
 
 #: data/weapons/definitions/knife.wcc:1
@@ -4357,6 +4381,10 @@ msgstr ""
 
 #: data/weapons/definitions/sw39.wcc:1
 msgid "S&W 39"
+msgstr ""
+
+#: data/weapons/definitions/sw39.wcc:2
+msgid "Your 9mm flavour, with good accuracy and two nouns behind."
 msgstr ""
 
 #: data/weapons/definitions/uzi.wcc:1

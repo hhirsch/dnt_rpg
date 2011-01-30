@@ -1,4 +1,5 @@
 name = gettext("Kalashnikov")
+description = gettext("The most insurgent weapon of the Asia in exact size to hide on a coat.")
 cal3d = models/objetos/armas/kalashnikov_small/model.cfg
 inventory_sizes = 2 3
 inventory_texture = models/objetos/armas/kalashnikov_small/kalashnikov_small_inv.png

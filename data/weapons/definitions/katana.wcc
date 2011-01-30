@@ -1,4 +1,5 @@
 name = gettext("Katana")
+description = gettext("A katana used on eastern martial arts.")
 cal3d = models/objetos/armas/dark_katana/model.cfg
 inventory_sizes = 2 4
 inventory_texture = models/objetos/armas/dark_katana/dark_katana_inv.png

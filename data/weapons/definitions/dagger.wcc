@@ -1,4 +1,5 @@
 name = gettext("Dagger")
+description = gettext("The common, simple and little dagger.")
 cal3d = models/objetos/armas/adaga/model.cfg
 inventory_sizes = 1 2
 inventory_texture = models/objetos/armas/adaga/adaga_inv.png
