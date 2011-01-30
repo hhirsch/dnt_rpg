@@ -244,7 +244,6 @@ useObject = models/objetos/books/mjack/mjack.dcc 1:9,1:518.009,10.200,38.957:-12
 useObject = models/objetos/geral/mesa_redonda/mesa_redonda.dcc 1:9,1:526.617,0.000,38.504:-91.000:0
 square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/steel3_dirty.png
-useObject = models/objetos/industrial/compdeck/compdeck.dcc 0:10,2:624.219,4.900,64.523:-270.000:0
 #Z: 1
 square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/steel3.png
@@ -272,7 +271,6 @@ useTexture = texturas/floor_indoor/steel3_dirty.png
 square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/steel3.png
 connection = 622.922791,117.384361,638.675232,135.716751:0.000000:mapas/tutorial/tyrol.map
-useObject = models/objetos/industrial/compdeck/compdeck.dcc 1:10,2:624.219,4.900,64.523:-270.000:0
 #Z: 2
 square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/steel3.png
