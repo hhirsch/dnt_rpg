@@ -183,7 +183,7 @@ void cursor::setTextOver(string txt)
          farso_colors curColor;
          
          fnt.defineFont(DNT_FONT_PALLADIO, 12);
-         fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
+         fnt.defineFontAlign(DNT_FONT_ALIGN_CENTER);
          fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
          textOverHeight = fnt.getHeight()+4;
          textOverWidth = fnt.getStringWidth(textOver)+8;

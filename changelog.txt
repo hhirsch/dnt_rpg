@@ -2,9 +2,7 @@
 |                Version 0.7                   |
 ================================================
  - New race's images;
- - Fixed the outdoor minimap scale ratio;
  - Default walls texture repeat to 64 (instead of 16);
- - Don't render shadow for low height sceneries at floor;
  - dntMapEditor: Using dntList and defParser for list of files;
  - heightmap2dnt: Added indoor map import (with walls);
  - Capacity to create empty (without decorations) windows;
@@ -14,6 +12,13 @@
  - Added instantKilled percentual to characters (aka: probability
    of get killed in a single strike);
  - Rewrote the dntParticleEditor to be more intuitive;
+
+BugFixes:
+ - Fixed the outdoor minimap scale ratio;
+ - Automatically don't render shadow for low height sceneries at floor;
+ - Fixed text renderer (was adding two times last character when 
+   checking current string size);
+
 
 ================================================
 |                Version 0.6                   |

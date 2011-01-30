@@ -299,7 +299,7 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
 
          /* Try to put character on the string */
          potLine += text[i];
-         if(getStringWidth(curLine + potLine + text[i], isUtf8) > maxWidth)
+         if(getStringWidth(curLine + potLine, isUtf8) > maxWidth)
          {
             /* Write the current thing  */
             renderedText = curLine;
@@ -548,7 +548,7 @@ string dntFont::getNextLine(string source, int& lastLinePos,
 
          /* Try to put character on the string */
          potLine += source[i];
-         if(getStringWidth(curLine + potLine + source[i], isUtf8) > maxWidth)
+         if(getStringWidth(curLine + potLine, isUtf8) > maxWidth)
          {
             /* Width overflow, got a line! */
             if(lastSpace >= 0)
