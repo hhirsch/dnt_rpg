@@ -112,19 +112,11 @@ src/map/mapfog.cpp
 #particle
 src/particle/grass.cpp
 src/particle/lake.cpp
-src/particle/meteor.cpp
-src/particle/part1.cpp
-src/particle/part2.cpp
-src/particle/part3.cpp
-src/particle/part4.cpp
-src/particle/part5.cpp
-src/particle/part6.cpp
-src/particle/part7.cpp
 src/particle/particle.cpp
 src/particle/partlist.cpp
 src/particle/partcontroller.cpp
-src/particle/wave.cpp
-src/particle/wind.cpp
+src/particle/partelement.cpp
+src/particle/partorigin.cpp
 
 
 #sound
@@ -294,6 +286,10 @@ data/models/objetos/itens/racao/racao.dcc
 data/models/objetos/itens/money/money.dcc
 data/models/objetos/geral/computador/computador.dcc
 data/models/objetos/geral/notebook/notebook.dcc
+
+#Vynils
+data/models/objetos/vinyls/clara_crocodilo.dcc
+data/models/objetos/vinyls/henry_cow_western_culture.dcc
 
 #Ammo
 data/models/objetos/ammo/9mm_pack/9mm_pack.dcc

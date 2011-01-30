@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2011-01-16 15:17-0200\n"
+"POT-Creation-Date: 2011-01-30 15:48-0200\n"
 "PO-Revision-Date: 2010-12-04 11:03+0000\n"
 "Last-Translator: zer berros <cerverros@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -68,15 +68,15 @@ msgstr "¡Impacto crítico!"
 msgid "Level"
 msgstr "Nivel"
 
-#: src/classes/defs.cpp:262 src/engine/charwindow.cpp:211
+#: src/classes/defs.cpp:262 src/engine/charwindow.cpp:208
 msgid "Fortitude"
 msgstr "Fortaleza"
 
-#: src/classes/defs.cpp:268 src/engine/charwindow.cpp:216
+#: src/classes/defs.cpp:268 src/engine/charwindow.cpp:213
 msgid "Reflexes"
 msgstr "Reflejos"
 
-#: src/classes/defs.cpp:275 src/engine/charwindow.cpp:221
+#: src/classes/defs.cpp:275 src/engine/charwindow.cpp:218
 msgid "I am Not a Fool"
 msgstr "No soy idiota"
 
@@ -84,7 +84,7 @@ msgstr "No soy idiota"
 msgid "Invalid Talent"
 msgstr "Talento inválido"
 
-#: src/classes/feats.cpp:234 src/engine/dccnit.cpp:2238
+#: src/classes/feats.cpp:234 src/engine/dccnit.cpp:2237
 msgid "Not enought points to use!"
 msgstr "¡No tienes suficientes puntos para usarlo!"
 
@@ -120,15 +120,15 @@ msgstr "Cancelar"
 msgid "Aspect"
 msgstr "Aspecto"
 
-#: src/engine/aspectwindow.cpp:67 src/engine/charwindow.cpp:107
+#: src/engine/aspectwindow.cpp:67 src/engine/charwindow.cpp:104
 msgid "Name:"
 msgstr "Nombre:"
 
-#: src/engine/aspectwindow.cpp:72 src/engine/charwindow.cpp:110
+#: src/engine/aspectwindow.cpp:72 src/engine/charwindow.cpp:107
 msgid "Age:"
 msgstr "Edad:"
 
-#: src/engine/aspectwindow.cpp:76 src/engine/charwindow.cpp:125
+#: src/engine/aspectwindow.cpp:76 src/engine/charwindow.cpp:122
 msgid "Sex:"
 msgstr "Sexo:"
 
@@ -148,32 +148,32 @@ msgstr "Limpiar"
 msgid "Auto"
 msgstr "Auto"
 
-#: src/engine/attwindow.cpp:90 src/engine/charwindow.cpp:168
+#: src/engine/attwindow.cpp:90 src/engine/charwindow.cpp:165
 #: data/skills/forca.ski:1
 msgid "Strength"
 msgstr "Fuerza"
 
-#: src/engine/attwindow.cpp:110 src/engine/charwindow.cpp:173
+#: src/engine/attwindow.cpp:110 src/engine/charwindow.cpp:170
 #: data/skills/destreza.ski:1
 msgid "Dexterity"
 msgstr "Destreza"
 
-#: src/engine/attwindow.cpp:130 src/engine/charwindow.cpp:178
+#: src/engine/attwindow.cpp:130 src/engine/charwindow.cpp:175
 #: data/skills/constituicao.ski:1
 msgid "Constitution"
 msgstr "Constitución"
 
-#: src/engine/attwindow.cpp:150 src/engine/charwindow.cpp:183
+#: src/engine/attwindow.cpp:150 src/engine/charwindow.cpp:180
 #: data/skills/inteligencia.ski:1
 msgid "Intelligence"
 msgstr "Inteligencia"
 
-#: src/engine/attwindow.cpp:171 src/engine/charwindow.cpp:188
+#: src/engine/attwindow.cpp:171 src/engine/charwindow.cpp:185
 #: data/skills/sabedoria.ski:1
 msgid "Wisdom"
 msgstr "Sabiduría"
 
-#: src/engine/attwindow.cpp:192 src/engine/charwindow.cpp:193
+#: src/engine/attwindow.cpp:192 src/engine/charwindow.cpp:190
 #: data/skills/carisma.ski:1
 msgid "Charisma"
 msgstr "Carisma"
@@ -182,8 +182,8 @@ msgstr "Carisma"
 msgid "Attribute Description"
 msgstr "Descripción de atributo"
 
-#: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:573
-#: src/engine/dccnit.cpp:2237 src/engine/featsel.cpp:468
+#: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:572
+#: src/engine/dccnit.cpp:2236 src/engine/featsel.cpp:468
 #: src/engine/inventwindow.cpp:364 src/engine/options.cpp:1386
 msgid "Warning"
 msgstr "Advertencia"
@@ -245,89 +245,89 @@ msgstr "Éxito"
 msgid "Failure"
 msgstr "Fallo"
 
-#: src/engine/charwindow.cpp:116
+#: src/engine/charwindow.cpp:113
 msgid "Female"
 msgstr "Mujer"
 
-#: src/engine/charwindow.cpp:119
+#: src/engine/charwindow.cpp:116
 msgid "Male"
 msgstr "Hombre"
 
-#: src/engine/charwindow.cpp:122
+#: src/engine/charwindow.cpp:119
 msgid "Undefined"
 msgstr "Indefinido"
 
-#: src/engine/charwindow.cpp:128
+#: src/engine/charwindow.cpp:125
 msgid "Race:"
 msgstr "Raza:"
 
-#: src/engine/charwindow.cpp:131
+#: src/engine/charwindow.cpp:128
 msgid "Alignment:"
 msgstr "Alineamiento:"
 
-#: src/engine/charwindow.cpp:135
+#: src/engine/charwindow.cpp:132
 msgid "XP"
 msgstr "Exp"
 
-#: src/engine/charwindow.cpp:136
+#: src/engine/charwindow.cpp:133
 msgid "Next Level"
 msgstr "Siguiente nivel"
 
-#: src/engine/charwindow.cpp:142
+#: src/engine/charwindow.cpp:139
 msgid "HP"
 msgstr "PV"
 
-#: src/engine/charwindow.cpp:145
+#: src/engine/charwindow.cpp:142
 msgid "AC"
 msgstr "CA"
 
-#: src/engine/charwindow.cpp:206
+#: src/engine/charwindow.cpp:203
 msgid "Total Level"
 msgstr "Nivel Total"
 
-#: src/engine/charwindow.cpp:226
+#: src/engine/charwindow.cpp:223
 msgid "Base Attack Modifier"
 msgstr "Modificador de ataque base"
 
-#: src/engine/charwindow.cpp:231
+#: src/engine/charwindow.cpp:228
 msgid "Size Modifier"
 msgstr "Modificador de tamaño"
 
-#: src/engine/charwindow.cpp:259
+#: src/engine/charwindow.cpp:256
 msgid "Level Up"
 msgstr "Subir nivel"
 
-#: src/engine/charwindow.cpp:265 src/engine/featsel.cpp:165
+#: src/engine/charwindow.cpp:262 src/engine/featsel.cpp:165
 #: src/engine/featswindow.cpp:73
 msgid "Talents"
 msgstr "Dotes"
 
-#: src/engine/charwindow.cpp:269 src/engine/skillwindow.cpp:74
+#: src/engine/charwindow.cpp:266 src/engine/skillwindow.cpp:74
 msgid "Skills"
 msgstr "Habilidades"
 
-#: src/engine/charwindow.cpp:273 src/engine/featswindow.cpp:93
+#: src/engine/charwindow.cpp:270 src/engine/featswindow.cpp:93
 #: src/engine/skillwindow.cpp:169 src/gui/window.cpp:169
 msgid "Close"
 msgstr "Cerrar"
 
-#: src/engine/charwindow.cpp:443
+#: src/engine/charwindow.cpp:440
 msgid "Main Weapon"
 msgstr "Arma principal"
 
-#: src/engine/charwindow.cpp:447
+#: src/engine/charwindow.cpp:444
 msgid "Secondary Weapon"
 msgstr "Arma secundaria"
 
-#: src/engine/charwindow.cpp:451
+#: src/engine/charwindow.cpp:448
 msgid "Weapon"
 msgstr "Arma"
 
-#: src/engine/charwindow.cpp:463
+#: src/engine/charwindow.cpp:460
 msgid "Unarmed"
 msgstr "Desarmado"
 
-#: src/engine/charwindow.cpp:469
+#: src/engine/charwindow.cpp:466
 msgid "Not Applicable"
 msgstr "No aplicable"
 
@@ -384,65 +384,65 @@ msgstr "Habilidades de clase"
 msgid "No Skills."
 msgstr "Sin habilidades"
 
-#: src/engine/dccnit.cpp:513 src/engine/dccnit.cpp:564
+#: src/engine/dccnit.cpp:512 src/engine/dccnit.cpp:563
 msgid "Error"
 msgstr "Error"
 
-#: src/engine/dccnit.cpp:513
+#: src/engine/dccnit.cpp:512
 msgid "Can't load the saved game!"
 msgstr "No se puede cargar el juego guardado!"
 
-#: src/engine/dccnit.cpp:559
+#: src/engine/dccnit.cpp:558
 msgid "Information"
 msgstr "Información"
 
-#: src/engine/dccnit.cpp:560
+#: src/engine/dccnit.cpp:559
 msgid "The game was saved!"
 msgstr "El juego ha sido guardado!"
 
-#: src/engine/dccnit.cpp:564
+#: src/engine/dccnit.cpp:563
 msgid "Can't save game!"
 msgstr "No se puede guardar el juego!"
 
-#: src/engine/dccnit.cpp:574
+#: src/engine/dccnit.cpp:573
 msgid "Can't save game while fighting!"
 msgstr "¡No puedes salvar el juego mientras estás luchando!"
 
-#: src/engine/dccnit.cpp:708
+#: src/engine/dccnit.cpp:707
 msgid "Saving Current Map Modifications"
 msgstr "Salvando modificaciones del mapa actual"
 
-#: src/engine/dccnit.cpp:743
+#: src/engine/dccnit.cpp:742
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Cargando mapa: %s..."
 
-#: src/engine/dccnit.cpp:808
+#: src/engine/dccnit.cpp:807
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Cargando PNJ: %s..."
 
-#: src/engine/dccnit.cpp:847
+#: src/engine/dccnit.cpp:846
 msgid "Creating MiniMap"
 msgstr "Creando minimapa..."
 
-#: src/engine/dccnit.cpp:853
+#: src/engine/dccnit.cpp:852
 msgid "Putting GUI on Screen"
 msgstr "Colocando GUI en pantalla..."
 
-#: src/engine/dccnit.cpp:901
+#: src/engine/dccnit.cpp:900
 msgid "Loading Particles"
 msgstr "Cargando partículas..."
 
-#: src/engine/dccnit.cpp:931
+#: src/engine/dccnit.cpp:930
 msgid "Loading Changes..."
 msgstr "Cargando cambios..."
 
-#: src/engine/dccnit.cpp:959
+#: src/engine/dccnit.cpp:958
 msgid "Done!"
 msgstr "¡Hecho!"
 
-#: src/engine/dccnit.cpp:1171
+#: src/engine/dccnit.cpp:1170
 msgid ""
 "DccNiTghtmare is relesead under GPLv3 or later: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -454,57 +454,57 @@ msgstr ""
 "está agradecido de toda la gente relacionada en el desarrollo de estas "
 "librerías: OpenAL, Cal3D, OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 
-#: src/engine/dccnit.cpp:1758
+#: src/engine/dccnit.cpp:1757
 msgid "Too far away for the action!"
 msgstr "¡Demasiado lejos para la acción!"
 
-#: src/engine/dccnit.cpp:1775
+#: src/engine/dccnit.cpp:1774
 msgid "Couldn't rest at battle mode."
 msgstr "No puedes descansar en modo batalla"
 
-#: src/engine/dccnit.cpp:1781
+#: src/engine/dccnit.cpp:1780
 msgid "Enemies nearby."
 msgstr "Enemigos cerca"
 
-#: src/engine/dccnit.cpp:1885
+#: src/engine/dccnit.cpp:1884
 msgid "No NPCs in the area."
 msgstr "No hay PNJ's en el área"
 
-#: src/engine/dccnit.cpp:1943
+#: src/engine/dccnit.cpp:1942
 msgid "Surprise Attack Turn."
 msgstr "Turno de ataque por sorpresa"
 
-#: src/engine/dccnit.cpp:1956
+#: src/engine/dccnit.cpp:1955
 msgid "No enemies in the area."
 msgstr "No hay enemigos en el área"
 
-#: src/engine/dccnit.cpp:2430
+#: src/engine/dccnit.cpp:2429
 #, c-format
 msgid "%s taken."
 msgstr "Recogido %s"
 
-#: src/engine/dccnit.cpp:2447
+#: src/engine/dccnit.cpp:2446
 msgid "Inventory is full!"
 msgstr "¡Inventario lleno!"
 
-#: src/engine/dccnit.cpp:2480
+#: src/engine/dccnit.cpp:2479
 msgid "Door"
 msgstr "Puerta"
 
-#: src/engine/dccnit.cpp:2582
+#: src/engine/dccnit.cpp:2581
 msgid "dead"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2632
+#: src/engine/dccnit.cpp:2631
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s ataca a %s"
 
-#: src/engine/dccnit.cpp:2801
+#: src/engine/dccnit.cpp:2800
 msgid "No more actions. Turn ended."
 msgstr "Sin acciones. Turno finalizado."
 
-#: src/engine/dccnit.cpp:4332
+#: src/engine/dccnit.cpp:4244
 msgid "Exit Battle Mode"
 msgstr "Salir del modo de batalla"
 
@@ -640,57 +640,57 @@ msgstr "Ninguna arma del equipamiento es compatible con este tipo de munición."
 msgid "Name: %s"
 msgstr "Nombre: %s"
 
-#: src/engine/itemwindow.cpp:83
+#: src/engine/itemwindow.cpp:91
 #, c-format
 msgid "Cost: %.2f"
 msgstr "Precio: %.2f"
 
-#: src/engine/itemwindow.cpp:88
+#: src/engine/itemwindow.cpp:96
 #, c-format
 msgid "Weight: %.2f Kg"
 msgstr "Peso: %.2f Kg"
 
-#: src/engine/itemwindow.cpp:103
+#: src/engine/itemwindow.cpp:111
 msgid "Heal Factor: "
 msgstr "Factor de cura: "
 
-#: src/engine/itemwindow.cpp:113
+#: src/engine/itemwindow.cpp:121
 msgid "Aditional Factor: "
 msgstr "Factor adicional: "
 
-#: src/engine/itemwindow.cpp:135
+#: src/engine/itemwindow.cpp:143
 msgid "Category: "
 msgstr "Categoría: "
 
-#: src/engine/itemwindow.cpp:141
+#: src/engine/itemwindow.cpp:149
 msgid "Damage Dice: "
 msgstr "Dado de daño: "
 
-#: src/engine/itemwindow.cpp:149
+#: src/engine/itemwindow.cpp:157
 msgid "Primary Damage: "
 msgstr "Daño primario: "
 
-#: src/engine/itemwindow.cpp:156
+#: src/engine/itemwindow.cpp:164
 msgid "Secondary Damage: "
 msgstr "Daño secundario: "
 
-#: src/engine/itemwindow.cpp:168
+#: src/engine/itemwindow.cpp:176
 msgid "Range: "
 msgstr "Alcance: "
 
-#: src/engine/itemwindow.cpp:173
+#: src/engine/itemwindow.cpp:181
 msgid "Size: "
 msgstr "Tamaño: "
 
-#: src/engine/itemwindow.cpp:186 src/engine/itemwindow.cpp:213
+#: src/engine/itemwindow.cpp:194 src/engine/itemwindow.cpp:221
 msgid "Ammo Type:"
 msgstr "Tipo de munición:"
 
-#: src/engine/itemwindow.cpp:192 src/engine/itemwindow.cpp:219
+#: src/engine/itemwindow.cpp:200 src/engine/itemwindow.cpp:227
 msgid "Quantity:"
 msgstr "Cantidad:"
 
-#: src/engine/itemwindow.cpp:238
+#: src/engine/itemwindow.cpp:246
 msgid "Ok"
 msgstr "Ok"
 
@@ -4830,9 +4830,20 @@ msgstr "Consigue algunas raciones psycodélicas de la I.S.L. hippie."
 msgid "Install Ruindows at the hippie's computer."
 msgstr "Instala Ruindown en el ordenador del hippie."
 
+#: data/models/objetos/books/combat_tutorial/combat_tutorial.dcc:2
+msgid ""
+"Like teaching the priest to pray the mass, this book will teach you how to "
+"fight."
+msgstr ""
+
 #: data/models/objetos/books/mjack/mjack.dcc:1
 msgid "Monster Book Fragment"
 msgstr "Fragmento del Libro de Mounstruos."
+
+#: data/models/objetos/books/mjack/mjack.dcc:2
+msgid ""
+"A fragment of the monster book describing a black and white thriller monster."
+msgstr ""
 
 #: data/models/natural/cogumelo/cogumelo.dcc:1
 msgid "Mushroom"
@@ -4873,6 +4884,16 @@ msgstr "Ordenador"
 #: data/models/objetos/geral/notebook/notebook.dcc:1
 msgid "Notebook"
 msgstr "Portátil"
+
+#: data/models/objetos/vinyls/clara_crocodilo.dcc:2
+msgid ""
+"A classical brazilian vynil with dodecaphonic music that could also be "
+"usefull to empty rooms."
+msgstr ""
+
+#: data/models/objetos/vinyls/henry_cow_western_culture.dcc:2
+msgid "Last Henry Cow's album. Let's see if you can listen it."
+msgstr ""
 
 #: data/models/objetos/ammo/9mm_pack/9mm_pack.dcc:1
 msgid "9mm Ammo Pack"

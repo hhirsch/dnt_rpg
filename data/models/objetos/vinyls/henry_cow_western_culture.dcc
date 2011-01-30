@@ -1,4 +1,5 @@
 name = Henry Cow - Western Culture Vinyl
+description = gettext("Last Henry Cow's album. Let's see if you can listen it.")
 cal3d = models/objetos/vinyls/henry_cow_western_culture.cfg
 inventory_sizes = 2 2
 inventory_texture = models/objetos/vinyls/henry_cow_western_culture_inv.png
