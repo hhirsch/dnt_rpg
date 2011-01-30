@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -58,13 +58,13 @@ void itemWindow::open(object* item)
    if(isOpen())
    {
       centerX = intWindow->getX1()+128;
-      centerY = intWindow->getY1()+118;
+      centerY = intWindow->getY1()+144;
       close();
    }
 
    /* Create Window */
-   intWindow = inter->insertWindow(centerX-128,centerY-118,
-                                   centerX+128,centerY+118,
+   intWindow = inter->insertWindow(centerX-128,centerY-144,
+                                   centerX+128,centerY+144,
                                    item->getName());
 
    /***********************
@@ -78,6 +78,14 @@ void itemWindow::open(object* item)
    sprintf(buf,gettext("Name: %s"), item->getName().c_str());
    intWindow->getObjectsList()->insertTextBox(70,curY,250,curY+17,0,buf);
    curY += 18;
+
+   /* Description */
+   if(!item->getDescription().empty())
+   {
+      intWindow->getObjectsList()->insertRolBar(70, curY, 250, curY+51, 
+         item->getDescription());
+      curY += 52;
+   }
 
    /* Cost */
    sprintf(buf,gettext("Cost: %.2f"), item->cost);
@@ -234,11 +242,11 @@ void itemWindow::open(object* item)
    intWindow->getObjectsList()->insertTextBox(5,15,69,curY-1,1,"");
 
    /* Ok Button */
-   okButton = intWindow->getObjectsList()->insertButton(88,208,158,227,
+   okButton = intWindow->getObjectsList()->insertButton(88,260,158,279,
                                                         gettext("Ok"),1);
 
    /* Remaining Contorn */
-   intWindow->getObjectsList()->insertTextBox(5,curY,250,231,1,"");
+   intWindow->getObjectsList()->insertTextBox(5,curY,250,281,1,"");
    
 
    /* Open Window */

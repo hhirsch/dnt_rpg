@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -122,6 +122,10 @@ object::object(string path, string curMap): thing()
       if(key == "name")
       {
          name = translateDataString(value);
+      }
+      else if(key == "description")
+      {
+         description = translateDataString(value);
       }
       else if(key == "dialog")
       {
@@ -323,6 +327,7 @@ void object::cleanValues()
    eqTrans2[1] = 0.0f;
    eqTrans2[2] = 0.0f;
    name = "";
+   description = "";
    fileName = "";
    relatedInfo = "";
    model2dName = "";
@@ -540,6 +545,15 @@ string object::getFileName()
 {
    return(fileName);
 }
+
+/**************************************************************
+ *                      getDescription                        *
+ **************************************************************/
+string object::getDescription()
+{
+   return(description);
+}
+
 
 /**************************************************************
  *                        getRelatedInfo                      *

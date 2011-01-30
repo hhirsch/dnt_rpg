@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -101,6 +101,10 @@ class object: public thing
       /*! Gets the fileName of the model
        * \return -> the fileName of the model*/
       string getFileName();
+
+      /*! Get the object's description
+       * \return string with description */
+      string getDescription();
 
       /*! Gets the Inventory size of the Model
        * \param x -> x inventory size
@@ -220,6 +224,7 @@ class object: public thing
 
       string fileName;      /**< FileName of the Object */
       string model2dName;   /**< FileName of the 2D Model */
+      string description;   /**< Description of the object */
       string relatedInfo;   /**< Some related fileName 
                                  (comic book file, for example) */
 
