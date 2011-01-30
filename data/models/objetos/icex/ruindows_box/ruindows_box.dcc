@@ -1,4 +1,5 @@
-name = Ruindows 
+name = gettext("Ruindows")
+descriptions = gettext("The last released Ruindows DVD. You feel like carrying a bomb.")
 cal3d = models/objetos/icex/ruindows_box/model.cfg
 inventory_sizes = 2 2
 inventory_texture = models/objetos/icex/ruindows_box/texture_inv.png

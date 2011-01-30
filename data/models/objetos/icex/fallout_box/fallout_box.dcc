@@ -1,4 +1,5 @@
-name = Fallout2
+name = Fallout 2
+description = gettext("Surely one of the best games you've ever played in your childhood.")
 cal3d = models/objetos/icex/fallout_box/model.cfg
 inventory_sizes = 2 2
 inventory_texture = models/objetos/icex/fallout_box/texture_inv.png

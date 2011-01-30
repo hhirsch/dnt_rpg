@@ -1,4 +1,5 @@
 name = Snes Rock'n'Roll Racing
+description = gettext("Let the carnage begin!")
 cal3d = models/objetos/icex/snes/rrr/model.cfg
 inventory_sizes = 1 1
 inventory_texture = models/objetos/icex/snes/rrr/snes_rrr_inv.png

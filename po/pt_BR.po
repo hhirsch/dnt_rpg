@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2011-01-30 16:11-0200\n"
+"POT-Creation-Date: 2011-01-30 16:39-0200\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -4949,6 +4949,65 @@ msgstr ""
 #: data/models/objetos/vinyls/henry_cow_western_culture.dcc:2
 msgid "Last Henry Cow's album. Let's see if you can listen it."
 msgstr "O último álbum da banda Henry Cow. Vejamos se consegue escutá-lo."
+
+#: data/models/objetos/icex/snes/chrono/snes_chrono.dcc:2
+msgid "The best snes RPG whose name begins with 'Chro'."
+msgstr "O melhor RPG de Super Nintendo cujo nome comeja com 'Chro'"
+
+#: data/models/objetos/icex/snes/contra/snes_contra.dcc:2
+msgid "You surely can't stay alive for more than 3 hours on this game."
+msgstr "Você com certeza não fica mais de 3 horas vivo neste jogo."
+
+#: data/models/objetos/icex/snes/dk/snes_dk.dcc:2
+msgid ""
+"A game about monkeys jumping around and playing music. You'll love that."
+msgstr ""
+"Um jogo sobre macacos pulando por aí e tocando música. Você vai adorar."
+
+#: data/models/objetos/icex/snes/mario/snes_mario.dcc:2
+msgid "The italian plumber strikes back, this time with a dino!"
+msgstr "O encanador italiano ataca novamente, desta vez com um dinossauro!"
+
+#: data/models/objetos/icex/snes/mariokart/snes_mariokart.dcc:2
+msgid ""
+"Karts, races and funny characters. Probably an acient clone of SuperTuxKart."
+msgstr ""
+"Karts, corridas e personagens bonitinhos. Provavelmente um clone antigo de "
+"SuperTuxKart."
+
+#: data/models/objetos/icex/snes/rrr/snes_rrr.dcc:2
+msgid "Let the carnage begin!"
+msgstr "Let the carnage begin!"
+
+#: data/models/objetos/icex/snes/sf2/snes_sf2.dcc:2
+msgid "You remember playing it on a dirty bar at the beach."
+msgstr ""
+"Você se lembra de jogar este jogo em um fliperama num bar copo-sujo da praia."
+
+#: data/models/objetos/icex/snes/starfox/snes_starfox.dcc:2
+msgid "A fox that thinks he's Tom Hanks on Apolo 13."
+msgstr "Uma raposa que pensa ser Tom Hanks na Apolo 13."
+
+#: data/models/objetos/icex/snes/topgear/snes_topgear.dcc:2
+msgid "Use your nitros, but beware of your fuel."
+msgstr "Utilize seus nitros, mas atenção ao combustível."
+
+#: data/models/objetos/icex/snes/zelda/snes_zelda.dcc:2
+msgid "No, the playable character in the game isn't called Zelda."
+msgstr "Não, o herói deste jogo não se chama Zelda."
+
+#: data/models/objetos/icex/ruindows_box/ruindows_box.dcc:1
+msgid "Ruindows"
+msgstr "Ruindows"
+
+#: data/models/objetos/icex/ruindows_box/ruindows_box.dcc:2
+msgid "The last released Ruindows DVD. You feel like carrying a bomb."
+msgstr ""
+"O DVD do último Ruindows lançado. Você se sente como carregando uma bomba."
+
+#: data/models/objetos/icex/fallout_box/fallout_box.dcc:2
+msgid "Surely one of the best games you've ever played in your childhood."
+msgstr "Certamente um dos melhores jogos que você jogou na sua infância."
 
 #: data/models/objetos/ammo/9mm_pack/9mm_pack.dcc:1
 msgid "9mm Ammo Pack"

@@ -1,4 +1,5 @@
 name = Snes Super Mario Kart
+description = gettext("Karts, races and funny characters. Probably an acient clone of SuperTuxKart.")
 cal3d = models/objetos/icex/snes/mariokart/model.cfg
 inventory_sizes = 1 1
 inventory_texture = models/objetos/icex/snes/mariokart/snes_mariokart_inv.png

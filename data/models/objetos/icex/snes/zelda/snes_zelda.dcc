@@ -1,4 +1,5 @@
 name = Snes Zelda
+description = gettext("No, the playable character in the game isn't called Zelda.")
 cal3d = models/objetos/icex/snes/zelda/model.cfg
 inventory_sizes = 1 1
 inventory_texture = models/objetos/icex/snes/zelda/snes_zelda_inv.png

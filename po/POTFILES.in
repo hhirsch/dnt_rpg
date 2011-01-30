@@ -291,6 +291,23 @@ data/models/objetos/geral/notebook/notebook.dcc
 data/models/objetos/vinyls/clara_crocodilo.dcc
 data/models/objetos/vinyls/henry_cow_western_culture.dcc
 
+# Snes 
+data/models/objetos/icex/snes/chrono/snes_chrono.dcc
+data/models/objetos/icex/snes/contra/snes_contra.dcc
+data/models/objetos/icex/snes/dk/snes_dk.dcc
+data/models/objetos/icex/snes/mario/snes_mario.dcc
+data/models/objetos/icex/snes/mariokart/snes_mariokart.dcc
+data/models/objetos/icex/snes/rrr/snes_rrr.dcc
+data/models/objetos/icex/snes/sf2/snes_sf2.dcc
+data/models/objetos/icex/snes/starfox/snes_starfox.dcc
+data/models/objetos/icex/snes/topgear/snes_topgear.dcc
+data/models/objetos/icex/snes/zelda/snes_zelda.dcc
+
+# Softwares
+data/models/objetos/icex/ruindows_box/ruindows_box.dcc
+data/models/objetos/icex/fallout_box/fallout_box.dcc
+
+
 #Ammo
 data/models/objetos/ammo/9mm_pack/9mm_pack.dcc
 
