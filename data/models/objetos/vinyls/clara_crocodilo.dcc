@@ -1,4 +1,5 @@
 name = Arrigo Barnabé - Clara Crocodilo
+description = gettext("A classical brazilian vynil with dodecaphonic music that could also be usefull to empty rooms.") 
 cal3d = models/objetos/vinyls/clara_crocodilo.cfg
 inventory_sizes = 2 2
 inventory_texture = models/objetos/vinyls/clara_crocodilo_inv.png

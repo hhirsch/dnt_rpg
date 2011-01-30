@@ -1,4 +1,5 @@
 name = gettext("Monster Book Fragment")
+description = gettext("A fragment of the monster book describing a black and white thriller monster.")
 cal3d = models/objetos/books/mjack/model.cfg
 related_info = comics/other/mjack/mjack.dcb
 type = book

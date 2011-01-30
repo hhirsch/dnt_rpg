@@ -1,4 +1,5 @@
 name = gettext("The Combat Book")
+description = gettext("Like teaching the priest to pray the mass, this book will teach you how to fight.")
 cal3d = models/objetos/books/combat_tutorial/model.cfg
 related_info = comics/tutorial/combat/combat.dcb
 type = book
