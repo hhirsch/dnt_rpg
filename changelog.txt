@@ -12,6 +12,7 @@
  - Added instantKilled percentual to characters (aka: probability
    of get killed in a single strike);
  - Rewrote the dntParticleEditor to be more intuitive;
+ - New main GUI layout;
 
 BugFixes:
  - Fixed the outdoor minimap scale ratio;
