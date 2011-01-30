@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2011-01-30 16:39-0200\n"
+"POT-Creation-Date: 2011-01-30 17:54-0200\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -5013,6 +5013,12 @@ msgstr "Certamente um dos melhores jogos que você jogou na sua infância."
 msgid "9mm Ammo Pack"
 msgstr "Caixa de Munição 9mm"
 
+#: data/models/objetos/ammo/9mm_pack/9mm_pack.dcc:2
+msgid "You can use this ammo at 9mm guns or to make your way to jail."
+msgstr ""
+"Você pode utilizar essa munição em armas de 9mm ou para fazer seu caminhgo à "
+"cadeia."
+
 #: data/weapons/definitions/axe.wcc:1
 msgid "Great Axe"
 msgstr "Alabarda"
@@ -5038,9 +5044,17 @@ msgstr "Katana"
 msgid "Knife"
 msgstr "Faca"
 
+#: data/weapons/definitions/knife.wcc:2
+msgid "A kitchen knife, usefull to cut flesh."
+msgstr "Uma faca de cozinha, útil para cortar carne."
+
 #: data/weapons/definitions/scimitar.wcc:1
 msgid "Scimitar"
 msgstr "Cimitarra"
+
+#: data/weapons/definitions/scimitar.wcc:2
+msgid "A scimitar that Cambises would be proud of."
+msgstr "Uma cimitarra que deixaria Cambises orgulhoso."
 
 #: data/weapons/definitions/sw39.wcc:1
 msgid "S&W 39"
@@ -5049,6 +5063,10 @@ msgstr "S&W 39"
 #: data/weapons/definitions/uzi.wcc:1
 msgid "Uzi"
 msgstr "Uzi"
+
+#: data/weapons/definitions/uzi.wcc:2
+msgid "Your Warmux favorite weapon."
+msgstr "Sua arma favorita em Warmux."
 
 #: data/weapons/types/categories.dcl:2
 msgid "Martial"

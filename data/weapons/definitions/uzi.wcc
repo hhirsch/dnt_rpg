@@ -1,4 +1,5 @@
 name = gettext("Uzi")
+description = gettext("Your Warmux favorite weapon.")
 cal3d = models/objetos/armas/uzi/model.cfg
 inventory_sizes = 2 2
 inventory_texture = models/objetos/armas/uzi/uzi_inv.png

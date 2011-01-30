@@ -1,4 +1,5 @@
 name = gettext("Scimitar")
+description = gettext("A scimitar that Cambises would be proud of.")
 cal3d = models/objetos/armas/scimitar/model.cfg
 inventory_sizes = 2 4
 inventory_texture = models/objetos/armas/scimitar/scimitar_inv.png

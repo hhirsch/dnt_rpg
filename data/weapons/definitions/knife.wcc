@@ -1,4 +1,5 @@
 name = gettext("Knife")
+description = gettext("A kitchen knife, usefull to cut flesh.")
 cal3d = models/objetos/armas/faca/model.cfg
 inventory_sizes = 1 2
 inventory_texture = models/objetos/armas/faca/faca_inv.png

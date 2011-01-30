@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2011-01-30 16:39-0200\n"
+"POT-Creation-Date: 2011-01-30 17:54-0200\n"
 "PO-Revision-Date: 2010-12-04 11:03+0000\n"
 "Last-Translator: zer berros <cerverros@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -4983,6 +4983,10 @@ msgstr ""
 msgid "9mm Ammo Pack"
 msgstr "Munición de 9mm."
 
+#: data/models/objetos/ammo/9mm_pack/9mm_pack.dcc:2
+msgid "You can use this ammo at 9mm guns or to make your way to jail."
+msgstr ""
+
 #: data/weapons/definitions/axe.wcc:1
 msgid "Great Axe"
 msgstr "Gran hacha."
@@ -5008,9 +5012,17 @@ msgstr "Katana"
 msgid "Knife"
 msgstr "cuchillo"
 
+#: data/weapons/definitions/knife.wcc:2
+msgid "A kitchen knife, usefull to cut flesh."
+msgstr ""
+
 #: data/weapons/definitions/scimitar.wcc:1
 msgid "Scimitar"
 msgstr "Cimitarra"
+
+#: data/weapons/definitions/scimitar.wcc:2
+msgid "A scimitar that Cambises would be proud of."
+msgstr ""
 
 #: data/weapons/definitions/sw39.wcc:1
 msgid "S&W 39"
@@ -5019,6 +5031,10 @@ msgstr "S&W 39"
 #: data/weapons/definitions/uzi.wcc:1
 msgid "Uzi"
 msgstr "Uzi"
+
+#: data/weapons/definitions/uzi.wcc:2
+msgid "Your Warmux favorite weapon."
+msgstr ""
 
 #: data/weapons/types/categories.dcl:2
 msgid "Martial"
