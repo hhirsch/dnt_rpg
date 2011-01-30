@@ -137,6 +137,7 @@ void partAux::deleteBuffers()
 void partAux::reset()
 {
    deleteBuffers();
+   actualParticles = 0;
    init();
 }
  
