@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -566,24 +566,15 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          {
             /* Particles */
             case STATE_FIRE:
+            case STATE_SMOKE:
+            case STATE_SNOW:
+            case STATE_WATERFALL:
                state = GUI_IO_STATE_PARTICLES;
-               tool = TOOL_PARTICLE_FIRE;
+               tool = TOOL_PARTICLE_DEFAULT;
             break;
             case STATE_GRASS:
                state = GUI_IO_STATE_PARTICLES;
                tool = TOOL_PARTICLE_GRASS;
-            break;
-            case STATE_SMOKE:
-               state = GUI_IO_STATE_PARTICLES;
-               tool = TOOL_PARTICLE_SMOKE;
-            break;
-            case STATE_SNOW:
-               state = GUI_IO_STATE_PARTICLES;
-               tool = TOOL_PARTICLE_SNOW;
-            break;
-            case STATE_WATERFALL:
-               state = GUI_IO_STATE_PARTICLES;
-               tool = TOOL_PARTICLE_WATERFALL;
             break;
 
             /* Doors */

@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -55,12 +55,9 @@ using namespace std;
 
 #define TOOL_OBSTACLE_ADD           141
 
-#define TOOL_PARTICLE_FIRE          151
-#define TOOL_PARTICLE_SMOKE         152
-#define TOOL_PARTICLE_WATERFALL     153
-#define TOOL_PARTICLE_LAKE          154
-#define TOOL_PARTICLE_SNOW          155
-#define TOOL_PARTICLE_GRASS         156
+#define TOOL_PARTICLE_DEFAULT       151
+#define TOOL_PARTICLE_LAKE          152
+#define TOOL_PARTICLE_GRASS         133
 
 #define TOOL_NPC_ADD                161
 

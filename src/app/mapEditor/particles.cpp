@@ -204,13 +204,10 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       }
    }
 
-   /* fire TOOL */
-   else if( ( (tool == TOOL_PARTICLE_FIRE) ||
-              (tool == TOOL_PARTICLE_SMOKE) ||
-              (tool == TOOL_PARTICLE_SNOW) ) &&
-              (!actualParticle) )
+   /* default particle TOOL */
+   else if( (tool == TOOL_PARTICLE_DEFAULT) && (!actualParticle) )
    {
-      state = TOOL_PARTICLE_FIRE; 
+      state = TOOL_PARTICLE_DEFAULT; 
       particleType = DNT_PARTICLE_SYSTEM_TYPE_DEFAULT;
       string fileToOpen = selectedText;
       if(fileToOpen != "../data/particles/")
@@ -277,20 +274,19 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       {
          if( (tool != TOOL_PARTICLE_GRASS) && (tool != TOOL_PARTICLE_LAKE))
          {
-#if 0         
-            particleSystem* p = pS->addParticle(particleType, 
-                                                mouseX, height, mouseZ,
-                                                actualParticle->getFileName());
 
+            pS->addParticle(mouseX, height, mouseZ,
+                            actualParticle->getFileName());
+
+#if 0         
             /* Set the waterfall window */
             if(tool == TOOL_PARTICLE_WATERFALL)
             {
                wtWindow->setWater(p);
             }
-            deleteParticle();
 #endif
+            deleteParticle();
             gui->setTool(TOOL_NONE);
-            actualParticle = NULL;
          }
          while(mButton & SDL_BUTTON(1))
          {
