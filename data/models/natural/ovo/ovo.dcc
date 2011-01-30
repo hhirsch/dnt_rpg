@@ -1,4 +1,5 @@
 name = gettext("Egg")
+description = gettext("A potential new chicken. Be carefull.")
 cal3d = models/natural/ovo/model.cfg
 base_dice = 4*d4+2
 inventory_sizes = 1 1

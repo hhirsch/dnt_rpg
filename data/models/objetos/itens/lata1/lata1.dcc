@@ -1,4 +1,5 @@
 name = gettext("Soda Can")
+description = gettext("A soda can, refresh yourself with lot of suggar.")
 cal3d = models/objetos/itens/lata1/model.cfg
 base_dice = 1*d3+2
 inventory_sizes = 1 1

@@ -1,4 +1,5 @@
 name = gettext("First Aid Kit")
+description = gettext("A heal kit functions exactly the opposite way of an opponent's attack.")
 cal3d = models/objetos/itens/healkit/model.cfg
 type = heal
 base_dice = 1*d5+0

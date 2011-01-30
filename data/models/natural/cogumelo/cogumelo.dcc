@@ -1,4 +1,5 @@
 name = gettext("Mushroom")
+description = gettext("A mushroom. Better won't eat it alone.")
 cal3d = models/natural/cogumelo/model.cfg
 type = narcotic
 base_dice = 4*d4+2

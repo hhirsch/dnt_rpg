@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2011-01-30 15:48-0200\n"
+"POT-Creation-Date: 2011-01-30 16:11-0200\n"
 "PO-Revision-Date: 2010-12-04 11:03+0000\n"
 "Last-Translator: zer berros <cerverros@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -4849,29 +4849,59 @@ msgstr ""
 msgid "Mushroom"
 msgstr "Seta"
 
+#: data/models/natural/cogumelo/cogumelo.dcc:2
+msgid "A mushroom. Better won't eat it alone."
+msgstr ""
+
 #: data/models/natural/ovo/ovo.dcc:1
 msgid "Egg"
 msgstr "Huevo."
+
+#: data/models/natural/ovo/ovo.dcc:2
+msgid "A potential new chicken. Be carefull."
+msgstr ""
 
 #: data/models/objetos/itens/healkit/healkit.dcc:1
 msgid "First Aid Kit"
 msgstr "Botiquín de primeros auxilios."
 
+#: data/models/objetos/itens/healkit/healkit.dcc:2
+msgid "A heal kit functions exactly the opposite way of an opponent's attack."
+msgstr ""
+
 #: data/models/objetos/itens/garrafa1/garrafa1.dcc:1
 msgid "Beer Bottle"
 msgstr "Birra"
+
+#: data/models/objetos/itens/garrafa1/garrafa1.dcc:2
+msgid "A beer bottle. Better use cold to deceive the warm climate."
+msgstr ""
 
 #: data/models/objetos/itens/lata1/lata1.dcc:1
 msgid "Soda Can"
 msgstr "Lata de refresco."
 
+#: data/models/objetos/itens/lata1/lata1.dcc:2
+msgid "A soda can, refresh yourself with lot of suggar."
+msgstr ""
+
 #: data/models/objetos/itens/lata1/logan_lata1.dcc:1
 msgid "Logan's Soda Can"
 msgstr "Refresco de Logan."
 
+#: data/models/objetos/itens/lata1/logan_lata1.dcc:2
+msgid ""
+"A soda can Logan gave you. Unfortunally, you can't see differences between "
+"this and a common one."
+msgstr ""
+
 #: data/models/objetos/itens/racao/racao.dcc:1
 msgid "Chicken Ration"
 msgstr "Ración de pollo."
+
+#: data/models/objetos/itens/racao/racao.dcc:2
+msgid "A packet of delicious chicken ration. Smells like corn."
+msgstr ""
 
 #: data/models/objetos/itens/money/money.dcc:1
 msgid "Money"

@@ -1,4 +1,5 @@
 name = gettext("Beer Bottle")
+description = gettext("A beer bottle. Better use cold to deceive the warm climate.")
 cal3d = models/objetos/itens/garrafa1/model.cfg
 type = narcotic
 base_dice = 1*d3+0
