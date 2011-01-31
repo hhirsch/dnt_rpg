@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -38,7 +38,6 @@
 #include "../gui/farso.h"
 #include "../map/map.h"
 #include "../particle/partcontroller.h"
-#include "../particle/wave.h"
 #include "../sound/sound.h"
 #include "../ia/iascript.h"
 #include "../etc/shader.h"
