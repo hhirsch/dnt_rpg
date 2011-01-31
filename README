@@ -54,8 +54,6 @@ go to the directory dccnitghtmare, run ./configure , run
    To  compile  dccnitghtmare  on  windows,  you'll  need  the 
 dev-c++  compiler  (a.k.a. gcc port and ide to Windows).  Open
 the project DccNiTghtmare.dev on it and compile.
-   Also, you can compile at the Visual  C++  thing,  just open
-the workspace DccNiTghtmare.dsw at it and compile.
    Don't blame us. Blame Microsoft!
 
 ==============================================================
