@@ -288,6 +288,7 @@ data/models/objetos/geral/computador/computador.dcc
 data/models/objetos/geral/notebook/notebook.dcc
 
 #Vynils
+data/models/objetos/vinyls/banco_darwin.dcc
 data/models/objetos/vinyls/clara_crocodilo.dcc
 data/models/objetos/vinyls/henry_cow_western_culture.dcc
 data/models/objetos/vinyls/zappa_apostrophe.dcc

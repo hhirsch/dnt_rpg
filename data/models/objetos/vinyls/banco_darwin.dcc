@@ -1,0 +1,14 @@
+name = Banco del Mutuo Soccorso - Darwin
+description = gettext("The Darwin's Evolution Theory recorded in a LP with mellotrons and dramatic vocals. It's near impossible to not let down some tears listening to it.")
+cal3d = models/objetos/vinyls/banco_darwin.cfg
+inventory_sizes = 2 2
+inventory_texture = models/objetos/vinyls/banco_darwin_inv.png
+life_points = 250
+fortitude = 8
+reflex = 0
+will = 0
+displacement = 0
+armature_class = 10
+size_modifier = -1
+cost = 15
+static_scenery = 0

@@ -50,6 +50,7 @@ Stair = models/objetos/geral/escada/escada.dcc
 TV_42 = models/objetos/geral/tv42/tv42.dcc
 TV_Hack = models/objetos/geral/tv_hack/tv_hack.dcc
 Wardrobe = models/objetos/geral/wardrobe/wardrobe.dcc
+BMS_Darwin = models/objetos/vinyls/banco_darwin.dcc
 Clara_Crocodilo = models/objetos/vinyls/clara_crocodilo.dcc
 HenryCown_Western_Culture = models/objetos/vinyls/henry_cow_western_culture.dcc
 Zappa_Apostrophe = models/objetos/vinyls/zappa_apostrophe.dcc
