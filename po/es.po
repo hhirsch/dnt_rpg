@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2011-01-30 18:48-0200\n"
+"POT-Creation-Date: 2011-02-06 20:31-0200\n"
 "PO-Revision-Date: 2010-12-04 11:03+0000\n"
 "Last-Translator: zer berros <cerverros@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -4923,6 +4923,12 @@ msgstr ""
 
 #: data/models/objetos/vinyls/henry_cow_western_culture.dcc:2
 msgid "Last Henry Cow's album. Let's see if you can listen it."
+msgstr ""
+
+#: data/models/objetos/vinyls/zappa_apostrophe.dcc:2
+msgid ""
+"It seems that someone recorded some histories about Nanook, the Eskimo  on "
+"this disk."
 msgstr ""
 
 #: data/models/objetos/icex/snes/chrono/snes_chrono.dcc:2

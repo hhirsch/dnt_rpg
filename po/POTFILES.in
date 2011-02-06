@@ -290,6 +290,7 @@ data/models/objetos/geral/notebook/notebook.dcc
 #Vynils
 data/models/objetos/vinyls/clara_crocodilo.dcc
 data/models/objetos/vinyls/henry_cow_western_culture.dcc
+data/models/objetos/vinyls/zappa_apostrophe.dcc
 
 # Snes 
 data/models/objetos/icex/snes/chrono/snes_chrono.dcc

@@ -1,0 +1,14 @@
+name = Frank Zappa - Apostrophe (')
+description = gettext("It seems that someone recorded some histories about Nanook, the Eskimo  on this disk.")
+cal3d = models/objetos/vinyls/zappa_apostrophe.cfg
+inventory_sizes = 2 2
+inventory_texture = models/objetos/vinyls/zappa_apostrophe_inv.png
+life_points = 250
+fortitude = 8
+reflex = 0
+will = 0
+displacement = 0
+armature_class = 10
+size_modifier = -1
+cost = 15
+static_scenery = 0
