@@ -112,7 +112,7 @@ void cursor::loadCursor(string fileName, int index)
    SDL_Surface* img = IMG_Load(fileName.c_str());
    if(img)
    {
-      setTextureRGBA(img, texture[index], true);
+      setTexture(img, texture[index], true);
       sizeX[index] = img->w;
       sizeY[index] = img->h;
       propX[index] = (float)(img->w) / (float)smallestPowerOfTwo(img->w);
@@ -140,7 +140,7 @@ void cursor::set(int nCursor)
 void cursor::set(SDL_Surface* img)
 {
    /* Load the image to a texture */
-   setTextureRGBA(img, texture[CURSOR_USER_IMAGE]);
+   setTexture(img, texture[CURSOR_USER_IMAGE]);
    sizeX[CURSOR_USER_IMAGE] = img->w;
    sizeY[CURSOR_USER_IMAGE] = img->h;
    propX[CURSOR_USER_IMAGE] = (float)(img->w) / 
