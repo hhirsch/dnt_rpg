@@ -207,13 +207,13 @@ void cursor::setTextOver(string txt)
          
          /* Do some details */
          color_Set(curColor.colorButton.R, curColor.colorButton.G, 
-               curColor.colorButton.B, curColor.colorButton.A);
+               curColor.colorButton.B, 255);
          rectangle_Fill(s,1,1,textOverWidth-2,textOverHeight-2);
          color_Set(curColor.colorCont[0].R, curColor.colorCont[0].G, 
-               curColor.colorCont[0].B, curColor.colorCont[0].A);
+               curColor.colorCont[0].B, 255);
          rectangle_Oval(s,0,0,textOverWidth-1, textOverHeight-1, 
                curColor.colorCont[0].R, curColor.colorCont[0].G,
-               curColor.colorCont[0].B, curColor.colorCont[0].A);
+               curColor.colorCont[0].B, 255);
 
          /* Write the text */
          color_Set(255,255,255,255);
