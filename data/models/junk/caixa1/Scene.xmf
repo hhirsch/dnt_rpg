@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<HEADER MAGIC="XMF" VERSION="1200"/>
+<MESH NUMSUBMESH="1">
+    <SUBMESH
+        NUMVERTICES="14"
+        NUMFACES="12"
+        MATERIAL="0"
+        NUMLODSTEPS="0"
+        NUMSPRINGS="0"
+        NUMTEXCOORDS="1"
+    >
+        <VERTEX ID="0" NUMINFLUENCES="1">
+            <POS>1.00000 1.00000 0.00000</POS>
+            <NORM>0.57735 0.57735 -0.57735</NORM>
+            <TEXCOORD>0.61177 0.48630</TEXCOORD>
+            <INFLUENCE ID="0">1.00000</INFLUENCE>
+        </VERTEX>
+        <VERTEX ID="1" NUMINFLUENCES="1">
+            <POS>1.00000 -1.00000 0.00000</POS>
+            <NORM>0.57735 -0.57735 -0.57735</NORM>
+            <TEXCOORD>0.38074 0.48630</TEXCOORD>
+            <INFLUENCE ID="0">1.00000</INFLUENCE>
+        </VERTEX>
+        <VERTEX ID="2" NUMINFLUENCES="1">
+            <POS>-1.00000 -1.00000 0.00000</POS>
+            <NORM>-0.57735 -0.57735 -0.57735</NORM>
+            <TEXCOORD>0.38074 0.25527</TEXCOORD>
+            <INFLUENCE ID="0">1.00000</INFLUENCE>
+        </VERTEX>
+        <VERTEX ID="3" NUMINFLUENCES="1">
+            <POS>-1.00000 1.00000 0.00000</POS>
+            <NORM>-0.57735 0.57735 -0.57735</NORM>
+            <TEXCOORD>0.61177 0.25527</TEXCOORD>
+            <INFLUENCE ID="0">1.00000</INFLUENCE>
+        </VERTEX>
+        <VERTEX ID="4" NUMINFLUENCES="1">
+            <POS>1.00000 1.00000 2.00000</POS>
+            <NORM>0.57735 0.57735 0.57735</NORM>
+            <TEXCOORD>0.61177 0.71733</TEXCOORD>
+            <INFLUENCE ID="0">1.00000</INFLUENCE>
+        </VERTEX>
+        <VERTEX ID="5" NUMINFLUENCES="1">
+            <POS>-1.00000 1.00000 2.00000</POS>
+            <NORM>-0.57735 0.57735 0.57735</NORM>
+            <TEXCOORD>0.61177 0.94836</TEXCOORD>
+            <INFLUENCE ID="0">1.00000</INFLUENCE>
+        </VERTEX>
+        <VERTEX ID="6" NUMINFLUENCES="1">
+            <POS>-1.00000 -1.00000 2.00000</POS>
+            <NORM>-0.57735 -0.57735 0.57735</NORM>
+            <TEXCOORD>0.38074 0.94836</TEXCOORD>
+            <INFLUENCE ID="0">1.00000</INFLUENCE>
+        </VERTEX>
+        <VERTEX ID="7" NUMINFLUENCES="1">
+            <POS>1.00000 -1.00000 2.00000</POS>
+            <NORM>0.57735 -0.57735 0.57735</NORM>
+            <TEXCOORD>0.38074 0.71733</TEXCOORD>
+            <INFLUENCE ID="0">1.00000</INFLUENCE>
+        </VERTEX>
+        <VERTEX ID="8" NUMINFLUENCES="1">
+            <POS>1.00000 -1.00000 2.00000</POS>
+            <NORM>0.57735 -0.57735 0.57735</NORM>
+            <TEXCOORD>0.14971 0.48630</TEXCOORD>
+            <INFLUENCE ID="0">1.00000</INFLUENCE>
+        </VERTEX>
+        <VERTEX ID="9" NUMINFLUENCES="1">
+            <POS>-1.00000 -1.00000 2.00000</POS>
+            <NORM>-0.57735 -0.57735 0.57735</NORM>
+            <TEXCOORD>0.14971 0.25527</TEXCOORD>
+            <INFLUENCE ID="0">1.00000</INFLUENCE>
+        </VERTEX>
+        <VERTEX ID="10" NUMINFLUENCES="1">
+            <POS>-1.00000 -1.00000 2.00000</POS>
+            <NORM>-0.57735 -0.57735 0.57735</NORM>
+            <TEXCOORD>0.38074 0.02425</TEXCOORD>
+            <INFLUENCE ID="0">1.00000</INFLUENCE>
+        </VERTEX>
+        <VERTEX ID="11" NUMINFLUENCES="1">
+            <POS>-1.00000 1.00000 2.00000</POS>
+            <NORM>-0.57735 0.57735 0.57735</NORM>
+            <TEXCOORD>0.61177 0.02425</TEXCOORD>
+            <INFLUENCE ID="0">1.00000</INFLUENCE>
+        </VERTEX>
+        <VERTEX ID="12" NUMINFLUENCES="1">
+            <POS>1.00000 1.00000 2.00000</POS>
+            <NORM>0.57735 0.57735 0.57735</NORM>
+            <TEXCOORD>0.84280 0.48630</TEXCOORD>
+            <INFLUENCE ID="0">1.00000</INFLUENCE>
+        </VERTEX>
+        <VERTEX ID="13" NUMINFLUENCES="1">
+            <POS>-1.00000 1.00000 2.00000</POS>
+            <NORM>-0.57735 0.57735 0.57735</NORM>
+            <TEXCOORD>0.84280 0.25527</TEXCOORD>
+            <INFLUENCE ID="0">1.00000</INFLUENCE>
+        </VERTEX>
+        <FACE VERTEXID="0 1 2"/>
+        <FACE VERTEXID="2 3 0"/>
+        <FACE VERTEXID="4 5 6"/>
+        <FACE VERTEXID="6 7 4"/>
+        <FACE VERTEXID="0 4 7"/>
+        <FACE VERTEXID="7 1 0"/>
+        <FACE VERTEXID="1 8 9"/>
+        <FACE VERTEXID="9 2 1"/>
+        <FACE VERTEXID="2 10 11"/>
+        <FACE VERTEXID="11 3 2"/>
+        <FACE VERTEXID="12 0 3"/>
+        <FACE VERTEXID="3 13 12"/>
+    </SUBMESH>
+</MESH>
+
