@@ -20,6 +20,7 @@
 
 #include "fightSystem.h"
 #include "../engine/modstate.h"
+#include "../etc/message3d.h"
 
 /***************************************************************
  *                       CONSTRUCTOR                           *
@@ -232,6 +233,13 @@ void fightSystem::verifyDeads()
                sprintf(buf, gettext("%s receive %d XP for killing"), 
                        p->name.c_str(), xp);
                brief->addText(buf, 255, 144, 0);
+
+               messageController msg;
+               sprintf(buf, "%d XP", xp);
+               msg.addMessage(actualActor->xPosition, 
+                              actualActor->yPosition + actualActor->max[1],
+                              actualActor->zPosition, 
+                              buf, 1.0f,0.6f,0.0f);
             }
          }
 
