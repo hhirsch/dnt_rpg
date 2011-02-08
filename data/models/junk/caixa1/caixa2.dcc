@@ -1,0 +1,12 @@
+name = Box
+cal3d = models/junk/caixa1/model2.cfg
+inventory_texture = texturas/na.png
+inventory_sizes = 0 0
+life_points = 10
+fortitude = 1
+reflex = 0
+will = 0
+displacement = 0
+armature_class = 1
+cost = 1
+static_scenery = 1
