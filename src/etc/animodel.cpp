@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -43,6 +43,10 @@ aniModel::aniModel():thing()
    m_renderScale = 1.0f;
    m_lodLevel = 1.0f;
    modelFileName = "";
+   for(i=0;i<ANIMODEL_MAX_ANIMATIONS;i++)
+   {
+      m_animationId[i] = -1;
+   }
 }
 
 /**********************************************************************
@@ -67,12 +71,11 @@ GLuint aniModel::loadTexture(const string& strFilename)
 {
    GLuint pId = 0;
  
-   /* carrega a textura do arquivo */
+   /* Load texture image from file */
    SDL_Surface* img = IMG_Load(strFilename.c_str());
    if(!img)
    {
       cout << "Can't Open Texture" << strFilename << endl; 
-      //free(arq);
       return(0);
    }
 
@@ -108,12 +111,10 @@ GLuint aniModel::loadTexture(const string& strFilename)
                      img->h, format, GL_UNSIGNED_BYTE, 
                      img->pixels );
 
-   /* Libera a memoria utilizada */
+   /* Free memory */
    SDL_FreeSurface(img);
 
-   //free(arq);
-
-   return pId;
+   return(pId);
 }
 
 /*********************************************************************
@@ -180,7 +181,7 @@ void aniModel::calculateBoundingBox()
 bool aniModel::loadModel(const string& strFilename)
 {
    dirs dir;
- 
+
    /* initialize the data path */
    string strPath = m_path;
 
@@ -198,24 +199,25 @@ bool aniModel::loadModel(const string& strFilename)
    modelFileName = strFilename;
 
    string strKey = "", strData = "";
-   
+
    /* Interpret each one */
    while(parser.getNextTuple(strKey, strData))
    {
-      // handle the model creation
+      /*  handle the model creation */
       if(strKey == "scale")
       {
-         // set rendering scale factor
+         /* set rendering scale factor */
          m_renderScale = atof(strData.c_str());
       }
       else if(strKey == "path")
       {
-         // set the new path for the data files if one hasn't been set already
+         /* set the new path for the data files 
+          * if one hasn't been set already */
          if (m_path == "") strPath = dir.getRealFile(strData);
       }
       else if(strKey == "skeleton")
       {
-         // load core skeleton
+         /* load core skeleton */
          if(!m_calCoreModel->loadCoreSkeleton(strPath + strData))
          {
             CalError::printLastError();
@@ -224,9 +226,9 @@ bool aniModel::loadModel(const string& strFilename)
       }
       else if(strKey == "animation")
       {
-         // load core animation
+         /* load core animation */
          m_animationId[animationCount] = 
-                           m_calCoreModel->loadCoreAnimation(strPath + strData);
+            m_calCoreModel->loadCoreAnimation(strPath + strData);
          if(m_animationId[animationCount] == -1)
          {
             CalError::printLastError();
@@ -237,7 +239,7 @@ bool aniModel::loadModel(const string& strFilename)
       }
       else if(strKey == "mesh")
       {
-         // load core mesh
+         /* load core mesh */
          int meshID = m_calCoreModel->loadCoreMesh(strPath + strData);
          if(meshID == -1)
          {
@@ -247,7 +249,7 @@ bool aniModel::loadModel(const string& strFilename)
       }
       else if(strKey == "material")
       {
-         // load core material
+         /* load core material */
          if(m_calCoreModel->loadCoreMaterial(strPath + strData) == -1)
          {
             CalError::printLastError();
@@ -257,72 +259,72 @@ bool aniModel::loadModel(const string& strFilename)
       else
       {
          cerr << strFilename << ": Unknow key '" << strKey
-              << "'" << endl;
+            << "'" << endl;
          return false;
       }
    }
 
-  // load all textures and store the opengl texture id in the 
-  // corresponding map in the material
-  int materialId;
-  for( materialId = 0; 
-       materialId < m_calCoreModel->getCoreMaterialCount(); 
-       materialId++)
-  {
-    // get the core material
-    CalCoreMaterial *pCoreMaterial;
-    pCoreMaterial = m_calCoreModel->getCoreMaterial(materialId);
+   /* load all textures and store the opengl texture id in the 
+    * corresponding map in the material */
+   int materialId;
+   for( materialId = 0; 
+         materialId < m_calCoreModel->getCoreMaterialCount(); 
+         materialId++)
+   {
+      /* get the core material */
+      CalCoreMaterial *pCoreMaterial;
+      pCoreMaterial = m_calCoreModel->getCoreMaterial(materialId);
 
-    // loop through all maps of the core material
-    int mapId;
-    for(mapId = 0; mapId < pCoreMaterial->getMapCount(); mapId++)
-    {
-      // get the filename of the texture
-      std::string strFilename;
-      strFilename = pCoreMaterial->getMapFilename(mapId);
+      /* loop through all maps of the core material */
+      int mapId;
+      for(mapId = 0; mapId < pCoreMaterial->getMapCount(); mapId++)
+      {
+         /* get the filename of the texture */
+         std::string strFilename;
+         strFilename = pCoreMaterial->getMapFilename(mapId);
 
-      // load the texture from the file
-      GLuint textureId;
-      textureId = loadTexture(strPath + strFilename);
+         /* load the texture from the file */
+         GLuint textureId;
+         textureId = loadTexture(strPath + strFilename);
 
-      // store the opengl texture id in the user data of the map
-      pCoreMaterial->setMapUserData(mapId, (Cal::UserData*)textureId);
-    }
-  }
+         /* store the opengl texture id in the user data of the map */
+         pCoreMaterial->setMapUserData(mapId, (Cal::UserData*)textureId);
+      }
+   }
 
-  // make one material thread for each material
-  // mapping without further information on the model etc.
-  for(materialId = 0; 
-      materialId < m_calCoreModel->getCoreMaterialCount(); materialId++)
-  {
-    // create the a material thread
-    m_calCoreModel->createCoreMaterialThread(materialId);
+   /* make one material thread for each material
+    * mapping without further information on the model etc. */
+   for(materialId = 0; 
+         materialId < m_calCoreModel->getCoreMaterialCount(); materialId++)
+   {
+      /* create the a material thread */
+      m_calCoreModel->createCoreMaterialThread(materialId);
 
-    // initialize the material thread
-    m_calCoreModel->setCoreMaterialId(materialId, 0, materialId);
-  }
+      /* initialize the material thread */
+      m_calCoreModel->setCoreMaterialId(materialId, 0, materialId);
+   }
 
-  // Calculate Bounding Boxes
-  m_calCoreModel->getCoreSkeleton()->calculateBoundingBoxes(m_calCoreModel);
+   /* Calculate Bounding Boxes */
+   m_calCoreModel->getCoreSkeleton()->calculateBoundingBoxes(m_calCoreModel);
 
-  m_calModel = new CalModel(m_calCoreModel);
+   m_calModel = new CalModel(m_calCoreModel);
 
-  // attach all meshes to the model
-  int meshId;
-  for(meshId = 0; meshId < m_calCoreModel->getCoreMeshCount(); meshId++)
-  {
-    m_calModel->attachMesh(meshId);
-  }
+   /* attach all meshes to the model */
+   int meshId;
+   for(meshId = 0; meshId < m_calCoreModel->getCoreMeshCount(); meshId++)
+   {
+      m_calModel->attachMesh(meshId);
+   }
 
-  // set the material set of the whole model
-  m_calModel->setMaterialSet(0);
+   /* set the material set of the whole model */
+   m_calModel->setMaterialSet(0);
 
-  // set initial animation state
-  curPos =  11 + (int)(30 * (rand() / (RAND_MAX + 1.0))); 
-  m_state = -1;
-  setState(STATE_IDLE);
+   /* set initial animation state */
+   curPos =  11 + (int)(30 * (rand() / (RAND_MAX + 1.0))); 
+   m_state = -1;
+   setState(STATE_IDLE);
 
-  m_calModel->update(curPos);
+   m_calModel->update(curPos);
 
    /* Define all key vertices */
    defineKeyVertex();
@@ -787,6 +789,14 @@ void aniModel::renderReflexion(float pX, float pY, float pZ, float angle)
  *********************************************************************/
 void aniModel::setState(int state)
 {
+   /* Verify if animation is defined */
+   if( (state > ANIMODEL_MAX_ANIMATIONS) || (state < 0) ||
+       (m_animationId[state] == -1) )
+   {
+      return;
+   }
+
+   /* Only change animation if not actually on it */
    if(state != m_state)
    {
        if(state == STATE_DIE)

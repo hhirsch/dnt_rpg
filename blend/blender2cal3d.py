@@ -1278,7 +1278,7 @@ def export_meshes(scene, base_matrix, base_translation):
 
 
 
-def export():
+def exportModel():
 	global STATUS, ROT_X, ROT_Y, ROT_Z, SCALE
 	global BONES, MATERIALS, ANIMATIONS, MESHES
 	
@@ -1290,7 +1290,7 @@ def export():
 	rot_z_matrix = Blender.Mathutils.RotationMatrix(ROT_Z, 4, "z")
 
 	# Get the scene
-	scene = Blender.Scene.getCurrent()
+	scene = Blender.Scene.GetCurrent()
 
 	# Reset the globals
 	BONES = {}
@@ -1628,7 +1628,7 @@ def event(evt, val):
 		return
 	if evt == EKEY:
 		update_reg()
-		export()
+		exportModel()
 
 def bevent(evt):
 	global EXPORT_TO_XML, EXPORT_SKELETON, EXPORT_ANIMATION, EXPORT_MESH, \
@@ -1644,7 +1644,7 @@ def bevent(evt):
 	update_reg()
 
 	if evt == 1:
-		export()
+		exportModel()
 	if evt == 2:
 		EXPORT_TO_XML = 1 - EXPORT_TO_XML
 	if evt == 3:

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -34,6 +34,10 @@ using namespace std;
 #define STATE_DEAD         3 /**< Character Animation State Dead */
 #define STATE_ATTACK_MEELE 4 /**< Character Animation State Meele Attack */
 #define STATE_RUN          5 /**< Character Animation State Run */
+#define STATE_HIT          6 /**< Character Animation State Hit */
+#define STATE_GUN_USE      7 /**< Character Animation State Gun Use */
+
+#define ANIMODEL_MAX_ANIMATIONS 16
 
 /*! Animated Model Definition (using cal3d) */
 class aniModel:public thing
@@ -169,7 +173,7 @@ class aniModel:public thing
       int m_state;                   /**< current animation state */
       CalCoreModel* m_calCoreModel;  /**< Cal3D Core Model of character */
       CalModel* m_calModel;          /**< Cal3D Model of character */
-      int m_animationId[16];         /**< Cal3D animation ID */
+      int m_animationId[ANIMODEL_MAX_ANIMATIONS]; /**< Cal3D animation ID */
       int m_animationCount;          /**< Cal3D number of animations */
       int m_meshId[32];              /**< Cal3D meshes ID */
       int m_meshCount;               /**< Cal3D meshes count */
