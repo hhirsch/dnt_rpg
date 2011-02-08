@@ -488,8 +488,8 @@ bool engine::loadGame()
 
          /* Open the default windows */
          mapWindow->open(gui,0,0, actualMap);
-         shortcuts->open(gui);
          brief->openWindow(gui);
+         shortcuts->open(gui);
 
          /* make sure not in battle mode */
          engineMode = ENGINE_MODE_REAL_TIME;
@@ -4212,8 +4212,8 @@ int engine::run(SDL_Surface *surface, bool commingBack)
    if(!commingBack)
    {
       mapWindow->open(gui,0,0, actualMap);
-      shortcuts->open(gui);
       brief->openWindow(gui);
+      shortcuts->open(gui);
    }
 
    /* Main Things Run */

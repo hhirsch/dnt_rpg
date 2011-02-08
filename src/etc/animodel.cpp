@@ -32,6 +32,8 @@
  **********************************************************************/
 aniModel::aniModel():thing()
 {
+   int i;
+
    m_calCoreModel = new CalCoreModel("");
    m_calModel = NULL;
    m_state = STATE_IDLE;
