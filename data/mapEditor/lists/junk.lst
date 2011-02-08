@@ -1,3 +1,4 @@
+Apple_Crate = models/junk/apple_crate/apple_crate.dcc
 Box_1 = models/junk/caixa1/caixa1.dcc
 Box_2 = models/junk/caixa1/caixa2.dcc
 Junk_Block_1 = models/junk/bloco1/bloco1.dcc
