@@ -895,6 +895,12 @@ int engine::loadMap(string arqMapa, bool loadingGame)
       }
    }
 
+   /* Define Map */
+   particleController.setActualMap(actualMap, &colisionDetect);
+   colisionDetect.defineMap(actualMap, NPCs, PCs);
+   actionControl->setCharacterLists(NPCs, PCs);
+   fight->setMap(actualMap->getFileName());
+
    /* Update  particle System to a stable state */
    showLoading(img,&texturaTexto,texturaCarga,
                gettext("Loading Particles"), progress);
@@ -946,12 +952,6 @@ int engine::loadMap(string arqMapa, bool loadingGame)
                             gameCamera.getPhi(), gameCamera.getD(),
                             gameCamera.getDeltaY());
    actualMap->flushSounds();
-
-   /* Define Map */
-   particleController.setActualMap(actualMap, &colisionDetect);
-   colisionDetect.defineMap(actualMap, NPCs, PCs);
-   actionControl->setCharacterLists(NPCs, PCs);
-   fight->setMap(actualMap->getFileName());
 
    /* Done */
    showLoading(img,&texturaTexto,texturaCarga,
