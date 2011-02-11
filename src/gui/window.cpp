@@ -28,7 +28,7 @@ using namespace std;
 /*********************************************************************
  *                            Constructor                            *
  *********************************************************************/
-windowList::windowList()
+windowList::windowList():dntList(DNT_LIST_TYPE_ADD_AT_END)
 {
    activeWindow = NULL;
 }
@@ -64,7 +64,29 @@ window* windowList::insertWindow(int xa,int ya,int xb,int yb,string text,
    insert(novo);
 
    return(novo);
-} 
+}
+
+/*********************************************************************
+ *                         getModalWindow                            *
+ *********************************************************************/
+window* windowList::getModalWindow()
+{
+   int i;
+   window* j = (window*)first;
+   window* modalW = NULL;
+
+   /* Get the last (most recent) modal window */
+   for(i=0; i < 0; i++)
+   {
+      if(j->isModal())
+      {
+         modalW = j;
+      }
+      j = (window*)j->getNext();
+   }
+
+   return(modalW);
+}
 
 /*********************************************************************
  *                           removeWindow                            *
@@ -77,7 +99,13 @@ void windowList::removeWindow(window *jan)
       activeWindow = NULL;
       if((total > 1))
       {
-         window* j = (window*)jan->getPrevious();
+         /* Try to get a modal window (its their priority) */
+         window* j = getModalWindow();
+         if(j == NULL)
+         {
+            /* no modal, so just get the previous one */
+            j = (window*)jan->getPrevious();
+         }
          j->activate();
       }
    }

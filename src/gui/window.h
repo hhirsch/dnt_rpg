@@ -208,6 +208,11 @@ class windowList: public dntList
        * \param obj -> pointer to the window */
       void freeElement(dntListElement* obj);
 
+      /*! Get the most recent modal window on the list
+       * \return pointer to the most recent modal window or NULL if no modal 
+       *         windos at all. */
+      window* getModalWindow();
+
       window* activeWindow;   /**< The Active Window */
 }; 
 
