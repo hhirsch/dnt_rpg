@@ -73,6 +73,7 @@ int initialScreen::run(int Status,GLdouble proj[16],
 
    window* jan = gui->insertWindow(xPos-64,yPos-64,xPos+64,yPos+64, dnt);  
    jan->setAttributes(false,true,false,false);
+   jan->setModal();
    if(Status == ON_INIT)
    {
       buttonNew = jan->getObjectsList()->insertButton(30,20,98,38, 
