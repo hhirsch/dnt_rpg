@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -198,7 +198,7 @@ class windowList: public dntList
        * \return pointer to the active window */
       window* getActiveWindow(){return(activeWindow);};
 
-      /*! Get the active window
+      /*! Set the active window
        * \param jan -> pointer to the new active window */
       void setActiveWindow(window* jan);
 
