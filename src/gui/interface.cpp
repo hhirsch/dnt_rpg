@@ -813,7 +813,7 @@ void guiInterface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 }
 
 /*********************************************************************
- *                          clearActiveObject                        *
+ *                           getActiveWindow                         *
  *********************************************************************/
 window* guiInterface::getActiveWindow()
 {
@@ -822,6 +822,17 @@ window* guiInterface::getActiveWindow()
       return(lwindows->getActiveWindow());
    }
    return(NULL);
+}
+
+/*********************************************************************
+ *                           setActiveWindow                         *
+ *********************************************************************/
+void guiInterface::setActiveWindow(window* w)
+{
+   if(lwindows)
+   {
+      lwindows->setActiveWindow(w);
+   }
 }
 
 /*********************************************************************

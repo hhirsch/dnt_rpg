@@ -99,13 +99,7 @@ void windowList::removeWindow(window *jan)
       activeWindow = NULL;
       if((total > 1))
       {
-         /* Try to get a modal window (its their priority) */
-         window* j = getModalWindow();
-         if(j == NULL)
-         {
-            /* no modal, so just get the previous one */
-            j = (window*)jan->getPrevious();
-         }
+         window* j = (window*)jan->getPrevious();
          j->activate();
       }
    }

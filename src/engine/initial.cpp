@@ -41,6 +41,7 @@ initialScreen::initialScreen()
    buttonLoad = NULL;
    buttonOptions = NULL;
    buttonExit = NULL;
+   menuWindow = NULL;
 }
 
 /***************************************************************
@@ -71,29 +72,30 @@ int initialScreen::run(int Status,GLdouble proj[16],
    string dnt = "DNT - ";
    dnt += VERSION;
 
-   window* jan = gui->insertWindow(xPos-64,yPos-64,xPos+64,yPos+64, dnt);  
-   jan->setAttributes(false,true,false,false);
+   menuWindow = gui->insertWindow(xPos-64,yPos-64,xPos+64,yPos+64, dnt);  
+   menuWindow->setAttributes(false,true,false,false);
    
    if(Status == ON_INIT)
    {
-      buttonNew = jan->getObjectsList()->insertButton(30,20,98,38, 
+      buttonNew = menuWindow->getObjectsList()->insertButton(30,20,98,38, 
                                                       gettext("New"),1);
    }
    else
    {
-      buttonContinue = jan->getObjectsList()->insertButton(30,20,98,38,
+      buttonContinue = menuWindow->getObjectsList()->insertButton(30,20,98,38,
                                            gettext("Continue"),1);
    }
-   buttonSave = jan->getObjectsList()->insertButton(30,40,98,58,
+   buttonSave = menuWindow->getObjectsList()->insertButton(30,40,98,58,
                                            gettext("Save"),1);
    buttonSave->setAvailable(Status != ON_INIT);
-   buttonLoad = jan->getObjectsList()->insertButton(30,60,98,78,
+   buttonLoad = menuWindow->getObjectsList()->insertButton(30,60,98,78,
                                                gettext("Load"),1);
-   buttonOptions = jan->getObjectsList()->insertButton(30,80,98,98,
+   buttonOptions = menuWindow->getObjectsList()->insertButton(30,80,98,98,
                                             gettext("Options"),1);
-   buttonExit = jan->getObjectsList()->insertButton(30,100,98,118,
+   buttonExit = menuWindow->getObjectsList()->insertButton(30,100,98,118,
                                            gettext("Exit"),1);
-   gui->openWindow(jan);
+   menuWindow->setExternPointer(&menuWindow);
+   gui->openWindow(menuWindow);
 
    glDisable(GL_LIGHTING);
    glDisable(GL_FOG);
@@ -105,6 +107,13 @@ int initialScreen::run(int Status,GLdouble proj[16],
 
    while (!done)
    {
+      /* Verify active window (force it to be the menu one, if not modal) */
+      if( (gui->getActiveWindow() != menuWindow) && 
+          (!gui->getActiveWindow()->isModal()) )
+      {
+         menuWindow->activate();
+      }
+
       tempo = SDL_GetTicks();
       if((tempo - tempoAnterior) >= 20) 
       {
@@ -173,7 +182,7 @@ int initialScreen::run(int Status,GLdouble proj[16],
       }
    }
 
-   gui->closeWindow(jan);
+   gui->closeWindow(menuWindow);
 
    glEnable(GL_LIGHTING);
    return(result);

@@ -144,6 +144,10 @@ class guiInterface
        * \return -> pointer to the active Window */
       window* getActiveWindow();
 
+      /*! Set a window to be the active one
+       * \param w -> window to activate */
+      void setActiveWindow(window* w);
+
       /*! Hide All Current Windows */
       void hideAll();
 
