@@ -1,0 +1,2 @@
+Models from UFO-AI ( http://ufoai.sf.net )
+License: GPLv2 or latter.
