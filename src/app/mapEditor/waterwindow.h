@@ -24,8 +24,6 @@
 #include "../../particle/partcontroller.h"
 #include "../../gui/farso.h"
 
-/* FIXME: broken. */
-
 /*! The water controller window */
 class waterWindow
 {
@@ -41,11 +39,9 @@ class waterWindow
        * \param water -> new active water */
       void setWater(particleSystem* water);
 
-#if 0
       /*! Set the active plane
        * \param pl -> new active Plane */
       void setPlane(interPlane* pl);
-#endif
 
       /*! Set the used particle system contoller
        * \param pS -> the particle system controller */
@@ -69,7 +65,7 @@ class waterWindow
       void defineValues();
 
       particleSystem* activeWater;        /**< The active Water */
-      //interPlane* activePlane;            /**< The active Plane */
+      interPlane* activePlane;            /**< The active Plane */
       partController* pSystem;            /**< The active Controller */
       guiInterface* gui;                  /**< The used Interface */
    

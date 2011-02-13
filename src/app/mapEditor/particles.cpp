@@ -229,33 +229,6 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       }
    }
 
-   /* Waterfall */
-#if 0   
-   else if( (tool == TOOL_PARTICLE_WATERFALL) && (!actualParticle) )
-   {
-      particleType = DNT_PARTICLE_TYPE_WATERFALL;
-      state = TOOL_PARTICLE_WATERFALL; 
-      part1* tmpPart = NULL;
-      string fileToOpen = selectedText;
-      if(fileToOpen != "../data/particles/")
-      {
-         height = 0;
-         tmpPart = new part1(mouseX, height, mouseZ, fileToOpen);
-         if(!tmpPart)
-         {
-            cerr << "Error opening: " << fileToOpen << endl;
-            actualParticle = NULL;
-            return;
-         }
-         actualParticle = (particleSystem*) tmpPart;
-      }
-      else
-      {
-         actualParticle = NULL;
-      }
-   }
-#endif
-   
    /* Default particle Actions (Up, down, etc) */
    if( (actualParticle) )
    {
@@ -275,22 +248,17 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
          if( (tool != TOOL_PARTICLE_GRASS) && (tool != TOOL_PARTICLE_LAKE))
          {
 
-            pS->addParticle(mouseX, height, mouseZ,
-                            actualParticle->getFileName());
-
-#if 0         
-            /* Set the waterfall window */
-            if(tool == TOOL_PARTICLE_WATERFALL)
-            {
-               wtWindow->setWater(p);
-            }
-#endif
+            particleSystem* p = pS->addParticle(mouseX, height, mouseZ,
+                  actualParticle->getFileName());
+            /* Set the water window (in reality now works for any kind
+             * of particle systems) */
+            wtWindow->setWater(p);
             deleteParticle();
             gui->setTool(TOOL_NONE);
          }
          while(mButton & SDL_BUTTON(1))
          {
-            //Wait for Mouse Button Release
+            /* Wait for Mouse Button Release */
             SDL_PumpEvents();
             int x,y;
             mButton = SDL_GetMouseState(&x,&y);

@@ -153,7 +153,12 @@ class particleSystem: public dntListElement
                            float x2, float y2, float z2, 
                            float dX, float dZ, int inclination);
 
-
+      /*! Remove a plane from the internal planes
+       * \param ip -> pointer to the plane to remove */
+      void removePlane(interPlane* ip);
+      /*! Get last plane from the internal planes list
+       * \return pointer to the last plane or NULL if no planes */
+      interPlane* getLastPlane();
 
       friend class partController;  /**< The controller is our friend */
       friend class particleList;    /**< The list is our friend too */

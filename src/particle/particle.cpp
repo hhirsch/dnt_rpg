@@ -638,7 +638,6 @@ void particleSystem::update(particle* part)
          part->velX += dX*0.02*(-gravity);
          part->velZ += dZ*0.02*(-gravity);
          part->posX += part->velX*0.02;
-         part->posY += 0.02*part->velY;
          part->posZ += part->velZ*0.02;
       }
       else
@@ -983,3 +982,28 @@ interPlane* particleSystem::addPlane(float x1, float y1, float z1,
    return(ip);
 }
 
+/****************************************************************************
+ *                             removePlane                                  *
+ ****************************************************************************/
+void particleSystem::removePlane(interPlane* ip)
+{
+   intersections.remove(ip);
+}
+ 
+/****************************************************************************
+ *                             removePlane                                  *
+ ****************************************************************************/
+interPlane* particleSystem::getLastPlane()
+{
+   interPlane* first; 
+   interPlane* last; 
+
+   first = (interPlane*)intersections.getFirst();
+   if(first)
+   {
+      last = (interPlane*)first->getPrevious();
+      return(last);
+   }
+
+   return(NULL);
+}

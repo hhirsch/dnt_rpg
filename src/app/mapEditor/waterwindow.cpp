@@ -31,7 +31,7 @@ waterWindow::waterWindow(guiInterface* actualGui)
 {
    gui = actualGui;
    activeWater = NULL;
-   //activePlane = NULL;
+   activePlane = NULL;
    intWindow = NULL;
 }
 
@@ -54,7 +54,6 @@ void waterWindow::setWater(particleSystem* water)
    }
 }
 
-#if 0
 /***********************************************************************
  *                              setPlane                               *
  ***********************************************************************/
@@ -66,7 +65,6 @@ void waterWindow::setPlane(interPlane* pl)
       openWindow();
    }
 }
-#endif
 
 /***********************************************************************
  *                              setPlane                               *
@@ -156,18 +154,18 @@ void waterWindow::openWindow()
                                               "Plane Waterflow");
    intWindow->getObjectsList()->insertTextBox(50,73,100,88,0,"deltaX:");
    dxWaterflowLess = intWindow->getObjectsList()->insertButton(101,71,111,88,
-                                                      fnt.createUnicode(0x25C4),0);
+                                                   fnt.createUnicode(0x25C4),0);
    dxWaterflowText = intWindow->getObjectsList()->insertTextBox(112,71,162,88,
                                                                  1,"1.0");
    dxWaterflowMore = intWindow->getObjectsList()->insertButton(163,71,173,88,
-                                                      fnt.createUnicode(0x25BA),0);
+                                                   fnt.createUnicode(0x25BA),0);
    intWindow->getObjectsList()->insertTextBox(50,93,100,108,0,"deltaZ:");
    dzWaterflowLess = intWindow->getObjectsList()->insertButton(101,91,111,108,
-                                                      fnt.createUnicode(0x25C4),0);
+                                                   fnt.createUnicode(0x25C4),0);
    dzWaterflowText = intWindow->getObjectsList()->insertTextBox(112,91,162,108,
                                                                  1,"1.0");
    dzWaterflowMore = intWindow->getObjectsList()->insertButton(163,91,173,108,
-                                                      fnt.createUnicode(0x25BA),0);
+                                                   fnt.createUnicode(0x25BA),0);
    intWindow->getObjectsList()->insertTextBox(49,53,246,120,1,"");
 
    /* Unused Space */
@@ -184,7 +182,6 @@ void waterWindow::openWindow()
  ***********************************************************************/
 bool waterWindow::eventGot(int type, guiObject* object)
 {
-#if 0
    GLfloat wX = 0, wY = 0, wZ = 0;
 
    if(!intWindow)
@@ -401,7 +398,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
       {
          if(activeWater)
          {
-            activeWater = (part1*)activeWater->getNext();
+            activeWater = (particleSystem*)activeWater->getNext();
             activePlane = activeWater->getLastPlane();
             defineValues();
          }
@@ -411,7 +408,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
       {
          if(activeWater)
          {
-            activeWater = (part1*)activeWater->getPrevious();
+            activeWater = (particleSystem*)activeWater->getPrevious();
             activePlane = activeWater->getLastPlane();
             defineValues();
          }
@@ -421,10 +418,10 @@ bool waterWindow::eventGot(int type, guiObject* object)
       {
          if((activeWater) && (pSystem))
          {
-            part1* tmpWater = NULL;
-            if(activeWater != (part1*)activeWater->getPrevious())
+            particleSystem* tmpWater = NULL;
+            if(activeWater != (particleSystem*)activeWater->getPrevious())
             {
-               tmpWater = (part1*)activeWater->getPrevious();
+               tmpWater = (particleSystem*)activeWater->getPrevious();
                activePlane = tmpWater->getLastPlane();
             }
             else
@@ -508,7 +505,6 @@ bool waterWindow::eventGot(int type, guiObject* object)
          return(true);
       }
    }
-#endif
    return(false);
 }
 
@@ -517,7 +513,6 @@ bool waterWindow::eventGot(int type, guiObject* object)
  ***********************************************************************/
 void waterWindow::defineValues()
 {
-#if 0
    char tmp[8];
    if(activePlane)
    {
@@ -527,7 +522,6 @@ void waterWindow::defineValues()
       dzWaterflowText->setText(tmp);
       intWindow->draw(0,0);
    }
-#endif
 }
 
 /***********************************************************************
@@ -535,7 +529,6 @@ void waterWindow::defineValues()
  ***********************************************************************/
 void waterWindow::drawTemporary()
 {
-#if 0
    if(activePlane != NULL)
    {
       glDisable(GL_LIGHTING);
@@ -566,6 +559,5 @@ void waterWindow::drawTemporary()
       glEnd();
       glEnable(GL_LIGHTING);
    }
-#endif
 }
 
