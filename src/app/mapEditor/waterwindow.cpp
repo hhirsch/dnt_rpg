@@ -81,7 +81,7 @@ void waterWindow::openWindow()
 {
    dirs dir;
    dntFont fnt;
-   intWindow = gui->insertWindow(403,599-247,653,599-37,"Waterfall");
+   intWindow = gui->insertWindow(403,599-247,653,599-37,"Particle's Planes");
 
    /* Waterfall Navigators */
    intWindow->getObjectsList()->insertTextBox(15,17,77,36,0,"Waterfall");

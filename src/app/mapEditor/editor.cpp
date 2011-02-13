@@ -292,6 +292,7 @@ void editor::openMap()
       if(!map->getParticlesFileName().empty())
       {
           particleSystem->loadFromFile(map->getParticlesFileName());
+          particleSystem->setActualMap(map, NULL);
           particleSystem->stabilizeAll();
       }
       else
