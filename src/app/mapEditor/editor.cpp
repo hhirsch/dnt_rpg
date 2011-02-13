@@ -67,6 +67,7 @@ editor::editor()
    gameSky = new(sky);
    models.init();
    wTypes.init();
+   curs.init();
 
    aligns al;
    al.init();
@@ -877,6 +878,12 @@ void editor::draw()
    glPushMatrix();
       draw2DMode();
       gui->draw(proj, modl, viewPort);
+
+      /* Cursor */
+      glPushMatrix();
+         curs.draw(mouseX, mouseY, 0);
+      glPopMatrix();
+      
       draw3DMode(OUTDOOR_FARVIEW);
    glPopMatrix();
    glEnable(GL_FOG);

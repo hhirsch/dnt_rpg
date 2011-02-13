@@ -20,6 +20,7 @@
 
 #include "guiIO.h"
 #include "../../engine/util.h"
+#include "../../engine/cursor.h"
 
 /****************************************************************
  *                         Constructor                          *
@@ -497,6 +498,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
                 bool outdoor)
 {
    int eventInfo = FARSO_EVENT_NONE;
+   cursor curs;
    guiObject* object;
 
    /* Get Events */
@@ -885,6 +887,57 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          }
          break;
       }
+
+      /* Set Mouse Messages */
+      case FARSO_EVENT_ON_FOCUS_TAB_BUTTON:
+      {
+         /* Wall Buttons */
+         if(object == (guiObject*) wallXButton)
+         {
+            curs.setTextOver("Create X Wall");
+         }
+         else if(object == (guiObject*) wallZButton)
+         {
+            curs.setTextOver("Create Z Wall");
+         }
+         else if(object == (guiObject*) wallCutButton)
+         {
+            curs.setTextOver("Cut Wall");
+         }
+         else if(object == (guiObject*) wallTextureButton)
+         {
+            curs.setTextOver("Set Wall Texture");
+         }
+         else if(object == (guiObject*) wallLessYTexture)
+         {
+            curs.setTextOver("Decrease Wall Y Texture Repeat");
+         }
+         else if(object == (guiObject*) wallMoreYTexture)
+         {
+            curs.setTextOver("Increase Wall Y Texture Repeat");
+         }
+         else if(object == (guiObject*) wallLessXTexture)
+         {
+            curs.setTextOver("Decrease Wall X Texture Repeat");
+         }
+         else if(object == (guiObject*) wallMoreXTexture)
+         {
+            curs.setTextOver("Increase Wall X Texture Repeat");
+         }
+         else if(object == (guiObject*) wallLessZTexture)
+         {
+            curs.setTextOver("Decrease Wall Z Texture Repeat");
+         }
+         else if(object == (guiObject*) wallMoreZTexture)
+         {
+            curs.setTextOver("Increase Wall Z Texture Repeat");
+         }
+         else if(object == (guiObject*) wallDestroyButton)
+         {
+            curs.setTextOver("Destroy Wall");
+         }
+      }
+      break;
 
       /* File Selectors Things */
       case FARSO_EVENT_FILE_SEL_ACCEPT:

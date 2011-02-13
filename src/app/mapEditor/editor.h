@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -30,6 +30,7 @@
 #include "particles.h"
 #include "npcs.h"
 #include "../../engine/sun.h"
+#include "../../engine/cursor.h"
 #include "../../engine/sky.h"
 #include "../../engine/character.h"
 #include "../../particle/partcontroller.h"
@@ -84,6 +85,7 @@ class editor
       SDL_Surface *screen;           /**< SDL Screen */
       Uint8* keys;                   /**< Keyboard State */
       Uint8 mButton;                 /**< Mouse Button State */
+      cursor curs;                   /**< The Mouse Cursor */
       int mouseX,                    /**< Mouse X position */
           mouseY;                    /**< Mouse Y position */
       bool quit;                     /**< Quit Editor Flag */

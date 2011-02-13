@@ -46,6 +46,10 @@ cursor::~cursor()
 void cursor::init()
 {
    dirs dir;
+   
+   /* Disable HW Mouse cursos */
+   SDL_ShowCursor(SDL_DISABLE);
+   
    /* Generate OpenGL Textures */
    glGenTextures(CURSOR_TOTAL, texture);
 

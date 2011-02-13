@@ -79,8 +79,6 @@ int main(int argc, char **argv)
    
    gameEngine->init(screen);
 
-   SDL_ShowCursor(SDL_DISABLE);
-
    /* Call Splash Screen  */
    gameEngine->splashScreen();
 
