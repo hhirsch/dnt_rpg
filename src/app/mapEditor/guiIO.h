@@ -210,9 +210,7 @@ class guiIO
       oneTabButton* wallXButton;          /**< X Wall Button */
       oneTabButton* wallZButton;          /**< Z Wall Button */
       oneTabButton* wallCutButton;        /**< X Meio Fio Button */
-      oneTabButton* wallPreviousButton;   /**< Wall Previous button */
       oneTabButton* wallDestroyButton;    /**< Wall Destroy Button */
-      oneTabButton* wallNextButton;       /**< Wall Next Button */
       oneTabButton* wallTextureButton;    /**< Wall Texture Button */
       oneTabButton* wallLessYTexture;     /**< Texture Y Less Button */
       oneTabButton* wallMoreYTexture;     /**< Texture Y More Button */

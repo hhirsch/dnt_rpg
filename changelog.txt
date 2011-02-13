@@ -16,6 +16,7 @@
    of get killed in a single strike);
  - Rewrote the dntParticleEditor to be more intuitive;
  - New main GUI layout;
+ - dntMapEditor: Better wall cut and destroy;
 
 BugFixes:
  - Fixed the outdoor minimap scale ratio;

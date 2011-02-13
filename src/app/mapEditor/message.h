@@ -37,7 +37,6 @@ using namespace std;
 #define TOOL_WALL_ADD_X             21
 #define TOOL_WALL_ADD_Z             22
 #define TOOL_WALL_CUT               23
-//#define TOOL_WALL2_ADD_Z            24
 #define TOOL_WALL_TEXTURE           25
 #define TOOL_WALL_LESS_Y_TEXTURE    26
 #define TOOL_WALL_MORE_Y_TEXTURE    27
@@ -46,8 +45,6 @@ using namespace std;
 #define TOOL_WALL_LESS_Z_TEXTURE    30
 #define TOOL_WALL_MORE_Z_TEXTURE    31
 #define TOOL_WALL_DESTROY           32
-#define TOOL_WALL_NEXT              33
-#define TOOL_WALL_PREVIOUS          34
 
 #define TOOL_PORTAL_ADD             131
 #define TOOL_PORTAL_TAG             132

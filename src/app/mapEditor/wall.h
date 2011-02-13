@@ -84,6 +84,9 @@ class wallController
       bool doCut();
       /*! Do The Wall Construction */
       void doWall(bool X, bool Z, bool full);
+      /*! Do the wall destroy
+       * \return true if destroyed a wall */
+      bool doDestroy();
 
 
 };

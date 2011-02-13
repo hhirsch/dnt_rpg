@@ -147,38 +147,15 @@ void wallController::verifyAction(GLfloat mouseX, GLfloat mouseY,
       }
    }
 
-   /* Next Wall */
-   else if(tool == TOOL_WALL_NEXT)
-   {
-      if(actualWall)
-      {
-         actualWall = (wall*)actualWall->getNext();
-      }
-      state = WALL_STATE_OTHER;
-      tool = TOOL_NONE;
-   }
-
-   /* Previous Wall */
-   else if(tool == TOOL_WALL_PREVIOUS)
-   {
-      if(actualWall)
-      {
-         actualWall = (wall*)actualWall->getPrevious();
-      }
-      state = WALL_STATE_OTHER;
-      tool = TOOL_NONE;
-   }
-
    /* Destroy Current Wall */
    else if(tool == TOOL_WALL_DESTROY)
    {
-      if(actualWall)
+      tmpWall = getWall();
+      if(tmpWall)
       {
-         actualMap->removeWall(actualWall);
-         actualWall = actualMap->getFirstWall();
+         actualWall = tmpWall;
+         doDestroy();
       }
-      state = WALL_STATE_OTHER;
-      tool = TOOL_NONE;
    }
 
    /* Cut Current Wall */
@@ -188,12 +165,7 @@ void wallController::verifyAction(GLfloat mouseX, GLfloat mouseY,
       if(tmpWall)
       {
          actualWall = tmpWall;
-         if(doCut())
-         {
-            /* Cut one, so just done */
-            tool = TOOL_NONE; 
-            actualTool = TOOL_NONE;
-         }
+         doCut();
       }
    }
 }
@@ -357,7 +329,7 @@ void wallController::doTexture()
 }
 
 /******************************************************
- *                        doWall()                    *
+ *                         doCut                      *
  ******************************************************/
 bool wallController::doCut()
 {
@@ -394,11 +366,42 @@ bool wallController::doCut()
          actualWall->x2 = mX;
       }
 
+      /* Wait mouse release */
+      while(mB & SDL_BUTTON(1))
+      {
+         SDL_PumpEvents();
+         int mx,my;
+         mB = SDL_GetMouseState(&mx,&my);
+      }
+
       return(true);
    }
 
    return(false);
+}
 
+/******************************************************
+ *                       doDestroy                    *
+ ******************************************************/
+bool wallController::doDestroy()
+{
+   state =  WALL_STATE_OTHER;
+
+   if( (actualWall) && ((mB & SDL_BUTTON(1))))
+   {
+      actualMap->removeWall(actualWall);
+      actualWall = actualMap->getFirstWall();
+      /* Wait mouse release */
+      while(mB & SDL_BUTTON(1))
+      {
+         SDL_PumpEvents();
+         int mx,my;
+         mB = SDL_GetMouseState(&mx,&my);
+      }
+      return(true);
+   }
+
+   return(false);
 }
 
 /******************************************************

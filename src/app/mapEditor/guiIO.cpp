@@ -264,10 +264,7 @@ void guiIO::openWallWindow()
    wallXButton = wallTabButton->insertButton(0,0,19,19);          /* Wall X */
    wallZButton = wallTabButton->insertButton(20,0,39,19);         /* Wall Z */
    wallCutButton = wallTabButton->insertButton(40,0,59,19);       /* Wall Cut */
-   //wallZ2Button = wallTabButton->insertButton(60,0,79,19);        /* Wall Z */
-   wallPreviousButton = wallTabButton->insertButton(80,0,99,19);  /* Previous */
    wallDestroyButton = wallTabButton->insertButton(100,0,119,19); /* Destroy */
-   wallNextButton = wallTabButton->insertButton(120,0,139,19);    /* Next */
    wallTextureButton = wallTabButton->insertButton(0,20,19,39);   /* Texture */
    wallLessXTexture = wallTabButton->insertButton(20,20,39,39);   /* Less X */
    wallMoreXTexture = wallTabButton->insertButton(40,20,59,39);   /* More X */
@@ -806,18 +803,6 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          {
             state = GUI_IO_STATE_WALL;
             tool = TOOL_WALL_MORE_Z_TEXTURE;
-            return(GUI_IO_NEW_STATE);
-         }
-         else if(object == (guiObject*) wallNextButton)
-         {
-            state = GUI_IO_STATE_WALL;
-            tool = TOOL_WALL_NEXT;
-            return(GUI_IO_NEW_STATE);
-         }
-         else if(object == (guiObject*) wallPreviousButton)
-         {
-            state = GUI_IO_STATE_WALL;
-            tool = TOOL_WALL_PREVIOUS;
             return(GUI_IO_NEW_STATE);
          }
          else if(object == (guiObject*) wallDestroyButton)
