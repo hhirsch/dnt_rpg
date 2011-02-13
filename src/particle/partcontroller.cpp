@@ -20,6 +20,7 @@
 
 #include "partcontroller.h"
 #include "../etc/dirs.h"
+#include "../etc/defparser.h"
 #include "../etc/extensions.h"
 #include "../engine/character.h"
 
@@ -190,13 +191,13 @@ int partController::numParticles()
  **********************************************************************/
 void partController::loadFromFile(string fileName)
 {
-   dirs dir;
-   fstream file;
-   string strBuffer;
-   int type; GLfloat X,Y,Z;
-   char buffer[150];
+   defParser def;
+   string key="", value="";
+   particleSystem* part = NULL;
+   char buffer[256];
+
+   GLfloat X,Y,Z;
    
-   int totalPlanes = 0;
    float x1, y1, z1; 
    float x2, y2, z2;
    float dX, dZ; 
@@ -206,46 +207,34 @@ void partController::loadFromFile(string fileName)
    deleteAll(true);
 
    /* Now, try to load from file */
-   file.open(dir.getRealFile(fileName).c_str(), ios::in | ios::binary);
-
-   if(!file)
+   if(!def.load(fileName))
    {
-       cerr << "Error while opening Map particle file: "
-            << dir.getRealFile(fileName) << endl;
+       cerr << "Couldn't open Map particle file: " << fileName << endl;
        return;
    }
 
-   while(!file.eof())
+   while(def.getNextTuple(key, value))
    {
-      if(getline(file, strBuffer) > 0)
+      if(key == "particle")
       {
-         sscanf(strBuffer.c_str(), "%d %f %f %f %s", &type,&X,&Y,&Z,&buffer[0]);
-
-         /* FIXME: Waterfall Extra Info */
-         if(type == DNT_PARTICLE_SYSTEM_TYPE_WATERFALL)
+         sscanf(value.c_str(), "%f %f %f %s", &X,&Y,&Z, &buffer[0]);
+         part = addParticle(X, Y, Z, buffer);
+      }
+      else if(key == "interplane")
+      {
+         if(!part)
          {
-            //particula = (part1*) addParticle(type, X, Y, Z, buffer);
-            getline(file, strBuffer);
-            sscanf(strBuffer.c_str(), "%d", &totalPlanes);
-
-            /* read Planes */
-            while(totalPlanes > 0)
-            {
-               getline(file, strBuffer);
-               sscanf(strBuffer.c_str(), "%f %f %f %f %f %f %f %f %d",
-                     &x1, &y1, &z1, &x2, &y2, &z2, &dX, &dZ, &inclination);
-               //particula->addPlane(x1, y1, z1, x2, y2, z2, dX, dZ, inclination);
-               totalPlanes--;
-            }
+            cerr << "Error: interplane without particle at " 
+                 << fileName << endl;
          }
-         /* Other Particles */
          else
          {
-            addParticle(X, Y, Z, buffer);
+            sscanf(value.c_str(), "%f %f %f %f %f %f %f %f %d",
+                  &x1, &y1, &z1, &x2, &y2, &z2, &dX, &dZ, &inclination);
+            part->addPlane(x1, y1, z1, x2, y2, z2, dX, dZ, inclination);
          }
       }
    }
-   file.close();
 }
 
 /**********************************************************************
@@ -255,8 +244,8 @@ void partController::saveToFile(string fileName)
 {
    FILE* file; 
    GLfloat X,Y,Z;
-   int i;
-   //interPlane* plane;
+   int i,j;
+   interPlane* plane;
 
    if(!(file=fopen(fileName.c_str(),"w")))
    {
@@ -271,35 +260,21 @@ void partController::saveToFile(string fileName)
    {
       /* Save the general info */
       part->getPosition(X, Y, Z);
-      fprintf(file,"%d %f %f %f %s\n", part->type, X, Y, Z,
+      fprintf(file,"particle = %f %f %f %s\n", X, Y, Z,
                part->getFileName().c_str());
 
-      /* TODO Save some specific info */
-#if 0
-         switch(part->type)
-         {
-            case DNT_PARTICLE_TYPE_WATERFALL:
-            {
-               /* Save Planes */
-               part1* wt = (part1*)part;
-               if(wt->getTotalPlanes() > 0)
-               {
-                  fprintf(file,"%d\n",wt->getTotalPlanes());
-               }
-               plane = wt->getLastPlane();
-               for(p = 0; p < wt->getTotalPlanes(); p++)
-               {
-                  fprintf(file,"%f %f %f %f %f %f %f %f %d\n", 
-                        plane->x1, plane->y1, plane->z1, 
-                        plane->x2, plane->y2, plane->z2, 
-                        plane->dX, plane->dZ, plane->inclination);
-                  plane = (interPlane*)plane->getNext();
-               }
-            }
-            break;
-
-         }
+      /* Save some specific info */
+      plane = (interPlane*)part->intersections.getFirst();
+      for(j=0; j < part->intersections.getTotal(); j++)
+      {
+         fprintf(file,"interplane = %f %f %f %f %f %f %f %f %d\n", 
+               plane->x1, plane->y1, plane->z1, 
+               plane->x2, plane->y2, plane->z2, 
+               plane->dX, plane->dZ, plane->inclination);
+         plane = (interPlane*)plane->getNext();
       }
+      /* TODO: grass */
+#if 0
       else if(part->type == DNT_PARTICLE_TYPE_GRASS)
       {
          grass* gr = (grass*)part;

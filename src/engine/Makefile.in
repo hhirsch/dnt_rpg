@@ -56,7 +56,7 @@ OBJSSOUND = $(ENDSOUND)ogg_stream.o  $(ENDSOUND)sound.o $(ENDSOUND)sndfx.o
 OBJSLANG = $(ENDLANG)translate.o
 OBJSPART = $(ENDPART)lake.o $(ENDPART)particle.o $(ENDPART)partorigin.o \
            $(ENDPART)partcontroller.o $(ENDPART)partelement.o \
-           $(ENDPART)partlist.o
+           $(ENDPART)partlist.o $(ENDPART)interplane.o
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o \
             $(ENDFIGHT)fightSystem.o
 OBJSETC = $(ENDETC)animodel.o $(ENDETC)extensions.o $(ENDETC)message3d.o \

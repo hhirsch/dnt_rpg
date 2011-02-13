@@ -598,6 +598,9 @@ bool particleSystem::continueLive(particle& part)
  ***************************************************************/
 void particleSystem::update(particle* part)
 {
+   float dX=0.0f;
+   float dZ=0.0f;
+
    /* Make it old */
    part->age++;
 
@@ -627,17 +630,31 @@ void particleSystem::update(particle* part)
       velocity[1].updateValue(part->velY);
       velocity[2].updateValue(part->velZ);
 
-      /* Apply gravity */
-      part->velY += -0.02*gravity;
+      /* Verify plane intersection, if defined */
+      if( (intersections.getTotal() > 0) &&
+          (intersections.intersectPlanes(part, &dX, &dZ)) )
+      {
+         part->velY = 0;
+         part->velX += dX*part->velY*0.02*(-gravity)*
+            ((rand() / ((double)RAND_MAX + 1)));
+         part->velZ += dZ*part->velY*0.02*(-gravity)*
+            ((rand() / ((double)RAND_MAX + 1)));
+         part->posX += part->velX*0.02;
+         part->posZ += part->velZ*0.02;
+      }
+      else
+      {
+         /* Apply gravity */
+         part->velY += -0.02*gravity;
+         part->posY += 0.02*part->velY;
+         part->posX += 0.02*part->velX;
+         part->posZ += 0.02*part->velZ;
+      }
 
-      part->posX += 0.02*part->velX;
-      part->posY += 0.02*part->velY;
-      part->posZ += 0.02*part->velZ;
    }
 
    /* Update scale */
    scale.updateValue(part->size);
-
 
    /* Verify floor collision */
    if( (floorCollision) && (part->status != PARTICLE_STATUS_STATIC)) 
@@ -940,3 +957,30 @@ int particleSystem::getMaxParticleLifeTime()
 {
    return(maxParticleLifeTime);
 }
+
+/****************************************************************************
+ *                               addPlane                                   *
+ ****************************************************************************/
+interPlane* particleSystem::addPlane(float x1, float y1, float z1, 
+                                     float x2, float y2, float z2,
+                                     float dX, float dZ, int inclination)
+{
+   interPlane* ip = new interPlane;
+
+   /* Set values */
+   ip->x1 = x1;
+   ip->y1 = y1;
+   ip->z1 = z1;
+   ip->x2 = x2;
+   ip->y2 = y2;
+   ip->z2 = z2;
+   ip->dX = dX;
+   ip->dZ = dZ;
+   ip->inclination = inclination;
+
+   /* Insert at the list */
+   intersections.insert(ip);
+
+   return(ip);
+}
+

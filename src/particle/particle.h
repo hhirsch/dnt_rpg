@@ -28,6 +28,7 @@ using namespace std;
 
 #include "partelement.h"
 #include "partorigin.h"
+#include "interplane.h"
 
 #include "../etc/dirs.h"
 #include "../etc/extensions.h"
@@ -50,8 +51,7 @@ using namespace std;
 /*! The particle system types */
 enum
 {
-    DNT_PARTICLE_SYSTEM_TYPE_DEFAULT=0,
-    DNT_PARTICLE_SYSTEM_TYPE_WATERFALL
+    DNT_PARTICLE_SYSTEM_TYPE_DEFAULT=0
 };
 
 /*! Number of actualizations to stabilize a system */
@@ -139,6 +139,22 @@ class particleSystem: public dntListElement
        * \return max life time of a single particle*/
       int getMaxParticleLifeTime();
 
+      /*! Add one plane to internal Planes
+       * \param x1 -> initial x plane coordinate 
+       * \param y1 -> initial y plane coordinate
+       * \param z1 -> initial z plane coordinate
+       * \param x2 -> final x plane coordinate 
+       * \param y2 -> final y plane coordinate
+       * \param z2 -> final z plane coordinate
+       * \param dX -> particle X variation when plane contact
+       * \param dZ -> particle Z variation when plane contact
+       * \param inclination -> plane inclination type */
+      interPlane* addPlane(float x1, float y1, float z1, 
+                           float x2, float y2, float z2, 
+                           float dX, float dZ, int inclination);
+
+
+
       friend class partController;  /**< The controller is our friend */
       friend class particleList;    /**< The list is our friend too */
 
@@ -182,6 +198,8 @@ class particleSystem: public dntListElement
       dntPartElement position[3]; /**< Position variation element */
       dntPartElement scale;       /**< Scale variation element */
       
+      interPlaneList intersections; /**< The internal Planes */
+
       /* System Bounding Box */
       float boundX1;           /**< Bounding Box */
       float boundX2;           /**< Bounding Box */

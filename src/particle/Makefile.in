@@ -7,9 +7,15 @@ ENDENGINE=../engine/
 ENDETC=../etc/
 ENDMAP=../map/
 
-OBJS = lake.o particle.o partcontroller.o partelement.o partlist.o partorigin.o
+OBJS = interplane.o lake.o particle.o partcontroller.o partelement.o \
+       partlist.o partorigin.o
 
 all: $(OBJS)
+
+interplane.o: interplane.cpp interplane.h
+	@printf "Making interplane.o... "
+	@$(CC) $(CFLAGS) interplane.cpp -o interplane.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 grass.o: grass.cpp grass.h particle.h wind.h
 	@printf "Making grass.o... "
