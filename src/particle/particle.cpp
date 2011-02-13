@@ -634,12 +634,11 @@ void particleSystem::update(particle* part)
       if( (intersections.getTotal() > 0) &&
           (intersections.intersectPlanes(part, &dX, &dZ)) )
       {
-         part->velY = 0;
-         part->velX += dX*part->velY*0.02*(-gravity)*
-            ((rand() / ((double)RAND_MAX + 1)));
-         part->velZ += dZ*part->velY*0.02*(-gravity)*
-            ((rand() / ((double)RAND_MAX + 1)));
+         part->velY = -0.02*part->velY+(-gravity);
+         part->velX += dX*0.02*(-gravity);
+         part->velZ += dZ*0.02*(-gravity);
          part->posX += part->velX*0.02;
+         part->posY += 0.02*part->velY;
          part->posZ += part->velZ*0.02;
       }
       else
