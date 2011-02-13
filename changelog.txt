@@ -2,8 +2,11 @@
 |                Version 0.7                   |
 ================================================
  - New race's images;
+ - New classes' images;
+ - Rewrote particle systems for better generalization;
  - Default walls texture repeat to 64 (instead of 16);
  - dntMapEditor: Using dntList and defParser for list of files;
+ - dntMapEditor: Plane editor for any kind of particles;
  - heightmap2dnt: Added indoor map import (with walls);
  - Capacity to create empty (without decorations) windows;
  - Text over cursor;
