@@ -197,6 +197,8 @@ void editor::closeMap()
       models.init();
       mapOpened = false;
       map = NULL;
+      particleSystem->deleteAll();
+      particleSystem->setActualMap(map, NULL);
    }
 }
 
@@ -298,6 +300,7 @@ void editor::openMap()
       else
       {
          particleSystem->deleteAll();
+         particleSystem->setActualMap(map, NULL);
       }
       /* Real Size when outDoor */
       if(map->isOutdoor())
@@ -509,6 +512,7 @@ void editor::newMap()
    curTextureName = ((mapTexture*)map->textures.getFirst())->name;
    NPCs = new (characterList);
    npcController = new npcs(map, NPCs, features);
+   particleSystem->setActualMap(map, NULL);
    gui->showMessage("Created New Game Map!");
    glEnable(GL_FOG);
    {
