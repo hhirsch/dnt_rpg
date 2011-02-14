@@ -81,6 +81,8 @@ class editor
       int insertTexture(string textureFile);
       /*! Render All Static Scenery Objects */
       void renderSceneryObjects();
+      /*! Update the mouse projection on axys XZ */
+      void updateMouseFloorPos();
 
       SDL_Surface *screen;           /**< SDL Screen */
       Uint8* keys;                   /**< Keyboard State */
@@ -91,6 +93,7 @@ class editor
       bool quit;                     /**< Quit Editor Flag */
 
       GLdouble xReal,yReal,zReal;
+      GLfloat xFloor, zFloor; 
 
       sun* gameSun;                  /**< The Sun on Game */
       sky* gameSky;                  /**< The Sky on Game */

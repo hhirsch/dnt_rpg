@@ -945,6 +945,38 @@ void editor::draw()
 }
 
 /*********************************************************************
+ *                         updateMouseFloorPos                       *
+ *********************************************************************/
+void editor::updateMouseFloorPos()
+{
+   GLfloat wx = mouseX,
+           wy = SCREEN_Y - mouseY;
+
+   GLdouble cX=0, cY=0, cZ=0;
+   GLdouble fX=0, fY=0, fZ=0;
+
+   GLfloat t=0, vd=0;
+
+   /* Get at camera */
+   gluUnProject(wx, wy, 0, modl, proj, viewPort, &cX, &cY, &cZ);
+
+   /* Get at far */
+   gluUnProject(wx, wy, 0.9, modl, proj, viewPort, &fX, &fY, &fZ);
+
+   /* Calculate */
+   vd = fY - cY;
+   if(vd == 0)
+   {
+      /* Vector Paralell to the floor */
+      return;
+   }
+   t = (-cY / vd);
+   xFloor = cX + t*(fX-cX);
+   zFloor = cZ + t*(fZ-cZ);
+}
+
+
+/*********************************************************************
  *                              doEditorIO                           *
  *********************************************************************/
 void editor::doEditorIO()
@@ -955,6 +987,8 @@ void editor::doEditorIO()
 
    glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
    gluUnProject( wx, wy, wz, modl, proj, viewPort, &xReal, &yReal, &zReal);
+
+   updateMouseFloorPos();
 
    if( (gui->getState() == GUI_IO_STATE_TERRAIN) && (mapOpened))
    {
@@ -981,7 +1015,7 @@ void editor::doEditorIO()
    else if( (gui->getState() == GUI_IO_STATE_WALL) && (mapOpened))
    {
       int tl = gui->getTool();
-      wallEditor->verifyAction(xReal, yReal, zReal, mButton, keys, 
+      wallEditor->verifyAction(xFloor, yReal, zFloor, mButton, keys, 
                                tl, curTexture, curTextureName);
       gui->setTool(tl);
    }
