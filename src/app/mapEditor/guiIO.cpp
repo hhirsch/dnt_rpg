@@ -936,6 +936,19 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          {
             curs.setTextOver("Destroy Wall");
          }
+         /* Portal Buttons */
+         else if(object == (guiObject*) portalAddButton)
+         {
+            curs.setTextOver("Add portal");
+         }
+         else if(object == (guiObject*) portalTagButton)
+         {
+            curs.setTextOver("Set portal destination");
+         }
+         else if(object == (guiObject*) portalDoorButton)
+         {
+            curs.setTextOver("Select door to add");
+         }
       }
       break;
 
