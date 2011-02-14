@@ -110,14 +110,15 @@ void wallController::verifyAction(GLfloat mouseX, GLfloat mouseY,
       limitSquare = true;
    }
 
-   /* Add Wall Tools */
-   if(tool == TOOL_WALL_ADD_X)
+   /* Add Wall Tool */
+   if(tool == TOOL_WALL_ADD)
    {
       doWall(true, false, true);
    }
-   else if(tool == TOOL_WALL_ADD_Z)
+   /* Edit Wall Toold */
+   else if(tool == TOOL_WALL_EDIT)
    {
-      doWall(false, true, true);
+      /* TODO */
    }
 
    /* Add texture to the wall */
@@ -432,6 +433,7 @@ void wallController::doWall(bool X, bool Z, bool full)
       actualWall->leftTexture.setTextureName(textureName);
       actualWall->rightTexture.setTextureId(texture);
       actualWall->rightTexture.setTextureName(textureName);
+      
       if( X )
       {
           actualWall->x2 = mX;
@@ -459,6 +461,39 @@ void wallController::doWall(bool X, bool Z, bool full)
    }
    else if((state == WALL_STATE_ADD_INIT) && (mB & SDL_BUTTON(1)))
    {
+      if(fabsf(mX - actualWall->x1) >= fabs(mZ - actualWall->z1) )
+      {
+         /* TODO: limit square! */
+
+         /* Do on X */
+         actualWall->x2 = mX;
+
+         /* And set the Z fixed */
+         if(mZ >= actualWall->z1)
+         {
+            actualWall->z2 = actualWall->z1+10;
+         }
+         else
+         {
+            actualWall->z2 = actualWall->z1-10;
+         }
+      }
+      else
+      {
+         /* Do on Z */
+         actualWall->z2 = mZ;
+
+         /* And set the X fixed */
+         if(mX >= actualWall->x1)
+         {
+            actualWall->x2 = actualWall->x1+10;
+         }
+         else
+         {
+            actualWall->x2 = actualWall->x1-10;
+         }
+      }
+#if 0
       if(X)
       {
          actualWall->x2 = mX;
@@ -522,6 +557,7 @@ void wallController::doWall(bool X, bool Z, bool full)
             }
          }
       }
+#endif
    }
    else if( (state == WALL_STATE_ADD_INIT) && (!(mB & SDL_BUTTON(1))))
    {

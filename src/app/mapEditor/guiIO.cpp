@@ -262,9 +262,9 @@ void guiIO::openWallWindow()
    wallWindow = gui->insertWindow(0,599-124,153,599-62,"Wall");
    wallTabButton = wallWindow->getObjectsList()->insertTabButton(7,17,0,0,
                                  dir.getRealFile("mapEditor/wall.png").c_str());
-   wallXButton = wallTabButton->insertButton(0,0,19,19);          /* Wall X */
-   wallZButton = wallTabButton->insertButton(20,0,39,19);         /* Wall Z */
-   wallCutButton = wallTabButton->insertButton(40,0,59,19);       /* Wall Cut */
+   wallAddButton = wallTabButton->insertButton(0,0,19,19);       /* Wall Add */
+   wallEditButton = wallTabButton->insertButton(20,0,39,19);     /* Wall Edit */
+   wallCutButton = wallTabButton->insertButton(40,0,59,19);      /* Wall Cut */
    wallDestroyButton = wallTabButton->insertButton(100,0,119,19); /* Destroy */
    wallTextureButton = wallTabButton->insertButton(0,20,19,39);   /* Texture */
    wallLessXTexture = wallTabButton->insertButton(20,20,39,39);   /* Less X */
@@ -747,16 +747,16 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          }
 
          /* Wall Buttons */
-         else if(object == (guiObject*) wallXButton)
+         else if(object == (guiObject*) wallAddButton)
          {
             state = GUI_IO_STATE_WALL;
-            tool = TOOL_WALL_ADD_X;
+            tool = TOOL_WALL_ADD;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (guiObject*) wallZButton)
+         else if(object == (guiObject*) wallEditButton)
          {
             state = GUI_IO_STATE_WALL;
-            tool = TOOL_WALL_ADD_Z;
+            tool = TOOL_WALL_EDIT;
             return(GUI_IO_NEW_STATE);
          }
          else if(object == (guiObject*) wallCutButton)
@@ -892,13 +892,13 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
       case FARSO_EVENT_ON_FOCUS_TAB_BUTTON:
       {
          /* Wall Buttons */
-         if(object == (guiObject*) wallXButton)
+         if(object == (guiObject*) wallAddButton)
          {
-            curs.setTextOver("Create X Wall");
+            curs.setTextOver("Create Wall");
          }
-         else if(object == (guiObject*) wallZButton)
+         else if(object == (guiObject*) wallEditButton)
          {
-            curs.setTextOver("Create Z Wall");
+            curs.setTextOver("Edit Wall");
          }
          else if(object == (guiObject*) wallCutButton)
          {

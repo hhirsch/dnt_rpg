@@ -54,13 +54,12 @@ string messageForTool(int tool)
       case TOOL_PORTAL_DOOR:
          return("Put Door on Wall");
       break;
-      case TOOL_WALL_ADD_X:
-         return("Draw The Wall on X Axis (press B tor Add only on Square "
+      case TOOL_WALL_ADD:
+         return("Draw The Wall (press B tor Add only on Square "
                 "Borders)");
       break;
-      case TOOL_WALL_ADD_Z:
-         return("Draw The Wall on Z axis (press B to Add only on Square "
-                "Borders)");
+      case TOOL_WALL_EDIT:
+         return("Grab or Draw The Wall");
       break;
       case TOOL_WALL_CUT:
          return("Click on the position to cut wall");

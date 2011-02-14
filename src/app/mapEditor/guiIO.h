@@ -207,8 +207,8 @@ class guiIO
       /*********************Wall*Window*******************************/
       window* wallWindow;                 /**< Wall Window */
       tabButton* wallTabButton;           /**< Wall Tab Button */
-      oneTabButton* wallXButton;          /**< X Wall Button */
-      oneTabButton* wallZButton;          /**< Z Wall Button */
+      oneTabButton* wallAddButton;        /**< Add Wall Button */
+      oneTabButton* wallEditButton;       /**< Edit Wall Button */
       oneTabButton* wallCutButton;        /**< X Meio Fio Button */
       oneTabButton* wallDestroyButton;    /**< Wall Destroy Button */
       oneTabButton* wallTextureButton;    /**< Wall Texture Button */

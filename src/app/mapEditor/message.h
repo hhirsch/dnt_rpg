@@ -34,8 +34,8 @@ using namespace std;
 #define TOOL_TERRAIN_DOWN           13
 #define TOOL_TERRAIN_TEXTURE        14
 
-#define TOOL_WALL_ADD_X             21
-#define TOOL_WALL_ADD_Z             22
+#define TOOL_WALL_ADD               21
+#define TOOL_WALL_EDIT              22
 #define TOOL_WALL_CUT               23
 #define TOOL_WALL_TEXTURE           25
 #define TOOL_WALL_LESS_Y_TEXTURE    26
