@@ -39,11 +39,14 @@ class wallController
        * \param mouseX -> mouse X coordinate
        * \param mouseY -> mouse Y coordinate 
        * \param mouseZ -> mouse Z coordinate 
+       * \param floorX -> mouse X coordinate on floor
+       * \param floorZ -> mouse Z coordinate on floor
        * \param mButton -> mouse button state
        * \param tool -> current Tool
        * \param curTexture -> current Texture Id 
        * \param curTextureName -> current texture name */
       void verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
+                        GLfloat floorX, GLfloat floorZ,
                         Uint8 mButton, Uint8* keys, int& tool, 
                         GLuint curTexture, string curTextureName);
 
@@ -61,7 +64,8 @@ class wallController
       GLuint texture;         /**< Current Texture */
       string textureName;     /**< Current Texture Name */
 
-      GLfloat mX, mY, mZ;     /**< Mouse Coordinates */
+      GLfloat mX, mY, mZ;     /**< Mouse World Coordinates */
+      GLfloat fX, fZ;         /**< Mouse Floor Coordinates */
 
       Uint8 mB;               /**< Mouse Buttons */
 

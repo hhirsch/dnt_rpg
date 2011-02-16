@@ -90,7 +90,8 @@ wall* wallController::getWall()
  *                      verifyAction                  *
  ******************************************************/
 void wallController::verifyAction(GLfloat mouseX, GLfloat mouseY, 
-                                  GLfloat mouseZ, Uint8 mButton, 
+                                  GLfloat mouseZ, GLfloat floorX,
+                                  GLfloat floorZ, Uint8 mButton, 
                                   Uint8* keys, int& tool, 
                                   GLuint curTexture, string curTextureName)
 {
@@ -100,6 +101,8 @@ void wallController::verifyAction(GLfloat mouseX, GLfloat mouseY,
    mX = mouseX;
    mY = mouseY;
    mZ = mouseZ;
+   fX = floorX;
+   fZ = floorZ;
    mB = mButton;
 
    wall* tmpWall = NULL;
@@ -185,10 +188,10 @@ void wallController::drawTemporary(GLdouble modelView[16],
    {
       glColor3f(0.1, 0.8, 0.8);
       glBegin(GL_QUADS);
-      glVertex3f(mX-1, 0.5, mZ-1);
-      glVertex3f(mX-1, 0.5, mZ+1);
-      glVertex3f(mX+1, 0.5, mZ+1);
-      glVertex3f(mX+1, 0.5, mZ-1);
+      glVertex3f(fX-1, 0.5, fZ-1);
+      glVertex3f(fX-1, 0.5, fZ+1);
+      glVertex3f(fX+1, 0.5, fZ+1);
+      glVertex3f(fX+1, 0.5, fZ-1);
       glEnd();
    }
 
@@ -423,8 +426,8 @@ void wallController::doWall(bool X, bool Z, bool full)
          //FIXME Curbs add!
          cerr << "Error: Removed the curbs! FIXME!" << endl;
       }
-      actualWall->x1 = mX;
-      actualWall->z1 = mZ;
+      actualWall->x1 = fX;
+      actualWall->z1 = fZ;
       actualWall->frontTexture.setTextureId(texture);
       actualWall->frontTexture.setTextureName(textureName);
       actualWall->backTexture.setTextureId(texture);
@@ -436,40 +439,40 @@ void wallController::doWall(bool X, bool Z, bool full)
       
       if( X )
       {
-          actualWall->x2 = mX;
+          actualWall->x2 = fX;
           if( !full )
           {
-             actualWall->z2 = mZ+2.5;  
+             actualWall->z2 = fZ+2.5;  
           }
           else
           {
-             actualWall->z2 = mZ+10;
+             actualWall->z2 = fZ+10;
           }
       }
       else
       {
-          actualWall->z2 = mZ;
+          actualWall->z2 = fZ;
           if ( !full )
           {
-             actualWall->x2 = mX+2.5;
+             actualWall->x2 = fX+2.5;
           }
           else
           {
-             actualWall->x2 = mX+10; 
+             actualWall->x2 = fX+10; 
           }
       }
    }
    else if((state == WALL_STATE_ADD_INIT) && (mB & SDL_BUTTON(1)))
    {
-      if(fabsf(mX - actualWall->x1) >= fabs(mZ - actualWall->z1) )
+      if(fabsf(fX - actualWall->x1) >= fabs(fZ - actualWall->z1) )
       {
          /* TODO: limit square! */
 
          /* Do on X */
-         actualWall->x2 = mX;
+         actualWall->x2 = fX;
 
          /* And set the Z fixed */
-         if(mZ >= actualWall->z1)
+         if(fZ >= actualWall->z1)
          {
             actualWall->z2 = actualWall->z1+10;
          }
@@ -481,10 +484,10 @@ void wallController::doWall(bool X, bool Z, bool full)
       else
       {
          /* Do on Z */
-         actualWall->z2 = mZ;
+         actualWall->z2 = fZ;
 
          /* And set the X fixed */
-         if(mX >= actualWall->x1)
+         if(fX >= actualWall->x1)
          {
             actualWall->x2 = actualWall->x1+10;
          }

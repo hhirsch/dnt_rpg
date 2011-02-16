@@ -1015,8 +1015,8 @@ void editor::doEditorIO()
    else if( (gui->getState() == GUI_IO_STATE_WALL) && (mapOpened))
    {
       int tl = gui->getTool();
-      wallEditor->verifyAction(xFloor, yReal, zFloor, mButton, keys, 
-                               tl, curTexture, curTextureName);
+      wallEditor->verifyAction(xReal, yReal, zReal, xFloor, zFloor,
+            mButton, keys, tl, curTexture, curTextureName);
       gui->setTool(tl);
    }
    else if( (gui->getState() == GUI_IO_STATE_OBJECTS) && (mapOpened))
