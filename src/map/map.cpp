@@ -2284,9 +2284,18 @@ void Map::newMap(int X, int Z)
    alloc();
 
    /* add a first default texture */
-   int IDtexture = insertTexture("texturas/floor_outdoor/grass.png", 
-                                 "texturas/floor_outdoor/grass.png",
-                                 54,102,49);
+   int IDtexture;
+   
+   if(isOutdoor())
+   {
+      IDtexture = insertTexture("texturas/floor_outdoor/grass.png", 
+            "texturas/floor_outdoor/grass.png", 54,102,49);
+   }
+   else
+   {
+      IDtexture = insertTexture("texturas/floor_indoor/steel1.png", 
+            "texturas/floor_indoor/steel1.png", 54,102,49);
+   }
 
    for(auxZ = 0; auxZ < z; auxZ++)
    {
