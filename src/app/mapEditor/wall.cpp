@@ -62,7 +62,7 @@ wallController::~wallController()
 /******************************************************
  *                        getWall                     *
  ******************************************************/
-wall* wallController::getWall()
+wall* wallController::getWall(int radius)
 {
    wall* aux;
    int wNum;
@@ -73,11 +73,11 @@ wall* wallController::getWall()
    for(wNum = 0; wNum < actualMap->getTotalWalls(); wNum++)
    {
       if( ( ((mX >= aux->x1) && (mX <= aux->x2))  ||
-            ((mX-1 >= aux->x1) && (mX-1 <= aux->x2)) ||
-            ((mX+1 >= aux->x1) && (mX+1 <= aux->x2)) ) &&
+            ((mX-radius >= aux->x1) && (mX-radius <= aux->x2)) ||
+            ((mX+radius >= aux->x1) && (mX+radius <= aux->x2)) ) &&
           ( ((mZ >= aux->z1) && (mZ <= aux->z2))  ||
-            ((mZ-1 >= aux->z1) && (mZ-1 <= aux->z2)) ||
-            ((mZ+1 >= aux->z1) && (mZ+1 <= aux->z2)) ) )
+            ((mZ-radius >= aux->z1) && (mZ-radius <= aux->z2)) ||
+            ((mZ+radius >= aux->z1) && (mZ+radius <= aux->z2)) ) )
       {
          return(aux);
       }
@@ -116,7 +116,7 @@ void wallController::verifyAction(GLfloat mouseX, GLfloat mouseY,
    /* Add Wall Tool */
    if(tool == TOOL_WALL_ADD)
    {
-      doWall(true, false, true);
+      doWall();
    }
    /* Edit Wall Toold */
    else if(tool == TOOL_WALL_EDIT)
@@ -411,23 +411,17 @@ bool wallController::doDestroy()
 /******************************************************
  *                        doWall()                    *
  ******************************************************/
-void wallController::doWall(bool X, bool Z, bool full)
+void wallController::doWall()
 {
+   wall* nearWall = getWall(5);
+
    if( (state == WALL_STATE_OTHER) && (mB & SDL_BUTTON(1)))
    {
       state = WALL_STATE_ADD_INIT;
       limitSquare = false;
-      if(full)
-      {
-         actualWall = actualMap->addWall(0,0,0,0);
-      }
-      else
-      {
-         //FIXME Curbs add!
-         cerr << "Error: Removed the curbs! FIXME!" << endl;
-      }
-      actualWall->x1 = fX;
-      actualWall->z1 = fZ;
+      actualWall = actualMap->addWall(0,0,0,0);
+
+      /* Set texture to the current one */
       actualWall->frontTexture.setTextureId(texture);
       actualWall->frontTexture.setTextureName(textureName);
       actualWall->backTexture.setTextureId(texture);
@@ -437,30 +431,41 @@ void wallController::doWall(bool X, bool Z, bool full)
       actualWall->rightTexture.setTextureId(texture);
       actualWall->rightTexture.setTextureName(textureName);
       
-      if( X )
+      cerr << fX << " " << fZ << endl;
+      /* Set initial position */
+      if(!nearWall)
       {
-          actualWall->x2 = fX;
-          if( !full )
-          {
-             actualWall->z2 = fZ+2.5;  
-          }
-          else
-          {
-             actualWall->z2 = fZ+10;
-          }
+         actualWall->x1 = fX;
+         actualWall->x2 = fX;
+         actualWall->z1 = fZ;
+         actualWall->z2 = fZ;
       }
       else
       {
-          actualWall->z2 = fZ;
-          if ( !full )
-          {
-             actualWall->x2 = fX+2.5;
-          }
-          else
-          {
-             actualWall->x2 = fX+10; 
-          }
+         actualWall->x1 = fX;
+         actualWall->z1 = fZ;
+         actualWall->x2 = fX;
+         actualWall->z2 = fZ;
+
+         /* Put it side by side with the wall */
+         if( fabsf(nearWall->x1 - fX) <= 5)
+         {
+            actualWall->x1 = nearWall->x1;
+         }
+         else if( fabsf(nearWall->x2 - fX) <= 5)
+         {
+            actualWall->x1 = nearWall->x2;
+         }
+         if( fabsf(nearWall->z1 - fZ) <= 5)
+         {
+            actualWall->z1 = nearWall->z1;
+         }
+         else if( fabsf(nearWall->z2 - fZ) <= 5)
+         {
+            actualWall->z1 = nearWall->z2;
+         }
       }
+
    }
    else if((state == WALL_STATE_ADD_INIT) && (mB & SDL_BUTTON(1)))
    {

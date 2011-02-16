@@ -74,8 +74,9 @@ class wallController
       GLuint markTexture;     /**< Actual Wall mark Texture */
 
       /*! Gets wall on actual Mouse Position
+       * \param radius -> delta from mouse position to verify wall in.
        * \return -> pointer to the wall under the mouse or NULL */
-      wall* getWall();
+      wall* getWall(int radius=1);
       /*! Get the texture of the wall side the mouse is pointing to
        * \return pointer to the wall side texture or NULL */
       wallTexture* getSideTexture();
@@ -87,7 +88,7 @@ class wallController
        * \return -> true if cut, false if not cut yet*/
       bool doCut();
       /*! Do The Wall Construction */
-      void doWall(bool X, bool Z, bool full);
+      void doWall();
       /*! Do the wall destroy
        * \return true if destroyed a wall */
       bool doDestroy();
