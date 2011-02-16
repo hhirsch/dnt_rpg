@@ -949,6 +949,51 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          {
             curs.setTextOver("Select door to add");
          }
+         /* Objects Buttons */
+         else if(object == (guiObject*) objectCommonButton)
+         {
+            curs.setTextOver("Common");
+         }
+         else if(object == (guiObject*) objectGunsButton)
+         {
+            curs.setTextOver("Weapons");
+         }
+         else if(object == (guiObject*) objectBuildButton)
+         {
+            curs.setTextOver("Buildings");
+         }
+         else if(object == (guiObject*) objectCarsButton)
+         {
+            curs.setTextOver("Vehicles");
+         }
+         else if(object == (guiObject*) objectIcexButton)
+         {
+            curs.setTextOver("School-like");
+         }
+         else if(object == (guiObject*) objectNaturalButton)
+         {
+            curs.setTextOver("Natural");
+         }
+         else if(object == (guiObject*) objectCharButton)
+         {
+            curs.setTextOver("Characters");
+         }
+         else if(object == (guiObject*) objectMacabreButton)
+         {
+            curs.setTextOver("Macabre");
+         }
+         else if(object == (guiObject*) objectBathButton)
+         {
+            curs.setTextOver("Toilete");
+         }
+         else if(object == (guiObject*) objectStreetButton)
+         {
+            curs.setTextOver("Outdoor");
+         }
+         else if(object == (guiObject*) objectJunkButton)
+         {
+            curs.setTextOver("Junk");
+         } 
       }
       break;
 
