@@ -474,7 +474,22 @@ void wallController::doWall()
          /* TODO: limit square! */
 
          /* Do on X */
-         actualWall->x2 = fX;
+         if(!nearWall)
+         {
+            actualWall->x2 = fX;
+         }
+         else
+         {
+            /* Put it side by side with the wall */
+            if( fabsf(nearWall->x1 - fX) <= 5)
+            {
+               actualWall->x2 = nearWall->x1;
+            }
+            else if( fabsf(nearWall->x2 - fX) <= 5)
+            {
+               actualWall->x2 = nearWall->x2;
+            }
+         }
 
          /* And set the Z fixed */
          if(fZ >= actualWall->z1)
@@ -489,7 +504,22 @@ void wallController::doWall()
       else
       {
          /* Do on Z */
-         actualWall->z2 = fZ;
+         if(!nearWall)
+         {
+            actualWall->z2 = fZ;
+         }
+         else
+         {
+            /* Put it at the nearWall */
+            if( fabsf(nearWall->z1 - fZ) <= 5)
+            {
+               actualWall->z2 = nearWall->z1;
+            }
+            else if( fabsf(nearWall->z2 - fZ) <= 5)
+            {
+               actualWall->z2 = nearWall->z2;
+            }
+         }
 
          /* And set the X fixed */
          if(fX >= actualWall->x1)
