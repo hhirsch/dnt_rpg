@@ -55,8 +55,11 @@ string messageForTool(int tool)
          return("Put Door on Wall");
       break;
       case TOOL_WALL_ADD:
-         return("Draw The Wall (press B tor Add only on Square "
+         return("Draw The Wall (press B to Add only on Square "
                 "Borders)");
+      break;
+      case TOOL_WALL_DESTROY:
+         return("Click on an wall to delete it");
       break;
       case TOOL_WALL_EDIT:
          return("Grab or Draw The Wall");
