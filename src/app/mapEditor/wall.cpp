@@ -413,7 +413,7 @@ bool wallController::doDestroy()
  ******************************************************/
 void wallController::doWall()
 {
-   wall* nearWall = getWall(5);
+   wall* nearWall = getWall(10);
 
    if( (state == WALL_STATE_OTHER) && (mB & SDL_BUTTON(1)))
    {
@@ -448,19 +448,19 @@ void wallController::doWall()
          actualWall->z2 = fZ;
 
          /* Put it side by side with the wall */
-         if( fabsf(nearWall->x1 - fX) <= 5)
+         if( fabsf(nearWall->x1 - fX) <= 10)
          {
             actualWall->x1 = nearWall->x1;
          }
-         else if( fabsf(nearWall->x2 - fX) <= 5)
+         else if( fabsf(nearWall->x2 - fX) <= 10)
          {
             actualWall->x1 = nearWall->x2;
          }
-         if( fabsf(nearWall->z1 - fZ) <= 5)
+         if( fabsf(nearWall->z1 - fZ) <= 10)
          {
             actualWall->z1 = nearWall->z1;
          }
-         else if( fabsf(nearWall->z2 - fZ) <= 5)
+         else if( fabsf(nearWall->z2 - fZ) <= 10)
          {
             actualWall->z1 = nearWall->z2;
          }
@@ -481,11 +481,11 @@ void wallController::doWall()
          else
          {
             /* Put it side by side with the wall */
-            if( fabsf(nearWall->x1 - fX) <= 5)
+            if( fabsf(nearWall->x1 - fX) <= 10)
             {
                actualWall->x2 = nearWall->x1;
             }
-            else if( fabsf(nearWall->x2 - fX) <= 5)
+            else if( fabsf(nearWall->x2 - fX) <= 10)
             {
                actualWall->x2 = nearWall->x2;
             }
@@ -511,11 +511,11 @@ void wallController::doWall()
          else
          {
             /* Put it at the nearWall */
-            if( fabsf(nearWall->z1 - fZ) <= 5)
+            if( fabsf(nearWall->z1 - fZ) <= 10)
             {
                actualWall->z2 = nearWall->z1;
             }
-            else if( fabsf(nearWall->z2 - fZ) <= 5)
+            else if( fabsf(nearWall->z2 - fZ) <= 10)
             {
                actualWall->z2 = nearWall->z2;
             }
