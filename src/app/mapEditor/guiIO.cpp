@@ -341,7 +341,7 @@ void guiIO::openFogWindow()
  if(actualFog != NULL)
  {
    char buf[10];
-   fogWindow = gui->insertWindow(185,97,289,253,"Fog");
+   fogWindow = gui->insertWindow(185,212,289,368,"Fog");
    fogWindow->getObjectsList()->insertTextBox(5,17,45,30,0,"Red");
    sprintf(buf,"%.4f",actualFog->color[0]);
    fogColor[0] = fogWindow->getObjectsList()->insertTextBar(48,17,98,30,buf,1);
