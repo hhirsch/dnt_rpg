@@ -497,6 +497,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
                 bool outdoor)
 {
    int eventInfo = FARSO_EVENT_NONE;
+   float qty = 4.0f;
    cursor curs;
    guiObject* object;
 
@@ -512,43 +513,48 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
    {
       gameCamera.doIO(keys, mButton, mouseX, mouseY, DELTA_CAMERA );
 
+      if( (keys[SDLK_RSHIFT]) || (keys[SDLK_LSHIFT]) )
+      {
+         qty = 16;
+      }
+
       if(keys[SDLK_KP8])
       {
          gameCamera.updateCamera(gameCamera.getCenterX() -
-                                 4.0 * sin(deg2Rad(gameCamera.getPhi())),
+                                 qty * sin(deg2Rad(gameCamera.getPhi())),
                                  gameCamera.getCenterY()-30,
                                  gameCamera.getCenterZ() - 
-                                 4.0 * cos(deg2Rad(gameCamera.getPhi())), 
+                                 qty * cos(deg2Rad(gameCamera.getPhi())), 
                                  0.0);
       }
       if(keys[SDLK_KP2])
       {
          gameCamera.updateCamera(gameCamera.getCenterX() +
-                                 4.0 * sin(deg2Rad(gameCamera.getPhi())),
+                                 qty * sin(deg2Rad(gameCamera.getPhi())),
                                  gameCamera.getCenterY()-30,
                                  gameCamera.getCenterZ() + 
-                                 4.0 * cos(deg2Rad(gameCamera.getPhi())), 
+                                 qty * cos(deg2Rad(gameCamera.getPhi())), 
                                  0.0);
       }
       if(keys[SDLK_KP4])
       {
          gameCamera.updateCamera(gameCamera.getCenterX() -
-                                 4.0 * sin(deg2Rad(gameCamera.getPhi()) + 
+                                 qty * sin(deg2Rad(gameCamera.getPhi()) + 
                                        deg2Rad(90)),
                                  gameCamera.getCenterY()-30,
                                  gameCamera.getCenterZ() - 
-                                 4.0 * cos(deg2Rad(gameCamera.getPhi()) + 
+                                 qty * cos(deg2Rad(gameCamera.getPhi()) + 
                                        deg2Rad(90)),
                                  0.0);
       }
       if(keys[SDLK_KP6])
       {
          gameCamera.updateCamera(gameCamera.getCenterX() +
-                                 4.0 * sin(deg2Rad(gameCamera.getPhi()) + 
+                                 qty * sin(deg2Rad(gameCamera.getPhi()) + 
                                         deg2Rad(90)),
                                  gameCamera.getCenterY()-30,
                                  gameCamera.getCenterZ() +
-                                 4.0 * cos(deg2Rad(gameCamera.getPhi()) +
+                                 qty * cos(deg2Rad(gameCamera.getPhi()) +
                                        deg2Rad(90)),
                                  0.0);
       }
