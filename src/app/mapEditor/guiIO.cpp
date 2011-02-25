@@ -1010,7 +1010,32 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          else if(object == (guiObject*) objectJunkButton)
          {
             curs.setTextOver("Junk");
-         } 
+         }
+         /* Particles Buttons */
+         else if(object == (guiObject*) fireButton)
+         {
+            curs.setTextOver("Fire");
+         }
+         else if(object == (guiObject*) smokeButton)
+         {
+            curs.setTextOver("Smoke");
+         }
+         else if(object == (guiObject*) snowButton)
+         {
+            curs.setTextOver("Snow");
+         }
+         else if(object == (guiObject*) waterfallButton)
+         {
+            curs.setTextOver("Waterfall");
+         }
+         else if(object == (guiObject*) waterSurfaceButton)
+         {
+            curs.setTextOver("Water Surface");
+         }
+         else if(object == (guiObject*) grassButton)
+         {
+            curs.setTextOver("Grass");
+         }
       }
       break;
 
