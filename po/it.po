@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2011-02-06 20:45-0200\n"
-"PO-Revision-Date: 2010-08-20 13:21+0000\n"
+"POT-Creation-Date: 2011-02-25 17:10-0300\n"
+"PO-Revision-Date: 2011-02-21 16:52+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-08-20 19:08+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-25 18:44+0000\n"
+"X-Generator: Launchpad (build 12460)\n"
 
 #: src/classes/actions.cpp:144
 #, c-format
@@ -49,7 +49,7 @@ msgstr "Curati %d punti."
 #: src/classes/actions.cpp:318
 #, c-format
 msgid "Hit at a vital area, inflicting %d points of damage."
-msgstr ""
+msgstr "Colpita un'area vitale, inflitti %d punti di danno."
 
 #: src/classes/actions.cpp:323
 #, c-format
@@ -307,7 +307,7 @@ msgid "Skills"
 msgstr "Abilità"
 
 #: src/engine/charwindow.cpp:270 src/engine/featswindow.cpp:93
-#: src/engine/skillwindow.cpp:169 src/gui/window.cpp:169
+#: src/engine/skillwindow.cpp:169 src/gui/window.cpp:191
 msgid "Close"
 msgstr "Chiudi"
 
@@ -430,11 +430,11 @@ msgstr "Creazione MiniMappa"
 msgid "Putting GUI on Screen"
 msgstr "Posizionamento GUI a Schermo"
 
-#: src/engine/dccnit.cpp:900
+#: src/engine/dccnit.cpp:906
 msgid "Loading Particles"
 msgstr "Caricamento Particelle"
 
-#: src/engine/dccnit.cpp:930
+#: src/engine/dccnit.cpp:936
 msgid "Loading Changes..."
 msgstr "Caricamento Modifiche"
 
@@ -494,7 +494,7 @@ msgstr "Porta"
 
 #: src/engine/dccnit.cpp:2581
 msgid "dead"
-msgstr ""
+msgstr "morto"
 
 #: src/engine/dccnit.cpp:2631
 #, c-format
@@ -553,27 +553,27 @@ msgstr "Non puoi selezionare altri talenti"
 msgid "Select"
 msgstr "Seleziona"
 
-#: src/engine/initial.cpp:79
+#: src/engine/initial.cpp:81
 msgid "New"
 msgstr "Nuovo"
 
-#: src/engine/initial.cpp:84
+#: src/engine/initial.cpp:86
 msgid "Continue"
 msgstr "Continua"
 
-#: src/engine/initial.cpp:87 src/engine/shortcutswindow.cpp:321
+#: src/engine/initial.cpp:89 src/engine/shortcutswindow.cpp:321
 msgid "Save"
 msgstr "Salva"
 
-#: src/engine/initial.cpp:90 src/engine/shortcutswindow.cpp:326
+#: src/engine/initial.cpp:92 src/engine/shortcutswindow.cpp:326
 msgid "Load"
 msgstr "Carica"
 
-#: src/engine/initial.cpp:92 src/engine/options.cpp:797
+#: src/engine/initial.cpp:94 src/engine/options.cpp:797
 msgid "Options"
 msgstr "Opzioni"
 
-#: src/engine/initial.cpp:94 data/dialogs/objects/computers.dlg:21
+#: src/engine/initial.cpp:96 data/dialogs/objects/computers.dlg:21
 #: data/dialogs/objects/computers.dlg:95
 #: data/dialogs/objects/computers.dlg:136
 #: data/dialogs/objects/computers.dlg:149
@@ -1089,29 +1089,29 @@ msgstr "Attributo base:"
 msgid "Unknow!"
 msgstr "Sconosciuto!"
 
-#: src/fight/fightSystem.cpp:151
+#: src/fight/fightSystem.cpp:152
 msgid "No more enemies."
 msgstr "Nessun nemico rimasto."
 
-#: src/fight/fightSystem.cpp:187
+#: src/fight/fightSystem.cpp:188
 #, c-format
 msgid "%s is dead!"
 msgstr "%s è morto!"
 
-#: src/fight/fightSystem.cpp:232
+#: src/fight/fightSystem.cpp:233
 #, c-format
 msgid "%s receive %d XP for killing"
 msgstr "%s riceve %d Punti Esperienza per aver ucciso"
 
-#: src/fight/fightSystem.cpp:279 src/fight/fightSystem.cpp:307
+#: src/fight/fightSystem.cpp:287 src/fight/fightSystem.cpp:315
 msgid "New Round"
 msgstr "Nuovo Round"
 
-#: src/fight/fightSystem.cpp:284 src/fight/fightSystem.cpp:312
+#: src/fight/fightSystem.cpp:292 src/fight/fightSystem.cpp:320
 msgid "Error: No Characters!"
 msgstr "Errore: Nessun Personaggio!"
 
-#: src/fight/fightSystem.cpp:340 src/fight/fightSystem.cpp:346
+#: src/fight/fightSystem.cpp:348 src/fight/fightSystem.cpp:354
 #, c-format
 msgid "%s's turn."
 msgstr "Turno di %s."
@@ -1121,7 +1121,7 @@ msgstr "Turno di %s."
 msgid "%s rolls initiative: "
 msgstr "%s tira per l'iniziativa: "
 
-#: src/gui/window.cpp:166
+#: src/gui/window.cpp:188
 msgid "Maximize"
 msgstr "Massimizza"
 
@@ -4810,6 +4810,8 @@ msgid ""
 "Like teaching the priest to pray the mass, this book will teach you how to "
 "fight."
 msgstr ""
+"Come per insegnare al prete a celebrare la messa, questo libro ti insegnerà "
+"come combattere."
 
 #: data/models/objetos/books/mjack/mjack.dcc:1
 msgid "Monster Book Fragment"
@@ -4819,6 +4821,8 @@ msgstr "Frammento Del Libro Del Mostro"
 msgid ""
 "A fragment of the monster book describing a black and white thriller monster."
 msgstr ""
+"Un frammento del gigantesco libro che descrive un mostro ricco di stile in "
+"bianco e nero."
 
 #: data/models/natural/cogumelo/cogumelo.dcc:1
 msgid "Mushroom"
@@ -4826,7 +4830,7 @@ msgstr "Fungo"
 
 #: data/models/natural/cogumelo/cogumelo.dcc:2
 msgid "A mushroom. Better won't eat it alone."
-msgstr ""
+msgstr "Un fungo. Meglio non mangiarlo da solo."
 
 #: data/models/natural/ovo/ovo.dcc:1
 msgid "Egg"
@@ -4834,7 +4838,7 @@ msgstr "Uovo"
 
 #: data/models/natural/ovo/ovo.dcc:2
 msgid "A potential new chicken. Be carefull."
-msgstr ""
+msgstr "Una nuova gallina potenziale. fai attenzione"
 
 #: data/models/objetos/itens/healkit/healkit.dcc:1
 msgid "First Aid Kit"
@@ -4843,6 +4847,8 @@ msgstr "Kit Di Primo Soccorso"
 #: data/models/objetos/itens/healkit/healkit.dcc:2
 msgid "A heal kit functions exactly the opposite way of an opponent's attack."
 msgstr ""
+"Un kit di salute funziona esattamente nel modo opposto di un attacco di un "
+"avversario."
 
 #: data/models/objetos/itens/garrafa1/garrafa1.dcc:1
 msgid "Beer Bottle"
@@ -4851,6 +4857,7 @@ msgstr "Bottiglia Di Birra"
 #: data/models/objetos/itens/garrafa1/garrafa1.dcc:2
 msgid "A beer bottle. Better use cold to deceive the warm climate."
 msgstr ""
+"Una bottiglia di birra. Meglio usare il freddo per ingannare il clima caldo."
 
 #: data/models/objetos/itens/lata1/lata1.dcc:1
 msgid "Soda Can"
@@ -4858,7 +4865,7 @@ msgstr "Lattina Di Soda"
 
 #: data/models/objetos/itens/lata1/lata1.dcc:2
 msgid "A soda can, refresh yourself with lot of suggar."
-msgstr ""
+msgstr "Una lattina di soda, rinfrescati con molto zucchero."
 
 #: data/models/objetos/itens/lata1/logan_lata1.dcc:1
 msgid "Logan's Soda Can"
@@ -4869,6 +4876,8 @@ msgid ""
 "A soda can Logan gave you. Unfortunally, you can't see differences between "
 "this and a common one."
 msgstr ""
+"Una lattina di soda che ti ha dato Logan. Sfortunatamente non riesci a "
+"vedere differenze tra questa e una comune."
 
 #: data/models/objetos/itens/racao/racao.dcc:1
 msgid "Chicken Ration"
@@ -4876,7 +4885,7 @@ msgstr "Becchime Per Polli"
 
 #: data/models/objetos/itens/racao/racao.dcc:2
 msgid "A packet of delicious chicken ration. Smells like corn."
-msgstr ""
+msgstr "Un pacchetto di deliziosa razione di gallina. Odora di granturco."
 
 #: data/models/objetos/itens/money/money.dcc:1
 msgid "Money"
@@ -4901,10 +4910,12 @@ msgid ""
 "A classical brazilian vynil with dodecaphonic music that could also be "
 "usefull to empty rooms."
 msgstr ""
+"Un classico vinile brasiliano con musica dodecafonica che può anche essere "
+"utile a stanze vuote."
 
 #: data/models/objetos/vinyls/henry_cow_western_culture.dcc:2
 msgid "Last Henry Cow's album. Let's see if you can listen it."
-msgstr ""
+msgstr "L'ultimo album di Henry Cow. Vediamo se riesci ad ascoltarlo."
 
 #: data/models/objetos/vinyls/zappa_apostrophe.dcc:2
 msgid ""
@@ -4914,57 +4925,63 @@ msgstr ""
 
 #: data/models/objetos/icex/snes/chrono/snes_chrono.dcc:2
 msgid "The best snes RPG whose name begins with 'Chro'."
-msgstr ""
+msgstr "Il migliore RPG per SNES il cui nome comincia con 'Chro'."
 
 #: data/models/objetos/icex/snes/contra/snes_contra.dcc:2
 msgid "You surely can't stay alive for more than 3 hours on this game."
 msgstr ""
+"Sicuramente non riuscirai a stare vivo per più di 3 ore in questo gioco."
 
 #: data/models/objetos/icex/snes/dk/snes_dk.dcc:2
 msgid ""
 "A game about monkeys jumping around and playing music. You'll love that."
 msgstr ""
+"Un gioco che riguarda scimmie che saltellano in giro e suonano musica. Lo "
+"amerai."
 
 #: data/models/objetos/icex/snes/mario/snes_mario.dcc:2
 msgid "The italian plumber strikes back, this time with a dino!"
-msgstr ""
+msgstr "L'idraulico italiano colpisce ancora, questa volta con un dinosauro!"
 
 #: data/models/objetos/icex/snes/mariokart/snes_mariokart.dcc:2
 msgid ""
 "Karts, races and funny characters. Probably an acient clone of SuperTuxKart."
 msgstr ""
+"Kart, corse e personaggi divertenti. Probabilmente un antico clone di "
+"SuperTuxKart."
 
 #: data/models/objetos/icex/snes/rrr/snes_rrr.dcc:2
 msgid "Let the carnage begin!"
-msgstr ""
+msgstr "Che la carneficina abbia inizio!"
 
 #: data/models/objetos/icex/snes/sf2/snes_sf2.dcc:2
 msgid "You remember playing it on a dirty bar at the beach."
-msgstr ""
+msgstr "Ti ricordi di averlo giocato in uno sporco bar sulla spiaggia."
 
 #: data/models/objetos/icex/snes/starfox/snes_starfox.dcc:2
 msgid "A fox that thinks he's Tom Hanks on Apolo 13."
-msgstr ""
+msgstr "Una volpe che pensa di essere Tom Hanks in Apollo 13."
 
 #: data/models/objetos/icex/snes/topgear/snes_topgear.dcc:2
 msgid "Use your nitros, but beware of your fuel."
-msgstr ""
+msgstr "Utilizza il turbo, ma fai attenzione alla benzina."
 
 #: data/models/objetos/icex/snes/zelda/snes_zelda.dcc:2
 msgid "No, the playable character in the game isn't called Zelda."
-msgstr ""
+msgstr "No, il personaggio giocabile nel gioco non è chiamato Zelda."
 
 #: data/models/objetos/icex/ruindows_box/ruindows_box.dcc:1
 msgid "Ruindows"
-msgstr ""
+msgstr "Ruindows"
 
 #: data/models/objetos/icex/ruindows_box/ruindows_box.dcc:2
 msgid "The last released Ruindows DVD. You feel like carrying a bomb."
-msgstr ""
+msgstr "L'ultimo Ruindows DVD rilasciato. Ti sembrerà di portare una bomba."
 
 #: data/models/objetos/icex/fallout_box/fallout_box.dcc:2
 msgid "Surely one of the best games you've ever played in your childhood."
 msgstr ""
+"Sicuramente uno dei migliori giochi che avrai mai giocato nella tua infanzia."
 
 #: data/models/objetos/ammo/9mm_pack/9mm_pack.dcc:1
 msgid "9mm Ammo Pack"
@@ -4973,6 +4990,8 @@ msgstr "Pacchetto Di Munizioni 9mm"
 #: data/models/objetos/ammo/9mm_pack/9mm_pack.dcc:2
 msgid "You can use this ammo at 9mm guns or to make your way to jail."
 msgstr ""
+"Puoi utilizzare queste munizioni con pistole da 9mm o per spianarti la "
+"strada per la prigione."
 
 #: data/weapons/definitions/axe.wcc:1
 msgid "Great Axe"
@@ -4980,7 +4999,7 @@ msgstr "Ascia Grande"
 
 #: data/weapons/definitions/axe.wcc:2
 msgid "It's heavy. Pretty heavy. Maybe a bull could handle it."
-msgstr ""
+msgstr "È pesante. Abbastanza pesante. Forse un toro potrebbe maneggiarla."
 
 #: data/weapons/definitions/dagger.wcc:1
 msgid "Dagger"
@@ -4988,7 +5007,7 @@ msgstr "Pugnale"
 
 #: data/weapons/definitions/dagger.wcc:2
 msgid "The common, simple and little dagger."
-msgstr ""
+msgstr "Il comune, semplice e piccolo pugnale."
 
 #: data/weapons/definitions/beretta92.wcc:1
 msgid "Beretta 92"
@@ -4997,6 +5016,7 @@ msgstr "Beretta 92"
 #: data/weapons/definitions/beretta92.wcc:2
 msgid "The exact copy of your ancient ball gun, but with real bullets."
 msgstr ""
+"L'esatta copia della tua antica pistola a pallini, ma con veri proiettili."
 
 #: data/weapons/definitions/kalashnikov_small.wcc:1
 #: data/weapons/definitions/kalashnikov.wcc:1
@@ -5006,10 +5026,12 @@ msgstr "Kalashnikov"
 #: data/weapons/definitions/kalashnikov_small.wcc:2
 msgid "The most insurgent weapon of the Asia in exact size to hide on a coat."
 msgstr ""
+"L'arma più ribelle dell'Asia nella dimesione esatta da essere nascosta in un "
+"cappotto."
 
 #: data/weapons/definitions/kalashnikov.wcc:2
 msgid "The most insurgent weapon of the Asia."
-msgstr ""
+msgstr "L'arma più ribelle dell'Asia."
 
 #: data/weapons/definitions/katana.wcc:1
 msgid "Katana"
@@ -5017,7 +5039,7 @@ msgstr "Katana"
 
 #: data/weapons/definitions/katana.wcc:2
 msgid "A katana used on eastern martial arts."
-msgstr ""
+msgstr "Una katana utilizzata nelle arti marziali orientali."
 
 #: data/weapons/definitions/knife.wcc:1
 msgid "Knife"
@@ -5025,7 +5047,7 @@ msgstr "Coltello"
 
 #: data/weapons/definitions/knife.wcc:2
 msgid "A kitchen knife, usefull to cut flesh."
-msgstr ""
+msgstr "Un coltello da cucina, utile per tagliare la carne."
 
 #: data/weapons/definitions/scimitar.wcc:1
 msgid "Scimitar"
@@ -5033,7 +5055,7 @@ msgstr "Scimitarra"
 
 #: data/weapons/definitions/scimitar.wcc:2
 msgid "A scimitar that Cambises would be proud of."
-msgstr ""
+msgstr "Una scimitarra di cui Cambises sarebbe fiero."
 
 #: data/weapons/definitions/sw39.wcc:1
 msgid "S&W 39"
@@ -5041,7 +5063,7 @@ msgstr "S&W 39"
 
 #: data/weapons/definitions/sw39.wcc:2
 msgid "Your 9mm flavour, with good accuracy and two nouns behind."
-msgstr ""
+msgstr "Il tuo gusto da 9mm, con una buona precisione e due sostantivi dietro."
 
 #: data/weapons/definitions/uzi.wcc:1
 msgid "Uzi"
@@ -5049,7 +5071,7 @@ msgstr "Uzi"
 
 #: data/weapons/definitions/uzi.wcc:2
 msgid "Your Warmux favorite weapon."
-msgstr ""
+msgstr "La tua arma preferita di Wormux."
 
 #: data/weapons/types/categories.dcl:2
 msgid "Martial"
@@ -5135,14 +5157,23 @@ msgstr "Pesante"
 msgid "Santa Claws"
 msgstr "Santa Claws"
 
+#~ msgid "Reflex"
+#~ msgstr "Riflesso"
+
 #~ msgid "Nothing"
 #~ msgstr "Niente"
 
-#~ msgid "Particles"
-#~ msgstr "Particelle"
+#~ msgid "I am Bombadinho"
+#~ msgstr "Io sono Bombadinho"
+
+#~ msgid "Not found in dialog: %d\n"
+#~ msgstr "Non trovato nel dialogo: %d\n"
 
 #~ msgid "FPS"
 #~ msgstr "FPS"
+
+#~ msgid "Particles"
+#~ msgstr "Particelle"
 
 #~ msgid "Open Assign Attacks Window"
 #~ msgstr "Apri Finestra Assegna Attacchi"
@@ -5158,6 +5189,35 @@ msgstr "Santa Claws"
 
 #~ msgid "Ranged Attack"
 #~ msgstr "Attacco a Distanza"
+
+#~ msgid ""
+#~ "Yes, occupation. A clean and sweet ocupation that also serves as a "
+#~ "healing clinic for people with big tongues and no gratitude!"
+#~ msgstr ""
+#~ "Si, catapecchia. Una catapecchia pulita e gioiosa usata anche come "
+#~ "clinica di cura per le persone con la lingua lunga e nessuna gratitudine!"
+
+#~ msgid ""
+#~ "I need you to install a Ruindows on the occupation's notebook. Will you "
+#~ "do it?"
+#~ msgstr ""
+#~ "Ho bisogno che mi installi Ruindows sul notebook del lavoro. Lo puoi fare?"
+
+#~ msgid ""
+#~ "I'm waiting for you install the Ruindows on the occupation's notebook!"
+#~ msgstr "Sto aspettando che mi installi Ruindows sul notebook del lavoro!"
+
+#~ msgid "I am Logan, maintainer of this occupation."
+#~ msgstr "Sono Logan, il custode di questa catapecchia"
+
+#~ msgid ""
+#~ "Occupation? Is this, the cleanest house I've ever seen, an occupation?"
+#~ msgstr ""
+#~ "Catapecchia? Questa, la casa più pulità io abbia mai visto, è una "
+#~ "catapecchia?"
+
+#~ msgid "Install Ruindows at the occupation's notebook for Santa Claws."
+#~ msgstr "Installa Ruindows sul portatile di lavoro di Santa Claws."
 
 #~ msgid "Error while opening team file: %s\n"
 #~ msgstr "Errore mentre si sta tentando di aprire il file delle squadre: %s\n"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2011-02-06 20:45-0200\n"
+"POT-Creation-Date: 2011-02-25 17:10-0300\n"
 "PO-Revision-Date: 2010-05-06 06:48+0000\n"
 "Last-Translator: Cédric VALMARY (Tot en òc) <cvalmary@yahoo.fr>\n"
 "Language-Team: Occitan (post 1500) <oc@li.org>\n"
@@ -307,7 +307,7 @@ msgid "Skills"
 msgstr "Competéncias"
 
 #: src/engine/charwindow.cpp:270 src/engine/featswindow.cpp:93
-#: src/engine/skillwindow.cpp:169 src/gui/window.cpp:169
+#: src/engine/skillwindow.cpp:169 src/gui/window.cpp:191
 msgid "Close"
 msgstr "Tampar"
 
@@ -430,11 +430,11 @@ msgstr "Creacion d'una Mapa miniatura"
 msgid "Putting GUI on Screen"
 msgstr "Afichatge per interfàcia grafica"
 
-#: src/engine/dccnit.cpp:900
+#: src/engine/dccnit.cpp:906
 msgid "Loading Particles"
 msgstr "Cargament de las Particulas"
 
-#: src/engine/dccnit.cpp:930
+#: src/engine/dccnit.cpp:936
 msgid "Loading Changes..."
 msgstr "Cargament de las modificacions..."
 
@@ -548,27 +548,27 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
-#: src/engine/initial.cpp:79
+#: src/engine/initial.cpp:81
 msgid "New"
 msgstr "Novèl"
 
-#: src/engine/initial.cpp:84
+#: src/engine/initial.cpp:86
 msgid "Continue"
 msgstr "Contunhar"
 
-#: src/engine/initial.cpp:87 src/engine/shortcutswindow.cpp:321
+#: src/engine/initial.cpp:89 src/engine/shortcutswindow.cpp:321
 msgid "Save"
 msgstr "Salvar"
 
-#: src/engine/initial.cpp:90 src/engine/shortcutswindow.cpp:326
+#: src/engine/initial.cpp:92 src/engine/shortcutswindow.cpp:326
 msgid "Load"
 msgstr "Cargar"
 
-#: src/engine/initial.cpp:92 src/engine/options.cpp:797
+#: src/engine/initial.cpp:94 src/engine/options.cpp:797
 msgid "Options"
 msgstr "Opcions"
 
-#: src/engine/initial.cpp:94 data/dialogs/objects/computers.dlg:21
+#: src/engine/initial.cpp:96 data/dialogs/objects/computers.dlg:21
 #: data/dialogs/objects/computers.dlg:95
 #: data/dialogs/objects/computers.dlg:136
 #: data/dialogs/objects/computers.dlg:149
@@ -1084,29 +1084,29 @@ msgstr ""
 msgid "Unknow!"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:151
+#: src/fight/fightSystem.cpp:152
 msgid "No more enemies."
 msgstr "Pas pus d'enemics"
 
-#: src/fight/fightSystem.cpp:187
+#: src/fight/fightSystem.cpp:188
 #, c-format
 msgid "%s is dead!"
 msgstr "%s es mòrt !"
 
-#: src/fight/fightSystem.cpp:232
+#: src/fight/fightSystem.cpp:233
 #, c-format
 msgid "%s receive %d XP for killing"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:279 src/fight/fightSystem.cpp:307
+#: src/fight/fightSystem.cpp:287 src/fight/fightSystem.cpp:315
 msgid "New Round"
 msgstr "Torn novèl"
 
-#: src/fight/fightSystem.cpp:284 src/fight/fightSystem.cpp:312
+#: src/fight/fightSystem.cpp:292 src/fight/fightSystem.cpp:320
 msgid "Error: No Characters!"
 msgstr "Error : Pas cap de personatge !"
 
-#: src/fight/fightSystem.cpp:340 src/fight/fightSystem.cpp:346
+#: src/fight/fightSystem.cpp:348 src/fight/fightSystem.cpp:354
 #, c-format
 msgid "%s's turn."
 msgstr "Torn de %s."
@@ -1116,7 +1116,7 @@ msgstr "Torn de %s."
 msgid "%s rolls initiative: "
 msgstr ""
 
-#: src/gui/window.cpp:166
+#: src/gui/window.cpp:188
 msgid "Maximize"
 msgstr "Maximizar"
 

@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2011-02-06 20:45-0200\n"
-"PO-Revision-Date: 2010-10-30 23:07+0000\n"
+"POT-Creation-Date: 2011-02-25 17:10-0300\n"
+"PO-Revision-Date: 2011-01-09 09:54+0000\n"
 "Last-Translator: Ahmed Mohammed <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-01 11:41+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-25 18:44+0000\n"
+"X-Generator: Launchpad (build 12460)\n"
 
 #: src/classes/actions.cpp:144
 #, c-format
@@ -44,7 +44,7 @@ msgstr "خطأ حاسم!"
 #: src/classes/actions.cpp:307
 #, c-format
 msgid "Healed %d points."
-msgstr ""
+msgstr "معالجة %d نقاط."
 
 #: src/classes/actions.cpp:318
 #, c-format
@@ -58,11 +58,11 @@ msgstr "اضرب لأجل %d نقاط."
 
 #: src/classes/actions.cpp:343 src/classes/actions.cpp:346
 msgid "Critical Heal!"
-msgstr ""
+msgstr "معالجة هامة!"
 
 #: src/classes/actions.cpp:351 src/classes/actions.cpp:355
 msgid "Critical Hit!"
-msgstr ""
+msgstr "ضربة قوية!"
 
 #: src/classes/defs.cpp:256
 msgid "Level"
@@ -86,7 +86,7 @@ msgstr "موهبة غير فاعلة"
 
 #: src/classes/feats.cpp:234 src/engine/dccnit.cpp:2237
 msgid "Not enought points to use!"
-msgstr ""
+msgstr "النقاط غير كافية للاستخدام!"
 
 #: src/classes/mission.cpp:531 src/engine/dialog.cpp:1185
 #, c-format
@@ -118,7 +118,7 @@ msgstr "إلغاء"
 
 #: src/engine/aspectwindow.cpp:48
 msgid "Aspect"
-msgstr ""
+msgstr "منحى"
 
 #: src/engine/aspectwindow.cpp:67 src/engine/charwindow.cpp:104
 msgid "Name:"
@@ -275,11 +275,11 @@ msgstr "المستوى التالي"
 
 #: src/engine/charwindow.cpp:139
 msgid "HP"
-msgstr ""
+msgstr "صحة"
 
 #: src/engine/charwindow.cpp:142
 msgid "AC"
-msgstr ""
+msgstr "AC"
 
 #: src/engine/charwindow.cpp:203
 msgid "Total Level"
@@ -287,15 +287,15 @@ msgstr "مجموع المستوى"
 
 #: src/engine/charwindow.cpp:223
 msgid "Base Attack Modifier"
-msgstr ""
+msgstr "مُغير هجوم القوعد"
 
 #: src/engine/charwindow.cpp:228
 msgid "Size Modifier"
-msgstr ""
+msgstr "مُغير حجم"
 
 #: src/engine/charwindow.cpp:256
 msgid "Level Up"
-msgstr ""
+msgstr "انتهت المرحلة"
 
 #: src/engine/charwindow.cpp:262 src/engine/featsel.cpp:165
 #: src/engine/featswindow.cpp:73
@@ -307,7 +307,7 @@ msgid "Skills"
 msgstr "مهارات"
 
 #: src/engine/charwindow.cpp:270 src/engine/featswindow.cpp:93
-#: src/engine/skillwindow.cpp:169 src/gui/window.cpp:169
+#: src/engine/skillwindow.cpp:169 src/gui/window.cpp:191
 msgid "Close"
 msgstr "إغلاق"
 
@@ -345,7 +345,7 @@ msgstr "توصيف"
 
 #: src/engine/classwindow.cpp:153
 msgid "Life Dice"
-msgstr ""
+msgstr "نرد الحياة"
 
 #: src/engine/classwindow.cpp:157
 msgid "Skill Points"
@@ -410,12 +410,12 @@ msgstr "يتعذر حفظ اللعبة أثناء العراك!"
 
 #: src/engine/dccnit.cpp:707
 msgid "Saving Current Map Modifications"
-msgstr ""
+msgstr "حفظ تغييرات الخريطة الحالية"
 
 #: src/engine/dccnit.cpp:742
 #, c-format
 msgid "Loading Map: %s"
-msgstr ""
+msgstr "تحميل خريطة: %s"
 
 #: src/engine/dccnit.cpp:807
 #, c-format
@@ -424,23 +424,23 @@ msgstr ""
 
 #: src/engine/dccnit.cpp:846
 msgid "Creating MiniMap"
-msgstr ""
+msgstr "تكوين خريطة مصغرة"
 
 #: src/engine/dccnit.cpp:852
 msgid "Putting GUI on Screen"
 msgstr ""
 
-#: src/engine/dccnit.cpp:900
+#: src/engine/dccnit.cpp:906
 msgid "Loading Particles"
 msgstr ""
 
-#: src/engine/dccnit.cpp:930
+#: src/engine/dccnit.cpp:936
 msgid "Loading Changes..."
-msgstr ""
+msgstr "تحميل تغييرات..."
 
 #: src/engine/dccnit.cpp:958
 msgid "Done!"
-msgstr ""
+msgstr "انتهى!"
 
 #: src/engine/dccnit.cpp:1170
 msgid ""
@@ -468,16 +468,16 @@ msgstr ""
 
 #: src/engine/dccnit.cpp:1942
 msgid "Surprise Attack Turn."
-msgstr ""
+msgstr "طور الهجوم المفاجئ."
 
 #: src/engine/dccnit.cpp:1955
 msgid "No enemies in the area."
-msgstr ""
+msgstr "لا أعداء في المنطقة."
 
 #: src/engine/dccnit.cpp:2429
 #, c-format
 msgid "%s taken."
-msgstr ""
+msgstr "%s أخذ."
 
 #: src/engine/dccnit.cpp:2446
 msgid "Inventory is full!"
@@ -485,7 +485,7 @@ msgstr ""
 
 #: src/engine/dccnit.cpp:2479
 msgid "Door"
-msgstr ""
+msgstr "باب"
 
 #: src/engine/dccnit.cpp:2581
 msgid "dead"
@@ -494,7 +494,7 @@ msgstr ""
 #: src/engine/dccnit.cpp:2631
 #, c-format
 msgid "%s attacks %s"
-msgstr ""
+msgstr "%s يهاجم %s"
 
 #: src/engine/dccnit.cpp:2800
 msgid "No more actions. Turn ended."
@@ -502,27 +502,27 @@ msgstr ""
 
 #: src/engine/dccnit.cpp:4244
 msgid "Exit Battle Mode"
-msgstr ""
+msgstr "خروج من طور المعركة"
 
 #: src/engine/dialog.cpp:1214
 #, c-format
 msgid "%s lost."
-msgstr ""
+msgstr "%s خسارة."
 
 #: src/engine/dialog.cpp:1257
 #, c-format
 msgid "Received %s."
-msgstr ""
+msgstr "استلام %s."
 
 #: src/engine/dialog.cpp:1274
 #, c-format
 msgid "Received $%d."
-msgstr ""
+msgstr "استلام $%d."
 
 #: src/engine/dialog.cpp:1288
 #, c-format
 msgid "Lost $%d."
-msgstr ""
+msgstr "خسارة $%d."
 
 #: src/engine/dialog.cpp:1482
 msgid "Dialog"
@@ -530,15 +530,15 @@ msgstr ""
 
 #: src/engine/featsel.cpp:168
 msgid "Available"
-msgstr ""
+msgstr "متوفر"
 
 #: src/engine/featsel.cpp:172
 msgid "Selected"
-msgstr ""
+msgstr "مُختار"
 
 #: src/engine/featsel.cpp:359
 msgid "Remaining"
-msgstr ""
+msgstr "إعادة تسمية"
 
 #: src/engine/featsel.cpp:469
 msgid "You can't select more talents"
@@ -546,29 +546,29 @@ msgstr ""
 
 #: src/engine/featswindow.cpp:96
 msgid "Select"
-msgstr ""
+msgstr "اختيار"
 
-#: src/engine/initial.cpp:79
+#: src/engine/initial.cpp:81
 msgid "New"
-msgstr ""
+msgstr "جديد"
 
-#: src/engine/initial.cpp:84
+#: src/engine/initial.cpp:86
 msgid "Continue"
-msgstr ""
+msgstr "إكمال"
 
-#: src/engine/initial.cpp:87 src/engine/shortcutswindow.cpp:321
+#: src/engine/initial.cpp:89 src/engine/shortcutswindow.cpp:321
 msgid "Save"
-msgstr ""
+msgstr "حفظ"
 
-#: src/engine/initial.cpp:90 src/engine/shortcutswindow.cpp:326
+#: src/engine/initial.cpp:92 src/engine/shortcutswindow.cpp:326
 msgid "Load"
-msgstr ""
+msgstr "تحميل"
 
-#: src/engine/initial.cpp:92 src/engine/options.cpp:797
+#: src/engine/initial.cpp:94 src/engine/options.cpp:797
 msgid "Options"
-msgstr ""
+msgstr "اختيارات"
 
-#: src/engine/initial.cpp:94 data/dialogs/objects/computers.dlg:21
+#: src/engine/initial.cpp:96 data/dialogs/objects/computers.dlg:21
 #: data/dialogs/objects/computers.dlg:95
 #: data/dialogs/objects/computers.dlg:136
 #: data/dialogs/objects/computers.dlg:149
@@ -588,39 +588,39 @@ msgstr ""
 #: data/dialogs/objects/refmachine.dlg:105
 #: data/dialogs/objects/refmachine.dlg:119
 msgid "Exit"
-msgstr ""
+msgstr "خروج"
 
 #: src/engine/inventwindow.cpp:190
 msgid "Get"
-msgstr ""
+msgstr "جلب"
 
 #: src/engine/inventwindow.cpp:193
 msgid "Info"
-msgstr ""
+msgstr "معلومة"
 
 #: src/engine/inventwindow.cpp:201
 msgid "Read"
-msgstr ""
+msgstr "قراءة"
 
 #: src/engine/inventwindow.cpp:204
 msgid "Reload Weapon"
-msgstr ""
+msgstr "إعادة تحميل سلاح"
 
 #: src/engine/inventwindow.cpp:207
 msgid "Use"
-msgstr ""
+msgstr "استخدام"
 
 #: src/engine/inventwindow.cpp:218
 msgid "Buy"
-msgstr ""
+msgstr "شراء"
 
 #: src/engine/inventwindow.cpp:218
 msgid "Sell"
-msgstr ""
+msgstr "بيع"
 
 #: src/engine/inventwindow.cpp:223
 msgid "Drop"
-msgstr ""
+msgstr "قذف"
 
 #: src/engine/inventwindow.cpp:330
 #, c-format
@@ -634,17 +634,17 @@ msgstr ""
 #: src/engine/itemwindow.cpp:78
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "اسم: %s"
 
 #: src/engine/itemwindow.cpp:91
 #, c-format
 msgid "Cost: %.2f"
-msgstr ""
+msgstr "تكلفة: %.2f"
 
 #: src/engine/itemwindow.cpp:96
 #, c-format
 msgid "Weight: %.2f Kg"
-msgstr ""
+msgstr "وزن: %.2f كج"
 
 #: src/engine/itemwindow.cpp:111
 msgid "Heal Factor: "
@@ -672,23 +672,23 @@ msgstr ""
 
 #: src/engine/itemwindow.cpp:176
 msgid "Range: "
-msgstr ""
+msgstr "مجال: "
 
 #: src/engine/itemwindow.cpp:181
 msgid "Size: "
-msgstr ""
+msgstr "حجم: "
 
 #: src/engine/itemwindow.cpp:194 src/engine/itemwindow.cpp:221
 msgid "Ammo Type:"
-msgstr ""
+msgstr "نوع الذخيرة:"
 
 #: src/engine/itemwindow.cpp:200 src/engine/itemwindow.cpp:227
 msgid "Quantity:"
-msgstr ""
+msgstr "تعداد:"
 
 #: src/engine/itemwindow.cpp:246
 msgid "Ok"
-msgstr ""
+msgstr "تم"
 
 #: src/engine/journalwindow.cpp:285 src/engine/options.cpp:166
 msgid "Journal"
@@ -696,39 +696,39 @@ msgstr ""
 
 #: src/engine/journalwindow.cpp:353
 msgid "Unknow Area"
-msgstr ""
+msgstr "منطقة مجهولة"
 
 #: src/engine/journalwindow.cpp:354
 msgid "No missions."
-msgstr ""
+msgstr "لا مهمات."
 
 #: src/engine/minimapwindow.cpp:59
 msgid "Map"
-msgstr ""
+msgstr "خريطة"
 
 #: src/engine/options.cpp:48
 msgid "English"
-msgstr ""
+msgstr "الانجليزية"
 
 #: src/engine/options.cpp:49
 msgid "French"
-msgstr ""
+msgstr "الفرنسية"
 
 #: src/engine/options.cpp:50
 msgid "Spanish"
-msgstr ""
+msgstr "الاسبانية"
 
 #: src/engine/options.cpp:51
 msgid "Portuguese"
-msgstr ""
+msgstr "البرتغالية"
 
 #: src/engine/options.cpp:52
 msgid "German"
-msgstr ""
+msgstr "الالمانية"
 
 #: src/engine/options.cpp:53
 msgid "Italian"
-msgstr ""
+msgstr "الايطالية"
 
 #: src/engine/options.cpp:54
 msgid "Dutch"
@@ -744,11 +744,11 @@ msgstr ""
 
 #: src/engine/options.cpp:57
 msgid "Russian"
-msgstr ""
+msgstr "الروسية"
 
 #: src/engine/options.cpp:58
 msgid "Japanese"
-msgstr ""
+msgstr "اليابانية"
 
 #: src/engine/options.cpp:137
 msgid "Camera Rotate Left"
@@ -1084,29 +1084,29 @@ msgstr ""
 msgid "Unknow!"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:151
+#: src/fight/fightSystem.cpp:152
 msgid "No more enemies."
 msgstr ""
 
-#: src/fight/fightSystem.cpp:187
+#: src/fight/fightSystem.cpp:188
 #, c-format
 msgid "%s is dead!"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:232
+#: src/fight/fightSystem.cpp:233
 #, c-format
 msgid "%s receive %d XP for killing"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:279 src/fight/fightSystem.cpp:307
+#: src/fight/fightSystem.cpp:287 src/fight/fightSystem.cpp:315
 msgid "New Round"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:284 src/fight/fightSystem.cpp:312
+#: src/fight/fightSystem.cpp:292 src/fight/fightSystem.cpp:320
 msgid "Error: No Characters!"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:340 src/fight/fightSystem.cpp:346
+#: src/fight/fightSystem.cpp:348 src/fight/fightSystem.cpp:354
 #, c-format
 msgid "%s's turn."
 msgstr ""
@@ -1116,7 +1116,7 @@ msgstr ""
 msgid "%s rolls initiative: "
 msgstr ""
 
-#: src/gui/window.cpp:166
+#: src/gui/window.cpp:188
 msgid "Maximize"
 msgstr ""
 
@@ -4303,7 +4303,7 @@ msgstr ""
 
 #: data/weapons/definitions/knife.wcc:1
 msgid "Knife"
-msgstr ""
+msgstr "سكين"
 
 #: data/weapons/definitions/knife.wcc:2
 msgid "A kitchen knife, usefull to cut flesh."
@@ -4416,3 +4416,6 @@ msgstr "ثقيل"
 #: data/characters/pcs/santa.pc:1
 msgid "Santa Claws"
 msgstr "سانتا كلوز"
+
+#~ msgid "Nothing"
+#~ msgstr "لا شيء"

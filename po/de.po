@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2011-02-06 20:45-0200\n"
-"PO-Revision-Date: 2011-01-02 14:31+0000\n"
+"POT-Creation-Date: 2011-02-25 17:10-0300\n"
+"PO-Revision-Date: 2011-01-04 13:00+0000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: German <de@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-04 11:12+0000\n"
-"X-Generator: Launchpad (build 12138)\n"
+"X-Launchpad-Export-Date: 2011-02-25 18:44+0000\n"
+"X-Generator: Launchpad (build 12460)\n"
 
 #: src/classes/actions.cpp:144
 #, c-format
@@ -307,7 +307,7 @@ msgid "Skills"
 msgstr "Fertigkeiten"
 
 #: src/engine/charwindow.cpp:270 src/engine/featswindow.cpp:93
-#: src/engine/skillwindow.cpp:169 src/gui/window.cpp:169
+#: src/engine/skillwindow.cpp:169 src/gui/window.cpp:191
 msgid "Close"
 msgstr "schließen"
 
@@ -430,11 +430,11 @@ msgstr "Erstelle Minikarte"
 msgid "Putting GUI on Screen"
 msgstr "Zeige GUI an"
 
-#: src/engine/dccnit.cpp:900
+#: src/engine/dccnit.cpp:906
 msgid "Loading Particles"
 msgstr "Lade Partikel"
 
-#: src/engine/dccnit.cpp:930
+#: src/engine/dccnit.cpp:936
 msgid "Loading Changes..."
 msgstr "Lade Veränderungen..."
 
@@ -553,27 +553,27 @@ msgstr "Sie können nicht mehr Talente sehen"
 msgid "Select"
 msgstr "Auswählen"
 
-#: src/engine/initial.cpp:79
+#: src/engine/initial.cpp:81
 msgid "New"
 msgstr "Neu"
 
-#: src/engine/initial.cpp:84
+#: src/engine/initial.cpp:86
 msgid "Continue"
 msgstr "Fortsetzen"
 
-#: src/engine/initial.cpp:87 src/engine/shortcutswindow.cpp:321
+#: src/engine/initial.cpp:89 src/engine/shortcutswindow.cpp:321
 msgid "Save"
 msgstr "Speichern"
 
-#: src/engine/initial.cpp:90 src/engine/shortcutswindow.cpp:326
+#: src/engine/initial.cpp:92 src/engine/shortcutswindow.cpp:326
 msgid "Load"
 msgstr "Laden"
 
-#: src/engine/initial.cpp:92 src/engine/options.cpp:797
+#: src/engine/initial.cpp:94 src/engine/options.cpp:797
 msgid "Options"
 msgstr "Optionen"
 
-#: src/engine/initial.cpp:94 data/dialogs/objects/computers.dlg:21
+#: src/engine/initial.cpp:96 data/dialogs/objects/computers.dlg:21
 #: data/dialogs/objects/computers.dlg:95
 #: data/dialogs/objects/computers.dlg:136
 #: data/dialogs/objects/computers.dlg:149
@@ -1089,29 +1089,29 @@ msgstr "Basis Attribute:"
 msgid "Unknow!"
 msgstr "Unbekannt!"
 
-#: src/fight/fightSystem.cpp:151
+#: src/fight/fightSystem.cpp:152
 msgid "No more enemies."
 msgstr "Keine Gegner mehr."
 
-#: src/fight/fightSystem.cpp:187
+#: src/fight/fightSystem.cpp:188
 #, c-format
 msgid "%s is dead!"
 msgstr "%s ist tot!"
 
-#: src/fight/fightSystem.cpp:232
+#: src/fight/fightSystem.cpp:233
 #, c-format
 msgid "%s receive %d XP for killing"
 msgstr "%s bekommt %d EP für Tötung"
 
-#: src/fight/fightSystem.cpp:279 src/fight/fightSystem.cpp:307
+#: src/fight/fightSystem.cpp:287 src/fight/fightSystem.cpp:315
 msgid "New Round"
 msgstr "Neue Runde"
 
-#: src/fight/fightSystem.cpp:284 src/fight/fightSystem.cpp:312
+#: src/fight/fightSystem.cpp:292 src/fight/fightSystem.cpp:320
 msgid "Error: No Characters!"
 msgstr "Fehler: Keine Charaktere!"
 
-#: src/fight/fightSystem.cpp:340 src/fight/fightSystem.cpp:346
+#: src/fight/fightSystem.cpp:348 src/fight/fightSystem.cpp:354
 #, c-format
 msgid "%s's turn."
 msgstr "%s's Zug."
@@ -1121,7 +1121,7 @@ msgstr "%s's Zug."
 msgid "%s rolls initiative: "
 msgstr "%s würfelt Initiative: "
 
-#: src/gui/window.cpp:166
+#: src/gui/window.cpp:188
 msgid "Maximize"
 msgstr "Maximieren"
 
@@ -4512,15 +4512,6 @@ msgstr "Schwer"
 msgid "Santa Claws"
 msgstr "Santa Claws"
 
-#~ msgid "Nothing"
-#~ msgstr "Nichts"
-
-#~ msgid "Particles"
-#~ msgstr "Partikel"
-
-#~ msgid "FPS"
-#~ msgstr "BPS"
-
 #~ msgid "Charism"
 #~ msgstr "Charisma"
 
@@ -4533,5 +4524,20 @@ msgstr "Santa Claws"
 #~ msgid "Can't open skill file: %s \n"
 #~ msgstr "Kann die Fertigkeitendatei nicht öffnen: %s \n"
 
+#~ msgid "Reflex"
+#~ msgstr "Reflex"
+
+#~ msgid "Nothing"
+#~ msgstr "Nichts"
+
+#~ msgid "Particles"
+#~ msgstr "Partikel"
+
+#~ msgid "FPS"
+#~ msgstr "BPS (Bilder pro Sekunde)"
+
 #~ msgid "Open Assign Attacks Window"
 #~ msgstr "Attackenzuweisungsfenster öffnen"
+
+#~ msgid "Install Ruindows at the occupation's notebook for Santa Claws."
+#~ msgstr "Installiere Ruindows am Arbeits-Notebook für Santa Claws."

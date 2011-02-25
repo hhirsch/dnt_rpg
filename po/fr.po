@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2011-02-06 20:45-0200\n"
-"PO-Revision-Date: 2011-01-02 14:37+0000\n"
-"Last-Translator: Yves MATHIEU <ymathieu@moulins-vichy.cci.fr>\n"
+"POT-Creation-Date: 2011-02-25 17:10-0300\n"
+"PO-Revision-Date: 2011-02-09 20:48+0000\n"
+"Last-Translator: lann <lann@worldonline.fr>\n"
 "Language-Team: French <fr@li.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-04 11:12+0000\n"
-"X-Generator: Launchpad (build 12138)\n"
+"X-Launchpad-Export-Date: 2011-02-25 18:44+0000\n"
+"X-Generator: Launchpad (build 12460)\n"
 
 #: src/classes/actions.cpp:144
 #, c-format
@@ -307,7 +307,7 @@ msgid "Skills"
 msgstr "Compétences"
 
 #: src/engine/charwindow.cpp:270 src/engine/featswindow.cpp:93
-#: src/engine/skillwindow.cpp:169 src/gui/window.cpp:169
+#: src/engine/skillwindow.cpp:169 src/gui/window.cpp:191
 msgid "Close"
 msgstr "Fermer"
 
@@ -430,11 +430,11 @@ msgstr "Création d'une Carte miniature"
 msgid "Putting GUI on Screen"
 msgstr "Affichage par interface graphique"
 
-#: src/engine/dccnit.cpp:900
+#: src/engine/dccnit.cpp:906
 msgid "Loading Particles"
 msgstr "Chargement des Particules"
 
-#: src/engine/dccnit.cpp:930
+#: src/engine/dccnit.cpp:936
 msgid "Loading Changes..."
 msgstr "Chargement des modifications..."
 
@@ -494,7 +494,7 @@ msgstr "Porte"
 
 #: src/engine/dccnit.cpp:2581
 msgid "dead"
-msgstr ""
+msgstr "mort"
 
 #: src/engine/dccnit.cpp:2631
 #, c-format
@@ -553,27 +553,27 @@ msgstr "Vous ne pouvez sélectionner plus de talents"
 msgid "Select"
 msgstr "Sélectionner"
 
-#: src/engine/initial.cpp:79
+#: src/engine/initial.cpp:81
 msgid "New"
 msgstr "Nouveau"
 
-#: src/engine/initial.cpp:84
+#: src/engine/initial.cpp:86
 msgid "Continue"
 msgstr "Continuer"
 
-#: src/engine/initial.cpp:87 src/engine/shortcutswindow.cpp:321
+#: src/engine/initial.cpp:89 src/engine/shortcutswindow.cpp:321
 msgid "Save"
 msgstr "Enregistrer"
 
-#: src/engine/initial.cpp:90 src/engine/shortcutswindow.cpp:326
+#: src/engine/initial.cpp:92 src/engine/shortcutswindow.cpp:326
 msgid "Load"
 msgstr "Charger"
 
-#: src/engine/initial.cpp:92 src/engine/options.cpp:797
+#: src/engine/initial.cpp:94 src/engine/options.cpp:797
 msgid "Options"
 msgstr "Options"
 
-#: src/engine/initial.cpp:94 data/dialogs/objects/computers.dlg:21
+#: src/engine/initial.cpp:96 data/dialogs/objects/computers.dlg:21
 #: data/dialogs/objects/computers.dlg:95
 #: data/dialogs/objects/computers.dlg:136
 #: data/dialogs/objects/computers.dlg:149
@@ -1089,29 +1089,29 @@ msgstr "Attributs de Base:"
 msgid "Unknow!"
 msgstr "Inconnu!"
 
-#: src/fight/fightSystem.cpp:151
+#: src/fight/fightSystem.cpp:152
 msgid "No more enemies."
 msgstr "Plus d'ennemis"
 
-#: src/fight/fightSystem.cpp:187
+#: src/fight/fightSystem.cpp:188
 #, c-format
 msgid "%s is dead!"
 msgstr "%s est mort !"
 
-#: src/fight/fightSystem.cpp:232
+#: src/fight/fightSystem.cpp:233
 #, c-format
 msgid "%s receive %d XP for killing"
 msgstr "%s recois %d XP pour avoir tué"
 
-#: src/fight/fightSystem.cpp:279 src/fight/fightSystem.cpp:307
+#: src/fight/fightSystem.cpp:287 src/fight/fightSystem.cpp:315
 msgid "New Round"
 msgstr "Nouveau tour"
 
-#: src/fight/fightSystem.cpp:284 src/fight/fightSystem.cpp:312
+#: src/fight/fightSystem.cpp:292 src/fight/fightSystem.cpp:320
 msgid "Error: No Characters!"
 msgstr "Erreur : Aucun personnage !"
 
-#: src/fight/fightSystem.cpp:340 src/fight/fightSystem.cpp:346
+#: src/fight/fightSystem.cpp:348 src/fight/fightSystem.cpp:354
 #, c-format
 msgid "%s's turn."
 msgstr "Tour de %s."
@@ -1121,7 +1121,7 @@ msgstr "Tour de %s."
 msgid "%s rolls initiative: "
 msgstr "Jet d'initiative de %s : "
 
-#: src/gui/window.cpp:166
+#: src/gui/window.cpp:188
 msgid "Maximize"
 msgstr "Maximiser"
 
@@ -1355,6 +1355,8 @@ msgid ""
 "You can also set the options to automatically end your turn when no more "
 "available actions."
 msgstr ""
+"Vous pouvez aussi régler les options pour terminer automatiquement votre "
+"tour lorsque plus aucune action n'est disponible."
 
 #: data/comics/tutorial/combat/combat.dcb:238
 msgid ""
@@ -2937,7 +2939,7 @@ msgstr ""
 
 #: data/feats/weapon_attack.fta:1
 msgid "Common Attack"
-msgstr ""
+msgstr "Attaque commune"
 
 #: data/feats/weapon_attack.fta:2
 msgid "Character's common attack."
@@ -2949,7 +2951,7 @@ msgstr "Pas de munitions!"
 
 #: data/feats/weapon_attack.dsl:44
 msgid "No more ammo. Reload your weapon!"
-msgstr ""
+msgstr "Plus de munitions. Rechargez votre arme !"
 
 #: data/feats/administration/aberration.fta:1
 msgid "Aberration"
@@ -3049,7 +3051,7 @@ msgstr ""
 
 #: data/feats/compsci/world_conception.fta:3
 msgid "World Conception"
-msgstr ""
+msgstr "Conception du Monde"
 
 #: data/feats/compsci/world_conception.fta:4
 msgid ""
@@ -3183,7 +3185,7 @@ msgstr ""
 
 #: data/feats/elective/fugitive.fta:3
 msgid "Fugitive"
-msgstr ""
+msgstr "Fugitive"
 
 #: data/feats/elective/fugitive.fta:4
 msgid ""
@@ -3193,7 +3195,7 @@ msgstr ""
 
 #: data/feats/elective/rough.fta:3
 msgid "Rough"
-msgstr ""
+msgstr "Rude"
 
 #: data/feats/elective/rough.fta:4
 msgid ""
@@ -3213,7 +3215,7 @@ msgstr ""
 
 #: data/feats/elective/cant_touch_me.fta:3
 msgid "Can't Touch Me"
-msgstr ""
+msgstr "Tu ne peux pas me toucher"
 
 #: data/feats/elective/cant_touch_me.fta:4
 msgid ""
@@ -3235,7 +3237,7 @@ msgstr ""
 
 #: data/feats/elective/bolivian_blood.fta:3
 msgid "Bolivian Blood"
-msgstr ""
+msgstr "Sang Bolivien"
 
 #: data/feats/elective/bolivian_blood.fta:4
 msgid ""
@@ -4438,7 +4440,7 @@ msgstr "Je suis perdu."
 
 #: data/dialogs/tutorial/atleticano.dlg:34
 msgid "So please, leave this house."
-msgstr ""
+msgstr "Aussi s'il te plait, quitte cette maison"
 
 #: data/dialogs/tutorial/atleticano.dlg:47
 msgid "Please, don't do anything bad to us!"
@@ -4513,11 +4515,11 @@ msgstr "Maintenant !"
 
 #: data/dialogs/tutorial/hippie.dlg:6
 msgid "Welcome to the F.S.C."
-msgstr ""
+msgstr "Bienvenue à la F.S.C."
 
 #: data/dialogs/tutorial/hippie.dlg:10
 msgid "F.S.C.?"
-msgstr ""
+msgstr "F.S.C ?"
 
 #: data/dialogs/tutorial/hippie.dlg:22
 msgid "Free Software Church. Do you dig it, bro?"
@@ -4525,7 +4527,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/hippie.dlg:27 data/dialogs/tutorial/hippie.dlg:31
 msgid "Oh, great!"
-msgstr ""
+msgstr "Oh, Super !"
 
 #: data/dialogs/tutorial/hippie.dlg:37
 msgid "No, it's a piece of shit!"
@@ -4557,7 +4559,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/hippie.dlg:83
 msgid "Sorry."
-msgstr ""
+msgstr "Désolé."
 
 #: data/dialogs/tutorial/hippie.dlg:86
 msgid "Die heretic!"
@@ -4620,11 +4622,11 @@ msgstr ""
 
 #: data/dialogs/tutorial/hippie.dlg:219
 msgid "You killed her! Pig!"
-msgstr ""
+msgstr "Tu l'a tué ! Cochon !"
 
 #: data/dialogs/tutorial/dona.dlg:6
 msgid "Hello stranger!"
-msgstr ""
+msgstr "Bonjour étranger"
 
 #: data/dialogs/tutorial/dona.dlg:11
 msgid "I need some chicken ration."
@@ -4632,31 +4634,31 @@ msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:14
 msgid "Where am I?"
-msgstr ""
+msgstr "Où suis-je ?"
 
 #: data/dialogs/tutorial/dona.dlg:26
 msgid "At the farm."
-msgstr ""
+msgstr "A la ferme"
 
 #: data/dialogs/tutorial/dona.dlg:30
 msgid "What is the farm?"
-msgstr ""
+msgstr "Qu'est que la ferme ?"
 
 #: data/dialogs/tutorial/dona.dlg:33
 msgid "The farm?"
-msgstr ""
+msgstr "La Ferme ?"
 
 #: data/dialogs/tutorial/dona.dlg:42
 msgid "I'm a simple farmer."
-msgstr ""
+msgstr "Je suis un simple fermier"
 
 #: data/dialogs/tutorial/dona.dlg:46
 msgid "A simple farmer?"
-msgstr ""
+msgstr "Un simple fermier ?"
 
 #: data/dialogs/tutorial/dona.dlg:49
 msgid "But what's your name?"
-msgstr ""
+msgstr "Mais quel est ton nom ?"
 
 #: data/dialogs/tutorial/dona.dlg:58
 msgid "Are you a piggy cop?"
@@ -4664,11 +4666,11 @@ msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:74
 msgid "F-A-R-M, farm, the farm."
-msgstr ""
+msgstr "F-E-R-M-E, ferme, la ferme."
 
 #: data/dialogs/tutorial/dona.dlg:78
 msgid "But what is a farm?"
-msgstr ""
+msgstr "Mais qu'est ce qu'une ferme ?"
 
 #: data/dialogs/tutorial/dona.dlg:81
 msgid "I got it!"
@@ -4676,7 +4678,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:90
 msgid "Pig!"
-msgstr ""
+msgstr "Cochon !"
 
 #: data/dialogs/tutorial/dona.dlg:103
 msgid "Neither I."
@@ -4696,7 +4698,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:132
 msgid "Because I want!"
-msgstr ""
+msgstr "Parce que je veux !"
 
 #: data/dialogs/tutorial/dona.dlg:145
 msgid "I won't sell anything more to that lazy hippie."
@@ -4716,7 +4718,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:181
 msgid "Sure."
-msgstr ""
+msgstr "Sur"
 
 #: data/dialogs/tutorial/dona.dlg:190
 msgid ""
@@ -4726,15 +4728,15 @@ msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:204
 msgid "Have you got the mushroom?"
-msgstr ""
+msgstr "As-tu le champignon ?"
 
 #: data/dialogs/tutorial/dona.dlg:212 data/dialogs/tutorial/dona.dlg:245
 msgid "Here it is."
-msgstr ""
+msgstr "Il est là"
 
 #: data/dialogs/tutorial/dona.dlg:223
 msgid "Great. Now I want an egg"
-msgstr ""
+msgstr "Super. Maintenant je veux un oeuf"
 
 #: data/dialogs/tutorial/dona.dlg:237
 msgid "Have you got the egg?"
@@ -4789,7 +4791,7 @@ msgstr ""
 
 #: data/models/natural/cogumelo/cogumelo.dcc:1
 msgid "Mushroom"
-msgstr ""
+msgstr "Champignon"
 
 #: data/models/natural/cogumelo/cogumelo.dcc:2
 msgid "A mushroom. Better won't eat it alone."
@@ -4797,7 +4799,7 @@ msgstr ""
 
 #: data/models/natural/ovo/ovo.dcc:1
 msgid "Egg"
-msgstr ""
+msgstr "Oeuf"
 
 #: data/models/natural/ovo/ovo.dcc:2
 msgid "A potential new chicken. Be carefull."
@@ -4839,7 +4841,7 @@ msgstr ""
 
 #: data/models/objetos/itens/racao/racao.dcc:1
 msgid "Chicken Ration"
-msgstr ""
+msgstr "Ration de poulet"
 
 #: data/models/objetos/itens/racao/racao.dcc:2
 msgid "A packet of delicious chicken ration. Smells like corn."
@@ -5105,8 +5107,79 @@ msgstr "le Père Fouettard"
 #~ msgid "Nothing"
 #~ msgstr "Rien"
 
+#~ msgid "Character's ranged attack."
+#~ msgstr "Attaque à distance du personnage"
+
+#~ msgid "Ranged Attack"
+#~ msgstr "Attaque à distance"
+
+#~ msgid "Reflex"
+#~ msgstr "Réflexe"
+
 #~ msgid "Particles"
 #~ msgstr "Particules"
+
+#~ msgid "Open Assign Attacks Window"
+#~ msgstr "Ouvrir la fenêtre des Postes d'attaque"
+
+#~ msgid "Not found in dialog: %d\n"
+#~ msgstr "Introuvable dans le dialogue : %d\n"
+
+#~ msgid ""
+#~ "DccNiTghtmare is developed under Public Domain: Feel free to use its "
+#~ "source code and data the way you want (or to blame us the same way). "
+#~ "DccNiTghtmare is thankful to the people who developed those libraries: "
+#~ "OpenAL, Cal3D, OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
+#~ msgstr ""
+#~ "DccNiTghtmare est un logiciel du Domaine public: Vous êtes libre de vous "
+#~ "servir du code source et des data comme il vous chante (ou vous pouvez "
+#~ "nous critiquer de la même façon). DccNiTghtmare remercie les développeurs "
+#~ "des bibliothèques (librairies) suivantes: OpenAL, Cal3D, OpenGL, SDL, "
+#~ "SDL_image, SDL_ttf, libVorbis."
+
+#~ msgid "I am Bombadinho"
+#~ msgstr "Je suis Bambadinho"
+
+#~ msgid "Melee Attack"
+#~ msgstr "Attaque en melée"
+
+#~ msgid "I am Logan, maintainer of this occupation."
+#~ msgstr "Je m'appelle Logan, le préposé à l'entretien de cette occupation."
+
+#~ msgid ""
+#~ "Occupation? Is this, the cleanest house I've ever seen, an occupation?"
+#~ msgstr ""
+#~ "Occupation ? Cette maison-ci, la maison la plus propre que j'ai jamais "
+#~ "vue, est-elle une occupation ?"
+
+#~ msgid ""
+#~ "Yes, occupation. A clean and sweet ocupation that also serves as a "
+#~ "healing clinic for people with big tongues and no gratitude!"
+#~ msgstr ""
+#~ "Oui, une occupation. Une occupation propre et douce qui sert aussi comme "
+#~ "clinique de guérison pour des gens sans gratitude et qui parlent trop."
+
+#~ msgid ""
+#~ "I need you to install a Ruindows on the occupation's notebook. Will you "
+#~ "do it?"
+#~ msgstr ""
+#~ "J'ai besoin de vous pour installer une version de Ruindows sur le "
+#~ "portable de l'habitation. Le ferez-vous ?"
+
+#~ msgid ""
+#~ "I'm waiting for you install the Ruindows on the occupation's notebook!"
+#~ msgstr ""
+#~ "J'attends que vous installiez Ruindows sur le portable de l'habitation !"
+
+#~ msgid "Character's melee attack."
+#~ msgstr "Attaque de melée du personnage"
+
+#~ msgid ""
+#~ "The Student who has frequently gone to the academy, permanently receives "
+#~ "+1 in Strength."
+#~ msgstr ""
+#~ "L'étudiant qui va souvent et depuis longtemps à l'académie, reçoit +1 en "
+#~ "Force de façon permanente."
 
 #~ msgid "FPS"
 #~ msgstr "IPS"
