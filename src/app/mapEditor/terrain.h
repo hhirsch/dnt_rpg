@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -37,11 +37,14 @@ class terrain
       /*! Verify and do action by mouse and state 
        * \param mouseX -> mouse X coordinate
        * \param mouseY -> mouse Y coordinate 
-       * \param mouseZ -> mouse Z coordinate 
+       * \param mouseZ -> mouse Z coordinate
+       * \param floorX -> X mouse on floor
+       * \param floorZ -> Z mouse on floor
        * \param mButton -> mouse button state
        * \param tool -> current Tool
        * \param actualTexture -> current Texture */
       void verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
+                        GLfloat floorX, GLfloat floorZ,
                         Uint8 mButton, int tool, GLuint actualTexture);
 
       /*! If have some temporary things to draw, draw it! */

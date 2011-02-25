@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -44,7 +44,8 @@ terrain::~terrain()
  *                           verifyAction                           *
  ********************************************************************/
 void terrain::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
-                           Uint8 mButton, int tool, GLuint actualTexture)
+      GLfloat floorX, GLfloat floorZ, Uint8 mButton, int tool, 
+      GLuint actualTexture)
 {
    quadX = (int) (mouseX / actualMap->squareSize());
    quadZ = (int) (mouseZ / actualMap->squareSize());
@@ -82,7 +83,7 @@ void terrain::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
    }
    else if(tool == TOOL_TERRAIN_NIVELATE)
    {
-      doNivelate(mouseX, mouseY, mouseZ, mButton);
+      doNivelate(floorX, mouseY, floorZ, mButton);
    }
    else
    {

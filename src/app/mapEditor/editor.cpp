@@ -992,8 +992,8 @@ void editor::doEditorIO()
 
    if( (gui->getState() == GUI_IO_STATE_TERRAIN) && (mapOpened))
    {
-      terrainEditor->verifyAction(xReal, yReal, zReal, mButton, gui->getTool(), 
-                                  curTexture);
+      terrainEditor->verifyAction(xReal, yReal, zReal, xFloor, zFloor, 
+            mButton, gui->getTool(), curTexture);
       particleSystem->setActualMap(map, NULL);
    }
    else if( (gui->getState() == GUI_IO_STATE_PORTAL) && (mapOpened))
