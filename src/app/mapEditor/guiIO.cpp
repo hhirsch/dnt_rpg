@@ -307,7 +307,6 @@ void guiIO::openTerrainWindow()
    terrainUpButton = terrainTabButton->insertButton(0,0,19,19);    
    terrainNivButton = terrainTabButton->insertButton(20,0,39,19);  
    terrainDownButton = terrainTabButton->insertButton(40,0,59,19); 
-   terrainWalkableButton = terrainTabButton->insertButton(0,20,19,39);
    terrainTextureButton = terrainTabButton->insertButton(20,20,39,39);
    terrainWindow->setExternPointer(&terrainWindow);
    gui->openWindow(terrainWindow);
@@ -936,6 +935,24 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          {
             curs.setTextOver("Destroy Wall");
          }
+         /* Terrain */
+         else if(object == (guiObject*) terrainUpButton)
+         {
+            curs.setTextOver("Up Terrain");
+         }
+         else if(object == (guiObject*) terrainDownButton)
+         {
+            curs.setTextOver("Down Terrain");
+         }
+         else if(object == (guiObject*) terrainNivButton)
+         {
+            curs.setTextOver("Nivelate Terrain");
+         }
+         else if(object == (guiObject*) terrainTextureButton)
+         {
+            curs.setTextOver("Set Terrain Texture");
+         }
+
          /* Portal Buttons */
          else if(object == (guiObject*) portalAddButton)
          {

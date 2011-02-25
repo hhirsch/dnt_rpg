@@ -201,7 +201,6 @@ class guiIO
       oneTabButton* terrainUpButton;       /**< Terrain Up Button */
       oneTabButton* terrainDownButton;     /**< Terrain Down Button */
       oneTabButton* terrainNivButton;      /**< Terrain Nivelation Button */
-      oneTabButton* terrainWalkableButton; /**< Terrain Walkable Button */
       oneTabButton* terrainTextureButton;  /**< Terrain Texture Button */
       void openTerrainWindow();
       /*********************Wall*Window*******************************/
