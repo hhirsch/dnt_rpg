@@ -4968,7 +4968,7 @@ msgstr ""
 
 #: data/models/objetos/icex/snes/chrono/snes_chrono.dcc:2
 msgid "The best snes RPG whose name begins with 'Chro'."
-msgstr "O melhor RPG de Super Nintendo cujo nome comeja com 'Chro'"
+msgstr "O melhor RPG de Super Nintendo cujo nome começa com 'Chro'"
 
 #: data/models/objetos/icex/snes/contra/snes_contra.dcc:2
 msgid "You surely can't stay alive for more than 3 hours on this game."
@@ -4998,7 +4998,7 @@ msgstr "Let the carnage begin!"
 #: data/models/objetos/icex/snes/sf2/snes_sf2.dcc:2
 msgid "You remember playing it on a dirty bar at the beach."
 msgstr ""
-"Você se lembra de jogar este jogo em um fliperama num bar copo-sujo da praia."
+"Você se lembra jogando este jogo em um fliperama num bar copo-sujo da praia."
 
 #: data/models/objetos/icex/snes/starfox/snes_starfox.dcc:2
 msgid "A fox that thinks he's Tom Hanks on Apolo 13."
@@ -5032,7 +5032,7 @@ msgstr "Caixa de Munição 9mm"
 #: data/models/objetos/ammo/9mm_pack/9mm_pack.dcc:2
 msgid "You can use this ammo at 9mm guns or to make your way to jail."
 msgstr ""
-"Você pode utilizar essa munição em armas de 9mm ou para fazer seu caminhgo à "
+"Você pode utilizar essa munição em armas de 9mm ou para fazer seu caminho à "
 "cadeia."
 
 #: data/weapons/definitions/axe.wcc:1
