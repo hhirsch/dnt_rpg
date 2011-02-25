@@ -183,9 +183,12 @@ void guiIO::openNavWindow()
 {
    dirs dir;
    navWindow = gui->insertWindow(SCREEN_X-69,SCREEN_Y-76,SCREEN_X-1,SCREEN_Y-1,
-                                 "Nav");
-   navTabButton = navWindow->getObjectsList()->insertTabButton(7,17,0,0,
-                                  dir.getRealFile("mapEditor/nav.png").c_str());
+                                 "Nav", true);
+   picture* pic = navWindow->getObjectsList()->insertPicture(7,17,0,0,
+         dir.getRealFile("mapEditor/nav.png").c_str());
+   navTabButton = navWindow->getObjectsList()->insertTabButton(7,17,53,50,NULL);
+   navTabButton->setObjectBelow(pic);
+   navTabButton->setStyle(FARSO_TAB_BUTTON_STYLE_HIGH);
    moreZoomButton = navTabButton->insertButton(0,0,8,8);    /* More Zoom */
    lessZoomButton = navTabButton->insertButton(9,0,17,8);   /* Less Zoom */
    upButton = navTabButton->insertButton(19,0,31,17);       /* Up */
@@ -196,7 +199,6 @@ void guiIO::openNavWindow()
    rotDownButton = navTabButton->insertButton(45,13,53,24); /* Rotation Down */
    rotLeftButton = navTabButton->insertButton(40,36,50,50); /* Rotation Left */
    rotRightButton = navTabButton->insertButton(0,36,10,50); /* Rotation Right */
-   navWindow->setAttributes(false,false,false,false);
    navWindow->setExternPointer(&navWindow);
    gui->openWindow(navWindow);
 }
