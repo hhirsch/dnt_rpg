@@ -491,6 +491,17 @@ void wallController::doWall()
             }
          }
 
+         /* Limit Square */
+         if(limitSquare)
+         {
+            actualWall->x1 = ((int)floor((actualWall->x1) / 
+                     actualMap->squareSize()))*actualMap->squareSize();
+            actualWall->x2 = ((int)floor((actualWall->x2) / 
+                     actualMap->squareSize()))*actualMap->squareSize();
+            actualWall->z1 = ((int)floor((actualWall->z1 / 
+                        actualMap->squareSize())))*actualMap->squareSize();
+         }
+
          /* And set the Z fixed */
          if(fZ >= actualWall->z1)
          {
@@ -521,6 +532,17 @@ void wallController::doWall()
             }
          }
 
+         /* Limit Square */
+         if(limitSquare)
+         {
+            actualWall->z1 = ((int)floor((actualWall->z1) / 
+                     actualMap->squareSize()))*actualMap->squareSize();
+            actualWall->z2 = ((int)floor((actualWall->z2) / 
+                     actualMap->squareSize()))*actualMap->squareSize();
+            actualWall->x1 = ((int)floor((actualWall->x1 / 
+                        actualMap->squareSize())))*actualMap->squareSize();
+         }
+
          /* And set the X fixed */
          if(fX >= actualWall->x1)
          {
@@ -531,71 +553,6 @@ void wallController::doWall()
             actualWall->x2 = actualWall->x1-10;
          }
       }
-#if 0
-      if(X)
-      {
-         actualWall->x2 = mX;
-         if(limitSquare)
-         {
-            float cmp = ((int)(actualWall->z1) / 
-                               actualMap->squareSize())*actualMap->squareSize();
-            actualWall->x1 = ((int)floor((actualWall->x1) / 
-                              actualMap->squareSize()))*actualMap->squareSize();
-            actualWall->x2 = ((int)floor((actualWall->x2) / 
-                              actualMap->squareSize()))*actualMap->squareSize();
-            actualWall->z1 = ((int)floor((actualWall->z1 / 
-                             actualMap->squareSize())))*actualMap->squareSize();
-            if(cmp < actualWall->z1)
-            {
-               if(full)
-                  actualWall->z1 = actualWall->z1-10;
-               else
-                  actualWall->z1 = actualWall->z1-2.5;
-            }
-            if(full)
-            {
-               actualWall->z2 = actualWall->z1+10;
-            }
-            else
-            {
-               actualWall->z2 = actualWall->z1+2.5;
-            }
-         }
-      }
-      else
-      {
-         actualWall->z2 = mZ;
-         if(limitSquare)
-         {
-            float cmp = ((int)(actualWall->x1) / actualMap->squareSize()) 
-                         * actualMap->squareSize();
-            actualWall->z1 = ((int)floor((actualWall->z1) / 
-                              actualMap->squareSize()))
-                              * actualMap->squareSize();
-            actualWall->z2 = ((int)floor((actualWall->z2) / 
-                              actualMap->squareSize()))
-                              * actualMap->squareSize();
-            actualWall->x1 = ((int)floor((actualWall->x1 / 
-                             actualMap->squareSize())))
-                             * actualMap->squareSize();
-            if(cmp < actualWall->x1)
-            {
-               if(full)
-                  actualWall->x1 = actualWall->x1-10;
-               else
-                  actualWall->x1 = actualWall->x1-2.5;
-            }
-            if(full)
-            {
-               actualWall->x2 = actualWall->x1+10;
-            }
-            else
-            {
-               actualWall->x2 = actualWall->x1+2.5;
-            }
-         }
-      }
-#endif
    }
    else if( (state == WALL_STATE_ADD_INIT) && (!(mB & SDL_BUTTON(1))))
    {

@@ -17,6 +17,7 @@
  - Rewrote the dntParticleEditor to be more intuitive;
  - New main GUI layout;
  - dntMapEditor: Better wall cut and destroy;
+ - dntMapEditor: Better wall add;
 
 BugFixes:
  - Fixed the outdoor minimap scale ratio;
