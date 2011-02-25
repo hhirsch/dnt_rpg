@@ -637,40 +637,40 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          if(object == (guiObject*) upButton)
          {
             gameCamera.updateCamera(gameCamera.getCenterX() -
-                                       4.0 * sin(deg2Rad(gameCamera.getPhi())),
+                                       qty * sin(deg2Rad(gameCamera.getPhi())),
                                        gameCamera.getCenterY()-30,
                                        gameCamera.getCenterZ() - 
-                                       4.0 * cos(deg2Rad(gameCamera.getPhi())), 
+                                       qty * cos(deg2Rad(gameCamera.getPhi())), 
                                        0.0);
             return(GUI_IO_NEW_POSITION);
          }
          else if (object == (guiObject*) downButton)
          {
             gameCamera.updateCamera(gameCamera.getCenterX() +
-                                       4.0 * sin(deg2Rad(gameCamera.getPhi())),
+                                       qty * sin(deg2Rad(gameCamera.getPhi())),
                                        gameCamera.getCenterY()-30,
                                        gameCamera.getCenterZ() + 
-                                       4.0 * cos(deg2Rad(gameCamera.getPhi())), 
+                                       qty * cos(deg2Rad(gameCamera.getPhi())), 
                                        0.0);
             return(GUI_IO_NEW_POSITION);
          }
          else if (object == (guiObject*) leftButton)
          {
             gameCamera.updateCamera(gameCamera.getCenterX() -
-                            4.0 * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
+                            qty * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
                                       gameCamera.getCenterY()-30,
                                       gameCamera.getCenterZ() - 
-                            4.0 * cos(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
+                            qty * cos(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
                                        0.0);
             return(GUI_IO_NEW_POSITION);
          }
          else if (object == (guiObject*) rightButton)
          {
             gameCamera.updateCamera(gameCamera.getCenterX() +
-                           4.0 * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
+                           qty * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
                                      gameCamera.getCenterY()-30,
                                      gameCamera.getCenterZ() +
-                           4.0 * cos(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
+                           qty * cos(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
                                      0.0);
             return(GUI_IO_NEW_POSITION);
          }
