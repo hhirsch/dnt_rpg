@@ -53,6 +53,8 @@ void terrain::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
    mX = mouseX;
    mY = mouseY;
    mZ = mouseZ;
+   fX = floorX;
+   fZ = floorZ;
 
    Square* saux;
    saux = actualMap->relativeSquare(quadX, quadZ);
@@ -410,9 +412,9 @@ void terrain::drawTemporary()
             glColor3f(0.5,0.1,0.6);
             glBegin(GL_POLYGON);
               glVertex3f(initmX,nivelHeight+0.1,initmZ);
-              glVertex3f(initmX,nivelHeight+0.1,mZ);
-              glVertex3f(mX,nivelHeight+0.1,mZ);
-              glVertex3f(mX,nivelHeight+0.1,initmZ);
+              glVertex3f(initmX,nivelHeight+0.1,fZ);
+              glVertex3f(fX,nivelHeight+0.1,fZ);
+              glVertex3f(fX,nivelHeight+0.1,initmZ);
             glEnd();
             glEnable(GL_LIGHTING);
          }

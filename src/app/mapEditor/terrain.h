@@ -64,7 +64,7 @@ class terrain
       GLfloat height;      /**< Current Map Height On Mouse */
       GLfloat nivelHeight; /**< Map Height at init of Nivelate */
 
-      GLfloat mX, mY, mZ;  /**< Mouse Positions */
+      GLfloat mX, mY, mZ, fX, fZ;  /**< Mouse Positions */
  
       GLfloat initmX, initmY, initmZ; /**< Mouse Positions On Init of State */
 

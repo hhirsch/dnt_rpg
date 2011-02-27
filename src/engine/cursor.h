@@ -79,6 +79,9 @@ class cursor
       /*! Set the text over the cursor
        * \param txt -> text to show or "" for no text */
       void setTextOver(string txt);
+
+      /*! Hide the mouse cursor (must reset it to cursor to show again) */
+      void hide();
       
    private:
       static GLuint texture[CURSOR_TOTAL]; /**< Cursors Textures */

@@ -106,7 +106,8 @@ string getStringFromUser(string title, string previous,
                          GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    cursor cursors;
-   cursors.set(CURSOR_WALK);
+   cursors.hide();
+   SDL_ShowCursor(SDL_ENABLE);
 
    guiInterface* gui = new guiInterface("");
    window* getWindow;
@@ -183,6 +184,8 @@ string getStringFromUser(string title, string previous,
 
    }
 
+   SDL_ShowCursor(SDL_DISABLE);
+   cursors.set(CURSOR_WALK);
    delete(gui);
 
    return(returnStr);
@@ -196,7 +199,8 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
                       GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    cursor cursors;
-   cursors.set(CURSOR_WALK);
+   cursors.hide();
+   SDL_ShowCursor(SDL_ENABLE);
 
    guiInterface* gui = new guiInterface("");
    window* getWindow;
@@ -283,6 +287,8 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
 
    }
 
+   SDL_ShowCursor(SDL_DISABLE);
+   cursors.set(CURSOR_WALK);
    delete(gui);
    
    return(ret);

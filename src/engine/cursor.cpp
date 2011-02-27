@@ -139,6 +139,14 @@ void cursor::set(int nCursor)
 }
 
 /*****************************************************************
+ *                               hide                            *
+ *****************************************************************/
+void cursor::hide()
+{
+   currentCursor = -1;
+}
+
+/*****************************************************************
  *                              set                              *
  *****************************************************************/
 void cursor::set(SDL_Surface* img)
@@ -241,6 +249,11 @@ void cursor::setTextOver(string txt)
 void cursor::draw(int mouseX, int mouseY, float angle,
                   float scaleX, float scaleY, float scaleZ)
 {
+   if(currentCursor < 0)
+   {
+      return;
+   }
+
    glEnable(GL_BLEND);
    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 
