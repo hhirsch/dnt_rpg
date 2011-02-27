@@ -85,7 +85,7 @@ void terrain::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
    }
    else if(tool == TOOL_TERRAIN_NIVELATE)
    {
-      doNivelate(floorX, mouseY, floorZ, mButton);
+      doNivelate(mouseX, mouseY, mouseZ, mButton);
    }
    else
    {
@@ -412,9 +412,9 @@ void terrain::drawTemporary()
             glColor3f(0.5,0.1,0.6);
             glBegin(GL_POLYGON);
               glVertex3f(initmX,nivelHeight+0.1,initmZ);
-              glVertex3f(initmX,nivelHeight+0.1,fZ);
-              glVertex3f(fX,nivelHeight+0.1,fZ);
-              glVertex3f(fX,nivelHeight+0.1,initmZ);
+              glVertex3f(initmX,nivelHeight+0.1,mZ);
+              glVertex3f(mX,nivelHeight+0.1,mZ);
+              glVertex3f(mX,nivelHeight+0.1,initmZ);
             glEnd();
             glEnable(GL_LIGHTING);
          }
