@@ -51,7 +51,6 @@ guiIO::guiIO()
    ltWindow->setState(0);
    openActWindow();
    openNavWindow();
-   openMainWindow();
    openWallWindow();
    openTerrainWindow();
    openParticleWindow();
@@ -59,6 +58,8 @@ guiIO::guiIO()
    openTextureWindow();
    openMessageWindow();
    openObjectWindow();
+   openSoundWindow();
+   openMainWindow();
 }
 
 /****************************************************************
@@ -279,6 +280,24 @@ void guiIO::openWallWindow()
    wallWindow->setExternPointer(&wallWindow);
    gui->openWindow(wallWindow);
 }
+
+/****************************************************************
+ *                      Open Sound Window                       *
+ ****************************************************************/
+void guiIO::openSoundWindow()
+{
+   dirs dir;
+   soundWindow = gui->insertWindow(0,599,153,661,"Sound");
+   soundTabButton = soundWindow->getObjectsList()->insertTabButton(7,17,0,0,
+                                dir.getRealFile("mapEditor/sound.png").c_str());
+   soundAddButton = soundTabButton->insertButton(0,0,19,19);    /* Sound Add */
+   soundRemoveButton = soundTabButton->insertButton(20,0,39,19);/* Sound Rm */
+   soundEditButton = soundTabButton->insertButton(40,0,59,19);  /* Sound Edit */
+
+   soundWindow->setExternPointer(&soundWindow);
+   gui->openWindow(soundWindow);
+}
+
 
 /****************************************************************
  *                       Open Portal Window                     *
@@ -892,6 +911,15 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          {
             ltWindow->setState(STATE_GRASS);
          }
+         else if(object == (guiObject*) soundAddButton)
+         {
+         }
+         else if(object == (guiObject*) soundRemoveButton)
+         {
+         }
+         else if(object == (guiObject*) soundEditButton)
+         {
+         }
          break;
       }
 
@@ -1043,6 +1071,19 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          else if(object == (guiObject*) grassButton)
          {
             curs.setTextOver("Grass");
+         }
+         /* Sound Buttons */
+         else if(object == (guiObject*) soundAddButton)
+         {
+            curs.setTextOver("Insert Sound");
+         }
+         else if(object == (guiObject*) soundRemoveButton)
+         {
+            curs.setTextOver("Remove Sound");
+         }
+         else if(object == (guiObject*) soundEditButton)
+         {
+            curs.setTextOver("Edit Sound Info");
          }
       }
       break;

@@ -250,6 +250,13 @@ class guiIO
       oneTabButton* waterSurfaceButton;   /**< Particle WaterSurface Button */
       oneTabButton* grassButton;          /**< Particle Grass Button */
       void openParticleWindow();
+      /************************Sound*Window*******************************/
+      window* soundWindow;                /**< Sound Window */
+      tabButton* soundTabButton;          /**< sound TabButton */
+      oneTabButton* soundAddButton;       /**< Sound Add Button */
+      oneTabButton* soundRemoveButton;    /**< Sound Remove Button */
+      oneTabButton* soundEditButton;      /**< Sound Edit Button */
+      void openSoundWindow();
       /*********************Message*Window*******************************/
       window* messageWindow;              /**< Message Window */
       textBox* messageText;               /**< Message Text */
