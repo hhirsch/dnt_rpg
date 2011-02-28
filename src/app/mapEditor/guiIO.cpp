@@ -58,7 +58,6 @@ guiIO::guiIO()
    openTextureWindow();
    openMessageWindow();
    openObjectWindow();
-   openSoundWindow();
    openMainWindow();
 }
 
