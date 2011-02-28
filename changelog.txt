@@ -1,10 +1,10 @@
 ================================================
 |                Version 0.7                   |
+|            Released: 2011-02-28              |
 ================================================
  - New race's images;
  - New classes' images;
  - Rewrote particle systems for better generalization;
- - Default walls texture repeat to 64 (instead of 16);
  - dntMapEditor: Using dntList and defParser for list of files;
  - dntMapEditor: Plane editor for any kind of particles;
  - heightmap2dnt: Added indoor map import (with walls);
@@ -19,13 +19,16 @@
  - Added pickable objects descriptions;
  - dntMapEditor: Better wall cut and destroy;
  - dntMapEditor: Better wall add;
- - dntMapEditor: Shift toggle camera faster move;
+ - dntMapEditor: "Shift key" toggle camera faster move;
+ - New models and textures;
 
 BugFixes:
  - Fixed the outdoor minimap scale ratio;
  - Automatically don't render shadow for low height sceneries at floor;
  - Fixed text renderer (was adding two times last character when 
    checking current string size);
+ - Fixed the terrain on the crat map;
+ - Default wall texture repeat to 64 (instead of 16);
 
 
 ================================================
