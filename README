@@ -2,11 +2,25 @@
 |                         DccNiTghtmare                      |
 ==============================================================
 
+0   - License
 I   - Requeriments
 II  - Instalation
 III - Execution
 IV  - Input
 V   - Contacts
+
+==============================================================
+|                        0 - License                         |
+==============================================================
+   DccNiTghtmare  source  code  is released under GPLv3 or any 
+latter version.  The  content created  by  the  DNTeam is also 
+released  under  GPLv3  or  latter.  Other  content  is either 
+licensed on GPLv2 or latter or CC-BY or CC-BY-SA licenses.
+   See  the  DNT's GIT repository* to get source files for all 
+contents  on  the game and to see the license of each specific 
+model.
+
+* git://dccnitghtmare.git.sourceforge.net/gitroot/dccnitghtmare/dccnitghtmare
 
 ==============================================================
 |                      I - Requeriments                      |
@@ -116,14 +130,10 @@ r          =  show range of action
                     | Auxiliars Windows |
                     =====================
 
-F1     =  Display Informations
 m      =  Open MiniMap window
-n      =  Open ShortCut window
 i      =  Open Inventory window
 c      =  Open Character Window
-
-   To  end  the  game,  simple  press  ESC key,  and  click on 
-button exit.
+j      =  Open Journal Window
 
 ==============================================================
 |                        V - Contacts                        |
