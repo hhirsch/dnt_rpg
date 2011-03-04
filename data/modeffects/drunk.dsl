@@ -49,8 +49,7 @@ script(character target, int difficulty, int drunkLevel)
       
          # Add particle effect
          partFile = "particles/drunk.par"
-         partType = 2;
-         particleAddToCharacter(partType, partFile, target, time)
+         particleAddToCharacter(partFile, target, time)
 
          # Add Burps
          showText(target, "Burp... hic!")
