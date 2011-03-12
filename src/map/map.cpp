@@ -2190,11 +2190,13 @@ int Map::open(string arquivo)
       /* Define Object at the square */
       else if(key == "useObject")
       {
-         int des, quadX, quadZ, oPis;
-         float oX, oY, oZ, oOri;
+         int des=0, quadX=0, quadZ=0, oPis=0;
+         float oX=0.0f, oY=0.0f, oZ=0.0f, 
+               angleX=0.0f, angleY=0.0f, angleZ=0.0f;
          objSquare* oObj;
-         sscanf(value.c_str(),"%s %d:%d,%d:%f,%f,%f:%f:%d",nome,
-               &des, &quadX, &quadZ, &oX, &oY, &oZ, &oOri, &oPis);
+         sscanf(value.c_str(),"%s %d:%d,%d:%f,%f,%f:%f,%f,%f:%d",nome,
+               &des, &quadX, &quadZ, &oX, &oY, &oZ, 
+               &angleX, &angleY, &angleZ, &oPis);
 
          object* obj = objectsList::search(nome, oX, oY, oZ);
          if(obj == NULL)
@@ -2205,17 +2207,19 @@ int Map::open(string arquivo)
             obj->xPosition = oX;
             obj->yPosition = oY;
             obj->zPosition = oZ;
-            obj->orientationY = oOri;
+            obj->orientationX = angleX;
+            obj->orientationY = angleY;
+            obj->orientationZ = angleZ;
          }
 
          oObj = MapSquares[posX][posZ].addObject(des==1, oX, oY, oZ,
-               0, oOri, 0, oPis!=1,
+               angleX, angleY, angleZ, oPis!=1,
                obj);
          if(oObj->draw)
          {
             if(oObj->obj->isStaticScenery())
             {
-               oObj->obj->addRenderPosition(oX, oY, oZ, 0, oOri, 0);
+               oObj->obj->addRenderPosition(oX, oY, oZ, angleX, angleY, angleZ);
             }
          }
 
