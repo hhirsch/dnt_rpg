@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -256,7 +256,7 @@ void editor::openMap()
                 per->xPosition = posX;
                 per->zPosition = posZ;
                 per->yPosition = map->getHeight(posX, posZ);
-                per->orientation = ori;
+                per->orientationY = ori;
                 per->update(0); 
                 per->calculateBoundingBox();
                 per->setPsychoState(psycho);
@@ -832,7 +832,7 @@ void editor::draw()
          z[2] = per->max[2];
          x[3] = per->max[0];
          z[3] = per->min[2];
-         rotTransBoundingBox(per->orientation, x, z,per->xPosition, 
+         rotTransBoundingBox(per->orientationY, x, z,per->xPosition, 
                              per->min[1] + per->yPosition, 
                              per->max[1] + per->yPosition,
                              per->zPosition, min, max );
@@ -844,7 +844,7 @@ void editor::draw()
             glPushMatrix();
                glTranslatef(per->xPosition, per->yPosition,
                             per->zPosition);
-               glRotatef(per->orientation,0,1,0);
+               glRotatef(per->orientationY,0,1,0);
                ((aniModel*)per)->render();
              /*per->RenderBoundingBox();
                glColor3f(0.6,0.1,0.1);

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -106,14 +106,15 @@ bool collision::verifySquare(GLfloat min[3], GLfloat max[3], Square* quad,
           X[3] = bounding.x2;
           Z[3] = bounding.z1;
           
-          rotTransBoundingBox(sobj->orientation, X, Z, sobj->x, 
+          rotTransBoundingBox(sobj->angleY, X, Z, sobj->x, 
                               sobj->y+bounding.y1, 
                               sobj->y+bounding.y2, sobj->z, min2, max2);
           if(intercepts(min,max,min2,max2))
           {
              /* If the bounding boxes intercepts, we'll need to do a more 
               * depth collision verify, so it is */
-             if(sobj->obj->depthCollision(sobj->orientation, sobj->x, 
+             if(sobj->obj->depthCollision(sobj->angleX, sobj->angleY,
+                                          sobj->angleZ, sobj->x, 
                                           sobj->y +
                                           actualMap->getHeight(sobj->x,sobj->z),
                                           sobj->z,min,max))
@@ -165,7 +166,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
    GLfloat perX = varX;
    GLfloat perY = varY;
    GLfloat perZ = varZ;
-   GLfloat perOrientation = actor->orientation + varAlpha;
+   GLfloat perOrientation = actor->orientationY + varAlpha;
    Square* perQuad = NULL;
 
    if(usePosition)
@@ -436,7 +437,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
                x[3] = pers->max[0];
                z[3] = pers->min[2];
 
-               rotTransBoundingBox(pers->orientation, x, z,
+               rotTransBoundingBox(pers->orientationY, x, z,
                                    pers->xPosition, 
                                    pers->min[1]+pers->yPosition,
                                    pers->max[1]+pers->yPosition, 
@@ -445,7 +446,8 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
                if(intercepts( min, max, min2, max2))
                {
                   /* Do a more depth colision verify */
-                  if(pers->depthCollision(pers->orientation, pers->xPosition, 
+                  if(pers->depthCollision(0.0f, pers->orientationY, 0.0f,
+                                          pers->xPosition, 
                                           pers->yPosition,
                                           pers->zPosition, min, max))
                   {

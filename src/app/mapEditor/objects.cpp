@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -140,7 +140,7 @@ void objects::drawTemporary()
       actualObstacle->yPosition = obstacleY + 
                                  actualMap->getHeight(obstacleX, obstacleZ);
       actualObstacle->zPosition = obstacleZ;
-      actualObstacle->orientation = obstacleOrientation;
+      actualObstacle->orientationY = obstacleOrientation;
       actualObstacle->draw(false);
    }
 }
@@ -154,7 +154,7 @@ void objects::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
    //TODO, mark with no collision some pickable objects
    acMap->insertObject(xReal, 
                        obstacleY + actualMap->getHeight(xReal, zReal), 
-                       zReal, orObj, obj, qx, qz, 1); 
+                       zReal, 0.0f, orObj, 0.0f, obj, qx, qz, 1); 
 }
 
 /******************************************************************

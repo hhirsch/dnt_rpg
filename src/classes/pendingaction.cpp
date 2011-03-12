@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -542,7 +542,7 @@ void pendingActionController::treatActions(Map* actualMap, bool fightMode)
 #endif
                if(!actor->pathFind.getNewPosition(actor->xPosition,
                                                   actor->zPosition,
-                                                  actor->orientation,
+                                                  actor->orientationY,
                                                   fightMode, false))
                {
 #ifdef DNT_DEBUG_PENDING_ACTION

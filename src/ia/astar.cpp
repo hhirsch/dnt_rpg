@@ -295,7 +295,7 @@ void aStar::doCycle(bool fightMode)
          patt = new pattAgent(true);
          patt->defineDestiny(node->x, node->z);
          patt->defineStepSize(curStepSize);
-         patt->defineOrientation( ((character*)curActor)->orientation );
+         patt->defineOrientation( ((character*)curActor)->orientationY );
          patt->defineSight(curStepSize*10, 360);
          destinyX = node->x;
          destinyZ = node->z;

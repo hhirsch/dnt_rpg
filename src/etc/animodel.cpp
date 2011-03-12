@@ -451,11 +451,13 @@ void aniModel::loadToGraphicMemory(bool useTexture)
  *                       renderFromGraphicMemory                     *
  *********************************************************************/
 void aniModel::renderFromGraphicMemory(float pX, float pY, float pZ, 
-      float angle, bool inverted)
+      float angleX, float angleY, float angleZ, bool inverted)
 {
    glPushMatrix();
       glTranslatef(pX, pY, pZ);
-      glRotatef(angle, 0.0f, 1.0f, 0.0f);
+      glRotatef(angleZ, 0.0f, 0.0f, 1.0f);
+      glRotatef(angleX, 1.0f, 0.0f, 0.0f);
+      glRotatef(angleY, 0.0f, 1.0f, 0.0f);
       if(inverted)
       {
          glScalef(1.0f, -1.0f, 1.0f);
@@ -741,6 +743,7 @@ void aniModel::renderShadow(GLfloat* shadowMatrix, float alpha)
    glPolygonOffset(-2.0f,-1.0f);
    glEnable(GL_POLYGON_OFFSET_FILL);
    glDisable(GL_LIGHTING);
+   glDisable(GL_COLOR_MATERIAL);
    glColor4f(0.0f, 0.0f, 0.0f, alpha);
 
    /* Render */
@@ -748,7 +751,9 @@ void aniModel::renderShadow(GLfloat* shadowMatrix, float alpha)
       glMultMatrixf(shadowMatrix);
       glPushMatrix();
          glTranslatef(xPosition, yPosition, zPosition);
-         glRotatef(orientation,0.0f,1.0f,0.0f);
+         glRotatef(orientationZ,0.0f,0.0f,1.0f);
+         glRotatef(orientationX,1.0f,0.0f,0.0f);
+         glRotatef(orientationY,0.0f,1.0f,0.0f);
          renderFromGraphicMemory();
      glPopMatrix();
    glPopMatrix();
@@ -767,20 +772,22 @@ void aniModel::renderShadow(GLfloat* shadowMatrix, float alpha)
  *********************************************************************/
 void aniModel::renderReflexion()
 {
-   renderReflexion(xPosition, yPosition, zPosition, orientation);
+   renderReflexion(xPosition, yPosition, zPosition, 
+         orientationX, orientationY, orientationZ);
 }
 
 /*********************************************************************
  *                           renderReflexion                         *
  *********************************************************************/
-void aniModel::renderReflexion(float pX, float pY, float pZ, float angle)
+void aniModel::renderReflexion(float pX, float pY, float pZ, float angleX,
+      float angleY, float angleZ)
 {
    glEnable(GL_STENCIL_TEST);
    glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
    glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
    glEnable(GL_NORMALIZE);
 
-   renderFromGraphicMemory(pX, pY, pZ, angle, true);
+   renderFromGraphicMemory(pX, pY, pZ, angleX, angleY, angleZ, true);
 
    glDisable(GL_NORMALIZE);
    glDisable(GL_STENCIL_TEST);
@@ -954,8 +961,8 @@ void aniModel::defineKeyVertex()
 void aniModel::updateKeyVertex(vertexInfo& v)
 {
    /* Calculate the sin and cos of the angle */
-   float angleSin = sinf(deg2Rad(orientation));
-   float angleCos = cosf(deg2Rad(orientation));
+   float angleSin = sinf(deg2Rad(orientationY));
+   float angleCos = cosf(deg2Rad(orientationY));
    
    /* Get the model renderer */ 
    pCalRenderer = m_calModel->getRenderer();
@@ -998,12 +1005,13 @@ void aniModel::updateKeyVertex(vertexInfo& v)
 /*********************************************************************
  *                           depthColision                           *
  *********************************************************************/
-bool aniModel::depthCollision(GLfloat angle, GLfloat pX, GLfloat pY, GLfloat pZ,
-                              GLfloat colMin[3],GLfloat colMax[3])
+bool aniModel::depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ,
+      GLfloat pX, GLfloat pY, GLfloat pZ,
+      GLfloat colMin[3],GLfloat colMax[3])
 {
    /* Calculate the sin and cos of the angle */
-   float angleSin = sinf(deg2Rad(angle));
-   float angleCos = cosf(deg2Rad(angle));
+   float angleSin = sinf(deg2Rad(angleY));
+   float angleCos = cosf(deg2Rad(angleY));
 
    GLushort* facesShort = NULL;
    GLuint* facesInt = NULL;

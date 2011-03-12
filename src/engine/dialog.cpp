@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -1247,7 +1247,8 @@ void conversation::proccessAction(int opcao, void* curEngine)
                   float height =  actualMap->getHeight(actualPC->xPosition, 
                                                        actualPC->zPosition);
                   actualMap->insertObject(actualPC->xPosition, height,
-                                          actualPC->zPosition, 0, obj, 0);
+                                          actualPC->zPosition, 
+                                          0.0f, 0.0f, 0.0f, obj, 0);
                   modif.mapObjectAddAction(MODSTATE_ACTION_OBJECT_ADD,
                                            actions[i].satt,
                                            actualMap->getFileName(),

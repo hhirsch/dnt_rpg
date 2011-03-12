@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -218,7 +218,9 @@ class objSquare : public dntListElement
       GLfloat x;           /**< X Position (used to simplify) */
       GLfloat y;           /**< Y position (used to simplify) */
       GLfloat z;           /**< Z positon (used to simplify) */
-      GLfloat orientation; /**< Orientation (used to simplify) */
+      GLfloat angleX,      /**< Orientation (used to simplify) */
+              angleY,      /**< Orientation (used to simplify) */
+              angleZ;      /**< Orientation (used to simplify) */
       
       int status;          /**< The status of the object */
       bool colision;       /**< If the collision is enable to this object */
@@ -255,7 +257,8 @@ class Square: public dntList
        * \param obj -> pointer to the object that is in the square
        * \return -> pointer to the created objectSquare */
       objSquare* addObject(bool draw, GLfloat x, GLfloat y, GLfloat z,
-                           GLfloat orientaton, bool colision, object* obj);
+                           GLfloat aX, GLfloat aY, GLfloat aZ, 
+                           bool colision, object* obj);
 
       /*! Remove Object from the square
        * \param obj -> pointer to the objectSquare to remove
@@ -408,26 +411,21 @@ class Map
        *          so if you want it deleted, just do yourself */
       void removeObject(object* obj);
       /*! Insert Object on Map
-       * \param xReal -> xPosition to insert
-       * \param yReal -> yPosition to insert
-       * \param zReal -> zPosition to insert
-       * \param orObj -> object orientation value
-       * \param obj -> pointer to mapObject
        * \param qx -> square internal X (in Squares)
        * \param qz -> square internal Z (in squares)
        * \param collision -> true if has collision with object */
       void insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal, 
-                        GLfloat orObj,
+                        GLfloat angleX, GLfloat angleY, GLfloat angleZ,
                         object* obj, int qx, int qz, bool collision);
       /*! Insert Object on Map
        * \param xReal -> xPosition to insert
        * \param yReal -> yPosition to insert
        * \param zReal -> zPosition to insert
-       * \param orObj -> object orientation value
        * \param obj -> pointer to mapObject
        * \param collision -> true if has collision with object */
       void insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal, 
-                        GLfloat orObj, object* obj, bool collision);
+                        GLfloat angleX, GLfloat angleY, GLfloat angleZ,
+                        object* obj, bool collision);
 
       /*! Get Map File Name
        * \return map fileName */

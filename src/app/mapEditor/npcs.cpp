@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -79,13 +79,13 @@ void npcs::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       /* Rotate the NPC + */
       if( (mButton & SDL_BUTTON(2)) && (actualNpc != NULL) )
       {
-         actualNpc->orientation = ((int) (actualNpc->orientation + 1)) % 360;
+         actualNpc->orientationY = ((int) (actualNpc->orientationY + 1)) % 360;
       }
 
       /* Rotate the NPC - */
       if( (mButton & SDL_BUTTON(3)) && (actualNpc != NULL) )
       {
-         actualNpc->orientation = ((int) (actualNpc->orientation - 1)) % 360;
+         actualNpc->orientationY = ((int) (actualNpc->orientationY - 1)) % 360;
       }
      
       /* Insert the NPC */
@@ -122,7 +122,7 @@ void npcs::drawTemporary()
          glTranslatef(actualNpc->xPosition, 
                       actualNpc->yPosition,
                       actualNpc->zPosition);
-         glRotatef(actualNpc->orientation,0,1,0);
+         glRotatef(actualNpc->orientationY,0,1,0);
          ((aniModel*)actualNpc)->render();
       glPopMatrix();
    }
@@ -136,7 +136,7 @@ void npcs::insertNpc(GLfloat xReal, GLfloat zReal,
 {
    character* per;
    per = NPCs->insertCharacter(npcFile,features, NULL, "");
-   per->orientation = npc->orientation;
+   per->orientationY = npc->orientationY;
    per->xPosition = xReal;
    per->zPosition = zReal;
    per->yPosition = actualMap->getHeight(xReal, zReal);
@@ -190,7 +190,7 @@ bool npcs::saveFile(string fileName)
          saveName = replaceSpaces(per->name);
          fprintf(arq,"%s %s %.3f %.3f %.3f %d\n", saveName.c_str(),
                  per->getCharacterFile().c_str(),
-                 per->xPosition,per->zPosition, per->orientation,
+                 per->xPosition,per->zPosition, per->orientationY,
                  per->getPsychoState());
          per = (character*) per->getNext();
        }

@@ -25,7 +25,8 @@ EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 
 ENDCLASSES=../classes/
 
-all: animodel.o btree.o btreecell.o defparser.o distance.o dirs.o extensions.o \
+all: animodel.o btree.o boundingbox.o btreecell.o defparser.o distance.o\
+     dirs.o extensions.o \
      list.o message3d.o modellist.o npcfile.o overlaps.o shader.o \
      texrenderer.o userinfo.o
 
@@ -42,6 +43,11 @@ btree.o: btree.h btree.cpp
 btreecell.o: btreecell.h btreecell.cpp
 	@printf "Making btreecell.o... "
 	@$(CPP) $(CFLAGS) -c btreecell.cpp -o btreecell.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+boundingbox.o: boundingbox.h boundingbox.cpp
+	@printf "Making boundingbox.o... "
+	@$(CPP) $(CFLAGS) -c boundingbox.cpp -o boundingbox.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 defparser.o: defparser.h defparser.cpp

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -298,7 +298,7 @@ void portal::drawTemporary()
          actualDoor->xPosition = doorX+delta;
          actualDoor->yPosition = 0;
          actualDoor->zPosition = doorZ;
-         actualDoor->orientation = doorOrientation;
+         actualDoor->orientationY = doorOrientation;
 
          /* Render */
          actualDoor->draw(false);
@@ -312,7 +312,7 @@ void portal::drawTemporary()
          actualDoor->xPosition = doorX;
          actualDoor->yPosition = 0;
          actualDoor->zPosition = doorZ+delta;
-         actualDoor->orientation = doorOrientation;
+         actualDoor->orientationY = doorOrientation;
          
          /* Render */
          actualDoor->draw(false);

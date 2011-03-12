@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -188,7 +188,7 @@ bool saveFile::save(string saveFile, void* curEngine, SDL_Surface* frontSurface)
    pcPos[0] = pc->xPosition;
    pcPos[1] = pc->yPosition;
    pcPos[2] = pc->zPosition;
-   pcAngle = pc->orientation;
+   pcAngle = pc->orientationY;
 
    /* Save to the header file */
    
@@ -311,7 +311,7 @@ bool saveFile::load(void* curEngine)
          pc->xPosition = pcPos[0];
          pc->yPosition = pcPos[1];
          pc->zPosition = pcPos[2];
-         pc->orientation = pcAngle;
+         pc->orientationY = pcAngle;
          Map* actualMap = eng->getCurrentMap();
          int posX =(int)floor(pc->xPosition / actualMap->squareSize());
          int posZ =(int)floor(pc->zPosition / actualMap->squareSize());

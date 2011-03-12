@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -1153,7 +1153,7 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs)
          }
          /* Insert the Object  */
          actualMap->insertObject(x, actualMap->getHeight(x,z), z, 
-               0, obj, 0);
+               0.0f, 0.0f, 0.0f, obj, 0);
       }
 
       /* Object Change State */
@@ -1192,7 +1192,7 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs)
                {
                   /* Put it as dead at the position */
                   ch->instantKill();
-                  ch->orientation = charAct->getOrientation();
+                  ch->orientationY = charAct->getOrientation();
                   charAct->getPosition(ch->xPosition, ch->yPosition, 
                         ch->zPosition);
                   ch->defineOcSquare(actualMap);

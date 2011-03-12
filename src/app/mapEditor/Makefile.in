@@ -54,7 +54,7 @@ OBJSETC = $(ENDETC)animodel.o $(ENDETC)extensions.o $(ENDETC)message3d.o \
           $(ENDETC)modellist.o $(ENDETC)userinfo.o $(ENDETC)dirs.o \
           $(ENDETC)overlaps.o $(ENDETC)defparser.o $(ENDETC)texrenderer.o \
           $(ENDETC)shader.o $(ENDETC)btreecell.o $(ENDETC)btree.o \
-          $(ENDETC)npcfile.o $(ENDETC)list.o
+          $(ENDETC)npcfile.o $(ENDETC)list.o $(ENDETC)boundingbox.o
 OBJSENGINE = $(ENDENGINE)alignwindow.o $(ENDENGINE)aspectwindow.o \
              $(ENDENGINE)attwindow.o $(ENDENGINE)barterwindow.o \
 				 $(ENDENGINE)briefing.o $(ENDENGINE)camera.o \
@@ -160,7 +160,7 @@ waterwindow.o: waterwindow.cpp waterwindow.h $(ENDPART)partcontroller.h\
 	@$(CC) $(CFLAGS) waterwindow.cpp -o waterwindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-$(BIN)dntMapEditor: $(OBJSGUI) $(OBJSMAPA) $(OBJSENGINE) $(OBJSETC) $(OBJSPART) $(OBJS)
+$(BIN)dntMapEditor: $(OBJSGUI) $(OBJSIA) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) $(OBJSCBOOK) $(OBJS)
 	@printf "Linking mapEditor... "
 	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSIA) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) $(OBJSCBOOK) $(OBJS) -o $(BIN)dntMapEditor
 	@printf "\e[0;32mDone.\e[0;0m\n"

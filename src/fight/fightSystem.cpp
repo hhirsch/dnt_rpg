@@ -199,7 +199,7 @@ void fightSystem::verifyDeads()
                                   currentEnemy->xPosition,
                                   currentEnemy->yPosition,
                                   currentEnemy->zPosition,
-                                  currentEnemy->orientation,
+                                  currentEnemy->orientationY,
                                   currentEnemy->initialXPosition,
                                   currentEnemy->initialZPosition);
 

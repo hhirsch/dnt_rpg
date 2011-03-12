@@ -129,8 +129,8 @@ bool doHealOrAttack(thing& actor, thing* target,
 
    /* Define Actor orientation
     * FIXME -> call rotate animation! */
-   actor.orientation = getAngle(actor.xPosition, actor.zPosition,
-                                target->xPosition, target->zPosition);
+   actor.orientationY = getAngle(actor.xPosition, actor.zPosition,
+                                 target->xPosition, target->zPosition);
 
    /* Define Actor target to the current */
    actor.currentEnemy = target;
@@ -381,8 +381,8 @@ bool doHealOrAttack(thing& actor, thing* target,
    else
    {
       /* Add Blood */
-      GLfloat cs = cos(deg2Rad(target->orientation));
-      GLfloat sn = sin(deg2Rad(target->orientation));
+      GLfloat cs = cos(deg2Rad(target->orientationY));
+      GLfloat sn = sin(deg2Rad(target->orientationY));
 
       bloodPart = pSystem.addParticle(target->xPosition - (sn*2),
             target->yPosition + target->bloodPosition,

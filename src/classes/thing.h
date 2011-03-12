@@ -59,7 +59,9 @@ class thing
       int sizeModifier;       /**< Thing's Size Modifier */
       int initiativeBonus;    /**< Thing's initiative bonus value */
 
-      float orientation;      /**< Thing's orientation (angle) */
+      float orientationY;     /**< Y axis rotation angle */
+      float orientationX;     /**< X axis rotation angle */
+      float orientationZ;     /**< Z axis rotation angle */
       float xPosition;        /**< Thing's X Position */
       float yPosition;        /**< Thing's Y Position (UP) */
       float zPosition;        /**< Thing's Z Position */

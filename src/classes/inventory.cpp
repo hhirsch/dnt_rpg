@@ -189,7 +189,8 @@ void inventory::dropObject(object* obj, int x, int y, int inv,
    removeFromInventory(x, y, inv);
 
    /* Add it to the map */
-   actualMap->insertObject(X, actualMap->getHeight(X,Z), Z, 0, obj, 0);
+   actualMap->insertObject(X, actualMap->getHeight(X,Z), Z, 
+         0.0f, 0.0f, 0.0f, obj, 0);
    modifState.mapObjectAddAction(MODSTATE_ACTION_OBJECT_ADD,
          obj->getFileName(), actualMap->getFileName(),
          X, actualMap->getHeight(X,Z), Z);

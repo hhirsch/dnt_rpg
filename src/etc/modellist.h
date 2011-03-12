@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -22,20 +22,10 @@
 #define _dnt_modelslist_h
 
 #include "animodel.h"
+#include "boundingbox.h"
+
 #include <string>
 using namespace std;
-
-/*! The Bounding Box Class */
-class boundingBox
-{
-   public:
-      GLfloat x1,
-              z1,
-              y1,
-              x2,
-              z2,
-              y2;
-};
 
 /*! A render Positon of a Scenery Static Model Object */
 class sceneryRenderPosition: public dntListElement
@@ -44,7 +34,9 @@ class sceneryRenderPosition: public dntListElement
       GLfloat x,        /**< x coordinate */
               y,        /**< y coordinate */
               z;        /**< z coordinate */
-      GLfloat angle;    /**< scenery angle */
+      GLfloat angleY,    /**< scenery angle */
+              angleX,   /**< X rotation angle */
+              angleZ;   /**< Z rotation angle */
 };
 
 /*! List of sceneryRenderPositions */
@@ -113,12 +105,9 @@ class model3d: public aniModel, public dntListElement
       bool isStaticScenery();
 
       /*! Add a render position.
-       * \note -> this only affects staticScenery objects 
-       * \param x -> x coordinate
-       * \param y -> y coordinate
-       * \param z -> z coordinate 
-       * \param angle -> orientation angle */
-      void addPosition(float x, float y, float z, float angle);
+       * \note -> this only affects staticScenery objects */
+      void addPosition(float x, float y, float z, 
+            float angleX, float angleY, float angleZ);
 
       /*!
        **********************************************/

@@ -47,6 +47,9 @@ thing::thing()
    displacement = WALK_PER_MOVE_ACTION;
    sizeModifier = 0;
    psychoState = PSYCHO_NEUTRAL;
+   orientationY = 0;
+   orientationX = 0;
+   orientationZ = 0;
    xPosition = 0;
    yPosition = 0;
    zPosition = 0;

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -501,7 +501,7 @@ bool engine::loadGame()
             gameCamera.updateCamera(activeCharacter->xPosition,
                   activeCharacter->yPosition,
                   activeCharacter->zPosition,
-                  activeCharacter->orientation);
+                  activeCharacter->orientationY);
          }
 
          res = true;
@@ -811,7 +811,7 @@ int engine::loadMap(string arqMapa, bool loadingGame)
            /* Define Initial Position */
            per->initialXPosition = posX;
            per->initialZPosition = posZ;
-           per->orientation = ori;
+           per->orientationY = ori;
            per->xPosition = posX;
            per->zPosition = posZ;
            per->yPosition = actualMap->getHeight(posX, posZ);
@@ -923,13 +923,13 @@ int engine::loadMap(string arqMapa, bool loadingGame)
    activeCharacter = PCs->getActiveCharacter();
    actualMap->getInitialPosition(activeCharacter->xPosition,
                                  activeCharacter->zPosition,
-                                 activeCharacter->orientation);
+                                 activeCharacter->orientationY);
    activeCharacter->yPosition=actualMap->getHeight(activeCharacter->xPosition,
                                                    activeCharacter->zPosition);
    gameCamera.updateCamera(activeCharacter->xPosition,
                            activeCharacter->yPosition,
                            activeCharacter->zPosition,
-                           activeCharacter->orientation);
+                           activeCharacter->orientationY);
    activeCharacter->ocSquare = actualMap->getInitialSquare();
 
    showLoading(img,&texturaTexto,texturaCarga,
@@ -2378,7 +2378,7 @@ int engine::verifyMouseActions(Uint8 mButton)
             Z[2] = bound.z2;
             X[3] = bound.x2;
             Z[3] = bound.z1;
-            rotTransBoundingBox(sobj->orientation, X, Z, sobj->x, 0.0, 
+            rotTransBoundingBox(sobj->angleY, X, Z, sobj->x, 0.0, 
                   0.0, sobj->z, minObj, maxObj);
             if(intercepts( minObj, maxObj, minMouse, maxMouse))
             {
@@ -2527,7 +2527,7 @@ int engine::verifyMouseActions(Uint8 mButton)
          x[3] = pers->max[0];
          z[3] = pers->min[2];
 
-         rotTransBoundingBox(pers->orientation, x, z,pers->xPosition,0.0, 0.0,
+         rotTransBoundingBox(pers->orientationY, x, z,pers->xPosition,0.0, 0.0,
                              pers->zPosition, min, max );
 
          if(intercepts( min, max, minMouse, maxMouse))
@@ -2564,7 +2564,7 @@ int engine::verifyMouseActions(Uint8 mButton)
             x[3] = pers->max[0];
             z[3] = pers->min[2];
 
-            rotTransBoundingBox(pers->orientation, x, z, 
+            rotTransBoundingBox(pers->orientationY, x, z, 
                                 pers->xPosition, 0.0f, 0.0f, 
                                 pers->zPosition, min, max );
 
@@ -3025,9 +3025,9 @@ int engine::treatIO(SDL_Surface *screen)
       {
          walkStatus = ENGINE_WALK_KEYS;
           varX = curWalkInterval * 
-                 sin(deg2Rad(activeCharacter->orientation+90.0f));
+                 sin(deg2Rad(activeCharacter->orientationY+90.0f));
           varZ = curWalkInterval * 
-                 cos(deg2Rad(activeCharacter->orientation+90.0f));
+                 cos(deg2Rad(activeCharacter->orientationY+90.0f));
          // Left walk
          if(keys[option->getKey(DNT_KEY_MOVE_LEFT)]) 
          {
@@ -3043,9 +3043,9 @@ int engine::treatIO(SDL_Surface *screen)
       { 
          walkStatus = ENGINE_WALK_KEYS;
          varX = curWalkInterval * 
-                sin(deg2Rad(activeCharacter->orientation));
+                sin(deg2Rad(activeCharacter->orientationY));
          varZ = curWalkInterval * 
-                cos(deg2Rad(activeCharacter->orientation));
+                cos(deg2Rad(activeCharacter->orientationY));
          if(keys[option->getKey(DNT_KEY_MOVE_FORWARD)]) 
          {
               varX *= -1;
@@ -3058,7 +3058,7 @@ int engine::treatIO(SDL_Surface *screen)
       if( (keys[option->getKey(DNT_KEY_ROTATE_LEFT)]) || 
           (keys[option->getKey(DNT_KEY_ROTATE_RIGHT)]))
       {
-         GLfloat ori = activeCharacter->orientation;
+         GLfloat ori = activeCharacter->orientationY;
          walkStatus = ENGINE_WALK_KEYS;
          // CounterClockWise Character turn
          if( (keys[option->getKey(DNT_KEY_ROTATE_LEFT)]) && 
@@ -3100,7 +3100,7 @@ int engine::treatIO(SDL_Surface *screen)
          gameCamera.updateCamera(activeCharacter->xPosition,
                                     activeCharacter->yPosition,
                                     activeCharacter->zPosition,
-                                    activeCharacter->orientation);
+                                    activeCharacter->orientationY);
          SDL_Delay(100);
       }
 
@@ -3153,10 +3153,10 @@ int engine::treatIO(SDL_Surface *screen)
             if(dist > 4)
             {
                /* Try to change the angle */
-               if(canWalk(0,0, walkAngle - activeCharacter->orientation))
+               if(canWalk(0,0, walkAngle - activeCharacter->orientationY))
                { 
                   /* can change */
-                  activeCharacter->orientation = walkAngle; 
+                  activeCharacter->orientationY = walkAngle; 
                }
 
                /* Verify if is running or walking */
@@ -3165,7 +3165,7 @@ int engine::treatIO(SDL_Surface *screen)
             else
             {
                /* Keep the direction angle */
-               walkAngle = activeCharacter->orientation;
+               walkAngle = activeCharacter->orientationY;
                run = false;
             }
 
@@ -3205,7 +3205,7 @@ int engine::treatIO(SDL_Surface *screen)
             if(! activeCharacter->pathFind.getNewPosition(
                                         activeCharacter->xPosition,
                                         activeCharacter->zPosition,
-                                        activeCharacter->orientation,
+                                        activeCharacter->orientationY,
                                         engineMode == ENGINE_MODE_TURN_BATTLE,
                                         run))
             {
@@ -3225,7 +3225,7 @@ int engine::treatIO(SDL_Surface *screen)
             gameCamera.updateCamera(activeCharacter->xPosition,
                                     activeCharacter->yPosition,
                                     activeCharacter->zPosition,
-                                    activeCharacter->orientation);
+                                    activeCharacter->orientationY);
             walked = true;
       }
 
@@ -3492,7 +3492,7 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
          z[2] = per->max[2];
          x[3] = per->max[0];
          z[3] = per->min[2];
-         rotTransBoundingBox(per->orientation, x, z,per->xPosition, 
+         rotTransBoundingBox(per->orientationY, x, z,per->xPosition, 
                              -per->max[1] + per->yPosition, //To get reflection
                              per->max[1] + per->yPosition,
                              per->zPosition, min, max );
@@ -3969,7 +3969,7 @@ bool engine::tryWalk(GLfloat varX, GLfloat varZ)
       gameCamera.updateCamera(activeCharacter->xPosition,
             activeCharacter->yPosition,
             activeCharacter->zPosition,
-            activeCharacter->orientation);
+            activeCharacter->orientationY);
       return(true);
    }
 
@@ -3988,7 +3988,7 @@ bool engine::tryWalk(GLfloat varX, GLfloat varZ)
       gameCamera.updateCamera(activeCharacter->xPosition,
             activeCharacter->yPosition,
             activeCharacter->zPosition,
-            activeCharacter->orientation);
+            activeCharacter->orientationY);
       return(true);
    }
 
@@ -4008,7 +4008,7 @@ bool engine::tryWalk(GLfloat varX, GLfloat varZ)
       gameCamera.updateCamera(activeCharacter->xPosition,
             activeCharacter->yPosition,
             activeCharacter->zPosition,
-            activeCharacter->orientation);
+            activeCharacter->orientationY);
       return(true);
    }
 

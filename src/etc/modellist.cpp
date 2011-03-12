@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -119,14 +119,17 @@ bool model3d::isStaticScenery()
 /********************************************************
  *                      addPosition                     *
  ********************************************************/
-void model3d::addPosition(float x, float y, float z, float angle)
+void model3d::addPosition(float x, float y, float z, float angleX, 
+      float angleY, float angleZ)
 {
    /* Create Position */
    sceneryRenderPosition* pos = new sceneryRenderPosition();
    pos->x = x;
    pos->y = y;
    pos->z = z;
-   pos->angle = angle;
+   pos->angleY = angleY;
+   pos->angleX = angleX;
+   pos->angleZ = angleZ;
 
    /* Add it to the list */
    positions->insert(pos);
@@ -137,15 +140,10 @@ void model3d::addPosition(float x, float y, float z, float angle)
  ********************************************************/
 void model3d::drawBoundingBoxes(GLfloat** matriz) 
 {
-   GLfloat min[3], max[3];
-   GLfloat X[4], Z[4];
    boundingBox bound;
    int i;
    
    sceneryRenderPosition* pos = (sceneryRenderPosition*)positions->getFirst();
-
-   glBegin(GL_QUADS);
-   glColor4f(1.0,0.0,0.0,0.5);
 
    /* Render All Models */
    for(i=0; i < positions->getTotal(); i++)
@@ -153,48 +151,21 @@ void model3d::drawBoundingBoxes(GLfloat** matriz)
       xPosition = pos->x;
       yPosition = pos->y;
       zPosition = pos->z;
-      orientation = pos->angle;
+      orientationY = pos->angleY;
+      orientationX = pos->angleX;
+      orientationZ = pos->angleZ;
 
       /* Do View Frustum Culling */
       bound = getBoundingBox();
-      X[0] = bound.x1;
-      Z[0] = bound.z1;
-      X[1] = bound.x1;
-      Z[1] = bound.z2; 
-      X[2] = bound.x2;
-      Z[2] = bound.z2;
-      X[3] = bound.x2;
-      Z[3] = bound.z1;
-      rotTransBoundingBox(pos->angle, X, Z, pos->x, 
-            pos->y+bound.y1, pos->y+bound.y2, 
-            pos->z, min, max );
+      bound.rotate(pos->angleX, pos->angleY, pos->angleZ);
+      bound.translate(pos->x, pos->y, pos->z);
 
-      if( (matriz == NULL) ||
-            (visibleCube(min[0],min[1],min[2],max[0],max[1],max[2],
-                         matriz)) )
+      if(bound.isVisible(matriz))
       {
-         /* Is visible, so render */
-         glVertex3f(min[0], min[1], min[2]);
-         glVertex3f(min[0], min[1], max[2]);
-         glVertex3f(max[0], min[1], max[2]);
-         glVertex3f(max[0], min[1], min[2]);
-
-         glVertex3f(min[0], max[1], min[2]);
-         glVertex3f(min[0], max[1], max[2]);
-         glVertex3f(max[0], max[1], max[2]);
-         glVertex3f(max[0], max[1], min[2]);
-
-         /*glPushMatrix();
-         glTranslatef(xPosition, yPosition, zPosition);
-         glRotatef(orientation, 0, 1, 0);
-         renderBoundingBox();
-         glPopMatrix();*/
+         bound.render();
       }
-
       pos = (sceneryRenderPosition*)pos->getNext();
    }
-
-   glEnd();
 }
 
 /********************************************************
@@ -219,7 +190,9 @@ void model3d::draw(GLfloat** matriz, bool inverted, GLfloat* shadowMatrix,
       xPosition = pos->x;
       yPosition = pos->y;
       zPosition = pos->z;
-      orientation = pos->angle;
+      orientationY = pos->angleY;
+      orientationX = pos->angleX;
+      orientationZ = pos->angleZ;
 
       /* Do View Frustum Culling */
       bound = getBoundingBox();
@@ -231,7 +204,7 @@ void model3d::draw(GLfloat** matriz, bool inverted, GLfloat* shadowMatrix,
       Z[2] = bound.z2;
       X[3] = bound.x2;
       Z[3] = bound.z1;
-      rotTransBoundingBox(pos->angle, X, Z, pos->x, 
+      rotTransBoundingBox(pos->angleY, X, Z, pos->x, 
             pos->y+bound.y1, pos->y+bound.y2, 
             pos->z, min, max );
       if( (matriz == NULL) ||
@@ -241,7 +214,9 @@ void model3d::draw(GLfloat** matriz, bool inverted, GLfloat* shadowMatrix,
          /* Is visible, so render */
          glPushMatrix();
          glTranslatef(xPosition, yPosition, zPosition);
-         glRotatef(orientation, 0, 1, 0);
+         glRotatef(orientationZ, 0, 0, 1);
+         glRotatef(orientationX, 1, 0, 0);
+         glRotatef(orientationY, 0, 1, 0);
          renderFromGraphicMemory();
          glPopMatrix();
       }
@@ -250,7 +225,7 @@ void model3d::draw(GLfloat** matriz, bool inverted, GLfloat* shadowMatrix,
       if( (inverted) && (pos->y >= 0) )
       {
          /* Do Clulling */
-         rotTransBoundingBox(pos->angle, X, Z, pos->x, 
+         rotTransBoundingBox(pos->angleY, X, Z, pos->x, 
                pos->y-bound.y2, pos->y-bound.y1, 
                pos->z, min, max);
          if(visibleCube(min[0],min[1],min[2],max[0],max[1],max[2],
@@ -263,7 +238,9 @@ void model3d::draw(GLfloat** matriz, bool inverted, GLfloat* shadowMatrix,
             glEnable(GL_NORMALIZE);
             glPushMatrix();
             glTranslatef(xPosition, -yPosition, zPosition);
-            glRotatef(orientation, 0, 1, 0);
+            glRotatef(orientationZ, 0, 0, 1);
+            glRotatef(orientationX, 1, 0, 0);
+            glRotatef(orientationY, 0, 1, 0);
             glScalef(1.0,-1.0,1.0);
             renderFromGraphicMemory();
             glPopMatrix();
@@ -277,7 +254,7 @@ void model3d::draw(GLfloat** matriz, bool inverted, GLfloat* shadowMatrix,
       if( (shadowMatrix != NULL) && 
           ( (pos->y > 0) || ( (pos->y == 0) && (max[1] > 2) ) ) )
       {
-         orientation = pos->angle;
+         orientationY = pos->angleY;
          glPushMatrix();
          renderShadow(shadowMatrix, alpha);
          glPopMatrix();
@@ -288,6 +265,9 @@ void model3d::draw(GLfloat** matriz, bool inverted, GLfloat* shadowMatrix,
 
    /* remove Model from graphic card memory */
    removeFromGraphicMemory();
+
+   /* Render bounding boxes */
+   drawBoundingBoxes(matriz);
 }
 
 /********************************************************

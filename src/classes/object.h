@@ -141,7 +141,8 @@ class object: public thing
        * \param y -> y coordinate
        * \param z -> z coordinate 
        * \param angle -> object angle */
-      void addRenderPosition(float x, float y, float z, float angle);
+      void addRenderPosition(float x, float y, float z, 
+            float angleX, float angleY, float angleZ);
 
       /*! Get the 2D image of the object
        * \return the pointer to the surface */
@@ -169,8 +170,9 @@ class object: public thing
        *  \param colMin -> colider min values of bounding box
        *  \param colMax -> colider max values of bounding box 
        *  \return -> true if one or more meshes colides, false otherwise */
-      bool depthCollision(GLfloat angle, GLfloat pX, GLfloat pY, GLfloat pZ,
-                          GLfloat colMin[3], GLfloat colMax[3]);
+      bool depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ, 
+            GLfloat pX, GLfloat pY, GLfloat pZ,
+            GLfloat colMin[3], GLfloat colMax[3]);
 
       /*! Get the related object dice information
        * \return -> diceThing of the object */

@@ -166,7 +166,7 @@ void character::render(bool updateAnimations, bool reflexion, bool shadow,
    glPushMatrix();
       /* Set position and orientation */
       glTranslatef(xPosition, yPosition, zPosition);
-      glRotatef(orientation, 0.0f, 1.0f, 0.0f);
+      glRotatef(orientationY, 0.0f, 1.0f, 0.0f);
       renderFromGraphicMemory();
    glPopMatrix();
 
@@ -189,7 +189,7 @@ void character::render(bool updateAnimations, bool reflexion, bool shadow,
    obj = inventories->getFromPlace(INVENTORY_LEFT_HAND);
    if(obj)
    {
-      obj->renderEquipped(2, leftHand.x, leftHand.y, leftHand.z, orientation,
+      obj->renderEquipped(2, leftHand.x, leftHand.y, leftHand.z, orientationY,
             leftHand.angleXY, leftHand.angleYZ,
             reflexion, shadow, gameSun->getShadowMatrix(), 
             gameSun->getShadowAlpha());
@@ -198,7 +198,7 @@ void character::render(bool updateAnimations, bool reflexion, bool shadow,
    if(obj)
    {
       obj->renderEquipped(2, rightHand.x, rightHand.y, rightHand.z, 
-            orientation,rightHand.angleXY, rightHand.angleYZ,
+            orientationY,rightHand.angleXY, rightHand.angleYZ,
             reflexion, shadow, gameSun->getShadowMatrix(), 
             gameSun->getShadowAlpha());
    }
@@ -671,7 +671,7 @@ void character::callIdleAnimation()
  *********************************************************************/
 void character::setOrientation(GLfloat ori)
 {
-   orientation = ori;
+   orientationY = ori;
    pathFind.setOrientation(ori);
 }
 
@@ -1042,7 +1042,7 @@ character* characterList::insertCharacter(string file, featsList* ft,
    /* Create the Character */ 
    character* novo;
    novo = new character(ft, pEngine);
-   novo->orientation = 0.0f;
+   novo->orientationY = 0.0f;
    novo->xPosition = 0.0f;
    novo->zPosition = 0.0f;
    novo->yPosition = 0.0f;

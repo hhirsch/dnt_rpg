@@ -404,7 +404,9 @@ void object::draw(bool inverted)
    glEnable(GL_COLOR_MATERIAL);
    glPushMatrix();
       glTranslatef(xPosition, (inverted?-yPosition:yPosition), zPosition);
-      glRotatef(orientation,0,1,0);
+      glRotatef(orientationZ,0,0,1);
+      glRotatef(orientationX,1,0,0);
+      glRotatef(orientationY,0,1,0);
       if(inverted)
       {
          glScalef(1.0, -1.0, 1.0);
@@ -466,7 +468,7 @@ void object::renderEquipped(int type, float pX, float pY,
          glTranslatef(pX, pY, pZ);
          glRotatef(angle, 0,1,0);
          equippedTransforms(type);
-         model3D->renderReflexion(0,0,0,0);
+         model3D->renderReflexion(0,0,0,0,0,0);
       glPopMatrix();
    }
 
@@ -663,11 +665,12 @@ model3d* object::get3dModel()
 /*********************************************************************
  *                         addRenderPosition                         *
  *********************************************************************/
-void object::addRenderPosition(float x, float y, float z, float angle)
+void object::addRenderPosition(float x, float y, float z, 
+      float angle, float angleX, float angleZ)
 {
    if( (staticScenery) && (model3D))
    {
-      model3D->addPosition(x,y,z,angle);
+      model3D->addPosition(x,y,z,angle, angleX, angleZ);
    }
 }
 
@@ -701,12 +704,13 @@ void object::callIdleAnimation()
 /*********************************************************************
  *                            depthCollision                         *
  *********************************************************************/
-bool object::depthCollision(GLfloat angle, GLfloat pX, GLfloat pY, GLfloat pZ,
-                            GLfloat colMin[3], GLfloat colMax[3])
+bool object::depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ, 
+      GLfloat pX, GLfloat pY, GLfloat pZ, GLfloat colMin[3], GLfloat colMax[3])
 {
    if(model3D)
    {
-      return(model3D->depthCollision(angle,pX,pY,pZ,colMin,colMax));
+      return(model3D->depthCollision(angleX,angleY,angleZ, 
+               pX,pY,pZ,colMin,colMax));
    }
    /* If no model, no collision =^P */
    return(false);

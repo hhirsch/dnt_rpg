@@ -54,7 +54,7 @@ OBJSETC = $(ENDETC)animodel.o $(ENDETC)extensions.o $(ENDETC)message3d.o \
           $(ENDETC)modellist.o $(ENDETC)userinfo.o $(ENDETC)dirs.o \
 			 $(ENDETC)overlaps.o $(ENDETC)defparser.o $(ENDETC)texrenderer.o \
 			 $(ENDETC)shader.o $(ENDETC)btreecell.o $(ENDETC)btree.o \
-			 $(ENDETC)npcfile.o $(ENDETC)list.o
+			 $(ENDETC)npcfile.o $(ENDETC)list.o $(ENDETC)boundingbox.o
 OBJSENGINE = $(ENDENGINE)alignwindow.o $(ENDENGINE)aspectwindow.o \
              $(ENDENGINE)attwindow.o $(ENDENGINE)barterwindow.o \
 				 $(ENDENGINE)briefing.o $(ENDENGINE)camera.o \

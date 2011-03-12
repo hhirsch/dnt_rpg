@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -82,7 +82,8 @@ Square::~Square()
  *                           addObject                              *
  ********************************************************************/
 objSquare* Square::addObject(bool draw, GLfloat x, GLfloat y, GLfloat z,
-                             GLfloat orientation, bool colision, object* obj)
+                             GLfloat aX, GLfloat aY, GLfloat aZ, 
+                             bool colision, object* obj)
 {
    /* Define the new objSquare */
    objSquare* n = new objSquare;
@@ -91,7 +92,9 @@ objSquare* Square::addObject(bool draw, GLfloat x, GLfloat y, GLfloat z,
    n->x = x;
    n->y = y;
    n->z = z;
-   n->orientation = orientation;
+   n->angleX = aX;
+   n->angleY = aY;
+   n->angleZ = aZ;
    n->colision = colision;
    n->obj = obj;
 
@@ -802,25 +805,29 @@ void Map::removeObject(object* obj)
  *                          insertObject                          *
  ******************************************************************/
 void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal, 
-                       GLfloat orObj, object* obj, bool collision)
+                       GLfloat angleX, GLfloat angleY, GLfloat angleZ,
+                       object* obj, bool collision)
 {
    int qx = (int)xReal / squareSize();
    int qz = (int)zReal / squareSize();
-   insertObject(xReal, yReal, zReal, orObj, obj, qx, qz, collision);
+   insertObject(xReal, yReal, zReal, angleX, angleY, angleZ, 
+         obj, qx, qz, collision);
 }
 
 /******************************************************************
  *                          insertObject                          *
  ******************************************************************/
 void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal, 
-                       GLfloat orObj, object* obj, int qx, int qz, 
-                       bool collision)
+                       GLfloat angleX, GLfloat angleY, GLfloat angleZ, 
+                       object* obj, int qx, int qz, bool collision)
 {
    /* Define the object Position */
    obj->xPosition = xReal;
    obj->yPosition = yReal;
    obj->zPosition = zReal;
-   obj->orientation = orObj;
+   obj->orientationX = angleX;
+   obj->orientationY = angleY;
+   obj->orientationZ = angleZ;
 
    /* Get the main square where object is */
    Square* saux = relativeSquare(qx,qz);
@@ -828,7 +835,8 @@ void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal,
    if(saux)
    {
       /* Add Object to the square */
-      saux->addObject(true, xReal, yReal, zReal, orObj, collision, obj);
+      saux->addObject(true, xReal, yReal, zReal, angleX, angleY, angleZ, 
+            collision, obj);
       boundingBox  bounds = obj->getBoundingBox();
 
       /* Now will search all other squares the object can be */
@@ -844,7 +852,7 @@ void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal,
       Z[2] = bounds.z2;
       X[3] = bounds.x2;
       Z[3] = bounds.z1;
-      rotTransBoundingBox(orObj, X, Z, xReal, bounds.y1+yReal, 
+      rotTransBoundingBox(angleY, X, Z, xReal, bounds.y1+yReal, 
             bounds.y2+yReal, zReal, min2, max2);
 
 
@@ -864,7 +872,8 @@ void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal,
             if((qaux) && (qaux != saux))
             {
                ob =0;
-               qaux->addObject(false,xReal, yReal, zReal, orObj,collision,obj);
+               qaux->addObject(false,xReal, yReal, zReal, 
+                     angleX, angleY, angleZ,collision,obj);
             }
          }
       }
@@ -873,12 +882,12 @@ void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal,
        * add a render position to it! */
       if(obj->isStaticScenery())
       {
-         obj->addRenderPosition(xReal, yReal, zReal, orObj);
+         obj->addRenderPosition(xReal, yReal, zReal, angleX, angleY , angleZ);
       }
    }
    else
    {
-      cerr << "Warn: Try to insert object out of Map's Limits!" << endl;
+      cerr << "Warn: Couldn't insert object out of Map's Limits!" << endl;
    }
 }
 
@@ -1495,7 +1504,7 @@ void Map::renderObjects(GLfloat cameraX, GLfloat cameraY,
             Z[3] = bound.z1;
             if(inverted)
             {
-               rotTransBoundingBox(obj->obj->orientation, X, Z, 
+               rotTransBoundingBox(obj->obj->orientationY, X, Z, 
                                    obj->obj->xPosition, 
                                    obj->obj->yPosition - bound.y2, 
                                    -obj->obj->yPosition - bound.y1, 
@@ -1503,7 +1512,7 @@ void Map::renderObjects(GLfloat cameraX, GLfloat cameraY,
             }
             else
             {
-               rotTransBoundingBox(obj->obj->orientation, X, Z, 
+               rotTransBoundingBox(obj->obj->orientationY, X, Z, 
                                    obj->obj->xPosition, 
                                    obj->obj->yPosition + bound.y1, 
                                    obj->obj->yPosition + bound.y2, 
@@ -1530,7 +1539,7 @@ void Map::renderObjects(GLfloat cameraX, GLfloat cameraY,
       if(dor->obj != NULL)
       {
          /* Remove previous delta */
-         dor->obj->orientation -= dor->delta;
+         dor->obj->orientationY -= dor->delta;
 
          /* Do the "animation" */
          if( (dor->status == DOOR_STATUS_OPENED) && (dor->delta < 90))
@@ -1543,7 +1552,7 @@ void Map::renderObjects(GLfloat cameraX, GLfloat cameraY,
          }
 
          /* Apply the new delta */
-         dor->obj->orientation += dor->delta; 
+         dor->obj->orientationY += dor->delta; 
 
          /* Draw it */
          dor->obj->draw(inverted);
@@ -2010,7 +2019,9 @@ int Map::open(string arquivo)
             doorAux->obj->xPosition = doorAux->x;
             doorAux->obj->yPosition = 0;
             doorAux->obj->zPosition = doorAux->z;
-            doorAux->obj->orientation = doorAux->orientation;
+            doorAux->obj->orientationY = doorAux->orientation;
+            doorAux->obj->orientationX = 0;
+            doorAux->obj->orientationZ = 0;
          }
       }
       /* Music File */
@@ -2194,17 +2205,17 @@ int Map::open(string arquivo)
             obj->xPosition = oX;
             obj->yPosition = oY;
             obj->zPosition = oZ;
-            obj->orientation = oOri;
+            obj->orientationY = oOri;
          }
 
          oObj = MapSquares[posX][posZ].addObject(des==1, oX, oY, oZ,
-               oOri, oPis!=1,
+               0, oOri, 0, oPis!=1,
                obj);
          if(oObj->draw)
          {
             if(oObj->obj->isStaticScenery())
             {
-               oObj->obj->addRenderPosition(oX, oY, oZ, oOri);
+               oObj->obj->addRenderPosition(oX, oY, oZ, 0, oOri, 0);
             }
          }
 
@@ -2599,11 +2610,12 @@ int Map::save(string arquivo)
             {
                x2 = (int)obj->obj->xPosition / squareSize();
                z2 = (int)obj->obj->zPosition / squareSize();
-               fprintf(arq,"useObject = %s %d:%d,%d:%.3f,%.3f,%.3f:%.3f:%d\n",
+               fprintf(arq,
+                  "useObject = %s %d:%d,%d:%.3f,%.3f,%.3f:%.3f,%.3f,%.3f:%d\n",
                        dir.getRelativeFile(obj->obj->getFileName()).c_str(),
                        obj->draw, x2 + 1, z2 + 1,
-                       obj->x, obj->y, 
-                       obj->z, obj->orientation, 
+                       obj->x, obj->y, obj->z, 
+                       obj->angleX, obj->angleY, obj->angleZ,
                        !obj->colision);
             }
             obj = (objSquare*)obj->getNext();

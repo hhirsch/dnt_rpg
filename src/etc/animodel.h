@@ -99,13 +99,9 @@ class aniModel:public thing
       /*! Render the loaded Graphic Memory to screen */
       void renderFromGraphicMemory();
       /*! Render the loaded Graphic Memory to screen at the position
-       * \param pX -> x position
-       * \param pY -> y position
-       * \param pZ -> z position
-       * \param angle -> orientation angle
        * \param inverted -> if will invert Y axys */
-      void renderFromGraphicMemory(float pX, float pY, float pZ, float angle,
-            bool inverted);
+      void renderFromGraphicMemory(float pX, float pY, float pZ, float angleX,
+            float angleY, float angleZ, bool inverted);
 
       /*! End the renderer State (unLoad the model from videocard).
        * \note -> must be called after all renderFromGraphicMemory */
@@ -123,12 +119,9 @@ class aniModel:public thing
 
       /*! Render the model reflexion on floor axys */
       void renderReflexion();
-      /*! Render the model reflexion on floor axys
-       * \param pX -> x position
-       * \param pY -> y position
-       * \param pZ -> z position
-       * \param angle -> orientation angle */
-      void renderReflexion(float pX, float pY, float pZ, float angle);
+      /*! Render the model reflexion on floor axys */
+      void renderReflexion(float pX, float pY, float pZ, float angleX, 
+            float angleY, float angleZ);
 
       /*! Calculate the model static bounding box */
       void calculateBoundingBox();
@@ -138,15 +131,15 @@ class aniModel:public thing
 
       /*! Verify, with all Meshes of the model, if the model colides
        *  with the bounding box defined as parameter. 
-       *  \param angle -> model angle
        *  \param pX -> model X position
        *  \param pY -> model Y position
        *  \param pZ -> model Z position
        *  \param colMin -> colider min values of bounding box
        *  \param colMax -> colider max values of bounding box 
        *  \return -> true if one or more meshes colides, false otherwise */
-      bool depthCollision(GLfloat angle, GLfloat pX, GLfloat pY, GLfloat pZ,
-                          GLfloat colMin[3], GLfloat colMax[3]);
+      bool depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ, 
+            GLfloat pX, GLfloat pY, GLfloat pZ,
+            GLfloat colMin[3], GLfloat colMax[3]);
 
       /*! Define all key vertices (left and right hand, for example) */
       void defineKeyVertex();
