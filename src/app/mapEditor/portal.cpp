@@ -219,7 +219,7 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
 
          /* "Break" the wall to door come in */
          novoMuro = actualMap->addWall(0,0,0,0);
-         boundingBox bounds = actualDoor->getBoundingBox();
+         boundingBox bounds = actualDoor->scNode->getBoundingBox();
          if( doorOrientation == 0 )
          {
             doorWall->x2 = doorX;
@@ -243,10 +243,10 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
          
          /* Add the new door to the map */
          door* novaPorta = new(door);
-         novaPorta->x = doorX;
-         novaPorta->z = doorZ;
-         novaPorta->orientation = doorOrientation;
          novaPorta->obj = actualDoor;
+         novaPorta->obj->scNode->set(
+               doorX,0.0f,doorZ, 0.0f, doorOrientation, 0.0f);
+
          
          actualMap->insertDoor(novaPorta);
          cerr << "Added Door: " << doorX << " " << doorZ << " " 
@@ -292,34 +292,9 @@ void portal::drawTemporary()
          delta = 2;
       }
 
-      if(doorOrientation)
-      {
-         /* Set the position */
-         actualDoor->xPosition = doorX+delta;
-         actualDoor->yPosition = 0;
-         actualDoor->zPosition = doorZ;
-         actualDoor->orientationY = doorOrientation;
-
-         /* Render */
-         actualDoor->draw(false);
-
-         /* Remove the delta */
-         actualDoor->xPosition -= delta;
-      }
-      else
-      {
-         /* Set Position */
-         actualDoor->xPosition = doorX;
-         actualDoor->yPosition = 0;
-         actualDoor->zPosition = doorZ+delta;
-         actualDoor->orientationY = doorOrientation;
-         
-         /* Render */
-         actualDoor->draw(false);
-
-         /* Remove the delta */
-         actualDoor->zPosition -= delta;
-      }
+      /* SetPosition */
+      actualDoor->scNode->set(doorX,0.0f,doorZ,
+            0.0f,doorOrientation,0.0f);
 
       /* Render a mouse position */
       glBegin(GL_QUADS);

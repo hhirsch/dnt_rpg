@@ -65,7 +65,7 @@ editor::editor()
    hour = 12.0;
    gameSun = new sun(hour , OUTDOOR_FARVIEW, OUTDOOR_FARVIEW);
    gameSky = new(sky);
-   models.init();
+   curScene.init();
    wTypes.init();
    curs.init();
 
@@ -125,7 +125,7 @@ editor::~editor()
    races rc;
    rc.finish();
    delete(gui);
-   models.finish();
+   curScene.finish();
    wTypes.finish();
    Farso_End(screen);
 
@@ -194,8 +194,8 @@ void editor::closeMap()
       delete(particleEditor);
       delete(npcController);
       objectsList::removeAll();
-      models.finish();;
-      models.init();
+      curScene.finish();;
+      curScene.init();
       mapOpened = false;
       map = NULL;
       particleSystem->deleteAll();
@@ -253,12 +253,8 @@ void editor::openMap()
             while(arq->getNextCharacter(name, arquivo, posX, posZ, ori, psycho))
             {
                 per = NPCs->insertCharacter(arquivo, features, NULL, "");
-                per->xPosition = posX;
-                per->zPosition = posZ;
-                per->yPosition = map->getHeight(posX, posZ);
-                per->orientationY = ori;
-                per->update(0); 
-                per->calculateBoundingBox();
+                per->scNode->set(posX, map->getHeight(posX, posZ), posZ, 
+                      0.0f, ori, 0.0f);
                 per->setPsychoState(psycho);
             }            
          }
@@ -337,7 +333,7 @@ void editor::saveMap()
    if(mapOpened)
    {
       /* Remove the models that aren't used */
-      models.removeUnusedModels();
+      curScene.removeUnusedModels();
 
       /* Save the particles File */
       if(particleSystem->numParticles() > 0)
@@ -666,7 +662,7 @@ int editor::insertTexture(string textureFile)
  ********************************************************************/
 void editor::renderSceneryObjects()
 {
-   models.renderSceneryObjects(visibleMatrix, false);
+   curScene.render(visibleMatrix, false, false, false, NULL, 0.0);
 }
 
 /*********************************************************************
@@ -809,56 +805,6 @@ void editor::draw()
       glPopMatrix();
    }
 
-   glColor4f(1.0,1.0,1.0,1.0);
-
-   /* Draw the NPCs */
-   if(NPCs)
-   {
-      character* per = (character*)NPCs->getFirst();
-      int aux;
-      GLfloat x[4]; GLfloat z[4];
-      GLfloat min[3],max[3];
-      for(aux=0;aux < NPCs->getTotal();aux++)
-      {
-         /* Actualize NPCs */
-         per->update(WALK_UPDATE/*seconds*/);   
-         per->calculateBoundingBox();
-         /* Verify Bounding Box */
-         x[0] = per->min[0];
-         z[0] = per->min[2];
-         x[1] = per->min[0];
-         z[1] = per->max[2]; 
-         x[2] = per->max[0];
-         z[2] = per->max[2];
-         x[3] = per->max[0];
-         z[3] = per->min[2];
-         rotTransBoundingBox(per->orientationY, x, z,per->xPosition, 
-                             per->min[1] + per->yPosition, 
-                             per->max[1] + per->yPosition,
-                             per->zPosition, min, max );
-
-         /* Only Draw Visible Characters */
-         if(visibleCube(min[0],min[1],min[2],max[0],max[1],max[2],
-                        visibleMatrix))
-         {
-            glPushMatrix();
-               glTranslatef(per->xPosition, per->yPosition,
-                            per->zPosition);
-               glRotatef(per->orientationY,0,1,0);
-               ((aniModel*)per)->render();
-             /*per->RenderBoundingBox();
-               glColor3f(0.6,0.1,0.1);
-               glBegin(GL_POLYGON);
-                   glVertex3f(per->min[0],per->min[1]+1,per->min[2]);
-                   glVertex3f(per->min[0],per->min[1]+1,per->max[2]);
-                   glVertex3f(per->max[0],per->min[1]+1,per->max[2]);
-                   glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
-               glEnd();*/
-            glPopMatrix();
-         }
-         per = (character*) per->getNext();
-      }
-   }
    glColor4f(1.0,1.0,1.0,1.0);
 
    /* Draw Particles */

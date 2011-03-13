@@ -134,15 +134,6 @@ void objects::verifyAction(Uint8* keys,
  ******************************************************/
 void objects::drawTemporary()
 {
-   if( (state == OBJECTS_STATE_ADD) && (actualObstacle != NULL))
-   {
-      actualObstacle->xPosition = obstacleX;
-      actualObstacle->yPosition = obstacleY + 
-                                 actualMap->getHeight(obstacleX, obstacleZ);
-      actualObstacle->zPosition = obstacleZ;
-      actualObstacle->orientationY = obstacleOrientation;
-      actualObstacle->draw(false);
-   }
 }
 
 /******************************************************************

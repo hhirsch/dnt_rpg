@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -22,7 +22,7 @@
 #define _dnt_map_editor_objects_h
 
 #include "../../map/map.h"
-#include "../../etc/modellist.h"
+#include "../../etc/scene.h"
 #include "../../engine/util.h"
 #include "../../classes/object.h"
 #include "message.h"

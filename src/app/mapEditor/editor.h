@@ -29,6 +29,7 @@
 #include "objects.h"
 #include "particles.h"
 #include "npcs.h"
+#include "../../etc/scene.h"
 #include "../../engine/sun.h"
 #include "../../engine/cursor.h"
 #include "../../engine/sky.h"
@@ -37,7 +38,6 @@
 #include "../../map/map.h"
 #include "../../engine/culling.h"
 #include "../../engine/util.h"
-#include "../../etc/modellist.h"
 #include <SDL/SDL_image.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -115,7 +115,7 @@ class editor
       wallController* wallEditor;    /**< The wall Editor Module */
       objects* objectEditor;         /**< The Object Editor Module */
       particles* particleEditor;     /**< The Particle Editor Module */
-      modelList models;              /**< The Objects Model List */
+      scene curScene;                /**< The Scene */
       npcs* npcController;           /**< The Npcs Controller */
       weaponTypes wTypes;            /**< The list of types */
 

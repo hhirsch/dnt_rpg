@@ -20,7 +20,7 @@ ENDCBOOK = ../cbook/
 OBJSCBOOK = $(ENDCBOOK)comicbox.o $(ENDCBOOK)comicbook.o \
             $(ENDCBOOK)comicpage.o
 OBJSMAPA = $(ENDMAP)map.o $(ENDMAP)mapfog.o $(ENDMAP)maplights.o \
-           $(ENDMAP)maproad.o $(ENDMAP)mapsound.o
+           $(ENDMAP)maproad.o $(ENDMAP)mapsound.o $(ENDMAP)door.o
 OBJSGUI = $(ENDGUI)textbar.o $(ENDGUI)button.o $(ENDGUI)color.o \
           $(ENDGUI)cxsel.o $(ENDGUI)draw.o $(ENDGUI)messages.o \
           $(ENDGUI)interface.o $(ENDGUI)farso.o $(ENDGUI)filesel.o \

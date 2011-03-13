@@ -70,22 +70,22 @@ void npcs::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
          /* Set the new position */
          mX = mouseXw;
          mY = mouseYw;
-         actualNpc->xPosition = mouseX;
-         actualNpc->zPosition = mouseZ;
-         /* Get its current height */
-         actualNpc->yPosition = actualMap->getHeight(mouseX, mouseZ);
+         actualNpc->scNode->setPosition(mouseX,
+               actualMap->getHeight(mouseX, mouseZ),mouseZ); 
       }
 
       /* Rotate the NPC + */
       if( (mButton & SDL_BUTTON(2)) && (actualNpc != NULL) )
       {
-         actualNpc->orientationY = ((int) (actualNpc->orientationY + 1)) % 360;
+         actualNpc->scNode->setAngle(0.0f, 
+               ((int)(actualNpc->scNode->getAngleY()+1))%360,0.0f);
       }
 
       /* Rotate the NPC - */
       if( (mButton & SDL_BUTTON(3)) && (actualNpc != NULL) )
       {
-         actualNpc->orientationY = ((int) (actualNpc->orientationY - 1)) % 360;
+         actualNpc->scNode->setAngle(0.0f, 
+               ((int)(actualNpc->scNode->getAngleY()-1))%360,0.0f);
       }
      
       /* Insert the NPC */
@@ -114,18 +114,6 @@ void npcs::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
  ******************************************************************/
 void npcs::drawTemporary()
 {
-   if(actualNpc)
-   {
-      actualNpc->update(WALK_UPDATE/*seconds*/);   
-      actualNpc->calculateBoundingBox();
-      glPushMatrix();
-         glTranslatef(actualNpc->xPosition, 
-                      actualNpc->yPosition,
-                      actualNpc->zPosition);
-         glRotatef(actualNpc->orientationY,0,1,0);
-         ((aniModel*)actualNpc)->render();
-      glPopMatrix();
-   }
 }
 
 /******************************************************************
@@ -136,12 +124,8 @@ void npcs::insertNpc(GLfloat xReal, GLfloat zReal,
 {
    character* per;
    per = NPCs->insertCharacter(npcFile,features, NULL, "");
-   per->orientationY = npc->orientationY;
-   per->xPosition = xReal;
-   per->zPosition = zReal;
-   per->yPosition = actualMap->getHeight(xReal, zReal);
-   per->update(0); 
-   per->calculateBoundingBox();
+   per->scNode->set(xReal, actualMap->getHeight(xReal, zReal), zReal,
+      0.0f, npc->scNode->getAngleY(), 0.0f);
 }
 
 /******************************************************************
@@ -154,8 +138,6 @@ void npcs::defineActualNpc(string fileName)
       delete(intList);
       intList = new(characterList);
       actualNpc = intList->insertCharacter(fileName, features, NULL, "");
-      actualNpc->update(0); 
-      actualNpc->calculateBoundingBox();
       npcFile = fileName;
    }
 }
@@ -190,7 +172,9 @@ bool npcs::saveFile(string fileName)
          saveName = replaceSpaces(per->name);
          fprintf(arq,"%s %s %.3f %.3f %.3f %d\n", saveName.c_str(),
                  per->getCharacterFile().c_str(),
-                 per->xPosition,per->zPosition, per->orientationY,
+                 per->scNode->getPosX(),
+                 per->scNode->getPosZ(), 
+                 per->scNode->getAngleY(),
                  per->getPsychoState());
          per = (character*) per->getNext();
        }

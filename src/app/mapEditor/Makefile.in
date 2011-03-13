@@ -19,7 +19,7 @@ ENDCBOOK = ../../cbook/
 OBJSCBOOK = $(ENDCBOOK)comicbox.o $(ENDCBOOK)comicbook.o \
             $(ENDCBOOK)comicpage.o
 OBJSMAPA = $(ENDMAP)map.o $(ENDMAP)mapfog.o $(ENDMAP)maplights.o \
-           $(ENDMAP)maproad.o $(ENDMAP)mapsound.o
+           $(ENDMAP)maproad.o $(ENDMAP)mapsound.o $(ENDMAP)door.o
 OBJSGUI = $(ENDGUI)textbar.o $(ENDGUI)button.o $(ENDGUI)color.o \
           $(ENDGUI)cxsel.o $(ENDGUI)draw.o $(ENDGUI)messages.o \
           $(ENDGUI)interface.o $(ENDGUI)farso.o $(ENDGUI)filesel.o \
@@ -89,7 +89,7 @@ area.o: area.cpp area.h
 editor.o: editor.cpp editor.h guiIO.h terrain.h portal.h wall.h message.h\
           objects.h particles.h npcs.h $(ENDENGINE)sun.h $(ENDENGINE)sky.h\
           $(ENDENGINE)character.h $(ENDENGINE)culling.h $(ENDENGINE)util.h\
-          $(ENDETC)modellist.h $(ENDPART)partcontroller.h $(ENDMAP)map.h
+          $(ENDPART)partcontroller.h $(ENDMAP)map.h
 	@printf "Making editor.o... "
 	@$(CC) $(CFLAGS) editor.cpp -o editor.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -121,14 +121,14 @@ message.o: message.cpp message.h $(ENDGUI)farso.h
 	@$(CC) $(CFLAGS) message.cpp -o message.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-npcs.o: npcs.cpp npcs.h message.h $(ENDMAP)map.h $(ENDETC)modellist.h\
+npcs.o: npcs.cpp npcs.h message.h $(ENDMAP)map.h \
         $(ENDENGINE)util.h $(ENDENGINE)character.h $(ENDCLASSES)feats.h
 	@printf "Making npcs.o... "
 	@$(CC) $(CFLAGS) npcs.cpp -o npcs.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 objects.o: objects.cpp objects.h message.h $(ENDMAP)map.h\
-          $(ENDETC)modellist.h $(ENDENGINE)util.h
+           $(ENDENGINE)util.h
 	@printf "Making objects.o... "
 	@$(CC) $(CFLAGS) objects.cpp -o objects.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
