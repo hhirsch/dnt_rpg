@@ -230,7 +230,7 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
          }
          else
          {
-            doorWall->z2 = doorZ - (bounds.x2 - bounds.x1);
+            doorWall->z2 = doorZ - (bounds.z2 - bounds.z1);
             novoMuro->z1 = doorZ;
             novoMuro->x2 = mx2;
             novoMuro->x1 = mx1;
@@ -293,8 +293,16 @@ void portal::drawTemporary()
       }
 
       /* SetPosition */
-      actualDoor->scNode->set(doorX,0.0f,doorZ,
-            0.0f,doorOrientation,0.0f);
+      if(doorOrientation)
+      {
+         actualDoor->scNode->set(doorX+delta,0.0f,doorZ,
+               0.0f,doorOrientation,0.0f);
+      }
+      else
+      {
+         actualDoor->scNode->set(doorX,0.0f,doorZ+delta,
+               0.0f,doorOrientation,0.0f);
+      }
 
       /* Render a mouse position */
       glBegin(GL_QUADS);
