@@ -303,9 +303,63 @@ void boundingBox::rotate(float angleX, float angleY, float angleZ)
 /***********************************************************************
  *                          multiplyShadow                             *
  ***********************************************************************/
-void boundingBox::multiplyShadow(float** shadowMatrix)
+void boundingBox::multiplyShadow(float* shadowMatrix)
 {
-   /* TODO */
+   /* Note: no need to calc on Y, as it will project to Y=0, always. */
+   float x[4], z[4];
+   float X[4], Z[4];
+   float nw;
+   int i;
+
+   /* Project on shadow all 4 "up" points of the bounding box */
+   X[0] = x1;
+   Z[0] = z1;
+   X[1] = x1;
+   Z[1] = z2;
+   X[2] = x2;
+   Z[2] = z2;
+   X[3] = x2;
+   Z[3] = z1;
+
+   for(i=0; i < 4; i++)
+   {
+      /* Do Projection */
+      x[i] = shadowMatrix[0]*X[i] + shadowMatrix[4]*y2 + shadowMatrix[8]*Z[i] +
+         shadowMatrix[12];
+      /*ny1 = shadowMatrix[1]*x1 + shadowMatrix[5]*y1 + shadowMatrix[9]*z1 +
+          shadowMatrix[13];*/
+      z[i] = shadowMatrix[2]*X[i] + shadowMatrix[6]*y2 + shadowMatrix[10]*Z[i] +
+         shadowMatrix[14];
+      nw = shadowMatrix[3]*X[i] + shadowMatrix[7]*y2 + shadowMatrix[11]*Z[i] +
+         shadowMatrix[15];
+      if(nw != 0)
+      {
+         x[i] = x[i] / nw;
+         z[i] = z[i] / nw;
+      }
+
+      /* Do min/max (conservative, as using previously x1,x2,z1,z2) */
+      if(x[i] < x1)
+      {
+         x1 = x[i];
+      }
+      if(x[i] > x2)
+      {
+         x2 = x[i];
+      }
+      if(z[i] < z1)
+      {
+         z1 = z[i];
+      }
+      if(z[i] > z2)
+      {
+         z2 = z[i];
+      }
+   }
+
+   /* Set Y, as always project to 0, set a delta to avoid glitches */
+   y1 = 0;
+   y2 = 4; /*< Delta to avoid glitches */
 }
 
 /***********************************************************************

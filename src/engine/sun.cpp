@@ -283,25 +283,25 @@ void sun::disableLight()
  *********************************************************************/
 void sun::defineShadowMatrix()
 {
-   shadowMat[0][0] = where[1];
-   shadowMat[1][0] = 0.f - where[0];
-   shadowMat[2][0] = 0.f;
-   shadowMat[3][0] = 0.f;
+   shadowMat[0] = where[1];
+   shadowMat[4] = 0.f - where[0];
+   shadowMat[8] = 0.f;
+   shadowMat[12] = 0.f;
 
-   shadowMat[0][1] = 0.f;
-   shadowMat[1][1] = 0.f;
-   shadowMat[2][1] = 0.f;
-   shadowMat[3][1] = 0.f;
+   shadowMat[1] = 0.f;
+   shadowMat[5] = 0.f;
+   shadowMat[9] = 0.f;
+   shadowMat[13] = 0.f;
 
-   shadowMat[0][2] = 0.f;
-   shadowMat[1][2] = 0.f - where[2];
-   shadowMat[2][2] = where[1];
-   shadowMat[3][2] = 0.f;
+   shadowMat[2] = 0.f;
+   shadowMat[6] = 0.f - where[2];
+   shadowMat[10] = where[1];
+   shadowMat[14] = 0.f;
 
-   shadowMat[0][3] = 0.f;
-   shadowMat[1][3] = 0.f - 1.0;//where[3];
-   shadowMat[2][3] = 0.f;
-   shadowMat[3][3] = where[1];
+   shadowMat[3] = 0.f;
+   shadowMat[7] = 0.f - 1.0;//where[3];
+   shadowMat[11] = 0.f;
+   shadowMat[15] = where[1];
 }
 
 /*********************************************************************
@@ -309,7 +309,7 @@ void sun::defineShadowMatrix()
  *********************************************************************/
 GLfloat* sun::getShadowMatrix()
 {
-   return((GLfloat*)shadowMat);
+   return((GLfloat*)&shadowMat[0]);
 }
 
 /*********************************************************************

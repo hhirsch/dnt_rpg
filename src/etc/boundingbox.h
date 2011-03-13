@@ -68,7 +68,7 @@ class boundingBox
       void notY();
 
       /*! Multiply the bounding box with the 4x4 shadow matrix */
-      void multiplyShadow(float** shadowMatrix);
+      void multiplyShadow(float* shadowMatrix);
 
       /*! assign operator */
       void operator=(const boundingBox& v);

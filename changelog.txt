@@ -1,8 +1,8 @@
 ================================================
 |                Version 0.8                   |
 ================================================
-
  - Created scene and sceneNode abstractions;
+ - Added view frustum culling for shadows;
 
 BugFixes:
  - Fixed a bug that freezes the game when drinking a beer (thanks 

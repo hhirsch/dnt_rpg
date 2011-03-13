@@ -183,17 +183,22 @@ void sceneNode::render(GLfloat** viewMatrix, bool update, bool reflexion,
       }
    }
 
-   /* TODO: the culling for shadow! */
+   /* The shadow render */
    if( (shadow) && (shadowMatrix) && 
        ( (posY > 0) || ( (posY == 0) && (bbox.y2 > 2) ) ) )
    {
-      if(!modelLoaded)
+      boundingBox shadBox = bbox;
+      shadBox.multiplyShadow(shadowMatrix);
+      if(shadBox.isVisible(viewMatrix))
       {
-         model->loadToGraphicMemory();
-         modelLoaded = true;
+         if(!modelLoaded)
+         {
+            model->loadToGraphicMemory();
+            modelLoaded = true;
+         }
+         model->renderShadow(posX, posY, posZ, angleX, angleY, angleZ, 
+               shadowMatrix, alpha);
       }
-      model->renderShadow(posX, posY, posZ, angleX, angleY, angleZ, 
-            shadowMatrix, alpha);
    }
 
    if(animated)

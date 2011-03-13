@@ -86,7 +86,7 @@ class sun
       GLfloat where[4];             /**< Actual Sun Sky Position */
       GLfloat rotation;             /**< Actual Sun Spin to surface */
 
-      GLfloat shadowMat[4][4];      /**< Actual Shadow Matrix */
+      GLfloat shadowMat[16];        /**< Actual Shadow Matrix */
 
       GLuint  sunTexture;           /**< Current Sun Texture */
       GLuint  moonTexture;          /**< Current Moon Texture */
