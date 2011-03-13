@@ -480,6 +480,27 @@ void aniModel::renderFromGraphicMemory(float pX, float pY, float pZ,
 /*********************************************************************
  *                       renderFromGraphicMemory                     *
  *********************************************************************/
+void aniModel::renderFromGraphicMemory(float pX, float pY, float pZ, 
+      float angleX, float angleY, float angleZ, 
+      float angle, float aX, float aY, float aZ, bool inverted)
+{
+   glPushMatrix();
+      glTranslatef(pX, pY, pZ);
+      glRotatef(angle, aX, aY, aZ);
+      glRotatef(angleZ, 0.0f, 0.0f, 1.0f);
+      glRotatef(angleX, 1.0f, 0.0f, 0.0f);
+      glRotatef(angleY, 0.0f, 1.0f, 0.0f);
+      if(inverted)
+      {
+         glScalef(1.0f, -1.0f, 1.0f);
+      }
+      renderFromGraphicMemory();
+   glPopMatrix();
+}
+
+/*********************************************************************
+ *                       renderFromGraphicMemory                     *
+ *********************************************************************/
 void aniModel::renderFromGraphicMemory()
 {
   glPushMatrix();

@@ -31,6 +31,7 @@ sceneNode::sceneNode(aniModel* a, GLfloat x, GLfloat y, GLfloat z,
    model = a;
    animated = false;
    updateCrude = false;
+   enableRotLast = false;
    set(x, y, z, aX, aY, aZ);
 }
 
@@ -44,6 +45,7 @@ sceneNode::sceneNode(string modelFileName, GLfloat x, GLfloat y, GLfloat z,
    /* Animated must have its own model */
    animated = true;
    updateCrude = true;
+   enableRotLast = false;
    model = new aniModel();
 
    /* Load and calculate bounding box */
@@ -106,6 +108,18 @@ void sceneNode::setAngle(GLfloat aX, GLfloat aY, GLfloat aZ)
 }
 
 /***********************************************************************
+ *                           setRotationLast                           *
+ ***********************************************************************/
+void sceneNode::setRotationLast(float angle, float x, float y, float z)
+{
+   rotLast[0] = angle;
+   rotLast[1] = x;
+   rotLast[2] = y;
+   rotLast[3] = z;
+   enableRotLast = true;
+}
+
+/***********************************************************************
  *                           updateBoundingBox                         *
  ***********************************************************************/
 void sceneNode::updateBoundingBox()
@@ -162,8 +176,17 @@ void sceneNode::render(GLfloat** viewMatrix, bool update, bool reflexion,
          model->loadToGraphicMemory();
          modelLoaded = true;
       }
-      model->renderFromGraphicMemory(posX, posY, posZ, 
-            angleX, angleY, angleZ, false);
+      if(!enableRotLast)
+      {
+         model->renderFromGraphicMemory(posX, posY, posZ, 
+               angleX, angleY, angleZ, false);
+      }
+      else
+      {
+         model->renderFromGraphicMemory(posX, posY, posZ, 
+               angleX, angleY, angleZ, rotLast[0], rotLast[1],
+               rotLast[2], rotLast[3], false); 
+      }
    }
 
    /* Do the culling for reflexion */

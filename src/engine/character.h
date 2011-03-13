@@ -343,6 +343,9 @@ class characterList: public dntList
        * \return -> true if the character is in the list */
       bool isCharacterIn(character* ch);
 
+      /*! Update effects and positions of all characters influences */
+      void update();
+
    protected:
 
       /*! Call the delete for a character

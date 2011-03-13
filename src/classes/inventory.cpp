@@ -147,6 +147,12 @@ bool inventory::addObject(object* obj, int x, int y, int curInv)
    /* Add the object */
    res = slots[curInv]->addObject(obj, x, y);
 
+   if(res)
+   {
+      /* Added to inventory: no more need to render at scene! */
+      obj->removeSceneNode();
+   }
+
    /* Redraw the window if needed */
    if( (res) && (openedWindow != NULL))
    {
@@ -170,7 +176,12 @@ bool inventory::equipObject(object* obj, int where)
           ( (where == INVENTORY_LEFT_HAND) ||
             (where == INVENTORY_RIGHT_HAND)))
       {
-         return(equippedSlots[where]->addObject(obj,0,0));
+         if(equippedSlots[where]->addObject(obj,0,0))
+         {
+            /* Recreate the scene node, to render it on scene (at hand) */
+            obj->createSceneNode(-10000, -10000, -10000, 0,0,0);
+            return(true);
+         }
       }
    }
    return(false);
@@ -247,11 +258,16 @@ bool inventory::addObject(object* obj)
       inv++;
    }
 
-   /* Redraw the window if needed */
-   if( (inv < INVENTORY_PER_CHARACTER) && (openedWindow != NULL))
+   /* Some verifications if added to inventory */
+   if(inv < INVENTORY_PER_CHARACTER)
    {
-      inventWindow* i = (inventWindow*)openedWindow;
-      i->reDraw();
+      obj->removeSceneNode(); 
+      if(openedWindow != NULL)
+      {
+         /* Redraw the window if needed */
+         inventWindow* i = (inventWindow*)openedWindow;
+         i->reDraw();
+      }
    }
 
    return(inv < INVENTORY_PER_CHARACTER);

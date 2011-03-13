@@ -3684,6 +3684,16 @@ void engine::updateBeforeRender()
    clearOpenGL();
    glLoadIdentity();
 
+   /* Apply effects and characters' influences */
+   if(PCs)
+   {
+      PCs->update();
+   }
+   if(NPCs)
+   {
+      NPCs->update();
+   }
+
    /* Redefine camera position */
    gameCamera.lookAt(actualMap);
 

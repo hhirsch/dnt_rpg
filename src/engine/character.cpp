@@ -150,6 +150,14 @@ character::~character()
 void character::updateEffects()
 {
    effects->doStep();
+   /* Update Equipped objects positions too */
+   aniModel* mdl = scNode->getModel();
+   object* obj = inventories->getFromPlace(INVENTORY_LEFT_HAND);
+   if(obj)
+   {
+      obj->setEquipedPosition(2, mdl->leftHand.x, mdl->leftHand.y, 
+            mdl->leftHand.z, scNode->getAngleY());
+   }
 }
 
 /*********************************************************************
@@ -1410,6 +1418,20 @@ bool characterList::isCharacterIn(character* ch)
 void characterList::setActiveCharacter(character* dude)
 {
    activeCharacter = dude;
+}
+
+/*********************************************************************
+ *                                  update                           *
+ *********************************************************************/
+void characterList::update()
+{
+   int i;
+   character* ch = (character*)first;
+   for(i=0; i < total; i++)
+   {
+      ch->updateEffects();
+      ch = (character*)ch->getNext();
+   }
 }
 
 /*********************************************************************

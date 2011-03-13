@@ -65,21 +65,6 @@ class object: public thing
        * \return true if the object is pickable */
       bool canGet();
 
-      /*! Render the object as equipped at the character
-       * \param type -> type of equiped [1,2]
-       * \param pX -> x position
-       * \param pY -> y position
-       * \param pZ -> z position
-       * \param angle -> object angle
-       * \param angleXY -> object X,Y angle
-       * \param angleYZ -> object Y,Z angle
-       * \param reflexion -> true to render reflexion too
-       * \param shadow -> true to render shadow too*/
-      void renderEquipped(int type, float pX, float pY, float pZ, 
-            float angle, float angleXY, float angleYZ,
-            bool reflexion, bool shadow, GLfloat* shadowMatrix, 
-            float shadowAlpha);
-
       /*! Draw the 2D Model to Surface
        * \param x -> x value on surface
        * \param y -> y value on surface
@@ -184,6 +169,11 @@ class object: public thing
       void createSceneNode(float pX, float pY, float pZ,
                            float aX, float aY, float aZ);
 
+      /*! Set the object position when equiped
+       * \param type -> 1 for first place, 2 for second place */
+      void setEquipedPosition(int type, float pX, float pY, float pZ,
+                              float aY);
+
    protected:
       int inventSizeX,      /**< Size on inventory X axis */
           inventSizeY;      /**< Size on inventory Y axis */
@@ -220,11 +210,6 @@ class object: public thing
       /*! Init the values (all with null or zero). Usually called
        * at begining of the constructors. */
       void cleanValues();
-
-    private:
-
-      /*! Do the equipped object transforms */
-      void equippedTransforms(int type);
 
 };
 

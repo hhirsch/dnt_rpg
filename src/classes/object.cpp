@@ -432,34 +432,41 @@ void object::setPrevious(object* o)
 }
 
 /**************************************************************
- *                        equippedMods                        *
+ *                     seEquippedPosition                     *
  **************************************************************/
-void object::equippedTransforms(int type)
+void object::setEquipedPosition(int type, float pX, float pY, float pZ,
+                                float aY)
 {
    if(type == 1)
    {
-      glTranslatef(eqTrans1[0], eqTrans1[1], eqTrans1[2]);
+      pX += eqTrans1[0];
+      pY += eqTrans1[1];
+      pZ += eqTrans1[2];
    }
    else
    {
-      glTranslatef(eqTrans2[0], eqTrans2[1], eqTrans2[2]);
+      pX += eqTrans2[0];
+      pY += eqTrans2[1];
+      pZ += eqTrans2[2];
    }
-
-   glRotatef(eqAngleX, 1,0,0);
-   glRotatef(eqAngleZ, 0,0,1);
-   glRotatef(eqAngleY, 0,1,0);
+   if(scNode)
+   {
+      scNode->set(pX, pY, pZ, eqAngleX, eqAngleY, eqAngleZ);
+      scNode->setRotationLast(aY, 0.0f, 1.0f, 0.0f);
+   }
 }
 
 /**************************************************************
  *                        renderEquipped                      *
  **************************************************************/
+#if 0
 void object::renderEquipped(int type, float pX, float pY, 
       float pZ, float angle, float angleXY, float angleYZ,
       bool reflexion, bool shadow, 
       GLfloat* shadowMatrix, float shadowAlpha)
 {
    /* FIXME! */
-#if 0
+
    /* Update model (if animated) */
    model3D->update(WALK_UPDATE);
 
@@ -525,8 +532,9 @@ void object::renderEquipped(int type, float pX, float pY,
 
    /* Remove it from graphic's memory */
    model3D->removeFromGraphicMemory();
-#endif
+
 }
+#endif
 
 /**************************************************************
  *                           draw2D                           *

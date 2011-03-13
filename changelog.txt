@@ -1,8 +1,11 @@
 ================================================
 |                Version 0.8                   |
 ================================================
- - Created scene and sceneNode abstractions;
  - Added view frustum culling for shadows;
+ - map: Add object rotation to all axis;
+ - Created scene and sceneNode abstractions;
+ - New Bounding Box class;
+
 
 BugFixes:
  - Fixed a bug that freezes the game when drinking a beer (thanks 

@@ -88,6 +88,11 @@ class sceneNode
              bool shadow, GLfloat* shadowMatrix, float alpha, 
              bool& modelLoaded);
 
+       /*! Set a rotation to do aftear all other rotations
+        * \note -> this rotation won't affect the bouding box!
+        * \note -> it is usually used for eqquiped objects */
+       void setRotationLast(float angle, float x, float y, float z);
+
     protected:
 
        GLfloat posX,    /**< X position on scene */
@@ -97,6 +102,9 @@ class sceneNode
        GLfloat angleX,  /**< rotation angle on X axis */
                angleY,  /**< rotation angle on Y axis */
                angleZ;  /**< rotation angle on Z axis */
+
+        GLfloat rotLast[4]; /**< Rotation to do after basic */
+        bool enableRotLast; /**< If rotation after all is avaiable */
 
         aniModel* model; /**< pointer to the animodel related */
         bool animated;   /**< true if is animated (so, own the aniModel),

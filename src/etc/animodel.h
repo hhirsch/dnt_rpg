@@ -99,6 +99,9 @@ class aniModel
        * \param inverted -> if will invert Y axys */
       void renderFromGraphicMemory(float pX, float pY, float pZ, float angleX,
             float angleY, float angleZ, bool inverted);
+      void renderFromGraphicMemory(float pX, float pY, float pZ, 
+            float angleX, float angleY, float angleZ, 
+            float angle, float aX, float aY, float aZ, bool inverted);
 
       /*! End the renderer State (unLoad the model from videocard).
        * \note -> must be called after all renderFromGraphicMemory */

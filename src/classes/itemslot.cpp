@@ -106,9 +106,6 @@ bool itemSlot::addObject(object* obj, int x, int y)
             spaces[j][k].origY = y;
          }
       }
-      /* Change Object Position (to avoid being deleted when back 
-       * to the map where got it) */
-      obj->removeSceneNode();
 
       totalItems++;
       return(true);
