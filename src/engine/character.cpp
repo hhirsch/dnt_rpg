@@ -1275,6 +1275,13 @@ character* characterList::insertCharacter(string file, featsList* ft,
    novo->scNode = curScene.createSceneNode(false, cal3dName, 
          0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 
+   /* Let's get the crude bounding box for IDLE state */
+   novo->scNode->getModel()->setState(STATE_IDLE);
+   novo->scNode->getModel()->update(0, 0, 0, 0, 0); 
+   novo->scNode->updateBoundingBox();
+   /* Now, disable any further update to the crude bounding box */
+   novo->scNode->disableCrudeBoundingBoxUpdate();
+
    /* Now insert it on the list */
    insert(novo);
    

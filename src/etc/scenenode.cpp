@@ -30,6 +30,7 @@ sceneNode::sceneNode(aniModel* a, GLfloat x, GLfloat y, GLfloat z,
    /* No animated (no-owner), only need to set */
    model = a;
    animated = false;
+   updateCrude = false;
    set(x, y, z, aX, aY, aZ);
 }
 
@@ -42,6 +43,7 @@ sceneNode::sceneNode(string modelFileName, GLfloat x, GLfloat y, GLfloat z,
 {
    /* Animated must have its own model */
    animated = true;
+   updateCrude = true;
    model = new aniModel();
 
    /* Load and calculate bounding box */
@@ -109,7 +111,7 @@ void sceneNode::setAngle(GLfloat aX, GLfloat aY, GLfloat aZ)
 void sceneNode::updateBoundingBox()
 {
    /* Update the crude */
-   if(animated)
+   if( (animated) && (updateCrude))
    {
       model->calculateCrudeBoundingBox();
    }
@@ -118,6 +120,22 @@ void sceneNode::updateBoundingBox()
    bbox = model->getCrudeBoundingBox();
    bbox.rotate(angleX, angleY, angleZ);
    bbox.translate(posX, posY, posZ);
+}
+
+/***********************************************************************
+ *                      enableCrudeBoundingBox                         *
+ ***********************************************************************/
+void sceneNode::enableCrudeBoundingBoxUpdate()
+{
+   updateCrude = true;
+}
+
+/***********************************************************************
+ *                     disableCrudeBoundingBox                         *
+ ***********************************************************************/
+void sceneNode::disableCrudeBoundingBoxUpdate()
+{
+   updateCrude = false;
 }
 
 /***********************************************************************

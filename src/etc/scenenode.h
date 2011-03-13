@@ -52,6 +52,14 @@ class sceneNode
        /*! Update the bounding box position */
        void updateBoundingBox();
 
+       /*! Enable the update of crude bounding box (related to the
+        * aniModel, at the origin) */
+       void enableCrudeBoundingBoxUpdate();
+
+       /*! Disable the update of crude bounding box (related to the
+        * aniModel, at the origin) */
+       void disableCrudeBoundingBoxUpdate();
+       
        /*! Get the related rotated & translated bounding box */
        boundingBox getBoundingBox(){return(bbox);};
        
@@ -93,6 +101,7 @@ class sceneNode
         aniModel* model; /**< pointer to the animodel related */
         bool animated;   /**< true if is animated (so, own the aniModel),
                               false if is only a render position */
+        bool updateCrude;  /**< if will update crude bounding box */
         boundingBox bbox;  /**< translated and rotated bounding box 
                                 relative to the scene node */
 

@@ -864,36 +864,6 @@ int engine::loadMap(string arqMapa, bool loadingGame)
       brief->reOpen(gui);
    }
 
-#if 0
-   /* Updating the BoundingBoxes for PCs */
-   int aux;
-   per = (character*) PCs->getFirst();
-   for(aux=0;aux < PCs->getTotal();aux++)
-   {
-      prevPos = per->scNodegetCurrentPos();
-      per->setState(STATE_IDLE);
-      per->update(0); 
-      per->updateBoundingBox();
-      per->update(prevPos);
-      per = (character*) per->getNext();
-   }
-
-   /* Updating the BoundingBoxes for NPCs */
-   if(NPCs)
-   { 
-      per = (character*) NPCs->getFirst();
-      for(aux=0; aux < NPCs->getTotal();aux++)
-      {
-         prevPos = per->getCurrentPos();
-         per->setState(STATE_IDLE);
-         per->update(0); 
-         per->updateBoundingBox();  
-         per->update(prevPos);
-         per = (character*) per->getNext();
-      }
-   }
-#endif
-
    /* Define Map */
    particleController.setActualMap(actualMap, &colisionDetect);
    colisionDetect.defineMap(actualMap, NPCs, PCs);
