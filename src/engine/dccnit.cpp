@@ -427,21 +427,11 @@ void engine::quitCurrentGame()
    /* Clear Objects List */
    objectsList::removeAll();
 
-   /* Restart the Scene */
-   curScene.finish();
-   curScene.init();
-
    /* Clear all missions */
    if(missions)
    {
       missions->finish();
       missions->init(this);
-   }
-
-   if(PCs)
-   {
-      /* Put the animation state on normal */
-      PCs->getActiveCharacter()->scNode->getModel()->setState(STATE_IDLE);
    }
 
    if(actionControl)
@@ -459,6 +449,11 @@ void engine::quitCurrentGame()
       delete(PCs);
       PCs = NULL;
    }
+
+   /* Restart the Scene */
+   curScene.finish();
+   curScene.init();
+
 }
 
 /*********************************************************************
