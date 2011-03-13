@@ -129,8 +129,10 @@ bool doHealOrAttack(thing& actor, thing* target,
 
    /* Define Actor orientation
     * FIXME -> call rotate animation! */
-   actor.orientationY = getAngle(actor.xPosition, actor.zPosition,
-                                 target->xPosition, target->zPosition);
+   actor.scNode->setAngle(0.0f, getAngle(actor.scNode->getPosX(), 
+                                         actor.scNode->getPosZ(),
+                                         target->scNode->getPosX(),
+                                         target->scNode->getPosZ()), 0.0f);
 
    /* Define Actor target to the current */
    actor.currentEnemy = target;
@@ -153,8 +155,8 @@ bool doHealOrAttack(thing& actor, thing* target,
 
    /* Verify Action Range */
    if( (range != 0) && 
-       (!actionInRange(actor.xPosition, actor.zPosition, 
-                     target->xPosition, target->zPosition,
+       (!actionInRange(actor.scNode->getPosX(), actor.scNode->getPosZ(), 
+                     target->scNode->getPosX(), target->scNode->getPosZ(),
                      range*METER_TO_DNT)))
    {
       brief.addText(gettext("Too far away for action!"), 225, 20, 20);
@@ -258,9 +260,9 @@ bool doHealOrAttack(thing& actor, thing* target,
          if( criticalMiss )
          {
             brief.addText(gettext("Critical Miss!"), 220, 0, 0);
-            controller.addMessage(actor.xPosition,
-                  actor.yPosition+actor.max[1],
-                  actor.zPosition,
+            controller.addMessage(actor.scNode->getPosX(),
+                  actor.scNode->getPosY() + actor.scNode->getBoundingBox().y2,
+                  actor.scNode->getPosZ(),
                   gettext("Critical Miss!"),
                   0.92,0.41,0.14);
             if(heal)
@@ -275,9 +277,9 @@ bool doHealOrAttack(thing& actor, thing* target,
          }
          else
          {
-            controller.addMessage(actor.xPosition,
-                  actor.yPosition+actor.max[1],
-                  actor.zPosition,gettext("Miss."),
+            controller.addMessage(actor.scNode->getPosX(),
+                  actor.scNode->getPosY()+actor.scNode->getBoundingBox().y2,
+                  actor.scNode->getPosZ(),gettext("Miss."),
                   0.92,0.41,0.14);
          }
          return(true);
@@ -341,18 +343,18 @@ bool doHealOrAttack(thing& actor, thing* target,
       if(heal)
       {
          brief.addText(gettext("Critical Heal!"), 12, 10, 128);
-         controller.addMessage(actor.xPosition,
-               actor.yPosition+actor.max[1],
-               actor.zPosition,gettext("Critical Heal!"),
+         controller.addMessage(actor.scNode->getPosX(),
+               actor.scNode->getPosY()+actor.scNode->getBoundingBox().y2,
+               actor.scNode->getPosZ(),gettext("Critical Heal!"),
                0.06,0.24,0.86);
       }
       else
       {
          brief.addText(gettext("Critical Hit!"), 12, 10, 128);
          /* Show critical hit */
-         controller.addMessage(actor.xPosition,
-               actor.yPosition+actor.max[1],
-               actor.zPosition,gettext("Critical Hit!"),
+         controller.addMessage(actor.scNode->getPosX(),
+               actor.scNode->getPosY()+actor.scNode->getBoundingBox().y2,
+               actor.scNode->getPosZ(),gettext("Critical Hit!"),
                0.84,0.2,0.01);
       }
    }
@@ -360,16 +362,16 @@ bool doHealOrAttack(thing& actor, thing* target,
    sprintf(texto,"%d",damage);
    if(heal)
    {
-      controller.addMessage(target->xPosition, 
-            target->yPosition + target->max[1],
-            target->zPosition, texto,
+      controller.addMessage(target->scNode->getPosX(), 
+            target->scNode->getPosY() + target->scNode->getBoundingBox().y2,
+            target->scNode->getPosZ(), texto,
             0.21, 0.15, 0.7);
    } 
    else
    {
-      controller.addMessage(target->xPosition, 
-            target->yPosition + target->max[1],
-            target->zPosition, texto,
+      controller.addMessage(target->scNode->getPosX(), 
+            target->scNode->getPosY() + target->scNode->getBoundingBox().y2,
+            target->scNode->getPosZ(), texto,
             0.4, 0.01, 0.03);
    }
 
@@ -381,12 +383,12 @@ bool doHealOrAttack(thing& actor, thing* target,
    else
    {
       /* Add Blood */
-      GLfloat cs = cos(deg2Rad(target->orientationY));
-      GLfloat sn = sin(deg2Rad(target->orientationY));
+      GLfloat cs = cos(deg2Rad(target->scNode->getAngleY()));
+      GLfloat sn = sin(deg2Rad(target->scNode->getAngleY()));
 
-      bloodPart = pSystem.addParticle(target->xPosition - (sn*2),
-            target->yPosition + target->bloodPosition,
-            target->zPosition - (cs*2), target->bloodFileName);
+      bloodPart = pSystem.addParticle(target->scNode->getPosX() - (sn*2),
+            target->scNode->getPosY() + target->bloodPosition,
+            target->scNode->getPosZ() - (cs*2), target->bloodFileName);
 
       /* Set the blood follow character if needed */
       if(target->getThingType() == THING_TYPE_CHARACTER)

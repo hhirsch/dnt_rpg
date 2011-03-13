@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2010 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -113,17 +113,19 @@ character* fightGroup::getNearestEnemy(character* pers)
          if(enemy == NULL)
          {
             enemy = characters[ch];
-            acDist = sqrt( (characters[ch]->xPosition - pers->xPosition) *
-                           (characters[ch]->xPosition - pers->xPosition) +
-                           (characters[ch]->zPosition - pers->zPosition) *
-                           (characters[ch]->zPosition - pers->zPosition) );
+            acDist = sqrt( 
+                (characters[ch]->scNode->getPosX() - pers->scNode->getPosX()) *
+                (characters[ch]->scNode->getPosX() - pers->scNode->getPosX()) +
+                (characters[ch]->scNode->getPosZ() - pers->scNode->getPosZ()) *
+                (characters[ch]->scNode->getPosZ() - pers->scNode->getPosZ()) );
          }
          else
          {
-            dist = sqrt( (characters[ch]->xPosition - pers->xPosition) *
-                         (characters[ch]->xPosition - pers->xPosition) +
-                         (characters[ch]->zPosition - pers->zPosition) *
-                         (characters[ch]->zPosition - pers->zPosition) );
+            dist = sqrt( 
+                (characters[ch]->scNode->getPosX() - pers->scNode->getPosX()) *
+                (characters[ch]->scNode->getPosX() - pers->scNode->getPosX()) +
+                (characters[ch]->scNode->getPosZ() - pers->scNode->getPosZ()) *
+                (characters[ch]->scNode->getPosZ() - pers->scNode->getPosZ()) );
             if(dist < acDist)
             {
                acDist = dist;

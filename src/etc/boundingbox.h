@@ -21,7 +21,7 @@
 #ifndef _dnt_boundingbox_h
 #define _dnt_boundingbox_h
 
-#include "animodel.h"
+#include <SDL/SDL_opengl.h>
 #include <string>
 using namespace std;
 
@@ -29,16 +29,19 @@ using namespace std;
 class boundingBox
 {
    public:
-      /*! Construcor */
+      /*! Constructor */
       boundingBox();
+      boundingBox(float min[3], float max[3]);
       /*! Destructor */
       ~boundingBox();
 
       /*! Set min values of the bounding box */
       void setMin(float x, float y, float z);
+      void setMin(float m[3]);
 
       /*! Set max values of the bounding box */
       void setMax(float x, float y, float z);
+      void setMax(float m[3]);
 
       /*! Get min values of the bounding box */
       void getMin(float& x, float& y, float& z);
@@ -60,6 +63,15 @@ class boundingBox
 
       /*! Render the bounding box */
       void render();
+
+      /*! Negate the Y box (to test reflexions, for example) */
+      void notY();
+
+      /*! Multiply the bounding box with the 4x4 shadow matrix */
+      void multiplyShadow(float** shadowMatrix);
+
+      /*! assign operator */
+      void operator=(const boundingBox& v);
 
       GLfloat x1,
               z1,

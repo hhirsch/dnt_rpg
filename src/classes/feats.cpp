@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -287,8 +287,8 @@ bool feats::useFeatAtTarget(thing* actor, int featNumber, thing* target)
       }
 
       /* Verify range */
-      if(!actionInRange(actor->xPosition, actor->zPosition, 
-               target->xPosition, target->zPosition,
+      if(!actionInRange(actor->scNode->getPosX(), actor->scNode->getPosZ(), 
+               target->scNode->getPosX(), target->scNode->getPosZ(),
                m_feats[featNumber].info->range*METER_TO_DNT))
       {
          brief.addText(gettext("Too far away for action!"), 225, 20, 20);
@@ -341,7 +341,8 @@ bool feats::useFeatAtArea(thing* actor, int featNumber,
       }
 
       /* Verify range */
-      if(!actionInRange(actor->xPosition, actor->zPosition, x, z,
+      if(!actionInRange(actor->scNode->getPosX(), 
+               actor->scNode->getPosZ(), x, z,
                m_feats[featNumber].info->range*METER_TO_DNT))
       {
          brief.addText(gettext("Too far away for action!"), 225, 20, 20);

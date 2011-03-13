@@ -25,7 +25,8 @@
 #include <string>
 using namespace std;
 
-#include "../etc/modellist.h"
+#include "../etc/scene.h"
+#include "../etc/scenenode.h"
 #include "thing.h"
 #include "dices.h"
 
@@ -55,7 +56,7 @@ class object: public thing
       /*! Constructor
        * \param obj -> some object to be the source of actual */
       object(object* obj);
-      /*! Constructor without parameter. Do not load anyhing */
+      /*! Constructor. Only set path (Do not load anyhing) */
       object(string path);
       /*! Destructor */
       ~object();
@@ -63,11 +64,6 @@ class object: public thing
       /*! Verify if Map object can be got
        * \return true if the object is pickable */
       bool canGet();
-
-      /*!
-       * Draws the object
-       * \param inverted -> to invert the Y position */
-      void draw(bool inverted);
 
       /*! Render the object as equipped at the character
        * \param type -> type of equiped [1,2]
@@ -89,10 +85,6 @@ class object: public thing
        * \param y -> y value on surface
        * \param surface -> surface where will draw the 2D version. */
       void draw2D(int x, int y, SDL_Surface* surface);
-
-      /*! Gets the actual Bounding box of the model 
-       * \return -> the boundingBox of the model */
-      boundingBox getBoundingBox();
 
       /*! Gets the name of the model
        * \return -> the name of the model*/
@@ -134,16 +126,6 @@ class object: public thing
        * \return -> true if the item is usable */
       bool isUsable();
 
-      /*! Add render position to the object.
-       * \note -> this function ios only valid if the object is a 
-       *          static scenery one. 
-       * \param x -> x coordinate
-       * \param y -> y coordinate
-       * \param z -> z coordinate 
-       * \param angle -> object angle */
-      void addRenderPosition(float x, float y, float z, 
-            float angleX, float angleY, float angleZ);
-
       /*! Get the 2D image of the object
        * \return the pointer to the surface */
       SDL_Surface* get2dModel();
@@ -151,10 +133,6 @@ class object: public thing
       /*! Get the 2D model name
        * \return -> model2D Name */
       string get2dModelName();
-
-      /*! Get the 3D model relative to this object
-       * \return -> pointer to the model3d */
-      model3d* get3dModel();
 
       /*! Get the related information string (comic book file name,
        * ammo type, etc.)
@@ -167,12 +145,10 @@ class object: public thing
        *  \param pX -> model X position
        *  \param pY -> model Y position
        *  \param pZ -> model Z position
-       *  \param colMin -> colider min values of bounding box
-       *  \param colMax -> colider max values of bounding box 
+       *  \param colBox -> collider bounding box
        *  \return -> true if one or more meshes colides, false otherwise */
       bool depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ, 
-            GLfloat pX, GLfloat pY, GLfloat pZ,
-            GLfloat colMin[3], GLfloat colMax[3]);
+            GLfloat pX, GLfloat pY, GLfloat pZ, boundingBox colBox);
 
       /*! Get the related object dice information
        * \return -> diceThing of the object */
@@ -200,6 +176,14 @@ class object: public thing
        * \param o -> previous object */
       void setPrevious(object* o);
 
+      /*! Remove the object's scene node (if defined)
+       * \note Usually called when added object to inventory */
+      void removeSceneNode();
+      /*! Create new scene node to the object
+       * \note Usually called when removed object from inventory */
+      void createSceneNode(float pX, float pY, float pZ,
+                           float aX, float aY, float aZ);
+
    protected:
       int inventSizeX,      /**< Size on inventory X axis */
           inventSizeY;      /**< Size on inventory Y axis */
@@ -217,7 +201,6 @@ class object: public thing
 
       int type;             /**< Type of the object */
 
-      model3d* model3D;     /**< Pointer to used 3D Model Maximun Quality */
       SDL_Surface* model2d; /**< Pointer to used 2D Model */
 
       int state;            /**< Object state. Its use is dependant of object. 
@@ -226,6 +209,7 @@ class object: public thing
 
       string fileName;      /**< FileName of the Object */
       string model2dName;   /**< FileName of the 2D Model */
+      string cal3dName;     /**< FileName of the cal3d model */
       string description;   /**< Description of the object */
       string relatedInfo;   /**< Some related fileName 
                                  (comic book file, for example) */

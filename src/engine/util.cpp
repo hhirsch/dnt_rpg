@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -64,26 +64,6 @@ void showLoading(SDL_Surface* img, GLuint* texturaTexto,
 }
 
 /*********************************************************************
- *                Verify if two bounding boxes intercepts            *
- *********************************************************************/
-int intercepts(GLfloat min1[3], GLfloat max1[3],
-               GLfloat min2[3], GLfloat max2[3])
-{
-   for (int i=0; i<3; i++)
-   {
-      if (! ((min1[i]<=min2[i] && min2[i]<=max1[i]) || 
-             (min1[i]<=max2[i] && max2[i]<=max1[i]) ||
-             (min2[i]<=min1[i] && min1[i]<=max2[i]) || 
-             (min2[i]<=max1[i] && max1[i]<=max2[i])))
-      {
-         return 0;
-      }
-   }
-   
-   return 1;
-}
-
-/*********************************************************************
  *                            actionInRange                          *
  *********************************************************************/
 bool actionInRange(GLfloat posX, GLfloat posZ, 
@@ -93,64 +73,6 @@ bool actionInRange(GLfloat posX, GLfloat posZ,
    GLfloat dist = sqrt( (targX - posX) * (targX - posX) +
                         (targZ - posZ) * (targZ - posZ) );
    return( dist <= range);
-}
-
-
-/*********************************************************************
- *                Rotate and Translate a Bounding Box                *
- *********************************************************************/
-void rotTransBoundingBox(GLfloat orientacao, GLfloat X[4], GLfloat Z[4],
-                         GLfloat varX, GLfloat varMinY, GLfloat varMaxY, 
-                         GLfloat varZ,
-                         GLfloat min[3], GLfloat max[3])
-{
-   int aux;
-   GLfloat x[4];
-   GLfloat z[4];
-   /* Rotaciona o bounding para a posicao correrta */
-   GLfloat cosseno = cos(deg2Rad(orientacao));
-   GLfloat seno = sin(deg2Rad(orientacao));
-   for(aux = 0;aux<4;aux++)
-   {
-      /* Inverting, because is X and Z, not x and z */
-      x[aux] = (Z[aux]*seno) + (X[aux]*cosseno);
-      z[aux] = (Z[aux]*cosseno) - (X[aux]*seno);
-   }
-
-   
-   /* translada o bounding box para o local correto*/
-   min[1] = varMinY;
-   max[1] = varMaxY;
-   for(aux=0;aux<4;aux++)
-   {
-     x[aux] += varX;
-     z[aux] += varZ;
-     if(aux == 0)
-     {
-        min[0] = x[0]; max[0] = x[0];
-        min[2] = z[0]; max[2] = z[0];
-     }
-     else
-     {
-         if(x[aux] < min[0])
-         {
-            min[0] = x[aux];
-         }
-         if(x[aux] > max[0])
-         {
-            max[0] = x[aux];
-         }
-         if(z[aux] < min[2])
-         {
-            min[2] = z[aux];
-         }
-         if(z[aux] > max[2])
-         {
-            max[2] = z[aux];
-         }
-
-     }
-   }
 }
 
 /********************************************************************

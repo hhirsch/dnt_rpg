@@ -353,21 +353,21 @@ pendingAction* pendingActionController::addAction(pendingAction* act,
             /* Apply X variation */
             if(signalX)
             {
-               act->targetX = act->target->xPosition + varX;
+               act->targetX = act->target->scNode->getPosX() + varX;
             }
             else
             {
-               act->targetX = act->target->xPosition - varX;
+               act->targetX = act->target->scNode->getPosX() - varX;
             }
 
             /* Apply X variation */
             if(signalZ)
             {
-               act->targetZ = act->target->zPosition + varZ;
+               act->targetZ = act->target->scNode->getPosZ() + varZ;
             }
             else
             {
-               act->targetZ = act->target->zPosition - varZ;
+               act->targetZ = act->target->scNode->getPosZ() - varZ;
             }
 
             /* It's a move to a target */
@@ -521,7 +521,7 @@ void pendingActionController::treatActions(Map* actualMap, bool fightMode)
 #ifdef DNT_DEBUG_PENDING_ACTION
                cerr << "ASTAR_FOUND!" << endl;
 #endif
-               actor->setState(STATE_WALK);
+               actor->scNode->getModel()->setState(STATE_WALK);
                act->setToggle(true);
             }
             else if(state == ASTAR_STATE_NOT_FOUND)
@@ -531,7 +531,7 @@ void pendingActionController::treatActions(Map* actualMap, bool fightMode)
 #endif
                /* The move ended, since not found a path */
                act->setAsEnded(false);
-               actor->setState(STATE_IDLE);
+               actor->scNode->getModel()->setState(STATE_IDLE);
             }
 
             /* If the toggle is seted, the path was found */
@@ -540,9 +540,11 @@ void pendingActionController::treatActions(Map* actualMap, bool fightMode)
 #ifdef DNT_DEBUG_PENDING_ACTION
                cerr << "Toggle: true!" << endl;
 #endif
-               if(!actor->pathFind.getNewPosition(actor->xPosition,
-                                                  actor->zPosition,
-                                                  actor->orientationY,
+               float pX=actor->scNode->getPosX(),
+                     pY=actor->scNode->getPosY(),
+                     pZ=actor->scNode->getPosZ();
+               float angleY=actor->scNode->getAngleY();
+               if(!actor->pathFind.getNewPosition(pX,pZ,angleY,
                                                   fightMode, false))
                {
 #ifdef DNT_DEBUG_PENDING_ACTION
@@ -550,23 +552,24 @@ void pendingActionController::treatActions(Map* actualMap, bool fightMode)
 #endif
                   /* The move ended */
                   act->setAsEnded(true);
-                  actor->setState(STATE_IDLE);
+                  actor->scNode->getModel()->setState(STATE_IDLE);
                }
                else
                {
 #ifdef DNT_DEBUG_PENDING_ACTION
                   cerr << "New position got." << endl;
 #endif
+                  actor->scNode->set(pX,pY,pZ, 0.0f, angleY, 0.0f);
                   /* Define New Occuped Square */
-                  int posX =(int)floor(actor->xPosition / 
+                  int posX =(int)floor(actor->scNode->getPosX() / 
                                        actualMap->squareSize());
-                  int posZ =(int)floor(actor->zPosition / 
+                  int posZ =(int)floor(actor->scNode->getPosZ() / 
                                        actualMap->squareSize());
                   actor->ocSquare = actualMap->relativeSquare(posX,posZ);
 
                   /* Define New Height */
-                  actualMap->defineThingHeight(actor, actor->xPosition,
-                                               actor->zPosition);
+                  actualMap->defineThingHeight(actor, actor->scNode->getPosX(),
+                                               actor->scNode->getPosZ());
                }
             }
          }
@@ -584,7 +587,7 @@ void pendingActionController::treatActions(Map* actualMap, bool fightMode)
             cerr << "Talk is opened!" << endl;
 #endif
             /* Talk window is opened, so Idle. */
-            actor->setState(STATE_IDLE);
+            actor->scNode->getModel()->setState(STATE_IDLE);
          }
       }
       else

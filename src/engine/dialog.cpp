@@ -1184,10 +1184,9 @@ void conversation::proccessAction(int opcao, void* curEngine)
                char vstr[200];
                sprintf(vstr,gettext("Mission Completed: %d XP!"),m->getXp());
                messageController msgController;
-               msgController.addMessage(actualPC->xPosition,
-                                        actualPC->max[1]+actualPC->yPosition,
-                                        actualPC->zPosition, vstr,
-                                        0.94, 0.8, 0.0);
+               msgController.addMessage(actualPC->scNode->getPosX(),
+                     actualPC->scNode->getBoundingBox().y2,
+                     actualPC->scNode->getPosZ(), vstr, 0.94, 0.8, 0.0);
             }
          }
          break;
@@ -1244,16 +1243,16 @@ void conversation::proccessAction(int opcao, void* curEngine)
                {
                   /* Can't add to the inventory (is full?), so puting it
                    * at the floor. */
-                  float height =  actualMap->getHeight(actualPC->xPosition, 
-                                                       actualPC->zPosition);
-                  actualMap->insertObject(actualPC->xPosition, height,
-                                          actualPC->zPosition, 
+                  float height =  actualMap->getHeight(actualPC->scNode->getPosX(), 
+                                                       actualPC->scNode->getPosZ());
+                  actualMap->insertObject(actualPC->scNode->getPosX(), height,
+                                          actualPC->scNode->getPosZ(), 
                                           0.0f, 0.0f, 0.0f, obj, 0);
                   modif.mapObjectAddAction(MODSTATE_ACTION_OBJECT_ADD,
                                            actions[i].satt,
                                            actualMap->getFileName(),
-                                           actualPC->xPosition, height,
-                                           actualPC->zPosition);
+                                           actualPC->scNode->getPosX(), height,
+                                           actualPC->scNode->getPosZ());
                }
                sprintf(buf,gettext("Received %s."),obj->name.c_str());
                brief.addText(buf,240,226,0);
@@ -1302,8 +1301,9 @@ void conversation::proccessAction(int opcao, void* curEngine)
             modState modif;
             modif.mapObjectAddAction(MODSTATE_ACTION_OBJECT_CHANGE_STATE,
                                      obj->getFileName(), ownerMap,
-                                     obj->xPosition, obj->yPosition, 
-                                     obj->zPosition, obj->getState());
+                                     obj->scNode->getPosX(), 
+                                     obj->scNode->getPosY(), 
+                                     obj->scNode->getPosZ(), obj->getState());
          }
          break;
          /* Receive XP */
@@ -1318,9 +1318,9 @@ void conversation::proccessAction(int opcao, void* curEngine)
 
             /* Put Message at game */
             messageController msgController;
-            msgController.addMessage(actualPC->xPosition,
-                  actualPC->max[1]+actualPC->yPosition,
-                  actualPC->zPosition, vstr,
+            msgController.addMessage(actualPC->scNode->getPosX(),
+                  actualPC->scNode->getBoundingBox().y2,
+                  actualPC->scNode->getPosZ(), vstr,
                   0.94, 0.8, 0.0);
 
             /* Put Message at Briefing */

@@ -79,7 +79,8 @@ bool potentAgent::defineNextPosition(bool run)
 
       dX = obstacles[aux].x - actualX;
       dZ = obstacles[aux].z - actualZ;
-      
+     
+#if 0
       if(intercepts(min1, max1, min2, max2))
       {
          fX += -kc*dX;
@@ -90,7 +91,9 @@ bool potentAgent::defineNextPosition(bool run)
          fX += -kr/dX;
          fZ += -kr/dZ;
       }
+#endif
    }
+
 
    //Sum Goal
    dX = (destinyX - actualX);

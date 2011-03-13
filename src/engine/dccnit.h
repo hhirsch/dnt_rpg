@@ -490,7 +490,7 @@ class engine
       sndfx* walkSound;            /**< Actual walking sound */
       options* option;             /**< Current Options */
 
-      modelList models;            /**< Current Models List */
+      scene curScene;              /**< Current Models List */
       
       featsList* features;         /**< Feats descriptions */
       aligns* alignList;           /**< Alignments List */

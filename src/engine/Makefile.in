@@ -28,7 +28,7 @@ ENDCBOOK = ../cbook/
 
 OBJSCBOOK = $(ENDCBOOK)comicbox.o $(ENDCBOOK)comicbook.o $(ENDCBOOK)comicpage.o
 OBJSMAPA = $(ENDMAP)map.o $(ENDMAP)mapfog.o $(ENDMAP)maplights.o \
-           $(ENDMAP)maproad.o $(ENDMAP)mapsound.o
+           $(ENDMAP)maproad.o $(ENDMAP)mapsound.o $(ENDMAP)door.o
 OBJSGUI = $(ENDGUI)textbar.o $(ENDGUI)button.o $(ENDGUI)color.o \
           $(ENDGUI)cxsel.o $(ENDGUI)draw.o $(ENDGUI)messages.o \
           $(ENDGUI)interface.o $(ENDGUI)farso.o $(ENDGUI)filesel.o \
@@ -60,7 +60,8 @@ OBJSPART = $(ENDPART)lake.o $(ENDPART)particle.o $(ENDPART)partorigin.o \
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o \
             $(ENDFIGHT)fightSystem.o
 OBJSETC = $(ENDETC)animodel.o $(ENDETC)extensions.o $(ENDETC)message3d.o \
-          $(ENDETC)modellist.o $(ENDETC)userinfo.o $(ENDETC)dirs.o \
+          $(ENDETC)scenenode.o $(ENDETC)scene.o \
+			 $(ENDETC)userinfo.o $(ENDETC)dirs.o \
           $(ENDETC)overlaps.o $(ENDETC)defparser.o \
           $(ENDETC)texrenderer.o $(ENDETC)shader.o \
           $(ENDETC)btreecell.o $(ENDETC)btree.o $(ENDETC)npcfile.o \

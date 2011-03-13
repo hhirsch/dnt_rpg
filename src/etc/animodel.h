@@ -26,7 +26,7 @@
 #include <string>
 using namespace std;
 
-#include "../classes/thing.h"
+#include "boundingbox.h"
 
 #define STATE_IDLE         0 /**< Character Animation State Idle */
 #define STATE_WALK         1 /**< Character Animation State Walk */
@@ -40,7 +40,7 @@ using namespace std;
 #define ANIMODEL_MAX_ANIMATIONS 16
 
 /*! Animated Model Definition (using cal3d) */
-class aniModel:public thing
+class aniModel
 {
    public:
 
@@ -70,7 +70,7 @@ class aniModel:public thing
 
       /*! Update Model to pos time 
        * \param pos -> time of the animation */
-      void update(GLfloat pos);
+      void update(GLfloat pos, float angleY, float pX, float pY, float pZ);
 
       /*! Get the model current pos time
        * \return current model pos time */
@@ -95,9 +95,6 @@ class aniModel:public thing
        *                        himself)
        * \note -> must be called before all renderFromGraphicMemory */
       void loadToGraphicMemory(bool useTexture=true);
-
-      /*! Render the loaded Graphic Memory to screen */
-      void renderFromGraphicMemory();
       /*! Render the loaded Graphic Memory to screen at the position
        * \param inverted -> if will invert Y axys */
       void renderFromGraphicMemory(float pX, float pY, float pZ, float angleX,
@@ -115,16 +112,17 @@ class aniModel:public thing
        * \param alpha -> alpha of the shadow
        * \note -> need to define the stencil to the projected surface
        * \note -> this function works as renderFromGraphicMemory()  */
-      void renderShadow(GLfloat* shadowMatrix, float alpha);
+      void renderShadow(float pX, float pY, float pZ, float angleX,
+            float angleY, float angleZ, GLfloat* shadowMatrix, float alpha);
 
-      /*! Render the model reflexion on floor axys */
-      void renderReflexion();
       /*! Render the model reflexion on floor axys */
       void renderReflexion(float pX, float pY, float pZ, float angleX, 
             float angleY, float angleZ);
 
-      /*! Calculate the model static bounding box */
-      void calculateBoundingBox();
+      /*! Calculate the model bounding box for current animation frame */
+      void calculateCrudeBoundingBox();
+      /*! Get the last calculated bounding box */
+      boundingBox getCrudeBoundingBox();
 
       /*! Render the model bounding box. Only used on debugging */
       void renderBoundingBox();
@@ -134,18 +132,17 @@ class aniModel:public thing
        *  \param pX -> model X position
        *  \param pY -> model Y position
        *  \param pZ -> model Z position
-       *  \param colMin -> colider min values of bounding box
-       *  \param colMax -> colider max values of bounding box 
+       *  \param colBox -> colider bounding box
        *  \return -> true if one or more meshes colides, false otherwise */
       bool depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ, 
-            GLfloat pX, GLfloat pY, GLfloat pZ,
-            GLfloat colMin[3], GLfloat colMax[3]);
+            GLfloat pX, GLfloat pY, GLfloat pZ, boundingBox colBox);
 
       /*! Define all key vertices (left and right hand, for example) */
       void defineKeyVertex();
 
       /*! Update the vertex info */
-      void updateKeyVertex(vertexInfo& v);
+      void updateKeyVertex(vertexInfo& v,
+         float angleY, float pX, float pY, float pZ);
 
       /*! Get the first vertex id influenced by a bone
        * \param boneId -> id of the bone
@@ -157,6 +154,9 @@ class aniModel:public thing
        * \param bName name of the bone to get its it
        * \return bone's ID or -1 if not found */
       int getBoneId(string bName);
+
+      /*! Get the model fileName */
+      string getFileName(){return(modelFileName);};
 
       vertexInfo leftHand;           /**< Base vertex at left hand */
       vertexInfo rightHand;          /**< Base vextex at right hand */
@@ -187,10 +187,15 @@ class aniModel:public thing
       int faceCount;                       /**< Number of Faces */
       int textureCoordinateCount;          /**< Number of Texture Coordinates */
 
+      boundingBox crudeBox;                /**< Crude bounding box */
+
       /*! Load the a texture to the model.
        * \param strFilename -> \c string with the texture file name.
        * \return the \c GLuint with the GL texture ID. */
       GLuint loadTexture(const string& strFilename);
+
+      /*! Render from the graphic memory at default position */
+      void renderFromGraphicMemory();
 };
 
 #endif

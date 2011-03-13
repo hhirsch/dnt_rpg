@@ -25,6 +25,8 @@
 #include "align.h"
 #include "modifier.h"
 #include "../etc/dirs.h"
+#include "../etc/scenenode.h"
+#include "../etc/scene.h"
 
 #define PSYCHO_HOSTILE     0  /**< Thing is hostile to PCs */
 #define PSYCHO_NEUTRAL     1  /**< Thing is neutral to PCs */
@@ -59,12 +61,7 @@ class thing
       int sizeModifier;       /**< Thing's Size Modifier */
       int initiativeBonus;    /**< Thing's initiative bonus value */
 
-      float orientationY;     /**< Y axis rotation angle */
-      float orientationX;     /**< X axis rotation angle */
-      float orientationZ;     /**< Z axis rotation angle */
-      float xPosition;        /**< Thing's X Position */
-      float yPosition;        /**< Thing's Y Position (UP) */
-      float zPosition;        /**< Thing's Z Position */
+      sceneNode* scNode;      /**< Scene node related to the thing */
       float initialXPosition; /**< Thing's initial X Position */
       float initialZPosition; /**< Thing's Initial Z Position */
       float bloodPosition;    /**< Blood Z Orign*/
@@ -82,10 +79,6 @@ class thing
       float walk_interval;    /**< The interval of walking (for multiply per
                                    WALK_ACTUALIZATION value. This is for 
                                    temporize the walk animation of the thing) */
-
-      float min[3];           /**< Min points of static bounding box */
-      float max[3];           /**< Max points of static bounding box */
-
 
       //////////////////////////////////////////////////////////////////////
       //                                                                  //
@@ -257,7 +250,6 @@ class thing
        * return true if at range */
       bool atRange(float posX, float posZ, float range);
 
-
       //////////////////////////////////////////////////////////////////////
       //                                                                  //
       //                     Virtual Functions                            //
@@ -299,8 +291,6 @@ class thing
 
       string conversationFile;    /**< Name of the Conversation File */
       void* conv;                 /**< Pointer to the conversation */
-
-
 
 };
 

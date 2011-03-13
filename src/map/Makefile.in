@@ -17,7 +17,12 @@ OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o
 
 all: objetos
 
-map.o: map.cpp map.h mapfog.h maplights.h maproad.h $(ENDPART)lake.h
+door.o: door.cpp door.h
+	@printf "Making door.o... "
+	@$(CC) $(CFLAGS) door.cpp -o door.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+map.o: map.cpp map.h mapfog.h maplights.h maproad.h door.h $(ENDPART)lake.h
 	@printf "Making map.o... "
 	@$(CPP) $(CFLAGS) map.cpp -o map.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -42,7 +47,7 @@ mapsound.o: mapsound.cpp mapsound.h $(ENDSOUND)sound.h $(ENDETC)defparser.h
 	@$(CC) $(CFLAGS) mapsound.cpp -o mapsound.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-objetos: map.o mapfog.o maplights.o maproad.o mapsound.o
+objetos: door.o map.o mapfog.o maplights.o maproad.o mapsound.o
 
 clean: 
 	@printf  "Cleaning Map Bin Files... "

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -17,6 +17,7 @@
   You should have received a copy of the GNU General Public License
   along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
 */
+
 #ifndef _dnt_util_h
 #define _dnt_util_h
 
@@ -159,31 +160,6 @@ inline double rad2Deg(double y){return(y * PID180I);}
 void showLoading(SDL_Surface* img, GLuint* texturaTexto, 
                  GLuint texturaCarga, const char* texto,
                  healthBar* progress);
-
-/*! Verifies if some bounding box is inner on another
- * \param min1 -> min values of first bounding box 
- * \param max1 -> max values of first bounding box
- * \param min2 -> min values of second bounding box
- * \param max2 -> max values of second bounding box
- * \return 1 if bounding 1 collides with bounding 2. */
-int intercepts(GLfloat min1[3], GLfloat max1[3],
-               GLfloat min2[3], GLfloat max2[3]);
-
-/*!
- * Rotate and translate to position the bounding box
- * \param orientacao -> orientation angle
- * \param X -> X bounding box positions
- * \param Z -> Z bounding box positions
- * \param varX -> variation to X position
- * \param varZ -> variation to Z position 
- * \param varMinY -> variation to minY 
- * \param varMaxY -> variation to maxY 
- * \param min -> min points bounding result
- * \param max -> max points bounding result */
-void rotTransBoundingBox(GLfloat orientacao, GLfloat X[4], GLfloat Z[4],
-                         GLfloat varX, GLfloat varMinY, GLfloat varMaxY, 
-                         GLfloat varZ,
-                         GLfloat min[3], GLfloat max[3]);
 
 /*! Calculate normal to the plane. */
 void normal (GLfloat x1, GLfloat y1, GLfloat z1,

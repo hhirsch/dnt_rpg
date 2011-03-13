@@ -118,8 +118,8 @@ engine::engine()
    /* Load Weapons Types */
    weaponsTypes.init();
 
-   /* Create 3D Models List */
-   models.init();
+   /* Create the Scene */
+   curScene.init();
 
    /* Create Special Windows */
    infoWindow = new itemWindow(gui);
@@ -308,8 +308,8 @@ engine::~engine()
    /* Removel all objects in the list */
    objectsList::removeAll();
 
-   /* Clear 3D Models List */
-   models.finish();
+   /* Clear scene */
+   curScene.finish();
    
    /* Clear Characters Lists */
    alignList->finish();
@@ -427,9 +427,9 @@ void engine::quitCurrentGame()
    /* Clear Objects List */
    objectsList::removeAll();
 
-   /* Restart the Models List */
-   models.finish();
-   models.init();
+   /* Restart the Scene */
+   curScene.finish();
+   curScene.init();
 
    /* Clear all missions */
    if(missions)
@@ -441,7 +441,7 @@ void engine::quitCurrentGame()
    if(PCs)
    {
       /* Put the animation state on normal */
-      PCs->getActiveCharacter()->setState(STATE_IDLE);
+      PCs->getActiveCharacter()->scNode->getModel()->setState(STATE_IDLE);
    }
 
    if(actionControl)
@@ -498,10 +498,10 @@ bool engine::loadGame()
          activeCharacter = PCs->getActiveCharacter();
          if(activeCharacter)
          {
-            gameCamera.updateCamera(activeCharacter->xPosition,
-                  activeCharacter->yPosition,
-                  activeCharacter->zPosition,
-                  activeCharacter->orientationY);
+            gameCamera.updateCamera(activeCharacter->scNode->getPosX(),
+                  activeCharacter->scNode->getPosY(),
+                  activeCharacter->scNode->getPosZ(),
+                  activeCharacter->scNode->getAngleY());
          }
 
          res = true;
@@ -612,8 +612,9 @@ void engine::keepNPCStatus()
                                    MODSTATE_ACTION_CHARACTER_CHANGE_STATE,
                                    dude->getCharacterFile(), 
                                    actualMap->getFileName(), 
-                                   dude->xPosition,
-                                   dude->yPosition, dude->zPosition,
+                                   dude->scNode->getPosX(),
+                                   dude->scNode->getPosY(), 
+                                   dude->scNode->getPosZ(),
                                    dude->getPsychoState(), 
                                    dude->initialXPosition,
                                    dude->initialZPosition);
@@ -641,8 +642,6 @@ int engine::loadMap(string arqMapa, bool loadingGame)
    
    SDL_Surface* img;    /* Text surface*/
    GLuint texturaTexto; /* Text texture */
-
-   GLfloat prevPos;
 
    char texto[512];
    string arqVelho = "nada";
@@ -714,7 +713,7 @@ int engine::loadMap(string arqMapa, bool loadingGame)
       delete(actualMap);
 
       /* Remove All Unused 3D Models */
-      models.removeUnusedModels();
+      curScene.removeUnusedModels();
    }
 
    /* Remove all NPCS  */
@@ -811,10 +810,8 @@ int engine::loadMap(string arqMapa, bool loadingGame)
            /* Define Initial Position */
            per->initialXPosition = posX;
            per->initialZPosition = posZ;
-           per->orientationY = ori;
-           per->xPosition = posX;
-           per->zPosition = posZ;
-           per->yPosition = actualMap->getHeight(posX, posZ);
+           per->scNode->set(posX, actualMap->getHeight(posX, posZ), posZ,
+                            0.0f, ori, 0.0f);
            per->setPsychoState(psycho);
            /* Define Occuped Square */
            per->defineOcSquare(actualMap);
@@ -867,15 +864,16 @@ int engine::loadMap(string arqMapa, bool loadingGame)
       brief->reOpen(gui);
    }
 
+#if 0
    /* Updating the BoundingBoxes for PCs */
    int aux;
    per = (character*) PCs->getFirst();
    for(aux=0;aux < PCs->getTotal();aux++)
    {
-      prevPos = per->getCurrentPos();
+      prevPos = per->scNodegetCurrentPos();
       per->setState(STATE_IDLE);
       per->update(0); 
-      per->calculateBoundingBox();
+      per->updateBoundingBox();
       per->update(prevPos);
       per = (character*) per->getNext();
    }
@@ -889,11 +887,12 @@ int engine::loadMap(string arqMapa, bool loadingGame)
          prevPos = per->getCurrentPos();
          per->setState(STATE_IDLE);
          per->update(0); 
-         per->calculateBoundingBox();  
+         per->updateBoundingBox();  
          per->update(prevPos);
          per = (character*) per->getNext();
       }
    }
+#endif
 
    /* Define Map */
    particleController.setActualMap(actualMap, &colisionDetect);
@@ -920,16 +919,15 @@ int engine::loadMap(string arqMapa, bool loadingGame)
    
 
    /* Put Active Party at initial Position */
+   float pX=0.0, pY=0.0, pZ=0.0f, a=0.0f;
    activeCharacter = PCs->getActiveCharacter();
-   actualMap->getInitialPosition(activeCharacter->xPosition,
-                                 activeCharacter->zPosition,
-                                 activeCharacter->orientationY);
-   activeCharacter->yPosition=actualMap->getHeight(activeCharacter->xPosition,
-                                                   activeCharacter->zPosition);
-   gameCamera.updateCamera(activeCharacter->xPosition,
-                           activeCharacter->yPosition,
-                           activeCharacter->zPosition,
-                           activeCharacter->orientationY);
+   actualMap->getInitialPosition(pX, pZ, a);
+   pY = actualMap->getHeight(pX, pZ);
+   activeCharacter->scNode->set(pX, pY, pZ, 0.0f, a, 0.0f);
+   gameCamera.updateCamera(activeCharacter->scNode->getPosX(),
+                           activeCharacter->scNode->getPosY(),
+                           activeCharacter->scNode->getPosZ(),
+                           activeCharacter->scNode->getAngleY());
    activeCharacter->ocSquare = actualMap->getInitialSquare();
 
    showLoading(img,&texturaTexto,texturaCarga,
@@ -1913,9 +1911,9 @@ void engine::enterBattleMode(bool surprisePC)
       /* Really Init the Battle */
       snd->addSoundEffect(SOUND_NO_LOOP,"sndfx/battleMode.ogg");
       engineMode = ENGINE_MODE_TURN_BATTLE;
-      moveCircleX = activeCharacter->xPosition;
-      moveCircleY = activeCharacter->yPosition;
-      moveCircleZ = activeCharacter->zPosition;
+      moveCircleX = activeCharacter->scNode->getPosX();
+      moveCircleY = activeCharacter->scNode->getPosY();
+      moveCircleZ = activeCharacter->scNode->getPosZ();
 
       /* Put the PCs on group */
       ch =(character*) PCs->getFirst();
@@ -2107,8 +2105,8 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
           (engineMode == ENGINE_MODE_REAL_TIME) )
       {
          int act =inventoryWindow->treat(object, eventInfo, cursors, actualMap,
-                                         PCs->getActiveCharacter()->xPosition,
-                                         PCs->getActiveCharacter()->zPosition); 
+               PCs->getActiveCharacter()->scNode->getPosX(),
+               PCs->getActiveCharacter()->scNode->getPosZ()); 
          if(act > INVENTORY_ACTION_INTERNAL)
          {
             /* Menu Use count as an action */
@@ -2338,6 +2336,7 @@ void engine::updateMouseFloorPos()
 int engine::verifyMouseActions(Uint8 mButton)
 {
    char buf[1024];
+   boundingBox colBox;
 
    Uint32 time = SDL_GetTicks();
    activeCharacter = PCs->getActiveCharacter();
@@ -2346,10 +2345,9 @@ int engine::verifyMouseActions(Uint8 mButton)
    curTarget = NULL;
 
    /* Create a bounding box for the mouse position */
-   GLfloat minMouse[3], maxMouse[3];
-   minMouse[0] = xReal-3;  maxMouse[0] = xReal+3;
-   minMouse[1] = 0.0;      maxMouse[1] = 0.0;
-   minMouse[2] = zReal-3;  maxMouse[2] = zReal+3;
+   boundingBox mouseBox;
+   mouseBox.setMin(xReal-3, yReal-1.0, zReal-3);
+   mouseBox.setMax(xReal+3, yReal+1.0, zReal+3);
 
    int qx, qz;
    qx = (int)xReal / actualMap->squareSize();
@@ -2359,7 +2357,6 @@ int engine::verifyMouseActions(Uint8 mButton)
    {
       int pronto;
       int obj = 0;
-      GLfloat minObj[3], maxObj[3];
       objSquare* sobj = quaux->getFirstObject();
 
       /* Objects Verification */
@@ -2368,19 +2365,8 @@ int engine::verifyMouseActions(Uint8 mButton)
          if( (sobj->obj) && ( (sobj->obj->canGet()) || 
              (!sobj->obj->getConversationFile().empty()) ) )
          {
-            boundingBox bound = sobj->obj->getBoundingBox();
-            GLfloat X[4]; GLfloat Z[4];
-            X[0] = bound.x1;
-            Z[0] = bound.z1;
-            X[1] = bound.x1;
-            Z[1] = bound.z2; 
-            X[2] = bound.x2;
-            Z[2] = bound.z2;
-            X[3] = bound.x2;
-            Z[3] = bound.z1;
-            rotTransBoundingBox(sobj->angleY, X, Z, sobj->x, 0.0, 
-                  0.0, sobj->z, minObj, maxObj);
-            if(intercepts( minObj, maxObj, minMouse, maxMouse))
+            colBox = sobj->obj->scNode->getBoundingBox();
+            if(mouseBox.intercepts(colBox))
             {
                curTarget = (thing*)sobj->obj;
                cursors->setTextOver(sobj->obj->getName());
@@ -2390,8 +2376,8 @@ int engine::verifyMouseActions(Uint8 mButton)
                {
                   cursors->set(CURSOR_USE);
                   if( (mButton & SDL_BUTTON(1)) && 
-                      (rangeAction(activeCharacter->xPosition, 
-                                   activeCharacter->zPosition,
+                      (rangeAction(activeCharacter->scNode->getPosX(), 
+                                   activeCharacter->scNode->getPosZ(),
                                    sobj->x, sobj->z,
                                    activeCharacter->displacement)) )
                   {
@@ -2406,8 +2392,8 @@ int engine::verifyMouseActions(Uint8 mButton)
                   cursors->set(CURSOR_GET);
                   cursors->setTextOver(sobj->obj->getName()); 
                   if( (mButton & SDL_BUTTON(1)) && 
-                      (rangeAction(activeCharacter->xPosition, 
-                                   activeCharacter->zPosition,
+                      (rangeAction(activeCharacter->scNode->getPosX(), 
+                                   activeCharacter->scNode->getPosZ(),
                                    sobj->x, sobj->z,
                                    activeCharacter->displacement) ) )
                   {
@@ -2460,49 +2446,37 @@ int engine::verifyMouseActions(Uint8 mButton)
       int d;
       for(d=0; ( (d < actualMap->getTotalDoors()) && (!pronto) ); d++)
       {
-         boundingBox bound = porta->obj->getBoundingBox();
-         GLfloat X[4]; GLfloat Z[4];
-         X[0] = bound.x1;
-         Z[0] = bound.z1;
-         X[1] = bound.x1;
-         Z[1] = bound.z2; 
-         X[2] = bound.x2;
-         Z[2] = bound.z2;
-         X[3] = bound.x2;
-         Z[3] = bound.z1;
-         rotTransBoundingBox(porta->orientation + porta->delta, 
-                             X, Z,porta->x, 
-                             0.0f,0.0f,porta->z, minObj, maxObj);
-         if(intercepts( minObj, maxObj, minMouse, maxMouse))
+         colBox = porta->obj->scNode->getBoundingBox();
+         if(mouseBox.intercepts(colBox))
          {
             cursors->set(CURSOR_DOOR);
             cursors->setTextOver(gettext("Door")); 
             //curTarget = porta;
             if( (mButton & SDL_BUTTON(1)) && 
-                (rangeAction(activeCharacter->xPosition, 
-                             activeCharacter->zPosition,
-                             porta->x, porta->z,
+                (rangeAction(activeCharacter->scNode->getPosX(), 
+                             activeCharacter->scNode->getPosZ(),
+                             porta->obj->scNode->getPosX(),
+                             porta->obj->scNode->getPosZ(),
                              activeCharacter->displacement) ) )
             {
                lastMousePression = time;
-               if(porta->status)
+               porta->flip();
+               if(porta->getStatus() == DOOR_STATUS_CLOSED)
                {
                   /* Is Closing Door */
-                  //porta->orientation -= 90;
-                  porta->status = DOOR_STATUS_CLOSED;
-                  snd->addSoundEffect(porta->x, 
-                                      actualMap->getHeight(porta->x, porta->z),
-                                      porta->z, SOUND_NO_LOOP, 
+                  snd->addSoundEffect(porta->obj->scNode->getPosX(), 
+                                      0.0,
+                                      porta->obj->scNode->getPosZ(), 
+                                      SOUND_NO_LOOP, 
                                       "sndfx/objects/door_close.ogg");
                }
                else
                {
                   /* Is Openning Door */
-                  //porta->orientation += 90;
-                  porta->status = DOOR_STATUS_OPENED;
-                  snd->addSoundEffect(porta->x, 
-                                      actualMap->getHeight(porta->x, porta->z),
-                                      porta->z, SOUND_NO_LOOP, 
+                  snd->addSoundEffect(porta->obj->scNode->getPosX(), 
+                                      0.0,
+                                      porta->obj->scNode->getPosZ(), 
+                                      SOUND_NO_LOOP,
                                       "sndfx/objects/door_open.ogg");
                }
             }
@@ -2516,21 +2490,8 @@ int engine::verifyMouseActions(Uint8 mButton)
       character* pers = (character*) PCs->getFirst();
       for(i = 0; ((i < PCs->getTotal()) && (!pronto)); i++)
       {
-         GLfloat x[4],z[4];
-         GLfloat min[3], max[3];
-         x[0] = pers->min[0];
-         z[0] = pers->min[2];
-         x[1] = pers->min[0];
-         z[1] = pers->max[2]; 
-         x[2] = pers->max[0];
-         z[2] = pers->max[2];
-         x[3] = pers->max[0];
-         z[3] = pers->min[2];
-
-         rotTransBoundingBox(pers->orientationY, x, z,pers->xPosition,0.0, 0.0,
-                             pers->zPosition, min, max );
-
-         if(intercepts( min, max, minMouse, maxMouse))
+         colBox = pers->scNode->getBoundingBox();
+         if(mouseBox.intercepts(colBox))
          {
             cursors->set(CURSOR_INVENTORY);
             cursors->setTextOver(pers->name);
@@ -2552,23 +2513,8 @@ int engine::verifyMouseActions(Uint8 mButton)
          pers = (character*) NPCs->getFirst();
          for(i = 0; ((i < NPCs->getTotal()) && (!pronto)); i++)
          {
-            GLfloat x[4],z[4];
-            GLfloat min[3], max[3];
-
-            x[0] = pers->min[0];
-            z[0] = pers->min[2];
-            x[1] = pers->min[0];
-            z[1] = pers->max[2]; 
-            x[2] = pers->max[0];
-            z[2] = pers->max[2];
-            x[3] = pers->max[0];
-            z[3] = pers->min[2];
-
-            rotTransBoundingBox(pers->orientationY, x, z, 
-                                pers->xPosition, 0.0f, 0.0f, 
-                                pers->zPosition, min, max );
-
-            if(intercepts( min, max, minMouse, maxMouse))
+            colBox = pers->scNode->getBoundingBox();
+            if(mouseBox.intercepts(colBox))
             {
                curTarget = (thing*)pers;
                if(pers->isAlive())
@@ -2593,9 +2539,10 @@ int engine::verifyMouseActions(Uint8 mButton)
                   {
                      cursors->set(CURSOR_TALK);
                      if( (mButton & SDL_BUTTON(1)) && 
-                         (rangeAction(activeCharacter->xPosition, 
-                                      activeCharacter->zPosition,
-                                      pers->xPosition, pers->zPosition,
+                         (rangeAction(activeCharacter->scNode->getPosX(), 
+                                      activeCharacter->scNode->getPosZ(),
+                                      pers->scNode->getPosX(), 
+                                      pers->scNode->getPosZ(),
                                       activeCharacter->displacement)) )
                      {
                         dialogWindow dlgWindow;
@@ -2622,9 +2569,10 @@ int engine::verifyMouseActions(Uint8 mButton)
                   }
 
                   if( (mButton & SDL_BUTTON(1)) &&
-                      (rangeAction(activeCharacter->xPosition, 
-                                   activeCharacter->zPosition,
-                                   pers->xPosition, pers->zPosition,
+                      (rangeAction(activeCharacter->scNode->getPosX(), 
+                                   activeCharacter->scNode->getPosZ(),
+                                   pers->scNode->getPosX(), 
+                                   pers->scNode->getPosZ(),
                                    activeCharacter->getActiveFeatRange() *
                                    METER_TO_DNT) ) )
                   {
@@ -2660,18 +2608,9 @@ int engine::verifyMouseActions(Uint8 mButton)
           (engineMode == ENGINE_MODE_REAL_TIME) ) 
       {
          /* Don't travel on battle mode */
-         GLfloat minCon[3], maxCon[3];
-         minCon[0] = quaux->mapConection.x1;
-         minCon[1] = 0.0f;
-         minCon[2] = quaux->mapConection.z1;
-         maxCon[0] = quaux->mapConection.x2;
-         maxCon[1] = 0.0f;
-         maxCon[2] = quaux->mapConection.z2;
-         GLfloat minMouse[3], maxMouse[3];
-         minMouse[0] = xReal-2;  maxMouse[0] = xReal+2;
-         minMouse[1] = 0.0f;      maxMouse[1] = 0.0f;
-         minMouse[2] = zReal-2;  maxMouse[2] = zReal+2;
-         if( intercepts( minCon, maxCon, minMouse, maxMouse ) )
+         colBox.setMin(quaux->mapConection.x1, 0.0f, quaux->mapConection.z1);
+         colBox.setMax(quaux->mapConection.x2, 0.0f, quaux->mapConection.z2);
+         if(mouseBox.intercepts( colBox ) )
          {
             cursors->setTextOver(quaux->mapConection.mapName); 
 
@@ -2679,8 +2618,8 @@ int engine::verifyMouseActions(Uint8 mButton)
             cursors->set(CURSOR_MAPTRAVEL);
             pronto = 1;
             if( (mButton & SDL_BUTTON(1)) && 
-                (rangeAction(activeCharacter->xPosition, 
-                             activeCharacter->zPosition,
+                (rangeAction(activeCharacter->scNode->getPosX(), 
+                             activeCharacter->scNode->getPosZ(),
                              xReal, zReal,
                              activeCharacter->displacement) ) )
             {
@@ -2771,10 +2710,14 @@ int engine::treatIO(SDL_Surface *screen)
             if( (npc->isAlive()) && (npc->getPsychoState() == PSYCHO_HOSTILE) )
             {
                /* Verify Distance */
-               dist = sqrt( (npc->xPosition - activeCharacter->xPosition)*
-                            (npc->xPosition - activeCharacter->xPosition) +
-                            (npc->zPosition - activeCharacter->zPosition)*
-                            (npc->zPosition - activeCharacter->zPosition));
+               dist = sqrt( (npc->scNode->getPosX() - 
+                             activeCharacter->scNode->getPosX()) *
+                            (npc->scNode->getPosX() - 
+                             activeCharacter->scNode->getPosX()) +
+                            (npc->scNode->getPosZ() - 
+                             activeCharacter->scNode->getPosZ()) *
+                            (npc->scNode->getPosZ() - 
+                             activeCharacter->scNode->getPosZ()));
 
                if(dist < DNT_BATTLE_RANGE)
                {
@@ -2906,7 +2849,7 @@ int engine::treatIO(SDL_Surface *screen)
       {
          lastKey = SDLK_F2;
          lastKeyb = time;
-         models.printAll();
+         //models.printAll();
       }      
 
       /* Open Minimap */
@@ -3025,9 +2968,9 @@ int engine::treatIO(SDL_Surface *screen)
       {
          walkStatus = ENGINE_WALK_KEYS;
           varX = curWalkInterval * 
-                 sin(deg2Rad(activeCharacter->orientationY+90.0f));
+                 sin(deg2Rad(activeCharacter->scNode->getAngleY()+90.0f));
           varZ = curWalkInterval * 
-                 cos(deg2Rad(activeCharacter->orientationY+90.0f));
+                 cos(deg2Rad(activeCharacter->scNode->getAngleY()+90.0f));
          // Left walk
          if(keys[option->getKey(DNT_KEY_MOVE_LEFT)]) 
          {
@@ -3043,9 +2986,9 @@ int engine::treatIO(SDL_Surface *screen)
       { 
          walkStatus = ENGINE_WALK_KEYS;
          varX = curWalkInterval * 
-                sin(deg2Rad(activeCharacter->orientationY));
+                sin(deg2Rad(activeCharacter->scNode->getAngleY()));
          varZ = curWalkInterval * 
-                cos(deg2Rad(activeCharacter->orientationY));
+                cos(deg2Rad(activeCharacter->scNode->getAngleY()));
          if(keys[option->getKey(DNT_KEY_MOVE_FORWARD)]) 
          {
               varX *= -1;
@@ -3058,7 +3001,7 @@ int engine::treatIO(SDL_Surface *screen)
       if( (keys[option->getKey(DNT_KEY_ROTATE_LEFT)]) || 
           (keys[option->getKey(DNT_KEY_ROTATE_RIGHT)]))
       {
-         GLfloat ori = activeCharacter->orientationY;
+         GLfloat ori = activeCharacter->scNode->getAngleY();
          walkStatus = ENGINE_WALK_KEYS;
          // CounterClockWise Character turn
          if( (keys[option->getKey(DNT_KEY_ROTATE_LEFT)]) && 
@@ -3069,7 +3012,7 @@ int engine::treatIO(SDL_Surface *screen)
             { 
                ori -= 360.0f;
             }
-            activeCharacter->setOrientation(ori);
+            activeCharacter->scNode->setAngle(0.0f, ori, 0.0f);
             walked = true;
          }
          // Clockwise Character Turn
@@ -3081,7 +3024,7 @@ int engine::treatIO(SDL_Surface *screen)
             {
                ori += 360.0f;
             }
-            activeCharacter->setOrientation(ori);
+            activeCharacter->scNode->setAngle(0.0f, ori, 0.0f);
          }
          walked = true;
       }
@@ -3097,10 +3040,10 @@ int engine::treatIO(SDL_Surface *screen)
             PCs->setActiveCharacter((character*)activeCharacter->getNext());
          }
          activeCharacter = PCs->getActiveCharacter();
-         gameCamera.updateCamera(activeCharacter->xPosition,
-                                    activeCharacter->yPosition,
-                                    activeCharacter->zPosition,
-                                    activeCharacter->orientationY);
+         gameCamera.updateCamera(activeCharacter->scNode->getPosX(),
+               activeCharacter->scNode->getPosY(), 
+               activeCharacter->scNode->getPosZ(),
+               activeCharacter->scNode->getAngleY());
          SDL_Delay(100);
       }
 
@@ -3142,21 +3085,21 @@ int engine::treatIO(SDL_Surface *screen)
          {
             /* Set character orientation (if mouse is far from character,
              * because if it is too near, some weird angles appears) */
-            dist = sqrt( (xFloor - activeCharacter->xPosition) *
-                         (xFloor - activeCharacter->xPosition) +
-                         (zFloor - activeCharacter->zPosition) *
-                         (zFloor - activeCharacter->zPosition) );
+            dist = sqrt( (xFloor - activeCharacter->scNode->getPosX()) *
+                         (xFloor - activeCharacter->scNode->getPosX()) +
+                         (zFloor - activeCharacter->scNode->getPosZ()) *
+                         (zFloor - activeCharacter->scNode->getPosZ()) );
             
-            walkAngle = getAngle(activeCharacter->xPosition,
-                                 activeCharacter->zPosition,
+            walkAngle = getAngle(activeCharacter->scNode->getPosX(),
+                                 activeCharacter->scNode->getPosZ(),
                                  xFloor, zFloor);
             if(dist > 4)
             {
                /* Try to change the angle */
-               if(canWalk(0,0, walkAngle - activeCharacter->orientationY))
+               if(canWalk(0,0, walkAngle-activeCharacter->scNode->getAngleY()))
                { 
                   /* can change */
-                  activeCharacter->orientationY = walkAngle; 
+                  activeCharacter->scNode->setAngle(0.0f, walkAngle, 0.0f);
                }
 
                /* Verify if is running or walking */
@@ -3165,7 +3108,7 @@ int engine::treatIO(SDL_Surface *screen)
             else
             {
                /* Keep the direction angle */
-               walkAngle = activeCharacter->orientationY;
+               walkAngle = activeCharacter->scNode->getAngleY();
                run = false;
             }
 
@@ -3202,31 +3145,32 @@ int engine::treatIO(SDL_Surface *screen)
 
       if(walkStatus == ENGINE_WALK_MOUSE_ASTAR)
       {
-            if(! activeCharacter->pathFind.getNewPosition(
-                                        activeCharacter->xPosition,
-                                        activeCharacter->zPosition,
-                                        activeCharacter->orientationY,
-                                        engineMode == ENGINE_MODE_TURN_BATTLE,
-                                        run))
-            {
-               walkStatus = ENGINE_WALK_KEYS;
-            }
-            else
-            {
-               /* Define New Occuped Square */
-               activeCharacter->defineOcSquare(actualMap);
-               
-               /* Define New Height */
-               defineCharacterHeight(activeCharacter, 
-                                     activeCharacter->xPosition,
-                                     activeCharacter->zPosition);
-            }
+         float pX=activeCharacter->scNode->getPosX();
+         float pY=activeCharacter->scNode->getPosY();
+         float pZ=activeCharacter->scNode->getPosZ();
+         float aY=activeCharacter->scNode->getAngleY();
+         if(! activeCharacter->pathFind.getNewPosition(pX,pZ,aY,
+                  engineMode == ENGINE_MODE_TURN_BATTLE, run))
+         {
+            walkStatus = ENGINE_WALK_KEYS;
+         }
+         else
+         {
+            /* Define New Occuped Square */
+            activeCharacter->scNode->set(pX,pY,pZ,0.0f,aY,0.0f);
+            activeCharacter->defineOcSquare(actualMap);
 
-            gameCamera.updateCamera(activeCharacter->xPosition,
-                                    activeCharacter->yPosition,
-                                    activeCharacter->zPosition,
-                                    activeCharacter->orientationY);
-            walked = true;
+            /* Define New Height */
+            defineCharacterHeight(activeCharacter, 
+                  activeCharacter->scNode->getPosX(),
+                  activeCharacter->scNode->getPosZ());
+         }
+
+         gameCamera.updateCamera(activeCharacter->scNode->getPosX(),
+               activeCharacter->scNode->getPosY(),
+               activeCharacter->scNode->getPosZ(),
+               activeCharacter->scNode->getAngleY());
+         walked = true;
       }
 
       /* IA cycle */
@@ -3238,8 +3182,8 @@ int engine::treatIO(SDL_Surface *screen)
       /* GUI Events */
 
       /* Update MiniMap */
-      mapWindow->updateCharacterPosition(activeCharacter->xPosition,
-                                         activeCharacter->zPosition);
+      mapWindow->updateCharacterPosition(activeCharacter->scNode->getPosX(),
+                                         activeCharacter->scNode->getPosZ());
 
       /* Get GUI Event */ 
       guiObject* object;
@@ -3321,18 +3265,18 @@ int engine::treatIO(SDL_Surface *screen)
          /* Set the animation (if not yet defined) */
          if(run)
          {
-            activeCharacter->setState(STATE_RUN);
+            activeCharacter->scNode->getModel()->setState(STATE_RUN);
          }
          else
          {
-            activeCharacter->setState(STATE_WALK);
+            activeCharacter->scNode->getModel()->setState(STATE_WALK);
          }
       }
       else if( (timePass) && (activeCharacter->isAlive()))
       { 
          /* The move stoped (or never occurred)  */
-         if( ( (activeCharacter->getState() == STATE_WALK) ||
-               (activeCharacter->getState() == STATE_RUN) ) &&
+         if( ( (activeCharacter->scNode->getModel()->getState()==STATE_WALK) ||
+               (activeCharacter->scNode->getModel()->getState()==STATE_RUN) ) &&
                (engineMode == ENGINE_MODE_TURN_BATTLE) && 
                (fightStatus == FIGHT_PC_TURN) )
          {
@@ -3348,7 +3292,7 @@ int engine::treatIO(SDL_Surface *screen)
          }
 
          /* Put at Idle animation */
-         activeCharacter->setState(STATE_IDLE);
+         activeCharacter->scNode->getModel()->setState(STATE_IDLE);
 
          /* And remove walk sound effect */
          if(walkSound)
@@ -3392,9 +3336,7 @@ void engine::clearOpenGL()
  ********************************************************************/
 void engine::renderScene(bool lightPass, bool updateAnimations)
 {
-   GLfloat min[3],max[3];
-   GLfloat x[4],z[4];
-
+   boundingBox bbox;
    bool shadow = ( (option->getShadowType() == SHADOWS_PROJECTIVE) && 
                    (actualMap->isOutdoor()) && 
                    (gameSun->shadowTime()) );
@@ -3416,10 +3358,10 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
       glPopMatrix();
    }
 
-   glPushMatrix();
-
    if((!lightPass) && (option->getStencilBufferSize() > 0))
    {
+
+      glPushMatrix();
       /* Draw The Floor with Stencil Buffer */
       if( ((option->getReflexionType() != REFLEXIONS_NONE) && 
                (!actualMap->isOutdoor()))  || (shadow))
@@ -3435,6 +3377,7 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
          glEnable(GL_DEPTH_TEST);
          glDisable(GL_STENCIL_TEST);
       }
+      glPopMatrix();
    }
 
    /* Render terrain for shadows */
@@ -3443,174 +3386,20 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
       glPushMatrix();
       actualMap->render(gameCamera.getCameraX(), gameCamera.getCameraY(),
             gameCamera.getCameraZ(), visibleMatrix,
-            PCs->getActiveCharacter()->xPosition,
-            PCs->getActiveCharacter()->zPosition);
+            PCs->getActiveCharacter()->scNode->getPosX(),
+            PCs->getActiveCharacter()->scNode->getPosZ());
       glPopMatrix();
    }
 
-   /* Draw Playable Characters (PCs) */
-   character* per = (character*) PCs->getFirst();
-   int aux;
-
-   for(aux=0;aux < PCs->getTotal();aux++)
-   {
-      per->render(updateAnimations, 
-                  /* Enable reflexion */
-                  ((option->getReflexionType() >= REFLEXIONS_CHARACTERS) && 
-                   (!actualMap->isOutdoor()) &&
-                   (option->getStencilBufferSize() > 0)),
-                  /* Enable Projective Shadow */
-                  ((shadow) && (gameSun->visibleTime())),
-                  gameSun);
-      /* Next */            
-      per = (character*) per->getNext();
-   }
-   glPopMatrix();
-
-   /* Draw the NPCs */
-   if(NPCs)
-   {
-      per = (character*) NPCs->getFirst();
-      for(aux=0;aux < NPCs->getTotal();aux++)
-      {
-         /* Update the model */
-         /*if(updateAnimations)
-         {
-            per->update(WALK_UPDATE);
-            per->getEffects()->doStep();
-         }*/
- 
-         /* Load the Model */
-         //per->loadToGraphicMemory();
-
-         /* Verify Bounding Box */
-         x[0] = per->min[0];
-         z[0] = per->min[2];
-         x[1] = per->min[0];
-         z[1] = per->max[2]; 
-         x[2] = per->max[0];
-         z[2] = per->max[2];
-         x[3] = per->max[0];
-         z[3] = per->min[2];
-         rotTransBoundingBox(per->orientationY, x, z,per->xPosition, 
-                             -per->max[1] + per->yPosition, //To get reflection
-                             per->max[1] + per->yPosition,
-                             per->zPosition, min, max );
-
-         /* Only Draw Visible Characters */
-         if(visibleCube(min[0],min[1],min[2],max[0],max[1],max[2],
-                        visibleMatrix))
-         {
-            if( (curTarget == (thing*)per) &&
-                ( (!per->isAlive()) || 
-                  (engineMode == ENGINE_MODE_TURN_BATTLE)) )
-            {
-               glColor3f(1.0f,0.0f,0.0f);
-            }
-            else
-            {
-               glColor3f(1.0f,1.0f,1.0f);
-            }
-
-            glPushMatrix();
-
-            per->render(updateAnimations, 
-                  /* Enable reflexion */
-                  ((option->getReflexionType() >= REFLEXIONS_CHARACTERS) && 
-                   (!actualMap->isOutdoor()) &&
-                   (option->getStencilBufferSize() > 0)),
-                  /* Enable Projective Shadow */
-                  ((shadow) && (gameSun->visibleTime())),
-                  gameSun);
-
-            glPopMatrix();
-
-#if 0
-            glPushMatrix();
-              glTranslatef(per->xPosition, per->yPosition,
-                           per->zPosition);
-              glRotatef(per->orientation, 0.0f, 1.0f, 0.0f);
-              per->renderFromGraphicMemory();
-              /*glColor3f(1.0,0.1,0.1);
-              glBegin(GL_QUADS);
-                 glVertex3f(per->min[0],per->min[1]+1,per->min[2]);
-                 glVertex3f(per->min[0],per->min[1]+1,per->max[2]);
-                 glVertex3f(per->max[0],per->min[1]+1,per->max[2]);
-                 glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
-              glEnd();*/
-            glPopMatrix();
-
-              //per->RenderBoundingBox();
-              /*glDisable(GL_LIGHTING);
-              glColor3f(0.6,0.1,0.1);
-              glBegin(GL_POLYGON);
-                 glVertex3f(per->min[0],per->min[1]+1,per->min[2]);
-                 glVertex3f(per->min[0],per->min[1]+1,per->max[2]);
-                 glVertex3f(per->max[0],per->min[1]+1,per->max[2]);
-                 glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
-              glEnd();
-              glEnable(GL_LIGHTING);*/
-
-              /* Draw Reflection */
-              if( (option->getReflexionType() >= REFLEXIONS_CHARACTERS) && 
-                  (!actualMap->isOutdoor()) &&
-                  (option->getStencilBufferSize() > 0))
-              {
-                 glEnable(GL_STENCIL_TEST);
-                 glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
-                 glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
-                 //glCullFace(GL_FRONT);
-                 glEnable(GL_NORMALIZE);
-                 glPushMatrix();
-                    glTranslatef(per->xPosition, per->yPosition,
-                                 per->zPosition);
-                    glRotatef(per->orientation, 0.0f, 1.0f, 0.0f);
-                    glScalef(1.0f, -1.0f, 1.0f);
-                    per->renderFromGraphicMemory();
-                 glPopMatrix();
-                 glDisable(GL_NORMALIZE);
-                 //glCullFace(GL_FRONT);
-                 glDisable(GL_STENCIL_TEST);
-              }
-
-              /* Draw Projective Shadow */
-              if( (shadow) && (gameSun->visibleTime()) )
-              {
-                 per->renderShadow(gameSun->getShadowMatrix(),
-                                   gameSun->getShadowAlpha());
-              }
-#endif
-         }
-         /* Remove the Model From Graphic Memory */
-         //per->removeFromGraphicMemory();
-         per = (character*) per->getNext();
-      }
-   }
-
-   /* Draw the Map Objects with Reflexions */
-   if( (option->getReflexionType() >= REFLEXIONS_ALL) && 
-       (!actualMap->isOutdoor()) &&
-       (option->getStencilBufferSize()))
-   {
-      glEnable(GL_STENCIL_TEST);
-      glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
-      glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
-      glEnable(GL_NORMALIZE);
-      glPushMatrix();
-        actualMap->renderObjects(gameCamera.getCameraX(),
-                                 gameCamera.getCameraY(),
-                                 gameCamera.getCameraZ(), visibleMatrix, true);
-      glPopMatrix();
-      glDisable(GL_NORMALIZE);
-      glDisable(GL_STENCIL_TEST);
-   }
-
-   models.renderSceneryObjects(visibleMatrix,
-                               ( (option->getReflexionType() >= REFLEXIONS_ALL) 
-                                && (option->getStencilBufferSize() > 0)
-                                && (!actualMap->isOutdoor())),
-                                shadow?gameSun->getShadowMatrix():NULL,
-                                shadow?gameSun->getShadowAlpha():0.0f);
+   /* Draw Scene */
+   curScene.render(visibleMatrix, updateAnimations, 
+         /* Enable reflexion */
+         ((option->getReflexionType() >= REFLEXIONS_CHARACTERS) &&
+          (!actualMap->isOutdoor()) &&
+          (option->getStencilBufferSize() > 0)),
+          /* Enable Projective Shadow */
+         ((shadow) && (gameSun->visibleTime())),
+         gameSun->getShadowMatrix(), gameSun->getShadowAlpha());
 
    /* Render Terrain at last for reflexion */
    if(!shadow)
@@ -3618,8 +3407,8 @@ void engine::renderScene(bool lightPass, bool updateAnimations)
       glPushMatrix();
       actualMap->render(gameCamera.getCameraX(), gameCamera.getCameraY(),
             gameCamera.getCameraZ(), visibleMatrix,
-            PCs->getActiveCharacter()->xPosition,
-            PCs->getActiveCharacter()->zPosition);
+            PCs->getActiveCharacter()->scNode->getPosX(),
+            PCs->getActiveCharacter()->scNode->getPosZ());
       glPopMatrix();
    }
 }
@@ -3656,13 +3445,13 @@ void engine::renderNoShadowThings()
    {
        /* Range Circle */
        actualMap->renderSurfaceOnMap(rangeCircle,
-                                     activeCharacter->xPosition - 
+                                     activeCharacter->scNode->getPosX() - 
                                                   activeCharacter->displacement,
-                                     activeCharacter->zPosition - 
+                                     activeCharacter->scNode->getPosZ() - 
                                                   activeCharacter->displacement,
-                                     activeCharacter->xPosition + 
+                                     activeCharacter->scNode->getPosX() + 
                                                   activeCharacter->displacement,
-                                     activeCharacter->zPosition + 
+                                     activeCharacter->scNode->getPosZ() + 
                                                   activeCharacter->displacement,
                                      0.05f, 20);
    }
@@ -3705,10 +3494,10 @@ void engine::renderNoShadowThings()
          /* Feat Range Circle */
          float rangeValue = turnCharacter->getActiveFeatRange()*METER_TO_DNT;
          actualMap->renderSurfaceOnMap(featRangeCircle, 
-               turnCharacter->xPosition-rangeValue,
-               turnCharacter->zPosition-rangeValue, 
-               turnCharacter->xPosition+rangeValue, 
-               turnCharacter->zPosition+rangeValue, 
+               turnCharacter->scNode->getPosX()-rangeValue,
+               turnCharacter->scNode->getPosZ()-rangeValue, 
+               turnCharacter->scNode->getPosX()+rangeValue, 
+               turnCharacter->scNode->getPosZ()+rangeValue, 
                0.5f,20);
       }
 
@@ -3800,7 +3589,8 @@ void engine::renderGUI()
          if(walkStatus == ENGINE_WALK_MOUSE)
          {
             /* Set the cursor to the current walkAngle orientation */
-            if(PCs->getActiveCharacter()->getState() == STATE_RUN)
+            if(PCs->getActiveCharacter()->scNode->getModel()->getState() 
+                  == STATE_RUN)
             {
                /* Is running, must scale a bit the cursor to demonstrate this */
                cursors->draw(mouseX, mouseY,
@@ -3964,12 +3754,15 @@ bool engine::tryWalk(GLfloat varX, GLfloat varZ)
    /* Try Normal Move */
    if(canWalk(varX,varZ,0)) 
    {
-      activeCharacter->xPosition += varX;
-      activeCharacter->zPosition += varZ;
-      gameCamera.updateCamera(activeCharacter->xPosition,
-            activeCharacter->yPosition,
-            activeCharacter->zPosition,
-            activeCharacter->orientationY);
+      activeCharacter->scNode->setPosition(
+            activeCharacter->scNode->getPosX() + varX,
+            activeCharacter->scNode->getPosY(),
+            activeCharacter->scNode->getPosZ() + varZ);
+
+      gameCamera.updateCamera(activeCharacter->scNode->getPosX(),
+            activeCharacter->scNode->getPosY(),
+            activeCharacter->scNode->getPosZ(),
+            activeCharacter->scNode->getAngleY());
       return(true);
    }
 
@@ -3979,16 +3772,22 @@ bool engine::tryWalk(GLfloat varX, GLfloat varZ)
    {
       if(varX < 0)
       {
-         activeCharacter->xPosition -= activeCharacter->walk_interval;
+         activeCharacter->scNode->setPosition(
+            activeCharacter->scNode->getPosX() - activeCharacter->walk_interval,
+            activeCharacter->scNode->getPosY(),
+            activeCharacter->scNode->getPosZ());
       }
       else
       {
-         activeCharacter->xPosition += activeCharacter->walk_interval;
+         activeCharacter->scNode->setPosition(
+            activeCharacter->scNode->getPosX() + activeCharacter->walk_interval,
+            activeCharacter->scNode->getPosY(),
+            activeCharacter->scNode->getPosZ());
       }
-      gameCamera.updateCamera(activeCharacter->xPosition,
-            activeCharacter->yPosition,
-            activeCharacter->zPosition,
-            activeCharacter->orientationY);
+      gameCamera.updateCamera(activeCharacter->scNode->getPosX(),
+            activeCharacter->scNode->getPosY(),
+            activeCharacter->scNode->getPosZ(),
+            activeCharacter->scNode->getAngleY());
       return(true);
    }
 
@@ -3998,17 +3797,22 @@ bool engine::tryWalk(GLfloat varX, GLfloat varZ)
    {
       if(varZ < 0)
       {
-         activeCharacter->zPosition -= activeCharacter->walk_interval;
+         activeCharacter->scNode->setPosition(
+            activeCharacter->scNode->getPosX(),
+            activeCharacter->scNode->getPosY(),
+            activeCharacter->scNode->getPosZ()-activeCharacter->walk_interval);
       }
       else
       {
-         activeCharacter->zPosition += activeCharacter->walk_interval;
+         activeCharacter->scNode->setPosition(
+            activeCharacter->scNode->getPosX(),
+            activeCharacter->scNode->getPosY(),
+            activeCharacter->scNode->getPosZ()+activeCharacter->walk_interval);
       }
-
-      gameCamera.updateCamera(activeCharacter->xPosition,
-            activeCharacter->yPosition,
-            activeCharacter->zPosition,
-            activeCharacter->orientationY);
+      gameCamera.updateCamera(activeCharacter->scNode->getPosX(),
+            activeCharacter->scNode->getPosY(),
+            activeCharacter->scNode->getPosZ(),
+            activeCharacter->scNode->getAngleY());
       return(true);
    }
 
@@ -4047,10 +3851,11 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
       }
 
       //verify distance to the orign point
-      walkDistance = sqrt( (activeCharacter->xPosition + varX - moveCircleX) *
-                           (activeCharacter->xPosition + varX - moveCircleX) +
-                           (activeCharacter->zPosition + varZ - moveCircleZ) *
-                           (activeCharacter->zPosition + varZ - moveCircleZ) );
+      walkDistance = sqrt( 
+            (activeCharacter->scNode->getPosX() + varX - moveCircleX) *
+            (activeCharacter->scNode->getPosX() + varX - moveCircleX) +
+            (activeCharacter->scNode->getPosZ() + varZ - moveCircleZ) *
+            (activeCharacter->scNode->getPosZ() + varZ - moveCircleZ) );
 
       /* Verify walk limits at FightMode */
       if( ( (activeCharacter->getCanAttack()) && 
@@ -4082,7 +3887,10 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
       }
 
       /* Apply VarHeight */
-      activeCharacter->yPosition += varHeight;
+      activeCharacter->scNode->setPosition(
+          activeCharacter->scNode->getPosX(),
+          activeCharacter->scNode->getPosY() + varHeight,
+          activeCharacter->scNode->getPosZ());
    }
    
    return(result);
@@ -4276,9 +4084,9 @@ int engine::run(SDL_Surface *surface, bool commingBack)
                   PCs->setActiveCharacter(fight->actualCharacterTurn());
                   activeCharacter = PCs->getActiveCharacter();
 
-                  moveCircleX = activeCharacter->xPosition;
-                  moveCircleY = activeCharacter->yPosition;
-                  moveCircleZ = activeCharacter->zPosition;
+                  moveCircleX = activeCharacter->scNode->getPosX();
+                  moveCircleY = activeCharacter->scNode->getPosY();
+                  moveCircleZ = activeCharacter->scNode->getPosZ();
                }
                else
                { //FIXME
@@ -4288,9 +4096,9 @@ int engine::run(SDL_Surface *surface, bool commingBack)
            else if(fightStatus == FIGHT_NPC_TURN)
            {
               activeCharacter = fight->actualCharacterTurn();
-              moveCircleX = activeCharacter->xPosition;
-              moveCircleY = activeCharacter->yPosition;
-              moveCircleZ = activeCharacter->zPosition;
+              moveCircleX = activeCharacter->scNode->getPosX();
+              moveCircleY = activeCharacter->scNode->getPosY();
+              moveCircleZ = activeCharacter->scNode->getPosZ();
            }
  
         }

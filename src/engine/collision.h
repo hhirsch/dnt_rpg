@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -47,7 +47,7 @@ class collision
        * \param max -> max positions of bounding box (translated & rotated)
        * \param quad -> pointer to the current square
        * \param varHeight -> height variation going in */
-      bool verifySquare(GLfloat min[3], GLfloat max[3],Square* quad,
+      bool verifySquare(boundingBox& actorBox, Square* quad,
                         GLfloat& varHeight, GLfloat curHeight);
 
       /*! Verify if character can walk to the position

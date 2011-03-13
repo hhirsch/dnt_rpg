@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -1219,7 +1219,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       character* c = getParameterc(token, strLine, pos);
       if(c != NULL)
       {
-         c->setState(STATE_IDLE);
+         c->scNode->getModel()->setState(STATE_IDLE);
       }
       else
       {
@@ -1683,13 +1683,13 @@ void iaScript::callFunction(iaVariable* var, string strLine,
             {
                /* Define a position away from the current target */
                //FIXME... wrong!
-               float angle = getAngle(characterOwner->xPosition,
-                                      characterOwner->zPosition,
-                                      characterOwner->currentEnemy->xPosition,
-                                      characterOwner->currentEnemy->zPosition);
-               posX = characterOwner->xPosition - 
+               float angle = getAngle(characterOwner->scNode->getPosX(),
+                     characterOwner->scNode->getPosZ(),
+                     characterOwner->currentEnemy->scNode->getPosX(),
+                     characterOwner->currentEnemy->scNode->getPosZ());
+               posX = characterOwner->scNode->getPosX() - 
                       (cos(deg2Rad(angle))*2*characterOwner->displacement);
-               posZ = characterOwner->zPosition - 
+               posZ = characterOwner->scNode->getPosZ() - 
                       (sin(deg2Rad(angle))*2*characterOwner->displacement);
 
                //cout << "Angle: " << angle << " X: " << posX << " Z: " << posZ 
@@ -1988,9 +1988,9 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          character* dude = getParameterc(token, strLine, pos);
          if(dude)
          {
-            x = dude->xPosition;
-            y = dude->yPosition;
-            z = dude->zPosition;
+            x = dude->scNode->getPosX();
+            y = dude->scNode->getPosY();
+            z = dude->scNode->getPosZ();
          }
       }
      
@@ -2069,8 +2069,9 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       if(dude != NULL)
       {
          messageController msgCtl;
-         msgCtl.addMessage(dude->xPosition, dude->yPosition+dude->max[1],
-                            dude->zPosition, text);
+         msgCtl.addMessage(dude->scNode->getPosX(), 
+               dude->scNode->getPosY() + dude->scNode->getBoundingBox().y2, 
+               dude->scNode->getPosZ(),text);
       }
    }
 
@@ -2205,8 +2206,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       if( (tgt != NULL) && (ref != NULL) )
       {
          /* syntax characterArRange(character ref, character tgt) */
-         bool atRange = actionInRange(ref->xPosition, ref->zPosition,  
-                                      tgt->xPosition, tgt->zPosition,
+         bool atRange = actionInRange(ref->scNode->getPosX(), ref->scNode->getPosZ(),  
+                                      tgt->scNode->getPosX(), tgt->scNode->getPosZ(),
                                       ref->getActiveFeatRange() * METER_TO_DNT);
          assignValue(var, (void*)&atRange, IA_TYPE_BOOL);
       }
@@ -2308,9 +2309,9 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       c = getParameterc(token, strLine, pos);
       if(c)
       {
-         posX = c->xPosition;
-         posY = c->max[1];
-         posZ = c->zPosition;
+         posX = c->scNode->getPosX();
+         posY = c->scNode->getBoundingBox().y2;
+         posZ = c->scNode->getPosZ();
       }
       duration = getParameteri(token, strLine, pos);
 
@@ -2477,15 +2478,15 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          {
             if(functionName == IA_OWNER_HEIGHT)
             {
-               v = t->max[1];
+               v = t->scNode->getBoundingBox().y2;
             }
             else if(functionName == IA_OWNER_POSX)
             {
-               v = t->xPosition;
+               v = t->scNode->getPosX();
             }
             else if(functionName == IA_OWNER_POSZ)
             {
-               v = t->zPosition;
+               v = t->scNode->getPosZ();
             }
          }
 

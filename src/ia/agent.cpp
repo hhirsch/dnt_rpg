@@ -206,51 +206,6 @@ bool agent::doAngle()
 }
 
 /********************************************************************
- *                             addIfVisible                         *
- ********************************************************************/
-bool agent::addIfVisible(agent* testAg)
-{
-   GLfloat posX, posZ;
-   GLfloat min1[3]; GLfloat max1[3];
-   GLfloat min2[3]; GLfloat max2[3];
-
-   GLfloat x[4];
-   GLfloat z[4];
-
-   /* Put Bounding Box on Place with Sight Distance */
-   x[0] = x1 - sightDistance;
-   z[0] = z1 - sightDistance;
-   x[1] = x1 - sightDistance;
-   z[1] = z2 + sightDistance;
-   x[2] = x2 + sightDistance;
-   z[2] = z2 + sightDistance;
-   x[3] = x2 + sightDistance;
-   z[3] = z1 - sightDistance;
-
-   rotTransBoundingBox(orientation, x,z, actualX,0.0,0.0,actualZ, min1, max1);
-
-   testAg->getPosition(posX, posZ);
-   testAg->getBoundingBox(x[0], z[0], x[2], z[2]);
-   x[1] = x[0];
-   z[1] = z[2];
-   x[3] = x[2];
-   z[3] = z[0];
-   rotTransBoundingBox(testAg->orientationValue(), x,z, posX, 0.0,0.0, posZ, 
-                       min2, max2);
-
-   //dist = sqrt( (agX-x)*(agX-x) + (agZ-z)*(agZ-z) );
-
-   /* If "colliding", is in sight, so add! */
-   if(intercepts(min1, max1, min2, max2))
-   {
-      addObstacle(posX,posZ, x[0], z[0], x[2], z[2]);
-      return(true);
-   }
-
-   return(false);
-}
-
-/********************************************************************
  *                        define Bounding Box                       *
  ********************************************************************/
 void agent::defineBoundingBox(GLfloat xa, GLfloat za, GLfloat xb, GLfloat zb)

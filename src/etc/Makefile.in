@@ -26,11 +26,11 @@ EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 ENDCLASSES=../classes/
 
 all: animodel.o btree.o boundingbox.o btreecell.o defparser.o distance.o\
-     dirs.o extensions.o \
-     list.o message3d.o modellist.o npcfile.o overlaps.o shader.o \
+     scenenode.o scene.o dirs.o extensions.o \
+     list.o message3d.o npcfile.o overlaps.o shader.o \
      texrenderer.o userinfo.o
 
-animodel.o: animodel.h animodel.cpp $(ENDCLASSES)thing.h dirs.h overlaps.h
+animodel.o: animodel.h animodel.cpp dirs.h overlaps.h
 	@printf "Making animodel.o... "
 	@$(CPP) $(CFLAGS) -c animodel.cpp -o animodel.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -93,6 +93,16 @@ npcfile.o: npcfile.cpp npcfile.h dirs.h
 overlaps.o: overlaps.cpp overlaps.h
 	@printf "Making overlaps.o... "
 	@$(CC) $(CFLAGS) overlaps.cpp -o overlaps.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+scenenode.o: scenenode.h scenenode.cpp animodel.h
+	@printf "Making scenenode.o... "
+	@$(CPP) $(CFLAGS) -c scenenode.cpp -o scenenode.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+scene.o: scene.h scene.cpp scenenode.h animodel.h
+	@printf "Making scene.o... "
+	@$(CPP) $(CFLAGS) -c scene.cpp -o scene.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 shader.o: shader.cpp shader.h dirs.h extensions.h

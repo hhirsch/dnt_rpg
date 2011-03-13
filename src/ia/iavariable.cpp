@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -631,8 +631,8 @@ string iaVariable::toString()
       if(obj)
       {
          string res = obj->getFileName();
-         sprintf(buffer," %.3f %.3f %.3f ",obj->xPosition, 
-                 obj->yPosition, obj->zPosition);
+         sprintf(buffer," %.3f %.3f %.3f ",obj->scNode->getPosX(), 
+                 obj->scNode->getPosY(), obj->scNode->getPosZ());
          res += buffer;
          return(res);
       }

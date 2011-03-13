@@ -1191,20 +1191,22 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs)
                if(tmpMobj->getAction() == MODSTATE_ACTION_CHARACTER_DEAD)
                {
                   /* Put it as dead at the position */
+                  float pX=0.0f,pY=0.0f,pZ=0.0f;
                   ch->instantKill();
-                  ch->orientationY = charAct->getOrientation();
-                  charAct->getPosition(ch->xPosition, ch->yPosition, 
-                        ch->zPosition);
+                  charAct->getPosition(pX,pY,pZ);
+
+                  ch->scNode->set(pX,pY,pZ,0.0f,charAct->getOrientation(),0.0f);
                   ch->defineOcSquare(actualMap);
                }
                else if(tmpMobj->getAction() == 
                                          MODSTATE_ACTION_CHARACTER_CHANGE_STATE)
                {
                   /* Change the state to the desired one! */
+                  float pX=0.0f,pY=0.0f,pZ=0.0f;
                   ch->setPsychoState((int)charAct->getOrientation());
                   /* Set the character position */
-                  charAct->getPosition(ch->xPosition, ch->yPosition,
-                        ch->zPosition);
+                  charAct->getPosition(pX, pY,pZ);
+                  ch->scNode->setPosition(pX, pY, pZ);
                   ch->defineOcSquare(actualMap);
                }
 

@@ -263,36 +263,6 @@ void wallList::freeElement(dntListElement* obj)
 
 //////////////////////////////////////////////////////////////////////////////
 //                                                                          //
-//                                 doorList                                 //
-//                                                                          //
-//////////////////////////////////////////////////////////////////////////////
-
-/********************************************************************
- *                            constructor                           *
- ********************************************************************/
-doorList::doorList(): dntList()
-{
-}
-
-/********************************************************************
- *                             Destructor                           *
- ********************************************************************/
-doorList::~doorList()
-{
-   clearList();
-}
-
-/********************************************************************
- *                            freeElement                           *
- ********************************************************************/
-void doorList::freeElement(dntListElement* obj)
-{
-   door* d = (door*)obj;
-   delete(d);
-}
-
-//////////////////////////////////////////////////////////////////////////////
-//                                                                          //
 //                               mapTexture                                 //
 //                                                                          //
 //////////////////////////////////////////////////////////////////////////////
@@ -822,12 +792,7 @@ void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal,
                        object* obj, int qx, int qz, bool collision)
 {
    /* Define the object Position */
-   obj->xPosition = xReal;
-   obj->yPosition = yReal;
-   obj->zPosition = zReal;
-   obj->orientationX = angleX;
-   obj->orientationY = angleY;
-   obj->orientationZ = angleZ;
+   obj->createSceneNode(xReal, yReal, zReal, angleX, angleY, angleZ);
 
    /* Get the main square where object is */
    Square* saux = relativeSquare(qx,qz);
@@ -837,31 +802,15 @@ void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal,
       /* Add Object to the square */
       saux->addObject(true, xReal, yReal, zReal, angleX, angleY, angleZ, 
             collision, obj);
-      boundingBox  bounds = obj->getBoundingBox();
+      boundingBox bounds = obj->scNode->getBoundingBox();
 
       /* Now will search all other squares the object can be */
-      float X[4], Z[4];
-      GLfloat min2[3];
-      GLfloat max2[3];
-
-      X[0] = bounds.x1;
-      Z[0] = bounds.z1;
-      X[1] = bounds.x1;
-      Z[1] = bounds.z2;
-      X[2] = bounds.x2;
-      Z[2] = bounds.z2;
-      X[3] = bounds.x2;
-      Z[3] = bounds.z1;
-      rotTransBoundingBox(angleY, X, Z, xReal, bounds.y1+yReal, 
-            bounds.y2+yReal, zReal, min2, max2);
-
-
       int minqx, minqz, maxqx, maxqz;
       int ssize = squareSize();
-      minqx = (int)(min2[0]) / ssize;
-      minqz = (int)(min2[2]) / ssize;
-      maxqx = (int)(max2[0]) / ssize;
-      maxqz = (int)(max2[2]) / ssize; 
+      minqx = (int)(bounds.x1) / ssize;
+      minqz = (int)(bounds.z1) / ssize;
+      maxqx = (int)(bounds.x2) / ssize;
+      maxqz = (int)(bounds.z2) / ssize; 
       int X1, Z1;
       Square* qaux;
       for(X1 = minqx; X1<=maxqx; X1++)
@@ -876,13 +825,6 @@ void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal,
                      angleX, angleY, angleZ,collision,obj);
             }
          }
-      }
-
-      /* If is a scenery one, the render is controlled by model3d, so
-       * add a render position to it! */
-      if(obj->isStaticScenery())
-      {
-         obj->addRenderPosition(xReal, yReal, zReal, angleX, angleY , angleZ);
       }
    }
    else
@@ -959,10 +901,6 @@ void Map::insertDoor(door* newDoor)
 {
    /* Insert on list */
    doors.insert(newDoor);
-
-   /* Set values */
-   newDoor->status = DOOR_STATUS_CLOSED;
-   newDoor->delta = 0;
 }
 
 /********************************************************************
@@ -1302,6 +1240,8 @@ void Map::renderFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 int Map::render(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
                 GLfloat** matriz, GLfloat perX, GLfloat perZ)
 {
+   /* Update doors */
+   doors.update();
    /* Update Lights */
    lights.update(perX, perZ);
 
@@ -1319,9 +1259,6 @@ int Map::render(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    {
       roads->draw();
    }*/
-
-   /* Render objects */
-   renderObjects(cameraX, cameraY, cameraZ, matriz, false);
 
    glDisable(GL_COLOR_MATERIAL);
    glColor3f(1.0,1.0,1.0);
@@ -1456,112 +1393,6 @@ void Map::renderWalls(GLfloat cameraX, GLfloat cameraY,
                         (!isOutdoor()));
 
 }
-
-/********************************************************************
- *                           renderObjects                          *
- ********************************************************************/
-void Map::renderObjects(GLfloat cameraX, GLfloat cameraY, 
-                      GLfloat cameraZ, GLfloat** matriz,
-                      bool inverted)
-{
-   int o, i;
-   int Xaux, Zaux;
-   GLfloat distancia;
-   GLfloat deltaX, deltaZ;
-   GLfloat deltaY2 = cameraY*cameraY;
-   GLfloat min[3], max[3];
-   GLfloat X[4], Z[4];
-   boundingBox bound;
-   objSquare* obj;
-
-   float ssize = squareSize();
-   float hsize = squareSize() / 2.0;
-
-   for(Xaux = 0; Xaux < x; Xaux++)
-   for(Zaux = 0; Zaux < z; Zaux++)
-   {
-      deltaX = (cameraX-MapSquares[Xaux][Zaux].x1+hsize);
-      deltaZ = (cameraZ-MapSquares[Xaux][Zaux].z1+hsize);
-      distancia = sqrt(deltaX*deltaX+deltaY2+deltaZ*deltaZ) / ssize;
-      obj = MapSquares[Xaux][Zaux].getFirstObject();
-
-      /* Draw All Needed Square Objects */
-      for(o=0; o < MapSquares[Xaux][Zaux].getTotalObjects(); o++)
-      {
-          if( (obj != NULL) && (obj->draw) && 
-              (!obj->obj->isStaticScenery()) &&
-              ( (!inverted) || ((inverted) && (obj->colision)) ) )
-          {
-            /* Do the Rotation of the Bounding Box */
-            bound = obj->obj->getBoundingBox();
-            X[0] = bound.x1;
-            Z[0] = bound.z1;
-            X[1] = bound.x1;
-            Z[1] = bound.z2; 
-            X[2] = bound.x2;
-            Z[2] = bound.z2;
-            X[3] = bound.x2;
-            Z[3] = bound.z1;
-            if(inverted)
-            {
-               rotTransBoundingBox(obj->obj->orientationY, X, Z, 
-                                   obj->obj->xPosition, 
-                                   obj->obj->yPosition - bound.y2, 
-                                   -obj->obj->yPosition - bound.y1, 
-                                   obj->obj->zPosition, min, max);
-            }
-            else
-            {
-               rotTransBoundingBox(obj->obj->orientationY, X, Z, 
-                                   obj->obj->xPosition, 
-                                   obj->obj->yPosition + bound.y1, 
-                                   obj->obj->yPosition + bound.y2, 
-                                   obj->obj->zPosition, min, max );
-            }
-
-            /* Verify ViewFrustum Culling */
-            if( (matriz == NULL) ||
-                (visibleCube(min[0],min[1],min[2],max[0],max[1],max[2],
-                             matriz)) )
-            {
-               obj->obj->draw(inverted);
-            }
-         }
-         obj = (objSquare*)obj->getNext();
-      }
-      MapSquares[Xaux][Zaux].visible = 0;
-   }
-
-   /* Draw Doors */
-   door* dor = (door*)doors.getFirst();
-   for(i=0; i < doors.getTotal(); i++)
-   {
-      if(dor->obj != NULL)
-      {
-         /* Remove previous delta */
-         dor->obj->orientationY -= dor->delta;
-
-         /* Do the "animation" */
-         if( (dor->status == DOOR_STATUS_OPENED) && (dor->delta < 90))
-         {
-            dor->delta += 5;
-         }
-         else if( (dor->status == DOOR_STATUS_CLOSED) && (dor->delta > 0) )
-         {
-            dor->delta -= 5;
-         }
-
-         /* Apply the new delta */
-         dor->obj->orientationY += dor->delta; 
-
-         /* Draw it */
-         dor->obj->draw(inverted);
-      }
-      dor = (door*)dor->getNext();
-   }
-}
-
-
 
 /********************************************************************
  *                                addLake                           *
@@ -2004,25 +1835,17 @@ int Map::open(string arquivo)
       else if(key == "door")
       {
          /* Create and insert the door */
+         float pX=0.0f, pZ=0.0f;
+         int ori=0;
          doorAux = new(door);
          insertDoor(doorAux);
 
          /* Read info */
-         sscanf(value.c_str(),"%s %f,%f:%d",nome,&doorAux->x,&doorAux->z,
-               &doorAux->orientation);
-         doorAux->delta = 0;
-         doorAux->obj = objectsList::search(nome, doorAux->x, 0, doorAux->z);
-         if(doorAux->obj == NULL)
-         {
-            /* Not found on list, so insert it! */
-            doorAux->obj = createObject(nome, fileName);
-            doorAux->obj->xPosition = doorAux->x;
-            doorAux->obj->yPosition = 0;
-            doorAux->obj->zPosition = doorAux->z;
-            doorAux->obj->orientationY = doorAux->orientation;
-            doorAux->obj->orientationX = 0;
-            doorAux->obj->orientationZ = 0;
-         }
+         sscanf(value.c_str(),"%s %f,%f:%d",nome,&pX,&pZ,&ori);
+         
+         /* Insert it! */
+         doorAux->obj = createObject(nome, fileName);
+         doorAux->obj->scNode->set(pX, 0.0f, pZ, 0.0f, ori, 0.0f);
       }
       /* Music File */
       else if(key == "musicFile")
@@ -2204,25 +2027,12 @@ int Map::open(string arquivo)
             /* Insert it */
             obj = createObject(nome, fileName);
             /* set the object position */
-            obj->xPosition = oX;
-            obj->yPosition = oY;
-            obj->zPosition = oZ;
-            obj->orientationX = angleX;
-            obj->orientationY = angleY;
-            obj->orientationZ = angleZ;
+            obj->scNode->set(oX, oY, oZ, angleX, angleY, angleZ);
          }
 
          oObj = MapSquares[posX][posZ].addObject(des==1, oX, oY, oZ,
                angleX, angleY, angleZ, oPis!=1,
                obj);
-         if(oObj->draw)
-         {
-            if(oObj->obj->isStaticScenery())
-            {
-               oObj->obj->addRenderPosition(oX, oY, oZ, angleX, angleY, angleZ);
-            }
-         }
-
       }
 
       /* ERROR: Unknow Key! */
@@ -2547,7 +2357,9 @@ int Map::save(string arquivo)
    {
       fprintf(arq,"door = %s %.3f,%.3f:%d\n",
               dir.getRelativeFile(doorAux->obj->getFileName()).c_str(),
-              doorAux->x,doorAux->z, doorAux->orientation);
+              doorAux->obj->scNode->getPosX(),
+              doorAux->obj->scNode->getPosZ(), 
+              (int)doorAux->obj->scNode->getAngleY());
       doorAux = (door*)doorAux->getNext();
    }
    
@@ -2612,8 +2424,8 @@ int Map::save(string arquivo)
           {
             if(obj->obj)
             {
-               x2 = (int)obj->obj->xPosition / squareSize();
-               z2 = (int)obj->obj->zPosition / squareSize();
+               x2 = (int)obj->obj->scNode->getPosX() / squareSize();
+               z2 = (int)obj->obj->scNode->getPosZ() / squareSize();
                fprintf(arq,
                   "useObject = %s %d:%d,%d:%.3f,%.3f,%.3f:%.3f,%.3f,%.3f:%d\n",
                        dir.getRelativeFile(obj->obj->getFileName()).c_str(),
@@ -2647,8 +2459,7 @@ SDL_Surface* Map::getMiniMap()
  ********************************************************************/
 void Map::drawMiniMap()
 {
-   modelList models;
-
+   scene curScene;
    int mapSizeX;
    int mapSizeZ;
    GLfloat ratio;
@@ -2721,7 +2532,7 @@ void Map::drawMiniMap()
 
    glPushMatrix();
       glScalef(ratio,ratio,ratio);
-      models.renderSceneryObjects(NULL, false);
+      curScene.render(NULL, false, false, false, NULL, 0);
       render(posX, 529, posZ, NULL, 0, 0);
    glPopMatrix();
 
@@ -3043,17 +2854,16 @@ void Map::defineCommonTexture()
  ********************************************************************/
 bool Map::defineThingHeight(thing* c, GLfloat nx, GLfloat nz)
 {
-   GLfloat altura_atual = c->yPosition;
+   GLfloat altura_atual = c->scNode->getPosY();
 
    GLfloat res = getHeight(nx, nz);
 
    if( (res - altura_atual) > 0.35)
    {
-       c->yPosition = altura_atual;
        return(false);
    }
 
-   c->yPosition = res;
+   c->scNode->setPosition(c->scNode->getPosX(), res, c->scNode->getPosZ());
    return(true);
 }
 

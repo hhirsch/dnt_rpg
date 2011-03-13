@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -264,34 +264,21 @@ void camera::lookAt(Map* acMap)
          float sumY = 0;
          int ob = 0;
          boundingBox bounding;
-         GLfloat min[3], max[3], min2[3], max2[3];
-         min[0] = cameraX-4;
-         max[0] = cameraX+4;
-         min[1] = cameraY-4;
-         max[1] = cameraY+4;
-         min[2] = cameraZ-4;
-         max[2] = cameraZ+4;
-         GLfloat X[4], Z[4];
+         
+         /* Set camera bounding box */
+         boundingBox cameraBox;
+         cameraBox.setMin(cameraX-4, cameraY-4, cameraZ-4);
+         cameraBox.setMax(cameraX+4, cameraY+4, cameraZ+4);
+         
          objSquare* sobj = ocSquare->getFirstObject();
          while( (ob < ocSquare->getTotalObjects()))
          {
             if(sobj->colision)
             {
-               bounding = sobj->obj->getBoundingBox();
-               X[0] = bounding.x1;
-               Z[0] = bounding.z1;
-               X[1] = bounding.x1;
-               Z[1] = bounding.z2;
-               X[2] = bounding.x2;
-               Z[2] = bounding.z2;
-               X[3] = bounding.x2;
-               Z[3] = bounding.z1;
-               rotTransBoundingBox(sobj->angleY, X, Z, 
-                                   sobj->x, bounding.y1 + sobj->y,
-                                   bounding.y2 + sobj->y, sobj->z, min2, max2);
-               if(intercepts(min,max,min2,max2))
+               bounding = sobj->obj->scNode->getBoundingBox();
+               if(cameraBox.intercepts(bounding))
                {
-                  if( (bounding.y2+sobj->y+10) > sumY)
+                  if( (bounding.y2 + sobj->y+10) > sumY)
                   {
                      sumY = bounding.y2 + sobj->y+10;
                   }

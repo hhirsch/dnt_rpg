@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -154,8 +154,8 @@ void aStar::findPath(void* actor, GLfloat x, GLfloat z, GLfloat stepSize,
       npcs = NPCs;
 
       /* Verify the distance to the target. If too near, no need to walk. */
-      GLfloat actualX = ((character*)actor)->xPosition;
-      GLfloat actualZ = ((character*)actor)->zPosition;
+      GLfloat actualX = ((character*)actor)->scNode->getPosX();
+      GLfloat actualZ = ((character*)actor)->scNode->getPosZ();
       dX = (x - actualX);
       dZ = (z - actualZ);
       GLfloat dist = sqrt( (dX*dX) + (dZ*dZ) );
@@ -295,7 +295,7 @@ void aStar::doCycle(bool fightMode)
          patt = new pattAgent(true);
          patt->defineDestiny(node->x, node->z);
          patt->defineStepSize(curStepSize);
-         patt->defineOrientation( ((character*)curActor)->orientationY );
+         patt->defineOrientation( ((character*)curActor)->scNode->getAngleY() );
          patt->defineSight(curStepSize*10, 360);
          destinyX = node->x;
          destinyZ = node->z;
@@ -307,10 +307,10 @@ void aStar::doCycle(bool fightMode)
             node = closed->find(node->parentX, node->parentZ);
          }
          patt->removeLinearWayPoints();
-         patt->setOrigin( ((character*)curActor)->xPosition, 
-                          ((character*)curActor)->zPosition );
-         patt->definePosition( ((character*)curActor)->xPosition, 
-                               ((character*)curActor)->zPosition );
+         patt->setOrigin( ((character*)curActor)->scNode->getPosX(), 
+                          ((character*)curActor)->scNode->getPosZ() );
+         patt->definePosition( ((character*)curActor)->scNode->getPosX(), 
+                               ((character*)curActor)->scNode->getPosZ() );
 
          /* We're done */
          clearSearch();

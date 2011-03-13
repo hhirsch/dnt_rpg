@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -108,9 +108,7 @@ bool itemSlot::addObject(object* obj, int x, int y)
       }
       /* Change Object Position (to avoid being deleted when back 
        * to the map where got it) */
-      obj->xPosition = -x;
-      obj->yPosition = -y;
-      obj->zPosition = -1;
+      obj->removeSceneNode();
 
       totalItems++;
       return(true);

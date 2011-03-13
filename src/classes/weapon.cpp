@@ -52,7 +52,6 @@ void wInfo::operator=(wInfo& v)
  ************************************************************/
 weapon::weapon(string path): object(path)
 {
-   modelList mdlList;
    weaponTypes wTypes;
    dirs dir;
    string key="", value="";
@@ -91,8 +90,9 @@ weapon::weapon(string path): object(path)
       else if(key == "cal3d")
       {
          /* Add the model. The weapon is never a scenery. */
-         model3D = mdlList.addModel(value,"", false);
-         model3D->incUsed();
+         cal3dName = value;
+         scNode = NULL;
+         createSceneNode(0,0,0,0,0,0);
       }
       else if( (key == "inventory_sizes") || (key == "sizeValue"))
       {

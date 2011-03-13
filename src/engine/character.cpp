@@ -145,63 +145,11 @@ character::~character()
 }
 
 /*********************************************************************
- *                             render                                *
+ *                            updateEffects                          *
  *********************************************************************/
-void character::render(bool updateAnimations, bool reflexion, bool shadow, 
-                       sun* gameSun)
+void character::updateEffects()
 {
-   object* obj;
-
-   /* Update the model */
-   if(updateAnimations)
-   {
-      update(WALK_UPDATE);
-      effects->doStep();
-   }
-
-   /* Load the Model */
-   loadToGraphicMemory();
-
-   /* Draw Character */
-   glPushMatrix();
-      /* Set position and orientation */
-      glTranslatef(xPosition, yPosition, zPosition);
-      glRotatef(orientationY, 0.0f, 1.0f, 0.0f);
-      renderFromGraphicMemory();
-   glPopMatrix();
-
-   /* Draw Reflection */
-   if(reflexion)
-   {
-      renderReflexion();
-   }
-
-   /* Draw Projective Shadow */
-   if(shadow)
-   {
-      renderShadow(gameSun->getShadowMatrix(), gameSun->getShadowAlpha());
-   }
-
-   /* Unload Model Graphics Memory */
-   removeFromGraphicMemory();
-
-   /* Render objects at hands */
-   obj = inventories->getFromPlace(INVENTORY_LEFT_HAND);
-   if(obj)
-   {
-      obj->renderEquipped(2, leftHand.x, leftHand.y, leftHand.z, orientationY,
-            leftHand.angleXY, leftHand.angleYZ,
-            reflexion, shadow, gameSun->getShadowMatrix(), 
-            gameSun->getShadowAlpha());
-   }
-   obj = inventories->getFromPlace(INVENTORY_RIGHT_HAND);
-   if(obj)
-   {
-      obj->renderEquipped(2, rightHand.x, rightHand.y, rightHand.z, 
-            orientationY,rightHand.angleXY, rightHand.angleYZ,
-            reflexion, shadow, gameSun->getShadowMatrix(), 
-            gameSun->getShadowAlpha());
-   }
+   effects->doStep();
 }
 
 /*********************************************************************
@@ -638,7 +586,7 @@ void character::defineInitialLifePoints()
  *********************************************************************/
 void character::callDeadAnimation()
 {
-   setState(STATE_DIE);
+   scNode->getModel()->setState(STATE_DIE);
 }
 
 /*********************************************************************
@@ -647,7 +595,7 @@ void character::callDeadAnimation()
 void character::instantKill()
 {
    dead = true;
-   setState(STATE_DEAD);
+   scNode->getModel()->setState(STATE_DEAD);
 }
 
 /*********************************************************************
@@ -655,7 +603,7 @@ void character::instantKill()
  *********************************************************************/
 void character::callAttackAnimation()
 {
-   setState(STATE_ATTACK_MEELE);
+   scNode->getModel()->setState(STATE_ATTACK_MEELE);
 }
 
 /*********************************************************************
@@ -663,7 +611,7 @@ void character::callAttackAnimation()
  *********************************************************************/
 void character::callIdleAnimation()
 {
-   setState(STATE_IDLE);
+   scNode->getModel()->setState(STATE_IDLE);
 }
 
 /*********************************************************************
@@ -671,7 +619,7 @@ void character::callIdleAnimation()
  *********************************************************************/
 void character::setOrientation(GLfloat ori)
 {
-   orientationY = ori;
+   scNode->setAngle(0.0f, ori, 0.0f);
    pathFind.setOrientation(ori);
 }
 
@@ -853,8 +801,8 @@ modEffectList* character::getEffects()
  *********************************************************************/
 void character::defineOcSquare(Map* curMap)
 {
-   int posX =(int)floor(xPosition / curMap->squareSize());
-   int posZ =(int)floor(zPosition / curMap->squareSize());
+   int posX =(int)floor(scNode->getPosX() / curMap->squareSize());
+   int posZ =(int)floor(scNode->getPosZ() / curMap->squareSize());
    
    ocSquare = curMap->relativeSquare(posX, posZ);
 }
@@ -878,7 +826,7 @@ bool character::save(string saveFile)
    /* Name */
    file << "name = " << name << endl;
    /* Model */
-   file << "model = " << modelFileName << endl;
+   file << "model = " << scNode->getModel()->getFileName() << endl;
    /* Portrait */
    file << "portrait = " << talkPortrait << endl;
    /* Race */
@@ -1029,23 +977,20 @@ character* characterList::insertCharacter(string file, featsList* ft,
    races racesDesc;
    aligns alignsDesc;
    classes classesDesc;
-   string arqModelo;
    string key, value;
    char buf[256];
    int lvl;
    int curClass = 0;
    int tmp=0;
    feat* cFeat = NULL;
+   string cal3dName = "";
+   scene curScene;
 
    bool definedBonusAndSave = false;
   
    /* Create the Character */ 
    character* novo;
    novo = new character(ft, pEngine);
-   novo->orientationY = 0.0f;
-   novo->xPosition = 0.0f;
-   novo->zPosition = 0.0f;
-   novo->yPosition = 0.0f;
 
    /* Try to Load the file */
    if(!def.load(file))
@@ -1067,7 +1012,7 @@ character* characterList::insertCharacter(string file, featsList* ft,
       else if(key == "model")
       {
          novo->setCharacterFile(file);
-         arqModelo = value;
+         cal3dName = value;
       }
       /* Define the Portrait */
       else if(key == "portrait")
@@ -1326,8 +1271,9 @@ character* characterList::insertCharacter(string file, featsList* ft,
    /* Apply cost to skills */
    novo->applySkillCosts();
    
-   /* Load The 3D Model */ 
-   novo->loadModel(arqModelo);
+   /* Load The 3D Model */
+   novo->scNode = curScene.createSceneNode(false, cal3dName, 
+         0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 
    /* Now insert it on the list */
    insert(novo);
@@ -1358,7 +1304,10 @@ void characterList::removeCharacter(character* dude)
  *********************************************************************/
 void characterList::freeElement(dntListElement* dude)
 {
+   scene curScene;
    character* c = (character*)dude;
+   curScene.deleteSceneNode(c->scNode);
+   c->scNode = NULL;
    delete(c);
 }
 

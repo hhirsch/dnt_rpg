@@ -185,10 +185,10 @@ bool saveFile::save(string saveFile, void* curEngine, SDL_Surface* frontSurface)
    quickTalentsFile = prefix + ".qck";
    pcFile = prefix + ".pc";
    invFile = prefix + ".inv";
-   pcPos[0] = pc->xPosition;
-   pcPos[1] = pc->yPosition;
-   pcPos[2] = pc->zPosition;
-   pcAngle = pc->orientationY;
+   pcPos[0] = pc->scNode->getPosX();
+   pcPos[1] = pc->scNode->getPosY();
+   pcPos[2] = pc->scNode->getPosZ();
+   pcAngle = pc->scNode->getAngleY();
 
    /* Save to the header file */
    
@@ -308,13 +308,10 @@ bool saveFile::load(void* curEngine)
       character* pc = eng->PCs->getActiveCharacter();      
       if(pc)
       {
-         pc->xPosition = pcPos[0];
-         pc->yPosition = pcPos[1];
-         pc->zPosition = pcPos[2];
-         pc->orientationY = pcAngle;
+         pc->scNode->set(pcPos[0], pcPos[1], pcPos[2], 0.0f, pcAngle, 0.0f);
          Map* actualMap = eng->getCurrentMap();
-         int posX =(int)floor(pc->xPosition / actualMap->squareSize());
-         int posZ =(int)floor(pc->zPosition / actualMap->squareSize());
+         int posX =(int)floor(pcPos[0] / actualMap->squareSize());
+         int posZ =(int)floor(pcPos[2] / actualMap->squareSize());
          pc->ocSquare = actualMap->relativeSquare(posX,posZ);
          pc->updateHealthBar();
       }

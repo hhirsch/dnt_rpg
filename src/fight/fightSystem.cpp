@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -140,8 +140,8 @@ bool fightSystem::hasEnemies(character* pers)
    for(i=0; i < FIGHT_MAX_NPC_GROUPS; i++)
    {
        if( ((!isNPC) || (pers->actualFightGroup != i) ) &&
-           (npcGroups[i].anyoneIsAliveAndInRange(true, pers->xPosition,
-                                                 pers->zPosition)) )
+           (npcGroups[i].anyoneIsAliveAndInRange(true, pers->scNode->getPosX(),
+                                                 pers->scNode->getPosZ())) )
        {
            //TODO verify if npc group is evil or not to PC.
            /* at last one enemy NPC is alive */
@@ -196,10 +196,10 @@ void fightSystem::verifyDeads()
       modif.mapCharacterAddAction(MODSTATE_ACTION_CHARACTER_DEAD,
                                   currentEnemy->getCharacterFile(),
                                   mapFileName, 
-                                  currentEnemy->xPosition,
-                                  currentEnemy->yPosition,
-                                  currentEnemy->zPosition,
-                                  currentEnemy->orientationY,
+                                  currentEnemy->scNode->getPosX(),
+                                  currentEnemy->scNode->getPosY(),
+                                  currentEnemy->scNode->getPosZ(),
+                                  currentEnemy->scNode->getAngleY(),
                                   currentEnemy->initialXPosition,
                                   currentEnemy->initialZPosition);
 
@@ -236,9 +236,9 @@ void fightSystem::verifyDeads()
 
                messageController msg;
                sprintf(buf, "%d XP", xp);
-               msg.addMessage(actualActor->xPosition, 
-                              actualActor->yPosition + actualActor->max[1],
-                              actualActor->zPosition, 
+               msg.addMessage(actualActor->scNode->getPosX(), 
+                              actualActor->scNode->getBoundingBox().y2,
+                              actualActor->scNode->getPosZ(), 
                               buf, 1.0f,0.6f,0.0f);
             }
          }
@@ -271,7 +271,7 @@ int fightSystem::doTurn()
       {
          /* Put the actor at idle state */
          pendingAnimation = false;
-         actualActor->setState(STATE_IDLE);
+         actualActor->scNode->getModel()->setState(STATE_IDLE);
 
          verifyDeads();
 
@@ -299,7 +299,7 @@ int fightSystem::doTurn()
                 ( (!isPC(actualActor)) && 
                   ( (actualActor->getPsychoState() != PSYCHO_HOSTILE) ||
                     (!pcGroups[0].anyoneIsAliveAndInRange(false, 
-                         actualActor->xPosition, actualActor->zPosition,
+                         actualActor->scNode->getPosX(), actualActor->scNode->getPosZ(),
                          2*DNT_BATTLE_RANGE) ) ) ))
          {
             /* Verify pcs */
@@ -332,7 +332,7 @@ int fightSystem::doTurn()
          }
 
          /* Set its state to IDLE */
-         actualActor->setState(STATE_IDLE);
+         actualActor->scNode->getModel()->setState(STATE_IDLE);
 
          /* Clear its actions! */
          actualActor->setCanAttack(true);
@@ -447,18 +447,18 @@ character* fightSystem::getNearestEnemy(character* pers)
          ch = pcGroups[group].getNearestEnemy(pers);
          if( (enemy == NULL) && (ch != NULL) )
          {
-            acDist = sqrt( (ch->xPosition - pers->xPosition) *
-                           (ch->xPosition - pers->xPosition) +
-                           (ch->zPosition - pers->zPosition) *
-                           (ch->zPosition - pers->zPosition) );
+            acDist = sqrt( (ch->scNode->getPosX() - pers->scNode->getPosX()) *
+                           (ch->scNode->getPosX() - pers->scNode->getPosX()) +
+                           (ch->scNode->getPosZ() - pers->scNode->getPosZ()) *
+                           (ch->scNode->getPosZ() - pers->scNode->getPosZ()) );
             enemy = ch;
          }
          else if(ch != NULL)
          {
-            dist = sqrt( (ch->xPosition - pers->xPosition) *
-                         (ch->xPosition - pers->xPosition) +
-                         (ch->zPosition - pers->zPosition) *
-                         (ch->zPosition - pers->zPosition) );
+            dist = sqrt( (ch->scNode->getPosX() - pers->scNode->getPosX()) *
+                         (ch->scNode->getPosX() - pers->scNode->getPosX()) +
+                         (ch->scNode->getPosZ() - pers->scNode->getPosZ()) *
+                         (ch->scNode->getPosZ() - pers->scNode->getPosZ()) );
             if(dist < acDist)
             {
                acDist = dist;
@@ -478,18 +478,18 @@ character* fightSystem::getNearestEnemy(character* pers)
          ch = npcGroups[group].getNearestEnemy(pers);
          if( (enemy == NULL) && (ch != NULL) )
          {
-            acDist = sqrt( (ch->xPosition - pers->xPosition) *
-                           (ch->xPosition - pers->xPosition) +
-                           (ch->zPosition - pers->zPosition) *
-                           (ch->zPosition - pers->zPosition) );
+            acDist = sqrt( (ch->scNode->getPosX() - pers->scNode->getPosX()) *
+                           (ch->scNode->getPosX() - pers->scNode->getPosX()) +
+                           (ch->scNode->getPosZ() - pers->scNode->getPosZ()) *
+                           (ch->scNode->getPosZ() - pers->scNode->getPosZ()) );
             enemy = ch;
          }
          else if(ch != NULL)
          {
-            dist = sqrt( (ch->xPosition - pers->xPosition) *
-                         (ch->xPosition - pers->xPosition) +
-                         (ch->zPosition - pers->zPosition) *
-                         (ch->zPosition - pers->zPosition) );
+            dist = sqrt( (ch->scNode->getPosX() - pers->scNode->getPosX()) *
+                         (ch->scNode->getPosX() - pers->scNode->getPosX()) +
+                         (ch->scNode->getPosZ() - pers->scNode->getPosZ()) *
+                         (ch->scNode->getPosZ() - pers->scNode->getPosZ()) );
             if(dist < acDist)
             {
                acDist = dist;

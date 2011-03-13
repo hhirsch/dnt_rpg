@@ -691,20 +691,22 @@ void particleSystem::updateByCharacter()
    {
       case DNT_PARTICLE_SYSTEM_FOLLOW_HEAD:
       {
-         if(chr->head.vertexId != -1)
+         if(chr->scNode->getModel()->head.vertexId != -1)
          {
             /* head bone defined, so put particle system origin there */
-            definePosition(chr->head.x, chr->head.y, chr->head.z);
+            definePosition(chr->scNode->getModel()->head.x, 
+                           chr->scNode->getModel()->head.y, 
+                           chr->scNode->getModel()->head.z);
          }
          else
          {
-             definePosition(chr->xPosition, chr->zPosition);
+             definePosition(chr->scNode->getPosX(), chr->scNode->getPosZ());
          }
       }
       break;
       case DNT_PARTICLE_SYSTEM_FOLLOW_PC:
       {
-         definePosition(chr->xPosition, chr->zPosition);
+         definePosition(chr->scNode->getPosX(), chr->scNode->getPosZ());
       }
       break;
    }

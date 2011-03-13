@@ -30,7 +30,7 @@
 /**********************************************************************
  *                            Constructor                             *
  **********************************************************************/
-aniModel::aniModel():thing()
+aniModel::aniModel()
 {
    int i;
 
@@ -122,13 +122,14 @@ GLuint aniModel::loadTexture(const string& strFilename)
 /*********************************************************************
  *                        calculateBoundingBox                       *
  *********************************************************************/
-void aniModel::calculateBoundingBox()
+void aniModel::calculateCrudeBoundingBox()
 {
   m_calModel->getSkeleton()->calculateBoundingBoxes();
 
   GLuint aux, aux2;
   int computed = 0;
   CalVector p[8];
+  float min[3], max[3];
 
   CalSkeleton *pCalSkeleton = m_calModel->getSkeleton();
 
@@ -175,6 +176,16 @@ void aniModel::calculateBoundingBox()
      max[aux] *= m_renderScale;
   }
 
+   crudeBox.setMin(min);
+   crudeBox.setMax(max);
+}
+
+/*********************************************************************
+ *                       getCrudeBoundingBox                         *
+ *********************************************************************/
+boundingBox aniModel::getCrudeBoundingBox()
+{
+   return(crudeBox);
 }
 
 /*********************************************************************
@@ -731,7 +742,8 @@ void aniModel::render()
 /*********************************************************************
  *                             RenderShadow                          *
  *********************************************************************/
-void aniModel::renderShadow(GLfloat* shadowMatrix, float alpha)
+void aniModel::renderShadow(float pX, float pY, float pZ, float angleX,
+            float angleY, float angleZ, GLfloat* shadowMatrix, float alpha)
 {
    /* Set Changes */
    glEnable(GL_BLEND);
@@ -750,10 +762,10 @@ void aniModel::renderShadow(GLfloat* shadowMatrix, float alpha)
    glPushMatrix();
       glMultMatrixf(shadowMatrix);
       glPushMatrix();
-         glTranslatef(xPosition, yPosition, zPosition);
-         glRotatef(orientationZ,0.0f,0.0f,1.0f);
-         glRotatef(orientationX,1.0f,0.0f,0.0f);
-         glRotatef(orientationY,0.0f,1.0f,0.0f);
+         glTranslatef(pX, pY, pZ);
+         glRotatef(angleZ,0.0f,0.0f,1.0f);
+         glRotatef(angleX,1.0f,0.0f,0.0f);
+         glRotatef(angleY,0.0f,1.0f,0.0f);
          renderFromGraphicMemory();
      glPopMatrix();
    glPopMatrix();
@@ -765,15 +777,6 @@ void aniModel::renderShadow(GLfloat* shadowMatrix, float alpha)
    glEnable(GL_TEXTURE_2D);
    glDisable(GL_BLEND);
    glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-}
-
-/*********************************************************************
- *                           renderReflexion                         *
- *********************************************************************/
-void aniModel::renderReflexion()
-{
-   renderReflexion(xPosition, yPosition, zPosition, 
-         orientationX, orientationY, orientationZ);
 }
 
 /*********************************************************************
@@ -849,13 +852,13 @@ int aniModel::getState()
 /*********************************************************************
  *                                update                             *
  *********************************************************************/
-void aniModel::update(GLfloat pos)
+void aniModel::update(GLfloat pos, float angleY, float pX, float pY, float pZ)
 {
    curPos = pos;
    m_calModel->update(pos);
-   updateKeyVertex(leftHand);
-   updateKeyVertex(rightHand);
-   updateKeyVertex(head);
+   updateKeyVertex(leftHand, angleY, pX, pY, pZ);
+   updateKeyVertex(rightHand, angleY, pX, pY, pZ);
+   updateKeyVertex(head, angleY, pX, pY, pZ);
 }
 
 /*********************************************************************
@@ -958,11 +961,12 @@ void aniModel::defineKeyVertex()
 /*********************************************************************
  *                          updateKeyVertex                          *
  *********************************************************************/
-void aniModel::updateKeyVertex(vertexInfo& v)
+void aniModel::updateKeyVertex(vertexInfo& v, 
+      float angleY, float pX, float pY, float pZ)
 {
    /* Calculate the sin and cos of the angle */
-   float angleSin = sinf(deg2Rad(orientationY));
-   float angleCos = cosf(deg2Rad(orientationY));
+   float angleSin = sinf(deg2Rad(angleY));
+   float angleCos = cosf(deg2Rad(angleY));
    
    /* Get the model renderer */ 
    pCalRenderer = m_calModel->getRenderer();
@@ -985,11 +989,11 @@ void aniModel::updateKeyVertex(vertexInfo& v)
       /* Translate and rotate the coordinates.
        * NOTE: Do not forget that if the blender coordinate system is
        * (x,y,z), the DNT system is (-x,z,y) */
-      v.x = xPosition + 
+      v.x = pX + 
             ((-meshVertices[v.vertexId][0])*angleCos*m_renderScale) +
             ((meshVertices[v.vertexId][1])*angleSin*m_renderScale);
-      v.y = yPosition + meshVertices[v.vertexId][2]*m_renderScale;
-      v.z = zPosition + 
+      v.y = pY + meshVertices[v.vertexId][2]*m_renderScale;
+      v.z = pZ + 
             ((meshVertices[v.vertexId][0]*angleSin*m_renderScale)) +
             ((meshVertices[v.vertexId][1]*angleCos*m_renderScale));
    }
@@ -1006,9 +1010,9 @@ void aniModel::updateKeyVertex(vertexInfo& v)
  *                           depthColision                           *
  *********************************************************************/
 bool aniModel::depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ,
-      GLfloat pX, GLfloat pY, GLfloat pZ,
-      GLfloat colMin[3],GLfloat colMax[3])
+      GLfloat pX, GLfloat pY, GLfloat pZ, boundingBox colBox)
 {
+   /* TODO: apply angleX and angleZ */
    /* Calculate the sin and cos of the angle */
    float angleSin = sinf(deg2Rad(angleY));
    float angleCos = cosf(deg2Rad(angleY));
@@ -1101,17 +1105,17 @@ bool aniModel::depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ,
                /* Bounding Box Faces */
 
                /* Upper Face A */
-               U0[0] = colMin[0];
-               U0[1] = colMax[1];   
-               U0[2] = colMin[2];
+               U0[0] = colBox.x1;
+               U0[1] = colBox.y2;   
+               U0[2] = colBox.z1;
                
-               U1[0] = colMax[0];
-               U1[1] = colMax[1];
-               U1[2] = colMin[2];
+               U1[0] = colBox.x2;
+               U1[1] = colBox.y2;
+               U1[2] = colBox.z1;
 
-               U2[0] = colMin[0];
-               U2[1] = colMax[1];
-               U2[2] = colMax[2];
+               U2[0] = colBox.x1;
+               U2[1] = colBox.y2;
+               U2[2] = colBox.z2;
 
                if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
                {
@@ -1120,9 +1124,9 @@ bool aniModel::depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ,
                }
 
                /* Upper Face B */
-               U0[0] = colMax[0];
-               U0[1] = colMax[1];
-               U0[2] = colMax[2];
+               U0[0] = colBox.x2;
+               U0[1] = colBox.y2;
+               U0[2] = colBox.z2;
                //U1 = same as upper face A
                //U2 = same as upper face A
                
@@ -1134,17 +1138,17 @@ bool aniModel::depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ,
                }
 
                /* Lower Face A */
-               U0[0] = colMin[0];
-               U0[1] = colMin[1];   
-               U0[2] = colMin[2];
+               U0[0] = colBox.x1;
+               U0[1] = colBox.y1;   
+               U0[2] = colBox.z1;
                
-               U1[0] = colMax[0];
-               U1[1] = colMin[1];
-               U1[2] = colMin[2];
+               U1[0] = colBox.x2;
+               U1[1] = colBox.y1;
+               U1[2] = colBox.z1;
 
-               U2[0] = colMin[0];
-               U2[1] = colMin[1];
-               U2[2] = colMax[2];
+               U2[0] = colBox.x1;
+               U2[1] = colBox.y1;
+               U2[2] = colBox.z2;
 
                if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
                {
@@ -1153,9 +1157,9 @@ bool aniModel::depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ,
                }
 
                /* Lower Face B */
-               U0[0] = colMax[0];
-               U0[1] = colMin[1];
-               U0[2] = colMax[2];
+               U0[0] = colBox.x2;
+               U0[1] = colBox.y1;
+               U0[2] = colBox.z2;
                //U1 = same as lower face A
                //U2 = same as lower face A
                
@@ -1168,17 +1172,17 @@ bool aniModel::depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ,
 
                
                /* Left Face A */
-               U0[0] = colMin[0];
-               U0[1] = colMin[1];   
-               U0[2] = colMin[2];
+               U0[0] = colBox.x1;
+               U0[1] = colBox.y1;   
+               U0[2] = colBox.z1;
                
-               U1[0] = colMin[0];
-               U1[1] = colMin[1];
-               U1[2] = colMax[2];
+               U1[0] = colBox.x1;
+               U1[1] = colBox.y1;
+               U1[2] = colBox.z2;
 
-               U2[0] = colMin[0];
-               U2[1] = colMax[1];
-               U2[2] = colMin[2];
+               U2[0] = colBox.x1;
+               U2[1] = colBox.y2;
+               U2[2] = colBox.z1;
 
                if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
                {
@@ -1187,9 +1191,9 @@ bool aniModel::depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ,
                }
 
                /* Left Face B */
-               U0[0] = colMin[0];
-               U0[1] = colMax[1];
-               U0[2] = colMax[2];
+               U0[0] = colBox.x1;
+               U0[1] = colBox.y2;
+               U0[2] = colBox.z2;
                //U1 = same as left face A
                //U2 = same as left face A
 
@@ -1200,17 +1204,17 @@ bool aniModel::depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ,
                }
 
                /* Right Face A */
-               U0[0] = colMax[0];
-               U0[1] = colMin[1];   
-               U0[2] = colMin[2];
+               U0[0] = colBox.x2;
+               U0[1] = colBox.y1;   
+               U0[2] = colBox.z1;
                
-               U1[0] = colMax[0];
-               U1[1] = colMin[1];
-               U1[2] = colMax[2];
+               U1[0] = colBox.x2;
+               U1[1] = colBox.y1;
+               U1[2] = colBox.z2;
 
-               U2[0] = colMax[0];
-               U2[1] = colMax[1];
-               U2[2] = colMin[2];
+               U2[0] = colBox.x2;
+               U2[1] = colBox.y2;
+               U2[2] = colBox.z1;
 
                if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
                {
@@ -1219,9 +1223,9 @@ bool aniModel::depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ,
                }
 
                /* Right Face B */
-               U0[0] = colMax[0];
-               U0[1] = colMax[1];
-               U0[2] = colMax[2];
+               U0[0] = colBox.x2;
+               U0[1] = colBox.y2;
+               U0[2] = colBox.z2;
                //U1 = same as right face A
                //U2 = same as right face A
 
@@ -1233,17 +1237,17 @@ bool aniModel::depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ,
 
             
                /* Front Face A */
-               U0[0] = colMin[0];
-               U0[1] = colMin[1];   
-               U0[2] = colMin[2];
+               U0[0] = colBox.x1;
+               U0[1] = colBox.y1;   
+               U0[2] = colBox.z1;
                
-               U1[0] = colMax[0];
-               U1[1] = colMin[1];
-               U1[2] = colMin[2];
+               U1[0] = colBox.x2;
+               U1[1] = colBox.y1;
+               U1[2] = colBox.z1;
 
-               U2[0] = colMin[0];
-               U2[1] = colMax[1];
-               U2[2] = colMin[2];
+               U2[0] = colBox.x1;
+               U2[1] = colBox.y2;
+               U2[2] = colBox.z1;
 
                if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
                {
@@ -1252,9 +1256,9 @@ bool aniModel::depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ,
                }
 
                /* Front Face B */
-               U0[0] = colMax[0];
-               U0[1] = colMax[1];
-               U0[2] = colMin[2];
+               U0[0] = colBox.x2;
+               U0[1] = colBox.y2;
+               U0[2] = colBox.z1;
                //U1 = same as front face A
                //U2 = same as front face A
 
@@ -1265,17 +1269,17 @@ bool aniModel::depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ,
                }
 
                /* Back Face A */
-               U0[0] = colMin[0];
-               U0[1] = colMin[1];   
-               U0[2] = colMax[2];
+               U0[0] = colBox.x1;
+               U0[1] = colBox.y1;   
+               U0[2] = colBox.z2;
                
-               U1[0] = colMax[0];
-               U1[1] = colMin[1];
-               U1[2] = colMax[2];
+               U1[0] = colBox.x2;
+               U1[1] = colBox.y1;
+               U1[2] = colBox.z2;
 
-               U2[0] = colMin[0];
-               U2[1] = colMax[1];
-               U2[2] = colMax[2];
+               U2[0] = colBox.x1;
+               U2[1] = colBox.y2;
+               U2[2] = colBox.z2;
 
                if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
                {
@@ -1284,9 +1288,9 @@ bool aniModel::depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ,
                }
 
                /* Back Face B */
-               U0[0] = colMax[0];
-               U0[1] = colMax[1];
-               U0[2] = colMax[2];
+               U0[0] = colBox.x2;
+               U0[1] = colBox.y2;
+               U0[2] = colBox.z2;
                //U1 = same as back face A
                //U2 = same as back face A
 

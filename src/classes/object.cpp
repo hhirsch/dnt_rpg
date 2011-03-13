@@ -27,6 +27,7 @@
 #include "../engine/util.h"
 #include "../etc/dirs.h"
 #include "../etc/defparser.h"
+#include "../etc/scene.h"
 #include "../lang/translate.h"
 
 #include <iostream>
@@ -94,13 +95,13 @@ int getObjectTypeId(string type)
  **************************************************************/
 object::object(string path, string curMap): thing()
 {
-   modelList mdlList;
-   string cal3DFile = "";
+   scene curScene;
    int aux;
    dirs dir;
    int diceId;
    int numberOfDices;
    int sumNumber;
+   cal3dName = "";
 
    /* Initial Values */
    cleanValues();
@@ -138,7 +139,7 @@ object::object(string path, string curMap): thing()
       }
       else if(key == "cal3d")
       {
-         cal3DFile = value;
+         cal3dName = value;
       }
       else if(key == "type")
       {
@@ -240,10 +241,9 @@ object::object(string path, string curMap): thing()
    }
 
    /* Load/Get Cal3D Model */
-   if(!cal3DFile.empty())
+   if(!cal3dName.empty())
    {
-      model3D = mdlList.addModel(cal3DFile,"", staticScenery);
-      model3D->incUsed();
+      scNode = curScene.createSceneNode(staticScenery, cal3dName, 0,0,0,0,0,0);
    }
    else
    {
@@ -259,6 +259,8 @@ object::object(string path, string curMap): thing()
  **************************************************************/
 object::object(object* obj): thing()
 {
+   scene curScene;
+
    /* First, clean */
    cleanValues();
 
@@ -279,8 +281,9 @@ object::object(object* obj): thing()
    model2d = IMG_Load(model2dName.c_str());
 
    /* Define 3D Model */
-   model3D = obj->model3D;
-   model3D->incUsed();
+   staticScenery = obj->staticScenery;
+   cal3dName = obj->cal3dName;
+   scNode = curScene.createSceneNode(staticScenery, cal3dName, 0,0,0,0,0,0);
 
    /* Define some Points */
    maxLifePoints = obj->maxLifePoints;
@@ -310,6 +313,39 @@ object::object(string path): thing()
 }
 
 /**************************************************************
+ *                       removeSceneNode                      *
+ **************************************************************/
+void object::removeSceneNode()
+{
+   scene curScene;
+
+   if(scNode)
+   {
+      curScene.deleteSceneNode(scNode);
+      scNode = NULL;
+   }
+}
+
+/**************************************************************
+ *                       createSceneNode                      *
+ **************************************************************/
+void object::createSceneNode(float pX, float pY, float pZ,
+                             float aX, float aY, float aZ)
+{
+   scene curScene;
+   /* Create or update the current scene node */
+   if(scNode)
+   {
+      /* Just update it */
+      scNode->set(pX, pY, pZ, aX, aY, aZ);
+   }
+   else
+   {
+      scNode = curScene.createSceneNode(staticScenery, cal3dName, 0,0,0,0,0,0);
+   }
+}
+
+/**************************************************************
  *                         cleanValues                        *
  **************************************************************/
 void object::cleanValues()
@@ -332,7 +368,7 @@ void object::cleanValues()
    relatedInfo = "";
    model2dName = "";
    model2d = NULL;
-   model3D = NULL;
+   scNode = NULL;
    type = OBJECT_TYPE_GENERIC;
    maxLifePoints = 0;
    lifePoints = 0;
@@ -348,9 +384,9 @@ void object::cleanValues()
  *                          Destructor                        *
  **************************************************************/
 object::~object()
-{
-   /* Decrement Model3D Usage */
-   model3D->decUsed();
+{ 
+   /* Remove the scene node, if any */
+   removeSceneNode();
 
    /* Delete the model 2D used 
     * TODO something like model3d for model2d */
@@ -396,28 +432,6 @@ void object::setPrevious(object* o)
 }
 
 /**************************************************************
- *                            draw                            *
- **************************************************************/
-void object::draw(bool inverted)
-{
-   /* Draw the defined model */
-   glEnable(GL_COLOR_MATERIAL);
-   glPushMatrix();
-      glTranslatef(xPosition, (inverted?-yPosition:yPosition), zPosition);
-      glRotatef(orientationZ,0,0,1);
-      glRotatef(orientationX,1,0,0);
-      glRotatef(orientationY,0,1,0);
-      if(inverted)
-      {
-         glScalef(1.0, -1.0, 1.0);
-      }
-      model3D->update(WALK_UPDATE);
-      model3D->draw();
-   glPopMatrix();
-   glDisable(GL_COLOR_MATERIAL);
-}
-
-/**************************************************************
  *                        equippedMods                        *
  **************************************************************/
 void object::equippedTransforms(int type)
@@ -444,6 +458,8 @@ void object::renderEquipped(int type, float pX, float pY,
       bool reflexion, bool shadow, 
       GLfloat* shadowMatrix, float shadowAlpha)
 {
+   /* FIXME! */
+#if 0
    /* Update model (if animated) */
    model3D->update(WALK_UPDATE);
 
@@ -509,6 +525,7 @@ void object::renderEquipped(int type, float pX, float pY,
 
    /* Remove it from graphic's memory */
    model3D->removeFromGraphicMemory();
+#endif
 }
 
 /**************************************************************
@@ -522,14 +539,6 @@ void object::draw2D(int x, int y, SDL_Surface* surface)
    ret.w = model2d->w;
    ret.h = model2d->h;
    SDL_BlitSurface(model2d, NULL, surface, &ret);
-}
-
-/**************************************************************
- *                       getBoundingBox                       *
- **************************************************************/
-boundingBox object::getBoundingBox()
-{
-   return(model3D->getBoundingBox());
 }
 
 /**************************************************************
@@ -655,26 +664,6 @@ string object::get2dModelName()
 }
 
 /*********************************************************************
- *                            get3dModel                             *
- *********************************************************************/
-model3d* object::get3dModel()
-{
-   return(model3D);
-}
-
-/*********************************************************************
- *                         addRenderPosition                         *
- *********************************************************************/
-void object::addRenderPosition(float x, float y, float z, 
-      float angle, float angleX, float angleZ)
-{
-   if( (staticScenery) && (model3D))
-   {
-      model3D->addPosition(x,y,z,angle, angleX, angleZ);
-   }
-}
-
-/*********************************************************************
  *                           callDeadAnimation                       *
  *********************************************************************/
 void object::callDeadAnimation()
@@ -705,12 +694,12 @@ void object::callIdleAnimation()
  *                            depthCollision                         *
  *********************************************************************/
 bool object::depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ, 
-      GLfloat pX, GLfloat pY, GLfloat pZ, GLfloat colMin[3], GLfloat colMax[3])
+      GLfloat pX, GLfloat pY, GLfloat pZ, boundingBox colBox)
 {
-   if(model3D)
+   if(scNode)
    {
-      return(model3D->depthCollision(angleX,angleY,angleZ, 
-               pX,pY,pZ,colMin,colMax));
+      return(scNode->getModel()->depthCollision(angleX,angleY,angleZ, 
+               pX,pY,pZ,colBox));
    }
    /* If no model, no collision =^P */
    return(false);
@@ -837,15 +826,14 @@ object* objectsList::search(string fileName, GLfloat posX, GLfloat posY,
    {
       if(cur->getFileName() == fileName)
       {
-         if(cur->isStaticScenery())
+         if(!cur->scNode)
          {
-            /* static sceneries always use the same object pointer,
-             * so it is found! */
-            return(cur);
+            /* FIXME: !!  */
+            cerr << "Without scNode!!!" << endl;
          }
-         else if( (cur->xPosition == posX) && 
-                  (cur->yPosition == posY) &&
-                  (cur->zPosition == posZ) )
+         else if( (cur->scNode->getPosX() == posX) && 
+                  (cur->scNode->getPosY() == posY) &&
+                  (cur->scNode->getPosZ() == posZ) )
          {
             /* same name, at the same position, it's the same! */
             return(cur);

@@ -79,7 +79,7 @@ money.o: money.h money.cpp object.h thing.h
 	@$(CPP) $(CFLAGS) money.cpp -o money.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-object.o: object.cpp object.h thing.h $(ENDETC)modellist.h
+object.o: object.cpp object.h thing.h $(ENDETC)scene.h $(ENDETC)scenenode.h
 	@printf "Making object.o... "
 	@$(CC) $(CFLAGS) object.cpp -o object.o
 	@printf "\e[0;32mDone.\e[0;0m\n"

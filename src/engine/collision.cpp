@@ -56,87 +56,69 @@ void collision::defineMap(Map* usedMap, characterList* npcs,
 /*********************************************************************
  *                           verifySquare                            *
  *********************************************************************/
-bool collision::verifySquare(GLfloat min[3], GLfloat max[3], Square* quad,
+bool collision::verifySquare(boundingBox& actorBox, Square* quad,
                              GLfloat& varHeight, GLfloat curHeight)
 {
-   GLfloat min2[3];
-   GLfloat max2[3];
+   boundingBox colBox;
 
    Square* proxima = quad;
    if(!(proxima->flags & SQUARE_CAN_WALK))
    {
+     /* Can't walk on square, collision! */
      return(false);
    }
-   
+
    /* test with walls */
+   int mur = 0;
+   while((mur < MAX_WALLS ) && (proxima->walls[mur] != NULL))
    {
-      int mur = 0;
-      while((mur < MAX_WALLS ) && (proxima->walls[mur] != NULL))
+      colBox.setMin(proxima->walls[mur]->x1, 0, proxima->walls[mur]->z1);
+      colBox.setMax(proxima->walls[mur]->x2, WALL_HEIGHT, 
+            proxima->walls[mur]->z2);
+      if(actorBox.intercepts(colBox))
       {
-         min2[0] = proxima->walls[mur]->x1; 
-         min2[1] = 0; 
-         min2[2] = proxima->walls[mur]->z1;
-         max2[0] = proxima->walls[mur]->x2; 
-         max2[1] = WALL_HEIGHT; 
-         max2[2] = proxima->walls[mur]->z2;
-         if(intercepts(min,max,min2,max2))
-         {
-           return(false);
-         }
-         mur++;
+         return(false);
       }
+      mur++;
    }
+
    /* test with objects */
+   int ob = 0;
+   objSquare* sobj = proxima->getFirstObject();
+   while( (ob < proxima->getTotalObjects())) 
    {
-      int ob = 0;
-      boundingBox bounding;
-      GLfloat X[4], Z[4];
-      objSquare* sobj = proxima->getFirstObject();
-      while( (ob < proxima->getTotalObjects())) 
+      if(sobj->colision)
       {
-        if(sobj->colision)
-        {
-          bounding = sobj->obj->getBoundingBox();
-          X[0] = bounding.x1;
-          Z[0] = bounding.z1;
-          X[1] = bounding.x1;
-          Z[1] = bounding.z2;
-          X[2] = bounding.x2;
-          Z[2] = bounding.z2;
-          X[3] = bounding.x2;
-          Z[3] = bounding.z1;
-          
-          rotTransBoundingBox(sobj->angleY, X, Z, sobj->x, 
-                              sobj->y+bounding.y1, 
-                              sobj->y+bounding.y2, sobj->z, min2, max2);
-          if(intercepts(min,max,min2,max2))
-          {
-             /* If the bounding boxes intercepts, we'll need to do a more 
-              * depth collision verify, so it is */
-             if(sobj->obj->depthCollision(sobj->angleX, sobj->angleY,
-                                          sobj->angleZ, sobj->x, 
-                                          sobj->y +
-                                          actualMap->getHeight(sobj->x,sobj->z),
-                                          sobj->z,min,max))
-             {
-                /* So if the depth collision is true, verify if can go up
-                 * the position. if can't, the position is 'unwalkable' now! */
-                if( ((bounding.y2+sobj->y) - curHeight) <= 1.5)
-                {
-                   /* Can walk above the object */
-                   varHeight = ((bounding.y2+sobj->y)>varHeight)?
-                                                  bounding.y2+sobj->y:varHeight;
-                }
-                else
-                {
-                   return(false);
-                }
-             }
-          }
-        }
-        ob++;
-        sobj = (objSquare*)sobj->getNext();
+         /* Get Bounding box */
+         colBox = sobj->obj->scNode->getBoundingBox();
+
+         if(actorBox.intercepts(colBox))
+         {
+            /* If the bounding boxes intercepts, we'll need to do a more 
+             * depth collision verify, so it is */
+            if(sobj->obj->depthCollision(sobj->angleX, sobj->angleY,
+                     sobj->angleZ, sobj->x, 
+                     sobj->y +
+                     actualMap->getHeight(sobj->x,sobj->z),
+                     sobj->z, actorBox))
+            {
+               /* So if the depth collision is true, verify if can go up
+                * the position. if can't, the position is 'unwalkable' now! */
+               if( ((colBox.y2 + sobj->y) - curHeight) <= 1.5)
+               {
+                  /* Can walk above the object */
+                  varHeight = ((colBox.y2+sobj->y)>varHeight)?
+                     colBox.y2+sobj->y:varHeight;
+               }
+               else
+               {
+                  return(false);
+               }
+            }
+         }
       }
+      ob++;
+      sobj = (objSquare*)sobj->getNext();
    }
 
    return(true);
@@ -153,6 +135,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
    bool result = true;
    int i, j;
    Square* saux;
+   boundingBox actorBox, colBox;
 
    varHeight = 0.0;
 
@@ -166,21 +149,16 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
    GLfloat perX = varX;
    GLfloat perY = varY;
    GLfloat perZ = varZ;
-   GLfloat perOrientation = actor->orientationY + varAlpha;
+   GLfloat perOrientation = actor->scNode->getAngleY() + varAlpha;
    Square* perQuad = NULL;
 
    if(usePosition)
    {
-      perX += actor->xPosition;
-      perY += actor->yPosition;
-      perZ += actor->zPosition;
+      perX += actor->scNode->getPosX();
+      perY += actor->scNode->getPosY();
+      perZ += actor->scNode->getPosZ();
       perQuad = actor->ocSquare;
    }
-
-   GLfloat min[3],min2[3];
-   GLfloat max[3],max2[3];
-
-   GLfloat x[4],z[4];
 
    if(!actualMap)
    {
@@ -199,27 +177,15 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
       }
    }
 
-
-   x[0] = actor->min[0];
-   z[0] = actor->min[2];
-
-   x[1] = actor->min[0];
-   z[1] = actor->max[2]; 
-
-   x[2] = actor->max[0];
-   z[2] = actor->max[2];
-
-   x[3] = actor->max[0];
-   z[3] = actor->min[2];
-
-   /* Rotate and translate the Bounding Box */
-   rotTransBoundingBox(perOrientation, x, z, perX, actor->min[1] + perY, 
-                       actor->max[1] + perY, perZ, min, max );
+   /* Calculate the bounding box of the actor at the new position */
+   actorBox = actor->scNode->getModel()->getCrudeBoundingBox();
+   actorBox.rotate(0.0f, perOrientation, 0.0f);
+   actorBox.translate(perX, perY, perZ);
 
    /* Test map limits */
-   if( (min[0]<2) || (min[2]<2) || 
-       (max[0]>actualMap->getSizeX()*actualMap->squareSize()-2) || 
-       (max[2]>actualMap->getSizeZ()*actualMap->squareSize()-2))
+   if( (actorBox.x1 < 2) || (actorBox.z1 < 2) || 
+       (actorBox.x2 > actualMap->getSizeX()*actualMap->squareSize()-2) || 
+       (actorBox.z2 > actualMap->getSizeZ()*actualMap->squareSize()-2))
    {
       return(false);
    }
@@ -228,24 +194,8 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
    door* door1 = actualMap->getFirstDoor();
    for(i=0; i < actualMap->getTotalDoors(); i++)
    {
-      GLfloat minObj[3], maxObj[3];
-      boundingBox boundPorta = door1->obj->getBoundingBox();
-      GLfloat XA[4]; GLfloat ZA[4];
-      XA[0] = boundPorta.x1;
-      ZA[0] = boundPorta.z1;
-
-      XA[1] = boundPorta.x1;
-      ZA[1] = boundPorta.z2; 
-
-      XA[2] = boundPorta.x2;
-      ZA[2] = boundPorta.z2;
-
-      XA[3] = boundPorta.x2;
-      ZA[3] = boundPorta.z1;
-      rotTransBoundingBox(door1->orientation+door1->delta, XA, ZA,
-                          door1->x, 0.0,0.0,door1->z, 
-                          minObj, maxObj);
-      if(intercepts( min, max, minObj, maxObj))
+      colBox = door1->obj->scNode->getBoundingBox();
+      if(actorBox.intercepts(colBox))
       {
          return(false);
       }
@@ -253,15 +203,12 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
    }
 
    /* Test the actual square, since is BIG ! */
-   min2[0] = perQuad->x1;
-   min2[1] = 0;
-   min2[2] = perQuad->z1;
-   max2[0] = perQuad->x2;
-   max2[1] = 400;
-   max2[2] = perQuad->z2;
-   if(intercepts(min,max,min2,max2))
+   colBox.setMin(perQuad->x1, 0, perQuad->z1);
+   colBox.setMax(perQuad->x2, 400, perQuad->z2);
+   if(actorBox.intercepts(colBox))
    {
-      result &= verifySquare(min,max,perQuad, varHeight, actor->yPosition);
+      result &= verifySquare(actorBox, perQuad, varHeight, 
+            actor->scNode->getPosY());
       if(!result)
       {
          return(false);
@@ -269,18 +216,17 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
    }
 
  
-   /* Test right walls */
+   /* Test near squares */
    saux = actualMap->relativeSquare(perQuad->posX+1, perQuad->posZ);
    if(saux) 
    { 
       /* lest */
-      min2[0] = saux->x1;
-      min2[2] = saux->z1;
-      max2[0] = saux->x2;
-      max2[2] = saux->z2;
-      if(intercepts(min,max,min2,max2) )
+      colBox.setMin(saux->x1, 0, saux->z1);
+      colBox.setMax(saux->x2, 400, saux->z2);
+      if(actorBox.intercepts(colBox) )
       {
-         result &= verifySquare(min,max,saux,varHeight, actor->yPosition);
+         result &= verifySquare(actorBox, saux,varHeight, 
+               actor->scNode->getPosY());
          if(!result)
          {
             return(false);
@@ -290,13 +236,12 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
       saux = actualMap->relativeSquare(perQuad->posX+1, perQuad->posZ-1);
       if( saux )
       {
-         min2[0] = saux->x1;
-         min2[2] = saux->z1;
-         max2[0] = saux->x2;
-         max2[2] = saux->z2;
-         if(intercepts(min,max,min2,max2) )
+         colBox.setMin(saux->x1, 0, saux->z1);
+         colBox.setMax(saux->x2, 400, saux->z2);
+         if(actorBox.intercepts(colBox) )
          {
-            result &= verifySquare(min,max,saux,varHeight, actor->yPosition);
+            result &= verifySquare(actorBox, saux,varHeight, 
+               actor->scNode->getPosY());
             if(!result) 
             {
                return(false);
@@ -307,13 +252,12 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
       saux = actualMap->relativeSquare(perQuad->posX+1, perQuad->posZ+1);
       if( saux )
       {
-         min2[0] = saux->x1;
-         min2[2] = saux->z1;
-         max2[0] = saux->x2;
-         max2[2] = saux->z2;
-         if(intercepts(min,max,min2,max2))
+         colBox.setMin(saux->x1, 0, saux->z1);
+         colBox.setMax(saux->x2, 400, saux->z2);
+         if(actorBox.intercepts(colBox) )
          {
-            result &= verifySquare(min,max,saux,varHeight, actor->yPosition);
+            result &= verifySquare(actorBox,saux,varHeight, 
+                  actor->scNode->getPosY());
             if(!result) 
             {
                return(false);
@@ -327,13 +271,12 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
    if( saux ) 
    { 
       /* west */
-      min2[0] = saux->x1;
-      min2[2] = saux->z1;
-      max2[0] = saux->x2;
-      max2[2] = saux->z2;
-      if(intercepts(min,max,min2,max2))
+      colBox.setMin(saux->x1, 0, saux->z1);
+      colBox.setMax(saux->x2, 400, saux->z2);
+      if(actorBox.intercepts(colBox) )
       {
-         result &= verifySquare(min,max,saux,varHeight, actor->yPosition);
+         result &= verifySquare(actorBox,saux,varHeight, 
+               actor->scNode->getPosY());
          if(!result) 
          {
             return(false);
@@ -344,13 +287,12 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
       saux = actualMap->relativeSquare(perQuad->posX-1, perQuad->posZ-1);
       if( saux )
       {
-         min2[0] = saux->x1;
-         min2[2] = saux->z1;
-         max2[0] = saux->x2;
-         max2[2] = saux->z2;
-         if(intercepts(min,max,min2,max2) )
+         colBox.setMin(saux->x1, 0, saux->z1);
+         colBox.setMax(saux->x2, 400, saux->z2);
+         if(actorBox.intercepts(colBox) )
          {
-            result &= verifySquare(min,max,saux,varHeight, actor->yPosition);
+            result &= verifySquare(actorBox,saux,varHeight, 
+                  actor->scNode->getPosY());
             if(!result) 
             {
                return(false);
@@ -360,14 +302,13 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
       /* Southest */
       saux = actualMap->relativeSquare(perQuad->posX-1, perQuad->posZ+1);
       if( saux )
-      { 
-         min2[0] = saux->x1;
-         min2[2] = saux->z1;
-         max2[0] = saux->x2;
-         max2[2] = saux->z2;
-         if(intercepts(min,max,min2,max2))
+      {
+         colBox.setMin(saux->x1, 0, saux->z1);
+         colBox.setMax(saux->x2, 400, saux->z2);
+         if(actorBox.intercepts(colBox) )
          {
-            result &=verifySquare(min,max,saux,varHeight, actor->yPosition);
+            result &=verifySquare(actorBox,saux,varHeight, 
+                  actor->scNode->getPosY());
             if(!result) 
             {
                return(false);
@@ -380,14 +321,13 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
    saux = actualMap->relativeSquare(perQuad->posX, perQuad->posZ+1);
    if( saux )
    {
-      min2[0] = saux->x1;
-      min2[2] = saux->z1;
-      max2[0] = saux->x2;
-      max2[2] = saux->z2;
-      if(intercepts(min,max,min2,max2) )
+      colBox.setMin(saux->x1, 0, saux->z1);
+      colBox.setMax(saux->x2, 400, saux->z2);
+      if(actorBox.intercepts(colBox) )
       { 
          /* south */
-         result &= verifySquare(min,max,saux,varHeight, actor->yPosition);
+         result &= verifySquare(actorBox,saux,varHeight, 
+               actor->scNode->getPosY());
          if(!result) 
          {
             return(false);
@@ -399,14 +339,13 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
    saux = actualMap->relativeSquare(perQuad->posX, perQuad->posZ-1);
    if( saux )
    {  
-      min2[0] = saux->x1;
-      min2[2] = saux->z1;
-      max2[0] = saux->x2;
-      max2[2] = saux->z2;
-      if(intercepts(min,max,min2,max2) )
+      colBox.setMin(saux->x1, 0, saux->z1);
+      colBox.setMax(saux->x2, 400, saux->z2);
+      if(actorBox.intercepts(colBox) )
       { 
-         /* nort */
-         result &= verifySquare(min,max,saux,varHeight, actor->yPosition);
+         /* north */
+         result &= verifySquare(actorBox,saux,varHeight, 
+               actor->scNode->getPosY());
          if(!result) 
          {
             return(false);
@@ -425,31 +364,15 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
          {
             if(pers != actor)
             {
-               x[0] = pers->min[0];
-               z[0] = pers->min[2];
-
-               x[1] = pers->min[0];
-               z[1] = pers->max[2]; 
-
-               x[2] = pers->max[0];
-               z[2] = pers->max[2];
- 
-               x[3] = pers->max[0];
-               z[3] = pers->min[2];
-
-               rotTransBoundingBox(pers->orientationY, x, z,
-                                   pers->xPosition, 
-                                   pers->min[1]+pers->yPosition,
-                                   pers->max[1]+pers->yPosition, 
-                                   pers->zPosition, min2, max2 );
-
-               if(intercepts( min, max, min2, max2))
+               colBox = pers->scNode->getBoundingBox();
+               if(actorBox.intercepts(colBox))
                {
                   /* Do a more depth colision verify */
-                  if(pers->depthCollision(0.0f, pers->orientationY, 0.0f,
-                                          pers->xPosition, 
-                                          pers->yPosition,
-                                          pers->zPosition, min, max))
+                  if(pers->scNode->getModel()->depthCollision(
+                           0.0f, pers->scNode->getAngleY(), 0.0f,
+                           pers->scNode->getPosX(), 
+                           pers->scNode->getPosY(),
+                           pers->scNode->getPosZ(), actorBox))
                   {
                      return(false);
                   }
@@ -462,8 +385,8 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
       list = PCs;
    }
 
-   nx = ((min[0] + max[0]) / 2);
-   nz = ((min[2] + max[2]) / 2);
+   nx = ((actorBox.x1 + actorBox.x2) / 2);
+   nz = ((actorBox.z1 + actorBox.z2) / 2);
       
    return(result);
 }

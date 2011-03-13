@@ -21,6 +21,7 @@
 #ifndef _dnt_map_h
 #define _dnt_map_h
 
+#include "door.h"
 #include "mapfog.h"
 #include "maplights.h"
 #include "maproad.h"
@@ -50,10 +51,6 @@ using namespace std;
 
 #define TEXTURE_REPEATS (OUTDOOR_SQUARE_SIZE / 256) /**< Number of Repeats */ 
 #define ALPHA_TEXTURE_INC       2 /**< Points per square on each alpha texture*/
-
-#define DOOR_STATUS_CLOSED      0      /**< If door is closed */
-#define DOOR_STATUS_OPENED      1      /**< If door is opened */
-
 
 /*! Map's Connections is a clickable area on the map that changes 
  * the current map to the one the connection defines. */
@@ -173,34 +170,6 @@ class mapTextureList: public dntList
    protected:
       /*! Free a mapTexture
        * \param obj -> pointer to the mapTexture to delete */
-      void freeElement(dntListElement* obj);
-};
-
-/*! A door is an object that, obviously, opens and close passages */
-class door: public dntListElement
-{
-   public:
-      object* obj;             /**< pointer to door object */
-      GLfloat x,z;             /**< position on map */
-      GLint status;            /**< actual status (opened, closed) */
-      GLint orientation;       /**< orientation */
-      GLfloat delta;           /**< current orientation delta
-                                    (is inc or dec by the current status,
-                                     from 0 to 90) */
-};
-
-/*! List of doors */
-class doorList: public dntList
-{
-   public:
-      /*! Constructor */
-      doorList();
-      /*! Destructor */
-      ~doorList();
-
-   protected:
-      /*! Free the door memory
-       * \param obj -> door to delete */
       void freeElement(dntListElement* obj);
 };
 
@@ -327,15 +296,6 @@ class Map
        * \return 1 if success. */
       void renderFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
                        GLfloat** matriz, bool selectionRender=false); 
-      /*! Render the map objects on screen (using view culling)  
-       * \param cameraX -> X coordinate of camera
-       * \param cameraY -> Y coordinate of camera
-       * \param cameraZ -> Z coordinate of camera
-       * \param matriz  -> view frustum matriz 
-       * \param inverted -> usefull for reflections */
-      void renderObjects(GLfloat cameraX, GLfloat cameraY, 
-                         GLfloat cameraZ, GLfloat** matriz,
-                       bool inverted);
       /*! Render the map walls on screen (using view culling)  
        * \param cameraX -> X coordinate of camera
        * \param cameraY -> Y coordinate of camera

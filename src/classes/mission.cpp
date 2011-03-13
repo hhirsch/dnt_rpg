@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -529,8 +529,9 @@ void missionsController::completeMission(mission* m, int type)
       dude = eng->PCs->getActiveCharacter();
 
       sprintf(vstr,gettext("Mission Completed: %d XP!"),m->getXp()); 
-      msgController.addMessage(dude->xPosition, dude->max[1]+dude->yPosition,
-                               dude->zPosition, vstr, 0.94, 0.8, 0.0);
+      msgController.addMessage(dude->scNode->getPosX(), 
+            dude->scNode->getBoundingBox().y2+dude->scNode->getPosY(),
+            dude->scNode->getPosZ(), vstr, 0.94, 0.8, 0.0);
 
       /* Add Briefing message of success */
       brief.addText(vstr);
@@ -543,9 +544,10 @@ void missionsController::completeMission(mission* m, int type)
       /* Add 3D message of failure */
       engine* eng = (engine*)pEngine;
       character* dude = eng->PCs->getActiveCharacter();
-      msgController.addMessage(dude->xPosition, dude->max[1]+dude->yPosition,
-                               dude->zPosition, 
-                               gettext("Mission Failure!"), 0.94, 0.2, 0.1);
+      msgController.addMessage(dude->scNode->getPosX(), 
+            dude->scNode->getBoundingBox().y2+dude->scNode->getPosY(),
+            dude->scNode->getPosZ(), 
+            gettext("Mission Failure!"), 0.94, 0.2, 0.1);
 
       /* Add Briefing message of failure */
       brief.addText(gettext("Mission Failure!"));

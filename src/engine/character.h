@@ -48,7 +48,7 @@ using namespace std;
 
 
 /*! Character Class */
-class character: public aniModel, public dntListElement
+class character: public thing, public dntListElement
 {
    public:
       /*! Constructor
@@ -233,13 +233,8 @@ class character: public aniModel, public dntListElement
        * \param curMap -> pointer to the current map opened */
       void defineOcSquare(Map* curMap);
 
-      /*! Render the character
-       * \param updateAnimations -> true to update animation state
-       * \param reflexion -> true to render reflexion
-       * \param shadow -> tru to render shadow
-       * \param gameSun -> pointer to the sun */
-      void render(bool updateAnimations, bool reflexion, bool shadow,
-            sun* gameSun);
+      /*! Update all effects affecting the character */
+      void updateEffects();
 
       /*! Get the damage dice of character 'empty hands'
        * \return bared hands damage dice */

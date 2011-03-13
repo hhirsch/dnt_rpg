@@ -47,12 +47,6 @@ thing::thing()
    displacement = WALK_PER_MOVE_ACTION;
    sizeModifier = 0;
    psychoState = PSYCHO_NEUTRAL;
-   orientationY = 0;
-   orientationX = 0;
-   orientationZ = 0;
-   xPosition = 0;
-   yPosition = 0;
-   zPosition = 0;
    initialXPosition = 0;
    initialZPosition = 0;
    initiativeBonus = 0;
@@ -98,6 +92,7 @@ int thing::getThingType()
 {
    return(thingType);
 }
+
 
 /******************************************************
  *                   skillBonus                       *
@@ -547,12 +542,18 @@ void thing::setInitialConversation(int i)
 bool thing::atRange(float posX, float posZ, float range)
 { 
    float dist=0;
+
+   if(!scNode)
+   {
+      /* Not on scene, so not at range! */
+      return(false);
+   }
    
    /* Calculate, if needed the distance */
    if((posX != -1) && (posZ != -1))
    {
-      dist = sqrt( (xPosition - posX) * (xPosition - posX) +
-            (zPosition - posZ) * (zPosition - posZ));
+      dist = sqrt( (scNode->getPosX() - posX) * (scNode->getPosX() - posX) +
+            (scNode->getPosZ() - posZ) * (scNode->getPosZ() - posZ));
    }
 
    /* Verify status */

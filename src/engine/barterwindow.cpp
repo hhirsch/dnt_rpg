@@ -356,12 +356,13 @@ bool barterWindow::treat(guiObject* guiObj, int eventInfo, int mouseX,
    if(buyerWindow)
    {
       buyerWindow->treat(guiObj, eventInfo, mouseCursor, actualMap, 
-                         buyer->xPosition, buyer->zPosition);
+                         buyer->scNode->getPosX(), buyer->scNode->getPosZ());
    }
    if(sellerWindow)
    {
       sellerWindow->treat(guiObj, eventInfo, mouseCursor, actualMap, 
-                          seller->xPosition, seller->zPosition, true);
+                          seller->scNode->getPosX(), seller->scNode->getPosZ(),
+                          true);
    }
 
    /* Gather GUI events */

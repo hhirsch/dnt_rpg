@@ -2,6 +2,8 @@
 |                Version 0.8                   |
 ================================================
 
+ - Created scene and sceneNode abstractions;
+
 BugFixes:
  - Fixed a bug that freezes the game when drinking a beer (thanks 
  to zerberros for the bug report);
