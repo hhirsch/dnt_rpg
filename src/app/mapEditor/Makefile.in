@@ -51,7 +51,8 @@ OBJSPART = $(ENDPART)partcontroller.o $(ENDPART)lake.o $(ENDPART)partorigin.o \
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o \
             $(ENDFIGHT)fightSystem.o
 OBJSETC = $(ENDETC)animodel.o $(ENDETC)extensions.o $(ENDETC)message3d.o \
-          $(ENDETC)modellist.o $(ENDETC)userinfo.o $(ENDETC)dirs.o \
+          $(ENDETC)scene.o $(ENDETC)scenenode.o \
+			 $(ENDETC)userinfo.o $(ENDETC)dirs.o \
           $(ENDETC)overlaps.o $(ENDETC)defparser.o $(ENDETC)texrenderer.o \
           $(ENDETC)shader.o $(ENDETC)btreecell.o $(ENDETC)btree.o \
           $(ENDETC)npcfile.o $(ENDETC)list.o $(ENDETC)boundingbox.o

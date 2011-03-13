@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -189,6 +189,7 @@ void inventory::dropObject(object* obj, int x, int y, int inv,
    removeFromInventory(x, y, inv);
 
    /* Add it to the map */
+   obj->createSceneNode(X, actualMap->getHeight(X,Z), Z, 0.0f, 0.0f, 0.0f);
    actualMap->insertObject(X, actualMap->getHeight(X,Z), Z, 
          0.0f, 0.0f, 0.0f, obj, 0);
    modifState.mapObjectAddAction(MODSTATE_ACTION_OBJECT_ADD,
