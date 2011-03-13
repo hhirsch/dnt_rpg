@@ -36,7 +36,9 @@ objects::objects(Map* acMap)
    obstacleX = 0;
    obstacleY = 0;
    obstacleZ = 0;
-   obstacleOrientation = 0;
+   angleX = 0;
+   angleY = 0;
+   angleZ = 0;
 }
 
 /******************************************************
@@ -73,10 +75,11 @@ void objects::verifyAction(Uint8* keys,
       /* Insert it on map */
       if(mButton & SDL_BUTTON(1))
       {
-         insertObject(mouseX, mouseZ, obstacleOrientation, actualMap, 
-                      actualObstacle, 
-                      (int)(mouseX / actualMap->squareSize()), 
-                      (int)(mouseZ / actualMap->squareSize()));
+         insertObject(actualMap, actualObstacle, 
+                      (int)(actualObstacle->scNode->getPosX() / 
+                            actualMap->squareSize()), 
+                      (int)(actualObstacle->scNode->getPosZ() / 
+                            actualMap->squareSize()));
          while(mButton & SDL_BUTTON(1))
          {
             //Wait for Mouse Button Release
@@ -87,16 +90,39 @@ void objects::verifyAction(Uint8* keys,
 
          /* No more with the actual */
          actualObstacle = NULL;
+         return;
       }
 
       /* Rotate Left/Right object */
       else if(mButton & SDL_BUTTON(2))
       {
-         obstacleOrientation += 1;
+         if(keys[SDLK_x])
+         {
+            angleX += 1;
+         }
+         else if(keys[SDLK_z])
+         {
+            angleZ += 1;
+         }
+         else
+         {
+            angleY += 1;
+         }
       }
       else if(mButton & SDL_BUTTON(3))
       {
-         obstacleOrientation -= 1;
+         if(keys[SDLK_x])
+         {
+            angleX -= 1;
+         }
+         else if(keys[SDLK_z])
+         {
+            angleZ -= 1;
+         }
+         else
+         {
+            angleY -= 1;
+         }
       }
 
       /* Up/Down Object */
@@ -120,6 +146,8 @@ void objects::verifyAction(Uint8* keys,
       {
          obstacleY = 0;
       }
+      actualObstacle->scNode->set(obstacleX, obstacleY, obstacleZ,
+            angleX, angleY, angleZ);
    }
    else
    {
@@ -139,13 +167,15 @@ void objects::drawTemporary()
 /******************************************************************
  *                          insertObject                          *
  ******************************************************************/
-void objects::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
-                          Map* acMap, object* obj, int qx, int qz)
+void objects::insertObject(Map* acMap, object* obj, int qx, int qz)
 {
    //TODO, mark with no collision some pickable objects
-   acMap->insertObject(xReal, 
-                       obstacleY + actualMap->getHeight(xReal, zReal), 
-                       zReal, 0.0f, orObj, 0.0f, obj, qx, qz, 1); 
+   acMap->insertObject(obj->scNode->getPosX(), 
+                       obj->scNode->getPosY(),
+                       obj->scNode->getPosZ(),
+                       obj->scNode->getAngleX(), 
+                       obj->scNode->getAngleY(),
+                       obj->scNode->getAngleZ(), obj, qx, qz, 1); 
 }
 
 /******************************************************************

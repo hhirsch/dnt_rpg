@@ -70,10 +70,11 @@ class objects
       GLfloat obstacleX,          /**< X position Obstacle */
               obstacleY,          /**< Y position Obstacle */
               obstacleZ;          /**< Z position Obstacle */
-      GLint obstacleOrientation;  /**< Orientation of the Obstacle */
+      GLfloat angleX,
+              angleY,
+              angleZ;
 
-      void insertObject(GLfloat xReal, GLfloat zReal, int orObj,
-                        Map* acMap, object* obj, int qx, int qz);
+      void insertObject(Map* acMap, object* obj, int qx, int qz);
 
 };
 
