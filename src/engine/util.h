@@ -221,6 +221,14 @@ void normalize (GLfloat& nx, GLfloat& ny, GLfloat& nz);
  * \param ny -> vector Y */
 void normalize(GLfloat& nx, GLfloat& ny);
 
+/*! Rotate a point around Y, X and Z axis. */
+void rotatePoint(GLfloat pX, GLfloat pY, GLfloat pZ,
+                 GLfloat angleX, GLfloat angleY, GLfloat angleZ,
+                 GLfloat sinAngleX, GLfloat cosAngleX,
+                 GLfloat sinAngleY, GLfloat cosAngleY,
+                 GLfloat sinAngleZ, GLfloat cosAngleZ,
+                 GLfloat& resX, GLfloat& resY, GLfloat& resZ);
+
 /*! Rotate a point p by angle theta around an arbitrary line segment p1-p2
     Return the rotated point.
     Positive angles are anticlockwise looking down the axis towards the origin.

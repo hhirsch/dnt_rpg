@@ -135,6 +135,50 @@ GLfloat getAngle(GLfloat prvX, GLfloat prvZ, GLfloat curX, GLfloat curZ)
 /*********************************************************************
  *                               rotatePoint                         *
  *********************************************************************/
+void rotatePoint(GLfloat pX, GLfloat pY, GLfloat pZ,
+                 GLfloat angleX, GLfloat angleY, GLfloat angleZ,
+                 GLfloat sinAngleX, GLfloat cosAngleX,
+                 GLfloat sinAngleY, GLfloat cosAngleY,
+                 GLfloat sinAngleZ, GLfloat cosAngleZ,
+                 GLfloat& resX, GLfloat& resY, GLfloat& resZ)
+{
+   /* Set initial result (no angle!) */
+   resX = pX;
+   resY = pY;
+   resZ = pZ;
+
+   /* Rotate around Y axis */
+   if(angleY != 0)
+   {
+      /* Calculate new point */
+      resX = (pZ*sinAngleY) + (pX*cosAngleY);
+      resZ = (pZ*cosAngleY) - (pX*sinAngleY);
+      pX = resX;
+      pZ = resZ;
+   }
+
+   /* Rotate around X axis */
+   if(angleX != 0)
+   {
+      /* Calculate new point */
+      resY = -(pZ*sinAngleX) + (pY*cosAngleX);
+      resZ =(pZ*cosAngleX) + (pY*sinAngleX);
+      pY = resY;
+      pZ = resZ;
+   }
+
+   /* Rotate at Z axis */
+   if(angleZ != 0)
+   {
+      /* Calculate new point */
+      resX = -(pY*sinAngleZ) + (pX*cosAngleZ);
+      resY = (pY*cosAngleZ) + (pX*sinAngleZ);
+   }
+}
+
+/*********************************************************************
+ *                               rotatePoint                         *
+ *********************************************************************/
 void rotatePoint(GLfloat srcX, GLfloat srcY, GLfloat srcZ, GLfloat theta,
                  GLfloat p1X, GLfloat p1Y, GLfloat p1Z, 
                  GLfloat p2X, GLfloat p2Y, GLfloat p2Z, 

@@ -1012,10 +1012,13 @@ void aniModel::updateKeyVertex(vertexInfo& v,
 bool aniModel::depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ,
       GLfloat pX, GLfloat pY, GLfloat pZ, boundingBox colBox)
 {
-   /* TODO: apply angleX and angleZ */
-   /* Calculate the sin and cos of the angle */
-   float angleSin = sinf(deg2Rad(angleY));
-   float angleCos = cosf(deg2Rad(angleY));
+   /* Calculate the sin and cos of the angles, to do less calculations */
+   float sinAngleX = sinf(deg2Rad(angleX));
+   float cosAngleX = cosf(deg2Rad(angleX));
+   float sinAngleY = sinf(deg2Rad(angleY));
+   float cosAngleY = cosf(deg2Rad(angleY));
+   float sinAngleZ = sinf(deg2Rad(angleZ));
+   float cosAngleZ = cosf(deg2Rad(angleZ));
 
    GLushort* facesShort = NULL;
    GLuint* facesInt = NULL;
@@ -1084,23 +1087,35 @@ bool aniModel::depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ,
                /* Translate and rotate the coordinates.
                 * NOTE: Do not forget that if the blender coordinate system is
                 * (x,y,z), the DNT system is (-x,z,y) */
-               V0[0] = pX+((-meshVertices[index0][0])*angleCos*m_renderScale) +
-                          ((meshVertices[index0][1])*angleSin*m_renderScale);
-               V0[1] = pY + meshVertices[index0][2]*m_renderScale;
-               V0[2] = pZ+((meshVertices[index0][0]*angleSin*m_renderScale)) +
-                          ((meshVertices[index0][1]*angleCos*m_renderScale));
+               rotatePoint(-meshVertices[index0][0]*m_renderScale,
+                           meshVertices[index0][2]*m_renderScale,
+                           meshVertices[index0][1]*m_renderScale,
+                           angleX, angleY, angleZ, sinAngleX, cosAngleX, 
+                           sinAngleY, cosAngleY, sinAngleZ, cosAngleZ,
+                           V0[0], V0[1], V0[2]);
+               V0[0] += pX;
+               V0[1] += pY;
+               V0[2] += pZ;
 
-               V1[0] = pX+((-meshVertices[index1][0])*angleCos*m_renderScale) +
-                          ((meshVertices[index1][1])*angleSin*m_renderScale);
-               V1[1] = pY + meshVertices[index1][2]*m_renderScale;
-               V1[2] = pZ+((meshVertices[index1][0]*angleSin*m_renderScale)) +
-                          ((meshVertices[index1][1]*angleCos*m_renderScale));
+               rotatePoint(-meshVertices[index1][0]*m_renderScale,
+                           meshVertices[index1][2]*m_renderScale,
+                           meshVertices[index1][1]*m_renderScale,
+                           angleX, angleY, angleZ, sinAngleX, cosAngleX, 
+                           sinAngleY, cosAngleY, sinAngleZ, cosAngleZ,
+                           V1[0], V1[1], V1[2]);
+               V1[0] += pX;
+               V1[1] += pY;
+               V1[2] += pZ;
 
-               V2[0] = pX+((-meshVertices[index2][0])*angleCos*m_renderScale) +
-                          ((meshVertices[index2][1])*angleSin*m_renderScale);
-               V2[1] = pY + meshVertices[index2][2]*m_renderScale;
-               V2[2] = pZ+((meshVertices[index2][0]*angleSin*m_renderScale)) +
-                          ((meshVertices[index2][1]*angleCos*m_renderScale));
+               rotatePoint(-meshVertices[index2][0]*m_renderScale,
+                           meshVertices[index2][2]*m_renderScale,
+                           meshVertices[index2][1]*m_renderScale,
+                           angleX, angleY, angleZ, sinAngleX, cosAngleX, 
+                           sinAngleY, cosAngleY, sinAngleZ, cosAngleZ,
+                           V2[0], V2[1], V2[2]);
+               V2[0] += pX;
+               V2[1] += pY;
+               V2[2] += pZ;
 
                /* Bounding Box Faces */
 
