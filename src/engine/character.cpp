@@ -151,12 +151,23 @@ void character::updateEffects()
 {
    effects->doStep();
    /* Update Equipped objects positions too */
+   
+   /* Left hand */
    aniModel* mdl = scNode->getModel();
    object* obj = inventories->getFromPlace(INVENTORY_LEFT_HAND);
    if(obj)
    {
       obj->setEquipedPosition(2, mdl->leftHand.x, mdl->leftHand.y, 
             mdl->leftHand.z, scNode->getAngleY());
+   }
+
+   /* Right Hand */
+   mdl = scNode->getModel();
+   obj = inventories->getFromPlace(INVENTORY_RIGHT_HAND);
+   if(obj)
+   {
+      obj->setEquipedPosition(1, mdl->rightHand.x, mdl->rightHand.y, 
+            mdl->rightHand.z, scNode->getAngleY());
    }
 }
 
