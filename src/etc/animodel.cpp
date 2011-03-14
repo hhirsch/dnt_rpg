@@ -801,6 +801,49 @@ void aniModel::renderShadow(float pX, float pY, float pZ, float angleX,
 }
 
 /*********************************************************************
+ *                             RenderShadow                          *
+ *********************************************************************/
+void aniModel::renderShadow(float pX, float pY, float pZ, float angleX,
+            float angleY, float angleZ, GLfloat* shadowMatrix, float alpha,
+            float angle, float aX, float aY, float aZ)
+{
+   /* Set Changes */
+   glEnable(GL_BLEND);
+   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+   glDisable(GL_TEXTURE_2D);
+   glEnable(GL_STENCIL_TEST);
+   glStencilFunc(GL_EQUAL, 1, 0xffffffff);
+   glStencilOp(GL_KEEP, GL_KEEP, GL_INCR);
+   glPolygonOffset(-2.0f,-1.0f);
+   glEnable(GL_POLYGON_OFFSET_FILL);
+   glDisable(GL_LIGHTING);
+   glDisable(GL_COLOR_MATERIAL);
+   glColor4f(0.0f, 0.0f, 0.0f, alpha);
+
+   /* Render */
+   glPushMatrix();
+      glMultMatrixf(shadowMatrix);
+      glPushMatrix();
+         glTranslatef(pX, pY, pZ);
+         glRotatef(angle, aX, aY, aZ);
+         glRotatef(angleZ,0.0f,0.0f,1.0f);
+         glRotatef(angleX,1.0f,0.0f,0.0f);
+         glRotatef(angleY,0.0f,1.0f,0.0f);
+         renderFromGraphicMemory();
+     glPopMatrix();
+   glPopMatrix();
+
+   /* Unset Changes */
+   glEnable(GL_LIGHTING);
+   glDisable(GL_POLYGON_OFFSET_FILL);
+   glDisable(GL_STENCIL_TEST);
+   glEnable(GL_TEXTURE_2D);
+   glDisable(GL_BLEND);
+   glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+}
+
+
+/*********************************************************************
  *                           renderReflexion                         *
  *********************************************************************/
 void aniModel::renderReflexion(float pX, float pY, float pZ, float angleX,
@@ -812,6 +855,25 @@ void aniModel::renderReflexion(float pX, float pY, float pZ, float angleX,
    glEnable(GL_NORMALIZE);
 
    renderFromGraphicMemory(pX, pY, pZ, angleX, angleY, angleZ, true);
+
+   glDisable(GL_NORMALIZE);
+   glDisable(GL_STENCIL_TEST);
+}
+
+/*********************************************************************
+ *                           renderReflexion                         *
+ *********************************************************************/
+void aniModel::renderReflexion(float pX, float pY, float pZ, float angleX,
+      float angleY, float angleZ,
+      float angle, float aX, float aY, float aZ)
+{
+   glEnable(GL_STENCIL_TEST);
+   glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
+   glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+   glEnable(GL_NORMALIZE);
+
+   renderFromGraphicMemory(pX, pY, pZ, angleX, angleY, angleZ, 
+         angle, aX, aY, aZ, true);
 
    glDisable(GL_NORMALIZE);
    glDisable(GL_STENCIL_TEST);

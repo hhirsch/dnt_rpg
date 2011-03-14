@@ -117,10 +117,16 @@ class aniModel
        * \note -> this function works as renderFromGraphicMemory()  */
       void renderShadow(float pX, float pY, float pZ, float angleX,
             float angleY, float angleZ, GLfloat* shadowMatrix, float alpha);
+      void renderShadow(float pX, float pY, float pZ, float angleX,
+            float angleY, float angleZ, GLfloat* shadowMatrix, float alpha,
+            float angle, float aX, float aY, float aZ);
 
       /*! Render the model reflexion on floor axys */
       void renderReflexion(float pX, float pY, float pZ, float angleX, 
             float angleY, float angleZ);
+      void renderReflexion(float pX, float pY, float pZ, float angleX,
+            float angleY, float angleZ,
+            float angle, float aX, float aY, float aZ);
 
       /*! Calculate the model bounding box for current animation frame */
       void calculateCrudeBoundingBox();

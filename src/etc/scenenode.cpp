@@ -202,7 +202,15 @@ void sceneNode::render(GLfloat** viewMatrix, bool update, bool reflexion,
             model->loadToGraphicMemory();
             modelLoaded = true;
          }
-         model->renderReflexion(posX, posY, posZ, angleX, angleY, angleZ);
+         if(!enableRotLast)
+         {
+            model->renderReflexion(posX, posY, posZ, angleX, angleY, angleZ);
+         }
+         else
+         {
+            model->renderReflexion(posX, posY, posZ, angleX, angleY, angleZ,
+                  rotLast[0], rotLast[1], rotLast[2], rotLast[3]);
+         }
       }
    }
 
@@ -219,8 +227,18 @@ void sceneNode::render(GLfloat** viewMatrix, bool update, bool reflexion,
             model->loadToGraphicMemory();
             modelLoaded = true;
          }
-         model->renderShadow(posX, posY, posZ, angleX, angleY, angleZ, 
-               shadowMatrix, alpha);
+
+         if(!enableRotLast)
+         {
+            model->renderShadow(posX, posY, posZ, angleX, angleY, angleZ, 
+                  shadowMatrix, alpha);
+         }
+         else
+         {
+            model->renderShadow(posX, posY, posZ, angleX, angleY, angleZ, 
+                  shadowMatrix, alpha, rotLast[0], rotLast[1], 
+                  rotLast[2], rotLast[3]);
+         }
       }
    }
 
