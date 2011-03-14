@@ -104,6 +104,18 @@ string portal::getDoorFileName()
    return(fileDoor);
 }
 
+/******************************************************
+ *                    deleteDoor                      *
+ ******************************************************/
+void portal::deleteDoor()
+{
+   if(actualDoor)
+   {
+      delete(actualDoor);
+      fileDoor = "";
+      actualDoor = NULL;
+   }
+}
 
 /******************************************************
  *                       VerifyAction                 *

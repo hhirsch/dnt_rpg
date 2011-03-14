@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -56,9 +56,14 @@ class portal
 
       void defineDoor(object* newDoor, string fileName);
 
+      /*! Get the current door */
       object* getDoor();
 
+      /*! get the current door file name */
       string getDoorFileName();
+
+      /*! delete the current door */
+      void deleteDoor();
 
 
    private:

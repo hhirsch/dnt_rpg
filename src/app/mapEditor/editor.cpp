@@ -949,6 +949,10 @@ void editor::doEditorIO()
           (doorFile != portalEditor->getDoorFileName())
         )
       {
+         if(!portalEditor->getDoorFileName().empty())
+         {
+            portalEditor->deleteDoor();
+         }
          if(!doorFile.empty())
          {
             object* obj = createObject(doorFile, map->getFileName());
@@ -1028,6 +1032,11 @@ void editor::doEditorIO()
           (!npcController->getNpcFileName().empty()) )
       {
          npcController->deleteNpc();
+      }
+      if( (gui->getTool() != TOOL_PORTAL_DOOR) && 
+          (!portalEditor->getDoorFileName().empty()))
+      {
+         portalEditor->deleteDoor();
       }
    }
 
