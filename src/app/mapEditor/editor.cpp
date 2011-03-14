@@ -970,11 +970,15 @@ void editor::doEditorIO()
       string objFile = gui->getSelectedText();
       if( (!objFile.empty()) && (objFile != objectEditor->getObjectFileName()))
       {
+         if(!objectEditor->getObjectFileName().empty())
+         {
+            objectEditor->deleteObject();
+         }
          object* obj = createObject(objFile, map->getFileName());
          objectEditor->defineActualObject(obj, objFile);
       }
-      objectEditor->verifyAction(keys, xReal, yReal, zReal, mButton, mouseX, mouseY,
-                                 gui->getTool(), proj, modl, viewPort);
+      objectEditor->verifyAction(keys, xReal, yReal, zReal, mButton, 
+            mouseX, mouseY, gui->getTool(), proj, modl, viewPort);
    }
    else if( (gui->getState() == GUI_IO_STATE_PARTICLES) && (mapOpened))
    {
@@ -1004,6 +1008,17 @@ void editor::doEditorIO()
          map->setMusicFileName(musicFile);
          sprintf(msg,"Defined Music as: %s", musicFile.c_str());
          gui->showMessage(msg);
+      }
+   }
+
+
+   /* Delete temporary unused models */
+   if(mapOpened)
+   {
+      if( (gui->getState() != GUI_IO_STATE_OBJECTS) && 
+            (!objectEditor->getObjectFileName().empty()) )
+      {
+         objectEditor->deleteObject();
       }
    }
 

@@ -52,9 +52,15 @@ class objects
       /*! If have some temporary things to draw, draw it! */
       void drawTemporary();
 
+      /*! Define the current object to add */
       void defineActualObject(object* obj, string fileName);
 
+      /*! Get object file name
+       * \return fileName of object or "" if no object */
       string getObjectFileName();
+
+      /*! delete actual object (if any) */
+      void deleteObject();
 
     private:
       Map* actualMap;             /**< Actual Internal Map */

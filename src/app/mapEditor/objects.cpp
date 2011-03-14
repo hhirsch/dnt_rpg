@@ -198,3 +198,16 @@ string objects::getObjectFileName()
    return(objectFile);
 }
 
+/******************************************************************
+ *                          deleteObject                          *
+ ******************************************************************/
+void objects::deleteObject()
+{
+   if(actualObstacle)
+   {
+      delete(actualObstacle);
+      actualObstacle = NULL;
+      objectFile = "";
+   }
+}
+
