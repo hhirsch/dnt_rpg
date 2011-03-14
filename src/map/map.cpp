@@ -724,10 +724,7 @@ void Map::deleteObjects()
               if( (sobj->draw) && (!sobj->obj->isStaticScenery()) ) 
               {
                  /* delete it! */
-                 switch(sobj->obj->getType())
-                 {
-                    deleteObject(sobj->obj);
-                 }
+                 deleteObject(sobj->obj);
               }
            }
            sobj = next;
