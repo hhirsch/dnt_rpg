@@ -129,7 +129,7 @@ void npcs::insertNpc(GLfloat xReal, GLfloat zReal,
 }
 
 /******************************************************************
- *                       defineActualObject                       *
+ *                        defineActualNpc                         *
  ******************************************************************/
 void npcs::defineActualNpc(string fileName)
 {
@@ -139,6 +139,19 @@ void npcs::defineActualNpc(string fileName)
       intList = new(characterList);
       actualNpc = intList->insertCharacter(fileName, features, NULL, "");
       npcFile = fileName;
+   }
+}
+
+/******************************************************************
+ *                            deleteNpcs                          *
+ ******************************************************************/
+void npcs::deleteNpc()
+{
+   if(actualNpc)
+   {
+      intList->removeCharacter(actualNpc);
+      npcFile = "";
+      actualNpc = NULL;
    }
 }
 

@@ -59,6 +59,9 @@ class npcs
 
       /*! Get the actual fileName of the actual NPC */
       string getNpcFileName();
+ 
+      /*! Delete the current NPC, if any */
+      void deleteNpc();
 
       /*! Save The NPCs list to a file
        * \param fileName -> name of the file to save */

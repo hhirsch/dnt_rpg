@@ -994,6 +994,10 @@ void editor::doEditorIO()
       string npcFile = gui->getSelectedText();
       if( (!npcFile.empty()) && (npcFile != npcController->getNpcFileName()))
       {
+         if(!npcController->getNpcFileName().empty())
+         {
+            npcController->deleteNpc();
+         }
          npcController->defineActualNpc(npcFile);
       }
       npcController->verifyAction(xReal, yReal, zReal, mButton, mouseX, mouseY,
@@ -1019,6 +1023,11 @@ void editor::doEditorIO()
             (!objectEditor->getObjectFileName().empty()) )
       {
          objectEditor->deleteObject();
+      }
+      if( (gui->getState() != GUI_IO_STATE_NPCS) && 
+          (!npcController->getNpcFileName().empty()) )
+      {
+         npcController->deleteNpc();
       }
    }
 
