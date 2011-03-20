@@ -90,7 +90,7 @@ string messageForTool(int tool)
       break;
       case TOOL_OBSTACLE_ADD:
          return("Put Object on Map with Left Mouse Button. "
-                "Right and Middle Buttons rotate");
+                "(x y z) + Right or Middle Buttons to rotate");
       break;
       case TOOL_NPC_ADD:
          return("Put NPC on Map with left mouse Button.");

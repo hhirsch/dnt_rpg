@@ -100,11 +100,11 @@ void objects::verifyAction(Uint8* keys,
          {
             angleX += 1;
          }
-         else if(keys[SDLK_z])
+         if(keys[SDLK_z])
          {
             angleZ += 1;
          }
-         else
+         if(keys[SDLK_y])
          {
             angleY += 1;
          }
@@ -115,11 +115,11 @@ void objects::verifyAction(Uint8* keys,
          {
             angleX -= 1;
          }
-         else if(keys[SDLK_z])
+         if(keys[SDLK_z])
          {
             angleZ -= 1;
          }
-         else
+         if(keys[SDLK_y])
          {
             angleY -= 1;
          }
