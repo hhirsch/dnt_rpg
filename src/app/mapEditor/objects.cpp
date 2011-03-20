@@ -146,6 +146,12 @@ void objects::verifyAction(Uint8* keys,
       {
          obstacleY = 0;
       }
+      if(keys[SDLK_BACKSPACE])
+      {
+         angleX = 0;
+         angleY = 0;
+         angleZ = 0;
+      }
       actualObstacle->scNode->set(obstacleX, obstacleY, obstacleZ,
             angleX, angleY, angleZ);
    }
