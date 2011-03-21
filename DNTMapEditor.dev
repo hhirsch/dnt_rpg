@@ -1,7 +1,7 @@
 [Project]
 FileName=DNTMapEditor.dev
 Name=DNTMapEditor
-UnitCount=273
+UnitCount=279
 Type=0
 Ver=1
 ObjFiles=
@@ -588,26 +588,6 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit56]
-FileName=src\etc\modellist.cpp
-CompileCpp=1
-Folder=DNTMapEditor
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit57]
-FileName=src\etc\modellist.h
-CompileCpp=1
-Folder=DNTMapEditor
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit58]
 FileName=src\etc\overlaps.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -617,7 +597,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit59]
+[Unit57]
 FileName=src\etc\overlaps.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -627,7 +607,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit60]
+[Unit58]
 FileName=src\etc\shader.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -637,7 +617,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit61]
+[Unit59]
 FileName=src\etc\shader.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -647,7 +627,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit62]
+[Unit60]
 FileName=src\etc\userinfo.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -657,7 +637,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit63]
+[Unit61]
 FileName=src\etc\userinfo.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -667,7 +647,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit64]
+[Unit62]
 FileName=src\classes\actions.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -677,7 +657,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit65]
+[Unit63]
 FileName=src\classes\actions.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -687,7 +667,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit66]
+[Unit64]
 FileName=src\classes\align.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -697,7 +677,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit67]
+[Unit65]
 FileName=src\classes\align.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -707,7 +687,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit68]
+[Unit66]
 FileName=src\classes\barter.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -717,7 +697,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit69]
+[Unit67]
 FileName=src\classes\barter.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -727,7 +707,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit70]
+[Unit68]
 FileName=src\classes\classes.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -737,7 +717,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit71]
+[Unit69]
 FileName=src\classes\classes.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -747,7 +727,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit72]
+[Unit70]
 FileName=src\classes\defs.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -757,7 +737,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit73]
+[Unit71]
 FileName=src\classes\defs.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -767,7 +747,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit74]
+[Unit72]
 FileName=src\classes\dices.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -777,7 +757,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit75]
+[Unit73]
 FileName=src\classes\dices.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -787,7 +767,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit76]
+[Unit74]
 FileName=src\classes\feats.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -797,7 +777,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit77]
+[Unit75]
 FileName=src\classes\feats.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -807,7 +787,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit78]
+[Unit76]
 FileName=src\classes\inventory.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -817,7 +797,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit79]
+[Unit77]
 FileName=src\classes\inventory.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -827,7 +807,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit80]
+[Unit78]
 FileName=src\classes\itemslot.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -837,7 +817,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit81]
+[Unit79]
 FileName=src\classes\itemslot.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -847,7 +827,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit82]
+[Unit80]
 FileName=src\classes\mission.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -857,7 +837,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit83]
+[Unit81]
 FileName=src\classes\mission.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -867,7 +847,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit84]
+[Unit82]
 FileName=src\classes\modifier.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -877,7 +857,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit85]
+[Unit83]
 FileName=src\classes\money.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -887,7 +867,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit86]
+[Unit84]
 FileName=src\classes\money.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -897,7 +877,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit87]
+[Unit85]
 FileName=src\classes\object.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -907,7 +887,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit88]
+[Unit86]
 FileName=src\classes\object.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -917,7 +897,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit89]
+[Unit87]
 FileName=src\classes\race.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -927,7 +907,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit90]
+[Unit88]
 FileName=src\classes\race.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -937,7 +917,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit91]
+[Unit89]
 FileName=src\classes\skills.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -947,7 +927,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit92]
+[Unit90]
 FileName=src\classes\skills.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -957,7 +937,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit93]
+[Unit91]
 FileName=src\classes\thing.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -967,7 +947,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit94]
+[Unit92]
 FileName=src\classes\thing.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -977,7 +957,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit95]
+[Unit93]
 FileName=src\classes\weapon.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -987,7 +967,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit96]
+[Unit94]
 FileName=src\classes\weapon.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -997,7 +977,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit97]
+[Unit95]
 FileName=src\classes\xp.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1007,7 +987,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit98]
+[Unit96]
 FileName=src\classes\xp.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1017,7 +997,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit99]
+[Unit97]
 FileName=src\engine\options.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1027,7 +1007,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit100]
+[Unit98]
 FileName=src\engine\options.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1037,7 +1017,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit101]
+[Unit99]
 FileName=src\engine\util.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1047,7 +1027,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit102]
+[Unit100]
 FileName=src\engine\util.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1057,7 +1037,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit103]
+[Unit101]
 FileName=src\engine\sun.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1067,7 +1047,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit104]
+[Unit102]
 FileName=src\engine\camera.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1077,7 +1057,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit105]
+[Unit103]
 FileName=src\engine\camera.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1087,7 +1067,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit106]
+[Unit104]
 FileName=src\engine\character.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1097,7 +1077,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit107]
+[Unit105]
 FileName=src\engine\character.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1107,7 +1087,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit108]
+[Unit106]
 FileName=src\engine\collision.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1117,7 +1097,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit109]
+[Unit107]
 FileName=src\engine\collision.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1127,7 +1107,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit110]
+[Unit108]
 FileName=src\engine\culling.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1137,7 +1117,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit111]
+[Unit109]
 FileName=src\engine\culling.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1147,7 +1127,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit112]
+[Unit110]
 FileName=src\engine\cursor.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1157,67 +1137,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit114]
-FileName=src\engine\dialog.cpp
-CompileCpp=1
-Folder=DNTMapEditor
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit115]
-FileName=src\engine\dialog.h
-CompileCpp=1
-Folder=DNTMapEditor
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit116]
-FileName=src\engine\sky.cpp
-CompileCpp=1
-Folder=DNTMapEditor
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit117]
-FileName=src\engine\sky.h
-CompileCpp=1
-Folder=DNTMapEditor
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit118]
-FileName=src\engine\sun.cpp
-CompileCpp=1
-Folder=DNTMapEditor
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit119]
-FileName=src\gui\button.cpp
-CompileCpp=1
-Folder=DNTMapEditor
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit113]
+[Unit111]
 FileName=src\engine\cursor.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1227,7 +1147,57 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit120]
+[Unit112]
+FileName=src\engine\dialog.cpp
+CompileCpp=1
+Folder=DNTMapEditor
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit114]
+FileName=src\engine\sky.cpp
+CompileCpp=1
+Folder=DNTMapEditor
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit115]
+FileName=src\engine\sky.h
+CompileCpp=1
+Folder=DNTMapEditor
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit116]
+FileName=src\engine\sun.cpp
+CompileCpp=1
+Folder=DNTMapEditor
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit117]
+FileName=src\gui\button.cpp
+CompileCpp=1
+Folder=DNTMapEditor
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit118]
 FileName=src\gui\button.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1237,7 +1207,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit121]
+[Unit119]
 FileName=src\gui\color.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1247,7 +1217,17 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit122]
+[Unit113]
+FileName=src\engine\dialog.h
+CompileCpp=1
+Folder=DNTMapEditor
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit120]
 FileName=src\gui\color.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1257,7 +1237,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit123]
+[Unit121]
 FileName=src\gui\cxsel.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1267,7 +1247,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit124]
+[Unit122]
 FileName=src\gui\cxsel.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1277,7 +1257,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit125]
+[Unit123]
 FileName=src\gui\dntfont.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1287,7 +1267,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit126]
+[Unit124]
 FileName=src\gui\dntfont.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1297,7 +1277,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit127]
+[Unit125]
 FileName=src\gui\draw.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1307,7 +1287,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit128]
+[Unit126]
 FileName=src\gui\draw.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1317,7 +1297,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit129]
+[Unit127]
 FileName=src\gui\farso.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1327,7 +1307,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit130]
+[Unit128]
 FileName=src\gui\farso.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1337,7 +1317,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit131]
+[Unit129]
 FileName=src\gui\filesel.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1347,7 +1327,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit132]
+[Unit130]
 FileName=src\gui\filesel.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1357,7 +1337,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit133]
+[Unit131]
 FileName=src\gui\guilist.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1367,7 +1347,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit134]
+[Unit132]
 FileName=src\gui\guilist.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1377,7 +1357,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit135]
+[Unit133]
 FileName=src\gui\guiobject.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1387,7 +1367,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit136]
+[Unit134]
 FileName=src\gui\healthBar.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1397,7 +1377,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit137]
+[Unit135]
 FileName=src\gui\healthBar.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1407,7 +1387,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit138]
+[Unit136]
 FileName=src\gui\interface.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1417,7 +1397,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit139]
+[Unit137]
 FileName=src\gui\interface.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1427,7 +1407,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit140]
+[Unit138]
 FileName=src\gui\listtext.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1437,7 +1417,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit141]
+[Unit139]
 FileName=src\gui\listtext.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1447,7 +1427,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit142]
+[Unit140]
 FileName=src\gui\menu.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1457,7 +1437,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit143]
+[Unit141]
 FileName=src\gui\menu.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1467,7 +1447,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit144]
+[Unit142]
 FileName=src\gui\messages.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1477,7 +1457,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit145]
+[Unit143]
 FileName=src\gui\messages.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1487,7 +1467,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit146]
+[Unit144]
 FileName=src\gui\mouse.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1497,7 +1477,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit147]
+[Unit145]
 FileName=src\gui\mouse.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1507,7 +1487,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit148]
+[Unit146]
 FileName=src\gui\picture.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1517,7 +1497,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit149]
+[Unit147]
 FileName=src\gui\picture.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1527,7 +1507,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit150]
+[Unit148]
 FileName=src\gui\rolbar.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1537,7 +1517,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit151]
+[Unit149]
 FileName=src\gui\rolbar.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1547,7 +1527,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit152]
+[Unit150]
 FileName=src\gui\seltext.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1557,7 +1537,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit153]
+[Unit151]
 FileName=src\gui\seltext.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1567,7 +1547,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit154]
+[Unit152]
 FileName=src\gui\tabbutton.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1577,7 +1557,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit155]
+[Unit153]
 FileName=src\gui\tabbutton.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1587,7 +1567,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit156]
+[Unit154]
 FileName=src\gui\textbar.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1597,7 +1577,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit157]
+[Unit155]
 FileName=src\gui\textbar.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1607,7 +1587,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit158]
+[Unit156]
 FileName=src\gui\textbox.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1617,7 +1597,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit159]
+[Unit157]
 FileName=src\gui\textbox.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1627,7 +1607,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit160]
+[Unit158]
 FileName=src\gui\window.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1637,7 +1617,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit161]
+[Unit159]
 FileName=src\gui\window.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1647,7 +1627,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit162]
+[Unit160]
 FileName=src\map\map.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1657,7 +1637,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit163]
+[Unit161]
 FileName=src\map\map.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1667,7 +1647,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit164]
+[Unit162]
 FileName=src\map\mapfog.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1677,7 +1657,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit165]
+[Unit163]
 FileName=src\map\mapfog.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1687,7 +1667,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit166]
+[Unit164]
 FileName=src\map\maplights.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1697,7 +1677,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit167]
+[Unit165]
 FileName=src\map\maplights.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1707,7 +1687,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit168]
+[Unit166]
 FileName=src\map\maproad.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1717,7 +1697,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit169]
+[Unit167]
 FileName=src\map\maproad.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1727,7 +1707,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit170]
+[Unit168]
 FileName=src\ia\pattAgent.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1737,7 +1717,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit171]
+[Unit169]
 FileName=src\ia\potentAgent.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1747,7 +1727,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit172]
+[Unit170]
 FileName=src\ia\potentAgent.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1757,7 +1737,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit173]
+[Unit171]
 FileName=src\ia\agent.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1767,7 +1747,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit174]
+[Unit172]
 FileName=src\ia\agent.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1777,7 +1757,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit175]
+[Unit173]
 FileName=src\ia\astar.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1787,7 +1767,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit176]
+[Unit174]
 FileName=src\ia\astar.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1797,7 +1777,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit177]
+[Unit175]
 FileName=src\ia\pattAgent.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1807,7 +1787,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit178]
+[Unit176]
 FileName=src\lang\translate.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1817,7 +1797,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit179]
+[Unit177]
 FileName=src\lang\translate.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1827,7 +1807,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit180]
+[Unit178]
 FileName=src\engine\inventwindow.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1837,7 +1817,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit181]
+[Unit179]
 FileName=src\engine\briefing.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1847,7 +1827,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit182]
+[Unit180]
 FileName=src\engine\briefing.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1857,7 +1837,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit183]
+[Unit181]
 FileName=src\engine\inventwindow.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1867,7 +1847,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit184]
+[Unit182]
 FileName=src\ia\iavariable.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1877,7 +1857,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit185]
+[Unit183]
 FileName=src\ia\iafuncs.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1887,7 +1867,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit186]
+[Unit184]
 FileName=src\ia\iafuncs.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1897,7 +1877,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit187]
+[Unit185]
 FileName=src\ia\iascript.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1907,7 +1887,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit188]
+[Unit186]
 FileName=src\ia\iascript.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1917,7 +1897,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit189]
+[Unit187]
 FileName=src\ia\iastack.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1927,7 +1907,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit190]
+[Unit188]
 FileName=src\ia\iastack.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1937,7 +1917,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit191]
+[Unit189]
 FileName=src\ia\iavariable.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1947,7 +1927,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit192]
+[Unit190]
 FileName=src\sound\ogg_stream.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1957,7 +1937,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit193]
+[Unit191]
 FileName=src\sound\ogg_stream.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1967,7 +1947,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit194]
+[Unit192]
 FileName=src\sound\sndfx.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1977,7 +1957,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit195]
+[Unit193]
 FileName=src\sound\sndfx.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1987,7 +1967,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit196]
+[Unit194]
 FileName=src\sound\sound.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -1997,7 +1977,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit197]
+[Unit195]
 FileName=src\sound\sound.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2007,7 +1987,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit198]
+[Unit196]
 FileName=src\engine\modstate.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2017,7 +1997,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit199]
+[Unit197]
 FileName=src\engine\modstate.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2027,7 +2007,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit200]
+[Unit198]
 FileName=src\fight\fightGroup.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2037,7 +2017,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit201]
+[Unit199]
 FileName=src\fight\fightGroup.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2047,7 +2027,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit202]
+[Unit200]
 FileName=src\fight\fightSystem.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2057,7 +2037,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit203]
+[Unit201]
 FileName=src\fight\fightSystem.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2067,7 +2047,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit204]
+[Unit202]
 FileName=src\fight\initiative.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2077,7 +2057,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit205]
+[Unit203]
 FileName=src\fight\initiative.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2087,7 +2067,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit206]
+[Unit204]
 FileName=src\engine\alignwindow.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2097,7 +2077,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit207]
+[Unit205]
 FileName=src\engine\alignwindow.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2107,7 +2087,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit208]
+[Unit206]
 FileName=src\engine\aspectwindow.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2117,7 +2097,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit209]
+[Unit207]
 FileName=src\engine\aspectwindow.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2127,7 +2107,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit210]
+[Unit208]
 FileName=src\engine\attwindow.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2137,7 +2117,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit211]
+[Unit209]
 FileName=src\engine\attwindow.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2147,7 +2127,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit212]
+[Unit210]
 FileName=src\engine\barterwindow.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2157,7 +2137,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit213]
+[Unit211]
 FileName=src\engine\barterwindow.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2167,7 +2147,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit214]
+[Unit212]
 FileName=src\engine\charwindow.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2177,7 +2157,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit215]
+[Unit213]
 FileName=src\engine\charwindow.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2187,7 +2167,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit216]
+[Unit214]
 FileName=src\engine\classwindow.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2197,7 +2177,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit217]
+[Unit215]
 FileName=src\engine\classwindow.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2207,7 +2187,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit218]
+[Unit216]
 FileName=src\engine\dccnit.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2217,7 +2197,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit219]
+[Unit217]
 FileName=src\engine\dccnit.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2227,7 +2207,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit220]
+[Unit218]
 FileName=src\engine\initial.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2237,7 +2217,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit221]
+[Unit219]
 FileName=src\engine\initial.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2247,7 +2227,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit222]
+[Unit220]
 FileName=src\engine\itemwindow.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2257,7 +2237,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit223]
+[Unit221]
 FileName=src\engine\itemwindow.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2267,7 +2247,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit224]
+[Unit222]
 FileName=src\engine\minimapwindow.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2277,7 +2257,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit225]
+[Unit223]
 FileName=src\engine\minimapwindow.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2287,7 +2267,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit226]
+[Unit224]
 FileName=src\engine\racewindow.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2297,7 +2277,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit227]
+[Unit225]
 FileName=src\engine\racewindow.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2307,7 +2287,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit228]
+[Unit226]
 FileName=src\engine\savefile.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2317,7 +2297,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit229]
+[Unit227]
 FileName=src\engine\savefile.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2327,7 +2307,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit230]
+[Unit228]
 FileName=src\engine\shadow.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2337,7 +2317,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit231]
+[Unit229]
 FileName=src\engine\shadow.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2347,7 +2327,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit232]
+[Unit230]
 FileName=src\engine\shortcutswindow.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2357,7 +2337,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit233]
+[Unit231]
 FileName=src\engine\shortcutswindow.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2367,7 +2347,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit234]
+[Unit232]
 FileName=src\engine\skillwindow.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2377,7 +2357,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit235]
+[Unit233]
 FileName=src\engine\skillwindow.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2387,7 +2367,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit236]
+[Unit234]
 FileName=src\map\mapsound.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2397,7 +2377,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit237]
+[Unit235]
 FileName=src\map\mapsound.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2407,7 +2387,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit238]
+[Unit236]
 FileName=src\etc\texrenderer.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2417,7 +2397,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit239]
+[Unit237]
 FileName=src\etc\texrenderer.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2427,7 +2407,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit240]
+[Unit238]
 FileName=src\classes\pendingaction.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2437,7 +2417,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit241]
+[Unit239]
 FileName=src\classes\pendingaction.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2447,7 +2427,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit242]
+[Unit240]
 FileName=src\engine\levelup.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2457,7 +2437,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit243]
+[Unit241]
 FileName=src\engine\levelup.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2467,7 +2447,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit244]
+[Unit242]
 FileName=src\etc\npcfile.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2477,7 +2457,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit245]
+[Unit243]
 FileName=src\etc\npcfile.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2487,7 +2467,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit246]
+[Unit244]
 FileName=src\gui\tabbox.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2497,7 +2477,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit247]
+[Unit245]
 FileName=src\gui\tabbox.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2507,7 +2487,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit248]
+[Unit246]
 FileName=src\engine\savewindow.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2517,7 +2497,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit249]
+[Unit247]
 FileName=src\engine\savewindow.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2527,7 +2507,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit250]
+[Unit248]
 FileName=src\engine\journalwindow.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2537,7 +2517,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit251]
+[Unit249]
 FileName=src\engine\journalwindow.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2547,7 +2527,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit252]
+[Unit250]
 FileName=src\etc\list.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2557,7 +2537,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit253]
+[Unit251]
 FileName=src\etc\list.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2567,7 +2547,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit254]
+[Unit252]
 FileName=src\engine\splitwindow.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2577,7 +2557,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit255]
+[Unit253]
 FileName=src\engine\splitwindow.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2587,8 +2567,28 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit256]
+[Unit254]
 FileName=src\classes\modeffect.cpp
+CompileCpp=1
+Folder=DNTMapEditor
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit255]
+FileName=src\classes\modeffect.h
+CompileCpp=1
+Folder=DNTMapEditor
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit256]
+FileName=src\cbook\comicbook.cpp
 CompileCpp=1
 Folder=DNTMapEditor
 Compile=1
@@ -2598,7 +2598,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit257]
-FileName=src\classes\modeffect.h
+FileName=src\cbook\comicbook.h
 CompileCpp=1
 Folder=DNTMapEditor
 Compile=1
@@ -2608,26 +2608,6 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit258]
-FileName=src\cbook\comicbook.cpp
-CompileCpp=1
-Folder=DNTMapEditor
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit259]
-FileName=src\cbook\comicbook.h
-CompileCpp=1
-Folder=DNTMapEditor
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit260]
 FileName=src\cbook\comicbox.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2637,7 +2617,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit261]
+[Unit259]
 FileName=src\cbook\comicbox.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2647,7 +2627,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit262]
+[Unit260]
 FileName=src\cbook\comicpage.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2657,7 +2637,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit263]
+[Unit261]
 FileName=src\cbook\comicpage.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2667,7 +2647,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit264]
+[Unit262]
 FileName=src\engine\featsel.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2677,7 +2657,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit265]
+[Unit263]
 FileName=src\engine\featsel.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2687,7 +2667,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit266]
+[Unit264]
 FileName=src\engine\featsel.o
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2697,7 +2677,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit267]
+[Unit265]
 FileName=src\engine\featswindow.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2707,7 +2687,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit268]
+[Unit266]
 FileName=src\particle\interplane.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2717,7 +2697,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit269]
+[Unit267]
 FileName=src\particle\interplane.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2727,7 +2707,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit270]
+[Unit268]
 FileName=src\particle\partelement.cpp
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2737,7 +2717,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit271]
+[Unit269]
 FileName=src\particle\partelement.h
 CompileCpp=1
 Folder=DNTMapEditor
@@ -2747,8 +2727,28 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit272]
+[Unit270]
 FileName=src\particle\partorigin.cpp
+CompileCpp=1
+Folder=DNTMapEditor
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit271]
+FileName=src\particle\partorigin.h
+CompileCpp=1
+Folder=DNTMapEditor
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit272]
+FileName=src\map\door.cpp
 CompileCpp=1
 Folder=DNTMapEditor
 Compile=1
@@ -2758,7 +2758,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit273]
-FileName=src\particle\partorigin.h
+FileName=src\map\door.h
 CompileCpp=1
 Folder=DNTMapEditor
 Compile=1
@@ -2768,7 +2768,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit274]
-FileName=src\particle\partorigin.cpp
+FileName=src\etc\boundingbox.cpp
 CompileCpp=1
 Folder=DNTMapEditor
 Compile=1
@@ -2778,7 +2778,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit275]
-FileName=src\particle\partorigin.h
+FileName=src\etc\boundingbox.h
 CompileCpp=1
 Folder=DNTMapEditor
 Compile=1
@@ -2788,7 +2788,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit276]
-FileName=src\classes\modeffect.cpp
+FileName=src\etc\scene.cpp
 CompileCpp=1
 Folder=DNTMapEditor
 Compile=1
@@ -2798,7 +2798,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit277]
-FileName=src\classes\modeffect.h
+FileName=src\etc\scene.h
 CompileCpp=1
 Folder=DNTMapEditor
 Compile=1
@@ -2808,7 +2808,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit278]
-FileName=src\cbook\comicbook.cpp
+FileName=src\etc\scenenode.cpp
 CompileCpp=1
 Folder=DNTMapEditor
 Compile=1
@@ -2818,7 +2818,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit279]
-FileName=src\cbook\comicbook.h
+FileName=src\etc\scenenode.h
 CompileCpp=1
 Folder=DNTMapEditor
 Compile=1
