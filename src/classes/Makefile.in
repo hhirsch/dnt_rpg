@@ -65,7 +65,7 @@ itemslot.o: itemslot.cpp itemslot.h object.h
 	@$(CC) $(CFLAGS) itemslot.cpp -o itemslot.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-mission.o: mission.h mission.cpp $(ENDIA)iascript.h
+mission.o: mission.h mission.cpp $(ENDIA)iascript.h $(ENDIA)iavariable.h
 	@printf "Making mission.o... "
 	@$(CPP) $(CFLAGS) mission.cpp -o mission.o
 	@printf "\e[0;32mDone.\e[0;0m\n"

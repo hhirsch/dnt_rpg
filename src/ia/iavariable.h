@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -31,6 +31,8 @@
 using namespace std;
 
 /* \todo IA_TYPE_DICE toString and from string to save!*/
+
+class engine;
 
 /*! iaVariable Class. It's just a variable to use at ia scripts */
 class iaVariable: public dntListElement
@@ -82,7 +84,7 @@ class iaVariable: public dntListElement
       /*! Define the variable value from a string
        * \param s -> string with variable value
        * \param curEngine -> pointer to the current engine */
-      void fromString(string s, void* curEngine);
+      void fromString(string s, engine* curEngine);
 
       void* value;   /**< The value of the variable. */
       string type;   /**< The type string id of the variable */
@@ -136,7 +138,7 @@ class iaSymbolsTable: public dntList
       /*! Load the Symbols Table from a file
        * \param def -> defParser to load from
        * \param curEngine -> pointer to the engine used */
-      void load(defParser* def, void* curEngine);
+      void load(defParser* def, engine* curEngine);
 
    protected:
       /*! Delete the variable memory

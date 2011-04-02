@@ -655,7 +655,7 @@ string iaVariable::toString()
 /***********************************************************
  *                       fromString                        *
  ***********************************************************/
-void iaVariable::fromString(string s, void* curEngine)
+void iaVariable::fromString(string s, engine* curEngine)
 {
    if(type == IA_TYPE_BOOL)
    {
@@ -678,8 +678,7 @@ void iaVariable::fromString(string s, void* curEngine)
    else if(type == IA_TYPE_CHARACTER)
    {
       /* Get the NPC with the file */
-      engine* eng = (engine*)curEngine;
-      value = (void*)eng->NPCs->getCharacter(s);
+      value = (void*)curEngine->NPCs->getCharacter(s);
    }
    else if(type == IA_TYPE_DICE)
    {
@@ -872,7 +871,7 @@ void iaSymbolsTable::save(ofstream* file)
 /***********************************************************
  *                          load                           *
  ***********************************************************/
-void iaSymbolsTable::load(defParser* def, void* curEngine)
+void iaSymbolsTable::load(defParser* def, engine* curEngine)
 {
    string key="", value="";
    char type[256], name[256];
