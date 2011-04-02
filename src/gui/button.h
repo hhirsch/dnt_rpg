@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -29,6 +29,8 @@ using namespace std;
 #include "color.h"
 #include "draw.h"
 #include "mouse.h"
+
+class menu;
 
 /*! The button class */
 class button: public guiObject
@@ -73,7 +75,8 @@ class button: public guiObject
        * \param b -> blue */
       void setTextColor(int r, int g, int b);
 
-      void* men;        /**< Button Menu (buttons can have a menu to be 
+      menu* men;        /**< Button Menu (buttons can have a menu to be 
+
                                           activated when button presses) */
 
    protected:

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -31,6 +31,8 @@ using namespace std;
 #include "button.h"
 #include "textbox.h"
 
+class guiList;
+
 /*! Rolling Text Bar Definition */
 class rolBar: public guiObject
 {
@@ -43,7 +45,7 @@ class rolBar: public guiObject
        * \param txt -> text on the rolbar
        * \param list -> pointer to the guiList
        * \param surface -> pointer to the screen surface */
-      rolBar(int xa, int ya, int xb, int yb, string txt, void* list, 
+      rolBar(int xa, int ya, int xb, int yb, string txt, guiList* list, 
              SDL_Surface* surface);
       /*! Destructor */
       ~rolBar();
@@ -126,7 +128,7 @@ class rolBar: public guiObject
       int sizeY;              /**< The size of position button */
       int lastMouseY;         /**< Last mouse Y */
       
-      void* intList;          /**< Internal GUI Objects List */
+      guiList* intList;       /**< Internal GUI Objects List */
 };
 
 #endif

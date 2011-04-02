@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -27,7 +27,7 @@
  *                        Constructor                         *
  **************************************************************/
 listText::listText(int xa, int ya, int xb, int yb, SDL_Surface* surface,
-                   void* list)
+                   guiList* list)
          : guiObject(surface), dntList(DNT_LIST_TYPE_ADD_AT_END)
 {
    int i;

@@ -37,6 +37,8 @@ using namespace std;
 #define WINDOW_MENU_MIN_MAX  1
 #define WINDOW_MENU_CLOSE    3
 
+class windowList;
+
 /*! The Window Object */
 class window: public guiObject
 {
@@ -49,7 +51,7 @@ class window: public guiObject
        * \param title -> title of the window
        * \param list -> guiList pointer to the list where the window is 
        * \param empty -> with window is without any self draw */ 
-      window(int xa, int ya, int xb, int yb, string title, void* list, 
+      window(int xa, int ya, int xb, int yb, string title, windowList* list, 
              bool empty=false);
 
       /*! Destructor */
@@ -138,7 +140,7 @@ class window: public guiObject
       void setModal();
 
    protected:
-      void* intList;             /**< Pointer to the list where the window is */
+      windowList* intList;       /**< Pointer to the list where the window is */
       int minX,                  /**< Min Size of X axys */
           minY;                  /**< Min Size of the Y axys */
       bool canMaximize;          /**< If can maximize the window */

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -26,6 +26,8 @@
 #include "rolbar.h"
 #include "tabbutton.h"
 
+class guiList;
+
 /*! A element of text on listText */
 class textElement: public dntListElement
 {
@@ -45,7 +47,7 @@ class listText: public guiObject, public dntList
        * \param surface -> window surface to draw
        * \param list -> pointer to the GUI objects list */
       listText(int xa, int ya, int xb, int yb, SDL_Surface* surface,
-               void* list);
+               guiList* list);
       /*! Destructor */
       ~listText();
 
@@ -96,7 +98,7 @@ class listText: public guiObject, public dntList
       void freeElement(dntListElement* dnt);
 
    private:
-      void* intList;              /**< Internal GUI Objects List */
+      guiList* intList;           /**< Internal GUI Objects List */
       oneTabButton** listButtons; /**< Buttons of the List*/
       string selectedText;        /**< Text selected */
       int selectedPos;            /**< Position on list of the selected */

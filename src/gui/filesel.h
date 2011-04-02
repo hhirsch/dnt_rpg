@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -38,6 +38,7 @@ using namespace std;
 #define FILE_SEL_ACTION_ACCEPT  2
 #define FILE_SEL_ACTION_CANCEL  3
 
+class guiList;
 
 /*! The fileSel class implements a file seector/navigator (usefull for
  *  open/close dialogs) */
@@ -54,7 +55,7 @@ class fileSel: public guiObject
        * \param list -> pointer to the GUI objects list
        * \param surface -> surface to draw to
        * \param nav -> if will show directories to navigate or not */
-      fileSel(int x, int y, bool load, string dir, void* list, 
+      fileSel(int x, int y, bool load, string dir, guiList* list, 
             SDL_Surface* surface, bool nav=true);
 
       /*! Destructor */
@@ -115,7 +116,7 @@ class fileSel: public guiObject
                                     directory (this used to separate 
                                     strings directories of  strings files)*/
 
-      void* intList;           /**< Internal Gui List used */
+      guiList* intList;        /**< Internal Gui List used */
 
       int lastAction;          /**< Last action occurred  */
 
