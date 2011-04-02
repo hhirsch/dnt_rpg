@@ -79,8 +79,7 @@ thing::~thing()
    dead = true;
    if(battleScript)
    {
-      iaScript* isc = (iaScript*)battleScript;
-      delete(isc);
+      delete(battleScript);
       battleScript = NULL;
    }
 }
@@ -286,7 +285,7 @@ bool thing::doCheck(string stateToCheck, int difficulty)
 /******************************************************
  *                   getBattleScript                  *
  ******************************************************/
-void* thing::getBattleScript()
+iaScript* thing::getBattleScript()
 {
    return(battleScript);
 }
@@ -294,7 +293,7 @@ void* thing::getBattleScript()
 /******************************************************
  *                   setBattleScript                  *
  ******************************************************/
-void thing::setBattleScript(void* script, string scriptFileName)
+void thing::setBattleScript(iaScript* script, string scriptFileName)
 {
    battleScript = script;
    battleScriptFileName = scriptFileName;
@@ -505,7 +504,7 @@ string thing::getConversationFile()
 /*********************************************************************
  *                          getConversation                          *
  *********************************************************************/
-void* thing::getConversation()
+conversation* thing::getConversation()
 {
    return(conv);
 }
@@ -517,10 +516,9 @@ void thing::createConversation(string curMap)
 {
    if(conversationFile != "")
    {
-      conv = (void*) new conversation();
-      conversation* cs = (conversation*)conv;
-      cs->loadFile(conversationFile);
-      cs->setOwner(this, curMap);
+      conv = new conversation();
+      conv->loadFile(conversationFile);
+      conv->setOwner(this, curMap);
    }
 }
 
@@ -531,8 +529,7 @@ void thing::setInitialConversation(int i)
 {
    if(conv != NULL)
    {
-      conversation* cs = (conversation*)conv;
-      cs->setInitialDialog(i);
+      conv->setInitialDialog(i);
    }
 }
 

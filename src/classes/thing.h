@@ -43,6 +43,9 @@
 #define THING_DISPLACEMENT      "DISPLACEMENT"
 #define THING_MAX_LIFE_POINTS   "MAX_LIFE_POINTS"
 
+class conversation;
+class iaScript;
+
 /*! Define what is a thing on game, in other words, what is the base fields
  * for characters and map objects.*/
 class thing
@@ -103,7 +106,7 @@ class thing
 
       /*! Get the character conversation
        * \return -> pointer to the character conversation (or NULL) */
-      void* getConversation();
+      conversation* getConversation();
 
       //////////////////////////////////////////////////////////////////////
       //                                                                  //
@@ -208,12 +211,12 @@ class thing
        *  \return -> pointer to iaScript that 
        *             controlls the battle mode
        *             of this thing. */
-      void* getBattleScript();
+      iaScript* getBattleScript();
 
       /*! Set the battle Script of the thing
        * \param script -> pointer to the battle script
        * \param scriptFileName -> filename of the script */
-      void setBattleScript(void* script, string scriptFileName);
+      void setBattleScript(iaScript* script, string scriptFileName);
 
       /*! Set the thing as enemy to PC */
       void setAsEnemy();
@@ -281,7 +284,7 @@ class thing
       int psychoState;        /**< Thing's Psycho State */
       bool dead;           /**< Dead state or not (if dead is only a corpse) */
 
-      void* battleScript;          /**< Pointer to the battle iaScript */
+      iaScript* battleScript;      /**< Pointer to the battle iaScript */
       string battleScriptFileName; /**< The Battle Script Filename */
 
       int thingType;              /**< The type of the thing */
@@ -290,7 +293,7 @@ class thing
       bool canAttack;             /**< If still have actions at fight */
 
       string conversationFile;    /**< Name of the Conversation File */
-      void* conv;                 /**< Pointer to the conversation */
+      conversation* conv;         /**< Pointer to the conversation */
 
 };
 
