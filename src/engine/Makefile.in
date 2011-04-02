@@ -151,12 +151,24 @@ dialog.o: dialog.cpp dialog.h $(ENDGUI)farso.h character.h barterwindow.h
 	@$(CC) $(CFLAGS) dialog.cpp -o dialog.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-dccnit.o: dccnit.h dccnit.cpp util.h $(ENDETC)userinfo.h $(ENDCLASSES)skills.h $(ENDCLASSES)feats.h $(ENDCLASSES)race.h $(ENDCLASSES)classes.h $(ENDCLASSES)weapon.h $(ENDCLASSES)actions.h $(ENDCLASSES)mission.h $(ENDETC)message3d.h $(ENDETC)dirs.h $(ENDFIGHT)fightSystem.h $(ENDGUI)farso.h $(ENDMAP)map.h $(ENDPART)partcontroller.h $(ENDPART)particle.h $(ENDSOUND)sound.h $(ENDIA)iascript.h alignwindow.h aspectwindow.h attwindow.h camera.h character.h classwindow.h collision.h cursor.h dialog.h featsel.h initial.h inventwindow.h itemwindow.h modstate.h options.h racewindow.h shadow.h shortcutswindow.h skillwindow.h sun.h util.h
+dccnit.o: dccnit.h dccnit.cpp util.h $(ENDETC)userinfo.h \
+          $(ENDCLASSES)skills.h $(ENDCLASSES)feats.h \
+			 $(ENDCLASSES)race.h $(ENDCLASSES)classes.h \
+			 $(ENDCLASSES)weapon.h $(ENDCLASSES)actions.h \
+			 $(ENDCLASSES)mission.h $(ENDETC)message3d.h $(ENDETC)dirs.h \
+			 $(ENDFIGHT)fightSystem.h $(ENDGUI)farso.h $(ENDMAP)map.h \
+			 $(ENDPART)partcontroller.h $(ENDPART)particle.h \
+			 $(ENDSOUND)sound.h $(ENDIA)iascript.h $(ENDIA)astar.h \
+			 alignwindow.h aspectwindow.h attwindow.h camera.h character.h \
+			 classwindow.h collision.h cursor.h dialog.h featsel.h initial.h \
+			 inventwindow.h itemwindow.h modstate.h options.h racewindow.h \
+			 shadow.h shortcutswindow.h skillwindow.h sun.h util.h
 	@printf "Making dccnit.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) dccnit.cpp -o dccnit.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-featsel.o: featsel.h featsel.cpp character.h $(ENDGUI)farso.h $(ENDCLASSES)feats.h
+featsel.o: featsel.h featsel.cpp character.h $(ENDGUI)farso.h \
+           $(ENDCLASSES)feats.h
 	@printf "Making featsel.o... "
 	@$(CC) $(CFLAGS) featsel.cpp -o featsel.o
 	@printf "\e[0;32mDone.\e[0;0m\n"

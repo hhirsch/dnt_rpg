@@ -86,6 +86,9 @@ class listStar: public dntList
 #define ASTAR_STATE_FOUND     2  /**< A* Found Path State */   
 #define ASTAR_STATE_NOT_FOUND 3  /**< A* Not Found Path State */
 
+class character;
+class characterList;
+
 /*! A* implementation. The A* will be searching few nodes per cycle. 
  *  When running, state is RUNNING. When end running, state is
  *  FOUND or NOT_FOUND, based on the result of the search. */
@@ -112,8 +115,8 @@ class aStar
        * \param forceCall -> true to force the call (there's a counter inner
        *                      the function that don't allow too often calls)
        * */
-      void findPath(void* actor, GLfloat x, GLfloat z, GLfloat stepSize,
-                    void* NPCs, void* PCs, bool fightMode, 
+      void findPath(character* actor, GLfloat x, GLfloat z, GLfloat stepSize,
+                    characterList* NPCs, characterList* PCs, bool fightMode, 
                     bool forceCall=false);
 
       /* Do the a* cycle (if is current searching for something)
@@ -162,9 +165,9 @@ class aStar
               destinyZ;         /**< Destiny Z position */
       pattAgent* patt;          /**< The Pattern Agent to Follow created path */
       int state;                /**< Internal State of the aStar */
-      void* curActor;           /**< Current Actor */
-      void* pcs;                /**< PCs list */
-      void* npcs;               /**< NPCs list */
+      character* curActor;      /**< Current Actor */
+      characterList* pcs;       /**< PCs list */
+      characterList* npcs;      /**< NPCs list */
       GLfloat curStepSize;      /**< Current Step Size */
       bool walking;             /**< True if the character is walking with
                                      at a* at the momment. */

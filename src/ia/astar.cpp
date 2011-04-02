@@ -20,6 +20,8 @@
 
 #include "astar.h"
 #include "../engine/collision.h"
+#include "../engine/character.h"
+
 #include <math.h>
 
 #define SEARCH_LIMIT   1000  /**< Max Nodes the aStar will search */
@@ -116,8 +118,9 @@ void aStar::forceNextCall()
 /****************************************************************
  *                            findPath                          *
  ****************************************************************/
-void aStar::findPath(void* actor, GLfloat x, GLfloat z, GLfloat stepSize,
-                     void* NPCs, void* PCs, bool fightMode, bool forceCall)
+void aStar::findPath(character* actor, GLfloat x, GLfloat z, GLfloat stepSize,
+                     characterList* NPCs, characterList* PCs, 
+                     bool fightMode, bool forceCall)
 {
    GLuint actualTime = SDL_GetTicks();
 
@@ -154,14 +157,14 @@ void aStar::findPath(void* actor, GLfloat x, GLfloat z, GLfloat stepSize,
       npcs = NPCs;
 
       /* Verify the distance to the target. If too near, no need to walk. */
-      GLfloat actualX = ((character*)actor)->scNode->getPosX();
-      GLfloat actualZ = ((character*)actor)->scNode->getPosZ();
+      GLfloat actualX = actor->scNode->getPosX();
+      GLfloat actualZ = actor->scNode->getPosZ();
       dX = (x - actualX);
       dZ = (z - actualZ);
       GLfloat dist = sqrt( (dX*dX) + (dZ*dZ) );
 
       /* Verify if the actor is alive (dead things can't walk, right?) */
-      if(!((character*)actor)->isAlive())
+      if(!actor->isAlive())
       {
          state = ASTAR_STATE_NOT_FOUND;
          return;
@@ -170,7 +173,7 @@ void aStar::findPath(void* actor, GLfloat x, GLfloat z, GLfloat stepSize,
       if(fightMode)
       {
          /* Verify if can walk */
-         if(!((character*)actor)->getCanMove())
+         if(!actor->getCanMove())
          {
              /* Can't move! */
              state = ASTAR_STATE_NOT_FOUND;
@@ -183,7 +186,7 @@ void aStar::findPath(void* actor, GLfloat x, GLfloat z, GLfloat stepSize,
       collisionDetect.defineMap(actualMap, (characterList*)npcs, 
                                 (characterList*)pcs);
       GLfloat varHeight=0, nx=0, nz=0;
-      if(!collisionDetect.canWalk((character*)actor, destinyX, 0, destinyZ, 0, 
+      if(!collisionDetect.canWalk(actor, destinyX, 0, destinyZ, 0, 
                                    varHeight, nx, nz, false))
       {
          state = ASTAR_STATE_NOT_FOUND;
@@ -194,7 +197,7 @@ void aStar::findPath(void* actor, GLfloat x, GLfloat z, GLfloat stepSize,
       if( (destinyX < 0) || (destinyZ < 0) || 
           (destinyX >= actualMap->getSizeX()*actualMap->squareSize()) ||
           (destinyZ >= actualMap->getSizeZ()*actualMap->squareSize()) ||
-          (dist > 4*((character*)actor)->displacement ) )
+          (dist > 4*(actor->displacement)) )
       {
          state = ASTAR_STATE_NOT_FOUND;
          return;
@@ -295,7 +298,7 @@ void aStar::doCycle(bool fightMode)
          patt = new pattAgent(true);
          patt->defineDestiny(node->x, node->z);
          patt->defineStepSize(curStepSize);
-         patt->defineOrientation( ((character*)curActor)->scNode->getAngleY() );
+         patt->defineOrientation(curActor->scNode->getAngleY());
          patt->defineSight(curStepSize*10, 360);
          destinyX = node->x;
          destinyZ = node->z;
@@ -307,10 +310,10 @@ void aStar::doCycle(bool fightMode)
             node = closed->find(node->parentX, node->parentZ);
          }
          patt->removeLinearWayPoints();
-         patt->setOrigin( ((character*)curActor)->scNode->getPosX(), 
-                          ((character*)curActor)->scNode->getPosZ() );
-         patt->definePosition( ((character*)curActor)->scNode->getPosX(), 
-                               ((character*)curActor)->scNode->getPosZ() );
+         patt->setOrigin(curActor->scNode->getPosX(), 
+                         curActor->scNode->getPosZ());
+         patt->definePosition(curActor->scNode->getPosX(), 
+                              curActor->scNode->getPosZ() );
 
          /* We're done */
          clearSearch();
@@ -390,7 +393,7 @@ void aStar::doCycle(bool fightMode)
         }
 
         /* Only look at valid nodes */
-        if(collisionDetect.canWalk((character*)curActor, posX, 0, posZ, 0, 
+        if(collisionDetect.canWalk(curActor, posX, 0, posZ, 0, 
                                    varHeight, nx, nz, false) )
         {
            /* New Gone is the current gone + distance to this one */
@@ -491,21 +494,20 @@ bool aStar::getNewPosition(GLfloat& posX, GLfloat& posZ, GLfloat& ori,
       if(fightMode)
       {
          /* Verify if overflow the max normal walk */
-         if( (patt->getTotalWalked() > ((character*)curActor)->displacement) &&
-             ( !((character*)curActor)->getCanAttack() ) )
+         if( (patt->getTotalWalked() > curActor->displacement) &&
+             ( !curActor->getCanAttack() ) )
          {
             /* Can't do a full move, so stop here */
-            ((character*)curActor)->setCanMove(false);
+            curActor->setCanMove(false);
             walking = false;
             return(false);
          }
 
          /* Verify if overflow the max full walk */
-         else if( patt->getTotalWalked() >= 
-               2*((character*)curActor)->displacement)
+         else if( patt->getTotalWalked() >= 2*curActor->displacement)
          {
-            ((character*)curActor)->setCanAttack(false);
-            ((character*)curActor)->setCanMove(false);
+            curActor->setCanAttack(false);
+            curActor->setCanMove(false);
             walking = false;
             return(false);
          }
@@ -514,11 +516,11 @@ bool aStar::getNewPosition(GLfloat& posX, GLfloat& posZ, GLfloat& ori,
          else if( (posX == destinyX) && (posZ == destinyZ) )
          {
             /* Update the booleans */
-            if(patt->getTotalWalked() > ((character*)curActor)->displacement)
+            if(patt->getTotalWalked() > curActor->displacement)
             {
-               ((character*)curActor)->setCanAttack(false);
+               curActor->setCanAttack(false);
             }
-            ((character*)curActor)->setCanMove(false);
+            curActor->setCanMove(false);
             
             /* Stop the motion */
             walking = false;

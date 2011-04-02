@@ -84,7 +84,8 @@ object.o: object.cpp object.h thing.h $(ENDETC)scene.h $(ENDETC)scenenode.h
 	@$(CC) $(CFLAGS) object.cpp -o object.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-pendingaction.o: pendingaction.cpp pendingaction.h thing.h $(ENDENGINE)character.h
+pendingaction.o: pendingaction.cpp pendingaction.h thing.h \
+                 $(ENDIA)astar.h $(ENDENGINE)character.h
 	@printf "Making pendingaction.o... "
 	@$(CC) $(CFLAGS) pendingaction.cpp -o pendingaction.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
