@@ -2302,6 +2302,9 @@ int engine::verifyMouseActions(Uint8 mButton)
 {
    char buf[1024];
    boundingBox colBox;
+   character* pers;
+   int i;
+   int pronto=0;
 
    Uint32 time = SDL_GetTicks();
    activeCharacter = PCs->getActiveCharacter();
@@ -2320,7 +2323,6 @@ int engine::verifyMouseActions(Uint8 mButton)
    Square* quaux = actualMap->relativeSquare(qx,qz);
    if(quaux != NULL)
    {
-      int pronto;
       int obj = 0;
       objSquare* sobj = quaux->getFirstObject();
 
@@ -2450,28 +2452,6 @@ int engine::verifyMouseActions(Uint8 mButton)
          porta = (door*)porta->getNext();
       }
 
-      /* Inventory Verification */
-      int i;
-      character* pers = (character*) PCs->getFirst();
-      for(i = 0; ((i < PCs->getTotal()) && (!pronto)); i++)
-      {
-         colBox = pers->scNode->getBoundingBox();
-         if(mouseBox.intercepts(colBox))
-         {
-            cursors->set(CURSOR_INVENTORY);
-            cursors->setTextOver(pers->name);
-            curTarget = (thing*)pers;
-
-            /* Open Inventory when button pressed */
-            if( (mButton & SDL_BUTTON(1)) && (!inventoryWindow))
-            {
-               openCloseInventoryWindow();
-            }
-            pronto = 1;
-         }
-         pers = (character*) pers->getNext();
-      }
-
       /* Talk And Attack Events Verification */
       if(NPCs)
       {
@@ -2597,12 +2577,39 @@ int engine::verifyMouseActions(Uint8 mButton)
       {
          curConection = NULL;
       }
-
-      if( (!pronto) )
-      {
-         cursors->setTextOver(/*gettext("Nothing")*/""); 
-      }
    }
+
+   pers = (character*) PCs->getFirst();
+   for(i = 0; ((i < PCs->getTotal()) && (!pronto)); i++)
+   {
+      /* Mouse under portrait or health bar */
+      if( (pers->mouseUnderPortrait(mouseX, mouseY)) || 
+            (pers->mouseUnderHealthBar(mouseX, mouseY)) )
+      {
+         pronto = 1;
+         break;
+      }
+
+      /* Inventory Verification */
+      colBox = pers->scNode->getBoundingBox();
+      if(mouseBox.intercepts(colBox))
+      {
+         cursors->set(CURSOR_INVENTORY);
+         cursors->setTextOver(pers->name);
+         curTarget = (thing*)pers;
+
+         /* Open Inventory when button pressed */
+         if( (mButton & SDL_BUTTON(1)) && (!inventoryWindow))
+         {
+            openCloseInventoryWindow();
+         }
+         pronto = 1;
+      }
+
+      pers = (character*) pers->getNext();
+   }
+
+
    return(0);
 }
 

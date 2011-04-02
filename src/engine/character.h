@@ -119,6 +119,15 @@ class character: public thing, public dntListElement
       /*! Draw the Portrait */
       void drawMainPortrait();
 
+      /*! Verify if the mouse is under portrait or not, setting text if is
+       * \param mouseX -> mouse X coordinate
+       * \param mouseY -> mouse Y coordinate */
+      bool mouseUnderPortrait(int mouseX, int mouseY);
+      /*! Verify if the mouse is under healthBar or not, setting text if is
+       * \param mouseX -> mouse X coordinate
+       * \param mouseY -> mouse Y coordinate */
+      bool mouseUnderHealthBar(int mouseX, int mouseY);
+
       /*! Get First Level Skill Points
        * \param cl -> pointer to the class
        * \return -> total points at first level */

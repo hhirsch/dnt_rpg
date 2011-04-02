@@ -22,12 +22,14 @@
 #include "barterwindow.h"
 #include "dialog.h"
 #include "modstate.h"
+#include "cursor.h"
 
 #include "../gui/draw.h"
 #include "../ia/iascript.h"
 #include "../etc/dirs.h"
 #include "../etc/defparser.h"
 #include "../lang/translate.h"
+#include "../classes/xp.h"
 
 #include <SDL/SDL_image.h>
 #include <iostream>
@@ -509,6 +511,42 @@ void character::drawMainPortrait()
    glEnd();
 
    glDisable(GL_TEXTURE_2D);
+}
+
+/*********************************************************************
+ *                        mouseUnderPortrait                         *
+ *********************************************************************/
+bool character::mouseUnderPortrait(int mouseX, int mouseY)
+{
+   cursor cur;
+   char buf[256];
+
+   if(isMouseAt(SCREEN_X-portraitImage->w-1, 1,
+                SCREEN_X-1, 64, mouseX, mouseY) )
+   {
+      sprintf(buf, "%s (%d/%d)", name.c_str(), xp, nextLevelXP(xp)); 
+      cur.setTextOver(buf);
+      return(true);
+   }
+   return(false);
+}
+
+/*********************************************************************
+ *                        mouseUnderHealthBar                        *
+ *********************************************************************/
+bool character::mouseUnderHealthBar(int mouseX, int mouseY)
+{
+   cursor cur;
+   char buf[128];
+   
+   if(isMouseAt(SCREEN_X-portraitImage->w+4, 65,
+                SCREEN_X-6, 75, mouseX, mouseY) )
+   {
+      sprintf(buf, "%s: %d/%d", gettext("HP"), lifePoints, maxLifePoints); 
+      cur.setTextOver(buf);
+      return(true);
+   }
+   return(false);
 }
 
 /******************************************************************

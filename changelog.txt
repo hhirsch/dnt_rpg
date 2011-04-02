@@ -5,6 +5,7 @@
  - map: Add object rotation to all axis;
  - Created scene and sceneNode abstractions;
  - New Bounding Box class;
+ - Added character info text when mouse over portrait;
 
 
 BugFixes:
