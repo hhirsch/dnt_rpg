@@ -70,6 +70,9 @@ class particle
       int internalNumber;        /**< Internal Number */
 };
 
+class thing;
+class Map;
+
 /*! The Particle System */
 class particleSystem: public dntListElement
 {
@@ -124,11 +127,11 @@ class particleSystem: public dntListElement
       /*! Set if the particleSystem will follow the PC or not
        * \param follow -> pointer to the character to follow
        * \param t -> floow type constant */
-      void setFollowCharacter(void* follow, int type);
+      void setFollowCharacter(thing* follow, int type);
 
       /*! Define the opened map
        * \param actualMap -> pointer to the opened map */
-      void defineMap(void* actualMap);
+      void defineMap(Map* actualMap);
 
       /*! Set the duration time to the system be deleted 
        * from controller
@@ -169,7 +172,7 @@ class particleSystem: public dntListElement
       int type;               /**< The particle type constant */
       int maxParticles;       /**< Max number of particles */
       int actualParticles;    /**< Number of actual alive particles */
-      void* followCharacter;  /**< If the orign of System Follows a character */
+      thing* followCharacter;  /**< If the orign Follows a character */
       int followType;         /**< If the follow character is a PC */
       bool windAffect;        /**< If Wind Affects the System */
       bool floorCollision;    /**< If collide with map's floor or not */
@@ -179,7 +182,7 @@ class particleSystem: public dntListElement
       GLuint partTexture;     /**< Current particle texture */
       extensions ext;         /**< The OpenGL Extensions */
       bool doneCreation;      /**< true when is no more to create particles */
-      void* curMap;           /**< the current map used */
+      Map* curMap;            /**< the current map used */
 
       /* Life related */
       int initialLifeTime;       /**< Time the Particle start to live  */

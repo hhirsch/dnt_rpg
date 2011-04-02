@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -460,22 +460,21 @@ void grass::defineSize(particle* part)
 /**************************************************************************
  *                              defineMap                                 *
  **************************************************************************/
-void grass::defineMap(void* actualMap)
+void grass::defineMap(Map* actualMap)
 {
    int i;
    usedMap = actualMap;
-   Map* mapa = (Map*)actualMap;
    for(i = 0; i < maxParticles; i++)
    {
       if(particles[i].status != PARTICLE_STATUS_DEAD)
       {
-         particles[i].posY = mapa->getHeight(particles[i].posX - 8.0, 
+         particles[i].posY = actualMap->getHeight(particles[i].posX - 8.0, 
                                              particles[i].posZ) + 10;
-         particles[i].prvX = mapa->getHeight(particles[i].posX + 8.0, 
+         particles[i].prvX = actualMap->getHeight(particles[i].posX + 8.0, 
                                              particles[i].posZ) + 10;
-         particles[i].prvY = mapa->getHeight(particles[i].posX + 8.0, 
+         particles[i].prvY = actualMap->getHeight(particles[i].posX + 8.0, 
                                              particles[i].posZ);
-         particles[i].prvZ = mapa->getHeight(particles[i].posX - 8.0, 
+         particles[i].prvZ = actualMap->getHeight(particles[i].posX - 8.0, 
                                              particles[i].posZ);
       }
    }

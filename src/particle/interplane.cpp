@@ -48,21 +48,20 @@ void interPlaneList::freeElement(dntListElement* obj)
 /****************************************************************************
  *                            intersectPlanes                               *
  ****************************************************************************/
-bool interPlaneList::intersectPlanes(void* p, float* dX, float* dZ)
+bool interPlaneList::intersectPlanes(particle* p, float* dX, float* dZ)
 {
    int i;
    float yOnPlane = 0;
    float size;
-   particle* part = (particle*)p;
    
    interPlane* ip = (interPlane*)getFirst();
 
    for(i = 0; i < getTotal(); i++)
    {
-      if( (part->posX <= ip->x2) && 
-          (part->posX >= ip->x1) &&
-          (part->posZ <= ip->z2) && 
-          (part->posZ >= ip->z1) )
+      if( (p->posX <= ip->x2) && 
+          (p->posX >= ip->x1) &&
+          (p->posZ <= ip->z2) && 
+          (p->posZ >= ip->z1) )
       {
          switch(ip->inclination)
          { 
@@ -72,20 +71,19 @@ bool interPlaneList::intersectPlanes(void* p, float* dX, float* dZ)
              case PLANE_INCLINATION_X:
              {
                 size = (ip->x2 - ip->x1);
-                yOnPlane = ((ip->x2 - part->posX) / size) * ip->y1 +
-                           ((part->posX - ip->x1) / size) * ip->y2;
+                yOnPlane = ((ip->x2 - p->posX) / size) * ip->y1 +
+                           ((p->posX - ip->x1) / size) * ip->y2;
              }
              break;
              case PLANE_INCLINATION_Z:
              {
                 size = (ip->z2 - ip->z1);
-                yOnPlane = ((ip->z2 - part->posZ) / size) * ip->y1 +
-                           ((part->posZ - ip->z1) / size) * ip->y2;
+                yOnPlane = ((ip->z2 - p->posZ) / size) * ip->y1 +
+                           ((p->posZ - ip->z1) / size) * ip->y2;
              }
              break;
          }
-         if( ((part->posY >= yOnPlane - 1) && (part->posY <= yOnPlane + 1)) )
-             
+         if( ((p->posY >= yOnPlane - 1) && (p->posY <= yOnPlane + 1)) )
          {
             *dX = ip->dX;
             *dZ = ip->dZ;

@@ -29,6 +29,8 @@
 #include <string>
 using namespace std;
 
+class Map;
+
 /*! The partController class controls all particles systens, 
     make their updates, renders, deaths, etc. */
 class partController
@@ -83,14 +85,14 @@ class partController
       /*! Define the opened map
        * \param acMap -> pointer to the opened map
        * \param col -> pointer to the collision system */
-      void setActualMap(void* acMap, collision* col);
+      void setActualMap(Map* acMap, collision* col);
 
 
    private:
       static particleList* particles;        /**< Waterfall Particles */
       
       static collision* colDetect;           /**< Collision System */
-      static void* currentMap;               /**< Current Map */
+      static Map* currentMap;                /**< Current Map */
 
 };
 

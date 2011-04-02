@@ -25,7 +25,7 @@
 #include <SDL/SDL_image.h>
 
 #include "../engine/culling.h"
-#include "../engine/character.h"
+#include "../classes/thing.h"
 #include "../map/map.h"
 #include "../etc/defparser.h"
 
@@ -657,11 +657,10 @@ void particleSystem::update(particle* part)
    /* Verify floor collision */
    if( (floorCollision) && (part->status != PARTICLE_STATUS_STATIC)) 
    {
-      Map* m = (Map*)curMap;
       float height=0.0f;
-      if(m != NULL)
+      if(curMap != NULL)
       {
-         height = m->getHeight(part->posX, part->posZ);
+         height = curMap->getHeight(part->posX, part->posZ);
          if(part->posY < height)
          {
             part->posY = height;
@@ -678,7 +677,7 @@ void particleSystem::update(particle* part)
  ***************************************************************/
 void particleSystem::updateByCharacter()
 {
-   character* chr;
+   thing* chr;
 
    if( (!followCharacter) || (followType == DNT_PARTICLE_SYSTEM_FOLLOW_NONE))
    {
@@ -686,7 +685,7 @@ void particleSystem::updateByCharacter()
       return;
    }
 
-   chr = (character*)followCharacter;
+   chr = followCharacter;
    switch(followType)
    {
       case DNT_PARTICLE_SYSTEM_FOLLOW_HEAD:
@@ -896,7 +895,7 @@ void particleSystem::definePosition(float cX, float cY, float cZ)
 /***********************************************************
  *                      defineMap                          *
  ***********************************************************/
-void particleSystem::defineMap(void* actualMap)
+void particleSystem::defineMap(Map* actualMap)
 {
    curMap = actualMap;
 }
@@ -936,7 +935,7 @@ int particleSystem::numParticles()
 /***********************************************************
  *                      setFollowPC                        *
  ***********************************************************/
-void particleSystem::setFollowCharacter(void* follow, int t)
+void particleSystem::setFollowCharacter(thing* follow, int t)
 {
    followCharacter = follow;
    followType = t;

@@ -42,6 +42,8 @@ class interPlane: public dntListElement
       int inclination; /**< Inclination Type of plane */
 };
 
+class particle;
+
 /*! The list of intersection planes */
 class interPlaneList: public dntList
 {
@@ -56,7 +58,7 @@ class interPlaneList: public dntList
        * \param dX -> Variation on X of the plane, if intersected
        * \param dZ -> Variation on Z of the plane, if intersected 
        * \return true if intersected some plane */
-      bool intersectPlanes(void* p, float* dX, float* dZ);
+      bool intersectPlanes(particle* p, float* dX, float* dZ);
 
    protected:
       /*! Free the interPlane memory

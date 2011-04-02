@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -28,6 +28,7 @@
 #include <string>
 using namespace std;
 
+class Map;
 
 #define GRASS_INFLUENCE_AREA    10   /**< The Influence area */
 
@@ -116,7 +117,7 @@ public:
        * Define the opened map
        * \param actualMap -> pointer to the opened map
        ***************************************************************/
-      void defineMap(void* actualMap);
+      void defineMap(Map* actualMap);
 
       /*!
        ***************************************************************
@@ -190,7 +191,7 @@ public:
       int vArrayPos;         /**< Actual Vertex Array Position */
       int tArrayPos;         /**< Actual Texture Array Position */
 
-      void* usedMap;        /**< Actual Openned Map */
+      Map* usedMap;        /**< Actual Openned Map */
 };
 
 

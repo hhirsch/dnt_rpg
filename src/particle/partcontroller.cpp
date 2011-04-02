@@ -24,6 +24,8 @@
 #include "../etc/extensions.h"
 #include "../engine/character.h"
 
+#include "../map/map.h"
+
 #include <fstream>
 #include <iostream>
 using namespace std;
@@ -145,7 +147,7 @@ void partController::stabilizeAll()
 /**********************************************************************
  *                                setMap                              *
  **********************************************************************/
-void partController::setActualMap(void* acMap, collision* col)
+void partController::setActualMap(Map* acMap, collision* col)
 {
    int i;
    particleSystem* part;
@@ -299,5 +301,5 @@ void partController::saveToFile(string fileName)
  **********************************************************************/
 particleList* partController::particles = NULL;
 collision* partController::colDetect = NULL;
-void* partController::currentMap = NULL;
+Map* partController::currentMap = NULL;
 
