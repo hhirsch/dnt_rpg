@@ -1001,6 +1001,7 @@ character* characterList::insertCharacter(string file, featsList* ft,
    int lvl;
    int curClass = 0;
    int tmp=0;
+   int randPos=0;
    feat* cFeat = NULL;
    string cal3dName = "";
    scene curScene;
@@ -1296,7 +1297,8 @@ character* characterList::insertCharacter(string file, featsList* ft,
 
    /* Let's get the crude bounding box for IDLE state */
    novo->scNode->getModel()->setState(STATE_IDLE);
-   novo->scNode->getModel()->update(0, 0, 0, 0, 0); 
+   randPos =  11 + (int)(30 * (rand() / (RAND_MAX + 1.0))); 
+   novo->scNode->getModel()->update(randPos, 0, 0, 0, 0); 
    novo->scNode->updateBoundingBox();
    /* Now, disable any further update to the crude bounding box */
    novo->scNode->disableCrudeBoundingBoxUpdate();
