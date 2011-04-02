@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -48,6 +48,8 @@
 #define INVENTORY_INVENTORY     8  /**< is in inventory */
 
 #define INVENTORY_PER_CHARACTER 4  /**< Number of Inventories per Character */
+
+class inventWindow;
 
 /*! Character Inventory Definition */
 class inventory
@@ -159,12 +161,12 @@ class inventory
       object* getItemByFileName(string fileName);
 
       /*! Set the inventory Opened Window
-       * \param window -> pointer to an inventWindow */
-      void setOpenedWindow(void* window);
+       * \param w -> pointer to an inventWindow */
+      void setOpenedWindow(inventWindow* w);
 
       /*! Get the current inventory opened window
        * \return -> pointer to the current inventory window or NULL */
-      void* getOpenedWindow();
+      inventWindow* getOpenedWindow();
 
       /*! Get total number of items at the inventory
        * \return -> total number of items */
@@ -174,7 +176,7 @@ class inventory
       /*! For debug: print all names of inventory itens on terminal */
       void print();
 
-      void* openedWindow;          /**< Pointer to the opened window */
+      inventWindow* openedWindow;          /**< Pointer to the opened window */
 
       itemSlot** slots;            /**< The Inventory */
       itemSlot** equippedSlots;    /**< The Equipped Slots */

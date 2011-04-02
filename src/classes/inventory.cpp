@@ -110,15 +110,15 @@ inventory::~inventory()
 /**************************************************************
  *                       setOpenedWindow                      *
  **************************************************************/
-void inventory::setOpenedWindow(void* window)
+void inventory::setOpenedWindow(inventWindow* w)
 {
-   openedWindow = window;
+   openedWindow = w;
 }
 
 /**************************************************************
  *                        getOpenedWindow                     *
  **************************************************************/
-void* inventory::getOpenedWindow()
+inventWindow* inventory::getOpenedWindow()
 {
    return(openedWindow);
 }
@@ -156,8 +156,7 @@ bool inventory::addObject(object* obj, int x, int y, int curInv)
    /* Redraw the window if needed */
    if( (res) && (openedWindow != NULL))
    {
-      inventWindow* i = (inventWindow*)openedWindow;
-      i->reDraw();
+      openedWindow->reDraw();
    }
 
    return(res);
@@ -220,8 +219,7 @@ void inventory::dropObject(object* obj, int x, int y, int inv,
    /* Redraw the window, if opened */
    if( (inv < INVENTORY_PER_CHARACTER) && (openedWindow != NULL))
    {
-      inventWindow* i = (inventWindow*)openedWindow;
-      i->reDraw();
+      openedWindow->reDraw();
    }
 }
 
@@ -265,8 +263,7 @@ bool inventory::addObject(object* obj)
       if(openedWindow != NULL)
       {
          /* Redraw the window if needed */
-         inventWindow* i = (inventWindow*)openedWindow;
-         i->reDraw();
+         openedWindow->reDraw();
       }
    }
 
