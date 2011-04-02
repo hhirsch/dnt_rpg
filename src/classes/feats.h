@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -140,6 +140,7 @@ class feat
       int featNumber;              /**< Number on feats */
 };
 
+class engine;
 
 /*! the class feats defines the Character's Feats,
  * and its functions to up-to-date, use, etc. */
@@ -147,7 +148,7 @@ class feats
 {
    public:
       /*! feats Constuctor */
-      feats(void* usedEngine);
+      feats(engine* usedEngine);
       /*! feats Destructior */
       ~feats();
       
@@ -238,7 +239,7 @@ class feats
 
       feat m_feats[MAX_FEATS];  /**< Internal Feats Struct */
       int  totalFeats;          /**< Actual Number of Feats */
-      void* uEngine;            /**< Pointer to the used engine */
+      engine* uEngine;          /**< Pointer to the used engine */
 
       /*! Use a quantity of the feat and propagate to other dependent 
        * feats.

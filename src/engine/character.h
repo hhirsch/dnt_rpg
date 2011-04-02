@@ -46,6 +46,8 @@ using namespace std;
 
 #define MAX_DISTINCT_CLASSES 3 /**< Max Different Classes for MultiClass */
 
+class engine;
+class iaScript;
 
 /*! Character Class */
 class character: public thing, public dntListElement
@@ -54,7 +56,7 @@ class character: public thing, public dntListElement
       /*! Constructor
        * \param ft -> pointer to all feats list
        * \param usedEngine -> pointer to the current engine */
-      character(featsList* ft, void* usedEngine);
+      character(featsList* ft, engine* usedEngine);
       /*! Destructor */
       ~character();
 
@@ -219,7 +221,7 @@ class character: public thing, public dntListElement
 
       /*! Get the general script pointer
        * \return genereal iaScript pointer */
-      void* getGeneralScript();
+      iaScript* getGeneralScript();
 
       /*! Add a modEffect to the character
        * \param mod -> modifier value
@@ -287,7 +289,7 @@ class character: public thing, public dntListElement
 
       modEffectList* effects;     /**< Current character effects */
 
-      void* generalScript;         /**< Pointer to the general iaScript */
+      iaScript* generalScript;    /**< Pointer to the general iaScript */
       string generalScriptFileName;/**< The General Script Filename */
 };
 
@@ -309,7 +311,7 @@ class characterList: public dntList
        * \param curMap -> fileName of the current map
        * \return pointer to opened character*/
       character* insertCharacter(string file, featsList* ft, 
-            void* pEngine, string curMap);
+            engine* pEngine, string curMap);
 
       /*!
        * Remove one character from list

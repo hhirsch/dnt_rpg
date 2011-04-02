@@ -111,7 +111,7 @@ featDescription::~featDescription()
 /***************************************************************
  *                       Constructor                           *
  ***************************************************************/
-feats::feats(void* usedEngine)
+feats::feats(engine* usedEngine)
 {
    totalFeats = 0;
    uEngine = usedEngine;
@@ -275,7 +275,6 @@ bool feats::useFeatAtTarget(thing* actor, int featNumber, thing* target)
    briefing brief;
    char texto[255];
    iaScript* sc;
-   engine* eng = (engine*)uEngine;
 
    if( (canUse(featNumber)) && (!m_feats[featNumber].info->scriptFile.empty()))
    {
@@ -300,7 +299,7 @@ bool feats::useFeatAtTarget(thing* actor, int featNumber, thing* target)
 
       /* Set infos */
       sc->defineCharacterOwner((character*)actor);
-      sc->defineMap(eng->getCurrentMap(), eng->NPCs);
+      sc->defineMap(uEngine->getCurrentMap(), uEngine->NPCs);
 
       /* Set parameters */
       sc->setParameter("target", target);
@@ -329,7 +328,6 @@ bool feats::useFeatAtArea(thing* actor, int featNumber,
    briefing brief;
    char texto[255];
    iaScript* sc;
-   engine* eng = (engine*)uEngine;
 
    if( (canUse(featNumber)) && (!m_feats[featNumber].info->scriptFile.empty()))
    {
@@ -354,7 +352,7 @@ bool feats::useFeatAtArea(thing* actor, int featNumber,
 
       /* Set infos */
       sc->defineCharacterOwner((character*)actor);
-      sc->defineMap(eng->getCurrentMap(), eng->NPCs);
+      sc->defineMap(uEngine->getCurrentMap(), uEngine->NPCs);
 
       /* Set parameters */
       sc->setParameter("x", &x);
@@ -382,7 +380,6 @@ bool feats::useFeatAtArea(thing* actor, int featNumber,
 bool feats::applyPermanentFeat(thing* actor, int featNumber)
 {
    iaScript* sc;
-   engine* eng = (engine*)uEngine;
 
    if( (canUse(featNumber)) && (!m_feats[featNumber].info->scriptFile.empty()))
    {
@@ -391,7 +388,7 @@ bool feats::applyPermanentFeat(thing* actor, int featNumber)
 
       /* Set infos */
       sc->defineCharacterOwner((character*)actor);
-      sc->defineMap(eng->getCurrentMap(), eng->NPCs);
+      sc->defineMap(uEngine->getCurrentMap(), uEngine->NPCs);
 
       /* Run it! */
       sc->run(0);

@@ -23,6 +23,7 @@
 #include "dialog.h"
 #include "modstate.h"
 #include "cursor.h"
+#include "dccnit.h"
 
 #include "../gui/draw.h"
 #include "../ia/iascript.h"
@@ -43,7 +44,7 @@ using namespace std;
 /*********************************************************************
  *                             constructor                           *
  *********************************************************************/
-character::character(featsList* ft, void* usedEngine)
+character::character(featsList* ft, engine* usedEngine)
 {
    int i;
 
@@ -132,8 +133,7 @@ character::~character()
    }
    if(generalScript)
    {
-      iaScript* isc = (iaScript*)generalScript;
-      delete(isc);
+      delete(generalScript);
       generalScript = NULL;
    }
    if(effects)
@@ -389,7 +389,7 @@ bool character::isAlignOf(string al)
 /*********************************************************************
  *                         getGeneralScript                          *
  *********************************************************************/
-void* character::getGeneralScript()
+iaScript* character::getGeneralScript()
 {
    return(generalScript);
 }
@@ -1029,7 +1029,7 @@ characterList::~characterList()
  *                           insertCharacter                         *
  *********************************************************************/
 character* characterList::insertCharacter(string file, featsList* ft,
-                                          void* pEngine, string curMap)
+                                          engine* pEngine, string curMap)
 
 {
    defParser def;
@@ -1110,11 +1110,10 @@ character* characterList::insertCharacter(string file, featsList* ft,
       else if(key == "generalScript")
       {
          /* Create the script */
-         iaScript* isc = new iaScript(value, pEngine);
-         novo->generalScript = isc;
+         novo->generalScript = new iaScript(value, pEngine);
          novo->generalScriptFileName = value;
          /* Set the owner */
-         isc->defineCharacterOwner(novo);
+         novo->generalScript->defineCharacterOwner(novo);
       }
       /* Battle Script */
       else if(key == "battleScript")
