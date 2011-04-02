@@ -289,6 +289,24 @@ void cursor::draw(int mouseX, int mouseY, float angle,
       tx1 = mouseX - hotSpot[currentCursor][0];
       ty1 = mouseY - hotSpot[currentCursor][1]-textOverHeight-2;
 
+      /* Verify off screen */
+      if(ty1 < 0)
+      {
+         ty1 = 0;
+      }
+      else if(ty1+textOverHeight > SCREEN_Y-1)
+      {
+         ty1 = (SCREEN_Y-1) - textOverHeight;
+      }
+      if(tx1 < 0)
+      {
+         tx1 = 0;
+      }
+      else if(tx1+textOverWidth > SCREEN_X-1)
+      {
+         tx1 = (SCREEN_X-1) - textOverWidth;
+      }
+
       glPushMatrix();
          textureToScreen(textOverTexture, tx1, ty1, textOverWidth+tx1, 
                ty1+textOverHeight, textOverWidth, textOverHeight);
