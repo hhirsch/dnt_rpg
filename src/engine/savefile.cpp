@@ -123,10 +123,10 @@ string saveFile::getQuickTalentsFile()
 /***********************************************************************
  *                               save                                  *
  ***********************************************************************/
-bool saveFile::save(string saveFile, void* curEngine, SDL_Surface* frontSurface)
+bool saveFile::save(string saveFile, engine* curEngine, 
+      SDL_Surface* frontSurface)
 {
    ofstream file;
-   engine* eng = (engine*)curEngine;
    char buf[256];
    int i;
 
@@ -136,15 +136,15 @@ bool saveFile::save(string saveFile, void* curEngine, SDL_Surface* frontSurface)
    missionsController missions;
    shortcutsWindow scWindow;
 
-   /* Verify if we got an engine */
-   if(eng == NULL)
+   /* Verify if we got an curEngineine */
+   if(curEngine == NULL)
    {
       return(false);
    }
 
    /* Flush the npcs inventories to the modState */
-   eng->keepNPCStatus();
-   pc = eng->PCs->getActiveCharacter();
+   curEngine->keepNPCStatus();
+   pc = curEngine->PCs->getActiveCharacter();
    
    /* Define the Save Prefix */
    string prefix = "";
@@ -179,7 +179,7 @@ bool saveFile::save(string saveFile, void* curEngine, SDL_Surface* frontSurface)
    /* Define variables/files */
    version = VERSION;
    imageFile = prefix + ".bmp";
-   mapFile = eng->getCurrentMap()->getFileName();
+   mapFile = curEngine->getCurrentMap()->getFileName();
    modStateFile = prefix + ".mod";
    missionsFile = prefix + ".mis";
    quickTalentsFile = prefix + ".qck";
@@ -214,11 +214,11 @@ bool saveFile::save(string saveFile, void* curEngine, SDL_Surface* frontSurface)
                                                << pcPos[2] << ":" 
                                                << pcAngle << endl;
    file << DNT_SAVE_TOKEN_CAMERA_INFO << " = " 
-                                      << eng->gameCamera.getPhi() << ":"
-                                      << eng->gameCamera.getTheta() << ":"
-                                      << eng->gameCamera.getDeltaY() << ":"
-                                      << eng->gameCamera.getD() << endl;
-   file << DNT_SAVE_TOKEN_HOUR << " = " << eng->getHour() << endl;
+                                      << curEngine->gameCamera.getPhi() << ":"
+                                      << curEngine->gameCamera.getTheta() << ":"
+                                      << curEngine->gameCamera.getDeltaY() << ":"
+                                      << curEngine->gameCamera.getD() << endl;
+   file << DNT_SAVE_TOKEN_HOUR << " = " << curEngine->getHour() << endl;
 
    /* Close the file */
    file.close();
@@ -259,22 +259,21 @@ bool saveFile::save(string saveFile, void* curEngine, SDL_Surface* frontSurface)
 /***********************************************************************
  *                                load                                 *
  ***********************************************************************/
-bool saveFile::load(void* curEngine)
+bool saveFile::load(engine* curEngine)
 {
-   engine* eng = (engine*)curEngine;
    modState modif;
    modInventory* inv;
    missionsController missions;
    shortcutsWindow scWindow;
 
-   /* Verify if we got a valid engine */
-   if(eng == NULL)
+   /* Verify if we got a valid curEngineine */
+   if(curEngine == NULL)
    {
       return(false);
    }
 
    /* Set the current hour */
-   eng->setHour(hour);
+   curEngine->setHour(hour);
 
    /* Verify load file version */
    if(version != VERSION)
@@ -286,7 +285,7 @@ bool saveFile::load(void* curEngine)
    if(!pcFile.empty())
    {
       /* Load the Playable character */
-      if(!eng->loadPC(pcFile))
+      if(!curEngine->loadPC(pcFile))
       {
          cerr << "Can't load pc of save file!" << endl;
          return(false);
@@ -302,14 +301,14 @@ bool saveFile::load(void* curEngine)
    if(!mapFile.empty())
    {
       /* Load the map! */
-      eng->loadMap(mapFile, true);
+      curEngine->loadMap(mapFile, true);
 
       /* Set Character Position */
-      character* pc = eng->PCs->getActiveCharacter();      
+      character* pc = curEngine->PCs->getActiveCharacter();      
       if(pc)
       {
          pc->scNode->set(pcPos[0], pcPos[1], pcPos[2], 0.0f, pcAngle, 0.0f);
-         Map* actualMap = eng->getCurrentMap();
+         Map* actualMap = curEngine->getCurrentMap();
          int posX =(int)floor(pcPos[0] / actualMap->squareSize());
          int posZ =(int)floor(pcPos[2] / actualMap->squareSize());
          pc->ocSquare = actualMap->relativeSquare(posX,posZ);
@@ -320,13 +319,13 @@ bool saveFile::load(void* curEngine)
    /* Load the PC Inventory */
    if(!invFile.empty())
    {
-      character* pc = eng->PCs->getActiveCharacter();
+      character* pc = curEngine->PCs->getActiveCharacter();
 
       if(pc)
       {
          inv = new modInventory(NULL, "", "");
          inv->load(invFile);
-         inv->flush(eng->getCurrentMap(), pc->inventories); 
+         inv->flush(curEngine->getCurrentMap(), pc->inventories); 
          delete(inv);
       }
    }
@@ -341,7 +340,7 @@ bool saveFile::load(void* curEngine)
    if(!quickTalentsFile.empty())
    {
       /* Set quick talents */
-      character* pc = eng->PCs->getActiveCharacter();
+      character* pc = curEngine->PCs->getActiveCharacter();
 
       if(pc)
       {
@@ -350,10 +349,10 @@ bool saveFile::load(void* curEngine)
    }
 
    /* Finally, reset the camera */
-   eng->gameCamera.setPhi(cameraPhi);
-   eng->gameCamera.setTheta(cameraTheta);
-   eng->gameCamera.setDeltaY(cameraDeltaY);
-   eng->gameCamera.setD(cameraD);
+   curEngine->gameCamera.setPhi(cameraPhi);
+   curEngine->gameCamera.setTheta(cameraTheta);
+   curEngine->gameCamera.setDeltaY(cameraDeltaY);
+   curEngine->gameCamera.setD(cameraD);
 
    return(true);
 }

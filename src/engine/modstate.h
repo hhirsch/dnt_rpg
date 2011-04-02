@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -38,6 +38,8 @@
 #define MODSTATE_INVENTORY             6  /**< Inventory "Snapshot" */
 
 #define MODSTATE_ACTION_CHARACTER_CHANGE_STATE 7 /**< Character Change State */
+
+class characterList;
 
 /*! The Generic Modification Action Class */
 class modAction: public dntListElement
@@ -377,7 +379,7 @@ class modMap: public dntListElement
        * like when you left it). 
        * \param actualMap -> pointer to actual opened map
        * \param NPCs -> current NPCs list */
-      void doMapModifications(Map* actualMap, void* NPCs);
+      void doMapModifications(Map* actualMap, characterList* NPCs);
 
       /*! Clear All the modifications states (usually called after death) */
       void clear();      
@@ -507,7 +509,7 @@ class modState
        * like when you left it). 
        * \param actualMap -> pointer to actual opened map
        * \param NPCs -> current NPCs list */
-      void doMapModifications(Map* actualMap, void* NPCs);
+      void doMapModifications(Map* actualMap, characterList* NPCs);
 
       /*! Clear All the modifications states (usually called after death) */
       void clear();

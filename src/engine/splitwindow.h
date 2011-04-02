@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2010 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -28,6 +28,8 @@
 #include "modstate.h"
 #include "util.h"
 
+class engine;
+
 /*! The splitWindow class defines a window used to split an object by its 
  * quantity (for example: removing money from a money quantity to give it 
  * away to someone, spliting an ammo, to throw it away, etc.) */
@@ -39,14 +41,14 @@ class splitWindow
        * \param o -> pointer to the object to split
        * \param usedEngine -> pointer to the current in-use engine
        * \param c -> character owner of the object */
-      void open(guiInterface* inter, object* o, void* usedEngine, 
+      void open(guiInterface* inter, object* o, engine* usedEngine, 
             character* c);
       /*! Constructor to give the desired object quantity to a character. 
        * \param inter -> pointer to the used guiInterface 
        * \param o -> pointer to the object to split
        * \param c -> pointer to the character owner of the object
        * \param t -> pointer to the character to receive the object */
-      void open(guiInterface* inter, object* o, void* usedEngine,
+      void open(guiInterface* inter, object* o, engine* usedEngine,
             character* c, character* t);
 
       /*! Close the window, if is opened */
@@ -83,7 +85,7 @@ class splitWindow
       static int curQty;             /**< Current quantity */
       static int delta;              /**< Delta variation to the quantity */
 
-      static void* curEngine;        /**< Current used engine */
+      static engine* curEngine;      /**< Current used engine */
 
       static guiInterface* interf;   /**< Current interface used */
       static window* intWindow;      /**< Internal Window */

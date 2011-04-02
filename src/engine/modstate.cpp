@@ -1110,10 +1110,9 @@ bool modMap::removeInverseObjectAction(int action, string target,
 /************************************************************
  *                    doMapModifications                    *
  ************************************************************/
-void modMap::doMapModifications(Map* actualMap, void* NPCs) 
+void modMap::doMapModifications(Map* actualMap, characterList* NPCs) 
 {
    int i;
-   characterList* npcs = (characterList*) NPCs;
    character* ch  = NULL;
    GLfloat x=0, y=0, z=0;
    modAction* tmpMobj = (modAction*)modList.getFirst();
@@ -1181,7 +1180,7 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs)
       {
          /* Get The character Pointer */
          mapCharacterModAction* charAct = (mapCharacterModAction*)tmpMobj;
-         ch = npcs->getCharacter(charAct->getTarget());
+         ch = NPCs->getCharacter(charAct->getTarget());
          bool done = false;
          while( (ch != NULL) && (!done) )
          {
@@ -1215,7 +1214,7 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs)
             else
             {
                /* Not the one, get the next */
-               ch = npcs->getNextSameCharacter(ch);
+               ch = NPCs->getNextSameCharacter(ch);
             }
          }
 
@@ -1229,7 +1228,7 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs)
       else if(tmpMobj->getAction() == MODSTATE_TALK_ENTER_VALUE)
       {
          /* Get the character pointer */
-         ch = npcs->getCharacter(tmpMobj->getTarget());
+         ch = NPCs->getCharacter(tmpMobj->getTarget());
          if(ch)
          {
             mapTalkModAction* mTalk = (mapTalkModAction*)tmpMobj;
@@ -1243,7 +1242,7 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs)
          /* Get the modified inventory */
          modInventory* mInv = (modInventory*)tmpMobj;
          /* Get the character */
-         ch = npcs->getCharacter(tmpMobj->getTarget());
+         ch = NPCs->getCharacter(tmpMobj->getTarget());
          if(ch)
          {
             mInv->flush(actualMap, ch->inventories);
@@ -1267,19 +1266,19 @@ void modMap::doMapModifications(Map* actualMap, void* NPCs)
  ************************************************************/
 bool modMap::allCharactersDead(string npcFileName)
 {
-   npcFile npcs;
+   npcFile NPCs;
    string name="", arq ="";
    GLfloat posX=0, posZ=0, angle=0;
    int psycho=0;
 
-   if(!npcs.load(npcFileName))
+   if(!NPCs.load(npcFileName))
    {
       /* No File, so always false */
       return(false);
    }
 
    /* Try to search for all characters dead definition here */
-   while(npcs.getNextCharacter(name, arq, posX, posZ, angle, psycho))
+   while(NPCs.getNextCharacter(name, arq, posX, posZ, angle, psycho))
    {
       /* If one isn't found, not all character are dead, so exit! */
       if(search(MODSTATE_ACTION_CHARACTER_DEAD, arq, posX, 0, posZ) == NULL)
@@ -1298,19 +1297,19 @@ bool modMap::allCharactersDead(string npcFileName)
  ************************************************************/
 bool modMap::allCharactersAlive(string npcFileName)
 {
-   npcFile npcs;
+   npcFile NPCs;
    string name="", arq ="";
    GLfloat posX=0, posZ=0, angle=0;
    int psycho=0;
 
-   if(!npcs.load(npcFileName))
+   if(!NPCs.load(npcFileName))
    {
       /* No File, so always false */
       return(false);
    }
 
    /* Try to search for all characters dead definition here */
-   while(npcs.getNextCharacter(name, arq, posX, posZ, angle, psycho))
+   while(NPCs.getNextCharacter(name, arq, posX, posZ, angle, psycho))
    {
       /* If one is found, not all character are alive, so exit! */
       if(search(MODSTATE_ACTION_CHARACTER_DEAD, arq, posX, 0, posZ) != NULL)
@@ -1572,7 +1571,7 @@ void modState::mapInventoryAdd(inventory* inv, string owner, string mapFile)
 /************************************************************
  *                    doMapModifications                    *
  ************************************************************/
-void modState::doMapModifications(Map* actualMap, void* NPCs)
+void modState::doMapModifications(Map* actualMap, characterList* NPCs)
 {
    modMap* mod = findModMap(actualMap->getFileName());
    if(mod != NULL)

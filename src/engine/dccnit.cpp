@@ -479,7 +479,7 @@ bool engine::loadGame()
          quitCurrentGame();
 
          /* Load the file */
-         sav->load((void*)this);
+         sav->load(this);
 
          /* Open the default windows */
          mapWindow->open(gui,0,0, actualMap);
@@ -547,8 +547,7 @@ void engine::saveGame()
          saveFile *sav = new saveFile();
 
          /* Do the Save */
-         if(sav->save(savWindow->getSelectedFileName(), (void*)this, 
-                      frontSurface))
+         if(sav->save(savWindow->getSelectedFileName(), this, frontSurface))
          {
             warn.show(gettext("Information"), 
                       gettext("The game was saved!"), gui);

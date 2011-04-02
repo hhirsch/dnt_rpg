@@ -164,7 +164,7 @@ dccnit.o: dccnit.h dccnit.cpp util.h $(ENDETC)userinfo.h \
 			 alignwindow.h aspectwindow.h attwindow.h camera.h character.h \
 			 classwindow.h collision.h cursor.h dialog.h featsel.h initial.h \
 			 inventwindow.h itemwindow.h modstate.h options.h racewindow.h \
-			 shadow.h shortcutswindow.h skillwindow.h sun.h util.h
+			 shadow.h shortcutswindow.h skillwindow.h sun.h util.h savefile.h
 	@printf "Making dccnit.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) dccnit.cpp -o dccnit.o
 	@printf "\e[0;32mDone.\e[0;0m\n"

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2010 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -23,7 +23,7 @@
 /***********************************************************************
  *                               open                                  *
  ***********************************************************************/
-void splitWindow::open(guiInterface* inter, object* o, void* usedEngine, 
+void splitWindow::open(guiInterface* inter, object* o, engine* usedEngine, 
       character* c)
 {
    /* Set things */
@@ -40,7 +40,7 @@ void splitWindow::open(guiInterface* inter, object* o, void* usedEngine,
 /***********************************************************************
  *                                 open                                *
  ***********************************************************************/
-void splitWindow::open(guiInterface* inter, object* o, void* usedEngine,
+void splitWindow::open(guiInterface* inter, object* o, engine* usedEngine,
       character* c, character* t)
 {
    /* Set things */
@@ -212,7 +212,7 @@ int splitWindow::curQty = 0;
 int splitWindow::delta = 1;
 character* splitWindow::target = NULL;
 character* splitWindow::owner = NULL;
-void* splitWindow::curEngine = NULL;
+engine* splitWindow::curEngine = NULL;
 guiInterface* splitWindow::interf = NULL;
 window* splitWindow::intWindow = NULL;
 textBox* splitWindow::qtyText = NULL;

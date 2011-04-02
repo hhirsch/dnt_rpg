@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -28,6 +28,8 @@
 #include <string>
 using namespace std;
 
+class engine;
+
 /*! The saveFile class is the access to the save/load game functionallity */
 class saveFile
 {
@@ -43,7 +45,7 @@ class saveFile
        * \return -> true if can load, false otherwise 
        * \note -> you must read the header with loadHeader before call
        *          this function */
-      bool load(void* curEngine);
+      bool load(engine* curEngine);
 
       /*! Load Save file header, before really load the save
        * \param fileName -> header filename (without path)
@@ -57,7 +59,7 @@ class saveFile
        * \param curEngine -> pointer to the current engine
        * \param frontSurface -> pointer to the frontSurface (screenshot)
        * \return -> true if can save, false otherwise */
-      bool save(string saveFile, void* curEngine, SDL_Surface* frontSurface);
+      bool save(string saveFile, engine* curEngine, SDL_Surface* frontSurface);
 
       /*! Get the save file title
        * \return -> save file title */
