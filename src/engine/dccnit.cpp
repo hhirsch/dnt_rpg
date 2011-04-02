@@ -2578,6 +2578,11 @@ int engine::verifyMouseActions(Uint8 mButton)
          curConection = NULL;
       }
    }
+   else if(!gui->mouseOnGui(mouseX, mouseY))
+   {
+      /* Mouse Cursor Forbidden (when can't go to position) */
+      cursors->set(CURSOR_FORBIDDEN);
+   }
 
    pers = (character*) PCs->getFirst();
    for(i = 0; ((i < PCs->getTotal()) && (!pronto)); i++)
@@ -3162,19 +3167,7 @@ int engine::treatIO(SDL_Surface *screen)
       object = gui->manipulateEvents(x,y,mButton,keys, guiEvent);
       /* Threat the GUI */
       treatGuiEvents(object, guiEvent);
-      
-      /* Verify Mouse Cursor Forbidden (when can't go to position) */
-      if(!gui->mouseOnGui(mouseX, mouseY))
-      {
-         int posX = (int) floor(xReal / actualMap->squareSize());
-         int posZ = (int) floor(zReal / actualMap->squareSize());
-         Square* sq = actualMap->relativeSquare(posX, posZ);
-         if( (sq == NULL) || (!(sq->flags & SQUARE_CAN_WALK)))
-         {
-            cursors->set(CURSOR_FORBIDDEN);
-         }
-      }
-   
+         
       /* Draw things */
       if(shadowMap.isEnable())
       {

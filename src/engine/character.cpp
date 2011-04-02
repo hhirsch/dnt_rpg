@@ -525,6 +525,7 @@ bool character::mouseUnderPortrait(int mouseX, int mouseY)
                 SCREEN_X-1, 64, mouseX, mouseY) )
    {
       sprintf(buf, "%s (%d/%d)", name.c_str(), xp, nextLevelXP(xp)); 
+      cur.set(CURSOR_WALK);
       cur.setTextOver(buf);
       return(true);
    }
@@ -544,6 +545,7 @@ bool character::mouseUnderHealthBar(int mouseX, int mouseY)
    {
       sprintf(buf, "%s: %d/%d", gettext("HP"), lifePoints, maxLifePoints); 
       cur.setTextOver(buf);
+      cur.set(CURSOR_WALK);
       return(true);
    }
    return(false);
