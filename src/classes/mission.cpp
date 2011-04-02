@@ -48,7 +48,7 @@
 /************************************************************
  *                        Constructor                       *
  ************************************************************/
-mission::mission(string missionFile, void* usedEngine, 
+mission::mission(string missionFile, engine* usedEngine, 
                  bool loadDefinition):
          iaScript(usedEngine)
 {
@@ -450,7 +450,7 @@ missionsController::missionsController()
 /************************************************************
  *                           init                           *
  ************************************************************/
-void missionsController::init(void* usedEngine)
+void missionsController::init(engine* usedEngine)
 {
    curTreat = NULL;
    pEngine = usedEngine;
@@ -515,18 +515,17 @@ void missionsController::completeMission(mission* m, int type)
    /* type <= 0 means failed. > 0 success */
    if(type > 0)
    {
-      engine* eng = (engine*)pEngine;
-      character* dude = (character*)eng->PCs->getFirst();
+      character* dude = (character*)pEngine->PCs->getFirst();
       
       /* Add XP to all PC characters */
-      for(i = 0; i < eng->PCs->getTotal(); i++)
+      for(i = 0; i < pEngine->PCs->getTotal(); i++)
       {
          dude->addXP(m->xpValue);
          dude = (character*)dude->getNext();
       }
 
       /* Add 3D Message of success */
-      dude = eng->PCs->getActiveCharacter();
+      dude = pEngine->PCs->getActiveCharacter();
 
       sprintf(vstr,gettext("Mission Completed: %d XP!"),m->getXp()); 
       msgController.addMessage(dude->scNode->getPosX(), 
@@ -542,8 +541,7 @@ void missionsController::completeMission(mission* m, int type)
    else 
    {
       /* Add 3D message of failure */
-      engine* eng = (engine*)pEngine;
-      character* dude = eng->PCs->getActiveCharacter();
+      character* dude = pEngine->PCs->getActiveCharacter();
       msgController.addMessage(dude->scNode->getPosX(), 
             dude->scNode->getBoundingBox().y2+dude->scNode->getPosY(),
             dude->scNode->getPosZ(), 
@@ -809,5 +807,5 @@ mission* missionsController::curTreat = NULL;
 missionList* missionsController::current = NULL;
 mission* missionsController::curComp = NULL;
 mission* missionsController::curCur = NULL;
-void* missionsController::pEngine = NULL;
+engine* missionsController::pEngine = NULL;
 

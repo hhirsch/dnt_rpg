@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -34,6 +34,8 @@ using namespace std;
 #define MISSION_COMPLETION_FINISHED -1
 #define MISSION_COMPLETION_FALSE     0
 
+class engine;
+
 /*! A mission definition. The mission is basically a main script
  * with temporary and a completed variables. */
 class mission: public iaScript, public dntListElement
@@ -46,7 +48,7 @@ class mission: public iaScript, public dntListElement
        * \param loadDefinition -> true if is to load the definition file
        *                          false if the missionFile is already 
        *                          the script itself. */
-      mission(string missionFile, void* usedEngine, bool loadDefinition);
+      mission(string missionFile, engine* usedEngine, bool loadDefinition);
 
       /*! Destructor */
       ~mission();
@@ -147,7 +149,7 @@ class missionsController
 
       /*! Init the mission controller state to use
        * \param usedEngine -> pointer to the used engine */
-      void init(void* usedEngine);
+      void init(engine* usedEngine);
 
       /*! finish the use of the mission controller (cleaning it) */
       void finish();
@@ -223,7 +225,7 @@ class missionsController
       static mission* curCur;     /**< Current current navigation pointer */
       static mission* curTreat;   /**< Pointer to the mission to treat next  */
 
-      static void* pEngine;       /**< Pointer to the current engine */
+      static engine* pEngine;     /**< Pointer to the current engine */
 };
 
 #endif
