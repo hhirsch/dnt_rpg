@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -67,6 +67,8 @@ class guiIO
       /*! Gets State seted by GUI IO.
        * \return Internal State */
       int getState();
+      /*! Clear the current state */
+      void clearState();
 
       /*! Get Tool selected by GUI IO.
        * \return actual selected Tool */

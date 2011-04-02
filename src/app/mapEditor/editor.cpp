@@ -186,6 +186,14 @@ void editor::closeMap()
    if(mapOpened)
    {
       gui->showMessage("Closing actual Map...");
+      
+      /* Remove temporary state objects */
+      objectEditor->deleteObject();
+      npcController->deleteNpc();
+      portalEditor->deleteDoor();
+      gui->clearState();
+     
+      /* Delete things */
       delete(map);
       delete(terrainEditor);
       delete(portalEditor);
