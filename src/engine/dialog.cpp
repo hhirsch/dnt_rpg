@@ -1067,7 +1067,7 @@ character* conversation::getPC()
 /*************************************************************************
  *                            proccessAction                             *
  *************************************************************************/
-void conversation::proccessAction(int opcao, void* curEngine)
+void conversation::proccessAction(int opcao, engine* curEngine)
 {
    /* Get dialog on list */
    int numDialog = actual;
@@ -1539,7 +1539,7 @@ void dialogWindow::redraw()
  *                                treat                                  *
  *************************************************************************/
 bool dialogWindow::treat(guiObject* guiObj, int eventInfo, itemWindow* infoW,
-                         void* curEngine)
+                         engine* curEngine)
 {
    barterWindow tradeWindow;
    int index = -1;

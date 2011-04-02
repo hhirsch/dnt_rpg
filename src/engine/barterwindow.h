@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -27,6 +27,8 @@
 #include "inventwindow.h"
 #include "itemwindow.h"
 
+class engine;
+
 /*! The Barter Window Class. In the barter window, objects to sell and buy 
  * are inserted, and you can offer the barter, impose the barter or cancel. */
 class barterWindow
@@ -44,7 +46,7 @@ class barterWindow
        * \param inter -> GUI interface used 
        * \param usedEngine -> pointer to the engine used */
       void open(character *s, character* b,
-                guiInterface* inter, itemWindow* infoW, void* usedEngine);
+                guiInterface* inter, itemWindow* infoW, engine* usedEngine);
 
       /*! Close / Remove structures from the barter window */
       void close();
@@ -140,7 +142,7 @@ class barterWindow
 
       static itemWindow* infoWindow;    /**< Pointer to the item window used */
 
-      static void* curEngine;           /**< Pointer to the current engine */
+      static engine* curEngine;           /**< Pointer to the current engine */
 };
 
 

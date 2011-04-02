@@ -115,7 +115,8 @@ character.o: character.cpp character.h $(ENDGUI)draw.h $(ENDGUI)picture.h \
 				 $(ENDCLASSES)classes.h $(ENDCLASSES)race.h \
 				 $(ENDCLASSES)inventory.h $(ENDIA)astar.h $(ENDETC)animodel.h \
 				 $(ENDMAP)map.h barterwindow.h $(ENDETC)dirs.h \
-				 $(ENDCLASSES)modeffect.h $(ENDCLASSES)feats.h
+				 $(ENDCLASSES)modeffect.h $(ENDCLASSES)feats.h \
+				 $(ENDIA)iascript.h
 	@printf "Making character.o... "
 	@$(CC) $(CFLAGS) character.cpp -o character.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -146,7 +147,8 @@ cursor.o: cursor.cpp cursor.h $(ENDETC)dirs.h
 	@$(CC) $(CFLAGS) cursor.cpp -o cursor.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-dialog.o: dialog.cpp dialog.h $(ENDGUI)farso.h character.h barterwindow.h
+dialog.o: dialog.cpp dialog.h $(ENDGUI)farso.h character.h barterwindow.h \
+          $(ENDIA)iascript.h
 	@printf "Making dialog.o... "
 	@$(CC) $(CFLAGS) dialog.cpp -o dialog.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -184,7 +186,10 @@ initial.o: initial.h initial.cpp $(ENDGUI)farso.h $(ENDSOUND)sound.h ../config.h
 	@$(CC) $(CFLAGS) $(SUPREDE) initial.cpp -o initial.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-inventwindow.o: inventwindow.h inventwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)inventory.h $(ENDMAP)map.h cursor.h modstate.h util.h itemwindow.h $(ENDETC)dirs.h
+inventwindow.o: inventwindow.h inventwindow.cpp $(ENDGUI)farso.h \
+                $(ENDCLASSES)inventory.h $(ENDMAP)map.h cursor.h \
+					 modstate.h util.h itemwindow.h $(ENDETC)dirs.h \
+					 $(ENDIA)iascript.h
 	@printf "Making inventwindow.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) inventwindow.cpp -o inventwindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"

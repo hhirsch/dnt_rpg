@@ -42,7 +42,7 @@
  **************************************************************/
 inventWindow::inventWindow(int xa, int ya, string title, 
                            character* invent, guiInterface* inter,
-                           itemWindow* infoW, void* usedEngine)
+                           itemWindow* infoW, engine* usedEngine)
 {
    init(xa,ya,title,invent,inter, infoW, usedEngine);
 }
@@ -51,7 +51,7 @@ inventWindow::inventWindow(int xa, int ya, string title,
  *                          Constructor                       *
  **************************************************************/
 inventWindow::inventWindow(character *invent, guiInterface* inter,
-                           itemWindow* infoW, void* usedEngine)
+                           itemWindow* infoW, engine* usedEngine)
 {
    init(321,0, gettext("Inventory"), invent, inter, infoW, usedEngine);
 }
@@ -61,7 +61,7 @@ inventWindow::inventWindow(character *invent, guiInterface* inter,
  **************************************************************/
 void inventWindow::init(int xa, int ya, string title, 
                        character *invent,guiInterface* inter,
-                       itemWindow* infoW, void* usedEngine)
+                       itemWindow* infoW, engine* usedEngine)
 {
    int i;
    char buf[8];

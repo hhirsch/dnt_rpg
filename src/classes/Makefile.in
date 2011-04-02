@@ -49,7 +49,8 @@ dices.o: dices.cpp dices.h
 	@$(CPP) $(CFLAGS) dices.cpp -o dices.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-feats.o: feats.cpp feats.h actions.h defs.h dices.h thing.h modifier.h $(ENDETC)message3d.h $(ENDETC)dirs.h
+feats.o: feats.cpp feats.h actions.h defs.h dices.h thing.h modifier.h \
+         $(ENDETC)message3d.h $(ENDETC)dirs.h $(ENDIA)iascript.h
 	@printf "Making feats.o... "
 	@$(CC) $(CFLAGS) feats.cpp -o feats.o
 	@printf "\e[0;32mDone.\e[0;0m\n"

@@ -34,7 +34,7 @@ barterWindow::barterWindow()
  ***************************************************************/
 void barterWindow::open(character* s, character* b,
                         guiInterface* inter, itemWindow* infoW, 
-                        void* usedEngine)
+                        engine* usedEngine)
 {
    dirs dir;
    /* Init Values */
@@ -503,5 +503,5 @@ inventWindow* barterWindow::buyerWindow = NULL;
 menu* barterWindow::objectMenu = NULL;
 
 itemWindow* barterWindow::infoWindow = NULL;
-void* barterWindow::curEngine = NULL;
+engine* barterWindow::curEngine = NULL;
 

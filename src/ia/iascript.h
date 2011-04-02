@@ -45,6 +45,8 @@ using namespace std;
 #define IASCRIPT_TYPE_DEFAULT   0  /**< Default type */
 #define IASCRIPT_TYPE_MISSION   1  /**< Mission type */
 
+class engine;
+
 /*! The ia Script is the script that controls the behaviour
  * of characters, objects and events on DNT. */
 class iaScript
@@ -54,11 +56,11 @@ class iaScript
        * \param usedEngine -> the pointer to the engine used
        * \note -> if you use this contstructor, you must define latter the
        * script's fileName and call the init() function. */
-      iaScript(void* usedEngine);
+      iaScript(engine* usedEngine);
       /*! Constructor
        * \param scriptFile -> fileName of the script
        * \param usedEngine -> the pointer to the engine used */
-      iaScript(string scriptFile, void* usedEngine);
+      iaScript(string scriptFile, engine* usedEngine);
       /*! Destructor */
       ~iaScript();
 
@@ -115,7 +117,7 @@ class iaScript
       object* objectOwner;       /**< Object Owner */
       character* characterOwner; /**< Character Owner */
 
-      void* actualEngine;        /**< The actual Engine */
+      engine* actualEngine;      /**< The actual Engine */
 
       Map* actualMap;            /**< Actual Opened Map */
       characterList* npcs;       /**< Current NPCs List */

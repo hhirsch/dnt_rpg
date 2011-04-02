@@ -112,6 +112,8 @@ class dialog: public dntListElement
       int id;                             /**< Identificator */
 };
 
+class engine;
+
 /*! Conversation Class. A conversation is a set of dialogs, usually for
  * a NPC character or an object. */
 class conversation: public dntList
@@ -168,7 +170,7 @@ class conversation: public dntList
       /*! Computates the action on dialog, based on selected option.
        * \param opcao -> option selected 
        * \param curEngine -> pointer to the current engine */
-      void proccessAction(int opcao, void* curEngine);
+      void proccessAction(int opcao, engine* curEngine);
 
       /*! Change dialog
        * \param numDialog -> number of the new dialog to use */
@@ -217,7 +219,7 @@ class dialogWindow
        * \param curEngine ->pointer to the current engine
        * \return true if event is threated, false otherwise. */
       bool treat(guiObject* guiObj, int eventInfo,
-                 itemWindow* infoW, void* curEngine);
+                 itemWindow* infoW, engine* curEngine);
 
       /*! Verify if the dialog is open or not 
        * \return true if the window is opened */

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -40,6 +40,8 @@
 #define MENU_TYPE_INVENTORY             1
 #define MENU_TYPE_EQUIPED               2
 
+class engine;
+
 /*! Inventory Window Class */
 class inventWindow
 {
@@ -50,7 +52,7 @@ class inventWindow
        * \param itemWindow -> pointer to the info window used
        * \param usedEngine -> pointer to the engine used */
       inventWindow(character *invent, guiInterface* inter, itemWindow* infoW,
-            void* usedEngine);
+            engine* usedEngine);
 
       /*! Constructor
        * \param xa -> position X to open the window
@@ -62,7 +64,7 @@ class inventWindow
        * \param usedEngine -> pointer to the engine used */
       inventWindow(int xa, int ya, string title, 
                    character *invent, guiInterface* inter,
-                   itemWindow* infoW, void* usedEngine);
+                   itemWindow* infoW, engine* usedEngine);
 
       /*! Destructor */
       ~inventWindow();
@@ -90,7 +92,7 @@ class inventWindow
 
       /*! Init the window */
       void init(int xa, int ya, string title, character *invent,
-                guiInterface* inter, itemWindow* infoW, void* usedEngine);
+                guiInterface* inter, itemWindow* infoW, engine* usedEngine);
 
       /*! Open the Inventory Object Menu  */
       void openMenu(int x, int y, int type, bool seller);
@@ -100,7 +102,7 @@ class inventWindow
 
       itemWindow* infoWindow;         /**< The item window to show object's */
 
-      void* curEngine;                /**< Pointer to the current engine */
+      engine* curEngine;              /**< Pointer to the current engine */
 
       inventory* inventories;         /**< Extern Inventories*/
       character* owner;               /**< The inventories owner */

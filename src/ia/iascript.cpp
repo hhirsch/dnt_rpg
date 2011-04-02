@@ -28,7 +28,7 @@ using namespace std;
 /***********************************************************************
  *                           Constructor                               *
  ***********************************************************************/
-iaScript::iaScript(void* usedEngine)
+iaScript::iaScript(engine* usedEngine)
 {
    objectOwner = NULL;
    characterOwner = NULL;
@@ -42,7 +42,7 @@ iaScript::iaScript(void* usedEngine)
 /***********************************************************************
  *                           Constructor                               *
  ***********************************************************************/
-iaScript::iaScript(string scriptFile, void* usedEngine)
+iaScript::iaScript(string scriptFile, engine* usedEngine)
 {
    fileName = scriptFile;
 
@@ -1003,7 +1003,6 @@ void iaScript::callFunction(iaVariable* var, string strLine,
                             string functionName, unsigned int& pos)
 {
    string token = "";
-   engine* eng = (engine*)actualEngine;
 
    string varName = "";
 
@@ -1152,9 +1151,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       if(dude)
       {
          dude->pathFind.defineMap(actualMap);
-         pendAction = eng->actionControl->addAction(line, ACT_MOVE, 
-                                                    dude, X, Z,
-                                               (type == IASCRIPT_TYPE_MISSION));
+         pendAction = actualEngine->actionControl->addAction(line, ACT_MOVE, 
+               dude, X, Z, (type == IASCRIPT_TYPE_MISSION));
       }
    }
 
@@ -1178,9 +1176,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       if( (dude) && (tgt) )
       {
          dude->pathFind.defineMap(actualMap);
-         pendAction = eng->actionControl->addAction(line, ACT_MOVE, 
-                                                    dude, tgt, 
-                                               (type == IASCRIPT_TYPE_MISSION));
+         pendAction = actualEngine->actionControl->addAction(line, ACT_MOVE, 
+               dude, tgt, (type == IASCRIPT_TYPE_MISSION));
       }
    }
 
@@ -1205,9 +1202,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       if( (dude) && (obj) )
       {
          dude->pathFind.defineMap(actualMap);
-         pendAction = eng->actionControl->addAction(line, ACT_MOVE, 
-                                                    dude, obj,
-                                               (type == IASCRIPT_TYPE_MISSION));
+         pendAction = actualEngine->actionControl->addAction(line, ACT_MOVE, 
+               dude, obj, (type == IASCRIPT_TYPE_MISSION));
       }
    }
 
@@ -1240,8 +1236,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
 
       int seconds = getParameteri(token, strLine, pos);
       /* Set the pending action (note: time is in mseconds) */
-      pendAction = eng->actionControl->addAction(line, ACT_WAIT, seconds*1000,
-            (type == IASCRIPT_TYPE_MISSION));
+      pendAction = actualEngine->actionControl->addAction(line, ACT_WAIT, 
+            seconds*1000, (type == IASCRIPT_TYPE_MISSION));
    }
 
 
@@ -1644,9 +1640,9 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    {
       /*! void mapTravel(string mapFile) */
       string st = getParameters(token, strLine, pos);
-      if(eng)
+      if(actualEngine)
       {
-         eng->loadMap(st);
+         actualEngine->loadMap(st);
       }
    }
 
@@ -1667,12 +1663,12 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          if(functionName == IA_FIGHT_ENTER)
          {
             characterOwner->setPsychoState(PSYCHO_HOSTILE);
-            eng->enterBattleMode(false);
+            actualEngine->enterBattleMode(false);
          }
          /* syntax void fightExit() */
          else if(functionName == IA_FIGHT_EXIT)
          {
-            eng->exitBattleMode();
+            actualEngine->exitBattleMode();
          }
          /* syntax void runAwayFromBattle() */
          else if(functionName == IA_FIGHT_RUN_AWAY_FROM_BATTLE)
@@ -1698,10 +1694,9 @@ void iaScript::callFunction(iaVariable* var, string strLine,
                /* Make the owner go to the position */
                string line = changeFrom(strLine, functionName, 0, varName);
                characterOwner->pathFind.defineMap(actualMap);
-               pendAction = eng->actionControl->addAction(line, ACT_MOVE, 
-                                                          characterOwner, 
-                                                          posX, posZ,
-                                               (type == IASCRIPT_TYPE_MISSION));
+               pendAction = actualEngine->actionControl->addAction(line, 
+                     ACT_MOVE, characterOwner, posX, posZ,
+                     (type == IASCRIPT_TYPE_MISSION));
             }
          }
       }
@@ -1731,7 +1726,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       if(dude != NULL)
       {
          /* syntax character getNearestEnemy(character dude) */
-         character* enemy = eng->getFightSystem()->getNearestEnemy(dude);
+         character* enemy = actualEngine->getFightSystem()->getNearestEnemy(
+               dude);
          assignValue(var, (void*)enemy, IA_TYPE_CHARACTER);
       }
       else
@@ -2016,9 +2012,9 @@ void iaScript::callFunction(iaVariable* var, string strLine,
 
       /* character getNPCByName(string s) */
       character* dude = NULL;
-      if(eng->NPCs != NULL)
+      if(actualEngine->NPCs != NULL)
       {
-         dude = eng->NPCs->getCharacter(charName);
+         dude = actualEngine->NPCs->getCharacter(charName);
          if(dude == NULL)
          {
             cerr << "Warning: NULL character for getNPCByName(\""
@@ -2319,7 +2315,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       ps = particles.addParticle(posX, posY, posZ, partFile);
       if(ps != NULL)
       {
-         ps->setFollowCharacter(c,eng->PCs->isCharacterIn(c));
+         ps->setFollowCharacter(c,actualEngine->PCs->isCharacterIn(c));
          ps->setDurationTime(duration);
       }
    }
@@ -2436,7 +2432,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       /* Define the variable as the character owner */
       if(var)
       {
-         character* dude = eng->PCs->getActiveCharacter();
+         character* dude = actualEngine->PCs->getActiveCharacter();
          assignValue(var, (void*)dude, IA_TYPE_CHARACTER);
       }
    }
