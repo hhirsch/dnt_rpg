@@ -194,6 +194,11 @@ void editor::closeMap()
       gui->clearState();
      
       /* Delete things */
+      if(NPCs)
+      {
+         delete(NPCs);
+         NPCs = NULL;
+      }
       delete(map);
       delete(terrainEditor);
       delete(portalEditor);
