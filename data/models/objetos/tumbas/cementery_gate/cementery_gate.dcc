@@ -1,0 +1,12 @@
+name = Tomb
+cal3d = models/objetos/tumbas/cementery_gate/model.cfg
+inventory_sizes = 0 0
+inventory_texture = texturas/na.png
+life_points = 2500
+fortitude = 12
+reflex = 0
+will = 0
+displacement = 0
+armature_class = 18
+size_modifier = 0
+static_scenery = 1
