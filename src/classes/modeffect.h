@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2010 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -25,6 +25,8 @@
 #include "../etc/list.h"
 
 #include "modifier.h"
+
+class character;
 
 /*! Status modifier effect */
 class modEffect: public dntListElement
@@ -51,16 +53,16 @@ class modEffect: public dntListElement
 
       /*! Apply the modEffect to the character
        * \param actor -> pointer to the character to apply the modEffect */
-      void apply(void* actor);
+      void apply(character* actor);
 
       /*! Unapply the modEffect to the character
        * \param actor -> pointer to the character to deapply the modEffect */
-      void unApply(void* actor);
+      void unApply(character* actor);
 
       /*! Get a string describing the modEffect
        * \param actor -> pointer to the character "owner" of the effect
        * \return -> representative string of the modEffect */
-      string toReadableText(void* actor);
+      string toReadableText(character* actor);
 
       /*! Get a string to save the modEffect
        * \return -> string with modEffect Info */
@@ -79,7 +81,7 @@ class modEffect: public dntListElement
       /*! Do the apply on actor, with predefined value
        * \param actor -> character to apply the modEffect to
        * \param value -> value to use as modifier (instead of current mod) */
-      void doApply(void* actor, int value);
+      void doApply(character* actor, int value);
 
       int mod;             /**< The modifier value */
       factor cause;        /**< Thing to modify */
@@ -102,7 +104,7 @@ class modEffectList: public dntList
 
       /*! Set the character owner of the modEffect list
        * \param actor -> pointer to the character owner of the list */
-      void setOwner(void* actor);
+      void setOwner(character* actor);
 
       /*! Insert the modEffect to the list
        * \param obj -> modEffect to insert
@@ -129,7 +131,7 @@ class modEffectList: public dntList
        * \param obj -> modEffect to delete */
       void freeElement(dntListElement* obj);
 
-      void* owner;       /**< Pointer to the character owner of the list */
+      character* owner;    /**< Pointer to the character owner of the list */
 };
 
 

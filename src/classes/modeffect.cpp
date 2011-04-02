@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2010 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -108,11 +108,10 @@ void modEffect::fromSaveText(string txt)
 /***********************************************************************
  *                          toReadableText                             *
  ***********************************************************************/
-string modEffect::toReadableText(void* actor)
+string modEffect::toReadableText(character* actor)
 {
    char buf[128];
 
-   character* c = (character*)actor;
    skill* s;
 
    if(actor == NULL)
@@ -124,7 +123,7 @@ string modEffect::toReadableText(void* actor)
    /* Attribute and skills */
    if((cause.type == MOD_TYPE_ATT) || (cause.type == MOD_TYPE_SKILL)) 
    {
-      s = c->sk.getSkillByString(cause.id);
+      s = actor->sk.getSkillByString(cause.id);
 
       if(s)
       {
@@ -202,7 +201,7 @@ int modEffect::getValue()
 /***********************************************************************
  *                                 apply                               *
  ***********************************************************************/
-void modEffect::apply(void* actor)
+void modEffect::apply(character* actor)
 {
    /* Apply */
    doApply(actor, mod);
@@ -211,7 +210,7 @@ void modEffect::apply(void* actor)
 /***********************************************************************
  *                               unApply                               *
  ***********************************************************************/
-void modEffect::unApply(void* actor)
+void modEffect::unApply(character* actor)
 {
    /* Apply with inverse value */
    doApply(actor, -mod);
@@ -220,14 +219,13 @@ void modEffect::unApply(void* actor)
 /***********************************************************************
  *                               doApply                               *
  ***********************************************************************/
-void modEffect::doApply(void* actor, int value)
+void modEffect::doApply(character* actor, int value)
 {
-   character* c = (character*)actor;
    int* v = NULL;
 
-   if(c != NULL)
+   if(actor != NULL)
    {
-      v = c->getFactorValuePointer(cause);
+      v = actor->getFactorValuePointer(cause);
       if(v)
       {
          *v += value;
@@ -273,7 +271,7 @@ void modEffectList::freeElement(dntListElement* obj)
 /***********************************************************************
  *                               setOwner                              *
  ***********************************************************************/
-void modEffectList::setOwner(void* actor)
+void modEffectList::setOwner(character* actor)
 {
    owner = actor;
 }

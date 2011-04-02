@@ -110,12 +110,18 @@ camera.o: camera.cpp camera.h $(ENDMAP)map.h
 	@$(CC) $(CFLAGS) camera.cpp -o camera.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-character.o: character.cpp character.h $(ENDGUI)draw.h $(ENDGUI)picture.h $(ENDGUI)healthBar.h $(ENDCLASSES)thing.h $(ENDCLASSES)feats.h $(ENDCLASSES)classes.h $(ENDCLASSES)race.h $(ENDCLASSES)inventory.h $(ENDIA)astar.h $(ENDETC)animodel.h $(ENDMAP)map.h barterwindow.h $(ENDETC)dirs.h
+character.o: character.cpp character.h $(ENDGUI)draw.h $(ENDGUI)picture.h \
+             $(ENDGUI)healthBar.h $(ENDCLASSES)thing.h $(ENDCLASSES)feats.h \
+				 $(ENDCLASSES)classes.h $(ENDCLASSES)race.h \
+				 $(ENDCLASSES)inventory.h $(ENDIA)astar.h $(ENDETC)animodel.h \
+				 $(ENDMAP)map.h barterwindow.h $(ENDETC)dirs.h \
+				 $(ENDCLASSES)modeffect.h
 	@printf "Making character.o... "
 	@$(CC) $(CFLAGS) character.cpp -o character.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-charwindow.o: charwindow.h charwindow.cpp character.h $(ENDGUI)farso.h
+charwindow.o: charwindow.h charwindow.cpp character.h $(ENDGUI)farso.h \
+				 $(ENDCLASSES)modeffect.h
 	@printf "Making charwindow.o... "
 	@$(CC) $(CFLAGS) charwindow.cpp -o charwindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
