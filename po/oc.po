@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2011-02-25 17:10-0300\n"
+"POT-Creation-Date: 2011-04-02 10:36-0300\n"
 "PO-Revision-Date: 2010-05-06 06:48+0000\n"
 "Last-Translator: Cédric VALMARY (Tot en òc) <cvalmary@yahoo.fr>\n"
 "Language-Team: Occitan (post 1500) <oc@li.org>\n"
@@ -18,49 +18,49 @@ msgstr ""
 "X-Launchpad-Export-Date: 2010-05-06 13:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/classes/actions.cpp:144
+#: src/classes/actions.cpp:146
 #, c-format
 msgid "%s try to attack %s"
 msgstr "%s ensajar d'atacar %s"
 
-#: src/classes/actions.cpp:149
+#: src/classes/actions.cpp:151
 #, c-format
 msgid "%s try to heal %s"
 msgstr "%s ensajar de sonhar %s"
 
-#: src/classes/actions.cpp:160 src/classes/feats.cpp:294
-#: src/classes/feats.cpp:347
+#: src/classes/actions.cpp:162 src/classes/feats.cpp:294
+#: src/classes/feats.cpp:348
 msgid "Too far away for action!"
 msgstr "Tròp luènh per aquesta accion !"
 
-#: src/classes/actions.cpp:257 src/classes/actions.cpp:280
+#: src/classes/actions.cpp:259 src/classes/actions.cpp:282
 msgid "Miss."
 msgstr "Mancat."
 
-#: src/classes/actions.cpp:260 src/classes/actions.cpp:264
+#: src/classes/actions.cpp:262 src/classes/actions.cpp:266
 msgid "Critical Miss!"
 msgstr "Fracàs Critic !"
 
-#: src/classes/actions.cpp:307
+#: src/classes/actions.cpp:309
 #, c-format
 msgid "Healed %d points."
 msgstr ""
 
-#: src/classes/actions.cpp:318
+#: src/classes/actions.cpp:320
 #, c-format
 msgid "Hit at a vital area, inflicting %d points of damage."
 msgstr ""
 
-#: src/classes/actions.cpp:323
+#: src/classes/actions.cpp:325
 #, c-format
 msgid "Hit for %d points."
 msgstr "Tòca de %d punts."
 
-#: src/classes/actions.cpp:343 src/classes/actions.cpp:346
+#: src/classes/actions.cpp:345 src/classes/actions.cpp:348
 msgid "Critical Heal!"
 msgstr ""
 
-#: src/classes/actions.cpp:351 src/classes/actions.cpp:355
+#: src/classes/actions.cpp:353 src/classes/actions.cpp:357
 msgid "Critical Hit!"
 msgstr "Tòca Critica !"
 
@@ -84,7 +84,7 @@ msgstr "Soi pas un piòt"
 msgid "Invalid Talent"
 msgstr "Don invalid"
 
-#: src/classes/feats.cpp:234 src/engine/dccnit.cpp:2237
+#: src/classes/feats.cpp:234 src/engine/dccnit.cpp:2200
 msgid "Not enought points to use!"
 msgstr ""
 
@@ -93,7 +93,7 @@ msgstr ""
 msgid "Mission Completed: %d XP!"
 msgstr "Mission complida : %d XP !"
 
-#: src/classes/mission.cpp:548 src/classes/mission.cpp:551
+#: src/classes/mission.cpp:550 src/classes/mission.cpp:553
 msgid "Mission Failure!"
 msgstr "Fracàs de la Mission !"
 
@@ -103,7 +103,7 @@ msgstr "Tendéncia & Alinhament"
 
 #: src/engine/alignwindow.cpp:72 src/engine/aspectwindow.cpp:93
 #: src/engine/attwindow.cpp:236 src/engine/classwindow.cpp:117
-#: src/engine/featsel.cpp:240 src/engine/options.cpp:1093
+#: src/engine/featsel.cpp:240 src/engine/options.cpp:1096
 #: src/engine/racewindow.cpp:117 src/engine/skillwindow.cpp:159
 msgid "Confirm"
 msgstr "Confirmar"
@@ -111,7 +111,7 @@ msgstr "Confirmar"
 #: src/engine/alignwindow.cpp:76 src/engine/aspectwindow.cpp:97
 #: src/engine/attwindow.cpp:240 src/engine/barterwindow.cpp:71
 #: src/engine/classwindow.cpp:121 src/engine/featsel.cpp:244
-#: src/engine/options.cpp:1097 src/engine/racewindow.cpp:121
+#: src/engine/options.cpp:1100 src/engine/racewindow.cpp:121
 #: src/engine/skillwindow.cpp:162
 msgid "Cancel"
 msgstr "Anullar"
@@ -182,9 +182,9 @@ msgstr "Carisme"
 msgid "Attribute Description"
 msgstr "Descripcion dels atributs"
 
-#: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:572
-#: src/engine/dccnit.cpp:2236 src/engine/featsel.cpp:468
-#: src/engine/inventwindow.cpp:364 src/engine/options.cpp:1386
+#: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:567
+#: src/engine/dccnit.cpp:2199 src/engine/featsel.cpp:468
+#: src/engine/inventwindow.cpp:364 src/engine/options.cpp:1389
 msgid "Warning"
 msgstr "Avertiment"
 
@@ -192,7 +192,7 @@ msgstr "Avertiment"
 msgid "You Need to Assign All Attributes."
 msgstr "Vos cal distribuir totes los atributs."
 
-#: src/engine/barterwindow.cpp:55 src/engine/dialog.cpp:1489
+#: src/engine/barterwindow.cpp:55 src/engine/dialog.cpp:1490
 msgid "Barter"
 msgstr "Tròc"
 
@@ -205,7 +205,7 @@ msgid "Impose"
 msgstr "Impausar"
 
 #: src/engine/barterwindow.cpp:97 src/engine/barterwindow.cpp:107
-#: src/engine/inventwindow.cpp:56 src/engine/options.cpp:164
+#: src/engine/inventwindow.cpp:56 src/engine/options.cpp:167
 msgid "Inventory"
 msgstr "Inventari"
 
@@ -229,7 +229,7 @@ msgstr ""
 msgid "Remove"
 msgstr "Suprimir"
 
-#: src/engine/briefing.cpp:58 src/engine/options.cpp:163
+#: src/engine/briefing.cpp:58 src/engine/options.cpp:166
 msgid "Briefing"
 msgstr "Acamp d'informacion"
 
@@ -384,65 +384,65 @@ msgstr "Competéncias de la classa"
 msgid "No Skills."
 msgstr "Pas de Competéncias."
 
-#: src/engine/dccnit.cpp:512 src/engine/dccnit.cpp:563
+#: src/engine/dccnit.cpp:507 src/engine/dccnit.cpp:558
 msgid "Error"
 msgstr "Error"
 
-#: src/engine/dccnit.cpp:512
+#: src/engine/dccnit.cpp:507
 msgid "Can't load the saved game!"
 msgstr "Pòt pas cargar lo jòc !"
 
-#: src/engine/dccnit.cpp:558
+#: src/engine/dccnit.cpp:553
 msgid "Information"
 msgstr "Informacion"
 
-#: src/engine/dccnit.cpp:559
+#: src/engine/dccnit.cpp:554
 msgid "The game was saved!"
 msgstr "Lo jòc es estat salvat !"
 
-#: src/engine/dccnit.cpp:563
+#: src/engine/dccnit.cpp:558
 msgid "Can't save game!"
 msgstr "Pòt pas salvar lo jòc !"
 
-#: src/engine/dccnit.cpp:573
+#: src/engine/dccnit.cpp:568
 msgid "Can't save game while fighting!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:707
+#: src/engine/dccnit.cpp:701
 msgid "Saving Current Map Modifications"
 msgstr ""
 
-#: src/engine/dccnit.cpp:742
+#: src/engine/dccnit.cpp:736
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Cargament de la Mapa : %s"
 
-#: src/engine/dccnit.cpp:807
+#: src/engine/dccnit.cpp:801
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Cargament del PNJ : %s"
 
-#: src/engine/dccnit.cpp:846
+#: src/engine/dccnit.cpp:838
 msgid "Creating MiniMap"
 msgstr "Creacion d'una Mapa miniatura"
 
-#: src/engine/dccnit.cpp:852
+#: src/engine/dccnit.cpp:844
 msgid "Putting GUI on Screen"
 msgstr "Afichatge per interfàcia grafica"
 
-#: src/engine/dccnit.cpp:906
+#: src/engine/dccnit.cpp:870
 msgid "Loading Particles"
 msgstr "Cargament de las Particulas"
 
-#: src/engine/dccnit.cpp:936
+#: src/engine/dccnit.cpp:899
 msgid "Loading Changes..."
 msgstr "Cargament de las modificacions..."
 
-#: src/engine/dccnit.cpp:958
+#: src/engine/dccnit.cpp:921
 msgid "Done!"
 msgstr "Acabat !"
 
-#: src/engine/dccnit.cpp:1170
+#: src/engine/dccnit.cpp:1133
 msgid ""
 "DccNiTghtmare is relesead under GPLv3 or later: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -450,61 +450,61 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1757
+#: src/engine/dccnit.cpp:1720
 msgid "Too far away for the action!"
 msgstr "Tròp luènh per aquesta accion !"
 
-#: src/engine/dccnit.cpp:1774
+#: src/engine/dccnit.cpp:1737
 msgid "Couldn't rest at battle mode."
 msgstr "Impossible de se repausar en mòde combat."
 
-#: src/engine/dccnit.cpp:1780
+#: src/engine/dccnit.cpp:1743
 msgid "Enemies nearby."
 msgstr "Enemics pròches."
 
-#: src/engine/dccnit.cpp:1884
+#: src/engine/dccnit.cpp:1847
 msgid "No NPCs in the area."
 msgstr "Pas de PNJ dins la zòna"
 
-#: src/engine/dccnit.cpp:1942
+#: src/engine/dccnit.cpp:1905
 msgid "Surprise Attack Turn."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1955
+#: src/engine/dccnit.cpp:1918
 msgid "No enemies in the area."
 msgstr "Pas d'enemics dins la zòna."
 
-#: src/engine/dccnit.cpp:2429
+#: src/engine/dccnit.cpp:2380
 #, c-format
 msgid "%s taken."
 msgstr "%s pres."
 
-#: src/engine/dccnit.cpp:2446
+#: src/engine/dccnit.cpp:2397
 msgid "Inventory is full!"
 msgstr "L'inventari es comol !"
 
-#: src/engine/dccnit.cpp:2479
+#: src/engine/dccnit.cpp:2418
 msgid "Door"
 msgstr "Pòrta"
 
-#: src/engine/dccnit.cpp:2581
+#: src/engine/dccnit.cpp:2492
 msgid "dead"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2631
+#: src/engine/dccnit.cpp:2544
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s atacs %s"
 
-#: src/engine/dccnit.cpp:2800
+#: src/engine/dccnit.cpp:2708
 msgid "No more actions. Turn ended."
 msgstr "Pas d'accions suplementàrias. Fin del torn."
 
-#: src/engine/dccnit.cpp:4244
+#: src/engine/dccnit.cpp:4027
 msgid "Exit Battle Mode"
 msgstr "Quitar lo Mòde Combat"
 
-#: src/engine/dialog.cpp:1214
+#: src/engine/dialog.cpp:1213
 #, c-format
 msgid "%s lost."
 msgstr "%s perdut."
@@ -524,7 +524,7 @@ msgstr "%d $ recebuts."
 msgid "Lost $%d."
 msgstr "%d $ perduts."
 
-#: src/engine/dialog.cpp:1482
+#: src/engine/dialog.cpp:1483
 msgid "Dialog"
 msgstr "Dialòg"
 
@@ -564,7 +564,7 @@ msgstr "Salvar"
 msgid "Load"
 msgstr "Cargar"
 
-#: src/engine/initial.cpp:94 src/engine/options.cpp:797
+#: src/engine/initial.cpp:94 src/engine/options.cpp:800
 msgid "Options"
 msgstr "Opcions"
 
@@ -690,7 +690,7 @@ msgstr "Quantitat :"
 msgid "Ok"
 msgstr "D'acòrdi"
 
-#: src/engine/journalwindow.cpp:285 src/engine/options.cpp:166
+#: src/engine/journalwindow.cpp:285 src/engine/options.cpp:169
 msgid "Journal"
 msgstr "Jornal"
 
@@ -750,253 +750,257 @@ msgstr "Rus"
 msgid "Japanese"
 msgstr ""
 
-#: src/engine/options.cpp:137
+#: src/engine/options.cpp:59
+msgid "Polish"
+msgstr ""
+
+#: src/engine/options.cpp:140
 msgid "Camera Rotate Left"
 msgstr "Rotacion a Esquèrra de la Camèra"
 
-#: src/engine/options.cpp:138
+#: src/engine/options.cpp:141
 msgid "Camera Rotate Right"
 msgstr "Rotacion a Drecha de la Camèra"
 
-#: src/engine/options.cpp:139
+#: src/engine/options.cpp:142
 msgid "Camera Rotate Up"
 msgstr "Rotacion cap Amont de la Camèra"
 
-#: src/engine/options.cpp:140
+#: src/engine/options.cpp:143
 msgid "Camera Rotate Down"
 msgstr "Rotacion cap Aval de la Camèra"
 
-#: src/engine/options.cpp:141
+#: src/engine/options.cpp:144
 msgid "Camera Zoom Up"
 msgstr "Zoom mai la Camèra"
 
-#: src/engine/options.cpp:142
+#: src/engine/options.cpp:145
 msgid "Camera Zoom Down"
 msgstr "Zoom mens la Camèra"
 
-#: src/engine/options.cpp:143
+#: src/engine/options.cpp:146
 msgid "Camera Top"
 msgstr "Camèra Amont"
 
-#: src/engine/options.cpp:144
+#: src/engine/options.cpp:147
 msgid "Camera Bottom"
 msgstr "Camèra Aval"
 
-#: src/engine/options.cpp:145
+#: src/engine/options.cpp:148
 msgid "Camera Zoom Max"
 msgstr "Zoom Camèra al Maximun"
 
-#: src/engine/options.cpp:146
+#: src/engine/options.cpp:149
 msgid "Camera Zoom Min"
 msgstr "Zoom Camèra al Minimun"
 
-#: src/engine/options.cpp:148
+#: src/engine/options.cpp:151
 msgid "Toggle Run(1)"
 msgstr "Bascuola Corsa(1)"
 
-#: src/engine/options.cpp:149
+#: src/engine/options.cpp:152
 msgid "Toggle Run(2)"
 msgstr "Bascuola Corsa(2)"
 
-#: src/engine/options.cpp:150
+#: src/engine/options.cpp:153
 msgid "Move Right"
 msgstr "Se desplaçar cap a drecha"
 
-#: src/engine/options.cpp:151
+#: src/engine/options.cpp:154
 msgid "Move Left"
 msgstr "Se desplaçar cap a esquèrra"
 
-#: src/engine/options.cpp:152
+#: src/engine/options.cpp:155
 msgid "Move Forward"
 msgstr "Moviment en Avant"
 
-#: src/engine/options.cpp:153
+#: src/engine/options.cpp:156
 msgid "Move Backward"
 msgstr "Moviment en Arrièr"
 
-#: src/engine/options.cpp:154
+#: src/engine/options.cpp:157
 msgid "Rotate Left"
 msgstr "Pivotar cap a esquèrra"
 
-#: src/engine/options.cpp:155
+#: src/engine/options.cpp:158
 msgid "Rotate Right"
 msgstr "Pivotar cap a drecha"
 
-#: src/engine/options.cpp:156
+#: src/engine/options.cpp:159
 msgid "Change Character"
 msgstr "Cambiar de personatge"
 
-#: src/engine/options.cpp:157 src/engine/shortcutswindow.cpp:301
+#: src/engine/options.cpp:160 src/engine/shortcutswindow.cpp:301
 msgid "Rest"
 msgstr "Repausar"
 
-#: src/engine/options.cpp:159
+#: src/engine/options.cpp:162
 msgid "End Turn"
 msgstr "Fin del torn"
 
-#: src/engine/options.cpp:161
+#: src/engine/options.cpp:164
 msgid "Minimap"
 msgstr "Minimapa"
 
-#: src/engine/options.cpp:162
+#: src/engine/options.cpp:165
 msgid "Shortcuts"
 msgstr "Acorchis de clavièr"
 
-#: src/engine/options.cpp:165
+#: src/engine/options.cpp:168
 msgid "Character Info"
 msgstr "Informacion sul Personatge"
 
-#: src/engine/options.cpp:603 src/engine/options.cpp:630
+#: src/engine/options.cpp:606 src/engine/options.cpp:633
 #: data/weapons/types/munitions.dcl:2
 msgid "None"
 msgstr "Pas cap"
 
-#: src/engine/options.cpp:608
+#: src/engine/options.cpp:611
 msgid "Characters"
 msgstr "Personatges"
 
-#: src/engine/options.cpp:613
+#: src/engine/options.cpp:616
 msgid "All"
 msgstr "Totes"
 
-#: src/engine/options.cpp:635
+#: src/engine/options.cpp:638
 msgid "Projective"
 msgstr "Projeccion"
 
-#: src/engine/options.cpp:651 data/weapons/types/sizes.dcl:3
+#: src/engine/options.cpp:654 data/weapons/types/sizes.dcl:3
 #: data/weapons/types/weights.dcl:3
 msgid "Normal"
 msgstr "Normal"
 
-#: src/engine/options.cpp:654
+#: src/engine/options.cpp:657
 msgid "Pursue"
 msgstr ""
 
-#: src/engine/options.cpp:670 src/engine/options.cpp:689
+#: src/engine/options.cpp:673 src/engine/options.cpp:692
 msgid "Disabled"
 msgstr "Desactivat"
 
-#: src/engine/options.cpp:692
+#: src/engine/options.cpp:695
 msgid "2x"
 msgstr "2x"
 
-#: src/engine/options.cpp:695
+#: src/engine/options.cpp:698
 msgid "4x"
 msgstr "4x"
 
-#: src/engine/options.cpp:807
+#: src/engine/options.cpp:810
 msgid "Input"
 msgstr "Entrada"
 
-#: src/engine/options.cpp:810
+#: src/engine/options.cpp:813
 msgid "Windows"
 msgstr "Fenèstras"
 
-#: src/engine/options.cpp:813
+#: src/engine/options.cpp:816
 msgid "Character"
 msgstr "Personatge"
 
-#: src/engine/options.cpp:816
+#: src/engine/options.cpp:819
 msgid "Camera"
 msgstr "Camèra"
 
-#: src/engine/options.cpp:821
+#: src/engine/options.cpp:824
 msgid "Audio"
 msgstr "Àudio"
 
-#: src/engine/options.cpp:825
+#: src/engine/options.cpp:828
 msgid "Music Volume:"
 msgstr "Volum de la musica :"
 
-#: src/engine/options.cpp:842
+#: src/engine/options.cpp:845
 msgid "Effects Volume:"
 msgstr "Volum dels efièches :"
 
-#: src/engine/options.cpp:859
+#: src/engine/options.cpp:862
 msgid "Video"
 msgstr "Vidèo"
 
-#: src/engine/options.cpp:867
+#: src/engine/options.cpp:870
 msgid "Screen Resolution:"
 msgstr "Resolucion d'ecran :"
 
-#: src/engine/options.cpp:882
+#: src/engine/options.cpp:885
 msgid "Enable FullScreen"
 msgstr "Activar l'ecran complet"
 
-#: src/engine/options.cpp:891
+#: src/engine/options.cpp:894
 msgid "Enable Grass Effects (need particles)"
 msgstr ""
 
-#: src/engine/options.cpp:900
+#: src/engine/options.cpp:903
 msgid "Enable Particles Effects"
 msgstr ""
 
-#: src/engine/options.cpp:912
+#: src/engine/options.cpp:915
 msgid "Enable MultiTextures"
 msgstr "Activar MultiTexturas"
 
-#: src/engine/options.cpp:922
+#: src/engine/options.cpp:925
 msgid "Enable Anisotropic Filter"
 msgstr ""
 
-#: src/engine/options.cpp:933
+#: src/engine/options.cpp:936
 msgid "Stencil Buffer:"
 msgstr "Stencil Buffer :"
 
-#: src/engine/options.cpp:950
+#: src/engine/options.cpp:953
 msgid "Reflections:"
 msgstr "Reflèctes :"
 
-#: src/engine/options.cpp:967
+#: src/engine/options.cpp:970
 msgid "Shadows:"
 msgstr "Ombras :"
 
-#: src/engine/options.cpp:983
+#: src/engine/options.cpp:986
 msgid "Anti-Aliasing:"
 msgstr "Anti-Aliasing :"
 
-#: src/engine/options.cpp:998
+#: src/engine/options.cpp:1001
 msgid "FarView:"
 msgstr ""
 
-#: src/engine/options.cpp:1014
+#: src/engine/options.cpp:1017
 msgid "Game"
 msgstr "Jòc"
 
-#: src/engine/options.cpp:1020
+#: src/engine/options.cpp:1023
 msgid "Language:"
 msgstr "Lenga :"
 
-#: src/engine/options.cpp:1037
+#: src/engine/options.cpp:1040
 msgid "Camera Mode:"
 msgstr "Mòde de la Camèra :"
 
-#: src/engine/options.cpp:1053
+#: src/engine/options.cpp:1056
 msgid "Auto End Turn"
 msgstr "Fin de Torn Automatica"
 
-#: src/engine/options.cpp:1062
+#: src/engine/options.cpp:1065
 msgid "Always Run"
 msgstr ""
 
-#: src/engine/options.cpp:1071
+#: src/engine/options.cpp:1074
 msgid "Show Enemy Battle Circle"
 msgstr ""
 
-#: src/engine/options.cpp:1080
+#: src/engine/options.cpp:1083
 msgid "Highlight current enemy"
 msgstr ""
 
-#: src/engine/options.cpp:1387
+#: src/engine/options.cpp:1390
 msgid "Some changes will only take effect upon restart."
 msgstr ""
 
-#: src/engine/options.cpp:1432
+#: src/engine/options.cpp:1435
 msgid "Press a key to: "
 msgstr ""
 
-#: src/engine/options.cpp:1435
+#: src/engine/options.cpp:1438
 msgid "Waiting..."
 msgstr "En espèra ..."
 

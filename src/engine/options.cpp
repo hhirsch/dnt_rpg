@@ -55,7 +55,8 @@ string dntLanguageName[] =
    gettext("Catalan"),
    gettext("Occitan"),
    gettext("Russian"),
-   gettext("Japanese")
+   gettext("Japanese"),
+   gettext("Polish")
 };
 
 /*! The language code  */
@@ -71,7 +72,8 @@ string dntLanguageCode[] =
    "ca",
    "oc",
    "ru",
-   "ja"
+   "ja",
+   "pl"
 };
 
 /*! The language numbers */
@@ -88,6 +90,7 @@ enum
    DNT_LANG_OCCITAN,
    DNT_LANG_RUSSIAN,
    DNT_LANG_JAPANESE,
+   DNT_LANG_POLISH,
    DNT_LANG_LAST
 };
 

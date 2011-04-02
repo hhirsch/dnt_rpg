@@ -60,7 +60,8 @@ src/etc/animodel.cpp
 src/etc/distance.cpp
 src/etc/extensions.cpp
 src/etc/message3d.cpp
-src/etc/modellist.cpp
+src/etc/scene.cpp
+src/etc/scenenode.cpp
 
 #fight
 src/fight/fightGroup.cpp
