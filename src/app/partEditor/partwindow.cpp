@@ -182,7 +182,7 @@ void partWindow::openWindow()
    men->insertItem(DNT_PART_AUX_POSZ, true);
    men->insertItem("-", false);
    men->insertItem(DNT_PART_AUX_SCALE, true);
-   element->men = (void*)men;
+   element->men = men;
 
    origin = curWindow->getObjectsList()->insertButton(103, 204, 173, 221, 
          "Origin", true);
