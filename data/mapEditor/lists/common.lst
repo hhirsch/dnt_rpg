@@ -34,6 +34,7 @@ Mjack_Book = models/objetos/books/mjack/mjack.dcc
 Money = models/objetos/itens/money/money.dcc
 Notebook = models/objetos/geral/notebook/notebook.dcc
 Oven = models/objetos/geral/oven/oven.dcc
+Pandeiro = models/objetos/geral/pandeiro/pandeiro.dcc
 PC_Chair = models/objetos/geral/pc_chair/pc_chair.dcc
 PC_Table = models/objetos/geral/pc_table/pc_table.dcc
 Pia = models/objetos/geral/pia/pia.dcc

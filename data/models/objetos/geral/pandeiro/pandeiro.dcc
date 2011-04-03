@@ -1,0 +1,9 @@
+name = gettext("Pandeiro")
+description = gettext("A simple percussion instrument.")
+cal3d = models/objetos/geral/pandeiro/model.cfg
+inventory_sizes = 2 2
+inventory_texture = models/objetos/geral/pandeiro/texture_inv.png
+life_points = 21
+armature_class = 10
+cost = 70
+weight = 0.5
