@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2011-04-02 10:36-0300\n"
+"POT-Creation-Date: 2011-04-09 11:30-0300\n"
 "PO-Revision-Date: 2010-05-27 16:34+0000\n"
 "Last-Translator: Dani Cases <danicases@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
@@ -28,8 +28,8 @@ msgstr "%s intenta atacar a %s"
 msgid "%s try to heal %s"
 msgstr "%s intenta curar a %s"
 
-#: src/classes/actions.cpp:162 src/classes/feats.cpp:294
-#: src/classes/feats.cpp:348
+#: src/classes/actions.cpp:162 src/classes/feats.cpp:293
+#: src/classes/feats.cpp:346
 msgid "Too far away for action!"
 msgstr "Massa lluny per l'acció!"
 
@@ -84,16 +84,16 @@ msgstr "No sóc cap boig"
 msgid "Invalid Talent"
 msgstr "Talent invàlid"
 
-#: src/classes/feats.cpp:234 src/engine/dccnit.cpp:2200
+#: src/classes/feats.cpp:234 src/engine/dccnit.cpp:2199
 msgid "Not enought points to use!"
 msgstr "No tens prous punts!"
 
-#: src/classes/mission.cpp:531 src/engine/dialog.cpp:1185
+#: src/classes/mission.cpp:530 src/engine/dialog.cpp:1185
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "Missió completada: %d XP!"
 
-#: src/classes/mission.cpp:550 src/classes/mission.cpp:553
+#: src/classes/mission.cpp:548 src/classes/mission.cpp:551
 msgid "Mission Failure!"
 msgstr "Missió fallida!"
 
@@ -182,8 +182,8 @@ msgstr "Carisma"
 msgid "Attribute Description"
 msgstr "Descripció de l'Atribut"
 
-#: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:567
-#: src/engine/dccnit.cpp:2199 src/engine/featsel.cpp:468
+#: src/engine/attwindow.cpp:551 src/engine/dccnit.cpp:566
+#: src/engine/dccnit.cpp:2198 src/engine/featsel.cpp:468
 #: src/engine/inventwindow.cpp:364 src/engine/options.cpp:1389
 msgid "Warning"
 msgstr "Atenció"
@@ -245,6 +245,10 @@ msgstr "Èxit"
 msgid "Failure"
 msgstr "Fracàs"
 
+#: src/engine/character.cpp:546 src/engine/charwindow.cpp:139
+msgid "HP"
+msgstr ""
+
 #: src/engine/charwindow.cpp:113
 msgid "Female"
 msgstr "Dona"
@@ -272,10 +276,6 @@ msgstr ""
 #: src/engine/charwindow.cpp:133
 msgid "Next Level"
 msgstr "Nivell Següent"
-
-#: src/engine/charwindow.cpp:139
-msgid "HP"
-msgstr ""
 
 #: src/engine/charwindow.cpp:142
 msgid "AC"
@@ -384,7 +384,7 @@ msgstr "Habilitats de classe"
 msgid "No Skills."
 msgstr "Sense habilitats"
 
-#: src/engine/dccnit.cpp:507 src/engine/dccnit.cpp:558
+#: src/engine/dccnit.cpp:507 src/engine/dccnit.cpp:557
 msgid "Error"
 msgstr "Error"
 
@@ -392,57 +392,57 @@ msgstr "Error"
 msgid "Can't load the saved game!"
 msgstr "No es pot carregar la partida guardada!"
 
-#: src/engine/dccnit.cpp:553
+#: src/engine/dccnit.cpp:552
 msgid "Information"
 msgstr "Informació"
 
-#: src/engine/dccnit.cpp:554
+#: src/engine/dccnit.cpp:553
 msgid "The game was saved!"
 msgstr "S'ha guardat la partida!"
 
-#: src/engine/dccnit.cpp:558
+#: src/engine/dccnit.cpp:557
 msgid "Can't save game!"
 msgstr "No es pot guardar la partida!"
 
-#: src/engine/dccnit.cpp:568
+#: src/engine/dccnit.cpp:567
 msgid "Can't save game while fighting!"
 msgstr "No es pot salvar la partida enmig d'una lluita!"
 
-#: src/engine/dccnit.cpp:701
+#: src/engine/dccnit.cpp:700
 msgid "Saving Current Map Modifications"
 msgstr "Guardant les modificacions actuals del mapa"
 
-#: src/engine/dccnit.cpp:736
+#: src/engine/dccnit.cpp:735
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Carregant mapa: %s"
 
-#: src/engine/dccnit.cpp:801
+#: src/engine/dccnit.cpp:800
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Carregant NPC: %s"
 
-#: src/engine/dccnit.cpp:838
+#: src/engine/dccnit.cpp:837
 msgid "Creating MiniMap"
 msgstr "Creant MiniMapa"
 
-#: src/engine/dccnit.cpp:844
+#: src/engine/dccnit.cpp:843
 msgid "Putting GUI on Screen"
 msgstr "Posant GUI en pantalla"
 
-#: src/engine/dccnit.cpp:870
+#: src/engine/dccnit.cpp:869
 msgid "Loading Particles"
 msgstr "Carregant partícules"
 
-#: src/engine/dccnit.cpp:899
+#: src/engine/dccnit.cpp:898
 msgid "Loading Changes..."
 msgstr "Carregant canvis..."
 
-#: src/engine/dccnit.cpp:921
+#: src/engine/dccnit.cpp:920
 msgid "Done!"
 msgstr "Fet!"
 
-#: src/engine/dccnit.cpp:1133
+#: src/engine/dccnit.cpp:1132
 msgid ""
 "DccNiTghtmare is relesead under GPLv3 or later: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -455,57 +455,57 @@ msgstr ""
 "a la gent que ha desenvolupat aquestes llibreries: OpenAL, Cal3D, OpenGL, "
 "SDL, SDL_image, SDL_ttf, libVorbis."
 
-#: src/engine/dccnit.cpp:1720
+#: src/engine/dccnit.cpp:1719
 msgid "Too far away for the action!"
 msgstr "Massa lluny per l'acció!"
 
-#: src/engine/dccnit.cpp:1737
+#: src/engine/dccnit.cpp:1736
 msgid "Couldn't rest at battle mode."
 msgstr "No es pot descansar en mode lluita"
 
-#: src/engine/dccnit.cpp:1743
+#: src/engine/dccnit.cpp:1742
 msgid "Enemies nearby."
 msgstr "Enemics a prop."
 
-#: src/engine/dccnit.cpp:1847
+#: src/engine/dccnit.cpp:1846
 msgid "No NPCs in the area."
 msgstr "Cap PnJ a la zona."
 
-#: src/engine/dccnit.cpp:1905
+#: src/engine/dccnit.cpp:1904
 msgid "Surprise Attack Turn."
 msgstr "Torn d'atac sorpresa"
 
-#: src/engine/dccnit.cpp:1918
+#: src/engine/dccnit.cpp:1917
 msgid "No enemies in the area."
 msgstr "Cap enemic a la zona."
 
-#: src/engine/dccnit.cpp:2380
+#: src/engine/dccnit.cpp:2381
 #, c-format
 msgid "%s taken."
 msgstr "%s recollit."
 
-#: src/engine/dccnit.cpp:2397
+#: src/engine/dccnit.cpp:2398
 msgid "Inventory is full!"
 msgstr "L'inventari està ple!"
 
-#: src/engine/dccnit.cpp:2418
+#: src/engine/dccnit.cpp:2419
 msgid "Door"
 msgstr "Porta"
 
-#: src/engine/dccnit.cpp:2492
+#: src/engine/dccnit.cpp:2471
 msgid "dead"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2544
+#: src/engine/dccnit.cpp:2523
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s ataca a %s"
 
-#: src/engine/dccnit.cpp:2708
+#: src/engine/dccnit.cpp:2719
 msgid "No more actions. Turn ended."
 msgstr "No queden accions. Torn finalitzat."
 
-#: src/engine/dccnit.cpp:4027
+#: src/engine/dccnit.cpp:4026
 msgid "Exit Battle Mode"
 msgstr "Surt del Mode lluita"
 
