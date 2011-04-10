@@ -2313,8 +2313,8 @@ int engine::verifyMouseActions(Uint8 mButton)
 
    /* Create a bounding box for the mouse position */
    boundingBox mouseBox;
-   mouseBox.setMin(xReal-3, yReal-1.0, zReal-3);
-   mouseBox.setMax(xReal+3, yReal+1.0, zReal+3);
+   mouseBox.setMin(xReal-4, yReal-4.0, zReal-4);
+   mouseBox.setMax(xReal+4, yReal+4.0, zReal+4);
 
    int qx, qz;
    qx = (int)xReal / actualMap->squareSize();
