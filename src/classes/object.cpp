@@ -836,8 +836,9 @@ object* objectsList::search(string fileName, GLfloat posX, GLfloat posY,
       {
          if(!cur->scNode)
          {
-            /* FIXME: !!  */
-            cerr << "Without scNode!!!" << endl;
+            /* FIXME: !!  
+            cerr << "Without scNode: " << fileName << " " 
+                 << posX << " " << posY << " " << posZ << " " << endl; */
          }
          else if( (cur->scNode->getPosX() == posX) && 
                   (cur->scNode->getPosY() == posY) &&

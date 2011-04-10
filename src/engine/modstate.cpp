@@ -125,7 +125,7 @@ void modAction::setPosition(GLfloat posX, GLfloat posY, GLfloat posZ)
 /************************************************************
  *                       Constructor                        *
  ************************************************************/
-modActionList::modActionList()
+modActionList::modActionList():dntList(DNT_LIST_TYPE_ADD_AT_END)
 {
 }
 
@@ -475,7 +475,8 @@ void mapTalkModAction::fromString(string s)
  *                       Constructor                        *
  ************************************************************/
 modInventory::modInventory(inventory* inv, string owner, string mapFile)
-             : modAction(MODSTATE_INVENTORY, owner, mapFile, -1, -1, -1)
+             : modAction(MODSTATE_INVENTORY, owner, mapFile, -1, -1, -1),
+             dntList(DNT_LIST_TYPE_ADD_AT_END)
 {
    /* Create the list from the inventory */
    if(inv != NULL)
@@ -1170,6 +1171,7 @@ void modMap::doMapModifications(Map* actualMap, characterList* NPCs)
          else
          {
             cerr << "Error: Unknow object: " << act->getTarget() 
+               << " " << x << " " << y << " " << z 
                << " to change at modState" << endl;
          }
       }
@@ -1332,7 +1334,7 @@ bool modMap::allCharactersAlive(string npcFileName)
 /************************************************************
  *                       Constructor                        *
  ************************************************************/
-modMapList::modMapList()
+modMapList::modMapList():dntList(DNT_LIST_TYPE_ADD_AT_END)
 {
 }
 
