@@ -12,6 +12,7 @@ BugFixes:
  - Fixed a bug that freezes the game when drinking a beer (thanks 
  to zerberros for the bug report);
  - Fixed a bug that won't let remove of some objects from list;
+ - Fixed a bug when leveling up a skill with effects applied;
 
 ================================================
 |                Version 0.7                   |

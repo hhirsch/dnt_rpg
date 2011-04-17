@@ -38,6 +38,7 @@ modEffect::modEffect(modEffect* obj)
    init = obj->init;
    time = obj->time;
    lastApply = obj->lastApply;
+   applied = obj->applied;
    periodicTime = obj->periodicTime;
    cause.type = obj->cause.type;
    cause.id = obj->cause.id;
@@ -57,6 +58,7 @@ modEffect::modEffect(int mod, int time, int periodicTime,
    this->mod = mod;
    this->init = SDL_GetTicks();
    this->lastApply = 0;
+   this->applied = false;
    this->time = time;
    this->periodicTime = periodicTime;
    this->cause.id = factorId;
@@ -103,6 +105,7 @@ void modEffect::fromSaveText(string txt)
 
    cause.id = i;
    cause.type = t;
+   applied = false;
 }
 
 /***********************************************************************
@@ -205,6 +208,7 @@ void modEffect::apply(character* actor)
 {
    /* Apply */
    doApply(actor, mod);
+   applied = true;
 }
 
 /***********************************************************************
@@ -214,6 +218,7 @@ void modEffect::unApply(character* actor)
 {
    /* Apply with inverse value */
    doApply(actor, -mod);
+   applied = false;
 }
 
 /***********************************************************************
@@ -389,9 +394,48 @@ void modEffectList::doStep()
          if(owner != NULL)
          {
             eff->apply(owner);
+            efaux->lastApply = curTime;
          }
       }
    }
 }
 
+
+/***********************************************************************
+ *                               unApply                               *
+ ***********************************************************************/
+void modEffectList::unApply()
+{
+   int i;
+
+   modEffect* eff = (modEffect*)first;
+
+   for(i=0; i < total; i++)
+   {
+      if(eff->applied)
+      {
+         eff->unApply(owner);
+      }
+      eff = (modEffect*)eff->getNext();
+   }
+}
+
+/***********************************************************************
+ *                                apply                                *
+ ***********************************************************************/
+void modEffectList::apply()
+{
+   int i;
+
+   modEffect* eff = (modEffect*)first;
+
+   for(i=0; i < total; i++)
+   {
+      if(!eff->applied)
+      {
+         eff->apply(owner);
+      }
+      eff = (modEffect*)eff->getNext();
+   }
+}
 

@@ -90,6 +90,7 @@ class modEffect: public dntListElement
       int periodicTime;    /**< Periodicity of the effect (with saves), 
                                 0 for non-periodic ones. */
       Uint16 lastApply;    /**< Time when last applied the modEffect */
+      bool applied;        /**< If applied or not */
 };
 
 /*! List of modEffects */
@@ -125,6 +126,12 @@ class modEffectList: public dntList
 
       /*! Do the rest to the modEffects list (removing all timed effects) */
       void rest();
+
+      /*! Unapply all effects (but do not remove them from list) */
+      void unApply();
+
+      /*! Apply all effects at the list */
+      void apply();
 
    protected:
       /*! Free modEffect used memory

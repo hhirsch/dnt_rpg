@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2010 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -71,6 +71,9 @@ void levelUp::doLevelUp(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
    classWindow *clWindow = NULL;
    skillWindow *skWindow = NULL;
    classe* selClass = current->actualClass[0];
+
+   /* Unapply effects */
+   current->getEffects()->unApply();
 
    /* Create the new GUI */
    guiInterface* gui = new guiInterface("");
@@ -228,6 +231,9 @@ void levelUp::doLevelUp(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
       /* Must apply the class choosed */
       current->getNewClassLevel(selClass);
    }
+
+   /* Reapply effects */
+   current->getEffects()->unApply();
 
    /* Clear the temporary gui, and done! */
    delete(gui);
