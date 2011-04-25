@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
 "POT-Creation-Date: 2011-04-09 11:30-0300\n"
-"PO-Revision-Date: 2011-04-04 17:13+0000\n"
+"PO-Revision-Date: 2011-04-16 15:37+0000\n"
 "Last-Translator: Michal Tuchowski <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-04-09 14:28+0000\n"
-"X-Generator: Launchpad (build 12757)\n"
+"X-Launchpad-Export-Date: 2011-04-25 17:08+0000\n"
+"X-Generator: Launchpad (build 12915)\n"
 
 #: src/classes/actions.cpp:146
 #, c-format
@@ -1278,7 +1278,7 @@ msgstr ""
 
 #: data/comics/tutorial/combat/combat.dcb:140
 msgid "Your action's range is represented by circles."
-msgstr ""
+msgstr "Kręgi pokazują zasięg Twoich akcji."
 
 #: data/comics/tutorial/combat/combat.dcb:151
 msgid "The yellow circle represents your current attack range."
