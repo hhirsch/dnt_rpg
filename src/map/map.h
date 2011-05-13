@@ -265,10 +265,17 @@ class Map
       float getSquareMiniSize();
 
       /*! Gets coordinate relative square
-       * \param xa -> x coordinate of square
-       * \param za -> z coordinate of square
+       * \param xa -> x coordinate of square [0,totalSquares]
+       * \param za -> z coordinate of square [0,totalSquares]
        * \return the coordinate relative square. */
       Square* relativeSquare(int xa, int za);
+
+      /*! Get the relative square in world coordinates
+       * \param xa -> world x coordinate where square is 
+       * \param za -> world z coordinate where square is
+       * \return square found or NULL */
+      Square* relativeSquareWorld(float xa, float za);
+
       /*! Get the initial square (where character begins)
        * \return -> pointer to the initial square */
       Square* getInitialSquare();

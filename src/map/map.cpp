@@ -1422,9 +1422,23 @@ lake* Map::addLake(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2)
 Square* Map::relativeSquare(int xa, int za)
 {
    if( (z <= za) || (x <= xa) || ( xa < 0) || (za < 0)) 
+   {
       return(NULL);
+   }
 
    return(&MapSquares[xa][za]);
+}
+
+/********************************************************************
+ *                        relativeSquareWorld                       *
+ ********************************************************************/
+Square* Map::relativeSquareWorld(float xa, float za)
+{
+   int qx, qz;
+   qx = (int)xa / squareSize();
+   qz = (int)za / squareSize();
+
+   return(relativeSquare(qx, qz));
 }
 
 /********************************************************************
