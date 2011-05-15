@@ -42,13 +42,19 @@ void nodeEditor::verifyAction(Uint8* keys, GLfloat mouseX, GLfloat mouseY,
             GLfloat mouseZ, Uint8 mButton, int mouseXw, int mouseYw,
             GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
-   Square* relSquare = actualMap->relativeSquareWorld(mouseX, mouseZ);
+   scene dntScene;
+   sceneNode* scNode;
 
    /* Create a bounding box for the mouse position */
    boundingBox mouseBox;
    mouseBox.setMin(mouseX-4, mouseY-4.0, mouseZ-4);
    mouseBox.setMax(mouseX+4, mouseY+4.0, mouseZ+4);
 
+   scNode = dntScene.getSceneNode(mouseBox);
+   if(scNode)
+   {
+      curNode = scNode;
+   }
 }
 
 
