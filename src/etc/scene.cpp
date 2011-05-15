@@ -54,6 +54,28 @@ nodesList::~nodesList()
 }
 
 /***********************************************************************
+ *                            getSceneNode                             *
+ ***********************************************************************/
+sceneNode* nodesList::getSceneNode(boundingBox& scBox)
+{
+   int i;
+   renderPosition* rp = (renderPosition*)getFirst();
+
+   /* Verify at animated list */
+   for(i=0; i < total; i++)
+   {
+      if(rp->node->getBoundingBox().intercepts(scBox))
+      {
+         /* Interceptd... must return */
+         return(rp->node);
+      }
+      rp = (renderPosition*)rp->getNext();
+   }
+
+   return(NULL);
+}
+
+/***********************************************************************
  *                          deleteSceneNode                            *
  ***********************************************************************/
 void nodesList::deleteSceneNode(sceneNode* node)
@@ -193,6 +215,32 @@ void listNodesList::render(GLfloat** viewMatrix, bool update, bool reflexion,
    }
 }
 
+/***********************************************************************
+ *                            getSceneNode                             *
+ ***********************************************************************/
+sceneNode* listNodesList::getSceneNode(boundingBox& scBox)
+{
+   int i;
+   nodesList* l = (nodesList*)getFirst();
+   sceneNode* scNode=NULL;
+
+   /* Verify at animated list */
+   for(i=0; i < total; i++)
+   {
+      /* Verify interception on this list */
+      scNode = l->getSceneNode(scBox);
+      if(scNode)
+      {
+         return(scNode);
+      }
+
+      /* None... must verify next */
+      l = (nodesList*)l->getNext();
+   }
+
+   return(NULL);
+}
+
 
 /***********************************************************************
  *                             freeElements                            *
@@ -306,6 +354,25 @@ sceneNode* scene::createSceneNode(bool staticModel, string modelFileName,
    }
 
    return(rp->node);
+}
+
+/***********************************************************************
+ *                            getSceneNode                             *
+ ***********************************************************************/
+sceneNode* scene::getSceneNode(boundingBox& scBox)
+{
+   sceneNode* scNode = NULL;
+
+   /* Verify at animated list */
+   scNode = animatedList->getSceneNode(scBox);
+
+   /* Verify at static nodes list */
+   if(!scNode)
+   {
+      scNode = nLists->getSceneNode(scBox);
+   }
+
+   return(scNode);
 }
 
 /***********************************************************************

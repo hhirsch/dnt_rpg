@@ -52,6 +52,11 @@ class nodesList: public dntListElement, public dntList
       void render(GLfloat** viewMatrix, bool update, bool reflexion,
             bool shadow, GLfloat* shadowMatrix, float alpha);
 
+      /*! Get scene node inner a bounding box
+       * \param scBox -> bounding box to check sceneNode in
+       * \return pointer to the sceneNode or NULL */
+      sceneNode* getSceneNode(boundingBox& scBox);
+
       /*! Delete scene node from list */
       void deleteSceneNode(sceneNode* node);
 
@@ -71,24 +76,29 @@ class nodesList: public dntListElement, public dntList
 /*! A list of nodes lists   */
 class listNodesList: public dntList
 {
-    public:
-       /*! Constructor */
-       listNodesList();
-       /*! Destructor */
-       ~listNodesList();
+   public:
+      /*! Constructor */
+      listNodesList();
+      /*! Destructor */
+      ~listNodesList();
 
-       /*! Find a list of name
-        * \param name -> name of the list 
-        * \return list pointer or NULL */
-       nodesList* find(string name);
-       /*! Find a list of model
-        * \param model -> pointer to the model to find list of
-        * \return list pointer or NULL */
-       nodesList* find(aniModel* model);
+      /*! Find a list of name
+       * \param name -> name of the list 
+       * \return list pointer or NULL */
+      nodesList* find(string name);
+      /*! Find a list of model
+       * \param model -> pointer to the model to find list of
+       * \return list pointer or NULL */
+      nodesList* find(aniModel* model);
 
-       /*! Render all models on list */
+      /*! Render all models on list */
       void render(GLfloat** viewMatrix, bool update, bool reflexion,
             bool shadow, GLfloat* shadowMatrix, float alpha);
+
+      /*! Get scene node inner a bounding box
+       * \param scBox -> bounding box to check sceneNode in
+       * \return pointer to the sceneNode or NULL */
+      sceneNode* getSceneNode(boundingBox& scBox);
 
     protected:
        void freeElement(dntListElement* obj);
@@ -114,6 +124,11 @@ class scene
       sceneNode* createSceneNode(bool staticModel, string modelFileName, 
             GLfloat x, GLfloat y, GLfloat z,
             GLfloat aX, GLfloat aY, GLfloat aZ);
+
+      /*! Get first sceneNode in the bounding box
+       * \param scBox -> bounding box to get scene nodes in
+       * \return -> pointer to sceneNode inner boundingBox or NULL if none.*/
+      sceneNode* getSceneNode(boundingBox& scBox);
 
       /*! Delete an scene node from scene */
       void deleteSceneNode(sceneNode* node);
