@@ -8,25 +8,25 @@ msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
 "POT-Creation-Date: 2011-04-09 11:30-0300\n"
-"PO-Revision-Date: 2011-02-18 15:36+0000\n"
-"Last-Translator: Dmitry Timofejev <Unknown>\n"
+"PO-Revision-Date: 2011-06-28 19:52+0000\n"
+"Last-Translator: Gnatyuk Roman <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-25 18:45+0000\n"
-"X-Generator: Launchpad (build 12460)\n"
+"X-Launchpad-Export-Date: 2011-07-03 11:52+0000\n"
+"X-Generator: Launchpad (build 13333)\n"
 
 #: src/classes/actions.cpp:146
 #, c-format
 msgid "%s try to attack %s"
-msgstr "%s попытка нападения %s"
+msgstr "%s пытается напасть на %s"
 
 #: src/classes/actions.cpp:151
 #, c-format
 msgid "%s try to heal %s"
-msgstr "%s попытка лечения %s"
+msgstr "%s пытается вылечить %s"
 
 #: src/classes/actions.cpp:162 src/classes/feats.cpp:293
 #: src/classes/feats.cpp:346
