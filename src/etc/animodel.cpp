@@ -465,7 +465,7 @@ void aniModel::renderFromGraphicMemory(float pX, float pY, float pZ,
       float angleX, float angleY, float angleZ, bool inverted)
 {
    glPushMatrix();
-      glTranslatef(pX, (!inverted)?pY:-pY, pZ);
+      glTranslatef(pX, (!inverted)?(pY+crudeBox.y1):(-pY-crudeBox.y1), pZ);
       glRotatef(angleZ, 0.0f, 0.0f, 1.0f);
       glRotatef(angleX, 1.0f, 0.0f, 0.0f);
       glRotatef(angleY, 0.0f, 1.0f, 0.0f);
