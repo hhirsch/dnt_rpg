@@ -1,0 +1,10 @@
+dead_trees.blend
+   author: p0ss
+   license: CC-BY 3.0
+   source: http://opengameart.org/content/3-dead-trees
+
+can.blend and can-tex*.png
+   author: p0ss
+   license: Public Domain
+   source: http://opengameart.org/content/open-can-junk
+
