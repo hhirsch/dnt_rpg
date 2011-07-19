@@ -1,8 +1,11 @@
 cementery_gate
+tomb
+water_tank
   author: zerberros
   license: GPLv3 
   source: http://dnt.dnteam.org/FoRuM/viewtopic.php?f=4&t=143#p427
   source: http://opengameart.org/content/cementery-gate
+
 
 Some modifications and adjusts by farrer, GPLv3 or later.
   
