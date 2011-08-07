@@ -78,6 +78,8 @@ class guiIO
        * \param toolID -> id of the new tool */
       void setTool(int toolID);
 
+      /*! Update the mouse world coordinates displayed */
+      void updateMouseWorldCoordinates(float mX, float mZ);
 
       /*! Do the GUI IO */
       int doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
@@ -262,6 +264,7 @@ class guiIO
       /*********************Message*Window*******************************/
       window* messageWindow;              /**< Message Window */
       textBox* messageText;               /**< Message Text */
+      textBox* mouseCoordText;            /**< Mouse Coordinate text */
       void openMessageWindow(); 
       /**************************Fog*Window******************************/
       window* fogWindow;                  /**< Fog Window */

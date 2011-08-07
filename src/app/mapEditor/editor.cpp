@@ -1072,6 +1072,7 @@ void editor::verifyIO()
       outdoor = map->isOutdoor();
    }
 
+   gui->updateMouseWorldCoordinates(xReal, zReal);
    guiEvent = gui->doIO(mouseX, mouseY, mButton, keys, outdoor);
    if(guiEvent == GUI_IO_EXIT)
    {
