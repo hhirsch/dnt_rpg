@@ -57,4 +57,12 @@ void nodeEditor::verifyAction(Uint8* keys, GLfloat mouseX, GLfloat mouseY,
    }
 }
 
+/***********************************************************************
+ *                              selectNode                             *
+ ***********************************************************************/
+void nodeEditor::selectNode(sceneNode* scNode)
+{
+   curNode = scNode;
+}
+
 

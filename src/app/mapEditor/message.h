@@ -52,6 +52,8 @@ using namespace std;
 
 #define TOOL_OBSTACLE_ADD           141
 
+#define TOOL_NODE_EDITOR            142
+
 #define TOOL_PARTICLE_DEFAULT       151
 #define TOOL_PARTICLE_LAKE          152
 #define TOOL_PARTICLE_GRASS         133

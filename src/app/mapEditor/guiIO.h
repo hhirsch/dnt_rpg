@@ -243,6 +243,7 @@ class guiIO
       oneTabButton* objectBathButton;     /**< Object Bath Button */
       oneTabButton* objectStreetButton;   /**< Object Street Button */
       oneTabButton* objectJunkButton;     /**< Objects Junk Button */
+      oneTabButton* objectSelectButton;   /**< Objects Select Button */
       void openObjectWindow();      
       /*********************Particle*Window*******************************/
       window* particleWindow;             /**< Particle Window */

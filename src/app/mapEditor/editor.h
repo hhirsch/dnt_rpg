@@ -29,6 +29,8 @@
 #include "objects.h"
 #include "particles.h"
 #include "npcs.h"
+#include "nodeeditor.h"
+
 #include "../../etc/scene.h"
 #include "../../engine/sun.h"
 #include "../../engine/cursor.h"
@@ -118,6 +120,7 @@ class editor
       scene curScene;                /**< The Scene */
       npcs* npcController;           /**< The Npcs Controller */
       weaponTypes wTypes;            /**< The list of types */
+      nodeEditor nodeEdit;           /**< Scene node editor */
 
       GLuint curTexture;             /**< Current Texture */
       string curTextureName;         /**< Current Texture Name */

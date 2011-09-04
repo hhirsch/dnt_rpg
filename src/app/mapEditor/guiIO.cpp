@@ -172,6 +172,7 @@ void guiIO::openObjectWindow()
    objectBathButton = objectTabButton->insertButton(25,25,44,45);
    objectStreetButton = objectTabButton->insertButton(49,25,71,45);
    objectJunkButton = objectTabButton->insertButton(74,25,96,45);
+   objectSelectButton = objectTabButton->insertButton(0, 50, 24, 70);
    objectWindow->setExternPointer(&objectWindow);
    gui->openWindow(objectWindow);
 }
@@ -1068,6 +1069,10 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          else if(object == (guiObject*) objectJunkButton)
          {
             curs.setTextOver("Junk");
+         }
+         else if(object == (guiObject*) objectSelectButton)
+         {
+            curs.setTextOver("Selector");
          }
          /* Particles Buttons */
          else if(object == (guiObject*) fireButton)
