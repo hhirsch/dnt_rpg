@@ -162,17 +162,30 @@ void guiIO::openObjectWindow()
    objectTabButton = objectWindow->getObjectsList()->insertTabButton(7,17,0,0,
                               dir.getRealFile("mapEditor/objects.png").c_str());
    objectCommonButton = objectTabButton->insertButton(0,0,24,19);
+   objectCommonButton->setMouseHint("Common");
    objectGunsButton = objectTabButton->insertButton(25,0,44,19);
+   objectGunsButton->setMouseHint("Weapons");
    objectBuildButton = objectTabButton->insertButton(49,0,71,19);
+   objectBuildButton->setMouseHint("Indoor");
    objectCarsButton = objectTabButton->insertButton(74,0,96,19);
+   objectCarsButton->setMouseHint("Vehicles");
    objectIcexButton = objectTabButton->insertButton(99,0,120,19);
+   objectIcexButton->setMouseHint("School-like");
    objectNaturalButton = objectTabButton->insertButton(125,0,145,19);
+   objectNaturalButton->setMouseHint("Nature");
    objectCharButton = objectTabButton->insertButton(147,0,170,19);
+   objectCharButton->setMouseHint("Characters");
    objectMacabreButton = objectTabButton->insertButton(0,25,24,45);
+   objectMacabreButton->setMouseHint("Macabre");
    objectBathButton = objectTabButton->insertButton(25,25,44,45);
+   objectBathButton->setMouseHint("Bathroom");
    objectStreetButton = objectTabButton->insertButton(49,25,71,45);
+   objectStreetButton->setMouseHint("Street");
    objectJunkButton = objectTabButton->insertButton(74,25,96,45);
+   objectJunkButton->setMouseHint("Junk");
    objectSelectButton = objectTabButton->insertButton(0, 50, 24, 70);
+   objectSelectButton->setMouseHint("Select object to edit");
+   
    objectWindow->setExternPointer(&objectWindow);
    gui->openWindow(objectWindow);
 }
@@ -283,15 +296,25 @@ void guiIO::openWallWindow()
    wallAddButton = wallTabButton->insertButton(0,0,19,19);       /* Wall Add */
    wallAddButton->setMouseHint("Create Wall");
    wallEditButton = wallTabButton->insertButton(20,0,39,19);     /* Wall Edit */
+   wallEditButton->setMouseHint("Edit Wall");
    wallCutButton = wallTabButton->insertButton(40,0,59,19);      /* Wall Cut */
+   wallCutButton->setMouseHint("Cut Wall");
    wallDestroyButton = wallTabButton->insertButton(100,0,119,19); /* Destroy */
+   wallDestroyButton->setMouseHint("Destroy Wall");
    wallTextureButton = wallTabButton->insertButton(0,20,19,39);   /* Texture */
+   wallTextureButton->setMouseHint("Set Wall Texture");
    wallLessXTexture = wallTabButton->insertButton(20,20,39,39);   /* Less X */
+   wallLessXTexture->setMouseHint("Decrease Wall X Texture Repeat");
    wallMoreXTexture = wallTabButton->insertButton(40,20,59,39);   /* More X */
+   wallMoreXTexture->setMouseHint("Increase Wall Z Texture Repeat");
    wallLessYTexture = wallTabButton->insertButton(60,20,79,39);   /* Less Y */
+   wallLessYTexture->setMouseHint("Decrease Wall Y Texture Repeat");
    wallMoreYTexture = wallTabButton->insertButton(80,20,99,39);   /* Less Y */
+   wallMoreYTexture->setMouseHint("Increase Wall Y Texture Repeat");
    wallLessZTexture = wallTabButton->insertButton(100,20,119,39);   /* Less Z */
+   wallLessZTexture->setMouseHint("Decrease Wall Z Texture Repeat");
    wallMoreZTexture = wallTabButton->insertButton(120,20,139,39);   /* Less Z */
+   wallMoreZTexture->setMouseHint("Increase Wall Z Texture Repeat");
 
    wallWindow->setExternPointer(&wallWindow);
    gui->openWindow(wallWindow);
@@ -307,8 +330,11 @@ void guiIO::openSoundWindow()
    soundTabButton = soundWindow->getObjectsList()->insertTabButton(7,17,0,0,
                                 dir.getRealFile("mapEditor/sound.png").c_str());
    soundAddButton = soundTabButton->insertButton(0,0,19,19);    /* Sound Add */
+   soundAddButton->setMouseHint("Add sound");
    soundRemoveButton = soundTabButton->insertButton(20,0,39,19);/* Sound Rm */
+   soundRemoveButton->setMouseHint("Remove sound");
    soundEditButton = soundTabButton->insertButton(40,0,59,19);  /* Sound Edit */
+   soundEditButton->setMouseHint("Edit sound info");
 
    soundWindow->setExternPointer(&soundWindow);
    gui->openWindow(soundWindow);
@@ -325,8 +351,11 @@ void guiIO::openPortalWindow()
    portalTabButton = portalWindow->getObjectsList()->insertTabButton(7,17,0,0,
                                dir.getRealFile("mapEditor/portal.png").c_str());
    portalAddButton = portalTabButton->insertButton(0,0,19,19); /* Add */
+   portalAddButton->setMouseHint("Add Portal");
    portalTagButton = portalTabButton->insertButton(20,0,39,19); /* Tag */
+   portalTagButton->setMouseHint("Set Portal Destination");
    portalDoorButton = portalTabButton->insertButton(40,0,59,19); /* Door */
+   portalDoorButton->setMouseHint("Add a door to an wall");
    portalWindow->setExternPointer(&portalWindow);
    gui->openWindow(portalWindow);
 }
@@ -342,9 +371,13 @@ void guiIO::openTerrainWindow()
    terrainTabButton = terrainWindow->getObjectsList()->insertTabButton(7,17,0,0,
                               dir.getRealFile("mapEditor/terrain.png").c_str());
    terrainUpButton = terrainTabButton->insertButton(0,0,19,19);    
+   terrainUpButton->setMouseHint("Up Terrain");
    terrainNivButton = terrainTabButton->insertButton(20,0,39,19);  
+   terrainNivButton->setMouseHint("Nivelate Terrain");
    terrainDownButton = terrainTabButton->insertButton(40,0,59,19); 
+   terrainDownButton->setMouseHint("Down Terrain");
    terrainTextureButton = terrainTabButton->insertButton(20,20,39,39);
+   terrainTextureButton->setMouseHint("Set Terrain Texture");
    terrainWindow->setExternPointer(&terrainWindow);
    gui->openWindow(terrainWindow);
 }
@@ -360,11 +393,18 @@ void guiIO::openParticleWindow()
                                                                          0,0,
                              dir.getRealFile("mapEditor/particle.png").c_str());
    fireButton = particleTabButton->insertButton(0,0,19,19);
+   fireButton->setMouseHint("Fire");
    smokeButton = particleTabButton->insertButton(20,0,39,19); 
+   smokeButton->setMouseHint("Smoke");
    waterfallButton = particleTabButton->insertButton(40,0,59,19);
+   waterfallButton->setMouseHint("Waterfall");
    waterSurfaceButton = particleTabButton->insertButton(60,0,79,19);
+   waterSurfaceButton->setMouseHint("Water Surface");
    snowButton = particleTabButton->insertButton(80,0,99,19);
+   snowButton->setMouseHint("Snow");
    grassButton = particleTabButton->insertButton(0,20,19,39);
+   grassButton->setMouseHint("Grass");
+   
    particleWindow->setExternPointer(&particleWindow);
    gui->openWindow(particleWindow);
 }
@@ -946,175 +986,6 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          }
          break;
       }
-
-      /* Set Mouse Messages */
-      case FARSO_EVENT_ON_FOCUS_TAB_BUTTON:
-      {
-         /* Wall Buttons */
-         if(object == (guiObject*) wallAddButton)
-         {
-
-         }
-         else if(object == (guiObject*) wallEditButton)
-         {
-            curs.setTextOver("Edit Wall");
-         }
-         else if(object == (guiObject*) wallCutButton)
-         {
-            curs.setTextOver("Cut Wall");
-         }
-         else if(object == (guiObject*) wallTextureButton)
-         {
-            curs.setTextOver("Set Wall Texture");
-         }
-         else if(object == (guiObject*) wallLessYTexture)
-         {
-            curs.setTextOver("Decrease Wall Y Texture Repeat");
-         }
-         else if(object == (guiObject*) wallMoreYTexture)
-         {
-            curs.setTextOver("Increase Wall Y Texture Repeat");
-         }
-         else if(object == (guiObject*) wallLessXTexture)
-         {
-            curs.setTextOver("Decrease Wall X Texture Repeat");
-         }
-         else if(object == (guiObject*) wallMoreXTexture)
-         {
-            curs.setTextOver("Increase Wall X Texture Repeat");
-         }
-         else if(object == (guiObject*) wallLessZTexture)
-         {
-            curs.setTextOver("Decrease Wall Z Texture Repeat");
-         }
-         else if(object == (guiObject*) wallMoreZTexture)
-         {
-            curs.setTextOver("Increase Wall Z Texture Repeat");
-         }
-         else if(object == (guiObject*) wallDestroyButton)
-         {
-            curs.setTextOver("Destroy Wall");
-         }
-         /* Terrain */
-         else if(object == (guiObject*) terrainUpButton)
-         {
-            curs.setTextOver("Up Terrain");
-         }
-         else if(object == (guiObject*) terrainDownButton)
-         {
-            curs.setTextOver("Down Terrain");
-         }
-         else if(object == (guiObject*) terrainNivButton)
-         {
-            curs.setTextOver("Nivelate Terrain");
-         }
-         else if(object == (guiObject*) terrainTextureButton)
-         {
-            curs.setTextOver("Set Terrain Texture");
-         }
-
-         /* Portal Buttons */
-         else if(object == (guiObject*) portalAddButton)
-         {
-            curs.setTextOver("Add portal");
-         }
-         else if(object == (guiObject*) portalTagButton)
-         {
-            curs.setTextOver("Set portal destination");
-         }
-         else if(object == (guiObject*) portalDoorButton)
-         {
-            curs.setTextOver("Select door to add");
-         }
-         /* Objects Buttons */
-         else if(object == (guiObject*) objectCommonButton)
-         {
-            curs.setTextOver("Common");
-         }
-         else if(object == (guiObject*) objectGunsButton)
-         {
-            curs.setTextOver("Weapons");
-         }
-         else if(object == (guiObject*) objectBuildButton)
-         {
-            curs.setTextOver("Buildings");
-         }
-         else if(object == (guiObject*) objectCarsButton)
-         {
-            curs.setTextOver("Vehicles");
-         }
-         else if(object == (guiObject*) objectIcexButton)
-         {
-            curs.setTextOver("School-like");
-         }
-         else if(object == (guiObject*) objectNaturalButton)
-         {
-            curs.setTextOver("Natural");
-         }
-         else if(object == (guiObject*) objectCharButton)
-         {
-            curs.setTextOver("Characters");
-         }
-         else if(object == (guiObject*) objectMacabreButton)
-         {
-            curs.setTextOver("Macabre");
-         }
-         else if(object == (guiObject*) objectBathButton)
-         {
-            curs.setTextOver("Toilete");
-         }
-         else if(object == (guiObject*) objectStreetButton)
-         {
-            curs.setTextOver("Outdoor");
-         }
-         else if(object == (guiObject*) objectJunkButton)
-         {
-            curs.setTextOver("Junk");
-         }
-         else if(object == (guiObject*) objectSelectButton)
-         {
-            curs.setTextOver("Selector");
-         }
-         /* Particles Buttons */
-         else if(object == (guiObject*) fireButton)
-         {
-            curs.setTextOver("Fire");
-         }
-         else if(object == (guiObject*) smokeButton)
-         {
-            curs.setTextOver("Smoke");
-         }
-         else if(object == (guiObject*) snowButton)
-         {
-            curs.setTextOver("Snow");
-         }
-         else if(object == (guiObject*) waterfallButton)
-         {
-            curs.setTextOver("Waterfall");
-         }
-         else if(object == (guiObject*) waterSurfaceButton)
-         {
-            curs.setTextOver("Water Surface");
-         }
-         else if(object == (guiObject*) grassButton)
-         {
-            curs.setTextOver("Grass");
-         }
-         /* Sound Buttons */
-         else if(object == (guiObject*) soundAddButton)
-         {
-            curs.setTextOver("Insert Sound");
-         }
-         else if(object == (guiObject*) soundRemoveButton)
-         {
-            curs.setTextOver("Remove Sound");
-         }
-         else if(object == (guiObject*) soundEditButton)
-         {
-            curs.setTextOver("Edit Sound Info");
-         }
-      }
-      break;
 
       /* File Selectors Things */
       case FARSO_EVENT_FILE_SEL_ACCEPT:
