@@ -77,11 +77,17 @@ void shortcutsWindow::open(guiInterface* gui)
       tb->setStyle(FARSO_TAB_BUTTON_STYLE_HIGH);
       buttonAttackMode = tb->insertButton(11,5,44,38);/* Attack Mode */
       buttonJournal = tb->insertButton(51,5,84,38);/* Journal Window */
+      buttonJournal->setMouseHint(gettext("Open Quests Window"));
       buttonInventory = tb->insertButton(91,5,124,38);/* Inventory */
+      buttonInventory->setMouseHint(gettext("Open Inventory Window"));
       buttonMap = tb->insertButton(131,5,164,38);/* Map */
+      buttonMap->setMouseHint(gettext("Open Map Window"));
       buttonGroup = tb->insertButton(171,5,204,38);/* Party/Group */
+      buttonGroup->setMouseHint(gettext("Open Group/Party Window"));
       buttonRest = tb->insertButton(211,5,244,38);/* Rest */
+      buttonRest->setMouseHint(gettext("Rest"));
       buttonCharacter = tb->insertButton(251,5,284,38);/* Character */
+      buttonCharacter->setMouseHint(gettext("View Character Informations"));
       buttonEndTurn = tb->insertButton(291,5,324,38);/* End Turn */
 
 
@@ -93,8 +99,11 @@ void shortcutsWindow::open(guiInterface* gui)
       
       /* Load / Save / Menu */
       buttonMenu = tb->insertButton(11, 5, 44, 38);
+      buttonMenu->setMouseHint(gettext("Menu"));
       buttonLoad = tb->insertButton(50, 5, 84, 38);
+      buttonLoad->setMouseHint(gettext("Load"));
       buttonSave = tb->insertButton(90, 5, 124, 38);
+      buttonSave->setMouseHint(gettext("Save"));
 
       /* Quick Attacks  */
       for(i=0; i<QUICK_FEATS; i++)
@@ -253,7 +262,7 @@ int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode,
    switch(eventInfo)
    {
       
-      /* Show Information about the shortcut */
+      /* Show Information about state-relative shortcuts */
       case FARSO_EVENT_ON_FOCUS_TAB_BUTTON:
       {
          if(object == (guiObject*) buttonAttackMode)
@@ -268,16 +277,6 @@ int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode,
              }  
             return(SHORTCUTS_WINDOW_OTHER); 
          }
-         else if(object == (guiObject*) buttonJournal)
-         {
-            mouseCursor.setTextOver(gettext("Open Quests Window"));
-            return(SHORTCUTS_WINDOW_OTHER);
-         }
-         else if(object == (guiObject*) buttonMap)
-         {
-            mouseCursor.setTextOver(gettext("Open Map Window"));
-            return(SHORTCUTS_WINDOW_OTHER);
-         }
          else if(object == (guiObject*) buttonEndTurn)
          {
             if(engineMode == ENGINE_MODE_TURN_BATTLE)
@@ -289,41 +288,6 @@ int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode,
                mouseCursor.setTextOver(
                      gettext("Only Available in Battle Mode"));
             }
-            return(SHORTCUTS_WINDOW_OTHER);
-         }
-         else if(object == (guiObject*) buttonInventory)
-         {
-            mouseCursor.setTextOver(gettext("Open Inventory Window"));
-            return(SHORTCUTS_WINDOW_OTHER);
-         }
-         else if(object == (guiObject*) buttonRest)
-         {
-            mouseCursor.setTextOver(gettext("Rest"));
-            return(SHORTCUTS_WINDOW_OTHER);
-         }
-         else if(object == (guiObject*) buttonCharacter)
-         {
-            mouseCursor.setTextOver(gettext("View Character Informations"));
-            return(SHORTCUTS_WINDOW_OTHER);
-         }
-         else if(object == (guiObject*) buttonGroup)
-         {
-            mouseCursor.setTextOver(gettext("Open Group/Party Window"));
-            return(SHORTCUTS_WINDOW_OTHER);
-         }
-         else if(object == (guiObject*) buttonMenu)
-         {
-            mouseCursor.setTextOver(gettext("Menu"));
-            return(SHORTCUTS_WINDOW_OTHER);
-         }
-         else if(object == (guiObject*) buttonSave)
-         {
-            mouseCursor.setTextOver(gettext("Save"));
-            return(SHORTCUTS_WINDOW_OTHER);
-         }
-         else if(object == (guiObject*) buttonLoad)
-         {
-            mouseCursor.setTextOver(gettext("Load"));
             return(SHORTCUTS_WINDOW_OTHER);
          }
          else
