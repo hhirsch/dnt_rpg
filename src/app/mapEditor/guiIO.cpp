@@ -281,6 +281,7 @@ void guiIO::openWallWindow()
    wallTabButton = wallWindow->getObjectsList()->insertTabButton(7,17,0,0,
                                  dir.getRealFile("mapEditor/wall.png").c_str());
    wallAddButton = wallTabButton->insertButton(0,0,19,19);       /* Wall Add */
+   wallAddButton->setMouseHint("Create Wall");
    wallEditButton = wallTabButton->insertButton(20,0,39,19);     /* Wall Edit */
    wallCutButton = wallTabButton->insertButton(40,0,59,19);      /* Wall Cut */
    wallDestroyButton = wallTabButton->insertButton(100,0,119,19); /* Destroy */
@@ -952,7 +953,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          /* Wall Buttons */
          if(object == (guiObject*) wallAddButton)
          {
-            curs.setTextOver("Create Wall");
+
          }
          else if(object == (guiObject*) wallEditButton)
          {

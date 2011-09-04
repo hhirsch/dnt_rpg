@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -21,11 +21,12 @@
 #ifndef _farso_interface_h
 #define _farso_interface_h
 
-#include <string.h>
 #include "window.h"
 #include "mouse.h"
 #include "menu.h"
 #include "guilist.h"
+
+#include "../engine/cursor.h"
 
 /********************************************************************
  *                      Return's constants                          *
@@ -212,6 +213,7 @@ class guiInterface
       windowList* lwindows;     /**< windows list */
       guiObject* activeObject;  /**< pointer to the actived object */
       guiObject* callerObject;  /**< pointer to the caller object */
+      cursor mouseCursor;       /**< current mouse cursor */
 
 };
 

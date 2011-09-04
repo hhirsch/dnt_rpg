@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -55,7 +55,13 @@ class guiObject : public dntListElement
 
       /*! Constructor 
        * \param surface -> SDL_Surface to draw to */
-      guiObject(SDL_Surface* surface){available=true;text="";wSurface=surface;};
+      guiObject(SDL_Surface* surface)
+      {
+         available=true;
+         text="";
+         mouseHint = "";
+         wSurface=surface;
+      };
 
       /*! Virtual Destructor */
       virtual ~guiObject(){};
@@ -133,13 +139,19 @@ class guiObject : public dntListElement
       /*! Set the surface used */
       void setSurface(SDL_Surface* surface){wSurface = surface;};
 
+      /*! Set Text to display when mouse is over the object */
+      void setMouseHint(string txt){mouseHint=txt;};
+      /*! Get current mouse hint */
+      string getMouseHint(){return(mouseHint);};
+
    protected:
       int x1,              /**< Coordinate on Window */
           y1,              /**< Coordinate on Window */
           x2,              /**< Coordinate on Window */
           y2;              /**< Coordinate on Window */
       bool available;      /**< Available? */
-      string text;         /**< Text on the bar */
+      string text;         /**< Text Display */
+      string mouseHint;    /**< Hint when mouse over */
       SDL_Surface* wSurface; /**< Screen surface */
    
    private:

@@ -6,6 +6,7 @@
  - Created scene and sceneNode abstractions;
  - New Bounding Box class;
  - Added character info text when mouse over portrait;
+ - gui: defined mouse hint for all gui objects;
 
 
 BugFixes:

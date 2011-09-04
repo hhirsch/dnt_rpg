@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -20,6 +20,7 @@
 
 #include "interface.h"
 #include "messages.h"
+
 #include <SDL/SDL_image.h>
 
 #include <iostream>
@@ -48,6 +49,7 @@ guiInterface::guiInterface(string backImage)
        background = NULL;
    }
    focus = FARSO_FOCUS_GAME;
+   activeObject = NULL;
 }
 
 /*********************************************************************
@@ -88,6 +90,12 @@ void guiInterface::verifyMouseInObjects(int x, int y, guiList* list)
          st->getCoordinate(xa,ya,xb,yb);
          if(lwindows->getActiveWindow()->isMouseIn(x,y))
          {
+            /* Set mouse hint */
+            if(!st->getMouseHint().empty())
+            {
+               mouseCursor.setTextOver(st->getMouseHint());
+            }
+            /* Set active object */
             activeObject = st;
             focus = FARSO_FOCUS_SEL_TEXT;
          }
@@ -99,6 +107,13 @@ void guiInterface::verifyMouseInObjects(int x, int y, guiList* list)
          if(tb->isMouseIn(x-lwindows->getActiveWindow()->getX1(),
                   y-lwindows->getActiveWindow()->getY1()))
          {
+            /* Set mouse hint if any */
+            if(!tb->getMouseHint().empty())
+            {
+               mouseCursor.setTextOver(tb->getMouseHint());
+            }
+
+            /* Set active object */
             activeObject = tb;
             focus = FARSO_FOCUS_TAB_BUTTON;
          }
@@ -415,6 +430,11 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
     {
        focus = FARSO_FOCUS_GAME;
     }
+    else if(!activeObject->getMouseHint().empty())
+    {
+       /* Set mouse hint, if any */
+       mouseCursor.setTextOver(activeObject->getMouseHint());
+    }
 
     if(lwindows->getActiveWindow() == NULL)
     {
@@ -531,6 +551,7 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
     {
         int pronto;
         button* bot = (button*)activeObject;
+        
         if(bot->press(lwindows->getActiveWindow()->getX1(), 
                       lwindows->getActiveWindow()->getY1(), x, y, 
                       Mbotao, &pronto))
@@ -741,6 +762,11 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
          {
             /* Still in focus, but no pressed */
             eventInfo = FARSO_EVENT_ON_FOCUS_TAB_BUTTON;
+            /* Set mouse hint for the button area on tabButton (if any) */
+            if( (object) && (!object->getMouseHint().empty()) )
+            {
+               mouseCursor.setTextOver(object->getMouseHint());
+            }
             return(object);
          }
        }
