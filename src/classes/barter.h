@@ -27,7 +27,12 @@
 #include "../etc/dirs.h"
 #include "../engine/character.h"
 #include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
+
+#ifdef __APPLE__
+   #include <SDL_image/SDL_image.h>
+#else
+   #include <SDL/SDL_image.h>
+#endif
 
 #define BARTER_BUY_SLOTS   3  /**< Number of Buy Slots */
 #define BARTER_SELL_SLOTS  3  /**< Number of Sell Slots */

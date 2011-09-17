@@ -29,18 +29,16 @@
 #include "../etc/defparser.h"
 #include "../lang/translate.h"
 
-#ifdef _MSC_VER
-   #include "../config_win.h"
-#else
-   #include "../config.h"
-#endif
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <SDL/SDL_opengl.h>
 #include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
+#ifdef __APPLE__
+   #include <SDL_image/SDL_image.h>
+#else
+   #include <SDL/SDL_image.h>
+#endif
 #include <iostream>
 using namespace std;
 

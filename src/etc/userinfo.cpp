@@ -64,7 +64,7 @@ void userInfo::getValuesFromSystem()
       userName = "Don Ramon";
       userHome = "PROGDIR:data/userdata/";
    #else
-      /* Get all Current User´s Info (so more clean, isn´t it?) */
+      /* Get all Current User's Info (so more clean, isn't it?) */
       struct passwd *info;
       info = getpwuid(getuid());
       userName = info->pw_name;

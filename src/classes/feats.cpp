@@ -27,7 +27,12 @@
 #include "../lang/translate.h"
 #include "../etc/dirs.h"
 #include "../etc/defparser.h"
-#include <SDL/SDL_image.h>
+
+#ifdef __APPLE__
+   #include <SDL_image/SDL_image.h>
+#else
+   #include <SDL/SDL_image.h>
+#endif
 
 string dntFeatTypeName[] =
 {

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -20,8 +20,12 @@
 
 #include "draw.h"
 #include <SDL/SDL_opengl.h>
-#include <GL/glu.h>
 
+#ifdef __APPLE__
+   #include <OpenGL/glu.h>
+#else
+   #include <GL/glu.h>
+#endif
 
 int SCREEN_X; /**< Current Screen Width */
 int SCREEN_Y; /**< Scurrent Screen Height */

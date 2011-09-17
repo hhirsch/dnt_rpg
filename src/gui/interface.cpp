@@ -21,7 +21,11 @@
 #include "interface.h"
 #include "messages.h"
 
-#include <SDL/SDL_image.h>
+#ifdef __APPLE__
+   #include <SDL_image/SDL_image.h>
+#else
+   #include <SDL/SDL_image.h>
+#endif
 
 #include <iostream>
 using namespace std;

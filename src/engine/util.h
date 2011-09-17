@@ -26,7 +26,11 @@
  * functionality. */
 
 #include <math.h>
-#include <SDL/SDL_image.h>
+#ifdef __APPLE__
+   #include <SDL_image/SDL_image.h>
+#else
+   #include <SDL/SDL_image.h>
+#endif
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
 #include "../gui/farso.h"

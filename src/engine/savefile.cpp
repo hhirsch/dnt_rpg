@@ -30,11 +30,7 @@
 #include "shortcutswindow.h"
 #include "util.h"
 
-#ifdef _MSC_VER
-   #include "../config_win.h"
-#else
-   #include "../config.h"
-#endif
+#include "../lang/translate.h"
 
 #define DNT_SAVE_TOKEN_VERSION       "version"
 #define DNT_SAVE_TOKEN_TITLE         "title"

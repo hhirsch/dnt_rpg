@@ -18,8 +18,14 @@
   along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <SDL/SDL_image.h>
-#include <SDL/SDL_opengl.h>
+
+#ifdef __APPLE__
+   #include <SDL_image/SDL_image.h>
+#else
+   #include <SDL/SDL_image.h>
+#endif
+
+#include <SDL_opengl.h>
 #include "object.h"
 #include "weapon.h"
 #include "money.h"

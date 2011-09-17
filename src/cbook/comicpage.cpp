@@ -24,7 +24,13 @@
 #include "../gui/draw.h"
 
 #include <iostream>
-#include <SDL/SDL_image.h>
+
+#ifdef __APPLE__
+   #include <SDL_image/SDL_image.h>
+#else
+   #include <SDL/SDL_image.h>
+#endif
+
 using namespace std;
 
 /***********************************************************************

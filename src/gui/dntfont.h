@@ -22,7 +22,13 @@
 #define _farso_dntfont_h
 
 #include <SDL/SDL.h>
-#include <SDL/SDL_ttf.h>
+
+#ifdef __APPLE__
+   #include <SDL_ttf/SDL_ttf.h>
+#else
+   #include <SDL/SDL_ttf.h>
+#endif
+
 #include <string>
 using namespace std;
 

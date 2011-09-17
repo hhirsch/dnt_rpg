@@ -26,7 +26,13 @@
 using namespace std;
  
 #include <SDL/SDL.h>
-#include <AL/al.h>
+
+#ifdef __APPLE__
+   #include <OpenAL/al.h>
+#else
+   #include <AL/al.h>
+#endif
+
 #include <ogg/ogg.h>
 #include <vorbis/codec.h>
 #include <vorbis/vorbisenc.h>

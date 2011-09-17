@@ -24,7 +24,12 @@
 /*! \file draw.h, where defined Surface draw functions. */
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
-#include <GL/glu.h>
+
+#ifdef __APPLE__
+   #include <OpenGL/glu.h>
+#else
+   #include <GL/glu.h>
+#endif
 #include <stdlib.h>
 #include <math.h>
 

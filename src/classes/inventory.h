@@ -27,7 +27,11 @@
 #include "../map/map.h"
 
 #include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
+#ifdef __APPLE__
+   #include <SDL_image/SDL_image.h>
+#else
+   #include <SDL/SDL_image.h>
+#endif
 
 #define INVENTORY_SIZE_X 13 /**< Number of Spaces on X axis */
 #define INVENTORY_SIZE_Y 6  /**< Number of Spaces on Y axis */

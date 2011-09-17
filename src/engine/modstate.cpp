@@ -23,11 +23,7 @@
 #include "../etc/npcfile.h"
 #include "../classes/money.h"
 
-#ifdef _MSC_VER
-   #include "../config_win.h"
-#else
-   #include "../config.h"
-#endif
+#include "../lang/translate.h"
 
 #include <iostream>
 using namespace std;

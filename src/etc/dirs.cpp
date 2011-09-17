@@ -27,8 +27,12 @@ using namespace std;
 
 #ifdef _MSC_VER
    #include "../config_win.h"
+#else 
+#ifdef __APPLE__
+   #include "../config_mac.h"
 #else
    #include "../config.h"
+#endif
 #endif
 
 /*********************************************************************
@@ -39,9 +43,16 @@ void dirs::findDataDirectories()
    FILE* arq;
    string file;
    string dataDir = DATADIR;
+
+#ifdef __APPLE__
+   dataDir = macBundlePath();
+   dataDir += "/Contents/Resources";
+   dataDir += DATADIR; 
+#else
    dataDir += "/";
    dataDir += PACKAGE;
-
+#endif
+   
 #if defined (__amigaos4__)
    dataDir = "PROGDIR:data";
 #endif

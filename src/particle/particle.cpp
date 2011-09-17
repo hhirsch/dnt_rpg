@@ -22,7 +22,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <SDL/SDL_opengl.h>
-#include <SDL/SDL_image.h>
+#ifdef __APPLE__
+   #include <SDL_image/SDL_image.h>
+#else
+   #include <SDL/SDL_image.h>
+#endif
 
 #include "../engine/culling.h"
 #include "../classes/thing.h"

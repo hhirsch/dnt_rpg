@@ -23,8 +23,12 @@
 
 #ifdef _MSC_VER
    #include "../config_win.h"
+#else 
+#ifdef __APPLE__
+   #include "../config_mac.h"
 #else
    #include "../config.h"
+#endif
 #endif
 
 #if ENABLE_NLS == 1

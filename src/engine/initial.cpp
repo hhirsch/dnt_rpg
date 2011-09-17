@@ -21,13 +21,12 @@
 #include "initial.h"
 #include "util.h"
 #include "../lang/translate.h"
-#include <SDL/SDL_image.h>
-
-#ifdef _MSC_VER
-   #include "../config_win.h"
+#ifdef __APPLE__
+   #include <SDL_image/SDL_image.h>
 #else
-   #include "../config.h"
+   #include <SDL/SDL_image.h>
 #endif
+
 
 /***************************************************************
  *                     Constructor                             *

@@ -7,7 +7,7 @@
  - New Bounding Box class;
  - Added character info text when mouse over portrait;
  - gui: defined mouse hint for all gui objects;
-
+ - Added support to MacOSX;
 
 BugFixes:
  - Fixed a bug that freezes the game when drinking a beer (thanks 

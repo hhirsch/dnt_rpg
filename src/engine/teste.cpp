@@ -31,11 +31,6 @@ using namespace std;
 #include "../etc/dirs.h"
 #include "../cbook/comicbook.h"
 
-#ifdef _MSC_VER
-   #include "../config_win.h"
-#else
-   #include "../config.h"
-#endif
 
 /*********************************************************************
  *                           Main Code                               *

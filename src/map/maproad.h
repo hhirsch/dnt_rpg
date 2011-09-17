@@ -23,8 +23,13 @@
 
 #include "../engine/util.h"
 #include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
 #include <SDL/SDL_opengl.h>
+
+#ifdef __APPLE__
+   #include <SDL_image/SDL_image.h>
+#else
+   #include <SDL/SDL_image.h>
+#endif
 
 #define MAPROAD_NONE                0
 #define MAPROAD_DOWN_UP             1
