@@ -24,8 +24,11 @@
 /***********************************************************************
  *                            Constructor                              *
  ***********************************************************************/
-nodeEditor::nodeEditor()
+nodeEditor::nodeEditor(guiInterface* g)
 {
+   gui = g;
+   nodeWindow = NULL;
+   nodeTab = NULL;
 }
 
 /***********************************************************************
@@ -53,7 +56,7 @@ void nodeEditor::verifyAction(Uint8* keys, GLfloat mouseX, GLfloat mouseY,
    scNode = dntScene.getSceneNode(mouseBox);
    if(scNode)
    {
-      curNode = scNode;
+     selectNode(scNode);
    }
 }
 
@@ -63,6 +66,57 @@ void nodeEditor::verifyAction(Uint8* keys, GLfloat mouseX, GLfloat mouseY,
 void nodeEditor::selectNode(sceneNode* scNode)
 {
    curNode = scNode;
+}
+
+/***********************************************************************
+ *                              openWindow                             *
+ ***********************************************************************/
+void nodeEditor::openWindow()
+{
+   dirs dir;
+   if(!nodeWindow)
+   {
+      /* Create the window */
+      nodeWindow = gui->insertWindow(290,212,490,368,"SceneNode");
+      nodeTab = nodeWindow->getObjectsList()->insertTabButton(7,17,0,0,
+            dir.getRealFile("mapEditor/nodeeditor.png").c_str());
+
+      /* Insert the tabbuttons */
+      rotX[0] = nodeTab->insertButton(114,0,143,29);
+      rotX[0]->setMouseHint("Dec X Rot");
+      rotX[1] = nodeTab->insertButton(155,0,182,29);
+      rotX[1]->setMouseHint("Inc X Rot");
+      rotY[0] = nodeTab->insertButton(114,37,143,66);
+      rotY[0]->setMouseHint("Dec Y Rot");
+      rotY[1] = nodeTab->insertButton(155,37,182,66);
+      rotY[1]->setMouseHint("Inc Y Rot");
+      rotZ[0] = nodeTab->insertButton(114,70,143,100);
+      rotZ[0]->setMouseHint("Dec Z Rot");
+      rotZ[1] = nodeTab->insertButton(155,70,143,100);
+      rotZ[1]->setMouseHint("Inc Z Rot");
+
+      moveX[0] = nodeTab->insertButton(0,41,18,57);
+      moveX[0]->setMouseHint("Dec X Pos");
+      moveX[1] = nodeTab->insertButton(37,41,54,57);
+      moveX[0]->setMouseHint("Inc X Pos");
+
+      moveZ[0] = nodeTab->insertButton(19,22,34,38);
+      moveZ[0]->setMouseHint("Dec Z Pos");
+      moveZ[1] = nodeTab->insertButton(19,59,34,76);
+      moveZ[1]->setMouseHint("Inc Z Pos");
+
+      moveY[0] = nodeTab->insertButton(62,59,79,98);
+      moveY[0]->setMouseHint("Up");
+      moveY[1] = nodeTab->insertButton(86,59,103,98);
+      moveY[1]->setMouseHint("Down");
+     
+      clearRot = nodeTab->insertButton(59,8,114,47);
+      clearRot->setMouseHint("Clear Rotations");
+
+      /* Finally, open */
+      nodeWindow->setExternPointer(&nodeWindow);
+      gui->openWindow(nodeWindow);
+   }
 }
 
 

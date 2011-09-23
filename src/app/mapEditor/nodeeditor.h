@@ -26,13 +26,14 @@
 
 #include "../../etc/scenenode.h"
 #include "../../map/map.h"
+#include "../../gui/farso.h"
 
 /*! An editor to a scene node */
 class nodeEditor
 {
    public:
       /*! Constructor */
-      nodeEditor();
+      nodeEditor(guiInterface* g);
 
       /*! Destructor */
       ~nodeEditor();
@@ -56,9 +57,26 @@ class nodeEditor
             GLfloat mouseZ, Uint8 mButton, int mouseXw, int mouseYw,
             GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
 
+      /*! Open the node window */
+      void openWindow();
+
    protected:
 
       sceneNode* curNode;  /**< current node to edit */
+
+      guiInterface* gui;   /**< gui used */
+      window* nodeWindow;  /**< Node info window */
+ 
+      tabButton* nodeTab;     /**< Tab button for node editor */
+      oneTabButton* rotX[2];  /**< Buttons for X rotation */
+      oneTabButton* rotY[2];  /**< Buttons for Y rotation */
+      oneTabButton* rotZ[2];  /**< Buttons for Z rotation */
+
+      oneTabButton* moveX[2]; /**< Translate on X */
+      oneTabButton* moveY[2]; /**< Translate on Y */
+      oneTabButton* moveZ[2]; /**< Translate on Z */
+
+      oneTabButton* clearRot; /**< Clear Rotation button */
 };
 
 #endif

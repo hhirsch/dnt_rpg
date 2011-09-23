@@ -76,6 +76,8 @@ editor::editor()
    races rc;
    rc.init();
 
+   nodeEdit = new nodeEditor(gui->getGui());
+
    terrainEditor = NULL;
    portalEditor = NULL;
    wallEditor = NULL;
@@ -124,6 +126,7 @@ editor::~editor()
    cl.finish();
    races rc;
    rc.finish();
+   delete(nodeEdit);
    delete(gui);
    curScene.finish();
    wTypes.finish();

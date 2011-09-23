@@ -120,7 +120,7 @@ class editor
       scene curScene;                /**< The Scene */
       npcs* npcController;           /**< The Npcs Controller */
       weaponTypes wTypes;            /**< The list of types */
-      nodeEditor nodeEdit;           /**< Scene node editor */
+      nodeEditor* nodeEdit;          /**< Scene node editor */
 
       GLuint curTexture;             /**< Current Texture */
       string curTextureName;         /**< Current Texture Name */
