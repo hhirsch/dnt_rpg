@@ -223,12 +223,15 @@ void options::getAvailableResolutions()
 bool options::load()
 {
    string file;
+   userInfo info;
 
    /* First define default keys */
    defaultKeys();
    
+   /* Define default save file */
+   fileName = info.getUserHome() + "options.cfg";
+   
    /* Try to Load From Users Directory */
-   userInfo info;
    file  = info.getUserHome()+"options.cfg";
 
    if(!load(file))
@@ -246,11 +249,9 @@ bool options::load()
          if(!load("./dcc.opc"))
          {
             cerr << "No Options File Avaible!" << endl;
-            return(false);
          }
       }
 
-      fileName = info.getUserHome() + "options.cfg";
       cerr << "Creating Directory: " << info.getUserHome() << ":";
       /* Create the User directory */
 

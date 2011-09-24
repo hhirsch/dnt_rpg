@@ -28,6 +28,10 @@
    #include <sys/types.h>
 #endif
 
+#ifdef __APPLE__
+   #include "config_mac.h"
+#endif
+
 #include <iostream>
 using namespace std;
 
@@ -63,6 +67,15 @@ void userInfo::getValuesFromSystem()
    #elif defined (__amigaos4__)
       userName = "Don Ramon";
       userHome = "PROGDIR:data/userdata/";
+   #elif defined (__APPLE__)
+      /* Get username from unix-like */
+      struct passwd *info;
+      info = getpwuid(getuid());
+      userName = info->pw_name;
+   
+      /* Set path as the macBundle one */
+      userHome = macBundlePath() + "/";
+   
    #else
       /* Get all Current User's Info (so more clean, isn't it?) */
       struct passwd *info;
