@@ -617,11 +617,16 @@ GLuint Map::insertTexture(string arq, string name, GLuint R, GLuint G, GLuint B)
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-   
+#ifdef __APPLE__   
+   gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, img->w,
+                     img->h, DNT_IMAGE_FORMAT_A, GL_UNSIGNED_BYTE, 
+                     img->pixels );
+#else
    gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, img->w,
                      img->h, DNT_IMAGE_FORMAT, GL_UNSIGNED_BYTE, 
                      img->pixels );
-
+#endif
+   
    /* Free the image */
    SDL_FreeSurface(img);
 
