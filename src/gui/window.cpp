@@ -340,7 +340,7 @@ void window::drawActiveBar()
  *********************************************************************/
 void window::flush()
 {
-   setTextureRGBA(surface, texture);
+   setTextureRGBA(surface, texture, false, GL_RGBA);
 }
 
 /*********************************************************************

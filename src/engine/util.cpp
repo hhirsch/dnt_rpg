@@ -46,7 +46,7 @@ void showLoading(SDL_Surface* img, GLuint* texturaTexto,
    fnt.write(img,128,0,texto);
    progress->draw();
    glGenTextures(1,texturaTexto);
-   setTextureRGBA(img,*texturaTexto);
+   setTextureRGBA(img,*texturaTexto,false,GL_RGBA);
 
    draw2DMode();
    textureToScreen(texturaCarga, centerX-midW, centerY-midH,

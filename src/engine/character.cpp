@@ -463,7 +463,7 @@ void character::definePortrait(string portraitFile)
    SDL_FreeSurface(border);
 
    /* Load Texture */
-   setTextureRGBA(portraitImage, portraitTexture);
+   setTextureRGBA(portraitImage, portraitTexture, false, GL_RGBA);
    portraitPropX = portraitImage->w /
                    (float)smallestPowerOfTwo(portraitImage->w);
    portraitPropY = portraitImage->h /

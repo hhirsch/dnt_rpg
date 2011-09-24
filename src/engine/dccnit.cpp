@@ -1621,7 +1621,7 @@ void engine::init(SDL_Surface *screen)
 
    glBindTexture(GL_TEXTURE_2D, normalMoveCircle);
    glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
-                0,GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
+                0,DNT_IMAGE_FORMAT_A, GL_UNSIGNED_BYTE, img->pixels);
 
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -1639,7 +1639,7 @@ void engine::init(SDL_Surface *screen)
 
    glBindTexture(GL_TEXTURE_2D, fullMoveCircle);
    glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
-                0,GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
+                0,DNT_IMAGE_FORMAT_A, GL_UNSIGNED_BYTE, img->pixels);
 
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -1658,7 +1658,7 @@ void engine::init(SDL_Surface *screen)
 
    glBindTexture(GL_TEXTURE_2D, featRangeCircle);
    glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
-                0,GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
+                0,DNT_IMAGE_FORMAT_A, GL_UNSIGNED_BYTE, img->pixels);
 
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -1676,7 +1676,7 @@ void engine::init(SDL_Surface *screen)
 
    glBindTexture(GL_TEXTURE_2D, rangeCircle);
    glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
-                0,GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
+                0,DNT_IMAGE_FORMAT_A, GL_UNSIGNED_BYTE, img->pixels);
 
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -1695,7 +1695,7 @@ void engine::init(SDL_Surface *screen)
 
    glBindTexture(GL_TEXTURE_2D, destinyImage);
    glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
-                0,GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
+                0,DNT_IMAGE_FORMAT_A, GL_UNSIGNED_BYTE, img->pixels);
 
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);

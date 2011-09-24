@@ -523,7 +523,8 @@ void setTexture(SDL_Surface* img, GLuint textID, bool mipMaps)
 /******************************************************************
  *                          setTextureRGBA                        *
  ******************************************************************/
-void setTextureRGBA(SDL_Surface* img, GLuint textID, bool mipMaps)
+void setTextureRGBA(SDL_Surface* img, GLuint textID, bool mipMaps,
+                    GLint format)
 {
    SDL_Surface* tmp = NULL;
    /* Define Machine Bit Order */
@@ -563,14 +564,14 @@ void setTextureRGBA(SDL_Surface* img, GLuint textID, bool mipMaps)
       SDL_SetAlpha(gamb, 0, 0);
       SDL_BlitSurface(gamb, NULL, tmp, NULL);
       glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tmp->w, tmp->h, 
-                                  0, DNT_IMAGE_FORMAT_A, GL_UNSIGNED_BYTE, 
+                                  0, format, GL_UNSIGNED_BYTE, 
                                   tmp->pixels);
       SDL_FreeSurface(gamb);
    }
    else
    {
       glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 
-                                  0, DNT_IMAGE_FORMAT_A, GL_UNSIGNED_BYTE, 
+                                  0, format, GL_UNSIGNED_BYTE, 
                                   img->pixels);
       tmp = img;
    }
@@ -589,7 +590,7 @@ void setTextureRGBA(SDL_Surface* img, GLuint textID, bool mipMaps)
 
 
       gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, tmp->w,
-            tmp->h, DNT_IMAGE_FORMAT_A, GL_UNSIGNED_BYTE,
+            tmp->h, format, GL_UNSIGNED_BYTE,
             tmp->pixels );
    }
    else

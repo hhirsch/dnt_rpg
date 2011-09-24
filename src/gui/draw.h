@@ -187,8 +187,10 @@ void setTexture(SDL_Surface* img, GLuint textID, bool mipMaps=false);
 /*! Load the GL RGBA texture based on the surface
  * \param img -> surface to load as texture
  * \param textID -> texture Identifier loaded
- * \param mipMaps -> if will use mipMaps */
-void setTextureRGBA(SDL_Surface* img, GLuint textID, bool mipMaps=false);
+ * \param mipMaps -> if will use mipMaps
+ * \param format -> workaround for SDL_Image broken on MacOSX */
+void setTextureRGBA(SDL_Surface* img, GLuint textID, bool mipMaps=false,
+                    GLint format=DNT_IMAGE_FORMAT_A);
 
 
 #endif
