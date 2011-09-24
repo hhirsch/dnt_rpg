@@ -783,6 +783,7 @@ void aniModel::renderShadow(float pX, float pY, float pZ, float angleX,
    glPolygonOffset(-2.0f,-1.0f);
    glEnable(GL_POLYGON_OFFSET_FILL);
    glDisable(GL_LIGHTING);
+   glDisable(GL_FOG); /* << This will fix white shadows on some systems! */
    glDisable(GL_COLOR_MATERIAL);
    glColor4f(0.0f, 0.0f, 0.0f, alpha);
 
