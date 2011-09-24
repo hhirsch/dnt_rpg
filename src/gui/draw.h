@@ -35,6 +35,14 @@
 
 #define RAIZ3D2  0.8660254 /**< Sqrt(3) / 2 */
 
+#ifdef __APPLE__
+   #define DNT_IMAGE_FORMAT    GL_BGR
+   #define DNT_IMAGE_FORMAT_A  GL_BGRA
+#else
+   #define DNT_IMAGE_FORMAT    GL_RGB
+   #define DNT_IMAGE_FORMAT_A  GL_RGBA
+#endif
+
 
 /********************************************************************
  *                      Screen's constants                          *

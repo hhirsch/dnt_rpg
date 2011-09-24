@@ -106,7 +106,7 @@ GLuint aniModel::loadTexture(const string& strFilename)
    glGenTextures(1, &pId);
    glBindTexture(GL_TEXTURE_2D, pId);
    glTexImage2D(GL_TEXTURE_2D,0,format,img->w,img->h, 
-                0, format, GL_UNSIGNED_BYTE, img->pixels);
+                0, DNT_IMAGE_FORMAT_A, GL_UNSIGNED_BYTE, img->pixels);
    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
    glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
                    GL_LINEAR_MIPMAP_LINEAR );
@@ -115,8 +115,8 @@ GLuint aniModel::loadTexture(const string& strFilename)
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
    gluBuild2DMipmaps(GL_TEXTURE_2D, format, img->w,
-                     img->h, format, GL_UNSIGNED_BYTE, 
-                     img->pixels );
+                     img->h, DNT_IMAGE_FORMAT_A, GL_UNSIGNED_BYTE, 
+                     img->pixels);
 
    /* Free memory */
    SDL_FreeSurface(img);

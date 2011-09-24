@@ -471,13 +471,13 @@ void setTexture(SDL_Surface* img, GLuint textID, bool mipMaps)
       
       SDL_BlitSurface(img, NULL, tmp, NULL);
       glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tmp->w, tmp->h, 
-                                  0, GL_RGBA, GL_UNSIGNED_BYTE, 
+                                  0, DNT_IMAGE_FORMAT_A, GL_UNSIGNED_BYTE, 
                                   tmp->pixels);      
    }
    else
    {
       glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img->w, img->h, 
-                                  0, GL_RGB, GL_UNSIGNED_BYTE, 
+                                  0, DNT_IMAGE_FORMAT, GL_UNSIGNED_BYTE, 
                                   img->pixels);
    }
 
@@ -494,13 +494,13 @@ void setTexture(SDL_Surface* img, GLuint textID, bool mipMaps)
 
       if(tmp)
       {
-         gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, tmp->w,
+         gluBuild2DMipmaps(GL_TEXTURE_2D, DNT_IMAGE_FORMAT_A, tmp->w,
                tmp->h, GL_RGBA, GL_UNSIGNED_BYTE,
                tmp->pixels );
       }
       else
       {
-         gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, img->w,
+         gluBuild2DMipmaps(GL_TEXTURE_2D, DNT_IMAGE_FORMAT, img->w,
                img->h, GL_RGB, GL_UNSIGNED_BYTE,
                img->pixels );
       }
@@ -563,14 +563,14 @@ void setTextureRGBA(SDL_Surface* img, GLuint textID, bool mipMaps)
       SDL_SetAlpha(gamb, 0, 0);
       SDL_BlitSurface(gamb, NULL, tmp, NULL);
       glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tmp->w, tmp->h, 
-                                  0, GL_RGBA, GL_UNSIGNED_BYTE, 
+                                  0, DNT_IMAGE_FORMAT_A, GL_UNSIGNED_BYTE, 
                                   tmp->pixels);
       SDL_FreeSurface(gamb);
    }
    else
    {
       glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 
-                                  0, GL_RGBA, GL_UNSIGNED_BYTE, 
+                                  0, DNT_IMAGE_FORMAT_A, GL_UNSIGNED_BYTE, 
                                   img->pixels);
       tmp = img;
    }
@@ -589,7 +589,7 @@ void setTextureRGBA(SDL_Surface* img, GLuint textID, bool mipMaps)
 
 
       gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, tmp->w,
-            tmp->h, GL_RGBA, GL_UNSIGNED_BYTE,
+            tmp->h, DNT_IMAGE_FORMAT_A, GL_UNSIGNED_BYTE,
             tmp->pixels );
    }
    else

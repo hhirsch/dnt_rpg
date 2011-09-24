@@ -28,6 +28,7 @@
 #include "../etc/dirs.h"
 #include "../etc/defparser.h"
 #include "../lang/translate.h"
+#include "../gui/draw.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -596,7 +597,7 @@ GLuint Map::insertTexture(string arq, string name, GLuint R, GLuint G, GLuint B)
    glGenTextures(1, &(tex->index));
    glBindTexture(GL_TEXTURE_2D, tex->index);
    glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,img->w,img->h, 
-                0, GL_RGB, GL_UNSIGNED_BYTE, img->pixels);
+                0, DNT_IMAGE_FORMAT_A, GL_UNSIGNED_BYTE, img->pixels);
 
    /* Enable Anisotropic filtering, if defined */
    if(opt.getEnableAnisotropicFilter())
@@ -618,7 +619,7 @@ GLuint Map::insertTexture(string arq, string name, GLuint R, GLuint G, GLuint B)
 
    
    gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, img->w,
-                     img->h, GL_RGB, GL_UNSIGNED_BYTE, 
+                     img->h, DNT_IMAGE_FORMAT_A, GL_UNSIGNED_BYTE, 
                      img->pixels );
 
    /* Free the image */
