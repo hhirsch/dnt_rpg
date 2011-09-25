@@ -434,11 +434,6 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
     {
        focus = FARSO_FOCUS_GAME;
     }
-    else if(!activeObject->getMouseHint().empty())
-    {
-       /* Set mouse hint, if any */
-       mouseCursor.setTextOver(activeObject->getMouseHint());
-    }
 
     if(lwindows->getActiveWindow() == NULL)
     {
