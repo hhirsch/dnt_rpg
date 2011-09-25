@@ -694,8 +694,7 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
     }
 
     /* FARSO_FOCUS ON TEXT SELECT  */
-    else
-    if ((focus == FARSO_FOCUS_SEL_TEXT) /*&& (x != mouseX || y != mouseY)*/ )
+    else if (focus == FARSO_FOCUS_SEL_TEXT)
     {
         mouseX = x;
         mouseY = y;
@@ -723,8 +722,7 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
     }
 
     /* FARSO_FOCUS ON TABBUTTON */
-    else
-    if ((focus == FARSO_FOCUS_TAB_BUTTON))
+    else if(focus == FARSO_FOCUS_TAB_BUTTON)
     {
        int actType = 0;
        tabButton* tb = (tabButton*) activeObject;

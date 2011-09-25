@@ -29,6 +29,9 @@ using namespace std;
 sound* actualSound;
 bool running = true;
 
+/*! Init and run the paralel sound */
+int runParalelSound(void* param);
+
 /*************************************************************************
  *                          runParalelSound                              *
  *************************************************************************/

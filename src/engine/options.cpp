@@ -1371,7 +1371,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
    else if(eventInfo == FARSO_EVENT_PRESSED_BUTTON) 
    {
       /* Confirm */
-      if( (object == (guiObject*) buttonConfirm) )
+      if(object == (guiObject*) buttonConfirm)
       {
          enableParticles = cxSelParticles->isSelected();
          enableGrass = cxSelGrass->isSelected();
@@ -1405,7 +1405,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          return(OPTIONSW_CONFIRM);
       }
       /* Cancel */
-      else if( (object == (guiObject*) buttonCancel) )
+      else if(object == (guiObject*) buttonCancel)
       {
          /* Redo to previous values */
          musicVolume = prevMusicVolume;

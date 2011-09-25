@@ -586,7 +586,13 @@ class Map
       void renderFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
                              GLfloat** matriz, bool selectionRender,
                              bool outdoorCompatible, bool enableReflexion);
-
+      /*! Render a single square */
+      void renderQuad(GLfloat x1, GLfloat z1,
+                 GLfloat x2, GLfloat z2,
+                 GLfloat h1, GLfloat h2, GLfloat h3, GLfloat h4,
+                 GLfloat texCoordX1, GLfloat texCoordZ1, 
+                 GLfloat texCoordX2, GLfloat texCoordZ2);
+   
       /*! Delete all remaining objects on the map */
       void deleteObjects();
 

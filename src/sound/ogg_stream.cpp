@@ -104,7 +104,7 @@ ALuint ogg_stream::getSource()
 void ogg_stream::release()
 {
    /* Stop Source (if already not stoped) */
-   if( (timeEnded == 0) )
+   if(timeEnded == 0)
    {
       alSourceStop(source);
       check("::release() alSourceStop");
