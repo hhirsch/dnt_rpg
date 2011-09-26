@@ -643,32 +643,10 @@ int editor::insertTexture(string textureFile)
       return(0);
    }
 
-   Uint8 R,G,B,tR,tG,tB;
-   
-   Uint32 pixel = pixel_Get(img,0,0);
-   SDL_GetRGB(pixel,img->format, &R, &G, &B);
-   tR = R;
-   tG = G;
-   tB = B;
-
-   int x, y;
-   /* Get the Medium Color Value of the texture */
-   for(x=0;x < img->w; x++)
-   {
-      for(y=0; y < img->h; y++)
-      {
-         pixel = pixel_Get(img,x,y);
-         SDL_GetRGB(pixel,img->format, &R, &G, &B);
-         tR = (tR+R) / 2;
-         tG = (tG+G) / 2;
-         tB = (tB+B) / 2;
-      }
-   }
-
    SDL_FreeSurface(img);
 
    return(map->insertTexture(gui->getTextureFileName(),
-                             gui->getTextureFileName(), tR, tG, tB));
+                             gui->getTextureFileName()));
 
    
 }
