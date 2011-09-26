@@ -210,6 +210,9 @@ class object: public thing
       /*! Init the values (all with null or zero). Usually called
        * at begining of the constructors. */
       void cleanValues();
+   
+      /*! Get the object type ID, based on string identifier */
+      int getObjectTypeId(string t);
 
 };
 

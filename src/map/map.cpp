@@ -909,7 +909,7 @@ mapFog Map::getFog()
 /********************************************************************
  *                           renderQuad                             *
  ********************************************************************/
-void renderQuad(GLfloat x1, GLfloat z1,
+void Map::renderQuad(GLfloat x1, GLfloat z1,
               GLfloat x2, GLfloat z2,
               GLfloat h1, GLfloat h2, GLfloat h3, GLfloat h4,
               GLfloat texCoordX1, GLfloat texCoordZ1, 

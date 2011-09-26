@@ -4049,7 +4049,7 @@ int engine::run(SDL_Surface *surface, bool commingBack)
            }
         }
         /* Continue the fight */
-        else if( (fightStatus == FIGHT_CONTINUE) ) 
+        else if(fightStatus == FIGHT_CONTINUE) 
         {
            lastTurnTime = time;
            fightStatus = fight->doBattleCicle();

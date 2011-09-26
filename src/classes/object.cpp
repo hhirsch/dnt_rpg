@@ -49,48 +49,48 @@ using namespace std;
 /**************************************************************
  *                       getObjectTypeId                      *
  **************************************************************/
-int getObjectTypeId(string type)
+int object::getObjectTypeId(string t)
 {
    /* Translates a type string to the object type Id */
-   if(type == "scenery")
+   if(t == "scenery")
    {
       return(OBJECT_TYPE_SCENERY);
    }
-   else if(type == "weapon")
+   else if(t == "weapon")
    {
       return(OBJECT_TYPE_WEAPON);
    }
-   else if(type == "armor")
+   else if(t == "armor")
    {
       return(OBJECT_TYPE_ARMOR);
    }
-   else if(type == "heal")
+   else if(t == "heal")
    {
       return(OBJECT_TYPE_HEAL);
    }
-   else if( (type == "ammo") || (type == "munition") )
+   else if( (t == "ammo") || (t == "munition") )
    {
       return(OBJECT_TYPE_AMMO);
    }
-   else if(type == "explosive")
+   else if(t == "explosive")
    {
       return(OBJECT_TYPE_EXPLOSIVE);
    }
-   else if(type == "narcotic")
+   else if(t == "narcotic")
    {
       return(OBJECT_TYPE_NARCOTIC);
    }
-   else if(type == "book")
+   else if(t == "book")
    {
       return(OBJECT_TYPE_BOOK);
    }
-   else if(type == "money")
+   else if(t == "money")
    {
       return(OBJECT_TYPE_MONEY);
    }
    else
    {
-      cerr << "Warning: Unknow object type: '" << type << "'" << endl;
+      cerr << "Warning: Unknow object type: '" << t << "'" << endl;
    }
 
    return(OBJECT_TYPE_GENERIC);

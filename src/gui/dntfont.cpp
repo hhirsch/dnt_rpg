@@ -266,7 +266,7 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
    }
 
    /* Verify if is on unicode special DNT button */
-   if( (text[0] == '\\') )
+   if(text[0] == '\\')
    {
       text.erase(0,1);
 
