@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -97,6 +97,17 @@ void pixel_Set(SDL_Surface* screen, int x, int y, Uint32 color);
  * \param y -> y coordinate of the pixel 
  * \return -> (x,y) surface color */
 Uint32 pixel_Get(SDL_Surface *surface, int x, int y);
+
+/*! Get the surface (x,y) pixel color
+ * \param surface -> surface to draw
+ * \param x -> x coordinate of the pixel
+ * \param y -> y coordinate of the pixel
+ * \param r -> pixel red color return  
+ * \param g -> pixel green color return  
+ * \param b -> pixel blue color return  
+ * \param a -> pixel alpha color return */ 
+void pixel_Get(SDL_Surface *surface, int x, int y, 
+               Uint8* r, Uint8* g, Uint8* b, Uint8* a);
 
 /*! Same as pixel_Get, but interpolate with nearest neighbors
  * \param surface -> surface to draw

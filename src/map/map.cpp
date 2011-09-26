@@ -364,7 +364,10 @@ Map::Map()
 
    lakes = NULL;
    totalLakes = 0;
-   
+
+   /* Load Shader */
+   shaderAlphaDefined = false;
+
    /* Initialize Structs */
    x = z = 0;
    xInic = zInic = 0;
@@ -407,6 +410,12 @@ Map::~Map()
    if(uvAlphaBuffer != NULL)
    {
       delete[] uvAlphaBuffer;
+   }
+
+   /* Delete alpha shader texture */
+   if(shaderAlphaDefined)
+   {
+      glDeleteTextures(1, &shaderAlphaTexture);
    }
 
    /* Delete the Wall texture renderer */
@@ -2770,6 +2779,7 @@ void Map::createAlpha(int x1, int z1)
  ********************************************************************/
 void Map::updateAlphaTextures()
 {
+   /* Update splatting-by-multitexture extension alpha textures */
    int aux = 0;
    mapTexture* tex = (mapTexture*)textures.getFirst();
    int x1, z1;
@@ -2812,7 +2822,135 @@ void Map::updateAlphaTextures()
       aux++;
    }
    SDL_FreeSurface(img);
+
+   /* And update the shader alpha texture */
+   updateShaderAlphaTexture();
+
+
 }
+
+/********************************************************************
+ *                     updateShaderAlphaTexture                     *
+ ********************************************************************/
+void Map::updateShaderAlphaTexture()
+{
+   int aux = 0;
+   Uint8 R=255,G=255,B=255,A=255;
+   mapTexture* tex = (mapTexture*)textures.getFirst();
+   int x1, z1;
+   SDL_Surface* img = SDL_CreateRGBSurface(SDL_SWSURFACE,
+                                     smallestPowerOfTwo(x*ALPHA_TEXTURE_INC),
+                                     smallestPowerOfTwo(z*ALPHA_TEXTURE_INC),
+                                     32,0x000000FF,0x0000FF00,
+                                     0x00FF0000,0xFF000000);
+
+   /* Create alpha texture */
+   if(shaderAlphaDefined)
+   {
+      /* Already defined... bye! */
+      glDeleteTextures(1, &shaderAlphaTexture);
+   }
+   glGenTextures(1, &(shaderAlphaTexture));
+   glBindTexture(GL_TEXTURE_2D, shaderAlphaTexture);
+
+   /* Note: the shader splatting has a lmit of 4 textures 
+    *       (one for each image channel) */
+   while( (aux < textures.getTotal()) && (aux < 4) )
+   {
+      /* Define The SDL_Surface */
+      for(x1=0; x1 < x*ALPHA_TEXTURE_INC; x1++)
+      {
+         for(z1=0; z1 < z*ALPHA_TEXTURE_INC; z1++)
+         {
+            pixel_Get(img, x1, z1, &R, &G, &B, &A);
+            switch(aux)
+            {
+               case 0:
+               {
+                  R = (int)floor(((tex->alphaValues[x1][z1])*255));
+               }
+               break;
+               case 1:
+               {
+                  G = (int)floor(((tex->alphaValues[x1][z1])*255));
+               }
+               break;
+               case 2:
+               {
+                  B = (int)floor(((tex->alphaValues[x1][z1])*255));
+               }
+               break;
+               case 3:
+               {
+                  A = (int)floor(((tex->alphaValues[x1][z1])*255));
+               }
+               break;
+            }
+            pixel_Set(img, x1, z1, R, G, B, A);
+         }
+      }
+
+      tex = (mapTexture*)tex->getNext();
+      aux++;
+   }
+
+   /* Must add empty channels for textures from aux to 4, when
+    * less than 4 textures used */
+   while(aux < 4)
+   {
+      /* Define the "transparent" channel for SDL_Surface */
+      for(x1=0; x1 < x*ALPHA_TEXTURE_INC; x1++)
+      {
+         for(z1=0; z1 < z*ALPHA_TEXTURE_INC; z1++)
+         {
+            pixel_Get(img, x1, z1, &R, &G, &B, &A);
+            switch(aux)
+            {
+               case 0:
+               {
+                  R = 0;
+               }
+               break;
+               case 1:
+               {
+                  G = 0;
+               }
+               break;
+               case 2:
+               {
+                  B = 0;
+               }
+               break;
+               case 3:
+               {
+                  A = 0;
+               }
+               break;
+            }
+            pixel_Set(img, x1, z1, R, G, B, A);
+         }
+      }
+
+      aux++;
+   }
+
+
+   /* Load the Surface onto the GL texture */
+   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 
+         0, GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
+   glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
+   glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,  GL_LINEAR);
+   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+   SDL_SaveBMP(img, "./shaderalpha.bmp");
+   /* Free the surface and done */
+   SDL_FreeSurface(img);
+}
+
 
 /********************************************************************
  *                        defineCommonTexture                       *

@@ -29,6 +29,7 @@
 
 #include "../particle/lake.h"
 #include "../etc/texrenderer.h"
+#include "../etc/shader.h"
 #include "../classes/object.h"
 #include "../classes/weapon.h"
 
@@ -630,6 +631,14 @@ class Map
 
       GLuint commonTexture;   /**< The most common texture on the map */
 
+
+      /* Things for Shader Splatting */
+      GLuint shaderAlphaTexture; /**< The alpha texture used for shader splat */
+      shader splattingShader;    /**< The shader for splatting textures */
+      bool shaderAlphaDefined;   /**< If already defined the alpha texture */
+
+      /*! Update the shader alpha texture */
+      void updateShaderAlphaTexture();
 };
 
 #endif

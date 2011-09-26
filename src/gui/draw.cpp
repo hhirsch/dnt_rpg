@@ -287,6 +287,15 @@ Uint32 pixel_Get(SDL_Surface *surface, int x, int y)
 }
 
 /******************************************************************
+ *                            pixel_Get                           *
+ ******************************************************************/
+void pixel_Get(SDL_Surface *surface, int x, int y, 
+               Uint8* r, Uint8* g, Uint8* b, Uint8* a)
+{
+   SDL_GetRGBA(pixel_Get(surface, x, y), surface->format, r, g, b, a);
+}
+
+/******************************************************************
  *                         rectangle_Fill                         *
  ******************************************************************/
 void rectangle_Fill(SDL_Surface *screen, int x1, int y1, int x2, int y2)
