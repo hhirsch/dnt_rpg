@@ -476,14 +476,13 @@ void Map::alloc()
    //roads = new mapRoad(x, z);
 
    /* Add Upper Wall Texture */
-   insertTexture("texturas/wall/upper_wall.png", 
-                 "UpperWall",235,147,89);
+   insertTexture("texturas/wall/upper_wall.png", "UpperWall");
 }
 
 /********************************************************************
  *                            getTextureID                          *
  ********************************************************************/
-int Map::getTextureID(string textureName, GLuint& R, GLuint& G, GLuint& B)
+int Map::getTextureID(string textureName)
 {
    /* search for texture */
    int aux=0;
@@ -494,7 +493,6 @@ int Map::getTextureID(string textureName, GLuint& R, GLuint& G, GLuint& B)
       if(!(tex->name.compare(textureName)) )
       {
          /* Found! */
-         R = tex->R; G = tex->G; B = tex->B;
          return(tex->index); 
       }
       tex = (mapTexture*)tex->getNext();
@@ -538,7 +536,7 @@ mapTexture* Map::getTexture(GLuint id)
 /********************************************************************
  *                         Insert texture                           *
  ********************************************************************/
-GLuint Map::insertTexture(string arq, string name, GLuint R, GLuint G, GLuint B)
+GLuint Map::insertTexture(string arq, string name)
 {
    dirs dir;
    options opt;
@@ -546,7 +544,7 @@ GLuint Map::insertTexture(string arq, string name, GLuint R, GLuint G, GLuint B)
    int aux;
 
    /* Verify if the texture is already inserted */
-   int id = getTextureID(arq, R, G, B);
+   int id = getTextureID(arq);
    if(id != -1)
    {
       return(id);
@@ -579,9 +577,6 @@ GLuint Map::insertTexture(string arq, string name, GLuint R, GLuint G, GLuint B)
    tex->fileName = arq.c_str();
    tex->name = name.c_str();
 
-   tex->R = R;
-   tex->G = G;
-   tex->B = B;
    tex->mapX = getSizeX();
 
    tex->definedAlpha = false;
@@ -661,8 +656,7 @@ void Map::removeUnusedTextures()
       }
 
       /* Verify Upper Wall Texture */
-      GLuint R=0,G=0,B=0;
-      used |= (getTexture(getTextureID("UpperWall", R,G,B)) == tex);
+      used |= (getTexture(getTextureID("UpperWall")) == tex);
 
       /* Verify use of texture at Walls  */
       w = (wall*)walls.getFirst();
@@ -1280,7 +1274,6 @@ void Map::renderWalls(GLfloat cameraX, GLfloat cameraY,
    int wNum;
    GLfloat altura = WALL_HEIGHT;
    GLfloat u,v;
-   GLuint R=0,G=0,B=0;
    GLuint dX=0, dY=0, dZ=0;
 
    /* Clear the wall renderer buffers */
@@ -1375,7 +1368,7 @@ void Map::renderWalls(GLfloat cameraX, GLfloat cameraY,
          /* Upper Side */
          u = (maux->x2-maux->x1) / 16.0;
          v = (maux->z2-maux->z1) / 16.0;
-         wallRenderer->addQuad(getTextureID("UpperWall", R, G, B),
+         wallRenderer->addQuad(getTextureID("UpperWall"),
                                "UpperWall",
                                maux->x1, altura, maux->z1, 
                                maux->x1, altura, maux->z2,
@@ -1773,8 +1766,6 @@ int Map::open(string arquivo)
    int IDwallTexturaAtual = -1;
    string nameMuroTexturaAtual = "nada";
    int pisavel=0;
-   GLuint R,G,B;
-   GLuint Ratual,Gatual,Batual;
   
    /* Load the map file defintions */ 
    if(!def.load(arquivo))
@@ -1907,7 +1898,7 @@ int Map::open(string arquivo)
          /* Get the texture Name */
          sscanf(value.c_str(),"%d,%d,%d %s", &dX, &dY, &dZ, nome);
          nameMuroTexturaAtual = nome;
-         IDwallTexturaAtual = getTextureID(nome,R,G,B);
+         IDwallTexturaAtual = getTextureID(nome);
 
          /* Get Wich wall side the texture is */
          switch(type)
@@ -1956,8 +1947,8 @@ int Map::open(string arquivo)
       /* Texture Definition */
       else if(key == "texture")
       {
-         sscanf(value.c_str(), "%s %s %d %d %d",nome,nomeArq,&R,&G,&B);  
-         insertTexture(nomeArq,nome,R,G,B);
+         sscanf(value.c_str(), "%s %s",nome,nomeArq);  
+         insertTexture(nomeArq,nome);
       }
       /* Square declaration */
       else if(key == "square")
@@ -2019,11 +2010,8 @@ int Map::open(string arquivo)
       /* Square's Texture */
       else if(key == "useTexture")
       {
-         IDtextureAtual = getTextureID(value,Ratual,Gatual,Batual);
+         IDtextureAtual = getTextureID(value);
          MapSquares[posX][posZ].texture = IDtextureAtual;
-         MapSquares[posX][posZ].R = Ratual;
-         MapSquares[posX][posZ].G = Gatual;
-         MapSquares[posX][posZ].B = Batual;
       }
       /* Define Object at the square */
       else if(key == "useObject")
@@ -2129,12 +2117,12 @@ void Map::newMap(int X, int Z)
    if(isOutdoor())
    {
       IDtexture = insertTexture("texturas/floor_outdoor/grass.png", 
-            "texturas/floor_outdoor/grass.png", 54,102,49);
+            "texturas/floor_outdoor/grass.png");
    }
    else
    {
       IDtexture = insertTexture("texturas/floor_indoor/steel1.png", 
-            "texturas/floor_indoor/steel1.png", 54,102,49);
+            "texturas/floor_indoor/steel1.png");
    }
 
    for(auxZ = 0; auxZ < z; auxZ++)
@@ -2150,9 +2138,6 @@ void Map::newMap(int X, int Z)
           saux->posZ = auxZ;
           saux->flags |= SQUARE_CAN_WALK;
           saux->texture = IDtexture;
-          saux->R = 130;
-          saux->G = 148;
-          saux->B = 96;
       }
    }
 
@@ -2359,9 +2344,8 @@ int Map::save(string arquivo)
        * always loaded at alloc() function */
       if(tex->name != "UpperWall")
       {
-         fprintf(arq,"texture = %s %s %d %d %d\n",tex->name.c_str(),
-                 dir.getRelativeFile(tex->fileName).c_str(),
-                 tex->R,tex->G,tex->B);
+         fprintf(arq,"texture = %s %s\n",tex->name.c_str(),
+                 dir.getRelativeFile(tex->fileName).c_str());
       }
       tex = (mapTexture*)tex->getNext();
    }

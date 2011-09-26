@@ -150,7 +150,6 @@ class mapTexture: public dntListElement
       string fileName;          /**< File Name */
       GLuint index;             /**< Texture ID */
       GLuint w,h;               /**< Dimmensions */
-      GLuint R,G,B;             /**< Colors to MINIMAP */
       GLuint alphaTexture;      /**< The Alpha Texture */
       int count;                /**< The count of the texture */
       int mapX;                 /**< mapX size */
@@ -213,7 +212,6 @@ class Square: public dntList
       int visible;                      /**< Visible on active frame ? */
       int texture;                      /**< Actual Texture */
       wall* walls[MAX_WALLS];           /**< Square walls on */
-      GLuint R,G,B;                     /**< Square Color to MINIMAP */
       conection mapConection;           /**< Conection to other map */
       int divisions;                    /**< Number of Divisions */
 
@@ -485,11 +483,8 @@ class Map
 
       /*! Get the integer ID value of the texture
        * \param textureName -> Name of the texture
-       * \param R -> the texture Red Color got
-       * \param G -> the texture Green Color got
-       * \param B -> the texture Blue Color got
        * \return integer with the texture ID, or -1 if not found. */
-      int getTextureID(string textureName, GLuint& R, GLuint& G, GLuint& B);
+      int getTextureID(string textureName);
       /*! Get the texture name
        * \param ID -> integer ID of the texture
        * \return texture Name */
@@ -500,12 +495,8 @@ class Map
       mapTexture* getTexture(GLuint id);
       /*! Insert the texture on the map
        * \param arq -> fileName of the texture
-       * \param name -> Name of the texture
-       * \param R -> Red Color of the texture
-       * \param G -> Green Color of the texture
-       * \param B -> Blue Color of the texture */
-      GLuint insertTexture(string arq, string name, 
-                           GLuint R, GLuint G, GLuint B);
+       * \param name -> Name of the texture */
+      GLuint insertTexture(string arq, string name); 
       /*! Remove all unused textures from the list */
       void removeUnusedTextures();
 
