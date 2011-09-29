@@ -29,6 +29,7 @@
 
 #include "../particle/lake.h"
 #include "../etc/texrenderer.h"
+#include "../etc/extensions.h"
 #include "../etc/shader.h"
 #include "../classes/object.h"
 #include "../classes/weapon.h"
@@ -633,12 +634,19 @@ class Map
 
 
       /* Things for Shader Splatting */
+      extensions ext;            /**< Extensions controller */
       GLuint shaderAlphaTexture; /**< The alpha texture used for shader splat */
       shader splattingShader;    /**< The shader for splatting textures */
       bool shaderAlphaDefined;   /**< If already defined the alpha texture */
 
       /*! Update the shader alpha texture */
       void updateShaderAlphaTexture();
+
+      /*! Render the outdoor terrain with shader */
+      void renderOutdoorShader();
+
+      /*! Render the outdoor terrain with multitexture */
+      void renderOutdoorMultitexture();
 };
 
 #endif

@@ -23,7 +23,6 @@
 
 #include "../engine/culling.h"
 #include "../engine/util.h"
-#include "../etc/extensions.h"
 #include "../engine/options.h"
 #include "../etc/dirs.h"
 #include "../etc/defparser.h"
@@ -367,6 +366,11 @@ Map::Map()
 
    /* Load Shader */
    shaderAlphaDefined = false;
+   if(ext.hasShader())
+   {
+      splattingShader.load("shaders/terrain_splat.vert", 
+            "shaders/terrain_splat.frag");
+   }
 
    /* Initialize Structs */
    x = z = 0;
@@ -1078,10 +1082,6 @@ void Map::renderFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 void Map::renderFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
                              GLfloat** matriz, bool selectionRender)
 {
-   extensions ext;
-   int aux = 0;
-   mapTexture* tex;
-
    /* Create the buffers with visible squares */
    createBuffers(matriz);
 
@@ -1095,7 +1095,108 @@ void Map::renderFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
       glDrawArrays(GL_QUADS, 0, (int)totalVertex / (int)3);
       glDisableClientState(GL_VERTEX_ARRAY);
       return;
-  }
+   }
+
+   /* Verify if will draw with shaders or multitexture extensions.
+    * FIXME: Option instead of auto select */  
+   if(ext.hasShader())
+   {
+      renderOutdoorShader();
+   }
+   else
+   {
+      renderOutdoorMultitexture();
+   }
+
+   glDisableClientState(GL_VERTEX_ARRAY);
+}
+
+
+/********************************************************************
+ *                         renderOutdoorShader                      *
+ ********************************************************************/
+void Map::renderOutdoorShader()
+{
+   int i;
+   string unif="";
+
+   /* NOTE: Vertex Buffer already set */
+   mapTexture* tex = (mapTexture*)textures.getFirst();
+
+   splattingShader.enable();
+
+   /* Set all uniform textures */
+   glActiveTexture(GL_TEXTURE0);
+   glEnable(GL_TEXTURE_2D);
+   glBindTexture(GL_TEXTURE_2D, shaderAlphaTexture);
+   splattingShader.setUniformVariable("alphaMap", (GLint)0);
+   glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+   glTexCoordPointer(2, GL_FLOAT, 0, uvAlphaBuffer);
+
+   
+   for(i=0; i < 4; i++)
+   {
+      glActiveTexture(GL_TEXTURE1+i);
+      glClientActiveTexture(GL_TEXTURE1+i);
+      glBindTexture(GL_TEXTURE_2D, tex->index);
+      switch(i)
+      {
+         case 0:
+         {
+            unif = "texture0";
+            glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+            glTexCoordPointer(2, GL_FLOAT, 0, uvBuffer);
+         }
+         break;
+         case 1:
+         {
+            unif = "texture1";
+         }
+         break;
+         case 2:
+         {
+            unif = "texture2";
+         }
+         break;
+         case 3:
+         {
+            unif = "texture3";
+         }
+         break;
+      }
+
+      glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
+            GL_LINEAR_MIPMAP_LINEAR );
+      glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
+      glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+      
+      /* Set sampler2d */
+      splattingShader.setUniformVariable(unif, (GLint)i+1);
+
+      /* Next Texture */
+      tex = (mapTexture*)tex->getNext();
+   }
+   
+   /* Draw The Array */
+   glNormal3i(0,1,0);
+   glDrawArrays(GL_QUADS, 0, (int)totalVertex / (int)3);
+
+   splattingShader.disable();
+   glActiveTexture(GL_TEXTURE0);
+   glClientActiveTexture(GL_TEXTURE0);
+}
+
+/********************************************************************
+ *                        renderOutdoorMultitexture                 *
+ ********************************************************************/
+void Map::renderOutdoorMultitexture()
+{
+   int aux = 0;
+   mapTexture* tex;
+
+   /* NOTE: Vertex Buffer already set */
 
    /* First Draw with the common texture. */
    glTexCoordPointer(2, GL_FLOAT, 0, uvBuffer);
@@ -1201,7 +1302,6 @@ void Map::renderFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
       glDisableClientState(GL_TEXTURE_COORD_ARRAY);
    }
 
-   glDisableClientState(GL_VERTEX_ARRAY);
 }
 
 /********************************************************************
@@ -2946,7 +3046,6 @@ void Map::updateShaderAlphaTexture()
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-   SDL_SaveBMP(img, "./shaderalpha.bmp");
    /* Free the surface and done */
    SDL_FreeSurface(img);
 }

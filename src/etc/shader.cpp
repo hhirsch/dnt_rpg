@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -111,6 +111,8 @@ void shader::disable()
 bool shader::load(string vShaderFileName, string fShaderFileName)
 {
    GLint vertexCompiled, fragmentCompiled, linked;
+   char buf[524288];
+   string res;
    const char* str;
 
    if(ext.hasShader())
@@ -123,9 +125,13 @@ bool shader::load(string vShaderFileName, string fShaderFileName)
       fragment = ext.arbCreateShaderObject(GL_FRAGMENT_SHADER_ARB);
 
       /* Load Vertex and fragment shaders */
-      str = parseFile(vShaderFileName).c_str();
+      res = parseFile(vShaderFileName);
+      sprintf(buf,"%s", res.c_str());
+      str = &res[0];
       ext.arbShaderSourceObject(vertex, 1, &str, NULL);
-      str = parseFile(fShaderFileName).c_str();
+      res = parseFile(fShaderFileName).c_str();
+      sprintf(buf,"%s", res.c_str());
+      str = &res[0];
       ext.arbShaderSourceObject(fragment, 1, &str, NULL);
 
       /* Compile Vertex Shader */
@@ -295,12 +301,15 @@ string shader::parseFile(string fileName)
    while(!file.eof())
    {
       getline(file, buffer);
-      res += buffer + "\n";
+      if(!file.eof())
+      {
+         res += buffer + "\n";
+      }
    }
 
    /* Close it, before return */
    file.close();
-   
+
    return(res);
 }
 
