@@ -102,3 +102,49 @@ bool mapFog::save()
    return(true);
 }
 
+/****************************************************************
+ *                             apply                            *
+ ****************************************************************/
+void mapFog::apply(bool outdoor, float ofarview, float ifarview)
+{
+   if(enabled)
+   {
+      glEnable(GL_FOG);
+      {
+        //glFogi(GL_FOG_COORD_SRC, GL_FRAGMENT_DEPTH);
+        glFogi(GL_FOG_MODE,GL_LINEAR);
+        glFogfv(GL_FOG_COLOR, color);
+        glFogf(GL_FOG_DENSITY, density);
+        glHint(GL_FOG_HINT,GL_DONT_CARE);
+        glFogf(GL_FOG_START, start);
+        glFogf(GL_FOG_END, end);
+      }
+   }
+   else
+   {
+      /* Default fog used */
+      GLfloat fogEnd = (ofarview) + 4000;
+      GLfloat fogStart = 200.0f;
+      GLfloat fogDensity = 5.0f;
+      GLfloat color[3] = {1.0f, 1.0f, 1.0f};
+      if(!outdoor)
+      {
+         color[0] = 0.0f;
+         color[1] = 0.0f;
+         color[2] = 0.0f;
+         fogStart = 40.0f;
+         fogDensity = 1.0f;
+         fogEnd = (ifarview)-2;
+      }
+      glEnable(GL_FOG);
+      {
+        glFogi(GL_FOG_MODE,GL_LINEAR);
+        glFogfv(GL_FOG_COLOR, color);
+        glFogf(GL_FOG_DENSITY, fogDensity);
+        glHint(GL_FOG_HINT, GL_DONT_CARE);
+        glFogf(GL_FOG_START, fogStart);
+        glFogf(GL_FOG_END, fogEnd);
+      }
+   }
+}
+

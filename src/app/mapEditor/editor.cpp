@@ -277,31 +277,8 @@ void editor::openMap()
          delete(arq);
       }
       /* Open FOG */
-      if(map->fog.enabled)
-      {
-         glEnable(GL_FOG);
-         {
-            glFogi(GL_FOG_MODE,GL_LINEAR);
-            glFogfv(GL_FOG_COLOR,map->fog.color);
-            glFogf(GL_FOG_DENSITY,map->fog.density);
-            glHint(GL_FOG_HINT,GL_DONT_CARE);
-            glFogf(GL_FOG_START,map->fog.start);
-            glFogf(GL_FOG_END,map->fog.end);
-         }
-      }
-      else
-      {
-         glEnable(GL_FOG);
-         {
-            GLfloat color[3]={1.0,1.0,1.0};
-            glFogi(GL_FOG_MODE,GL_LINEAR);
-            glFogfv(GL_FOG_COLOR, color);
-            glFogf(GL_FOG_DENSITY, 5.00);
-            glHint(GL_FOG_HINT, GL_DONT_CARE);
-            glFogf(GL_FOG_START, 200);
-            glFogf(GL_FOG_END, (OUTDOOR_FARVIEW) + 4000);
-         }
-      }
+      map->fog.apply(map->isOutdoor(), OUTDOOR_FARVIEW, INDOOR_FARVIEW);
+
       gui->setFog(&map->fog);
       /* Open Particles */
       if(!map->getParticlesFileName().empty())
@@ -527,16 +504,7 @@ void editor::newMap()
    npcController = new npcs(map, NPCs, features);
    particleSystem->setActualMap(map, NULL);
    gui->showMessage("Created New Game Map!");
-   glEnable(GL_FOG);
-   {
-      GLfloat color[3]={0.8,0.8,0.8};
-      glFogi(GL_FOG_MODE,GL_LINEAR);
-      glFogfv(GL_FOG_COLOR, color);
-      glFogf(GL_FOG_DENSITY, 0.0010);
-      glHint(GL_FOG_HINT, GL_DONT_CARE);
-      glFogf(GL_FOG_START, 200);
-      glFogf(GL_FOG_END, (OUTDOOR_FARVIEW / 2.0)+200);
-   }
+   map->fog.apply(map->isOutdoor(), OUTDOOR_FARVIEW, INDOOR_FARVIEW);
    gui->setFog(&map->fog); 
 }
 

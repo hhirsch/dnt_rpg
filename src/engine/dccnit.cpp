@@ -745,45 +745,10 @@ int engine::loadMap(string arqMapa, bool loadingGame)
    actualMap->setFileName(arqVelho);
    actualMap->open(arqMapa);
 
-   /* Enable, if needed, the FOG */
+   /* Apply the FOG */
    mapFog fog = actualMap->getFog();
-   if(fog.enabled)
-   {
-      glEnable(GL_FOG);
-      {
-        glFogi(GL_FOG_MODE,GL_LINEAR);
-        glFogfv(GL_FOG_COLOR, fog.color);
-        glFogf(GL_FOG_DENSITY, fog.density);
-        glHint(GL_FOG_HINT,GL_DONT_CARE);
-        glFogf(GL_FOG_START, fog.start);
-        glFogf(GL_FOG_END, fog.end);
-      }
-   }
-   else
-   {
-      GLfloat fogEnd = (option->getFarViewFactor()*OUTDOOR_FARVIEW) + 4000;
-      GLfloat fogStart = 200.0f;
-      GLfloat fogDensity = 5.0f;
-      GLfloat color[3] = {1.0f, 1.0f, 1.0f};
-      if(!actualMap->isOutdoor())
-      {
-         color[0] = 0.0f;
-         color[1] = 0.0f;
-         color[2] = 0.0f;
-         fogStart = 40.0f;
-         fogDensity = 1.0f;
-         fogEnd = (INDOOR_FARVIEW)-2;
-      }
-      glEnable(GL_FOG);
-      {
-        glFogi(GL_FOG_MODE,GL_LINEAR);
-        glFogfv(GL_FOG_COLOR, color);
-        glFogf(GL_FOG_DENSITY, fogDensity);
-        glHint(GL_FOG_HINT, GL_DONT_CARE);
-        glFogf(GL_FOG_START, fogStart);
-        glFogf(GL_FOG_END, fogEnd);
-      }
-   }
+   fog.apply(actualMap->isOutdoor(), option->getFarViewFactor()*OUTDOOR_FARVIEW,
+         INDOOR_FARVIEW);
 
    /* Loading NPCs */
    NPCs = NULL;

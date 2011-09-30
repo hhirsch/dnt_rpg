@@ -416,7 +416,7 @@ void guiIO::openFogWindow()
 {
  if(actualFog != NULL)
  {
-   char buf[10];
+   char buf[32];
    fogWindow = gui->insertWindow(185,212,289,368,"Fog");
    fogWindow->getObjectsList()->insertTextBox(5,17,45,30,0,"Red");
    sprintf(buf,"%.4f",actualFog->color[0]);
@@ -492,31 +492,7 @@ void guiIO::applyFog()
       sscanf(fogStart->getText().c_str(),"%f",&actualFog->start);
       sscanf(fogEnd->getText().c_str(),"%f",&actualFog->end);
       actualFog->enabled = fogEnabled->isSelected();
-      if(actualFog->enabled)
-      {
-         glEnable(GL_FOG);
-         {
-            glFogi(GL_FOG_MODE,GL_LINEAR);
-            glFogfv(GL_FOG_COLOR,actualFog->color);
-            glFogf(GL_FOG_DENSITY,actualFog->density);
-            glHint(GL_FOG_HINT,GL_DONT_CARE);
-            glFogf(GL_FOG_START,actualFog->start);
-            glFogf(GL_FOG_END,actualFog->end);
-         }
-      }
-      else
-      {
-         glEnable(GL_FOG);
-         {
-            GLfloat color[3]={1.0,1.0,1.0};
-            glFogi(GL_FOG_MODE,GL_LINEAR);
-            glFogfv(GL_FOG_COLOR, color);
-            glFogf(GL_FOG_DENSITY, 0.10);
-            glHint(GL_FOG_HINT, GL_DONT_CARE);
-            glFogf(GL_FOG_START, 100);
-            glFogf(GL_FOG_END, OUTDOOR_FARVIEW / 2.0);
-         }
-      }
+      actualFog->apply(true, OUTDOOR_FARVIEW, INDOOR_FARVIEW);
    }
 }
 
