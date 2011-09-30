@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -410,10 +410,11 @@ bool options::load(string file)
          /* Read FarViewFactor Options */
          sscanf(value.c_str(),"%f",&farViewFactor);
       }
-      else if(key == "MultiTexture")
+      else if(key == "SplattingType")
       {
-         /* Read Multitexture options */
-         enableMultiTexture = (value == "true");
+         /* Read Splatting option */
+         sscanf(value.c_str(), "%d", &splattingType);
+         verifySplattingAvailability();
       }
       else if(key == "Anisotropic")
       {
@@ -524,8 +525,8 @@ void options::save()
    fprintf(arq, "AntiAliasing = %d\n",antiAliasing);
    /* FarViewFactor */
    fprintf(arq, "FarViewFactor = %.2f\n", farViewFactor);  
-   /* Multi Texture */
-   fprintf(arq, "MultiTexture = %s\n",enableMultiTexture?"true":"false");
+   /* Splatting Type */
+   fprintf(arq, "SplattingType = %d\n", splattingType);
    /* Anisotropic Filter */
    fprintf(arq, "Anisotropic = %s\n",enableAnisotropic?"true":"false");
 
@@ -690,6 +691,29 @@ string options::stencilBufferSizeName()
 }
 
 /****************************************************************
+ *                       splattingTypeName                      *
+ ****************************************************************/
+string options::splattingTypeName()
+{
+   string saux = "!!!";
+
+   switch(splattingType)
+   {
+      case DNT_SPLATTING_NONE:
+         saux = gettext("Disabled");
+      break;
+      case DNT_SPLATTING_EXTENSION:
+         saux = "glMultiTextureARB";
+      break;
+      case DNT_SPLATTING_SHADER:
+         saux = "GLSL Shader";
+      break;
+   }
+
+   return(saux);
+}
+
+/****************************************************************
  *                       AntiAliasingName                       *
  ****************************************************************/
 string options::antiAliasingName()
@@ -793,6 +817,7 @@ void options::displayOptionsScreen(guiInterface* interf)
 
    prevAntiAliasing = antiAliasing;
    prevStencilBufferSize = stencilBufferSize;
+   prevSplattingType = splattingType;
    prevFarViewFactor = farViewFactor;
 
    /* Previous Keys values too */
@@ -919,17 +944,7 @@ void options::displayOptionsScreen(guiInterface* interf)
                           cxSelParticles->isSelected());
    posY += 25;
 
-   /* MultiTexture Enable or Not */
-   qt = list->insertTextBox(24,posY,219,posY+17,0,
-                            gettext("Enable MultiTextures"));
-   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
-   cxSelMultiTexture = list->insertCxSel(12,posY+4,getEnableMultiTexture());
-   list->insertPicture(220,posY,40,112,
-                  dir.getRealFile("texturas/options/multitexture.png").c_str());
-   cxSelMultiTexture->setAvailable(ext.hasMultiTexture());
-   posY += 25;
-
-   /* MultiTexture Enable or Not */
+   /* Anisotropic Enable or Not */
    qt = list->insertTextBox(24,posY,219,posY+17,0,
                             gettext("Enable Anisotropic Filter"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
@@ -939,6 +954,23 @@ void options::displayOptionsScreen(guiInterface* interf)
    cxSelAnisotropic->setAvailable(ext.hasAnisotropic());
    posY += 35;
 
+   /* Splatting Type */
+   prevSplattingType = splattingType;
+   saux = splattingTypeName();
+   qt = list->insertTextBox(12,posY,145,posY+17,0,gettext("Splatting:"));
+   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   buttonSplattingDec = list->insertButton(121,posY,131,posY+17,
+                                      fnt.createUnicode(0x25C4),0);
+   buttonSplattingDec->defineFont(DNT_FONT_ARIAL, 9);
+   txtSplatting = list->insertTextBox(132,posY,227,posY+17,1,saux.c_str());
+   txtSplatting->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   buttonSplattingSum = list->insertButton(228,posY,238,posY+17,
+                                      fnt.createUnicode(0x25BA),0);
+   buttonSplattingSum->defineFont(DNT_FONT_ARIAL, 9);
+   list->insertPicture(245,posY,40,220,
+                  dir.getRealFile("texturas/options/multitexture.png").c_str());
+   posY += 25;
+
    /* Stncil Buffer Size */
    prevStencilBufferSize = stencilBufferSize;
    saux = stencilBufferSizeName();
@@ -947,12 +979,12 @@ void options::displayOptionsScreen(guiInterface* interf)
    buttonStencilDec = list->insertButton(121,posY,131,posY+17,
                                       fnt.createUnicode(0x25C4),0);
    buttonStencilDec->defineFont(DNT_FONT_ARIAL, 9);
-   txtStencil = list->insertTextBox(132,posY,197,posY+17,1,saux.c_str());
+   txtStencil = list->insertTextBox(132,posY,227,posY+17,1,saux.c_str());
    txtStencil->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
-   buttonStencilSum = list->insertButton(198,posY,208,posY+17,
+   buttonStencilSum = list->insertButton(228,posY,238,posY+17,
                                       fnt.createUnicode(0x25BA),0);
    buttonStencilSum->defineFont(DNT_FONT_ARIAL, 9);
-   list->insertPicture(220,posY,40,220,
+   list->insertPicture(245,posY,40,220,
                   dir.getRealFile("texturas/options/stencil_size.png").c_str());
    posY += 25;
 
@@ -964,12 +996,12 @@ void options::displayOptionsScreen(guiInterface* interf)
    buttonReflDec = list->insertButton(121,posY,131,posY+17,
                                       fnt.createUnicode(0x25C4),0);
    buttonReflDec->defineFont(DNT_FONT_ARIAL, 9);
-   txtReflexion = list->insertTextBox(132,posY,197,posY+17,1,saux.c_str());
+   txtReflexion = list->insertTextBox(132,posY,227,posY+17,1,saux.c_str());
    txtReflexion->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
-   buttonReflSum = list->insertButton(198,posY,208,posY+17,
+   buttonReflSum = list->insertButton(228,posY,238,posY+17,
                                       fnt.createUnicode(0x25BA),0);
    buttonReflSum->defineFont(DNT_FONT_ARIAL, 9);
-   list->insertPicture(220,posY,40,220,
+   list->insertPicture(245,posY,40,220,
                     dir.getRealFile("texturas/options/reflexions.png").c_str());
    posY += 25;
 
@@ -981,12 +1013,12 @@ void options::displayOptionsScreen(guiInterface* interf)
    buttonShadDec = list->insertButton(121,posY,131,posY+17,
                                       fnt.createUnicode(0x25C4),0);
    buttonShadDec->defineFont(DNT_FONT_ARIAL, 9);
-   txtShadow = list->insertTextBox(132,posY,197,posY+17,1,saux.c_str());
+   txtShadow = list->insertTextBox(132,posY,227,posY+17,1,saux.c_str());
    txtShadow->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
-   buttonShadSum = list->insertButton(198,posY,208,posY+17,
+   buttonShadSum = list->insertButton(228,posY,238,posY+17,
                                       fnt.createUnicode(0x25BA),0);
    buttonShadSum->defineFont(DNT_FONT_ARIAL, 9);
-   list->insertPicture(220,posY,40,220,
+   list->insertPicture(245,posY,40,220,
                     dir.getRealFile("texturas/options/shadow.png").c_str());
    posY += 25;
 
@@ -997,12 +1029,12 @@ void options::displayOptionsScreen(guiInterface* interf)
    buttonAliasDec = list->insertButton(121,posY,131,posY+17,
                                        fnt.createUnicode(0x25C4),0);
    buttonAliasDec->defineFont(DNT_FONT_ARIAL, 9);
-   txtAntiAliasing = list->insertTextBox(132,posY,197,posY+17,1,saux.c_str());
+   txtAntiAliasing = list->insertTextBox(132,posY,227,posY+17,1,saux.c_str());
    txtAntiAliasing->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
-   buttonAliasSum = list->insertButton(198,posY,208,posY+17,
+   buttonAliasSum = list->insertButton(228,posY,238,posY+17,
                                        fnt.createUnicode(0x25BA),0);
    buttonAliasSum->defineFont(DNT_FONT_ARIAL, 9);
-   list->insertPicture(220,posY,40,220,
+   list->insertPicture(245,posY,40,220,
                   dir.getRealFile("texturas/options/antialiasing.png").c_str());
    posY += 25;
  
@@ -1012,12 +1044,12 @@ void options::displayOptionsScreen(guiInterface* interf)
    buttonFarViewDec = list->insertButton(121,posY,131,posY+17,
                                          fnt.createUnicode(0x25C4),0);
    buttonFarViewDec->defineFont(DNT_FONT_ARIAL, 9);
-   barFarView = list->insertHealthBar(133,posY,196,posY+17,9);
+   barFarView = list->insertHealthBar(133,posY,226,posY+17,9);
    barFarView->defineActualHealth((int)floor(farViewFactor*9));                                                          
-   buttonFarViewSum = list->insertButton(198,posY,208,posY+17,
+   buttonFarViewSum = list->insertButton(228,posY,238,posY+17,
                                          fnt.createUnicode(0x25BA),0);
    buttonFarViewSum->defineFont(DNT_FONT_ARIAL, 9);
-   list->insertPicture(220,posY,40,223,
+   list->insertPicture(245,posY,40,223,
                      dir.getRealFile("texturas/options/farview.png").c_str());
 
    /************************************************
@@ -1298,6 +1330,26 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          }
       }
 
+      /* Splatting Type */
+      else if(object == (guiObject*) buttonSplattingSum) 
+      {
+         splattingType++;
+         if(splattingType > DNT_SPLATTING_SHADER)
+         {
+            splattingType = DNT_SPLATTING_SHADER;
+         }
+         txtSplatting->setText(splattingTypeName());
+      }
+      else if(object == (guiObject*) buttonSplattingDec) 
+      {
+         splattingType--;
+         if(splattingType < DNT_SPLATTING_NONE)
+         {
+            splattingType = DNT_SPLATTING_NONE;
+         }
+         txtSplatting->setText(splattingTypeName());
+      }
+
       /* Stencil Buffer Size */
       else if(object == (guiObject*) buttonStencilSum) 
       {
@@ -1375,7 +1427,6 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
       {
          enableParticles = cxSelParticles->isSelected();
          enableGrass = cxSelGrass->isSelected();
-         enableMultiTexture = cxSelMultiTexture->isSelected();
          enableAnisotropic = cxSelAnisotropic->isSelected();
          autoEndTurn = cxSelAutoEndTurn->isSelected();
          alwaysRun = cxSelAlwaysRun->isSelected();
@@ -1418,6 +1469,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          screenHeight = prevHeight;
          antiAliasing = prevAntiAliasing;
          stencilBufferSize = prevStencilBufferSize;
+         splattingType = prevSplattingType;
          farViewFactor = prevFarViewFactor;
          
          /* Keys to previous values too */
@@ -1532,20 +1584,58 @@ bool options::getEnableGrass()
 }
 
 /****************************************************************
- *                     setEnableMultiTexture                    *
+ *                  verifySplattingAvailability                 *
  ****************************************************************/
-void options::setEnableMultiTexture(bool val)
+void options::verifySplattingAvailability()
 {
-   enableMultiTexture = val;
+   extensions ext;
+
+   switch(splattingType)
+   {
+      case DNT_SPLATTING_SHADER:
+      {
+         if(!ext.hasShader())
+         {
+            /* Hasn't shader, let's try as multitexture extension */
+            if(ext.hasMultiTexture())
+            {
+               splattingType = DNT_SPLATTING_EXTENSION;
+            }
+            else
+            {
+               /* Must disable */
+               splattingType = DNT_SPLATTING_NONE;
+            }
+         }
+      }
+      break;
+      case DNT_SPLATTING_EXTENSION:
+      {
+         if(!ext.hasMultiTexture())
+         {
+            /* No extension, must disable */
+            splattingType = DNT_SPLATTING_NONE;
+         }
+      }
+      break;
+   }
 }
 
 /****************************************************************
- *                     getEnableMultiTexture                    *
+ *                        getSplattingType                      *
  ****************************************************************/
-bool options::getEnableMultiTexture()
+int options::getSplattingType()
 {
-   extensions ext;
-   return(enableMultiTexture && ext.hasMultiTexture());
+   return(splattingType);
+}
+
+/****************************************************************
+ *                        setSplattingType                      *
+ ****************************************************************/
+void options::setSplattingType(int t)
+{
+   splattingType = t;
+   verifySplattingAvailability();
 }
 
 /****************************************************************
@@ -1741,7 +1831,7 @@ bool   options::enableFullScreen = false;
 int    options::antiAliasing = 4;
 int    options::stencilBufferSize = 8;
 float  options::farViewFactor = 1.0;
-bool   options::enableMultiTexture = true;
+int    options::splattingType = DNT_SPLATTING_SHADER;
 bool   options::autoEndTurn = true;
 bool   options::showEnemyCircles = false;
 bool   options::highlightEnemy = true;

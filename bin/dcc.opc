@@ -1,5 +1,5 @@
 # Mandatory Version Definition
-Version = 0.5
+Version = 0.8
 # Sound Options
 SoundVolume = 128
 MusicVolume = 90
@@ -20,7 +20,7 @@ Reflexions = 2
 Shadows = 1
 AntiAliasing = 4
 FarViewFactor = 1.00
-MultiTexture = true
+SplattingType = 2
 Anisotropic = true
 # Keyboard Preferences
 cameraRotateLeft = 276

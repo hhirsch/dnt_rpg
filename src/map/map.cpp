@@ -552,7 +552,6 @@ mapTexture* Map::getTexture(GLuint id)
 GLuint Map::insertTexture(string arq, string name)
 {
    dirs dir;
-   options opt;
    mapTexture* tex;
    int aux;
 
@@ -1097,13 +1096,12 @@ void Map::renderFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
       return;
    }
 
-   /* Verify if will draw with shaders or multitexture extensions.
-    * FIXME: Option instead of auto select */  
-   if(ext.hasShader())
+   /* Verify if will draw with shaders or multitexture extensions. */
+   if(opt.getSplattingType() == DNT_SPLATTING_SHADER)
    {
       renderOutdoorShader();
    }
-   else
+   else if(opt.getSplattingType() == DNT_SPLATTING_EXTENSION)
    {
       renderOutdoorMultitexture();
    }
@@ -1311,8 +1309,7 @@ void Map::renderFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
                       GLfloat** matriz, bool selectionRender)
 {
    /* Draw Terrain */
-   options opt;
-   if( (outdoor) && (opt.getEnableMultiTexture()) )
+   if( (outdoor) && (opt.getSplattingType() != DNT_SPLATTING_NONE) )
    {
       renderFloorOutdoor(cameraX, cameraY, cameraZ, matriz, selectionRender);
    }
@@ -1491,8 +1488,7 @@ void Map::renderWalls(GLfloat cameraX, GLfloat cameraY,
    }
 
    /* Now, finally render! */
-   options option;
-   wallRenderer->render((option.getReflexionType() >= REFLEXIONS_ALL) &&
+   wallRenderer->render((opt.getReflexionType() >= REFLEXIONS_ALL) &&
                         (!isOutdoor()));
 
 }
@@ -2572,7 +2568,6 @@ void Map::drawMiniMap()
    int mapSizeZ;
    GLfloat ratio;
    GLfloat height;
-   options opt;
 
    /* Define Size to render */
    mapSizeX = (int)squareMiniSize*(x);

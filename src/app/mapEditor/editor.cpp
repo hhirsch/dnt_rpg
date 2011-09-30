@@ -643,7 +643,14 @@ void editor::draw()
    /* Invert multitexture if desired */
    if(gui->getInvertMultiTexture())
    {
-      opt.setEnableMultiTexture(!opt.getEnableMultiTexture());
+      if(opt.getSplattingType() == DNT_SPLATTING_NONE)
+      {
+         opt.setSplattingType(DNT_SPLATTING_SHADER);
+      }
+      else
+      {
+         opt.setSplattingType(DNT_SPLATTING_NONE);
+      }
    }
 
    /* Redefine camera position */
@@ -848,7 +855,14 @@ void editor::draw()
    /* Invert multitexture if desired */
    if(gui->getInvertMultiTexture())
    {
-      opt.setEnableMultiTexture(!opt.getEnableMultiTexture());
+      if(opt.getSplattingType() == DNT_SPLATTING_NONE)
+      {
+         opt.setSplattingType(DNT_SPLATTING_SHADER);
+      }
+      else
+      {
+         opt.setSplattingType(DNT_SPLATTING_NONE);
+      }
    }
 }
 

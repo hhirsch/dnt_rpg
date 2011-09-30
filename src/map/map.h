@@ -33,6 +33,7 @@
 #include "../etc/shader.h"
 #include "../classes/object.h"
 #include "../classes/weapon.h"
+#include "../engine/options.h"
 
 #include <string>
 using namespace std;
@@ -635,6 +636,7 @@ class Map
 
       /* Things for Shader Splatting */
       extensions ext;            /**< Extensions controller */
+      options opt;               /**< Options */
       GLuint shaderAlphaTexture; /**< The alpha texture used for shader splat */
       shader splattingShader;    /**< The shader for splatting textures */
       bool shaderAlphaDefined;   /**< If already defined the alpha texture */

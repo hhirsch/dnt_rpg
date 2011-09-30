@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -71,6 +71,10 @@ enum
    /* Keys count */
    DNT_TOTAL_KEYS
 };
+
+#define DNT_SPLATTING_NONE        0    /**< No texture spatting */
+#define DNT_SPLATTING_EXTENSION   1    /**< Splatting by OpenGL extensions */
+#define DNT_SPLATTING_SHADER      2    /**< Splatting by Shader (fastest) */
 
 /* Firsts and Lasts for the tabs */
 #define DNT_KEY_FIRST_CAMERA     DNT_KEY_CAMERA_ROTATE_LEFT
@@ -155,12 +159,12 @@ class options
       /*! Verify if the fullscreen is enabled
        * \return -> true if fullscreen is enabled */
       bool getEnableFullScreen();
-      /*! Verify if the multitexture is enabled (and avalaible) 
-       * \return true if enabled */
-      bool getEnableMultiTexture();
-      /*! Enable/disable the multitexture 
-       * \param val -> true to enable */
-      void setEnableMultiTexture(bool val);
+      /*! Get Splatting type 
+       * \return splatting type constant */
+      int getSplattingType();
+      /*! Set splatting type
+       * \param t -> splatting type constant */
+      void setSplattingType(int t);
       /*! Verify if the anisotropic filter is enabled (and available)
        * \return true if enabled */
       bool getEnableAnisotropicFilter();
@@ -209,6 +213,9 @@ class options
       /*! Set the default keys */
       void defaultKeys();
 
+      /*! Verify if current splatting is avaiable or not */
+      void verifySplattingAvailability();
+
       textBox* txtLanguage;        /**< Language Text on Window */
       textBox* txtCamera;          /**< Camera Mode Text on Window */
       textBox* txtReflexion;       /**< Reflexion Type Text on Window */
@@ -216,6 +223,7 @@ class options
       textBox* txtStencil;         /**< Stencil buffer size Text on Window */
       textBox* txtResolution;      /**< Resolution Text on Window */
       textBox* txtAntiAliasing;    /**< AntiAliasing Text on Window */
+      textBox* txtSplatting;       /**< Splatting text on window */
       
       healthBar* barMusicVolume;   /**< Music Volume Text on Window*/
       healthBar* barSndfxVolume;   /**< Sound Effects Volume Text on Window*/
@@ -236,7 +244,7 @@ class options
       static int     antiAliasing;    /**< Current Anti-Aliasing */
       static int     stencilBufferSize; /**< Current Stencil buffer size */
       static float   farViewFactor;   /**< Current FarView Factor */
-      static bool    enableMultiTexture; /**< If terrain multi texture */
+      static int     splattingType;    /**< Texture Splatting type */
       static bool    enableAnisotropic; /**< If anisotropic filter is used */
       static bool    autoEndTurn;     /**< If will autoend turn or not */
       static bool    showEnemyCircles; /**< if show enemies battle circles */
@@ -258,6 +266,7 @@ class options
       int      prevStencilBufferSize; /**< Previous stencil buffer size */
       int      prevAntiAliasing;   /**< Previous Used AntiAliasing */
       float    prevFarViewFactor;  /**< Previous FarViewFactor */
+      int      prevSplattingType;  /**< Previous Splatting type */
       int      resPosition;        /**< Resolution Position on Vector */
       int      curKey;             /**< Current Key index to scan */
       static Uint32 prevKeys[DNT_TOTAL_KEYS]; /**< The previous key values */
@@ -297,12 +306,14 @@ class options
       button* buttonFarViewSum;
       button* buttonFarViewDec;
 
+      button* buttonSplattingSum;
+      button* buttonSplattingDec;
+
       cxSel* cxSelFullScreen;
 
       cxSel* cxSelGrass;
       cxSel* cxSelParticles;
 
-      cxSel* cxSelMultiTexture;
       cxSel* cxSelAnisotropic;
 
       cxSel* cxSelShowEnemyCircles;
@@ -340,6 +351,10 @@ class options
       /*! Get the stencil buffer size name
        * \return name of the stencil buffer size */
       string stencilBufferSizeName();
+
+      /*! Get a string with splattingType name
+       * \return name of the spalttingType */
+      string splattingTypeName();
 
 };
 
