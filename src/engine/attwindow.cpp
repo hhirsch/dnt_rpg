@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -105,7 +105,7 @@ attWindow::attWindow(skills* savSkill, guiInterface* inter,
    intWindow->getObjectsList()->insertPicture(135,41,0,0,
                                dir.getRealFile("skills/Img/forca.png").c_str());
 
-   /* Dextery */
+   /* Dexterity */
    intWindow->getObjectsList()->insertTextBox(9,84,85,97,0,
                                               gettext("Dexterity"));
    attPoints[1] = intWindow->getObjectsList()->insertTextBox(103,82,122,99,
@@ -224,7 +224,8 @@ attWindow::attWindow(skills* savSkill, guiInterface* inter,
                                              gettext("Attribute Description"));
    textDescTitle->setFont(DNT_FONT_TIMES,12,DNT_FONT_ALIGN_CENTER,
                           DNT_FONT_STYLE_BOLD);
-   
+   textDescTitle->setBackColor(110, 0, 0);
+
    textDesc = intWindow->getObjectsList()->insertRolBar(248,54,519,245,"");
 
    setDescription(1);
