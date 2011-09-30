@@ -96,10 +96,6 @@ engine::engine()
    /* Set Language, base on options */
    option->setLanguage();
 
-   /* Define all OpenGL Extensions used */
-   extensions ext;
-   ext.defineAllExtensions();
-
    /* Load Skills List */
    skillsList.init();
   

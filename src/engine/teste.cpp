@@ -69,6 +69,11 @@ int main(int argc, char **argv)
    Farso_Init(&screen,"DccNiTghtmare", opt.getScreenWidth(), 
               opt.getScreenHeight(),  opt.getEnableFullScreen(), 
               opt.getAntiAliasing(), opt.getStencilBufferSize());
+   
+   /* Define all OpenGL Extensions used */
+   extensions ext;
+   ext.defineAllExtensions();
+   opt.verifyOptionsAvailability();
 
    engine* gameEngine = new engine();
    

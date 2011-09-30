@@ -198,6 +198,9 @@ class options
        * \param factor -> new farview factor */
       void setFarViewFactor(float factor);
 
+      /*! Verify options availability */
+      void verifyOptionsAvailability();
+
       /*! Get the SDL_Key value for the DNT key
        * \param key -> DNT key constant
        * \return -> SDLK_ constant */

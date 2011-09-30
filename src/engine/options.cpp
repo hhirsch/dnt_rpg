@@ -414,7 +414,6 @@ bool options::load(string file)
       {
          /* Read Splatting option */
          sscanf(value.c_str(), "%d", &splattingType);
-         verifySplattingAvailability();
       }
       else if(key == "Anisotropic")
       {
@@ -1584,6 +1583,14 @@ bool options::getEnableGrass()
 }
 
 /****************************************************************
+ *                   verifyOptionsAvailability                  *
+ ****************************************************************/
+void options::verifyOptionsAvailability()
+{
+   verifySplattingAvailability();
+}
+
+/****************************************************************
  *                  verifySplattingAvailability                 *
  ****************************************************************/
 void options::verifySplattingAvailability()
@@ -1596,6 +1603,8 @@ void options::verifySplattingAvailability()
       {
          if(!ext.hasShader())
          {
+            cerr << "Warning: no shader; reverting splatting to "
+                 << "glMultitextureARB" << endl;
             /* Hasn't shader, let's try as multitexture extension */
             if(ext.hasMultiTexture())
             {
@@ -1604,6 +1613,8 @@ void options::verifySplattingAvailability()
             else
             {
                /* Must disable */
+               cerr << "Warning: no glMultitextureARB; no splatting available!"
+                    << endl;
                splattingType = DNT_SPLATTING_NONE;
             }
          }
@@ -1613,6 +1624,8 @@ void options::verifySplattingAvailability()
       {
          if(!ext.hasMultiTexture())
          {
+            cerr << "Warning: no glMultitextureARB; no splatting available!"
+                 << endl;
             /* No extension, must disable */
             splattingType = DNT_SPLATTING_NONE;
          }
