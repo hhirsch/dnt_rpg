@@ -48,15 +48,20 @@ void nodeEditor::verifyAction(Uint8* keys, GLfloat mouseX, GLfloat mouseY,
    scene dntScene;
    sceneNode* scNode;
 
-   /* Create a bounding box for the mouse position */
-   boundingBox mouseBox;
-   mouseBox.setMin(mouseX-4, mouseY-4.0, mouseZ-4);
-   mouseBox.setMax(mouseX+4, mouseY+4.0, mouseZ+4);
-
-   scNode = dntScene.getSceneNode(mouseBox);
-   if(scNode)
+   if(mButton & SDL_BUTTON(1))
    {
-     selectNode(scNode);
+      /* Create a bounding box for the mouse position */
+      boundingBox mouseBox;
+      mouseBox.setMin(mouseX-4, mouseY-4.0, mouseZ-4);
+      mouseBox.setMax(mouseX+4, mouseY+4.0, mouseZ+4);
+
+      scNode = dntScene.getSceneNode(mouseBox);
+      if(scNode)
+      {
+
+         selectNode(scNode);
+         openWindow();
+      }
    }
 }
 
@@ -65,7 +70,187 @@ void nodeEditor::verifyAction(Uint8* keys, GLfloat mouseX, GLfloat mouseY,
  ***********************************************************************/
 void nodeEditor::selectNode(sceneNode* scNode)
 {
+   if(curNode)
+   {
+      /* TODO: Must put back the curNode to the map */
+   }
    curNode = scNode;
+}
+
+/***********************************************************************
+ *                               eventGot                              *
+ ***********************************************************************/
+bool nodeEditor::eventGot(int eventInfo, guiObject* obj)
+{
+   float delta=1.0f;
+
+   if( (!nodeWindow) || (!curNode))
+   {
+      /* If no window, no events here! */
+      return(false);
+   }
+
+   if(eventInfo == FARSO_EVENT_ON_PRESS_TAB_BUTTON)
+   {
+      /* Angles */
+      if(obj == clearRot)
+      {
+         curNode->setAngle(0.0f, 0.0f, 0.0f);
+         return(true);
+      }
+      else if(obj == rotX[0])
+      {
+         curNode->setAngle(curNode->getAngleX()-delta, 
+                           curNode->getAngleY(),
+                           curNode->getAngleZ());
+         return(true);
+      }
+      else if(obj == rotX[1])
+      {
+         curNode->setAngle(curNode->getAngleX()+delta, 
+                           curNode->getAngleY(),
+                           curNode->getAngleZ());
+         return(true);
+      }
+      else if(obj == rotY[0])
+      {
+         curNode->setAngle(curNode->getAngleX(), 
+                           curNode->getAngleY()-delta,
+                           curNode->getAngleZ());
+         return(true);
+      }
+      else if(obj == rotY[1])
+      {
+         curNode->setAngle(curNode->getAngleX(), 
+                           curNode->getAngleY()+delta,
+                           curNode->getAngleZ());
+         return(true);
+      }
+      else if(obj == rotZ[0])
+      {
+         curNode->setAngle(curNode->getAngleX(), 
+                           curNode->getAngleY(),
+                           curNode->getAngleZ()-delta);
+         return(true);
+      }
+      else if(obj == rotZ[0])
+      {
+         curNode->setAngle(curNode->getAngleX(), 
+                           curNode->getAngleY(),
+                           curNode->getAngleZ()+delta);
+         return(true);
+      }
+      /* Position */
+      else if(obj == moveX[0])
+      {
+         if(!gridMode->isSelected())
+         {
+            curNode->setPosition(curNode->getPosX()-delta, 
+                                 curNode->getPosY(),
+                                 curNode->getPosZ());
+            return(true);
+         }
+      }
+      else if(obj == moveX[1])
+      {
+         if(!gridMode->isSelected())
+         {
+            curNode->setPosition(curNode->getPosX()+delta, 
+                                 curNode->getPosY(),
+                                 curNode->getPosZ());
+            return(true);
+         }
+      }
+      else if(obj == moveY[0])
+      {
+         curNode->setPosition(curNode->getPosX(), 
+                              curNode->getPosY()+delta,
+                              curNode->getPosZ());
+         return(true);
+      }
+      else if(obj == moveY[1])
+      {
+         curNode->setPosition(curNode->getPosX(), 
+                              curNode->getPosY()-delta,
+                              curNode->getPosZ());
+         return(true);
+      }
+      else if(obj == moveZ[0])
+      {
+         if(!gridMode->isSelected())
+         {
+            curNode->setPosition(curNode->getPosX(), 
+                                 curNode->getPosY(),
+                                 curNode->getPosZ()-delta);
+            return(true);
+         }
+      }
+      else if(obj == moveZ[1])
+      {
+         if(!gridMode->isSelected())
+         {
+            curNode->setPosition(curNode->getPosX(), 
+                                 curNode->getPosY(),
+                                 curNode->getPosZ()+delta);
+            return(true);
+         }
+      }
+   }
+   else if(eventInfo == FARSO_EVENT_PRESSED_TAB_BUTTON)
+   {
+      if(obj == moveX[0])
+      {
+         if(gridMode->isSelected())
+         {
+            int pm10 = round(curNode->getPosX());
+            pm10 = (pm10 - (pm10 % 10)) - delta*10;
+            curNode->setPosition(pm10, 
+                                 curNode->getPosY(),
+                                 curNode->getPosZ());
+            return(true);
+         }
+      }
+      else if(obj == moveX[1])
+      {
+         if(gridMode->isSelected())
+         {
+            int pm10 = round(curNode->getPosX());
+            pm10 = (pm10 - (pm10 % 10)) + delta*10;
+            curNode->setPosition(pm10, 
+                                 curNode->getPosY(),
+                                 curNode->getPosZ());
+            return(true);
+         }
+      }
+      else if(obj == moveZ[0])
+      {
+         if(gridMode->isSelected())
+         {
+            int pm10 = round(curNode->getPosZ());
+            pm10 = (pm10 - (pm10 % 10)) - delta*10;
+            curNode->setPosition(curNode->getPosX(), 
+                                 curNode->getPosY(),
+                                 pm10);
+            return(true);
+         }
+      }
+      else if(obj == moveZ[1])
+      {
+         if(gridMode->isSelected())
+         {
+            int pm10 = round(curNode->getPosZ());
+            pm10 = (pm10 - (pm10 % 10)) + delta*10;
+            curNode->setPosition(curNode->getPosX(), 
+                                 curNode->getPosY(),
+                                 pm10);
+            return(true);
+         }
+      
+      }
+      
+   }
+
+   return(false);
 }
 
 /***********************************************************************
@@ -92,7 +277,7 @@ void nodeEditor::openWindow()
       rotY[1]->setMouseHint("Inc Y Rot");
       rotZ[0] = nodeTab->insertButton(114,70,143,100);
       rotZ[0]->setMouseHint("Dec Z Rot");
-      rotZ[1] = nodeTab->insertButton(155,70,143,100);
+      rotZ[1] = nodeTab->insertButton(155,70,182,100);
       rotZ[1]->setMouseHint("Inc Z Rot");
 
       moveX[0] = nodeTab->insertButton(0,41,18,57);
@@ -109,9 +294,16 @@ void nodeEditor::openWindow()
       moveY[0]->setMouseHint("Up");
       moveY[1] = nodeTab->insertButton(86,59,103,98);
       moveY[1]->setMouseHint("Down");
-     
+    
+      deleteNode = nodeTab->insertButton(37,65,59,98);
+      deleteNode->setMouseHint("Delete");
+
       clearRot = nodeTab->insertButton(59,8,114,47);
       clearRot->setMouseHint("Clear Rotations");
+
+      gridMode = nodeWindow->getObjectsList()->insertCxSel(12,134,false);
+      nodeWindow->getObjectsList()->insertTextBox(24,130,150,144,0,
+            "Grid Mode");
 
       /* Finally, open */
       nodeWindow->setExternPointer(&nodeWindow);
@@ -119,4 +311,49 @@ void nodeEditor::openWindow()
    }
 }
 
+
+/***********************************************************************
+ *                             drawTemporary                           *
+ ***********************************************************************/
+void nodeEditor::drawTemporary()
+{
+   boundingBox b;
+
+   glDisable(GL_FOG);
+   glDisable(GL_LIGHTING);
+   if(curNode)
+   {
+      b = curNode->getBoundingBox();
+      glColor4f(0.0f, 0.5f, 0.8f, 1.0f);
+
+      glBegin(GL_QUADS);
+
+        glVertex3f(b.x1-2, b.y1+1, b.z1);
+        glVertex3f(b.x1-2, b.y1+1, b.z2);
+        glVertex3f(b.x1+2, b.y1+1, b.z2);
+        glVertex3f(b.x1+2, b.y1+1, b.z1);
+      
+        glVertex3f(b.x2-2, b.y1+1, b.z1);
+        glVertex3f(b.x2-2, b.y1+1, b.z2);
+        glVertex3f(b.x2+2, b.y1+1, b.z2);
+        glVertex3f(b.x2+2, b.y1+1, b.z1);
+
+        glVertex3f(b.x1, b.y1+1, b.z1-2);
+        glVertex3f(b.x2, b.y1+1, b.z1-2);
+        glVertex3f(b.x2, b.y1+1, b.z1+2);
+        glVertex3f(b.x1, b.y1+1, b.z1+2);
+
+        glVertex3f(b.x1, b.y1+1, b.z2-2);
+        glVertex3f(b.x2, b.y1+1, b.z2-2);
+        glVertex3f(b.x2, b.y1+1, b.z2+2);
+        glVertex3f(b.x1, b.y1+1, b.z2+2);
+
+      glEnd();
+   }
+
+
+   glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+   glEnable(GL_FOG);
+   glEnable(GL_LIGHTING);
+}
 

@@ -60,6 +60,13 @@ class nodeEditor
       /*! Open the node window */
       void openWindow();
 
+      /*! Treat GUI events
+       * \return true if some event occurred here */
+      bool eventGot(int eventInfo, guiObject* obj);
+
+      /*! Draw temporary elements */
+      void drawTemporary();
+
    protected:
 
       sceneNode* curNode;  /**< current node to edit */
@@ -77,6 +84,9 @@ class nodeEditor
       oneTabButton* moveZ[2]; /**< Translate on Z */
 
       oneTabButton* clearRot; /**< Clear Rotation button */
+      oneTabButton* deleteNode; /**< Delete Node Button */
+
+      cxSel* gridMode;        /**< Selector if will grid mode or not */
 };
 
 #endif

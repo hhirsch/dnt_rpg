@@ -28,6 +28,7 @@
 #include "listwindow.h"
 #include "grasswindow.h"
 #include "waterwindow.h"
+#include "nodeeditor.h"
 
 /* Return Constants */
 #define GUI_IO_NOTHING              0
@@ -128,6 +129,8 @@ class guiIO
       camera gameCamera;               /**< The Game Camera */
 
       guiInterface* getGui(){return(gui);};
+
+      nodeEditor* getNodeEditor(){return(nodeEdit);};
 
    private:
       
@@ -276,7 +279,9 @@ class guiIO
       textBar* fogEnd;                 /**< Fog End Text */
       button* fogApplyButton;              /**< Fog Apply Button */
       void openFogWindow();               /**< Open Fog Window */
-      
+     
+
+      nodeEditor* nodeEdit;          /**< Scene node editor */
 };
 
 #endif

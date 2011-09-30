@@ -59,6 +59,8 @@ guiIO::guiIO()
    openMessageWindow();
    openObjectWindow();
    openMainWindow();
+
+   nodeEdit = new nodeEditor(gui);
 }
 
 /****************************************************************
@@ -67,6 +69,7 @@ guiIO::guiIO()
 guiIO::~guiIO()
 {
    delete(gui);
+   delete(nodeEdit);
    delete(grWindow);
    delete(ltWindow);
    delete(wtWindow);
@@ -689,6 +692,9 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
    else if(wtWindow->eventGot(eventInfo, object))
    {
    }
+   else if(nodeEdit->eventGot(eventInfo, object))
+   {
+   }
 
    switch(eventInfo)
    {
@@ -924,7 +930,12 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          else if(object == (guiObject*) objectJunkButton)
          {
             ltWindow->setState(STATE_JUNK);
-         } 
+         }
+         else if(object == (guiObject*) objectSelectButton)
+         {
+            state = GUI_IO_STATE_OBJECTS;
+            tool = TOOL_NODE_EDITOR;
+         }
          /* Particles Buttons */
          else if(object == (guiObject*) fireButton)
          {

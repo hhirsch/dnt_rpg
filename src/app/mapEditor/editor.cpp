@@ -76,8 +76,6 @@ editor::editor()
    races rc;
    rc.init();
 
-   nodeEdit = new nodeEditor(gui->getGui());
-
    terrainEditor = NULL;
    portalEditor = NULL;
    wallEditor = NULL;
@@ -126,7 +124,6 @@ editor::~editor()
    cl.finish();
    races rc;
    rc.finish();
-   delete(nodeEdit);
    delete(gui);
    curScene.finish();
    wTypes.finish();
@@ -734,7 +731,8 @@ void editor::draw()
       /* Render All Static Scenery Objects */
       renderSceneryObjects();
 
-      glPushMatrix();   
+      glPushMatrix();
+         gui->getNodeEditor()->drawTemporary();
          if(gui->getState() == GUI_IO_STATE_TERRAIN)
          {
             terrainEditor->drawTemporary();
@@ -947,18 +945,29 @@ void editor::doEditorIO()
    }
    else if( (gui->getState() == GUI_IO_STATE_OBJECTS) && (mapOpened))
    {
-      string objFile = gui->getSelectedText();
-      if( (!objFile.empty()) && (objFile != objectEditor->getObjectFileName()))
+      /* Object Add */
+      if(gui->getTool() == TOOL_OBSTACLE_ADD)
       {
-         if(!objectEditor->getObjectFileName().empty())
+         string objFile = gui->getSelectedText();
+         if( (!objFile.empty()) && 
+             (objFile != objectEditor->getObjectFileName()))
          {
-            objectEditor->deleteObject();
+            if(!objectEditor->getObjectFileName().empty())
+            {
+               objectEditor->deleteObject();
+            }
+            object* obj = createObject(objFile, map->getFileName());
+            objectEditor->defineActualObject(obj, objFile);
          }
-         object* obj = createObject(objFile, map->getFileName());
-         objectEditor->defineActualObject(obj, objFile);
+         objectEditor->verifyAction(keys, xReal, yReal, zReal, mButton, 
+               mouseX, mouseY, gui->getTool(), proj, modl, viewPort);
       }
-      objectEditor->verifyAction(keys, xReal, yReal, zReal, mButton, 
-            mouseX, mouseY, gui->getTool(), proj, modl, viewPort);
+      /* Object Node Editor */
+      else if(gui->getTool() == TOOL_NODE_EDITOR)
+      {
+         gui->getNodeEditor()->verifyAction(keys, xReal, yReal, zReal, mButton, 
+               mouseX, mouseY, proj, modl, viewPort);
+      }
    }
    else if( (gui->getState() == GUI_IO_STATE_PARTICLES) && (mapOpened))
    {
