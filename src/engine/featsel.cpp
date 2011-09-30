@@ -164,13 +164,15 @@ void featSelWindow::open(character* pers, featsList* fList, int total)
    intWindow = inter->insertWindow(centerX-200, centerY-200, 
          centerX+200, centerY+200, gettext("Talents"));
 
-   intWindow->getObjectsList()->insertTextBox(10, 18, 194, 36, 1, 
-         gettext("Available"))->setFont(DNT_FONT_ARIAL,12,
-         DNT_FONT_ALIGN_CENTER, DNT_FONT_STYLE_BOLD);
+   textBox* tb = intWindow->getObjectsList()->insertTextBox(10, 18, 194, 36, 1, 
+         gettext("Available"));
+   tb->setFont(DNT_FONT_ARIAL,12,DNT_FONT_ALIGN_CENTER, DNT_FONT_STYLE_BOLD);
+   tb->setBackColor(110, 0, 0);
 
-   intWindow->getObjectsList()->insertTextBox(195, 18, 390, 36, 1, 
-         gettext("Selected"))->setFont(DNT_FONT_ARIAL,12,
-         DNT_FONT_ALIGN_CENTER, DNT_FONT_STYLE_BOLD);
+   tb = intWindow->getObjectsList()->insertTextBox(195, 18, 390, 36, 1, 
+         gettext("Selected"));
+   tb->setFont(DNT_FONT_ARIAL,12,DNT_FONT_ALIGN_CENTER, DNT_FONT_STYLE_BOLD);
+   tb->setBackColor(110, 0, 0);
 
    /* Each Feat */
    y = 37;
@@ -184,10 +186,12 @@ void featSelWindow::open(character* pers, featsList* fList, int total)
       textAvail[i]->setReceiveEvents(true);
       buttonInsert[i] = intWindow->getObjectsList()->insertButton(176, y+9, 
             190, y+27, fnt.createUnicode(0x25BA),0);
+      buttonInsert[i]->defineFont(DNT_FONT_ARIAL, 9);
 
       /* Selected */
       buttonRemove[i] =  intWindow->getObjectsList()->insertButton(200, y+9, 
             214, y+27, fnt.createUnicode(0x25C4),0); 
+      buttonRemove[i]->defineFont(DNT_FONT_ARIAL, 9);
       picSel[i] = intWindow->getObjectsList()->insertPicture(216,y+2,0,0,NULL);
       picSel[i]->setSurfaceDeletion(false);
       textSel[i] = intWindow->getObjectsList()->insertTextBox(250,y,388,y+34,
@@ -204,28 +208,34 @@ void featSelWindow::open(character* pers, featsList* fList, int total)
    /* Available page selectors */
    prevAvailButton = intWindow->getObjectsList()->insertButton(10, y+6,
                                     25, y+24, fnt.createUnicode(0x25C4),0);
+   prevAvailButton->defineFont(DNT_FONT_ARIAL, 9);
    textAvailPage = intWindow->getObjectsList()->insertTextBox(26, y+6, 
                                    178, y+24, 1, "0/0");
    textAvailPage->setFont(DNT_FONT_ARIAL,10,DNT_FONT_ALIGN_CENTER,
                           DNT_FONT_STYLE_BOLD);
    nextAvailButton = intWindow->getObjectsList()->insertButton(179, y+6,
                                     194, y+24, fnt.createUnicode(0x25BA),0);
+   nextAvailButton->defineFont(DNT_FONT_ARIAL, 9);
 
    /* Selected page selectors */ 
    prevSelButton = intWindow->getObjectsList()->insertButton(195, y+6,
                                     210, y+24, fnt.createUnicode(0x25C4),0);
+   prevSelButton->defineFont(DNT_FONT_ARIAL, 9);
    textSelPage = intWindow->getObjectsList()->insertTextBox(211, y+6, 
                                    374, y+24, 1, "0/0");
    textSelPage->setFont(DNT_FONT_ARIAL,10,DNT_FONT_ALIGN_CENTER,
                           DNT_FONT_STYLE_BOLD);
    nextSelButton = intWindow->getObjectsList()->insertButton(375, y+6,
                                    390, y+24, fnt.createUnicode(0x25BA),0);
+   nextSelButton->defineFont(DNT_FONT_ARIAL, 9);
 
+   y += 2;
    /* Title & Description */
    textTitle = intWindow->getObjectsList()->insertTextBox(10, y+25, 390, y+43,
          1, "");
    textTitle->setFont(DNT_FONT_ARIAL,11,DNT_FONT_ALIGN_CENTER,
          DNT_FONT_STYLE_BOLD);
+   textTitle->setBackColor(102, 0, 0);
    textDescription = intWindow->getObjectsList()->insertRolBar(10, y+44, 
                                    390, 350, "");
    picFeat = intWindow->getObjectsList()->insertPicture(84,354,0,0,NULL);
