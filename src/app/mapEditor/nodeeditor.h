@@ -87,6 +87,9 @@ class nodeEditor
       oneTabButton* deleteNode; /**< Delete Node Button */
 
       cxSel* gridMode;        /**< Selector if will grid mode or not */
+
+      textBar* deltaText;    /**< Delta Value display */
+      float deltaValue;      /**< Delta to move/rotate */
 };
 
 #endif

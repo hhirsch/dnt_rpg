@@ -29,6 +29,7 @@ nodeEditor::nodeEditor(guiInterface* g)
    gui = g;
    nodeWindow = NULL;
    nodeTab = NULL;
+   deltaValue = 1.0f;
 }
 
 /***********************************************************************
@@ -82,13 +83,15 @@ void nodeEditor::selectNode(sceneNode* scNode)
  ***********************************************************************/
 bool nodeEditor::eventGot(int eventInfo, guiObject* obj)
 {
-   float delta=1.0f;
+   float delta=deltaValue;
 
    if( (!nodeWindow) || (!curNode))
    {
       /* If no window, no events here! */
       return(false);
    }
+
+   /* Define Delta Value */
 
    if(eventInfo == FARSO_EVENT_ON_PRESS_TAB_BUTTON)
    {
@@ -249,6 +252,20 @@ bool nodeEditor::eventGot(int eventInfo, guiObject* obj)
       }
       
    }
+   else if(eventInfo == FARSO_EVENT_WROTE_TEXT_BAR)
+   {
+      if(obj == deltaText)
+      {
+         if(!deltaText->getText().empty())
+         {
+            sscanf(deltaText->getText().c_str(),"%f",&deltaValue);
+         }
+         else
+         {
+            deltaValue = 0.0f;
+         }
+      }
+   }
 
    return(false);
 }
@@ -301,9 +318,15 @@ void nodeEditor::openWindow()
       clearRot = nodeTab->insertButton(59,8,114,47);
       clearRot->setMouseHint("Clear Rotations");
 
+      /* Cx Sel for grid mode on move X/Z */
       gridMode = nodeWindow->getObjectsList()->insertCxSel(12,134,false);
-      nodeWindow->getObjectsList()->insertTextBox(24,130,150,144,0,
+      nodeWindow->getObjectsList()->insertTextBox(24,130,79,144,0,
             "Grid Mode");
+
+      /* Delta Value edit */
+      nodeWindow->getObjectsList()->insertTextBox(80,130,120,144,0,"Delta:");
+      deltaText = nodeWindow->getObjectsList()->insertTextBar(122,131,162,145,
+            "1.0",0);
 
       /* Finally, open */
       nodeWindow->setExternPointer(&nodeWindow);
