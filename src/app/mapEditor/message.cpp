@@ -92,6 +92,10 @@ string messageForTool(int tool)
          return("Put Object on Map with Left Mouse Button. "
                 "(x y z) + Right or Middle Buttons to rotate");
       break;
+      case TOOL_NODE_EDITOR:
+         return("Select an sceneNode to edit "
+                "and do changes at the window ");
+      break;
       case TOOL_NPC_ADD:
          return("Put NPC on Map with left mouse Button.");
       break;
