@@ -815,13 +815,13 @@ int engine::loadMap(string arqMapa, bool loadingGame)
    {
       mapWindow->reOpen(gui, actualMap);
    }
-   if(shortcuts->isOpened())
-   {
-      shortcuts->reOpen(gui);
-   }
    if(brief->isOpened())
    {
       brief->reOpen(gui);
+   }
+   if(shortcuts->isOpened())
+   {
+      shortcuts->reOpen(gui);
    }
 
    /* Define Map */
