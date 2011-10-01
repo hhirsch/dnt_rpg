@@ -583,7 +583,7 @@ GLuint Map::insertTexture(string arq, string name)
    tex = new(mapTexture);
 
    /* Insert it at the list */
-   textures.insert(tex);
+   textures.insertAtEnd(tex);
  
    /* Define it */
    tex->fileName = arq.c_str();
