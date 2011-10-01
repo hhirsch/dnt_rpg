@@ -549,7 +549,7 @@ mapTexture* Map::getTexture(GLuint id)
 /********************************************************************
  *                         Insert texture                           *
  ********************************************************************/
-GLuint Map::insertTexture(string arq, string name)
+GLuint Map::insertTexture(string arq, string name, bool atLast)
 {
    dirs dir;
    mapTexture* tex;
@@ -583,7 +583,14 @@ GLuint Map::insertTexture(string arq, string name)
    tex = new(mapTexture);
 
    /* Insert it at the list */
-   textures.insertAtEnd(tex);
+   if(atLast)
+   {
+      textures.insertAtEnd(tex);
+   }
+   else
+   {
+      textures.insert(tex);
+   }
  
    /* Define it */
    tex->fileName = arq.c_str();

@@ -503,8 +503,9 @@ class Map
       mapTexture* getTexture(GLuint id);
       /*! Insert the texture on the map
        * \param arq -> fileName of the texture
-       * \param name -> Name of the texture */
-      GLuint insertTexture(string arq, string name); 
+       * \param name -> Name of the texture
+       * \param atLast -> true to insert at last */
+      GLuint insertTexture(string arq, string name, bool atLast=false); 
       /*! Remove all unused textures from the list */
       void removeUnusedTextures();
 

@@ -617,7 +617,7 @@ int editor::insertTexture(string textureFile)
    SDL_FreeSurface(img);
 
    return(map->insertTexture(gui->getTextureFileName(),
-                             gui->getTextureFileName()));
+                             gui->getTextureFileName(), true));
 
    
 }
