@@ -779,16 +779,26 @@ void Map::removeObject(object* obj)
 }
 
 /******************************************************************
+ *                           getObject                            *
+ ******************************************************************/
+object* Map::getObject(sceneNode* scNode)
+{
+   /* Search all squares for the object */
+   objectsList l;
+   return(l.search(scNode));
+}
+
+/******************************************************************
  *                          insertObject                          *
  ******************************************************************/
 void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal, 
                        GLfloat angleX, GLfloat angleY, GLfloat angleZ,
-                       object* obj, bool collision)
+                       object* obj, bool collision, bool createSceneNode)
 {
    int qx = (int)xReal / squareSize();
    int qz = (int)zReal / squareSize();
    insertObject(xReal, yReal, zReal, angleX, angleY, angleZ, 
-         obj, qx, qz, collision);
+         obj, qx, qz, collision, createSceneNode);
 }
 
 /******************************************************************
@@ -796,10 +806,14 @@ void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal,
  ******************************************************************/
 void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal, 
                        GLfloat angleX, GLfloat angleY, GLfloat angleZ, 
-                       object* obj, int qx, int qz, bool collision)
+                       object* obj, int qx, int qz, bool collision,
+                       bool createSceneNode)
 {
-   /* Define the object Position */
-   obj->createSceneNode(xReal, yReal, zReal, angleX, angleY, angleZ);
+   if(createSceneNode)
+   {
+      /* Define the object Position */
+      obj->createSceneNode(xReal, yReal, zReal, angleX, angleY, angleZ);
+   }
 
    /* Get the main square where object is */
    Square* saux = relativeSquare(qx,qz);
@@ -883,6 +897,28 @@ void Map::removeWall(wall* w)
    {
       walls.remove(w);
    }
+}
+
+/********************************************************************
+ *                             getDoor                              *
+ ********************************************************************/
+door* Map::getDoor(sceneNode* sc)
+{
+   door* d = getFirstDoor();
+   int i;
+
+   for(i=0; i < doors.getTotal(); i++)
+   {
+      if(d->obj->scNode == sc)
+      {
+         /* Found! */
+         return(d);
+      }
+
+      d = (door*)d->getNext();
+   }
+
+   return(NULL);
 }
 
 /********************************************************************

@@ -273,6 +273,8 @@ void editor::openMap()
          }
          delete(arq);
       }
+
+      gui->getNodeEditor()->setMap(map, NPCs);
       /* Open FOG */
       map->fog.apply(map->isOutdoor(), OUTDOOR_FARVIEW, INDOOR_FARVIEW);
 
@@ -322,6 +324,9 @@ void editor::saveMap()
    string tmp;
    if(mapOpened)
    {
+      /* Flush changes on nodes */
+      gui->getNodeEditor()->flush();
+
       /* Remove the models that aren't used */
       curScene.removeUnusedModels();
 
@@ -500,6 +505,7 @@ void editor::newMap()
    NPCs = new (characterList);
    npcController = new npcs(map, NPCs, features);
    particleSystem->setActualMap(map, NULL);
+   gui->getNodeEditor()->setMap(map, NPCs);
    gui->showMessage("Created New Game Map!");
    map->fog.apply(map->isOutdoor(), OUTDOOR_FARVIEW, INDOOR_FARVIEW);
    gui->setFog(&map->fog); 

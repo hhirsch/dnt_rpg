@@ -859,6 +859,29 @@ object* objectsList::search(string fileName, GLfloat posX, GLfloat posY,
 
    /* Not found! */
    return(NULL);
+}
+
+/*********************************************************************
+ *                              search                               *
+ *********************************************************************/
+object* objectsList::search(sceneNode* scNode)
+{
+   int i;
+   object* cur = first;
+
+   /* Search all the list */
+   for(i=0; i<total; i++)
+   {
+      if(cur->scNode == scNode)
+      {
+         return(cur);
+      }
+      
+      cur = cur->getNext();
+   }
+
+   /* Not found! */
+   return(NULL);
 
 }
 

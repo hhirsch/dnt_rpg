@@ -245,6 +245,10 @@ class objectsList
       static object* search(string fileName, GLfloat posX, GLfloat posY,
                             GLfloat posZ);
 
+      /*! Search for the object on the list with scNode
+       * \return object pointer or NULL */
+      static object* search(sceneNode* scNode);
+
    protected:
       static object* first;       /**< First object on the list */
       static int total;           /**< Total Objects on the list */

@@ -7,10 +7,12 @@
  - New Bounding Box class;
  - Added character info text when mouse over portrait;
  - gui: defined mouse hint for all gui objects;
- - dntMapEditor: Show mouse world coordinates;
  - Added support to MacOSX;
  - Added shader for texture splatting (splatting now can be via
    ARB extensions or GLSL shader);
+ - dntMapEditor: Show mouse world coordinates;
+ - dntMapEditor: grid mode alternative on object XZ move;
+ - dntMapEditor: Tool to select and edit objects;
 
 BugFixes:
  - Fixed a bug that freezes the game when drinking a beer (thanks 

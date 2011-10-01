@@ -372,7 +372,9 @@ class Map
        * \return -> true if can define new heigh, false if can't move. */
       bool defineThingHeight(thing* c, GLfloat nx, GLfloat nz);
 
-
+      /*! Get object related to the sceneNode
+       * \return object's pointer or NULL if not found */
+      object* getObject(sceneNode* scNode);
       /*! Remove Object from Map
        * \param obj -> pointer to map Object
        * \note -> this function will not delete the object pointer.
@@ -384,16 +386,19 @@ class Map
        * \param collision -> true if has collision with object */
       void insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal, 
                         GLfloat angleX, GLfloat angleY, GLfloat angleZ,
-                        object* obj, int qx, int qz, bool collision);
+                        object* obj, int qx, int qz, bool collision,
+                        bool createSceneNode=true);
       /*! Insert Object on Map
        * \param xReal -> xPosition to insert
        * \param yReal -> yPosition to insert
        * \param zReal -> zPosition to insert
        * \param obj -> pointer to mapObject
-       * \param collision -> true if has collision with object */
+       * \param collision -> true if has collision with object
+       * \param createSceneNode -> true to create scene node, false to use
+       *                           an already created one */
       void insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal, 
                         GLfloat angleX, GLfloat angleY, GLfloat angleZ,
-                        object* obj, bool collision);
+                        object* obj, bool collision, bool createSceneNode=true);
 
       /*! Get Map File Name
        * \return map fileName */
@@ -529,6 +534,9 @@ class Map
       /*! Insert a door on door's list
        * \param newDoor -> pointer to the door to insert */
       void insertDoor(door* newDoor);
+      /*! Get a door related to the sceneNode
+       * return door pointer or NULL */
+      door* getDoor(sceneNode* sc);
 
       /*! Get the current mapFog
        * \return -> mapFog information */

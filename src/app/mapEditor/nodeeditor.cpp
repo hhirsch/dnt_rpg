@@ -28,8 +28,9 @@ nodeEditor::nodeEditor(guiInterface* g)
 {
    gui = g;
    nodeWindow = NULL;
-   nodeTab = NULL;
-   deltaValue = 1.0f;
+   curMap = NULL;
+
+   clear();
 }
 
 /***********************************************************************
@@ -37,6 +38,33 @@ nodeEditor::nodeEditor(guiInterface* g)
  ***********************************************************************/
 nodeEditor::~nodeEditor()
 {
+}
+
+/***********************************************************************
+ *                               clear                                 *
+ ***********************************************************************/
+void nodeEditor::clear()
+{
+   if(nodeWindow)
+   {
+      gui->closeWindow(nodeWindow);
+   }
+   nodeTab = NULL;
+   deltaValue = 1.0f;
+   curNode = NULL;
+   curNodeParent = NULL;
+   curMap = NULL;
+   npcs = NULL;
+}
+
+/***********************************************************************
+ *                              setMap                                 *
+ ***********************************************************************/
+void nodeEditor::setMap(Map* m, characterList* npcList)
+{
+   clear();
+   curMap = m;
+   npcs = npcList;
 }
 
 /***********************************************************************
@@ -59,10 +87,55 @@ void nodeEditor::verifyAction(Uint8* keys, GLfloat mouseX, GLfloat mouseY,
       scNode = dntScene.getSceneNode(mouseBox);
       if(scNode)
       {
-
          selectNode(scNode);
-         openWindow();
       }
+   }
+}
+
+/***********************************************************************
+ *                            deleteCurNode                            *
+ ***********************************************************************/
+void nodeEditor::deleteCurNode()
+{
+   if(curNode)
+   {
+      if(nodeParentType == NODE_PARENT_OBJECT)
+      {
+         object* o = (object*)curNodeParent;
+         delete(o);
+      }
+      else if(nodeParentType == NODE_PARENT_CHARACTER)
+      {
+         npcs->removeCharacter((character*)curNodeParent);
+      }
+   }
+
+   curNode = NULL;
+}
+
+/***********************************************************************
+ *                                flush                                *
+ ***********************************************************************/
+void nodeEditor::flush()
+{
+   if( (curNode) && (curMap) )
+   {
+      if(nodeParentType == NODE_PARENT_OBJECT)
+      {
+         /* Must put back the object to the map, without creating another
+          * sceneNode for it */
+         curMap->insertObject(curNode->getPosX(), curNode->getPosY(), 
+                              curNode->getPosZ(), curNode->getAngleX(),
+                              curNode->getAngleY(), curNode->getAngleZ(),
+                              (object*)curNodeParent, true, false);
+      }
+      curNodeParent = NULL;
+      curNode = NULL;
+   }
+
+   if(nodeWindow)
+   {
+      gui->closeWindow(nodeWindow);
    }
 }
 
@@ -71,11 +144,43 @@ void nodeEditor::verifyAction(Uint8* keys, GLfloat mouseX, GLfloat mouseY,
  ***********************************************************************/
 void nodeEditor::selectNode(sceneNode* scNode)
 {
-   if(curNode)
-   {
-      /* TODO: Must put back the curNode to the map */
-   }
+   /* Flush changes not applied, if needed */
+   flush();
+
+   /* Set new curNode */
    curNode = scNode;
+
+   /* Verify its type */
+   curNodeParent = curMap->getDoor(curNode);
+   if(curNodeParent)
+   {
+      //nodeParentType = NODE_PARENT_DOOR;
+      
+      /* FIXME: not editing doors for now... */
+      curNode = NULL;
+      return;
+   }
+   curNodeParent = curMap->getObject(curNode);
+   if(curNodeParent)
+   {
+      nodeParentType = NODE_PARENT_OBJECT;
+      /* Must remove from map to edit it (otherwise, the squares related
+       * to it will be mistaken!) */
+      curMap->removeObject((object*)curNodeParent);
+      openWindow();
+      return;
+   }
+   curNodeParent = npcs->getCharacter(curNode);
+   if(curNodeParent)
+   {
+      nodeParentType = NODE_PARENT_CHARACTER;
+      openWindow();
+      return;
+   }
+   
+   /* Couldn't determine type, no edit! */
+   //cerr << "Couldn't determine sceneNode type! Unselecting... " << endl;
+   curNode = NULL;
 }
 
 /***********************************************************************
@@ -136,7 +241,7 @@ bool nodeEditor::eventGot(int eventInfo, guiObject* obj)
                            curNode->getAngleZ()-delta);
          return(true);
       }
-      else if(obj == rotZ[0])
+      else if(obj == rotZ[1])
       {
          curNode->setAngle(curNode->getAngleX(), 
                            curNode->getAngleY(),
@@ -250,7 +355,11 @@ bool nodeEditor::eventGot(int eventInfo, guiObject* obj)
          }
       
       }
-      
+      else if(obj == deleteNode)
+      {
+         deleteCurNode();
+         gui->closeWindow(nodeWindow);
+      }
    }
    else if(eventInfo == FARSO_EVENT_WROTE_TEXT_BAR)
    {

@@ -26,7 +26,15 @@
 
 #include "../../etc/scenenode.h"
 #include "../../map/map.h"
+#include "../../engine/character.h"
 #include "../../gui/farso.h"
+
+enum
+{
+   NODE_PARENT_OBJECT,
+   NODE_PARENT_CHARACTER,
+   NODE_PARENT_DOOR
+};
 
 /*! An editor to a scene node */
 class nodeEditor
@@ -37,6 +45,16 @@ class nodeEditor
 
       /*! Destructor */
       ~nodeEditor();
+
+      /*! Clear the nodeEditor (usually, after a map open) */
+      void clear();
+
+      /*! Set the current map, npc's list and clear */
+      void setMap(Map* m, characterList* npcList);
+
+      /*! Flush not applied changes to the map
+       * \note: usually called before save the map */
+      void flush();
 
       /*! Select a node to edit (unselecting any previous one)
        * \param scNode -> sceneNode to edit */
@@ -69,7 +87,15 @@ class nodeEditor
 
    protected:
 
+      /*! Delete the current node */
+      void deleteCurNode();
+
       sceneNode* curNode;  /**< current node to edit */
+      int nodeParentType; /**< Type of the node(object, character, door, etc)*/
+      void* curNodeParent;  /**< Pointer to the node parent */
+
+      Map* curMap;         /**< Current map pointer */
+      characterList* npcs; /**< List of NPCs */
 
       guiInterface* gui;   /**< gui used */
       window* nodeWindow;  /**< Node info window */

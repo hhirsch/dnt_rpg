@@ -334,6 +334,10 @@ class characterList: public dntList
        * \return -> characte pointer or NULL */
       character* getCharacter(string fileName);
 
+      /*! Get the character related to the sceneNode
+       * \return character pointer or NULL */
+      character* getCharacter(sceneNode* scNode);
+
       /*! Get the next character with the same model from the list
        * \param ch -> character to get next witg same model
        * \return -> next character with same model or NULL if

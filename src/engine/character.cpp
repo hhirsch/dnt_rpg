@@ -1429,6 +1429,27 @@ character* characterList::getCharacter(string fileName)
 }
 
 /*********************************************************************
+ *                              getCharacter                         *
+ *********************************************************************/
+character* characterList::getCharacter(sceneNode* scNode)
+{
+   character* ch = (character*)first;
+   int i;
+
+   /* Search the list for it */
+   for(i = 0; i < total; i++)
+   {
+      if(ch->scNode == scNode)
+      {
+         return(ch);
+      }
+      ch = (character*)ch->getNext();
+   }
+
+   return(NULL);
+}
+
+/*********************************************************************
  *                         getNextSameCharacter                      *
  *********************************************************************/
 character* characterList::getNextSameCharacter(character* ch)
