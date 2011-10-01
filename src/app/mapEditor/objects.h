@@ -43,8 +43,9 @@ class objects
        * \param mouseY -> mouse Y coordinate 
        * \param mouseZ -> mouse Z coordinate 
        * \param mButton -> mouse button state
-       * \param tool -> current Tool*/
-      void verifyAction(Uint8* keys, GLfloat mouseX, GLfloat mouseY, 
+       * \param tool -> current Tool
+       * \return pointer to object sceneNode when inserted it. */
+      sceneNode* verifyAction(Uint8* keys, GLfloat mouseX, GLfloat mouseY, 
                         GLfloat mouseZ, 
                         Uint8 mButton, int mouseXw, int mouseYw, int tool,
                         GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);

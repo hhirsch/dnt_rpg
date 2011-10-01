@@ -965,8 +965,16 @@ void editor::doEditorIO()
             object* obj = createObject(objFile, map->getFileName());
             objectEditor->defineActualObject(obj, objFile);
          }
-         objectEditor->verifyAction(keys, xReal, yReal, zReal, mButton, 
-               mouseX, mouseY, gui->getTool(), proj, modl, viewPort);
+         /*sceneNode* sc=*/objectEditor->verifyAction(keys, xReal, yReal, zReal,
+               mButton, mouseX, mouseY, gui->getTool(), proj, modl, viewPort);
+         #if 0
+         if(sc)
+         {
+            /* Set scene node editor to the new edited object */
+            gui->getNodeEditor()->selectNode(sc);
+            gui->getNodeEditor()->openWindow();
+         }
+         #endif
       }
       /* Object Node Editor */
       else if(gui->getTool() == TOOL_NODE_EDITOR)
@@ -1014,7 +1022,7 @@ void editor::doEditorIO()
    /* Delete temporary unused models */
    if(mapOpened)
    {
-      if( (gui->getState() != GUI_IO_STATE_OBJECTS) && 
+      if( (gui->getTool() != TOOL_OBSTACLE_ADD) && 
             (!objectEditor->getObjectFileName().empty()) )
       {
          objectEditor->deleteObject();

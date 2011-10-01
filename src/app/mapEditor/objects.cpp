@@ -53,7 +53,7 @@ objects::~objects()
 /******************************************************
  *                      verifyAction                  *
  ******************************************************/
-void objects::verifyAction(Uint8* keys, 
+sceneNode* objects::verifyAction(Uint8* keys, 
                            GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
                            Uint8 mButton, int mouseXw, int mouseYw,
                            int tool, GLdouble proj[16], 
@@ -89,8 +89,9 @@ void objects::verifyAction(Uint8* keys,
          }
 
          /* No more with the actual */
+         sceneNode* sc = actualObstacle->scNode;
          actualObstacle = NULL;
-         return;
+         return(sc);
       }
 
       /* Rotate Left/Right object */
@@ -161,6 +162,7 @@ void objects::verifyAction(Uint8* keys,
       actualObstacle = NULL;
       objectFile = "";
    }
+   return(NULL);
 }
 
 /******************************************************
