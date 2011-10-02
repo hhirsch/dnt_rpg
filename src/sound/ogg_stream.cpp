@@ -42,7 +42,7 @@ bool ogg_stream::open(string path)
        return(false);
    }
    
-   #ifdef _MSC_VER
+   #if defined(_MSC_VER)
       result = ov_open_callbacks(oggFile, &oggStream, 
                                  NULL, 0, OV_CALLBACKS_DEFAULT);
    #else
@@ -212,76 +212,138 @@ bool ogg_stream::update()
  *************************************************************************/
 bool ogg_stream::stream(ALuint buffer, bool rewind)
 {
-    char data[BUFFER_SIZE] = { 0 };
-    int  size = 0;
-    int  section;
-    int  result = -1;
-    bool resumed = false;
+   char data[BUFFER_SIZE] = { 0 };
+   int  size = 0;
+   int  section;
+   int  result = -1;
+   bool resumed = false;
+   int bufferSize = BUFFER_SIZE;
+   
+#if (defined(__APPLE__) && (SDL_BYTEORDER != SDL_BIG_ENDIAN))
+   /* ogg_ov_read seems to be buggy on Intel Macs... so, doing by hand */
+   float** channels;
+   int i,c,j;
+   int val;
+   
+   if(format == AL_FORMAT_MONO8)
+   {
+      bufferSize = BUFFER_SIZE / 2;
+   }
+   else if(format == AL_FORMAT_STEREO16)
+   {
+      bufferSize = BUFFER_SIZE / 4;
+   }
+#endif
+   
+   if(rewind)
+   {
+      /* Must restart the stream */
+      timeEnded = 0;
+      /* Rewind the file */
+      if(ov_raw_seek(&oggStream,0) != 0)
+      {
+         cerr << "Ogg Rewind Error" << endl;
+      }
+      resumed = true;
+   }
+   else if(timeEnded > 0)
+   {
+      /* Must only wait */
+      return(true);
+   }
+   
+   while( (size < bufferSize) && (result != 0))
+   {
+#if (defined(__APPLE__) && (SDL_BYTEORDER != SDL_BIG_ENDIAN))
+      /* Get as ov_read_float, as ov_read is buggy on Intel OSX */
+      result = ov_read_float(&oggStream, &channels, bufferSize-size, &section);
+      /* Convert float values to the buffer... ugly and unefficient! */
+      if(result > 0)
+      {
 
-    if(rewind)
-    {
-       /* Must restart the stream */
-       timeEnded = 0;
-       /* Rewind the file */
-       if(ov_raw_seek(&oggStream,0) != 0)
-       {
-          cerr << "Ogg Rewind Error" << endl;
-       }
-       resumed = true;
-    }
-    else if(timeEnded > 0)
-    {
-       /* Must only wait */
-       return(true);
-    }
- 
-    while( (size < BUFFER_SIZE) && (result != 0))
-    {
-        result = ov_read(&oggStream,data+size,BUFFER_SIZE-size,
-              (SDL_BYTEORDER == SDL_BIG_ENDIAN),2,1,&section);
-    
-        if(result > 0)
-        {
-           size += result;
-        }
-        else if(result < 0)
-        {
-           cerr << "Ogg Buffer Error: " << errorString(result) << endl;
-           return(false);
-        }
-        else
-        {
-           if(loopInterval == 0)
-           {
-              /* rewind file */
-              result = 1;
-              if(ov_raw_seek(&oggStream,0) != 0)
-              {
-                 cerr << "Ogg Rewind Error" << endl;
-              }
-           }
-           else if(loopInterval > 0)
-           {
-              timeEnded = SDL_GetTicks();
-           }
-        }
-    }
-    
-    if(size == 0)
-    {
-       /*empty();*/
-       alSourceStop(source);
-
-       /* Only return false if will no more play */
-       return(timeEnded > 0);
-    }
-    else
-    {
-       alBufferData(buffer, format, data, size, vorbisInfo->rate);
-       check("::stream() alBufferData");
-    }
- 
-    return(true);
+         if(format == AL_FORMAT_MONO16)
+         {
+            j=size;
+            for(i=0; i<result; i++)
+            {
+               val = channels[0][i]*32767;
+               
+               if(val > 32767) val = 32767;
+               else if(val < -32767) val = -32767;
+               
+               data[j] = (val&0xff);
+               data[j+1] = (val>>8);
+               j += 2;
+            }
+            result *= 2;
+         }
+         else if(format == AL_FORMAT_STEREO16)
+         {
+            j = size;
+            for(i=0; i<result; i++)
+            {
+               for(c=0; c < 2; c++)
+               {
+                  val = channels[c][i]*32768;
+                  
+                  if(val > 32767) val = 32767;
+                  else if(val < -32767) val = -32767;
+                  
+                  data[j] = (val&0xff);
+                  data[j+1] = (val>>8);
+                  j += 2;
+               }
+            }
+            result *= 4;
+         }
+      }
+#else
+      result = ov_read(&oggStream,data+size,bufferSize-size,
+                       (SDL_BYTEORDER == SDL_BIG_ENDIAN),2,1,&section);
+#endif
+      
+      if(result > 0)
+      {
+         size += result;
+      }
+      else if(result < 0)
+      {
+         cerr << "Ogg Buffer Error: " << errorString(result) << endl;
+         return(false);
+      }
+      else
+      {
+         if(loopInterval == 0)
+         {
+            /* rewind file */
+            result = 1;
+            if(ov_raw_seek(&oggStream,0) != 0)
+            {
+               cerr << "Ogg Rewind Error" << endl;
+            }
+         }
+         else if(loopInterval > 0)
+         {
+            timeEnded = SDL_GetTicks();
+         }
+      }
+   }
+   
+   if(size == 0)
+   {
+      /*empty();*/
+      alSourceStop(source);
+      
+      /* Only return false if will no more play */
+      return(timeEnded > 0);
+   }
+   else
+   {
+      alBufferData(buffer, format, data, size, vorbisInfo->rate);
+      check("::stream() alBufferData");
+   }
+   
+   return(true);
 }
 
 /*************************************************************************
