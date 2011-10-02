@@ -104,6 +104,28 @@ class barter
        * \return -> total value of goods on the sell inventory */
       float getTotalSellValue();
 
+      /*! Add quantity to the buy money */
+      bool addBuyMoney(int qty);
+      /*! Dec quantity from the buy money */
+      bool decBuyMoney(int qty);
+
+      /*! Add quantity to the sell money */
+      bool addSellMoney(int qty);
+      /*! Dec quantity from the sell money */
+      bool decSellMoney(int qty);
+
+      /*! Get buy money quantity */
+      int getBuyMoneyQuantity();
+
+      /*! Get buy money object, if any */
+      money* getBuyMoney();
+
+      /*! Get sell money quantity */
+      int getSellMoneyQuantity();
+
+      /*! Get Sell money object, if any */
+      money* getSellMoney();
+
       /*! Get an object (if exists) at inventory position
        * \param posX -> X position
        * \param posY -> Y position

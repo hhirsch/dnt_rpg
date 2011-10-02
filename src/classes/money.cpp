@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -50,7 +50,7 @@ int money::quantity()
 bool money::removeQuantity(int qty)
 {
    /* Only remove if have the quantity */
-   if(cost > qty)
+   if(cost >= qty)
    {
       cost -= qty;
       calculateWeight();

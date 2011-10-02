@@ -20,7 +20,7 @@
 
 #include "inventwindow.h"
 #include "barterwindow.h"
-#include "splitwindow.h"
+#include "moneywindow.h"
 
 #include "dccnit.h"
 
@@ -739,57 +739,62 @@ int inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
 
                   if(activeObject)
                   {
-                     /* FIXME
                      if(activeObject->getType() == OBJECT_TYPE_MONEY)
                      {
-                        money* m = (money*)activeObject;
-                        quantityWindow qty;
-                        qty.setRange(0.0f, m->quantity());
-                        qty.setValue(m->quantity());
-                        qty.setDelta(1.0f);
-                        qty.show(gettext("Money"), 
-                                 gettext("Define quantity:"), interf); 
-                     }*/
-
-                     if(seller)
-                     {
-                        /* The Pc is buying from the seller */
-                        tradeWindow.addBuyItem(activeObject);
+                        /* Open the money window to do the work */
+                        moneyWindow mWindow;
+                        mWindow.open(inventories, seller);
+                       
+                        activeObject = NULL;
+                        state = INVENTORY_STATE_NONE;
+                        act = INVENTORY_ACTION_INTERNAL;
                      }
                      else
                      {
-                        /* The PC is selling to the seller */
-                        tradeWindow.addSellItem(activeObject);
+                        if(seller)
+                        {
+                           /* The Pc is buying from the seller */
+                           tradeWindow.addBuyItem(activeObject);
+                        }
+                        else
+                        {
+                           /* The PC is selling to the seller */
+                           tradeWindow.addSellItem(activeObject);
+                        }
+                        inventories->removeFromInventory(objX,objY, 
+                              currentInventory);
+                        activeObject = NULL;
+
+                        reDraw();
                      }
-                     inventories->removeFromInventory(objX,objY, 
-                           currentInventory);
-                     reDraw();
-                     activeObject = NULL;
                   }
                }
                break;
                case 8: /* Drop */
                   if(objWhere == INVENTORY_INVENTORY)
                   {
-                  #if 0
                      if(activeObject->getType() == OBJECT_TYPE_MONEY)
                      {
-                        splitWindow spWindow;
-                        spWindow.open(interf, activeObject, curEngine, owner); 
+                        /* Open the money window to do the work */
+                        moneyWindow mWindow;
+                        mWindow.open(inventories, X, Z);
+                      
+                        activeObject = NULL;
+                        state = INVENTORY_STATE_NONE;  
+                        act = INVENTORY_ACTION_INTERNAL;
                      }
                      else
-                   #endif
-                   //  {
+                     {
                         /* drop the object */
                         inventories->dropObject(activeObject, objX, objY, 
                               currentInventory, actualMap, X, Z);
-                   //  }
 
-                     /* Return to the NONE state */
-                     activeObject = NULL;
-                     state = INVENTORY_STATE_NONE;
-                     
-                     act = INVENTORY_ACTION_REMOVE_ITEM;
+                        /* Return to the NONE state */
+                        activeObject = NULL;
+                        state = INVENTORY_STATE_NONE;
+
+                        act = INVENTORY_ACTION_REMOVE_ITEM;
+                     }
                   }
                break;
             }

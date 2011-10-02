@@ -111,8 +111,18 @@ void barter::cancelBarter()
       obj=buySlot[i]->getFirstItem(oX, oY);
       while(obj != NULL)
       {
-         seller->inventories->addObject(obj);
-         buySlot[i]->removeObject(oX, oY);
+         if(obj->getType() == OBJECT_TYPE_MONEY)
+         {
+            money* m = (money*)obj;
+            seller->inventories->addMoney(m->quantity());
+            buySlot[i]->removeObject(oX, oY);
+            decBuyMoney(m->quantity());
+         }
+         else
+         {
+            seller->inventories->addObject(obj);
+            buySlot[i]->removeObject(oX, oY);
+         }
          obj = buySlot[i]->getFirstItem(oX, oY);
       }
    }
@@ -124,8 +134,18 @@ void barter::cancelBarter()
       obj = sellSlot[i]->getFirstItem(oX, oY);
       while(obj != NULL)
       {
-         buyer->inventories->addObject(obj);
-         sellSlot[i]->removeObject(oX, oY);
+         if(obj->getType() == OBJECT_TYPE_MONEY)
+         {
+            money* m = (money*)obj;
+            buyer->inventories->addMoney(m->quantity());
+            sellSlot[i]->removeObject(oX, oY);
+            decSellMoney(m->quantity());
+         }
+         else
+         {
+            buyer->inventories->addObject(obj);
+            sellSlot[i]->removeObject(oX, oY);
+         }
          obj = sellSlot[i]->getFirstItem(oX, oY);
       }
    }
@@ -148,8 +168,18 @@ void barter::acceptBarter()
       obj=buySlot[i]->getFirstItem(oX, oY);
       while(obj != NULL)
       {
-         buyer->inventories->addObject(obj);
-         buySlot[i]->removeObject(oX, oY);
+         if(obj->getType() == OBJECT_TYPE_MONEY)
+         {
+            money* m = (money*)obj;
+            buyer->inventories->addMoney(m->quantity());
+            buySlot[i]->removeObject(oX,oY);
+            decBuyMoney(m->quantity());
+         }
+         else
+         {
+            buyer->inventories->addObject(obj);
+            buySlot[i]->removeObject(oX, oY);
+         }
          obj = buySlot[i]->getFirstItem(oX, oY);
       }
    }
@@ -160,8 +190,18 @@ void barter::acceptBarter()
       obj = sellSlot[i]->getFirstItem(oX, oY);
       while(obj != NULL)
       {
-         seller->inventories->addObject(obj);
-         sellSlot[i]->removeObject(oX, oY);
+         if(obj->getType() == OBJECT_TYPE_MONEY)
+         {
+            money* m = (money*)obj;
+            seller->inventories->addMoney(m->quantity());
+            sellSlot[i]->removeObject(oX, oY);
+            decSellMoney(m->quantity());
+         }
+         else
+         {
+            seller->inventories->addObject(obj);
+            sellSlot[i]->removeObject(oX, oY);
+         }
          obj = sellSlot[i]->getFirstItem(oX, oY);
       }
    }
@@ -265,6 +305,178 @@ void barter::draw(int x, int y, SDL_Surface* surface,
 }
 
 /*******************************************************************
+ *                           getSellMoney                          *
+ *******************************************************************/
+money* barter::getSellMoney()
+{
+   money* m;
+   int i;
+   for(i=0; i < BARTER_SELL_SLOTS; i++)
+   {
+      m = (money*)sellSlot[i]->getItemByFileName(DNT_MONEY_OBJECT);
+      if(m != NULL)
+      {
+         return(m);
+      }
+   }
+   return(NULL);
+}
+
+/*******************************************************************
+ *                      getSellMoneyQuantity                       *
+ *******************************************************************/
+int barter::getSellMoneyQuantity()
+{
+   money* m = getSellMoney();
+   if(m)
+   {
+      return(m->quantity());
+   }
+
+   return(0);
+}
+
+/*******************************************************************
+ *                            getBuyMoney                          *
+ *******************************************************************/
+money* barter::getBuyMoney()
+{
+   money* m;
+   int i;
+   for(i=0; i < BARTER_BUY_SLOTS; i++)
+   {
+      m = (money*)buySlot[i]->getItemByFileName(DNT_MONEY_OBJECT);
+      if(m != NULL)
+      {
+         return(m);
+      }
+   }
+   return(NULL);
+}
+
+/*******************************************************************
+ *                       getBuyMoneyQuantity                       *
+ *******************************************************************/
+int barter::getBuyMoneyQuantity()
+{
+   money* m = getBuyMoney();
+   if(m)
+   {
+      return(m->quantity());
+   }
+
+   return(0);
+}
+
+/*******************************************************************
+ *                            addBuyMoney                          *
+ *******************************************************************/
+bool barter::addBuyMoney(int qty)
+{
+   money* m = getBuyMoney();
+   if(m)
+   {
+      /* Just add quantity */
+      m->addQuantity(qty);
+      totalBuyValue += qty;
+      return(true);
+   }
+   
+   /* Create a new money object */
+   m = new money();
+   m->setQuantity(qty);
+   if(addBuyItem(m))
+   {
+      /* No need to sum totalBuyItem, as addBuyItem already done it */
+      return(true);
+   }
+
+   /* Couldn't add, must delete new one */
+   delete(m);
+   return(false);
+}
+
+/*******************************************************************
+ *                            decBuyMoney                          *
+ *******************************************************************/
+bool barter::decBuyMoney(int qty)
+{
+   money* m = getBuyMoney();
+   if(m)
+   {
+      if(m->removeQuantity(qty))
+      {
+         if(m->quantity() == 0)
+         {
+            /* Must delete object */
+            delete(m);
+         }
+         totalBuyValue -= qty;
+         return(true);
+      }
+      /* Couldn't dec! */
+      return(false);
+   }
+
+   /* No Money! */
+   return(false);
+}
+
+/*******************************************************************
+ *                           addSellMoney                          *
+ *******************************************************************/
+bool barter::addSellMoney(int qty)
+{
+   money* m = getSellMoney();
+   if(m)
+   {
+      /* Just add quantity */
+      m->addQuantity(qty);
+      totalSellValue += qty;
+      return(true);
+   }
+   
+   /* Create a new money object */
+   m = new money();
+   m->setQuantity(qty);
+   if(addSellItem(m))
+   {
+      /* No need to sum totalSellValue, as addSellItem do it */
+      return(true);
+   }
+
+   /* Couldn't add, must delete new one */
+   delete(m);
+   return(false);
+}
+
+/*******************************************************************
+ *                           decSellMoney                          *
+ *******************************************************************/
+bool barter::decSellMoney(int qty)
+{
+   money* m = getSellMoney();
+   if(m)
+   {
+      if(m->removeQuantity(qty))
+      {
+         if(m->quantity() == 0)
+         {
+            /* Must delete object */
+            delete(m);
+         }
+         totalSellValue -= qty;
+         return(true);
+      }
+      /* Couldn't dec! */
+      return(false);
+   }
+
+   /* No Money! */
+   return(false);
+}
+
+/*******************************************************************
  *                         getFromPosition                         *
  *******************************************************************/
 object* barter::getFromPosition(int posX, int posY, int curInv, bool seller)
@@ -324,17 +536,29 @@ void barter::removeBuyItem(int x, int y, int curBuySlot)
    object* obj = buySlot[curBuySlot]->getFromPosition(x,y);
    if(obj)
    {
-      /* Put it back at the sellers inventory */
-      seller->inventories->addObject(obj);
+      if(obj->getType() == OBJECT_TYPE_MONEY)
+      {
+         money* m = (money*)obj;
+         seller->inventories->addMoney(m->quantity());
+         totalBuyValue -= m->quantity();
+         buySlot[curBuySlot]->removeObject(x,y);
+         decBuyMoney(m->quantity());
+      }
+      else
+      {
+         /* Put it back at the sellers inventory */
+         seller->inventories->addObject(obj);
+
+         /* Dec the total value and remove from inventory */
+         totalBuyValue -= obj->cost;
+         buySlot[curBuySlot]->removeObject(x,y);
+      }
+      
       if(seller->inventories->getOpenedWindow() != NULL)
       {
          inventWindow* i=(inventWindow*)seller->inventories->getOpenedWindow();
          i->reDraw();
       }
-
-      /* Dec the total value and remove from inventory */
-      totalBuyValue -= obj->cost;
-      buySlot[curBuySlot]->removeObject(x,y);
    }
 }
 
@@ -347,17 +571,29 @@ void barter::removeSellItem(int x, int y, int curSellSlot)
    object* obj = sellSlot[curSellSlot]->getFromPosition(x,y);
    if(obj)
    {
-      /* Put it back at the buyer's inventory */
-      buyer->inventories->addObject(obj);
+      if(obj->getType() == OBJECT_TYPE_MONEY)
+      {
+         money* m = (money*)obj;
+         buyer->inventories->addMoney(m->quantity());
+         totalSellValue -= m->quantity();
+         sellSlot[curSellSlot]->removeObject(x,y);
+         decSellMoney(m->quantity());
+      }
+      else
+      {
+         /* Put it back at the buyer's inventory */
+         buyer->inventories->addObject(obj);
+
+         /* Dec from the total value and remove from inventory */
+         totalSellValue -= obj->cost;
+         sellSlot[curSellSlot]->removeObject(x,y);
+      }
+      
       if(buyer->inventories->getOpenedWindow() != NULL)
       {
          inventWindow* i = (inventWindow*)buyer->inventories->getOpenedWindow();
          i->reDraw();
       }
-      
-      /* Dec from the total value and remove from inventory */
-      totalSellValue -= obj->cost;
-      sellSlot[curSellSlot]->removeObject(x,y);
    }
 }
 

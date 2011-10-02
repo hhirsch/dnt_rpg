@@ -10,6 +10,7 @@
  - Added support to MacOSX;
  - Added shader for texture splatting (splatting now can be via
    ARB extensions or GLSL shader);
+ - Added money split;
  - dntMapEditor: Show mouse world coordinates;
  - dntMapEditor: grid mode alternative on object XZ move;
  - dntMapEditor: Tool to select and edit objects;

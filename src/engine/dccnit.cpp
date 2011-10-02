@@ -352,6 +352,10 @@ void engine::closeWindows()
    {
       infoWindow->close();
    }
+   if(moneySplitWindow.isOpen())
+   {
+      moneySplitWindow.cancel();
+   }
    if(charInfoWindow->isOpen())
    {
       charInfoWindow->close();
@@ -829,6 +833,7 @@ int engine::loadMap(string arqMapa, bool loadingGame)
    colisionDetect.defineMap(actualMap, NPCs, PCs);
    actionControl->setCharacterLists(NPCs, PCs);
    fight->setMap(actualMap->getFileName());
+   moneySplitWindow.setMap(gui, actualMap);
 
    /* Update  particle System to a stable state */
    showLoading(img,&texturaTexto,texturaCarga,
@@ -2022,6 +2027,9 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
 
    /* Verify Dialog Windows */
    dlgWindow.treat(object, eventInfo, infoWindow, this);
+
+   /* Verify Money Window */
+   moneySplitWindow.treat(object, eventInfo);
 
    /* Verify Split window */
    spWindow.treat(object, eventInfo);

@@ -71,7 +71,7 @@ OBJS = alignwindow.o aspectwindow.o attwindow.o barterwindow.o briefing.o \
 		 culling.o cursor.o dialog.o dccnit.o featsel.o \
 		 featswindow.o initial.o inventwindow.o \
 		 itemwindow.o journalwindow.o levelup.o minimapwindow.o \
-		 modstate.o options.o \
+		 modstate.o moneywindow.o options.o \
 		 racewindow.o savefile.o savewindow.o skillwindow.o shadow.o \
 		 shortcutswindow.o sky.o splitwindow.o sun.o teste.o util.o
 BIN = ../../bin/
@@ -217,6 +217,13 @@ minimapwindow.o: minimapwindow.h minimapwindow.cpp $(ENDGUI)farso.h $(ENDMAP)map
 modstate.o: modstate.h modstate.cpp $(ENDCLASSES)inventory.h $(ENDMAP)map.h
 	@printf "Making modstate.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) modstate.cpp -o modstate.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+moneywindow.o: moneywindow.h moneywindow.cpp $(ENDGUI)farso.h \
+               $(ENDCLASSES)object.h $(ENDCLASSES)inventory.h \
+					$(ENDCLASSES)money.h
+	@printf "Making moneywindow.o... "
+	@$(CC) $(CFLAGS) moneywindow.cpp -o moneywindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 options.o: options.h options.cpp $(ENDGUI)farso.h $(ENDETC)userinfo.h $(ENDETC)dirs.h

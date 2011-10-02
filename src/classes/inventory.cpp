@@ -224,31 +224,119 @@ void inventory::dropObject(object* obj, int x, int y, int inv,
 }
 
 /**************************************************************
+ *                           getMoney                         *
+ **************************************************************/
+int inventory::getMoneyQuantity()
+{
+   money* m = getMoney();
+   if(m)
+   {
+      return(m->quantity());
+   }
+
+   return(0);
+}
+
+/**************************************************************
+ *                           getMoney                         *
+ **************************************************************/
+money* inventory::getMoney()
+{
+   int inv;
+   money* m;
+
+   /* search slots */
+   for(inv = 0; inv < INVENTORY_PER_CHARACTER; inv++)
+   {
+      m = (money*)slots[inv]->getItemByFileName(DNT_MONEY_OBJECT);
+      if(m != NULL)
+      {
+         /* Found! */
+         return(m);
+      }
+   }
+
+   /* Not found */
+   return(NULL);
+}
+
+/**************************************************************
+ *                           addMoney                         *
+ **************************************************************/
+bool inventory::addMoney(int qty)
+{
+   money* m;
+
+   /* Search for money already on the inventory.
+    * If have, just add value, otherwise, create money object */
+   m = getMoney();
+   if(m)
+   {
+      /* add quantity and quit */
+      m->addQuantity(qty);
+      return(true);
+   }
+
+   /* Couldn't found... must create a money object and add it to inventory */
+   m = new money();
+   m->setQuantity(qty);
+
+   /* Try to add it to inventory */
+   if(addObject(m))
+   {
+      if(openedWindow != NULL)
+      {
+         openedWindow->reDraw();
+      }
+      return(true);
+   }
+
+   /* Couldn't add, must delete the money created and false! */
+   delete(m);
+   return(false);
+}
+
+/**************************************************************
+ *                           decMoney                         *
+ **************************************************************/
+bool inventory::decMoney(int qty)
+{
+   money* m;
+
+   /* Search for money already on the inventory.
+    * If have, just add value, otherwise, create money object */
+   m = getMoney();
+   if(m)
+   {
+      /* add quantity and quit */
+      if(m->removeQuantity(qty))
+      {
+         if(m->quantity() == 0)
+         {
+            /* Must delete money! */
+            removeFromInventory(m);
+            if(openedWindow != NULL)
+            {
+               openedWindow->reDraw();
+            }
+            delete(m);
+         }
+         /* subtracted! */
+         return(true);
+      }
+   }
+
+   /*  */
+   return(false);
+}
+
+
+/**************************************************************
  *                           addObject                        *
  **************************************************************/
 bool inventory::addObject(object* obj)
 {
    int inv = 0;
-   money* m, *cur;
-
-   if(obj->getType() == OBJECT_TYPE_MONEY)
-   {
-      cur = (money*)obj;
-      /* Search for money already on the inventory */
-      for(inv = 0; inv < INVENTORY_PER_CHARACTER; inv++)
-      {
-         m = (money*)slots[inv]->getItemByFileName(DNT_MONEY_OBJECT);
-         if(m != NULL)
-         {
-            /* Add the money quantity to the current */
-            m->addQuantity(cur->quantity());
-            /* bye current! */
-            delete(cur);
-
-            return(true);
-         }
-      }
-   }
 
    inv = 0;
    while( (!slots[inv]->addObject(obj) && (inv < INVENTORY_PER_CHARACTER)))

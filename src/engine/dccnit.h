@@ -62,6 +62,7 @@
 #include "journalwindow.h"
 #include "minimapwindow.h"
 #include "modstate.h"
+#include "moneywindow.h"
 #include "options.h"
 #include "racewindow.h"
 #include "shadow.h"
@@ -467,6 +468,7 @@ class engine
 
       inventWindow* inventoryWindow; /**< Inventory Window */
       itemWindow* infoWindow;        /**< The info Window */
+      moneyWindow moneySplitWindow;  /**< Money split window */
       charWindow* charInfoWindow;    /**< The character info Window */
       miniMapWindow* mapWindow;      /**< The miniMap window */
       shortcutsWindow* shortcuts;    /**< The shortcuts window */

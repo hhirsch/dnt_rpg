@@ -202,7 +202,7 @@ void barterWindow::removeSellItem(int x, int y, int curSellSlot)
 }
 
 /**************************************************************
- *                       removeBuyItem                       *
+ *                       removeBuyItem                        *
  **************************************************************/
 void barterWindow::removeBuyItem(int x, int y, int curBuySlot)
 {

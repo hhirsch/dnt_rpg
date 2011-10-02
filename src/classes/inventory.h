@@ -23,6 +23,7 @@
 
 #include "object.h"
 #include "itemslot.h"
+#include "money.h"
 #include "../etc/dirs.h"
 #include "../map/map.h"
 
@@ -63,6 +64,22 @@ class inventory
       inventory();
       /*! Destructor */
       ~inventory();
+
+      /*! Add Money to the inventory
+       * \param qty -> money quantity (value) 
+       * \return true if could add, false otherwise */
+      bool addMoney(int qty);
+
+      /*! Get money quantity */
+      int getMoneyQuantity();
+
+      /*! Get money object at inventory, if any */
+      money* getMoney();
+
+      /*! Dec money value from current money object
+       * \note -> if remaining quantity is == 0, object is deleted. 
+       * \return true if could subtract, false if quantity insuficient */
+      bool decMoney(int qty);
 
       /*! Add object to inventory space
        * \param obj -> pointer to object to be added

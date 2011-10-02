@@ -95,6 +95,9 @@ class barterWindow
        * \param curSellSlot -> current sell Slot */
       void removeSellItem(int x, int y, int curSellSlot);
 
+      /*! Get the barter inventory */
+      barter* getBarterInventory(){return(barterInventory);};
+
    private:
 
       /*! Cancel the barter */
