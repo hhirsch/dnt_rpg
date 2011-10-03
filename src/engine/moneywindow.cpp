@@ -273,7 +273,17 @@ bool moneyWindow::treat(guiObject* object, int eventInfo)
             cancel();
             return(true);
          }
-         else if(object == incButton)
+         else if(object == allButton)
+         {
+            curQty = maxQty;
+            sprintf(&buf[0], "%d", curQty);
+            qtyText->setText(buf);
+            return(true);
+         }
+      }
+      else if(eventInfo == FARSO_EVENT_ON_PRESS_BUTTON)
+      {
+         if(object == incButton)
          {
             curQty++;
             if(curQty > maxQty)
@@ -291,13 +301,6 @@ bool moneyWindow::treat(guiObject* object, int eventInfo)
             {
                curQty = 0;
             }
-            sprintf(&buf[0], "%d", curQty);
-            qtyText->setText(buf);
-            return(true);
-         }
-         else if(object == allButton)
-         {
-            curQty = maxQty;
             sprintf(&buf[0], "%d", curQty);
             qtyText->setText(buf);
             return(true);

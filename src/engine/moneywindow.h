@@ -82,23 +82,23 @@ class moneyWindow
 
       static guiInterface* inter;  /**< Current GUI interface */
       
-      static textBox* qtyText;
-      static int curQty;
-      static int maxQty;
-      static button* incButton;
-      static button* decButton;
-      static button* allButton;
+      static textBox* qtyText;    /**< Text with quantity */
+      static int curQty;          /**< Current quantity selected */
+      static int maxQty;          /**< Max quantity to select */
+      static button* incButton;   /**< Inc quantity button  */
+      static button* decButton;   /**< Dec quantity button */
+      static button* allButton;   /**< Set quantity to max button */
 
       static button* cancelButton; /**< cancel button */
       static button* okButton;     /**< The ok Button */
 
       
-      static int type;
-      static inventory* inv;
-      static float destinyPosX;
-      static float destinyPosZ;
+      static int type;             /**< type of money transaction */
+      static inventory* inv;       /**< inventory used at transaction */
+      static float destinyPosX;    /**< floor X position for transaction */
+      static float destinyPosZ;    /**< floor Z position for transaction */
 
-      static Map* curMap;
+      static Map* curMap;          /**< current opened map */
 };
 
 
