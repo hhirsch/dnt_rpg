@@ -330,14 +330,9 @@ bool talkTest::doTest(character* pc, thing* owner)
    /* Have money */
    else if(id == TALK_TEST_HAVE_MONEY)
    {
-      money* m = (money*)pc->inventories->getItemByFileName(DNT_MONEY_OBJECT);
-      if(m)
-      {
-         int val=0;
-         sscanf(test.c_str(), "%d", &val);
-         return(m->quantity() >= val);
-      }
-      return(false);
+      int val=0;
+      sscanf(test.c_str(), "%d", &val);
+      return(pc->inventories->getMoneyQuantity() >= val);
    }
 
    /* Mission active */
@@ -1263,31 +1258,18 @@ void conversation::proccessAction(int opcao, engine* curEngine)
          /* Receive Money */
          case TALK_ACTION_RECEIVE_MONEY:
          {
-            /* Must load one */
-            money* m = (money*)createObject(DNT_MONEY_OBJECT, "");
-
-            /* Now, put it at the actualCharacter Inventory */
-            if(m != NULL)
-            {
-               m->setQuantity(actions[i].att);
-               actualPC->inventories->addObject(m);
-               sprintf(buf,gettext("Received $%d."),actions[i].att);
-               brief.addText(buf,18,191,0);
-            }
+            actualPC->inventories->addMoney(actions[i].att);
+            sprintf(buf,gettext("Received $%d."),actions[i].att);
+            brief.addText(buf,18,191,0);
          }
          break;
 
          /* Give Money */
          case TALK_ACTION_GIVE_MONEY:
          {
-            money* m = (money*)actualPC->inventories->getItemByFileName(
-                                                              DNT_MONEY_OBJECT);
-            if(m)
-            {
-               m->removeQuantity(actions[i].att);
-               sprintf(buf,gettext("Lost $%d."),actions[i].att);
-               brief.addText(buf,18,191,0);
-            }
+            actualPC->inventories->decMoney(actions[i].att);
+            sprintf(buf,gettext("Lost $%d."),actions[i].att);
+            brief.addText(buf,18,191,0);
          }
          break;
 
