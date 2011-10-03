@@ -2333,13 +2333,27 @@ int engine::verifyMouseActions(Uint8 mButton)
                      if( (engineMode != ENGINE_MODE_TURN_BATTLE) ||
                            (activeCharacter->getCanAttack() ) )
                      {
+                        bool objGot = false;
+
                         /* Get Item count as action */
                         activeCharacter->setCanAttack(false);
 
                         /* Get Object */
                         lastMousePression = time;
 
-                        if(activeCharacter->inventories->addObject(sobj->obj))
+                        if(sobj->obj->getType() == OBJECT_TYPE_MONEY)
+                        {
+                           money* m = (money*)sobj->obj;
+                           objGot = activeCharacter->inventories->addMoney(
+                                 m->quantity());
+                        }
+                        else
+                        {
+                           objGot = activeCharacter->inventories->addObject(
+                                 sobj->obj);
+                        }
+
+                        if(objGot)
                         {
                            snd->addSoundEffect(sobj->x, sobj->y, sobj->z, 
                                  SOUND_NO_LOOP,
@@ -2359,6 +2373,14 @@ int engine::verifyMouseActions(Uint8 mButton)
 
                            /* Remove object from Map */
                            actualMap->removeObject(sobj->obj);
+
+                           /* If money, delete the original object,
+                            * as no more needed */
+                           if(sobj->obj->getType() == OBJECT_TYPE_MONEY)
+                           {
+                              money* m = (money*)sobj->obj;
+                              delete(m);
+                           }
                         }
                         else
                         {
