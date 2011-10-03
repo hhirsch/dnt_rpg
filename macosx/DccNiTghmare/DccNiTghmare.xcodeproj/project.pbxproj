@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AB4CFCC41424D6B00000E132 /* dnt.ico in Resources */ = {isa = PBXBuildFile; fileRef = AB4CFCC31424D6B00000E132 /* dnt.ico */; };
+		AB838C42143A42E700AD8D24 /* moneywindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB838C40143A42E700AD8D24 /* moneywindow.cpp */; };
 		ABA0E3FC13FED9EA00FA02A0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA0E3FB13FED9EA00FA02A0 /* Cocoa.framework */; };
 		ABA0E40613FED9EA00FA02A0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ABA0E40413FED9EA00FA02A0 /* InfoPlist.strings */; };
 		ABA0E40C13FED9EA00FA02A0 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = ABA0E40A13FED9EA00FA02A0 /* Credits.rtf */; };
@@ -71,7 +72,6 @@
 		ABA0E54C13FEDB9D00FA02A0 /* shortcutswindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA0E4A913FEDB9D00FA02A0 /* shortcutswindow.cpp */; };
 		ABA0E54D13FEDB9D00FA02A0 /* skillwindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA0E4AB13FEDB9D00FA02A0 /* skillwindow.cpp */; };
 		ABA0E54E13FEDB9D00FA02A0 /* sky.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA0E4AD13FEDB9D00FA02A0 /* sky.cpp */; };
-		ABA0E54F13FEDB9D00FA02A0 /* splitwindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA0E4AF13FEDB9D00FA02A0 /* splitwindow.cpp */; };
 		ABA0E55013FEDB9D00FA02A0 /* sun.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA0E4B113FEDB9D00FA02A0 /* sun.cpp */; };
 		ABA0E55113FEDB9D00FA02A0 /* teste.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA0E4B313FEDB9D00FA02A0 /* teste.cpp */; };
 		ABA0E55213FEDB9D00FA02A0 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA0E4B413FEDB9D00FA02A0 /* util.cpp */; };
@@ -156,6 +156,8 @@
 
 /* Begin PBXFileReference section */
 		AB4CFCC31424D6B00000E132 /* dnt.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = dnt.ico; sourceTree = "<group>"; };
+		AB838C40143A42E700AD8D24 /* moneywindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = moneywindow.cpp; sourceTree = "<group>"; };
+		AB838C41143A42E700AD8D24 /* moneywindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = moneywindow.h; sourceTree = "<group>"; };
 		ABA0E3F713FED9EA00FA02A0 /* DccNiTghmare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DccNiTghmare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABA0E3FB13FED9EA00FA02A0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		ABA0E3FE13FED9EA00FA02A0 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -280,8 +282,6 @@
 		ABA0E4AC13FEDB9D00FA02A0 /* skillwindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = skillwindow.h; sourceTree = "<group>"; };
 		ABA0E4AD13FEDB9D00FA02A0 /* sky.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sky.cpp; sourceTree = "<group>"; };
 		ABA0E4AE13FEDB9D00FA02A0 /* sky.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sky.h; sourceTree = "<group>"; };
-		ABA0E4AF13FEDB9D00FA02A0 /* splitwindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = splitwindow.cpp; sourceTree = "<group>"; };
-		ABA0E4B013FEDB9D00FA02A0 /* splitwindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = splitwindow.h; sourceTree = "<group>"; };
 		ABA0E4B113FEDB9D00FA02A0 /* sun.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sun.cpp; sourceTree = "<group>"; };
 		ABA0E4B213FEDB9D00FA02A0 /* sun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sun.h; sourceTree = "<group>"; };
 		ABA0E4B313FEDB9D00FA02A0 /* teste.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = teste.cpp; sourceTree = "<group>"; };
@@ -607,6 +607,8 @@
 		ABA0E46F13FEDB9D00FA02A0 /* engine */ = {
 			isa = PBXGroup;
 			children = (
+				AB838C40143A42E700AD8D24 /* moneywindow.cpp */,
+				AB838C41143A42E700AD8D24 /* moneywindow.h */,
 				ABA0E47013FEDB9D00FA02A0 /* alignwindow.cpp */,
 				ABA0E47113FEDB9D00FA02A0 /* alignwindow.h */,
 				ABA0E47213FEDB9D00FA02A0 /* aspectwindow.cpp */,
@@ -669,8 +671,6 @@
 				ABA0E4AC13FEDB9D00FA02A0 /* skillwindow.h */,
 				ABA0E4AD13FEDB9D00FA02A0 /* sky.cpp */,
 				ABA0E4AE13FEDB9D00FA02A0 /* sky.h */,
-				ABA0E4AF13FEDB9D00FA02A0 /* splitwindow.cpp */,
-				ABA0E4B013FEDB9D00FA02A0 /* splitwindow.h */,
 				ABA0E4B113FEDB9D00FA02A0 /* sun.cpp */,
 				ABA0E4B213FEDB9D00FA02A0 /* sun.h */,
 				ABA0E4B313FEDB9D00FA02A0 /* teste.cpp */,
@@ -1005,7 +1005,6 @@
 				ABA0E54C13FEDB9D00FA02A0 /* shortcutswindow.cpp in Sources */,
 				ABA0E54D13FEDB9D00FA02A0 /* skillwindow.cpp in Sources */,
 				ABA0E54E13FEDB9D00FA02A0 /* sky.cpp in Sources */,
-				ABA0E54F13FEDB9D00FA02A0 /* splitwindow.cpp in Sources */,
 				ABA0E55013FEDB9D00FA02A0 /* sun.cpp in Sources */,
 				ABA0E55113FEDB9D00FA02A0 /* teste.cpp in Sources */,
 				ABA0E55213FEDB9D00FA02A0 /* util.cpp in Sources */,
@@ -1083,6 +1082,7 @@
 				ABA0E5CE13FEDBB500FA02A0 /* sound.cpp in Sources */,
 				ABA0E5D213FEDDA600FA02A0 /* SDLMain.m in Sources */,
 				ABEBFE111424D2CD00425986 /* config_mac.cpp in Sources */,
+				AB838C42143A42E700AD8D24 /* moneywindow.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
