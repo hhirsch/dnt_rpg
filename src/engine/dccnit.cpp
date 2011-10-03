@@ -23,7 +23,6 @@
 #include "util.h"
 #include "savefile.h"
 #include "savewindow.h"
-#include "splitwindow.h"
 
 #include <math.h>
 #ifdef __APPLE__
@@ -342,10 +341,8 @@ void engine::closeWindows()
    /* Close the static windows, if needed */
    barterWindow tradeWindow;
    dialogWindow dlgWindow;
-   splitWindow spWindow;
    tradeWindow.close();
    dlgWindow.close();
-   spWindow.close();
 
    /* Close info Window, character window and journal window too */
    if(infoWindow->isOpen())
@@ -2010,7 +2007,6 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
 {
    barterWindow tradeWindow;
    dialogWindow dlgWindow;
-   splitWindow spWindow;
    
    /* Verify if Inventory Window is opened */
    if(inventoryWindow)
@@ -2030,9 +2026,6 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
 
    /* Verify Money Window */
    moneySplitWindow.treat(object, eventInfo);
-
-   /* Verify Split window */
-   spWindow.treat(object, eventInfo);
 
    /* Verify Inventory Window Actions */
    if( (inventoryWindow) )

@@ -73,7 +73,7 @@ OBJS = alignwindow.o aspectwindow.o attwindow.o barterwindow.o briefing.o \
 		 itemwindow.o journalwindow.o levelup.o minimapwindow.o \
 		 modstate.o moneywindow.o options.o \
 		 racewindow.o savefile.o savewindow.o skillwindow.o shadow.o \
-		 shortcutswindow.o sky.o splitwindow.o sun.o teste.o util.o
+		 shortcutswindow.o sky.o sun.o teste.o util.o
 BIN = ../../bin/
 SUPREDE = #-DVIDEO_MODE #-DREDE #comente para nao ter suporte a rede na bagaca
 FIFO = #../etc/fifo.o
@@ -266,11 +266,6 @@ sky.o: sky.h sky.cpp $(ENDMAP)map.h $(ENDETC)dirs.h
 	@$(CC) $(CFLAGS) $(SUPREDE) sky.cpp -o sky.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 	
-splitwindow.o: splitwindow.h splitwindow.cpp $(ENDGUI)farso.h
-	@printf "Making splitwindow.o... "
-	@$(CC) $(CFLAGS) splitwindow.cpp -o splitwindow.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
 sun.o: sun.h sun.cpp $(ENDETC)dirs.h
 	@printf "Making sun.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) sun.cpp -o sun.o

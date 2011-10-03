@@ -65,7 +65,7 @@ OBJSENGINE = $(ENDENGINE)alignwindow.o $(ENDENGINE)aspectwindow.o \
 				 $(ENDENGINE)culling.o $(ENDENGINE)cursor.o \
 				 $(ENDENGINE)dccnit.o $(ENDENGINE)initial.o \
 				 $(ENDENGINE)inventwindow.o $(ENDENGINE)itemwindow.o \
-				 $(ENDENGINE)journalwindow.o $(ENDENGINE)splitwindow.o \
+				 $(ENDENGINE)journalwindow.o \
 				 $(ENDENGINE)levelup.o $(ENDENGINE)minimapwindow.o \
 				 $(ENDENGINE)modstate.o $(ENDENGINE)options.o \
 				 $(ENDENGINE)character.o $(ENDENGINE)racewindow.o \
