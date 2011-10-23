@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AB4CFCC41424D6B00000E132 /* dnt.ico in Resources */ = {isa = PBXBuildFile; fileRef = AB4CFCC31424D6B00000E132 /* dnt.ico */; };
+		AB72D9B01454631F00C4331C /* dnt-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AB72D9AF1454631F00C4331C /* dnt-icon.png */; };
 		AB838C42143A42E700AD8D24 /* moneywindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB838C40143A42E700AD8D24 /* moneywindow.cpp */; };
 		ABA0E3FC13FED9EA00FA02A0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA0E3FB13FED9EA00FA02A0 /* Cocoa.framework */; };
 		ABA0E40613FED9EA00FA02A0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ABA0E40413FED9EA00FA02A0 /* InfoPlist.strings */; };
@@ -156,6 +157,7 @@
 
 /* Begin PBXFileReference section */
 		AB4CFCC31424D6B00000E132 /* dnt.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = dnt.ico; sourceTree = "<group>"; };
+		AB72D9AF1454631F00C4331C /* dnt-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dnt-icon.png"; sourceTree = "<group>"; };
 		AB838C40143A42E700AD8D24 /* moneywindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = moneywindow.cpp; sourceTree = "<group>"; };
 		AB838C41143A42E700AD8D24 /* moneywindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = moneywindow.h; sourceTree = "<group>"; };
 		ABA0E3F713FED9EA00FA02A0 /* DccNiTghmare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DccNiTghmare.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -464,6 +466,7 @@
 		ABA0E3EC13FED9EA00FA02A0 = {
 			isa = PBXGroup;
 			children = (
+				AB72D9AF1454631F00C4331C /* dnt-icon.png */,
 				AB4CFCC31424D6B00000E132 /* dnt.ico */,
 				ABEBFE0E1424CD6400425986 /* data */,
 				ABEBFE0B1424CC9200425986 /* OpenAL.framework */,
@@ -945,6 +948,7 @@
 				ABA0E41213FED9EB00FA02A0 /* MainMenu.xib in Resources */,
 				ABEBFE0F1424CD6400425986 /* data in Resources */,
 				AB4CFCC41424D6B00000E132 /* dnt.ico in Resources */,
+				AB72D9B01454631F00C4331C /* dnt-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
