@@ -106,60 +106,64 @@ void guiList::draw()
    int aux;
    for(aux=0; aux < total; aux++)
    {
-      switch(obj->type)
+      /* Only draw visible objects */
+      if(obj->isVisible())
       {
-         case FARSO_OBJECT_BUTTON:
+         switch(obj->type)
          {
-              button *b = (button*) obj;   
-              b->draw();
-              break;
-         }
-         case FARSO_OBJECT_TEXT_BAR:
-         {
-              textBar *bart = (textBar*) obj; 
-              bart->draw();
-              break;
-         }
-         case FARSO_OBJECT_SEL_BOX:
-         {
-              cxSel *cx = (cxSel*) obj;
-              cx->draw();
-              break;
-         }
-         case FARSO_OBJECT_SEL_TEXT:
-         {
-              selText *st = (selText*) obj;
-              st->draw();
-              break;
-         }
-         case FARSO_OBJECT_PICTURE:
-         {
-              picture* fig = (picture*) obj;
-              fig->draw();
-              break;
-         }
-         case FARSO_OBJECT_TEXT_BOX:
-         {
-              textBox *quad = (textBox*) obj;
-              quad->draw();
-              break;
-         }
-         case FARSO_OBJECT_TAB_BUTTON:
-         {
-              tabButton *bt = (tabButton*) obj; 
-              bt->setCurrent(-1);
-              bt->draw();
-              break;
-         }
-         case FARSO_OBJECT_HEALTH_BAR:
-         {
-              healthBar* hb = (healthBar*) obj;
-              hb->draw();
-              break;
-         }
-         default:break;
-       
-      } //case
+            case FARSO_OBJECT_BUTTON:
+            {
+                 button *b = (button*) obj;   
+                 b->draw();
+                 break;
+            }
+            case FARSO_OBJECT_TEXT_BAR:
+            {
+                 textBar *bart = (textBar*) obj; 
+                 bart->draw();
+                 break;
+            }
+            case FARSO_OBJECT_SEL_BOX:
+            {
+                 cxSel *cx = (cxSel*) obj;
+                 cx->draw();
+                 break;
+            }
+            case FARSO_OBJECT_SEL_TEXT:
+            {
+                 selText *st = (selText*) obj;
+                 st->draw();
+                 break;
+            }
+            case FARSO_OBJECT_PICTURE:
+            {
+                 picture* fig = (picture*) obj;
+                 fig->draw();
+                 break;
+            }
+            case FARSO_OBJECT_TEXT_BOX:
+            {
+                 textBox *quad = (textBox*) obj;
+                 quad->draw();
+                 break;
+            }
+            case FARSO_OBJECT_TAB_BUTTON:
+            {
+                 tabButton *bt = (tabButton*) obj; 
+                 bt->setCurrent(-1);
+                 bt->draw();
+                 break;
+            }
+            case FARSO_OBJECT_HEALTH_BAR:
+            {
+                 healthBar* hb = (healthBar*) obj;
+                 hb->draw();
+                 break;
+            }
+            default:break;
+          
+         } //case
+      }
       obj = (guiObject*)obj->getNext();
    }
 

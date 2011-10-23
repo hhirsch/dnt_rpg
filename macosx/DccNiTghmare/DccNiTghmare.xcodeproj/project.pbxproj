@@ -915,6 +915,9 @@
 /* Begin PBXProject section */
 		ABA0E3EE13FED9EA00FA02A0 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = ABA0E3F113FED9EA00FA02A0 /* Build configuration list for PBXProject "DccNiTghmare" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;

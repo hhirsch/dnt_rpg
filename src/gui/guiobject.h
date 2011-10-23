@@ -143,6 +143,13 @@ class guiObject : public dntListElement
       void setMouseHint(string txt){mouseHint=txt;};
       /*! Get current mouse hint */
       string getMouseHint(){return(mouseHint);};
+   
+      /*! Hide the object */
+      void hide(){visible=false;hadChanged=true;};
+      /*! Show the object */
+      void show(){visible=true;hadChanged=true;};
+      /*! Get visibility status */
+      bool isVisible(){return(visible);};
 
    protected:
       int x1,              /**< Coordinate on Window */
@@ -153,6 +160,7 @@ class guiObject : public dntListElement
       string text;         /**< Text Display */
       string mouseHint;    /**< Hint when mouse over */
       SDL_Surface* wSurface; /**< Screen surface */
+      bool visible;        /**< Toggle object visibility */
    
    private:
       bool hadChanged;     /**< Flag if the had changed its draw state */
