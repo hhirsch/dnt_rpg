@@ -72,6 +72,13 @@ void button::draw()
 {
    dntFont font;
    int R1,R2,G1,G2,B1,B2,A1,A2; 
+   
+   /* No draw when hidden */
+   if(!isVisible())
+   {
+      return;
+   }
+   
    if(pressed) 
    {
       R1 = Colors.colorCont[1].R;

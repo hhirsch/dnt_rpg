@@ -219,6 +219,12 @@ void tabBox::draw()
    fnt.defineFont(DNT_FONT_ARIAL, 10);
    fnt.defineFontAlign(DNT_FONT_ALIGN_CENTER);
    fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
+   
+   /* No draw when hidden */
+   if(!isVisible())
+   {
+      return;
+   }
 
    /* Draw Limitators */
    color_Set(colors.colorButton.R, colors.colorButton.G,

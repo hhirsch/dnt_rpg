@@ -65,7 +65,7 @@ void healthBar::defineActualHealth(int health)
  ****************************************************************/
 void healthBar::draw()
 {
-   if(wSurface != NULL)
+   if( (wSurface != NULL) && (isVisible()) )
    {
       color_Set(223,223,223,255);
       rectangle_Fill(wSurface, x1,y1,x2,y2);

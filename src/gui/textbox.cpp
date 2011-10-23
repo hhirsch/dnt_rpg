@@ -192,8 +192,8 @@ void textBox::draw(int i)
    textLine* line;
    dntFont fnt;
 
-   /* No ned to draw if not before first line */
-   if(i < firstLine)
+   /* No need to draw if not before first line or hidden */
+   if( (i < firstLine) || (!isVisible()) )
    {
       return;
    }
@@ -236,6 +236,12 @@ int textBox::draw2()
    dntFont fnt;
    int lastLine = 0;
    int height = 0;
+   
+   /* No draw when hidden */
+   if(!isVisible())
+   {
+      return(lastLine);
+   }
 
    /* Draw Background */
    if(framed)

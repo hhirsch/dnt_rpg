@@ -96,6 +96,12 @@ void selText::draw()
    fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
    
    int height = fnt.getHeight();
+   
+   /* No draw when hidden */
+   if(!isVisible())
+   {
+      return;
+   }
 
    /* Clear the current */
    color_Set(Cores.colorWindow.R, Cores.colorWindow.G, 

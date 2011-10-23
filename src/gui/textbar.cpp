@@ -129,6 +129,12 @@ void textBar::setText(string txt)
  ********************************************************************/
 void textBar::draw()
 {
+   /* No draw when hidden */
+   if(!isVisible())
+   {
+      return;
+   }
+   
    color_Set(Colors.colorCont[0].R, Colors.colorCont[0].G,
              Colors.colorCont[0].B, Colors.colorCont[0].A);
    rectangle_2Colors(wSurface,x1,y1,x2,y2, Colors.colorCont[1].R,

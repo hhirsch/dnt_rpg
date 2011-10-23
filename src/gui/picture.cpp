@@ -120,7 +120,7 @@ void picture::setSurfaceDeletion(bool enable)
  ******************************************************/
 void picture::draw()
 {
-   if(fig == NULL)
+   if( (fig == NULL) || (!isVisible()) )
    {
       return;
    }

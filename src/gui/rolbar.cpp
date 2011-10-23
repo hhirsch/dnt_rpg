@@ -193,7 +193,11 @@ bool rolBar::eventGot(int type, guiObject* object, int mouseY)
  *********************************************************************/
 void rolBar::draw(int i)
 {
-   scrollText->draw(i);
+   /* No draw when hidden */
+   if(isVisible())
+   {
+      scrollText->draw(i);
+   }
 }
 
 /*********************************************************************

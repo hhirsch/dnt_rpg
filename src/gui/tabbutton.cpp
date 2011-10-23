@@ -125,6 +125,12 @@ oneTabButton* tabButton::insertButton(int x1, int y1, int x2, int y2)
 void tabButton::draw()
 { 
    int i;
+   
+   /* No draw when hidden */
+   if(!isVisible())
+   {
+      return;
+   }
 
    /* Clear Below */
    color_Set(cor.colorWindow.R, cor.colorWindow.G, 

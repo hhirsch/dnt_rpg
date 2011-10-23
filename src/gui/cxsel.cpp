@@ -40,6 +40,12 @@ cxSel::cxSel(int x, int y, SDL_Surface* surface):guiObject(surface)
  **********************************************************/
 void cxSel::draw()
 {
+   /* No draw when hidden */
+   if(!isVisible())
+   {
+      return;
+   }
+   
    color_Set(Colors.colorCont[0].R, Colors.colorCont[0].G, 
              Colors.colorCont[0].B, Colors.colorCont[0].A);
    rectangle_2Colors(wSurface, x1, y1, x1+10, y1+10, Colors.colorCont[1].R,
