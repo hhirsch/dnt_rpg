@@ -58,6 +58,7 @@ class guiObject : public dntListElement
       guiObject(SDL_Surface* surface)
       {
          available=true;
+         visible = true;
          text="";
          mouseHint = "";
          wSurface=surface;
@@ -145,9 +146,9 @@ class guiObject : public dntListElement
       string getMouseHint(){return(mouseHint);};
    
       /*! Hide the object */
-      void hide(){visible=false;hadChanged=true;};
+      void hide(){visible=false;available=false;hadChanged=true;};
       /*! Show the object */
-      void show(){visible=true;hadChanged=true;};
+      void show(){visible=true;available=true;hadChanged=true;};
       /*! Get visibility status */
       bool isVisible(){return(visible);};
 

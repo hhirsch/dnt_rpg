@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2010 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -324,6 +324,7 @@ void featSelWindow::drawThings(fSelFeat* f)
          picAvail[i]->set(ft->desc->image);
          textAvail[i]->setText(ft->desc->name);
          buttonInsert[i]->setAvailable(true);
+         buttonInsert[i]->show();
          curAvail[i] = ft;
          ft = (fSelFeat*)ft->getNext();
       }
@@ -333,6 +334,7 @@ void featSelWindow::drawThings(fSelFeat* f)
          picAvail[i]->set(NULL);
          textAvail[i]->setText("");
          buttonInsert[i]->setAvailable(false);
+         buttonInsert[i]->hide();
       }
    }
 
@@ -352,7 +354,16 @@ void featSelWindow::drawThings(fSelFeat* f)
       {
          picSel[i]->set(ft->desc->image);
          textSel[i]->setText(ft->desc->name);
-         buttonRemove[i]->setAvailable(!ft->classFeat);
+         if(ft->classFeat)
+         {
+            buttonRemove[i]->hide();
+            buttonRemove[i]->setAvailable(!ft->classFeat);
+         }
+         else
+         {
+            buttonRemove[i]->setAvailable(true);
+            buttonRemove[i]->show();
+         }
          curSel[i] = ft;
          ft = (fSelFeat*)ft->getNext();
       }
@@ -362,6 +373,7 @@ void featSelWindow::drawThings(fSelFeat* f)
          picSel[i]->set(NULL);
          textSel[i]->setText("");
          buttonRemove[i]->setAvailable(false);
+         buttonRemove[i]->hide();
       }
    }
 
