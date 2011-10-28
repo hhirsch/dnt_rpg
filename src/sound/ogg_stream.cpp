@@ -24,7 +24,15 @@
 #include <iostream>
 using namespace std;
 
+#ifdef __APPLE__
+
+#define BUFFER_SIZE (4096 * 64) /**< Size of the Ogg Buffer */
+
+#else
+
 #define BUFFER_SIZE (4096 * 16) /**< Size of the Ogg Buffer */
+
+#endif
 
 /*************************************************************************
  *                                 open                                  *
