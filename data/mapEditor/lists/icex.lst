@@ -7,6 +7,7 @@ Icex_Table = models/objetos/icex/mesa_redonda/mesa_redonda.dcc
 Portinari_1 = models/objetos/paints/portinari_1/portinari_1.dcc
 Portinari_2 = models/objetos/paints/portinari_2/portinari_2.dcc
 Portinari_3 = models/objetos/paints/portinari_3/portinari_3.dcc
+Portinari_4 = models/objetos/paints/portinari_4/portinari_4.dcc
 Ruindows_Box = models/objetos/icex/ruindows_box/ruindows_box.dcc
 Snes = models/objetos/icex/snes/snes.dcc
 Snes_Chrono = models/objetos/icex/snes/chrono/snes_chrono.dcc
