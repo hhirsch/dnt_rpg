@@ -1,7 +1,8 @@
 # Made by DccNiTghtmare's MapEditor, 0.8
 size = 4X4
-name = gettext("mapName")
+name = gettext("Bar")
 musicFile = music/musica5.ogg
+lightsFile = mapas/tutorial/barraco2.map.lgh
 outdoor = 0
 texture = texturas/floor_indoor/steel1.png texturas/floor_indoor/steel1.png
 texture = texturas/floor_indoor/wood6.png texturas/floor_indoor/wood6.png
@@ -77,7 +78,7 @@ useObject = models/objetos/geral/cadeira/cadeira.dcc 1:3,2:177.250,0.000,75.688:
 useObject = models/objetos/geral/rug3/rug3.dcc 1:3,2:158.784,0.200,127.871:0.000,0.000,0.000:0
 square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/wood8.png
-connection = 225.163376,120.103973,253.736511,136.621704:0.000000:mapas/tutorial/tyrol.map
+connection = 225.163376,120.103973,253.736511,136.621704:90.000000:mapas/tutorial/tyrol.map
 useObject = models/objetos/geral/cadeira/cadeira.dcc 0:4,1:214.003,0.000,62.664:0.000,184.000,0.000:0
 #Z: 2
 square = 1,0.000000,0.000000,0.000000,0.000000
@@ -111,10 +112,11 @@ useObject = models/objetos/geral/mesa_redonda/mesa_redonda.dcc 0:3,4:147.233,0.0
 useObject = models/objetos/geral/rug3/rug3.dcc 0:3,2:158.784,0.200,127.871:0.000,0.000,0.000:0
 square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/wood8.png
-connection = 225.163376,120.103973,253.736511,136.621704:0.000000:mapas/tutorial/tyrol.map
+connection = 225.163376,120.103973,253.736511,136.621704:90.000000:mapas/tutorial/tyrol.map
+useObject = models/objetos/geral/mesa_redonda/mesa_redonda.dcc 0:4,4:209.635,0.000,198.669:0.000,0.000,0.000:0
+useObject = models/objetos/paints/portinari_3/portinari_3.dcc 1:4,3:245.876,21.500,159.314:0.000,-271.000,0.000:0
 useObject = models/objetos/geral/cadeira/cadeira.dcc 0:3,4:190.398,0.000,195.603:0.000,79.000,0.000:0
 useObject = models/objetos/geral/cadeira/cadeira.dcc 1:4,3:210.933,0.000,175.225:0.000,0.000,0.000:0
-useObject = models/objetos/geral/mesa_redonda/mesa_redonda.dcc 0:4,4:209.635,0.000,198.669:0.000,0.000,0.000:0
 #Z: 3
 square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/wood8.png
@@ -138,10 +140,10 @@ useObject = models/objetos/geral/cadeira/cadeira.dcc 0:2,4:127.388,0.000,202.450
 useObject = models/objetos/geral/mesa_redonda/mesa_redonda.dcc 1:3,4:147.233,0.000,199.273:0.000,99.000,0.000:0
 square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/wood8.png
+useObject = models/objetos/geral/mesa_redonda/mesa_redonda.dcc 1:4,4:209.635,0.000,198.669:0.000,0.000,0.000:0
 useObject = models/objetos/geral/cadeira/cadeira.dcc 1:4,4:227.288,0.000,196.605:0.000,-93.000,0.000:0
 useObject = models/objetos/geral/cadeira/cadeira.dcc 1:4,4:211.317,0.000,219.386:0.000,198.000,0.000:0
 useObject = models/objetos/geral/cadeira/cadeira.dcc 0:3,4:190.398,0.000,195.603:0.000,79.000,0.000:0
-useObject = models/objetos/geral/mesa_redonda/mesa_redonda.dcc 1:4,4:209.635,0.000,198.669:0.000,0.000,0.000:0
 useObject = models/objetos/geral/barrels/barrel1/barrel1.dcc 1:4,4:242.352,1.900,239.128:-537.000,-59.000,-99.000:0
 useObject = models/objetos/geral/barrels/barrel1/barrel1.dcc 1:4,4:242.161,1.900,226.670:-537.000,-155.000,-99.000:0
 useObject = models/objetos/geral/barrels/barrel1/barrel1.dcc 1:4,4:241.999,9.300,232.760:-537.000,-177.000,-99.000:0
