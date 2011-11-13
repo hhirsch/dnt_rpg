@@ -1,4 +1,5 @@
 CementeryGate = models/objetos/tumbas/cementery_gate/cementery_gate.dcc
+CementeryFence = models/objetos/tumbas/cementery_fence/cementery_fence.dcc
 Cross = models/objetos/tumbas/cruz/cruz.dcc
 TombStone1 = models/objetos/tumbas/ts1/ts1.dcc
 TombStone2 = models/objetos/tumbas/ts2/ts2.dcc
