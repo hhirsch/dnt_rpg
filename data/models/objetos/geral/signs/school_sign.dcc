@@ -1,0 +1,13 @@
+name = School_Sign
+cal3d = models/objetos/geral/signs/school_sign.cfg
+inventory_sizes = 0 0
+inventory_texture = texturas/na.png
+life_points = 80
+fortitude = 5
+reflex = 2
+will = 0
+displacement = 0
+armature_class = 10
+size_modifier = 0
+cost = 35
+static_scenery = 1

@@ -17,6 +17,7 @@ Lorry = models/objetos/industrial/lorry/lorry.dcc
 LightPole = models/street/lightpole/lightpole.dcc
 Mixer = models/street/mixer/mixer.dcc
 Petro_Sign = models/objetos/geral/placa_petro/placa_petro.dcc
+School_Sign = models/objetos/geral/signs/school_sign.dcc
 Stop_Sign = models/objetos/geral/placa_pare/placa_pare.dcc
 Street_Light1 = models/street/streetlight1/streetlight1.dcc
 Street_Light2 = models/street/streetlight2/streetlight2.dcc
