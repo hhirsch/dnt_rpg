@@ -384,6 +384,7 @@ bool nodeEditor::eventGot(int eventInfo, guiObject* obj)
  ***********************************************************************/
 void nodeEditor::openWindow()
 {
+   char dl[16];
    dirs dir;
    if(!nodeWindow)
    {
@@ -433,9 +434,10 @@ void nodeEditor::openWindow()
             "Grid Mode");
 
       /* Delta Value edit */
+      sprintf(dl, "%.2f", deltaValue);
       nodeWindow->getObjectsList()->insertTextBox(80,130,120,144,0,"Delta:");
       deltaText = nodeWindow->getObjectsList()->insertTextBar(122,131,162,145,
-            "1.0",0);
+            dl,0);
 
       /* Finally, open */
       nodeWindow->setExternPointer(&nodeWindow);
