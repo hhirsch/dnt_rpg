@@ -10,5 +10,5 @@ displacement = 0
 armature_class = 10
 size_modifier = 0
 cost = 2500
-dialog = dialogs/objects/computers.dlg
+dialog = dialogs/objects/compdeck.dlg
 static_scenery = 0

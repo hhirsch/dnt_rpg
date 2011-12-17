@@ -253,6 +253,7 @@ data/skills/tocarinst.ski
 
 #dialogs
 data/dialogs/objects/computers.dlg
+data/dialogs/objects/compdeck.dlg
 data/dialogs/objects/bunker_school_server.dlg
 data/dialogs/objects/house2_paints.dlg
 data/dialogs/objects/house2_ovo.dlg

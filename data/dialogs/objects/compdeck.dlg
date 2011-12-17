@@ -1,0 +1,81 @@
+############################################################
+#                     Main Dialog                          #
+############################################################
+dialog(0)
+   npc_begin
+      text = gettext("(The computer is asking for an access code)") 
+   npc_end
+
+   pc_begin
+      option
+         pre_test = have_item("models/objetos/geral/letter/letter.dcc")
+         text = gettext("Insert the code from the letter")
+         action = go_to_dialog(2)
+
+      option
+         text = gettext("Try a random password")
+         post_test = roll(WISDOM, 30)
+         if_action = receive_xp(20)
+         if_action = go_to_dialog(2)
+         else_action = go_to_dialog(1)
+
+      option
+         text = gettext("Search for a buffer overflow")
+         post_test = roll(OPERATE_ELETRONIC_OBJECTS, 28)
+         if_action = receive_xp(20)
+         if_action = go_to_dialog(2)
+         else_action = go_to_dialog(3)
+
+      option
+         text = gettext("Leave the computer")
+         action = finish_dialog() 
+   pc_end
+
+end_dialog
+############################################################
+#                  Wrong Pass Dialog                       #
+############################################################
+dialog(1)
+   npc_begin
+      text = gettext("(You've entered an wrong code)")
+   npc_end
+
+   pc_begin
+      option
+         text = gettext("Try again")
+         action = go_to_dialog(0)
+      option
+         text = gettext("Leave the computer")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                  Correct-Pass Dialog                     #
+############################################################
+dialog(2)
+   npc_begin
+      text = gettext("(You've got full access to the computer)")
+   npc_end
+
+   pc_begin
+      option
+         text = gettext("Copy all information to Logan's notebook")
+         action = complete_mission("missions/tutorial/compdeck", 200, 1)
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                    No Overflows Dialog                   #
+############################################################
+dialog(3)
+   npc_begin
+      text = gettext("(You couldn't find any flaws)")
+   npc_end
+
+   pc_begin
+      option
+         text = gettext("Leave the computer")
+         action = finish_dialog()
+   pc_end
+
+end_dialog
