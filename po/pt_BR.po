@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2011-12-17 15:51-0200\n"
+"POT-Creation-Date: 2011-12-18 14:03-0200\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -4034,7 +4034,7 @@ msgid "Search for a buffer overflow"
 msgstr "Procurar por um estouro de buffer"
 
 #: data/dialogs/objects/compdeck.dlg:30 data/dialogs/objects/compdeck.dlg:48
-#: data/dialogs/objects/compdeck.dlg:77
+#: data/dialogs/objects/compdeck.dlg:68 data/dialogs/objects/compdeck.dlg:83
 msgid "Leave the computer"
 msgstr "Deixar o computador"
 
@@ -4050,11 +4050,11 @@ msgstr "Tentar novamente"
 msgid "(You've got full access to the computer)"
 msgstr "(Você obteve completo acesso ao computador)"
 
-#: data/dialogs/objects/compdeck.dlg:62
+#: data/dialogs/objects/compdeck.dlg:63
 msgid "Copy all information to Logan's notebook"
 msgstr "Copiar todas as informações para o notebook do Logan"
 
-#: data/dialogs/objects/compdeck.dlg:72
+#: data/dialogs/objects/compdeck.dlg:78
 msgid "(You couldn't find any flaws)"
 msgstr "(Você não pode encontrar nenhuma brecha)"
 
@@ -4983,6 +4983,14 @@ msgstr "Computador"
 #: data/models/objetos/geral/notebook/notebook.dcc:1
 msgid "Notebook"
 msgstr "Notebook"
+
+#: data/models/objetos/geral/letter/letter.dcc:1
+msgid "Suspicious Letter"
+msgstr "Carta Suspeita"
+
+#: data/models/objetos/geral/letter/letter.dcc:2
+msgid "A letter with some kind of code written on it."
+msgstr "Uma carta com um código escrito."
 
 #: data/models/objetos/vinyls/banco_darwin.dcc:2
 msgid ""

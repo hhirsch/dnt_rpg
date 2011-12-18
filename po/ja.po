@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2011-12-17 15:51-0200\n"
+"POT-Creation-Date: 2011-12-18 14:03-0200\n"
 "PO-Revision-Date: 2010-08-20 15:50+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
@@ -3326,7 +3326,7 @@ msgid "Search for a buffer overflow"
 msgstr ""
 
 #: data/dialogs/objects/compdeck.dlg:30 data/dialogs/objects/compdeck.dlg:48
-#: data/dialogs/objects/compdeck.dlg:77
+#: data/dialogs/objects/compdeck.dlg:68 data/dialogs/objects/compdeck.dlg:83
 msgid "Leave the computer"
 msgstr ""
 
@@ -3342,11 +3342,11 @@ msgstr ""
 msgid "(You've got full access to the computer)"
 msgstr ""
 
-#: data/dialogs/objects/compdeck.dlg:62
+#: data/dialogs/objects/compdeck.dlg:63
 msgid "Copy all information to Logan's notebook"
 msgstr ""
 
-#: data/dialogs/objects/compdeck.dlg:72
+#: data/dialogs/objects/compdeck.dlg:78
 msgid "(You couldn't find any flaws)"
 msgstr ""
 
@@ -4220,6 +4220,14 @@ msgstr ""
 
 #: data/models/objetos/geral/notebook/notebook.dcc:1
 msgid "Notebook"
+msgstr ""
+
+#: data/models/objetos/geral/letter/letter.dcc:1
+msgid "Suspicious Letter"
+msgstr ""
+
+#: data/models/objetos/geral/letter/letter.dcc:2
+msgid "A letter with some kind of code written on it."
 msgstr ""
 
 #: data/models/objetos/vinyls/banco_darwin.dcc:2
