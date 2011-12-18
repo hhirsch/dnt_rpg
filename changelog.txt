@@ -18,6 +18,7 @@
  - dntMapEditor: Show mouse world coordinates;
  - dntMapEditor: grid mode alternative on object XZ move;
  - dntMapEditor: Tool to select and edit objects;
+ - Using code::blocks as default IDE for Windows build;
 
 BugFixes:
  - Fixed a bug that freezes the game when drinking a beer (thanks 
