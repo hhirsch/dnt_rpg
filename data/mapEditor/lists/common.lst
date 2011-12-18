@@ -25,6 +25,7 @@ Guitar = models/objetos/geral/guitarra/guitarra.dcc
 Healkit = models/objetos/itens/healkit/healkit.dcc
 LCD_Monitor = models/objetos/geral/monitor/monitor.dcc
 LCD_Bunker_School = models/objetos/geral/monitor/monitor_bunker_school.dcc
+Letter = models/objetos/geral/letter/letter.dcc
 Letto = models/objetos/geral/letto/letto.dcc
 Mesa_Grande = models/objetos/geral/mesa_grande/mesa_grande.dcc
 Mesa_Redonda = models/objetos/geral/mesa_redonda/mesa_redonda.dcc
