@@ -1,9 +1,9 @@
-/* 
+/*
   DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
- 
+
   This file is part of DccNiTghtmare.
- 
+
   DccNiTghtmare is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -25,7 +25,7 @@
    #include <SDL/SDL_image.h>
 #endif
 
-#include <SDL_opengl.h>
+#include <SDL/SDL_opengl.h>
 #include "object.h"
 #include "weapon.h"
 #include "money.h"
@@ -198,7 +198,7 @@ object::object(string path, string curMap): thing()
       {
          sscanf(value.c_str(),"%d",&sizeModifier);
       }
-      else if(key =="cost") 
+      else if(key =="cost")
       {
          sscanf(value.c_str(),"%f",&cost);
       }
@@ -313,7 +313,7 @@ object::object(string path): thing()
 
    /* Set the fileName */
    fileName = path;
-   
+
    /* Add the object to the list */
    objectsList::insert(this);
 }
@@ -390,11 +390,11 @@ void object::cleanValues()
  *                          Destructor                        *
  **************************************************************/
 object::~object()
-{ 
+{
    /* Remove the scene node, if any */
    removeSceneNode();
 
-   /* Delete the model 2D used 
+   /* Delete the model 2D used
     * TODO something like model3d for model2d */
    if(model2d)
    {
@@ -466,9 +466,9 @@ void object::setEquipedPosition(int type, float pX, float pY, float pZ,
  *                        renderEquipped                      *
  **************************************************************/
 #if 0
-void object::renderEquipped(int type, float pX, float pY, 
+void object::renderEquipped(int type, float pX, float pY,
       float pZ, float angle, float angleXY, float angleYZ,
-      bool reflexion, bool shadow, 
+      bool reflexion, bool shadow,
       GLfloat* shadowMatrix, float shadowAlpha)
 {
    /* FIXME! */
@@ -527,7 +527,7 @@ void object::renderEquipped(int type, float pX, float pY,
             model3D->renderFromGraphicMemory();
          glPopMatrix();
       glPopMatrix();
- 
+
       glEnable(GL_LIGHTING);
       glDisable(GL_POLYGON_OFFSET_FILL);
       glDisable(GL_STENCIL_TEST);
@@ -707,12 +707,12 @@ void object::callIdleAnimation()
 /*********************************************************************
  *                            depthCollision                         *
  *********************************************************************/
-bool object::depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ, 
+bool object::depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ,
       GLfloat pX, GLfloat pY, GLfloat pZ, boundingBox colBox)
 {
    if(scNode)
    {
-      return(scNode->getModel()->depthCollision(angleX,angleY,angleZ, 
+      return(scNode->getModel()->depthCollision(angleX,angleY,angleZ,
                pX,pY,pZ,colBox));
    }
    /* If no model, no collision =^P */
@@ -779,7 +779,7 @@ void objectsList::remove(object* o)
  *                       removeStaticSceneries                       *
  *********************************************************************/
 void objectsList::removeStaticSceneries()
-{ 
+{
    int i;
    int curTotal = total;
    object* cur = first;
@@ -805,7 +805,7 @@ void objectsList::removeStaticSceneries()
  *                             removeAll                             *
  *********************************************************************/
 void objectsList::removeAll()
-{ 
+{
    int i;
    int curTotal = total;
    object* cur = first;
@@ -842,11 +842,11 @@ object* objectsList::search(string fileName, GLfloat posX, GLfloat posY,
       {
          if(!cur->scNode)
          {
-            /* FIXME: !!  
-            cerr << "Without scNode: " << fileName << " " 
+            /* FIXME: !!
+            cerr << "Without scNode: " << fileName << " "
                  << posX << " " << posY << " " << posZ << " " << endl; */
          }
-         else if( (cur->scNode->getPosX() == posX) && 
+         else if( (cur->scNode->getPosX() == posX) &&
                   (cur->scNode->getPosY() == posY) &&
                   (cur->scNode->getPosZ() == posZ) )
          {
@@ -876,7 +876,7 @@ object* objectsList::search(sceneNode* scNode)
       {
          return(cur);
       }
-      
+
       cur = cur->getNext();
    }
 

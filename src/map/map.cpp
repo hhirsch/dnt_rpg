@@ -1,9 +1,9 @@
-/* 
+/*
   DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
- 
+
   This file is part of DccNiTghtmare.
- 
+
   DccNiTghtmare is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -80,7 +80,7 @@ Square::~Square()
  *                           addObject                              *
  ********************************************************************/
 objSquare* Square::addObject(bool draw, GLfloat x, GLfloat y, GLfloat z,
-                             GLfloat aX, GLfloat aY, GLfloat aZ, 
+                             GLfloat aX, GLfloat aY, GLfloat aZ,
                              bool colision, object* obj)
 {
    /* Define the new objSquare */
@@ -368,7 +368,7 @@ Map::Map()
    shaderAlphaDefined = false;
    if(ext.hasShader())
    {
-      splattingShader.load("shaders/terrain_splat.vert", 
+      splattingShader.load("shaders/terrain_splat.vert",
             "shaders/terrain_splat.frag");
    }
 
@@ -395,7 +395,7 @@ Map::~Map()
 
    /* Delete All Textures */
    textures.clearList();
-   
+
    /* Delete all Walls */
    walls.clearList();
 
@@ -476,7 +476,7 @@ void Map::alloc()
    for(i = 0; i < x; i++)
    {
       MapSquares[i] = new Square[z];
-   } 
+   }
 
    /* Alloc Vertex Buffer (4 x,y,z per square, so 12 floats per square) */
    vertexBuffer = new float[x*z*12];
@@ -506,7 +506,7 @@ int Map::getTextureID(string textureName)
       if(!(tex->name.compare(textureName)) )
       {
          /* Found! */
-         return(tex->index); 
+         return(tex->index);
       }
       tex = (mapTexture*)tex->getNext();
       aux++;
@@ -574,12 +574,12 @@ GLuint Map::insertTexture(string arq, string name, bool atLast)
    if( (img->h != smallestPowerOfTwo(img->h)) ||
        (img->w != smallestPowerOfTwo(img->w)) )
    {
-      cerr << "Warning: image '" << arq 
-           << "' is of non-power of two dimension '" 
+      cerr << "Warning: image '" << arq
+           << "' is of non-power of two dimension '"
            << img->w << "x" << img->h << "'" << endl;
    }
 
-   /* Create the Texture Structs */ 
+   /* Create the Texture Structs */
    tex = new(mapTexture);
 
    /* Insert it at the list */
@@ -591,7 +591,7 @@ GLuint Map::insertTexture(string arq, string name, bool atLast)
    {
       textures.insert(tex);
    }
- 
+
    /* Define it */
    tex->fileName = arq.c_str();
    tex->name = name.c_str();
@@ -607,10 +607,10 @@ GLuint Map::insertTexture(string arq, string name, bool atLast)
       tex->alphaValues[aux] = new float[getSizeZ() * ALPHA_TEXTURE_INC];
    }
 
-   /* Generate the openGL texture */   
+   /* Generate the openGL texture */
    glGenTextures(1, &(tex->index));
    glBindTexture(GL_TEXTURE_2D, tex->index);
-   glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,img->w,img->h, 
+   glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,img->w,img->h,
                 0, DNT_IMAGE_FORMAT, GL_UNSIGNED_BYTE, img->pixels);
 
    /* Enable Anisotropic filtering, if defined */
@@ -631,16 +631,16 @@ GLuint Map::insertTexture(string arq, string name, bool atLast)
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-#ifdef __APPLE__   
+#ifdef __APPLE__
    gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, img->w,
-                     img->h, DNT_IMAGE_FORMAT_A, GL_UNSIGNED_BYTE, 
+                     img->h, DNT_IMAGE_FORMAT_A, GL_UNSIGNED_BYTE,
                      img->pixels );
 #else
    gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, img->w,
-                     img->h, DNT_IMAGE_FORMAT, GL_UNSIGNED_BYTE, 
+                     img->h, DNT_IMAGE_FORMAT, GL_UNSIGNED_BYTE,
                      img->pixels );
 #endif
-   
+
    /* Free the image */
    SDL_FreeSurface(img);
 
@@ -693,7 +693,7 @@ void Map::removeUnusedTextures()
          /* Set pointers */
          rmTex = tex;
          tex = (mapTexture*)tex->getNext();
-         
+
          cout << "Will remove texture: " << rmTex->name << endl;
          /* Remove it from the linked list */
          textures.remove(rmTex);
@@ -735,10 +735,10 @@ void Map::deleteObjects()
         for(o=0; o < MapSquares[Xaux][Zaux].getTotalObjects(); o++)
         {
            next = (objSquare*)sobj->getNext();
-           if(sobj != NULL) 
+           if(sobj != NULL)
            {
               /* If will draw here and isn't scenery */
-              if( (sobj->draw) && (!sobj->obj->isStaticScenery()) ) 
+              if( (sobj->draw) && (!sobj->obj->isStaticScenery()) )
               {
                  /* delete it! */
                  deleteObject(sobj->obj);
@@ -770,7 +770,7 @@ void Map::removeObject(object* obj)
         for(o=0; o < MapSquares[Xaux][Zaux].getTotalObjects(); o++)
         {
            next = (objSquare*)sobj->getNext();
-           if(sobj != NULL) 
+           if(sobj != NULL)
            {
               if(sobj->obj == obj)
               {
@@ -798,21 +798,21 @@ object* Map::getObject(sceneNode* scNode)
 /******************************************************************
  *                          insertObject                          *
  ******************************************************************/
-void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal, 
+void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal,
                        GLfloat angleX, GLfloat angleY, GLfloat angleZ,
                        object* obj, bool collision, bool createSceneNode)
 {
    int qx = (int)xReal / squareSize();
    int qz = (int)zReal / squareSize();
-   insertObject(xReal, yReal, zReal, angleX, angleY, angleZ, 
+   insertObject(xReal, yReal, zReal, angleX, angleY, angleZ,
          obj, qx, qz, collision, createSceneNode);
 }
 
 /******************************************************************
  *                          insertObject                          *
  ******************************************************************/
-void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal, 
-                       GLfloat angleX, GLfloat angleY, GLfloat angleZ, 
+void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal,
+                       GLfloat angleX, GLfloat angleY, GLfloat angleZ,
                        object* obj, int qx, int qz, bool collision,
                        bool createSceneNode)
 {
@@ -828,7 +828,7 @@ void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal,
    if(saux)
    {
       /* Add Object to the square */
-      saux->addObject(true, xReal, yReal, zReal, angleX, angleY, angleZ, 
+      saux->addObject(true, xReal, yReal, zReal, angleX, angleY, angleZ,
             collision, obj);
       boundingBox bounds = obj->scNode->getBoundingBox();
 
@@ -838,18 +838,18 @@ void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal,
       minqx = (int)(bounds.x1) / ssize;
       minqz = (int)(bounds.z1) / ssize;
       maxqx = (int)(bounds.x2) / ssize;
-      maxqz = (int)(bounds.z2) / ssize; 
+      maxqz = (int)(bounds.z2) / ssize;
       int X1, Z1;
       Square* qaux;
       for(X1 = minqx; X1<=maxqx; X1++)
       {
-         for(Z1 = minqz; Z1 <=maxqz; Z1++) 
+         for(Z1 = minqz; Z1 <=maxqz; Z1++)
          {
             qaux = relativeSquare(X1,Z1);
             if((qaux) && (qaux != saux))
             {
                ob =0;
-               qaux->addObject(false,xReal, yReal, zReal, 
+               qaux->addObject(false,xReal, yReal, zReal,
                      angleX, angleY, angleZ,collision,obj);
             }
          }
@@ -875,7 +875,7 @@ wall* Map::addWall(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2)
 
    /* Add it to the list */
    walls.insert(maux);
-   
+
    return(maux);
 }
 
@@ -967,7 +967,7 @@ mapFog Map::getFog()
 void Map::renderQuad(GLfloat x1, GLfloat z1,
               GLfloat x2, GLfloat z2,
               GLfloat h1, GLfloat h2, GLfloat h3, GLfloat h4,
-              GLfloat texCoordX1, GLfloat texCoordZ1, 
+              GLfloat texCoordX1, GLfloat texCoordZ1,
               GLfloat texCoordX2, GLfloat texCoordZ2)
 {
    glTexCoord2f(texCoordX1, texCoordZ1);
@@ -991,25 +991,25 @@ void Map::renderInvisibleSurface()
 {
    glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
    glBegin(GL_QUADS);
- 
+
    if(outdoor)
    {
       glVertex3f(-OUTDOOR_FARVIEW_D4, -5.0f, -OUTDOOR_FARVIEW_D4);
-      glVertex3f(-OUTDOOR_FARVIEW_D4, -5.0f, 
+      glVertex3f(-OUTDOOR_FARVIEW_D4, -5.0f,
             z*OUTDOOR_SQUARE_SIZE+OUTDOOR_FARVIEW_D4);
-      glVertex3f(x*OUTDOOR_SQUARE_SIZE+OUTDOOR_FARVIEW_D4, -5.0f, 
+      glVertex3f(x*OUTDOOR_SQUARE_SIZE+OUTDOOR_FARVIEW_D4, -5.0f,
             z*OUTDOOR_SQUARE_SIZE+OUTDOOR_FARVIEW_D4);
-      glVertex3f(x*OUTDOOR_SQUARE_SIZE+OUTDOOR_FARVIEW_D4, -5.0f, 
+      glVertex3f(x*OUTDOOR_SQUARE_SIZE+OUTDOOR_FARVIEW_D4, -5.0f,
             -OUTDOOR_FARVIEW_D4);
    }
    else
    {
       glVertex3f(-INDOOR_FARVIEW_D4, -5.0f, -INDOOR_FARVIEW_D4);
-      glVertex3f(-INDOOR_FARVIEW_D4, -5.0f, 
+      glVertex3f(-INDOOR_FARVIEW_D4, -5.0f,
             z*INDOOR_SQUARE_SIZE+INDOOR_FARVIEW_D4);
-      glVertex3f(x*INDOOR_SQUARE_SIZE+INDOOR_FARVIEW_D4, -5.0f, 
+      glVertex3f(x*INDOOR_SQUARE_SIZE+INDOOR_FARVIEW_D4, -5.0f,
             z*INDOOR_SQUARE_SIZE+INDOOR_FARVIEW_D4);
-      glVertex3f(x*INDOOR_SQUARE_SIZE+INDOOR_FARVIEW_D4, -5.0f, 
+      glVertex3f(x*INDOOR_SQUARE_SIZE+INDOOR_FARVIEW_D4, -5.0f,
             -INDOOR_FARVIEW_D4);
    }
    glEnd();
@@ -1019,7 +1019,7 @@ void Map::renderInvisibleSurface()
 /********************************************************************
  *                      renderFloorIndoor                           *
  ********************************************************************/
-void Map::renderFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
+void Map::renderFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
                             GLfloat** matriz, bool selectionRender,
                             bool outdoorCompatible, bool enableReflexion)
 {
@@ -1089,12 +1089,12 @@ void Map::renderFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
                              MapSquares[x1][z1].z2 + VIS_DELTA, matriz)) ))
             {
                /* At selection mode, only render if reflect */
-               if( (!selectionRender) || 
+               if( (!selectionRender) ||
                    (MapSquares[x1][z1].flags & SQUARE_REFLECT) )
                {
                   renderQuad(MapSquares[x1][z1].x1, MapSquares[x1][z1].z1,
                              MapSquares[x1][z1].x2, MapSquares[x1][z1].z2,
-                             MapSquares[x1][z1].h1, MapSquares[x1][z1].h2, 
+                             MapSquares[x1][z1].h1, MapSquares[x1][z1].h2,
                              MapSquares[x1][z1].h3, MapSquares[x1][z1].h4,
                              0.0, 0.0, 1.0, 1.0);
                }
@@ -1121,7 +1121,7 @@ void Map::renderFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 /********************************************************************
  *                     renderFloorOutdoor                           *
  ********************************************************************/
-void Map::renderFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
+void Map::renderFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
                              GLfloat** matriz, bool selectionRender)
 {
    /* Create the buffers with visible squares */
@@ -1132,7 +1132,7 @@ void Map::renderFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 
    if(selectionRender)
    {
-      /* At selection mode, only need to draw it one time, 
+      /* At selection mode, only need to draw it one time,
        * without textures */
       glDrawArrays(GL_QUADS, 0, (int)totalVertex / (int)3);
       glDisableClientState(GL_VERTEX_ARRAY);
@@ -1167,18 +1167,18 @@ void Map::renderOutdoorShader()
    splattingShader.enable();
 
    /* Set all uniform textures */
-   glActiveTexture(GL_TEXTURE0);
+   ext.arbActiveTexture(GL_TEXTURE0);
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, shaderAlphaTexture);
    splattingShader.setUniformVariable("alphaMap", (GLint)0);
    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
    glTexCoordPointer(2, GL_FLOAT, 0, uvAlphaBuffer);
 
-   
+
    for(i=0; i < 4; i++)
    {
-      glActiveTexture(GL_TEXTURE1+i);
-      glClientActiveTexture(GL_TEXTURE1+i);
+      ext.arbActiveTexture(GL_TEXTURE1+i);
+      ext.arbClientActiveTexture(GL_TEXTURE1+i);
       glBindTexture(GL_TEXTURE_2D, tex->index);
       switch(i)
       {
@@ -1212,21 +1212,21 @@ void Map::renderOutdoorShader()
       glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-      
+
       /* Set sampler2d */
       splattingShader.setUniformVariable(unif, (GLint)i+1);
 
       /* Next Texture */
       tex = (mapTexture*)tex->getNext();
    }
-   
+
    /* Draw The Array */
    glNormal3i(0,1,0);
    glDrawArrays(GL_QUADS, 0, (int)totalVertex / (int)3);
 
    splattingShader.disable();
-   glActiveTexture(GL_TEXTURE0);
-   glClientActiveTexture(GL_TEXTURE0);
+   ext.arbActiveTexture(GL_TEXTURE0);
+   ext.arbClientActiveTexture(GL_TEXTURE0);
 }
 
 /********************************************************************
@@ -1257,7 +1257,7 @@ void Map::renderOutdoorMultitexture()
    /* Next, define and draw all textures, with multitexture.
     * \FIXME -> when no multitexture is avaible! */
    if(ext.hasMultiTexture())
-   { 
+   {
       ext.arbClientActiveTexture(GL_TEXTURE0_ARB);
       glTexCoordPointer(2, GL_FLOAT, 0, uvAlphaBuffer);
       glEnableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -1275,7 +1275,7 @@ void Map::renderOutdoorMultitexture()
       glDepthMask(GL_TRUE);
       glEnable(GL_BLEND);
       glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-      
+
       while(aux < textures.getTotal())
       {
          /* Only Draw texture with floor count > 0 */
@@ -1289,7 +1289,7 @@ void Map::renderOutdoorMultitexture()
             glTexEnvf(GL_TEXTURE_ENV, GL_OPERAND0_ALPHA_ARB, GL_SRC_ALPHA);
             glEnable(GL_TEXTURE_2D);
 
-            /* Bind the Texture */ 
+            /* Bind the Texture */
             ext.arbActiveTexture(GL_TEXTURE1);
             glBindTexture(GL_TEXTURE_2D, tex->index);
             glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
@@ -1313,7 +1313,7 @@ void Map::renderOutdoorMultitexture()
             /* Draw The Array */
             glNormal3i(0,1,0);
             glDrawArrays(GL_QUADS, 0, (int)totalVertex / (int)3);
-         
+
          }
          tex = (mapTexture*)tex->getNext();
          aux++;
@@ -1336,7 +1336,7 @@ void Map::renderOutdoorMultitexture()
 
    /* So disable the multitexture state. */
    if(ext.hasMultiTexture())
-   { 
+   {
       ext.arbClientActiveTexture(GL_TEXTURE1_ARB);
       glDisableClientState(GL_TEXTURE_COORD_ARRAY);
       ext.arbClientActiveTexture(GL_TEXTURE0_ARB);
@@ -1348,7 +1348,7 @@ void Map::renderOutdoorMultitexture()
 /********************************************************************
  *                           renderFloor                            *
  ********************************************************************/
-void Map::renderFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
+void Map::renderFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
                       GLfloat** matriz, bool selectionRender)
 {
    /* Draw Terrain */
@@ -1358,7 +1358,7 @@ void Map::renderFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    }
    else
    {
-      renderFloorIndoor(cameraX, cameraY, cameraZ, matriz, selectionRender, 
+      renderFloorIndoor(cameraX, cameraY, cameraZ, matriz, selectionRender,
                         outdoor, opt.getReflexionType() > 0);
    }
 
@@ -1381,7 +1381,7 @@ void Map::renderFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 /********************************************************************
  *                             render                               *
  ********************************************************************/
-int Map::render(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
+int Map::render(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
                 GLfloat** matriz, GLfloat perX, GLfloat perZ)
 {
    /* Update doors */
@@ -1413,7 +1413,7 @@ int Map::render(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 /********************************************************************
  *                            renderWalls                           *
  ********************************************************************/
-void Map::renderWalls(GLfloat cameraX, GLfloat cameraY, 
+void Map::renderWalls(GLfloat cameraX, GLfloat cameraY,
                       GLfloat cameraZ, GLfloat** matriz,
                       bool inverted)
 {
@@ -1460,7 +1460,7 @@ void Map::renderWalls(GLfloat cameraX, GLfloat cameraY,
       }
       if(visible)
       {
-         /* Inserting each quad at the renderer */         
+         /* Inserting each quad at the renderer */
 
          /* Front Face */
          maux->frontTexture.getDelta(dX, dY, dZ);
@@ -1468,26 +1468,26 @@ void Map::renderWalls(GLfloat cameraX, GLfloat cameraY,
          v = (altura+1) / dY;
          wallRenderer->addQuad(maux->frontTexture.getTextureId(),
                                maux->frontTexture.getTextureName(),
-                               maux->x1, 0, maux->z1, 
+                               maux->x1, 0, maux->z1,
                                maux->x1, altura, maux->z1,
                                maux->x2, altura, maux->z1,
                                maux->x2, 0, maux->z1,
                                0, 0, u, v,
                                0, 0, 1);
-         
+
          /* Back Face */
          maux->backTexture.getDelta(dX, dY, dZ);
          u = (maux->x2-maux->x1) / dX;
          v = (altura+1) / dY;
          wallRenderer->addQuad(maux->backTexture.getTextureId(),
                                maux->backTexture.getTextureName(),
-                               maux->x1, 0, maux->z2, 
+                               maux->x1, 0, maux->z2,
                                maux->x1, altura, maux->z2,
                                maux->x2, altura, maux->z2,
                                maux->x2, 0, maux->z2,
                                0, 0, u, v,
                                0, 0, -1);
-                                
+
          /* Left Face */
          maux->leftTexture.getDelta(dX, dY, dZ);
          u = (maux->z2-maux->z1) / dX;
@@ -1519,13 +1519,13 @@ void Map::renderWalls(GLfloat cameraX, GLfloat cameraY,
          v = (maux->z2-maux->z1) / 16.0;
          wallRenderer->addQuad(getTextureID("UpperWall"),
                                "UpperWall",
-                               maux->x1, altura, maux->z1, 
+                               maux->x1, altura, maux->z1,
                                maux->x1, altura, maux->z2,
                                maux->x2, altura, maux->z2,
                                maux->x2, altura, maux->z1,
                                0, 0, u, v,
                                0, 1, 0);
-                               
+
       }
       maux = (wall*)maux->getNext();
    }
@@ -1566,7 +1566,7 @@ lake* Map::addLake(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2)
  ********************************************************************/
 Square* Map::relativeSquare(int xa, int za)
 {
-   if( (z <= za) || (x <= xa) || ( xa < 0) || (za < 0)) 
+   if( (z <= za) || (x <= xa) || ( xa < 0) || (za < 0))
    {
       return(NULL);
    }
@@ -1620,7 +1620,7 @@ float Map::getSquareMiniSize()
 GLfloat Map::getHeight(GLfloat nx, GLfloat nz)
 {
    int posX =(int)floor( nx / (squareSize()));
-   int posZ =(int)floor( nz / (squareSize())); 
+   int posZ =(int)floor( nz / (squareSize()));
 
    Square* saux = relativeSquare(posX, posZ);
 
@@ -1633,7 +1633,7 @@ GLfloat Map::getHeight(GLfloat nx, GLfloat nz)
 GLfloat Map::getHeight(GLfloat nx, GLfloat nz, Square* saux)
 {
    float d2, d4, h = 0;
-   double a = 0, 
+   double a = 0,
           b = 0,
           c = 0,
           d = 0,
@@ -1658,9 +1658,9 @@ GLfloat Map::getHeight(GLfloat nx, GLfloat nz, Square* saux)
    if( d2 <= d4 )
    {
       /* is at the upper triangle */
-      a = ( (saux->h4 - saux->h1) * (saux->z2 - saux->z1) ); 
+      a = ( (saux->h4 - saux->h1) * (saux->z2 - saux->z1) );
       b = -( (saux->z2 - saux->z1) * (saux->x2 - saux->x1) );
-      c = ( (saux->x2 - saux->x1) * (saux->h3 - saux->h1) ) - 
+      c = ( (saux->x2 - saux->x1) * (saux->h3 - saux->h1) ) -
           ( (saux->h4 - saux->h1) * (saux->x2 - saux->x1) );
       l = sqrt( a*a + b*b + c*c);
       a = a / l;
@@ -1692,7 +1692,7 @@ GLfloat Map::getHeight(GLfloat nx, GLfloat nz, Square* saux)
 /********************************************************************
  *                       renderSurfaceOnMap                         *
  ********************************************************************/
-void Map::renderSurfaceOnMap(GLuint image, GLfloat xa, GLfloat za, 
+void Map::renderSurfaceOnMap(GLuint image, GLfloat xa, GLfloat za,
                              GLfloat xb, GLfloat zb, GLfloat sumY,
                              int divisions)
 {
@@ -1914,8 +1914,8 @@ int Map::open(string arquivo)
    int IDwallTexturaAtual = -1;
    string nameMuroTexturaAtual = "nada";
    int pisavel=0;
-  
-   /* Load the map file defintions */ 
+
+   /* Load the map file defintions */
    if(!def.load(arquivo))
    {
       cerr << "Error while opening map file: " << arquivo << endl;
@@ -1959,7 +1959,7 @@ int Map::open(string arquivo)
       {
          float xa=0, za=0, xb=0, zb=0;
          float r=0,g=0,b=0,a=0;
-         sscanf(value.c_str(),"%f,%f,%f,%f:%f,%f,%f,%f", 
+         sscanf(value.c_str(),"%f,%f,%f,%f:%f,%f,%f,%f",
                &xa, &za, &xb, &zb,
                &r, &g, &b, &a);
          lake* l = addLake(xa,za,xb,zb);
@@ -1996,7 +1996,7 @@ int Map::open(string arquivo)
 
          /* Read info */
          sscanf(value.c_str(),"%s %f,%f:%d",nome,&pX,&pZ,&ori);
-         
+
          /* Insert it! */
          doorAux->obj = createObject(nome, fileName);
          doorAux->obj->scNode->set(pX, 0.0f, pZ, 0.0f, ori, 0.0f);
@@ -2012,7 +2012,7 @@ int Map::open(string arquivo)
          soundsFileName = value;
          if(!sounds->load(soundsFileName))
          {
-            cerr << "Error loading sounds fileName: " 
+            cerr << "Error loading sounds fileName: "
                << soundsFileName << endl;
          }
       }
@@ -2037,7 +2037,7 @@ int Map::open(string arquivo)
          }
       }
       /* Define Current Wall Texture */
-      else if( (key == "wtf") || (key == "wtb") || 
+      else if( (key == "wtf") || (key == "wtb") ||
                (key == "wtl") || (key == "wtr") )
       {
          char type = key[2];
@@ -2095,14 +2095,14 @@ int Map::open(string arquivo)
       /* Texture Definition */
       else if(key == "texture")
       {
-         sscanf(value.c_str(), "%s %s",nome,nomeArq);  
+         sscanf(value.c_str(), "%s %s",nome,nomeArq);
          insertTexture(nomeArq,nome);
       }
       /* Square declaration */
       else if(key == "square")
       {
          if(posX == (x-1)) //end of the line of squares
-         { 
+         {
             posX = 0;
             posZ++;
          }
@@ -2117,14 +2117,14 @@ int Map::open(string arquivo)
                &MapSquares[posX][posZ].h3,
                &MapSquares[posX][posZ].h4);
 
-         MapSquares[posX][posZ].setDivisions(); 
+         MapSquares[posX][posZ].setDivisions();
          MapSquares[posX][posZ].x1 = (posX) * squareSize();
          MapSquares[posX][posZ].x2 = MapSquares[posX][posZ].x1+squareSize();
          MapSquares[posX][posZ].z1 = (posZ) * squareSize();
-         MapSquares[posX][posZ].z2 = MapSquares[posX][posZ].z1+squareSize(); 
+         MapSquares[posX][posZ].z2 = MapSquares[posX][posZ].z1+squareSize();
          MapSquares[posX][posZ].posX = posX;
          MapSquares[posX][posZ].posZ = posZ;
-         if(pisavel) 
+         if(pisavel)
          {
 
          }
@@ -2147,9 +2147,9 @@ int Map::open(string arquivo)
          if(arqVelho == (MapSquares[posX][posZ].mapConection.mapName))
          {
             squareInic = &MapSquares[posX][posZ];
-            xInic = (MapSquares[posX][posZ].mapConection.x1 + 
+            xInic = (MapSquares[posX][posZ].mapConection.x1 +
                   MapSquares[posX][posZ].mapConection.x2) / 2.0;
-            zInic = (MapSquares[posX][posZ].mapConection.z1 + 
+            zInic = (MapSquares[posX][posZ].mapConection.z1 +
                   MapSquares[posX][posZ].mapConection.z2) / 2.0;
             angleInic = MapSquares[posX][posZ].mapConection.angle;
          }
@@ -2165,11 +2165,11 @@ int Map::open(string arquivo)
       else if(key == "useObject")
       {
          int des=0, quadX=0, quadZ=0, oPis=0;
-         float oX=0.0f, oY=0.0f, oZ=0.0f, 
+         float oX=0.0f, oY=0.0f, oZ=0.0f,
                angleX=0.0f, angleY=0.0f, angleZ=0.0f;
          objSquare* oObj;
          sscanf(value.c_str(),"%s %d:%d,%d:%f,%f,%f:%f,%f,%f:%d",nome,
-               &des, &quadX, &quadZ, &oX, &oY, &oZ, 
+               &des, &quadX, &quadZ, &oX, &oY, &oZ,
                &angleX, &angleY, &angleZ, &oPis);
 
          object* obj = objectsList::search(nome, oX, oY, oZ);
@@ -2194,7 +2194,7 @@ int Map::open(string arquivo)
    }
 
    int ax,az;
-   
+
    /* Now, update pointers to the walls */
    maux = (wall*)walls.getFirst();
    int wNum;
@@ -2202,7 +2202,7 @@ int Map::open(string arquivo)
    int indexMuro;
    Square* aux;
    float ssize = squareSize();
-   
+
    for(wNum = 0; wNum < walls.getTotal(); wNum++)
    {
       inix = (int)floor(maux->x1 / ssize);
@@ -2215,7 +2215,7 @@ int Map::open(string arquivo)
           {
               indexMuro = 0;
               aux = relativeSquare(ax,az);
-              while((aux!=NULL) && (indexMuro < MAX_WALLS) && 
+              while((aux!=NULL) && (indexMuro < MAX_WALLS) &&
                     (aux->walls[indexMuro] != NULL))
               {
                  indexMuro++;
@@ -2226,8 +2226,8 @@ int Map::open(string arquivo)
               }
               else if(indexMuro >= MAX_WALLS)
               {
-                 cerr << "Quad: " << ax << "x" << az 
-                      << "has more walls than permitted: " 
+                 cerr << "Quad: " << ax << "x" << az
+                      << "has more walls than permitted: "
                       << indexMuro << endl;
               }
           }
@@ -2261,15 +2261,15 @@ void Map::newMap(int X, int Z)
 
    /* add a first default texture */
    int IDtexture;
-   
+
    if(isOutdoor())
    {
-      IDtexture = insertTexture("texturas/floor_outdoor/grass.png", 
+      IDtexture = insertTexture("texturas/floor_outdoor/grass.png",
             "texturas/floor_outdoor/grass.png");
    }
    else
    {
-      IDtexture = insertTexture("texturas/floor_indoor/steel1.png", 
+      IDtexture = insertTexture("texturas/floor_indoor/steel1.png",
             "texturas/floor_indoor/steel1.png");
    }
 
@@ -2281,7 +2281,7 @@ void Map::newMap(int X, int Z)
           saux->x1 = (auxX)*squareSize();
           saux->x2 = saux->x1+squareSize();
           saux->z1 = (auxZ)*squareSize();
-          saux->z2 = saux->z1+squareSize(); 
+          saux->z2 = saux->z1+squareSize();
           saux->posX = auxX;
           saux->posZ = auxZ;
           saux->flags |= SQUARE_CAN_WALK;
@@ -2318,7 +2318,7 @@ void Map::optimize()
         {
             if(maux != maux2)
             {
-                if( (maux->x1 == maux2->x1) && 
+                if( (maux->x1 == maux2->x1) &&
                     ( ((maux->z1 >= maux2->z1) && (maux->z2 <= maux2->z2)) ||
                       ((maux->z1 <= maux2->z1) && (maux->z2 >= maux2->z2)) ))
                 {
@@ -2335,7 +2335,7 @@ void Map::optimize()
                        //deleta maux(2)
                     }
                 }
-                else if( (maux->x2 == maux2->x2) && 
+                else if( (maux->x2 == maux2->x2) &&
                     ( ((maux->z1 >= maux2->z1) && (maux->z2 <= maux2->z2)) ||
                       ((maux->z1 <= maux2->z1) && (maux->z2 >= maux2->z2)) ))
                 {
@@ -2352,7 +2352,7 @@ void Map::optimize()
                        //deleta maux(2)
                     }
                 }
-                else if( (maux->z1 == maux2->z1) && 
+                else if( (maux->z1 == maux2->z1) &&
                     ( ((maux->x1 >= maux2->x1) && (maux->x2 <= maux2->x2)) ||
                       ((maux->x1 <= maux2->x1) && (maux->x2 >= maux2->x2)) ))
                 {
@@ -2369,7 +2369,7 @@ void Map::optimize()
                        //deleta maux(2)
                     }
                 }
-                else if( (maux->z2 == maux2->z2) && 
+                else if( (maux->z2 == maux2->z2) &&
                     ( ((maux->x1 >= maux2->x1) && (maux->x2 <= maux2->x2)) ||
                       ((maux->x1 <= maux2->x1) && (maux->x2 >= maux2->x2)) ))
                 {
@@ -2418,7 +2418,7 @@ int Map::save(string arquivo)
 
    /* Remove Unused Textures */
    removeUnusedTextures();
-   
+
    /* Write Dimensions */
    fprintf(arq,"# Made by DccNiTghtmare's MapEditor, %s\n", VERSION);
    fprintf(arq,"size = %dX%d\n",x,z);
@@ -2431,7 +2431,7 @@ int Map::save(string arquivo)
    {
       fprintf(arq,"fogFile = %s\n",dir.getRelativeFile(fog.fileName).c_str());
    }
-  
+
    /* Write NPC file name, if exists */
    if( !npcFileName.empty())
    {
@@ -2445,7 +2445,7 @@ int Map::save(string arquivo)
                    dir.getRelativeFile(particlesFileName).c_str());
    }
 
- 
+
    /* Write music file name */
    if(!music.empty())
    {
@@ -2505,11 +2505,11 @@ int Map::save(string arquivo)
       fprintf(arq,"door = %s %.3f,%.3f:%d\n",
               dir.getRelativeFile(doorAux->obj->getFileName()).c_str(),
               doorAux->obj->scNode->getPosX(),
-              doorAux->obj->scNode->getPosZ(), 
+              doorAux->obj->scNode->getPosZ(),
               (int)doorAux->obj->scNode->getAngleY());
       doorAux = (door*)doorAux->getNext();
    }
-   
+
    /* Write Walls */
    wall* maux = (wall*)walls.getFirst();
    int x1,z1,x2,z2,wNum;
@@ -2519,7 +2519,7 @@ int Map::save(string arquivo)
       fprintf(arq,"wall = %.3f,%.3f,%.3f,%.3f\n",
               maux->x1,maux->z1,maux->x2,maux->z2);
       maux->frontTexture.getDelta(dX,dY,dZ);
-      fprintf(arq,"wtf = %d,%d,%d %s\n", dX, dY, dZ, 
+      fprintf(arq,"wtf = %d,%d,%d %s\n", dX, dY, dZ,
                   getTextureName(maux->frontTexture.getTextureId()).c_str());
       maux->backTexture.getDelta(dX,dY,dZ);
       fprintf(arq,"wtb = %d,%d,%d %s\n", dX,dY,dZ,
@@ -2546,11 +2546,11 @@ int Map::save(string arquivo)
                   MapSquares[x1][z1].h2,
                   MapSquares[x1][z1].h3,
                   MapSquares[x1][z1].h4);
-          
+
           /* Square Texture */
           fprintf(arq,"useTexture = %s\n",
                   getTextureName(MapSquares[x1][z1].texture).c_str());
-          
+
           /* Connection */
           if( MapSquares[x1][z1].mapConection.active )
           {
@@ -2577,7 +2577,7 @@ int Map::save(string arquivo)
                   "useObject = %s %d:%d,%d:%.3f,%.3f,%.3f:%.3f,%.3f,%.3f:%d\n",
                        dir.getRelativeFile(obj->obj->getFileName()).c_str(),
                        obj->draw, x2 + 1, z2 + 1,
-                       obj->x, obj->y, obj->z, 
+                       obj->x, obj->y, obj->z,
                        obj->angleX, obj->angleY, obj->angleZ,
                        !obj->colision);
             }
@@ -2615,11 +2615,11 @@ void Map::drawMiniMap()
    /* Define Size to render */
    mapSizeX = (int)squareMiniSize*(x);
    mapSizeZ = (int)squareMiniSize*(z);
-   
+
    /* Define the scale ratio */
    if(outdoor)
    {
-      
+
       ratio = 0.009f;
       if(x > z)
       {
@@ -2662,13 +2662,13 @@ void Map::drawMiniMap()
    glLoadIdentity();
 
    /* Set the look up, at the map's center looking down at Y axys */
-   GLfloat posX = ratio*x*squareSize()/2.0; 
+   GLfloat posX = ratio*x*squareSize()/2.0;
    GLfloat posZ = ratio*z*squareSize()/2.0;
    gluLookAt(posX, height, posZ, posX, 0.0, posZ, 0, 0, -1);
 
    /* Put some light */
    GLfloat color[4] = {0.8,0.8,0.8,1.0};
-   GLfloat where[4] = {(OUTDOOR_FARVIEW / 2.0)-1, 
+   GLfloat where[4] = {(OUTDOOR_FARVIEW / 2.0)-1,
                        (OUTDOOR_FARVIEW / 2.0)-1 + posX,
                        posZ, 1.0};
    glLightfv(GL_LIGHT0, GL_AMBIENT, color);
@@ -2701,21 +2701,21 @@ void Map::drawMiniMap()
    /* Create the minimap Surface, if needed) */
    if(miniMap == NULL)
    {
-      miniMap = SDL_CreateRGBSurface(SDL_SWSURFACE, 
+      miniMap = SDL_CreateRGBSurface(SDL_SWSURFACE,
                                      mapSizeX, mapSizeZ, 32,
                                      rmask, gmask, bmask, amask);
    }
 
    /* Read the pixels to the surface */
    glReadBuffer(GL_BACK);
-   glReadPixels(0, 0, mapSizeX, mapSizeZ, 
+   glReadPixels(0, 0, mapSizeX, mapSizeZ,
                 GL_RGBA, GL_UNSIGNED_BYTE, miniMap->pixels);
 
    /* Define Surface Params to Blit Later */
    SDL_SetAlpha(miniMap, 0,0);
-   SDL_SetColorKey(miniMap, SDL_SRCCOLORKEY, 
+   SDL_SetColorKey(miniMap, SDL_SRCCOLORKEY,
                    SDL_MapRGB(miniMap->format, 0, 0, 0));
-     
+
    /* Reset the View */
    glDisable(GL_LIGHT0);
    glDisable(GL_LIGHTING);
@@ -2776,7 +2776,7 @@ void Map::createBuffers(GLfloat** matriz)
             uvBuffer[actualTexture+4] = TEXTURE_REPEATS;
             uvBuffer[actualTexture+5] = TEXTURE_REPEATS;
             uvAlphaBuffer[actualTexture+4] = (alphaCoordX + ALPHA_TEXTURE_INC)
-                                             / modX; 
+                                             / modX;
             uvAlphaBuffer[actualTexture+5] = (alphaCoordZ + ALPHA_TEXTURE_INC)
                                              / modZ;
             vertexBuffer[totalVertex+6] = MapSquares[x1][z1].x2;
@@ -2786,7 +2786,7 @@ void Map::createBuffers(GLfloat** matriz)
             uvBuffer[actualTexture+6] = TEXTURE_REPEATS;
             uvBuffer[actualTexture+7] = 0.0;
             uvAlphaBuffer[actualTexture+6] = (alphaCoordX + ALPHA_TEXTURE_INC)
-                                             / modX; 
+                                             / modX;
             uvAlphaBuffer[actualTexture+7] = alphaCoordZ / modZ;
             vertexBuffer[totalVertex+9] = MapSquares[x1][z1].x2;
             vertexBuffer[totalVertex+10] = MapSquares[x1][z1].h4;
@@ -2807,7 +2807,7 @@ void Map::createBuffers(GLfloat** matriz)
 void Map::createSplats()
 {
    int x1, z1;
-   
+
    /* Create the alpha channel, for each square */
    for(z1=0;z1<z;z1++)
    {
@@ -2856,7 +2856,7 @@ void Map::createAlpha(int x1, int z1)
          {
             /* Visit all 8 potential Neighbors */
             for(neigZ = z1-1; neigZ <= z1+1; neigZ++)
-            {           
+            {
                /* Verify if the Z coordinate is valid */
                if( (neigZ >= 0) && (neigZ < z) )
                {
@@ -2946,7 +2946,7 @@ void Map::updateAlphaTextures()
 
       glGenTextures(1, &(tex->alphaTexture));
       glBindTexture(GL_TEXTURE_2D, tex->alphaTexture);
-      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h,
                    0, GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
       glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
@@ -2991,7 +2991,7 @@ void Map::updateShaderAlphaTexture()
    glGenTextures(1, &(shaderAlphaTexture));
    glBindTexture(GL_TEXTURE_2D, shaderAlphaTexture);
 
-   /* Note: the shader splatting has a lmit of 4 textures 
+   /* Note: the shader splatting has a lmit of 4 textures
     *       (one for each image channel) */
    while( (aux < textures.getTotal()) && (aux < 4) )
    {
@@ -3074,7 +3074,7 @@ void Map::updateShaderAlphaTexture()
 
 
    /* Load the Surface onto the GL texture */
-   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 
+   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h,
          0, GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
