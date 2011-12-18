@@ -59,9 +59,15 @@ dialog(2)
 
    pc_begin
       option
+         pre_test = mission_active("missions/tutorial/compdeck.dsl")
          text = gettext("Copy all information to Logan's notebook")
-         action = complete_mission("missions/tutorial/compdeck", 200, 1)
+         action = complete_mission("missions/tutorial/compdeck.dsl", 200, 1)
          action = finish_dialog()
+
+       option
+         text = gettext("Leave the computer")
+         action = finish_dialog()
+
    pc_end
 end_dialog
 ############################################################

@@ -288,6 +288,7 @@ data/models/objetos/itens/racao/racao.dcc
 data/models/objetos/itens/money/money.dcc
 data/models/objetos/geral/computador/computador.dcc
 data/models/objetos/geral/notebook/notebook.dcc
+data/models/objetos/geral/letter/letter.dcc
 
 #Vynils
 data/models/objetos/vinyls/banco_darwin.dcc
