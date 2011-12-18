@@ -327,7 +327,7 @@ square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/steel3_dirty.png
 square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/steel3.png
-connection = 622.922791,117.384361,638.675232,135.716751:90.000000:mapas/tutorial/tyrol.map
+connection = 618.922791,119.384361,635.675232,133.716751:90.000000:mapas/tutorial/tyrol.map
 #Z: 2
 square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/steel3.png
@@ -389,7 +389,7 @@ useObject = models/junk/madeira1/madeira1.dcc 0:9,4:554.055,0.000,192.360:0.000,
 useObject = models/junk/madeira1/madeira1.dcc 0:9,4:524.484,0.000,202.572:0.000,-1271.000,0.000:0
 square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/steel3.png
-connection = 622.922791,117.384361,638.675232,135.716751:90.000000:mapas/tutorial/tyrol.map
+connection = 618.922791,119.384361,635.675232,133.716751:90.000000:mapas/tutorial/tyrol.map
 useObject = models/junk/pneu/pneu.dcc 1:10,3:626.319,0.000,166.311:0.000,-155.000,0.000:0
 useObject = models/junk/pneu/pneu.dcc 1:10,3:612.534,0.000,164.797:0.000,-155.000,0.000:0
 useObject = models/junk/pneu/pneu.dcc 1:10,3:617.850,0.000,150.524:0.000,-155.000,0.000:0
