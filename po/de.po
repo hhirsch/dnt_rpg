@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2011-12-18 14:03-0200\n"
+"POT-Creation-Date: 2011-12-18 15:49-0200\n"
 "PO-Revision-Date: 2011-01-04 13:00+0000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: German <de@li.org>\n"
@@ -3709,6 +3709,27 @@ msgid ""
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:297
+msgid ""
+"When you have some time, please go to the old software factory (the big "
+"building at the end of Tyrol), and try to access the old computer there. I "
+"couldn't discover the needed password!"
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:301 data/dialogs/tutorial/logan.dlg:316
+msgid "I'll do it."
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:312
+msgid ""
+"You haven't accessed the old factory computer. I really need all information "
+"you can find there."
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:320
+msgid "I've forgot!"
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:329
 #: data/dialogs/tutorial/atleticano.dlg:120
 #: data/dialogs/tutorial/cruzeirense.dlg:83
 #: data/dialogs/tutorial/hippie.dlg:206 data/dialogs/tutorial/dona.dlg:283
@@ -3717,7 +3738,7 @@ msgid ""
 "there's a latter version or join DNTeam to help us develop it!"
 msgstr ""
 
-#: data/dialogs/tutorial/logan.dlg:301 data/dialogs/tutorial/atleticano.dlg:38
+#: data/dialogs/tutorial/logan.dlg:333 data/dialogs/tutorial/atleticano.dlg:38
 #: data/dialogs/tutorial/atleticano.dlg:51
 #: data/dialogs/tutorial/atleticano.dlg:64
 #: data/dialogs/tutorial/atleticano.dlg:124
@@ -4227,6 +4248,10 @@ msgstr "Hole Psychedelische Ration für den F.S.C. Hippie"
 #: data/missions/tutorial/santa2.mis:2
 msgid "Install Ruindows at the hippie's computer."
 msgstr "Installiere Ruindows auf Hippie's Computer."
+
+#: data/missions/tutorial/compdeck.mis:2
+msgid "Copy info from old factory computer to Logan."
+msgstr ""
 
 #: data/models/objetos/books/combat_tutorial/combat_tutorial.dcc:2
 msgid ""
