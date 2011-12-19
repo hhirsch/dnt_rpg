@@ -1,5 +1,6 @@
 ================================================
 |                Version 0.8                   |
+|            Released: 2011-02-19              |
 ================================================
  - Added view frustum culling for shadows;
  - map: Add object rotation to all axis;
