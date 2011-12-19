@@ -8,11 +8,10 @@
 
 tarFile=$1
 project="dccnitghtmare"
-workDirs="bin data po src syntax"
-homeFiles="aclocal.m4 configure configure.in DccNiTghtmare.dev \
-           DNTMapEditor.dev Doxyfile.in \
+workDirs="bin data po src syntax macosx windows"
+homeFiles="aclocal.m4 configure configure.in Doxyfile.in \
            install.sh Makefile.in COPYING README \
-           systems.txt torelease.sh config.sub config.guess"
+           torelease.sh config.sub config.guess"
 
 # Verify if file was defined
 if [[ -z $tarFile ]]; then
