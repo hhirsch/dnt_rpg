@@ -1,6 +1,6 @@
 /*
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
 
   This file is part of DccNiTghtmare.
 
@@ -23,7 +23,7 @@
 
 #define LOCALEDIR "..\\data\\locale\\"
 #define PACKAGE "dccnitghtmare"
-#define VERSION "0.8"
+#define VERSION "0.9"
 
 #define DATADIR "..\\data\\"
 
