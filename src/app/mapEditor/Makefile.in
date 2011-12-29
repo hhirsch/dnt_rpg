@@ -99,96 +99,98 @@ BIN = ../../../bin/
 all: $(BIN)dntMapEditor
 
 area.o: area.cpp area.h
-	@printf "Making area.o... "
-	@$(CC) $(CFLAGS) area.cpp -o area.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) area.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 editor.o: editor.cpp editor.h guiIO.h terrain.h portal.h wall.h message.h\
           objects.h particles.h npcs.h $(ENDENGINE)sun.h $(ENDENGINE)sky.h\
           $(ENDENGINE)character.h $(ENDENGINE)culling.h $(ENDENGINE)util.h\
           $(ENDPART)partcontroller.h $(ENDMAP)map.h
-	@printf "Making editor.o... "
-	@$(CC) $(CFLAGS) editor.cpp -o editor.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) editor.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 grasswindow.o: grasswindow.cpp grasswindow.h $(ENDGUI)farso.h $(ENDPART)grass.h\
                $(ENDPART)partcontroller.h
-	@printf "Making grasswindow.o... "
-	@$(CC) $(CFLAGS) grasswindow.cpp -o grasswindow.o
-	@printf "\e[0;32mDone.\e[0;0m\n"	
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) grasswindow.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"	
 
 guiIO.o: guiIO.cpp guiIO.h portal.h terrain.h listwindow.h grasswindow.h\
          waterwindow.h $(ENDGUI)farso.h $(ENDENGINE)camera.h
-	@printf "Making guiIO.o... "
-	@$(CC) $(CFLAGS) guiIO.cpp -o guiIO.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) guiIO.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 listwindow.o: listwindow.cpp listwindow.h $(ENDGUI)farso.h
-	@printf "Making listwindow.o... "
-	@$(CC) $(CFLAGS) listwindow.cpp -o listwindow.o
-	@printf "\e[0;32mDone.\e[0;0m\n"	
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) listwindow.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"	
 
 mapEditor.o: mapEditor.cpp mapEditor.h editor.h
-	@printf "Making mapEditor.o... "
-	@$(CC) $(CFLAGS) mapEditor.cpp -o mapEditor.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) mapEditor.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 nodeeditor.o: nodeeditor.cpp nodeeditor.h
-	@printf "Making nodeeditor.o... "
-	@$(CC) $(CFLAGS) nodeeditor.cpp -o nodeeditor.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) nodeeditor.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 message.o: message.cpp message.h $(ENDGUI)farso.h
-	@printf "Making message.o... "
-	@$(CC) $(CFLAGS) message.cpp -o message.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) message.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 npcs.o: npcs.cpp npcs.h message.h $(ENDMAP)map.h \
         $(ENDENGINE)util.h $(ENDENGINE)character.h $(ENDCLASSES)feats.h
-	@printf "Making npcs.o... "
-	@$(CC) $(CFLAGS) npcs.cpp -o npcs.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) npcs.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 objects.o: objects.cpp objects.h message.h $(ENDMAP)map.h\
            $(ENDENGINE)util.h
-	@printf "Making objects.o... "
-	@$(CC) $(CFLAGS) objects.cpp -o objects.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) objects.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 particles.o: particles.cpp particles.h grasswindow.h waterwindow.h message.h\
              guiIO.h $(ENDMAP)map.h $(ENDPART)partcontroller.h
-	@printf "Making particles.o... "
-	@$(CC) $(CFLAGS) particles.cpp -o particles.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) particles.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 portal.o: portal.cpp portal.h area.h message.h $(ENDMAP)map.h\
           $(ENDENGINE)util.h
-	@printf "Making portal.o... "
-	@$(CC) $(CFLAGS) portal.cpp -o portal.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) portal.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 terrain.o: terrain.cpp terrain.h $(ENDMAP)map.h message.h
-	@printf "Making terrain.o... "
-	@$(CC) $(CFLAGS) terrain.cpp -o terrain.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) terrain.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 wall.o: wall.cpp wall.h $(ENDMAP)map.h $(ENDGUI)draw.h message.h
-	@printf "Making wall.o... "
-	@$(CC) $(CFLAGS) wall.cpp -o wall.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) wall.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 waterwindow.o: waterwindow.cpp waterwindow.h $(ENDPART)partcontroller.h\
                $(ENDGUI)farso.h
-	@printf "Making waterwindow.o... "
-	@$(CC) $(CFLAGS) waterwindow.cpp -o waterwindow.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) waterwindow.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
-$(BIN)dntMapEditor: $(OBJSGUI) $(OBJSIA) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) $(OBJSCBOOK) $(OBJS)
-	@printf "Linking mapEditor... "
-	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSIA) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) $(OBJSCBOOK) $(OBJS) -o $(BIN)dntMapEditor
-	@printf "\e[0;32mDone.\e[0;0m\n"
+$(BIN)dntMapEditor: $(OBJSGUI) $(OBJSIA) $(OBJSMAPA) $(OBJSENGINE) \
+                    $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) \
+						  $(OBJSSOUND) $(OBJSFIGHT) $(OBJSCBOOK) $(OBJS)
+	@printf "Linking $@...\n"
+	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSIA) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) $(OBJSCBOOK) $(OBJS) -o $@
+	@printf "\e[0;32mLinked\e[0;0m ($@)\n"
 
 clean:
-	@printf "Cleaning mapEditor Bin Files... "
+	@printf "Cleaning mapEditor Bin Files...\n"
 	@\rm -rf *.o *.e $(BIN)dntMapEditor
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "\e[0;32mCleaned.\e[0;0m\n"

@@ -1,4 +1,21 @@
-# DccNiTghtmare is public domain. Do whatever you want with this code.
+#  DccNiTghtmare: a satirical post-apocalyptical RPG.
+#  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+# 
+#  This file is part of DccNiTghtmare.
+# 
+#  DccNiTghtmare is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  DccNiTghtmare is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+
 
 CFLAGS = @CPPFLAGS@ -g -c -Wall -O2
 CC = @CXX@
@@ -32,66 +49,69 @@ OBJS = agent.o astar.o fuzzy.o fuzzyfunction.o fuzzyrule.o fuzzyvariable.o iafun
 all: $(OBJS)
 
 agent.o: agent.cpp agent.h $(ENDENGINE)util.h
-	@printf "Making agent.o... "
-	@$(CPP) $(CFLAGS) agent.cpp -o agent.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) agent.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 astar.o: astar.cpp astar.h pattAgent.h $(ENDMAP)map.h
-	@printf "Making astar.o... "
-	@$(CPP) $(CFLAGS) astar.cpp -o astar.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) astar.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 fuzzy.o: fuzzy.cpp fuzzy.h fuzzyrule.h fuzzyfunction.h fuzzyvariable.h
-	@printf "Making fuzzy.o... "
-	@$(CPP) $(CFLAGS) fuzzy.cpp -o fuzzy.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) fuzzy.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 fuzzyfunction.o: fuzzyfunction.cpp fuzzyfunction.h
-	@printf "Making fuzzyfunction.o... "
-	@$(CPP) $(CFLAGS) fuzzyfunction.cpp -o fuzzyfunction.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) fuzzyfunction.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 fuzzyrule.o: fuzzyrule.cpp fuzzyrule.h fuzzyfunction.h fuzzyvariable.h
-	@printf "Making fuzzyrule.o... "
-	@$(CPP) $(CFLAGS) fuzzyrule.cpp -o fuzzyrule.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) fuzzyrule.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 fuzzyvariable.o: fuzzyvariable.cpp fuzzyvariable.h fuzzyfunction.h
-	@printf "Making fuzzyvariable.o... "
-	@$(CPP) $(CFLAGS) fuzzyvariable.cpp -o fuzzyvariable.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) fuzzyvariable.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 iafuncs.o: iafuncs.cpp iafuncs.h
-	@printf "Making iafuncs.o... "
-	@$(CPP) $(CFLAGS) iafuncs.cpp -o iafuncs.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) iafuncs.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
-iascript.o: iascript.cpp iascript.h iafuncs.h iavariable.h iastack.h $(ENDENGINE)character.h $(ENDCLASSES)object.h $(ENDCLASSES)feats.h $(ENDCLASSES)skills.h $(ENDCLASSES)actions.h $(ENDMAP)map.h
-	@printf "Making iascript.o... "
-	@$(CPP) $(CFLAGS) iascript.cpp -o iascript.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+iascript.o: iascript.cpp iascript.h iafuncs.h iavariable.h \
+            iastack.h $(ENDENGINE)character.h $(ENDCLASSES)object.h \
+				$(ENDCLASSES)feats.h $(ENDCLASSES)skills.h \
+				$(ENDCLASSES)actions.h $(ENDMAP)map.h
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) iascript.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 iastack.o: iastack.cpp iastack.h
-	@printf "Making iastack.o... "
-	@$(CPP) $(CFLAGS) iastack.cpp -o iastack.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) iastack.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 iavariable.o: iavariable.cpp iavariable.h iafuncs.h
-	@printf "Making iavariable.o... "
-	@$(CPP) $(CFLAGS) iavariable.cpp -o iavariable.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) iavariable.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 pattAgent.o: pattAgent.cpp pattAgent.h agent.h
-	@printf "Making pattAgent.o... "
-	@$(CPP) $(CFLAGS) pattAgent.cpp -o pattAgent.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) pattAgent.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 potentAgent.o: potentAgent.cpp potentAgent.h agent.h
-	@printf "Making potentAgent.o... "
-	@$(CPP) $(CFLAGS) potentAgent.cpp -o potentAgent.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) potentAgent.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 clean:
-	@printf "Cleaning AI Bin Files... "
+	@printf "Cleaning AI Bin Files...\n"
 	@\rm -rf *.o ./testeai
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "\e[0;32mCleaned.\e[0;0m\n"

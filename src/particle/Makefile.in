@@ -1,3 +1,21 @@
+#  DccNiTghtmare: a satirical post-apocalyptical RPG.
+#  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+# 
+#  This file is part of DccNiTghtmare.
+# 
+#  DccNiTghtmare is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  DccNiTghtmare is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+
 CFLAGS = @CPPFLAGS@ -g -c -Wall -O2
 CC = @CXX@
 LDFLAGS = @LDFLAGS@
@@ -13,61 +31,61 @@ OBJS = interplane.o lake.o particle.o partcontroller.o partelement.o \
 all: $(OBJS)
 
 interplane.o: interplane.cpp interplane.h
-	@printf "Making interplane.o... "
-	@$(CC) $(CFLAGS) interplane.cpp -o interplane.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) interplane.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 grass.o: grass.cpp grass.h particle.h wind.h
-	@printf "Making grass.o... "
-	@$(CC) $(CFLAGS) grass.cpp -o grass.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) grass.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 lake.o: lake.cpp lake.h
-	@printf "Making lake.o... "
-	@$(CC) $(CFLAGS) lake.cpp -o lake.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) lake.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 particle.o: particle.cpp particle.h partelement.h partorigin.h \
             $(ENDETC)defparser.h $(ENDETC)extensions.h \
             $(ENDETC)dirs.h $(ENDENGINE)culling.h $(ENDETC)list.h \
 				$(ENDMAP)map.h $(ENDENGINE)character.h
-	@printf "Making particle.o... "
-	@$(CC) $(CFLAGS) particle.cpp -o particle.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) particle.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 wave.o: wave.cpp wave.h
-	@printf "Making wave.o (Waves)... "
-	@$(CC) $(CFLAGS) wave.cpp -o wave.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) wave.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 wind.o: wind.h wind.cpp
-	@printf "Making wind.o (Wind)... "
-	@$(CC) $(CFLAGS) wind.cpp -o wind.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) wind.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 partelement.o: partelement.cpp partelement.h
-	@printf "Making partelement.o..."
-	@$(CC) $(CFLAGS) partelement.cpp -o partelement.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) partelement.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 partlist.o: partlist.cpp partlist.h particle.h $(ENDETC)list.h
-	@printf "Making partlist.o..."
-	@$(CC) $(CFLAGS) partlist.cpp -o partlist.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) partlist.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 partorigin.o: partorigin.cpp partorigin.h
-	@printf "Making partorigin.o..."
-	@$(CC) $(CFLAGS) partorigin.cpp -o partorigin.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) partorigin.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 partcontroller.o: partcontroller.cpp partcontroller.h particle.h \
                   partlist.h $(ENDENGINE)collision.h $(ENDENGINE)character.h \
 						$(ENDETC)dirs.h $(ENDETC)extensions.h
-	@printf "Making partcontroller.o..."
-	@$(CC) $(CFLAGS) partcontroller.cpp -o partcontroller.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) partcontroller.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 clean: 
-	@printf "Cleaning Particle Bin Files... "
+	@printf "Cleaning Particle Bin Files...\n"
 	@\rm -rf *.o *.e
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "\e[0;32mCleaned.\e[0;0m\n"

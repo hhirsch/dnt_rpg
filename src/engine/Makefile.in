@@ -1,4 +1,20 @@
-# DccNiTghtmare is public domain. Do whatever you want with this code.
+#  DccNiTghtmare: a satirical post-apocalyptical RPG.
+#  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+# 
+#  This file is part of DccNiTghtmare.
+# 
+#  DccNiTghtmare is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  DccNiTghtmare is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
 
 prefix = @prefix@
 datadir = @datarootdir@
@@ -81,34 +97,34 @@ FIFO = #../etc/fifo.o
 all: $(BIN)dccnitghtmare
 
 alignwindow.o: alignwindow.h alignwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)align.h
-	@printf "Making alignwindow.o... "
-	@$(CC) $(CFLAGS) $(SUPREDE) alignwindow.cpp -o alignwindow.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) $(SUPREDE) alignwindow.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 aspectwindow.o: aspectwindow.h aspectwindow.cpp $(ENDGUI)farso.h character.h $(ENDETC)userinfo.h $(ENDETC)dirs.h
-	@printf "Making aspectwindow.o... "
-	@$(CC) $(CFLAGS) $(SUPREDE) aspectwindow.cpp -o aspectwindow.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) $(SUPREDE) aspectwindow.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 attwindow.o: attwindow.h attwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)skills.h $(ENDETC)dirs.h
-	@printf "Making attwindow.o... "
-	@$(CC) $(CFLAGS) $(SUPREDE) attwindow.cpp -o attwindow.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) $(SUPREDE) attwindow.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 barterwindow.o: barterwindow.h barterwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)barter.h inventwindow.h itemwindow.h $(ENDETC)dirs.h
-	@printf "Making barterwindow.o... "
-	@$(CC) $(CFLAGS) $(SUPREDE) barterwindow.cpp -o barterwindow.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) $(SUPREDE) barterwindow.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 briefing.o: briefing.cpp briefing.h
-	@printf "Making briefing.o... "
-	@$(CC) $(CFLAGS) briefing.cpp -o briefing.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) briefing.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 camera.o: camera.cpp camera.h $(ENDMAP)map.h
-	@printf "Making camera.o... "
-	@$(CC) $(CFLAGS) camera.cpp -o camera.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) camera.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 character.o: character.cpp character.h $(ENDGUI)draw.h $(ENDGUI)picture.h \
              $(ENDGUI)healthBar.h $(ENDCLASSES)thing.h $(ENDCLASSES)feats.h \
@@ -117,41 +133,41 @@ character.o: character.cpp character.h $(ENDGUI)draw.h $(ENDGUI)picture.h \
 				 $(ENDMAP)map.h barterwindow.h $(ENDETC)dirs.h \
 				 $(ENDCLASSES)modeffect.h $(ENDCLASSES)feats.h \
 				 $(ENDIA)iascript.h
-	@printf "Making character.o... "
-	@$(CC) $(CFLAGS) character.cpp -o character.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) character.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 charwindow.o: charwindow.h charwindow.cpp character.h $(ENDGUI)farso.h \
 				 $(ENDCLASSES)modeffect.h $(ENDCLASSES)feats.h
-	@printf "Making charwindow.o... "
-	@$(CC) $(CFLAGS) charwindow.cpp -o charwindow.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) charwindow.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 classwindow.o: classwindow.h classwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)classes.h
-	@printf "Making classwindow.o... "
-	@$(CC) $(CFLAGS) classwindow.cpp -o classwindow.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) classwindow.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 collision.o: collision.cpp collision.h $(ENDMAP)map.h character.h
-	@printf "Making collision.o... "
-	@$(CC) $(CFLAGS) collision.cpp -o collision.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) collision.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 culling.o: culling.cpp culling.h
-	@printf "Making culling.o... "
-	@$(CC) $(CFLAGS) culling.cpp -o culling.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) culling.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 cursor.o: cursor.cpp cursor.h $(ENDETC)dirs.h
-	@printf "Making cursor.o... "
-	@$(CC) $(CFLAGS) cursor.cpp -o cursor.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) cursor.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 dialog.o: dialog.cpp dialog.h $(ENDGUI)farso.h character.h barterwindow.h \
           $(ENDIA)iascript.h
-	@printf "Making dialog.o... "
-	@$(CC) $(CFLAGS) dialog.cpp -o dialog.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) dialog.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 dccnit.o: dccnit.h dccnit.cpp util.h $(ENDETC)userinfo.h \
           $(ENDCLASSES)skills.h $(ENDCLASSES)feats.h \
@@ -165,128 +181,128 @@ dccnit.o: dccnit.h dccnit.cpp util.h $(ENDETC)userinfo.h \
 			 classwindow.h collision.h cursor.h dialog.h featsel.h initial.h \
 			 inventwindow.h itemwindow.h modstate.h options.h racewindow.h \
 			 shadow.h shortcutswindow.h skillwindow.h sun.h util.h savefile.h
-	@printf "Making dccnit.o... "
-	@$(CC) $(CFLAGS) $(SUPREDE) dccnit.cpp -o dccnit.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) $(SUPREDE) dccnit.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 featsel.o: featsel.h featsel.cpp character.h $(ENDGUI)farso.h \
            $(ENDCLASSES)feats.h
-	@printf "Making featsel.o... "
-	@$(CC) $(CFLAGS) featsel.cpp -o featsel.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) featsel.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 featswindow.o: featswindow.h featswindow.cpp character.h $(ENDGUI)farso.h $(ENDCLASSES)feats.h
-	@printf "Making featswindow.o... "
-	@$(CC) $(CFLAGS) featswindow.cpp -o featswindow.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) featswindow.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 
 initial.o: initial.h initial.cpp $(ENDGUI)farso.h $(ENDSOUND)sound.h ../config.h
-	@printf "Making initial.o... "
-	@$(CC) $(CFLAGS) $(SUPREDE) initial.cpp -o initial.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) $(SUPREDE) initial.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 inventwindow.o: inventwindow.h inventwindow.cpp $(ENDGUI)farso.h \
                 $(ENDCLASSES)inventory.h $(ENDMAP)map.h cursor.h \
 					 modstate.h util.h itemwindow.h $(ENDETC)dirs.h \
 					 $(ENDIA)iascript.h
-	@printf "Making inventwindow.o... "
-	@$(CC) $(CFLAGS) $(SUPREDE) inventwindow.cpp -o inventwindow.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) $(SUPREDE) inventwindow.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 itemwindow.o: itemwindow.h itemwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)object.h
-	@printf "Making itemwindow.o... "
-	@$(CC) $(CFLAGS) itemwindow.cpp -o itemwindow.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) itemwindow.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 journalwindow.o: journalwindow.h journalwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)mission.h
-	@printf "Making journalwindow.o... "
-	@$(CC) $(CFLAGS) $(SUPREDE) journalwindow.cpp -o journalwindow.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) $(SUPREDE) journalwindow.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 levelup.o: levelup.cpp levelup.h character.h cursor.h classwindow.h skillwindow.h options.h culling.h
-	@printf "Making levelup.o... "
-	@$(CC) $(CFLAGS) levelup.cpp -o levelup.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) levelup.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 minimapwindow.o: minimapwindow.h minimapwindow.cpp $(ENDGUI)farso.h $(ENDMAP)map.h
-	@printf "Making minimapwindow.o... "
-	@$(CC) $(CFLAGS) $(SUPREDE) minimapwindow.cpp -o minimapwindow.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) $(SUPREDE) minimapwindow.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 modstate.o: modstate.h modstate.cpp $(ENDCLASSES)inventory.h $(ENDMAP)map.h
-	@printf "Making modstate.o... "
-	@$(CC) $(CFLAGS) $(SUPREDE) modstate.cpp -o modstate.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) $(SUPREDE) modstate.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 moneywindow.o: moneywindow.h moneywindow.cpp $(ENDGUI)farso.h \
                $(ENDCLASSES)object.h $(ENDCLASSES)inventory.h \
 					$(ENDCLASSES)money.h
-	@printf "Making moneywindow.o... "
-	@$(CC) $(CFLAGS) moneywindow.cpp -o moneywindow.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) moneywindow.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 options.o: options.h options.cpp $(ENDGUI)farso.h $(ENDETC)userinfo.h $(ENDETC)dirs.h
-	@printf "Making options.o... "
-	@$(CC) $(CFLAGS) $(SUPREDE) options.cpp -o options.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) $(SUPREDE) options.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 racewindow.o: racewindow.h racewindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)race.h
-	@printf "Making racewindow.o... "
-	@$(CC) $(CFLAGS) $(SUPREDE) racewindow.cpp -o racewindow.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) $(SUPREDE) racewindow.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 savefile.o: savefile.h savefile.cpp dccnit.h modstate.h $(ENDGUI)farso.h
-	@printf "Making savefile.o... "
-	@$(CC) $(CFLAGS) savefile.cpp -o savefile.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) savefile.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 savewindow.o: savefile.h savewindow.cpp savewindow.h $(ENDGUI)farso.h
-	@printf "Making savewindow.o... "
-	@$(CC) $(CFLAGS) savewindow.cpp -o savewindow.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) savewindow.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 skillwindow.o: skillwindow.h skillwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)skills.h
-	@printf "Making skillwindow.o... "
-	@$(CC) $(CFLAGS) $(SUPREDE) skillwindow.cpp -o skillwindow.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) $(SUPREDE) skillwindow.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 shadow.o: shadow.h shadow.cpp camera.h
-	@printf "Making shadow.o... "
-	@$(CC) $(CFLAGS) $(SUPREDE) shadow.cpp -o shadow.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) $(SUPREDE) shadow.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 shortcutswindow.o: shortcutswindow.h shortcutswindow.cpp $(ENDGUI)farso.h
-	@printf "Making shortcutswindow.o... "
-	@$(CC) $(CFLAGS) $(SUPREDE) shortcutswindow.cpp -o shortcutswindow.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) $(SUPREDE) shortcutswindow.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 sky.o: sky.h sky.cpp $(ENDMAP)map.h $(ENDETC)dirs.h
-	@printf "Making sky.o... "
-	@$(CC) $(CFLAGS) $(SUPREDE) sky.cpp -o sky.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) $(SUPREDE) sky.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 	
 sun.o: sun.h sun.cpp $(ENDETC)dirs.h
-	@printf "Making sun.o... "
-	@$(CC) $(CFLAGS) $(SUPREDE) sun.cpp -o sun.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) $(SUPREDE) sun.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 teste.o: teste.cpp ../config.h dccnit.h $(ENDGUI)farso.h $(ENDETC)dirs.h
-	@printf "Making teste.o... "
-	@$(CC) $(CFLAGS) $(SUPREDE) teste.cpp -o teste.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) $(SUPREDE) teste.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 util.o: util.cpp util.h $(ENDGUI)farso.h
-	@printf "Making util.o... "
-	@$(CC) $(CFLAGS) $(SUPREDE) util.cpp -o util.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) $(SUPREDE) util.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 $(BIN)dccnitghtmare: $(OBJSGUI) $(OBJSMAPA) $(OBJSNET) $(OBJSETC) $(OBJSCLASSES) $(OBJSLANG) $(OBJSSOUND) $(OBJSPART) $(OBJSFIGHT) $(OBJSIA) $(OBJSCBOOK) $(OBJS)  
-	@printf "Linking dccnitghtmare... "
-	@$(CC) $(LDFLAGS) $(LIBS) $(EFLAGS) $(OBJSGUI) $(OBJSCLASSES) $(OBJSLANG) $(OBJSNET) $(OBJSETC) $(OBJSIA) $(FIFO) $(OBJSMAPA) $(OBJSCBOOK) $(OBJSSOUND) $(OBJSPART) $(OBJSFIGHT) $(OBJS) $(SUPREDE) -o $(BIN)dccnitghtmare
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Linking $@...\n"
+	@$(CC) $(LDFLAGS) $(LIBS) $(EFLAGS) $(OBJSGUI) $(OBJSCLASSES) $(OBJSLANG) $(OBJSNET) $(OBJSETC) $(OBJSIA) $(FIFO) $(OBJSMAPA) $(OBJSCBOOK) $(OBJSSOUND) $(OBJSPART) $(OBJSFIGHT) $(OBJS) $(SUPREDE) -o $@
+	@printf "\e[0;32mLinked\e[0;0m ($@)\n"
 
 clean:
-	@printf "Cleaning Engine Bin Files... "
+	@printf "Cleaning Engine Bin Files...\n"
 	@\rm -rf *.o *.e $(BIN)dccnitghtmare
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "\e[0;32mCleaned.\e[0;0m\n"

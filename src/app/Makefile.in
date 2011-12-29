@@ -1,4 +1,21 @@
-#  DccNiTghtmare is public domain. Do whatever you want with this code.
+#  DccNiTghtmare: a satirical post-apocalyptical RPG.
+#  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+# 
+#  This file is part of DccNiTghtmare.
+# 
+#  DccNiTghtmare is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  DccNiTghtmare is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+
 CFLAGS = @CPPFLAGS@ -g -c -Wall -O2
 CC = @CXX@
 LDFLAGS = @LDFLAGS@
@@ -85,14 +102,17 @@ OBJSFNT = $(OBJSGUI) $(ENDENGINE)culling.o $(ENDENGINE)util.o
 all: parts $(BIN)heightmap2dnt
 
 heightmap2dnt.o: heightmap2dnt.cpp
-	@printf "Making heightmap2dnt.o... "
-	@$(CC) $(CFLAGS) heightmap2dnt.cpp -o heightmap2dnt.o
-	@printf "\e[0;32mDone.\e[0;0m\n"	
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) heightmap2dnt.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"	
 
-$(BIN)heightmap2dnt: $(OBJSGUI) $(OBJSIA) $(OBJSMAPA) $(OBJSCBOOK) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) heightmap2dnt.o
-	@printf "Linking heightmap2dnt... "
-	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSIA) $(OBJSCBOOK) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) heightmap2dnt.o -o $(BIN)heightmap2dnt
-	@printf "\e[0;32mDone.\e[0;0m\n"
+$(BIN)heightmap2dnt: $(OBJSGUI) $(OBJSIA) $(OBJSMAPA) \
+                     $(OBJSCBOOK) $(OBJSENGINE) $(OBJSPART) \
+							$(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) \
+							$(OBJSSOUND) $(OBJSFIGHT) heightmap2dnt.o
+	@printf "Linking $@...\n"
+	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSIA) $(OBJSCBOOK) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) heightmap2dnt.o -o $@
+	@printf "\e[0;32mLinked\e[0;0m ($@)\n"
 
 parts:
 	@for dir in ${SUBSYSTEMS}; do \
@@ -106,9 +126,9 @@ MapEditor:
 	@cd ./mapEditor; make all;
 
 clean:
-	@printf "Cleaning App Bin Files... "
+	@printf "Cleaning App Bin Files...\n"
 	@\rm -rf *.o *.e ./mapEditor/*.o ./iaEditor/*.o $(BIN)DlgEditor $(BIN)mapEditor $(BIN)fntEditor $(BIN)dntPartEditor $(BIN)iaEditor $(BIN)dlgCompiler $(BIN)heightmap2dnt
 	@for dir in ${SUBSYSTEMS}; do \
 	   (echo " ";cd $$dir; ${MAKE} clean;echo " "); \
 	done
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "\e[0;32mCleaned.\e[0;0m\n"

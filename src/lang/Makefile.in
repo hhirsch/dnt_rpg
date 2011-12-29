@@ -1,3 +1,22 @@
+#  DccNiTghtmare: a satirical post-apocalyptical RPG.
+#  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+# 
+#  This file is part of DccNiTghtmare.
+# 
+#  DccNiTghtmare is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  DccNiTghtmare is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+
+
 CFLAGS = @CPPFLAGS@ -g -c -Wall -O2
 CC = @CXX@
 LDFLAGS = @LDFLAGS@
@@ -9,11 +28,11 @@ OBJS = translate.o
 all: $(OBJS)
 
 translate.o: translate.cpp translate.h
-	@printf "Making translate.o... "
-	@$(CC) $(CFLAGS) translate.cpp -o translate.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making translate.o...\n"
+	@$(CC) $(CFLAGS) translate.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 clean: 
-	@printf "Cleaning Lang Bin Files... "
+	@printf "Cleaning Lang Bin Files...\n"
 	@\rm -rf *.o *.e
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "\e[0;32mCleaned.\e[0;0m\n"

@@ -33,5 +33,5 @@ clean:
 	@for dir in $(SUBSYSTEMS);do \
 	(cd $$dir; ${MAKE} clean); \
 	done
-	@printf "\e[0;32mAll Done.\e[0;0m\n"
+	@printf "\e[0;32mAll Cleaned.\e[0;0m\n"
 

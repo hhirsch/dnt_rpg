@@ -20,103 +20,104 @@ objetos = actions.o align.o barter.o classes.o defs.o dices.o feats.o \
 all: $(objetos)
 
 actions.o: actions.cpp actions.h thing.h $(ENDENGINE)character.h
-	@printf "Making actions.o... "
-	@$(CC) $(CFLAGS) actions.cpp -o actions.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) actions.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 align.o: align.cpp align.h $(ENDETC)dirs.h
-	@printf "Making align.o... "
-	@$(CC) $(CFLAGS) align.cpp -o align.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) align.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 barter.o: barter.cpp barter.h object.h itemslot.h inventory.h $(ENDETC)dirs.h
-	@printf "Making barter.o... "
-	@$(CC) $(CFLAGS) barter.cpp -o barter.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) barter.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
-classes.o: classes.cpp classes.h actions.h skills.h feats.h dices.h defs.h $(ENDETC)dirs.h
-	@printf "Making classes.o... "
-	@$(CPP) $(CFLAGS) classes.cpp -o classes.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+classes.o: classes.cpp classes.h actions.h skills.h feats.h \
+           dices.h defs.h $(ENDETC)dirs.h
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) classes.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 defs.o: defs.h defs.cpp dices.h
-	@printf "Making defs.o... "
-	@$(CPP) $(CFLAGS) defs.cpp -o defs.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) defs.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 dices.o: dices.cpp dices.h
-	@printf "Making dices.o... "
-	@$(CPP) $(CFLAGS) dices.cpp -o dices.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) dices.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 feats.o: feats.cpp feats.h actions.h defs.h dices.h thing.h modifier.h \
          $(ENDETC)message3d.h $(ENDETC)dirs.h $(ENDIA)iascript.h
-	@printf "Making feats.o... "
-	@$(CC) $(CFLAGS) feats.cpp -o feats.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) feats.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 inventory.o: inventory.cpp inventory.h object.h itemslot.h $(ENDETC)dirs.h
-	@printf "Making inventory.o... "
-	@$(CC) $(CFLAGS) inventory.cpp -o inventory.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) inventory.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 itemslot.o: itemslot.cpp itemslot.h object.h
-	@printf "Making itemslot.o... "
-	@$(CC) $(CFLAGS) itemslot.cpp -o itemslot.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) itemslot.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 mission.o: mission.h mission.cpp $(ENDIA)iascript.h $(ENDIA)iavariable.h
-	@printf "Making mission.o... "
-	@$(CPP) $(CFLAGS) mission.cpp -o mission.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) mission.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 modeffect.o: modeffect.cpp modeffect.h
-	@printf "Making modeffect.o... "
-	@$(CC) $(CFLAGS) modeffect.cpp -o modeffect.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) modeffect.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 money.o: money.h money.cpp object.h thing.h
-	@printf "Making money.o... "
-	@$(CPP) $(CFLAGS) money.cpp -o money.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) money.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 object.o: object.cpp object.h thing.h $(ENDETC)scene.h $(ENDETC)scenenode.h
-	@printf "Making object.o... "
-	@$(CC) $(CFLAGS) object.cpp -o object.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) object.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 pendingaction.o: pendingaction.cpp pendingaction.h thing.h \
                  $(ENDIA)astar.h $(ENDENGINE)character.h
-	@printf "Making pendingaction.o... "
-	@$(CC) $(CFLAGS) pendingaction.cpp -o pendingaction.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) pendingaction.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 race.o: race.cpp race.h modifier.h feats.h skills.h $(ENDETC)dirs.h
-	@printf "Making race.o... "
-	@$(CC) $(CFLAGS) race.cpp -o race.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) race.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 skills.o: skills.cpp skills.h $(ENDETC)dirs.h
-	@printf "Making skills.o... "
-	@$(CC) $(CFLAGS) skills.cpp -o skills.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) skills.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 thing.o: thing.cpp thing.h skills.h align.h modifier.h $(ENDETC)dirs.h
-	@printf "Making thing.o... "
-	@$(CC) $(CFLAGS) thing.cpp -o thing.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) thing.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 weapon.o: weapon.cpp weapon.h dices.h object.h $(ENDETC)dirs.h
-	@printf "Making weapon.o... "
-	@$(CC) $(CFLAGS) weapon.cpp -o weapon.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) weapon.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 xp.o: xp.h xp.cpp $(ENDENGINE)character.h
-	@printf "Making xp.o... "
-	@$(CPP) $(CFLAGS) xp.cpp -o xp.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) xp.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 clean: 
-	@printf  "Cleaning Classes Bin Files... "
+	@printf  "Cleaning Classes Bin Files...\n"
 	@\rm -Rf ./*.o
-	@printf "\e[0;32mDone.\e[0;0m\n" 
+	@printf "\e[0;32mCleaned.\e[0;0m\n" 

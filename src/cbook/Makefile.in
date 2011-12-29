@@ -17,22 +17,22 @@ comicbook.o: comicbook.h comicbook.cpp comicpage.h comicbox.h \
              $(ENDENGINE)util.h $(ENDENGINE)cursor.h $(ENDETC)defparser.h \
 				 $(ENDETC)dirs.h $(ENDGUI)draw.h $(ENDGUI)mouse.h \
 				 $(ENDLANG)translate.h $(ENDETC)list.h
-	@printf "Making comicbook.o... "
-	@$(CPP) $(CFLAGS) -c comicbook.cpp -o comicbook.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) -c comicbook.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 comicbox.o: comicbox.h comicbox.cpp $(ENDETC)list.h $(ENDENGINE)util.h
-	@printf "Making comicbox.o... "
-	@$(CPP) $(CFLAGS) -c comicbox.cpp -o comicbox.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) -c comicbox.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 comicpage.o: comicpage.h comicpage.cpp comicbox.h $(ENDETC)list.h \
              $(ENDETC)dirs.h $(ENDGUI)dntfont.h $(ENDGUI)draw.h
-	@printf "Making comicpage.o... "
-	@$(CPP) $(CFLAGS) -c comicpage.cpp -o comicpage.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) -c comicpage.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 clean:
-	@printf "Cleaning cbook Bin Files... "
+	@printf "Cleaning cbook Bin Files...\n"
 	@\rm -rf *.o fifo
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "\e[0;32mCleaned.\e[0;0m\n"

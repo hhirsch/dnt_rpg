@@ -31,96 +31,96 @@ all: animodel.o btree.o boundingbox.o btreecell.o defparser.o distance.o\
      texrenderer.o userinfo.o
 
 animodel.o: animodel.h animodel.cpp dirs.h overlaps.h
-	@printf "Making animodel.o... "
-	@$(CPP) $(CFLAGS) -c animodel.cpp -o animodel.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) -c animodel.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 btree.o: btree.h btree.cpp
-	@printf "Making btree.o... "
-	@$(CPP) $(CFLAGS) -c btree.cpp -o btree.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) -c btree.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 btreecell.o: btreecell.h btreecell.cpp
-	@printf "Making btreecell.o... "
-	@$(CPP) $(CFLAGS) -c btreecell.cpp -o btreecell.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) -c btreecell.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 boundingbox.o: boundingbox.h boundingbox.cpp
-	@printf "Making boundingbox.o... "
-	@$(CPP) $(CFLAGS) -c boundingbox.cpp -o boundingbox.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) -c boundingbox.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 defparser.o: defparser.h defparser.cpp
-	@printf "Making defparser.o... "
-	@$(CPP) $(CFLAGS) -c defparser.cpp -o defparser.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) -c defparser.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 distance.o: distance.h distance.cpp
-	@printf "Making distance.o... "
-	@$(CPP) $(CFLAGS) -c distance.cpp -o distance.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) -c distance.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 dirs.o: dirs.h dirs.cpp
-	@printf "Making dirs.o... "
-	@$(CPP) $(CFLAGS) -c dirs.cpp -o dirs.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) -c dirs.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 extensions.o: extensions.h extensions.cpp
-	@printf "Making extensions.o... "
-	@$(CPP) $(CFLAGS) -c extensions.cpp -o extensions.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) -c extensions.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 list.o: list.cpp list.h
-	@printf "Making list.o... "
-	@$(CPP) $(CFLAGS) -c list.cpp -o list.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) -c list.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 message3d.o: message3d.cpp message3d.h
-	@printf "Making message3d.o... "
-	@$(CPP) $(CFLAGS) -c message3d.cpp -o message3d.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) -c message3d.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 modellist.o: modellist.h modellist.cpp animodel.h
-	@printf "Making modellist.o... "
-	@$(CPP) $(CFLAGS) -c modellist.cpp -o modellist.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) -c modellist.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 npcfile.o: npcfile.cpp npcfile.h dirs.h
-	@printf "Making npcfile.o... "
-	@$(CPP) $(CFLAGS) -c npcfile.cpp -o npcfile.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) -c npcfile.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 overlaps.o: overlaps.cpp overlaps.h
-	@printf "Making overlaps.o... "
-	@$(CC) $(CFLAGS) overlaps.cpp -o overlaps.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) overlaps.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 scenenode.o: scenenode.h scenenode.cpp animodel.h
-	@printf "Making scenenode.o... "
-	@$(CPP) $(CFLAGS) -c scenenode.cpp -o scenenode.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) -c scenenode.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 scene.o: scene.h scene.cpp scenenode.h animodel.h
-	@printf "Making scene.o... "
-	@$(CPP) $(CFLAGS) -c scene.cpp -o scene.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) -c scene.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 shader.o: shader.cpp shader.h dirs.h extensions.h
-	@printf "Making shader.o... "
-	@$(CC) $(CFLAGS) shader.cpp -o shader.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making shader.o...\n"
+	@$(CC) $(CFLAGS) shader.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 texrenderer.o: texrenderer.h texrenderer.cpp btree.h btreecell.h
-	@printf "Making texrenderer.o... "
-	@$(CPP) $(CFLAGS) -c texrenderer.cpp -o texrenderer.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) -c texrenderer.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 userinfo.o: userinfo.h userinfo.cpp
-	@printf "Making userinfo.o... "
-	@$(CPP) $(CFLAGS) -c userinfo.cpp -o userinfo.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) -c userinfo.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 clean:
-	@printf "Cleaning Etc Bin Files... "
+	@printf "Cleaning Etc Bin Files...\n"
 	@\rm -rf *.o fifo
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "\e[0;32mCleaned.\e[0;0m\n"

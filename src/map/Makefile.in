@@ -1,4 +1,22 @@
-# DccNiTghtmare is public domain. Do whatever you want with this code.
+#  DccNiTghtmare: a satirical post-apocalyptical RPG.
+#  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+# 
+#  This file is part of DccNiTghtmare.
+# 
+#  DccNiTghtmare is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  DccNiTghtmare is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+
+
 CFLAGS = @CPPFLAGS@ -g -c -Wall -O2
 CC = @CXX@
 CPP = @CXX@
@@ -18,38 +36,38 @@ OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o
 all: objetos
 
 door.o: door.cpp door.h
-	@printf "Making door.o... "
-	@$(CC) $(CFLAGS) door.cpp -o door.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) door.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 map.o: map.cpp map.h mapfog.h maplights.h maproad.h door.h $(ENDPART)lake.h
-	@printf "Making map.o... "
-	@$(CPP) $(CFLAGS) map.cpp -o map.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) map.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 mapfog.o: mapfog.cpp mapfog.h
-	@printf "Making mapfog.o... "
-	@$(CC) $(CFLAGS) mapfog.cpp -o mapfog.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) mapfog.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 maplights.o: maplights.cpp maplights.h
-	@printf "Making maplights.o... "
-	@$(CC) $(CFLAGS) maplights.cpp -o maplights.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) maplights.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 maproad.o: maproad.cpp maproad.h $(ENDENGINE)util.h
-	@printf "Making maproad.o... "
-	@$(CC) $(CFLAGS) maproad.cpp -o maproad.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making maproad.o...\n"
+	@$(CC) $(CFLAGS) maproad.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 mapsound.o: mapsound.cpp mapsound.h $(ENDSOUND)sound.h $(ENDETC)defparser.h
-	@printf "Making mapsound.o... "
-	@$(CC) $(CFLAGS) mapsound.cpp -o mapsound.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) mapsound.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 objetos: door.o map.o mapfog.o maplights.o maproad.o mapsound.o
 
 clean: 
-	@printf  "Cleaning Map Bin Files... "
+	@printf  "Cleaning Map Bin Files...\n"
 	@\rm -Rf ./*.o $(BINDIR)testeMapa
-	@printf "\e[0;32mDone.\e[0;0m\n" 
+	@printf "\e[0;32mCleaned.\e[0;0m\n" 

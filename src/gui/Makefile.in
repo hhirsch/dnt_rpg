@@ -1,4 +1,20 @@
-#  DccNiTghtmare is public domain. Do whatever you want with this code.
+#  DccNiTghtmare: a satirical post-apocalyptical RPG.
+#  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+# 
+#  This file is part of DccNiTghtmare.
+# 
+#  DccNiTghtmare is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  DccNiTghtmare is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
 
 CFLAGS = @CPPFLAGS@ -g -c -Wall -O2
 CC = @CXX@
@@ -20,116 +36,123 @@ all: guiobject
 guiobject: $(OBJSPP)
 
 button.o: button.h button.cpp color.h draw.h mouse.h guiobject.h
-	@printf "Making button.o... "
-	@$(CC) $(CFLAGS) button.cpp -o button.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) button.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 color.o: color.h color.cpp
-	@printf "Making color.o... "
-	@$(CC) $(CFLAGS) color.cpp -o color.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) color.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 cxsel.o: cxsel.h cxsel.cpp color.h draw.h guiobject.h
-	@printf "Making cxsel.o... "
-	@$(CC) $(CFLAGS) cxsel.cpp -o cxsel.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) cxsel.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 dntfont.o: dntfont.h dntfont.cpp
-	@printf "Making dntfont.o... "
-	@$(CC) $(CFLAGS) dntfont.cpp -o dntfont.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) dntfont.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 draw.o: draw.h draw.cpp
-	@printf "Making draw.o... "
-	@$(CC) $(CFLAGS) draw.cpp -o draw.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) draw.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
-farso.o: farso.h farso.cpp draw.h button.h color.h cxsel.h window.h interface.h dntfont.h healthBar.h textbox.h rolbar.h seltext.h textbar.h guiobject.h guilist.h picture.h menu.h mouse.h tabbutton.h messages.h
-	@printf "Making farso.o... "
-	@$(CC) $(CFLAGS) farso.cpp -o farso.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+farso.o: farso.h farso.cpp draw.h button.h color.h \
+         cxsel.h window.h interface.h dntfont.h healthBar.h \
+			textbox.h rolbar.h seltext.h textbar.h guiobject.h \
+			guilist.h picture.h menu.h mouse.h tabbutton.h messages.h
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) farso.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
-filesel.o: filesel.h filesel.cpp color.h draw.h guiobject.h textbar.h button.h listtext.h
-	@printf "Making filesel.o... "
-	@$(CC) $(CFLAGS) filesel.cpp -o filesel.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+filesel.o: filesel.h filesel.cpp color.h draw.h guiobject.h \
+           textbar.h button.h listtext.h
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) filesel.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
-guilist.o: guilist.h guilist.cpp guiobject.h button.h cxsel.h picture.h textbox.h seltext.h tabbutton.h textbar.h rolbar.h listtext.h
-	@printf "Making guilist.o... "
-	@$(CC) $(CFLAGS) guilist.cpp -o guilist.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+guilist.o: guilist.h guilist.cpp guiobject.h button.h cxsel.h \
+           picture.h textbox.h seltext.h tabbutton.h textbar.h \
+			  rolbar.h listtext.h
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) guilist.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 healthBar.o: healthBar.h healthBar.cpp
-	@printf "Making healthBar.o... "
-	@$(CC) $(CFLAGS) healthBar.cpp -o healthBar.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) healthBar.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 interface.o: interface.h interface.cpp window.h mouse.h menu.h guilist.h
-	@printf "Making interface.o... "
-	@$(CC) $(CFLAGS) interface.cpp -o interface.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) interface.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 listtext.o: listtext.h listtext.cpp rolbar.h tabbutton.h
-	@printf "Making listtext.o... "
-	@$(CC) $(CFLAGS) listtext.cpp -o listtext.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) listtext.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 menu.o: menu.h menu.cpp color.h draw.h dntfont.h mouse.h guiobject.h guilist.h
-	@printf "Making menu.o... "
-	@$(CC) $(CFLAGS) menu.cpp -o menu.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) menu.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 messages.o: messages.h messages.cpp farso.h
-	@printf "Making messages.o... "
-	@$(CC) $(CFLAGS) messages.cpp -o messages.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) messages.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 mouse.o: mouse.h mouse.cpp
-	@printf "Making mouse.o... "
-	@$(CC) $(CFLAGS) mouse.cpp -o mouse.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) mouse.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 picture.o: picture.h picture.cpp draw.h guiobject.h
-	@printf "Making picture.o... "
-	@$(CC) $(CFLAGS) picture.cpp -o picture.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) picture.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
-rolbar.o: rolbar.h rolbar.cpp guiobject.h color.h draw.h mouse.h button.h textbox.h
-	@printf "Making rolbar.o... "
-	@$(CC) $(CFLAGS) rolbar.cpp -o rolbar.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+rolbar.o: rolbar.h rolbar.cpp guiobject.h color.h draw.h \
+          mouse.h button.h textbox.h
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) rolbar.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 seltext.o: seltext.h seltext.cpp draw.h dntfont.h color.h mouse.h guiobject.h
-	@printf "Making seltext.o... "
-	@$(CC) $(CFLAGS) seltext.cpp -o seltext.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) seltext.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 tabbutton.o: tabbutton.h tabbutton.cpp picture.h color.h guiobject.h
-	@printf "Making tabbutton.o... "
-	@$(CC) $(CFLAGS) tabbutton.cpp -o tabbutton.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) tabbutton.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 tabbox.o: tabbox.h tabbox.cpp color.h guiobject.h guilist.h
-	@printf "Making tabbox.o... "
-	@$(CC) $(CFLAGS) tabbox.cpp -o tabbox.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) tabbox.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 textbar.o: textbar.h textbar.cpp color.h draw.h dntfont.h mouse.h guiobject.h
-	@printf "Making textbar.o... "
-	@$(CC) $(CFLAGS) textbar.cpp -o textbar.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) textbar.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 textbox.o: textbox.h textbox.cpp color.h draw.h dntfont.h guiobject.h
-	@printf "Making textbox.o... "
-	@$(CC) $(CFLAGS) textbox.cpp -o textbox.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) textbox.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 window.o: window.h window.cpp draw.h color.h dntfont.h guiobject.h guilist.h
-	@printf "Making window.o... "
-	@$(CC) $(CFLAGS) $(MOVOPACO) window.cpp -o window.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) $(MOVOPACO) window.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 clean:
-	@printf "Cleaning Gui Bin Files... "
+	@printf "Cleaning Gui Bin Files...\n"
 	@\rm -rf *.o *.e $(BIN)teste $(BIN)fntEditor $(BIN)testaObj $(BIN)tp2
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "\e[0;32mCleaned.\e[0;0m\n"

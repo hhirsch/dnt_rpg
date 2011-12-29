@@ -1,4 +1,21 @@
-#  DccNiTghtmare is public domain. Do whatever you want with this code.
+#  DccNiTghtmare: a satirical post-apocalyptical RPG.
+#  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+# 
+#  This file is part of DccNiTghtmare.
+# 
+#  DccNiTghtmare is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  DccNiTghtmare is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+
 CFLAGS = @CPPFLAGS@ -g -c -Wall -O2
 CC = @CXX@
 LDFLAGS = @LDFLAGS@
@@ -82,46 +99,46 @@ BIN = ../../../bin/
 all: $(BIN)dntPartEditor
 
 main.o: main.cpp editor.h partaux.h
-	@printf "Making main.o... "
-	@$(CC) $(CFLAGS) main.cpp -o main.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) main.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 editor.o: editor.cpp editor.h partaux.h
-	@printf "Making editor.o... "
-	@$(CC) $(CFLAGS) editor.cpp -o editor.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) editor.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 partaux.o: partaux.cpp partaux.h $(ENDPART)particle.h
-	@printf "Making partaux.o... "
-	@$(CC) $(CFLAGS) partaux.cpp -o partaux.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) partaux.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 partelementwindow.o: partelementwindow.h partelementwindow.cpp \
                      $(ENDPART)partelement.h $(ENDGUI)farso.h \
 							$(ENDPART)particle.h
-	@printf "Making partelementwindow.o... "
-	@$(CC) $(CFLAGS) partelementwindow.cpp -o partelementwindow.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) partelementwindow.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 partoriginwindow.o: partoriginwindow.h partoriginwindow.cpp partaux.h \
                     $(ENDPART)particle.h $(ENDGUI)farso.h
-	@printf "Making partoriginwindow.o... "
-	@$(CC) $(CFLAGS) partoriginwindow.cpp -o partoriginwindow.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) partoriginwindow.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 partwindow.o: partwindow.h partwindow.cpp partaux.h partelementwindow.h \
               partoriginwindow.h $(ENDPART)particle.h $(ENDGUI)farso.h
-	@printf "Making partwindow.o... "
-	@$(CC) $(CFLAGS) partwindow.cpp -o partwindow.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) partwindow.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 
 $(BIN)dntPartEditor: $(OBJSGUI) $(OBJSMAPA) $(OBJSPART) $(OBJS)
-	@printf "Linking partEditor... "
-	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSIA) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) $(OBJSCBOOK) $(OBJS) -o $(BIN)dntPartEditor
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Linking $@...\n"
+	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSIA) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) $(OBJSCBOOK) $(OBJS) -o $@
+	@printf "\e[0;32mLinked\e[0;0m ($@)\n"
 
 clean:
-	@printf "Cleaning partEditor Bin Files... "
+	@printf "Cleaning partEditor Bin Files...\n"
 	@\rm -rf *.o *.e $(BIN)dntPartEditor
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "\e[0;32mCleaned.\e[0;0m\n"

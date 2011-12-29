@@ -1,4 +1,21 @@
-# DccNiTghtmare is public domain. Do whatever you want with this code.
+#  DccNiTghtmare: a satirical post-apocalyptical RPG.
+#  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+# 
+#  This file is part of DccNiTghtmare.
+# 
+#  DccNiTghtmare is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  DccNiTghtmare is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+
 CFLAGS = @CPPFLAGS@ -g -c -Wall -O2
 CC = @CXX@
 LDFLAGS = @LDFLAGS@
@@ -15,24 +32,24 @@ objetos = fightGroup.o initiative.o fightSystem.o
 all: $(objetos)
 
 fightGroup.o: fightGroup.cpp fightGroup.h $(ENDENGINE)character.h
-	@printf "Making fightGroup.o... "
-	@$(CC) $(CFLAGS) fightGroup.cpp -o fightGroup.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) fightGroup.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 fightSystem.o: fightSystem.cpp fightSystem.h fightGroup.h initiative.h\
                $(ENDETC)message3d.h $(ENDPART)partcontroller.h
-	@printf "Making fightSystem.o... "
-	@$(CC) $(CFLAGS) fightSystem.cpp -o fightSystem.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) fightSystem.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
  
 initiative.o: initiative.cpp initiative.h $(ENDENGINE)character.h
-	@printf "Making initiative.o... "
-	@$(CC) $(CFLAGS) initiative.cpp -o initiative.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) initiative.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 
 clean: 
-	@printf  "Cleaning Classes Bin Files... "
+	@printf  "Cleaning Classes Bin Files...\n"
 	@\rm -Rf ./*.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "\e[0;32mCleaned.\e[0;0m\n"
 
