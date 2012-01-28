@@ -111,24 +111,28 @@ ALuint ogg_stream::getSource()
  *************************************************************************/
 void ogg_stream::release()
 {
-   /* Stop Source (if already not stoped) */
-   if(timeEnded == 0)
+   if(vorbisInfo)
    {
-      alSourceStop(source);
-      check("::release() alSourceStop");
+      /* Stop Source (if already not stoped) */
+      if(timeEnded == 0)
+      {
+         alSourceStop(source);
+         check("::release() alSourceStop");
+      }
+
+      /* Empty the remaining buffers */
+      empty();
+
+      /* Delete Sources And Buffers */
+      alDeleteSources(1, &source);
+      check("::release() alDeleteSources");
+      alDeleteBuffers(2, &buffers[0]);
+      check("::release() alDeleteBuffers");
+
+      /* Finally, clear the ogg stream */
+      ov_clear(&oggStream);
+      vorbisInfo = NULL;
    }
-
-   /* Empty the remaining buffers */
-   empty();
-
-   /* Delete Sources And Buffers */
-   alDeleteSources(1, &source);
-   check("::release() alDeleteSources");
-   alDeleteBuffers(2, &buffers[0]);
-   check("::release() alDeleteBuffers");
-
-   /* Finally, clear the ogg stream */
-   ov_clear(&oggStream);
 }
 
 /*************************************************************************

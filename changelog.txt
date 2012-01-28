@@ -4,7 +4,8 @@
  -
 
 BugFixes:
- -
+ - Fixed a possible double OpenAL stop when releasing an ogg_stream;
+
 ================================================
 |                Version 0.8                   |
 |            Released: 2011-12-19              |
