@@ -46,6 +46,7 @@ sndfx::sndfx(ALfloat centerX, ALfloat centerY, ALfloat centerZ, int lp,
       /* Define Position */
       alSource3f(oggSndFx->getSource(), AL_POSITION, centerX, centerY, centerZ);
       alSourcef(oggSndFx->getSource(), AL_REFERENCE_DISTANCE, 160);
+      setLoop(lp);
 
       if(!oggSndFx->playback())
       {
@@ -53,7 +54,6 @@ sndfx::sndfx(ALfloat centerX, ALfloat centerY, ALfloat centerZ, int lp,
       }
 
       oggName = fileName;
-      setLoop(lp);
    }
    else
    {
@@ -76,6 +76,7 @@ sndfx::sndfx(int lp, string fileName)
    {
       /* Define Position */
       oggSndFx->defineAsMusic();
+      setLoop(lp);
 
       if(!oggSndFx->playback())
       {
@@ -83,7 +84,6 @@ sndfx::sndfx(int lp, string fileName)
       }
 
       oggName = fileName;
-      setLoop(lp);
    }
    else
    {

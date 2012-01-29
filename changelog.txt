@@ -5,6 +5,7 @@
 
 BugFixes:
  - Fixed a possible double OpenAL stop when releasing an ogg_stream;
+ - Fixed a undesired loop with a sound file lesser than the buffer;
 
 ================================================
 |                Version 0.8                   |
