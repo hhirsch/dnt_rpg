@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -206,13 +206,18 @@ bool ogg_stream::update()
         alSourceUnqueueBuffers(source, 1, &buffer);
         check("::update() alSourceUnqueueBuffers");
 
-        active = stream(buffer);
- 
-        if( (active) && (timeEnded == 0))
+        /* Only re-stream with ogg_stream is active (sometimes the previous
+         * buffer inactive the stream, so must end to avoid uneeded replay) */
+        if(active)
         {
-           /* Only Queue if stream is active, and not waiting */
-           alSourceQueueBuffers(source, 1, &buffer);
-           check("::update() alSourceQueueBuffers");
+           active = stream(buffer);
+
+           if( (active) && (timeEnded == 0))
+           {
+              /* Only Queue if stream is active, and not waiting */
+              alSourceQueueBuffers(source, 1, &buffer);
+              check("::update() alSourceQueueBuffers");
+           }
         }
     }
  
