@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -24,6 +24,7 @@
 #include "../engine/dccnit.h"
 #include "../classes/object.h"
 #include "../classes/dices.h"
+using namespace std;
 
 #define IA_SYMBOLS_TOKEN_VARIABLE   "variable"
 #define IA_SYMBOLS_TOKEN_VALUE      "value"

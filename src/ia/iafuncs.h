@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -23,7 +23,6 @@
 
 #include <string>
 #include <iostream>
-using namespace std;
 
 
 /* Operators */
@@ -336,51 +335,51 @@ using namespace std;
 /*! Convert the infix string to a postfix one
  * \param infix -> infix expression 
  * \return -> postfix expression */
- string toPostFix(string infix);
+std::string toPostFix(std::string infix);
 
 /*! Get the precedence number of the operator
  * \param s -> operator string
  * \return -> precedence number of the operator */
- int precedence(string s);
+int precedence(std::string s);
 
 /*! Get the next token on the string from the position pos.
  * \param s -> string to get the token
  * \param pos -> position where the last token was got.
  * \return -> the token string got. "" if no more tokens exists.*/
- string nextToken(string s, unsigned int& pos);
+std::string nextToken(std::string s, unsigned int& pos);
 
 /*! Verify if the string is a operator
  * \param c -> token to verify
  * \return true if is operator. */
- bool isOperator(string c);
+bool isOperator(std::string c);
 
 /*! Verify if the string is a type
  * \param s -> token to verify
  * \return -> true if the string is a type. */
- bool isType(string s);
+bool isType(std::string s);
 
 /*! Verify if the string is a function name or not.
  * \param s -> token to verify.
  * \return true if is a function name*/
- bool isFunction(string s);
+bool isFunction(std::string s);
 
 /*! Verify if the string is a float literal
  * \param s -> string to verify 
  * \return true if is float. */
- bool isFloat(string s);
+bool isFloat(std::string s);
 /*! Verify if the string is an integer literal 
  * \param s -> string to verify
  * \return true if is integer */
- bool isInteger(string s);
+bool isInteger(std::string s);
 /*! Verify if the string is an string literal
  * \param s -> string to verify
  * \return true if is an string literal */
- bool isString(string s);
+bool isString(std::string s);
 
 /*! Get the function type
  * \param s -> function name
  * \return -> the type of the function. default is void. */
- string functionType(string s);
+std::string functionType(std::string s);
 
 
 #endif

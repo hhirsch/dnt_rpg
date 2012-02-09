@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -53,7 +53,7 @@
  * \param fullScreen -> true if is fullscreen
  * \param antiAliasingSample -> number of Antialising used (0 == disabled)
  * \param stencilBufferSize -> number of stencil buffers */
-void Farso_Init(SDL_Surface **screen, string title, int width, int height,
+void Farso_Init(SDL_Surface **screen, std::string title, int width, int height,
                 bool fullScreen, int antiAliasingSample, int stencilBufferSize);
 
 /*! Define the SDL/OpenGL Context Resolution
@@ -63,7 +63,7 @@ void Farso_Init(SDL_Surface **screen, string title, int width, int height,
  * \param height -> screen height
  * \param fullScreen -> true if is fullscreen
  * \param antiAliasingSample -> number of Antialising used (0 == disabled) */
-void Farso_DefineResolution(SDL_Surface **screen, string title, 
+void Farso_DefineResolution(SDL_Surface **screen, std::string title, 
                             int width, int height,
                             bool fullScreen, int antiAliasingSample, 
                             int stencilBufferSize);

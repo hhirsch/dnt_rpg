@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -30,7 +30,6 @@
 #endif
 
 #include <string>
-using namespace std;
 
 #define CURSOR_WALK         0 /**< Walk Mouse Cursor */
 #define CURSOR_ATTACK       1 /**< Attack Mouse Cursor */
@@ -82,7 +81,7 @@ class cursor
 
       /*! Set the text over the cursor
        * \param txt -> text to show or "" for no text */
-      void setTextOver(string txt);
+      void setTextOver(std::string txt);
 
       /*! Hide the mouse cursor (must reset it to cursor to show again) */
       void hide();
@@ -97,7 +96,7 @@ class cursor
       static float scaleFactor[CURSOR_TOTAL]; /**< Scale Factor */
       static int currentCursor;            /**< Current Cursor Index */
       
-      static string textOver;              /**< Text over cursor */
+      static std::string textOver;              /**< Text over cursor */
       static GLuint textOverTexture;       /**< Texture of text over */
       static int textOverWidth;            /**< Width of text over texture */
       static int textOverHeight;           /**< Height of text over texture */
@@ -106,7 +105,7 @@ class cursor
       /*! Load Cursor file 
        * \param fileName -> file name of cursor
        * \param index -> internal cursor index */
-      void loadCursor(string fileName, int index);
+      void loadCursor(std::string fileName, int index);
 
       
 };

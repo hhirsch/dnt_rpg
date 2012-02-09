@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -25,7 +25,7 @@
 #include <SDL/SDL_opengl.h>
 
 /*! Print all openGL errors on cache */
-void printOpenGLErrors(string where="");
+void printOpenGLErrors(std::string where="");
 
 /* some declarations for AmigaOS4 */
 #if defined (__amigaos4__)
@@ -120,28 +120,28 @@ class extensions
    protected:
       /*! Define Point per Texture functions
        * \param ext -> extensions string */
-      void definePointTexture(string ext);
+      void definePointTexture(std::string ext);
       /*! Define MultiTexture functions
        * \param ext -> extensions string */
-      void defineMultiTexture(string ext);
+      void defineMultiTexture(std::string ext);
       /*! Define Frame Buffer Object functions
        * \param ext -> extensions string */
-      void defineFrameBuffer(string ext);
+      void defineFrameBuffer(std::string ext);
       /*! Define shader functions
        * \param ext -> extensions string */
-      void defineShader(string ext);
+      void defineShader(std::string ext);
       /*! Define anisotropic
        * \param ext -> extensions string */
-      void defineAnisotropic(string ext);
+      void defineAnisotropic(std::string ext);
 
       /*! Get OpenGL Function
        * \param functionName -> function to get
        * \return -> pointer to the function found or NULL */
-      void* getFunction(string functionName);
+      void* getFunction(std::string functionName);
 
       /*! Sow an warning about not found some extension function 
        * \param functionName -> string wit function name to displa warning of*/
-      void showWarning(string functionName);
+      void showWarning(std::string functionName);
 
       static bool anisotropic;   /**< True when anisotropic is avalaible */
 

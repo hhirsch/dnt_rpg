@@ -1,7 +1,7 @@
 
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -25,7 +25,6 @@
 #include <SDL/SDL_opengl.h>
 #include <string>
 #include <iostream>
-using namespace std;
 
 #include "extensions.h"
 
@@ -42,41 +41,41 @@ class shader
        * \param vShaderFileName -> vertex shader file name to load
        * \param fShaderFileName -> fragment shader file name to load 
        * \return -> true if successfull */
-      bool load(string vShaderFileName, string fShaderFileName);
+      bool load(std::string vShaderFileName, std::string fShaderFileName);
 
       /*! Set the uniform variable value 
        * \param variableName -> the uniform variable name
        * \param x -> x value 
        * \param y -> y value
        * \param z -> z value */
-      void setUniformVariable(string variableName, 
+      void setUniformVariable(std::string variableName, 
                               GLfloat x, GLfloat y, GLfloat z);
        /*! Set the uniform variable value 
        * \param variableName -> the uniform variable name
        * \param x -> x value 
        * \param y -> y value */
-      void setUniformVariable(string variableName, GLfloat x, GLfloat y);
+      void setUniformVariable(std::string variableName, GLfloat x, GLfloat y);
        /*! Set the uniform variable value 
        * \param variableName -> the uniform variable name
        * \param x -> x value */
-      void setUniformVariable(string variableName, GLfloat x);
+      void setUniformVariable(std::string variableName, GLfloat x);
 
       /*! Set the uniform variable value 
        * \param variableName -> the uniform variable name
        * \param x -> x value 
        * \param y -> y value
        * \param z -> z value */
-      void setUniformVariable(string variableName, 
+      void setUniformVariable(std::string variableName, 
                               GLint x, GLint y, GLint z);
        /*! Set the uniform variable value 
        * \param variableName -> the uniform variable name
        * \param x -> x value 
        * \param y -> y value */
-      void setUniformVariable(string variableName, GLint x, GLint y);
+      void setUniformVariable(std::string variableName, GLint x, GLint y);
        /*! Set the uniform variable value 
        * \param variableName -> the uniform variable name
        * \param x -> x value */
-      void setUniformVariable(string variableName, GLint x);
+      void setUniformVariable(std::string variableName, GLint x);
 
       /*! Enable the shader */
       void enable();
@@ -92,11 +91,11 @@ class shader
       /*! Parse the file, before send it to shader
        * \param fileName -> file to parse
        * \return -> string with file contents */
-      string parseFile(string fileName);
+      std::string parseFile(std::string fileName);
 
       /*! Get uniform variable identifier
        * \param variableName -> uniform variable name */
-      GLint getUniformVariable(string variableName);
+      GLint getUniformVariable(std::string variableName);
 
       /*! Print the info log to the stdout
        * \param obj -> object to print info log from

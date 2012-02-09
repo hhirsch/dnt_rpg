@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -22,7 +22,6 @@
 #define _dnt_userinfo_h
 
 #include <string>
-using namespace std;
 
 /*! The User Info Class define the user name and home dir (where will save
  * all needed files like options, saves, etc) */
@@ -35,17 +34,17 @@ class userInfo
       void getValuesFromSystem();
 
       /*! Get The User Login Name */
-      string getUserName();
+      std::string getUserName();
 
       /*! Get the User Home */
-      string getUserHome();
+      std::string getUserHome();
 
       /*! Get the Saves Directory */
-      string getSavesDirectory();
+      std::string getSavesDirectory();
 
    protected:
-      static string userName;    /**< The User Name */
-      static string userHome;    /**< The User Home */
+      static std::string userName;    /**< The User Name */
+      static std::string userHome;    /**< The User Home */
 };
 
 

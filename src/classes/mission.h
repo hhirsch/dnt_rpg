@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -26,7 +26,6 @@
 #include "../etc/list.h"
 
 #include <iostream>
-using namespace std;
 
 #define MISSION_TEMP_FLAGS  5    /**< Number of temp flags on missions */
 
@@ -48,7 +47,7 @@ class mission: public iaScript, public dntListElement
        * \param loadDefinition -> true if is to load the definition file
        *                          false if the missionFile is already 
        *                          the script itself. */
-      mission(string missionFile, engine* usedEngine, bool loadDefinition);
+      mission(std::string missionFile, engine* usedEngine, bool loadDefinition);
 
       /*! Destructor */
       ~mission();
@@ -78,29 +77,29 @@ class mission: public iaScript, public dntListElement
 
       /*! Get the mission's description
        * \return -> translated mission description string */
-      string getDescription();
+      std::string getDescription();
 
       /*! Set the mission's description
        * \param desc -> translated mission description string */
-      void setDescription(string desc);
+      void setDescription(std::string desc);
 
       /*! Get the Area where the mission occurs
        * \return -> Area Name */
-      string getArea();
+      std::string getArea();
 
       /*! Set the Area where the mission occurs
        * \param a -> Area Name */
-      void setArea(string a);
+      void setArea(std::string a);
 
       /*! Save the current mission status to a file
        * \param file -> pointer to the file to use
        * \note -> this function will save all the stack and script 
        *          status relative to the mission */
-      void saveAsCurrent(ofstream* file);
+      void saveAsCurrent(std::ofstream* file);
 
       /*! Save the completed mission to a file
        * \param file -> pointer to the file to use */
-      void saveAsCompleted(ofstream* file);
+      void saveAsCompleted(std::ofstream* file);
 
       /*! Load the completed mission from a definitions file
        * \param def -> pointer to the defintions file to load from */
@@ -114,8 +113,8 @@ class mission: public iaScript, public dntListElement
       friend class missionsController;
 
    protected:
-      string area;        /**< Area where mission occurs (ex: Tyrol) */
-      string description; /**< Mission's Description */
+      std::string area;        /**< Area where mission occurs (ex: Tyrol) */
+      std::string description; /**< Mission's Description */
 
       int xpValue;      /**< XP received on complete the mission */
 
@@ -156,7 +155,7 @@ class missionsController
 
       /*! A a new mission to the current list
        * \param missionFile -> fileName of the definition's file */
-      void addNewMission(string missionFile);
+      void addNewMission(std::string missionFile);
 
       /*! Complete the mission (remove from current and put at completed)
        * \param m -> mission completed.
@@ -167,7 +166,7 @@ class missionsController
       /*! Search for a mission on the current list
        * \param scriptFile -> filename of mission to find
        * \return -> pointer to the mission */
-      mission* getCurrentMission(string scriptFile);
+      mission* getCurrentMission(std::string scriptFile);
 
       /*! Treat all current missions scripts
        * \param acMap -> pointer to current opened map
@@ -177,12 +176,12 @@ class missionsController
       /*! Save all missions (completed and current) to a file
        * \param fName -> fileName to save 
        * \return -> true if save. */
-      bool save(string fName);
+      bool save(std::string fName);
 
       /*! Load all mission
        * \param fName -> name of the file to load
        * \return -> true if loaded. */
-      bool load(string fName);
+      bool load(std::string fName);
 
       /*! Get first mission at the current missions list
        * \return -> pointer to the first mission at the current list */

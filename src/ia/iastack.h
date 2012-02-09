@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -25,7 +25,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
-using namespace std;
 
 #include "../etc/defparser.h"
 
@@ -33,12 +32,12 @@ using namespace std;
 class iaJumpPos
 {
    public:
-      streampos begin;     /**< The begin of the block */
-      streampos end;       /**< The end of the block (normally used only on
+      std::streampos begin;     /**< The begin of the block */
+      std::streampos end;       /**< The end of the block (normally used only on
                                 for and whiles). */
       int lineNumber;      /**< The file line number (for errors show) */
       iaJumpPos* previous; /**< Previous jump on the stack */
-      string command;      /**< The token command (if, else, for) */
+      std::string command; /**< The token command (if, else, for) */
 };
 
 /*! The ia Stack of Jumps. */
@@ -63,7 +62,7 @@ class iaStack
 
       /*! Save the Stack to a file
        * \param file -> ofstream file to save to */
-      void save(ofstream* file);
+      void save(std::ofstream* file);
 
       /*! Load the defparser from a file
        * \param def -> defParser to load from */

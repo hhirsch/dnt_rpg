@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -30,8 +30,6 @@
 #include "guilist.h"
 
 #include <string>
-using namespace std;
-
 /*! tabObj is used to keep information about a single option at the tabBox */
 class tabObj: public dntListElement
 {
@@ -42,7 +40,7 @@ class tabObj: public dntListElement
       ~tabObj();
 
       guiList* list;      /**< The guiList itself */
-      string title;       /**< The title */
+      std::string title;  /**< The title */
 };
 
 /*! The tabBox class is a tabWidget for FarSo. It have a 
@@ -69,7 +67,7 @@ class tabBox: public guiObject, public dntList
 
       /*! Get the active element title
        * \return -> title of the active element (or "") */
-      string getActiveTitle();
+      std::string getActiveTitle();
 
       /*! Get list relative to the option
        * \param opt -> option number to get guiList from [0,total)
@@ -79,12 +77,12 @@ class tabBox: public guiObject, public dntList
       /*! Get list relative to the option
        * \param title -> option title to get guiList from
        * \return -> guiList relative to the option or NULL */
-      guiList* getList(string title);
+      guiList* getList(std::string title);
 
       /*! Insert a new option at the tabBox
        * \param title -> unique title for the option 
        * \return -> pointer to th object guiList */
-      guiList* insertOption(string title);
+      guiList* insertOption(std::string title);
 
       /*! Draw the tabBox */
       void draw();

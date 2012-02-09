@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -26,7 +26,6 @@
 #include <SDL/SDL_opengl.h>
 #include <iostream>
 #include <string>
-using namespace std;
 
 #include "list.h"
 
@@ -51,13 +50,13 @@ class renderTexture: public bTreeCell, public dntListElement
        * \param name -> the unique name of the texture
        * \note -> the name is the key (usually Ids are inserted with
        *          ascending values, so it's not a good key) */
-      renderTexture(GLuint id, string name);
+      renderTexture(GLuint id, std::string name);
       /*! Destructor */
       ~renderTexture();
 
       /*! Get the current texture Name
        * \return -> texture Name */
-      string getTextureName();
+      std::string getTextureName();
 
       /*! Clear the buffer's values, keeping the 
        * buffers's structures (it just reset the 
@@ -80,7 +79,7 @@ class renderTexture: public bTreeCell, public dntListElement
       /*! Compare with another renderTexture key
        * \param name -> name of the texture to compare with this one
        * \return  == 0 if equal, < 0  if lesser or > 0 if greater */
-      int compare(string name);
+      int compare(std::string name);
 
       /*! Compare with another renderTexture
        * \param cell -> pointer to cell to compare this one to
@@ -108,7 +107,7 @@ class renderTexture: public bTreeCell, public dntListElement
       GLfloat* normalBuffer;  /**< The normal Buffer */
 
       GLuint textureId;       /**< The texture Id */
-      string textureName;     /**< The texture Name */
+      std::string textureName;/**< The texture Name */
 };
 
 /*! The texRenderer is used to render GL_QUADS per texture using
@@ -136,7 +135,7 @@ class texRenderer: public bTree, public dntList
        * \param textureId -> the texture ID
        * \param textureName  -> the name of the texture (the key)
        * \return -> pointer to the texture inserted */
-      renderTexture* insertTexture(GLuint textureId, string textureName);
+      renderTexture* insertTexture(GLuint textureId, std::string textureName);
 
       /*! Render all renderTextures quads
        * \param floorReflexion -> with reflextion with floor is enabled */
@@ -148,12 +147,12 @@ class texRenderer: public bTree, public dntList
       /*! Search for a renderTexture
        * \param textureName -> name of the texture to search
        * \return -> pointer to the renderTexture found or NULL */
-      renderTexture* search(string textureName);
+      renderTexture* search(std::string textureName);
 
       /*! Add a GL_QUAD to the renderTexture buffers
        * \param textureId -> the Id of the  texture used
        * \param textureName -> the name of the texture used */
-      void addQuad(GLuint textureId, string textureName,
+      void addQuad(GLuint textureId, std::string textureName,
                    GLfloat x1, GLfloat y1, GLfloat z1,
                    GLfloat x2, GLfloat y2, GLfloat z2,
                    GLfloat x3, GLfloat y3, GLfloat z3,

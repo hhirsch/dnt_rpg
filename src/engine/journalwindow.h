@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -29,8 +29,8 @@
 class journalDesc: public dntListElement
 {
    public:
-      string text;    /**< Description Text */
-      bool completed; /**< If completed or not */
+      std::string text;  /**< Description Text */
+      bool completed;    /**< If completed or not */
 };
 
 /*! The journalArea keeps information about
@@ -56,15 +56,15 @@ class journalArea : public bTreeCell, public dntList
       /*! Insert a mission at the area
        * \param desc -> mission description
        * \param comp -> true if completed */
-      void insertMission(string desc, bool comp);
+      void insertMission(std::string desc, bool comp);
 
       /*! Get the area name
        * \return string with area's name */
-      string getName();
+      std::string getName();
 
       /*! Set the area name
        * \param n -> new area's name */
-      void setName(string n);
+      void setName(std::string n);
 
    protected:
       /*! Free area description memory
@@ -72,7 +72,7 @@ class journalArea : public bTreeCell, public dntList
       void freeElement(dntListElement* obj);
 
 
-      string name;  /**< Area Name */
+      std::string name;  /**< Area Name */
 };
 
 /*! The journalAreas keeps all journalArea informations */
@@ -87,12 +87,12 @@ class journalAreas : public bTree
       /*! Insert a journalArea at the bTree
        * \param title -> journalArea text 
        * \return -> pointer to the inserted journal area */
-      journalArea* insert(string title);
+      journalArea* insert(std::string title);
 
       /*! Insert a journalArea at the bTree
        * \param title -> journalArea text 
        * \return -> pointer to the inserted journal area */
-      journalArea* search(string title);
+      journalArea* search(std::string title);
 
       /*! Get the journalArea at the num position
        * \param num -> position to get

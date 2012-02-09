@@ -19,8 +19,8 @@
 */
 
 #include "comicbox.h"
-
 #include "../engine/util.h"
+using namespace std;
 
 /***********************************************************************
  *                              Constructor                            *

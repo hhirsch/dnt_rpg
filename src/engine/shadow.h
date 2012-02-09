@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -24,7 +24,6 @@
 #include <SDL/SDL_opengl.h>
 #include <SDL/SDL.h>
 #include <string>
-using namespace std;
 
 #include "camera.h"
 

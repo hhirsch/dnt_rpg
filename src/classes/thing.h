@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -68,10 +68,10 @@ class thing
       float initialXPosition; /**< Thing's initial X Position */
       float initialZPosition; /**< Thing's Initial Z Position */
       float bloodPosition;    /**< Blood Z Orign*/
-      string bloodFileName;   /**< Blood Particle FileName to use */ 
+      std::string bloodFileName;   /**< Blood Particle FileName to use */ 
       int sexType;            /**< Thing's Sex Type */
       int age;                /**< Thing's Age */
-      string name;              /**< Character's name */
+      std::string name;              /**< Character's name */
 
       thing* currentEnemy;    /**< Pointer to current fight enemy (target) */
 
@@ -90,15 +90,15 @@ class thing
       //////////////////////////////////////////////////////////////////////
       /*! Set the conversation file
        * \param file -> name of the conversation file*/
-      void setConversationFile(string file);
+      void setConversationFile(std::string file);
 
       /*! Get the conversation file
        * \return -> conversation fileName */
-      string getConversationFile();
+      std::string getConversationFile();
 
       /*! Create the conversation (load all things, but not open the dialog)
        * \param curMap -> string with the map character is in */
-      void createConversation(string curMap);
+      void createConversation(std::string curMap);
 
       /*! Set the initial dialog to the character conversation
        * \param i -> initial dialog number */
@@ -164,7 +164,7 @@ class thing
       /*! Do a check (skill, saves, etc) against the difficulty.
        * \param difficulty -> Difficulty of the check
        * \return true if succed, false if failed. */
-      bool doCheck(string stateToCheck, int difficulty);
+      bool doCheck(std::string stateToCheck, int difficulty);
 
       /*! Get the thing type 
        * \return -> type of the thing */
@@ -216,7 +216,7 @@ class thing
       /*! Set the battle Script of the thing
        * \param script -> pointer to the battle script
        * \param scriptFileName -> filename of the script */
-      void setBattleScript(iaScript* script, string scriptFileName);
+      void setBattleScript(iaScript* script, std::string scriptFileName);
 
       /*! Set the thing as enemy to PC */
       void setAsEnemy();
@@ -285,14 +285,14 @@ class thing
       bool dead;           /**< Dead state or not (if dead is only a corpse) */
 
       iaScript* battleScript;      /**< Pointer to the battle iaScript */
-      string battleScriptFileName; /**< The Battle Script Filename */
+      std::string battleScriptFileName; /**< The Battle Script Filename */
 
       int thingType;              /**< The type of the thing */
 
       bool canMove;               /**< If still have movements at fight */
       bool canAttack;             /**< If still have actions at fight */
 
-      string conversationFile;    /**< Name of the Conversation File */
+      std::string conversationFile;    /**< Name of the Conversation File */
       conversation* conv;         /**< Pointer to the conversation */
 
 };

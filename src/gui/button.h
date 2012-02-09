@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -23,7 +23,6 @@
 
 
 #include <string>
-using namespace std;
 
 #include "guiobject.h"
 #include "color.h"
@@ -43,7 +42,7 @@ class button: public guiObject
        * \param yb -> y2 coordinate 
        * \param txt -> button text
        * \param isOval -> if the button is oval or rectangular */
-      button(int xa,int ya,int xb,int yb, string txt, bool isOval, 
+      button(int xa,int ya,int xb,int yb, std::string txt, bool isOval, 
             SDL_Surface* surface);
 
       /*! Destructor */
@@ -67,7 +66,7 @@ class button: public guiObject
       /*! Define the font to use for the button
        * \param fileName -> fileName of the font to use
        * \param size -> size of the font to use */
-      void defineFont(string fileName, int size);
+      void defineFont(std::string fileName, int size);
 
       /*! Set the text color of the button
        * \param r -> red
@@ -83,7 +82,7 @@ class button: public guiObject
       bool pressed;         /**< If the button is pressed or not */
       bool oval;            /**< Oval Button?  */
       farso_colors Colors;  /**< Colors */
-      string fontName;      /**< Font Name */
+      std::string fontName; /**< Font Name */
       int fontSize;         /**< Font Size */
 };
 

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -91,7 +91,7 @@ class guiInterface
       /*! Constructor
        * \param backImage -> name of a image file to be the background. 
        *                    NULL if no background is used*/
-      guiInterface(string backImage="");
+      guiInterface(std::string backImage="");
       /*! Destructor  */
       ~guiInterface();
 
@@ -131,7 +131,7 @@ class guiInterface
        * \param text -> title of the window 
        * \param empty -> with window is without any self draw 
        * \return -> pointer to the inserted window */
-      window* insertWindow(int xa,int ya,int xb,int yb,string text,
+      window* insertWindow(int xa,int ya,int xb,int yb,std::string text,
             bool empty=false);
       /*! Open a Window
        * \param jan -> pointer to the window opened */

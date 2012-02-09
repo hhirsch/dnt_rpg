@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -31,7 +31,7 @@
 #include "../gui/dntfont.h"
 #include "../sound/sound.h"
 
-
+using namespace std;
 
 #define INVENTORY_STATE_NONE   0
 #define INVENTORY_STATE_OBJECT 1

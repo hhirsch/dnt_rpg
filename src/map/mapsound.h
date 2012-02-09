@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -28,7 +28,7 @@
 class soundInfo: public dntListElement
 {
    public:
-      string fileName;   /**< Ogg File Name */
+      std::string fileName;   /**< Ogg File Name */
       ALfloat x,         /**< Sound X Position */
               y,         /**< Sound Y Position */
               z;         /**< Sound Z Position */
@@ -49,12 +49,12 @@ class mapSound: public dntList
       /*! Load mapSound definition file
        * \param fileName -> file name of the definition to load
        * \return -> true if load was successfull, falst otherwise */
-      bool load(string fileName);
+      bool load(std::string fileName);
 
       /*! Save mapSound definition file with the current sound list
        * \param fileName -> name of the file to save
        * \return -> true if save was successfull */
-      bool save(string fileName);
+      bool save(std::string fileName);
 
       /*! Flush Sounds, adding it to the OpenAL sound controller */
       void flush();

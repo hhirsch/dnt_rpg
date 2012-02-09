@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -44,7 +44,7 @@ class nodesList: public dntListElement, public dntList
       nodesList();
       /*! Constructor for a list of inanimated nodes of specific model
        * \note: listName will be modelFileName */
-      nodesList(string modelFileName);
+      nodesList(std::string modelFileName);
       /*! Destructor */
       ~nodesList();
 
@@ -61,7 +61,7 @@ class nodesList: public dntListElement, public dntList
       void deleteSceneNode(sceneNode* node);
 
       /*! Get the nodes list name */
-      string getName(){return(name);};
+      std::string getName(){return(name);};
       /*! Get the nodes aniModel */
       aniModel* getModel(){return(model);};
 
@@ -70,7 +70,7 @@ class nodesList: public dntListElement, public dntList
       void freeElement(dntListElement* obj);
     
       aniModel* model;  /**< Model loaded or NULL */
-      string name;      /**< Name of the list */
+      std::string name;      /**< Name of the list */
 };
 
 /*! A list of nodes lists   */
@@ -85,7 +85,7 @@ class listNodesList: public dntList
       /*! Find a list of name
        * \param name -> name of the list 
        * \return list pointer or NULL */
-      nodesList* find(string name);
+      nodesList* find(std::string name);
       /*! Find a list of model
        * \param model -> pointer to the model to find list of
        * \return list pointer or NULL */
@@ -121,7 +121,7 @@ class scene
       void removeUnusedModels();
 
       /*! Create an scene node  */
-      sceneNode* createSceneNode(bool staticModel, string modelFileName, 
+      sceneNode* createSceneNode(bool staticModel, std::string modelFileName, 
             GLfloat x, GLfloat y, GLfloat z,
             GLfloat aX, GLfloat aY, GLfloat aZ);
 

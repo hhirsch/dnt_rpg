@@ -62,7 +62,7 @@ class inventWindow
        * \param inter -> GUI interface to use 
        * \param itemWindow -> pointer to the info window used
        * \param usedEngine -> pointer to the engine used */
-      inventWindow(int xa, int ya, string title, 
+      inventWindow(int xa, int ya, std::string title, 
                    character *invent, guiInterface* inter,
                    itemWindow* infoW, engine* usedEngine);
 
@@ -91,7 +91,7 @@ class inventWindow
    private:
 
       /*! Init the window */
-      void init(int xa, int ya, string title, character *invent,
+      void init(int xa, int ya, std::string title, character *invent,
                 guiInterface* inter, itemWindow* infoW, engine* usedEngine);
 
       /*! Open the Inventory Object Menu  */

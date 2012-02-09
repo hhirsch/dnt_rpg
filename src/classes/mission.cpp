@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -25,6 +25,7 @@
 #include "../etc/dirs.h"
 #include "../etc/message3d.h"
 #include "../lang/translate.h"
+using namespace std;
 
 #define MISSION_TOKEN_CURRENT_MISSION    "currentMission"
 #define MISSION_TOKEN_XP_VALUE           "xpValue"

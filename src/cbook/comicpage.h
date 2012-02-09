@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -45,7 +45,7 @@ class comicPage: public dntListElement
        * \param x2 -> x last coordinate
        * \param y2 -> y last coordinate
        * \param text -> string with text to insert */
-      void insertText(int x1, int y1, int x2, int y2, string text); 
+      void insertText(int x1, int y1, int x2, int y2, std::string text); 
       
       /*! Insert (draw) a text to the page texture
        * \param x1 -> x first coordinate 
@@ -58,13 +58,13 @@ class comicPage: public dntListElement
        * \param R -> red color
        * \param G -> green color
        * \param B -. blue color */
-      void insertText(int x1, int y1, int x2, int y2, string text,
+      void insertText(int x1, int y1, int x2, int y2, std::string text,
                       int fontSize, int fontStyle, int R, int G, int B);
 
       /*! Set the texture
        * \textureFile -> image file to use as texture
        * \return -> true if can load the image */
-      bool defineTexture(string textureFile);
+      bool defineTexture(std::string textureFile);
 
       /*! Flush the SDL texture to an openGL texture */
       void flushTexture();

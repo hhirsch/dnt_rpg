@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -180,14 +180,14 @@ class engine
        * \param loadingGame -> true when loading map for a saveFile
        * \return 0 if can't load file .
        ***************************************************************/
-      int loadMap(string arqMapa, bool loadingGame=false);
+      int loadMap(std::string arqMapa, bool loadingGame=false);
 
       /*!
        ****************************************************************
        * Load a new playable character to the engine
        * \param pcFile -> fileName of the character to load
        ****************************************************************/
-      bool loadPC(string pcFile);
+      bool loadPC(std::string pcFile);
 
       /*!
        ****************************************************************
@@ -406,7 +406,7 @@ class engine
        ************************************************************** 
        * Show an Image to Screen and wait mouse Button.
        ***************************************************************/
-      void showImage(string fileName);
+      void showImage(std::string fileName);
 
       /*!
        ************************************************************** 

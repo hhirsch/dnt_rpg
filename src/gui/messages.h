@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2010 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -25,7 +25,6 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
 #include <string>
-using namespace std;
 
 /*! The warning class is used to show messages to the user */
 class warning
@@ -35,7 +34,7 @@ class warning
        * \param title -> title of the window
        * \param message -> message to show to user
        * \param gui -> pointer to the current interface */
-      void show(string title, string message, guiInterface* gui);
+      void show(std::string title, std::string message, guiInterface* gui);
 
       /*! Get the okButton pointer
        * \return -> pointer to the okButton */

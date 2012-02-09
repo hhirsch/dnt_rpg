@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -197,14 +197,14 @@ SDL_Surface* readFrontBuffer();
  * \param fileName -> fileName of the screenShot
  * \param thumb -> if will save as a miniature 
  * \return -> true if screenshot was saved */
-bool screenshot(string fileName, bool thumb=false); 
+bool screenshot(std::string fileName, bool thumb=false); 
 
 /*! Take screenshot from a SDL_Surface
  * \param screen -> pointer to the surface to save, containing ALL the screen
  * \param fileName -> fileName of the screenShot
  * \param thumb -> if will save as a miniature 
  * \return -> true if screenshot was saved */
-bool screenshot(SDL_Surface* screen, string fileName, bool thumb);
+bool screenshot(SDL_Surface* screen, std::string fileName, bool thumb);
 
 /*! Calculate the angle with two points
  * \param prvX -> point A X
@@ -245,6 +245,6 @@ void rotatePoint(GLfloat srcX, GLfloat srcY, GLfloat srcZ, GLfloat theta,
 /*! Replace all space characteres on the string
  * \param s -> string to replace spaces
  * \return -> string with '_' at spaces places */
-string replaceSpaces(string s);
+std::string replaceSpaces(std::string s);
 
 #endif

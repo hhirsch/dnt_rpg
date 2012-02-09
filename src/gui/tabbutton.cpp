@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -23,6 +23,7 @@
 #include "rolbar.h"
 #include "draw.h"
 #include "mouse.h"
+using namespace std;
 
 /***********************************************************
  *                       Constructor                       *

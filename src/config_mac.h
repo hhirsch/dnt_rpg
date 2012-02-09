@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -30,10 +30,11 @@
 #define ENABLE_NLS  0
 
 #include <string>
-using namespace std;
+
 
 /*! Retrieve the mac path. Based on ogre's function. */
-string macBundlePath();
+std::string macBundlePath();
+
 
 #endif
 

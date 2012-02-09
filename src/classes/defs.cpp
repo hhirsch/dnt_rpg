@@ -20,6 +20,7 @@
 
 #include "defs.h"
 #include "../engine/briefing.h"
+using namespace std;
 
 #include <stdio.h>
 

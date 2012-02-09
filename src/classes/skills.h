@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -29,7 +29,6 @@
 #endif
 
 #include <string>
-using namespace std;
 
 #include "../etc/dirs.h"
 
@@ -37,10 +36,10 @@ using namespace std;
 class skillDefinition
 {
    public:
-      string name;          /**< The Skill's Name */
-      string description;   /**< The Skill's Description */
+      std::string name;          /**< The Skill's Name */
+      std::string description;   /**< The Skill's Description */
       SDL_Surface* image;   /**< The Skill's Image */
-      string idString;      /**< String Identificator of the Skill */
+      std::string idString;      /**< String Identificator of the Skill */
       int baseAttribute;    /**< Base Attibute */
       bool isAttribute;     /**< True if the skill is an attribute */
 };
@@ -73,7 +72,7 @@ class skillsDefinitions
       /*! Return the wanted skill definition
        * \param idString -> String Identifier of the skill 
        * \return -> pointer to the skillDefinition */
-      skillDefinition* getSkillDefinition(string idString);
+      skillDefinition* getSkillDefinition(std::string idString);
 
       /*! Get an specific skill definition
        * \param i -> index of the skill
@@ -110,7 +109,7 @@ class skills
       /*! Return the wanted skill
        * \param idString -> String Identifier of the skill 
        * \return -> pointer to the skill */
-      skill* getSkillByString(string idString);
+      skill* getSkillByString(std::string idString);
       
       /*! Return the wanted skill
        * \param i -> integer representing the skill 
@@ -120,14 +119,14 @@ class skills
       /*! Return the wanted skill number
        * \param idString -> String identifier of the skill 
        * \return -> skill index */
-      int getSkillIntByString(string idString);
+      int getSkillIntByString(std::string idString);
 
       /*! Do a skill check (getting the value got at the check,
        *  to compare latter with another skill check or a fixed value) 
        *  \param idString -> String identifier of the skill
        *  \param difficulty -> check difficulty
        *  \return -> true if success, false if fail */
-      bool doSkillCheck(string idString, int difficulty);
+      bool doSkillCheck(std::string idString, int difficulty);
 
       /*! Do a skill check (getting the value got at the check,
        *  to compare latter with another skill check or a fixed value) 

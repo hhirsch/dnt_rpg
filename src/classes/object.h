@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -23,7 +23,6 @@
 
 #include <SDL/SDL.h>
 #include <string>
-using namespace std;
 
 #include "../etc/scene.h"
 #include "../etc/scenenode.h"
@@ -52,12 +51,12 @@ class object: public thing
       /*! Constructor 
        * \param path -> path to the object file
        * \param curmap -> current map filename */
-      object(string path, string curMap);
+      object(std::string path, std::string curMap);
       /*! Constructor
        * \param obj -> some object to be the source of actual */
       object(object* obj);
       /*! Constructor. Only set path (Do not load anyhing) */
-      object(string path);
+      object(std::string path);
       /*! Destructor */
       ~object();
 
@@ -73,15 +72,15 @@ class object: public thing
 
       /*! Gets the name of the model
        * \return -> the name of the model*/
-      string getName();
+      std::string getName();
 
       /*! Gets the fileName of the model
        * \return -> the fileName of the model*/
-      string getFileName();
+      std::string getFileName();
 
       /*! Get the object's description
        * \return string with description */
-      string getDescription();
+      std::string getDescription();
 
       /*! Gets the Inventory size of the Model
        * \param x -> x inventory size
@@ -117,12 +116,12 @@ class object: public thing
 
       /*! Get the 2D model name
        * \return -> model2D Name */
-      string get2dModelName();
+      std::string get2dModelName();
 
       /*! Get the related information string (comic book file name,
        * ammo type, etc.)
        * \return -> related info */
-      string getRelatedInfo();
+      std::string getRelatedInfo();
 
       /*! Verify, with all Meshes of the model, if the model colides
        *  with the bounding box defined as parameter. 
@@ -197,11 +196,11 @@ class object: public thing
                                  For example, at computers, it keeps the 
                                  operational system installed. */
 
-      string fileName;      /**< FileName of the Object */
-      string model2dName;   /**< FileName of the 2D Model */
-      string cal3dName;     /**< FileName of the cal3d model */
-      string description;   /**< Description of the object */
-      string relatedInfo;   /**< Some related fileName 
+      std::string fileName;      /**< FileName of the Object */
+      std::string model2dName;   /**< FileName of the 2D Model */
+      std::string cal3dName;     /**< FileName of the cal3d model */
+      std::string description;   /**< Description of the object */
+      std::string relatedInfo;   /**< Some related fileName 
                                  (comic book file, for example) */
 
       object* next;         /**< Next Object on List */
@@ -212,7 +211,7 @@ class object: public thing
       void cleanValues();
    
       /*! Get the object type ID, based on string identifier */
-      int getObjectTypeId(string t);
+      int getObjectTypeId(std::string t);
 
 };
 
@@ -242,7 +241,7 @@ class objectsList
       /*! Search for the object on the list
        * \return -> pointer to the object found or NULL
        * \note -> static sceneries objects always use the same object pointer */
-      static object* search(string fileName, GLfloat posX, GLfloat posY,
+      static object* search(std::string fileName, GLfloat posX, GLfloat posY,
                             GLfloat posZ);
 
       /*! Search for the object on the list with scNode
@@ -258,7 +257,7 @@ class objectsList
  * \param arquivo -> filename to load
  * \return -> pointer to the Object created (object* as generic,
  *            but really create the child type, as weapon*, for example) */
-object* createObject(string arquivo, string curMapFileName);
+object* createObject(std::string arquivo, std::string curMapFileName);
 
 /*! Delete an object, based on its type
  * \param obj -> pointer to the object to delete */

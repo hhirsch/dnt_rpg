@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -23,7 +23,6 @@
 
 #include <SDL/SDL_opengl.h>
 #include <string>
-using namespace std;
 
 /*! Map Fog Class */
 class mapFog
@@ -34,7 +33,7 @@ class mapFog
       GLfloat start;    /**< Fog Distant Start */
       GLfloat end;      /**< Fog Distant End */
       bool enabled;     /**< Fog Enabled? */
-      string fileName;  /**< File name of the fog */
+      std::string fileName;  /**< File name of the fog */
 
       /*! Constructor */
       mapFog();
@@ -42,7 +41,7 @@ class mapFog
       ~mapFog();
       /*! Load Fog from File
        * \param arq -> fog filename */
-      void load(string arq);
+      void load(std::string arq);
       /*! Save fog to file */
       bool save();
 

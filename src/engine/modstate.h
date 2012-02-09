@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -51,7 +51,7 @@ class modAction: public dntListElement
        * \param mapFile - name of the map file where action occurs 
        * \param xPos -> x position
        * \param zPos -> z position */
-      modAction(int act, string tgt, string mapFile,
+      modAction(int act, std::string tgt, std::string mapFile,
                 GLfloat xPos, GLfloat yPos, GLfloat zPos);
 
       /*! Destructor */
@@ -59,13 +59,13 @@ class modAction: public dntListElement
 
       /*! Get the target of the action
        * \return pointer to object of the action */
-      string getTarget();
+      std::string getTarget();
       /*! Get the action type
        * \return number of the action type*/
       int getAction();
       /*! Get map filename
        * \return name of the map file */
-      string getMapFileName();
+      std::string getMapFileName();
 
       /*! Get the position where action occurs
        * \param posX -> X position
@@ -81,18 +81,18 @@ class modAction: public dntListElement
 
       /*! Convert the action to a string (usually to save)
        * \return string representing the action */
-      virtual string toString()=0;
+      virtual std::string toString()=0;
       /*! Define the action from a string (usually to load) 
        * \param s -> string to load from */
-      virtual void fromString(string s)=0;
+      virtual void fromString(std::string s)=0;
 
    protected:
-      string mapFileName;       /**< name of the map file where action occurs */
+      std::string mapFileName;  /**< name of the map file where action occurs */
       int action;               /**< type of the action */
       GLfloat x;                /**< X position on map */
       GLfloat y;                /**< Y Position on map */
       GLfloat z;                /**< Z position on map */
-      string target;            /**< target of the action (fileName) */
+      std::string target;       /**< target of the action (fileName) */
 };
 
 /*! The list of modActions */
@@ -123,14 +123,14 @@ class mapCharacterModAction : public modAction
        * \param orientation -> character orientation angle
        * \param initialX -> initial X position when loaded the map
        * \param initialZ -> initial Z position when loaded the map */
-      mapCharacterModAction(int act, string character, string mapFile,
+      mapCharacterModAction(int act, std::string character, std::string mapFile,
                             GLfloat xPos, GLfloat yPos, GLfloat zPos, 
                             GLfloat orientation,
                             GLfloat initialX, GLfloat initialZ);
 
       /*! Constructor from string
        * \param s -> string with info to load */
-      mapCharacterModAction(string s);
+      mapCharacterModAction(std::string s);
 
       /*! Destructor */                      
       ~mapCharacterModAction();
@@ -152,10 +152,10 @@ class mapCharacterModAction : public modAction
 
       /*! Convert the action to a string (usually to save)
        * \return string representing the action */
-      string toString();
+      std::string toString();
       /*! Define the action from a string (usually to load)
        * \param s -> string to load from */
-      void fromString(string s);
+      void fromString(std::string s);
 
    protected:
       GLfloat initX;                   /**< X initial position on map */
@@ -173,12 +173,12 @@ class mapObjectModAction: public modAction
        * \param mapFile - name of the map file where action occurs 
        * \param xPos -> x position
        * \param zPos -> z position */
-      mapObjectModAction(int act, string obj, string mapFile,
+      mapObjectModAction(int act, std::string obj, std::string mapFile,
                          GLfloat xPos, GLfloat yPos, GLfloat zPos);
 
       /*! Constructor from string
        * \param s -> string with info to load */
-      mapObjectModAction(string s);
+      mapObjectModAction(std::string s);
 
       /*! Destructor */
       ~mapObjectModAction();
@@ -193,10 +193,10 @@ class mapObjectModAction: public modAction
 
       /*! Convert the action to a string (usually to save)
        * \return string representing the action */
-      string toString();
+      std::string toString();
       /*! Define the action from a string (usually to load)
        * \param s -> string to load from */
-      void fromString(string s);
+      void fromString(std::string s);
 
    protected:
        int value;   /**< Some Value Information (usually related to state)  */
@@ -212,12 +212,12 @@ class mapTalkModAction: public modAction
        * \param tgt -> actor target fileName
        * \param mapFile - name of the map file where action occurs 
        * \param talkValue -> value position */
-      mapTalkModAction(int act, string tgt, string mapFile,
+      mapTalkModAction(int act, std::string tgt, std::string mapFile,
                        int talkValue);
 
       /*! Constructor from string
        * \param s -> string with info to load */
-      mapTalkModAction(string s);
+      mapTalkModAction(std::string s);
 
       /*! Destructor */
       ~mapTalkModAction();
@@ -232,10 +232,10 @@ class mapTalkModAction: public modAction
 
       /*! Convert the action to a string (usually to save)
        * \return string representing the action */
-      string toString();
+      std::string toString();
       /*! Define the action from a string (usually to load)
        * \param s -> string to load from */
-      void fromString(string s);
+      void fromString(std::string s);
 
    protected:
        int value;   /**< Some talk Value Information */
@@ -246,7 +246,7 @@ class mapTalkModAction: public modAction
 class modInvObj: public dntListElement
 {
    public:
-      string fileName;      /**< The Object Filename */
+      std::string fileName; /**< The Object Filename */
       int x,                /**< X position on inventory */
           y;                /**< Y position on inventory */
       int invNumber;        /**< The inventory number */
@@ -266,7 +266,7 @@ class modInventory: public modAction, public dntList
        * \param inv -> inventory to keep status
        * \param owner -> inventory owner
        * \param mapFile -> mapFileName where the owner is */
-      modInventory(inventory* inv,string owner, string mapFile);
+      modInventory(inventory* inv, std::string owner, std::string mapFile);
 
       /*! Destructor */
       ~modInventory();
@@ -287,23 +287,23 @@ class modInventory: public modAction, public dntList
 
       /*! Convert the action to a string (usually to save)
        * \return string representing the action */
-      string toString();
+      std::string toString();
       /*! Define the action from a string (usually to load)
        * \param s -> string to load from */
-      void fromString(string s);
+      void fromString(std::string s);
 
       /*! Save the modInventory to the file
        * \param file -> pointer to the file to save */
-      void save(ofstream* file);
+      void save(std::ofstream* file);
 
       /*! Load the modInventory from a file
        * \param file -> fileName to load
        * \return -> true if ok  */
-      bool load(string file);
+      bool load(std::string file);
 
       /*! Insert a item from a string representing the modInvObj
        * \param s -> string representing modInvObj */
-      void insert(string s);
+      void insert(std::string s);
 
    protected:
     
@@ -322,13 +322,13 @@ class modMap: public dntListElement
    public:
       /*! Constructor 
        * \param fileName -> map file name */
-      modMap(string fileName);
+      modMap(std::string fileName);
       /*! Destructor */
       ~modMap();
 
       /*! Save the modMap to the file
        * \param file -> pointer to the file to save */
-      void save(ofstream* file);
+      void save(std::ofstream* file);
 
       /*! Load the modMap from the definitions parser
        * \param def -> pointer to the defParser with info for the modMap */
@@ -342,7 +342,8 @@ class modMap: public dntListElement
        * \param yPos -> y position
        * \param zPos -> z position
        * \param value -> some value related to the action */
-      void mapObjectAddAction(int action, string target, string mapFileName,
+      void mapObjectAddAction(int action, std::string target, 
+                              std::string mapFileName,
                               GLfloat xPos, GLfloat yPos, GLfloat zPos,
                               int value);
 
@@ -355,7 +356,8 @@ class modMap: public dntListElement
        * \param orientation -> character orientation angle
        * \param initialX -> initial X position when loaded the map
        * \param initialZ -> initial Z position when loaded the map */
-      void mapCharacterAddAction(int act, string character, string mapFile,
+      void mapCharacterAddAction(int act, std::string character,
+                                 std::string mapFile,
                                  GLfloat xPos, GLfloat yPos, GLfloat zPos, 
                                  GLfloat orientation,
                                  GLfloat initialX, GLfloat initialZ);
@@ -365,14 +367,14 @@ class modMap: public dntListElement
        * \param character -> character fileName
        * \param mapFile -> fileName of the map
        * \param value -> the action talk value */
-      void mapTalkAddAction(int act, string character, string mapFile,
-                            int value);
+      void mapTalkAddAction(int act, std::string character, 
+                            std::string mapFile, int value);
 
       /*! Add Inventory to the modifications list (or update respective 
        *  modInv if one exists)
        *  \param inv -> pointer to the inventory to update
        *  \param owner -> inventory owner filename */ 
-      void mapInventoryAdd(inventory* inv, string owner);
+      void mapInventoryAdd(inventory* inv, std::string owner);
 
       /*! Do All saved modifications to the map (those that are for them,
        * usually when you return to the map and want it to appears exactly 
@@ -385,17 +387,17 @@ class modMap: public dntListElement
       void clear();      
 
       /*! Get the mapFileName */
-      string getMapFileName();
+      std::string getMapFileName();
 
       /*! Verify if all Characters defined at a NPC file (relative,
        * obviously, to a map) are dead. 
        * \return -> true if all are dead*/
-      bool allCharactersDead(string npcFileName);
+      bool allCharactersDead(std::string npcFileName);
 
       /*! Verify if all Characters defined at a NPC file (relative,
        * obviously, to a map) are alive 
        * \return -> true if all are alive */
-      bool allCharactersAlive(string npcFileName);
+      bool allCharactersAlive(std::string npcFileName);
 
    protected:
 
@@ -414,18 +416,18 @@ class modMap: public dntListElement
        * \param xPos -> x position
        * \param zPos -> z position
        * \return true if the inverse action is found and removed. */
-      bool removeInverseObjectAction(int action, string target, 
-                                     string mapFileName, GLfloat xPos, 
+      bool removeInverseObjectAction(int action, std::string target, 
+                                     std::string mapFileName, GLfloat xPos, 
                                      GLfloat yPos, GLfloat zPos);
 
       /*! Search for a modAction on the list
        * \param action -> action number constant
        * \param target -> target name
        * \return -> pointer to the modAction found, or NULL if none */
-      modAction* search(int action, string target, 
+      modAction* search(int action, std::string target, 
                         GLfloat xPos=-1, GLfloat yPos=-1, GLfloat zPos=-1);
 
-      string mapFileName;          /**< The map file name */
+      std::string mapFileName;     /**< The map file name */
       modActionList modList;       /**< List of map modification actions */
 };
 
@@ -456,11 +458,11 @@ class modState
 
       /*! Load File of state 
        * \param file -> filename to load */
-      bool loadState(string file);
+      bool loadState(std::string file);
 
       /*! Save File of State 
        * \param file -> filename to save */
-      bool saveState(string file);
+      bool saveState(std::string file);
 
       /*! Add action to the list (or remove some inverse action from)
        * \param action -> action type
@@ -470,7 +472,8 @@ class modState
        * \param yPos -> y position 
        * \param zPos -> z position
        * \param value -> some value related to the action */
-      void mapObjectAddAction(int action, string target, string mapFileName,
+      void mapObjectAddAction(int action, std::string target,
+                              std::string mapFileName,
                               GLfloat xPos, GLfloat yPos, GLfloat zPos,
                               int value=0);
 
@@ -484,7 +487,8 @@ class modState
        * \param orientation -> character orientation angle
        * \param initialX -> initial X position when loaded the map
        * \param initialZ -> initial Z position when loaded the map */
-      void mapCharacterAddAction(int act, string character, string mapFile,
+      void mapCharacterAddAction(int act, std::string character,
+                                 std::string mapFile,
                                  GLfloat xPos, GLfloat yPos, GLfloat zPos, 
                                  GLfloat orientation,
                                  GLfloat initialX, GLfloat initialZ);
@@ -494,7 +498,7 @@ class modState
        * \param character -> character fileName
        * \param mapFile -> fileName of the map
        * \param value -> the action talk value */
-      void mapTalkAddAction(int act, string character, string mapFile,
+      void mapTalkAddAction(int act, std::string character, std::string mapFile,
                             int value);
       
       /*! Add Inventory to the modifications list (or update respective 
@@ -502,7 +506,8 @@ class modState
        *  \param inv -> pointer to the inventory to update
        *  \param owner -> inventory owner filename 
        *  \param mapFile -> map filename where the character is */
-      void mapInventoryAdd(inventory* inv, string owner, string mapFile);
+      void mapInventoryAdd(inventory* inv, std::string owner,
+                           std::string mapFile);
 
       /*! Do All saved modifications to the map (those that are for them,
        * usually when you return to the map and want it to appears exactly 
@@ -517,30 +522,30 @@ class modState
       /*! Verify if all Characters defined at a NPC file (relative,
        * obviously, to a map) are dead. 
        * \return -> true if all are dead*/
-      bool allCharactersDead(string npcFileName);
+      bool allCharactersDead(std::string npcFileName);
 
       /*! Verify if all Characters defined at a NPC file (relative,
        * obviously, to a map) are alive 
        * \return -> true if all are alive */
-      bool allCharactersAlive(string npcFileName);
+      bool allCharactersAlive(std::string npcFileName);
 
       /*! Verify if the modState have informations for the map
        * \param fileName -> map filename to verify
        * \return -> true if have info, false if not */
-      bool haveMap(string fileName);
+      bool haveMap(std::string fileName);
 
    protected:
 
       /*! Create the ModMap related to the fileName 
        * \param fileName -> map file name
        * \return -> pointer to the created modMap */
-      modMap* createModMap(string fileName);
+      modMap* createModMap(std::string fileName);
 
       /*! Find the modMap on the list related to the fileName
        * \param fileName -> map filename to search
        * \return -> modMap pointer if found or created
        * \note -> if not found a modMap this function create a new one */
-      modMap* findModMap(string fileName);
+      modMap* findModMap(std::string fileName);
       
       static modMapList modList;   /**< List of mod maps */
 };

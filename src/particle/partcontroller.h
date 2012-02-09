@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -27,7 +27,6 @@
 #include "../engine/collision.h"
 
 #include <string>
-using namespace std;
 
 class Map;
 
@@ -53,7 +52,7 @@ class partController
        * \param fileName -> name of the file containing the definition
        * \return particle pointer; */
       particleSystem* addParticle(GLfloat X, GLfloat Y, GLfloat Z,
-                                  string fileName );
+                                  std::string fileName );
 
       /*! Remove an particle system from the system
        * \param part -> address of the Particle */
@@ -68,11 +67,11 @@ class partController
 
       /*! Load Particles Systems from file.
        * \param fileName -> name of the file to load. */
-      void loadFromFile(string fileName);
+      void loadFromFile(std::string fileName);
 
       /*! Save Particles System To file.
        * \param fileName -> name of the file to be saved. */
-      void saveToFile(string fileName);
+      void saveToFile(std::string fileName);
 
       /*! Remove all particle systems from the controller 
        * \param keepPCRelated -> true to keep all particles related to the 

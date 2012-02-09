@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -23,7 +23,6 @@
 
 #include <string>
 #include <iostream>
-using namespace std;
  
 #include <SDL/SDL.h>
 
@@ -45,7 +44,7 @@ class ogg_stream
       /*! Open Ogg file to use
        * \param path -> file name of the ogg file to use
        * \return -> true if successfully opened */
-      bool open(string path);
+      bool open(std::string path);
       
       /*! Release all buffers and sources relative to the file */
       void release();         
@@ -93,12 +92,12 @@ class ogg_stream
       /*! Check OpenAl errors
        * \param where -> string with information about 
        *                 where the check occurs */
-      void check(string where); 
+      void check(std::string where); 
 
       /*! Error code
        * \param code -> numer of error
        * \return string relative to the error */
-      string errorString(int code); 
+      std::string errorString(int code); 
       
    private:
         FILE* oggFile;                 /**< file handle */

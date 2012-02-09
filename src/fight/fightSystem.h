@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -130,7 +130,7 @@ class fightSystem
 
      /*! Set the current openned map file name
       * \param fileName -> current openned map filename */
-     void setMap(string fileName);
+     void setMap(std::string fileName);
 
    private:
      fightGroup npcGroups[FIGHT_MAX_NPC_GROUPS];  /**< PCs groups */
@@ -139,7 +139,7 @@ class fightSystem
      Uint32 lastTime;            /**< Last time of some animation */
      character* actualActor;         /**< Actual Character Acting */
      bool pendingAnimation;     /**< If some animation is pending */
-     string mapFileName;        /**< Current Openned Map filename */
+     std::string mapFileName;   /**< Current Openned Map filename */
      briefing* brief;                           /**< The briefing */
 
      /*!

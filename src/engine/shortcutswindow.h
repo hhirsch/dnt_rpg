@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2010 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -85,11 +85,11 @@ class shortcutsWindow
        * \param fileName -> file to open
        * \param activeCharacter -> pointer to the active character
        * \return true if successfull */
-      bool loadQuickTalents(string fileName, character* activeCharacter);
+      bool loadQuickTalents(std::string fileName, character* activeCharacter);
       /*! Save quick talents defined to file
        * \param fileName -> file to save to
        * \return true if successfull */
-      bool saveQuickTalents(string fileName);
+      bool saveQuickTalents(std::string fileName);
 
       /*! set the cleared talents flag
        * \param b -> new clearedTalents flag */

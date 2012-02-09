@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -24,7 +24,6 @@
 #include <SDL/SDL.h>
 #include <iostream>
 #include <string>
-using namespace std;
 
 #include "../etc/list.h"
 
@@ -81,11 +80,11 @@ class guiObject : public dntListElement
 
       /*! Gets the object text
        * \return object text */
-      string getText(){return(text);};
+      std::string getText(){return(text);};
 
       /*! Set the object text
        * \param txt -> new text */
-      void setText(string txt){text = txt;};
+      void setText(std::string txt){text = txt;};
 
       /*! Gets the X1 Coordinate
        * \return x1 coordinate */
@@ -141,9 +140,9 @@ class guiObject : public dntListElement
       void setSurface(SDL_Surface* surface){wSurface = surface;};
 
       /*! Set Text to display when mouse is over the object */
-      void setMouseHint(string txt){mouseHint=txt;};
+      void setMouseHint(std::string txt){mouseHint=txt;};
       /*! Get current mouse hint */
-      string getMouseHint(){return(mouseHint);};
+      std::string getMouseHint(){return(mouseHint);};
    
       /*! Hide the object */
       void hide(){visible=false;available=false;hadChanged=true;};
@@ -158,8 +157,8 @@ class guiObject : public dntListElement
           x2,              /**< Coordinate on Window */
           y2;              /**< Coordinate on Window */
       bool available;      /**< Available? */
-      string text;         /**< Text Display */
-      string mouseHint;    /**< Hint when mouse over */
+      std::string text;      /**< Text Display */
+      std::string mouseHint; /**< Hint when mouse over */
       SDL_Surface* wSurface; /**< Screen surface */
       bool visible;        /**< Toggle object visibility */
    

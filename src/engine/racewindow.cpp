@@ -20,6 +20,7 @@
 
 
 #include "racewindow.h"
+using namespace std;
 
 /***********************************************************************
  *                           cmpRaceFunction                           *

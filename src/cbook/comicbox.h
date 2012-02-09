@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -27,7 +27,6 @@
 #include <SDL/SDL.h>
 
 #include <string>
-using namespace std;
 
 /* Wait Time */
 #define COMIC_BOX_DEFAULT_TIMEOUT  5000 /**< Default Box Wait time (5 sec) */
@@ -49,7 +48,7 @@ class comicBox: public dntListElement
    public:
       /*! Constructor 
        * \param t -> box title */
-      comicBox(string t);
+      comicBox(std::string t);
       /*! Destructor */
       ~comicBox();
 
@@ -85,7 +84,7 @@ class comicBox: public dntListElement
 
       /*! Get the box title
        * \return -> title string */
-      string getTitle();
+      std::string getTitle();
 
    protected:
 
@@ -110,7 +109,7 @@ class comicBox: public dntListElement
 
       Uint32 timeout;        /**< Box Wait time */
 
-      string title;          /**< title  */
+      std::string title;     /**< title  */
 };
 
 /*! The chain list of comic boxes */

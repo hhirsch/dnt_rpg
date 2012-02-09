@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -22,7 +22,6 @@
 #define _farso_rolbar_h
 
 #include <string>
-using namespace std;
 
 #include "guiobject.h"
 #include "color.h"
@@ -45,7 +44,7 @@ class rolBar: public guiObject
        * \param txt -> text on the rolbar
        * \param list -> pointer to the guiList
        * \param surface -> pointer to the screen surface */
-      rolBar(int xa, int ya, int xb, int yb, string txt, guiList* list, 
+      rolBar(int xa, int ya, int xb, int yb, std::string txt, guiList* list, 
              SDL_Surface* surface);
       /*! Destructor */
       ~rolBar();
@@ -64,11 +63,11 @@ class rolBar: public guiObject
 
       /*! Set The Text of the Bar, putting them on top
        * \param txt -> desired text */
-      void setText(string txt);
+      void setText(std::string txt);
 
       /*! Add text to bar 
        * \param txt -> text to add*/
-      void addText(string txt);
+      void addText(std::string txt);
 
       /*! Add the string to the rolBar
        * \param txt -> text screen to add
@@ -76,7 +75,7 @@ class rolBar: public guiObject
        * \param size -> size of the font to use
        * \param align -> alignment of the font to use
        * \param style -> style of the font to use  */
-      void addText(string txt, string font, int size, int style,
+      void addText(std::string txt, std::string font, int size, int style,
                    int align);
 
       /*! Add the string to the rolBar
@@ -88,7 +87,7 @@ class rolBar: public guiObject
        * \param R -> red color of the font
        * \param G -> green color of the font
        * \param B -> blue color of the font */
-      void addText(string txt, string font, int size, int style,
+      void addText(std::string txt, std::string font, int size, int style,
                    int align, int R, int G, int B);
 
       /*! Set the first displayed line of the rolBar
@@ -111,7 +110,7 @@ class rolBar: public guiObject
 
       /*! Get last line text on the rolbar
        * /param -> text of the last line */
-      string getLastLine();
+      std::string getLastLine();
 
    private:
       button* up;              /**< Up Button */

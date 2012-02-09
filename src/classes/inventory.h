@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -179,7 +179,7 @@ class inventory
       /*! Get a item from the inventory with the desired fileName, if exists.
        * \param fileName -> fileName of the item
        * \return -> pointer to the found object of NULL */
-      object* getItemByFileName(string fileName);
+      object* getItemByFileName(std::string fileName);
 
       /*! Set the inventory Opened Window
        * \param w -> pointer to an inventWindow */

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -32,7 +32,6 @@
 #endif
 
 #include <string>
-using namespace std;
 
 #include "ogg_stream.h"
 #include "sndfx.h"
@@ -74,7 +73,7 @@ class sound
 
       /*! Load and Start to Play OGG music file.
        * \param fileName -> name of the ogg file with the desired music. */
-      bool loadMusic(string fileName);
+      bool loadMusic(std::string fileName);
    
       /*! Add sound effect to the list
        *  \param x -> X position
@@ -84,14 +83,14 @@ class sound
        *  \param fileName -> name of the ogg file to open
        *  \return pointer to the added sound */
       sndfx* addSoundEffect(ALfloat x, ALfloat y, ALfloat z, int loop,
-                            string fileName);
+                            std::string fileName);
       
       /*! Add sound effect without position to the list
        *  \param loop -> if sound will loop at end or not (see sndFx and
        *                                                   ogg_stream)
        *  \param fileName -> name of the ogg file to open
        *  \return pointer to the added sound */
-      sndfx* addSoundEffect(int loop, string fileName);
+      sndfx* addSoundEffect(int loop, std::string fileName);
 
       /*! Remove sound effect from list
        *  \param snd -> pointer to sound effect to remove */

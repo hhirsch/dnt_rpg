@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2010 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -84,7 +84,7 @@ class featSelWindow
             /*! Get the fSelFeat from list
              * \param featId -> Id of the feat to get
              * \return poiter to the feat got (or NULL) */
-            fSelFeat* getFeat(string featId);
+            fSelFeat* getFeat(std::string featId);
          protected:
             /*! Free Element
              * \param obj -> pointer to the

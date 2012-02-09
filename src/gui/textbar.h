@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -22,7 +22,7 @@
 #define _farso_textbar_h
 
 #include <stdlib.h>
-#include <string.h>
+
 #include "color.h"
 #include "draw.h"
 #include "dntfont.h"
@@ -41,7 +41,7 @@ class textBar: public guiObject
        * \param text1 -> textBar text
        * \param cripto -> if is crypt, or not
        * \param screen -> surface to draw to */
-      textBar(int xa,int ya,int xb,int yb, string text1, bool cripto,
+      textBar(int xa,int ya,int xb,int yb, std::string text1, bool cripto,
               SDL_Surface* screen);
       /*! Destructor */
       ~textBar();
@@ -60,7 +60,7 @@ class textBar: public guiObject
 
       /*! Set the current text at the bar
        * \param txt -> new text to the bar */
-      void setText(string txt);
+      void setText(std::string txt);
 
       /*! Define current cursor position, based on mouse position
        * (for example at a click inside the bar) 
@@ -79,7 +79,7 @@ class textBar: public guiObject
           end;              /**< Actual last visible character on string */
       unsigned int pos;     /**< Current cursor position */
       int lastWrite;        /**< Last time when write */
-      string lastChar;      /**< Last Character writed */
+      std::string lastChar; /**< Last Character writed */
       farso_colors Colors;  /**< Internal Colors */   
 };
  

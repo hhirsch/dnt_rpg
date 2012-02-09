@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -36,7 +36,6 @@
 #include "../engine/options.h"
 
 #include <string>
-using namespace std;
 
 /* Flag masks */
 #define SQUARE_CAN_WALK      1   /**< If a Square is walkable or not. */
@@ -63,7 +62,7 @@ class conection
       bool active;          /**< Active Conection */
       GLfloat x1,z1,x2,z2;  /**< Map Position */
       GLfloat angle;        /**< Connection Angle */
-      string mapName;       /**< Map filename */ 
+      std::string mapName;  /**< Map filename */ 
 };
 
 /*! Texture information to be used by an wall */
@@ -85,11 +84,11 @@ class wallTexture
 
       /*! Set the texture name
        * \param name -> texture name */
-      void setTextureName(string name);
+      void setTextureName(std::string name);
 
       /*! Get the texture name
        * \return -> string with texture name */
-      string getTextureName();
+      std::string getTextureName();
 
       /*! Get Texture Deltas
        * \param x -> deltaX
@@ -105,7 +104,7 @@ class wallTexture
    protected:
 
       int textureId;       /**< Texture ID Used*/
-      string textureName;  /**< Texture Name */
+      std::string textureName;  /**< Texture Name */
       GLuint dX,           /**< Delta X of texture cycle */
              dY,           /**< Delta Y of texture cycle */
              dZ;           /**< Delta Z of texture cycle */ 
@@ -149,8 +148,8 @@ class mapTexture: public dntListElement
       /*! Destructor */
       ~mapTexture();
 
-      string name;              /**< Name */
-      string fileName;          /**< File Name */
+      std::string name;         /**< Name */
+      std::string fileName;     /**< File Name */
       GLuint index;             /**< Texture ID */
       GLuint w,h;               /**< Dimmensions */
       GLuint alphaTexture;      /**< The Alpha Texture */
@@ -343,11 +342,11 @@ class Map
       /*! Opens map from file
        * \param arquivo ->  Name of file to be opened
        * \return 1 on success. */
-      int open(string arquivo); 
+      int open(std::string arquivo); 
       /*! Save map to file
        * \param arquivo -> file name to be saved
        * \return -> 1 on success. */
-      int save( string arquivo ); 
+      int save(std::string arquivo ); 
 
 
       /*! Optimize Map Structs */
@@ -402,41 +401,41 @@ class Map
 
       /*! Get Map File Name
        * \return map fileName */
-      string getFileName();
+      std::string getFileName();
       /*! Set Map File Name
        * \param fName -> New fileName */
-      void setFileName(string fName);
+      void setFileName(std::string fName);
       /*! Get the Map Name
        * \return -> string with the map's name */
-      string getName();
+      std::string getName();
 
       /*! Get NPC File Name
        * \return NPC fileName */
-      string getNpcFileName();
+      std::string getNpcFileName();
       /*! Set NPC File Name
        * \param fName -> New fileName */
-      void setNpcFileName(string fName);
+      void setNpcFileName(std::string fName);
 
       /*! Get Music File Name
        * \return music fileName */
-      string getMusicFileName();
+      std::string getMusicFileName();
       /*! Set Music File Name
        * \param fName -> New fileName */
-      void setMusicFileName(string fName);
+      void setMusicFileName(std::string fName);
 
       /*! Get Sounds File Name
        * \return sounds fileName */
-      string getSoundsFileName();
+      std::string getSoundsFileName();
       /*! Set Sounds File Name
        * \param fName -> New fileName */
-      void setSoundsFileName(string fName);
+      void setSoundsFileName(std::string fName);
 
       /*! Get Particles File Name
        * \return particles fileName */
-      string getParticlesFileName();
+      std::string getParticlesFileName();
       /*! Set Particles File Name
        * \param fName -> New fileName */
-      void setParticlesFileName(string fName);
+      void setParticlesFileName(std::string fName);
 
 
       /*! Get Map Size X
@@ -492,11 +491,11 @@ class Map
       /*! Get the integer ID value of the texture
        * \param textureName -> Name of the texture
        * \return integer with the texture ID, or -1 if not found. */
-      int getTextureID(string textureName);
+      int getTextureID(std::string textureName);
       /*! Get the texture name
        * \param ID -> integer ID of the texture
        * \return texture Name */
-      string getTextureName(GLuint ID);
+      std::string getTextureName(GLuint ID);
       /*! Get the texture
        * \param id -> integer ID of the texture
        * \return texture pointer */
@@ -505,7 +504,7 @@ class Map
        * \param arq -> fileName of the texture
        * \param name -> Name of the texture
        * \param atLast -> true to insert at last */
-      GLuint insertTexture(string arq, string name, bool atLast=false); 
+      GLuint insertTexture(std::string arq, std::string name, bool atLast=false); 
       /*! Remove all unused textures from the list */
       void removeUnusedTextures();
 
@@ -615,7 +614,7 @@ class Map
       float squareMiniDiv;  /**< MiniMap square division relation */
 
       mapSound* sounds;      /**< Map Sound Effects */
-      string soundsFileName; /**< Sound Info File Name */
+      std::string soundsFileName; /**< Sound Info File Name */
 
       wallList walls;        /**< Map Walls */
 
@@ -623,12 +622,12 @@ class Map
           z;                /**< Map Z Dimension (in squares) */
       bool outdoor;         /**< If it's an outdoor or indoor map */
       Square** MapSquares;  /**< Internal Map squares */
-      string music;         /**< Map Music */
-      string fileName;      /**< File name of loaded map */
-      string name;          /**< The name of the map */
+      std::string music;         /**< Map Music */
+      std::string fileName;      /**< File name of loaded map */
+      std::string name;          /**< The name of the map */
 
-      string particlesFileName; /**< File Name of Map Particles Systens */
-      string npcFileName;       /**< Static NPC's on map filename */
+      std::string particlesFileName; /**< File Name of Map Particles Systens */
+      std::string npcFileName;       /**< Static NPC's on map filename */
       float xInic,              /**< X coordinate where PCs starts */
             zInic;              /**< Z Coordinate where PCs starts */
       float angleInic;          /**< Angle for PC at initial position */

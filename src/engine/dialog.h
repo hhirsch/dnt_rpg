@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -34,7 +34,6 @@
 
 #include "character.h"
 #include <string>
-using namespace std;
 
 /*! talkAction Struct */
 class talkAction
@@ -48,7 +47,7 @@ class talkAction
      int oper; /**< Operator used */
      int qty;  /**< Quantity */
      int att;  /**< Attribute to modify */
-     string satt; /**< String Attribute */
+     std::string satt; /**< String Attribute */
 };
 
 /* a talk test */
@@ -63,7 +62,7 @@ class talkTest
        * \param token -> function token string
        * \param t -> the test string
        * \param a -> the against string */
-      bool set(string token, string t, string a);
+      bool set(std::string token, std::string t, std::string a);
 
       /*! Do the test with a character
        * \param pc -> pointer to the character to test
@@ -74,12 +73,12 @@ class talkTest
       /*! Get the test name (ie. if a skill, the skill name)
        * \param pc -> pointer to the character
        * \return -> the test name */
-      string getTestName(character* pc);
+      std::string getTestName(character* pc);
 
    protected:
       int id;            /**< Talk test ID */
-      string test;       /**< The modifier to test */
-      string against;    /**< The against modifier to test (or value) */
+      std::string test;       /**< The modifier to test */
+      std::string against;    /**< The against modifier to test (or value) */
 };
 
 /*! The dialog Option definition */
@@ -93,7 +92,7 @@ class dialogOption
       talkTest preTest[MAX_PRE_TESTS]; /**< The pre test 
                                             (if all true, the option is show) */
 
-      string text;         /**< The option text */
+      std::string text;    /**< The option text */
 
       talkTest postTest;   /**< The post test (if true run ifActions) */
 
@@ -107,7 +106,7 @@ class dialogOption
 class dialog: public dntListElement
 {
    public:
-      string npcText;                     /**< NPC text */
+      std::string npcText;                /**< NPC text */
       dialogOption options[MAX_OPTIONS];  /**< PC options to talk */
       int id;                             /**< Identificator */
 };
@@ -128,13 +127,13 @@ class conversation: public dntList
        * Load file that contents the dialog.
        * \param name -> file name to load
        * \return 1 if succed. */
-      int loadFile(string name);  
+      int loadFile(std::string name);  
 
       /*!
        * Save dialog file
        * \param name -> file name to save
        * \return 1 if succed. */
-      int saveFile(string name);    
+      int saveFile(std::string name);    
 
       /*!
        * Insert dialog on conversation
@@ -153,7 +152,7 @@ class conversation: public dntList
       /*! Set the owner of the conversation
        * \param thing -> pointer to thing owner
        * \param mapFile -> fileName where the NPC is */
-      void setOwner(thing* o, string mapFile);
+      void setOwner(thing* o, std::string mapFile);
 
       /*! Set the playable character pointer
        * \param PC -> pointer to the playable character */
@@ -193,11 +192,12 @@ class conversation: public dntList
       int initialDialog;    /**< First dialog to show */
       character* actualPC;  /**< The Actual PC */
       thing* owner;         /**< The owner of the conversation */
-      string ownerMap;      /**< The Map Owner */
+      std::string ownerMap;      /**< The Map Owner */
       
-      string getString(int& initialPosition, string buffer, char& separator);
-      int getActionID(string token, string fileName, int line);
-      void printError(string fileName, string error, int lineNumber);
+      std::string getString(int& initialPosition, std::string buffer, 
+                            char& separator);
+      int getActionID(std::string token, std::string fileName, int line);
+      void printError(std::string fileName, std::string error, int lineNumber);
 };
 
 /*! The window where will show a dialog */
@@ -210,7 +210,7 @@ class dialogWindow
        * \param cv -> pointer to the conversation to show 
        * \param pictureFile -> filename of the picture to use */
       void open(guiInterface* gui, character* PC, conversation* cv, 
-                string pictureFile);
+                std::string pictureFile);
 
       /*! Treat Events on Window. 
        * \param guiObj -> active GUI object
@@ -241,7 +241,7 @@ class dialogWindow
 
       /*! Set the current NPC Text
        * \param text -> current npc text to display */
-      void setNPCText(string text);
+      void setNPCText(std::string text);
 
       /*! Clear all options */
       void clearOptions();
@@ -250,7 +250,7 @@ class dialogWindow
        * \param optNumber -> the option number
        * \param text -> the option text 
        * \param info -> the option info */
-      void addOption(int optNumber, string text, int info);
+      void addOption(int optNumber, std::string text, int info);
 
    protected:
       static conversation* conv;     /**< Pointer to the conversation used */

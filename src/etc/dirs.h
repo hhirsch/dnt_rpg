@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -22,7 +22,6 @@
 #define _dnt_dirs_h
 
 #include <string>
-using namespace std;
 
 
 /*! The directory abstraction path */
@@ -38,15 +37,15 @@ class dirs
       /*! Get the real path and file of an internal file path
        * \param fileName -> internal file path
        * \return -> string with the real path of the file */
-      string getRealFile(string fileName);
+      std::string getRealFile(std::string fileName);
 
       /*! Get the relative (internal) file path of a real path file
        * \param fileName -> real file path
        * \return -> string with the internal path of the file */
-      string getRelativeFile(string fileName);
+      std::string getRelativeFile(std::string fileName);
 
    protected:
-      static string dataPath; /**< Current Data Path */
+      static std::string dataPath; /**< Current Data Path */
 };
 
 

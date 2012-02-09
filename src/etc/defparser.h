@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -24,7 +24,6 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-using namespace std;
 
 #include "list.h"
 
@@ -39,21 +38,21 @@ class defTuple: public dntListElement
 
       /*! Set the tuple value
        * \param v -> new value */
-      void setValue(string v);
+      void setValue(std::string v);
       /*! Set the tuple Key
        * \param k -> new key */
-      void setKey(string k);
+      void setKey(std::string k);
 
       /*! Get tuple value
        * \return -> current tuple value */
-      string getValue();
+      std::string getValue();
       /*! Get the tuple key
        * \return -> current tuple key */
-      string getKey();
+      std::string getKey();
 
    protected:
-      string value;         /**< Tuple Value */
-      string key;           /**< Tuple Key */
+      std::string value;         /**< Tuple Value */
+      std::string key;           /**< Tuple Key */
 };
 
 /*! The defParser class is the implementation of a definitions
@@ -71,14 +70,14 @@ class defParser: public dntList
        * \param fileName -> file name to load
        * \param fullPath -> if the fileName is a fullPath or not
        * \note -> if not full path, will get the path with dirs */
-      bool load(string fileName, bool fullPath=false);
+      bool load(std::string fileName, bool fullPath=false);
 
       /*! Get the next tuple from the list
        * \param key -> string with the next key
        * \param value -> string with the next value 
        * \return -> true if can get the next tuple, false if no 
        *            more tuples to get */
-      bool getNextTuple(string& key, string& value);
+      bool getNextTuple(std::string& key, std::string& value);
 
    protected:
 
@@ -89,7 +88,7 @@ class defParser: public dntList
       /*! Insert a tuple into linked list
        * \param key -> tuple key
        * \param value -> tuple value */
-      void insertTuple(string key, string value);
+      void insertTuple(std::string key, std::string value);
 
       defTuple* curTuple;      /**< Current Tuple */
 };

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -50,7 +50,7 @@ class saveWindow
 
       /*! Get the selected fileName
        * \return selected fileName (if one) */
-      string getSelectedFileName();
+      std::string getSelectedFileName();
 
    protected:
 
@@ -60,7 +60,7 @@ class saveWindow
       /*! Change the current displayed image and title */
       void changeInfo(int mouseX, int mouseY);
 
-      string curFileName;       /**< Current FileName selected */
+      std::string curFileName;       /**< Current FileName selected */
 
       window* fileWindow;       /**< The file window, used for load/save */
       fileSel* fileSelector;    /**< The file selector interface */

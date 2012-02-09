@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -23,7 +23,6 @@
 
 #include <SDL/SDL_opengl.h>
 #include <string>
-using namespace std;
 
 #define MAX_LIGHTS_PER_MAP       20
 
@@ -74,7 +73,7 @@ class mapLights
       ~mapLights();
       /*! Load Map Lights from file
        * \param arq -> filename of lights file */
-      void load(string arq);
+      void load(std::string arq);
       /*! Actualize Map Lights Position
        * \param posX -> active character X position
        * \param posZ -> active character Z position */
@@ -82,7 +81,7 @@ class mapLights
 
       /*! Get the Lights File Name
        * \return name of the file */
-      string getFileName();
+      std::string getFileName();
 
    private:
       /*! Set the active lights as the near lights
@@ -92,7 +91,7 @@ class mapLights
 
       int totalLights;                       /**< Total Lights on Map */
       mapLight light[MAX_LIGHTS_PER_MAP];    /**< lights on Map */
-      string fileName;                       /**< FileName */
+      std::string fileName;                       /**< FileName */
       lightDist activeLights[3];             /**< Current Active Lights */
 };
 

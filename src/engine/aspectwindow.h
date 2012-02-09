@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -36,7 +36,7 @@ class portraitImage
       portraitImage(){image = NULL;};
       ~portraitImage(){if(image){SDL_FreeSurface(image);}};
       SDL_Surface* image;         /**< Image to portrait */
-      string imageFile;           /**< FileName of the Image */
+      std::string imageFile;      /**< FileName of the Image */
 };
 
 /*! The Aspect Window Class */

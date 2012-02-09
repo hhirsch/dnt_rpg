@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -29,7 +29,6 @@
 #include "guiobject.h"
 
 #include <string>
-using namespace std;
 
 #define TEXT_BOX_NOT_FRAMED          0 /**< Text without frames */
 #define TEXT_BOX_FRAMED_FILLED       1 /**< Text with frames and BG color */
@@ -41,11 +40,11 @@ using namespace std;
 class textLine: public dntListElement
 {  
    public:
-      string text;         /**< Text of the line */
+      std::string text;    /**< Text of the line */
       int R,               /**< Red Color */
           G,               /**< Green Color */
           B;               /**< Blue Color */
-      string fontName;     /**< Name of the Font Used */
+      std::string fontName;/**< Name of the Font Used */
       int fontSize;        /**< Size of the font */
       int fontAlign;       /**< Align of the font */
       int fontStyle;       /**< Style of the font */
@@ -87,14 +86,14 @@ class textBox: public guiObject, public dntList
        * \param name -> font file name
        * \param align -> font aligment
        * \param size -> font size */
-      void setFont(string name, int size, int align);
+      void setFont(std::string name, int size, int align);
 
       /*! Define the Font
        * \param name -> font file name
        * \param align -> font aligment
        * \param size -> font size
        * \param style -> style constant */
-      void setFont(string name, int size, int align, int style);
+      void setFont(std::string name, int size, int align, int style);
 
       /*! Set the text color
        * \param R -> red color
@@ -111,11 +110,11 @@ class textBox: public guiObject, public dntList
       /*! Get the text from the line number
        * \param line -> number of line to get text from 
        * \note -> first line is 0. */
-      string getTextLine(int line);
+      std::string getTextLine(int line);
 
       /*! Set the object text
        * \param txt -> new text */
-      void setText(string txt);
+      void setText(std::string txt);
 
       /*! Get the number of the last drawable line
        * \return -> number of the last drawable line */
@@ -136,7 +135,7 @@ class textBox: public guiObject, public dntList
 
       /*! Add the string to the textBox
        * \param txt -> text screen to add */
-      void addText(string txt);
+      void addText(std::string txt);
 
       /*! Add the string to the textBox
        * \param txt -> text screen to add
@@ -144,7 +143,7 @@ class textBox: public guiObject, public dntList
        * \param size -> size of the font to use
        * \param align -> alignment of the font to use
        * \param style -> style of the font to use  */
-      void addText(string txt, string font, int size,
+      void addText(std::string txt, std::string font, int size,
                    int align, int style);
 
       /*! Add the string to the textBox
@@ -156,7 +155,7 @@ class textBox: public guiObject, public dntList
        * \param R -> red color of the font
        * \param G -> green color of the font
        * \param B -> blue color of the font */
-      void addText(string txt, string font, int size,
+      void addText(std::string txt, std::string font, int size,
                    int align, int style, int R, int G, int B);
 
       /*! Verify if the text box receives events or not
@@ -179,7 +178,7 @@ class textBox: public guiObject, public dntList
 
       /*! Create the text lines
        * \param txt -> string base to create the lines */
-      void createLines(string txt, string font, int size,
+      void createLines(std::string txt, std::string font, int size,
                        int align, int style, int R, int G, int B);
 
       /*! Insert textLine to the list
@@ -193,7 +192,7 @@ class textBox: public guiObject, public dntList
       bool recEvents;      /**< If receive events or not */
 
       int framed;          /**< Type of the frame. 0 for none */
-      string fontName;     /**< Font FileName */
+      std::string fontName;/**< Font FileName */
       int fontAlign;       /**< Font Align */
       int fontSize;        /**< Font Size */
       int fontStyle;       /**< Font Style */

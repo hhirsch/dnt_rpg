@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -24,7 +24,6 @@
 #include <SDL/SDL_opengl.h>
 #include <SDL/SDL.h>
 #include <string>
-using namespace std;
 
 #define DNT_PART_ORIGIN_POINT    0  /**< All originated at point */
 #define DNT_PART_ORIGIN_QUAD     1  /**< All originated at quad */
@@ -86,12 +85,12 @@ class dntPartOrigin
 
       /*! Convert the dntPartOrigin to an string
        * \return string with origin info */
-      string toString();
+      std::string toString();
 
       /*! Populate the dntPartOrigin with a descriptive string
        * \param s -> string with origin info 
        * \return true if success */
-      bool fromString(string s);
+      bool fromString(std::string s);
 
       /*! As friend to avoid useless functions */
       friend class partOriginWindow;

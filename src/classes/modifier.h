@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -22,7 +22,6 @@
 #define _dnt_modifier_h
 
 #include <string>
-using namespace std;
 
 #include "defs.h"
 
@@ -44,8 +43,8 @@ class factor
       /* Default Constructor */
       factor(){type = "ALL"; id = "ALL";};
 
-      string type;    /**< Type of the Factor (ex: Skill, Feat, Class, etc) */
-      string id;      /**< ID of the Factor (ex: Intimidation, etc) */
+      std::string type; /**< Type of the Factor (ex: Skill, Feat, Class) */
+      std::string id;   /**< ID of the Factor (ex: Intimidation, etc) */
 };
 
 /*! Default Modifier */
@@ -55,7 +54,7 @@ class modifier
       int mod;            /**< Value of the Modifier */
       factor cause;       /**< Cause of the Modifier */
       factor target;      /**< Target when modifer is valid */
-      string description; /**< Modifier Description */
+      std::string description; /**< Modifier Description */
 };
 
 /*! Number of Points, based on ATTRIBUTES 
@@ -65,7 +64,7 @@ class points
    public:
       int sum;          /**< Value of Sum */
       int signal;       /**< Signal Used (- or +) */
-      string attID;     /**< ID of the Attribute to use modifier */
+      std::string attID;/**< ID of the Attribute to use modifier */
       int mult;         /**< Value of Mult */
 };
 

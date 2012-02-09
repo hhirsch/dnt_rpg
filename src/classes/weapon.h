@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -34,9 +34,9 @@ class wInfo
       /*! Assign Operator */
       void operator=(wInfo& v);
 
-      string name;   /**< Name of the info */
+      std::string name;   /**< Name of the info */
       int index;     /**< Index of the info */
-      string title;  /**< Title of the info (text) */
+      std::string title;  /**< Title of the info (text) */
 };
 
 /*! The Weapon Types Class. This class receives all informations about
@@ -52,44 +52,44 @@ class weaponTypes
       /*! Get the category number
        * \param name -> name of the category
        * \return -> the category pointer. NULL on error.. */
-      wInfo* getCategory(string name);
+      wInfo* getCategory(std::string name);
 
       /*! Get the size number
        * \param name -> name of the size
        * \return -> the size pointer. NULL on error.. */
-      wInfo* getSize(string name);
+      wInfo* getSize(std::string name);
 
       /*! Get the weight number
        * \param name -> name of the weight
        * \return -> the weight pointer. NULL on error.. */
-      wInfo* getWeight(string name);
+      wInfo* getWeight(std::string name);
 
       /*! Get the damage number
        * \param name -> name of the damage
        * \return -> the damage pointer. NULL on error.. */
-      wInfo* getDamage(string name);
+      wInfo* getDamage(std::string name);
 
       /*! Get the range number
        * \param name -> name of the range
        * \return -> the range pointer. NULL on error.. */
-      wInfo* getRange(string name);
+      wInfo* getRange(std::string name);
 
       /*! Get the munition type number
        * \param name -> name of the munition
        * \return -> the munition pointer. NULL on error.. */
-      wInfo* getMunition(string name);
+      wInfo* getMunition(std::string name);
 
    private:
       /*! Read A definition file
        * \param fileName ->  string with the fileName of the file to load */
-      void readFile(string fileName);
+      void readFile(std::string fileName);
 
       /*! Get a thing from a wInfo
        * \param thing -> the pointer to the desired wInfo 
        * \param total -> the total elements on the thing
        * \param name -> thing name to get
        * \return -> the thing internal number . -1 on error. */
-      wInfo* getThing(wInfo* thing, int total, string name);
+      wInfo* getThing(wInfo* thing, int total, std::string name);
 
 
       static int totalCategories;    /**< Total number of categories */
@@ -113,7 +113,7 @@ class weapon: public object
    public:
       /*! Constructor
        * \param path -> name of the weapon file to load */
-      weapon(string path);
+      weapon(std::string path);
       /*! Destructor */
       ~weapon();
 
@@ -174,7 +174,7 @@ class weapon: public object
       diceThing damageDice;   /**< Damage Dices */
       int rangeValue;         /**< Range Value */
       wInfo* damageType[2];   /**< Damage Type Vector (Ex: Slashing) */
-      string attackSound[2];  /**< Damage Type Sounds Files */
+      std::string attackSound[2];  /**< Damage Type Sounds Files */
 
       /*! TODO /todo Special things on weapons! It's, for example a 
        * resistance, a special damage, etc.. */

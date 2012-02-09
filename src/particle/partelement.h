@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -24,7 +24,6 @@
 #include <SDL/SDL_opengl.h>
 #include <SDL/SDL.h>
 #include <string>
-using namespace std;
 
 #define DNT_PART_ELEMENT_CONSTANT   0    /**< Constant (only the initial) */
 #define DNT_PART_ELEMENT_RANDOM     1    /**< Randomically changes over time */
@@ -69,12 +68,12 @@ class dntPartElement
       /*! Populate the dntPartElement from an string
        * \param s -> string with dntPartElement info
        * \return true -> if could populate */
-      bool fromString(string s);
+      bool fromString(std::string s);
 
       /*! Convert the dntPartElement to an string (used to save it on files)
        * \return string containing the dntPartElement info or empty, 
        *         if not used */
-      string toString();
+      std::string toString();
 
       /*! Update current value, based on definitions
        * \param curValue -> current value (will receive the new one)

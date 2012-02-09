@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -22,7 +22,6 @@
 #define _dnt_sndfx_h
 
 #include <string>
-using namespace std;
 
 #ifdef __APPLE__
    #include <OpenAL/al.h>
@@ -48,7 +47,7 @@ class sndfx: public dntListElement
        * \param lp -> loop interval (<0 won't loop, =0 loop 
        *              just after the end, >0 wait lp seconds to loop)
        * \param fileName -> name of the Ogg File to Open */
-      sndfx(int lp, string fileName);
+      sndfx(int lp, std::string fileName);
       
       /*! Constructor of the Class.
        * \param centerX -> X position of the source
@@ -57,7 +56,7 @@ class sndfx: public dntListElement
        * \param lp -> loop interval (see setLoop)
        * \param fileName -> name of the Ogg File to Open */
       sndfx(ALfloat centerX, ALfloat centerY, ALfloat centerZ, int lp,
-            string fileName);
+            std::string fileName);
       /*! Destructor */
       ~sndfx();
 
@@ -104,7 +103,7 @@ class sndfx: public dntListElement
    private:
       int loopInterval;       /**< The sound loop interval */
       ogg_stream* oggSndFx;   /**< The Ogg stream of the Sound */
-      string oggName;         /**< File Name of the Ogg Used */
+      std::string oggName;         /**< File Name of the Ogg Used */
 };
 
 /*! List of sound effects */

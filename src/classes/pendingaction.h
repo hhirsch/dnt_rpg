@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -22,7 +22,6 @@
 #define _dnt_pending_actions_h
 
 #include <string>
-using namespace std;
 
 #include "../etc/list.h"
 #include "../engine/character.h"
@@ -40,14 +39,14 @@ class pendingAction: public dntListElement
        * \param type -> the type of the action
        * \param act -> the character actor
        * \param tgt -> the target thing */
-      pendingAction(string strLine, int type, character* act, thing* tgt);
+      pendingAction(std::string strLine, int type, character* act, thing* tgt);
       /*! Constructor
        * \param strLine -> the line of the script the action was 
        * \param type -> the type of the action
        * \param act -> the character actor 
        * \param tgtX -> target X position
        * \param tgtZ -> target Z position */
-      pendingAction(string strLine, int type, character* act, 
+      pendingAction(std::string strLine, int type, character* act, 
                     GLfloat tgtX, GLfloat tgtZ);
       /*! Constructor
        * \param strLine -> the line of the script the action was 
@@ -56,13 +55,13 @@ class pendingAction: public dntListElement
        * \param tgt -> the target thing
        * \param tgtX -> target X position
        * \param tgtZ -> target Z position */
-      pendingAction(string strLine, int type, character* act, thing* tgt,
+      pendingAction(std::string strLine, int type, character* act, thing* tgt,
                     GLfloat tgtX, GLfloat tgtZ);
       /*! Constructor
        * \param strLine -> the line of the script the action was
        * \param type -> type of the action
        * \param v -> integer value to pass */
-      pendingAction(string strLine, int type, int v);
+      pendingAction(std::string strLine, int type, int v);
       /*! Destructor */
       ~pendingAction();
 
@@ -74,7 +73,7 @@ class pendingAction: public dntListElement
        * \param tgtX -> target X position
        * \param tgtZ -> target Z position
        * \param v -> integer value */
-      void init(string strLine, int type, character* act, thing* tgt,
+      void init(std::string strLine, int type, character* act, thing* tgt,
                 GLfloat tgtX, GLfloat tgtZ, int v);
 
       /*! Verify if the action is still running
@@ -128,11 +127,11 @@ class pendingAction: public dntListElement
       /*! Get the script line where the action was called
        * \return -> the line, with the action's function changed to the
        *            temporary variable. */
-      string getScriptLine();
+      std::string getScriptLine();
 
    private:
-      string scriptLine;   /**< The line of the script that calls the more than
-                                one cycle function. */
+      std::string scriptLine; /**< The line of the script that calls the more than
+                                   one cycle function. */
 
       character* actor;    /**< The actor of the action */
       thing* target;       /**< The target of the action. Can be NULL if
@@ -189,7 +188,7 @@ class pendingActionController
        * \param tgt -> the target thing
        * \param mission -> if is a mission action
        * \return pointer to the pending action added */
-      pendingAction* addAction(string strLine, int type, character* act, 
+      pendingAction* addAction(std::string strLine, int type, character* act, 
                                thing* tgt, bool mission);
       /*! Add action to the controller
        * \param strLine -> the line of the script the action was 
@@ -199,7 +198,7 @@ class pendingActionController
        * \param tgtZ -> target Z position
        * \param mission -> if is a mission action
        * \return pointer to the pnding action added */
-      pendingAction* addAction(string strLine, int type, character* act, 
+      pendingAction* addAction(std::string strLine, int type, character* act, 
                                GLfloat tgtX, GLfloat tgtZ, bool mission);
       /*! Add action to the controller
        * \param strLine -> the line of the script the action was 
@@ -210,7 +209,7 @@ class pendingActionController
        * \param tgtZ -> target Z position
        * \param mission -> if is a mission action
        * \return pointer to the pending action added */
-      pendingAction* addAction(string strLine, int type, character* act, 
+      pendingAction* addAction(std::string strLine, int type, character* act, 
                                thing* tgt, GLfloat tgtX, GLfloat tgtZ, 
                                bool mission);
       /*! Constructor
@@ -218,7 +217,8 @@ class pendingActionController
        * \param type -> type of the action
        * \param mission -> if is a mission action
        * \param v -> integer value to pass */
-      pendingAction* addAction(string strLine, int type, int v, bool mission);
+      pendingAction* addAction(std::string strLine, int type, int v, 
+                               bool mission);
       /*! add action to the controller
        * \param act -> pointer to the action to add
        * \param mission -> if is a mission action

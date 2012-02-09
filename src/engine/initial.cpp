@@ -26,7 +26,7 @@
 #else
    #include <SDL/SDL_image.h>
 #endif
-
+using namespace std;
 
 /***************************************************************
  *                     Constructor                             *

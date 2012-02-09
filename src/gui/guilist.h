@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -22,7 +22,6 @@
 #define _farso_guilist_h
 
 #include <string>
-using namespace std;
 
 #include "../etc/list.h"
 
@@ -70,7 +69,7 @@ class guiList: public dntList
        * \param oval -> if the button is oval or rectangular
        * \return pointer to the button inserted */
       button* insertButton(int xa,int ya,int xb,int yb,
-                           string text, bool oval);
+                           std::string text, bool oval);
 
       /*! Insert a new cxSel on the List
        * \param xa -> X coordinate
@@ -104,7 +103,7 @@ class guiList: public dntList
        * \param text -> textBar text
        * \param cript -> if is crypt, or not
        * \return textBar inserted */
-      textBar* insertTextBar(int xa,int ya,int xb,int yb, string text, 
+      textBar* insertTextBar(int xa,int ya,int xb,int yb, std::string text, 
                              int cript);
 
       /*! Insert a textBox on the List
@@ -116,7 +115,7 @@ class guiList: public dntList
        * \param text -> text of the textBox
        * \return textBox inserted */
       textBox* insertTextBox(int xa,int ya,int xb,int yb,
-                             int frameType, string text);
+                             int frameType, std::string text);
 
       /*! Insert a selText on the list
        * \param xa -> x1 coordinate
@@ -129,9 +128,9 @@ class guiList: public dntList
        * \param text3 -> option 3 text
        * \param text4 -> option 4 text
        * \return selText inserted */
-      selText* insertSelText(int xa,int ya,int xb,int yb,string text0,
-                             string text1,string text2,string text3, 
-                             string text4);
+      selText* insertSelText(int xa,int ya,int xb,int yb, std::string text0,
+                             std::string text1, std::string text2,
+                             std::string text3, std::string text4);
 
       /*! Insert a rolBar on the List
        * \param xa -> x1 coordinate
@@ -140,7 +139,7 @@ class guiList: public dntList
        * \param yb -> y2 coordinate
        * \param txt -> text on the rolbar
        * \return rolBar inserted */
-      rolBar* insertRolBar(int xa,int ya,int xb,int yb,string txt);
+      rolBar* insertRolBar(int xa,int ya,int xb,int yb, std::string txt);
 
       /*! Insert a listText on the List
        * \param xa -> x1 position
@@ -158,7 +157,7 @@ class guiList: public dntList
        * \param dir -> current dir to browse
        * \param nav -> if show dirs to navigate or not
        * \return -> pointer to the fileSel inserted */
-      fileSel* insertFileSel(int xa, int ya, bool load, string dir, 
+      fileSel* insertFileSel(int xa, int ya, bool load, std::string dir, 
                              bool nav=true);
 
       /*! Insert a healthBar (a progress bar) on the list

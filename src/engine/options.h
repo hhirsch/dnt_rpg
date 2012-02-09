@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -23,7 +23,6 @@
 
 #include "../gui/farso.h"
 #include <string>
-using namespace std;
 
 #define OPTIONSW_CANCEL  0  /**< Cancel Return Value */
 #define OPTIONSW_CONFIRM 1  /**< Confirm Return Value */
@@ -108,7 +107,7 @@ class options
       /*! Load options from file
        * \param file -> filename with the options file to be loaded.
        * \return true if can load the options, false otherwise */
-      bool load(string file);
+      bool load(std::string file);
       /*! Treat options Window Events */
       int treat(guiObject* object, int eventInfo, guiInterface* interf,
                 GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
@@ -276,7 +275,7 @@ class options
       
       int timeLastOperation;       /**< Ticks when done last operation */
 
-      static string fileName;      /**< The current options fileName */            
+      static std::string fileName;      /**< The current options fileName */            
       button* buttonKeys[DNT_TOTAL_KEYS];
 
       button* buttonMusSum;
@@ -328,36 +327,36 @@ class options
       button* buttonCancel;
 
       /*! Get the Current Language Name
-       * \return the name of the language. */
-      string languageName();
+      * \return the name of the language. */
+      std::string languageName();
 
       /*! Get the Current Camera Name
        * \return the name of the camera. */
-      string cameraName();
+      std::string cameraName();
 
       /*! Get the Current Reflexion Type Name
        * \return the name of the reflexion type */
-      string reflexionName();
+      std::string reflexionName();
       
       /*! Get the Current Shadow Type Name
        * \return the name of the shadow type */
-      string shadowName();
+      std::string shadowName();
 
       /*! Get the current resolution name
        * \return the name of the resolution */
-      string resolutionName();
+      std::string resolutionName();
 
       /*! Get the Current antiAliasing Name
        * \return name of the antiAliasing */
-      string antiAliasingName();
+      std::string antiAliasingName();
 
       /*! Get the stencil buffer size name
        * \return name of the stencil buffer size */
-      string stencilBufferSizeName();
+      std::string stencilBufferSizeName();
 
       /*! Get a string with splattingType name
        * \return name of the spalttingType */
-      string splattingTypeName();
+      std::string splattingTypeName();
 
 };
 

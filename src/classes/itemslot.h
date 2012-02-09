@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -116,7 +116,7 @@ class itemSlot
       /*! Get a item from the slots with the desired fileName, if exists.
        * \param fileName -> fileName of the item
        * \return -> pointer to the found object of NULL */
-      object* getItemByFileName(string fileName);
+      object* getItemByFileName(std::string fileName);
 
       /*! Get the number of items at the itemSlot
        * \return -> number of items at the itemSlot */

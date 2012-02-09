@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -46,14 +46,14 @@ class briefing
 
        /*! Add the string to the briefing (with default font and colors) 
        * \param text -> text to add */
-      void addText(string text);
+      void addText(std::string text);
 
        /*! Add the string to the briefing 
        * \param text -> text to add
        * \param R -> red color of the font
        * \param G -> green color of the font
        * \param B -> blue color of the font */
-      void addText(string text, int R, int G, int B);
+      void addText(std::string text, int R, int G, int B);
 
       /*! Add the string to the briefing 
        * \param text -> text to add
@@ -64,14 +64,14 @@ class briefing
        * \param R -> red color of the font
        * \param G -> green color of the font
        * \param B -> blue color of the font */
-      void addText(string text, string font, int size, int style,
+      void addText(std::string text, std::string font, int size, int style,
                    int align, int R, int G, int B);
 
       /*! Add a check text to the briefieng
        * \param testName -> name of the state tested
        * \param value -> result tested value
        * \param difficulty -> difficulty tested against */
-      void addCheckText(string testName, int value, int difficulty);
+      void addCheckText(std::string testName, int value, int difficulty);
 
       /*! Clear the briefing text */
       void clear();

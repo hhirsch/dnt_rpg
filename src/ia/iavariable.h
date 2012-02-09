@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -28,7 +28,6 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-using namespace std;
 
 /* \todo IA_TYPE_DICE toString and from string to save!*/
 
@@ -39,7 +38,7 @@ class iaVariable: public dntListElement
 {
    public:
       /*! Constructor */
-      iaVariable(string varType, string varName);
+      iaVariable(std::string varType, std::string varName);
       /*! Destructor */
       ~iaVariable();
 
@@ -72,23 +71,24 @@ class iaVariable: public dntListElement
        * \param operation -> operation to do
        * \param v1 -> pointer to the first variable
        * \param v2 -> pointer to the second variable (NULL on NOT !)*/
-      void receiveOperation(string operation, iaVariable* v1, iaVariable* v2);
+      void receiveOperation(std::string operation, 
+                            iaVariable* v1, iaVariable* v2);
 
       /*! Change the signal of the current variable value */
       void changeSignal();
 
       /*!  Convert the variable value to a string one
        * \return -> string representing the variable value */
-      string toString();
+      std::string toString();
 
       /*! Define the variable value from a string
        * \param s -> string with variable value
        * \param curEngine -> pointer to the current engine */
-      void fromString(string s, engine* curEngine);
+      void fromString(std::string s, engine* curEngine);
 
       void* value;   /**< The value of the variable. */
-      string type;   /**< The type string id of the variable */
-      string name;   /**< The name of the variable */
+      std::string type;   /**< The type string id of the variable */
+      std::string name;   /**< The name of the variable */
 
 };
 
@@ -104,12 +104,12 @@ class iaSymbolsTable: public dntList
       /*! Add the symbol to the table.
        * \param type -> type of the symbol;
        * \param name -> name of the symbol; */
-      iaVariable* addSymbol(string type, string name);
+      iaVariable* addSymbol(std::string type, std::string name);
 
       /*! Add the symbol to the table.
        * \param type -> type of the symbol;
        * \return -> name of the symbol; */
-      string addTempSymbol(string type);
+      std::string addTempSymbol(std::string type);
 
       /*! Remove all temporary symbols from the table */
       void removeTempSymbols();
@@ -121,7 +121,7 @@ class iaSymbolsTable: public dntList
 
       /*! Remove the Symbol from the table
        * \param name -> symbol's name */
-      void removeSymbol(string name);
+      void removeSymbol(std::string name);
       /*! Remove the Symbol from the table
        * \param symbol -> the symbol's pointer */
       void removeSymbol(iaVariable* symbol);
@@ -129,11 +129,11 @@ class iaSymbolsTable: public dntList
       /*! Get the symbol from the table
        * \param name -/. name of the symbol to get.
        * \return pointer to the symbol, or NULL if not found any. */
-      iaVariable* getSymbol(string name);
+      iaVariable* getSymbol(std::string name);
 
       /*! Save the Symbols Table to a file
        * \param file -> ofstream file to save to */
-      void save(ofstream* file);
+      void save(std::ofstream* file);
 
       /*! Load the Symbols Table from a file
        * \param def -> defParser to load from

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -23,7 +23,7 @@
 
 #include <stdlib.h>
 #include <string>
-using namespace std;
+
 #include "color.h"
 #include "draw.h"
 #include "dntfont.h"
@@ -54,14 +54,14 @@ class menu: public guiList
       /*! Insert a Item on the Menu
        * \param text -> item Text
        * \param avaible -> if the item is avaible or not */
-      void insertItem(string text, bool avaible);
+      void insertItem(std::string text, bool avaible);
 
       /*! Insert a Item on the Menu
        * \param text -> item Text
        * \param imageFile -> item Image
        * \note imageFile must be of Size: 10x10 pixels
        * \param avaible -> if the item is avaible or not */
-      void insertItem(string text, string imageFile, bool avaible);
+      void insertItem(std::string text, std::string imageFile, bool avaible);
 
       /*! Set the Position of the Menu
        * \param xa -> x coordinate

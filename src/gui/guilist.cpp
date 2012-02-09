@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -29,6 +29,7 @@
 #else
    #include <SDL/SDL_image.h>
 #endif
+using namespace std;
 
 /**************************************************************
  *                         Constructor                        *

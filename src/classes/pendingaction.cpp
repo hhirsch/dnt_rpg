@@ -22,6 +22,8 @@
 
 #include "../engine/dialog.h"
 
+using namespace std;
+
 /////////////////////////////////////////////////////////////////////////////
 //                                                                         //
 //                           pendingAction                                 //

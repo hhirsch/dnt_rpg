@@ -20,6 +20,7 @@
 
 #include "defparser.h"
 #include "dirs.h"
+using namespace std;
 
 ///////////////////////////////////////////////////////////////////////////
 //                                                                       //

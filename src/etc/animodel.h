@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -24,7 +24,6 @@
 #include <cal3d/cal3d.h>
 #include <SDL/SDL_opengl.h>
 #include <string>
-using namespace std;
 
 #include "boundingbox.h"
 
@@ -79,7 +78,7 @@ class aniModel
       /*! Load the cal3D model to be this character's body and animations.
        * \param strFilename -> \c string with the cal3d file name.
        * \return true if success on load. */
-      bool loadModel(const string& strFilename);
+      bool loadModel(const std::string& strFilename);
 
       /*! Set the animation state of the model.
        * \param state -> state ID to be defined. */
@@ -162,10 +161,10 @@ class aniModel
       /*! Get the Id of a bone
        * \param bName name of the bone to get its it
        * \return bone's ID or -1 if not found */
-      int getBoneId(string bName);
+      int getBoneId(std::string bName);
 
       /*! Get the model fileName */
-      string getFileName(){return(modelFileName);};
+      std::string getFileName(){return(modelFileName);};
 
       vertexInfo leftHand;           /**< Base vertex at left hand */
       vertexInfo rightHand;          /**< Base vextex at right hand */
@@ -185,8 +184,8 @@ class aniModel
       float m_renderScale;           /**< Cal3D scale on render */
       float m_lodLevel;              /**< Cal3D Level of Detail to render */
       float curPos;                  /**< current time pos */
-      string m_path;                 /**< Path to cal3D model */
-      string modelFileName;          /**< Filename of the model */
+      std::string m_path;            /**< Path to cal3D model */
+      std::string modelFileName;     /**< Filename of the model */
 
       CalRenderer *pCalRenderer;     /**< Pointer to themodel renderer */
       static float meshVertices[30000][3]; /**< Model Vertices */
@@ -201,7 +200,7 @@ class aniModel
       /*! Load the a texture to the model.
        * \param strFilename -> \c string with the texture file name.
        * \return the \c GLuint with the GL texture ID. */
-      GLuint loadTexture(const string& strFilename);
+      GLuint loadTexture(const std::string& strFilename);
 
       /*! Render from the graphic memory at default position */
       void renderFromGraphicMemory();

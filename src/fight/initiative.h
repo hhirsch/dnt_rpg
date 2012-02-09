@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -23,7 +23,7 @@
 
 #include <stdlib.h>
 #include <string>
-using namespace std;
+
 #include "../engine/character.h"
 #include "../engine/briefing.h"
 #include "../lang/translate.h"

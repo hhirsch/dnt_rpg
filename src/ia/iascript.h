@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -38,7 +38,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
-using namespace std;
 
 #define MAX_SCRIPT_LINES 2 /**< Max interpreted script lines per cycle */
 
@@ -60,7 +59,7 @@ class iaScript
       /*! Constructor
        * \param scriptFile -> fileName of the script
        * \param usedEngine -> the pointer to the engine used */
-      iaScript(string scriptFile, engine* usedEngine);
+      iaScript(std::string scriptFile, engine* usedEngine);
       /*! Destructor */
       ~iaScript();
 
@@ -81,7 +80,7 @@ class iaScript
        * \note : to define an integer parameter: 
        *    int val = 50;
        *    setParameter("name", &val); */
-      bool setParameter(string paramName, void* value);
+      bool setParameter(std::string paramName, void* value);
    
       /*! Define the owner of the script as a object
        * \param owner -> pointer to the object */
@@ -112,8 +111,8 @@ class iaScript
       void restart();
 
    protected:
-      ifstream file;             /**< The script's file */
-      string fileName;           /**< FileName of the script */
+      std::ifstream file;        /**< The script's file */
+      std::string fileName;      /**< FileName of the script */
       object* objectOwner;       /**< Object Owner */
       character* characterOwner; /**< Character Owner */
 
@@ -124,9 +123,9 @@ class iaScript
 
       int actualLine;            /**< The actual Line */
 
-      streampos lastPos;         /**< Last pos before the read */
+      std::streampos lastPos;    /**< Last pos before the read */
 
-      string context;            /**< The context */
+      std::string context;       /**< The context */
 
       int type;                  /**< Define the type if is a child */
 
@@ -147,7 +146,7 @@ class iaScript
        * where type is the type of the variable and name is how many
        * new variable of the type will be declared. 
        * \param strLine -> the line of declaration read from the file */
-      void declareVariable(string strLine);
+      void declareVariable(std::string strLine);
 
       /*! Call a function.
        * \param var -> variable that will receive the result of the function
@@ -156,8 +155,8 @@ class iaScript
        * \param strLine -> the line that contains the function call.
        * \param functionName -> the name of the function to call
        * \param pos -> the position on the strLine after the function name */
-      void callFunction(iaVariable* var, string strLine,
-                        string functionName, unsigned int &pos);
+      void callFunction(iaVariable* var, std::string strLine,
+                        std::string functionName, unsigned int &pos);
 
       /*! Get next parameter of the function
        * \param token -> token got
@@ -166,21 +165,28 @@ class iaScript
        * \param pos -> position of after the rpevious parameter got
        * \return -> the iaVariable with the parameter got, or NULL if an
        *            error occurs. */
-      iaVariable* getParameter(string& token, string strLine, 
-                               string paramType, unsigned int& pos);
-      int getParameteri(string& token, string strLine, unsigned int& pos);
-      float getParameterf(string& token, string strLine, unsigned int& pos);
-      character* getParameterc(string& token, string strLine,unsigned int& pos);
-      object* getParametero(string& token, string strLine, unsigned int& pos);
-      string getParameters(string& token, string strLine, unsigned int& pos);
-      diceThing* getParameterd(string& token, string strLine,unsigned int& pos);
-      weapon* getParameterw(string& token, string strLine,unsigned int& pos);
-
+      iaVariable* getParameter(std::string& token, std::string strLine, 
+                               std::string paramType, unsigned int& pos);
+      int getParameteri(std::string& token, std::string strLine, 
+                        unsigned int& pos);
+      float getParameterf(std::string& token, std::string strLine,
+                          unsigned int& pos);
+      character* getParameterc(std::string& token, std::string strLine,
+                               unsigned int& pos);
+      object* getParametero(std::string& token, std::string strLine, 
+                            unsigned int& pos);
+      std::string getParameters(std::string& token, std::string strLine, 
+                                unsigned int& pos);
+      diceThing* getParameterd(std::string& token, std::string strLine,
+                               unsigned int& pos);
+      weapon* getParameterw(std::string& token, std::string strLine,
+                            unsigned int& pos);
+  
       /*! Assign the value to the variable
        * \param var -> pointer to a variable
        * \param value -> pointer to the value to assign
        * \param type -> the type of parameter AND value */
-      void assignValue(iaVariable* var, void* value, string type);
+      void assignValue(iaVariable* var, void* value, std::string type);
 
       /*! Evaluate a expression
        * \param var -> variable that will contain the expression result
@@ -188,7 +194,7 @@ class iaScript
        * \param assignExpression -> true if is an assign expression,
        *                            false otherwise (false usually if
        *                            only a parameter or conditional one) */
-      void evaluateExpression(iaVariable* var, string strLine,
+      void evaluateExpression(iaVariable* var, std::string strLine,
                               bool assignExpression);
 
 
@@ -198,7 +204,8 @@ class iaScript
        * \param token -> the token string to remove
        * \param num -> the number of tokens to remove after the token 
        * \param newToken -> the token that will take place of removed ones. */
-      string changeFrom(string postFix, string token, int num, string newToken);
+      std::string changeFrom(std::string postFix, std::string token, int num, 
+                             std::string newToken);
 };
 
 #endif

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -23,6 +23,7 @@
 #include "../engine/character.h"
 
 #include <math.h>
+using namespace std;
 
 #define SEARCH_LIMIT   1000  /**< Max Nodes the aStar will search */
 #define SEARCH_INTERVAL   5  /**< Interval of Nodes when aStar will sleep */

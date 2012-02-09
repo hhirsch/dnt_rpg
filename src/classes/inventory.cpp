@@ -24,7 +24,7 @@
 #include "../engine/inventwindow.h"
 #include "../engine/modstate.h"
 #include "../sound/sound.h"
-
+using namespace std;
 
 /**************************************************************
  *                          Constructor                       *

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -24,7 +24,6 @@
 #include "thing.h"
 #include "dices.h"
 #include <string>
-using namespace std;
 
 #define ACT_OPEN                  0
 #define ACT_ATTACK                1
@@ -83,7 +82,7 @@ using namespace std;
  * \param buffer -> string with the name of the concept
  * \return correspondent action Type number.
  ***************************************************************/
-int numberAction(string buffer);
+int numberAction(std::string buffer);
 
 /*!
  ************************************************************** 
@@ -91,7 +90,7 @@ int numberAction(string buffer);
  * \param buffer -> string with the name of the concept
  * \return correspondent action Type number.
  ***************************************************************/
-int numberActionType(string buffer);
+int numberActionType(std::string buffer);
 
 /*!
  **************************************************************** 

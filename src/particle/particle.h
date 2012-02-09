@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -24,7 +24,6 @@
 #include <SDL/SDL_opengl.h>
 #include <SDL/SDL.h>
 #include <string>
-using namespace std;
 
 #include "partelement.h"
 #include "partorigin.h"
@@ -85,12 +84,12 @@ class particleSystem: public dntListElement
       /*! Load the partSystem from a file
        * \param fileName -> fileName of the particle system to load 
        * \return true if loaded. */
-      bool load(string fileName);
+      bool load(std::string fileName);
       
       /*! Save the system to a file
        * \param fileName -> name of file to save
        * \return -> true if can save the particle */
-      bool save(string fileName);
+      bool save(std::string fileName);
 
       /*! Update and render all particles  
        * \param matriz -> the viewFrustum Matrix */
@@ -108,7 +107,7 @@ class particleSystem: public dntListElement
 
       /*! Get the FileName of the particleSystem
        * \return -> particleSystem fileName  */
-      string getFileName();
+      std::string getFileName();
 
       /*! Get the current position of the particleSystem
        * \param x -> current X position
@@ -176,9 +175,9 @@ class particleSystem: public dntListElement
       int followType;         /**< If the follow character is a PC */
       bool windAffect;        /**< If Wind Affects the System */
       bool floorCollision;    /**< If collide with map's floor or not */
-      string strFileName;     /**< Name of the File */
+      std::string strFileName;/**< Name of the File */
       particle* particles;    /**< Internal Particles Vector */
-      string textureFileName; /**< Filename of the texture */
+      std::string textureFileName; /**< Filename of the texture */
       GLuint partTexture;     /**< Current particle texture */
       extensions ext;         /**< The OpenGL Extensions */
       bool doneCreation;      /**< true when is no more to create particles */

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -30,7 +30,6 @@
 #endif
 
 #include <string>
-using namespace std;
 
 #define DNT_FONT_ARIAL     "fnt/arial.ttf"
 #define DNT_FONT_TIMES     "fnt/times.ttf"
@@ -55,7 +54,7 @@ using namespace std;
 class loadedFont: public dntListElement
 {
    public:
-      string fontName;        /**< The font Name */
+      std::string fontName;   /**< The font Name */
       int fontSize;           /**< The font size */
 
       TTF_Font* font;         /**< The loaded TTF font */
@@ -91,7 +90,7 @@ class dntFont
        * \param fileName -> filename of the font
        * \param size -> font size
        * \return -> true if success. */
-      bool defineFont(string fileName, int size);
+      bool defineFont(std::string fileName, int size);
 
       /*! Define the font align
        * \param align -> the new font align */
@@ -111,20 +110,20 @@ class dntFont
       /*! Get the string width
        * \param s -> string to calculate width
        * \return string width */
-      int getStringWidth(string s);
+      int getStringWidth(std::string s);
 
       /*! Get the string width
        * \param s -> string to calculate width
        * \param isUtf8 -> if string in utf8
        * \return string width */
-      int getStringWidth(string s, bool isUtf8);
+      int getStringWidth(std::string s, bool isUtf8);
 
       /*! Write the Text on the Surface
        * \param screen -> surface where write the text
        * \param x -> X coordinate of the text
        * \param y -> Y coordinate of the text
        * \param text -> text to write*/
-      void write(SDL_Surface *screen,int x,int y, string text, 
+      void write(SDL_Surface *screen,int x,int y, std::string text, 
                  bool solid=false);
 
       /*! Write the Text on the Surface From init to end
@@ -134,7 +133,7 @@ class dntFont
        * \param text -> text to write
        * \param init -> init text position to write
        * \param end  -> end text position to write */
-      void write(SDL_Surface *screen,int x,int y, string text,
+      void write(SDL_Surface *screen,int x,int y, std::string text,
                  int init, int end, bool solid=false);
 
       /*! Write the Text on the Surface, with limit area
@@ -147,8 +146,8 @@ class dntFont
        * \param x2 -> X2 limit
        * \param y2 -> Y2 limit
        * \return -> Y where ends the write. */
-      int write(SDL_Surface *screen,int x, int y, string text,int x1,int y1,
-                int x2,int y2, bool solid=false);
+      int write(SDL_Surface *screen,int x, int y, std::string text,
+                int x1,int y1,int x2,int y2, bool solid=false);
 
       /*! Write the Text on the Surface, with limit area
        * \param screen -> surface where write the text
@@ -162,7 +161,7 @@ class dntFont
        * \param x2 -> X2 limit
        * \param y2 -> Y2 limit
        * \return -> Y where ends the write.*/
-      int write(SDL_Surface *screen,int x,int y,string text,int init,
+      int write(SDL_Surface *screen,int x,int y, std::string text,int init,
                 int end, int x1,int y1,int x2,int y2, bool solid=false);
 
       /*! Write the Text on the Surface, with limit area, at a single area
@@ -175,27 +174,29 @@ class dntFont
        * \param x2 -> X2 limit
        * \param y2 -> Y2 limit */
       void writeSingleLine(SDL_Surface* screen, int x, int y, 
-            string text, int x1, int y1, int x2, int y2, bool solid=false);
+                           std::string text, int x1, int y1, int x2, int y2, 
+                           bool solid=false);
 
       /*! Write the Text on the Surface
        * \param screen -> surface where write the text
        * \param x -> X coordinate of the text
        * \param y -> Y coordinate of the text
        * \param text -> text to write, coded on unicode mode */
-      void writeUnicode(SDL_Surface* screen, int x, int y, string text,
+      void writeUnicode(SDL_Surface* screen, int x, int y, std::string text,
                         bool solid=false);
 
       /*! Create a special unicode character (beginning with \\)
        * \param character -> unicode character code
        * \return -> string with the unicode character begining with \\*/
-      string createUnicode(Uint16 character);
+      std::string createUnicode(Uint16 character);
 
       /*! Get Next line of the string.
        * \param source -> string to get line from
        * \param lastLinePos -> last position read (at init = 0)
        * \param maxWidth -> max width of the line
        * \return -> the desired line got. */
-      string getNextLine(string source, int& lastLinePos, int maxWidth);
+      std::string getNextLine(std::string source, int& lastLinePos, 
+                              int maxWidth);
 
    protected:
 
@@ -203,24 +204,24 @@ class dntFont
        * \param fontName -> file name of the font to load
        * \param fontSize -> size of the font to load
        * \return -> loadedFont pointer */
-      loadedFont* loadFont(string fontName, int fontSize);
+      loadedFont* loadFont(std::string fontName, int fontSize);
       /*! Search for a font on the list
        * \param fontName -> file name of the font to load
        * \param fontSize -> size of the font to load
        * \return -> loadedFont pointer with the founded font, 
        *             or NULL, if not found. */
-      loadedFont* findFont(string fontName, int fontSize);
+      loadedFont* findFont(std::string fontName, int fontSize);
 
       /*! Render text to a new surface
        * \param str -> text to render
        * \param color -> color to render text
        * \param isUtf8 -> if text in utf8 */
-      SDL_Surface* renderText(string str, SDL_Color color, bool isUtf8);
+      SDL_Surface* renderText(std::string str, SDL_Color color, bool isUtf8);
 
       /*! Blit the text to the screen surface*/
       void blitText(SDL_Surface *screen, SDL_Surface* writeSurface, 
-            int x,int y, string text, int x1,int y1,int x2,int y2, bool solid, 
-            bool isUtf8);
+                    int x,int y, std::string text, int x1,int y1,
+                    int x2,int y2, bool solid, bool isUtf8);
       
       static loadedFontList* fonts;  /**< List of loaded fonts */
       static int activeFontAlign;    /**< The active font alignment */

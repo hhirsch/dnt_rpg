@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -39,7 +39,7 @@ class comicBook
       /*! Load a comicBook from file
        * \param bookFile -> comicBook file name 
        * \return -> true if the load was successfull */
-      bool load(string bookFile);
+      bool load(std::string bookFile);
 
       /*! Run the comic book */
       void run();
@@ -54,7 +54,7 @@ class comicBook
       /*! Insert a page at the book pages list
        * \param t -> page title 
        * \return -> pointer to the comic page created */
-      comicPage* insertPage(string t);
+      comicPage* insertPage(std::string t);
 
       /*! Empty the book, deleting all its pages */
       void empty();
@@ -76,7 +76,7 @@ class comicBook
       bool changeColor;   /**< True to change skip texture color */
 
       comicPageList pages;/**< Each comic book page  */
-      string title;       /**< Book Title */
+      std::string title;  /**< Book Title */
 };
 
 #endif

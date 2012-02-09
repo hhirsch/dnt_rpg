@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -22,7 +22,6 @@
 #define _farso_file_sel_h
 
 #include <string>
-using namespace std;
 
 #include "button.h"
 #include "guiobject.h"
@@ -55,7 +54,7 @@ class fileSel: public guiObject
        * \param list -> pointer to the GUI objects list
        * \param surface -> surface to draw to
        * \param nav -> if will show directories to navigate or not */
-      fileSel(int x, int y, bool load, string dir, guiList* list, 
+      fileSel(int x, int y, bool load, std::string dir, guiList* list, 
             SDL_Surface* surface, bool nav=true);
 
       /*! Destructor */
@@ -76,26 +75,26 @@ class fileSel: public guiObject
 
       /*! Get the current selected fileName
        * \param -> complete selected fileName path (if one) */
-      string getFileName();
+      std::string getFileName();
  
       /*! Set the current file and dir to the one defined at the fileName
        * \param fileName -> full fileName to set new file and dir. */
-      void setFileName(string fileName);
+      void setFileName(std::string fileName);
 
       /*! Set the current filter
        * \param newFilter -> new filter to set */
-      void setFilter(string newFilter);
+      void setFilter(std::string newFilter);
 
    protected:
 
       /*! Change the current displayed dir
        * \param newDir -> dir to change the display to */
-      void changeCurDir(string newDir);
+      void changeCurDir(std::string newDir);
 
       /*! Verify if the string pass the current filter
        * \param s -> string to verify
        * \return -> true if passed*/
-      bool passFilter(string s);
+      bool passFilter(std::string s);
 
       button* cancelButton;    /**< The cancel Button */
       button* acceptButton;    /**< The accept Button */
@@ -108,9 +107,9 @@ class fileSel: public guiObject
       bool loading;            /**< If selector is a loading one, 
                                     or a saving one */
 
-      string curDir;           /**< Current Opened directory */
+      std::string curDir;      /**< Current Opened directory */
 
-      string filter;           /**< Files Filter */
+      std::string filter;      /**< Files Filter */
 
       int lastDir;             /**< Last element on selector that is a 
                                     directory (this used to separate 

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -22,7 +22,6 @@
 #define _farso_seltext_h
 
 #include <string>
-using namespace std;
 
 #include "draw.h"
 #include "dntfont.h"
@@ -47,8 +46,9 @@ class selText: public guiObject
        * \param text3 -> option 3 text
        * \param text4 -> option 4 text
        * \param screen -> the window screen used */
-      selText(int xa,int ya,int xb,int yb, string text0, string text1,
-              string text2, string text3, string text4, SDL_Surface* screen);
+      selText(int xa,int ya,int xb,int yb, std::string text0, std::string text1,
+              std::string text2, std::string text3, std::string text4,
+              SDL_Surface* screen);
 
       /*! Destructor */
       ~selText();
@@ -88,7 +88,7 @@ class selText: public guiObject
        * \param info -> option info to store
        * \note -> at info you can store, for example, external vector 
        *          position of the element */
-      void setText(int opt, string txt, int info=0);
+      void setText(int opt, std::string txt, int info=0);
 
       /*! Clear the selText options text */
       void clearText();
@@ -105,7 +105,7 @@ class selText: public guiObject
 
    protected:
       int y[MAX_OPTIONS];          /**< Final Y of each option */
-      string optText[MAX_OPTIONS]; /**< Text Options */
+      std::string optText[MAX_OPTIONS]; /**< Text Options */
       int optInfo[MAX_OPTIONS];    /**< Info Options */
       int selec;                   /**< last item selected */
       farso_colors Cores;          /**< colors */

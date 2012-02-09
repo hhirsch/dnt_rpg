@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -26,7 +26,6 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-using namespace std;
 
 class engine;
 
@@ -50,7 +49,7 @@ class saveFile
       /*! Load Save file header, before really load the save
        * \param fileName -> header filename (without path)
        * \return -> true if can load the header, false otherwise */
-      bool loadHeader(string fileName);
+      bool loadHeader(std::string fileName);
 
       /*! Create a save file
        * \param saveFile -> save file name string
@@ -59,35 +58,35 @@ class saveFile
        * \param curEngine -> pointer to the current engine
        * \param frontSurface -> pointer to the frontSurface (screenshot)
        * \return -> true if can save, false otherwise */
-      bool save(string saveFile, engine* curEngine, SDL_Surface* frontSurface);
+      bool save(std::string saveFile, engine* curEngine, SDL_Surface* frontSurface);
 
       /*! Get the save file title
        * \return -> save file title */
-      string getTitle();
+      std::string getTitle();
       /*! Get the image file
        * \return -> save image file name */
-      string getImageFile();
+      std::string getImageFile();
       /*! Get the current map filename
        * \return -> current map filename */
-      string getCurrentMap();
+      std::string getCurrentMap();
       /*! Get the current PC filename
        * \return -> saved character filename */
-      string getCharacterFile();
+      std::string getCharacterFile();
       /*! Get quick talents filename
        * \return -> quick talents filename */
-      string getQuickTalentsFile();
+      std::string getQuickTalentsFile();
 
    protected:
 
-      string title;            /**< The save File title*/
-      string version;          /**< The DNT version who created the save */
-      string imageFile;        /**< The screenshot file */
-      string invFile;          /**< The inventory file */
-      string mapFile;          /**< The current map file */
-      string modStateFile;     /**< The modState file */
-      string missionsFile;     /**< The missions file */
-      string quickTalentsFile; /**< Quick talents file */
-      string pcFile;           /**< The PC file */
+      std::string title;            /**< The save File title*/
+      std::string version;          /**< The DNT version who created the save */
+      std::string imageFile;        /**< The screenshot file */
+      std::string invFile;          /**< The inventory file */
+      std::string mapFile;          /**< The current map file */
+      std::string modStateFile;     /**< The modState file */
+      std::string missionsFile;     /**< The missions file */
+      std::string quickTalentsFile; /**< Quick talents file */
+      std::string pcFile;           /**< The PC file */
       float pcPos[3];          /**< The PC Position */
       float pcAngle;           /**< The PC angle */
       float hour;              /**< The current game hour */

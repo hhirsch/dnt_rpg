@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -39,12 +39,11 @@
 #endif
 
 #include <string>
-using namespace std;
 
 /*! Translate a data string readed from a data file.
  * \param dataString -> translatable data string readed from a data file 
  * \return -> translated string for the input data. */
-string translateDataString(string dataString);
+std::string translateDataString(std::string dataString);
 
 
 #endif

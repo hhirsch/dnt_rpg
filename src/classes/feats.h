@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -22,10 +22,9 @@
 #define _dnt_feats_h
 
 #include <SDL/SDL.h>
-#include "defs.h"
 #include <string>
-using namespace std;
 
+#include "defs.h"
 #include "thing.h"
 #include "modifier.h"
 #include "modeffect.h"
@@ -58,7 +57,7 @@ class depFeat: public dntListElement
 {
    public:
       float  reason;       /**< Dependence Reason (1/1, 1/2, 1/3, 2/1, etc) */
-      string featId;       /**< ID String of the Feat */
+      std::string featId;  /**< ID String of the Feat */
 };
 /*! The dependence feat list (depFeat) */
 class depFeatList: public dntList
@@ -104,11 +103,11 @@ class featDescription
       int type;                    /**< Feature type constant */
       int action;                  /**< Feat action (as <actions.h>) */
 
-      string name;                 /**< Feat Name */
-      string idString;             /**< Feat ID String */
-      string description;          /**< Feat Description */
+      std::string name;                 /**< Feat Name */
+      std::string idString;             /**< Feat ID String */
+      std::string description;          /**< Feat Description */
 
-      string scriptFile;           /**< FileName of the script to run */
+      std::string scriptFile;           /**< FileName of the script to run */
 
       int internalListNumber;      /**< Number on List */
       reqFactorList reqFactors;    /**< List of required factors */
@@ -166,7 +165,7 @@ class feats
       /*! Return the feat with name featName
        * \param featName -> name of feat to return
        * \return return the feat struct that has the name. */
-      feat* featByString(string featName);
+      feat* featByString(std::string featName);
 
       /*! Insert a feat on Character's Feats.
        * \param featInsert -> featDescription of feat to insert
@@ -257,7 +256,7 @@ class featsList
        * \param dir -> string with the directory where all feats are
        * \param arq -> file name with the list of avaible feats.
        ***************************************************************/
-      void init(string dir, string arq);
+      void init(std::string dir, std::string arq);
       /*!
        ***************************************************************
        * featsList Destructor
@@ -270,7 +269,7 @@ class featsList
        * \param featName -> name of feat to return
        * \return the featDescription struct.
        ***************************************************************/
-      featDescription* featByString(string featName);
+      featDescription* featByString(std::string featName);
 
       /*!
        **************************************************************** 

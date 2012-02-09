@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -22,7 +22,6 @@
 #define _dnt_character_h
 
 #include <string>
-using namespace std;
 
 #include "../gui/draw.h"
 #include "../gui/picture.h"
@@ -72,7 +71,7 @@ class character: public thing, public dntListElement
       /*! Get the character level for a specific class
        * \param classId -> id of the class
        * \return -> number of levels the character has on class */
-      int getLevel(string classId);
+      int getLevel(std::string classId);
 
       /*! Get the character level for a specific class
        * \param cl -> clas to get how many levels the character has
@@ -104,19 +103,19 @@ class character: public thing, public dntListElement
        * \return -> true if the align string identifier have the string al
        *            in it, false otherwise. 
        * \note -> a common use is, for example: isAlignOf("FREE_SOFTWARE") */
-      bool isAlignOf(string al);
+      bool isAlignOf(std::string al);
 
       /*! Define the image used as portrait
        * \param portraitFile -> file name of the image to use*/
-      void definePortrait(string portraitFile);
+      void definePortrait(std::string portraitFile);
 
       /*! Get the filename of the image used as portrait
        * \return -> file name of the image used */
-      string getPortraitFileName();
+      std::string getPortraitFileName();
 
       /*! Get the filename of the inventory defined to the character
        * \return -> string with inventory file name or "" */
-      string getInventoryFile();
+      std::string getInventoryFile();
 
       /*! Draw the Portrait */
       void drawMainPortrait();
@@ -166,7 +165,7 @@ class character: public thing, public dntListElement
       /*! Verify if already have a feat
        * \param featId -> identifier of the feat
        * \return true if already have the feat */
-      bool haveFeat(string featId);
+      bool haveFeat(std::string featId);
 
       /*! Clear Skills */
       void clearSkills();
@@ -200,16 +199,16 @@ class character: public thing, public dntListElement
 
       /*! Get the character filename
        * \return -> the character filename */
-      string getCharacterFile(){return(characterFile);};
+      std::string getCharacterFile(){return(characterFile);};
 
       /*! Set the character file
        * \param fileName -> new fileName of the character */
-      void setCharacterFile(string fileName){characterFile = fileName;}
+      void setCharacterFile(std::string fileName){characterFile = fileName;}
 
       /*! Save the character to a new file 
        * \param fileName -> name of the file to save
        * \return-> true if can save, false otherwise */
-      bool save(string fileName);
+      bool save(std::string fileName);
 
       /*! Get the active attack feat range
        * \return range value in meters */ 
@@ -231,7 +230,7 @@ class character: public thing, public dntListElement
        * \param factorId -> id of the target factor
        * \param factorType -> type of the target factor */
       void addModEffect(int mod, int time, int periodicTime,
-            string factorId, string factorType);
+                        std::string factorId, std::string factorType);
 
       /*! Remove all modEffects from the character */
       void removeAllModEffects();
@@ -275,13 +274,13 @@ class character: public thing, public dntListElement
        * \return points */
       int getPoints(points pt);
 
-      string talkPortrait;        /**< Portrait talk file name */
-      string characterFile;       /**< Name of the character file */
+      std::string talkPortrait;        /**< Portrait talk file name */
+      std::string characterFile;       /**< Name of the character file */
       float portraitPropX;        /**< X proportion for portrait texture */
       float portraitPropY;        /**< Y proportion for portrait texture */
       SDL_Surface* portraitImage; /**< Character's portrait image */
       GLuint portraitTexture;     /**< The Portrait Texture */
-      string inventoryFile;       /**< The inventory file name */
+      std::string inventoryFile;       /**< The inventory file name */
 
       int activeFeat;             /**< The character active feat */
       
@@ -290,7 +289,7 @@ class character: public thing, public dntListElement
       modEffectList* effects;     /**< Current character effects */
 
       iaScript* generalScript;    /**< Pointer to the general iaScript */
-      string generalScriptFileName;/**< The General Script Filename */
+      std::string generalScriptFileName; /**< The General Script Filename */
 };
 
 
@@ -310,8 +309,8 @@ class characterList: public dntList
        * \param pEngine -> pointer to current engine
        * \param curMap -> fileName of the current map
        * \return pointer to opened character*/
-      character* insertCharacter(string file, featsList* ft, 
-            engine* pEngine, string curMap);
+      character* insertCharacter(std::string file, featsList* ft, 
+                                 engine* pEngine, std::string curMap);
 
       /*!
        * Remove one character from list
@@ -332,7 +331,7 @@ class characterList: public dntList
       /*! Get the first character with fileName on the list
        * \param fileName -> fileName of the character to get
        * \return -> characte pointer or NULL */
-      character* getCharacter(string fileName);
+      character* getCharacter(std::string fileName);
 
       /*! Get the character related to the sceneNode
        * \return character pointer or NULL */

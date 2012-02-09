@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -32,7 +32,7 @@ class guiList;
 class textElement: public dntListElement
 {
    public:
-      string text;            /**< The text of the element */
+      std::string text;            /**< The text of the element */
 };
 
 /*! The listText class. Is a list of texts elements to select one */
@@ -56,18 +56,18 @@ class listText: public guiObject, public dntList
 
       /*! Insert Text Element on the list
        * \param text -> string to insert */
-      void insertText(string text);
+      void insertText(std::string text);
 
       /*! Insert Text element, with color on the list
        * \param text -> string to insert 
        * \param r -> red 
        * \param g -> green
        * \param b -> blue */
-      void insertText(string text, int r, int g, int b);
+      void insertText(std::string text, int r, int g, int b);
 
       /*! Remove text from list
        * \param text -> string to remove */
-      void removeText(string text);
+      void removeText(std::string text);
 
       /*! Draw the listText to the surface */
       void draw();
@@ -80,7 +80,7 @@ class listText: public guiObject, public dntList
 
       /*! Get the selected text
        * \return selected text */
-      string getSelectedText();
+      std::string getSelectedText();
 
       /*! Get the selected text position on list
        * \return selected text position */
@@ -100,7 +100,7 @@ class listText: public guiObject, public dntList
    private:
       guiList* intList;           /**< Internal GUI Objects List */
       oneTabButton** listButtons; /**< Buttons of the List*/
-      string selectedText;        /**< Text selected */
+      std::string selectedText;   /**< Text selected */
       int selectedPos;            /**< Position on list of the selected */
       int maxButtons;             /**< Max number of buttons */
 };

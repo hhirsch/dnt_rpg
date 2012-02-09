@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -22,7 +22,6 @@
 #define _dnt_classes_h
 
 #include <string>
-using namespace std;
 
 #include "skills.h"
 #include "feats.h"
@@ -57,23 +56,23 @@ class classe: public dntListElement
       void getAttModifiers(int mods[6], bool sum, skills* sk);
 
       int intID;                 /**< Integer Identifier of the class */
-      string strID;              /**< String Identifier of the class */
+      std::string strID;         /**< String Identifier of the class */
       SDL_Surface* image;        /**< Image of the Class */
       
-      string name;               /**< Name of the Class */
-      string description;        /**< Description of the Class */
-      string citation;           /**< Class Citation */
+      std::string name;          /**< Name of the Class */
+      std::string description;   /**< Description of the Class */
+      std::string citation;      /**< Class Citation */
 
       int totalModifiers;        /**< Total Modifiers on Class */
       int* modifierLevels;       /**< Level when each Modifier will be avaible*/
       modifier* classModifiers;  /**< Class Modifiers */
 
       int totalFeats;            /**< Total Class Feats */
-      string* classFeats;        /**< ID String of Class Feats */
+      std::string* classFeats;   /**< ID String of Class Feats */
       int* reqLevel;             /**< Requerided Level for Feat */
 
       int totalSkills;           /**< Total Class Skills */
-      string* classSkills;       /**< Class Skills */
+      std::string* classSkills;  /**< Class Skills */
 
       int lifeDiceID;            /**< Life Dice ID */
       points firstLevelSP;       /**< First Level Skill Points */
@@ -114,7 +113,7 @@ class classes
       /*! Get a Class from list 
        * \param id -> string ID of the class
        * \return class found, if found one. */
-      classe* getClassByString(string id);
+      classe* getClassByString(std::string id);
 
       /*! Get total classes avaible */
       int getTotalClasses();
@@ -127,8 +126,8 @@ class classes
        * \param imgFile -> image file of the class
        * \param idString -> String Identifier of the class
        * \param idInt -> Integer Identifier of the class */
-      void insertClass(string fileName, string imgFile, string idString,
-                       int idInt);
+      void insertClass(std::string fileName, std::string imgFile, 
+                       std::string idString, int idInt);
 };
 
 #endif

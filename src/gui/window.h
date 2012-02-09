@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -31,7 +31,6 @@
 #include "../lang/translate.h"
 
 #include <string>
-using namespace std;
 
 
 #define WINDOW_MENU_MIN_MAX  1
@@ -51,8 +50,8 @@ class window: public guiObject
        * \param title -> title of the window
        * \param list -> guiList pointer to the list where the window is 
        * \param empty -> with window is without any self draw */ 
-      window(int xa, int ya, int xb, int yb, string title, windowList* list, 
-             bool empty=false);
+      window(int xa, int ya, int xb, int yb, std::string title,
+             windowList* list, bool empty=false);
 
       /*! Destructor */
       ~window();
@@ -189,7 +188,7 @@ class windowList: public dntList
        * \param yb -> y2 coordinate 
        * \param text -> title of the window
        * \param empty -> with window is without any self draw */ 
-      window* insertWindow(int xa,int ya,int xb,int yb,string text, 
+      window* insertWindow(int xa,int ya,int xb,int yb, std::string text, 
             bool empty=false);
 
       /*! Remove a window from the list

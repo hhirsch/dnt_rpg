@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -26,7 +26,6 @@
 #include <SDL/SDL_opengl.h>
 #include <SDL/SDL.h>
 #include <string>
-using namespace std;
 
 #define MESSAGE3D_MAX_TIME  75 /**< max time showing the message */
 
@@ -40,7 +39,7 @@ class message3d: public dntListElement
        * \param y -> y position
        * \param z -> z position
        * \param msg -> message to show */
-      message3d(GLfloat x, GLfloat y, GLfloat z, string msg);
+      message3d(GLfloat x, GLfloat y, GLfloat z, std::string msg);
       /*! Constructor
        * \param x -> x position
        * \param y -> y position
@@ -49,7 +48,7 @@ class message3d: public dntListElement
        * \param R -> red color [0..1]
        * \param G -> green color [0..1]
        * \param B -> blue color [0..1]*/
-      message3d(GLfloat x, GLfloat y, GLfloat z, string msg,
+      message3d(GLfloat x, GLfloat y, GLfloat z, std::string msg,
                 GLfloat R, GLfloat G, GLfloat B);
       /*! Destructor */
       ~message3d();
@@ -66,7 +65,7 @@ class message3d: public dntListElement
        * \param R -> red color [0..1]
        * \param G -> green color [0..1]
        * \param B -> blue color [0..1]*/
-      void init(GLfloat x, GLfloat y, GLfloat z, string msg,
+      void init(GLfloat x, GLfloat y, GLfloat z, std::string msg,
                 GLfloat R, GLfloat G, GLfloat B);
 
 
@@ -76,7 +75,7 @@ class message3d: public dntListElement
               posZ;          /**< Z position */
       int size;              /**< Message Size (in pixels) */
       GLfloat halfSize;      /**< Half size */
-      string message;        /**< the message to show */
+      std::string message;   /**< the message to show */
       GLuint messageTexture; /**< The texture load by the message */
       int live;              /**< Time living */
 };
@@ -124,7 +123,7 @@ class messageController
        * \param y -> y position
        * \param z -> z position
        * \param msg -> message to show */
-      void addMessage(GLfloat x, GLfloat y, GLfloat z, string msg);
+      void addMessage(GLfloat x, GLfloat y, GLfloat z, std::string msg);
 
       /*! Add a message
        * \param x -> x position
@@ -134,7 +133,7 @@ class messageController
        * \param R -> red color [0..1]
        * \param G -> green color [0..1]
        * \param B -> blue color [0..1]*/
-      void addMessage(GLfloat x, GLfloat y, GLfloat z, string msg,
+      void addMessage(GLfloat x, GLfloat y, GLfloat z, std::string msg,
                       GLfloat R, GLfloat G, GLfloat B);
 
 

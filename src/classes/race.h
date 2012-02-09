@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -35,7 +35,6 @@
 #include "modifier.h"
 #include "feats.h"
 #include "skills.h"
-using namespace std;
 
 /*! Single Race Definition */
 class race: public dntListElement
@@ -60,22 +59,22 @@ class race: public dntListElement
 
 
       int intID;              /**< Integer Identifier of the race */
-      string strID;           /**< String Identifier of the race */
+      std::string strID;      /**< String Identifier of the race */
       SDL_Surface* image;     /**< Image of the Race */
       
-      string name;            /**< Name of the Race */
-      string description;     /**< Description of the Race */
-      string citation;        /**< Race Citation */
+      std::string name;            /**< Name of the Race */
+      std::string description;     /**< Description of the Race */
+      std::string citation;        /**< Race Citation */
 
       int totalModifiers;     /**< Total Modifiers on Class */
       modifier* raceModifiers;/**< Race Modifiers */
 
       int totalFeats;         /**< Total Race Feats */
-      string* raceFeats;      /**< ID String of Race Feats */
+      std::string* raceFeats;      /**< ID String of Race Feats */
 
       int totalSkills;           /**< Total Race Skills */
-      string* raceSkills;        /**< Race Skills */
-      string* raceSkillsJustify; /**< Justify of the Skill */
+      std::string* raceSkills;        /**< Race Skills */
+      std::string* raceSkillsJustify; /**< Justify of the Skill */
 };
 
 /**! List of races */
@@ -109,7 +108,7 @@ class races
       /*! Get an Race from list 
        * \param id -> string ID of the race
        * \return race found, if found one. */
-      race* getRaceByString(string id);
+      race* getRaceByString(std::string id);
 
       /*! Get total races avaible
        * \return number of races avaible */
@@ -123,7 +122,8 @@ class races
        * \param imgFile -> image file of the race
        * \param idString -> String Identifier of the race
        * \param idInt -> Integer Identifier of the race */
-      void insertRace(string fileName,string imgFile,string idString,int idInt);
+      void insertRace(std::string fileName, std::string imgFile, 
+                      std::string idString,int idInt);
 };
 
 

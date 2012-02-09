@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -23,7 +23,6 @@
 
 #include <SDL/SDL_opengl.h>
 #include <string>
-using namespace std;
 
 #include "list.h"
 
@@ -31,8 +30,8 @@ using namespace std;
 class npcParseStruct: public dntListElement
 {
    public:
-      string name;       /**< The NPC name */
-      string fileName;   /**< The NPC fileName */
+      std::string name;       /**< The NPC name */
+      std::string fileName;   /**< The NPC fileName */
       GLfloat posX,      /**< The NPC Initial X Position */
               posZ,      /**< The NPC Initial Z Position */
               angle;     /**< The NPC Initial Orientation Angle */
@@ -54,12 +53,12 @@ class npcFile: public dntList
       /* Load the npc file
        * \param fileName -> relative fileName of the npc's file
        * \return -> true if can save, false otherwise */
-      bool load(string fileName);
+      bool load(std::string fileName);
 
       /*! Save the npc file
        * \param fileName -> relative fileName of the npc's file
        * \return -> true if can save, false otherwise */
-      bool save(string fileName);
+      bool save(std::string fileName);
 
       /*! Get the next character readed from the file
        * \param name -> name of the npc
@@ -69,8 +68,9 @@ class npcFile: public dntList
        * \param ange -> Orientation angle of the character got
        * \param psycho -> Psycho state of the character got
        * \return -> true if can get the next character, false otherwise */
-      bool getNextCharacter(string& name, string& fileName, GLfloat& posX, 
-                            GLfloat& posZ, GLfloat& angle, int& psycho);
+      bool getNextCharacter(std::string& name, std::string& fileName,
+                            GLfloat& posX, GLfloat& posZ, GLfloat& angle,
+                            int& psycho);
 
       /* Insert a character at the list
        * \param name -> name of the npc
@@ -79,7 +79,7 @@ class npcFile: public dntList
        * \param posZ -> Z position of the character got
        * \param angle -> Orientation angle of the character got
        * \param psycho -> Character psycho state */
-      void insertCharacter(string name, string fileName, GLfloat posX, 
+      void insertCharacter(std::string name, std::string fileName, GLfloat posX, 
                            GLfloat posZ, GLfloat angle, int psycho);
 
       /*! Kill All NPCs defined by the NPC file */
@@ -91,7 +91,7 @@ class npcFile: public dntList
        * \param obj -> pointer to delete */
       void freeElement(dntListElement* obj);
 
-      string npcFileName;        /**< Name of the NPC list file opened */
+      std::string npcFileName;        /**< Name of the NPC list file opened */
       npcParseStruct* current;   /**< Current NPC */
 
 };

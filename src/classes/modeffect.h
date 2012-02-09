@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -41,13 +41,13 @@ class modEffect: public dntListElement
        * \param factorId -> id of the target factor (see: factor)
        * \param factorType -> type of the target factor (see: factor) */
       modEffect(int mod, int time, int periodicTime, 
-            string factorId, string factorType);
+                std::string factorId, std::string factorType);
       /*! Constructor 
        * \param obj -> modEffect to use as base */
       modEffect(modEffect* obj);
       /*! Constructor
        * \param saveTxt -> saveText with modEffect info to load from */
-      modEffect(string saveTxt);
+      modEffect(std::string saveTxt);
       /*! Destructor */
       ~modEffect();
 
@@ -62,15 +62,15 @@ class modEffect: public dntListElement
       /*! Get a string describing the modEffect
        * \param actor -> pointer to the character "owner" of the effect
        * \return -> representative string of the modEffect */
-      string toReadableText(character* actor);
+      std::string toReadableText(character* actor);
 
       /*! Get a string to save the modEffect
        * \return -> string with modEffect Info */
-      string toSaveText();
+      std::string toSaveText();
 
       /*! Load the modEffect from the save string
        * \param txt -> saveString with modEffect info */
-      void fromSaveText(string txt);
+      void fromSaveText(std::string txt);
 
       /*! Get modification value */
       int getValue();

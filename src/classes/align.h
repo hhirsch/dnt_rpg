@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -30,7 +30,6 @@
 #endif
 
 #include <string>
-using namespace std;
 
 #include "../etc/dirs.h"
 #include "../etc/list.h"
@@ -40,11 +39,11 @@ class align: public dntListElement
 {
    public:
       int intID;              /**< Integer Identifier of the alignment */
-      string strID;           /**< String Identifier of the alignment */
+      std::string strID;      /**< String Identifier of the alignment */
       SDL_Surface* image;     /**< Image of the Aligment */
       
-      string name;            /**< Name of the Aligment */
-      string description;     /**< Description of the Aligment */
+      std::string name;            /**< Name of the Aligment */
+      std::string description;     /**< Description of the Aligment */
 };
 
 /*! List of aligns */
@@ -78,7 +77,7 @@ class aligns
       /*! Get an Aligment from list 
        * \param id -> string ID of the alignment
        * \return aligment found, if found one. */
-      align* getAlignByString(string id);
+      align* getAlignByString(std::string id);
       
    private:
       static alignList* list;
@@ -87,7 +86,7 @@ class aligns
        * \param fileName -> fileName of the alignment to insert 
        * \param idString -> String Identificator of the alignment 
        * \param idInt -> Integer Identificator of the the alignment */
-      void insertAlign(string fileName, string idString, int idInt);
+      void insertAlign(std::string fileName, std::string idString, int idInt);
 };
 
 

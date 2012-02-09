@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -23,7 +23,6 @@
 
 #include "dices.h"
 #include <string>
-using namespace std;
 
 
 #define MAX_ATTACKS 6
@@ -91,7 +90,7 @@ class attackBonus
 
       /*! Convert the attack bonus to a string 
        * \return -> string representing the attack bonus */
-      string toString();
+      std::string toString();
 
       /*! Convert the attack bonus to a representativ integer
        * \return -> int with the attack bonus */
@@ -135,7 +134,8 @@ class bonusAndSaves
        * \param couldCheck -> will be true if the stateToCheck is valid here,
        *                      or false if it is invalid (not a bonus or a save)
        * \return true if success, false if failed. */
-      bool doCheck(string stateToCheck, int difficulty, bool* couldCheck=NULL);
+      bool doCheck(std::string stateToCheck, int difficulty,
+                   bool* couldCheck=NULL);
 
       /*! = Operator */
       bonusAndSaves& operator=(const bonusAndSaves& b);
