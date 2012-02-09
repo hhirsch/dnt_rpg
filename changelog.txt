@@ -1,7 +1,7 @@
 ================================================
 |                Version 0.9                   |
 ================================================
- -
+ - gui: rolBar can use position button to scroll text;
 
 BugFixes:
  - Fixed a possible double OpenAL stop when releasing an ogg_stream;

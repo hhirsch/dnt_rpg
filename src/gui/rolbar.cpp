@@ -23,6 +23,7 @@
 #include "guilist.h"
 #include "interface.h"
 
+#include <math.h>
 #include <iostream>
 using namespace std;
 
@@ -100,60 +101,50 @@ bool rolBar::isOwner(guiObject* obj)
  *********************************************************************/
 bool rolBar::eventGot(int type, guiObject* object, int mouseY)
 {
-#if 0
-   int diff;
-
    /* Verify position button */
    if( (type == FARSO_EVENT_ON_PRESS_BUTTON) && 
        (object == (guiObject*)position) )
    {
-      actualPressed = position;
-      if(lastMouseY != -1)
+      if(lastMouseY == -1)
       {
-         diff = (int)(mouseY - lastMouseY)*deltaY;
-         cout << lastMouseY << " cur: " << mouseY << " diff: " << diff << endl;
-         if(diff < 0)
-         {
-            if(scrollText->getFirstLine() + diff < 0)
-            {
-               scrollText->setFirstLine(0);
-            }
-            else
-            {
-               scrollText->setFirstLine(scrollText->getFirstLine() + diff);
-            }
-         }
-         else if(diff > 0)
-         {
-            if(scrollText->lastDrawableLine() < 
-                  scrollText->getTotalLines()-diff)
-            {
-               scrollText->setFirstLine(scrollText->getFirstLine() + diff);
-            }
-            else
-            {
-               /* TODO */
-            }
-         }
-       
-         if(diff != 0)
-         {
-            setChanged();  
-            return(true);
-            lastMouseY = mouseY;
-         }
-      }
-      else
-      {
+         /* set initial-procedure mouseY */
          lastMouseY = mouseY;
+         deltaY = mouseY-position->getY1();
+      }
+      else if(mouseY != lastMouseY)
+      {
+         /* Update last mouse change */
+         lastMouseY = mouseY;
+
+         /* Set initial text line */
+         int dif = (position->getY2()-position->getY1());
+         int newInit = (int)floor( ( (mouseY-deltaY - y1 - 2) / 
+                                     (float)(y2-28-y1) ) *
+                                   scrollText->getTotalLines());
+         int newEnd = (int)floor( ( (mouseY-deltaY+dif - y1 - 2) /
+                  (float)(y2-28-y1) ) *
+               scrollText->getTotalLines())-1;
+         if(newInit < 0)
+         {
+            newInit = 0;
+         }
+         else if(newEnd > scrollText->getTotalLines()-1) //FIXME!
+         {
+            newInit = scrollText->getTotalLines()-1-(newEnd-newInit);
+         }
+         scrollText->setFirstLine(newInit);
+         
+         /* mark to update */
+         setChanged();
+         return(true);
       }
    }
    else
    {
       lastMouseY = -1;
    }
-#endif
 
+   /* Verify press up or down buttons */
    if((SDL_GetTicks() - lastUpdated) >= ROLBAR_UPDATE_RATE)
    {
       lastUpdated = SDL_GetTicks();
@@ -225,7 +216,7 @@ void rolBar::redraw()
 
    if(scrollText->getTotalLines() != 0)
    {
-      deltaY = (float)scrollText->getTotalLines() /  (y2-28.0f-y1);
+      //deltaY = (float)scrollText->getTotalLines() /  (y2-28.0f-y1);
       position->setCoordinate(position->getX1(), 
                               (int) ((y1+2) + ((float)actualInit/
                                      (float)scrollText->getTotalLines())*
@@ -237,7 +228,7 @@ void rolBar::redraw()
    }
    else
    {
-      deltaY = 0;
+      //deltaY = 0;
       position->setCoordinate(position->getX1(), y1+2, 
                               position->getX2(), y2-26);
    }
