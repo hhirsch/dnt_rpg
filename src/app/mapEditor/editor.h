@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -80,7 +80,7 @@ class editor
       /*! Gets Next Texture on Map List */
       int nextTexture();
       /*! Insert Texture on Map List */
-      int insertTexture(string textureFile);
+      int insertTexture(std::string textureFile);
       /*! Render All Static Scenery Objects */
       void renderSceneryObjects();
       /*! Update the mouse projection on axys XZ */
@@ -122,7 +122,7 @@ class editor
       weaponTypes wTypes;            /**< The list of types */
 
       GLuint curTexture;             /**< Current Texture */
-      string curTextureName;         /**< Current Texture Name */
+      std::string curTextureName;    /**< Current Texture Name */
       
       GLdouble proj[16];             /**< Projection Matrix */
       GLdouble modl[16];             /**< Model View Matrix */

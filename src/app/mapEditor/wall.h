@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -48,7 +48,7 @@ class wallController
       void verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
                         GLfloat floorX, GLfloat floorZ,
                         Uint8 mButton, Uint8* keys, int& tool, 
-                        GLuint curTexture, string curTextureName);
+                        GLuint curTexture, std::string curTextureName);
 
       /*! If have some temporary things to draw, draw it! */
       void drawTemporary(GLdouble modelView[16], 
@@ -61,8 +61,8 @@ class wallController
       wall* actualWall;       /**< Actual Selected Wall */
       bool limitSquare;       /**< Limit Wall to square's vertices*/
 
-      GLuint texture;         /**< Current Texture */
-      string textureName;     /**< Current Texture Name */
+      GLuint texture;           /**< Current Texture */
+      std::string textureName;   /**< Current Texture Name */
 
       GLfloat mX, mY, mZ;     /**< Mouse World Coordinates */
       GLfloat fX, fZ;         /**< Mouse Floor Coordinates */

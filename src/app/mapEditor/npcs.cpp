@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -24,6 +24,8 @@
 
 #define NPCS_STATE_NONE    0
 #define NPCS_STATE_ADD     1
+
+using namespace std;
 
 /******************************************************
  *                      Constructor                   *

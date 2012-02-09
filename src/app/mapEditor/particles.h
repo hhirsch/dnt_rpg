@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -48,7 +48,7 @@ class particles
                         Uint8 mButton, Uint8* keys, guiIO* gui, 
                         partController* pS,
                         GLdouble proj[16],GLdouble modl[16],GLint viewPort[4],
-                        string selectedText, grassWindow* grWindow,
+                        std::string selectedText, grassWindow* grWindow,
                         waterWindow* wtWindow, Map* actualMap);
 
       /*! If have some temporary things to draw, draw it! */
@@ -63,7 +63,7 @@ class particles
       int particleType;                /**< actual Particle Type */
       GLfloat height;                  /**< actual Particle Height */
 
-      string previousText;             /**< Previous selectedText */
+      std::string previousText;        /**< Previous selectedText */
 
       GLfloat x1,                      /**< X1 coordinate for grass */
               z1,                      /**< Z1 Coordinate for grass */

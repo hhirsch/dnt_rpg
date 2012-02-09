@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -22,7 +22,6 @@
 #define _dnt_part_editor_partelement_window_aux
 
 #include <string>
-using namespace std;
 
 #include "../../gui/farso.h"
 #include "../../particle/partelement.h"
@@ -42,7 +41,7 @@ class partElementWindow
        * \param e -> new element to display
        * \param text -> name of the element to display
        * \param p -> pointer to the particleSystem on edition */
-      void setElement(dntPartElement* e, string text, particleSystem* p);
+      void setElement(dntPartElement* e, std::string text, particleSystem* p);
 
       /*! Treat the window events
        * \param object -> guiObject where event occurred
@@ -73,7 +72,7 @@ class partElementWindow
       guiInterface* gui;        /**< Gui used */
       window* curWindow;        /**< Current in use window */
       dntPartElement* element;  /**< Current in-edition element */
-      string elementName;       /**< Current element's name */
+      std::string elementName;  /**< Current element's name */
       particleSystem* part;     /**< Current particle system edited */
 
       button* nextType;         /**< To select next type */

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -25,7 +25,6 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
 #include <string>
-using namespace std;
 
 #define TOOL_NONE                    0
 
@@ -60,7 +59,7 @@ using namespace std;
 
 #define TOOL_NPC_ADD                161
 
-string messageForTool(int tool);
+std::string messageForTool(int tool);
 
 /*! Get a string from user input
  * \param title -> title of the window
@@ -69,8 +68,8 @@ string messageForTool(int tool);
  * \param modl -> model view matrix
  * \param viewPort -> viewPort vector
  * \return the value of the screen selected */
-string getStringFromUser(string title, string previous,
-                         GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
+std::string getStringFromUser(std::string title, std::string previous,
+      GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
 
 /*! Get a Option from user input
  * \param title -> title of the window
@@ -81,8 +80,8 @@ string getStringFromUser(string title, string previous,
  * \param modl -> model view matrix
  * \param viewPort -> viewPort vector
  * \return the value of the option selected (1 or 2) */
-int getOptionFromUser(string title, string message, string opt1, string opt2,
-                      GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
+int getOptionFromUser(std::string title, std::string message, std::string opt1,
+      std::string opt2,GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
 
 
 

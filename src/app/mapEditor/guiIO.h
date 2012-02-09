@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -94,19 +94,19 @@ class guiIO
       void cameraPos(Map* acMap);
 
       /*! Gets the FileName */
-      string getFileName();
+      std::string getFileName();
 
       /*! Gets the Selected Text */
-      string getSelectedText();
+      std::string getSelectedText();
 
       /*! Gets the Texture File Name */
-      string getTextureFileName();
+      std::string getTextureFileName();
 
       /*! Gets Object File Name */
-      string getObjectFileName();
+      std::string getObjectFileName();
 
       /*! Show Message on Message Window */
-      void showMessage(string msg);
+      void showMessage(std::string msg);
 
       /*! Set the map fog */
       void setFog(mapFog* fog);
@@ -143,8 +143,8 @@ class guiIO
       int state;            /**< Internal State */
       int tool;             /**< Selected Tool */
       bool invertMultiTexture; /**< Invert multi texture display or not */
-      string selectedText;  /**< Last selected text with list window */
-      string curFileName;   /**< Current File Name */
+      std::string selectedText;  /**< Last selected text with list window */
+      std::string curFileName;   /**< Current File Name */
 
       guiInterface* gui;    /**< Internal GUI */
 

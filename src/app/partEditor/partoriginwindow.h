@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -22,7 +22,6 @@
 #define _dnt_part_editor_part_origin_window
 
 #include <string>
-using namespace std;
 
 #include "../../gui/farso.h"
 #include "../../particle/partorigin.h"

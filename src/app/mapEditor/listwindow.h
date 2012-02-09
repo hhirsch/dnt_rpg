@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -58,8 +58,8 @@
 class tuple: public dntListElement
 {
    public:
-      string title;            /**< The Title of the element */
-      string fileName;         /**< The name of the file of the element */
+      std::string title;            /**< The Title of the element */
+      std::string fileName;         /**< The name of the file of the element */
 };
 
 /*! List of tuples */
@@ -96,7 +96,7 @@ class listWindow
 
       /*! Get the current selected fileName
        * \return file name */
-      string getFileName();
+      std::string getFileName();
 
 
       /*! Verify if some event is related to the window
@@ -111,19 +111,19 @@ class listWindow
 
       /*! Load list from a file
        * \param filename -> full filename of the list to load */
-      void loadFromFile(string fileName);
+      void loadFromFile(std::string fileName);
 
       /*! Get the filename with title title
        * \param title -> title of the filename 
        * \return -> the fielename */
-      string getFileNameWithTitle(string title);
+      std::string getFileNameWithTitle(std::string title);
 
       int state;                 /**< Internal State */
       window* intWindow;         /**< Pointer to the window */
       guiInterface* intGui;      /**< Pointer to the interface */
       listText* list;            /**< Pointer to the listText */
       tupleList tuples;          /**< Current Tuples */
-      string selFileName;        /**< Last Selected fileName */
+      std::string selFileName;   /**< Last Selected fileName */
 
 };
 

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -55,17 +55,17 @@ class npcs
       void drawTemporary();
 
       /*! Define the actual npc */
-      void defineActualNpc(string fileName);
+      void defineActualNpc(std::string fileName);
 
       /*! Get the actual fileName of the actual NPC */
-      string getNpcFileName();
+      std::string getNpcFileName();
  
       /*! Delete the current NPC, if any */
       void deleteNpc();
 
       /*! Save The NPCs list to a file
        * \param fileName -> name of the file to save */
-      bool saveFile(string fileName);
+      bool saveFile(std::string fileName);
                         
    private:
       characterList* NPCs;        /**< Actual NPCs List */
@@ -73,7 +73,7 @@ class npcs
       featsList* features;        /**< Actual Features */
       Map* actualMap;             /**< Actual Internal Map */
       character* actualNpc;       /**< Actual Npc */
-      string npcFile;             /**< Actual Npc Filename */
+      std::string npcFile;        /**< Actual Npc Filename */
       int actualTool;             /**< Actual Tool */
       int state;                  /**< Actual Internal State */
 

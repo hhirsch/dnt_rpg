@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -23,14 +23,13 @@
 
 #include <SDL/SDL_opengl.h>
 #include <string>
-using namespace std;
 
 /*! Simple Definition of Map Area */
 class area
 {
    public:
       GLfloat x1, y1, x2, y2; /**< Coordinates */
-      string whereToGo;       /**< Destiny */
+      std::string whereToGo;  /**< Destiny */
       area* next;             /**< Next Node */
 };
 
@@ -49,7 +48,7 @@ class areaList
 
       /*! Add an area to the list */
       void addArea(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2, 
-                   string whereToGo);
+                   std::string whereToGo);
 
       /*! Draw on screen all portals */
       void drawAll();

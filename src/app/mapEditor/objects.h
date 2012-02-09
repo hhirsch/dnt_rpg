@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -54,11 +54,11 @@ class objects
       void drawTemporary();
 
       /*! Define the current object to add */
-      void defineActualObject(object* obj, string fileName);
+      void defineActualObject(object* obj, std::string fileName);
 
       /*! Get object file name
        * \return fileName of object or "" if no object */
-      string getObjectFileName();
+      std::string getObjectFileName();
 
       /*! delete actual object (if any) */
       void deleteObject();
@@ -66,7 +66,7 @@ class objects
     private:
       Map* actualMap;             /**< Actual Internal Map */
       object* actualObstacle;     /**< Actual Obstacle */
-      string objectFile;          /**< Actual Obstacle Filename */
+      std::string objectFile;     /**< Actual Obstacle Filename */
       int actualTool;             /**< Actual Tool */
       int state;                  /**< Actual Internal State */
 

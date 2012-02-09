@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -23,7 +23,7 @@
 
 
 #include "../../particle/particle.h"
-
+#include <string>
 /* Integers */
 #define DNT_PART_AUX_TYPE                      "type"
 #define DNT_PART_AUX_MAX_PARTICLES             "maxParticles"
@@ -65,34 +65,34 @@ class partAux: public particleSystem
       /*! Get integer parameter
        * \param i -> parameter name 
        * \return paramater value */
-      int getInt(string i);
+      int getInt(std::string i);
       /*! Set integer parameter
        * \param i -> parameter name
        * \param value -> parameter value */
-      void setInt(string i, int value);
+      void setInt(std::string i, int value);
 
       /*! Get float parameter
        * \param f -> parameter name 
        * \return paramater value */
-      float getFloat(string f);
+      float getFloat(std::string f);
       /*! Set float parameter
        * \param f -> parameter name
        * \param value -> parameter value */
-      void setFloat(string f, float value);
+      void setFloat(std::string f, float value);
 
       /*! Get boolean parameter
        * \param b -> parameter name 
        * \return paramater value */
-      bool getBool(string b);
+      bool getBool(std::string b);
       /*! Set boolean parameter
        * \param b -> parameter name
        * \param value -> parameter value */
-      void setBool(string b, bool value);
+      void setBool(std::string b, bool value);
 
       /*! Get particle element
        * \param e -> element name
        * \return pointer to the particle element got */
-      dntPartElement* getElement(string e);
+      dntPartElement* getElement(std::string e);
 
       /*! Get the particle origin
        * \return pointer to the particle origin */
@@ -109,18 +109,18 @@ class partAux: public particleSystem
 
       /*! Get the texture filename
        * \return filename of the texture used */
-      string getTextureFileName();
+      std::string getTextureFileName();
 
       /*! Set the filename of the texture to use */
-      void setTextureFileName(string f);
+      void setTextureFileName(std::string f);
 
    private:
       /*! Get the pointer to an internal integer */
-      int* getIntPtr(string i);
+      int* getIntPtr(std::string i);
       /*! Get the pointer to an internal boolean */
-      bool* getBoolPtr(string b);
+      bool* getBoolPtr(std::string b);
       /*! Get the pointer to an internal float */
-      float* getFloatPtr(string f);
+      float* getFloatPtr(std::string f);
       /*! Delete all buffers */
       void deleteBuffers();
 };

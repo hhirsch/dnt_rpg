@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -54,13 +54,13 @@ class portal
       bool inner(GLfloat ax, GLfloat az, GLfloat bx1, GLfloat bz1, 
                                         GLfloat bx2, GLfloat bz2);
 
-      void defineDoor(object* newDoor, string fileName);
+      void defineDoor(object* newDoor, std::string fileName);
 
       /*! Get the current door */
       object* getDoor();
 
       /*! get the current door file name */
-      string getDoorFileName();
+      std::string getDoorFileName();
 
       /*! delete the current door */
       void deleteDoor();
@@ -68,8 +68,8 @@ class portal
 
    private:
       Map* actualMap;         /**< Actual Internal Map */
-      object* actualDoor;  /**< Actual Door */
-      string fileDoor;        /**< Actual Door File */
+      object* actualDoor;     /**< Actual Door */
+      std::string fileDoor;   /**< Actual Door File */
       int doorMode;           /**< Actual Door Mode */
       int doorOrientation;    /**< Actual Door Orientation */
       GLfloat doorX;          /**< Actual Door X position */
@@ -91,7 +91,7 @@ class portal
       /*! Internal Tag Portal */
       void doTagPortal(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
       /*! Add Portal To Map */
-      void addPortal(int qx, int qz, string where);
+      void addPortal(int qx, int qz, std::string where);
 
       
 
