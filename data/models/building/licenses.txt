@@ -1,0 +1,8 @@
+
+DNTeam GPLv3 or latter:
+
+barraco1   house1  house5       ruin_house2  ruin_house5  ruin_house8
+barraco2   house2  house6       ruin_house3  ruin_house6  ruin_house_barraco1
+farm_ruin  house4  ruin_house1  ruin_house4  ruin_house7
+
+

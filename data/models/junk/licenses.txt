@@ -1,0 +1,28 @@
+
+DNTeam - GPLv3 or latter:
+
+bloco1  
+bloco2  
+bloco3  
+caixa1    
+madeira1
+pneu
+
+========================================================================
+
+pfunked (Clint Bellanger) - GPLv3
+source: http://opengameart.org/content/wood-apple-crate
+
+apple_crate
+
+=========================================================================
+
+UFO-AI - GPLv2 or latter
+source: http://ufoai.sf.net
+
+scrap1
+scrap2
+scrap3
+scrap4
+
+
