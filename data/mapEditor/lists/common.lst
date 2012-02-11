@@ -6,6 +6,7 @@ Calendar = models/objetos/geral/calendar/calendar.dcc
 Cama = models/objetos/geral/cama/cama.dcc
 Cap = models/objetos/geral/cap/cap.dcc
 Chair = models/objetos/geral/chair/chair.dcc
+Chair2 = models/objetos/geral/chair2/chair2.dcc
 Colarinho = models/objetos/geral/colarinho_e_oculos/colarinho_e_oculos.dcc
 Combat_Book = models/objetos/books/combat_tutorial/combat_tutorial.dcc
 Comoda = models/objetos/geral/comoda/comoda.dcc
