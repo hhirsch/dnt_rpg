@@ -15,3 +15,12 @@ author: soulvalou (Neil dela Merced <solvalou4ever@yahoo.com>)
 author site: http://solvalou.carbonmade.com
 source: http://opengameart.org/content/low-poly-chair
 
+========================================================================
+
+bed.blend bed_texture.png
+
+license: CC-BY 3.0
+author: soulvalou (Neil dela Merced <solvalou4ever@yahoo.com>)
+author site: http://solvalou.carbonmade.com
+source: http://opengameart.org/content/lowpoly-bare-bed
+

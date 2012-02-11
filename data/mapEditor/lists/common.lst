@@ -1,3 +1,4 @@
+Bed = models/objetos/geral/bed/bed.dcc
 Beer = models/objetos/itens/garrafa1/garrafa1.dcc
 Bookshelf = models/objetos/geral/bookshelf/bookshelf.dcc
 Briefcase = models/objetos/geral/mala/mala.dcc
