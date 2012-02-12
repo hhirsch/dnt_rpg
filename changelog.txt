@@ -2,6 +2,10 @@
 |                Version 0.9                   |
 ================================================
  - gui: rolBar can use position button to scroll text;
+ - gui: button type: KEEP_PRESSING for buttons that will
+        remain pressed until mouse is released, ignoring
+		  if inner the button area;
+ - Setting delta to sceneNode minY when lesser than 0;
 
 BugFixes:
  - Fixed a possible double OpenAL stop when releasing an ogg_stream;

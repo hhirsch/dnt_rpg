@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -43,6 +43,7 @@ button::button(int xa,int ya,int xb,int yb, string txt, bool isOval,
    available = true;
    defineFont(DNT_FONT_ARIAL, 12);
    type = FARSO_OBJECT_BUTTON;
+   bType = NORMAL;
 }
 
 /***********************************************************
@@ -54,6 +55,21 @@ button::~button()
    {
       menu* m = (menu*)men;
       delete(m);
+   }
+}
+
+/***********************************************************
+ *                         setType                         *
+ ***********************************************************/
+void button::setType(int t)
+{
+   if(t == KEEP_PRESSING)
+   {
+      bType = t;
+   }
+   else
+   {
+      bType = NORMAL;
    }
 }
 
@@ -192,6 +208,20 @@ bool button::press(int Xjan, int Yjan, int x, int y, Uint8 Mbotao, int* pronto)
    *pronto = 0;
    bool pres;
 
+   /* Verify keep pressing-button type */
+   if( (bType == button::KEEP_PRESSING) && (pressed) )
+   {
+      /* KEEP_PRESSING type: if pressing, just verify if mouse is
+       * still pressed (ignoring if inner button area) */
+      if(Mbotao & SDL_BUTTON(1))
+      {
+         /* Keep pressing it */
+         return(true);
+      }
+   }
+
+   /* No pressing or not KEEP_PRESSING type, must verify if inner
+    * the button area AND pressing mouse button */
    pres = (isMouseIn(x-Xjan,y-Yjan));
 
    /* Verify if the mouse Button is left */

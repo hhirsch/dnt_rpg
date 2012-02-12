@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -56,6 +56,7 @@ rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, guiList* list,
    lastMouseY = -1;
    deltaY = 0.0f;
    position = l->insertButton(xb-10, ya+2, xb-2, yb-26, "", 0);
+   position->setType(button::KEEP_PRESSING);
    sizeY = position->getY2() - position->getY1();
    contorn = l->insertTextBox(xb-12, ya, xb, yb-24, 1, "");
    

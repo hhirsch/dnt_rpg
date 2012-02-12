@@ -35,6 +35,13 @@ class menu;
 class button: public guiObject
 {
    public:
+
+      enum buttonType
+      {
+         NORMAL,
+         KEEP_PRESSING
+      };
+
       /*! Constructor
        * \param xa -> x1 coordinate
        * \param ya -> y1 coordinate
@@ -47,6 +54,10 @@ class button: public guiObject
 
       /*! Destructor */
       ~button();
+
+      /*! Set button type
+       * \param t -> buttonType constant */
+      void setType(int t);
 
       /*! Draw the Button on wSurface */
       void draw();
@@ -75,7 +86,6 @@ class button: public guiObject
       void setTextColor(int r, int g, int b);
 
       menu* men;        /**< Button Menu (buttons can have a menu to be 
-
                                           activated when button presses) */
 
    protected:
@@ -84,6 +94,7 @@ class button: public guiObject
       farso_colors Colors;  /**< Colors */
       std::string fontName; /**< Font Name */
       int fontSize;         /**< Font Size */
+      int bType;            /**< Button type */
 };
 
 #endif
