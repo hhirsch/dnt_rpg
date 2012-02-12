@@ -1,0 +1,5 @@
+interdit.xcf  
+perigo.xcf
+   author: DNTeam
+   license: GPLv3
+

@@ -1,6 +1,4 @@
 
-DNTeam - GPLv3 models:
-
 arvores/tree1
 arvores/tree2
 arvores/tree3
@@ -9,13 +7,12 @@ cogumelo
 fogueira
 matos
 ovo
-
-========================================================================
-
-UFO-AI (http://ufoai.sf.net) - GPLv2 models:
+   author: farrer (DNTeam)
+   license: GPLv3 or latter
 
 arvores/bananeira
 bush
-
-========================================================================
+   author: UFO-AI
+   license: GPLv2
+   source: http://ufoai.sf.net
 

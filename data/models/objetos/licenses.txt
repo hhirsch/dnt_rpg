@@ -1,0 +1,188 @@
+
+
+ammo/9mm_pack
+armas/adaga
+armas/axe
+armas/beretta92
+armas/dark_katana
+armas/faca
+armas/kalashnikov
+armas/kalashnikov_small
+armas/scimitar
+armas/sw39
+armas/uzi
+banho/mictorio
+banho/privada
+books/combat_tutorial
+books/mjack
+geral/barrel
+geral/cadeira
+geral/corchea
+geral/escada
+geral/exclamacao
+geral/fogaoalenha
+geral/guitarra
+geral/letter
+geral/monitor
+geral/notebook
+geral/pandeiro
+geral/placa_pare
+geral/placa_petro
+geral/porta
+geral/porta2
+geral/porta3
+geral/porta4
+geral/porta5
+geral/porta6
+geral/porta7
+geral/porta8
+geral/refmachine
+geral/santa_barrel
+geral/signs
+icex/fallout_box
+icex/lixo
+icex/quadro
+icex/ruindows_box
+icex/snes/*
+industrial/compdeck
+itens/garrafa1
+itens/healkit
+itens/lata1
+itens/money
+itens/racao
+paints/portinari_1
+paints/portinari_2
+paints/portinari_3
+paints/portinari_4
+paints/tarsila_1
+paints/tarsila_2
+paints/tarsila_3
+vinyls
+   author: farrer (DNTeam)
+   license: GPLv3 or latter
+
+geral/cap
+geral/colarinho_e_oculos
+geral/et
+geral/mala
+   author: ecarvalh (DNTeam)
+   license: GPLv3 or latter
+
+icex/cadeira
+icex/mesa
+icex/mesa_braco
+icex/mesa_redonda
+tumbas/cruz
+tumbas/lapide
+tumbas/tomb1
+tumbas/tomb_column
+   author: silvio (DNTeam)
+   license: GPLv3 or latter
+
+geral/computador
+   authors: silvio and farrer (DNTeam)
+   license: GPLv3 or latter
+
+banho/broom
+   authors: Scott Hsu-Storaker, Terrence M, Evan Tann, Yaniv Pe'er, Emily
+            Huffman, Clint Herron, Tom Perkins
+   license: CC-BY
+   source: http://www.lowpolycoop.com
+
+banho/papel_higienico
+banho/privada2
+geral/calendar
+geral/cama
+geral/bookshelf
+geral/comoda
+geral/escrivaninha
+geral/estante
+geral/gabinete
+geral/galinheiro
+geral/mesa_grande
+geral/mesa_redonda
+geral/pc_chair
+geral/pc_table
+geral/pia
+geral/sofa2
+geral/tomada
+geral/tv_hack
+   author: Estrada Real Digital
+   license: GPLv2
+   source: (http://sourceforge.net/projects/erd/)
+   note: modifications by DNTeam
+
+geral/bed
+geral/chair1
+geral/chair2
+   license: CC-BY 3.0
+   author: soulvalou (Neil dela Merced <solvalou4ever@yahoo.com>)
+   author site: http://solvalou.carbonmade.com
+   source: http://opengameart.org/content/low-poly-chair-2
+           http://opengameart.org/content/low-poly-chair
+           http://opengameart.org/content/lowpoly-bare-bed
+
+geral/rug
+geral/rug2
+geral/rug3
+   author: Lemog3d (OpenFrag texture pack)
+   license: GPLv2
+   source: http://sourceforge.net/projects/openfrag/files/Artwork/Slayer%20texture%20pack/
+
+geral/letto
+   author: Tiziana (TiZeta) <unbrucom1@unbruco.it> <tialo@tiscali.it>
+   license: CC-BY
+   source: http://www.unbruco.it/offcircle/index.html
+
+geral/meuble
+geral/tv42
+   license: Public Domain
+   source: http://e2-productions.com/repository/modules/PDdownloads/singlefile.php?cid=25&lid=199
+
+geral/chair
+geral/barrels
+geral/microwave
+geral/oven
+industrial/lorry
+tumbas/ts1
+tumbas/ts2
+tumbas/ts3
+tumbas/ts4
+tumbas/ts5
+tumbas/ts6
+   author: UFO-AI
+   license: GPLv2
+   source: http://ufoai.sf.net
+
+geral/dinner_chair
+geral/dinner_table
+geral/pillow
+geral/sofa
+geral/wardrobe
+   author: Scopia Visual Interfaces Systems, s.l. (http://www.scopia.es)
+   license: CC-BY
+   sources: http://resources.blogscopia.com
+
+geral/fridge
+   authors: Authors: Andrew Kator & Jennifer Legaz
+   license: CC-BY
+   sources: http://www.katorlegaz.com/3d_models/transport_sidewalks/0206/index.php
+   note: modifications by DNTeam
+
+tumbas/granite1.png
+tumbas/marble1.png
+   author: GIMP default materials
+   license: GPLv3
+
+tumbas/cementery_gate
+tumbas/tomb
+   author: zerberros
+   license: GPLv3
+   source: http://dnt.dnteam.org/FoRuM/viewtopic.php?f=4&t=143#p427
+   source: http://opengameart.org/content/cementery-gate
+   Note: Some modifications and adjusts by farrer, GPLv3 or later.
+
+tumbas/cementery_fence
+   author: farrer, based on zerberros cementery_gate
+   license: GPLv3
+

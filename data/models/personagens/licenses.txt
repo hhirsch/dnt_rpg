@@ -1,0 +1,45 @@
+
+Ameiva
+Arvore
+galo
+Jacaranda
+Logan
+metaleiro
+Ratazana
+   author: farrer (DNTeam)
+   license: GPLv3 or latter
+
+atleticano
+cruzeirense
+santa
+   authors: ecarvalh & farrer (DNTeam)
+   license: GPLv3 or latter
+
+galo2
+ganso
+hippie
+morcego
+rato
+velha
+velhaca
+   author: Estrada Real Digital (erd)
+   license: GPLv2
+   source: http://sourceforge.net/projects/erd/
+   note: modifications by DNTeam
+
+
+cow
+   authors: cow model originally provided by openfrag.org
+             modified by damien mcginnes
+   license: GPLv2
+
+deer
+spider
+   author: damien mcginnes <mcginnes at netspeed dot com . au>
+   license: GPLv2
+
+cow2
+   author: lyndon
+   license: Public Domain (CC0)
+   source: http://www.download.lyndondaniels.com/ranchers/
+

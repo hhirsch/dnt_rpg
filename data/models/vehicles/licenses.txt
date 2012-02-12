@@ -1,0 +1,23 @@
+
+
+car1
+golf
+   author: UFO-AI
+   license: GPLv2
+   source: http://ufoai.sf.net
+
+onibus
+   author: Estrada Real Digital
+   license: GPLv2
+   source: http://sourceforge.net/projects/erd/
+
+truck2
+   author: Saypen
+   license: GPLv3
+   source: http://opengameart.org/content/german-ww2-truck
+
+carreta
+   author: farrer (DNTeam)
+   license: GPLv3
+
+

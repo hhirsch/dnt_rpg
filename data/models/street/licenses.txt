@@ -1,0 +1,28 @@
+
+bench1
+bench2
+log_fence1
+log_fence2
+   authors: Scott Hsu-Storaker, Evan Tann, The Daggerfall Workshop
+   license: CC-BY
+   source: www.lowpolycoop
+
+hydrant
+lightpole
+streetlight1
+streetlight2
+streetlight3
+   authors: Scott Hsu-Storaker, Terrence M, Evan Tann, Yaniv Pe'er, Emily
+            Huffman, Clint Herron, Tom Perkins
+   license: CC-BY
+   source: http://www.lowpolycoop.com
+
+cond
+container
+fountain1
+fountain2
+mixer
+   author: UFO-AI
+   license: GPLv2
+   source: http://ufoai.sf.net
+

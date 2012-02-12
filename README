@@ -15,10 +15,25 @@ V   - Contacts
    DccNiTghtmare  source  code  is released under GPLv3 or any 
 latter version.  The  content created  by  the  DNTeam is also 
 released  under  GPLv3  or  latter.  Other  content  is either 
-licensed on GPLv2 or latter or CC-BY or CC-BY-SA licenses.
+licensed under GPLv2 or latter or CC-BY or CC-BY-SA licenses.
+
+   See the detailed license attribution files at:
+      ./data/models/building/licenses.txt
+      ./data/models/junk/licenses.txt
+      ./data/models/natural/licenses.txt
+      ./data/models/objetos/licenses.txt
+      ./data/models/personagens/licenses.txt
+      ./data/models/street/licenses.txt
+      ./data/models/vehicles/licenses.txt
+      ./data/models/warnings/licenses.txt
+      ./data/texturas/floor_indoor/licenses.txt
+      ./data/texturas/floor_outdoor/licenses.txt
+
+   Any  not  explicit attributed file is, by default, licensed 
+under GPLv3 or latter, and was created by DNTeam.
+
    See  the  DNT's GIT repository* to get source files for all 
-contents  on  the game and to see the license of each specific 
-model.
+contents  on  the game (.blend files).
 
 * git://dccnitghtmare.git.sourceforge.net/gitroot/dccnitghtmare/dccnitghtmare
 
