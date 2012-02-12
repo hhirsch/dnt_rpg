@@ -99,6 +99,8 @@ class sceneNode
                posY,    /**< Y position on scene */
                posZ;    /**< Z position on scene */
 
+       GLfloat dY;      /**< Delta to Y position to y1 be 0 */
+
        GLfloat angleX,  /**< rotation angle on X axis */
                angleY,  /**< rotation angle on Y axis */
                angleZ;  /**< rotation angle on Z axis */

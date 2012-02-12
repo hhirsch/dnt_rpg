@@ -43,6 +43,8 @@ sceneNode::sceneNode(aniModel* a, GLfloat x, GLfloat y, GLfloat z,
 sceneNode::sceneNode(string modelFileName, GLfloat x, GLfloat y, GLfloat z,
       GLfloat aX, GLfloat aY, GLfloat aZ)
 {
+   dY = 0;
+
    /* Animated must have its own model */
    animated = true;
    updateCrude = true;
@@ -54,6 +56,13 @@ sceneNode::sceneNode(string modelFileName, GLfloat x, GLfloat y, GLfloat z,
 
    /* Now, set its position/angle */
    set(x, y, z, aX, aY, aZ);
+
+   /* And define a translation, according to the object's minor y */
+   boundingBox bb = model->getCrudeBoundingBox();
+   if(bb.y1 < 0)
+   {
+      dY = -bb.y1;
+   }
 }
 
 /***********************************************************************
@@ -134,7 +143,7 @@ void sceneNode::updateBoundingBox()
    /* and rotate/translate bounding box */
    bbox = model->getCrudeBoundingBox();
    bbox.rotate(angleX, angleY, angleZ);
-   bbox.translate(posX, posY, posZ);
+   bbox.translate(posX, posY+dY, posZ);
 }
 
 /***********************************************************************
@@ -164,7 +173,7 @@ void sceneNode::render(GLfloat** viewMatrix, bool update, bool reflexion,
       /* Update animation */
       if(update)
       {
-         model->update(WALK_UPDATE, angleY, posX, posY, posZ);
+         model->update(WALK_UPDATE, angleY, posX, posY+dY, posZ);
       }
    }
 
@@ -179,12 +188,12 @@ void sceneNode::render(GLfloat** viewMatrix, bool update, bool reflexion,
       }
       if(!enableRotLast)
       {
-         model->renderFromGraphicMemory(posX, posY, posZ, 
+         model->renderFromGraphicMemory(posX, posY+dY, posZ, 
                angleX, angleY, angleZ, false);
       }
       else
       {
-         model->renderFromGraphicMemory(posX, posY, posZ, 
+         model->renderFromGraphicMemory(posX, posY+dY, posZ, 
                angleX, angleY, angleZ, rotLast[0], rotLast[1],
                rotLast[2], rotLast[3], false); 
       }
@@ -205,11 +214,11 @@ void sceneNode::render(GLfloat** viewMatrix, bool update, bool reflexion,
          }
          if(!enableRotLast)
          {
-            model->renderReflexion(posX, posY, posZ, angleX, angleY, angleZ);
+            model->renderReflexion(posX, posY+dY, posZ, angleX, angleY, angleZ);
          }
          else
          {
-            model->renderReflexion(posX, posY, posZ, angleX, angleY, angleZ,
+            model->renderReflexion(posX, posY+dY, posZ, angleX, angleY, angleZ,
                   rotLast[0], rotLast[1], rotLast[2], rotLast[3]);
          }
       }
@@ -217,7 +226,7 @@ void sceneNode::render(GLfloat** viewMatrix, bool update, bool reflexion,
 
    /* The shadow render */
    if( (shadow) && (shadowMatrix) && 
-       ( (posY > 0) || ( (posY == 0) && (bbox.y2 > 2) ) ) )
+       ( (posY+dY > 0) || ( (posY+dY == 0) && (bbox.y2 > 2) ) ) )
    {
       boundingBox shadBox = bbox;
       shadBox.multiplyShadow(shadowMatrix);
@@ -231,12 +240,12 @@ void sceneNode::render(GLfloat** viewMatrix, bool update, bool reflexion,
 
          if(!enableRotLast)
          {
-            model->renderShadow(posX, posY, posZ, angleX, angleY, angleZ, 
+            model->renderShadow(posX, posY+dY, posZ, angleX, angleY, angleZ, 
                   shadowMatrix, alpha);
          }
          else
          {
-            model->renderShadow(posX, posY, posZ, angleX, angleY, angleZ, 
+            model->renderShadow(posX, posY+dY, posZ, angleX, angleY, angleZ, 
                   shadowMatrix, alpha, rotLast[0], rotLast[1], 
                   rotLast[2], rotLast[3]);
          }
