@@ -1,0 +1,21 @@
+
+DNTeam - GPLv3 models:
+
+arvores/tree1
+arvores/tree2
+arvores/tree3
+arvores/tree4
+cogumelo
+fogueira
+matos
+ovo
+
+========================================================================
+
+UFO-AI (http://ufoai.sf.net) - GPLv2 models:
+
+arvores/bananeira
+bush
+
+========================================================================
+
