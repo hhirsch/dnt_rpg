@@ -1,0 +1,7 @@
+
+galinha_agitada.ogg
+galinha_tranquila.ogg
+   author: Estrada Real Digital
+   license: GPLv2
+   source: http://erd.cvs.sourceforge.net/viewvc/erd/EstradaReal/sons/sfx/
+
