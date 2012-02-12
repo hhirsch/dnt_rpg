@@ -247,23 +247,11 @@ firstArg = 1
 for i in args.input:
    if(firstArg):
       firstArg = 0
-      f.load(i)
+      f.loadFile(i)
    else:
       f2 = meshFile()
-      f2.load(i)
-      f.merge(f2)
+      f2.loadFile(i)
+      f.append(f2)
 
 f.write(args.output)
 
-#f1 = meshFile()
-#f1.loadFile("/projetos/dccnitghtmare/data/models/personagens/horse/Horse.xmf")
-
-#f2 = meshFile()
-#f2.loadFile("/projetos/dccnitghtmare/data/models/personagens/horse/HorseTail.xmf")
-
-#f3 = meshFile()
-#f3.loadFile("/projetos/dccnitghtmare/data/models/personagens/horse/HorseEars.xmf")
-
-#f1.append(f2)
-#f1.append(f3)
-#f1.write("HorseFull.xmf")
