@@ -6,6 +6,7 @@ Ganso(lvl2) = characters/npcs/lvl2/ganso_lvl2.npc
 Ratazana(lvl1) = characters/npcs/lvl1/ratazana_lvl1.npc
 Spider(1lvl) = characters/npcs/lvl1/spider_lvl1.npc
 Spider(3lvl) = characters/npcs/lvl3/spider_lvl3.npc
+Spider(10lvl) = characters/npcs/lvl10/spider_lvl10.npc
 
 # PCs
 Atleticano(1lvl) = characters/pcs/atleticano.pc
