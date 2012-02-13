@@ -29,14 +29,17 @@ velhaca
 
 
 cow
+horse
    authors: cow model originally provided by openfrag.org
              modified by damien mcginnes
    license: GPLv2
+   source: https://svn.worldforge.org:886/svn/media/trunk/3d_skeletons/
 
 deer
 spider
    author: damien mcginnes <mcginnes at netspeed dot com . au>
    license: GPLv2
+   source: https://svn.worldforge.org:886/svn/media/trunk/3d_skeletons/
 
 cow2
    author: lyndon
