@@ -1,5 +1,15 @@
 # NPCs
 Ameiva(lvl1) = characters/npcs/lvl1/ameiva_lvl1.npc
+Cow(lvl1) = characters/npcs/lvl1/cow_lvl1.npc
+Cow_A(lvl1) = characters/npcs/lvl1/cowa_lvl1.npc
+Cow_B(lvl1) = characters/npcs/lvl1/cowb_lvl1.npc
+Cow_C(lvl1) = characters/npcs/lvl1/cowc_lvl1.npc
+Cow(lvl2) = characters/npcs/lvl2/cow_lvl2.npc
+Cow_A(lvl2) = characters/npcs/lvl2/cowa_lvl2.npc
+Cow_B(lvl2) = characters/npcs/lvl2/cowb_lvl2.npc
+Cow_C(lvl2) = characters/npcs/lvl2/cowc_lvl2.npc
+Donkey(lvl1) = characters/npcs/lvl1/donkey_lvl1.npc
+Horse(lvl1) = characters/npcs/lvl1/horse_lvl1.npc
 Galo(lvl1) = characters/npcs/lvl1/galo_lvl1.npc
 Galo(lvl2) = characters/npcs/lvl2/galo_lvl2.npc
 Ganso(lvl2) = characters/npcs/lvl2/ganso_lvl2.npc
