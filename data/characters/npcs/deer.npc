@@ -1,8 +1,0 @@
-name = Cerdo
-model = models/personagens/deer/cal3d.cfg
-portrait = characters/portraits/ameiva.png
-maxLifePoints = 75
-baseModifier = 12/25/17
-attackModifier = 13/8/3/0/0/0
-sizeModifier = 3
-psychoState = 1

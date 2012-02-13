@@ -1,16 +1,18 @@
+# NPCs
 Ameiva(lvl1) = characters/npcs/lvl1/ameiva_lvl1.npc
-Ratazana(lvl1) = characters/npcs/lvl1/ratazana_lvl1.npc
 Galo(lvl1) = characters/npcs/lvl1/galo_lvl1.npc
 Galo(lvl2) = characters/npcs/lvl2/galo_lvl2.npc
 Ganso(lvl2) = characters/npcs/lvl2/ganso_lvl2.npc
-Ameiva(7lvl) = characters/npcs/ameiva.npc
+Ratazana(lvl1) = characters/npcs/lvl1/ratazana_lvl1.npc
+Spider(1lvl) = characters/npcs/lvl1/spider_lvl1.npc
+Spider(3lvl) = characters/npcs/lvl3/spider_lvl3.npc
+
+# PCs
 Atleticano(1lvl) = characters/pcs/atleticano.pc
 Cruzeirense(1lvl) = characters/pcs/cruzeirense.pc
-Ente(10lvl) = characters/npcs/ente.npc
-Logan(20lvl) = characters/pcs/logan.pc
-Metaleiro(1lvl) = characters/pcs/metaleiro.pc
-Ratazana(1lvl) = characters/npcs/ratazana.npc
-Santa(1lvl) = characters/pcs/santa.pc
 Dona_Velha(2lvl) = characters/pcs/dona.pc
 Hippie(2lvl) = characters/pcs/hippie.pc
-Velhaca(1lvl) = characters/pcs/velhaca.pc
+Logan(20lvl) = characters/pcs/logan.pc
+Metaleiro(1lvl) = characters/pcs/metaleiro.pc
+Santa(1lvl) = characters/pcs/santa.pc
+#Velhaca(1lvl) = characters/pcs/velhaca.pc

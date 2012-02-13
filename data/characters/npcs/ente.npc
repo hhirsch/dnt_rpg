@@ -1,9 +1,0 @@
-name = Ente
-model = models/personagens/Jacaranda/model.cfg
-portrait = characters/portraits/ente.png
-maxLifePoints = 187
-baseModifier = 18/3/18
-attackModifier = 12/7/2/0/0/0
-sizeModifier = -1
-conversationFile = dialogs/initial.dlg
-psychoState = 1

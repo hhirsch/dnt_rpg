@@ -1,9 +1,0 @@
-name = Aranha
-model = models/personagens/spider/model.cfg
-portrait = characters/portraits/ameiva.png
-maxLifePoints = 82
-baseModifier = 12/25/17
-attackModifier = 13/8/3/0/0/0
-sizeModifier = 3
-walk_interval = 32
-psychoState = 1

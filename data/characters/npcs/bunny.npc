@@ -1,8 +1,0 @@
-name = Coelho
-model = models/personagens/bunny/cal3d.cfg
-portrait = characters/portraits/ratazana.png
-maxLifePoints = 22
-baseModifier = 2/2/2
-attackModifier = 5/0/0/0/0/0
-sizeModifier = 2
-psychoState = 1
