@@ -3,10 +3,10 @@ size = 20X20
 name = gettext("mapName")
 npcFile = mapas/tutorial/estoril.map.npc
 outdoor = 1
-texture = texturas/floor_outdoor/burlwood.png texturas/floor_outdoor/burlwood.png
-texture = texturas/floor_outdoor/sand.png texturas/floor_outdoor/sand.png
-texture = texturas/floor_outdoor/ofslayer/017terresable.png texturas/floor_outdoor/ofslayer/017terresable.png
 texture = texturas/floor_outdoor/grass.png texturas/floor_outdoor/grass.png
+texture = texturas/floor_outdoor/ofslayer/017terresable.png texturas/floor_outdoor/ofslayer/017terresable.png
+texture = texturas/floor_outdoor/sand.png texturas/floor_outdoor/sand.png
+texture = texturas/floor_outdoor/burlwood.png texturas/floor_outdoor/burlwood.png
 #Z: 0
 square = 0,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_outdoor/grass.png

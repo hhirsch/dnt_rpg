@@ -13,6 +13,7 @@ Horse(lvl1) = characters/npcs/lvl1/horse_lvl1.npc
 Galo(lvl1) = characters/npcs/lvl1/galo_lvl1.npc
 Galo(lvl2) = characters/npcs/lvl2/galo_lvl2.npc
 Ganso(lvl2) = characters/npcs/lvl2/ganso_lvl2.npc
+Pig(lvl1) = characters/npcs/lvl1/pig_lvl1.npc
 Ratazana(lvl1) = characters/npcs/lvl1/ratazana_lvl1.npc
 Spider(1lvl) = characters/npcs/lvl1/spider_lvl1.npc
 Spider(3lvl) = characters/npcs/lvl3/spider_lvl3.npc

@@ -27,7 +27,6 @@ velhaca
    source: http://sourceforge.net/projects/erd/
    note: modifications by DNTeam
 
-
 cow
 horse
    authors: cow model originally provided by openfrag.org
@@ -38,6 +37,11 @@ horse
 deer
 spider
    author: damien mcginnes <mcginnes at netspeed dot com . au>
+   license: GPLv2
+   source: https://svn.worldforge.org:886/svn/media/trunk/3d_skeletons/
+
+pig
+   author:  Kai Blin	<blin(at)gmx.net> & damien mcginnes
    license: GPLv2
    source: https://svn.worldforge.org:886/svn/media/trunk/3d_skeletons/
 
