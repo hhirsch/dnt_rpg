@@ -196,6 +196,7 @@ class aniModel
       int textureCoordinateCount;          /**< Number of Texture Coordinates */
 
       boundingBox crudeBox;                /**< Crude bounding box */
+      GLfloat dY;      /**< Delta to Y position to y1 be 0 */
 
       /*! Load the a texture to the model.
        * \param strFilename -> \c string with the texture file name.
@@ -204,6 +205,9 @@ class aniModel
 
       /*! Render from the graphic memory at default position */
       void renderFromGraphicMemory();
+
+      /*! Calculate the model deltaY */
+      void calculateDeltaY();
 };
 
 #endif

@@ -40,6 +40,8 @@ aniModel::aniModel()
 {
    int i;
 
+   dY = 0.0f;
+
    m_calCoreModel = new CalCoreModel("");
    m_calModel = NULL;
    m_state = STATE_IDLE;
@@ -130,6 +132,53 @@ GLuint aniModel::loadTexture(const string& strFilename)
 /*********************************************************************
  *                        calculateBoundingBox                       *
  *********************************************************************/
+void aniModel::calculateDeltaY()
+{
+   int i;
+   float mY = 5000;
+
+   int meshCount = m_calCoreModel->getCoreMeshCount();;
+
+   /* Throught the ONLY ONE mesh of the model */
+   int meshId = 0;
+   if(meshId < meshCount)
+   {
+      CalCoreMesh* mesh = m_calCoreModel->getCoreMesh(meshId);
+      std::vector<CalCoreSubmesh*>subMeshes = mesh->getVectorCoreSubmesh();
+      int submeshCount;
+      submeshCount = subMeshes.size();
+
+      /* Load the ONLY ONE submesh of the mesh */
+      int submeshId = 0;
+      if(submeshId < submeshCount)
+      {
+         std::vector<CalCoreSubmesh::Vertex>vertex = 
+            subMeshes[0]->getVectorVertex();
+         int vertexCount;
+         vertexCount = vertex.size();
+
+         for(i=0; i < vertexCount; i++)
+         {
+            /* Verify minimum Y (at blender coordinate system, Z) */
+            if(vertex[i].position.z < mY)
+            {
+               mY = vertex[i].position.z;
+            }
+         }
+      }
+   }
+
+   /* Define the delta Y when model is bellow ground */
+   if(mY < 0)
+   {
+      /* Delta to sum to Y to be above ground! */
+      dY = -mY*m_renderScale;
+   }
+}
+
+/*********************************************************************
+ *                        calculateBoundingBox                       *
+ *********************************************************************/
 void aniModel::calculateCrudeBoundingBox()
 {
   m_calModel->getSkeleton()->calculateBoundingBoxes();
@@ -184,6 +233,9 @@ void aniModel::calculateCrudeBoundingBox()
      max[aux] *= m_renderScale;
   }
 
+  /* Apply the delta */
+  min[1] += dY;
+
    crudeBox.setMin(min);
    crudeBox.setMax(max);
 }
@@ -202,6 +254,8 @@ boundingBox aniModel::getCrudeBoundingBox()
 bool aniModel::loadModel(const string& strFilename)
 {
    dirs dir;
+
+   bool definedDeltaY = false;
 
    /* initialize the data path */
    string strPath = m_path;
@@ -277,6 +331,11 @@ bool aniModel::loadModel(const string& strFilename)
             return false;
          }
       }
+      else if(strKey == "deltaY")
+      {
+         sscanf(strData.c_str(), "%f", &dY);
+         definedDeltaY = true;
+      }
       else
       {
          cerr << strFilename << ": Unknow key '" << strKey
@@ -340,11 +399,16 @@ bool aniModel::loadModel(const string& strFilename)
    /* set the material set of the whole model */
    m_calModel->setMaterialSet(0);
 
+   /* Get the delta Y, if it'isnt already set */
+   if(!definedDeltaY)
+   {
+      calculateDeltaY();
+   }
+
    /* set initial animation state */
    curPos =  11 + (int)(30 * (rand() / (RAND_MAX + 1.0))); 
    m_state = -1;
    setState(STATE_IDLE);
-
    m_calModel->update(curPos);
 
    /* Define all key vertices */
@@ -473,7 +537,7 @@ void aniModel::renderFromGraphicMemory(float pX, float pY, float pZ,
       float angleX, float angleY, float angleZ, bool inverted)
 {
    glPushMatrix();
-      glTranslatef(pX, (!inverted)?(pY+crudeBox.y1):(-pY-crudeBox.y1), pZ);
+      glTranslatef(pX,(!inverted)?(pY+dY+crudeBox.y1):(-pY-dY-crudeBox.y1),pZ);
       glRotatef(angleZ, 0.0f, 0.0f, 1.0f);
       glRotatef(angleX, 1.0f, 0.0f, 0.0f);
       glRotatef(angleY, 0.0f, 1.0f, 0.0f);
@@ -493,7 +557,7 @@ void aniModel::renderFromGraphicMemory(float pX, float pY, float pZ,
       float angle, float aX, float aY, float aZ, bool inverted)
 {
    glPushMatrix();
-      glTranslatef(pX, pY, pZ);
+      glTranslatef(pX, (!inverted)?pY+dY:-pY-dY, pZ);
       glRotatef(angle, aX, aY, aZ);
       glRotatef(angleZ, 0.0f, 0.0f, 1.0f);
       glRotatef(angleX, 1.0f, 0.0f, 0.0f);
@@ -626,6 +690,8 @@ void aniModel::renderBoundingBox()
 void aniModel::render()
 {
   glPushMatrix();
+   /* Correct delta */
+   glTranslatef(0.0f, dY, 0.0f);
    /* Correct from blender to dnt coordinates */
    glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
    glRotatef(-90.0f, 1.0f, 0.0f, 0.0f);
@@ -792,7 +858,7 @@ void aniModel::renderShadow(float pX, float pY, float pZ, float angleX,
    glPushMatrix();
       glMultMatrixf(shadowMatrix);
       glPushMatrix();
-         glTranslatef(pX, pY, pZ);
+         glTranslatef(pX, pY+dY, pZ);
          glRotatef(angleZ,0.0f,0.0f,1.0f);
          glRotatef(angleX,1.0f,0.0f,0.0f);
          glRotatef(angleY,0.0f,1.0f,0.0f);
@@ -833,7 +899,7 @@ void aniModel::renderShadow(float pX, float pY, float pZ, float angleX,
    glPushMatrix();
       glMultMatrixf(shadowMatrix);
       glPushMatrix();
-         glTranslatef(pX, pY, pZ);
+         glTranslatef(pX, pY+dY, pZ);
          glRotatef(angle, aX, aY, aZ);
          glRotatef(angleZ,0.0f,0.0f,1.0f);
          glRotatef(angleX,1.0f,0.0f,0.0f);
@@ -948,9 +1014,9 @@ void aniModel::update(GLfloat pos, float angleY, float pX, float pY, float pZ)
 {
    curPos = pos;
    m_calModel->update(pos);
-   updateKeyVertex(leftHand, angleY, pX, pY, pZ);
-   updateKeyVertex(rightHand, angleY, pX, pY, pZ);
-   updateKeyVertex(head, angleY, pX, pY, pZ);
+   updateKeyVertex(leftHand, angleY, pX, pY+dY, pZ);
+   updateKeyVertex(rightHand, angleY, pX, pY+dY, pZ);
+   updateKeyVertex(head, angleY, pX, pY+dY, pZ);
 }
 
 /*********************************************************************
@@ -1010,7 +1076,7 @@ bool aniModel::getInfluencedVertex(int boneId, vertexInfo& inf)
                   inf.vertexId = v;
                   /* DNT coordinates: (-x, z, y) */
                   inf.iX = -vert[v].position.x;
-                  inf.iY = vert[v].position.z;
+                  inf.iY = vert[v].position.z+dY;
                   inf.iZ = vert[v].position.y;
                   return(true);
                }
@@ -1084,7 +1150,7 @@ void aniModel::updateKeyVertex(vertexInfo& v,
       v.x = pX + 
             ((-meshVertices[v.vertexId][0])*angleCos*m_renderScale) +
             ((meshVertices[v.vertexId][1])*angleSin*m_renderScale);
-      v.y = pY + meshVertices[v.vertexId][2]*m_renderScale;
+      v.y = pY + meshVertices[v.vertexId][2]*m_renderScale + dY;
       v.z = pZ + 
             ((meshVertices[v.vertexId][0]*angleSin*m_renderScale)) +
             ((meshVertices[v.vertexId][1]*angleCos*m_renderScale));
@@ -1114,6 +1180,9 @@ bool aniModel::depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ,
 
    GLushort* facesShort = NULL;
    GLuint* facesInt = NULL;
+
+   /* Apply delta */
+   pY += dY;
 
    /* get the renderer of the model */
    pCalRenderer = m_calModel->getRenderer();
