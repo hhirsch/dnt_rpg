@@ -187,6 +187,11 @@ class character: public thing, public dntListElement
       /*! Call the thing attack animation */
       void callIdleAnimation();
 
+      /*! Call a one cycle animation action */
+      void callActionAnimation(int id);
+      /*! Set animation state (repeated) */
+      void callAnimation(int id);
+
       /*! Delete the Existed Inventory and Create a new One. 
        *  Usually called after death*/
       void newInventory();

@@ -295,6 +295,11 @@
 /*! bool characterAtRange(character ref, character target) */
 #define IA_CHARACTER_AT_RANGE "characterAtRange"
 
+/*! void callAnimation(character c, int animationId) */
+#define IA_CHARACTER_CALL_ANIMATION "callAnimation"
+/*! void setAnimation(character c, int animationId) */
+#define IA_CHARACTER_SET_ANIMATION "setAnimation"
+
 ////////////////////////////////////////////////////
 //                   Map Functions                //
 ////////////////////////////////////////////////////

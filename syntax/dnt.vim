@@ -44,6 +44,7 @@ syn keyword dntFunction       combatEnter getNearestEnemy
 syn keyword dntFunction       getNPCByName isAlive
 syn keyword dntFunction       getPsycho setPsycho getActualLife getMaxLife
 syn keyword dntFunction       characterAtRange canAttack
+syn keyword dntFunction       callAnimation setAnimation
 syn keyword dntFunction       featUseAtCharacter runAwayFromBattle
 syn keyword dntFunction       inventoryHave
 syn keyword dntFunction       dialogSetInitial

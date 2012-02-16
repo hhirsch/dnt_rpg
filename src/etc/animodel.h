@@ -88,6 +88,10 @@ class aniModel
        * \return state ID of the current animation */
       int getState();
 
+      /*! Call Action Animation (just a cycle to blend)
+       * \param aniId -> animation ID */
+      void callActionAnimation(int aniId);
+
       /*! Load the model to video card memory
        * \param useTexture -> true to use the model texture, false otherwise
        *                      (if false, user must bind the desired texture by

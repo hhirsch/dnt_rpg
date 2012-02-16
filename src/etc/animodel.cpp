@@ -955,6 +955,23 @@ void aniModel::renderReflexion(float pX, float pY, float pZ, float angleX,
 }
 
 /*********************************************************************
+ *                        callActionAnimation                        *
+ *********************************************************************/
+void aniModel::callActionAnimation(int aniId)
+{
+   /* Verify if animation is defined */
+   if( (aniId > ANIMODEL_MAX_ANIMATIONS) || (aniId < 0) ||
+       (m_animationId[aniId] == -1) )
+   {
+      return;
+   }
+
+   m_calModel->getMixer()->executeAction(m_animationId[aniId],
+         0.3f,0.3f);
+   m_state = aniId;
+}
+
+/*********************************************************************
  *                               setState                            *
  *********************************************************************/
 void aniModel::setState(int state)

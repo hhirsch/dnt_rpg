@@ -2071,6 +2071,30 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       }
    }
 
+   /* Syntax void function(character c, int i) */
+   else if( (functionName == IA_CHARACTER_SET_ANIMATION) ||
+            (functionName == IA_CHARACTER_CALL_ANIMATION) )
+   {
+      int iAux = 0;
+      character* dude = NULL;
+      
+      /* Get character and integer */
+      dude = getParameterc(token, strLine, pos);
+      iAux = getParameteri(token, strLine, pos);
+
+      if(dude != NULL)
+      {
+         if(functionName == IA_CHARACTER_SET_ANIMATION)
+         {
+            dude->callAnimation(iAux);
+         }
+         else
+         {
+            dude->callActionAnimation(iAux);
+         }
+      }
+   }
+
    /* Syntax bool function(string s) */
    else if(functionName == IA_CHARACTER_IS_ALL_DEAD)
    {

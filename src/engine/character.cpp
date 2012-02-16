@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -676,6 +676,22 @@ void character::callAttackAnimation()
 void character::callIdleAnimation()
 {
    scNode->getModel()->setState(STATE_IDLE);
+}
+
+/*********************************************************************
+ *                         callActionAnimation                       *
+ *********************************************************************/
+void character::callActionAnimation(int id)
+{
+   scNode->getModel()->callActionAnimation(id);
+}
+
+/*********************************************************************
+ *                              seAnimation                          *
+ *********************************************************************/
+void character::callAnimation(int id)
+{
+   scNode->getModel()->setState(id);
 }
 
 /*********************************************************************
