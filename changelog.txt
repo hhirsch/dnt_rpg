@@ -6,12 +6,18 @@
         remain pressed until mouse is released, ignoring
 		  if inner the button area;
  - Setting delta to sceneNode minY when lesser than 0;
- - scripts: fixed a bug on jumping from "else if" statements when an "if" was
-            successfull;
+ - script: new functions: callAnimation, setAnimation, playSound;
+ - New script to controll cattle idle behaviour;
+
+ - New Models;
+ - New Sound Effects;
 
 BugFixes:
  - Fixed a possible double OpenAL stop when releasing an ogg_stream;
  - Fixed a undesired loop with a sound file lesser than the buffer;
+ - script: Fixed a bug on jumping from "else if" statements when an 
+           "if" was successfull;
+ 
 
 ================================================
 |                Version 0.8                   |

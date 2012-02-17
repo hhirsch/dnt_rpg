@@ -2428,6 +2428,28 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    }
 
    ////////////////////////////////////////////////////
+   //               Sound Functions                  //
+   ////////////////////////////////////////////////////
+
+   /* void function(string s, float x, float y, float z) */
+   else if(functionName == IA_PLAY_SOUND)
+   {
+      string s;
+      float pX=0.0f, pY=0.0f, pZ=0.0f;
+
+      s = getParameters(token, strLine, pos);
+      pX = getParameterf(token, strLine, pos);
+      pY = getParameterf(token, strLine, pos);
+      pZ = getParameterf(token, strLine, pos);
+
+      if(!s.empty())
+      {
+         sound snd;
+         snd.addSoundEffect(pX, pY, pZ, SOUND_NO_LOOP, s);
+      }
+   }
+
+   ////////////////////////////////////////////////////
    //                Quick Pointers                  //
    ////////////////////////////////////////////////////
 

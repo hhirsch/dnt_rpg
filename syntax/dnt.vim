@@ -60,6 +60,7 @@ syn keyword dntFunction       weaponEquiped getEquipedWeapon
 syn keyword dntFunction       weaponGetAmmoType weaponGetAmmo weaponDecAmmo
 syn keyword dntFunction       weaponGetRangeType weaponGetRange weaponGetDice
 syn keyword dntFunction       weaponSound weaponSoundAtCharacter
+syn keyword dntFunction       playSound
 
 syn sync lines=250
 

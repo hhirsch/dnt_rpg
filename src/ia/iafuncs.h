@@ -337,6 +337,13 @@
 /*! dice getBaredHandsDice(character c) */
 #define IA_GET_BARED_HANDS_DICE "getBaredHandsDice"
 
+////////////////////////////////////////////////////
+//               Sound Functions                  //
+////////////////////////////////////////////////////
+/*! void playSound(string soundFile, float pX, float pY, float pZ) */
+#define IA_PLAY_SOUND "playSound"
+
+
 /*! Convert the infix string to a postfix one
  * \param infix -> infix expression 
  * \return -> postfix expression */
