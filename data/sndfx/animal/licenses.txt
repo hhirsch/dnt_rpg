@@ -5,3 +5,8 @@ galinha_tranquila.ogg
    license: GPLv2
    source: http://erd.cvs.sourceforge.net/viewvc/erd/EstradaReal/sons/sfx/
 
+mudchuteanimals/*
+   author: Secretlondon <http://commons.wikimedia.org/wiki/User:Secretlondon>
+   license: CC-BY-SA 3.0 or later
+   source: http://opengameart.org/content/farm-animals
+
