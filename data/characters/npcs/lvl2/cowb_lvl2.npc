@@ -2,6 +2,7 @@ name = gettext("Cow")
 model = models/personagens/cow/cow3.cfg
 portrait = characters/portraits/ameiva.png
 battleScript = ia/script/fight/fight_animal.dsl
+generalScript = ia/script/general/cattle_idle.dsl
 bloodFileName = particles/blood2.par
 bloodPosition = 10
 fortitude = 14

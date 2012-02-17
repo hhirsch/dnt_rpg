@@ -13,8 +13,7 @@
 
 script()
 
-   float pX
-   float pZ
+   float pX,pZ
 
    string mooSound
    mooSound = "sndfx/animal/mudchuteanimals/Mudchute_cow_1.ogg"
