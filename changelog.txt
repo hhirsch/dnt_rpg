@@ -6,6 +6,8 @@
         remain pressed until mouse is released, ignoring
 		  if inner the button area;
  - Setting delta to sceneNode minY when lesser than 0;
+ - scripts: fixed a bug on jumping from "else if" statements when an "if" was
+            successfull;
 
 BugFixes:
  - Fixed a possible double OpenAL stop when releasing an ogg_stream;

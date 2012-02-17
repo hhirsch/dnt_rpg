@@ -42,8 +42,7 @@ script()
          #end
          # Stand for 5 seconds
          wait(5)
-      end
-      if(diceValue == 3)
+      else if(diceValue == 3)
          # Moo!
          print("Moo!")
          state = 5
@@ -52,8 +51,7 @@ script()
          # TODO: call moo sound!
          # Wait 2 seconds before take anoter action
          wait(2)
-      end
-      if( (diceValue > 4) && (diceValue <= 6) )
+      else if( (diceValue > 4) && (diceValue <= 6) )
          # Eat state (30%)
          print("Eat")
          state = 3
@@ -65,15 +63,13 @@ script()
          #end
          # Eat for 10 seconds
          wait(10)
-      end
-      if( (diceValue > 6) && (diceValue <= 9) )
+      else if( (diceValue > 6) && (diceValue <= 9) )
          # Sit state (30%)
          print("Sit!")
          state = 2
          setAnimation(SELF_CHARACTER, 6)
          wait(4)
-      end
-      if(diceValue == 10)
+      else if(diceValue == 10)
          # Walk (10%)
          print("Walk!!\n")
          state = 4

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -535,7 +535,15 @@ void iaScript::run(int maxLines)
                                  {
                                     /* It's an else to the current one, so
                                      * is the end of block! */
-                                    numBegins = 0;
+
+                                    /* Must check if it's an else if,
+                                     * case where the block still is opened */
+                                    if(nextToken(strBuffer, pos) != 
+                                          IA_SETENCE_IF)
+                                    {
+                                       /* No else if. Block ended */
+                                       numBegins = 0;
+                                    }
                                  }
                                  /* Otherwise, It's an else for another if, so
                                   * it's a block open. But it is also a block
@@ -555,7 +563,9 @@ void iaScript::run(int maxLines)
                      else
                      {
                         cerr << "Got else, without ifs, at line " << actualLine
-                             << " of script " << fileName << endl;
+                             << " of script " << fileName 
+                             << ". Last jmp command was: " << jmp->command 
+                             << endl;
                         if(jmp)
                         {
                            /* Push Back the jump  */
@@ -2226,9 +2236,9 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       if( (tgt != NULL) && (ref != NULL) )
       {
          /* syntax characterArRange(character ref, character tgt) */
-         bool atRange = actionInRange(ref->scNode->getPosX(), ref->scNode->getPosZ(),  
-                                      tgt->scNode->getPosX(), tgt->scNode->getPosZ(),
-                                      ref->getActiveFeatRange() * METER_TO_DNT);
+         bool atRange = actionInRange(ref->scNode->getPosX(),
+               ref->scNode->getPosZ(), tgt->scNode->getPosX(), 
+               tgt->scNode->getPosZ(), ref->getActiveFeatRange()*METER_TO_DNT);
          assignValue(var, (void*)&atRange, IA_TYPE_BOOL);
       }
       else
