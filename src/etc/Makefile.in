@@ -1,5 +1,5 @@
 #  DccNiTghtmare: a satirical post-apocalyptical RPG.
-#  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+#  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
 # 
 #  This file is part of DccNiTghtmare.
 # 
@@ -25,12 +25,16 @@ EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 
 ENDCLASSES=../classes/
 
-all: animodel.o btree.o boundingbox.o btreecell.o defparser.o distance.o\
-     scenenode.o scene.o dirs.o extensions.o \
-     list.o message3d.o npcfile.o overlaps.o shader.o \
+all: animodel.o btree.o boundingbox.o btreecell.o cal3dmodel.o \
+     defparser.o distance.o \
+     scenenode.o scene.o dirs.o extensions.o list.o \
+	  md5model.o md5anim.o \
+	  message3d.o npcfile.o \
+	  overlaps.o quaternion.o shader.o \
      texrenderer.o userinfo.o
 
-animodel.o: animodel.h animodel.cpp dirs.h overlaps.h
+animodel.o: animodel.h animodel.cpp dirs.h overlaps.h md5anim.h md5model.h \
+            cal3dmodel.h quaternion.h
 	@printf "Making $@...\n"
 	@$(CPP) $(CFLAGS) -c animodel.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
@@ -48,6 +52,11 @@ btreecell.o: btreecell.h btreecell.cpp
 boundingbox.o: boundingbox.h boundingbox.cpp
 	@printf "Making $@...\n"
 	@$(CPP) $(CFLAGS) -c boundingbox.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
+
+cal3dmodel.o: animodel.h cal3dmodel.cpp cal3dmodel.h dirs.h
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) -c cal3dmodel.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 defparser.o: defparser.h defparser.cpp
@@ -75,6 +84,16 @@ list.o: list.cpp list.h
 	@$(CPP) $(CFLAGS) -c list.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
+md5model.o: md5model.cpp md5model.h quaternion.h md5anim.h
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) -c md5model.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
+
+md5anim.o: md5anim.cpp md5anim.h quaternion.h
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) -c md5anim.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
+
 message3d.o: message3d.cpp message3d.h
 	@printf "Making $@...\n"
 	@$(CPP) $(CFLAGS) -c message3d.cpp -o $@
@@ -95,12 +114,19 @@ overlaps.o: overlaps.cpp overlaps.h
 	@$(CC) $(CFLAGS) overlaps.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
-scenenode.o: scenenode.h scenenode.cpp animodel.h
+quaternion.o: quaternion.h quaternion.cpp
+	@printf "Making $@...\n"
+	@$(CPP) $(CFLAGS) -c quaternion.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
+
+scenenode.o: scenenode.h scenenode.cpp animodel.h cal3dmodel.h \
+             quaternion.h md5model.h md5anim.h
 	@printf "Making $@...\n"
 	@$(CPP) $(CFLAGS) -c scenenode.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
-scene.o: scene.h scene.cpp scenenode.h animodel.h
+scene.o: scene.h scene.cpp scenenode.h animodel.h cal3dmodel.h \
+             quaternion.h md5model.h md5anim.h
 	@printf "Making $@...\n"
 	@$(CPP) $(CFLAGS) -c scene.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"

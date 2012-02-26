@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -23,6 +23,8 @@
 
 #include <SDL/SDL_opengl.h>
 #include "animodel.h"
+#include "cal3dmodel.h"
+#include "md5model.h"
 
 /*! The scene node is an aniModel with a render position on the scene.
  * It can or not own the aniModel (if not, it's only a render position of it) */

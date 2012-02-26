@@ -1,5 +1,5 @@
 #  DccNiTghtmare: a satirical post-apocalyptical RPG.
-#  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+#  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
 # 
 #  This file is part of DccNiTghtmare.
 # 
@@ -73,7 +73,9 @@ OBJSETC = $(ENDETC)animodel.o $(ENDETC)extensions.o $(ENDETC)message3d.o \
 			 $(ENDETC)userinfo.o $(ENDETC)dirs.o \
           $(ENDETC)overlaps.o $(ENDETC)defparser.o $(ENDETC)texrenderer.o \
           $(ENDETC)shader.o $(ENDETC)btreecell.o $(ENDETC)btree.o \
-          $(ENDETC)npcfile.o $(ENDETC)list.o $(ENDETC)boundingbox.o
+          $(ENDETC)npcfile.o $(ENDETC)list.o $(ENDETC)boundingbox.o \
+			 $(ENDETC)cal3dmodel.o $(ENDETC)md5model.o $(ENDETC)md5anim.o \
+			 $(ENDETC)quaternion.o
 OBJSENGINE = $(ENDENGINE)alignwindow.o $(ENDENGINE)aspectwindow.o \
              $(ENDENGINE)attwindow.o $(ENDENGINE)barterwindow.o \
 				 $(ENDENGINE)briefing.o $(ENDENGINE)camera.o \

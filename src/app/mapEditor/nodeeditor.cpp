@@ -451,6 +451,14 @@ void nodeEditor::openWindow()
  ***********************************************************************/
 void nodeEditor::drawTemporary()
 {
+   if(curNode)
+   {
+      glPushMatrix();
+         curNode->getBoundingBox().render();
+      glPopMatrix();
+   }
+
+#if 0
    boundingBox b;
    float delta=2;
    int med;
@@ -507,5 +515,6 @@ void nodeEditor::drawTemporary()
    glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
    glEnable(GL_FOG);
    glEnable(GL_LIGHTING);
+#endif
 }
 

@@ -663,6 +663,7 @@ void editor::draw()
    updateFrustum( visibleMatrix, proj, modl);
    gameSun->updateHourOfDay(hour, 0.0, 0.0);
    gameSun->setLight();
+   
    /* Draw Things */
    if(mapOpened)
    {

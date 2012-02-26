@@ -36,27 +36,16 @@ using namespace std;
 /**********************************************************************
  *                            Constructor                             *
  **********************************************************************/
-aniModel::aniModel()
+aniModel::aniModel(int modelType)
 {
-   int i;
-
+   fileName = "";
    dY = 0.0f;
-
-   m_calCoreModel = new CalCoreModel("");
-   m_calModel = NULL;
-   m_state = STATE_IDLE;
-   m_motionBlend[0] = 1.0f;
-   m_motionBlend[1] = 1.0f;
-   m_motionBlend[2] = 1.0f;
-   m_animationCount = 0;
-   m_meshCount = 0;
-   m_renderScale = 1.0f;
-   m_lodLevel = 1.0f;
-   modelFileName = "";
-   for(i=0;i<ANIMODEL_MAX_ANIMATIONS;i++)
-   {
-      m_animationId[i] = -1;
-   }
+   faceCount = 0;
+   faces = NULL;
+   renderScale = 1.0f;
+   curState = STATE_NONE;
+   type = modelType;
+   loadedTexture = false;
 }
 
 /**********************************************************************
@@ -64,14 +53,6 @@ aniModel::aniModel()
  **********************************************************************/
 aniModel::~aniModel()
 {
-   if(m_calCoreModel)
-   {
-      delete(m_calCoreModel);
-   }
-   if(m_calModel)
-   {
-      delete(m_calModel);
-   }
 }
 
 /*********************************************************************
@@ -79,10 +60,11 @@ aniModel::~aniModel()
  *********************************************************************/
 GLuint aniModel::loadTexture(const string& strFilename)
 {
+   dirs dir;
    GLuint pId = 0;
  
    /* Load texture image from file */
-   SDL_Surface* img = IMG_Load(strFilename.c_str());
+   SDL_Surface* img = IMG_Load(dir.getRealFile(strFilename).c_str());
    if(!img)
    {
       cout << "Can't Open Texture" << strFilename << endl; 
@@ -126,45 +108,27 @@ GLuint aniModel::loadTexture(const string& strFilename)
    /* Free memory */
    SDL_FreeSurface(img);
 
+   loadedTexture = true;
+
    return(pId);
 }
 
 /*********************************************************************
- *                        calculateBoundingBox                       *
+ *                          calculateDeltaY                          *
  *********************************************************************/
 void aniModel::calculateDeltaY()
 {
+   int vertsCount = 0;
+   vector3f_t* verts = getMeshVertices(0, vertsCount);
    int i;
    float mY = 5000;
 
-   int meshCount = m_calCoreModel->getCoreMeshCount();;
-
-   /* Throught the ONLY ONE mesh of the model */
-   int meshId = 0;
-   if(meshId < meshCount)
+   for(i=0; i < vertsCount; i++)
    {
-      CalCoreMesh* mesh = m_calCoreModel->getCoreMesh(meshId);
-      std::vector<CalCoreSubmesh*>subMeshes = mesh->getVectorCoreSubmesh();
-      int submeshCount;
-      submeshCount = subMeshes.size();
-
-      /* Load the ONLY ONE submesh of the mesh */
-      int submeshId = 0;
-      if(submeshId < submeshCount)
+      /* Verify minimum Y (2, as at blender coordinate system is Z) */
+      if(verts[i][2] < mY)
       {
-         std::vector<CalCoreSubmesh::Vertex>vertex = 
-            subMeshes[0]->getVectorVertex();
-         int vertexCount;
-         vertexCount = vertex.size();
-
-         for(i=0; i < vertexCount; i++)
-         {
-            /* Verify minimum Y (at blender coordinate system, Z) */
-            if(vertex[i].position.z < mY)
-            {
-               mY = vertex[i].position.z;
-            }
-         }
+         mY = verts[i][2];
       }
    }
 
@@ -172,72 +136,8 @@ void aniModel::calculateDeltaY()
    if(mY < 0)
    {
       /* Delta to sum to Y to be above ground! */
-      dY = -mY*m_renderScale;
+      dY = -mY*renderScale;
    }
-}
-
-/*********************************************************************
- *                        calculateBoundingBox                       *
- *********************************************************************/
-void aniModel::calculateCrudeBoundingBox()
-{
-  m_calModel->getSkeleton()->calculateBoundingBoxes();
-
-  GLuint aux, aux2;
-  int computed = 0;
-  CalVector p[8];
-  float min[3], max[3];
-
-  CalSkeleton *pCalSkeleton = m_calModel->getSkeleton();
-
-  std::vector<CalBone*> &vectorCoreBone = pCalSkeleton->getVectorBone();
-  for(aux = 0; aux < vectorCoreBone.size(); aux++)
-  {
-     CalBoundingBox &calBoundingBox=vectorCoreBone[aux]->getBoundingBox();
-     calBoundingBox.computePoints(p);
-     
-     for(aux2 = 0;aux2 < 8; aux2++)
-     {
-        /* NOTE: Do not forget that if the blender coordinate system is
-         * (x,y,z), the DNT system is (-x,z,y) */
-        if(!computed)
-        {
-           min[0] = -p[aux2].x; max[0] = -p[aux2].x; 
-           min[1] = p[aux2].z; max[1] = p[aux2].z;
-           min[2] = p[aux2].y; max[2] = p[aux2].y;
-
-           computed = 1;
-        }
-        else
-        {
-           if(-p[aux2].x > max[0])
-             max[0] = -p[aux2].x;
-           if(-p[aux2].x < min[0])
-             min[0] = -p[aux2].x;
-           if(p[aux2].z > max[1])
-             max[1] = p[aux2].z;
-           if(p[aux2].z < min[1])
-             min[1] = p[aux2].z;
-           if(p[aux2].y > max[2])
-             max[2] = p[aux2].y;
-           if(p[aux2].y < min[2])
-             min[2] = p[aux2].y;
-        }
-     }
-  }
-
-  /* Do the Scale to the bounding box */
-  for(aux = 0; aux < 3; aux++)
-  {
-     min[aux] *= m_renderScale;
-     max[aux] *= m_renderScale;
-  }
-
-  /* Apply the delta */
-  min[1] += dY;
-
-   crudeBox.setMin(min);
-   crudeBox.setMax(max);
 }
 
 /*********************************************************************
@@ -249,285 +149,58 @@ boundingBox aniModel::getCrudeBoundingBox()
 }
 
 /*********************************************************************
- *                              loadModel                            *
- *********************************************************************/
-bool aniModel::loadModel(const string& strFilename)
-{
-   dirs dir;
-
-   bool definedDeltaY = false;
-
-   /* initialize the data path */
-   string strPath = m_path;
-
-   /* initialize the animation count */
-   int animationCount;
-   animationCount = 0;
-
-   /* Get the definitions */
-   defParser parser;
-   if(!parser.load(strFilename))
-   {
-      return(false);
-   }
-
-   modelFileName = strFilename;
-
-   string strKey = "", strData = "";
-
-   /* Interpret each one */
-   while(parser.getNextTuple(strKey, strData))
-   {
-      /*  handle the model creation */
-      if(strKey == "scale")
-      {
-         /* set rendering scale factor */
-         m_renderScale = atof(strData.c_str());
-      }
-      else if(strKey == "path")
-      {
-         /* set the new path for the data files 
-          * if one hasn't been set already */
-         if (m_path == "") strPath = dir.getRealFile(strData);
-      }
-      else if(strKey == "skeleton")
-      {
-         /* load core skeleton */
-         if(!m_calCoreModel->loadCoreSkeleton(strPath + strData))
-         {
-            CalError::printLastError();
-            return false;
-         }
-      }
-      else if(strKey == "animation")
-      {
-         /* load core animation */
-         m_animationId[animationCount] = 
-            m_calCoreModel->loadCoreAnimation(strPath + strData);
-         if(m_animationId[animationCount] == -1)
-         {
-            CalError::printLastError();
-            return false;
-         }
-
-         animationCount++;
-      }
-      else if(strKey == "mesh")
-      {
-         /* load core mesh */
-         int meshID = m_calCoreModel->loadCoreMesh(strPath + strData);
-         if(meshID == -1)
-         {
-            CalError::printLastError();
-            return false;
-         }
-      }
-      else if(strKey == "material")
-      {
-         /* load core material */
-         if(m_calCoreModel->loadCoreMaterial(strPath + strData) == -1)
-         {
-            CalError::printLastError();
-            return false;
-         }
-      }
-      else if(strKey == "deltaY")
-      {
-         sscanf(strData.c_str(), "%f", &dY);
-         definedDeltaY = true;
-      }
-      else
-      {
-         cerr << strFilename << ": Unknow key '" << strKey
-            << "'" << endl;
-         return false;
-      }
-   }
-
-   /* load all textures and store the opengl texture id in the 
-    * corresponding map in the material */
-   int materialId;
-   for( materialId = 0; 
-         materialId < m_calCoreModel->getCoreMaterialCount(); 
-         materialId++)
-   {
-      /* get the core material */
-      CalCoreMaterial *pCoreMaterial;
-      pCoreMaterial = m_calCoreModel->getCoreMaterial(materialId);
-
-      /* loop through all maps of the core material */
-      int mapId;
-      for(mapId = 0; mapId < pCoreMaterial->getMapCount(); mapId++)
-      {
-         /* get the filename of the texture */
-         std::string strFilename;
-         strFilename = pCoreMaterial->getMapFilename(mapId);
-
-         /* load the texture from the file */
-         GLuint textureId;
-         textureId = loadTexture(strPath + strFilename);
-
-         /* store the opengl texture id in the user data of the map */
-         pCoreMaterial->setMapUserData(mapId, (Cal::UserData*)textureId);
-      }
-   }
-
-   /* make one material thread for each material
-    * mapping without further information on the model etc. */
-   for(materialId = 0; 
-         materialId < m_calCoreModel->getCoreMaterialCount(); materialId++)
-   {
-      /* create the a material thread */
-      m_calCoreModel->createCoreMaterialThread(materialId);
-
-      /* initialize the material thread */
-      m_calCoreModel->setCoreMaterialId(materialId, 0, materialId);
-   }
-
-   /* Calculate Bounding Boxes */
-   m_calCoreModel->getCoreSkeleton()->calculateBoundingBoxes(m_calCoreModel);
-
-   m_calModel = new CalModel(m_calCoreModel);
-
-   /* attach all meshes to the model */
-   int meshId;
-   for(meshId = 0; meshId < m_calCoreModel->getCoreMeshCount(); meshId++)
-   {
-      m_calModel->attachMesh(meshId);
-   }
-
-   /* set the material set of the whole model */
-   m_calModel->setMaterialSet(0);
-
-   /* Get the delta Y, if it'isnt already set */
-   if(!definedDeltaY)
-   {
-      calculateDeltaY();
-   }
-
-   /* set initial animation state */
-   curPos =  11 + (int)(30 * (rand() / (RAND_MAX + 1.0))); 
-   m_state = -1;
-   setState(STATE_IDLE);
-   m_calModel->update(curPos);
-
-   /* Define all key vertices */
-   defineKeyVertex();
-
-   /* End of CAL3D LOAD */
-   return(true);
-}
-
-/*********************************************************************
  *                        loadToGraphicMemory                        *
  *********************************************************************/
 void aniModel::loadToGraphicMemory(bool useTexture)
 {
-  m_calModel->getSkeleton()->calculateBoundingBoxes();
-  // get the renderer of the model
-  pCalRenderer = m_calModel->getRenderer();
+   int count=0;
+   vector3f_t* vertices=NULL;
+   vector3f_t* normals=NULL;
+   vector2f_t* uvs=NULL;
 
-  if(!pCalRenderer->beginRendering()) return;
+   aniModelMaterial* mat;
 
-  // set the global OpenGL states
-  glShadeModel(GL_SMOOTH);
-  glDisable(GL_COLOR_MATERIAL);
+   /* Get all arrays
+    * FIXME: using only the first mesh! */
+   vertices = getMeshVertices(0, count);
+   normals = getMeshNormals(0, count);
+   uvs = getMeshTexCoords(0, count);
+   faces = getMeshFaces(0, faceCount);
+   
+   /* Keep previous enable, before do the needed here */
+   glPushAttrib(GL_ENABLE_BIT);
 
-  // we will use vertex arrays, so enable them
-  glEnableClientState(GL_VERTEX_ARRAY);
-  glEnableClientState(GL_NORMAL_ARRAY);
+   /* set the global OpenGL states */
+   glShadeModel(GL_SMOOTH);
+   glDisable(GL_COLOR_MATERIAL);
 
-  // get the number of meshes
-  int meshCount;
-  meshCount = pCalRenderer->getMeshCount();
+   /* we will use vertex arrays, so enable them */
+   glEnableClientState(GL_VERTEX_ARRAY);
+   glEnableClientState(GL_NORMAL_ARRAY);
 
-  /* Load the ONLY ONE mesh of the model */
-  int meshId = 0;
-  if(meshId < meshCount)
-  {
-    // get the number of submeshes
-    int submeshCount;
-    submeshCount = pCalRenderer->getSubmeshCount(meshId);
+   /* Set Material */
+   mat = getMeshMaterial(0);
+   glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, &mat->ambient[0]);
+   glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, &mat->diffuse[0]);
+   glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, &mat->specular[0]);
+   glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, &mat->shininess);
 
-    // Load the ONLY ONE submesh of the mesh
-    int submeshId = 0;
-    if(submeshId < submeshCount)
-    {
-      // select mesh and submesh for further data access
-      if(pCalRenderer->selectMeshSubmesh(meshId, submeshId))
-      {
-        unsigned char meshColor[4];
-        GLfloat materialColor[4];
+   /* set the vertex and normal buffers */
+   glVertexPointer(3, GL_FLOAT, 0, &vertices[0][0]);
+   glNormalPointer(GL_FLOAT, 0, &normals[0][0]);
 
-        // set the material ambient color
-        pCalRenderer->getAmbientColor(&meshColor[0]);
-        materialColor[0] = meshColor[0] / 255.0f;  
-        materialColor[1] = meshColor[1] / 255.0f; 
-        materialColor[2] = meshColor[2] / 255.0f; 
-        materialColor[3] = meshColor[3] / 255.0f;
-        glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, materialColor);
+   /* Set texture, when necessary */
+   if( (useTexture) && (loadedTexture) )
+   {
+      glEnable(GL_TEXTURE_2D);
+      glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-        // set the material diffuse color
-        pCalRenderer->getDiffuseColor(&meshColor[0]);
-        materialColor[0] = meshColor[0] / 255.0f;  
-        materialColor[1] = meshColor[1] / 255.0f; 
-        materialColor[2] = meshColor[2] / 255.0f; 
-        materialColor[3] = meshColor[3] / 255.0f;
-        glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, materialColor);
+      /* set the texture id we stored in the map user data */
+      glBindTexture(GL_TEXTURE_2D, mat->textureId);
 
-        // set the material specular color
-        pCalRenderer->getSpecularColor(&meshColor[0]);
-        materialColor[0] = meshColor[0] / 255.0f;  
-        materialColor[1] = meshColor[1] / 255.0f; 
-        materialColor[2] = meshColor[2] / 255.0f; 
-        materialColor[3] = meshColor[3] / 255.0f;
-        glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, materialColor);
-
-        // set the material shininess factor
-        float shininess;
-        shininess = 50.0f;// pCalRenderer->getShininess();
-        glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, &shininess);
-
-        // get the transformed vertices of the submesh
-        
-        int vertexCount;
-        vertexCount = pCalRenderer->getVertices(&meshVertices[0][0]);
-
-        // get the transformed normals of the submesh
-        pCalRenderer->getNormals(&meshNormals[0][0]);
-
-        // get the texture coordinates of the submesh
-        textureCoordinateCount = pCalRenderer->getTextureCoordinates(0,
-                                         &meshTextureCoordinates[0][0]);
-
-        // get the faces of the submesh
-        faceCount = pCalRenderer->getFaces(&meshFaces[0][0]);
-
-        // set the vertex and normal buffers
-        glVertexPointer(3, GL_FLOAT, 0, &meshVertices[0][0]);
-        glNormalPointer(GL_FLOAT, 0, &meshNormals[0][0]);
-
-        // set the texture coordinate buffer and state if necessary
-        if( (pCalRenderer->getMapCount() > 0) && 
-            (textureCoordinateCount > 0))
-        {
-          glEnable(GL_TEXTURE_2D);
-          glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-          glEnable(GL_COLOR_MATERIAL);
-
-          if(useTexture)
-          {
-             // set the texture id we stored in the map user data
-             glBindTexture(GL_TEXTURE_2D, 
-                           (unsigned long)pCalRenderer->getMapUserData(0));
-          }
-
-          // set the texture coordinate buffer
-          glTexCoordPointer(2, GL_FLOAT, 0, &meshTextureCoordinates[0][0]);
-        }
-      }
-    }
-  }
+      /* set the texture coordinate buffer */
+      glTexCoordPointer(2, GL_FLOAT, 0, &uvs[0][0]);
+   }
 }
 
 /*********************************************************************
@@ -537,7 +210,7 @@ void aniModel::renderFromGraphicMemory(float pX, float pY, float pZ,
       float angleX, float angleY, float angleZ, bool inverted)
 {
    glPushMatrix();
-      glTranslatef(pX,(!inverted)?(pY+dY+crudeBox.y1):(-pY-dY-crudeBox.y1),pZ);
+      glTranslatef(pX,(!inverted)?(pY+dY):(-pY-dY),pZ);
       glRotatef(angleZ, 0.0f, 0.0f, 1.0f);
       glRotatef(angleX, 1.0f, 0.0f, 0.0f);
       glRotatef(angleY, 0.0f, 1.0f, 0.0f);
@@ -575,32 +248,21 @@ void aniModel::renderFromGraphicMemory(float pX, float pY, float pZ,
  *********************************************************************/
 void aniModel::renderFromGraphicMemory()
 {
-  glPushMatrix();
+   glPushMatrix();
    /* Correct from blender to dnt coordinates */
    glRotatef(180,0,1,0);
    glRotatef(-90,1,0,0);
    /* Scale, if needed */
-   if(m_renderScale != 1.0)
+   if(renderScale != 1.0)
    {
-      glScalef(m_renderScale,m_renderScale,m_renderScale);
+      glScalef(renderScale, renderScale, renderScale);
    }
 
-   // draw the loaded thing
-   if(sizeof(CalIndex)==2)
-   {
-      glDrawElements(GL_TRIANGLES, faceCount * 3, 
-                     GL_UNSIGNED_SHORT, &meshFaces[0][0]);
-   }
-   else
-   {
-	   glDrawElements(GL_TRIANGLES, faceCount * 3, 
-                     GL_UNSIGNED_INT, &meshFaces[0][0]);
-   }
+   glDrawElements(GL_TRIANGLES, faceCount * 3, GL_UNSIGNED_INT, &faces[0][0]);
 
-  glPopMatrix();
+   glPopMatrix();
 
-  glColor3f(1.0f, 1.0f, 1.0f);
-
+   glColor3f(1.0f, 1.0f, 1.0f);
 }
 
 /*********************************************************************
@@ -608,230 +270,14 @@ void aniModel::renderFromGraphicMemory()
  *********************************************************************/
 void aniModel::removeFromGraphicMemory()
 {
-   if( (pCalRenderer->getMapCount() > 0) &&
-       (textureCoordinateCount > 0) )
-   {
-      glDisable(GL_COLOR_MATERIAL);
-      glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-      glDisable(GL_TEXTURE_2D);
-  }
-  // clear vertex array state
-  glDisableClientState(GL_NORMAL_ARRAY);
-  glDisableClientState(GL_VERTEX_ARRAY);
+   glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+   glDisable(GL_TEXTURE_2D);
+  
+   glDisableClientState(GL_NORMAL_ARRAY);
+   glDisableClientState(GL_VERTEX_ARRAY);
 
-  pCalRenderer->endRendering();
-}
-
-/*********************************************************************
- *                       renderBoundingBox                           *
- *********************************************************************/
-void aniModel::renderBoundingBox()
-{  
-   CalSkeleton *pCalSkeleton = m_calModel->getSkeleton();
-
-   std::vector<CalBone*> &vectorCoreBone = pCalSkeleton->getVectorBone();
-
-   glColor4f(1.0f, 1.0f, 0.5f, 0.5f);
-   glBegin(GL_LINES);      
-
-   for(size_t boneId=0;boneId<vectorCoreBone.size();++boneId)
-   {
-      CalBoundingBox &calBoundingBox = vectorCoreBone[boneId]->getBoundingBox();
-
-      CalVector p[8];
-      calBoundingBox.computePoints(p);
-
-
-      glVertex3f(p[0].x,p[0].y,p[0].z);
-      glVertex3f(p[1].x,p[1].y,p[1].z);
-
-      glVertex3f(p[0].x,p[0].y,p[0].z);
-      glVertex3f(p[2].x,p[2].y,p[2].z);
-
-      glVertex3f(p[1].x,p[1].y,p[1].z);
-      glVertex3f(p[3].x,p[3].y,p[3].z);
-
-      glVertex3f(p[2].x,p[2].y,p[2].z);
-      glVertex3f(p[3].x,p[3].y,p[3].z);
-
-      glVertex3f(p[4].x,p[4].y,p[4].z);
-      glVertex3f(p[5].x,p[5].y,p[5].z);
-
-      glVertex3f(p[4].x,p[4].y,p[4].z);
-      glVertex3f(p[6].x,p[6].y,p[6].z);
-
-      glVertex3f(p[5].x,p[5].y,p[5].z);
-      glVertex3f(p[7].x,p[7].y,p[7].z);
-
-      glVertex3f(p[6].x,p[6].y,p[6].z);
-      glVertex3f(p[7].x,p[7].y,p[7].z);
-
-      glVertex3f(p[0].x,p[0].y,p[0].z);
-      glVertex3f(p[4].x,p[4].y,p[4].z);
-
-      glVertex3f(p[1].x,p[1].y,p[1].z);
-      glVertex3f(p[5].x,p[5].y,p[5].z);
-
-      glVertex3f(p[2].x,p[2].y,p[2].z);
-      glVertex3f(p[6].x,p[6].y,p[6].z);
-
-      glVertex3f(p[3].x,p[3].y,p[3].z);
-      glVertex3f(p[7].x,p[7].y,p[7].z);  
-
-   }
-
-   glEnd();
-
-}
-
-/*********************************************************************
- *                                Render                             *
- *********************************************************************/
-void aniModel::render()
-{
-  glPushMatrix();
-   /* Correct delta */
-   glTranslatef(0.0f, dY, 0.0f);
-   /* Correct from blender to dnt coordinates */
-   glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
-   glRotatef(-90.0f, 1.0f, 0.0f, 0.0f);
-   /* Scale, if needed */
-   if(m_renderScale != 1.0f)
-   {
-      glScalef(m_renderScale,m_renderScale,m_renderScale);
-   }
-
-  m_calModel->getSkeleton()->calculateBoundingBoxes();
-  // get the renderer of the model
-  CalRenderer *pCalRenderer;
-  pCalRenderer = m_calModel->getRenderer();
-
-  if(!pCalRenderer->beginRendering()) return;
-
-  // set the global OpenGL states
-  glShadeModel(GL_SMOOTH);
-  glDisable(GL_COLOR_MATERIAL);
-
-  // we will use vertex arrays, so enable them
-  glEnableClientState(GL_VERTEX_ARRAY);
-  glEnableClientState(GL_NORMAL_ARRAY);
-
-  // get the number of meshes
-  int meshCount;
-  meshCount = pCalRenderer->getMeshCount();
-
-  // render all meshes of the model
-  int meshId;
-  for(meshId = 0; meshId < meshCount; meshId++)
-  {
-    // get the number of submeshes
-    int submeshCount;
-    submeshCount = pCalRenderer->getSubmeshCount(meshId);
-
-    // render all submeshes of the mesh
-    int submeshId;
-    for(submeshId = 0; submeshId < submeshCount; submeshId++)
-    {
-      // select mesh and submesh for further data access
-      if(pCalRenderer->selectMeshSubmesh(meshId, submeshId))
-      {
-        unsigned char meshColor[4];
-        GLfloat materialColor[4];
-
-        // set the material ambient color
-        pCalRenderer->getAmbientColor(&meshColor[0]);
-        materialColor[0] = meshColor[0] / 255.0f;  
-        materialColor[1] = meshColor[1] / 255.0f; 
-        materialColor[2] = meshColor[2] / 255.0f; 
-        materialColor[3] = meshColor[3] / 255.0f;
-        glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, materialColor);
-
-        // set the material diffuse color
-        pCalRenderer->getDiffuseColor(&meshColor[0]);
-        materialColor[0] = meshColor[0] / 255.0f;  
-        materialColor[1] = meshColor[1] / 255.0f; 
-        materialColor[2] = meshColor[2] / 255.0f; 
-        materialColor[3] = meshColor[3] / 255.0f;
-        glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, materialColor);
-
-        // set the material specular color
-        pCalRenderer->getSpecularColor(&meshColor[0]);
-        materialColor[0] = meshColor[0] / 255.0f;  
-        materialColor[1] = meshColor[1] / 255.0f; 
-        materialColor[2] = meshColor[2] / 255.0f; 
-        materialColor[3] = meshColor[3] / 255.0f;
-        glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, materialColor);
-
-        // set the material shininess factor
-        float shininess;
-        shininess = 50.0f;// pCalRenderer->getShininess();
-        glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, &shininess);
-
-        // get the transformed vertices of the submesh
-        int vertexCount;
-        vertexCount = pCalRenderer->getVertices(&meshVertices[0][0]);
-
-        // get the transformed normals of the submesh
-        pCalRenderer->getNormals(&meshNormals[0][0]);
-
-        // get the texture coordinates of the submesh
-        textureCoordinateCount = pCalRenderer->getTextureCoordinates(0,
-                                         &meshTextureCoordinates[0][0]);
-
-        // get the faces of the submesh
-        faceCount = pCalRenderer->getFaces(&meshFaces[0][0]);
-
-        // set the vertex and normal buffers
-        glVertexPointer(3, GL_FLOAT, 0, &meshVertices[0][0]);
-        glNormalPointer(GL_FLOAT, 0, &meshNormals[0][0]);
-
-        // set the texture coordinate buffer and state if necessary
-        if((pCalRenderer->getMapCount() > 0) && (textureCoordinateCount > 0))
-        {
-          glEnable(GL_TEXTURE_2D);
-          glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-          glEnable(GL_COLOR_MATERIAL);
-
-          // set the texture id we stored in the map user data
-          glBindTexture(GL_TEXTURE_2D, 
-                        (unsigned long)pCalRenderer->getMapUserData(0));
-
-          // set the texture coordinate buffer
-          glTexCoordPointer(2, GL_FLOAT, 0, &meshTextureCoordinates[0][0]);
-          glColor3f(1.0f, 1.0f, 1.0f);
-        }
-
-        // draw the submesh
-        
-        if(sizeof(CalIndex)==2)
-			  glDrawElements(GL_TRIANGLES, faceCount * 3, 
-                                   GL_UNSIGNED_SHORT, &meshFaces[0][0]);
-		  else
-			  glDrawElements(GL_TRIANGLES, faceCount * 3, 
-                                     GL_UNSIGNED_INT, &meshFaces[0][0]);
-
-        // disable the texture coordinate state if necessary
-        if( (pCalRenderer->getMapCount() > 0) 
-            && (textureCoordinateCount > 0) )
-        {
-          glDisable(GL_COLOR_MATERIAL);
-          glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-          glDisable(GL_TEXTURE_2D);
-        }
-      }
-    }
-  }
-
-  // clear vertex array state
-  glDisableClientState(GL_NORMAL_ARRAY);
-  glDisableClientState(GL_VERTEX_ARRAY);
-
-  pCalRenderer->endRendering();
-
-  glPopMatrix();
-
-  glColor3f(1.0f, 1.0f, 1.0f);
-
+   /* Back to previous enable bits */
+   glPopAttrib();
 }
 
 /*********************************************************************
@@ -955,64 +401,21 @@ void aniModel::renderReflexion(float pX, float pY, float pZ, float angleX,
 }
 
 /*********************************************************************
- *                        callActionAnimation                        *
- *********************************************************************/
-void aniModel::callActionAnimation(int aniId)
-{
-   /* Verify if animation is defined */
-   if( (aniId > ANIMODEL_MAX_ANIMATIONS) || (aniId < 0) ||
-       (m_animationId[aniId] == -1) )
-   {
-      return;
-   }
-
-   m_calModel->getMixer()->executeAction(m_animationId[aniId],
-         0.3f,0.3f);
-   m_state = aniId;
-}
-
-/*********************************************************************
  *                               setState                            *
  *********************************************************************/
 void aniModel::setState(int state)
 {
    /* Verify if animation is defined */
-   if( (state > ANIMODEL_MAX_ANIMATIONS) || (state < 0) ||
-       (m_animationId[state] == -1) )
+   if( (state > ANIMODEL_MAX_ANIMATIONS) || (state < 0) )
    {
       return;
    }
 
    /* Only change animation if not actually on it */
-   if(state != m_state)
+   if(state != curState)
    {
-       if(state == STATE_DIE)
-       {
-          m_calModel->getMixer()->clearCycle(m_animationId[m_state],0.1f);
-          
-          if(m_state == STATE_ATTACK_MEELE)
-          {
-             /* The idle is merged with the attack, so clear it too */
-             m_calModel->getMixer()->clearCycle(m_animationId[STATE_IDLE],0.1f);
-          }
-
-          m_calModel->getMixer()->executeAction(m_animationId[state],
-                                                0.3f,0.3f);
-          m_calModel->getMixer()->blendCycle(m_animationId[STATE_DEAD],
-                                            0.1f,0.1f);
-       }
-       else if(state == STATE_ATTACK_MEELE)
-       {         
-          m_calModel->getMixer()->executeAction(m_animationId[state],
-                                                0.3f,0.3f);
-       }
-       else
-       {
-          m_calModel->getMixer()->clearCycle(m_animationId[m_state],0.1f);
-          m_calModel->getMixer()->blendCycle(m_animationId[state],
-                                             1.0f,0.1f);
-       }
-       m_state = state;
+      curState = state;
+      setAnimation(curState);
    }
 }
 
@@ -1021,164 +424,73 @@ void aniModel::setState(int state)
  *********************************************************************/
 int aniModel::getState()
 {
-   return(m_state);
+   return(curState);
 }
 
 /*********************************************************************
  *                                update                             *
  *********************************************************************/
-void aniModel::update(GLfloat pos, float angleY, float pX, float pY, float pZ)
+void aniModel::update(GLfloat delta, float angleY, float pX, float pY, float pZ)
 {
-   curPos = pos;
-   m_calModel->update(pos);
+   //curPos = delta;
+   update(delta);
    updateKeyVertex(leftHand, angleY, pX, pY+dY, pZ);
    updateKeyVertex(rightHand, angleY, pX, pY+dY, pZ);
    updateKeyVertex(head, angleY, pX, pY+dY, pZ);
 }
 
 /*********************************************************************
- *                            getCurrentPos                          *
+ *                                Render                             *
  *********************************************************************/
-GLfloat aniModel::getCurrentPos()
+void aniModel::render()
 {
-   return(curPos); 
+   loadToGraphicMemory();
+   renderFromGraphicMemory();
+   removeFromGraphicMemory();
 }
 
 /*********************************************************************
- *                             getBoneId                             *
+ *                             renderNormals                         *
  *********************************************************************/
-int aniModel::getBoneId(string bName)
+void aniModel::renderNormals()
 {
-   Uint16 i;
-   CalSkeleton *pCalSkeleton = m_calModel->getSkeleton();
-   std::vector<CalBone *>& vectorBone = pCalSkeleton->getVectorBone();
-   CalCoreBone* coreBone;
+   int i;
+   int total=0;
+   vector3f_t* normals = getMeshNormals(0, total);
+   vector3f_t* verts = getMeshVertices(0, total);
 
-   for(i=0; i < vectorBone.size(); i++)
-   {
-      coreBone = vectorBone[i]->getCoreBone();
-      if( (coreBone) && (coreBone->getName() == bName))
-      {
-         return(i);
-      }
-   }
-   return(-1);
-}
-
-/*********************************************************************
- *                         getInfluencedVertex                       *
- *********************************************************************/
-bool aniModel::getInfluencedVertex(int boneId, vertexInfo& inf)
-{
-   Uint16 i, j, v, c;
-   CalCoreMesh* mesh;
-   CalCoreSubmesh* subMesh;
-   std::vector<CalCoreSubmesh::Vertex> vert;
-
-   for(i=0; i < m_calCoreModel->getCoreMeshCount(); i++)
-   {
-      mesh = m_calCoreModel->getCoreMesh(i);
-      for(j=0; j < mesh->getCoreSubmeshCount(); j++)
-      {
-         subMesh = mesh->getCoreSubmesh(j);
-         vert = subMesh->getVectorVertex();
-         for(v=0; v < subMesh->getVertexCount(); v++)
-         {
-            for(c=0; c < vert[v].vectorInfluence.size(); c++)
-            {
-               if(vert[v].vectorInfluence[c].boneId == boneId)
-               { 
-                  inf.meshId = i;
-                  inf.subMeshId = j;
-                  inf.vertexId = v;
-                  /* DNT coordinates: (-x, z, y) */
-                  inf.iX = -vert[v].position.x;
-                  inf.iY = vert[v].position.z+dY;
-                  inf.iZ = vert[v].position.y;
-                  return(true);
-               }
-            }
-         }
-      }
-   }
-   return(false);
-}
-
-/*********************************************************************
- *                          defineKeyVertex                          *
- *********************************************************************/
-void aniModel::defineKeyVertex()
-{
-   int boneId = -1;
-
-   /* Get left hand */
-   boneId = getBoneId("hand_left");
-   if((boneId == -1) || (!getInfluencedVertex(boneId, leftHand)))
-   {
-      leftHand.vertexId = -1;
-   }
-
-   /* Get right hand */
-   boneId = getBoneId("hand_right");
-   if((boneId == -1) || (!getInfluencedVertex(boneId, rightHand)))
-   {
-      rightHand.vertexId = -1;
-   }
-
-   /* Get head */
-   boneId = getBoneId("head");
-   if((boneId == -1) || (!getInfluencedVertex(boneId, head)))
-   {
-      head.vertexId = -1;
-   }
-}
-
-/*********************************************************************
- *                          updateKeyVertex                          *
- *********************************************************************/
-void aniModel::updateKeyVertex(vertexInfo& v, 
-      float angleY, float pX, float pY, float pZ)
-{
-   /* Calculate the sin and cos of the angle */
-   float angleSin = sinf(deg2Rad(angleY));
-   float angleCos = cosf(deg2Rad(angleY));
+   glPushAttrib(GL_ENABLE_BIT);
    
-   /* Get the model renderer */ 
-   pCalRenderer = m_calModel->getRenderer();
+   glDisable(GL_LIGHTING);
+   glDisable(GL_FOG);
+   glColor3f( 1.0f, 1.0f, 0.0f );
 
-   if(v.vertexId != -1)
+   glPushMatrix();
+   
+   /* Correct from blender to dnt coordinates */
+   glRotatef(180,0,1,0);
+   glRotatef(-90,1,0,0);
+
+   glBegin( GL_LINES );
+   for(i=0; i < total; i++)
    {
-      /* Define the mesh/submesh and get its vertices */
-      pCalRenderer->selectMeshSubmesh(v.meshId, v.subMeshId);
-      pCalRenderer->getVertices(&meshVertices[0][0]);
-
-      /* Calculate angles TODO */
-      v.angleXY = (atanf( (meshVertices[v.vertexId][2] - v.iY) /
-                                 (-meshVertices[v.vertexId][0] - v.iX) ));
-      v.angleYZ = (atanf( (meshVertices[v.vertexId][2] - v.iY) /
-                                 (meshVertices[v.vertexId][1] - v.iZ) ));
-
-      v.angleXY = rad2Deg(v.angleXY);
-      v.angleYZ = rad2Deg(v.angleYZ);
-
-      /* Translate and rotate the coordinates.
-       * NOTE: Do not forget that if the blender coordinate system is
-       * (x,y,z), the DNT system is (-x,z,y) */
-      v.x = pX + 
-            ((-meshVertices[v.vertexId][0])*angleCos*m_renderScale) +
-            ((meshVertices[v.vertexId][1])*angleSin*m_renderScale);
-      v.y = pY + meshVertices[v.vertexId][2]*m_renderScale + dY;
-      v.z = pZ + 
-            ((meshVertices[v.vertexId][0]*angleSin*m_renderScale)) +
-            ((meshVertices[v.vertexId][1]*angleCos*m_renderScale));
+      glVertex3fv(verts[i]);
+      glVertex3f(verts[i][0] + normals[i][0],
+            verts[i][1] + normals[i][1], verts[i][2] + normals[i][2]);
    }
-   else
-   {
-      /* Key vertex not defined */
-      v.x = 0;
-      v.y = 0;
-      v.z = 0;
-   }
+   glEnd();
+
+   glPopMatrix();
+
+   glPopAttrib();
+}
+
+/*********************************************************************
+ *                         renderBoundingBox                         *
+ *********************************************************************/
+void aniModel::renderBoundingBox()
+{
+   crudeBox.render();
 }
 
 /*********************************************************************
@@ -1195,317 +507,274 @@ bool aniModel::depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ,
    float sinAngleZ = sinf(deg2Rad(angleZ));
    float cosAngleZ = cosf(deg2Rad(angleZ));
 
-   GLushort* facesShort = NULL;
-   GLuint* facesInt = NULL;
+   int vertCount=0;
+   int triCount=0;
+   vector3i_t* triangles = NULL;
+   vector3f_t* vertices=NULL;
 
    /* Apply delta */
    pY += dY;
 
-   /* get the renderer of the model */
-   pCalRenderer = m_calModel->getRenderer();
-
    /* get the number of meshes */
    int meshCount;
-   meshCount = pCalRenderer->getMeshCount();
+   meshCount = getTotalMeshes();
 
    /* verify all meshes of the model */
    int meshId;
    for(meshId = 0; meshId < meshCount; meshId++)
    {
-      /* get the number of submeshes */
-      int submeshCount;
-      submeshCount = pCalRenderer->getSubmeshCount(meshId);
+      /* get the transformed vertices of the mesh */
+      vertices = getMeshVertices(meshId, vertCount);
 
-      /* verify all submeshes of the mesh */
-      int submeshId;
-      for(submeshId = 0; submeshId < submeshCount; submeshId++)
+      /* get faces */
+      triangles = getMeshFaces(meshId, triCount);
+
+      /* Verify each model face with each bounding box face */
+      int f;
+      float V0[3], V1[3], V2[3];
+      float U0[3], U1[3], U2[3];
+      int index0=0, index1=0, index2=0;
+      for(f = 0; f < triCount; f++)
       {
-         /* select mesh and submesh for further data access */
-         if(pCalRenderer->selectMeshSubmesh(meshId, submeshId))
+
+         /* Define Triangle Vertex index */
+         index0 = triangles[f][0];
+         index1 = triangles[f][1];
+         index2 = triangles[f][2];
+
+         /* Translate and rotate the coordinates.
+          * NOTE: Do not forget that if the blender coordinate system is
+          * (x,y,z), the DNT system is (-x,z,y) */
+         rotatePoint(-vertices[index0][0]*renderScale,
+               vertices[index0][2]*renderScale,
+               vertices[index0][1]*renderScale,
+               angleX, angleY, angleZ, sinAngleX, cosAngleX, 
+               sinAngleY, cosAngleY, sinAngleZ, cosAngleZ,
+               V0[0], V0[1], V0[2]);
+         V0[0] += pX;
+         V0[1] += pY;
+         V0[2] += pZ;
+
+         rotatePoint(-vertices[index1][0]*renderScale,
+               vertices[index1][2]*renderScale,
+               vertices[index1][1]*renderScale,
+               angleX, angleY, angleZ, sinAngleX, cosAngleX, 
+               sinAngleY, cosAngleY, sinAngleZ, cosAngleZ,
+               V1[0], V1[1], V1[2]);
+         V1[0] += pX;
+         V1[1] += pY;
+         V1[2] += pZ;
+
+         rotatePoint(-vertices[index2][0]*renderScale,
+               vertices[index2][2]*renderScale,
+               vertices[index2][1]*renderScale,
+               angleX, angleY, angleZ, sinAngleX, cosAngleX, 
+               sinAngleY, cosAngleY, sinAngleZ, cosAngleZ,
+               V2[0], V2[1], V2[2]);
+         V2[0] += pX;
+         V2[1] += pY;
+         V2[2] += pZ;
+
+         /* Bounding Box Faces */
+
+         /* Upper Face A */
+         U0[0] = colBox.x1;
+         U0[1] = colBox.y2;   
+         U0[2] = colBox.z1;
+
+         U1[0] = colBox.x2;
+         U1[1] = colBox.y2;
+         U1[2] = colBox.z1;
+
+         U2[0] = colBox.x1;
+         U2[1] = colBox.y2;
+         U2[2] = colBox.z2;
+
+         if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
          {
-            /* get the transformed vertices of the submesh */
-            int vertexCount;
-            vertexCount = pCalRenderer->getVertices(&meshVertices[0][0]);
+            /* Detected Collision at Upper Face A! */
+            return(true);
+         }
 
-            /* get faces */
-            faceCount = pCalRenderer->getFaces(&meshFaces[0][0]);
-         
-            /* Transform faces pointer to the desired one */
-            if(sizeof(CalIndex)==2)
-            {
-               facesShort = (GLushort*)(void*)&meshFaces[0][0];
-            }
-            else
-            {
-               facesInt = (GLuint*)(void*)&meshFaces[0][0];
-            }
+         /* Upper Face B */
+         U0[0] = colBox.x2;
+         U0[1] = colBox.y2;
+         U0[2] = colBox.z2;
+         //U1 = same as upper face A
+         //U2 = same as upper face A
 
-            /* Verify each model face with each bounding box face */
-            int f;
-            float V0[3], V1[3], V2[3];
-            float U0[3], U1[3], U2[3];
-            int index0=0, index1=0, index2=0;
-            for(f = 0; f < faceCount*3; f+=3)
-            {
 
-               /* Define Triangle Vertex index */
-               if(sizeof(CalIndex)==2)
-               {
-                  index0 = facesShort[f];
-                  index1 = facesShort[f+1];
-                  index2 = facesShort[f+2];
-               }
-               else
-               {
-                  index0 = facesInt[f];
-                  index1 = facesInt[f+1];
-                  index2 = facesInt[f+2];
-               }
+         if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
+         {
+            /* Detected Collision at Upper Face B! */
+            return(true);
+         }
 
-               /* Translate and rotate the coordinates.
-                * NOTE: Do not forget that if the blender coordinate system is
-                * (x,y,z), the DNT system is (-x,z,y) */
-               rotatePoint(-meshVertices[index0][0]*m_renderScale,
-                           meshVertices[index0][2]*m_renderScale,
-                           meshVertices[index0][1]*m_renderScale,
-                           angleX, angleY, angleZ, sinAngleX, cosAngleX, 
-                           sinAngleY, cosAngleY, sinAngleZ, cosAngleZ,
-                           V0[0], V0[1], V0[2]);
-               V0[0] += pX;
-               V0[1] += pY;
-               V0[2] += pZ;
+         /* Lower Face A */
+         U0[0] = colBox.x1;
+         U0[1] = colBox.y1;   
+         U0[2] = colBox.z1;
 
-               rotatePoint(-meshVertices[index1][0]*m_renderScale,
-                           meshVertices[index1][2]*m_renderScale,
-                           meshVertices[index1][1]*m_renderScale,
-                           angleX, angleY, angleZ, sinAngleX, cosAngleX, 
-                           sinAngleY, cosAngleY, sinAngleZ, cosAngleZ,
-                           V1[0], V1[1], V1[2]);
-               V1[0] += pX;
-               V1[1] += pY;
-               V1[2] += pZ;
+         U1[0] = colBox.x2;
+         U1[1] = colBox.y1;
+         U1[2] = colBox.z1;
 
-               rotatePoint(-meshVertices[index2][0]*m_renderScale,
-                           meshVertices[index2][2]*m_renderScale,
-                           meshVertices[index2][1]*m_renderScale,
-                           angleX, angleY, angleZ, sinAngleX, cosAngleX, 
-                           sinAngleY, cosAngleY, sinAngleZ, cosAngleZ,
-                           V2[0], V2[1], V2[2]);
-               V2[0] += pX;
-               V2[1] += pY;
-               V2[2] += pZ;
+         U2[0] = colBox.x1;
+         U2[1] = colBox.y1;
+         U2[2] = colBox.z2;
 
-               /* Bounding Box Faces */
+         if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
+         {
+            /* Detected Collision at Lower Face A! */
+            return(true);
+         }
 
-               /* Upper Face A */
-               U0[0] = colBox.x1;
-               U0[1] = colBox.y2;   
-               U0[2] = colBox.z1;
-               
-               U1[0] = colBox.x2;
-               U1[1] = colBox.y2;
-               U1[2] = colBox.z1;
+         /* Lower Face B */
+         U0[0] = colBox.x2;
+         U0[1] = colBox.y1;
+         U0[2] = colBox.z2;
+         //U1 = same as lower face A
+         //U2 = same as lower face A
 
-               U2[0] = colBox.x1;
-               U2[1] = colBox.y2;
-               U2[2] = colBox.z2;
 
-               if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
-               {
-                  /* Detected Collision at Upper Face A! */
-                  return(true);
-               }
+         if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
+         {
+            /* Detected Collision at Lower Face B! */
+            return(true);
+         }
 
-               /* Upper Face B */
-               U0[0] = colBox.x2;
-               U0[1] = colBox.y2;
-               U0[2] = colBox.z2;
-               //U1 = same as upper face A
-               //U2 = same as upper face A
-               
 
-               if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
-               {
-                  /* Detected Collision at Upper Face B! */
-                  return(true);
-               }
+         /* Left Face A */
+         U0[0] = colBox.x1;
+         U0[1] = colBox.y1;   
+         U0[2] = colBox.z1;
 
-               /* Lower Face A */
-               U0[0] = colBox.x1;
-               U0[1] = colBox.y1;   
-               U0[2] = colBox.z1;
-               
-               U1[0] = colBox.x2;
-               U1[1] = colBox.y1;
-               U1[2] = colBox.z1;
+         U1[0] = colBox.x1;
+         U1[1] = colBox.y1;
+         U1[2] = colBox.z2;
 
-               U2[0] = colBox.x1;
-               U2[1] = colBox.y1;
-               U2[2] = colBox.z2;
+         U2[0] = colBox.x1;
+         U2[1] = colBox.y2;
+         U2[2] = colBox.z1;
 
-               if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
-               {
-                  /* Detected Collision at Lower Face A! */
-                  return(true);
-               }
+         if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
+         {
+            /* Detected Collision at Left Face A! */  
+            return(true);
+         }
 
-               /* Lower Face B */
-               U0[0] = colBox.x2;
-               U0[1] = colBox.y1;
-               U0[2] = colBox.z2;
-               //U1 = same as lower face A
-               //U2 = same as lower face A
-               
+         /* Left Face B */
+         U0[0] = colBox.x1;
+         U0[1] = colBox.y2;
+         U0[2] = colBox.z2;
+         //U1 = same as left face A
+         //U2 = same as left face A
 
-               if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
-               {
-                  /* Detected Collision at Lower Face B! */
-                  return(true);
-               }
+         if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
+         {
+            /* Detected Collision at Left Face B! */
+            return(true);
+         }
 
-               
-               /* Left Face A */
-               U0[0] = colBox.x1;
-               U0[1] = colBox.y1;   
-               U0[2] = colBox.z1;
-               
-               U1[0] = colBox.x1;
-               U1[1] = colBox.y1;
-               U1[2] = colBox.z2;
+         /* Right Face A */
+         U0[0] = colBox.x2;
+         U0[1] = colBox.y1;   
+         U0[2] = colBox.z1;
 
-               U2[0] = colBox.x1;
-               U2[1] = colBox.y2;
-               U2[2] = colBox.z1;
+         U1[0] = colBox.x2;
+         U1[1] = colBox.y1;
+         U1[2] = colBox.z2;
 
-               if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
-               {
-                  /* Detected Collision at Left Face A! */  
-                  return(true);
-               }
+         U2[0] = colBox.x2;
+         U2[1] = colBox.y2;
+         U2[2] = colBox.z1;
 
-               /* Left Face B */
-               U0[0] = colBox.x1;
-               U0[1] = colBox.y2;
-               U0[2] = colBox.z2;
-               //U1 = same as left face A
-               //U2 = same as left face A
+         if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
+         {
+            /* Detected Collision at Right Face A! */
+            return(true);
+         }
 
-               if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
-               {
-                  /* Detected Collision at Left Face B! */
-                  return(true);
-               }
+         /* Right Face B */
+         U0[0] = colBox.x2;
+         U0[1] = colBox.y2;
+         U0[2] = colBox.z2;
+         //U1 = same as right face A
+         //U2 = same as right face A
 
-               /* Right Face A */
-               U0[0] = colBox.x2;
-               U0[1] = colBox.y1;   
-               U0[2] = colBox.z1;
-               
-               U1[0] = colBox.x2;
-               U1[1] = colBox.y1;
-               U1[2] = colBox.z2;
+         if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
+         {
+            /* Detected Collision at Right Face B! */
+            return(true);
+         }
 
-               U2[0] = colBox.x2;
-               U2[1] = colBox.y2;
-               U2[2] = colBox.z1;
 
-               if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
-               {
-                  /* Detected Collision at Right Face A! */
-                  return(true);
-               }
+         /* Front Face A */
+         U0[0] = colBox.x1;
+         U0[1] = colBox.y1;   
+         U0[2] = colBox.z1;
 
-               /* Right Face B */
-               U0[0] = colBox.x2;
-               U0[1] = colBox.y2;
-               U0[2] = colBox.z2;
-               //U1 = same as right face A
-               //U2 = same as right face A
+         U1[0] = colBox.x2;
+         U1[1] = colBox.y1;
+         U1[2] = colBox.z1;
 
-               if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
-               {
-                  /* Detected Collision at Right Face B! */
-                  return(true);
-               }
+         U2[0] = colBox.x1;
+         U2[1] = colBox.y2;
+         U2[2] = colBox.z1;
 
-            
-               /* Front Face A */
-               U0[0] = colBox.x1;
-               U0[1] = colBox.y1;   
-               U0[2] = colBox.z1;
-               
-               U1[0] = colBox.x2;
-               U1[1] = colBox.y1;
-               U1[2] = colBox.z1;
+         if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
+         {
+            /* Detected Collision at Front Face A! */
+            return(true);
+         }
 
-               U2[0] = colBox.x1;
-               U2[1] = colBox.y2;
-               U2[2] = colBox.z1;
+         /* Front Face B */
+         U0[0] = colBox.x2;
+         U0[1] = colBox.y2;
+         U0[2] = colBox.z1;
+         //U1 = same as front face A
+         //U2 = same as front face A
 
-               if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
-               {
-                  /* Detected Collision at Front Face A! */
-                  return(true);
-               }
+         if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
+         {
+            /* Detected Collision at Front Face B! */
+            return(true);
+         }
 
-               /* Front Face B */
-               U0[0] = colBox.x2;
-               U0[1] = colBox.y2;
-               U0[2] = colBox.z1;
-               //U1 = same as front face A
-               //U2 = same as front face A
+         /* Back Face A */
+         U0[0] = colBox.x1;
+         U0[1] = colBox.y1;   
+         U0[2] = colBox.z2;
 
-               if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
-               {
-                  /* Detected Collision at Front Face B! */
-                  return(true);
-               }
+         U1[0] = colBox.x2;
+         U1[1] = colBox.y1;
+         U1[2] = colBox.z2;
 
-               /* Back Face A */
-               U0[0] = colBox.x1;
-               U0[1] = colBox.y1;   
-               U0[2] = colBox.z2;
-               
-               U1[0] = colBox.x2;
-               U1[1] = colBox.y1;
-               U1[2] = colBox.z2;
+         U2[0] = colBox.x1;
+         U2[1] = colBox.y2;
+         U2[2] = colBox.z2;
 
-               U2[0] = colBox.x1;
-               U2[1] = colBox.y2;
-               U2[2] = colBox.z2;
+         if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
+         {
+            /* Detected Collision at Back Face A! */
+            return(true);
+         }
 
-               if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
-               {
-                  /* Detected Collision at Back Face A! */
-                  return(true);
-               }
+         /* Back Face B */
+         U0[0] = colBox.x2;
+         U0[1] = colBox.y2;
+         U0[2] = colBox.z2;
+         //U1 = same as back face A
+         //U2 = same as back face A
 
-               /* Back Face B */
-               U0[0] = colBox.x2;
-               U0[1] = colBox.y2;
-               U0[2] = colBox.z2;
-               //U1 = same as back face A
-               //U2 = same as back face A
-
-               if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
-               {
-                  /* Detected Collision at Back Face B! */
-                  return(true);
-               }
-            }
+         if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
+         {
+            /* Detected Collision at Back Face B! */
+            return(true);
          }
       }
    }
-
-  /* If got here, no collision occurs */
-  return(false);
+   /* If got here, no collision occurs */
+   return(false);
 }
-
-/*********************************************************************
- *                          Static Variables                         *
- *********************************************************************/
-float aniModel::meshVertices[30000][3];
-float aniModel::meshNormals[30000][3];
-float aniModel::meshTextureCoordinates[30000][2];
-CalIndex aniModel::meshFaces[50000][3];
 

@@ -47,10 +47,19 @@ sceneNode::sceneNode(string modelFileName, GLfloat x, GLfloat y, GLfloat z,
    animated = true;
    updateCrude = true;
    enableRotLast = false;
-   model = new aniModel();
+
+   /* Load the model, based on its type */
+   if(modelFileName.find(".md5") != string::npos)
+   {
+      model = new md5Model();
+   }
+   else
+   {
+      model = new cal3DModel();
+   }
 
    /* Load and calculate bounding box */
-   model->loadModel(modelFileName);
+   model->load(modelFileName);
 
    /* Now, set its position/angle */
    set(x, y, z, aX, aY, aZ);
@@ -64,7 +73,28 @@ sceneNode::~sceneNode()
    /* If animated, no more need to keep model */
    if(animated)
    {
-      delete(model);
+      switch(model->getType())
+      {
+         case aniModel::TYPE_CAL3D:
+         {
+            cal3DModel* c = (cal3DModel*)model;
+            delete(c);
+         }
+         break;
+         case aniModel::TYPE_MD5:
+         {
+            md5Model* m = (md5Model*)model;
+            delete(m);
+         }
+         break;
+         default:
+         {
+            std::cerr << "Warning: will delete as aniModel: '" 
+               << model->getFileName() << "'" << std::endl;
+            delete(model);
+         }
+         break;
+      }
    }
 }
 

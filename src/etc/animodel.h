@@ -27,6 +27,31 @@
 
 #include "boundingbox.h"
 
+typedef float vector2f_t[2];
+typedef float vector3f_t[3];
+typedef int vector3i_t[3];
+
+/*! The animodel material definition */
+class aniModelMaterial
+{
+   public:
+      aniModelMaterial()
+      {
+         ambient[0]=1.0f;ambient[1]=1.0f;ambient[2]=1.0f;ambient[3]=1.0f;
+         diffuse[0]=1.0f;diffuse[1]=1.0f;diffuse[2]=1.0f;diffuse[3]=1.0f;
+         specular[0]=1.0f;specular[1]=1.0f;specular[2]=1.0f;specular[3]=1.0f;
+         shininess = 50.0f;
+      };
+
+      GLfloat ambient[4];
+      GLfloat diffuse[4];
+      GLfloat specular[4];
+      GLfloat shininess;
+
+      GLuint textureId;
+};
+
+#define STATE_NONE        -1 /**< No animation */
 #define STATE_IDLE         0 /**< Character Animation State Idle */
 #define STATE_WALK         1 /**< Character Animation State Walk */
 #define STATE_DIE          2 /**< Character Animation State Die */
@@ -42,6 +67,12 @@
 class aniModel
 {
    public:
+
+      enum
+      {
+         TYPE_MD5,
+         TYPE_CAL3D
+      };
 
       /*! Vertex info for some key vertices */
       struct vertexInfo
@@ -63,22 +94,41 @@ class aniModel
       };
 
       /*! Constructor */
-      aniModel();
+      aniModel(int modelType);
       /*! Destructor */
-      ~aniModel();
+      virtual ~aniModel();
+
+      /*****************************************************************
+       * Virtuals
+       *****************************************************************/
+      /*! Render the skeleton (usually, for debug reasons) */
+      virtual void renderSkeleton()=0;
+
+      /*! Load the model to be this character's body and animations.
+       * \param strFilename -> string with the file name.
+       * \return true if success on load. */
+      virtual bool load(const std::string& strFilename)=0;
+
+      /*! Call Action Animation (just a cycle to blend)
+       * \param aniId -> animation ID */
+      virtual void callActionAnimation(int aniId)=0;
+      /*! Set the current animation to "animationId" */
+      virtual void setAnimation(int animationId)=0;
+      /*! Calculate the model bounding box for current animation frame */
+      virtual void calculateCrudeBoundingBox()=0;
+      /*! Update the vertex info */
+      virtual void updateKeyVertex(vertexInfo& v,
+         float angleY, float pX, float pY, float pZ)=0;
+      /*! Get mesh material */
+      virtual aniModelMaterial* getMeshMaterial(int meshId)=0;
+      /*****************************************************************
+       * /Virtuals
+       *****************************************************************/
+
 
       /*! Update Model to pos time 
        * \param pos -> time of the animation */
-      void update(GLfloat pos, float angleY, float pX, float pY, float pZ);
-
-      /*! Get the model current pos time
-       * \return current model pos time */
-      GLfloat getCurrentPos();
-
-      /*! Load the cal3D model to be this character's body and animations.
-       * \param strFilename -> \c string with the cal3d file name.
-       * \return true if success on load. */
-      bool loadModel(const std::string& strFilename);
+      void update(float pos, float angleY, float pX, float pY, float pZ);
 
       /*! Set the animation state of the model.
        * \param state -> state ID to be defined. */
@@ -88,16 +138,14 @@ class aniModel
        * \return state ID of the current animation */
       int getState();
 
-      /*! Call Action Animation (just a cycle to blend)
-       * \param aniId -> animation ID */
-      void callActionAnimation(int aniId);
+      /*! Get the animodel type */
+      int getType(){return(type);};
 
       /*! Load the model to video card memory
        * \param useTexture -> true to use the model texture, false otherwise
-       *                      (if false, user must bind the desired texture by
-       *                        himself)
        * \note -> must be called before all renderFromGraphicMemory */
       void loadToGraphicMemory(bool useTexture=true);
+      
       /*! Render the loaded Graphic Memory to screen at the position
        * \param inverted -> if will invert Y axys */
       void renderFromGraphicMemory(float pX, float pY, float pZ, float angleX,
@@ -131,8 +179,9 @@ class aniModel
             float angleY, float angleZ,
             float angle, float aX, float aY, float aZ);
 
-      /*! Calculate the model bounding box for current animation frame */
-      void calculateCrudeBoundingBox();
+      /*! Render all normals (usualy, for debug reasons) */
+      void renderNormals();
+
       /*! Get the last calculated bounding box */
       boundingBox getCrudeBoundingBox();
 
@@ -152,55 +201,26 @@ class aniModel
       /*! Define all key vertices (left and right hand, for example) */
       void defineKeyVertex();
 
-      /*! Update the vertex info */
-      void updateKeyVertex(vertexInfo& v,
-         float angleY, float pX, float pY, float pZ);
-
       /*! Get the first vertex id influenced by a bone
        * \param boneId -> id of the bone
        * \param inf -> will receive the vertex indexes
        * \return true if found */
       bool getInfluencedVertex(int boneId, vertexInfo& inf);
 
-      /*! Get the Id of a bone
-       * \param bName name of the bone to get its it
-       * \return bone's ID or -1 if not found */
-      int getBoneId(std::string bName);
-
       /*! Get the model fileName */
-      std::string getFileName(){return(modelFileName);};
+      std::string getFileName(){return(fileName);};
 
       vertexInfo leftHand;           /**< Base vertex at left hand */
       vertexInfo rightHand;          /**< Base vextex at right hand */
       vertexInfo head;               /**< Base vertex at head */
 
    protected:
-      int m_state;                   /**< current animation state */
-      CalCoreModel* m_calCoreModel;  /**< Cal3D Core Model of character */
-      CalModel* m_calModel;          /**< Cal3D Model of character */
-      int m_animationId[ANIMODEL_MAX_ANIMATIONS]; /**< Cal3D animation ID */
-      int m_animationCount;          /**< Cal3D number of animations */
-      int m_meshId[32];              /**< Cal3D meshes ID */
-      int m_meshCount;               /**< Cal3D meshes count */
-      GLuint m_textureId[32];        /**< Cal3D texture ID */
-      int m_textureCount;            /**< Cal3D texture Count */
-      float m_motionBlend[3];        /**< Cal3D motion blend */
-      float m_renderScale;           /**< Cal3D scale on render */
-      float m_lodLevel;              /**< Cal3D Level of Detail to render */
-      float curPos;                  /**< current time pos */
-      std::string m_path;            /**< Path to cal3D model */
-      std::string modelFileName;     /**< Filename of the model */
+      std::string fileName;          /**< current model fileName */
 
-      CalRenderer *pCalRenderer;     /**< Pointer to themodel renderer */
-      static float meshVertices[30000][3]; /**< Model Vertices */
-      static float meshNormals[30000][3];  /**< Model Normals */
-      static float meshTextureCoordinates[30000][2]; /**< Texture Coords */
-      static CalIndex meshFaces[50000][3]; /**< Model Faces */
-      int faceCount;                       /**< Number of Faces */
-      int textureCoordinateCount;          /**< Number of Texture Coordinates */
-
-      boundingBox crudeBox;                /**< Crude bounding box */
-      GLfloat dY;      /**< Delta to Y position to y1 be 0 */
+      boundingBox crudeBox;  /**< Crude bounding box */
+      float dY;              /**< Delta to Y position to y1 be 0 */
+      float renderScale;     /**< Render scale factor */
+      bool loadedTexture;    /**< True if loaded texture */
 
       /*! Load the a texture to the model.
        * \param strFilename -> \c string with the texture file name.
@@ -212,6 +232,52 @@ class aniModel
 
       /*! Calculate the model deltaY */
       void calculateDeltaY();
+
+      /*****************************************************************
+       * Virtuals
+       *****************************************************************/
+
+      /*! Update the model animation after delta */
+      virtual void update(float delta)=0;
+
+      /*! Get the Id of a bone
+       * \param bName name of the bone to get its it
+       * \return bone's ID or -1 if not found */
+      virtual int getBoneId(std::string bName)=0;
+
+      /*! Get the current animated vertices
+       * \param meshId -> current Id of the mesh
+       * \param count -> on return will have the total vertices
+       * \return pointer to current vertices of the mesh */
+      virtual vector3f_t* getMeshVertices(int meshId, int& count)=0;
+
+      /*! Get the current animated normals
+       * \param meshId -> current Id of the mesh
+       * \param count -> on return will have the total normals
+       * \return pointer to current vertices of the mesh */
+      virtual vector3f_t* getMeshNormals(int meshId, int& count)=0;
+
+      /*! Get the current animated texture coordinates
+       * \param meshId -> current Id of the mesh
+       * \param count -> on return will have the total texture coordinates
+       * \return pointer to current vertices of the mesh */
+      virtual vector2f_t* getMeshTexCoords(int meshId, int& count)=0;
+
+      /*! Get the current animated faces (vertices index)
+       * \param meshId -> current Id of the mesh
+       * \param count -> on return will have the total faces
+       * \return pointer to current faces of the mesh */
+      virtual vector3i_t* getMeshFaces(int meshId, int& count)=0;
+
+      /*! Get the number of meshes */
+      virtual int getTotalMeshes()=0;
+
+   private:
+      int type;          /**< model type */
+      int curState;      /**< current animation state */
+      int faceCount;     /**< number of faces to render */
+      vector3i_t* faces;       /**< current faces to render */
+ 
 };
 
 #endif

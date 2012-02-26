@@ -36,9 +36,18 @@ nodesList::nodesList()
 nodesList::nodesList(string modelFileName)
 {
    name = modelFileName;
-   model = new aniModel();
 
-   model->loadModel(modelFileName);
+   /* Load the model, based on its type */
+   if(modelFileName.find(".md5") != string::npos)
+   {
+      model = new md5Model();
+   }
+   else
+   {
+      model = new cal3DModel();
+   }
+
+   model->load(modelFileName);
    model->calculateCrudeBoundingBox();
 }
 
@@ -50,7 +59,26 @@ nodesList::~nodesList()
    clearList();
    if(model)
    {
-      delete(model);
+      switch(model->getType())
+      {
+         case aniModel::TYPE_CAL3D:
+         {
+            cal3DModel* c = (cal3DModel*)model;
+            delete(c);
+         }
+         break;
+         case aniModel::TYPE_MD5:
+         {
+            md5Model* m = (md5Model*)model;
+            delete(m);
+         }
+         break;
+         default:
+         {
+            delete(model);
+         }
+         break;
+      }
    }
 }
 

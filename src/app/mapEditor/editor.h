@@ -128,7 +128,6 @@ class editor
       GLdouble modl[16];             /**< Model View Matrix */
       GLint viewPort[4];             /**< View Port Vector */
       GLfloat** visibleMatrix;       /**< Visible Matrix */
-      
 };
 
 #endif

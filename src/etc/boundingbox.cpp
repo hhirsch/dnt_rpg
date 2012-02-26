@@ -485,19 +485,67 @@ bool boundingBox::isVisible(GLfloat** matrix)
  ***********************************************************************/
 void boundingBox::render()
 {
-   glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-   glBegin(GL_QUADS);
-      /* Up Face */
+   glPushAttrib(GL_ENABLE_BIT);
+
+   glDisable(GL_LIGHTING);
+   glDisable(GL_FOG);
+
+   glLineWidth(4);
+   glColor4f(0.0f, 0.5f, 0.8f, 1.0f);
+   glPushMatrix();
+   
+   glBegin(GL_LINE_STRIP );
+      /* Front */
+      glVertex3f(x1, y1, z1);
       glVertex3f(x1, y2, z1);
       glVertex3f(x2, y2, z1);
-      glVertex3f(x2, y2, z2);
-      glVertex3f(x1, y2, z2);
-
-      /* DownFace */
-      glVertex3f(x1, y1, z1);
       glVertex3f(x2, y1, z1);
+      glVertex3f(x1, y1, z1);
+   glEnd();
+
+   glBegin(GL_LINE_STRIP );
+      /* Back */
+      glVertex3f(x1, y1, z2);
+      glVertex3f(x1, y2, z2);
+      glVertex3f(x2, y2, z2);
       glVertex3f(x2, y1, z2);
+   glEnd();
+      
+   glBegin(GL_LINE_STRIP );
+      /* Top */
+      glVertex3f(x1, y2, z1);
+      glVertex3f(x1, y2, z2);
+      glVertex3f(x2, y2, z2);
+      glVertex3f(x2, y2, z1);
+   glEnd();
+
+   glBegin(GL_LINE_STRIP );
+      /* Bottom */
+      glVertex3f(x1, y1, z1);
+      glVertex3f(x1, y1, z2);
+      glVertex3f(x2, y1, z2);
+      glVertex3f(x2, y1, z1);
+   glEnd();
+      
+   glBegin(GL_LINE_STRIP );
+      /* Left */
+      glVertex3f(x1, y1, z1);
+      glVertex3f(x1, y2, z1);
+      glVertex3f(x1, y2, z2);
       glVertex3f(x1, y1, z2);
    glEnd();
+
+   glBegin(GL_LINE_STRIP );
+      /* Right */
+      glVertex3f(x2, y1, z1);
+      glVertex3f(x2, y2, z1);
+      glVertex3f(x2, y2, z2);
+      glVertex3f(x2, y1, z2);
+   glEnd();
+
+   glPopMatrix();
+   glLineWidth(1);
+
+   glPopAttrib();
 }
 

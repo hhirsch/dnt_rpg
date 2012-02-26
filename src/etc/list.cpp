@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -243,6 +243,28 @@ bool dntList::remove(dntListElement* obj)
 dntListElement* dntList::getFirst()
 {
    return(first);
+}
+
+/***********************************************************************
+ *                                 get                                 *
+ ***********************************************************************/
+dntListElement* dntList::get(int i)
+{
+   int j=0;
+   dntListElement* e = first;
+
+   if( (i < 0) && (i >= total) )
+   {
+      return(NULL);
+   }
+
+   while(j < i)
+   {
+      e = e->getNext();
+      j++;
+   }
+
+   return(e);
 }
 
 /***********************************************************************
