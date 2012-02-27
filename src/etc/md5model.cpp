@@ -35,7 +35,8 @@
 /***********************************************************************
  *                               Constructor                           *
  ***********************************************************************/
-md5Model::md5Model(): aniModel(aniModel::TYPE_MD5)
+md5Model::md5Model(): aniModel(aniModel::TYPE_MD5),
+                    dntList(DNT_LIST_TYPE_ADD_AT_END)
 {
    totalJoints = 0;
    totalMeshes = 0;

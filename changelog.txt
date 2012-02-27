@@ -8,6 +8,7 @@
  - Setting delta to sceneNode minY when lesser than 0;
  - script: new functions: callAnimation, setAnimation, playSound;
  - New script to controll cattle idle behaviour;
+ - Added support to md5 models and animations;
 
  - New Models;
  - New Sound Effects;
