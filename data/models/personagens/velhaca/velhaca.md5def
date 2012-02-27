@@ -1,0 +1,18 @@
+scale = 3.5f
+path = models/personagens/velhaca/
+
+mesh = velhaca.md5mesh
+animation = velhacaidle.md5anim
+animation = velhacawalk.md5anim
+animation = velhacadie.md5anim
+animation = velhacadead.md5anim
+animation = velhacaattack.md5anim
+
+
+# Material data
+ambient = 1.0 1.0 1.0 1.0
+diffuse = 1.0 1.0 1.0 1.0
+specular = 0.8 0.8 0.8 1.0
+shininess = 0.0
+image = texture.png
+
