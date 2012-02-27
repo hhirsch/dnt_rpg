@@ -28,4 +28,4 @@ Hippie(2lvl) = characters/pcs/hippie.pc
 Logan(20lvl) = characters/pcs/logan.pc
 Metaleiro(1lvl) = characters/pcs/metaleiro.pc
 Santa(1lvl) = characters/pcs/santa.pc
-#Velhaca(1lvl) = characters/pcs/velhaca.pc
+Velhaca(1lvl) = characters/pcs/velhaca.pc
