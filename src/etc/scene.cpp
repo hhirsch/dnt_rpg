@@ -148,6 +148,8 @@ void nodesList::render(GLfloat** viewMatrix, bool update, bool reflexion,
       {
          /* Animated list, set to false to force load of next model */
          modelLoaded = false;
+         /* Debug render bounding box */
+         //pos->node->getBoundingBox().render();
       }
       pos = (renderPosition*)pos->getNext();
    }

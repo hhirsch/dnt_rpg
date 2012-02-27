@@ -156,7 +156,8 @@ void sceneNode::setRotationLast(float angle, float x, float y, float z)
 void sceneNode::updateBoundingBox()
 {
    /* Update the crude */
-   if( (animated) && (updateCrude))
+   if( (animated) && 
+       ( (updateCrude) || (model->getType() == aniModel::TYPE_MD5) ) )
    {
       model->calculateCrudeBoundingBox();
    }
@@ -195,6 +196,13 @@ void sceneNode::render(GLfloat** viewMatrix, bool update, bool reflexion,
       if(update)
       {
          model->update(WALK_UPDATE, angleY, posX, posY, posZ);
+         if( (updateCrude) || (model->getType() == aniModel::TYPE_MD5) )
+         {
+            /* Need to recalculate bounding box, based on position *
+             * As md5 models have bounding boxes pre-calculated per frame,
+             * always get them, ignoring the updateCrude state. */
+            updateBoundingBox();
+         }
       }
    }
 

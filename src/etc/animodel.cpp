@@ -272,7 +272,9 @@ void aniModel::removeFromGraphicMemory()
 {
    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
    glDisable(GL_TEXTURE_2D);
-  
+ 
+   glEnable(GL_COLOR_MATERIAL);
+
    glDisableClientState(GL_NORMAL_ARRAY);
    glDisableClientState(GL_VERTEX_ARRAY);
 

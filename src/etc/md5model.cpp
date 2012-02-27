@@ -818,8 +818,8 @@ void md5Model::calculateCrudeBoundingBox()
    max.z += dY;
 
    /* Finally, set bounding box, converting to DNT system */
-   crudeBox.setMin(-max.x, min.z, min.z);
-   crudeBox.setMax(-min.x, max.z, max.z);
+   crudeBox.setMin(-max.x, min.z, min.y);
+   crudeBox.setMax(-min.x, max.z, max.y);
 }
 
 /***********************************************************************
