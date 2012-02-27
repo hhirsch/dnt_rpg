@@ -416,8 +416,42 @@ void aniModel::setState(int state)
    /* Only change animation if not actually on it */
    if(state != curState)
    {
-      curState = state;
-      setAnimation(curState);
+      if(type == TYPE_CAL3D)
+      {
+         /* FIXME: remove this specific case. */
+         curState = state;
+         setAnimation(curState);
+
+      }
+      else
+      {
+         switch(state)
+         {
+            case STATE_DIE:
+            {
+               /* Action action that will became dead after */
+               curState = STATE_DEAD;
+               setAnimation(STATE_DEAD);
+               callActionAnimation(STATE_DIE);
+            }
+            break;
+            case STATE_ATTACK_MEELE:
+            case STATE_HIT:
+            case STATE_GUN_USE:
+            {
+               /* Action action wich go back to previous */
+               callActionAnimation(state);
+            }
+            break;
+            default:
+            {
+               /* Normal cycled action */
+               curState = state;
+               setAnimation(curState);
+            }
+            break;
+         }
+      }
    }
 }
 

@@ -30,11 +30,13 @@
 /***********************************************************************
  *                               Constructor                           *
  ***********************************************************************/
-md5Anim::md5Anim()
+md5Anim::md5Anim(int identifier)
 {
    totalFrames=0;
    totalJoints=0;
    frameRate=0;
+
+   id = identifier;
 
    skelFrames = NULL;
    retSkel = NULL;
@@ -414,11 +416,22 @@ void md5Anim::buildFrameSkeleton(md5_joint_info_t* jointInfos,
 }
 
 /***********************************************************************
+ *                               reset                                 *
+ ***********************************************************************/
+void md5Anim::reset()
+{
+   lastTime = 0;
+   curFrame = 0;
+   nextFrame = 1;
+}
+
+/***********************************************************************
  *                               update                                *
  ***********************************************************************/
-void md5Anim::update(float delta)
+bool md5Anim::update(float delta, bool singleCycle)
 {
    int maxFrames = totalFrames - 1;
+   bool retVal = true;
 
    lastTime += delta;
 
@@ -433,6 +446,7 @@ void md5Anim::update(float delta)
       {
          /* Reset cur frame */
          curFrame = 0;
+         retVal = false;
       }
 
       if(nextFrame > maxFrames)
@@ -441,6 +455,7 @@ void md5Anim::update(float delta)
          nextFrame = 0;
       }
    }
+   return(retVal);
 }
 
 /***********************************************************************

@@ -77,7 +77,19 @@ struct md5_mesh_t
 class md5ModelAnimation: public dntListElement
 {
    public:
-      md5Anim animation;
+      /*! Constructor */
+      md5ModelAnimation(int id)
+      {
+         animation = new md5Anim(id);
+      }
+      /*! Destructor */
+      ~md5ModelAnimation()
+      {
+         delete(animation);
+      }
+
+
+      md5Anim* animation;
 };
 
 /*! The MD5 model abstraction. It's composed by a .md5mesh file and
@@ -186,6 +198,9 @@ class md5Model: public aniModel, dntList
       int totalMeshes;             /**< Total model meshes */
 
       md5ModelAnimation* curAnimation; /**< Current animation */
+      md5ModelAnimation* backAnimation; /**< Animation to return after a
+                                          "callAction" (one cycle) animation */
+      bool actionAnimation;            /**< if curAnimation is an action-one */
 
       std::string path;    /**< Model's path */
 

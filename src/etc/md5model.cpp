@@ -45,6 +45,8 @@ md5Model::md5Model(): aniModel(aniModel::TYPE_MD5),
    baseSkel = NULL;
    curSkel = NULL;
    curAnimation = NULL;
+   backAnimation = NULL;
+   actionAnimation = false;
 
    needToCalculate = true;
    needToCalculateBoundingBox = true;
@@ -116,8 +118,9 @@ void md5Model::freeElement(dntListElement* obj)
  ***********************************************************************/
 bool md5Model::loadAnimFile(const std::string strFileName)
 {
-   md5ModelAnimation* mAnim = new md5ModelAnimation;
-   if(mAnim->animation.load(strFileName))
+   md5ModelAnimation* mAnim = new md5ModelAnimation(getTotal());
+
+   if(mAnim->animation->load(strFileName))
    {
       insert(mAnim);
       return(true);
@@ -361,11 +364,17 @@ void md5Model::setAnimation(int animationId)
    {
       /* TODO: blend it with the next! */
    }
+   backAnimation = curAnimation;
    curAnimation = (md5ModelAnimation*)get(animationId);
    if(!curAnimation)
    {
       needToCalculate = true;
       needToCalculateBoundingBox = true;
+   }
+   else
+   {
+      /* Reset it */
+      curAnimation->animation->reset();
    }
 }
 
@@ -379,9 +388,25 @@ void md5Model::update(float delta)
       /* Always need to calculate when animated */
       needToCalculate = true;
       /* Calculate current and next frames */
-      curAnimation->animation.update(delta);
+      if( (curAnimation->animation->update(delta, actionAnimation) == false) &&
+          (actionAnimation) )
+      {
+         actionAnimation = false;
+         /* Must go back to the previous animation */
+         if(backAnimation)
+         {
+            setAnimation(backAnimation->animation->getId());
+         }
+         else
+         {
+            setAnimation(STATE_NONE);
+         }
+         /* Recall the update for the previous animation  */
+         update(delta);
+         return;
+      }
       /* Interpolate skeletons between two frames */
-      curSkel = curAnimation->animation.interpolate();
+      curSkel = curAnimation->animation->interpolate();
       calculateMeshes();
    }
    else
@@ -736,7 +761,24 @@ bool md5Model::load(const std::string& strFileName)
  ***********************************************************************/
 void md5Model::callActionAnimation(int aniId)
 {
-   /* TODO: not yet on md5Model! */
+   md5ModelAnimation* anim;
+   if(curAnimation)
+   {
+      /* TODO: blend it with the next! */
+   }
+   anim = (md5ModelAnimation*)get(aniId);
+   if(anim)
+   {
+      /* Only set backAnimation if not an action one */
+      if(!actionAnimation)
+      {
+         backAnimation = curAnimation;
+      }
+      /* Set current as action and reset its position */
+      actionAnimation = true;
+      curAnimation = anim;
+      anim->animation->reset();
+   }
 }
 
 /***********************************************************************
@@ -753,7 +795,7 @@ void md5Model::calculateCrudeBoundingBox()
    if(curAnimation)
    {
       /* Get bounding box from animation frame */
-      md5_bbox_t* bbox = curAnimation->animation.getCurrentBoundingBox();
+      md5_bbox_t* bbox = curAnimation->animation->getCurrentBoundingBox();
       min = bbox->min;
       max = bbox->max;
    }

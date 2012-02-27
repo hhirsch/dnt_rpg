@@ -72,7 +72,7 @@ class md5Anim
    public:
 
       /* Constructor */
-      md5Anim();
+      md5Anim(int identifier);
 
       /*! Destructor */
       ~md5Anim();
@@ -80,8 +80,17 @@ class md5Anim
       /*! Load a .md5anim file */
       bool load(std::string strFileName);
 
-      /*! Update the animation, delta seconds after previous update */
-      void update(float delta);
+      /*! Update the animation, delta seconds after previous update
+       * \param delta -> time after previous call (in seconds)
+       * \param singleCycle -> if animation is just a single cycle call
+       * \return false when animation ended! */
+      bool update(float delta, bool singleCycle);
+
+      /*! Reset the animation state */
+      void reset();
+
+      /*! Get the animation id */
+      int getId(){return(id);};
 
       /*! Interpolate current and next skeletons 
        * \note the return value will be overriden on successive calls */
@@ -104,6 +113,8 @@ class md5Anim
             int frameNumber);
 
       std::string fileName; /**< Animation fileName */
+
+      int id;    /**< Animation identifier */
 
       int totalFrames;    /**< Total frames in the animation */
       int totalJoints;    /**< Total joints in the animation */
