@@ -426,6 +426,16 @@ void md5Anim::reset()
 }
 
 /***********************************************************************
+ *                         setCurrentFrame                             *
+ ***********************************************************************/
+void md5Anim::setCurrentFrame(int f)
+{
+   lastTime = 0;
+   curFrame = (f % totalFrames);
+   nextFrame = (curFrame+1)%totalFrames;
+}
+
+/***********************************************************************
  *                               update                                *
  ***********************************************************************/
 bool md5Anim::update(float delta, bool singleCycle)

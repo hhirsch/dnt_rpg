@@ -103,6 +103,9 @@ class md5Anim
       /*! Get bounding box for current frame */
       md5_bbox_t* getCurrentBoundingBox();
 
+      /*! Set the current frame to f */
+      void setCurrentFrame(int f);
+
    protected:
       /*! Delete all created structures */
       void clean();

@@ -360,12 +360,20 @@ bool md5Model::loadMeshFile(const std::string strFileName)
  ***********************************************************************/
 void md5Model::setAnimation(int animationId)
 {
+   md5ModelAnimation* selected = (md5ModelAnimation*)get(animationId);
+
+   if(curAnimation == selected)
+   {
+      /* same current animation, no need to change it! */
+      return;
+   }
+
    if(curAnimation)
    {
       /* TODO: blend it with the next! */
    }
    backAnimation = curAnimation;
-   curAnimation = (md5ModelAnimation*)get(animationId);
+   curAnimation = selected;
    if(!curAnimation)
    {
       needToCalculate = true;
@@ -741,15 +749,18 @@ bool md5Model::load(const std::string& strFileName)
       }
    }
 
-   /* Must do a first model update, to a random position */
    if(getTotal() > 0)
    {
       /* Set initial animation to IDLE */
       setAnimation(STATE_IDLE);
+      /* Set initial frame */
+      if(curAnimation)
+      {
+         int curPos = 11 + (int)(30 * (rand() / (RAND_MAX + 1.0)));
+         curAnimation->animation->setCurrentFrame(curPos);
+      } 
    }
-   int curPos =  11 + (int)(30 * (rand() / (RAND_MAX + 1.0)));
-   update(curPos);
-
+   
    /* Must define all initial bounding box */
    calculateCrudeBoundingBox();
    
