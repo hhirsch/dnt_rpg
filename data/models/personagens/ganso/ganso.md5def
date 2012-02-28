@@ -1,0 +1,21 @@
+# Exported from Blender by DNT md5 exporter
+
+scale = 6.0
+path = models/personagens/ganso/
+
+# Mesh Information
+mesh = ganso.md5mesh
+
+# Animations
+animation = ganso_Idle.md5anim
+animation = ganso_Walk.md5anim
+animation = ganso_Die.md5anim
+animation = ganso_Dead.md5anim
+animation = ganso_Attack.md5anim
+
+# Material
+ambient = 1.0 1.0 1.0 1.0 
+diffuse = 0.0 0.0 0.0 1.0 
+specular = 1.0 1.0 1.0 1.0
+shininess = 0.0
+image = texture.png
