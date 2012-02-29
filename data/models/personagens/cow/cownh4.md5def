@@ -1,0 +1,30 @@
+# Exported from Blender by DNT md5 exporter
+
+path=models/personagens/cow/
+scale = 8.1
+
+# Mesh Information
+mesh = cow_no_horns.md5mesh
+
+# Animations
+animation = cow2_stand.md5anim
+animation = cow2_walk.md5anim
+animation = cow2_die.md5anim
+animation = cow2_dead.md5anim
+animation = cow2_attack.md5anim
+animation = cow2_look.md5anim
+animation = cow2_eatlow.md5anim
+animation = cow2_sit.md5anim
+animation = cow2_moo.md5anim
+animation = cow2_tailflick.md5anim
+animation = cow2_dead2.md5anim
+
+
+
+
+# Material
+ambient = 1.0 1.0 1.0 1.0 
+diffuse = 0.800000011920929 0.800000011920929 0.800000011920929 1.0 
+specular = 1.0 1.0 1.0 1.0
+shininess = 0.0
+image = cow4.png

@@ -1,5 +1,5 @@
 name = gettext("Cow")
-model = models/personagens/cow/cownh2.cfg
+model = models/personagens/cow/cownh2.md5def
 portrait = characters/portraits/ameiva.png
 battleScript = ia/script/fight/fight_animal.dsl
 generalScript = ia/script/general/cattle_idle.dsl

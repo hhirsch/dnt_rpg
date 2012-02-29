@@ -756,7 +756,7 @@ bool md5Model::load(const std::string& strFileName)
       /* Set initial frame */
       if(curAnimation)
       {
-         int curPos = 11 + (int)(30 * (rand() / (RAND_MAX + 1.0)));
+         int curPos = 11 + (int)(70 * (rand() / (RAND_MAX + 1.0)));
          curAnimation->animation->setCurrentFrame(curPos);
       } 
    }
