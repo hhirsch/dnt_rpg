@@ -1,0 +1,16 @@
+# Exported from Blender by DNT md5 exporter
+
+path = models/objetos/geral/charango/
+scale = 1.3
+
+# Mesh Information
+mesh = charango.md5mesh
+
+# Animations
+
+# Material
+ambient = 1.0 1.0 1.0 1.0 
+diffuse = 0.80 0.80 0.80 1.0 
+specular = 1.0 1.0 1.0 1.0
+shininess = 0.0
+image = texture.png

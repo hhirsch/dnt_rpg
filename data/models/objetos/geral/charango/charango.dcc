@@ -1,0 +1,9 @@
+name = Charango
+description = gettext("A bolivian chord instrument")
+cal3d = models/objetos/geral/charango/charango.md5def
+inventory_sizes = 2 6
+inventory_texture = models/objetos/geral/charango/texture_inv.png
+life_points = 28
+armature_class = 10
+cost = 120
+weight = 0.9

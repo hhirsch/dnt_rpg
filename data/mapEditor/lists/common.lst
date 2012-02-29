@@ -9,6 +9,7 @@ Cap = models/objetos/geral/cap/cap.dcc
 Chair = models/objetos/geral/chair/chair.dcc
 Chair1 = models/objetos/geral/chair1/chair1.dcc
 Chair2 = models/objetos/geral/chair2/chair2.dcc
+Charango = models/objetos/geral/charango/charango.dcc
 Colarinho = models/objetos/geral/colarinho_e_oculos/colarinho_e_oculos.dcc
 Combat_Book = models/objetos/books/combat_tutorial/combat_tutorial.dcc
 Comoda = models/objetos/geral/comoda/comoda.dcc
