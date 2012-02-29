@@ -533,13 +533,15 @@ class md5Settings:
                scale,
                exportMode,
                appendPath,
-               softScale
+               softScale,
+               blendFrames
                ):
     self.savepath = savepath
     self.scale = scale
     self.exportMode = exportMode
     self.path = appendPath
     self.softScale = softScale
+    self.blendFrames = blendFrames
 
 scale = 1.0
 
@@ -886,6 +888,7 @@ def save_md5(settings):
   # Let's write the path and soft scale
   file.write("path = " + str(settings.path) + "\n")
   file.write("scale = " + str(settings.softScale) +"\n")
+  file.write("blendFrames = " + str(settings.blendFrames) +"\n")
   file.write("\n# Mesh Information\n")
   # Write the mesh file name
   file.write("mesh = " + crudeFileName + ".md5mesh" + "\n")
@@ -938,20 +941,23 @@ class ExportDNT(bpy.types.Operator):
     md5scale = FloatProperty(name="Scale", 
         description="Scale all objects from world origin (0,0,0) before export",
         default=1.0, precision=5)
-    defAppendPath = StringProperty(name="Append Path", 
+    defAppendPath = StringProperty(name="Path", 
          description="Path to insert at .md5def", 
          maxlen=1024, default="models/")
     defSoftScale = FloatProperty(name="Scale Factor",
          description="Scale factor to set at .md5def descriptor",
-         default=1.0, precision=5)
+         min=0.001, default=1.0, precision=5)
+    defBlendFrames = IntProperty(name="Blend Frames",
+         description="Number of frames for blend between animations",
+         default=4, min=1)
 
     def execute(self, context):
         settings = md5Settings(savepath = self.properties.filepath,
                               scale = self.properties.md5scale,
                               exportMode = self.properties.md5exportList,
                               appendPath = self.properties.defAppendPath,
-                              softScale = self.properties.defSoftScale
-                              )
+                              softScale = self.properties.defSoftScale,
+                              blendFrames = self.properties.defBlendFrames)
         save_md5(settings)
         return {'FINISHED'}
 
