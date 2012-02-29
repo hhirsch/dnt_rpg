@@ -571,7 +571,7 @@ def save_md5(settings):
   thearmature = 0  #null to start, will assign in next section 
   
   #first pass on selected data, pull one skeleton
-  skeleton = Skeleton(10, "Exported from Blender by io_export_md5.py by Paul Zirkle")
+  skeleton = Skeleton(10, "Exported from Blender by io_export_dnt.py")
   bpy.context.scene.frame_set(bpy.context.scene.frame_start)
   for obj in bpy.context.selected_objects:
     if obj.type == 'ARMATURE':
