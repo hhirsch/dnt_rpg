@@ -2,6 +2,7 @@
 
 path=models/personagens/cow/
 scale = 8.3
+blendFrames = 8
 
 # Mesh Information
 mesh = cow_no_horns.md5mesh

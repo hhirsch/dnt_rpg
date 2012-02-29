@@ -41,6 +41,8 @@ md5Model::md5Model(): aniModel(aniModel::TYPE_MD5),
    totalJoints = 0;
    totalMeshes = 0;
 
+   blendFrames = 4;
+
    meshes = NULL;
    baseSkel = NULL;
    curSkel = NULL;
@@ -382,7 +384,8 @@ void md5Model::setAnimation(int animationId)
    else
    {
       /* Reset it */
-      curAnimation->animation->reset();
+      curAnimation->animation->reset(
+            (backAnimation)?backAnimation->animation:NULL, blendFrames);
    }
 }
 
@@ -683,6 +686,13 @@ bool md5Model::load(const std::string& strFileName)
          sconv << data;
          sconv >> renderScale;
       }
+      else if(key == "blendFrames")
+      {
+         /* Set number of frames when blend between animations */
+         std::stringstream sconv;
+         sconv << data;
+         sconv >> blendFrames;
+      }
       else if(key == "mesh")
       {
          if(meshes == NULL)
@@ -787,8 +797,9 @@ void md5Model::callActionAnimation(int aniId)
       }
       /* Set current as action and reset its position */
       actionAnimation = true;
+      anim->animation->reset((curAnimation)?curAnimation->animation:NULL,
+            blendFrames);
       curAnimation = anim;
-      anim->animation->reset();
    }
 }
 

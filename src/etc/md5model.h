@@ -94,8 +94,7 @@ class md5ModelAnimation: public dntListElement
 
 /*! The MD5 model abstraction. It's composed by a .md5mesh file and
  * some md5anim files. Currently, there's no mixer for animations (as there
- * is in Doom3, for example), so only one active animation per time.
- * TODO: Mix animations, based on idtech4 code. */
+ * is in Doom3, for example), so only one active animation per time. */
 class md5Model: public aniModel, dntList
 {
    public:
@@ -196,6 +195,8 @@ class md5Model: public aniModel, dntList
 
       int totalJoints;             /**< Total joint in model */
       int totalMeshes;             /**< Total model meshes */
+
+      int blendFrames;             /**< Total frames when blending */
 
       md5ModelAnimation* curAnimation; /**< Current animation */
       md5ModelAnimation* backAnimation; /**< Animation to return after a

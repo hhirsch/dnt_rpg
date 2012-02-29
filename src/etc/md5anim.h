@@ -86,8 +86,11 @@ class md5Anim
        * \return false when animation ended! */
       bool update(float delta, bool singleCycle);
 
-      /*! Reset the animation state */
-      void reset();
+      /*! Reset the animation state 
+       * \param prev -> pointer to the previous animation to blend with
+       *                before start the current one 
+       * \param totalBlendFrames -> number of frames of the blend */
+      void reset(md5Anim* prev, int totalBlendFrames);
 
       /*! Get the animation id */
       int getId(){return(id);};
@@ -99,6 +102,9 @@ class md5Anim
       /*! Interpolate 2 skeletons
        * \note the return value will be overriden on successive calls */
       md5_joint_t* interpolate(md5_joint_t* skelA, md5_joint_t* skelB);
+
+      /*! Get the last interpolated skeleton  */
+      md5_joint_t* getLastSkeleton();
 
       /*! Get bounding box for current frame */
       md5_bbox_t* getCurrentBoundingBox();
@@ -130,6 +136,9 @@ class md5Anim
 
       int curFrame;    /**< Current animation frame */
       int nextFrame;   /**< Next animation frame */
+
+      md5Anim* previousAnim;  /**< Previous animation to blend with */
+      int blendFrames;        /**< total frames to blend before init */
 
       double lastTime; /**< Last animation time */
       double maxTime;  /**< Max animation time */

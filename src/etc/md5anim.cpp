@@ -42,6 +42,9 @@ md5Anim::md5Anim(int identifier)
    retSkel = NULL;
    bboxes = NULL;
 
+   previousAnim = NULL;
+   blendFrames = 1;
+
    curFrame = 0;
    nextFrame = 1;
 
@@ -321,6 +324,15 @@ bool md5Anim::load(const std::string strFileName)
       delete[] jointInfos;
    }
 
+   /* Set the retSkel to first skeleton, to avoid return a not defined
+    * skeleton with getLastInterpolate */
+   for(i = 0; i < totalJoints; ++i)
+   {
+      retSkel[i].parent = skelFrames[0][i].parent;
+      retSkel[i].pos = skelFrames[0][i].pos;
+      retSkel[i].orient = skelFrames[0][i].orient;
+   }
+
    return(true);
 }
 
@@ -418,11 +430,14 @@ void md5Anim::buildFrameSkeleton(md5_joint_info_t* jointInfos,
 /***********************************************************************
  *                               reset                                 *
  ***********************************************************************/
-void md5Anim::reset()
+void md5Anim::reset(md5Anim* prev, int totalBlendFrames)
 {
    lastTime = 0;
    curFrame = 0;
    nextFrame = 1;
+
+   previousAnim = prev;
+   blendFrames = totalBlendFrames;
 }
 
 /***********************************************************************
@@ -445,24 +460,37 @@ bool md5Anim::update(float delta, bool singleCycle)
 
    lastTime += delta;
 
-   if(lastTime >= maxTime)
+   if(!previousAnim)
    {
-      /* Frame time over, move to next frame */
-      curFrame++;
-      nextFrame++;
-      lastTime = 0.0f;
-
-      if(curFrame > maxFrames)
+      /* Normal state */
+      if(lastTime >= maxTime)
       {
-         /* Reset cur frame */
-         curFrame = 0;
-         retVal = false;
+         /* Frame time over, move to next frame */
+         curFrame++;
+         nextFrame++;
+         lastTime = 0.0f;
+
+         if(curFrame > maxFrames)
+         {
+            /* Reset cur frame */
+            curFrame = 0;
+            retVal = false;
+         }
+
+         if(nextFrame > maxFrames)
+         {
+            /* Reset next frame */
+            nextFrame = 0;
+         }
       }
-
-      if(nextFrame > maxFrames)
+   }
+   else
+   {
+      /* Blending with previous animation state */
+      if(lastTime >= maxTime*blendFrames)
       {
-         /* Reset next frame */
-         nextFrame = 0;
+         /* Done with blending */
+         previousAnim = NULL;
       }
    }
    return(retVal);
@@ -473,7 +501,13 @@ bool md5Anim::update(float delta, bool singleCycle)
  ***********************************************************************/
 md5_joint_t* md5Anim::interpolate()
 {
-   return(interpolate(skelFrames[curFrame], skelFrames[nextFrame]));
+   if(!previousAnim)
+   {
+      /* Normal interpolate two frames */
+      return(interpolate(skelFrames[curFrame], skelFrames[nextFrame]));
+   }
+   /* Otherwise, interpolate the previous animation frame with the current! */
+   return(interpolate(previousAnim->getLastSkeleton(), skelFrames[curFrame]));
 }
 
 /***********************************************************************
@@ -483,6 +517,13 @@ md5_joint_t* md5Anim::interpolate(md5_joint_t* skelA, md5_joint_t* skelB)
 {
    int i;
    double interp = lastTime*frameRate;
+
+   if(previousAnim)
+   {
+      /* Is interpoling with the previous animation, must
+       * set maxTime as the total blend frames*/
+      interp *= 1.0f/blendFrames;
+   }
 
    for(i = 0; i < totalJoints; ++i)
    {
@@ -501,6 +542,14 @@ md5_joint_t* md5Anim::interpolate(md5_joint_t* skelA, md5_joint_t* skelB)
       retSkel[i].orient = skelA[i].orient.slerp(skelB[i].orient, interp);
    }
 
+   return(retSkel);
+}
+
+/***********************************************************************
+ *                          getLastSkeleton                            *
+ ***********************************************************************/
+md5_joint_t* md5Anim::getLastSkeleton()
+{
    return(retSkel);
 }
 

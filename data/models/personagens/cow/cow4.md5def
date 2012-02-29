@@ -2,6 +2,7 @@
 
 path=models/personagens/cow/
 scale = 8.1
+blendFrames = 8
 
 # Mesh Information
 mesh = cow2.md5mesh
