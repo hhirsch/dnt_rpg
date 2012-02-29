@@ -78,6 +78,9 @@ class ogg_stream
        *              the EOF, >0 wait lp seconds before loop) */
       void setLoop(int lp);
 
+      /*! Get the ogg stream file name */
+      std::string getFileName(){return(fileName);};
+
  
    protected:
       /*! Reloads a buffer
@@ -104,6 +107,8 @@ class ogg_stream
         OggVorbis_File oggStream;      /**< stream handle */
         vorbis_info* vorbisInfo;       /**< some formatting data */
         vorbis_comment* vorbisComment; /**< user comments */
+
+        std::string fileName;          /**< stream file name */
 
         int loopInterval;              /**< if loop the source at EOF */ 
         Uint32 timeEnded;              /**< SDL_Ticks when EOF found */

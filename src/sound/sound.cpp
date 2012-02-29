@@ -217,6 +217,12 @@ bool sound::loadMusic(string fileName)
    
    if(backMusic)
    {
+      if(backMusic->getFileName() == fileName)
+      {
+         /* Keep playing as the file is the same */
+         unLock();
+         return(true);
+      }
       /* Delete Active Music, if one is */
       backMusic->release();
       delete(backMusic);

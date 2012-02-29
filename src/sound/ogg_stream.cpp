@@ -43,6 +43,7 @@ bool ogg_stream::open(string path)
    int result;
 
    timeEnded = 0;
+   fileName = path;
     
    if(!(oggFile = fopen(dir.getRealFile(path).c_str(), "rb")))
    {
