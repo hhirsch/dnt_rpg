@@ -770,6 +770,7 @@ bool md5Model::load(const std::string& strFileName)
          curAnimation->animation->setCurrentFrame(curPos);
       } 
    }
+   update(0);
    
    /* Must define all initial bounding box */
    calculateCrudeBoundingBox();
@@ -783,10 +784,6 @@ bool md5Model::load(const std::string& strFileName)
 void md5Model::callActionAnimation(int aniId)
 {
    md5ModelAnimation* anim;
-   if(curAnimation)
-   {
-      /* TODO: blend it with the next! */
-   }
    anim = (md5ModelAnimation*)get(aniId);
    if(anim)
    {
