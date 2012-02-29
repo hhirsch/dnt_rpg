@@ -741,6 +741,8 @@ def save_md5(settings):
   # Export animations
   ANIMATIONS = {}
 
+  previousAction = None
+
   # Try to get the dopesheet context to set active action to
   # the all needed ones on export;
   for a in bpy.context.screen.areas:
@@ -803,9 +805,10 @@ def save_md5(settings):
       currenttime += 1
   
   # Restore the previous active action and frame
-  dopeSheet.action = previousAction
-  print("Previous Frame:" + str(previousFrame))
-  bpy.context.scene.frame_set(previousFrame)
+  if(previousAction):
+      dopeSheet.action = previousAction
+      print("Previous Frame:" + str(previousFrame))
+      bpy.context.scene.frame_set(previousFrame)
 
 
 
