@@ -30,7 +30,7 @@ script()
          else if(diceValue == 6)
             message = gettext("Food for the hungry!")
          else if(diceValue == 7)
-            message = gettext("Im starving")
+            message = gettext("I'm starving")
          else if(diceValue == 8)
             message = gettext("Could you spare some coffee?")
          else if(diceValue == 9)
@@ -42,7 +42,7 @@ script()
          showTextStatic(SELF_CHARACTER, message)
 
          # Wait some random time
-	 waitTime = 10+rollDice(20)
+	      waitTime = 10+rollDice(20)
          wait(waitTime)
       else
          # Character not at range... for now, just wait
