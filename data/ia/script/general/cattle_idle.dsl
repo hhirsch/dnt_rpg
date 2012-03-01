@@ -38,6 +38,7 @@ script()
       else if(diceValue <= 3)
          # Moo (20%)
          #print("Moo!")
+         showTextStatic(SELF_CHARACTER, "Mooo")
          # Only need one cycle of Moo animation (no repeats)
          callAnimation(SELF_CHARACTER, 8)
          # Play moo sound!

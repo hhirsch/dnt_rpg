@@ -24,8 +24,8 @@ animation = cow2_dead2.md5anim
 
 
 # Material
-ambient = 1.0 1.0 1.0 1.0 
-diffuse = 0.800000011920929 0.800000011920929 0.800000011920929 1.0 
+ambient = 0.0 0.0 0.0 1.0 
+diffuse = 0.60 0.60 0.60 1.0 
 specular = 1.0 1.0 1.0 1.0
-shininess = 0.0
+shininess = 0.50
 image = cow2.png
