@@ -151,6 +151,10 @@
 		ABA0E5CE13FEDBB500FA02A0 /* sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA0E5BE13FEDBB500FA02A0 /* sound.cpp */; };
 		ABA0E5D213FEDDA600FA02A0 /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA0E5D113FEDDA600FA02A0 /* SDLMain.m */; };
 		ABCDE0531423BCB600020FA3 /* SDL_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABCDE0521423BCB600020FA3 /* SDL_ttf.framework */; };
+		ABD6279114FFE060008D83C7 /* cal3dmodel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD6278914FFE060008D83C7 /* cal3dmodel.cpp */; };
+		ABD6279214FFE060008D83C7 /* md5anim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD6278B14FFE060008D83C7 /* md5anim.cpp */; };
+		ABD6279314FFE060008D83C7 /* md5model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD6278D14FFE060008D83C7 /* md5model.cpp */; };
+		ABD6279414FFE060008D83C7 /* quaternion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD6278F14FFE060008D83C7 /* quaternion.cpp */; };
 		ABEBFE0C1424CC9200425986 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABEBFE0B1424CC9200425986 /* OpenAL.framework */; };
 		ABEBFE0F1424CD6400425986 /* data in Resources */ = {isa = PBXBuildFile; fileRef = ABEBFE0E1424CD6400425986 /* data */; };
 		ABEBFE111424D2CD00425986 /* config_mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEBFE101424D2CD00425986 /* config_mac.cpp */; };
@@ -439,6 +443,14 @@
 		ABA0E5D013FEDDA600FA02A0 /* SDLMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLMain.h; sourceTree = "<group>"; };
 		ABA0E5D113FEDDA600FA02A0 /* SDLMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLMain.m; sourceTree = "<group>"; };
 		ABCDE0521423BCB600020FA3 /* SDL_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_ttf.framework; path = Library/Frameworks/SDL_ttf.framework; sourceTree = SDKROOT; };
+		ABD6278914FFE060008D83C7 /* cal3dmodel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cal3dmodel.cpp; sourceTree = "<group>"; };
+		ABD6278A14FFE060008D83C7 /* cal3dmodel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cal3dmodel.h; sourceTree = "<group>"; };
+		ABD6278B14FFE060008D83C7 /* md5anim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = md5anim.cpp; sourceTree = "<group>"; };
+		ABD6278C14FFE060008D83C7 /* md5anim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5anim.h; sourceTree = "<group>"; };
+		ABD6278D14FFE060008D83C7 /* md5model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = md5model.cpp; sourceTree = "<group>"; };
+		ABD6278E14FFE060008D83C7 /* md5model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5model.h; sourceTree = "<group>"; };
+		ABD6278F14FFE060008D83C7 /* quaternion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = quaternion.cpp; sourceTree = "<group>"; };
+		ABD6279014FFE060008D83C7 /* quaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = quaternion.h; sourceTree = "<group>"; };
 		ABEBFE0B1424CC9200425986 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		ABEBFE0E1424CD6400425986 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../../data; sourceTree = "<group>"; };
 		ABEBFE101424D2CD00425986 /* config_mac.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = config_mac.cpp; path = ../../../src/config_mac.cpp; sourceTree = "<group>"; };
@@ -690,6 +702,14 @@
 		ABA0E4B613FEDB9D00FA02A0 /* etc */ = {
 			isa = PBXGroup;
 			children = (
+				ABD6278914FFE060008D83C7 /* cal3dmodel.cpp */,
+				ABD6278A14FFE060008D83C7 /* cal3dmodel.h */,
+				ABD6278B14FFE060008D83C7 /* md5anim.cpp */,
+				ABD6278C14FFE060008D83C7 /* md5anim.h */,
+				ABD6278D14FFE060008D83C7 /* md5model.cpp */,
+				ABD6278E14FFE060008D83C7 /* md5model.h */,
+				ABD6278F14FFE060008D83C7 /* quaternion.cpp */,
+				ABD6279014FFE060008D83C7 /* quaternion.h */,
 				ABA0E4B713FEDB9D00FA02A0 /* animodel.cpp */,
 				ABA0E4B813FEDB9D00FA02A0 /* animodel.h */,
 				ABA0E4B913FEDB9D00FA02A0 /* boundingbox.cpp */,
@@ -1094,6 +1114,10 @@
 				ABA0E5D213FEDDA600FA02A0 /* SDLMain.m in Sources */,
 				ABEBFE111424D2CD00425986 /* config_mac.cpp in Sources */,
 				AB838C42143A42E700AD8D24 /* moneywindow.cpp in Sources */,
+				ABD6279114FFE060008D83C7 /* cal3dmodel.cpp in Sources */,
+				ABD6279214FFE060008D83C7 /* md5anim.cpp in Sources */,
+				ABD6279314FFE060008D83C7 /* md5model.cpp in Sources */,
+				ABD6279414FFE060008D83C7 /* quaternion.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
