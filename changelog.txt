@@ -19,7 +19,8 @@ BugFixes:
  - Fixed a undesired loop with a sound file lesser than the buffer;
  - script: Fixed a bug on jumping from "else if" statements when an 
            "if" was successfull;
- - sound: keep music playing if try to load same music file; 
+ - sound: keep music playing if try to load same music file;
+ - sun: Light w must be 1.0;
 
 ================================================
 |                Version 0.8                   |

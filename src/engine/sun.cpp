@@ -38,7 +38,7 @@ sun::sun(float hour, float farViewX, float farViewZ)
    where[0] = 0.0;
    where[1] = 0.0;
    where[2] = 0.0;
-   where[3] = 0.0;
+   where[3] = 1.0;
    
    positionOnHour(0.0,0.0);
 
