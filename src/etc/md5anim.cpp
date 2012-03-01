@@ -479,8 +479,19 @@ bool md5Anim::update(float delta, bool singleCycle)
 
          if(nextFrame > maxFrames)
          {
-            /* Reset next frame */
-            nextFrame = 0;
+            if(singleCycle)
+            {
+               /* Reset next frame */
+               nextFrame = 0;
+            }
+            else
+            {
+               /* Not single cycle, so final frame must be equal to first
+                * one. So, just jump to the first and first's next */
+               curFrame = 0;
+               nextFrame = 1;
+               retVal = false;
+            }
          }
       }
    }
