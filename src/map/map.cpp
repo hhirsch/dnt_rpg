@@ -1379,6 +1379,15 @@ void Map::renderFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 }
 
 /********************************************************************
+ *                           setLights                              *
+ ********************************************************************/
+void Map::setLights(GLfloat perX, GLfloat perZ)
+{
+   /* Update Lights */
+   lights.update(perX, perZ);
+}
+
+/********************************************************************
  *                             render                               *
  ********************************************************************/
 int Map::render(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
@@ -1386,8 +1395,6 @@ int Map::render(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 {
    /* Update doors */
    doors.update();
-   /* Update Lights */
-   lights.update(perX, perZ);
 
    glColor3f(1.0,1.0,1.0);
    /* Render Walls */

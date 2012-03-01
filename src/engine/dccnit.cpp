@@ -3706,6 +3706,9 @@ void engine::updateBeforeRender()
    {
       gameSun->disableLight();
    }
+   /* Other light definitions */
+   actualMap->setLights(PCs->getActiveCharacter()->scNode->getPosX(),
+                        PCs->getActiveCharacter()->scNode->getPosZ());
 }
 
 /*********************************************************************

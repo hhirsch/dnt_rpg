@@ -21,6 +21,7 @@ BugFixes:
            "if" was successfull;
  - sound: keep music playing if try to load same music file;
  - sun: Light w must be 1.0;
+ - map: fix for mapLights set;
 
 ================================================
 |                Version 0.8                   |

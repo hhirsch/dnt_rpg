@@ -256,6 +256,9 @@ class Map
       Map();       /**< Construtor */
       ~Map();      /**< Destruidor */
 
+      /*! Set the map Lights 
+       * \note: must be called after glLoadIdentity(), at render's begin */
+      void setLights(GLfloat perX, GLfloat perZ);
 
       /*! Gets the square size on the map 
        * \return-> the square size used on the map */ 
