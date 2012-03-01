@@ -473,7 +473,16 @@ bool md5Anim::update(float delta, bool singleCycle)
          if(curFrame > maxFrames)
          {
             /* Reset cur frame */
-            curFrame = 0;
+            if(singleCycle)
+            {
+               /* Single cycle, must keep stopped at final */
+               curFrame = maxFrames;
+               nextFrame = maxFrames-1;
+            }
+            else
+            {
+               curFrame = 0;
+            }
             retVal = false;
          }
 
@@ -481,8 +490,8 @@ bool md5Anim::update(float delta, bool singleCycle)
          {
             if(singleCycle)
             {
-               /* Reset next frame */
-               nextFrame = 0;
+               /* SingleCycle must stop at end! */
+               nextFrame = maxFrames;
             }
             else
             {
