@@ -2063,7 +2063,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    }
 
    /* Syntax void function(character c, string s) */
-   else if( (functionName == IA_CHARACTER_SHOW_TEXT) )
+   else if( (functionName == IA_CHARACTER_SHOW_TEXT) ||
+            (functionName == IA_CHARACTER_SHOW_TEXT_STATIC) )
    {
       character* dude = NULL;
       string text;
@@ -2075,9 +2076,20 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       if(dude != NULL)
       {
          messageController msgCtl;
-         msgCtl.addMessage(dude->scNode->getPosX(), 
-               dude->scNode->getPosY() + dude->scNode->getBoundingBox().y2, 
-               dude->scNode->getPosZ(),text);
+         
+         if(functionName == IA_CHARACTER_SHOW_TEXT)
+         {
+            msgCtl.addMessage(dude->scNode->getPosX(), 
+                  dude->scNode->getPosY() + dude->scNode->getBoundingBox().y2, 
+                  dude->scNode->getPosZ(),text);
+         }
+         else if(functionName == IA_CHARACTER_SHOW_TEXT_STATIC)
+         {
+            msgCtl.addMessage(dude->scNode->getPosX(), 
+                  dude->scNode->getPosY() + dude->scNode->getBoundingBox().y2, 
+                  dude->scNode->getPosZ(), text,
+                  0.9f, 0.12f, 0.2f, DNT_FONT_ARIAL, 14, true);
+         }
       }
    }
 

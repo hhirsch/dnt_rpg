@@ -35,7 +35,7 @@ using namespace std;
  ***********************************************************/
 message3d::message3d(GLfloat x, GLfloat y, GLfloat z, string msg)
 {
-   init(x, y, z, msg, 1.0f, 0.5f, 0.5f);
+   init(x, y, z, msg, 1.0f, 0.5f, 0.5f, DNT_FONT_ARIAL, 18);
 }
 
 /***********************************************************
@@ -44,14 +44,23 @@ message3d::message3d(GLfloat x, GLfloat y, GLfloat z, string msg)
 message3d::message3d(GLfloat x, GLfloat y, GLfloat z, string msg,
                      GLfloat R, GLfloat G, GLfloat B)
 {
-   init(x,y,z,msg, R,G,B);
+   init(x,y,z,msg, R,G,B, DNT_FONT_ARIAL, 18);
+}
+
+/***********************************************************
+ *                       Constructor                       *
+ ***********************************************************/
+message3d::message3d(GLfloat x, GLfloat y, GLfloat z, std::string msg,
+      GLfloat R, GLfloat G, GLfloat B, std::string font, int fontSize)
+{
+   init(x,y,z,msg, R,G,B, font, fontSize);
 }
 
 /***********************************************************
  *                           init                          *
  ***********************************************************/
 void message3d::init(GLfloat x, GLfloat y, GLfloat z, string msg,
-                     GLfloat R, GLfloat G, GLfloat B)
+      GLfloat R, GLfloat G, GLfloat B, string font, int fontSize)
 {
    dntFont fnt;
 
@@ -76,9 +85,10 @@ void message3d::init(GLfloat x, GLfloat y, GLfloat z, string msg,
    posZ = z;
    live = 0;
    message = msg;
+   isStatic = false;
 
    /* Define the font and sizes */
-   fnt.defineFont(DNT_FONT_ARIAL, 18);
+   fnt.defineFont(font, fontSize);
    fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
    fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
    size = fnt.getStringWidth(message) + 8;
@@ -104,6 +114,14 @@ void message3d::init(GLfloat x, GLfloat y, GLfloat z, string msg,
 message3d::~message3d()
 {
    glDeleteTextures(1,&messageTexture);
+}
+
+/***********************************************************
+ *                       setStatic                         *
+ ***********************************************************/
+void message3d::setStatic()
+{
+   isStatic = true;
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -179,12 +197,18 @@ void messageController::finish()
 /***********************************************************
  *                           add                           *
  ***********************************************************/
-void messageController::addMessage(GLfloat x, GLfloat y, GLfloat z, string msg)
+void messageController::addMessage(GLfloat x, GLfloat y, GLfloat z, string msg,
+      bool yStatic)
 {
    if(!msg.empty())
    {
       message3d* m = new message3d(x,y,z,msg);
       list->insert(m);
+
+      if(yStatic)
+      {
+         m->setStatic();
+      }
    }
 }
 
@@ -192,12 +216,36 @@ void messageController::addMessage(GLfloat x, GLfloat y, GLfloat z, string msg)
  *                           add                           *
  ***********************************************************/
 void messageController::addMessage(GLfloat x, GLfloat y, GLfloat z, string msg,
-                                   GLfloat R, GLfloat G, GLfloat B)
+      GLfloat R, GLfloat G, GLfloat B, bool yStatic)
 {
    if(!msg.empty())
    {
       message3d* m = new message3d(x,y,z,msg, R, G, B);
       list->insert(m);
+
+      if(yStatic)
+      {
+         m->setStatic();
+      }
+   }
+}
+
+/***********************************************************
+ *                           add                           *
+ ***********************************************************/
+void messageController::addMessage(GLfloat x, GLfloat y, GLfloat z, string msg,
+      GLfloat R, GLfloat G, GLfloat B, std::string font, int fontSize, 
+      bool yStatic)
+{
+   if(!msg.empty())
+   {
+      message3d* m = new message3d(x,y,z,msg, R, G, B, font, fontSize);
+      list->insert(m);
+
+      if(yStatic)
+      {
+         m->setStatic();
+      }
    }
 }
 
@@ -246,7 +294,10 @@ void messageController::draw(GLdouble modelView[16], GLdouble projection[16],
       glPopMatrix();
 
       msg->live++;
-      msg->posY += 0.5f;
+      if(!msg->isStatic)
+      {
+         msg->posY += 0.5f;
+      }
       msg = (message3d*)msg->getNext();
 
       /* Verify if the message elapsed */

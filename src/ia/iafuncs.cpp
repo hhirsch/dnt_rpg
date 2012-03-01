@@ -149,7 +149,9 @@ bool isFunction(string s)
            (s == IA_WEAPON_DEC_AMMO) || (s == IA_WEAPON_GET_DICE) ||
            (s == IA_WEAPON_GET_RANGE_TYPE) || (s == IA_WEAPON_GET_RANGE) ||
            (s == IA_WEAPON_SOUND_AT_CHARACTER) || (s == IA_WEAPON_SOUND) ||
-           (s == IA_CHARACTER_SHOW_TEXT) || (s == IA_CHARACTER_SET_ANIMATION) ||
+           (s == IA_CHARACTER_SHOW_TEXT) || 
+           (s == IA_CHARACTER_SHOW_TEXT_STATIC) ||
+           (s == IA_CHARACTER_SET_ANIMATION) ||
            (s == IA_CHARACTER_CALL_ANIMATION) || (s == IA_PLAY_SOUND) );
 }
 

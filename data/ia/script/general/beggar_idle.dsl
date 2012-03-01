@@ -43,7 +43,7 @@ script()
          message = gettext("I cook with wine")
       end
 
-      showText(SELF_CHARACTER, message)
+      showTextStatic(SELF_CHARACTER, message)
 
    end
 

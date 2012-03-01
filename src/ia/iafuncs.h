@@ -281,6 +281,8 @@
 
 /*! void showText(character c, text string) */
 #define IA_CHARACTER_SHOW_TEXT  "showText"
+/*! void showTextStatic(character c, text string) */
+#define IA_CHARACTER_SHOW_TEXT_STATIC  "showTextStatic"
 
 /*! int getPsycho(character c)  */
 #define IA_CHARACTER_GET_PSYCHO "getPsycho"

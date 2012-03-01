@@ -50,8 +50,15 @@ class message3d: public dntListElement
        * \param B -> blue color [0..1]*/
       message3d(GLfloat x, GLfloat y, GLfloat z, std::string msg,
                 GLfloat R, GLfloat G, GLfloat B);
+      /*! Constructor*/
+      message3d(GLfloat x, GLfloat y, GLfloat z, std::string msg,
+                GLfloat R, GLfloat G, GLfloat B, 
+                std::string font, int fontSize);
       /*! Destructor */
       ~message3d();
+
+      /*! Set the message static on Y axis */
+      void setStatic();
 
       /*! Set the controller as friend */
       friend class messageController;
@@ -64,10 +71,12 @@ class message3d: public dntListElement
        * \param msg -> message to show
        * \param R -> red color [0..1]
        * \param G -> green color [0..1]
-       * \param B -> blue color [0..1]*/
+       * \param B -> blue color [0..1]
+       * \param font -> font name constant
+       * \param fontSize -> font size */
       void init(GLfloat x, GLfloat y, GLfloat z, std::string msg,
-                GLfloat R, GLfloat G, GLfloat B);
-
+                GLfloat R, GLfloat G, GLfloat B, 
+                std::string font, int fontSize);
 
 
       GLfloat posX,          /**< X position */
@@ -78,6 +87,7 @@ class message3d: public dntListElement
       std::string message;   /**< the message to show */
       GLuint messageTexture; /**< The texture load by the message */
       int live;              /**< Time living */
+      bool isStatic;         /**< If is static or not */
 };
 
 /*! The message 3d list */
@@ -123,7 +133,8 @@ class messageController
        * \param y -> y position
        * \param z -> z position
        * \param msg -> message to show */
-      void addMessage(GLfloat x, GLfloat y, GLfloat z, std::string msg);
+      void addMessage(GLfloat x, GLfloat y, GLfloat z, std::string msg, 
+            bool yStatic=false);
 
       /*! Add a message
        * \param x -> x position
@@ -134,8 +145,12 @@ class messageController
        * \param G -> green color [0..1]
        * \param B -> blue color [0..1]*/
       void addMessage(GLfloat x, GLfloat y, GLfloat z, std::string msg,
-                      GLfloat R, GLfloat G, GLfloat B);
+                      GLfloat R, GLfloat G, GLfloat B, bool yStatic=false);
 
+      /*! Add message, setting the font */
+      void addMessage(GLfloat x, GLfloat y, GLfloat z, std::string msg,
+                      GLfloat R, GLfloat G, GLfloat B, 
+                      std::string font, int fontSize, bool yStatic=false);
 
    protected:
       static message3dList* list;  /**< The messages chain list */
