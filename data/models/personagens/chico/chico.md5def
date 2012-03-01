@@ -1,0 +1,25 @@
+# Exported from Blender by DNT md5 exporter
+
+path = models/personagens/chico/
+scale = 19.4
+blendFrames = 4
+
+# Mesh Information
+mesh = chico.md5mesh
+
+# Animations
+animation = chico_Idle-M.md5anim
+animation = chico_Walk.md5anim
+animation = chico_Die.md5anim
+animation = chico_Dead.md5anim
+animation = chico_Left-Punch-M.md5anim
+animation = chico_Run-M.md5anim
+animation = chico_Charge-Punch-M.md5anim
+animation = chico_Rest.md5anim
+
+# Material
+ambient = 1.0 1.0 1.0 1.0 
+diffuse = 0.8 0.8 0.8 1.0 
+specular = 0.9 0.9 0.9 1.0
+shininess = 0.0
+image = chico.png

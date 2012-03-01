@@ -22,6 +22,7 @@ Spider(10lvl) = characters/npcs/lvl10/spider_lvl10.npc
 
 # PCs
 Atleticano(1lvl) = characters/pcs/atleticano.pc
+Chico(4lvl) = characters/pcs/chico.pc
 Cruzeirense(1lvl) = characters/pcs/cruzeirense.pc
 Dona_Velha(2lvl) = characters/pcs/dona.pc
 Hippie(2lvl) = characters/pcs/hippie.pc
@@ -29,4 +30,4 @@ Logan(20lvl) = characters/pcs/logan.pc
 Metaleiro(1lvl) = characters/pcs/metaleiro.pc
 Santa(1lvl) = characters/pcs/santa.pc
 Velhaca(1lvl) = characters/pcs/velhaca.pc
-ZeDoBar(3lvl) = characters/pcs/zedobar.pc
+ZeDoBar(4lvl) = characters/pcs/zedobar.pc

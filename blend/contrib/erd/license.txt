@@ -2,8 +2,8 @@ Originally from: Estrada Real Digital (http://sourceforge.net/projects/erd/)
 License: GPLv2
 Modifications by DNTeam
 
-Armature of bigboss by FreeLikeGNU, Clint Bellanger, and Pompei2, with
-aditional dead and die by DNTeam.
-Source: http://opengameart.org/content/base-human-models-low-poly-for-blender-25x
-License: LGPLv3
+Armature of bigboss, chico:
+   by FreeLikeGNU, Clint Bellanger, and Pompei2, with adjusts by DNTeam.
+   Source: http://opengameart.org/content/base-human-models-low-poly-for-blender-25x
+   License: LGPLv3
 
