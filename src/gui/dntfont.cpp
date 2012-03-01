@@ -185,7 +185,7 @@ void dntFont::defineFontOutline(int outLine)
 {
    if(activeFont)
    {
-      TTF_SetFontStyle(activeFont->font, outLine);
+      TTF_SetFontOutline(activeFont->font, outLine);
    }
 }
 
