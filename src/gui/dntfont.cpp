@@ -179,6 +179,17 @@ void dntFont::defineFontStyle(int style)
 }
 
 /**********************************************************************
+ *                         defineFontOutline                          *
+ **********************************************************************/
+void dntFont::defineFontOutline(int outLine)
+{
+   if(activeFont)
+   {
+      TTF_SetFontStyle(activeFont->font, outLine);
+   }
+}
+
+/**********************************************************************
  *                            renderText                              *
  **********************************************************************/
 SDL_Surface* dntFont::renderText(string str, SDL_Color color, bool isUtf8)

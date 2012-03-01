@@ -99,6 +99,9 @@ class dntFont
       /*! Define the current font style (normal, bold or italic)
        * \param style -> font style constant (and combinations) */
       void defineFontStyle(int style);
+   
+      /*! Set the font outline */
+      void defineFontOutline(int outLine);
 
       /*! Get the max width of the font (in a "gambiarra")  */
       int getIncCP();
