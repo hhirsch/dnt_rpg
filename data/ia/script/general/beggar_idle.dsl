@@ -13,7 +13,7 @@ script()
    while(true)
 
       # Verify if the playable character is near.
-      if(characterAtRange(SELF_CHARACTER, ACTIVE_CHARACTER)
+      if(characterAtRange(SELF_CHARACTER, ACTIVE_CHARACTER))
          # It's near, let's show a beggar message and wait!
          diceValue = rollDice(10)
 
