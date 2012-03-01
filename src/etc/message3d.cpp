@@ -98,19 +98,27 @@ void message3d::init(GLfloat x, GLfloat y, GLfloat z, string msg,
                                          smallestPowerOfTwo(size),
                                          32,
                                          32, rmask, gmask, bmask, amask);
+   SDL_Surface* bs = SDL_CreateRGBSurface(SDL_SWSURFACE,
+                                          smallestPowerOfTwo(size),
+                                          32,
+                                          32, rmask, gmask, bmask, amask);
    
    fnt.defineFontOutline(2);
-   
+   color_Set(0, 0, 0, 255);
+   fnt.write(bs, 0, 0, message.c_str(), true);
+
+   fnt.defineFontOutline(0);
    color_Set((int)floor(R*255),(int)floor(G*255),(int)floor(B*255),255);
    fnt.write(s, 2, 2, message.c_str(), true);
    
-   fnt.defineFontOutline(0);
+   SDL_BlitSurface(s, NULL, bs, NULL);
    
    
    glGenTextures(1,&messageTexture);
-   setTextureRGBA(s, messageTexture);
+   setTextureRGBA(bs, messageTexture);
 
    SDL_FreeSurface(s);
+   SDL_FreeSurface(bs);
 }
 
 /***********************************************************
