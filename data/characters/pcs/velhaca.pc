@@ -1,6 +1,6 @@
 name = Velhaca
 model = models/personagens/velhaca/velhaca.md5def
-portrait = characters/portraits/velha.png
+portrait = characters/portraits/velhaca.png
 battleScript = ia/script/fight/fight_animal.dsl
 bloodFileName = particles/blood2.par
 bloodPosition = 40
