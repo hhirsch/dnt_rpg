@@ -1,0 +1,25 @@
+# Exported from Blender by DNT md5 exporter
+
+path = models/personagens/zedobar/
+scale = 18.2
+blendFrames = 4
+
+# Mesh Information
+mesh = zedobar.md5mesh
+
+# Animations
+animation = zedobar_Idle-M.md5anim
+animation = zedobar_Walk.md5anim
+animation = zedobar_Die.md5anim
+animation = zedobar_Dead.md5anim
+animation = zedobar_Left-Punch-M.md5anim
+animation = zedobar_Run-M.md5anim
+animation = zedobar_Charge-Punch-M.md5anim
+
+
+# Material
+ambient = 1.0 1.0 1.0 1.0 
+diffuse = 0.80 0.80 0.80 1.0 
+specular = 1.0 1.0 1.0 1.0
+shininess = 0.0
+image = texture.png
