@@ -2657,7 +2657,7 @@ int engine::treatIO(SDL_Surface *screen)
       /* Update Time */
       seconds = varTempo / 1000.0f;
 
-      hour = (hour + (seconds / 100.0f) );
+      hour = (hour + (seconds / 1000.0f) );
       if(hour > 23.99f)
       {
          hour = 0.0f;
