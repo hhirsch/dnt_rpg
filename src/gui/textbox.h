@@ -163,8 +163,12 @@ class textBox: public guiObject, public dntList
       bool receiveEvents();
 
       /*! Set if the text box receive events
-       * \param b _> true to receive events*/
+       * \param b -> true to receive events*/
       void setReceiveEvents(bool b);
+
+      /*! Set the textBox to SolidMode (allowing, for example, correct
+       * render on empty - with full alpha - surfaces) */
+      void setSolid();
    
    protected:
       /*! Delete the textLine
@@ -196,6 +200,7 @@ class textBox: public guiObject, public dntList
       int fontAlign;       /**< Font Align */
       int fontSize;        /**< Font Size */
       int fontStyle;       /**< Font Style */
+      bool solid;          /**< Solid Mode */
       farso_colors Colors; /**< Colors */
 };
 

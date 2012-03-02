@@ -521,6 +521,9 @@ class engine
       
       thing* curTarget;            /**< The current target under mouse */
 
+      guiInterface* fpsGui;        /**< A gui jsut for fps */
+      window* fpsWindow;           /**< an invisible window for fps display */
+      textBox* fpsText;            /**< The fps text */
 
       /* Combat Things */
       GLuint  normalMoveCircle,    /**< One Movimentation Circle */

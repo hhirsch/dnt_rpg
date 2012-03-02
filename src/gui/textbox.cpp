@@ -41,6 +41,7 @@ textBox::textBox(int xa, int ya, int xb, int yb, int frameType,
    fontSize = 10;
    firstLine = 0;
    recEvents = false;
+   solid = false;
 }
 
 /*******************************************************
@@ -66,6 +67,14 @@ void textBox::freeElement(dntListElement* obj)
 {
    textLine* t = (textLine*)obj;
    delete(t);
+}
+
+/*******************************************************
+ *                       setSolid                      *
+ *******************************************************/
+void textBox::setSolid()
+{
+   solid = true;
 }
 
 /*******************************************************
@@ -220,7 +229,8 @@ void textBox::draw(int i)
          fnt.defineFont(line->fontName, line->fontSize);
          fnt.defineFontAlign(line->fontAlign);
          fnt.defineFontStyle(line->fontStyle);
-         fnt.writeSingleLine(wSurface, x1+2, y, line->text, x1+2, y, x2, y2);
+         fnt.writeSingleLine(wSurface, x1+2, y, line->text, 
+               x1+2, y, x2, y2, solid);
 
          setChanged();
       }
@@ -265,6 +275,12 @@ int textBox::draw2()
                           Colors.colorCont[1].B, Colors.colorCont[1].A);
       }
    }
+   else if(solid)
+   {
+      /* Must set an empty background */
+      color_Set(255, 255, 255, 0);
+      rectangle_Fill(wSurface,x1+1,y1+1,x2-1,y2-1);
+   }
 
    if(total > 0)
    {
@@ -284,7 +300,8 @@ int textBox::draw2()
          fnt.defineFont(line->fontName, line->fontSize);
          fnt.defineFontAlign(line->fontAlign);
          fnt.defineFontStyle(line->fontStyle);
-         fnt.writeSingleLine(wSurface, x1+2, y, line->text, x1+2, y, x2, y2);
+         fnt.writeSingleLine(wSurface, x1+2, y, line->text, 
+               x1+2, y, x2, y2, solid);
          y += line->height;
          height = line->height;
          line = (textLine*)line->getNext();

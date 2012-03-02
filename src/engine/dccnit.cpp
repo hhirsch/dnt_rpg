@@ -129,6 +129,17 @@ engine::engine()
    mapWindow = new miniMapWindow();
    shortcuts = new shortcutsWindow();
 
+   /* Create the fps window */
+   fpsGui  = new guiInterface("");
+   fpsWindow = fpsGui->insertWindow(option->getScreenWidth()-129, 
+         option->getScreenHeight()-33, option->getScreenWidth()-1,
+         option->getScreenHeight()-1, "", true); 
+   fpsText = fpsWindow->getObjectsList()->insertTextBox(10, 10, 118, 30, 0, "");
+   fpsText->setFont(DNT_FONT_PALLADIO, 14, DNT_FONT_ALIGN_CENTER);
+   fpsText->setSolid();
+   fpsWindow->setExternPointer(&fpsWindow);
+   fpsGui->openWindow(fpsWindow);
+
    /* Initialize Briefing */
    brief = new briefing();
 
@@ -288,6 +299,11 @@ engine::~engine()
    }
 
    /* Clear GUI */
+   if(fpsGui)
+   {
+      fpsGui->closeWindow(fpsWindow);
+      delete(fpsGui);
+   }
    if(gui)
    {
       delete(gui);
@@ -3180,6 +3196,11 @@ int engine::treatIO(SDL_Surface *screen)
       if( time-lastFPS >= 500 )
       {
          /* FIXME -> reshow FPS! */
+         std::stringstream sconv;
+         std::string fpsStr;
+         sconv << actualFPS;
+         sconv >> fpsStr;
+         fpsText->setText(fpsStr);
          lastFPS = time;
       }
       
@@ -3536,6 +3557,9 @@ void engine::renderGUI()
 
       glPushMatrix();
          gui->draw(proj,modl,viewPort);
+      glPopMatrix();
+      glPushMatrix();
+         fpsGui->draw(proj, modl, viewPort);
       glPopMatrix();
 
       /* Mouse Cursor */
