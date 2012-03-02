@@ -195,7 +195,8 @@ void sceneNode::render(GLfloat** viewMatrix, bool update, bool reflexion,
       /* Update animation */
       if(update)
       {
-         model->update(WALK_UPDATE, angleY, posX, posY, posZ);
+         model->update(WALK_UPDATE, angleY, posX, posY, posZ, 
+               bbox.isVisible(viewMatrix));
          if( (updateCrude) || (model->getType() == aniModel::TYPE_MD5) )
          {
             /* Need to recalculate bounding box, based on position *

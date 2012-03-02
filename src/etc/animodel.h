@@ -127,8 +127,15 @@ class aniModel
 
 
       /*! Update Model to pos time 
-       * \param pos -> time of the animation */
-      void update(float pos, float angleY, float pX, float pY, float pZ);
+       * \param pos -> time of the animation
+       * \param isVisible -> result of the view frustum culling for
+       *                     the last bounding box calculation. 
+       *                     If isn't visible, only update the frame,
+       *                     but not calculate the mesh position,
+       *                     to avoid spending cpu/gpu time if things
+       *                     that at end will not be visible. */
+      void update(float pos, float angleY, float pX, float pY, float pZ,
+         bool isVisible);
 
       /*! Set the animation state of the model.
        * \param state -> state ID to be defined. */
@@ -238,7 +245,7 @@ class aniModel
        *****************************************************************/
 
       /*! Update the model animation after delta */
-      virtual void update(float delta)=0;
+      virtual void update(float delta, bool isVisible)=0;
 
       /*! Get the Id of a bone
        * \param bName name of the bone to get its it

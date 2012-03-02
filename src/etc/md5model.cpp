@@ -392,15 +392,16 @@ void md5Model::setAnimation(int animationId)
 /***********************************************************************
  *                               update                                *
  ***********************************************************************/
-void md5Model::update(float delta)
+void md5Model::update(float delta, bool isVisible)
 {
    if(curAnimation)
    {
-      /* Always need to calculate when animated */
-      needToCalculate = true;
+      /* Always need to calculate when animated and visible */
+      needToCalculate = isVisible;
+
       /* Calculate current and next frames */
-      if( (curAnimation->animation->update(delta, actionAnimation) == false) &&
-          (actionAnimation) )
+      if( (curAnimation->animation->update(delta, actionAnimation) 
+               == false) && (actionAnimation) )
       {
          actionAnimation = false;
          /* Must go back to the previous animation */
@@ -413,19 +414,25 @@ void md5Model::update(float delta)
             setAnimation(STATE_NONE);
          }
          /* Recall the update for the previous animation  */
-         update(delta);
+         update(delta, isVisible);
          return;
       }
+
       /* Interpolate skeletons between two frames */
       curSkel = curAnimation->animation->interpolate();
-      calculateMeshes();
+
+      /* Only calculate when visible */
+      if(isVisible)
+      {
+         calculateMeshes();
+      }
    }
    else
    {
       /* No animation, just use the base skeleton */
       curSkel = baseSkel;
       /* Only do a single calculation for non-animation */
-      if(needToCalculate)
+      if( (needToCalculate) && (isVisible) )
       {
          calculateMeshes();
          needToCalculate = false;
@@ -770,7 +777,8 @@ bool md5Model::load(const std::string& strFileName)
          curAnimation->animation->setCurrentFrame(curPos);
       } 
    }
-   update(0);
+   /* Update at as "visible" state, to first calculate the mesh */
+   update(0, true);
    
    /* Must define all initial bounding box */
    calculateCrudeBoundingBox();

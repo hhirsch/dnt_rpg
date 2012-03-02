@@ -277,7 +277,7 @@ bool cal3DModel::load(const string& strFilename)
    curPos =  11 + (int)(30 * (rand() / (RAND_MAX + 1.0))); 
    m_state = STATE_NONE;
    setAnimation(STATE_IDLE);
-   update(curPos);
+   update(curPos, true);
 
    /* Define the material */
    defineMaterial();
@@ -354,11 +354,15 @@ void cal3DModel::setAnimation(int animationId)
 /*********************************************************************
  *                                update                             *
  *********************************************************************/
-void cal3DModel::update(float delta)
+void cal3DModel::update(float delta, bool isVisible)
 {
    curPos = delta;
-   m_calModel->update(delta);
-   updateArrays();
+
+   if(isVisible)
+   {
+      m_calModel->update(delta);
+      updateArrays();
+   }
 }
 
 /*********************************************************************

@@ -60,7 +60,7 @@ class cal3DModel: public aniModel
    protected:
 
       /*! Update the animation, delta seconds after previous update */
-      void update(float delta);
+      void update(float delta, bool isVisible);
 
       /*! Set the current animation to "animationId" */
       void setAnimation(int animationId);

@@ -163,7 +163,7 @@ class md5Model: public aniModel, dntList
       void preCalculateNormals();
 
       /*! Update the animation, delta seconds after previous update */
-      void update(float delta);
+      void update(float delta, bool isVisible);
 
       /*! Delete and clean all created structures */
       void clean();

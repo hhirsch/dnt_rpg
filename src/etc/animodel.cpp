@@ -466,13 +466,18 @@ int aniModel::getState()
 /*********************************************************************
  *                                update                             *
  *********************************************************************/
-void aniModel::update(GLfloat delta, float angleY, float pX, float pY, float pZ)
+void aniModel::update(GLfloat delta, float angleY, 
+      float pX, float pY, float pZ, bool isVisible)
 {
    //curPos = delta;
-   update(delta);
-   updateKeyVertex(leftHand, angleY, pX, pY+dY, pZ);
-   updateKeyVertex(rightHand, angleY, pX, pY+dY, pZ);
-   updateKeyVertex(head, angleY, pX, pY+dY, pZ);
+   update(delta, isVisible);
+
+   if(isVisible)
+   {
+      updateKeyVertex(leftHand, angleY, pX, pY+dY, pZ);
+      updateKeyVertex(rightHand, angleY, pX, pY+dY, pZ);
+      updateKeyVertex(head, angleY, pX, pY+dY, pZ);
+   }
 }
 
 /*********************************************************************
