@@ -65,8 +65,8 @@ script()
          # Walk (10%)
          #print("Walk")
          # Get a random position
-         pX = OWNER_POSX + (0-1)*(rollDice(2)-1)*rollDice(30)
-         pZ = OWNER_POSZ + (0-1)*(rollDice(2)-1)*rollDice(30)
+         pX = OWNER_POSX + (0-1)*(rollDice(2)-1)*rollDice(80)
+         pZ = OWNER_POSZ + (0-1)*(rollDice(2)-1)*rollDice(80)
          moveToPosition(SELF_CHARACTER, pX, pZ)
       end
    end
