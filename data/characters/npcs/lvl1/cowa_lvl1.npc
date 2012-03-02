@@ -4,6 +4,7 @@ portrait = characters/portraits/ameiva.png
 battleScript = ia/script/fight/fight_animal.dsl
 generalScript = ia/script/general/cattle_idle.dsl
 bloodFileName = particles/blood2.par
+walk_interval = 18
 bloodPosition = 10
 fortitude = 14
 iAmNotAFool = 9
