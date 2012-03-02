@@ -13,6 +13,6 @@ animation = velhacaattack.md5anim
 ambient = 1.0 1.0 1.0 1.0
 diffuse = 1.0 1.0 1.0 1.0
 specular = 0.8 0.8 0.8 1.0
-shininess = 0.0
+shininess = 0.50
 image = texture.png
 
