@@ -432,7 +432,8 @@ void aniModel::setState(int state)
                /* Action action that will became dead after */
                curState = STATE_DEAD;
                setAnimation(STATE_DEAD);
-               callActionAnimation(STATE_DIE);
+               /* No merge, as dead will be after die, not previously */
+               callActionAnimation(STATE_DIE, false);
             }
             break;
             case STATE_ATTACK_MEELE:

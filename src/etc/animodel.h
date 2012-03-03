@@ -111,7 +111,8 @@ class aniModel
 
       /*! Call Action Animation (just a cycle to blend)
        * \param aniId -> animation ID */
-      virtual void callActionAnimation(int aniId)=0;
+      virtual void callActionAnimation(int aniId, 
+            bool mergeWithPrevious=true)=0;
       /*! Set the current animation to "animationId" */
       virtual void setAnimation(int animationId)=0;
       /*! Calculate the model bounding box for current animation frame */

@@ -39,7 +39,7 @@ class cal3DModel: public aniModel
 
       /*! Call Action Animation (just a cycle to blend)
        * \param aniId -> animation ID */
-      void callActionAnimation(int aniId);
+      void callActionAnimation(int aniId, bool mergeWithPrevious);
 
       /*! Load .cfg file and all needed meshes/animations, etc. */
       bool load(const std::string& strFileName);

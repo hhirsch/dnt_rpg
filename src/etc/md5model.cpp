@@ -390,6 +390,30 @@ void md5Model::setAnimation(int animationId)
 }
 
 /***********************************************************************
+ *                         callActionAnimation                         *
+ ***********************************************************************/
+void md5Model::callActionAnimation(int aniId, bool mergeWithPrevious)
+{
+   md5ModelAnimation* anim;
+   anim = (md5ModelAnimation*)get(aniId);
+   if(anim)
+   {
+      /* Only set backAnimation if not an action one */
+      if(!actionAnimation)
+      {
+         backAnimation = curAnimation;
+      }
+      /* Set current as action and reset its position */
+      actionAnimation = true;
+      anim->animation->reset(
+            ((curAnimation)&&(mergeWithPrevious))?curAnimation->animation:NULL,
+            blendFrames);
+      curAnimation = anim;
+   }
+}
+
+
+/***********************************************************************
  *                               update                                *
  ***********************************************************************/
 void md5Model::update(float delta, bool isVisible)
@@ -784,28 +808,6 @@ bool md5Model::load(const std::string& strFileName)
    calculateCrudeBoundingBox();
    
    return(true);
-}
-
-/***********************************************************************
- *                         callActionAnimation                         *
- ***********************************************************************/
-void md5Model::callActionAnimation(int aniId)
-{
-   md5ModelAnimation* anim;
-   anim = (md5ModelAnimation*)get(aniId);
-   if(anim)
-   {
-      /* Only set backAnimation if not an action one */
-      if(!actionAnimation)
-      {
-         backAnimation = curAnimation;
-      }
-      /* Set current as action and reset its position */
-      actionAnimation = true;
-      anim->animation->reset((curAnimation)?curAnimation->animation:NULL,
-            blendFrames);
-      curAnimation = anim;
-   }
 }
 
 /***********************************************************************

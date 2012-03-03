@@ -292,7 +292,7 @@ bool cal3DModel::load(const string& strFilename)
 /*********************************************************************
  *                        callActionAnimation                        *
  *********************************************************************/
-void cal3DModel::callActionAnimation(int animationId)
+void cal3DModel::callActionAnimation(int animationId, bool mergeWithPrevious)
 {
    /* Verify if animation is defined */
    if( (animationId > ANIMODEL_MAX_ANIMATIONS) || (animationId < 0) ||

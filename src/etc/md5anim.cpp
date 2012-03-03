@@ -477,7 +477,7 @@ bool md5Anim::update(float delta, bool singleCycle)
             {
                /* Single cycle, must keep stopped at final */
                curFrame = maxFrames;
-               nextFrame = maxFrames-1;
+               nextFrame = maxFrames;
             }
             else
             {

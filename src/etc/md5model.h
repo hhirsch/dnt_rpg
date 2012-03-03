@@ -121,8 +121,9 @@ class md5Model: public aniModel, dntList
       aniModelMaterial* getMeshMaterial(int meshId);
 
       /*! Call Action Animation (just a cycle to blend)
-       * \param aniId -> animation ID */ 
-      void callActionAnimation(int aniId);
+       * \param aniId -> animation ID 
+       * \param mergeWithPrevious -> if will merge with previous animation */ 
+      void callActionAnimation(int aniId, bool mergeWithPrevious=true);
 
       /*! Set the current animation to "animationId" */
       void setAnimation(int animationId);
