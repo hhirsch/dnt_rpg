@@ -492,6 +492,7 @@ bool md5Anim::update(float delta, bool singleCycle)
             {
                /* SingleCycle must stop at end! */
                nextFrame = maxFrames;
+               retVal = false;
             }
             else
             {
@@ -499,7 +500,6 @@ bool md5Anim::update(float delta, bool singleCycle)
                 * one. So, just jump to the first and first's next */
                curFrame = 0;
                nextFrame = 1;
-               retVal = false;
             }
          }
       }
@@ -511,6 +511,7 @@ bool md5Anim::update(float delta, bool singleCycle)
       {
          /* Done with blending */
          previousAnim = NULL;
+         lastTime = 0.0f;
       }
    }
    return(retVal);
