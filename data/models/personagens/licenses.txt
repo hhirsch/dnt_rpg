@@ -50,13 +50,13 @@ cow2
    license: Public Domain (CC0)
    source: http://www.download.lyndondaniels.com/ranchers/
 
-chico, zedobar (mesh)
+chico, guri, zedobar (meshes & textures)
    author: Estrada Real Digital (erd)
    license: GPLv2
    source: http://sourceforge.net/projects/erd/
    note: modifications by DNTeam
 
-chico, zedobar (armature)
+chico, guri, zedobar (armature)
    authors: FreeLikeGNU, Clint Bellanger, and Pompei2
    license: LGPLv3
    source: opengameart.org/content/base-human-models-low-poly-for-blender-25x

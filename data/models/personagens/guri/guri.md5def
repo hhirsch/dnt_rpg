@@ -1,0 +1,26 @@
+# Exported from Blender by DNT md5 exporter
+
+path = models/personagens/guri/
+scale = 12.0
+blendFrames = 4
+
+# Mesh Information
+mesh = guri.md5mesh
+
+# Animations
+animation = guri_Idle-M.md5anim
+animation = guri_Run-M.md5anim
+animation = guri_Die.md5anim
+animation = guri_Dead.md5anim
+animation = guri_Left-Punch-M.md5anim
+animation = guri_Walk.md5anim
+animation = guri_Rest.md5anim
+animation = guri_Charge-Punch-M.md5anim
+
+
+# Material
+ambient = 1.0 1.0 1.0 1.0 
+diffuse = 0.0 0.0 0.0 1.0 
+specular = 1.0 1.0 1.0 1.0
+shininess = 0.0
+image = texture.png

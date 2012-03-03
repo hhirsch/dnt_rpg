@@ -23,6 +23,7 @@ Spider(10lvl) = characters/npcs/lvl10/spider_lvl10.npc
 # PCs
 Atleticano(1lvl) = characters/pcs/atleticano.pc
 Chico(4lvl) = characters/pcs/chico.pc
+Child_Male(1lvl) = characters/pcs/guri.pc
 Cruzeirense(1lvl) = characters/pcs/cruzeirense.pc
 Dona_Velha(2lvl) = characters/pcs/dona.pc
 Hippie(2lvl) = characters/pcs/hippie.pc
