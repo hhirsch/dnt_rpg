@@ -59,7 +59,7 @@ skillWindow::skillWindow(skills* savSkill, guiInterface* inter,
    readOnly = readOnlyMode;
 
    /* Alphabetical Order Skills */
-   totalSkills = (ATT_SKILL_LAST - ATT_SKILL_FIRST)+1;
+   totalSkills = savSkill->getTotalSkills()-ATT_SKILL_FIRST;
    skillsOrder = new skill*[totalSkills];
    for(i = 0; i < totalSkills; i++)
    {

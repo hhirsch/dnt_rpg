@@ -38,7 +38,7 @@
 #define ATT_WISDOM       5
 #define ATT_CHARISM      6
 #define ATT_SKILL_FIRST  7
-#define ATT_SKILL_LAST   46
+// #define ATT_SKILL_LAST   46
 
 #define VAR_AUX1         40
 #define VAR_AUX2         41

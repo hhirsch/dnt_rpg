@@ -1,11 +1,5 @@
-21
+14
 weapon_attack.fta
-administration/esthetic_shock_i.fta
-administration/esthetic_shock_ii.fta
-administration/webdesign.fta
-administration/esthetic_shock_iii.fta
-administration/supreme_esthetic_shock.fta
-administration/aberration.fta
 biology/ameivas_worms.fta
 biology/arc_impulse.fta
 compsci/world_conception.fta 
@@ -16,7 +10,6 @@ elective/coward_touch.fta
 elective/hasty.fta
 elective/quick_thought.fta
 elective/feline.fta
-elective/fugitive.fta
 elective/pinocchios_aura.fta
 elective/rough.fta
 elective/strong_will.fta

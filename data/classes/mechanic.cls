@@ -21,13 +21,13 @@ talent = 11 BATTLE_CONSTRUCT
 talent = 14 ACTION_AND_REACTION
 talent = 17 LIKE_A_CHILD_ON_SLID
 talent = 20 F=M*A
-totalSkills = 6
-skill = CONDUCTION
+totalSkills = 3
+#skill = CONDUCTION
 skill = DRINKING
-skill = OBSERVATE
+#skill = OBSERVATE
 skill = OPERATE_ELETRONIC_OBJECTS
 skill = OPERATE_MECHANIC_OBJECTS
-skill = PROFESSIONAL_SPEECH
+#skill = PROFESSIONAL_SPEECH
 firstSkillPoints = ( 6 + INTELLIGENCE )x3
 nextSkillPoints = ( 6 + INTELLIGENCE )x1
 bonus = 1,1,0/1/0

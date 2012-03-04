@@ -8,5 +8,5 @@ totalTalents = 2
 talent = INSANE_FURY
 talent = CALL_HORDES
 totalSkills = 1
-skill = CARTE_BLANCHE
-skillText = gettext("Since they have friends in the army, Skinhead Maniacs can get all kinds of heavy guns and walk around freely with them. Their class skill is obviously Carte Blanche.")
+skill = INTIMIDATE
+skillText = gettext("Since they have friends in the army, Skinhead Maniacs can get all kinds of heavy guns and walk around freely with them. Their class skill is obviously Intimidate.")

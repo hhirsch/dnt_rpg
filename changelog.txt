@@ -11,6 +11,9 @@
  - Added support to md5 models and animations;
  - 3D messages could be static on Y axis;
 
+ - Simplified number of skills to 12;
+ - Removed the class Administration Student;
+
  - New Models;
  - New Sound Effects;
 
