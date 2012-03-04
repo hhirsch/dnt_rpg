@@ -15,13 +15,15 @@
  - New Sound Effects;
 
 BugFixes:
- - Fixed a possible double OpenAL stop when releasing an ogg_stream;
- - Fixed a undesired loop with a sound file lesser than the buffer;
+ - sound: Fixed a possible double OpenAL stop when releasing an ogg_stream;
+ - sound: Fixed a undesired loop with a sound file lesser than the buffer;
  - script: Fixed a bug on jumping from "else if" statements when an 
            "if" was successfull;
  - sound: keep music playing if try to load same music file;
  - sun: Light w must be 1.0;
  - map: fix for mapLights set;
+ - render: Fixed the offset to avoid glitches between rendered floor surfaces
+           and shadows;
 
 ================================================
 |                Version 0.8                   |

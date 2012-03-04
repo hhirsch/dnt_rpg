@@ -1027,6 +1027,8 @@ void Map::renderFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    int x1, z1;
    mapTexture* tex;
 
+   glPushAttrib(GL_ENABLE_BIT);
+
    if(selectionRender)
    {
       /* At Selection Mode, no need for textures */
@@ -1116,6 +1118,7 @@ void Map::renderFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
          glDisable(GL_BLEND);
       }
    }
+   glPopAttrib();
 }
 
 /********************************************************************
@@ -1160,6 +1163,8 @@ void Map::renderOutdoorShader()
 {
    int i;
    string unif="";
+   
+   glPushAttrib(GL_ENABLE_BIT);
 
    /* NOTE: Vertex Buffer already set */
    mapTexture* tex = (mapTexture*)textures.getFirst();
@@ -1227,6 +1232,8 @@ void Map::renderOutdoorShader()
    splattingShader.disable();
    ext.arbActiveTexture(GL_TEXTURE0);
    ext.arbClientActiveTexture(GL_TEXTURE0);
+
+   glPopAttrib();
 }
 
 /********************************************************************
@@ -1236,7 +1243,8 @@ void Map::renderOutdoorMultitexture()
 {
    int aux = 0;
    mapTexture* tex;
-
+ 
+   glPushAttrib(GL_ENABLE_BIT);
    /* NOTE: Vertex Buffer already set */
 
    /* First Draw with the common texture. */
@@ -1342,7 +1350,7 @@ void Map::renderOutdoorMultitexture()
       ext.arbClientActiveTexture(GL_TEXTURE0_ARB);
       glDisableClientState(GL_TEXTURE_COORD_ARRAY);
    }
-
+   glPopAttrib();
 }
 
 /********************************************************************
@@ -1708,6 +1716,8 @@ void Map::renderSurfaceOnMap(GLuint image, GLfloat xa, GLfloat za,
    GLfloat pX1, pX2, pZ1, pZ2;
    int k, l;
 
+   glPushAttrib(GL_ENABLE_BIT);
+
    incTex = (1.0 / divisions);
    incPosX = (GLfloat) (xb - xa) / (GLfloat) divisions;
    incPosZ = (GLfloat) (zb - za) / (GLfloat) divisions;
@@ -1717,6 +1727,8 @@ void Map::renderSurfaceOnMap(GLuint image, GLfloat xa, GLfloat za,
    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
    glPushMatrix();
      glDisable(GL_LIGHTING);
+     glEnable(GL_POLYGON_OFFSET_FILL);
+     glPolygonOffset(-3.0, -1.5);
      glEnable(GL_TEXTURE_2D);
      glBindTexture(GL_TEXTURE_2D, image );
      glBegin(GL_QUADS);
@@ -1732,23 +1744,24 @@ void Map::renderSurfaceOnMap(GLuint image, GLfloat xa, GLfloat za,
            pZ2 = (incPosZ) + pZ1;
            glTexCoord2f(texX, texZ);
            glNormal3i(0,1,0);
-           glVertex3f( pX1 , getHeight(pX1, pZ1)+sumY+0.5, pZ1 );
+           glVertex3f( pX1 , getHeight(pX1, pZ1)+sumY, pZ1 );
            glTexCoord2f(texX, texZ + incTex);
            glNormal3i(0,1,0);
-           glVertex3f( pX1 , getHeight(pX1, pZ2)+sumY+0.5, pZ2);
+           glVertex3f( pX1 , getHeight(pX1, pZ2)+sumY, pZ2);
            glTexCoord2f(texX + incTex, texZ + incTex);
            glNormal3i(0,1,0);
-           glVertex3f( pX2, getHeight(pX2, pZ2)+sumY+0.5, pZ2 );
+           glVertex3f( pX2, getHeight(pX2, pZ2)+sumY, pZ2 );
            glTexCoord2f(texX + incTex, texZ);
            glNormal3i(0,1,0);
-           glVertex3f( pX2, getHeight(pX2, pZ1)+sumY+0.5, pZ1 );
+           glVertex3f( pX2, getHeight(pX2, pZ1)+sumY, pZ1 );
         }
      }
      glEnd();
      glDisable(GL_TEXTURE_2D);
      glDisable(GL_BLEND);
-     glEnable(GL_LIGHTING);
    glPopMatrix();
+
+   glPopAttrib();
 }
 
 /********************************************************************

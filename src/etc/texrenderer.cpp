@@ -181,6 +181,7 @@ void renderTexture::increaseBuffers()
  ***********************************************************************/
 void renderTexture::render(bool floorReflexion)
 {
+   glPushAttrib(GL_ENABLE_BIT);
    /* Only need to render if the quantity is not null */
    if(totalQuads > 0)
    {
@@ -189,6 +190,7 @@ void renderTexture::render(bool floorReflexion)
       glEnableClientState(GL_NORMAL_ARRAY);
       glEnable(GL_TEXTURE_2D);
       glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+      glEnable(GL_COLOR_MATERIAL);
 
       /* Bind the texture */
       glBindTexture(GL_TEXTURE_2D, textureId);
@@ -222,6 +224,7 @@ void renderTexture::render(bool floorReflexion)
       glDisableClientState(GL_VERTEX_ARRAY);
       glDisableClientState(GL_TEXTURE_COORD_ARRAY);
    }
+   glPopAttrib();
 }
 
 /***********************************************************************
