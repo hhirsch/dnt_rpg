@@ -1,6 +1,6 @@
 name = gettext("Child")
 model = models/personagens/guri/guri.md5def
-portrait = characters/portraits/velhaca.png
+portrait = characters/portraits/guri.png
 battleScript = ia/script/fight/fight_animal.dsl
 bloodFileName = particles/blood2.par
 bloodPosition = 20
