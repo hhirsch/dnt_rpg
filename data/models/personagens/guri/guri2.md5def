@@ -23,4 +23,4 @@ ambient = 1.0 1.0 1.0 1.0
 diffuse = 0.6 0.6 0.6 1.0 
 specular = 1.0 1.0 1.0 1.0
 shininess = 0.0
-image = texture.png
+image = texture2.png
