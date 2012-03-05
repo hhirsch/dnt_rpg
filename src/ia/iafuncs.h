@@ -146,6 +146,8 @@
 #define IA_MOVE_TO_POSITION "moveToPosition"
 /*! bool moveToCharacter(character char, character tgt) */
 #define IA_MOVE_TO_CHARACTER "moveToCharacter"
+/*! bool moveFromCharacter(character char, character tgt) */
+#define IA_MOVE_FROM_CHARACTER "moveFromCharacter"
 /*! bool moveToObject(character char, object obj) */
 #define IA_MOVE_TO_OBJECT "moveToObject"
 /*! void setIdle(character char) */
@@ -280,6 +282,8 @@
 #define IA_CHARACTER_ADD_EFFECT "addEffect"
 /*! void addFeat(character c, string featId) */
 #define IA_CHARACTER_ADD_FEAT "addFeat"
+/*! bool haveFeat(character c, string featId) */
+#define IA_CHARACTER_HAVE_FEAT "haveFeat"
 
 /*! void showText(character c, text string) */
 #define IA_CHARACTER_SHOW_TEXT  "showText"

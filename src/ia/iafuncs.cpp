@@ -106,6 +106,7 @@ bool isFunction(string s)
    return( (s == IA_DEBUG_PRINT) || (s == IA_BRIEFING) || 
            (s == IA_BRIEFING_COLOR) || (s == IA_GET_TEXT) ||
            (s == IA_MOVE_TO_POSITION) || (s == IA_MOVE_TO_CHARACTER) ||
+           (s == IA_MOVE_FROM_CHARACTER) ||
            (s == IA_MOVE_TO_OBJECT) || (s == IA_SET_IDLE) ||
            (s == IA_WAIT) || (s == IA_EXIT) ||
            (s == IA_FEAT_ACTUAL_QUANTITY) || (s == IA_FEAT_QUANTITY_PER_DAY) ||
@@ -153,7 +154,7 @@ bool isFunction(string s)
            (s == IA_CHARACTER_SHOW_TEXT_STATIC) ||
            (s == IA_CHARACTER_SET_ANIMATION) ||
            (s == IA_CHARACTER_CALL_ANIMATION) || (s == IA_PLAY_SOUND) ||
-           (s == IA_CHARACTER_ADD_FEAT) );
+           (s == IA_CHARACTER_ADD_FEAT) || (s == IA_CHARACTER_HAVE_FEAT) );
 }
 
 /***********************************************************************
@@ -163,6 +164,7 @@ string functionType(string s)
 {
    /* Boolean Functions */
    if( (s == IA_MOVE_TO_POSITION) || (s == IA_MOVE_TO_CHARACTER) ||
+       (s == IA_MOVE_FROM_CHARACTER) ||
        (s == IA_MOVE_TO_OBJECT) || (s == IA_FEAT_USE_AT_CHARACTER) ||
        (s == IA_FEAT_USE_AT_OBJECT) || (s == IA_TRUE) || (s == IA_FALSE) ||
        (s == IA_MISSION_IS_ACTIVE) || (s == IA_INVENTORY_HAVE) ||
@@ -171,7 +173,7 @@ string functionType(string s)
        (s == IA_FIGHT_CAN_ATTACK) || (s == IA_DICE_ROLL) ||
        (s == IA_FIGHT_DO_ATTACK) || (s == IA_FIGHT_DO_ATTACK_AGAINST) ||
        (s == IA_FIGHT_DO_ATTACK_WITHOUT_RESISTENCE) || 
-       (s == IA_WEAPON_EQUIPED) ) 
+       (s == IA_WEAPON_EQUIPED) || (s == IA_CHARACTER_HAVE_FEAT) ) 
    {
       return(IA_TYPE_BOOL);
    }

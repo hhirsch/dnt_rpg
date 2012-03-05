@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language: DNT Script Language
-" Maintainer: Guilherme Farrer <farrer@dnteam.org>
-" Last Change: 2010 Jul 29
+" Maintainer: Farrer <farrer@dnteam.org>
+" Last Change: 2012 Mar 05
 
 syn clear
 
@@ -31,7 +31,7 @@ syn keyword dntOperator       true false
 " Functions
 syn keyword dntFunction       wait print briefing briefingColor exit
 syn keyword dntFunction       gettext
-syn keyword dntFunction       moveToPosition moveToCharacter
+syn keyword dntFunction       moveToPosition moveToCharacter moveFromCharacter
 syn keyword dntFunction       moveToObject setIdle
 syn keyword dntFunction       missionAdd missionComplete missionIsActive
 syn keyword dntFunction       missionAbort
@@ -50,6 +50,7 @@ syn keyword dntFunction       inventoryHave
 syn keyword dntFunction       dialogSetInitial
 syn keyword dntFunction       getObject getObjectState
 syn keyword dntFunction       isAllDead mapTravel
+syn keyword dntFunction       addFead haveFeat
 syn keyword dntFunction       classLevel roll rollDice addEffect
 syn keyword dntFunction       particleAddToCharacter
 syn keyword dntFunction       setBaseDice setAditionalDice getBaredHandsDice

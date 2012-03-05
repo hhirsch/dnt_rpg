@@ -1166,10 +1166,10 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       }
    }
 
-   /* Move to Character */
-   else if(functionName == IA_MOVE_TO_CHARACTER)
+   /* Syntax bool function(character char, character tgt) */
+   else if( (functionName == IA_MOVE_TO_CHARACTER) ||
+            (functionName == IA_MOVE_FROM_CHARACTER) )
    {
-      /* Syntax bool moveToCharacter(character char, character tgt) */
       varName = symbols->addTempSymbol(IA_TYPE_BOOL);
 
       string line = changeFrom(strLine, functionName, 2, varName);
@@ -1186,8 +1186,26 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       if( (dude) && (tgt) )
       {
          dude->pathFind.defineMap(actualMap);
-         pendAction = actualEngine->actionControl->addAction(line, ACT_MOVE, 
-               dude, tgt, (type == IASCRIPT_TYPE_MISSION));
+
+         if(functionName == IA_MOVE_TO_CHARACTER)
+         {
+            pendAction = actualEngine->actionControl->addAction(line, ACT_MOVE, 
+                  dude, tgt, (type == IASCRIPT_TYPE_MISSION));
+         }
+         else if(functionName == IA_MOVE_FROM_CHARACTER)
+         {
+            /* Define a position away from the character */
+            float angle = getAngle(
+                  dude->scNode->getPosX(), dude->scNode->getPosZ(),
+                  tgt->scNode->getPosX(), tgt->scNode->getPosZ());
+            float posX = dude->scNode->getPosX() - 
+               (cos(deg2Rad(angle))*2*dude->displacement);
+            float posZ = characterOwner->scNode->getPosZ() - 
+               (sin(deg2Rad(angle))*2*dude->displacement);
+
+            pendAction = actualEngine->actionControl->addAction(line, ACT_MOVE, 
+                  dude, posX, posZ, (type == IASCRIPT_TYPE_MISSION));
+         }
       }
    }
 
@@ -2059,6 +2077,26 @@ void iaScript::callFunction(iaVariable* var, string strLine,
             bl = (dude->getEquipedWeapon() != NULL);
          }
       }
+      assignValue(var, (void*)&bl, IA_TYPE_BOOL);
+   }
+
+   /* Syntax bool function(character c, string s) */
+   else if( (functionName == IA_CHARACTER_HAVE_FEAT) )
+   {
+      character* dude = NULL;
+      string text;
+      bool bl = false;
+     
+      /* Get parameters */
+      dude = getParameterc(token, strLine, pos);
+      text = getParameters(token, strLine, pos);
+
+      if(dude)
+      {
+         bl = dude->haveFeat(text);
+      }
+      
+      /* Set return */ 
       assignValue(var, (void*)&bl, IA_TYPE_BOOL);
    }
 
