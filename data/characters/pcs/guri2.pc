@@ -2,6 +2,7 @@ name = gettext("Child")
 model = models/personagens/guri/guri2.md5def
 portrait = characters/portraits/guri2.png
 battleScript = ia/script/fight/fight_animal.dsl
+killedScript = ia/script/kill/guri_kill.dsl
 bloodFileName = particles/blood2.par
 bloodPosition = 20
 challengeRating = 1

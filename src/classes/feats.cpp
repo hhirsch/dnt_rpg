@@ -92,6 +92,7 @@ featDescription::featDescription()
    powerLevel = 0;
    type = 0;
    range = 0;
+   selectable = true;
    scriptFile = "";
    name = "undefined";
    idString = "unknow";
@@ -651,6 +652,18 @@ void featsList::init(string dir, string arq)
                   m_feats[aux].type = i;
                   break;
                }
+            }
+         }
+         /* Selectable */
+         else if(key == "selectable")
+         {
+            if(value == "true")
+            {   
+               m_feats[aux].selectable = true;
+            }
+            else if(value == "false")
+            {
+               m_feats[aux].selectable = false;
             }
          }
          /* Action */

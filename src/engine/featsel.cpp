@@ -90,7 +90,9 @@ void featSelWindow::defineAvailableFeats()
    for(i=0; i < allFeats->getTotal(); i++)
    {
       def = allFeats->featByNumber(i);
-      if( (current->canHaveFeat(def)) && (!current->haveFeat(def->idString)) )
+      if( (def->selectable) &&
+          (current->canHaveFeat(def)) && 
+          (!current->haveFeat(def->idString)) )
       {
          /* Available: Insert it at list */
          fSel = new(fSelFeat);

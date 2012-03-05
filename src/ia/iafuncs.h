@@ -278,6 +278,8 @@
 /*! void addEffect(character c, int mod, int time, int periodicTime,
  *                 string factorType, string factorId) */
 #define IA_CHARACTER_ADD_EFFECT "addEffect"
+/*! void addFeat(character c, string featId) */
+#define IA_CHARACTER_ADD_FEAT "addFeat"
 
 /*! void showText(character c, text string) */
 #define IA_CHARACTER_SHOW_TEXT  "showText"

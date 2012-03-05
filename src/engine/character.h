@@ -227,6 +227,9 @@ class character: public thing, public dntListElement
        * \return genereal iaScript pointer */
       iaScript* getGeneralScript();
 
+      /*! Call the script when character is killed */
+      void callKilledScript();
+
       /*! Add a modEffect to the character
        * \param mod -> modifier value
        * \param time -> time to expire (0 == forever)
@@ -293,8 +296,12 @@ class character: public thing, public dntListElement
 
       modEffectList* effects;     /**< Current character effects */
 
+      engine* curEngine;          /**< current used engine */
+
       iaScript* generalScript;    /**< Pointer to the general iaScript */
       std::string generalScriptFileName; /**< The General Script Filename */
+      iaScript* killedScript;     /**< The Killed script */
+      std::string killedScriptFileName; /**< Script when killed */
 };
 
 

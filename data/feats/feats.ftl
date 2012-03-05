@@ -1,4 +1,4 @@
-14
+15
 weapon_attack.fta
 biology/ameivas_worms.fta
 biology/arc_impulse.fta
@@ -13,3 +13,4 @@ elective/feline.fta
 elective/pinocchios_aura.fta
 elective/rough.fta
 elective/strong_will.fta
+received/mj_friends_killer.fta

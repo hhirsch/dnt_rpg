@@ -2064,7 +2064,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
 
    /* Syntax void function(character c, string s) */
    else if( (functionName == IA_CHARACTER_SHOW_TEXT) ||
-            (functionName == IA_CHARACTER_SHOW_TEXT_STATIC) )
+            (functionName == IA_CHARACTER_SHOW_TEXT_STATIC) ||
+            (functionName == IA_CHARACTER_ADD_FEAT) )
    {
       character* dude = NULL;
       string text;
@@ -2089,6 +2090,24 @@ void iaScript::callFunction(iaVariable* var, string strLine,
                   dude->scNode->getPosY() + dude->scNode->getBoundingBox().y2, 
                   dude->scNode->getPosZ(), text,
                   0.9f, 0.12f, 0.2f, DNT_FONT_ARIAL, 14, true);
+         }
+         else if(functionName == IA_CHARACTER_ADD_FEAT)
+         {
+            featsList fList;
+            featDescription* ft = fList.featByString(text);
+            if( (ft) && (dude->canHaveFeat(ft)) && (!dude->haveFeat(text)) )
+            {
+               dude->actualFeats->insertFeat(ft);
+               /* Apply its effects, if is permanent */
+               if(ft->type == FEAT_TYPE_PERMANENT)
+               {
+                  feat* f = dude->actualFeats->featByString(text);
+                  if(f)
+                  {
+                     dude->actualFeats->applyPermanentFeat(dude, f->featNumber);
+                  }
+               }
+            }
          }
       }
    }

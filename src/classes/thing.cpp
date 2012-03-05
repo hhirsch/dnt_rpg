@@ -314,6 +314,11 @@ void thing::kill()
 {
    dead = true;
    callDeadAnimation();
+   if(thingType == THING_TYPE_CHARACTER)
+   {
+      character* c = (character*)this;
+      c->callKilledScript();
+   }
 }
 
 /******************************************************

@@ -102,6 +102,7 @@ class featDescription
 
       int type;                    /**< Feature type constant */
       int action;                  /**< Feat action (as <actions.h>) */
+      bool selectable;             /**< If feat is selectable or auto-assigned*/
 
       std::string name;                 /**< Feat Name */
       std::string idString;             /**< Feat ID String */

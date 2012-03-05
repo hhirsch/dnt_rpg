@@ -64,7 +64,6 @@ character::character(featsList* ft, engine* usedEngine)
 
    for(i=0; i<MAX_DISTINCT_CLASSES; i++)
    {
-
       actualClass[i] = NULL;
       classLevels[i] = 0;
    }
@@ -76,6 +75,7 @@ character::character(featsList* ft, engine* usedEngine)
    conversationFile = "";
    conv = NULL;
    cr = 1;
+   curEngine = usedEngine;
 
    inventories = new inventory;
 
@@ -98,7 +98,8 @@ character::character(featsList* ft, engine* usedEngine)
    /* Scripts */
    generalScript = NULL;
    generalScriptFileName = "";
-
+   killedScriptFileName = "";
+   killedScript = NULL;
 }
 
 /*********************************************************************
@@ -140,6 +141,10 @@ character::~character()
    {
       delete(generalScript);
       generalScript = NULL;
+   }
+   if(killedScript)
+   {
+      delete(killedScript);
    }
    if(effects)
    {
@@ -397,6 +402,17 @@ bool character::isAlignOf(string al)
 iaScript* character::getGeneralScript()
 {
    return(generalScript);
+}
+
+/*********************************************************************
+ *                     getKilledScriptFileName                       *
+ *********************************************************************/
+void character::callKilledScript()
+{
+   if( (curEngine) && (!killedScriptFileName.empty()) )
+   {
+      killedScript = new iaScript(killedScriptFileName, curEngine);
+   }
 }
 
 /*********************************************************************
@@ -928,10 +944,18 @@ bool character::save(string saveFile)
                             << classLevels[i] << endl;
       }
    }
-   /* Battle Script (if one) */
+   /* Scripts (if any) */
    if(!battleScriptFileName.empty())
    {
       file << "battleScript = " << battleScriptFileName << endl;
+   }
+   if(!generalScriptFileName.empty())
+   {
+      file << "generalScript = " << generalScriptFileName << endl; 
+   }
+   if(!killedScriptFileName.empty())
+   {
+      file << "killedScript = " << killedScriptFileName << endl;
    }
    /* Blood Filename and position */
    file << "bloodFileName = " << bloodFileName << endl;
@@ -1143,6 +1167,11 @@ character* characterList::insertCharacter(string file, featsList* ft,
          novo->setBattleScript(isc, value);
          /* Set the owner */
          isc->defineCharacterOwner(novo);
+      }
+      /* killed Script */
+      else if(key == "killedScript")
+      {
+         novo->killedScriptFileName = value;
       }
       /* Blood Position */
       else if(key == "bloodPosition")
@@ -1555,6 +1584,21 @@ void characterList::treatGeneralScripts(Map* actualMap, characterList* NPCs)
          {
             script->defineMap(actualMap, NPCs);
             script->run(MAX_SCRIPT_LINES);
+         }
+      }
+
+      /* Treat killed scripts (defined when character is killed, 
+       * and removed from list when ends) */
+      script = curTreat->killedScript;
+      if((script) && (!curTreat->isAlive()))
+      {
+         script->defineMap(actualMap, NPCs);
+         script->run(MAX_SCRIPT_LINES);
+         if(script->finished())
+         {
+            /* Done with killed script, must clear it! */
+            delete(curTreat->killedScript);
+            curTreat->killedScript = NULL;
          }
       }
 
