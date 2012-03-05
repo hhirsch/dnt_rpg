@@ -13,7 +13,7 @@ script()
         # If active character is a child's killer, must run away!
         if(haveFeat(ACTIVE_CHARACTER, "MJ_FRIENDS_KILLER"))
            showTextStatic(SELF_CHARACTER, "Aaaaahhhh")
-           moveFromCharacter(SELF_CHARACTER, ACTIVE_CHARACTER))
+           moveFromCharacter(SELF_CHARACTER, ACTIVE_CHARACTER)
         end
         wait(10)
       else
