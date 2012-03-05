@@ -1728,7 +1728,7 @@ void Map::renderSurfaceOnMap(GLuint image, GLfloat xa, GLfloat za,
    glPushMatrix();
      glDisable(GL_LIGHTING);
      glEnable(GL_POLYGON_OFFSET_FILL);
-     glPolygonOffset(-3.0, -1.5);
+     glPolygonOffset(-3.0-(2*sumY), -1.5-(2*sumY));
      glEnable(GL_TEXTURE_2D);
      glBindTexture(GL_TEXTURE_2D, image );
      glBegin(GL_QUADS);
