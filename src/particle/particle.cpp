@@ -725,7 +725,7 @@ void particleSystem::doStep(GLfloat** matriz)
    int alive = 0;
    int aliveColor = 0;
 
-   srand(SDL_GetTicks());
+   srand(SDL_GetTicks() + (int)(1 + 1000 * (rand() / (RAND_MAX + 1.0))));
 
    /* Set new origin, if character to follow is defined */
    updateByCharacter();
