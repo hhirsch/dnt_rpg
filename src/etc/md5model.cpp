@@ -363,7 +363,8 @@ bool md5Model::loadMeshFile(const std::string strFileName)
 void md5Model::setAnimation(int animationId)
 {
    md5ModelAnimation* selected = (md5ModelAnimation*)get(animationId);
-
+   actionAnimation = false;
+   
    if(curAnimation == selected)
    {
       /* same current animation, no need to change it! */
