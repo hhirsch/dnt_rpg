@@ -130,8 +130,8 @@ class pendingAction: public dntListElement
       std::string getScriptLine();
 
    private:
-      std::string scriptLine; /**< The line of the script that calls the more than
-                                   one cycle function. */
+      std::string scriptLine; /**< The line of the script that calls the more 
+                                   than one cycle function. */
 
       character* actor;    /**< The actor of the action */
       thing* target;       /**< The target of the action. Can be NULL if

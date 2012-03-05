@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -343,14 +343,19 @@ pendingAction* pendingActionController::addAction(pendingAction* act,
             /* Do some randomize (current ticks + random number [0,1000) */
             srand(SDL_GetTicks() + (int)(1 + 1000 * 
                                          (rand() / (RAND_MAX + 1.0))));
+
+            /* Get the target bounding box, to set min variation */
+            boundingBox bb = act->target->scNode->getBoundingBox();
+            GLfloat sizeX = (bb.x2-bb.x1) + 16;
+            GLfloat sizeZ = (bb.z2-bb.z1) + 16;
  
             /* Save the target value to move (to get changes of 
              *                                target position ) */
             bool signalX = ((rand()/(RAND_MAX+1.0)) > 0.5);
-            GLfloat varX = (int)((10 * (rand()/(RAND_MAX+1.0)))+10);
+            GLfloat varX = (int)((10 * (rand()/(RAND_MAX+1.0)))+sizeX);
 
             bool signalZ = ((rand()/(RAND_MAX+1.0)) > 0.5);
-            GLfloat varZ = (int)((10 * (rand()/(RAND_MAX+1.0)))+10);
+            GLfloat varZ = (int)((10 * (rand()/(RAND_MAX+1.0)))+sizeZ);
 
             /* Apply X variation */
             if(signalX)
@@ -362,7 +367,7 @@ pendingAction* pendingActionController::addAction(pendingAction* act,
                act->targetX = act->target->scNode->getPosX() - varX;
             }
 
-            /* Apply X variation */
+            /* Apply Z variation */
             if(signalZ)
             {
                act->targetZ = act->target->scNode->getPosZ() + varZ;
