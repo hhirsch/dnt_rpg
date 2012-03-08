@@ -73,6 +73,7 @@ void Farso_DefineResolution(SDL_Surface **screen, string title,
                             int stencilBufferSize)
 {
     SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
+    SDL_GL_SetAttribute( SDL_GL_SWAP_CONTROL, 0 );
 
     if(stencilBufferSize > 0)
     {
