@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -403,9 +403,6 @@ bool collision::canWalk(character* actor, boundingBox& actorBox,
 bool collision::canWalk(character* actor, GLfloat x, GLfloat y, GLfloat z, 
       GLfloat prevX, GLfloat prevY, GLfloat prevZ)
 {
-
-#warning "Fix to pass on open doors!"
-
    boundingBox actorBox;
 
    /* Some unused returned values */
