@@ -218,8 +218,7 @@ void aStar::findPath(character* actor, GLfloat x, GLfloat z, GLfloat stepSize,
       /* Verify if the destiny is in map and not too far away */
       if( (destinyX < 0) || (destinyZ < 0) || 
           (destinyX >= actualMap->getSizeX()*actualMap->squareSize()) ||
-          (destinyZ >= actualMap->getSizeZ()*actualMap->squareSize()) /*||
-          (dist > 4*(actor->displacement))*/ )
+          (destinyZ >= actualMap->getSizeZ()*actualMap->squareSize()) )
       {
          state = ASTAR_STATE_NOT_FOUND;
          clearSearch();
@@ -362,14 +361,6 @@ void aStar::doCycle(bool fightMode)
          /* Get next potential node  */
          switch(i) 
          {
-           case 0:
-           {
-              /* verify the node itself */
-              posX = node->x;
-              posZ = node->z;
-              directionChange = !( (dX == 0) && (dZ == 0) );
-           }
-           break;
            case 1:
            {
               posX = node->x;
