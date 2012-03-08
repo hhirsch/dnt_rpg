@@ -60,9 +60,12 @@ void wayPointList::freeElement(dntListElement* obj)
 pattAgent::pattAgent(bool oriented):agent(oriented)
 {
    actualWayPoint = NULL;
+   totalWayPoints = 0;
    totalWalked = 0;
    origX = 0;
    origZ = 0;
+   xInc = 0.0f;
+   zInc = 0.0f;
 }
 
 /********************************************************************
@@ -125,17 +128,6 @@ bool pattAgent::defineNextPosition(bool run)
    float varX=0, varZ=0;
    float xIncCur, zIncCur;
 
-   if(run)
-   {
-      xIncCur = xInc*ENGINE_RUN_MULTIPLIER;
-      zIncCur = zInc*ENGINE_RUN_MULTIPLIER;
-   }
-   else
-   {
-      xIncCur = xInc;
-      zIncCur = zInc;
-   }
-
    if(!actualWayPoint)
    {
       /* No wayPoints defined. don't move. */
@@ -160,10 +152,22 @@ bool pattAgent::defineNextPosition(bool run)
       return(true);
    }
 
-  
+
+   /* Set current increment */
+   if(run)
+   {
+      xIncCur = xInc*ENGINE_RUN_MULTIPLIER;
+      zIncCur = zInc*ENGINE_RUN_MULTIPLIER;
+   }
+   else
+   {
+      xIncCur = xInc;
+      zIncCur = zInc;
+   }
+
    /* Update position, making sure that goes exactly to the waypoint */
-   if( ((xIncCur > 0) && (actualX + xIncCur > actualWayPoint->x)) ||
-       ((xIncCur < 0) && (actualX + xIncCur < actualWayPoint->x)) ||
+   if( ((xIncCur > 0) && (actualX + xIncCur >= actualWayPoint->x)) ||
+       ((xIncCur < 0) && (actualX + xIncCur <= actualWayPoint->x)) ||
        (xIncCur == 0))
    {
       actualX = actualWayPoint->x;
@@ -173,8 +177,8 @@ bool pattAgent::defineNextPosition(bool run)
       actualX += xIncCur;
    }
 
-   if( ((zIncCur > 0) && (actualZ + zIncCur > actualWayPoint->z)) ||
-       ((zIncCur < 0) && (actualZ + zIncCur < actualWayPoint->z)) ||
+   if( ((zIncCur > 0) && (actualZ + zIncCur >= actualWayPoint->z)) ||
+       ((zIncCur < 0) && (actualZ + zIncCur <= actualWayPoint->z)) ||
        (zIncCur == 0))
    {
       actualZ = actualWayPoint->z;
@@ -214,6 +218,16 @@ void pattAgent::addWayPoint(GLfloat x, GLfloat z)
    {
       /* First wayPoint, so orientation is equal to current */
       newWay->angle = orientation;
+   }
+
+   /* Put orientation at range */
+   while(newWay->angle < 0)
+   {
+      newWay->angle += 360;
+   }
+   while(newWay->angle >= 360)
+   {
+      newWay->angle -= 360;
    }
 
    /* Set the current, if not defined */
@@ -285,19 +299,28 @@ void pattAgent::removeLinearWayPoints()
    int i;
    wayPoint* way = (wayPoint*)list.getFirst();
    wayPoint* oth;
+   GLfloat valNext;
    for(i = 0; i<total; i++)
    {
       oth = way;
       way = (wayPoint*)way->getNext();
       if( (oth != list.getFirst()) && (oth != list.getFirst()->getPrevious()) )
       {
-         if(oth->angle == ((wayPoint*)oth->getNext())->angle)
+         valNext = ((wayPoint*)oth->getNext())->angle;
+         if( (oth->angle >= valNext-0.1f) &&
+             (oth->angle <= valNext+0.1f) )
          {
             /* Can remove the wayPoint */
             removeWayPoint(oth);
          }
       }
-   } 
+   }
+
+   way = (wayPoint*)list.getFirst();
+   for(i=0; i < list.getTotal(); i++)
+   {
+      way = (wayPoint*)way->getNext();
+   }
 }
 
 
@@ -343,6 +366,7 @@ void pattAgent::drawWayPoints()
    int aux = 0;
    if(tmp)
    {
+      glPushAttrib(GL_ENABLE_BIT);
       glDisable(GL_LIGHTING);
       glLineWidth(3);
       glBegin(GL_LINE_LOOP);
@@ -354,7 +378,7 @@ void pattAgent::drawWayPoints()
       }
       glEnd();
       glLineWidth(1);
-      glEnable(GL_LIGHTING);
+      glPopAttrib();
    }
 }
 
@@ -367,7 +391,10 @@ void pattAgent::drawWayPointsLinear()
    int aux = 0;
    if(tmp)
    {
+      glPushAttrib(GL_ENABLE_BIT);
+      glColor4f(1.0f, 1.0f, 0.2f, 1.0f);
       glDisable(GL_LIGHTING);
+      glDisable(GL_FOG);
       glLineWidth(3);
       glBegin(GL_LINE_STRIP);
       while(aux < list.getTotal())
@@ -378,7 +405,21 @@ void pattAgent::drawWayPointsLinear()
       }
       glEnd();
       glLineWidth(1);
-      glEnable(GL_LIGHTING);
+
+      glPointSize(5.0f);
+      glColor4f(1.0, 0.2, 0.2, 1.0);
+      tmp = (wayPoint*)list.getFirst();
+      aux = 0;
+      glBegin(GL_POINTS);;
+      while(aux < list.getTotal())
+      {
+         glVertex3f(tmp->x, 0.2, tmp->z);
+         aux++;
+         tmp = (wayPoint*)tmp->getNext();
+      }
+      glEnd();
+      glPointSize(1);
+      glPopAttrib();
    }
 }
 

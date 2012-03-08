@@ -132,12 +132,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
                         GLfloat& varHeight, GLfloat& nx, 
                         GLfloat& nz, bool usePosition)
 {
-   bool result = true;
-   int i, j;
-   Square* saux;
-   boundingBox actorBox, colBox;
-
-   varHeight = 0.0;
+   boundingBox actorBox;
 
    /* Verify if there is an actor!  */
    if(!actor)
@@ -182,6 +177,25 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
    actorBox.rotate(0.0f, perOrientation, 0.0f);
    actorBox.translate(perX, perY, perZ);
 
+   /* Do the check */
+   return(canWalk(actor, actorBox, actor->scNode->getPosY(), perQuad, 
+            varHeight, nx, nz));
+}
+
+/*********************************************************************
+ *                              canWalk                              *
+ *********************************************************************/
+bool collision::canWalk(character* actor, boundingBox& actorBox, 
+      GLfloat curPerY, Square* perQuad, GLfloat& varHeight, 
+      GLfloat& nx, GLfloat& nz)
+{
+   bool result = true;
+   int i, j;
+   Square* saux;
+   boundingBox colBox;
+
+   varHeight = 0.0;
+
    /* Test map limits */
    if( (actorBox.x1 < 2) || (actorBox.z1 < 2) || 
        (actorBox.x2 > actualMap->getSizeX()*actualMap->squareSize()-2) || 
@@ -207,8 +221,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
    colBox.setMax(perQuad->x2, 400, perQuad->z2);
    if(actorBox.intercepts(colBox))
    {
-      result &= verifySquare(actorBox, perQuad, varHeight, 
-            actor->scNode->getPosY());
+      result &= verifySquare(actorBox, perQuad, varHeight, curPerY);
       if(!result)
       {
          return(false);
@@ -225,8 +238,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
       colBox.setMax(saux->x2, 400, saux->z2);
       if(actorBox.intercepts(colBox) )
       {
-         result &= verifySquare(actorBox, saux,varHeight, 
-               actor->scNode->getPosY());
+         result &= verifySquare(actorBox, saux,varHeight, curPerY);
          if(!result)
          {
             return(false);
@@ -240,8 +252,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
          colBox.setMax(saux->x2, 400, saux->z2);
          if(actorBox.intercepts(colBox) )
          {
-            result &= verifySquare(actorBox, saux,varHeight, 
-               actor->scNode->getPosY());
+            result &= verifySquare(actorBox, saux,varHeight, curPerY);
             if(!result) 
             {
                return(false);
@@ -256,8 +267,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
          colBox.setMax(saux->x2, 400, saux->z2);
          if(actorBox.intercepts(colBox) )
          {
-            result &= verifySquare(actorBox,saux,varHeight, 
-                  actor->scNode->getPosY());
+            result &= verifySquare(actorBox,saux,varHeight, curPerY);
             if(!result) 
             {
                return(false);
@@ -275,8 +285,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
       colBox.setMax(saux->x2, 400, saux->z2);
       if(actorBox.intercepts(colBox) )
       {
-         result &= verifySquare(actorBox,saux,varHeight, 
-               actor->scNode->getPosY());
+         result &= verifySquare(actorBox,saux,varHeight, curPerY);
          if(!result) 
          {
             return(false);
@@ -291,8 +300,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
          colBox.setMax(saux->x2, 400, saux->z2);
          if(actorBox.intercepts(colBox) )
          {
-            result &= verifySquare(actorBox,saux,varHeight, 
-                  actor->scNode->getPosY());
+            result &= verifySquare(actorBox,saux,varHeight, curPerY);
             if(!result) 
             {
                return(false);
@@ -307,8 +315,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
          colBox.setMax(saux->x2, 400, saux->z2);
          if(actorBox.intercepts(colBox) )
          {
-            result &=verifySquare(actorBox,saux,varHeight, 
-                  actor->scNode->getPosY());
+            result &=verifySquare(actorBox,saux,varHeight, curPerY);
             if(!result) 
             {
                return(false);
@@ -326,8 +333,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
       if(actorBox.intercepts(colBox) )
       { 
          /* south */
-         result &= verifySquare(actorBox,saux,varHeight, 
-               actor->scNode->getPosY());
+         result &= verifySquare(actorBox,saux,varHeight, curPerY);
          if(!result) 
          {
             return(false);
@@ -344,8 +350,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
       if(actorBox.intercepts(colBox) )
       { 
          /* north */
-         result &= verifySquare(actorBox,saux,varHeight, 
-               actor->scNode->getPosY());
+         result &= verifySquare(actorBox,saux,varHeight, curPerY);
          if(!result) 
          {
             return(false);
@@ -391,4 +396,116 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
    return(result);
 }
 
+
+/*********************************************************************
+ *                            verifyLine                             *
+ *********************************************************************/
+bool collision::canWalk(character* actor, GLfloat x, GLfloat y, GLfloat z, 
+      GLfloat prevX, GLfloat prevY, GLfloat prevZ)
+{
+
+#warning "Fix to pass on open doors!"
+
+   boundingBox actorBox;
+
+   /* Some unused returned values */
+   GLfloat varHeight=0.0f, nX=0.0f, nZ=0.0f;
+
+   /* Let's calculate the expanded BoundingBox */
+   actorBox = actor->scNode->getModel()->getCrudeBoundingBox();
+   /* Expand depending on direction */
+   float dif;
+   dif = fabs(x - prevX);
+   actorBox.x1 -= dif;
+   actorBox.x2 += dif;
+   dif = fabs(y - prevY);
+   actorBox.y1 -= dif;
+   actorBox.y2 += dif;
+   dif = fabs(z - prevZ);
+   actorBox.z1 -= dif;
+   actorBox.z2 += dif;
+
+   /* Must do the check at the middle position */
+   float midX = (x + prevX) / 2.0f;
+   float midY = (y + prevY) / 2.0f;
+   float midZ = (z + prevZ) / 2.0f;
+   
+   /* Now just rotate and set position */
+   actorBox.rotate(0.0f, actor->scNode->getAngleY(), 0.0f);
+   actorBox.translate(midX, midY, midZ);
+
+   /* And Calculate square occupied */
+   int posX =(int)floor(midX / (actualMap->squareSize()));
+   int posZ =(int)floor(midZ / (actualMap->squareSize()));
+   Square* perQuad = actualMap->relativeSquare(posX, posZ);
+   if(!perQuad)
+   {
+      return(false);
+   }
+
+   return(canWalk(actor, actorBox, midY, perQuad, varHeight, nX, nZ));
+#if 0
+   GLfloat dX = fabs(x - prevX);
+   GLfloat dY = fabs(y - prevY);
+   GLfloat dZ = fabs(z - prevZ);
+   int steps = 1;
+   int i;
+   GLfloat minVar = 4.0f;
+   GLfloat pX, pY, pZ;
+
+   /* First, calculate the number of steps */
+   if( (dX >= dY) && (dX >= dZ) )
+   {
+      /* X is greater */
+      steps = (int)floor(dX / minVar) + 1;
+   }
+   else if(dZ >= dY)
+   {
+      /* Z is greater */
+      steps = (int)floor(dZ / minVar) + 1;
+   }
+   else
+   {
+      /* Y is greater */
+      steps = (int)floor(dY / minVar) + 1;
+   }
+
+   printf("Steps: %d ", steps);
+
+   /* Calculate Variation */
+   dX = dX / steps;
+   dY = dY / steps;
+   dZ = dZ / steps;
+
+
+   pX = prevX;
+   pY = prevY;
+   pZ = prevZ;
+   for(i=1; i <= steps; i++)
+   {
+      if(i == steps)
+      {
+         /* Last step with the destiny */
+         pX = x;
+         pY = y;
+         pZ = z;
+      }
+
+      if(!canWalk(actor, pX, pY, pZ, actor->scNode->getAngleY(), 
+               varHeight, nX, nZ, false))
+      {
+         /* Can't walk, so no more need to test further */
+         return(false);
+      }
+
+
+      pX += dX;
+      pY += dY;
+      pZ += dZ;
+   }
+
+   /* Could walk... finally! */
+   return(true);
+#endif
+}
 

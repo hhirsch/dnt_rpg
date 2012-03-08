@@ -26,9 +26,13 @@
 using namespace std;
 
 #define SEARCH_LIMIT   1000  /**< Max Nodes the aStar will search */
-#define SEARCH_INTERVAL   5  /**< Interval of Nodes when aStar will sleep */
+#define SEARCH_INTERVAL   2  /**< Interval of Nodes when aStar will sleep */
 #define MIN_CALL        200  /**< Minimun time interval to call search again */
 
+#define STEP_FACTOR        20  /**< Factor to step search */
+#define STEP_FACTOR_INDOOR  4  /**< Indor Factor to step search */
+#define MAX_DIST_FACTOR     2  /**< Only visit nodes at max X times 
+                                    distant to the goal than the current one */
 
 /****************************************************************
  *                         Constructor                          *
@@ -46,6 +50,7 @@ aStar::aStar()
    opened = NULL;
    closed = NULL;
    walking = false;
+   maxDist = 0;
 }
 
 /****************************************************************
@@ -71,6 +76,8 @@ void aStar::clearSearch()
    pcs = NULL;
    npcs = NULL;
    curStepSize = 1;
+   walking = false;
+   maxDist = 0;
 }
 
 /****************************************************************
@@ -164,10 +171,22 @@ void aStar::findPath(character* actor, GLfloat x, GLfloat z, GLfloat stepSize,
       dZ = (z - actualZ);
       GLfloat dist = sqrt( (dX*dX) + (dZ*dZ) );
 
+      /* Set maxDist */
+      maxDist = dist*MAX_DIST_FACTOR;
+
+      if(dist < 5)
+      {
+         /* too near */
+         state = ASTAR_STATE_NOT_FOUND;
+         clearSearch();
+         return;
+      }
+
       /* Verify if the actor is alive (dead things can't walk, right?) */
       if(!actor->isAlive())
       {
          state = ASTAR_STATE_NOT_FOUND;
+         clearSearch();
          return;
       }
 
@@ -178,6 +197,7 @@ void aStar::findPath(character* actor, GLfloat x, GLfloat z, GLfloat stepSize,
          {
              /* Can't move! */
              state = ASTAR_STATE_NOT_FOUND;
+             clearSearch();
              return;
          }
       }
@@ -191,25 +211,23 @@ void aStar::findPath(character* actor, GLfloat x, GLfloat z, GLfloat stepSize,
                                    varHeight, nx, nz, false))
       {
          state = ASTAR_STATE_NOT_FOUND;
+         clearSearch();
          return;
       }
 
       /* Verify if the destiny is in map and not too far away */
       if( (destinyX < 0) || (destinyZ < 0) || 
           (destinyX >= actualMap->getSizeX()*actualMap->squareSize()) ||
-          (destinyZ >= actualMap->getSizeZ()*actualMap->squareSize()) ||
-          (dist > 4*(actor->displacement)) )
+          (destinyZ >= actualMap->getSizeZ()*actualMap->squareSize()) /*||
+          (dist > 4*(actor->displacement))*/ )
       {
          state = ASTAR_STATE_NOT_FOUND;
+         clearSearch();
          return;
       }
 
       /* Put initial node at search */
-      dX = fabs(destinyX - actualX);
-      dZ = fabs(destinyZ - actualZ);
-      orthogonal = fabs(dX - dZ);
-      diagonal = fabs(((dX + dZ) - orthogonal)/2);
-      heuristic = diagonal + orthogonal + dX + dZ;
+      heuristic = dX + dZ;
       opened->insert(actualX, actualZ, 0, heuristic, -1, -1);
    }
    else
@@ -220,6 +238,7 @@ void aStar::findPath(character* actor, GLfloat x, GLfloat z, GLfloat stepSize,
       {
          /* Don't search, so don't found =^D */
          state = ASTAR_STATE_NOT_FOUND;
+         clearSearch();
       }
    }
 }
@@ -245,8 +264,7 @@ void aStar::doCycle(bool fightMode)
    GLfloat posX=0, posZ=0;          /* positions */
    int i, j;                        /* counters */
    bool directionChange;            /* direction verification */
-
-   GLfloat varHeight=0, nx=0, nz=0; /* collision returns (ignored) */
+   GLfloat curDist = 0.0f;          /* current distance to goal  */
 
    /* Verify if is searching, if not, no need to run */
    if(state != ASTAR_STATE_RUNNING)
@@ -262,8 +280,15 @@ void aStar::doCycle(bool fightMode)
    }
 
    /* Define Pass sizes */
-   GLfloat pass = curStepSize*10;
-   GLfloat passMid = ((curStepSize*10) * sqrt(2.0));
+   GLfloat pass;
+   if(actualMap->isOutdoor())
+   {
+      pass = curStepSize*STEP_FACTOR;
+   }
+   else
+   {
+      pass = curStepSize*STEP_FACTOR_INDOOR;
+   }
 
    /* Set the colision variables */
    collision collisionDetect;
@@ -272,11 +297,12 @@ void aStar::doCycle(bool fightMode)
 
    for(j = 0; j < SEARCH_INTERVAL; j++)
    {
-       /* Verify if the search still exists or if the limit was reached */
+      /* Verify if the search still exists or if the limit was reached */
       if( (opened->isEmpty()) || 
           ((closed->size() + opened->size()) >= SEARCH_LIMIT) )
       {
          state = ASTAR_STATE_NOT_FOUND;
+         clearSearch();
          return;
       }
 
@@ -285,14 +311,15 @@ void aStar::doCycle(bool fightMode)
       if(!node)
       {
          state = ASTAR_STATE_NOT_FOUND;
+         clearSearch();
          return;
       }
 
        /* Verify if arrived at destiny */
-      if( (node->x >= destinyX - (curStepSize * 10)) &&
-          (node->x <= destinyX + (curStepSize * 10)) && 
-          (node->z >= destinyZ - (curStepSize * 10)) &&
-          (node->z <= destinyZ + (curStepSize * 10)) )
+      if( (node->x >= destinyX - (pass)) &&
+          (node->x <= destinyX + (pass)) && 
+          (node->z >= destinyZ - (pass)) &&
+          (node->z <= destinyZ + (pass)) )
       {
          /* create new path */
          delete(patt);
@@ -300,7 +327,7 @@ void aStar::doCycle(bool fightMode)
          patt->defineDestiny(node->x, node->z);
          patt->defineStepSize(curStepSize);
          patt->defineOrientation(curActor->scNode->getAngleY());
-         patt->defineSight(curStepSize*10, 360);
+         patt->defineSight(pass, 360);
          destinyX = node->x;
          destinyZ = node->z;
 
@@ -325,7 +352,7 @@ void aStar::doCycle(bool fightMode)
       }
 
       /* Visit all Adjacents Positions */
-      for(i=0; i<9; i++)
+      for(i=1; i<9; i++)
       {
          /* Get current direction  */
          directionChange = false;
@@ -335,6 +362,14 @@ void aStar::doCycle(bool fightMode)
          /* Get next potential node  */
          switch(i) 
          {
+           case 0:
+           {
+              /* verify the node itself */
+              posX = node->x;
+              posZ = node->z;
+              directionChange = !( (dX == 0) && (dZ == 0) );
+           }
+           break;
            case 1:
            {
               posX = node->x;
@@ -344,8 +379,8 @@ void aStar::doCycle(bool fightMode)
            break;
            case 2:
            {
-              posX = node->x + passMid;
-              posZ = node->z - passMid;
+              posX = node->x + pass;
+              posZ = node->z - pass;
               directionChange = !( (dX > 0) && (dZ < 0) );
            }
            break;
@@ -358,8 +393,8 @@ void aStar::doCycle(bool fightMode)
            break;
            case 4:
            {
-              posX = node->x + passMid;
-              posZ = node->z + passMid;
+              posX = node->x + pass;
+              posZ = node->z + pass;
               directionChange = !( (dX > 0) && (dZ > 0) );
            }
            break;
@@ -372,8 +407,8 @@ void aStar::doCycle(bool fightMode)
            break;
            case 6:
            {
-              posX = node->x - passMid;
-              posZ = node->z + passMid;
+              posX = node->x - pass;
+              posZ = node->z + pass;
               directionChange = !( (dX <  0) && (dZ > 0) );
            }
            break;
@@ -386,16 +421,23 @@ void aStar::doCycle(bool fightMode)
            break;
            case 8:
            {
-              posX = node->x - passMid;
-              posZ = node->z - passMid;
+              posX = node->x - pass;
+              posZ = node->z - pass;
               directionChange = !( (dX <  0) && (dZ < 0) );
            }
            break;
         }
 
-        /* Only look at valid nodes */
-        if(collisionDetect.canWalk(curActor, posX, 0, posZ, 0, 
-                                   varHeight, nx, nz, false) )
+        /* Calculate current distance to goal */
+        dX = fabs(posX - destinyX);
+        dZ = fabs(posZ - destinyZ);
+        curDist = sqrt((dX * dX) + (dZ * dZ)); 
+
+        /* Only look at valid nodes and not so far away from the
+         * destiny. */
+        if( (curDist <= maxDist) &&  
+            (collisionDetect.canWalk(curActor, posX, 0, posZ, 
+                                   node->x, 0, node->z)) )
         {
            /* New Gone is the current gone + distance to this one */
            newg = node->gone + sqrt((posX - node->x) * (posX - node->x) + 
@@ -413,12 +455,8 @@ void aStar::doCycle(bool fightMode)
            /* search it at opened */
            node3 = opened->find(posX, posZ);
 
-           /* Heuristic calculation with diagonal.  */
-           dX = fabs(destinyX - posX);
-           dZ = fabs(destinyZ - posZ);
-           diagonal = (dX < dZ) ? dX : dZ;
-           orthogonal = dX + dZ;
-           heuristic = 1.41 * diagonal + (orthogonal - 2*diagonal);
+           /* Heuristic calculation */
+           heuristic = dX + dZ;
 
            /* If is in open or closed and n.g <= new g */
            if( ((node2 != NULL) && (node2->gone <= newg)) || 
@@ -457,7 +495,6 @@ void aStar::doCycle(bool fightMode)
                      node->parentX, node->parentZ);
       opened->remove(node);
    }
-
 }
 
 /****************************************************************
@@ -574,6 +611,52 @@ int aStar::getState()
    return(st);
 }
 
+/****************************************************************
+ *                            drawSearch                        *
+ ****************************************************************/
+void aStar::drawSearch()
+{
+   int i;
+   pointStar* node;
+
+   if(state == ASTAR_STATE_RUNNING)
+   {
+      glPushAttrib(GL_ENABLE_BIT);
+      glDisable(GL_FOG);
+      glDisable(GL_LIGHTING);
+
+      glPointSize(10);
+
+      node = (pointStar*)opened->getFirst();
+      if(opened->getTotal() > 0)
+      {
+         glColor4f(0.0, 1.0, 0.2, 1.0);
+         glBegin(GL_POINTS);
+         for(i=0; i < opened->getTotal(); i++)
+         {
+            glVertex3f(node->x, 1.0, node->z);
+            node = (pointStar*)node->getNext();
+         }
+         glEnd();
+      }
+      node = (pointStar*)closed->getFirst();
+      if(closed->getTotal() > 0)
+      {
+         glColor4f(0.0, 0.2, 1.0, 1.0);
+         glBegin(GL_POINTS);
+         for(i=0; i < closed->getTotal(); i++)
+         {
+            glVertex3f(node->x, 1.0, node->z);
+            node = (pointStar*)node->getNext();
+         }
+         glEnd();
+      }
+
+      glPointSize(1);
+      glPopAttrib();
+   }
+}
+
 
 /****************************************************************************/
 /****************************************************************************/
@@ -665,7 +748,10 @@ pointStar* listStar::find(GLfloat x, GLfloat z)
    pointStar* tmp = (pointStar*)first;
    for(aux = 0; aux < total; aux++)
    {
-      if( (tmp->x == x) && (tmp->z == z))
+      if( (tmp->x >= x-0.1f) && 
+          (tmp->x <= x+0.1f) &&
+          (tmp->z >= z-0.1f) &&
+          (tmp->z <= z+0.1f) )
       {
          return(tmp);
       }
@@ -683,15 +769,23 @@ pointStar* listStar::findLowest()
    pointStar* tmp = (pointStar*)first;
    pointStar* lowest = (pointStar*)first;
 
+   float val=0.0;
+   float lowestVal;
+
    if(total <= 0)
    {
       return(NULL);
    }
+
+   lowestVal = lowest->gone+lowest->heuristic;
    
-   for(aux = 0; aux < total; aux++)
+   tmp = (pointStar*)first->getNext();
+   for(aux = 1; aux < total; aux++)
    {
-      if( (tmp->gone + tmp->heuristic) <= (lowest->gone+lowest->heuristic) )
+      val = tmp->gone + tmp->heuristic; 
+      if( val < lowestVal )
       {
+         lowestVal = val;
          lowest = tmp;
       }
       tmp = (pointStar*)tmp->getNext();

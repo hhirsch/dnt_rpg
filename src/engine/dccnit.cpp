@@ -3121,7 +3121,7 @@ int engine::treatIO(SDL_Surface *screen)
       /* Verify if found path in aStar */
       if(activeCharacter->pathFind.getState() == ASTAR_STATE_FOUND)
       {
-         //Found path to, so walk
+         /* Found path to, so walk */
          walkStatus = ENGINE_WALK_MOUSE_ASTAR;
       }
 
@@ -3396,12 +3396,6 @@ void engine::renderNoShadowThings()
 
    activeCharacter = PCs->getActiveCharacter(); 
 
-   /* Draw Path */
-   /*if(walkStatus == ENGINE_WALK_MOUSE_ASTAR)
-   {
-      activeCharacter->pathFind.drawPath();
-   }*/
-
    /* The SUN or MOON */
    if(actualMap->isOutdoor())
    {
@@ -3482,7 +3476,9 @@ void engine::renderNoShadowThings()
    if(walkStatus == ENGINE_WALK_MOUSE_ASTAR)
    {
       GLfloat destX =0, destZ=0;
-      //activeCharacter->pathFind.drawPath();
+#ifdef DEBUG_ASTAR
+      activeCharacter->pathFind.drawPath();
+#endif
       activeCharacter->pathFind.getDestiny(destX, destZ);
       
        /* Draw Movimentation Destiny */
@@ -3653,6 +3649,11 @@ void engine::drawWithShadows(bool flush)
    /* Render remaining things (and GUI) */
    renderNoShadowThings();
    renderGUI();
+
+#ifdef DEBUG_ASTAR
+   /* Debug for a* */
+   activeCharacter->pathFind.drawSearch();
+#endif
    
    if(flush)
    {
@@ -3678,6 +3679,11 @@ void engine::drawWithoutShadows(bool flush)
    renderNoShadowThings();
 
    renderGUI();
+
+#ifdef DEBUG_ASTAR
+   /* Debug for a* */
+   activeCharacter->pathFind.drawSearch();
+#endif
 
    /* Flush */
    if(flush)

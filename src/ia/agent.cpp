@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -150,12 +150,19 @@ void agent::clearObstacles()
  ********************************************************************/
 bool agent::doAngle()
 {
+   /* Must put at range before check */
+   while(desiredAngle < 0)
+   {
+      desiredAngle += 360;
+   }
+   while(orientation < 0)
+   {
+      orientation += 360;
+   }
+
+   /* Now recalculate, if are differents */
    if(orientation != desiredAngle)
    {
-      if(desiredAngle < 0)
-      {
-         desiredAngle += 360;
-      }
       GLfloat d1;
       GLfloat d2;
       if(orientation > desiredAngle)
@@ -195,7 +202,7 @@ bool agent::doAngle()
 
       }
 
-      if(orientation < 0)
+      while(orientation < 0)
       {
          orientation += 360;
       }

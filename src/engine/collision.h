@@ -75,7 +75,17 @@ class collision
       bool canWalk(character* actor, GLfloat varX, GLfloat varY ,GLfloat varZ,
                    GLfloat varAlpha, GLfloat& varHeight, GLfloat& nx, 
                    GLfloat& nz, bool usePosition=true);
-                   
+     
+      /*! Verify if can walk, doing an interpolate beetween previous 
+       * and current positions, to avoid some phantom effects  */
+      bool canWalk(character* actor, GLfloat x, GLfloat y, GLfloat z, 
+                   GLfloat prevX, GLfloat prevY, GLfloat prevZ);
+
+   protected:
+      bool canWalk(character* actor, boundingBox& actorBox, 
+            GLfloat curPerY, Square* perQuad,
+            GLfloat& varHeight, GLfloat& nx, GLfloat& nz);
+
       
    private:
       Map* actualMap;         /**< Pointer to current opened map */
