@@ -19,9 +19,6 @@
 		<Linker>
 			<Add option="-g -Wall -lm -lmingw32 -lGLU32 -lOPENGL32 -lSDLmain -lSDL -lSDL_image -lSDL_ttf -lcal3d -logg -lvorbis -lvorbisfile -lopenal32 -lintl" />
 		</Linker>
-		<Unit filename="resource.rc">
-			<Option compilerVar="WINDRES" />
-		</Unit>
 		<Unit filename="..\src\app\mapEditor\area.cpp" />
 		<Unit filename="..\src\app\mapEditor\area.h" />
 		<Unit filename="..\src\app\mapEditor\editor.cpp" />
@@ -173,6 +170,8 @@
 		<Unit filename="..\src\etc\btree.h" />
 		<Unit filename="..\src\etc\btreecell.cpp" />
 		<Unit filename="..\src\etc\btreecell.h" />
+		<Unit filename="..\src\etc\cal3dmodel.cpp" />
+		<Unit filename="..\src\etc\cal3dmodel.h" />
 		<Unit filename="..\src\etc\defparser.cpp" />
 		<Unit filename="..\src\etc\defparser.h" />
 		<Unit filename="..\src\etc\dirs.cpp" />
@@ -183,12 +182,18 @@
 		<Unit filename="..\src\etc\extensions.h" />
 		<Unit filename="..\src\etc\list.cpp" />
 		<Unit filename="..\src\etc\list.h" />
+		<Unit filename="..\src\etc\md5anim.cpp" />
+		<Unit filename="..\src\etc\md5anim.h" />
+		<Unit filename="..\src\etc\md5model.cpp" />
+		<Unit filename="..\src\etc\md5model.h" />
 		<Unit filename="..\src\etc\message3d.cpp" />
 		<Unit filename="..\src\etc\message3d.h" />
 		<Unit filename="..\src\etc\npcfile.cpp" />
 		<Unit filename="..\src\etc\npcfile.h" />
 		<Unit filename="..\src\etc\overlaps.cpp" />
 		<Unit filename="..\src\etc\overlaps.h" />
+		<Unit filename="..\src\etc\quaternion.cpp" />
+		<Unit filename="..\src\etc\quaternion.h" />
 		<Unit filename="..\src\etc\scene.cpp" />
 		<Unit filename="..\src\etc\scene.h" />
 		<Unit filename="..\src\etc\scenenode.cpp" />
@@ -302,6 +307,9 @@
 		<Unit filename="..\src\sound\sndfx.h" />
 		<Unit filename="..\src\sound\sound.cpp" />
 		<Unit filename="..\src\sound\sound.h" />
+		<Unit filename="resource.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<debugger />
