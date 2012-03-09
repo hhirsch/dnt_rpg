@@ -1,0 +1,25 @@
+# Exported from Blender by DNT md5 exporter
+
+path = models/personagens/guria/
+scale = 12.0
+blendFrames = 4
+
+# Mesh Information
+mesh = guria.md5mesh
+
+# Animations
+animation = guria_Idle-M.md5anim
+animation = guria_Run-M.md5anim
+animation = guria_Die.md5anim
+animation = guria_Dead.md5anim
+animation = guria_Left-Punch-M.md5anim
+animation = guria_Walk.md5anim
+animation = guria_Rest.md5anim
+animation = guria_Charge-Punch-M.md5anim
+
+# Material
+ambient = 1.0 1.0 1.0 1.0 
+diffuse = 0.6 0.6 0.6 1.0 
+specular = 1.0 1.0 1.0 1.0
+shininess = 0.0
+image = texture.png
