@@ -47,11 +47,11 @@ void door::update()
 
    if( (status == DOOR_STATUS_OPENED) && (delta < 90))
    {
-      delta += 5;
+      delta += 3;
    }
    else if( (status == DOOR_STATUS_CLOSED) && (delta > 0) )
    {
-      delta -= 5;
+      delta -= 6;
    }
    obj->scNode->setAngle(0.0f, oY+delta, 0.0f);
 }

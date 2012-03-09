@@ -1,0 +1,14 @@
+door_close.ogg  
+door_open.ogg  
+   Author: FreqMan
+   License: CC-BY 3.0
+   Source: http://www.freesound.org/people/FreqMan/sounds/23168/
+   Note: Edited by DNTeam.
+
+
+drop_item.ogg  
+et.ogg  
+take_item.ogg
+   Author: DNTeam
+   License: GPLv3 or latter
+

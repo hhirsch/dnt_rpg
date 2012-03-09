@@ -1858,7 +1858,7 @@ void engine::enterBattleMode(bool surprisePC)
    if(numEnemies > 0)
    {
       /* Really Init the Battle */
-      snd->addSoundEffect(SOUND_NO_LOOP,"sndfx/battleMode.ogg");
+      snd->addSoundEffect(SOUND_NO_LOOP,"sndfx/other/battleMode.ogg");
       engineMode = ENGINE_MODE_TURN_BATTLE;
       moveCircleX = activeCharacter->scNode->getPosX();
       moveCircleY = activeCharacter->scNode->getPosY();

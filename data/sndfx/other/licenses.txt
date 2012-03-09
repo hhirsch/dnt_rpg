@@ -1,0 +1,3 @@
+battleMode.ogg
+   author: DNTeam
+   license: GPLv3 or latter;
