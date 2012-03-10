@@ -412,13 +412,13 @@ bool collision::canWalk(character* actor, GLfloat x, GLfloat y, GLfloat z,
    actorBox = actor->scNode->getModel()->getCrudeBoundingBox();
    /* Expand depending on direction */
    float dif;
-   dif = fabs(x - prevX);
+   dif = fabs(x - prevX) / 2.0f;
    actorBox.x1 -= dif;
    actorBox.x2 += dif;
-   dif = fabs(y - prevY);
+   dif = fabs(y - prevY) / 2.0f;
    actorBox.y1 -= dif;
    actorBox.y2 += dif;
-   dif = fabs(z - prevZ);
+   dif = fabs(z - prevZ) / 2.0f;
    actorBox.z1 -= dif;
    actorBox.z2 += dif;
 
@@ -441,68 +441,5 @@ bool collision::canWalk(character* actor, GLfloat x, GLfloat y, GLfloat z,
    }
 
    return(canWalk(actor, actorBox, midY, perQuad, varHeight, nX, nZ));
-#if 0
-   GLfloat dX = fabs(x - prevX);
-   GLfloat dY = fabs(y - prevY);
-   GLfloat dZ = fabs(z - prevZ);
-   int steps = 1;
-   int i;
-   GLfloat minVar = 4.0f;
-   GLfloat pX, pY, pZ;
-
-   /* First, calculate the number of steps */
-   if( (dX >= dY) && (dX >= dZ) )
-   {
-      /* X is greater */
-      steps = (int)floor(dX / minVar) + 1;
-   }
-   else if(dZ >= dY)
-   {
-      /* Z is greater */
-      steps = (int)floor(dZ / minVar) + 1;
-   }
-   else
-   {
-      /* Y is greater */
-      steps = (int)floor(dY / minVar) + 1;
-   }
-
-   printf("Steps: %d ", steps);
-
-   /* Calculate Variation */
-   dX = dX / steps;
-   dY = dY / steps;
-   dZ = dZ / steps;
-
-
-   pX = prevX;
-   pY = prevY;
-   pZ = prevZ;
-   for(i=1; i <= steps; i++)
-   {
-      if(i == steps)
-      {
-         /* Last step with the destiny */
-         pX = x;
-         pY = y;
-         pZ = z;
-      }
-
-      if(!canWalk(actor, pX, pY, pZ, actor->scNode->getAngleY(), 
-               varHeight, nX, nZ, false))
-      {
-         /* Can't walk, so no more need to test further */
-         return(false);
-      }
-
-
-      pX += dX;
-      pY += dY;
-      pZ += dZ;
-   }
-
-   /* Could walk... finally! */
-   return(true);
-#endif
 }
 
