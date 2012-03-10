@@ -530,7 +530,7 @@ void missionsController::completeMission(mission* m, int type)
 
       sprintf(vstr,gettext("Mission Completed: %d XP!"),m->getXp()); 
       msgController.addMessage(dude->scNode->getPosX(), 
-            dude->scNode->getBoundingBox().y2+dude->scNode->getPosY(),
+            dude->scNode->getBoundingBox().max.y+dude->scNode->getPosY(),
             dude->scNode->getPosZ(), vstr, 0.94, 0.8, 0.0);
 
       /* Add Briefing message of success */
@@ -544,7 +544,7 @@ void missionsController::completeMission(mission* m, int type)
       /* Add 3D message of failure */
       character* dude = pEngine->PCs->getActiveCharacter();
       msgController.addMessage(dude->scNode->getPosX(), 
-            dude->scNode->getBoundingBox().y2+dude->scNode->getPosY(),
+            dude->scNode->getBoundingBox().max.y+dude->scNode->getPosY(),
             dude->scNode->getPosZ(), 
             gettext("Mission Failure!"), 0.94, 0.2, 0.1);
 

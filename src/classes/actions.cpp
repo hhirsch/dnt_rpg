@@ -263,10 +263,9 @@ bool doHealOrAttack(thing& actor, thing* target,
          {
             brief.addText(gettext("Critical Miss!"), 220, 0, 0);
             controller.addMessage(actor.scNode->getPosX(),
-                  actor.scNode->getPosY() + actor.scNode->getBoundingBox().y2,
-                  actor.scNode->getPosZ(),
-                  gettext("Critical Miss!"),
-                  0.92,0.41,0.14);
+               actor.scNode->getPosY() + actor.scNode->getBoundingBox().max.y,
+               actor.scNode->getPosZ(),
+               gettext("Critical Miss!"), 0.92,0.41,0.14);
             if(heal)
             {
                /* Damage the target with ??? ! */
@@ -280,8 +279,8 @@ bool doHealOrAttack(thing& actor, thing* target,
          else
          {
             controller.addMessage(actor.scNode->getPosX(),
-                  actor.scNode->getPosY()+actor.scNode->getBoundingBox().y2,
-                  actor.scNode->getPosZ(),gettext("Miss."),
+               actor.scNode->getPosY()+actor.scNode->getBoundingBox().max.y,
+               actor.scNode->getPosZ(),gettext("Miss."),
                   0.92,0.41,0.14);
          }
          return(true);
@@ -346,7 +345,7 @@ bool doHealOrAttack(thing& actor, thing* target,
       {
          brief.addText(gettext("Critical Heal!"), 12, 10, 128);
          controller.addMessage(actor.scNode->getPosX(),
-               actor.scNode->getPosY()+actor.scNode->getBoundingBox().y2,
+               actor.scNode->getPosY()+actor.scNode->getBoundingBox().max.y,
                actor.scNode->getPosZ(),gettext("Critical Heal!"),
                0.06,0.24,0.86);
       }
@@ -355,7 +354,7 @@ bool doHealOrAttack(thing& actor, thing* target,
          brief.addText(gettext("Critical Hit!"), 12, 10, 128);
          /* Show critical hit */
          controller.addMessage(actor.scNode->getPosX(),
-               actor.scNode->getPosY()+actor.scNode->getBoundingBox().y2,
+               actor.scNode->getPosY()+actor.scNode->getBoundingBox().max.y,
                actor.scNode->getPosZ(),gettext("Critical Hit!"),
                0.84,0.2,0.01);
       }
@@ -365,14 +364,14 @@ bool doHealOrAttack(thing& actor, thing* target,
    if(heal)
    {
       controller.addMessage(target->scNode->getPosX(), 
-            target->scNode->getPosY() + target->scNode->getBoundingBox().y2,
+            target->scNode->getPosY() + target->scNode->getBoundingBox().max.y,
             target->scNode->getPosZ(), texto,
             0.21, 0.15, 0.7);
    } 
    else
    {
       controller.addMessage(target->scNode->getPosX(), 
-            target->scNode->getPosY() + target->scNode->getBoundingBox().y2,
+            target->scNode->getPosY() + target->scNode->getBoundingBox().max.y,
             target->scNode->getPosZ(), texto,
             0.4, 0.01, 0.03);
    }

@@ -49,6 +49,7 @@ class collision
        * \param varHeight -> height variation going in */
       bool verifySquare(boundingBox& actorBox, Square* quad,
                         GLfloat& varHeight, GLfloat curHeight);
+      bool verifySquare(ray& acRay, Square* quad);
 
       /*! Verify if character can walk to the position
        *  \param perX -> character X position
@@ -81,16 +82,19 @@ class collision
       bool canWalk(character* actor, GLfloat x, GLfloat y, GLfloat z, 
                    GLfloat prevX, GLfloat prevY, GLfloat prevZ);
 
+      /*! Verify if an character is at sight of another */
+      bool characterAtSight(character* actor, character* target);
+
    protected:
       bool canWalk(character* actor, boundingBox& actorBox, 
-            GLfloat curPerY, Square* perQuad,
+            GLfloat curPerY, Square* perQuad, bool checkChars,
             GLfloat& varHeight, GLfloat& nx, GLfloat& nz);
 
       
    private:
-      Map* actualMap;         /**< Pointer to current opened map */
-      characterList* NPCs;    /**< Pointer to the current NPC List */
-      characterList* PCs;     /**< Pointer to the current PC List */
+      static Map* actualMap;         /**< Pointer to current opened map */
+      static characterList* NPCs;    /**< Pointer to the current NPC List */
+      static characterList* PCs;     /**< Pointer to the current PC List */
 };
 
 

@@ -1,6 +1,6 @@
 /*
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
 
   This file is part of DccNiTghtmare.
 
@@ -835,10 +835,10 @@ void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal,
       /* Now will search all other squares the object can be */
       int minqx, minqz, maxqx, maxqz;
       int ssize = squareSize();
-      minqx = (int)(bounds.x1) / ssize;
-      minqz = (int)(bounds.z1) / ssize;
-      maxqx = (int)(bounds.x2) / ssize;
-      maxqz = (int)(bounds.z2) / ssize;
+      minqx = (int)(bounds.min.x) / ssize;
+      minqz = (int)(bounds.min.z) / ssize;
+      maxqx = (int)(bounds.max.x) / ssize;
+      maxqz = (int)(bounds.max.z) / ssize;
       int X1, Z1;
       Square* qaux;
       for(X1 = minqx; X1<=maxqx; X1++)

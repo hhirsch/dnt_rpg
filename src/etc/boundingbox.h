@@ -23,6 +23,23 @@
 
 #include <SDL/SDL_opengl.h>
 #include <string>
+#include "../etc/quaternion.h"
+
+#define DNT_INFINITE_RAY_SIZE -1
+
+/*! A simple ray */
+class ray
+{
+   public:
+      ray()
+      {
+         size = DNT_INFINITE_RAY_SIZE;
+      };
+
+      vec3_t origin;
+      vec3_t direction;
+      float size;
+};
 
 /*! The Bounding Box Class */
 class boundingBox
@@ -30,7 +47,7 @@ class boundingBox
    public:
       /*! Constructor */
       boundingBox();
-      boundingBox(float min[3], float max[3]);
+      boundingBox(float minV[3], float maxV[3]);
       /*! Destructor */
       ~boundingBox();
 
@@ -57,6 +74,9 @@ class boundingBox
       /*! Verify if the two bounding boxes intercepts or not */
       bool intercepts(boundingBox& b);
 
+      /*! Verify if bounding box intercepts with a ray */
+      bool intercepts(const ray& r, float* d=NULL);
+
       /*! Verify if a bounding box is visible at the viewFrustum matrix */
       bool isVisible(GLfloat** matrix);
 
@@ -72,12 +92,8 @@ class boundingBox
       /*! assign operator */
       void operator=(const boundingBox& v);
 
-      GLfloat x1,
-              z1,
-              y1,
-              x2,
-              z2,
-              y2;
+      vec3_t min;
+      vec3_t max;
 };
 
 #endif

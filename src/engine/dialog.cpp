@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -1180,7 +1180,7 @@ void conversation::proccessAction(int opcao, engine* curEngine)
                sprintf(vstr,gettext("Mission Completed: %d XP!"),m->getXp());
                messageController msgController;
                msgController.addMessage(actualPC->scNode->getPosX(),
-                     actualPC->scNode->getBoundingBox().y2,
+                     actualPC->scNode->getBoundingBox().max.y,
                      actualPC->scNode->getPosZ(), vstr, 0.94, 0.8, 0.0);
             }
          }
@@ -1301,7 +1301,7 @@ void conversation::proccessAction(int opcao, engine* curEngine)
             /* Put Message at game */
             messageController msgController;
             msgController.addMessage(actualPC->scNode->getPosX(),
-                  actualPC->scNode->getBoundingBox().y2,
+                  actualPC->scNode->getBoundingBox().max.y,
                   actualPC->scNode->getPosZ(), vstr,
                   0.94, 0.8, 0.0);
 

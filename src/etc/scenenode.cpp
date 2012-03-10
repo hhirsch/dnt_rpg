@@ -256,7 +256,7 @@ void sceneNode::render(GLfloat** viewMatrix, bool update, bool reflexion,
 
    /* The shadow render */
    if( (shadow) && (shadowMatrix) && 
-       ( (posY > 0) || ( (posY == 0) && (bbox.y2 > 2) ) ) )
+       ( (posY > 0) || ( (posY == 0) && (bbox.max.y > 2) ) ) )
    {
       boundingBox shadBox = bbox;
       shadBox.multiplyShadow(shadowMatrix);

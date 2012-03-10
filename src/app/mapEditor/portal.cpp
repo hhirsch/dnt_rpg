@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -235,14 +235,14 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
          if( doorOrientation == 0 )
          {
             doorWall->x2 = doorX;
-            novoMuro->x1 = doorX + (bounds.x2 - bounds.x1);
+            novoMuro->x1 = doorX + (bounds.max.x - bounds.min.x);
             novoMuro->x2 = mx2;
             novoMuro->z1 = mz1;
             novoMuro->z2 = mz2;
          }
          else
          {
-            doorWall->z2 = doorZ - (bounds.z2 - bounds.z1);
+            doorWall->z2 = doorZ - (bounds.max.z - bounds.min.z);
             novoMuro->z1 = doorZ;
             novoMuro->x2 = mx2;
             novoMuro->x1 = mx1;

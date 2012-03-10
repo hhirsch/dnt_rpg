@@ -238,7 +238,7 @@ void fightSystem::verifyDeads()
                messageController msg;
                sprintf(buf, "%d XP", xp);
                msg.addMessage(actualActor->scNode->getPosX(), 
-                              actualActor->scNode->getBoundingBox().y2,
+                              actualActor->scNode->getBoundingBox().max.y,
                               actualActor->scNode->getPosZ(), 
                               buf, 1.0f,0.6f,0.0f);
             }

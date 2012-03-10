@@ -19,6 +19,7 @@
 */
 
 #include "fightGroup.h"
+#include "../engine/collision.h"
 #include <SDL/SDL.h>
 
 /***************************************************************
@@ -134,9 +135,14 @@ character* fightGroup::getNearestEnemy(character* pers)
       }
    }
 
-   if(acDist <= DNT_BATTLE_RANGE)
+   if( (enemy) && (acDist <= DNT_BATTLE_RANGE*2) )
    {
-      return(enemy);
+      /* Verify if enemy is at sight! */
+      collision coldet;
+      if(coldet.characterAtSight(pers, enemy))
+      {
+         return(enemy);
+      }
    }
    return(NULL);
 }

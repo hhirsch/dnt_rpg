@@ -346,8 +346,8 @@ pendingAction* pendingActionController::addAction(pendingAction* act,
 
             /* Get the target bounding box, to set min variation */
             boundingBox bb = act->target->scNode->getBoundingBox();
-            GLfloat sizeX = (bb.x2-bb.x1) + 16;
-            GLfloat sizeZ = (bb.z2-bb.z1) + 16;
+            GLfloat sizeX = (bb.max.x-bb.min.x) + 16;
+            GLfloat sizeZ = (bb.max.z-bb.min.z) + 16;
  
             /* Save the target value to move (to get changes of 
              *                                target position ) */

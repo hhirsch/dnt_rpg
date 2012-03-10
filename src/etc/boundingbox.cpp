@@ -30,17 +30,11 @@
  ***********************************************************************/
 boundingBox::boundingBox()
 {
-   x1 = 0;
-   z1 = 0;
-   y1 = 0;
-   x2 = 0;
-   z2 = 0;
-   y2 = 0;
 }
-boundingBox::boundingBox(float min[3], float max[3])
+boundingBox::boundingBox(float minV[3], float maxV[3])
 {
-   setMin(min);
-   setMax(max);
+   setMin(minV);
+   setMax(maxV);
 }
 
 
@@ -56,12 +50,12 @@ boundingBox::~boundingBox()
  ***********************************************************************/
 void boundingBox::operator=(const boundingBox& v)
 {
-   x1 = v.x1;
-   y1 = v.y1;
-   z1 = v.z1;
-   x2 = v.x2;
-   y2 = v.y2;
-   z2 = v.z2;
+   min.x = v.min.x;
+   min.y = v.min.y;
+   min.z = v.min.z;
+   max.x = v.max.x;
+   max.y = v.max.y;
+   max.z = v.max.z;
 }
 
 /***********************************************************************
@@ -69,9 +63,9 @@ void boundingBox::operator=(const boundingBox& v)
  ***********************************************************************/
 void boundingBox::setMin(float x, float y, float z)
 {
-   x1 = x;
-   y1 = y;
-   z1 = z;
+   min.x = x;
+   min.y = y;
+   min.z = z;
 }
 
 /***********************************************************************
@@ -79,9 +73,9 @@ void boundingBox::setMin(float x, float y, float z)
  ***********************************************************************/
 void boundingBox::setMin(float m[3])
 {
-   x1 = m[0];
-   y1 = m[1];
-   z1 = m[2];
+   min.x = m[0];
+   min.y = m[1];
+   min.z = m[2];
 }
 
 /***********************************************************************
@@ -89,9 +83,9 @@ void boundingBox::setMin(float m[3])
  ***********************************************************************/
 void boundingBox::setMax(float x, float y, float z)
 {
-   x2 = x;
-   y2 = y;
-   z2 = z;
+   max.x = x;
+   max.y = y;
+   max.z = z;
 }
 
 /***********************************************************************
@@ -99,9 +93,9 @@ void boundingBox::setMax(float x, float y, float z)
  ***********************************************************************/
 void boundingBox::setMax(float m[3])
 {
-   x2 = m[0];
-   y2 = m[1];
-   z2 = m[2];
+   max.x = m[0];
+   max.y = m[1];
+   max.z = m[2];
 }
 
 /***********************************************************************
@@ -109,9 +103,9 @@ void boundingBox::setMax(float m[3])
  ***********************************************************************/
 void boundingBox::getMin(float& x, float& y, float& z)
 {
-   x = x1;
-   y = y1;
-   z = z1;
+   x = min.x;
+   y = min.y;
+   z = min.z;
 }
 
 /***********************************************************************
@@ -119,9 +113,9 @@ void boundingBox::getMin(float& x, float& y, float& z)
  ***********************************************************************/
 void boundingBox::getMax(float& x, float& y, float& z)
 {
-   x = x2;
-   y = y2;
-   z = z2;
+   x = max.x;
+   y = max.y;
+   z = max.z;
 }
 
 /***********************************************************************
@@ -129,12 +123,12 @@ void boundingBox::getMax(float& x, float& y, float& z)
  ***********************************************************************/
 void boundingBox::translate(float x, float y, float z)
 {
-   x1 += x;
-   x2 += x;
-   y1 += y;
-   y2 += y;
-   z1 += z;
-   z2 += z;
+   min.x += x;
+   max.x += x;
+   min.y += y;
+   max.y += y;
+   min.z += z;
+   max.z += z;
 }
 
 /***********************************************************************
@@ -142,8 +136,8 @@ void boundingBox::translate(float x, float y, float z)
  ***********************************************************************/
 void boundingBox::notY()
 {
-   y1 = -y1;
-   y2 = -y2;
+   min.y = -min.y;
+   max.y = -max.y;
 }
 
 /***********************************************************************
@@ -160,14 +154,14 @@ void boundingBox::rotate(float angleX, float angleY, float angleZ)
    if(angleY != 0)
    {
       /* Populate the points X and Z */
-      X[0] = x1;
-      Z[0] = z1;
-      X[1] = x1;
-      Z[1] = z2;
-      X[2] = x2;
-      Z[2] = z2;
-      X[3] = x2;
-      Z[3] = z1;
+      X[0] = min.x;
+      Z[0] = min.z;
+      X[1] = min.x;
+      Z[1] = max.z;
+      X[2] = max.x;
+      Z[2] = max.z;
+      X[3] = max.x;
+      Z[3] = min.z;
 
       /* precalculate angles */
       seno = sin(deg2Rad(angleY));
@@ -180,25 +174,25 @@ void boundingBox::rotate(float angleX, float angleY, float angleZ)
          z[aux] = (Z[aux]*cosseno) - (X[aux]*seno);
       }
       /* Recalculate min and max */
-      x1 = x[0]; x2 = x[0];
-      z1 = z[0]; z2 = z[0];
+      min.x = x[0]; max.x = x[0];
+      min.z = z[0]; max.z = z[0];
       for(aux=1; aux < 4; aux++)
       {
-         if(x[aux] < x1)
+         if(x[aux] < min.x)
          {
-            x1 = x[aux];
+            min.x = x[aux];
          }
-         if(x[aux] > x2)
+         if(x[aux] > max.x)
          {
-            x2 = x[aux];
+            max.x = x[aux];
          }
-         if(z[aux] < z1)
+         if(z[aux] < min.z)
          {
-            z1 = z[aux];
+            min.z = z[aux];
          }
-         if(z[aux] > z2)
+         if(z[aux] > max.z)
          {
-            z2 = z[aux];
+            max.z = z[aux];
          }
       }
    }
@@ -207,14 +201,14 @@ void boundingBox::rotate(float angleX, float angleY, float angleZ)
    if(angleX != 0)
    {
       /* Populate the points Y and Z */
-      Y[0] = y1;
-      Z[0] = z1;
-      Y[1] = y1;
-      Z[1] = z2;
-      Y[2] = y2;
-      Z[2] = z2;
-      Y[3] = y2;
-      Z[3] = z1;
+      Y[0] = min.y;
+      Z[0] = min.z;
+      Y[1] = min.y;
+      Z[1] = max.z;
+      Y[2] = max.y;
+      Z[2] = max.z;
+      Y[3] = max.y;
+      Z[3] = min.z;
 
       /* precalculate angles */
       seno = sin(deg2Rad(angleX));
@@ -227,25 +221,25 @@ void boundingBox::rotate(float angleX, float angleY, float angleZ)
          z[aux] = (Z[aux]*cosseno) + (Y[aux]*seno);
       }
       /* Recalculate min and max */
-      y1 = y[0]; y2 = y[0];
-      z1 = z[0]; z2 = z[0];
+      min.y = y[0]; max.y = y[0];
+      min.z = z[0]; max.z = z[0];
       for(aux=1; aux < 4; aux++)
       {
-         if(y[aux] < y1)
+         if(y[aux] < min.y)
          {
-            y1 = y[aux];
+            min.y = y[aux];
          }
-         if(y[aux] > y2)
+         if(y[aux] > max.y)
          {
-            y2 = y[aux];
+            max.y = y[aux];
          }
-         if(z[aux] < z1)
+         if(z[aux] < min.z)
          {
-            z1 = z[aux];
+            min.z = z[aux];
          }
-         if(z[aux] > z2)
+         if(z[aux] > max.z)
          {
-            z2 = z[aux];
+            max.z = z[aux];
          }
       }
    }
@@ -254,14 +248,14 @@ void boundingBox::rotate(float angleX, float angleY, float angleZ)
    if(angleZ != 0)
    {
       /* Populate the points X and Y */
-      X[0] = x1;
-      Y[0] = y1;
-      X[1] = x1;
-      Y[1] = y2;
-      X[2] = x2;
-      Y[2] = y2;
-      X[3] = x2;
-      Y[3] = y1;
+      X[0] = min.x;
+      Y[0] = min.y;
+      X[1] = min.x;
+      Y[1] = max.y;
+      X[2] = max.x;
+      Y[2] = max.y;
+      X[3] = max.x;
+      Y[3] = min.y;
 
       /* precalculate angles */
       seno = sin(deg2Rad(angleZ));
@@ -274,25 +268,25 @@ void boundingBox::rotate(float angleX, float angleY, float angleZ)
          y[aux] = (Y[aux]*cosseno) + (X[aux]*seno);
       }
       /* Recalculate min and max */
-      x1 = x[0]; x2 = x[0];
-      y1 = y[0]; y2 = y[0];
+      min.x = x[0]; max.x = x[0];
+      min.y = y[0]; max.y = y[0];
       for(aux=1; aux < 4; aux++)
       {
-         if(x[aux] < x1)
+         if(x[aux] < min.x)
          {
-            x1 = x[aux];
+            min.x = x[aux];
          }
-         if(x[aux] > x2)
+         if(x[aux] > max.x)
          {
-            x2 = x[aux];
+            max.x = x[aux];
          }
-         if(y[aux] < y1)
+         if(y[aux] < min.y)
          {
-            y1 = y[aux];
+            min.y = y[aux];
          }
-         if(y[aux] > y2)
+         if(y[aux] > max.y)
          {
-            y2 = y[aux];
+            max.y = y[aux];
          }
       }
 
@@ -312,25 +306,25 @@ void boundingBox::multiplyShadow(float* shadowMatrix)
    int i;
 
    /* Project on shadow all 4 "up" points of the bounding box */
-   X[0] = x1;
-   Z[0] = z1;
-   X[1] = x1;
-   Z[1] = z2;
-   X[2] = x2;
-   Z[2] = z2;
-   X[3] = x2;
-   Z[3] = z1;
+   X[0] = min.x;
+   Z[0] = min.z;
+   X[1] = min.x;
+   Z[1] = max.z;
+   X[2] = max.x;
+   Z[2] = max.z;
+   X[3] = max.x;
+   Z[3] = min.z;
 
    for(i=0; i < 4; i++)
    {
       /* Do Projection */
-      x[i] = shadowMatrix[0]*X[i] + shadowMatrix[4]*y2 + shadowMatrix[8]*Z[i] +
+      x[i] = shadowMatrix[0]*X[i] + shadowMatrix[4]*max.y + shadowMatrix[8]*Z[i] +
          shadowMatrix[12];
-      /*ny1 = shadowMatrix[1]*x1 + shadowMatrix[5]*y1 + shadowMatrix[9]*z1 +
+      /*nmin.y = shadowMatrix[1]*min.x + shadowMatrix[5]*min.y + shadowMatrix[9]*min.z +
           shadowMatrix[13];*/
-      z[i] = shadowMatrix[2]*X[i] + shadowMatrix[6]*y2 + shadowMatrix[10]*Z[i] +
+      z[i] = shadowMatrix[2]*X[i] + shadowMatrix[6]*max.y + shadowMatrix[10]*Z[i] +
          shadowMatrix[14];
-      nw = shadowMatrix[3]*X[i] + shadowMatrix[7]*y2 + shadowMatrix[11]*Z[i] +
+      nw = shadowMatrix[3]*X[i] + shadowMatrix[7]*max.y + shadowMatrix[11]*Z[i] +
          shadowMatrix[15];
       if(nw != 0)
       {
@@ -338,28 +332,28 @@ void boundingBox::multiplyShadow(float* shadowMatrix)
          z[i] = z[i] / nw;
       }
 
-      /* Do min/max (conservative, as using previously x1,x2,z1,z2) */
-      if(x[i] < x1)
+      /* Do min/max (conservative, as using previously min.x,max.x,min.z,max.z) */
+      if(x[i] < min.x)
       {
-         x1 = x[i];
+         min.x = x[i];
       }
-      if(x[i] > x2)
+      if(x[i] > max.x)
       {
-         x2 = x[i];
+         max.x = x[i];
       }
-      if(z[i] < z1)
+      if(z[i] < min.z)
       {
-         z1 = z[i];
+         min.z = z[i];
       }
-      if(z[i] > z2)
+      if(z[i] > max.z)
       {
-         z2 = z[i];
+         max.z = z[i];
       }
    }
 
    /* Set Y, as always project to 0, set a delta to avoid glitches */
-   y1 = 0;
-   y2 = 4; /*< Delta to avoid glitches */
+   min.y = 0;
+   max.y = 4; /*< Delta to avoid glitches */
 }
 
 /***********************************************************************
@@ -374,28 +368,28 @@ bool boundingBox::intercepts(boundingBox& b)
    b.getMax(bX2, bY2, bZ2);
 
    /* Verify at X */
-   if(! ((x1 <= bX1 && bX1 <= x2) ||
-         (x1 <= bX2 && bX2 <= x2) ||
-         (bX1 <= x1 && x1 <= bX2) ||
-         (bX1 <= x2 && x2 <= bX2)))
+   if(! ((min.x <= bX1 && bX1 <= max.x) ||
+         (min.x <= bX2 && bX2 <= max.x) ||
+         (bX1 <= min.x && min.x <= bX2) ||
+         (bX1 <= max.x && max.x <= bX2)))
    {
       return(false);;
    }
 
    /* Verify at Y */
-   if(! ((y1 <= bY1 && bY1 <= y2) ||
-         (y1 <= bY2 && bY2 <= y2) ||
-         (bY1 <= y1 && y1 <= bY2) ||
-         (bY1 <= y2 && y2 <= bY2)))
+   if(! ((min.y <= bY1 && bY1 <= max.y) ||
+         (min.y <= bY2 && bY2 <= max.y) ||
+         (bY1 <= min.y && min.y <= bY2) ||
+         (bY1 <= max.y && max.y <= bY2)))
    {
       return(false);;
    }
 
    /* Verify at Z */
-   if(! ((z1 <= bZ1 && bZ1 <= z2) ||
-         (z1 <= bZ2 && bZ2 <= z2) ||
-         (bZ1 <= z1 && z1 <= bZ2) ||
-         (bZ1 <= z2 && z2 <= bZ2)))
+   if(! ((min.z <= bZ1 && bZ1 <= max.z) ||
+         (min.z <= bZ2 && bZ2 <= max.z) ||
+         (bZ1 <= min.z && min.z <= bZ2) ||
+         (bZ1 <= max.z && max.z <= bZ2)))
    {
       return(false);;
    }
@@ -404,17 +398,162 @@ bool boundingBox::intercepts(boundingBox& b)
 }
 
 /***********************************************************************
+ *                              intercepts                             *
+ ***********************************************************************/
+bool boundingBox::intercepts(const ray& r, float* d)
+{
+   /* Note: from Ogre3D source code. */
+   float lowt = 0.0f;
+   float t;
+   bool hit = false;
+   vec3_t hitpoint;
+
+   vec3_t rayorig = r.origin;
+   vec3_t raydir = r.direction;
+
+   // Check origin inside first
+   if( (rayorig[0] > min[0]) && 
+       (rayorig[1] > min[1]) &&
+       (rayorig[2] > min[2]) &&
+       (rayorig[0] < max[0]) &&
+       (rayorig[1] < max[1]) &&
+       (rayorig[2] < max[2]) )
+   {
+      if(d)
+      {
+         *d = 0;
+      }
+      return(true);
+   }
+
+   // Check each face in turn, only check closest 3
+   // Min x
+   if (rayorig.x <= min.x && raydir.x > 0)
+   {
+      t = (min.x - rayorig.x) / raydir.x;
+      if (t >= 0)
+      {
+         // Substitute t back into ray and check bounds and dist
+         hitpoint = rayorig + raydir * t;
+         if (hitpoint.y >= min.y && hitpoint.y <= max.y &&
+               hitpoint.z >= min.z && hitpoint.z <= max.z &&
+               (!hit || t < lowt))
+         {
+            hit = true;
+            lowt = t;
+         }
+      }
+   }
+   // Max x
+   if (rayorig.x >= max.x && raydir.x < 0)
+   {
+      t = (max.x - rayorig.x) / raydir.x;
+      if (t >= 0)
+      {
+         // Substitute t back into ray and check bounds and dist
+         hitpoint = rayorig + raydir * t;
+         if (hitpoint.y >= min.y && hitpoint.y <= max.y &&
+               hitpoint.z >= min.z && hitpoint.z <= max.z &&
+               (!hit || t < lowt))
+         {
+            hit = true;
+            lowt = t;
+         }
+      }
+   }
+   // Min y
+   if (rayorig.y <= min.y && raydir.y > 0)
+   {
+      t = (min.y - rayorig.y) / raydir.y;
+      if (t >= 0)
+      {
+         // Substitute t back into ray and check bounds and dist
+         hitpoint = rayorig + raydir * t;
+         if (hitpoint.x >= min.x && hitpoint.x <= max.x &&
+               hitpoint.z >= min.z && hitpoint.z <= max.z &&
+               (!hit || t < lowt))
+         {
+            hit = true;
+            lowt = t;
+         }
+      }
+   }
+   // Max y
+   if (rayorig.y >= max.y && raydir.y < 0)
+   {
+      t = (max.y - rayorig.y) / raydir.y;
+      if (t >= 0)
+      {
+         // Substitute t back into ray and check bounds and dist
+         hitpoint = rayorig + raydir * t;
+         if (hitpoint.x >= min.x && hitpoint.x <= max.x &&
+               hitpoint.z >= min.z && hitpoint.z <= max.z &&
+               (!hit || t < lowt))
+         {
+            hit = true;
+            lowt = t;
+         }
+      }
+   }
+   // Min z
+   if (rayorig.z <= min.z && raydir.z > 0)
+   {
+      t = (min.z - rayorig.z) / raydir.z;
+      if (t >= 0)
+      {
+         // Substitute t back into ray and check bounds and dist
+         hitpoint = rayorig + raydir * t;
+         if (hitpoint.x >= min.x && hitpoint.x <= max.x &&
+               hitpoint.y >= min.y && hitpoint.y <= max.y &&
+               (!hit || t < lowt))
+         {
+            hit = true;
+            lowt = t;
+         }
+      }
+   }
+   // Max z
+   if (rayorig.z >= max.z && raydir.z < 0)
+   {
+      t = (max.z - rayorig.z) / raydir.z;
+      if (t >= 0)
+      {
+         // Substitute t back into ray and check bounds and dist
+         hitpoint = rayorig + raydir * t;
+         if (hitpoint.x >= min.x && hitpoint.x <= max.x &&
+               hitpoint.y >= min.y && hitpoint.y <= max.y &&
+               (!hit || t < lowt))
+         {
+            hit = true;
+            lowt = t;
+         }
+      }
+   }
+
+   if(d)
+   {
+      *d = lowt;
+   }
+
+   if( (hit) && (r.size != DNT_INFINITE_RAY_SIZE) )
+   {
+      hit = ((lowt >= 0) && (lowt <= r.size)); 
+   }
+   return(hit);
+}
+
+/***********************************************************************
  *                               isVisible                             *
  ***********************************************************************/
 bool boundingBox::isVisible(GLfloat** matrix)
 {
    /* Apply AntiAliasing Delta */
-   float cx1 = x1 - ANTI_ALIASING_DELTA;
-   float cy1 = y1 - ANTI_ALIASING_DELTA;
-   float cz1 = z1 - ANTI_ALIASING_DELTA;
-   float cx2 = x2 + ANTI_ALIASING_DELTA;
-   float cy2 = y2 + ANTI_ALIASING_DELTA;
-   float cz2 = z2 + ANTI_ALIASING_DELTA;
+   float cx1 = min.x - ANTI_ALIASING_DELTA;
+   float cy1 = min.y - ANTI_ALIASING_DELTA;
+   float cz1 = min.z - ANTI_ALIASING_DELTA;
+   float cx2 = max.x + ANTI_ALIASING_DELTA;
+   float cy2 = max.y + ANTI_ALIASING_DELTA;
+   float cz2 = max.z + ANTI_ALIASING_DELTA;
 
    if(!matrix)
    {
@@ -496,51 +635,51 @@ void boundingBox::render()
    
    glBegin(GL_LINE_STRIP );
       /* Front */
-      glVertex3f(x1, y1, z1);
-      glVertex3f(x1, y2, z1);
-      glVertex3f(x2, y2, z1);
-      glVertex3f(x2, y1, z1);
-      glVertex3f(x1, y1, z1);
+      glVertex3f(min.x, min.y, min.z);
+      glVertex3f(min.x, max.y, min.z);
+      glVertex3f(max.x, max.y, min.z);
+      glVertex3f(max.x, min.y, min.z);
+      glVertex3f(min.x, min.y, min.z);
    glEnd();
 
    glBegin(GL_LINE_STRIP );
       /* Back */
-      glVertex3f(x1, y1, z2);
-      glVertex3f(x1, y2, z2);
-      glVertex3f(x2, y2, z2);
-      glVertex3f(x2, y1, z2);
+      glVertex3f(min.x, min.y, max.z);
+      glVertex3f(min.x, max.y, max.z);
+      glVertex3f(max.x, max.y, max.z);
+      glVertex3f(max.x, min.y, max.z);
    glEnd();
       
    glBegin(GL_LINE_STRIP );
       /* Top */
-      glVertex3f(x1, y2, z1);
-      glVertex3f(x1, y2, z2);
-      glVertex3f(x2, y2, z2);
-      glVertex3f(x2, y2, z1);
+      glVertex3f(min.x, max.y, min.z);
+      glVertex3f(min.x, max.y, max.z);
+      glVertex3f(max.x, max.y, max.z);
+      glVertex3f(max.x, max.y, min.z);
    glEnd();
 
    glBegin(GL_LINE_STRIP );
       /* Bottom */
-      glVertex3f(x1, y1, z1);
-      glVertex3f(x1, y1, z2);
-      glVertex3f(x2, y1, z2);
-      glVertex3f(x2, y1, z1);
+      glVertex3f(min.x, min.y, min.z);
+      glVertex3f(min.x, min.y, max.z);
+      glVertex3f(max.x, min.y, max.z);
+      glVertex3f(max.x, min.y, min.z);
    glEnd();
       
    glBegin(GL_LINE_STRIP );
       /* Left */
-      glVertex3f(x1, y1, z1);
-      glVertex3f(x1, y2, z1);
-      glVertex3f(x1, y2, z2);
-      glVertex3f(x1, y1, z2);
+      glVertex3f(min.x, min.y, min.z);
+      glVertex3f(min.x, max.y, min.z);
+      glVertex3f(min.x, max.y, max.z);
+      glVertex3f(min.x, min.y, max.z);
    glEnd();
 
    glBegin(GL_LINE_STRIP );
       /* Right */
-      glVertex3f(x2, y1, z1);
-      glVertex3f(x2, y2, z1);
-      glVertex3f(x2, y2, z2);
-      glVertex3f(x2, y1, z2);
+      glVertex3f(max.x, min.y, min.z);
+      glVertex3f(max.x, max.y, min.z);
+      glVertex3f(max.x, max.y, max.z);
+      glVertex3f(max.x, min.y, max.z);
    glEnd();
 
    glPopMatrix();

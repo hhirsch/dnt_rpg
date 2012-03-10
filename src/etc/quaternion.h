@@ -81,6 +81,13 @@ class vec3_t
          z = f[2];
       };
 
+      vec3_t(float pX, float pY, float pZ)
+      {
+         x = pX;
+         y = pY;
+         z = pZ;
+      };
+
       inline float operator[] (const unsigned int i)
       {
          switch(i)

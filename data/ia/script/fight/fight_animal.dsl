@@ -16,13 +16,11 @@ script()
    curLife = getActualLife(SELF_CHARACTER)
    
    if(curLife < 2)
-      print("Will run away!"
       runAwayFromBattle()
 
    # Else (if have enough life, try to attack and be near enemy)
    # Cause it's an animal and don't have range attacks
    else if(TARGET_CHARACTER)
-      print("Got Target!")
       # verify if the enemy (active character) is reachable
       if(!characterAtRange(SELF_CHARACTER, TARGET_CHARACTER))
          moveToCharacter(SELF_CHARACTER, TARGET_CHARACTER)
@@ -34,7 +32,6 @@ script()
          featUseAtCharacter(at, TARGET_CHARACTER)
       end
    else
-      print("No target!")
       # Set enemy
       tgt = getNearestEnemy(SELF_CHARACTER)
       if(tgt)

@@ -27,9 +27,6 @@
  *********************************************************************/
 collision::collision()
 {
-   actualMap = NULL;
-   NPCs = NULL;
-   PCs = NULL;
 }
 
 /*********************************************************************
@@ -37,9 +34,6 @@ collision::collision()
  *********************************************************************/
 collision::~collision()
 {
-   actualMap = NULL;
-   NPCs = NULL;
-   PCs = NULL;
 }
 
 /*********************************************************************
@@ -104,17 +98,66 @@ bool collision::verifySquare(boundingBox& actorBox, Square* quad,
             {
                /* So if the depth collision is true, verify if can go up
                 * the position. if can't, the position is 'unwalkable' now! */
-               if( ((colBox.y2 + sobj->y) - curHeight) <= 1.5)
+               if( ((colBox.max.y + sobj->y) - curHeight) <= 1.5)
                {
                   /* Can walk above the object */
-                  varHeight = ((colBox.y2+sobj->y)>varHeight)?
-                     colBox.y2+sobj->y:varHeight;
+                  varHeight = ((colBox.max.y+sobj->y)>varHeight)?
+                     colBox.max.y+sobj->y:varHeight;
                }
                else
                {
                   return(false);
                }
             }
+         }
+      }
+      ob++;
+      sobj = (objSquare*)sobj->getNext();
+   }
+
+   return(true);
+}
+
+/*********************************************************************
+ *                           verifySquare                            *
+ *********************************************************************/
+bool collision::verifySquare(ray& acRay, Square* quad)
+{
+   boundingBox colBox;
+
+   if(!(quad->flags & SQUARE_CAN_WALK))
+   {
+     /* Can't walk on square, collision! */
+     return(false);
+   }
+
+   /* test with walls */
+   int mur = 0;
+   while((mur < MAX_WALLS ) && (quad->walls[mur] != NULL))
+   {
+      colBox.setMin(quad->walls[mur]->x1, 0, quad->walls[mur]->z1);
+      colBox.setMax(quad->walls[mur]->x2, WALL_HEIGHT, 
+            quad->walls[mur]->z2);
+      if(colBox.intercepts(acRay))
+      {
+         return(false);
+      }
+      mur++;
+   }
+
+   /* test with objects */
+   int ob = 0;
+   objSquare* sobj = quad->getFirstObject();
+   while( (ob < quad->getTotalObjects())) 
+   {
+      if(sobj->colision)
+      {
+         /* Get Bounding box */
+         colBox = sobj->obj->scNode->getBoundingBox();
+
+         if(colBox.intercepts(acRay))
+         {
+            return(false);
          }
       }
       ob++;
@@ -178,7 +221,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
    actorBox.translate(perX, perY, perZ);
 
    /* Do the check */
-   return(canWalk(actor, actorBox, actor->scNode->getPosY(), perQuad, 
+   return(canWalk(actor, actorBox, actor->scNode->getPosY(), perQuad, true, 
             varHeight, nx, nz));
 }
 
@@ -186,7 +229,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
  *                              canWalk                              *
  *********************************************************************/
 bool collision::canWalk(character* actor, boundingBox& actorBox, 
-      GLfloat curPerY, Square* perQuad, GLfloat& varHeight, 
+      GLfloat curPerY, Square* perQuad, bool checkChars, GLfloat& varHeight, 
       GLfloat& nx, GLfloat& nz)
 {
    bool result = true;
@@ -197,9 +240,9 @@ bool collision::canWalk(character* actor, boundingBox& actorBox,
    varHeight = 0.0;
 
    /* Test map limits */
-   if( (actorBox.x1 < 2) || (actorBox.z1 < 2) || 
-       (actorBox.x2 > actualMap->getSizeX()*actualMap->squareSize()-2) || 
-       (actorBox.z2 > actualMap->getSizeZ()*actualMap->squareSize()-2))
+   if( (actorBox.min.x < 2) || (actorBox.min.z < 2) || 
+       (actorBox.max.x > actualMap->getSizeX()*actualMap->squareSize()-2) || 
+       (actorBox.max.z > actualMap->getSizeZ()*actualMap->squareSize()-2))
    {
       return(false);
    }
@@ -359,39 +402,42 @@ bool collision::canWalk(character* actor, boundingBox& actorBox,
    }
 
    /* Test colision with npcs and pcs */
-   characterList* list = NPCs;
-   for(i = 0; i <=1; i++)
+   if(checkChars)
    {
-      if(list)
+      characterList* list = NPCs;
+      for(i = 0; i <=1; i++)
       {
-         character* pers = (character*)list->getFirst();
-         for(j = 0; j < list->getTotal(); j++)
+         if(list)
          {
-            if(pers != actor)
+            character* pers = (character*)list->getFirst();
+            for(j = 0; j < list->getTotal(); j++)
             {
-               colBox = pers->scNode->getBoundingBox();
-               if(actorBox.intercepts(colBox))
+               if(pers != actor)
                {
-                  /* Do a more depth colision verify */
-                  if(pers->scNode->getModel()->depthCollision(
-                           0.0f, pers->scNode->getAngleY(), 0.0f,
-                           pers->scNode->getPosX(), 
-                           pers->scNode->getPosY(),
-                           pers->scNode->getPosZ(), actorBox))
+                  colBox = pers->scNode->getBoundingBox();
+                  if(actorBox.intercepts(colBox))
                   {
-                     return(false);
+                     /* Do a more depth colision verify */
+                     if(pers->scNode->getModel()->depthCollision(
+                              0.0f, pers->scNode->getAngleY(), 0.0f,
+                              pers->scNode->getPosX(), 
+                              pers->scNode->getPosY(),
+                              pers->scNode->getPosZ(), actorBox))
+                     {
+                        return(false);
+                     }
                   }
                }
+               pers = (character*)pers->getNext();
             }
-            pers = (character*)pers->getNext();
          }
+         /* Change from NPC List to PC list */
+         list = PCs;
       }
-      /* Change from NPC List to PC list */
-      list = PCs;
    }
 
-   nx = ((actorBox.x1 + actorBox.x2) / 2);
-   nz = ((actorBox.z1 + actorBox.z2) / 2);
+   nx = ((actorBox.min.x + actorBox.max.x) / 2);
+   nz = ((actorBox.min.z + actorBox.max.z) / 2);
       
    return(result);
 }
@@ -413,14 +459,14 @@ bool collision::canWalk(character* actor, GLfloat x, GLfloat y, GLfloat z,
    /* Expand depending on direction */
    float dif;
    dif = fabs(x - prevX) / 2.0f;
-   actorBox.x1 -= dif;
-   actorBox.x2 += dif;
+   actorBox.min.x -= dif;
+   actorBox.max.x += dif;
    dif = fabs(y - prevY) / 2.0f;
-   actorBox.y1 -= dif;
-   actorBox.y2 += dif;
+   actorBox.min.y -= dif;
+   actorBox.max.y += dif;
    dif = fabs(z - prevZ) / 2.0f;
-   actorBox.z1 -= dif;
-   actorBox.z2 += dif;
+   actorBox.min.z -= dif;
+   actorBox.max.z += dif;
 
    /* Must do the check at the middle position */
    float midX = (x + prevX) / 2.0f;
@@ -440,6 +486,92 @@ bool collision::canWalk(character* actor, GLfloat x, GLfloat y, GLfloat z,
       return(false);
    }
 
-   return(canWalk(actor, actorBox, midY, perQuad, varHeight, nX, nZ));
+   return(canWalk(actor, actorBox, midY, perQuad, true, varHeight, nX, nZ));
 }
+
+/*********************************************************************
+ *                         characterAtSight                          *
+ *********************************************************************/
+bool collision::characterAtSight(character* actor, character* target)
+{
+   /* TODO: verify if actor is turned to the target */
+
+   int x, z;
+   Square* quad;
+
+   bool result = true;
+
+   ray sightRay;
+   
+   float difX = (target->scNode->getPosX() - actor->scNode->getPosX());
+   float difZ = (target->scNode->getPosZ() - actor->scNode->getPosZ());
+   sightRay.size = sqrt((difX*difX) + (difZ*difZ));
+
+   sightRay.direction = vec3_t(difX, 0.0f, difZ);
+   sightRay.direction.normalize();
+
+   sightRay.origin = vec3_t(actor->scNode->getPosX(), 30.0f, 
+         actor->scNode->getPosZ());
+
+   /* Let's check each possible square */
+   int initX = (int)floor(actor->scNode->getPosX() / (actualMap->squareSize()));
+   int endX = (int)floor(target->scNode->getPosX() / (actualMap->squareSize()));
+   int initZ = (int)floor(actor->scNode->getPosZ() / (actualMap->squareSize()));
+   int endZ = (int)floor(target->scNode->getPosZ() / (actualMap->squareSize()));
+
+#if 0
+   glLineWidth(3);
+
+     glBegin(GL_LINES);
+        glVertex3f(sightRay.origin.x, sightRay.origin.y, sightRay.origin.z);
+        glVertex3f(sightRay.origin.x+1000*sightRay.direction.x, 
+                   sightRay.origin.y+1000*sightRay.direction.y,
+                   sightRay.origin.z+1000*sightRay.direction.z);
+     glEnd();
+   glLineWidth(1);
+   glFlush();
+   SDL_GL_SwapBuffers();
+   SDL_Delay(5000);
+#endif
+
+   if(endX < initX)
+   {
+      int tmp = initX;
+      initX = endX;
+      endX = tmp;
+   }
+   if(endZ < initZ)
+   {
+      int tmp = initZ;
+      initZ = endZ;
+      endZ = tmp;
+   }
+
+   /* FIXME: better if verify only in squares at the line, not at the 
+    * rectangle as it is now... */
+   for(x = initX; x <= endX; x++)
+   {
+      for(z = initZ; z <= endZ; z++)
+      {
+         quad = actualMap->relativeSquare(x, z);
+         if(quad)
+         {
+            result &= verifySquare(sightRay, quad);
+            if(!result) 
+            {
+               return(false);
+            }
+         }
+      }
+   }
+
+   return(result);
+}
+
+/*********************************************************************
+ *                         Static Members                            *
+ *********************************************************************/
+Map* collision::actualMap = NULL;
+characterList* collision::NPCs = NULL;
+characterList* collision::PCs = NULL;
 

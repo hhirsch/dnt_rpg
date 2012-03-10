@@ -2105,13 +2105,13 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          if(functionName == IA_CHARACTER_SHOW_TEXT)
          {
             msgCtl.addMessage(dude->scNode->getPosX(), 
-                  dude->scNode->getPosY() + dude->scNode->getBoundingBox().y2, 
+                  dude->scNode->getPosY()+dude->scNode->getBoundingBox().max.y, 
                   dude->scNode->getPosZ(),text);
          }
          else if(functionName == IA_CHARACTER_SHOW_TEXT_STATIC)
          {
             msgCtl.addMessage(dude->scNode->getPosX(), 
-                  dude->scNode->getPosY() + dude->scNode->getBoundingBox().y2, 
+                  dude->scNode->getPosY()+dude->scNode->getBoundingBox().max.y, 
                   dude->scNode->getPosZ(), text,
                   0.9f, 0.12f, 0.2f, DNT_FONT_ARIAL, 14, true);
          }
@@ -2405,7 +2405,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       if(c)
       {
          posX = c->scNode->getPosX();
-         posY = c->scNode->getBoundingBox().y2;
+         posY = c->scNode->getBoundingBox().max.y;
          posZ = c->scNode->getPosZ();
       }
       duration = getParameteri(token, strLine, pos);
@@ -2607,7 +2607,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          {
             if(functionName == IA_OWNER_HEIGHT)
             {
-               v = t->scNode->getBoundingBox().y2;
+               v = t->scNode->getBoundingBox().max.y;
             }
             else if(functionName == IA_OWNER_POSX)
             {
