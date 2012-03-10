@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -28,6 +28,10 @@
 int NoDivTriTriIsect(float V0[3],float V1[3],float V2[3],
                      float U0[3],float U1[3],float U2[3]);
 
+
+int intersect_triangle(float orig[3], float dir[3], 
+                       float vert0 [3], float vert1 [3], float vert2 [3],
+                       float* t, float* u, float* v);
 
 #endif
 

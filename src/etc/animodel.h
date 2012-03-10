@@ -204,7 +204,17 @@ class aniModel
        *  \param colBox -> colider bounding box
        *  \return -> true if one or more meshes colides, false otherwise */
       bool depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ, 
-            GLfloat pX, GLfloat pY, GLfloat pZ, boundingBox colBox);
+            GLfloat pX, GLfloat pY, GLfloat pZ, boundingBox& colBox);
+
+      /*! Verify, with all Meshes of the model, if the model colides
+       *  with the ray defined as parameter. 
+       *  \param pX -> model X position
+       *  \param pY -> model Y position
+       *  \param pZ -> model Z position
+       *  \param colRay -> colider ray
+       *  \return -> true if one or more meshes colides, false otherwise */
+      bool depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ, 
+            GLfloat pX, GLfloat pY, GLfloat pZ, ray& colRay);
 
       /*! Define all key vertices (left and right hand, for example) */
       void defineKeyVertex();

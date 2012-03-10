@@ -535,7 +535,7 @@ void aniModel::renderBoundingBox()
  *                           depthColision                           *
  *********************************************************************/
 bool aniModel::depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ,
-      GLfloat pX, GLfloat pY, GLfloat pZ, boundingBox colBox)
+      GLfloat pX, GLfloat pY, GLfloat pZ, boundingBox& colBox)
 {
    /* Calculate the sin and cos of the angles, to do less calculations */
    float sinAngleX = sinf(deg2Rad(angleX));
@@ -815,4 +815,124 @@ bool aniModel::depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ,
    /* If got here, no collision occurs */
    return(false);
 }
+
+/*********************************************************************
+ *                           depthColision                           *
+ *********************************************************************/
+bool aniModel::depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ,
+      GLfloat pX, GLfloat pY, GLfloat pZ, ray& colRay)
+{
+   /* Calculate the sin and cos of the angles, to do less calculations */
+   float sinAngleX = sinf(deg2Rad(angleX));
+   float cosAngleX = cosf(deg2Rad(angleX));
+   float sinAngleY = sinf(deg2Rad(angleY));
+   float cosAngleY = cosf(deg2Rad(angleY));
+   float sinAngleZ = sinf(deg2Rad(angleZ));
+   float cosAngleZ = cosf(deg2Rad(angleZ));
+
+   int vertCount=0;
+   int triCount=0;
+   vector3i_t* triangles = NULL;
+   vector3f_t* vertices=NULL;
+
+   float t=0.0f, u=0.0f, v=0.0f;
+
+   /* Get ray info */
+   float orig[3];
+   float dir[3];
+
+   orig[0] = colRay.origin.x;
+   orig[1] = colRay.origin.y;
+   orig[2] = colRay.origin.z;
+
+   dir[0] = colRay.direction.x;
+   dir[1] = colRay.direction.y;
+   dir[2] = colRay.direction.z;
+
+   /* Apply delta */
+   pY += dY;
+
+   /* get the number of meshes */
+   int meshCount;
+   meshCount = getTotalMeshes();
+
+   /* verify all meshes of the model */
+   int meshId;
+   for(meshId = 0; meshId < meshCount; meshId++)
+   {
+      /* get the transformed vertices of the mesh */
+      vertices = getMeshVertices(meshId, vertCount);
+
+      /* get faces */
+      triangles = getMeshFaces(meshId, triCount);
+
+      /* Verify each model face */
+      int f;
+      float V0[3], V1[3], V2[3];
+      int index0=0, index1=0, index2=0;
+      for(f = 0; f < triCount; f++)
+      {
+
+         /* Define Triangle Vertex index */
+         index0 = triangles[f][0];
+         index1 = triangles[f][1];
+         index2 = triangles[f][2];
+
+         /* Translate and rotate the coordinates.
+          * NOTE: Do not forget that if the blender coordinate system is
+          * (x,y,z), the DNT system is (-x,z,y) */
+         rotatePoint(-vertices[index0][0]*renderScale,
+               vertices[index0][2]*renderScale,
+               vertices[index0][1]*renderScale,
+               angleX, angleY, angleZ, sinAngleX, cosAngleX, 
+               sinAngleY, cosAngleY, sinAngleZ, cosAngleZ,
+               V0[0], V0[1], V0[2]);
+         V0[0] += pX;
+         V0[1] += pY;
+         V0[2] += pZ;
+
+         rotatePoint(-vertices[index1][0]*renderScale,
+               vertices[index1][2]*renderScale,
+               vertices[index1][1]*renderScale,
+               angleX, angleY, angleZ, sinAngleX, cosAngleX, 
+               sinAngleY, cosAngleY, sinAngleZ, cosAngleZ,
+               V1[0], V1[1], V1[2]);
+         V1[0] += pX;
+         V1[1] += pY;
+         V1[2] += pZ;
+
+         rotatePoint(-vertices[index2][0]*renderScale,
+               vertices[index2][2]*renderScale,
+               vertices[index2][1]*renderScale,
+               angleX, angleY, angleZ, sinAngleX, cosAngleX, 
+               sinAngleY, cosAngleY, sinAngleZ, cosAngleZ,
+               V2[0], V2[1], V2[2]);
+         V2[0] += pX;
+         V2[1] += pY;
+         V2[2] += pZ;
+
+         /* Verify ray triangle intersection */
+         if(intersect_triangle(orig, dir, V0, V1, V2, &t, &u, &v) )
+         {
+            if(colRay.size != DNT_INFINITE_RAY_SIZE)
+            {
+               /* Collided with ray, must verify extension */
+               if(t <= colRay.size)
+               {
+                  /* Lenght lesser: collided! */
+                  return(true);
+               }
+            }
+            else
+            {
+               /* Collided with infinite ray */
+               return(true);
+            }
+         }
+      }
+   }
+   /* If got here, no collision occurs */
+   return(false);
+}
+
 

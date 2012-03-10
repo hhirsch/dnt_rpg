@@ -1,6 +1,6 @@
 /*
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
 
   This file is part of DccNiTghtmare.
 
@@ -716,6 +716,21 @@ bool object::depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ,
                pX,pY,pZ,colBox));
    }
    /* If no model, no collision =^P */
+   return(false);
+}
+
+/*********************************************************************
+ *                            depthCollision                         *
+ *********************************************************************/
+bool object::depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ,
+      GLfloat pX, GLfloat pY, GLfloat pZ, ray& colRay)
+{
+   if(scNode)
+   {
+      return(scNode->getModel()->depthCollision(angleX, angleY, angleZ,
+               pX, pY, pZ, colRay));
+   }
+
    return(false);
 }
 

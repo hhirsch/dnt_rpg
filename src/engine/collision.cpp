@@ -157,7 +157,16 @@ bool collision::verifySquare(ray& acRay, Square* quad)
 
          if(colBox.intercepts(acRay))
          {
-            return(false);
+            /* Verify depth collision */
+            if(sobj->obj->depthCollision(sobj->angleX, sobj->angleY,
+                     sobj->angleZ, sobj->x, 
+                     sobj->y +
+                     actualMap->getHeight(sobj->x,sobj->z),
+                     sobj->z, acRay))
+            {
+               /* really collided */
+               return(false);
+            }
          }
       }
       ob++;
@@ -449,44 +458,135 @@ bool collision::canWalk(character* actor, boundingBox& actorBox,
 bool collision::canWalk(character* actor, GLfloat x, GLfloat y, GLfloat z, 
       GLfloat prevX, GLfloat prevY, GLfloat prevZ)
 {
-   boundingBox actorBox;
+   /* Do a ray intersection between positions.
+    * It'll use two rays, each from origin character's top to destiny floor,
+    * and another from origin floor to character top at destiny */
+   int i, j;
+   Square* quad;
 
-   /* Some unused returned values */
-   GLfloat varHeight=0.0f, nX=0.0f, nZ=0.0f;
+   bool result = true;
 
-   /* Let's calculate the expanded BoundingBox */
-   actorBox = actor->scNode->getModel()->getCrudeBoundingBox();
-   /* Expand depending on direction */
-   float dif;
-   dif = fabs(x - prevX) / 2.0f;
-   actorBox.min.x -= dif;
-   actorBox.max.x += dif;
-   dif = fabs(y - prevY) / 2.0f;
-   actorBox.min.y -= dif;
-   actorBox.max.y += dif;
-   dif = fabs(z - prevZ) / 2.0f;
-   actorBox.min.z -= dif;
-   actorBox.max.z += dif;
+   ray sightRay, sightRay2;
+   boundingBox colBox;
 
-   /* Must do the check at the middle position */
-   float midX = (x + prevX) / 2.0f;
-   float midY = (y + prevY) / 2.0f;
-   float midZ = (z + prevZ) / 2.0f;
+   float varY = actor->scNode->getBoundingBox().max.y;
    
-   /* Now just rotate and set position */
-   actorBox.rotate(0.0f, actor->scNode->getAngleY(), 0.0f);
-   actorBox.translate(midX, midY, midZ);
+   float difX = x - prevX;
+   float difY1 = (y+varY) - prevY;
+   float difY2 = y - (prevY+varY);
+   float difZ = z - prevZ;
 
-   /* And Calculate square occupied */
-   int posX =(int)floor(midX / (actualMap->squareSize()));
-   int posZ =(int)floor(midZ / (actualMap->squareSize()));
-   Square* perQuad = actualMap->relativeSquare(posX, posZ);
-   if(!perQuad)
+   sightRay.size = sqrt((difX*difX) + (difY1*difY1) + (difZ*difZ));
+   sightRay.direction = vec3_t(difX, difY1, difZ);
+   sightRay.direction.normalize();
+   sightRay.origin = vec3_t(prevX, prevY, prevZ); 
+
+   sightRay2.size = sqrt((difX*difX) + (difY2*difY2) + (difZ*difZ));
+   sightRay2.direction = vec3_t(difX, difY2, difZ);
+   sightRay2.direction.normalize();
+   sightRay2.origin = vec3_t(prevX, prevY+varY, prevZ); 
+
+   /* Let's check each possible square */
+   int initX = (int)floor(prevX / (actualMap->squareSize()));
+   int endX = (int)floor(x / (actualMap->squareSize()));
+   int initZ = (int)floor(prevZ / (actualMap->squareSize()));
+   int endZ = (int)floor(z / (actualMap->squareSize()));
+
+   /* Verify precedence */
+   if(endX < initX)
    {
-      return(false);
+      int tmp = initX;
+      initX = endX;
+      endX = tmp;
+   }
+   if(endZ < initZ)
+   {
+      int tmp = initZ;
+      initZ = endZ;
+      endZ = tmp;
    }
 
-   return(canWalk(actor, actorBox, midY, perQuad, true, varHeight, nX, nZ));
+   /* FIXME: better if verify only in squares at the line, not at the 
+    * rectangle as it is now... */
+   for(i = initX; i <= endX; i++)
+   {
+      for(j = initZ; j <= endZ; j++)
+      {
+         quad = actualMap->relativeSquare(i, j);
+         if(quad)
+         {
+            result &= verifySquare(sightRay, quad);
+            if(!result) 
+            {
+               return(false);
+            }
+            result &= verifySquare(sightRay2, quad);
+            if(!result)
+            {
+               return(false);
+            }
+         }
+      }
+   }
+
+   /* Test Doors */
+   door* door1 = actualMap->getFirstDoor();
+   for(i=0; i < actualMap->getTotalDoors(); i++)
+   {
+      colBox = door1->obj->scNode->getBoundingBox();
+      if(colBox.intercepts(sightRay))
+      {
+         return(false);
+      }
+      if(colBox.intercepts(sightRay2))
+      {
+         return(false);
+      }
+      door1 = (door*)door1->getNext();
+   }
+
+
+   /* Now, let's check with PCs and NPCs */
+   characterList* list = NPCs;
+   for(i = 0; i <=1; i++)
+   {
+      if(list)
+      {
+         character* pers = (character*)list->getFirst();
+         for(j = 0; j < list->getTotal(); j++)
+         {
+            if(pers != actor)
+            {
+               colBox = pers->scNode->getBoundingBox();
+               if(colBox.intercepts(sightRay))
+               {
+                  /* Do a more depth colision verify */
+                  //if(pers->scNode->getModel()->depthCollision(
+                  //         0.0f, pers->scNode->getAngleY(), 0.0f,
+                  //         pers->scNode->getPosX(), 
+                  //         pers->scNode->getPosY(),
+                  //         pers->scNode->getPosZ(), sightRay))
+                  {
+                     return(false);
+                  }
+               }
+               if(colBox.intercepts(sightRay2))
+               {
+                  return(false);
+               }
+            }
+            pers = (character*)pers->getNext();
+         }
+      }
+      /* Change from NPC List to PC list */
+      list = PCs;
+   }
+
+   /* Finally, check boundingBox at final position */
+   float varHeight=0.0f, nx=0.0f, nz=0.0f;
+
+   return(canWalk(actor, x, 0, z, 0,
+            varHeight, nx, nz, false));
 }
 
 /*********************************************************************

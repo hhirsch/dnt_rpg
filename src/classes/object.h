@@ -133,6 +133,8 @@ class object: public thing
        *  \return -> true if one or more meshes colides, false otherwise */
       bool depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ, 
             GLfloat pX, GLfloat pY, GLfloat pZ, boundingBox colBox);
+      bool depthCollision(GLfloat angleX, GLfloat angleY, GLfloat angleZ,
+            GLfloat pX, GLfloat pY, GLfloat pZ, ray& colRay);
 
       /*! Get the related object dice information
        * \return -> diceThing of the object */

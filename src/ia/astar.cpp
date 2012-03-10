@@ -30,7 +30,7 @@ using namespace std;
 #define MIN_CALL        200  /**< Minimun time interval to call search again */
 
 #define STEP_FACTOR        20  /**< Factor to step search */
-#define STEP_FACTOR_INDOOR  4  /**< Indor Factor to step search */
+#define STEP_FACTOR_INDOOR 10  /**< Indor Factor to step search */
 #define MAX_DIST_FACTOR     2  /**< Only visit nodes at max X times 
                                     distant to the goal than the current one */
 
