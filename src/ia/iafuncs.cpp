@@ -124,12 +124,13 @@ bool isFunction(string s)
            (s == IA_GET_OBJECT) || (s == IA_GET_OBJECT_STATE) ||
            (s == IA_CHARACTER_IS_ALIVE) || (s == IA_CHARACTER_IS_ALL_DEAD) ||
            (s == IA_CHARACTER_GET_PSYCHO) ||
-           (s == IA_CHARACTER_SET_PSYCHO) || (s == IA_CHARACTER_AT_RANGE) || 
+           (s == IA_CHARACTER_SET_PSYCHO) || (s == IA_CHARACTER_AT_RANGE) ||
+           (s == IA_SET_TARGET_CHARACTER) ||
            (s == IA_CHARACTER_GET_ACTUAL_LIFE) ||
            (s == IA_CHARACTER_GET_MAX_LIFE) || (s == IA_CHARACTER_ADD_EFFECT) ||
            (s == IA_SELF_OBJECT) ||
            (s == IA_SELF_CHARACTER) || (s == IA_SELF_MISSION) ||
-           (s == IA_ACTIVE_CHARACTER) ||
+           (s == IA_ACTIVE_CHARACTER) || (s == IA_TARGET_CHARACTER) ||
            (s == IA_ACTUAL_MAP) || (s == IA_TRUE) || (s == IA_FALSE) ||
            (s == IA_MISSION_ADD) || (s == IA_MISSION_COMPLETE) ||
            (s == IA_MISSION_ABORT) ||
@@ -215,6 +216,7 @@ string functionType(string s)
    }
    /* Character Functions */
    else if( (s == IA_SELF_CHARACTER) || (s == IA_ACTIVE_CHARACTER) ||
+            (s == IA_TARGET_CHARACTER) ||
             (s == IA_FIGHT_GET_NEAREST_ENEMY) || (s == IA_GET_NPC_BY_NAME) )
    {
       return(IA_TYPE_CHARACTER);

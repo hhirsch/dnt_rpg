@@ -87,6 +87,7 @@
 #define IA_SELF_OBJECT "SELF_OBJECT"  /**< As the owner object of the script */
 #define IA_SELF_CHARACTER "SELF_CHARACTER" /**< As script's owner character */
 #define IA_ACTIVE_CHARACTER "ACTIVE_CHARACTER" /**< The Active PC */
+#define IA_TARGET_CHARACTER "TARGET_CHARACTER" /**< Target of owner character */
 #define IA_ACTUAL_MAP "ACTUAL_MAP" /**< The actual openned map */
 #define IA_SELF_MISSION "SELF_MISSION" /**< As the script's owner mission */
 
@@ -302,6 +303,8 @@
 #define IA_CHARACTER_HEAL_CHARACTER "healCharacter"
 /*! bool characterAtRange(character ref, character target) */
 #define IA_CHARACTER_AT_RANGE "characterAtRange"
+/*! void setTargetCharacter(character ref, character target) */
+#define IA_SET_TARGET_CHARACTER "setTargetCharacter"
 
 /*! void callAnimation(character c, int animationId) */
 #define IA_CHARACTER_CALL_ANIMATION "callAnimation"

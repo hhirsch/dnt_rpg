@@ -20,7 +20,6 @@
 
 #include "fightGroup.h"
 #include <SDL/SDL.h>
-#include <stdlib.h>
 
 /***************************************************************
  *                        CONSTRUCTOR                          *
@@ -134,7 +133,12 @@ character* fightGroup::getNearestEnemy(character* pers)
          }
       }
    }
-   return(enemy);
+
+   if(acDist <= DNT_BATTLE_RANGE)
+   {
+      return(enemy);
+   }
+   return(NULL);
 }
 
 /***************************************************************

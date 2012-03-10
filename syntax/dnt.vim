@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language: DNT Script Language
 " Maintainer: Farrer <farrer@dnteam.org>
-" Last Change: 2012 Mar 05
+" Last Change: 2012 Mar 10
 
 syn clear
 
@@ -21,7 +21,8 @@ syn keyword dntTodo          contained TODO FIXME XXX NOTE
 
 
 " Operators and Types
-syn keyword dntOperator       SELF_OBJECT SELF_CHARACTER ACTIVE_CHARACTER
+syn keyword dntOperator       SELF_OBJECT SELF_CHARACTER 
+syn keyword dntOperator       ACTIVE_CHARACTER TARGET_CHARACTER
 syn keyword dntOperator       ACTUAL_MAP SELF_MISSION
 syn keyword dntOperator       OWNER_HEIGHT OWNER_POSX OWNER_POSZ
 syn keyword dntOperator       void bool int float string dice character
@@ -40,7 +41,7 @@ syn keyword dntFunction       featActualQuantity featCost featQuantityPerDay
 syn keyword dntFunction       getRandomAttackFeat getPowerfullAttackFeat
 syn keyword dntFunction       getRandomHealFeat getPowerfullHealFeat
 syn keyword dntFunction       skillPoints attModifier thingValue
-syn keyword dntFunction       combatEnter getNearestEnemy
+syn keyword dntFunction       combatEnter getNearestEnemy setTargetCharacter
 syn keyword dntFunction       getNPCByName isAlive
 syn keyword dntFunction       getPsycho setPsycho getActualLife getMaxLife
 syn keyword dntFunction       characterAtRange canAttack

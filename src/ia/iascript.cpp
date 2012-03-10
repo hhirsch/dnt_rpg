@@ -531,24 +531,10 @@ void iaScript::run(int maxLines)
                               }
                               else if(token == IA_SETENCE_ELSE)
                               {
-                                 if(numBegins == 1)
-                                 {
-                                    /* It's an else to the current one, so
-                                     * is the end of block! */
-
-                                    /* Must check if it's an else if,
-                                     * case where the block still is opened */
-                                    if(nextToken(strBuffer, pos) != 
-                                          IA_SETENCE_IF)
-                                    {
-                                       /* No else if. Block ended */
-                                       numBegins = 0;
-                                    }
-                                 }
-                                 /* Otherwise, It's an else for another if, so
+                                 /* It's an else for an if, so
                                   * it's a block open. But it is also a block
-                                  * close, for the if, so no numBegins change
-                                  * here! (trickery, no? =^P) */
+                                  * close, for the if itself, thus no numBegins 
+                                  * change here! (trickery, no? =^P) */
                               }
                               else if( (token == IA_SETENCE_IF) ||
                                     (token == IA_SETENCE_WHILE) )
@@ -2290,8 +2276,9 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       }
    }
 
-   /* syntax bool function(character ref, character target) */
-   else if(functionName == IA_CHARACTER_AT_RANGE)
+   /* syntax bool/void function(character ref, character target) */
+   else if( (functionName == IA_CHARACTER_AT_RANGE) ||
+            (functionName == IA_SET_TARGET_CHARACTER) )
    {
       character* ref = NULL;
       character* tgt = NULL;
@@ -2304,11 +2291,20 @@ void iaScript::callFunction(iaVariable* var, string strLine,
 
       if( (tgt != NULL) && (ref != NULL) )
       {
-         /* syntax characterArRange(character ref, character tgt) */
-         bool atRange = actionInRange(ref->scNode->getPosX(),
-               ref->scNode->getPosZ(), tgt->scNode->getPosX(), 
-               tgt->scNode->getPosZ(), ref->getActiveFeatRange()*METER_TO_DNT);
-         assignValue(var, (void*)&atRange, IA_TYPE_BOOL);
+         if(functionName == IA_CHARACTER_AT_RANGE)
+         {
+            /* syntax characterArRange(character ref, character tgt) */
+            bool atRange = actionInRange(ref->scNode->getPosX(),
+                  ref->scNode->getPosZ(), tgt->scNode->getPosX(), 
+                   tgt->scNode->getPosZ(), 
+                   ref->getActiveFeatRange()*METER_TO_DNT);
+            assignValue(var, (void*)&atRange, IA_TYPE_BOOL);
+         }
+         else if(functionName == IA_SET_TARGET_CHARACTER)
+         {
+            /* void setTargetEnemy(character ref, character tgt) */
+            ref->currentEnemy = tgt;
+         }
       }
       else
       {
@@ -2554,11 +2550,23 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    /* Active Character */
    else if(functionName == IA_ACTIVE_CHARACTER)
    {
-      /* Define the variable as the character owner */
+      /* Define the variable as the active playable character */
       if(var)
       {
          character* dude = actualEngine->PCs->getActiveCharacter();
          assignValue(var, (void*)dude, IA_TYPE_CHARACTER);
+      }
+   }
+   else if(functionName == IA_TARGET_CHARACTER)
+   {
+      /* Define the variable as the character owner's target (enemy( */
+      if(var)
+      {
+         if(characterOwner)
+         {
+            assignValue(var, (void*)characterOwner->currentEnemy, 
+                  IA_TYPE_CHARACTER);
+         }
       }
    }
 
