@@ -585,7 +585,10 @@ bool collision::canWalk(character* actor, GLfloat x, GLfloat y, GLfloat z,
    /* Finally, check boundingBox at final position */
    float varHeight=0.0f, nx=0.0f, nz=0.0f;
 
-   return(canWalk(actor, x, 0, z, 0,
+   /* Calculate angle */
+   float angle = getAngle(prevX, prevZ, x, z);
+
+   return(canWalk(actor, x, 0, z, angle,
             varHeight, nx, nz, false));
 }
 
