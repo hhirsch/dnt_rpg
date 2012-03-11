@@ -88,13 +88,14 @@ bool collision::verifySquare(boundingBox& actorBox, Square* quad,
 
          if(actorBox.intercepts(colBox))
          {
-            /* If the bounding boxes intercepts, we'll need to do a more 
+            /* If the bounding boxes intercepts, we'll maybe need to do a more 
              * depth collision verify, so it is */
-            if(sobj->obj->depthCollision(sobj->angleX, sobj->angleY,
+            if( (!sobj->obj->needDepthCollisionCheck()) ||
+                (sobj->obj->depthCollision(sobj->angleX, sobj->angleY,
                      sobj->angleZ, sobj->x, 
                      sobj->y +
                      actualMap->getHeight(sobj->x,sobj->z),
-                     sobj->z, actorBox))
+                     sobj->z, actorBox)) )
             {
                /* So if the depth collision is true, verify if can go up
                 * the position. if can't, the position is 'unwalkable' now! */
@@ -158,11 +159,12 @@ bool collision::verifySquare(ray& acRay, Square* quad)
          if(colBox.intercepts(acRay))
          {
             /* Verify depth collision */
-            if(sobj->obj->depthCollision(sobj->angleX, sobj->angleY,
+            if( (!sobj->obj->needDepthCollisionCheck()) ||
+                (sobj->obj->depthCollision(sobj->angleX, sobj->angleY,
                      sobj->angleZ, sobj->x, 
                      sobj->y +
                      actualMap->getHeight(sobj->x,sobj->z),
-                     sobj->z, acRay))
+                     sobj->z, acRay)) )
             {
                /* really collided */
                return(false);

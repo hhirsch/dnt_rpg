@@ -15,6 +15,8 @@
  - Disabling vsync via OpenGL for better perfomance in OSX;
  - Verifying sight when NPC selecting target enemy and when 
    PC or NPC do an action;
+ - Possibility to disable depth collision check on models where 
+   the boundingBox check is enough;
 
  - Simplified number of skills to 12;
  - Removed the class Administration Student;

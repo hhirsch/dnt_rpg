@@ -221,6 +221,11 @@ object::object(string path, string curMap): thing()
          sscanf(value.c_str(),"%d", &aux);
          staticScenery = (aux);
       }
+      else if((key == "depthCollision") || (key == "depth_collision"))
+      {
+         sscanf(value.c_str(), "%d", &aux);
+         depthCol = (aux);
+      }
       else if((key == "weight_value") || (key == "weight"))
       {
          sscanf(value.c_str(),"%f",&weight);
@@ -299,6 +304,7 @@ object::object(object* obj): thing()
    curBonusAndSaves.iAmNotAFool = obj->curBonusAndSaves.iAmNotAFool;
    armatureClass = obj->armatureClass;
    sizeModifier = obj->sizeModifier;
+   depthCol = obj->depthCol;
 
    /* Add the object to the list */
    objectsList::insert(this);
@@ -383,6 +389,7 @@ void object::cleanValues()
    sizeModifier = 0;
    cost = 0;
    staticScenery = false;
+   depthCol = true;
    thingType = THING_TYPE_OBJECT;
 }
 
@@ -627,6 +634,14 @@ bool object::isUsable()
            (type == OBJECT_TYPE_BOOK) ||
            (type == OBJECT_TYPE_AMMO) ||
            (type == OBJECT_TYPE_NARCOTIC));
+}
+
+/*********************************************************************
+ *                        needDepthCollisonCheck                     *
+ *********************************************************************/
+bool object::needDepthCollisionCheck()
+{
+   return(depthCol);
 }
 
 /*********************************************************************

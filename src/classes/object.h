@@ -110,6 +110,11 @@ class object: public thing
        * \return -> true if the item is usable */
       bool isUsable();
 
+      /*! Verify if the item need a depth collision check or not
+       * \return -> true if depth collsion is needed, or false if only the
+       *            boudingBox check is sufficient. */
+      bool needDepthCollisionCheck();
+
       /*! Get the 2D image of the object
        * \return the pointer to the surface */
       SDL_Surface* get2dModel();
@@ -204,6 +209,8 @@ class object: public thing
       std::string description;   /**< Description of the object */
       std::string relatedInfo;   /**< Some related fileName 
                                  (comic book file, for example) */
+
+      bool depthCol;        /**< If do a depth collision check or not */
 
       object* next;         /**< Next Object on List */
       object* previous;     /**< Previous Object on List */ 
