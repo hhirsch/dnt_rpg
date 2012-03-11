@@ -192,6 +192,7 @@ void sun::updateHourOfDay(float hour, float posX, float posZ)
 void sun::drawSun()
 {
    GLfloat size;
+   glPushAttrib(GL_ENABLE_BIT);
    glDisable(GL_LIGHTING);
    glEnable(GL_BLEND);
    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -228,10 +229,8 @@ void sun::drawSun()
    glPopMatrix();
    glDisable(GL_BLEND);
    glDisable(GL_TEXTURE_2D);
-   glEnable(GL_DEPTH_TEST);
    glColor4f(1,1,1,1);
-   glEnable(GL_LIGHTING);
-   glEnable(GL_FOG);
+   glPopAttrib();
 }
 
 /*********************************************************************
