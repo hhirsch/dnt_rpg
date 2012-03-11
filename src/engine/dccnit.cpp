@@ -1572,10 +1572,10 @@ void engine::init(SDL_Surface *screen)
    glShadeModel(GL_SMOOTH);
 
    /* Light Definition */
-   GLfloat light_ambient[] = { 0.25f, 0.25f, 0.25f, 1.0f };
-   glLightModelfv(GL_LIGHT_MODEL_AMBIENT, light_ambient);
-   glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_FALSE);
-   glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE);
+   //GLfloat light_ambient[] = { 0.25f, 0.25f, 0.25f, 1.0f };
+   //glLightModelfv(GL_LIGHT_MODEL_AMBIENT, light_ambient);
+   //glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_FALSE);
+   //glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE);
 
    glEnable(GL_LIGHTING);
    glEnable(GL_NORMALIZE);
