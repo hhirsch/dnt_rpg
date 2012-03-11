@@ -1,4 +1,4 @@
-name = Tomb
+name = Gate
 cal3d = models/objetos/tumbas/cementery_gate/model.cfg
 inventory_sizes = 0 0
 inventory_texture = texturas/na.png
@@ -10,3 +10,4 @@ displacement = 0
 armature_class = 18
 size_modifier = 0
 static_scenery = 1
+depth_collision = 0
