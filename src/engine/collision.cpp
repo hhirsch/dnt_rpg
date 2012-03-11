@@ -623,13 +623,12 @@ bool collision::characterAtSight(character* actor, character* target)
    int endZ = (int)floor(target->scNode->getPosZ() / (actualMap->squareSize()));
 
 #if 0
-   glLineWidth(3);
-
+   glLineWidth(2);
      glBegin(GL_LINES);
         glVertex3f(sightRay.origin.x, sightRay.origin.y, sightRay.origin.z);
-        glVertex3f(sightRay.origin.x+1000*sightRay.direction.x, 
-                   sightRay.origin.y+1000*sightRay.direction.y,
-                   sightRay.origin.z+1000*sightRay.direction.z);
+        glVertex3f(sightRay.origin.x+sightRay.size*sightRay.direction.x, 
+                   sightRay.origin.y+sightRay.size*sightRay.direction.y,
+                   sightRay.origin.z+sightRay.size*sightRay.direction.z);
      glEnd();
    glLineWidth(1);
    glFlush();
@@ -667,6 +666,20 @@ bool collision::characterAtSight(character* actor, character* target)
          }
       }
    }
+
+   /* Test Doors */
+   door* door1 = actualMap->getFirstDoor();
+   boundingBox colBox;
+   for(int i=0; i < actualMap->getTotalDoors(); i++)
+   {
+      colBox = door1->obj->scNode->getBoundingBox();
+      if(colBox.intercepts(sightRay))
+      {
+         return(false);
+      }
+      door1 = (door*)door1->getNext();
+   }
+
 
    return(result);
 }

@@ -13,7 +13,8 @@
  - 3D messages could be static on Y axis;
  - Lots of adjusts and fixes to the A* implementation;
  - Disabling vsync via OpenGL for better perfomance in OSX;
- - Verifying sight when NPC selecting target enemy;
+ - Verifying sight when NPC selecting target enemy and when 
+   PC or NPC do an action;
 
  - Simplified number of skills to 12;
  - Removed the class Administration Student;

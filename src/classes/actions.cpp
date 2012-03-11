@@ -127,6 +127,7 @@ bool doHealOrAttack(thing& actor, thing* target,
    string diceText;
    briefing brief;
    messageController controller;
+   collision colDet;
    particleSystem* bloodPart;
 
    /* Define Actor orientation
@@ -163,6 +164,16 @@ bool doHealOrAttack(thing& actor, thing* target,
    {
       brief.addText(gettext("Too far away for action!"), 225, 20, 20);
       return(false);
+   }
+
+   /* Verify action sight */
+   if(target->getThingType() == THING_TYPE_CHARACTER)
+   {
+      if(!colDet.characterAtSight((character*)&actor, (character*)target))
+      {
+         brief.addText(gettext("Enemy out of sight!"), 255, 20, 20);
+         return(false);
+      }
    }
 
    srand(SDL_GetTicks());
