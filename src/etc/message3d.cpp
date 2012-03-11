@@ -146,7 +146,7 @@ void message3d::setStatic()
 /***********************************************************
  *                       Constructor                       *
  ***********************************************************/
-message3dList::message3dList():dntList(DNT_LIST_TYPE_ADD_AT_END)
+message3dList::message3dList():dntList(DNT_LIST_TYPE_ADD_AT_BEGIN)
 {
 }
 
