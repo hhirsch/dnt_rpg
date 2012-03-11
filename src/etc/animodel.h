@@ -40,12 +40,14 @@ class aniModelMaterial
          ambient[0]=1.0f;ambient[1]=1.0f;ambient[2]=1.0f;ambient[3]=1.0f;
          diffuse[0]=1.0f;diffuse[1]=1.0f;diffuse[2]=1.0f;diffuse[3]=1.0f;
          specular[0]=1.0f;specular[1]=1.0f;specular[2]=1.0f;specular[3]=1.0f;
-         shininess = 50.0f;
+         emission[0]=0.5f;emission[1]=0.5f;emission[2]=0.5f;emission[3]=1.0f;
+         shininess = 0.0f;
       };
 
       GLfloat ambient[4];
       GLfloat diffuse[4];
       GLfloat specular[4];
+      GLfloat emission[4];
       GLfloat shininess;
 
       GLuint textureId;

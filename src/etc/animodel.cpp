@@ -183,7 +183,8 @@ void aniModel::loadToGraphicMemory(bool useTexture)
    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, &mat->ambient[0]);
    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, &mat->diffuse[0]);
    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, &mat->specular[0]);
-   glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, &mat->shininess);
+   glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, &mat->shininess);;
+   glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, &mat->emission[0]);
 
    /* set the vertex and normal buffers */
    glVertexPointer(3, GL_FLOAT, 0, &vertices[0][0]);
