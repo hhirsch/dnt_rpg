@@ -201,6 +201,7 @@ data/feats/elective/hasty.fta
 data/feats/elective/bolivian_blood.fta
 data/feats/elective/pinocchios_aura.fta
 data/feats/elective/coward_touch.fta
+data/feats/received/mj_friends_killer.fta
 
 #skills
 data/skills/acrobacias.ski
@@ -338,5 +339,7 @@ data/weapons/types/weights.dcl
 #characters
 data/characters/pcs/santa.pc
 
+#scripts
+data/ia/script/general/beggar_idle.dsl
 
 

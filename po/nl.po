@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2011-12-18 15:49-0200\n"
+"POT-Creation-Date: 2012-03-11 18:19-0300\n"
 "PO-Revision-Date: 2009-04-16 21:14+0000\n"
 "Last-Translator: Marcel de Klein <q-bus@home.nl>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -18,82 +18,86 @@ msgstr ""
 "X-Launchpad-Export-Date: 2009-04-29 17:20+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/classes/actions.cpp:146
+#: src/classes/actions.cpp:149
 #, c-format
 msgid "%s try to attack %s"
 msgstr "%s probeer aan te vallen %s"
 
-#: src/classes/actions.cpp:151
+#: src/classes/actions.cpp:154
 #, c-format
 msgid "%s try to heal %s"
 msgstr "%s probeer te genezen %s"
 
-#: src/classes/actions.cpp:162 src/classes/feats.cpp:298
-#: src/classes/feats.cpp:351
+#: src/classes/actions.cpp:165 src/classes/feats.cpp:301
+#: src/classes/feats.cpp:354
 msgid "Too far away for action!"
 msgstr "Te ver weg voor actie!"
 
-#: src/classes/actions.cpp:259 src/classes/actions.cpp:282
+#: src/classes/actions.cpp:174
+msgid "Enemy out of sight!"
+msgstr ""
+
+#: src/classes/actions.cpp:272 src/classes/actions.cpp:294
 msgid "Miss."
 msgstr "Mis."
 
-#: src/classes/actions.cpp:262 src/classes/actions.cpp:266
+#: src/classes/actions.cpp:275 src/classes/actions.cpp:279
 msgid "Critical Miss!"
 msgstr "Kritieke mis."
 
-#: src/classes/actions.cpp:309
+#: src/classes/actions.cpp:321
 #, c-format
 msgid "Healed %d points."
 msgstr "%d punten genezen."
 
-#: src/classes/actions.cpp:320
+#: src/classes/actions.cpp:332
 #, c-format
 msgid "Hit at a vital area, inflicting %d points of damage."
 msgstr ""
 
-#: src/classes/actions.cpp:325
+#: src/classes/actions.cpp:337
 #, c-format
 msgid "Hit for %d points."
 msgstr "Voor %d punten geraakt."
 
-#: src/classes/actions.cpp:345 src/classes/actions.cpp:348
+#: src/classes/actions.cpp:357 src/classes/actions.cpp:360
 msgid "Critical Heal!"
 msgstr ""
 
-#: src/classes/actions.cpp:353 src/classes/actions.cpp:357
+#: src/classes/actions.cpp:365 src/classes/actions.cpp:369
 msgid "Critical Hit!"
 msgstr ""
 
-#: src/classes/defs.cpp:256
+#: src/classes/defs.cpp:257
 msgid "Level"
 msgstr "Niveau"
 
-#: src/classes/defs.cpp:262 src/engine/charwindow.cpp:208
+#: src/classes/defs.cpp:263 src/engine/charwindow.cpp:209
 msgid "Fortitude"
 msgstr "Kracht"
 
-#: src/classes/defs.cpp:268 src/engine/charwindow.cpp:213
+#: src/classes/defs.cpp:269 src/engine/charwindow.cpp:214
 msgid "Reflexes"
 msgstr "Reflex"
 
-#: src/classes/defs.cpp:275 src/engine/charwindow.cpp:218
+#: src/classes/defs.cpp:276 src/engine/charwindow.cpp:219
 msgid "I am Not a Fool"
 msgstr "Ik ben niet gek"
 
-#: src/classes/feats.cpp:217
+#: src/classes/feats.cpp:220
 msgid "Invalid Talent"
 msgstr ""
 
-#: src/classes/feats.cpp:239 src/engine/dccnit.cpp:2166
+#: src/classes/feats.cpp:242 src/engine/dccnit.cpp:2183
 msgid "Not enought points to use!"
 msgstr "Niet genoeg punten om te gebruiken!"
 
-#: src/classes/mission.cpp:530 src/engine/dialog.cpp:1180
+#: src/classes/mission.cpp:531 src/engine/dialog.cpp:1180
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "Missie volbracht: %d XP!"
 
-#: src/classes/mission.cpp:548 src/classes/mission.cpp:551
+#: src/classes/mission.cpp:549 src/classes/mission.cpp:552
 msgid "Mission Failure!"
 msgstr "Missie gefaalt!"
 
@@ -102,16 +106,16 @@ msgid "Tendency & Alignment"
 msgstr ""
 
 #: src/engine/alignwindow.cpp:72 src/engine/aspectwindow.cpp:93
-#: src/engine/attwindow.cpp:237 src/engine/classwindow.cpp:117
-#: src/engine/featsel.cpp:250 src/engine/options.cpp:1136
-#: src/engine/racewindow.cpp:117 src/engine/skillwindow.cpp:159
+#: src/engine/attwindow.cpp:237 src/engine/classwindow.cpp:118
+#: src/engine/featsel.cpp:253 src/engine/options.cpp:1136
+#: src/engine/racewindow.cpp:118 src/engine/skillwindow.cpp:159
 msgid "Confirm"
 msgstr "Bevestig"
 
 #: src/engine/alignwindow.cpp:76 src/engine/aspectwindow.cpp:97
 #: src/engine/attwindow.cpp:241 src/engine/barterwindow.cpp:71
-#: src/engine/classwindow.cpp:121 src/engine/featsel.cpp:254
-#: src/engine/options.cpp:1140 src/engine/racewindow.cpp:121
+#: src/engine/classwindow.cpp:122 src/engine/featsel.cpp:257
+#: src/engine/options.cpp:1140 src/engine/racewindow.cpp:122
 #: src/engine/skillwindow.cpp:162
 msgid "Cancel"
 msgstr "Annuleren"
@@ -120,15 +124,15 @@ msgstr "Annuleren"
 msgid "Aspect"
 msgstr ""
 
-#: src/engine/aspectwindow.cpp:67 src/engine/charwindow.cpp:104
+#: src/engine/aspectwindow.cpp:67 src/engine/charwindow.cpp:105
 msgid "Name:"
 msgstr "Naam:"
 
-#: src/engine/aspectwindow.cpp:72 src/engine/charwindow.cpp:107
+#: src/engine/aspectwindow.cpp:72 src/engine/charwindow.cpp:108
 msgid "Age:"
 msgstr "Leeftijd:"
 
-#: src/engine/aspectwindow.cpp:76 src/engine/charwindow.cpp:122
+#: src/engine/aspectwindow.cpp:76 src/engine/charwindow.cpp:123
 msgid "Sex:"
 msgstr "Geslacht:"
 
@@ -148,32 +152,32 @@ msgstr ""
 msgid "Auto"
 msgstr ""
 
-#: src/engine/attwindow.cpp:90 src/engine/charwindow.cpp:165
+#: src/engine/attwindow.cpp:90 src/engine/charwindow.cpp:166
 #: data/skills/forca.ski:1
 msgid "Strength"
 msgstr "Kracht"
 
-#: src/engine/attwindow.cpp:110 src/engine/charwindow.cpp:170
+#: src/engine/attwindow.cpp:110 src/engine/charwindow.cpp:171
 #: data/skills/destreza.ski:1
 msgid "Dexterity"
 msgstr "Vaardigheid"
 
-#: src/engine/attwindow.cpp:130 src/engine/charwindow.cpp:175
+#: src/engine/attwindow.cpp:130 src/engine/charwindow.cpp:176
 #: data/skills/constituicao.ski:1
 msgid "Constitution"
 msgstr "Gezondheid"
 
-#: src/engine/attwindow.cpp:150 src/engine/charwindow.cpp:180
+#: src/engine/attwindow.cpp:150 src/engine/charwindow.cpp:181
 #: data/skills/inteligencia.ski:1
 msgid "Intelligence"
 msgstr "Intelligentie"
 
-#: src/engine/attwindow.cpp:171 src/engine/charwindow.cpp:185
+#: src/engine/attwindow.cpp:171 src/engine/charwindow.cpp:186
 #: data/skills/sabedoria.ski:1
 msgid "Wisdom"
 msgstr "Wijsheid"
 
-#: src/engine/attwindow.cpp:192 src/engine/charwindow.cpp:190
+#: src/engine/attwindow.cpp:192 src/engine/charwindow.cpp:191
 #: data/skills/carisma.ski:1
 msgid "Charisma"
 msgstr "Charisma"
@@ -182,8 +186,8 @@ msgstr "Charisma"
 msgid "Attribute Description"
 msgstr "Attribuut beschrijving"
 
-#: src/engine/attwindow.cpp:552 src/engine/dccnit.cpp:568
-#: src/engine/dccnit.cpp:2165 src/engine/featsel.cpp:490
+#: src/engine/attwindow.cpp:552 src/engine/dccnit.cpp:585
+#: src/engine/dccnit.cpp:2182 src/engine/featsel.cpp:493
 #: src/engine/inventwindow.cpp:364 src/engine/options.cpp:1448
 msgid "Warning"
 msgstr "Waarschuwing"
@@ -229,220 +233,220 @@ msgstr ""
 msgid "Remove"
 msgstr "Verwijder"
 
-#: src/engine/briefing.cpp:58 src/engine/options.cpp:174
+#: src/engine/briefing.cpp:60 src/engine/options.cpp:174
 msgid "Briefing"
 msgstr "Instructie"
 
-#: src/engine/briefing.cpp:60
+#: src/engine/briefing.cpp:62
 msgid "Welcome to DNT!"
 msgstr "Welkom bij DNT!"
 
-#: src/engine/briefing.cpp:158
+#: src/engine/briefing.cpp:160
 msgid "Success"
 msgstr ""
 
-#: src/engine/briefing.cpp:158
+#: src/engine/briefing.cpp:160
 msgid "Failure"
 msgstr ""
 
-#: src/engine/character.cpp:551 src/engine/charwindow.cpp:139
+#: src/engine/character.cpp:567 src/engine/charwindow.cpp:140
 msgid "HP"
 msgstr "HP"
 
-#: src/engine/charwindow.cpp:113
+#: src/engine/charwindow.cpp:114
 msgid "Female"
 msgstr "Vrouw"
 
-#: src/engine/charwindow.cpp:116
+#: src/engine/charwindow.cpp:117
 msgid "Male"
 msgstr "Man"
 
-#: src/engine/charwindow.cpp:119
+#: src/engine/charwindow.cpp:120
 msgid "Undefined"
 msgstr "Ongedefinieerd"
 
-#: src/engine/charwindow.cpp:125
+#: src/engine/charwindow.cpp:126
 msgid "Race:"
 msgstr "Ras:"
 
-#: src/engine/charwindow.cpp:128
+#: src/engine/charwindow.cpp:129
 msgid "Alignment:"
 msgstr "Uitlijning:"
 
-#: src/engine/charwindow.cpp:132
+#: src/engine/charwindow.cpp:133
 msgid "XP"
 msgstr "XP"
 
-#: src/engine/charwindow.cpp:133
+#: src/engine/charwindow.cpp:134
 msgid "Next Level"
 msgstr "Volgend niveau"
 
-#: src/engine/charwindow.cpp:142
+#: src/engine/charwindow.cpp:143
 msgid "AC"
 msgstr "AC"
 
-#: src/engine/charwindow.cpp:203
+#: src/engine/charwindow.cpp:204
 msgid "Total Level"
 msgstr ""
 
-#: src/engine/charwindow.cpp:223
+#: src/engine/charwindow.cpp:224
 msgid "Base Attack Modifier"
 msgstr ""
 
-#: src/engine/charwindow.cpp:228
+#: src/engine/charwindow.cpp:229
 msgid "Size Modifier"
 msgstr ""
 
-#: src/engine/charwindow.cpp:256
+#: src/engine/charwindow.cpp:257
 msgid "Level Up"
 msgstr ""
 
-#: src/engine/charwindow.cpp:262 src/engine/featsel.cpp:165
+#: src/engine/charwindow.cpp:263 src/engine/featsel.cpp:168
 #: src/engine/featswindow.cpp:73
 msgid "Talents"
 msgstr "Talenten"
 
-#: src/engine/charwindow.cpp:266 src/engine/skillwindow.cpp:74
+#: src/engine/charwindow.cpp:267 src/engine/skillwindow.cpp:74
 msgid "Skills"
 msgstr "Vaardigheden"
 
-#: src/engine/charwindow.cpp:270 src/engine/featswindow.cpp:93
+#: src/engine/charwindow.cpp:271 src/engine/featswindow.cpp:93
 #: src/engine/skillwindow.cpp:169 src/gui/window.cpp:191
 msgid "Close"
 msgstr ""
 
-#: src/engine/charwindow.cpp:440
+#: src/engine/charwindow.cpp:441
 msgid "Main Weapon"
 msgstr "Hoofd wapen"
 
-#: src/engine/charwindow.cpp:444
+#: src/engine/charwindow.cpp:445
 msgid "Secondary Weapon"
 msgstr "Secundair wapen"
 
-#: src/engine/charwindow.cpp:448
+#: src/engine/charwindow.cpp:449
 msgid "Weapon"
 msgstr "Wapen"
 
-#: src/engine/charwindow.cpp:460
+#: src/engine/charwindow.cpp:461
 msgid "Unarmed"
 msgstr "Ongewapend"
 
-#: src/engine/charwindow.cpp:466
+#: src/engine/charwindow.cpp:467
 msgid "Not Applicable"
 msgstr ""
 
-#: src/engine/classwindow.cpp:83
+#: src/engine/classwindow.cpp:84
 msgid "Class"
 msgstr "Klasse"
 
-#: src/engine/classwindow.cpp:94 src/engine/racewindow.cpp:94
+#: src/engine/classwindow.cpp:95 src/engine/racewindow.cpp:95
 msgid "Characteristics"
 msgstr "Karakteristieken"
 
-#: src/engine/classwindow.cpp:95 src/engine/racewindow.cpp:95
+#: src/engine/classwindow.cpp:96 src/engine/racewindow.cpp:96
 msgid "Description"
 msgstr "Beschrijving"
 
-#: src/engine/classwindow.cpp:153
+#: src/engine/classwindow.cpp:154
 msgid "Life Dice"
 msgstr "Levensdobbelsteen"
 
-#: src/engine/classwindow.cpp:157
+#: src/engine/classwindow.cpp:158
 msgid "Skill Points"
 msgstr "Vaardigheidspunten"
 
-#: src/engine/classwindow.cpp:186
+#: src/engine/classwindow.cpp:187
 msgid "First Level"
 msgstr "Eerste niveau"
 
-#: src/engine/classwindow.cpp:214
+#: src/engine/classwindow.cpp:215
 msgid "Other Levels"
 msgstr "Overige niveau's"
 
-#: src/engine/classwindow.cpp:219
+#: src/engine/classwindow.cpp:220
 msgid "Class Modifiers"
 msgstr ""
 
-#: src/engine/classwindow.cpp:231 src/engine/racewindow.cpp:172
+#: src/engine/classwindow.cpp:232 src/engine/racewindow.cpp:173
 msgid "No Modifiers."
 msgstr ""
 
-#: src/engine/classwindow.cpp:239
+#: src/engine/classwindow.cpp:240
 msgid "Class Talents"
 msgstr ""
 
-#: src/engine/classwindow.cpp:258 src/engine/featswindow.cpp:83
-#: src/engine/racewindow.cpp:190
+#: src/engine/classwindow.cpp:259 src/engine/featswindow.cpp:83
+#: src/engine/racewindow.cpp:191
 msgid "No Talents."
 msgstr ""
 
-#: src/engine/classwindow.cpp:266
+#: src/engine/classwindow.cpp:267
 msgid "Class Skills"
 msgstr ""
 
-#: src/engine/classwindow.cpp:285 src/engine/racewindow.cpp:216
+#: src/engine/classwindow.cpp:286 src/engine/racewindow.cpp:217
 msgid "No Skills."
 msgstr ""
 
-#: src/engine/dccnit.cpp:509 src/engine/dccnit.cpp:559
+#: src/engine/dccnit.cpp:526 src/engine/dccnit.cpp:576
 msgid "Error"
 msgstr ""
 
-#: src/engine/dccnit.cpp:509
+#: src/engine/dccnit.cpp:526
 msgid "Can't load the saved game!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:554
+#: src/engine/dccnit.cpp:571
 msgid "Information"
 msgstr ""
 
-#: src/engine/dccnit.cpp:555
+#: src/engine/dccnit.cpp:572
 msgid "The game was saved!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:559
+#: src/engine/dccnit.cpp:576
 msgid "Can't save game!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:569
+#: src/engine/dccnit.cpp:586
 msgid "Can't save game while fighting!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:702
+#: src/engine/dccnit.cpp:719
 msgid "Saving Current Map Modifications"
 msgstr ""
 
-#: src/engine/dccnit.cpp:737
+#: src/engine/dccnit.cpp:754
 #, c-format
 msgid "Loading Map: %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:767
+#: src/engine/dccnit.cpp:784
 #, c-format
 msgid "Loading NPC: %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:804
+#: src/engine/dccnit.cpp:821
 msgid "Creating MiniMap"
 msgstr ""
 
-#: src/engine/dccnit.cpp:810
+#: src/engine/dccnit.cpp:827
 msgid "Putting GUI on Screen"
 msgstr ""
 
-#: src/engine/dccnit.cpp:837
+#: src/engine/dccnit.cpp:854
 msgid "Loading Particles"
 msgstr ""
 
-#: src/engine/dccnit.cpp:866
+#: src/engine/dccnit.cpp:883
 msgid "Loading Changes..."
 msgstr ""
 
-#: src/engine/dccnit.cpp:888
+#: src/engine/dccnit.cpp:905
 msgid "Done!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1100
+#: src/engine/dccnit.cpp:1117
 msgid ""
 "DccNiTghtmare is relesead under GPLv3 or later: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -450,57 +454,57 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1687
+#: src/engine/dccnit.cpp:1704
 msgid "Too far away for the action!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1704
+#: src/engine/dccnit.cpp:1721
 msgid "Couldn't rest at battle mode."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1710
+#: src/engine/dccnit.cpp:1727
 msgid "Enemies nearby."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1814
+#: src/engine/dccnit.cpp:1831
 msgid "No NPCs in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1872
+#: src/engine/dccnit.cpp:1889
 msgid "Surprise Attack Turn."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1885
+#: src/engine/dccnit.cpp:1902
 msgid "No enemies in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:2362
+#: src/engine/dccnit.cpp:2379
 #, c-format
 msgid "%s taken."
 msgstr ""
 
-#: src/engine/dccnit.cpp:2387
+#: src/engine/dccnit.cpp:2404
 msgid "Inventory is full!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2408
+#: src/engine/dccnit.cpp:2425
 msgid "Door"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2460
+#: src/engine/dccnit.cpp:2477
 msgid "dead"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2512
+#: src/engine/dccnit.cpp:2529
 #, c-format
 msgid "%s attacks %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2708
+#: src/engine/dccnit.cpp:2725
 msgid "No more actions. Turn ended."
 msgstr ""
 
-#: src/engine/dccnit.cpp:4015
+#: src/engine/dccnit.cpp:4049
 msgid "Exit Battle Mode"
 msgstr ""
 
@@ -528,19 +532,19 @@ msgstr ""
 msgid "Dialog"
 msgstr ""
 
-#: src/engine/featsel.cpp:168
+#: src/engine/featsel.cpp:171
 msgid "Available"
 msgstr ""
 
-#: src/engine/featsel.cpp:173
+#: src/engine/featsel.cpp:176
 msgid "Selected"
 msgstr ""
 
-#: src/engine/featsel.cpp:381
+#: src/engine/featsel.cpp:384
 msgid "Remaining"
 msgstr ""
 
-#: src/engine/featsel.cpp:491
+#: src/engine/featsel.cpp:494
 msgid "You can't select more talents"
 msgstr ""
 
@@ -556,11 +560,11 @@ msgstr ""
 msgid "Continue"
 msgstr ""
 
-#: src/engine/initial.cpp:88 src/engine/shortcutswindow.cpp:106
+#: src/engine/initial.cpp:88 src/engine/shortcutswindow.cpp:107
 msgid "Save"
 msgstr ""
 
-#: src/engine/initial.cpp:91 src/engine/shortcutswindow.cpp:104
+#: src/engine/initial.cpp:91 src/engine/shortcutswindow.cpp:105
 msgid "Load"
 msgstr ""
 
@@ -830,7 +834,7 @@ msgstr ""
 msgid "Change Character"
 msgstr ""
 
-#: src/engine/options.cpp:168 src/engine/shortcutswindow.cpp:88
+#: src/engine/options.cpp:168 src/engine/shortcutswindow.cpp:89
 msgid "Rest"
 msgstr ""
 
@@ -1005,63 +1009,63 @@ msgstr ""
 msgid "Waiting..."
 msgstr ""
 
-#: src/engine/racewindow.cpp:83
+#: src/engine/racewindow.cpp:84
 msgid "Race"
 msgstr ""
 
-#: src/engine/racewindow.cpp:160
+#: src/engine/racewindow.cpp:161
 msgid "Race Modifiers"
 msgstr ""
 
-#: src/engine/racewindow.cpp:178
+#: src/engine/racewindow.cpp:179
 msgid "Race Talents"
 msgstr ""
 
-#: src/engine/racewindow.cpp:197
+#: src/engine/racewindow.cpp:198
 msgid "Race Skills"
 msgstr ""
 
-#: src/engine/shortcutswindow.cpp:80
+#: src/engine/shortcutswindow.cpp:81
 msgid "Open Quests Window"
 msgstr ""
 
-#: src/engine/shortcutswindow.cpp:82
+#: src/engine/shortcutswindow.cpp:83
 msgid "Open Inventory Window"
 msgstr ""
 
-#: src/engine/shortcutswindow.cpp:84
+#: src/engine/shortcutswindow.cpp:85
 msgid "Open Map Window"
 msgstr ""
 
-#: src/engine/shortcutswindow.cpp:86
+#: src/engine/shortcutswindow.cpp:87
 msgid "Open Group/Party Window"
 msgstr ""
 
-#: src/engine/shortcutswindow.cpp:90
+#: src/engine/shortcutswindow.cpp:91
 msgid "View Character Informations"
 msgstr ""
 
-#: src/engine/shortcutswindow.cpp:102
+#: src/engine/shortcutswindow.cpp:103
 msgid "Menu"
 msgstr ""
 
-#: src/engine/shortcutswindow.cpp:272
+#: src/engine/shortcutswindow.cpp:273
 msgid "Enter Battle Mode"
 msgstr ""
 
-#: src/engine/shortcutswindow.cpp:276
+#: src/engine/shortcutswindow.cpp:277
 msgid "Select Normal Attack"
 msgstr ""
 
-#: src/engine/shortcutswindow.cpp:284
+#: src/engine/shortcutswindow.cpp:285
 msgid "End Character's Turn"
 msgstr ""
 
-#: src/engine/shortcutswindow.cpp:289
+#: src/engine/shortcutswindow.cpp:290
 msgid "Only Available in Battle Mode"
 msgstr ""
 
-#: src/engine/shortcutswindow.cpp:308
+#: src/engine/shortcutswindow.cpp:309
 msgid "Click to select a talent"
 msgstr ""
 
@@ -1089,34 +1093,34 @@ msgstr ""
 msgid "Unknow!"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:152
+#: src/fight/fightSystem.cpp:153
 msgid "No more enemies."
 msgstr ""
 
-#: src/fight/fightSystem.cpp:188
+#: src/fight/fightSystem.cpp:189
 #, c-format
 msgid "%s is dead!"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:233
+#: src/fight/fightSystem.cpp:234
 #, c-format
 msgid "%s receive %d XP for killing"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:287 src/fight/fightSystem.cpp:315
+#: src/fight/fightSystem.cpp:288 src/fight/fightSystem.cpp:316
 msgid "New Round"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:292 src/fight/fightSystem.cpp:320
+#: src/fight/fightSystem.cpp:293 src/fight/fightSystem.cpp:321
 msgid "Error: No Characters!"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:348 src/fight/fightSystem.cpp:354
+#: src/fight/fightSystem.cpp:349 src/fight/fightSystem.cpp:355
 #, c-format
 msgid "%s's turn."
 msgstr ""
 
-#: src/fight/initiative.cpp:56
+#: src/fight/initiative.cpp:57
 #, c-format
 msgid "%s rolls initiative: "
 msgstr ""
@@ -1478,25 +1482,6 @@ msgid ""
 "of study. +2 for Constitution."
 msgstr ""
 
-#: data/classes/administration.cls:13
-msgid ""
-"Since they are Taylor's faithful disciples, they receive +4 of Taylorism "
-"Skill."
-msgstr ""
-
-#: data/classes/administration.cls:15
-msgid ""
-"In their dogmatic cult to Taylor they found bizarre things (with maximun "
-"financial efficiency) to be their 'clothes', receiving +4 of Bizarre Clothes."
-msgstr ""
-
-#: data/classes/administration.cls:17
-msgid ""
-"Everyone knows that Administration Students have a lot of difficulty in the "
-"assimilation of other's opinions, and also to ask in a concise way some "
-"question, so they receive -6 of Listen."
-msgstr ""
-
 #: data/classes/medician.cls:1
 msgid "Medical Student"
 msgstr ""
@@ -1591,22 +1576,6 @@ msgstr ""
 msgid ""
 "-1 of Strength, cause their muscles atrophy after spending 12 hours "
 "motionless, observing the ameiva's coupling rituals. "
-msgstr ""
-
-#: data/classes/biology.cls:11
-msgid ""
-"Since they are commonly mistaken for hippies, Biology Students receive +6 of "
-"Disguises when disguised as hippies (and when not of this race)"
-msgstr ""
-
-#: data/classes/biology.cls:13
-msgid "For the same reason, -4 of Carte Blanche."
-msgstr ""
-
-#: data/classes/biology.cls:15
-msgid ""
-"For the hard work observing ameivas, the Biology Student receives +2 of "
-"furtivity."
 msgstr ""
 
 #: data/classes/music.cls:1
@@ -1763,18 +1732,12 @@ msgid ""
 msgstr ""
 
 #: data/classes/philosophy.cls:15
-msgid "Receive +4 of Bohemia, obviously."
+msgid "Receive +4 of Drinking, obviously."
 msgstr ""
 
 #: data/classes/philosophy.cls:17
 msgid ""
 "Receive -4 of all Dexterity-related tests, for they are frequently drunk."
-msgstr ""
-
-#: data/classes/philosophy.cls:19
-msgid ""
-"Because he doesn't attend any (or very few) classes, the Philosophy Student "
-"receives -4 of Not Enough Time."
 msgstr ""
 
 #: data/classes/journalism.cls:1
@@ -1891,14 +1854,6 @@ msgid ""
 "idea of the meaning of this word."
 msgstr ""
 
-#: data/classes/physicaled.cls:21
-msgid "-4 of Hide, since they are coarse hulks."
-msgstr ""
-
-#: data/classes/physicaled.cls:23
-msgid "-2 of Listen, since their muscles fill their ear canals."
-msgstr ""
-
 #: data/classes/physicaled.cls:25
 msgid "The Student receives +1 of Natural Armor."
 msgstr ""
@@ -1907,17 +1862,6 @@ msgstr ""
 msgid ""
 "Receive +2 of I Am Not A Fool because their brain stops functioning "
 "sometimes."
-msgstr ""
-
-#: data/classes/physicaled.cls:29
-msgid ""
-"The Student receives -4 in Training Animals, since, because they haven't "
-"absolute control of their muscles, there is a chance of crushing the animal."
-msgstr ""
-
-#: data/classes/physicaled.cls:31
-msgid ""
-"Receives -3 in Direction cause they usually get lost among their own muscles."
 msgstr ""
 
 #: data/classes/physicaled.cls:33
@@ -1936,12 +1880,6 @@ msgstr ""
 msgid ""
 "Beyond this, the Student of Physical Education can't buy points on Skills "
 "whose ability key is Intelligence."
-msgstr ""
-
-#: data/classes/physicaled.cls:39
-msgid ""
-"Because his skills are extremely limited, the Physical Education Student "
-"doesn't have any limits concerning how many points he can get in Sports."
 msgstr ""
 
 #: data/classes/lawner.cls:1
@@ -2153,23 +2091,8 @@ msgid ""
 "Institute."
 msgstr ""
 
-#: data/classes/to.cls:15
-msgid ""
-"-12 of Furtive when in a radius of 30 meters of at least one ICEX Student."
-msgstr ""
-
-#: data/classes/to.cls:17
-msgid "-12 of Hide in the same circunstances."
-msgstr ""
-
 #: data/classes/to.cls:19
 msgid "And +5 of Intimidate for the same reason."
-msgstr ""
-
-#: data/classes/to.cls:21
-msgid ""
-"OT Students have a tendency to play that musical instrument called a bass, "
-"receiving -4 of Observe."
 msgstr ""
 
 #: data/races/autista.rca:1
@@ -2237,21 +2160,11 @@ msgid ""
 "herself 'magically' in just a few hours."
 msgstr ""
 
-#: data/races/boy.rca:8
-msgid "For the aforesaid reasons, the Patys also receive + 2 of Disguises."
-msgstr ""
-
 #: data/races/boy.rca:10
 msgid ""
 "Boys and Patys receive +1 of Constitution due to the time they constantly "
 "spend at body academies. If they no longer go there, they'll lose this bonus "
 "and automatically become the butt of jokes among others of their own race."
-msgstr ""
-
-#: data/races/boy.rca:13
-msgid ""
-"Boys have Driver as class skill, since they are distinguished offenders of "
-"traffic laws."
 msgstr ""
 
 #: data/races/gotico.rca:1
@@ -2303,14 +2216,13 @@ msgstr ""
 #: data/races/hippie.rca:6
 msgid ""
 "Since they love nature so much, the el.., err, I said, hippies, receive +5 "
-"of Training Animals."
+"of Diplomacy."
 msgstr ""
 
 #: data/races/hippie.rca:8
 msgid ""
 "Usually Hippie creatures aren't well accepted by society, fearful of their "
-"subversive actions under the influence of LSD, so, they receive -6 of Carte "
-"Blanche."
+"subversive actions under the influence of LSD, so, they receive -6 of Bluff."
 msgstr ""
 
 #: data/races/humano.rca:1
@@ -2408,7 +2320,8 @@ msgid ""
 msgstr ""
 
 #: data/races/mutante.rca:8
-msgid "By obvious reasons, the Human Cricket receive + 6 of Jump."
+msgid ""
+"By its incredible jumps, the Human Cricket receive +4 of Prestidigitation."
 msgstr ""
 
 #: data/races/skinhead.rca:1
@@ -2443,7 +2356,7 @@ msgstr ""
 msgid ""
 "Since they have friends in the army, Skinhead Maniacs can get all kinds of "
 "heavy guns and walk around freely with them. Their class skill is obviously "
-"Carte Blanche."
+"Intimidate."
 msgstr ""
 
 #: data/feats/weapon_attack.fta:1
@@ -2470,8 +2383,8 @@ msgstr ""
 msgid ""
 "The Administration Student's Taylorism is at its maximum capacity after "
 "those years of graduation. The student became a natural aberration, a biped "
-"ox. It'll receive +2 points on Constitution and on Strenght, +5 of "
-"Taylorism, -2 on Charism, -4 on Intelligence and -4 on I Am Not A Fool. "
+"ox. It'll receive +2 points on Constitution and on Strenght, -2 on Charisma, "
+"-4 on Intelligence and -4 on I Am Not A Fool. "
 msgstr ""
 
 #: data/feats/administration/esthetic_shock_i.fta:1
@@ -2482,8 +2395,8 @@ msgstr ""
 msgid ""
 "At his first level, the Administration Student can charge Esthetic Shocks, "
 "one time per day, causing 1d4 points of damage, since the target creature "
-"fails at an I Am Not A Fool test against the Bizarre Clothes roll . For each "
-"2 levels, the character can use this feat for one more time per day."
+"fails at an I Am Not A Fool test against the -Charisma roll . For each 2 "
+"levels, the character can use this feat for one more time per day."
 msgstr ""
 
 #: data/feats/administration/esthetic_shock_ii.fta:1
@@ -2770,6 +2683,16 @@ msgid ""
 "The creature with Coward Touch can do, 3 times per day, an attack that do "
 "not follow clean-fight rules, inflicting 1d3+character level points of "
 "damage."
+msgstr ""
+
+#: data/feats/received/mj_friends_killer.fta:3
+msgid "M. J. Friends Killer"
+msgstr ""
+
+#: data/feats/received/mj_friends_killer.fta:4
+msgid ""
+"The character is known by the nasty habit of killing children, being "
+"deplored by most people."
 msgstr ""
 
 #: data/skills/acrobacias.ski:1
@@ -4494,4 +4417,44 @@ msgstr "Zwaar"
 
 #: data/characters/pcs/santa.pc:1
 msgid "Santa Claws"
+msgstr ""
+
+#: data/ia/script/general/beggar_idle.dsl:21
+msgid "Will no-one spare a dime?"
+msgstr ""
+
+#: data/ia/script/general/beggar_idle.dsl:23
+msgid "My plate is hot but my food is cold"
+msgstr ""
+
+#: data/ia/script/general/beggar_idle.dsl:25
+msgid "Wish I go on a diet"
+msgstr ""
+
+#: data/ia/script/general/beggar_idle.dsl:27
+msgid "People drink too much"
+msgstr ""
+
+#: data/ia/script/general/beggar_idle.dsl:29
+msgid "Touch my food and suffer the consequences"
+msgstr ""
+
+#: data/ia/script/general/beggar_idle.dsl:31
+msgid "Food for the hungry!"
+msgstr ""
+
+#: data/ia/script/general/beggar_idle.dsl:33
+msgid "I'm starving"
+msgstr ""
+
+#: data/ia/script/general/beggar_idle.dsl:35
+msgid "Could you spare some coffee?"
+msgstr ""
+
+#: data/ia/script/general/beggar_idle.dsl:37
+msgid "Nutrition facts are useless"
+msgstr ""
+
+#: data/ia/script/general/beggar_idle.dsl:39
+msgid "I cook with wine"
 msgstr ""
