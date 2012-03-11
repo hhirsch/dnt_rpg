@@ -10,3 +10,4 @@ displacement = 0
 armature_class = 25
 cost = 1200
 static_scenery = 1
+depth_collision = 0
