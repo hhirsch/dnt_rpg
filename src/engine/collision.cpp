@@ -588,7 +588,7 @@ bool collision::canWalk(character* actor, GLfloat x, GLfloat y, GLfloat z,
    /* Calculate angle */
    float angle = getAngle(prevX, prevZ, x, z);
 
-   return(canWalk(actor, x, 0, z, angle,
+   return(canWalk(actor, x, y, z, angle,
             varHeight, nx, nz, false));
 }
 
