@@ -166,8 +166,13 @@ bool collision::verifySquare(ray& acRay, Square* quad)
                      actualMap->getHeight(sobj->x,sobj->z),
                      sobj->z, acRay)) )
             {
-               /* really collided */
-               return(false);
+               /* So if the depth collision is true, verify if can go up
+                * the position. if can't, the position is 'unwalkable' now! */
+               if( (colBox.max.y + sobj->y) >= 1.5)
+               {
+                  /* really collided */
+                  return(false);
+               }
             }
          }
       }
