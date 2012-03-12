@@ -3047,7 +3047,8 @@ int engine::treatIO(SDL_Surface *screen)
             walkStatus = ENGINE_WALK_MOUSE;
             walkPressTime = 0;
       }
-      else if ( (walkPressTime != 0) && !(mButton & SDL_BUTTON(3)) )
+      else if( (walkPressTime != 0) && !(mButton & SDL_BUTTON(3)) && 
+               (pcHaveWalkAction()) )
       {
          /* Path Verification */
          walkPressTime = 0;
@@ -3818,15 +3819,11 @@ bool engine::tryWalk(GLfloat varX, GLfloat varZ)
 }
 
 /*********************************************************************
- *                              canWalk                              *
+ *                         pcHaveWalkAction                          *
  *********************************************************************/
-bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
+bool engine::pcHaveWalkAction()
 {
-   bool result = true;
-   GLfloat varHeight = 0;
-   GLfloat nx, nz;
    activeCharacter = PCs->getActiveCharacter();
-  
    if(!activeCharacter->isAlive())
    {
       /* Dead Characters can't walk too! */
@@ -3846,8 +3843,32 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
          /* Already Moved */
          return(false);
       }
+   }
 
-      //verify distance to the orign point
+   /* Can try to move */
+   return(true);
+}
+
+/*********************************************************************
+ *                              canWalk                              *
+ *********************************************************************/
+bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
+{
+   bool result = true;
+   GLfloat varHeight = 0;
+   GLfloat nx, nz;
+   activeCharacter = PCs->getActiveCharacter();
+  
+   if(!pcHaveWalkAction())
+   {
+      return(false);
+   }
+
+   /* Verify walk limits on fight mode */
+   if((engineMode == ENGINE_MODE_TURN_BATTLE) && 
+         (fightStatus == FIGHT_PC_TURN))
+   {
+      /* Calculate distance to the orign point*/ 
       walkDistance = sqrt( 
             (activeCharacter->scNode->getPosX() + varX - moveCircleX) *
             (activeCharacter->scNode->getPosX() + varX - moveCircleX) +

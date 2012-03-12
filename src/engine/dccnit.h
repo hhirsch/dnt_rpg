@@ -370,6 +370,11 @@ class engine
        ***************************************************************/
       bool canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha);
 
+
+      /*! Verify if the active playable character have 
+       * available walk actions  */
+      bool pcHaveWalkAction();
+
       /*!
        *************************************************************** 
        * Try walk the character with the move variation

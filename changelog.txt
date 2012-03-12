@@ -33,7 +33,9 @@ BugFixes:
  - sun: Light w must be 1.0;
  - map: fix for mapLights set;
  - render: Fixed the offset to avoid glitches between rendered floor surfaces
-           and shadows;
+           and shadow;
+ - fight: Fixed a bug that allowed a playable character to walk without on
+          its turn;
 
 ================================================
 |                Version 0.8                   |
