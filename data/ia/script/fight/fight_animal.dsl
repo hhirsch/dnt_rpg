@@ -9,6 +9,16 @@ script()
    int at
    character tgt
 
+   # Verify if have an enemy target defined
+   if(!TARGET_CHARACTER)
+      # No target, must set it
+      tgt = getNearestEnemy(SELF_CHARACTER)
+      if(tgt)
+         setTargetCharacter(SELF_CHARACTER, tgt);
+      end
+   end
+
+
    # Verify if the curren life is too low.
    # If is the case, try to run away
    int curLife
@@ -31,14 +41,7 @@ script()
          at = getRandomAttackFeat(TARGET_CHARACTER)
          featUseAtCharacter(at, TARGET_CHARACTER)
       end
-   else
-      # Set enemy
-      tgt = getNearestEnemy(SELF_CHARACTER)
-      if(tgt)
-         setTargetCharacter(SELF_CHARACTER, tgt);
-      end
    end
-
 end
 
 
