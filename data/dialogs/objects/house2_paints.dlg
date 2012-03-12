@@ -9,7 +9,7 @@ dialog(0)
       option
          pre_test = equal(OBJECT_STATE, 0)
          text = gettext("Look the paint.")
-         post_test = roll(OBSERVATE, 5)
+         post_test = roll(WISDOM, 5)
          if_action = change_object_state(1)
          if_action = go_to_dialog(1)
          else_action = go_to_dialog(2)
