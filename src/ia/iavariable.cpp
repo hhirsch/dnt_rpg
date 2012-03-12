@@ -580,6 +580,12 @@ void iaVariable::receiveOperation(string operation, iaVariable* v1,
       {
          *(bool*)value = !(*(bool*)v1->value);
       }
+      else if( (type == IA_TYPE_BOOL) && 
+               ( (v1->type == IA_TYPE_CHARACTER) ||
+                 (v1->type == IA_TYPE_OBJECT) ) )
+      {
+         *(bool*)value = !(v1->value != NULL);
+      }
       else
       {
          cerr << "Error: Operator " << operation << " is only defined for " 
