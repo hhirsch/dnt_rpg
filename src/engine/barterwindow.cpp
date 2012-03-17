@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -311,7 +311,7 @@ void barterWindow::openMenu(int mouseX, int mouseY)
    objectMenu->insertItem(gettext("Remove"), dir.getRealFile("icons/drop.png"), 
                           true);
 
-   fnt.defineFont(DNT_FONT_ARIAL,12);
+   fnt.defineFont(dir.getRealFile(DNT_FONT_ARIAL),12);
 
    xSize = objectMenu->getMaxCharac()*(fnt.getIncCP()+1)+6;
 

@@ -29,6 +29,7 @@
 #include "../classes/money.h"
 #include "../etc/dirs.h"
 #include "../gui/dntfont.h"
+#include "../gui/farsoopts.h"
 #include "../sound/sound.h"
 
 using namespace std;
@@ -178,6 +179,7 @@ void inventWindow::reDraw()
  **************************************************************/
 void inventWindow::openMenu(int x, int y, int type, bool seller)
 {
+   farsoOptions fopt;
    barterWindow tradeWindow;
    dntFont fnt;
    dirs dir;
@@ -225,7 +227,7 @@ void inventWindow::openMenu(int x, int y, int type, bool seller)
                           (menuType == MENU_TYPE_INVENTORY) && 
                           (!seller) );
 
-   fnt.defineFont(DNT_FONT_ARIAL,12);
+   fnt.defineFont(fopt.getDefaultFont(),12);
 
    xSize = objectMenu->getMaxCharac()*(fnt.getIncCP()+1)+6;
 

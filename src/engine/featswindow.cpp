@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2010 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -19,6 +19,7 @@
 */
 
 #include "featswindow.h"
+#include "../etc/dirs.h"
 
 /***********************************************************************
  *                            Constructor                              *
@@ -45,6 +46,7 @@ featsWindow::~featsWindow()
  ***********************************************************************/
 void featsWindow::open(character* pers, bool selectFeat)
 {
+   dirs dir;
    dntFont fnt;
    /* Set open position */
    int centerY = SCREEN_Y / 2;
@@ -81,7 +83,7 @@ void featsWindow::open(character* pers, bool selectFeat)
    /* title and selectors */
    featTitle = intWindow->getObjectsList()->insertTextBox(59,191,230,209,
          1, gettext("No Talents."));
-   featTitle->setFont(DNT_FONT_ARIAL,10,DNT_FONT_ALIGN_CENTER,
+   featTitle->setFont(dir.getRealFile(DNT_FONT_ARIAL),10,DNT_FONT_ALIGN_CENTER,
          DNT_FONT_STYLE_BOLD);
    buttonPrevious = intWindow->getObjectsList()->insertButton(44,191,58,209,
          fnt.createUnicode(0x25C4),0);

@@ -22,6 +22,7 @@
 #include "dntfont.h"
 #include "guilist.h"
 #include "interface.h"
+#include "farsoopts.h"
 
 #include <math.h>
 #include <iostream>
@@ -61,15 +62,16 @@ rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, guiList* list,
    contorn = l->insertTextBox(xb-12, ya, xb, yb-24, 1, "");
    
    /* Buttons */
+   farsoOptions opt;
    dntFont font;
    up = l->insertButton(xb-12,yb-23,xb,yb-12, font.createUnicode(0x25B2),0);
-   up->defineFont(DNT_FONT_ARIAL, 8);
+   up->defineFont(opt.getDefaultFont(), 8);
    down = l->insertButton(xb-12,yb-11,xb,yb, font.createUnicode(0x25BC),0);
-   down->defineFont(DNT_FONT_ARIAL, 8);
+   down->defineFont(opt.getDefaultFont(), 8);
 
    /* Text */
    scrollText = l->insertTextBox(xa,ya,xb-13,yb,1,""); 
-   scrollText->setFont(DNT_FONT_ARIAL, 10, 0);
+   scrollText->setFont(opt.getDefaultFont(), 10, 0);
    scrollText->setColor(246, 190, 190);
 
    actualPressed = NULL;

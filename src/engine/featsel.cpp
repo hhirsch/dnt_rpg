@@ -142,10 +142,12 @@ void featSelWindow::defineAvailableFeats()
  ********************************************************************/
 void featSelWindow::open(character* pers, featsList* fList, int total)
 {
+   farsoOptions opt;
    int i, y;
    int centerY = SCREEN_Y / 2;
    int centerX = SCREEN_X / 2;
    dntFont fnt;
+   std::string fontArial = opt.getDefaultFont();
 
    /* Ignore, if pers or fList not defined */
    if( (!pers) || (!fList) )
@@ -169,12 +171,12 @@ void featSelWindow::open(character* pers, featsList* fList, int total)
 
    textBox* tb = intWindow->getObjectsList()->insertTextBox(10, 18, 194, 36, 1, 
          gettext("Available"));
-   tb->setFont(DNT_FONT_ARIAL,12,DNT_FONT_ALIGN_CENTER, DNT_FONT_STYLE_BOLD);
+   tb->setFont(fontArial,12,DNT_FONT_ALIGN_CENTER, DNT_FONT_STYLE_BOLD);
    tb->setBackColor(110, 0, 0);
 
    tb = intWindow->getObjectsList()->insertTextBox(195, 18, 390, 36, 1, 
          gettext("Selected"));
-   tb->setFont(DNT_FONT_ARIAL,12,DNT_FONT_ALIGN_CENTER, DNT_FONT_STYLE_BOLD);
+   tb->setFont(fontArial,12,DNT_FONT_ALIGN_CENTER, DNT_FONT_STYLE_BOLD);
    tb->setBackColor(110, 0, 0);
 
    /* Each Feat */
@@ -189,12 +191,12 @@ void featSelWindow::open(character* pers, featsList* fList, int total)
       textAvail[i]->setReceiveEvents(true);
       buttonInsert[i] = intWindow->getObjectsList()->insertButton(176, y+9, 
             190, y+27, fnt.createUnicode(0x25BA),0);
-      buttonInsert[i]->defineFont(DNT_FONT_ARIAL, 9);
+      buttonInsert[i]->defineFont(fontArial, 9);
 
       /* Selected */
       buttonRemove[i] =  intWindow->getObjectsList()->insertButton(200, y+9, 
             214, y+27, fnt.createUnicode(0x25C4),0); 
-      buttonRemove[i]->defineFont(DNT_FONT_ARIAL, 9);
+      buttonRemove[i]->defineFont(fontArial, 9);
       picSel[i] = intWindow->getObjectsList()->insertPicture(216,y+2,0,0,NULL);
       picSel[i]->setSurfaceDeletion(false);
       textSel[i] = intWindow->getObjectsList()->insertTextBox(250,y,388,y+34,
@@ -211,32 +213,32 @@ void featSelWindow::open(character* pers, featsList* fList, int total)
    /* Available page selectors */
    prevAvailButton = intWindow->getObjectsList()->insertButton(10, y+6,
                                     25, y+24, fnt.createUnicode(0x25C4),0);
-   prevAvailButton->defineFont(DNT_FONT_ARIAL, 9);
+   prevAvailButton->defineFont(fontArial, 9);
    textAvailPage = intWindow->getObjectsList()->insertTextBox(26, y+6, 
                                    178, y+24, 1, "0/0");
-   textAvailPage->setFont(DNT_FONT_ARIAL,10,DNT_FONT_ALIGN_CENTER,
+   textAvailPage->setFont(fontArial,10,DNT_FONT_ALIGN_CENTER,
                           DNT_FONT_STYLE_BOLD);
    nextAvailButton = intWindow->getObjectsList()->insertButton(179, y+6,
                                     194, y+24, fnt.createUnicode(0x25BA),0);
-   nextAvailButton->defineFont(DNT_FONT_ARIAL, 9);
+   nextAvailButton->defineFont(fontArial, 9);
 
    /* Selected page selectors */ 
    prevSelButton = intWindow->getObjectsList()->insertButton(195, y+6,
                                     210, y+24, fnt.createUnicode(0x25C4),0);
-   prevSelButton->defineFont(DNT_FONT_ARIAL, 9);
+   prevSelButton->defineFont(fontArial, 9);
    textSelPage = intWindow->getObjectsList()->insertTextBox(211, y+6, 
                                    374, y+24, 1, "0/0");
-   textSelPage->setFont(DNT_FONT_ARIAL,10,DNT_FONT_ALIGN_CENTER,
+   textSelPage->setFont(fontArial,10,DNT_FONT_ALIGN_CENTER,
                           DNT_FONT_STYLE_BOLD);
    nextSelButton = intWindow->getObjectsList()->insertButton(375, y+6,
                                    390, y+24, fnt.createUnicode(0x25BA),0);
-   nextSelButton->defineFont(DNT_FONT_ARIAL, 9);
+   nextSelButton->defineFont(fontArial, 9);
 
    y += 2;
    /* Title & Description */
    textTitle = intWindow->getObjectsList()->insertTextBox(10, y+25, 390, y+43,
          1, "");
-   textTitle->setFont(DNT_FONT_ARIAL,11,DNT_FONT_ALIGN_CENTER,
+   textTitle->setFont(fontArial,11,DNT_FONT_ALIGN_CENTER,
          DNT_FONT_STYLE_BOLD);
    textTitle->setBackColor(102, 0, 0);
    textDescription = intWindow->getObjectsList()->insertRolBar(10, y+44, 
@@ -245,7 +247,7 @@ void featSelWindow::open(character* pers, featsList* fList, int total)
    picFeat->setSurfaceDeletion(false);
    textTotal = intWindow->getObjectsList()->insertTextBox(120, 360, 310, 380,
        0, "");
-   textTotal->setFont(DNT_FONT_ARIAL,13,DNT_FONT_ALIGN_LEFT, 
+   textTotal->setFont(fontArial,13,DNT_FONT_ALIGN_LEFT, 
          DNT_FONT_STYLE_BOLD);
 
    /* Ok Button */

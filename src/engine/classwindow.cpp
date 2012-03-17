@@ -19,6 +19,7 @@
 */
 
 #include "classwindow.h"
+#include "../gui/farsoopts.h"
 using namespace std;
 
 /***********************************************************************
@@ -38,6 +39,7 @@ static int cmpClassFunction(const void *p1,  const void *p2)
  ********************************************************************/
 classWindow::classWindow(guiInterface* inter, classe** retClass)
 {
+   farsoOptions fopt;
    classes cls;
    dntFont fnt;
    int centerY = SCREEN_Y / 2;
@@ -110,7 +112,7 @@ classWindow::classWindow(guiInterface* inter, classe** retClass)
                                                   fnt.createUnicode(0x25BA),0);
    textName = intWindow->getObjectsList()->insertTextBox(90,346,329,364,1, 
                                           classesOrder[curClass]->name.c_str());
-   textName->setFont(DNT_FONT_ARIAL,10,DNT_FONT_ALIGN_CENTER,
+   textName->setFont(fopt.getDefaultFont(),10,DNT_FONT_ALIGN_CENTER,
                      DNT_FONT_STYLE_BOLD);
 
    /* Confirm Button */
@@ -140,6 +142,7 @@ classWindow::~classWindow()
  ********************************************************************/
 void classWindow::setCharacteristics()
 {
+   farsoOptions fopt;
    int i;
    char tmp[1024];
    char c;
@@ -151,12 +154,13 @@ void classWindow::setCharacteristics()
 
 
    textCharac->setText("|");
-   textCharac->addText(string(gettext("Life Dice")) + tmp, DNT_FONT_ARIAL,
+   textCharac->addText(string(gettext("Life Dice")) + tmp, 
+                       fopt.getDefaultFont(),
                        10, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
                        240, 120, 0);
 
    textCharac->addText(string(gettext("Skill Points")) + "||",
-                       DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
+                       fopt.getDefaultFont(), 12, DNT_FONT_ALIGN_CENTER,
                        DNT_FONT_STYLE_UNDERLINE,
                        86, 161, 32);
 
@@ -184,7 +188,8 @@ void classWindow::setCharacteristics()
               c, classesOrder[curClass]->firstLevelSP.attID.c_str(), 
               classesOrder[curClass]->firstLevelSP.mult);
    }
-   textCharac->addText(string(gettext("First Level")) + tmp, DNT_FONT_ARIAL,
+   textCharac->addText(string(gettext("First Level")) + tmp, 
+                       fopt.getDefaultFont(),
                        10, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
                        220,0,0);
 
@@ -212,13 +217,15 @@ void classWindow::setCharacteristics()
               c, classesOrder[curClass]->otherLevelsSP.attID.c_str(), 
               classesOrder[curClass]->otherLevelsSP.mult);
    }
-   textCharac->addText(string(gettext("Other Levels")) + tmp, DNT_FONT_ARIAL,
+   textCharac->addText(string(gettext("Other Levels")) + tmp, 
+                       fopt.getDefaultFont(),
                        10, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
                        220,0,0);
 
    /* Modifiers */
    textCharac->addText(string(gettext("Class Modifiers")) + "||", 
-                       DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
+                       fopt.getDefaultFont(),
+                       12, DNT_FONT_ALIGN_CENTER,
                        DNT_FONT_STYLE_UNDERLINE,
                        86, 161, 32);
    for(i=0; i<classesOrder[curClass]->totalModifiers; i++)
@@ -230,7 +237,7 @@ void classWindow::setCharacteristics()
    if(classesOrder[curClass]->totalModifiers == 0)
    {
       textCharac->addText(string(gettext("No Modifiers.")) + "||",
-                          DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
+                          fopt.getDefaultFont(), 10, DNT_FONT_ALIGN_LEFT,
                           DNT_FONT_STYLE_NORMAL,
                           75,147,207);
    }
@@ -238,7 +245,7 @@ void classWindow::setCharacteristics()
    /* Feats */
    featDescription* fDesc = NULL;
    textCharac->addText(string(gettext("Class Talents")) + "||",
-                       DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
+                       fopt.getDefaultFont(), 12, DNT_FONT_ALIGN_CENTER,
                        DNT_FONT_STYLE_UNDERLINE,
                        86, 161, 32);
    for(i=0; i<classesOrder[curClass]->totalFeats; i++)
@@ -257,7 +264,7 @@ void classWindow::setCharacteristics()
    if(classesOrder[curClass]->totalFeats == 0)
    {
       textCharac->addText(string(gettext("No Talents.")) + "||",
-                          DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
+                          fopt.getDefaultFont(), 10, DNT_FONT_ALIGN_LEFT,
                           DNT_FONT_STYLE_NORMAL,
                           75,147,207);
    }
@@ -265,7 +272,7 @@ void classWindow::setCharacteristics()
    /* Skills */
    textCharac->addText("|");
    textCharac->addText(string(gettext("Class Skills")) + "||",
-                       DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
+                       fopt.getDefaultFont(), 12, DNT_FONT_ALIGN_CENTER,
                        DNT_FONT_STYLE_UNDERLINE,
                        86, 161, 32);
    for(i=0; i<classesOrder[curClass]->totalSkills; i++)
@@ -284,7 +291,7 @@ void classWindow::setCharacteristics()
    if(classesOrder[curClass]->totalSkills == 0)
    {
       textCharac->addText(gettext("No Skills."), 
-                          DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
+                          fopt.getDefaultFont(), 10, DNT_FONT_ALIGN_LEFT,
                           DNT_FONT_STYLE_NORMAL,
                           75,147,207);
    }
@@ -297,8 +304,10 @@ void classWindow::setCharacteristics()
  ********************************************************************/
 void classWindow::setDescription()
 {
+   farsoOptions fopt;
    textDesc->setText("");
-   textDesc->addText(classesOrder[curClass]->citation + "||", DNT_FONT_ARIAL,
+   textDesc->addText(classesOrder[curClass]->citation + "||", 
+                     fopt.getDefaultFont(),
                      10, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
                      220,0,0);
    textDesc->addText(classesOrder[curClass]->description);

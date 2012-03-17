@@ -19,6 +19,7 @@
 */
 
 #include "partelementwindow.h"
+#include "../../gui/farsoopts.h"
 using namespace std;
 
 /***********************************************************************
@@ -74,6 +75,7 @@ bool partElementWindow::isOpen()
  ***********************************************************************/
 void partElementWindow::openWindow()
 {
+   farsoOptions opt;
    int curPosX = 194;
    int curPosY = 64;
    dntFont fnt;
@@ -93,12 +95,12 @@ void partElementWindow::openWindow()
    /* Type things */
    previousType = curWindow->getObjectsList()->insertButton(10, 20, 20, 37, 
          fnt.createUnicode(0x25C4),0);
-   previousType->defineFont(DNT_FONT_ARIAL, 9);
+   previousType->defineFont(opt.getDefaultFont(), 9);
    type = curWindow->getObjectsList()->insertTextBox(21, 20, 130, 37, 1, "");
-   type->setFont(DNT_FONT_ARIAL, 9, DNT_FONT_ALIGN_CENTER);
+   type->setFont(opt.getDefaultFont(), 9, DNT_FONT_ALIGN_CENTER);
    nextType = curWindow->getObjectsList()->insertButton(131, 20, 141, 37, 
          fnt.createUnicode(0x25BA),0);
-   nextType->defineFont(DNT_FONT_ARIAL, 9);
+   nextType->defineFont(opt.getDefaultFont(), 9);
 
    /* Initial Value */
    texts[0] = curWindow->getObjectsList()->insertTextBox(10, 43, 80, 60, 0, 

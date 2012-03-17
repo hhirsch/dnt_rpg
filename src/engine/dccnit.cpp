@@ -71,6 +71,7 @@ engine::engine()
    /* Initialize the Cursor */
    cursors = new(cursor);
    cursors->init();
+   cursors->setTextOverFont(dir.getRealFile(DNT_FONT_PALLADIO));
 
    /* Initialize sounds and musics */
    snd = new(sound);
@@ -135,7 +136,8 @@ engine::engine()
          option->getScreenHeight()-33, option->getScreenWidth()-1,
          option->getScreenHeight()-1, "", true); 
    fpsText = fpsWindow->getObjectsList()->insertTextBox(10, 10, 118, 30, 0, "");
-   fpsText->setFont(DNT_FONT_PALLADIO, 14, DNT_FONT_ALIGN_CENTER);
+   fpsText->setFont(dir.getRealFile(DNT_FONT_PALLADIO), 14, 
+         DNT_FONT_ALIGN_CENTER);
    fpsText->setSolid();
    fpsWindow->setExternPointer(&fpsWindow);
    fpsGui->openWindow(fpsWindow);
@@ -715,7 +717,7 @@ int engine::loadMap(string arqMapa, bool loadingGame)
    {
       /* Show the "Saving Map Status" */
       color_Set(200,20,20,255);
-      fnt.defineFont(DNT_FONT_TIMES,10);
+      fnt.defineFont(dir.getRealFile(DNT_FONT_TIMES),10);
       sprintf(texto,"%s", gettext("Saving Current Map Modifications"));
       showLoading(img,&texturaTexto,texturaCarga, texto, progress);
       progress->defineActualHealth(1);
@@ -750,7 +752,7 @@ int engine::loadMap(string arqMapa, bool loadingGame)
 
    /* Show the "Loading Map" */
    color_Set(200,20,20,255);
-   fnt.defineFont(DNT_FONT_TIMES,10);
+   fnt.defineFont(dir.getRealFile(DNT_FONT_TIMES),10);
    sprintf(texto,gettext("Loading Map: %s"),arqMapa.c_str());
    showLoading(img,&texturaTexto,texturaCarga, texto, progress);
    progress->defineActualHealth(3);
@@ -1111,7 +1113,7 @@ void engine::splashScreen()
    glDisable(GL_LIGHTING);
 
    dntFont fnt;
-   fnt.defineFont(DNT_FONT_TIMES, 20);
+   fnt.defineFont(dir.getRealFile(DNT_FONT_TIMES), 20);
    fnt.defineFontAlign(DNT_FONT_ALIGN_CENTER);
    color_Set(130,130,130,255);
    fnt.write(img, 52, 424, gettext("DccNiTghtmare is relesead under GPLv3 or "

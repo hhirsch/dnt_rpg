@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -19,6 +19,8 @@
 */
 
 #include "seltext.h"
+#include "farsoopts.h"
+
 #include <iostream>
 using namespace std;
 
@@ -90,8 +92,9 @@ void selText::draw()
 {
    int ya = y1+3;
    int aux;
+   farsoOptions opt;
    dntFont fnt;
-   fnt.defineFont(DNT_FONT_ARIAL,10); 
+   fnt.defineFont(opt.getDefaultFont(),10); 
    fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
    fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
    
@@ -150,7 +153,8 @@ void selText::writeSelected(int selectedItem)
 int selText::getSelectedItem(int ya )
 {
    dntFont fnt;
-   fnt.defineFont(DNT_FONT_ARIAL,10);
+   farsoOptions opt;
+   fnt.defineFont(opt.getDefaultFont(), 10);
    fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
    fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
    int height = fnt.getHeight();

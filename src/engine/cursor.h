@@ -85,6 +85,10 @@ class cursor
 
       /*! Hide the mouse cursor (must reset it to cursor to show again) */
       void hide();
+
+      /*! Set the font used for text over
+       * \param s -> font file name  */
+      void setTextOverFont(std::string f);
       
    private:
       static GLuint texture[CURSOR_TOTAL]; /**< Cursors Textures */
@@ -101,6 +105,7 @@ class cursor
       static int textOverWidth;            /**< Width of text over texture */
       static int textOverHeight;           /**< Height of text over texture */
       static Uint32 textOverInit;          /**< Time inited the display */
+      static std::string font;             /**< Font used to display */ 
 
       /*! Load Cursor file 
        * \param fileName -> file name of cursor

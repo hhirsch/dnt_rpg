@@ -21,9 +21,7 @@
 #include "dntfont.h"
 
 #include "draw.h"
-#include "../engine/options.h"
-#include "../etc/dirs.h"
-#include "../lang/translate.h"
+#include "farsoopts.h"
 
 #include <iostream>
 using namespace std;
@@ -59,6 +57,7 @@ loadedFontList::~loadedFontList()
  **********************************************************************/
 void dntFont::init()
 {
+   farsoOptions opts;
    /* Init SDL_ttf */
    if(TTF_Init() == -1)
    {
@@ -73,7 +72,7 @@ void dntFont::init()
    activeFont = NULL;
    activeFontAlign = DNT_FONT_ALIGN_LEFT;
    activeFontStyle = DNT_FONT_STYLE_NORMAL;
-   defineFont(DNT_FONT_ARIAL,12);
+   defineFont(opts.getDefaultFont(),12);
 }
 
 /**********************************************************************
@@ -117,8 +116,6 @@ loadedFont* dntFont::loadFont(string fontName, int fontSize)
 {
    loadedFont* fnt = NULL;
 
-   dirs dir;
-
    fnt = findFont(fontName, fontSize);
 
    if(!fnt)
@@ -127,11 +124,11 @@ loadedFont* dntFont::loadFont(string fontName, int fontSize)
       fnt = new loadedFont();
       fnt->fontName = fontName;
       fnt->fontSize = fontSize;
-      fnt->font = TTF_OpenFont(dir.getRealFile(fontName).c_str(), fontSize);
+      fnt->font = TTF_OpenFont(fontName.c_str(), fontSize);
 
       if(!fnt->font)
       {
-         cerr << "Can't open font file: " << dir.getRealFile(fontName) << endl;
+         cerr << "Can't open font file: " << fontName << endl;
          delete(fnt);
          return(NULL);
       }
@@ -238,7 +235,7 @@ void dntFont::blitText(SDL_Surface *screen, SDL_Surface* writeSurface,
 int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
                    int end, int x1,int y1,int x2,int y2, bool solid)
 {
-   options opt;
+   farsoOptions opt;
 
    SDL_Color color;
    Uint8 a=0;
@@ -360,7 +357,7 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
 void dntFont::writeSingleLine(SDL_Surface* screen, int x, int y, string text,
                               int x1, int y1, int x2, int y2, bool solid)
 {
-   options opt;
+   farsoOptions opt;
    SDL_Surface* writeSurface; 
    SDL_Color color;
    Uint8 a=0;
@@ -456,7 +453,7 @@ string dntFont::createUnicode(Uint16 character)
  ***********************************************************************/
 int dntFont::getStringWidth(string s)
 {
-   options opt;
+   farsoOptions opt;
    return(getStringWidth(s, opt.isLanguageUnicode()));
 }
 
@@ -512,7 +509,7 @@ int dntFont::getHeight()
 string dntFont::getNextLine(string source, int& lastLinePos,
                             int maxWidth)
 {
-   options opt;
+   farsoOptions opt;
 
    int i, lastSpace=-1;
 

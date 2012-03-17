@@ -22,6 +22,7 @@
 
 #include "../../engine/util.h"
 #include "../../engine/cursor.h"
+#include "../../gui/farsoopts.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -204,6 +205,7 @@ string getStringFromUser(string title, string previous,
 int getOptionFromUser(string title, string message, string opt1, string opt2,
                       GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
+   farsoOptions fopts;
    cursor cursors;
    cursors.hide();
    SDL_ShowCursor(SDL_ENABLE);
@@ -217,7 +219,7 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
    Uint8 mButton;
    Uint8* keys;
    dntFont fnt;
-   fnt.defineFont(DNT_FONT_ARIAL, 10);
+   fnt.defineFont(fopts.getDefaultFont(), 10);
    int mouseX, mouseY;
    int sizeX = fnt.getStringWidth(message);
    if(sizeX < 180)
@@ -237,7 +239,7 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
                                                  
    quadText = getWindow->getObjectsList()->insertTextBox(5,17,sizeX+10,33,0,
                                                       message.c_str());
-   quadText->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   quadText->setFont(fopts.getDefaultFont(), 10, DNT_FONT_ALIGN_CENTER);
    getWindow->setAttributes(true, false, false, false);
    getWindow->setExternPointer(&getWindow);
    gui->openWindow(getWindow);

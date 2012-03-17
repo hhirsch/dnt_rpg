@@ -21,6 +21,7 @@
 #include "tabbox.h"
 
 #include "guilist.h"
+#include "farsoopts.h"
 
 #include <iostream>
 using namespace std;
@@ -207,8 +208,9 @@ void tabBox::draw()
    farso_colors colors;
 
    /* Set the font */
+   farsoOptions opt;
    dntFont fnt;
-   fnt.defineFont(DNT_FONT_ARIAL, 10);
+   fnt.defineFont(opt.getDefaultFont(), 10);
    fnt.defineFontAlign(DNT_FONT_ALIGN_CENTER);
    fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
    

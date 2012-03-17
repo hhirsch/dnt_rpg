@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -23,6 +23,8 @@ using namespace std;
 
 #include "skillwindow.h"
 #include "../classes/defs.h"
+#include "../gui/farsoopts.h"
+#include "../lang/translate.h"
 
 /***********************************************************************
  *                          cmpSkillFunction                           *
@@ -42,6 +44,7 @@ static int cmpSkillFunction(const void *p1,  const void *p2)
 skillWindow::skillWindow(skills* savSkill, guiInterface* inter,
                          int actualLevel, bool readOnlyMode)
 {
+   farsoOptions opt;
    dntFont fnt;
    int centerY = SCREEN_Y / 2;
    int centerX = SCREEN_X / 2;
@@ -105,7 +108,7 @@ skillWindow::skillWindow(skills* savSkill, guiInterface* inter,
                                               fnt.createUnicode(0x25BA),0);
    skillName = intWindow->getObjectsList()->insertTextBox(67,175,233,193,1,
                                                           sk->name.c_str());
-   skillName->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER,
+   skillName->setFont(opt.getDefaultFont(), 10, DNT_FONT_ALIGN_CENTER,
                       DNT_FONT_STYLE_ITALIC);
 
    /* Skill Image */
@@ -120,7 +123,7 @@ skillWindow::skillWindow(skills* savSkill, guiInterface* inter,
    saux = tmp;
    txtPoints = intWindow->getObjectsList()->insertTextBox(111,198,133,216,1,
                                                    saux.c_str());
-   txtPoints->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER,
+   txtPoints->setFont(opt.getDefaultFont(), 10, DNT_FONT_ALIGN_CENTER,
                       DNT_FONT_STYLE_NORMAL);
    txtPoints->setColor(255,255,255);
 
@@ -133,10 +136,10 @@ skillWindow::skillWindow(skills* savSkill, guiInterface* inter,
    {
       buttonSum = intWindow->getObjectsList()->insertButton(134,198,144,216,
             fnt.createUnicode(0x25BA),0);
-      buttonSum->defineFont(DNT_FONT_ARIAL, 9);
+      buttonSum->defineFont(opt.getDefaultFont(), 9);
       buttonDec = intWindow->getObjectsList()->insertButton(100,198,110,216,
             fnt.createUnicode(0x25C4),0);
-      buttonDec->defineFont(DNT_FONT_ARIAL, 9);
+      buttonDec->defineFont(opt.getDefaultFont(), 9);
    }
    else
    {
@@ -211,6 +214,7 @@ void skillWindow::close(guiInterface* inter)
  **************************************************************/
 void skillWindow::updateSkillInfo()
 {
+   farsoOptions opt;
    string saux;  
    skill* att;
    char tmp[5];
@@ -244,7 +248,7 @@ void skillWindow::updateSkillInfo()
    {
       saux += gettext("Unknow!");
    }
-   desc->addText(saux, DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
+   desc->addText(saux, opt.getDefaultFont(), 10, DNT_FONT_ALIGN_LEFT,
          DNT_FONT_STYLE_NORMAL, 86, 161, 3);
 
    /* Set Current Image */

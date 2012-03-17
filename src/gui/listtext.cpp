@@ -21,6 +21,7 @@
 #include "listtext.h"
 #include "guilist.h"
 #include "interface.h"
+#include "farsoopts.h"
 using namespace std;
 
 /**************************************************************
@@ -35,8 +36,9 @@ listText::listText(int xa, int ya, int xb, int yb, SDL_Surface* surface,
    selectedText = ""; 
    selectedPos = -1;  
 
+   farsoOptions opt;
    dntFont fnt;
-   fnt.defineFont(DNT_FONT_ARIAL, 10);
+   fnt.defineFont(opt.getDefaultFont(), 10);
 
    /* Init things */
    type = FARSO_OBJECT_LIST_TEXT;
@@ -108,6 +110,7 @@ void listText::insertText(string text)
  **************************************************************/
 void listText::insertText(string text, int r, int g, int b)
 {
+   farsoOptions opt;
    textList.push_back(text);
    if(r == -1)
    {
@@ -115,7 +118,7 @@ void listText::insertText(string text, int r, int g, int b)
    }
    else
    {
-      roll->addText(text, DNT_FONT_ARIAL, 10, DNT_FONT_STYLE_NORMAL,
+      roll->addText(text, opt.getDefaultFont(), 10, DNT_FONT_STYLE_NORMAL,
                     DNT_FONT_ALIGN_LEFT, r,g,b);
    }
    roll->setFirstLine(0);

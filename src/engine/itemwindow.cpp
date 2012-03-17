@@ -20,6 +20,7 @@
 
 #include "itemwindow.h"
 #include "../classes/weapon.h"
+#include "../lang/translate.h"
 using namespace std;
 
 /********************************************************************

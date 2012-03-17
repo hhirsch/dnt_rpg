@@ -22,7 +22,6 @@
 #define _farso_h
 
 
-#include <stdlib.h>
 #include <SDL/SDL.h>
 #include "draw.h"
 #include "button.h"
@@ -43,7 +42,7 @@
 #include "mouse.h"
 #include "tabbutton.h"
 #include "messages.h"
-#include "../lang/translate.h"
+#include "farsoopts.h"
 
 /*! Init the SDL/OpenGL Context
  * \param screen -> pointer to the pointer to the surface used as screen

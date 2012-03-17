@@ -31,6 +31,7 @@
 #include "options.h"
 
 #include "../etc/userinfo.h"
+#include "../lang/translate.h"
 using namespace std;
 
 /***********************************************************************

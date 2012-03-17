@@ -19,6 +19,7 @@
 */
 
 #include "textbox.h"
+#include "farsoopts.h"
 using namespace std;
 
 /*******************************************************
@@ -28,6 +29,8 @@ textBox::textBox(int xa, int ya, int xb, int yb, int frameType,
                  SDL_Surface *screen): 
                  guiObject(screen)
 {
+   farsoOptions opt;
+
    wSurface = screen;
    type = FARSO_OBJECT_TEXT_BOX;
    x1 = xa;
@@ -36,7 +39,7 @@ textBox::textBox(int xa, int ya, int xb, int yb, int frameType,
    y2 = yb;
    framed = frameType;
    fontAlign = DNT_FONT_ALIGN_LEFT;
-   fontName = DNT_FONT_ARIAL;
+   fontName = opt.getDefaultFont();
    fontStyle = DNT_FONT_STYLE_NORMAL;
    fontSize = 10;
    firstLine = 0;

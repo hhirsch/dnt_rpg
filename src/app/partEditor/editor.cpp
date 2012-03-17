@@ -45,6 +45,13 @@ editor::editor()
    /* Get current data directories */
    dir.findDataDirectories();
 
+
+   farsoOptions farOpt;
+   farOpt.setNeededDefaults(dir.getRealFile(DNT_FONT_ARIAL),
+         dir.getRealFile("icons/maximize.png"),
+         dir.getRealFile("icons/close.png"),
+         "Maximize", "Close", "Confirm", "Cancel");
+
    /* Initialize SDL/Farso/etc */
    Farso_Init(&screen,"DccNiTghtmare's Particle Editor", 800, 600, false, 0, 8);
 

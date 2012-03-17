@@ -20,6 +20,7 @@
 
 #include "journalwindow.h"
 #include "../classes/mission.h"
+#include "../etc/dirs.h"
 using namespace std;
 
 /***************************************************************************
@@ -272,6 +273,7 @@ void journalWindow::open(guiInterface* inter)
    int centerY = SCREEN_Y / 2;
    int centerX = SCREEN_X / 2;
    dntFont fnt;
+   dirs dir;
 
    /* Set the inteface */
    gui = inter;
@@ -290,7 +292,7 @@ void journalWindow::open(guiInterface* inter)
                                                    fnt.createUnicode(0x25C4),0);
    areaText = internalWindow->getObjectsList()->insertTextBox(24,231,229,249,1,
                                                               "");
-   areaText->setFont(DNT_FONT_ARIAL,10,DNT_FONT_ALIGN_CENTER, 
+   areaText->setFont(dir.getRealFile(DNT_FONT_ARIAL),10,DNT_FONT_ALIGN_CENTER, 
                      DNT_FONT_STYLE_BOLD);
    nextButton = internalWindow->getObjectsList()->insertButton(230,231,248,249,
                                                    fnt.createUnicode(0x25BA),0);
@@ -312,6 +314,7 @@ void journalWindow::showArea()
    int i;
    char buf[8];
    string text;
+   dirs dir;
 
    if( (areas) && (isOpen()) )
    {
@@ -333,13 +336,13 @@ void journalWindow::showArea()
             text = buf + desc->text;
             if(!desc->completed)
             {
-               missionsText->addText(text, DNT_FONT_ARIAL, 9,
+               missionsText->addText(text, dir.getRealFile(DNT_FONT_ARIAL), 9,
                                      DNT_FONT_ALIGN_LEFT, 
                                      DNT_FONT_STYLE_NORMAL, 240, 120, 0);
             }
             else
             {
-               missionsText->addText(text, DNT_FONT_ARIAL, 9,
+               missionsText->addText(text, dir.getRealFile(DNT_FONT_ARIAL), 9,
                                      DNT_FONT_ALIGN_LEFT, 
                                      DNT_FONT_STYLE_ITALIC, 0, 120, 0);
             }

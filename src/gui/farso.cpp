@@ -72,62 +72,64 @@ void Farso_DefineResolution(SDL_Surface **screen, string title,
                             bool fullScreen, int antiAliasingSamples,
                             int stencilBufferSize)
 {
-    SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
-    SDL_GL_SetAttribute( SDL_GL_SWAP_CONTROL, 0 );
+   farsoOptions opts;
+   SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
+   SDL_GL_SetAttribute( SDL_GL_SWAP_CONTROL, 0 );
 
-    if(stencilBufferSize > 0)
-    {
-       SDL_GL_SetAttribute( SDL_GL_STENCIL_SIZE, stencilBufferSize);
-    }
+   if(stencilBufferSize > 0)
+   {
+      SDL_GL_SetAttribute( SDL_GL_STENCIL_SIZE, stencilBufferSize);
+   }
 
-    if(antiAliasingSamples > 0)
-    {
-       SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
-       SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, antiAliasingSamples);
-    }
-   
-    int flags = SDL_DOUBLEBUF | SDL_OPENGL;
+   if(antiAliasingSamples > 0)
+   {
+      SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
+      SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, antiAliasingSamples);
+   }
 
-    if(fullScreen)
-    {
+   int flags = SDL_DOUBLEBUF | SDL_OPENGL;
+
+   if(fullScreen)
+   {
       flags |= SDL_FULLSCREEN;
-    }
-    
-    SCREEN_X = width;
-    SCREEN_Y = height;
+   }
 
-    *screen = SDL_SetVideoMode(SCREEN_X, SCREEN_Y, 32, flags);
-    if ( *screen == NULL ) 
-    {
-       cerr << "Oxi! Can't ajust video mode: " << SDL_GetError() << endl;
+   opts.setCurrentScreen(width, height);
+   SCREEN_X = width;
+   SCREEN_Y = height;
 
-       if(stencilBufferSize > 8)
-       {
-          cerr << "Trying again with lesser stencil." << endl;
-          /* Quit the SDL  */
-          SDL_Quit();
-          /* Restart it  */
-          Farso_Init(screen, title, width, height, fullScreen, 
-                antiAliasingSamples, 8);
-       }
-       else if(antiAliasingSamples > 0)
-       {
-          cerr << "Trying again without AntiAliasing." << endl;
-          /* Quit the SDL  */
-          SDL_Quit();
-          /* Restart it  */
-          Farso_Init(screen, title, width, height, fullScreen, 
-                0, stencilBufferSize);
-       }
-       else
-       {
-          cerr << "Something must be wrong! " << endl
-               << "Try editing ~/.dccnitghtmare/options.cfg" << endl;
-          exit(2);
-       }
-    }
+   *screen = SDL_SetVideoMode(SCREEN_X, SCREEN_Y, 32, flags);
+   if ( *screen == NULL ) 
+   {
+      cerr << "Oxi! Can't ajust video mode: " << SDL_GetError() << endl;
 
-    SDL_WM_SetCaption(title.c_str(),"");
+      if(stencilBufferSize > 8)
+      {
+         cerr << "Trying again with lesser stencil." << endl;
+         /* Quit the SDL  */
+         SDL_Quit();
+         /* Restart it  */
+         Farso_Init(screen, title, width, height, fullScreen, 
+               antiAliasingSamples, 8);
+      }
+      else if(antiAliasingSamples > 0)
+      {
+         cerr << "Trying again without AntiAliasing." << endl;
+         /* Quit the SDL  */
+         SDL_Quit();
+         /* Restart it  */
+         Farso_Init(screen, title, width, height, fullScreen, 
+               0, stencilBufferSize);
+      }
+      else
+      {
+         cerr << "Something must be wrong! " << endl
+            << "Try editing ~/.dccnitghtmare/options.cfg" << endl;
+         exit(2);
+      }
+   }
+
+   SDL_WM_SetCaption(title.c_str(),"");
 }
 
 /************************************************************

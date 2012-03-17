@@ -23,6 +23,7 @@
 #include "window.h"
 #include "dntfont.h"
 #include "menu.h"
+#include "farsoopts.h"
 
 using namespace std;
 
@@ -32,6 +33,7 @@ using namespace std;
 button::button(int xa,int ya,int xb,int yb, string txt, bool isOval, 
       SDL_Surface* surface): guiObject(surface)
 {
+   farsoOptions opt;
    x1 = xa; 
    y1 = ya;
    x2 = xb;
@@ -41,7 +43,7 @@ button::button(int xa,int ya,int xb,int yb, string txt, bool isOval,
    men = NULL;
    pressed = false;
    available = true;
-   defineFont(DNT_FONT_ARIAL, 12);
+   defineFont(opt.getDefaultFont(), 12);
    type = FARSO_OBJECT_BUTTON;
    bType = NORMAL;
 }

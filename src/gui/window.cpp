@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -20,7 +20,7 @@
 
 #include "window.h"
 #include "menu.h"
-#include "../etc/dirs.h"
+#include "farsoopts.h"
 
 #include <iostream>
 using namespace std;
@@ -103,7 +103,7 @@ void windowList::removeWindow(window *jan)
    {
       activeWindow = NULL;
       list.remove(jan);
-      if((list.size() > 1))
+      if((list.size() > 0))
       {
          window* j = list.back();
          j->activate();
@@ -135,7 +135,7 @@ window::window(int xa, int ya, int xb, int yb, string title, windowList* list,
       bool empty):guiObject(NULL)
 {
    dntFont fnt;
-   dirs dir;
+   farsoOptions opt;
 
    /* Set Variables */
    intList = list;
@@ -194,20 +194,19 @@ window::window(int xa, int ya, int xb, int yb, string title, windowList* list,
       menuButton = objects->insertButton(3,3,13,12,"-",0);
       menuButton->men = new menu(0,0,x2-x1, y2-y1, surface);
       menu* men = (menu*) menuButton->men;
-      men->insertItem(gettext("Maximize"), 
-            dir.getRealFile("icons/maximize.png") ,0);
+      men->insertItem(opt.getMaximizeLabel(), opt.getMaximizeIcon(), 0);
       men->insertItem("-",0);
-      men->insertItem(gettext("Close"), dir.getRealFile("icons/close.png"), 1);
+      men->insertItem(opt.getCloseLabel(), opt.getCloseIcon(), 1);
 
       /* Create Close Button */
       closeButton = objects->insertButton(14,3,24,12,
             fnt.createUnicode(0x25CF),0);
-      closeButton->defineFont(DNT_FONT_ARIAL, 10);
+      closeButton->defineFont(opt.getDefaultFont(), 10);
 
       /* Create Minimize Maximize Button */
       minMaxButton = objects->insertButton(25,3,35,12,
             fnt.createUnicode(0x25B2),0);
-      minMaxButton->defineFont(DNT_FONT_ARIAL, 8);
+      minMaxButton->defineFont(opt.getDefaultFont(), 8);
    }
    else
    {
@@ -299,6 +298,7 @@ void window::draw(int mouseX, int mouseY, bool drawBar)
  *********************************************************************/
 void window::drawInactiveBar()
 {
+   farsoOptions opt;
    dntFont fnt;
    int dx = x2-x1;
 
@@ -313,7 +313,7 @@ void window::drawInactiveBar()
       rectangle_Fill(surface,36,3,dx-3,12);
       color_Set(Colors.colorBar.R+100, Colors.colorBar.G,
             Colors.colorBar.B, Colors.colorBar.A);
-      fnt.defineFont(DNT_FONT_ARIAL,10);
+      fnt.defineFont(opt.getDefaultFont(),10);
       fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
       fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
       fnt.write(surface,39,1,text);
@@ -326,6 +326,7 @@ void window::drawInactiveBar()
  *********************************************************************/
 void window::drawActiveBar()
 {
+   farsoOptions opt;
    dntFont fnt;
    int dx = x2-x1;
 
@@ -336,7 +337,7 @@ void window::drawActiveBar()
       rectangle_Fill(surface,36,3,dx-3,12);
       color_Set(Colors.colorText.R, Colors.colorText.G,
             Colors.colorText.B, Colors.colorText.A);
-      fnt.defineFont(DNT_FONT_ARIAL,10);
+      fnt.defineFont(opt.getDefaultFont(),10);
       fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
       fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
       fnt.write(surface,39,1,text);

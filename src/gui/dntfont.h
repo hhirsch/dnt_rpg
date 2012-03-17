@@ -32,13 +32,6 @@
 #include <string>
 #include <list>
 
-#define DNT_FONT_ARIAL     "fnt/arial.ttf"
-#define DNT_FONT_TIMES     "fnt/times.ttf"
-#define DNT_FONT_COURRIER  "fnt/courrier.ttf"
-#define DNT_FONT_SANS      "fnt/DejaVuSans.ttf"
-#define DNT_FONT_SHEER     "fnt/sheer.ttf"
-#define DNT_FONT_PALLADIO  "fnt/URWPalladioL-Roma.ttf"
-
 #define DNT_FONT_ALIGN_LEFT    0
 #define DNT_FONT_ALIGN_CENTER  1
 

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -22,6 +22,7 @@
 
 #include "util.h"
 #include "../etc/dirs.h"
+#include "../gui/farsoopts.h"
 
 #include <iostream>
 using namespace std;
@@ -45,7 +46,11 @@ cursor::~cursor()
  *****************************************************************/
 void cursor::init()
 {
+   farsoOptions opt;
    dirs dir;
+
+   /* Set font to default */
+   font = opt.getDefaultFont();
    
    /* Disable HW Mouse cursos */
    SDL_ShowCursor(SDL_DISABLE);
@@ -174,7 +179,15 @@ int cursor::get()
 }
 
 /*****************************************************************
- *                      setTextOver                              *
+ *                      setTextOverFont                          *
+ *****************************************************************/
+void cursor::setTextOverFont(std::string f)
+{
+   font = f;
+}
+
+/*****************************************************************
+ *                        setTextOver                            *
  *****************************************************************/
 void cursor::setTextOver(string txt)
 {
@@ -194,7 +207,7 @@ void cursor::setTextOver(string txt)
          dntFont fnt;
          farso_colors curColor;
          
-         fnt.defineFont(DNT_FONT_PALLADIO, 12);
+         fnt.defineFont(font, 12);
          fnt.defineFontAlign(DNT_FONT_ALIGN_CENTER);
          fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
          textOverHeight = fnt.getHeight()+4;
@@ -342,3 +355,4 @@ GLuint cursor::textOverTexture;
 int cursor::textOverWidth;
 int cursor::textOverHeight;
 Uint32 cursor::textOverInit;          /**< Time inited the display */
+std::string cursor::font;

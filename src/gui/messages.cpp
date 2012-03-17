@@ -36,6 +36,7 @@ using namespace std;
 void warning::show(string title, string message, guiInterface* gui)
 { 
    dntFont fnt;
+   farsoOptions opt;
 
    /* Close the window if it is opened */
    close();
@@ -44,7 +45,7 @@ void warning::show(string title, string message, guiInterface* gui)
    lastGui = gui;
 
    /* Calculate Window Position And size */
-   fnt.defineFont(DNT_FONT_ARIAL, 10);
+   fnt.defineFont(opt.getDefaultFont(), 10);
    int sizeX = fnt.getStringWidth(message);
    int sX = SCREEN_X / 2;
    int sY = SCREEN_Y / 2;
@@ -57,7 +58,7 @@ void warning::show(string title, string message, guiInterface* gui)
    textBox* quadText = warnWindow->getObjectsList()->insertTextBox(5,17,
                                                       sizeX+10,33,0,
                                                       message.c_str());
-   quadText->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   quadText->setFont(opt.getDefaultFont(), 10, DNT_FONT_ALIGN_CENTER);
    warnWindow->setModal();
    warnWindow->setExternPointer(&warnWindow);
    gui->openWindow(warnWindow);

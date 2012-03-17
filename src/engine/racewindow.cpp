@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -20,6 +20,8 @@
 
 
 #include "racewindow.h"
+#include "util.h"
+#include "../etc/dirs.h"
 using namespace std;
 
 /***********************************************************************
@@ -39,6 +41,7 @@ static int cmpRaceFunction(const void *p1,  const void *p2)
  ********************************************************************/
 raceWindow::raceWindow(guiInterface* inter, race** retRace)
 {
+   dirs dir;
    races rc;
    dntFont fnt;
    int i;
@@ -110,7 +113,7 @@ raceWindow::raceWindow(guiInterface* inter, race** retRace)
                                              fnt.createUnicode(0x25BA),0);
    textName = intWindow->getObjectsList()->insertTextBox(22,346,261,364,1, 
                                              racesOrder[curRace]->name.c_str());
-   textName->setFont(DNT_FONT_ARIAL,10,DNT_FONT_ALIGN_CENTER,
+   textName->setFont(dir.getRealFile(DNT_FONT_ARIAL),10,DNT_FONT_ALIGN_CENTER,
                      DNT_FONT_STYLE_BOLD);
 
    /* Confirm Button */
@@ -140,8 +143,10 @@ raceWindow::~raceWindow()
  ********************************************************************/
 void raceWindow::setDescription()
 {
+   dirs dir;
    textDesc->setText("");
-   textDesc->addText(racesOrder[curRace]->citation + "||", DNT_FONT_ARIAL,
+   textDesc->addText(racesOrder[curRace]->citation + "||", 
+                     dir.getRealFile(DNT_FONT_ARIAL),
                      10, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
                      220,0,0);
    textDesc->addText(racesOrder[curRace]->description);
@@ -154,12 +159,14 @@ void raceWindow::setDescription()
 void raceWindow::setCharacteristics()
 {
    int i;
+   dirs dir;
    skillDefinition* skTmp;
    skillsDefinitions skDefs;
 
    textCharac->setText("");
    textCharac->addText(string(gettext("Race Modifiers")) + "||",
-                       DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
+                       dir.getRealFile(DNT_FONT_ARIAL), 12, 
+                       DNT_FONT_ALIGN_CENTER,
                        DNT_FONT_STYLE_UNDERLINE,
                        86, 161, 32);
    for(i=0; i<racesOrder[curRace]->totalModifiers; i++)
@@ -171,13 +178,15 @@ void raceWindow::setCharacteristics()
    if(racesOrder[curRace]->totalModifiers == 0)
    {
       textCharac->addText(string(gettext("No Modifiers.")) + "||",
-                          DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
+                          dir.getRealFile(DNT_FONT_ARIAL), 10, 
+                          DNT_FONT_ALIGN_LEFT,
                           DNT_FONT_STYLE_NORMAL,
                           75, 147, 207);
    }
 
    textCharac->addText(string(gettext("Race Talents")) + "||",
-                       DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
+                       dir.getRealFile(DNT_FONT_ARIAL), 12, 
+                       DNT_FONT_ALIGN_CENTER,
                        DNT_FONT_STYLE_UNDERLINE,
                        86, 161, 32);
 
@@ -189,14 +198,16 @@ void raceWindow::setCharacteristics()
    if(racesOrder[curRace]->totalFeats == 0)
    {
       textCharac->addText(string(gettext("No Talents.")) + "|",
-                          DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
+                          dir.getRealFile(DNT_FONT_ARIAL), 10, 
+                          DNT_FONT_ALIGN_LEFT,
                           DNT_FONT_STYLE_NORMAL,
                           75,147,207);
    }
 
    /* Race Skills */
    textCharac->addText(string("|") + string(gettext("Race Skills")) + "||",
-                       DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
+                       dir.getRealFile(DNT_FONT_ARIAL), 12, 
+                       DNT_FONT_ALIGN_CENTER,
                        DNT_FONT_STYLE_UNDERLINE,
                        86, 161, 32);
    for(i=0; i<racesOrder[curRace]->totalSkills; i++)
@@ -215,7 +226,8 @@ void raceWindow::setCharacteristics()
    if(racesOrder[curRace]->totalSkills == 0)
    {
       textCharac->addText(gettext("No Skills."),
-                          DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
+                          dir.getRealFile(DNT_FONT_ARIAL), 10, 
+                          DNT_FONT_ALIGN_LEFT,
                           DNT_FONT_STYLE_NORMAL,
                           75,147,207);
    }

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -19,12 +19,15 @@
 */
 
 #include "alignwindow.h"
+#include "../etc/dirs.h"
+#include "util.h"
 
 /************************************************************************
  *                           Constructor                                *
  ************************************************************************/
 alignWindow::alignWindow(aligns* alg, guiInterface* inter, align** actual)
 {
+   dirs dir;
    dntFont fnt;
    int centerY = SCREEN_Y / 2;
    int centerX = SCREEN_X / 2;
@@ -53,7 +56,7 @@ alignWindow::alignWindow(aligns* alg, guiInterface* inter, align** actual)
    /* Align Description */
    textDesc = intWindow->getObjectsList()->insertRolBar(5,38,282,180,"");
    textDesc->addText(actualAlign->description.c_str(),
-                     DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
+                     dir.getRealFile(DNT_FONT_ARIAL), 10, DNT_FONT_ALIGN_LEFT,
                      DNT_FONT_STYLE_NORMAL, 86, 161, 132); 
    textDesc->setFirstLine(0);
       
@@ -64,7 +67,7 @@ alignWindow::alignWindow(aligns* alg, guiInterface* inter, align** actual)
                                                  fnt.createUnicode(0x25BA),0);
    textName = intWindow->getObjectsList()->insertTextBox(20,19,267,37,1, 
                                                   actualAlign->name.c_str());
-   textName->setFont(DNT_FONT_ARIAL,10,DNT_FONT_ALIGN_CENTER,
+   textName->setFont(dir.getRealFile(DNT_FONT_ARIAL),10,DNT_FONT_ALIGN_CENTER,
                      DNT_FONT_STYLE_BOLD);
 
    /* Confirm Button */
@@ -106,10 +109,11 @@ int alignWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
          {
             actualAlign = (align*)actualAlign->getPrevious();
          }
+         dirs dir;
          textName->setText(actualAlign->name);
          textDesc->setText("");
          textDesc->addText(actualAlign->description.c_str(),
-                     DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
+                     dir.getRealFile(DNT_FONT_ARIAL), 10, DNT_FONT_ALIGN_LEFT,
                      DNT_FONT_STYLE_NORMAL, 86, 161, 132);
          textDesc->setFirstLine(0);
          alignImage->set(actualAlign->image);

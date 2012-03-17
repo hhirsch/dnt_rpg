@@ -19,6 +19,7 @@
 */
 
 #include "minimapwindow.h"
+#include "../lang/translate.h"
 
 /***********************************************************************
  *                            constructor                              *

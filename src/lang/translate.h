@@ -34,8 +34,11 @@
 #if ENABLE_NLS == 1
    #include <libintl.h>
 #else
-   /* Define a gettext ignore function */
-   inline const char* gettext(const char* s){return(s);};
+   #ifndef _gettext_func_
+      #define _gettext_func_
+      /* Define a gettext ignore function */
+      inline const char* gettext(const char* s){return(s);};
+   #endif
 #endif
 
 #include <string>

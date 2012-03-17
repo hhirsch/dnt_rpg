@@ -20,7 +20,7 @@
 
 
 #include "options.h"
-
+#include "../lang/translate.h"
 #include "../sound/sound.h"
 #include "camera.h"
 #include "util.h"
@@ -600,6 +600,9 @@ void options::setLanguage()
       #endif
    }
 #endif
+
+   farsoOptions farOpt;
+   farOpt.setUnicodeLanguage(isLanguageUnicode());
 }
 
 /****************************************************************
@@ -799,9 +802,10 @@ void options::insertKeys(int firstKey, int lastKey, guiList* list)
 void options::displayOptionsScreen(guiInterface* interf)
 {
    dirs dir;
+   std::string fontArial = dir.getRealFile(DNT_FONT_ARIAL);
    extensions ext;
    dntFont fnt;
-   fnt.defineFont(DNT_FONT_ARIAL, 10);
+   fnt.defineFont(fontArial, 10);
    char tmp[8];
    string saux;
    textBox* qt;
@@ -859,15 +863,15 @@ void options::displayOptionsScreen(guiInterface* interf)
    posY = 52;
    /* Music Things */
    qt = list->insertTextBox(12,posY,145,posY+17,0, gettext("Music Volume:"));
-   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
    buttonMusDec = list->insertButton(121,posY,131,posY+17,
                                      fnt.createUnicode(0x25C4),0);
-   buttonMusDec->defineFont(DNT_FONT_ARIAL, 9);
+   buttonMusDec->defineFont(fontArial, 9);
    barMusicVolume = list->insertHealthBar(133,posY,196,posY+17,255);
    barMusicVolume->defineActualHealth(musicVolume);
    buttonMusSum = list->insertButton(198,posY,208,posY+17,
                                      fnt.createUnicode(0x25BA),0);
-   buttonMusSum->defineFont(DNT_FONT_ARIAL, 9);
+   buttonMusSum->defineFont(fontArial, 9);
    list->insertPicture(220,posY,40,112,
                        dir.getRealFile("texturas/options/music.png").c_str());
    posY += 25;
@@ -876,15 +880,15 @@ void options::displayOptionsScreen(guiInterface* interf)
    sprintf(tmp,"%d",sndfxVolume);
    saux = tmp;
    qt = list->insertTextBox(12,posY,145,posY+17,0, gettext("Effects Volume:"));
-   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
    buttonSndDec = list->insertButton(121,posY,131,posY+17,
                                      fnt.createUnicode(0x25C4),0);
-   buttonSndDec->defineFont(DNT_FONT_ARIAL, 9);
+   buttonSndDec->defineFont(fontArial, 9);
    barSndfxVolume = list->insertHealthBar(133,posY,196,posY+17,255);
    barSndfxVolume->defineActualHealth(sndfxVolume);
    buttonSndSum = list->insertButton(198,posY,208,posY+17,
                                      fnt.createUnicode(0x25BA),0);
-   buttonSndSum->defineFont(DNT_FONT_ARIAL, 9);
+   buttonSndSum->defineFont(fontArial, 9);
    list->insertPicture(220,posY,40,112,
                        dir.getRealFile("texturas/options/sndfx.png").c_str());
 
@@ -901,22 +905,22 @@ void options::displayOptionsScreen(guiInterface* interf)
    saux = resolutionName();
    qt = list->insertTextBox(12,posY,145,posY+17,0,
                             gettext("Screen Resolution:"));
-   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
    buttonResDec = list->insertButton(121,posY,131,posY+17,
                                      fnt.createUnicode(0x25C4),0);
-   buttonResDec->defineFont(DNT_FONT_ARIAL, 9);
+   buttonResDec->defineFont(fontArial, 9);
    txtResolution = list->insertTextBox(132,posY,197,posY+17,1,saux.c_str());
-   txtResolution->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   txtResolution->setFont(fontArial, 10, DNT_FONT_ALIGN_CENTER);
    buttonResSum = list->insertButton(198,posY,208,posY+17,
                                      fnt.createUnicode(0x25BA),0);
-   buttonResSum->defineFont(DNT_FONT_ARIAL, 9);
+   buttonResSum->defineFont(fontArial, 9);
    list->insertPicture(220,posY,40,220,
                     dir.getRealFile("texturas/options/resolution.png").c_str());
    posY += 35;
   
    /* Fullscreen */
    qt = list->insertTextBox(24,posY,219,posY+17,0,gettext("Enable FullScreen"));
-   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
    cxSelFullScreen = list->insertCxSel(12,posY+4,enableFullScreen);
    list->insertPicture(220,posY,40,220,
                     dir.getRealFile("texturas/options/fullscreen.png").c_str());
@@ -925,7 +929,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    /* Grass Enabled or Not */
    qt = list->insertTextBox(24,posY,219,posY+17,0,
                             gettext("Enable Grass Effects (need particles)"));
-   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
    cxSelGrass = list->insertCxSel(12,posY+4, enableGrass);
    list->insertPicture(220,posY,40,112,
                        dir.getRealFile("texturas/options/grass.png").c_str());
@@ -934,7 +938,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    /* Particle System Enabled or Not */
    qt = list->insertTextBox(24,posY,219,posY+17,0,
                             gettext("Enable Particles Effects"));
-   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
    cxSelParticles = list->insertCxSel(12, posY+4, enableParticles);
    list->insertPicture(220,posY,40,112,
                      dir.getRealFile("texturas/options/particles.png").c_str());
@@ -946,7 +950,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    /* Anisotropic Enable or Not */
    qt = list->insertTextBox(24,posY,219,posY+17,0,
                             gettext("Enable Anisotropic Filter"));
-   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
    cxSelAnisotropic = list->insertCxSel(12,posY+4,getEnableAnisotropicFilter());
    list->insertPicture(220,posY,40,112,
                    dir.getRealFile("texturas/options/anisotropic.png").c_str());
@@ -957,15 +961,15 @@ void options::displayOptionsScreen(guiInterface* interf)
    prevSplattingType = splattingType;
    saux = splattingTypeName();
    qt = list->insertTextBox(12,posY,145,posY+17,0,gettext("Splatting:"));
-   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
    buttonSplattingDec = list->insertButton(121,posY,131,posY+17,
                                       fnt.createUnicode(0x25C4),0);
-   buttonSplattingDec->defineFont(DNT_FONT_ARIAL, 9);
+   buttonSplattingDec->defineFont(fontArial, 9);
    txtSplatting = list->insertTextBox(132,posY,227,posY+17,1,saux.c_str());
-   txtSplatting->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   txtSplatting->setFont(fontArial, 10, DNT_FONT_ALIGN_CENTER);
    buttonSplattingSum = list->insertButton(228,posY,238,posY+17,
                                       fnt.createUnicode(0x25BA),0);
-   buttonSplattingSum->defineFont(DNT_FONT_ARIAL, 9);
+   buttonSplattingSum->defineFont(fontArial, 9);
    list->insertPicture(245,posY,40,220,
                   dir.getRealFile("texturas/options/multitexture.png").c_str());
    posY += 25;
@@ -974,15 +978,15 @@ void options::displayOptionsScreen(guiInterface* interf)
    prevStencilBufferSize = stencilBufferSize;
    saux = stencilBufferSizeName();
    qt = list->insertTextBox(12,posY,145,posY+17,0,gettext("Stencil Buffer:"));
-   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
    buttonStencilDec = list->insertButton(121,posY,131,posY+17,
                                       fnt.createUnicode(0x25C4),0);
-   buttonStencilDec->defineFont(DNT_FONT_ARIAL, 9);
+   buttonStencilDec->defineFont(fontArial, 9);
    txtStencil = list->insertTextBox(132,posY,227,posY+17,1,saux.c_str());
-   txtStencil->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   txtStencil->setFont(fontArial, 10, DNT_FONT_ALIGN_CENTER);
    buttonStencilSum = list->insertButton(228,posY,238,posY+17,
                                       fnt.createUnicode(0x25BA),0);
-   buttonStencilSum->defineFont(DNT_FONT_ARIAL, 9);
+   buttonStencilSum->defineFont(fontArial, 9);
    list->insertPicture(245,posY,40,220,
                   dir.getRealFile("texturas/options/stencil_size.png").c_str());
    posY += 25;
@@ -991,15 +995,15 @@ void options::displayOptionsScreen(guiInterface* interf)
    prevReflexion = reflexionType;
    saux = reflexionName();
    qt = list->insertTextBox(12,posY,145,posY+17,0,gettext("Reflections:"));
-   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
    buttonReflDec = list->insertButton(121,posY,131,posY+17,
                                       fnt.createUnicode(0x25C4),0);
-   buttonReflDec->defineFont(DNT_FONT_ARIAL, 9);
+   buttonReflDec->defineFont(fontArial, 9);
    txtReflexion = list->insertTextBox(132,posY,227,posY+17,1,saux.c_str());
-   txtReflexion->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   txtReflexion->setFont(fontArial, 10, DNT_FONT_ALIGN_CENTER);
    buttonReflSum = list->insertButton(228,posY,238,posY+17,
                                       fnt.createUnicode(0x25BA),0);
-   buttonReflSum->defineFont(DNT_FONT_ARIAL, 9);
+   buttonReflSum->defineFont(fontArial, 9);
    list->insertPicture(245,posY,40,220,
                     dir.getRealFile("texturas/options/reflexions.png").c_str());
    posY += 25;
@@ -1008,15 +1012,15 @@ void options::displayOptionsScreen(guiInterface* interf)
    prevShadow = shadowType;
    saux = shadowName();
    qt = list->insertTextBox(12,posY,145,posY+17,0,gettext("Shadows:"));
-   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
    buttonShadDec = list->insertButton(121,posY,131,posY+17,
                                       fnt.createUnicode(0x25C4),0);
-   buttonShadDec->defineFont(DNT_FONT_ARIAL, 9);
+   buttonShadDec->defineFont(fontArial, 9);
    txtShadow = list->insertTextBox(132,posY,227,posY+17,1,saux.c_str());
-   txtShadow->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   txtShadow->setFont(fontArial, 10, DNT_FONT_ALIGN_CENTER);
    buttonShadSum = list->insertButton(228,posY,238,posY+17,
                                       fnt.createUnicode(0x25BA),0);
-   buttonShadSum->defineFont(DNT_FONT_ARIAL, 9);
+   buttonShadSum->defineFont(fontArial, 9);
    list->insertPicture(245,posY,40,220,
                     dir.getRealFile("texturas/options/shadow.png").c_str());
    posY += 25;
@@ -1024,30 +1028,30 @@ void options::displayOptionsScreen(guiInterface* interf)
    /* AntiAliasing */                 
    saux = antiAliasingName();
    qt = list->insertTextBox(12,posY,145,posY+17,0,gettext("Anti-Aliasing:"));
-   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
    buttonAliasDec = list->insertButton(121,posY,131,posY+17,
                                        fnt.createUnicode(0x25C4),0);
-   buttonAliasDec->defineFont(DNT_FONT_ARIAL, 9);
+   buttonAliasDec->defineFont(fontArial, 9);
    txtAntiAliasing = list->insertTextBox(132,posY,227,posY+17,1,saux.c_str());
-   txtAntiAliasing->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   txtAntiAliasing->setFont(fontArial, 10, DNT_FONT_ALIGN_CENTER);
    buttonAliasSum = list->insertButton(228,posY,238,posY+17,
                                        fnt.createUnicode(0x25BA),0);
-   buttonAliasSum->defineFont(DNT_FONT_ARIAL, 9);
+   buttonAliasSum->defineFont(fontArial, 9);
    list->insertPicture(245,posY,40,220,
                   dir.getRealFile("texturas/options/antialiasing.png").c_str());
    posY += 25;
  
    /* FarViewFactor */
    qt = list->insertTextBox(12,posY,145,posY+17,0, gettext("FarView:"));
-   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
    buttonFarViewDec = list->insertButton(121,posY,131,posY+17,
                                          fnt.createUnicode(0x25C4),0);
-   buttonFarViewDec->defineFont(DNT_FONT_ARIAL, 9);
+   buttonFarViewDec->defineFont(fontArial, 9);
    barFarView = list->insertHealthBar(133,posY,226,posY+17,9);
    barFarView->defineActualHealth((int)floor(farViewFactor*9));                                                          
    buttonFarViewSum = list->insertButton(228,posY,238,posY+17,
                                          fnt.createUnicode(0x25BA),0);
-   buttonFarViewSum->defineFont(DNT_FONT_ARIAL, 9);
+   buttonFarViewSum->defineFont(fontArial, 9);
    list->insertPicture(245,posY,40,223,
                      dir.getRealFile("texturas/options/farview.png").c_str());
 
@@ -1061,15 +1065,15 @@ void options::displayOptionsScreen(guiInterface* interf)
    prevLanguage = langNumber;
    saux = languageName();
    qt = list->insertTextBox(12,posY,145,posY+17,0,gettext("Language:"));
-   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
    buttonLangDec = list->insertButton(121,posY,131,posY+17,
                                       fnt.createUnicode(0x25C4),0);
-   buttonLangDec->defineFont(DNT_FONT_ARIAL, 9);
+   buttonLangDec->defineFont(fontArial, 9);
    txtLanguage = list->insertTextBox(132,posY,197,posY+17,1,saux.c_str());
-   txtLanguage->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   txtLanguage->setFont(fontArial, 10, DNT_FONT_ALIGN_CENTER);
    buttonLangSum = list->insertButton(198,posY,208,posY+17,
                                       fnt.createUnicode(0x25BA),0);
-   buttonLangSum->defineFont(DNT_FONT_ARIAL, 9);
+   buttonLangSum->defineFont(fontArial, 9);
    list->insertPicture(220,posY,40,112,
                       dir.getRealFile("texturas/options/language.png").c_str());
    posY += 25;                      
@@ -1078,15 +1082,15 @@ void options::displayOptionsScreen(guiInterface* interf)
    prevCamera = cameraNumber;
    saux = cameraName();
    qt = list->insertTextBox(12,posY,145,posY+17,0,gettext("Camera Mode:"));
-   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
    buttonCamDec = list->insertButton(121,posY,131,posY+17,
                                      fnt.createUnicode(0x25C4),0);
-   buttonCamDec->defineFont(DNT_FONT_ARIAL, 9);
+   buttonCamDec->defineFont(fontArial, 9);
    txtCamera = list->insertTextBox(132,posY,197,posY+17,1,saux.c_str());
-   txtCamera->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   txtCamera->setFont(fontArial, 10, DNT_FONT_ALIGN_CENTER);
    buttonCamSum = list->insertButton(198,posY,208,posY+17,
                                      fnt.createUnicode(0x25BA),0);
-   buttonCamSum->defineFont(DNT_FONT_ARIAL, 9);
+   buttonCamSum->defineFont(fontArial, 9);
    list->insertPicture(220,posY,40,posY+17,
                        dir.getRealFile("texturas/options/camera.png").c_str());
    posY += 35;
@@ -1094,7 +1098,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    /* AutoEndTurn Enable or Not */
    qt = list->insertTextBox(24,posY,219,posY+17,0,
                             gettext("Auto End Turn"));
-   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_CENTER);
    cxSelAutoEndTurn = list->insertCxSel(12,posY+4,autoEndTurn);
    list->insertPicture(220,posY,40,112,
                   dir.getRealFile("texturas/options/autoendturn.png").c_str());
@@ -1103,7 +1107,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    /* AlwaysRun Enable or Not */
    qt = list->insertTextBox(24,posY,219,posY+17,0,
                             gettext("Always Run"));
-   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_CENTER);
    cxSelAlwaysRun = list->insertCxSel(12,posY+4,alwaysRun);
    list->insertPicture(220,posY,40,112,
                   dir.getRealFile("texturas/options/alwaysrun.png").c_str());
@@ -1112,7 +1116,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    /* ShowEnemyCircles or or Not */
    qt = list->insertTextBox(24,posY,219,posY+34,0,
                             gettext("Show Enemy Battle Circle"));
-   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_CENTER);
    cxSelShowEnemyCircles = list->insertCxSel(12,posY+4,showEnemyCircles);
    list->insertPicture(220,posY,40,112,
               dir.getRealFile("texturas/options/showenemycircles.png").c_str());
@@ -1121,7 +1125,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    /* ShowEnemyCircles or or Not */
    qt = list->insertTextBox(24,posY,219,posY+34,0,
                             gettext("Highlight current enemy"));
-   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_CENTER);
    cxSelHighlightEnemy = list->insertCxSel(12,posY+4,highlightEnemy);
    list->insertPicture(220,posY,40,112,
               dir.getRealFile("texturas/options/highlightenemy.png").c_str());

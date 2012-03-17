@@ -19,6 +19,7 @@
 */
 
 #include "textbar.h"
+#include "farsoopts.h"
 using namespace std;
 
 #define REFRESH_RATE 170
@@ -56,8 +57,9 @@ textBar::~textBar()
  ********************************************************************/
 void textBar::putText(unsigned int pos, int marca)
 {
+   farsoOptions opt;
    dntFont fnt;
-   fnt.defineFont(DNT_FONT_ARIAL,12);
+   fnt.defineFont(opt.getDefaultFont(), 12);
    fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
    fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
 
@@ -150,8 +152,9 @@ void textBar::draw()
  ********************************************************************/
 void textBar::defineCursorPosition(int mouseX, int mouseY)
 {
+   farsoOptions opt;
    dntFont fnt;
-   fnt.defineFont(DNT_FONT_ARIAL,12);
+   fnt.defineFont(opt.getDefaultFont(),12);
    fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
    fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
    string s = text.substr(init,end);

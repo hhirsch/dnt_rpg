@@ -20,6 +20,8 @@
 
 #include "util.h"
 
+#include "../etc/dirs.h"
+
 #include <iostream>
 using namespace std;
 
@@ -30,6 +32,7 @@ void showLoading(SDL_Surface* img, GLuint* texturaTexto,
                  GLuint texturaCarga, const char* texto,
                  healthBar* progress)
 {
+   dirs dir;
    dntFont fnt;
    int centerY = SCREEN_Y / 2;
    int centerX = SCREEN_X / 2;
@@ -41,7 +44,7 @@ void showLoading(SDL_Surface* img, GLuint* texturaTexto,
    color_Set(0,0,0,255);
    rectangle_Fill(img,0,0,img->w-1,img->h-1);
    color_Set(200,20,20,255);
-   fnt.defineFont(DNT_FONT_TIMES,12);
+   fnt.defineFont(dir.getRealFile(DNT_FONT_TIMES), 12);
    fnt.defineFontAlign(DNT_FONT_ALIGN_CENTER);
    fnt.write(img,128,0,texto);
    progress->draw();

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -19,6 +19,7 @@
 */
 
 #include "partwindow.h"
+#include "../../gui/farsoopts.h"
 
 /***********************************************************************
  *                             Constructor                             *
@@ -91,13 +92,14 @@ void partWindow::set(partAux* p)
  ***********************************************************************/
 void partWindow::openWindow()
 {
+   farsoOptions opt;
    int posX=0, 
        posY = 64;
    dntFont fnt;
 
    if(isOpen())
    {
-      /* Clsoe to reopen */
+      /* Close to reopen */
       posX = curWindow->getX1();
       posY = curWindow->getY1();
       closeWindow();
@@ -128,25 +130,25 @@ void partWindow::openWindow()
    curWindow->getObjectsList()->insertTextBox(10,89,80,106,0,"DrawMode:");
    previousDrawMode = curWindow->getObjectsList()->insertButton(81,89,91,106, 
          fnt.createUnicode(0x25C4),0);
-   previousDrawMode->defineFont(DNT_FONT_ARIAL, 9);
+   previousDrawMode->defineFont(opt.getDefaultFont(), 9);
    drawMode = curWindow->getObjectsList()->insertTextBox(92, 89, 172, 106, 
          1, "");
-   drawMode->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   drawMode->setFont(opt.getDefaultFont(), 10, DNT_FONT_ALIGN_CENTER);
    nextDrawMode = curWindow->getObjectsList()->insertButton(173, 89, 183, 106, 
          fnt.createUnicode(0x25BA),0);
-   nextDrawMode->defineFont(DNT_FONT_ARIAL, 9);
+   nextDrawMode->defineFont(opt.getDefaultFont(), 9);
 
    /* renderMode things */
    curWindow->getObjectsList()->insertTextBox(10,112,80,129,0,"RenderMode:");
    previousRenderMode = curWindow->getObjectsList()->insertButton(81,112,
          91,129, fnt.createUnicode(0x25C4),0);
-   previousRenderMode->defineFont(DNT_FONT_ARIAL, 9);
+   previousRenderMode->defineFont(opt.getDefaultFont(), 9);
    renderMode = curWindow->getObjectsList()->insertTextBox(92,112,172,129, 
          1, "");
-   renderMode->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   renderMode->setFont(opt.getDefaultFont(), 10, DNT_FONT_ALIGN_CENTER);
    nextRenderMode = curWindow->getObjectsList()->insertButton(173,112,183,129, 
          fnt.createUnicode(0x25BA),0);
-   nextRenderMode->defineFont(DNT_FONT_ARIAL, 9);
+   nextRenderMode->defineFont(opt.getDefaultFont(), 9);
 
    /* pointSize */
    curWindow->getObjectsList()->insertTextBox(10,135,80,152,0,"PointSize:");

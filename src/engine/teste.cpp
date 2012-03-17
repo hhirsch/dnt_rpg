@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -58,6 +58,14 @@ int main(int argc, char **argv)
    /* Load Options */
    options opt;
    opt.load();
+
+   /* Set Farso Options */
+   farsoOptions farOpt;
+   farOpt.setNeededDefaults(dir.getRealFile(DNT_FONT_ARIAL), 
+         dir.getRealFile("icons/maximize.png"), 
+         dir.getRealFile("icons/close.png"),
+         gettext("Maximize"), gettext("Close"), gettext("Confirm"), 
+         gettext("Cancel"));
    
    #ifdef REDE
       cout << "Server IP or Name: ";

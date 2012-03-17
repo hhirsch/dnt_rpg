@@ -21,6 +21,7 @@
 #include "charwindow.h"
 #include "levelup.h"
 #include "../classes/xp.h"
+#include "../gui/farsoopts.h"
 using namespace std;
 
 /********************************************************************
@@ -55,6 +56,7 @@ charWindow::~charWindow()
  ********************************************************************/
 void charWindow::open(character* pers)
 {
+   farsoOptions fopt;
    dirs dir;
    int i;
 
@@ -237,13 +239,15 @@ void charWindow::open(character* pers)
          if(meff->getValue() > 0)
          {
             /* green text */
-            infoBar->addText(meff->toReadableText(pers), DNT_FONT_ARIAL, 10, 
+            infoBar->addText(meff->toReadableText(pers), 
+                  fopt.getDefaultFont(), 10, 
                   DNT_FONT_STYLE_ITALIC, DNT_FONT_ALIGN_LEFT, 20, 200, 12);
          }
          else
          {
             /* red text */
-            infoBar->addText(meff->toReadableText(pers), DNT_FONT_ARIAL, 10, 
+            infoBar->addText(meff->toReadableText(pers), 
+                  fopt.getDefaultFont(), 10, 
                   DNT_FONT_STYLE_ITALIC, DNT_FONT_ALIGN_LEFT, 200, 20, 12);
          }
          meff = (modEffect*)meff->getNext();

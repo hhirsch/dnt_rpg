@@ -23,13 +23,12 @@ LIBS= @LIBS@
 EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 
 OBJSPP = button.o color.o cxsel.o dntfont.o draw.o \
-         farso.o filesel.o guilist.o healthBar.o \
+         farso.o farsoopts.o filesel.o guilist.o healthBar.o \
 			interface.o listtext.o menu.o messages.o \
 			mouse.o picture.o rolbar.o seltext.o \
 			tabbutton.o tabbox.o textbar.o textbox.o window.o
 EFLAGSGL = -L/usr/X11R6/lib -lGLU -lGL -lSDL -lSDL_image
 PROGFLAGs = 
-BIN = ../../bin/
 
 all: libfarso.a
 
@@ -38,7 +37,7 @@ libfarso.a: $(OBJSPP)
 	@ar -rcs $@ $^
 	@printf "\e[0;32mLinked.\e[0;0m\n"
 
-button.o: button.h button.cpp color.h draw.h mouse.h guiobject.h
+button.o: button.h button.cpp color.h draw.h mouse.h guiobject.h farsoopts.h
 	@printf "Making $@...\n"
 	@$(CC) $(CFLAGS) button.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
@@ -48,12 +47,12 @@ color.o: color.h color.cpp
 	@$(CC) $(CFLAGS) color.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
-cxsel.o: cxsel.h cxsel.cpp color.h draw.h guiobject.h
+cxsel.o: cxsel.h cxsel.cpp color.h draw.h guiobject.h farsoopts.h
 	@printf "Making $@...\n"
 	@$(CC) $(CFLAGS) cxsel.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
-dntfont.o: dntfont.h dntfont.cpp
+dntfont.o: dntfont.h dntfont.cpp farsoopts.h
 	@printf "Making $@...\n"
 	@$(CC) $(CFLAGS) dntfont.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
@@ -66,45 +65,53 @@ draw.o: draw.h draw.cpp
 farso.o: farso.h farso.cpp draw.h button.h color.h \
          cxsel.h window.h interface.h dntfont.h healthBar.h \
 			textbox.h rolbar.h seltext.h textbar.h guiobject.h \
-			guilist.h picture.h menu.h mouse.h tabbutton.h messages.h
+			guilist.h picture.h menu.h mouse.h tabbutton.h messages.h \
+			farsoopts.h
 	@printf "Making $@...\n"
 	@$(CC) $(CFLAGS) farso.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
+farsoopts.o: farsoopts.h farsoopts.cpp
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) farsoopts.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
+
 filesel.o: filesel.h filesel.cpp color.h draw.h guiobject.h \
-           textbar.h button.h listtext.h
+           textbar.h button.h listtext.h farsoopts.h
 	@printf "Making $@...\n"
 	@$(CC) $(CFLAGS) filesel.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 guilist.o: guilist.h guilist.cpp guiobject.h button.h cxsel.h \
            picture.h textbox.h seltext.h tabbutton.h textbar.h \
-			  rolbar.h listtext.h
+			  rolbar.h listtext.h farsoopts.h
 	@printf "Making $@...\n"
 	@$(CC) $(CFLAGS) guilist.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
-healthBar.o: healthBar.h healthBar.cpp
+healthBar.o: healthBar.h healthBar.cpp farsoopts.h
 	@printf "Making $@...\n"
 	@$(CC) $(CFLAGS) healthBar.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
-interface.o: interface.h interface.cpp window.h mouse.h menu.h guilist.h
+interface.o: interface.h interface.cpp window.h mouse.h menu.h guilist.h \
+             farsoopts.h
 	@printf "Making $@...\n"
 	@$(CC) $(CFLAGS) interface.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
-listtext.o: listtext.h listtext.cpp rolbar.h tabbutton.h
+listtext.o: listtext.h listtext.cpp rolbar.h tabbutton.h farsoopts.h
 	@printf "Making $@...\n"
 	@$(CC) $(CFLAGS) listtext.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
-menu.o: menu.h menu.cpp color.h draw.h dntfont.h mouse.h guiobject.h guilist.h
+menu.o: menu.h menu.cpp color.h draw.h dntfont.h mouse.h guiobject.h guilist.h \
+		  farsoopts.h
 	@printf "Making $@...\n"
 	@$(CC) $(CFLAGS) menu.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
-messages.o: messages.h messages.cpp farso.h
+messages.o: messages.h messages.cpp farso.h farsoopts.h
 	@printf "Making $@...\n"
 	@$(CC) $(CFLAGS) messages.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
@@ -114,48 +121,52 @@ mouse.o: mouse.h mouse.cpp
 	@$(CC) $(CFLAGS) mouse.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
-picture.o: picture.h picture.cpp draw.h guiobject.h
+picture.o: picture.h picture.cpp draw.h guiobject.h farsoopts.h
 	@printf "Making $@...\n"
 	@$(CC) $(CFLAGS) picture.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 rolbar.o: rolbar.h rolbar.cpp guiobject.h color.h draw.h \
-          mouse.h button.h textbox.h
+          mouse.h button.h textbox.h farsoopts.h
 	@printf "Making $@...\n"
 	@$(CC) $(CFLAGS) rolbar.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
-seltext.o: seltext.h seltext.cpp draw.h dntfont.h color.h mouse.h guiobject.h
+seltext.o: seltext.h seltext.cpp draw.h dntfont.h color.h mouse.h guiobject.h \
+		     farsoopts.h
 	@printf "Making $@...\n"
 	@$(CC) $(CFLAGS) seltext.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
-tabbutton.o: tabbutton.h tabbutton.cpp picture.h color.h guiobject.h
+tabbutton.o: tabbutton.h tabbutton.cpp picture.h color.h guiobject.h farsoopts.h
 	@printf "Making $@...\n"
 	@$(CC) $(CFLAGS) tabbutton.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
-tabbox.o: tabbox.h tabbox.cpp color.h guiobject.h guilist.h
+tabbox.o: tabbox.h tabbox.cpp color.h guiobject.h guilist.h farsoopts.h
 	@printf "Making $@...\n"
 	@$(CC) $(CFLAGS) tabbox.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
-textbar.o: textbar.h textbar.cpp color.h draw.h dntfont.h mouse.h guiobject.h
+textbar.o: textbar.h textbar.cpp color.h draw.h dntfont.h mouse.h guiobject.h \
+		     farsoopts.h
 	@printf "Making $@...\n"
 	@$(CC) $(CFLAGS) textbar.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
-textbox.o: textbox.h textbox.cpp color.h draw.h dntfont.h guiobject.h
+textbox.o: textbox.h textbox.cpp color.h draw.h dntfont.h guiobject.h \
+           farsoopts.h
 	@printf "Making $@...\n"
 	@$(CC) $(CFLAGS) textbox.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
-window.o: window.h window.cpp draw.h color.h dntfont.h guiobject.h guilist.h
+window.o: window.h window.cpp draw.h color.h dntfont.h guiobject.h guilist.h \
+		    farsoopts.h
 	@printf "Making $@...\n"
 	@$(CC) $(CFLAGS) $(MOVOPACO) window.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 clean:
 	@printf "Cleaning Gui Bin Files...\n"
-	@\rm -rf *.o *.e *.a $(BIN)teste $(BIN)fntEditor $(BIN)testaObj $(BIN)tp2
+	@\rm -rf *.o *.e *.a 
 	@printf "\e[0;32mCleaned.\e[0;0m\n"

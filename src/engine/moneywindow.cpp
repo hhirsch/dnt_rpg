@@ -21,6 +21,7 @@
 #include "moneywindow.h"
 #include "barterwindow.h"
 #include "modstate.h"
+#include "../gui/farsoopts.h"
 using namespace std;
 
 /********************************************************************
@@ -125,6 +126,7 @@ void moneyWindow::open(inventory* source, float pX, float pZ)
  ********************************************************************/
 void moneyWindow::open()
 {
+   farsoOptions fopts;
    dntFont fnt;
    /* Set open position */
    int centerY = SCREEN_Y / 2;
@@ -145,11 +147,11 @@ void moneyWindow::open()
 
    decButton = intWindow->getObjectsList()->insertButton(10, 20,
                24, 38, fnt.createUnicode(0x25C4),0);
-   decButton->defineFont(DNT_FONT_ARIAL, 9);
+   decButton->defineFont(fopts.getDefaultFont(), 9);
    qtyText = intWindow->getObjectsList()->insertTextBox(25,20,95,38,1,buf);
    incButton = intWindow->getObjectsList()->insertButton(96,20,110,38,
          fnt.createUnicode(0x25BA),0);
-   incButton->defineFont(DNT_FONT_ARIAL, 9);
+   incButton->defineFont(fopts.getDefaultFont(), 9);
    allButton = intWindow->getObjectsList()->insertButton(114,20,164,38,
          gettext("All"),true);
 

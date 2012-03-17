@@ -20,6 +20,8 @@
 
 #include "briefing.h"
 #include "../etc/dirs.h"
+#include "../lang/translate.h"
+#include "util.h"
 
 using namespace std;
 
@@ -126,7 +128,8 @@ void briefing::addText(string text)
  ***********************************************************************/
 void briefing::addText(string text, int R, int G, int B)
 {
-   addText(text, DNT_FONT_ARIAL, 10, DNT_FONT_STYLE_NORMAL, 
+   dirs dir;
+   addText(text, dir.getRealFile(DNT_FONT_ARIAL), 10, DNT_FONT_STYLE_NORMAL, 
            DNT_FONT_ALIGN_LEFT, R, G, B); 
 }
 

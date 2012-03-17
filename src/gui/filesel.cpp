@@ -34,7 +34,7 @@ using namespace std;
 #include "filesel.h"
 #include "guilist.h"
 #include "interface.h"
-
+#include "farsoopts.h"
 
 #ifndef _MSC_VER
    #define FILE_SEL_SLASH '/'
@@ -49,6 +49,7 @@ using namespace std;
 fileSel::fileSel(int x, int y, bool load, string dir, guiList* list, 
       SDL_Surface* surface,  bool nav):guiObject(surface)
 {
+   farsoOptions opts;
    x1 = x;
    x2 = x+250;
    y1 = y;
@@ -69,9 +70,10 @@ fileSel::fileSel(int x, int y, bool load, string dir, guiList* list,
    textFiles = l->insertListText(x, y+17, x+250, y+130);
 
    /* Create the buttons */
-   cancelButton = l->insertButton(x, y+135, x+70, y+154, gettext("Cancel"),1);
+   cancelButton = l->insertButton(x, y+135, x+70, y+154, 
+         opts.getCancelLabel(), 1);
    acceptButton = l->insertButton(x+180, y+135, x+250, y+154, 
-                                  gettext("Confirm"), 1);
+         opts.getConfirmLabel(), 1);
 
    /* Create the current file text */
    if(loading)

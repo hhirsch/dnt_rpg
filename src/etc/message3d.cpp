@@ -22,6 +22,8 @@
 #include "../gui/dntfont.h"
 #include "../gui/draw.h"
 #include "../engine/options.h"
+#include "../engine/util.h"
+#include "../etc/dirs.h"
 using namespace std;
 
 ///////////////////////////////////////////////////////////////////////////
@@ -62,6 +64,7 @@ message3d::message3d(GLfloat x, GLfloat y, GLfloat z, std::string msg,
 void message3d::init(GLfloat x, GLfloat y, GLfloat z, string msg,
       GLfloat R, GLfloat G, GLfloat B, string font, int fontSize)
 {
+   dirs dir;
    dntFont fnt;
 
    /* Define Machine Bit Order */
@@ -88,7 +91,7 @@ void message3d::init(GLfloat x, GLfloat y, GLfloat z, string msg,
    isStatic = false;
 
    /* Define the font and sizes */
-   fnt.defineFont(font, fontSize);
+   fnt.defineFont(dir.getRealFile(font), fontSize);
    fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
    fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
    size = fnt.getStringWidth(message) + 8;

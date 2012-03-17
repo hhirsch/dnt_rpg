@@ -20,7 +20,6 @@
 
 #include "picture.h"
 
-#include "../lang/translate.h"
 #ifdef __APPLE__
    #include <SDL_image/SDL_image.h>
 #else

@@ -44,6 +44,14 @@ editor::editor()
    features->init(dir.getRealFile("feats/"),
                   dir.getRealFile("feats/feats.ftl"));
 
+   /* Set Farso Options */
+   farsoOptions farOpt;
+   farOpt.setNeededDefaults(dir.getRealFile(DNT_FONT_ARIAL),
+         dir.getRealFile("icons/maximize.png"),
+         dir.getRealFile("icons/close.png"),
+         gettext("Maximize"), gettext("Close"), gettext("Confirm"),
+         gettext("Cancel"));
+
    /* Init things */
    options opt;
    Farso_Init(&screen,"DccNiTghtmare Map Editor", opt.getScreenWidth(),

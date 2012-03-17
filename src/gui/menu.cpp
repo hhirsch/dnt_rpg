@@ -19,6 +19,7 @@
 */
 
 #include "menu.h"
+#include "farsoopts.h"
 
 /*********************************************************
  *                       Destructor                      *
@@ -143,7 +144,8 @@ void menu::setPosition(int xa, int ya)
 void menu::draw(int pos)
 {
    dntFont fnt;
-   fnt.defineFont(DNT_FONT_ARIAL, 10);
+   farsoOptions opt;
+   fnt.defineFont(opt.getDefaultFont(), 10);
    fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
    fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
 
@@ -266,8 +268,9 @@ int menu::getMaxCharac()
 int menu::run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
               int *pronto, int Xjan, int Yjan)
 {
+   farsoOptions opt;
    dntFont fnt;
-   fnt.defineFont(DNT_FONT_ARIAL, 10);
+   fnt.defineFont(opt.getDefaultFont(), 10);
 
    /* Draws */
    draw(0);

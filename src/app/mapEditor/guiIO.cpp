@@ -21,6 +21,7 @@
 #include "guiIO.h"
 #include "../../engine/util.h"
 #include "../../engine/cursor.h"
+#include "../../gui/farsoopts.h"
 
 using namespace std;
 
@@ -227,6 +228,7 @@ void guiIO::openNavWindow()
  ****************************************************************/
 void guiIO::openMessageWindow()
 {
+   farsoOptions fopt;
    int width = SCREEN_X - 153 - 68;
    messageWindow = gui->insertWindow(0,SCREEN_Y-38,SCREEN_X-220,SCREEN_Y-1,
                                      "Messages");
@@ -234,7 +236,7 @@ void guiIO::openMessageWindow()
                  width-90,31,0,"Welcome to DccNiTghtmare Map Editor!");
    mouseCoordText = messageWindow->getObjectsList()->insertTextBox(width-90,16,
          width-7, 31, 0, "");
-   mouseCoordText->setFont(DNT_FONT_ARIAL, 9, DNT_FONT_ALIGN_CENTER);
+   mouseCoordText->setFont(fopt.getDefaultFont(), 9, DNT_FONT_ALIGN_CENTER);
    messageWindow->setAttributes(false,true,false,false);
    messageWindow->setExternPointer(&messageWindow);
    gui->openWindow(messageWindow);

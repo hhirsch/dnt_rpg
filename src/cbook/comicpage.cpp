@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -22,6 +22,7 @@
 #include "../etc/dirs.h"
 #include "../gui/dntfont.h"
 #include "../gui/draw.h"
+#include "../engine/util.h"
 
 #include <iostream>
 
@@ -211,7 +212,8 @@ void comicPage::insertText(int x1, int y1, int x2, int y2, string text,
    if(texture != NULL)
    {
       dntFont fnt;
-      fnt.defineFont(DNT_FONT_TIMES, fontSize);
+      dirs dir;
+      fnt.defineFont(dir.getRealFile(DNT_FONT_TIMES), fontSize);
       fnt.defineFontAlign(DNT_FONT_ALIGN_CENTER);
       fnt.defineFontStyle(fontStyle);
 
