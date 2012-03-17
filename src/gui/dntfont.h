@@ -30,6 +30,7 @@
 #endif
 
 #include <string>
+#include <list>
 
 #define DNT_FONT_ARIAL     "fnt/arial.ttf"
 #define DNT_FONT_TIMES     "fnt/times.ttf"
@@ -48,10 +49,9 @@
 
 #define MAX_TEXT  8192
 
-#include "../etc/list.h"
 
 /*! Single loaded font */
-class loadedFont: public dntListElement
+class loadedFont
 {
    public:
       std::string fontName;   /**< The font Name */
@@ -61,7 +61,7 @@ class loadedFont: public dntListElement
 };
 
 /*! The loaded fonts */
-class loadedFontList: public dntList
+class loadedFontList
 {
    public:
       /*! Constructor */
@@ -69,10 +69,8 @@ class loadedFontList: public dntList
       /*! Destructor */
       ~loadedFontList();
 
-   protected:
-      /*! Free the loaded font object
-       * \param obj -> loaded font to delete */
-      void freeElement(dntListElement* obj);
+      std::list<loadedFont*>fonts;
+
 };
 
 /*! The DNT font class. Used to write texts on surfaces with ttf fonts. */

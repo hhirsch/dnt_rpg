@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -40,24 +40,18 @@ loadedFontList::loadedFontList()
  **********************************************************************/
 loadedFontList::~loadedFontList()
 {
-   clearList();
-}
-
-/**********************************************************************
- *                              freeElement                           *
- **********************************************************************/
-void loadedFontList::freeElement(dntListElement* obj)
-{
-   loadedFont* fnt = (loadedFont*)obj;
-   
-   /* Close the font, before delete */
-   if(fnt->font)
+   loadedFont* fnt;
+   std::list<loadedFont*>::iterator it;
+   for(it=fonts.begin(); it != fonts.end(); it++)
    {
-      TTF_CloseFont(fnt->font);
+      fnt = (*it);
+      if(fnt->font)
+      {
+         TTF_CloseFont(fnt->font);
+      }
+      delete(fnt);
    }
-
-   /* Delete it! */
-   delete(fnt);
+   fonts.clear();
 }
 
 /**********************************************************************
@@ -101,16 +95,16 @@ void dntFont::end()
  **********************************************************************/
 loadedFont* dntFont::findFont(string fontName, int fontSize)
 {
-   int i;
-   loadedFont* fnt = (loadedFont*)fonts->getFirst();
-   for(i = 0; i < fonts->getTotal(); i++)
+   std::list<loadedFont*>::iterator it;
+   loadedFont* fnt;
+   for(it=fonts->fonts.begin(); it != fonts->fonts.end(); it++)
    {
+      fnt = (*it);
       if( (fontName == fnt->fontName) && (fontSize == fnt->fontSize) )
       {
          /* Found */
          return(fnt);
       }
-      fnt = (loadedFont*)fnt->getNext();
    }
    /* Not found */
    return(NULL);
@@ -142,7 +136,7 @@ loadedFont* dntFont::loadFont(string fontName, int fontSize)
          return(NULL);
       }
 
-      fonts->insert(fnt);
+      fonts->fonts.push_back(fnt);
    }
 
    return(fnt);
