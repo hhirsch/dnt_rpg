@@ -28,7 +28,7 @@ using namespace std;
  **************************************************************/
 listText::listText(int xa, int ya, int xb, int yb, SDL_Surface* surface,
                    guiList* list)
-         : guiObject(surface), dntList(DNT_LIST_TYPE_ADD_AT_END)
+         : guiObject(surface)
 {
    int i;
    /* Nullify elements */
@@ -78,16 +78,9 @@ listText::~listText()
 {
    /* Delete the pointers */
    delete [] listButtons;
-   clearList();
-}
-
-/**************************************************************
- *                         freeElement                        *
- **************************************************************/
-void listText::freeElement(dntListElement* obj)
-{
-   textElement* tx = (textElement*)obj;
-   delete(tx);
+   
+   /* Clear the list */
+   textList.clear();
 }
 
 /**************************************************************
@@ -95,7 +88,7 @@ void listText::freeElement(dntListElement* obj)
  **************************************************************/
 void listText::clear()
 {
-   clearList();
+   textList.clear();
    roll->setText("");
 
    defineTabButton();
@@ -115,9 +108,7 @@ void listText::insertText(string text)
  **************************************************************/
 void listText::insertText(string text, int r, int g, int b)
 {
-   textElement* tel = new textElement();
-   tel->text = text;
-   insert(tel);
+   textList.push_back(text);
    if(r == -1)
    {
       roll->addText(text);
@@ -136,20 +127,16 @@ void listText::insertText(string text, int r, int g, int b)
  **************************************************************/
 void listText::removeText(string text)
 {
-   int i;
-   int prevTotal = total;
-   textElement* tel = (textElement*)first;
-   textElement* taux;
-   for(i=0; i < prevTotal; i++)
+   std::list<std::string>::iterator it;
+   for(it=textList.begin(); it != textList.end(); it++)
    {
-      taux = (textElement*)tel->getNext();
-      if(tel->text == text)
+      if((*it) == text)
       {
-         remove(tel);
+         textList.remove((*it));
+         defineTabButton();
+         return;
       }
-      tel = taux;
    }
-
    defineTabButton();
 }
 
@@ -163,7 +150,7 @@ void listText::defineTabButton()
 
    for(i = 0; i<maxButtons; i++)
    {
-      listButtons[i]->setAvailable(i+curInit < total);
+      listButtons[i]->setAvailable(i+curInit < (int)textList.size());
    }
 }
 
@@ -204,15 +191,15 @@ bool listText::eventGot(int type, guiObject* object)
          if(object == (guiObject*)listButtons[i])
          {
             int pos = roll->getFirstLine() + i;
-            if(pos < total)
+            if(pos < (int)textList.size())
             {
                int k;
-               textElement* tel = (textElement*)first;
+               std::list<std::string>::iterator it = textList.begin();
                for(k = 0; k < pos; k++)
                {
-                  tel = (textElement*)tel->getNext();
+                  it++;
                }
-               selectedText = tel->text;
+               selectedText = (*it);
                selectedPos = pos;
             }
             return(true);

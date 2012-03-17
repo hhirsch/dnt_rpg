@@ -21,7 +21,7 @@
 #ifndef _farso_textbox_h
 #define _farso_textbox_h
 
-#include "../etc/list.h"
+#include <list>
 
 #include "color.h"
 #include "draw.h"
@@ -37,7 +37,7 @@
 
 /*! The textLine represents each line of text in the
  * textBox, with his own font parameters and colors */
-class textLine: public dntListElement
+class textLine
 {  
    public:
       std::string text;    /**< Text of the line */
@@ -52,7 +52,7 @@ class textLine: public dntListElement
 };
 
 /*! Class of text box representation. */
-class textBox: public guiObject, public dntList
+class textBox: public guiObject
 {
    public:
       /*! Constructor 
@@ -170,11 +170,6 @@ class textBox: public guiObject, public dntList
        * render on empty - with full alpha - surfaces) */
       void setSolid();
    
-   protected:
-      /*! Delete the textLine
-       * \param obj -> pointer to the element to delete */
-      void freeElement(dntListElement* obj);
-   
    private:
 
       /*! Clear the lines list */
@@ -202,6 +197,8 @@ class textBox: public guiObject, public dntList
       int fontStyle;       /**< Font Style */
       bool solid;          /**< Solid Mode */
       farso_colors Colors; /**< Colors */
+
+      std::list<textLine*>lines; /**< Text line list */
 };
 
 

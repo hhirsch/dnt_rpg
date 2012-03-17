@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -77,16 +77,12 @@ tabBox::tabBox(int xa, int ya, int xb, int yb, SDL_Surface* screen)
  ***********************************************************************/
 tabBox::~tabBox()
 {
-   clearList();
-}
-
-/***********************************************************************
- *                             freeElement                             *
- ***********************************************************************/
-void tabBox::freeElement(dntListElement* obj)
-{
-   tabObj* tb = (tabObj*)obj;
-   delete(tb);
+   std::list<tabObj*>::iterator it;
+   for(it=tabs.begin(); it != tabs.end(); it++)
+   {
+      delete(*it);
+   }
+   tabs.clear();
 }
 
 /***********************************************************************
@@ -120,16 +116,15 @@ string tabBox::getActiveTitle()
 tabObj* tabBox::getObject(int opt)
 {
    int i;
-   tabObj* obj = (tabObj*)first;
-
    /* Search for the element */
-   if( (opt < total) && (opt >= 0))
+   if( (opt < (int)tabs.size()) && (opt >= 0))
    {
+      std::list<tabObj*>::iterator it=tabs.begin();
       for(i = 0; i < opt; i++)
       {
-         obj = (tabObj*)obj->getNext();
+         it++;
       }
-      return(obj);
+      return(*it);
    }
 
    return(NULL);
@@ -155,18 +150,15 @@ guiList* tabBox::getList(int opt)
  ***********************************************************************/
 guiList* tabBox::getList(string title)
 {
-   int i;
-   tabObj* obj = (tabObj*)first;
-
    /* Search for the element */
-   for(i = 0; i < total; i++)
+   std::list<tabObj*>::iterator it;
+   for(it = tabs.begin(); it != tabs.end(); it++)
    {
-      if(obj->title == title)
+      if((*it)->title == title)
       {
          /* Found it! */
-         return(obj->list);
+         return((*it)->list);
       }
-      obj = (tabObj*)obj->getNext();
    }
 
    return(NULL);
@@ -186,7 +178,7 @@ guiList* tabBox::insertOption(string title)
       obj->title = title;
 
       /* Insert it */
-      insert(obj);
+      tabs.push_front(obj);
 
       /* Define the active one */
       active = obj;
@@ -202,13 +194,13 @@ guiList* tabBox::insertOption(string title)
  ***********************************************************************/
 void tabBox::draw()
 {
-   if(total == 0)
+   if(tabs.size() == 0)
    {
      return; //nothing to draw
    }
 
-   int i;
-   int incX = (x2-x1) / total;
+   unsigned int i;
+   int incX = (x2-x1) / tabs.size();
    int posX = 0;
    int endPos = 0;
    tabObj* obj;
@@ -237,12 +229,14 @@ void tabBox::draw()
                      colors.colorCont[1].B, colors.colorCont[1].A);
 
    /* Draw All Titles */
-   obj = (tabObj*)first;
    posX = x1;
-   for(i = 0; i < total; i++)
+   std::list<tabObj*>::iterator it;
+   i = 0;
+   for(it = tabs.begin(); it != tabs.end(); it++)
    {
+      obj = (*it);
       /* Define Final position */
-      if(i != total-1)
+      if(i != tabs.size()-1)
       {
          endPos = posX+incX-1;
       }
@@ -285,7 +279,7 @@ void tabBox::draw()
 
       /* Next! */
       posX += incX;
-      obj = (tabObj*)obj->getNext();
+      i++;
    }
 
    /* Draw all active objects */
@@ -300,11 +294,11 @@ void tabBox::draw()
  ***********************************************************************/
 bool tabBox::verifyChanges(int mouseX, int mouseY)
 {
-   if(total == 0)
+   if(tabs.size() == 0)
    {
       return(false);//nothing to verify
    }
-   int incX = (x2-x1) / total;
+   int incX = (x2-x1) / tabs.size();
    int cur = 0;
    tabObj* obj = NULL;
 

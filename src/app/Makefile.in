@@ -38,14 +38,7 @@ OBJSCBOOK = $(ENDCBOOK)comicbox.o $(ENDCBOOK)comicbook.o \
             $(ENDCBOOK)comicpage.o
 OBJSMAPA = $(ENDMAP)map.o $(ENDMAP)mapfog.o $(ENDMAP)maplights.o \
            $(ENDMAP)maproad.o $(ENDMAP)mapsound.o $(ENDMAP)door.o
-OBJSGUI = $(ENDGUI)textbar.o $(ENDGUI)button.o $(ENDGUI)color.o \
-          $(ENDGUI)cxsel.o $(ENDGUI)draw.o $(ENDGUI)messages.o \
-          $(ENDGUI)interface.o $(ENDGUI)farso.o $(ENDGUI)filesel.o \
-          $(ENDGUI)picture.o $(ENDGUI)dntfont.o $(ENDGUI)healthBar.o \
-          $(ENDGUI)window.o $(ENDGUI)guilist.o $(ENDGUI)listtext.o \
-          $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)textbox.o \
-          $(ENDGUI)rolbar.o $(ENDGUI)seltext.o $(ENDGUI)tabbutton.o \
-          $(ENDGUI)tabbox.o
+FARSOLIB = $(ENDGUI)libfarso.a
 OBJSNET = #$(ENDNET)client.o $(ENDNET)common.o
 OBJSIA = $(ENDIA)agent.o $(ENDIA)pattAgent.o $(ENDIA)potentAgent.o \
          $(ENDIA)astar.o $(ENDIA)fuzzy.o $(ENDIA)fuzzyvariable.o \
@@ -99,7 +92,7 @@ SUBSYSTEMS = mapEditor partEditor
 OBJS = DlgEditor.o
 BIN = ../../bin/
 
-OBJSFNT = $(OBJSGUI) $(ENDENGINE)culling.o $(ENDENGINE)util.o
+OBJSFNT = $(ENDENGINE)culling.o $(ENDENGINE)util.o
 
 all: parts $(BIN)heightmap2dnt
 
@@ -108,12 +101,12 @@ heightmap2dnt.o: heightmap2dnt.cpp
 	@$(CC) $(CFLAGS) heightmap2dnt.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"	
 
-$(BIN)heightmap2dnt: $(OBJSGUI) $(OBJSIA) $(OBJSMAPA) \
+$(BIN)heightmap2dnt: $(FARSOLIB) $(OBJSIA) $(OBJSMAPA) \
                      $(OBJSCBOOK) $(OBJSENGINE) $(OBJSPART) \
 							$(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) \
 							$(OBJSSOUND) $(OBJSFIGHT) heightmap2dnt.o
 	@printf "Linking $@...\n"
-	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSIA) $(OBJSCBOOK) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) heightmap2dnt.o -o $@
+	@$(CC) $(EFLAGS) $(OBJSIA) $(OBJSCBOOK) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) heightmap2dnt.o $(FARSOLIB) -o $@
 	@printf "\e[0;32mLinked\e[0;0m ($@)\n"
 
 parts:

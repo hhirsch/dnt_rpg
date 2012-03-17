@@ -21,7 +21,7 @@
 #ifndef _farso_tab_box_h
 #define _farso_tab_box_h
 
-#include "../etc/list.h"
+#include <list>
 
 #include "color.h"
 #include "draw.h"
@@ -31,7 +31,7 @@
 
 #include <string>
 /*! tabObj is used to keep information about a single option at the tabBox */
-class tabObj: public dntListElement
+class tabObj
 {
    public:
       /*! Constructor */
@@ -47,7 +47,7 @@ class tabObj: public dntListElement
  * gui objects list for each tab option, only displaying one
  * per time (that that is selected). 
  * \note each guiList can have only one tabBox */
-class tabBox: public guiObject, public dntList
+class tabBox: public guiObject
 {
    public:
       /*! Constructor 
@@ -100,9 +100,7 @@ class tabBox: public guiObject, public dntList
        * \return -> pointer to the found tabObj or NULL */
       tabObj* getObject(int opt);
 
-      /*! Delete a tabObj.
-       * \param obj -> tabObj to delete */
-      void freeElement(dntListElement* obj);
+      std::list<tabObj*> tabs;
 
       tabObj* active;  /**< The active tabObj */
 };

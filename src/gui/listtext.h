@@ -21,22 +21,15 @@
 #ifndef _farso_listtext_h
 #define _farso_listtext_h
 
-#include "../etc/list.h"
+#include <list>
 
 #include "rolbar.h"
 #include "tabbutton.h"
 
 class guiList;
 
-/*! A element of text on listText */
-class textElement: public dntListElement
-{
-   public:
-      std::string text;            /**< The text of the element */
-};
-
 /*! The listText class. Is a list of texts elements to select one */
-class listText: public guiObject, public dntList
+class listText: public guiObject
 {
    public:
       /*! Constructor 
@@ -93,16 +86,13 @@ class listText: public guiObject, public dntList
       /*! Define tabButton buttons avaialabilility */
       void defineTabButton();
 
-      /*! Free the textElement
-       * \param obj -> pointer to the text element */
-      void freeElement(dntListElement* dnt);
-
    private:
       guiList* intList;           /**< Internal GUI Objects List */
       oneTabButton** listButtons; /**< Buttons of the List*/
       std::string selectedText;   /**< Text selected */
       int selectedPos;            /**< Position on list of the selected */
       int maxButtons;             /**< Max number of buttons */
+      std::list<std::string>textList; /**< List of text elements */
 };
 
 #endif

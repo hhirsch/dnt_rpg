@@ -31,7 +31,7 @@ menu::~menu()
  *                      Constructor                      *
  *********************************************************/
 menu::menu(int xa, int ya, int sWidth, int sHeight, SDL_Surface* surface)
-     :guiList(sWidth, sHeight, surface, true, DNT_LIST_TYPE_ADD_AT_END)
+     :guiList(sWidth, sHeight, surface, true, LIST_TYPE_ADD_AT_END)
 {
    x = xa;
    y = ya;
@@ -92,11 +92,11 @@ guiObject* menu::getItem(int i)
    {
       if((*it)->type != FARSO_OBJECT_PICTURE)
       {
+         count++;
          if(count == i)
          {
             return(*it);  
          }
-         count++;
       }
    }
    return(NULL);

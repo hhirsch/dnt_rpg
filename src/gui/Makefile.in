@@ -31,9 +31,12 @@ EFLAGSGL = -L/usr/X11R6/lib -lGLU -lGL -lSDL -lSDL_image
 PROGFLAGs = 
 BIN = ../../bin/
 
-all: guiobject  
+all: libfarso.a
 
-guiobject: $(OBJSPP)
+libfarso.a: $(OBJSPP)
+	@printf "Linking $a...\n"
+	@ar -rcs $@ $^
+	@printf "\e[0;32mLinked.\e[0;0m\n"
 
 button.o: button.h button.cpp color.h draw.h mouse.h guiobject.h
 	@printf "Making $@...\n"
@@ -154,5 +157,5 @@ window.o: window.h window.cpp draw.h color.h dntfont.h guiobject.h guilist.h
 
 clean:
 	@printf "Cleaning Gui Bin Files...\n"
-	@\rm -rf *.o *.e $(BIN)teste $(BIN)fntEditor $(BIN)testaObj $(BIN)tp2
+	@\rm -rf *.o *.e *.a $(BIN)teste $(BIN)fntEditor $(BIN)testaObj $(BIN)tp2
 	@printf "\e[0;32mCleaned.\e[0;0m\n"
