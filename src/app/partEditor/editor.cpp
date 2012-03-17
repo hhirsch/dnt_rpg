@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -48,6 +48,7 @@ editor::editor()
 
    farsoOptions farOpt;
    farOpt.setNeededDefaults(dir.getRealFile(DNT_FONT_ARIAL),
+         dir.getRealFile("cursors/Walk.png"),
          dir.getRealFile("icons/maximize.png"),
          dir.getRealFile("icons/close.png"),
          "Maximize", "Close", "Confirm", "Cancel");

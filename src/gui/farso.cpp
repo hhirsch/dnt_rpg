@@ -19,6 +19,7 @@
 */
 
 #include "farso.h"
+#include "mouse.h"
 
 #include <iostream>
 using namespace std;
@@ -62,6 +63,9 @@ void Farso_Init(SDL_Surface **screen, string title, int width, int height,
 
     dntFont fnt;
     fnt.init();
+
+    MouseCursor cursors;
+    cursors.init();
 }
 
 /************************************************************
@@ -139,6 +143,9 @@ void Farso_End(SDL_Surface *screen)
 {
    dntFont fnt;
    fnt.end();
+
+   MouseCursor cursors;
+   cursors.finish();
 }
 
 

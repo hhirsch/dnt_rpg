@@ -21,33 +21,28 @@
 #ifndef _dnt_cursor_h
 #define _dnt_cursor_h
 
-#include <SDL/SDL_opengl.h>
-#include <SDL/SDL.h>
-#ifdef __APPLE__
-   #include <SDL_image/SDL_image.h>
-#else
-   #include <SDL/SDL_image.h>
-#endif
-
 #include <string>
 
-#define CURSOR_WALK         0 /**< Walk Mouse Cursor */
-#define CURSOR_ATTACK       1 /**< Attack Mouse Cursor */
-#define CURSOR_DEFEND       2 /**< Defend Mouse Cursor */
-#define CURSOR_MAPTRAVEL    3 /**< Map Travel Mouse Cursor */
-#define CURSOR_TALK         4 /**< Talk Mouse Cursor */
-#define CURSOR_GET          5 /**< Get Mouse Cursor */
-#define CURSOR_INVENTORY    6 /**< Inventory Mouse Cursor */
-#define CURSOR_DOOR         7 /**< Door Mouse Cursor */
-#define CURSOR_FORBIDDEN    8 /**< Forbidden Mouse Cursor */
-#define CURSOR_WALK_CONT    9 /**< Continuous Walk Cursor */
-#define CURSOR_USE         10 /**< Object Use */
-#define CURSOR_USER_IMAGE  11 /**< Any user image seted as cursor */
-#define CURSOR_TOTAL       12 /**< Total number of mouse cursors */
+#include "../gui/mouse.h"
 
-#define DNT_CURSOR_MAX_TEXT_OVER_TIME  220   /**< After 60ms if no update */
+enum
+{
+   CURSOR_WALK=0,     /**< Walk Mouse Cursor */
+   CURSOR_ATTACK,     /**< Attack Mouse Cursor */
+   CURSOR_DEFEND,     /**< Defend Mouse Cursor */
+   CURSOR_MAPTRAVEL,  /**< Map Travel Mouse Cursor */
+   CURSOR_TALK,       /**< Talk Mouse Cursor */
+   CURSOR_GET,        /**< Get Mouse Cursor */
+   CURSOR_INVENTORY,  /**< Inventory Mouse Cursor */
+   CURSOR_DOOR,       /**< Door Mouse Cursor */
+   CURSOR_FORBIDDEN,  /**< Forbidden Mouse Cursor */
+   CURSOR_WALK_CONT,  /**< Continuous Walk Cursor */
+   CURSOR_USE,        /**< Object Use */
+   CURSOR_TOTAL,      /**< Total number of mouse cursors */
+   CURSOR_USER_IMAGE  /**< The special User Image cursor */
+};
 
-/*! A mouse cursor class.*/
+/*! The DNT mouse cursor class.*/
 class cursor
 {
    public:
@@ -91,27 +86,8 @@ class cursor
       void setTextOverFont(std::string f);
       
    private:
-      static GLuint texture[CURSOR_TOTAL]; /**< Cursors Textures */
-      static float sizeX[CURSOR_TOTAL];    /**< Cursors Widths */
-      static float sizeY[CURSOR_TOTAL];    /**< Cursors Heights */
-      static float propX[CURSOR_TOTAL];    /**< X Proportion */
-      static float propY[CURSOR_TOTAL];    /**< Y Proportion */
-      static float hotSpot[CURSOR_TOTAL][2]; /**< HotSpot */
-      static float scaleFactor[CURSOR_TOTAL]; /**< Scale Factor */
-      static int currentCursor;            /**< Current Cursor Index */
-      
-      static std::string textOver;              /**< Text over cursor */
-      static GLuint textOverTexture;       /**< Texture of text over */
-      static int textOverWidth;            /**< Width of text over texture */
-      static int textOverHeight;           /**< Height of text over texture */
-      static Uint32 textOverInit;          /**< Time inited the display */
-      static std::string font;             /**< Font used to display */ 
-
-      /*! Load Cursor file 
-       * \param fileName -> file name of cursor
-       * \param index -> internal cursor index */
-      void loadCursor(std::string fileName, int index);
-
+      static int currentCursor;        /**< Current Cursor Index */
+      static MouseCursor mCursor;      /**< The Farso Mouse Cursor */
       
 };
 

@@ -48,8 +48,13 @@ class farsoOptions
        * \return -> path to the default font */
       std::string getDefaultFont(){return(defaultFont);};
 
+      /*! Get default cursor
+       * \return -> path to the default font */
+      std::string getDefaultCursor(){return(defaultCursor);};
+
       /*! Set the default needed options
-       * \param fntFileName -> file name of the font to use
+       * \param fntFileName -> file name of the default font to use
+       * \param cursorFileName -> file name of the default cursor image to use
        * \param maximizeIcon -> file name of the maximize icon
        * \param closeIcon -> file name of the close icon
        * \param maximizeLabel -> text for "Maximize"
@@ -57,7 +62,8 @@ class farsoOptions
        * \param confirmLabel -> text for "Confirm"
        * \param cancelLabel -> text for "Cancel"
        * \note ou must set the default font previously using any FarSo widget */
-      void setNeededDefaults(std::string fntFileName, std::string maximizeIcon,
+      void setNeededDefaults(std::string fntFileName, 
+         std::string cursorFileName, std::string maximizeIcon,
          std::string closeIcon, std::string maximizeLabel, 
          std::string closeLabel, std::string confirmLabel, 
          std::string cancelLabel);
@@ -74,6 +80,7 @@ class farsoOptions
       static int width;    /**< Current width */
       static int height;   /**< Current height */
       static std::string defaultFont; /**< The default font */
+      static std::string defaultCursor; /**< The default cursor */
       static std::string maxIcon; /**< The maximize icon fileName */
       static std::string maxLabel; /**< The maximize label */
       static std::string clIcon; /**< The close icon filename */

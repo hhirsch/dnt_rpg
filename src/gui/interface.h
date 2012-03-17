@@ -26,8 +26,6 @@
 #include "menu.h"
 #include "guilist.h"
 
-#include "../engine/cursor.h"
-
 /********************************************************************
  *                      Return's constants                          *
  ********************************************************************/
@@ -213,7 +211,7 @@ class guiInterface
       windowList* lwindows;     /**< windows list */
       guiObject* activeObject;  /**< pointer to the actived object */
       guiObject* callerObject;  /**< pointer to the caller object */
-      cursor mouseCursor;       /**< current mouse cursor */
+      MouseCursor mouseCursor;  /**< current mouse cursor */
 
 };
 

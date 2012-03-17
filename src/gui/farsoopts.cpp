@@ -24,11 +24,13 @@
  *                          setNeededDefaults                          *
  ***********************************************************************/
 void farsoOptions::setNeededDefaults(std::string fntFileName, 
+      std::string cursorFileName, 
       std::string maximizeIcon, std::string closeIcon, 
       std::string maximizeLabel, std::string closeLabel,
       std::string confirmLabel, std::string cancelLabel)
 {
    farsoOptions::defaultFont = fntFileName;
+   farsoOptions::defaultCursor = cursorFileName;
    farsoOptions::maxIcon = maximizeIcon;
    farsoOptions::maxLabel = maximizeLabel;
    farsoOptions::clIcon = closeIcon;
@@ -44,6 +46,7 @@ bool farsoOptions::languageIsUnicode = false;
 int farsoOptions::width = 0;
 int farsoOptions::height = 0;
 std::string farsoOptions::defaultFont = "undefined";
+std::string farsoOptions::defaultCursor = "undefined";
 std::string farsoOptions::maxIcon = "";
 std::string farsoOptions::maxLabel = "Maximize";
 std::string farsoOptions::clIcon = "";

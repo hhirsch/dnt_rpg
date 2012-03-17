@@ -61,7 +61,8 @@ int main(int argc, char **argv)
 
    /* Set Farso Options */
    farsoOptions farOpt;
-   farOpt.setNeededDefaults(dir.getRealFile(DNT_FONT_ARIAL), 
+   farOpt.setNeededDefaults(dir.getRealFile(DNT_FONT_ARIAL),
+         dir.getRealFile("cursors/Walk.png"),
          dir.getRealFile("icons/maximize.png"), 
          dir.getRealFile("icons/close.png"),
          gettext("Maximize"), gettext("Close"), gettext("Confirm"), 
