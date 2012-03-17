@@ -172,7 +172,7 @@ class window: public guiObject
 };
 
 /*! The List of Windows Class (windowList) */
-class windowList: public dntList
+class windowList
 {
    public:
       /*! Constructor */
@@ -203,11 +203,14 @@ class windowList: public dntList
        * \param jan -> pointer to the new active window */
       void setActiveWindow(window* jan);
 
-   protected:
+      /*! Clear the list, deleting all windows */
+      void clearList();
 
-      /*! Delete a window pointer
-       * \param obj -> pointer to the window */
-      void freeElement(dntListElement* obj);
+      friend class guiInterface;
+
+   protected:
+      
+      std::list<window*>list;
 
       /*! Get the most recent modal window on the list
        * \return pointer to the most recent modal window or NULL if no modal 

@@ -19,8 +19,6 @@
 */
 
 #include "menu.h"
-using namespace std;
-
 
 /*********************************************************
  *                       Destructor                      *
@@ -49,7 +47,7 @@ menu::menu(int xa, int ya, int sWidth, int sHeight, SDL_Surface* surface)
 /*********************************************************
  *                      insertItem                       *
  *********************************************************/
-void menu::insertItem(string text, bool avaible)
+void menu::insertItem(std::string text, bool avaible)
 {
    insertItem(text, "", avaible);
 } 
@@ -57,7 +55,7 @@ void menu::insertItem(string text, bool avaible)
 /*********************************************************
  *                      insertItem                       *
  *********************************************************/
-void menu::insertItem(string text, string imageFile, bool avaible)
+void menu::insertItem(std::string text, std::string imageFile, bool avaible)
 {
    textBox* novo;
 
@@ -82,26 +80,24 @@ void menu::insertItem(string text, string imageFile, bool avaible)
  *********************************************************/
 guiObject* menu::getItem(int i)
 {
-   guiObject* it= (guiObject*) first;
-   if(i <= (total-numPictures))
+   int count=0;
+   /* If searching for greater than total, for sure doesn't exist */
+   if(i > (list.size()-numPictures))
    {
-      while(it->type == FARSO_OBJECT_PICTURE)
-      {
-         /* Ignore Pictures */
-         it = (guiObject*)it->getNext();
-      }
+      return(NULL);
+   }
 
-      int aux;
-      for(aux=1;((aux < i) && (it));aux++)
+   std::list<guiObject*>::iterator it;
+   for(it=list.begin(); it != list.end(); it++)
+   {
+      if((*it)->type != FARSO_OBJECT_PICTURE)
       {
-         it = (guiObject*)it->getNext();
-         while(it->type == FARSO_OBJECT_PICTURE)
+         if(count == i)
          {
-            /* Ignore Pictures */
-            it = (guiObject*)it->getNext();
+            return(*it);  
          }
+         count++;
       }
-      return(it);  
    }
    return(NULL);
 }
@@ -155,7 +151,7 @@ void menu::draw(int pos)
    int x1 = x;
    int x2 = x1 + (maxCharac)*(fnt.getIncCP()+1)+4; 
    int y1 = y;
-   int y2 = ((total-numPictures) * MENU_ITEM_HEIGHT) + 
+   int y2 = ((list.size()-numPictures) * MENU_ITEM_HEIGHT) + 
                                          y1 + 5; /* bizarre from DOS version */
    
    /* Verify Sides */
@@ -184,11 +180,13 @@ void menu::draw(int pos)
       /*itens*/  
    int xa = x1+4;
    int ya = y1+3;
-   int k;
    int med = (MENU_ITEM_HEIGHT - 10) / 2;
-   guiObject* item = (guiObject*) first;
-   for (k=0; k < total; k++)
+   guiObject* item;
+
+   std::list<guiObject*>::iterator it;
+   for(it=list.begin(); it != list.end(); it++)
    {
+      item = (*it);
       /* Treat Pictures */
       if(item->type == FARSO_OBJECT_PICTURE)
       {
@@ -237,7 +235,6 @@ void menu::draw(int pos)
          xa = x1+4;
          ya += MENU_ITEM_HEIGHT;
       }
-      item = (guiObject*)item->getNext();
    }
   
 }
@@ -274,7 +271,7 @@ int menu::run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
 
    /* Draws */
    draw(0);
-   int altura = ((total-numPictures)*MENU_ITEM_HEIGHT)+6;
+   int altura = ((list.size()-numPictures)*MENU_ITEM_HEIGHT)+6;
    int largura = (maxCharac)*(fnt.getIncCP()+1)+5;
 
    /* Runs */
@@ -308,7 +305,7 @@ int menu::run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
    {
       actualItem --;
    }
-   else if(teclado[SDLK_DOWN] && (actualItem+1 <= total-numPictures))
+   else if(teclado[SDLK_DOWN] && (actualItem+1 <= (int)list.size()-numPictures))
    {
       actualItem++;
    }

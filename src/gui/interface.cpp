@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -75,17 +75,17 @@ guiInterface::~guiInterface()
  *********************************************************************/
 void guiInterface::verifyMouseInObjects(int x, int y, guiList* list)
 {
-   int aux;
    /* Verify if the list is valid */
    if(list == NULL)
    {
       return;
    }
 
+   std::list<guiObject*>::iterator it;
    guiObject *obj;
-   obj = (guiObject*)list->getFirst();
-   for(aux=0; aux < list->getTotal(); aux++)
+   for(it=list->list.begin(); it != list->list.end(); it++)
    {
+      obj = (*it);
       /* Test selTexto */
       if(obj->type == FARSO_OBJECT_SEL_TEXT) 
       {
@@ -122,7 +122,6 @@ void guiInterface::verifyMouseInObjects(int x, int y, guiList* list)
             focus = FARSO_FOCUS_TAB_BUTTON;
          }
       }
-      obj = (guiObject*)obj->getNext();
    }
 
    /* Verify TabBox, if defined */
@@ -144,11 +143,11 @@ void guiInterface::verifyMousePressObjects(int x, int y, guiList* list)
    }
 
    /* Here are the internal windows clicks verification */
-   guiObject *obj = (guiObject*)list->getFirst();
-   int aux;
-
-   for(aux=0; aux < list->getTotal(); aux++)
+   std::list<guiObject*>::iterator it;
+   guiObject *obj;
+   for(it=list->list.begin(); it != list->list.end(); it++)
    {
+      obj = (*it);
       if(obj->type == FARSO_OBJECT_BUTTON)
       {
          /* Verify Click on Button */
@@ -236,7 +235,6 @@ void guiInterface::verifyMousePressObjects(int x, int y, guiList* list)
             focus = FARSO_FOCUS_PICTURE;
          }
       }
-      obj = (guiObject*)obj->getNext();
    }
 
    /* Verify inner tabbox if defined */
@@ -291,11 +289,12 @@ bool guiInterface::verifyRolBars(int x, int y, guiList* list)
    }
 
    /* Now search it for rolBars */
+   std::list<guiObject*>::iterator it;
    guiObject *obj;
-   obj = (guiObject*)list->getFirst();
-   int aux;
-   for(aux=0; aux < list->getTotal(); aux++)
+   for(it=list->list.begin(); it != list->list.end(); it++)
    {
+      obj = (*it);
+
       if(obj->type == FARSO_OBJECT_ROL_BAR)
       {
          rolBar* rb = (rolBar*)obj;
@@ -306,7 +305,6 @@ bool guiInterface::verifyRolBars(int x, int y, guiList* list)
             return(true);
          }
       }
-      obj = (guiObject*)obj->getNext();
    }
 
    /* Verify Nested tabBox */
@@ -343,14 +341,13 @@ guiObject* guiInterface::manipulateEvents(int x, int y, Uint8 Mbotao,
 guiObject* guiInterface::verifyFileSelectorsEvents(guiObject* actObj, 
                                                    int& eventInfo)
 {
-   int aux;
-   guiObject *obj = (guiObject*)
-                      lwindows->getActiveWindow()->getObjectsList()->getFirst();
-
+   guiList* list = lwindows->getActiveWindow()->getObjectsList();
+   std::list<guiObject*>::iterator it;
+   guiObject *obj;
    /* pass all objects, treating file selectors */
-   for(aux=0; aux < lwindows->getActiveWindow()->getObjectsList()->getTotal(); 
-       aux++)
+   for(it=list->list.begin(); it != list->list.end(); it++)
    {
+      obj = (*it);
       /* Verify FARSO_OBJECT_FILE_SEL */
       if(obj->type == FARSO_OBJECT_FILE_SEL)
       {
@@ -376,7 +373,6 @@ guiObject* guiInterface::verifyFileSelectorsEvents(guiObject* actObj,
             focus = FARSO_FOCUS_GAME;
          }
       }
-      obj = (guiObject*)obj->getNext();
    }
    return(actObj);
 }
@@ -387,14 +383,14 @@ guiObject* guiInterface::verifyFileSelectorsEvents(guiObject* actObj,
 guiObject* guiInterface::verifyCompositeEvents(guiObject* actObj, 
                                                int& eventInfo)
 {
-   int aux;
-   guiObject *obj = (guiObject*)
-                      lwindows->getActiveWindow()->getObjectsList()->getFirst();
-
+   guiList* list = lwindows->getActiveWindow()->getObjectsList();
+   std::list<guiObject*>::iterator it;
+   guiObject *obj;
    /* pass all objects, treating those composited */
-   for(aux=0; aux < lwindows->getActiveWindow()->getObjectsList()->getTotal(); 
-       aux++)
+   for(it=list->list.begin(); it != list->list.end(); it++)
    {
+      obj = (*it);
+
       /* Verify FARSO_OBJECT_LIST_TEXT */
       if(obj->type == FARSO_OBJECT_LIST_TEXT)
       {
@@ -408,7 +404,6 @@ guiObject* guiInterface::verifyCompositeEvents(guiObject* actObj,
             return(lt);
          }
       }
-      obj = (guiObject*)obj->getNext();
    }
 
    /* Verify Warning Window */
@@ -514,10 +509,11 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
         {
            /* Test Other Windows Activation (if the current one 
             * isn't a modal window) */
-           int aux; 
-           window *jaux=(window*)lwindows->getFirst();
-           for(aux=0; aux < lwindows->getTotal(); aux++)
+           std::list<window*>::iterator it;
+           window* jaux;
+           for(it=lwindows->list.begin(); it != lwindows->list.end(); it++)
            {
+              jaux = (*it);
                if( (jaux->isVisible()) &&
                    (jaux != lwindows->getActiveWindow())  && 
                    (jaux->isMouseIn(x,y)))
@@ -528,7 +524,6 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
                     mouseX = -1;
                     return((guiObject*) jaux);
                }
-               jaux = (window*) jaux->getNext();
            }
         } 
     }
@@ -804,26 +799,29 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
  *********************************************************************/
 void guiInterface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
-   int aux;
    double depth = 0.012;
-   window* jan = (window*) lwindows->getFirst();
+   window* jan;
 
    if(lwindows->getActiveWindow() == NULL)
-     return;
+   {
+      return;
+   }
 
    glEnable(GL_BLEND);
    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
    glDisable(GL_DEPTH_TEST);
 
    /* Draw Inative Windows */
-   for(aux = 0;aux<lwindows->getTotal();aux++)
+   std::list<window*>::iterator it;
+   for(it=lwindows->list.begin(); it != lwindows->list.end(); it++)
    {
+      jan = (*it);
+
       if( (jan != lwindows->getActiveWindow()) && (jan->isVisible()) )
       {
          jan->render(depth);
           depth += 0.001;
       }
-      jan = (window*) jan->getNext();
    }
 
    /* Draw Active Window */
@@ -907,15 +905,16 @@ void guiInterface::openWindow(window* jan)
  *********************************************************************/
 bool guiInterface::mouseOnGui(int mouseX, int mouseY)
 {
-   int aux;
-   window *jaux=(window*)lwindows->getFirst();
-   for(aux=0; aux < lwindows->getTotal(); aux++)
+   window* jaux;
+   std::list<window*>::iterator it;
+   for(it=lwindows->list.begin(); it != lwindows->list.end(); it++)
    {
+      jaux = (*it);
+
       if( (jaux->isVisible()) && (jaux->isMouseIn(mouseX,mouseY)) )
       {
          return(true);
       }
-      jaux = (window*) jaux->getNext();
    }
    return(false);
 }
@@ -925,12 +924,10 @@ bool guiInterface::mouseOnGui(int mouseX, int mouseY)
  *********************************************************************/
 void guiInterface::hideAll()
 {
-   int aux;
-   window *jaux=(window*)lwindows->getFirst();
-   for(aux=0; aux < lwindows->getTotal(); aux++)
+   std::list<window*>::iterator it;
+   for(it=lwindows->list.begin(); it != lwindows->list.end(); it++)
    {
-      jaux->hide();
-      jaux = (window*) jaux->getNext();
+      (*it)->hide();
    }
 }
 
@@ -939,12 +936,10 @@ void guiInterface::hideAll()
  *********************************************************************/
 void guiInterface::showAll()
 {
-   int aux;
-   window *jaux=(window*)lwindows->getFirst();
-   for(aux=0; aux < lwindows->getTotal(); aux++)
+   std::list<window*>::iterator it;
+   for(it=lwindows->list.begin(); it != lwindows->list.end(); it++)
    {
-      jaux->show();
-      jaux = (window*) jaux->getNext();
+      (*it)->show();
    }
 }
 

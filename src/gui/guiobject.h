@@ -25,8 +25,6 @@
 #include <iostream>
 #include <string>
 
-#include "../etc/list.h"
-
 /*! The farso guiObject types */
 enum
 {
@@ -47,7 +45,7 @@ enum
 };
 
 /*! The Class guiObject is a generic interface to all GUI related objects. */
-class guiObject : public dntListElement
+class guiObject
 {
    public:
       int type;            /**< Object Type */ 
@@ -165,7 +163,6 @@ class guiObject : public dntListElement
    private:
       bool hadChanged;     /**< Flag if the had changed its draw state */
 };
-
 
 
 #endif

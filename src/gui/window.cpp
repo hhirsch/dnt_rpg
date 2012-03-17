@@ -28,7 +28,7 @@ using namespace std;
 /*********************************************************************
  *                            Constructor                            *
  *********************************************************************/
-windowList::windowList():dntList(DNT_LIST_TYPE_ADD_AT_END)
+windowList::windowList()
 {
    activeWindow = NULL;
 }
@@ -39,18 +39,24 @@ windowList::windowList():dntList(DNT_LIST_TYPE_ADD_AT_END)
 windowList::~windowList()
 {
    clearList();
-} 
-
-/*********************************************************************
- *                           freeElement                             *
- *********************************************************************/
-void windowList::freeElement(dntListElement* obj)
-{
-   /* Delete the window */
-   window* w = (window*)obj;
-   delete(w);
 }
- 
+
+/**************************************************************
+ *                          clearList                         *
+ **************************************************************/
+void windowList::clearList()
+{
+   std::list<window*>::iterator it;
+   window* obj;
+
+   for(it=list.begin(); it != list.end(); it++)
+   {
+      obj = *it;
+      delete(obj);
+   }
+   list.clear();
+}
+
 /*********************************************************************
  *                           insertWindow                            *
  *********************************************************************/
@@ -61,7 +67,7 @@ window* windowList::insertWindow(int xa,int ya,int xb,int yb,string text,
 
    /* Create and insert the window on the list */
    novo = new window(xa,ya,xb,yb,text,this, empty);
-   insert(novo);
+   list.push_back(novo);
 
    return(novo);
 }
@@ -71,18 +77,17 @@ window* windowList::insertWindow(int xa,int ya,int xb,int yb,string text,
  *********************************************************************/
 window* windowList::getModalWindow()
 {
-   int i;
-   window* j = (window*)first;
    window* modalW = NULL;
 
+   std::list<window*>::iterator it;
+
    /* Get the last (most recent) modal window */
-   for(i=0; i < 0; i++)
+   for(it=list.begin(); it != list.end(); it++)
    {
-      if(j->isModal())
+      if((*it)->isModal())
       {
-         modalW = j;
+         modalW = (*it);
       }
-      j = (window*)j->getNext();
    }
 
    return(modalW);
@@ -97,14 +102,18 @@ void windowList::removeWindow(window *jan)
    if(jan == activeWindow)
    {
       activeWindow = NULL;
-      if((total > 1))
+      list.remove(jan);
+      if((list.size() > 1))
       {
-         window* j = (window*)jan->getPrevious();
+         window* j = list.back();
          j->activate();
       }
    }
-
-   remove(jan);
+   else
+   {
+      list.remove(jan);
+   }
+   delete(jan);
 }
 
 /*********************************************************************
@@ -115,8 +124,8 @@ void windowList::setActiveWindow(window* jan)
    activeWindow = jan;
    /* Reinsert it at the end, to be last draw (aka on top)
     * after de-activated */
-   removeWithoutDelete(jan);
-   insertAtEnd(jan);
+   list.remove(jan);
+   list.push_back(jan);
 }
 
 /*********************************************************************

@@ -35,15 +35,14 @@ using namespace std;
  *                         Constructor                        *
  **************************************************************/
 guiList::guiList(int sWidth, int sHeight, SDL_Surface* surface, 
-                 bool hasDecor, int t):dntList(t)
+                 bool hasDecor, int t)
 {
-   total = 0;
-   first = NULL;
    intMenu = NULL;
    wSurface = surface;
    wWidth = sWidth;
    wHeight = sHeight;
    wHasDecor = hasDecor;
+   type = t;
    tab = NULL;
 }
 
@@ -69,44 +68,67 @@ guiList::~guiList()
 }
 
 /**************************************************************
+ *                          clearList                         *
+ **************************************************************/
+void guiList::clearList()
+{
+   std::list<guiObject*>::iterator it;
+
+   for(it=list.begin(); it != list.end(); it++)
+   {
+      freeElement(*it);
+   }
+   list.clear();
+}
+
+/**************************************************************
  *                            changed                         *
  **************************************************************/
 bool guiList::changed()
 {
-   bool result = false;
+   std::list<guiObject*>::iterator it;
 
-   guiObject *obj = (guiObject*)first;
-   int aux;
-   for(aux=0; aux < total; aux++)
+   /* Verify all objects on list */
+   for(it=list.begin(); it != list.end(); it++)
    {
-      result |= obj->changed();
-      obj = (guiObject*)obj->getNext();
+      if((*it)->changed())
+      {
+         return(true);
+      }
    }
 
    /* Verify tabBox Objects */
    if(tab != NULL)
    {
       tabBox* tb = (tabBox*)tab;
-      result |= tb->changed();
+      if(tb->changed())
+      {
+         return(true);
+      }
 
       if(tb->getActiveList() != NULL)
       {
-         result |= tb->getActiveList()->changed();
+         if(tb->getActiveList()->changed())
+         {
+            return(true);
+         }
       }
    }
 
-   return(result);
+   return(false);
 }
 
 /**************************************************************
  *                            draw                            *
  **************************************************************/
 void guiList::draw()
-{
-   guiObject *obj = (guiObject*)first;
-   int aux;
-   for(aux=0; aux < total; aux++)
+{ 
+   std::list<guiObject*>::iterator it;
+   guiObject* obj;
+
+   for(it=list.begin(); it != list.end(); it++)
    {
+      obj = (*it);
       /* Only draw visible objects */
       if(obj->isVisible())
       {
@@ -165,7 +187,6 @@ void guiList::draw()
           
          } //case
       }
-      obj = (guiObject*)obj->getNext();
    }
 
    /* TabBox Draw */
@@ -178,12 +199,10 @@ void guiList::draw()
 /**************************************************************
  *                         freeElement                        *
  **************************************************************/
-void guiList::freeElement(dntListElement *obj)
+void guiList::freeElement(guiObject* obj)
 {
-   guiObject* gobj = (guiObject*)obj;
-
    /* Delete the memory used */
-   switch(gobj->type) 
+   switch(obj->type) 
    {
       case FARSO_OBJECT_BUTTON:
       {
@@ -258,6 +277,21 @@ void guiList::freeElement(dntListElement *obj)
       }
    }
 
+}
+
+/**************************************************************
+ *                            insert                          *
+ **************************************************************/
+void guiList::insert(guiObject* obj)
+{
+   if(type == LIST_TYPE_ADD_AT_BEGIN)
+   {
+      list.push_front(obj);
+   }
+   else /*if(type == LIST_TYPE_ADD_AT_END)*/
+   {
+      list.push_back(obj);
+   }
 }
 
 /**************************************************************

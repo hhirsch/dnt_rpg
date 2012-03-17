@@ -23,7 +23,7 @@
 
 #include <string>
 
-#include "../etc/list.h"
+#include <list>
 
 #include "guiobject.h"
 #include "button.h"
@@ -38,8 +38,14 @@
 #include "filesel.h"
 #include "healthBar.h"
 
+enum
+{
+   LIST_TYPE_ADD_AT_BEGIN=0,
+   LIST_TYPE_ADD_AT_END
+};
+
 /*! The guiList Class: a list for guiObjects. */
-class guiList: public dntList
+class guiList
 {
    public:
       /*! Constructor
@@ -49,7 +55,7 @@ class guiList: public dntList
        * \param hasDecor -> if window has decor or not
        * \param t -> dntList type */
       guiList(int sWidth, int sHeight, SDL_Surface* surface, bool hasDecor,
-            int t=DNT_LIST_TYPE_ADD_AT_BEGIN);
+            int t=LIST_TYPE_ADD_AT_BEGIN);
       /*! Destructor */
       ~guiList();
 
@@ -195,23 +201,33 @@ class guiList: public dntList
       /*! Remove Internal Menu, if exists one. */
       void removeMenu();
 
+      /*! Clear and delete all elements from the list */
+      void clearList();
+
+      /*! Insert element on list, based on its type (end or head) */
+      void insert(guiObject* obj);
+
+      friend class guiInterface;
+
    protected:
 
       /*! Free Element
        * \param obj -> pointer to the object to free */
-      void freeElement(dntListElement* obj);
-
-
+      void freeElement(guiObject* obj);
+     
+      std::list<guiObject*>list; /**< The list itself */
 
       SDL_Surface* wSurface;  /**< window surface used */
       int wWidth,             /**< Window width */
           wHeight;            /**< Window Height */
+      int type;               /**< List type */
       bool wHasDecor;         /**< true if window has decor */
       
       guiObject* intMenu; /**< The internal Menu of the List */
       guiObject* tab;    /**< Inner tabBox */
 
 };
+
 
 #endif
 
