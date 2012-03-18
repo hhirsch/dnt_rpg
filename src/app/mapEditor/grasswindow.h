@@ -31,7 +31,7 @@ class grassWindow
    public:
       /*! Constructor
        * \param actualGui -> the actual GUI interface*/
-      grassWindow(guiInterface* actualGui);
+      grassWindow(Farso::GuiInterface* actualGui);
       /*! Destructor */
       ~grassWindow();
 #if 0      

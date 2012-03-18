@@ -25,34 +25,37 @@
 #include <iostream>
 #include <string>
 
-/*! The farso guiObject types */
-enum
+namespace Farso
 {
-   FARSO_OBJECT_WINDOW,
-   FARSO_OBJECT_BUTTON,
-   FARSO_OBJECT_TEXT_BAR,
-   FARSO_OBJECT_SEL_BOX,
-   FARSO_OBJECT_PICTURE,
-   FARSO_OBJECT_SEL_TEXT,
-   FARSO_OBJECT_TEXT_BOX,
-   FARSO_OBJECT_MENU_ITEM,
-   FARSO_OBJECT_TAB_BUTTON,
-   FARSO_OBJECT_ROL_BAR,
-   FARSO_OBJECT_LIST_TEXT,
-   FARSO_OBJECT_FILE_SEL,
-   FARSO_OBJECT_HEALTH_BAR,
-   FARSO_OBJECT_TAB_BOX
+
+/*! The farso guiObject types */
+enum FarsoObjectEnum
+{
+   OBJECT_WINDOW,
+   OBJECT_BUTTON,
+   OBJECT_TEXT_BAR,
+   OBJECT_SEL_BOX,
+   OBJECT_PICTURE,
+   OBJECT_SEL_TEXT,
+   OBJECT_TEXT_BOX,
+   OBJECT_MENU_ITEM,
+   OBJECT_TAB_BUTTON,
+   OBJECT_ROL_BAR,
+   OBJECT_LIST_TEXT,
+   OBJECT_FILE_SEL,
+   OBJECT_HEALTH_BAR,
+   OBJECT_TAB_BOX
 };
 
 /*! The Class guiObject is a generic interface to all GUI related objects. */
-class guiObject
+class GuiObject
 {
    public:
       int type;            /**< Object Type */ 
 
       /*! Constructor 
        * \param surface -> SDL_Surface to draw to */
-      guiObject(SDL_Surface* surface)
+      GuiObject(SDL_Surface* surface)
       {
          available=true;
          visible = true;
@@ -62,7 +65,7 @@ class guiObject
       };
 
       /*! Virtual Destructor */
-      virtual ~guiObject(){};
+      virtual ~GuiObject(){};
 
       /*! Virtual Draw Function */
       virtual void draw()=0;
@@ -164,6 +167,7 @@ class guiObject
       bool hadChanged;     /**< Flag if the had changed its draw state */
 };
 
+}
 
 #endif
 

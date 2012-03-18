@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -41,7 +41,7 @@ class nodeEditor
 {
    public:
       /*! Constructor */
-      nodeEditor(guiInterface* g);
+      nodeEditor(Farso::GuiInterface* g);
 
       /*! Destructor */
       ~nodeEditor();
@@ -80,7 +80,7 @@ class nodeEditor
 
       /*! Treat GUI events
        * \return true if some event occurred here */
-      bool eventGot(int eventInfo, guiObject* obj);
+      bool eventGot(int eventInfo, Farso::GuiObject* obj);
 
       /*! Draw temporary elements */
       void drawTemporary();
@@ -97,24 +97,24 @@ class nodeEditor
       Map* curMap;         /**< Current map pointer */
       characterList* npcs; /**< List of NPCs */
 
-      guiInterface* gui;   /**< gui used */
-      window* nodeWindow;  /**< Node info window */
+      Farso::GuiInterface* gui;   /**< gui used */
+      Farso::Window* nodeWindow;  /**< Node info window */
  
-      tabButton* nodeTab;     /**< Tab button for node editor */
-      oneTabButton* rotX[2];  /**< Buttons for X rotation */
-      oneTabButton* rotY[2];  /**< Buttons for Y rotation */
-      oneTabButton* rotZ[2];  /**< Buttons for Z rotation */
+      Farso::TabButton* nodeTab;     /**< Tab button for node editor */
+      Farso::OneTabButton* rotX[2];  /**< Buttons for X rotation */
+      Farso::OneTabButton* rotY[2];  /**< Buttons for Y rotation */
+      Farso::OneTabButton* rotZ[2];  /**< Buttons for Z rotation */
 
-      oneTabButton* moveX[2]; /**< Translate on X */
-      oneTabButton* moveY[2]; /**< Translate on Y */
-      oneTabButton* moveZ[2]; /**< Translate on Z */
+      Farso::OneTabButton* moveX[2]; /**< Translate on X */
+      Farso::OneTabButton* moveY[2]; /**< Translate on Y */
+      Farso::OneTabButton* moveZ[2]; /**< Translate on Z */
 
-      oneTabButton* clearRot; /**< Clear Rotation button */
-      oneTabButton* deleteNode; /**< Delete Node Button */
+      Farso::OneTabButton* clearRot; /**< Clear Rotation button */
+      Farso::OneTabButton* deleteNode; /**< Delete Node Button */
 
-      cxSel* gridMode;        /**< Selector if will grid mode or not */
+      Farso::CxSel* gridMode;        /**< Selector if will grid mode or not */
 
-      textBar* deltaText;    /**< Delta Value display */
+      Farso::TextBar* deltaText;    /**< Delta Value display */
       float deltaValue;      /**< Delta to move/rotate */
 };
 

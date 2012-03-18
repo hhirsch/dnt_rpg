@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -38,7 +38,7 @@ miniMapWindow::~miniMapWindow()
 /***********************************************************************
  *                               open                                  *
  ***********************************************************************/
-void miniMapWindow::open(guiInterface* gui, float posX, float posZ,
+void miniMapWindow::open(Farso::GuiInterface* gui, float posX, float posZ,
                          Map* openedMap) 
 {
    /* Set the current map */
@@ -84,7 +84,7 @@ void miniMapWindow::open(guiInterface* gui, float posX, float posZ,
 /***********************************************************************
  *                              close                                  *
  ***********************************************************************/
-void miniMapWindow::close(guiInterface* gui)
+void miniMapWindow::close(Farso::GuiInterface* gui)
 {
    if(mapWindow != NULL)
    {
@@ -105,7 +105,7 @@ bool miniMapWindow::isOpened()
 /***********************************************************************
  *                              reOpen                                 *
  ***********************************************************************/
-void miniMapWindow::reOpen(guiInterface* gui, Map* openedMap)
+void miniMapWindow::reOpen(Farso::GuiInterface* gui, Map* openedMap)
 {
    int x1=0, y1=0, x2=0, y2=0;
    if(isOpened())
@@ -195,8 +195,8 @@ void miniMapWindow::updateCharacterPosition(float posX, float posZ)
  ***********************************************************************/
 int miniMapWindow::width = 0;
 int miniMapWindow::height = 0;
-picture* miniMapWindow::fig = NULL;
-window* miniMapWindow::mapWindow = NULL;
-button* miniMapWindow::charPosition = NULL;
+Farso::Picture* miniMapWindow::fig = NULL;
+Farso::Window* miniMapWindow::mapWindow = NULL;
+Farso::Button* miniMapWindow::charPosition = NULL;
 Map* miniMapWindow::curMap = NULL;
 

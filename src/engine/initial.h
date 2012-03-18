@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -59,20 +59,20 @@ class initialScreen
      int run(int Status, GLdouble proj[16],
              GLdouble modl[16], GLint viewPort[4],
              GLuint idTextura, sound* snd,
-             guiInterface* interf);
+             Farso::GuiInterface* interf);
    private:
-      guiInterface* gui; /**< GUI for Windows */
+      Farso::GuiInterface* gui; /**< GUI for Windows */
 
       int result;        /**< Result of the initial Screen */
       bool done;
       
-      window* menuWindow;
-      button* buttonNew;
-      button* buttonContinue;
-      button* buttonSave;
-      button* buttonLoad;
-      button* buttonOptions;
-      button* buttonExit;
+      Farso::Window* menuWindow;
+      Farso::Button* buttonNew;
+      Farso::Button* buttonContinue;
+      Farso::Button* buttonSave;
+      Farso::Button* buttonLoad;
+      Farso::Button* buttonOptions;
+      Farso::Button* buttonExit;
 };
 
 #endif

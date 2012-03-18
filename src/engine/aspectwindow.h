@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -46,7 +46,7 @@ class aspectWindow
       /*! Constructor
        * \param dude -> pointer to the edited character
        * \param inter -> pointer to the GUI used interface */
-      aspectWindow(character* dude, guiInterface* inter);
+      aspectWindow(character* dude, Farso::GuiInterface* inter);
       /*! Destructor */
       ~aspectWindow();
 
@@ -55,7 +55,8 @@ class aspectWindow
        * \param object -> last GUI object
        * \param eventInfo -> last GUI Event
        * \return 0 on close, 1 otherwise */
-      int treat(guiObject* object, int eventInfo, guiInterface* inter);
+      int treat(Farso::GuiObject* object, int eventInfo, 
+            Farso::GuiInterface* inter);
 
    private:
       /*! Load All Portrait Images */
@@ -63,17 +64,17 @@ class aspectWindow
 
       character* usedCharacter;    /**< Pointer to the used character */
 
-      button* buttonConfirm;         /**< Confirm Button */
-      button* buttonCancel;          /**< Cancel Button */
-      button* buttonNextImage;       /**< Next Image Button */
-      button* buttonPreviousImage;   /**< Previous Image Button */
-      textBar* textName;            /**< Character Name Text */
-      textBar* textAge;             /**< Character Age Text */
-      cxSel* cxSelSexM;             /**< Feminine Sex SelBox */
-      cxSel* cxSelSexF;             /**< Masculine Sex SelBox */
-      cxSel* cxSelSexO;             /**< Other Sex SelBox */
-      picture* figurePortrait;      /**< Portrait Figure */
-      window* intWindow;            /**< Internal pointer to the window */
+      Farso::Button* buttonConfirm;         /**< Confirm Button */
+      Farso::Button* buttonCancel;          /**< Cancel Button */
+      Farso::Button* buttonNextImage;       /**< Next Image Button */
+      Farso::Button* buttonPreviousImage;   /**< Previous Image Button */
+      Farso::TextBar* textName;            /**< Character Name Text */
+      Farso::TextBar* textAge;             /**< Character Age Text */
+      Farso::CxSel* cxSelSexM;             /**< Feminine Sex SelBox */
+      Farso::CxSel* cxSelSexF;             /**< Masculine Sex SelBox */
+      Farso::CxSel* cxSelSexO;             /**< Other Sex SelBox */
+      Farso::Picture* figurePortrait;      /**< Portrait Figure */
+      Farso::Window* intWindow;           /**< Internal pointer to the window */
 
       int totalImages;              /**< Number of total images */
       int curImage;                 /**< Nuber of the Current Image */

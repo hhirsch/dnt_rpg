@@ -21,15 +21,16 @@
 #include "textbar.h"
 #include "farsoopts.h"
 using namespace std;
+using namespace Farso;
 
 #define REFRESH_RATE 170
 
 /********************************************************************
  *                          Constructor                             *
  ********************************************************************/
-textBar::textBar(int xa,int ya,int xb,int yb, string text1, bool cripto,
+TextBar::TextBar(int xa,int ya,int xb,int yb, string text1, bool cripto,
                  SDL_Surface* screen)
-        :guiObject(screen)
+        :GuiObject(screen)
 {
    lastWrite = 0;
    x1 = xa;
@@ -41,49 +42,49 @@ textBar::textBar(int xa,int ya,int xb,int yb, string text1, bool cripto,
    pos = 0;
    lastChar='\0';
    cript = cripto;
-   type = FARSO_OBJECT_TEXT_BAR;
+   type = Farso::OBJECT_TEXT_BAR;
    text = text1;
 }
 
 /********************************************************************
  *                          Constructor                             *
  ********************************************************************/
-textBar::~textBar()
+TextBar::~TextBar()
 {
 }
 
 /********************************************************************
  *                            putText                               *
  ********************************************************************/
-void textBar::putText(unsigned int pos, int marca)
+void TextBar::putText(unsigned int pos, int marca)
 {
-   farsoOptions opt;
-   dntFont fnt;
+   Options opt;
+   Font fnt;
    fnt.defineFont(opt.getDefaultFont(), 12);
-   fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
-   fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
+   fnt.defineFontAlign(Font::ALIGN_LEFT);
+   fnt.defineFontStyle(Font::STYLE_NORMAL);
 
    if(available)
    {
-      color_Set(Colors.colorCont[2].R, Colors.colorCont[2].G,
-                Colors.colorCont[2].B, Colors.colorCont[2].A);
+      color_Set(colors.colorCont[2].R, colors.colorCont[2].G,
+                colors.colorCont[2].B, colors.colorCont[2].A);
    }
    else
    {
-      color_Set(Colors.colorCont[0].R, Colors.colorCont[0].G,
-                Colors.colorCont[0].B, Colors.colorCont[0].A);
+      color_Set(colors.colorCont[0].R, colors.colorCont[0].G,
+                colors.colorCont[0].B, colors.colorCont[0].A);
    }
    rectangle_Fill(wSurface,x1+1, y1+1, x2-1, y2-1);
 
    if(available)
    {
-      color_Set(Colors.colorCont[1].R, Colors.colorCont[1].G,
-            Colors.colorCont[1].B, Colors.colorCont[1].A);
+      color_Set(colors.colorCont[1].R, colors.colorCont[1].G,
+            colors.colorCont[1].B, colors.colorCont[1].A);
    }
    else
    {
-      color_Set(Colors.colorText.R, Colors.colorText.G,
-            Colors.colorText.B, Colors.colorText.A);
+      color_Set(colors.colorText.R, colors.colorText.G,
+            colors.colorText.B, colors.colorText.A);
    }
 
    init = 0;
@@ -121,7 +122,7 @@ void textBar::putText(unsigned int pos, int marca)
 /********************************************************************
  *                              setText                             *
  ********************************************************************/
-void textBar::setText(string txt)
+void TextBar::setText(string txt)
 {
    text = txt;
    draw();
@@ -130,7 +131,7 @@ void textBar::setText(string txt)
 /********************************************************************
  *                              draw                                *
  ********************************************************************/
-void textBar::draw()
+void TextBar::draw()
 {
    /* No draw when hidden */
    if(!isVisible())
@@ -138,11 +139,11 @@ void textBar::draw()
       return;
    }
    
-   color_Set(Colors.colorCont[0].R, Colors.colorCont[0].G,
-             Colors.colorCont[0].B, Colors.colorCont[0].A);
-   rectangle_2Colors(wSurface,x1,y1,x2,y2, Colors.colorCont[1].R,
-                     Colors.colorCont[1].G,Colors.colorCont[1].B,
-                     Colors.colorCont[1].A);
+   color_Set(colors.colorCont[0].R, colors.colorCont[0].G,
+             colors.colorCont[0].B, colors.colorCont[0].A);
+   rectangle_2Colors(wSurface,x1,y1,x2,y2, colors.colorCont[1].R,
+                     colors.colorCont[1].G,colors.colorCont[1].B,
+                     colors.colorCont[1].A);
    putText(0,0);
    setChanged();
 }
@@ -150,13 +151,13 @@ void textBar::draw()
 /********************************************************************
  *                    defineCursorPosition                          *
  ********************************************************************/
-void textBar::defineCursorPosition(int mouseX, int mouseY)
+void TextBar::defineCursorPosition(int mouseX, int mouseY)
 {
-   farsoOptions opt;
-   dntFont fnt;
+   Options opt;
+   Font fnt;
    fnt.defineFont(opt.getDefaultFont(),12);
-   fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
-   fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
+   fnt.defineFontAlign(Font::ALIGN_LEFT);
+   fnt.defineFontStyle(Font::STYLE_NORMAL);
    string s = text.substr(init,end);
 
    string saux = "";
@@ -175,7 +176,7 @@ void textBar::defineCursorPosition(int mouseX, int mouseY)
 /********************************************************************
  *                             Write                                *
  ********************************************************************/
-int textBar::doWrite(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclas)
+int TextBar::doWrite(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclas)
 {
    string c;
    c = "";

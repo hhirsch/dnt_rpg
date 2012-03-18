@@ -29,12 +29,16 @@
 #include "mouse.h"
 #include "guiobject.h"
 
-#define MAX_OPTIONS 5  /**< Max Options on Sel Text */
+namespace Farso
+{
 
 /*! Select Text Class (from 1 to 5 texts) */
-class selText: public guiObject
+class SelText: public GuiObject
 {
    public:
+
+      #define MAX_OPTIONS 5  /**< Max Options on Sel Text */
+
       /*! Constructor
        * \param xa -> x1 coordinate
        * \param ya -> y1 coordinate
@@ -46,12 +50,12 @@ class selText: public guiObject
        * \param text3 -> option 3 text
        * \param text4 -> option 4 text
        * \param screen -> the window screen used */
-      selText(int xa,int ya,int xb,int yb, std::string text0, std::string text1,
+      SelText(int xa,int ya,int xb,int yb, std::string text0, std::string text1,
               std::string text2, std::string text3, std::string text4,
               SDL_Surface* screen);
 
       /*! Destructor */
-      ~selText();
+      ~SelText();
 
       /*! Set the SelText coordinates
        * \param xa -> x1 coordinate
@@ -108,9 +112,11 @@ class selText: public guiObject
       std::string optText[MAX_OPTIONS]; /**< Text Options */
       int optInfo[MAX_OPTIONS];    /**< Info Options */
       int selec;                   /**< last item selected */
-      farso_colors Cores;          /**< colors */
+      Colors cores;                /**< colors */
       bool pressed;                /**< while pressed == true */
 };
+
+}
 
 #endif
 

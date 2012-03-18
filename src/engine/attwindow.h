@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -38,7 +38,7 @@ class attWindow
        * \param inter -> GUI interface to be used
        * \param modifiers -> race and class Modifiers
        * \param usePreviousValues -> if will use previous values or new ones */
-      attWindow(skills* savSkill, guiInterface* inter, 
+      attWindow(skills* savSkill, Farso::GuiInterface* inter, 
                 int modifiers[6], bool usePreviousValues);
 
       /*! Treat Events on Window. 
@@ -49,10 +49,11 @@ class attWindow
        * \param modl -> Model Viewn matrix
        * \param viewPort -> ViewPort Vector
        * \return 0 on close, 1 otherwise */
-      int treat(guiObject* object, int eventInfo, guiInterface* inter,
-                GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
+      int treat(Farso::GuiObject* object, int eventInfo, 
+            Farso::GuiInterface* inter,
+            GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
 
-      window*      intWindow;     /**< Pointer to the internal window */
+      Farso::Window*      intWindow;     /**< Pointer to the internal window */
 
    private:
       int points[6];              /**< Rolled Points */
@@ -62,20 +63,20 @@ class attWindow
 
       skills* saveSkill;          /**< Pointer to the edited skill List */
 
-      textBox* rolledPoints;  /**< Rolled Points Text */
-      textBox* attPoints[6];  /**< Attributes Points Texts */
-      textBox* attTotals[6];  /**< Attributes Totals Texts */
-      textBox* attMods[6];    /**< Attributes Totals Modifiers */
-      rolBar* textDesc;       /**< Description Text */
-      textBox* textDescTitle; /**< Description Title Text */
+      Farso::TextBox* rolledPoints;  /**< Rolled Points Text */
+      Farso::TextBox* attPoints[6];  /**< Attributes Points Texts */
+      Farso::TextBox* attTotals[6];  /**< Attributes Totals Texts */
+      Farso::TextBox* attMods[6];    /**< Attributes Totals Modifiers */
+      Farso::RolBar* textDesc;       /**< Description Text */
+      Farso::TextBox* textDescTitle; /**< Description Title Text */
 
-      button* attButtonNext[6];    /**< Next Buttons */
-      button* attButtonPrev[6];    /**< Previous Buttons */
-      button* rerollButton;        /**< ReRoll Button */
-      button* clearButton;         /**< Clear Button */
-      button* autoButton;          /**< Auto Assign Button */
-      button* buttonConfirm;       /**< Confirm Button */
-      button* buttonCancel;        /**< Cancel Button */
+      Farso::Button* attButtonNext[6];    /**< Next Buttons */
+      Farso::Button* attButtonPrev[6];    /**< Previous Buttons */
+      Farso::Button* rerollButton;        /**< ReRoll Button */
+      Farso::Button* clearButton;         /**< Clear Button */
+      Farso::Button* autoButton;          /**< Auto Assign Button */
+      Farso::Button* buttonConfirm;       /**< Confirm Button */
+      Farso::Button* buttonCancel;        /**< Cancel Button */
 
       /*! Set the description text
        * \param sk -> skill number */

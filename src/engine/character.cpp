@@ -57,7 +57,7 @@ character::character(featsList* ft, engine* usedEngine)
    thingType = THING_TYPE_CHARACTER;
 
    /* Create the Health Bar */
-   lifeBar = new healthBar(5,64,59,74,NULL);
+   lifeBar = new Farso::HealthBar(5,64,59,74,NULL);
 
    /* Create the feats list */
    actualFeats = new feats(usedEngine);
@@ -479,11 +479,11 @@ void character::definePortrait(string portraitFile)
    SDL_FreeSurface(border);
 
    /* Load Texture */
-   setTextureRGBA(portraitImage, portraitTexture, false, GL_RGBA);
+   Farso::setTextureRGBA(portraitImage, portraitTexture, false, GL_RGBA);
    portraitPropX = portraitImage->w /
-                   (float)smallestPowerOfTwo(portraitImage->w);
+                   (float)Farso::smallestPowerOfTwo(portraitImage->w);
    portraitPropY = portraitImage->h /
-                   (float)smallestPowerOfTwo(portraitImage->h);
+                   (float)Farso::smallestPowerOfTwo(portraitImage->h);
 
    /* Define fileName */
    talkPortrait = portraitFile;
@@ -507,7 +507,7 @@ void character::updateHealthBar()
 {
   lifeBar->defineMaxHealth(maxLifePoints);
   lifeBar->defineActualHealth(lifePoints);
-  setTextureRGBA(portraitImage, portraitTexture);
+  Farso::setTextureRGBA(portraitImage, portraitTexture);
 }
 
 /*********************************************************************
@@ -522,13 +522,14 @@ void character::drawMainPortrait()
 
    glBegin(GL_QUADS);
       glTexCoord2f(0.0f, 0.0f);
-      glVertex2f(SCREEN_X-portraitImage->w-1, SCREEN_Y-1);
+      glVertex2f(Farso::SCREEN_X-portraitImage->w-1, Farso::SCREEN_Y-1);
       glTexCoord2f(0.0f, portraitPropY);
-      glVertex2f(SCREEN_X-portraitImage->w-1, SCREEN_Y-portraitImage->h-1);
+      glVertex2f(Farso::SCREEN_X-portraitImage->w-1, 
+            Farso::SCREEN_Y-portraitImage->h-1);
       glTexCoord2f(portraitPropX, portraitPropY);
-      glVertex2f(SCREEN_X-1, SCREEN_Y-portraitImage->h-1);
+      glVertex2f(Farso::SCREEN_X-1, Farso::SCREEN_Y-portraitImage->h-1);
       glTexCoord2f(portraitPropX, 0.0f);
-      glVertex2f(SCREEN_X-1, SCREEN_Y-1);
+      glVertex2f(Farso::SCREEN_X-1, Farso::SCREEN_Y-1);
    glEnd();
 
    glDisable(GL_TEXTURE_2D);
@@ -542,8 +543,8 @@ bool character::mouseUnderPortrait(int mouseX, int mouseY)
    cursor cur;
    char buf[256];
 
-   if(isMouseAt(SCREEN_X-portraitImage->w-1, 1,
-                SCREEN_X-1, 64, mouseX, mouseY) )
+   if(Farso::isMouseAt(Farso::SCREEN_X-portraitImage->w-1, 1,
+                Farso::SCREEN_X-1, 64, mouseX, mouseY) )
    {
       sprintf(buf, "%s (%d/%d)", name.c_str(), xp, nextLevelXP(xp)); 
       cur.set(CURSOR_WALK);
@@ -561,8 +562,8 @@ bool character::mouseUnderHealthBar(int mouseX, int mouseY)
    cursor cur;
    char buf[128];
    
-   if(isMouseAt(SCREEN_X-portraitImage->w+4, 65,
-                SCREEN_X-6, 75, mouseX, mouseY) )
+   if(Farso::isMouseAt(Farso::SCREEN_X-portraitImage->w+4, 65,
+            Farso::SCREEN_X-6, 75, mouseX, mouseY) )
    {
       sprintf(buf, "%s: %d/%d", gettext("HP"), lifePoints, maxLifePoints); 
       cur.setTextOver(buf);

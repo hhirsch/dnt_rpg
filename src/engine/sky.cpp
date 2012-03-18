@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -41,7 +41,7 @@ sky::sky()
    img = IMG_Load(dir.getRealFile("texturas/sky/skymap.png").c_str());
    if(img != NULL)
    {
-      setTextureRGBA(img, skyMap);
+      Farso::setTextureRGBA(img, skyMap);
       SDL_FreeSurface(img);
    }
 

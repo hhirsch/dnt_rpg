@@ -21,26 +21,27 @@
 #include "textbox.h"
 #include "farsoopts.h"
 using namespace std;
+using namespace Farso;
 
 /*******************************************************
  *                       Constructor                   *
  *******************************************************/
-textBox::textBox(int xa, int ya, int xb, int yb, int frameType,
+TextBox::TextBox(int xa, int ya, int xb, int yb, int frameType,
                  SDL_Surface *screen): 
-                 guiObject(screen)
+                 GuiObject(screen)
 {
-   farsoOptions opt;
+   Options opt;
 
    wSurface = screen;
-   type = FARSO_OBJECT_TEXT_BOX;
+   type = Farso::OBJECT_TEXT_BOX;
    x1 = xa;
    y1 = ya;
    x2 = xb;
    y2 = yb;
    framed = frameType;
-   fontAlign = DNT_FONT_ALIGN_LEFT;
+   fontAlign = Font::ALIGN_LEFT;
    fontName = opt.getDefaultFont();
-   fontStyle = DNT_FONT_STYLE_NORMAL;
+   fontStyle = Font::STYLE_NORMAL;
    fontSize = 10;
    firstLine = 0;
    recEvents = false;
@@ -50,7 +51,7 @@ textBox::textBox(int xa, int ya, int xb, int yb, int frameType,
 /*******************************************************
  *                        Destructor                   *
  *******************************************************/
-textBox::~textBox()
+TextBox::~TextBox()
 {
    clear();
 }
@@ -58,9 +59,9 @@ textBox::~textBox()
 /*******************************************************
  *                        clear                        *
  *******************************************************/
-void textBox::clear()
+void TextBox::clear()
 {
-   std::list<textLine*>::iterator it;
+   std::list<TextLine*>::iterator it;
    for(it = lines.begin(); it != lines.end(); it++)
    {
       delete(*it);
@@ -71,7 +72,7 @@ void textBox::clear()
 /*******************************************************
  *                       setSolid                      *
  *******************************************************/
-void textBox::setSolid()
+void TextBox::setSolid()
 {
    solid = true;
 }
@@ -79,13 +80,13 @@ void textBox::setSolid()
 /*******************************************************
  *                      getTextLine                    *
  *******************************************************/
-string textBox::getTextLine(int line)
+string TextBox::getTextLine(int line)
 {
    int i;
    if(line < (int)lines.size())
    {
       /* Get the line */
-      std::list<textLine*>::iterator it = lines.begin();
+      std::list<TextLine*>::iterator it = lines.begin();
       for(i = 0; i < line; i++)
       {
          it++;
@@ -100,15 +101,15 @@ string textBox::getTextLine(int line)
 /*******************************************************
  *                        setText                      *
  *******************************************************/
-void textBox::setText(string txt)
+void TextBox::setText(string txt)
 {
    if(text != txt)
    {
       clear();
       text = txt;
       createLines(txt, fontName, fontSize, fontAlign, fontStyle,
-                  Colors.colorText.R, Colors.colorText.G,
-                  Colors.colorText.B);
+                  colors.colorText.R, colors.colorText.G,
+                  colors.colorText.B);
       draw();
    }
 }
@@ -116,7 +117,7 @@ void textBox::setText(string txt)
 /*******************************************************
  *                        addText                      *
  *******************************************************/
-void textBox::addText(string txt, string font, int size,
+void TextBox::addText(string txt, string font, int size,
                       int align, int style, int R, int G, int B)
 {
    text += txt;
@@ -127,31 +128,31 @@ void textBox::addText(string txt, string font, int size,
 /*******************************************************
  *                        addText                      *
  *******************************************************/
-void textBox::addText(string txt, string font, int size,
+void TextBox::addText(string txt, string font, int size,
                       int align, int style)
 {
    addText(txt, font, size, align, style,
-               Colors.colorText.R, Colors.colorText.G,
-               Colors.colorText.B);
+               colors.colorText.R, colors.colorText.G,
+               colors.colorText.B);
 }
 
 /*******************************************************
  *                        addText                      *
  *******************************************************/
-void textBox::addText(string txt)
+void TextBox::addText(string txt)
 {
    addText(txt, fontName, fontSize, fontAlign, fontStyle, 
-               Colors.colorText.R, Colors.colorText.G,
-               Colors.colorText.B);
+               colors.colorText.R, colors.colorText.G,
+               colors.colorText.B);
 }
 
 /*******************************************************
  *                  lastDrawableLines                  *
  *******************************************************/
-int textBox::lastDrawableLine()
+int TextBox::lastDrawableLine()
 {
    int i;
-   textLine* line;
+   TextLine* line;
    int lastLine = 0;
    int height = 0;
 
@@ -162,7 +163,7 @@ int textBox::lastDrawableLine()
    }
 
    /* Get first text line */
-   std::list<textLine*>::iterator it = lines.begin();
+   std::list<TextLine*>::iterator it = lines.begin();
    for(i = 0; i < firstLine; i++)
    {
       /* height must be the previous one. */
@@ -188,7 +189,7 @@ int textBox::lastDrawableLine()
 /*******************************************************
  *                          draw                       *
  *******************************************************/
-void textBox::draw()
+void TextBox::draw()
 {
    draw2();
 }
@@ -196,11 +197,11 @@ void textBox::draw()
 /*******************************************************
  *                          draw                       *
  *******************************************************/
-void textBox::draw(int i)
+void TextBox::draw(int i)
 {
    int l;
-   textLine* line;
-   dntFont fnt;
+   TextLine* line;
+   Font fnt;
 
    /* No need to draw if not before first line or hidden */
    if( (i < firstLine) || (!isVisible()) || (i > (int)lines.size()) )
@@ -212,7 +213,7 @@ void textBox::draw(int i)
    {
       /* Get desired text line */
       int y = y1+2;
-      std::list<textLine*>::iterator it = lines.begin();
+      std::list<TextLine*>::iterator it = lines.begin();
       for(l = 0; (l < i); l++)
       {
          if(l >= firstLine)
@@ -241,11 +242,11 @@ void textBox::draw(int i)
 /*******************************************************
  *                          draw                       *
  *******************************************************/
-int textBox::draw2()
+int TextBox::draw2()
 {
    int i;
-   textLine* line;
-   dntFont fnt;
+   TextLine* line;
+   Font fnt;
    int lastLine = 0;
    int height = 0;
    
@@ -260,20 +261,20 @@ int textBox::draw2()
    {
       if( (framed == 1) || (framed == 3))
       {
-         color_Set(Colors.colorButton.R,
-                   Colors.colorButton.G,
-                   Colors.colorButton.B,
-                   Colors.colorButton.A);
+         color_Set(colors.colorButton.R,
+                   colors.colorButton.G,
+                   colors.colorButton.B,
+                   colors.colorButton.A);
          rectangle_Fill(wSurface,x1+1,y1+1,x2-1,y2-1);
       }
       
       if(framed != 3)
       {
-         color_Set(Colors.colorCont[0].R, Colors.colorCont[0].G,
-                   Colors.colorCont[0].B, Colors.colorCont[0].A);
+         color_Set(colors.colorCont[0].R, colors.colorCont[0].G,
+                   colors.colorCont[0].B, colors.colorCont[0].A);
          rectangle_2Colors(wSurface,x1,y1,x2,y2,
-                          Colors.colorCont[1].R, Colors.colorCont[1].G,
-                          Colors.colorCont[1].B, Colors.colorCont[1].A);
+                          colors.colorCont[1].R, colors.colorCont[1].G,
+                          colors.colorCont[1].B, colors.colorCont[1].A);
       }
    }
    else if(solid)
@@ -286,7 +287,7 @@ int textBox::draw2()
    if(lines.size() > 0)
    {
       /* Get first text line */
-      std::list<textLine*>::iterator it = lines.begin();
+      std::list<TextLine*>::iterator it = lines.begin();
       for(i = 0; i < firstLine; i++)
       {
          it++;
@@ -316,7 +317,7 @@ int textBox::draw2()
 /*******************************************************
  *                     getTotalLines                   *
  *******************************************************/
-int textBox::getTotalLines()
+int TextBox::getTotalLines()
 {
    return((int)lines.size());
 }
@@ -324,7 +325,7 @@ int textBox::getTotalLines()
 /*******************************************************
  *                      getFirstLine                   *
  *******************************************************/
-int textBox::getFirstLine()
+int TextBox::getFirstLine()
 {
    return(firstLine);
 }
@@ -332,7 +333,7 @@ int textBox::getFirstLine()
 /*******************************************************
  *                      setFirstLine                   *
  *******************************************************/
-void textBox::setFirstLine(int line)
+void TextBox::setFirstLine(int line)
 {
    firstLine = line;
 }
@@ -340,7 +341,7 @@ void textBox::setFirstLine(int line)
 /*******************************************************
  *                      setLastLine                   *
  *******************************************************/
-void textBox::setLastLine(int line)
+void TextBox::setLastLine(int line)
 {
    int cur = line;
    
@@ -364,15 +365,15 @@ void textBox::setLastLine(int line)
 /*******************************************************
  *                        setFont                      *
  *******************************************************/
-void textBox::setFont(string name, int size, int align)
+void TextBox::setFont(string name, int size, int align)
 {
-   setFont(name, size, align, DNT_FONT_STYLE_NORMAL);
+   setFont(name, size, align, Font::STYLE_NORMAL);
 }
 
 /*******************************************************
  *                        setFont                      *
  *******************************************************/
-void textBox::setFont(string name, int size, int align, int style)
+void TextBox::setFont(string name, int size, int align, int style)
 {
    fontName = name;
    fontAlign = align;
@@ -380,8 +381,8 @@ void textBox::setFont(string name, int size, int align, int style)
    fontStyle = style;
 
    /* Change all current Lines */
-   textLine* line;
-   std::list<textLine*>::iterator it = lines.begin();
+   TextLine* line;
+   std::list<TextLine*>::iterator it = lines.begin();
    for(it = lines.begin(); it != lines.end(); it++)
    {
       line = (*it);
@@ -395,15 +396,15 @@ void textBox::setFont(string name, int size, int align, int style)
 /*******************************************************
  *                       setColor                      *
  *******************************************************/
-void textBox::setColor(int R, int G, int B)
+void TextBox::setColor(int R, int G, int B)
 {
-   Colors.colorText.R = R;
-   Colors.colorText.G = G;
-   Colors.colorText.B = B;
+   colors.colorText.R = R;
+   colors.colorText.G = G;
+   colors.colorText.B = B;
 
    /* Change all current Lines */
-   textLine* line;
-   std::list<textLine*>::iterator it = lines.begin();
+   TextLine* line;
+   std::list<TextLine*>::iterator it = lines.begin();
    for(it = lines.begin(); it != lines.end(); it++)
    {
       line = (*it);
@@ -416,17 +417,17 @@ void textBox::setColor(int R, int G, int B)
 /*******************************************************
  *                     setBackColor                    *
  *******************************************************/
-void textBox::setBackColor(int R, int G, int B)
+void TextBox::setBackColor(int R, int G, int B)
 {
-   Colors.colorButton.R = R;
-   Colors.colorButton.G = G;
-   Colors.colorButton.B = B;
+   colors.colorButton.R = R;
+   colors.colorButton.G = G;
+   colors.colorButton.B = B;
 }
 
 /*******************************************************
  *                    receiveEvents                    *
  *******************************************************/
-bool textBox::receiveEvents()
+bool TextBox::receiveEvents()
 {
    return(recEvents);
 }
@@ -434,7 +435,7 @@ bool textBox::receiveEvents()
 /*******************************************************
  *                    setReceiveEvents                 *
  *******************************************************/
-void textBox::setReceiveEvents(bool b)
+void TextBox::setReceiveEvents(bool b)
 {
    recEvents = b;
 }
@@ -442,7 +443,7 @@ void textBox::setReceiveEvents(bool b)
 /*******************************************************
  *                     insertLine                      *
  *******************************************************/
-void textBox::insertLine(textLine* line)
+void TextBox::insertLine(TextLine* line)
 {
    lines.push_back(line);
 }
@@ -450,20 +451,20 @@ void textBox::insertLine(textLine* line)
 /*******************************************************
  *                     createLines                     *
  *******************************************************/
-void textBox::createLines(string txt, string font, int size,
+void TextBox::createLines(string txt, string font, int size,
                           int align, int style, int R, int G, int B)
 {
-   dntFont fnt;
+   Font fnt;
    fnt.defineFont(font, size);
    fnt.defineFontAlign(align);
    fnt.defineFontStyle(style);
 
-   textLine* line = NULL;
+   TextLine* line = NULL;
    int lastPos = 0;
 
    while(lastPos < (int)txt.length())
    {
-      line = new textLine();
+      line = new TextLine();
       line->R = R; 
       line->G = G;
       line->B = B;

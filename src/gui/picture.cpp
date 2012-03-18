@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -27,11 +27,12 @@
 #endif
 #include <iostream>
 using namespace std;
+using namespace Farso;
 
 /******************************************************
  *                    Destructor                      *
  ******************************************************/
-picture::~picture()
+Picture::~Picture()
 {
    if( (fig) && (deleteSurface) )
    {
@@ -43,8 +44,8 @@ picture::~picture()
 /******************************************************
  *                     Constructor                    *
  ******************************************************/
-picture::picture(int x,int y,int w,int h,const char* arquivo, 
-      SDL_Surface* surface): guiObject(surface)
+Picture::Picture(int x,int y,int w,int h,const char* arquivo, 
+      SDL_Surface* surface): GuiObject(surface)
 {
    /* Define Machine Bit Order */
    Uint32 rmask, gmask, bmask, amask;
@@ -69,7 +70,7 @@ picture::picture(int x,int y,int w,int h,const char* arquivo,
    y1 = y;
    x2 = x+w;
    y2 = y+h;
-   type = FARSO_OBJECT_PICTURE;
+   type = Farso::OBJECT_PICTURE;
 
    deleteSurface = true;
 
@@ -109,7 +110,7 @@ picture::picture(int x,int y,int w,int h,const char* arquivo,
 /******************************************************
  *               setSurfaceDelettion                  *
  ******************************************************/
-void picture::setSurfaceDeletion(bool enable)
+void Picture::setSurfaceDeletion(bool enable)
 {
    deleteSurface = enable;
 }
@@ -117,7 +118,7 @@ void picture::setSurfaceDeletion(bool enable)
 /******************************************************
  *                        draw                        *
  ******************************************************/
-void picture::draw()
+void Picture::draw()
 {
    if( (fig == NULL) || (!isVisible()) )
    {
@@ -132,7 +133,7 @@ void picture::draw()
 /******************************************************
  *                        set                         *
  ******************************************************/
-void picture::set(SDL_Surface* newPicture)
+void Picture::set(SDL_Surface* newPicture)
 {
    fig = newPicture;
    area.x = 0;
@@ -149,7 +150,7 @@ void picture::set(SDL_Surface* newPicture)
 /******************************************************
  *                         get                        *
  ******************************************************/
-SDL_Surface* picture::get()
+SDL_Surface* Picture::get()
 {
    return(fig);
 }
@@ -157,7 +158,7 @@ SDL_Surface* picture::get()
 /******************************************************
  *                  setVisibleArea                    *
  ******************************************************/
-void picture::setVisibleArea(int xa, int ya, int xb, int yb)
+void Picture::setVisibleArea(int xa, int ya, int xb, int yb)
 {
    area.x = xa;
    area.y = ya;
@@ -168,7 +169,7 @@ void picture::setVisibleArea(int xa, int ya, int xb, int yb)
 /******************************************************
  *                   setAllVisible                    *
  ******************************************************/
-void picture::setAllVisible()
+void Picture::setAllVisible()
 {
    area.x = 0;
    area.y = 0;
@@ -179,7 +180,7 @@ void picture::setAllVisible()
 /******************************************************
  *                   setAllVisible                    *
  ******************************************************/
-void picture::setUseAlphaFromSource()
+void Picture::setUseAlphaFromSource()
 {
    if(fig)
    {

@@ -33,7 +33,7 @@ barterWindow::barterWindow()
  *                             open                            *
  ***************************************************************/
 void barterWindow::open(character* s, character* b,
-                        guiInterface* inter, itemWindow* infoW, 
+                        Farso::GuiInterface* inter, itemWindow* infoW, 
                         engine* usedEngine)
 {
    dirs dir;
@@ -42,7 +42,7 @@ void barterWindow::open(character* s, character* b,
    infoWindow = infoW;
    curEngine = usedEngine;
 
-   int midX = SCREEN_X / 2;
+   int midX = Farso::SCREEN_X / 2;
 
    /* Set characters */
    seller = s;
@@ -304,10 +304,10 @@ void barterWindow::openMenu(int mouseX, int mouseY)
    int y = mouseY - intWindow->getY1();
    int xSize = 0;
    dirs dir;
-   dntFont fnt;
+   Farso::Font fnt;
 
    /* Create the Menu */
-   objectMenu = (menu*) intWindow->getObjectsList()->addMenu();
+   objectMenu = (Farso::Menu*) intWindow->getObjectsList()->addMenu();
    objectMenu->insertItem(gettext("Remove"), dir.getRealFile("icons/drop.png"), 
                           true);
 
@@ -332,7 +332,7 @@ void barterWindow::openMenu(int mouseX, int mouseY)
 /**************************************************************
  *                            treat                           *
  **************************************************************/
-bool barterWindow::treat(guiObject* guiObj, int eventInfo, int mouseX, 
+bool barterWindow::treat(Farso::GuiObject* guiObj, int eventInfo, int mouseX, 
                          int mouseY, cursor* mouseCursor, Map* actualMap)
 {
    bool res = false;
@@ -368,23 +368,23 @@ bool barterWindow::treat(guiObject* guiObj, int eventInfo, int mouseX,
    /* Gather GUI events */
    switch(eventInfo)
    {
-      case FARSO_EVENT_PRESSED_BUTTON:
+      case Farso::EVENT_PRESSED_BUTTON:
       {
          /* Cancel the Barter */
-         if(guiObj == (guiObject*) cancelButton)
+         if(guiObj == (Farso::GuiObject*) cancelButton)
          {
             cancel();
             close();
             res = true;
          }
          /* Impose Barter */
-         else if(guiObj == (guiObject*) imposeButton)
+         else if(guiObj == (Farso::GuiObject*) imposeButton)
          {
             impose();
             res = true;
          }
          /* Offer Barter */
-         else if(guiObj == (guiObject*) offerButton)
+         else if(guiObj == (Farso::GuiObject*) offerButton)
          {
             offer();
             res = true;
@@ -392,15 +392,15 @@ bool barterWindow::treat(guiObject* guiObj, int eventInfo, int mouseX,
       }
       break;
 
-      case FARSO_EVENT_PRESSED_TAB_BUTTON:
-      case FARSO_EVENT_ON_FOCUS_TAB_BUTTON:
+      case Farso::EVENT_PRESSED_TAB_BUTTON:
+      case Farso::EVENT_ON_FOCUS_TAB_BUTTON:
       {
          /* Inventory Spaces Selected */
-         if( (guiObj == (guiObject*) buyerInv) || 
-             (guiObj == (guiObject*) sellerInv) )
+         if( (guiObj == (Farso::GuiObject*) buyerInv) || 
+             (guiObj == (Farso::GuiObject*) sellerInv) )
          {
             /* Define Inventory */
-            sellerObj = (guiObj == (guiObject*) sellerInv);
+            sellerObj = (guiObj == (Farso::GuiObject*) sellerInv);
             int curInv = 0;
 
             /* Convert Mouse Coordinate to inventory coordinate */
@@ -423,7 +423,7 @@ bool barterWindow::treat(guiObject* guiObj, int eventInfo, int mouseX,
                activeObject = barterInventory->getFromPosition(posX,posY,curInv,
                                                                sellerObj);
 
-               if(eventInfo == FARSO_EVENT_PRESSED_TAB_BUTTON)
+               if(eventInfo == Farso::EVENT_PRESSED_TAB_BUTTON)
                {
                   objX = posX;
                   objY = posY;
@@ -440,7 +440,7 @@ bool barterWindow::treat(guiObject* guiObj, int eventInfo, int mouseX,
       }
       break;
 
-      case FARSO_EVENT_SELECTED_MENU:
+      case Farso::EVENT_SELECTED_MENU:
       {
          if( (objectMenu) && (activeObject))
          {
@@ -485,22 +485,22 @@ int barterWindow::objY = 0;
 bool barterWindow::sellerObj = false;
 
 barter* barterWindow::barterInventory = NULL;
-guiInterface* barterWindow::gui = NULL;
-textBox* barterWindow::sellerTotals = NULL;
-textBox* barterWindow::buyerTotals = NULL;
-window* barterWindow::intWindow = NULL;
-button* barterWindow::imposeButton = NULL;
-button* barterWindow::offerButton = NULL;
-button* barterWindow::cancelButton = NULL;
+Farso::GuiInterface* barterWindow::gui = NULL;
+Farso::TextBox* barterWindow::sellerTotals = NULL;
+Farso::TextBox* barterWindow::buyerTotals = NULL;
+Farso::Window* barterWindow::intWindow = NULL;
+Farso::Button* barterWindow::imposeButton = NULL;
+Farso::Button* barterWindow::offerButton = NULL;
+Farso::Button* barterWindow::cancelButton = NULL;
 
-tabButton* barterWindow::barterTabButton = NULL;
-oneTabButton* barterWindow::sellerInv = NULL;
+Farso::TabButton* barterWindow::barterTabButton = NULL;
+Farso::OneTabButton* barterWindow::sellerInv = NULL;
 inventWindow* barterWindow::sellerWindow = NULL;
 
-oneTabButton* barterWindow::buyerInv = NULL;
+Farso::OneTabButton* barterWindow::buyerInv = NULL;
 inventWindow* barterWindow::buyerWindow = NULL;
 
-menu* barterWindow::objectMenu = NULL;
+Farso::Menu* barterWindow::objectMenu = NULL;
 
 itemWindow* barterWindow::infoWindow = NULL;
 engine* barterWindow::curEngine = NULL;

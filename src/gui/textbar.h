@@ -29,8 +29,11 @@
 #include "mouse.h"
 #include "guiobject.h"
 
+namespace Farso
+{
+
 /*! Text Bar Definition */
-class textBar: public guiObject
+class TextBar: public GuiObject
 {
    public:
       /*! Constructor
@@ -41,10 +44,10 @@ class textBar: public guiObject
        * \param text1 -> textBar text
        * \param cripto -> if is crypt, or not
        * \param screen -> surface to draw to */
-      textBar(int xa,int ya,int xb,int yb, std::string text1, bool cripto,
+      TextBar(int xa,int ya,int xb,int yb, std::string text1, bool cripto,
               SDL_Surface* screen);
       /*! Destructor */
-      ~textBar();
+      ~TextBar();
       
       /*!
        * Draw the text bar on a surface */
@@ -80,7 +83,9 @@ class textBar: public guiObject
       unsigned int pos;     /**< Current cursor position */
       int lastWrite;        /**< Last time when write */
       std::string lastChar; /**< Last Character writed */
-      farso_colors Colors;  /**< Internal Colors */   
+      Colors colors;        /**< Internal Colors */   
 };
+
+}
  
 #endif

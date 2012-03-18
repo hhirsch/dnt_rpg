@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -24,12 +24,15 @@
 #include "draw.h"
 #include "guiobject.h"
 
+namespace Farso
+{
+
 /*! The Picture Class. A picture is just a image on the GUI */
-class picture: public guiObject
+class Picture: public GuiObject
 {
    public:
       /*! Destructor */
-      ~picture();
+      ~Picture();
 
       /*! Constructor
        * \param x -> x initial coordinate
@@ -38,7 +41,7 @@ class picture: public guiObject
        * \param h -> height of the picture
        * \param surface -> surface to draw to
        * \param arquivo -> fileName to opwn or NULL to not open a file */
-      picture(int x,int y,int w,int h,const char* arquivo, 
+      Picture(int x,int y,int w,int h,const char* arquivo, 
             SDL_Surface* surface);
 
       /*! Draw the Picture on the surface */
@@ -79,6 +82,7 @@ class picture: public guiObject
 
 };
 
+}
 
 #endif
 

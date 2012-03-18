@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -30,7 +30,7 @@ class itemWindow
    public:
       /*! Constructor
        * \param interf -> gui interface to open the window */
-      itemWindow(guiInterface* interf);
+      itemWindow(Farso::GuiInterface* interf);
 
       /*! Destructor */
       ~itemWindow();
@@ -46,19 +46,19 @@ class itemWindow
        * \param object -> last GUI object
        * \param eventInfo -> last GUI Event
        * \return != 0 if event is gathered */
-      int treat(guiObject* object, int eventInfo);
+      int treat(Farso::GuiObject* object, int eventInfo);
 
       /*! Verify if the window is openned
        * \return true if opened, false otherwise. */
       bool isOpen();
 
    protected:
-      window* intWindow;         /**< Pointer to the internal window */
+      Farso::Window* intWindow;  /**< Pointer to the internal window */
       object* curObject;         /**< Pointer to current object */
 
-      guiInterface* inter;       /**< Current GUI interface */
-      picture* fig;              /**< The item figure */
-      button* okButton;          /**< The ok Button */
+      Farso::GuiInterface* inter;/**< Current GUI interface */
+      Farso::Picture* fig;       /**< The item figure */
+      Farso::Button* okButton;   /**< The ok Button */
 
 };
 

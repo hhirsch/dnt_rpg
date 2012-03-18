@@ -31,14 +31,16 @@
 
 #include <string>
 
+namespace Farso
+{
 
 #define WINDOW_MENU_MIN_MAX  1
 #define WINDOW_MENU_CLOSE    3
 
-class windowList;
+class WindowList;
 
 /*! The Window Object */
-class window: public guiObject
+class Window: public GuiObject
 {
    public:
       /*! Constructor
@@ -49,11 +51,11 @@ class window: public guiObject
        * \param title -> title of the window
        * \param list -> guiList pointer to the list where the window is 
        * \param empty -> with window is without any self draw */ 
-      window(int xa, int ya, int xb, int yb, std::string title,
-             windowList* list, bool empty=false);
+      Window(int xa, int ya, int xb, int yb, std::string title,
+             WindowList* list, bool empty=false);
 
       /*! Destructor */
-      ~window();
+      ~Window();
       
       /*! Draw the Window to its internal surface
        * \param mouseX -> mouse X position
@@ -89,7 +91,7 @@ class window: public guiObject
 
       /*! Get the objects list
        * \return guiList of objects on the window */
-      guiList* getObjectsList(){return(objects);};
+      GuiList* getObjectsList(){return(objects);};
 
       /*! Get the surface of the window
        * \return window surface */
@@ -111,7 +113,7 @@ class window: public guiObject
       bool canMoveWindow(){return(canMove);};
 
       /*! Set the extern pointer of the window */
-      void setExternPointer(window** extr){externPointer=extr;};
+      void setExternPointer(Window** extr){externPointer=extr;};
 
       /*! Set the mouse click difference, usually for move the window */
       void setDiff(int x, int y){difx = x; dify = y;};
@@ -138,7 +140,7 @@ class window: public guiObject
       void setModal();
 
    protected:
-      windowList* intList;       /**< Pointer to the list where the window is */
+      WindowList* intList;       /**< Pointer to the list where the window is */
       int minX,                  /**< Min Size of X axys */
           minY;                  /**< Min Size of the Y axys */
       bool canMaximize;          /**< If can maximize the window */
@@ -147,7 +149,7 @@ class window: public guiObject
       bool canMove;              /**< If can move the window */
       bool modal;                /**< If the window is modal or not */
       bool visible;              /**< If the window is visible or not */
-      guiList* objects;          /**< Objects on the Window */
+      GuiList* objects;          /**< Objects on the Window */
       SDL_Surface *surface;      /**< Window Surface */
       GLuint texture;            /**< GL texture for the window */
       GLfloat alpha;             /**< Alpha Value of the texture \fixme! */
@@ -155,11 +157,11 @@ class window: public guiObject
               propY;             /**< Texture Y proportion */
       int difx;                  /**< Difference of X where mouse clicked */
       int dify;                  /**< Difference of Y where mouse clicked */
-      window **externPointer;    /**< Pointer to the extern window pointer */
-      farso_colors Colors;       /**< Colors Used */
-      button* closeButton;    /**< Button to close Window */
-      button* menuButton;     /**< Button to open Window Menu */
-      button* minMaxButton;   /**< Button to minimize, maximize the window */
+      Window **externPointer;    /**< Pointer to the extern window pointer */
+      Colors colors;             /**< Colors Used */
+      Button* closeButton;    /**< Button to close Window */
+      Button* menuButton;     /**< Button to open Window Menu */
+      Button* minMaxButton;   /**< Button to minimize, maximize the window */
 
       bool hasSelfDraw;          /**< If has title bar or not */
 
@@ -171,14 +173,14 @@ class window: public guiObject
 };
 
 /*! The List of Windows Class (windowList) */
-class windowList
+class WindowList
 {
    public:
       /*! Constructor */
-      windowList();
+      WindowList();
 
       /*! Destructor */
-      ~windowList();
+      ~WindowList();
  
       /*! Insert a new window on the list
        * \param xa -> x1 coordinate
@@ -187,39 +189,39 @@ class windowList
        * \param yb -> y2 coordinate 
        * \param text -> title of the window
        * \param empty -> with window is without any self draw */ 
-      window* insertWindow(int xa,int ya,int xb,int yb, std::string text, 
+      Window* insertWindow(int xa,int ya,int xb,int yb, std::string text, 
             bool empty=false);
 
       /*! Remove a window from the list
        * \param jan -> pointer to window to remove */
-      void removeWindow(window *jan);
+      void removeWindow(Window *jan);
 
       /*! Get the active window
        * \return pointer to the active window */
-      window* getActiveWindow(){return(activeWindow);};
+      Window* getActiveWindow(){return(activeWindow);};
 
       /*! Set the active window
        * \param jan -> pointer to the new active window */
-      void setActiveWindow(window* jan);
+      void setActiveWindow(Window* jan);
 
       /*! Clear the list, deleting all windows */
       void clearList();
 
-      friend class guiInterface;
+      friend class GuiInterface;
 
    protected:
       
-      std::list<window*>list;
+      std::list<Window*>list;
 
       /*! Get the most recent modal window on the list
        * \return pointer to the most recent modal window or NULL if no modal 
        *         windos at all. */
-      window* getModalWindow();
+      Window* getModalWindow();
 
-      window* activeWindow;   /**< The Active Window */
+      Window* activeWindow;   /**< The Active Window */
 }; 
 
-
+}
 
 #endif
 

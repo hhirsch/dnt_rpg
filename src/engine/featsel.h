@@ -37,7 +37,7 @@ class featSelWindow
    public:
       /*! Constructor
        * \param interf -> gui interface to open the window */
-      featSelWindow(guiInterface* interf);
+      featSelWindow(Farso::GuiInterface* interf);
 
       /*! Destructor */
       ~featSelWindow();
@@ -56,7 +56,7 @@ class featSelWindow
        * \param object -> last GUI object
        * \param eventInfo -> last GUI Event
        * \return != 0 if event is gathered */
-      int treat(guiObject* object, int eventInfo);
+      int treat(Farso::GuiObject* object, int eventInfo);
 
       /*! Verify if the window is openned
        * \return true if opened, false otherwise. */
@@ -99,8 +99,8 @@ class featSelWindow
        * \param f -> feat to show description */
       void drawThings(fSelFeat* f);
      
-      window* intWindow;         /**< Pointer to the internal window */
-      guiInterface* inter;       /**< Current GUI interface */
+      Farso::Window* intWindow;         /**< Pointer to the internal window */
+      Farso::GuiInterface* inter;       /**< Current GUI interface */
       character* current;        /**< Current opened character */
       int curTotal;              /**< Current total */
 
@@ -108,32 +108,34 @@ class featSelWindow
       fSelFeatList availableFeats; /**< List of available feats */
       fSelFeatList selectedFeats;  /**< List of selected feats */
 
-      textBox* textAvail[FEATS_PER_PAGE];  /**< Available feats text */
-      picture* picAvail[FEATS_PER_PAGE];   /**< Available feats picture */
-      button* buttonInsert[FEATS_PER_PAGE];/**< Insert Available feat buttons */
+      Farso::TextBox* textAvail[FEATS_PER_PAGE];/**< Available feats text */
+      Farso::Picture* picAvail[FEATS_PER_PAGE]; /**< Available feats picture */
+      Farso::Button* buttonInsert[FEATS_PER_PAGE];/**< Insert Available 
+                                                       feat buttons */
       fSelFeat* curAvail[FEATS_PER_PAGE];  /**< Current available feats */
-      button* nextAvailButton;             /**< Next Page Button on available */
-      textBox* textAvailPage;              /**< Page of available feats */
-      button* prevAvailButton;         /**< Previous Page Button on available */
-      textBox* textSel[FEATS_PER_PAGE];    /**< Selected feats text */
-      picture* picSel[FEATS_PER_PAGE];     /**< Selected feats picture */
-      button* buttonRemove[FEATS_PER_PAGE];/**< Remove Selected feat buttons */
+      Farso::Button* nextAvailButton;      /**< Next Page Button on available */
+      Farso::TextBox* textAvailPage;       /**< Page of available feats */
+      Farso::Button* prevAvailButton; /**< Previous Page Button on available */
+      Farso::TextBox* textSel[FEATS_PER_PAGE]; /**< Selected feats text */
+      Farso::Picture* picSel[FEATS_PER_PAGE];  /**< Selected feats picture */
+      Farso::Button* buttonRemove[FEATS_PER_PAGE];/**< Remove Selected 
+                                                       feat buttons */
       fSelFeat* curSel[FEATS_PER_PAGE];    /**< Current selected feats */
-      button* nextSelButton;               /**< Next Page button on selected */
-      textBox* textSelPage;                /**< Page of selected feats */
-      button* prevSelButton;            /**< Previous page button on selected */
-      textBox* textTotal;                  /**< Total remaining text */
+      Farso::Button* nextSelButton;        /**< Next Page button on selected */
+      Farso::TextBox* textSelPage;         /**< Page of selected feats */
+      Farso::Button* prevSelButton;     /**< Previous page button on selected */
+      Farso::TextBox* textTotal;          /**< Total remaining text */
 
       int curSelPage;                      /**< Current selected page */
       int curAvailPage;                    /**< Current available page */
 
-      textBox* textTitle;             /**< Feat title */
-      rolBar* textDescription;        /**< Feat description */
-      picture* picFeat;               /**< Feat image */
+      Farso::TextBox* textTitle;             /**< Feat title */
+      Farso::RolBar* textDescription;        /**< Feat description */
+      Farso::Picture* picFeat;               /**< Feat image */
 
 
-      button* okButton;          /**< The ok Button */
-      button* cancelButton;      /**< The cancel button */
+      Farso::Button* okButton;          /**< The ok Button */
+      Farso::Button* cancelButton;      /**< The cancel button */
 };
 
 #endif

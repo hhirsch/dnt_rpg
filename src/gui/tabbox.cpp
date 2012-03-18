@@ -25,44 +25,45 @@
 
 #include <iostream>
 using namespace std;
+using namespace Farso;
 
 //////////////////////////////////////////////////////////////////////////
 //                                                                      //
-//                                  tabObj                              //
+//                                  TabObj                              //
 //                                                                      //
 //////////////////////////////////////////////////////////////////////////
 
 /***********************************************************************
  *                              Constructor                            *
  ***********************************************************************/
-tabObj::tabObj(int w, int h, SDL_Surface* surface)
+TabObj::TabObj(int w, int h, SDL_Surface* surface)
 {
-   list = new guiList(w, h, surface, true);
+   list = new GuiList(w, h, surface, true);
    title = "";
 }
 
 /***********************************************************************
  *                               Destructor                            *
  ***********************************************************************/
-tabObj::~tabObj()
+TabObj::~TabObj()
 {
    delete(list);
 }
 
 //////////////////////////////////////////////////////////////////////////
 //                                                                      //
-//                                  tabBox                              //
+//                                  TabBox                              //
 //                                                                      //
 //////////////////////////////////////////////////////////////////////////
 
 /***********************************************************************
  *                              Constructor                            *
  ***********************************************************************/
-tabBox::tabBox(int xa, int ya, int xb, int yb, SDL_Surface* screen)
-       :guiObject(screen)
+TabBox::TabBox(int xa, int ya, int xb, int yb, SDL_Surface* screen)
+       :GuiObject(screen)
 {
    /* Define guiObject type */
-   type = FARSO_OBJECT_TAB_BOX;
+   type = Farso::OBJECT_TAB_BOX;
    /* Define Position */
    x1 = xa;
    y1 = ya;
@@ -76,9 +77,9 @@ tabBox::tabBox(int xa, int ya, int xb, int yb, SDL_Surface* screen)
 /***********************************************************************
  *                               Destructor                            *
  ***********************************************************************/
-tabBox::~tabBox()
+TabBox::~TabBox()
 {
-   std::list<tabObj*>::iterator it;
+   std::list<TabObj*>::iterator it;
    for(it=tabs.begin(); it != tabs.end(); it++)
    {
       delete(*it);
@@ -89,7 +90,7 @@ tabBox::~tabBox()
 /***********************************************************************
  *                             getActiveList                           *
  ***********************************************************************/
-guiList* tabBox::getActiveList()
+GuiList* TabBox::getActiveList()
 {
    if(active)
    {
@@ -102,7 +103,7 @@ guiList* tabBox::getActiveList()
 /***********************************************************************
  *                            getActiveTitle                           *
  ***********************************************************************/
-string tabBox::getActiveTitle()
+string TabBox::getActiveTitle()
 {
    if(active)
    {
@@ -114,13 +115,13 @@ string tabBox::getActiveTitle()
 /***********************************************************************
  *                               getObject                             *
  ***********************************************************************/
-tabObj* tabBox::getObject(int opt)
+TabObj* TabBox::getObject(int opt)
 {
    int i;
    /* Search for the element */
    if( (opt < (int)tabs.size()) && (opt >= 0))
    {
-      std::list<tabObj*>::iterator it=tabs.begin();
+      std::list<TabObj*>::iterator it=tabs.begin();
       for(i = 0; i < opt; i++)
       {
          it++;
@@ -134,9 +135,9 @@ tabObj* tabBox::getObject(int opt)
 /***********************************************************************
  *                                getList                              *
  ***********************************************************************/
-guiList* tabBox::getList(int opt)
+GuiList* TabBox::getList(int opt)
 {
-   tabObj* obj = getObject(opt);
+   TabObj* obj = getObject(opt);
 
    if(obj != NULL)
    {
@@ -149,10 +150,10 @@ guiList* tabBox::getList(int opt)
 /***********************************************************************
  *                                getList                              *
  ***********************************************************************/
-guiList* tabBox::getList(string title)
+GuiList* TabBox::getList(string title)
 {
    /* Search for the element */
-   std::list<tabObj*>::iterator it;
+   std::list<TabObj*>::iterator it;
    for(it = tabs.begin(); it != tabs.end(); it++)
    {
       if((*it)->title == title)
@@ -168,14 +169,14 @@ guiList* tabBox::getList(string title)
 /***********************************************************************
  *                              insertOption                           *
  ***********************************************************************/
-guiList* tabBox::insertOption(string title)
+GuiList* TabBox::insertOption(string title)
 {
-   tabObj* obj;
+   TabObj* obj;
 
    /* Only insert if not found! */
    if(getList(title) == NULL)
    {
-      obj = new tabObj(x2-x1, y2-y1, wSurface);
+      obj = new TabObj(x2-x1, y2-y1, wSurface);
       obj->title = title;
 
       /* Insert it */
@@ -193,7 +194,7 @@ guiList* tabBox::insertOption(string title)
 /***********************************************************************
  *                                 draw                                *
  ***********************************************************************/
-void tabBox::draw()
+void TabBox::draw()
 {
    if(tabs.size() == 0)
    {
@@ -204,15 +205,15 @@ void tabBox::draw()
    int incX = (x2-x1) / tabs.size();
    int posX = 0;
    int endPos = 0;
-   tabObj* obj;
-   farso_colors colors;
+   TabObj* obj;
+   Colors colors;
 
    /* Set the font */
-   farsoOptions opt;
-   dntFont fnt;
+   Options opt;
+   Font fnt;
    fnt.defineFont(opt.getDefaultFont(), 10);
-   fnt.defineFontAlign(DNT_FONT_ALIGN_CENTER);
-   fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
+   fnt.defineFontAlign(Font::ALIGN_CENTER);
+   fnt.defineFontStyle(Font::STYLE_NORMAL);
    
    /* No draw when hidden */
    if(!isVisible())
@@ -232,7 +233,7 @@ void tabBox::draw()
 
    /* Draw All Titles */
    posX = x1;
-   std::list<tabObj*>::iterator it;
+   std::list<TabObj*>::iterator it;
    i = 0;
    for(it = tabs.begin(); it != tabs.end(); it++)
    {
@@ -294,7 +295,7 @@ void tabBox::draw()
 /***********************************************************************
  *                              verifyChanges                          *
  ***********************************************************************/
-bool tabBox::verifyChanges(int mouseX, int mouseY)
+bool TabBox::verifyChanges(int mouseX, int mouseY)
 {
    if(tabs.size() == 0)
    {
@@ -302,7 +303,7 @@ bool tabBox::verifyChanges(int mouseX, int mouseY)
    }
    int incX = (x2-x1) / tabs.size();
    int cur = 0;
-   tabObj* obj = NULL;
+   TabObj* obj = NULL;
 
    if(isMouseAt(x1, y1, x2, y1+18, mouseX, mouseY))
    {

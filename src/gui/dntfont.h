@@ -18,8 +18,8 @@
   along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef _farso_dntfont_h
-#define _farso_dntfont_h
+#ifndef _farso_font_h
+#define _farso_font_h
 
 #include <SDL/SDL.h>
 
@@ -32,19 +32,11 @@
 #include <string>
 #include <list>
 
-#define DNT_FONT_ALIGN_LEFT    0
-#define DNT_FONT_ALIGN_CENTER  1
-
-#define DNT_FONT_STYLE_NORMAL TTF_STYLE_NORMAL
-#define DNT_FONT_STYLE_BOLD   TTF_STYLE_BOLD
-#define DNT_FONT_STYLE_ITALIC TTF_STYLE_ITALIC
-#define DNT_FONT_STYLE_UNDERLINE TTF_STYLE_UNDERLINE
-
-#define MAX_TEXT  8192
-
+namespace Farso
+{
 
 /*! Single loaded font */
-class loadedFont
+class LoadedFont
 {
    public:
       std::string fontName;   /**< The font Name */
@@ -54,22 +46,36 @@ class loadedFont
 };
 
 /*! The loaded fonts */
-class loadedFontList
+class LoadedFontList
 {
    public:
       /*! Constructor */
-      loadedFontList();
+      LoadedFontList();
       /*! Destructor */
-      ~loadedFontList();
+      ~LoadedFontList();
 
-      std::list<loadedFont*>fonts;
+      std::list<LoadedFont*>fonts;
 
 };
 
-/*! The DNT font class. Used to write texts on surfaces with ttf fonts. */
-class dntFont
+/*! The font class. Used to write texts on surfaces with ttf fonts. */
+class Font
 {
    public:
+
+      enum FontAlignEnum
+      {
+         ALIGN_LEFT=0,
+         ALIGN_CENTER
+      };
+
+      static const int STYLE_NORMAL = TTF_STYLE_NORMAL;
+      static const int STYLE_BOLD = TTF_STYLE_BOLD;
+      static const int STYLE_ITALIC = TTF_STYLE_ITALIC;
+      static const int STYLE_UNDERLINE = TTF_STYLE_UNDERLINE;
+      static const int MAX_TEXT = 8192;
+
+
       /*! Init the font system to use. \note Only needed to be called one 
        * time at the init of the engine. */
       void init();
@@ -198,13 +204,13 @@ class dntFont
        * \param fontName -> file name of the font to load
        * \param fontSize -> size of the font to load
        * \return -> loadedFont pointer */
-      loadedFont* loadFont(std::string fontName, int fontSize);
+      LoadedFont* loadFont(std::string fontName, int fontSize);
       /*! Search for a font on the list
        * \param fontName -> file name of the font to load
        * \param fontSize -> size of the font to load
        * \return -> loadedFont pointer with the founded font, 
        *             or NULL, if not found. */
-      loadedFont* findFont(std::string fontName, int fontSize);
+      LoadedFont* findFont(std::string fontName, int fontSize);
 
       /*! Render text to a new surface
        * \param str -> text to render
@@ -217,14 +223,15 @@ class dntFont
                     int x,int y, std::string text, int x1,int y1,
                     int x2,int y2, bool solid, bool isUtf8);
       
-      static loadedFontList* fonts;  /**< List of loaded fonts */
+      static LoadedFontList* fonts;  /**< List of loaded fonts */
       static int activeFontAlign;    /**< The active font alignment */
       static int activeFontStyle;    /**< The active Font Style */
-      static loadedFont* activeFont; /**< The active font */
+      static LoadedFont* activeFont; /**< The active font */
       static SDL_Rect rect; /**< rectangle */
 
 };
 
+}
 
 #endif
 

@@ -87,7 +87,7 @@ void comicPage::flushTexture()
 {
    if(texture != NULL)
    {
-      setTexture(texture, tex);
+      Farso::setTexture(texture, tex);
    }
 }
 
@@ -143,7 +143,7 @@ void comicPage::render()
    GLfloat ratio = 1.0f;
    if(texture)
    { 
-      ratio = (float)SCREEN_Y / (float)texture->h;
+      ratio = (float)Farso::SCREEN_Y / (float)texture->h;
    }
 
    glColor4f(1.0f,1.0f,1.0f,1.0f);
@@ -154,7 +154,7 @@ void comicPage::render()
    /* Center the Page on screen */
    if(texture)
    {
-      glTranslatef(((SCREEN_X/2.0) - ratio*(texture->w/2.0)),0.0,0.0);
+      glTranslatef(((Farso::SCREEN_X/2.0) - ratio*(texture->w/2.0)),0.0,0.0);
 
       /* Render Blank Page */
       GLfloat midX = ratio * texture->w;
@@ -199,7 +199,7 @@ void comicPage::insertBox(comicBox* box)
  ***********************************************************************/
 void comicPage::insertText(int x1, int y1, int x2, int y2, string text)
 {
-   insertText(x1, y1, x2, y2, text, 16, DNT_FONT_STYLE_NORMAL, 0, 0, 0);
+   insertText(x1, y1, x2, y2, text, 16, Farso::Font::STYLE_NORMAL, 0, 0, 0);
 }
 
 /***********************************************************************
@@ -211,16 +211,16 @@ void comicPage::insertText(int x1, int y1, int x2, int y2, string text,
 {
    if(texture != NULL)
    {
-      dntFont fnt;
+      Farso::Font fnt;
       dirs dir;
       fnt.defineFont(dir.getRealFile(DNT_FONT_TIMES), fontSize);
-      fnt.defineFontAlign(DNT_FONT_ALIGN_CENTER);
+      fnt.defineFontAlign(Farso::Font::ALIGN_CENTER);
       fnt.defineFontStyle(fontStyle);
 
-      color_Set(R, G, B, 255);
+      Farso::color_Set(R, G, B, 255);
       fnt.write(texture, x1+1,y1+2, text, x1,y1,x2,y2);
 
-      fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
+      fnt.defineFontStyle(Farso::Font::STYLE_NORMAL);
    }
    else
    {

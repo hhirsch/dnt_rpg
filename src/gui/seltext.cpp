@@ -23,16 +23,16 @@
 
 #include <iostream>
 using namespace std;
-
+using namespace Farso;
 
 /***************************************************************************
  *                            Constructor                                  *
  ***************************************************************************/
-selText::selText(int xa,int ya,int xb,int yb, string text0, string text1,
+SelText::SelText(int xa,int ya,int xb,int yb, string text0, string text1,
                  string text2, string text3, string text4,
-                 SDL_Surface* screen):guiObject(screen)
+                 SDL_Surface* screen):GuiObject(screen)
 {
-   type = FARSO_OBJECT_SEL_TEXT;
+   type = OBJECT_SEL_TEXT;
    x1 = xa;
    y1 = ya;
    x2 = xb;
@@ -56,14 +56,14 @@ selText::selText(int xa,int ya,int xb,int yb, string text0, string text1,
 /***************************************************************************
  *                             Destructor                                  *
  ***************************************************************************/
-selText::~selText()
+SelText::~SelText()
 {
 }
 
 /***************************************************************************
  *                           setCoordinate                                 *
  ***************************************************************************/
-void selText::setCoordinate(int xa,int ya,int xb,int yb)
+void SelText::setCoordinate(int xa,int ya,int xb,int yb)
 {
    x1 = xa;
    y1 = ya;
@@ -76,7 +76,7 @@ void selText::setCoordinate(int xa,int ya,int xb,int yb)
 /***************************************************************************
  *                           getCoordinate                                 *
  ***************************************************************************/
-void selText::getCoordinate(int& xa,int& ya,int& xb,int& yb)
+void SelText::getCoordinate(int& xa,int& ya,int& xb,int& yb)
 {
    xa = x1;
    ya = y1;
@@ -88,15 +88,15 @@ void selText::getCoordinate(int& xa,int& ya,int& xb,int& yb)
 /***************************************************************************
  *                                draw                                     *
  ***************************************************************************/
-void selText::draw()
+void SelText::draw()
 {
    int ya = y1+3;
    int aux;
-   farsoOptions opt;
-   dntFont fnt;
+   Options opt;
+   Font fnt;
    fnt.defineFont(opt.getDefaultFont(),10); 
-   fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
-   fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
+   fnt.defineFontAlign(Font::ALIGN_LEFT);
+   fnt.defineFontStyle(Font::STYLE_NORMAL);
    
    int height = fnt.getHeight();
    
@@ -107,14 +107,14 @@ void selText::draw()
    }
 
    /* Clear the current */
-   color_Set(Cores.colorWindow.R, Cores.colorWindow.G, 
-             Cores.colorWindow.B, Cores.colorWindow.A);
+   color_Set(cores.colorWindow.R, cores.colorWindow.G, 
+             cores.colorWindow.B, cores.colorWindow.A);
    rectangle_Fill(wSurface,x1,y1,x2,y2);
-   color_Set(Cores.colorCont[1].R, Cores.colorCont[1].G,
-             Cores.colorCont[1].B, Cores.colorCont[1].A);
-   rectangle_2Colors(wSurface,x1,y1,x2,y2, Cores.colorCont[0].R,
-                     Cores.colorCont[0].G, Cores.colorCont[0].B,
-                     Cores.colorCont[0].A);
+   color_Set(cores.colorCont[1].R, cores.colorCont[1].G,
+             cores.colorCont[1].B, cores.colorCont[1].A);
+   rectangle_2Colors(wSurface,x1,y1,x2,y2, cores.colorCont[0].R,
+                     cores.colorCont[0].G, cores.colorCont[0].B,
+                     cores.colorCont[0].A);
 
    for(aux = 0; aux<5;aux++)
    {
@@ -122,13 +122,13 @@ void selText::draw()
       {
          if(aux != selec)
          {
-            color_Set(Cores.colorText.R, Cores.colorText.G,
-                      Cores.colorText.B, Cores.colorText.A);
+            color_Set(cores.colorText.R, cores.colorText.G,
+                      cores.colorText.B, cores.colorText.A);
          }
          else
          {
-            color_Set(Cores.colorSelText.R, Cores.colorSelText.G,
-                      Cores.colorSelText.B, Cores.colorSelText.A);
+            color_Set(cores.colorSelText.R, cores.colorSelText.G,
+                      cores.colorSelText.B, cores.colorSelText.A);
          }
          ya=fnt.write(wSurface,4+x1,ya,
                optText[aux].c_str(),x1+1,y1+1,x2-1,y2-1);
@@ -141,7 +141,7 @@ void selText::draw()
 /***************************************************************************
  *                           writeSelected                                 *
  ***************************************************************************/
-void selText::writeSelected(int selectedItem)
+void SelText::writeSelected(int selectedItem)
 {
    selec = selectedItem;
    draw();
@@ -150,13 +150,13 @@ void selText::writeSelected(int selectedItem)
 /***************************************************************************
  *                          getSelectedItem                                *
  ***************************************************************************/
-int selText::getSelectedItem(int ya )
+int SelText::getSelectedItem(int ya )
 {
-   dntFont fnt;
-   farsoOptions opt;
+   Font fnt;
+   Options opt;
    fnt.defineFont(opt.getDefaultFont(), 10);
-   fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
-   fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
+   fnt.defineFontAlign(Font::ALIGN_LEFT);
+   fnt.defineFontStyle(Font::STYLE_NORMAL);
    int height = fnt.getHeight();
    int aux;
    int selaux = -1;
@@ -183,7 +183,7 @@ int selText::getSelectedItem(int ya )
 /***************************************************************************
  *                                 treat                                   *
  ***************************************************************************/
-int selText::treat(int xa,int ya, Uint8 Mbotao)
+int SelText::treat(int xa,int ya, Uint8 Mbotao)
 {
    int lastSelec = selec;
    selec = -1;
@@ -233,7 +233,7 @@ int selText::treat(int xa,int ya, Uint8 Mbotao)
 /***************************************************************************
  *                          getLastSelectedItem                            *
  ***************************************************************************/
-int selText::getLastSelectedItem(int* info)
+int SelText::getLastSelectedItem(int* info)
 {
    if( (info) && (selec >= 0) && (selec < MAX_OPTIONS))
    {
@@ -246,7 +246,7 @@ int selText::getLastSelectedItem(int* info)
 /***************************************************************************
  *                                setText                                  *
  ***************************************************************************/
-void selText::setText(int opt, string txt, int info)
+void SelText::setText(int opt, string txt, int info)
 {
    if(opt < MAX_OPTIONS)
    {
@@ -261,7 +261,7 @@ void selText::setText(int opt, string txt, int info)
 /***************************************************************************
  *                               clearText                                 *
  ***************************************************************************/
-void selText::clearText()
+void SelText::clearText()
 {
    int i;
    for(i = 0; i < MAX_OPTIONS; i++)

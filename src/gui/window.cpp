@@ -24,11 +24,12 @@
 
 #include <iostream>
 using namespace std;
+using namespace Farso;
 
 /*********************************************************************
  *                            Constructor                            *
  *********************************************************************/
-windowList::windowList()
+WindowList::WindowList()
 {
    activeWindow = NULL;
 }
@@ -36,7 +37,7 @@ windowList::windowList()
 /*********************************************************************
  *                             Destructor                            *
  *********************************************************************/
-windowList::~windowList()
+WindowList::~WindowList()
 {
    clearList();
 }
@@ -44,10 +45,10 @@ windowList::~windowList()
 /**************************************************************
  *                          clearList                         *
  **************************************************************/
-void windowList::clearList()
+void WindowList::clearList()
 {
-   std::list<window*>::iterator it;
-   window* obj;
+   std::list<Window*>::iterator it;
+   Window* obj;
 
    for(it=list.begin(); it != list.end(); it++)
    {
@@ -60,13 +61,13 @@ void windowList::clearList()
 /*********************************************************************
  *                           insertWindow                            *
  *********************************************************************/
-window* windowList::insertWindow(int xa,int ya,int xb,int yb,string text,
+Window* WindowList::insertWindow(int xa,int ya,int xb,int yb,string text,
       bool empty)
 {
-   window* novo;
+   Window* novo;
 
-   /* Create and insert the window on the list */
-   novo = new window(xa,ya,xb,yb,text,this, empty);
+   /* Create and insert the Window on the list */
+   novo = new Window(xa,ya,xb,yb,text,this, empty);
    list.push_back(novo);
 
    return(novo);
@@ -75,13 +76,13 @@ window* windowList::insertWindow(int xa,int ya,int xb,int yb,string text,
 /*********************************************************************
  *                         getModalWindow                            *
  *********************************************************************/
-window* windowList::getModalWindow()
+Window* WindowList::getModalWindow()
 {
-   window* modalW = NULL;
+   Window* modalW = NULL;
 
-   std::list<window*>::iterator it;
+   std::list<Window*>::iterator it;
 
-   /* Get the last (most recent) modal window */
+   /* Get the last (most recent) modal Window */
    for(it=list.begin(); it != list.end(); it++)
    {
       if((*it)->isModal())
@@ -96,7 +97,7 @@ window* windowList::getModalWindow()
 /*********************************************************************
  *                           removeWindow                            *
  *********************************************************************/
-void windowList::removeWindow(window *jan)
+void WindowList::removeWindow(Window *jan)
 {
    /* Verify ActiveWindow Pointer */
    if(jan == activeWindow)
@@ -105,7 +106,7 @@ void windowList::removeWindow(window *jan)
       list.remove(jan);
       if((list.size() > 0))
       {
-         window* j = list.back();
+         Window* j = list.back();
          j->activate();
       }
    }
@@ -119,7 +120,7 @@ void windowList::removeWindow(window *jan)
 /*********************************************************************
  *                         setActiveWindow                           *
  *********************************************************************/
-void windowList::setActiveWindow(window* jan)
+void WindowList::setActiveWindow(Window* jan)
 {
    activeWindow = jan;
    /* Reinsert it at the end, to be last draw (aka on top)
@@ -131,11 +132,11 @@ void windowList::setActiveWindow(window* jan)
 /*********************************************************************
  *                             Constructor                           *
  *********************************************************************/
-window::window(int xa, int ya, int xb, int yb, string title, windowList* list,
-      bool empty):guiObject(NULL)
+Window::Window(int xa, int ya, int xb, int yb, string title, WindowList* list,
+      bool empty):GuiObject(NULL)
 {
-   dntFont fnt;
-   farsoOptions opt;
+   Font fnt;
+   Options opt;
 
    /* Set Variables */
    intList = list;
@@ -184,7 +185,7 @@ window::window(int xa, int ya, int xb, int yb, string title, windowList* list,
    propY = (float)(yb-ya) / (float)smallestPowerOfTwo(yb-ya);
 
    /* Create Objects List */
-   objects = new guiList(x2-x1, y2-y1, surface, hasSelfDraw);
+   objects = new GuiList(x2-x1, y2-y1, surface, hasSelfDraw);
 
 
    /* Create title bar things */
@@ -192,8 +193,8 @@ window::window(int xa, int ya, int xb, int yb, string title, windowList* list,
    {
       /* Create Menu Button */
       menuButton = objects->insertButton(3,3,13,12,"-",0);
-      menuButton->men = new menu(0,0,x2-x1, y2-y1, surface);
-      menu* men = (menu*) menuButton->men;
+      menuButton->men = new Menu(0,0,x2-x1, y2-y1, surface);
+      Menu* men = (Menu*) menuButton->men;
       men->insertItem(opt.getMaximizeLabel(), opt.getMaximizeIcon(), 0);
       men->insertItem("-",0);
       men->insertItem(opt.getCloseLabel(), opt.getCloseIcon(), 1);
@@ -217,13 +218,13 @@ window::window(int xa, int ya, int xb, int yb, string title, windowList* list,
    }
 
    /* Set the object type as WINDOW! */
-   type = FARSO_OBJECT_WINDOW;
+   type = Farso::OBJECT_WINDOW;
 }
 
 /*********************************************************************
  *                             Destructor                            *
  *********************************************************************/
-window::~window()
+Window::~Window()
 {
    if(externPointer != NULL)
    {
@@ -237,7 +238,7 @@ window::~window()
 /*********************************************************************
  *                                draw                               *
  *********************************************************************/
-void window::draw()
+void Window::draw()
 {
    draw(-1,-1, true);
 }
@@ -245,34 +246,34 @@ void window::draw()
 /*********************************************************************
  *                                draw                               *
  *********************************************************************/
-void window::draw(int mouseX, int mouseY, bool drawBar)
+void Window::draw(int mouseX, int mouseY, bool drawBar)
 {
    int dx = x2 - x1;
    int dy = y2 - y1;
 
    if(hasSelfDraw)
    {
-      color_Set(Colors.colorWindow.R, Colors.colorWindow.G,
-            Colors.colorWindow.B, Colors.colorWindow.A);
+      color_Set(colors.colorWindow.R, colors.colorWindow.G,
+            colors.colorWindow.B, colors.colorWindow.A);
       rectangle_Fill(surface, 3,3,dx-3,dy-3);
-      color_Set(Colors.colorCont[0].R, Colors.colorCont[0].G,
-            Colors.colorCont[0].B, Colors.colorCont[0].A);
+      color_Set(colors.colorCont[0].R, colors.colorCont[0].G,
+            colors.colorCont[0].B, colors.colorCont[0].A);
       rectangle_Draw(surface,0,0,dx-1,dy-1);
-      color_Set(Colors.colorButton.R, Colors.colorButton.G, 
-            Colors.colorButton.B, Colors.colorButton.A);
+      color_Set(colors.colorButton.R, colors.colorButton.G, 
+            colors.colorButton.B, colors.colorButton.A);
       rectangle_Draw(surface,1,1,dx-2,dy-2);
-      color_Set(Colors.colorCont[2].R, Colors.colorCont[2].G,
-            Colors.colorCont[2].B, Colors.colorCont[2].A);
+      color_Set(colors.colorCont[2].R, colors.colorCont[2].G,
+            colors.colorCont[2].B, colors.colorCont[2].A);
       line_Draw(surface,2,13,dx-4,13);
-      color_Set(Colors.colorCont[0].R, Colors.colorCont[0].G,
-            Colors.colorCont[0].B, Colors.colorCont[0].A);
-      rectangle_2Colors(surface,2,2,dx-3,dy-3,Colors.colorCont[2].R,
-            Colors.colorCont[2].G,Colors.colorCont[2].B,
-            Colors.colorCont[2].A);
+      color_Set(colors.colorCont[0].R, colors.colorCont[0].G,
+            colors.colorCont[0].B, colors.colorCont[0].A);
+      rectangle_2Colors(surface,2,2,dx-3,dy-3,colors.colorCont[2].R,
+            colors.colorCont[2].G,colors.colorCont[2].B,
+            colors.colorCont[2].A);
 
 
       /* Draw the bar */
-      windowList* lst = (windowList*)intList;
+      WindowList* lst = (WindowList*)intList;
 
       if(drawBar)
       {
@@ -296,26 +297,26 @@ void window::draw(int mouseX, int mouseY, bool drawBar)
 /*********************************************************************
  *                         drawInactiveBar                           *
  *********************************************************************/
-void window::drawInactiveBar()
+void Window::drawInactiveBar()
 {
-   farsoOptions opt;
-   dntFont fnt;
+   Options opt;
+   Font fnt;
    int dx = x2-x1;
 
-   /* Redraw All window, removing the mouse from it */
+   /* Redraw All Window, removing the mouse from it */
    draw(-1,-1, false);
 
    if(hasSelfDraw)
    {
       /* Redraw the Inactive Bar */
-      color_Set(Colors.colorWindow.R, Colors.colorWindow.G,
-            Colors.colorWindow.B, Colors.colorWindow.A);
+      color_Set(colors.colorWindow.R, colors.colorWindow.G,
+            colors.colorWindow.B, colors.colorWindow.A);
       rectangle_Fill(surface,36,3,dx-3,12);
-      color_Set(Colors.colorBar.R+100, Colors.colorBar.G,
-            Colors.colorBar.B, Colors.colorBar.A);
+      color_Set(colors.colorBar.R+100, colors.colorBar.G,
+            colors.colorBar.B, colors.colorBar.A);
       fnt.defineFont(opt.getDefaultFont(),10);
-      fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
-      fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
+      fnt.defineFontAlign(Font::ALIGN_LEFT);
+      fnt.defineFontStyle(Font::STYLE_NORMAL);
       fnt.write(surface,39,1,text);
    }
    setChanged();
@@ -324,22 +325,22 @@ void window::drawInactiveBar()
 /*********************************************************************
  *                           drawActiveBar                           *
  *********************************************************************/
-void window::drawActiveBar()
+void Window::drawActiveBar()
 {
-   farsoOptions opt;
-   dntFont fnt;
+   Options opt;
+   Font fnt;
    int dx = x2-x1;
 
    if(hasSelfDraw)
    {
-      color_Set(Colors.colorBar.R, Colors.colorBar.G,
-            Colors.colorBar.B, Colors.colorBar.A);
+      color_Set(colors.colorBar.R, colors.colorBar.G,
+            colors.colorBar.B, colors.colorBar.A);
       rectangle_Fill(surface,36,3,dx-3,12);
-      color_Set(Colors.colorText.R, Colors.colorText.G,
-            Colors.colorText.B, Colors.colorText.A);
+      color_Set(colors.colorText.R, colors.colorText.G,
+            colors.colorText.B, colors.colorText.A);
       fnt.defineFont(opt.getDefaultFont(),10);
-      fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
-      fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
+      fnt.defineFontAlign(Font::ALIGN_LEFT);
+      fnt.defineFontStyle(Font::STYLE_NORMAL);
       fnt.write(surface,39,1,text);
       setChanged();
    }
@@ -348,7 +349,7 @@ void window::drawActiveBar()
 /*********************************************************************
  *                               flush                               *
  *********************************************************************/
-void window::flush()
+void Window::flush()
 {
    setTextureRGBA(surface, texture, false, GL_RGBA);
 }
@@ -356,7 +357,7 @@ void window::flush()
 /*********************************************************************
  *                              render                               *
  *********************************************************************/
-void window::render(float depth)
+void Window::render(float depth)
 {
    /* Update the Texture if needed */
    if(changed())
@@ -389,23 +390,23 @@ void window::render(float depth)
 /*********************************************************************
  *                             activate                              *
  *********************************************************************/
-void window::activate()
+void Window::activate()
 {
-  windowList *ljan = (windowList*) intList;
+  WindowList *ljan = (WindowList*) intList;
   if (ljan->getActiveWindow() != NULL)
   {
      if(ljan->getActiveWindow()->isModal())
      {
-        /* The current active window is a modal one,
-         * so it continue as the active window! */
+        /* The current active Window is a modal one,
+         * so it continue as the active Window! */
         return;
      }
 
-     /* Draw the Inactive TitleBar to the current active window */
+     /* Draw the Inactive TitleBar to the current active Window */
      ljan->getActiveWindow()->drawInactiveBar();
   }
 
-  /* Set this window as the new active one */
+  /* Set this Window as the new active one */
   ljan->setActiveWindow(this);
 
   /* And obviously, draw its active bar */
@@ -415,7 +416,7 @@ void window::activate()
 /*********************************************************************
  *                               open                                *
  *********************************************************************/
-void window::open()
+void Window::open()
 {
    activate();
    draw(0,0);
@@ -425,11 +426,11 @@ void window::open()
 /*********************************************************************
  *                          setAttributes                            *
  *********************************************************************/
-void window::setAttributes(bool close, bool move, bool scale, bool maximize)
+void Window::setAttributes(bool close, bool move, bool scale, bool maximize)
 {
    if(hasSelfDraw)
    {
-      menu* men = (menu*)menuButton->men;
+      Menu* men = (Menu*)menuButton->men;
       canClose = close;
       men->setItemAvailable(WINDOW_MENU_CLOSE, canClose);
       canMove = move;
@@ -441,7 +442,7 @@ void window::setAttributes(bool close, bool move, bool scale, bool maximize)
 /*********************************************************************
  *                              isModal                              *
  *********************************************************************/
-bool window::isModal()
+bool Window::isModal()
 {
    return(modal);
 }
@@ -449,7 +450,7 @@ bool window::isModal()
 /*********************************************************************
  *                              setModal                             *
  *********************************************************************/
-void window::setModal()
+void Window::setModal()
 {
    modal = true;
 }
@@ -457,7 +458,7 @@ void window::setModal()
 /*********************************************************************
  *                                hide                               *
  *********************************************************************/
-void window::hide()
+void Window::hide()
 {
    visible = false;
 }
@@ -465,7 +466,7 @@ void window::hide()
 /*********************************************************************
  *                                 show                              *
  *********************************************************************/
-void window::show()
+void Window::show()
 {
    visible = true;
 }
@@ -473,7 +474,7 @@ void window::show()
 /*********************************************************************
  *                             isVisible                             *
  *********************************************************************/
-bool window::isVisible()
+bool Window::isVisible()
 {
    return(visible);
 }
@@ -481,12 +482,12 @@ bool window::isVisible()
 /*********************************************************************
  *                              changed                              *
  *********************************************************************/
-bool window::changed()
+bool Window::changed()
 {
    bool result = false;
 
    /* Verify the Window */
-   result |= guiObject::changed();
+   result |= GuiObject::changed();
 
    /* Verify some Object Change. Must verify all to avoid
     * not needed redraws at next frame.  */
@@ -499,7 +500,7 @@ bool window::changed()
 /*********************************************************************
  *                               doMove                              *
  *********************************************************************/
-int window::doMove(SDL_Surface* backGround, int xinic, int yinic, int Mbotao)
+int Window::doMove(SDL_Surface* backGround, int xinic, int yinic, int Mbotao)
 {
    int dx = x2 - x1;        /* Width */
    int dy = y2 - y1;        /* Heigh */
@@ -508,7 +509,7 @@ int window::doMove(SDL_Surface* backGround, int xinic, int yinic, int Mbotao)
 
    if(Mbotao & SDL_BUTTON(1))
    {
-      /* Calculate the translation from window (0,0) coordinate */
+      /* Calculate the translation from Window (0,0) coordinate */
       x = xinic - difx; 
       y = yinic - dify;
 

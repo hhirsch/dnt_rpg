@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -38,11 +38,11 @@ class miniMapWindow
        * \param posX -> character X position
        * \param posZ -> character Z position 
        * \param openedMap -> current opened map */
-      void open(guiInterface* gui, float posX, float posZ,
+      void open(Farso::GuiInterface* gui, float posX, float posZ,
                 Map* openedMap);
       /*! Close the minimap window (if opened)
        * \param gui -> guiInterface where the window is */
-      void close(guiInterface* gui);
+      void close(Farso::GuiInterface* gui);
 
       /*! Update the active character map position
        * \param posX -> character X position
@@ -56,14 +56,14 @@ class miniMapWindow
       /*! Reopen the Window (if is opened) 
        * \param gui -> pointer to the used guiInterface 
        * \param openedMap -> current opened map */
-      void reOpen(guiInterface* gui, Map* openedMap);
+      void reOpen(Farso::GuiInterface* gui, Map* openedMap);
 
    protected:
       static int width;             /**< Current picture width */
       static int height;            /**< Current picture height */
-      static picture* fig;          /**< The current minimap picture */
-      static window* mapWindow;     /**< MiniMap Window */
-      static button* charPosition;  /**< Character MiniMap Button */
+      static Farso::Picture* fig;          /**< The current minimap picture */
+      static Farso::Window* mapWindow;     /**< MiniMap Window */
+      static Farso::Button* charPosition;  /**< Character MiniMap Button */
       static Map* curMap;           /**< Current Opened Map */
 };
 

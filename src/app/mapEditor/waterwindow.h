@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -18,19 +18,19 @@
   along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef _dnt_map_editor_waterwindow_h
-#define _dnt_map_editor_waterwindow_h
+#ifndef _dnt_map_editor_water_window_h
+#define _dnt_map_editor_water_window_h
 
 #include "../../particle/partcontroller.h"
 #include "../../gui/farso.h"
 
-/*! The water controller window */
+/*! The water controller Farso::Window */
 class waterWindow
 {
    public:
       /*! Constructor
        * \param actualGui -> actual used interface */
-      waterWindow(guiInterface* actualGui);
+      waterWindow(Farso::GuiInterface* actualGui);
 
       /*! Destructor */
       ~waterWindow();
@@ -47,18 +47,18 @@ class waterWindow
        * \param pS -> the particle system controller */
       void setPartSystem(partController* pS);
 
-      /*! Verify if some event is related to the window
+      /*! Verify if some event is related to the Farso::Window
        * \param type -> Type of the occurred event
        * \param object -> object of the event 
-       * \return -> true if event is related (and treated) by the window */
-      bool eventGot(int type, guiObject* object);
+       * \return -> true if event is related (and treated) by the Window */
+      bool eventGot(int type, Farso::GuiObject* object);
 
       /*! Draw the temporary things to the screen */
       void drawTemporary();
       
    protected:
 
-      /*! Open the water window */
+      /*! Open the water Farso::Window */
       void openWindow();
 
       /*! Define the Values amd put on the boxes */
@@ -67,59 +67,59 @@ class waterWindow
       particleSystem* activeWater;        /**< The active Water */
       interPlane* activePlane;            /**< The active Plane */
       partController* pSystem;            /**< The active Controller */
-      guiInterface* gui;                  /**< The used Interface */
+      Farso::GuiInterface* gui;           /**< The used Interface */
    
 
-      window* intWindow;                  /**< The internal window pointer */
+      Farso::Window* intWindow;   /**< The internal Farso::Window pointer */
 
-      tabButton* waterTab;                /**< Water Tab */
-      oneTabButton* buttonDestroyWater;   /**< Destroy active water */
-      oneTabButton* buttonPreviousWater;  /**< Previous Water */
-      oneTabButton* buttonNextWater;      /**< Next Water */
+      Farso::TabButton* waterTab;                /**< Water Tab */
+      Farso::OneTabButton* buttonDestroyWater;/**< Destroy activeWater */
+      Farso::OneTabButton* buttonPreviousWater;  /**< Previous Water */
+      Farso::OneTabButton* buttonNextWater;      /**< Next Water */
 
-      tabButton* waterMoveTab;            /**< Water Move tab */
-      oneTabButton* buttonMoveWaterUp;    /**< Water Move Up */
-      oneTabButton* buttonMoveWaterDown;  /**< Water Move Down */
+      Farso::TabButton* waterMoveTab;            /**< Water Move tab */
+      Farso::OneTabButton* buttonMoveWaterUp;    /**< Water Move Up */
+      Farso::OneTabButton* buttonMoveWaterDown;  /**< Water Move Down */
    
-      tabButton* planesTab;               /**< Planes Tab */
-      oneTabButton* buttonAddPlane;       /**< Add Plane */
-      oneTabButton* buttonDestroyPlane;   /**< Destroy Active Plane */
-      oneTabButton* buttonPreviousPlane;  /**< Previous Plane */
-      oneTabButton* buttonNextPlane;      /**< Next Plane */
+      Farso::TabButton* planesTab;               /**< Planes Tab */
+      Farso::OneTabButton* buttonAddPlane;       /**< Add Plane */
+      Farso::OneTabButton* buttonDestroyPlane;/**< Destroy Active Plane*/
+      Farso::OneTabButton* buttonPreviousPlane;  /**< Previous Plane */
+      Farso::OneTabButton* buttonNextPlane;      /**< Next Plane */
 
-      tabButton* incTypeTab;              /**< Plane Inclination type Tab */
-      oneTabButton* buttonNoInclination;  /**< No Inclination */
-      oneTabButton* buttonInclinationX;   /**< X axys Inclination */
-      oneTabButton* buttonInclinationZ;   /**< Z axys Inclination */
+      Farso::TabButton* incTypeTab;           /**< Plane Inclination type Tab */
+      Farso::OneTabButton* buttonNoInclination;  /**< No Inclination */
+      Farso::OneTabButton* buttonInclinationX;/**< X axys Inclination */
+      Farso::OneTabButton* buttonInclinationZ;/**< Z axys Inclination */
 
-      tabButton* movXZTab;                /**< Move Plane on XZ axys Tab */
-      oneTabButton* buttonMoveZMore;      /**< Move More on Z */
-      oneTabButton* buttonMoveZLess;      /**< Move Less on Z */
-      oneTabButton* buttonMoveXMore;      /**< Move More on X */
-      oneTabButton* buttonMoveXLess;      /**< Move Less on X */
+      Farso::TabButton* movXZTab;             /**< Move Plane on XZ axys Tab */
+      Farso::OneTabButton* buttonMoveZMore;      /**< Move More on Z */
+      Farso::OneTabButton* buttonMoveZLess;      /**< Move Less on Z */
+      Farso::OneTabButton* buttonMoveXMore;      /**< Move More on X */
+      Farso::OneTabButton* buttonMoveXLess;      /**< Move Less on X */
 
-      tabButton* movYTab;                 /**< Move Plane on Y axys Tab */
-      oneTabButton* buttonMoveYMore;      /**< Move More on Y */
-      oneTabButton* buttonMoveYLess;      /**< Move Less on Y */
-      oneTabButton* buttonMoveY1More;     /**< Move Y1 More */
-      oneTabButton* buttonMoveY1Less;     /**< Move Y1 Less */
-      oneTabButton* buttonMoveY2More;     /**< Move Y2 More */
-      oneTabButton* buttonMoveY2Less;     /**< Move Y2 Less */
+      Farso::TabButton* movYTab;              /**< Move Plane on Y axys Tab */
+      Farso::OneTabButton* buttonMoveYMore;      /**< Move More on Y */
+      Farso::OneTabButton* buttonMoveYLess;      /**< Move Less on Y */
+      Farso::OneTabButton* buttonMoveY1More;     /**< Move Y1 More */
+      Farso::OneTabButton* buttonMoveY1Less;     /**< Move Y1 Less */
+      Farso::OneTabButton* buttonMoveY2More;     /**< Move Y2 More */
+      Farso::OneTabButton* buttonMoveY2Less;     /**< Move Y2 Less */
 
-      tabButton* scaleTab;                /**< Plane Scale Tab */
-      oneTabButton* buttonScaleXMore;     /**< Scale more on X */
-      oneTabButton* buttonScaleXLess;     /**< Scale less on X */
-      oneTabButton* buttonScaleZMore;     /**< Scale more on Z */
-      oneTabButton* buttonScaleZLess;     /**< Scale less on Z */
-      oneTabButton* buttonScaleYMore;     /**< Scale more on Y */
-      oneTabButton* buttonScaleYLess;     /**< Scale less on Y */
+      Farso::TabButton* scaleTab;                /**< Plane Scale Tab */
+      Farso::OneTabButton* buttonScaleXMore;     /**< Scale more on X */
+      Farso::OneTabButton* buttonScaleXLess;     /**< Scale less on X */
+      Farso::OneTabButton* buttonScaleZMore;     /**< Scale more on Z */
+      Farso::OneTabButton* buttonScaleZLess;     /**< Scale less on Z */
+      Farso::OneTabButton* buttonScaleYMore;     /**< Scale more on Y */
+      Farso::OneTabButton* buttonScaleYLess;     /**< Scale less on Y */
 
-      button* dxWaterflowMore;            /**< More dX flow */
-      textBox* dxWaterflowText;           /**< dx flow text */
-      button* dxWaterflowLess;            /**< Less dX flow */
-      button* dzWaterflowMore;            /**< More dZ flow */
-      textBox* dzWaterflowText;           /**< dz flow text */
-      button* dzWaterflowLess;            /**< Less dZ flow */
+      Farso::Button* dxWaterflowMore;            /**< More dX flow */
+      Farso::TextBox* dxWaterflowText;           /**< dx flow text */
+      Farso::Button* dxWaterflowLess;            /**< Less dX flow */
+      Farso::Button* dzWaterflowMore;            /**< More dZ flow */
+      Farso::TextBox* dzWaterflowText;           /**< dz flow text */
+      Farso::Button* dzWaterflowLess;            /**< Less dZ flow */
 };
 
 

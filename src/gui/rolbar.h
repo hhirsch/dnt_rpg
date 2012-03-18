@@ -30,10 +30,13 @@
 #include "button.h"
 #include "textbox.h"
 
-class guiList;
+namespace Farso
+{
+
+class GuiList;
 
 /*! Rolling Text Bar Definition */
-class rolBar: public guiObject
+class RolBar: public GuiObject
 {
    public:
       /*! Constructor
@@ -44,22 +47,22 @@ class rolBar: public guiObject
        * \param txt -> text on the rolbar
        * \param list -> pointer to the guiList
        * \param surface -> pointer to the screen surface */
-      rolBar(int xa, int ya, int xb, int yb, std::string txt, guiList* list, 
+      RolBar(int xa, int ya, int xb, int yb, std::string txt, GuiList* list, 
              SDL_Surface* surface);
       /*! Destructor */
-      ~rolBar();
+      ~RolBar();
 
       /*! Verify if the rolBar is the owner of a guiObject
        * \param obj -> pointer to the desired guiObject
        * \return -> true if obj is from the rolBar (a button, for example) */
-      bool isOwner(guiObject* obj);
+      bool isOwner(GuiObject* obj);
 
       /*! Verify if some event is related to the rolBar
        * \param type -> Type of the occurred event
        * \param object -> object of the event 
        * \param mouseY -> mouse Y coordinate
        * \return -> true if event is related (and threated) by the rolBar */
-      bool eventGot(int type, guiObject* object, int y);
+      bool eventGot(int type, GuiObject* object, int y);
 
       /*! Set The Text of the Bar, putting them on top
        * \param txt -> desired text */
@@ -113,12 +116,12 @@ class rolBar: public guiObject
       std::string getLastLine();
 
    private:
-      button* up;              /**< Up Button */
-      button* down;            /**< Down Button */
-      button* actualPressed;   /**< Actual Pressed Button */
-      textBox* scrollText;     /**< Text of The Scroll */
-      textBox* contorn;        /**< Contorn of the Scroll */
-      button* position;        /**< Contorn Text Position */
+      Button* up;              /**< Up Button */
+      Button* down;            /**< Down Button */
+      Button* actualPressed;   /**< Actual Pressed Button */
+      TextBox* scrollText;     /**< Text of The Scroll */
+      TextBox* contorn;        /**< Contorn of the Scroll */
+      Button* position;        /**< Contorn Text Position */
 
       Uint32 lastUpdated;     /**< Last Time when updated */
       int maxHeight;          /**< Max Height */
@@ -127,8 +130,10 @@ class rolBar: public guiObject
       int sizeY;              /**< The size of position button */
       int lastMouseY;         /**< Last mouse Y */
       
-      guiList* intList;       /**< Internal GUI Objects List */
+      GuiList* intList;       /**< Internal GUI Objects List */
 };
+
+}
 
 #endif
 

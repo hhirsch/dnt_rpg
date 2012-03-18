@@ -37,13 +37,13 @@ static int cmpClassFunction(const void *p1,  const void *p2)
 /********************************************************************
  *                           Constructor                            *
  ********************************************************************/
-classWindow::classWindow(guiInterface* inter, classe** retClass)
+classWindow::classWindow(Farso::GuiInterface* inter, classe** retClass)
 {
-   farsoOptions fopt;
+   Farso::Options fopt;
    classes cls;
-   dntFont fnt;
-   int centerY = SCREEN_Y / 2;
-   int centerX = SCREEN_X / 2;
+   Farso::Font fnt;
+   int centerY = Farso::SCREEN_Y / 2;
+   int centerX = Farso::SCREEN_X / 2;
    int i;
 
    choosedClass = retClass;
@@ -92,10 +92,10 @@ classWindow::classWindow(guiInterface* inter, classe** retClass)
    classImage->set(classesOrder[curClass]->image);
 
    /* TabBox */
-   tabBox *tab = (tabBox*)intWindow->getObjectsList()->defineTabBox(74,18,
-                                                                    345,345);
-   guiList *listChar = tab->insertOption(gettext("Characteristics"));
-   guiList *listDesc = tab->insertOption(gettext("Description"));
+   Farso::TabBox *tab = (Farso::TabBox*)intWindow->getObjectsList()->
+      defineTabBox(74,18,345,345);
+   Farso::GuiList *listChar = tab->insertOption(gettext("Characteristics"));
+   Farso::GuiList *listDesc = tab->insertOption(gettext("Description"));
 
    /* Class Description */
    textDesc = listDesc->insertRolBar(77,39,342,341,"");
@@ -112,8 +112,8 @@ classWindow::classWindow(guiInterface* inter, classe** retClass)
                                                   fnt.createUnicode(0x25BA),0);
    textName = intWindow->getObjectsList()->insertTextBox(90,346,329,364,1, 
                                           classesOrder[curClass]->name.c_str());
-   textName->setFont(fopt.getDefaultFont(),10,DNT_FONT_ALIGN_CENTER,
-                     DNT_FONT_STYLE_BOLD);
+   textName->setFont(fopt.getDefaultFont(),10,Farso::Font::ALIGN_CENTER,
+                     Farso::Font::STYLE_BOLD);
 
    /* Confirm Button */
    buttonConfirm = intWindow->getObjectsList()->insertButton(271,370,341,389,
@@ -142,7 +142,7 @@ classWindow::~classWindow()
  ********************************************************************/
 void classWindow::setCharacteristics()
 {
-   farsoOptions fopt;
+   Farso::Options fopt;
    int i;
    char tmp[1024];
    char c;
@@ -156,12 +156,12 @@ void classWindow::setCharacteristics()
    textCharac->setText("|");
    textCharac->addText(string(gettext("Life Dice")) + tmp, 
                        fopt.getDefaultFont(),
-                       10, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
+                       10, Farso::Font::ALIGN_LEFT, Farso::Font::STYLE_ITALIC,
                        240, 120, 0);
 
    textCharac->addText(string(gettext("Skill Points")) + "||",
-                       fopt.getDefaultFont(), 12, DNT_FONT_ALIGN_CENTER,
-                       DNT_FONT_STYLE_UNDERLINE,
+                       fopt.getDefaultFont(), 12, Farso::Font::ALIGN_CENTER,
+                       Farso::Font::STYLE_UNDERLINE,
                        86, 161, 32);
 
    /* Skill Points for First Level */
@@ -190,7 +190,7 @@ void classWindow::setCharacteristics()
    }
    textCharac->addText(string(gettext("First Level")) + tmp, 
                        fopt.getDefaultFont(),
-                       10, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
+                       10, Farso::Font::ALIGN_LEFT, Farso::Font::STYLE_ITALIC,
                        220,0,0);
 
    /* Other Levels Points */
@@ -219,14 +219,14 @@ void classWindow::setCharacteristics()
    }
    textCharac->addText(string(gettext("Other Levels")) + tmp, 
                        fopt.getDefaultFont(),
-                       10, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
+                       10, Farso::Font::ALIGN_LEFT, Farso::Font::STYLE_ITALIC,
                        220,0,0);
 
    /* Modifiers */
    textCharac->addText(string(gettext("Class Modifiers")) + "||", 
                        fopt.getDefaultFont(),
-                       12, DNT_FONT_ALIGN_CENTER,
-                       DNT_FONT_STYLE_UNDERLINE,
+                       12, Farso::Font::ALIGN_CENTER,
+                       Farso::Font::STYLE_UNDERLINE,
                        86, 161, 32);
    for(i=0; i<classesOrder[curClass]->totalModifiers; i++)
    {
@@ -237,16 +237,16 @@ void classWindow::setCharacteristics()
    if(classesOrder[curClass]->totalModifiers == 0)
    {
       textCharac->addText(string(gettext("No Modifiers.")) + "||",
-                          fopt.getDefaultFont(), 10, DNT_FONT_ALIGN_LEFT,
-                          DNT_FONT_STYLE_NORMAL,
+                          fopt.getDefaultFont(), 10, Farso::Font::ALIGN_LEFT,
+                          Farso::Font::STYLE_NORMAL,
                           75,147,207);
    }
 
    /* Feats */
    featDescription* fDesc = NULL;
    textCharac->addText(string(gettext("Class Talents")) + "||",
-                       fopt.getDefaultFont(), 12, DNT_FONT_ALIGN_CENTER,
-                       DNT_FONT_STYLE_UNDERLINE,
+                       fopt.getDefaultFont(), 12, Farso::Font::ALIGN_CENTER,
+                       Farso::Font::STYLE_UNDERLINE,
                        86, 161, 32);
    for(i=0; i<classesOrder[curClass]->totalFeats; i++)
    {
@@ -264,16 +264,16 @@ void classWindow::setCharacteristics()
    if(classesOrder[curClass]->totalFeats == 0)
    {
       textCharac->addText(string(gettext("No Talents.")) + "||",
-                          fopt.getDefaultFont(), 10, DNT_FONT_ALIGN_LEFT,
-                          DNT_FONT_STYLE_NORMAL,
+                          fopt.getDefaultFont(), 10, Farso::Font::ALIGN_LEFT,
+                          Farso::Font::STYLE_NORMAL,
                           75,147,207);
    }
 
    /* Skills */
    textCharac->addText("|");
    textCharac->addText(string(gettext("Class Skills")) + "||",
-                       fopt.getDefaultFont(), 12, DNT_FONT_ALIGN_CENTER,
-                       DNT_FONT_STYLE_UNDERLINE,
+                       fopt.getDefaultFont(), 12, Farso::Font::ALIGN_CENTER,
+                       Farso::Font::STYLE_UNDERLINE,
                        86, 161, 32);
    for(i=0; i<classesOrder[curClass]->totalSkills; i++)
    {
@@ -291,8 +291,8 @@ void classWindow::setCharacteristics()
    if(classesOrder[curClass]->totalSkills == 0)
    {
       textCharac->addText(gettext("No Skills."), 
-                          fopt.getDefaultFont(), 10, DNT_FONT_ALIGN_LEFT,
-                          DNT_FONT_STYLE_NORMAL,
+                          fopt.getDefaultFont(), 10, Farso::Font::ALIGN_LEFT,
+                          Farso::Font::STYLE_NORMAL,
                           75,147,207);
    }
 
@@ -304,11 +304,11 @@ void classWindow::setCharacteristics()
  ********************************************************************/
 void classWindow::setDescription()
 {
-   farsoOptions fopt;
+   Farso::Options fopt;
    textDesc->setText("");
    textDesc->addText(classesOrder[curClass]->citation + "||", 
                      fopt.getDefaultFont(),
-                     10, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
+                     10, Farso::Font::ALIGN_LEFT, Farso::Font::STYLE_ITALIC,
                      220,0,0);
    textDesc->addText(classesOrder[curClass]->description);
    textDesc->setFirstLine(0);
@@ -317,14 +317,15 @@ void classWindow::setDescription()
 /********************************************************************
  *                              treat                               *
  ********************************************************************/
-int classWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
+int classWindow::treat(Farso::GuiObject* object, int eventInfo, 
+      Farso::GuiInterface* inter)
 {
-   if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
+   if(eventInfo == Farso::EVENT_PRESSED_BUTTON)
    {
-      if( (object == (guiObject*) buttonNext) || 
-          (object == (guiObject*) buttonPrevious))
+      if( (object == (Farso::GuiObject*) buttonNext) || 
+          (object == (Farso::GuiObject*) buttonPrevious))
       { 
-         if(object == (guiObject*) buttonNext)
+         if(object == (Farso::GuiObject*) buttonNext)
          {
             curClass = (curClass + 1) % totalClasses;
          }
@@ -343,13 +344,13 @@ int classWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
          classImage->set(classesOrder[curClass]->image);
          intWindow->draw(0,0);
       }
-      else if(object == (guiObject*) buttonConfirm)
+      else if(object == (Farso::GuiObject*) buttonConfirm)
       {
          *choosedClass = classesOrder[curClass];
          inter->closeWindow(intWindow);
          return(CLASSW_CONFIRM);
       }
-      else if(object == (guiObject*) buttonCancel) 
+      else if(object == (Farso::GuiObject*) buttonCancel) 
       {
          inter->closeWindow(intWindow);
          *choosedClass = NULL;

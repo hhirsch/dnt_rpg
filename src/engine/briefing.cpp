@@ -52,7 +52,7 @@ bool briefing::isOpened()
 /***********************************************************************
  *                             openWindow                              *
  ***********************************************************************/
-void briefing::openWindow(guiInterface* gui)
+void briefing::openWindow(Farso::GuiInterface* gui)
 {
    dirs dir;
 
@@ -72,7 +72,7 @@ void briefing::openWindow(guiInterface* gui)
 /***********************************************************************
  *                            closeWindow                              *
  ***********************************************************************/
-void briefing::closeWindow(guiInterface* gui)
+void briefing::closeWindow(Farso::GuiInterface* gui)
 {
    if(briefWindow != NULL)
    {
@@ -84,7 +84,7 @@ void briefing::closeWindow(guiInterface* gui)
 /***********************************************************************
  *                              reOpen                                 *
  ***********************************************************************/
-void briefing::reOpen(guiInterface* gui)
+void briefing::reOpen(Farso::GuiInterface* gui)
 {
    int x1=0, y1=0, x2=0, y2=0;
    if(isOpened())
@@ -129,8 +129,8 @@ void briefing::addText(string text)
 void briefing::addText(string text, int R, int G, int B)
 {
    dirs dir;
-   addText(text, dir.getRealFile(DNT_FONT_ARIAL), 10, DNT_FONT_STYLE_NORMAL, 
-           DNT_FONT_ALIGN_LEFT, R, G, B); 
+   addText(text, dir.getRealFile(DNT_FONT_ARIAL), 10, Farso::Font::STYLE_NORMAL,
+           Farso::Font::ALIGN_LEFT, R, G, B); 
 }
 
 /***********************************************************************
@@ -178,7 +178,7 @@ void briefing::addCheckText(string testName, int value, int difficulty)
 /***********************************************************************
  *                           Static Members                            *
  ***********************************************************************/
-rolBar* briefing::briefTxt = NULL;
-window* briefing::briefWindow = NULL;
+Farso::RolBar* briefing::briefTxt = NULL;
+Farso::Window* briefing::briefWindow = NULL;
 Uint32 briefing::timeLastAdd = 0;
 

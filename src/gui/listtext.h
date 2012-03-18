@@ -26,10 +26,13 @@
 #include "rolbar.h"
 #include "tabbutton.h"
 
-class guiList;
+namespace Farso
+{
+
+class GuiList;
 
 /*! The listText class. Is a list of texts elements to select one */
-class listText: public guiObject
+class ListText: public GuiObject
 {
    public:
       /*! Constructor 
@@ -39,10 +42,10 @@ class listText: public guiObject
        * \param yb -> y2 position
        * \param surface -> window surface to draw
        * \param list -> pointer to the GUI objects list */
-      listText(int xa, int ya, int xb, int yb, SDL_Surface* surface,
-               guiList* list);
+      ListText(int xa, int ya, int xb, int yb, SDL_Surface* surface,
+               GuiList* list);
       /*! Destructor */
-      ~listText();
+      ~ListText();
 
       /*! Clear the text list */
       void clear();
@@ -69,7 +72,7 @@ class listText: public guiObject
        * \param type -> Type of the occurred event
        * \param object -> object of the event 
        * \return -> true if event is related (and treated) by the listText */
-      bool eventGot(int type, guiObject* object);
+      bool eventGot(int type, GuiObject* object);
 
       /*! Get the selected text
        * \return selected text */
@@ -79,21 +82,23 @@ class listText: public guiObject
        * \return selected text position */
       int getSelectedPos();
 
-      rolBar* roll;           /**< RolBar of the list */
-      tabButton* table;       /**< TabButton of the list */
+      RolBar* roll;           /**< RolBar of the list */
+      TabButton* table;       /**< TabButton of the list */
 
    protected:
       /*! Define tabButton buttons avaialabilility */
       void defineTabButton();
 
    private:
-      guiList* intList;           /**< Internal GUI Objects List */
-      oneTabButton** listButtons; /**< Buttons of the List*/
+      GuiList* intList;           /**< Internal GUI Objects List */
+      OneTabButton** listButtons; /**< Buttons of the List*/
       std::string selectedText;   /**< Text selected */
       int selectedPos;            /**< Position on list of the selected */
       int maxButtons;             /**< Max number of buttons */
       std::list<std::string>textList; /**< List of text elements */
 };
+
+}
 
 #endif
 

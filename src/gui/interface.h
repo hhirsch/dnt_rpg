@@ -26,72 +26,75 @@
 #include "menu.h"
 #include "guilist.h"
 
+namespace Farso
+{
+
 /********************************************************************
  *                      Return's constants                          *
  ********************************************************************/
-enum
+enum FarsoEventsEnum
 {
-   FARSO_EVENT_NONE,
-   FARSO_EVENT_EXIT,
-   FARSO_EVENT_MODIFIED_SEL_TEXT,
-   FARSO_EVENT_SELECTED_MENU,
-   FARSO_EVENT_PRESSED_BUTTON,
-   FARSO_EVENT_NOT_PRESSED_BUTTON,
-   FARSO_EVENT_WROTE_TEXT_BAR,
-   FARSO_EVENT_MODIFYING_CX_SEL,
-   FARSO_EVENT_MODIFIED_CX_SEL,
-   FARSO_EVENT_CLOSED_WINDOW,
-   FARSO_EVENT_ACTIVATED_WINDOW,
-   FARSO_EVENT_MOVED_WINDOW,
-   FARSO_EVENT_CLICKED_WINDOW,
-   FARSO_EVENT_PRESSED_TAB_BUTTON,
-   FARSO_EVENT_RIGHT_PRESSED_TAB_BUTTON,
-   FARSO_EVENT_ON_PRESS_TAB_BUTTON,
-   FARSO_EVENT_ON_RIGHT_PRESS_TAB_BUTTON,
-   FARSO_EVENT_ON_PRESS_BUTTON,
-   FARSO_EVENT_MODIFIED_MENU,
-   FARSO_EVENT_SELECTED_SEL_TEXT,
-   FARSO_EVENT_SELECTED_LIST_TEXT,
-   FARSO_EVENT_ON_FOCUS_TAB_BUTTON,
-   FARSO_EVENT_FILE_SEL_ACCEPT,
-   FARSO_EVENT_FILE_SEL_CANCEL,
-   FARSO_EVENT_FILE_SEL_CHANGED,
-   FARSO_EVENT_TAB_BOX_CHANGED,
-   FARSO_EVENT_ON_PRESS_TEXT_BOX,
-   FARSO_EVENT_ON_PRESS_PICTURE
+   EVENT_NONE,
+   EVENT_EXIT,
+   EVENT_MODIFIED_SEL_TEXT,
+   EVENT_SELECTED_MENU,
+   EVENT_PRESSED_BUTTON,
+   EVENT_NOT_PRESSED_BUTTON,
+   EVENT_WROTE_TEXT_BAR,
+   EVENT_MODIFYING_CX_SEL,
+   EVENT_MODIFIED_CX_SEL,
+   EVENT_CLOSED_WINDOW,
+   EVENT_ACTIVATED_WINDOW,
+   EVENT_MOVED_WINDOW,
+   EVENT_CLICKED_WINDOW,
+   EVENT_PRESSED_TAB_BUTTON,
+   EVENT_RIGHT_PRESSED_TAB_BUTTON,
+   EVENT_ON_PRESS_TAB_BUTTON,
+   EVENT_ON_RIGHT_PRESS_TAB_BUTTON,
+   EVENT_ON_PRESS_BUTTON,
+   EVENT_MODIFIED_MENU,
+   EVENT_SELECTED_SEL_TEXT,
+   EVENT_SELECTED_LIST_TEXT,
+   EVENT_ON_FOCUS_TAB_BUTTON,
+   EVENT_FILE_SEL_ACCEPT,
+   EVENT_FILE_SEL_CANCEL,
+   EVENT_FILE_SEL_CHANGED,
+   EVENT_TAB_BOX_CHANGED,
+   EVENT_ON_PRESS_TEXT_BOX,
+   EVENT_ON_PRESS_PICTURE
 };
 
 /********************************************************************
  *                       Focus's constants                          *
  ********************************************************************/
-enum
+enum FarsoFocusEnum
 {
-   FARSO_FOCUS_WINDOW,
-   FARSO_FOCUS_TEXT_BAR,
-   FARSO_FOCUS_BUTTON,
-   FARSO_FOCUS_CX_SEL,
-   FARSO_FOCUS_MENU,
-   FARSO_FOCUS_SEL_TEXT,
-   FARSO_FOCUS_WINDOW_MOVE,
-   FARSO_FOCUS_WINDOW_MENU,
-   FARSO_FOCUS_TAB_BUTTON,
-   FARSO_FOCUS_TEXT_BOX,
-   FARSO_FOCUS_PICTURE,
-   FARSO_FOCUS_GAME
+   FOCUS_WINDOW,
+   FOCUS_TEXT_BAR,
+   FOCUS_BUTTON,
+   FOCUS_CX_SEL,
+   FOCUS_MENU,
+   FOCUS_SEL_TEXT,
+   FOCUS_WINDOW_MOVE,
+   FOCUS_WINDOW_MENU,
+   FOCUS_TAB_BUTTON,
+   FOCUS_TEXT_BOX,
+   FOCUS_PICTURE,
+   FOCUS_GAME
 };
 
 
-/*! guiInterface is the GUI upper level class. Is from it that all GUI events
+/*! GuiInterface is the GUI upper level class. Is from it that all GUI events
  * are treated, and all actions maybe be takken. */
-class guiInterface
+class GuiInterface
 {
    public:
       /*! Constructor
        * \param backImage -> name of a image file to be the background. 
        *                    NULL if no background is used*/
-      guiInterface(std::string backImage="");
+      GuiInterface(std::string backImage="");
       /*! Destructor  */
-      ~guiInterface();
+      ~GuiInterface();
 
       /*! Manipulate Events on Gui.
        * \param x -> mouseX position
@@ -101,7 +104,7 @@ class guiInterface
        * \param eventInfo -> variable that will receive the information 
        *                     on the event that occurs
        * \return -> pointer to the active objet of the action */
-      guiObject* manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
+      GuiObject* manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                                   int& eventInfo);
       /*! Draw all the guiInterface (all windows and objects)
        * \param proj -> project view matrix
@@ -113,7 +116,7 @@ class guiInterface
       void clearActiveObject();
       /*! Close a window
        * \param jan -> pointer to the window */
-      void closeWindow(window *jan);
+      void closeWindow(Window *jan);
       /*! Close all guiInterface openned windows */
       void closeAllWindows();
       /*! Verify if the mouse is on some window or not
@@ -129,11 +132,11 @@ class guiInterface
        * \param text -> title of the window 
        * \param empty -> with window is without any self draw 
        * \return -> pointer to the inserted window */
-      window* insertWindow(int xa,int ya,int xb,int yb,std::string text,
+      Window* insertWindow(int xa,int ya,int xb,int yb,std::string text,
             bool empty=false);
       /*! Open a Window
        * \param jan -> pointer to the window opened */
-      void openWindow(window* jan);
+      void openWindow(Window* jan);
       
       /*! Get the guiInterface focus
        * \return focus constant of the current focus*/
@@ -141,11 +144,11 @@ class guiInterface
 
       /*! Get active Window
        * \return -> pointer to the active Window */
-      window* getActiveWindow();
+      Window* getActiveWindow();
 
       /*! Set a window to be the active one
        * \param w -> window to activate */
-      void setActiveWindow(window* w);
+      void setActiveWindow(Window* w);
 
       /*! Hide All Current Windows */
       void hideAll();
@@ -160,26 +163,26 @@ class guiInterface
        * \param y -> mouse y coordinate
        * \param list -> pointer to the guiList to verify 
        * \note -> call this function after verify the mouse is pressed. */
-      void verifyMousePressObjects(int x, int y, guiList* list);
+      void verifyMousePressObjects(int x, int y, GuiList* list);
 
       /*! Verify mouse in at objects
        * \param x -> mouse x coordinate
        * \param y -> mouse y coordinate
        * \param list -> pointer to the guiList to verify */
-      void verifyMouseInObjects(int x, int y, guiList* list);
+      void verifyMouseInObjects(int x, int y, GuiList* list);
       
       /*! Verify mouse at tab boxes
        * \param x -> mouse x coordinate
        * \param y -> mouse y coordinate
        * \param list -> pointer to the guiList to verify
        * \return -> tabBox pointer if event got */
-      guiObject* verifyTabBox(int x, int y, guiList* list);
+      GuiObject* verifyTabBox(int x, int y, GuiList* list);
 
       /*! Verify RolBars (after got button pressed events)
        * \param x -> mouse x coordinate
        * \param y -> mouse y coordinate
        * \param guiList -> list of objects to verify rolBars */
-      bool verifyRolBars(int x, int y, guiList* list);
+      bool verifyRolBars(int x, int y, GuiList* list);
 
       /*! Verify events occured on gui at single components
        * \param x -> current mouse x
@@ -188,7 +191,7 @@ class guiInterface
        * \param tecla -> current keyboard state
        * \param eventInfo -> return event information got
        * \return -> pointer tot he active object */
-      guiObject* verifySingleEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
+      GuiObject* verifySingleEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                                     int& eventInfo);
 
       /*! Verify events occureed on gui at composite components (those composed
@@ -197,25 +200,25 @@ class guiInterface
        *  \param event info -> current event info from verifySingleEvents (will
        *  have the new one, if something occurs)
        *  \return -> new active object or the current one. */
-      guiObject* verifyCompositeEvents(guiObject* actObj, int& eventInfo);
+      GuiObject* verifyCompositeEvents(GuiObject* actObj, int& eventInfo);
 
       /*! Verify events occureed on gui at file selectors (its an special case)
        *  \param actObj -> active object 
        *  \param event info -> current event
        *  \return -> new active object or the current one. */
-      guiObject* verifyFileSelectorsEvents(guiObject* actObj, int& eventInfo);
+      GuiObject* verifyFileSelectorsEvents(GuiObject* actObj, int& eventInfo);
 
       int focus;                /**< Current GUI focus */
       SDL_Surface* background;  /**< background surface, if has one */
-      guiList* objects;         /**< some no window objects */
-      windowList* lwindows;     /**< windows list */
-      guiObject* activeObject;  /**< pointer to the actived object */
-      guiObject* callerObject;  /**< pointer to the caller object */
+      GuiList* objects;         /**< some no window objects */
+      WindowList* lwindows;     /**< windows list */
+      GuiObject* activeObject;  /**< pointer to the actived object */
+      GuiObject* callerObject;  /**< pointer to the caller object */
       MouseCursor mouseCursor;  /**< current mouse cursor */
 
 };
 
-
+}
 
 #endif
 

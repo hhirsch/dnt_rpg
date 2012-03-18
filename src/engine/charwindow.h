@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2010 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -33,7 +33,7 @@ class charWindow
    public:
       /*! Constructor
        * \param interf -> gui interface to open the window */
-      charWindow(guiInterface* interf);
+      charWindow(Farso::GuiInterface* interf);
 
       /*! Destructor */
       ~charWindow();
@@ -50,7 +50,7 @@ class charWindow
        * \param features -> current talents on game
        * \param eventInfo -> last GUI Event
        * \return != 0 if event is gathered */
-      int treat(guiObject* object, int eventInfo, featsList* features,
+      int treat(Farso::GuiObject* object, int eventInfo, featsList* features,
                 GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
 
       /*! Verify if the window is openned
@@ -68,18 +68,18 @@ class charWindow
        *        INVENTORY_LEFT_HAND and INVENTORY_RIGHT_HAND)*/
       void writeAboutWeapon(int inventoryPlace);
 
-      window* intWindow;         /**< Pointer to the internal window */
+      Farso::Window* intWindow;         /**< Pointer to the internal window */
       skillWindow* skWindow;     /**< Skill Window used */
       featsWindow* talentsWindow;/**< Talents window */
 
       character* current;        /**< Current character */
 
-      guiInterface* inter;       /**< Current GUI interface */
-      button* okButton;          /**< The ok Button */
-      button* levelUpButton;     /**< The Level Up Button */
-      button* skillsButton;      /**< The Skills Button */
-      button* talentsButton;     /**< The talents button */
-      rolBar* infoBar;           /**< The Info Bar */
+      Farso::GuiInterface* inter;       /**< Current GUI interface */
+      Farso::Button* okButton;          /**< The ok Button */
+      Farso::Button* levelUpButton;     /**< The Level Up Button */
+      Farso::Button* skillsButton;      /**< The Skills Button */
+      Farso::Button* talentsButton;     /**< The talents button */
+      Farso::RolBar* infoBar;           /**< The Info Bar */
 };
 
 #endif

@@ -209,7 +209,7 @@ class dialogWindow
        * \param PC -> player's character 
        * \param cv -> pointer to the conversation to show 
        * \param pictureFile -> filename of the picture to use */
-      void open(guiInterface* gui, character* PC, conversation* cv, 
+      void open(Farso::GuiInterface* gui, character* PC, conversation* cv, 
                 std::string pictureFile);
 
       /*! Treat Events on Window. 
@@ -218,7 +218,7 @@ class dialogWindow
        * \param infoW -> pointer to the used itemWindow
        * \param curEngine ->pointer to the current engine
        * \return true if event is threated, false otherwise. */
-      bool treat(guiObject* guiObj, int eventInfo,
+      bool treat(Farso::GuiObject* guiObj, int eventInfo,
                  itemWindow* infoW, engine* curEngine);
 
       /*! Verify if the dialog is open or not 
@@ -254,11 +254,11 @@ class dialogWindow
 
    protected:
       static conversation* conv;     /**< Pointer to the conversation used */
-      static window* jan;            /**< Pointer to window used to show */
-      static guiInterface* usedGui;  /**< Pointer to the used interface */
-      static rolBar* npcText;        /**< The NPC text quad */
-      static selText* pcSelText;     /**< The PC selection text */
-      static button* barterButton;   /**< The Barter Button */
+      static Farso::Window* jan;         /**< Pointer to window used to show */
+      static Farso::GuiInterface* usedGui;/**< Pointer to the used interface */
+      static Farso::RolBar* npcText;        /**< The NPC text quad */
+      static Farso::SelText* pcSelText;     /**< The PC selection text */
+      static Farso::Button* barterButton;   /**< The Barter Button */
 };
 
 #endif

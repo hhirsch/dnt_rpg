@@ -175,7 +175,7 @@ inline double rad2Deg(double y){return(y * PID180I);}
  * \param progress -> progress bar */
 void showLoading(SDL_Surface* img, GLuint* texturaTexto, 
                  GLuint texturaCarga, const char* texto,
-                 healthBar* progress);
+                 Farso::HealthBar* progress);
 
 /*! Calculate normal to the plane. */
 void normal (GLfloat x1, GLfloat y1, GLfloat z1,

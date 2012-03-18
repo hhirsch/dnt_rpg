@@ -65,7 +65,7 @@ void message3d::init(GLfloat x, GLfloat y, GLfloat z, string msg,
       GLfloat R, GLfloat G, GLfloat B, string font, int fontSize)
 {
    dirs dir;
-   dntFont fnt;
+   Farso::Font fnt;
 
    /* Define Machine Bit Order */
    Uint32 rmask, gmask, bmask, amask;
@@ -92,33 +92,33 @@ void message3d::init(GLfloat x, GLfloat y, GLfloat z, string msg,
 
    /* Define the font and sizes */
    fnt.defineFont(dir.getRealFile(font), fontSize);
-   fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
-   fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
+   fnt.defineFontAlign(Farso::Font::ALIGN_LEFT);
+   fnt.defineFontStyle(Farso::Font::STYLE_NORMAL);
    size = fnt.getStringWidth(message) + 8;
    halfSize = (size / 2.0f);
-   color_Set(0,0,0,255);
+   Farso::color_Set(0,0,0,255);
    SDL_Surface* s = SDL_CreateRGBSurface(SDL_SWSURFACE,
-                                         smallestPowerOfTwo(size),
+                                         Farso::smallestPowerOfTwo(size),
                                          32,
                                          32, rmask, gmask, bmask, amask);
    SDL_Surface* bs = SDL_CreateRGBSurface(SDL_SWSURFACE,
-                                          smallestPowerOfTwo(size),
+                                          Farso::smallestPowerOfTwo(size),
                                           32,
                                           32, rmask, gmask, bmask, amask);
    
    fnt.defineFontOutline(2);
-   color_Set(0, 0, 0, 255);
+   Farso::color_Set(0, 0, 0, 255);
    fnt.write(bs, 0, 0, message.c_str(), true);
 
    fnt.defineFontOutline(0);
-   color_Set((int)floor(R*255),(int)floor(G*255),(int)floor(B*255),255);
+   Farso::color_Set((int)floor(R*255),(int)floor(G*255),(int)floor(B*255),255);
    fnt.write(s, 2, 2, message.c_str(), true);
    
    SDL_BlitSurface(s, NULL, bs, NULL);
    
    
    glGenTextures(1,&messageTexture);
-   setTextureRGBA(bs, messageTexture);
+   Farso::setTextureRGBA(bs, messageTexture);
 
    SDL_FreeSurface(s);
    SDL_FreeSurface(bs);
@@ -291,7 +291,7 @@ void messageController::draw(GLdouble modelView[16], GLdouble projection[16],
             viewPort, &winX, &winY, &winZ);
       
       /* Calculate Texture factor */
-      factor = (float)(msg->size) / (float)(smallestPowerOfTwo(msg->size));
+      factor = (float)(msg->size)/(float)(Farso::smallestPowerOfTwo(msg->size));
 
       /* Draw */
       glColor3f(1.0f, 1.0f, 1.0f);

@@ -153,5 +153,5 @@ void cursor::draw(int mouseX, int mouseY, float angle,
  *                         Static Members                        *
  *****************************************************************/
 int cursor::currentCursor=-1;
-MouseCursor cursor::mCursor;
+Farso::MouseCursor cursor::mCursor;
 

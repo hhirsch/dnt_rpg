@@ -24,19 +24,21 @@
 #include <stdlib.h>
 using namespace std;
 
+using namespace Farso;
+
 ///////////////////////////////////////////////////////////////////////////
 //
-//                                warning
+//                                Warning
 //
 //////////////////////////////////////////////////////////////////////////
 
 /***********************************************************************
  *                               Show                                  *
  ***********************************************************************/
-void warning::show(string title, string message, guiInterface* gui)
+void Warning::show(string title, string message, GuiInterface* gui)
 { 
-   dntFont fnt;
-   farsoOptions opt;
+   Font fnt;
+   Options opt;
 
    /* Close the window if it is opened */
    close();
@@ -55,10 +57,10 @@ void warning::show(string title, string message, guiInterface* gui)
    okButton = warnWindow->getObjectsList()->insertButton(med-28+10,37,
                                                          med+28+10,55,
                                                          "Ok",1);
-   textBox* quadText = warnWindow->getObjectsList()->insertTextBox(5,17,
+   TextBox* quadText = warnWindow->getObjectsList()->insertTextBox(5,17,
                                                       sizeX+10,33,0,
                                                       message.c_str());
-   quadText->setFont(opt.getDefaultFont(), 10, DNT_FONT_ALIGN_CENTER);
+   quadText->setFont(opt.getDefaultFont(), 10, Font::ALIGN_CENTER);
    warnWindow->setModal();
    warnWindow->setExternPointer(&warnWindow);
    gui->openWindow(warnWindow);
@@ -67,7 +69,7 @@ void warning::show(string title, string message, guiInterface* gui)
 /***********************************************************************
  *                            getOkButton                              *
  ***********************************************************************/
-button* warning::getOkButton()
+Button* Warning::getOkButton()
 {
    return(okButton);
 }
@@ -75,7 +77,7 @@ button* warning::getOkButton()
 /***********************************************************************
  *                             isOpened                                *
  ***********************************************************************/
-bool warning::isOpened()
+bool Warning::isOpened()
 {
    return(warnWindow != NULL);
 }
@@ -83,7 +85,7 @@ bool warning::isOpened()
 /***********************************************************************
  *                               close                                 *
  ***********************************************************************/
-void warning::close()
+void Warning::close()
 {
    if(warnWindow != NULL)
    {
@@ -94,7 +96,7 @@ void warning::close()
 /***********************************************************************
  *                           static members                            *
  ***********************************************************************/
-window* warning::warnWindow = NULL;
-guiInterface* warning::lastGui = NULL;
-button* warning::okButton = NULL;
+Window* Warning::warnWindow = NULL;
+GuiInterface* Warning::lastGui = NULL;
+Button* Warning::okButton = NULL;
 

@@ -42,11 +42,11 @@ shortcutsWindow::~shortcutsWindow()
 /***********************************************************************
  *                                open                                 *
  ***********************************************************************/
-void shortcutsWindow::open(guiInterface* gui)
+void shortcutsWindow::open(Farso::GuiInterface* gui)
 {
    dirs dir;
    int i;
-   int midX=SCREEN_X/2;
+   int midX=Farso::SCREEN_X/2;
 
    guiUsed = gui;
 
@@ -68,14 +68,15 @@ void shortcutsWindow::open(guiInterface* gui)
       curSelectedTalent = -1;
  
       /* Open Shortcuts Window */
-      shortCutsWindow = gui->insertWindow(midX-247,SCREEN_Y-88,
-            midX+247,SCREEN_Y-1, "", true);
-      picture* pic = shortCutsWindow->getObjectsList()->insertPicture(80,0,0,0,
+      shortCutsWindow = gui->insertWindow(midX-247,Farso::SCREEN_Y-88,
+            midX+247,Farso::SCREEN_Y-1, "", true);
+      Farso::Picture* pic = shortCutsWindow->getObjectsList()->insertPicture(
+            80,0,0,0,
             dir.getRealFile("texturas/shortcutsw/shortcuts.png").c_str());
-      tabButton* tb;
+      Farso::TabButton* tb;
       tb = shortCutsWindow->getObjectsList()->insertTabButton(80,0,334,43,NULL);
       tb->setObjectBelow(pic);
-      tb->setStyle(FARSO_TAB_BUTTON_STYLE_HIGH);
+      tb->setStyle(Farso::TabButton::STYLE_HIGH);
       buttonAttackMode = tb->insertButton(11,5,44,38);/* Attack Mode */
       buttonJournal = tb->insertButton(51,5,84,38);/* Journal Window */
       buttonJournal->setMouseHint(gettext("Open Quests Window"));
@@ -96,7 +97,7 @@ void shortcutsWindow::open(guiInterface* gui)
       tb = shortCutsWindow->getObjectsList()->insertTabButton(0,44,494,87,
             NULL);
 
-      tb->setStyle(FARSO_TAB_BUTTON_STYLE_HIGH);
+      tb->setStyle(Farso::TabButton::STYLE_HIGH);
       
       /* Load / Save / Menu */
       buttonMenu = tb->insertButton(11, 5, 44, 38);
@@ -139,7 +140,7 @@ void shortcutsWindow::open(guiInterface* gui)
 /***********************************************************************
  *                               close                                 *
  ***********************************************************************/
-void shortcutsWindow::close(guiInterface* gui)
+void shortcutsWindow::close(Farso::GuiInterface* gui)
 {
    if(shortCutsWindow != NULL)
    {
@@ -166,7 +167,7 @@ bool shortcutsWindow::isOpened()
 /***********************************************************************
  *                              reOpen                                 *
  ***********************************************************************/
-void shortcutsWindow::reOpen(guiInterface* gui)
+void shortcutsWindow::reOpen(Farso::GuiInterface* gui)
 {
    int x1=0, y1=0, x2=0, y2=0;
    if(isOpened())
@@ -219,7 +220,7 @@ void shortcutsWindow::clearSelectedTalent()
 /***********************************************************************
  *                                treat                                *
  ***********************************************************************/
-int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode,
+int shortcutsWindow::treat(Farso::GuiObject* object, int eventInfo, int engineMode,
       character* activeCharacter)
 {
    int i, res;
@@ -264,9 +265,9 @@ int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode,
    {
       
       /* Show Information about state-relative shortcuts */
-      case FARSO_EVENT_ON_FOCUS_TAB_BUTTON:
+      case Farso::EVENT_ON_FOCUS_TAB_BUTTON:
       {
-         if(object == (guiObject*) buttonAttackMode)
+         if(object == (Farso::GuiObject*) buttonAttackMode)
          {
             if(engineMode != ENGINE_MODE_TURN_BATTLE)
              {
@@ -278,7 +279,7 @@ int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode,
              }  
             return(SHORTCUTS_WINDOW_OTHER); 
          }
-         else if(object == (guiObject*) buttonEndTurn)
+         else if(object == (Farso::GuiObject*) buttonEndTurn)
          {
             if(engineMode == ENGINE_MODE_TURN_BATTLE)
             {
@@ -296,7 +297,7 @@ int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode,
             /* Let's see if is under a quick feat */
             for(i=0; i < QUICK_FEATS; i++)
             {
-               if(object == (guiObject*)buttonQuickFeat[i])
+               if(object == (Farso::GuiObject*)buttonQuickFeat[i])
                {
                   if(quickFeat[i] != NULL)
                   {
@@ -316,48 +317,48 @@ int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode,
       break;
 
       /* Treat Shortcuts pressing */
-      case FARSO_EVENT_PRESSED_TAB_BUTTON:
+      case Farso::EVENT_PRESSED_TAB_BUTTON:
       {
-         if(object == (guiObject*) buttonAttackMode)
+         if(object == (Farso::GuiObject*) buttonAttackMode)
          {
             if( engineMode != ENGINE_MODE_TURN_BATTLE )
             {
                return(SHORTCUTS_WINDOW_ATTACK_MODE);
             }
          }
-         else if( object == (guiObject*) buttonMap)
+         else if( object == (Farso::GuiObject*) buttonMap)
          {
             return(SHORTCUTS_WINDOW_MAP);
          } 
-         else if(object == (guiObject*) buttonEndTurn)
+         else if(object == (Farso::GuiObject*) buttonEndTurn)
          {
             return(SHORTCUTS_WINDOW_END_TURN);
          }
-         else if(object == (guiObject*) buttonInventory)
+         else if(object == (Farso::GuiObject*) buttonInventory)
          {
             return(SHORTCUTS_WINDOW_INVENTORY);
          }
-         else if(object == (guiObject*) buttonJournal)
+         else if(object == (Farso::GuiObject*) buttonJournal)
          {
             return(SHORTCUTS_WINDOW_JOURNAL);
          }
-         else if(object == (guiObject*) buttonRest)
+         else if(object == (Farso::GuiObject*) buttonRest)
          {
             return(SHORTCUTS_WINDOW_REST);
          }
-         else if(object == (guiObject*) buttonCharacter)
+         else if(object == (Farso::GuiObject*) buttonCharacter)
          {
             return(SHORTCUTS_WINDOW_CHARACTER);
          }
-         else if(object == (guiObject*) buttonMenu)
+         else if(object == (Farso::GuiObject*) buttonMenu)
          {
             return(SHORTCUTS_WINDOW_MENU);
          }
-         else if(object == (guiObject*) buttonSave)
+         else if(object == (Farso::GuiObject*) buttonSave)
          {
             return(SHORTCUTS_WINDOW_SAVE);
          }
-         else if(object == (guiObject*) buttonLoad)
+         else if(object == (Farso::GuiObject*) buttonLoad)
          {
             return(SHORTCUTS_WINDOW_LOAD);
          }
@@ -366,7 +367,7 @@ int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode,
             /* Let's see if selectd a quick feat */
             for(i=0; i < QUICK_FEATS; i++)
             {
-               if(object == (guiObject*)buttonQuickFeat[i])
+               if(object == (Farso::GuiObject*)buttonQuickFeat[i])
                {
                   if(quickFeat[i] == NULL)
                   {
@@ -397,12 +398,12 @@ int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode,
       }
 
       /* Right press tabbutton */
-      case FARSO_EVENT_RIGHT_PRESSED_TAB_BUTTON:
+      case Farso::EVENT_RIGHT_PRESSED_TAB_BUTTON:
       {
          /* Let's see if selectd a quick feat */
          for(i=0; i < QUICK_FEATS; i++)
          {
-            if(object == (guiObject*)buttonQuickFeat[i])
+            if(object == (Farso::GuiObject*)buttonQuickFeat[i])
             {
                /* call to define it */
                if(!talentWindow)
@@ -504,23 +505,23 @@ bool shortcutsWindow::saveQuickTalents(string fileName)
 /***********************************************************************
  *                            Static Fields                            *
  ***********************************************************************/
-guiInterface* shortcutsWindow::guiUsed = NULL;
+Farso::GuiInterface* shortcutsWindow::guiUsed = NULL;
 
-oneTabButton* shortcutsWindow::buttonMenu = NULL;
-oneTabButton* shortcutsWindow::buttonSave = NULL;
-oneTabButton* shortcutsWindow::buttonLoad = NULL;
+Farso::OneTabButton* shortcutsWindow::buttonMenu = NULL;
+Farso::OneTabButton* shortcutsWindow::buttonSave = NULL;
+Farso::OneTabButton* shortcutsWindow::buttonLoad = NULL;
 
-oneTabButton* shortcutsWindow::buttonAttackMode = NULL;
-oneTabButton* shortcutsWindow::buttonJournal = NULL;
-oneTabButton* shortcutsWindow::buttonMap = NULL;
-oneTabButton* shortcutsWindow::buttonInventory = NULL;
-oneTabButton* shortcutsWindow::buttonRest = NULL;
-oneTabButton* shortcutsWindow::buttonGroup = NULL;
-oneTabButton* shortcutsWindow::buttonCharacter = NULL;
-oneTabButton* shortcutsWindow::buttonEndTurn = NULL;
+Farso::OneTabButton* shortcutsWindow::buttonAttackMode = NULL;
+Farso::OneTabButton* shortcutsWindow::buttonJournal = NULL;
+Farso::OneTabButton* shortcutsWindow::buttonMap = NULL;
+Farso::OneTabButton* shortcutsWindow::buttonInventory = NULL;
+Farso::OneTabButton* shortcutsWindow::buttonRest = NULL;
+Farso::OneTabButton* shortcutsWindow::buttonGroup = NULL;
+Farso::OneTabButton* shortcutsWindow::buttonCharacter = NULL;
+Farso::OneTabButton* shortcutsWindow::buttonEndTurn = NULL;
 
-oneTabButton* shortcutsWindow::buttonQuickFeat[QUICK_FEATS];
-picture* shortcutsWindow::picQuickFeat[QUICK_FEATS];
+Farso::OneTabButton* shortcutsWindow::buttonQuickFeat[QUICK_FEATS];
+Farso::Picture* shortcutsWindow::picQuickFeat[QUICK_FEATS];
 feat* shortcutsWindow::quickFeat[QUICK_FEATS];
 
 featsWindow* shortcutsWindow::talentWindow = NULL;
@@ -529,5 +530,5 @@ int shortcutsWindow::curSelectedTalent = -1;
 
 bool shortcutsWindow::clearedTalents = false;
 
-window* shortcutsWindow::shortCutsWindow = NULL;
+Farso::Window* shortcutsWindow::shortCutsWindow = NULL;
 

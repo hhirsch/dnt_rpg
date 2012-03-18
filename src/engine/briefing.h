@@ -34,11 +34,11 @@ class briefing
 
       /*! Open the briefing window (if not already openned) 
        * \param gui -> interface to use */
-      void openWindow(guiInterface* gui);
+      void openWindow(Farso::GuiInterface* gui);
  
       /*! Close the briefing window (if opened) 
        * \param gui -> interface where window is opened */
-      void closeWindow(guiInterface* gui);
+      void closeWindow(Farso::GuiInterface* gui);
 
       /*! Verify if the briefing window is opened
        * \return -> true if the window is opened */
@@ -78,11 +78,11 @@ class briefing
 
       /*! Reopen the Window (if is opened) 
        * \param gui -> pointer to the used guiInterface */ 
-      void reOpen(guiInterface* gui);
+      void reOpen(Farso::GuiInterface* gui);
 
    protected:
-      static rolBar* briefTxt;       /**< Briefing Text */
-      static window* briefWindow;    /**< ShortCuts Window */
+      static Farso::RolBar* briefTxt;       /**< Briefing Text */
+      static Farso::Window* briefWindow;    /**< ShortCuts Window */
       static Uint32 timeLastAdd;     /**< Ticks when last added text */
 };
 

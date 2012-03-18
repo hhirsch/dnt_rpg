@@ -32,8 +32,7 @@
 class saveWindow
 {
    public:
-      /*! Constructor
-       * \param interf -> guiInterface used */
+      /*! Constructor */
       saveWindow();
       /*! Destructor */
       ~saveWindow();
@@ -62,12 +61,12 @@ class saveWindow
 
       std::string curFileName;       /**< Current FileName selected */
 
-      window* fileWindow;       /**< The file window, used for load/save */
-      fileSel* fileSelector;    /**< The file selector interface */
-      textBox* fileTitle;       /**< The title of the save */
-      picture* fileImage;       /**< The image representing the save */
+      Farso::Window* fileWindow;  /**< The file window, used for load/save */
+      Farso::FileSel* fileSelector;    /**< The file selector interface */
+      Farso::TextBox* fileTitle;       /**< The title of the save */
+      Farso::Picture* fileImage;       /**< The image representing the save */
       bool windowIsLoad;        /**< If is a load window or not */
-      guiInterface* gui;        /**< Pointer to the current gui used */ 
+      Farso::GuiInterface* gui;        /**< Pointer to the current gui used */ 
 };
 
 

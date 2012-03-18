@@ -27,7 +27,7 @@ using namespace std;
 /********************************************************************
  *                              setMap                              *
  ********************************************************************/
-void moneyWindow::setMap(guiInterface* interf, Map* m)
+void moneyWindow::setMap(Farso::GuiInterface* interf, Map* m)
 {
    /* set map and interface */
    curMap = m;
@@ -126,11 +126,11 @@ void moneyWindow::open(inventory* source, float pX, float pZ)
  ********************************************************************/
 void moneyWindow::open()
 {
-   farsoOptions fopts;
-   dntFont fnt;
+   Farso::Options fopts;
+   Farso::Font fnt;
    /* Set open position */
-   int centerY = SCREEN_Y / 2;
-   int centerX = SCREEN_X / 2;
+   int centerY = Farso::SCREEN_Y / 2;
+   int centerX = Farso::SCREEN_X / 2;
 
    char buf[16];
    sprintf(&buf[0], "%d", curQty);
@@ -264,7 +264,7 @@ void moneyWindow::accept()
 /********************************************************************
  *                               treat                              *
  ********************************************************************/
-bool moneyWindow::treat(guiObject* object, int eventInfo)
+bool moneyWindow::treat(Farso::GuiObject* object, int eventInfo)
 {
    char buf[16];
    barterWindow bart;
@@ -283,7 +283,7 @@ bool moneyWindow::treat(guiObject* object, int eventInfo)
       }
 
       /* Verify farso events */
-      if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
+      if(eventInfo == Farso::EVENT_PRESSED_BUTTON)
       {
          if(object == okButton)
          {
@@ -303,7 +303,7 @@ bool moneyWindow::treat(guiObject* object, int eventInfo)
             return(true);
          }
       }
-      else if(eventInfo == FARSO_EVENT_ON_PRESS_BUTTON)
+      else if(eventInfo == Farso::EVENT_ON_PRESS_BUTTON)
       {
          if(object == incButton)
          {
@@ -344,17 +344,17 @@ bool moneyWindow::isOpen()
 /********************************************************************
  *                          static members                          *
  ********************************************************************/
-window* moneyWindow::intWindow=NULL;
+Farso::Window* moneyWindow::intWindow=NULL;
 Map* moneyWindow::curMap = NULL;
-guiInterface* moneyWindow::inter=NULL;
-textBox* moneyWindow::qtyText=NULL;
+Farso::GuiInterface* moneyWindow::inter=NULL;
+Farso::TextBox* moneyWindow::qtyText=NULL;
 int moneyWindow::curQty=0;
 int moneyWindow::maxQty=0;
-button* moneyWindow::incButton=NULL;
-button* moneyWindow::decButton=NULL;
-button* moneyWindow::allButton=NULL;
-button* moneyWindow::okButton=NULL;
-button* moneyWindow::cancelButton=NULL;
+Farso::Button* moneyWindow::incButton=NULL;
+Farso::Button* moneyWindow::decButton=NULL;
+Farso::Button* moneyWindow::allButton=NULL;
+Farso::Button* moneyWindow::okButton=NULL;
+Farso::Button* moneyWindow::cancelButton=NULL;
 int moneyWindow::type=0;
 inventory* moneyWindow::inv=NULL;
 float moneyWindow::destinyPosX=0.0f;

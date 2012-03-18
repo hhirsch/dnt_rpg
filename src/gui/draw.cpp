@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -26,6 +26,9 @@
 #else
    #include <GL/glu.h>
 #endif
+
+namespace Farso
+{
 
 int SCREEN_X; /**< Current Screen Width */
 int SCREEN_Y; /**< Scurrent Screen Height */
@@ -617,4 +620,5 @@ void setTextureRGBA(SDL_Surface* img, GLuint textID, bool mipMaps,
    }
 }
 
+}
 

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -21,8 +21,11 @@
 #ifndef _farso_color_h
 #define _farso_color_h
 
+namespace Farso
+{
+
 /*! A color Definition */
-class farso_color
+class Color
 {
    public:
       int R, /**< Red [0,255] */
@@ -32,21 +35,22 @@ class farso_color
 };
 
 /*! The GUI Colors Definition */
-class farso_colors
+class Colors
 {
    public:
-      farso_color colorCont[3],       /**< Contorn Colors */
-                  colorWindow,        /**< Window Color */ 
-                  colorButton,        /**< Button Color */
-                  colorMenu,          /**< Menu Color */
-                  colorText,          /**< Text Color */
-                  colorBar,           /**< Bar Color */
-                  colorSelText;       /**< Color Selected Text */
+      Color colorCont[3],       /**< Contorn Colors */
+            colorWindow,        /**< Window Color */ 
+            colorButton,        /**< Button Color */
+            colorMenu,          /**< Menu Color */
+            colorText,          /**< Text Color */
+            colorBar,           /**< Bar Color */
+            colorSelText;       /**< Color Selected Text */
       
-       /*! Constructor */
-       farso_colors();
+      /*! Constructor */
+      Colors();
 };
 
-
+}
 
 #endif
+

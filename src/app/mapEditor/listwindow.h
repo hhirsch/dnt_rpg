@@ -82,7 +82,7 @@ class listWindow
    public:
       /*! Constructor
        * \param gui -> pointer to the interface used */
-      listWindow(guiInterface* gui);
+      listWindow(Farso::GuiInterface* gui);
       /*! Destructor */
       ~listWindow();
 
@@ -103,7 +103,7 @@ class listWindow
        * \param type -> Type of the occurred event
        * \param object -> object of the event 
        * \return -> true if event is related (and treated) by the window */
-      bool eventGot(int type, guiObject* object);
+      bool eventGot(int type, Farso::GuiObject* object);
 
    private:
       /*! Open the window */
@@ -119,9 +119,9 @@ class listWindow
       std::string getFileNameWithTitle(std::string title);
 
       int state;                 /**< Internal State */
-      window* intWindow;         /**< Pointer to the window */
-      guiInterface* intGui;      /**< Pointer to the interface */
-      listText* list;            /**< Pointer to the listText */
+      Farso::Window* intWindow;         /**< Pointer to the window */
+      Farso::GuiInterface* intGui;      /**< Pointer to the interface */
+      Farso::ListText* list;            /**< Pointer to the listText */
       tupleList tuples;          /**< Current Tuples */
       std::string selFileName;   /**< Last Selected fileName */
 

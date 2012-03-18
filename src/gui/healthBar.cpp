@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -20,12 +20,13 @@
 
 #include "healthBar.h"
 #include "draw.h"
+using namespace Farso;
 
 /****************************************************************
  *                        Constructor                           *
  ****************************************************************/
-healthBar::healthBar(int x1, int y1, int x2, int y2, SDL_Surface* surface)
-          :guiObject(surface)
+HealthBar::HealthBar(int x1, int y1, int x2, int y2, SDL_Surface* surface)
+          :GuiObject(surface)
 {
    this->x1 = x1;
    this->y1 = y1;
@@ -33,20 +34,20 @@ healthBar::healthBar(int x1, int y1, int x2, int y2, SDL_Surface* surface)
    this->y2 = y2;
    this->maxHealth = 1;
    this->actualHealth = 1;
-   this->type = FARSO_OBJECT_HEALTH_BAR;
+   this->type = Farso::OBJECT_HEALTH_BAR;
 }
 
 /****************************************************************
  *                         Destructor                           *
  ****************************************************************/
-healthBar::~healthBar()
+HealthBar::~HealthBar()
 {
 }
 
 /****************************************************************
  *                      defineMaxHealth                         *
  ****************************************************************/
-void healthBar::defineMaxHealth(int health)
+void HealthBar::defineMaxHealth(int health)
 {
    maxHealth = health;
 }
@@ -54,7 +55,7 @@ void healthBar::defineMaxHealth(int health)
 /****************************************************************
  *                     defineActualHealth                       *
  ****************************************************************/
-void healthBar::defineActualHealth(int health)
+void HealthBar::defineActualHealth(int health)
 {
    actualHealth = health;
    draw();
@@ -63,7 +64,7 @@ void healthBar::defineActualHealth(int health)
 /****************************************************************
  *                            draw                              *
  ****************************************************************/
-void healthBar::draw()
+void HealthBar::draw()
 {
    if( (wSurface != NULL) && (isVisible()) )
    {

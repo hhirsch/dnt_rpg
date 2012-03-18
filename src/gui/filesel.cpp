@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -36,6 +36,8 @@ using namespace std;
 #include "interface.h"
 #include "farsoopts.h"
 
+using namespace Farso;
+
 #ifndef _MSC_VER
    #define FILE_SEL_SLASH '/'
 #else
@@ -46,17 +48,17 @@ using namespace std;
 /***********************************************************************
  *                             Constructor                             *
  ***********************************************************************/
-fileSel::fileSel(int x, int y, bool load, string dir, guiList* list, 
-      SDL_Surface* surface,  bool nav):guiObject(surface)
+FileSel::FileSel(int x, int y, bool load, string dir, GuiList* list, 
+      SDL_Surface* surface,  bool nav):GuiObject(surface)
 {
-   farsoOptions opts;
+   Options opts;
    x1 = x;
    x2 = x+250;
    y1 = y;
    y2 = y+155;
-   type = FARSO_OBJECT_FILE_SEL;
+   type = Farso::OBJECT_FILE_SEL;
    curDir = dir;
-   lastAction = FILE_SEL_ACTION_NONE;
+   lastAction = ACTION_NONE;
    lastDir = -1;
    filter = "";
    loading = load;
@@ -64,7 +66,7 @@ fileSel::fileSel(int x, int y, bool load, string dir, guiList* list,
 
    intList = list;
 
-   guiList* l = (guiList*)list;
+   GuiList* l = (GuiList*)list;
 
    /* Create the text selector */
    textFiles = l->insertListText(x, y+17, x+250, y+130);
@@ -98,21 +100,21 @@ fileSel::fileSel(int x, int y, bool load, string dir, guiList* list,
 /***********************************************************************
  *                              Destructor                             *
  ***********************************************************************/
-fileSel::~fileSel()
+FileSel::~FileSel()
 {
 }
 
 /***********************************************************************
  *                                draw                                 *
  ***********************************************************************/
-void fileSel::draw()
+void FileSel::draw()
 {
 }
 
 /***********************************************************************
  *                              setFilter                              *
  ***********************************************************************/
-void fileSel::setFilter(string newFilter)
+void FileSel::setFilter(string newFilter)
 {
    filter = newFilter;
    textFilter->setText(filter);
@@ -134,7 +136,7 @@ static int cmpFunction(const void *p1,  const void *p2)
 /***********************************************************************
  *                             changeCurDir                            *
  ***********************************************************************/
-void fileSel::changeCurDir(string newDir)
+void FileSel::changeCurDir(string newDir)
 {
    int j, total;
 
@@ -286,7 +288,7 @@ void fileSel::changeCurDir(string newDir)
 /***********************************************************************
  *                             passFilter                              *
  ***********************************************************************/
-bool fileSel::passFilter(string s)
+bool FileSel::passFilter(string s)
 {
    string aux = s;
 
@@ -306,7 +308,7 @@ bool fileSel::passFilter(string s)
 /***********************************************************************
  *                            getLastAction                            *
  ***********************************************************************/
-int fileSel::getLastAction()
+int FileSel::getLastAction()
 {
    return(lastAction);
 }
@@ -314,7 +316,7 @@ int fileSel::getLastAction()
 /***********************************************************************
  *                             getFileName                             *
  ***********************************************************************/
-string fileSel::getFileName()
+string FileSel::getFileName()
 {
    /* Get the current directory */
    string fileName = curDir;
@@ -349,7 +351,7 @@ string fileSel::getFileName()
 /***********************************************************************
  *                             setFileName                             *
  ***********************************************************************/
-void fileSel::setFileName(string fileName)
+void FileSel::setFileName(string fileName)
 {
    string newDir, file;
 
@@ -376,12 +378,12 @@ void fileSel::setFileName(string fileName)
 /***********************************************************************
  *                              eventGot                               *
  ***********************************************************************/
-bool fileSel::eventGot(int type, guiObject* object)
+bool FileSel::eventGot(int type, GuiObject* object)
 {
-   lastAction = FILE_SEL_ACTION_NONE;
+   lastAction = ACTION_NONE;
    switch(type)
    { 
-      case FARSO_EVENT_PRESSED_BUTTON:
+      case EVENT_PRESSED_BUTTON:
       {
          /* Pressed Accept Button */
          if( (object == acceptButton) && 
@@ -389,18 +391,18 @@ bool fileSel::eventGot(int type, guiObject* object)
              ( ((!loading) && (editCurFile->getText() != "")) ) )
            )
          {
-            lastAction = FILE_SEL_ACTION_ACCEPT;
+            lastAction = ACTION_ACCEPT;
             return(true);
          }
          /* Pressed Cancel Button */
          else if(object == cancelButton)
          {
-            lastAction = FILE_SEL_ACTION_CANCEL;
+            lastAction = ACTION_CANCEL;
             return(true);
          }
       }
       break;
-      case FARSO_EVENT_SELECTED_LIST_TEXT:
+      case EVENT_SELECTED_LIST_TEXT:
       {
          /* Selected a file of a directory */
          if(object == textFiles)
@@ -460,7 +462,7 @@ bool fileSel::eventGot(int type, guiObject* object)
                   editCurFile->setText(sel);
                }
             }
-            lastAction = FILE_SEL_ACTION_SELECT;
+            lastAction = ACTION_SELECT;
             return(true);
          }
       }

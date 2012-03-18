@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -90,14 +90,14 @@ comicBox::~comicBox()
 void comicBox::setVertex(int vertNumber, GLfloat x, GLfloat y,
                          int imgX, int imgY)
 {
-   float ratio = (float)SCREEN_Y / (float)imgY;
+   float ratio = (float)Farso::SCREEN_Y / (float)imgY;
    
    if( (vertNumber >= 0) && (vertNumber <= 3) )
    {
-      texCoord[vertNumber][0] = x / (float)smallestPowerOfTwo(imgX);
-      texCoord[vertNumber][1] = y / (float)smallestPowerOfTwo(imgY);
+      texCoord[vertNumber][0] = x / (float)Farso::smallestPowerOfTwo(imgX);
+      texCoord[vertNumber][1] = y / (float)Farso::smallestPowerOfTwo(imgY);
       vertex[vertNumber][0] = x * ratio;
-      vertex[vertNumber][1] = SCREEN_Y - (y * ratio);
+      vertex[vertNumber][1] = Farso::SCREEN_Y - (y * ratio);
    }
 }
 

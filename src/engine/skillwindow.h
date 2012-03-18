@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -42,7 +42,7 @@ class skillWindow
        * \param inter -> interface used
        * \actualLevel -> current character level
        * \readOnlyMode -> if the windows is read only, or not */
-      skillWindow(skills* savSkill, guiInterface* inter,
+      skillWindow(skills* savSkill, Farso::GuiInterface* inter,
                   int actualLevel, bool readOnlyMode=false);
 
       /*! Destructor */
@@ -53,7 +53,8 @@ class skillWindow
        * \param object -> last GUI object
        * \param eventInfo -> last GUI Event
        * \return 0 on close, 1 otherwise */
-      int treat(guiObject* object, int eventInfo, guiInterface* inter);
+      int treat(Farso::GuiObject* object, int eventInfo, 
+           Farso::GuiInterface* inter);
 
       /*! Verify if the window is opened
        * \return true if is opened, false otherwise */
@@ -61,7 +62,7 @@ class skillWindow
 
       /*! Close the window, if is opened
        * \param inter -> guiInterface where the window is */
-      void close(guiInterface* inter);
+      void close(Farso::GuiInterface* inter);
 
    private:
  
@@ -74,7 +75,7 @@ class skillWindow
       /*! Set to the next skill */
       void nextSkill();
 
-      window*      intWindow;     /**< Pointer to the internal window */
+      Farso::Window* intWindow;   /**< Pointer to the internal window */
       skills*      saveSkill;     /**< Pointer to the edited skill list */
       skill**      skillsOrder;   /**< Sorted skills */
       int          totalSkills;   /**< Total avaible skills */
@@ -83,21 +84,21 @@ class skillWindow
       int          charLevel;     /**< Character Level */
       bool         readOnly;      /**< True if read only window (no changes) */
 
-      rolBar* desc;               /**< Description Text */
-      textBox* txtAvaiblePoints;  /**< Avaible Points Text */
-      textBox* skillName;         /**< Actual Skill Name */
-      textBox* txtPoints;         /**< Actual Points Text */
-      textBox* txtCosts;          /**< Actual Cost Text */
-      cxSel* cxOnlyClass;         /**< Only Race/Class skills */
+      Farso::RolBar* desc;               /**< Description Text */
+      Farso::TextBox* txtAvaiblePoints;  /**< Avaible Points Text */
+      Farso::TextBox* skillName;         /**< Actual Skill Name */
+      Farso::TextBox* txtPoints;         /**< Actual Points Text */
+      Farso::TextBox* txtCosts;          /**< Actual Cost Text */
+      Farso::CxSel* cxOnlyClass;         /**< Only Race/Class skills */
 
-      button* buttonSum;          /**< Inc Points Button */
-      button* buttonDec;          /**< Dec Points Button */
-      button* buttonPrevious;     /**< Previous Skill Button */
-      button* buttonNext;         /**< Next Skill Button */
-      button* buttonConfirm;      /**< Confirm Changes Button */
-      button* buttonCancel;       /**< Cancel Changes Button */
+      Farso::Button* buttonSum;          /**< Inc Points Button */
+      Farso::Button* buttonDec;          /**< Dec Points Button */
+      Farso::Button* buttonPrevious;     /**< Previous Skill Button */
+      Farso::Button* buttonNext;         /**< Next Skill Button */
+      Farso::Button* buttonConfirm;      /**< Confirm Changes Button */
+      Farso::Button* buttonCancel;       /**< Cancel Changes Button */
 
-      picture*     skFig;         /**< Actual skill Image */
+      Farso::Picture*     skFig;         /**< Actual skill Image */
 
 };
 

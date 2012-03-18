@@ -42,7 +42,7 @@ using namespace std;
  *                          Constructor                       *
  **************************************************************/
 inventWindow::inventWindow(int xa, int ya, string title, 
-                           character* invent, guiInterface* inter,
+                           character* invent, Farso::GuiInterface* inter,
                            itemWindow* infoW, engine* usedEngine)
 {
    init(xa,ya,title,invent,inter, infoW, usedEngine);
@@ -51,7 +51,7 @@ inventWindow::inventWindow(int xa, int ya, string title,
 /**************************************************************
  *                          Constructor                       *
  **************************************************************/
-inventWindow::inventWindow(character *invent, guiInterface* inter,
+inventWindow::inventWindow(character *invent, Farso::GuiInterface* inter,
                            itemWindow* infoW, engine* usedEngine)
 {
    init(321,0, gettext("Inventory"), invent, inter, infoW, usedEngine);
@@ -61,7 +61,7 @@ inventWindow::inventWindow(character *invent, guiInterface* inter,
  *                              init                          *
  **************************************************************/
 void inventWindow::init(int xa, int ya, string title, 
-                       character *invent,guiInterface* inter,
+                       character *invent,Farso::GuiInterface* inter,
                        itemWindow* infoW, engine* usedEngine)
 {
    int i;
@@ -102,11 +102,11 @@ void inventWindow::init(int xa, int ya, string title,
    leftFingerButton = characterTabButton->insertButton(200,169,219,188);
 
    /* Add Inventory Tab Box */
-   inventoryTabBox = (tabBox*)intWindow->getObjectsList()->defineTabBox(6,272,
-                                                                       258,409);
+   inventoryTabBox = (Farso::TabBox*)intWindow->getObjectsList()->defineTabBox(
+         6,272,258,409);
 
    /* Add Each Options */
-   guiList* list;
+   Farso::GuiList* list;
    for(i = 4; i > 0; i--)
    {
       sprintf(buf, "%d", i);
@@ -179,14 +179,14 @@ void inventWindow::reDraw()
  **************************************************************/
 void inventWindow::openMenu(int x, int y, int type, bool seller)
 {
-   farsoOptions fopt;
+   Farso::Options fopt;
    barterWindow tradeWindow;
-   dntFont fnt;
+   Farso::Font fnt;
    dirs dir;
    int xSize;
    string text="";
    menuType = type;
-   objectMenu = (menu*) intWindow->getObjectsList()->addMenu();
+   objectMenu = (Farso::Menu*) intWindow->getObjectsList()->addMenu();
  
    /* Insert all menu items */
    objectMenu->insertItem(gettext("Get"),
@@ -232,7 +232,7 @@ void inventWindow::openMenu(int x, int y, int type, bool seller)
    xSize = objectMenu->getMaxCharac()*(fnt.getIncCP()+1)+6;
 
    /* Make Sure all Menu is in Window */
-   int menuHeight = 8*(MENU_ITEM_HEIGHT+1);
+   int menuHeight = 8*(Farso::Menu::ITEM_HEIGHT+1);
    if( (y + menuHeight) >= (intWindow->getY2() - intWindow->getY1()) )
    {
        y = intWindow->getY2()-intWindow->getY1()-(menuHeight);
@@ -362,7 +362,7 @@ void inventWindow::verifyUseObject()
          if(!used)
          {
             /* If can't use the ammo, better show a message */
-            warning warn;
+            Farso::Warning warn;
             warn.show(gettext("Warning"), 
                       gettext("No equipped weapons are compatible with this "
                               "munition type."), interf);
@@ -426,7 +426,7 @@ void inventWindow::verifyUseObject()
 /**************************************************************
  *                             treat                          *
  **************************************************************/
-int inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
+int inventWindow::treat(Farso::GuiObject* guiObj, int eventInfo, cursor* mouseCursor,
                         Map* actualMap, GLfloat X, GLfloat Z, bool seller)
 {
    if(!isOpen())
@@ -495,9 +495,9 @@ int inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
    switch(eventInfo)
    {
       /* Changes to the Current Inventory */
-      case FARSO_EVENT_TAB_BOX_CHANGED:
+      case Farso::EVENT_TAB_BOX_CHANGED:
       {
-         if(guiObj == (guiObject*)inventoryTabBox)
+         if(guiObj == (Farso::GuiObject*)inventoryTabBox)
          {
             int inv;
             sscanf(inventoryTabBox->getActiveTitle().c_str(),"%d",&inv);
@@ -511,13 +511,13 @@ int inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
       break;
 
       /* Show Thing's name */
-      case FARSO_EVENT_ON_FOCUS_TAB_BUTTON:
+      case Farso::EVENT_ON_FOCUS_TAB_BUTTON:
       {
          /* Inventory Spaces Selected */
-         if( (guiObj == (guiObject*) inventoryButton[0]) ||
-             (guiObj == (guiObject*) inventoryButton[1]) ||
-             (guiObj == (guiObject*) inventoryButton[2]) ||
-             (guiObj == (guiObject*) inventoryButton[3]))
+         if( (guiObj == (Farso::GuiObject*) inventoryButton[0]) ||
+             (guiObj == (Farso::GuiObject*) inventoryButton[1]) ||
+             (guiObj == (Farso::GuiObject*) inventoryButton[2]) ||
+             (guiObj == (Farso::GuiObject*) inventoryButton[3]))
          {
             /* Open Menu For Object if one is avaible */
             object* o;
@@ -536,13 +536,13 @@ int inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
       break;
 
       /* Accessing inventory or equipment slots! */
-      case FARSO_EVENT_PRESSED_TAB_BUTTON:
+      case Farso::EVENT_PRESSED_TAB_BUTTON:
       {
          /* Inventory Spaces Selected */
-         if( (guiObj == (guiObject*) inventoryButton[0]) ||
-             (guiObj == (guiObject*) inventoryButton[1]) ||
-             (guiObj == (guiObject*) inventoryButton[2]) ||
-             (guiObj == (guiObject*) inventoryButton[3]))
+         if( (guiObj == (Farso::GuiObject*) inventoryButton[0]) ||
+             (guiObj == (Farso::GuiObject*) inventoryButton[1]) ||
+             (guiObj == (Farso::GuiObject*) inventoryButton[2]) ||
+             (guiObj == (Farso::GuiObject*) inventoryButton[3]))
          {
             if(state == INVENTORY_STATE_NONE)
             {
@@ -576,42 +576,42 @@ int inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
          if(state == INVENTORY_STATE_NONE)
          {
             object* aObject = NULL;
-            if(guiObj == (guiObject*) headButton)
+            if(guiObj == (Farso::GuiObject*) headButton)
             {
                aObject = inventories->getFromPlace(INVENTORY_HEAD);
                objWhere = INVENTORY_HEAD;
             }
-            else if(guiObj == (guiObject*) leftHandButton)
+            else if(guiObj == (Farso::GuiObject*) leftHandButton)
             {
                aObject = inventories->getFromPlace(INVENTORY_LEFT_HAND);
                objWhere = INVENTORY_LEFT_HAND;
             }
-            else if(guiObj == (guiObject*) rightHandButton)
+            else if(guiObj == (Farso::GuiObject*) rightHandButton)
             {
                aObject = inventories->getFromPlace(INVENTORY_RIGHT_HAND);
                objWhere = INVENTORY_RIGHT_HAND;
             }
-            else if(guiObj == (guiObject*) leftFingerButton)
+            else if(guiObj == (Farso::GuiObject*) leftFingerButton)
             {
                aObject = inventories->getFromPlace(INVENTORY_LEFT_FINGER);
                objWhere = INVENTORY_LEFT_FINGER;
             }
-            else if(guiObj == (guiObject*) rightFingerButton)
+            else if(guiObj == (Farso::GuiObject*) rightFingerButton)
             {
                aObject = inventories->getFromPlace(INVENTORY_RIGHT_FINGER);
                objWhere = INVENTORY_RIGHT_FINGER;
             }
-            else if(guiObj == (guiObject*) neckButton)
+            else if(guiObj == (Farso::GuiObject*) neckButton)
             {
                aObject = inventories->getFromPlace(INVENTORY_NECK);
                objWhere = INVENTORY_NECK;
             }
-            else if(guiObj == (guiObject*) footButton)
+            else if(guiObj == (Farso::GuiObject*) footButton)
             {
                aObject = inventories->getFromPlace(INVENTORY_FOOT);
                objWhere = INVENTORY_FOOT;
             }
-            else if(guiObj == (guiObject*) bodyButton)
+            else if(guiObj == (Farso::GuiObject*) bodyButton)
             {
                aObject = inventories->getFromPlace(INVENTORY_BODY);
                objWhere = INVENTORY_BODY;
@@ -629,14 +629,14 @@ int inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
          /* State Object */
          else if(state == INVENTORY_STATE_OBJECT)
          {
-            if(guiObj == (guiObject*) headButton)
+            if(guiObj == (Farso::GuiObject*) headButton)
             {
                if(inventories->equipObject(activeObject, INVENTORY_HEAD))
                {
                   activeObject = NULL;
                }
             }
-            else if(guiObj == (guiObject*) leftHandButton)
+            else if(guiObj == (Farso::GuiObject*) leftHandButton)
             {
                if(inventories->equipObject(activeObject,INVENTORY_LEFT_HAND))
                {
@@ -644,42 +644,42 @@ int inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                }
 
             }
-            else if(guiObj == (guiObject*) rightHandButton)
+            else if(guiObj == (Farso::GuiObject*) rightHandButton)
             {
                if(inventories->equipObject(activeObject,INVENTORY_RIGHT_HAND))
                {
                   activeObject = NULL;
                }
             }
-            else if(guiObj == (guiObject*) leftFingerButton)
+            else if(guiObj == (Farso::GuiObject*) leftFingerButton)
             {
                if(inventories->equipObject(activeObject,INVENTORY_LEFT_FINGER))
                {
                   activeObject = NULL;
                }
             }
-            else if(guiObj == (guiObject*) rightFingerButton)
+            else if(guiObj == (Farso::GuiObject*) rightFingerButton)
             {
                if(inventories->equipObject(activeObject,INVENTORY_RIGHT_FINGER))
                {
                   activeObject = NULL;
                }
             }
-            else if(guiObj == (guiObject*) neckButton)
+            else if(guiObj == (Farso::GuiObject*) neckButton)
             {
                if(inventories->equipObject(activeObject, INVENTORY_NECK))
                {
                   activeObject = NULL;
                }
             }
-            else if(guiObj == (guiObject*) footButton)
+            else if(guiObj == (Farso::GuiObject*) footButton)
             {
                if(inventories->equipObject(activeObject, INVENTORY_FOOT))
                {
                   activeObject = NULL;
                }
             }
-            else if(guiObj == (guiObject*) bodyButton)
+            else if(guiObj == (Farso::GuiObject*) bodyButton)
             {
                if(inventories->equipObject(activeObject, INVENTORY_BODY))
                {
@@ -699,7 +699,7 @@ int inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
       break;
      
       /* Verify Menu Options */
-      case FARSO_EVENT_SELECTED_MENU:
+      case Farso::EVENT_SELECTED_MENU:
       {
          if(objectMenu)
          {

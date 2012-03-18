@@ -45,7 +45,7 @@ editor::editor()
                   dir.getRealFile("feats/feats.ftl"));
 
    /* Set Farso Options */
-   farsoOptions farOpt;
+   Farso::Options farOpt;
    farOpt.setNeededDefaults(dir.getRealFile(DNT_FONT_ARIAL),
          dir.getRealFile("cursors/Walk.png"),
          dir.getRealFile("icons/maximize.png"),
@@ -55,7 +55,7 @@ editor::editor()
 
    /* Init things */
    options opt;
-   Farso_Init(&screen,"DccNiTghtmare Map Editor", opt.getScreenWidth(),
+   Farso::init(&screen,"DccNiTghtmare Map Editor", opt.getScreenWidth(),
               opt.getScreenHeight(),  opt.getEnableFullScreen(),
               opt.getAntiAliasing(), opt.getStencilBufferSize());
 
@@ -138,7 +138,7 @@ editor::~editor()
    delete(gui);
    curScene.finish();
    wTypes.finish();
-   Farso_End(screen);
+   Farso::end(screen);
 
    /* Clear the visibleMatrix */
    for(i = 0; i < 6; i++)
@@ -425,7 +425,7 @@ void editor::newMap()
       sscanf(s.c_str(),"%d", &sizeX);
       if( (sizeX <= 0) || (sizeX > 30) )
       {
-         warning warn;
+         Farso::Warning warn;
          warn.show("Error!", "Size must be in range (0,30]", gui->getGui());
       }
    }
@@ -437,7 +437,7 @@ void editor::newMap()
       sscanf(s.c_str(),"%d", &sizeZ);
       if( (sizeZ <= 0) || (sizeZ > 30) )
       {
-         warning warn;
+         Farso::Warning warn;
          warn.show("Error!", "Size must be in range (0,30]", gui->getGui()); 
       }
    }
@@ -826,13 +826,13 @@ void editor::draw()
    /* Draw Active Texture */
    if(mapOpened)
    {
-      gluUnProject(SCREEN_X,SCREEN_Y, 0.01, modl, proj, viewPort, 
+      gluUnProject(Farso::SCREEN_X,Farso::SCREEN_Y, 0.01, modl, proj, viewPort, 
                    &x1, &y1, &z1);
-      gluUnProject(SCREEN_X,SCREEN_Y-50,0.01, modl, proj, viewPort, 
+      gluUnProject(Farso::SCREEN_X,Farso::SCREEN_Y-50,0.01, modl, proj, viewPort, 
                    &x2, &y2, &z2);
-      gluUnProject(SCREEN_X-50,SCREEN_Y-50,0.01,modl,proj,viewPort, 
+      gluUnProject(Farso::SCREEN_X-50,Farso::SCREEN_Y-50,0.01,modl,proj,viewPort, 
                    &x3, &y3, &z3);
-      gluUnProject(SCREEN_X-50,SCREEN_Y,0.01, modl, proj, viewPort,  
+      gluUnProject(Farso::SCREEN_X-50,Farso::SCREEN_Y,0.01, modl, proj, viewPort,  
                    &x4, &y4, &z4);
 
       glDisable(GL_LIGHTING);
@@ -888,7 +888,7 @@ void editor::draw()
 void editor::updateMouseFloorPos()
 {
    GLfloat wx = mouseX,
-           wy = SCREEN_Y - mouseY;
+           wy = Farso::SCREEN_Y - mouseY;
 
    GLdouble cX=0, cY=0, cZ=0;
    GLdouble fX=0, fY=0, fZ=0;
@@ -921,7 +921,7 @@ void editor::doEditorIO()
 {
    GLfloat wx, wy, wz;
 
-   wx = mouseX; wy = SCREEN_Y-mouseY; 
+   wx = mouseX; wy = Farso::SCREEN_Y-mouseY; 
 
    glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
    gluUnProject( wx, wy, wz, modl, proj, viewPort, &xReal, &yReal, &zReal);

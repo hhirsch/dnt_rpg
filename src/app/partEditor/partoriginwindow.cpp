@@ -24,7 +24,7 @@
 /***********************************************************************
  *                             Constructor                             *
  ***********************************************************************/
-partOriginWindow::partOriginWindow(guiInterface* interf)
+partOriginWindow::partOriginWindow(Farso::GuiInterface* interf)
 {
    curWindow = NULL;
    part = NULL;
@@ -69,11 +69,11 @@ bool partOriginWindow::isOpen()
  ***********************************************************************/
 void partOriginWindow::openWindow()
 {
-   farsoOptions opt;
+   Farso::Options opt;
    int curPosX = 346;
    int curPosY = 64;
    int i;
-   dntFont fnt;
+   Farso::Font fnt;
 
    /* Close it if already opened */
    if(isOpen())
@@ -92,7 +92,7 @@ void partOriginWindow::openWindow()
          fnt.createUnicode(0x25C4),0);
    previousType->defineFont(opt.getDefaultFont(), 9);
    type = curWindow->getObjectsList()->insertTextBox(21, 20, 130, 37, 1, "");
-   type->setFont(opt.getDefaultFont(), 9, DNT_FONT_ALIGN_CENTER);
+   type->setFont(opt.getDefaultFont(), 9, Farso::Font::ALIGN_CENTER);
    nextType = curWindow->getObjectsList()->insertButton(131, 20, 141, 37, 
          fnt.createUnicode(0x25BA),0);
    nextType->defineFont(opt.getDefaultFont(), 9);
@@ -252,7 +252,7 @@ void partOriginWindow::resetElement()
 /***********************************************************************
  *                               treat                                 *
  ***********************************************************************/
-bool partOriginWindow::treat(guiObject* object, int eventInfo)
+bool partOriginWindow::treat(Farso::GuiObject* object, int eventInfo)
 {
    dntPartOrigin* o;
 
@@ -266,9 +266,9 @@ bool partOriginWindow::treat(guiObject* object, int eventInfo)
    o = part->getOrigin();
 
    /* Button press */
-   if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
+   if(eventInfo == Farso::EVENT_PRESSED_BUTTON)
    {
-      if(object == (guiObject*)nextType)
+      if(object == (Farso::GuiObject*)nextType)
       {
          if(o->type < DNT_PART_ORIGIN_SPHERE)
          {
@@ -278,7 +278,7 @@ bool partOriginWindow::treat(guiObject* object, int eventInfo)
             return(true);
          }
       }
-      else if(object == (guiObject*)previousType)
+      else if(object == (Farso::GuiObject*)previousType)
       {
          if(o->type > 0)
          {
@@ -289,15 +289,15 @@ bool partOriginWindow::treat(guiObject* object, int eventInfo)
          }
       }
    }
-   else if(eventInfo == FARSO_EVENT_WROTE_TEXT_BAR)
+   else if(eventInfo == Farso::EVENT_WROTE_TEXT_BAR)
    {
-      if( (object == (guiObject*)pos1[0]) ||
-          (object == (guiObject*)pos1[1]) ||
-          (object == (guiObject*)pos1[2]) ||
-          (object == (guiObject*)pos2[0]) ||
-          (object == (guiObject*)pos2[1]) ||
-          (object == (guiObject*)pos2[2]) ||
-          (object == (guiObject*)radius) )
+      if( (object == (Farso::GuiObject*)pos1[0]) ||
+          (object == (Farso::GuiObject*)pos1[1]) ||
+          (object == (Farso::GuiObject*)pos1[2]) ||
+          (object == (Farso::GuiObject*)pos2[0]) ||
+          (object == (Farso::GuiObject*)pos2[1]) ||
+          (object == (Farso::GuiObject*)pos2[2]) ||
+          (object == (Farso::GuiObject*)radius) )
       {
          resetElement();
          return(true);

@@ -46,7 +46,7 @@ editor::editor()
    dir.findDataDirectories();
 
 
-   farsoOptions farOpt;
+   Farso::Options farOpt;
    farOpt.setNeededDefaults(dir.getRealFile(DNT_FONT_ARIAL),
          dir.getRealFile("cursors/Walk.png"),
          dir.getRealFile("icons/maximize.png"),
@@ -54,7 +54,7 @@ editor::editor()
          "Maximize", "Close", "Confirm", "Cancel");
 
    /* Initialize SDL/Farso/etc */
-   Farso_Init(&screen,"DccNiTghtmare's Particle Editor", 800, 600, false, 0, 8);
+   Farso::init(&screen,"DccNiTghtmare's Particle Editor", 800, 600,false, 0, 8);
 
    /* Get OpenGL Extensions */
    ext.defineAllExtensions();
@@ -80,7 +80,7 @@ editor::editor()
    gameCamera = new camera();
 
    /* Create the GUI */
-   gui = new guiInterface("");
+   gui = new Farso::GuiInterface("");
 
    /* Nullify elements */
    p = NULL;
@@ -116,6 +116,7 @@ editor::~editor()
       delete[] viewMatrix[i];
    }
    delete[] viewMatrix;
+   Farso::end(screen);
 }
 
 /************************************************************************
@@ -222,18 +223,18 @@ void editor::createWindows()
  ************************************************************************/
 void editor::treatGuiEvents()
 {
-   int eventInfo = FARSO_EVENT_NONE;
+   int eventInfo = Farso::EVENT_NONE;
 
    done = false;
 
    /* Get events */
-   guiObject* obj = gui->manipulateEvents(mouseX, mouseY, mButton, 
+   Farso::GuiObject* obj = gui->manipulateEvents(mouseX, mouseY, mButton, 
                                           keys, eventInfo);
 
    /* Write current number of particles */
    particleWindow->writeCurParticles();
 
-   if(eventInfo == FARSO_EVENT_NONE)
+   if(eventInfo == Farso::EVENT_NONE)
    {
       /* No Event, so must treat Camera Input */
       gameCamera->doIO(keys, mButton, mouseX, mouseY, DELTA_CAMERA);
@@ -243,7 +244,7 @@ void editor::treatGuiEvents()
       if(particleWindow->treat(obj, eventInfo))
       {
       }
-      else if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
+      else if(eventInfo == Farso::EVENT_PRESSED_BUTTON)
       {
          /* Exit was pressed! */
          if(obj == buttonExit)
@@ -260,11 +261,11 @@ void editor::treatGuiEvents()
          }
       }
       /* File Selectors Things */
-      else if(eventInfo == FARSO_EVENT_FILE_SEL_ACCEPT)
+      else if(eventInfo == Farso::EVENT_FILE_SEL_ACCEPT)
       {
          if(fileWindow)
          {
-            if(obj == (guiObject*)fileSelector) 
+            if(obj == (Farso::GuiObject*)fileSelector) 
             {
                curFileName = fileSelector->getFileName();
                gui->closeWindow(fileWindow);
@@ -279,7 +280,7 @@ void editor::treatGuiEvents()
                   /* Save the Particle with desired fileName */
                   if(p)
                   {
-                     warning warn;
+                     Farso::Warning warn;
                      if(p->save(curFileName))
                      {
                         warn.show("Message", "File was saved!", gui);
@@ -293,12 +294,12 @@ void editor::treatGuiEvents()
             }
          }
       }
-      else if(eventInfo == FARSO_EVENT_FILE_SEL_CANCEL)
+      else if(eventInfo == Farso::EVENT_FILE_SEL_CANCEL)
       {
          if(fileWindow)
          {
             /* Just close the window */
-            if(obj == (guiObject*)fileSelector) 
+            if(obj == (Farso::GuiObject*)fileSelector) 
             {
                gui->closeWindow(fileWindow);
             }

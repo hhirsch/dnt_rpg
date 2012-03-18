@@ -116,18 +116,18 @@ string getStringFromUser(string title, string previous,
    cursors.hide();
    SDL_ShowCursor(SDL_ENABLE);
 
-   guiInterface* gui = new guiInterface("");
-   window* getWindow;
-   button* okButton;
-   button* cancelButton;
-   textBar* getText = NULL;
+   Farso::GuiInterface* gui = new Farso::GuiInterface("");
+   Farso::Window* getWindow;
+   Farso::Button* okButton;
+   Farso::Button* cancelButton;
+   Farso::TextBar* getText = NULL;
    bool quit = false;
    string returnStr;
    Uint8 mButton;
    Uint8* keys;
    int mouseX, mouseY;
-   int sX = SCREEN_X / 2;
-   int sY = SCREEN_Y / 2;
+   int sX = Farso::SCREEN_X / 2;
+   int sY = Farso::SCREEN_Y / 2;
 
    getWindow = gui->insertWindow(sX-100,sY-31,sX+100,sY+31,title.c_str());
    okButton = getWindow->getObjectsList()->insertButton(40,37,95,55,"Ok",1);
@@ -142,22 +142,22 @@ string getStringFromUser(string title, string previous,
 
    while(!quit)
    {
-      int eventInfo = FARSO_EVENT_NONE;
+      int eventInfo = Farso::EVENT_NONE;
       SDL_PumpEvents();
       keys = SDL_GetKeyState(NULL);
       mButton = SDL_GetMouseState(&mouseX,&mouseY);
 
-      guiObject* object;
+      Farso::GuiObject* object;
       object = gui->manipulateEvents(mouseX, mouseY, mButton, keys, eventInfo);
 
-      if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
+      if(eventInfo == Farso::EVENT_PRESSED_BUTTON)
       {
-         if(object == (guiObject*) okButton)
+         if(object == (Farso::GuiObject*) okButton)
          {
             returnStr = getText->getText();
             quit =true;
          }
-         else if(object == (guiObject*) cancelButton)
+         else if(object == (Farso::GuiObject*) cancelButton)
          {
             returnStr = previous;
             quit = true;
@@ -205,20 +205,20 @@ string getStringFromUser(string title, string previous,
 int getOptionFromUser(string title, string message, string opt1, string opt2,
                       GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
-   farsoOptions fopts;
+   Farso::Options fopts;
    cursor cursors;
    cursors.hide();
    SDL_ShowCursor(SDL_ENABLE);
 
-   guiInterface* gui = new guiInterface("");
-   window* getWindow;
-   button* opt1Button;
-   button* opt2Button;
-   textBox* quadText = NULL;
+   Farso::GuiInterface* gui = new Farso::GuiInterface("");
+   Farso::Window* getWindow;
+   Farso::Button* opt1Button;
+   Farso::Button* opt2Button;
+   Farso::TextBox* quadText = NULL;
    bool quit = false;
    Uint8 mButton;
    Uint8* keys;
-   dntFont fnt;
+   Farso::Font fnt;
    fnt.defineFont(fopts.getDefaultFont(), 10);
    int mouseX, mouseY;
    int sizeX = fnt.getStringWidth(message);
@@ -227,8 +227,8 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
       sizeX = 180;
    }
    int med = sizeX / 2;
-   int sX = SCREEN_X / 2;
-   int sY = SCREEN_Y / 2;
+   int sX = Farso::SCREEN_X / 2;
+   int sY = Farso::SCREEN_Y / 2;
    int ret = -1;
 
    getWindow=gui->insertWindow(sX-med-10,sY-31,sX+med+10,sY+31, title.c_str());
@@ -239,29 +239,29 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
                                                  
    quadText = getWindow->getObjectsList()->insertTextBox(5,17,sizeX+10,33,0,
                                                       message.c_str());
-   quadText->setFont(fopts.getDefaultFont(), 10, DNT_FONT_ALIGN_CENTER);
+   quadText->setFont(fopts.getDefaultFont(), 10, Farso::Font::ALIGN_CENTER);
    getWindow->setAttributes(true, false, false, false);
    getWindow->setExternPointer(&getWindow);
    gui->openWindow(getWindow);
 
    while(!quit)
    {
-      int eventInfo = FARSO_EVENT_NONE;
+      int eventInfo = Farso::EVENT_NONE;
       SDL_PumpEvents();
       keys = SDL_GetKeyState(NULL);
       mButton = SDL_GetMouseState(&mouseX,&mouseY);
 
-      guiObject* object;
+      Farso::GuiObject* object;
       object = gui->manipulateEvents(mouseX, mouseY, mButton, keys, eventInfo);
 
-      if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
+      if(eventInfo == Farso::EVENT_PRESSED_BUTTON)
       {
-         if(object == (guiObject*) opt1Button)
+         if(object == (Farso::GuiObject*) opt1Button)
          {
             quit =true;
             ret = 1;
          }
-         else if(object == (guiObject*) opt2Button)
+         else if(object == (Farso::GuiObject*) opt2Button)
          {
             quit =true;
             ret = 2;

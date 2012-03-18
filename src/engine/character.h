@@ -269,7 +269,7 @@ class character: public thing, public dntListElement
 
       int actualFightGroup;     /**< fightGroup of character, used on battles*/
 
-      healthBar* lifeBar;       /**< Character's Life Bar */
+      Farso::HealthBar* lifeBar;       /**< Character's Life Bar */
 
       aStar pathFind;           /**< The A* pathFind to the character */
       Square* ocSquare;         /**< Square occuped by character */

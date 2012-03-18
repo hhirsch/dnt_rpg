@@ -21,18 +21,20 @@
 #include "menu.h"
 #include "farsoopts.h"
 
+using namespace Farso;
+
 /*********************************************************
  *                       Destructor                      *
  *********************************************************/
-menu::~menu()
+Menu::~Menu()
 {
 }
 
 /*********************************************************
  *                      Constructor                      *
  *********************************************************/
-menu::menu(int xa, int ya, int sWidth, int sHeight, SDL_Surface* surface)
-     :guiList(sWidth, sHeight, surface, true, LIST_TYPE_ADD_AT_END)
+Menu::Menu(int xa, int ya, int sWidth, int sHeight, SDL_Surface* surface)
+     :GuiList(sWidth, sHeight, surface, true, LIST_TYPE_ADD_AT_END)
 {
    x = xa;
    y = ya;
@@ -48,7 +50,7 @@ menu::menu(int xa, int ya, int sWidth, int sHeight, SDL_Surface* surface)
 /*********************************************************
  *                      insertItem                       *
  *********************************************************/
-void menu::insertItem(std::string text, bool avaible)
+void Menu::insertItem(std::string text, bool avaible)
 {
    insertItem(text, "", avaible);
 } 
@@ -56,9 +58,9 @@ void menu::insertItem(std::string text, bool avaible)
 /*********************************************************
  *                      insertItem                       *
  *********************************************************/
-void menu::insertItem(std::string text, std::string imageFile, bool avaible)
+void Menu::insertItem(std::string text, std::string imageFile, bool avaible)
 {
-   textBox* novo;
+   TextBox* novo;
 
    /* Insert Picture */
    if(!imageFile.empty())
@@ -79,7 +81,7 @@ void menu::insertItem(std::string text, std::string imageFile, bool avaible)
 /*********************************************************
  *                        getItem                        *
  *********************************************************/
-guiObject* menu::getItem(int i)
+GuiObject* Menu::getItem(int i)
 {
    int count=0;
    /* If searching for greater than total, for sure doesn't exist */
@@ -88,10 +90,10 @@ guiObject* menu::getItem(int i)
       return(NULL);
    }
 
-   std::list<guiObject*>::iterator it;
+   std::list<GuiObject*>::iterator it;
    for(it=list.begin(); it != list.end(); it++)
    {
-      if((*it)->type != FARSO_OBJECT_PICTURE)
+      if((*it)->type != Farso::OBJECT_PICTURE)
       {
          count++;
          if(count == i)
@@ -106,9 +108,9 @@ guiObject* menu::getItem(int i)
 /*********************************************************
  *                      itemAvaible                      *
  *********************************************************/
-bool menu::itemAvailable(int item)
+bool Menu::itemAvailable(int item)
 {
-   guiObject* it = getItem(item);
+   GuiObject* it = getItem(item);
    if(!it)
    {
       return(false);
@@ -119,9 +121,9 @@ bool menu::itemAvailable(int item)
 /*********************************************************
  *                     setItemAvaible                    *
  *********************************************************/
-void menu::setItemAvailable(int item, bool av)
+void Menu::setItemAvailable(int item, bool av)
 {
-   guiObject* it = getItem(item);
+   GuiObject* it = getItem(item);
    if(it)
    {
       it->setAvailable(av);
@@ -132,7 +134,7 @@ void menu::setItemAvailable(int item, bool av)
 /*********************************************************
  *                      setCoordinate                    *
  *********************************************************/
-void menu::setPosition(int xa, int ya)
+void Menu::setPosition(int xa, int ya)
 {
   x = xa;
   y = ya;
@@ -141,19 +143,19 @@ void menu::setPosition(int xa, int ya)
 /*********************************************************
  *                          draw                         *
  *********************************************************/
-void menu::draw(int pos)
+void Menu::draw(int pos)
 {
-   dntFont fnt;
-   farsoOptions opt;
+   Font fnt;
+   Options opt;
    fnt.defineFont(opt.getDefaultFont(), 10);
-   fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
-   fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
+   fnt.defineFontAlign(Font::ALIGN_LEFT);
+   fnt.defineFontStyle(Font::STYLE_NORMAL);
 
    /* Define Coordinates */
    int x1 = x;
    int x2 = x1 + (maxCharac)*(fnt.getIncCP()+1)+4; 
    int y1 = y;
-   int y2 = ((list.size()-numPictures) * MENU_ITEM_HEIGHT) + 
+   int y2 = ((list.size()-numPictures) * ITEM_HEIGHT) + 
                                          y1 + 5; /* bizarre from DOS version */
    
    /* Verify Sides */
@@ -171,40 +173,40 @@ void menu::draw(int pos)
    }
 
    /* Draw the Menu */
-   color_Set(Colors.colorMenu.R, Colors.colorMenu.G,
-             Colors.colorMenu.B, Colors.colorMenu.A);
+   color_Set(colors.colorMenu.R, colors.colorMenu.G,
+             colors.colorMenu.B, colors.colorMenu.A);
    rectangle_Fill(wSurface,x1+1,y1+1,x2-1,y2-1);
-   color_Set(Colors.colorCont[2].R, Colors.colorCont[2].G,
-             Colors.colorCont[2].B, Colors.colorCont[2].A);
-   rectangle_Oval(wSurface,x1,y1,x2,y2,Colors.colorCont[1].R,
-                  Colors.colorCont[1].G, Colors.colorCont[1].B,
-                  Colors.colorCont[1].A);
+   color_Set(colors.colorCont[2].R, colors.colorCont[2].G,
+             colors.colorCont[2].B, colors.colorCont[2].A);
+   rectangle_Oval(wSurface,x1,y1,x2,y2,colors.colorCont[1].R,
+                  colors.colorCont[1].G, colors.colorCont[1].B,
+                  colors.colorCont[1].A);
       /*itens*/  
    int xa = x1+4;
    int ya = y1+3;
-   int med = (MENU_ITEM_HEIGHT - 10) / 2;
-   guiObject* item;
+   int med = (ITEM_HEIGHT - 10) / 2;
+   GuiObject* item;
 
-   std::list<guiObject*>::iterator it;
+   std::list<GuiObject*>::iterator it;
    for(it=list.begin(); it != list.end(); it++)
    {
       item = (*it);
       /* Treat Pictures */
-      if(item->type == FARSO_OBJECT_PICTURE)
+      if(item->type == Farso::OBJECT_PICTURE)
       {
-         picture* pic = (picture*)item;
+         Picture* pic = (Picture*)item;
          pic->setCoordinate(xa, ya+med+1, xa+10, ya+10+med+1);
          pic->draw();
          /* The next text will be translated right */
          xa = x1+15;
       }
       /* treat Texts */
-      else if(item->type == FARSO_OBJECT_TEXT_BOX)
+      else if(item->type == Farso::OBJECT_TEXT_BOX)
       {
-         color_Set(Colors.colorText.R,
-               Colors.colorText.G,
-               Colors.colorText.B,
-               Colors.colorText.A);
+         color_Set(colors.colorText.R,
+               colors.colorText.G,
+               colors.colorText.B,
+               colors.colorText.A);
 
          /* Menu Texts */
          if (item->getText().compare("-"))
@@ -215,11 +217,11 @@ void menu::draw(int pos)
             }
             else
             {
-               color_Set(Colors.colorCont[2].R, Colors.colorCont[2].G,
-                     Colors.colorCont[2].B, Colors.colorCont[2].A);
+               color_Set(colors.colorCont[2].R, colors.colorCont[2].G,
+                     colors.colorCont[2].B, colors.colorCont[2].A);
                fnt.write(wSurface,xa+1,ya+med+1,item->getText());
-               color_Set(Colors.colorCont[1].R, Colors.colorCont[1].G,
-                     Colors.colorCont[1].B, Colors.colorCont[1].A);
+               color_Set(colors.colorCont[1].R, colors.colorCont[1].G,
+                     colors.colorCont[1].B, colors.colorCont[1].A);
                fnt.write(wSurface,xa,ya+med,item->getText());
             }
          } 
@@ -227,15 +229,15 @@ void menu::draw(int pos)
          /* Menu Separators */
          else 
          {
-            color_Set(Colors.colorCont[1].R, Colors.colorCont[1].G,
-                  Colors.colorCont[1].B, Colors.colorCont[1].A);
+            color_Set(colors.colorCont[1].R, colors.colorCont[1].G,
+                  colors.colorCont[1].B, colors.colorCont[1].A);
             rectangle_2Colors(wSurface,xa-2,ya+6,x2-2,ya+7,
-                  Colors.colorCont[0].R,
-                  Colors.colorCont[0].G,Colors.colorCont[0].B,
-                  Colors.colorCont[0].A);
+                  colors.colorCont[0].R,
+                  colors.colorCont[0].G,colors.colorCont[0].B,
+                  colors.colorCont[0].A);
          }
          xa = x1+4;
-         ya += MENU_ITEM_HEIGHT;
+         ya += ITEM_HEIGHT;
       }
    }
   
@@ -244,7 +246,7 @@ void menu::draw(int pos)
 /*********************************************************
  *                     getActualItem                     *
  *********************************************************/
-int menu::getActualItem()
+int Menu::getActualItem()
 {
    if(itemAvailable(actualItem))
    {
@@ -256,7 +258,7 @@ int menu::getActualItem()
 /*********************************************************
  *                      getMaxCharac                     *
  *********************************************************/
-int menu::getMaxCharac()
+int Menu::getMaxCharac()
 {
    return(maxCharac);
 }
@@ -265,16 +267,16 @@ int menu::getMaxCharac()
 /*********************************************************
  *                          run                          *
  *********************************************************/
-int menu::run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
+int Menu::run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
               int *pronto, int Xjan, int Yjan)
 {
-   farsoOptions opt;
-   dntFont fnt;
+   Options opt;
+   Font fnt;
    fnt.defineFont(opt.getDefaultFont(), 10);
 
    /* Draws */
    draw(0);
-   int altura = ((list.size()-numPictures)*MENU_ITEM_HEIGHT)+6;
+   int altura = ((list.size()-numPictures)*ITEM_HEIGHT)+6;
    int largura = (maxCharac)*(fnt.getIncCP()+1)+5;
 
    /* Runs */
@@ -285,7 +287,7 @@ int menu::run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
    if(isMouseAt(x+Xjan, y+Yjan, x+largura+Xjan,
             y+altura+Yjan-3, mouseX, mouseY)) 
    {
-      actualItem = ((mouseY - (y+Yjan)-4) / MENU_ITEM_HEIGHT) + 1;
+      actualItem = ((mouseY - (y+Yjan)-4) / ITEM_HEIGHT) + 1;
       if(actualItem < 0)
       {
          actualItem = 0;
@@ -325,17 +327,17 @@ int menu::run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
 
    if(actualItem > 0)
    {
-      color_Set(Colors.colorCont[1].R,
-            Colors.colorCont[1].G,
-            Colors.colorCont[1].B,
-            Colors.colorCont[1].A);
-      rectangle_Oval(wSurface,x+2,(actualItem-1)*MENU_ITEM_HEIGHT+y+4,
-            x+largura-2,(actualItem)*MENU_ITEM_HEIGHT+y+4,
-            Colors.colorCont[2].R, Colors.colorCont[2].G,
-            Colors.colorCont[2].B, Colors.colorCont[2].A);
+      color_Set(colors.colorCont[1].R,
+            colors.colorCont[1].G,
+            colors.colorCont[1].B,
+            colors.colorCont[1].A);
+      rectangle_Oval(wSurface,x+2,(actualItem-1)*ITEM_HEIGHT+y+4,
+            x+largura-2,(actualItem)*ITEM_HEIGHT+y+4,
+            colors.colorCont[2].R, colors.colorCont[2].G,
+            colors.colorCont[2].B, colors.colorCont[2].A);
    }
 
-   /* Verify if the mouse is at menu */
+   /* Verify if the mouse is at Menu */
    if(!isMouseAt(x+Xjan, y+Yjan, x+largura+Xjan, y+altura+Yjan-3, 
                  mouseX, mouseY) && 
       (!tecla) && (*pronto))

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -46,7 +46,8 @@ class barterWindow
        * \param inter -> GUI interface used 
        * \param usedEngine -> pointer to the engine used */
       void open(character *s, character* b,
-                guiInterface* inter, itemWindow* infoW, engine* usedEngine);
+                Farso::GuiInterface* inter, itemWindow* infoW, 
+                engine* usedEngine);
 
       /*! Close / Remove structures from the barter window */
       void close();
@@ -59,8 +60,8 @@ class barterWindow
        * \param mouseCursor -> the mouse cursor
        * \param actualMap -> pointer to the opened map
        * \return true if event is threated, false otherwise. */
-      bool treat(guiObject* guiObj, int eventInfo, int mouseX, int mouseY,
-                 cursor* mouseCursor, Map* actualMap);
+      bool treat(Farso::GuiObject* guiObj, int eventInfo, 
+            int mouseX, int mouseY, cursor* mouseCursor, Map* actualMap);
 
       /*! Verify if window is still opened
        * \return true if window is openned, false otherwise */
@@ -126,22 +127,22 @@ class barterWindow
       static bool sellerObj;            /**< True if object is from seller */
 
       static barter* barterInventory;   /**< The barter inventory */
-      static guiInterface* gui;         /**< The used GUI */
-      static textBox* sellerTotals;     /**< The Seller Totals */
-      static textBox* buyerTotals;      /**< The Buyer Totals */
-      static window* intWindow;         /**< The window used */
-      static button* imposeButton;      /**< The Impose Button */
-      static button* offerButton;       /**< The Offer Button */
-      static button* cancelButton;      /**< The Cancel Button */
-      static tabButton* barterTabButton;/**< The Barter TabButton */
-      static oneTabButton* sellerInv;   /**< The actual Inventory */
+      static Farso::GuiInterface* gui;         /**< The used GUI */
+      static Farso::TextBox* sellerTotals;     /**< The Seller Totals */
+      static Farso::TextBox* buyerTotals;      /**< The Buyer Totals */
+      static Farso::Window* intWindow;         /**< The window used */
+      static Farso::Button* imposeButton;      /**< The Impose Button */
+      static Farso::Button* offerButton;       /**< The Offer Button */
+      static Farso::Button* cancelButton;      /**< The Cancel Button */
+      static Farso::TabButton* barterTabButton;/**< The Barter TabButton */
+      static Farso::OneTabButton* sellerInv;   /**< The actual Inventory */
       static inventWindow* sellerWindow;/**< Pointer to the seller inventory
                                              window, if it is openned here. */
-      static oneTabButton* buyerInv;    /**< The actual Inventory */
+      static Farso::OneTabButton* buyerInv;    /**< The actual Inventory */
       static inventWindow* buyerWindow; /**< Pointer to the buyer inventory 
                                              window, if it is opened here. */
 
-      static menu* objectMenu;          /**< The object menu */
+      static Farso::Menu* objectMenu;          /**< The object menu */
 
       static itemWindow* infoWindow;    /**< Pointer to the item window used */
 

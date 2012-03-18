@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -50,7 +50,7 @@ comicBook::comicBook()
    img = IMG_Load(dir.getRealFile("texturas/cbook/skip.png").c_str());
    if(img)
    {
-      setTexture(img, skipTexture);
+      Farso::setTexture(img, skipTexture);
       SDL_FreeSurface(img);
    }
    else
@@ -98,7 +98,7 @@ bool comicBook::load(string bookFile)
    int curVertex = 0;
    int posX1=0, posY1=0, posX2=0, posY2=0;
    int textColor[3];
-   int textSize=16, textStyle = DNT_FONT_STYLE_NORMAL;
+   int textSize=16, textStyle = Farso::Font::STYLE_NORMAL;
 
    /* First, empty all previous book pages */
    empty();
@@ -211,7 +211,7 @@ bool comicBook::load(string bookFile)
          textColor[1] = 0;
          textColor[2] = 0;
          /* Default as normal style and 16 size */
-         textStyle = DNT_FONT_STYLE_NORMAL;
+         textStyle = Farso::Font::STYLE_NORMAL;
          textSize = 16;
       }
       /* Define the text color */
@@ -346,7 +346,7 @@ void comicBook::render(comicPage* curPage, float scale)
    glBindTexture(GL_TEXTURE_2D, skipTexture);
 
    glPushMatrix();
-      glTranslatef(SCREEN_X-23, 23, 0);
+      glTranslatef(Farso::SCREEN_X-23, 23, 0);
       glScalef(skipScale, skipScale, skipScale);
       glBegin(GL_QUADS);
          glTexCoord2f(0, 0);
@@ -404,7 +404,8 @@ bool comicBook::verifyInput()
    }
 
    /* If Skip Texture Pressed, skip comic book too */
-   if(isMouseAt(SCREEN_X-55, SCREEN_Y-55, SCREEN_X, SCREEN_Y, mouseX, mouseY)) 
+   if(Farso::isMouseAt(Farso::SCREEN_X-55, Farso::SCREEN_Y-55, 
+            Farso::SCREEN_X, Farso::SCREEN_Y, mouseX, mouseY)) 
    {
       changeColor = true;
       if(mButton & SDL_BUTTON(1))

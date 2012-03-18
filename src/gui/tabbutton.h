@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -24,6 +24,9 @@
 #include "picture.h"
 #include "color.h"
 
+namespace Farso
+{
+
 #define MAX_TABBUTTONS      20 /**< Max Buttons per table of buttons */
 #define TABBUTTON_NONE       0 /**< No Action */
 #define TABBUTTON_ON_PRESS       40 /**< Some button pressing */
@@ -32,19 +35,12 @@
 #define TABBUTTON_RIGHT_PRESSED  43 /**< Some Button right pressed */
 #define TABBUTTON_BELLOW    32 /**< Max guiObject bellow */
 
-enum
-{
-   FARSO_TAB_BUTTON_STYLE_NORMAL,
-   FARSO_TAB_BUTTON_STYLE_HIGH,
-   FARSO_TAB_BUTTON_STYLE_LIST_TEXT
-};
-
 /*! oneTabButton is a class to define what is a button on a table of buttons */
-class oneTabButton: public guiObject
+class OneTabButton: public GuiObject
 {
    public:
       /*! Constructor */
-      oneTabButton():guiObject(NULL){};
+      OneTabButton():GuiObject(NULL){};
       /*! From guiObject */
       void draw(){};
 
@@ -56,31 +52,39 @@ class oneTabButton: public guiObject
 
 /*! The table of Buttons class. Its a figure divided in squares each one 
     representing (and acting as) a button. */
-class tabButton: public picture
+class TabButton: public Picture
 {
    public:
+      /*! TabButton styles */
+      enum TabButtonStyleEnum
+      {
+         STYLE_NORMAL=0,
+         STYLE_HIGH,
+         STYLE_LIST_TEXT
+      };
+
       /*! Constructor 
        * \param x -> x position of the tab button
        * \param y -> y position of the tab button
        * \param arquivo -> fileName of the image to Load 
        * \param surface -> window surface where object is */
-      tabButton(int x,int y,const char* arquivo, SDL_Surface* surface);
+      TabButton(int x,int y,const char* arquivo, SDL_Surface* surface);
       /*! Constructor without Image
        * \param x -> x position of the tab button
        * \param y -> y position of the tab button
        * \param w -> width of the tab button
        * \param h -> heigh of the tab button 
        * \param surface -> window surface where object is */
-      tabButton(int x, int y, int w, int h, SDL_Surface* surface);
+      TabButton(int x, int y, int w, int h, SDL_Surface* surface);
       /*! Destructor */
-      ~tabButton(){};
+      ~TabButton(){};
       /*! insert Button in the table of buttons
        * \param x1 -> X Coordinate
        * \param y1 -> Y Coordinate
        * \param x2 -> X Coordinate 
        * \param y2 -> Y Coordinate 
        * \return Pointer to the oneTableButton Created */
-      oneTabButton* insertButton(int x1, int y1, int x2, int y2); 
+      OneTabButton* insertButton(int x1, int y1, int x2, int y2); 
       /*! Draws the table button to the surface */
       void draw();
       /*! Verify Mouse Press on Buttons 
@@ -91,7 +95,7 @@ class tabButton: public picture
        * \param Yjan -> window Y coordinate
        * \param actionType -> ID of action done
        * \return Pointer to the button pressed.*/
-      guiObject* verifyPosition(int mouseX, int mouseY, Uint8 Mbuttons, 
+      GuiObject* verifyPosition(int mouseX, int mouseY, Uint8 Mbuttons, 
                                 int Xjan, int Yjan, int& actionType);
 
 
@@ -105,20 +109,21 @@ class tabButton: public picture
 
       /*! Set the object below the tabbuton (this object will always draw
        * before draw the tabButton) */
-      void setObjectBelow(guiObject* obj);
+      void setObjectBelow(GuiObject* obj);
 
    private:
       int numButtons;                       /**< Number of active buttons */
-      oneTabButton Buttons[MAX_TABBUTTONS]; /**< Buttons Vector */
+      OneTabButton buttons[MAX_TABBUTTONS]; /**< Buttons Vector */
       bool pressed;                         /**< Internal Verifier on Treat */
       bool rightPressed;                    /**< Internal Verifier on Treat */
       int current;                          /**< Current Button selected */
       int style;                            /**< Current Style */
-      guiObject* objectsBelow[TABBUTTON_BELLOW];  /**< Object Below */
+      GuiObject* objectsBelow[TABBUTTON_BELLOW];  /**< Object Below */
       int curBelow;                         /**< Current objects below */
-      farso_colors cor;
+      Colors cor;
 };
 
+}
 
 #endif
 

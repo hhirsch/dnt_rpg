@@ -30,12 +30,12 @@ using namespace std;
 /**************************************************************
  *                          Constructor                       *
  **************************************************************/
-aspectWindow::aspectWindow(character* dude, guiInterface* inter)
+aspectWindow::aspectWindow(character* dude, Farso::GuiInterface* inter)
 {
    dirs dir;
-   dntFont fnt;
-   int centerY = SCREEN_Y / 2;
-   int centerX = SCREEN_X / 2;
+   Farso::Font fnt;
+   int centerY = Farso::SCREEN_Y / 2;
+   int centerX = Farso::SCREEN_X / 2;
 
 
    curImage = 0;
@@ -150,12 +150,13 @@ void aspectWindow::loadImages()
 /**************************************************************
  *                             treat                          *
  **************************************************************/
-int aspectWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
+int aspectWindow::treat(Farso::GuiObject* object, int eventInfo, 
+      Farso::GuiInterface* inter)
 {
-   if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
+   if(eventInfo == Farso::EVENT_PRESSED_BUTTON)
    {
       /* Confirm */
-      if(object == (guiObject*) buttonConfirm)
+      if(object == (Farso::GuiObject*) buttonConfirm)
       {
          /* Save Things to the character */
          usedCharacter->definePortrait(images[curImage].imageFile);
@@ -183,14 +184,14 @@ int aspectWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
          return(ASPECTW_CONFIRM);
       }
       /* Cancel */
-      else if(object == (guiObject*) buttonCancel) 
+      else if(object == (Farso::GuiObject*) buttonCancel) 
       {
          inter->closeWindow(intWindow);
          intWindow = NULL;
          return(ASPECTW_CANCEL);
       }
       /* Previous Image */
-      else if(object == (guiObject*) buttonPreviousImage)
+      else if(object == (Farso::GuiObject*) buttonPreviousImage)
       {
          curImage--;
          if(curImage < 0)
@@ -200,7 +201,7 @@ int aspectWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
          figurePortrait->set(images[curImage].image);
       }
       /* Next Image */
-      else if(object == (guiObject*) buttonNextImage)
+      else if(object == (Farso::GuiObject*) buttonNextImage)
       {
          curImage++;
          if(curImage >= totalImages)
@@ -210,10 +211,10 @@ int aspectWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
          figurePortrait->set(images[curImage].image);
       }
    }
-   else if(eventInfo == FARSO_EVENT_MODIFIED_CX_SEL)
+   else if(eventInfo == Farso::EVENT_MODIFIED_CX_SEL)
    {
       /* Female */
-      if(object == (guiObject*) cxSelSexF)
+      if(object == (Farso::GuiObject*) cxSelSexF)
       {
          if(cxSelSexF->isSelected())
          {
@@ -226,7 +227,7 @@ int aspectWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
          cxSelSexO->setSelection(false);
       }
       /* Male */
-      if(object == (guiObject*) cxSelSexM)
+      if(object == (Farso::GuiObject*) cxSelSexM)
       {
          if(cxSelSexM->isSelected())
          {
@@ -239,7 +240,7 @@ int aspectWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
          cxSelSexO->setSelection(false);
       }
       /* Other */
-      if(object == (guiObject*) cxSelSexO)
+      if(object == (Farso::GuiObject*) cxSelSexO)
       {
          if(cxSelSexO->isSelected())
          {

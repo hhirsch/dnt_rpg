@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -51,7 +51,7 @@ sun::sun(float hour, float farViewX, float farViewZ)
    }
    else
    {
-      setTextureRGBA(img,sunTexture);
+      Farso::setTextureRGBA(img,sunTexture);
       SDL_FreeSurface(img);
    }
 
@@ -63,7 +63,7 @@ sun::sun(float hour, float farViewX, float farViewZ)
    }
    else
    {
-      setTextureRGBA(img,moonTexture);
+      Farso::setTextureRGBA(img,moonTexture);
       SDL_FreeSurface(img);
    }
 

@@ -38,26 +38,30 @@
 #include "filesel.h"
 #include "healthBar.h"
 
-enum
+namespace Farso
 {
-   LIST_TYPE_ADD_AT_BEGIN=0,
-   LIST_TYPE_ADD_AT_END
-};
 
 /*! The guiList Class: a list for guiObjects. */
-class guiList
+class GuiList
 {
    public:
+
+      enum ListType
+      {
+         LIST_TYPE_ADD_AT_BEGIN=0,
+         LIST_TYPE_ADD_AT_END
+      };
+
       /*! Constructor
        * \param sWidth -> usefull width of the surface
        * \param sHeight -> usefull height of the surface (see menu)
        * \param surface -> pointer to the surface where list is
        * \param hasDecor -> if window has decor or not
        * \param t -> dntList type */
-      guiList(int sWidth, int sHeight, SDL_Surface* surface, bool hasDecor,
+      GuiList(int sWidth, int sHeight, SDL_Surface* surface, bool hasDecor,
             int t=LIST_TYPE_ADD_AT_BEGIN);
       /*! Destructor */
-      ~guiList();
+      ~GuiList();
 
       /*! Verify if some object at the list changed its draw status
        * \return -> true if something changed, false if not */
@@ -74,14 +78,14 @@ class guiList
        * \param text -> button text
        * \param oval -> if the button is oval or rectangular
        * \return pointer to the button inserted */
-      button* insertButton(int xa,int ya,int xb,int yb,
+      Button* insertButton(int xa,int ya,int xb,int yb,
                            std::string text, bool oval);
 
       /*! Insert a new cxSel on the List
        * \param xa -> X coordinate
        * \param ya -> Y coordinate
        * \param selecionada -> if selected or not */
-      cxSel* insertCxSel(int xa, int ya, bool selecionada);
+      CxSel* insertCxSel(int xa, int ya, bool selecionada);
 
       /*! Insert a new picture on the list
        * \param x -> x initial coordinate
@@ -90,7 +94,7 @@ class guiList
        * \param h -> height of the picture
        * \param arquivo -> fileName to opwn or NULL to not open a file
        * \return pointer to the picture inserted */
-      picture* insertPicture(int x,int y,int w,int h, const char* arquivo);
+      Picture* insertPicture(int x,int y,int w,int h, const char* arquivo);
 
       /*! Insert a new tabButton on the list
        * \param x -> x initial coordinate
@@ -99,7 +103,7 @@ class guiList
        * \param h -> height of the picture
        * \param arquivo -> fileName to opwn or NULL to not open a file 
        * \return tabbutton inserted */
-      tabButton* insertTabButton(int x,int y,int w,int h, const char* arquivo);
+      TabButton* insertTabButton(int x,int y,int w,int h, const char* arquivo);
 
       /*! Insert a textBar on the List
        * \param xa -> x1 coordinate
@@ -109,7 +113,7 @@ class guiList
        * \param text -> textBar text
        * \param cript -> if is crypt, or not
        * \return textBar inserted */
-      textBar* insertTextBar(int xa,int ya,int xb,int yb, std::string text, 
+      TextBar* insertTextBar(int xa,int ya,int xb,int yb, std::string text, 
                              int cript);
 
       /*! Insert a textBox on the List
@@ -120,7 +124,7 @@ class guiList
        * \param frameType -> type of the frame. 0 for no frames
        * \param text -> text of the textBox
        * \return textBox inserted */
-      textBox* insertTextBox(int xa,int ya,int xb,int yb,
+      TextBox* insertTextBox(int xa,int ya,int xb,int yb,
                              int frameType, std::string text);
 
       /*! Insert a selText on the list
@@ -134,7 +138,7 @@ class guiList
        * \param text3 -> option 3 text
        * \param text4 -> option 4 text
        * \return selText inserted */
-      selText* insertSelText(int xa,int ya,int xb,int yb, std::string text0,
+      SelText* insertSelText(int xa,int ya,int xb,int yb, std::string text0,
                              std::string text1, std::string text2,
                              std::string text3, std::string text4);
 
@@ -145,7 +149,7 @@ class guiList
        * \param yb -> y2 coordinate
        * \param txt -> text on the rolbar
        * \return rolBar inserted */
-      rolBar* insertRolBar(int xa,int ya,int xb,int yb, std::string txt);
+      RolBar* insertRolBar(int xa,int ya,int xb,int yb, std::string txt);
 
       /*! Insert a listText on the List
        * \param xa -> x1 position
@@ -153,7 +157,7 @@ class guiList
        * \param xb -> x2 position
        * \param yb -> y2 position
        * \return listText inserted */
-      listText* insertListText(int xa,int ya,int xb,int yb);
+      ListText* insertListText(int xa,int ya,int xb,int yb);
 
       /*! Insert a fileSel on the list
        * \param xa -> x coordinate
@@ -163,7 +167,7 @@ class guiList
        * \param dir -> current dir to browse
        * \param nav -> if show dirs to navigate or not
        * \return -> pointer to the fileSel inserted */
-      fileSel* insertFileSel(int xa, int ya, bool load, std::string dir, 
+      FileSel* insertFileSel(int xa, int ya, bool load, std::string dir, 
                              bool nav=true);
 
       /*! Insert a healthBar (a progress bar) on the list
@@ -172,7 +176,7 @@ class guiList
        * \param xb -> x2 coordinate
        * \param yb -> y2 coordinate
        * \param max -> max health value */
-      healthBar* insertHealthBar(int xa, int ya, int xb, int yb, int max);
+      HealthBar* insertHealthBar(int xa, int ya, int xb, int yb, int max);
 
       /*! Define a tabBox for the window
        * \param x1 -> x first coordinate
@@ -180,23 +184,23 @@ class guiList
        * \param x2 -> x last coordinate
        * \param y2 -> y last coordinate
        * \return -> pointer to the defined tabBox */
-      guiObject* defineTabBox(int x1, int y1, int x2, int y2);
+      GuiObject* defineTabBox(int x1, int y1, int x2, int y2);
 
       /*! Get the current tabBox 
        * \return -> pointer to the current tabBox */
-      guiObject* getTabBox();
+      GuiObject* getTabBox();
   
       /*! Get the objects list relative to the tabBox (if one)
        * \return guiList of objects active at the tabBox */
-      guiList* getActiveTabBoxList();
+      GuiList* getActiveTabBoxList();
 
       /*! Add a internal Menu to the list
        * \return menu Inserted */
-      guiObject* addMenu();
+      GuiObject* addMenu();
 
       /*! Get the Internal Menu of The List
        * \return internal menu */
-      guiObject* getMenu();
+      GuiObject* getMenu();
 
       /*! Remove Internal Menu, if exists one. */
       void removeMenu();
@@ -205,17 +209,17 @@ class guiList
       void clearList();
 
       /*! Insert element on list, based on its type (end or head) */
-      void insert(guiObject* obj);
+      void insert(GuiObject* obj);
 
-      friend class guiInterface;
+      friend class GuiInterface;
 
    protected:
 
       /*! Free Element
        * \param obj -> pointer to the object to free */
-      void freeElement(guiObject* obj);
+      void freeElement(GuiObject* obj);
      
-      std::list<guiObject*>list; /**< The list itself */
+      std::list<GuiObject*>list; /**< The list itself */
 
       SDL_Surface* wSurface;  /**< window surface used */
       int wWidth,             /**< Window width */
@@ -223,11 +227,12 @@ class guiList
       int type;               /**< List type */
       bool wHasDecor;         /**< true if window has decor */
       
-      guiObject* intMenu; /**< The internal Menu of the List */
-      guiObject* tab;    /**< Inner tabBox */
+      GuiObject* intMenu; /**< The internal Menu of the List */
+      GuiObject* tab;    /**< Inner tabBox */
 
 };
 
+}
 
 #endif
 

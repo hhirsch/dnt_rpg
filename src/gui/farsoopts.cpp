@@ -19,38 +19,39 @@
 */
 
 #include "farsoopts.h"
+using namespace Farso;
 
 /***********************************************************************
  *                          setNeededDefaults                          *
  ***********************************************************************/
-void farsoOptions::setNeededDefaults(std::string fntFileName, 
+void Options::setNeededDefaults(std::string fntFileName, 
       std::string cursorFileName, 
       std::string maximizeIcon, std::string closeIcon, 
       std::string maximizeLabel, std::string closeLabel,
       std::string confirmLabel, std::string cancelLabel)
 {
-   farsoOptions::defaultFont = fntFileName;
-   farsoOptions::defaultCursor = cursorFileName;
-   farsoOptions::maxIcon = maximizeIcon;
-   farsoOptions::maxLabel = maximizeLabel;
-   farsoOptions::clIcon = closeIcon;
-   farsoOptions::clLabel = closeLabel;
-   farsoOptions::confirmLabel = confirmLabel;
-   farsoOptions::cancelLabel = cancelLabel;
+   Options::defaultFont = fntFileName;
+   Options::defaultCursor = cursorFileName;
+   Options::maxIcon = maximizeIcon;
+   Options::maxLabel = maximizeLabel;
+   Options::clIcon = closeIcon;
+   Options::clLabel = closeLabel;
+   Options::confirmLabel = confirmLabel;
+   Options::cancelLabel = cancelLabel;
 }
 
 /***********************************************************************
  *                            staticMembers                            *
  ***********************************************************************/
-bool farsoOptions::languageIsUnicode = false;
-int farsoOptions::width = 0;
-int farsoOptions::height = 0;
-std::string farsoOptions::defaultFont = "undefined";
-std::string farsoOptions::defaultCursor = "undefined";
-std::string farsoOptions::maxIcon = "";
-std::string farsoOptions::maxLabel = "Maximize";
-std::string farsoOptions::clIcon = "";
-std::string farsoOptions::clLabel = "Close";
-std::string farsoOptions::confirmLabel = "Confirm";
-std::string farsoOptions::cancelLabel = "Cancel";
+bool Options::languageIsUnicode = false;
+int Options::width = 0;
+int Options::height = 0;
+std::string Options::defaultFont = "undefined";
+std::string Options::defaultCursor = "undefined";
+std::string Options::maxIcon = "";
+std::string Options::maxLabel = "Maximize";
+std::string Options::clIcon = "";
+std::string Options::clLabel = "Close";
+std::string Options::confirmLabel = "Confirm";
+std::string Options::cancelLabel = "Cancel";
 

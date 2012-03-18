@@ -29,14 +29,17 @@
 #include "draw.h"
 #include "mouse.h"
 
-class menu;
+namespace Farso
+{
+
+class Menu;
 
 /*! The button class */
-class button: public guiObject
+class Button: public GuiObject
 {
    public:
 
-      enum buttonType
+      enum ButtonType
       {
          NORMAL,
          KEEP_PRESSING
@@ -49,11 +52,11 @@ class button: public guiObject
        * \param yb -> y2 coordinate 
        * \param txt -> button text
        * \param isOval -> if the button is oval or rectangular */
-      button(int xa,int ya,int xb,int yb, std::string txt, bool isOval, 
+      Button(int xa,int ya,int xb,int yb, std::string txt, bool isOval, 
             SDL_Surface* surface);
 
       /*! Destructor */
-      ~button();
+      ~Button();
 
       /*! Set button type
        * \param t -> buttonType constant */
@@ -85,17 +88,19 @@ class button: public guiObject
        * \param b -> blue */
       void setTextColor(int r, int g, int b);
 
-      menu* men;        /**< Button Menu (buttons can have a menu to be 
+      Menu* men;        /**< Button Menu (buttons can have a menu to be 
                                           activated when button presses) */
 
    protected:
       bool pressed;         /**< If the button is pressed or not */
       bool oval;            /**< Oval Button?  */
-      farso_colors Colors;  /**< Colors */
+      Colors colors;        /**< Colors */
       std::string fontName; /**< Font Name */
       int fontSize;         /**< Font Size */
       int bType;            /**< Button type */
 };
+
+}
 
 #endif
 

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -601,7 +601,7 @@ void options::setLanguage()
    }
 #endif
 
-   farsoOptions farOpt;
+   Farso::Options farOpt;
    farOpt.setUnicodeLanguage(isLanguageUnicode());
 }
 
@@ -768,11 +768,11 @@ string options::resolutionName()
 /****************************************************************
  *                          insertKeys                          *
  ****************************************************************/
-void options::insertKeys(int firstKey, int lastKey, guiList* list)
+void options::insertKeys(int firstKey, int lastKey, Farso::GuiList* gList)
 {
    int posY = 77;
    int i;
-   textBox* tb;
+   Farso::TextBox* tb;
 
    if( (firstKey < 0) || (firstKey >= DNT_TOTAL_KEYS) ||
        (lastKey < 0) || (lastKey >= DNT_TOTAL_KEYS) )
@@ -782,9 +782,9 @@ void options::insertKeys(int firstKey, int lastKey, guiList* list)
 
    for(i = firstKey; i <= lastKey; i++)
    {
-      tb = list->insertTextBox(14,posY,185,posY+17,0, 
+      tb = gList->insertTextBox(14,posY,185,posY+17,0, 
                                gettext(dntKeyDesc[i].c_str()));
-      buttonKeys[i] = list->insertButton(188,posY,262,posY+17,
+      buttonKeys[i] = gList->insertButton(188,posY,262,posY+17,
                                          SDL_GetKeyName((SDLKey)keys[i]),true);
       if(i % 2 != 0)
       {
@@ -799,16 +799,16 @@ void options::insertKeys(int firstKey, int lastKey, guiList* list)
 /****************************************************************
  *                    Open Options Screen                       *
  ****************************************************************/
-void options::displayOptionsScreen(guiInterface* interf)
+void options::displayOptionsScreen(Farso::GuiInterface* interf)
 {
    dirs dir;
    std::string fontArial = dir.getRealFile(DNT_FONT_ARIAL);
    extensions ext;
-   dntFont fnt;
+   Farso::Font fnt;
    fnt.defineFont(fontArial, 10);
    char tmp[8];
    string saux;
-   textBox* qt;
+   Farso::TextBox* qt;
 
    getAvailableResolutions();
 
@@ -830,22 +830,23 @@ void options::displayOptionsScreen(guiInterface* interf)
       prevKeys[i] = keys[i];
    }
 
-   int xPos = (int)(SCREEN_X / 2.0);
-   int yPos = (int)(SCREEN_Y / 2.0);
+   int xPos = (int)(Farso::SCREEN_X / 2.0);
+   int yPos = (int)(Farso::SCREEN_Y / 2.0);
 
    intWindow = interf->insertWindow(xPos-138,yPos-192,xPos+138,yPos+192,
                                     gettext("Options"));
 
    /* Insert the Objects TabBox */
-   tabBox* tb=(tabBox*)intWindow->getObjectsList()->defineTabBox(8,27,268,352);
-   guiList* list;
+   Farso::TabBox* tb=(Farso::TabBox*)intWindow->getObjectsList()->defineTabBox(
+         8,27,268,352);
+   Farso::GuiList* gList;
    int posY;
 
    /************************************************
     *                Input Options                 *
     ************************************************/
-   list = tb->insertOption(gettext("Input"));
-   tabBox* inputTab = (tabBox*)list->defineTabBox(10,52,266,350);
+   gList = tb->insertOption(gettext("Input"));
+   Farso::TabBox* inputTab = (Farso::TabBox*)gList->defineTabBox(10,52,266,350);
    insertKeys(DNT_KEY_FIRST_WINDOW, DNT_KEY_LAST_WINDOW,
               inputTab->insertOption(gettext("Windows")));
 
@@ -858,89 +859,89 @@ void options::displayOptionsScreen(guiInterface* interf)
    /************************************************
     *                Audio Options                 *
     ************************************************/
-   list = tb->insertOption(gettext("Audio"));
+   gList = tb->insertOption(gettext("Audio"));
 
    posY = 52;
    /* Music Things */
-   qt = list->insertTextBox(12,posY,145,posY+17,0, gettext("Music Volume:"));
-   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
-   buttonMusDec = list->insertButton(121,posY,131,posY+17,
+   qt = gList->insertTextBox(12,posY,145,posY+17,0, gettext("Music Volume:"));
+   qt->setFont(fontArial, 10, Farso::Font::ALIGN_LEFT);
+   buttonMusDec = gList->insertButton(121,posY,131,posY+17,
                                      fnt.createUnicode(0x25C4),0);
    buttonMusDec->defineFont(fontArial, 9);
-   barMusicVolume = list->insertHealthBar(133,posY,196,posY+17,255);
+   barMusicVolume = gList->insertHealthBar(133,posY,196,posY+17,255);
    barMusicVolume->defineActualHealth(musicVolume);
-   buttonMusSum = list->insertButton(198,posY,208,posY+17,
+   buttonMusSum = gList->insertButton(198,posY,208,posY+17,
                                      fnt.createUnicode(0x25BA),0);
    buttonMusSum->defineFont(fontArial, 9);
-   list->insertPicture(220,posY,40,112,
+   gList->insertPicture(220,posY,40,112,
                        dir.getRealFile("texturas/options/music.png").c_str());
    posY += 25;
 
    /* Sound Effects Things */
    sprintf(tmp,"%d",sndfxVolume);
    saux = tmp;
-   qt = list->insertTextBox(12,posY,145,posY+17,0, gettext("Effects Volume:"));
-   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
-   buttonSndDec = list->insertButton(121,posY,131,posY+17,
+   qt = gList->insertTextBox(12,posY,145,posY+17,0, gettext("Effects Volume:"));
+   qt->setFont(fontArial, 10, Farso::Font::ALIGN_LEFT);
+   buttonSndDec = gList->insertButton(121,posY,131,posY+17,
                                      fnt.createUnicode(0x25C4),0);
    buttonSndDec->defineFont(fontArial, 9);
-   barSndfxVolume = list->insertHealthBar(133,posY,196,posY+17,255);
+   barSndfxVolume = gList->insertHealthBar(133,posY,196,posY+17,255);
    barSndfxVolume->defineActualHealth(sndfxVolume);
-   buttonSndSum = list->insertButton(198,posY,208,posY+17,
+   buttonSndSum = gList->insertButton(198,posY,208,posY+17,
                                      fnt.createUnicode(0x25BA),0);
    buttonSndSum->defineFont(fontArial, 9);
-   list->insertPicture(220,posY,40,112,
+   gList->insertPicture(220,posY,40,112,
                        dir.getRealFile("texturas/options/sndfx.png").c_str());
 
 
    /************************************************
     *                Video Options                 *
     ************************************************/
-   list = tb->insertOption(gettext("Video"));
+   gList = tb->insertOption(gettext("Video"));
    
    posY = 52;
    /* Resolution */
    prevHeight = screenHeight;
    prevWidth = screenWidth;
    saux = resolutionName();
-   qt = list->insertTextBox(12,posY,145,posY+17,0,
+   qt = gList->insertTextBox(12,posY,145,posY+17,0,
                             gettext("Screen Resolution:"));
-   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
-   buttonResDec = list->insertButton(121,posY,131,posY+17,
+   qt->setFont(fontArial, 10, Farso::Font::ALIGN_LEFT);
+   buttonResDec = gList->insertButton(121,posY,131,posY+17,
                                      fnt.createUnicode(0x25C4),0);
    buttonResDec->defineFont(fontArial, 9);
-   txtResolution = list->insertTextBox(132,posY,197,posY+17,1,saux.c_str());
-   txtResolution->setFont(fontArial, 10, DNT_FONT_ALIGN_CENTER);
-   buttonResSum = list->insertButton(198,posY,208,posY+17,
+   txtResolution = gList->insertTextBox(132,posY,197,posY+17,1,saux.c_str());
+   txtResolution->setFont(fontArial, 10, Farso::Font::ALIGN_CENTER);
+   buttonResSum = gList->insertButton(198,posY,208,posY+17,
                                      fnt.createUnicode(0x25BA),0);
    buttonResSum->defineFont(fontArial, 9);
-   list->insertPicture(220,posY,40,220,
+   gList->insertPicture(220,posY,40,220,
                     dir.getRealFile("texturas/options/resolution.png").c_str());
    posY += 35;
   
    /* Fullscreen */
-   qt = list->insertTextBox(24,posY,219,posY+17,0,gettext("Enable FullScreen"));
-   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
-   cxSelFullScreen = list->insertCxSel(12,posY+4,enableFullScreen);
-   list->insertPicture(220,posY,40,220,
+   qt = gList->insertTextBox(24,posY,219,posY+17,0,gettext("Enable FullScreen"));
+   qt->setFont(fontArial, 10, Farso::Font::ALIGN_LEFT);
+   cxSelFullScreen = gList->insertCxSel(12,posY+4,enableFullScreen);
+   gList->insertPicture(220,posY,40,220,
                     dir.getRealFile("texturas/options/fullscreen.png").c_str());
    posY += 25;
 
    /* Grass Enabled or Not */
-   qt = list->insertTextBox(24,posY,219,posY+17,0,
+   qt = gList->insertTextBox(24,posY,219,posY+17,0,
                             gettext("Enable Grass Effects (need particles)"));
-   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
-   cxSelGrass = list->insertCxSel(12,posY+4, enableGrass);
-   list->insertPicture(220,posY,40,112,
+   qt->setFont(fontArial, 10, Farso::Font::ALIGN_LEFT);
+   cxSelGrass = gList->insertCxSel(12,posY+4, enableGrass);
+   gList->insertPicture(220,posY,40,112,
                        dir.getRealFile("texturas/options/grass.png").c_str());
    posY += 25;
 
    /* Particle System Enabled or Not */
-   qt = list->insertTextBox(24,posY,219,posY+17,0,
+   qt = gList->insertTextBox(24,posY,219,posY+17,0,
                             gettext("Enable Particles Effects"));
-   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
-   cxSelParticles = list->insertCxSel(12, posY+4, enableParticles);
-   list->insertPicture(220,posY,40,112,
+   qt->setFont(fontArial, 10, Farso::Font::ALIGN_LEFT);
+   cxSelParticles = gList->insertCxSel(12, posY+4, enableParticles);
+   gList->insertPicture(220,posY,40,112,
                      dir.getRealFile("texturas/options/particles.png").c_str());
    cxSelParticles->setAvailable(getAvaibleParticles());
    cxSelGrass->setAvailable(getAvaibleParticles() && 
@@ -948,11 +949,11 @@ void options::displayOptionsScreen(guiInterface* interf)
    posY += 25;
 
    /* Anisotropic Enable or Not */
-   qt = list->insertTextBox(24,posY,219,posY+17,0,
+   qt = gList->insertTextBox(24,posY,219,posY+17,0,
                             gettext("Enable Anisotropic Filter"));
-   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
-   cxSelAnisotropic = list->insertCxSel(12,posY+4,getEnableAnisotropicFilter());
-   list->insertPicture(220,posY,40,112,
+   qt->setFont(fontArial, 10, Farso::Font::ALIGN_LEFT);
+   cxSelAnisotropic = gList->insertCxSel(12,posY+4,getEnableAnisotropicFilter());
+   gList->insertPicture(220,posY,40,112,
                    dir.getRealFile("texturas/options/anisotropic.png").c_str());
    cxSelAnisotropic->setAvailable(ext.hasAnisotropic());
    posY += 35;
@@ -960,174 +961,174 @@ void options::displayOptionsScreen(guiInterface* interf)
    /* Splatting Type */
    prevSplattingType = splattingType;
    saux = splattingTypeName();
-   qt = list->insertTextBox(12,posY,145,posY+17,0,gettext("Splatting:"));
-   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
-   buttonSplattingDec = list->insertButton(121,posY,131,posY+17,
+   qt = gList->insertTextBox(12,posY,145,posY+17,0,gettext("Splatting:"));
+   qt->setFont(fontArial, 10, Farso::Font::ALIGN_LEFT);
+   buttonSplattingDec = gList->insertButton(121,posY,131,posY+17,
                                       fnt.createUnicode(0x25C4),0);
    buttonSplattingDec->defineFont(fontArial, 9);
-   txtSplatting = list->insertTextBox(132,posY,227,posY+17,1,saux.c_str());
-   txtSplatting->setFont(fontArial, 10, DNT_FONT_ALIGN_CENTER);
-   buttonSplattingSum = list->insertButton(228,posY,238,posY+17,
+   txtSplatting = gList->insertTextBox(132,posY,227,posY+17,1,saux.c_str());
+   txtSplatting->setFont(fontArial, 10, Farso::Font::ALIGN_CENTER);
+   buttonSplattingSum = gList->insertButton(228,posY,238,posY+17,
                                       fnt.createUnicode(0x25BA),0);
    buttonSplattingSum->defineFont(fontArial, 9);
-   list->insertPicture(245,posY,40,220,
+   gList->insertPicture(245,posY,40,220,
                   dir.getRealFile("texturas/options/multitexture.png").c_str());
    posY += 25;
 
    /* Stncil Buffer Size */
    prevStencilBufferSize = stencilBufferSize;
    saux = stencilBufferSizeName();
-   qt = list->insertTextBox(12,posY,145,posY+17,0,gettext("Stencil Buffer:"));
-   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
-   buttonStencilDec = list->insertButton(121,posY,131,posY+17,
+   qt = gList->insertTextBox(12,posY,145,posY+17,0,gettext("Stencil Buffer:"));
+   qt->setFont(fontArial, 10, Farso::Font::ALIGN_LEFT);
+   buttonStencilDec = gList->insertButton(121,posY,131,posY+17,
                                       fnt.createUnicode(0x25C4),0);
    buttonStencilDec->defineFont(fontArial, 9);
-   txtStencil = list->insertTextBox(132,posY,227,posY+17,1,saux.c_str());
-   txtStencil->setFont(fontArial, 10, DNT_FONT_ALIGN_CENTER);
-   buttonStencilSum = list->insertButton(228,posY,238,posY+17,
+   txtStencil = gList->insertTextBox(132,posY,227,posY+17,1,saux.c_str());
+   txtStencil->setFont(fontArial, 10, Farso::Font::ALIGN_CENTER);
+   buttonStencilSum = gList->insertButton(228,posY,238,posY+17,
                                       fnt.createUnicode(0x25BA),0);
    buttonStencilSum->defineFont(fontArial, 9);
-   list->insertPicture(245,posY,40,220,
+   gList->insertPicture(245,posY,40,220,
                   dir.getRealFile("texturas/options/stencil_size.png").c_str());
    posY += 25;
 
    /* Reflexions */
    prevReflexion = reflexionType;
    saux = reflexionName();
-   qt = list->insertTextBox(12,posY,145,posY+17,0,gettext("Reflections:"));
-   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
-   buttonReflDec = list->insertButton(121,posY,131,posY+17,
+   qt = gList->insertTextBox(12,posY,145,posY+17,0,gettext("Reflections:"));
+   qt->setFont(fontArial, 10, Farso::Font::ALIGN_LEFT);
+   buttonReflDec = gList->insertButton(121,posY,131,posY+17,
                                       fnt.createUnicode(0x25C4),0);
    buttonReflDec->defineFont(fontArial, 9);
-   txtReflexion = list->insertTextBox(132,posY,227,posY+17,1,saux.c_str());
-   txtReflexion->setFont(fontArial, 10, DNT_FONT_ALIGN_CENTER);
-   buttonReflSum = list->insertButton(228,posY,238,posY+17,
+   txtReflexion = gList->insertTextBox(132,posY,227,posY+17,1,saux.c_str());
+   txtReflexion->setFont(fontArial, 10, Farso::Font::ALIGN_CENTER);
+   buttonReflSum = gList->insertButton(228,posY,238,posY+17,
                                       fnt.createUnicode(0x25BA),0);
    buttonReflSum->defineFont(fontArial, 9);
-   list->insertPicture(245,posY,40,220,
+   gList->insertPicture(245,posY,40,220,
                     dir.getRealFile("texturas/options/reflexions.png").c_str());
    posY += 25;
 
    /* Shadows */
    prevShadow = shadowType;
    saux = shadowName();
-   qt = list->insertTextBox(12,posY,145,posY+17,0,gettext("Shadows:"));
-   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
-   buttonShadDec = list->insertButton(121,posY,131,posY+17,
+   qt = gList->insertTextBox(12,posY,145,posY+17,0,gettext("Shadows:"));
+   qt->setFont(fontArial, 10, Farso::Font::ALIGN_LEFT);
+   buttonShadDec = gList->insertButton(121,posY,131,posY+17,
                                       fnt.createUnicode(0x25C4),0);
    buttonShadDec->defineFont(fontArial, 9);
-   txtShadow = list->insertTextBox(132,posY,227,posY+17,1,saux.c_str());
-   txtShadow->setFont(fontArial, 10, DNT_FONT_ALIGN_CENTER);
-   buttonShadSum = list->insertButton(228,posY,238,posY+17,
+   txtShadow = gList->insertTextBox(132,posY,227,posY+17,1,saux.c_str());
+   txtShadow->setFont(fontArial, 10, Farso::Font::ALIGN_CENTER);
+   buttonShadSum = gList->insertButton(228,posY,238,posY+17,
                                       fnt.createUnicode(0x25BA),0);
    buttonShadSum->defineFont(fontArial, 9);
-   list->insertPicture(245,posY,40,220,
+   gList->insertPicture(245,posY,40,220,
                     dir.getRealFile("texturas/options/shadow.png").c_str());
    posY += 25;
 
    /* AntiAliasing */                 
    saux = antiAliasingName();
-   qt = list->insertTextBox(12,posY,145,posY+17,0,gettext("Anti-Aliasing:"));
-   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
-   buttonAliasDec = list->insertButton(121,posY,131,posY+17,
+   qt = gList->insertTextBox(12,posY,145,posY+17,0,gettext("Anti-Aliasing:"));
+   qt->setFont(fontArial, 10, Farso::Font::ALIGN_LEFT);
+   buttonAliasDec = gList->insertButton(121,posY,131,posY+17,
                                        fnt.createUnicode(0x25C4),0);
    buttonAliasDec->defineFont(fontArial, 9);
-   txtAntiAliasing = list->insertTextBox(132,posY,227,posY+17,1,saux.c_str());
-   txtAntiAliasing->setFont(fontArial, 10, DNT_FONT_ALIGN_CENTER);
-   buttonAliasSum = list->insertButton(228,posY,238,posY+17,
+   txtAntiAliasing = gList->insertTextBox(132,posY,227,posY+17,1,saux.c_str());
+   txtAntiAliasing->setFont(fontArial, 10, Farso::Font::ALIGN_CENTER);
+   buttonAliasSum = gList->insertButton(228,posY,238,posY+17,
                                        fnt.createUnicode(0x25BA),0);
    buttonAliasSum->defineFont(fontArial, 9);
-   list->insertPicture(245,posY,40,220,
+   gList->insertPicture(245,posY,40,220,
                   dir.getRealFile("texturas/options/antialiasing.png").c_str());
    posY += 25;
  
    /* FarViewFactor */
-   qt = list->insertTextBox(12,posY,145,posY+17,0, gettext("FarView:"));
-   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
-   buttonFarViewDec = list->insertButton(121,posY,131,posY+17,
+   qt = gList->insertTextBox(12,posY,145,posY+17,0, gettext("FarView:"));
+   qt->setFont(fontArial, 10, Farso::Font::ALIGN_LEFT);
+   buttonFarViewDec = gList->insertButton(121,posY,131,posY+17,
                                          fnt.createUnicode(0x25C4),0);
    buttonFarViewDec->defineFont(fontArial, 9);
-   barFarView = list->insertHealthBar(133,posY,226,posY+17,9);
+   barFarView = gList->insertHealthBar(133,posY,226,posY+17,9);
    barFarView->defineActualHealth((int)floor(farViewFactor*9));                                                          
-   buttonFarViewSum = list->insertButton(228,posY,238,posY+17,
+   buttonFarViewSum = gList->insertButton(228,posY,238,posY+17,
                                          fnt.createUnicode(0x25BA),0);
    buttonFarViewSum->defineFont(fontArial, 9);
-   list->insertPicture(245,posY,40,223,
+   gList->insertPicture(245,posY,40,223,
                      dir.getRealFile("texturas/options/farview.png").c_str());
 
    /************************************************
     *                 Game Options                 *
     ************************************************/
-   list = tb->insertOption(gettext("Game"));
+   gList = tb->insertOption(gettext("Game"));
 
    posY = 52;
    /* Language Things */
    prevLanguage = langNumber;
    saux = languageName();
-   qt = list->insertTextBox(12,posY,145,posY+17,0,gettext("Language:"));
-   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
-   buttonLangDec = list->insertButton(121,posY,131,posY+17,
+   qt = gList->insertTextBox(12,posY,145,posY+17,0,gettext("Language:"));
+   qt->setFont(fontArial, 10, Farso::Font::ALIGN_LEFT);
+   buttonLangDec = gList->insertButton(121,posY,131,posY+17,
                                       fnt.createUnicode(0x25C4),0);
    buttonLangDec->defineFont(fontArial, 9);
-   txtLanguage = list->insertTextBox(132,posY,197,posY+17,1,saux.c_str());
-   txtLanguage->setFont(fontArial, 10, DNT_FONT_ALIGN_CENTER);
-   buttonLangSum = list->insertButton(198,posY,208,posY+17,
+   txtLanguage = gList->insertTextBox(132,posY,197,posY+17,1,saux.c_str());
+   txtLanguage->setFont(fontArial, 10, Farso::Font::ALIGN_CENTER);
+   buttonLangSum = gList->insertButton(198,posY,208,posY+17,
                                       fnt.createUnicode(0x25BA),0);
    buttonLangSum->defineFont(fontArial, 9);
-   list->insertPicture(220,posY,40,112,
+   gList->insertPicture(220,posY,40,112,
                       dir.getRealFile("texturas/options/language.png").c_str());
    posY += 25;                      
 
    /* Camera Mode Things */
    prevCamera = cameraNumber;
    saux = cameraName();
-   qt = list->insertTextBox(12,posY,145,posY+17,0,gettext("Camera Mode:"));
-   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_LEFT);
-   buttonCamDec = list->insertButton(121,posY,131,posY+17,
+   qt = gList->insertTextBox(12,posY,145,posY+17,0,gettext("Camera Mode:"));
+   qt->setFont(fontArial, 10, Farso::Font::ALIGN_LEFT);
+   buttonCamDec = gList->insertButton(121,posY,131,posY+17,
                                      fnt.createUnicode(0x25C4),0);
    buttonCamDec->defineFont(fontArial, 9);
-   txtCamera = list->insertTextBox(132,posY,197,posY+17,1,saux.c_str());
-   txtCamera->setFont(fontArial, 10, DNT_FONT_ALIGN_CENTER);
-   buttonCamSum = list->insertButton(198,posY,208,posY+17,
+   txtCamera = gList->insertTextBox(132,posY,197,posY+17,1,saux.c_str());
+   txtCamera->setFont(fontArial, 10, Farso::Font::ALIGN_CENTER);
+   buttonCamSum = gList->insertButton(198,posY,208,posY+17,
                                      fnt.createUnicode(0x25BA),0);
    buttonCamSum->defineFont(fontArial, 9);
-   list->insertPicture(220,posY,40,posY+17,
+   gList->insertPicture(220,posY,40,posY+17,
                        dir.getRealFile("texturas/options/camera.png").c_str());
    posY += 35;
 
    /* AutoEndTurn Enable or Not */
-   qt = list->insertTextBox(24,posY,219,posY+17,0,
+   qt = gList->insertTextBox(24,posY,219,posY+17,0,
                             gettext("Auto End Turn"));
-   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_CENTER);
-   cxSelAutoEndTurn = list->insertCxSel(12,posY+4,autoEndTurn);
-   list->insertPicture(220,posY,40,112,
+   qt->setFont(fontArial, 10, Farso::Font::ALIGN_CENTER);
+   cxSelAutoEndTurn = gList->insertCxSel(12,posY+4,autoEndTurn);
+   gList->insertPicture(220,posY,40,112,
                   dir.getRealFile("texturas/options/autoendturn.png").c_str());
    posY += 25;
 
    /* AlwaysRun Enable or Not */
-   qt = list->insertTextBox(24,posY,219,posY+17,0,
+   qt = gList->insertTextBox(24,posY,219,posY+17,0,
                             gettext("Always Run"));
-   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_CENTER);
-   cxSelAlwaysRun = list->insertCxSel(12,posY+4,alwaysRun);
-   list->insertPicture(220,posY,40,112,
+   qt->setFont(fontArial, 10, Farso::Font::ALIGN_CENTER);
+   cxSelAlwaysRun = gList->insertCxSel(12,posY+4,alwaysRun);
+   gList->insertPicture(220,posY,40,112,
                   dir.getRealFile("texturas/options/alwaysrun.png").c_str());
    posY += 25;
 
    /* ShowEnemyCircles or or Not */
-   qt = list->insertTextBox(24,posY,219,posY+34,0,
+   qt = gList->insertTextBox(24,posY,219,posY+34,0,
                             gettext("Show Enemy Battle Circle"));
-   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_CENTER);
-   cxSelShowEnemyCircles = list->insertCxSel(12,posY+4,showEnemyCircles);
-   list->insertPicture(220,posY,40,112,
+   qt->setFont(fontArial, 10, Farso::Font::ALIGN_CENTER);
+   cxSelShowEnemyCircles = gList->insertCxSel(12,posY+4,showEnemyCircles);
+   gList->insertPicture(220,posY,40,112,
               dir.getRealFile("texturas/options/showenemycircles.png").c_str());
    posY += 25;
 
    /* ShowEnemyCircles or or Not */
-   qt = list->insertTextBox(24,posY,219,posY+34,0,
+   qt = gList->insertTextBox(24,posY,219,posY+34,0,
                             gettext("Highlight current enemy"));
-   qt->setFont(fontArial, 10, DNT_FONT_ALIGN_CENTER);
-   cxSelHighlightEnemy = list->insertCxSel(12,posY+4,highlightEnemy);
-   list->insertPicture(220,posY,40,112,
+   qt->setFont(fontArial, 10, Farso::Font::ALIGN_CENTER);
+   cxSelHighlightEnemy = gList->insertCxSel(12,posY+4,highlightEnemy);
+   gList->insertPicture(220,posY,40,112,
               dir.getRealFile("texturas/options/highlightenemy.png").c_str());
    posY += 25;
 
@@ -1152,8 +1153,9 @@ void options::displayOptionsScreen(guiInterface* interf)
 /****************************************************************
  *                             Treat                            *
  ****************************************************************/
-int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
-                   GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
+int options::treat(Farso::GuiObject* object, int eventInfo, 
+      Farso::GuiInterface* interf,
+      GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    int i;
 
@@ -1178,13 +1180,13 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
    }
 
    /* The other events verify */
-   if( (eventInfo == FARSO_EVENT_ON_PRESS_BUTTON) && 
+   if( (eventInfo == Farso::EVENT_ON_PRESS_BUTTON) && 
          (SDL_GetTicks() - timeLastOperation > 100) )
    {
       timeLastOperation = SDL_GetTicks();
 
       /* Music */
-      if(object == (guiObject*) buttonMusSum)
+      if(object == (Farso::GuiObject*) buttonMusSum)
       {
          if(musicVolume < 255)
          {
@@ -1196,7 +1198,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
              barMusicVolume->defineActualHealth(musicVolume);
          }
       }
-      else if(object == (guiObject*) buttonMusDec) 
+      else if(object == (Farso::GuiObject*) buttonMusDec) 
       {
          if(musicVolume > 0)
          {
@@ -1209,7 +1211,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          }
       }
       /* Sound Effects */
-      else if(object == (guiObject*) buttonSndSum) 
+      else if(object == (Farso::GuiObject*) buttonSndSum) 
       {
          if(sndfxVolume < 255)
          {
@@ -1221,7 +1223,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
              barSndfxVolume->defineActualHealth(sndfxVolume);
          }
       }
-      else if(object == (guiObject*) buttonSndDec) 
+      else if(object == (Farso::GuiObject*) buttonSndDec) 
       {
          if(sndfxVolume > 0)
          {
@@ -1234,7 +1236,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          }
       }
       /* Language */
-      else if(object == (guiObject*) buttonLangSum)
+      else if(object == (Farso::GuiObject*) buttonLangSum)
       {
          if(langNumber < DNT_LANG_LAST-1)
          {
@@ -1242,7 +1244,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          }
          txtLanguage->setText(languageName());
       }
-      else if(object == (guiObject*) buttonLangDec)
+      else if(object == (Farso::GuiObject*) buttonLangDec)
       {
          if(langNumber > DNT_LANG_ENGLISH)
          {
@@ -1251,14 +1253,14 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          txtLanguage->setText(languageName());
       }
       /* Camera */
-      else if(object == (guiObject*) buttonCamSum)
+      else if(object == (Farso::GuiObject*) buttonCamSum)
       {
          if(cameraNumber < CAMERA_TYPE_DRIVE)
          {
             cameraNumber++;
          }
       }
-      else if(object == (guiObject*) buttonCamDec)
+      else if(object == (Farso::GuiObject*) buttonCamDec)
       {
          if(cameraNumber > CAMERA_TYPE_NORMAL)
          {
@@ -1266,7 +1268,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          }
       }
       /* Reflexion */
-      else if(object == (guiObject*) buttonReflSum)
+      else if(object == (Farso::GuiObject*) buttonReflSum)
       {
          if((reflexionType < REFLEXIONS_ALL) && (stencilBufferSize > 0))
          {
@@ -1274,7 +1276,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          }
          txtReflexion->setText(reflexionName());
       }
-      else if(object == (guiObject*) buttonReflDec)
+      else if(object == (Farso::GuiObject*) buttonReflDec)
       {
          if(reflexionType > REFLEXIONS_NONE)
          {
@@ -1283,7 +1285,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          txtReflexion->setText(reflexionName());
       }
       /* Shadow */
-      else if(object == (guiObject*) buttonShadSum)
+      else if(object == (Farso::GuiObject*) buttonShadSum)
       {
          if( (shadowType < SHADOWS_PROJECTIVE) && (stencilBufferSize > 0))
          {
@@ -1291,7 +1293,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          }
          txtShadow->setText(shadowName());
       }
-      else if(object == (guiObject*) buttonShadDec)
+      else if(object == (Farso::GuiObject*) buttonShadDec)
       {
          if(shadowType > SHADOWS_NONE)
          {
@@ -1300,7 +1302,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          txtShadow->setText(shadowName());
       }
       /* Resolution */
-      else if(object == (guiObject*) buttonResSum)
+      else if(object == (Farso::GuiObject*) buttonResSum)
       {
          if(resPosition > 0)
          {
@@ -1317,7 +1319,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
             txtResolution->setText(resolutionName());
          }
       }
-      else if(object == (guiObject*) buttonResDec)
+      else if(object == (Farso::GuiObject*) buttonResDec)
       {
          if((resolutions != NULL) && (resolutions[resPosition+1]))
          {
@@ -1334,7 +1336,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
       }
 
       /* Splatting Type */
-      else if(object == (guiObject*) buttonSplattingSum) 
+      else if(object == (Farso::GuiObject*) buttonSplattingSum) 
       {
          splattingType++;
          if(splattingType > DNT_SPLATTING_SHADER)
@@ -1343,7 +1345,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          }
          txtSplatting->setText(splattingTypeName());
       }
-      else if(object == (guiObject*) buttonSplattingDec) 
+      else if(object == (Farso::GuiObject*) buttonSplattingDec) 
       {
          splattingType--;
          if(splattingType < DNT_SPLATTING_NONE)
@@ -1354,7 +1356,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
       }
 
       /* Stencil Buffer Size */
-      else if(object == (guiObject*) buttonStencilSum) 
+      else if(object == (Farso::GuiObject*) buttonStencilSum) 
       {
          if(stencilBufferSize == 0)
          {
@@ -1366,7 +1368,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          }
          txtStencil->setText(stencilBufferSizeName());
       }
-      else if(object == (guiObject*) buttonStencilDec) 
+      else if(object == (Farso::GuiObject*) buttonStencilDec) 
       {
          if(stencilBufferSize == 2)
          {
@@ -1388,7 +1390,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
       }
 
       /* Anti Aliasing */
-      else if(object == (guiObject*) buttonAliasSum) 
+      else if(object == (Farso::GuiObject*) buttonAliasSum) 
       {
          if(antiAliasing < 4)
          {
@@ -1396,7 +1398,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          }
          txtAntiAliasing->setText(antiAliasingName());
       }
-      else if(object == (guiObject*) buttonAliasDec) 
+      else if(object == (Farso::GuiObject*) buttonAliasDec) 
       {
          if(antiAliasing > 0)
          {
@@ -1405,7 +1407,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          txtAntiAliasing->setText(antiAliasingName());
       }
       /* FarView Factor */
-      else if(object == (guiObject*) buttonFarViewSum) 
+      else if(object == (Farso::GuiObject*) buttonFarViewSum) 
       {
          if(farViewFactor < 1.0)
          {
@@ -1413,7 +1415,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
             barFarView->defineActualHealth((int)floor(farViewFactor*9));
          }
       }
-      else if(object == (guiObject*) buttonFarViewDec) 
+      else if(object == (Farso::GuiObject*) buttonFarViewDec) 
       {
          if(farViewFactor > 0.4)
          {
@@ -1423,10 +1425,10 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
       }
 
    }
-   else if(eventInfo == FARSO_EVENT_PRESSED_BUTTON) 
+   else if(eventInfo == Farso::EVENT_PRESSED_BUTTON) 
    {
       /* Confirm */
-      if(object == (guiObject*) buttonConfirm)
+      if(object == (Farso::GuiObject*) buttonConfirm)
       {
          enableParticles = cxSelParticles->isSelected();
          enableGrass = cxSelGrass->isSelected();
@@ -1448,7 +1450,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
              (stencilBufferSize != prevStencilBufferSize) ||
              (langNumber != prevLanguage) )
          {
-            warning warn;
+            Farso::Warning warn;
             warn.show(gettext("Warning"), 
                     gettext("Some changes will only take effect upon restart."),
                       interf);
@@ -1459,7 +1461,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          return(OPTIONSW_CONFIRM);
       }
       /* Cancel */
-      else if(object == (guiObject*) buttonCancel)
+      else if(object == (Farso::GuiObject*) buttonCancel)
       {
          /* Redo to previous values */
          musicVolume = prevMusicVolume;
@@ -1490,12 +1492,12 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          bool got = false;
          for(i=0; ((i < DNT_TOTAL_KEYS) && (!got)); i++)
          {
-            if(object == (guiObject*)buttonKeys[i])
+            if(object == (Farso::GuiObject*)buttonKeys[i])
             {
                curKey = i;
                /* Show a modal window until got the key */
-               int xPos = (int)(SCREEN_X / 2.0);
-               int yPos = (int)(SCREEN_Y / 2.0);
+               int xPos = (int)(Farso::SCREEN_X / 2.0);
+               int yPos = (int)(Farso::SCREEN_Y / 2.0);
                string s = gettext("Press a key to: ");
                keyWindow = interf->insertWindow(xPos-138,yPos-243,
                                                 xPos+138,yPos-203,
@@ -1514,11 +1516,11 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          }
       }
    }
-   else if(eventInfo == FARSO_EVENT_MODIFIED_CX_SEL)
+   else if(eventInfo == Farso::EVENT_MODIFIED_CX_SEL)
    {
       /* cxSelParticles */
-      if( (object == (guiObject*) cxSelParticles) || 
-          (object == (guiObject*) cxSelGrass))
+      if( (object == (Farso::GuiObject*) cxSelParticles) || 
+          (object == (Farso::GuiObject*) cxSelGrass))
       {
          /* When disable particles, disable the grass */
          cxSelGrass->setAvailable(getAvaibleParticles() &&

@@ -26,6 +26,7 @@
 
 #include <iostream>
 using namespace std;
+using namespace Farso;
 
 /*****************************************************************
  *                         Constructor                           *
@@ -74,7 +75,7 @@ MouseCursor::~MouseCursor()
  *****************************************************************/
 void MouseCursor::init()
 {
-   farsoOptions opt;
+   Options opt;
    
    /* Set font to default */
    font = opt.getDefaultFont();
@@ -268,12 +269,12 @@ void MouseCursor::setTextOver(string txt)
       if(!textOver.empty())
       {
          /* Recreate the texture */
-         dntFont fnt;
-         farso_colors curColor;
+         Font fnt;
+         Colors curColor;
          
          fnt.defineFont(font, 12);
-         fnt.defineFontAlign(DNT_FONT_ALIGN_CENTER);
-         fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
+         fnt.defineFontAlign(Font::ALIGN_CENTER);
+         fnt.defineFontStyle(Font::STYLE_NORMAL);
          textOverHeight = fnt.getHeight()+4;
          textOverWidth = fnt.getStringWidth(textOver)+8;
 
@@ -306,7 +307,7 @@ void MouseCursor::setTextOver(string txt)
 
          /* Write the text */
          color_Set(255,255,255,255);
-         fnt.defineFontAlign(DNT_FONT_ALIGN_CENTER);
+         fnt.defineFontAlign(Font::ALIGN_CENTER);
          fnt.write(s, 2, 3,
                textOver.c_str(),
                0, 0, textOverWidth, textOverHeight);
@@ -417,7 +418,7 @@ std::string MouseCursor::font="";
 /**********************************************************
  *                        isMouseIn                       *
  **********************************************************/
-bool isMouseAt(int x1,int y1,int x2,int y2, int mouseX, int mouseY)
+bool Farso::isMouseAt(int x1,int y1,int x2,int y2, int mouseX, int mouseY)
 {
    return( ( (mouseX>=x1) && (mouseX<=x2) ) && 
            ( (mouseY>=y1) && (mouseY<=y2) ) );

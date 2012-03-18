@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -27,7 +27,7 @@ using namespace std;
 /***********************************************************************
  *                            Constructor                              *
  ***********************************************************************/
-waterWindow::waterWindow(guiInterface* actualGui)
+waterWindow::waterWindow(Farso::GuiInterface* actualGui)
 {
    gui = actualGui;
    activeWater = NULL;
@@ -80,7 +80,7 @@ void waterWindow::setPartSystem(partController* pS)
 void waterWindow::openWindow()
 {
    dirs dir;
-   dntFont fnt;
+   Farso::Font fnt;
    intWindow = gui->insertWindow(403,599-247,653,599-37,"Particle's Planes");
 
    /* Waterfall Navigators */
@@ -180,7 +180,7 @@ void waterWindow::openWindow()
 /***********************************************************************
  *                              eventGot                               *
  ***********************************************************************/
-bool waterWindow::eventGot(int type, guiObject* object)
+bool waterWindow::eventGot(int type, Farso::GuiObject* object)
 {
    GLfloat wX = 0, wY = 0, wZ = 0;
 
@@ -194,10 +194,10 @@ bool waterWindow::eventGot(int type, guiObject* object)
       activeWater->getPosition(wX, wY, wZ);
    }
 
-   if(type == FARSO_EVENT_ON_PRESS_TAB_BUTTON)
+   if(type == Farso::EVENT_ON_PRESS_TAB_BUTTON)
    {
       /* Waterfall Up/Down */
-      if(object == (guiObject*)buttonMoveWaterUp)
+      if(object == (Farso::GuiObject*)buttonMoveWaterUp)
       {
          if(activeWater)
          {
@@ -206,7 +206,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          }
          return(true);
       }
-      else if(object == (guiObject*)buttonMoveWaterDown)
+      else if(object == (Farso::GuiObject*)buttonMoveWaterDown)
       {
          if(activeWater)
          {
@@ -217,7 +217,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
       }
 
       /* Plane Inclination Type */
-      else if(object == (guiObject*)buttonNoInclination)
+      else if(object == (Farso::GuiObject*)buttonNoInclination)
       {
          if(activePlane)
          {
@@ -225,7 +225,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          }
          return(true);
       }
-      else if(object == (guiObject*)buttonInclinationX)
+      else if(object == (Farso::GuiObject*)buttonInclinationX)
       {
          if(activePlane)
          {
@@ -233,7 +233,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          }
          return(true);
       }
-      else if(object == (guiObject*)buttonInclinationZ)
+      else if(object == (Farso::GuiObject*)buttonInclinationZ)
       {
          if(activePlane)
          {
@@ -243,7 +243,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
       }
 
       /* Plane Move X/Z */
-      else if(object == (guiObject*)buttonMoveZMore)
+      else if(object == (Farso::GuiObject*)buttonMoveZMore)
       {
          if(activePlane)
          {
@@ -252,7 +252,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          }
          return(true);
       }
-      else if(object == (guiObject*)buttonMoveZLess)
+      else if(object == (Farso::GuiObject*)buttonMoveZLess)
       {
          if(activePlane)
          {
@@ -261,7 +261,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          }
          return(true);
       }
-      else if(object == (guiObject*)buttonMoveXMore)
+      else if(object == (Farso::GuiObject*)buttonMoveXMore)
       {
          if(activePlane)
          {
@@ -270,7 +270,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          }
          return(true);
       }
-      else if(object == (guiObject*)buttonMoveXLess)
+      else if(object == (Farso::GuiObject*)buttonMoveXLess)
       {
          if(activePlane)
          {
@@ -281,7 +281,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
       }
 
       /* Move Plane Y */
-      else if(object == (guiObject*)buttonMoveYMore)
+      else if(object == (Farso::GuiObject*)buttonMoveYMore)
       {
          if(activePlane)
          {
@@ -290,7 +290,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          }
          return(true);
       }
-      else if(object == (guiObject*)buttonMoveYLess)
+      else if(object == (Farso::GuiObject*)buttonMoveYLess)
       {
          if(activePlane)
          {
@@ -299,7 +299,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          }
          return(true);
       }
-      else if(object == (guiObject*)buttonMoveY1More)
+      else if(object == (Farso::GuiObject*)buttonMoveY1More)
       {
          if(activePlane)
          {
@@ -307,7 +307,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          }
          return(true);
       }
-      else if(object == (guiObject*)buttonMoveY1Less)
+      else if(object == (Farso::GuiObject*)buttonMoveY1Less)
       {
          if(activePlane)
          {
@@ -316,7 +316,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          return(true);
       }
 
-      else if(object == (guiObject*)buttonMoveY2More)
+      else if(object == (Farso::GuiObject*)buttonMoveY2More)
       {
          if(activePlane)
          {
@@ -324,7 +324,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          }
          return(true);
       }
-      else if(object == (guiObject*)buttonMoveY2Less)
+      else if(object == (Farso::GuiObject*)buttonMoveY2Less)
       {
          if(activePlane)
          {
@@ -334,7 +334,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
       }
 
       /* Scale Plane */
-      else if(object == (guiObject*)buttonScaleXMore)
+      else if(object == (Farso::GuiObject*)buttonScaleXMore)
       {
          if(activePlane)
          {
@@ -343,7 +343,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          }
          return(true);
       }
-      else if(object == (guiObject*)buttonScaleXLess)
+      else if(object == (Farso::GuiObject*)buttonScaleXLess)
       {
          if(activePlane)
          {
@@ -352,7 +352,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          }
          return(true);
       }
-      else if(object == (guiObject*)buttonScaleYMore)
+      else if(object == (Farso::GuiObject*)buttonScaleYMore)
       {
          if(activePlane)
          {
@@ -361,7 +361,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          }
          return(true);
       }
-      else if(object == (guiObject*)buttonScaleYLess)
+      else if(object == (Farso::GuiObject*)buttonScaleYLess)
       {
          if(activePlane)
          {
@@ -370,7 +370,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          }
          return(true);
       }
-      else if(object == (guiObject*)buttonScaleZMore)
+      else if(object == (Farso::GuiObject*)buttonScaleZMore)
       {
          if(activePlane)
          {
@@ -379,7 +379,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          }
          return(true);
       }
-      else if(object == (guiObject*)buttonScaleZLess)
+      else if(object == (Farso::GuiObject*)buttonScaleZLess)
       {
          if(activePlane)
          {
@@ -391,10 +391,10 @@ bool waterWindow::eventGot(int type, guiObject* object)
 
    }
 
-   else if(type == FARSO_EVENT_PRESSED_TAB_BUTTON)
+   else if(type == Farso::EVENT_PRESSED_TAB_BUTTON)
    {
       /* Waterfall Controller */
-      if(object == (guiObject*)buttonNextWater)
+      if(object == (Farso::GuiObject*)buttonNextWater)
       {
          if(activeWater)
          {
@@ -404,7 +404,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          }
          return(true);
       }
-      else if(object == (guiObject*)buttonPreviousWater)
+      else if(object == (Farso::GuiObject*)buttonPreviousWater)
       {
          if(activeWater)
          {
@@ -414,7 +414,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          }
          return(true);
       }
-      else if(object == (guiObject*)buttonDestroyWater)
+      else if(object == (Farso::GuiObject*)buttonDestroyWater)
       {
          if((activeWater) && (pSystem))
          {
@@ -435,7 +435,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          return(true);
       }
       /* Plane Controller */
-      else if(object == (guiObject*)buttonAddPlane)
+      else if(object == (Farso::GuiObject*)buttonAddPlane)
       {
          if(activeWater)
          {  
@@ -446,7 +446,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          }
          return(true);
       }
-      else if(object == (guiObject*)buttonNextPlane)
+      else if(object == (Farso::GuiObject*)buttonNextPlane)
       {
          if(activePlane)
          {
@@ -454,7 +454,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          }
          return(true);
       }
-      else if(object == (guiObject*)buttonPreviousPlane)
+      else if(object == (Farso::GuiObject*)buttonPreviousPlane)
       {
          if(activePlane)
          {
@@ -462,7 +462,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          }
          return(true);
       }
-      else if(object == (guiObject*)buttonDestroyPlane)
+      else if(object == (Farso::GuiObject*)buttonDestroyPlane)
       {
          if((activeWater) && (activePlane))
          {
@@ -478,27 +478,27 @@ bool waterWindow::eventGot(int type, guiObject* object)
          return(true);
       }
    }
-   else if(type == FARSO_EVENT_ON_PRESS_BUTTON)
+   else if(type == Farso::EVENT_ON_PRESS_BUTTON)
    {
-      if(object == (guiObject*)dxWaterflowMore)
+      if(object == (Farso::GuiObject*)dxWaterflowMore)
       {
          activePlane->dX += 0.1;
          defineValues();
          return(true);
       }
-      else if(object == (guiObject*)dxWaterflowLess)
+      else if(object == (Farso::GuiObject*)dxWaterflowLess)
       {
          activePlane->dX -= 0.1;
          defineValues();
          return(true);
       }
-      else if(object == (guiObject*)dzWaterflowMore)
+      else if(object == (Farso::GuiObject*)dzWaterflowMore)
       {
          activePlane->dZ += 0.1;
          defineValues();
          return(true);
       }
-      else if(object == (guiObject*)dzWaterflowLess)
+      else if(object == (Farso::GuiObject*)dzWaterflowLess)
       {
          activePlane->dZ -= 0.1;
          defineValues();

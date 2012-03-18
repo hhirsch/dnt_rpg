@@ -27,7 +27,7 @@ using namespace std;
 /********************************************************************
  *                           Constructor                            *
  ********************************************************************/
-charWindow::charWindow(guiInterface* interf)
+charWindow::charWindow(Farso::GuiInterface* interf)
 {
    /* set interface */
    inter = interf;
@@ -56,7 +56,7 @@ charWindow::~charWindow()
  ********************************************************************/
 void charWindow::open(character* pers)
 {
-   farsoOptions fopt;
+   Farso::Options fopt;
    dirs dir;
    int i;
 
@@ -95,7 +95,7 @@ void charWindow::open(character* pers)
                                    pers->name);
 
    /* Character Image */
-   picture* fig;
+   Farso::Picture* fig;
    fig = intWindow->getObjectsList()->insertPicture(9,19,
                                                     0,0,
                    dir.getRealFile(pers->getPortraitFileName()).c_str());
@@ -241,14 +241,16 @@ void charWindow::open(character* pers)
             /* green text */
             infoBar->addText(meff->toReadableText(pers), 
                   fopt.getDefaultFont(), 10, 
-                  DNT_FONT_STYLE_ITALIC, DNT_FONT_ALIGN_LEFT, 20, 200, 12);
+                  Farso::Font::STYLE_ITALIC, Farso::Font::ALIGN_LEFT, 
+                  20, 200, 12);
          }
          else
          {
             /* red text */
             infoBar->addText(meff->toReadableText(pers), 
                   fopt.getDefaultFont(), 10, 
-                  DNT_FONT_STYLE_ITALIC, DNT_FONT_ALIGN_LEFT, 200, 20, 12);
+                  Farso::Font::STYLE_ITALIC, Farso::Font::ALIGN_LEFT, 
+                  200, 20, 12);
          }
          meff = (modEffect*)meff->getNext();
       }
@@ -335,7 +337,7 @@ bool charWindow::hasChildrenWindows()
 /********************************************************************
  *                              treat                               *
  ********************************************************************/
-int charWindow::treat(guiObject* object, int eventInfo, featsList* features,
+int charWindow::treat(Farso::GuiObject* object, int eventInfo, featsList* features,
                       GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    if(!isOpen())
@@ -385,16 +387,16 @@ int charWindow::treat(guiObject* object, int eventInfo, featsList* features,
       }
    }
 
-   if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
+   if(eventInfo == Farso::EVENT_PRESSED_BUTTON)
    {
       /* Ok Button */
-      if(object == (guiObject*)okButton)
+      if(object == (Farso::GuiObject*)okButton)
       {
          close();
          return(1);
       }
       /* Skills Button */
-      else if(object == (guiObject*)skillsButton)
+      else if(object == (Farso::GuiObject*)skillsButton)
       {
          if(skWindow == NULL)
          {
@@ -403,7 +405,7 @@ int charWindow::treat(guiObject* object, int eventInfo, featsList* features,
          }
       }
       /* Talents Button */
-      else if(object == (guiObject*)talentsButton)
+      else if(object == (Farso::GuiObject*)talentsButton)
       {
          if(talentsWindow == NULL)
          {
@@ -412,7 +414,7 @@ int charWindow::treat(guiObject* object, int eventInfo, featsList* features,
          }
       }
       /* Level Up Button */
-      else if(object == (guiObject*)levelUpButton)
+      else if(object == (Farso::GuiObject*)levelUpButton)
       {
          /* Call Level Up for Character */
          levelUp* lvlUp = new levelUp(current, features);

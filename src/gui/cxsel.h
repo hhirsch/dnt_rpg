@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -25,15 +25,18 @@
 #include "guiobject.h"
 #include "color.h"
 
+namespace Farso
+{
+
 /*! Selection Box Class */
-class cxSel: public guiObject
+class CxSel: public GuiObject
 {
    public:
       /*! Constructor
        * \param x -> x position
        * \param y -> y position
        * \param surface -> SDL_Surface where cxSel is */
-      cxSel(int x, int y, SDL_Surface* surface);
+      CxSel(int x, int y, SDL_Surface* surface);
 
       /*! Draws the Selected Box */
       void draw();
@@ -55,11 +58,13 @@ class cxSel: public guiObject
       bool doPress(Uint8 mouseButton);
 
    private:
-      farso_colors Colors;   /**< Colors of the object */
-      bool selected;         /**< True if selected, false otherwise  */
+      Colors colors;    /**< Colors of the object */
+      bool selected;    /**< True if selected, false otherwise  */
 
-      bool pressing;         /**< mouse is currently pressing it */
+      bool pressing;    /**< mouse is currently pressing it */
 };
+
+}
 
 #endif
 

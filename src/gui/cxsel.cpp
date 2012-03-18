@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -19,11 +19,12 @@
 */
 
 #include "cxsel.h"
+using namespace Farso;
 
 /**********************************************************
  *                       Constructor                      *
  **********************************************************/
-cxSel::cxSel(int x, int y, SDL_Surface* surface):guiObject(surface)
+CxSel::CxSel(int x, int y, SDL_Surface* surface):GuiObject(surface)
 {
    x1 = x;
    y1 = y;
@@ -32,13 +33,13 @@ cxSel::cxSel(int x, int y, SDL_Surface* surface):guiObject(surface)
    available = true;
    selected = false;
    pressing = false;
-   type = FARSO_OBJECT_SEL_BOX;
+   type = Farso::OBJECT_SEL_BOX;
 }
 
 /**********************************************************
  *                           draw                         *
  **********************************************************/
-void cxSel::draw()
+void CxSel::draw()
 {
    /* No draw when hidden */
    if(!isVisible())
@@ -46,18 +47,18 @@ void cxSel::draw()
       return;
    }
    
-   color_Set(Colors.colorCont[0].R, Colors.colorCont[0].G, 
-             Colors.colorCont[0].B, Colors.colorCont[0].A);
-   rectangle_2Colors(wSurface, x1, y1, x1+10, y1+10, Colors.colorCont[1].R,
-                     Colors.colorCont[1].G, Colors.colorCont[1].B,
-                     Colors.colorCont[1].A);
-   color_Set(Colors.colorCont[2].R,Colors.colorCont[2].G,Colors.colorCont[2].B,
-             Colors.colorButton.A);
+   color_Set(colors.colorCont[0].R, colors.colorCont[0].G, 
+             colors.colorCont[0].B, colors.colorCont[0].A);
+   rectangle_2Colors(wSurface, x1, y1, x1+10, y1+10, colors.colorCont[1].R,
+                     colors.colorCont[1].G, colors.colorCont[1].B,
+                     colors.colorCont[1].A);
+   color_Set(colors.colorCont[2].R,colors.colorCont[2].G,colors.colorCont[2].B,
+             colors.colorButton.A);
    rectangle_Fill(wSurface, x1+1, y1+1, x1+9, y1+9);
    if( (available) && (selected) )
    {
-      color_Set(Colors.colorBar.R, Colors.colorBar.G, 
-                Colors.colorBar.B, Colors.colorCont[0].A);
+      color_Set(colors.colorBar.R, colors.colorBar.G, 
+                colors.colorBar.B, colors.colorCont[0].A);
       line_Draw(wSurface, x1+2, y1+2, x1+8, y1+8);
       line_Draw(wSurface, x1+1, y1+2, x1+7, y1+8);
       line_Draw(wSurface, x1+3, y1+2, x1+9, y1+8);
@@ -70,7 +71,7 @@ void cxSel::draw()
 /**********************************************************
  *                       isSelected                       *
  **********************************************************/
-bool cxSel::isSelected()
+bool CxSel::isSelected()
 {
    return(selected);
 }
@@ -78,7 +79,7 @@ bool cxSel::isSelected()
 /**********************************************************
  *                     invertSelection                    *
  **********************************************************/
-void cxSel::invertSelection()
+void CxSel::invertSelection()
 {
    setSelection(!selected);
 }
@@ -86,7 +87,7 @@ void cxSel::invertSelection()
 /**********************************************************
  *                       setSelection                     *
  **********************************************************/
-void cxSel::setSelection(bool value)
+void CxSel::setSelection(bool value)
 {
    setChanged();
    selected = value;
@@ -95,7 +96,7 @@ void cxSel::setSelection(bool value)
 /**********************************************************
  *                         doPress                        *
  **********************************************************/
-bool cxSel::doPress(Uint8 mouseButton)
+bool CxSel::doPress(Uint8 mouseButton)
 {
    if(mouseButton & SDL_BUTTON(1))
    {

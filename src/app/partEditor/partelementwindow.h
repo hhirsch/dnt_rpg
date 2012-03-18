@@ -31,8 +31,8 @@ class partElementWindow
 {
    public:
       /*! Constructor 
-       * \param interf -> pointer to the current guiInterface */
-      partElementWindow(guiInterface* interf);
+       * \param interf -> pointer to the current Farso::GuiInterface */
+      partElementWindow(Farso::GuiInterface* interf);
       /*! Destructor */
       ~partElementWindow();
 
@@ -44,10 +44,10 @@ class partElementWindow
       void setElement(dntPartElement* e, std::string text, particleSystem* p);
 
       /*! Treat the window events
-       * \param object -> guiObject where event occurred
+       * \param object -> Farso::GuiObject where event occurred
        * \param eventInfo -> info about the happened event
        * \return true when event is related to partElement window */
-      bool treat(guiObject* object, int eventInfo);
+      bool treat(Farso::GuiObject* object, int eventInfo);
 
       /*! Verify if window is open
        * \return true if open */
@@ -69,29 +69,29 @@ class partElementWindow
       /*! Reset the element, to update it with new values */
       void resetElement();
 
-      guiInterface* gui;        /**< Gui used */
-      window* curWindow;        /**< Current in use window */
+      Farso::GuiInterface* gui;        /**< Gui used */
+      Farso::Window* curWindow;        /**< Current in use window */
       dntPartElement* element;  /**< Current in-edition element */
       std::string elementName;  /**< Current element's name */
       particleSystem* part;     /**< Current particle system edited */
 
-      button* nextType;         /**< To select next type */
-      button* previousType;     /**< To select previous type */
-      textBox* type;            /**< Current type text */
+      Farso::Button* nextType;         /**< To select next type */
+      Farso::Button* previousType;     /**< To select previous type */
+      Farso::TextBox* type;            /**< Current type text */
 
-      cxSel* useLimits;         /**< If will use the limits or not */
-      textBar* lowerLimit;      /**< Lower limit */
-      textBar* upperLimit;      /**< Upper limit */
+      Farso::CxSel* useLimits;         /**< If will use the limits or not */
+      Farso::TextBar* lowerLimit;      /**< Lower limit */
+      Farso::TextBar* upperLimit;      /**< Upper limit */
 
       /* Random */
-      textBar* mult;            /**< Multiplier value */
-      textBar* sum;             /**< Sum value */
+      Farso::TextBar* mult;            /**< Multiplier value */
+      Farso::TextBar* sum;             /**< Sum value */
 
       /* Linear */
-      textBar* initialValue;    /**< initial value */
-      textBar* finalValue;      /**< final value */
+      Farso::TextBar* initialValue;    /**< initial value */
+      Farso::TextBar* finalValue;      /**< final value */
 
-      textBox* texts[7];        /**< Text of each element */
+      Farso::TextBox* texts[7];        /**< Text of each element */
 };
 
 #endif

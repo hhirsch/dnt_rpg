@@ -33,6 +33,9 @@
 #include <string>
 #include <list>
 
+namespace Farso
+{
+
 #define MOUSE_CURSOR_NONE         "None"
 #define MOUSE_CURSOR_USER_IMAGE   "User"
 
@@ -128,6 +131,8 @@ class MouseCursor
  * \param mouseY -> mouse Y coordinate 
  * \return true id on area, false otherwise */
 bool isMouseAt(int x1,int y1,int x2,int y2, int mouseX, int mouseY);
+
+}
 
 #endif
 

@@ -30,7 +30,7 @@ using namespace std;
  ****************************************************************/
 guiIO::guiIO()
 {
-   gui = new guiInterface("");
+   gui = new Farso::GuiInterface("");
 
    state = GUI_IO_STATE_INITIAL;
    tool = TOOL_NONE;
@@ -202,13 +202,13 @@ void guiIO::openObjectWindow()
 void guiIO::openNavWindow()
 {
    dirs dir;
-   navWindow = gui->insertWindow(SCREEN_X-69,SCREEN_Y-76,SCREEN_X-1,SCREEN_Y-1,
-                                 "Nav", true);
-   picture* pic = navWindow->getObjectsList()->insertPicture(7,17,0,0,
+   navWindow = gui->insertWindow(Farso::SCREEN_X-69, Farso::SCREEN_Y-76,
+         Farso::SCREEN_X-1,Farso::SCREEN_Y-1,"Nav", true);
+   Farso::Picture* pic = navWindow->getObjectsList()->insertPicture(7,17,0,0,
          dir.getRealFile("mapEditor/nav.png").c_str());
    navTabButton = navWindow->getObjectsList()->insertTabButton(7,17,53,50,NULL);
    navTabButton->setObjectBelow(pic);
-   navTabButton->setStyle(FARSO_TAB_BUTTON_STYLE_HIGH);
+   navTabButton->setStyle(Farso::TabButton::STYLE_HIGH);
    moreZoomButton = navTabButton->insertButton(0,0,8,8);    /* More Zoom */
    lessZoomButton = navTabButton->insertButton(9,0,17,8);   /* Less Zoom */
    upButton = navTabButton->insertButton(19,0,31,17);       /* Up */
@@ -228,15 +228,15 @@ void guiIO::openNavWindow()
  ****************************************************************/
 void guiIO::openMessageWindow()
 {
-   farsoOptions fopt;
-   int width = SCREEN_X - 153 - 68;
-   messageWindow = gui->insertWindow(0,SCREEN_Y-38,SCREEN_X-220,SCREEN_Y-1,
-                                     "Messages");
+   Farso::Options fopt;
+   int width = Farso::SCREEN_X - 153 - 68;
+   messageWindow = gui->insertWindow(0,Farso::SCREEN_Y-38,
+         Farso::SCREEN_X-220,Farso::SCREEN_Y-1, "Messages");
    messageText = messageWindow->getObjectsList()->insertTextBox(7,16,
                  width-90,31,0,"Welcome to DccNiTghtmare Map Editor!");
    mouseCoordText = messageWindow->getObjectsList()->insertTextBox(width-90,16,
          width-7, 31, 0, "");
-   mouseCoordText->setFont(fopt.getDefaultFont(), 9, DNT_FONT_ALIGN_CENTER);
+   mouseCoordText->setFont(fopt.getDefaultFont(), 9, Farso::Font::ALIGN_CENTER);
    messageWindow->setAttributes(false,true,false,false);
    messageWindow->setExternPointer(&messageWindow);
    gui->openWindow(messageWindow);
@@ -564,10 +564,10 @@ bool guiIO::getInvertMultiTexture()
 int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
                 bool outdoor)
 {
-   int eventInfo = FARSO_EVENT_NONE;
+   int eventInfo = Farso::EVENT_NONE;
    float qty = 4.0f;
    cursor curs;
-   guiObject* object;
+   Farso::GuiObject* object;
 
    /* Get Events */
    object = gui->manipulateEvents(mouseX, mouseY, mButton, keys, eventInfo);
@@ -577,7 +577,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
 
 
    /* Do Camera IO */
-   if(eventInfo != FARSO_EVENT_WROTE_TEXT_BAR)
+   if(eventInfo != Farso::EVENT_WROTE_TEXT_BAR)
    {
       gameCamera.doIO(keys, mButton, mouseX, mouseY, DELTA_CAMERA );
 
@@ -702,10 +702,10 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
 
    switch(eventInfo)
    {
-      case FARSO_EVENT_ON_PRESS_TAB_BUTTON:
+      case Farso::EVENT_ON_PRESS_TAB_BUTTON:
       {
          /*  Navigation Buttons  */
-         if(object == (guiObject*) upButton)
+         if(object == (Farso::GuiObject*) upButton)
          {
             gameCamera.updateCamera(gameCamera.getCenterX() -
                                        qty * sin(deg2Rad(gameCamera.getPhi())),
@@ -715,7 +715,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
                                        0.0);
             return(GUI_IO_NEW_POSITION);
          }
-         else if (object == (guiObject*) downButton)
+         else if (object == (Farso::GuiObject*) downButton)
          {
             gameCamera.updateCamera(gameCamera.getCenterX() +
                                        qty * sin(deg2Rad(gameCamera.getPhi())),
@@ -725,7 +725,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
                                        0.0);
             return(GUI_IO_NEW_POSITION);
          }
-         else if (object == (guiObject*) leftButton)
+         else if (object == (Farso::GuiObject*) leftButton)
          {
             gameCamera.updateCamera(gameCamera.getCenterX() -
                             qty * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
@@ -735,7 +735,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
                                        0.0);
             return(GUI_IO_NEW_POSITION);
          }
-         else if (object == (guiObject*) rightButton)
+         else if (object == (Farso::GuiObject*) rightButton)
          {
             gameCamera.updateCamera(gameCamera.getCenterX() +
                            qty * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
@@ -745,145 +745,145 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
                                      0.0);
             return(GUI_IO_NEW_POSITION);
          }
-         else if (object == (guiObject*) rotUpButton)
+         else if (object == (Farso::GuiObject*) rotUpButton)
          {
             gameCamera.sumTheta(1);
             return(GUI_IO_NEW_POSITION);
          }
-         else if (object == (guiObject*) rotDownButton)
+         else if (object == (Farso::GuiObject*) rotDownButton)
          {
             gameCamera.sumTheta(-1);
             return(GUI_IO_NEW_POSITION);
          }
-         else if (object == (guiObject*) rotLeftButton)
+         else if (object == (Farso::GuiObject*) rotLeftButton)
          {
             gameCamera.sumPhi(1);
             return(GUI_IO_NEW_POSITION);
          }
-         else if (object == (guiObject*) rotRightButton)
+         else if (object == (Farso::GuiObject*) rotRightButton)
          {
             gameCamera.sumPhi(-1);
             return(GUI_IO_NEW_POSITION);
          }
-         else if (object == (guiObject*) moreZoomButton)
+         else if (object == (Farso::GuiObject*) moreZoomButton)
          {
             gameCamera.sumD(-1);
             return(GUI_IO_NEW_POSITION);
          }
-         else if (object == (guiObject*) lessZoomButton)
+         else if (object == (Farso::GuiObject*) lessZoomButton)
          {
             gameCamera.sumD(1);
             return(GUI_IO_NEW_POSITION);
          }
       break;
       
-      case FARSO_EVENT_PRESSED_TAB_BUTTON:
+      case Farso::EVENT_PRESSED_TAB_BUTTON:
 
          /*  Terrain Buttons  */
-         if(object == (guiObject*) terrainUpButton)
+         if(object == (Farso::GuiObject*) terrainUpButton)
          {
             state = GUI_IO_STATE_TERRAIN;
             tool = TOOL_TERRAIN_UP;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (guiObject*) terrainDownButton)
+         else if(object == (Farso::GuiObject*) terrainDownButton)
          {
             state = GUI_IO_STATE_TERRAIN;
             tool = TOOL_TERRAIN_DOWN;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (guiObject*) terrainNivButton)
+         else if(object == (Farso::GuiObject*) terrainNivButton)
          {
             state = GUI_IO_STATE_TERRAIN;
             tool = TOOL_TERRAIN_NIVELATE;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (guiObject*) terrainTextureButton)
+         else if(object == (Farso::GuiObject*) terrainTextureButton)
          {
             state = GUI_IO_STATE_TERRAIN;
             tool = TOOL_TERRAIN_TEXTURE;
             return(GUI_IO_NEW_STATE);
          }
          /* Portal Buttons */
-         else if(object == (guiObject*) portalAddButton)
+         else if(object == (Farso::GuiObject*) portalAddButton)
          {
             state = GUI_IO_STATE_PORTAL;
             tool = TOOL_PORTAL_ADD;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (guiObject*) portalTagButton)
+         else if(object == (Farso::GuiObject*) portalTagButton)
          {
             state = GUI_IO_STATE_PORTAL;
             tool = TOOL_PORTAL_TAG;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (guiObject*) portalDoorButton)
+         else if(object == (Farso::GuiObject*) portalDoorButton)
          {
             ltWindow->setState(STATE_DOORS);
          }
 
          /* Wall Buttons */
-         else if(object == (guiObject*) wallAddButton)
+         else if(object == (Farso::GuiObject*) wallAddButton)
          {
             state = GUI_IO_STATE_WALL;
             tool = TOOL_WALL_ADD;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (guiObject*) wallEditButton)
+         else if(object == (Farso::GuiObject*) wallEditButton)
          {
             state = GUI_IO_STATE_WALL;
             tool = TOOL_WALL_EDIT;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (guiObject*) wallCutButton)
+         else if(object == (Farso::GuiObject*) wallCutButton)
          {
             state = GUI_IO_STATE_WALL;
             tool = TOOL_WALL_CUT;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (guiObject*) wallTextureButton)
+         else if(object == (Farso::GuiObject*) wallTextureButton)
          {
             state = GUI_IO_STATE_WALL;
             tool = TOOL_WALL_TEXTURE;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (guiObject*) wallLessYTexture)
+         else if(object == (Farso::GuiObject*) wallLessYTexture)
          {
             state = GUI_IO_STATE_WALL;
             tool = TOOL_WALL_LESS_Y_TEXTURE;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (guiObject*) wallMoreYTexture)
+         else if(object == (Farso::GuiObject*) wallMoreYTexture)
          {
             state = GUI_IO_STATE_WALL;
             tool = TOOL_WALL_MORE_Y_TEXTURE;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (guiObject*) wallLessXTexture)
+         else if(object == (Farso::GuiObject*) wallLessXTexture)
          {
             state = GUI_IO_STATE_WALL;
             tool = TOOL_WALL_LESS_X_TEXTURE;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (guiObject*) wallMoreXTexture)
+         else if(object == (Farso::GuiObject*) wallMoreXTexture)
          {
             state = GUI_IO_STATE_WALL;
             tool = TOOL_WALL_MORE_X_TEXTURE;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (guiObject*) wallLessZTexture)
+         else if(object == (Farso::GuiObject*) wallLessZTexture)
          {
             state = GUI_IO_STATE_WALL;
             tool = TOOL_WALL_LESS_Z_TEXTURE;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (guiObject*) wallMoreZTexture)
+         else if(object == (Farso::GuiObject*) wallMoreZTexture)
          {
             state = GUI_IO_STATE_WALL;
             tool = TOOL_WALL_MORE_Z_TEXTURE;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (guiObject*) wallDestroyButton)
+         else if(object == (Farso::GuiObject*) wallDestroyButton)
          {
             state = GUI_IO_STATE_WALL;
             tool = TOOL_WALL_DESTROY;
@@ -891,99 +891,99 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          }
 
          /* Objects Buttons */
-         else if(object == (guiObject*) objectCommonButton)
+         else if(object == (Farso::GuiObject*) objectCommonButton)
          {
             ltWindow->setState(STATE_COMMON);
          }
-         else if(object == (guiObject*) objectGunsButton)
+         else if(object == (Farso::GuiObject*) objectGunsButton)
          {
             ltWindow->setState(STATE_GUNS);
          }
-         else if(object == (guiObject*) objectBuildButton)
+         else if(object == (Farso::GuiObject*) objectBuildButton)
          {
             ltWindow->setState(STATE_BUILDING);
          }
-         else if(object == (guiObject*) objectCarsButton)
+         else if(object == (Farso::GuiObject*) objectCarsButton)
          {
             ltWindow->setState(STATE_CARS);
          }
-         else if(object == (guiObject*) objectIcexButton)
+         else if(object == (Farso::GuiObject*) objectIcexButton)
          {
             ltWindow->setState(STATE_ICEX);
          }
-         else if(object == (guiObject*) objectNaturalButton)
+         else if(object == (Farso::GuiObject*) objectNaturalButton)
          {
             ltWindow->setState(STATE_NATURE);
          }
-         else if(object == (guiObject*) objectCharButton)
+         else if(object == (Farso::GuiObject*) objectCharButton)
          {
             ltWindow->setState(STATE_CHARACTERS);
          }
-         else if(object == (guiObject*) objectMacabreButton)
+         else if(object == (Farso::GuiObject*) objectMacabreButton)
          {
             ltWindow->setState(STATE_MACABRE);
          }
-         else if(object == (guiObject*) objectBathButton)
+         else if(object == (Farso::GuiObject*) objectBathButton)
          {
             ltWindow->setState(STATE_BATH);
          }
-         else if(object == (guiObject*) objectStreetButton)
+         else if(object == (Farso::GuiObject*) objectStreetButton)
          {
             ltWindow->setState(STATE_STREET);
          }
-         else if(object == (guiObject*) objectJunkButton)
+         else if(object == (Farso::GuiObject*) objectJunkButton)
          {
             ltWindow->setState(STATE_JUNK);
          }
-         else if(object == (guiObject*) objectSelectButton)
+         else if(object == (Farso::GuiObject*) objectSelectButton)
          {
             state = GUI_IO_STATE_OBJECTS;
             tool = TOOL_NODE_EDITOR;
          }
          /* Particles Buttons */
-         else if(object == (guiObject*) fireButton)
+         else if(object == (Farso::GuiObject*) fireButton)
          {
             ltWindow->setState(STATE_FIRE);
          }
-         else if(object == (guiObject*) smokeButton)
+         else if(object == (Farso::GuiObject*) smokeButton)
          {
             ltWindow->setState(STATE_SMOKE);
          }
-         else if(object == (guiObject*) snowButton)
+         else if(object == (Farso::GuiObject*) snowButton)
          {
             ltWindow->setState(STATE_SNOW);
          }
-         else if(object == (guiObject*) waterfallButton)
+         else if(object == (Farso::GuiObject*) waterfallButton)
          {
             ltWindow->setState(STATE_WATERFALL);
          }
-         else if(object == (guiObject*) waterSurfaceButton)
+         else if(object == (Farso::GuiObject*) waterSurfaceButton)
          {
             state = GUI_IO_STATE_PARTICLES;
             tool = TOOL_PARTICLE_LAKE;
          }
-         else if(object == (guiObject*) grassButton)
+         else if(object == (Farso::GuiObject*) grassButton)
          {
             ltWindow->setState(STATE_GRASS);
          }
-         else if(object == (guiObject*) soundAddButton)
+         else if(object == (Farso::GuiObject*) soundAddButton)
          {
          }
-         else if(object == (guiObject*) soundRemoveButton)
+         else if(object == (Farso::GuiObject*) soundRemoveButton)
          {
          }
-         else if(object == (guiObject*) soundEditButton)
+         else if(object == (Farso::GuiObject*) soundEditButton)
          {
          }
          break;
       }
 
       /* File Selectors Things */
-      case FARSO_EVENT_FILE_SEL_ACCEPT:
+      case Farso::EVENT_FILE_SEL_ACCEPT:
       {
          if(fileWindow)
          {
-            if(object == (guiObject*)fileSelector) 
+            if(object == (Farso::GuiObject*)fileSelector) 
             {
                curFileName = fileSelector->getFileName();
                gui->closeWindow(fileWindow);
@@ -999,11 +999,11 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          }
          break;
       }
-      case FARSO_EVENT_FILE_SEL_CANCEL:
+      case Farso::EVENT_FILE_SEL_CANCEL:
       {
          if(fileWindow)
          {
-            if(object == (guiObject*)fileSelector) 
+            if(object == (Farso::GuiObject*)fileSelector) 
             {
                gui->closeWindow(fileWindow);
             }
@@ -1014,29 +1014,29 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
 
 
       /* Buttons */
-      case FARSO_EVENT_PRESSED_BUTTON:
+      case Farso::EVENT_PRESSED_BUTTON:
       {
-         if(object == (guiObject*) exitButton)
+         if(object == (Farso::GuiObject*) exitButton)
          {
             return(GUI_IO_EXIT);
          }
-         else if(object == (guiObject*) newButton)
+         else if(object == (Farso::GuiObject*) newButton)
          {
             return(GUI_IO_NEW_MAP);
          }
-         else if(object == (guiObject*) openButton)
+         else if(object == (Farso::GuiObject*) openButton)
          {
             /* Open File Window for Load */
             openFileWindow(true);
             return(GUI_IO_OTHER);
          }
-         else if(object == (guiObject*) saveButton)
+         else if(object == (Farso::GuiObject*) saveButton)
          {
             /* Open File Window for Save */
             openFileWindow(false);
             return(GUI_IO_OTHER);
          }
-         else if(object == (guiObject*) terrainButton)
+         else if(object == (Farso::GuiObject*) terrainButton)
          {
             if(!terrainWindow)
             {
@@ -1044,7 +1044,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
             }
             return(GUI_IO_OTHER);
          }
-         else if(object == (guiObject*) wallButton)
+         else if(object == (Farso::GuiObject*) wallButton)
          {
             if(!wallWindow)
             {
@@ -1052,7 +1052,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
             }
             return(GUI_IO_OTHER);
          }
-         else if(object == (guiObject*) portalButton)
+         else if(object == (Farso::GuiObject*) portalButton)
          {
             if(!portalWindow)
             {
@@ -1060,7 +1060,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
             }
             return(GUI_IO_OTHER);
          }
-         else if(object == (guiObject*) particleButton)
+         else if(object == (Farso::GuiObject*) particleButton)
          {
             if(!particleWindow)
             {
@@ -1068,7 +1068,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
             }
             return(GUI_IO_OTHER);
          }
-         else if(object == (guiObject*) objectButton)
+         else if(object == (Farso::GuiObject*) objectButton)
          {
             if(!objectWindow)
             {
@@ -1076,7 +1076,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
             }
             return(GUI_IO_OTHER);
          }
-         else if(object == (guiObject*) fogButton)
+         else if(object == (Farso::GuiObject*) fogButton)
          {
             if(!fogWindow)
             {
@@ -1084,24 +1084,24 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
             }
             return(GUI_IO_OTHER);
          }
-         else if(object == (guiObject*) npcButton)
+         else if(object == (Farso::GuiObject*) npcButton)
          {
             ltWindow->setState(STATE_CHARACTERS);
          }
-         else if(object == (guiObject*) musicButton)
+         else if(object == (Farso::GuiObject*) musicButton)
          {
             ltWindow->setState(STATE_MUSIC);
          }
          /* Texture Window */
-         else if(object == (guiObject*) textureNextButton)
+         else if(object == (Farso::GuiObject*) textureNextButton)
          {
             return(GUI_IO_TEXTURE_NEXT);
          }
-         else if(object == (guiObject*) texturePreviousButton)
+         else if(object == (Farso::GuiObject*) texturePreviousButton)
          {
             return(GUI_IO_TEXTURE_PREVIOUS);
          }
-         else if(object == (guiObject*) textureInsertButton)
+         else if(object == (Farso::GuiObject*) textureInsertButton)
          {
             if(outdoor)
             {
@@ -1113,7 +1113,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
             }
          }
          /*Fog Buttons */
-         else if(object == (guiObject*) fogApplyButton)
+         else if(object == (Farso::GuiObject*) fogApplyButton)
          {
             applyFog();
             return(GUI_IO_NOTHING);
@@ -1121,7 +1121,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          break;
       }
    }
-   if(eventInfo == FARSO_EVENT_NONE)
+   if(eventInfo == Farso::EVENT_NONE)
    {
       return(GUI_IO_NOTHING);
    }

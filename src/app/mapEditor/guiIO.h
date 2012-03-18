@@ -128,7 +128,7 @@ class guiIO
 
       camera gameCamera;               /**< The Game Camera */
 
-      guiInterface* getGui(){return(gui);};
+      Farso::GuiInterface* getGui(){return(gui);};
 
       nodeEditor* getNodeEditor(){return(nodeEdit);};
 
@@ -146,138 +146,138 @@ class guiIO
       std::string selectedText;  /**< Last selected text with list window */
       std::string curFileName;   /**< Current File Name */
 
-      guiInterface* gui;    /**< Internal GUI */
+      Farso::GuiInterface* gui;    /**< Internal GUI */
 
       /**********************File*Window*******************************/
-      window* fileWindow;      /**< File Selector Window (for load/save) */
-      fileSel* fileSelector;   /**< The file selector itself */
+      Farso::Window* fileWindow; /**< File Selector Window (for load/save) */
+      Farso::FileSel* fileSelector;   /**< The file selector itself */
       bool fileLoading;        /**< If is loading or saving */
       void openFileWindow(bool load);
 
 
       /**********************Act*Window*******************************/
-      window* actWindow;     /**< Act Window */
-      button* openButton;    /**< Open Button */
-      button* saveButton;    /**< Save Button */
-      button* exitButton;    /**< Exit Button */
-      button* newButton;     /**< New Button */
+      Farso::Window* actWindow;     /**< Act Window */
+      Farso::Button* openButton;    /**< Open Button */
+      Farso::Button* saveButton;    /**< Save Button */
+      Farso::Button* exitButton;    /**< Exit Button */
+      Farso::Button* newButton;     /**< New Button */
       void openActWindow();
 
 
       /*********************Navigate*Window***************************/
-      window* navWindow;              /**< Navigate Window */
-      tabButton* navTabButton;        /**< Navigation Tab Button */
-      oneTabButton* moreZoomButton;   /**< Navigation More Zoom Button */
-      oneTabButton* lessZoomButton;   /**< Navigation Less Zoom Button */
-      oneTabButton* upButton;         /**< Navigation Up Button */
-      oneTabButton* downButton;       /**< Navigation Down Button */
-      oneTabButton* leftButton;       /**< Navigation Left Button */
-      oneTabButton* rightButton;      /**< Navigation Right Button */
-      oneTabButton* rotUpButton;      /**< Navigation Rotation Up Button */
-      oneTabButton* rotDownButton;    /**< Navigation Rotation Down Button */
-      oneTabButton* rotLeftButton;    /**< Navigation Rotation Left Button */
-      oneTabButton* rotRightButton;   /**< Navigation Rotation Right Button */
+      Farso::Window* navWindow;              /**< Navigate Window */
+      Farso::TabButton* navTabButton;        /**< Navigation Tab Button */
+      Farso::OneTabButton* moreZoomButton;   /**< Navigation More Zoom Button */
+      Farso::OneTabButton* lessZoomButton;   /**< Navigation Less Zoom Button */
+      Farso::OneTabButton* upButton;         /**< Navigation Up Button */
+      Farso::OneTabButton* downButton;       /**< Navigation Down Button */
+      Farso::OneTabButton* leftButton;       /**< Navigation Left Button */
+      Farso::OneTabButton* rightButton;      /**< Navigation Right Button */
+      Farso::OneTabButton* rotUpButton;   /**< Navigation Rotation Up Button */
+      Farso::OneTabButton* rotDownButton;/**< Navigation Rotation Down Button */
+      Farso::OneTabButton* rotLeftButton;/**< Navigation Rotation Left Button */
+      Farso::OneTabButton* rotRightButton;/**< Navigation RotationRightButton */
       void openNavWindow();
 
       /*********************Main*Window*******************************/
-      window* mainWindow;   /**< Main Window */
-      button* terrainButton; /**< Terrain Edition Button */
-      button* wallButton;    /**< Wall Edition Button */
-      button* portalButton;  /**< Portal Edition Button */
-      button* objectButton;  /**< Objects Edition Button */
-      button* npcButton;     /**< NPC Editon Button */
-      button* particleButton;/**< Particle Edit Button */
-      button* lightButton;   /**< Light Edit Button */
-      button* fogButton;     /**< Fog Button */
-      button* destroyButton; /**< Destroy Button */
-      button* optionsButton; /**< Options Button */
-      button* musicButton;   /**< Music Button */
-      button* sndFxButton;   /**< Sound Effects Button */
+      Farso::Window* mainWindow;   /**< Main Window */
+      Farso::Button* terrainButton; /**< Terrain Edition Button */
+      Farso::Button* wallButton;    /**< Wall Edition Button */
+      Farso::Button* portalButton;  /**< Portal Edition Button */
+      Farso::Button* objectButton;  /**< Objects Edition Button */
+      Farso::Button* npcButton;     /**< NPC Editon Button */
+      Farso::Button* particleButton;/**< Particle Edit Button */
+      Farso::Button* lightButton;   /**< Light Edit Button */
+      Farso::Button* fogButton;     /**< Fog Button */
+      Farso::Button* destroyButton; /**< Destroy Button */
+      Farso::Button* optionsButton; /**< Options Button */
+      Farso::Button* musicButton;   /**< Music Button */
+      Farso::Button* sndFxButton;   /**< Sound Effects Button */
       void openMainWindow();
 
       /*********************Texture*Window*******************************/
-      window* textureWindow;           /**< Texture Window */
-      button* texturePreviousButton;   /**< Previous Texture Button */
-      button* textureNextButton;       /**< Next Texture Button */
-      button* textureInsertButton;     /**< Insert Texture Button */
+      Farso::Window* textureWindow;           /**< Texture Window */
+      Farso::Button* texturePreviousButton;   /**< Previous Texture Button */
+      Farso::Button* textureNextButton;       /**< Next Texture Button */
+      Farso::Button* textureInsertButton;     /**< Insert Texture Button */
       void openTextureWindow();        /**< Open The texture Window */
 
       /*********************Terrain*Window*******************************/
-      window* terrainWindow;               /**< Terrain Window */
-      tabButton* terrainTabButton;         /**< Terrain TabButton */
-      oneTabButton* terrainUpButton;       /**< Terrain Up Button */
-      oneTabButton* terrainDownButton;     /**< Terrain Down Button */
-      oneTabButton* terrainNivButton;      /**< Terrain Nivelation Button */
-      oneTabButton* terrainTextureButton;  /**< Terrain Texture Button */
+      Farso::Window* terrainWindow;               /**< Terrain Window */
+      Farso::TabButton* terrainTabButton;         /**< Terrain TabButton */
+      Farso::OneTabButton* terrainUpButton;       /**< Terrain Up Button */
+      Farso::OneTabButton* terrainDownButton;     /**< Terrain Down Button */
+      Farso::OneTabButton* terrainNivButton;  /**< Terrain Nivelation Button */
+      Farso::OneTabButton* terrainTextureButton;  /**< Terrain Texture Button */
       void openTerrainWindow();
       /*********************Wall*Window*******************************/
-      window* wallWindow;                 /**< Wall Window */
-      tabButton* wallTabButton;           /**< Wall Tab Button */
-      oneTabButton* wallAddButton;        /**< Add Wall Button */
-      oneTabButton* wallEditButton;       /**< Edit Wall Button */
-      oneTabButton* wallCutButton;        /**< X Meio Fio Button */
-      oneTabButton* wallDestroyButton;    /**< Wall Destroy Button */
-      oneTabButton* wallTextureButton;    /**< Wall Texture Button */
-      oneTabButton* wallLessYTexture;     /**< Texture Y Less Button */
-      oneTabButton* wallMoreYTexture;     /**< Texture Y More Button */
-      oneTabButton* wallLessXTexture;     /**< Texture X Less Button */
-      oneTabButton* wallMoreXTexture;     /**< Texture X More Button */
-      oneTabButton* wallLessZTexture;     /**< Texture Z Less Button */
-      oneTabButton* wallMoreZTexture;     /**< Texture Z More Button */
+      Farso::Window* wallWindow;                 /**< Wall Window */
+      Farso::TabButton* wallTabButton;           /**< Wall Tab Button */
+      Farso::OneTabButton* wallAddButton;        /**< Add Wall Button */
+      Farso::OneTabButton* wallEditButton;       /**< Edit Wall Button */
+      Farso::OneTabButton* wallCutButton;        /**< X Meio Fio Button */
+      Farso::OneTabButton* wallDestroyButton;    /**< Wall Destroy Button */
+      Farso::OneTabButton* wallTextureButton;    /**< Wall Texture Button */
+      Farso::OneTabButton* wallLessYTexture;     /**< Texture Y Less Button */
+      Farso::OneTabButton* wallMoreYTexture;     /**< Texture Y More Button */
+      Farso::OneTabButton* wallLessXTexture;     /**< Texture X Less Button */
+      Farso::OneTabButton* wallMoreXTexture;     /**< Texture X More Button */
+      Farso::OneTabButton* wallLessZTexture;     /**< Texture Z Less Button */
+      Farso::OneTabButton* wallMoreZTexture;     /**< Texture Z More Button */
       void openWallWindow();
       /*********************Portal*Window*******************************/
-      window* portalWindow;               /**< Portal Window */
-      tabButton* portalTabButton;         /**< Portal TabButton */
-      oneTabButton* portalAddButton;      /**< Add Portal Button */
-      oneTabButton* portalTagButton;      /**< Portal Tag Button */
-      oneTabButton* portalDoorButton;     /**< Door Button */
+      Farso::Window* portalWindow;               /**< Portal Window */
+      Farso::TabButton* portalTabButton;         /**< Portal TabButton */
+      Farso::OneTabButton* portalAddButton;      /**< Add Portal Button */
+      Farso::OneTabButton* portalTagButton;      /**< Portal Tag Button */
+      Farso::OneTabButton* portalDoorButton;     /**< Door Button */
       void openPortalWindow();
       /*********************Object*Window*******************************/
-      window* objectWindow;               /**< Object Window */
-      tabButton* objectTabButton;         /**< Object TabButton */
-      oneTabButton* objectCommonButton;   /**< Object Common Button */
-      oneTabButton* objectGunsButton;     /**< Object Guns Button */
-      oneTabButton* objectBuildButton;    /**< Object Building Button */
-      oneTabButton* objectCarsButton;     /**< Object Cars Button */
-      oneTabButton* objectIcexButton;     /**< Object Icex Button */
-      oneTabButton* objectNaturalButton;  /**< Object Natural Button */
-      oneTabButton* objectCharButton;     /**< Object Character Button */
-      oneTabButton* objectMacabreButton;  /**< Object Macabre Button */
-      oneTabButton* objectBathButton;     /**< Object Bath Button */
-      oneTabButton* objectStreetButton;   /**< Object Street Button */
-      oneTabButton* objectJunkButton;     /**< Objects Junk Button */
-      oneTabButton* objectSelectButton;   /**< Objects Select Button */
+      Farso::Window* objectWindow;               /**< Object Window */
+      Farso::TabButton* objectTabButton;         /**< Object TabButton */
+      Farso::OneTabButton* objectCommonButton;   /**< Object Common Button */
+      Farso::OneTabButton* objectGunsButton;     /**< Object Guns Button */
+      Farso::OneTabButton* objectBuildButton;    /**< Object Building Button */
+      Farso::OneTabButton* objectCarsButton;     /**< Object Cars Button */
+      Farso::OneTabButton* objectIcexButton;     /**< Object Icex Button */
+      Farso::OneTabButton* objectNaturalButton;  /**< Object Natural Button */
+      Farso::OneTabButton* objectCharButton;     /**< Object Character Button */
+      Farso::OneTabButton* objectMacabreButton;  /**< Object Macabre Button */
+      Farso::OneTabButton* objectBathButton;     /**< Object Bath Button */
+      Farso::OneTabButton* objectStreetButton;   /**< Object Street Button */
+      Farso::OneTabButton* objectJunkButton;     /**< Objects Junk Button */
+      Farso::OneTabButton* objectSelectButton;   /**< Objects Select Button */
       void openObjectWindow();      
       /*********************Particle*Window*******************************/
-      window* particleWindow;             /**< Particle Window */
-      tabButton* particleTabButton;       /**< Particles Tab Button */
-      oneTabButton* fireButton;           /**< Particle Fire Button */
-      oneTabButton* smokeButton;          /**< Particle Smoke Button */
-      oneTabButton* snowButton;           /**< Particle Snow Button */
-      oneTabButton* waterfallButton;      /**< Particle Waterfall Button */
-      oneTabButton* waterSurfaceButton;   /**< Particle WaterSurface Button */
-      oneTabButton* grassButton;          /**< Particle Grass Button */
+      Farso::Window* particleWindow;             /**< Particle Window */
+      Farso::TabButton* particleTabButton;       /**< Particles Tab Button */
+      Farso::OneTabButton* fireButton;           /**< Particle Fire Button */
+      Farso::OneTabButton* smokeButton;          /**< Particle Smoke Button */
+      Farso::OneTabButton* snowButton;           /**< Particle Snow Button */
+      Farso::OneTabButton* waterfallButton;   /**< Particle Waterfall Button */
+      Farso::OneTabButton* waterSurfaceButton;/**< ParticleWaterSurfaceButton */
+      Farso::OneTabButton* grassButton;       /**< Particle Grass Button */
       void openParticleWindow();
       /************************Sound*Window*******************************/
-      window* soundWindow;                /**< Sound Window */
-      tabButton* soundTabButton;          /**< sound TabButton */
-      oneTabButton* soundAddButton;       /**< Sound Add Button */
-      oneTabButton* soundRemoveButton;    /**< Sound Remove Button */
-      oneTabButton* soundEditButton;      /**< Sound Edit Button */
+      Farso::Window* soundWindow;                /**< Sound Window */
+      Farso::TabButton* soundTabButton;          /**< sound TabButton */
+      Farso::OneTabButton* soundAddButton;       /**< Sound Add Button */
+      Farso::OneTabButton* soundRemoveButton;    /**< Sound Remove Button */
+      Farso::OneTabButton* soundEditButton;      /**< Sound Edit Button */
       void openSoundWindow();
       /*********************Message*Window*******************************/
-      window* messageWindow;              /**< Message Window */
-      textBox* messageText;               /**< Message Text */
-      textBox* mouseCoordText;            /**< Mouse Coordinate text */
+      Farso::Window* messageWindow;              /**< Message Window */
+      Farso::TextBox* messageText;               /**< Message Text */
+      Farso::TextBox* mouseCoordText;            /**< Mouse Coordinate text */
       void openMessageWindow(); 
       /**************************Fog*Window******************************/
-      window* fogWindow;                  /**< Fog Window */
-      cxSel* fogEnabled;                  /**< Fog enabled CxSel */
-      textBar* fogColor[4];            /**< Fog Color Texts */
-      textBar* fogDensity;             /**< Fog Density Text */
-      textBar* fogStart;               /**< Fog Start Text */
-      textBar* fogEnd;                 /**< Fog End Text */
-      button* fogApplyButton;              /**< Fog Apply Button */
+      Farso::Window* fogWindow;                  /**< Fog Window */
+      Farso::CxSel* fogEnabled;                  /**< Fog enabled CxSel */
+      Farso::TextBar* fogColor[4];            /**< Fog Color Texts */
+      Farso::TextBar* fogDensity;             /**< Fog Density Text */
+      Farso::TextBar* fogStart;               /**< Fog Start Text */
+      Farso::TextBar* fogEnd;                 /**< Fog End Text */
+      Farso::Button* fogApplyButton;              /**< Fog Apply Button */
       void openFogWindow();               /**< Open Fog Window */
      
 

@@ -60,7 +60,7 @@ int main(int argc, char **argv)
    opt.load();
 
    /* Set Farso Options */
-   farsoOptions farOpt;
+   Farso::Options farOpt;
    farOpt.setNeededDefaults(dir.getRealFile(DNT_FONT_ARIAL),
          dir.getRealFile("cursors/Walk.png"),
          dir.getRealFile("icons/maximize.png"), 
@@ -75,7 +75,7 @@ int main(int argc, char **argv)
       cout << "I'll conect to " << server << endl;
    #endif
 
-   Farso_Init(&screen,"DccNiTghtmare", opt.getScreenWidth(), 
+   Farso::init(&screen,"DccNiTghtmare", opt.getScreenWidth(), 
               opt.getScreenHeight(),  opt.getEnableFullScreen(), 
               opt.getAntiAliasing(), opt.getStencilBufferSize());
    
@@ -94,7 +94,7 @@ int main(int argc, char **argv)
    /* Call Initial Screen */
    glDisable(GL_LIGHTING);
    gameEngine->fadeInTexture(gameEngine->idTextura,
-         0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
+         0,0,Farso::SCREEN_X-1,Farso::SCREEN_Y-1,800,600);
    int result = gameEngine->menuScreen(ON_INIT,true);
    int estado = ON_INIT;
    int charCreation = 0;
@@ -153,7 +153,7 @@ int main(int argc, char **argv)
          {
             glDisable(GL_LIGHTING);
             gameEngine->fadeOutTexture(gameEngine->idTextura,
-                  0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
+                  0,0,Farso::SCREEN_X-1,Farso::SCREEN_Y-1,800,600);
          }
          if(gameEngine->run(screen, (result == CONTINUE_GAME)) == 1)
          {
@@ -167,7 +167,7 @@ int main(int argc, char **argv)
          glDisable(GL_LIGHTING);
 	      glDisable(GL_FOG);
          gameEngine->fadeInTexture(gameEngine->idTextura,
-               0,0,SCREEN_X-1,SCREEN_Y-1, 800, 600);
+               0,0,Farso::SCREEN_X-1,Farso::SCREEN_Y-1, 800, 600);
          result = gameEngine->menuScreen(estado,reloadMusic);
       }
       else
@@ -183,11 +183,11 @@ int main(int argc, char **argv)
 
    glDisable(GL_LIGHTING);
    gameEngine->fadeOutTexture(gameEngine->idTextura,
-         0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
+         0,0,Farso::SCREEN_X-1,Farso::SCREEN_Y-1,800,600);
 
    delete(gameEngine);
 
-   Farso_End(screen);
+   Farso::end(screen);
 
    return(0); 
 }

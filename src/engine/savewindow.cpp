@@ -67,8 +67,8 @@ void saveWindow::open()
    userInfo info;
 
    /* Define Sizes and positions */
-   midX = (SCREEN_X / 2);
-   midY = (SCREEN_Y / 2);
+   midX = (Farso::SCREEN_X / 2);
+   midY = (Farso::SCREEN_Y / 2);
    if(windowIsLoad)
    {
       dX = 132;
@@ -116,7 +116,7 @@ void saveWindow::open()
 void saveWindow::changeInfo(int mouseX, int mouseY)
 {
    saveFile* sav;
-   warning warn;
+   Farso::Warning warn;
 
    /* Free any previous */
    if(windowIsLoad)
@@ -155,7 +155,7 @@ int saveWindow::run(bool load, GLuint tituloId,
       GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    int state = -1;
-   guiObject* obj;
+   Farso::GuiObject* obj;
    Uint8 mButton;
    Uint8* keys;
    int x,y;
@@ -168,7 +168,7 @@ int saveWindow::run(bool load, GLuint tituloId,
    windowIsLoad = load;
 
    /* Create the GUI */
-   gui = new guiInterface("");
+   gui = new Farso::GuiInterface("");
 
    /* Open the window */
    open();
@@ -194,7 +194,8 @@ int saveWindow::run(bool load, GLuint tituloId,
          /* Render Things */
          glPushMatrix();
             draw2DMode();
-            textureToScreen(tituloId,0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
+            Farso::textureToScreen(tituloId,0,0,
+                  Farso::SCREEN_X-1,Farso::SCREEN_Y-1,800,600);
             gui->draw(proj,modl,viewPort);
             glPushMatrix();
                cursors.draw(x, y);
@@ -208,13 +209,13 @@ int saveWindow::run(bool load, GLuint tituloId,
          /* Get Events  */
          switch(eventInfo)
          {
-            case FARSO_EVENT_FILE_SEL_CHANGED:
+            case Farso::EVENT_FILE_SEL_CHANGED:
                changeInfo(x,y);
             break;
-            case FARSO_EVENT_FILE_SEL_CANCEL:
+            case Farso::EVENT_FILE_SEL_CANCEL:
                state = DNT_SAVE_WINDOW_CANCEL;
             break;
-            case FARSO_EVENT_FILE_SEL_ACCEPT:
+            case Farso::EVENT_FILE_SEL_ACCEPT:
                curFileName = fileSelector->getFileName();
                state = DNT_SAVE_WINDOW_CONFIRM; 
             break;

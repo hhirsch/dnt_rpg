@@ -23,7 +23,10 @@
 
 #include <string>
 
-class farsoOptions
+namespace Farso
+{
+
+class Options
 {
    public:
 
@@ -32,7 +35,7 @@ class farsoOptions
       void setUnicodeLanguage(bool unicode){languageIsUnicode = unicode;};
 
       /*! Get the current screen width */
-      int getScreenWidth(){return(width);};;
+      int getScreenWidth(){return(width);};
       /*! Get the current screen height */
       int getScreenHeight(){return(height);};
 
@@ -89,6 +92,8 @@ class farsoOptions
       static std::string cancelLabel;  /**< cancel label */
 
 };
+
+}
 
 
 #endif

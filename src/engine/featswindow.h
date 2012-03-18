@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2010 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -34,7 +34,7 @@ class featsWindow
    public:
       /*! Constructor
        * \param interf -> gui interface to open the window */
-      featsWindow(guiInterface* interf);
+      featsWindow(Farso::GuiInterface* interf);
 
       /*! Destructor */
       ~featsWindow();
@@ -51,7 +51,7 @@ class featsWindow
        * \param object -> last GUI object
        * \param eventInfo -> last GUI Event
        * \return != 0 if event is gathered */
-      int treat(guiObject* object, int eventInfo);
+      int treat(Farso::GuiObject* object, int eventInfo);
 
       /*! Verify if the window is openned
        * \return true if opened, false otherwise. */
@@ -74,18 +74,18 @@ class featsWindow
        * \return feat number or -1 */
       int getPreviousUsableFeat(int prev);
 
-      guiInterface* usedGui;   /**< Pointer to the gui used */
+      Farso::GuiInterface* usedGui;   /**< Pointer to the gui used */
       character* curCharacter; /**< Current character to show feats */
       int curFeat;             /**< Current displayed feat */
       bool selectFeatMode;     /**< If is at select feat mode */
 
-      window* intWindow;        /**< Window used */
-      picture* featIcon;        /**< The feature Image */
-      textBox* featTitle;       /**< Feat title text */
-      rolBar* featDescription;  /**< Feat desciprion text */
-      button* buttonNext;       /**< Next Feat button */
-      button* buttonPrevious;   /**< Prevous Feat Button */
-      button* buttonClose;      /**< Close Window button */
+      Farso::Window* intWindow;        /**< Window used */
+      Farso::Picture* featIcon;        /**< The feature Image */
+      Farso::TextBox* featTitle;       /**< Feat title text */
+      Farso::RolBar* featDescription;  /**< Feat desciprion text */
+      Farso::Button* buttonNext;       /**< Next Feat button */
+      Farso::Button* buttonPrevious;   /**< Prevous Feat Button */
+      Farso::Button* buttonClose;      /**< Close Window button */
 };
 
 

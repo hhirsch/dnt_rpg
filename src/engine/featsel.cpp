@@ -60,7 +60,7 @@ featSelWindow::fSelFeat* featSelWindow::fSelFeatList::getFeat(string featId)
 /********************************************************************
  *                           Constructor                            *
  ********************************************************************/
-featSelWindow::featSelWindow(guiInterface* interf)
+featSelWindow::featSelWindow(Farso::GuiInterface* interf)
 {
    /* set interface */
    inter = interf;
@@ -142,11 +142,11 @@ void featSelWindow::defineAvailableFeats()
  ********************************************************************/
 void featSelWindow::open(character* pers, featsList* fList, int total)
 {
-   farsoOptions opt;
+   Farso::Options opt;
    int i, y;
-   int centerY = SCREEN_Y / 2;
-   int centerX = SCREEN_X / 2;
-   dntFont fnt;
+   int centerY = Farso::SCREEN_Y / 2;
+   int centerX = Farso::SCREEN_X / 2;
+   Farso::Font fnt;
    std::string fontArial = opt.getDefaultFont();
 
    /* Ignore, if pers or fList not defined */
@@ -169,14 +169,14 @@ void featSelWindow::open(character* pers, featsList* fList, int total)
    intWindow = inter->insertWindow(centerX-200, centerY-200, 
          centerX+200, centerY+200, gettext("Talents"));
 
-   textBox* tb = intWindow->getObjectsList()->insertTextBox(10, 18, 194, 36, 1, 
-         gettext("Available"));
-   tb->setFont(fontArial,12,DNT_FONT_ALIGN_CENTER, DNT_FONT_STYLE_BOLD);
+   Farso::TextBox* tb = intWindow->getObjectsList()->insertTextBox(10, 18, 
+         194, 36, 1, gettext("Available"));
+   tb->setFont(fontArial,12,Farso::Font::ALIGN_CENTER, Farso::Font::STYLE_BOLD);
    tb->setBackColor(110, 0, 0);
 
    tb = intWindow->getObjectsList()->insertTextBox(195, 18, 390, 36, 1, 
          gettext("Selected"));
-   tb->setFont(fontArial,12,DNT_FONT_ALIGN_CENTER, DNT_FONT_STYLE_BOLD);
+   tb->setFont(fontArial,12,Farso::Font::ALIGN_CENTER, Farso::Font::STYLE_BOLD);
    tb->setBackColor(110, 0, 0);
 
    /* Each Feat */
@@ -216,8 +216,8 @@ void featSelWindow::open(character* pers, featsList* fList, int total)
    prevAvailButton->defineFont(fontArial, 9);
    textAvailPage = intWindow->getObjectsList()->insertTextBox(26, y+6, 
                                    178, y+24, 1, "0/0");
-   textAvailPage->setFont(fontArial,10,DNT_FONT_ALIGN_CENTER,
-                          DNT_FONT_STYLE_BOLD);
+   textAvailPage->setFont(fontArial,10,Farso::Font::ALIGN_CENTER,
+                          Farso::Font::STYLE_BOLD);
    nextAvailButton = intWindow->getObjectsList()->insertButton(179, y+6,
                                     194, y+24, fnt.createUnicode(0x25BA),0);
    nextAvailButton->defineFont(fontArial, 9);
@@ -228,8 +228,8 @@ void featSelWindow::open(character* pers, featsList* fList, int total)
    prevSelButton->defineFont(fontArial, 9);
    textSelPage = intWindow->getObjectsList()->insertTextBox(211, y+6, 
                                    374, y+24, 1, "0/0");
-   textSelPage->setFont(fontArial,10,DNT_FONT_ALIGN_CENTER,
-                          DNT_FONT_STYLE_BOLD);
+   textSelPage->setFont(fontArial,10,Farso::Font::ALIGN_CENTER,
+                          Farso::Font::STYLE_BOLD);
    nextSelButton = intWindow->getObjectsList()->insertButton(375, y+6,
                                    390, y+24, fnt.createUnicode(0x25BA),0);
    nextSelButton->defineFont(fontArial, 9);
@@ -238,8 +238,8 @@ void featSelWindow::open(character* pers, featsList* fList, int total)
    /* Title & Description */
    textTitle = intWindow->getObjectsList()->insertTextBox(10, y+25, 390, y+43,
          1, "");
-   textTitle->setFont(fontArial,11,DNT_FONT_ALIGN_CENTER,
-         DNT_FONT_STYLE_BOLD);
+   textTitle->setFont(fontArial,11,Farso::Font::ALIGN_CENTER,
+         Farso::Font::STYLE_BOLD);
    textTitle->setBackColor(102, 0, 0);
    textDescription = intWindow->getObjectsList()->insertRolBar(10, y+44, 
                                    390, 350, "");
@@ -247,8 +247,8 @@ void featSelWindow::open(character* pers, featsList* fList, int total)
    picFeat->setSurfaceDeletion(false);
    textTotal = intWindow->getObjectsList()->insertTextBox(120, 360, 310, 380,
        0, "");
-   textTotal->setFont(fontArial,13,DNT_FONT_ALIGN_LEFT, 
-         DNT_FONT_STYLE_BOLD);
+   textTotal->setFont(fontArial,13,Farso::Font::ALIGN_LEFT, 
+         Farso::Font::STYLE_BOLD);
 
    /* Ok Button */
    okButton = intWindow->getObjectsList()->insertButton(320,370,390,389,
@@ -397,7 +397,7 @@ void featSelWindow::drawThings(fSelFeat* f)
 /********************************************************************
  *                              treat                               *
  ********************************************************************/
-int featSelWindow::treat(guiObject* object, int eventInfo)
+int featSelWindow::treat(Farso::GuiObject* object, int eventInfo)
 {
    int i;
 
@@ -406,10 +406,10 @@ int featSelWindow::treat(guiObject* object, int eventInfo)
       return(TALENT_WINDOW_CANCEL);
    }
 
-   if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
+   if(eventInfo == Farso::EVENT_PRESSED_BUTTON)
    {
       /* Ok */
-      if(object == (guiObject*)okButton)
+      if(object == (Farso::GuiObject*)okButton)
       {
          /* Add All selected feats to the character */
          fSelFeat* ft = (fSelFeat*)selectedFeats.getFirst();
@@ -423,13 +423,13 @@ int featSelWindow::treat(guiObject* object, int eventInfo)
          return(TALENT_WINDOW_CONFIRM);
       }
       /* Cancel */
-      else if(object == (guiObject*)cancelButton)
+      else if(object == (Farso::GuiObject*)cancelButton)
       {
          close();
          return(TALENT_WINDOW_CANCEL);
       }
       /* Next Avail Button */
-      else if(object == (guiObject*)nextAvailButton)
+      else if(object == (Farso::GuiObject*)nextAvailButton)
       {
          if((((availableFeats.getTotal()-1) / FEATS_PER_PAGE)+1) > curAvailPage)
          {
@@ -442,7 +442,7 @@ int featSelWindow::treat(guiObject* object, int eventInfo)
          drawThings(NULL);
       }
       /* Previous Avail Button */
-      else if(object == (guiObject*)prevAvailButton)
+      else if(object == (Farso::GuiObject*)prevAvailButton)
       {
          curAvailPage--;
          if(curAvailPage <= 0)
@@ -452,7 +452,7 @@ int featSelWindow::treat(guiObject* object, int eventInfo)
          drawThings(NULL);
       }
       /* Next Selected Button */
-      else if(object == (guiObject*)nextSelButton)
+      else if(object == (Farso::GuiObject*)nextSelButton)
       {
          if((((selectedFeats.getTotal()-1) / FEATS_PER_PAGE)+1) > curSelPage)
          {
@@ -465,7 +465,7 @@ int featSelWindow::treat(guiObject* object, int eventInfo)
          drawThings(NULL);
       }
       /* Previous Selected Button */
-      else if(object == (guiObject*)prevSelButton)
+      else if(object == (Farso::GuiObject*)prevSelButton)
       {
          curSelPage--;
          if(curSelPage <= 0)
@@ -491,7 +491,7 @@ int featSelWindow::treat(guiObject* object, int eventInfo)
                }
                else
                {
-                  warning w;
+                  Farso::Warning w;
                   w.show(gettext("Warning"), 
                          gettext("You can't select more talents"), inter);
                }
@@ -508,7 +508,7 @@ int featSelWindow::treat(guiObject* object, int eventInfo)
       }
    }
    /* Verify text press */
-   else if(eventInfo == FARSO_EVENT_ON_PRESS_TEXT_BOX)
+   else if(eventInfo == Farso::EVENT_ON_PRESS_TEXT_BOX)
    {
       for(i=0; i < FEATS_PER_PAGE; i++)
       {
@@ -525,7 +525,7 @@ int featSelWindow::treat(guiObject* object, int eventInfo)
       }
    }
    /* Verify picture press */
-   else if(eventInfo == FARSO_EVENT_ON_PRESS_PICTURE)
+   else if(eventInfo == Farso::EVENT_ON_PRESS_PICTURE)
    {
       for(i=0; i < FEATS_PER_PAGE; i++)
       {

@@ -94,7 +94,7 @@ class engine
       #endif
 
       camera gameCamera;               /**< The Game Camera */
-      guiInterface* gui;               /**< GUI used on Engine */
+      Farso::GuiInterface* gui;        /**< GUI used on Engine */
       GLdouble proj[16];               /**< Projection Matrix */
       GLdouble modl[16];               /**< ModelView Matrix  */
       GLfloat camProj[16];             /**< Camera Projection */
@@ -325,7 +325,7 @@ class engine
        * \param object -> last object modifief on GUI
        * \param eventInfo -> las event on GUI
        **************************************************************/
-      void treatGuiEvents(guiObject* object, int eventInfo);
+      void treatGuiEvents(Farso::GuiObject* object, int eventInfo);
 
       /*!
        **************************************************************
@@ -526,9 +526,9 @@ class engine
       
       thing* curTarget;            /**< The current target under mouse */
 
-      guiInterface* fpsGui;        /**< A gui jsut for fps */
-      window* fpsWindow;           /**< an invisible window for fps display */
-      textBox* fpsText;            /**< The fps text */
+      Farso::GuiInterface* fpsGui; /**< A gui jsut for fps */
+      Farso::Window* fpsWindow;    /**< an invisible window for fps display */
+      Farso::TextBox* fpsText;     /**< The fps text */
 
       /* Combat Things */
       GLuint  normalMoveCircle,    /**< One Movimentation Circle */

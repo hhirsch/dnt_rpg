@@ -41,13 +41,13 @@ static int cmpSkillFunction(const void *p1,  const void *p2)
 /**************************************************************
  *                          Constructor                       *
  **************************************************************/
-skillWindow::skillWindow(skills* savSkill, guiInterface* inter,
+skillWindow::skillWindow(skills* savSkill, Farso::GuiInterface* inter,
                          int actualLevel, bool readOnlyMode)
 {
-   farsoOptions opt;
-   dntFont fnt;
-   int centerY = SCREEN_Y / 2;
-   int centerX = SCREEN_X / 2;
+   Farso::Options opt;
+   Farso::Font fnt;
+   int centerY = Farso::SCREEN_Y / 2;
+   int centerX = Farso::SCREEN_X / 2;
 
    char tmp[5];
    string saux;
@@ -108,8 +108,8 @@ skillWindow::skillWindow(skills* savSkill, guiInterface* inter,
                                               fnt.createUnicode(0x25BA),0);
    skillName = intWindow->getObjectsList()->insertTextBox(67,175,233,193,1,
                                                           sk->name.c_str());
-   skillName->setFont(opt.getDefaultFont(), 10, DNT_FONT_ALIGN_CENTER,
-                      DNT_FONT_STYLE_ITALIC);
+   skillName->setFont(opt.getDefaultFont(), 10, Farso::Font::ALIGN_CENTER,
+                      Farso::Font::STYLE_ITALIC);
 
    /* Skill Image */
    skFig = intWindow->getObjectsList()->insertPicture(13,175,0,0,NULL);
@@ -123,8 +123,8 @@ skillWindow::skillWindow(skills* savSkill, guiInterface* inter,
    saux = tmp;
    txtPoints = intWindow->getObjectsList()->insertTextBox(111,198,133,216,1,
                                                    saux.c_str());
-   txtPoints->setFont(opt.getDefaultFont(), 10, DNT_FONT_ALIGN_CENTER,
-                      DNT_FONT_STYLE_NORMAL);
+   txtPoints->setFont(opt.getDefaultFont(), 10, Farso::Font::ALIGN_CENTER,
+                      Farso::Font::STYLE_NORMAL);
    txtPoints->setColor(255,255,255);
 
    /* Show Only Class/Race Skills cxSel */
@@ -200,7 +200,7 @@ bool skillWindow::isOpened()
 /**************************************************************
  *                             close                          *
  **************************************************************/
-void skillWindow::close(guiInterface* inter)
+void skillWindow::close(Farso::GuiInterface* inter)
 {
    if(isOpened())
    {
@@ -214,7 +214,7 @@ void skillWindow::close(guiInterface* inter)
  **************************************************************/
 void skillWindow::updateSkillInfo()
 {
-   farsoOptions opt;
+   Farso::Options opt;
    string saux;  
    skill* att;
    char tmp[5];
@@ -248,8 +248,8 @@ void skillWindow::updateSkillInfo()
    {
       saux += gettext("Unknow!");
    }
-   desc->addText(saux, opt.getDefaultFont(), 10, DNT_FONT_ALIGN_LEFT,
-         DNT_FONT_STYLE_NORMAL, 86, 161, 3);
+   desc->addText(saux, opt.getDefaultFont(), 10, Farso::Font::ALIGN_LEFT,
+         Farso::Font::STYLE_NORMAL, 86, 161, 3);
 
    /* Set Current Image */
    skFig->set(sk->image);
@@ -315,7 +315,7 @@ void skillWindow::nextSkill()
 /**************************************************************
  *                             treat                          *
  **************************************************************/
-int skillWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
+int skillWindow::treat(Farso::GuiObject* object, int eventInfo, Farso::GuiInterface* inter)
 {
    /* No need to verify NULL events (should not occurs, anyway) */
    if(object == NULL)
@@ -324,9 +324,9 @@ int skillWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
    }
 
    /* Verify cxSel Events */
-   if(eventInfo == FARSO_EVENT_MODIFIED_CX_SEL)
+   if(eventInfo == Farso::EVENT_MODIFIED_CX_SEL)
    {
-      if(object == (guiObject*)cxOnlyClass)
+      if(object == (Farso::GuiObject*)cxOnlyClass)
       {
          if( (cxOnlyClass->isSelected()) && (skillsOrder[curSkill]->mod != 1))
          {
@@ -340,9 +340,9 @@ int skillWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
    }
 
    /* Verify Button Events */
-   else if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
+   else if(eventInfo == Farso::EVENT_PRESSED_BUTTON)
    {
-      if( (object == (guiObject*) buttonSum) && (!readOnly))
+      if( (object == (Farso::GuiObject*) buttonSum) && (!readOnly))
       {
          /* Try to sum a point to the skill */
          if( ( avaiblePoints - skillsOrder[curSkill]->mod >=0 ) && 
@@ -355,7 +355,7 @@ int skillWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
       }
 
       /* Try to dec a point from the skill */
-      else if( (object == (guiObject*) buttonDec) && (!readOnly) )
+      else if( (object == (Farso::GuiObject*) buttonDec) && (!readOnly) )
       {
          if(skillsOrder[curSkill]->points - 1 >= 
             skillsOrder[curSkill]->prevPoints)
@@ -367,7 +367,7 @@ int skillWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
       }
 
       /* Show next skill info */
-      else if(object == (guiObject*) buttonNext)
+      else if(object == (Farso::GuiObject*) buttonNext)
       {
          nextSkill();
          if(cxOnlyClass->isSelected())
@@ -381,7 +381,7 @@ int skillWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
       }
 
       /* Show Previous skill info */
-      else if(object == (guiObject*) buttonPrevious)
+      else if(object == (Farso::GuiObject*) buttonPrevious)
       {
          previousSkill();
          if(cxOnlyClass->isSelected())
@@ -396,7 +396,7 @@ int skillWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
       }
 
       /* Confirm all Changes done to the skills and exit */
-      else if( (object == (guiObject*) buttonConfirm) && (!readOnly) )
+      else if( (object == (Farso::GuiObject*) buttonConfirm) && (!readOnly) )
       {
          close(inter);
          saveSkill->setAvaiblePoints(avaiblePoints);
@@ -404,7 +404,7 @@ int skillWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
       }
 
       /* Cancel all changes done to skills and exit */
-      else if(object == (guiObject*) buttonCancel) 
+      else if(object == (Farso::GuiObject*) buttonCancel) 
       {
          /* Undo */
          int aux;

@@ -24,7 +24,7 @@
 /***********************************************************************
  *                             Constructor                             *
  ***********************************************************************/
-partWindow::partWindow(guiInterface* interf)
+partWindow::partWindow(Farso::GuiInterface* interf)
 {
    curWindow = NULL;
    textureWindow = NULL;
@@ -92,10 +92,10 @@ void partWindow::set(partAux* p)
  ***********************************************************************/
 void partWindow::openWindow()
 {
-   farsoOptions opt;
+   Farso::Options opt;
    int posX=0, 
        posY = 64;
-   dntFont fnt;
+   Farso::Font fnt;
 
    if(isOpen())
    {
@@ -133,7 +133,7 @@ void partWindow::openWindow()
    previousDrawMode->defineFont(opt.getDefaultFont(), 9);
    drawMode = curWindow->getObjectsList()->insertTextBox(92, 89, 172, 106, 
          1, "");
-   drawMode->setFont(opt.getDefaultFont(), 10, DNT_FONT_ALIGN_CENTER);
+   drawMode->setFont(opt.getDefaultFont(), 10, Farso::Font::ALIGN_CENTER);
    nextDrawMode = curWindow->getObjectsList()->insertButton(173, 89, 183, 106, 
          fnt.createUnicode(0x25BA),0);
    nextDrawMode->defineFont(opt.getDefaultFont(), 9);
@@ -145,7 +145,7 @@ void partWindow::openWindow()
    previousRenderMode->defineFont(opt.getDefaultFont(), 9);
    renderMode = curWindow->getObjectsList()->insertTextBox(92,112,172,129, 
          1, "");
-   renderMode->setFont(opt.getDefaultFont(), 10, DNT_FONT_ALIGN_CENTER);
+   renderMode->setFont(opt.getDefaultFont(), 10, Farso::Font::ALIGN_CENTER);
    nextRenderMode = curWindow->getObjectsList()->insertButton(173,112,183,129, 
          fnt.createUnicode(0x25BA),0);
    nextRenderMode->defineFont(opt.getDefaultFont(), 9);
@@ -167,7 +167,7 @@ void partWindow::openWindow()
    /* Elements */
    element = curWindow->getObjectsList()->insertButton(20, 204, 97, 221, 
          "Elements", true);
-   menu* men = new menu(80, 204, 192, 318, curWindow->getSurface());
+   Farso::Menu* men = new Farso::Menu(80,204,192,318,curWindow->getSurface());
    men->insertItem(DNT_PART_AUX_PARTICLES_TO_CREATE, true);
    men->insertItem("-", false);
    men->insertItem(DNT_PART_AUX_RED, true);
@@ -322,7 +322,7 @@ void partWindow::writeCurParticles()
 /***********************************************************************
  *                               treat                                 *
  ***********************************************************************/
-bool partWindow::treat(guiObject* object, int eventInfo)
+bool partWindow::treat(Farso::GuiObject* object, int eventInfo)
 {
    if(elementWindow->isOpen())
    {
@@ -342,20 +342,20 @@ bool partWindow::treat(guiObject* object, int eventInfo)
       }
    }
 
-   if(eventInfo == FARSO_EVENT_SELECTED_MENU)
+   if(eventInfo == Farso::EVENT_SELECTED_MENU)
    {
-      menu* men = (menu*)element->men;
-      guiObject* actualItem = men->getItem(men->getActualItem());
+      Farso::Menu* men = (Farso::Menu*)element->men;
+      Farso::GuiObject* actualItem = men->getItem(men->getActualItem());
       if(actualItem != NULL)
       {
          dntPartElement* e = part->getElement(actualItem->getText());
          elementWindow->setElement(e, actualItem->getText(), part);
       }
    }
-   else if(eventInfo == FARSO_EVENT_WROTE_TEXT_BAR)
+   else if(eventInfo == Farso::EVENT_WROTE_TEXT_BAR)
    {
       int i=0;
-      if(object == (guiObject*)maxParticles)
+      if(object == (Farso::GuiObject*)maxParticles)
       {
          if(!maxParticles->getText().empty())
          {
@@ -367,25 +367,25 @@ bool partWindow::treat(guiObject* object, int eventInfo)
          }
          return(true);
       }
-      else if(object == (guiObject*)maxLifeTime)
+      else if(object == (Farso::GuiObject*)maxLifeTime)
       {
          sscanf(maxLifeTime->getText().c_str(), "%i", &i);
          part->setInt(DNT_PART_AUX_MAX_LIFE_TIME, i);
          return(true);
       }
-      else if(object == (guiObject*)particleLifeTime)
+      else if(object == (Farso::GuiObject*)particleLifeTime)
       {
          sscanf(particleLifeTime->getText().c_str(), "%i", &i);
          part->setInt(DNT_PART_AUX_MAX_PARTICLE_LIFE_TIME, i);
          return(true);
       }
-      else if(object == (guiObject*)pointSize)
+      else if(object == (Farso::GuiObject*)pointSize)
       {
          sscanf(pointSize->getText().c_str(), "%i", &i);
          part->setInt(DNT_PART_AUX_POINT_SIZE, i);
          return(true);
       }
-      else if(object == (guiObject*)gravity)
+      else if(object == (Farso::GuiObject*)gravity)
       {
          float g=0.0f;
          sscanf(gravity->getText().c_str(), "%f", &g);
@@ -393,9 +393,9 @@ bool partWindow::treat(guiObject* object, int eventInfo)
          return(true);
       }
    }
-   else if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
+   else if(eventInfo == Farso::EVENT_PRESSED_BUTTON)
    {
-      if(object == (guiObject*)nextRenderMode)
+      if(object == (Farso::GuiObject*)nextRenderMode)
       {
          if(part->getInt(DNT_PART_AUX_RENDER_MODE) < DNT_PARTICLE_RENDER_GLOW)
          {
@@ -405,7 +405,7 @@ bool partWindow::treat(guiObject* object, int eventInfo)
          }
          return(true);
       }
-      else if(object == (guiObject*)previousRenderMode)
+      else if(object == (Farso::GuiObject*)previousRenderMode)
       {
          if(part->getInt(DNT_PART_AUX_RENDER_MODE) > 0)
          {
@@ -415,7 +415,7 @@ bool partWindow::treat(guiObject* object, int eventInfo)
          }
          return(true);
       }
-      else if(object == (guiObject*)nextDrawMode)
+      else if(object == (Farso::GuiObject*)nextDrawMode)
       {
          if(part->getInt(DNT_PART_AUX_DRAW_MODE) < DNT_PARTICLE_DRAW_INDIVIDUAL)
          {
@@ -425,7 +425,7 @@ bool partWindow::treat(guiObject* object, int eventInfo)
          }
          return(true);
       }
-      else if(object == (guiObject*)previousDrawMode)
+      else if(object == (Farso::GuiObject*)previousDrawMode)
       {
          if(part->getInt(DNT_PART_AUX_DRAW_MODE) > 0)
          {
@@ -435,31 +435,31 @@ bool partWindow::treat(guiObject* object, int eventInfo)
          }
          return(true);
       }
-      else if(object == (guiObject*)restart)
+      else if(object == (Farso::GuiObject*)restart)
       {
          part->reset();
       }
-      else if(object == (guiObject*)origin)
+      else if(object == (Farso::GuiObject*)origin)
       {
          originWindow->setParticle(part);
       }
-      else if(object == (guiObject*)texture)
+      else if(object == (Farso::GuiObject*)texture)
       {
          openTextureWindow();
       }
    }
    /* Texture Load things */
-   else if(eventInfo == FARSO_EVENT_FILE_SEL_ACCEPT)
+   else if(eventInfo == Farso::EVENT_FILE_SEL_ACCEPT)
    {
-      if( (textureWindow) && (object == (guiObject*)fileSelector) )
+      if( (textureWindow) && (object == (Farso::GuiObject*)fileSelector) )
       {
          part->setTextureFileName(fileSelector->getFileName());
          gui->closeWindow(textureWindow);
       }
    }
-   else if(eventInfo == FARSO_EVENT_FILE_SEL_CANCEL)
+   else if(eventInfo == Farso::EVENT_FILE_SEL_CANCEL)
    {
-      if((textureWindow) && (object == (guiObject*)fileSelector))
+      if((textureWindow) && (object == (Farso::GuiObject*)fileSelector))
       {
          /* Just close the window */
          gui->closeWindow(textureWindow);

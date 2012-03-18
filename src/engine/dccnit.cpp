@@ -43,7 +43,7 @@ engine::engine()
    int i;
 
    /* Initialize internal lists */
-   gui  = new guiInterface("");
+   gui  = new Farso::GuiInterface("");
    actualMap = NULL;
    PCs = NULL;
    NPCs = NULL;
@@ -131,13 +131,13 @@ engine::engine()
    shortcuts = new shortcutsWindow();
 
    /* Create the fps window */
-   fpsGui  = new guiInterface("");
+   fpsGui  = new Farso::GuiInterface("");
    fpsWindow = fpsGui->insertWindow(option->getScreenWidth()-129, 
          option->getScreenHeight()-33, option->getScreenWidth()-1,
          option->getScreenHeight()-1, "", true); 
    fpsText = fpsWindow->getObjectsList()->insertTextBox(10, 10, 118, 30, 0, "");
    fpsText->setFont(dir.getRealFile(DNT_FONT_PALLADIO), 14, 
-         DNT_FONT_ALIGN_CENTER);
+         Farso::Font::ALIGN_CENTER);
    fpsText->setSolid();
    fpsWindow->setExternPointer(&fpsWindow);
    fpsGui->openWindow(fpsWindow);
@@ -524,7 +524,7 @@ bool engine::loadGame()
       }
       else
       {
-         warning warn;
+         Farso::Warning warn;
          warn.show(gettext("Error"),gettext("Can't load the saved game!"),gui);
          res = false;
       }
@@ -556,7 +556,7 @@ void engine::defineFrontSurface()
  *********************************************************************/
 void engine::saveGame()
 {
-   warning warn;
+   Farso::Warning warn;
 
    if(engineMode != ENGINE_MODE_TURN_BATTLE)
    {
@@ -644,11 +644,11 @@ void engine::keepNPCStatus()
  *********************************************************************/
 int engine::loadMap(string arqMapa, bool loadingGame)
 {
-   healthBar* progress = NULL; /* the progress bar */
+   Farso::HealthBar* progress = NULL; /* the progress bar */
 
-   dntFont fnt;                   /* DNT font controller */
-   int centerY = SCREEN_Y / 2;   /* Window Y middle */
-   int centerX = SCREEN_X / 2;   /* Window X middle */
+   Farso::Font fnt;                   /* DNT font controller */
+   int centerY = Farso::SCREEN_Y / 2;   /* Window Y middle */
+   int centerX = Farso::SCREEN_X / 2;   /* Window X middle */
 
    int midW=128, /* Middle Width of load image */
        midH=256; /* Middle Height of load image */
@@ -691,18 +691,18 @@ int engine::loadMap(string arqMapa, bool loadingGame)
       midH = fig->h / 2;
             
       /* Load the texture to opengl */
-      setTexture(fig,texturaCarga);
+      Farso::setTexture(fig,texturaCarga);
       SDL_FreeSurface(fig);
    }  
    
    /* Create the text surface/texture */
    img = SDL_CreateRGBSurface(SDL_SWSURFACE, 2*midW,32,32,
                               0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
-   color_Set(0,0,0,255);
-   rectangle_Fill(img,0,0,255,31);
+   Farso::color_Set(0,0,0,255);
+   Farso::rectangle_Fill(img,0,0,255,31);
 
    /* create the progress bar */
-   progress = new healthBar(2,20,(midW*2)-3,30, img);
+   progress = new Farso::HealthBar(2,20,(midW*2)-3,30, img);
    progress->defineMaxHealth(11);
    progress->defineActualHealth(0);
 
@@ -716,7 +716,7 @@ int engine::loadMap(string arqMapa, bool loadingGame)
    if(actualMap) 
    {
       /* Show the "Saving Map Status" */
-      color_Set(200,20,20,255);
+      Farso::color_Set(200,20,20,255);
       fnt.defineFont(dir.getRealFile(DNT_FONT_TIMES),10);
       sprintf(texto,"%s", gettext("Saving Current Map Modifications"));
       showLoading(img,&texturaTexto,texturaCarga, texto, progress);
@@ -751,7 +751,7 @@ int engine::loadMap(string arqMapa, bool loadingGame)
    walkSound = NULL;
 
    /* Show the "Loading Map" */
-   color_Set(200,20,20,255);
+   Farso::color_Set(200,20,20,255);
    fnt.defineFont(dir.getRealFile(DNT_FONT_TIMES),10);
    sprintf(texto,gettext("Loading Map: %s"),arqMapa.c_str());
    showLoading(img,&texturaTexto,texturaCarga, texto, progress);
@@ -964,9 +964,9 @@ void engine::fadeIn()
 
       glBegin(GL_QUADS);
          glVertex3f(0, 0, 0);
-         glVertex3f(SCREEN_X, 0, 0);
-         glVertex3f(SCREEN_X, SCREEN_Y, 0);
-         glVertex3f(0, SCREEN_Y, 0);
+         glVertex3f(Farso::SCREEN_X, 0, 0);
+         glVertex3f(Farso::SCREEN_X, Farso::SCREEN_Y, 0);
+         glVertex3f(0, Farso::SCREEN_Y, 0);
       glEnd();
       glDisable(GL_COLOR_MATERIAL);
       glDisable(GL_BLEND);
@@ -1025,9 +1025,9 @@ void engine::fadeOut()
 
       glBegin(GL_QUADS);
          glVertex3f(0, 0, 0);
-         glVertex3f(SCREEN_X, 0, 0);
-         glVertex3f(SCREEN_X, SCREEN_Y, 0);
-         glVertex3f(0, SCREEN_Y, 0);
+         glVertex3f(Farso::SCREEN_X, 0, 0);
+         glVertex3f(Farso::SCREEN_X, Farso::SCREEN_Y, 0);
+         glVertex3f(0, Farso::SCREEN_Y, 0);
       glEnd();
       glDisable(GL_COLOR_MATERIAL);
       glDisable(GL_BLEND);
@@ -1064,7 +1064,7 @@ void engine::fadeInTexture(GLuint id, int x1, int y1, int x2, int y2,
       clearOpenGL();
       draw2DMode();
       glColor3f(i/50.0f, i/50.0f, i/50.0f);
-      textureToScreen(id,x1,y1,x2,y2,sizeX,sizeY);
+      Farso::textureToScreen(id,x1,y1,x2,y2,sizeX,sizeY);
       draw3DMode(option->getFarViewFactor()*OUTDOOR_FARVIEW);
       glFlush();
       SDL_GL_SwapBuffers();
@@ -1085,7 +1085,7 @@ void engine::fadeOutTexture(GLuint id, int x1, int y1, int x2, int y2,
       clearOpenGL();
       draw2DMode();
       glColor3f(i/50.0f, i/50.0f, i/50.0f);
-      textureToScreen(id,x1,y1,x2,y2,sizeX,sizeY);
+      Farso::textureToScreen(id,x1,y1,x2,y2,sizeX,sizeY);
       draw3DMode(option->getFarViewFactor()*OUTDOOR_FARVIEW);
       glFlush();
       SDL_GL_SwapBuffers();
@@ -1112,10 +1112,10 @@ void engine::splashScreen()
    img = IMG_Load(dir.getRealFile("texturas/general/inicio1.png").c_str()); 
    glDisable(GL_LIGHTING);
 
-   dntFont fnt;
+   Farso::Font fnt;
    fnt.defineFont(dir.getRealFile(DNT_FONT_TIMES), 20);
-   fnt.defineFontAlign(DNT_FONT_ALIGN_CENTER);
-   color_Set(130,130,130,255);
+   fnt.defineFontAlign(Farso::Font::ALIGN_CENTER);
+   Farso::color_Set(130,130,130,255);
    fnt.write(img, 52, 424, gettext("DccNiTghtmare is relesead under GPLv3 or "
                                    "later: Feel free to use its source code "
                                    "and data the way you want (or to blame us "
@@ -1124,13 +1124,13 @@ void engine::splashScreen()
                                    "libraries: OpenAL, Cal3D, OpenGL, SDL, "
                                    "SDL_image, SDL_ttf, libVorbis."), 
               52, 424, 745, 511);
-   fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
+   fnt.defineFontAlign(Farso::Font::ALIGN_LEFT);
    glGenTextures(1,&id);
-   setTextureRGBA(img,id);
+   Farso::setTextureRGBA(img,id);
    SDL_FreeSurface(img);
 
    /* Fade In Screen */
-   fadeInTexture(id,0,0,SCREEN_X-1,SCREEN_Y-1, 800, 600);
+   fadeInTexture(id,0,0,Farso::SCREEN_X-1,Farso::SCREEN_Y-1, 800, 600);
 
    /* Wait until Mouse Button pressed or time passed */
    while( !done )
@@ -1138,7 +1138,8 @@ void engine::splashScreen()
       clearOpenGL();
       draw2DMode();
       glColor3f(1.0f, 1.0f, 1.0f);
-      textureToScreen(id, 0, 0, SCREEN_X-1, SCREEN_Y-1, 800, 600);
+      Farso::textureToScreen(id, 0, 0, 
+            Farso::SCREEN_X-1, Farso::SCREEN_Y-1, 800, 600);
       draw3DMode(option->getFarViewFactor()*OUTDOOR_FARVIEW);
       glFlush();
       SDL_GL_SwapBuffers();
@@ -1163,7 +1164,7 @@ void engine::splashScreen()
       SDL_Delay(50);
    }
 
-   fadeOutTexture(id,0,0,SCREEN_X-1,SCREEN_Y-1, 800, 600);
+   fadeOutTexture(id,0,0,Farso::SCREEN_X-1,Farso::SCREEN_Y-1, 800, 600);
    
    glEnable(GL_LIGHTING);
    glDeleteTextures(1,&id);
@@ -1207,7 +1208,8 @@ void engine::mainScreenEffect()
       draw2DMode();
       glPushMatrix();
       glScalef(scale, scale, scale);
-         textureToScreen(idTextura,0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
+      Farso::textureToScreen(idTextura,0,0,
+            Farso::SCREEN_X-1,Farso::SCREEN_Y-1,800,600);
       glPopMatrix();
       draw3DMode(option->getFarViewFactor()*OUTDOOR_FARVIEW);
 
@@ -1230,8 +1232,8 @@ int engine::optionsScreen()
    int timeAnterior = 0;
    Uint8* keys;
    int x,y;
-   guiObject* object = NULL;
-   int eventInfo = FARSO_EVENT_NONE;
+   Farso::GuiObject* object = NULL;
+   int eventInfo = Farso::EVENT_NONE;
 
    glDisable(GL_LIGHTING);
    glDisable(GL_FOG);
@@ -1254,7 +1256,8 @@ int engine::optionsScreen()
          
          glPushMatrix();
             draw2DMode();
-            textureToScreen(idTextura,0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
+            Farso::textureToScreen(idTextura,0,0,
+                  Farso::SCREEN_X-1,Farso::SCREEN_Y-1,800,600);
             gui->draw(proj,modl,viewPort);
 
             glPushMatrix();
@@ -1295,8 +1298,8 @@ int engine::characterScreen()
    int timeAnterior = 0;
    Uint8* keys;
    int x,y;
-   guiObject* guiObj = NULL;
-   int eventInfo = FARSO_EVENT_NONE;
+   Farso::GuiObject* guiObj = NULL;
+   int eventInfo = Farso::EVENT_NONE;
 
    int mods[6];
 
@@ -1346,7 +1349,8 @@ int engine::characterScreen()
          
          glPushMatrix();
             draw2DMode();
-            textureToScreen(idTextura,0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
+            Farso::textureToScreen(idTextura,0,0,
+                  Farso::SCREEN_X-1,Farso::SCREEN_Y-1,800,600);
             gui->draw(proj,modl,viewPort);
 
             glPushMatrix();
@@ -1540,10 +1544,10 @@ int engine::characterScreen()
  *********************************************************************/
 void engine::redefineWindow(SDL_Surface *screen, float actualFarView)
 {
-   glViewport(0, 0, SCREEN_X, SCREEN_Y);
+   glViewport(0, 0, Farso::SCREEN_X, Farso::SCREEN_Y);
    glMatrixMode(GL_PROJECTION);
    glLoadIdentity();
-   gluPerspective(45.0f, SCREEN_X / (float)SCREEN_Y, 1.0f, 
+   gluPerspective(45.0f, Farso::SCREEN_X / (float)Farso::SCREEN_Y, 1.0f, 
                   actualFarView);
    glGetIntegerv(GL_VIEWPORT, viewPort);
    glGetFloatv(GL_MODELVIEW_MATRIX, camProj);
@@ -1686,7 +1690,7 @@ void engine::init(SDL_Surface *screen)
    /* Main screen texture */
    img = IMG_Load(dir.getRealFile("texturas/general/inicio.png").c_str());
    glGenTextures(1,&idTextura);
-   setTexture(img, idTextura);
+   Farso::setTexture(img, idTextura);
    SDL_FreeSurface(img);
 
 
@@ -2022,7 +2026,7 @@ void engine::treatPendingActions()
 /*********************************************************************
  *                          Treat GUI Events                         *
  *********************************************************************/
-void engine::treatGuiEvents(guiObject* object, int eventInfo)
+void engine::treatGuiEvents(Farso::GuiObject* object, int eventInfo)
 {
    barterWindow tradeWindow;
    dialogWindow dlgWindow;
@@ -2180,7 +2184,7 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
 
             if(!activeCharacter->actualFeats->canUse(acFeat))
             {
-               warning warn;
+               Farso::Warning warn;
                warn.show(gettext("Warning"), 
                          gettext("Not enought points to use!"), gui);
             }
@@ -2237,7 +2241,7 @@ void engine::updateMouseWorldPos()
    GLfloat wx,wy,wz=1;
    
    /* Define Mouse OpenGL Window Coordinate */
-   wx = mouseX; wy = SCREEN_Y - mouseY; 
+   wx = mouseX; wy = Farso::SCREEN_Y - mouseY; 
   
    /* Get the Zbuffer position of the mouse */
    glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
@@ -2255,7 +2259,7 @@ void engine::updateMouseWorldPos()
 void engine::updateMouseFloorPos()
 {
    GLfloat wx = mouseX,
-           wy = SCREEN_Y - mouseY;
+           wy = Farso::SCREEN_Y - mouseY;
 
    GLdouble cX=0, cY=0, cZ=0;
    GLdouble fX=0, fY=0, fZ=0;
@@ -2650,7 +2654,7 @@ int engine::treatIO(SDL_Surface *screen)
    GLfloat varTempo;  // Time Variation
 
    time = SDL_GetTicks();
-   srand(time);
+   srand(time*rand());
    varTempo = (time-lastRead);
    if( ((varTempo)) >= UPDATE_RATE)
    {
@@ -3171,7 +3175,7 @@ int engine::treatIO(SDL_Surface *screen)
                                          activeCharacter->scNode->getPosZ());
 
       /* Get GUI Event */ 
-      guiObject* object;
+      Farso::GuiObject* object;
       object = gui->manipulateEvents(x,y,mButton,keys, guiEvent);
       /* Threat the GUI */
       treatGuiEvents(object, guiEvent);
@@ -3631,10 +3635,10 @@ void engine::drawWithShadows(bool flush)
    shadowMap.endLightRender();
 
    /* Now set to the camera view and render again! */
-   glViewport(0, 0, SCREEN_X, SCREEN_Y);
+   glViewport(0, 0, Farso::SCREEN_X, Farso::SCREEN_Y);
    glMatrixMode(GL_PROJECTION);
    glLoadIdentity();
-   gluPerspective(45.0f, SCREEN_X / (float)SCREEN_Y, 1.0f, 
+   gluPerspective(45.0f, Farso::SCREEN_X / (float)Farso::SCREEN_Y, 1.0f, 
                   OUTDOOR_FARVIEW);
    glGetIntegerv(GL_VIEWPORT, viewPort);
    glGetFloatv(GL_MODELVIEW_MATRIX, camProj);
@@ -3965,10 +3969,10 @@ void engine::showImage(string fileName)
    SDL_Surface* img = IMG_Load(fileName.c_str()); 
    glDisable(GL_LIGHTING);
    glGenTextures(1,&id);
-   setTextureRGBA(img,id);
+   Farso::setTextureRGBA(img,id);
    SDL_FreeSurface(img);
 
-   fadeInTexture(id,0,0,SCREEN_X-1,SCREEN_Y-1, 800, 600);
+   fadeInTexture(id,0,0,Farso::SCREEN_X-1,Farso::SCREEN_Y-1, 800, 600);
 
    /* Wait until Mouse Button pressed */
    while(!(mButton & SDL_BUTTON(1)))
@@ -3981,7 +3985,8 @@ void engine::showImage(string fileName)
       clearOpenGL();
       draw2DMode();
       glColor3f(1.0f, 1.0f, 1.0f);
-      textureToScreen(id, 0, 0, SCREEN_X-1, SCREEN_Y-1, 800, 600);
+      Farso::textureToScreen(id, 0, 0, Farso::SCREEN_X-1, 
+            Farso::SCREEN_Y-1, 800, 600);
       draw3DMode(option->getFarViewFactor()*OUTDOOR_FARVIEW);
       glFlush();
       SDL_GL_SwapBuffers();
@@ -3989,7 +3994,7 @@ void engine::showImage(string fileName)
       SDL_Delay(50);
    }
 
-   fadeOutTexture(id,0,0,SCREEN_X-1,SCREEN_Y-1, 800, 600);
+   fadeOutTexture(id,0,0,Farso::SCREEN_X-1,Farso::SCREEN_Y-1, 800, 600);
    
    glEnable(GL_LIGHTING);
    glDeleteTextures(1,&id);

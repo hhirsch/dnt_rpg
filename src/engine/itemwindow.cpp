@@ -26,7 +26,7 @@ using namespace std;
 /********************************************************************
  *                           Constructor                            *
  ********************************************************************/
-itemWindow::itemWindow(guiInterface* interf)
+itemWindow::itemWindow(Farso::GuiInterface* interf)
 {
    inter = interf;
    intWindow = NULL;
@@ -46,8 +46,8 @@ itemWindow::~itemWindow()
 void itemWindow::open(object* item)
 {
    /* Set open position */
-   int centerY = SCREEN_Y / 2;
-   int centerX = SCREEN_X / 2;
+   int centerY = Farso::SCREEN_Y / 2;
+   int centerX = Farso::SCREEN_X / 2;
 
    int curY = 0;
    int prvY = 0;
@@ -279,11 +279,11 @@ bool itemWindow::isOpen()
 /********************************************************************
  *                              treat                               *
  ********************************************************************/
-int itemWindow::treat(guiObject* object, int eventInfo)
+int itemWindow::treat(Farso::GuiObject* object, int eventInfo)
 {
-   if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
+   if(eventInfo == Farso::EVENT_PRESSED_BUTTON)
    {
-      if(object == (guiObject*) okButton)
+      if(object == (Farso::GuiObject*) okButton)
       {
          close();
          return(1);

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -24,7 +24,7 @@
 /***********************************************************************
  *                            Constructor                              *
  ***********************************************************************/
-nodeEditor::nodeEditor(guiInterface* g)
+nodeEditor::nodeEditor(Farso::GuiInterface* g)
 {
    gui = g;
    nodeWindow = NULL;
@@ -186,7 +186,7 @@ void nodeEditor::selectNode(sceneNode* scNode)
 /***********************************************************************
  *                               eventGot                              *
  ***********************************************************************/
-bool nodeEditor::eventGot(int eventInfo, guiObject* obj)
+bool nodeEditor::eventGot(int eventInfo, Farso::GuiObject* obj)
 {
    float delta=deltaValue;
 
@@ -198,7 +198,7 @@ bool nodeEditor::eventGot(int eventInfo, guiObject* obj)
 
    /* Define Delta Value */
 
-   if(eventInfo == FARSO_EVENT_ON_PRESS_TAB_BUTTON)
+   if(eventInfo == Farso::EVENT_ON_PRESS_TAB_BUTTON)
    {
       /* Angles */
       if(obj == clearRot)
@@ -304,7 +304,7 @@ bool nodeEditor::eventGot(int eventInfo, guiObject* obj)
          }
       }
    }
-   else if(eventInfo == FARSO_EVENT_PRESSED_TAB_BUTTON)
+   else if(eventInfo == Farso::EVENT_PRESSED_TAB_BUTTON)
    {
       if(obj == moveX[0])
       {
@@ -361,7 +361,7 @@ bool nodeEditor::eventGot(int eventInfo, guiObject* obj)
          gui->closeWindow(nodeWindow);
       }
    }
-   else if(eventInfo == FARSO_EVENT_WROTE_TEXT_BAR)
+   else if(eventInfo == Farso::EVENT_WROTE_TEXT_BAR)
    {
       if(obj == deltaText)
       {

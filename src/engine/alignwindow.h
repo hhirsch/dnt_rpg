@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -37,32 +37,33 @@ class alignWindow
        * \param alg -> alignmnet list
        * \param inter -> GUI interface to use
        * \param actual -> pointer to the actual alignent */
-      alignWindow(aligns* alg, guiInterface* inter, align** actual);
+      alignWindow(aligns* alg, Farso::GuiInterface* inter, align** actual);
 
       /*! Treat Events on Window. 
        * \param inter -> pointer to GUI interface
        * \param object -> last GUI object
        * \param eventInfo -> last GUI Event
        * \return 0 on close, 1 otherwise */
-      int treat(guiObject* object, int eventInfo, guiInterface* inter );
+      int treat(Farso::GuiObject* object, int eventInfo, 
+            Farso::GuiInterface* inter );
 
-      window*      intWindow;        /**< Pointer to the internal window */
+      Farso::Window* intWindow;        /**< Pointer to the internal window */
 
    private:
       aligns*      externalAligns;   /**< Pointer to the Aligns List */
       align*       actualAlign;      /**< Pointer to actual aligned */
       align**      choosedAlign;     /**< Pointer to the pointer of choosed */
 
-      button* buttonConfirm;          /**< Confirm Button */
-      button* buttonCancel;           /**< Cancel Button */
+      Farso::Button* buttonConfirm;          /**< Confirm Button */
+      Farso::Button* buttonCancel;           /**< Cancel Button */
 
-      button* buttonPrevious;         /**< Previous Button */
-      button* buttonNext;             /**< Next Button */
+      Farso::Button* buttonPrevious;         /**< Previous Button */
+      Farso::Button* buttonNext;             /**< Next Button */
 
-      textBox* textName;             /**< Text Name */
-      rolBar* textDesc;              /**< Text Description */
+      Farso::TextBox* textName;             /**< Text Name */
+      Farso::RolBar* textDesc;              /**< Text Description */
 
-      picture* alignImage;           /**< Alignment Image */
+      Farso::Picture* alignImage;           /**< Alignment Image */
 
 };
 

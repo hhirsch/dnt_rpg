@@ -31,8 +31,8 @@ class partOriginWindow
 {
    public:
       /*! Constructor 
-       * \param interf -> pointer to the current guiInterface */
-      partOriginWindow(guiInterface* interf);
+       * \param interf -> pointer to the current Farso::GuiInterface */
+      partOriginWindow(Farso::GuiInterface* interf);
       /*! Destructor */
       ~partOriginWindow();
 
@@ -42,10 +42,10 @@ class partOriginWindow
       void setParticle(partAux* p);
 
       /*! Treat the window events
-       * \param object -> guiObject where event occurred
+       * \param object -> Farso::GuiObject where event occurred
        * \param eventInfo -> info about the happened event
        * \return true when event is related to partElement window */
-      bool treat(guiObject* object, int eventInfo);
+      bool treat(Farso::GuiObject* object, int eventInfo);
 
       /*! Verify if window is open
        * \return true if open */
@@ -67,19 +67,19 @@ class partOriginWindow
       /*! Reset the element, to update it with new values */
       void resetElement();
 
-      guiInterface* gui;        /**< Gui used */
-      window* curWindow;        /**< Current in use window */
+      Farso::GuiInterface* gui;        /**< Gui used */
+      Farso::Window* curWindow;        /**< Current in use window */
       partAux* part;            /**< Current particle system edited */
 
-      button* nextType;         /**< To select next type */
-      button* previousType;     /**< To select previous type */
-      textBox* type;            /**< Current type text */
+      Farso::Button* nextType;         /**< To select next type */
+      Farso::Button* previousType;     /**< To select previous type */
+      Farso::TextBox* type;            /**< Current type text */
 
-      textBox* text[3];         /**< Desc text */
+      Farso::TextBox* text[3];         /**< Desc text */
 
-      textBar* pos1[3];          /**< Lower Position edition */
-      textBar* pos2[3];          /**< Upper Position edition (only for quad) */
-      textBar* radius;           /**< Radius (only for sphere) */
+      Farso::TextBar* pos1[3];   /**< Lower Position edition */
+      Farso::TextBar* pos2[3];   /**< Upper Position edition (only for quad) */
+      Farso::TextBar* radius;    /**< Radius (only for sphere) */
 };
 
 #endif

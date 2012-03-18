@@ -30,40 +30,38 @@ using namespace std;
  *********************************************************************/
 void showLoading(SDL_Surface* img, GLuint* texturaTexto, 
                  GLuint texturaCarga, const char* texto,
-                 healthBar* progress)
+                 Farso::HealthBar* progress)
 {
    dirs dir;
-   dntFont fnt;
-   int centerY = SCREEN_Y / 2;
-   int centerX = SCREEN_X / 2;
+   Farso::Font fnt;
+   int centerY = Farso::SCREEN_Y / 2;
+   int centerX = Farso::SCREEN_X / 2;
    int midW = img->w / 2;
    int midH = midW / 2;
 
    glClearColor(0,0,0,1);
    glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
-   color_Set(0,0,0,255);
-   rectangle_Fill(img,0,0,img->w-1,img->h-1);
-   color_Set(200,20,20,255);
+   Farso::color_Set(0,0,0,255);
+   Farso::rectangle_Fill(img,0,0,img->w-1,img->h-1);
+   Farso::color_Set(200,20,20,255);
    fnt.defineFont(dir.getRealFile(DNT_FONT_TIMES), 12);
-   fnt.defineFontAlign(DNT_FONT_ALIGN_CENTER);
+   fnt.defineFontAlign(Farso::Font::ALIGN_CENTER);
    fnt.write(img,128,0,texto);
    progress->draw();
    glGenTextures(1,texturaTexto);
-   setTextureRGBA(img,*texturaTexto,false,GL_RGBA);
+   Farso::setTextureRGBA(img,*texturaTexto,false,GL_RGBA);
 
    draw2DMode();
-   textureToScreen(texturaCarga, centerX-midW, centerY-midH,
-                                 centerX+midW, centerY+midH,
-                   2*midW,2*midH);
-   textureToScreen(*texturaTexto, centerX-midW, centerY+midH+1,
-                                  centerX+midW, centerY+midH+33,
-                   2*midW,128);
+   Farso::textureToScreen(texturaCarga, centerX-midW, centerY-midH,
+         centerX+midW, centerY+midH, 2*midW,2*midH);
+   Farso::textureToScreen(*texturaTexto, centerX-midW, centerY+midH+1,
+         centerX+midW, centerY+midH+33,2*midW,128);
 
    draw3DMode(OUTDOOR_FARVIEW);
    glFlush();
    SDL_GL_SwapBuffers();
    glDeleteTextures(1,texturaTexto);
-   fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
+   fnt.defineFontAlign(Farso::Font::ALIGN_LEFT);
 }
 
 /*********************************************************************
@@ -299,7 +297,7 @@ void draw2DMode()
 
    glMatrixMode(GL_PROJECTION);
    glLoadIdentity();
-   gluOrtho2D(0.0, (GLdouble) SCREEN_X, 0.0, (GLdouble) SCREEN_Y);
+   gluOrtho2D(0.0, (GLdouble) Farso::SCREEN_X, 0.0, (GLdouble) Farso::SCREEN_Y);
    glMatrixMode(GL_MODELVIEW);
    glLoadIdentity();
 }
@@ -311,7 +309,8 @@ void draw3DMode(float actualFarView)
 {
    glMatrixMode (GL_PROJECTION);
    glLoadIdentity ();
-   gluPerspective(45.0, SCREEN_X / (float)SCREEN_Y, 1.0, actualFarView);
+   gluPerspective(45.0, Farso::SCREEN_X / (float)Farso::SCREEN_Y, 
+         1.0, actualFarView);
    glMatrixMode (GL_MODELVIEW);
    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
    /* Reload the saved 3D One */
@@ -340,13 +339,14 @@ SDL_Surface* readFrontBuffer()
 #endif
 
    /* Create the Screen */
-   screen = SDL_CreateRGBSurface(SDL_SWSURFACE, SCREEN_X, SCREEN_Y, 32, 
-                                 rmask, gmask, bmask, amask);
+   screen = SDL_CreateRGBSurface(SDL_SWSURFACE, 
+         Farso::SCREEN_X, Farso::SCREEN_Y, 32, 
+         rmask, gmask, bmask, amask);
 
    /* Read screen from the buffer */
    glReadBuffer(GL_FRONT);
-   glReadPixels(0, 0, SCREEN_X, SCREEN_Y, GL_RGBA, GL_UNSIGNED_BYTE, 
-                screen->pixels);
+   glReadPixels(0, 0, Farso::SCREEN_X, Farso::SCREEN_Y, 
+         GL_RGBA, GL_UNSIGNED_BYTE, screen->pixels);
 
    return(screen);
 }
@@ -387,8 +387,9 @@ bool screenshot(SDL_Surface* screen, string fileName, bool thumb)
    }
    else
    {
-      dest = SDL_CreateRGBSurface(SDL_SWSURFACE, SCREEN_X, SCREEN_Y, 32, 
-                                  rmask, gmask, bmask, amask);
+      dest = SDL_CreateRGBSurface(SDL_SWSURFACE, 
+            Farso::SCREEN_X, Farso::SCREEN_Y, 32, 
+            rmask, gmask, bmask, amask);
    }
 
    /* invert the image Y or scale and invert it */
@@ -399,7 +400,7 @@ bool screenshot(SDL_Surface* screen, string fileName, bool thumb)
       {
          for(j = 0; j < screen->h; j++)
          {
-            pixel_Set(dest,i,j, pixel_Get(screen,i,screen->h-j-1));
+            Farso::pixel_Set(dest,i,j, Farso::pixel_Get(screen,i,screen->h-j-1));
          }
       }
    }
@@ -412,9 +413,9 @@ bool screenshot(SDL_Surface* screen, string fileName, bool thumb)
       {
          for(j = 0; j < THUMB_Y; j++)
          {
-            pixel_Set(dest,i,j, 
-                      pixel_Get_Interpolate(screen, (i*sumX), 
-                                            (screen->h - ((j-1)*sumY))));
+            Farso::pixel_Set(dest,i,j, 
+                  Farso::pixel_Get_Interpolate(screen, (i*sumX), 
+                     (screen->h - ((j-1)*sumY))));
          }
       }
    }

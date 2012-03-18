@@ -35,8 +35,8 @@ class partWindow
 {
    public:
       /*! Constructor 
-       * \param interf -> pointer to the current guiInterface */
-      partWindow(guiInterface* interf);
+       * \param interf -> pointer to the current Farso::GuiInterface */
+      partWindow(Farso::GuiInterface* interf);
 
       /*! Destructor */
       ~partWindow();
@@ -46,10 +46,10 @@ class partWindow
       void set(partAux* p);
 
       /*! Treat the window events
-       * \param object -> guiObject where event occurred
+       * \param object -> Farso::GuiObject where event occurred
        * \param eventInfo -> info about the happened event
        * \return true when event is related to partWindow */
-      bool treat(guiObject* object, int eventInfo);
+      bool treat(Farso::GuiObject* object, int eventInfo);
 
       /*! Verify if window is open
        * \return true if open */
@@ -77,41 +77,41 @@ class partWindow
       partElementWindow* elementWindow; /**< The window to edit elements */
       partOriginWindow* originWindow;   /**< The window to edit origin */
 
-      window* textureWindow;            /**< The window to select textures */
-      fileSel* fileSelector;            /**< The texture file selector */
+      Farso::Window* textureWindow;  /**< The window to select textures */
+      Farso::FileSel* fileSelector;      /**< The texture file selector */
 
-      window* curWindow;       /**< Internal window */
-      guiInterface* gui;       /**< The guiInterface used */
+      Farso::Window* curWindow;       /**< Internal window */
+      Farso::GuiInterface* gui;       /**< The Farso::GuiInterface used */
 
       partAux* part;           /**< The particle system to edit */
       int max;                 /**< Max number of particles got for current
                                     particle system */
 
-      textBox* curParticles;   /**< Current number of particles */
+      Farso::TextBox* curParticles;   /**< Current number of particles */
 
-      textBar* maxParticles;
-      textBar* maxLifeTime;
-      textBar* particleLifeTime;
-      textBar* gravity;
+      Farso::TextBar* maxParticles;
+      Farso::TextBar* maxLifeTime;
+      Farso::TextBar* particleLifeTime;
+      Farso::TextBar* gravity;
 
-      button* previousDrawMode;
-      textBox* drawMode;
-      button* nextDrawMode;
+      Farso::Button* previousDrawMode;
+      Farso::TextBox* drawMode;
+      Farso::Button* nextDrawMode;
 
-      button* texture;
-      button* restart;
+      Farso::Button* texture;
+      Farso::Button* restart;
 
-      button* previousRenderMode;
-      textBox* renderMode;
-      button* nextRenderMode;
+      Farso::Button* previousRenderMode;
+      Farso::TextBox* renderMode;
+      Farso::Button* nextRenderMode;
 
-      textBar* pointSize;
+      Farso::TextBar* pointSize;
 
-      cxSel* windAffect;
-      cxSel* floorCollision;
+      Farso::CxSel* windAffect;
+      Farso::CxSel* floorCollision;
 
-      button* element;
-      button* origin;
+      Farso::Button* element;
+      Farso::Button* origin;
 
 };
 

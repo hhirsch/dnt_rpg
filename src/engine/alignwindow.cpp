@@ -25,12 +25,13 @@
 /************************************************************************
  *                           Constructor                                *
  ************************************************************************/
-alignWindow::alignWindow(aligns* alg, guiInterface* inter, align** actual)
+alignWindow::alignWindow(aligns* alg, Farso::GuiInterface* inter, 
+      align** actual)
 {
    dirs dir;
-   dntFont fnt;
-   int centerY = SCREEN_Y / 2;
-   int centerX = SCREEN_X / 2;
+   Farso::Font fnt;
+   int centerY = Farso::SCREEN_Y / 2;
+   int centerX = Farso::SCREEN_X / 2;
 
    externalAligns = alg;
    choosedAlign = actual;
@@ -56,8 +57,8 @@ alignWindow::alignWindow(aligns* alg, guiInterface* inter, align** actual)
    /* Align Description */
    textDesc = intWindow->getObjectsList()->insertRolBar(5,38,282,180,"");
    textDesc->addText(actualAlign->description.c_str(),
-                     dir.getRealFile(DNT_FONT_ARIAL), 10, DNT_FONT_ALIGN_LEFT,
-                     DNT_FONT_STYLE_NORMAL, 86, 161, 132); 
+         dir.getRealFile(DNT_FONT_ARIAL), 10, Farso::Font::ALIGN_LEFT,
+         Farso::Font::STYLE_NORMAL, 86, 161, 132); 
    textDesc->setFirstLine(0);
       
    /* Name and Selectors */
@@ -67,8 +68,8 @@ alignWindow::alignWindow(aligns* alg, guiInterface* inter, align** actual)
                                                  fnt.createUnicode(0x25BA),0);
    textName = intWindow->getObjectsList()->insertTextBox(20,19,267,37,1, 
                                                   actualAlign->name.c_str());
-   textName->setFont(dir.getRealFile(DNT_FONT_ARIAL),10,DNT_FONT_ALIGN_CENTER,
-                     DNT_FONT_STYLE_BOLD);
+   textName->setFont(dir.getRealFile(DNT_FONT_ARIAL), 10, 
+         Farso::Font::ALIGN_CENTER, Farso::Font::STYLE_BOLD);
 
    /* Confirm Button */
    buttonConfirm = intWindow->getObjectsList()->insertButton(203,229,273,248, 
@@ -94,14 +95,15 @@ alignWindow::alignWindow(aligns* alg, guiInterface* inter, align** actual)
 /************************************************************************
  *                              treat                                   *
  ************************************************************************/
-int alignWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
+int alignWindow::treat(Farso::GuiObject* object, int eventInfo, 
+      Farso::GuiInterface* inter)
 {
-   if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
+   if(eventInfo == Farso::EVENT_PRESSED_BUTTON)
    {
-      if( (object == (guiObject*) buttonNext) || 
-          (object == (guiObject*) buttonPrevious))
+      if( (object == (Farso::GuiObject*) buttonNext) || 
+          (object == (Farso::GuiObject*) buttonPrevious))
       {
-         if(object == (guiObject*) buttonNext)
+         if(object == (Farso::GuiObject*) buttonNext)
          {
             actualAlign = (align*)actualAlign->getNext();
          }
@@ -113,19 +115,19 @@ int alignWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
          textName->setText(actualAlign->name);
          textDesc->setText("");
          textDesc->addText(actualAlign->description.c_str(),
-                     dir.getRealFile(DNT_FONT_ARIAL), 10, DNT_FONT_ALIGN_LEFT,
-                     DNT_FONT_STYLE_NORMAL, 86, 161, 132);
+               dir.getRealFile(DNT_FONT_ARIAL), 10, Farso::Font::ALIGN_LEFT,
+               Farso::Font::STYLE_NORMAL, 86, 161, 132);
          textDesc->setFirstLine(0);
          alignImage->set(actualAlign->image);
          intWindow->draw(0,0);
       }
-      else if(object == (guiObject*) buttonConfirm)
+      else if(object == (Farso::GuiObject*) buttonConfirm)
       {
          *choosedAlign = actualAlign;
          inter->closeWindow(intWindow);
          return(ALIGNW_CONFIRM);
       }
-      else if(object == (guiObject*) buttonCancel) 
+      else if(object == (Farso::GuiObject*) buttonCancel) 
       {
          inter->closeWindow(intWindow);
          *choosedAlign = NULL;

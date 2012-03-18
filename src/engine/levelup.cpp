@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -57,7 +57,7 @@ levelUp::~levelUp()
  ***********************************************************************/
 void levelUp::doLevelUp(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
-   guiObject* obj;
+   Farso::GuiObject* obj;
    Uint8 mButton;
    Uint8* keys;
    options option;
@@ -76,14 +76,14 @@ void levelUp::doLevelUp(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
    current->getEffects()->unApply();
 
    /* Create the new GUI */
-   guiInterface* gui = new guiInterface("");
+   Farso::GuiInterface* gui = new Farso::GuiInterface("");
 
    /* Create the background */
    GLuint tituloId;
    SDL_Surface* img = IMG_Load(
          dir.getRealFile("texturas/general/inicio.png").c_str());
    glGenTextures(1,&tituloId);
-   setTexture(img,tituloId);
+   Farso::setTexture(img,tituloId);
    SDL_FreeSurface(img);
 
    /* Open the class window */
@@ -110,7 +110,8 @@ void levelUp::doLevelUp(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
          /* Render Things */
          glPushMatrix();
             draw2DMode();
-            textureToScreen(tituloId,0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
+            Farso::textureToScreen(tituloId,0,0,
+                  Farso::SCREEN_X-1,Farso::SCREEN_Y-1,800,600);
             gui->draw(proj,modl,viewPort);
             glPushMatrix();
                cursors.draw(x, y);
@@ -147,7 +148,7 @@ void levelUp::doLevelUp(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
                   {
                      /* Can't, so must alert user and keep at the 
                       * class window */                     
-                     warning warn;
+                     Farso::Warning warn;
                      clWindow = new classWindow(gui, &selClass);
                      state = LEVEL_UP_CLASS_WINDOW;
                      warn.show(gettext("Warning"), 

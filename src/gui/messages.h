@@ -26,19 +26,22 @@
 #include <SDL/SDL_opengl.h>
 #include <string>
 
+namespace Farso
+{
+
 /*! The warning class is used to show messages to the user */
-class warning
+class Warning
 {
    public:
       /*! Show a message to user
        * \param title -> title of the window
        * \param message -> message to show to user
        * \param gui -> pointer to the current interface */
-      void show(std::string title, std::string message, guiInterface* gui);
+      void show(std::string title, std::string message, GuiInterface* gui);
 
       /*! Get the okButton pointer
        * \return -> pointer to the okButton */
-      button* getOkButton();
+      Button* getOkButton();
 
       /*! Verify if the warnWindow is opened
        * \return -> true, if opened, false otherwise */
@@ -48,10 +51,12 @@ class warning
       void close();
 
    protected:
-      static window* warnWindow;         /**< The warning window */
-      static guiInterface* lastGui;      /**< The guiInterface in use */
-      static button* okButton;           /**< The Ok Button */
+      static Window* warnWindow;         /**< The warning window */
+      static GuiInterface* lastGui;      /**< The guiInterface in use */
+      static Button* okButton;           /**< The Ok Button */
 };
+
+}
 
 #endif
 

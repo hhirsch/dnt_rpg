@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -37,7 +37,7 @@ class classWindow
        * \param inter -> pointer to the GUI
        * \param ftl -> pointer to the featsList
        * \param retClass -> pointer to the choosed class */
-      classWindow(guiInterface* inter, classe** retClass);
+      classWindow(Farso::GuiInterface* inter, classe** retClass);
 
       /*! Destructor */
       ~classWindow();
@@ -47,9 +47,10 @@ class classWindow
        * \param object -> last GUI object
        * \param eventInfo -> last GUI Event
        * \return 0 on close, 1 otherwise */
-      int treat(guiObject* object, int eventInfo,guiInterface* inter); 
+      int treat(Farso::GuiObject* object, int eventInfo, 
+            Farso::GuiInterface* inter); 
 
-      window*      intWindow;           /**< Pointer to the internal window */
+      Farso::Window*      intWindow;  /**< Pointer to the internal window */
 
    private:
       int           curClass;         /**< Pointer to current Class */
@@ -57,20 +58,20 @@ class classWindow
       classe**      choosedClass;     /**< Pointer to choosed pointer class */
       int           totalClasses;     /**< Total Avaible classes */
 
-      button* buttonConfirm;
-      button* buttonCancel;
+      Farso::Button* buttonConfirm;
+      Farso::Button* buttonCancel;
 
-      button* buttonPrevious;
-      button* buttonNext;
+      Farso::Button* buttonPrevious;
+      Farso::Button* buttonNext;
 
-      textBox* textName;
-      textBox* textDescTitle;
-      rolBar* textDesc;
-      rolBar* textCharac;
-      textBox* textCharacTitle;
-      textBox* textCitation;
+      Farso::TextBox* textName;
+      Farso::TextBox* textDescTitle;
+      Farso::RolBar* textDesc;
+      Farso::RolBar* textCharac;
+      Farso::TextBox* textCharacTitle;
+      Farso::TextBox* textCitation;
 
-      picture* classImage;
+      Farso::Picture* classImage;
 
       /*! Draw the characteritics */
       void setCharacteristics();

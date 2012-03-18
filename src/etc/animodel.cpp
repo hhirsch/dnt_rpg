@@ -81,8 +81,8 @@ GLuint aniModel::loadTexture(const string& strFilename)
    }
 
    /* Show Warning if not power of 2 */
-   if( (img->h != smallestPowerOfTwo(img->h)) ||
-       (img->w != smallestPowerOfTwo(img->w)) )
+   if( (img->h != Farso::smallestPowerOfTwo(img->h)) ||
+       (img->w != Farso::smallestPowerOfTwo(img->w)) )
    {
       cout << "Warning: image '" << strFilename 
            << "' is of non-power of two dimension '" 

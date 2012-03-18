@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -51,8 +51,8 @@ class inventWindow
        * \param inter -> GUI interface to use 
        * \param itemWindow -> pointer to the info window used
        * \param usedEngine -> pointer to the engine used */
-      inventWindow(character *invent, guiInterface* inter, itemWindow* infoW,
-            engine* usedEngine);
+      inventWindow(character *invent, Farso::GuiInterface* inter, 
+            itemWindow* infoW, engine* usedEngine);
 
       /*! Constructor
        * \param xa -> position X to open the window
@@ -63,7 +63,7 @@ class inventWindow
        * \param itemWindow -> pointer to the info window used
        * \param usedEngine -> pointer to the engine used */
       inventWindow(int xa, int ya, std::string title, 
-                   character *invent, guiInterface* inter,
+                   character *invent, Farso::GuiInterface* inter,
                    itemWindow* infoW, engine* usedEngine);
 
       /*! Destructor */
@@ -78,7 +78,7 @@ class inventWindow
        * \param Z ->     "       "    "    "      "     Z    "  
        * \param seller -> if is the seller inventory
        * \return actionCode if event is threated, 0 otherwise. */
-      int treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
+      int treat(Farso::GuiObject* guiObj, int eventInfo, cursor* mouseCursor,
                  Map* actualMap, GLfloat X, GLfloat Z, bool seller=false);
 
       /*! Verify if window is still opened
@@ -92,7 +92,8 @@ class inventWindow
 
       /*! Init the window */
       void init(int xa, int ya, std::string title, character *invent,
-                guiInterface* inter, itemWindow* infoW, engine* usedEngine);
+                Farso::GuiInterface* inter, itemWindow* infoW, 
+                engine* usedEngine);
 
       /*! Open the Inventory Object Menu  */
       void openMenu(int x, int y, int type, bool seller);
@@ -107,25 +108,25 @@ class inventWindow
       inventory* inventories;         /**< Extern Inventories*/
       character* owner;               /**< The inventories owner */
 
-      guiInterface* interf;              /**< Pointer to Interface */
-      window* intWindow;                 /**< Internal Window */
-      tabButton* inventoryTabButton[4];  /**< Inventory Tab Button */
-      oneTabButton* inventoryButton[4];  /**< Button to acces inventory */
-      tabBox* inventoryTabBox;           /**< The Inventory selector */
+      Farso::GuiInterface* interf;       /**< Pointer to Interface */
+      Farso::Window* intWindow;          /**< Internal Window */
+      Farso::TabButton* inventoryTabButton[4];/**< Inventory Tab Button */
+      Farso::OneTabButton* inventoryButton[4];/**< Button to acces inventory */
+      Farso::TabBox* inventoryTabBox;    /**< The Inventory selector */
       
-      tabButton* characterTabButton;  /**< Character Tab Button */
-      oneTabButton* headButton;       /**< Head Button */
-      oneTabButton* leftHandButton;   /**< Left Hand Button */
-      oneTabButton* rightHandButton;  /**< Right Hand Button */
-      oneTabButton* leftFingerButton; /**< Left Finger Button */
-      oneTabButton* rightFingerButton;/**< Right Finger Button */
-      oneTabButton* neckButton;       /**< Neck Button */
-      oneTabButton* footButton;       /**< Foot Button */
-      oneTabButton* bodyButton;       /**< Body (Torso) Button */
+      Farso::TabButton* characterTabButton;  /**< Character Tab Button */
+      Farso::OneTabButton* headButton;       /**< Head Button */
+      Farso::OneTabButton* leftHandButton;   /**< Left Hand Button */
+      Farso::OneTabButton* rightHandButton;  /**< Right Hand Button */
+      Farso::OneTabButton* leftFingerButton; /**< Left Finger Button */
+      Farso::OneTabButton* rightFingerButton;/**< Right Finger Button */
+      Farso::OneTabButton* neckButton;       /**< Neck Button */
+      Farso::OneTabButton* footButton;       /**< Foot Button */
+      Farso::OneTabButton* bodyButton;       /**< Body (Torso) Button */
 
       int state;                      /**< Internal State of the Window */
       int currentInventory;           /**< Current Opened Inventory */
-      menu* objectMenu;               /**< Pointer to Object Actions Menu */
+      Farso::Menu* objectMenu;        /**< Pointer to Object Actions Menu */
       int menuType;                   /**< Type of the menu opened */
       int objWhere;                   /**< Where The Object is on Inventory */
       int objX;                       /**< X of the object in inventory */

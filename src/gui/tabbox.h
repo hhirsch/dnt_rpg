@@ -22,6 +22,7 @@
 #define _farso_tab_box_h
 
 #include <list>
+#include <string>
 
 #include "color.h"
 #include "draw.h"
@@ -29,25 +30,27 @@
 #include "guiobject.h"
 #include "guilist.h"
 
-#include <string>
+namespace Farso
+{
+
 /*! tabObj is used to keep information about a single option at the tabBox */
-class tabObj
+class TabObj
 {
    public:
       /*! Constructor */
-      tabObj(int w, int h, SDL_Surface* surface);
+      TabObj(int w, int h, SDL_Surface* surface);
       /*! Destructor */
-      ~tabObj();
+      ~TabObj();
 
-      guiList* list;      /**< The guiList itself */
+      GuiList* list;      /**< The guiList itself */
       std::string title;  /**< The title */
 };
 
-/*! The tabBox class is a tabWidget for FarSo. It have a 
+/*! The TabBox class is a tabWidget for FarSo. It have a 
  * gui objects list for each tab option, only displaying one
  * per time (that that is selected). 
  * \note each guiList can have only one tabBox */
-class tabBox: public guiObject
+class TabBox: public GuiObject
 {
    public:
       /*! Constructor 
@@ -56,14 +59,14 @@ class tabBox: public guiObject
        * \param xb -> x2 coordinate
        * \param yb -> y2 coordinate
        * \param screen -> pointer to the window surface */
-      tabBox(int xa, int ya, int xb, int yb, SDL_Surface* screen);
+      TabBox(int xa, int ya, int xb, int yb, SDL_Surface* screen);
 
       /*! Destructor */
-      ~tabBox();
+      ~TabBox();
 
       /*! Get the active Element List
        * \return -> guiList relative to the active option or NULL */
-      guiList* getActiveList();
+      GuiList* getActiveList();
 
       /*! Get the active element title
        * \return -> title of the active element (or "") */
@@ -72,17 +75,17 @@ class tabBox: public guiObject
       /*! Get list relative to the option
        * \param opt -> option number to get guiList from [0,total)
        * \return -> guiList relative to the option or NULL */
-      guiList* getList(int opt);
+      GuiList* getList(int opt);
 
       /*! Get list relative to the option
        * \param title -> option title to get guiList from
        * \return -> guiList relative to the option or NULL */
-      guiList* getList(std::string title);
+      GuiList* getList(std::string title);
 
       /*! Insert a new option at the tabBox
        * \param title -> unique title for the option 
        * \return -> pointer to th object guiList */
-      guiList* insertOption(std::string title);
+      GuiList* insertOption(std::string title);
 
       /*! Draw the tabBox */
       void draw();
@@ -98,12 +101,14 @@ class tabBox: public guiObject
       /*! Get the tabObj relative to the number
        * \param opt -> tabObj index
        * \return -> pointer to the found tabObj or NULL */
-      tabObj* getObject(int opt);
+      TabObj* getObject(int opt);
 
-      std::list<tabObj*> tabs;
+      std::list<TabObj*> tabs;
 
-      tabObj* active;  /**< The active tabObj */
+      TabObj* active;  /**< The active tabObj */
 };
+
+}
 
 #endif
 

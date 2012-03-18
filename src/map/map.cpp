@@ -571,8 +571,8 @@ GLuint Map::insertTexture(string arq, string name, bool atLast)
    }
 
    /* Show Warning if not power of 2 */
-   if( (img->h != smallestPowerOfTwo(img->h)) ||
-       (img->w != smallestPowerOfTwo(img->w)) )
+   if( (img->h != Farso::smallestPowerOfTwo(img->h)) ||
+       (img->w != Farso::smallestPowerOfTwo(img->w)) )
    {
       cerr << "Warning: image '" << arq
            << "' is of non-power of two dimension '"
@@ -2739,10 +2739,11 @@ void Map::drawMiniMap()
    /* Reset the View */
    glDisable(GL_LIGHT0);
    glDisable(GL_LIGHTING);
-   glViewport(0,0,SCREEN_X, SCREEN_Y);
+   glViewport(0,0,Farso::SCREEN_X, Farso::SCREEN_Y);
    glMatrixMode (GL_PROJECTION);
    glLoadIdentity ();
-   gluPerspective(45.0, SCREEN_X / (float)SCREEN_Y, 1.0, OUTDOOR_FARVIEW);
+   gluPerspective(45.0, Farso::SCREEN_X / (float)Farso::SCREEN_Y, 1.0, 
+         OUTDOOR_FARVIEW);
    glMatrixMode (GL_MODELVIEW);
 
 }
@@ -2756,8 +2757,8 @@ void Map::createBuffers(GLfloat** matriz)
    int actualTexture = 0;
    float alphaCoordX = 0;
    float alphaCoordZ = 0;
-   float modX = smallestPowerOfTwo(x*ALPHA_TEXTURE_INC);
-   float modZ = smallestPowerOfTwo(z*ALPHA_TEXTURE_INC);
+   float modX = Farso::smallestPowerOfTwo(x*ALPHA_TEXTURE_INC);
+   float modZ = Farso::smallestPowerOfTwo(z*ALPHA_TEXTURE_INC);
 
    /* Reinit the vertex buffer */
    totalVertex = 0;
@@ -2942,10 +2943,9 @@ void Map::updateAlphaTextures()
    mapTexture* tex = (mapTexture*)textures.getFirst();
    int x1, z1;
    SDL_Surface* img = SDL_CreateRGBSurface(SDL_SWSURFACE,
-                                     smallestPowerOfTwo(x*ALPHA_TEXTURE_INC),
-                                     smallestPowerOfTwo(z*ALPHA_TEXTURE_INC),
-                                     32,0x000000FF,0x0000FF00,
-                                     0x00FF0000,0xFF000000);
+         Farso::smallestPowerOfTwo(x*ALPHA_TEXTURE_INC),
+         Farso::smallestPowerOfTwo(z*ALPHA_TEXTURE_INC),
+         32,0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
    while(aux < textures.getTotal())
    {
       if(tex->definedAlpha)
@@ -2959,7 +2959,7 @@ void Map::updateAlphaTextures()
       {
          for(z1=0; z1 < z*ALPHA_TEXTURE_INC; z1++)
          {
-            pixel_Set(img, x1, z1, 255, 255, 255,
+            Farso::pixel_Set(img, x1, z1, 255, 255, 255,
                       (int)floor(((tex->alphaValues[x1][z1])*255)));
          }
       }
@@ -2997,10 +2997,9 @@ void Map::updateShaderAlphaTexture()
    mapTexture* tex = (mapTexture*)textures.getFirst();
    int x1, z1;
    SDL_Surface* img = SDL_CreateRGBSurface(SDL_SWSURFACE,
-                                     smallestPowerOfTwo(x*ALPHA_TEXTURE_INC),
-                                     smallestPowerOfTwo(z*ALPHA_TEXTURE_INC),
-                                     32,0x000000FF,0x0000FF00,
-                                     0x00FF0000,0xFF000000);
+         Farso::smallestPowerOfTwo(x*ALPHA_TEXTURE_INC),
+         Farso::smallestPowerOfTwo(z*ALPHA_TEXTURE_INC),
+         32,0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
 
    /* Create alpha texture */
    if(shaderAlphaDefined)
@@ -3020,7 +3019,7 @@ void Map::updateShaderAlphaTexture()
       {
          for(z1=0; z1 < z*ALPHA_TEXTURE_INC; z1++)
          {
-            pixel_Get(img, x1, z1, &R, &G, &B, &A);
+            Farso::pixel_Get(img, x1, z1, &R, &G, &B, &A);
             switch(aux)
             {
                case 0:
@@ -3044,7 +3043,7 @@ void Map::updateShaderAlphaTexture()
                }
                break;
             }
-            pixel_Set(img, x1, z1, R, G, B, A);
+            Farso::pixel_Set(img, x1, z1, R, G, B, A);
          }
       }
 
@@ -3061,7 +3060,7 @@ void Map::updateShaderAlphaTexture()
       {
          for(z1=0; z1 < z*ALPHA_TEXTURE_INC; z1++)
          {
-            pixel_Get(img, x1, z1, &R, &G, &B, &A);
+            Farso::pixel_Get(img, x1, z1, &R, &G, &B, &A);
             switch(aux)
             {
                case 0:
@@ -3085,7 +3084,7 @@ void Map::updateShaderAlphaTexture()
                }
                break;
             }
-            pixel_Set(img, x1, z1, R, G, B, A);
+            Farso::pixel_Set(img, x1, z1, R, G, B, A);
          }
       }
 

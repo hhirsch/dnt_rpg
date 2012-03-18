@@ -86,8 +86,8 @@ class cursor
       void setTextOverFont(std::string f);
       
    private:
-      static int currentCursor;        /**< Current Cursor Index */
-      static MouseCursor mCursor;      /**< The Farso Mouse Cursor */
+      static int currentCursor;          /**< Current Cursor Index */
+      static Farso::MouseCursor mCursor; /**< The Farso Mouse Cursor */
       
 };
 

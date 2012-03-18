@@ -96,7 +96,7 @@ class options
 
       /*! Display the Options Screen 
        * \param interf -> GUI interface to be used.*/
-      void displayOptionsScreen(guiInterface* interf);
+      void displayOptionsScreen(Farso::GuiInterface* interf);
       /*! Save current options on file. */
       void save();
 
@@ -109,8 +109,9 @@ class options
        * \return true if can load the options, false otherwise */
       bool load(std::string file);
       /*! Treat options Window Events */
-      int treat(guiObject* object, int eventInfo, guiInterface* interf,
-                GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
+      int treat(Farso::GuiObject* object, int eventInfo, 
+            Farso::GuiInterface* interf,
+            GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
 
       /*! Set language to one defined at the option's file */
       void setLanguage();
@@ -210,7 +211,7 @@ class options
        * \param firstKey -> number of first key
        * \param lastKey -> number of last key
        * \param list -> pointer to the desired guiList */
-      void insertKeys(int firstKey, int lastKey, guiList* list);
+      void insertKeys(int firstKey, int lastKey, Farso::GuiList* list);
 
       /*! Set the default keys */
       void defaultKeys();
@@ -218,18 +219,18 @@ class options
       /*! Verify if current splatting is avaiable or not */
       void verifySplattingAvailability();
 
-      textBox* txtLanguage;        /**< Language Text on Window */
-      textBox* txtCamera;          /**< Camera Mode Text on Window */
-      textBox* txtReflexion;       /**< Reflexion Type Text on Window */
-      textBox* txtShadow;          /**< Shadow Type Text on Window */
-      textBox* txtStencil;         /**< Stencil buffer size Text on Window */
-      textBox* txtResolution;      /**< Resolution Text on Window */
-      textBox* txtAntiAliasing;    /**< AntiAliasing Text on Window */
-      textBox* txtSplatting;       /**< Splatting text on window */
+      Farso::TextBox* txtLanguage;    /**< Language Text on Window */
+      Farso::TextBox* txtCamera;      /**< Camera Mode Text on Window */
+      Farso::TextBox* txtReflexion;   /**< Reflexion Type Text on Window */
+      Farso::TextBox* txtShadow;      /**< Shadow Type Text on Window */
+      Farso::TextBox* txtStencil;     /**< Stencil buffer size Text on Window */
+      Farso::TextBox* txtResolution;  /**< Resolution Text on Window */
+      Farso::TextBox* txtAntiAliasing;/**< AntiAliasing Text on Window */
+      Farso::TextBox* txtSplatting;   /**< Splatting text on window */
       
-      healthBar* barMusicVolume;   /**< Music Volume Text on Window*/
-      healthBar* barSndfxVolume;   /**< Sound Effects Volume Text on Window*/
-      healthBar* barFarView;       /**< FarViewFactor Text on Window */
+      Farso::HealthBar* barMusicVolume;  /**< Music Volume Text on Window*/
+      Farso::HealthBar* barSndfxVolume;  /**< Sound Effects Volume Text */
+      Farso::HealthBar* barFarView;      /**< FarViewFactor Text on Window */
 
       static SDL_Rect** resolutions;  /**< the available resolutions */
       static int     musicVolume;     /**< Current Music Volume */
@@ -254,8 +255,8 @@ class options
       static bool    alwaysRun;        /**< if will always run */
       static Uint32  keys[DNT_TOTAL_KEYS]; /**< The key values */
 
-      window* intWindow;       /**< Options Window Pointer */
-      window* keyWindow;       /**< Window to get key */
+      Farso::Window* intWindow;       /**< Options Window Pointer */
+      Farso::Window* keyWindow;       /**< Window to get key */
  
       int      prevCamera;         /**< Previous used Camera Mode */
       int      prevMusicVolume;    /**< Previous used Music Volume */
@@ -276,55 +277,55 @@ class options
       int timeLastOperation;       /**< Ticks when done last operation */
 
       static std::string fileName;      /**< The current options fileName */            
-      button* buttonKeys[DNT_TOTAL_KEYS];
+      Farso::Button* buttonKeys[DNT_TOTAL_KEYS];
 
-      button* buttonMusSum;
-      button* buttonMusDec;
+      Farso::Button* buttonMusSum;
+      Farso::Button* buttonMusDec;
       
-      button* buttonSndSum;
-      button* buttonSndDec;
+      Farso::Button* buttonSndSum;
+      Farso::Button* buttonSndDec;
       
-      button* buttonLangSum;
-      button* buttonLangDec;
+      Farso::Button* buttonLangSum;
+      Farso::Button* buttonLangDec;
 
-      button* buttonCamSum;
-      button* buttonCamDec;
+      Farso::Button* buttonCamSum;
+      Farso::Button* buttonCamDec;
 
-      button* buttonReflSum;
-      button* buttonReflDec;
+      Farso::Button* buttonReflSum;
+      Farso::Button* buttonReflDec;
       
-      button* buttonShadSum;
-      button* buttonShadDec;
+      Farso::Button* buttonShadSum;
+      Farso::Button* buttonShadDec;
 
-      button* buttonResSum;
-      button* buttonResDec;
+      Farso::Button* buttonResSum;
+      Farso::Button* buttonResDec;
 
-      button* buttonAliasSum;
-      button* buttonAliasDec;
+      Farso::Button* buttonAliasSum;
+      Farso::Button* buttonAliasDec;
 
-      button* buttonStencilSum;
-      button* buttonStencilDec;
+      Farso::Button* buttonStencilSum;
+      Farso::Button* buttonStencilDec;
 
-      button* buttonFarViewSum;
-      button* buttonFarViewDec;
+      Farso::Button* buttonFarViewSum;
+      Farso::Button* buttonFarViewDec;
 
-      button* buttonSplattingSum;
-      button* buttonSplattingDec;
+      Farso::Button* buttonSplattingSum;
+      Farso::Button* buttonSplattingDec;
 
-      cxSel* cxSelFullScreen;
+      Farso::CxSel* cxSelFullScreen;
 
-      cxSel* cxSelGrass;
-      cxSel* cxSelParticles;
+      Farso::CxSel* cxSelGrass;
+      Farso::CxSel* cxSelParticles;
 
-      cxSel* cxSelAnisotropic;
+      Farso::CxSel* cxSelAnisotropic;
 
-      cxSel* cxSelShowEnemyCircles;
-      cxSel* cxSelHighlightEnemy;
-      cxSel* cxSelAutoEndTurn;
-      cxSel* cxSelAlwaysRun;
+      Farso::CxSel* cxSelShowEnemyCircles;
+      Farso::CxSel* cxSelHighlightEnemy;
+      Farso::CxSel* cxSelAutoEndTurn;
+      Farso::CxSel* cxSelAlwaysRun;
 
-      button* buttonConfirm;
-      button* buttonCancel;
+      Farso::Button* buttonConfirm;
+      Farso::Button* buttonCancel;
 
       /*! Get the Current Language Name
       * \return the name of the language. */

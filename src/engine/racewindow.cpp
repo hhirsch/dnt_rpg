@@ -39,14 +39,14 @@ static int cmpRaceFunction(const void *p1,  const void *p2)
 /********************************************************************
  *                           Constructor                            *
  ********************************************************************/
-raceWindow::raceWindow(guiInterface* inter, race** retRace)
+raceWindow::raceWindow(Farso::GuiInterface* inter, race** retRace)
 {
    dirs dir;
    races rc;
-   dntFont fnt;
+   Farso::Font fnt;
    int i;
-   int centerY = SCREEN_Y / 2;
-   int centerX = SCREEN_X / 2;
+   int centerY = Farso::SCREEN_Y / 2;
+   int centerX = Farso::SCREEN_X / 2;
 
    choosedRace = retRace;
    curRace = -1;
@@ -93,10 +93,11 @@ raceWindow::raceWindow(guiInterface* inter, race** retRace)
    raceImage->set(racesOrder[curRace]->image);
 
    /* TabBox */
-   tabBox *tab=(tabBox*)intWindow->getObjectsList()->defineTabBox(6,18,277,345);
+   Farso::TabBox *tab=(Farso::TabBox*)intWindow->getObjectsList()->defineTabBox(
+         6,18,277,345);
 
-   guiList *listChar = tab->insertOption(gettext("Characteristics"));
-   guiList *listDesc = tab->insertOption(gettext("Description"));
+   Farso::GuiList *listChar = tab->insertOption(gettext("Characteristics"));
+   Farso::GuiList *listDesc = tab->insertOption(gettext("Description"));
 
    /* Race Description */
    textDesc = listDesc->insertRolBar(9,39,274,341,"");
@@ -113,8 +114,8 @@ raceWindow::raceWindow(guiInterface* inter, race** retRace)
                                              fnt.createUnicode(0x25BA),0);
    textName = intWindow->getObjectsList()->insertTextBox(22,346,261,364,1, 
                                              racesOrder[curRace]->name.c_str());
-   textName->setFont(dir.getRealFile(DNT_FONT_ARIAL),10,DNT_FONT_ALIGN_CENTER,
-                     DNT_FONT_STYLE_BOLD);
+   textName->setFont(dir.getRealFile(DNT_FONT_ARIAL),10,Farso::Font::ALIGN_CENTER,
+                     Farso::Font::STYLE_BOLD);
 
    /* Confirm Button */
    buttonConfirm = intWindow->getObjectsList()->insertButton(270,370,340,389,
@@ -147,7 +148,7 @@ void raceWindow::setDescription()
    textDesc->setText("");
    textDesc->addText(racesOrder[curRace]->citation + "||", 
                      dir.getRealFile(DNT_FONT_ARIAL),
-                     10, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
+                     10, Farso::Font::ALIGN_LEFT, Farso::Font::STYLE_ITALIC,
                      220,0,0);
    textDesc->addText(racesOrder[curRace]->description);
    textDesc->setFirstLine(0);
@@ -166,8 +167,8 @@ void raceWindow::setCharacteristics()
    textCharac->setText("");
    textCharac->addText(string(gettext("Race Modifiers")) + "||",
                        dir.getRealFile(DNT_FONT_ARIAL), 12, 
-                       DNT_FONT_ALIGN_CENTER,
-                       DNT_FONT_STYLE_UNDERLINE,
+                       Farso::Font::ALIGN_CENTER,
+                       Farso::Font::STYLE_UNDERLINE,
                        86, 161, 32);
    for(i=0; i<racesOrder[curRace]->totalModifiers; i++)
    {
@@ -179,15 +180,15 @@ void raceWindow::setCharacteristics()
    {
       textCharac->addText(string(gettext("No Modifiers.")) + "||",
                           dir.getRealFile(DNT_FONT_ARIAL), 10, 
-                          DNT_FONT_ALIGN_LEFT,
-                          DNT_FONT_STYLE_NORMAL,
+                          Farso::Font::ALIGN_LEFT,
+                          Farso::Font::STYLE_NORMAL,
                           75, 147, 207);
    }
 
    textCharac->addText(string(gettext("Race Talents")) + "||",
                        dir.getRealFile(DNT_FONT_ARIAL), 12, 
-                       DNT_FONT_ALIGN_CENTER,
-                       DNT_FONT_STYLE_UNDERLINE,
+                       Farso::Font::ALIGN_CENTER,
+                       Farso::Font::STYLE_UNDERLINE,
                        86, 161, 32);
 
    for(i=0; i<racesOrder[curRace]->totalFeats; i++)
@@ -199,16 +200,16 @@ void raceWindow::setCharacteristics()
    {
       textCharac->addText(string(gettext("No Talents.")) + "|",
                           dir.getRealFile(DNT_FONT_ARIAL), 10, 
-                          DNT_FONT_ALIGN_LEFT,
-                          DNT_FONT_STYLE_NORMAL,
+                          Farso::Font::ALIGN_LEFT,
+                          Farso::Font::STYLE_NORMAL,
                           75,147,207);
    }
 
    /* Race Skills */
    textCharac->addText(string("|") + string(gettext("Race Skills")) + "||",
                        dir.getRealFile(DNT_FONT_ARIAL), 12, 
-                       DNT_FONT_ALIGN_CENTER,
-                       DNT_FONT_STYLE_UNDERLINE,
+                       Farso::Font::ALIGN_CENTER,
+                       Farso::Font::STYLE_UNDERLINE,
                        86, 161, 32);
    for(i=0; i<racesOrder[curRace]->totalSkills; i++)
    {
@@ -227,8 +228,8 @@ void raceWindow::setCharacteristics()
    {
       textCharac->addText(gettext("No Skills."),
                           dir.getRealFile(DNT_FONT_ARIAL), 10, 
-                          DNT_FONT_ALIGN_LEFT,
-                          DNT_FONT_STYLE_NORMAL,
+                          Farso::Font::ALIGN_LEFT,
+                          Farso::Font::STYLE_NORMAL,
                           75,147,207);
    }
 
@@ -238,15 +239,15 @@ void raceWindow::setCharacteristics()
 /********************************************************************
  *                              treat                               *
  ********************************************************************/
-int raceWindow::treat(guiObject* object, int eventInfo, 
-                      guiInterface* inter)
+int raceWindow::treat(Farso::GuiObject* object, int eventInfo, 
+                      Farso::GuiInterface* inter)
 {
-   if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
+   if(eventInfo == Farso::EVENT_PRESSED_BUTTON)
    {
-      if( (object == (guiObject*) buttonNext) || 
-          (object == (guiObject*) buttonPrevious))
+      if( (object == (Farso::GuiObject*) buttonNext) || 
+          (object == (Farso::GuiObject*) buttonPrevious))
       {
-         if(object == (guiObject*) buttonNext)
+         if(object == (Farso::GuiObject*) buttonNext)
          {
             curRace = (curRace + 1) % totalRaces;
          }
@@ -264,14 +265,14 @@ int raceWindow::treat(guiObject* object, int eventInfo,
          raceImage->set(racesOrder[curRace]->image);
          intWindow->draw(0,0);
       }
-      else if(object == (guiObject*) buttonConfirm)
+      else if(object == (Farso::GuiObject*) buttonConfirm)
       {
          *choosedRace = racesOrder[curRace];
          inter->closeWindow(intWindow);
          intWindow = NULL;
          return(RACEW_CONFIRM);
       }
-      else if(object == (guiObject*) buttonCancel) 
+      else if(object == (Farso::GuiObject*) buttonCancel) 
       {
          inter->closeWindow(intWindow);
          *choosedRace = NULL;

@@ -1433,11 +1433,11 @@ void conversation::changeDialog(int numDialog)
 /*************************************************************************
  *                                 open                                  *
  *************************************************************************/
-void dialogWindow::open(guiInterface* gui, character* PC, conversation* cv,
+void dialogWindow::open(Farso::GuiInterface* gui, character* PC, conversation* cv,
                         string pictureFile)
 {
    dirs dir;
-   int midX = SCREEN_X / 2;
+   int midX = Farso::SCREEN_X / 2;
 
    /* Do not open NULL conversations */
    if(!cv)
@@ -1520,7 +1520,7 @@ void dialogWindow::redraw()
 /*************************************************************************
  *                                treat                                  *
  *************************************************************************/
-bool dialogWindow::treat(guiObject* guiObj, int eventInfo, itemWindow* infoW,
+bool dialogWindow::treat(Farso::GuiObject* guiObj, int eventInfo, itemWindow* infoW,
                          engine* curEngine)
 {
    barterWindow tradeWindow;
@@ -1532,9 +1532,9 @@ bool dialogWindow::treat(guiObject* guiObj, int eventInfo, itemWindow* infoW,
       return(false);
    }
 
-   if(eventInfo == FARSO_EVENT_SELECTED_SEL_TEXT)
+   if(eventInfo == Farso::EVENT_SELECTED_SEL_TEXT)
    {
-      if(guiObj == (guiObject*)pcSelText)
+      if(guiObj == (Farso::GuiObject*)pcSelText)
       {
          /* Get the last Selected Item Index */
          pcSelText->getLastSelectedItem(&index);
@@ -1547,9 +1547,9 @@ bool dialogWindow::treat(guiObject* guiObj, int eventInfo, itemWindow* infoW,
          return(true);
       }
    }
-   else if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
+   else if(eventInfo == Farso::EVENT_PRESSED_BUTTON)
    {
-      if(guiObj == (guiObject*)barterButton)
+      if(guiObj == (Farso::GuiObject*)barterButton)
       {
          /* Closes the dialog window  */
          close();
@@ -1628,9 +1628,9 @@ void dialogWindow::addOption(int optNumber, string text, int info)
  *                             Static Members                            *
  *************************************************************************/
 conversation* dialogWindow::conv = NULL;
-window* dialogWindow::jan = NULL;
-guiInterface* dialogWindow::usedGui = NULL;
-rolBar* dialogWindow::npcText = NULL;
-selText* dialogWindow::pcSelText = NULL;
-button* dialogWindow::barterButton = NULL;
+Farso::Window* dialogWindow::jan = NULL;
+Farso::GuiInterface* dialogWindow::usedGui = NULL;
+Farso::RolBar* dialogWindow::npcText = NULL;
+Farso::SelText* dialogWindow::pcSelText = NULL;
+Farso::Button* dialogWindow::barterButton = NULL;
 

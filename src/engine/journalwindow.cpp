@@ -267,12 +267,12 @@ void journalWindow::close()
 /***********************************************************************
  *                               open                                  *
  ***********************************************************************/
-void journalWindow::open(guiInterface* inter)
+void journalWindow::open(Farso::GuiInterface* inter)
 {
    /* Set open position */
-   int centerY = SCREEN_Y / 2;
-   int centerX = SCREEN_X / 2;
-   dntFont fnt;
+   int centerY = Farso::SCREEN_Y / 2;
+   int centerX = Farso::SCREEN_X / 2;
+   Farso::Font fnt;
    dirs dir;
 
    /* Set the inteface */
@@ -292,8 +292,9 @@ void journalWindow::open(guiInterface* inter)
                                                    fnt.createUnicode(0x25C4),0);
    areaText = internalWindow->getObjectsList()->insertTextBox(24,231,229,249,1,
                                                               "");
-   areaText->setFont(dir.getRealFile(DNT_FONT_ARIAL),10,DNT_FONT_ALIGN_CENTER, 
-                     DNT_FONT_STYLE_BOLD);
+   areaText->setFont(dir.getRealFile(DNT_FONT_ARIAL), 10,
+                     Farso::Font::ALIGN_CENTER, 
+                     Farso::Font::STYLE_BOLD);
    nextButton = internalWindow->getObjectsList()->insertButton(230,231,248,249,
                                                    fnt.createUnicode(0x25BA),0);
 
@@ -337,14 +338,14 @@ void journalWindow::showArea()
             if(!desc->completed)
             {
                missionsText->addText(text, dir.getRealFile(DNT_FONT_ARIAL), 9,
-                                     DNT_FONT_ALIGN_LEFT, 
-                                     DNT_FONT_STYLE_NORMAL, 240, 120, 0);
+                                     Farso::Font::ALIGN_LEFT, 
+                                     Farso::Font::STYLE_NORMAL, 240, 120, 0);
             }
             else
             {
                missionsText->addText(text, dir.getRealFile(DNT_FONT_ARIAL), 9,
-                                     DNT_FONT_ALIGN_LEFT, 
-                                     DNT_FONT_STYLE_ITALIC, 0, 120, 0);
+                                     Farso::Font::ALIGN_LEFT, 
+                                     Farso::Font::STYLE_ITALIC, 0, 120, 0);
             }
 
             desc = (journalDesc*)desc->getNext();

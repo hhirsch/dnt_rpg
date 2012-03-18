@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -32,6 +32,9 @@
 #endif
 #include <stdlib.h>
 #include <math.h>
+
+namespace Farso
+{
 
 #define RAIZ3D2  0.8660254 /**< Sqrt(3) / 2 */
 
@@ -203,6 +206,7 @@ void setTexture(SDL_Surface* img, GLuint textID, bool mipMaps=false);
 void setTextureRGBA(SDL_Surface* img, GLuint textID, bool mipMaps=false,
                     GLint format=DNT_IMAGE_FORMAT_A);
 
+}
 
 #endif
 

@@ -31,12 +31,16 @@
 #include "guiobject.h"
 #include "guilist.h"
 
-#define MENU_ITEM_HEIGHT  12
+namespace Farso
+{
 
 /*! The Menu GUI class */
-class menu: public guiList
+class Menu: public GuiList
 {
    public:
+
+      static const int ITEM_HEIGHT=12;
+
       /*! Constructor
        * \param xa -> x coordinate
        * \param ya -> y coordinate
@@ -46,10 +50,10 @@ class menu: public guiList
        * \note: the usefull width and height are due that an window surface
        *        is greater of the window itself (as OpenGL powerOfTwo 
        *        textures restriction) */
-      menu(int xa, int ya, int sWidth, int sHeight, SDL_Surface* surface);
+      Menu(int xa, int ya, int sWidth, int sHeight, SDL_Surface* surface);
 
       /*! Destructor */
-      ~menu();
+      ~Menu();
 
       /*! Insert a Item on the Menu
        * \param text -> item Text
@@ -82,7 +86,7 @@ class menu: public guiList
       /*! Get a item
        * \param i -> position of the item on menu
        * \return pointer to desired item, or NULL, if not exists. */
-      guiObject* getItem(int i);
+      GuiObject* getItem(int i);
 
       /*! Get the actual Item */
       int getActualItem();
@@ -108,7 +112,7 @@ class menu: public guiList
       int x,                   /**< Menu X Coordinate */
           y;                   /**< Menu Y Coordinate */   
       unsigned int maxCharac;  /**< Size of the bigger string on menu */
-      farso_colors Colors;     /**< Colors */
+      Colors colors;           /**< Colors */
       int numPictures;         /**< Number of pictures at the menu */
       int actualItem;          /**< Actual Selected item */
       bool pressed;            /**< Control to take the release button press */
@@ -117,6 +121,8 @@ class menu: public guiList
       int wHeight;             /**< Usefull Surface Height */
 
 };
+
+}
 
 #endif
 

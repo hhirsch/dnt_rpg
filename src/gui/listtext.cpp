@@ -23,25 +23,26 @@
 #include "interface.h"
 #include "farsoopts.h"
 using namespace std;
+using namespace Farso;
 
 /**************************************************************
  *                        Constructor                         *
  **************************************************************/
-listText::listText(int xa, int ya, int xb, int yb, SDL_Surface* surface,
-                   guiList* list)
-         : guiObject(surface)
+ListText::ListText(int xa, int ya, int xb, int yb, SDL_Surface* surface,
+                   GuiList* list)
+         : GuiObject(surface)
 {
    int i;
    /* Nullify elements */
    selectedText = ""; 
    selectedPos = -1;  
 
-   farsoOptions opt;
-   dntFont fnt;
+   Options opt;
+   Font fnt;
    fnt.defineFont(opt.getDefaultFont(), 10);
 
    /* Init things */
-   type = FARSO_OBJECT_LIST_TEXT;
+   type = Farso::OBJECT_LIST_TEXT;
    x1 = xa;
    y1 = ya;
    x2 = xb;
@@ -49,19 +50,19 @@ listText::listText(int xa, int ya, int xb, int yb, SDL_Surface* surface,
 
    /* Alloc tabButtons pointers */
    maxButtons = ((yb-ya-2) / fnt.getHeight());
-   listButtons = new oneTabButton*[maxButtons];
+   listButtons = new OneTabButton*[maxButtons];
 
 
    intList = list;
 
-   guiList* l = (guiList*)list;
+   GuiList* l = (GuiList*)list;
 
    /* Create the rollbar */
    roll = l->insertRolBar(x1, y1, x2, y2, "");
    
    /* Create the tabButton */
    table = l->insertTabButton(x1, y1, x2-x1-12, y2-y1, NULL);
-   table->setStyle(FARSO_TAB_BUTTON_STYLE_LIST_TEXT);
+   table->setStyle(TabButton::STYLE_LIST_TEXT);
    for(i = 0; i<maxButtons; i++)
    {
       listButtons[i] = table->insertButton(1, (i*fnt.getHeight())+3,
@@ -76,7 +77,7 @@ listText::listText(int xa, int ya, int xb, int yb, SDL_Surface* surface,
 /**************************************************************
  *                         Destructor                         *
  **************************************************************/
-listText::~listText()
+ListText::~ListText()
 {
    /* Delete the pointers */
    delete [] listButtons;
@@ -88,7 +89,7 @@ listText::~listText()
 /**************************************************************
  *                           clear                            *
  **************************************************************/
-void listText::clear()
+void ListText::clear()
 {
    textList.clear();
    roll->setText("");
@@ -99,7 +100,7 @@ void listText::clear()
 /**************************************************************
  *                         insertText                         *
  **************************************************************/
-void listText::insertText(string text)
+void ListText::insertText(string text)
 {
    /* Insert with default color */
    insertText(text, -1, -1, -1);
@@ -108,9 +109,9 @@ void listText::insertText(string text)
 /**************************************************************
  *                         insertText                         *
  **************************************************************/
-void listText::insertText(string text, int r, int g, int b)
+void ListText::insertText(string text, int r, int g, int b)
 {
-   farsoOptions opt;
+   Options opt;
    textList.push_back(text);
    if(r == -1)
    {
@@ -118,8 +119,8 @@ void listText::insertText(string text, int r, int g, int b)
    }
    else
    {
-      roll->addText(text, opt.getDefaultFont(), 10, DNT_FONT_STYLE_NORMAL,
-                    DNT_FONT_ALIGN_LEFT, r,g,b);
+      roll->addText(text, opt.getDefaultFont(), 10, Font::STYLE_NORMAL,
+                    Font::ALIGN_LEFT, r,g,b);
    }
    roll->setFirstLine(0);
    defineTabButton();
@@ -128,7 +129,7 @@ void listText::insertText(string text, int r, int g, int b)
 /**************************************************************
  *                         removeText                         *
  **************************************************************/
-void listText::removeText(string text)
+void ListText::removeText(string text)
 {
    std::list<std::string>::iterator it;
    for(it=textList.begin(); it != textList.end(); it++)
@@ -146,7 +147,7 @@ void listText::removeText(string text)
 /**************************************************************
  *                      defineTabButton                       *
  **************************************************************/
-void listText::defineTabButton()
+void ListText::defineTabButton()
 {
    int curInit = roll->getFirstLine();
    int i;
@@ -160,7 +161,7 @@ void listText::defineTabButton()
 /**************************************************************
  *                            draw                            *
  **************************************************************/
-void listText::draw()
+void ListText::draw()
 {
    //Actually nothing to do here
 }
@@ -168,7 +169,7 @@ void listText::draw()
 /**************************************************************
  *                         eventGot                           *
  **************************************************************/
-bool listText::eventGot(int type, guiObject* object)
+bool ListText::eventGot(int type, GuiObject* object)
 {
    int i;
    selectedText = "";
@@ -177,7 +178,7 @@ bool listText::eventGot(int type, guiObject* object)
    /* Verify Events */
 
    /* RolBar events */
-   if(type == FARSO_EVENT_PRESSED_BUTTON)
+   if(type == EVENT_PRESSED_BUTTON)
    {
       if(roll->isOwner(object))
       {
@@ -187,11 +188,11 @@ bool listText::eventGot(int type, guiObject* object)
    }
 
    /* TabButton events */
-   else if(type == FARSO_EVENT_PRESSED_TAB_BUTTON)
+   else if(type == EVENT_PRESSED_TAB_BUTTON)
    {
       for(i = 0; i<maxButtons; i++)
       {
-         if(object == (guiObject*)listButtons[i])
+         if(object == (GuiObject*)listButtons[i])
          {
             int pos = roll->getFirstLine() + i;
             if(pos < (int)textList.size())
@@ -215,7 +216,7 @@ bool listText::eventGot(int type, guiObject* object)
 /**************************************************************
  *                      getSelectedText                       *
  **************************************************************/
-string listText::getSelectedText()
+string ListText::getSelectedText()
 {
    return(selectedText);
 }
@@ -223,7 +224,7 @@ string listText::getSelectedText()
 /**************************************************************
  *                      getSelectedPos                        *
  **************************************************************/
-int listText::getSelectedPos()
+int ListText::getSelectedPos()
 {  
    return(selectedPos);
 }

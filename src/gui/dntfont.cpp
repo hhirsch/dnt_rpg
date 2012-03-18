@@ -25,21 +25,23 @@
 
 #include <iostream>
 using namespace std;
+using namespace Farso;
+
 
 /**********************************************************************
  *                            constructor                             *
  **********************************************************************/
-loadedFontList::loadedFontList()
+LoadedFontList::LoadedFontList()
 {
 }
 
 /**********************************************************************
  *                             destructor                             *
  **********************************************************************/
-loadedFontList::~loadedFontList()
+LoadedFontList::~LoadedFontList()
 {
-   loadedFont* fnt;
-   std::list<loadedFont*>::iterator it;
+   LoadedFont* fnt;
+   std::list<LoadedFont*>::iterator it;
    for(it=fonts.begin(); it != fonts.end(); it++)
    {
       fnt = (*it);
@@ -55,9 +57,9 @@ loadedFontList::~loadedFontList()
 /**********************************************************************
  *                               init                                 *
  **********************************************************************/
-void dntFont::init()
+void Font::init()
 {
-   farsoOptions opts;
+   Options opts;
    /* Init SDL_ttf */
    if(TTF_Init() == -1)
    {
@@ -66,19 +68,19 @@ void dntFont::init()
    }
 
    /* Create the list */
-   fonts = new loadedFontList();
+   fonts = new LoadedFontList();
 
    /* Define some defaults */
    activeFont = NULL;
-   activeFontAlign = DNT_FONT_ALIGN_LEFT;
-   activeFontStyle = DNT_FONT_STYLE_NORMAL;
+   activeFontAlign = ALIGN_LEFT;
+   activeFontStyle = STYLE_NORMAL;
    defineFont(opts.getDefaultFont(),12);
 }
 
 /**********************************************************************
  *                                end                                 *
  **********************************************************************/
-void dntFont::end()
+void Font::end()
 {
    if(fonts != NULL)
    {
@@ -92,10 +94,10 @@ void dntFont::end()
 /**********************************************************************
  *                            findFont                                *
  **********************************************************************/
-loadedFont* dntFont::findFont(string fontName, int fontSize)
+LoadedFont* Font::findFont(string fontName, int fontSize)
 {
-   std::list<loadedFont*>::iterator it;
-   loadedFont* fnt;
+   std::list<LoadedFont*>::iterator it;
+   LoadedFont* fnt;
    for(it=fonts->fonts.begin(); it != fonts->fonts.end(); it++)
    {
       fnt = (*it);
@@ -112,16 +114,16 @@ loadedFont* dntFont::findFont(string fontName, int fontSize)
 /**********************************************************************
  *                             loadFont                               *
  **********************************************************************/
-loadedFont* dntFont::loadFont(string fontName, int fontSize)
+LoadedFont* Font::loadFont(string fontName, int fontSize)
 {
-   loadedFont* fnt = NULL;
+   LoadedFont* fnt = NULL;
 
    fnt = findFont(fontName, fontSize);
 
    if(!fnt)
    {
       /* Not found the font, so open it! */
-      fnt = new loadedFont();
+      fnt = new LoadedFont();
       fnt->fontName = fontName;
       fnt->fontSize = fontSize;
       fnt->font = TTF_OpenFont(fontName.c_str(), fontSize);
@@ -142,7 +144,7 @@ loadedFont* dntFont::loadFont(string fontName, int fontSize)
 /**********************************************************************
  *                            defineFont                              *
  **********************************************************************/
-bool dntFont::defineFont(string fileName, int size)
+bool Font::defineFont(string fileName, int size)
 {
    if( (!activeFont) ||
        (activeFont->fontName != fileName) || 
@@ -156,7 +158,7 @@ bool dntFont::defineFont(string fileName, int size)
 /**********************************************************************
  *                          defineFontAlign                           *
  **********************************************************************/
-void dntFont::defineFontAlign(int align)
+void Font::defineFontAlign(int align)
 {
    activeFontAlign = align;
 }
@@ -164,7 +166,7 @@ void dntFont::defineFontAlign(int align)
 /**********************************************************************
  *                          defineFontStyle                           *
  **********************************************************************/
-void dntFont::defineFontStyle(int style)
+void Font::defineFontStyle(int style)
 {
    activeFontStyle = style;
 }
@@ -172,7 +174,7 @@ void dntFont::defineFontStyle(int style)
 /**********************************************************************
  *                         defineFontOutline                          *
  **********************************************************************/
-void dntFont::defineFontOutline(int outLine)
+void Font::defineFontOutline(int outLine)
 {
    if(activeFont)
    {
@@ -183,7 +185,7 @@ void dntFont::defineFontOutline(int outLine)
 /**********************************************************************
  *                            renderText                              *
  **********************************************************************/
-SDL_Surface* dntFont::renderText(string str, SDL_Color color, bool isUtf8)
+SDL_Surface* Font::renderText(string str, SDL_Color color, bool isUtf8)
 {
    SDL_Surface* writeSurface = NULL;
 
@@ -204,12 +206,12 @@ SDL_Surface* dntFont::renderText(string str, SDL_Color color, bool isUtf8)
 /***********************************************************************
  *                             blitText                                *
  ***********************************************************************/
-void dntFont::blitText(SDL_Surface *screen, SDL_Surface* writeSurface, 
+void Font::blitText(SDL_Surface *screen, SDL_Surface* writeSurface, 
       int x,int y, string text, int x1,int y1,int x2,int y2, bool solid, 
       bool isUtf8)
 {
    /* Define Position */
-   if(activeFontAlign == DNT_FONT_ALIGN_CENTER)
+   if(activeFontAlign == ALIGN_CENTER)
    {
       rect.x = ((x2 + x1) / 2) - 
          (getStringWidth(text, isUtf8) / 2)-1;
@@ -232,10 +234,10 @@ void dntFont::blitText(SDL_Surface *screen, SDL_Surface* writeSurface,
 /***********************************************************************
  *                               write                                 *
  ***********************************************************************/
-int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
+int Font::write(SDL_Surface *screen,int x,int y,string text,int init,
                    int end, int x1,int y1,int x2,int y2, bool solid)
 {
-   farsoOptions opt;
+   Options opt;
 
    SDL_Color color;
    Uint8 a=0;
@@ -272,7 +274,7 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
    {
       text.erase(0,1);
 
-      if(activeFontAlign == DNT_FONT_ALIGN_CENTER)
+      if(activeFontAlign == ALIGN_CENTER)
       {
          x = ((x2 + x1) / 2) - (getStringWidth(text, true) / 2)-1;
       }
@@ -354,10 +356,10 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
 /***********************************************************************
  *                               write                                 *
  ***********************************************************************/
-void dntFont::writeSingleLine(SDL_Surface* screen, int x, int y, string text,
+void Font::writeSingleLine(SDL_Surface* screen, int x, int y, string text,
                               int x1, int y1, int x2, int y2, bool solid)
 {
-   farsoOptions opt;
+   Options opt;
    SDL_Surface* writeSurface; 
    SDL_Color color;
    Uint8 a=0;
@@ -381,7 +383,7 @@ void dntFont::writeSingleLine(SDL_Surface* screen, int x, int y, string text,
 /***********************************************************************
  *                               write                                 *
  ***********************************************************************/
-void dntFont::write(SDL_Surface *screen,int x,int y,string text, bool solid)
+void Font::write(SDL_Surface *screen,int x,int y,string text, bool solid)
 {
    write(screen,x,y,text,0,text.length()-1,0,0,screen->w-1,screen->h-1,solid);
 }
@@ -389,7 +391,7 @@ void dntFont::write(SDL_Surface *screen,int x,int y,string text, bool solid)
 /***********************************************************************
  *                               write                                 *
  ***********************************************************************/
-int dntFont::write(SDL_Surface *screen,int x, int y,string text,int x1,int y1,
+int Font::write(SDL_Surface *screen,int x, int y,string text,int x1,int y1,
                    int x2,int y2,bool solid)
 {
    return(write(screen,x,y,text,0,text.length()-1,x1,y1,x2,y2,solid));
@@ -398,7 +400,7 @@ int dntFont::write(SDL_Surface *screen,int x, int y,string text,int x1,int y1,
 /***********************************************************************
  *                                write                                *
  ***********************************************************************/
-void dntFont::write(SDL_Surface *screen,int x,int y,string text,
+void Font::write(SDL_Surface *screen,int x,int y,string text,
                     int init,int end,bool solid)
 {
    write(screen,x,y,text,init,end,0,0,screen->w-1,screen->h-1,solid);
@@ -407,7 +409,7 @@ void dntFont::write(SDL_Surface *screen,int x,int y,string text,
 /***********************************************************************
  *                            writeUnicode                             *
  ***********************************************************************/
-void dntFont::writeUnicode(SDL_Surface* screen, int x, int y, string text,
+void Font::writeUnicode(SDL_Surface* screen, int x, int y, string text,
                            bool solid)
 {
    SDL_Color color;
@@ -438,7 +440,7 @@ void dntFont::writeUnicode(SDL_Surface* screen, int x, int y, string text,
 /***********************************************************************
  *                           createUnicode                             *
  ***********************************************************************/
-string dntFont::createUnicode(Uint16 character)
+string Font::createUnicode(Uint16 character)
 {
    Uint16 c[2];
    c[0] = character;
@@ -451,16 +453,16 @@ string dntFont::createUnicode(Uint16 character)
 /***********************************************************************
  *                          getStringWidth                             *
  ***********************************************************************/
-int dntFont::getStringWidth(string s)
+int Font::getStringWidth(string s)
 {
-   farsoOptions opt;
+   Options opt;
    return(getStringWidth(s, opt.isLanguageUnicode()));
 }
 
 /***********************************************************************
  *                          getStringWidth                             *
  ***********************************************************************/
-int dntFont::getStringWidth(string s, bool isUtf8)
+int Font::getStringWidth(string s, bool isUtf8)
 {
    int w = 0;
    if(activeFont != NULL)
@@ -480,7 +482,7 @@ int dntFont::getStringWidth(string s, bool isUtf8)
 /***********************************************************************
  *                              getincCP                               *
  ***********************************************************************/
-int dntFont::getIncCP()
+int Font::getIncCP()
 {
    int adv = 0;
    if(activeFont)
@@ -494,7 +496,7 @@ int dntFont::getIncCP()
 /***********************************************************************
  *                             getHeight                               *
  ***********************************************************************/
-int dntFont::getHeight()
+int Font::getHeight()
 {
    if(activeFont)
    {
@@ -506,10 +508,10 @@ int dntFont::getHeight()
 /***********************************************************************
  *                            getNextLine                              *
  ***********************************************************************/
-string dntFont::getNextLine(string source, int& lastLinePos,
+string Font::getNextLine(string source, int& lastLinePos,
                             int maxWidth)
 {
-   farsoOptions opt;
+   Options opt;
 
    int i, lastSpace=-1;
 
@@ -584,9 +586,9 @@ string dntFont::getNextLine(string source, int& lastLinePos,
 }
 
 /* Static Variables */
-loadedFont*      dntFont::activeFont;
-loadedFontList*  dntFont::fonts=NULL;
-int              dntFont::activeFontAlign;
-int              dntFont::activeFontStyle;
-SDL_Rect         dntFont::rect;
+LoadedFont*      Font::activeFont;
+LoadedFontList*  Font::fonts=NULL;
+int              Font::activeFontAlign;
+int              Font::activeFontStyle;
+SDL_Rect         Font::rect;
 

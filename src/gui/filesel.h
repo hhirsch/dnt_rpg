@@ -32,18 +32,23 @@
 #include "textbar.h"
 #include "textbox.h"
 
-#define FILE_SEL_ACTION_NONE    0
-#define FILE_SEL_ACTION_SELECT  1
-#define FILE_SEL_ACTION_ACCEPT  2
-#define FILE_SEL_ACTION_CANCEL  3
+namespace Farso
+{
 
-class guiList;
+class GuiList;
 
 /*! The fileSel class implements a file seector/navigator (usefull for
  *  open/close dialogs) */
-class fileSel: public guiObject
+class FileSel: public GuiObject
 {
    public:
+      enum FileSelAction
+      {
+         ACTION_NONE=0,
+         ACTION_SELECT,
+         ACTION_ACCEPT,
+         ACTION_CANCEL
+      };
 
       /*! Constructor
        * \param x -> x coordinate
@@ -54,11 +59,11 @@ class fileSel: public guiObject
        * \param list -> pointer to the GUI objects list
        * \param surface -> surface to draw to
        * \param nav -> if will show directories to navigate or not */
-      fileSel(int x, int y, bool load, std::string dir, guiList* list, 
+      FileSel(int x, int y, bool load, std::string dir, GuiList* list, 
             SDL_Surface* surface, bool nav=true);
 
       /*! Destructor */
-      ~fileSel();
+      ~FileSel();
 
       /*! Not used, only for compatibility with guiObject */
       void draw();
@@ -67,7 +72,7 @@ class fileSel: public guiObject
        * \param type -> Type of the occurred event
        * \param object -> object of the event 
        * \return -> true if event is related (and treated) by the listText */
-      bool eventGot(int type, guiObject* object);
+      bool eventGot(int type, GuiObject* object);
 
       /*! Get last action occurred on the file selector
        * \return -> last action occurred */
@@ -96,12 +101,12 @@ class fileSel: public guiObject
        * \return -> true if passed*/
       bool passFilter(std::string s);
 
-      button* cancelButton;    /**< The cancel Button */
-      button* acceptButton;    /**< The accept Button */
-      listText* textFiles;     /**< The files selector (as text) */
-      textBox* textCurFile;    /**< The current file display (for load) */
-      textBar* editCurFile;    /**< The current file edit (for save) */
-      textBox* textFilter;     /**< The current filter display */
+      Button* cancelButton;    /**< The cancel Button */
+      Button* acceptButton;    /**< The accept Button */
+      ListText* textFiles;     /**< The files selector (as text) */
+      TextBox* textCurFile;    /**< The current file display (for load) */
+      TextBar* editCurFile;    /**< The current file edit (for save) */
+      TextBox* textFilter;     /**< The current filter display */
 
       bool navDirs;            /**< True if will diplay (and navigate) dirs */
       bool loading;            /**< If selector is a loading one, 
@@ -115,12 +120,13 @@ class fileSel: public guiObject
                                     directory (this used to separate 
                                     strings directories of  strings files)*/
 
-      guiList* intList;        /**< Internal Gui List used */
+      GuiList* intList;        /**< Internal Gui List used */
 
       int lastAction;          /**< Last action occurred  */
 
 };
 
+}
 
 #endif
 

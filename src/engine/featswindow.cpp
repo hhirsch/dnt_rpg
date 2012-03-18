@@ -24,7 +24,7 @@
 /***********************************************************************
  *                            Constructor                              *
  ***********************************************************************/
-featsWindow::featsWindow(guiInterface* interf)
+featsWindow::featsWindow(Farso::GuiInterface* interf)
 {
    usedGui = interf;
    intWindow = NULL;
@@ -47,10 +47,10 @@ featsWindow::~featsWindow()
 void featsWindow::open(character* pers, bool selectFeat)
 {
    dirs dir;
-   dntFont fnt;
+   Farso::Font fnt;
    /* Set open position */
-   int centerY = SCREEN_Y / 2;
-   int centerX = SCREEN_X / 2;
+   int centerY = Farso::SCREEN_Y / 2;
+   int centerX = Farso::SCREEN_X / 2;
 
    selectFeatMode = selectFeat;
    curCharacter = pers;
@@ -83,8 +83,9 @@ void featsWindow::open(character* pers, bool selectFeat)
    /* title and selectors */
    featTitle = intWindow->getObjectsList()->insertTextBox(59,191,230,209,
          1, gettext("No Talents."));
-   featTitle->setFont(dir.getRealFile(DNT_FONT_ARIAL),10,DNT_FONT_ALIGN_CENTER,
-         DNT_FONT_STYLE_BOLD);
+   featTitle->setFont(dir.getRealFile(DNT_FONT_ARIAL),10,
+         Farso::Font::ALIGN_CENTER,
+         Farso::Font::STYLE_BOLD);
    buttonPrevious = intWindow->getObjectsList()->insertButton(44,191,58,209,
          fnt.createUnicode(0x25C4),0);
    buttonNext = intWindow->getObjectsList()->insertButton(231,191,245,209,
@@ -206,7 +207,7 @@ int featsWindow::getPreviousUsableFeat(int prev)
 /***********************************************************************
  *                               treat                                 *
  ***********************************************************************/
-int featsWindow::treat(guiObject* object, int eventInfo)
+int featsWindow::treat(Farso::GuiObject* object, int eventInfo)
 {
    if(!isOpen())
    {
@@ -214,7 +215,7 @@ int featsWindow::treat(guiObject* object, int eventInfo)
       return(TALENT_WINDOW_CANCEL);
    }
 
-   if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
+   if(eventInfo == Farso::EVENT_PRESSED_BUTTON)
    {
       /* Close/Select */
       if(object == buttonClose)

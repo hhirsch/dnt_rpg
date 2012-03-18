@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -75,19 +75,19 @@ bool doConversion(string imgFile, string mapFile)
          x = k*10;
          z = l*10;
 
-         color = pixel_Get(img, x, z);
+         color = Farso::pixel_Get(img, x, z);
          SDL_GetRGB(color, img->format, &R, &G, &B);
          saux->h1 = (R+G+B) / 2.0;
 
-         color = pixel_Get(img, x, z+10);
+         color = Farso::pixel_Get(img, x, z+10);
          SDL_GetRGB(color, img->format, &R, &G, &B);
          saux->h2 = (R+G+B) / 2.0;
 
-         color = pixel_Get(img, x+10, z+10);
+         color = Farso::pixel_Get(img, x+10, z+10);
          SDL_GetRGB(color, img->format, &R, &G, &B);
          saux->h3 = (R+G+B) / 2.0;
 
-         color = pixel_Get(img, x+10, z);
+         color = Farso::pixel_Get(img, x+10, z);
          SDL_GetRGB(color, img->format, &R, &G, &B);
          saux->h4 = (R+G+B) / 2.0;
       }
@@ -148,7 +148,7 @@ bool doIndoor(string imgFile, string mapFile)
    {
       for(l=0; l < img->h; l++)
       {
-         color = pixel_Get(img, k, l);
+         color = Farso::pixel_Get(img, k, l);
          SDL_GetRGB(color, img->format, &R, &G, &B);
          if(R == 0)
          {
@@ -196,7 +196,7 @@ bool doIndoor(string imgFile, string mapFile)
    {
       for(k=0; k < img->w; k++)
       {
-         color = pixel_Get(img, k, l);
+         color = Farso::pixel_Get(img, k, l);
          SDL_GetRGB(color, img->format, &R, &G, &B);
          if(R == 0)
          {

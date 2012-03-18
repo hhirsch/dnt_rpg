@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -24,11 +24,14 @@
 #include <iostream>
 using namespace std;
 
+namespace Farso
+{
+
 /************************************************************
  *                        Farso_Init                        *
  ************************************************************/
-void Farso_Init(SDL_Surface **screen, string title, int width, int height,
-                bool fullScreen, int antiAliasingSamples, int stencilBufferSize)
+void init(SDL_Surface **screen, string title, int width, int height,
+          bool fullScreen, int antiAliasingSamples, int stencilBufferSize)
 {
     /* Start Openning the screen  */
     if ( SDL_Init(SDL_INIT_VIDEO) < 0 ) 
@@ -39,8 +42,8 @@ void Farso_Init(SDL_Surface **screen, string title, int width, int height,
     atexit(SDL_Quit);
 
     /* Define the resolution */
-    Farso_DefineResolution(screen, title, width, height, fullScreen,
-                           antiAliasingSamples, stencilBufferSize);
+    defineResolution(screen, title, width, height, fullScreen,
+                     antiAliasingSamples, stencilBufferSize);
     
     /* Define ignored events */
     SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,SDL_DEFAULT_REPEAT_INTERVAL);
@@ -61,7 +64,7 @@ void Farso_Init(SDL_Surface **screen, string title, int width, int height,
     SDL_EventState(SDL_QUIT, SDL_IGNORE);
     SDL_EventState(SDL_USEREVENT, SDL_IGNORE);
 
-    dntFont fnt;
+    Font fnt;
     fnt.init();
 
     MouseCursor cursors;
@@ -71,12 +74,12 @@ void Farso_Init(SDL_Surface **screen, string title, int width, int height,
 /************************************************************
  *                  Farso_DefineResolution                  *
  ************************************************************/
-void Farso_DefineResolution(SDL_Surface **screen, string title, 
-                            int width, int height,
-                            bool fullScreen, int antiAliasingSamples,
-                            int stencilBufferSize)
+void defineResolution(SDL_Surface **screen, string title, 
+                      int width, int height,
+                      bool fullScreen, int antiAliasingSamples,
+                      int stencilBufferSize)
 {
-   farsoOptions opts;
+   Options opts;
    SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
    SDL_GL_SetAttribute( SDL_GL_SWAP_CONTROL, 0 );
 
@@ -113,8 +116,7 @@ void Farso_DefineResolution(SDL_Surface **screen, string title,
          /* Quit the SDL  */
          SDL_Quit();
          /* Restart it  */
-         Farso_Init(screen, title, width, height, fullScreen, 
-               antiAliasingSamples, 8);
+         init(screen, title, width, height, fullScreen, antiAliasingSamples, 8);
       }
       else if(antiAliasingSamples > 0)
       {
@@ -122,8 +124,7 @@ void Farso_DefineResolution(SDL_Surface **screen, string title,
          /* Quit the SDL  */
          SDL_Quit();
          /* Restart it  */
-         Farso_Init(screen, title, width, height, fullScreen, 
-               0, stencilBufferSize);
+         init(screen, title, width, height, fullScreen, 0, stencilBufferSize);
       }
       else
       {
@@ -139,13 +140,14 @@ void Farso_DefineResolution(SDL_Surface **screen, string title,
 /************************************************************
  *                         Farso_End                        *
  ************************************************************/
-void Farso_End(SDL_Surface *screen)
+void end(SDL_Surface *screen)
 {
-   dntFont fnt;
+   Font fnt;
    fnt.end();
 
    MouseCursor cursors;
    cursors.finish();
 }
 
+}
 

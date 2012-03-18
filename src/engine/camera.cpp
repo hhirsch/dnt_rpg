@@ -112,7 +112,7 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
       phiAc = varCamera; 
    }
    /* Right Edge */
-   if(x >= SCREEN_X-5) // Turn CounterClockWise
+   if(x >= Farso::SCREEN_X-5) // Turn CounterClockWise
    {
       phiAc = -varCamera; 
    }

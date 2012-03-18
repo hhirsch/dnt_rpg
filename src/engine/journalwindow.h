@@ -130,7 +130,7 @@ class journalWindow
 
       /*! Open, if not already opened, the journal window
        * \param inter -> pointer to the used guiInterface */
-      void open(guiInterface* inter);
+      void open(Farso::GuiInterface* inter);
 
       /*! Verify if the window is opened
        * \return true if the journalWindow is opened */
@@ -148,12 +148,12 @@ class journalWindow
       journalAreas* areas;       /**< The missions per areas */
       int curArea;               /**< Current area displayed */
 
-      guiInterface* gui;         /**< The gui used */
-      window* internalWindow;    /**< The window pointer */
-      button* nextButton;        /**< The Next Area Button */
-      button* previousButton;    /**< The Previous Area Button */
-      textBox* areaText;         /**< The Area text */
-      rolBar* missionsText;      /**< The missons text */
+      Farso::GuiInterface* gui;         /**< The gui used */
+      Farso::Window* internalWindow;    /**< The window pointer */
+      Farso::Button* nextButton;        /**< The Next Area Button */
+      Farso::Button* previousButton;    /**< The Previous Area Button */
+      Farso::TextBox* areaText;         /**< The Area text */
+      Farso::RolBar* missionsText;      /**< The missons text */
 };
 
 #endif

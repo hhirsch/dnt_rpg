@@ -30,11 +30,12 @@
    #include <SDL/SDL_image.h>
 #endif
 using namespace std;
+using namespace Farso;
 
 /**************************************************************
  *                         Constructor                        *
  **************************************************************/
-guiList::guiList(int sWidth, int sHeight, SDL_Surface* surface, 
+GuiList::GuiList(int sWidth, int sHeight, SDL_Surface* surface, 
                  bool hasDecor, int t)
 {
    intMenu = NULL;
@@ -49,7 +50,7 @@ guiList::guiList(int sWidth, int sHeight, SDL_Surface* surface,
 /**************************************************************
  *                          Destructor                        *
  **************************************************************/
-guiList::~guiList()
+GuiList::~GuiList()
 {
    /* Clear the list */
    clearList();
@@ -70,9 +71,9 @@ guiList::~guiList()
 /**************************************************************
  *                          clearList                         *
  **************************************************************/
-void guiList::clearList()
+void GuiList::clearList()
 {
-   std::list<guiObject*>::iterator it;
+   std::list<GuiObject*>::iterator it;
 
    for(it=list.begin(); it != list.end(); it++)
    {
@@ -84,9 +85,9 @@ void guiList::clearList()
 /**************************************************************
  *                            changed                         *
  **************************************************************/
-bool guiList::changed()
+bool GuiList::changed()
 {
-   std::list<guiObject*>::iterator it;
+   std::list<GuiObject*>::iterator it;
 
    /* Verify all objects on list */
    for(it=list.begin(); it != list.end(); it++)
@@ -100,7 +101,7 @@ bool guiList::changed()
    /* Verify tabBox Objects */
    if(tab != NULL)
    {
-      tabBox* tb = (tabBox*)tab;
+      TabBox* tb = (TabBox*)tab;
       if(tb->changed())
       {
          return(true);
@@ -121,10 +122,10 @@ bool guiList::changed()
 /**************************************************************
  *                            draw                            *
  **************************************************************/
-void guiList::draw()
+void GuiList::draw()
 { 
-   std::list<guiObject*>::iterator it;
-   guiObject* obj;
+   std::list<GuiObject*>::iterator it;
+   GuiObject* obj;
 
    for(it=list.begin(); it != list.end(); it++)
    {
@@ -134,52 +135,52 @@ void guiList::draw()
       {
          switch(obj->type)
          {
-            case FARSO_OBJECT_BUTTON:
+            case OBJECT_BUTTON:
             {
-                 button *b = (button*) obj;   
+                 Button *b = (Button*) obj;   
                  b->draw();
                  break;
             }
-            case FARSO_OBJECT_TEXT_BAR:
+            case OBJECT_TEXT_BAR:
             {
-                 textBar *bart = (textBar*) obj; 
+                 TextBar *bart = (TextBar*) obj; 
                  bart->draw();
                  break;
             }
-            case FARSO_OBJECT_SEL_BOX:
+            case OBJECT_SEL_BOX:
             {
-                 cxSel *cx = (cxSel*) obj;
+                 CxSel *cx = (CxSel*) obj;
                  cx->draw();
                  break;
             }
-            case FARSO_OBJECT_SEL_TEXT:
+            case OBJECT_SEL_TEXT:
             {
-                 selText *st = (selText*) obj;
+                 SelText *st = (SelText*) obj;
                  st->draw();
                  break;
             }
-            case FARSO_OBJECT_PICTURE:
+            case OBJECT_PICTURE:
             {
-                 picture* fig = (picture*) obj;
+                 Picture* fig = (Picture*) obj;
                  fig->draw();
                  break;
             }
-            case FARSO_OBJECT_TEXT_BOX:
+            case OBJECT_TEXT_BOX:
             {
-                 textBox *quad = (textBox*) obj;
+                 TextBox *quad = (TextBox*) obj;
                  quad->draw();
                  break;
             }
-            case FARSO_OBJECT_TAB_BUTTON:
+            case OBJECT_TAB_BUTTON:
             {
-                 tabButton *bt = (tabButton*) obj; 
+                 TabButton *bt = (TabButton*) obj; 
                  bt->setCurrent(-1);
                  bt->draw();
                  break;
             }
-            case FARSO_OBJECT_HEALTH_BAR:
+            case OBJECT_HEALTH_BAR:
             {
-                 healthBar* hb = (healthBar*) obj;
+                 HealthBar* hb = (HealthBar*) obj;
                  hb->draw();
                  break;
             }
@@ -199,74 +200,74 @@ void guiList::draw()
 /**************************************************************
  *                         freeElement                        *
  **************************************************************/
-void guiList::freeElement(guiObject* obj)
+void GuiList::freeElement(GuiObject* obj)
 {
    /* Delete the memory used */
    switch(obj->type) 
    {
-      case FARSO_OBJECT_BUTTON:
+      case OBJECT_BUTTON:
       {
-         button* b = (button*) obj;
+         Button* b = (Button*) obj;
          delete(b);
          break;
       }
-      case FARSO_OBJECT_TEXT_BAR:
+      case OBJECT_TEXT_BAR:
       {
-         textBar* b = (textBar*) obj;
+         TextBar* b = (TextBar*) obj;
          delete(b);
          break;
       }
-      case FARSO_OBJECT_SEL_BOX:
+      case OBJECT_SEL_BOX:
       {
-         cxSel* c = (cxSel*) obj;
+         CxSel* c = (CxSel*) obj;
          delete(c);
          break;
       }
-      case FARSO_OBJECT_PICTURE:
+      case OBJECT_PICTURE:
       {
-         picture* f = (picture*) obj;
+         Picture* f = (Picture*) obj;
          delete(f);
          break;
       }
-      case FARSO_OBJECT_SEL_TEXT:
+      case OBJECT_SEL_TEXT:
       {
-         selText* s = (selText*) obj;
+         SelText* s = (SelText*) obj;
          delete(s);
          break;
       }
-      case FARSO_OBJECT_TEXT_BOX:
+      case OBJECT_TEXT_BOX:
       {
-         textBox* q = (textBox*) obj;
+         TextBox* q = (TextBox*) obj;
          delete(q);
          break;
       }
-      case FARSO_OBJECT_TAB_BUTTON:
+      case OBJECT_TAB_BUTTON:
       {
-         tabButton* tb = (tabButton*) obj;
+         TabButton* tb = (TabButton*) obj;
          delete(tb);
          break;
       }
-      case FARSO_OBJECT_ROL_BAR:
+      case OBJECT_ROL_BAR:
       {
-         rolBar* b = (rolBar*) obj;
+         RolBar* b = (RolBar*) obj;
          delete(b);
          break;
       }
-      case FARSO_OBJECT_LIST_TEXT:
+      case OBJECT_LIST_TEXT:
       {
-         listText* lt = (listText*) obj;
+         ListText* lt = (ListText*) obj;
          delete(lt);
          break;
       }
-      case FARSO_OBJECT_FILE_SEL:
+      case OBJECT_FILE_SEL:
       {
-         fileSel* fs = (fileSel*)obj;
+         FileSel* fs = (FileSel*)obj;
          delete(fs);
          break;
       }
-      case FARSO_OBJECT_HEALTH_BAR:
+      case OBJECT_HEALTH_BAR:
       {
-         healthBar* hb = (healthBar*)obj;
+         HealthBar* hb = (HealthBar*)obj;
          delete(hb);
          break;
       }
@@ -282,7 +283,7 @@ void guiList::freeElement(guiObject* obj)
 /**************************************************************
  *                            insert                          *
  **************************************************************/
-void guiList::insert(guiObject* obj)
+void GuiList::insert(GuiObject* obj)
 {
    if(type == LIST_TYPE_ADD_AT_BEGIN)
    {
@@ -297,11 +298,11 @@ void guiList::insert(guiObject* obj)
 /**************************************************************
  *                         insertButton                       *
  **************************************************************/
-button* guiList::insertButton(int xa,int ya,int xb,int yb,
+Button* GuiList::insertButton(int xa,int ya,int xb,int yb,
                            string text, bool oval)
 {
-   button* novo;
-   novo = new button(xa,ya,xb,yb, text, oval, wSurface);
+   Button* novo;
+   novo = new Button(xa,ya,xb,yb, text, oval, wSurface);
    insert(novo);
    return(novo);
 }
@@ -309,10 +310,10 @@ button* guiList::insertButton(int xa,int ya,int xb,int yb,
 /**************************************************************
  *                         insertCxSel                        *
  **************************************************************/
-cxSel* guiList::insertCxSel(int xa,int ya, bool selected)
+CxSel* GuiList::insertCxSel(int xa,int ya, bool selected)
 {
-   cxSel* novo;
-   novo = new cxSel(xa, ya, wSurface);
+   CxSel* novo;
+   novo = new CxSel(xa, ya, wSurface);
    novo->setSelection(selected);
    insert(novo);
    return(novo);
@@ -321,10 +322,10 @@ cxSel* guiList::insertCxSel(int xa,int ya, bool selected)
 /**************************************************************
  *                        insertPicture                       *
  **************************************************************/
-picture* guiList::insertPicture(int x,int y,int w,int h,const char* arquivo)
+Picture* GuiList::insertPicture(int x,int y,int w,int h,const char* arquivo)
 {
-   picture* novo;
-   novo = new picture(x,y,w,h,arquivo,wSurface);
+   Picture* novo;
+   novo = new Picture(x,y,w,h,arquivo,wSurface);
    /* Use alpha from source at empty windows */
    if(!wHasDecor)
    {
@@ -337,17 +338,17 @@ picture* guiList::insertPicture(int x,int y,int w,int h,const char* arquivo)
 /**************************************************************
  *                       insertTabButton                      *
  **************************************************************/
-tabButton* guiList::insertTabButton(int x,int y,int w,int h,const char* arquivo)
+TabButton* GuiList::insertTabButton(int x,int y,int w,int h,const char* arquivo)
 {
-   tabButton* novo;
+   TabButton* novo;
 
    if(arquivo)
    {
-      novo = new tabButton(x,y,arquivo,wSurface);
+      novo = new TabButton(x,y,arquivo,wSurface);
    }
    else
    {
-      novo = new tabButton(x,y,w,h, wSurface);
+      novo = new TabButton(x,y,w,h, wSurface);
    }
    insert(novo);
    return(novo);
@@ -356,11 +357,11 @@ tabButton* guiList::insertTabButton(int x,int y,int w,int h,const char* arquivo)
 /**************************************************************
  *                        insertTextBar                       *
  **************************************************************/
-textBar* guiList::insertTextBar(int xa,int ya,int xb,int yb, string text,
+TextBar* GuiList::insertTextBar(int xa,int ya,int xb,int yb, string text,
                                 int cript)
 {
-   textBar* novo;
-   novo = new textBar(xa,ya,xb,yb, text, cript, wSurface);
+   TextBar* novo;
+   novo = new TextBar(xa,ya,xb,yb, text, cript, wSurface);
    insert(novo);
    return(novo);
 } 
@@ -368,11 +369,11 @@ textBar* guiList::insertTextBar(int xa,int ya,int xb,int yb, string text,
 /**************************************************************
  *                         insertTextBox                      *
  **************************************************************/
-textBox* guiList::insertTextBox(int xa,int ya,int xb,int yb,
+TextBox* GuiList::insertTextBox(int xa,int ya,int xb,int yb,
                                    int frameType, string text)
 {
-   textBox* novo;
-   novo = new textBox(xa,ya,xb,yb,frameType,wSurface);
+   TextBox* novo;
+   novo = new TextBox(xa,ya,xb,yb,frameType,wSurface);
    novo->setText(text);
    insert(novo);
    return(novo);
@@ -381,13 +382,13 @@ textBox* guiList::insertTextBox(int xa,int ya,int xb,int yb,
 /**************************************************************
  *                        insertSelText                       *
  **************************************************************/
-selText* guiList::insertSelText(int xa,int ya,int xb,int yb,
+SelText* GuiList::insertSelText(int xa,int ya,int xb,int yb,
                                 string text0, string text1,
                                 string text2, string text3, 
                                 string text4)
 {
-   selText* novo;
-   novo = new selText(xa,ya,xb,yb,text0,text1,text2,text3,text4,wSurface);
+   SelText* novo;
+   novo = new SelText(xa,ya,xb,yb,text0,text1,text2,text3,text4,wSurface);
    insert(novo);
    return(novo);
 } 
@@ -395,10 +396,10 @@ selText* guiList::insertSelText(int xa,int ya,int xb,int yb,
 /**************************************************************
  *                         insertRolBar                       *
  **************************************************************/
-rolBar* guiList::insertRolBar(int xa,int ya,int xb,int yb,string txt)
+RolBar* GuiList::insertRolBar(int xa,int ya,int xb,int yb,string txt)
 {
-   rolBar* novo;
-   novo = new rolBar(xa,ya,xb,yb,txt, this, wSurface);
+   RolBar* novo;
+   novo = new RolBar(xa,ya,xb,yb,txt, this, wSurface);
    insert(novo);
    return(novo);
 }
@@ -406,10 +407,10 @@ rolBar* guiList::insertRolBar(int xa,int ya,int xb,int yb,string txt)
 /**************************************************************
  *                        insertListText                      *
  **************************************************************/
-listText* guiList::insertListText(int xa,int ya,int xb,int yb)
+ListText* GuiList::insertListText(int xa,int ya,int xb,int yb)
 {
-   listText* novo;
-   novo = new listText(xa,ya,xb,yb, wSurface, this);
+   ListText* novo;
+   novo = new ListText(xa,ya,xb,yb, wSurface, this);
    insert(novo);
    return(novo);
 }
@@ -417,10 +418,10 @@ listText* guiList::insertListText(int xa,int ya,int xb,int yb)
 /**************************************************************
  *                        insertFileSel                       *
  **************************************************************/
-fileSel* guiList::insertFileSel(int xa, int ya, bool load, 
+FileSel* GuiList::insertFileSel(int xa, int ya, bool load, 
                                 string dir, bool nav)
 {
-   fileSel* n = new fileSel(xa, ya, load, dir, this, wSurface, nav);
+   FileSel* n = new FileSel(xa, ya, load, dir, this, wSurface, nav);
    insert(n);
    return(n);
 }
@@ -428,9 +429,9 @@ fileSel* guiList::insertFileSel(int xa, int ya, bool load,
 /**************************************************************
  *                      insertHealthBar                       *
  **************************************************************/
-healthBar* guiList::insertHealthBar(int xa, int ya, int xb, int yb, int max)
+HealthBar* GuiList::insertHealthBar(int xa, int ya, int xb, int yb, int max)
 {
-   healthBar* n = new healthBar(xa, ya, xb, yb, wSurface);
+   HealthBar* n = new HealthBar(xa, ya, xb, yb, wSurface);
    insert(n);
    n->defineMaxHealth(max);
    return(n);
@@ -439,22 +440,22 @@ healthBar* guiList::insertHealthBar(int xa, int ya, int xb, int yb, int max)
 /*********************************************************************
  *                          defineTabBox                             *
  *********************************************************************/
-guiObject* guiList::defineTabBox(int x1, int y1, int x2, int y2)
+GuiObject* GuiList::defineTabBox(int x1, int y1, int x2, int y2)
 {
    if(tab != NULL)
    {
-      tabBox* tb = (tabBox*)tab;
+      TabBox* tb = (TabBox*)tab;
       delete(tb);
    }
 
-   tab = (guiObject*)new tabBox(x1,y1,x2,y2, wSurface);
+   tab = (GuiObject*)new TabBox(x1,y1,x2,y2, wSurface);
    return(tab);
 }
 
 /*********************************************************************
  *                            getTabBox                              *
  *********************************************************************/
-guiObject* guiList::getTabBox()
+GuiObject* GuiList::getTabBox()
 {
    return(tab);
 }
@@ -462,11 +463,11 @@ guiObject* guiList::getTabBox()
 /*********************************************************************
  *                       getActiveTabBoxList                         *
  *********************************************************************/
-guiList* guiList::getActiveTabBoxList()
+GuiList* GuiList::getActiveTabBoxList()
 {
    if(tab != NULL)
    {
-      tabBox* tb = (tabBox*)tab;
+      TabBox* tb = (TabBox*)tab;
       return(tb->getActiveList());
    }
 
@@ -476,20 +477,20 @@ guiList* guiList::getActiveTabBoxList()
 /**************************************************************
  *                            addMenu                         *
  **************************************************************/
-guiObject* guiList::addMenu()
+GuiObject* GuiList::addMenu()
 {
    if(intMenu)
    {
       removeMenu();
    }
-   intMenu = (guiObject*)new menu(0,0,wWidth, wHeight, wSurface);
+   intMenu = (GuiObject*)new Menu(0,0,wWidth, wHeight, wSurface);
    return(intMenu);
 }
 
 /**************************************************************
  *                           getMenu                          *
  **************************************************************/
-guiObject* guiList::getMenu()
+GuiObject* GuiList::getMenu()
 {
    return(intMenu);
 }
@@ -497,11 +498,11 @@ guiObject* guiList::getMenu()
 /**************************************************************
  *                          removeMenu                        *
  **************************************************************/
-void guiList::removeMenu()
+void GuiList::removeMenu()
 {
    if(intMenu)
    {
-      menu* men = (menu*)intMenu;
+      Menu* men = (Menu*)intMenu;
       delete(men);
    }
    intMenu = NULL;

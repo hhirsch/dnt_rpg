@@ -25,7 +25,7 @@ using namespace std;
 /***********************************************************************
  *                             Constructor                             *
  ***********************************************************************/
-partElementWindow::partElementWindow(guiInterface* interf)
+partElementWindow::partElementWindow(Farso::GuiInterface* interf)
 {
    curWindow = NULL;
    element = NULL;
@@ -75,10 +75,10 @@ bool partElementWindow::isOpen()
  ***********************************************************************/
 void partElementWindow::openWindow()
 {
-   farsoOptions opt;
+   Farso::Options opt;
    int curPosX = 194;
    int curPosY = 64;
-   dntFont fnt;
+   Farso::Font fnt;
 
    /* Close it if already opened */
    if(isOpen())
@@ -97,7 +97,7 @@ void partElementWindow::openWindow()
          fnt.createUnicode(0x25C4),0);
    previousType->defineFont(opt.getDefaultFont(), 9);
    type = curWindow->getObjectsList()->insertTextBox(21, 20, 130, 37, 1, "");
-   type->setFont(opt.getDefaultFont(), 9, DNT_FONT_ALIGN_CENTER);
+   type->setFont(opt.getDefaultFont(), 9, Farso::Font::ALIGN_CENTER);
    nextType = curWindow->getObjectsList()->insertButton(131, 20, 141, 37, 
          fnt.createUnicode(0x25BA),0);
    nextType->defineFont(opt.getDefaultFont(), 9);
@@ -278,7 +278,7 @@ void partElementWindow::resetElement()
 /***********************************************************************
  *                               treat                                 *
  ***********************************************************************/
-bool partElementWindow::treat(guiObject* object, int eventInfo)
+bool partElementWindow::treat(Farso::GuiObject* object, int eventInfo)
 {
    if(!isOpen())
    {
@@ -287,9 +287,9 @@ bool partElementWindow::treat(guiObject* object, int eventInfo)
    }
 
    /* Button press */
-   if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
+   if(eventInfo == Farso::EVENT_PRESSED_BUTTON)
    {
-      if(object == (guiObject*)nextType)
+      if(object == (Farso::GuiObject*)nextType)
       {
          if(element->type < DNT_PART_ELEMENT_RANDOM_INITIAL)
          {
@@ -299,7 +299,7 @@ bool partElementWindow::treat(guiObject* object, int eventInfo)
             return(true);
          }
       }
-      else if(object == (guiObject*)previousType)
+      else if(object == (Farso::GuiObject*)previousType)
       {
          if(element->type > 0)
          {
@@ -311,9 +311,9 @@ bool partElementWindow::treat(guiObject* object, int eventInfo)
       }
    }
    /* cxSel changed */
-   else if(eventInfo == FARSO_EVENT_MODIFIED_CX_SEL)
+   else if(eventInfo == Farso::EVENT_MODIFIED_CX_SEL)
    {
-      if(object == (guiObject*)useLimits)
+      if(object == (Farso::GuiObject*)useLimits)
       {
          /* Set useLimits */
          element->limitsDefined = useLimits->isSelected();
@@ -323,38 +323,38 @@ bool partElementWindow::treat(guiObject* object, int eventInfo)
          return(true);
       }
    }
-   else if(eventInfo == FARSO_EVENT_WROTE_TEXT_BAR)
+   else if(eventInfo == Farso::EVENT_WROTE_TEXT_BAR)
    {
-      if(object == (guiObject*)initialValue)
+      if(object == (Farso::GuiObject*)initialValue)
       {
          sscanf(initialValue->getText().c_str(), "%f", &element->initialValue);
          resetElement();
          return(true);
       }
-      else if(object == (guiObject*)finalValue)
+      else if(object == (Farso::GuiObject*)finalValue)
       {
          sscanf(finalValue->getText().c_str(), "%f", &element->finalValue);
          resetElement();
          return(true);
       }
-      else if(object == (guiObject*)mult)
+      else if(object == (Farso::GuiObject*)mult)
       {
          sscanf(mult->getText().c_str(), "%f", &element->mult);
          resetElement();
          return(true);
       }
-      else if(object == (guiObject*)sum)
+      else if(object == (Farso::GuiObject*)sum)
       {
          sscanf(sum->getText().c_str(), "%f", &element->sum);
          resetElement();
          return(true);
       }
-      else if(object == (guiObject*)lowerLimit)
+      else if(object == (Farso::GuiObject*)lowerLimit)
       {
          sscanf(lowerLimit->getText().c_str(), "%f", &element->lowerLimit);
          return(true);
       }
-      else if(object == (guiObject*)upperLimit)
+      else if(object == (Farso::GuiObject*)upperLimit)
       {
          sscanf(upperLimit->getText().c_str(), "%f", &element->upperLimit);
          return(true);

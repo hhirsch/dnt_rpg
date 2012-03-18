@@ -44,6 +44,9 @@
 #include "messages.h"
 #include "farsoopts.h"
 
+namespace Farso
+{
+
 /*! Init the SDL/OpenGL Context
  * \param screen -> pointer to the pointer to the surface used as screen
  * \param title -> title of the screen
@@ -52,8 +55,8 @@
  * \param fullScreen -> true if is fullscreen
  * \param antiAliasingSample -> number of Antialising used (0 == disabled)
  * \param stencilBufferSize -> number of stencil buffers */
-void Farso_Init(SDL_Surface **screen, std::string title, int width, int height,
-                bool fullScreen, int antiAliasingSample, int stencilBufferSize);
+void init(SDL_Surface **screen, std::string title, int width, int height,
+          bool fullScreen, int antiAliasingSample, int stencilBufferSize);
 
 /*! Define the SDL/OpenGL Context Resolution
  * \param screen -> pointer to the pointer to the surface used as screen
@@ -62,15 +65,16 @@ void Farso_Init(SDL_Surface **screen, std::string title, int width, int height,
  * \param height -> screen height
  * \param fullScreen -> true if is fullscreen
  * \param antiAliasingSample -> number of Antialising used (0 == disabled) */
-void Farso_DefineResolution(SDL_Surface **screen, std::string title, 
-                            int width, int height,
-                            bool fullScreen, int antiAliasingSample, 
-                            int stencilBufferSize);
+void defineResolution(SDL_Surface **screen, std::string title, 
+                      int width, int height,
+                      bool fullScreen, int antiAliasingSample, 
+                      int stencilBufferSize);
 
 /*! End the SDL/OpenGL Context
  * \param screen -> surface used as screen */
-void Farso_End(SDL_Surface *screen);
+void end(SDL_Surface *screen);
 
+}
 
 #endif
 

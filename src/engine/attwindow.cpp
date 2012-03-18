@@ -31,13 +31,13 @@ using namespace std;
 /**************************************************************
  *                      Constructor                           *
  **************************************************************/
-attWindow::attWindow(skills* savSkill, guiInterface* inter,
+attWindow::attWindow(skills* savSkill, Farso::GuiInterface* inter,
                      int modifiers[6],bool usePreviousValues)
 {
    dirs dir;
-   dntFont fnt;
-   int centerY = SCREEN_Y / 2;
-   int centerX = SCREEN_X / 2;
+   Farso::Font fnt;
+   int centerY = Farso::SCREEN_Y / 2;
+   int centerX = Farso::SCREEN_X / 2;
    int i;
    string saux;
    char tmp[16];
@@ -79,7 +79,7 @@ attWindow::attWindow(skills* savSkill, guiInterface* inter,
    }
    rolledPoints = intWindow->getObjectsList()->insertTextBox(8,19,243,32,0,
                                                              saux.c_str());
-   rolledPoints->setFont(fontArial, 12, DNT_FONT_ALIGN_CENTER);
+   rolledPoints->setFont(fontArial, 12, Farso::Font::ALIGN_CENTER);
    /* reroll button */
    rerollButton = intWindow->getObjectsList()->insertButton(244,17,334,35,
                                                   gettext("Roll"),1);
@@ -95,7 +95,7 @@ attWindow::attWindow(skills* savSkill, guiInterface* inter,
    intWindow->getObjectsList()->insertTextBox(9,50,85,63,0,gettext("Strength"));
    attPoints[0] = intWindow->getObjectsList()->insertTextBox(103,48,122,65,
                                                              1,"");
-   attPoints[0]->setFont(fontPalladio, 10, DNT_FONT_ALIGN_CENTER);
+   attPoints[0]->setFont(fontPalladio, 10, Farso::Font::ALIGN_CENTER);
    attButtonPrev[0] = intWindow->getObjectsList()->insertButton(92,48,102,65,
                                                   fnt.createUnicode(0x25C4),0);
    attButtonPrev[0]->defineFont(fontArial, 9);
@@ -115,7 +115,7 @@ attWindow::attWindow(skills* savSkill, guiInterface* inter,
                                               gettext("Dexterity"));
    attPoints[1] = intWindow->getObjectsList()->insertTextBox(103,82,122,99,
                                                              1,"");
-   attPoints[1]->setFont(fontPalladio, 10, DNT_FONT_ALIGN_CENTER);
+   attPoints[1]->setFont(fontPalladio, 10, Farso::Font::ALIGN_CENTER);
    attButtonPrev[1] = intWindow->getObjectsList()->insertButton(92,82,102,99,
                                                   fnt.createUnicode(0x25C4),0);
    attButtonPrev[1]->defineFont(fontArial, 9);
@@ -135,7 +135,7 @@ attWindow::attWindow(skills* savSkill, guiInterface* inter,
                                               gettext("Constitution"));
    attPoints[2] = intWindow->getObjectsList()->insertTextBox(103,118,122,135,1,
                                                              "");
-   attPoints[2]->setFont(fontPalladio, 10, DNT_FONT_ALIGN_CENTER);
+   attPoints[2]->setFont(fontPalladio, 10, Farso::Font::ALIGN_CENTER);
    attButtonPrev[2] = intWindow->getObjectsList()->insertButton(92,118,102,135,
                                                    fnt.createUnicode(0x25C4),0);
    attButtonNext[2] = intWindow->getObjectsList()->insertButton(123,118,133,135,
@@ -155,7 +155,7 @@ attWindow::attWindow(skills* savSkill, guiInterface* inter,
                                               gettext("Intelligence"));
    attPoints[3] = intWindow->getObjectsList()->insertTextBox(103,152,122,169,
                                                              1,"");
-   attPoints[3]->setFont(fontPalladio, 10, DNT_FONT_ALIGN_CENTER);
+   attPoints[3]->setFont(fontPalladio, 10, Farso::Font::ALIGN_CENTER);
    attButtonPrev[3] = intWindow->getObjectsList()->insertButton(92,152,102,169,
                                                   fnt.createUnicode(0x25C4),0);
    attButtonNext[3] = intWindow->getObjectsList()->insertButton(123,152,
@@ -176,7 +176,7 @@ attWindow::attWindow(skills* savSkill, guiInterface* inter,
                                               gettext("Wisdom"));
    attPoints[4] = intWindow->getObjectsList()->insertTextBox(103,186,122,203,
                                                              1,"");
-   attPoints[4]->setFont(fontPalladio, 10, DNT_FONT_ALIGN_CENTER);
+   attPoints[4]->setFont(fontPalladio, 10, Farso::Font::ALIGN_CENTER);
    attButtonPrev[4] = intWindow->getObjectsList()->insertButton(92,186,102,203,
                                                   fnt.createUnicode(0x25C4),0);
    attButtonNext[4] = intWindow->getObjectsList()->insertButton(123,186,
@@ -197,7 +197,7 @@ attWindow::attWindow(skills* savSkill, guiInterface* inter,
                                               gettext("Charisma"));
    attPoints[5] = intWindow->getObjectsList()->insertTextBox(103,220,122,237,1,
                                                              "");
-   attPoints[5]->setFont(fontPalladio, 10, DNT_FONT_ALIGN_CENTER);
+   attPoints[5]->setFont(fontPalladio, 10, Farso::Font::ALIGN_CENTER);
    attButtonPrev[5] = intWindow->getObjectsList()->insertButton(92,220,102,237,
                                                   fnt.createUnicode(0x25C4),0);
    attButtonNext[5] = intWindow->getObjectsList()->insertButton(123,220,
@@ -227,8 +227,8 @@ attWindow::attWindow(skills* savSkill, guiInterface* inter,
    /* Attribute Description */
    textDescTitle = intWindow->getObjectsList()->insertTextBox(248,38,519,53,1,
                                              gettext("Attribute Description"));
-   textDescTitle->setFont(fontTimes,12,DNT_FONT_ALIGN_CENTER,
-                          DNT_FONT_STYLE_BOLD);
+   textDescTitle->setFont(fontTimes,12,Farso::Font::ALIGN_CENTER,
+                          Farso::Font::STYLE_BOLD);
    textDescTitle->setBackColor(110, 0, 0);
 
    textDesc = intWindow->getObjectsList()->insertRolBar(248,54,519,245,"");
@@ -272,9 +272,8 @@ void attWindow::setDescription(int sk)
    {
       textDesc->setText("");
       textDesc->addText(skDef->name + "||", 
-            dir.getRealFile(DNT_FONT_ARIAL), 12, DNT_FONT_ALIGN_CENTER,
-            DNT_FONT_STYLE_UNDERLINE,
-            86, 161, 32);
+            dir.getRealFile(DNT_FONT_ARIAL), 12, Farso::Font::ALIGN_CENTER,
+            Farso::Font::STYLE_UNDERLINE, 86, 161, 32);
       textDesc->addText(skDef->description);
       textDesc->setFirstLine(0);
    }
@@ -536,16 +535,17 @@ int attWindow::assignAttMod(int att)
 /**************************************************************
  *                            treat                           *
  **************************************************************/
-int attWindow::treat(guiObject* object, int eventInfo, guiInterface* inter,
-                     GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
+int attWindow::treat(Farso::GuiObject* object, int eventInfo, 
+      Farso::GuiInterface* inter, GLdouble proj[16], GLdouble modl[16],
+      GLint viewPort[4])
 {
    char tmp[5];
    int i;
 
-   if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
+   if(eventInfo == Farso::EVENT_PRESSED_BUTTON)
    {
       /* Confirm */
-      if(object == (guiObject*) buttonConfirm)
+      if(object == (Farso::GuiObject*) buttonConfirm)
       {
          if(allAssigned())
          {
@@ -555,21 +555,21 @@ int attWindow::treat(guiObject* object, int eventInfo, guiInterface* inter,
          }
          else
          {
-            warning warn;
+            Farso::Warning warn;
             warn.show(gettext("Warning"),
                       gettext("You Need to Assign All Attributes."), inter);
             return(ATTW_OTHER);
          }
       }
       /* Cancel */
-      else if(object == (guiObject*) buttonCancel) 
+      else if(object == (Farso::GuiObject*) buttonCancel) 
       {
           inter->closeWindow(intWindow);
           intWindow = NULL;
          return(ATTW_CANCEL);
       }
       /* Reroll */
-      else if(object == (guiObject*) rerollButton)
+      else if(object == (Farso::GuiObject*) rerollButton)
       {
           clear();
           /* ReRoll All Dices */
@@ -583,12 +583,12 @@ int attWindow::treat(guiObject* object, int eventInfo, guiInterface* inter,
           intWindow->draw(0,0);
       }
       /* Clear */
-      else if(object == (guiObject*) clearButton)
+      else if(object == (Farso::GuiObject*) clearButton)
       {
          clear();
       }
       /* Auto */
-      else if(object == (guiObject*) autoButton)
+      else if(object == (Farso::GuiObject*) autoButton)
       {
          autoAssign();
       }
@@ -597,7 +597,7 @@ int attWindow::treat(guiObject* object, int eventInfo, guiInterface* inter,
       {
          for(i=0; i<6; i++) 
          {
-            if(object == (guiObject*) attButtonNext[i])
+            if(object == (Farso::GuiObject*) attButtonNext[i])
             {
                 nextAvaiblePoints(i);
                 sprintf(tmp,"%.2d", points[attPointsIndex[i]]);
@@ -606,7 +606,7 @@ int attWindow::treat(guiObject* object, int eventInfo, guiInterface* inter,
                 setDescription(i+1);
                 intWindow->draw(0,0);
             }
-            else if(object == (guiObject*) attButtonPrev[i])
+            else if(object == (Farso::GuiObject*) attButtonPrev[i])
             {
                 previousAvaiblePoints(i);
                 sprintf(tmp,"%.2d", points[attPointsIndex[i]]);

@@ -27,43 +27,44 @@
 #include <math.h>
 #include <iostream>
 using namespace std;
+using namespace Farso;
 
 #define ROLBAR_UPDATE_RATE 50
 
 /*********************************************************************
  *                            Constructor                            *
  *********************************************************************/
-rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, guiList* list,
-               SDL_Surface* surface):guiObject(surface)
+RolBar::RolBar(int xa, int ya, int xb, int yb, string txt, GuiList* list,
+               SDL_Surface* surface):GuiObject(surface)
 {
    lastUpdated = SDL_GetTicks();
    if(!list)
    {
-      cerr << "Unknow Objects List when inserting rolBar!" << endl;
+      cerr << "Unknow Objects List when inserting RolBar!" << endl;
       return;
    }
    intList = list;
 
-   type = FARSO_OBJECT_ROL_BAR;
+   type = Farso::OBJECT_ROL_BAR;
    x1 = xa;
    y1 = ya;
    x2 = xb;
    y2 = yb;
    maxHeight = (yb-ya-2);
 
-   guiList* l = (guiList*)list;
+   GuiList* l = (GuiList*)list;
 
    /* Edges */
    lastMouseY = -1;
    deltaY = 0.0f;
    position = l->insertButton(xb-10, ya+2, xb-2, yb-26, "", 0);
-   position->setType(button::KEEP_PRESSING);
+   position->setType(Button::KEEP_PRESSING);
    sizeY = position->getY2() - position->getY1();
    contorn = l->insertTextBox(xb-12, ya, xb, yb-24, 1, "");
    
    /* Buttons */
-   farsoOptions opt;
-   dntFont font;
+   Options opt;
+   Font font;
    up = l->insertButton(xb-12,yb-23,xb,yb-12, font.createUnicode(0x25B2),0);
    up->defineFont(opt.getDefaultFont(), 8);
    down = l->insertButton(xb-12,yb-11,xb,yb, font.createUnicode(0x25BC),0);
@@ -83,30 +84,30 @@ rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, guiList* list,
 /*********************************************************************
  *                             Destructor                            *
  *********************************************************************/
-rolBar::~rolBar()
+RolBar::~RolBar()
 {
 }
 
 /*********************************************************************
  *                             isOwner                               *
  *********************************************************************/
-bool rolBar::isOwner(guiObject* obj)
+bool RolBar::isOwner(GuiObject* obj)
 {
-   return( (obj == (guiObject*) up) ||
-           (obj == (guiObject*) down) ||
-           (obj == (guiObject*) scrollText) ||
-           (obj == (guiObject*) contorn) ||
-           (obj == (guiObject*) position) );
+   return( (obj == (GuiObject*) up) ||
+           (obj == (GuiObject*) down) ||
+           (obj == (GuiObject*) scrollText) ||
+           (obj == (GuiObject*) contorn) ||
+           (obj == (GuiObject*) position) );
 }
 
 /*********************************************************************
  *                              eventGot                             *
  *********************************************************************/
-bool rolBar::eventGot(int type, guiObject* object, int mouseY)
+bool RolBar::eventGot(int type, GuiObject* object, int mouseY)
 {
    /* Verify position button */
-   if( (type == FARSO_EVENT_ON_PRESS_BUTTON) && 
-       (object == (guiObject*)position) )
+   if( (type == Farso::EVENT_ON_PRESS_BUTTON) && 
+       (object == (GuiObject*)position) )
    {
       if(lastMouseY == -1)
       {
@@ -151,9 +152,9 @@ bool rolBar::eventGot(int type, guiObject* object, int mouseY)
    if((SDL_GetTicks() - lastUpdated) >= ROLBAR_UPDATE_RATE)
    {
       lastUpdated = SDL_GetTicks();
-      if(type == FARSO_EVENT_ON_PRESS_BUTTON)
+      if(type == Farso::EVENT_ON_PRESS_BUTTON)
       {
-         if(object == (guiObject*)up)
+         if(object == (GuiObject*)up)
          {
             if(scrollText->getFirstLine() > 0)
             {
@@ -163,7 +164,7 @@ bool rolBar::eventGot(int type, guiObject* object, int mouseY)
             setChanged();
             return(true);
          }
-         else if(object == (guiObject*)down)
+         else if(object == (GuiObject*)down)
          {
             if(scrollText->lastDrawableLine() < scrollText->getTotalLines()-1)
             {
@@ -185,7 +186,7 @@ bool rolBar::eventGot(int type, guiObject* object, int mouseY)
 /*********************************************************************
  *                               draw                                *
  *********************************************************************/
-void rolBar::draw(int i)
+void RolBar::draw(int i)
 {
    /* No draw when hidden */
    if(isVisible())
@@ -197,7 +198,7 @@ void rolBar::draw(int i)
 /*********************************************************************
  *                                draw                               *
  *********************************************************************/
-void rolBar::draw()
+void RolBar::draw()
 {
    /* Redraw the TextBox and Bar */
    redraw();
@@ -210,7 +211,7 @@ void rolBar::draw()
 /*********************************************************************
  *                               redraw                              *
  *********************************************************************/
-void rolBar::redraw()
+void RolBar::redraw()
 {
    int actualInit = scrollText->getFirstLine();
 
@@ -243,7 +244,7 @@ void rolBar::redraw()
 /*********************************************************************
  *                              setText                              *
  *********************************************************************/
-void rolBar::setText(string txt)
+void RolBar::setText(string txt)
 {
    scrollText->setText(txt);
    scrollText->setFirstLine(0);
@@ -253,7 +254,7 @@ void rolBar::setText(string txt)
 /*********************************************************************
  *                              addText                              *
  *********************************************************************/
-void rolBar::addText(string txt)
+void RolBar::addText(string txt)
 {
    scrollText->addText(txt);
    scrollText->setLastLine(scrollText->getTotalLines()-1);
@@ -263,7 +264,7 @@ void rolBar::addText(string txt)
 /*********************************************************************
  *                              addText                              *
  *********************************************************************/
-void rolBar::addText(string txt, string font, int size,
+void RolBar::addText(string txt, string font, int size,
                      int align, int style)
 {
    scrollText->addText(txt, font, size, align, style);
@@ -274,7 +275,7 @@ void rolBar::addText(string txt, string font, int size,
 /*********************************************************************
  *                              addText                              *
  *********************************************************************/
-void rolBar::addText(string txt, string font, int size,
+void RolBar::addText(string txt, string font, int size,
                      int align, int style, int R, int G, int B)
 {
    scrollText->addText(txt, font, size, align, style, R, G, B);
@@ -285,7 +286,7 @@ void rolBar::addText(string txt, string font, int size,
 /*********************************************************************
  *                           setFirstLine                            *
  *********************************************************************/
-void rolBar::setFirstLine(int line)
+void RolBar::setFirstLine(int line)
 {
    scrollText->setFirstLine(line);
    redraw();
@@ -294,7 +295,7 @@ void rolBar::setFirstLine(int line)
 /*********************************************************************
  *                           getFirstLine                            *
  *********************************************************************/
-int rolBar::getFirstLine()
+int RolBar::getFirstLine()
 {
    return(scrollText->getFirstLine());
 }
@@ -302,7 +303,7 @@ int rolBar::getFirstLine()
 /*********************************************************************
  *                            getLastLine                            *
  *********************************************************************/
-string rolBar::getLastLine()
+string RolBar::getLastLine()
 {
    return(scrollText->getTextLine(scrollText->getTotalLines()-1));
 }

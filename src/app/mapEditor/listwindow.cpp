@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -85,7 +85,7 @@ void tupleList::freeElement(dntListElement* obj)
 /********************************************************************
  *                             Constructor                          *
  ********************************************************************/
-listWindow::listWindow(guiInterface* gui)
+listWindow::listWindow(Farso::GuiInterface* gui)
 {
    intGui = gui;
    state = -1;
@@ -269,10 +269,10 @@ string listWindow::getFileNameWithTitle(string title)
 /********************************************************************
  *                             eventGot                             *
  ********************************************************************/
-bool listWindow::eventGot(int type, guiObject* object)
+bool listWindow::eventGot(int type, Farso::GuiObject* object)
 {
    selFileName = "";
-   if(type == FARSO_EVENT_SELECTED_LIST_TEXT)
+   if(type == Farso::EVENT_SELECTED_LIST_TEXT)
    {
       if(object == list)
       {

@@ -88,20 +88,20 @@ class editor
 
       dirs dir;            /**< Directories Definition */
       extensions ext;      /**< OpenGL Extensions */
-      guiInterface* gui;   /**< The farso Gui Used */
+      Farso::GuiInterface* gui;   /**< The farso Gui Used */
 
       camera* gameCamera; /**< The OpenGL Camera Used */
 
-      button* buttonLoad; /**< Load Button */
-      button* buttonSave; /**< Save Button */
-      button* buttonExit; /**< Exit Button */
+      Farso::Button* buttonLoad; /**< Load Button */
+      Farso::Button* buttonSave; /**< Save Button */
+      Farso::Button* buttonExit; /**< Exit Button */
 
-      window* actWindow;
+      Farso::Window* actWindow;
       partWindow* particleWindow;        /**< Window to edit particle */
 
       /**********************File*Window*******************************/
-      window* fileWindow;      /**< File Selector Window (for load/save) */
-      fileSel* fileSelector;   /**< The file selector itself */
+      Farso::Window* fileWindow;  /**< File Selector Window (for load/save) */
+      Farso::FileSel* fileSelector;   /**< The file selector itself */
       bool fileLoading;        /**< If is loading or saving */
       void openFileWindow(bool load);
 

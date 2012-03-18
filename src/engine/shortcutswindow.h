@@ -55,16 +55,16 @@ class shortcutsWindow
 
       /*! Open the window 
        * \param gui -> interface used */
-      void open(guiInterface* gui);
+      void open(Farso::GuiInterface* gui);
       /*! Close the window 
        * \param gui -> interface used */
-      void close(guiInterface* gui);
+      void close(Farso::GuiInterface* gui);
       /*! Verify if the window is opened
        * \return -> true if the window is opened */
       bool isOpened();
       /*! Reopen the Window (if is opened) 
        * \param gui -> pointer to the used guiInterface */ 
-      void reOpen(guiInterface* gui);
+      void reOpen(Farso::GuiInterface* gui);
 
       /*! Treat the window events
        * \param object -> current active gui object
@@ -72,7 +72,7 @@ class shortcutsWindow
        * \param engineMode -> current engine mode
        * \param activeCharacter -> pointer to the current active Character
        * \return -> shortcutsWindow return value constant */
-      int treat(guiObject* object, int eventInfo, int engineMode,
+      int treat(Farso::GuiObject* object, int eventInfo, int engineMode,
             character* activeCharacter);
 
       /*! Get the current selected quick talent (if any)
@@ -96,22 +96,23 @@ class shortcutsWindow
       void setClearedTalents(bool b);
 
    protected:
-      static guiInterface* guiUsed;          /**< the used guiInterface */
+      static Farso::GuiInterface* guiUsed;   /**< the used guiInterface */
 
-      static oneTabButton* buttonMenu;       /**< call Menu */
-      static oneTabButton* buttonSave;       /**< call Save Function */
-      static oneTabButton* buttonLoad;       /**< call Load Function */
-      static oneTabButton* buttonAttackMode; /**< Enter on Attack Mode */
-      static oneTabButton* buttonJournal;    /**< Open Journal Window */
-      static oneTabButton* buttonMap;        /**< Call MiniMap */
-      static oneTabButton* buttonInventory;  /**< Call Inventory */
-      static oneTabButton* buttonRest;       /**< Call Rest Function */
-      static oneTabButton* buttonGroup;      /**< open group window */
-      static oneTabButton* buttonCharacter;  /**< open Character Window */
-      static oneTabButton* buttonEndTurn;    /**< End Turn Button */
+      static Farso::OneTabButton* buttonMenu;       /**< call Menu */
+      static Farso::OneTabButton* buttonSave;       /**< call Save Function */
+      static Farso::OneTabButton* buttonLoad;       /**< call Load Function */
+      static Farso::OneTabButton* buttonAttackMode; /**< Enter on Attack Mode */
+      static Farso::OneTabButton* buttonJournal;    /**< Open Journal Window */
+      static Farso::OneTabButton* buttonMap;        /**< Call MiniMap */
+      static Farso::OneTabButton* buttonInventory;  /**< Call Inventory */
+      static Farso::OneTabButton* buttonRest;       /**< Call Rest Function */
+      static Farso::OneTabButton* buttonGroup;      /**< open group window */
+      static Farso::OneTabButton* buttonCharacter; /**< open Character Window */
+      static Farso::OneTabButton* buttonEndTurn;    /**< End Turn Button */
 
-      static oneTabButton* buttonQuickFeat[QUICK_FEATS];  /**< Feats buttons */
-      static picture* picQuickFeat[QUICK_FEATS];  /**< Feats icons */
+      static Farso::OneTabButton* buttonQuickFeat[QUICK_FEATS]; /**< Feats 
+                                                                  buttons */
+      static Farso::Picture* picQuickFeat[QUICK_FEATS];  /**< Feats icons */
       static feat* quickFeat[QUICK_FEATS];   /**< Quick access feats */
 
       static featsWindow* talentWindow;      /**< Window to select talent */
@@ -120,7 +121,7 @@ class shortcutsWindow
       static int curSelectedTalent;          /**< Current talent 
                                                   selected to use */
 
-      static window* shortCutsWindow;        /**< ShortCuts Window */
+      static Farso::Window* shortCutsWindow;        /**< ShortCuts Window */
 
       static bool clearedTalents;            /**< flag to clear talents */
 };

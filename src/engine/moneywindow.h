@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -43,7 +43,7 @@ class moneyWindow
 {
    public:
       /*! Set the map and interface used for moneyWindow */
-      static void setMap(guiInterface* interf, Map* m);
+      static void setMap(Farso::GuiInterface* interf, Map* m);
 
       /*! Open the money window for inventory to sell/buy transaction */
       static void open(inventory* source, bool sell);
@@ -64,7 +64,7 @@ class moneyWindow
        * \param object -> last GUI object
        * \param eventInfo -> last GUI Event
        * \return true if event is gathered */
-      static bool treat(guiObject* object, int eventInfo);
+      static bool treat(Farso::GuiObject* object, int eventInfo);
 
       /*! Verify if the window is openned
        * \return true if opened, false otherwise. */
@@ -78,19 +78,19 @@ class moneyWindow
       /*! Close the window */
       static void close();
 
-      static window* intWindow;  /**< Pointer to the internal window */
+      static Farso::Window* intWindow;  /**< Pointer to the internal window */
 
-      static guiInterface* inter;  /**< Current GUI interface */
+      static Farso::GuiInterface* inter;  /**< Current GUI interface */
       
-      static textBox* qtyText;    /**< Text with quantity */
+      static Farso::TextBox* qtyText;    /**< Text with quantity */
       static int curQty;          /**< Current quantity selected */
       static int maxQty;          /**< Max quantity to select */
-      static button* incButton;   /**< Inc quantity button  */
-      static button* decButton;   /**< Dec quantity button */
-      static button* allButton;   /**< Set quantity to max button */
+      static Farso::Button* incButton;   /**< Inc quantity button  */
+      static Farso::Button* decButton;   /**< Dec quantity button */
+      static Farso::Button* allButton;   /**< Set quantity to max button */
 
-      static button* cancelButton; /**< cancel button */
-      static button* okButton;     /**< The ok Button */
+      static Farso::Button* cancelButton; /**< cancel button */
+      static Farso::Button* okButton;     /**< The ok Button */
 
       
       static int type;             /**< type of money transaction */

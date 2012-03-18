@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -55,18 +55,19 @@ initialScreen::~initialScreen()
  ***************************************************************/
 int initialScreen::run(int Status,GLdouble proj[16],
                        GLdouble modl[16], GLint viewPort[4],
-                       GLuint tituloID, sound* snd, guiInterface* interf)
+                       GLuint tituloID, sound* snd, 
+                       Farso::GuiInterface* interf)
 {
    Uint32 tempo;
    Uint32 tempoAnterior = 0;
    done = false;
-   guiObject* object = NULL;
-   int eventInfo = FARSO_EVENT_NONE;
+   Farso::GuiObject* object = NULL;
+   int eventInfo = Farso::EVENT_NONE;
    cursor cursors;
    gui = interf;
 
-   int xPos = (int)(SCREEN_X / 2.0);
-   int yPos = (int)(SCREEN_Y / 2.0);
+   int xPos = (int)(Farso::SCREEN_X / 2.0);
+   int yPos = (int)(Farso::SCREEN_Y / 2.0);
 
    string dnt = "DNT - ";
    dnt += VERSION;
@@ -124,36 +125,36 @@ int initialScreen::run(int Status,GLdouble proj[16],
          Uint8 Mbotao = SDL_GetMouseState(&x,&y);
          
          object = gui->manipulateEvents(x,y,Mbotao,keys, eventInfo);
-         if(eventInfo != FARSO_EVENT_NONE)
+         if(eventInfo != Farso::EVENT_NONE)
          {
-             if(eventInfo == FARSO_EVENT_PRESSED_BUTTON)
+             if(eventInfo == Farso::EVENT_PRESSED_BUTTON)
              {
-                 if(object == (guiObject*) buttonNew)
+                 if(object == (Farso::GuiObject*) buttonNew)
                  {
                     result = NEW_GAME;
                     done = true;
                  }
-                 else if(object == (guiObject*) buttonContinue)
+                 else if(object == (Farso::GuiObject*) buttonContinue)
                  {
                     result = CONTINUE_GAME;
                     done = true;
                  }
-                 else if(object == (guiObject*) buttonLoad)
+                 else if(object == (Farso::GuiObject*) buttonLoad)
                  {
                     result = LOAD_GAME;
                     done = true;
                  }
-                 else if(object == (guiObject*) buttonSave)
+                 else if(object == (Farso::GuiObject*) buttonSave)
                  {
                     result = SAVE_GAME;
                     done = true;
                  }
-                 else if(object == (guiObject*) buttonExit)
+                 else if(object == (Farso::GuiObject*) buttonExit)
                  {
                     result = EXIT_GAME;
                     done = true;
                  }
-                 else if(object == (guiObject*) buttonOptions)
+                 else if(object == (Farso::GuiObject*) buttonOptions)
                  {
                     result = OPTIONS;
                     done = true;
@@ -163,7 +164,8 @@ int initialScreen::run(int Status,GLdouble proj[16],
          glPushMatrix();
             draw2DMode();
             
-            textureToScreen(tituloID, 0,0, SCREEN_X-1,SCREEN_Y-1, 800,600);
+            Farso::textureToScreen(tituloID, 0,0, 
+                  Farso::SCREEN_X-1,Farso::SCREEN_Y-1, 800,600);
             gui->draw(proj,modl,viewPort);
 
             glPushMatrix();

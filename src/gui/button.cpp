@@ -26,14 +26,15 @@
 #include "farsoopts.h"
 
 using namespace std;
+using namespace Farso;
 
 /***********************************************************
  *                       Constructor                       *
  ***********************************************************/
-button::button(int xa,int ya,int xb,int yb, string txt, bool isOval, 
-      SDL_Surface* surface): guiObject(surface)
+Button::Button(int xa,int ya,int xb,int yb, string txt, bool isOval, 
+      SDL_Surface* surface): GuiObject(surface)
 {
-   farsoOptions opt;
+   Options opt;
    x1 = xa; 
    y1 = ya;
    x2 = xb;
@@ -44,18 +45,18 @@ button::button(int xa,int ya,int xb,int yb, string txt, bool isOval,
    pressed = false;
    available = true;
    defineFont(opt.getDefaultFont(), 12);
-   type = FARSO_OBJECT_BUTTON;
+   type = Farso::OBJECT_BUTTON;
    bType = NORMAL;
 }
 
 /***********************************************************
  *                        Destructor                       *
  ***********************************************************/
-button::~button()
+Button::~Button()
 {
    if(men)
    {
-      menu* m = (menu*)men;
+      Menu* m = (Menu*)men;
       delete(m);
    }
 }
@@ -63,7 +64,7 @@ button::~button()
 /***********************************************************
  *                         setType                         *
  ***********************************************************/
-void button::setType(int t)
+void Button::setType(int t)
 {
    if(t == KEEP_PRESSING)
    {
@@ -78,19 +79,19 @@ void button::setType(int t)
 /***********************************************************
  *                      setTextColor                       *
  ***********************************************************/
-void button::setTextColor(int r, int g, int b)
+void Button::setTextColor(int r, int g, int b)
 {
-   Colors.colorText.R = r;
-   Colors.colorText.G = g;
-   Colors.colorText.B = b;
+   colors.colorText.R = r;
+   colors.colorText.G = g;
+   colors.colorText.B = b;
 }
 
 /***********************************************************
  *                           draw                          *
  ***********************************************************/
-void button::draw()
+void Button::draw()
 {
-   dntFont font;
+   Font font;
    int R1,R2,G1,G2,B1,B2,A1,A2; 
    
    /* No draw when hidden */
@@ -101,31 +102,31 @@ void button::draw()
    
    if(pressed) 
    {
-      R1 = Colors.colorCont[1].R;
-      G1 = Colors.colorCont[1].G;
-      B1 = Colors.colorCont[1].B;
-      A1 = Colors.colorCont[1].A;
-      R2 = Colors.colorCont[0].R;
-      G2 = Colors.colorCont[0].G;
-      B2 = Colors.colorCont[0].B;
-      A2 = Colors.colorCont[0].A;
+      R1 = colors.colorCont[1].R;
+      G1 = colors.colorCont[1].G;
+      B1 = colors.colorCont[1].B;
+      A1 = colors.colorCont[1].A;
+      R2 = colors.colorCont[0].R;
+      G2 = colors.colorCont[0].G;
+      B2 = colors.colorCont[0].B;
+      A2 = colors.colorCont[0].A;
    }
    else
    {
-      R2 = Colors.colorCont[1].R;
-      G2 = Colors.colorCont[1].G;
-      B2 = Colors.colorCont[1].B;
-      A2 = Colors.colorCont[1].A;
-      R1 = Colors.colorCont[0].R;
-      G1 = Colors.colorCont[0].G;
-      B1 = Colors.colorCont[0].B; 
-      A1 = Colors.colorCont[0].A;
+      R2 = colors.colorCont[1].R;
+      G2 = colors.colorCont[1].G;
+      B2 = colors.colorCont[1].B;
+      A2 = colors.colorCont[1].A;
+      R1 = colors.colorCont[0].R;
+      G1 = colors.colorCont[0].G;
+      B1 = colors.colorCont[0].B; 
+      A1 = colors.colorCont[0].A;
    }
    
-   color_Set(Colors.colorButton.R, 
-             Colors.colorButton.G,
-             Colors.colorButton.B,
-             Colors.colorButton.A);
+   color_Set(colors.colorButton.R, 
+             colors.colorButton.G,
+             colors.colorButton.B,
+             colors.colorButton.A);
    rectangle_Fill(wSurface,x1+1,y1+1,x2-1,y2-1);
    color_Set(R1,G1,B1,A1);
    if(oval)
@@ -138,8 +139,8 @@ void button::draw()
    }
 
    /* Write the Text */
-   color_Set(Colors.colorText.R, Colors.colorText.G,
-             Colors.colorText.B, Colors.colorText.A);
+   color_Set(colors.colorText.R, colors.colorText.G,
+             colors.colorText.B, colors.colorText.A);
    int ya=y1;
    int xa=x1;
    int xb=x2;
@@ -149,8 +150,8 @@ void button::draw()
      xa+=2;
    }
    font.defineFont(fontName, fontSize);
-   font.defineFontAlign(DNT_FONT_ALIGN_CENTER);
-   font.defineFontStyle(DNT_FONT_STYLE_NORMAL);
+   font.defineFontAlign(Font::ALIGN_CENTER);
+   font.defineFontStyle(Font::STYLE_NORMAL);
 
    if(text == font.createUnicode(0x25B2)) /* up */
    {
@@ -192,11 +193,11 @@ void button::draw()
    }
    else
    {
-      color_Set(Colors.colorCont[2].R, Colors.colorCont[2].G,
-            Colors.colorCont[2].B, Colors.colorCont[2].A);
+      color_Set(colors.colorCont[2].R, colors.colorCont[2].G,
+            colors.colorCont[2].B, colors.colorCont[2].A);
       font.write(wSurface,xa+1,ya+1, getText(),xa,y1,xb,y2);
-      color_Set(Colors.colorCont[1].R, Colors.colorCont[1].G,
-            Colors.colorCont[1].B, Colors.colorCont[1].A);
+      color_Set(colors.colorCont[1].R, colors.colorCont[1].G,
+            colors.colorCont[1].B, colors.colorCont[1].A);
       font.write(wSurface,xa,ya, getText(), xa,y1,xb,y2);
    }
    setChanged();
@@ -205,13 +206,13 @@ void button::draw()
 /***********************************************************
  *                           press                         *
  ***********************************************************/
-bool button::press(int Xjan, int Yjan, int x, int y, Uint8 Mbotao, int* pronto)
+bool Button::press(int Xjan, int Yjan, int x, int y, Uint8 Mbotao, int* pronto)
 {
    *pronto = 0;
    bool pres;
 
    /* Verify keep pressing-button type */
-   if( (bType == button::KEEP_PRESSING) && (pressed) )
+   if( (bType == Button::KEEP_PRESSING) && (pressed) )
    {
       /* KEEP_PRESSING type: if pressing, just verify if mouse is
        * still pressed (ignoring if inner button area) */
@@ -242,7 +243,7 @@ bool button::press(int Xjan, int Yjan, int x, int y, Uint8 Mbotao, int* pronto)
 /***********************************************************
  *                        defineFont                       *
  ***********************************************************/
-void button::defineFont(string fileName, int size)
+void Button::defineFont(string fileName, int size)
 {
    fontName = fileName;
    fontSize = size;
