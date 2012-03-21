@@ -106,6 +106,42 @@ void* TextBox::getRelatedInfo(int line)
 }
 
 /*******************************************************
+ *                    getRelatedInfo                   *
+ *******************************************************/
+void* TextBox::getRelatedInfo(int x, int y)
+{
+   int i;
+   int height;
+
+   /* Verify if inner */
+   if(!isMouseIn(x,y))
+   {
+      return(NULL);
+   }
+
+   /* Get the line */
+   std::list<TextLine*>::iterator it = lines.begin();
+   for(i = 0; i < firstLine; i++)
+   {
+      it++;
+   }
+
+   /* Let's get wich line it is, if any */
+   height = y1+2;
+   while( (it != lines.end()) && (height < y2) )
+   {
+      if((y >= height) && (y <= height+(*it)->height))
+      {
+         return((*it)->relatedInfo);
+      }
+      height += (*it)->height;
+      it++;
+   }
+ 
+   return(NULL);
+}
+
+/*******************************************************
  *                      getTextLine                    *
  *******************************************************/
 TextLine* TextBox::getTextLine(int line)

@@ -308,3 +308,21 @@ string RolBar::getLastLine()
    return(scrollText->getLineText(scrollText->getTotalLines()-1));
 }
 
+/***********************************************************************
+ *                            getRelatedInfo                           *
+ ***********************************************************************/
+void* RolBar::getRelatedInfo(int x, int y)
+{
+   return(scrollText->getRelatedInfo(x,y));
+}
+
+/***********************************************************************
+ *                            getRelatedInfo                           *
+ ***********************************************************************/
+void* RolBar::getRelatedInfo(int line)
+{
+   return(scrollText->getRelatedInfo(line));
+}
+
+
+

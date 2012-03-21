@@ -187,6 +187,10 @@ class TextBox: public GuiObject
        * \param line -> line number
        * \return related line info (if any) */
       void* getRelatedInfo(int line);
+
+      /*! Get the related info of line under (x,y) position
+       * \note (x,y) are at window coordinate system, not global. */
+      void* getRelatedInfo(int x, int y);
    
    private:
 

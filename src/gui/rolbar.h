@@ -118,6 +118,15 @@ class RolBar: public GuiObject
        * /param -> text of the last line */
       std::string getLastLine();
 
+      /*! Get related line info
+       * \param line -> line number
+       * \return related line info (if any) */
+      void* getRelatedInfo(int line);
+
+      /*! Get the related info of line under (x,y) position
+       * \note (x,y) are at window coordinate system, not global. */
+      void* getRelatedInfo(int x, int y);
+
    private:
       Button* up;              /**< Up Button */
       Button* down;            /**< Down Button */
