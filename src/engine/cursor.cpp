@@ -70,7 +70,8 @@ void cursor::init()
             cursorHotSpot[i][0], cursorHotSpot[i][1]);
    }
 
-   currentCursor = CURSOR_WALK;
+   /* set the current */
+   set(CURSOR_WALK);
 }
 
 /*****************************************************************

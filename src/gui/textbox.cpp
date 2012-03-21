@@ -80,7 +80,35 @@ void TextBox::setSolid()
 /*******************************************************
  *                      getTextLine                    *
  *******************************************************/
-string TextBox::getTextLine(int line)
+string TextBox::getLineText(int line)
+{
+   TextLine* t = getTextLine(line);
+   if(t)
+   {
+      return(t->text);
+   }
+
+   return("");
+}
+
+/*******************************************************
+ *                    getRelatedInfo                   *
+ *******************************************************/
+void* TextBox::getRelatedInfo(int line)
+{
+   TextLine* t = getTextLine(line);
+   if(t)
+   {
+      return(t->relatedInfo);
+   }
+
+   return(NULL);
+}
+
+/*******************************************************
+ *                      getTextLine                    *
+ *******************************************************/
+TextLine* TextBox::getTextLine(int line)
 {
    int i;
    if(line < (int)lines.size())
@@ -91,11 +119,11 @@ string TextBox::getTextLine(int line)
       {
          it++;
       }
-      /* Get the text from line */
-      return((*it)->text);
+      /* Get the info from line */
+      return(*it);
    }
 
-   return("");
+   return(NULL);
 }
 
 /*******************************************************
@@ -109,7 +137,7 @@ void TextBox::setText(string txt)
       text = txt;
       createLines(txt, fontName, fontSize, fontAlign, fontStyle,
                   colors.colorText.R, colors.colorText.G,
-                  colors.colorText.B);
+                  colors.colorText.B, NULL);
       draw();
    }
 }
@@ -118,10 +146,11 @@ void TextBox::setText(string txt)
  *                        addText                      *
  *******************************************************/
 void TextBox::addText(string txt, string font, int size,
-                      int align, int style, int R, int G, int B)
+                      int align, int style, int R, int G, int B,
+                      void* info)
 {
    text += txt;
-   createLines(txt, font, size, align, style, R, G, B);
+   createLines(txt, font, size, align, style, R, G, B, info);
    draw();
 }
 
@@ -129,21 +158,21 @@ void TextBox::addText(string txt, string font, int size,
  *                        addText                      *
  *******************************************************/
 void TextBox::addText(string txt, string font, int size,
-                      int align, int style)
+                      int align, int style, void* info)
 {
    addText(txt, font, size, align, style,
                colors.colorText.R, colors.colorText.G,
-               colors.colorText.B);
+               colors.colorText.B, info);
 }
 
 /*******************************************************
  *                        addText                      *
  *******************************************************/
-void TextBox::addText(string txt)
+void TextBox::addText(string txt, void* info)
 {
    addText(txt, fontName, fontSize, fontAlign, fontStyle, 
                colors.colorText.R, colors.colorText.G,
-               colors.colorText.B);
+               colors.colorText.B, info);
 }
 
 /*******************************************************
@@ -452,7 +481,8 @@ void TextBox::insertLine(TextLine* line)
  *                     createLines                     *
  *******************************************************/
 void TextBox::createLines(string txt, string font, int size,
-                          int align, int style, int R, int G, int B)
+                          int align, int style, int R, int G, int B,
+                          void* info)
 {
    Font fnt;
    fnt.defineFont(font, size);
@@ -474,6 +504,7 @@ void TextBox::createLines(string txt, string font, int size,
       line->fontStyle = style;
       line->text = fnt.getNextLine(txt, lastPos, x2-x1-2);
       line->height = fnt.getHeight();
+      line->relatedInfo = info;
       insertLine(line);
    }
 }

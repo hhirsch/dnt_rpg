@@ -254,9 +254,9 @@ void RolBar::setText(string txt)
 /*********************************************************************
  *                              addText                              *
  *********************************************************************/
-void RolBar::addText(string txt)
+void RolBar::addText(string txt, void* info)
 {
-   scrollText->addText(txt);
+   scrollText->addText(txt, info);
    scrollText->setLastLine(scrollText->getTotalLines()-1);
    redraw();
 }
@@ -265,7 +265,7 @@ void RolBar::addText(string txt)
  *                              addText                              *
  *********************************************************************/
 void RolBar::addText(string txt, string font, int size,
-                     int align, int style)
+                     int align, int style, void* info)
 {
    scrollText->addText(txt, font, size, align, style);
    scrollText->setLastLine(scrollText->getTotalLines()-1);
@@ -276,7 +276,7 @@ void RolBar::addText(string txt, string font, int size,
  *                              addText                              *
  *********************************************************************/
 void RolBar::addText(string txt, string font, int size,
-                     int align, int style, int R, int G, int B)
+                     int align, int style, int R, int G, int B, void* info)
 {
    scrollText->addText(txt, font, size, align, style, R, G, B);
    scrollText->setLastLine(scrollText->getTotalLines()-1);
@@ -305,6 +305,6 @@ int RolBar::getFirstLine()
  *********************************************************************/
 string RolBar::getLastLine()
 {
-   return(scrollText->getTextLine(scrollText->getTotalLines()-1));
+   return(scrollText->getLineText(scrollText->getTotalLines()-1));
 }
 

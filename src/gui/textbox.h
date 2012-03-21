@@ -48,6 +48,7 @@ class TextLine
       int fontAlign;       /**< Align of the font */
       int fontStyle;       /**< Style of the font */
       int height;          /**< Height of the line */
+      void* relatedInfo;   /**< Pointer to some related info */
 };
 
 /*! Class of text box representation. */
@@ -119,7 +120,7 @@ class TextBox: public GuiObject
       /*! Get the text from the line number
        * \param line -> number of line to get text from 
        * \note -> first line is 0. */
-      std::string getTextLine(int line);
+      std::string getLineText(int line);
 
       /*! Set the object text
        * \param txt -> new text */
@@ -143,17 +144,19 @@ class TextBox: public GuiObject
       int getFirstLine();
 
       /*! Add the string to the textBox
-       * \param txt -> text screen to add */
-      void addText(std::string txt);
+       * \param txt -> text screen to add 
+       * \param info-> some related info for the text added */
+      void addText(std::string txt, void* info=NULL);
 
       /*! Add the string to the textBox
        * \param txt -> text screen to add
        * \param font -> font file to use
        * \param size -> size of the font to use
        * \param align -> alignment of the font to use
-       * \param style -> style of the font to use  */
+       * \param style -> style of the font to use  
+       * \param info-> some related info for the text added */
       void addText(std::string txt, std::string font, int size,
-                   int align, int style);
+                   int align, int style, void* info=NULL);
 
       /*! Add the string to the textBox
        * \param txt -> text screen to add
@@ -163,9 +166,10 @@ class TextBox: public GuiObject
        * \param style -> style of the font to use
        * \param R -> red color of the font
        * \param G -> green color of the font
-       * \param B -> blue color of the font */
+       * \param B -> blue color of the font 
+       * \param info-> some related info for the text added */
       void addText(std::string txt, std::string font, int size,
-                   int align, int style, int R, int G, int B);
+                   int align, int style, int R, int G, int B, void* info=NULL);
 
       /*! Verify if the text box receives events or not
        * \return true if receive events*/
@@ -178,6 +182,11 @@ class TextBox: public GuiObject
       /*! Set the textBox to SolidMode (allowing, for example, correct
        * render on empty - with full alpha - surfaces) */
       void setSolid();
+
+      /*! Get related line info
+       * \param line -> line number
+       * \return related line info (if any) */
+      void* getRelatedInfo(int line);
    
    private:
 
@@ -187,11 +196,14 @@ class TextBox: public GuiObject
       /*! Create the text lines
        * \param txt -> string base to create the lines */
       void createLines(std::string txt, std::string font, int size,
-                       int align, int style, int R, int G, int B);
+                       int align, int style, int R, int G, int B, void* info);
 
       /*! Insert textLine to the list
        * \param line -> line to insert to the list */
       void insertLine(TextLine* line);
+
+      /*! Get the related text line */
+      TextLine* getTextLine(int line);
 
       SDL_Surface* wSurface; /**< Window Surface */
       
