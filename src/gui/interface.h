@@ -61,7 +61,8 @@ enum FarsoEventsEnum
    EVENT_FILE_SEL_CHANGED,
    EVENT_TAB_BOX_CHANGED,
    EVENT_ON_PRESS_TEXT_BOX,
-   EVENT_ON_PRESS_PICTURE
+   EVENT_ON_PRESS_PICTURE,
+   EVENT_ON_WRITE_TEXT_BAR
 };
 
 /********************************************************************

@@ -617,7 +617,7 @@ GuiObject* GuiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
            eventInfo = EVENT_WROTE_TEXT_BAR;
            return(activeObject);
         }
-       eventInfo = EVENT_WROTE_TEXT_BAR; 
+       eventInfo = EVENT_ON_WRITE_TEXT_BAR; 
        return(activeObject);
     }
     
