@@ -192,6 +192,8 @@
 		<Unit filename="..\src\gui\draw.h" />
 		<Unit filename="..\src\gui\farso.cpp" />
 		<Unit filename="..\src\gui\farso.h" />
+		<Unit filename="..\src\gui\farsoopts.cpp" />
+		<Unit filename="..\src\gui\farsoopts.h" />
 		<Unit filename="..\src\gui\filesel.cpp" />
 		<Unit filename="..\src\gui\filesel.h" />
 		<Unit filename="..\src\gui\guilist.cpp" />
