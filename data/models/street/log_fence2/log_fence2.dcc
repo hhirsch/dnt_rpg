@@ -1,5 +1,5 @@
 name = Fence2
-cal3d = models/street/log_fence2/model.cfg
+cal3d = models/street/log_fence2/fence2.md5def
 inventory_texture = texturas/na.png
 inventory_sizes = 0 0
 life_points = 30
