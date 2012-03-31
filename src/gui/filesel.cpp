@@ -138,6 +138,7 @@ static int cmpFunction(const void *p1,  const void *p2)
  ***********************************************************************/
 void FileSel::changeCurDir(string newDir)
 {
+   Colors color;
    int j, total;
 
    string aux = "";
@@ -259,7 +260,8 @@ void FileSel::changeCurDir(string newDir)
          if(navDirs)
          {
             lastDir = j;
-            textFiles->insertText(s[j], 255,20,20);
+            textFiles->insertText(s[j], color.colorDirectory.R, 
+                  color.colorDirectory.G, color.colorDirectory.B);
          }
       }
 
@@ -273,7 +275,8 @@ void FileSel::changeCurDir(string newDir)
          if(passFilter(s[j]))
          {
             /* Passed filter, so Insert at list */
-            textFiles->insertText(s[j], 240,240,240);
+            textFiles->insertText(s[j], color.colorFile.R, 
+                  color.colorFile.G, color.colorFile.B);
          }
       }
    }

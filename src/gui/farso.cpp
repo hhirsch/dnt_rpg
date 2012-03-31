@@ -69,6 +69,9 @@ void init(SDL_Surface **screen, string title, int width, int height,
 
     MouseCursor cursors;
     cursors.init();
+
+    Colors cor;
+    cor.init();
 }
 
 /************************************************************

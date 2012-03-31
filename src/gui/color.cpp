@@ -19,6 +19,7 @@
 */
 
 #include "color.h"
+#include <stdlib.h>
 
 using namespace Farso;
 
@@ -27,41 +28,142 @@ using namespace Farso;
  ***************************************************************/
 Colors::Colors()
 {
-   colorCont[0].R = 134;
-   colorCont[0].G = 134;
-   colorCont[0].B = 134;
-   colorCont[0].A = 255;
-   colorCont[1].R = 70;
-   colorCont[1].G = 70;
-   colorCont[1].B = 70;
-   colorCont[1].A = 255;
-   colorCont[2].R = 169;
-   colorCont[2].G = 169;
-   colorCont[2].B = 169;
-   colorCont[2].A = 255;
-   colorWindow.R = 30;
-   colorWindow.G = 30;
-   colorWindow.B = 30;
-   colorWindow.A = 190;
-   colorText.R = 255;
-   colorText.G = 255;
-   colorText.B = 255;
-   colorText.A = 255;
-   colorSelText.R = 26;
-   colorSelText.G = 230;
-   colorSelText.B = 25;
-   colorSelText.A = 255;
-   colorBar.R = 102;
-   colorBar.G = 0;
-   colorBar.B = 0;
-   colorBar.A = 190;
-   colorButton.R = colorWindow.R;
-   colorButton.G = colorWindow.G;
-   colorButton.B = colorWindow.B;
-   colorButton.A = colorWindow.A;
-   colorMenu.R = colorWindow.R;
-   colorMenu.G = colorWindow.G;
-   colorMenu.B = colorWindow.B;
-   colorMenu.A = colorWindow.A;
-} 
+   int i;
+
+   for(i=0; i < 3; i++)
+   {
+      colorCont[i] = defCont[i];
+   }
+   colorWindow = defWindow;
+   colorText = defText;
+   colorSelText = defSelText;
+   colorBar = defBar;
+   colorButton = defButton;
+   colorMenu = defMenu;
+   colorFile = defFile;
+   colorDirectory = defDir;
+   colorHigh = defHigh;
+}
+
+/***************************************************************
+ *                            init                             *
+ ***************************************************************/
+void Colors::init()
+{
+   defCont[0].R = 134;
+   defCont[0].G = 134;
+   defCont[0].B = 134;
+   defCont[0].A = 255;
+   defCont[1].R = 70;
+   defCont[1].G = 70;
+   defCont[1].B = 70;
+   defCont[1].A = 255;
+   defCont[2].R = 169;
+   defCont[2].G = 169;
+   defCont[2].B = 169;
+   defCont[2].A = 255;
+   defWindow.R = 30;
+   defWindow.G = 30;
+   defWindow.B = 30;
+   defWindow.A = 190;
+   defText.R = 255;
+   defText.G = 255;
+   defText.B = 255;
+   defText.A = 255;
+   defSelText.R = 26;
+   defSelText.G = 230;
+   defSelText.B = 25;
+   defSelText.A = 255;
+   defBar.R = 102;
+   defBar.G = 0;
+   defBar.B = 0;
+   defBar.A = 190;
+   defButton.R = defWindow.R;
+   defButton.G = defWindow.G;
+   defButton.B = defWindow.B;
+   defButton.A = defWindow.A;
+   defMenu.R = defWindow.R;
+   defMenu.G = defWindow.G;
+   defMenu.B = defWindow.B;
+   defMenu.A = defWindow.A;
+   defFile.R = 240;
+   defFile.B = 240;
+   defFile.G = 240;
+   defFile.A = 255;
+   defDir.R = 255;
+   defDir.G = 20;
+   defDir.B = 20;
+   defDir.A = 255;
+   defHigh.R = 240;
+   defHigh.G = 120;
+   defHigh.B = 0;
+   defHigh.A = 255;
+}
+
+/***************************************************************
+ *                        setDefaultColor                      *
+ ***************************************************************/
+void Colors::setDefaultColor(int colorId, int R, int G, int B, int A)
+{
+   Color* c = NULL;
+   switch(colorId)
+   {
+      case COLOR_CONT_0:
+         c = &defCont[0];
+      break;
+      case COLOR_CONT_1:
+         c = &defCont[1];
+      break;
+      case COLOR_CONT_2:
+         c = &defCont[2];
+      break;
+      case COLOR_WINDOW:
+         c = &defWindow;
+      break;
+      case COLOR_BUTTON:
+         c = &defButton;
+      break;
+      case COLOR_MENU:
+         c = &defMenu;
+      break;
+      case COLOR_TEXT:
+         c = &defText;
+      break;
+      case COLOR_BAR:
+         c = &defBar;
+      break;
+      case COLOR_SEL_TEXT:
+         c = &defSelText;
+      break;
+      case COLOR_FILE:
+         c = &defFile;
+      break;
+      case COLOR_DIRECTORY:
+         c = &defDir;
+      break;
+      case COLOR_HIGH:
+         c = &defHigh;
+      break;
+   }
+
+   if(c)
+   {
+      c->R = R;
+      c->G = G;
+      c->B = B;
+      c->A = A;
+   }
+}
+
+
+Color Colors::defCont[3];
+Color Colors::defWindow;
+Color Colors::defButton;
+Color Colors::defMenu;
+Color Colors::defText;
+Color Colors::defBar;
+Color Colors::defSelText;
+Color Colors::defFile;
+Color Colors::defDir;
+Color Colors::defHigh;
 

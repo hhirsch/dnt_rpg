@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -43,11 +43,50 @@ class Colors
             colorButton,        /**< Button Color */
             colorMenu,          /**< Menu Color */
             colorText,          /**< Text Color */
-            colorBar,           /**< Bar Color */
-            colorSelText;       /**< Color Selected Text */
+            colorBar,           /**< Active Window Bar Color */
+            colorSelText,       /**< Color Selected Text */
+            colorFile,          /**< Color for file on file lists */
+            colorDirectory,     /**< color for directory on file lists */
+            colorHigh;          /**< Color for highlight */
       
       /*! Constructor */
       Colors();
+
+      /*! Init the defaults colors. Automatically used at farso init. */
+      void init();
+
+      /*! Set a default color to a value */
+      void setDefaultColor(int colorId, int R, int G, int B, int A);
+
+      enum DefaultColorId
+      {
+         COLOR_CONT_0 = 0,
+         COLOR_CONT_1,
+         COLOR_CONT_2,
+         COLOR_WINDOW,
+         COLOR_BUTTON,
+         COLOR_MENU,
+         COLOR_TEXT,
+         COLOR_BAR,
+         COLOR_SEL_TEXT,
+         COLOR_FILE,
+         COLOR_DIRECTORY,
+         COLOR_HIGH
+      };
+
+   protected:
+
+      /* Deafaults */
+      static Color defCont[3];
+      static Color defWindow;
+      static Color defButton;
+      static Color defMenu;
+      static Color defText;
+      static Color defBar;
+      static Color defSelText;
+      static Color defFile;
+      static Color defDir;
+      static Color defHigh;
 };
 
 }

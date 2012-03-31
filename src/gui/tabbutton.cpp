@@ -172,7 +172,8 @@ void TabButton::draw()
       }
       else if(style == STYLE_HIGH)
       {
-         color_Set(240,120,0,255);
+         color_Set(cor.colorHigh.R,cor.colorHigh.G,
+               cor.colorHigh.B, cor.colorHigh.A);
          rectangle_Draw(wSurface,x1+buttons[current].x1,
                                  y1+buttons[current].y1,
                                  x1+buttons[current].x2,
@@ -184,8 +185,8 @@ void TabButton::draw()
       }
       else if(style == STYLE_LIST_TEXT)
       {
-
-         color_Set(240,120,0,255);
+         color_Set(cor.colorHigh.R,cor.colorHigh.G,
+               cor.colorHigh.B, cor.colorHigh.A);
          rectangle_Fill(wSurface, x1+buttons[current].x1,
                y1+buttons[current].y1,
                x1+buttons[current].x2,
