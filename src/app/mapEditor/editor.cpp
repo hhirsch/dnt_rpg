@@ -61,6 +61,20 @@ editor::editor()
 
    init();
 
+   /* Set default colors */
+   Farso::Colors farCor;
+   farCor.setDefaultColor(Farso::Colors::COLOR_WINDOW, 152, 148, 140, 220);
+   farCor.setDefaultColor(Farso::Colors::COLOR_MENU, 152, 148, 140, 220);
+   farCor.setDefaultColor(Farso::Colors::COLOR_BUTTON, 152, 148, 140, 220);
+   farCor.setDefaultColor(Farso::Colors::COLOR_BAR, 15, 80, 220, 220);
+   farCor.setDefaultColor(Farso::Colors::COLOR_HIGH, 15, 80, 190, 255);
+   farCor.setDefaultColor(Farso::Colors::COLOR_TEXT, 0, 0, 0, 255);
+   farCor.setDefaultColor(Farso::Colors::COLOR_DIRECTORY, 0, 0, 0, 255);
+
+   farCor.setDefaultColor(Farso::Colors::COLOR_CONT_0, 169, 169, 169, 255);
+   farCor.setDefaultColor(Farso::Colors::COLOR_CONT_1, 40, 40, 40, 255);
+   farCor.setDefaultColor(Farso::Colors::COLOR_CONT_2, 200, 200, 200, 255);
+
    /* Alloc the visible Matrix */
    visibleMatrix = new GLfloat*[6];
    for(i = 0; i < 6; i++)
