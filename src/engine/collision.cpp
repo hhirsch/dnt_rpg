@@ -90,7 +90,7 @@ bool collision::verifySquare(boundingBox& actorBox, Square* quad,
          {
             /* If the bounding boxes intercepts, we'll maybe need to do a more 
              * depth collision verify, so it is */
-            if( (!sobj->obj->needDepthCollisionCheck()) ||
+            if( /*(!sobj->obj->needDepthCollisionCheck()) ||*/
                 (sobj->obj->depthCollision(sobj->angleX, sobj->angleY,
                      sobj->angleZ, sobj->x, 
                      sobj->y +
@@ -159,7 +159,7 @@ bool collision::verifySquare(ray& acRay, Square* quad)
          if(colBox.intercepts(acRay))
          {
             /* Verify depth collision */
-            if( (!sobj->obj->needDepthCollisionCheck()) ||
+            if( (!sobj->obj->needDepthCollisionCheck()) || 
                 (sobj->obj->depthCollision(sobj->angleX, sobj->angleY,
                      sobj->angleZ, sobj->x, 
                      sobj->y +
