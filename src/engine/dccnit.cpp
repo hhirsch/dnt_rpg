@@ -3049,9 +3049,14 @@ int engine::treatIO(SDL_Surface *screen)
       if( ( time - walkPressTime >= ENGINE_WALK_ACTION_DELAY ) &&
           ( walkPressTime != 0) && (mButton & SDL_BUTTON(3)) )
       {
-            /* Continuous walk */
-            walkStatus = ENGINE_WALK_MOUSE;
-            walkPressTime = 0;
+         /* Continuous walk */
+         walkStatus = ENGINE_WALK_MOUSE;
+         walkPressTime = 0;
+         if(activeCharacter->pathFind.getState() == ASTAR_STATE_RUNNING)
+         {
+            /* Must stop the A* */
+            activeCharacter->pathFind.clear();
+         }
       }
       else if( (walkPressTime != 0) && !(mButton & SDL_BUTTON(3)) && 
                (pcHaveWalkAction()) )
