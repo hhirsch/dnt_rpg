@@ -41,7 +41,7 @@ script(character target)
             
             if(weaponDecAmmo(curWeapon) <= 0)
                # Show a message if no more ammo, to allow pc reload
-               briefing(gettext("No more ammo. Reload your weapon!"))
+               briefingColor(gettext("No more ammo. Reload your weapon!"), 235, 80, 10)
             end
          end
       end
