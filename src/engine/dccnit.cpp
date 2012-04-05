@@ -73,6 +73,9 @@ engine::engine()
    cursors->init();
    cursors->setTextOverFont(dir.getRealFile(DNT_FONT_PALLADIO));
 
+   /* Initialize all shaders */
+   glslShaders.init();
+
    /* Initialize sounds and musics */
    snd = new(sound);
    snd->init();
@@ -320,6 +323,9 @@ engine::~engine()
    /* Clear Cursors */
    cursors->finish();
    delete(cursors);
+
+   /* Delete all shaders */
+   glslShaders.finish();
 
    /* Delete the action controller */
    delete(actionControl);

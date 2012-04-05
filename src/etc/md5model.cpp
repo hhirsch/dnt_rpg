@@ -93,6 +93,7 @@ void md5Model::clean()
          delete[] meshes[i].triangles;
          delete[] meshes[i].uvArray;
          delete[] meshes[i].normalArray;
+         delete[] meshes[i].tangentArray;
          delete[] meshes[i].weights;
       }
 
@@ -285,6 +286,7 @@ bool md5Model::loadMeshFile(const std::string strFileName)
                mesh->vertexArray = new vector3f_t[mesh->num_verts];
                mesh->uvArray = new vector2f_t[mesh->num_verts];
                mesh->normalArray = new vector3f_t[mesh->num_verts];
+               mesh->tangentArray = new vector3f_t[mesh->num_verts];
             }
             else if(buff.compare(0, 7, "numtris") == 0)
             {
@@ -352,7 +354,7 @@ bool md5Model::loadMeshFile(const std::string strFileName)
    /* End with file read */
    file.close();
 
-   preCalculateNormals();
+   preCalculateNormalsAndTangents();
 
    return(true);
 }
@@ -532,6 +534,7 @@ void md5Model::calculateMeshes()
       {
          vec3_t finalVertex;
          vec3_t finalNormal;
+         vec3_t finalTangent;
 
          /* Calculate final vertex with weights */
          for (j = 0; j < meshes[m].vertices[i].count; ++j)
@@ -549,8 +552,14 @@ void md5Model::calculateMeshes()
             finalVertex.y += (joint->pos.y + wv.y) * weight->bias;
             finalVertex.z += (joint->pos.z + wv.z) * weight->bias;
 
+            /* Transform Normal */
             finalNormal = finalNormal + 
                (joint->orient.rotatePoint(vert->normal) * weight->bias);
+
+            /* Transform Tangent */
+            finalTangent = finalTangent +
+               (joint->orient.rotatePoint(vert->tangent) * weight->bias);
+
          }
 
          meshes[m].vertexArray[i][0] = finalVertex.x;
@@ -560,14 +569,18 @@ void md5Model::calculateMeshes()
          meshes[m].normalArray[i][0] = finalNormal.x;
          meshes[m].normalArray[i][1] = finalNormal.y;
          meshes[m].normalArray[i][2] = finalNormal.z;
+
+         meshes[m].tangentArray[i][0] = finalTangent.x;
+         meshes[m].tangentArray[i][1] = finalTangent.y;
+         meshes[m].tangentArray[i][2] = finalTangent.z;
       }
    }
 }
 
 /***********************************************************************
- *                        preCalculateNormals                          *
+ *                 preCalculateNormalsAndTangents                      *
  ***********************************************************************/
-void md5Model::preCalculateNormals()
+void md5Model::preCalculateNormalsAndTangents()
 {
    int i,j, meshId;
 
@@ -580,9 +593,10 @@ void md5Model::preCalculateNormals()
    {
       md5_mesh_t* curMesh = &meshes[meshId];
 
-      /* Calculate each face normal */
+      /* Calculate each vertex normal and tangent */
       for(i=0; i < curMesh->num_tris; i++)
       {
+         /* Calculate normal */
          md5_vertex_t* vert0 = &curMesh->vertices[curMesh->triangles[i][0]];
          md5_vertex_t* vert1 = &curMesh->vertices[curMesh->triangles[i][1]];
          md5_vertex_t* vert2 = &curMesh->vertices[curMesh->triangles[i][2]];
@@ -597,9 +611,28 @@ void md5Model::preCalculateNormals()
          vert0->normal = vert0->normal + n;
          vert1->normal = vert1->normal + n;
          vert2->normal = vert2->normal + n;
+
+         /* Calculate tangent */
+         vec2_t uv0 = vec2_t(curMesh->uvArray[curMesh->triangles[i][0]]);
+         vec2_t uv1 = vec2_t(curMesh->uvArray[curMesh->triangles[i][1]]);
+         vec2_t uv2 = vec2_t(curMesh->uvArray[curMesh->triangles[i][2]]);
+
+         vec2_t st1 = uv2 - uv0;
+         vec2_t st2 = uv1 - uv0;
+
+         float coef = 1 / (st1.x * st2.y - st2.x * st1.y);
+         vec3_t tangent;
+
+         tangent.x = coef * ((v1.x * st2.y)  + (v2.x * -st1.y));
+         tangent.y = coef * ((v1.y * st2.y)  + (v2.y * -st1.y));
+         tangent.z = coef * ((v1.z * st2.y)  + (v2.z * -st1.y));
+
+         vert0->tangent = vert0->tangent + tangent;
+         vert1->tangent = vert1->tangent + tangent;
+         vert2->tangent = vert2->tangent + tangent;
       }
 
-      /* Finally, normalize normals */
+      /* Finally, normalize normals and tangents */
       for(i=0; i < curMesh->num_verts; i++)
       {
          md5_vertex_t* vert = &curMesh->vertices[i];
@@ -608,17 +641,26 @@ void md5Model::preCalculateNormals()
          vec3_t normal = vert->normal;
          normal.normalize();
 
-         /* Let's return back to joint-local space */
+         /* normalize tangent */
+         vec3_t tangent = vert->tangent;
+         tangent.normalize();
+
+         /* Let's put to joint-local space */
          vert->normal = vec3_t();
+         vert->tangent = vec3_t();
          for(j=0; j < vert->count; j++)
          {
             md5_weight_t* w = &curMesh->weights[vert->start + j];
             md5_joint_t* j = &baseSkel[w->joint];
             vec3_t wv;
-            wv = j->orient.rotatePoint(normal);
 
+            /* Transform normal */
+            wv = j->orient.rotatePoint(normal);
             vert->normal = vert->normal +  (wv * w->bias);
 
+            /* Transform tangent */
+            wv = j->orient.rotatePoint(tangent);
+            vert->tangent = vert->tangent + (wv * w->bias);
          }
       }
    }
@@ -641,7 +683,7 @@ vector3f_t* md5Model::getMeshVertices(int meshId, int& count)
 }
 
 /***********************************************************************
- *                           getMeshVertices                           *
+ *                            getMeshFaces                             *
  ***********************************************************************/
 vector3i_t* md5Model::getMeshFaces(int meshId, int& count)
 {
@@ -663,7 +705,7 @@ vector2f_t* md5Model::getMeshTexCoords(int meshId, int& count)
 {
     if((meshId >= 0) && (meshId < totalMeshes))
    {
-      count = meshes[meshId].num_tris;
+      count = meshes[meshId].num_verts;
       return(&meshes[meshId].uvArray[0]);
    }
 
@@ -679,8 +721,24 @@ vector3f_t* md5Model::getMeshNormals(int meshId, int& count)
 {
     if((meshId >= 0) && (meshId < totalMeshes))
    {
-      count = meshes[meshId].num_tris;
+      count = meshes[meshId].num_verts;
       return(&meshes[meshId].normalArray[0]);
+   }
+
+   /* No mesh with meshId */
+   count = 0;
+   return(NULL);
+}
+
+/***********************************************************************
+ *                           getMeshTangents                           *
+ ***********************************************************************/
+vector3f_t* md5Model::getMeshTangents(int meshId, int& count)
+{
+    if((meshId >= 0) && (meshId < totalMeshes))
+   {
+      count = meshes[meshId].num_verts;
+      return(&meshes[meshId].tangentArray[0]);
    }
 
    /* No mesh with meshId */
@@ -788,6 +846,11 @@ bool md5Model::load(const std::string& strFileName)
       else if( (key == "texture") || (key == "image"))
       {
          meshMaterial.textureId = loadTexture(path+data);
+      }
+      else if( (key == "normalMap") )
+      {
+         meshMaterial.normalTexId = loadTexture(path+data);
+         meshMaterial.normalMap = true;
       }
    }
 

@@ -459,6 +459,7 @@ class engine
                                         mouse walk */
 
       collision colisionDetect;    /**< The collision detect Module */
+      shaders glslShaders;         /**< The GLSL shaders used */
  
       GLfloat** visibleMatrix;     /**< Actual Frustum Matrix */
       int mouseX,                  /**< Actual mouse X coordinates on screen */

@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -63,7 +63,7 @@ void shader::printInfoLog(GLuint obj, bool prog)
          printOpenGLErrors("arbGetInfoLog");
       }
 
-      cout << "infoLog: " << infoLog << endl;
+      cout << "infoLog ('" << fileName << "')" << ": " << infoLog << endl;
    }
 }
 
@@ -114,6 +114,8 @@ bool shader::load(string vShaderFileName, string fShaderFileName)
    char buf[524288];
    string res;
    const char* str;
+
+   fileName = fShaderFileName.substr(0, vShaderFileName.length()-5);
 
    if(ext.hasShader())
    {
@@ -234,8 +236,8 @@ GLint shader::getUniformVariable(string variableName)
 
       if(loc == -1)
       {
-         cerr << "ERROR: Can't find shader uniform variable: "
-            << variableName << endl;
+         cerr << "ERROR: Can't find shader (" << fileName 
+              << ") uniform variable: " << variableName << endl;
       }
 
       return(loc);
@@ -278,6 +280,58 @@ void shader::setUniformVariable(string variableName, GLint x)
    }
 }
 
+/***********************************************************************
+ *                                getAttrib                            *
+ ***********************************************************************/
+GLint shader::getAttrib(std::string s)
+{
+   GLint res;
+   if(ext.hasShader())
+   {
+      res = ext.arbGetAttribLocation(program, s.c_str());
+      if(res == -1)
+      {
+         cerr << "ERROR: Couldn't find shader (" << fileName 
+              << ") vertex attribute: " << s << endl;
+      }
+      return(res);
+   }
+   return(-1);
+}
+
+/***********************************************************************
+ *                                getAttrib                            *
+ ***********************************************************************/
+void shader::setAttrib(GLint att, GLint size, GLenum type,
+      GLboolean normalized, GLsizei stride, const GLvoid* ptr)
+{
+   if(ext.hasShader())
+   {
+      ext.arbVertexAttribPointer(att, size, type, normalized, stride, ptr);
+   }
+}
+
+/***********************************************************************
+ *                              enableAttrib                           *
+ ***********************************************************************/
+void shader::enableAttrib(GLuint att)
+{
+   if(ext.hasShader())
+   {
+      ext.arbEnableVertexAttribArray(att);
+   }
+}
+
+/***********************************************************************
+ *                             disableAttrib                           *
+ ***********************************************************************/
+void shader::disableAttrib(GLuint att)
+{
+   if(ext.hasShader())
+   {
+      ext.arbDisableVertexAttribArray(att);
+   }
+}
 
 /***********************************************************************
  *                           getUniformVariable                        *
@@ -312,4 +366,56 @@ string shader::parseFile(string fileName)
 
    return(res);
 }
+
+/***********************************************************************
+ *                               init                                  *
+ ***********************************************************************/
+void shaders::init()
+{
+   extensions ext;
+   if(ext.hasShader())
+   {
+      /* Load Texture Splatting shader */
+      mShaders[SHADER_TEXTURE_SPLAT] = new shader();
+      mShaders[SHADER_TEXTURE_SPLAT]->load("shaders/terrain_splat.vert",
+            "shaders/terrain_splat.frag");
+      /* Load Normal Map Shader */
+      mShaders[SHADER_BUMP_MAPPING] = new shader();
+      mShaders[SHADER_BUMP_MAPPING]->load("shaders/bump_mapping.vert",
+            "shaders/bump_mapping.frag");
+   }
+}
+
+/***********************************************************************
+ *                                finish                               *
+ ***********************************************************************/
+void shaders::finish()
+{
+   int i;
+   extensions ext;
+   if(ext.hasShader())
+   {
+      for(i=0; i < TOTAL_SHADERS; i++)
+      {
+         delete(mShaders[i]);
+      }
+   }
+}
+
+/***********************************************************************
+ *                                getShader                            *
+ ***********************************************************************/
+shader* shaders::getShader(int id)
+{
+   if((id >= 0) && (id < TOTAL_SHADERS))
+   {
+      return(mShaders[id]);
+   }
+   return(NULL);
+}
+
+
+/* The shaders */
+shader* shaders::mShaders[shaders::TOTAL_SHADERS];
+
 

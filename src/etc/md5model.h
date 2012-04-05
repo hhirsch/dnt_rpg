@@ -41,6 +41,7 @@ class md5_vertex_t
       int count;   /**< weight count */
 
       vec3_t normal;  /**< The precalculated vertex normal "weights" */
+      vec3_t tangent; /**< The precalculated vertex tangent "weights" */
 };
 
 /*! Weight */
@@ -63,6 +64,7 @@ struct md5_mesh_t
 
       vector3f_t* vertexArray;   /**< Array of vertices to render */
       vector3f_t* normalArray;   /**< Array of normals */
+      vector3f_t* tangentArray;  /**< Array of tangents */
       vector2f_t* uvArray;       /**< Array of vertices texture uv map */
       vector3i_t* triangles;     /**< Array of faces (triangles) */
 
@@ -157,11 +159,17 @@ class md5Model: public aniModel, dntList
        * \param count -> on return will have the total normals
        * \return pointer to current vertices of the mesh */
       vector3f_t* getMeshNormals(int meshId, int& count);
+
+      /*! Get the current animated vertex tangents
+       * \param meshId -> current Id of the mesh
+       * \param count -> on return will have the total normals
+       * \return pointer to current vertices tangents of the mesh */
+      vector3f_t* getMeshTangents(int meshId, int& count);
    
    protected:
 
-      /*! precalculate normals for latter per-frame use */
-      void preCalculateNormals();
+      /*! precalculate normals and tangents for latter per-frame use */
+      void preCalculateNormalsAndTangents();
 
       /*! Update the animation, delta seconds after previous update */
       void update(float delta, bool isVisible);

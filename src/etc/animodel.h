@@ -26,6 +26,8 @@
 #include <string>
 
 #include "boundingbox.h"
+#include "shader.h"
+#include "extensions.h"
 
 typedef float vector2f_t[2];
 typedef float vector3f_t[3];
@@ -35,6 +37,7 @@ typedef int vector3i_t[3];
 class aniModelMaterial
 {
    public:
+      /*! Material Constructor */
       aniModelMaterial()
       {
          ambient[0]=1.0f;ambient[1]=1.0f;ambient[2]=1.0f;ambient[3]=1.0f;
@@ -42,15 +45,19 @@ class aniModelMaterial
          specular[0]=1.0f;specular[1]=1.0f;specular[2]=1.0f;specular[3]=1.0f;
          emission[0]=0.5f;emission[1]=0.5f;emission[2]=0.5f;emission[3]=1.0f;
          shininess = 0.0f;
+         normalMap = false;
       };
 
-      GLfloat ambient[4];
-      GLfloat diffuse[4];
-      GLfloat specular[4];
-      GLfloat emission[4];
-      GLfloat shininess;
+      GLfloat ambient[4];   /**< Ambient color */
+      GLfloat diffuse[4];   /**< Diffuse color */
+      GLfloat specular[4];  /**< Specular color */
+      GLfloat emission[4];  /**< Color emission */
+      GLfloat shininess;    /**< Shininess factor */
 
-      GLuint textureId;
+      GLuint textureId;     /**< GL id of texture used */
+ 
+      bool normalMap;       /**< if uses a normal map */
+      GLuint normalTexId;   /**< GL id of normal map texture */
 };
 
 #define STATE_NONE        -1 /**< No animation */
@@ -192,6 +199,9 @@ class aniModel
       /*! Render all normals (usualy, for debug reasons) */
       void renderNormals();
 
+      /*! Render all tangents (usually, for debug) */
+      void renderTangents();
+
       /*! Get the last calculated bounding box */
       boundingBox getCrudeBoundingBox();
 
@@ -242,6 +252,9 @@ class aniModel
       float renderScale;     /**< Render scale factor */
       bool loadedTexture;    /**< True if loaded texture */
 
+      shaders dntShaders;    /**< Shaders on DNT */
+      extensions ext;        /**< OpenGL extensions */
+
       /*! Load the a texture to the model.
        * \param strFilename -> \c string with the texture file name.
        * \return the \c GLuint with the GL texture ID. */
@@ -274,14 +287,20 @@ class aniModel
       /*! Get the current animated normals
        * \param meshId -> current Id of the mesh
        * \param count -> on return will have the total normals
-       * \return pointer to current vertices of the mesh */
+       * \return pointer to current normals of the mesh */
       virtual vector3f_t* getMeshNormals(int meshId, int& count)=0;
 
       /*! Get the current animated texture coordinates
        * \param meshId -> current Id of the mesh
        * \param count -> on return will have the total texture coordinates
-       * \return pointer to current vertices of the mesh */
+       * \return pointer to current texture coordinates of the mesh */
       virtual vector2f_t* getMeshTexCoords(int meshId, int& count)=0;
+
+      /*! Get the current animated vertex tangents
+       * \param meshId -> current Id of the mesh
+       * \param count -> on return will have the total normals
+       * \return pointer to current vertices tangents of the mesh */
+      virtual vector3f_t* getMeshTangents(int meshId, int& count)=0;
 
       /*! Get the current animated faces (vertices index)
        * \param meshId -> current Id of the mesh
@@ -297,6 +316,7 @@ class aniModel
       int curState;      /**< current animation state */
       int faceCount;     /**< number of faces to render */
       vector3i_t* faces;       /**< current faces to render */
+      GLint tangentAttrib;  /**< the tangent attrib */
  
 };
 

@@ -23,3 +23,4 @@ Stop_Sign = models/objetos/geral/placa_pare/placa_pare.dcc
 Street_Light1 = models/street/streetlight1/streetlight1.dcc
 Street_Light2 = models/street/streetlight2/streetlight2.dcc
 Street_Light3 = models/street/streetlight3/streetlight3.dcc
+Cave1_C1 = models/tiles/cave_1/cave1_c1.dcc

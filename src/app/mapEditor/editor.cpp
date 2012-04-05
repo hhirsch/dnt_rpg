@@ -94,6 +94,9 @@ editor::editor()
    wTypes.init();
    curs.init();
 
+   /* Initialize all shaders */
+   glslShaders.init();
+
    aligns al;
    al.init();
    classes cl;
@@ -124,6 +127,7 @@ editor::~editor()
    }
 
    objectsList::removeAll();
+   glslShaders.finish();
 
    delete(gameSun);
    delete(gameSky);

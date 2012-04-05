@@ -32,6 +32,7 @@
 #include "nodeeditor.h"
 
 #include "../../etc/scene.h"
+#include "../../etc/shader.h"
 #include "../../engine/sun.h"
 #include "../../engine/cursor.h"
 #include "../../engine/sky.h"
@@ -110,6 +111,8 @@ class editor
       featsList* features;           /**< NPCs Geral Features */
       
       partController* particleSystem;    /**< Particles on Map */
+
+      shaders glslShaders;           /* DNT shaders */
       
       guiIO* gui;                    /**< The Editor's GUI */
       terrain* terrainEditor;        /**< The terrain Editor Module */

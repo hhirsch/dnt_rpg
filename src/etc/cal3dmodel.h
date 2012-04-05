@@ -89,6 +89,13 @@ class cal3DModel: public aniModel
        * \return pointer to current faces of the mesh */
       vector3i_t* getMeshFaces(int meshId, int& count);
 
+      /*! Get the current animated vertex tangents
+       * \param meshId -> current Id of the mesh
+       * \param count -> on return will have the total normals
+       * \return pointer to current vertices tangents of the mesh
+       * TODO: Not used for cal3d models! */
+      vector3f_t* getMeshTangents(int meshId, int& count){return(NULL);};
+
       /*! Get the number of meshes on model */
       int getTotalMeshes(){return(m_meshCount);};
 

@@ -1,0 +1,18 @@
+# Exported from Blender by DNT md5 exporter
+
+path = models/tiles/cave_1/
+scale = 18.0
+blendFrames = 4
+
+# Mesh Information
+mesh = cave1_c1.md5mesh
+
+# Animations
+
+# Material
+ambient = 0.2 0.2 0.2 1.0 
+diffuse = 0.800000011920929 0.800000011920929 0.800000011920929 1.0 
+specular = 0.8 0.8 0.8 1.0
+shininess = 0.1
+image = Dirt_darkE.png
+normalMap = cavenormal.png

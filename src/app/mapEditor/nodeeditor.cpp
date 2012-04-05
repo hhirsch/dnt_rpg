@@ -456,65 +456,15 @@ void nodeEditor::drawTemporary()
       glPushMatrix();
          curNode->getBoundingBox().render();
       glPopMatrix();
+
+      glPushMatrix();
+         glTranslatef(curNode->getPosX(),curNode->getPosY(),curNode->getPosZ());
+         glRotatef(curNode->getAngleZ(),0.0f,0.0f,1.0f);
+         glRotatef(curNode->getAngleX(),1.0f,0.0f,0.0f);
+         glRotatef(curNode->getAngleY(),0.0f,1.0f,0.0f);
+         curNode->getModel()->renderNormals();
+         curNode->getModel()->renderTangents();
+      glPopMatrix();
    }
-
-#if 0
-   boundingBox b;
-   float delta=2;
-   int med;
-
-   glDisable(GL_FOG);
-   glDisable(GL_LIGHTING);
-   if(curNode)
-   {
-      b = curNode->getBoundingBox();
-      glColor4f(0.0f, 0.5f, 0.8f, 1.0f);
-
-      /* Calculate delta */
-      med = ( (b.x2-b.x1) + (b.y2-b.y1) + (b.z2-b.z1) ) / 3;
-      if(med > 10)
-      {
-         delta = 2.0f;
-      }
-      else if(med > 5)
-      {
-         delta = 1.0f;
-      }
-      else
-      {
-         delta = 0.5f;
-      }
-
-      /* Render the contorn grid */
-      glBegin(GL_QUADS);
-
-        glVertex3f(b.x1-delta, b.y1+1, b.z1);
-        glVertex3f(b.x1-delta, b.y1+1, b.z2);
-        glVertex3f(b.x1+delta, b.y1+1, b.z2);
-        glVertex3f(b.x1+delta, b.y1+1, b.z1);
-      
-        glVertex3f(b.x2-delta, b.y1+1, b.z1);
-        glVertex3f(b.x2-delta, b.y1+1, b.z2);
-        glVertex3f(b.x2+delta, b.y1+1, b.z2);
-        glVertex3f(b.x2+delta, b.y1+1, b.z1);
-
-        glVertex3f(b.x1, b.y1+1, b.z1-delta);
-        glVertex3f(b.x2, b.y1+1, b.z1-delta);
-        glVertex3f(b.x2, b.y1+1, b.z1+delta);
-        glVertex3f(b.x1, b.y1+1, b.z1+delta);
-
-        glVertex3f(b.x1, b.y1+1, b.z2-delta);
-        glVertex3f(b.x2, b.y1+1, b.z2-delta);
-        glVertex3f(b.x2, b.y1+1, b.z2+delta);
-        glVertex3f(b.x1, b.y1+1, b.z2+delta);
-
-      glEnd();
-   }
-
-
-   glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-   glEnable(GL_FOG);
-   glEnable(GL_LIGHTING);
-#endif
 }
 

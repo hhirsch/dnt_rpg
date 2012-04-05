@@ -34,6 +34,13 @@ class vec2_t
          x = 0.0f;
          y = 0.0f;
       };
+
+      vec2_t(float f[2])
+      {
+         x = f[0];
+         y = f[1];
+      };
+
       
       inline float operator[] (const unsigned int i)
       {
@@ -58,6 +65,8 @@ class vec2_t
          y = v.y;
          return *this;
       }
+
+      vec2_t operator-(const vec2_t& v) const;
 
 
       float x, y;

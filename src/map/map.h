@@ -649,8 +649,8 @@ class Map
       extensions ext;            /**< Extensions controller */
       options opt;               /**< Options */
       GLuint shaderAlphaTexture; /**< The alpha texture used for shader splat */
-      shader splattingShader;    /**< The shader for splatting textures */
       bool shaderAlphaDefined;   /**< If already defined the alpha texture */
+      shaders dntShaders;        /**< All shaders */
 
       /*! Update the shader alpha texture */
       void updateShaderAlphaTexture();

@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -208,6 +208,14 @@ void extensions::defineShader(string ext)
       arbUniform1i = (PFNGLUNIFORM1IARBPROC)getFunction("glUniform1iARB");
       arbUniform2i = (PFNGLUNIFORM2IARBPROC)getFunction("glUniform2iARB");
       arbUniform3i = (PFNGLUNIFORM3IARBPROC)getFunction("glUniform3iARB");
+      arbVertexAttribPointer = (PFNGLVERTEXATTRIBPOINTERARBPROC)
+         getFunction("glVertexAttribPointerARB");
+      arbGetAttribLocation = (PFNGLGETATTRIBLOCATIONARBPROC)
+         getFunction("glGetAttribLocationARB");
+      arbEnableVertexAttribArray = (PFNGLENABLEVERTEXATTRIBARRAYARBPROC)
+         getFunction("glEnableVertexAttribArrayARB");
+      arbDisableVertexAttribArray = (PFNGLDISABLEVERTEXATTRIBARRAYARBPROC)
+         getFunction("glDisableVertexAttribArrayARB");
    }
    else
    {
@@ -354,6 +362,11 @@ PFNGLUNIFORM3FARBPROC extensions::arbUniform3f = NULL;
 PFNGLUNIFORM1IARBPROC extensions::arbUniform1i = NULL;
 PFNGLUNIFORM2IARBPROC extensions::arbUniform2i = NULL;
 PFNGLUNIFORM3IARBPROC extensions::arbUniform3i = NULL;
+PFNGLVERTEXATTRIBPOINTERARBPROC extensions::arbVertexAttribPointer = NULL;
+PFNGLGETATTRIBLOCATIONARBPROC extensions::arbGetAttribLocation = NULL;
+PFNGLENABLEVERTEXATTRIBARRAYARBPROC extensions::arbEnableVertexAttribArray=NULL;
+PFNGLDISABLEVERTEXATTRIBARRAYARBPROC 
+   extensions::arbDisableVertexAttribArray = NULL;
 
 bool extensions::anisotropic = false;
 

@@ -190,17 +190,51 @@ void aniModel::loadToGraphicMemory(bool useTexture)
    glVertexPointer(3, GL_FLOAT, 0, &vertices[0][0]);
    glNormalPointer(GL_FLOAT, 0, &normals[0][0]);
 
+   shader* normalMap = dntShaders.getShader(shaders::SHADER_BUMP_MAPPING);
+   
    /* Set texture, when necessary */
-   if( (useTexture) && (loadedTexture) )
+   if( (useTexture) && (loadedTexture) && 
+       ( (!mat->normalMap) || (normalMap == NULL)))
    {
       glEnable(GL_TEXTURE_2D);
       glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-
-      /* set the texture id we stored in the map user data */
       glBindTexture(GL_TEXTURE_2D, mat->textureId);
-
-      /* set the texture coordinate buffer */
       glTexCoordPointer(2, GL_FLOAT, 0, &uvs[0][0]);
+   }
+   /* Set Normal-map shader, if needed */
+   else if( (useTexture) && (mat->normalMap) )
+   {
+      normalMap->enable();
+
+      /* Set tangent attribute */
+      tangentAttrib = normalMap->getAttrib("tangent");
+      //tangentAttrib = normalMap->getAttrib("vTangent");
+      normalMap->enableAttrib(tangentAttrib);
+      normalMap->setAttrib(tangentAttrib, 3, GL_FLOAT,GL_FALSE, 0,
+            getMeshTangents(0, count));
+
+      /* Set color texture */
+      ext.arbActiveTexture(GL_TEXTURE0);
+      ext.arbClientActiveTexture(GL_TEXTURE0);
+      glBindTexture(GL_TEXTURE_2D, mat->textureId);
+      glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+      glTexCoordPointer(2, GL_FLOAT, 0, &uvs[0][0]);
+      //normalMap->setUniformVariable("colorMap", (GLint)0);
+      normalMap->setUniformVariable("diffuseTexture", (GLint)0);
+
+      /* Set uniform texture */
+      ext.arbActiveTexture(GL_TEXTURE1);
+      ext.arbClientActiveTexture(GL_TEXTURE1);
+      glBindTexture(GL_TEXTURE_2D, mat->normalTexId);
+      glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
+            GL_LINEAR_MIPMAP_LINEAR );
+      glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
+      glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+      //normalMap->setUniformVariable("normalMap", (GLint)1);
+      normalMap->setUniformVariable("normalTexture", (GLint)1);
+
    }
 }
 
@@ -278,6 +312,20 @@ void aniModel::removeFromGraphicMemory()
 
    glDisableClientState(GL_NORMAL_ARRAY);
    glDisableClientState(GL_VERTEX_ARRAY);
+
+   aniModelMaterial* mat = getMeshMaterial(0);
+   if(mat->normalMap)
+   {
+      shader* normalMap = dntShaders.getShader(shaders::SHADER_BUMP_MAPPING);
+
+      if(normalMap)
+      {
+         normalMap->disableAttrib(tangentAttrib);
+         normalMap->disable();
+         ext.arbActiveTexture(GL_TEXTURE0);
+         ext.arbClientActiveTexture(GL_TEXTURE0);
+      }
+   }
 
    /* Back to previous enable bits */
    glPopAttrib();
@@ -509,6 +557,11 @@ void aniModel::renderNormals()
    /* Correct from blender to dnt coordinates */
    glRotatef(180,0,1,0);
    glRotatef(-90,1,0,0);
+   /* Scale, if needed */
+   if(renderScale != 1.0)
+   {
+      glScalef(renderScale, renderScale, renderScale);
+   }
 
    glBegin( GL_LINES );
    for(i=0; i < total; i++)
@@ -516,6 +569,53 @@ void aniModel::renderNormals()
       glVertex3fv(verts[i]);
       glVertex3f(verts[i][0] + normals[i][0],
             verts[i][1] + normals[i][1], verts[i][2] + normals[i][2]);
+   }
+   glEnd();
+
+   glPopMatrix();
+
+   glPopAttrib();
+}
+
+/*********************************************************************
+ *                             renderTangents                        *
+ *********************************************************************/
+void aniModel::renderTangents()
+{
+   int i;
+   int total=0;
+   vector3f_t* tangents = getMeshTangents(0, total);
+   vector3f_t* verts = getMeshVertices(0, total);
+
+   if(!tangents)
+   {
+      /* No tangents to render */
+      return;
+   }
+
+   glPushAttrib(GL_ENABLE_BIT);
+   
+   glDisable(GL_LIGHTING);
+   glDisable(GL_FOG);
+   glColor3f( 1.0f, 0.2f, 0.6f );
+
+   glPushMatrix();
+   
+   /* Correct from blender to dnt coordinates */
+   glRotatef(180,0,1,0);
+   glRotatef(-90,1,0,0);
+   /* Scale, if needed */
+   if(renderScale != 1.0)
+   {
+      glScalef(renderScale, renderScale, renderScale);
+   }
+
+   glBegin( GL_LINES );
+   for(i=0; i < total; i++)
+   {
+      glVertex3fv(verts[i]);
+      glVertex3f(verts[i][0] + tangents[i][0],
+            verts[i][1] + tangents[i][1], verts[i][2] + tangents[i][2]);
    }
    glEnd();
 

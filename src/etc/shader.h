@@ -28,6 +28,7 @@
 
 #include "extensions.h"
 
+/*! An GLSL shader abstraction */
 class shader
 {
    public:
@@ -76,6 +77,16 @@ class shader
        * \param variableName -> the uniform variable name
        * \param x -> x value */
       void setUniformVariable(std::string variableName, GLint x);
+ 
+      /*! Get an vertex-attrib GL constant from shader */
+      GLint getAttrib(std::string s);
+      /*! Set vertex atrib pointer */
+      void setAttrib(GLint att, GLint size, GLenum type,
+            GLboolean normalized, GLsizei stride, const GLvoid* ptr);
+      /*! Enable use of vertex attrib */
+      void enableAttrib(GLuint att);
+      /*! Disable use of vertex attrib */
+      void disableAttrib(GLuint att);
 
       /*! Enable the shader */
       void enable();
@@ -108,7 +119,35 @@ class shader
 
       extensions ext;   /**< The openGL extensions controller */
 
+      std::string fileName; /**< shader file name */
+
       bool loaded;      /**< If the program was loaded or not */
+};
+
+/*! The loaded shaders */
+class shaders
+{
+   public:
+      /*! init and load all shaders */
+      void init();
+
+      /*! finish the shaders use */
+      void finish();
+
+      /*! Get a shader to use
+       * \param id -> shaderId 
+       * \return -> pointer to shader or NULL, if not defined */
+      shader* getShader(int id);
+
+      enum shaderId
+      {
+         SHADER_TEXTURE_SPLAT=0,
+         SHADER_BUMP_MAPPING,
+         TOTAL_SHADERS
+      };
+
+   protected:
+      static shader* mShaders[TOTAL_SHADERS]; /**< All shaders */
 };
 
 #endif

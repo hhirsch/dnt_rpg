@@ -366,11 +366,6 @@ Map::Map()
 
    /* Load Shader */
    shaderAlphaDefined = false;
-   if(ext.hasShader())
-   {
-      splattingShader.load("shaders/terrain_splat.vert",
-            "shaders/terrain_splat.frag");
-   }
 
    /* Initialize Structs */
    x = z = 0;
@@ -1168,14 +1163,16 @@ void Map::renderOutdoorShader()
 
    /* NOTE: Vertex Buffer already set */
    mapTexture* tex = (mapTexture*)textures.getFirst();
+   shader* splattingShader = dntShaders.getShader(
+         shaders::SHADER_TEXTURE_SPLAT); 
 
-   splattingShader.enable();
+   splattingShader->enable();
 
    /* Set all uniform textures */
    ext.arbActiveTexture(GL_TEXTURE0);
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, shaderAlphaTexture);
-   splattingShader.setUniformVariable("alphaMap", (GLint)0);
+   splattingShader->setUniformVariable("alphaMap", (GLint)0);
    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
    glTexCoordPointer(2, GL_FLOAT, 0, uvAlphaBuffer);
 
@@ -1219,7 +1216,7 @@ void Map::renderOutdoorShader()
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
       /* Set sampler2d */
-      splattingShader.setUniformVariable(unif, (GLint)i+1);
+      splattingShader->setUniformVariable(unif, (GLint)i+1);
 
       /* Next Texture */
       tex = (mapTexture*)tex->getNext();
@@ -1229,7 +1226,7 @@ void Map::renderOutdoorShader()
    glNormal3i(0,1,0);
    glDrawArrays(GL_QUADS, 0, (int)totalVertex / (int)3);
 
-   splattingShader.disable();
+   splattingShader->disable();
    ext.arbActiveTexture(GL_TEXTURE0);
    ext.arbClientActiveTexture(GL_TEXTURE0);
 
