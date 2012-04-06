@@ -1,0 +1,17 @@
+# Exported from Blender by DNT md5 exporter
+
+path = models/building/ruin1/
+scale = 54.0
+blendFrames = 4
+
+# Mesh Information
+mesh = ruin1.md5mesh
+
+# Animations
+
+# Material
+ambient = 1.0 1.0 1.0 1.0 
+diffuse = 0.800000011920929 0.800000011920929 0.800000011920929 1.0 
+specular = 1.0 1.0 1.0 1.0
+shininess = 0.0
+image = texture.png

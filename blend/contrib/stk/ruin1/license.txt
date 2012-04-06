@@ -1,0 +1,5 @@
+ruin1.blend, texture.png
+   author: Marianne Gagnon & Jean-Manuel Clémençon
+   license: CC-BY 3.0
+   note: from SuperTuxKart Jungle track
+   source: https://supertuxkart.svn.sourceforge.net/svnroot/supertuxkart/media/
