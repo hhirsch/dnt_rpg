@@ -1,0 +1,30 @@
+MD5Version 10
+commandline "Exported from Blender by io_export_dnt.py"
+
+numJoints 1
+numMeshes 1
+
+joints {
+	"Bone"	-1 ( -0.016382 0.016449 0.017876 ) ( -0.707107 -0.000000 -0.000000 )		// 
+}
+
+mesh {
+	shader "Dirt"
+
+	numverts 4
+	vert 0 ( 1.000000 1.000000 ) 0 1
+	vert 1 ( 1.000000 0.000000 ) 1 1
+	vert 2 ( 0.000000 0.000000 ) 2 1
+	vert 3 ( 0.000000 1.000000 ) 3 1
+
+	numtris 2
+	tri 0 0 2 1
+	tri 1 0 3 2
+
+	numweights 4
+	weight 0 0 1.000000 ( 1.266334 2.811924 1.266439 )
+	weight 1 0 1.000000 ( 1.266334 2.811925 -1.233566 )
+	weight 2 0 1.000000 ( -1.233675 2.811925 -1.233566 )
+	weight 3 0 1.000000 ( -1.233673 2.811924 1.266439 )
+}
+
