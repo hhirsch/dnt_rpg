@@ -258,14 +258,12 @@ void sun::getPosition(GLfloat pos[4])
  *********************************************************************/
 void sun::setLight()
 {
+   glPushMatrix();
+      glLightfv(GL_LIGHT0, GL_POSITION, where);
+   glPopMatrix();
    glLightfv(GL_LIGHT0, GL_AMBIENT, actualColor);
    glLightfv(GL_LIGHT0, GL_DIFFUSE, actualColor);
    glLightfv(GL_LIGHT0, GL_SPECULAR, actualColor);
-   glPushMatrix();
-      //glRotatef (rotation, 0.0, 1.0, 0.0);  
-      glLightfv (GL_LIGHT0, GL_POSITION, where);
-   glPopMatrix();
-   
    glEnable(GL_LIGHT0);
 }
 

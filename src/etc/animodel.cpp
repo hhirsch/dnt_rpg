@@ -222,16 +222,16 @@ void aniModel::loadToGraphicMemory(bool useTexture)
       //normalMap->setUniformVariable("colorMap", (GLint)0);
       normalMap->setUniformVariable("diffuseTexture", (GLint)0);
 
-      /* Set uniform texture */
+      /* Set normal-map texture */
       ext.arbActiveTexture(GL_TEXTURE1);
       ext.arbClientActiveTexture(GL_TEXTURE1);
       glBindTexture(GL_TEXTURE_2D, mat->normalTexId);
-      glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
+      /*glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
             GL_LINEAR_MIPMAP_LINEAR );
       glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
       glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);*/
       //normalMap->setUniformVariable("normalMap", (GLint)1);
       normalMap->setUniformVariable("normalTexture", (GLint)1);
 

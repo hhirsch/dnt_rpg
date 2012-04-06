@@ -684,13 +684,16 @@ void editor::draw()
          opt.setSplattingType(DNT_SPLATTING_NONE);
       }
    }
-
+   
+   glMatrixMode(GL_MODELVIEW);
+   glLoadIdentity();
+   
    /* Redefine camera position */
    gui->cameraPos(map);
    updateFrustum( visibleMatrix, proj, modl);
    gameSun->updateHourOfDay(hour, 0.0, 0.0);
    gameSun->setLight();
-   
+  
    /* Draw Things */
    if(mapOpened)
    {

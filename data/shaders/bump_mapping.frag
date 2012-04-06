@@ -42,7 +42,8 @@ void main()
       // In doom3, specular value comes from a texture 
       specularMaterial =  gl_FrontMaterial.specular;
       specularLight = gl_LightSource[0].specular;
-      shininess = pow(max (dot (halfVec, normal), 0.0), 4.0);
+      //shininess = pow(max (dot (halfVec, normal), 0.0), 4.0);
+      shininess = lamberFactor;
       shininess *= gl_FrontMaterial.shininess;
 
       gl_FragColor = diffuseMaterial * diffuseLight * lamberFactor * 1.8;
