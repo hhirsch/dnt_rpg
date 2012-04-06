@@ -320,10 +320,16 @@ void aniModel::removeFromGraphicMemory()
 
       if(normalMap)
       {
-         normalMap->disableAttrib(tangentAttrib);
-         normalMap->disable();
+         ext.arbActiveTexture(GL_TEXTURE1);
+         ext.arbClientActiveTexture(GL_TEXTURE1);
+         glDisable(GL_TEXTURE_2D);
+         glDisableClientState(GL_TEXTURE_COORD_ARRAY);
          ext.arbActiveTexture(GL_TEXTURE0);
          ext.arbClientActiveTexture(GL_TEXTURE0);
+         glDisable(GL_TEXTURE_2D);
+         glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+         normalMap->disableAttrib(tangentAttrib);
+         normalMap->disable();
       }
    }
 
@@ -352,6 +358,11 @@ void aniModel::renderShadow(float pX, float pY, float pZ, float angleX,
    glDisable(GL_FOG); /* << This will fix white shadows on some systems! */
    glDisable(GL_COLOR_MATERIAL);
    glColor4f(0.0f, 0.0f, 0.0f, alpha);
+   shader* normalMap = dntShaders.getShader(shaders::SHADER_BUMP_MAPPING);
+   if(normalMap->isEnabled())
+   {
+      normalMap->disable();
+   }
 
    /* Render */
    glPushMatrix();
@@ -389,7 +400,13 @@ void aniModel::renderShadow(float pX, float pY, float pZ, float angleX,
    glEnable(GL_POLYGON_OFFSET_FILL);
    glDisable(GL_LIGHTING);
    glDisable(GL_COLOR_MATERIAL);
+   glDisable(GL_FOG);
    glColor4f(0.0f, 0.0f, 0.0f, alpha);
+   shader* normalMap = dntShaders.getShader(shaders::SHADER_BUMP_MAPPING);
+   if(normalMap->isEnabled())
+   {
+      normalMap->disable();
+   }
 
    /* Render */
    glPushMatrix();

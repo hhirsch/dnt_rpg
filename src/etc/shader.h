@@ -93,6 +93,9 @@ class shader
 
       /*! Disable the shader */
       void disable();
+
+      /*! Verify if the shader is enabled or not */
+      bool isEnabled(){return(enabled);};
    
    protected:
 
@@ -122,6 +125,7 @@ class shader
       std::string fileName; /**< shader file name */
 
       bool loaded;      /**< If the program was loaded or not */
+      bool enabled;     /**< If the shader is enabled or not */
 };
 
 /*! The loaded shaders */

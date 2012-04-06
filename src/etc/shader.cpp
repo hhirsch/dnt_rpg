@@ -30,6 +30,7 @@ shader::shader()
 {
    program = 0;
    loaded = false;
+   enabled = false;
 }
 
 /***********************************************************************
@@ -91,6 +92,7 @@ void shader::enable()
    if((ext.hasShader()) && (loaded))
    {
       ext.arbUseProgram(program);
+      enabled = true;
    }
 }
 
@@ -102,6 +104,7 @@ void shader::disable()
    if(ext.hasShader())
    {
       ext.arbUseProgram(0);
+      enabled = false;
    }
 }
 
