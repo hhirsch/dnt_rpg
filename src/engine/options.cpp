@@ -920,7 +920,7 @@ void options::displayOptionsScreen(Farso::GuiInterface* interf)
    posY += 35;
   
    /* Fullscreen */
-   qt = gList->insertTextBox(24,posY,219,posY+17,0,gettext("Enable FullScreen"));
+   qt =gList->insertTextBox(24,posY,219,posY+17,0,gettext("Enable FullScreen"));
    qt->setFont(fontArial, 10, Farso::Font::ALIGN_LEFT);
    cxSelFullScreen = gList->insertCxSel(12,posY+4,enableFullScreen);
    gList->insertPicture(220,posY,40,220,

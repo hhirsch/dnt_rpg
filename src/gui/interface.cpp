@@ -87,7 +87,18 @@ void GuiInterface::verifyMouseInObjects(int x, int y, GuiList* list)
    for(it=list->list.begin(); it != list->list.end(); it++)
    {
       obj = (*it);
-      /* Test selTexto */
+
+      /* Verify mouse hint, if any */
+      if(!obj->getMouseHint().empty())
+      {
+         if(obj->isMouseIn( (x-lwindows->getActiveWindow()->getX1()),
+                            (y-lwindows->getActiveWindow()->getY1()) ) )
+         {
+            mouseCursor.setTextOver(obj->getMouseHint());
+         }
+      }
+
+      /* Test selText */
       if(obj->type == OBJECT_SEL_TEXT) 
       {
          SelText* st = (SelText*) obj;
@@ -95,11 +106,6 @@ void GuiInterface::verifyMouseInObjects(int x, int y, GuiList* list)
          st->getCoordinate(xa,ya,xb,yb);
          if(lwindows->getActiveWindow()->isMouseIn(x,y))
          {
-            /* Set mouse hint */
-            if(!st->getMouseHint().empty())
-            {
-               mouseCursor.setTextOver(st->getMouseHint());
-            }
             /* Set active object */
             activeObject = st;
             focus = FOCUS_SEL_TEXT;
@@ -112,12 +118,6 @@ void GuiInterface::verifyMouseInObjects(int x, int y, GuiList* list)
          if(tb->isMouseIn(x-lwindows->getActiveWindow()->getX1(),
                   y-lwindows->getActiveWindow()->getY1()))
          {
-            /* Set mouse hint if any */
-            if(!tb->getMouseHint().empty())
-            {
-               mouseCursor.setTextOver(tb->getMouseHint());
-            }
-
             /* Set active object */
             activeObject = tb;
             focus = FOCUS_TAB_BUTTON;
