@@ -10,14 +10,13 @@ script()
    character tgt
 
    # Verify if have an enemy target defined
-   if(!TARGET_CHARACTER)
+   if( (!TARGET_CHARACTER) || (!isAlive(TARGET_CHARACTER)) )
       # No target, must set it
       tgt = getNearestEnemy(SELF_CHARACTER)
       if(tgt)
          setTargetCharacter(SELF_CHARACTER, tgt);
       end
    end
-
 
    # Verify if the curren life is too low.
    # If is the case, try to run away
