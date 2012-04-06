@@ -4,7 +4,6 @@ uniform sampler2D normalTexture;
 
 // New bumpmapping
 varying vec3 lightVec;
-varying vec3 halfVec;
 varying float fog;
 
 void main()
@@ -42,9 +41,7 @@ void main()
       // In doom3, specular value comes from a texture 
       specularMaterial =  gl_FrontMaterial.specular;
       specularLight = gl_LightSource[0].specular;
-      //shininess = pow(max (dot (halfVec, normal), 0.0), 4.0);
-      shininess = lamberFactor;
-      shininess *= gl_FrontMaterial.shininess;
+      shininess = lamberFactor * gl_FrontMaterial.shininess;
 
       gl_FragColor = diffuseMaterial * diffuseLight * lamberFactor * 1.8;
       gl_FragColor += specularMaterial * specularLight * shininess;
