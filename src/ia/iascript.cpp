@@ -1783,15 +1783,15 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       {
          if(functionName == IA_FIGHT_DO_ATTACK)
          {
-            res = doHealOrAttack(*actor, target, *d, &f, 0, false); 
+            res = doHealOrAttack(actor, target, *d, &f, 0, false); 
          }
          else if(functionName == IA_FIGHT_DO_ATTACK_WITHOUT_RESISTENCE)
          {
-            res = doHealOrAttack(*actor, target, *d, NULL, NULL, 0, false); 
+            res = doHealOrAttack(actor, target, *d, NULL, NULL, 0, false); 
          }
          else if(functionName == IA_FIGHT_DO_ATTACK_AGAINST)
          {
-            res = doHealOrAttack(*actor, target, *d, &f, &against,
+            res = doHealOrAttack(actor, target, *d, &f, &against,
                   0, false); 
          }
       }

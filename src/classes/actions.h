@@ -106,7 +106,7 @@ int numberActionType(std::string buffer);
  * \note -> this wil use armatureClass as against concept
  * \return \c true if could attack
  ***************************************************************/
-bool doHealOrAttack(thing& actor, thing* target, 
+bool doHealOrAttack(thing* actor, thing* target, 
                     diceThing diceInfo, factor* conceptBonus,
                     int range, bool heal);
 
@@ -122,7 +122,7 @@ bool doHealOrAttack(thing& actor, thing* target,
  * \param heal -> true if is a heal/fix feat, 
  *                false if is an attack/break one.
  * \return \c true if could attack */
-bool doHealOrAttack(thing& actor, thing* target, 
+bool doHealOrAttack(thing* actor, thing* target, 
                     diceThing diceInfo, factor* conceptBonus,
                     factor* conceptAgainst, int range, bool heal);
 

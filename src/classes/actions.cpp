@@ -95,7 +95,7 @@ int numberActionType(string buffer)
 /***************************************************************
  *                       doHealOrAttack                        *
  ***************************************************************/
-bool doHealOrAttack(thing& actor, thing* target, 
+bool doHealOrAttack(thing* actor, thing* target, 
                     diceThing diceInfo, factor* conceptBonus,
                     int range, bool heal)
 {
@@ -110,7 +110,7 @@ bool doHealOrAttack(thing& actor, thing* target,
 /***************************************************************
  *                       doHealOrAttack                        *
  ***************************************************************/
-bool doHealOrAttack(thing& actor, thing* target, 
+bool doHealOrAttack(thing* actor, thing* target, 
                     diceThing diceInfo, factor* conceptBonus,
                     factor* conceptAgainst, int range, bool heal)
 {
@@ -132,33 +132,43 @@ bool doHealOrAttack(thing& actor, thing* target,
 
    /* Define Actor orientation
     * FIXME -> call rotate animation! */
-   actor.scNode->setAngle(0.0f, getAngle(actor.scNode->getPosX(), 
-                                         actor.scNode->getPosZ(),
+   actor->scNode->setAngle(0.0f, getAngle(actor->scNode->getPosX(), 
+                                         actor->scNode->getPosZ(),
                                          target->scNode->getPosX(),
                                          target->scNode->getPosZ()), 0.0f);
 
-   /* Define Actor target to the current */
-   actor.currentEnemy = target;
+   /* Must set some target when attacking */
+   if(!heal)
+   {
+      /* Define Actor target to the current */
+      actor->currentEnemy = target;
 
-   /* define its status to hostile */
-   target->setPsychoState(PSYCHO_HOSTILE);
+      /* Define Target Enemy to actor, if no enemy defined */
+      if(!target->currentEnemy)
+      {
+         target->currentEnemy = actor;
+      }
+
+      /* define its status to hostile */
+      target->setPsychoState(PSYCHO_HOSTILE);
+   }
    
    /* Show try brief */
    if(!heal)
    {
       sprintf(texto, gettext("%s try to attack %s"), 
-                     actor.name.c_str(), target->name.c_str());
+                     actor->name.c_str(), target->name.c_str());
    }
    else
    {
       sprintf(texto, gettext("%s try to heal %s"), 
-                     actor.name.c_str(), target->name.c_str());
+                     actor->name.c_str(), target->name.c_str());
    }
    brief.addText(texto);
 
    /* Verify Action Range */
    if( (range != 0) && 
-       (!actionInRange(actor.scNode->getPosX(), actor.scNode->getPosZ(), 
+       (!actionInRange(actor->scNode->getPosX(), actor->scNode->getPosZ(), 
                      target->scNode->getPosX(), target->scNode->getPosZ(),
                      range*METER_TO_DNT)))
    {
@@ -169,7 +179,7 @@ bool doHealOrAttack(thing& actor, thing* target,
    /* Verify action sight */
    if(target->getThingType() == THING_TYPE_CHARACTER)
    {
-      if(!colDet.characterAtSight((character*)&actor, (character*)target))
+      if(!colDet.characterAtSight((character*)actor, (character*)target))
       {
          brief.addText(gettext("Enemy out of sight!"), 255, 20, 20);
          return(false);
@@ -182,7 +192,7 @@ bool doHealOrAttack(thing& actor, thing* target,
    //TODO call other animation, if is defined
    if(!heal)
    {
-      actor.callAttackAnimation();
+      actor->callAttackAnimation();
    }
    //TODO -> create an heal animation!
 
@@ -195,11 +205,11 @@ bool doHealOrAttack(thing& actor, thing* target,
    {
       /* Apply Bonuses */
       //FIXME get fromm the relative attack, not always of the first!
-      bonus = actor.sizeModifier + 
-         actor.curBonusAndSaves.baseAttackBonus.getBonus(1);
+      bonus = actor->sizeModifier + 
+         actor->curBonusAndSaves.baseAttackBonus.getBonus(1);
       if(conceptBonus)
       { 
-         bonus += actor.getBonusValue(*conceptBonus);
+         bonus += actor->getBonusValue(*conceptBonus);
       }
 
       dice d20;
@@ -273,9 +283,9 @@ bool doHealOrAttack(thing& actor, thing* target,
          if( criticalMiss )
          {
             brief.addText(gettext("Critical Miss!"), 220, 0, 0);
-            controller.addMessage(actor.scNode->getPosX(),
-               actor.scNode->getPosY() + actor.scNode->getBoundingBox().max.y,
-               actor.scNode->getPosZ(),
+            controller.addMessage(actor->scNode->getPosX(),
+               actor->scNode->getPosY() + actor->scNode->getBoundingBox().max.y,
+               actor->scNode->getPosZ(),
                gettext("Critical Miss!"), 0.92,0.41,0.14);
             if(heal)
             {
@@ -289,9 +299,9 @@ bool doHealOrAttack(thing& actor, thing* target,
          }
          else
          {
-            controller.addMessage(actor.scNode->getPosX(),
-               actor.scNode->getPosY()+actor.scNode->getBoundingBox().max.y,
-               actor.scNode->getPosZ(),gettext("Miss."),
+            controller.addMessage(actor->scNode->getPosX(),
+               actor->scNode->getPosY()+actor->scNode->getBoundingBox().max.y,
+               actor->scNode->getPosZ(),gettext("Miss."),
                   0.92,0.41,0.14);
          }
          return(true);
@@ -305,7 +315,7 @@ bool doHealOrAttack(thing& actor, thing* target,
    /* Apply Damage/Heal modifiers bonus */
    if(conceptBonus)
    {
-      damage += actor.getBonusValue(*conceptBonus);
+      damage += actor->getBonusValue(*conceptBonus);
    }
 
    /* Make sure damage value is at last 1 */
@@ -355,18 +365,18 @@ bool doHealOrAttack(thing& actor, thing* target,
       if(heal)
       {
          brief.addText(gettext("Critical Heal!"), 12, 10, 128);
-         controller.addMessage(actor.scNode->getPosX(),
-               actor.scNode->getPosY()+actor.scNode->getBoundingBox().max.y,
-               actor.scNode->getPosZ(),gettext("Critical Heal!"),
+         controller.addMessage(actor->scNode->getPosX(),
+               actor->scNode->getPosY()+actor->scNode->getBoundingBox().max.y,
+               actor->scNode->getPosZ(),gettext("Critical Heal!"),
                0.06,0.24,0.86);
       }
       else
       {
          brief.addText(gettext("Critical Hit!"), 12, 10, 128);
          /* Show critical hit */
-         controller.addMessage(actor.scNode->getPosX(),
-               actor.scNode->getPosY()+actor.scNode->getBoundingBox().max.y,
-               actor.scNode->getPosZ(),gettext("Critical Hit!"),
+         controller.addMessage(actor->scNode->getPosX(),
+               actor->scNode->getPosY()+actor->scNode->getBoundingBox().max.y,
+               actor->scNode->getPosZ(),gettext("Critical Hit!"),
                0.84,0.2,0.01);
       }
    }

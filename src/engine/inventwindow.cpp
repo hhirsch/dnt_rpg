@@ -284,7 +284,7 @@ void inventWindow::verifyUseObject()
          factor healFactor;
          healFactor.id = "HEAL";
          healFactor.type = MOD_TYPE_SKILL;
-         doHealOrAttack(*owner, target, 
+         doHealOrAttack(owner, target, 
                activeObject->getDiceInfo(),
                &healFactor, 20, true);
 
