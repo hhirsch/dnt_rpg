@@ -560,6 +560,7 @@ void aniModel::renderNormals()
 {
    int i;
    int total=0;
+   GLfloat factor = 5.0f;
    vector3f_t* normals = getMeshNormals(0, total);
    vector3f_t* verts = getMeshVertices(0, total);
 
@@ -578,14 +579,16 @@ void aniModel::renderNormals()
    if(renderScale != 1.0)
    {
       glScalef(renderScale, renderScale, renderScale);
+      factor = 5.0f / renderScale;
    }
 
    glBegin( GL_LINES );
    for(i=0; i < total; i++)
    {
       glVertex3fv(verts[i]);
-      glVertex3f(verts[i][0] + normals[i][0],
-            verts[i][1] + normals[i][1], verts[i][2] + normals[i][2]);
+      glVertex3f(verts[i][0] + normals[i][0]*factor,
+            verts[i][1] + normals[i][1]*factor, 
+            verts[i][2] + normals[i][2]*factor);
    }
    glEnd();
 

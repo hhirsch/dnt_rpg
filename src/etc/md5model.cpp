@@ -608,6 +608,7 @@ void md5Model::preCalculateNormalsAndTangents()
          vec3_t dif1 = v2 - v1;
          vec3_t dif2 = v0 - v1;
          vec3_t n = dif1.cross(dif2);
+         n.x = -n.x;
          
          vert0->normal = vert0->normal + n;
          vert1->normal = vert1->normal + n;
@@ -624,7 +625,7 @@ void md5Model::preCalculateNormalsAndTangents()
          float coef = 1 / (st1.x * st2.y - st2.x * st1.y);
          vec3_t tangent;
 
-         tangent.x = coef * ((dif1.x * st2.y)  + (dif2.x * -st1.y));
+         tangent.x = -(coef * ((dif1.x * st2.y)  + (dif2.x * -st1.y)));
          tangent.y = coef * ((dif1.y * st2.y)  + (dif2.y * -st1.y));
          tangent.z = coef * ((dif1.z * st2.y)  + (dif2.z * -st1.y));
 
