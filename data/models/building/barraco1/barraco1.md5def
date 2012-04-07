@@ -11,7 +11,7 @@ mesh = barraco1.md5mesh
 
 # Material
 ambient = 0.8 0.8 0.8 1.0 
-diffuse = 0.800000011920929 0.800000011920929 0.800000011920929 1.0 
+diffuse = 0.80 0.80 0.80 1.0 
 specular = 0.1 0.1 0.1 0.1
 shininess = 0.0
 image = texture.png

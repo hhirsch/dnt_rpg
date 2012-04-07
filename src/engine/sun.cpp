@@ -147,11 +147,11 @@ void sun::colorOnHour()
       /* When Visible Time, is The Sun! */
       if(rotation <= 90)
       {
-         color = ((rotation / 90) * 0.5)+0.5;
+         color = ((rotation / 90) * 0.2)+0.8;
       }
       else
       {
-         color = (((180 - rotation) / 90) * 0.5)+0.5;
+         color = (((180 - rotation) / 90) * 0.2)+0.8;
       }
       actualColor[0] = color;
       actualColor[1] = color;
