@@ -605,8 +605,9 @@ void md5Model::preCalculateNormalsAndTangents()
          vec3_t v1 = vec3_t(curMesh->vertexArray[curMesh->triangles[i][1]]);
          vec3_t v2 = vec3_t(curMesh->vertexArray[curMesh->triangles[i][2]]);
 
-         vec3_t dif1 = v2 - v0;
-         vec3_t n = dif1.cross(v1 - v0);
+         vec3_t dif1 = v2 - v1;
+         vec3_t dif2 = v0 - v1;
+         vec3_t n = dif1.cross(dif2);
          
          vert0->normal = vert0->normal + n;
          vert1->normal = vert1->normal + n;
@@ -617,15 +618,15 @@ void md5Model::preCalculateNormalsAndTangents()
          vec2_t uv1 = vec2_t(curMesh->uvArray[curMesh->triangles[i][1]]);
          vec2_t uv2 = vec2_t(curMesh->uvArray[curMesh->triangles[i][2]]);
 
-         vec2_t st1 = uv2 - uv0;
-         vec2_t st2 = uv1 - uv0;
+         vec2_t st1 = uv2 - uv1;
+         vec2_t st2 = uv0 - uv1;
 
          float coef = 1 / (st1.x * st2.y - st2.x * st1.y);
          vec3_t tangent;
 
-         tangent.x = coef * ((v1.x * st2.y)  + (v2.x * -st1.y));
-         tangent.y = coef * ((v1.y * st2.y)  + (v2.y * -st1.y));
-         tangent.z = coef * ((v1.z * st2.y)  + (v2.z * -st1.y));
+         tangent.x = coef * ((dif1.x * st2.y)  + (dif2.x * -st1.y));
+         tangent.y = coef * ((dif1.y * st2.y)  + (dif2.y * -st1.y));
+         tangent.z = coef * ((dif1.z * st2.y)  + (dif2.z * -st1.y));
 
          vert0->tangent = vert0->tangent + tangent;
          vert1->tangent = vert1->tangent + tangent;
