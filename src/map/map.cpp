@@ -1023,6 +1023,7 @@ void Map::renderFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    mapTexture* tex;
 
    glPushAttrib(GL_ENABLE_BIT);
+   glEnable(GL_COLOR_MATERIAL);
 
    if(selectionRender)
    {

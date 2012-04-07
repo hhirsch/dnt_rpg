@@ -248,7 +248,7 @@ void mapLights::update(GLfloat posX, GLfloat posZ)
           (activeLights[i].distance <= 2*INDOOR_FARVIEW))
       {
          l = activeLights[i].lightNumber;
-         /*glDisable(GL_LIGHTING);
+         glDisable(GL_LIGHTING);
          glColor3f(1.0,0.2,0.2);
          glBegin(GL_QUADS);
             glVertex3f(light[l].light_position[0]-5, light[l].light_position[1],
@@ -260,9 +260,11 @@ void mapLights::update(GLfloat posX, GLfloat posZ)
             glVertex3f(light[l].light_position[0]+5, light[l].light_position[1],
                        light[l].light_position[2]-5);
          glEnd();
-         glEnable(GL_LIGHTING);*/
+         glEnable(GL_LIGHTING);
          /* Define Position */
-         glLightfv(gLight, GL_POSITION, light[l].light_position);
+         glPushMatrix();
+            glLightfv(gLight, GL_POSITION, light[l].light_position);
+         glPopMatrix();
          /* Ambient */
          if(light[l].enableAmbient)
          {
@@ -301,6 +303,10 @@ void mapLights::update(GLfloat posX, GLfloat posZ)
       else
       {
          glDisable(gLight);
+         GLfloat p[4]={0.0f, 0.0f, 0.0f, 2.0f};
+         glPushMatrix();
+         glLightfv(gLight, GL_POSITION, p);
+         glPopMatrix();
       }
    }
 }

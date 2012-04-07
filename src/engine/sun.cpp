@@ -272,6 +272,12 @@ void sun::setLight()
  *********************************************************************/
 void sun::disableLight()
 {
+   /* Set the light at unknow w = 2.0f; */
+   GLfloat p[4]={0.0f, 0.0f, 0.0f, 2.0f};
+   glPushMatrix();
+      glLightfv(GL_LIGHT0, GL_POSITION, p);
+   glPopMatrix();
+   /* Disable it */
    glDisable(GL_LIGHT0);
 }
 
