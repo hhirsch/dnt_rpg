@@ -53,7 +53,7 @@ void main()
 
    /* Ambient Light */
    gl_FragColor += gl_LightSource[0].ambient * colorTexture * 
-                   (gl_FrontMaterial.ambient);
+                   gl_FrontMaterial.ambient;
 
    /* Apply Fog */
    gl_FragColor = vec4(mix(vec3(gl_Fog.color), vec3(gl_FragColor), fog), 

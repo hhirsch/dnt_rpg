@@ -834,8 +834,8 @@ bool md5Model::load(const std::string& strFileName)
       else if(key == "specular")
       {
          if(sscanf(data.c_str(), "%f %f %f %f", 
-                  &meshMaterial.ambient[0], &meshMaterial.ambient[1],
-                  &meshMaterial.ambient[2], &meshMaterial.ambient[3]) != 4)
+                  &meshMaterial.specular[0], &meshMaterial.specular[1],
+                  &meshMaterial.specular[2], &meshMaterial.specular[3]) != 4)
          {
             std::cerr << "Warning: invalid material data '" << data 
                << "' on model " << fileName << std::endl;
