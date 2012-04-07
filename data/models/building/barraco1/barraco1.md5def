@@ -1,0 +1,18 @@
+# Exported from Blender by DNT md5 exporter
+
+path=models/building/barraco1/
+scale=7.2
+blendFrames = 4
+
+# Mesh Information
+mesh = barraco1.md5mesh
+
+# Animations
+
+# Material
+ambient = 0.3 0.3 0.3 0.3 
+diffuse = 0.800000011920929 0.800000011920929 0.800000011920929 1.0 
+specular = 0.1 0.1 0.1 0.1
+shininess = 0.0
+image = texture.png
+normalMap = normal.png

@@ -17,7 +17,7 @@
    PC or NPC do an action;
  - Possibility to disable depth collision check on models where 
    the boundingBox check is enough;
-
+ - Support for model's bump (normal) mapping;
  - Simplified number of skills to 12;
  - Removed the class Administration Student;
 

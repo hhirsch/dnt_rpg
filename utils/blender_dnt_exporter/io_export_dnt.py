@@ -656,6 +656,13 @@ def save_md5(settings):
                 [p1[0] - p2[0], p1[1] - p2[1], p1[2] - p2[2]], \
                 ), w_matrix))
             
+            #print("Normal: " + str(face.normal));
+            #cNormal = vector_normalize(vector_by_matrix(vector_crossproduct( \
+            #            [p3[0] - p2[0], p3[1] - p2[1], p3[2] - p2[2]], \
+            #            [p1[0] - p2[0], p1[1] - p2[1], p1[2] - p2[2]], \
+            #            ), w_matrix))
+            #print("cNormal: " + str(cNormal));
+
             #for each vertex in this face, add unique to vertices dictionary
             face_vertices = []
             for i in range(len(face.vertices)):
