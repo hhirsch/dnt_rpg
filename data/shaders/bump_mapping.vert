@@ -13,6 +13,7 @@ void main()
    vec3 t = normalize (gl_NormalMatrix * tangent);
    vec3 b = cross (n, t);
 
+   vec3 vertexPosition = vec3(gl_ModelViewMatrix *  gl_Vertex);
    vec3 lightDir;
    vec3 v;
    int i;
@@ -25,7 +26,6 @@ void main()
          if(gl_LightSource[i].position.w != 0.0)
          {
             /* Positional Light */
-            vec3 vertexPosition = vec3(gl_ModelViewMatrix *  gl_Vertex);
             lightDir = normalize(gl_LightSource[i].position.xyz - 
                                  vertexPosition);
          }
