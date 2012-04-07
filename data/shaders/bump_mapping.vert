@@ -13,8 +13,18 @@ void main()
    vec3 t = normalize (gl_NormalMatrix * tangent);
    vec3 b = cross (n, t);
 
-   vec3 lightDir = normalize(gl_LightSource[0].position.xyz - gl_Position.xyz);
-
+   vec3 lightDir;    
+   if(gl_LightSource[0].position.w != 0.0)
+   {
+      /* Positional Light */
+      lightDir = normalize(gl_LightSource[0].position.xyz-gl_Position.xyz);
+   }
+   else
+   {
+      /* Directional Light */
+      lightDir = normalize(gl_LightSource[0].position.xyz);
+   }
+ 
    vec3 v;
    v.x = dot (lightDir, t);
    v.y = dot (lightDir, b);

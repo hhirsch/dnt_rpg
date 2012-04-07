@@ -2,7 +2,6 @@
 uniform sampler2D diffuseTexture;
 uniform sampler2D normalTexture;
 
-// New bumpmapping
 varying vec3 lightVec;
 varying float fog;
 
@@ -13,12 +12,12 @@ void main()
    normal = normalize(normal);
 
    /* Calculate lambert factor */
-   //float lamberFactor= max(dot(lightVec, normal), 0.0) ;
-   float lamberFactor= dot(lightVec, normal);
+   float lamberFactor= max(dot(normal, lightVec), 0.0) ;
+   /*float lamberFactor= dot(lightVec, normal);
    if(lamberFactor < 0.0)
    {
       lamberFactor = -lamberFactor;
-   }
+   }*/
 
    /* Apply Texture and single light */
    vec4 colorTexture = texture2D(diffuseTexture, gl_TexCoord[0].st);
@@ -33,7 +32,7 @@ void main()
                    gl_FrontMaterial.specular * shininess;
 
    /* Ambient Light */
-   gl_FragColor += gl_LightSource[0].ambient * gl_FrontMaterial.ambient * 
+   gl_FragColor += gl_LightSource[0].ambient * /*gl_FrontMaterial.ambient * */
                    colorTexture;
 
    /* Apply Fog */

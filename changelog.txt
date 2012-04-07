@@ -30,7 +30,6 @@ BugFixes:
  - script: Fixed a bug on jumping from "else if" statements when an 
            "if" was successfull;
  - sound: keep music playing if try to load same music file;
- - sun: Light w must be 1.0;
  - map: fix for mapLights set;
  - render: Fixed the offset to avoid glitches between rendered floor surfaces
            and shadow;
