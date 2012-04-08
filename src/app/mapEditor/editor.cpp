@@ -107,6 +107,7 @@ editor::editor()
    terrainEditor = NULL;
    portalEditor = NULL;
    wallEditor = NULL;
+   tileWall = NULL;
    particleEditor = NULL;
 }
 
@@ -122,6 +123,7 @@ editor::~editor()
       delete(terrainEditor);
       delete(portalEditor);
       delete(wallEditor);
+      delete(tileWall);
       delete(particleEditor);
       delete(npcController);
    }
@@ -232,6 +234,7 @@ void editor::closeMap()
       delete(terrainEditor);
       delete(portalEditor);
       delete(wallEditor);
+      delete(tileWall);
       delete(objectEditor);
       delete(particleEditor);
       delete(npcController);
@@ -264,6 +267,7 @@ void editor::openMap()
       terrainEditor = new terrain(map);
       portalEditor = new portal(map);
       wallEditor = new wallController(map);
+      tileWall = new dntMapEditor::TileWall(map);
       objectEditor = new objects(map);
       particleEditor = new particles(map);
       curTexture = ((mapTexture*)map->textures.getFirst())->index;
@@ -527,6 +531,7 @@ void editor::newMap()
    terrainEditor = new terrain(map);
    portalEditor = new portal(map);
    wallEditor = new wallController(map);
+   tileWall = new dntMapEditor::TileWall(map);
    objectEditor = new objects(map);
    particleEditor = new particles(map);
    curTexture = index;
@@ -981,6 +986,11 @@ void editor::doEditorIO()
       wallEditor->verifyAction(xReal, yReal, zReal, xFloor, zFloor,
             mButton, keys, tl, curTexture, curTextureName);
       gui->setTool(tl);
+   }
+   else if( (gui->getState() == GUI_IO_STATE_TILE_WALL) )
+   {
+      tileWall->verifyAction(xReal, yReal, zReal, xFloor, zFloor,
+                  mButton, keys, gui->getTool());
    }
    else if( (gui->getState() == GUI_IO_STATE_OBJECTS) && (mapOpened))
    {

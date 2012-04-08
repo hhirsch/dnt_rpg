@@ -1,5 +1,5 @@
 #  DccNiTghtmare: a satirical post-apocalyptical RPG.
-#  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+#  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
 # 
 #  This file is part of DccNiTghtmare.
 # 
@@ -86,7 +86,7 @@ OBJSENGINE = $(ENDENGINE)alignwindow.o $(ENDENGINE)aspectwindow.o \
 				 $(ENDENGINE)sky.o $(ENDENGINE)sun.o $(ENDENGINE)util.o
 OBJS = area.o editor.o grasswindow.o guiIO.o listwindow.o mapEditor.o \
        message.o nodeeditor.o npcs.o objects.o particles.o portal.o \
-		 terrain.o wall.o waterwindow.o
+		 tilewall.o terrain.o wall.o waterwindow.o
 
 BIN = ../../../bin/
 
@@ -100,7 +100,7 @@ area.o: area.cpp area.h
 editor.o: editor.cpp editor.h guiIO.h terrain.h portal.h wall.h message.h\
           objects.h particles.h npcs.h $(ENDENGINE)sun.h $(ENDENGINE)sky.h\
           $(ENDENGINE)character.h $(ENDENGINE)culling.h $(ENDENGINE)util.h\
-          $(ENDPART)partcontroller.h $(ENDMAP)map.h
+          $(ENDPART)partcontroller.h $(ENDMAP)map.h nodeeditor.h tilewall.h
 	@printf "Making $@...\n"
 	@$(CC) $(CFLAGS) editor.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
@@ -164,6 +164,11 @@ portal.o: portal.cpp portal.h area.h message.h $(ENDMAP)map.h\
 terrain.o: terrain.cpp terrain.h $(ENDMAP)map.h message.h
 	@printf "Making $@...\n"
 	@$(CC) $(CFLAGS) terrain.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
+
+tilewall.o: tilewall.cpp tilewall.h
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) tilewall.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 wall.o: wall.cpp wall.h $(ENDMAP)map.h $(ENDGUI)draw.h message.h

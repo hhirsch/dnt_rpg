@@ -45,6 +45,8 @@
 #define TOOL_WALL_MORE_Z_TEXTURE    31
 #define TOOL_WALL_DESTROY           32
 
+#define TOOL_TILE_WALL_ADD          50
+
 #define TOOL_PORTAL_ADD             131
 #define TOOL_PORTAL_TAG             132
 #define TOOL_PORTAL_DOOR            133

@@ -56,6 +56,7 @@
 #define GUI_IO_STATE_NPCS      6
 #define GUI_IO_STATE_MUSIC     7
 #define GUI_IO_STATE_SOUNDS    8 
+#define GUI_IO_STATE_TILE_WALL 9
 
 /**! The Super GUI IO Class, to control things on map Editor! */
 class guiIO 
@@ -224,6 +225,7 @@ class guiIO
       Farso::OneTabButton* wallMoreXTexture;     /**< Texture X More Button */
       Farso::OneTabButton* wallLessZTexture;     /**< Texture Z Less Button */
       Farso::OneTabButton* wallMoreZTexture;     /**< Texture Z More Button */
+      Farso::OneTabButton* tileWallAddButton;    /**< Add tile walls */
       void openWallWindow();
       /*********************Portal*Window*******************************/
       Farso::Window* portalWindow;               /**< Portal Window */

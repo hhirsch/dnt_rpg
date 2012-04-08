@@ -4,9 +4,6 @@
  
   This file is part of DccNiTghtmare.
   
-  Originally based on the work of David Henry <tfc_duke@club-internet.fr>
-  Copyright (c) 2005-2007 David HENRY
- 
   DccNiTghtmare is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -67,7 +64,7 @@ class vec2_t
       }
 
       vec2_t operator-(const vec2_t& v) const;
-
+      vec2_t operator/(float f) const;
 
       float x, y;
 };

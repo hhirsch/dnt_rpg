@@ -30,6 +30,7 @@
 #include "particles.h"
 #include "npcs.h"
 #include "nodeeditor.h"
+#include "tilewall.h"
 
 #include "../../etc/scene.h"
 #include "../../etc/shader.h"
@@ -118,6 +119,7 @@ class editor
       terrain* terrainEditor;        /**< The terrain Editor Module */
       portal* portalEditor;          /**< The portal Editor Module */
       wallController* wallEditor;    /**< The wall Editor Module */
+      dntMapEditor::TileWall* tileWall; /**< The tile wall controller */
       objects* objectEditor;         /**< The Object Editor Module */
       particles* particleEditor;     /**< The Particle Editor Module */
       scene curScene;                /**< The Scene */
