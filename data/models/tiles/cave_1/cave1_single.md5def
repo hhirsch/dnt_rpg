@@ -5,7 +5,7 @@ scale = 18.0
 blendFrames = 4
 
 # Mesh Information
-mesh = cave_single.md5mesh
+mesh = cave_single1.md5mesh
 
 # Animations
 
