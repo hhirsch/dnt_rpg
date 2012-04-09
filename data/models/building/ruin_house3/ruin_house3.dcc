@@ -1,5 +1,5 @@
 name = Ruin_House
-cal3d = models/building/ruin_house3/model.cfg
+cal3d = models/building/ruin_house3/ruin_house3.md5def
 inventory_texture = texturas/na.png
 inventory_sizes = 0 0
 life_points = 1260

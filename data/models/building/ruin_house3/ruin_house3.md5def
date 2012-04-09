@@ -1,0 +1,18 @@
+# Exported from Blender by DNT md5 exporter
+
+path=models/building/ruin_house3/
+scale=7.2
+blendFrames = 4
+
+# Mesh Information
+mesh = ruin_house3.md5mesh
+
+# Animations
+
+# Material
+ambient = 0.6 0.6 0.6 1.0 
+diffuse = 0.80 0.80 0.80 1.0 
+specular = 0.1 0.1 0.1 0.1
+shininess = 0.0
+image = texture.png
+normaMap = normalmap.png
