@@ -109,6 +109,7 @@ TileWall::TileWall(Map* acMap)
    format = ".md5def";
    baseName = "models/tiles/cave_1/cave1_";
    totalCenter = 4;
+   totalLineCenter = 2;
 }
 
 /***********************************************************************
@@ -152,11 +153,18 @@ void TileWall::flush()
 /***********************************************************************
  *                             randomCenter                            *
  ***********************************************************************/
-std::string TileWall::randomCenter()
+std::string TileWall::randomCenter(int i)
 {
-   dice d(totalCenter);
    char buf[16];
-   sprintf(buf, "%d", d.roll());
+   if(i > 1)
+   {
+      dice d(i);
+      sprintf(buf, "%d", d.roll());
+   }
+   else
+   {
+      sprintf(buf, "%d", 1);
+   }
    return(buf);
 }
 
@@ -172,13 +180,13 @@ void TileWall::setTiles()
 
    /* First, let's calculate needed totals */
    needed = (finalPos - initPos) / TILE_SIZE;
-   if(fabs(needed.x) < 2)
+   if(fabs(needed.x) < 1)
    {
-      needed.x = (finalPos.x < initPos.x)?-2:2;
+      needed.x = (finalPos.x < initPos.x)?-1:1;
    }
-   if(fabs(needed.y) < 2)
+   if(fabs(needed.y) < 1)
    {
-      needed.y = (finalPos.y < initPos.y)?-2:2;
+      needed.y = (finalPos.y < initPos.y)?-1:1;
    }
 
    //printf("Total: %d %d\nNeeded: %d %d\n", totalX, totalZ, 
@@ -210,7 +218,7 @@ void TileWall::setTiles()
          for(j=0; j < absZ; j++)
          {
             tiles[i][j] = new Tile();
-            tiles[i][j]->model = baseName+"top"+format;
+            tiles[i][j]->model = baseName+"single"+format;
             tiles[i][j]->createSceneNode(0.0f, 0.0f, 0.0f, 0.0f); 
          }
       }
@@ -276,6 +284,66 @@ void TileWall::setTileModels()
    int sigX = (totalX < 0)?-1:1;
    int sigZ = (totalZ < 0)?-1:1;
 
+   /* Let's threat special cases, and general one */
+   if((absX == 1) && (absZ == 1))
+   {
+      /* Special Case 1: 1x1 grid. only use a single-type mesh. */
+      model = baseName+"single"+format;
+      tiles[0][0]->changeModel(model);
+      tiles[0][0]->scNode->setAngle(0.0f, 0.0f, 0.0f);
+      tiles[0][0]->scNode->setPosition(initPos.x, 0.0f, initPos.y);
+      /* We're done! */
+      return;
+   }
+
+   else if( (absX == 1) || (absZ == 1) )
+   {
+      /* Special Case 2: Single line grid. use line-type meshes. */
+      for(i=0; i < absX; i++)
+      {
+         for(j=0; j < absZ; j++)
+         {
+            angle = (absX == 1)?90.0f:0.0f;
+            if( ((i == 0) && (absZ == 1)) ||
+                ((j == 0) && (absX == 1)) )
+            {
+               /* Initial Edge */
+               model = baseName+"lside"+format;
+               if(  ( (absZ == 1) && (sigX > 0) ) ||
+                    ( (absX == 1) && (sigZ < 0) ) )
+               {
+                  angle += 180;
+               }
+            }
+            else if( ((i == absX-1) && (absZ == 1)) ||
+                     ((j == absZ-1) && (absX == 1)) )
+            {
+               /* Final Edge */
+               model = baseName+"lside"+format;
+               if(  ( (absZ == 1) && (sigX < 0) ) ||
+                    ( (absX == 1) && (sigZ > 0) ) )
+               {
+                  angle += 180;
+               }
+            }
+            else
+            {
+               /* Center */
+               model = baseName+"lc"+randomCenter(totalLineCenter)+format;
+            }
+            /* Let's change the model, if needed */
+            tiles[i][j]->changeModel(model);
+            tiles[i][j]->scNode->setAngle(0.0f, angle, 0.0f);
+            tiles[i][j]->scNode->setPosition(initPos.x+sigX*i*TILE_SIZE, 0.0f, 
+                  initPos.y+sigZ*j*TILE_SIZE);
+         }
+      }
+
+      /* We're done! */
+      return;
+   }
+
+   /* General Case. Use normal meshes. */
    for(i=0; i < absX; i++)
    {
       for(j=0; j < absZ; j++)
@@ -336,7 +404,7 @@ void TileWall::setTileModels()
          else if((i == 0) || (i == absX-1))
          {
             /* Model to center closed-X one */
-            model = baseName+"c"+randomCenter()+format;
+            model = baseName+"c"+randomCenter(totalCenter)+format;
             if(sigX > 0)
             {
                angle = (i==0)?180.0:0.0f;
@@ -349,7 +417,7 @@ void TileWall::setTileModels()
          else if( (j == 0) || (j == absZ-1) )
          {
             /* Model to center closed-Z one */
-            model = baseName+"c"+randomCenter()+format;
+            model = baseName+"c"+randomCenter(totalCenter)+format;
             angle = (j==0)?90.0:270.0f;
             angle *= sigZ;
          }

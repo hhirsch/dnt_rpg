@@ -79,7 +79,7 @@ class TileWall
       void setTiles();
       void setTileModels();
       /*! Get random a center tile number */
-      std::string randomCenter();
+      std::string randomCenter(int total);
 
       std::vector< std::vector<Tile*> > tiles; /**< Current created tiles */
       Map* curMap;     /**< Current on-edit map */
@@ -93,6 +93,7 @@ class TileWall
       std::string format;   /**< tile model format (with .) */
       std::string baseName; /**< tile base name */
       int totalCenter;      /**< Number of center tiles */
+      int totalLineCenter;  /**< Number of line center tiles */
 };
 
 }
