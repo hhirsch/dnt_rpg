@@ -21,6 +21,8 @@
 #include "tilewall.h"
 #include "message.h"
 
+#include <math.h>
+
 #define TILE_SIZE  45
 #define TILE_HALF  TILE_SIZE / 2
 
@@ -180,6 +182,8 @@ void TileWall::setTiles()
 
    /* First, let's calculate needed totals */
    needed = (finalPos - initPos) / TILE_SIZE;
+   needed.x = round(needed.x);
+   needed.y = round(needed.y);
    if(fabs(needed.x) < 1)
    {
       needed.x = (finalPos.x < initPos.x)?-1:1;
