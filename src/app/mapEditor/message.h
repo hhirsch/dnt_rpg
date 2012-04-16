@@ -47,6 +47,7 @@
 
 #define TOOL_TILE_WALL_ADD          50
 #define TOOL_TILE_WALL_REMOVE       51
+#define TOOL_TILE_WALL_CHANGE       52
 
 #define TOOL_PORTAL_ADD             131
 #define TOOL_PORTAL_TAG             132

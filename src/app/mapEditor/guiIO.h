@@ -231,6 +231,7 @@ class guiIO
       Farso::TabButton* tileWallTabButton;       /**< TileWall Tab Button */
       Farso::OneTabButton* tileWallAddButton;    /**< Add tile walls Button */
       Farso::OneTabButton* tileWallRemoveButton; /**< Remove tile Button */
+      Farso::OneTabButton* tileWallChangeButton; /**< Change tile Button */
       void openTileWallWindow();
       /*********************Portal*Window*******************************/
       Farso::Window* portalWindow;               /**< Portal Window */

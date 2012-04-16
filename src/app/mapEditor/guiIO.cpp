@@ -340,6 +340,8 @@ void guiIO::openTileWallWindow()
    tileWallAddButton->setMouseHint("Add TileWall");
    tileWallRemoveButton = tileWallTabButton->insertButton(20,0,39,19);
    tileWallRemoveButton->setMouseHint("Remove TileWall");
+   tileWallChangeButton = tileWallTabButton->insertButton(40,0,59,19);
+   tileWallChangeButton->setMouseHint("Change TileWall Model");
 
    tileWallWindow->setExternPointer(&tileWallWindow);
    gui->openWindow(tileWallWindow);
@@ -841,6 +843,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
             ltWindow->setState(STATE_DOORS);
          }
 
+         /* TileWall Buttons */
          else if(object == (Farso::GuiObject*) tileWallAddButton)
          {
             state = GUI_IO_STATE_TILE_WALL;
@@ -851,6 +854,12 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          {
             state = GUI_IO_STATE_TILE_WALL;
             tool = TOOL_TILE_WALL_REMOVE;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if(object == (Farso::GuiObject*) tileWallChangeButton)
+         {
+            state = GUI_IO_STATE_TILE_WALL;
+            tool = TOOL_TILE_WALL_CHANGE;
             return(GUI_IO_NEW_STATE);
          }
 

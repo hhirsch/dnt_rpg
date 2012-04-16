@@ -42,7 +42,8 @@ class Tile
          TYPE_CENTER,
          TYPE_LINE_CENTER,
          TYPE_SIDE,
-         TYPE_LINE_SIDE
+         TYPE_LINE_SIDE,
+         TOTAL_TILES
       };
 
       /*! Constructor */
@@ -97,9 +98,14 @@ class TileWall
       void setTileModels();
       /*! Get random a center tile number */
       std::string randomCenter(int total);
+      /*! Get a model filename for tile type */
+      std::string getModel(int type);
 
       /*! Remove tile from tileWall (adjusting its neighboors) */
       void removeTile(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
+            Uint8 mButton);
+      /*! Change tile Type from tileWall, cycling. */
+      void changeTile(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
             Uint8 mButton);
 
       /*! Get a tile under the mouse position, if any */

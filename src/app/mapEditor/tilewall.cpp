@@ -177,6 +177,49 @@ std::string TileWall::randomCenter(int i)
 }
 
 /***********************************************************************
+ *                               getModel                              *
+ ***********************************************************************/
+std::string TileWall::getModel(int type)
+{
+   std::string ret;
+   switch(type)
+   {
+      case Tile::TYPE_SINGLE:
+      {
+         ret = baseName + "single" + format;
+      }
+      break;
+      case Tile::TYPE_TOP:
+      {
+         ret = baseName + "top" + format;
+      }
+      break;
+      case Tile::TYPE_CENTER:
+      {
+         ret = baseName+"c"+randomCenter(totalCenter)+format;
+      }
+      break;
+      case Tile::TYPE_LINE_CENTER:
+      {
+         ret = baseName+"lc"+randomCenter(totalLineCenter)+format;
+      }
+      break;
+      case Tile::TYPE_SIDE:
+      {
+         ret = baseName+"side"+format;
+      }
+      break;
+      case Tile::TYPE_LINE_SIDE:
+      {
+         ret = baseName+"lside"+format;
+      }
+      break;
+   }
+
+   return(ret);
+}
+
+/***********************************************************************
  *                             setTiles                                *
  ***********************************************************************/
 void TileWall::setTiles()
@@ -285,7 +328,6 @@ void TileWall::setTiles()
 void TileWall::setTileModels()
 {
    int i,j;
-   std::string model;
    int type = Tile::TYPE_TOP;
    float angle=0.0f;
 
@@ -301,8 +343,7 @@ void TileWall::setTileModels()
    if((absX == 1) && (absZ == 1))
    {
       /* Special Case 1: 1x1 grid. only use a single-type mesh. */
-      model = baseName+"single"+format;
-      tiles[0][0]->changeModel(Tile::TYPE_SINGLE, model);
+      tiles[0][0]->changeModel(Tile::TYPE_SINGLE, getModel(Tile::TYPE_SINGLE));
       tiles[0][0]->scNode->setAngle(0.0f, 0.0f, 0.0f);
       tiles[0][0]->scNode->setPosition(initPos.x, 0.0f, initPos.y);
       /* We're done! */
@@ -321,7 +362,6 @@ void TileWall::setTileModels()
                 ((j == 0) && (absX == 1)) )
             {
                /* Initial Edge */
-               model = baseName+"lside"+format;
                type = Tile::TYPE_LINE_SIDE;
                if(  ( (absZ == 1) && (sigX > 0) ) ||
                     ( (absX == 1) && (sigZ < 0) ) )
@@ -333,7 +373,6 @@ void TileWall::setTileModels()
                      ((j == absZ-1) && (absX == 1)) )
             {
                /* Final Edge */
-               model = baseName+"lside"+format;
                type = Tile::TYPE_LINE_SIDE;
                if(  ( (absZ == 1) && (sigX < 0) ) ||
                     ( (absX == 1) && (sigZ > 0) ) )
@@ -344,11 +383,10 @@ void TileWall::setTileModels()
             else
             {
                /* Center */
-               model = baseName+"lc"+randomCenter(totalLineCenter)+format;
                type = Tile::TYPE_LINE_CENTER;
             }
             /* Let's change the model, if needed */
-            tiles[i][j]->changeModel(type, model);
+            tiles[i][j]->changeModel(type, getModel(type));
             tiles[i][j]->scNode->setAngle(0.0f, angle, 0.0f);
             tiles[i][j]->scNode->setPosition(initPos.x+sigX*i*TILE_SIZE, 0.0f, 
                   initPos.y+sigZ*j*TILE_SIZE);
@@ -369,7 +407,6 @@ void TileWall::setTileModels()
               ( (j == 0) || (j == absZ-1) ) )
          {
             /* Set its model to side one */
-            model = baseName+"side"+format;
             type = Tile::TYPE_SIDE;
 
             /* Let's set each angle */
@@ -421,7 +458,6 @@ void TileWall::setTileModels()
          else if((i == 0) || (i == absX-1))
          {
             /* Model to center closed-X one */
-            model = baseName+"c"+randomCenter(totalCenter)+format;
             type = Tile::TYPE_CENTER;
             if(sigX > 0)
             {
@@ -435,7 +471,6 @@ void TileWall::setTileModels()
          else if( (j == 0) || (j == absZ-1) )
          {
             /* Model to center closed-Z one */
-            model = baseName+"c"+randomCenter(totalCenter)+format;
             type = Tile::TYPE_CENTER;
             angle = (j==0)?90.0:270.0f;
             angle *= sigZ;
@@ -443,13 +478,12 @@ void TileWall::setTileModels()
          else
          {
             /* Top models */
-            model = baseName+"top"+format;
             type = Tile::TYPE_TOP;
             angle = 0.0f;
          }
      
          /* Let's change the model, if needed */
-         tiles[i][j]->changeModel(type, model);
+         tiles[i][j]->changeModel(type, getModel(type));
          tiles[i][j]->scNode->setAngle(0.0f, angle, 0.0f);
          tiles[i][j]->scNode->setPosition(initPos.x+sigX*i*TILE_SIZE, 0.0f, 
                                           initPos.y+sigZ*j*TILE_SIZE);
@@ -513,7 +547,6 @@ void TileWall::removeTile(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       Uint8 mButton)
 {
    Tile* neighTile;
-   std::string model;
    int absX = (int)fabs(totalX);
    int absZ = (int)fabs(totalZ);
    
@@ -523,7 +556,13 @@ void TileWall::removeTile(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
    /* Verify if tried to delete it! */
    if( (mButton & SDL_BUTTON(1)) && (curTile) )
    {
-      /* TODO: Wait until release mouse button */
+      /* Wait until release mouse button */
+      while(mButton & SDL_BUTTON(1))
+      {
+         SDL_PumpEvents();
+         int x,y;
+         mButton = SDL_GetMouseState(&x,&y);
+      }
 
       /* Delete its scene node */
       curTile->deleteSceneNode();
@@ -534,14 +573,14 @@ void TileWall::removeTile(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
          neighTile = tiles[curTile->i][curTile->j-1];
          if(haveNeighbor(neighTile, 0, -1, absX, absZ))
          {
-            model = baseName+"c"+randomCenter(totalCenter)+format;
-            neighTile->changeModel(Tile::TYPE_CENTER, model);
+            neighTile->changeModel(Tile::TYPE_CENTER, 
+                  getModel(Tile::TYPE_CENTER));
             neighTile->scNode->setAngle(0.0f, 90.0f, 0.0f);
          }
          else
          {
-            model = baseName+"lc"+randomCenter(totalLineCenter)+format;
-            neighTile->changeModel(Tile::TYPE_LINE_CENTER, model);
+            neighTile->changeModel(Tile::TYPE_LINE_CENTER,
+                  getModel(Tile::TYPE_LINE_CENTER));
             neighTile->scNode->setAngle(0.0f, 0.0f, 0.0f);
          }
       }
@@ -552,14 +591,14 @@ void TileWall::removeTile(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
          neighTile = tiles[curTile->i][curTile->j+1];
          if(haveNeighbor(neighTile, 0, 1, absX, absZ))
          {
-            model = baseName+"c"+randomCenter(totalCenter)+format;
-            neighTile->changeModel(Tile::TYPE_CENTER, model);
+            neighTile->changeModel(Tile::TYPE_CENTER, 
+                  getModel(Tile::TYPE_CENTER));
             neighTile->scNode->setAngle(0.0f, -90.0f, 0.0f);
          }
          else
          {
-            model = baseName+"lc"+randomCenter(totalLineCenter)+format;
-            neighTile->changeModel(Tile::TYPE_LINE_CENTER, model);
+            neighTile->changeModel(Tile::TYPE_LINE_CENTER, 
+                  getModel(Tile::TYPE_LINE_CENTER));
             neighTile->scNode->setAngle(0.0f, 180.0f, 0.0f);
          }
       }
@@ -570,14 +609,14 @@ void TileWall::removeTile(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
          neighTile = tiles[curTile->i-1][curTile->j];
          if(haveNeighbor(neighTile, -1, 0, absX, absZ))
          {
-            model = baseName+"c"+randomCenter(totalCenter)+format;
-            neighTile->changeModel(Tile::TYPE_CENTER, model);
+            neighTile->changeModel(Tile::TYPE_CENTER, 
+                  getModel(Tile::TYPE_CENTER));
             neighTile->scNode->setAngle(0.0f, 180.0f, 0.0f);
          }
          else
          {
-            model = baseName+"lc"+randomCenter(totalLineCenter)+format;
-            neighTile->changeModel(Tile::TYPE_LINE_CENTER, model);
+            neighTile->changeModel(Tile::TYPE_LINE_CENTER,
+                  getModel(Tile::TYPE_LINE_CENTER));
             neighTile->scNode->setAngle(0.0f, 90.0f, 0.0f);
          }
       }
@@ -588,17 +627,56 @@ void TileWall::removeTile(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
          neighTile = tiles[curTile->i+1][curTile->j];
          if(haveNeighbor(neighTile, 1, 0, absX, absZ))
          {
-            model = baseName+"c"+randomCenter(totalCenter)+format;
-            neighTile->changeModel(Tile::TYPE_CENTER, model);
+            neighTile->changeModel(Tile::TYPE_CENTER,
+                  getModel(Tile::TYPE_CENTER));
             neighTile->scNode->setAngle(0.0f, 0.0f, 0.0f);
          }
          else
          {
-            model = baseName+"lc"+randomCenter(totalLineCenter)+format;
-            neighTile->changeModel(Tile::TYPE_LINE_CENTER, model);
+            neighTile->changeModel(Tile::TYPE_LINE_CENTER,
+                  getModel(Tile::TYPE_CENTER));
             neighTile->scNode->setAngle(0.0f, -90.0f, 0.0f);
          }
       }
+   }
+}
+
+/***********************************************************************
+ *                            changeTile                               *
+ ***********************************************************************/
+void TileWall::changeTile(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
+      Uint8 mButton)
+{
+   int nextType;
+
+   /* Get tile under mouse */
+   curTile = getTileUnder(mouseX, mouseY, mouseZ);
+
+   /* Verify if tried to change it! */
+   if( (mButton & SDL_BUTTON(1)) && (curTile) )
+   {
+      /* Wait mouse release */
+      while(mButton & SDL_BUTTON(1))
+      {
+         SDL_PumpEvents();
+         int x,y;
+         mButton = SDL_GetMouseState(&x,&y);
+      }
+      nextType = ( (curTile->type + 1) % Tile::TOTAL_TILES);
+      curTile->changeModel(nextType, getModel(nextType));
+   }
+
+   /* Right button to change orientation */
+   if( (mButton & SDL_BUTTON(3)) && (curTile) )
+   {
+      /* Wait mouse release */
+      while(mButton & SDL_BUTTON(3))
+      {
+         SDL_PumpEvents();
+         int x,y;
+         mButton = SDL_GetMouseState(&x,&y);
+      }
+      curTile->scNode->setAngle(0.0f, curTile->scNode->getAngleY()+90, 0.0f);
    }
 }
 
@@ -639,6 +717,10 @@ void TileWall::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
    else if(tool == TOOL_TILE_WALL_REMOVE)
    {
       removeTile(mouseX, mouseY, mouseZ, mButton);
+   }
+   else if(tool == TOOL_TILE_WALL_CHANGE)
+   {
+      changeTile(mouseX, mouseY, mouseZ, mButton);
    }
 }
 
