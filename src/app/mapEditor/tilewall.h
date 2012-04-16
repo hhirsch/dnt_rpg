@@ -34,8 +34,19 @@ namespace dntMapEditor
 class Tile
 {
    public:
+ 
+      enum TileType
+      {
+         TYPE_SINGLE=0,
+         TYPE_TOP,
+         TYPE_CENTER,
+         TYPE_LINE_CENTER,
+         TYPE_SIDE,
+         TYPE_LINE_SIDE
+      };
+
       /*! Constructor */
-      Tile();
+      Tile(int indexi, int indexj);
       /*! Destructor */
       ~Tile();
       /*! Create tile sceneNode */
@@ -43,10 +54,13 @@ class Tile
       /*! Delete tile sceneNode */
       void deleteSceneNode();
       /*! Change current tile model */
-      void changeModel(std::string modelName);
+      void changeModel(int t, std::string modelName);
 
       std::string model; /**< Model of this tile */
       sceneNode* scNode; /**< Scene node related to this tile */
+      int i;             /**< 'i' index on matrix */
+      int j;             /**< 'j' index on matrix */
+      int type;          /**< Tile current type */
 };
 
 class TileWall
@@ -90,6 +104,11 @@ class TileWall
 
       /*! Get a tile under the mouse position, if any */
       Tile* getTileUnder(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ);
+      
+      /*! Verify if tile have neighbor
+       * \param di -> delta to i index for neighbor
+       * \param dj -> delta to j index for neighbor */
+      bool haveNeighbor(Tile* t, int di, int dj, int absX, int absZ);
 
       std::vector< std::vector<Tile*> > tiles; /**< Current created tiles */
       Map* curMap;     /**< Current on-edit map */
