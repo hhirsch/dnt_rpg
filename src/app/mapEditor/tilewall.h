@@ -63,6 +63,9 @@ class TileWall
       /*! Flush current tiles to the map, as objects */
       void flush();
 
+      /*! Draw temporary editor things */
+      void drawTemporary();
+
       /*! Verify Action on tile Wall */
       void verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
             GLfloat floorX, GLfloat floorZ,
@@ -81,9 +84,18 @@ class TileWall
       /*! Get random a center tile number */
       std::string randomCenter(int total);
 
+      /*! Remove tile from tileWall (adjusting its neighboors) */
+      void removeTile(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
+            Uint8 mButton);
+
+      /*! Get a tile under the mouse position, if any */
+      Tile* getTileUnder(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ);
+
       std::vector< std::vector<Tile*> > tiles; /**< Current created tiles */
       Map* curMap;     /**< Current on-edit map */
       int state;       /**< Current state */
+
+      Tile* curTile;   /**< Current tile under mouse, for "remove" actions */
 
       vec2_t initPos;   /**< Initial Position */
       vec2_t finalPos;  /**< Current Position */

@@ -791,6 +791,10 @@ void editor::draw()
                                       gui->gameCamera.getCameraY(),
                                       gui->gameCamera.getCameraZ());
          }
+         else if(gui->getState() == GUI_IO_STATE_TILE_WALL)
+         {
+            tileWall->drawTemporary();
+         }
          else if(gui->getState() == GUI_IO_STATE_OBJECTS)
          {
             objectEditor->drawTemporary();

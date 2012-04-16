@@ -55,6 +55,7 @@ guiIO::guiIO()
    openActWindow();
    openNavWindow();
    openWallWindow();
+   openTileWallWindow();
    openTerrainWindow();
    openParticleWindow();
    openPortalWindow();
@@ -229,9 +230,8 @@ void guiIO::openNavWindow()
 void guiIO::openMessageWindow()
 {
    Farso::Options fopt;
-   int width = Farso::SCREEN_X - 153 - 68;
-   messageWindow = gui->insertWindow(0,Farso::SCREEN_Y-38,
-         Farso::SCREEN_X-220,Farso::SCREEN_Y-1, "Messages");
+   int width = Farso::SCREEN_X - 50 - 437;
+   messageWindow = gui->insertWindow(437,0,Farso::SCREEN_X-50,37, "Messages");
    messageText = messageWindow->getObjectsList()->insertTextBox(7,16,
                  width-90,31,0,"Welcome to DccNiTghtmare Map Editor!");
    mouseCoordText = messageWindow->getObjectsList()->insertTextBox(width-90,16,
@@ -306,8 +306,6 @@ void guiIO::openWallWindow()
    wallEditButton->setMouseHint("Edit Wall");
    wallCutButton = wallTabButton->insertButton(40,0,59,19);      /* Wall Cut */
    wallCutButton->setMouseHint("Cut Wall");
-   tileWallAddButton = wallTabButton->insertButton(60,0,79,19); /* TileWall */
-   tileWallAddButton->setMouseHint("Add Tile Wall");
    wallDestroyButton = wallTabButton->insertButton(100,0,119,19); /* Destroy */
    wallDestroyButton->setMouseHint("Destroy Wall");
    wallTextureButton = wallTabButton->insertButton(0,20,19,39);   /* Texture */
@@ -328,6 +326,25 @@ void guiIO::openWallWindow()
    wallWindow->setExternPointer(&wallWindow);
    gui->openWindow(wallWindow);
 }
+
+/****************************************************************
+ *                     Open Tile Wall Window                    *
+ ****************************************************************/
+void guiIO::openTileWallWindow()
+{
+   dirs dir;
+   tileWallWindow = gui->insertWindow(0,599,153,661,"TileWall");
+   tileWallTabButton = tileWallWindow->getObjectsList()->insertTabButton(
+         7,17,0,0, dir.getRealFile("mapEditor/tilewall.png").c_str());
+   tileWallAddButton = tileWallTabButton->insertButton(0,0,19,19);
+   tileWallAddButton->setMouseHint("Add TileWall");
+   tileWallRemoveButton = tileWallTabButton->insertButton(20,0,39,19);
+   tileWallRemoveButton->setMouseHint("Remove TileWall");
+
+   tileWallWindow->setExternPointer(&tileWallWindow);
+   gui->openWindow(tileWallWindow);
+}
+
 
 /****************************************************************
  *                      Open Sound Window                       *
@@ -830,6 +847,12 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
             tool = TOOL_TILE_WALL_ADD;
             return(GUI_IO_NEW_STATE);
          }
+         else if(object == (Farso::GuiObject*) tileWallRemoveButton)
+         {
+            state = GUI_IO_STATE_TILE_WALL;
+            tool = TOOL_TILE_WALL_REMOVE;
+            return(GUI_IO_NEW_STATE);
+         }
 
          /* Wall Buttons */
          else if(object == (Farso::GuiObject*) wallAddButton)
@@ -1058,6 +1081,10 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
             if(!wallWindow)
             {
                openWallWindow();
+            }
+            if(!tileWallWindow)
+            {
+               openTileWallWindow();
             }
             return(GUI_IO_OTHER);
          }

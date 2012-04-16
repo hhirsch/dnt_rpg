@@ -36,7 +36,7 @@ class sceneNode
                  GLfloat aX, GLfloat aY, GLfloat aZ);
        /*! Constructor of a scene node that owns the model (will delete it
         * at the destructor) */
-      sceneNode(std::string modelFileName, GLfloat x, GLfloat y, GLfloat z,
+       sceneNode(std::string modelFileName, GLfloat x, GLfloat y, GLfloat z,
                  GLfloat aX, GLfloat aY, GLfloat aZ);
        /*! Destructor */
        ~sceneNode();

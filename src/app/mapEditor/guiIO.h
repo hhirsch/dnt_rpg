@@ -225,8 +225,13 @@ class guiIO
       Farso::OneTabButton* wallMoreXTexture;     /**< Texture X More Button */
       Farso::OneTabButton* wallLessZTexture;     /**< Texture Z Less Button */
       Farso::OneTabButton* wallMoreZTexture;     /**< Texture Z More Button */
-      Farso::OneTabButton* tileWallAddButton;    /**< Add tile walls */
       void openWallWindow();
+      /*********************Tile*Wall*Window**************************/
+      Farso::Window* tileWallWindow;             /**< TileWall Window */
+      Farso::TabButton* tileWallTabButton;       /**< TileWall Tab Button */
+      Farso::OneTabButton* tileWallAddButton;    /**< Add tile walls Button */
+      Farso::OneTabButton* tileWallRemoveButton; /**< Remove tile Button */
+      void openTileWallWindow();
       /*********************Portal*Window*******************************/
       Farso::Window* portalWindow;               /**< Portal Window */
       Farso::TabButton* portalTabButton;         /**< Portal TabButton */

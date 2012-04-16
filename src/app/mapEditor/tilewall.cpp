@@ -106,6 +106,7 @@ TileWall::TileWall(Map* acMap)
    curMap = acMap;
    totalX = 0;
    totalZ = 0;
+   curTile = NULL;
 
    /* Must set tiles to change latter */
    format = ".md5def";
@@ -142,6 +143,7 @@ void TileWall::clear()
    state = STATE_OTHER;
    totalX = 0;
    totalZ = 0;
+   curTile = NULL;
 }
 
 /***********************************************************************
@@ -441,6 +443,55 @@ void TileWall::setTileModels()
    }
 }
 
+/***********************************************************************
+ *                           getTileUnder                              *
+ ***********************************************************************/
+Tile* TileWall::getTileUnder(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ)
+{
+   /* Set absolute totals */
+   int i,j;
+   int absX = (int)fabs(totalX);
+   int absZ = (int)fabs(totalZ);
+
+   /* Create a bounding box for mouse position */
+   boundingBox mouseBox;
+   mouseBox.setMin(mouseX-4, mouseY-4.0, mouseZ-4);
+   mouseBox.setMax(mouseX+4, mouseY+4.0, mouseZ+4);
+
+   /* Let's search throught all tiles */
+   for(i=0; i < absX; i++)
+   {
+      for(j=0; j < absZ; j++)
+      {
+         if(tiles[i][j]->scNode)
+         {
+            if(tiles[i][j]->scNode->getBoundingBox().intercepts(mouseBox))
+            {
+               /* Got tile under */
+               return(tiles[i][j]);
+            }
+         }
+      }
+   }
+
+   /* No tile under */
+   return(NULL);
+}
+
+/***********************************************************************
+ *                            removeTile                               *
+ ***********************************************************************/
+void TileWall::removeTile(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
+      Uint8 mButton)
+{
+   /* Get tile under mouse */
+   curTile = getTileUnder(mouseX, mouseY, mouseZ);
+
+   /* Verify if tried to delete it! */
+   if( (mButton & SDL_BUTTON(1)) && (curTile) )
+   {
+   }
+}
 
 /***********************************************************************
  *                           verifyactions                             *
@@ -475,6 +526,23 @@ void TileWall::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
          state = STATE_OTHER;
          //flush();
       }
+   }
+   else if(tool == TOOL_TILE_WALL_REMOVE)
+   {
+      removeTile(mouseX, mouseY, mouseZ, mButton);
+   }
+}
+
+/***********************************************************************
+ *                          drawTemporary                              *
+ ***********************************************************************/
+void TileWall::drawTemporary()
+{
+   if((curTile) && (curTile->scNode))
+   {
+      glPushMatrix();
+         curTile->scNode->getBoundingBox().render();
+      glPopMatrix();
    }
 }
 
