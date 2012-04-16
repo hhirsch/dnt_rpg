@@ -114,9 +114,14 @@ TileWall::TileWall(Map* acMap)
 
    /* Must set tiles to change latter */
    format = ".md5def";
-   baseName = "models/tiles/cave_1/cave1_";
+   
+   /*baseName = "models/tiles/cave_1/cave1_";
    totalCenter = 4;
-   totalLineCenter = 2;
+   totalLineCenter = 2;*/
+
+   baseName = "models/tiles/temple/temple_";
+   totalCenter = 1;
+   totalLineCenter = 1;
 }
 
 /***********************************************************************
