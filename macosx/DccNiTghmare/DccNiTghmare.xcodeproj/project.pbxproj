@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB3AB4381541946B00DF4F44 /* farsoopts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB3AB4361541946B00DF4F44 /* farsoopts.cpp */; };
 		AB4CFCC41424D6B00000E132 /* dnt.ico in Resources */ = {isa = PBXBuildFile; fileRef = AB4CFCC31424D6B00000E132 /* dnt.ico */; };
 		AB72D9B01454631F00C4331C /* dnt-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AB72D9AF1454631F00C4331C /* dnt-icon.png */; };
 		AB838C42143A42E700AD8D24 /* moneywindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB838C40143A42E700AD8D24 /* moneywindow.cpp */; };
@@ -161,6 +162,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB3AB4361541946B00DF4F44 /* farsoopts.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = farsoopts.cpp; sourceTree = "<group>"; };
+		AB3AB4371541946B00DF4F44 /* farsoopts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = farsoopts.h; sourceTree = "<group>"; };
 		AB4CFCC31424D6B00000E132 /* dnt.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = dnt.ico; sourceTree = "<group>"; };
 		AB72D9AF1454631F00C4331C /* dnt-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dnt-icon.png"; sourceTree = "<group>"; };
 		AB838C40143A42E700AD8D24 /* moneywindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = moneywindow.cpp; sourceTree = "<group>"; };
@@ -766,6 +769,8 @@
 		ABA0E4E213FEDB9D00FA02A0 /* gui */ = {
 			isa = PBXGroup;
 			children = (
+				AB3AB4361541946B00DF4F44 /* farsoopts.cpp */,
+				AB3AB4371541946B00DF4F44 /* farsoopts.h */,
 				ABA0E4E313FEDB9D00FA02A0 /* button.cpp */,
 				ABA0E4E413FEDB9D00FA02A0 /* button.h */,
 				ABA0E4E513FEDB9D00FA02A0 /* color.cpp */,
@@ -1118,6 +1123,7 @@
 				ABD6279214FFE060008D83C7 /* md5anim.cpp in Sources */,
 				ABD6279314FFE060008D83C7 /* md5model.cpp in Sources */,
 				ABD6279414FFE060008D83C7 /* quaternion.cpp in Sources */,
+				AB3AB4381541946B00DF4F44 /* farsoopts.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -37,7 +37,8 @@ BugFixes:
           its turn;
  - fight: When attacked and without a target enemy, set the current character
           target as the attacker;
-          
+ - map: fix a bug at money object check after object removed from map;  
+         
 ================================================
 |                Version 0.8                   |
 |            Released: 2011-12-19              |

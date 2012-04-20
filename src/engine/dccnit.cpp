@@ -2401,13 +2401,16 @@ int engine::verifyMouseActions(Uint8 mButton)
                                  sobj->x, sobj->y, sobj->z);
 
                            /* Remove object from Map */
-                           actualMap->removeObject(sobj->obj);
-
-                           /* If money, delete the original object,
-                            * as no more needed */
-                           if(sobj->obj->getType() == OBJECT_TYPE_MONEY)
+                           if(sobj->obj->getType() != OBJECT_TYPE_MONEY)
                            {
+                              actualMap->removeObject(sobj->obj);
+                           }
+                           else
+                           {
+                              /* If money, delete the original object,
+                               * as no more needed */
                               money* m = (money*)sobj->obj;
+                              actualMap->removeObject(sobj->obj);
                               delete(m);
                            }
                         }
