@@ -115,13 +115,13 @@ TileWall::TileWall(Map* acMap)
    /* Must set tiles to change latter */
    format = ".md5def";
    
-   /*baseName = "models/tiles/cave_1/cave1_";
+   baseName = "models/tiles/cave_1/cave1_";
    totalCenter = 4;
-   totalLineCenter = 2;*/
+   totalLineCenter = 2;
 
-   baseName = "models/tiles/temple/temple_";
+   /*baseName = "models/tiles/temple/temple_";
    totalCenter = 1;
-   totalLineCenter = 1;
+   totalLineCenter = 1;*/
 }
 
 /***********************************************************************
@@ -199,9 +199,49 @@ std::string TileWall::getModel(int type)
          ret = baseName + "top" + format;
       }
       break;
+      case Tile::TYPE_TOP_SIDE_1:
+      {
+         ret = baseName + "top_s1" + format;
+      }
+      break;
+      case Tile::TYPE_TOP_SIDE_2:
+      {
+         ret = baseName + "top_s2" + format;
+      }
+      break;
+      case Tile::TYPE_TOP_SIDE_2_2:
+      {
+         ret = baseName + "top_s2_2" + format;
+      }
+      break;
+      case Tile::TYPE_TOP_SIDE_3:
+      {
+         ret = baseName + "top_s3" + format;
+      }
+      break;
+      case Tile::TYPE_TOP_SIDE_4:
+      {
+         ret = baseName + "top_s4" + format;
+      }
+      break;
       case Tile::TYPE_CENTER:
       {
          ret = baseName+"c"+randomCenter(totalCenter)+format;
+      }
+      break;
+      case Tile::TYPE_CENTER_SIDE_1:
+      {
+         ret = baseName+"c1_s1"+format;
+      }
+      break;
+      case Tile::TYPE_CENTER_SIDE_1_2:
+      {
+         ret = baseName+"c1_s1_2"+format;
+      }
+      break;
+      case Tile::TYPE_CENTER_SIDE_2:
+      {
+         ret = baseName+"c1_s2"+format;
       }
       break;
       case Tile::TYPE_LINE_CENTER:
@@ -212,6 +252,11 @@ std::string TileWall::getModel(int type)
       case Tile::TYPE_SIDE:
       {
          ret = baseName+"side"+format;
+      }
+      break;
+      case Tile::TYPE_SIDE_SIDE:
+      {
+         ret = baseName+"side_s"+format;
       }
       break;
       case Tile::TYPE_LINE_SIDE:

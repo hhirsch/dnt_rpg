@@ -43,6 +43,15 @@ class Tile
          TYPE_LINE_CENTER,
          TYPE_SIDE,
          TYPE_LINE_SIDE,
+         TYPE_TOP_SIDE_1,
+         TYPE_TOP_SIDE_2,
+         TYPE_TOP_SIDE_2_2,
+         TYPE_TOP_SIDE_3,
+         TYPE_TOP_SIDE_4,
+         TYPE_CENTER_SIDE_1,
+         TYPE_CENTER_SIDE_1_2,
+         TYPE_CENTER_SIDE_2,
+         TYPE_SIDE_SIDE,
          TOTAL_TILES
       };
 
