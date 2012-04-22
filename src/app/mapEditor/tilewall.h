@@ -125,6 +125,12 @@ class TileWall
        * \param dj -> delta to j index for neighbor */
       bool haveNeighbor(Tile* t, int di, int dj, int absX, int absZ);
 
+      /*! Get number of diagonal neighbors for tile */
+      int numTileDiagonalNeighbors(Tile* t, int absX, int absZ);
+
+      /*! Get number of side (non-diagonal) neighbors for tile */
+      int numTileSideNeighbors(Tile* t, int absX, int absZ);
+
       std::vector< std::vector<Tile*> > tiles; /**< Current created tiles */
       Map* curMap;     /**< Current on-edit map */
       int state;       /**< Current state */

@@ -381,162 +381,315 @@ void TileWall::setTileModels()
    int type = Tile::TYPE_TOP;
    float angle=0.0f;
 
+   float iX = initPos.x;
+   float iZ = initPos.y;
+
+   int numSideNeighbors;
+   int numDiagonalNeighbors;
+
    /* Set absolute totals */
    int absX = (int)fabs(totalX);
    int absZ = (int)fabs(totalZ);
 
-   /* Get signal value */
-   int sigX = (totalX < 0)?-1:1;
-   int sigZ = (totalZ < 0)?-1:1;
-
-   /* Let's threat special cases, and general one */
-   if((absX == 1) && (absZ == 1))
+   if(totalX < 0)
    {
-      /* Special Case 1: 1x1 grid. only use a single-type mesh. */
-      tiles[0][0]->changeModel(Tile::TYPE_SINGLE, getModel(Tile::TYPE_SINGLE));
-      tiles[0][0]->scNode->setAngle(0.0f, 0.0f, 0.0f);
-      tiles[0][0]->scNode->setPosition(initPos.x, 0.0f, initPos.y);
-      /* We're done! */
-      return;
+      iX = finalPos.x;
+   }
+   if(totalZ < 0)
+   {
+      iZ = finalPos.y;
    }
 
-   else if( (absX == 1) || (absZ == 1) )
-   {
-      /* Special Case 2: Single line grid. use line-type meshes. */
-      for(i=0; i < absX; i++)
-      {
-         for(j=0; j < absZ; j++)
-         {
-            angle = (absX == 1)?90.0f:0.0f;
-            if( ((i == 0) && (absZ == 1)) ||
-                ((j == 0) && (absX == 1)) )
-            {
-               /* Initial Edge */
-               type = Tile::TYPE_LINE_SIDE;
-               if(  ( (absZ == 1) && (sigX > 0) ) ||
-                    ( (absX == 1) && (sigZ < 0) ) )
-               {
-                  angle += 180;
-               }
-            }
-            else if( ((i == absX-1) && (absZ == 1)) ||
-                     ((j == absZ-1) && (absX == 1)) )
-            {
-               /* Final Edge */
-               type = Tile::TYPE_LINE_SIDE;
-               if(  ( (absZ == 1) && (sigX < 0) ) ||
-                    ( (absX == 1) && (sigZ > 0) ) )
-               {
-                  angle += 180;
-               }
-            }
-            else
-            {
-               /* Center */
-               type = Tile::TYPE_LINE_CENTER;
-            }
-            /* Let's change the model, if needed */
-            tiles[i][j]->changeModel(type, getModel(type));
-            tiles[i][j]->scNode->setAngle(0.0f, angle, 0.0f);
-            tiles[i][j]->scNode->setPosition(initPos.x+sigX*i*TILE_SIZE, 0.0f, 
-                  initPos.y+sigZ*j*TILE_SIZE);
-         }
-      }
-
-      /* We're done! */
-      return;
-   }
-
-   /* General Case. Use normal meshes. */
+   /* Let's set all tiles */
    for(i=0; i < absX; i++)
    {
       for(j=0; j < absZ; j++)
       {
-         /* Sides */
-         if(  ( (i == 0) || (i == absX-1) ) &&
-              ( (j == 0) || (j == absZ-1) ) )
+         /* Only set existing tiles */
+         if(tiles[i][j]->scNode)
          {
-            /* Set its model to side one */
-            type = Tile::TYPE_SIDE;
+            /* Let's count how many neighboors it has */
+            numSideNeighbors = numTileSideNeighbors(tiles[i][j], absX, absZ);
+            numDiagonalNeighbors = numTileDiagonalNeighbors(tiles[i][j], 
+                  absX, absZ);
 
-            /* Let's set each angle */
-            if( (i == 0) && (j == 0) )
+            /* And set its model by the neighbors */
+            if(numSideNeighbors == 0)
             {
-               if(sigX > 0)
+               /* No side neighbors case. Must be a single.*/
+               angle = 0.0f;
+               type = Tile::TYPE_SINGLE;
+            }
+            else if(numSideNeighbors == 1)
+            {
+               /* just one side neighbors*/
+               angle = 0.0f;
+               type = Tile::TYPE_LINE_SIDE;
+               /* Set angles */
+               if(haveNeighbor(tiles[i][j], 1, 0, absX, absZ))
                {
-                  angle = (sigZ > 0)?180:270;
+                  /* First X */
+                  angle = 180.0f;
+               }
+               else if(haveNeighbor(tiles[i][j], 0, -1, absX, absZ))
+               {
+                  /* Final Z */
+                  angle = -90.0f;
+               }
+               else if(haveNeighbor(tiles[i][j], 0, 1, absX, absZ))
+               {
+                  /* First Z */
+                  angle = 90.0f;
+               }
+            }
+            else if(numSideNeighbors == 2)
+            {
+               /* Two side neighbors. Side or Middle line? */
+               if( (haveNeighbor(tiles[i][j], -1, 0, absX, absZ)) &&
+                   (haveNeighbor(tiles[i][j], 1, 0, absX, absZ)) )
+               {
+                  /* middle X line */
+                  type = Tile::TYPE_LINE_CENTER;
+                  angle = 0.0f;
+               }
+               else if( (haveNeighbor(tiles[i][j], 0, -1, absX, absZ)) &&
+                        (haveNeighbor(tiles[i][j], 0, 1, absX, absZ)) )
+               {
+                  /* middle Z line */
+                  type = Tile::TYPE_LINE_CENTER;
+                  angle = 90.0f;
                }
                else
                {
-                  angle = (sigZ > 0)?90:0;
+                  /* must be a side. verify each side type. */
+                  type = Tile::TYPE_SIDE;
+
+                  /* Let's set angle */
+                  if( (haveNeighbor(tiles[i][j], -1, 0, absX, absZ)) &&
+                      (haveNeighbor(tiles[i][j], 0, 1, absX, absZ)) )
+                  {
+                     angle = 90.0f;
+                     if(!haveNeighbor(tiles[i][j], -1, 1, absX, absZ))
+                     {
+                        type = Tile::TYPE_SIDE_SIDE;
+                     }
+                  }
+                  else if( (haveNeighbor(tiles[i][j], 1, 0, absX, absZ)) &&
+                           (haveNeighbor(tiles[i][j], 0, 1, absX, absZ)) )
+                  {
+                     angle = 180.0f;
+                     if(!haveNeighbor(tiles[i][j], 1, 1, absX, absZ))
+                     {
+                        type = Tile::TYPE_SIDE_SIDE;
+                     }
+                  }
+                  else if( (haveNeighbor(tiles[i][j], 1, 0, absX, absZ)) &&
+                           (haveNeighbor(tiles[i][j], 0, -1, absX, absZ)) )
+                  {
+                     angle = -90.0f;
+                     if(!haveNeighbor(tiles[i][j], 1, -1, absX, absZ))
+                     {
+                        type = Tile::TYPE_SIDE_SIDE;
+                     }
+                  }
+                  else
+                  {
+                     angle = 0.0f;
+                     if(!haveNeighbor(tiles[i][j], -1, -1, absX, absZ))
+                     {
+                        type = Tile::TYPE_SIDE_SIDE;
+                     }
+                  }
                }
             }
-            else if( (i == 0) && (j == absZ-1) )
+            else if(numSideNeighbors == 3)
             {
-               if(sigX > 0)
+               /* A middle! */
+               type = Tile::TYPE_CENTER;
+               
+               /* Let's set its angle (and special cases for center_sides) */
+               if(!haveNeighbor(tiles[i][j], -1, 0, absX, absZ))
                {
-                  angle = (sigZ > 0)?270:180;
+                  angle = 180.0f;
+                  if(!haveNeighbor(tiles[i][j], 1, -1, absX, absZ))
+                  {
+                     if(!haveNeighbor(tiles[i][j], 1, 1, absX, absZ))
+                     {
+                        type = Tile::TYPE_CENTER_SIDE_2;
+                     }
+                     else
+                     {
+                        type = Tile::TYPE_CENTER_SIDE_1_2;
+                     }
+                  }
+                  else if(!haveNeighbor(tiles[i][j], 1, 1, absX, absZ))
+                  {
+                     type = Tile::TYPE_CENTER_SIDE_1;
+                  }
+               }
+               else if(!haveNeighbor(tiles[i][j], 0, -1, absX, absZ))
+               {
+                  angle = 90.0f;
+                  if(!haveNeighbor(tiles[i][j], 1, 1, absX, absZ))
+                  {
+                     if(!haveNeighbor(tiles[i][j], -1, 1, absX, absZ))
+                     {
+                        type = Tile::TYPE_CENTER_SIDE_2;
+                     }
+                     else
+                     {
+                        type = Tile::TYPE_CENTER_SIDE_1_2;
+                     }
+                  }
+                  else if(!haveNeighbor(tiles[i][j], -1, 1, absX, absZ))
+                  {
+                     type = Tile::TYPE_CENTER_SIDE_1;
+                  }
+               }
+               else if(!haveNeighbor(tiles[i][j], 0, 1, absX, absZ))
+               {
+                  angle = -90.0f;
+                  if(!haveNeighbor(tiles[i][j], -1, -1, absX, absZ))
+                  {
+                     if(!haveNeighbor(tiles[i][j], 1, -1, absX, absZ))
+                     {
+                        type = Tile::TYPE_CENTER_SIDE_2;
+                     }
+                     else
+                     {
+                        type = Tile::TYPE_CENTER_SIDE_1_2;
+                     }
+                  }
+                  else if(!haveNeighbor(tiles[i][j], 1, -1, absX, absZ))
+                  {
+                     type = Tile::TYPE_CENTER_SIDE_1;
+                  }
                }
                else
                {
-                  angle = (sigZ > 0)?0:90;
+                  angle = 0.0f;
+                  if(!haveNeighbor(tiles[i][j], -1, 1, absX, absZ))
+                  {
+                     if(!haveNeighbor(tiles[i][j], -1, -1, absX, absZ))
+                     {
+                        type = Tile::TYPE_CENTER_SIDE_2;
+                     }
+                     else
+                     {
+                        type = Tile::TYPE_CENTER_SIDE_1_2;
+                     }
+                  }
+                  else if(!haveNeighbor(tiles[i][j], -1, -1, absX, absZ))
+                  {
+                     type = Tile::TYPE_CENTER_SIDE_1;
+                  }
                }
             }
-            else if( (i == absX-1) && (j == absZ-1) )
+            else if(numSideNeighbors == 4)
             {
-               if(sigX > 0)
+               /* All side neighbors, Must be a top. verify each top type */
+               if(numDiagonalNeighbors == 0)
                {
-                  angle = (sigZ > 0)?0:90;
+                  /* Top with all diagonals complements */
+                  type = Tile::TYPE_TOP_SIDE_4;
+                  angle = 0.0f;
                }
-               else
+               else if(numDiagonalNeighbors == 1)
                {
-                  angle = (sigZ > 0)?270:180;
+                  /* Top with 3 diagonals complements */
+                  type = Tile::TYPE_TOP_SIDE_3;
+
+                  if(haveNeighbor(tiles[i][j], -1, -1, absX, absZ))
+                  {
+                     angle = 90.0f;
+                  }
+                  else if(haveNeighbor(tiles[i][j], -1, 1, absX, absZ))
+                  {
+                     angle = 180.0f;
+                  }
+                  else if(haveNeighbor(tiles[i][j], 1, -1, absX, absZ))
+                  {
+                     angle = 0.0f;
+                  }
+                  else
+                  {
+                     angle = -90.0f;
+                  }
+               }
+               else if(numDiagonalNeighbors == 2)
+               {
+                  /* Top with 2 diagonals complements */
+                  if( (!haveNeighbor(tiles[i][j], -1, -1, absX, absZ)) &&
+                      (!haveNeighbor(tiles[i][j], 1, 1, absX, absZ)) )
+                  {
+                     type = Tile::TYPE_TOP_SIDE_2;
+                     angle = 0.0f;
+                  }
+                  else if( (!haveNeighbor(tiles[i][j], -1, 1, absX, absZ)) &&
+                           (!haveNeighbor(tiles[i][j], 1, -1, absX, absZ)) )
+                  {
+                     type = Tile::TYPE_TOP_SIDE_2;
+                     angle = 90.0f;
+                  }
+                  else
+                  {
+                     /* Top, with 2 sided diagonal complements */
+                     type = Tile::TYPE_TOP_SIDE_2_2;
+                     if( (!haveNeighbor(tiles[i][j], -1, 1, absX, absZ)) &&
+                         (!haveNeighbor(tiles[i][j], -1, -1, absX, absZ)) )
+                     {
+                        angle = 180.0f;
+                     }
+                     else if( (!haveNeighbor(tiles[i][j], 1, -1, absX, absZ)) &&
+                         (!haveNeighbor(tiles[i][j], -1, -1, absX, absZ)) )
+                     {
+                        angle = 90.0f;
+                     }
+                     else if( (!haveNeighbor(tiles[i][j], -1, 1, absX, absZ)) &&
+                         (!haveNeighbor(tiles[i][j], 1, 1, absX, absZ)) )
+                     {
+                        angle = -90.0f;
+                     }
+                     else
+                     {
+                        angle = 0.0f;
+                     }
+                  }
+               }
+               else if(numDiagonalNeighbors == 3)
+               {
+                  /* Top with 1 diagonal complement */
+                  type = Tile::TYPE_TOP_SIDE_1;
+
+                  /* Set angles */
+                  angle = 0.0f;
+                  if(!haveNeighbor(tiles[i][j], -1, -1, absX, absZ))
+                  {
+                     angle = 180.0f;
+                  }
+                  else if(!haveNeighbor(tiles[i][j], -1, 1, absX, absZ))
+                  {
+                     angle = -90.0f;
+                  }
+                  else if(!haveNeighbor(tiles[i][j], 1, -1, absX, absZ))
+                  {
+                     angle = 90.0f;
+                  }
+               }
+               else if(numDiagonalNeighbors == 4)
+               {
+                  /* Top without complements */
+                  type = Tile::TYPE_TOP;
                }
             }
-            else if( (i == absX-1) && (j == 0) )
-            {
-               if(sigX > 0)
-               {
-                  angle = (sigZ > 0)?90:0;
-               }
-               else
-               {
-                  angle = (sigZ > 0)?180:270;
-               }
-            }
+
+            /* Let's change the model, if needed */
+            tiles[i][j]->changeModel(type, getModel(type));
+            tiles[i][j]->scNode->setAngle(0.0f, angle, 0.0f);
+            tiles[i][j]->scNode->setPosition(iX+i*TILE_SIZE, 0.0f, 
+                                             iZ+j*TILE_SIZE);
+
          }
-         else if((i == 0) || (i == absX-1))
-         {
-            /* Model to center closed-X one */
-            type = Tile::TYPE_CENTER;
-            if(sigX > 0)
-            {
-               angle = (i==0)?180.0:0.0f;
-            }
-            else
-            {
-               angle = (i==0)?0.0:180.0f;
-            }
-         }
-         else if( (j == 0) || (j == absZ-1) )
-         {
-            /* Model to center closed-Z one */
-            type = Tile::TYPE_CENTER;
-            angle = (j==0)?90.0:270.0f;
-            angle *= sigZ;
-         }
-         else
-         {
-            /* Top models */
-            type = Tile::TYPE_TOP;
-            angle = 0.0f;
-         }
-     
-         /* Let's change the model, if needed */
-         tiles[i][j]->changeModel(type, getModel(type));
-         tiles[i][j]->scNode->setAngle(0.0f, angle, 0.0f);
-         tiles[i][j]->scNode->setPosition(initPos.x+sigX*i*TILE_SIZE, 0.0f, 
-                                          initPos.y+sigZ*j*TILE_SIZE);
       }
    }
 }
@@ -577,6 +730,57 @@ Tile* TileWall::getTileUnder(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ)
 }
 
 /***********************************************************************
+ *                       numTileDiagonalNeighbors                      *
+ ***********************************************************************/
+int TileWall::numTileDiagonalNeighbors(Tile* t, int absX, int absZ)
+{
+   int total=0;
+   int di, dj;
+   
+   /* Verify only diagonal neighbors */
+   for(di = -1; di < 2; di += 2)
+   {
+      for(dj = -1; dj < 2; dj += 2)
+      if(haveNeighbor(t, di, dj, absX, absZ))
+      {
+         total++;
+      }
+   }
+
+   return(total);
+}
+
+
+/***********************************************************************
+ *                         numTileSideNeighbors                        *
+ ***********************************************************************/
+int TileWall::numTileSideNeighbors(Tile* t, int absX, int absZ)
+{
+   int total=0;
+   int d;
+   
+   /* Verify di -1 and + 1 */
+   for(d=-1; d < 2; d += 2)
+   {
+      if(haveNeighbor(t, d, 0, absX, absZ))
+      {
+         total++;
+      }
+   }
+   
+   /* Verify dj -1 and + 1 */
+   for(d=-1; d < 2; d += 2)
+   {
+      if(haveNeighbor(t, 0, d, absX, absZ))
+      {
+         total++;
+      }
+   }
+
+   return(total);
+}
+
+/***********************************************************************
  *                           haveNeighbor                              *
  ***********************************************************************/
 bool TileWall::haveNeighbor(Tile* t, int di, int dj, int absX, int absZ)
@@ -596,10 +800,6 @@ bool TileWall::haveNeighbor(Tile* t, int di, int dj, int absX, int absZ)
 void TileWall::removeTile(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
       Uint8 mButton)
 {
-   Tile* neighTile;
-   int absX = (int)fabs(totalX);
-   int absZ = (int)fabs(totalZ);
-   
    /* Get tile under mouse */
    curTile = getTileUnder(mouseX, mouseY, mouseZ);
 
@@ -617,77 +817,8 @@ void TileWall::removeTile(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       /* Delete its scene node */
       curTile->deleteSceneNode();
 
-      /* Verify Up tile style */
-      if(haveNeighbor(curTile, 0, -1, absX, absZ))
-      {
-         neighTile = tiles[curTile->i][curTile->j-1];
-         if(haveNeighbor(neighTile, 0, -1, absX, absZ))
-         {
-            neighTile->changeModel(Tile::TYPE_CENTER, 
-                  getModel(Tile::TYPE_CENTER));
-            neighTile->scNode->setAngle(0.0f, 90.0f, 0.0f);
-         }
-         else
-         {
-            neighTile->changeModel(Tile::TYPE_LINE_CENTER,
-                  getModel(Tile::TYPE_LINE_CENTER));
-            neighTile->scNode->setAngle(0.0f, 0.0f, 0.0f);
-         }
-      }
-
-      /* Verify Down tile style */
-      if(haveNeighbor(curTile, 0, 1, absX, absZ))
-      {
-         neighTile = tiles[curTile->i][curTile->j+1];
-         if(haveNeighbor(neighTile, 0, 1, absX, absZ))
-         {
-            neighTile->changeModel(Tile::TYPE_CENTER, 
-                  getModel(Tile::TYPE_CENTER));
-            neighTile->scNode->setAngle(0.0f, -90.0f, 0.0f);
-         }
-         else
-         {
-            neighTile->changeModel(Tile::TYPE_LINE_CENTER, 
-                  getModel(Tile::TYPE_LINE_CENTER));
-            neighTile->scNode->setAngle(0.0f, 180.0f, 0.0f);
-         }
-      }
-
-      /* Verify left tile style */
-      if(haveNeighbor(curTile, -1, 0, absX, absZ))
-      {
-         neighTile = tiles[curTile->i-1][curTile->j];
-         if(haveNeighbor(neighTile, -1, 0, absX, absZ))
-         {
-            neighTile->changeModel(Tile::TYPE_CENTER, 
-                  getModel(Tile::TYPE_CENTER));
-            neighTile->scNode->setAngle(0.0f, 180.0f, 0.0f);
-         }
-         else
-         {
-            neighTile->changeModel(Tile::TYPE_LINE_CENTER,
-                  getModel(Tile::TYPE_LINE_CENTER));
-            neighTile->scNode->setAngle(0.0f, 90.0f, 0.0f);
-         }
-      }
-      
-      /* Verify Right tile style */
-      if(haveNeighbor(curTile, 1, 0, absX, absZ))
-      {
-         neighTile = tiles[curTile->i+1][curTile->j];
-         if(haveNeighbor(neighTile, 1, 0, absX, absZ))
-         {
-            neighTile->changeModel(Tile::TYPE_CENTER,
-                  getModel(Tile::TYPE_CENTER));
-            neighTile->scNode->setAngle(0.0f, 0.0f, 0.0f);
-         }
-         else
-         {
-            neighTile->changeModel(Tile::TYPE_LINE_CENTER,
-                  getModel(Tile::TYPE_CENTER));
-            neighTile->scNode->setAngle(0.0f, -90.0f, 0.0f);
-         }
-      }
+      /* Reset tiles */
+      setTileModels();
    }
 }
 
@@ -737,6 +868,10 @@ void TileWall::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       GLfloat floorX, GLfloat floorZ,
       Uint8 mButton, Uint8* keys, int tool)
 {
+   /* Set floor by tiles */
+   floorX = ((int)(floorX / TILE_SIZE) ) * TILE_SIZE;
+   floorZ = ((int)(floorZ / TILE_SIZE) ) * TILE_SIZE;
+
    if(tool == TOOL_TILE_WALL_ADD)
    {
       if( (state == STATE_OTHER) && (mButton & SDL_BUTTON(1)))
