@@ -1,0 +1,3 @@
+Cave = models/tiles/cave_1/Dirt_darkE.png
+BurntSand = texturas/floor_cave/burnt_sand_light.png
+SandGrey = texturas/floor_cave/sand_grey.png

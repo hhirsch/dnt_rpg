@@ -133,6 +133,31 @@ TileWall::~TileWall()
 }
 
 /***********************************************************************
+ *                         fillMapWithTiles                            *
+ ***********************************************************************/
+void TileWall::fillMapWithTiles(std::string tileType)
+{
+   if(tileType == "cave")
+   {
+      baseName = "models/tiles/cave_1/cave1_";
+      totalCenter = 4;
+      totalLineCenter = 2;
+   }
+   else if(tileType == "temple")
+   {
+      baseName = "models/tiles/temple/temple_";
+      totalCenter = 1;
+      totalLineCenter = 1;
+   }
+   
+   initPos.x = 0;
+   initPos.y = 0;
+   finalPos.x = (curMap->getSizeX())*curMap->squareSize()+TILE_SIZE;
+   finalPos.y = (curMap->getSizeZ())*curMap->squareSize()+TILE_SIZE;
+   setTiles();
+}
+
+/***********************************************************************
  *                               clear                                 *
  ***********************************************************************/
 void TileWall::clear()

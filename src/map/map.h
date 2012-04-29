@@ -341,7 +341,7 @@ class Map
        * \param X -> number of squares on X coordinate
        * \param Z -> number of squares on Z coordinate
        * \note -> usually called at dntMapEditor */
-      void newMap(int X,int Z);
+      void newMap(int X,int Z, std::string defaultTexture="");
       /*! Opens map from file
        * \param arquivo ->  Name of file to be opened
        * \return 1 on success. */

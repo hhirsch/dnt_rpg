@@ -2267,7 +2267,7 @@ int Map::open(string arquivo)
 /************************************************************************
  *                     Create a new Map                                 *
  ************************************************************************/
-void Map::newMap(int X, int Z)
+void Map::newMap(int X, int Z, std::string defaultTexture)
 {
    int auxX, auxZ;
    Square* saux;
@@ -2280,15 +2280,22 @@ void Map::newMap(int X, int Z)
    /* add a first default texture */
    int IDtexture;
 
-   if(isOutdoor())
+   if(defaultTexture.empty())
    {
-      IDtexture = insertTexture("texturas/floor_outdoor/grass.png",
-            "texturas/floor_outdoor/grass.png");
+      if(isOutdoor())
+      {
+         IDtexture = insertTexture("texturas/floor_outdoor/grass.png",
+               "texturas/floor_outdoor/grass.png");
+      }
+      else
+      {
+         IDtexture = insertTexture("texturas/floor_indoor/steel1.png",
+               "texturas/floor_indoor/steel1.png");
+      }
    }
    else
    {
-      IDtexture = insertTexture("texturas/floor_indoor/steel1.png",
-            "texturas/floor_indoor/steel1.png");
+      IDtexture = insertTexture(defaultTexture, defaultTexture);
    }
 
    for(auxZ = 0; auxZ < z; auxZ++)

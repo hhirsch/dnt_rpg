@@ -95,6 +95,9 @@ class TileWall
             GLfloat floorX, GLfloat floorZ,
             Uint8 mButton, Uint8* keys, int tool);
 
+      /*! Fill the map with tiles */
+      void fillMapWithTiles(std::string tileType);
+
    protected:
       enum TileWallState
       {

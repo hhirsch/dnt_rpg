@@ -1,0 +1,8 @@
+
+burnt_sand_light.png
+sand_grey.png
+   Author: qubodup
+   License: CC0 (Public Domain)
+   reference: http://opengameart.org/node/7999
+              http://opengameart.org/node/7998
+

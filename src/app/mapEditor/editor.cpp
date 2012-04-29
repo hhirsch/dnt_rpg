@@ -429,12 +429,29 @@ void editor::newMap()
    string s;
    int type = -1;
    int index = 0;
+   int opt=-1;
 
    /* Get map type */
    while( type == -1 )
    {
       type = getOptionFromUser("Map Type", "Select the map type:",
                                "Indoor", "Outdoor", proj, modl, viewPort);
+   }
+
+   if(type == 1)
+   {
+      /* Select if empty or basic */
+      opt = getOptionFromUser("Map Preset", "Select Map preset:",
+            "Empty", "Tiles", proj, modl, viewPort);
+      if(opt == 2)
+      {
+         opt = getOptionFromUser("Tile Type", "Select Tile to fill map:",
+            "Cave", "Temple", proj, modl, viewPort);
+         if(opt != -1)
+         {
+            type = 2+opt;
+         }
+      }
    }
 
    /* Set the type */
@@ -490,39 +507,52 @@ void editor::newMap()
    }
    else
    {
-      map->newMap(sizeX,sizeZ);
-      index = ((mapTexture*)map->textures.getFirst())->index;
-      /* Insert walls */
-      wall* actualWall = map->addWall(0,0,(sizeX)*map->squareSize(),10);
-      actualWall->frontTexture.setTextureId(index);
-      actualWall->backTexture.setTextureId(index);
-      actualWall->leftTexture.setTextureId(index);
-      actualWall->rightTexture.setTextureId(index);
+      if(type == 1)
+      {
+         map->newMap(sizeX,sizeZ);
+         index = ((mapTexture*)map->textures.getFirst())->index;
+         /* Insert walls */
+         wall* actualWall = map->addWall(0,0,(sizeX)*map->squareSize(),10);
+         actualWall->frontTexture.setTextureId(index);
+         actualWall->backTexture.setTextureId(index);
+         actualWall->leftTexture.setTextureId(index);
+         actualWall->rightTexture.setTextureId(index);
 
+         actualWall = map->addWall(0,0,10,(sizeZ)*map->squareSize());
+         actualWall->frontTexture.setTextureId(index);
+         actualWall->backTexture.setTextureId(index);
+         actualWall->leftTexture.setTextureId(index);
+         actualWall->rightTexture.setTextureId(index);
 
-      actualWall = map->addWall(0,0,10,(sizeZ)*map->squareSize());
-      actualWall->frontTexture.setTextureId(index);
-      actualWall->backTexture.setTextureId(index);
-      actualWall->leftTexture.setTextureId(index);
-      actualWall->rightTexture.setTextureId(index);
-      
-      actualWall = map->addWall((sizeX)*map->squareSize()-10,0,
-                                (sizeX)*map->squareSize(), 
-                                (sizeZ)*map->squareSize());
-      actualWall->frontTexture.setTextureId(index);
-      actualWall->backTexture.setTextureId(index);
-      actualWall->leftTexture.setTextureId(index);
-      actualWall->rightTexture.setTextureId(index);
-      
-      actualWall = map->addWall(0,(sizeZ)*map->squareSize()-10,
-                                (sizeX)*map->squareSize(),
-                                (sizeZ)*map->squareSize());
-      actualWall->frontTexture.setTextureId(index);
-      actualWall->backTexture.setTextureId(index);
-      actualWall->leftTexture.setTextureId(index);
-      actualWall->rightTexture.setTextureId(index);
+         actualWall = map->addWall((sizeX)*map->squareSize()-10,0,
+               (sizeX)*map->squareSize(), 
+               (sizeZ)*map->squareSize());
+         actualWall->frontTexture.setTextureId(index);
+         actualWall->backTexture.setTextureId(index);
+         actualWall->leftTexture.setTextureId(index);
+         actualWall->rightTexture.setTextureId(index);
+
+         actualWall = map->addWall(0,(sizeZ)*map->squareSize()-10,
+               (sizeX)*map->squareSize(),
+               (sizeZ)*map->squareSize());
+         actualWall->frontTexture.setTextureId(index);
+         actualWall->backTexture.setTextureId(index);
+         actualWall->leftTexture.setTextureId(index);
+         actualWall->rightTexture.setTextureId(index);
+      }
+      else if(type == 3)
+      {
+         /* Cave! */
+         map->newMap(sizeX,sizeZ, "texturas/floor_cave/burnt_sand_light.png");
+      }
+      else if(type == 4)
+      {
+         /* Temple! */
+         map->newMap(sizeX, sizeZ);
+      }
       
       /* Define Position */
+      index = ((mapTexture*)map->textures.getFirst())->index;
       map->setInitialPosition( ((sizeX)*map->squareSize() / 2.0),
                             ((sizeZ)*map->squareSize() / 2.0));
    }
@@ -540,6 +570,18 @@ void editor::newMap()
    npcController = new npcs(map, NPCs, features);
    particleSystem->setActualMap(map, NULL);
    gui->getNodeEditor()->setMap(map, NPCs);
+
+   /* Add the tileset for map, if needed */
+   if(type == 3)
+   {
+      tileWall->fillMapWithTiles("cave");
+   }
+   else if(type == 4)
+   {
+      tileWall->fillMapWithTiles("temple");
+   }
+
+
    gui->showMessage("Created New Game Map!");
    map->fog.apply(map->isOutdoor(), OUTDOOR_FARVIEW, INDOOR_FARVIEW);
    gui->setFog(&map->fog); 
