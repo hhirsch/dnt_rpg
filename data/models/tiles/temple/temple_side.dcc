@@ -1,0 +1,12 @@
+name = Temple_Side
+cal3d = models/tiles/temple/temple_side.md5def
+inventory_texture = texturas/na.png
+inventory_sizes = 0 0
+life_points = 600
+fortitude = 8
+reflex = 2
+will = 0
+displacement = 0
+armature_class = 25
+cost = 40
+static_scenery = 1

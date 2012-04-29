@@ -1,0 +1,12 @@
+name = Cave1_C1_S1
+cal3d = models/tiles/cave_1/cave1_c1_s1.md5def
+inventory_texture = texturas/na.png
+inventory_sizes = 0 0
+life_points = 600
+fortitude = 8
+reflex = 2
+will = 0
+displacement = 0
+armature_class = 25
+cost = 40
+static_scenery = 1
