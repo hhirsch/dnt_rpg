@@ -1,0 +1,18 @@
+# Exported from Blender by DNT md5 exporter
+
+path = models/tiles/temple/
+scale = 18.0
+blendFrames = 4
+
+# Mesh Information
+mesh = temple_side_s.md5mesh
+
+# Animations
+
+# Material
+ambient = 1.0 1.0 1.0 1.0 
+diffuse = 0.800000011920929 0.800000011920929 0.800000011920929 1.0 
+specular = 1.0 1.0 1.0 1.0
+shininess = 0.0
+image = Claimedwall2B.png
+normalMap = normalmap.png
