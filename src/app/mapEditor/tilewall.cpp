@@ -217,6 +217,11 @@ void TileWall::flush()
             curMap->insertObject(pos.x, pos.y, pos.z, 
                   angle.x, angle.y, angle.z, obj, true);
          }
+         else
+         {
+            /* only delete it */
+            delete(tiles[i][j]);
+         }
       }
       tiles[i].resize(0);
    }
