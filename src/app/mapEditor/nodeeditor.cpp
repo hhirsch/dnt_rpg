@@ -456,7 +456,7 @@ void nodeEditor::drawTemporary()
       glPushMatrix();
          curNode->getBoundingBox().render();
       glPopMatrix();
-
+#if 0
       glPushMatrix();
          glTranslatef(curNode->getPosX(),curNode->getPosY(),curNode->getPosZ());
          glRotatef(curNode->getAngleZ(),0.0f,0.0f,1.0f);
@@ -465,6 +465,7 @@ void nodeEditor::drawTemporary()
          curNode->getModel()->renderNormals();
          curNode->getModel()->renderTangents();
       glPopMatrix();
+#endif
    }
 }
 
