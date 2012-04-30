@@ -417,8 +417,13 @@ bool options::load(string file)
       }
       else if(key == "Anisotropic")
       {
-         /* Read Anisotropi option */
+         /* Read Anisotropic option */
          enableAnisotropic = (value == "true");
+      }
+      else if(key == "BumpMapping")
+      {
+         /* Read BumpMapping option */
+         enableBumpMapping = (value == "true");
       }
 
       else
@@ -528,6 +533,8 @@ void options::save()
    fprintf(arq, "SplattingType = %d\n", splattingType);
    /* Anisotropic Filter */
    fprintf(arq, "Anisotropic = %s\n",enableAnisotropic?"true":"false");
+   /* Bump Mapping */
+   fprintf(arq, "BumpMapping = %s\n",enableBumpMapping?"true":"false");
 
    /**********************************************
     *                 Keys Options               *
@@ -917,7 +924,7 @@ void options::displayOptionsScreen(Farso::GuiInterface* interf)
    buttonResSum->defineFont(fontArial, 9);
    gList->insertPicture(220,posY,40,220,
                     dir.getRealFile("texturas/options/resolution.png").c_str());
-   posY += 35;
+   posY += 25;
   
    /* Fullscreen */
    qt =gList->insertTextBox(24,posY,219,posY+17,0,gettext("Enable FullScreen"));
@@ -948,15 +955,29 @@ void options::displayOptionsScreen(Farso::GuiInterface* interf)
                           cxSelParticles->isSelected());
    posY += 25;
 
-   /* Anisotropic Enable or Not */
+   /* Anisotropic Enabled or Not */
    qt = gList->insertTextBox(24,posY,219,posY+17,0,
                             gettext("Enable Anisotropic Filter"));
    qt->setFont(fontArial, 10, Farso::Font::ALIGN_LEFT);
-   cxSelAnisotropic = gList->insertCxSel(12,posY+4,getEnableAnisotropicFilter());
+   cxSelAnisotropic = gList->insertCxSel(12,posY+4,
+         getEnableAnisotropicFilter());
    gList->insertPicture(220,posY,40,112,
                    dir.getRealFile("texturas/options/anisotropic.png").c_str());
    cxSelAnisotropic->setAvailable(ext.hasAnisotropic());
-   posY += 35;
+   posY += 25;
+
+   /* BumpMapping Enabled or Not */
+   qt = gList->insertTextBox(24,posY,219,posY+17,0,
+                            gettext("Enable BumpMapping"));
+   qt->setFont(fontArial, 10, Farso::Font::ALIGN_LEFT);
+   cxSelBumpMapping = gList->insertCxSel(12,posY+4,
+         getEnableBumpMapping());
+   gList->insertPicture(220,posY,40,112,
+         dir.getRealFile("texturas/options/bumpmapping.png").c_str());
+   cxSelBumpMapping->setAvailable(ext.hasShader());
+   posY += 25;
+
+
 
    /* Splatting Type */
    prevSplattingType = splattingType;
@@ -1433,6 +1454,7 @@ int options::treat(Farso::GuiObject* object, int eventInfo,
          enableParticles = cxSelParticles->isSelected();
          enableGrass = cxSelGrass->isSelected();
          enableAnisotropic = cxSelAnisotropic->isSelected();
+         enableBumpMapping = cxSelBumpMapping->isSelected();
          autoEndTurn = cxSelAutoEndTurn->isSelected();
          alwaysRun = cxSelAlwaysRun->isSelected();
          showEnemyCircles = cxSelShowEnemyCircles->isSelected();
@@ -1667,6 +1689,15 @@ bool options::getEnableAnisotropicFilter()
 }
 
 /****************************************************************
+ *                     getEnableBumpMapping                     *
+ ****************************************************************/
+bool options::getEnableBumpMapping()
+{
+   extensions ext;
+   return(enableBumpMapping && ext.hasShader());
+}
+
+/****************************************************************
  *                         getReflexionType                     *
  ****************************************************************/
 int options::getReflexionType()
@@ -1855,6 +1886,7 @@ bool   options::autoEndTurn = true;
 bool   options::showEnemyCircles = false;
 bool   options::highlightEnemy = true;
 bool   options::enableAnisotropic = true;
+bool   options::enableBumpMapping = true;
 bool   options::alwaysRun = true;
 Uint32 options::keys[DNT_TOTAL_KEYS];
 

@@ -194,7 +194,8 @@ void aniModel::loadToGraphicMemory(bool useTexture)
    
    /* Set texture, when necessary */
    if( (useTexture) && (loadedTexture) && 
-       ( (!mat->normalMap) || (normalMap == NULL)))
+       ( (!mat->normalMap) || (normalMap == NULL) ||
+         (!opt.getEnableBumpMapping()) ))
    {
       glEnable(GL_TEXTURE_2D);
       glEnableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -314,7 +315,7 @@ void aniModel::removeFromGraphicMemory()
    glDisableClientState(GL_VERTEX_ARRAY);
 
    aniModelMaterial* mat = getMeshMaterial(0);
-   if(mat->normalMap)
+   if( (mat->normalMap) && (opt.getEnableBumpMapping()) )
    {
       shader* normalMap = dntShaders.getShader(shaders::SHADER_BUMP_MAPPING);
 

@@ -28,6 +28,7 @@
 #include "boundingbox.h"
 #include "shader.h"
 #include "extensions.h"
+#include "../engine/options.h"
 
 typedef float vector2f_t[2];
 typedef float vector3f_t[3];
@@ -254,6 +255,7 @@ class aniModel
 
       shaders dntShaders;    /**< Shaders on DNT */
       extensions ext;        /**< OpenGL extensions */
+      options opt;           /**< DNT options */
 
       /*! Load the a texture to the model.
        * \param strFilename -> \c string with the texture file name.

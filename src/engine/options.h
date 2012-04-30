@@ -168,6 +168,9 @@ class options
       /*! Verify if the anisotropic filter is enabled (and available)
        * \return true if enabled */
       bool getEnableAnisotropicFilter();
+      /*! Verify if bumpmapping is enabled (and available)
+       * \return true if enabled */
+      bool getEnableBumpMapping();
       /*! Verify if the auto end turn is enabled
        * \return -> true if enabled 
        * \note -> if enabled, if the character have no possible actions,
@@ -249,6 +252,7 @@ class options
       static float   farViewFactor;   /**< Current FarView Factor */
       static int     splattingType;    /**< Texture Splatting type */
       static bool    enableAnisotropic; /**< If anisotropic filter is used */
+      static bool    enableBumpMapping; /**< If bumpMapping is used */
       static bool    autoEndTurn;     /**< If will autoend turn or not */
       static bool    showEnemyCircles; /**< if show enemies battle circles */
       static bool    highlightEnemy;  /**< if highlight enemy at battle */
@@ -318,6 +322,7 @@ class options
       Farso::CxSel* cxSelParticles;
 
       Farso::CxSel* cxSelAnisotropic;
+      Farso::CxSel* cxSelBumpMapping;
 
       Farso::CxSel* cxSelShowEnemyCircles;
       Farso::CxSel* cxSelHighlightEnemy;
