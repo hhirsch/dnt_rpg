@@ -194,7 +194,6 @@ class md5Model: public aniModel, dntList
 
       
       /* The model info */
-      std::string fileName;        /**< Model fileName */
       md5_joint_t* baseSkel;       /**< Base skeleton */
       md5_mesh_t* meshes;          /**< Model meshes */
 

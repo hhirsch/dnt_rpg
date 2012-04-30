@@ -84,8 +84,14 @@ class TileWall
       /*! Clear internal things. Called when close an edited map. */
       void clear();
 
-      /*! Flush current tiles to the map, as objects */
+      /*! Flush current tiles to the map, as objects
+       * \note this function will clear the current tiles
+       * \note to get them back, call for loadTilesFromMap */
       void flush();
+
+      /*! Load tiles from map, searching for tile objects,
+       * removing them from map's lists and adding here to tile editor. */
+      void loadTilesFromMap();
 
       /*! Draw temporary editor things */
       void drawTemporary();
@@ -106,12 +112,14 @@ class TileWall
       };
 
       /*! Set the existing tiles from initial to current position */
-      void setTiles();
+      void setTiles(bool createSceneNodes=true);
       void setTileModels();
       /*! Get random a center tile number */
       std::string randomCenter(int total);
       /*! Get a model filename for tile type */
       std::string getModel(int type);
+      /*! Get a tile type based on model filename */
+      int getTileType(std::string modelFile);
 
       /*! Remove tile from tileWall (adjusting its neighboors) */
       void removeTile(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 

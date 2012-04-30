@@ -339,6 +339,9 @@ void editor::openMap()
       float x=0,z=0,a=0;
       map->getInitialPosition(x,z,a);
       gui->gameCamera.updateCamera(x,0,z,0);
+      
+      /* Set tile editor with tiles, if any. */
+      tileWall->loadTilesFromMap();
 
       gui->showMessage("Map opened.");
    }
@@ -359,6 +362,9 @@ void editor::saveMap()
    {
       /* Flush changes on nodes */
       gui->getNodeEditor()->flush();
+
+      /* Flush changes on tiles */
+      tileWall->flush();
 
       /* Remove the models that aren't used */
       curScene.removeUnusedModels();
@@ -405,6 +411,9 @@ void editor::saveMap()
       /* To make sure the selected texture isn't one that was removed */
       nextTexture();
       previousTexture();
+      
+      /* Get back tiles to tile editor.*/
+      tileWall->loadTilesFromMap();
    }
    else
    {

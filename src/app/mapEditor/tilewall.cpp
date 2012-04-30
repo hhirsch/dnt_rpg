@@ -185,7 +185,126 @@ void TileWall::clear()
  ***********************************************************************/
 void TileWall::flush()
 {
-   /* TODO */
+   size_t i,j;
+   std::string s;
+   sceneNode* scNode;
+   object* obj;
+   vec3_t pos;
+   vec3_t angle;
+   
+   for(i=0; i < tiles.size(); i++)
+   {
+      for(j=0; j < tiles[i].size(); j++)
+      {
+         if(tiles[i][j]->scNode != NULL)
+         {
+            scNode = tiles[i][j]->scNode;
+            /* Get the tile model name */
+            s = tiles[i][j]->model.substr(0, tiles[i][j]->model.length() - 
+                  format.length());
+            
+            /* Keep SceneNode info, and bye to the tile! */
+            pos.x = scNode->getPosX();
+            pos.y = scNode->getPosY();
+            pos.z = scNode->getPosZ();
+            angle.x = scNode->getAngleX();
+            angle.y = scNode->getAngleY();
+            angle.z = scNode->getAngleZ();
+            delete(tiles[i][j]);
+            
+            /* Add the tile to the map as an static scenery object */
+            obj = createObject(s+".dcc", curMap->getFileName()); 
+            curMap->insertObject(pos.x, pos.y, pos.z, 
+                  angle.x, angle.y, angle.z, obj, true);
+         }
+      }
+      tiles[i].resize(0);
+   }
+   tiles.resize(0);
+   state = STATE_OTHER;
+   totalX = 0;
+   totalZ = 0;
+   curTile = NULL;
+}
+
+/***********************************************************************
+ *                         loadTilesFromMap                            *
+ ***********************************************************************/
+void TileWall::loadTilesFromMap()
+{
+   int i,j,k;
+   Square* sq;
+   objSquare* obj;
+   vec3_t pos;
+   vec3_t angle;
+   std::string tileFileName;
+
+   /* First, create empty tiles */
+   initPos.x = 0;
+   initPos.y = 0;
+   finalPos.x = (curMap->getSizeX())*curMap->squareSize()+TILE_SIZE;
+   finalPos.y = (curMap->getSizeZ())*curMap->squareSize()+TILE_SIZE;
+   setTiles(false);
+
+   /* Now, let's loopt through map objects, searching for tiles */
+   for(i=0; i < curMap->getSizeX(); i++)
+   {
+      for(j=0; j < curMap->getSizeZ(); j++)
+      {
+         sq = curMap->relativeSquare(i, j);
+
+         obj = sq->getFirstObject();
+         int totalObjs = sq->getTotalObjects();
+         for(k=0; k < totalObjs; k++)
+         {
+            if((obj->obj) && (obj->draw))
+            {
+               /* Verify if is a tile or not */
+               if(obj->obj->getFileName().find("models/tiles/") 
+                     != std::string::npos)
+               {
+                  /* Keep SceneNode info, and bye to the tile! */
+                  pos.x = obj->obj->scNode->getPosX();
+                  pos.y = obj->obj->scNode->getPosY();
+                  pos.z = obj->obj->scNode->getPosZ();
+                  angle.x = obj->obj->scNode->getAngleX();
+                  angle.y = obj->obj->scNode->getAngleY();
+                  angle.z = obj->obj->scNode->getAngleZ();
+                  tileFileName = obj->obj->scNode->getModel()->getFileName();
+                  object* o = obj->obj;
+                  obj = (objSquare*)obj->getNext();
+                  curMap->removeObject(o);
+                  delete(o);
+
+                  /* Get tile */
+                  int x,z;
+                  x = pos.x / TILE_SIZE;
+                  z = pos.z / TILE_SIZE;
+                  if(!tiles[x][z]->scNode)
+                  {
+                     //std::cerr << x << " " << z << std::endl;
+                     tiles[x][z]->type = getTileType(tileFileName);
+                     tiles[x][z]->model = tileFileName;
+                     tiles[x][z]->createSceneNode(pos.x, pos.y, pos.z, 
+                           angle.y); 
+                  }
+                  else
+                  {
+                     std::cerr << "Warning: already have tile!" << std::endl;
+                  }
+               }
+               else
+               {
+                  obj = (objSquare*)obj->getNext();
+               }
+            }
+            else
+            {
+               obj = (objSquare*)obj->getNext();
+            }
+         }
+      }
+   }
 }
 
 /***********************************************************************
@@ -295,9 +414,81 @@ std::string TileWall::getModel(int type)
 }
 
 /***********************************************************************
+ *                            getTileType                              *
+ ***********************************************************************/
+int TileWall::getTileType(std::string modelFile)
+{
+   if(modelFile.find("_top_s4") != std::string::npos)
+   {
+      return(Tile::TYPE_TOP_SIDE_4);
+   }
+   else if(modelFile.find("_top_s3") != std::string::npos)
+   {
+      return(Tile::TYPE_TOP_SIDE_3);
+   }
+   else if(modelFile.find("_top_s2_2") != std::string::npos)
+   {
+      return(Tile::TYPE_TOP_SIDE_2_2);
+   }
+   else if(modelFile.find("_top_s2") != std::string::npos)
+   {
+      return(Tile::TYPE_TOP_SIDE_2);
+   }
+   else if(modelFile.find("_top_s1") != std::string::npos)
+   {
+      return(Tile::TYPE_TOP_SIDE_1);
+   }
+   else if(modelFile.find("_top") != std::string::npos)
+   {
+      return(Tile::TYPE_TOP);
+   }
+   else if(modelFile.find("_single") != std::string::npos)
+   {
+      return(Tile::TYPE_SINGLE);
+   }
+   else if(modelFile.find("_c1_s2") != std::string::npos)
+   {
+      return(Tile::TYPE_CENTER_SIDE_2);
+   }
+   else if(modelFile.find("_c1_s1_2") != std::string::npos)
+   {
+      return(Tile::TYPE_CENTER_SIDE_1_2);
+   }
+   else if(modelFile.find("_c1_s1") != std::string::npos)
+   {
+      return(Tile::TYPE_CENTER_SIDE_1);
+   }
+   else if(modelFile.find("_c") != std::string::npos)
+   {
+      return(Tile::TYPE_CENTER);
+   }
+   else if(modelFile.find("_lc") != std::string::npos)
+   {
+      return(Tile::TYPE_LINE_CENTER);
+   }
+   else if(modelFile.find("_side_s") != std::string::npos)
+   {
+      return(Tile::TYPE_SIDE_SIDE);
+   }
+   else if(modelFile.find("_side") != std::string::npos)
+   {
+      return(Tile::TYPE_SIDE);
+   }
+   else if(modelFile.find("_lside") != std::string::npos)
+   {
+      return(Tile::TYPE_LINE_SIDE);
+   }
+
+   std::cerr << "Warning: Couldn't define type for: " << modelFile 
+         << std::endl;
+
+   return(-1);
+}
+
+/***********************************************************************
  *                             setTiles                                *
  ***********************************************************************/
-void TileWall::setTiles()
+void TileWall::setTiles(bool createSceneNodes)
 {
    vec2_t needed;
    int absX, prevX;
@@ -346,9 +537,12 @@ void TileWall::setTiles()
          for(j=0; j < absZ; j++)
          {
             tiles[i][j] = new Tile(i, j);
-            tiles[i][j]->type = Tile::TYPE_SINGLE;
-            tiles[i][j]->model = baseName+"single"+format;
-            tiles[i][j]->createSceneNode(0.0f, 0.0f, 0.0f, 0.0f); 
+            if(createSceneNodes)
+            {
+               tiles[i][j]->type = Tile::TYPE_SINGLE;
+               tiles[i][j]->model = baseName+"single"+format;
+               tiles[i][j]->createSceneNode(0.0f, 0.0f, 0.0f, 0.0f); 
+            }
          }
       }
    }
@@ -377,9 +571,12 @@ void TileWall::setTiles()
          for(j=prevZ; j < absZ; j++)
          {
             tiles[i][j] = new Tile(i, j);
-            tiles[i][j]->type = Tile::TYPE_TOP;
-            tiles[i][j]->model = baseName+"top"+format;
-            tiles[i][j]->createSceneNode(0.0f, 0.0f, 0.0f, 0.0f);
+            if(createSceneNodes)
+            {
+               tiles[i][j]->type = Tile::TYPE_TOP;
+               tiles[i][j]->model = baseName+"top"+format;
+               tiles[i][j]->createSceneNode(0.0f, 0.0f, 0.0f, 0.0f);
+            }
          }
       }
       else if(absZ < prevZ)
@@ -394,7 +591,10 @@ void TileWall::setTiles()
       }
    }
 
-   setTileModels();
+   if(createSceneNodes)
+   {
+      setTileModels();
+   }
 }
 
 /***********************************************************************

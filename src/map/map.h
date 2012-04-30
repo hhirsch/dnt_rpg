@@ -507,7 +507,8 @@ class Map
        * \param arq -> fileName of the texture
        * \param name -> Name of the texture
        * \param atLast -> true to insert at last */
-      GLuint insertTexture(std::string arq, std::string name, bool atLast=false); 
+      GLuint insertTexture(std::string arq, std::string name, 
+            bool atLast=false); 
       /*! Remove all unused textures from the list */
       void removeUnusedTextures();
 
