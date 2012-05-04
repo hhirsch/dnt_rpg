@@ -9,7 +9,7 @@
  - script: new functions: callAnimation, setAnimation, playSound;
  - New script to controll cattle idle behaviour;
  - New script to controll beggars idle behaviour;
- - Added support to md5 models and animations;
+ - Added support to idtech4 (.md5*) models and animations;
  - 3D messages could be static on Y axis;
  - Lots of adjusts and fixes to the A* implementation;
  - Disabling vsync via OpenGL for better perfomance in OSX;
@@ -20,6 +20,7 @@
  - Support for model's bump (normal) mapping;
  - Simplified number of skills to 12;
  - Removed the class Administration Student;
+ - mapEditor: Support for skorpio OD tilesets;
 
  - New Models;
  - New Sound Effects;
