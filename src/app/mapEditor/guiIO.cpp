@@ -100,6 +100,7 @@ waterWindow* guiIO::getWaterWindow()
  ****************************************************************/
 void guiIO::openFileWindow(bool load)
 {
+   dirs dir;
    if(fileWindow)
    {
        /* Close the current opened */
@@ -109,7 +110,7 @@ void guiIO::openFileWindow(bool load)
    fileLoading = load;
    fileWindow = gui->insertWindow(200,100,460,285,"File");
    fileSelector = fileWindow->getObjectsList()->insertFileSel(5,18,load,
-                                                              "../data/mapas/");
+         dir.getRealFile("../data/mapas/"));
    fileSelector->setFilter(".map");
    if( (!fileLoading) && (!curFileName.empty()) )
    {

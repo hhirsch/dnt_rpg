@@ -210,26 +210,16 @@ void TileWall::flush()
             angle.x = scNode->getAngleX();
             angle.y = scNode->getAngleY();
             angle.z = scNode->getAngleZ();
-            delete(tiles[i][j]);
             
             /* Add the tile to the map as an static scenery object */
             obj = createObject(s+".dcc", curMap->getFileName()); 
             curMap->insertObject(pos.x, pos.y, pos.z, 
-                  angle.x, angle.y, angle.z, obj, true);
-         }
-         else
-         {
-            /* only delete it */
-            delete(tiles[i][j]);
+                                 angle.x, angle.y, angle.z, 
+                                 obj, true, true);
          }
       }
-      tiles[i].resize(0);
    }
-   tiles.resize(0);
-   state = STATE_OTHER;
-   totalX = 0;
-   totalZ = 0;
-   curTile = NULL;
+   clear();
 }
 
 /***********************************************************************
@@ -251,7 +241,7 @@ void TileWall::loadTilesFromMap()
    finalPos.y = (curMap->getSizeZ())*curMap->squareSize()+TILE_SIZE;
    setTiles(false);
 
-   /* Now, let's loopt through map objects, searching for tiles */
+   /* Now, let's loop through map objects, searching for tiles */
    for(i=0; i < curMap->getSizeX(); i++)
    {
       for(j=0; j < curMap->getSizeZ(); j++)
@@ -268,7 +258,7 @@ void TileWall::loadTilesFromMap()
                if(obj->obj->getFileName().find("models/tiles/") 
                      != std::string::npos)
                {
-                  /* Keep SceneNode info, and bye to the tile! */
+                  /* Keep SceneNode info, and bye to the object! */
                   pos.x = obj->obj->scNode->getPosX();
                   pos.y = obj->obj->scNode->getPosY();
                   pos.z = obj->obj->scNode->getPosZ();
