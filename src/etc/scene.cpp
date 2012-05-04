@@ -125,7 +125,7 @@ void nodesList::deleteSceneNode(sceneNode* node)
    }
 
    /* node found on list! */
-   cerr << "Couldn't found sceneNode on list!" << endl;
+   cerr << "Couldn't find sceneNode '" << node << "' on list!" << endl;
    delete(node);
 }
 
@@ -332,7 +332,7 @@ void scene::removeUnusedModels()
       {
          aux = l;
          l = (nodesList*)l->getNext();
-         nLists->remove(l);
+         nLists->remove(l->getPrevious());
       }
       else
       {
@@ -424,7 +424,7 @@ void scene::deleteSceneNode(sceneNode* node)
       }
       else
       {
-         cerr << "Couldn't find list for node! " << endl;
+         cerr << "Couldn't find list for node! " << node->getModel() << endl;
          delete(node);
       }
    }

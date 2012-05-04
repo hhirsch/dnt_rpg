@@ -39,6 +39,7 @@ BugFixes:
  - fight: When attacked and without a target enemy, set the current character
           target as the attacker;
  - map: fix a bug at money object check after object removed from map;  
+ - scene: fix a bug on removing no more used scene nodes lists;
          
 ================================================
 |                Version 0.8                   |
