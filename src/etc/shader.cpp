@@ -60,7 +60,7 @@ void shader::printInfoLog(GLuint obj, bool prog)
       }
       else*/
       {
-         ext.arbGetInfoLog((void*)obj, 1024, NULL, infoLog); 
+         ext.arbGetInfoLog((GLhandleARB)obj, 1024, NULL, infoLog); 
          printOpenGLErrors("arbGetInfoLog");
       }
 
@@ -76,11 +76,11 @@ void shader::clear()
    if(ext.hasShader())
    {
       /* Cleanning Shaders */
-      ext.arbDeleteObject((void*)vertex);
-      ext.arbDeleteObject((void*)fragment);
+      ext.arbDeleteObject((GLhandleARB)vertex);
+      ext.arbDeleteObject((GLhandleARB)fragment);
 
       /* Cleanning Program */
-      ext.arbDeleteObject((void*)program);
+      ext.arbDeleteObject((GLhandleARB)program);
    }
 }
 
@@ -91,7 +91,7 @@ void shader::enable()
 {
    if((ext.hasShader()) && (loaded))
    {
-      ext.arbUseProgram((void*)program);
+      ext.arbUseProgram((GLhandleARB)program);
       enabled = true;
    }
 }
@@ -133,16 +133,16 @@ bool shader::load(string vShaderFileName, string fShaderFileName)
       res = parseFile(vShaderFileName);
       sprintf(buf,"%s", res.c_str());
       str = &res[0];
-      ext.arbShaderSourceObject((void*)vertex, 1, &str, NULL);
+      ext.arbShaderSourceObject((GLhandleARB)vertex, 1, &str, NULL);
       res = parseFile(fShaderFileName).c_str();
       sprintf(buf,"%s", res.c_str());
       str = &res[0];
-      ext.arbShaderSourceObject((void*)fragment, 1, &str, NULL);
+      ext.arbShaderSourceObject((GLhandleARB)fragment, 1, &str, NULL);
 
       /* Compile Vertex Shader */
-      ext.arbCompileShader((void*)vertex);
+      ext.arbCompileShader((GLhandleARB)vertex);
       printOpenGLErrors("arbCompileShader(vertex)");
-      ext.arbGetObjectParameteriv((void*)vertex, GL_OBJECT_COMPILE_STATUS_ARB, 
+      ext.arbGetObjectParameteriv((GLhandleARB)vertex, GL_OBJECT_COMPILE_STATUS_ARB, 
                                   &vertexCompiled);
       printInfoLog(vertex);
       if(!vertexCompiled)
@@ -153,9 +153,9 @@ bool shader::load(string vShaderFileName, string fShaderFileName)
       }
 
       /* Compile Fragment shader */
-      ext.arbCompileShader((void*)fragment);
+      ext.arbCompileShader((GLhandleARB)fragment);
       printOpenGLErrors("arbCompileShader(fragment)");
-      ext.arbGetObjectParameteriv((void*)fragment, GL_OBJECT_COMPILE_STATUS_ARB, 
+      ext.arbGetObjectParameteriv((GLhandleARB)fragment, GL_OBJECT_COMPILE_STATUS_ARB, 
                                   &fragmentCompiled);
       printInfoLog(fragment);
       if(!fragmentCompiled)
@@ -166,13 +166,13 @@ bool shader::load(string vShaderFileName, string fShaderFileName)
       }
 
       /* Attach shaders to the program */
-      ext.arbAttachObject((void*)program, (void*)fragment);
-      ext.arbAttachObject((void*)program, (void*)vertex);
+      ext.arbAttachObject((GLhandleARB)program, (GLhandleARB)fragment);
+      ext.arbAttachObject((GLhandleARB)program, (GLhandleARB)vertex);
 
       /* Finnaly, link them */
-      ext.arbLinkProgram((void*)program);
+      ext.arbLinkProgram((GLhandleARB)program);
       printOpenGLErrors("arbLinkProgram");
-      ext.arbGetObjectParameteriv((void*)program, 
+      ext.arbGetObjectParameteriv((GLhandleARB)program, 
             GL_OBJECT_LINK_STATUS_ARB, &linked);
       printOpenGLErrors("arbGetProgramiv");
       printInfoLog(program, true);
@@ -236,7 +236,7 @@ GLint shader::getUniformVariable(string variableName)
    {
       GLint loc;
 
-      loc = ext.arbGetUniformLocation((void*)program, variableName.c_str());
+      loc = ext.arbGetUniformLocation((GLhandleARB)program, variableName.c_str());
 
       if(loc == -1)
       {
@@ -292,7 +292,7 @@ GLint shader::getAttrib(std::string s)
    GLint res;
    if(ext.hasShader())
    {
-      res = ext.arbGetAttribLocation((void*)program, s.c_str());
+      res = ext.arbGetAttribLocation((GLhandleARB)program, s.c_str());
       if(res == -1)
       {
          cerr << "ERROR: Couldn't find shader (" << fileName 
