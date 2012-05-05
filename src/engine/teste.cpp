@@ -108,14 +108,21 @@ int main(int argc, char **argv)
           charCreation = gameEngine->characterScreen();
           if( charCreation == CHAR_CONFIRM)
           {
+             /* Fade main screen */
              glDisable(GL_LIGHTING);
              glDisable(GL_FOG);
              gameEngine->mainScreenEffect();
 
+             /* Change to initial music */
+             sound snd;
+             snd.loadMusic("music/emptycity.ogg");
+             
+             /* Show Introduction comic book */
              comicBook* cBook = new comicBook();
              cBook->load("comics/intro/intro.dcb");
              cBook->run();
 
+             /* Finally, begin the game! */
              gameEngine->loadMap("mapas/tutorial/house1.map");
           }
        }
