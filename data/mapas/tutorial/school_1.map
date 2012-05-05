@@ -1,7 +1,7 @@
 # Made by DccNiTghtmare's MapEditor, 0.9
 size = 5X6
 name = gettext("Bunker School")
-musicFile = music/musica9.ogg
+musicFile = music/emptycity.ogg
 lightsFile = mapas/tutorial/school_1.map.lgh
 outdoor = 0
 texture = texturas/floor_indoor/steel4.png texturas/floor_indoor/steel4.png

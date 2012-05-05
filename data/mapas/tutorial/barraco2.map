@@ -2,7 +2,7 @@
 size = 4X3
 name = gettext("Barraco 2")
 npcFile = mapas/tutorial/barraco2.map.npc
-musicFile = music/musica10.ogg
+musicFile = music/emptycity.ogg
 lightsFile = mapas/tutorial/barraco2.map.lgh
 outdoor = 0
 texture = texturas/floor_indoor/steel3.png texturas/floor_indoor/steel3.png 163 158 163

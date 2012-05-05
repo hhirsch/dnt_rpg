@@ -2,8 +2,7 @@
 size = 6X8
 name = gettext("Logan's Occupation")
 npcFile = mapas/tutorial/house1.map.npc
-musicFile = music/musica12.ogg
-soundsFile = mapas/tutorial/house1.map.sfx
+musicFile = music/emptycity.ogg
 lightsFile = mapas/tutorial/house1.map.lgh
 outdoor = 0
 texture = texturas/floor_indoor/steel4_dirty1.png texturas/floor_indoor/steel4_dirty1.png

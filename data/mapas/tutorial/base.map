@@ -4,6 +4,7 @@ name = gettext("Base")
 npcFile = mapas/tutorial/base.map.npc
 particlesFile = mapas/tutorial/base.map.par
 lightsFile = mapas/tutorial/base.map.lgh
+musicFile = music/emptycity.ogg
 outdoor = 0
 texture = texturas/floor_indoor/steel3.png texturas/floor_indoor/steel3.png
 texture = texturas/floor_indoor/steel3_dirty.png texturas/floor_indoor/steel3_dirty.png

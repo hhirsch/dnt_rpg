@@ -2,7 +2,7 @@
 size = 18X20
 name = gettext("mapName")
 npcFile = mapas/tutorial/fazenda.map.npc
-musicFile = music/musica11.ogg
+musicFile = music/emptycity.ogg
 outdoor = 1
 texture = texturas/floor_outdoor/ofslayer/058terresable.png texturas/floor_outdoor/ofslayer/058terresable.png
 texture = texturas/floor_outdoor/grass.png texturas/floor_outdoor/grass.png
