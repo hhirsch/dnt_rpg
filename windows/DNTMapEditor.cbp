@@ -45,6 +45,8 @@
 		<Unit filename="..\src\app\mapEditor\portal.h" />
 		<Unit filename="..\src\app\mapEditor\terrain.cpp" />
 		<Unit filename="..\src\app\mapEditor\terrain.h" />
+		<Unit filename="..\src\app\mapEditor\tilewall.cpp" />
+		<Unit filename="..\src\app\mapEditor\tilewall.h" />
 		<Unit filename="..\src\app\mapEditor\wall.cpp" />
 		<Unit filename="..\src\app\mapEditor\wall.h" />
 		<Unit filename="..\src\app\mapEditor\waterwindow.cpp" />

@@ -1,9 +1,9 @@
-/* 
+/*
   DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
- 
+
   This file is part of DccNiTghtmare.
- 
+
   DccNiTghtmare is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -108,40 +108,40 @@ void Colors::setDefaultColor(int colorId, int R, int G, int B, int A)
    Color* c = NULL;
    switch(colorId)
    {
-      case COLOR_CONT_0:
+      case COLOUR_CONT_0:
          c = &defCont[0];
       break;
-      case COLOR_CONT_1:
+      case COLOUR_CONT_1:
          c = &defCont[1];
       break;
-      case COLOR_CONT_2:
+      case COLOUR_CONT_2:
          c = &defCont[2];
       break;
-      case COLOR_WINDOW:
+      case COLOUR_WINDOW:
          c = &defWindow;
       break;
-      case COLOR_BUTTON:
+      case COLOUR_BUTTON:
          c = &defButton;
       break;
-      case COLOR_MENU:
+      case COLOUR_MENU:
          c = &defMenu;
       break;
-      case COLOR_TEXT:
+      case COLOUR_TEXT:
          c = &defText;
       break;
-      case COLOR_BAR:
+      case COLOUR_BAR:
          c = &defBar;
       break;
-      case COLOR_SEL_TEXT:
+      case COLOUR_SEL_TEXT:
          c = &defSelText;
       break;
-      case COLOR_FILE:
+      case COLOUR_FILE:
          c = &defFile;
       break;
-      case COLOR_DIRECTORY:
+      case COLOUR_DIRECTORY:
          c = &defDir;
       break;
-      case COLOR_HIGH:
+      case COLOUR_HIGH:
          c = &defHigh;
       break;
    }
