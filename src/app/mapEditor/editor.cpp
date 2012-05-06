@@ -1,9 +1,9 @@
-/* 
+/*
   DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
- 
+
   This file is part of DccNiTghtmare.
- 
+
   DccNiTghtmare is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -63,17 +63,17 @@ editor::editor()
 
    /* Set default colors */
    Farso::Colors farCor;
-   farCor.setDefaultColor(Farso::Colors::COLOR_WINDOW, 152, 148, 140, 220);
-   farCor.setDefaultColor(Farso::Colors::COLOR_MENU, 152, 148, 140, 220);
-   farCor.setDefaultColor(Farso::Colors::COLOR_BUTTON, 152, 148, 140, 220);
-   farCor.setDefaultColor(Farso::Colors::COLOR_BAR, 15, 80, 220, 220);
-   farCor.setDefaultColor(Farso::Colors::COLOR_HIGH, 15, 80, 190, 255);
-   farCor.setDefaultColor(Farso::Colors::COLOR_TEXT, 0, 0, 0, 255);
-   farCor.setDefaultColor(Farso::Colors::COLOR_DIRECTORY, 0, 0, 0, 255);
+   farCor.setDefaultColor(Farso::Colors::COLOUR_WINDOW, 152, 148, 140, 220);
+   farCor.setDefaultColor(Farso::Colors::COLOUR_MENU, 152, 148, 140, 220);
+   farCor.setDefaultColor(Farso::Colors::COLOUR_BUTTON, 152, 148, 140, 220);
+   farCor.setDefaultColor(Farso::Colors::COLOUR_BAR, 15, 80, 220, 220);
+   farCor.setDefaultColor(Farso::Colors::COLOUR_HIGH, 15, 80, 190, 255);
+   farCor.setDefaultColor(Farso::Colors::COLOUR_TEXT, 0, 0, 0, 255);
+   farCor.setDefaultColor(Farso::Colors::COLOUR_DIRECTORY, 0, 0, 0, 255);
 
-   farCor.setDefaultColor(Farso::Colors::COLOR_CONT_0, 169, 169, 169, 255);
-   farCor.setDefaultColor(Farso::Colors::COLOR_CONT_1, 40, 40, 40, 255);
-   farCor.setDefaultColor(Farso::Colors::COLOR_CONT_2, 200, 200, 200, 255);
+   farCor.setDefaultColor(Farso::Colors::COLOUR_CONT_0, 169, 169, 169, 255);
+   farCor.setDefaultColor(Farso::Colors::COLOUR_CONT_1, 40, 40, 40, 255);
+   farCor.setDefaultColor(Farso::Colors::COLOUR_CONT_2, 200, 200, 200, 255);
 
    /* Alloc the visible Matrix */
    visibleMatrix = new GLfloat*[6];
@@ -177,7 +177,7 @@ void editor::redmensionateWindow()
    glViewport (0, 0, (GLsizei) screen->w, (GLsizei) screen->h);
    glMatrixMode (GL_PROJECTION);
    glLoadIdentity ();
-   gluPerspective(45.0, (GLsizei)screen->w / (GLsizei)screen->h, 1.0, 
+   gluPerspective(45.0, (GLsizei)screen->w / (GLsizei)screen->h, 1.0,
                   OUTDOOR_FARVIEW);
    glGetIntegerv(GL_VIEWPORT, viewPort);
    glMatrixMode (GL_MODELVIEW);
@@ -217,13 +217,13 @@ void editor::closeMap()
    if(mapOpened)
    {
       gui->showMessage("Closing actual Map...");
-      
+
       /* Remove temporary state objects */
       objectEditor->deleteObject();
       npcController->deleteNpc();
       portalEditor->deleteDoor();
       gui->clearState();
-     
+
       /* Delete things */
       if(NPCs)
       {
@@ -299,10 +299,10 @@ void editor::openMap()
             while(arq->getNextCharacter(name, arquivo, posX, posZ, ori, psycho))
             {
                 per = NPCs->insertCharacter(arquivo, features, NULL, "");
-                per->scNode->set(posX, map->getHeight(posX, posZ), posZ, 
+                per->scNode->set(posX, map->getHeight(posX, posZ), posZ,
                       0.0f, ori, 0.0f);
                 per->setPsychoState(psycho);
-            }            
+            }
          }
          delete(arq);
       }
@@ -339,7 +339,7 @@ void editor::openMap()
       float x=0,z=0,a=0;
       map->getInitialPosition(x,z,a);
       gui->gameCamera.updateCamera(x,0,z,0);
-      
+
       /* Set tile editor with tiles, if any. */
       tileWall->loadTilesFromMap();
 
@@ -411,7 +411,7 @@ void editor::saveMap()
       /* To make sure the selected texture isn't one that was removed */
       nextTexture();
       previousTexture();
-      
+
       /* Get back tiles to tile editor.*/
       tileWall->loadTilesFromMap();
    }
@@ -486,7 +486,7 @@ void editor::newMap()
       if( (sizeZ <= 0) || (sizeZ > 30) )
       {
          Farso::Warning warn;
-         warn.show("Error!", "Size must be in range (0,30]", gui->getGui()); 
+         warn.show("Error!", "Size must be in range (0,30]", gui->getGui());
       }
    }
 
@@ -511,7 +511,7 @@ void editor::newMap()
       }
       map->setInitialPosition( ((sizeX+12)*map->squareSize() / 2.0),
                                ((sizeZ+12)*map->squareSize() / 2.0));
-      gui->gameCamera.updateCamera(((sizeX+14)*map->squareSize() / 2.0), 0.0, 
+      gui->gameCamera.updateCamera(((sizeX+14)*map->squareSize() / 2.0), 0.0,
                                    ((sizeZ+14)*map->squareSize() / 2.0), 0.0);
    }
    else
@@ -534,7 +534,7 @@ void editor::newMap()
          actualWall->rightTexture.setTextureId(index);
 
          actualWall = map->addWall((sizeX)*map->squareSize()-10,0,
-               (sizeX)*map->squareSize(), 
+               (sizeX)*map->squareSize(),
                (sizeZ)*map->squareSize());
          actualWall->frontTexture.setTextureId(index);
          actualWall->backTexture.setTextureId(index);
@@ -559,7 +559,7 @@ void editor::newMap()
          /* Temple! */
          map->newMap(sizeX, sizeZ);
       }
-      
+
       /* Define Position */
       index = ((mapTexture*)map->textures.getFirst())->index;
       map->setInitialPosition( ((sizeX)*map->squareSize() / 2.0),
@@ -593,7 +593,7 @@ void editor::newMap()
 
    gui->showMessage("Created New Game Map!");
    map->fog.apply(map->isOutdoor(), OUTDOOR_FARVIEW, INDOOR_FARVIEW);
-   gui->setFog(&map->fog); 
+   gui->setFog(&map->fog);
 }
 
 /*********************************************************************
@@ -603,36 +603,36 @@ void editor::verifyPosition()
 {
    if(mapOpened)
    {
-       if(gui->gameCamera.getCenterX() > 
+       if(gui->gameCamera.getCenterX() >
           ((map->getSizeX() * map->squareSize())+20))
        {
-          gui->gameCamera.updateCamera( ((map->getSizeX() * 
+          gui->gameCamera.updateCamera( ((map->getSizeX() *
                                              map->squareSize())+20),
                                           gui->gameCamera.getCenterY()-30,
-                                          gui->gameCamera.getCenterZ(), 
+                                          gui->gameCamera.getCenterZ(),
                                           0.0);
        }
        else if(gui->gameCamera.getCenterX() < -20)
        {
           gui->gameCamera.updateCamera( -20 ,
                                           gui->gameCamera.getCenterY()-30,
-                                          gui->gameCamera.getCenterZ(), 
+                                          gui->gameCamera.getCenterZ(),
                                           0.0);
        }
-       if(gui->gameCamera.getCenterZ() > ((map->getSizeZ() * 
+       if(gui->gameCamera.getCenterZ() > ((map->getSizeZ() *
                                            map->squareSize())+20))
        {
           gui->gameCamera.updateCamera( gui->gameCamera.getCenterX(),
                                            gui->gameCamera.getCenterY()-30,
-                                          ((map->getSizeZ() * 
-                                            map->squareSize())+20), 
+                                          ((map->getSizeZ() *
+                                            map->squareSize())+20),
                                           0.0);
        }
        else if(gui->gameCamera.getCenterZ() < -20)
        {
           gui->gameCamera.updateCamera( gui->gameCamera.getCenterX(),
                                           gui->gameCamera.getCenterY()-30,
-                                          -20, 
+                                          -20,
                                           0.0);
 
        }
@@ -704,7 +704,7 @@ int editor::insertTexture(string textureFile)
    return(map->insertTexture(gui->getTextureFileName(),
                              gui->getTextureFileName(), true));
 
-   
+
 }
 
 /********************************************************************
@@ -740,16 +740,16 @@ void editor::draw()
          opt.setSplattingType(DNT_SPLATTING_NONE);
       }
    }
-   
+
    glMatrixMode(GL_MODELVIEW);
    glLoadIdentity();
-   
+
    /* Redefine camera position */
    gui->cameraPos(map);
    updateFrustum( visibleMatrix, proj, modl);
    gameSun->updateHourOfDay(hour, 0.0, 0.0);
    gameSun->setLight();
-  
+
    /* Draw Things */
    if(mapOpened)
    {
@@ -759,7 +759,7 @@ void editor::draw()
       {
          /* Sky */
          glPushMatrix();
-            glTranslatef(gui->gameCamera.getCameraX(), 0.0, 
+            glTranslatef(gui->gameCamera.getCameraX(), 0.0,
                          gui->gameCamera.getCameraZ());
             gameSky->draw(map,gameSun->getRotation(),!map->getFog().enabled);
          glPopMatrix();
@@ -774,38 +774,38 @@ void editor::draw()
             glBegin(GL_QUADS);
                glNormal3f(0,1,0);
                glVertex3f(7*map->squareSize()-5, 0.5, 7*map->squareSize());
-               glVertex3f(7*map->squareSize()-5, 0.5, 
+               glVertex3f(7*map->squareSize()-5, 0.5,
                           (sizeZ+7)*map->squareSize());
-               glVertex3f(7*map->squareSize()+5, 0.5, 
+               glVertex3f(7*map->squareSize()+5, 0.5,
                           (sizeZ+7)*map->squareSize());
                glVertex3f(7*map->squareSize()+5, 0.5, 7*map->squareSize());
 
                glNormal3f(0,1,0);
-               glVertex3f((sizeX+7)*map->squareSize()-5, 0.5, 
+               glVertex3f((sizeX+7)*map->squareSize()-5, 0.5,
                           7*map->squareSize());
-               glVertex3f((sizeX+7)*map->squareSize()-5, 0.5, 
+               glVertex3f((sizeX+7)*map->squareSize()-5, 0.5,
                           (sizeZ+7)*map->squareSize());
-               glVertex3f((sizeX+7)*map->squareSize()+5, 0.5, 
+               glVertex3f((sizeX+7)*map->squareSize()+5, 0.5,
                           (sizeZ+7)*map->squareSize());
-               glVertex3f((sizeX+7)*map->squareSize()+5, 0.5, 
+               glVertex3f((sizeX+7)*map->squareSize()+5, 0.5,
                           7*map->squareSize());
 
                glNormal3f(0,1,0);
                glVertex3f(7*map->squareSize(), 0.5, 7*map->squareSize()-5);
-               glVertex3f((sizeX+7)*map->squareSize(), 0.5, 
+               glVertex3f((sizeX+7)*map->squareSize(), 0.5,
                           7*map->squareSize()-5);
-               glVertex3f((sizeX+7)*map->squareSize(), 0.5, 
+               glVertex3f((sizeX+7)*map->squareSize(), 0.5,
                           7*map->squareSize()+5);
                glVertex3f(7*map->squareSize(), 0.5, 7*map->squareSize()+5);
 
                glNormal3f(0,1,0);
-               glVertex3f(7*map->squareSize(), 0.5, 
+               glVertex3f(7*map->squareSize(), 0.5,
                           (sizeZ+7)*map->squareSize()-5);
-               glVertex3f((sizeX+7)*map->squareSize(), 0.5, 
+               glVertex3f((sizeX+7)*map->squareSize(), 0.5,
                           (sizeZ+7)*map->squareSize()-5);
-               glVertex3f((sizeX+7)*map->squareSize(), 0.5, 
+               glVertex3f((sizeX+7)*map->squareSize(), 0.5,
                           (sizeZ+7)*map->squareSize()+5);
-               glVertex3f(7*map->squareSize(), 0.5, 
+               glVertex3f(7*map->squareSize(), 0.5,
                           (sizeZ+7)*map->squareSize()+5);
 
             glEnd();
@@ -816,10 +816,10 @@ void editor::draw()
       /* Render Map */
       glPushMatrix();
          map->render(gui->gameCamera.getCameraX(),
-                     gui->gameCamera.getCameraY(), 
-                     gui->gameCamera.getCameraZ(), 
+                     gui->gameCamera.getCameraY(),
+                     gui->gameCamera.getCameraZ(),
                      visibleMatrix,
-                     gui->gameCamera.getCameraX(), 
+                     gui->gameCamera.getCameraX(),
                      gui->gameCamera.getCameraZ());
       glPopMatrix();
 
@@ -895,7 +895,7 @@ void editor::draw()
       glPushMatrix();
          curs.draw(mouseX, mouseY, 0);
       glPopMatrix();
-      
+
       draw3DMode(OUTDOOR_FARVIEW);
    glPopMatrix();
    glEnable(GL_FOG);
@@ -907,13 +907,13 @@ void editor::draw()
    /* Draw Active Texture */
    if(mapOpened)
    {
-      gluUnProject(Farso::SCREEN_X,Farso::SCREEN_Y, 0.01, modl, proj, viewPort, 
+      gluUnProject(Farso::SCREEN_X,Farso::SCREEN_Y, 0.01, modl, proj, viewPort,
                    &x1, &y1, &z1);
-      gluUnProject(Farso::SCREEN_X,Farso::SCREEN_Y-50,0.01, modl, proj, viewPort, 
+      gluUnProject(Farso::SCREEN_X,Farso::SCREEN_Y-50,0.01, modl, proj, viewPort,
                    &x2, &y2, &z2);
-      gluUnProject(Farso::SCREEN_X-50,Farso::SCREEN_Y-50,0.01,modl,proj,viewPort, 
+      gluUnProject(Farso::SCREEN_X-50,Farso::SCREEN_Y-50,0.01,modl,proj,viewPort,
                    &x3, &y3, &z3);
-      gluUnProject(Farso::SCREEN_X-50,Farso::SCREEN_Y,0.01, modl, proj, viewPort,  
+      gluUnProject(Farso::SCREEN_X-50,Farso::SCREEN_Y,0.01, modl, proj, viewPort,
                    &x4, &y4, &z4);
 
       glDisable(GL_LIGHTING);
@@ -1002,23 +1002,23 @@ void editor::doEditorIO()
 {
    GLfloat wx, wy, wz;
 
-   wx = mouseX; wy = Farso::SCREEN_Y-mouseY; 
+   wx = mouseX; wy = Farso::SCREEN_Y-mouseY;
 
-   glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
+   glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz);
    gluUnProject( wx, wy, wz, modl, proj, viewPort, &xReal, &yReal, &zReal);
 
    updateMouseFloorPos();
 
    if( (gui->getState() == GUI_IO_STATE_TERRAIN) && (mapOpened))
    {
-      terrainEditor->verifyAction(xReal, yReal, zReal, xFloor, zFloor, 
+      terrainEditor->verifyAction(xReal, yReal, zReal, xFloor, zFloor,
             mButton, gui->getTool(), curTexture);
       particleSystem->setActualMap(map, NULL);
    }
    else if( (gui->getState() == GUI_IO_STATE_PORTAL) && (mapOpened))
    {
       string doorFile = gui->getSelectedText();
-      if( (portalEditor->getDoor() == NULL) || 
+      if( (portalEditor->getDoor() == NULL) ||
           (doorFile != portalEditor->getDoorFileName())
         )
       {
@@ -1053,7 +1053,7 @@ void editor::doEditorIO()
       if(gui->getTool() == TOOL_OBSTACLE_ADD)
       {
          string objFile = gui->getSelectedText();
-         if( (!objFile.empty()) && 
+         if( (!objFile.empty()) &&
              (objFile != objectEditor->getObjectFileName()))
          {
             if(!objectEditor->getObjectFileName().empty())
@@ -1077,16 +1077,16 @@ void editor::doEditorIO()
       /* Object Node Editor */
       else if(gui->getTool() == TOOL_NODE_EDITOR)
       {
-         gui->getNodeEditor()->verifyAction(keys, xReal, yReal, zReal, mButton, 
+         gui->getNodeEditor()->verifyAction(keys, xReal, yReal, zReal, mButton,
                mouseX, mouseY, proj, modl, viewPort);
       }
    }
    else if( (gui->getState() == GUI_IO_STATE_PARTICLES) && (mapOpened))
    {
-      particleEditor->verifyAction(xReal, yReal, zReal, mButton, keys, 
-                                   gui, particleSystem, proj, 
+      particleEditor->verifyAction(xReal, yReal, zReal, mButton, keys,
+                                   gui, particleSystem, proj,
                                    modl, viewPort, gui->getSelectedText(),
-                                   gui->getGrassWindow(), 
+                                   gui->getGrassWindow(),
                                    gui->getWaterWindow(),
                                    map);
    }
@@ -1120,17 +1120,17 @@ void editor::doEditorIO()
    /* Delete temporary unused models */
    if(mapOpened)
    {
-      if( (gui->getTool() != TOOL_OBSTACLE_ADD) && 
+      if( (gui->getTool() != TOOL_OBSTACLE_ADD) &&
             (!objectEditor->getObjectFileName().empty()) )
       {
          objectEditor->deleteObject();
       }
-      if( (gui->getState() != GUI_IO_STATE_NPCS) && 
+      if( (gui->getState() != GUI_IO_STATE_NPCS) &&
           (!npcController->getNpcFileName().empty()) )
       {
          npcController->deleteNpc();
       }
-      if( (gui->getTool() != TOOL_PORTAL_DOOR) && 
+      if( (gui->getTool() != TOOL_PORTAL_DOOR) &&
           (!portalEditor->getDoorFileName().empty()))
       {
          portalEditor->deleteDoor();
@@ -1172,7 +1172,7 @@ void editor::verifyIO()
    }
    else if(guiEvent == GUI_IO_SAVE_MAP)
    {
-      saveMap();            
+      saveMap();
    }
    else if(guiEvent == GUI_IO_TEXTURE_PREVIOUS)
    {
@@ -1217,10 +1217,10 @@ void editor::verifyIO()
  *********************************************************************/
 void editor::run()
 {
-   
+
    quit = false;
    int time = 0;
-   
+
    while(!quit)
    {
       if(SDL_GetTicks() - time >= UPDATE_RATE)
@@ -1229,7 +1229,7 @@ void editor::run()
 
          verifyPosition();
          verifyIO();
-         
+
          draw();
       }
       else

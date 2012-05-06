@@ -1,7 +1,7 @@
 # Made by DccNiTghtmare's MapEditor, 0.8
 size = 18X17
 name = gettext("mapName")
-musicFile = music/musica9.ogg
+musicFile = music/emptycity.ogg
 outdoor = 1
 texture = texturas/floor_outdoor/grass.png texturas/floor_outdoor/grass.png
 texture = texturas/floor_outdoor/rock.png texturas/floor_outdoor/rock.png

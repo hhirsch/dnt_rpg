@@ -2,7 +2,7 @@
 size = 18X18
 name = gettext("Cratera")
 npcFile = mapas/tutorial/crat.map.npc
-musicFile = music/musica6.ogg
+musicFile = music/emptycity.ogg
 outdoor = 1
 texture = texturas/floor_outdoor/sand.png texturas/floor_outdoor/sand.png
 texture = texturas/floor_outdoor/ofslayer/058terresable.png texturas/floor_outdoor/ofslayer/058terresable.png

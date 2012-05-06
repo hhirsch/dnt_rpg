@@ -2,7 +2,7 @@
 size = 5X4
 name = gettext("Bunker Down")
 npcFile = mapas/tutorial/school_2.map.npc
-musicFile = music/musica7.ogg
+musicFile = music/emptycity.ogg
 lightsFile = mapas/tutorial/school_2.map.lgh
 outdoor = 0
 texture = texturas/floor_indoor/burl.png texturas/floor_indoor/burl.png 169 94 57

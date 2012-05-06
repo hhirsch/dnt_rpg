@@ -1,9 +1,9 @@
-/* 
+/*
   DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
- 
+
   This file is part of DccNiTghtmare.
- 
+
   DccNiTghtmare is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -39,7 +39,7 @@ class Colors
 {
    public:
       Color colorCont[3],       /**< Contorn Colors */
-            colorWindow,        /**< Window Color */ 
+            colorWindow,        /**< Window Color */
             colorButton,        /**< Button Color */
             colorMenu,          /**< Menu Color */
             colorText,          /**< Text Color */
@@ -48,7 +48,7 @@ class Colors
             colorFile,          /**< Color for file on file lists */
             colorDirectory,     /**< color for directory on file lists */
             colorHigh;          /**< Color for highlight */
-      
+
       /*! Constructor */
       Colors();
 
@@ -58,20 +58,22 @@ class Colors
       /*! Set a default color to a value */
       void setDefaultColor(int colorId, int R, int G, int B, int A);
 
+      /*! Calling them COLOUR, instead of COLOR, due to conflicts with
+       * a global defined by MS-Windows for COLOR_WINDOW! */
       enum DefaultColorId
       {
-         COLOR_CONT_0 = 0,
-         COLOR_CONT_1,
-         COLOR_CONT_2,
-         COLOR_WINDOW,
-         COLOR_BUTTON,
-         COLOR_MENU,
-         COLOR_TEXT,
-         COLOR_BAR,
-         COLOR_SEL_TEXT,
-         COLOR_FILE,
-         COLOR_DIRECTORY,
-         COLOR_HIGH
+         COLOUR_CONT_0 = 0,
+         COLOUR_CONT_1,
+         COLOUR_CONT_2,
+         COLOUR_WINDOW,
+         COLOUR_BUTTON,
+         COLOUR_MENU,
+         COLOUR_TEXT,
+         COLOUR_BAR,
+         COLOUR_SEL_TEXT,
+         COLOUR_FILE,
+         COLOUR_DIRECTORY,
+         COLOUR_HIGH
       };
 
    protected:

@@ -2,6 +2,7 @@
 size = 20X20
 name = gettext("mapName")
 npcFile = mapas/tutorial/estoril.map.npc
+musicFile = music/cavesofsorrow.ogg
 outdoor = 1
 texture = texturas/floor_outdoor/burlwood.png texturas/floor_outdoor/burlwood.png
 texture = texturas/floor_outdoor/sand.png texturas/floor_outdoor/sand.png

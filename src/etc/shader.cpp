@@ -64,7 +64,11 @@ void shader::printInfoLog(GLuint obj, bool prog)
          printOpenGLErrors("arbGetInfoLog");
       }
 
-      cout << "infoLog ('" << fileName << "')" << ": " << infoLog << endl;
+      std::string log = infoLog;
+      if(!log.empty())
+      {
+         cout << "infoLog ('" << fileName << "')" << ": " << infoLog << endl;
+      }
    }
 }
 
@@ -142,8 +146,8 @@ bool shader::load(string vShaderFileName, string fShaderFileName)
       /* Compile Vertex Shader */
       ext.arbCompileShader((GLhandleARB)vertex);
       printOpenGLErrors("arbCompileShader(vertex)");
-      ext.arbGetObjectParameteriv((GLhandleARB)vertex, GL_OBJECT_COMPILE_STATUS_ARB, 
-                                  &vertexCompiled);
+      ext.arbGetObjectParameteriv((GLhandleARB)vertex, 
+            GL_OBJECT_COMPILE_STATUS_ARB, &vertexCompiled);
       printInfoLog(vertex);
       if(!vertexCompiled)
       {
@@ -155,8 +159,8 @@ bool shader::load(string vShaderFileName, string fShaderFileName)
       /* Compile Fragment shader */
       ext.arbCompileShader((GLhandleARB)fragment);
       printOpenGLErrors("arbCompileShader(fragment)");
-      ext.arbGetObjectParameteriv((GLhandleARB)fragment, GL_OBJECT_COMPILE_STATUS_ARB, 
-                                  &fragmentCompiled);
+      ext.arbGetObjectParameteriv((GLhandleARB)fragment, 
+            GL_OBJECT_COMPILE_STATUS_ARB, &fragmentCompiled);
       printInfoLog(fragment);
       if(!fragmentCompiled)
       {
@@ -236,7 +240,8 @@ GLint shader::getUniformVariable(string variableName)
    {
       GLint loc;
 
-      loc = ext.arbGetUniformLocation((GLhandleARB)program, variableName.c_str());
+      loc = ext.arbGetUniformLocation((GLhandleARB)program, 
+            variableName.c_str());
 
       if(loc == -1)
       {

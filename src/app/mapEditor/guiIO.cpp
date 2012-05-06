@@ -337,12 +337,12 @@ void guiIO::openTileWallWindow()
    tileWallWindow = gui->insertWindow(0,599,153,661,"TileWall");
    tileWallTabButton = tileWallWindow->getObjectsList()->insertTabButton(
          7,17,0,0, dir.getRealFile("mapEditor/tilewall.png").c_str());
-   tileWallAddButton = tileWallTabButton->insertButton(0,0,19,19);
-   tileWallAddButton->setMouseHint("Add TileWall");
+   tileWallAddButton = NULL; /*tileWallTabButton->insertButton(0,0,19,19);
+   tileWallAddButton->setMouseHint("Add TileWall");*/
    tileWallRemoveButton = tileWallTabButton->insertButton(20,0,39,19);
    tileWallRemoveButton->setMouseHint("Remove TileWall");
-   tileWallChangeButton = tileWallTabButton->insertButton(40,0,59,19);
-   tileWallChangeButton->setMouseHint("Change TileWall Model");
+   tileWallChangeButton = NULL;/*tileWallTabButton->insertButton(40,0,59,19);
+   tileWallChangeButton->setMouseHint("Change TileWall Model");*/
 
    tileWallWindow->setExternPointer(&tileWallWindow);
    gui->openWindow(tileWallWindow);

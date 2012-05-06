@@ -4,6 +4,7 @@ name = gettext("mapName")
 npcFile = mapas/tutorial/house2_sec.map.npc
 particlesFile = mapas/tutorial/house2_sec.map.par
 lightsFile = mapas/tutorial/house2_sec.map.lgh
+musicFile = music/emptycity.ogg
 outdoor = 0
 texture = texturas/floor_indoor/wood4.png texturas/floor_indoor/wood4.png
 texture = texturas/floor_indoor/mosaic2.png texturas/floor_indoor/mosaic2.png

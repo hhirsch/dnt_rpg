@@ -2,7 +2,7 @@
 size = 4X4
 name = gettext("Bar")
 npcFile = mapas/tutorial/bar.map.npc
-musicFile = music/musica5.ogg
+musicFile = music/emptycity.ogg
 lightsFile = mapas/tutorial/barraco2.map.lgh
 outdoor = 0
 texture = texturas/floor_indoor/wood8.png texturas/floor_indoor/wood8.png
