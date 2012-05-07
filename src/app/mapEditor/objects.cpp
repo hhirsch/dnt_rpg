@@ -20,6 +20,7 @@
 
 #include "objects.h"
 using namespace std;
+using namespace dntMapEditor;
 
 #define OBJECTS_STATE_NONE    0
 #define OBJECTS_STATE_ADD     1
@@ -27,7 +28,7 @@ using namespace std;
 /******************************************************
  *                      Constructor                   *
  ******************************************************/
-objects::objects(Map* acMap)
+Objects::Objects(Map* acMap)
 {
    actualTool = 0;
    actualMap = acMap;
@@ -45,7 +46,7 @@ objects::objects(Map* acMap)
 /******************************************************
  *                       Destructor                   *
  ******************************************************/
-objects::~objects()
+Objects::~Objects()
 {
    actualMap = NULL;
    actualObstacle = NULL;
@@ -54,7 +55,7 @@ objects::~objects()
 /******************************************************
  *                      verifyAction                  *
  ******************************************************/
-sceneNode* objects::verifyAction(Uint8* keys, 
+sceneNode* Objects::verifyAction(Uint8* keys, 
                            GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
                            Uint8 mButton, int mouseXw, int mouseYw,
                            int tool, GLdouble proj[16], 
@@ -169,16 +170,16 @@ sceneNode* objects::verifyAction(Uint8* keys,
 /******************************************************
  *                       drawTemporary                *
  ******************************************************/
-void objects::drawTemporary()
+void Objects::drawTemporary()
 {
 }
 
 /******************************************************************
  *                          insertObject                          *
  ******************************************************************/
-void objects::insertObject(Map* acMap, object* obj, int qx, int qz)
+void Objects::insertObject(Map* acMap, object* obj, int qx, int qz)
 {
-   //TODO, mark with no collision some pickable objects
+   //TODO, mark with no collision some pickable Objects
    acMap->insertObject(obj->scNode->getPosX(), 
                        obj->scNode->getPosY(),
                        obj->scNode->getPosZ(),
@@ -190,7 +191,7 @@ void objects::insertObject(Map* acMap, object* obj, int qx, int qz)
 /******************************************************************
  *                       defineActualObject                       *
  ******************************************************************/
-void objects::defineActualObject(object* obj, string fileName)
+void Objects::defineActualObject(object* obj, string fileName)
 {
    if(obj)
    {
@@ -202,7 +203,7 @@ void objects::defineActualObject(object* obj, string fileName)
 /******************************************************************
  *                       getObjectFileName                        *
  ******************************************************************/
-string objects::getObjectFileName()
+string Objects::getObjectFileName()
 {
    return(objectFile);
 }
@@ -210,7 +211,7 @@ string objects::getObjectFileName()
 /******************************************************************
  *                          deleteObject                          *
  ******************************************************************/
-void objects::deleteObject()
+void Objects::deleteObject()
 {
    if(actualObstacle)
    {

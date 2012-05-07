@@ -25,11 +25,12 @@
 #include "../../engine/options.h"
 
 using namespace std;
+using namespace dntMapEditor;
 
 /*********************************************************************
  *                            Constructor                             *
  *********************************************************************/
-editor::editor()
+Editor::Editor()
 {
    int i;
    dirs dir;
@@ -86,10 +87,10 @@ editor::editor()
    extensions ext;
    ext.defineAllExtensions();
 
-   gui = new(guiIO);
+   gui = new dntMapEditor::GuiIO();
    hour = 12.0;
    gameSun = new sun(hour , OUTDOOR_FARVIEW, OUTDOOR_FARVIEW);
-   gameSky = new(sky);
+   gameSky = new sky();
    curScene.init();
    wTypes.init();
    curs.init();
@@ -114,7 +115,7 @@ editor::editor()
 /*********************************************************************
  *                            Destructor                             *
  *********************************************************************/
-editor::~editor()
+Editor::~Editor()
 {
    int i;
    if(mapOpened)
@@ -172,7 +173,7 @@ editor::~editor()
 /*********************************************************************
  *                  redmensionate Window to Screen                   *
  *********************************************************************/
-void editor::redmensionateWindow()
+void Editor::redmensionateWindow()
 {
    glViewport (0, 0, (GLsizei) screen->w, (GLsizei) screen->h);
    glMatrixMode (GL_PROJECTION);
@@ -187,7 +188,7 @@ void editor::redmensionateWindow()
 /*********************************************************************
  *                            Init Function                          *
  *********************************************************************/
-void editor::init()
+void Editor::init()
 {
    redmensionateWindow();
 
@@ -212,7 +213,7 @@ void editor::init()
 /*********************************************************************
  *                              Close Map                            *
  *********************************************************************/
-void editor::closeMap()
+void Editor::closeMap()
 {
    if(mapOpened)
    {
@@ -251,7 +252,7 @@ void editor::closeMap()
 /*********************************************************************
  *                               Open Map                            *
  *********************************************************************/
-void editor::openMap()
+void Editor::openMap()
 {
    if(mapOpened)
    {
@@ -264,12 +265,12 @@ void editor::openMap()
    if(map->open(gui->getFileName()))
    {
       mapOpened = true;
-      terrainEditor = new terrain(map);
-      portalEditor = new portal(map);
-      wallEditor = new wallController(map);
+      terrainEditor = new dntMapEditor::Terrain(map);
+      portalEditor = new dntMapEditor::Portal(map);
+      wallEditor = new dntMapEditor::WallController(map);
       tileWall = new dntMapEditor::TileWall(map);
-      objectEditor = new objects(map);
-      particleEditor = new particles(map);
+      objectEditor = new dntMapEditor::Objects(map);
+      particleEditor = new dntMapEditor::Particles(map);
       curTexture = ((mapTexture*)map->textures.getFirst())->index;
       curTextureName = ((mapTexture*)map->textures.getFirst())->name;
 
@@ -278,8 +279,8 @@ void editor::openMap()
       {
          delete(NPCs);
       }
-      NPCs = new (characterList);
-      npcController = new npcs(map, NPCs, features);
+      NPCs = new characterList();
+      npcController = new dntMapEditor::Npcs(map, NPCs, features);
       character* per;
 
       /* Load the NPCs */
@@ -340,7 +341,7 @@ void editor::openMap()
       map->getInitialPosition(x,z,a);
       gui->gameCamera.updateCamera(x,0,z,0);
 
-      /* Set tile editor with tiles, if any. */
+      /* Set tile Editor with tiles, if any. */
       tileWall->loadTilesFromMap();
 
       gui->showMessage("Map opened.");
@@ -355,7 +356,7 @@ void editor::openMap()
 /*********************************************************************
  *                               Save Map                            *
  *********************************************************************/
-void editor::saveMap()
+void Editor::saveMap()
 {
    string tmp;
    if(mapOpened)
@@ -412,7 +413,7 @@ void editor::saveMap()
       nextTexture();
       previousTexture();
 
-      /* Get back tiles to tile editor.*/
+      /* Get back tiles to tile Editor.*/
       tileWall->loadTilesFromMap();
    }
    else
@@ -424,7 +425,7 @@ void editor::saveMap()
 /*********************************************************************
  *                               New Map                             *
  *********************************************************************/
-void editor::newMap()
+void Editor::newMap()
 {
    if(mapOpened)
    {
@@ -567,16 +568,16 @@ void editor::newMap()
    }
 
    /* Create Editor Controller */
-   terrainEditor = new terrain(map);
-   portalEditor = new portal(map);
-   wallEditor = new wallController(map);
+   terrainEditor = new dntMapEditor::Terrain(map);
+   portalEditor = new dntMapEditor::Portal(map);
+   wallEditor = new dntMapEditor::WallController(map);
    tileWall = new dntMapEditor::TileWall(map);
-   objectEditor = new objects(map);
-   particleEditor = new particles(map);
+   objectEditor = new dntMapEditor::Objects(map);
+   particleEditor = new dntMapEditor::Particles(map);
    curTexture = index;
    curTextureName = ((mapTexture*)map->textures.getFirst())->name;
-   NPCs = new (characterList);
-   npcController = new npcs(map, NPCs, features);
+   NPCs = new characterList();
+   npcController = new dntMapEditor::Npcs(map, NPCs, features);
    particleSystem->setActualMap(map, NULL);
    gui->getNodeEditor()->setMap(map, NPCs);
 
@@ -599,7 +600,7 @@ void editor::newMap()
 /*********************************************************************
  *                           Verify Position                         *
  *********************************************************************/
-void editor::verifyPosition()
+void Editor::verifyPosition()
 {
    if(mapOpened)
    {
@@ -642,7 +643,7 @@ void editor::verifyPosition()
 /************************************************************************
  *                         Previous Texture                             *
  ************************************************************************/
-int editor::previousTexture()
+int Editor::previousTexture()
 {
    int aux=0;
    mapTexture* tex = (mapTexture*)map->textures.getFirst();
@@ -665,7 +666,7 @@ int editor::previousTexture()
 /************************************************************************
  *                             Next Texture                             *
  ************************************************************************/
-int editor::nextTexture()
+int Editor::nextTexture()
 {
    int aux=0;
    mapTexture* tex = (mapTexture*)map->textures.getFirst();
@@ -688,7 +689,7 @@ int editor::nextTexture()
 /************************************************************************
  *                            insertTexture                             *
  ************************************************************************/
-int editor::insertTexture(string textureFile)
+int Editor::insertTexture(string textureFile)
 {
    dirs dir;
    SDL_Surface* img;
@@ -710,7 +711,7 @@ int editor::insertTexture(string textureFile)
 /********************************************************************
  *                        RenderSceneryObjects                      *
  ********************************************************************/
-void editor::renderSceneryObjects()
+void Editor::renderSceneryObjects()
 {
    curScene.render(visibleMatrix, false, false, false, NULL, 0.0);
 }
@@ -718,7 +719,7 @@ void editor::renderSceneryObjects()
 /*********************************************************************
  *                                Draw                               *
  *********************************************************************/
-void editor::draw()
+void Editor::draw()
 {
    options opt;
    GLenum errorCode;
@@ -853,12 +854,12 @@ void editor::draw()
          else if(gui->getState() == GUI_IO_STATE_PARTICLES)
          {
             particleEditor->drawTemporary(visibleMatrix);
-            grassWindow* gr = gui->getGrassWindow();
+            dntMapEditor::GrassWindow* gr = gui->getGrassWindow();
             if(gr)
             {
                //gr->drawTemporary();
             }
-            waterWindow* wt = gui->getWaterWindow();
+            dntMapEditor::WaterWindow* wt = gui->getWaterWindow();
             if(wt)
             {
                wt->drawTemporary();
@@ -966,7 +967,7 @@ void editor::draw()
 /*********************************************************************
  *                         updateMouseFloorPos                       *
  *********************************************************************/
-void editor::updateMouseFloorPos()
+void Editor::updateMouseFloorPos()
 {
    GLfloat wx = mouseX,
            wy = Farso::SCREEN_Y - mouseY;
@@ -998,7 +999,7 @@ void editor::updateMouseFloorPos()
 /*********************************************************************
  *                              doEditorIO                           *
  *********************************************************************/
-void editor::doEditorIO()
+void Editor::doEditorIO()
 {
    GLfloat wx, wy, wz;
 
@@ -1068,7 +1069,7 @@ void editor::doEditorIO()
          #if 0
          if(sc)
          {
-            /* Set scene node editor to the new edited object */
+            /* Set scene node Editor to the new edited object */
             gui->getNodeEditor()->selectNode(sc);
             gui->getNodeEditor()->openWindow();
          }
@@ -1142,7 +1143,7 @@ void editor::doEditorIO()
 /*********************************************************************
  *                              verifyIO                             *
  *********************************************************************/
-void editor::verifyIO()
+void Editor::verifyIO()
 {
    int guiEvent;
    bool outdoor = false;
@@ -1215,7 +1216,7 @@ void editor::verifyIO()
 /*********************************************************************
  *                                 Run                               *
  *********************************************************************/
-void editor::run()
+void Editor::run()
 {
 
    quit = false;

@@ -26,6 +26,9 @@
 #include <SDL/SDL_opengl.h>
 #include <string>
 
+namespace dntMapEditor
+{
+
 #define TOOL_NONE                    0
 
 #define TOOL_TERRAIN_UP             11
@@ -87,7 +90,7 @@ std::string getStringFromUser(std::string title, std::string previous,
 int getOptionFromUser(std::string title, std::string message, std::string opt1,
       std::string opt2,GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
 
-
+}
 
 #endif
 

@@ -37,6 +37,13 @@
 
 #include <string>
 
+namespace dntMapEditor
+{
+
+class Editor;
+
+}
+
 /* Flag masks */
 #define SQUARE_CAN_WALK      1   /**< If a Square is walkable or not. */
 #define SQUARE_REFLECT       2   /**< If the square reflect or not */
@@ -555,10 +562,10 @@ class Map
        * \return -> pointer to the lake added */
       lake* addLake(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2);
 
-      /*! Set editor as friend, one time it MUST have acces to some
+      /*! Set dntMapEditor as friend, one time it MUST have acces to some
        * internal structures (that aren't needed to be exposed for 
        * other things) */
-      friend class editor;
+      friend class dntMapEditor::Editor;
 
    protected:
 

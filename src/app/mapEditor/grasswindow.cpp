@@ -21,10 +21,12 @@
 #include "grasswindow.h"
 #include "../../etc/dirs.h"
 
+using namespace dntMapEditor;
+
 /**********************************************************
  *                      constructor                       *
  **********************************************************/
-grassWindow::grassWindow(Farso::GuiInterface* actualGui)
+GrassWindow::GrassWindow(Farso::GuiInterface* actualGui)
 {
 #if 0
    actualWindow = NULL;
@@ -38,7 +40,7 @@ grassWindow::grassWindow(Farso::GuiInterface* actualGui)
 /**********************************************************
  *                       destructor                       *
  **********************************************************/
-grassWindow::~grassWindow()
+GrassWindow::~GrassWindow()
 {
 }
 

@@ -29,7 +29,10 @@
 #include "../../engine/character.h"
 #include "../../gui/farso.h"
 
-enum
+namespace dntMapEditor
+{
+
+enum NodeParentType
 {
    NODE_PARENT_OBJECT,
    NODE_PARENT_CHARACTER,
@@ -37,14 +40,14 @@ enum
 };
 
 /*! An editor to a scene node */
-class nodeEditor
+class NodeEditor
 {
    public:
       /*! Constructor */
-      nodeEditor(Farso::GuiInterface* g);
+      NodeEditor(Farso::GuiInterface* g);
 
       /*! Destructor */
-      ~nodeEditor();
+      ~NodeEditor();
 
       /*! Clear the nodeEditor (usually, after a map open) */
       void clear();
@@ -117,6 +120,8 @@ class nodeEditor
       Farso::TextBar* deltaText;    /**< Delta Value display */
       float deltaValue;      /**< Delta to move/rotate */
 };
+
+}
 
 #endif
 

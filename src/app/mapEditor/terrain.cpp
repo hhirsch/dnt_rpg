@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -19,6 +19,8 @@
 */
 
 #include "terrain.h"
+using namespace std;
+using namespace dntMapEditor;
 
 #define STATE_TERRAIN_OTHER            0
 #define STATE_TERRAIN_NIVELATE_STARTED 1
@@ -26,7 +28,7 @@
 /********************************************************************
  *                             Constructor                          *
  ********************************************************************/
-terrain::terrain(Map* acMap)
+Terrain::Terrain(Map* acMap)
 {
    actualMap = acMap;
    state = STATE_TERRAIN_OTHER;
@@ -35,7 +37,7 @@ terrain::terrain(Map* acMap)
 /********************************************************************
  *                             Destructor                           *
  ********************************************************************/
-terrain::~terrain()
+Terrain::~Terrain()
 {
    actualMap = NULL;
 }
@@ -43,7 +45,7 @@ terrain::~terrain()
 /********************************************************************
  *                           verifyAction                           *
  ********************************************************************/
-void terrain::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
+void Terrain::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
       GLfloat floorX, GLfloat floorZ, Uint8 mButton, int tool, 
       GLuint actualTexture)
 {
@@ -96,7 +98,7 @@ void terrain::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
 /********************************************************************
  *                              doUpDown                            *
  ********************************************************************/
-void terrain::doUpDown(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
+void Terrain::doUpDown(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
                        Uint8 mButton)
 {
    Square* saux = actualMap->relativeSquare(quadX,quadZ);
@@ -229,7 +231,7 @@ void terrain::doUpDown(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
 /********************************************************************
  *                            pointInSquare                         *
  ********************************************************************/
-bool terrain::pointInSquare(GLfloat x, GLfloat y, 
+bool Terrain::pointInSquare(GLfloat x, GLfloat y, 
                             GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2)
 {
    if( (x >= x1) && (x <= x2) )
@@ -245,7 +247,7 @@ bool terrain::pointInSquare(GLfloat x, GLfloat y,
 /********************************************************************
  *                            doNivelate                            *
  ********************************************************************/
-void terrain::doNivelate(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
+void Terrain::doNivelate(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
                          Uint8 mButton)
 {
    if(state == STATE_TERRAIN_OTHER)
@@ -338,7 +340,7 @@ void terrain::doNivelate(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
 /********************************************************************
  *                             doTexture                            *
  ********************************************************************/
-void terrain::doTexture(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
+void Terrain::doTexture(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
                         Uint8 mButton, GLuint actualTexture )
 {
    if(mButton & SDL_BUTTON(1))
@@ -355,7 +357,7 @@ void terrain::doTexture(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
 /********************************************************************
  *                             drawTemporary                        *
  ********************************************************************/
-void terrain::drawTemporary()
+void Terrain::drawTemporary()
 {
    Square* quad = actualMap->relativeSquare(quadX, quadZ); 
 

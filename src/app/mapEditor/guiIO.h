@@ -30,6 +30,9 @@
 #include "waterwindow.h"
 #include "nodeeditor.h"
 
+namespace dntMapEditor
+{
+
 /* Return Constants */
 #define GUI_IO_NOTHING              0
 #define GUI_IO_NEW_POSITION         1
@@ -58,13 +61,13 @@
 #define GUI_IO_STATE_SOUNDS    8 
 #define GUI_IO_STATE_TILE_WALL 9
 
-/**! The Super GUI IO Class, to control things on map Editor! */
-class guiIO 
+/**! The Super GUI I/O Class, to control things on map Editor! */
+class GuiIO 
 {
    public:
 
-      guiIO();
-      ~guiIO();
+      GuiIO();
+      ~GuiIO();
 
       /*! Gets State seted by GUI IO.
        * \return Internal State */
@@ -117,11 +120,11 @@ class guiIO
 
       /*! Get the grass Window
        * \return pointer to the grass window */
-      grassWindow* getGrassWindow();
+      dntMapEditor::GrassWindow* getGrassWindow();
       
       /*! Get the water Window
        * \return pointer to the water window */
-      waterWindow* getWaterWindow();
+      dntMapEditor::WaterWindow* getWaterWindow();
 
       /*! Get if is to invert the multitexture display
        * \return true or false */
@@ -131,13 +134,13 @@ class guiIO
 
       Farso::GuiInterface* getGui(){return(gui);};
 
-      nodeEditor* getNodeEditor(){return(nodeEdit);};
+      dntMapEditor::NodeEditor* getNodeEditor(){return(nodeEdit);};
 
    private:
       
-      grassWindow* grWindow;/**< the grass window */ 
-      waterWindow* wtWindow;/**< the waterfall window */
-      listWindow* ltWindow; /**< The List Window */
+      dntMapEditor::GrassWindow* grWindow;/**< the grass window */ 
+      dntMapEditor::WaterWindow* wtWindow;/**< the waterfall window */
+      dntMapEditor::ListWindow* ltWindow; /**< The List Window */
 
       mapFog* actualFog;    /**< The actual fog */
 
@@ -289,8 +292,10 @@ class guiIO
       void openFogWindow();               /**< Open Fog Window */
      
 
-      nodeEditor* nodeEdit;          /**< Scene node editor */
+      dntMapEditor::NodeEditor* nodeEdit;          /**< Scene node editor */
 };
+
+}
 
 #endif
 

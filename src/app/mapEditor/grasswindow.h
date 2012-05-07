@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -25,15 +25,18 @@
 #include "../../gui/farso.h"
 #include "../../particle/partcontroller.h"
 
+namespace dntMapEditor
+{
+
 /*! The Grass Controller Window */
-class grassWindow
+class GrassWindow
 {
    public:
       /*! Constructor
        * \param actualGui -> the actual GUI interface*/
-      grassWindow(Farso::GuiInterface* actualGui);
+      GrassWindow(Farso::GuiInterface* actualGui);
       /*! Destructor */
-      ~grassWindow();
+      ~GrassWindow();
 #if 0      
       /*! Set the current grass (and open the window, if it is closed)
        * \param gr -> grass to show params. */
@@ -77,6 +80,8 @@ class grassWindow
       oneTabButton* buttonDestroy;  /**< Destroy Button */
 #endif
 };
+
+}
 
 #endif
 

@@ -21,6 +21,7 @@
 #include "wall.h"
 #include <iostream>
 using namespace std;
+using namespace dntMapEditor;
 
 #define WALL_STATE_OTHER     0
 #define WALL_STATE_ADD_INIT  1
@@ -30,7 +31,7 @@ using namespace std;
 /******************************************************
  *                      Constructor                   *
  ******************************************************/
-wallController::wallController(Map* acMap)
+WallController::WallController(Map* acMap)
 {
    dirs dir;
    actualMap = acMap;
@@ -53,7 +54,7 @@ wallController::wallController(Map* acMap)
 /******************************************************
  *                      Destructor                    *
  ******************************************************/
-wallController::~wallController()
+WallController::~WallController()
 {
    glDeleteTextures(1,&markTexture);
    actualMap = NULL;
@@ -62,7 +63,7 @@ wallController::~wallController()
 /******************************************************
  *                        getWall                     *
  ******************************************************/
-wall* wallController::getWall(int radius)
+wall* WallController::getWall(int radius)
 {
    wall* aux;
    int wNum;
@@ -89,7 +90,7 @@ wall* wallController::getWall(int radius)
 /******************************************************
  *                      verifyAction                  *
  ******************************************************/
-void wallController::verifyAction(GLfloat mouseX, GLfloat mouseY, 
+void WallController::verifyAction(GLfloat mouseX, GLfloat mouseY, 
                                   GLfloat mouseZ, GLfloat floorX,
                                   GLfloat floorZ, Uint8 mButton, 
                                   Uint8* keys, int& tool, 
@@ -177,7 +178,7 @@ void wallController::verifyAction(GLfloat mouseX, GLfloat mouseY,
 /******************************************************
  *                      drawTemporary                 *
  ******************************************************/
-void wallController::drawTemporary(GLdouble modelView[16], 
+void WallController::drawTemporary(GLdouble modelView[16], 
                                    GLfloat camX, GLfloat camY, GLfloat camZ)
 {
    GLfloat scale = 1.0;
@@ -241,7 +242,7 @@ void wallController::drawTemporary(GLdouble modelView[16],
 /******************************************************
  *                doModifyVerHorTexture()             *
  ******************************************************/
-void wallController::doModifyVerHorTexture()
+void WallController::doModifyVerHorTexture()
 {
    GLuint dX=0, dY=0, dZ=0;
 
@@ -281,7 +282,7 @@ void wallController::doModifyVerHorTexture()
 /******************************************************
  *                    getSideTexture()                *
  ******************************************************/
-wallTexture* wallController::getSideTexture()
+wallTexture* WallController::getSideTexture()
 {
    if((mZ > actualWall->z1) && (mZ < actualWall->z2))
    {
@@ -317,7 +318,7 @@ wallTexture* wallController::getSideTexture()
 /******************************************************
  *                        doTexture()                 *
  ******************************************************/
-void wallController::doTexture()
+void WallController::doTexture()
 {
    state =  WALL_STATE_OTHER;
 
@@ -335,7 +336,7 @@ void wallController::doTexture()
 /******************************************************
  *                         doCut                      *
  ******************************************************/
-bool wallController::doCut()
+bool WallController::doCut()
 {
    state =  WALL_STATE_OTHER;
 
@@ -387,7 +388,7 @@ bool wallController::doCut()
 /******************************************************
  *                       doDestroy                    *
  ******************************************************/
-bool wallController::doDestroy()
+bool WallController::doDestroy()
 {
    state =  WALL_STATE_OTHER;
 
@@ -411,7 +412,7 @@ bool wallController::doDestroy()
 /******************************************************
  *                        doWall()                    *
  ******************************************************/
-void wallController::doWall()
+void WallController::doWall()
 {
    wall* nearWall = getWall(10);
 

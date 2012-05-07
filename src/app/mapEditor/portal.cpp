@@ -24,6 +24,7 @@
 
 #include <iostream>
 using namespace std;
+using namespace dntMapEditor;
 
 #define PORTAL_STATE_OTHER     0
 #define PORTAL_STATE_ADD_INIT  1
@@ -31,13 +32,13 @@ using namespace std;
 /******************************************************
  *                      Constructor                   *
  ******************************************************/
-portal::portal(Map* acMap)
+Portal::Portal(Map* acMap)
 {
    actualMap = acMap;
    state = PORTAL_STATE_OTHER;
    fileDoor = "";
-   portalList = new(areaList);
-   /* Start the portal List */
+   portalList = new(AreaList);
+   /* Start the Portal List */
    Square* s;
    int x, z;
    for(x=0; x<actualMap->getSizeX(); x++)
@@ -61,7 +62,7 @@ portal::portal(Map* acMap)
 /******************************************************
  *                       Destructor                   *
  ******************************************************/
-portal::~portal()
+Portal::~Portal()
 {
    actualMap = NULL;
    delete(portalList);
@@ -70,7 +71,7 @@ portal::~portal()
 /******************************************************
  *                        inner                       *
  ******************************************************/
-bool portal::inner(GLfloat ax, GLfloat az, GLfloat bx1, GLfloat bz1, 
+bool Portal::inner(GLfloat ax, GLfloat az, GLfloat bx1, GLfloat bz1, 
                                           GLfloat bx2, GLfloat bz2)
 {
    return( (ax >= bx1 ) && (ax <= bx2) && (az >= bz1) && (az <=bz2) );
@@ -79,7 +80,7 @@ bool portal::inner(GLfloat ax, GLfloat az, GLfloat bx1, GLfloat bz1,
 /******************************************************
  *                     defineDoor                     *
  ******************************************************/
-void portal::defineDoor(object* newDoor, string fileName)
+void Portal::defineDoor(object* newDoor, string fileName)
 {
    if(newDoor != NULL)
    {
@@ -91,7 +92,7 @@ void portal::defineDoor(object* newDoor, string fileName)
 /******************************************************
  *                       getDoor                      *
  ******************************************************/
-object* portal::getDoor()
+object* Portal::getDoor()
 {
    return(actualDoor);
 }
@@ -99,7 +100,7 @@ object* portal::getDoor()
 /******************************************************
  *                       getDoor                      *
  ******************************************************/
-string portal::getDoorFileName()
+string Portal::getDoorFileName()
 {
    return(fileDoor);
 }
@@ -107,7 +108,7 @@ string portal::getDoorFileName()
 /******************************************************
  *                    deleteDoor                      *
  ******************************************************/
-void portal::deleteDoor()
+void Portal::deleteDoor()
 {
    if(actualDoor)
    {
@@ -120,7 +121,7 @@ void portal::deleteDoor()
 /******************************************************
  *                       VerifyAction                 *
  ******************************************************/
-void portal::verifyAction(GLfloat mouseX, GLfloat mouseY, 
+void Portal::verifyAction(GLfloat mouseX, GLfloat mouseY, 
                           GLfloat mouseZ, Uint8 mButton, int tool,
                           GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
@@ -292,7 +293,7 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
 /******************************************************
  *                       drawTemporary                *
  ******************************************************/
-void portal::drawTemporary()
+void Portal::drawTemporary()
 {
    glPushMatrix();
    int delta = -2;
@@ -349,12 +350,12 @@ void portal::drawTemporary()
 /******************************************************
  *                       addPortal                    *
  ******************************************************/
-void portal::addPortal(int qx, int qz, string where)
+void Portal::addPortal(int qx, int qz, string where)
 {
    Square* s = actualMap->relativeSquare(qx,qz);
    if(s)
    {
-      /* Set portal square */
+      /* Set Portal square */
       if(initmX > mX)
       {
          GLfloat tmp = initmX;
@@ -404,14 +405,14 @@ void portal::addPortal(int qx, int qz, string where)
 /******************************************************
  *                      doAddPortal                   *
  ******************************************************/
-void portal::doAddPortal()
+void Portal::doAddPortal()
 {
    int qx = (int) (mX / actualMap->squareSize());
    int qz = (int) (mZ / actualMap->squareSize());
 
    if( (state == PORTAL_STATE_OTHER) && (mB & SDL_BUTTON(1)) )
    {
-      /* Init portal Select Area */
+      /* Init Portal Select Area */
       state = PORTAL_STATE_ADD_INIT;
       initmX = mX;
       initmZ = mZ;
@@ -427,9 +428,9 @@ void portal::doAddPortal()
 /******************************************************
  *                       doTagPortal                  *
  ******************************************************/
-void portal::doTagPortal(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
+void Portal::doTagPortal(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
-   area* ar = portalList->getArea(mX, mZ);
+   Area* ar = portalList->getArea(mX, mZ);
 
    if( (ar != NULL) && (mB & SDL_BUTTON(1)) )
    {

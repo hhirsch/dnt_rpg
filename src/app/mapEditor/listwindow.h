@@ -24,6 +24,9 @@
 #include "../../gui/farso.h"
 #include "../../etc/list.h"
 
+namespace dntMapEditor
+{
+
 /* NPCs */
 #define STATE_CHARACTERS   1
 
@@ -55,7 +58,7 @@
 #define STATE_OUTDOOR_TEXTURE  51
 
 /*! Tuple (title, file) on the list */
-class tuple: public dntListElement
+class Tuple: public dntListElement
 {
    public:
       std::string title;            /**< The Title of the element */
@@ -63,13 +66,13 @@ class tuple: public dntListElement
 };
 
 /*! List of tuples */
-class tupleList: public dntList
+class TupleList: public dntList
 {
    public:
       /*! Constructor */
-      tupleList();
+      TupleList();
       /*! Destructor */
-      ~tupleList();
+      ~TupleList();
 
    protected:
       /*! Free tuple memory */
@@ -77,14 +80,14 @@ class tupleList: public dntList
 };
 
 /*! The list Window, for selecting objects */
-class listWindow
+class ListWindow
 {
    public:
       /*! Constructor
        * \param gui -> pointer to the interface used */
-      listWindow(Farso::GuiInterface* gui);
+      ListWindow(Farso::GuiInterface* gui);
       /*! Destructor */
-      ~listWindow();
+      ~ListWindow();
 
       /*! Set State
        * \param st -> state value */
@@ -122,10 +125,12 @@ class listWindow
       Farso::Window* intWindow;         /**< Pointer to the window */
       Farso::GuiInterface* intGui;      /**< Pointer to the interface */
       Farso::ListText* list;            /**< Pointer to the listText */
-      tupleList tuples;          /**< Current Tuples */
+      TupleList tuples;          /**< Current Tuples */
       std::string selFileName;   /**< Last Selected fileName */
 
 };
+
+}
 
 #endif
 

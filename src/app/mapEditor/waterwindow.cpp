@@ -23,11 +23,12 @@
 
 #include <iostream>
 using namespace std;
+using namespace dntMapEditor;
 
 /***********************************************************************
  *                            Constructor                              *
  ***********************************************************************/
-waterWindow::waterWindow(Farso::GuiInterface* actualGui)
+WaterWindow::WaterWindow(Farso::GuiInterface* actualGui)
 {
    gui = actualGui;
    activeWater = NULL;
@@ -38,14 +39,14 @@ waterWindow::waterWindow(Farso::GuiInterface* actualGui)
 /***********************************************************************
  *                             Destructor                              *
  ***********************************************************************/
-waterWindow::~waterWindow()
+WaterWindow::~WaterWindow()
 {
 }
 
 /***********************************************************************
  *                              setWater                               *
  ***********************************************************************/
-void waterWindow::setWater(particleSystem* water)
+void WaterWindow::setWater(particleSystem* water)
 {
    activeWater = water;
    if(!intWindow)
@@ -57,7 +58,7 @@ void waterWindow::setWater(particleSystem* water)
 /***********************************************************************
  *                              setPlane                               *
  ***********************************************************************/
-void waterWindow::setPlane(interPlane* pl)
+void WaterWindow::setPlane(interPlane* pl)
 {
    activePlane = pl;
    if(!intWindow)
@@ -69,7 +70,7 @@ void waterWindow::setPlane(interPlane* pl)
 /***********************************************************************
  *                              setPlane                               *
  ***********************************************************************/
-void waterWindow::setPartSystem(partController* pS) 
+void WaterWindow::setPartSystem(partController* pS) 
 {
    pSystem = pS;
 }
@@ -77,7 +78,7 @@ void waterWindow::setPartSystem(partController* pS)
 /***********************************************************************
  *                             openWindow                              *
  ***********************************************************************/
-void waterWindow::openWindow()
+void WaterWindow::openWindow()
 {
    dirs dir;
    Farso::Font fnt;
@@ -180,7 +181,7 @@ void waterWindow::openWindow()
 /***********************************************************************
  *                              eventGot                               *
  ***********************************************************************/
-bool waterWindow::eventGot(int type, Farso::GuiObject* object)
+bool WaterWindow::eventGot(int type, Farso::GuiObject* object)
 {
    GLfloat wX = 0, wY = 0, wZ = 0;
 
@@ -511,7 +512,7 @@ bool waterWindow::eventGot(int type, Farso::GuiObject* object)
 /***********************************************************************
  *                           defineValues                              *
  ***********************************************************************/
-void waterWindow::defineValues()
+void WaterWindow::defineValues()
 {
    char tmp[8];
    if(activePlane)
@@ -527,7 +528,7 @@ void waterWindow::defineValues()
 /***********************************************************************
  *                           drawTemporary                             *
  ***********************************************************************/
-void waterWindow::drawTemporary()
+void WaterWindow::drawTemporary()
 {
    if(activePlane != NULL)
    {

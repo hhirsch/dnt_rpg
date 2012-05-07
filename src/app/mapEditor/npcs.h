@@ -28,18 +28,20 @@
 #include "../../classes/feats.h"
 #include "message.h"
 
+namespace dntMapEditor
+{
 
 /*! The Npcs MapEditor Controller Class */
-class npcs
+class Npcs
 {
    public:
       /*! Constructor
        * \param acMap -> pointer to opened map
        * \param NPCsList -> pointer to the list of NPCs 
        * \param lFeats -> pointer to features descriptions list*/
-      npcs(Map* acMap, characterList* NPCsList, featsList* lFeats);
+      Npcs(Map* acMap, characterList* NPCsList, featsList* lFeats);
       /*! Destructor */
-      ~npcs();
+      ~Npcs();
 
       /*! Verify and do action by mouse and state 
        * \param mouseX -> mouse X coordinate
@@ -84,6 +86,8 @@ class npcs
       void insertNpc(GLfloat xReal, GLfloat zReal,
                      character* npc, int qx, int qz);
 };
+
+}
 
 #endif
 

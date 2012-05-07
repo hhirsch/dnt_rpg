@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -23,6 +23,7 @@
 
 #include <iostream>
 using namespace std;
+using namespace dntMapEditor;
 
 #define STATE_PLANES     800
 #define STATE_GRASS_INIT 801
@@ -31,7 +32,7 @@ using namespace std;
 /*****************************************************************
  *                          Constructor                          *
  *****************************************************************/
-particles::particles(Map* acMap)
+Particles::Particles(Map* acMap)
 {
    actualMap = acMap;
    actualParticle = NULL;
@@ -43,7 +44,7 @@ particles::particles(Map* acMap)
 /*****************************************************************
  *                           Destructor                          *
  *****************************************************************/
-particles::~particles()
+Particles::~Particles()
 {
    state = -1;
    actualMap = NULL;
@@ -55,7 +56,7 @@ particles::~particles()
 /*****************************************************************
  *                          deleteParticle                       *
  *****************************************************************/
-void particles::deleteParticle()
+void Particles::deleteParticle()
 {
    if(actualParticle)
    {
@@ -67,13 +68,13 @@ void particles::deleteParticle()
 /*****************************************************************
  *                          verifyAction                         *
  *****************************************************************/
-void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
-                             Uint8 mButton, Uint8* keys, guiIO* gui, 
+void Particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
+                             Uint8 mButton, Uint8* keys, GuiIO* gui, 
                              partController* pS, GLdouble proj[16],
                              GLdouble modl[16], GLint viewPort[4],
                              string selectedText,
-                             grassWindow* grWindow, 
-                             waterWindow* wtWindow,
+                             GrassWindow* grWindow, 
+                             WaterWindow* wtWindow,
                              Map* actualMap)
 {
    int tool = gui->getTool();
@@ -210,7 +211,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       state = TOOL_PARTICLE_DEFAULT; 
       particleType = DNT_PARTICLE_SYSTEM_TYPE_DEFAULT;
       string fileToOpen = selectedText;
-      if(fileToOpen != "../data/particles/")
+      if(fileToOpen != "../data/Particles/")
       {
          height = 0;
          actualParticle = new particleSystem();
@@ -270,7 +271,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
 /*****************************************************************
  *                          drawTemporary                        *
  *****************************************************************/
-void particles::drawTemporary(GLfloat** matriz)
+void Particles::drawTemporary(GLfloat** matriz)
 {
    if(state == STATE_GRASS_INIT)
    {

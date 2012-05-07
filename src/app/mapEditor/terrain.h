@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -24,15 +24,17 @@
 #include "../../map/map.h"
 #include "message.h"
 
+namespace dntMapEditor
+{
 
-class terrain
+class Terrain
 {
    public:
       /*! Constructor
        * \param acMap -> pointer to opened map */
-      terrain(Map* acMap);
+      Terrain(Map* acMap);
       /*! Destructor */
-      ~terrain();
+      ~Terrain();
 
       /*! Verify and do action by mouse and state 
        * \param mouseX -> mouse X coordinate
@@ -82,6 +84,7 @@ class terrain
                             GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2);
 };
 
+}
 
 #endif
 

@@ -19,12 +19,12 @@
 */
 
 #include "nodeeditor.h"
-
+using namespace dntMapEditor;
 
 /***********************************************************************
  *                            Constructor                              *
  ***********************************************************************/
-nodeEditor::nodeEditor(Farso::GuiInterface* g)
+NodeEditor::NodeEditor(Farso::GuiInterface* g)
 {
    gui = g;
    nodeWindow = NULL;
@@ -36,14 +36,14 @@ nodeEditor::nodeEditor(Farso::GuiInterface* g)
 /***********************************************************************
  *                              Destructor                             *
  ***********************************************************************/
-nodeEditor::~nodeEditor()
+NodeEditor::~NodeEditor()
 {
 }
 
 /***********************************************************************
  *                               clear                                 *
  ***********************************************************************/
-void nodeEditor::clear()
+void NodeEditor::clear()
 {
    if(nodeWindow)
    {
@@ -60,7 +60,7 @@ void nodeEditor::clear()
 /***********************************************************************
  *                              setMap                                 *
  ***********************************************************************/
-void nodeEditor::setMap(Map* m, characterList* npcList)
+void NodeEditor::setMap(Map* m, characterList* npcList)
 {
    clear();
    curMap = m;
@@ -70,7 +70,7 @@ void nodeEditor::setMap(Map* m, characterList* npcList)
 /***********************************************************************
  *                             verifyAction                            *
  ***********************************************************************/
-void nodeEditor::verifyAction(Uint8* keys, GLfloat mouseX, GLfloat mouseY, 
+void NodeEditor::verifyAction(Uint8* keys, GLfloat mouseX, GLfloat mouseY, 
             GLfloat mouseZ, Uint8 mButton, int mouseXw, int mouseYw,
             GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
@@ -95,7 +95,7 @@ void nodeEditor::verifyAction(Uint8* keys, GLfloat mouseX, GLfloat mouseY,
 /***********************************************************************
  *                            deleteCurNode                            *
  ***********************************************************************/
-void nodeEditor::deleteCurNode()
+void NodeEditor::deleteCurNode()
 {
    if(curNode)
    {
@@ -116,7 +116,7 @@ void nodeEditor::deleteCurNode()
 /***********************************************************************
  *                                flush                                *
  ***********************************************************************/
-void nodeEditor::flush()
+void NodeEditor::flush()
 {
    if( (curNode) && (curMap) )
    {
@@ -142,7 +142,7 @@ void nodeEditor::flush()
 /***********************************************************************
  *                              selectNode                             *
  ***********************************************************************/
-void nodeEditor::selectNode(sceneNode* scNode)
+void NodeEditor::selectNode(sceneNode* scNode)
 {
    /* Flush changes not applied, if needed */
    flush();
@@ -186,7 +186,7 @@ void nodeEditor::selectNode(sceneNode* scNode)
 /***********************************************************************
  *                               eventGot                              *
  ***********************************************************************/
-bool nodeEditor::eventGot(int eventInfo, Farso::GuiObject* obj)
+bool NodeEditor::eventGot(int eventInfo, Farso::GuiObject* obj)
 {
    float delta=deltaValue;
 
@@ -382,7 +382,7 @@ bool nodeEditor::eventGot(int eventInfo, Farso::GuiObject* obj)
 /***********************************************************************
  *                              openWindow                             *
  ***********************************************************************/
-void nodeEditor::openWindow()
+void NodeEditor::openWindow()
 {
    char dl[16];
    dirs dir;
@@ -449,7 +449,7 @@ void nodeEditor::openWindow()
 /***********************************************************************
  *                             drawTemporary                           *
  ***********************************************************************/
-void nodeEditor::drawTemporary()
+void NodeEditor::drawTemporary()
 {
    if(curNode)
    {

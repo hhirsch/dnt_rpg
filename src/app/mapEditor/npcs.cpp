@@ -26,11 +26,12 @@
 #define NPCS_STATE_ADD     1
 
 using namespace std;
+using namespace dntMapEditor;
 
 /******************************************************
  *                      Constructor                   *
  ******************************************************/
-npcs::npcs(Map* acMap, characterList* NPCsList, featsList* lFeats)
+Npcs::Npcs(Map* acMap, characterList* NPCsList, featsList* lFeats)
 {
    actualMap = acMap;
    state = NPCS_STATE_NONE;
@@ -44,7 +45,7 @@ npcs::npcs(Map* acMap, characterList* NPCsList, featsList* lFeats)
 /******************************************************
  *                       Destructor                   *
  ******************************************************/
-npcs::~npcs()
+Npcs::~Npcs()
 {
    actualMap = NULL;
 }
@@ -52,7 +53,7 @@ npcs::~npcs()
 /******************************************************
  *                      verifyAction                  *
  ******************************************************/
-void npcs::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
+void Npcs::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
                            Uint8 mButton, int mouseXw, int mouseYw,
                            int tool, GLdouble proj[16], 
                            GLdouble modl[16], GLint viewPort[4])
@@ -114,14 +115,14 @@ void npcs::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
 /******************************************************************
  *                         drawTemporary                          *
  ******************************************************************/
-void npcs::drawTemporary()
+void Npcs::drawTemporary()
 {
 }
 
 /******************************************************************
  *                           insertNpc                            *
  ******************************************************************/
-void npcs::insertNpc(GLfloat xReal, GLfloat zReal,
+void Npcs::insertNpc(GLfloat xReal, GLfloat zReal,
                      character* npc, int qx, int qz)
 {
    character* per;
@@ -133,7 +134,7 @@ void npcs::insertNpc(GLfloat xReal, GLfloat zReal,
 /******************************************************************
  *                        defineActualNpc                         *
  ******************************************************************/
-void npcs::defineActualNpc(string fileName)
+void Npcs::defineActualNpc(string fileName)
 {
    if(npcFile != fileName)
    {
@@ -147,7 +148,7 @@ void npcs::defineActualNpc(string fileName)
 /******************************************************************
  *                            deleteNpcs                          *
  ******************************************************************/
-void npcs::deleteNpc()
+void Npcs::deleteNpc()
 {
    if(actualNpc)
    {
@@ -160,7 +161,7 @@ void npcs::deleteNpc()
 /******************************************************************
  *                       getObjectFileName                        *
  ******************************************************************/
-string npcs::getNpcFileName()
+string Npcs::getNpcFileName()
 {
    return(npcFile);
 }
@@ -168,7 +169,7 @@ string npcs::getNpcFileName()
 /******************************************************************
  *                             saveFile                           *
  ******************************************************************/
-bool npcs::saveFile(string fileName)
+bool Npcs::saveFile(string fileName)
 {
    FILE* arq;
    string saveName;

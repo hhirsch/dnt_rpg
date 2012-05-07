@@ -29,6 +29,9 @@
 
 using namespace std;
 
+namespace dntMapEditor
+{
+
 /******************************************************************
  *                        messageForTool                          *
  ******************************************************************/
@@ -300,5 +303,7 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
    delete(gui);
    
    return(ret);
+}
+
 }
 

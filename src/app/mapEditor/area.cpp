@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -20,11 +20,12 @@
 
 #include "area.h"
 using namespace std;
+using namespace dntMapEditor;
 
 /*********************************************************************
  *                           Constructor                             *
  *********************************************************************/
-areaList::areaList()
+AreaList::AreaList()
 {
    first = NULL;
    total = 0;
@@ -33,10 +34,10 @@ areaList::areaList()
 /*********************************************************************
  *                           Destructor                              *
  *********************************************************************/
-areaList::~areaList()
+AreaList::~AreaList()
 {
    int aux;
-   area* a;
+   Area* a;
    for(aux = 0 ; aux < total; aux++)
    {
       a = first;
@@ -50,10 +51,10 @@ areaList::~areaList()
 /*********************************************************************
  *                              getArea                              *
  *********************************************************************/
-area* areaList::getArea(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2)
+Area* AreaList::getArea(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2)
 {
    int aux;
-   area* a = first;
+   Area* a = first;
    for(aux = 0 ; aux < total; aux++)
    {
       if( (a->x1 == x1) && (a->y1 == y1) && (a->x2 == x2) && (a->y2 == y2) )
@@ -65,10 +66,10 @@ area* areaList::getArea(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2)
    return(NULL);
 }
 
-area* areaList::getArea(GLfloat x, GLfloat y)
+Area* AreaList::getArea(GLfloat x, GLfloat y)
 {
    int aux;
-   area* a = first;
+   Area* a = first;
    for(aux = 0 ; aux < total; aux++)
    {
       if( (a->x1 <= x) && (a->y1 <= y) && (a->x2 >= x) && (a->y2 >= y) )
@@ -84,13 +85,13 @@ area* areaList::getArea(GLfloat x, GLfloat y)
 /*********************************************************************
  *                             addArea                               *
  *********************************************************************/
-void areaList::addArea(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2,
+void AreaList::addArea(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2,
                        string whereToGo)
 {
    /* Only insert if not inserted already */
    if(getArea(x1, y1, x2, y2) == NULL)
    {
-      area* a = new(area);
+      Area* a = new(Area);
       a->x1 = x1;
       a->y1 = y1;
       a->x2 = x2;
@@ -109,10 +110,10 @@ void areaList::addArea(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2,
 /*********************************************************************
  *                             drawAll                               *
  *********************************************************************/
-void areaList::drawAll()
+void AreaList::drawAll()
 {
    int aux;
-   area* a = first;
+   Area* a = first;
    //Draw
    glDisable(GL_LIGHTING);
    glColor3f(0.5, 0.5, 0.1);

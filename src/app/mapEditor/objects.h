@@ -27,15 +27,18 @@
 #include "../../classes/object.h"
 #include "message.h"
 
+namespace dntMapEditor
+{
+
 /*! The objects Map Controller Class */
-class objects
+class Objects
 {
    public:
       /*! Constructor
        * \param acMap -> poiter to opened map*/
-      objects(Map* acMap);
+      Objects(Map* acMap);
       /*! Destructor */
-      ~objects();
+      ~Objects();
 
       /*! Verify and do action by mouse and state 
        * \param keys -> current keyboard state
@@ -84,6 +87,8 @@ class objects
       void insertObject(Map* acMap, object* obj, int qx, int qz);
 
 };
+
+}
 
 #endif
 

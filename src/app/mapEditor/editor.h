@@ -52,14 +52,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+namespace dntMapEditor
+{
+
 /*! The Editor Class */
-class editor
+class Editor
 {
    public:
       /*! Editor Constructor */
-      editor();
+      Editor();
       /*! Editor Destructor */
-      ~editor();
+      ~Editor();
       /*! Run Editor Main Loop */
       void run();
    private:
@@ -121,16 +124,17 @@ class editor
 
       shaders glslShaders;           /* DNT shaders */
       
-      guiIO* gui;                    /**< The Editor's GUI */
-      terrain* terrainEditor;        /**< The terrain Editor Module */
-      portal* portalEditor;          /**< The portal Editor Module */
-      wallController* wallEditor;    /**< The wall Editor Module */
+      dntMapEditor::GuiIO* gui;             /**< The Editor's GUI */
+      dntMapEditor::Terrain* terrainEditor; /**< The terrain Editor Module */
+      dntMapEditor::Portal* portalEditor;   /**< The portal Editor Module */
+      dntMapEditor::WallController* wallEditor; /**< The wall Editor Module */
       dntMapEditor::TileWall* tileWall; /**< The tile wall controller */
-      objects* objectEditor;         /**< The Object Editor Module */
-      particles* particleEditor;     /**< The Particle Editor Module */
-      scene curScene;                /**< The Scene */
-      npcs* npcController;           /**< The Npcs Controller */
+      dntMapEditor::Objects* objectEditor; /**< The Object Editor Module */
+      dntMapEditor::Particles* particleEditor;/**< The Particle Editor Module */
+      dntMapEditor::Npcs* npcController;      /**< The Npcs Controller */
+      
       weaponTypes wTypes;            /**< The list of types */
+      scene curScene;                /**< The Scene */
 
       GLuint curTexture;             /**< Current Texture */
       std::string curTextureName;    /**< Current Texture Name */
@@ -140,6 +144,8 @@ class editor
       GLint viewPort[4];             /**< View Port Vector */
       GLfloat** visibleMatrix;       /**< Visible Matrix */
 };
+
+}
 
 #endif
 

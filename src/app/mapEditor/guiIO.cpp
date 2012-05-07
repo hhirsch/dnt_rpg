@@ -24,11 +24,12 @@
 #include "../../gui/farsoopts.h"
 
 using namespace std;
+using namespace dntMapEditor;
 
 /****************************************************************
  *                         Constructor                          *
  ****************************************************************/
-guiIO::guiIO()
+GuiIO::GuiIO()
 {
    gui = new Farso::GuiInterface("");
 
@@ -48,9 +49,9 @@ guiIO::guiIO()
    gameCamera.defineMinZoom(2*ZOOM_MIN);
 
    /* Open Windows */
-   grWindow = new grassWindow(gui);
-   wtWindow = new waterWindow(gui);
-   ltWindow = new listWindow(gui);
+   grWindow = new dntMapEditor::GrassWindow(gui);
+   wtWindow = new dntMapEditor::WaterWindow(gui);
+   ltWindow = new dntMapEditor::ListWindow(gui);
    ltWindow->setState(0);
    openActWindow();
    openNavWindow();
@@ -64,13 +65,13 @@ guiIO::guiIO()
    openObjectWindow();
    openMainWindow();
 
-   nodeEdit = new nodeEditor(gui);
+   nodeEdit = new dntMapEditor::NodeEditor(gui);
 }
 
 /****************************************************************
  *                          Destructor                          *
  ****************************************************************/
-guiIO::~guiIO()
+GuiIO::~GuiIO()
 {
    delete(gui);
    delete(nodeEdit);
@@ -82,7 +83,7 @@ guiIO::~guiIO()
 /****************************************************************
  *                        getGrassWindow                        *
  ****************************************************************/
-grassWindow* guiIO::getGrassWindow()
+dntMapEditor::GrassWindow* GuiIO::getGrassWindow()
 {
    return(grWindow);
 }
@@ -90,7 +91,7 @@ grassWindow* guiIO::getGrassWindow()
 /****************************************************************
  *                        getWaterWindow                        *
  ****************************************************************/
-waterWindow* guiIO::getWaterWindow()
+dntMapEditor::WaterWindow* GuiIO::getWaterWindow()
 {
    return(wtWindow);
 }
@@ -98,7 +99,7 @@ waterWindow* guiIO::getWaterWindow()
 /****************************************************************
  *                      Open File  Window                       *
  ****************************************************************/
-void guiIO::openFileWindow(bool load)
+void GuiIO::openFileWindow(bool load)
 {
    dirs dir;
    if(fileWindow)
@@ -125,7 +126,7 @@ void guiIO::openFileWindow(bool load)
 /****************************************************************
  *                       Open Act  Window                       *
  ****************************************************************/
-void guiIO::openActWindow()
+void GuiIO::openActWindow()
 {
    actWindow = gui->insertWindow(0,0,185,63,"Main Actions");
    newButton = actWindow->getObjectsList()->insertButton(10,27,50,45,"New",1);
@@ -143,7 +144,7 @@ void guiIO::openActWindow()
 /****************************************************************
  *                       Open Texture Window                    *
  ****************************************************************/
-void guiIO::openTextureWindow()
+void GuiIO::openTextureWindow()
 {
    textureWindow = gui->insertWindow(0,163,185,244,"Texture");
    texturePreviousButton = textureWindow->getObjectsList()->insertButton(7,56,
@@ -163,7 +164,7 @@ void guiIO::openTextureWindow()
 /****************************************************************
  *                       Open Object Window                     *
  ****************************************************************/
-void guiIO::openObjectWindow()
+void GuiIO::openObjectWindow()
 {
    dirs dir;
    objectWindow = gui->insertWindow(0,244,185,599-248,"Objects");
@@ -201,7 +202,7 @@ void guiIO::openObjectWindow()
 /****************************************************************
  *                       Open Nav Window                        *
  ****************************************************************/
-void guiIO::openNavWindow()
+void GuiIO::openNavWindow()
 {
    dirs dir;
    navWindow = gui->insertWindow(Farso::SCREEN_X-69, Farso::SCREEN_Y-76,
@@ -228,7 +229,7 @@ void guiIO::openNavWindow()
 /****************************************************************
  *                       Open Message Window                    *
  ****************************************************************/
-void guiIO::openMessageWindow()
+void GuiIO::openMessageWindow()
 {
    Farso::Options fopt;
    int width = Farso::SCREEN_X - 50 - 437;
@@ -246,7 +247,7 @@ void guiIO::openMessageWindow()
 /****************************************************************
  *                    updateMouseWorldCoordinates               *
  ****************************************************************/
-void guiIO::updateMouseWorldCoordinates(float mX, float mZ)
+void GuiIO::updateMouseWorldCoordinates(float mX, float mZ)
 {
    char buf[64];
 
@@ -259,7 +260,7 @@ void guiIO::updateMouseWorldCoordinates(float mX, float mZ)
 /****************************************************************
  *                       Open Main Window                       *
  ****************************************************************/
-void guiIO::openMainWindow()
+void GuiIO::openMainWindow()
 {
    mainWindow = gui->insertWindow(0,63,185,163,"Main");
    terrainButton = mainWindow->getObjectsList()->insertButton(5,17,59,35,
@@ -295,7 +296,7 @@ void guiIO::openMainWindow()
 /****************************************************************
  *                       Open Wall Window                       *
  ****************************************************************/
-void guiIO::openWallWindow()
+void GuiIO::openWallWindow()
 {
    dirs dir;
    wallWindow = gui->insertWindow(0,599-124,153,599-62,"Wall");
@@ -331,7 +332,7 @@ void guiIO::openWallWindow()
 /****************************************************************
  *                     Open Tile Wall Window                    *
  ****************************************************************/
-void guiIO::openTileWallWindow()
+void GuiIO::openTileWallWindow()
 {
    dirs dir;
    tileWallWindow = gui->insertWindow(0,599,153,661,"TileWall");
@@ -352,7 +353,7 @@ void guiIO::openTileWallWindow()
 /****************************************************************
  *                      Open Sound Window                       *
  ****************************************************************/
-void guiIO::openSoundWindow()
+void GuiIO::openSoundWindow()
 {
    dirs dir;
    soundWindow = gui->insertWindow(0,599,153,661,"Sound");
@@ -373,7 +374,7 @@ void guiIO::openSoundWindow()
 /****************************************************************
  *                       Open Portal Window                     *
  ****************************************************************/
-void guiIO::openPortalWindow()
+void GuiIO::openPortalWindow()
 {
    dirs dir;
    portalWindow = gui->insertWindow(0,599-186,153,599-124,"Portal");
@@ -393,7 +394,7 @@ void guiIO::openPortalWindow()
 /****************************************************************
  *                       Open Terrain Window                    *
  ****************************************************************/
-void guiIO::openTerrainWindow()
+void GuiIO::openTerrainWindow()
 {
    dirs dir;
    terrainWindow = gui->insertWindow(0,599-62,153,599,"Terrain");
@@ -414,7 +415,7 @@ void guiIO::openTerrainWindow()
 /****************************************************************
  *                       Open Particle Window                   *
  ****************************************************************/
-void guiIO::openParticleWindow()
+void GuiIO::openParticleWindow()
 {
    dirs dir;
    particleWindow = gui->insertWindow(0,599-248,153,599-186,"Particle");
@@ -441,7 +442,7 @@ void guiIO::openParticleWindow()
 /****************************************************************
  *                          Open Fog Window                     *
  ****************************************************************/
-void guiIO::openFogWindow()
+void GuiIO::openFogWindow()
 {
  if(actualFog != NULL)
  {
@@ -482,7 +483,7 @@ void guiIO::openFogWindow()
 /****************************************************************
  *                            setFog                            *
  ****************************************************************/
-void guiIO::setFog(mapFog* fog)
+void GuiIO::setFog(mapFog* fog)
 {
    actualFog = fog;
    if(fogWindow)
@@ -508,7 +509,7 @@ void guiIO::setFog(mapFog* fog)
 /****************************************************************
  *                          applyFog                            *
  ****************************************************************/
-void guiIO::applyFog()
+void GuiIO::applyFog()
 {
    if(actualFog)
    {
@@ -529,7 +530,7 @@ void guiIO::applyFog()
 /****************************************************************
  *                           getState                           *
  ****************************************************************/
-int guiIO::getState()
+int GuiIO::getState()
 {
    return(state);
 }
@@ -537,7 +538,7 @@ int guiIO::getState()
 /****************************************************************
  *                          clearState                          *
  ****************************************************************/
-void guiIO::clearState()
+void GuiIO::clearState()
 {
    state = GUI_IO_STATE_INITIAL;
 }
@@ -545,7 +546,7 @@ void guiIO::clearState()
 /****************************************************************
  *                           getTool                            *
  ****************************************************************/
-int guiIO::getTool()
+int GuiIO::getTool()
 {
    return(tool);
 }
@@ -553,7 +554,7 @@ int guiIO::getTool()
 /****************************************************************
  *                           setTool                            *
  ****************************************************************/
-void guiIO::setTool(int toolID)
+void GuiIO::setTool(int toolID)
 {
    tool = toolID;
 }
@@ -562,7 +563,7 @@ void guiIO::setTool(int toolID)
 /****************************************************************
  *                             Draw                             *
  ****************************************************************/
-void guiIO::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
+void GuiIO::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    glDisable(GL_LIGHTING);
    glDisable(GL_DEPTH_TEST);
@@ -575,7 +576,7 @@ void guiIO::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 /****************************************************************
  *                     getInvertMultiTexture                    *
  ****************************************************************/
-bool guiIO::getInvertMultiTexture()
+bool GuiIO::getInvertMultiTexture()
 {
    return(invertMultiTexture);
 }
@@ -583,7 +584,7 @@ bool guiIO::getInvertMultiTexture()
 /****************************************************************
  *                             DoIO                             *
  ****************************************************************/
-int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
+int GuiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
                 bool outdoor)
 {
    int eventInfo = Farso::EVENT_NONE;
@@ -1180,7 +1181,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
 /****************************************************************
  *                             camera                           *
  ****************************************************************/
-void guiIO::cameraPos(Map* acMap)
+void GuiIO::cameraPos(Map* acMap)
 {
    /*cameraX = centerX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
    cameraY = centerY + deltaY + (float) d * sin(deg2Rad(theta));
@@ -1192,7 +1193,7 @@ void guiIO::cameraPos(Map* acMap)
 /****************************************************************
  *                      getSelectedText                         *
  ****************************************************************/
-string guiIO::getSelectedText()
+string GuiIO::getSelectedText()
 {
    return(selectedText);
 }
@@ -1201,7 +1202,7 @@ string guiIO::getSelectedText()
 /****************************************************************
  *                        getFileName                           *
  ****************************************************************/
-string guiIO::getFileName()
+string GuiIO::getFileName()
 {
    return(curFileName);
 }
@@ -1209,7 +1210,7 @@ string guiIO::getFileName()
 /****************************************************************
  *                   getTextureFileName                         *
  ****************************************************************/
-string guiIO::getTextureFileName()
+string GuiIO::getTextureFileName()
 {
    return(selectedText);
 }
@@ -1217,7 +1218,7 @@ string guiIO::getTextureFileName()
 /****************************************************************
  *                    getObjectFileName                         *
  ****************************************************************/
-string guiIO::getObjectFileName()
+string GuiIO::getObjectFileName()
 {
    //FIXME
    return(""/*objectText->texto*/);
@@ -1226,7 +1227,7 @@ string guiIO::getObjectFileName()
 /****************************************************************
  *                        Show Message                          *
  ****************************************************************/
-void guiIO::showMessage(string msg)
+void GuiIO::showMessage(string msg)
 {
    messageText->setText(msg);
    messageWindow->draw(0,0);

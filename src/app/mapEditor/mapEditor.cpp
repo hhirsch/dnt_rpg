@@ -1,6 +1,6 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -33,9 +33,9 @@ int main(int argc, char **argv)
    dir.findDataDirectories();
    options opt;
    opt.load();
-   editor* edt;
+   dntMapEditor::Editor* edt;
 
-   edt = new(editor);
+   edt = new dntMapEditor::Editor();
    edt->run();
    delete(edt);
 

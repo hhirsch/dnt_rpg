@@ -27,15 +27,17 @@
 #include "../../classes/object.h"
 #include "../../engine/util.h"
 
+namespace dntMapEditor
+{
 
-class portal
+class Portal
 {
    public:
       /*! Constructor
        * \param acMap -> poiter to opened map */
-      portal(Map* acMap);
+      Portal(Map* acMap);
       /*! Destructor */
-      ~portal();
+      ~Portal();
 
       /*! Verify and do action by mouse and state 
        * \param mouseX -> mouse X coordinate
@@ -84,7 +86,7 @@ class portal
 
       GLfloat initmX, initmZ; /**< Mouse Initial Positions on some States */
 
-      areaList* portalList;   /**< Portal List */
+      dntMapEditor::AreaList* portalList;   /**< Portal List */
 
       /*! Internal Add Portal */
       void doAddPortal();
@@ -92,10 +94,9 @@ class portal
       void doTagPortal(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
       /*! Add Portal To Map */
       void addPortal(int qx, int qz, std::string where);
-
-      
-
 };
+
+}
 
 #endif
 

@@ -28,15 +28,17 @@
 #include "../../map/map.h"
 #include "../../particle/partcontroller.h"
 
+namespace dntMapEditor
+{
 
-class particles
+class Particles
 {
    public:
       /*! Constructor
        * \param acMap -> poiter to opened map*/
-      particles(Map* acMap);
+      Particles(Map* acMap);
       /*! Destructor */
-      ~particles();
+      ~Particles();
 
       /*! Verify and do action by mouse and state 
        * \param mouseX -> mouse X coordinate
@@ -45,11 +47,11 @@ class particles
        * \param mButton -> mouse button state
        * \param grWindow -> the grassWindow Used*/
       void verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
-                        Uint8 mButton, Uint8* keys, guiIO* gui, 
+                        Uint8 mButton, Uint8* keys, GuiIO* gui, 
                         partController* pS,
                         GLdouble proj[16],GLdouble modl[16],GLint viewPort[4],
-                        std::string selectedText, grassWindow* grWindow,
-                        waterWindow* wtWindow, Map* actualMap);
+                        std::string selectedText, GrassWindow* grWindow,
+                        WaterWindow* wtWindow, Map* actualMap);
 
       /*! If have some temporary things to draw, draw it! */
       void drawTemporary(GLfloat** matriz);
@@ -72,6 +74,8 @@ class particles
 
       //interPlane* actualPlane;         /**< actual Plane */
 };
+
+}
 
 #endif
 

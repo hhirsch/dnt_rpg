@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -24,27 +24,30 @@
 #include <SDL/SDL_opengl.h>
 #include <string>
 
+namespace dntMapEditor
+{
+
 /*! Simple Definition of Map Area */
-class area
+class Area
 {
    public:
       GLfloat x1, y1, x2, y2; /**< Coordinates */
       std::string whereToGo;  /**< Destiny */
-      area* next;             /**< Next Node */
+      Area* next;             /**< Next Node */
 };
 
 /*! List of Map Areas */
-class areaList
+class AreaList
 {
    public:
       /*! Constructor */
-      areaList();
+      AreaList();
       /*! Destructor */
-      ~areaList();
+      ~AreaList();
 
       /*! Search and Return an Area on the list */
-      area* getArea(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2);
-      area* getArea(GLfloat x, GLfloat y);
+      Area* getArea(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2);
+      Area* getArea(GLfloat x, GLfloat y);
 
       /*! Add an area to the list */
       void addArea(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2, 
@@ -54,10 +57,11 @@ class areaList
       void drawAll();
 
    private:
-      area* first; /**< First Node of the list */
+      Area* first; /**< First Node of the list */
       int total;   /**< Total Nodes of the list */
 };
 
+}
 
 #endif
 

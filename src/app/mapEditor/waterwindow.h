@@ -24,16 +24,19 @@
 #include "../../particle/partcontroller.h"
 #include "../../gui/farso.h"
 
+namespace dntMapEditor
+{
+
 /*! The water controller Farso::Window */
-class waterWindow
+class WaterWindow
 {
    public:
       /*! Constructor
        * \param actualGui -> actual used interface */
-      waterWindow(Farso::GuiInterface* actualGui);
+      WaterWindow(Farso::GuiInterface* actualGui);
 
       /*! Destructor */
-      ~waterWindow();
+      ~WaterWindow();
 
       /*! Set the active Water
        * \param water -> new active water */
@@ -122,6 +125,7 @@ class waterWindow
       Farso::Button* dzWaterflowLess;            /**< Less dZ flow */
 };
 
+}
 
 #endif
 

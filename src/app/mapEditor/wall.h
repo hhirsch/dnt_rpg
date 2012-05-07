@@ -1,5 +1,5 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DccNiTghtmare: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
@@ -25,15 +25,18 @@
 #include "../../gui/draw.h"
 #include "message.h"
 
+namespace dntMapEditor
+{
 
-class wallController
+/*! The editor of walls */
+class WallController
 {
    public:
       /*! Constructor 
        * \param acMap -> pointer to opened map */
-      wallController(Map* acMap);
+      WallController(Map* acMap);
       /*! Destructor */
-      ~wallController();
+      ~WallController();
 
       /*! Verify and do action by mouse and state 
        * \param mouseX -> mouse X coordinate
@@ -92,9 +95,9 @@ class wallController
       /*! Do the wall destroy
        * \return true if destroyed a wall */
       bool doDestroy();
-
-
 };
+
+}
 
 #endif
 

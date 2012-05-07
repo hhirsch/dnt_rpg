@@ -20,6 +20,8 @@
 
 #include "listwindow.h"
 #include "../../etc/dirs.h"
+using namespace dntMapEditor;
+
 
 /* NPCs */
 #define FILE_CHARACTERS "mapEditor/lists/characters.lst"
@@ -60,22 +62,22 @@ using namespace std;
 /********************************************************************
  *                             Constructor                          *
  ********************************************************************/
-tupleList::tupleList():dntList(DNT_LIST_TYPE_ADD_AT_END)
+TupleList::TupleList():dntList(DNT_LIST_TYPE_ADD_AT_END)
 {
 }
 /********************************************************************
  *                              Destructor                          *
  ********************************************************************/
-tupleList::~tupleList()
+TupleList::~TupleList()
 {
    clearList();
 }
 /********************************************************************
  *                             freeElement                          *
  ********************************************************************/
-void tupleList::freeElement(dntListElement* obj)
+void TupleList::freeElement(dntListElement* obj)
 {
-   tuple* t = (tuple*)obj;
+   Tuple* t = (Tuple*)obj;
    if(t)
    {
       delete(t);
@@ -85,7 +87,7 @@ void tupleList::freeElement(dntListElement* obj)
 /********************************************************************
  *                             Constructor                          *
  ********************************************************************/
-listWindow::listWindow(Farso::GuiInterface* gui)
+ListWindow::ListWindow(Farso::GuiInterface* gui)
 {
    intGui = gui;
    state = -1;
@@ -96,7 +98,7 @@ listWindow::listWindow(Farso::GuiInterface* gui)
 /********************************************************************
  *                              Destructor                          *
  ********************************************************************/
-listWindow::~listWindow()
+ListWindow::~ListWindow()
 {
    if(intWindow)
    {
@@ -106,7 +108,7 @@ listWindow::~listWindow()
 /********************************************************************
  *                              getState                            *
  ********************************************************************/
-int listWindow::getState()
+int ListWindow::getState()
 {
    return(state);
 }
@@ -114,7 +116,7 @@ int listWindow::getState()
 /********************************************************************
  *                              setState                            *
  ********************************************************************/
-void listWindow::setState(int st)
+void ListWindow::setState(int st)
 {
    dirs dir;
    string fileName = "";
@@ -202,7 +204,7 @@ void listWindow::setState(int st)
 /********************************************************************
  *                               open                               *
  ********************************************************************/
-void listWindow::open()
+void ListWindow::open()
 {
    intWindow = intGui->insertWindow(186,0,437,211,"Select");
    list = intWindow->getObjectsList()->insertListText(5,15,245,190);
@@ -213,11 +215,11 @@ void listWindow::open()
 /********************************************************************
  *                           loadFromFile                           *
  ********************************************************************/
-void listWindow::loadFromFile(string fileName)
+void ListWindow::loadFromFile(string fileName)
 {
    defParser f;
    string key="", value="";
-   tuple* t;
+   Tuple* t;
 
    /* Clear current list */
    tuples.clearList();
@@ -231,7 +233,7 @@ void listWindow::loadFromFile(string fileName)
 
    while(f.getNextTuple(key, value))
    {
-      t = new tuple();
+      t = new Tuple();
       t->title = key;
       t->fileName = value;
       list->insertText(key);
@@ -242,7 +244,7 @@ void listWindow::loadFromFile(string fileName)
 /********************************************************************
  *                           getFileName                            *
  ********************************************************************/
-string listWindow::getFileName()
+string ListWindow::getFileName()
 {
    return(selFileName);
 }
@@ -250,10 +252,10 @@ string listWindow::getFileName()
 /********************************************************************
  *                       getFileNameWithTitle                       *
  ********************************************************************/
-string listWindow::getFileNameWithTitle(string title)
+string ListWindow::getFileNameWithTitle(string title)
 {
    int i;
-   tuple* t = (tuple*)tuples.getFirst();
+   Tuple* t = (Tuple*)tuples.getFirst();
 
    for(i = 0; i < tuples.getTotal(); i++)
    {
@@ -261,7 +263,7 @@ string listWindow::getFileNameWithTitle(string title)
       {
          return(t->fileName);
       }
-      t = (tuple*)t->getNext();
+      t = (Tuple*)t->getNext();
    }
    return("");
 }
@@ -269,7 +271,7 @@ string listWindow::getFileNameWithTitle(string title)
 /********************************************************************
  *                             eventGot                             *
  ********************************************************************/
-bool listWindow::eventGot(int type, Farso::GuiObject* object)
+bool ListWindow::eventGot(int type, Farso::GuiObject* object)
 {
    selFileName = "";
    if(type == Farso::EVENT_SELECTED_LIST_TEXT)
