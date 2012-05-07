@@ -475,7 +475,7 @@ EXCLUDE_SYMLINKS       = NO
 # against the file with absolute path, so to exclude all test directories 
 # for example use the pattern */test/*
 
-EXCLUDE_PATTERNS = */app/* */net/* */etc/fifo.h */etc/texture.h
+EXCLUDE_PATTERNS = */app/partEditor/* */app/iaEditor/* */app/height* */net/* */etc/fifo.h */etc/texture.h
 
 # The EXAMPLE_PATH tag can be used to specify one or more files or 
 # directories that contain example code fragments that are included (see 
