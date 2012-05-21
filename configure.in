@@ -71,6 +71,11 @@ fi
 #}
 #fi
 
+# Checks for debug flags
+AC_ARG_ENABLE([debug_astar], [  --enable-debug_astar    Enable A* debug code], [CPPFLAGS="$CPPFLAGS -DDEBUG_ASTAR"])
+AC_ARG_ENABLE([debug_pending_action], [  --enable-debug_pending_action    Enable Pending Action debug code], [CPPFLAGS="$CPPFLAGS -DDNT_DEBUG_PENDING_ACTION"])
+AC_ARG_ENABLE([debug_scripts], [  --enable-debug_scripts    Enable DNT Script Language debug code], [CPPFLAGS="$CPPFLAGS -DDNT_DEBUG_SCRIPTS"])
+
 # Checks for libraries.
 
 #OpenGL
