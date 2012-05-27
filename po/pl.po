@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2012-04-30 10:55-0300\n"
+"POT-Creation-Date: 2012-05-27 12:32-0300\n"
 "PO-Revision-Date: 2011-04-16 15:37+0000\n"
 "Last-Translator: Michal Tuchowski <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -1629,8 +1629,8 @@ msgstr ""
 
 #: data/classes/music.cls:13
 msgid ""
-"+1 of Intelligence for knowing those notes, how they are created and all the "
-"musical theory envolved on their creation."
+"+1 of Intelligence for knowing those chords, how they were invented and all "
+"the music theory involved on their creation."
 msgstr ""
 
 #: data/classes/music.cls:15
@@ -1646,8 +1646,8 @@ msgstr ""
 
 #: data/classes/music.cls:19
 msgid ""
-"The Music Student need to have at least one graduation on Play Instrument, "
-"of one presented at the Bizarre Musical Instruments List."
+"The Music Student need at least one graduation on Play Instrument, of one "
+"presented at the Bizarre Musical Instruments List."
 msgstr ""
 
 #: data/classes/compsci.cls:1
@@ -4338,7 +4338,7 @@ msgid "Uzi"
 msgstr ""
 
 #: data/weapons/definitions/uzi.wcc:2
-msgid "Your Warmux favorite weapon."
+msgid "Everybody's favorite Warmux weapon."
 msgstr ""
 
 #: data/weapons/types/categories.dcl:2

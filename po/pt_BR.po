@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2012-04-30 10:55-0300\n"
+"POT-Creation-Date: 2012-05-27 12:32-0300\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -1773,8 +1773,8 @@ msgstr ""
 
 #: data/classes/music.cls:13
 msgid ""
-"+1 of Intelligence for knowing those notes, how they are created and all the "
-"musical theory envolved on their creation."
+"+1 of Intelligence for knowing those chords, how they were invented and all "
+"the music theory involved on their creation."
 msgstr ""
 "+1 de Inteligência por saber estes acordes, por saber como eles se formam e "
 "saber toda a teoria musical que foi levada em conta na formação dos mesmos;"
@@ -1801,8 +1801,8 @@ msgstr ""
 
 #: data/classes/music.cls:19
 msgid ""
-"The Music Student need to have at least one graduation on Play Instrument, "
-"of one presented at the Bizarre Musical Instruments List."
+"The Music Student need at least one graduation on Play Instrument, of one "
+"presented at the Bizarre Musical Instruments List."
 msgstr ""
 "Os Estudantes de Música tem de, no primeiro nível, possuir pelo menos uma "
 "graduação em Tocar Instrumento (Instrumento em Questão), e este tem de "
@@ -5096,8 +5096,8 @@ msgid "Uzi"
 msgstr "Uzi"
 
 #: data/weapons/definitions/uzi.wcc:2
-msgid "Your Warmux favorite weapon."
-msgstr "Sua arma favorita em Warmux."
+msgid "Everybody's favorite Warmux weapon."
+msgstr ""
 
 #: data/weapons/types/categories.dcl:2
 msgid "Martial"
@@ -5222,6 +5222,9 @@ msgstr "Fatores nutricionais são inúteis"
 #: data/ia/script/general/beggar_idle.dsl:39
 msgid "I cook with wine"
 msgstr "Eu cozinho com vinho"
+
+#~ msgid "Your Warmux favorite weapon."
+#~ msgstr "Sua arma favorita em Warmux."
 
 #~ msgid ""
 #~ "Since they are Taylor's faithful disciples, they receive +4 of Taylorism "

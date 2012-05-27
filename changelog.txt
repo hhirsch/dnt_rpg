@@ -1,5 +1,6 @@
 ================================================
 |                Version 0.9                   |
+|            Released: 2012-05-26              |
 ================================================
  - gui: rolBar can use position button to scroll text;
  - gui: button type: KEEP_PRESSING for buttons that will
@@ -21,9 +22,8 @@
  - Simplified number of skills to 12;
  - Removed the class Administration Student;
  - mapEditor: Support for skorpio OD tilesets;
-
  - New Models;
- - New Sound Effects;
+ - New Sound Effects and Music;
 
 BugFixes:
  - sound: Fixed a possible double OpenAL stop when releasing an ogg_stream;
