@@ -26,6 +26,7 @@
 
 #include <string>
 #include <iostream>
+#include <unistd.h>
 using namespace std;
 
 #include "../map/map.h"
