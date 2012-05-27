@@ -23,7 +23,7 @@
 
 #define LOCALEDIR "..\\data\\locale\\"
 #define PACKAGE "dccnitghtmare"
-#define VERSION "0.9"
+#define VERSION "0.10"
 
 #define DATADIR "..\\data\\"
 
