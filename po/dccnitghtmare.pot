@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2012-05-27 12:32-0300\n"
+"POT-Creation-Date: 2012-05-27 14:48-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1492,9 +1492,9 @@ msgstr ""
 
 #: data/classes/medician.cls:2
 msgid ""
-"'If I've tried Physiotherapy there, I should passed on first with the points "
-"I've made in Medicine.'|(Mattar, Medician Student answering the provocation "
-"of Wanucia, Physiotherapy Student)"
+"'If I've tried Physiotherapy there, I should passed at first place with the "
+"points I've made to pass on Medicine!'|(Mattar, Medical Student replying to "
+"the provocation of Wanucia, Physiotherapy Student)"
 msgstr ""
 
 #: data/classes/medician.cls:3

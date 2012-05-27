@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2012-05-27 12:32-0300\n"
+"POT-Creation-Date: 2012-05-27 14:48-0300\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -1572,12 +1572,12 @@ msgstr "Estudante de Medicina"
 
 #: data/classes/medician.cls:2
 msgid ""
-"'If I've tried Physiotherapy there, I should passed on first with the points "
-"I've made in Medicine.'|(Mattar, Medician Student answering the provocation "
-"of Wanucia, Physiotherapy Student)"
+"'If I've tried Physiotherapy there, I should passed at first place with the "
+"points I've made to pass on Medicine!'|(Mattar, Medical Student replying to "
+"the provocation of Wanucia, Physiotherapy Student)"
 msgstr ""
 "'Se eu tivesse tentado fisioterapia lá, teria passado em primeiro lugar com "
-"a nota que tirei em medicina'|(Mattar, Estudante de Medicina respondendo à "
+"a nota que tirei em medicina!'|(Mattar, Estudante de Medicina respondendo à "
 "provocação de Wanúcia, Estudante de Fisioterapia)"
 
 #: data/classes/medician.cls:3
@@ -5097,7 +5097,7 @@ msgstr "Uzi"
 
 #: data/weapons/definitions/uzi.wcc:2
 msgid "Everybody's favorite Warmux weapon."
-msgstr ""
+msgstr "Sua arma favorita ao jogar Warmux."
 
 #: data/weapons/types/categories.dcl:2
 msgid "Martial"
