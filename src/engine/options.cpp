@@ -968,7 +968,7 @@ void options::displayOptionsScreen(Farso::GuiInterface* interf)
 
    /* BumpMapping Enabled or Not */
    qt = gList->insertTextBox(24,posY,219,posY+17,0,
-                            gettext("Enable BumpMapping"));
+                            gettext("Enable bump mapping"));
    qt->setFont(fontArial, 10, Farso::Font::ALIGN_LEFT);
    cxSelBumpMapping = gList->insertCxSel(12,posY+4,
          getEnableBumpMapping());

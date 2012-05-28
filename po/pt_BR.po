@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2012-05-27 14:48-0300\n"
+"POT-Creation-Date: 2012-05-28 17:42-0300\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -949,8 +949,8 @@ msgid "Enable Anisotropic Filter"
 msgstr "Habilitar Filtro Anisotrópico"
 
 #: src/engine/options.cpp:971
-msgid "Enable BumpMapping"
-msgstr "Habilitar BumpMapping"
+msgid "Enable bump mapping"
+msgstr "Habilitar bump mapping"
 
 #: src/engine/options.cpp:985
 msgid "Splatting:"
@@ -1599,8 +1599,8 @@ msgstr ""
 
 #: data/classes/medician.cls:7
 msgid ""
-"Although they are creatures of theory, they usually spend their money in "
-"physical academies, receiving +1 of Strength."
+"Although they are creatures of theory, they spend most of their money on a "
+"gym membership, receiving +1 Strength."
 msgstr ""
 "Apesar de serem criaturas que se dedicam à teoria, estas geralmente utilizam "
 "seu dinheiro em academias, pois sua característica 'boy' ou 'paty' os obriga "
@@ -1626,7 +1626,7 @@ msgstr ""
 msgid ""
 "So immersed in his studies is the Medical Student that he has often "
 "forgotten to grow up, being very susceptible to questions, receiving -3 on "
-"all I am not a Fool tests (diminished to -6 when the target is their father "
+"all I Am Not A Fool tests (diminished to -6 when the target is their father "
 "or mother)."
 msgstr ""
 "Por estar constantemente ligado aos estudos, o Estudante de Medicina "
@@ -1637,7 +1637,7 @@ msgstr ""
 #: data/classes/medician.cls:15
 msgid ""
 "Those creatures receive +4 on all Bluff tests. They bluff all the time and "
-"the more ridiculous their bluffing is, the more easily it can be really true."
+"the more ridiculous their bluffing, the more likely it is really true."
 msgstr ""
 "Estes organismos recebem +4 em seus testes de Blefar, pois quaisquer "
 "desculpas que eles dêem, por mais esfarrapadas que sejam, são bem possíveis "
@@ -1666,8 +1666,7 @@ msgid "Biology Student"
 msgstr "Estudante de Biologia"
 
 #: data/classes/biology.cls:2
-msgid ""
-"'This place is filled with arthropodes!'|(Bin, that time, a Biology Student)"
+msgid "'This place is filled with arthropodes!'|(Bin, Biology Student)"
 msgstr ""
 "'Este lugar está cheio de artrópodes!'|(Bin, o então Estudante de Biologia)"
 
@@ -1774,7 +1773,7 @@ msgstr ""
 #: data/classes/music.cls:13
 msgid ""
 "+1 of Intelligence for knowing those chords, how they were invented and all "
-"the music theory involved on their creation."
+"the music theory involved in their creation."
 msgstr ""
 "+1 de Inteligência por saber estes acordes, por saber como eles se formam e "
 "saber toda a teoria musical que foi levada em conta na formação dos mesmos;"
@@ -1925,7 +1924,7 @@ msgstr ""
 
 #: data/classes/philosophy.cls:13
 msgid ""
-"The Philosophy Student receives +4 of Knowledge (Classic) for the little "
+"The Philosophy Student receives +4 of Knowledge (General) for the little "
 "they learn at university."
 msgstr ""
 "O Estudante de Filosofia recebe +4 em Conhecimentos (Clássico) devido ao "
@@ -2496,7 +2495,7 @@ msgstr ""
 "alvos de tendências compativeis à sua."
 
 #: data/races/boy.rca:1
-msgid "Boy / Paty"
+msgid "Boy / Patty"
 msgstr "Boy / Paty"
 
 #: data/races/boy.rca:2
@@ -2507,10 +2506,10 @@ msgstr "'Ah velho, não dá porque vou malhar hoje'|(Tico Bombadinho)"
 
 #: data/races/boy.rca:3
 msgid ""
-"Boys, and their female versions, Patys, are creatures endowed with a strange "
-"fondness for body academies. Always wanting to be thin, to go to jet-set "
-"parties and rubbing with their opposite sex equivalents, they usually ignore "
-"their friends of other races. But, the more upper-class they consider "
+"Boys, and their female versions, Pattys, are creatures endowed with a "
+"strange fondness for body academies. Always wanting to be thin, to go to jet-"
+"set parties and rubbing with their opposite sex equivalents, they usually "
+"ignore their friends of other races. But, the more upper-class they consider "
 "themselves, and although they have a great capacity for affection, this race "
 "is always the target of mockeries and jokes by other races."
 msgstr ""
@@ -2523,7 +2522,7 @@ msgstr ""
 
 #: data/races/boy.rca:6
 msgid ""
-"Patys have +1 of Diplomacy since they always exhibit the characteristics of "
+"Pattys have +1 of Diplomacy since they always exhibit the characteristics of "
 "their bodies. As terribly horrendous as she was, she is able to alter "
 "herself 'magically' in just a few hours."
 msgstr ""
@@ -2533,7 +2532,7 @@ msgstr ""
 
 #: data/races/boy.rca:10
 msgid ""
-"Boys and Patys receive +1 of Constitution due to the time they constantly "
+"Boys and Pattys receive +1 of Constitution due to the time they constantly "
 "spend at body academies. If they no longer go there, they'll lose this bonus "
 "and automatically become the butt of jokes among others of their own race."
 msgstr ""
@@ -4609,7 +4608,7 @@ msgid "Die heretic!"
 msgstr "Morra herege!"
 
 #: data/dialogs/tutorial/hippie.dlg:98
-msgid "Hahaha! Linux at Santa's notebook!"
+msgid "Hahaha! Linux on Santa's notebook!"
 msgstr "Hahaha! Linux no notebook to Papai Cruel!"
 
 #: data/dialogs/tutorial/hippie.dlg:102
@@ -4634,7 +4633,7 @@ msgid "For sure."
 msgstr "Com certeza."
 
 #: data/dialogs/tutorial/hippie.dlg:133
-msgid "I can't! I love bloody works!"
+msgid "I can't! I love bloody work!"
 msgstr "Não posso! Eu adora trabalhos sangrentos!"
 
 #: data/dialogs/tutorial/hippie.dlg:143
@@ -4655,7 +4654,7 @@ msgid "Oh, really bad rap!"
 msgstr "Grande merda!"
 
 #: data/dialogs/tutorial/hippie.dlg:168
-msgid "Sure, that is."
+msgid "Sure, it is."
 msgstr "Com certeza."
 
 #: data/dialogs/tutorial/hippie.dlg:177
@@ -4663,7 +4662,7 @@ msgid "Don't lie to me, bro!"
 msgstr "Não minta para mim, bicho!"
 
 #: data/dialogs/tutorial/hippie.dlg:190
-msgid "Oh, you got it. A peak experience waits!"
+msgid "Oh, you got it. A peak experience awaits!"
 msgstr "Oh, você conseguiu. Psicodelia nos espera!"
 
 #: data/dialogs/tutorial/hippie.dlg:219
@@ -4823,7 +4822,7 @@ msgid "Install Ruindows at the hippie's computer."
 msgstr "Instalar Ruindows no computador do Hippie."
 
 #: data/missions/tutorial/compdeck.mis:2
-msgid "Copy info from old factory computer to Logan."
+msgid "Copy info from old factory computer for Logan."
 msgstr "Copiar informação do computador para o Logan."
 
 #: data/models/objetos/books/combat_tutorial/combat_tutorial.dcc:2
@@ -4855,7 +4854,7 @@ msgid "Egg"
 msgstr "Ovo"
 
 #: data/models/natural/ovo/ovo.dcc:2
-msgid "A potential new chicken. Be carefull."
+msgid "A potential new chicken. Be careful!"
 msgstr "Uma galinha em potencial. Tome cuidado."
 
 #: data/models/objetos/itens/healkit/healkit.dcc:1
@@ -4921,7 +4920,7 @@ msgid "Suspicious Letter"
 msgstr "Carta Suspeita"
 
 #: data/models/objetos/geral/letter/letter.dcc:2
-msgid "A letter with some kind of code written on it."
+msgid "A letter with some kind of code written in it."
 msgstr "Uma carta com um código escrito."
 
 #: data/models/objetos/vinyls/banco_darwin.dcc:2
@@ -4942,18 +4941,18 @@ msgstr ""
 "para esvaziar salas."
 
 #: data/models/objetos/vinyls/henry_cow_western_culture.dcc:2
-msgid "Last Henry Cow's album. Let's see if you can listen it."
+msgid "Last Henry Cow album. Let's see if you can listen it."
 msgstr "O último álbum da banda Henry Cow. Vejamos se consegue escutá-lo."
 
 #: data/models/objetos/vinyls/zappa_apostrophe.dcc:2
 msgid ""
-"It seems that someone recorded some histories about Nanook, the Eskimo  on "
+"It seems that someone recorded some stories about Nanook, the Eskimo  on "
 "this disk."
 msgstr ""
 "Parece que alguém gravou algumas histórias de Nanook, o esquimó neste disco."
 
 #: data/models/objetos/icex/snes/chrono/snes_chrono.dcc:2
-msgid "The best snes RPG whose name begins with 'Chro'."
+msgid "The best SNES RPG whose name begins with 'Chro'."
 msgstr "O melhor RPG de Super Nintendo cujo nome começa com 'Chro'"
 
 #: data/models/objetos/icex/snes/contra/snes_contra.dcc:2
@@ -4982,16 +4981,16 @@ msgid "Let the carnage begin!"
 msgstr "Let the carnage begin!"
 
 #: data/models/objetos/icex/snes/sf2/snes_sf2.dcc:2
-msgid "You remember playing it on a dirty bar at the beach."
+msgid "You remember playing it in a dirty bar at the beach."
 msgstr ""
 "Você se lembra jogando este jogo em um fliperama num bar copo-sujo da praia."
 
 #: data/models/objetos/icex/snes/starfox/snes_starfox.dcc:2
-msgid "A fox that thinks he's Tom Hanks on Apolo 13."
+msgid "A fox that thinks he's Tom Hanks in Apollo 13."
 msgstr "Uma raposa que pensa ser Tom Hanks na Apolo 13."
 
 #: data/models/objetos/icex/snes/topgear/snes_topgear.dcc:2
-msgid "Use your nitros, but beware of your fuel."
+msgid "Use the nitros but watch the fuel!"
 msgstr "Utilize seus nitros, mas atenção ao combustível."
 
 #: data/models/objetos/icex/snes/zelda/snes_zelda.dcc:2
@@ -5016,7 +5015,7 @@ msgid "9mm Ammo Pack"
 msgstr "Caixa de Munição 9mm"
 
 #: data/models/objetos/ammo/9mm_pack/9mm_pack.dcc:2
-msgid "You can use this ammo at 9mm guns or to make your way to jail."
+msgid "You can use this ammo with a 9mm gun and to make your way to jail."
 msgstr ""
 "Você pode utilizar essa munição em armas de 9mm ou para fazer seu caminho à "
 "cadeia."
@@ -5026,7 +5025,7 @@ msgid "Great Axe"
 msgstr "Alabarda"
 
 #: data/weapons/definitions/axe.wcc:2
-msgid "It's heavy. Pretty heavy. Maybe a bull could handle it."
+msgid "It's heavy. Pretty heavy. Maybe a minotaur could handle it."
 msgstr "É pesada. Muito pesada. Talvez um touro consiga carregá-la."
 
 #: data/weapons/definitions/dagger.wcc:1
@@ -5042,7 +5041,7 @@ msgid "Beretta 92"
 msgstr "Beretta 92"
 
 #: data/weapons/definitions/beretta92.wcc:2
-msgid "The exact copy of your ancient ball gun, but with real bullets."
+msgid "An exact copy of your ancient ball gun, but with real bullets."
 msgstr "A cópia exata de sua antiga arma de bolinhas, mas com munição real."
 
 #: data/weapons/definitions/kalashnikov_small.wcc:1
@@ -5051,20 +5050,21 @@ msgid "Kalashnikov"
 msgstr "Kalashnikov"
 
 #: data/weapons/definitions/kalashnikov_small.wcc:2
-msgid "The most insurgent weapon of the Asia in exact size to hide on a coat."
+msgid ""
+"Favorite weapon of Asian rebels but in perfect size for hiding inside a coat."
 msgstr ""
 "A arma mais insurgente da Ásia no tamanho exato para escondê-la em um casaco."
 
 #: data/weapons/definitions/kalashnikov.wcc:2
-msgid "The most insurgent weapon of the Asia."
-msgstr "A mais insurgente arma da Ásia."
+msgid "Favorite weapon of Asia rebels."
+msgstr ""
 
 #: data/weapons/definitions/katana.wcc:1
 msgid "Katana"
 msgstr "Katana"
 
 #: data/weapons/definitions/katana.wcc:2
-msgid "A katana used on eastern martial arts."
+msgid "A katana, as used in eastern martial arts."
 msgstr "Uma katana utilizada nas artes marciais do leste."
 
 #: data/weapons/definitions/knife.wcc:1
@@ -5088,7 +5088,7 @@ msgid "S&W 39"
 msgstr "S&W 39"
 
 #: data/weapons/definitions/sw39.wcc:2
-msgid "Your 9mm flavour, with good accuracy and two nouns behind."
+msgid "Your choice of 9mm flavor, with good accuracy and two nouns at the end."
 msgstr "Sua 9mm favorita, com boa precisão e dois nomes por trás."
 
 #: data/weapons/definitions/uzi.wcc:1
@@ -5192,7 +5192,7 @@ msgid "My plate is hot but my food is cold"
 msgstr "Meu prato é quente, mas minha comida fria"
 
 #: data/ia/script/general/beggar_idle.dsl:25
-msgid "Wish I go on a diet"
+msgid "I should go on a diet"
 msgstr "Eu queria estar de dieta"
 
 #: data/ia/script/general/beggar_idle.dsl:27
@@ -5222,6 +5222,9 @@ msgstr "Fatores nutricionais são inúteis"
 #: data/ia/script/general/beggar_idle.dsl:39
 msgid "I cook with wine"
 msgstr "Eu cozinho com vinho"
+
+#~ msgid "The most insurgent weapon of the Asia."
+#~ msgstr "A mais insurgente arma da Ásia."
 
 #~ msgid "Your Warmux favorite weapon."
 #~ msgstr "Sua arma favorita em Warmux."

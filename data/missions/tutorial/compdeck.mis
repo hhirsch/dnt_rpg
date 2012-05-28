@@ -1,3 +1,3 @@
 area = Tyrol
-description = gettext("Copy info from old factory computer to Logan.")
+description = gettext("Copy info from old factory computer for Logan.")
 script = missions/tutorial/compdeck.dsl

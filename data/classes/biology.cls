@@ -1,5 +1,5 @@
 name = gettext("Biology Student")
-epigraph = gettext("'This place is filled with arthropodes!'|(Bin, that time, a Biology Student)")
+epigraph = gettext("'This place is filled with arthropodes!'|(Bin, Biology Student)")
 description = gettext("Able to be isolated in the mountains for two weeks at a time doing their 'Field Work', ambushing and observing the incredible and exciting ameiva's feeding habits (and they are sometimes mistaken as Hippies in their search for Feed-Karma), the Biology Students can be all things to all men: among them, there are a few doctors, a few hippies, a few computer analysts, a few hot-dog sellers...")
 lifeDice = d8
 totalModifiers = 2

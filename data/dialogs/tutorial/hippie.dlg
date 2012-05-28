@@ -95,7 +95,7 @@ end_dialog
 ############################################################
 dialog(5)
    npc_begin
-      text = gettext("Hahaha! Linux at Santa's notebook!")
+      text = gettext("Hahaha! Linux on Santa's notebook!")
    npc_end
    pc_begin
       option
@@ -130,7 +130,7 @@ dialog(7)
          action = add_mission("missions/tutorial/hippie1.mis")
          action = finish_dialog()
       option
-         text = gettext("I can't! I love bloody works!")
+         text = gettext("I can't! I love bloody work!")
          action = dialog_init(6)
          action = go_to_dialog(6)
    pc_end
@@ -165,7 +165,7 @@ dialog(9)
    npc_end
    pc_begin
       option
-         text = gettext("Sure, that is.")
+         text = gettext("Sure, it is.")
          action = go_to_dialog(12)
    pc_end
 end_dialog
@@ -187,7 +187,7 @@ end_dialog
 ############################################################
 dialog(11)
    npc_begin
-      text = gettext("Oh, you got it. A peak experience waits!")
+      text = gettext("Oh, you got it. A peak experience awaits!")
    npc_end
    pc_begin
       option

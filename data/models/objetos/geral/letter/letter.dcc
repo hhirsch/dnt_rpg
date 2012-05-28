@@ -1,5 +1,5 @@
 name = gettext("Suspicious Letter")
-description = gettext("A letter with some kind of code written on it.")
+description = gettext("A letter with some kind of code written in it.")
 cal3d = models/objetos/geral/letter/model.cfg
 inventory_sizes = 2 1
 inventory_texture = models/objetos/geral/letter/texture_inv.png

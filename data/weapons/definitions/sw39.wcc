@@ -1,5 +1,5 @@
 name = gettext("S&W 39")
-description = gettext("Your 9mm flavour, with good accuracy and two nouns behind.")
+description = gettext("Your choice of 9mm flavor, with good accuracy and two nouns at the end.")
 cal3d = models/objetos/armas/sw39/model.cfg
 inventory_sizes = 2 2
 inventory_texture = models/objetos/armas/sw39/sw39_inv.png

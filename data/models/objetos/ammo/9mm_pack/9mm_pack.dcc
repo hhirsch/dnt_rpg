@@ -1,5 +1,5 @@
 name = gettext("9mm Ammo Pack")
-description = gettext("You can use this ammo at 9mm guns or to make your way to jail.")
+description = gettext("You can use this ammo with a 9mm gun and to make your way to jail.")
 cal3d = models/objetos/ammo/9mm_pack/model.cfg
 type = ammo
 related_info = 9mm

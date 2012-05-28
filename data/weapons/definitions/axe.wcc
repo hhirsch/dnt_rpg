@@ -1,5 +1,5 @@
 name = gettext("Great Axe")
-description = gettext("It's heavy. Pretty heavy. Maybe a bull could handle it.")
+description = gettext("It's heavy. Pretty heavy. Maybe a minotaur could handle it.")
 cal3d = models/objetos/armas/axe/model.cfg
 inventory_sizes = 2 4
 inventory_texture = models/objetos/armas/axe/axe_inv.png
