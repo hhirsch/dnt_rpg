@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2012-05-28 17:42-0300\n"
+"POT-Creation-Date: 2012-05-30 10:32-0300\n"
 "PO-Revision-Date: 2010-05-06 06:48+0000\n"
 "Last-Translator: Cédric VALMARY (Tot en òc) <cvalmary@yahoo.fr>\n"
 "Language-Team: Occitan (post 1500) <oc@li.org>\n"
@@ -3817,8 +3817,9 @@ msgid ""
 msgstr ""
 
 #: data/dialogs/tutorial/cruzeirense.dlg:71
-msgid "Now!"
-msgstr "Ara !"
+#, fuzzy
+msgid "I'm on it!"
+msgstr "Soi perdut."
 
 #: data/dialogs/tutorial/hippie.dlg:6
 msgid "Welcome to the F.S.C."
@@ -4463,6 +4464,9 @@ msgstr ""
 #: data/ia/script/general/beggar_idle.dsl:39
 msgid "I cook with wine"
 msgstr ""
+
+#~ msgid "Now!"
+#~ msgstr "Ara !"
 
 #~ msgid "Enable MultiTextures"
 #~ msgstr "Activar MultiTexturas"

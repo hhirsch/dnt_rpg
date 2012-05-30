@@ -68,7 +68,7 @@ dialog(4)
    npc_end
    pc_begin
       option
-         text = gettext("Now!")
+         text = gettext("I'm on it!")
          action = add_mission("missions/tutorial/mission4.mis")
          action = map_travel("mapas/tutorial/cruz_local.map")
          action = finish_dialog()

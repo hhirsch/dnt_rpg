@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2012-05-28 17:42-0300\n"
+"POT-Creation-Date: 2012-05-30 10:32-0300\n"
 "PO-Revision-Date: 2012-01-21 13:13+0000\n"
 "Last-Translator: Daniel Winzen <d@winzen4.de>\n"
 "Language-Team: German <de@li.org>\n"
@@ -3903,7 +3903,7 @@ msgid ""
 msgstr ""
 
 #: data/dialogs/tutorial/cruzeirense.dlg:71
-msgid "Now!"
+msgid "I'm on it!"
 msgstr ""
 
 #: data/dialogs/tutorial/hippie.dlg:6
