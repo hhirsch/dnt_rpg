@@ -1185,7 +1185,7 @@ int engine::menuScreen(int Status, bool reloadMusic)
    if(reloadMusic)
    {
       /*music =*/
-      snd->loadMusic("music/musica1.ogg");
+      snd->loadMusic("music/main_menu.ogg");
    }
 
    cursors->set(CURSOR_WALK);
@@ -4072,7 +4072,7 @@ int engine::run(SDL_Surface *surface, bool commingBack)
           ( (SDL_GetTicks() - waitDieTimer) >= ENGINE_WAIT_DIE_DELAY) )
       {
          /* All Pcs are Dead, so Death Screen! */
-         snd->loadMusic("music/musica8.ogg");
+         snd->loadMusic("music/death_game.ogg");
          showImage(dir.getRealFile("texturas/fightMode/death.png"));
 
          quitCurrentGame();

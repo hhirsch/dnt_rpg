@@ -27,7 +27,19 @@ cavesofsorrow.ogg
    References: 
       http://opengameart.org/content/caves-of-sorrow-from-flare-project
 
+death_game.ogg
+   Author: Tobias "Sum-1" Peterson
+   License: CC-BY 3.0
+   Reference:
+   http://opengameart.org/content/weird-death-game-over-loop-15s-cut-of-alien-phone-sex-by-sum-1
+
 discordance.ogg
    Author: tenach
    License: CC-BY-SA 3.0
    References: http://opengameart.org/content/discordance
+
+main_menu.ogg
+   Author: brandon75689
+   License: CC-BY 3.0
+   Reference: http://opengameart.org/content/tragic-ambient-main-menu
+
