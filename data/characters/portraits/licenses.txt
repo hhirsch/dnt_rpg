@@ -1,0 +1,31 @@
+gordinho.png
+metaleiro.png
+mutante.png
+velho.png
+   Author: Raquel (from DNTeam)
+   License: GPLv3 or latter
+
+hippie.png
+   Author: Scribe (Daniel Stephens)
+   License: CC0
+   Reference:
+   http://opengameart.org/forumtopic/portraits-for-weird-realism-cartoon-style-satirical-post-apocalyptic-rpg
+
+ameiva.png
+atleticano.png
+borda.png
+chico.png
+cruzeirense.png
+ente.png
+guri2.png
+guria.png
+guri.png
+logan.png
+ratazana.png
+santa.png
+velhaca.png
+velha.png
+zedobar.png
+   Author: DNTeam
+   License: GPLv3 or latter
+
