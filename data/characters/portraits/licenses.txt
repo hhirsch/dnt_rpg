@@ -11,6 +11,12 @@ hippie.png
    Reference:
    http://opengameart.org/forumtopic/portraits-for-weird-realism-cartoon-style-satirical-post-apocalyptic-rpg
 
+velhaca.png
+   Author: qubodup
+   License: CC0
+   Reference:
+   http://qubodup.deviantart.com/art/Velhaca-Badly-Drawn-Portrait-for-DNT-305587263
+
 athlete.png
 fille.png
 fille2.png
@@ -34,7 +40,6 @@ guri.png
 logan.png
 ratazana.png
 santa.png
-velhaca.png
 velha.png
 zedobar.png
    Author: DNTeam
