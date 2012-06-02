@@ -1,4 +1,13 @@
 ================================================
+|                Version 0.10                  |
+================================================
+ - new portraits (thanks to nubux, qubodup and scribe);
+ - new menu and game over musics;
+
+BugFixes:
+ - heightmap2dnt: Fixed a missing include;
+
+================================================
 |                Version 0.9                   |
 |            Released: 2012-05-26              |
 ================================================
