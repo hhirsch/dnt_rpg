@@ -20,7 +20,10 @@ velhaca.png
 athlete.png
 fille.png
 fille2.png
+fille3.png
 garcon.png
+garcon2.png
+garcon3.png
 punk.png
 transgender.png
    Author: nubux
