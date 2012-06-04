@@ -2,9 +2,11 @@
 uniform sampler2D diffuseTexture;
 uniform sampler2D normalTexture;
 
-#define MAX_LIGHTS  4
-
-varying vec3 lightVec[MAX_LIGHTS];
+varying vec3 lightVec;
+varying vec4 lightSpecular;
+varying vec4 lightDiffuse;
+varying vec4 lightAmbient;
+varying float lightW;
 varying float fog;
 
 /*! Calculate lamber factor for bidirectional light */
@@ -27,49 +29,42 @@ void main()
    normal = normalize(normal);
 
    gl_FragColor = vec4(0.0,0.0,0.0,0.0);
-   int i;
-   for(i=0; i < MAX_LIGHTS; i++)
+
+      
+   /* Only calculate for enabled lights */
+   if(lightW != 2.0)
    {
-      /* Only calculate for enabled lights */
-      if(gl_LightSource[i].position.w != 2.0)
+      /* Calculate lambert factor */
+      float lamberFactor;
+
+      if(lightW != 0.0)
       {
-         /* Calculate lambert factor */
-         float lamberFactor;
-
-         if(gl_LightSource[i].position.w != 0.0)
-         {
-            /* Positional Light */
-            lamberFactor = max(dot(normal, lightVec[i]), 0.0);
-         }
-         else
-         {
-            /* Directional Light (sun), must illuminate all sides. */
-            lamberFactor = calcBidirectionalLamber(normal, lightVec[i]);
-            lamberFactor += 0.5*calcBidirectionalLamber(normal, 
-                  vec3(lightVec[i].z, lightVec[i].y, lightVec[i].x));
-            lamberFactor /= 1.5;
-         }
-
-         /* Apply Texture and single light */
-         float shininess = lamberFactor * gl_FrontMaterial.shininess;
-
-         /* Diffuse light */
-         gl_FragColor += colorTexture * gl_LightSource[i].diffuse * 
-            gl_FrontMaterial.diffuse * lamberFactor * 1.6;
-
-         /* Specular Light */
-         gl_FragColor += gl_LightSource[i].specular * 
-            gl_FrontMaterial.specular * shininess;
-
-         /* Ambient Light */
-         gl_FragColor += gl_LightSource[i].ambient * colorTexture * 
-            gl_FrontMaterial.ambient;
+         /* Positional Light */
+         lamberFactor = max(dot(normal, lightVec), 0.0);
       }
-      else if(i != 0)
+      else
       {
-         /* Done with lights */
-         i = MAX_LIGHTS;
+         /* Directional Light (sun), must illuminate all sides. */
+         lamberFactor = calcBidirectionalLamber(normal, lightVec);
+         lamberFactor += 0.5*calcBidirectionalLamber(normal, 
+               vec3(lightVec.z, lightVec.y, lightVec.x));
+         lamberFactor /= 1.5;
       }
+
+      /* Apply Texture and single light */
+      float shininess = lamberFactor * gl_FrontMaterial.shininess;
+
+      /* Diffuse light */
+      gl_FragColor += colorTexture * lightDiffuse * 
+         gl_FrontMaterial.diffuse * lamberFactor * 1.6;
+
+      /* Specular Light */
+      gl_FragColor += lightSpecular * 
+         gl_FrontMaterial.specular * shininess;
+
+      /* Ambient Light */
+      gl_FragColor += lightAmbient * colorTexture * 
+         gl_FrontMaterial.ambient;
    }
 
    /* Apply Fog */

@@ -1,9 +1,12 @@
 
-#define MAX_LIGHTS  4
-
 attribute vec3 tangent;
-varying vec3 lightVec[MAX_LIGHTS];
+varying vec3 lightVec;
 varying float fog;
+varying vec4 lightSpecular;
+varying vec4 lightDiffuse;
+varying vec4 lightAmbient;
+varying float lightW;
+
 
 void main()
 {
@@ -16,36 +19,41 @@ void main()
    vec3 vertexPosition = vec3(gl_ModelViewMatrix *  gl_Vertex);
    vec3 lightDir;
    vec3 v;
-   int i;
 
-   for(i=0; i < MAX_LIGHTS; i++)
+   /* Verify each light (indoor is using LIGHT_1) */
+   int lightNumber = 0;
+   if(gl_LightSource[1].position.w != 2.0)
    {
-      /* Only calculate for enabled lights */
-      if(gl_LightSource[i].position.w != 2.0)
-      {
-         if(gl_LightSource[i].position.w != 0.0)
-         {
-            /* Positional Light */
-            lightDir = normalize(gl_LightSource[i].position.xyz - 
-                                 vertexPosition);
-         }
-         else
-         {
-            /* Directional Light */
-            lightDir = normalize(gl_LightSource[i].position.xyz);
-         }
+      lightNumber = 1;
+   }
 
-         v.x = dot(lightDir, t);
-         v.y = dot(lightDir, b);
-         v.z = dot(lightDir, n);
-         lightVec[i] = normalize(v);
-      }
-      else if(i != 0)
+   /* Only calculate for enabled lights */
+   if(gl_LightSource[lightNumber].position.w != 2.0)
+   {
+      if(gl_LightSource[lightNumber].position.w != 0.0)
       {
-         /*! Some non trivial (0) light disable, 
-          * all after it is disabled too */
-         i = MAX_LIGHTS;
+         /* Positional Light */
+         lightDir = normalize(gl_LightSource[lightNumber].position.xyz - 
+               vertexPosition);
       }
+      else
+      {
+         /* Directional Light */
+         lightDir = normalize(gl_LightSource[lightNumber].position.xyz);
+      }
+
+      v.x = dot(lightDir, t);
+      v.y = dot(lightDir, b);
+      v.z = dot(lightDir, n);
+      lightVec = normalize(v);
+      lightDiffuse = gl_LightSource[lightNumber].diffuse;
+      lightSpecular = gl_LightSource[lightNumber].specular;
+      lightAmbient = gl_LightSource[lightNumber].ambient;
+      lightW = gl_LightSource[lightNumber].position.w;
+   }
+   else
+   {
+      lightW = 2.0;
    }
   
    gl_Position = ftransform();
