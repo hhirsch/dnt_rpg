@@ -751,6 +751,16 @@ void Editor::draw()
    gameSun->updateHourOfDay(hour, 0.0, 0.0);
    gameSun->setLight();
 
+   /* FIXME: when lights enabled in map editor, must ignore the following
+    * light disable. */
+   /* Disable GL_LIGHT1 for bump mapping correct usage without 
+    * enabled map lights */
+   glDisable(GL_LIGHT1);
+   GLfloat p[4]={0.0f, 0.0f, 0.0f, 2.0f};
+   glPushMatrix();
+   glLightfv(GL_LIGHT1, GL_POSITION, p);
+   glPopMatrix();
+
    /* Draw Things */
    if(mapOpened)
    {
