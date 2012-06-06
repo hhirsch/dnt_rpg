@@ -2,10 +2,12 @@
 |                Version 0.10                  |
 ================================================
  - new portraits (thanks to nubux, qubodup and scribe);
- - new menu and game over musics;
+ - new menu and game-over musics;
 
 BugFixes:
  - heightmap2dnt: Fixed a missing include;
+ - Changes on the bump mapping shader to suppor not so 
+   recent video cards (Geforce 6 series);
 
 ================================================
 |                Version 0.9                   |
