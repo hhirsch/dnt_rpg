@@ -32,11 +32,16 @@ transgender.png
    http://opengameart.org/forumtopic/portraits-for-weird-realism-cartoon-style-satirical-post-apocalyptic-rpg
 
 mysterious.png
-mercenary.png
    Author: Buch
    License: GPLv3
+   Reference: http://opengameart.org/content/mysterious-man
+
+mercenary.png
+   Author: Buch
+   Modifications: Color adjusts by Scribe (Daniel Stephens)
+   License: GPLv3
    References: http://opengameart.org/content/post-apocaliptic-soldier
-               http://opengameart.org/content/mysterious-man
+               http://opengameart.org/forumtopic/portraits-for-weird-realism-cartoon-style-satirical-post-apocalyptic-rpg
 
 ameiva.png
 atleticano.png
