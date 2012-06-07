@@ -280,7 +280,7 @@ end_dialog
 ############################################################
 dialog(17)
    npc_begin
-      text = gettext("I haven't any more things for you in this DNT version. Come back when there's a latter version or join DNTeam to help us develop it!")
+      text = gettext("I have nothing else for you in this version of DNT. Come back when there is a new release or join DNTeam to help us develop it!")
    npc_end
    pc_begin
       option
