@@ -525,7 +525,6 @@ useObject = models/objetos/geral/barrels/barrel3/barrel3.dcc 1:9,10:2168.737,7.2
 useObject = models/junk/scrap2/scrap2.dcc 1:9,10:2196.818,8.200,2489.398:-2.000,0.000,2.000:0
 square = 1,11.000000,14.000000,0.000000,0.000000
 useTexture = texturas/floor_outdoor/grass.png
-connection = 2320.736084,2507.968506,2321.213867,2508.055420:0.000000:mapFileName
 useObject = models/junk/madeira1/madeira1.dcc 1:10,10:2378.543,18.900,2433.320:-25.000,104.000,145.000:0
 useObject = models/junk/madeira1/madeira1.dcc 1:10,10:2379.143,7.900,2424.335:0.000,0.000,0.000:0
 useObject = models/junk/madeira1/madeira1.dcc 1:10,10:2372.381,7.900,2420.637:0.000,0.000,0.000:0
