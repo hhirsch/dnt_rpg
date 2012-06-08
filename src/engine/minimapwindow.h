@@ -82,6 +82,7 @@ class miniMapWindow
       static std::list<miniMapLabel*>labels; /**< Labels on map */
       static int width;             /**< Current picture width */
       static int height;            /**< Current picture height */
+      static SDL_Surface* connectionImage; /**< Connection Image */
       static Farso::Picture* fig;          /**< The current minimap picture */
       static Farso::Window* mapWindow;     /**< MiniMap Window */
       static Farso::Button* charPosition;  /**< Character MiniMap Button */

@@ -20,6 +20,7 @@
 
 #include "minimapwindow.h"
 #include "../lang/translate.h"
+#include "../etc/dirs.h"
 
 /***********************************************************************
  *                            constructor                              *
@@ -71,6 +72,11 @@ void miniMapWindow::open(Farso::GuiInterface* gui, float posX, float posZ,
       {
          fig->setVisibleArea(0,0,173,106);
       }
+
+      /* Load connection image */
+      dirs dir;
+      connectionImage = IMG_Load(
+            dir.getRealFile("texturas/general/travelmark.png").c_str());
 
       /* Set the connection labels */
       setConnections();
@@ -151,10 +157,20 @@ void miniMapWindow::setConnections()
                }
 
                /* Draw it on map picture */
-               Farso::color_Set(220, 20, 20, 255);
-               Farso::rectangle_Draw(fig->get(), x1, z1, x2, z2);
-               Farso::color_Set(235, 235, 25, 255);
-               Farso::rectangle_Fill(fig->get(), x1+1, z1+1, x2-1, z2-1);
+               if(curMap->isOutdoor())
+               {
+                  Farso::color_Set(220, 20, 20, 255);
+                  Farso::rectangle_Draw(fig->get(), x1, z1, x2, z2);
+                  Farso::color_Set(235, 235, 25, 255);
+                  Farso::rectangle_Fill(fig->get(), x1+1, z1+1, x2-1, z2-1);
+               }
+               else
+               {
+                  SDL_Rect rec;
+                  rec.x = ((x2+x1)/2)-6;
+                  rec.y = ((z2+z1)/2)-6;
+                  SDL_BlitSurface(connectionImage, NULL, fig->get(), &rec);
+               }
 
                /* Insert it on list */
                labels.push_front(l);
@@ -208,6 +224,11 @@ void miniMapWindow::close(Farso::GuiInterface* gui)
       gui->closeWindow(mapWindow);
       clearLabels();
       mapWindow = NULL;
+      if(connectionImage)
+      {
+         SDL_FreeSurface(connectionImage);
+         connectionImage = NULL;
+      }
    }
 }
 
@@ -316,5 +337,6 @@ Farso::Picture* miniMapWindow::fig = NULL;
 Farso::Window* miniMapWindow::mapWindow = NULL;
 Farso::Button* miniMapWindow::charPosition = NULL;
 Map* miniMapWindow::curMap = NULL;
+SDL_Surface* miniMapWindow::connectionImage = NULL;
 std::list<miniMapLabel*> miniMapWindow::labels;
 

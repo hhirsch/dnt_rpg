@@ -6,7 +6,7 @@ Here are the licenses for those at the current directory.
 DNTeam Textures (GPLv3)
 
 brief.png  dnt_icon.png  inicio1.xcf  inicio.xcf
-inicio1.png   inicio.png
+inicio1.png   inicio.png travelmark.png
 
 ===========================================================================
 
