@@ -17,6 +17,8 @@ velhaca.png
    Reference:
    http://qubodup.deviantart.com/art/Velhaca-Badly-Drawn-Portrait-for-DNT-305587263
 
+ameiva.png
+ameiva02.png
 athlete.png
 fille.png
 fille2.png
@@ -25,6 +27,8 @@ garcon.png
 garcon2.png
 garcon3.png
 punk.png
+ratazana.png
+santa2.png
 transgender.png
    Author: nubux
    License: CC-BY 3.0
@@ -43,7 +47,6 @@ mercenary.png
    References: http://opengameart.org/content/post-apocaliptic-soldier
                http://opengameart.org/forumtopic/portraits-for-weird-realism-cartoon-style-satirical-post-apocalyptic-rpg
 
-ameiva.png
 atleticano.png
 borda.png
 chico.png
@@ -53,7 +56,6 @@ guri2.png
 guria.png
 guri.png
 logan.png
-ratazana.png
 santa.png
 velha.png
 zedobar.png
