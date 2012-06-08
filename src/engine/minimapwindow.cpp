@@ -72,6 +72,9 @@ void miniMapWindow::open(Farso::GuiInterface* gui, float posX, float posZ,
          fig->setVisibleArea(0,0,173,106);
       }
 
+      /* Set the connection labels */
+      setConnections();
+
       /* Finally, open the window */
       mapWindow->setExternPointer(&mapWindow);
       gui->openWindow(mapWindow);
@@ -79,6 +82,119 @@ void miniMapWindow::open(Farso::GuiInterface* gui, float posX, float posZ,
       /* And now, update the character position on miniMap */
       updateCharacterPosition(posX, posZ);
    }
+}
+
+/***********************************************************************
+ *                         setConnections                              *
+ ***********************************************************************/
+void miniMapWindow::setConnections()
+{   
+   Square* sq;
+   int i,j, aux;
+   miniMapLabel* l;
+   GLfloat ratio = (GLfloat)curMap->getSquareMiniSize() / 
+                   (GLfloat)curMap->squareSize();
+
+   /* Convert Character position to the MiniMap Coordinates */
+   GLint x1,z1,x2,z2;
+   
+   for(i=0; i < curMap->getSizeX(); i++)
+   {
+      for(j=0; j < curMap->getSizeZ(); j++)
+      {
+         sq = curMap->relativeSquare(i, j);
+         if( (sq) && (sq->mapConection.active) )
+         {
+            /* Convert to minimap coordinates */
+            x1 = (int) (sq->mapConection.x1*ratio);
+            z1 = (int) ((curMap->getSizeZ()*curMap->squareSize()) - 
+                        sq->mapConection.z1)*ratio;
+
+            /* Verify if label is already inserted */
+            l = getLabel(x1, z1, sq->mapConection.mapName);
+            if(!l)
+            {
+               /* Create and set label values */
+               l = new miniMapLabel();
+               l->labelText = sq->mapConection.mapName; 
+               l->labelName = sq->mapConection.mapName; 
+               l->position.x = x1;
+               l->position.y = z1;
+
+               /* Adjusts and calculations to draw on map */
+               if(curMap->isOutdoor())
+               {
+                  x1 -= 1;
+                  z1 -= 1;
+                  x2 = x1 + 2;
+                  z2 = z1 + 2;
+               }
+               else
+               {
+                  x2 = (int) (sq->mapConection.x2*ratio);
+                  z2 = (int) ((curMap->getSizeZ()*curMap->squareSize()) - 
+                           sq->mapConection.z2)*ratio;
+               }
+
+               /* Verify if inverted */
+               if(x2 < x1)
+               {
+                  aux = x1;
+                  x1 = x2;
+                  x2 = aux;
+               }
+               if(z2 < z1)
+               {
+                  aux = z1;
+                  z1 = z2;
+                  z2 = aux;
+               }
+
+               /* Draw it on map picture */
+               Farso::color_Set(220, 20, 20, 255);
+               Farso::rectangle_Draw(fig->get(), x1, z1, x2, z2);
+               Farso::color_Set(235, 235, 25, 255);
+               Farso::rectangle_Fill(fig->get(), x1+1, z1+1, x2-1, z2-1);
+
+               /* Insert it on list */
+               labels.push_front(l);
+            }
+         }
+      }
+   }
+}
+
+/***********************************************************************
+ *                            getLabel                                 *
+ ***********************************************************************/
+miniMapLabel* miniMapWindow::getLabel(float x, float y, std::string name)
+{
+   std::list<miniMapLabel*>::iterator it;
+
+   for(it=labels.begin(); it != labels.end(); it++)
+   {
+      if( ((*it)->position.x == x) && ((*it)->position.y == y) &&
+          ((*it)->labelName == name) )
+      {
+         return(*it);
+      }
+   }
+   return(NULL);
+}
+
+/***********************************************************************
+ *                            getLabel                                 *
+ ***********************************************************************/
+void miniMapWindow::clearLabels()
+{
+   /* Clear all labels from the list */
+   std::list<miniMapLabel*>::iterator it;
+
+   for(it=labels.begin(); it != labels.end(); it++)
+   {
+      delete(*it);
+   }
+   labels.clear();
 }
 
 /***********************************************************************
@@ -90,6 +206,7 @@ void miniMapWindow::close(Farso::GuiInterface* gui)
    {
       /* Close the window */
       gui->closeWindow(mapWindow);
+      clearLabels();
       mapWindow = NULL;
    }
 }
@@ -199,4 +316,5 @@ Farso::Picture* miniMapWindow::fig = NULL;
 Farso::Window* miniMapWindow::mapWindow = NULL;
 Farso::Button* miniMapWindow::charPosition = NULL;
 Map* miniMapWindow::curMap = NULL;
+std::list<miniMapLabel*> miniMapWindow::labels;
 

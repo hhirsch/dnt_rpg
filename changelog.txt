@@ -3,6 +3,7 @@
 ================================================
  - new portraits (thanks to nubux, qubodup and scribe);
  - new menu and game-over musics;
+ - highlight connections on minimap;
 
 BugFixes:
  - heightmap2dnt: Fixed a missing include;

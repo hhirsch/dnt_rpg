@@ -23,6 +23,19 @@
 
 #include "../gui/farso.h"
 #include "../map/map.h"
+#include <string>
+#include <list>
+
+/*! A label in the minimap */
+class miniMapLabel
+{
+   public:
+      std::string labelText;   /**< The caption text for label */
+      std::string labelName;   /**< The label name */
+
+      vec2_t position;         /**< Label map position */
+};
+
 
 /*! The minimap window */
 class miniMapWindow
@@ -59,6 +72,14 @@ class miniMapWindow
       void reOpen(Farso::GuiInterface* gui, Map* openedMap);
 
    protected:
+      /*! Set map connections labels on minimap */
+      void setConnections();
+      /*! Get label on the list */
+      miniMapLabel* getLabel(float x, float y, std::string name);
+      /*! Clear label list */
+      void clearLabels();
+
+      static std::list<miniMapLabel*>labels; /**< Labels on map */
       static int width;             /**< Current picture width */
       static int height;            /**< Current picture height */
       static Farso::Picture* fig;          /**< The current minimap picture */
