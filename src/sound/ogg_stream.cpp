@@ -234,7 +234,6 @@ bool ogg_stream::stream(ALuint buffer, bool rewind)
    int  size = 0;
    int  section;
    int  result = -1;
-   bool resumed = false;
    int bufferSize = BUFFER_SIZE;
    
 #if (defined(__APPLE__) && (SDL_BYTEORDER != SDL_BIG_ENDIAN))
@@ -262,7 +261,6 @@ bool ogg_stream::stream(ALuint buffer, bool rewind)
       {
          cerr << "Ogg Rewind Error" << endl;
       }
-      resumed = true;
    }
    else if(timeEnded > 0)
    {

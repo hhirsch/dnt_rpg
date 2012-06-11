@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -99,7 +99,6 @@ int getXP(character* actualActor, float targetCR)
 {
    int i;
    int level = 0;
-   float divider = 1;
 
    /* CR < 0, means no XP! */
    if(targetCR <= 0)
@@ -110,7 +109,6 @@ int getXP(character* actualActor, float targetCR)
    /* Calculate the divider */
    if(targetCR < 1)
    {
-      divider = 1.0 / targetCR;
       targetCR = 1;
    }
 

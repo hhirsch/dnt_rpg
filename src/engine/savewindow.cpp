@@ -29,6 +29,7 @@
 
 #include "cursor.h"
 #include "options.h"
+#include "util.h"
 
 #include "../etc/userinfo.h"
 #include "../lang/translate.h"
@@ -155,7 +156,6 @@ int saveWindow::run(bool load, GLuint tituloId,
       GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    int state = -1;
-   Farso::GuiObject* obj;
    Uint8 mButton;
    Uint8* keys;
    int x,y;
@@ -189,7 +189,7 @@ int saveWindow::run(bool load, GLuint tituloId,
          SDL_PumpEvents();
          keys = SDL_GetKeyState(NULL);
          mButton = SDL_GetMouseState(&x,&y);
-         obj = gui->manipulateEvents(x,y,mButton,keys, eventInfo);
+         gui->manipulateEvents(x,y,mButton,keys, eventInfo);
 
          /* Render Things */
          glPushMatrix();

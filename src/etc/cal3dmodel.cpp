@@ -225,7 +225,8 @@ bool cal3DModel::load(const string& strFilename)
          textureId = loadTexture(m_path + strFilename);
 
          /* store the opengl texture id in the user data of the map */
-         pCoreMaterial->setMapUserData(mapId, (Cal::UserData*)textureId);
+         pCoreMaterial->setMapUserData(mapId, 
+               (Cal::UserData*)(long)textureId);
       }
    }
 

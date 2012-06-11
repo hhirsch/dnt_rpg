@@ -37,7 +37,7 @@ ENDCBOOK = ../cbook/
 OBJSCBOOK = $(ENDCBOOK)comicbox.o $(ENDCBOOK)comicbook.o \
             $(ENDCBOOK)comicpage.o
 OBJSMAPA = $(ENDMAP)map.o $(ENDMAP)mapfog.o $(ENDMAP)maplights.o \
-           $(ENDMAP)maproad.o $(ENDMAP)mapsound.o $(ENDMAP)door.o
+           $(ENDMAP)mapsound.o $(ENDMAP)door.o
 FARSOLIB = $(ENDGUI)libfarso.a
 OBJSNET = #$(ENDNET)client.o $(ENDNET)common.o
 OBJSIA = $(ENDIA)agent.o $(ENDIA)pattAgent.o $(ENDIA)potentAgent.o \

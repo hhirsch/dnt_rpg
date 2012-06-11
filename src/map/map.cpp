@@ -819,7 +819,6 @@ void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal,
 
    /* Get the main square where object is */
    Square* saux = relativeSquare(qx,qz);
-   int ob=0;
    if(saux)
    {
       /* Add Object to the square */
@@ -843,7 +842,6 @@ void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal,
             qaux = relativeSquare(X1,Z1);
             if((qaux) && (qaux != saux))
             {
-               ob =0;
                qaux->addObject(false,xReal, yReal, zReal,
                      angleX, angleY, angleZ,collision,obj);
             }
@@ -2185,7 +2183,6 @@ int Map::open(string arquivo)
          int des=0, quadX=0, quadZ=0, oPis=0;
          float oX=0.0f, oY=0.0f, oZ=0.0f,
                angleX=0.0f, angleY=0.0f, angleZ=0.0f;
-         objSquare* oObj;
          sscanf(value.c_str(),"%s %d:%d,%d:%f,%f,%f:%f,%f,%f:%d",nome,
                &des, &quadX, &quadZ, &oX, &oY, &oZ,
                &angleX, &angleY, &angleZ, &oPis);
@@ -2199,9 +2196,8 @@ int Map::open(string arquivo)
             obj->scNode->set(oX, oY, oZ, angleX, angleY, angleZ);
          }
 
-         oObj = MapSquares[posX][posZ].addObject(des==1, oX, oY, oZ,
-               angleX, angleY, angleZ, oPis!=1,
-               obj);
+         MapSquares[posX][posZ].addObject(des==1, oX, oY, oZ,
+               angleX, angleY, angleZ, oPis!=1, obj);
       }
 
       /* ERROR: Unknow Key! */

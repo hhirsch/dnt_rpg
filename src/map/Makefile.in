@@ -40,7 +40,7 @@ door.o: door.cpp door.h
 	@$(CC) $(CFLAGS) door.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
-map.o: map.cpp map.h mapfog.h maplights.h maproad.h door.h $(ENDPART)lake.h
+map.o: map.cpp map.h mapfog.h maplights.h door.h $(ENDPART)lake.h
 	@printf "Making $@...\n"
 	@$(CPP) $(CFLAGS) map.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
@@ -55,17 +55,12 @@ maplights.o: maplights.cpp maplights.h
 	@$(CC) $(CFLAGS) maplights.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
-maproad.o: maproad.cpp maproad.h $(ENDENGINE)util.h
-	@printf "Making maproad.o...\n"
-	@$(CC) $(CFLAGS) maproad.cpp -o $@
-	@printf "\e[0;32mDone\e[0;0m ($@)\n"
-
 mapsound.o: mapsound.cpp mapsound.h $(ENDSOUND)sound.h $(ENDETC)defparser.h
 	@printf "Making $@...\n"
 	@$(CC) $(CFLAGS) mapsound.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
-objetos: door.o map.o mapfog.o maplights.o maproad.o mapsound.o
+objetos: door.o map.o mapfog.o maplights.o mapsound.o
 
 clean: 
 	@printf  "Cleaning Map Bin Files...\n"

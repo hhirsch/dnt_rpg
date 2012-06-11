@@ -322,7 +322,7 @@ void scene::removeUnusedModels()
 {
    int i;
    int total = nLists->getTotal();
-   nodesList* l=NULL, *aux=NULL;
+   nodesList* l=NULL;
 
    /* Search for lists without sceneNodes */
    l = (nodesList*)nLists->getFirst();
@@ -330,7 +330,6 @@ void scene::removeUnusedModels()
    {
       if(l->getTotal() == 0)
       {
-         aux = l;
          l = (nodesList*)l->getNext();
          nLists->remove(l->getPrevious());
       }

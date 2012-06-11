@@ -19,6 +19,9 @@
 */
 
 #include "editor.h"
+#include "../../engine/util.h"
+#include "../../gui/dntfont.h"
+
 #include <iostream>
 using namespace std;
 

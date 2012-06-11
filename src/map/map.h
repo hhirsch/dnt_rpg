@@ -24,7 +24,6 @@
 #include "door.h"
 #include "mapfog.h"
 #include "maplights.h"
-#include "maproad.h"
 #include "mapsound.h"
 
 #include "../particle/lake.h"

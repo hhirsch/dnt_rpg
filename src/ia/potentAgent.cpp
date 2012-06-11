@@ -54,11 +54,13 @@ potentAgent::~potentAgent()
 bool potentAgent::defineNextPosition(bool run)
 {
    int aux;
-   GLfloat min1[3], min2[3], max1[3], max2[3];
    GLfloat fX = 0;
    GLfloat fZ = 0;
    GLfloat dX;
    GLfloat dZ;
+
+#if 0
+   GLfloat min1[3], min2[3], max1[3], max2[3];
 
    min1[0] = x1+actualX;
    min1[1] = 0;
@@ -69,13 +71,16 @@ bool potentAgent::defineNextPosition(bool run)
 
    min2[1] = 0;
    max2[1] = 0;
+#endif
 
    for(aux = 0; aux < knowObstacles; aux++)
    {
+#if 0
       min2[0] = obstacles[aux].x1;
       min2[2] = obstacles[aux].z1;
       max2[0] = obstacles[aux].x2;
       max2[2] = obstacles[aux].z2;
+#endif
 
       dX = obstacles[aux].x - actualX;
       dZ = obstacles[aux].z - actualZ;

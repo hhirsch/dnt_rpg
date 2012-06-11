@@ -95,9 +95,7 @@ void charWindow::open(character* pers)
                                    pers->name);
 
    /* Character Image */
-   Farso::Picture* fig;
-   fig = intWindow->getObjectsList()->insertPicture(9,19,
-                                                    0,0,
+   intWindow->getObjectsList()->insertPicture(9, 19, 0, 0,
                    dir.getRealFile(pers->getPortraitFileName()).c_str());
    intWindow->getObjectsList()->insertTextBox(5,15,65,75,1,"");
 
