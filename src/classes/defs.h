@@ -136,6 +136,10 @@ class bonusAndSaves
        * \return true if success, false if failed. */
       bool doCheck(std::string stateToCheck, int difficulty,
                    bool* couldCheck=NULL);
+      /*! Get the value of a bonus or save
+       * \param state -> bonus or save to get value 
+       * \return bonus or save value */
+      int getValue(std::string state);
 
       /*! = Operator */
       bonusAndSaves& operator=(const bonusAndSaves& b);

@@ -76,6 +76,10 @@ class talkTest
       std::string getTestName(character* pc);
 
    protected:
+
+      /*! Get the against value (or skill value) */
+      int getAgainstValue(thing* owner);
+
       int id;            /**< Talk test ID */
       std::string test;       /**< The modifier to test */
       std::string against;    /**< The against modifier to test (or value) */

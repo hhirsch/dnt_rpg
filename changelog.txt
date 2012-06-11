@@ -4,6 +4,8 @@
  - new portraits (thanks to nubux, qubodup and scribe);
  - new menu and game-over musics;
  - highlight connections on minimap;
+ - dialog checks can be against factors (instead of 
+   only numerical values)
 
 BugFixes:
  - heightmap2dnt: Fixed a missing include;

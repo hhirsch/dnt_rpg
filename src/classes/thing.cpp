@@ -250,7 +250,7 @@ int thing::getBonusValue(factor something)
       }
    }
    
-   return(0);
+   return(-1);
 }
 
 /***********************************************************************

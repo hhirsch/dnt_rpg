@@ -262,14 +262,54 @@ string talkTest::getTestName(character* pc)
    return(res);
 }
 
+
+/*************************************************************************
+ *                         getAgainstValue                               *
+ *************************************************************************/
+int talkTest::getAgainstValue(thing* owner)
+{
+   int val=0;
+   factor fac;
+
+   /* Try to get as a number */
+   if(sscanf(against.c_str(), "%d", &val) == 1)
+   {
+      /* It's a number */
+      return(val);
+   }
+   else
+   {
+      fac.id = against;
+
+      /* Not a number. Try to get as a thing value */
+      fac.type = MOD_TYPE_THING;
+      val = owner->getBonusValue(fac);
+      if(val != -1)
+      {
+         /* Got it. */
+         return(val);
+      }
+
+      /* Not a thing value, must be an skill or attribute*/
+      fac.type = MOD_TYPE_SKILL;
+      val = owner->getBonusValue(fac);
+      if(val != -1)
+      {
+         /* Got it. */
+         return(val);
+      }
+   }
+
+   /* No value got! */
+   return(0);
+}
+
 /*************************************************************************
  *                                 doTest                                *
  *************************************************************************/
 bool talkTest::doTest(character* pc, thing* owner)
 {
-   //FIXME - Must verify if the against is a number or a thing...
-   //        for now, always is a number
-   int value;
+   int value=0;
 
    /* Verify if we have a pc to check */
    if(!pc)
@@ -286,7 +326,7 @@ bool talkTest::doTest(character* pc, thing* owner)
    else if(id == TALK_TEST_ROLL)
    {
       /* Get the difficulty value */
-      sscanf(against.c_str(), "%d", &value);
+      value = getAgainstValue(owner);
 
       /* Roll the thing! */
       bool res = pc->doCheck(test, value);
@@ -374,7 +414,7 @@ bool talkTest::doTest(character* pc, thing* owner)
       }
 
       /* Get the value to compare with */
-      sscanf(against.c_str(), "%d", &value);
+      value = getAgainstValue(owner);
 
       /* Now, finally do the test */
 

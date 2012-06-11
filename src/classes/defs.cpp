@@ -236,6 +236,32 @@ bonusAndSaves& bonusAndSaves::operator=(const bonusAndSaves& b)
 }
 
 /***********************************************************************
+ *                              getValue                               *
+ ***********************************************************************/
+int bonusAndSaves::getValue(string state)
+{
+   if(state == DNT_BS_LEVEL)
+   {
+      return(level);
+   }
+   else if(state == DNT_BS_FORTITUDE)
+   {
+      return(fortitude);
+   }
+   else if(state == DNT_BS_REFLEXES)
+   {
+      return(reflexes);
+   }
+   else if( (state == DNT_BS_I_AM_NOT_A_FOOL) ||
+            (state == DNT_BS_WILL))
+   {
+      return(iAmNotAFool);
+   }
+
+   return(0);
+}
+
+/***********************************************************************
  *                               doCheck                               *
  ***********************************************************************/
 bool bonusAndSaves::doCheck(string stateToCheck, int difficulty,
