@@ -1,7 +1,7 @@
 name = Door
 cal3d = models/objetos/geral/porta2/model.cfg
 inventory_sizes = 0 0
-inventory_texture = texturas/na.png
+inventory_texture = texturas/general/lock.png
 life_points = 500
 fortitude = 10
 reflex = 2

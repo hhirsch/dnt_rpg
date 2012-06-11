@@ -85,6 +85,7 @@ void Portal::defineDoor(object* newDoor, string fileName)
    if(newDoor != NULL)
    {
       actualDoor = newDoor;
+      actualDoor->setThingType(THING_TYPE_DOOR);
       fileDoor = fileName;
    }
 }

@@ -35,7 +35,7 @@
 #define THING_TYPE_NONE       0  /**< Unknow thing */
 #define THING_TYPE_OBJECT     1  /**< Thing is an Object */
 #define THING_TYPE_CHARACTER  2  /**< Thing is a character */
-
+#define THING_TYPE_DOOR       3  /**< Thing is a door */
 
 #define THING_ARMATURE_CLASS    "ARMATURE_CLASS"
 #define THING_SIZE_MODIFIER     "SIZE_MODIFIER"
@@ -169,6 +169,10 @@ class thing
       /*! Get the thing type 
        * \return -> type of the thing */
       int getThingType();
+
+      /*! Set the thing type
+       * \note Use with care. */
+      void setThingType(int t){thingType = t;};
  
       /*! Get the current psycho state
        * \return Psycho state constant */

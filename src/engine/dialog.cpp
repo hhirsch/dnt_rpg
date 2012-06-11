@@ -48,6 +48,7 @@ using namespace std;
 #define TALK_ACTION_MAP_TRAVEL          14 /* Travel to another map */
 #define TALK_ACTION_GIVE_MONEY          15 /* Give money quantity */
 #define TALK_ACTION_CALL_SCRIPT         16 /* Call a one time finish script */
+#define TALK_ACTION_OPEN                17 /* Open Door or Object Owner */
 
 #define TALK_TEST_TRUE                0  /* Always True */
 #define TALK_TEST_ROLL                1  /* Roll some test */
@@ -98,6 +99,7 @@ using namespace std;
 #define TK_ACTION_RECEIVE_ITEM "receive_item"
 #define TK_ACTION_MAP_TRAVEL "map_travel"
 #define TK_ACTION_CALL_SCRIPT "call_script"
+#define TK_ACTION_OPEN "open"
 
 /* Test Tokens */
 #define TK_TEST_ROLL "roll"
@@ -654,6 +656,10 @@ int conversation::getActionID(string token, string fileName, int line)
    {
       return(TALK_ACTION_MAP_TRAVEL);
    }
+   else if(token == TK_ACTION_OPEN)
+   {
+      return(TALK_ACTION_OPEN);
+   }
 
    printError(fileName, "Unknow action!", line);
    return(-1);
@@ -1166,6 +1172,27 @@ void conversation::proccessAction(int opcao, engine* curEngine)
          case TALK_ACTION_DIALOG_INIT:
          {
             setInitialDialog(actions[i].att);
+         }
+         break;
+
+         /* Open the door or container
+          * TODO: container when - and if - implemented. */
+         case TALK_ACTION_OPEN:
+         {
+            /* Open the door */
+            if(owner->getThingType() == THING_TYPE_DOOR)
+            {
+               object* ownerObj = (object*)owner;
+               door* d;
+
+               /* Get the door related to the object */
+               d = ((engine*)curEngine)->getCurrentMap()->getDoor(
+                     ownerObj->scNode);
+               if( (d) && (d->getStatus() == DOOR_STATUS_CLOSED) )
+               {
+                 d->flip();
+               }
+            }
          }
          break;
          

@@ -24,6 +24,9 @@
 #define DOOR_STATUS_CLOSED      0      /**< If door is closed */
 #define DOOR_STATUS_OPENED      1      /**< If door is opened */
 
+#define DOOR_STATE_UNLOCKED     0
+#define DOOR_STATE_LOCKED       1
+
 #include "../etc/list.h"
 #include "../classes/object.h"
 

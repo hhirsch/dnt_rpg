@@ -19,6 +19,7 @@
 */
 
 #include "door.h"
+#include "../sound/sound.h"
 
 /********************************************************************
  *                            Constructor                           *
@@ -61,16 +62,25 @@ void door::update()
  ********************************************************************/
 void door::flip()
 {
-    if(status == DOOR_STATUS_CLOSED)
-    {
-       /* Will open */
-       status = DOOR_STATUS_OPENED;
-    }
-    else
-    {
-       /* Will close */
-       status = DOOR_STATUS_CLOSED;
-    }
+   sound snd;
+   if(status == DOOR_STATUS_CLOSED)
+   {
+      /* Will open */
+      status = DOOR_STATUS_OPENED;
+      /* Call opening sound */
+      snd.addSoundEffect(obj->scNode->getPosX(), 0.0, 
+            obj->scNode->getPosZ(), SOUND_NO_LOOP,
+            "sndfx/objects/door_open.ogg");
+   }
+   else
+   {
+      /* Will close */
+      status = DOOR_STATUS_CLOSED;
+      /* Call closing sound */
+      snd.addSoundEffect(obj->scNode->getPosX(), 0.0,
+            obj->scNode->getPosZ(), SOUND_NO_LOOP,
+            "sndfx/objects/door_close.ogg");
+   }
 }
 
 

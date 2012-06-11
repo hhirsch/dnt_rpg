@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language: DNT Dialogs Language
 " Maintainer: Guilherme Farrer <farrer@dnteam.org>
-" Last Change: 2009 May 18 
+" Last Change: 2012 Jun 11 
 
 syn clear
 
@@ -38,6 +38,7 @@ syn keyword dntFunction       give_item receive_item give_money receive_money
 syn keyword dntFunction       receive_xp change_object_state
 syn keyword dntFunction       kill_all map_travel
 syn keyword dntFunction       call_script
+syn keyword dntFunction       open
 
 " Tests
 syn keyword dntTest           roll

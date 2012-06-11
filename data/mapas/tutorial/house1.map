@@ -28,6 +28,7 @@ door = models/objetos/geral/porta4/porta4.dcc 256.000,302.913:90
 door = models/objetos/geral/porta4/porta4.dcc 256.000,365.776:90
 door = models/objetos/geral/porta4/porta4.dcc 86.247,384.000:0
 door = models/objetos/geral/porta4/porta4.dcc 87.167,320.000:0
+lockDoor = 4 2 dialogs/objects/doors.dlg
 door = models/objetos/geral/porta5/porta5.dcc 14.708,384.000:0
 door = models/objetos/geral/porta5/porta5.dcc 21.686,138.000:0
 wall = 374.000,465.814,384.000,512.000

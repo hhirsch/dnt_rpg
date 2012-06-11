@@ -2438,7 +2438,7 @@ int engine::verifyMouseActions(Uint8 mButton)
          {
             cursors->set(CURSOR_DOOR);
             cursors->setTextOver(gettext("Door")); 
-            //curTarget = porta;
+            
             if( (mButton & SDL_BUTTON(1)) && 
                 (rangeAction(activeCharacter->scNode->getPosX(), 
                              activeCharacter->scNode->getPosZ(),
@@ -2446,25 +2446,20 @@ int engine::verifyMouseActions(Uint8 mButton)
                              porta->obj->scNode->getPosZ(),
                              activeCharacter->displacement) ) )
             {
-               lastMousePression = time;
-               porta->flip();
-               if(porta->getStatus() == DOOR_STATUS_CLOSED)
+               if(porta->obj->getState() == DOOR_STATE_UNLOCKED)
                {
-                  /* Is Closing Door */
-                  snd->addSoundEffect(porta->obj->scNode->getPosX(), 
-                                      0.0,
-                                      porta->obj->scNode->getPosZ(), 
-                                      SOUND_NO_LOOP, 
-                                      "sndfx/objects/door_close.ogg");
+                  /* Door Unlocked, open or close it */
+                  lastMousePression = time;
+                  porta->flip();
                }
                else
                {
-                  /* Is Openning Door */
-                  snd->addSoundEffect(porta->obj->scNode->getPosX(), 
-                                      0.0,
-                                      porta->obj->scNode->getPosZ(), 
-                                      SOUND_NO_LOOP,
-                                      "sndfx/objects/door_open.ogg");
+                  /* Door is locked. Open its dialog. */
+                  dialogWindow dlgWindow;
+                  dlgWindow.open(gui, activeCharacter, 
+                        (conversation*)porta->obj->getConversation(), 
+                        porta->obj->get2dModelName());
+
                }
             }
             pronto = 1;

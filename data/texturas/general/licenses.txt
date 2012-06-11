@@ -1,12 +1,16 @@
-All Textures used in DNT are free (as in free speech).
+brief.png  
+dnt_icon.png  
+inicio1.xcf  
+inicio.xcf
+inicio1.png   
+inicio.png 
+travelmark.png
+   author: farrer (DNTeam)
+   license: GPLv3
 
-Here are the licenses for those at the current directory.
+lock.png
+   author: yd
+   license: CC0
+   source: http://opengameart.org/content/pointers
 
-===========================================================================
-DNTeam Textures (GPLv3)
-
-brief.png  dnt_icon.png  inicio1.xcf  inicio.xcf
-inicio1.png   inicio.png travelmark.png
-
-===========================================================================
 

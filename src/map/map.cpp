@@ -2015,7 +2015,28 @@ int Map::open(string arquivo)
 
          /* Insert it! */
          doorAux->obj = createObject(nome, fileName);
+         doorAux->obj->setThingType(THING_TYPE_DOOR);
          doorAux->obj->scNode->set(pX, 0.0f, pZ, 0.0f, ori, 0.0f);
+      }
+      /* Lock Door */
+      else if(key == "lockDoor")
+      {
+         if(doorAux)
+         {
+            int ope=0, burg=0;
+            /* Read values */
+            sscanf(value.c_str(), "%d %d %s", &ope, &burg, &nomeArq[0]); 
+            /* Set as locked and set its dialog and counter values */
+            doorAux->obj->setState(DOOR_STATE_LOCKED);
+            doorAux->obj->curBonusAndSaves.iAmNotAFool = ope;
+            doorAux->obj->curBonusAndSaves.fortitude = burg;
+            doorAux->obj->setConversationFile(nomeArq);
+            doorAux->obj->createConversation(fileName);
+         }
+         else
+         {
+            cerr << "Couldn't lock unknown door on " << fileName << endl;
+         }
       }
       /* Music File */
       else if(key == "musicFile")
@@ -2528,6 +2549,13 @@ int Map::save(string arquivo)
               doorAux->obj->scNode->getPosX(),
               doorAux->obj->scNode->getPosZ(),
               (int)doorAux->obj->scNode->getAngleY());
+      if(doorAux->obj->getState() == DOOR_STATE_LOCKED)
+      {
+         fprintf(arq,"lockDoor = %d %d %s\n",
+               doorAux->obj->curBonusAndSaves.iAmNotAFool,
+               doorAux->obj->curBonusAndSaves.fortitude,
+               doorAux->obj->getConversationFile().c_str());
+      }
       doorAux = (door*)doorAux->getNext();
    }
 
