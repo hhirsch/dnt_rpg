@@ -55,6 +55,7 @@ namespace dntMapEditor
 #define TOOL_PORTAL_ADD             131
 #define TOOL_PORTAL_TAG             132
 #define TOOL_PORTAL_DOOR            133
+#define TOOL_PORTAL_DOOR_LOCK       134
 
 #define TOOL_OBSTACLE_ADD           141
 

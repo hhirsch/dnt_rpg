@@ -134,7 +134,9 @@ class GuiIO
 
       Farso::GuiInterface* getGui(){return(gui);};
 
-      dntMapEditor::NodeEditor* getNodeEditor(){return(nodeEdit);};
+      dntMapEditor::NodeEditor* getNodeEditor(){return(nodeEdit);}
+      
+      void setPortalEditor(dntMapEditor::Portal* p){portalEditor = p;}
 
    private:
       
@@ -242,6 +244,7 @@ class GuiIO
       Farso::OneTabButton* portalAddButton;      /**< Add Portal Button */
       Farso::OneTabButton* portalTagButton;      /**< Portal Tag Button */
       Farso::OneTabButton* portalDoorButton;     /**< Door Button */
+      Farso::OneTabButton* portalLockButton;     /**< Door Lock Button */
       void openPortalWindow();
       /*********************Object*Window*******************************/
       Farso::Window* objectWindow;               /**< Object Window */
@@ -293,6 +296,7 @@ class GuiIO
      
 
       dntMapEditor::NodeEditor* nodeEdit;          /**< Scene node editor */
+      dntMapEditor::Portal* portalEditor;
 };
 
 }

@@ -32,8 +32,9 @@ using namespace dntMapEditor;
 /******************************************************
  *                      Constructor                   *
  ******************************************************/
-Portal::Portal(Map* acMap)
+Portal::Portal(Map* acMap, Farso::GuiInterface* g)
 {
+   gui = g;
    actualMap = acMap;
    state = PORTAL_STATE_OTHER;
    fileDoor = "";
@@ -56,6 +57,8 @@ Portal::Portal(Map* acMap)
    }
    actualDoor = NULL;
    doorWall = NULL;
+   curLockDoor = NULL;
+   lockWindow = NULL;
    doorMode = 0;
 }
 
@@ -139,6 +142,10 @@ void Portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
    else if (tool == TOOL_PORTAL_TAG)
    {
       doTagPortal(proj,modl,viewPort);
+   }
+   else if(tool == TOOL_PORTAL_DOOR_LOCK)
+   {
+      doDoorLockUnlock(mouseX, mouseY, mouseZ, mButton);
    }
    else if( (tool == TOOL_PORTAL_DOOR) && (actualDoor))
    {
@@ -326,6 +333,10 @@ void Portal::drawTemporary()
          glVertex3f(mX+2,1,mZ-2);
       glEnd();
    }
+   else if((actualTool == TOOL_PORTAL_DOOR_LOCK) && (curLockDoor))
+   {
+      curLockDoor->obj->scNode->getBoundingBox().render();
+   }
    glPopMatrix();
 
    glDisable(GL_LIGHTING);
@@ -448,4 +459,172 @@ void Portal::doTagPortal(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
    }
 }
 
+/******************************************************
+ *                 doDoorLockUnlock                   *
+ ******************************************************/
+void Portal::doDoorLockUnlock(GLfloat mouseX, GLfloat mouseY,
+      GLfloat mouseZ, Uint8 mButton)
+{
+   boundingBox colBox;
+   boundingBox mouseBox;
+   
+   /* Create a bounding box for the mouse position */
+   mouseBox.setMin(mouseX-4, mouseY-4.0, mouseZ-4);
+   mouseBox.setMax(mouseX+4, mouseY+4.0, mouseZ+4);
+
+   if(mButton & SDL_BUTTON(1))
+   {
+      /* Doors Verification */
+      door* porta = actualMap->getFirstDoor();
+      int d;
+      for(d=0; (d < actualMap->getTotalDoors()); d++)
+      {
+         colBox = porta->obj->scNode->getBoundingBox();
+         if(mouseBox.intercepts(colBox))
+         {
+            /* Select the door */
+            curLockDoor = porta;
+            /* Update or open the window with this door values */
+            openLockWindow();
+            return;
+         }
+         porta = (door*)porta->getNext();
+      }
+   }
+}
+
+/******************************************************
+ *                  openLockWindow                    *
+ ******************************************************/
+void Portal::openLockWindow()
+{
+   /* Only open window if it's not opened */
+   if(!lockWindow)
+   {
+      /* Create window */
+      lockWindow = gui->insertWindow(290,212,530,292,"Door Lock/Unlock");
+
+      /* Radio Box for lock */
+      lockCxSel = lockWindow->getObjectsList()->insertCxSel(6, 20, false);
+      lockTxt = lockWindow->getObjectsList()->insertTextBox(18,17,129,31,0,
+            "Door Unlocked");
+
+      /* Dialog File To Use */
+      lockWindow->getObjectsList()->insertTextBox(6,38,67,52,0,"Dialog File:");
+      lockDialogBar = lockWindow->getObjectsList()->insertTextBar(68,38,234,52,
+          "dialogs/objects/doors.dlg", 0);
+
+      /* Lock Levels */
+      lockWindow->getObjectsList()->insertTextBox(6,54,76,68,0,
+            "PickLock Lvl:");
+      lockIAmNotAFool = lockWindow->getObjectsList()->insertTextBar(
+            77,54,107,68,"20", 0);
+      lockWindow->getObjectsList()->insertTextBox(133,54,203,68,0,
+            "Burglary Lvl:");
+      lockFortitude = lockWindow->getObjectsList()->insertTextBar(
+            204,54,234,68,"20", 0);
+
+
+      /* Finally, open */
+      lockWindow->setExternPointer(&lockWindow);
+      gui->openWindow(lockWindow);
+   }
+
+   /* And set values */
+   setLockWindowValues();
+}
+
+/******************************************************
+ *              setLockWindowValues                   *
+ ******************************************************/
+void Portal::setLockWindowValues()
+{
+   char buf[32];
+   if( (lockWindow) && (curLockDoor) )
+   {
+      /* Set Values */
+      lockCxSel->setSelection(curLockDoor->obj->getState()==DOOR_STATE_LOCKED);
+      lockDialogBar->setText(curLockDoor->obj->getConversationFile());
+      lockDialogBar->setAvailable(lockCxSel->isSelected());
+      sprintf(buf, "%d", curLockDoor->obj->curBonusAndSaves.fortitude);
+      lockFortitude->setText(buf);
+      lockFortitude->setAvailable(lockCxSel->isSelected());
+      sprintf(buf, "%d", curLockDoor->obj->curBonusAndSaves.fortitude);
+      sprintf(buf, "%d", curLockDoor->obj->curBonusAndSaves.iAmNotAFool);
+      lockIAmNotAFool->setText(buf);
+      lockIAmNotAFool->setAvailable(lockCxSel->isSelected());
+
+      /* Set lock/unlock text */
+      if(lockCxSel->isSelected())
+      {
+         lockTxt->setText("Door Locked");
+      }
+      else
+      {
+         lockTxt->setText("Door Unlocked");
+      }
+
+      /* Force Window redraw */
+      lockWindow->draw(0,0);
+   }
+}
+
+
+/******************************************************
+ *                     eventGot                       *
+ ******************************************************/
+bool Portal::eventGot(int eventInfo, Farso::GuiObject* obj)
+{
+   if(eventInfo == Farso::EVENT_MODIFIED_CX_SEL)
+   {
+      if(obj == lockCxSel)
+      {
+         if(lockCxSel->isSelected())
+         {
+            /* Set as locked */
+            curLockDoor->obj->setState(DOOR_STATE_LOCKED);
+            /* If needed, set default dialog file */
+            if(curLockDoor->obj->getConversationFile().empty())
+            {
+               curLockDoor->obj->setConversationFile(
+                     "dialogs/objects/doors.dlg");
+            }
+         }
+         else
+         {
+            /* Set As Unlocked */
+            curLockDoor->obj->setState(DOOR_STATE_UNLOCKED);
+            /* Clear Dialog File */
+            curLockDoor->obj->setConversationFile("");
+         }
+         setLockWindowValues();
+         return(true);
+      }
+   }
+   else if(eventInfo == Farso::EVENT_WROTE_TEXT_BAR)
+   {
+      if(obj == lockDialogBar)
+      {
+         curLockDoor->obj->setConversationFile(lockDialogBar->getText());
+         setLockWindowValues();
+         return(true);
+      }
+      else if(obj == lockFortitude)
+      {
+         sscanf(lockFortitude->getText().c_str(), "%d", 
+               &curLockDoor->obj->curBonusAndSaves.fortitude);
+         setLockWindowValues();
+         return(true);
+      }
+      else if(obj == lockIAmNotAFool)
+      {
+         sscanf(lockIAmNotAFool->getText().c_str(), "%d", 
+               &curLockDoor->obj->curBonusAndSaves.iAmNotAFool);
+         setLockWindowValues();
+         return(true);
+      }
+   }
+
+   return(false);
+}
 

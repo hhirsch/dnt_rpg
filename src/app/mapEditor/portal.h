@@ -26,6 +26,7 @@
 #include "message.h"
 #include "../../classes/object.h"
 #include "../../engine/util.h"
+#include "../../gui/farso.h"
 
 namespace dntMapEditor
 {
@@ -35,7 +36,7 @@ class Portal
    public:
       /*! Constructor
        * \param acMap -> poiter to opened map */
-      Portal(Map* acMap);
+      Portal(Map* acMap, Farso::GuiInterface* g);
       /*! Destructor */
       ~Portal();
 
@@ -48,6 +49,11 @@ class Portal
       void verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
                         Uint8 mButton, int tool,
                         GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
+
+      /*! Treat GUI events
+       * \return true if some event occurred here */
+      bool eventGot(int eventInfo, Farso::GuiObject* obj);
+
 
       /*! If have some temporary things to draw, draw it! */
       void drawTemporary();
@@ -71,6 +77,7 @@ class Portal
    private:
       Map* actualMap;         /**< Actual Internal Map */
       object* actualDoor;     /**< Actual Door */
+      door* curLockDoor;      /**< Current door on lock/unlock mode */
       std::string fileDoor;   /**< Actual Door File */
       int doorMode;           /**< Actual Door Mode */
       int doorOrientation;    /**< Actual Door Orientation */
@@ -94,6 +101,26 @@ class Portal
       void doTagPortal(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
       /*! Add Portal To Map */
       void addPortal(int qx, int qz, std::string where);
+      /*! Internal lock lock unlock */
+      void doDoorLockUnlock(GLfloat mouseX, GLfloat mouseY,
+            GLfloat mouseZ, Uint8 mButton);
+
+      /***********************
+       * Lock Window Related * 
+       ***********************/
+      Farso::GuiInterface* gui;   /**< gui used */
+      Farso::Window* lockWindow;  /**< Window to edit lock/unlock doors */
+      Farso::CxSel* lockCxSel;    /**< Lock/unlock */
+      Farso::TextBox* lockTxt;    /**< Lock or Unlock text */
+      Farso::TextBar* lockDialogBar; /**< Will keep dialog text of lock */
+      Farso::TextBar* lockFortitude; /**< Against Burglary */
+      Farso::TextBar* lockIAmNotAFool; /**< Against Operate Mechanic Objs */
+
+      /*! Open the lock window
+       * \note -> if it's already opened, only reset its values */
+      void openLockWindow();
+      /*! Set values at the lock window */
+      void setLockWindowValues();
 };
 
 }

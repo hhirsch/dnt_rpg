@@ -42,6 +42,7 @@ GuiIO::GuiIO()
    fogWindow = NULL;
    actualFog = NULL;
    fileWindow = NULL;
+   portalEditor = NULL;
 
    invertMultiTexture = false;
 
@@ -175,7 +176,7 @@ void GuiIO::openObjectWindow()
    objectGunsButton = objectTabButton->insertButton(25,0,44,19);
    objectGunsButton->setMouseHint("Weapons");
    objectBuildButton = objectTabButton->insertButton(49,0,71,19);
-   objectBuildButton->setMouseHint("Indoor");
+   objectBuildButton->setMouseHint("Houses");
    objectCarsButton = objectTabButton->insertButton(74,0,96,19);
    objectCarsButton->setMouseHint("Vehicles");
    objectIcexButton = objectTabButton->insertButton(99,0,120,19);
@@ -386,6 +387,8 @@ void GuiIO::openPortalWindow()
    portalTagButton->setMouseHint("Set Portal Destination");
    portalDoorButton = portalTabButton->insertButton(40,0,59,19); /* Door */
    portalDoorButton->setMouseHint("Add a door to an wall");
+   portalLockButton = portalTabButton->insertButton(60,0,79,19); /* Lock */
+   portalLockButton->setMouseHint("Lock/Unlock a Door");
    portalWindow->setExternPointer(&portalWindow);
    gui->openWindow(portalWindow);
 }
@@ -712,15 +715,22 @@ int GuiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          }
          return(GUI_IO_NEW_STATE);
       }
+      return(GUI_IO_OTHER);
    }
    /*else if(grWindow->eventGot(eventInfo, object))
    {
    }*/
    else if(wtWindow->eventGot(eventInfo, object))
    {
+      return(GUI_IO_OTHER);
    }
    else if(nodeEdit->eventGot(eventInfo, object))
    {
+      return(GUI_IO_OTHER);
+   }
+   else if(portalEditor->eventGot(eventInfo, object))
+   {
+      return(GUI_IO_OTHER);
    }
 
    switch(eventInfo)
@@ -843,6 +853,12 @@ int GuiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          else if(object == (Farso::GuiObject*) portalDoorButton)
          {
             ltWindow->setState(STATE_DOORS);
+         }
+         else if(object == (Farso::GuiObject*) portalLockButton)
+         {
+            state = GUI_IO_STATE_PORTAL;
+            tool = TOOL_PORTAL_DOOR_LOCK;
+            return(GUI_IO_NEW_STATE);
          }
 
          /* TileWall Buttons */

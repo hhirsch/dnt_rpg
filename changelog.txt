@@ -7,12 +7,13 @@
  - dialog checks can be against factors (instead of 
    only numerical values)
  - Lockable doors;
+ - dntMapEditor: Edit locked door parameters;
 
 BugFixes:
  - heightmap2dnt: Fixed a missing include;
- - Changes on the bump mapping shader to suppor not so 
-   recent video cards (Geforce 6 series);
- - Restricted SDL_ttf to >= 2.0.10 in ./configure script;
+ - bumpMapping: Changed shader to suppor not so recent 
+                video cards (Geforce 6 series);
+ - ./configure: Restricted SDL_ttf to >= 2.0.10;
 
 ================================================
 |                Version 0.9                   |

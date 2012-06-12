@@ -60,6 +60,9 @@ string messageForTool(int tool)
       case TOOL_PORTAL_DOOR:
          return("Put Door on Wall");
       break;
+      case TOOL_PORTAL_DOOR_LOCK:
+         return("Select Door to Lock/Unlock");
+      break;
       case TOOL_WALL_ADD:
          return("Draw The Wall (press B to Add only on Square "
                 "Borders)");
@@ -104,6 +107,9 @@ string messageForTool(int tool)
       break;
       case TOOL_NPC_ADD:
          return("Put NPC on Map with left mouse Button.");
+      break;
+      case TOOL_TILE_WALL_REMOVE:
+         return("Click on a tile to remove it.");
       break;
    }
    return("DccNiTghtmare!");
