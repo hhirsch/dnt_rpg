@@ -1,21 +1,21 @@
 /* 
-  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  DNT: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
-  This file is part of DccNiTghtmare.
+  This file is part of DNT.
  
-  DccNiTghtmare is free software: you can redistribute it and/or modify
+  DNT is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  DccNiTghtmare is distributed in the hope that it will be useful,
+  DNT is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+  along with DNT.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "dccnit.h"
@@ -1122,10 +1122,10 @@ void engine::splashScreen()
    fnt.defineFont(dir.getRealFile(DNT_FONT_TIMES), 20);
    fnt.defineFontAlign(Farso::Font::ALIGN_CENTER);
    Farso::color_Set(130,130,130,255);
-   fnt.write(img, 52, 424, gettext("DccNiTghtmare is relesead under GPLv3 or "
+   fnt.write(img, 52, 424, gettext("DNT is relesead under GPLv3 or "
                                    "later: Feel free to use its source code "
                                    "and data the way you want (or to blame us "
-                                   "the same way). DccNiTghtmare is thankful "
+                                   "the same way). DNT is thankful "
                                    "to the people who developed those "
                                    "libraries: OpenAL, Cal3D, OpenGL, SDL, "
                                    "SDL_image, SDL_ttf, libVorbis."), 

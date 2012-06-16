@@ -1,13 +1,13 @@
 #!/bin/sh
 
-# torelease.sh will create a dccnitghtmare tar.bz2 with the needed files
+# torelease.sh will create a dnt tar.bz2 with the needed files
 # for a source release.
 
 # Usage: torelease.sh [file.tar.bz2]
 # if no file defined, will create as $project.tar.bz2
 
 tarFile=$1
-project="dccnitghtmare"
+project="dnt"
 workDirs="bin data po src syntax macosx windows"
 homeFiles="aclocal.m4 configure configure.in Doxyfile.in \
            install.sh Makefile.in COPYING README \

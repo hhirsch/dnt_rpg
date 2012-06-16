@@ -87,7 +87,7 @@ BIN = ../../bin/
 SUPREDE = #-DVIDEO_MODE #-DREDE #comente para nao ter suporte a rede na bagaca
 FIFO = #../etc/fifo.o
 
-all: $(BIN)dccnitghtmare
+all: $(BIN)dnt
 
 alignwindow.o: alignwindow.h alignwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)align.h
 	@printf "Making $@...\n"
@@ -290,12 +290,12 @@ util.o: util.cpp util.h $(ENDGUI)farso.h
 	@$(CC) $(CFLAGS) $(SUPREDE) util.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
-$(BIN)dccnitghtmare: $(FARSOLIB) $(OBJSMAPA) $(OBJSNET) $(OBJSETC) $(OBJSCLASSES) $(OBJSLANG) $(OBJSSOUND) $(OBJSPART) $(OBJSFIGHT) $(OBJSIA) $(OBJSCBOOK) $(OBJS)  
+$(BIN)dnt: $(FARSOLIB) $(OBJSMAPA) $(OBJSNET) $(OBJSETC) $(OBJSCLASSES) $(OBJSLANG) $(OBJSSOUND) $(OBJSPART) $(OBJSFIGHT) $(OBJSIA) $(OBJSCBOOK) $(OBJS)  
 	@printf "Linking $@...\n"
 	@$(CC) $(LDFLAGS) $(LIBS) $(EFLAGS) $(OBJSCLASSES) $(OBJSLANG) $(OBJSNET) $(OBJSETC) $(OBJSIA) $(FIFO) $(OBJSMAPA) $(OBJSCBOOK) $(OBJSSOUND) $(OBJSPART) $(OBJSFIGHT) $(OBJS) $(FARSOLIB) $(SUPREDE) -o $@
 	@printf "\e[0;32mLinked\e[0;0m ($@)\n"
 
 clean:
 	@printf "Cleaning Engine Bin Files...\n"
-	@\rm -rf *.o *.e $(BIN)dccnitghtmare
+	@\rm -rf *.o *.e $(BIN)dnt
 	@printf "\e[0;32mCleaned.\e[0;0m\n"

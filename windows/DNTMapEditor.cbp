@@ -285,8 +285,6 @@
 		<Unit filename="..\src\map\mapfog.h" />
 		<Unit filename="..\src\map\maplights.cpp" />
 		<Unit filename="..\src\map\maplights.h" />
-		<Unit filename="..\src\map\maproad.cpp" />
-		<Unit filename="..\src\map\maproad.h" />
 		<Unit filename="..\src\map\mapsound.cpp" />
 		<Unit filename="..\src\map\mapsound.h" />
 		<Unit filename="..\src\particle\interplane.cpp" />

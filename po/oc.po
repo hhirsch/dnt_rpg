@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2012-06-07 03:43+0200\n"
+"POT-Creation-Date: 2012-06-16 14:40-0300\n"
 "PO-Revision-Date: 2010-05-06 06:48+0000\n"
 "Last-Translator: Cédric VALMARY (Tot en òc) <cvalmary@yahoo.fr>\n"
 "Language-Team: Occitan (post 1500) <oc@li.org>\n"
@@ -18,69 +18,81 @@ msgstr ""
 "X-Launchpad-Export-Date: 2010-05-06 13:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/classes/actions.cpp:159
+#: src/classes/actions.cpp:160
 #, c-format
 msgid "%s try to attack %s"
 msgstr "%s ensajar d'atacar %s"
 
-#: src/classes/actions.cpp:164
+#: src/classes/actions.cpp:165
 #, c-format
 msgid "%s try to heal %s"
 msgstr "%s ensajar de sonhar %s"
 
-#: src/classes/actions.cpp:175 src/classes/feats.cpp:301
-#: src/classes/feats.cpp:354
+#: src/classes/actions.cpp:176 src/classes/actions.cpp:462
+#: src/classes/feats.cpp:301 src/classes/feats.cpp:354
 msgid "Too far away for action!"
 msgstr "Tròp luènh per aquesta accion !"
 
-#: src/classes/actions.cpp:184
+#: src/classes/actions.cpp:185
 msgid "Enemy out of sight!"
 msgstr ""
 
-#: src/classes/actions.cpp:282 src/classes/actions.cpp:304
+#: src/classes/actions.cpp:283 src/classes/actions.cpp:305
+#: src/classes/actions.cpp:553 src/classes/actions.cpp:557
 msgid "Miss."
 msgstr "Mancat."
 
-#: src/classes/actions.cpp:285 src/classes/actions.cpp:289
+#: src/classes/actions.cpp:286 src/classes/actions.cpp:290
 msgid "Critical Miss!"
 msgstr "Fracàs Critic !"
 
-#: src/classes/actions.cpp:331
+#: src/classes/actions.cpp:332
 #, c-format
 msgid "Healed %d points."
 msgstr ""
 
-#: src/classes/actions.cpp:342
+#: src/classes/actions.cpp:343 src/classes/actions.cpp:590
 #, c-format
 msgid "Hit at a vital area, inflicting %d points of damage."
 msgstr ""
 
-#: src/classes/actions.cpp:347
+#: src/classes/actions.cpp:348 src/classes/actions.cpp:595
 #, c-format
 msgid "Hit for %d points."
 msgstr "Tòca de %d punts."
 
-#: src/classes/actions.cpp:367 src/classes/actions.cpp:370
+#: src/classes/actions.cpp:368 src/classes/actions.cpp:371
 msgid "Critical Heal!"
 msgstr ""
 
-#: src/classes/actions.cpp:375 src/classes/actions.cpp:379
+#: src/classes/actions.cpp:376 src/classes/actions.cpp:380
+#: src/classes/actions.cpp:604 src/classes/actions.cpp:609
 msgid "Critical Hit!"
 msgstr "Tòca Critica !"
 
-#: src/classes/defs.cpp:258
+#: src/classes/actions.cpp:454
+#, fuzzy, c-format
+msgid "%s try to attack an area."
+msgstr "%s ensajar d'atacar %s"
+
+#: src/classes/actions.cpp:640 src/fight/fightSystem.cpp:189
+#, c-format
+msgid "%s is dead!"
+msgstr "%s es mòrt !"
+
+#: src/classes/defs.cpp:284
 msgid "Level"
 msgstr "Nivèl"
 
-#: src/classes/defs.cpp:264 src/engine/charwindow.cpp:211
+#: src/classes/defs.cpp:290 src/engine/charwindow.cpp:209
 msgid "Fortitude"
 msgstr "Coratge"
 
-#: src/classes/defs.cpp:270 src/engine/charwindow.cpp:216
+#: src/classes/defs.cpp:296 src/engine/charwindow.cpp:214
 msgid "Reflexes"
 msgstr "Reflèxe"
 
-#: src/classes/defs.cpp:277 src/engine/charwindow.cpp:221
+#: src/classes/defs.cpp:303 src/engine/charwindow.cpp:219
 msgid "I am Not a Fool"
 msgstr "Soi pas un piòt"
 
@@ -92,7 +104,7 @@ msgstr "Don invalid"
 msgid "Not enought points to use!"
 msgstr ""
 
-#: src/classes/mission.cpp:531 src/engine/dialog.cpp:1180
+#: src/classes/mission.cpp:531 src/engine/dialog.cpp:1247
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "Mission complida : %d XP !"
@@ -125,15 +137,15 @@ msgstr "Anullar"
 msgid "Aspect"
 msgstr "Aspècte"
 
-#: src/engine/aspectwindow.cpp:67 src/engine/charwindow.cpp:107
+#: src/engine/aspectwindow.cpp:67 src/engine/charwindow.cpp:105
 msgid "Name:"
 msgstr "Nom :"
 
-#: src/engine/aspectwindow.cpp:72 src/engine/charwindow.cpp:110
+#: src/engine/aspectwindow.cpp:72 src/engine/charwindow.cpp:108
 msgid "Age:"
 msgstr "Atge :"
 
-#: src/engine/aspectwindow.cpp:76 src/engine/charwindow.cpp:125
+#: src/engine/aspectwindow.cpp:76 src/engine/charwindow.cpp:123
 msgid "Sex:"
 msgstr "Sèxe :"
 
@@ -153,32 +165,32 @@ msgstr "Escafar"
 msgid "Auto"
 msgstr "Automatic"
 
-#: src/engine/attwindow.cpp:95 src/engine/charwindow.cpp:168
+#: src/engine/attwindow.cpp:95 src/engine/charwindow.cpp:166
 #: data/skills/forca.ski:1
 msgid "Strength"
 msgstr "Fòrça"
 
-#: src/engine/attwindow.cpp:115 src/engine/charwindow.cpp:173
+#: src/engine/attwindow.cpp:115 src/engine/charwindow.cpp:171
 #: data/skills/destreza.ski:1
 msgid "Dexterity"
 msgstr "Dexteritat"
 
-#: src/engine/attwindow.cpp:135 src/engine/charwindow.cpp:178
+#: src/engine/attwindow.cpp:135 src/engine/charwindow.cpp:176
 #: data/skills/constituicao.ski:1
 msgid "Constitution"
 msgstr "Constitucion"
 
-#: src/engine/attwindow.cpp:155 src/engine/charwindow.cpp:183
+#: src/engine/attwindow.cpp:155 src/engine/charwindow.cpp:181
 #: data/skills/inteligencia.ski:1
 msgid "Intelligence"
 msgstr "Intelligéncia"
 
-#: src/engine/attwindow.cpp:176 src/engine/charwindow.cpp:188
+#: src/engine/attwindow.cpp:176 src/engine/charwindow.cpp:186
 #: data/skills/sabedoria.ski:1
 msgid "Wisdom"
 msgstr "Sapiéncia"
 
-#: src/engine/attwindow.cpp:197 src/engine/charwindow.cpp:193
+#: src/engine/attwindow.cpp:197 src/engine/charwindow.cpp:191
 #: data/skills/carisma.ski:1
 msgid "Charisma"
 msgstr "Carisme"
@@ -197,7 +209,7 @@ msgstr "Avertiment"
 msgid "You Need to Assign All Attributes."
 msgstr "Vos cal distribuir totes los atributs."
 
-#: src/engine/barterwindow.cpp:55 src/engine/dialog.cpp:1472
+#: src/engine/barterwindow.cpp:55 src/engine/dialog.cpp:1539
 msgid "Barter"
 msgstr "Tròc"
 
@@ -250,89 +262,89 @@ msgstr "Succès"
 msgid "Failure"
 msgstr "Fracàs"
 
-#: src/engine/character.cpp:568 src/engine/charwindow.cpp:142
+#: src/engine/character.cpp:568 src/engine/charwindow.cpp:140
 msgid "HP"
 msgstr "PV"
 
-#: src/engine/charwindow.cpp:116
+#: src/engine/charwindow.cpp:114
 msgid "Female"
 msgstr "Femna"
 
-#: src/engine/charwindow.cpp:119
+#: src/engine/charwindow.cpp:117
 msgid "Male"
 msgstr "Òme"
 
-#: src/engine/charwindow.cpp:122
+#: src/engine/charwindow.cpp:120
 msgid "Undefined"
 msgstr "Indefinit"
 
-#: src/engine/charwindow.cpp:128
+#: src/engine/charwindow.cpp:126
 msgid "Race:"
 msgstr "Raça :"
 
-#: src/engine/charwindow.cpp:131
+#: src/engine/charwindow.cpp:129
 msgid "Alignment:"
 msgstr "Alinhament :"
 
-#: src/engine/charwindow.cpp:135
+#: src/engine/charwindow.cpp:133
 msgid "XP"
 msgstr "XP"
 
-#: src/engine/charwindow.cpp:136
+#: src/engine/charwindow.cpp:134
 msgid "Next Level"
 msgstr "Nivèl seguent"
 
-#: src/engine/charwindow.cpp:145
+#: src/engine/charwindow.cpp:143
 msgid "AC"
 msgstr "CA"
 
-#: src/engine/charwindow.cpp:206
+#: src/engine/charwindow.cpp:204
 msgid "Total Level"
 msgstr "Nivèl Total"
 
-#: src/engine/charwindow.cpp:226
+#: src/engine/charwindow.cpp:224
 msgid "Base Attack Modifier"
 msgstr "Modificador de combat"
 
-#: src/engine/charwindow.cpp:231
+#: src/engine/charwindow.cpp:229
 msgid "Size Modifier"
 msgstr "Modificador de Talha"
 
-#: src/engine/charwindow.cpp:263
+#: src/engine/charwindow.cpp:261
 msgid "Level Up"
 msgstr "Nivèl Superior"
 
-#: src/engine/charwindow.cpp:269 src/engine/featsel.cpp:170
+#: src/engine/charwindow.cpp:267 src/engine/featsel.cpp:170
 #: src/engine/featswindow.cpp:75
 msgid "Talents"
 msgstr "Dons"
 
-#: src/engine/charwindow.cpp:273 src/engine/skillwindow.cpp:77
+#: src/engine/charwindow.cpp:271 src/engine/skillwindow.cpp:77
 msgid "Skills"
 msgstr "Competéncias"
 
-#: src/engine/charwindow.cpp:277 src/engine/featswindow.cpp:96
+#: src/engine/charwindow.cpp:275 src/engine/featswindow.cpp:96
 #: src/engine/skillwindow.cpp:172 src/engine/teste.cpp:68
 msgid "Close"
 msgstr "Tampar"
 
-#: src/engine/charwindow.cpp:447
+#: src/engine/charwindow.cpp:445
 msgid "Main Weapon"
 msgstr "Arma principala"
 
-#: src/engine/charwindow.cpp:451
+#: src/engine/charwindow.cpp:449
 msgid "Secondary Weapon"
 msgstr "Arma segondària"
 
-#: src/engine/charwindow.cpp:455
+#: src/engine/charwindow.cpp:453
 msgid "Weapon"
 msgstr "Arma"
 
-#: src/engine/charwindow.cpp:467
+#: src/engine/charwindow.cpp:465
 msgid "Unarmed"
 msgstr "Desarmat"
 
-#: src/engine/charwindow.cpp:473
+#: src/engine/charwindow.cpp:471
 msgid "Not Applicable"
 msgstr "S'aplica pas"
 
@@ -449,10 +461,10 @@ msgstr "Acabat !"
 
 #: src/engine/dccnit.cpp:1125
 msgid ""
-"DccNiTghtmare is relesead under GPLv3 or later: Feel free to use its source "
-"code and data the way you want (or to blame us the same way). DccNiTghtmare "
-"is thankful to the people who developed those libraries: OpenAL, Cal3D, "
-"OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
+"DNT is relesead under GPLv3 or later: Feel free to use its source code and "
+"data the way you want (or to blame us the same way). DNT is thankful to the "
+"people who developed those libraries: OpenAL, Cal3D, OpenGL, SDL, SDL_image, "
+"SDL_ttf, libVorbis."
 msgstr ""
 
 #: src/engine/dccnit.cpp:1716
@@ -492,44 +504,44 @@ msgstr "L'inventari es comol !"
 msgid "Door"
 msgstr "Pòrta"
 
-#: src/engine/dccnit.cpp:2492
+#: src/engine/dccnit.cpp:2487
 msgid "dead"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2544
+#: src/engine/dccnit.cpp:2539
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s atacs %s"
 
-#: src/engine/dccnit.cpp:2740
+#: src/engine/dccnit.cpp:2735
 msgid "No more actions. Turn ended."
 msgstr "Pas d'accions suplementàrias. Fin del torn."
 
-#: src/engine/dccnit.cpp:4091
+#: src/engine/dccnit.cpp:4086
 msgid "Exit Battle Mode"
 msgstr "Quitar lo Mòde Combat"
 
-#: src/engine/dialog.cpp:1208
+#: src/engine/dialog.cpp:1275
 #, c-format
 msgid "%s lost."
 msgstr "%s perdut."
 
-#: src/engine/dialog.cpp:1252
+#: src/engine/dialog.cpp:1319
 #, c-format
 msgid "Received %s."
 msgstr "Recebut %s."
 
-#: src/engine/dialog.cpp:1262
+#: src/engine/dialog.cpp:1329
 #, c-format
 msgid "Received $%d."
 msgstr "%d $ recebuts."
 
-#: src/engine/dialog.cpp:1271
+#: src/engine/dialog.cpp:1338
 #, c-format
 msgid "Lost $%d."
 msgstr "%d $ perduts."
 
-#: src/engine/dialog.cpp:1465
+#: src/engine/dialog.cpp:1532
 msgid "Dialog"
 msgstr "Dialòg"
 
@@ -591,7 +603,10 @@ msgstr "Opcions"
 #: data/dialogs/objects/refmachine.dlg:78
 #: data/dialogs/objects/refmachine.dlg:92
 #: data/dialogs/objects/refmachine.dlg:106
-#: data/dialogs/objects/refmachine.dlg:120
+#: data/dialogs/objects/refmachine.dlg:120 data/dialogs/objects/doors.dlg:63
+#: data/dialogs/objects/doors.dlg:78 data/dialogs/objects/doors.dlg:93
+#: data/dialogs/objects/doors.dlg:112 data/dialogs/objects/doors.dlg:128
+#: data/dialogs/objects/doors.dlg:143
 msgid "Exit"
 msgstr "Quitar"
 
@@ -707,7 +722,7 @@ msgstr "Zòna desconeguda"
 msgid "No missions."
 msgstr "Pas de mission."
 
-#: src/engine/minimapwindow.cpp:60
+#: src/engine/minimapwindow.cpp:61
 msgid "Map"
 msgstr "Mapa"
 
@@ -1105,11 +1120,6 @@ msgstr "Maximizar"
 #: src/fight/fightSystem.cpp:153
 msgid "No more enemies."
 msgstr "Pas pus d'enemics"
-
-#: src/fight/fightSystem.cpp:189
-#, c-format
-msgid "%s is dead!"
-msgstr "%s es mòrt !"
 
 #: src/fight/fightSystem.cpp:234
 #, c-format
@@ -1661,14 +1671,14 @@ msgstr ""
 
 #: data/classes/compsci.cls:3
 msgid ""
-"The Computer Science Student is the most bizarre class in DccNiTghtmare "
-"(and, paradoxically, the most common). They are known by their suicidal "
-"choices (the first one being the course of studies they have chosen), their "
-"lack of patience when attending what their masters call 'classes', the "
-"infinite time spent on Practical Exercises (TPs) and the hatred they feel "
-"when they perceive that what they have done works perfectly, but their "
-"masters won't look at and appraise it, since CS teachers are disciplined and "
-"will not compromise the worth of the diploma."
+"The Computer Science Student is the most bizarre class in DNT (and, "
+"paradoxically, the most common). They are known by their suicidal choices "
+"(the first one being the course of studies they have chosen), their lack of "
+"patience when attending what their masters call 'classes', the infinite time "
+"spent on Practical Exercises (TPs) and the hatred they feel when they "
+"perceive that what they have done works perfectly, but their masters won't "
+"look at and appraise it, since CS teachers are disciplined and will not "
+"compromise the worth of the diploma."
 msgstr ""
 
 #: data/classes/compsci.cls:7
@@ -3356,6 +3366,47 @@ msgstr ""
 
 #: data/dialogs/objects/refmachine.dlg:116
 msgid "(You don't have enough money)"
+msgstr ""
+
+#: data/dialogs/objects/doors.dlg:14
+msgid "(The door seems to be locked)"
+msgstr ""
+
+#: data/dialogs/objects/doors.dlg:20
+msgid "Try to unlock it."
+msgstr ""
+
+#: data/dialogs/objects/doors.dlg:30
+msgid "Force your entrance."
+msgstr ""
+
+#: data/dialogs/objects/doors.dlg:43 data/dialogs/objects/doors.dlg:59
+#: data/dialogs/objects/doors.dlg:108
+msgid "Sit down and cry."
+msgstr ""
+
+#: data/dialogs/objects/doors.dlg:54
+msgid "(You failed to unlock it.)"
+msgstr ""
+
+#: data/dialogs/objects/doors.dlg:73
+msgid "(Tic, trec, ouch! You almost lost a finger but the door is now opened.)"
+msgstr ""
+
+#: data/dialogs/objects/doors.dlg:88
+msgid "(The door is unlocked.)"
+msgstr ""
+
+#: data/dialogs/objects/doors.dlg:103
+msgid "(You failed to put it down.)"
+msgstr ""
+
+#: data/dialogs/objects/doors.dlg:123
+msgid "(The jamb was broken and the door is now opened .)"
+msgstr ""
+
+#: data/dialogs/objects/doors.dlg:138
+msgid "(The door doesn't seem to listen you.)"
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:6

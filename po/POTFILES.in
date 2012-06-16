@@ -107,7 +107,6 @@ src/ia/potentAgent.cpp
 #map
 src/map/map.cpp
 src/map/maplights.cpp
-src/map/maproad.cpp
 src/map/mapfog.cpp
 
 #particle
@@ -259,6 +258,7 @@ data/dialogs/objects/bunker_school_server.dlg
 data/dialogs/objects/house2_paints.dlg
 data/dialogs/objects/house2_ovo.dlg
 data/dialogs/objects/refmachine.dlg
+data/dialogs/objects/doors.dlg
 data/dialogs/tutorial/logan.dlg
 data/dialogs/tutorial/santa.dlg
 data/dialogs/tutorial/atleticano.dlg

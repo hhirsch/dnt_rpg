@@ -1,27 +1,27 @@
-#  DccNiTghtmare: a satirical post-apocalyptical RPG.
+#  DNT: a satirical post-apocalyptical RPG.
 #  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
 # 
-#  This file is part of DccNiTghtmare.
+#  This file is part of DNT.
 # 
-#  DccNiTghtmare is free software: you can redistribute it and/or modify
+#  DNT is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  DccNiTghtmare is distributed in the hope that it will be useful,
+#  DNT is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 #
 #  You should have received a copy of the GNU General Public License
-#  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+#  along with DNT.  If not, see <http://www.gnu.org/licenses/>.
 
 AC_PREREQ(2.61)
-AC_INIT(DccNiTghmare, 0.10, http://sourceforge.net/projects/dccnitghtmare)
+AC_INIT(DNT, 0.10, http://sourceforge.net/projects/dccnitghtmare)
 #AC_CONFIG_SRCDIR([src/])
 AC_CONFIG_HEADER([src/config.h])
 
-PACKAGE=dccnitghtmare
+PACKAGE=dnt
 VERSION=0.10
 AC_DEFINE_UNQUOTED(PACKAGE, "$PACKAGE")
 AC_DEFINE_UNQUOTED(VERSION, "$VERSION")

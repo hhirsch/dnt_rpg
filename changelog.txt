@@ -1,6 +1,7 @@
 ================================================
 |                Version 0.10                  |
 ================================================
+ - The game is now called DNT;
  - new portraits (thanks to nubux, qubodup and scribe);
  - new menu and game-over musics;
  - highlight connections on minimap;

@@ -1,6 +1,6 @@
 name = gettext("Computer Science Student")
 epigraph = gettext("'I really don't know why I want to earn this diploma...|Are you stupid? For the women, obviously!'|(Gushm, then a CS Student, answering the existential question of his class).")
-description = gettext("The Computer Science Student is the most bizarre class in DccNiTghtmare (and, paradoxically, the most common). They are known by their suicidal choices (the first one being the course of studies they have chosen), their lack of patience when attending what their masters call 'classes', the infinite time spent on Practical Exercises (TPs) and the hatred they feel when they perceive that what they have done works perfectly, but their masters won't look at and appraise it, since CS teachers are disciplined and will not compromise the worth of the diploma.")
+description = gettext("The Computer Science Student is the most bizarre class in DNT (and, paradoxically, the most common). They are known by their suicidal choices (the first one being the course of studies they have chosen), their lack of patience when attending what their masters call 'classes', the infinite time spent on Practical Exercises (TPs) and the hatred they feel when they perceive that what they have done works perfectly, but their masters won't look at and appraise it, since CS teachers are disciplined and will not compromise the worth of the diploma.")
 lifeDice = d8
 totalModifiers = 4
 modifier = 2 ATTRIBUTE WISDOM ALL ALL
