@@ -19,6 +19,7 @@
 */
 
 #include "actions.h"
+#include "../engine/dccnit.h"
 #include "../engine/briefing.h"
 #include "../engine/util.h"
 #include "../etc/message3d.h"
@@ -277,7 +278,7 @@ bool doHealOrAttack(thing* actor, thing* target,
       /*TODO apply resistances  */
 
       if( ( (diceValue - targetValue <= 0) || (criticalMiss) || (miss) ) &&
-          (criticalHit) )
+          (!criticalHit) )
       {
          brief.addText(diceText + gettext("Miss."));
          if( criticalMiss )
@@ -417,6 +418,234 @@ bool doHealOrAttack(thing* actor, thing* target,
       {
          bloodPart->setFollowCharacter(target, DNT_PARTICLE_SYSTEM_FOLLOW_HEAD);
       }
+   }
+
+   return(true);
+}
+
+/***************************************************************
+ *                         doAreaAttack                        *
+ ***************************************************************/
+bool doAreaAttack(thing* actor, float targetX, float targetZ, int radius,
+                  diceThing diceInfo, factor* conceptBonus,
+                  factor* conceptAgainst, int range, engine* eng)
+{
+   briefing brief;
+   partController pSystem;
+   messageController controller;
+   collision colDet;
+   particleSystem* bloodPart;
+   string diceText;
+   int diceValue;
+   int criticalRoll = -1;
+   int damage = 0;
+   int targetValue; 
+   int bonus;
+   bool miss = false;
+   bool criticalHit = false;
+   char texto[1024];
+
+   /* Define Actor orientation
+    * FIXME -> call rotate animation! */
+   actor->scNode->setAngle(0.0f, getAngle(actor->scNode->getPosX(), 
+                                         actor->scNode->getPosZ(),
+                                         targetX, targetZ), 0.0f);
+   /* Show try brief */
+   sprintf(texto, gettext("%s try to attack an area."), actor->name.c_str());
+   brief.addText(texto);
+
+   /* Verify Action Range */
+   if( (range != 0) && 
+       (!actionInRange(actor->scNode->getPosX(), actor->scNode->getPosZ(), 
+                     targetX, targetZ, range*METER_TO_DNT)))
+   {
+      brief.addText(gettext("Too far away for action!"), 225, 20, 20);
+      return(false);
+   }
+
+   srand(SDL_GetTicks());
+
+   /* Call the animation */
+   actor->callAttackAnimation();
+
+   /* Now let's check action and damage for each character in the area */
+   /* TODO: check and apply damage to objects too! */
+   int i,c;
+   characterList* l = eng->PCs;
+   character* targ;
+   for(i=0; i < 2; i++)
+   {
+      targ = (character*)l->getFirst();
+      for(c=0; c < l->getTotal(); l++)
+      {
+         /* Verify if target in area */
+         float dX = (targ->scNode->getPosX() - targetX);
+         float dZ = (targ->scNode->getPosZ() - targetZ);
+         float dist = sqrt( (dX*dX) + (dZ*dZ) );
+         if(dist <= radius)
+         {
+            miss = false;
+            criticalHit = false;
+            criticalRoll = -1;
+            damage = 0;
+            /* Let's apply action to the target */
+            if(conceptAgainst)
+            {
+               /* Apply Bonuses */
+               bonus = 0;
+               if(conceptBonus)
+               { 
+                  bonus += actor->getBonusValue(*conceptBonus);
+               }
+
+               dice d20;
+               diceValue = d20.roll();
+
+               //TODO apply reflexes bonus, esquive bonus, etc, to target,
+               //depending of the attack type!
+               targetValue = targ->getBonusValue(*conceptAgainst);
+
+               /* verify critical Hit */
+               if(diceValue == DICE_D20)
+               {
+                  criticalRoll = d20.roll();
+                  if( (criticalRoll + bonus - targetValue) > 0)
+                  {
+                     criticalHit = true;
+                  }
+               }
+               else if(diceValue == 1)
+               {
+                 miss = true; 
+               }
+
+               /* Put Dice Values on Briefing */
+               char txtBonus[32];
+               if(bonus >= 0)
+               {
+                  sprintf(txtBonus,"+%d",bonus);
+               }
+               else
+               {
+                  sprintf(txtBonus,"%d",bonus);
+               }
+
+               if(criticalRoll != -1)
+               {
+                  sprintf(texto,"%d(%s) & (%d%s) x %d : ",diceValue,txtBonus,
+                        criticalRoll,txtBonus,targetValue);
+               }
+               else
+               {
+                  sprintf(texto,"%d(%s) x %d : ",diceValue,txtBonus,
+                        targetValue);
+               }
+               diceText = texto;
+
+               //apply bonus (skill bonus)
+               diceValue += bonus;
+
+               /*TODO apply resistances  */
+
+               if( ( (diceValue - targetValue <= 0 || (miss))) && 
+                   (!criticalHit) )
+               {
+                  brief.addText(diceText + gettext("Miss."));
+                  controller.addMessage(actor->scNode->getPosX(),
+                        targ->scNode->getPosY()+
+                        targ->scNode->getBoundingBox().max.y,
+                        targ->scNode->getPosZ(),gettext("Miss."),
+                        0.92,0.41,0.14);
+                  return(true);
+               }
+
+            }
+
+            /* Apply Base Damage Dices */
+            damage += diceInfo.baseDice.roll(criticalHit);
+
+            /* Apply Damage/Heal modifiers bonus */
+            if(conceptBonus)
+            {
+               damage += actor->getBonusValue(*conceptBonus);
+            }
+
+            /* Make sure damage value is at last 1 */
+            if(damage <= 0)
+            {
+               damage = 1;
+            }
+
+            /*TODO apply aditional dices */
+
+            /* Verify instant killing the target */
+            int instantKill = diceInfo.instantKill;
+            
+            dice d100(100);
+            if(d100.roll() < instantKill)
+            {
+               /* Got an instantaneous death here! */
+               damage = targ->getMaxLifePoints();
+               sprintf(texto, 
+                     gettext("Hit at a vital area, inflicting %d points "
+                        "of damage."), damage);
+            }
+            else
+            {
+               sprintf(texto,gettext("Hit for %d points."),damage);
+            }
+            brief.addText(diceText + texto);
+
+            /* apply damage on thing */
+            targ->addLifePoints(-damage);
+
+            if(criticalHit)
+            {
+               brief.addText(gettext("Critical Hit!"), 12, 10, 128);
+               /* Show critical hit */
+               controller.addMessage(targ->scNode->getPosX(),
+                     targ->scNode->getPosY()+
+                     targ->scNode->getBoundingBox().max.y,
+                     targ->scNode->getPosZ(),gettext("Critical Hit!"),
+                     0.84,0.2,0.01);
+            }
+            /* Show Damage */
+            sprintf(texto,"%d",damage);
+            controller.addMessage(targ->scNode->getPosX(), 
+                  targ->scNode->getPosY() + 
+                  targ->scNode->getBoundingBox().max.y,
+                  targ->scNode->getPosZ(), texto,
+                  0.4, 0.01, 0.03);
+
+            /* Add Blood */
+            GLfloat cs = cos(deg2Rad(targ->scNode->getAngleY()));
+            GLfloat sn = sin(deg2Rad(targ->scNode->getAngleY()));
+
+            bloodPart = pSystem.addParticle(targ->scNode->getPosX() - (sn*2),
+                  targ->scNode->getPosY() + targ->bloodPosition,
+                  targ->scNode->getPosZ() - (cs*2), targ->bloodFileName);
+
+            /* Set the blood follow character if needed */
+            if(targ->getThingType() == THING_TYPE_CHARACTER)
+            {
+               bloodPart->setFollowCharacter(targ, 
+                     DNT_PARTICLE_SYSTEM_FOLLOW_HEAD);
+            }
+
+            /* Verify if character is dead */
+            if(targ->getLifePoints() <= 0)
+            {
+               /* Character is dead! */
+               targ->kill();
+               sprintf(texto, gettext("%s is dead!"), targ->name.c_str());
+               brief.addText(texto, 255, 144, 0);
+            }
+
+         }
+
+         targ = (character*)targ->getNext();
+      }
+      l = eng->NPCs;
    }
 
    return(true);

@@ -76,6 +76,9 @@
 
 #define ACT_MOVE_DELTA 5
 
+/* Forward declaration */
+class engine;
+
 /*!
  ************************************************************* 
  * Return the number of the action with name buffer  
@@ -125,6 +128,23 @@ bool doHealOrAttack(thing* actor, thing* target,
 bool doHealOrAttack(thing* actor, thing* target, 
                     diceThing diceInfo, factor* conceptBonus,
                     factor* conceptAgainst, int range, bool heal);
+
+/*! Do an action that will negatively affect the life points of
+ * characters  in the area.
+ * \note : TODO: afect objects too.
+ * \param actor -> thing that will act 
+ * \param targetX -> central X target
+ * \param targetZ -> central Z target
+ * \param diceInfo -> the action dice
+ * \param conceptBonus -> pointer to the concept bonus (if one), or NULL
+ * \param conceptAgainst -> the target's concept to roll against (NULL for no
+ *  resistance test)
+ * \param radius -> radius of target circle
+ * \param range -> action range 
+ * \param eng -> pointer to current DNT engine */
+bool doAreaAttack(thing* actor, float targetX, float targetZ, int radius,
+                  diceThing diceInfo, factor* conceptBonus,
+                  factor* conceptAgainst, int range, engine* eng);
 
 #endif
 
