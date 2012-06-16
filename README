@@ -1,5 +1,5 @@
 ==============================================================
-|                         DccNiTghtmare                      |
+|                              DNT                           |
 ==============================================================
 
 0   - License
@@ -12,8 +12,8 @@ V   - Contacts
 ==============================================================
 |                        0 - License                         |
 ==============================================================
-   DccNiTghtmare  source  code  is released under GPLv3 or any 
-latter version.  The  content created  by  the  DNTeam is also 
+   DNT  source  code  is  released  under  GPLv3 or any latter 
+version.   The   content   created  by  the   DNTeam  is  also 
 released  under  GPLv3  or  latter.  Other  content  is either 
 licensed under GPLv2 or latter or CC-BY or CC-BY-SA licenses.
 
@@ -41,8 +41,8 @@ contents  on  the game (.blend files).
 |                      I - Requeriments                      |
 ==============================================================
 
-   The DccNiTghtmare's compilation and execution needs  some 
-software and hardware. They are:
+   The  DNT  compilation and execution needs some software and 
+hardware. They are:
 
    Software:
       Cal3D     - http://home.gna.org/cal3d/
@@ -65,24 +65,26 @@ software and hardware. They are:
 
    a) LINUX, BSD, *NIX
 
-   To   "install"   dccnitghtmare,   decompact   the  tar.bz2,  
-go to the directory dccnitghtmare, run ./configure , run
-"make" and "make install".
-   Example:
-   farrer@anamabeka:~/$ tar -xvjf dccnitghtmare.tar.bz2
-   farrer@anamabeka:~/$ cd dccnitghtmare
-   farrer@snamabeka:~/dccnitghtmare/$ ./configure
-   farrer@anamabeka:~/dccnitghtmare/$ make
-   farrer@anamabeka:~/dccnitghtmare/$ sudo make install
+   To "install" DNT, decompact the tar.bz2, go to the directory
+"dnt",  run   ./configure ,   run   "make"   and,   optionally, 
+"make install".
 
-   NOTE: the 'make install' isn't necessary: you can run the game
-         at its local folder.
+   Example:
+
+   farrer@anamabeka:~/$ tar -xvjf dnt.tar.bz2
+   farrer@anamabeka:~/$ cd dnt
+   farrer@anamabeka:~/dnt/$ ./configure
+   farrer@anamabeka:~/dnt/$ make
+   farrer@anamabeka:~/dnt/$ sudo make install
+
+   NOTE: the  'make install'  isn't  necessary:  you  can run 
+         the game at its local folder.
 
    b) WINDOWS (We hope you're not using it on Ruindow$).
 
-   To  compile  dccnitghtmare  on  windows,  you'll  need  the 
-dev-c++  compiler  (a.k.a. gcc port and ide to Windows).  Open
-the project DccNiTghtmare.dev on it and compile.
+   To   compile   DNT   on    windows,   you'll   need    the 
+Code::Blocks IDE.  Open the project at ./windows folder on it 
+and compile.
    Don't blame us. Blame Microsoft!
 
 ==============================================================
@@ -155,7 +157,7 @@ j      =  Open Journal Window
 ==============================================================
 
 =========================
-|     DccNiTghtmare     |
+|          DNT          |
 |-----------------------|
 | http://dnt.dnteam.org |
 |     dnt@dnteam.org    |
