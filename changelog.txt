@@ -10,6 +10,7 @@
  - Lockable doors;
  - dntMapEditor: Edit locked door parameters;
  - Surface texture indicating "possible-to-walk" positions on map;
+ - Decreased the A* delay for Playable Character pathfinding;
 
 BugFixes:
  - heightmap2dnt: Fixed a missing include;
