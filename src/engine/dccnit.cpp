@@ -1966,7 +1966,7 @@ void engine::doAStar()
       per = (character*) NPCs->getFirst();
       for(aux=0; aux < NPCs->getTotal(); aux++)
       {
-         per->pathFind.doCycle((engineMode == ENGINE_MODE_TURN_BATTLE));
+         per->pathFind.doCycle((engineMode == ENGINE_MODE_TURN_BATTLE), false);
          per = (character*)per->getNext();
       }
    }
@@ -1976,7 +1976,7 @@ void engine::doAStar()
       per = (character*) PCs->getFirst();
       for(aux=0; aux < PCs->getTotal(); aux++)
       {
-         per->pathFind.doCycle((engineMode == ENGINE_MODE_TURN_BATTLE));
+         per->pathFind.doCycle((engineMode == ENGINE_MODE_TURN_BATTLE), true);
          per = (character*)per->getNext();
       }
 

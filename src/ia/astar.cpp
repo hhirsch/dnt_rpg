@@ -27,6 +27,7 @@ using namespace std;
 
 #define SEARCH_LIMIT   1000  /**< Max Nodes the aStar will search */
 #define SEARCH_INTERVAL   2  /**< Interval of Nodes when aStar will sleep */
+#define PC_SEARCH_FACTOR  4  /**< Playable character factor to searchinterval */
 #define MIN_CALL        200  /**< Minimun time interval to call search again */
 
 #define STEP_FACTOR        20  /**< Factor to step search */
@@ -256,7 +257,7 @@ void aStar::clear()
 /****************************************************************
  *                             doCycle                          *
  ****************************************************************/
-void aStar::doCycle(bool fightMode)
+void aStar::doCycle(bool fightMode, bool isPC)
 {
    GLfloat newg = 0;                /* new gone value */
    pointStar* node, *node2, *node3; /* auxiliar nodes */
@@ -264,11 +265,18 @@ void aStar::doCycle(bool fightMode)
    int i, j;                        /* counters */
    bool directionChange;            /* direction verification */
    GLfloat curDist = 0.0f;          /* current distance to goal  */
+   int searchInterval = SEARCH_INTERVAL;
 
    /* Verify if is searching, if not, no need to run */
    if(state != ASTAR_STATE_RUNNING)
    {
       return;
+   }
+
+   if(isPC)
+   {
+      /* Must search for more cycles */
+      searchInterval *= PC_SEARCH_FACTOR;
    }
 
    /* Verify Lists */
@@ -294,7 +302,7 @@ void aStar::doCycle(bool fightMode)
    collisionDetect.defineMap(actualMap, (characterList*)npcs, 
                              (characterList*)pcs);
 
-   for(j = 0; j < SEARCH_INTERVAL; j++)
+   for(j = 0; j < searchInterval; j++)
    {
       /* Verify if the search still exists or if the limit was reached */
       if( (opened->isEmpty()) || 

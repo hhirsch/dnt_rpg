@@ -120,8 +120,9 @@ class aStar
                     bool forceCall=false);
 
       /* Do the a* cycle (if is current searching for something)
-       * \param fightMode -> true if is in the fight mode */
-      void doCycle(bool fightMode);
+       * \param fightMode -> true if is in the fight mode
+       * \param isPC -> true if is searching for a playable character */
+      void doCycle(bool fightMode, bool isPC);
 
       /*! Get the New Character Position, based on Path Found previously 
        * \param posX -> new X position
