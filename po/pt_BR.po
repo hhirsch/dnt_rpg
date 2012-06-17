@@ -5296,7 +5296,7 @@ msgstr "Casa sede em ruínas"
 #: data/models/building/ruin_house5/ruin_house5.dcc:1
 #: data/models/building/ruin_house6/ruin_house6.dcc:1
 msgid "Ruined House"
-msgstr "Case em Ruínas"
+msgstr "Casa em Ruínas"
 
 #: data/models/building/ruin_house_barraco1/ruin_house_barraco1.dcc:1
 msgid "Shed on Ruins"
@@ -5325,7 +5325,7 @@ msgstr "Escola Bunker"
 #: data/models/junk/bloco1/bloco1.dcc:1 data/models/junk/pneu/pneu.dcc:1
 #: data/models/junk/bloco2/bloco2.dcc:1 data/models/junk/scrap2/scrap2.dcc:1
 msgid "Junk"
-msgstr "Lixo"
+msgstr "Entulho"
 
 #: data/models/junk/caixa1/caixa2.dcc:1 data/models/junk/caixa1/caixa1.dcc:1
 msgid "Box"
