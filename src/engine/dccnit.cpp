@@ -3206,10 +3206,15 @@ int engine::treatIO(SDL_Surface *screen)
       }
 
       /* Verify if found path in aStar */
-      if(activeCharacter->pathFind.getState() == ASTAR_STATE_FOUND)
+      int astate = activeCharacter->pathFind.getState();
+      if(astate == ASTAR_STATE_FOUND)
       {
          /* Found path to, so walk */
          walkStatus = ENGINE_WALK_MOUSE_ASTAR;
+      }
+      else if(astate == ASTAR_STATE_NOT_FOUND)
+      {
+         brief->addText(gettext("A* could not find a path!"), 220,20,220, true);
       }
 
       if(walkStatus == ENGINE_WALK_MOUSE_ASTAR)

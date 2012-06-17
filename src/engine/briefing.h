@@ -52,8 +52,9 @@ class briefing
        * \param text -> text to add
        * \param R -> red color of the font
        * \param G -> green color of the font
-       * \param B -> blue color of the font */
-      void addText(std::string text, int R, int G, int B);
+       * \param B -> blue color of the font 
+       * \param forceRep -> if you force repetition or not */
+      void addText(std::string text, int R, int G, int B, bool forceRep=false);
 
       /*! Add the string to the briefing 
        * \param text -> text to add
@@ -63,9 +64,10 @@ class briefing
        * \param style -> style of the font to use
        * \param R -> red color of the font
        * \param G -> green color of the font
-       * \param B -> blue color of the font */
+       * \param B -> blue color of the font 
+       * \param forceRep -> force repetition or not */
       void addText(std::string text, std::string font, int size, int style,
-                   int align, int R, int G, int B);
+                   int align, int R, int G, int B, bool forceRep=false);
 
       /*! Add a check text to the briefieng
        * \param testName -> name of the state tested

@@ -11,6 +11,8 @@
  - dntMapEditor: Edit locked door parameters;
  - Surface texture indicating "possible-to-walk" positions on map;
  - Decreased the A* delay for Playable Character pathfinding;
+ - Added a brief text alert when Playable Character A* fails 
+   to find a path;
 
 BugFixes:
  - heightmap2dnt: Fixed a missing include;

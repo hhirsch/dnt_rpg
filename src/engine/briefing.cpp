@@ -115,7 +115,7 @@ void briefing::addText(string text)
       /* To avoid same last line for too much mouse press, for example */
       Uint32 time = SDL_GetTicks(); 
       if( (briefTxt->getLastLine() != text) ||
-          (time - timeLastAdd > DNT_BRIEFING_RATE) )
+          ((time - timeLastAdd) > DNT_BRIEFING_RATE) )
       {
          timeLastAdd = time;
          briefTxt->addText(text);
@@ -126,23 +126,23 @@ void briefing::addText(string text)
 /***********************************************************************
  *                              addText                                *
  ***********************************************************************/
-void briefing::addText(string text, int R, int G, int B)
+void briefing::addText(string text, int R, int G, int B, bool forceRep)
 {
    dirs dir;
    addText(text, dir.getRealFile(DNT_FONT_ARIAL), 10, Farso::Font::STYLE_NORMAL,
-           Farso::Font::ALIGN_LEFT, R, G, B); 
+           Farso::Font::ALIGN_LEFT, R, G, B, forceRep); 
 }
 
 /***********************************************************************
  *                              addText                                *
  ***********************************************************************/
 void briefing::addText(string text, string font, int size, int style,
-                       int align, int R, int G, int B)
+                       int align, int R, int G, int B, bool forceRep)
 {
    if(briefWindow != NULL)
    {
       /* To avoid same last line */
-      if(briefTxt->getLastLine() != text)
+      if( (briefTxt->getLastLine() != text) || (forceRep))
       {
          briefTxt->addText(text, font, size, style, align, R, G, B);
       }
