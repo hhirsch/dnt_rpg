@@ -156,6 +156,7 @@ engine::engine()
    mouseY = 0;
 
    showRange = false;
+   occPosition = false;
 
    /* Create the particle System */
    particleController.init();
@@ -244,6 +245,7 @@ engine::~engine()
    glDeleteTextures(1, &fullMoveCircle);
    glDeleteTextures(1, &destinyImage);
    glDeleteTextures(1, &rangeCircle);
+   glDeleteTextures(1, &canOccImage);
    glDeleteTextures(1, &featRangeCircle);
    glDeleteTextures(1, &idTextura);
 
@@ -1675,6 +1677,24 @@ void engine::init(SDL_Surface *screen)
 
    SDL_FreeSurface(img);
 
+   /* can occupy image */
+   img = IMG_Load(dir.getRealFile("texturas/walk/canwalkmark.png").c_str());
+   if(!img)
+   {
+      cerr << "Error: can't Load Texure: walk/canwalkmark.png" << endl;
+   }
+
+   glGenTextures(1, &canOccImage);
+
+   glBindTexture(GL_TEXTURE_2D, canOccImage);
+   glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
+                0,DNT_IMAGE_FORMAT_A, GL_UNSIGNED_BYTE, img->pixels);
+
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+   SDL_FreeSurface(img);
+
 
    /* Move Destiny */
    img = IMG_Load(dir.getRealFile("texturas/walk/destino.png").c_str());
@@ -2304,6 +2324,8 @@ int engine::verifyMouseActions(Uint8 mButton)
    Uint32 time = SDL_GetTicks();
    activeCharacter = PCs->getActiveCharacter();
 
+   occPosition = true;
+
    /* Nullify the current target */
    curTarget = NULL;
 
@@ -2311,6 +2333,10 @@ int engine::verifyMouseActions(Uint8 mButton)
    boundingBox mouseBox;
    mouseBox.setMin(xReal-4, yReal-4.0, zReal-4);
    mouseBox.setMax(xReal+4, yReal+4.0, zReal+4);
+   boundingBox biggerMouseBox;
+   biggerMouseBox.setMin(xReal-6, yReal-10.0, zReal-6);
+   biggerMouseBox.setMax(xReal+6, yReal+10.0, zReal+6);
+
 
    int qx, qz;
    qx = (int)xReal / actualMap->squareSize();
@@ -2324,18 +2350,35 @@ int engine::verifyMouseActions(Uint8 mButton)
       /* Objects Verification */
       for(pronto = 0; ( (obj < quaux->getTotalObjects()) && (!pronto) );obj++)
       {
-         if( (sobj->obj) && ( (sobj->obj->canGet()) || 
-             (!sobj->obj->getConversationFile().empty()) ) )
+         if(sobj->obj)
          {
             colBox = sobj->obj->scNode->getBoundingBox();
             if(mouseBox.intercepts(colBox))
             {
                curTarget = (thing*)sobj->obj;
                cursors->setTextOver(sobj->obj->getName());
+
+               /* Verify if object is walkable (if can't occ position,
+                * no need to verify more). */
+               if( (occPosition) &&
+                 ((sobj->y + sobj->obj->scNode->getBoundingBox().max.y)>=1.5f))
+               {
+                  /* Isn't, verify depth collision to make sure
+                   * the collision with mouse occurs */
+                  if(sobj->obj->depthCollision(sobj->angleX, sobj->angleY,
+                           sobj->angleZ, sobj->x,
+                           sobj->y +
+                           actualMap->getHeight(sobj->x,sobj->z),
+                           sobj->z, biggerMouseBox))
+                  {
+                     occPosition = false;
+                  }
+               }
                
                /* The Object Dialog Window Call */
                if(!sobj->obj->getConversationFile().empty())
                {
+                  occPosition = false;
                   cursors->set(CURSOR_USE);
                   if( (mButton & SDL_BUTTON(1)) && 
                       (rangeAction(activeCharacter->scNode->getPosX(), 
@@ -2348,9 +2391,11 @@ int engine::verifyMouseActions(Uint8 mButton)
                            (conversation*)sobj->obj->getConversation(), 
                            sobj->obj->get2dModelName());
                   }
+                  pronto = 1;
                }
-               else
+               else if(sobj->obj->canGet())
                {
+                  occPosition = false;
                   cursors->set(CURSOR_GET);
                   cursors->setTextOver(sobj->obj->getName()); 
                   if( (mButton & SDL_BUTTON(1)) && 
@@ -2421,8 +2466,8 @@ int engine::verifyMouseActions(Uint8 mButton)
                         }
                      }
                   }
+                  pronto = 1;
                }
-               pronto = 1;
             }
          }
          sobj = (objSquare*)sobj->getNext();
@@ -2436,6 +2481,7 @@ int engine::verifyMouseActions(Uint8 mButton)
          colBox = porta->obj->scNode->getBoundingBox();
          if(mouseBox.intercepts(colBox))
          {
+            occPosition = false;
             cursors->set(CURSOR_DOOR);
             cursors->setTextOver(gettext("Door")); 
             
@@ -2476,6 +2522,7 @@ int engine::verifyMouseActions(Uint8 mButton)
             colBox = pers->scNode->getBoundingBox();
             if(mouseBox.intercepts(colBox))
             {
+               occPosition = false;
                curTarget = (thing*)pers;
                if(pers->isAlive())
                {
@@ -2592,11 +2639,33 @@ int engine::verifyMouseActions(Uint8 mButton)
       {
          curConection = NULL;
       }
+   
+      /* Verify Walls under mouse */
+      if(occPosition)
+      {
+         wall* w = actualMap->getFirstWall();
+         boundingBox wallBox;
+         for(i=0; ( (i < actualMap->getTotalWalls()) && (occPosition)); i++)
+         {
+            wallBox.setMin(w->x1, 0.0f, w->z1);
+            wallBox.setMax(w->x2, WALL_HEIGHT, w->z2);
+            if(wallBox.intercepts(biggerMouseBox))
+            {
+               occPosition = false;
+            }
+            w = (wall*)w->getNext();
+         }
+      }
    }
-   else if(!gui->mouseOnGui(mouseX, mouseY))
+   else
    {
-      /* Mouse Cursor Forbidden (when can't go to position) */
-      cursors->set(CURSOR_FORBIDDEN);
+      occPosition = false;
+      if(!gui->mouseOnGui(mouseX, mouseY))
+      {
+         /* Mouse Cursor Forbidden (when can't go to position) */
+         cursors->set(CURSOR_FORBIDDEN);
+
+      }
    }
 
    pers = (character*) PCs->getFirst();
@@ -2606,6 +2675,7 @@ int engine::verifyMouseActions(Uint8 mButton)
       if( (pers->mouseUnderPortrait(mouseX, mouseY)) || 
             (pers->mouseUnderHealthBar(mouseX, mouseY)) )
       {
+         occPosition = false;
          pronto = 1;
          break;
       }
@@ -2614,6 +2684,7 @@ int engine::verifyMouseActions(Uint8 mButton)
       colBox = pers->scNode->getBoundingBox();
       if(mouseBox.intercepts(colBox))
       {
+         occPosition = false;
          cursors->set(CURSOR_INVENTORY);
          cursors->setTextOver(pers->name);
          curTarget = (thing*)pers;
@@ -3439,6 +3510,15 @@ void engine::renderNoShadowThings()
                                      activeCharacter->scNode->getPosZ() + 
                                                   activeCharacter->displacement,
                                      0.05f, 20);
+   }
+
+   if( (occPosition) && (walkStatus != ENGINE_WALK_MOUSE) )
+   {
+      /* Can walk to position mark */
+      actualMap->renderSurfaceOnMap(canOccImage,
+                                    xReal-4, zReal-4,
+                                    xReal+4, zReal+4,
+                                     0.075f, 20);
    }
 
    /* Draw Combat Mode Things */

@@ -2,13 +2,14 @@
 |                Version 0.10                  |
 ================================================
  - The game is now called DNT;
- - new portraits (thanks to nubux, qubodup and scribe);
- - new menu and game-over musics;
- - highlight connections on minimap;
- - dialog checks can be against factors (instead of 
+ - New portraits (thanks to nubux, qubodup and scribe);
+ - New menu and game-over musics;
+ - Highlight connections on minimap;
+ - Dialog checks can be against factors (instead of 
    only numerical values)
  - Lockable doors;
  - dntMapEditor: Edit locked door parameters;
+ - Surface texture indicating "possible-to-walk" positions on map;
 
 BugFixes:
  - heightmap2dnt: Fixed a missing include;

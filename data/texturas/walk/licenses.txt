@@ -1,11 +1,10 @@
-All Textures used in DNT are free (as in free speech).
+destino.png,
+range.png
+   Author: DNTeam
+   License: GPLv3
 
-Here are the licenses for those at the current directory.
-
-===========================================================================
-DNTeam Public Domain Textures
-
-destino.png, range.png
-
-===========================================================================
+canwalkmark.png
+   Author: ?
+   License: Public-Domain
+   Reference: http://dnt.dnteam.org/FoRuM/viewtopic.php?f=10&t=161#p527
 
