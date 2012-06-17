@@ -1,4 +1,4 @@
-name = School_Sign
+name = gettext("School Sign")
 cal3d = models/objetos/geral/signs/school_sign.cfg
 inventory_sizes = 0 0
 inventory_texture = texturas/na.png

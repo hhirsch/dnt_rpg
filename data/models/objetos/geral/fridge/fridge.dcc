@@ -1,4 +1,4 @@
-name = Fridge
+name = gettext("Fridge")
 cal3d = models/objetos/geral/fridge/model.cfg
 inventory_sizes = 0 0
 inventory_texture = texturas/na.png

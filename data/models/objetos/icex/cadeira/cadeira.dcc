@@ -1,4 +1,4 @@
-name = Chair
+name = gettext("Chair")
 cal3d = models/objetos/icex/cadeira/cadeira.cfg
 inventory_sizes = 0 0
 inventory_texture = texturas/na.png

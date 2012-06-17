@@ -1,4 +1,4 @@
-name = Pneu
+name = gettext("Junk")
 cal3d = models/junk/pneu/model.cfg
 inventory_texture = texturas/na.png
 inventory_sizes = 0 0

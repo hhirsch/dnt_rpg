@@ -1,4 +1,4 @@
-name = Box1
+name = gettext("Box")
 cal3d = models/junk/caixa1/model.cfg
 inventory_texture = texturas/na.png
 inventory_sizes = 0 0

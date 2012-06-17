@@ -1,4 +1,4 @@
-name = Fence
+name = gettext("Fence")
 cal3d = models/objetos/tumbas/cementery_fence/model.cfg
 inventory_sizes = 0 0
 inventory_texture = texturas/na.png

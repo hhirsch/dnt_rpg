@@ -1,4 +1,4 @@
-name = Bench
+name = gettext("Bench")
 cal3d = models/street/bench2/model.cfg
 inventory_texture = texturas/na.png
 inventory_sizes = 0 0

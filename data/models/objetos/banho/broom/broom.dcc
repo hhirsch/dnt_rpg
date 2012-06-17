@@ -1,4 +1,4 @@
-name = Broom
+name = gettext("Broom")
 cal3d = models/objetos/banho/broom/model.cfg
 inventory_sizes = 0 0
 inventory_texture = texturas/na.png

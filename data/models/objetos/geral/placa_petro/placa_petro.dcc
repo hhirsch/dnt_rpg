@@ -1,4 +1,4 @@
-name = Sign
+name = gettext("Sign")
 cal3d = models/objetos/geral/placa_petro/model.cfg
 inventory_sizes = 0 0
 inventory_texture = texturas/na.png

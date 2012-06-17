@@ -1,4 +1,4 @@
-name = Ruin_House
+name = gettext("Bunker School")
 cal3d = models/building/ruin_house3/ruin_house3.md5def
 inventory_texture = texturas/na.png
 inventory_sizes = 0 0

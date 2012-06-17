@@ -1,4 +1,4 @@
-name = Escada
+name = gettext("Ladder")
 cal3d = models/objetos/geral/escada/model.cfg
 inventory_sizes = 0 0
 inventory_texture = texturas/na.png

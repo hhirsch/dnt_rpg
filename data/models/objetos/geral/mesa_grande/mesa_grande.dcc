@@ -1,4 +1,4 @@
-name = Mesa
+name = gettext("Table")
 cal3d = models/objetos/geral/mesa_grande/model.cfg
 inventory_sizes = 0 0
 inventory_texture = texturas/na.png

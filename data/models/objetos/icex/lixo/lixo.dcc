@@ -1,4 +1,4 @@
-name = Lixo
+name = gettext("Dump")
 cal3d = models/objetos/icex/lixo/lixo.cfg
 inventory_sizes = 0 0
 inventory_texture = texturas/na.png

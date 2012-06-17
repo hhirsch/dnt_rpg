@@ -1,4 +1,4 @@
-name = Wardrobe
+name = gettext("Wardrobe")
 cal3d = models/objetos/geral/wardrobe/model.cfg
 inventory_sizes = 0 0
 inventory_texture = texturas/na.png

@@ -1,4 +1,4 @@
-name = Fireplace
+name = gettext("Fireplace")
 cal3d = models/natural/fogueira/model.cfg
 inventory_texture = texturas/na.png
 inventory_sizes = 0 0

@@ -1,4 +1,4 @@
-name = Rug
+name = gettext("Rug")
 cal3d = models/objetos/geral/rug2/model.cfg
 inventory_sizes = 0 0
 inventory_texture = texturas/na.png

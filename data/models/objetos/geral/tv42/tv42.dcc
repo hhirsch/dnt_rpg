@@ -1,4 +1,4 @@
-name = TV42
+name = gettext("Television")
 cal3d = models/objetos/geral/tv42/model.cfg
 inventory_sizes = 0 0
 inventory_texture = texturas/na.png

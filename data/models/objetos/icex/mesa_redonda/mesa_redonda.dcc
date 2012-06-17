@@ -1,4 +1,4 @@
-name = Table
+name = gettext("Table")
 cal3d = models/objetos/icex/mesa_redonda/model.cfg
 inventory_sizes = 0 0
 inventory_texture = texturas/na.png

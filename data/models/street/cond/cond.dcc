@@ -1,4 +1,4 @@
-name = Cond
+name = gettext("Pillar")
 cal3d = models/street/cond/model.cfg
 inventory_texture = texturas/na.png
 inventory_sizes = 0 0

@@ -1,4 +1,4 @@
-name = Estante
+name = gettext("Shelf")
 cal3d = models/objetos/geral/estante/model.cfg
 inventory_sizes = 0 0
 inventory_texture = texturas/na.png

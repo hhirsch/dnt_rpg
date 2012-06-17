@@ -1,4 +1,4 @@
-name = StreetLight
+name = gettext("Light Pole")
 cal3d = models/street/streetlight3/model.cfg
 inventory_texture = texturas/na.png
 inventory_sizes = 0 0

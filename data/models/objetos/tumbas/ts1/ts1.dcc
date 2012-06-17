@@ -1,4 +1,4 @@
-name = TombStone1
+name = gettext("Tombstone")
 cal3d = models/objetos/tumbas/ts1/model.cfg
 inventory_sizes = 0 0
 inventory_texture = texturas/na.png

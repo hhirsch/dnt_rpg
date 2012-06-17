@@ -1,4 +1,4 @@
-name = Scrap4
+name = gettext("Junk")
 cal3d = models/junk/scrap4/model.cfg
 inventory_texture = texturas/na.png
 inventory_sizes = 0 0

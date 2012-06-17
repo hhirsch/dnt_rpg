@@ -1,4 +1,4 @@
-name = Barraco2
+name = gettext("Shed")
 cal3d = models/building/barraco2/model.cfg
 inventory_texture = texturas/na.png
 inventory_sizes = 0 0

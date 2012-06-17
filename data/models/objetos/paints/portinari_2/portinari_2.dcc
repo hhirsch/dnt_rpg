@@ -1,4 +1,4 @@
-name = Cafe
+name = Café
 cal3d = models/objetos/paints/portinari_2/model.cfg
 inventory_sizes = 0 0
 inventory_texture = models/objetos/paints/portinari_2/tex_dlg.png

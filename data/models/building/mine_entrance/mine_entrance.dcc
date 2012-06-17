@@ -1,4 +1,4 @@
-name = MineEntrance
+name = gettext("Mine Entrance")
 cal3d = models/building/mine_entrance/mine_entrance.md5def
 inventory_texture = texturas/na.png
 inventory_sizes = 0 0

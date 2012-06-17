@@ -1,4 +1,4 @@
-name = Container
+name = gettext("Container")
 cal3d = models/street/container/model.cfg
 inventory_texture = texturas/na.png
 inventory_sizes = 0 0

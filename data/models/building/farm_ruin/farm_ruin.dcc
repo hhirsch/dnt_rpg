@@ -1,4 +1,4 @@
-name = Farm_Ruin
+name = gettext("Ruined Farm House")
 cal3d = models/building/farm_ruin/model.cfg
 inventory_texture = texturas/na.png
 inventory_sizes = 0 0

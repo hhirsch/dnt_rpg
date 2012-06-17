@@ -1,4 +1,4 @@
-name = Tomb
+name = gettext("Tomb")
 cal3d = models/objetos/tumbas/tomb1/model.cfg
 inventory_sizes = 0 0
 inventory_texture = texturas/na.png

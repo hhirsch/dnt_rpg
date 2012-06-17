@@ -1,4 +1,4 @@
-name = Mixer
+name = gettext("Concrete Mixer")
 cal3d = models/street/mixer/model.cfg
 inventory_texture = texturas/na.png
 inventory_sizes = 0 0

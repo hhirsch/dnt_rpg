@@ -1,4 +1,4 @@
-name = Guitar
+name = gettext("Guitar")
 cal3d = models/objetos/geral/guitarra/model.cfg
 inventory_sizes = 0 0
 inventory_texture = texturas/na.png

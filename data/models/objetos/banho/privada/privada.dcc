@@ -1,4 +1,4 @@
-name = Privada
+name = gettext("Toilet")
 cal3d = models/objetos/banho/privada/model.cfg
 inventory_sizes = 0 0
 inventory_texture = texturas/na.png

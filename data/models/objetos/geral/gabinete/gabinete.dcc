@@ -1,4 +1,4 @@
-name = Computer
+name = gettext("Computer")
 cal3d = models/objetos/geral/gabinete/model.cfg
 inventory_sizes = 0 0
 inventory_texture = texturas/na.png

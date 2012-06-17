@@ -1,4 +1,4 @@
-name = Tree
+name = gettext("Tree")
 cal3d = models/natural/arvores/tree3/model.cfg
 inventory_texture = texturas/na.png
 inventory_sizes = 0 0

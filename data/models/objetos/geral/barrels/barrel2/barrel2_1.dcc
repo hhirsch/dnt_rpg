@@ -1,4 +1,4 @@
-name = Barrel2_1
+name = gettext("Barrel")
 cal3d = models/objetos/geral/barrels/barrel2/model_1.cfg
 inventory_sizes = 0 0
 inventory_texture = texturas/na.png

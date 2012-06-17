@@ -1,4 +1,4 @@
-name = PapelHigienico
+name = gettext("Toilet Paper")
 cal3d = models/objetos/banho/papel_higienico/model.cfg
 inventory_sizes = 0 0
 inventory_texture = texturas/na.png

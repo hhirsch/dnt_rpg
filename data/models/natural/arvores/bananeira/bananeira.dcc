@@ -1,4 +1,4 @@
-name = Bananeira
+name = gettext("Banana Plant")
 cal3d = models/natural/arvores/bananeira/model.cfg
 inventory_texture = texturas/na.png
 inventory_sizes = 0 0

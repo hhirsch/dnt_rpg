@@ -1,4 +1,4 @@
-name = Operarios
+name = Operários
 cal3d = models/objetos/paints/tarsila_2/model.cfg
 inventory_sizes = 0 0
 inventory_texture = models/objetos/paints/tarsila_2/tex_dlg.png

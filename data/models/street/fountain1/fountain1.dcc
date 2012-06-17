@@ -1,4 +1,4 @@
-name = Fountain
+name = gettext("Fountain")
 cal3d = models/street/fountain1/model.cfg
 inventory_texture = texturas/na.png
 inventory_sizes = 0 0

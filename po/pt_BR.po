@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DNT\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2012-06-16 14:40-0300\n"
+"POT-Creation-Date: 2012-06-17 15:21-0300\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -98,7 +98,7 @@ msgstr "Não Sou Bobo"
 msgid "Invalid Talent"
 msgstr "Talento Inválido"
 
-#: src/classes/feats.cpp:242 src/engine/dccnit.cpp:2195
+#: src/classes/feats.cpp:242 src/engine/dccnit.cpp:2215
 msgid "Not enought points to use!"
 msgstr "Pontos não suficientes para usar!"
 
@@ -197,8 +197,8 @@ msgstr "Carisma"
 msgid "Attribute Description"
 msgstr "Descrição do Atributo"
 
-#: src/engine/attwindow.cpp:559 src/engine/dccnit.cpp:593
-#: src/engine/dccnit.cpp:2194 src/engine/featsel.cpp:495
+#: src/engine/attwindow.cpp:559 src/engine/dccnit.cpp:595
+#: src/engine/dccnit.cpp:2214 src/engine/featsel.cpp:495
 #: src/engine/inventwindow.cpp:366 src/engine/options.cpp:1476
 msgid "Warning"
 msgstr "Aviso"
@@ -399,65 +399,65 @@ msgstr "Perícias da Classe"
 msgid "No Skills."
 msgstr "Sem Perícias"
 
-#: src/engine/dccnit.cpp:534 src/engine/dccnit.cpp:584
+#: src/engine/dccnit.cpp:536 src/engine/dccnit.cpp:586
 msgid "Error"
 msgstr "Erro"
 
-#: src/engine/dccnit.cpp:534
+#: src/engine/dccnit.cpp:536
 msgid "Can't load the saved game!"
 msgstr "Não consegui carregar o jogo salvo!"
 
-#: src/engine/dccnit.cpp:579
+#: src/engine/dccnit.cpp:581
 msgid "Information"
 msgstr "Informação"
 
-#: src/engine/dccnit.cpp:580
+#: src/engine/dccnit.cpp:582
 msgid "The game was saved!"
 msgstr "O jogo foi salvo!"
 
-#: src/engine/dccnit.cpp:584
+#: src/engine/dccnit.cpp:586
 msgid "Can't save game!"
 msgstr "Não consegui salvar o jogo!"
 
-#: src/engine/dccnit.cpp:594
+#: src/engine/dccnit.cpp:596
 msgid "Can't save game while fighting!"
 msgstr "Não é possível salvar o jogo durante uma batalha!"
 
-#: src/engine/dccnit.cpp:727
+#: src/engine/dccnit.cpp:729
 msgid "Saving Current Map Modifications"
 msgstr "Salvando Modificações"
 
-#: src/engine/dccnit.cpp:762
+#: src/engine/dccnit.cpp:764
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Carregando Mapa: %s"
 
-#: src/engine/dccnit.cpp:792
+#: src/engine/dccnit.cpp:794
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Carregando NPC: %s"
 
-#: src/engine/dccnit.cpp:829
+#: src/engine/dccnit.cpp:831
 msgid "Creating MiniMap"
 msgstr "Criando Mini Mapa"
 
-#: src/engine/dccnit.cpp:835
+#: src/engine/dccnit.cpp:837
 msgid "Putting GUI on Screen"
 msgstr "Colocando as janelas na tela"
 
-#: src/engine/dccnit.cpp:862
+#: src/engine/dccnit.cpp:864
 msgid "Loading Particles"
 msgstr "Carregando Partículas"
 
-#: src/engine/dccnit.cpp:891
+#: src/engine/dccnit.cpp:893
 msgid "Loading Changes..."
 msgstr "Carregando Mudanças..."
 
-#: src/engine/dccnit.cpp:913
+#: src/engine/dccnit.cpp:915
 msgid "Done!"
 msgstr "Pronto!"
 
-#: src/engine/dccnit.cpp:1125
+#: src/engine/dccnit.cpp:1127
 msgid ""
 "DNT is relesead under GPLv3 or later: Feel free to use its source code and "
 "data the way you want (or to blame us the same way). DNT is thankful to the "
@@ -469,57 +469,61 @@ msgstr ""
 "agradece aos que desenvolveram as bibliotecas: OpenAL, Cal3D, OpenGL, SDL, "
 "SDL_image, SDL_ttf, libVorbis."
 
-#: src/engine/dccnit.cpp:1716
+#: src/engine/dccnit.cpp:1736
 msgid "Too far away for the action!"
 msgstr "Muito distante para realizar a ação!"
 
-#: src/engine/dccnit.cpp:1733
+#: src/engine/dccnit.cpp:1753
 msgid "Couldn't rest at battle mode."
 msgstr "Não é possível descansar no modo de batalha."
 
-#: src/engine/dccnit.cpp:1739
+#: src/engine/dccnit.cpp:1759
 msgid "Enemies nearby."
 msgstr "Inimigos próximos."
 
-#: src/engine/dccnit.cpp:1843
+#: src/engine/dccnit.cpp:1863
 msgid "No NPCs in the area."
 msgstr "Sem NPCs na área."
 
-#: src/engine/dccnit.cpp:1901
+#: src/engine/dccnit.cpp:1921
 msgid "Surprise Attack Turn."
 msgstr "Turno de ataque surpresa."
 
-#: src/engine/dccnit.cpp:1914
+#: src/engine/dccnit.cpp:1934
 msgid "No enemies in the area."
 msgstr "Sem inimigos na área."
 
-#: src/engine/dccnit.cpp:2391
+#: src/engine/dccnit.cpp:2436
 #, c-format
 msgid "%s taken."
 msgstr "Pegou %s."
 
-#: src/engine/dccnit.cpp:2419
+#: src/engine/dccnit.cpp:2464
 msgid "Inventory is full!"
 msgstr "O inventário está cheio!"
 
-#: src/engine/dccnit.cpp:2440
+#: src/engine/dccnit.cpp:2486
 msgid "Door"
 msgstr "Porta"
 
-#: src/engine/dccnit.cpp:2487
+#: src/engine/dccnit.cpp:2534
 msgid "dead"
 msgstr "morto(a)"
 
-#: src/engine/dccnit.cpp:2539
+#: src/engine/dccnit.cpp:2586
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s ataca %s"
 
-#: src/engine/dccnit.cpp:2735
+#: src/engine/dccnit.cpp:2806
 msgid "No more actions. Turn ended."
 msgstr "Sem mais ações: Turno Finalizado."
 
-#: src/engine/dccnit.cpp:4086
+#: src/engine/dccnit.cpp:3217
+msgid "A* could not find a path!"
+msgstr "O A* não encontrou um caminho!"
+
+#: src/engine/dccnit.cpp:4171
 msgid "Exit Battle Mode"
 msgstr "Sai do Modo de Batalha"
 
@@ -4893,39 +4897,190 @@ msgid ""
 msgstr ""
 "Um fragmento do livro dos monstros descrevendo um monstro thriller alvinegro."
 
-#: data/models/natural/cogumelo/cogumelo.dcc:1
-msgid "Mushroom"
-msgstr "Cogumelo"
+#: data/models/vehicles/onibus/onibus.dcc:1
+msgid "Bus"
+msgstr "Ônibus"
 
-#: data/models/natural/cogumelo/cogumelo.dcc:2
-msgid "A mushroom. Better won't eat it alone."
-msgstr "Um cogumelo. Melhor não comê-lo sozinho."
+#: data/models/vehicles/car1/car1.dcc:1 data/models/vehicles/golf/golf_b.dcc:1
+#: data/models/vehicles/golf/golf_r.dcc:1
+#: data/models/vehicles/golf/golf_bl.dcc:1
+msgid "Broken Car"
+msgstr "Carro"
 
-#: data/models/natural/ovo/ovo.dcc:1
-msgid "Egg"
-msgstr "Ovo"
+#: data/models/vehicles/truck2/truck2.dcc:1
+msgid "Broken Truck"
+msgstr "Caminhão"
 
-#: data/models/natural/ovo/ovo.dcc:2
-msgid "A potential new chicken. Be careful!"
-msgstr "Uma galinha em potencial. Tome cuidado."
+#: data/models/objetos/geral/placa_petro/placa_petro.dcc:1
+#: data/models/objetos/geral/placa_pare/placa_pare.dcc:1
+msgid "Sign"
+msgstr "Placa"
 
-#: data/models/objetos/itens/healkit/healkit.dcc:1
-msgid "First Aid Kit"
-msgstr "Caixa de Primeiros Socorros"
+#: data/models/objetos/geral/chair2/chair2.dcc:1
+#: data/models/objetos/geral/chair1/chair1.dcc:1
+#: data/models/objetos/geral/dinner_chair/dinner_chair.dcc:1
+#: data/models/objetos/geral/cadeira/cadeira.dcc:1
+#: data/models/objetos/geral/pc_chair/pc_chair.dcc:1
+#: data/models/objetos/geral/chair/chair.dcc:1
+#: data/models/objetos/icex/mesa_braco/mesa_braco.dcc:1
+#: data/models/objetos/icex/cadeira/cadeira.dcc:1
+msgid "Chair"
+msgstr "Cadeira"
 
-#: data/models/objetos/itens/healkit/healkit.dcc:2
-msgid "A heal kit functions exactly the opposite way of an opponent's attack."
-msgstr ""
-"Uma caixa de primeiros socorros funciona exatamente da maneira oposta a um "
-"ataque inimigo."
+#: data/models/objetos/geral/charango/charango.dcc:2
+msgid "A bolivian chord instrument"
+msgstr "Um instrumento de cordas boliviano"
 
-#: data/models/objetos/itens/garrafa1/garrafa1.dcc:1
-msgid "Beer Bottle"
-msgstr "Garrafa de Cerveja"
+#: data/models/objetos/geral/gabinete/gabinete.dcc:1
+#: data/models/objetos/geral/monitor/monitor_bunker_school.dcc:1
+#: data/models/objetos/geral/monitor/monitor.dcc:1
+#: data/models/objetos/geral/computador/computador.dcc:1
+#: data/models/objetos/industrial/compdeck/compdeck.dcc:1
+msgid "Computer"
+msgstr "Computador"
 
-#: data/models/objetos/itens/garrafa1/garrafa1.dcc:2
-msgid "A beer bottle. Better use cold to deceive the warm climate."
-msgstr "Uma garrafa de cerveja. Melhor utilizá-la gelada para enganar o calor."
+#: data/models/objetos/geral/cap/cap.dcc:1
+msgid "Cap"
+msgstr "Chapéu"
+
+#: data/models/objetos/geral/oven/oven.dcc:1
+msgid "Oven"
+msgstr "Fogão"
+
+#: data/models/objetos/geral/pillow/pillow.dcc:1
+msgid "Pillow"
+msgstr "Almofada"
+
+#: data/models/objetos/geral/notebook/notebook.dcc:1
+msgid "Notebook"
+msgstr "Notebook"
+
+#: data/models/objetos/geral/letto/letto.dcc:1
+#: data/models/objetos/geral/bed/bed.dcc:1
+msgid "Bed"
+msgstr "Cama"
+
+#: data/models/objetos/geral/tv_hack/tv_hack.dcc:1
+msgid "Tv Hack"
+msgstr "Mesa de Tv"
+
+#: data/models/objetos/geral/microwave/microwave.dcc:1
+msgid "Microwave"
+msgstr "Microondas"
+
+#: data/models/objetos/geral/barrel/barrel.dcc:1
+#: data/models/objetos/geral/barrels/barrel2/barrel2_1.dcc:1
+#: data/models/objetos/geral/barrels/barrel2/barrel2_2.dcc:1
+#: data/models/objetos/geral/barrels/barrel1/barrel1.dcc:1
+#: data/models/objetos/geral/barrels/barrel3/barrel3.dcc:1
+#: data/models/objetos/geral/santa_barrel/santa_barrel.dcc:1
+msgid "Barrel"
+msgstr "Barril"
+
+#: data/models/objetos/geral/galinheiro/galinheiro.dcc:1
+msgid "Hennery"
+msgstr "Galinheiro"
+
+#: data/models/objetos/geral/rug3/rug3.dcc:1
+#: data/models/objetos/geral/rug2/rug2.dcc:1
+#: data/models/objetos/geral/rug/rug.dcc:1
+msgid "Rug"
+msgstr "Tapete"
+
+#: data/models/objetos/geral/escrivaninha/escrivaninha.dcc:1
+#: data/models/objetos/geral/pc_table/pc_table.dcc:1
+msgid "Desk"
+msgstr "Escrivaninha"
+
+#: data/models/objetos/geral/escada/escada.dcc:1
+msgid "Ladder"
+msgstr "Escada"
+
+#: data/models/objetos/geral/signs/school_sign.dcc:1
+msgid "School Sign"
+msgstr "Placa da Escola"
+
+#: data/models/objetos/geral/signs/bar_sign.dcc:1
+msgid "Tap-house sign"
+msgstr "Placa do Boteco"
+
+#: data/models/objetos/geral/wardrobe/wardrobe.dcc:1
+#: data/models/objetos/geral/meuble/meuble.dcc:1
+msgid "Wardrobe"
+msgstr "Armário"
+
+#: data/models/objetos/geral/bookshelf/bookshelf.dcc:1
+msgid "Bookshelf"
+msgstr "Estante"
+
+#: data/models/objetos/geral/mala/mala.dcc:1
+msgid "Briefcase"
+msgstr "Mala"
+
+#: data/models/objetos/geral/tv42/tv42.dcc:1
+msgid "Television"
+msgstr "Televisão"
+
+#: data/models/objetos/geral/guitarra/guitarra.dcc:1
+msgid "Guitar"
+msgstr "Guitarra"
+
+#: data/models/objetos/geral/estante/estante.dcc:1
+msgid "Shelf"
+msgstr "Prateleiras"
+
+#: data/models/objetos/geral/letter/letter.dcc:1
+msgid "Suspicious Letter"
+msgstr "Carta Suspeita"
+
+#: data/models/objetos/geral/letter/letter.dcc:2
+msgid "A letter with some kind of code written in it."
+msgstr "Uma carta com um código escrito."
+
+#: data/models/objetos/geral/fogaoalenha/fogaoalenha.dcc:1
+msgid "Wood Stove"
+msgstr "Fogão à lenha"
+
+#: data/models/objetos/geral/mesa_redonda/mesa_redonda.dcc:1
+#: data/models/objetos/geral/dinner_table/dinner_table.dcc:1
+#: data/models/objetos/geral/mesa_grande/mesa_grande.dcc:1
+#: data/models/objetos/icex/mesa/mesa.dcc:1
+#: data/models/objetos/icex/mesa_redonda/mesa_redonda.dcc:1
+msgid "Table"
+msgstr "Mesa"
+
+#: data/models/objetos/geral/fridge/fridge.dcc:1
+msgid "Fridge"
+msgstr "Geladeira"
+
+#: data/models/objetos/geral/pandeiro/pandeiro.dcc:1
+msgid "Pandeiro"
+msgstr "Pandeiro"
+
+#: data/models/objetos/geral/pandeiro/pandeiro.dcc:2
+msgid "A simple percussion instrument."
+msgstr "Um instrumento de percursão simples."
+
+#: data/models/objetos/geral/pia/pia.dcc:1
+msgid "Sink"
+msgstr "Pia"
+
+#: data/models/objetos/geral/sofa/sofa.dcc:1
+#: data/models/objetos/geral/sofa2/sofa2.dcc:1
+msgid "Sofa"
+msgstr "Sofá"
+
+#: data/models/objetos/geral/comoda/comoda.dcc:1
+msgid "Drawer"
+msgstr "Cômoda"
+
+#: data/models/objetos/geral/calendar/calendar.dcc:1
+msgid "Calendar"
+msgstr "Calendário"
+
+#: data/models/objetos/itens/money/money.dcc:1
+msgid "Money"
+msgstr "Dinheiro"
 
 #: data/models/objetos/itens/lata1/lata1.dcc:1
 msgid "Soda Can"
@@ -4947,6 +5102,14 @@ msgstr ""
 "Uma lata de refrigerante que o Logan te deu. Infelizmente, você não vê "
 "nenhuma diferença dela para uma lata comum."
 
+#: data/models/objetos/itens/garrafa1/garrafa1.dcc:1
+msgid "Beer Bottle"
+msgstr "Garrafa de Cerveja"
+
+#: data/models/objetos/itens/garrafa1/garrafa1.dcc:2
+msgid "A beer bottle. Better use cold to deceive the warm climate."
+msgstr "Uma garrafa de cerveja. Melhor utilizá-la gelada para enganar o calor."
+
 #: data/models/objetos/itens/racao/racao.dcc:1
 msgid "Chicken Ration"
 msgstr "Ração de Galinha"
@@ -4955,25 +5118,90 @@ msgstr "Ração de Galinha"
 msgid "A packet of delicious chicken ration. Smells like corn."
 msgstr "Um pacote de ração para galinha. Cheira a milho."
 
-#: data/models/objetos/itens/money/money.dcc:1
-msgid "Money"
-msgstr "Dinheiro"
+#: data/models/objetos/itens/healkit/healkit.dcc:1
+msgid "First Aid Kit"
+msgstr "Caixa de Primeiros Socorros"
 
-#: data/models/objetos/geral/computador/computador.dcc:1
-msgid "Computer"
-msgstr "Computador"
+#: data/models/objetos/itens/healkit/healkit.dcc:2
+msgid "A heal kit functions exactly the opposite way of an opponent's attack."
+msgstr ""
+"Uma caixa de primeiros socorros funciona exatamente da maneira oposta a um "
+"ataque inimigo."
 
-#: data/models/objetos/geral/notebook/notebook.dcc:1
-msgid "Notebook"
-msgstr "Notebook"
+#: data/models/objetos/ammo/9mm_pack/9mm_pack.dcc:1
+msgid "9mm Ammo Pack"
+msgstr "Caixa de Munição 9mm"
 
-#: data/models/objetos/geral/letter/letter.dcc:1
-msgid "Suspicious Letter"
-msgstr "Carta Suspeita"
+#: data/models/objetos/ammo/9mm_pack/9mm_pack.dcc:2
+msgid "You can use this ammo with a 9mm gun and to make your way to jail."
+msgstr ""
+"Você pode utilizar essa munição em armas de 9mm ou para fazer seu caminho à "
+"cadeia."
 
-#: data/models/objetos/geral/letter/letter.dcc:2
-msgid "A letter with some kind of code written in it."
-msgstr "Uma carta com um código escrito."
+#: data/models/objetos/banho/broom/broom.dcc:1
+msgid "Broom"
+msgstr "Vassoura"
+
+#: data/models/objetos/banho/privada2/privada.dcc:1
+#: data/models/objetos/banho/privada/privada.dcc:1
+msgid "Toilet"
+msgstr "Privada"
+
+#: data/models/objetos/banho/papel_higienico/papel_higienico.dcc:1
+msgid "Toilet Paper"
+msgstr "Papel Higiênico"
+
+#: data/models/objetos/banho/mictorio/mictorio.dcc:1
+msgid "Urinal"
+msgstr "Mictório"
+
+#: data/models/objetos/tumbas/cementery_gate/cementery_gate.dcc:1
+msgid "Gate"
+msgstr "Portão"
+
+#: data/models/objetos/tumbas/ts6/ts6.dcc:1
+#: data/models/objetos/tumbas/lapide/lapide.dcc:1
+#: data/models/objetos/tumbas/ts4/ts4.dcc:1
+#: data/models/objetos/tumbas/ts1/ts1.dcc:1
+#: data/models/objetos/tumbas/ts5/ts5.dcc:1
+#: data/models/objetos/tumbas/ts2/ts2.dcc:1
+#: data/models/objetos/tumbas/ts3/ts3.dcc:1
+#: data/models/objetos/tumbas/tomb_column/tomb_column.dcc:1
+msgid "Tombstone"
+msgstr "Tumba"
+
+#: data/models/objetos/tumbas/tomb1/tomb1.dcc:1
+msgid "Tomb"
+msgstr "Tumba"
+
+#: data/models/objetos/tumbas/cruz/cruz.dcc:1
+msgid "Cross"
+msgstr "Cruz"
+
+#: data/models/objetos/tumbas/cementery_fence/cementery_fence.dcc:1
+#: data/models/street/log_fence1/log_fence1.dcc:1
+#: data/models/street/log_fence2/log_fence2.dcc:1
+msgid "Fence"
+msgstr "Cerca"
+
+#: data/models/objetos/industrial/lorry/lorry.dcc:1
+msgid "Lorry"
+msgstr "Vagão"
+
+#: data/models/objetos/vinyls/clara_crocodilo.dcc:2
+msgid ""
+"A classical brazilian vynil with dodecaphonic music that could also be "
+"usefull to empty rooms."
+msgstr ""
+"Um clássico vinil brasileiro de música dodecafônica que pode ser útil também "
+"para esvaziar salas."
+
+#: data/models/objetos/vinyls/zappa_apostrophe.dcc:2
+msgid ""
+"It seems that someone recorded some stories about Nanook, the Eskimo  on "
+"this disk."
+msgstr ""
+"Parece que alguém gravou algumas histórias de Nanook, o esquimó neste disco."
 
 #: data/models/objetos/vinyls/banco_darwin.dcc:2
 msgid ""
@@ -4984,38 +5212,48 @@ msgstr ""
 "dramáticos. É praticamente impossível não deixar cair uma lágrima ao ouvir "
 "este disco."
 
-#: data/models/objetos/vinyls/clara_crocodilo.dcc:2
-msgid ""
-"A classical brazilian vynil with dodecaphonic music that could also be "
-"usefull to empty rooms."
-msgstr ""
-"Um clássico vinil brasileiro de música dodecafônica que pode ser útil também "
-"para esvaziar salas."
-
 #: data/models/objetos/vinyls/henry_cow_western_culture.dcc:2
 msgid "Last Henry Cow album. Let's see if you can listen it."
 msgstr "O último álbum da banda Henry Cow. Vejamos se consegue escutá-lo."
 
-#: data/models/objetos/vinyls/zappa_apostrophe.dcc:2
-msgid ""
-"It seems that someone recorded some stories about Nanook, the Eskimo  on "
-"this disk."
-msgstr ""
-"Parece que alguém gravou algumas histórias de Nanook, o esquimó neste disco."
+#: data/models/objetos/icex/quadro/quadro.dcc:1
+msgid "Blackboard"
+msgstr "Quadro Negro"
 
-#: data/models/objetos/icex/snes/chrono/snes_chrono.dcc:2
-msgid "The best SNES RPG whose name begins with 'Chro'."
-msgstr "O melhor RPG de Super Nintendo cujo nome começa com 'Chro'"
+#: data/models/objetos/icex/lixo/lixo.dcc:1
+msgid "Dump"
+msgstr "Lixeira"
 
-#: data/models/objetos/icex/snes/contra/snes_contra.dcc:2
-msgid "You surely can't stay alive for more than 3 hours on this game."
-msgstr "Você com certeza não fica mais de 3 horas vivo neste jogo."
+#: data/models/objetos/icex/fallout_box/fallout_box.dcc:2
+msgid "Surely one of the best games you've ever played in your childhood."
+msgstr "Certamente um dos melhores jogos que você jogou na sua infância."
 
 #: data/models/objetos/icex/snes/dk/snes_dk.dcc:2
 msgid ""
 "A game about monkeys jumping around and playing music. You'll love that."
 msgstr ""
 "Um jogo sobre macacos pulando por aí e tocando música. Você vai adorar."
+
+#: data/models/objetos/icex/snes/topgear/snes_topgear.dcc:2
+msgid "Use the nitros but watch the fuel!"
+msgstr "Utilize seus nitros, mas atenção ao combustível."
+
+#: data/models/objetos/icex/snes/rrr/snes_rrr.dcc:2
+msgid "Let the carnage begin!"
+msgstr "Let the carnage begin!"
+
+#: data/models/objetos/icex/snes/zelda/snes_zelda.dcc:2
+msgid "No, the playable character in the game isn't called Zelda."
+msgstr "Não, o herói deste jogo não se chama Zelda."
+
+#: data/models/objetos/icex/snes/starfox/snes_starfox.dcc:2
+msgid "A fox that thinks he's Tom Hanks in Apollo 13."
+msgstr "Uma raposa que pensa ser Tom Hanks na Apolo 13."
+
+#: data/models/objetos/icex/snes/sf2/snes_sf2.dcc:2
+msgid "You remember playing it in a dirty bar at the beach."
+msgstr ""
+"Você se lembra jogando este jogo em um fliperama num bar copo-sujo da praia."
 
 #: data/models/objetos/icex/snes/mario/snes_mario.dcc:2
 msgid "The italian plumber strikes back, this time with a dino!"
@@ -5028,26 +5266,13 @@ msgstr ""
 "Karts, corridas e personagens bonitinhos. Provavelmente um clone antigo de "
 "SuperTuxKart."
 
-#: data/models/objetos/icex/snes/rrr/snes_rrr.dcc:2
-msgid "Let the carnage begin!"
-msgstr "Let the carnage begin!"
+#: data/models/objetos/icex/snes/chrono/snes_chrono.dcc:2
+msgid "The best SNES RPG whose name begins with 'Chro'."
+msgstr "O melhor RPG de Super Nintendo cujo nome começa com 'Chro'"
 
-#: data/models/objetos/icex/snes/sf2/snes_sf2.dcc:2
-msgid "You remember playing it in a dirty bar at the beach."
-msgstr ""
-"Você se lembra jogando este jogo em um fliperama num bar copo-sujo da praia."
-
-#: data/models/objetos/icex/snes/starfox/snes_starfox.dcc:2
-msgid "A fox that thinks he's Tom Hanks in Apollo 13."
-msgstr "Uma raposa que pensa ser Tom Hanks na Apolo 13."
-
-#: data/models/objetos/icex/snes/topgear/snes_topgear.dcc:2
-msgid "Use the nitros but watch the fuel!"
-msgstr "Utilize seus nitros, mas atenção ao combustível."
-
-#: data/models/objetos/icex/snes/zelda/snes_zelda.dcc:2
-msgid "No, the playable character in the game isn't called Zelda."
-msgstr "Não, o herói deste jogo não se chama Zelda."
+#: data/models/objetos/icex/snes/contra/snes_contra.dcc:2
+msgid "You surely can't stay alive for more than 3 hours on this game."
+msgstr "Você com certeza não fica mais de 3 horas vivo neste jogo."
 
 #: data/models/objetos/icex/ruindows_box/ruindows_box.dcc:1
 msgid "Ruindows"
@@ -5058,19 +5283,125 @@ msgid "The last released Ruindows DVD. You feel like carrying a bomb."
 msgstr ""
 "O DVD do último Ruindows lançado. Você se sente como carregando uma bomba."
 
-#: data/models/objetos/icex/fallout_box/fallout_box.dcc:2
-msgid "Surely one of the best games you've ever played in your childhood."
-msgstr "Certamente um dos melhores jogos que você jogou na sua infância."
+#: data/models/building/farm_ruin/farm_ruin.dcc:1
+msgid "Ruined Farm House"
+msgstr "Casa sede em ruínas"
 
-#: data/models/objetos/ammo/9mm_pack/9mm_pack.dcc:1
-msgid "9mm Ammo Pack"
-msgstr "Caixa de Munição 9mm"
+#: data/models/building/ruin_house1/ruin_house1.dcc:1
+#: data/models/building/ruin_house8/ruin_house8.dcc:1
+#: data/models/building/ruin_house9/ruin_house9.dcc:1
+#: data/models/building/ruin_house4/ruin_house4.dcc:1
+#: data/models/building/ruin_house2/ruin_house2.dcc:1
+#: data/models/building/ruin_house7/ruin_house7.dcc:1
+#: data/models/building/ruin_house5/ruin_house5.dcc:1
+#: data/models/building/ruin_house6/ruin_house6.dcc:1
+msgid "Ruined House"
+msgstr "Case em Ruínas"
 
-#: data/models/objetos/ammo/9mm_pack/9mm_pack.dcc:2
-msgid "You can use this ammo with a 9mm gun and to make your way to jail."
-msgstr ""
-"Você pode utilizar essa munição em armas de 9mm ou para fazer seu caminho à "
-"cadeia."
+#: data/models/building/ruin_house_barraco1/ruin_house_barraco1.dcc:1
+msgid "Shed on Ruins"
+msgstr "Barraco"
+
+#: data/models/building/ruin1/ruin1.dcc:1
+msgid "Ruin"
+msgstr "Ruína"
+
+#: data/models/building/mine_entrance/mine_entrance.dcc:1
+msgid "Mine Entrance"
+msgstr "Entrada da Mina"
+
+#: data/models/building/barraco1/barraco1.dcc:1
+#: data/models/building/barraco2/barraco2.dcc:1
+msgid "Shed"
+msgstr "Barraco"
+
+#: data/models/building/ruin_house3/ruin_house3.dcc:1
+msgid "Bunker School"
+msgstr "Escola Bunker"
+
+#: data/models/junk/madeira1/madeira1.dcc:1
+#: data/models/junk/scrap1/scrap1.dcc:1 data/models/junk/scrap3/scrap3.dcc:1
+#: data/models/junk/bloco3/bloco3.dcc:1 data/models/junk/scrap4/scrap4.dcc:1
+#: data/models/junk/bloco1/bloco1.dcc:1 data/models/junk/pneu/pneu.dcc:1
+#: data/models/junk/bloco2/bloco2.dcc:1 data/models/junk/scrap2/scrap2.dcc:1
+msgid "Junk"
+msgstr "Lixo"
+
+#: data/models/junk/caixa1/caixa2.dcc:1 data/models/junk/caixa1/caixa1.dcc:1
+msgid "Box"
+msgstr "Caixa"
+
+#: data/models/junk/apple_crate/apple_crate.dcc:1
+msgid "Crate"
+msgstr "Caixa"
+
+#: data/models/natural/arvores/tree3/tree3.dcc:1
+#: data/models/natural/arvores/tree1/tree1.dcc:1
+#: data/models/natural/arvores/tree4/tree4.dcc:1
+#: data/models/natural/arvores/tree2/tree2.dcc:1
+msgid "Tree"
+msgstr "Árvore"
+
+#: data/models/natural/arvores/bananeira/bananeira.dcc:1
+msgid "Banana Plant"
+msgstr "Bananeira"
+
+#: data/models/natural/cogumelo/cogumelo.dcc:1
+msgid "Mushroom"
+msgstr "Cogumelo"
+
+#: data/models/natural/cogumelo/cogumelo.dcc:2
+msgid "A mushroom. Better won't eat it alone."
+msgstr "Um cogumelo. Melhor não comê-lo sozinho."
+
+#: data/models/natural/ovo/ovo.dcc:1
+msgid "Egg"
+msgstr "Ovo"
+
+#: data/models/natural/ovo/ovo.dcc:2
+msgid "A potential new chicken. Be careful!"
+msgstr "Uma galinha em potencial. Tome cuidado."
+
+#: data/models/natural/fogueira/fogueira.dcc:1
+msgid "Fireplace"
+msgstr "Fogueira"
+
+#: data/models/natural/bush/bush.dcc:1
+msgid "Bush"
+msgstr "Moita"
+
+#: data/models/street/streetlight3/streetlight3.dcc:1
+#: data/models/street/streetlight1/streetlight1.dcc:1
+#: data/models/street/lightpole/lightpole.dcc:1
+#: data/models/street/streetlight2/streetlight2.dcc:1
+msgid "Light Pole"
+msgstr "Poste"
+
+#: data/models/street/hydrant/hydrant.dcc:1
+msgid "Hydrant"
+msgstr "Hidrante"
+
+#: data/models/street/container/container.dcc:1
+msgid "Container"
+msgstr "Container"
+
+#: data/models/street/fountain2/fountain2.dcc:1
+#: data/models/street/fountain1/fountain1.dcc:1
+msgid "Fountain"
+msgstr "Fonte"
+
+#: data/models/street/bench1/bench1.dcc:1
+#: data/models/street/bench2/bench2.dcc:1
+msgid "Bench"
+msgstr "Banco"
+
+#: data/models/street/cond/cond.dcc:1
+msgid "Pillar"
+msgstr "Pilastra"
+
+#: data/models/street/mixer/mixer.dcc:1
+msgid "Concrete Mixer"
+msgstr "Betoneira"
 
 #: data/weapons/definitions/axe.wcc:1
 msgid "Great Axe"

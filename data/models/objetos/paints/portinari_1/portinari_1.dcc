@@ -1,4 +1,4 @@
-name = Crianca Morta
+name = Criança Morta
 cal3d = models/objetos/paints/portinari_1/model.cfg
 inventory_sizes = 0 0
 inventory_texture = models/objetos/paints/portinari_1/tex_dlg.png

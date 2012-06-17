@@ -1,4 +1,4 @@
-name = Bar_Sign
+name = gettext("Tap-house sign")
 cal3d = models/objetos/geral/signs/bar_sign.cfg
 inventory_sizes = 0 0
 inventory_texture = texturas/na.png

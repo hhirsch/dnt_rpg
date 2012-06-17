@@ -1,4 +1,4 @@
-name = Bush
+name = gettext("Bush")
 cal3d = models/natural/bush/model.cfg
 inventory_texture = texturas/na.png
 inventory_sizes = 0 0

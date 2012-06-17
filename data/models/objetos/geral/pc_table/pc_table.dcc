@@ -1,4 +1,4 @@
-name = PC Table
+name = gettext("Desk")
 cal3d = models/objetos/geral/pc_table/model.cfg
 inventory_sizes = 0 0
 inventory_texture = texturas/na.png

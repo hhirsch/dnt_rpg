@@ -1,4 +1,4 @@
-name = JunkBlock3
+name = gettext("Junk")
 cal3d = models/junk/bloco3/model.cfg
 inventory_texture = texturas/na.png
 inventory_sizes = 0 0

@@ -1,4 +1,4 @@
-name = Car1
+name = gettext("Broken Car")
 cal3d = models/vehicles/car1/model.cfg
 inventory_sizes = 0 0
 inventory_texture = texturas/na.png

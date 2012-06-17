@@ -1,4 +1,4 @@
-name = Ruin_House
+name = gettext("Shed on Ruins")
 cal3d = models/building/ruin_house_barraco1/model.cfg
 inventory_texture = texturas/na.png
 inventory_sizes = 0 0

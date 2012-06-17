@@ -1,4 +1,4 @@
-name = Apple_Crate
+name = gettext("Crate")
 cal3d = models/junk/apple_crate/model.cfg
 inventory_texture = texturas/na.png
 inventory_sizes = 0 0
