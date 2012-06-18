@@ -51,7 +51,6 @@ void init(SDL_Surface **screen, string title, int width, int height,
     SDL_EventState(SDL_KEYDOWN, SDL_IGNORE);
     SDL_EventState(SDL_KEYUP, SDL_IGNORE);
     SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
-    SDL_EventState(SDL_MOUSEBUTTONDOWN, SDL_IGNORE);
     SDL_EventState(SDL_MOUSEBUTTONUP, SDL_IGNORE);
     SDL_EventState(SDL_JOYAXISMOTION, SDL_IGNORE);
     SDL_EventState(SDL_JOYBALLMOTION, SDL_IGNORE);
@@ -61,7 +60,6 @@ void init(SDL_Surface **screen, string title, int width, int height,
     SDL_EventState(SDL_SYSWMEVENT, SDL_IGNORE);
     SDL_EventState(SDL_VIDEORESIZE, SDL_IGNORE);
     SDL_EventState(SDL_VIDEOEXPOSE, SDL_IGNORE);
-    SDL_EventState(SDL_QUIT, SDL_IGNORE);
     SDL_EventState(SDL_USEREVENT, SDL_IGNORE);
 
     Font fnt;
