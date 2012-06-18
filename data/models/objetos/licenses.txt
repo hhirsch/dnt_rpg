@@ -41,7 +41,6 @@ geral/santa_barrel
 geral/signs
 icex/lixo
 icex/quadro
-icex/ruindows_box
 icex/snes/*
 industrial/compdeck
 itens/garrafa1
@@ -58,14 +57,19 @@ paints/tarsila_2
 paints/tarsila_3
 vinyls
    author: farrer (DNTeam)
-   license: GPLv3 or latter
+   license: GPLv3 or later
+
+icex/ruindows_box
+   author: farrer (DNTeam)
+   license: GPLv3 or later
+   logo changes 2012: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
 
 geral/cap
 geral/colarinho_e_oculos
 geral/et
 geral/mala
    author: ecarvalh (DNTeam)
-   license: GPLv3 or latter
+   license: GPLv3 or later
 
 icex/cadeira
 icex/mesa
@@ -76,11 +80,11 @@ tumbas/lapide
 tumbas/tomb1
 tumbas/tomb_column
    author: silvio (DNTeam)
-   license: GPLv3 or latter
+   license: GPLv3 or later
 
 geral/computador
    authors: silvio and farrer (DNTeam)
-   license: GPLv3 or latter
+   license: GPLv3 or later
 
 banho/broom
    authors: Scott Hsu-Storaker, Terrence M, Evan Tann, Yaniv Pe'er, Emily
