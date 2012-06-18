@@ -1,8 +1,8 @@
-name = Fallout 2
+name = DNT 2
 description = gettext("Surely one of the best games you've ever played in your childhood.")
-cal3d = models/objetos/icex/fallout_box/model.cfg
+cal3d = models/objetos/icex/dnt2_box/model.cfg
 inventory_sizes = 2 2
-inventory_texture = models/objetos/icex/fallout_box/texture_inv.png
+inventory_texture = models/objetos/icex/dnt2_box/texture_inv.png
 life_points = 12
 fortitude = 10
 reflex = 0
