@@ -2337,7 +2337,6 @@ int engine::verifyMouseActions(Uint8 mButton)
    biggerMouseBox.setMin(xReal-6, yReal-10.0, zReal-6);
    biggerMouseBox.setMax(xReal+6, yReal+10.0, zReal+6);
 
-
    int qx, qz;
    qx = (int)xReal / actualMap->squareSize();
    qz = (int)zReal / actualMap->squareSize();
@@ -2825,6 +2824,10 @@ int engine::treatIO(SDL_Surface *screen)
                /* Changed Map, so */
                return(1);
             }
+         }
+         else
+         {
+            occPosition = false;
          }
       }
 
