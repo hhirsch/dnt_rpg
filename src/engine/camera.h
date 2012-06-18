@@ -1,21 +1,21 @@
 /* 
-  DccNiTghtmare: a satiric post-apocalyptical RPG.
+  DNT: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
-  This file is part of DccNiTghtmare.
+  This file is part of DNT.
  
-  DccNiTghtmare is free software: you can redistribute it and/or modify
+  DNT is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  DccNiTghtmare is distributed in the hope that it will be useful,
+  DNT is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+  along with DNT.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #ifndef _dnt_camera_h
@@ -43,9 +43,11 @@ class camera
        * \param mBotao -> mouse Button state
        * \param x -> mouse X Screen position
        * \param y -> mouse Y Screen position
+       * \param mouseWheel -> relative mouse wheel move
        * \param varCamera -> how much the camera moves
        * \return TRUE if camera modified, false otherwise */
-      bool doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera);
+      bool doIO(Uint8 *keys, Uint8 mBotao, int x, int y, int mouseWheel,
+            GLfloat varCamera);
 
       /*! Get The Camera X Postion
        * \return Camera X position */

@@ -1,21 +1,21 @@
 /*
-  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  DNT: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
 
-  This file is part of DccNiTghtmare.
+  This file is part of DNT.
 
-  DccNiTghtmare is free software: you can redistribute it and/or modify
+  DNT is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  DccNiTghtmare is distributed in the hope that it will be useful,
+  DNT is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+  along with DNT.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "editor.h"
@@ -56,7 +56,7 @@ Editor::Editor()
 
    /* Init things */
    options opt;
-   Farso::init(&screen,"DccNiTghtmare Map Editor", opt.getScreenWidth(),
+   Farso::init(&screen,"DNT Map Editor", opt.getScreenWidth(),
               opt.getScreenHeight(),  opt.getEnableFullScreen(),
               opt.getAntiAliasing(), opt.getStencilBufferSize());
 
@@ -1164,13 +1164,34 @@ void Editor::verifyIO()
    keys = SDL_GetKeyState(NULL);
    mButton = SDL_GetMouseState(&mouseX,&mouseY);
 
+   /* Let's check some events */
+   SDL_Event event;
+   mouseWheel = 0;
+   while(SDL_PollEvent(&event))
+   {
+      if(event.type == SDL_QUIT)
+      {
+      }
+      else if(event.type == SDL_MOUSEBUTTONDOWN)
+      {
+         if(event.button.button == SDL_BUTTON_WHEELUP)
+         {
+            mouseWheel++;
+         }
+         else if(event.button.button == SDL_BUTTON_WHEELDOWN)
+         {
+            mouseWheel--;
+         }
+      }
+   }
+
    if(mapOpened)
    {
       outdoor = map->isOutdoor();
    }
 
    gui->updateMouseWorldCoordinates(xReal, zReal);
-   guiEvent = gui->doIO(mouseX, mouseY, mButton, keys, outdoor);
+   guiEvent = gui->doIO(mouseX, mouseY, mButton, keys, mouseWheel, outdoor);
    if(guiEvent == GUI_IO_EXIT)
    {
       quit = true;

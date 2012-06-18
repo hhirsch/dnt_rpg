@@ -61,6 +61,8 @@ engine::engine()
    yReal = 0;
    zReal = 0;
 
+   mouseWheel = 0;
+
    imgNumber = 0;
    actualScreen = NULL;
 
@@ -2756,6 +2758,27 @@ int engine::treatIO(SDL_Surface *screen)
       mouseX = x;
       mouseY = y;
 
+      /* Let's check some events */
+      SDL_Event event;
+      mouseWheel = 0;
+      while(SDL_PollEvent(&event))
+      {
+         if(event.type == SDL_QUIT)
+         {
+         }
+         else if(event.type == SDL_MOUSEBUTTONDOWN)
+         {
+            if(event.button.button == SDL_BUTTON_WHEELUP)
+            {
+               mouseWheel++;
+            }
+            else if(event.button.button == SDL_BUTTON_WHEELDOWN)
+            {
+               mouseWheel--;
+            }
+         }
+      }
+
       /* Get AlwaysRun from Options */
       run = option->getAlwaysRun();
 
@@ -3114,7 +3137,7 @@ int engine::treatIO(SDL_Surface *screen)
       }
 
       /* Camera Verification */
-      gameCamera.doIO(keys, mButton, x, y, DELTA_CAMERA );
+      gameCamera.doIO(keys, mButton, x, y, mouseWheel, DELTA_CAMERA );
 
       /* Set press time, if needed */
       if( (mButton & SDL_BUTTON(3)) && (!gui->mouseOnGui(x,y)) && 

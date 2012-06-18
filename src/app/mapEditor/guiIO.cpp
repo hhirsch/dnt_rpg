@@ -1,21 +1,21 @@
 /* 
-  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  DNT: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
-  This file is part of DccNiTghtmare.
+  This file is part of DNT.
  
-  DccNiTghtmare is free software: you can redistribute it and/or modify
+  DNT is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  DccNiTghtmare is distributed in the hope that it will be useful,
+  DNT is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+  along with DNT.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "guiIO.h"
@@ -236,7 +236,7 @@ void GuiIO::openMessageWindow()
    int width = Farso::SCREEN_X - 50 - 437;
    messageWindow = gui->insertWindow(437,0,Farso::SCREEN_X-50,37, "Messages");
    messageText = messageWindow->getObjectsList()->insertTextBox(7,16,
-                 width-90,31,0,"Welcome to DccNiTghtmare Map Editor!");
+                 width-90,31,0,"Welcome to DNT Map Editor!");
    mouseCoordText = messageWindow->getObjectsList()->insertTextBox(width-90,16,
          width-7, 31, 0, "");
    mouseCoordText->setFont(fopt.getDefaultFont(), 9, Farso::Font::ALIGN_CENTER);
@@ -588,7 +588,7 @@ bool GuiIO::getInvertMultiTexture()
  *                             DoIO                             *
  ****************************************************************/
 int GuiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
-                bool outdoor)
+                int mouseWheel, bool outdoor)
 {
    int eventInfo = Farso::EVENT_NONE;
    float qty = 4.0f;
@@ -605,7 +605,7 @@ int GuiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
    /* Do Camera IO */
    if(eventInfo != Farso::EVENT_WROTE_TEXT_BAR)
    {
-      gameCamera.doIO(keys, mButton, mouseX, mouseY, DELTA_CAMERA );
+      gameCamera.doIO(keys, mButton, mouseX, mouseY, mouseWheel, DELTA_CAMERA );
 
       if( (keys[SDLK_RSHIFT]) || (keys[SDLK_LSHIFT]) )
       {

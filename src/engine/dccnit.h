@@ -464,6 +464,7 @@ class engine
       GLfloat** visibleMatrix;     /**< Actual Frustum Matrix */
       int mouseX,                  /**< Actual mouse X coordinates on screen */
           mouseY;                  /**< Actual mouse Y coordinates on screen */
+      int mouseWheel;              /**< Mouse Wheel relative move */
       double xReal,                /**< Actual mouse X coordinates on World */
              zReal,                /**< Actual mouse Z coordinates on World */
              yReal;                /**< Actual mouse Y coordinates on World */
