@@ -4,7 +4,7 @@ range.png
    License: GPLv3
 
 canwalkmark.png
-   Author: ?
+   Author: qubodup (Iwan Gabovitch <qubodup@gmail.com>)
    License: Public-Domain
    Reference: http://dnt.dnteam.org/FoRuM/viewtopic.php?f=10&t=161#p527
-
+   Source: http://openclipart.org/detail/170661/
