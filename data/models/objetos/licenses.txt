@@ -39,7 +39,6 @@ geral/porta8
 geral/refmachine
 geral/santa_barrel
 geral/signs
-icex/fallout_box
 icex/lixo
 icex/quadro
 icex/ruindows_box
@@ -186,3 +185,6 @@ tumbas/cementery_fence
    author: farrer, based on zerberros cementery_gate
    license: GPLv3
 
+icex/fallout_box
+   author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   license: GPLv3+, CC-BY-SAv3+
