@@ -4469,7 +4469,7 @@ msgstr ""
 msgid "Dump"
 msgstr ""
 
-#: data/models/objetos/icex/fallout_box/fallout_box.dcc:2
+#: data/models/objetos/icex/dnt2_box/dnt2_box.dcc:2
 msgid "Surely one of the best games you've ever played in your childhood."
 msgstr ""
 

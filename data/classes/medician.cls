@@ -1,5 +1,5 @@
 name = gettext("Medical Student")
-epigraph = gettext("'If I've tried Physiotherapy there, I should passed at first place with the points I've made to pass on Medicine!'|(Mattar, Medical Student replying to the provocation of Wanucia, Physiotherapy Student)")
+epigraph = gettext("'Had I chosen Physiotherapy, I would have passed first place thanks to all the points I got in the Medicine enry exam!'|(Mattar, Medical Student replying to the provocation of Wanucia, Physiotherapy Student)")
 description = gettext("The Medical Student is a person who has given up his social life in exchange for an abnormal dedication to his studies, believing he'll be something in life. Those creatures haven't any cleverness, and base their lives on theories and more theories. To be one of this class, the character needs to be able to behave in a hideous manner: drowning hookies, public perversion, among other activities that result in death.")
 lifeDice = d6
 totalModifiers = 8

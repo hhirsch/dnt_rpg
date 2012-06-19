@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2012-06-17 15:21-0300\n"
+"POT-Creation-Date: 2012-06-19 21:48+0200\n"
 "PO-Revision-Date: 2012-05-28 21:08+0000\n"
 "Last-Translator: Iwan Gabovitch <qubodup@gmail.com>\n"
 "Language-Team: German <de@li.org>\n"
@@ -100,7 +100,7 @@ msgstr "Ich bin kein Narr"
 msgid "Invalid Talent"
 msgstr "Ungültiges Talent"
 
-#: src/classes/feats.cpp:242 src/engine/dccnit.cpp:2215
+#: src/classes/feats.cpp:242 src/engine/dccnit.cpp:2217
 msgid "Not enought points to use!"
 msgstr "Nicht genügend Punkte für Gebrauch!"
 
@@ -199,8 +199,8 @@ msgstr "Charisma"
 msgid "Attribute Description"
 msgstr "Eigenschaftsbeschreibung"
 
-#: src/engine/attwindow.cpp:559 src/engine/dccnit.cpp:595
-#: src/engine/dccnit.cpp:2214 src/engine/featsel.cpp:495
+#: src/engine/attwindow.cpp:559 src/engine/dccnit.cpp:597
+#: src/engine/dccnit.cpp:2216 src/engine/featsel.cpp:495
 #: src/engine/inventwindow.cpp:366 src/engine/options.cpp:1476
 msgid "Warning"
 msgstr "Warnung"
@@ -401,66 +401,65 @@ msgstr "Klassenfähigkeiten"
 msgid "No Skills."
 msgstr "Keine Fähigkeiten."
 
-#: src/engine/dccnit.cpp:536 src/engine/dccnit.cpp:586
+#: src/engine/dccnit.cpp:538 src/engine/dccnit.cpp:588
 msgid "Error"
 msgstr "Fehler"
 
-#: src/engine/dccnit.cpp:536
+#: src/engine/dccnit.cpp:538
 msgid "Can't load the saved game!"
 msgstr "Der Spielstand konnte nicht geladen werden!"
 
-#: src/engine/dccnit.cpp:581
+#: src/engine/dccnit.cpp:583
 msgid "Information"
 msgstr "Information"
 
-#: src/engine/dccnit.cpp:582
+#: src/engine/dccnit.cpp:584
 msgid "The game was saved!"
 msgstr "Das Spiel wurde gespeichert."
 
-#: src/engine/dccnit.cpp:586
+#: src/engine/dccnit.cpp:588
 msgid "Can't save game!"
 msgstr "Das Spiel konnte nicht gespeichert werden."
 
-#: src/engine/dccnit.cpp:596
+#: src/engine/dccnit.cpp:598
 msgid "Can't save game while fighting!"
 msgstr "Das Spiel kann nicht während eines Kampfes gespeichert werden."
 
-#: src/engine/dccnit.cpp:729
+#: src/engine/dccnit.cpp:731
 msgid "Saving Current Map Modifications"
 msgstr "Speichere aktuelle Kartenmodifikatoren"
 
-#: src/engine/dccnit.cpp:764
+#: src/engine/dccnit.cpp:766
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Lade Karte: %s"
 
-#: src/engine/dccnit.cpp:794
+#: src/engine/dccnit.cpp:796
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Lade NPC: %s"
 
-#: src/engine/dccnit.cpp:831
+#: src/engine/dccnit.cpp:833
 msgid "Creating MiniMap"
 msgstr "Erstelle Minikarte"
 
-#: src/engine/dccnit.cpp:837
+#: src/engine/dccnit.cpp:839
 msgid "Putting GUI on Screen"
 msgstr "Zeige GUI an"
 
-#: src/engine/dccnit.cpp:864
+#: src/engine/dccnit.cpp:866
 msgid "Loading Particles"
 msgstr "Lade Partikel"
 
-#: src/engine/dccnit.cpp:893
+#: src/engine/dccnit.cpp:895
 msgid "Loading Changes..."
 msgstr "Lade Veränderungen..."
 
-#: src/engine/dccnit.cpp:915
+#: src/engine/dccnit.cpp:917
 msgid "Done!"
 msgstr "Fertig!"
 
-#: src/engine/dccnit.cpp:1127
-#, fuzzy
+#: src/engine/dccnit.cpp:1129
 msgid ""
 "DNT is relesead under GPLv3 or later: Feel free to use its source code and "
 "data the way you want (or to blame us the same way). DNT is thankful to the "
@@ -473,61 +472,61 @@ msgstr ""
 "diese Libraries entwickelt haben: OpenAL, Cal3D, OpenGL, SDL, SDL_image, "
 "SDL_ttf, libVorbis."
 
-#: src/engine/dccnit.cpp:1736
+#: src/engine/dccnit.cpp:1738
 msgid "Too far away for the action!"
 msgstr "Zu weit entfernt zum Agieren!"
 
-#: src/engine/dccnit.cpp:1753
+#: src/engine/dccnit.cpp:1755
 msgid "Couldn't rest at battle mode."
 msgstr "Kann nicht im Kampfmodus ausrasten!"
 
-#: src/engine/dccnit.cpp:1759
+#: src/engine/dccnit.cpp:1761
 msgid "Enemies nearby."
 msgstr "Feinde in der Nähe"
 
-#: src/engine/dccnit.cpp:1863
+#: src/engine/dccnit.cpp:1865
 msgid "No NPCs in the area."
 msgstr "Keine NPCs in der Nähe."
 
-#: src/engine/dccnit.cpp:1921
+#: src/engine/dccnit.cpp:1923
 msgid "Surprise Attack Turn."
 msgstr "Überraschungsangriff."
 
-#: src/engine/dccnit.cpp:1934
+#: src/engine/dccnit.cpp:1936
 msgid "No enemies in the area."
 msgstr "Keine Feinde in der Nähe."
 
-#: src/engine/dccnit.cpp:2436
+#: src/engine/dccnit.cpp:2437
 #, c-format
 msgid "%s taken."
 msgstr "%s genommen."
 
-#: src/engine/dccnit.cpp:2464
+#: src/engine/dccnit.cpp:2465
 msgid "Inventory is full!"
 msgstr "Inventar ist voll!"
 
-#: src/engine/dccnit.cpp:2486
+#: src/engine/dccnit.cpp:2487
 msgid "Door"
 msgstr "Tür"
 
-#: src/engine/dccnit.cpp:2534
+#: src/engine/dccnit.cpp:2535
 msgid "dead"
 msgstr "tot"
 
-#: src/engine/dccnit.cpp:2586
+#: src/engine/dccnit.cpp:2587
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s attackiert %s"
 
-#: src/engine/dccnit.cpp:2806
+#: src/engine/dccnit.cpp:2828
 msgid "No more actions. Turn ended."
 msgstr "Keine Aktionen mehr.  Runde beendet."
 
-#: src/engine/dccnit.cpp:3217
+#: src/engine/dccnit.cpp:3243
 msgid "A* could not find a path!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:4171
+#: src/engine/dccnit.cpp:4197
 msgid "Exit Battle Mode"
 msgstr "Beende Kampfmodus"
 
@@ -1585,9 +1584,9 @@ msgstr "Medizinstudent"
 
 #: data/classes/medician.cls:2
 msgid ""
-"'If I've tried Physiotherapy there, I should passed at first place with the "
-"points I've made to pass on Medicine!'|(Mattar, Medical Student replying to "
-"the provocation of Wanucia, Physiotherapy Student)"
+"'Had I chosen Physiotherapy, I would have passed first place thanks to all "
+"the points I got in the Medicine enry exam!'|(Mattar, Medical Student "
+"replying to the provocation of Wanucia, Physiotherapy Student)"
 msgstr ""
 
 #: data/classes/medician.cls:3
@@ -1765,7 +1764,7 @@ msgstr ""
 
 #: data/classes/compsci.cls:1
 msgid "Computer Science Student"
-msgstr "Informatikstudent"
+msgstr "Informatikstudentin"
 
 #: data/classes/compsci.cls:2
 msgid ""
@@ -1778,7 +1777,6 @@ msgstr ""
 "existentielle Frage über sein Studium beantwortet)."
 
 #: data/classes/compsci.cls:3
-#, fuzzy
 msgid ""
 "The Computer Science Student is the most bizarre class in DNT (and, "
 "paradoxically, the most common). They are known by their suicidal choices "
@@ -1788,11 +1786,19 @@ msgid ""
 "perceive that what they have done works perfectly, but their masters won't "
 "look at and appraise it, since CS teachers are disciplined and will not "
 "compromise the worth of the diploma."
-msgstr "Die Informatikstudentin"
+msgstr ""
+"Informatikstudentin ist die bizarreste Klasse in DNT (und paradoxerweise, "
+"die am weitesten verbreitete). Sie sind für ihre suizidalen Entscheidungen "
+"(die erste ist ihre Studiumswahl), ihren Mangel and Geduld während sie sich "
+"in dem, was ihre Lehrer 'Kurs' nennen, befinden, die unendliche Zeit, die "
+"sie mit Praktischen Übungen (PÜs) verbringen und den Hass, den sie fühlen, "
+"wenn das was sie kreiert haben perfekt funktioniert, aber ihre Lehrer es "
+"nicht anschauen und wertschätzen, weil Informatiklehrer diszipliniert sind "
+"und den Wert ihres Diploms nicht gefährden wollen."
 
 #: data/classes/compsci.cls:7
 msgid "Because they have to teach themselves, they receive +2 of Wisdom."
-msgstr "Weil sie sich alles selbst beibringen müssen erhalten sie +2 Wissen."
+msgstr "Weil sie sich alles selbst beibringen müssen, erhalten sie +2 Wissen."
 
 #: data/classes/compsci.cls:9
 msgid ""
@@ -3369,11 +3375,11 @@ msgstr ""
 
 #: data/dialogs/objects/computers.dlg:6
 msgid "(You see the computer main screen)"
-msgstr ""
+msgstr "(Du siehst den Startbildschirm des Computers)"
 
 #: data/dialogs/objects/computers.dlg:11
 msgid "Install a new Operating System"
-msgstr ""
+msgstr "Installiere ein neues Betriebssystem"
 
 #: data/dialogs/objects/computers.dlg:31
 msgid "What Operating System do you wish to install?"
@@ -3381,11 +3387,11 @@ msgstr "Welches Betriebssystem möchtest du installieren?"
 
 #: data/dialogs/objects/computers.dlg:39
 msgid "Install Pirate Ruindows"
-msgstr ""
+msgstr "Installiere raubkopiertes Windoof"
 
 #: data/dialogs/objects/computers.dlg:49
 msgid "Install Original Ruindows"
-msgstr "Originales Ruindows installieren"
+msgstr "Originales Windoof installieren"
 
 #: data/dialogs/objects/computers.dlg:59
 msgid "Install Ubuntu Linux"
@@ -3402,11 +3408,11 @@ msgstr "Zurück"
 
 #: data/dialogs/objects/computers.dlg:91
 msgid "Operational System successfully installed."
-msgstr ""
+msgstr "Betriebssystem erfolgreich installiert."
 
 #: data/dialogs/objects/computers.dlg:105
 msgid "You have failed to install an Operational System"
-msgstr ""
+msgstr "Du hast es nicht geschafft, das Betriebssystem zu installieren."
 
 #: data/dialogs/objects/computers.dlg:119
 msgid ""
@@ -3432,32 +3438,32 @@ msgstr ""
 
 #: data/dialogs/objects/compdeck.dlg:12
 msgid "Insert the code from the letter"
-msgstr ""
+msgstr "Gib den Code aus dem Brief ein"
 
 #: data/dialogs/objects/compdeck.dlg:16
 msgid "Try a random password"
-msgstr ""
+msgstr "Versuche ein zufälliges Kennwort"
 
 #: data/dialogs/objects/compdeck.dlg:23
 msgid "Search for a buffer overflow"
-msgstr ""
+msgstr "Suche nach einem Pufferüberlauf"
 
 #: data/dialogs/objects/compdeck.dlg:30 data/dialogs/objects/compdeck.dlg:48
 #: data/dialogs/objects/compdeck.dlg:68 data/dialogs/objects/compdeck.dlg:83
 msgid "Leave the computer"
-msgstr ""
+msgstr "Verlasse den Computer"
 
 #: data/dialogs/objects/compdeck.dlg:40
 msgid "(You've entered an wrong code)"
-msgstr ""
+msgstr "(Du hast das falsche Kennwort eingegeben)"
 
 #: data/dialogs/objects/compdeck.dlg:45
 msgid "Try again"
-msgstr ""
+msgstr "Nochmal versuchen"
 
 #: data/dialogs/objects/compdeck.dlg:57
 msgid "(You've got full access to the computer)"
-msgstr ""
+msgstr "(Du hast vollen Zugriff auf den Computer erhalten)"
 
 #: data/dialogs/objects/compdeck.dlg:63
 msgid "Copy all information to Logan's notebook"
@@ -3473,11 +3479,11 @@ msgstr ""
 
 #: data/dialogs/objects/bunker_school_server.dlg:12
 msgid "Temporally turn off the subterranean air system"
-msgstr ""
+msgstr "Schalte das unterirdische Belüftungssystem temporär ab"
 
 #: data/dialogs/objects/bunker_school_server.dlg:32
 msgid "The computer laughts at you. You have failed."
-msgstr ""
+msgstr "Der Computer lacht dich aus. Du hast versagt."
 
 #: data/dialogs/objects/bunker_school_server.dlg:46
 msgid ""
@@ -3872,6 +3878,8 @@ msgstr "Nein."
 msgid ""
 "I need you to install a Ruindows on the squatter's notebook. Will you do it?"
 msgstr ""
+"Ich will, dass du Windoof auf dem Netbook des Hausbesetzers installierst. "
+"Wirst du es machen?"
 
 #: data/dialogs/tutorial/santa.dlg:96
 msgid "Never! I am a Free Software Adept and will never touch this evil O.S."
@@ -3904,6 +3912,8 @@ msgstr ""
 #: data/dialogs/tutorial/santa.dlg:146
 msgid "I'm waiting for you install the Ruindows at the squatter's notebook!"
 msgstr ""
+"Ich warte darauf, dass du Windoof auf dem Notebook vom Hausbesetzer "
+"installierst!"
 
 #: data/dialogs/tutorial/santa.dlg:150 data/dialogs/tutorial/santa.dlg:228
 #: data/dialogs/tutorial/atleticano.dlg:90
@@ -3945,11 +3955,13 @@ msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:208
 msgid "Now, Ruindows at the Hippie's computer!"
-msgstr ""
+msgstr "Jetzt, installiere Windoof auf dem Rechner des Hippies!"
 
 #: data/dialogs/tutorial/santa.dlg:224
 msgid "I'm waiting for you install the Ruindows on the hippie's computer!"
 msgstr ""
+"Ich warte darauf, dass du Windoof auf dem Notebook vom Hippie installierst!"
+"installierst!"
 
 #: data/dialogs/tutorial/santa.dlg:258
 msgid "Follow the frozen blue screen path, brother!"
@@ -4312,7 +4324,8 @@ msgstr "Töte alle lebenden Kreaturen in der Bunker Schule."
 
 #: data/missions/tutorial/mission3.mis:2
 msgid "Install Ruindows at the squatter's notebook for Santa Claws."
-msgstr "Installiere Ruindows am Arbeits-Notebook für Santa Claws."
+msgstr ""
+"Installiere Windoof auf dem Notebook des Hausbesetzers für Santa Claws."
 
 #: data/missions/tutorial/mission4.mis:2
 msgid "Fight for Cruzeirense."
@@ -4324,7 +4337,7 @@ msgstr "Hole Psychedelische Ration für den F.S.C. Hippie"
 
 #: data/missions/tutorial/santa2.mis:2
 msgid "Install Ruindows at the hippie's computer."
-msgstr "Installiere Ruindows auf Hippie's Computer."
+msgstr "Installiere Windoof auf dem Computer vom Hippie."
 
 #: data/missions/tutorial/compdeck.mis:2
 msgid "Copy info from old factory computer for Logan."
@@ -4348,24 +4361,23 @@ msgstr ""
 "beschreibt."
 
 #: data/models/vehicles/onibus/onibus.dcc:1
-#, fuzzy
 msgid "Bus"
-msgstr "Kaufen"
+msgstr "Bus"
 
 #: data/models/vehicles/car1/car1.dcc:1 data/models/vehicles/golf/golf_b.dcc:1
 #: data/models/vehicles/golf/golf_r.dcc:1
 #: data/models/vehicles/golf/golf_bl.dcc:1
 msgid "Broken Car"
-msgstr ""
+msgstr "Kaputtes Auto"
 
 #: data/models/vehicles/truck2/truck2.dcc:1
 msgid "Broken Truck"
-msgstr ""
+msgstr "Kaputter Lastwagen"
 
 #: data/models/objetos/geral/placa_petro/placa_petro.dcc:1
 #: data/models/objetos/geral/placa_pare/placa_pare.dcc:1
 msgid "Sign"
-msgstr ""
+msgstr "Straßenschild"
 
 #: data/models/objetos/geral/chair2/chair2.dcc:1
 #: data/models/objetos/geral/chair1/chair1.dcc:1
@@ -4376,7 +4388,7 @@ msgstr ""
 #: data/models/objetos/icex/mesa_braco/mesa_braco.dcc:1
 #: data/models/objetos/icex/cadeira/cadeira.dcc:1
 msgid "Chair"
-msgstr ""
+msgstr "Stuhl"
 
 #: data/models/objetos/geral/charango/charango.dcc:2
 msgid "A bolivian chord instrument"
@@ -4391,17 +4403,16 @@ msgid "Computer"
 msgstr "Computer"
 
 #: data/models/objetos/geral/cap/cap.dcc:1
-#, fuzzy
 msgid "Cap"
-msgstr "Karte"
+msgstr "Deckel"
 
 #: data/models/objetos/geral/oven/oven.dcc:1
 msgid "Oven"
-msgstr ""
+msgstr "Ofen"
 
 #: data/models/objetos/geral/pillow/pillow.dcc:1
 msgid "Pillow"
-msgstr ""
+msgstr "Kissen"
 
 #: data/models/objetos/geral/notebook/notebook.dcc:1
 msgid "Notebook"
@@ -4410,7 +4421,7 @@ msgstr "Notebook"
 #: data/models/objetos/geral/letto/letto.dcc:1
 #: data/models/objetos/geral/bed/bed.dcc:1
 msgid "Bed"
-msgstr ""
+msgstr "Bett"
 
 #: data/models/objetos/geral/tv_hack/tv_hack.dcc:1
 msgid "Tv Hack"
@@ -4418,7 +4429,7 @@ msgstr ""
 
 #: data/models/objetos/geral/microwave/microwave.dcc:1
 msgid "Microwave"
-msgstr ""
+msgstr "Mikrowelle"
 
 #: data/models/objetos/geral/barrel/barrel.dcc:1
 #: data/models/objetos/geral/barrels/barrel2/barrel2_1.dcc:1
@@ -4498,9 +4509,8 @@ msgstr ""
 #: data/models/objetos/geral/mesa_grande/mesa_grande.dcc:1
 #: data/models/objetos/icex/mesa/mesa.dcc:1
 #: data/models/objetos/icex/mesa_redonda/mesa_redonda.dcc:1
-#, fuzzy
 msgid "Table"
-msgstr "Deaktiviert"
+msgstr "Tisch"
 
 #: data/models/objetos/geral/fridge/fridge.dcc:1
 msgid "Fridge"
@@ -4587,28 +4597,29 @@ msgstr "9mm Munitionspackung"
 #: data/models/objetos/ammo/9mm_pack/9mm_pack.dcc:2
 msgid "You can use this ammo with a 9mm gun and to make your way to jail."
 msgstr ""
+"Du kannst diese Munition mit einer 9mm Waffe benutzen, um den Weg zum Knast "
+"freizumachen."
 
 #: data/models/objetos/banho/broom/broom.dcc:1
-#, fuzzy
 msgid "Broom"
-msgstr "Pilz"
+msgstr "Besen"
 
 #: data/models/objetos/banho/privada2/privada.dcc:1
 #: data/models/objetos/banho/privada/privada.dcc:1
 msgid "Toilet"
-msgstr ""
+msgstr "Klo"
 
 #: data/models/objetos/banho/papel_higienico/papel_higienico.dcc:1
 msgid "Toilet Paper"
-msgstr ""
+msgstr "Klopapier"
 
 #: data/models/objetos/banho/mictorio/mictorio.dcc:1
 msgid "Urinal"
-msgstr ""
+msgstr "Urinal"
 
 #: data/models/objetos/tumbas/cementery_gate/cementery_gate.dcc:1
 msgid "Gate"
-msgstr ""
+msgstr "Tor"
 
 #: data/models/objetos/tumbas/ts6/ts6.dcc:1
 #: data/models/objetos/tumbas/lapide/lapide.dcc:1
@@ -4619,26 +4630,25 @@ msgstr ""
 #: data/models/objetos/tumbas/ts3/ts3.dcc:1
 #: data/models/objetos/tumbas/tomb_column/tomb_column.dcc:1
 msgid "Tombstone"
-msgstr ""
+msgstr "Grabstein"
 
 #: data/models/objetos/tumbas/tomb1/tomb1.dcc:1
 msgid "Tomb"
-msgstr ""
+msgstr "Grab"
 
 #: data/models/objetos/tumbas/cruz/cruz.dcc:1
 msgid "Cross"
-msgstr ""
+msgstr "Kreuz"
 
 #: data/models/objetos/tumbas/cementery_fence/cementery_fence.dcc:1
 #: data/models/street/log_fence1/log_fence1.dcc:1
 #: data/models/street/log_fence2/log_fence2.dcc:1
 msgid "Fence"
-msgstr ""
+msgstr "Zaun"
 
 #: data/models/objetos/industrial/lorry/lorry.dcc:1
-#, fuzzy
 msgid "Lorry"
-msgstr "Sorry."
+msgstr "Förderwagen"
 
 #: data/models/objetos/vinyls/clara_crocodilo.dcc:2
 msgid ""
@@ -4670,7 +4680,7 @@ msgstr ""
 msgid "Dump"
 msgstr ""
 
-#: data/models/objetos/icex/fallout_box/fallout_box.dcc:2
+#: data/models/objetos/icex/dnt2_box/dnt2_box.dcc:2
 msgid "Surely one of the best games you've ever played in your childhood."
 msgstr ""
 "Mit Sicherheit eines der besten Spiele, die Du jemals in deiner Kindheit "
@@ -4744,18 +4754,16 @@ msgstr ""
 #: data/models/building/ruin_house7/ruin_house7.dcc:1
 #: data/models/building/ruin_house5/ruin_house5.dcc:1
 #: data/models/building/ruin_house6/ruin_house6.dcc:1
-#, fuzzy
 msgid "Ruined House"
-msgstr "Windoof"
+msgstr "Hausruine"
 
 #: data/models/building/ruin_house_barraco1/ruin_house_barraco1.dcc:1
 msgid "Shed on Ruins"
 msgstr ""
 
 #: data/models/building/ruin1/ruin1.dcc:1
-#, fuzzy
 msgid "Ruin"
-msgstr "Windoof"
+msgstr "Ruine"
 
 #: data/models/building/mine_entrance/mine_entrance.dcc:1
 msgid "Mine Entrance"
@@ -4825,37 +4833,34 @@ msgstr ""
 #: data/models/street/streetlight1/streetlight1.dcc:1
 #: data/models/street/lightpole/lightpole.dcc:1
 #: data/models/street/streetlight2/streetlight2.dcc:1
-#, fuzzy
 msgid "Light Pole"
-msgstr "Leicht"
+msgstr "Lichtmast"
 
 #: data/models/street/hydrant/hydrant.dcc:1
 msgid "Hydrant"
-msgstr ""
+msgstr "Hydrant"
 
 #: data/models/street/container/container.dcc:1
-#, fuzzy
 msgid "Container"
-msgstr "Fortsetzen"
+msgstr "Behälter"
 
 #: data/models/street/fountain2/fountain2.dcc:1
 #: data/models/street/fountain1/fountain1.dcc:1
 msgid "Fountain"
-msgstr ""
+msgstr "Springbrunnen"
 
 #: data/models/street/bench1/bench1.dcc:1
 #: data/models/street/bench2/bench2.dcc:1
-#, fuzzy
 msgid "Bench"
-msgstr "Französisch"
+msgstr "Sitzbank"
 
 #: data/models/street/cond/cond.dcc:1
 msgid "Pillar"
-msgstr ""
+msgstr "Pfeiler"
 
 #: data/models/street/mixer/mixer.dcc:1
 msgid "Concrete Mixer"
-msgstr ""
+msgstr "Zementmischer"
 
 #: data/weapons/definitions/axe.wcc:1
 msgid "Great Axe"

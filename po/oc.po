@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2012-06-17 15:21-0300\n"
+"POT-Creation-Date: 2012-06-19 21:48+0200\n"
 "PO-Revision-Date: 2010-05-06 06:48+0000\n"
 "Last-Translator: Cédric VALMARY (Tot en òc) <cvalmary@yahoo.fr>\n"
 "Language-Team: Occitan (post 1500) <oc@li.org>\n"
@@ -100,7 +100,7 @@ msgstr "Soi pas un piòt"
 msgid "Invalid Talent"
 msgstr "Don invalid"
 
-#: src/classes/feats.cpp:242 src/engine/dccnit.cpp:2215
+#: src/classes/feats.cpp:242 src/engine/dccnit.cpp:2217
 msgid "Not enought points to use!"
 msgstr ""
 
@@ -199,8 +199,8 @@ msgstr "Carisme"
 msgid "Attribute Description"
 msgstr "Descripcion dels atributs"
 
-#: src/engine/attwindow.cpp:559 src/engine/dccnit.cpp:595
-#: src/engine/dccnit.cpp:2214 src/engine/featsel.cpp:495
+#: src/engine/attwindow.cpp:559 src/engine/dccnit.cpp:597
+#: src/engine/dccnit.cpp:2216 src/engine/featsel.cpp:495
 #: src/engine/inventwindow.cpp:366 src/engine/options.cpp:1476
 msgid "Warning"
 msgstr "Avertiment"
@@ -401,65 +401,65 @@ msgstr "Competéncias de la classa"
 msgid "No Skills."
 msgstr "Pas de Competéncias."
 
-#: src/engine/dccnit.cpp:536 src/engine/dccnit.cpp:586
+#: src/engine/dccnit.cpp:538 src/engine/dccnit.cpp:588
 msgid "Error"
 msgstr "Error"
 
-#: src/engine/dccnit.cpp:536
+#: src/engine/dccnit.cpp:538
 msgid "Can't load the saved game!"
 msgstr "Pòt pas cargar lo jòc !"
 
-#: src/engine/dccnit.cpp:581
+#: src/engine/dccnit.cpp:583
 msgid "Information"
 msgstr "Informacion"
 
-#: src/engine/dccnit.cpp:582
+#: src/engine/dccnit.cpp:584
 msgid "The game was saved!"
 msgstr "Lo jòc es estat salvat !"
 
-#: src/engine/dccnit.cpp:586
+#: src/engine/dccnit.cpp:588
 msgid "Can't save game!"
 msgstr "Pòt pas salvar lo jòc !"
 
-#: src/engine/dccnit.cpp:596
+#: src/engine/dccnit.cpp:598
 msgid "Can't save game while fighting!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:729
+#: src/engine/dccnit.cpp:731
 msgid "Saving Current Map Modifications"
 msgstr ""
 
-#: src/engine/dccnit.cpp:764
+#: src/engine/dccnit.cpp:766
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Cargament de la Mapa : %s"
 
-#: src/engine/dccnit.cpp:794
+#: src/engine/dccnit.cpp:796
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Cargament del PNJ : %s"
 
-#: src/engine/dccnit.cpp:831
+#: src/engine/dccnit.cpp:833
 msgid "Creating MiniMap"
 msgstr "Creacion d'una Mapa miniatura"
 
-#: src/engine/dccnit.cpp:837
+#: src/engine/dccnit.cpp:839
 msgid "Putting GUI on Screen"
 msgstr "Afichatge per interfàcia grafica"
 
-#: src/engine/dccnit.cpp:864
+#: src/engine/dccnit.cpp:866
 msgid "Loading Particles"
 msgstr "Cargament de las Particulas"
 
-#: src/engine/dccnit.cpp:893
+#: src/engine/dccnit.cpp:895
 msgid "Loading Changes..."
 msgstr "Cargament de las modificacions..."
 
-#: src/engine/dccnit.cpp:915
+#: src/engine/dccnit.cpp:917
 msgid "Done!"
 msgstr "Acabat !"
 
-#: src/engine/dccnit.cpp:1127
+#: src/engine/dccnit.cpp:1129
 msgid ""
 "DNT is relesead under GPLv3 or later: Feel free to use its source code and "
 "data the way you want (or to blame us the same way). DNT is thankful to the "
@@ -467,61 +467,61 @@ msgid ""
 "SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1736
+#: src/engine/dccnit.cpp:1738
 msgid "Too far away for the action!"
 msgstr "Tròp luènh per aquesta accion !"
 
-#: src/engine/dccnit.cpp:1753
+#: src/engine/dccnit.cpp:1755
 msgid "Couldn't rest at battle mode."
 msgstr "Impossible de se repausar en mòde combat."
 
-#: src/engine/dccnit.cpp:1759
+#: src/engine/dccnit.cpp:1761
 msgid "Enemies nearby."
 msgstr "Enemics pròches."
 
-#: src/engine/dccnit.cpp:1863
+#: src/engine/dccnit.cpp:1865
 msgid "No NPCs in the area."
 msgstr "Pas de PNJ dins la zòna"
 
-#: src/engine/dccnit.cpp:1921
+#: src/engine/dccnit.cpp:1923
 msgid "Surprise Attack Turn."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1934
+#: src/engine/dccnit.cpp:1936
 msgid "No enemies in the area."
 msgstr "Pas d'enemics dins la zòna."
 
-#: src/engine/dccnit.cpp:2436
+#: src/engine/dccnit.cpp:2437
 #, c-format
 msgid "%s taken."
 msgstr "%s pres."
 
-#: src/engine/dccnit.cpp:2464
+#: src/engine/dccnit.cpp:2465
 msgid "Inventory is full!"
 msgstr "L'inventari es comol !"
 
-#: src/engine/dccnit.cpp:2486
+#: src/engine/dccnit.cpp:2487
 msgid "Door"
 msgstr "Pòrta"
 
-#: src/engine/dccnit.cpp:2534
+#: src/engine/dccnit.cpp:2535
 msgid "dead"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2586
+#: src/engine/dccnit.cpp:2587
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s atacs %s"
 
-#: src/engine/dccnit.cpp:2806
+#: src/engine/dccnit.cpp:2828
 msgid "No more actions. Turn ended."
 msgstr "Pas d'accions suplementàrias. Fin del torn."
 
-#: src/engine/dccnit.cpp:3217
+#: src/engine/dccnit.cpp:3243
 msgid "A* could not find a path!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:4171
+#: src/engine/dccnit.cpp:4197
 msgid "Exit Battle Mode"
 msgstr "Quitar lo Mòde Combat"
 
@@ -1507,9 +1507,9 @@ msgstr "Estudiant en medecina"
 
 #: data/classes/medician.cls:2
 msgid ""
-"'If I've tried Physiotherapy there, I should passed at first place with the "
-"points I've made to pass on Medicine!'|(Mattar, Medical Student replying to "
-"the provocation of Wanucia, Physiotherapy Student)"
+"'Had I chosen Physiotherapy, I would have passed first place thanks to all "
+"the points I got in the Medicine enry exam!'|(Mattar, Medical Student "
+"replying to the provocation of Wanucia, Physiotherapy Student)"
 msgstr ""
 
 #: data/classes/medician.cls:3
@@ -4476,7 +4476,7 @@ msgstr ""
 msgid "Dump"
 msgstr ""
 
-#: data/models/objetos/icex/fallout_box/fallout_box.dcc:2
+#: data/models/objetos/icex/dnt2_box/dnt2_box.dcc:2
 msgid "Surely one of the best games you've ever played in your childhood."
 msgstr ""
 
