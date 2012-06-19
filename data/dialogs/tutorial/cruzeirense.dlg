@@ -7,7 +7,7 @@ dialog(0)
    npc_end
    pc_begin
       option
-         text = gettext("I'll come back latter")
+         text = gettext("I'll come back later")
          action = finish_dialog()
    pc_end
 end_dialog

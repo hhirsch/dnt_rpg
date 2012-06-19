@@ -561,7 +561,7 @@ void setTextureRGBA(SDL_Surface* img, GLuint textID, bool mipMaps,
    {
       /* Gamb is needed to copy the alpha channel from source to destiny
        * disabling the SRC_ALPHA from the source (but not really from the
-       * source to avoid colatheral effects on latter blits with img.) */
+       * source to avoid colatheral effects on later blits with img.) */
       SDL_Surface* gamb = SDL_CreateRGBSurfaceFrom(img->pixels, 
                                                    img->w, img->h, 
                                                    img->format->BitsPerPixel,

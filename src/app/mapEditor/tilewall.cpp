@@ -112,7 +112,7 @@ TileWall::TileWall(Map* acMap)
    totalZ = 0;
    curTile = NULL;
 
-   /* Must set tiles to change latter */
+   /* Must set tiles to change later */
    format = ".md5def";
    
    baseName = "models/tiles/cave_1/cave1_";

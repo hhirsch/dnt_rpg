@@ -168,7 +168,7 @@ class md5Model: public aniModel, dntList
    
    protected:
 
-      /*! precalculate normals and tangents for latter per-frame use */
+      /*! precalculate normals and tangents for later per-frame use */
       void preCalculateNormalsAndTangents();
 
       /*! Update the animation, delta seconds after previous update */

@@ -8,7 +8,7 @@ fogueira
 matos
 ovo
    author: farrer (DNTeam)
-   license: GPLv3 or latter
+   license: GPLv3 or later
 
 arvores/bananeira
 bush

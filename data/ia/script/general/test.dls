@@ -9,7 +9,7 @@
 #   - expressions as functions parameters (they must be assign to variables
 #                                          before used as parameters)
 #   - literals as functions parameters
-#   - declare functions (will add it latter);
+#   - declare functions (will add it later);
 #   - comments after some statments (the comments must be full lines)
 #   - direct assign at declaration (like int a = 20)
 #

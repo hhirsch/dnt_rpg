@@ -4032,7 +4032,7 @@ msgid "I'm very busy now."
 msgstr ""
 
 #: data/dialogs/tutorial/cruzeirense.dlg:10
-msgid "I'll come back latter"
+msgid "I'll come back later"
 msgstr ""
 
 #: data/dialogs/tutorial/cruzeirense.dlg:20
@@ -4284,7 +4284,7 @@ msgstr "Sicher."
 
 #: data/dialogs/tutorial/dona.dlg:190
 msgid ""
-"Uhm, there's something I'll want latter from you. But first, I'll need some "
+"Uhm, there's something I'll want later from you. But first, I'll need some "
 "ingredients for the ration. A mushroom..."
 msgstr ""
 "Ähem, eine letzte Bitte hätte ich noch. Aber zuerst bräuchte ich eine "
@@ -4307,7 +4307,7 @@ msgid "Have you got the egg?"
 msgstr "Hast du das Ei bekommen?"
 
 #: data/dialogs/tutorial/dona.dlg:257
-msgid "Done. Come back latter to do me your favor."
+msgid "Done. Come back later to do me your favor."
 msgstr "Fertig. Komm später wieder für einen Gefallen."
 
 #: data/dialogs/tutorial/dona.dlg:270

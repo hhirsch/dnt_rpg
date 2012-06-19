@@ -10,5 +10,5 @@ drop_item.ogg
 et.ogg  
 take_item.ogg
    Author: DNTeam
-   License: GPLv3 or latter
+   License: GPLv3 or later
 

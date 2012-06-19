@@ -53,7 +53,7 @@ class iaScript
    public:
       /*! Constructor
        * \param usedEngine -> the pointer to the engine used
-       * \note -> if you use this contstructor, you must define latter the
+       * \note -> if you use this contstructor, you must define later the
        * script's fileName and call the init() function. */
       iaScript(engine* usedEngine);
       /*! Constructor

@@ -122,14 +122,14 @@ class skills
       int getSkillIntByString(std::string idString);
 
       /*! Do a skill check (getting the value got at the check,
-       *  to compare latter with another skill check or a fixed value) 
+       *  to compare later with another skill check or a fixed value) 
        *  \param idString -> String identifier of the skill
        *  \param difficulty -> check difficulty
        *  \return -> true if success, false if fail */
       bool doSkillCheck(std::string idString, int difficulty);
 
       /*! Do a skill check (getting the value got at the check,
-       *  to compare latter with another skill check or a fixed value) 
+       *  to compare later with another skill check or a fixed value) 
        *  \param sk -> pointer to the skill to check 
        *  \param difficulty -> check difficulty
        *  \return -> true if succes, false if fail */

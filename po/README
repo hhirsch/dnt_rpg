@@ -1,0 +1,2 @@
+After making changes to tranlatable strings, update the .po files with:
+  make update-po

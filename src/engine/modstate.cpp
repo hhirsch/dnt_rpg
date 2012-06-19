@@ -1394,7 +1394,7 @@ bool modState::loadState(string file)
    def.getNextTuple(key, value);
    if(key == MODSTATE_TOKEN_VERSION)
    {
-      //TODO do some latter version check
+      //TODO do some later version check
    }
    else
    {

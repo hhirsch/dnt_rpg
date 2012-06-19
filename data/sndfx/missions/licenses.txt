@@ -1,4 +1,4 @@
 mission_complete.ogg 
 mission_failed.ogg
    Author: DNTeam (using timidity-freepats and rosegarden)
-   License: GPLv2 or latter
+   License: GPLv2 or later

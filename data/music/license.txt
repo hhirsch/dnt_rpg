@@ -12,7 +12,7 @@ musica11.ogg
 musica12.ogg
 musica13.ogg
    Author: DNTeam
-   License: GPLv3 or latter
+   License: GPLv3 or later
 
 caravan.ogg
 emptycity.ogg

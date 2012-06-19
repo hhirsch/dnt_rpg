@@ -748,7 +748,7 @@ def save_md5(settings):
   for a in bpy.context.screen.areas:
      if a.type == 'DOPESHEET_EDITOR':
         dopeSheet = a.spaces.active
-        # Save previous action to restore latter
+        # Save previous action to restore later
         previousAction = a.spaces.active.action
         previousFrame = bpy.context.scene.frame_current
 

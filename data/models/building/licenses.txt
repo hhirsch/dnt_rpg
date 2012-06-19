@@ -17,7 +17,7 @@ ruin_house7
 ruin_house8
 ruin_house_barraco1
    author: farrer (DNTeam)
-   license: GPLv3 or latter
+   license: GPLv3 or later
 
 ruin1
    author: Marianne Gagnon & Jean-Manuel Clémençon

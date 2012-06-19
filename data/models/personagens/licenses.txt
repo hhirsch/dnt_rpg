@@ -7,13 +7,13 @@ Logan
 metaleiro
 Ratazana
    author: farrer (DNTeam)
-   license: GPLv3 or latter
+   license: GPLv3 or later
 
 atleticano
 cruzeirense
 santa
    authors: ecarvalh & farrer (DNTeam)
-   license: GPLv3 or latter
+   license: GPLv3 or later
 
 galo2
 ganso

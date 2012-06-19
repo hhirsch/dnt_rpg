@@ -187,7 +187,7 @@ end_dialog
 ############################################################
 dialog(11)
    npc_begin
-      text = gettext("Uhm, there's something I'll want latter from you. But first, I'll need some ingredients for the ration. A mushroom...")
+      text = gettext("Uhm, there's something I'll want later from you. But first, I'll need some ingredients for the ration. A mushroom...")
    npc_end
    pc_begin
       option
@@ -254,7 +254,7 @@ end_dialog
 ############################################################
 dialog(15)
    npc_begin
-      text = gettext("Done. Come back latter to do me your favor.")
+      text = gettext("Done. Come back later to do me your favor.")
    npc_end
    pc_begin
       option

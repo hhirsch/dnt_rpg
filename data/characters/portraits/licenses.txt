@@ -3,7 +3,7 @@ metaleiro.png
 mutante.png
 velho.png
    Author: Raquel (from DNTeam), colored by Farrer (from DNTeam).
-   License: GPLv3 or latter
+   License: GPLv3 or later
 
 hippie.png
    Author: Scribe (Daniel Stephens)
@@ -60,5 +60,5 @@ santa.png
 velha.png
 zedobar.png
    Author: DNTeam
-   License: GPLv3 or latter
+   License: GPLv3 or later
 

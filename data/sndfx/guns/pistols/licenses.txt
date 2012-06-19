@@ -2,4 +2,4 @@ leve_1.ogg
 leve_2.ogg  
 leve_3.ogg
    Author: DNTeam (using timidity-freepats and rosegarden)
-   License: GPLv2 or latter
+   License: GPLv2 or later
