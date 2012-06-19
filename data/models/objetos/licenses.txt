@@ -46,7 +46,6 @@ icex/snes/*/* (except *.png)
 industrial/compdeck
 itens/garrafa1
 itens/healkit
-itens/lata1
 itens/money
 itens/racao
 paints/portinari_1
@@ -61,6 +60,7 @@ vinyls
    license: GPLv3 or later
 
 icex/ruindows_box
+itens/lata1
    author: farrer (DNTeam)
    license: GPLv3 or later
    logo changes 2012: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
