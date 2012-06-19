@@ -41,7 +41,8 @@ geral/santa_barrel
 geral/signs
 icex/lixo
 icex/quadro
-icex/snes/*
+icex/snes/* (except snes_game.xcf.bz2)
+icex/snes/*/* (except *.png)
 industrial/compdeck
 itens/garrafa1
 itens/healkit
@@ -190,5 +191,7 @@ tumbas/cementery_fence
    license: GPLv3
 
 icex/dnt2_box
+icex/snes/snes_game.xcf.bz2
+icex/snes/*/*.png
    author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
    license: GPLv3+, CC-BY-SAv3+
