@@ -1,0 +1,4 @@
+attack.png
+   author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   license: CC0/Public Domain
+   source: http://openclipart.org/detail/170791/
