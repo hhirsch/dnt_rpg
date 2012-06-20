@@ -1,0 +1,24 @@
+Img/etc/computer.svg
+   author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   license: CC0/Public Domain
+   source: http://openclipart.org/detail/170792/
+
+Img/etc/scimitar.svg
+   author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   license: CC0/Public Domain
+   source: http://openclipart.org/detail/170793/
+
+Img/etc/horns.svg
+   author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   license: CC0/Public Domain
+   source: http://openclipart.org/detail/170790/bull-horns-by-qubodup-170790
+
+Img/etc/dice.svg
+   author: yves_guillou
+   license: CC0/Public Domain
+   source: http://openclipart.org/detail/92041/dice-by-yves_guillou-92041
+
+Img/etc/pineapple.svg
+   author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   license: CC0/Public Domain
+   source: http://openclipart.org/detail/170794/
