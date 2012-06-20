@@ -1,16 +1,14 @@
 
 
 ammo/9mm_pack
-armas/adaga
-armas/axe
-armas/beretta92
-armas/dark_katana
-armas/faca
-armas/kalashnikov
-armas/kalashnikov_small
-armas/scimitar
+armas/adaga (except *.png)
+armas/axe (except *.png)
+armas/dark_katana (except *.png)
+armas/faca (except *.png)
+armas/kalashnikov (except *.png)
+armas/kalashnikov_small (except *.png)
+armas/scimitar (except *.png)
 armas/sw39 (except *.png)
-armas/uzi
 banho/mictorio
 banho/privada
 books/combat_tutorial
@@ -57,6 +55,16 @@ paints/tarsila_3
 vinyls
    author: farrer (DNTeam)
    license: GPLv3 or later
+
+armas/uzi
+   author: farrer (DNTeam)
+   license: GPLv3 or later
+   source: http://www.wpclipart.com/armed_services/small_arms/guns_6/Uzi.png.html
+
+armas/beretta92
+   author: farrer (DNTeam)
+   license: GPLv3 or later
+   source: http://www.wpclipart.com/armed_services/small_arms/guns_1/Beretta_Model_92.png.html
 
 icex/ruindows_box
 geral/refmachine
@@ -201,3 +209,34 @@ armas/sw39/*png
    license: GPLv2
    base: http://commons.wikimedia.org/wiki/File:Smith_and_Wesson_model_39_IMG_3063.jpg
    note: CeCILL is GPLv2-compatible
+
+armas/scimitar/*.png
+   author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   license: CC0/PD
+   source: http://openclipart.org/detail/170824/
+
+armas/kalashnikov/*.png
+armas/kalashnikov_small/*.png
+   author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   license: CC0/PD
+   source: http://openclipart.org/detail/20269/ak-47-rifle-by-radioflyer
+
+armas/faca/*.png
+   author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   license: CC0/PD
+   source: http://openclipart.org/detail/170827/
+
+armas/dark_katana/*.png
+   author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   license: CC0/PD
+   source: http://openclipart.org/detail/170828/
+
+armas/axe/*.png
+vinyls/banco_darwin*.png
+   author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   license: GPLv2+, CC-BY-SAv3+
+
+armas/adaga/*.png
+   author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   license: CC0/PD
+   source: http://openclipart.org/detail/170829
