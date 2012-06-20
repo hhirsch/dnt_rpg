@@ -36,7 +36,6 @@ geral/porta5
 geral/porta6
 geral/porta7
 geral/porta8
-geral/refmachine
 geral/santa_barrel
 geral/signs
 icex/lixo
@@ -60,10 +59,11 @@ vinyls
    license: GPLv3 or later
 
 icex/ruindows_box
+geral/refmachine
 itens/lata1
    author: farrer (DNTeam)
    license: GPLv3 or later
-   logo changes 2012: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   modifications 2012: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
 
 geral/cap
 geral/colarinho_e_oculos
