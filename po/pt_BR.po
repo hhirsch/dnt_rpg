@@ -1585,7 +1585,6 @@ msgid "Medical Student"
 msgstr "Estudante de Medicina"
 
 #: data/classes/medician.cls:2
-#, fuzzy
 msgid ""
 "'Had I chosen Physiotherapy, I would have passed first place thanks to all "
 "the points I got in the Medicine enry exam!'|(Mattar, Medical Student "

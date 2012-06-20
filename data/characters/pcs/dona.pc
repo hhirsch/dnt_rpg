@@ -1,6 +1,6 @@
 name = Dona
 model = models/personagens/velha/model.cfg
-portrait = characters/portraits/velha.png
+portrait = characters/portraits/mama.png
 battleScript = ia/script/fight/fight_animal.dsl
 bloodFileName = particles/blood2.par
 bloodPosition = 40
