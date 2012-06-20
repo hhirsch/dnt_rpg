@@ -1,6 +1,6 @@
 name = gettext("Santa Claws")
 model = models/personagens/santa/model.cfg
-portrait = characters/portraits/santa.png
+portrait = characters/portraits/santa2.png
 battleScript = ia/script/fight/fight_animal.dsl
 bloodFileName = particles/blood2.par
 bloodPosition = 45

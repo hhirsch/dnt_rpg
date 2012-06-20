@@ -20,14 +20,17 @@ velhaca.png
 ameiva.png
 ameiva02.png
 athlete.png
+chicolee.png
 fille.png
 fille2.png
 fille3.png
 garcon.png
 garcon2.png
 garcon3.png
+mama.png
 punk.png
 ratazana.png
+santa.png
 santa2.png
 transgender.png
    Author: nubux
