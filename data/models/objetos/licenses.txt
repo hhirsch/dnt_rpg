@@ -9,7 +9,7 @@ armas/faca
 armas/kalashnikov
 armas/kalashnikov_small
 armas/scimitar
-armas/sw39
+armas/sw39 (except *.png)
 armas/uzi
 banho/mictorio
 banho/privada
@@ -195,3 +195,9 @@ icex/snes/snes_game.xcf.bz2
 icex/snes/*/*.png
    author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
    license: GPLv3+, CC-BY-SAv3+
+
+armas/sw39/*png
+   author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   license: GPLv2
+   base: http://commons.wikimedia.org/wiki/File:Smith_and_Wesson_model_39_IMG_3063.jpg
+   note: CeCILL is GPLv2-compatible
