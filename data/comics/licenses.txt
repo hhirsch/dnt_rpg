@@ -1,0 +1,69 @@
+intro/Ameiva.png
+intro/forno.png
+intro/metalerio.png
+intro/ufmg.png
+other/msoftlivre/mus.png
+other/msoftlivre/tcho.png
+   unknown
+
+intro/hbomb.png 
+   author: farrer (DNTeam)
+   license: GPLv3 or later
+   source: http://commons.wikimedia.org/wiki/File:Castle_Romeo.jpg
+
+intro/metaleiro.png
+   author: Raquel (DNTeam)
+   license: GPLv3 or later
+
+intro/logan.png
+   author: Logan (DNTeam)
+   license: GPLv3 or later
+
+intro/logan_rosto.png
+   author: farrer (DNTeam)
+   license: GPLv3 or later
+
+intro/jornal.png
+   license: CC0/Public Domain
+   source: anachist newspaper from 2007
+
+intro/ticoaboboramod.png
+   license: GPLv3
+
+intro/fotodcc.png
+   license: GPLv3
+
+intro/bh.png
+   author: Gordo (DNTeam)
+   license: GPLv3
+
+tutorial/combat/uzi_inv.png
+   author: farrer (DNTeam)
+   license: GPLv3 or later
+   source: http://www.wpclipart.com/armed_services/small_arms/guns_6/Uzi.png.html
+
+tutorial/combat/scimitar.svg
+   author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   license: CC0/Public Domain
+   source: http://openclipart.org/detail/170793/
+
+tutorial/combat/dice.svg
+   author: yves_guillou
+   license: CC0/Public Domain
+   source: http://openclipart.org/detail/92041/dice-by-yves_guillou-92041
+
+tutorial/combat/keyboard.svg
+   author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   license: CC0/Public Domain
+   source: http://openclipart.org/detail/170836/
+
+other/msoftlivre/gue.png
+other/msoftlivre/real.png
+   author: Rui César <ruicesar at gmail>
+   license: GPLv2 or later
+
+other/msoftlivre/metal.svg
+other/msoftlivre/metal-text.png
+other/msoftlivre/ruikre.png
+   author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   license: CC0/Public Domain
