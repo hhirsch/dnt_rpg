@@ -14,7 +14,7 @@
    height="297mm"
    id="svg3787"
    version="1.1"
-   inkscape:version="0.47 r22583"
+   inkscape:version="0.48.3.1 r9886"
    sodipodi:docname="desenho.svg">
   <defs
      id="defs3789">
@@ -203,6 +203,142 @@
          mode="screen"
          in="fbSourceGraphic" />
     </filter>
+    <linearGradient
+       y2="386.64789"
+       y1="410.93362"
+       xlink:href="#linearGradient7703"
+       x2="472.50156"
+       x1="486.07141"
+       id="linearGradient9204"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.250837,0.968029,-0.968029,0.250837,708.1899,32.79548)" />
+    <linearGradient
+       y2="415.57648"
+       y1="353.43362"
+       xlink:href="#linearGradient7703"
+       x2="526.07141"
+       x1="492.85715"
+       id="linearGradient9202"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.250837,0.968029,-0.968029,0.250837,708.1899,32.79548)" />
+    <linearGradient
+       y2="500.48007"
+       y1="470.48007"
+       xlink:href="#linearGradient6955"
+       x2="324.44196"
+       x1="308.24765"
+       id="linearGradient9200"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.250837,0.968029,-0.968029,0.250837,708.1899,32.79548)" />
+    <linearGradient
+       y2="500.48007"
+       y1="470.48007"
+       xlink:href="#linearGradient6955"
+       x2="324.44196"
+       x1="308.24765"
+       id="linearGradient9193"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.250837,0.968029,-0.968029,0.250837,708.1899,32.79548)" />
+    <linearGradient
+       y2="415.57648"
+       y1="353.43362"
+       xlink:href="#linearGradient7703"
+       x2="526.07141"
+       x1="492.85715"
+       id="linearGradient9190"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.250837,0.968029,-0.968029,0.250837,708.1899,32.79548)" />
+    <linearGradient
+       y2="386.64789"
+       y1="410.93362"
+       xlink:href="#linearGradient7703"
+       x2="472.50156"
+       x1="486.07141"
+       id="linearGradient9187"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.250837,0.968029,-0.968029,0.250837,708.1899,32.79548)" />
+    <linearGradient
+       y2="386.64789"
+       y1="410.93362"
+       xlink:href="#linearGradient7703"
+       x2="472.50156"
+       x1="486.07141"
+       id="linearGradient9184"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       y2="415.57648"
+       y1="353.43362"
+       xlink:href="#linearGradient7703"
+       x2="526.07141"
+       x1="492.85715"
+       id="linearGradient9182"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       y2="500.48007"
+       y1="470.48007"
+       xlink:href="#linearGradient6955"
+       x2="324.44196"
+       x1="308.24765"
+       id="linearGradient9180"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       y2="386.64789"
+       y1="410.93362"
+       xlink:href="#linearGradient7703"
+       x2="472.50156"
+       x1="486.07141"
+       id="linearGradient7721"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       y2="415.57648"
+       y1="353.43362"
+       xlink:href="#linearGradient7703"
+       x2="526.07141"
+       x1="492.85715"
+       id="linearGradient7709"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       y2="500.48007"
+       y1="470.48007"
+       xlink:href="#linearGradient6955"
+       x2="324.44196"
+       x1="308.24765"
+       id="linearGradient6969"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       id="linearGradient6955">
+      <stop
+         style="stop-color:#5b390e;stop-opacity:1.0000000"
+         offset="0.0000000"
+         id="stop6957" />
+      <stop
+         style="stop-color:#b59147;stop-opacity:1.0000000"
+         offset="0.50000000"
+         id="stop6971" />
+      <stop
+         style="stop-color:#504018;stop-opacity:1.0000000"
+         offset="0.75000000"
+         id="stop6973" />
+      <stop
+         style="stop-color:#a58323;stop-opacity:1.0000000"
+         offset="1.0000000"
+         id="stop6959" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient7703">
+      <stop
+         style="stop-color:#be391a;stop-opacity:1.0000000"
+         offset="0.0000000"
+         id="stop7705" />
+      <stop
+         style="stop-color:#883210;stop-opacity:1.0000000"
+         offset="0.50000000"
+         id="stop7711" />
+      <stop
+         style="stop-color:#d05c18;stop-opacity:1.0000000"
+         offset="1.0000000"
+         id="stop7707" />
+    </linearGradient>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -211,17 +347,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8"
-     inkscape:cx="383.49708"
-     inkscape:cy="45.771062"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="15.837294"
+     inkscape:cy="523.8818"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1280"
-     inkscape:window-height="948"
+     inkscape:window-width="1920"
+     inkscape:window-height="1181"
      inkscape:window-x="0"
-     inkscape:window-y="25"
-     inkscape:window-maximized="1"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
      inkscape:object-paths="false" />
   <metadata
      id="metadata3792">
@@ -400,15 +536,6 @@
            d="m -147.88598,379.3112 c 0,0 0.96884,3.08724 3.81529,2.21262 3.05755,-0.76529 2.52878,-4.00297 2.52878,-4.00297"
            id="path10460" />
       </g>
-      <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/mart.png"
-         xlink:href="mart.png"
-         y="-285.35522"
-         x="756.71039"
-         id="image10462"
-         height="50.088051"
-         width="47.289532"
-         transform="matrix(0.75331562,0.65765916,-0.77050219,0.63743734,0,0)" />
       <g
          transform="matrix(0.42753672,0.90399798,-0.90399798,0.42753672,802.0668,-550.55925)"
          id="g10501">
@@ -527,14 +654,14 @@
          d="m 892.88059,326.35114 9.6774,30.60293"
          style="fill:none;stroke:#000000;stroke-width:1.42369139px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
-         xlink:href="../msoftlivre/kalashnikov_inv.png"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
-         width="38.000004"
-         height="76.000008"
-         id="image9552"
+         sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
+         xlink:href="../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
+         y="885.50549"
          x="118.5812"
-         y="885.50549" />
+         id="image9552"
+         height="76.000008"
+         width="38.000004"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
       <path
          style="fill:none;stroke:#000000;stroke-width:0.91376841px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 900.18499,345.54216 c 0,0 1.9164,2.60676 -0.4724,4.38497 -2.4256,2.0131 -4.7237,-0.32774 -4.7237,-0.32774"
@@ -677,14 +804,14 @@
          d="m -115.87733,160.30689 9.67746,30.60293"
          id="path2569" />
       <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
-         xlink:href="../msoftlivre/kalashnikov_inv.png"
-         y="-134.7252"
-         x="184.09911"
-         id="image2571"
-         height="76.000008"
+         sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
+         xlink:href="../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
          width="38.000004"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
+         height="76.000008"
+         id="image2571"
+         x="184.09911"
+         y="-134.7252" />
       <path
          id="path2573"
          d="m -108.5729,179.49791 c 0,0 1.91644,2.60676 -0.47244,4.38497 -2.42559,2.0131 -4.72361,-0.32774 -4.72361,-0.32774"
@@ -810,13 +937,13 @@
          d="m 797.01037,256.86707 c 0,1.95262 -1.13066,3.53553 -2.52538,3.53553 -1.39473,0 -2.52539,-1.58291 -2.52539,-3.53553 0,-1.95263 1.13066,-3.53554 2.52539,-3.53554 1.39472,0 2.52538,1.58291 2.52538,3.53554 z"
          transform="matrix(0.82503656,0,0,0.48027241,264.69393,286.28301)" />
       <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/revoots.png"
+         sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/revoots.png"
          xlink:href="revoots.png"
-         width="24.501085"
-         height="26.412428"
-         id="image6277"
+         y="442.16486"
          x="908.67419"
-         y="442.16486" />
+         id="image6277"
+         height="26.412428"
+         width="24.501085" />
       <path
          sodipodi:type="arc"
          style="fill:#800000;stroke:#000000;stroke-width:2.94199991;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -889,15 +1016,6 @@
          id="path6046"
          d="m 906.05498,442.07796 -10.42359,10.47471 -10.03752,-7.91991"
          style="fill:none;stroke:#000000;stroke-width:0.87935418px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-      <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/foice.png"
-         xlink:href="foice.png"
-         y="174.10638"
-         x="936.71228"
-         id="image6048"
-         height="52.142857"
-         width="44.285717"
-         transform="matrix(0.96828631,0.24984319,-0.24984319,0.96828631,0,0)" />
       <g
          transform="matrix(0.72573703,-0.68797221,0.68797221,0.72573703,731.18231,71.603216)"
          id="g6050">
@@ -927,6 +1045,22 @@
          d="m 907.67857,423.61219 15.89285,-2.32143"
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     </g>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use5300"
+       id="use5302"
+       transform="matrix(0.83265107,-0.55379797,0.55379797,0.83265107,-108.42189,202.65638)"
+       width="744.09448"
+       height="1052.3622" />
+    <use
+       height="1052.3622"
+       width="744.09448"
+       transform="matrix(0.849722,-0.28434375,0.28434375,0.849722,-228.46729,133.07991)"
+       id="use4516"
+       xlink:href="#use4510"
+       y="0"
+       x="0" />
     <g
        id="g4723"
        transform="translate(556.52226,-1.0101574)">
@@ -1061,15 +1195,6 @@
          id="path4715"
          d="m -97.47972,370.00414 -13.63706,10.35407 -13.13198,-7.82869"
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-      <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/pa.png"
-         xlink:href="pa.png"
-         transform="matrix(0.04428565,-0.99901891,0.99901891,0.04428565,0,0)"
-         width="93.933983"
-         height="95.954292"
-         id="image4711"
-         x="-415.10236"
-         y="-157.29272" />
       <g
          transform="matrix(0.72573703,-0.68797221,0.68797221,0.72573703,-278.3635,-1.2452147)"
          id="g4567">
@@ -1091,6 +1216,14 @@
          d="m -66.670068,370.00414 3.282996,9.59645 -13.637059,3.78807"
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     </g>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use4510"
+       id="use4512"
+       transform="translate(-152.91185,-48.613591)"
+       width="744.09448"
+       height="1052.3622" />
     <g
        id="g4841"
        transform="matrix(1.233493,0,0,1.1278221,562.54227,-19.655832)">
@@ -1172,14 +1305,14 @@
          d="m -141.30548,340.43632 7.85869,25.58922"
          style="fill:none;stroke:#000000;stroke-width:1.17316031px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
-         xlink:href="../msoftlivre/kalashnikov_inv.png"
-         transform="matrix(-0.21913921,0.9756936,0.97279825,0.23165397,0,0)"
-         width="31.728558"
-         height="61.811008"
-         id="image4770"
+         sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
+         xlink:href="../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
+         y="-110.40227"
          x="365.44708"
-         y="-110.40227" />
+         id="image4770"
+         height="61.811008"
+         width="31.728558"
+         transform="matrix(-0.21913921,0.9756936,0.97279825,0.23165397,0,0)" />
       <path
          style="fill:none;stroke:#000000;stroke-width:0.75296998px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m -135.37384,356.48325 c 0,0 1.55627,2.1797 -0.38365,3.66658 -1.96972,1.68329 -3.83586,-0.27405 -3.83586,-0.27405"
@@ -1330,14 +1463,14 @@
          d="m 1007.1663,504.92258 9.6774,30.60293"
          id="path9494" />
       <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
-         xlink:href="../msoftlivre/kalashnikov_inv.png"
-         y="1037.0879"
-         x="266.80994"
-         id="image9496"
-         height="76.000008"
+         sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
+         xlink:href="../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
          width="38.000004"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
+         height="76.000008"
+         id="image9496"
+         x="266.80994"
+         y="1037.0879" />
       <path
          id="path9498"
          d="m 1014.4707,524.1136 c 0,0 1.9164,2.60676 -0.4724,4.38497 -2.4256,2.0131 -4.7237,-0.32774 -4.7237,-0.32774"
@@ -1504,14 +1637,14 @@
          d="m 892.88059,326.35114 9.6774,30.60293"
          id="path9658" />
       <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
-         xlink:href="../msoftlivre/kalashnikov_inv.png"
-         y="885.50549"
-         x="118.5812"
-         id="image9660"
-         height="76.000008"
+         sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
+         xlink:href="../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
          width="38.000004"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
+         height="76.000008"
+         id="image9660"
+         x="118.5812"
+         y="885.50549" />
       <path
          id="path9662"
          d="m 900.18499,345.54216 c 0,0 1.9164,2.60676 -0.4724,4.38497 -2.4256,2.0131 -4.7237,-0.32774 -4.7237,-0.32774"
@@ -1974,6 +2107,14 @@
          x="1021.2379"
          y="223.50485" />
     </g>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use4460"
+       id="use4462"
+       transform="matrix(0.99798699,-0.06341896,0.06341896,0.99798699,223.02551,-128.08251)"
+       width="744.09448"
+       height="1052.3622" />
     <g
        id="g7826"
        transform="translate(-372.14285,-10.714286)">
@@ -2256,14 +2397,14 @@
          d="m 1023.5751,381.94093 c -3.6282,-4.00563 -5.5787,2.99903 -5.5787,2.99903"
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/../../../models/objetos/armas/scimitar/scimitar_inv.png"
+         sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/scimitar/scimitar_inv.png"
          xlink:href="../../../models/objetos/armas/scimitar/scimitar_inv.png"
-         transform="matrix(0.97134715,0.23766513,-0.23766513,0.97134715,0,0)"
-         width="27.645937"
-         height="60.595173"
-         id="image10401"
+         y="84.529015"
          x="1007.2947"
-         y="84.529015" />
+         id="image10401"
+         height="60.595173"
+         width="27.645937"
+         transform="matrix(0.97134715,0.23766513,-0.23766513,0.97134715,0,0)" />
     </g>
     <g
        id="g9768"
@@ -2374,13 +2515,13 @@
            sodipodi:type="arc" />
       </g>
       <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/../../../models/objetos/armas/sw39/sw39_inv.png"
+         sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/sw39/sw39_inv.png"
          xlink:href="../../../models/objetos/armas/sw39/sw39_inv.png"
-         y="357.6131"
-         x="884.43085"
-         id="image9730"
+         width="23.357143"
          height="22.285715"
-         width="23.357143" />
+         id="image9730"
+         x="884.43085"
+         y="357.6131" />
       <path
          id="path9732"
          d="m 907.0361,373.59427 c 2.62965,-4.72165 -4.63049,-4.32127 -4.63049,-4.32127"
@@ -2677,15 +2818,6 @@
          id="path9184"
          d="m 885.85192,371.36728 -10.42359,10.47471 -10.03752,-7.91991"
          style="fill:none;stroke:#000000;stroke-width:0.87935418px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-      <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/foice.png"
-         xlink:href="foice.png"
-         y="-131.54108"
-         x="905.95197"
-         id="image9186"
-         height="52.142857"
-         width="44.285717"
-         transform="matrix(0.87342443,0.48695972,-0.48695972,0.87342443,0,0)" />
       <g
          transform="matrix(0.72573703,-0.68797221,0.68797221,0.72573703,710.97925,0.892535)"
          id="g9188">
@@ -2702,15 +2834,6 @@
            d="m -147.88598,379.3112 c 0,0 0.96884,3.08724 3.81529,2.21262 3.05755,-0.76529 2.52878,-4.00297 2.52878,-4.00297"
            style="fill:none;stroke:#000000;stroke-width:0.91376841px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       </g>
-      <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/foice.png"
-         xlink:href="foice.png"
-         transform="matrix(0.34553985,-0.93840408,0.93840408,0.34553985,0,0)"
-         width="44.285717"
-         height="52.142857"
-         id="image9196"
-         x="-75.484634"
-         y="960.30133" />
       <path
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 918.67923,366.802 5.71428,17.85714"
@@ -2720,6 +2843,14 @@
          d="m 907.96494,409.83771 -0.89286,17.67857 -10.53571,0"
          id="path9200" />
     </g>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use5302"
+       id="use5304"
+       transform="matrix(0.95734415,0.28895012,-0.28895012,0.95734415,259.20752,-61.775624)"
+       width="744.09448"
+       height="1052.3622" />
     <g
        id="g8197"
        transform="translate(-468.57142,-134.28572)">
@@ -2801,14 +2932,14 @@
          d="m 1007.1663,504.92258 9.6774,30.60293"
          style="fill:none;stroke:#000000;stroke-width:1.42369139px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
-         xlink:href="../msoftlivre/kalashnikov_inv.png"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
-         width="38.000004"
-         height="76.000008"
-         id="image8136"
+         sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
+         xlink:href="../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
+         y="1037.0879"
          x="266.80994"
-         y="1037.0879" />
+         id="image8136"
+         height="76.000008"
+         width="38.000004"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
       <path
          style="fill:none;stroke:#000000;stroke-width:0.91376841px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 1014.4707,524.1136 c 0,0 1.9164,2.60676 -0.4724,4.38497 -2.4256,2.0131 -4.7237,-0.32774 -4.7237,-0.32774"
@@ -2897,15 +3028,6 @@
     <g
        id="g7338"
        transform="translate(-387.14285,18.571428)">
-      <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/pa.png"
-         xlink:href="pa.png"
-         y="887.23053"
-         x="-167.07343"
-         id="image6680"
-         height="95.954292"
-         width="93.933983"
-         transform="matrix(0.31512091,-0.94905153,0.94905153,0.31512091,0,0)" />
       <g
          id="g7314">
         <rect
@@ -3055,6 +3177,22 @@
            id="path7312" />
       </g>
     </g>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use4462"
+       id="use4464"
+       transform="matrix(0.9877364,-0.15613073,0.15613073,0.9877364,-167.69988,211.48953)"
+       width="744.09448"
+       height="1052.3622" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use5304"
+       id="use5306"
+       transform="matrix(0.33389563,-0.94261005,0.94261005,0.33389563,82.361036,802.58295)"
+       width="744.09448"
+       height="1052.3622" />
     <g
        id="g8507"
        transform="translate(-439.28571,64.285714)">
@@ -3179,15 +3317,6 @@
            d="m -147.88598,379.3112 c 0,0 0.96884,3.08724 3.81529,2.21262 3.05755,-0.76529 2.52878,-4.00297 2.52878,-4.00297"
            id="path8474" />
       </g>
-      <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/mart.png"
-         xlink:href="mart.png"
-         y="-187.81512"
-         x="959.44806"
-         id="image8476"
-         height="50.088051"
-         width="47.289532"
-         transform="matrix(0.87958568,0.47574051,-0.61131976,0.79138369,0,0)" />
       <g
          id="g8478"
          transform="matrix(-0.97239759,0.23333009,-0.23333009,-0.97239759,975.87001,764.71871)">
@@ -3327,15 +3456,6 @@
          style="fill:none;stroke:#000000;stroke-width:0.87935418px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m -109.61302,290.14176 -10.42359,10.47471 -10.03752,-7.91991"
          id="path5689" />
-      <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/foice.png"
-         xlink:href="foice.png"
-         transform="matrix(0.87342443,0.48695972,-0.48695972,0.87342443,0,0)"
-         width="44.285717"
-         height="52.142857"
-         id="image5988"
-         x="-3.0649734"
-         y="282.2659" />
       <g
          id="g5693"
          transform="matrix(0.72573703,-0.68797221,0.68797221,0.72573703,-284.48569,-80.332984)">
@@ -3352,15 +3472,6 @@
            d="m -147.88598,379.3112 c 0,0 0.96884,3.08724 3.81529,2.21262 3.05755,-0.76529 2.52878,-4.00297 2.52878,-4.00297"
            id="path5699" />
       </g>
-      <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/foice.png"
-         xlink:href="foice.png"
-         y="-1.9136939"
-         x="-343.23508"
-         id="image5992"
-         height="52.142857"
-         width="44.285717"
-         transform="matrix(0.34553985,-0.93840408,0.93840408,0.34553985,0,0)" />
       <path
          id="path5730"
          d="m -76.785714,285.57648 5.714286,17.85714"
@@ -3370,6 +3481,22 @@
          d="m -87.5,328.61219 -0.892857,17.67857 -10.535714,0"
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     </g>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use5296"
+       id="use5298"
+       transform="matrix(-0.58036991,-0.81435297,0.81435297,-0.58036991,290.81326,1051.6452)"
+       width="744.09448"
+       height="1052.3622" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use4458"
+       id="use4460"
+       transform="matrix(0.9994753,-0.0323901,0.0323901,0.9994753,16.765913,-314.04997)"
+       width="744.09448"
+       height="1052.3622" />
     <g
        id="g6621"
        transform="translate(-415.17269,34.345186)">
@@ -3494,15 +3621,6 @@
            d="m -147.88598,379.3112 c 0,0 0.96884,3.08724 3.81529,2.21262 3.05755,-0.76529 2.52878,-4.00297 2.52878,-4.00297"
            style="fill:none;stroke:#000000;stroke-width:0.91376841px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       </g>
-      <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/mart.png"
-         xlink:href="mart.png"
-         transform="matrix(0.75331562,0.65765916,-0.77050219,0.63743734,0,0)"
-         width="47.289532"
-         height="50.088051"
-         id="image6595"
-         x="828.93262"
-         y="-252.10837" />
       <g
          transform="matrix(-0.97239759,0.23333009,-0.23333009,-0.97239759,825.32842,841.8021)"
          id="g6341">
@@ -3523,15 +3641,6 @@
     <g
        id="g8417"
        transform="translate(-347.85714,93.571428)">
-      <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/pa.png"
-         xlink:href="pa.png"
-         y="867.06598"
-         x="-1.0774404"
-         id="image8355"
-         height="95.954292"
-         width="93.933983"
-         transform="matrix(0.45293196,-0.89154509,0.89154509,0.45293196,0,0)" />
       <g
          transform="matrix(1.1255853,0,0,1,-104.65928,0)"
          id="g8394">
@@ -3829,15 +3938,23 @@
          d="m 873.06678,449.86579 2.14286,13.92857 -11.42857,1.78572"
          id="path9290" />
       <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/../../../models/objetos/armas/axe/axe_inv.png"
+         sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/axe/axe_inv.png"
          xlink:href="../../../models/objetos/armas/axe/axe_inv.png"
-         transform="matrix(-0.7812738,0.62418847,0.62418847,0.7812738,0,0)"
-         width="29.428572"
-         height="170.71428"
-         id="image9424"
+         y="733.63019"
          x="-409.15195"
-         y="733.63019" />
+         id="image9424"
+         height="170.71428"
+         width="29.428572"
+         transform="matrix(-0.7812738,0.62418847,0.62418847,0.7812738,0,0)" />
     </g>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use4512"
+       id="use4514"
+       transform="matrix(0.81675,0,0,0.81675,116.4597,112.75813)"
+       width="744.09448"
+       height="1052.3622" />
     <g
        id="g8296"
        transform="translate(-453.57143,76.428571)">
@@ -3954,15 +4071,6 @@
          style="fill:none;stroke:#000000;stroke-width:0.87935418px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 916.30831,414.38431 -10.42359,10.47471 -10.03752,-7.91991"
          id="path8254" />
-      <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/foice.png"
-         xlink:href="foice.png"
-         transform="matrix(0.96828631,0.24984319,-0.24984319,0.96828631,0,0)"
-         width="44.285717"
-         height="52.142857"
-         id="image8256"
-         x="939.26849"
-         y="144.40353" />
       <g
          id="g8258"
          transform="matrix(0.72573703,-0.68797221,0.68797221,0.72573703,741.43564,43.909568)">
@@ -4127,13 +4235,13 @@
          d="m 944.06542,500.81319 18.11322,-1.05194"
          style="fill:none;stroke:#000000;stroke-width:1.3624891px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/../../../models/objetos/armas/sw39/sw39_inv.png"
+         sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/sw39/sw39_inv.png"
          xlink:href="../../../models/objetos/armas/sw39/sw39_inv.png"
-         width="23.357143"
-         height="22.285715"
-         id="image9129"
+         y="508.36221"
          x="910.28571"
-         y="508.36221" />
+         id="image9129"
+         height="22.285715"
+         width="23.357143" />
       <path
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 932.89098,524.34339 c 2.62965,-4.72165 -4.63049,-4.32127 -4.63049,-4.32127"
@@ -4337,31 +4445,30 @@
          d="m 888.09654,427.87214 6.23328,16.56729 -9.66118,4.20268"
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/../../../models/objetos/armas/dark_katana/dark_katana_inv.png"
+         sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/dark_katana/dark_katana_inv.png"
          xlink:href="../../../models/objetos/armas/dark_katana/dark_katana_inv.png"
-         transform="matrix(0.94590106,0.3244552,-0.3244552,0.94590106,0,0)"
-         width="38"
-         height="76"
-         id="image10103"
+         y="32.606907"
          x="902.11108"
-         y="32.606907" />
+         id="image10103"
+         height="76"
+         width="38"
+         transform="matrix(0.94590106,0.3244552,-0.3244552,0.94590106,0,0)" />
       <path
          id="path10153"
          d="m 871.29404,373.64372 c 1.0714,0.17857 14.4643,-1.07143 14.4643,-1.07143"
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     </g>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use4508"
+       id="use4510"
+       transform="matrix(-0.22196019,-0.97505573,0.97505573,-0.22196019,-93.638339,1290.0798)"
+       width="744.09448"
+       height="1052.3622" />
     <g
        id="g9889"
        transform="translate(-385.71428,107.14286)">
-      <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/pa.png"
-         xlink:href="pa.png"
-         y="1020.8542"
-         x="-50.86607"
-         id="image9828"
-         height="95.954292"
-         width="93.933983"
-         transform="matrix(0.34354319,-0.93913688,0.93913688,0.34354319,0,0)" />
       <g
          id="g9867">
         <rect
@@ -4828,15 +4935,6 @@
            d="m -147.88598,379.3112 c 0,0 0.96884,3.08724 3.81529,2.21262 3.05755,-0.76529 2.52878,-4.00297 2.52878,-4.00297"
            style="fill:none;stroke:#000000;stroke-width:0.91376841px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       </g>
-      <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/mart.png"
-         xlink:href="mart.png"
-         transform="matrix(0.75331562,0.65765916,-0.77050219,0.63743734,0,0)"
-         width="47.289532"
-         height="50.088051"
-         id="image5082"
-         x="756.71039"
-         y="-285.35522" />
       <g
          id="g5084"
          transform="matrix(0.42753672,0.90399798,-0.90399798,0.42753672,802.0668,-550.55925)">
@@ -4955,14 +5053,14 @@
          d="m 892.88059,326.35114 9.6774,30.60293"
          id="path5118" />
       <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
-         xlink:href="../msoftlivre/kalashnikov_inv.png"
-         y="885.50549"
-         x="118.5812"
-         id="image5120"
-         height="76.000008"
+         sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
+         xlink:href="../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
          width="38.000004"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
+         height="76.000008"
+         id="image5120"
+         x="118.5812"
+         y="885.50549" />
       <path
          id="path5122"
          d="m 900.18499,345.54216 c 0,0 1.9164,2.60676 -0.4724,4.38497 -2.4256,2.0131 -4.7237,-0.32774 -4.7237,-0.32774"
@@ -5105,14 +5203,14 @@
          d="m -115.87733,160.30689 9.67746,30.60293"
          style="fill:none;stroke:#000000;stroke-width:1.42369139px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
-         xlink:href="../msoftlivre/kalashnikov_inv.png"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
-         width="38.000004"
-         height="76.000008"
-         id="image5164"
+         sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
+         xlink:href="../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
+         y="-134.7252"
          x="184.09911"
-         y="-134.7252" />
+         id="image5164"
+         height="76.000008"
+         width="38.000004"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
       <path
          style="fill:none;stroke:#000000;stroke-width:0.91376841px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m -108.5729,179.49791 c 0,0 1.91644,2.60676 -0.47244,4.38497 -2.42559,2.0131 -4.72361,-0.32774 -4.72361,-0.32774"
@@ -5238,13 +5336,13 @@
          style="fill:#ffcc00;stroke:#f6d72b;stroke-width:2.94199991;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
          sodipodi:type="arc" />
       <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/revoots.png"
+         sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/revoots.png"
          xlink:href="revoots.png"
-         y="442.16486"
-         x="908.67419"
-         id="image5208"
+         width="24.501085"
          height="26.412428"
-         width="24.501085" />
+         id="image5208"
+         x="908.67419"
+         y="442.16486" />
       <path
          sodipodi:end="3.1578779"
          sodipodi:start="0"
@@ -5317,15 +5415,6 @@
          style="fill:none;stroke:#000000;stroke-width:0.87935418px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 906.05498,442.07796 -10.42359,10.47471 -10.03752,-7.91991"
          id="path5226" />
-      <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/foice.png"
-         xlink:href="foice.png"
-         transform="matrix(0.96828631,0.24984319,-0.24984319,0.96828631,0,0)"
-         width="44.285717"
-         height="52.142857"
-         id="image5228"
-         x="936.71228"
-         y="174.10638" />
       <g
          id="g5230"
          transform="matrix(0.72573703,-0.68797221,0.68797221,0.72573703,731.18231,71.603216)">
@@ -5355,6 +5444,14 @@
          d="m 907.67857,423.61219 15.89285,-2.32143"
          id="path5242" />
     </g>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use5288"
+       id="use5290"
+       transform="matrix(-0.10924171,0.99401522,-0.99401522,-0.10924171,1020.4084,764.24152)"
+       width="744.09448"
+       height="1052.3622" />
     <g
        transform="translate(264.52226,478.98984)"
        id="g5244">
@@ -5489,15 +5586,6 @@
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m -97.47972,370.00414 -13.63706,10.35407 -13.13198,-7.82869"
          id="path5278" />
-      <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/pa.png"
-         xlink:href="pa.png"
-         y="-157.29272"
-         x="-415.10236"
-         id="image5280"
-         height="95.954292"
-         width="93.933983"
-         transform="matrix(0.04428565,-0.99901891,0.99901891,0.04428565,0,0)" />
       <g
          id="g5282"
          transform="matrix(0.72573703,-0.68797221,0.68797221,0.72573703,-278.3635,-1.2452147)">
@@ -5520,14 +5608,14 @@
          id="path5290" />
     </g>
     <image
-       sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
-       xlink:href="../msoftlivre/kalashnikov_inv.png"
-       transform="matrix(-0.28910686,0.95729683,0.96461787,0.26365196,0,0)"
-       width="35.952324"
-       height="75.907204"
-       id="image5314"
+       sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
+       xlink:href="../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
+       y="743.69708"
        x="781.01599"
-       y="743.69708" />
+       id="image5314"
+       height="75.907204"
+       width="35.952324"
+       transform="matrix(-0.28910686,0.95729683,0.96461787,0.26365196,0,0)" />
     <g
        id="g5340"
        transform="translate(-730.57142,272.85714)">
@@ -5609,14 +5697,14 @@
          d="m 1007.1663,504.92258 9.6774,30.60293"
          style="fill:none;stroke:#000000;stroke-width:1.42369139px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
-         xlink:href="../msoftlivre/kalashnikov_inv.png"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
-         width="38.000004"
-         height="76.000008"
-         id="image5362"
+         sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
+         xlink:href="../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
+         y="1037.0879"
          x="266.80994"
-         y="1037.0879" />
+         id="image5362"
+         height="76.000008"
+         width="38.000004"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
       <path
          style="fill:none;stroke:#000000;stroke-width:0.91376841px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 1014.4707,524.1136 c 0,0 1.9164,2.60676 -0.4724,4.38497 -2.4256,2.0131 -4.7237,-0.32774 -4.7237,-0.32774"
@@ -5702,6 +5790,14 @@
            style="fill:#008080;stroke:#000000;stroke-width:1.0220449px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       </g>
     </g>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g4475"
+       id="use4458"
+       transform="matrix(0.99242364,0.12286303,-0.12286303,0.99242364,366.41295,-159.28349)"
+       width="744.09448"
+       height="1052.3622" />
     <g
        id="g5396"
        transform="translate(-563.42857,455.71429)">
@@ -5783,14 +5879,14 @@
          d="m 892.88059,326.35114 9.6774,30.60293"
          style="fill:none;stroke:#000000;stroke-width:1.42369139px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
-         xlink:href="../msoftlivre/kalashnikov_inv.png"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
-         width="38.000004"
-         height="76.000008"
-         id="image5418"
+         sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
+         xlink:href="../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
+         y="885.50549"
          x="118.5812"
-         y="885.50549" />
+         id="image5418"
+         height="76.000008"
+         width="38.000004"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
       <path
          style="fill:none;stroke:#000000;stroke-width:0.91376841px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 900.18499,345.54216 c 0,0 1.9164,2.60676 -0.4724,4.38497 -2.4256,2.0131 -4.7237,-0.32774 -4.7237,-0.32774"
@@ -6579,14 +6675,14 @@
          d="m 1023.5751,381.94093 c -3.6282,-4.00563 -5.5787,2.99903 -5.5787,2.99903"
          id="path5696" />
       <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/../../../models/objetos/armas/scimitar/scimitar_inv.png"
+         sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/scimitar/scimitar_inv.png"
          xlink:href="../../../models/objetos/armas/scimitar/scimitar_inv.png"
-         y="84.529015"
-         x="1007.2947"
-         id="image5698"
-         height="60.595173"
+         transform="matrix(0.97134715,0.23766513,-0.23766513,0.97134715,0,0)"
          width="27.645937"
-         transform="matrix(0.97134715,0.23766513,-0.23766513,0.97134715,0,0)" />
+         height="60.595173"
+         id="image5698"
+         x="1007.2947"
+         y="84.529015" />
     </g>
     <g
        transform="translate(-557.67012,519.90103)"
@@ -6697,13 +6793,13 @@
            transform="matrix(0.81206153,0,0,0.83616909,-31.840833,212.71516)" />
       </g>
       <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/../../../models/objetos/armas/sw39/sw39_inv.png"
+         sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/sw39/sw39_inv.png"
          xlink:href="../../../models/objetos/armas/sw39/sw39_inv.png"
-         width="23.357143"
-         height="22.285715"
-         id="image5730"
+         y="357.6131"
          x="884.43085"
-         y="357.6131" />
+         id="image5730"
+         height="22.285715"
+         width="23.357143" />
       <path
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 907.0361,373.59427 c 2.62965,-4.72165 -4.63049,-4.32127 -4.63049,-4.32127"
@@ -6878,15 +6974,6 @@
            style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       </g>
     </g>
-    <image
-       sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/foice.png"
-       xlink:href="foice.png"
-       y="970.7973"
-       x="92.98539"
-       id="image5817"
-       height="52.142857"
-       width="44.285717"
-       transform="matrix(0.91036976,-0.41379573,0.41379573,0.91036976,0,0)" />
     <g
        transform="translate(-760.57142,345.71428)"
        id="g5833">
@@ -6968,14 +7055,14 @@
          d="m 1007.1663,504.92258 9.6774,30.60293"
          id="path5853" />
       <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/../msoftlivre/kalashnikov_inv.png"
-         xlink:href="../msoftlivre/kalashnikov_inv.png"
-         y="1037.0879"
-         x="266.80994"
-         id="image5855"
-         height="76.000008"
+         sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
+         xlink:href="../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
          width="38.000004"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
+         height="76.000008"
+         id="image5855"
+         x="266.80994"
+         y="1037.0879" />
       <path
          id="path5857"
          d="m 1014.4707,524.1136 c 0,0 1.9164,2.60676 -0.4724,4.38497 -2.4256,2.0131 -4.7237,-0.32774 -4.7237,-0.32774"
@@ -7072,15 +7159,6 @@
          id="g5893">
         <g
            id="g5593">
-          <image
-             sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/pa.png"
-             xlink:href="pa.png"
-             y="-60.144348"
-             x="636.43536"
-             id="image5891"
-             height="95.954292"
-             width="93.933983"
-             transform="matrix(0.82776115,0.56108063,-0.56108063,0.82776115,0,0)" />
           <g
              id="g5666">
             <g
@@ -7375,15 +7453,6 @@
            d="m -147.88598,379.3112 c 0,0 0.96884,3.08724 3.81529,2.21262 3.05755,-0.76529 2.52878,-4.00297 2.52878,-4.00297"
            style="fill:none;stroke:#000000;stroke-width:0.91376841px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       </g>
-      <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/mart.png"
-         xlink:href="mart.png"
-         transform="matrix(0.87958568,0.47574051,-0.61131976,0.79138369,0,0)"
-         width="47.289532"
-         height="50.088051"
-         id="image5973"
-         x="959.44806"
-         y="-187.81512" />
       <g
          transform="matrix(-0.97239759,0.23333009,-0.23333009,-0.97239759,975.87001,764.71871)"
          id="g5975">
@@ -7400,6 +7469,69 @@
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 989.47349,333.40658 15.89281,-2.32143"
          id="path5981" />
+    </g>
+    <g
+       id="layer1-2"
+       transform="matrix(-0.16363216,-0.14157222,0.14157222,-0.16363216,201.95071,1005.0649)">
+      <g
+         transform="translate(-138.5714,-277.1429)"
+         id="g9195">
+        <path
+           style="fill:url(#linearGradient9200);fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.9999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           id="path6227-7"
+           d="M 420.09631,564.92973 154.85574,281.69244 c 0,0 -4.87114,-3.38116 -8.99461,0.63882 -4.12347,4.01998 0.45737,9.47387 0.45737,9.47387 l 268.3647,283.90352 5.41311,-10.77892 z"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:url(#linearGradient9202);fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.9999994;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           id="path6975-6"
+           d="m 419.5588,562.85539 15.38848,16.67304 c 0,0 2.5475,4.13607 6.78578,3.40679 4.23827,-0.7293 8.09299,-5.78645 8.09299,-5.78645 l 16.69827,-12.44351 c 0,0 30.18291,25.21519 41.5562,47.89303 7.09002,14.13716 7.31943,35.36611 5.56429,42.83072 -1.75514,7.46462 -5.3411,13.55895 -5.3411,13.55895 0,0 -16.65913,6.8993 -30.8843,4.68234 -14.22516,-2.21696 -30.76692,-11.95028 -42.21239,-23.37309 -11.44546,-11.42283 -26.51345,-31.13041 -26.51345,-31.13041 l 15.26492,-17.97511 c 0,0 8.51569,-7.00279 0.74447,-14.21256 -7.77121,-7.20976 -14.76139,-14.25296 -14.76139,-14.25296 0,0 3.71339,-1.33116 5.94168,-4.12217 2.22829,-2.79103 3.76514,-5.40289 3.67555,-5.74861 z"
+           inkscape:connector-curvature="0" />
+        <path
+           style="opacity:0.69999994;fill:url(#linearGradient9204);fill-opacity:1;fill-rule:evenodd;stroke:none"
+           id="path7713"
+           d="m 419.84017,565.36504 18.96053,19.06788 c 0,0 2.68883,0.41009 8.91188,-1.20244 6.22304,-1.61252 20.31692,25.72624 12.23653,32.98517 -5.15859,4.63417 -31.52272,-9.17187 -30.9713,-15.5867 0.71404,-8.30695 2.15382,-9.97923 -1.58602,-13.23973 -6.18293,-5.39047 -15.88814,-14.32994 -15.88814,-14.32994 0,0 3.29069,-0.11482 4.82753,-2.72667 1.53684,-2.61186 3.59858,-4.62185 3.50899,-4.96757 z"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use4506"
+       id="use4454"
+       transform="matrix(0.43720574,-0.89936152,0.89936152,0.43720574,-868.36698,715.65577)"
+       width="744.09448"
+       height="1052.3622" />
+    <g
+       id="g4499"
+       transform="matrix(0.18443878,-0.05829265,0.05829265,0.18443878,62.400709,845.05757)">
+      <path
+         sodipodi:nodetypes="cczczcc"
+         inkscape:connector-curvature="0"
+         id="path2989"
+         d="m 70.423732,143.68189 c 0,0 -7.48614,-11.92844 -2.54238,-15.25424 C 86.694912,114.69884 117.81772,84.640059 95.631302,48.065451 73.444892,11.490843 22.372881,16.309007 0,17.071719 27.20339,-9.8774345 81.015512,-6.1538995 109.17062,37.087422 137.32572,80.328749 112.37288,124.6141 82.627122,140.12257 z"
+         style="fill:#373737;fill-opacity:1;fill-rule:evenodd;stroke:none" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path2987-2"
+         d="m 81.610172,212.5802 -3.05085,-53.89831 4.57627,-18.55932 -19.83051,4.32203 2.54238,14.23729 -3.55933,53.89831 z"
+         style="fill:#bfb385;fill-opacity:1;fill-rule:evenodd;stroke:none" />
+      <path
+         sodipodi:nodetypes="ccccccc"
+         style="fill:#a69668;fill-opacity:1;fill-rule:evenodd;stroke:none"
+         d="m 69.809172,143.02704 -6.50409,1.41756 2.54238,14.23729 -3.55933,53.89831 7.9525,0 2.75068,-54.48017 z"
+         id="path3759"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3761"
+         d="m 19.933792,10.369389 c -3.446488,0.03942 -7.987337,3.586917 -12.25,6.375 5.144509,-0.209197 10.909682,-0.371068 17.28125,-0.25 -0.880653,-4.54458 -2.698622,-6.15168 -5.03125,-6.125 z m 24.1875,2.6875 c -3.20188,0.145472 -6.51258,2.297184 -9.65625,3.875 5.87187,0.432657 11.91249,1.227109 17.90625,2.5625 -1.72576,-3.010519 -3.39707,-6.444157 -6.9375,-6.375 -0.44337,-0.06461 -0.86432,-0.08286 -1.3125,-0.0625 z m 25.0625,7.59375 c -2.49792,0.06293 -4.98515,0.562374 -7.28125,1.46875 7.37437,2.497858 14.42883,6.041375 20.65625,11.03125 0.54394,-2.910488 1.26341,-6.090108 -1,-8.1875 -3.33754,-3.091899 -7.85105,-4.426478 -12.375,-4.3125 z m 21.84375,18.53125 c -0.61955,-0.01079 -1.24319,0.07013 -1.84375,0.21875 2.34504,2.596898 4.49619,5.455972 6.4375,8.65625 1.29022,2.126945 2.40119,4.231556 3.34375,6.3125 0.34373,-0.456207 0.75864,-0.922198 1.281248,-1.40625 4.39463,-5.146334 -2.654028,-13.666908 -9.218748,-13.78125 z m 11.249998,25.15625 c 1.62856,7.537231 1.18888,14.68191 -0.65625,21.34375 3.73913,-3.97557 8.05363,-7.561473 5.28125,-13.3125 -0.0119,-3.149734 -2.32422,-5.670689 -4.625,-8.03125 z m -4.906248,31.96875 c -3.86202,7.403071 -9.1908,13.995891 -14.78125,19.593751 2.41569,-0.0793 4.91212,-0.0324 7.09375,-0.375 7.6119,-3.09751 8.14889,-12.13314 7.6875,-19.218751 z m -25.03125,28.687501 c -1.53631,1.22175 -3.045,2.39854 -4.46875,3.4375 -0.30899,0.20786 -0.56451,0.44869 -0.78125,0.71875 2.56086,0.1947 4.67027,-0.84752 5.25,-4.15625 z"
+         style="fill:#575757;fill-opacity:1;fill-rule:evenodd;stroke:none" />
+      <path
+         sodipodi:nodetypes="czcczcc"
+         inkscape:connector-curvature="0"
+         id="path3772-1"
+         d="m 65.579322,157.59784 c 0,0 -0.92043,1.56808 -0.75,2.30266 0.17043,0.73458 1.25,0.8635 1.25,0.8635 l 12.875,-1.05539 c 0,0 0.45697,-0.86324 0.4375,-1.34322 -0.0195,-0.47998 -0.5,-1.15133 -0.5,-1.15133 z"
+         style="fill:#515151;fill-opacity:1;fill-rule:evenodd;stroke:none" />
     </g>
     <g
        transform="translate(216.57142,581.42857)"
@@ -7523,15 +7655,6 @@
          id="path6011"
          d="m -109.61302,290.14176 -10.42359,10.47471 -10.03752,-7.91991"
          style="fill:none;stroke:#000000;stroke-width:0.87935418px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-      <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/foice.png"
-         xlink:href="foice.png"
-         y="282.2659"
-         x="-3.0649734"
-         id="image6013"
-         height="52.142857"
-         width="44.285717"
-         transform="matrix(0.87342443,0.48695972,-0.48695972,0.87342443,0,0)" />
       <g
          transform="matrix(0.72573703,-0.68797221,0.68797221,0.72573703,-284.48569,-80.332984)"
          id="g6015">
@@ -7548,15 +7671,6 @@
            d="m -147.88598,379.3112 c 0,0 0.96884,3.08724 3.81529,2.21262 3.05755,-0.76529 2.52878,-4.00297 2.52878,-4.00297"
            style="fill:none;stroke:#000000;stroke-width:0.91376841px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       </g>
-      <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/foice.png"
-         xlink:href="foice.png"
-         transform="matrix(0.34553985,-0.93840408,0.93840408,0.34553985,0,0)"
-         width="44.285717"
-         height="52.142857"
-         id="image6023"
-         x="-343.23508"
-         y="-1.9136939" />
       <path
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m -76.785714,285.57648 5.714286,17.85714"
@@ -7565,6 +7679,124 @@
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m -87.5,328.61219 -0.892857,17.67857 -10.535714,0"
          id="path6027" />
+    </g>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use5286"
+       id="use5288"
+       transform="matrix(0.64632772,-0.76305994,0.76305994,0.64632772,-696.34567,367.35842)"
+       width="744.09448"
+       height="1052.3622" />
+    <g
+       id="g4475"
+       transform="matrix(0.19153922,-0.02282149,0.02282149,0.19153922,97.072855,913.47385)">
+      <path
+         sodipodi:nodetypes="czczzcc"
+         inkscape:connector-curvature="0"
+         id="path3772"
+         d="m 41.725706,207.5 c 0,0 -1.33963,4.50049 -1.091579,6.60877 0.24805,2.10829 2.194299,2.39123 2.194299,2.39123 0,0 15,0 17,0 2,0 2.028863,-5.4195 2.000525,-6.79709 -0.02839,-1.37757 -0.727719,-3.30438 -0.727719,-3.30438 z"
+         style="fill:#515151;fill-opacity:1;fill-rule:evenodd;stroke:none" />
+      <path
+         sodipodi:nodetypes="zcczz"
+         inkscape:connector-curvature="0"
+         id="path2987"
+         d="M 65.491231,212.5 C 67.15404,210.5 67.71139,4.5423698 67.71139,4.5423698 l -29.882964,-0.04237 c 0,0 -1.918474,206.0000002 -0.459237,208.0000002 1.459237,2 26.459237,2 28.122042,0 z"
+         style="fill:#a17953;fill-opacity:1;fill-rule:evenodd;stroke:none" />
+      <path
+         style="fill:#b68a59;fill-opacity:1;fill-rule:evenodd;stroke:none"
+         d="M 54.429317,4.5235378 37.828426,4.4999998 c 0,0 -1.106383,207.1130402 -0.459237,208.0000002 0.647146,0.88696 5.924207,1.38058 11.742369,1.48083 z"
+         id="path3808"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cczcc" />
+      <rect
+         rx="4"
+         ry="4"
+         y="3"
+         x="2"
+         height="47"
+         width="102.82843"
+         id="rect3810"
+         style="fill:#101010;fill-opacity:1;fill-rule:evenodd;stroke:none" />
+      <rect
+         style="fill:#191919;fill-opacity:1;fill-rule:evenodd;stroke:none"
+         id="rect3812"
+         width="23"
+         height="53"
+         x="2"
+         y="0" />
+      <rect
+         y="0"
+         x="82"
+         height="53"
+         width="22.999996"
+         id="rect3814"
+         style="fill:#191919;fill-opacity:1;fill-rule:evenodd;stroke:none" />
+      <path
+         transform="translate(-20.171574,-0.0802002)"
+         d="m 86.625,7.3926997 c 0,1.7604077 -6.212049,3.1875003 -13.875,3.1875003 -7.662951,0 -13.875,-1.4270926 -13.875,-3.1875003 0,-1.7604076 6.212049,-3.1875 13.875,-3.1875 7.662951,0 13.875,1.4270924 13.875,3.1875 z"
+         sodipodi:ry="3.1875"
+         sodipodi:rx="13.875"
+         sodipodi:cy="7.3926997"
+         sodipodi:cx="72.75"
+         id="path3821"
+         style="fill:#b68a59;fill-opacity:1;fill-rule:evenodd;stroke:none"
+         sodipodi:type="arc" />
+      <path
+         transform="translate(-33,-12.5802)"
+         d="m 37,39.0802 c 0,14.635546 -0.895431,26.5 -2,26.5 -1.104569,0 -2,-11.864454 -2,-26.5 0,-14.635546 0.895431,-26.5 2,-26.5 1.104569,0 2,11.864454 2,26.5 z"
+         sodipodi:ry="26.5"
+         sodipodi:rx="2"
+         sodipodi:cy="39.0802"
+         sodipodi:cx="35"
+         id="path3832"
+         style="fill:#383838;fill-opacity:1;fill-rule:evenodd;stroke:none"
+         sodipodi:type="arc" />
+      <path
+         transform="translate(47,-12.5802)"
+         sodipodi:type="arc"
+         style="fill:#383838;fill-opacity:1;fill-rule:evenodd;stroke:none"
+         id="path3834"
+         sodipodi:cx="35"
+         sodipodi:cy="39.0802"
+         sodipodi:rx="2"
+         sodipodi:ry="26.5"
+         d="m 37,39.0802 c 0,14.635546 -0.895431,26.5 -2,26.5 -1.104569,0 -2,-11.864454 -2,-26.5 0,-14.635546 0.895431,-26.5 2,-26.5 1.104569,0 2,11.864454 2,26.5 z" />
+      <path
+         d="m 37,39.0802 c 0,14.635546 -0.895431,26.5 -2,26.5 -1.104569,0 -2,-11.864454 -2,-26.5 0,-14.635546 0.895431,-26.5 2,-26.5 1.104569,0 2,11.864454 2,26.5 z"
+         sodipodi:ry="26.5"
+         sodipodi:rx="2"
+         sodipodi:cy="39.0802"
+         sodipodi:cx="35"
+         id="path3836"
+         style="fill:#101010;fill-opacity:1;fill-rule:evenodd;stroke:none"
+         sodipodi:type="arc"
+         transform="matrix(0.88679245,0,0,0.88679245,49.962264,-8.1560266)" />
+      <path
+         transform="translate(-10.01903,-12.5802)"
+         sodipodi:type="arc"
+         style="fill:#191919;fill-opacity:1;fill-rule:evenodd;stroke:none"
+         id="path3838"
+         sodipodi:cx="35"
+         sodipodi:cy="39.0802"
+         sodipodi:rx="2"
+         sodipodi:ry="26.5"
+         d="m 37,39.0802 c 0,14.635546 -0.895431,26.5 -2,26.5 -1.104569,0 -2,-11.864454 -2,-26.5 0,-14.635546 0.895431,-26.5 2,-26.5 1.104569,0 2,11.864454 2,26.5 z" />
+      <path
+         d="m 37,39.0802 c 0,14.635546 -0.895431,26.5 -2,26.5 -1.104569,0 -2,-11.864454 -2,-26.5 0,-14.635546 0.895431,-26.5 2,-26.5 1.104569,0 2,11.864454 2,26.5 z"
+         sodipodi:ry="26.5"
+         sodipodi:rx="2"
+         sodipodi:cy="39.0802"
+         sodipodi:cx="35"
+         id="path3840"
+         style="fill:#191919;fill-opacity:1;fill-rule:evenodd;stroke:none"
+         sodipodi:type="arc"
+         transform="translate(70,-12.5802)" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3850"
+         d="m 52.59375,4.1385498 c -0.489572,0 -0.961014,0.01988 -1.4375,0.03125 1.453052,2.097227 2.874695,4.131012 4.34375,6.2500002 6.257738,-0.30861 10.96875,-1.5639602 10.96875,-3.0937502 0,-1.760408 -6.212049,-3.1875 -13.875,-3.1875 z"
+         style="fill:#a17953;fill-opacity:1;fill-rule:evenodd;stroke:none" />
     </g>
     <g
        transform="translate(-707.17269,514.34519)"
@@ -7690,15 +7922,6 @@
            d="m -147.88598,379.3112 c 0,0 0.96884,3.08724 3.81529,2.21262 3.05755,-0.76529 2.52878,-4.00297 2.52878,-4.00297"
            id="path6061" />
       </g>
-      <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/mart.png"
-         xlink:href="mart.png"
-         y="-252.10837"
-         x="828.93262"
-         id="image6063"
-         height="50.088051"
-         width="47.289532"
-         transform="matrix(0.75331562,0.65765916,-0.77050219,0.63743734,0,0)" />
       <g
          id="g6065"
          transform="matrix(-0.97239759,0.23333009,-0.23333009,-0.97239759,825.32842,841.8021)">
@@ -7716,18 +7939,17 @@
          d="m 838.9319,410.48997 15.89285,-2.32143"
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     </g>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g4475"
+       id="use4456"
+       transform="matrix(0.9638767,-0.26634886,0.26634886,0.9638767,-121.08718,15.408834)"
+       width="744.09448"
+       height="1052.3622" />
     <g
        transform="translate(-639.85714,573.57143)"
        id="g6073">
-      <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/pa.png"
-         xlink:href="pa.png"
-         transform="matrix(0.45293196,-0.89154509,0.89154509,0.45293196,0,0)"
-         width="93.933983"
-         height="95.954292"
-         id="image6075"
-         x="-1.0774404"
-         y="867.06598" />
       <g
          id="g6077"
          transform="matrix(1.1255853,0,0,1,-104.65928,0)">
@@ -8025,14 +8247,14 @@
          d="m 873.06678,449.86579 2.14286,13.92857 -11.42857,1.78572"
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/../../../models/objetos/armas/axe/axe_inv.png"
+         sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/axe/axe_inv.png"
          xlink:href="../../../models/objetos/armas/axe/axe_inv.png"
-         y="733.63019"
-         x="-409.15195"
-         id="image6165"
-         height="170.71428"
+         transform="matrix(-0.7812738,0.62418847,0.62418847,0.7812738,0,0)"
          width="29.428572"
-         transform="matrix(-0.7812738,0.62418847,0.62418847,0.7812738,0,0)" />
+         height="170.71428"
+         id="image6165"
+         x="-409.15195"
+         y="733.63019" />
     </g>
     <g
        transform="translate(-745.57143,556.42857)"
@@ -8150,15 +8372,6 @@
          id="path6195"
          d="m 916.30831,414.38431 -10.42359,10.47471 -10.03752,-7.91991"
          style="fill:none;stroke:#000000;stroke-width:0.87935418px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-      <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/foice.png"
-         xlink:href="foice.png"
-         y="144.40353"
-         x="939.26849"
-         id="image6197"
-         height="52.142857"
-         width="44.285717"
-         transform="matrix(0.96828631,0.24984319,-0.24984319,0.96828631,0,0)" />
       <g
          transform="matrix(0.72573703,-0.68797221,0.68797221,0.72573703,741.43564,43.909568)"
          id="g6199">
@@ -8185,14 +8398,14 @@
          id="path6209" />
     </g>
     <image
-       sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/../../../models/objetos/armas/sw39/sw39_inv.png"
+       sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/sw39/sw39_inv.png"
        xlink:href="../../../models/objetos/armas/sw39/sw39_inv.png"
-       transform="matrix(-0.65532334,-0.75534847,-0.75534847,0.65532334,0,0)"
-       width="23.357143"
-       height="22.285715"
-       id="image6245"
+       y="414.63022"
        x="-922.02515"
-       y="414.63022" />
+       id="image6245"
+       height="22.285715"
+       width="23.357143"
+       transform="matrix(-0.65532334,-0.75534847,-0.75534847,0.65532334,0,0)" />
     <g
        transform="translate(-464.19511,537.96122)"
        id="g6255">
@@ -8334,14 +8547,14 @@
          d="m 888.09654,427.87214 6.23328,16.56729 -9.66118,4.20268"
          id="path6295" />
       <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/../../../models/objetos/armas/dark_katana/dark_katana_inv.png"
+         sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/dark_katana/dark_katana_inv.png"
          xlink:href="../../../models/objetos/armas/dark_katana/dark_katana_inv.png"
-         y="32.606907"
-         x="902.11108"
-         id="image6297"
-         height="76"
+         transform="matrix(0.94590106,0.3244552,-0.3244552,0.94590106,0,0)"
          width="38"
-         transform="matrix(0.94590106,0.3244552,-0.3244552,0.94590106,0,0)" />
+         height="76"
+         id="image6297"
+         x="902.11108"
+         y="32.606907" />
       <path
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 871.29404,373.64372 c 1.0714,0.17857 14.4643,-1.07143 14.4643,-1.07143"
@@ -8350,15 +8563,6 @@
     <g
        transform="translate(-677.71428,587.14286)"
        id="g6301">
-      <image
-         sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/pa.png"
-         xlink:href="pa.png"
-         transform="matrix(0.34354319,-0.93913688,0.93913688,0.34354319,0,0)"
-         width="93.933983"
-         height="95.954292"
-         id="image6303"
-         x="-50.86607"
-         y="1020.8542" />
       <g
          id="g6305">
         <rect
@@ -8668,15 +8872,6 @@
          d="m 870.35714,903.43361 c -0.30279,0.58288 -1.13486,0.48401 -1.42857,1.07143 -0.10648,0.21296 0.10648,0.50133 0,0.71429 -0.0753,0.15058 -0.28185,0.20655 -0.35715,0.35714 -0.19472,0.38945 0.19121,0.46537 0.35715,0.71428 0.14766,0.2215 0.20948,0.4928 0.35714,0.71429 0.18678,0.28017 0.5637,0.41312 0.71429,0.71429 0.14285,0.28571 -0.14286,0.78571 0,1.07142 0.44132,0.88265 0.35714,-0.12327 0.35714,0.71429 0,0.11905 0.0376,0.2442 0,0.35714 -0.25533,0.766 -0.87957,1.23671 -1.42857,1.78572 -0.18803,0.18802 -0.88069,0.97605 -1.07143,1.07143 -0.10648,0.0532 -0.2381,0 -0.35714,0 -0.2381,0.11904 -0.4928,0.20948 -0.71429,0.35714 -0.14008,0.0934 -0.20656,0.28185 -0.35714,0.35714 -0.43872,0.21936 -1.15962,0.17637 -1.42857,0.71429 -0.17517,0.35033 0.16354,0.52068 0.35714,0.71428 1.18449,1.1845 -0.33672,-0.16836 0.71428,0.35715 0.15059,0.0753 0.2381,0.23809 0.35715,0.35714 0.26824,0.26824 0.79011,0.71428 0.35714,0.71428 -0.11905,0 0,-0.47619 0,-0.35714 0,0.88265 0.16836,0.54593 -0.35714,1.07143"
          style="fill:none;stroke:#c41313;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     </g>
-    <image
-       sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/foice.png"
-       xlink:href="foice.png"
-       transform="matrix(-0.98998418,0.14117836,-0.14117836,-0.98998418,0,0)"
-       width="44.285717"
-       height="52.142857"
-       id="image5827"
-       x="-433.96365"
-       y="-1028.554" />
     <path
        style="fill:none;stroke:#f30000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 642.32143,930.93361 c 0.23099,0.0577 0.4833,-0.0578 0.71429,0 0.12912,0.0323 0.23809,0.11905 0.35714,0.17857 0.11905,0.0595 0.26303,0.0845 0.35714,0.17857 0.0941,0.0941 0.0678,0.28332 0.17857,0.35715 0.0991,0.066 0.24165,-0.0289 0.35715,0 0.95238,0.23809 -0.17858,0.0595 0.53571,0.53571 0.0991,0.066 0.25809,-0.066 0.35714,0 0.11075,0.0738 0.0678,0.28331 0.17857,0.35714 0.0991,0.066 0.24165,-0.0289 0.35715,0 0.63492,0.15873 0.13889,0.13889 0.53571,0.53572 0.71429,0.71428 0.0595,-0.41667 0.53572,0.53571"
@@ -8995,15 +9190,23 @@
          d="m 486.875,1137.63 4.19643,-0.4464"
          style="fill:none;stroke:#e2dd00;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     </g>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use4506"
+       id="use4508"
+       transform="matrix(-0.22626192,0.9740665,-0.9740665,-0.22626192,1645.2041,773.08594)"
+       width="744.09448"
+       height="1052.3622" />
     <image
-       sodipodi:absref="/home/farrer/dccnitghtmare/data/comics/other/rev/../../../models/objetos/armas/scimitar/scimitar_inv.png"
+       sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/scimitar/scimitar_inv.png"
        xlink:href="../../../models/objetos/armas/scimitar/scimitar_inv.png"
-       y="1092.672"
-       x="76.50016"
-       id="image5704"
-       height="60.595173"
+       transform="matrix(0.834424,-0.55112303,0.55112303,0.834424,0,0)"
        width="27.645937"
-       transform="matrix(0.834424,-0.55112303,0.55112303,0.834424,0,0)" />
+       height="60.595173"
+       id="image5704"
+       x="76.50016"
+       y="1092.672" />
     <path
        style="fill:none;stroke:#f10000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 649.28572,1009.505 c -1.90477,0 0.23809,-0.2381 -0.71429,0.7143 -0.16836,0.1684 -0.54593,-0.1683 -0.71428,0 -0.16836,0.1684 0,0.4762 0,0.7143 0,0.3735 -0.0939,2.6693 0,2.8572 0.15058,0.3011 0.5637,0.4131 0.71428,0.7142 0.0187,0.037 0.0187,2.1055 0,2.1429 -0.15058,0.3012 -0.47619,0.4762 -0.71428,0.7143 0,0.4762 0.21295,1.0026 0,1.4286 -0.73895,0 -0.98725,-0.1684 -1.42858,0.7142 -0.0939,0.1879 0,2.4837 0,2.8572 0,0.2381 -0.16835,0.5459 0,0.7143 0.16836,0.1683 0.54593,-0.1684 0.71429,0 0.16836,0.1683 -0.10648,0.5013 0,0.7143 0.15058,0.3011 0.5637,0.4131 0.71429,0.7142 0.10647,0.213 -0.10648,0.5014 0,0.7143 0.093,0.186 1.27266,0.8702 0.71428,1.4286 -0.16836,0.1684 -0.54593,-0.1684 -0.71428,0 -0.16836,0.1684 0.16835,0.5459 0,0.7143 -0.16836,0.1683 -0.54593,-0.1684 -0.71429,0 -0.33672,0.3367 0.33672,1.0918 0,1.4286 -0.16836,0.1683 -0.54593,-0.1684 -0.71429,0 -0.16835,0.1683 0,0.4761 0,0.7142 0,0.2381 -0.16835,0.546 0,0.7143 0.16836,0.1684 0.71429,-0.2381 0.71429,0 0,0.2381 -0.47619,0 -0.71429,0"
@@ -9020,5 +9223,53 @@
        style="fill:none;stroke:#eb0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 492.85715,985.93361 c 0.14981,0.68084 1.10298,0.19435 1.42857,0.35714 0.15058,0.0753 0.20655,0.28185 0.35714,0.35715 0.10648,0.0532 0.27296,-0.0842 0.35714,0 0.16836,0.16836 -0.10648,0.50132 0,0.71428 0.0753,0.15059 0.28185,0.20656 0.35715,0.35715 0.04,0.08 0,1.3437 0,1.42857 0,0.24661 0.0543,1.31998 0,1.42857 -0.0753,0.15058 -0.28186,0.20656 -0.35715,0.35714 -0.0532,0.10648 0,0.2381 0,0.35714 0,0.11905 -0.0532,0.25067 0,0.35715 0.0753,0.15058 0.2381,0.23809 0.35715,0.35714 0.11904,0.11905 0.20655,0.28185 0.35714,0.35714 0.10648,0.0532 0.25066,-0.0532 0.35714,0 0.15059,0.0753 0.20656,0.28185 0.35714,0.35715 0.10648,0.0532 0.2381,0 0.35715,0 0.11904,0.11904 0.20655,0.28185 0.35714,0.35714 0.10648,0.0532 0.23809,0 0.35714,0 0.11905,0 0.2381,0 0.35715,0 0.59523,0 1.19047,0 1.78571,0 0.13116,0 1.4142,-0.0144 1.42857,0 0.0842,0.0842 -0.0842,0.27296 0,0.35714 0.0842,0.0842 0.25066,-0.0532 0.35714,0 0.15059,0.0753 0.2381,0.2381 0.35715,0.35714 0.11904,0.11905 0.28185,0.20656 0.35714,0.35715 0.0532,0.10648 -0.0532,0.25066 0,0.35714 0.0753,0.15058 0.28185,0.20656 0.35714,0.35714 0.0532,0.10648 -0.0532,0.25067 0,0.35715 0.0753,0.15058 0.28185,0.20655 0.35715,0.35714 0.0532,0.10648 -0.0532,0.25066 0,0.35714 0.0474,0.0948 0.9766,1.02402 1.07142,1.07143 0.28572,0.14286 0.78572,-0.14286 1.07143,0 0.15059,0.0753 0.20656,0.28185 0.35715,0.35714 0.10647,0.0532 0.25066,-0.0532 0.35714,0 0.15058,0.0753 0.20656,0.28185 0.35714,0.35715 0.10648,0.0532 0.25066,-0.0532 0.35714,0 0.72232,0.36115 0.11453,0.82881 0.35715,1.07142 0.0842,0.0842 0.27296,-0.0842 0.35714,0 0.0842,0.0842 -0.0532,0.25067 0,0.35715 0.0753,0.15058 0.28185,0.20655 0.35714,0.35714 0.2381,0.47619 -0.35714,0.35714 0.35715,0.35714"
        id="path7350" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#layer1-2"
+       id="use4506"
+       transform="matrix(0.99696908,-0.07779881,0.07779881,0.99696908,52.267602,31.858429)"
+       width="744.09448"
+       height="1052.3622" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g4499"
+       id="use5286"
+       transform="matrix(0.78890506,-0.61451511,0.61451511,0.78890506,-457.77853,337.18378)"
+       width="744.09448"
+       height="1052.3622" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use5290"
+       id="use5292"
+       transform="matrix(0.0106433,0.99994336,-0.99994336,0.0106433,1329.9648,803.79807)"
+       width="744.09448"
+       height="1052.3622" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use5292"
+       id="use5294"
+       transform="matrix(-0.97471827,-0.22343745,0.22343745,-0.97471827,842.18719,1883.8383)"
+       width="744.09448"
+       height="1052.3622" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use5294"
+       id="use5296"
+       transform="matrix(-0.28591641,0.95825456,-0.95825456,-0.28591641,1416.7136,215.58907)"
+       width="744.09448"
+       height="1052.3622" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use5298"
+       id="use5300"
+       transform="matrix(-0.06809657,0.99767873,-0.99767873,-0.06809657,811.45166,-11.588339)"
+       width="744.09448"
+       height="1052.3622" />
   </g>
 </svg>

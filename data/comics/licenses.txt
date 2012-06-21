@@ -4,6 +4,7 @@ intro/metalerio.png
 intro/ufmg.png
 other/msoftlivre/mus.png
 other/msoftlivre/tcho.png
+other/rev/revoots.png
    unknown
 
 intro/hbomb.png 
@@ -20,6 +21,7 @@ intro/logan.png
    license: GPLv3 or later
 
 intro/logan_rosto.png
+other/rev/desenho.svg
    author: farrer (DNTeam)
    license: GPLv3 or later
 
