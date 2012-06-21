@@ -51,7 +51,6 @@ paints/portinari_3
 paints/portinari_4
 paints/tarsila_1
 paints/tarsila_2
-paints/tarsila_3
 vinyls/zappa_apostrophe*
    author: farrer (DNTeam)
    license: GPLv3 or later
@@ -237,6 +236,8 @@ vinyls/clara_crocodilo*.png
 vinyls/clara_crocodilo.svg
 vinyls/henry_cow_western_culture.png
 vinyls/henry_cow_western_culture.xcf.bz2
+paints/tarsila_3/*png
+paints/tarsila_3/*svg
    author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
    license: GPLv2+, CC-BY-SAv3+
 
