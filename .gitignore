@@ -1,0 +1,32 @@
+# files created by configure
+Makefile
+autom4te.cache/
+po/Makefile.in
+po/POTFILES
+src/config.h
+
+# Logs
+po/make_po.log
+*.log
+*.toc
+*.aux
+
+# Pdfs of the books
+doc/livroJogador.pdf
+doc/playerBook.pdf
+
+# files created during build
+*.o
+
+# binaries
+bin/dnt
+bin/dntMapEditor
+bin/dntPartEditor
+bin/heightmap2dnt
+
+
+# static libraries
+*.a
+
+
+
