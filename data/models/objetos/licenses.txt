@@ -51,19 +51,19 @@ paints/portinari_3
 paints/portinari_4
 paints/tarsila_1
 paints/tarsila_2
-vinyls/zappa_apostrophe*
+vinyls/zappa_*
    author: farrer (DNTeam)
    license: GPLv3 or later
 
 armas/uzi
    author: farrer (DNTeam)
    license: GPLv3 or later
-   source: http://www.wpclipart.com/armed_services/small_arms/guns_6/Uzi.png.html
+   texture source: http://www.wpclipart.com/armed_services/small_arms/guns_6/Uzi.png.html
 
 armas/beretta92
    author: farrer (DNTeam)
    license: GPLv3 or later
-   source: http://www.wpclipart.com/armed_services/small_arms/guns_1/Beretta_Model_92.png.html
+   texture source: http://www.wpclipart.com/armed_services/small_arms/guns_1/Beretta_Model_92.png.html
 
 icex/ruindows_box
 geral/refmachine
