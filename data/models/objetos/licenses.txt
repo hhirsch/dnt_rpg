@@ -48,7 +48,6 @@ itens/racao
 paints/portinari_1
 paints/portinari_2
 paints/portinari_3
-paints/portinari_4
 vinyls/zappa_*
    author: farrer (DNTeam)
    license: GPLv3 or later
@@ -234,6 +233,8 @@ vinyls/clara_crocodilo*.png
 vinyls/clara_crocodilo.svg
 vinyls/henry_cow_western_culture.png
 vinyls/henry_cow_western_culture.xcf.bz2
+paints/portinari_4/*png
+paints/portinari_4/*xcf.bz2
 paints/tarsila_1/*png
 paints/tarsila_1/*svg
 paints/tarsila_2/*png
