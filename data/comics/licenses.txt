@@ -1,7 +1,5 @@
-intro/Ameiva.png
 intro/forno.png
 intro/ufmg.png
-other/rev/revoots.png
    unknown
 
 intro/hbomb.png 
@@ -27,14 +25,14 @@ intro/jornal.png
    source: anachist newspaper from 2007
 
 intro/ticoaboboramod.png
-   license: GPLv3
+   license: GPLv3 or later
 
 intro/fotodcc.png
-   license: GPLv3
+   license: GPLv3 or later
 
 intro/bh.png
    author: Gordo (DNTeam)
-   license: GPLv3
+   license: GPLv3 or later
 
 tutorial/combat/uzi_inv.png
    author: farrer (DNTeam)
@@ -65,5 +63,11 @@ other/msoftlivre/metal.svg
 other/msoftlivre/metal-text.png
 other/msoftlivre/mus.svg
 other/msoftlivre/ruikre.png
+other/rev/revoots.svg
    author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
    license: CC0/Public Domain
+
+intro/Ameiva.png
+   author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   license: CC-BY-SA 3.0 or later
+   reference: http://qubodup.deviantart.com/art/Ameiva-on-Concrete-310076020

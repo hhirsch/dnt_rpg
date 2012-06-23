@@ -347,13 +347,13 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.70710678"
-     inkscape:cx="15.837294"
-     inkscape:cy="523.8818"
+     inkscape:zoom="1"
+     inkscape:cx="164.01109"
+     inkscape:cy="264.83965"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g5198"
      showgrid="false"
-     inkscape:window-width="1920"
+     inkscape:window-width="1476"
      inkscape:window-height="1181"
      inkscape:window-x="0"
      inkscape:window-y="0"
@@ -656,12 +656,12 @@
       <image
          sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
          xlink:href="../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
-         y="885.50549"
-         x="118.5812"
-         id="image9552"
-         height="76.000008"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
          width="38.000004"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
+         height="76.000008"
+         id="image9552"
+         x="118.5812"
+         y="885.50549" />
       <path
          style="fill:none;stroke:#000000;stroke-width:0.91376841px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 900.18499,345.54216 c 0,0 1.9164,2.60676 -0.4724,4.38497 -2.4256,2.0131 -4.7237,-0.32774 -4.7237,-0.32774"
@@ -806,12 +806,12 @@
       <image
          sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
          xlink:href="../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
-         width="38.000004"
-         height="76.000008"
-         id="image2571"
+         y="-134.7252"
          x="184.09911"
-         y="-134.7252" />
+         id="image2571"
+         height="76.000008"
+         width="38.000004"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
       <path
          id="path2573"
          d="m -108.5729,179.49791 c 0,0 1.91644,2.60676 -0.47244,4.38497 -2.42559,2.0131 -4.72361,-0.32774 -4.72361,-0.32774"
@@ -936,14 +936,6 @@
          sodipodi:ry="3.5355339"
          d="m 797.01037,256.86707 c 0,1.95262 -1.13066,3.53553 -2.52538,3.53553 -1.39473,0 -2.52539,-1.58291 -2.52539,-3.53553 0,-1.95263 1.13066,-3.53554 2.52539,-3.53554 1.39472,0 2.52538,1.58291 2.52538,3.53554 z"
          transform="matrix(0.82503656,0,0,0.48027241,264.69393,286.28301)" />
-      <image
-         sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/revoots.png"
-         xlink:href="revoots.png"
-         y="442.16486"
-         x="908.67419"
-         id="image6277"
-         height="26.412428"
-         width="24.501085" />
       <path
          sodipodi:type="arc"
          style="fill:#800000;stroke:#000000;stroke-width:2.94199991;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -956,6 +948,128 @@
          transform="matrix(-0.45144136,0.54720478,-0.49738082,-0.41112775,1344.9502,67.577712)"
          sodipodi:start="0"
          sodipodi:end="3.1578779" />
+      <g
+         id="g4463-5"
+         transform="matrix(0.1337942,0,0,0.1337942,908.20848,441.47702)">
+        <rect
+           y="0"
+           x="0"
+           height="200"
+           width="200"
+           id="rect3765-7"
+           style="fill:#ad3d3d;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+        <path
+           transform="translate(0.42372881,-5.9322034)"
+           d="m 165.67796,75.847458 c 0,36.740972 -29.78444,66.525422 -66.525418,66.525422 -36.740975,0 -66.525421,-29.78445 -66.525421,-66.525422 0,-36.740976 29.784446,-66.5254213 66.525421,-66.5254213 36.740978,0 66.525418,29.7844453 66.525418,66.5254213 z"
+           sodipodi:ry="66.525421"
+           sodipodi:rx="66.525421"
+           sodipodi:cy="75.847458"
+           sodipodi:cx="99.152542"
+           id="path2987-9-9"
+           style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           sodipodi:type="arc" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path3757-3"
+           d="m 39.830508,171.18644 19.067797,-59.32203 72.881355,2.11864 14.40678,58.89831 z"
+           style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+        <text
+           sodipodi:linespacing="100%"
+           id="text3759-8"
+           y="195.55084"
+           x="100.6356"
+           style="font-size:42px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:100%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Serif;-inkscape-font-specification:Serif Bold Italic"
+           xml:space="preserve"><tspan
+             style="font-size:28px;fill:#000000;fill-opacity:1"
+             y="195.55084"
+             x="100.6356"
+             id="tspan3761-4"
+             sodipodi:role="line">Revolution!</tspan></text>
+        <path
+           sodipodi:type="arc"
+           style="fill:#c13434;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="path3771-5"
+           sodipodi:cx="99.152542"
+           sodipodi:cy="75.847458"
+           sodipodi:rx="66.525421"
+           sodipodi:ry="66.525421"
+           d="m 165.67796,75.847458 c 0,36.740972 -29.78444,66.525422 -66.525418,66.525422 -36.740975,0 -66.525421,-29.78445 -66.525421,-66.525422 0,-36.740976 29.784446,-66.5254213 66.525421,-66.5254213 36.740978,0 66.525418,29.7844453 66.525418,66.5254213 z"
+           transform="matrix(0.86624203,0,0,0.86624203,13.686171,4.2129984)" />
+        <path
+           sodipodi:nodetypes="ccccc"
+           style="fill:#c13434;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           d="m 54.237288,171.18644 19.067797,-59.32203 44.491525,2.11864 14.40678,58.89831 z"
+           id="path3773-3"
+           inkscape:connector-curvature="0" />
+        <path
+           transform="matrix(1.212937,0,0,0.70426131,-21.340515,19.149536)"
+           d="m 121.18644,50.423729 c 0,7.488607 -4.93246,13.559322 -11.01695,13.559322 -6.0845,0 -11.016952,-6.070715 -11.016952,-13.559322 0,-7.488607 4.932452,-13.559322 11.016952,-13.559322 6.08449,0 11.01695,6.070715 11.01695,13.559322 z"
+           sodipodi:ry="13.559322"
+           sodipodi:rx="11.016949"
+           sodipodi:cy="50.423729"
+           sodipodi:cx="110.16949"
+           id="path3775-5"
+           style="fill:none;stroke:#000000;stroke-width:6;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           sodipodi:type="arc" />
+        <path
+           transform="matrix(0.98517496,0,0,1.1285797,-30.570123,-5.8478722)"
+           sodipodi:type="arc"
+           style="fill:none;stroke:#000000;stroke-width:6;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           id="path3777-7"
+           sodipodi:cx="110.16949"
+           sodipodi:cy="50.423729"
+           sodipodi:rx="11.016949"
+           sodipodi:ry="13.559322"
+           d="m 121.18644,50.423729 c 0,7.488607 -4.93246,13.559322 -11.01695,13.559322 -6.0845,0 -11.016952,-6.070715 -11.016952,-13.559322 0,-7.488607 4.932452,-13.559322 11.016952,-13.559322 6.08449,0 11.01695,6.070715 11.01695,13.559322 z" />
+        <path
+           sodipodi:nodetypes="cccccc"
+           inkscape:connector-curvature="0"
+           id="path3781-3"
+           d="M 87.491396,100.84801 72.227515,84.839352 66.068516,105.26962 c 22.201384,-7.002068 43.599944,-4.31989 64.778144,1.02026 l -13.18652,-22.957865 -7.46303,18.051005"
+           style="fill:none;stroke:#000000;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+        <rect
+           transform="matrix(-0.99201871,-0.12609072,-0.12609072,0.99201871,0,0)"
+           y="16.144253"
+           x="-95.300621"
+           height="4"
+           width="68"
+           id="rect3767-6"
+           style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+        <rect
+           style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="rect3769-5"
+           width="68"
+           height="4"
+           x="94.111862"
+           y="39.516937"
+           transform="matrix(0.99201871,-0.12609072,0.12609072,0.99201871,0,0)" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path3783-8"
+           d="m 143.64407,40.677966 45.76271,-9.322034 -34.74576,33.898305"
+           style="fill:#c13434;fill-opacity:1;stroke:#000000;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path3785-8"
+           d="M 52.966102,42.372881 12.288136,32.627119 47.033898,67.79661"
+           style="fill:#c13434;fill-opacity:1;stroke:#000000;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+        <path
+           sodipodi:nodetypes="cc"
+           inkscape:connector-curvature="0"
+           id="path3787-5"
+           d="m 61.016949,131.77966 c 27.281761,17.1507 47.983611,9.0784 68.644071,0.84746"
+           style="fill:none;stroke:#000000;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+        <path
+           transform="translate(2.9661017,-0.42372881)"
+           d="m 100.42373,149.57628 c 0,5.85047 -4.74275,10.59322 -10.593225,10.59322 -5.850474,0 -10.59322,-4.74275 -10.59322,-10.59322 0,-5.85048 4.742746,-10.59322 10.59322,-10.59322 5.850475,0 10.593225,4.74274 10.593225,10.59322 z"
+           sodipodi:ry="10.593221"
+           sodipodi:rx="10.593221"
+           sodipodi:cy="149.57628"
+           sodipodi:cx="89.830505"
+           id="path3789-2"
+           style="fill:#c13434;fill-opacity:1;stroke:#000000;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           sodipodi:type="arc" />
+      </g>
       <path
          sodipodi:end="3.1578779"
          sodipodi:start="0"
@@ -1307,12 +1421,12 @@
       <image
          sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
          xlink:href="../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
-         y="-110.40227"
-         x="365.44708"
-         id="image4770"
-         height="61.811008"
+         transform="matrix(-0.21913921,0.9756936,0.97279825,0.23165397,0,0)"
          width="31.728558"
-         transform="matrix(-0.21913921,0.9756936,0.97279825,0.23165397,0,0)" />
+         height="61.811008"
+         id="image4770"
+         x="365.44708"
+         y="-110.40227" />
       <path
          style="fill:none;stroke:#000000;stroke-width:0.75296998px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m -135.37384,356.48325 c 0,0 1.55627,2.1797 -0.38365,3.66658 -1.96972,1.68329 -3.83586,-0.27405 -3.83586,-0.27405"
@@ -1465,12 +1579,12 @@
       <image
          sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
          xlink:href="../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
-         width="38.000004"
-         height="76.000008"
-         id="image9496"
+         y="1037.0879"
          x="266.80994"
-         y="1037.0879" />
+         id="image9496"
+         height="76.000008"
+         width="38.000004"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
       <path
          id="path9498"
          d="m 1014.4707,524.1136 c 0,0 1.9164,2.60676 -0.4724,4.38497 -2.4256,2.0131 -4.7237,-0.32774 -4.7237,-0.32774"
@@ -1639,12 +1753,12 @@
       <image
          sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
          xlink:href="../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
-         width="38.000004"
-         height="76.000008"
-         id="image9660"
+         y="885.50549"
          x="118.5812"
-         y="885.50549" />
+         id="image9660"
+         height="76.000008"
+         width="38.000004"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
       <path
          id="path9662"
          d="m 900.18499,345.54216 c 0,0 1.9164,2.60676 -0.4724,4.38497 -2.4256,2.0131 -4.7237,-0.32774 -4.7237,-0.32774"
@@ -2399,12 +2513,12 @@
       <image
          sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/scimitar/scimitar_inv.png"
          xlink:href="../../../models/objetos/armas/scimitar/scimitar_inv.png"
-         y="84.529015"
-         x="1007.2947"
-         id="image10401"
-         height="60.595173"
+         transform="matrix(0.97134715,0.23766513,-0.23766513,0.97134715,0,0)"
          width="27.645937"
-         transform="matrix(0.97134715,0.23766513,-0.23766513,0.97134715,0,0)" />
+         height="60.595173"
+         id="image10401"
+         x="1007.2947"
+         y="84.529015" />
     </g>
     <g
        id="g9768"
@@ -2517,11 +2631,11 @@
       <image
          sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/sw39/sw39_inv.png"
          xlink:href="../../../models/objetos/armas/sw39/sw39_inv.png"
-         width="23.357143"
-         height="22.285715"
-         id="image9730"
+         y="357.6131"
          x="884.43085"
-         y="357.6131" />
+         id="image9730"
+         height="22.285715"
+         width="23.357143" />
       <path
          id="path9732"
          d="m 907.0361,373.59427 c 2.62965,-4.72165 -4.63049,-4.32127 -4.63049,-4.32127"
@@ -2934,12 +3048,12 @@
       <image
          sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
          xlink:href="../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
-         y="1037.0879"
-         x="266.80994"
-         id="image8136"
-         height="76.000008"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
          width="38.000004"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
+         height="76.000008"
+         id="image8136"
+         x="266.80994"
+         y="1037.0879" />
       <path
          style="fill:none;stroke:#000000;stroke-width:0.91376841px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 1014.4707,524.1136 c 0,0 1.9164,2.60676 -0.4724,4.38497 -2.4256,2.0131 -4.7237,-0.32774 -4.7237,-0.32774"
@@ -3940,12 +4054,12 @@
       <image
          sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/axe/axe_inv.png"
          xlink:href="../../../models/objetos/armas/axe/axe_inv.png"
-         y="733.63019"
-         x="-409.15195"
-         id="image9424"
-         height="170.71428"
+         transform="matrix(-0.7812738,0.62418847,0.62418847,0.7812738,0,0)"
          width="29.428572"
-         transform="matrix(-0.7812738,0.62418847,0.62418847,0.7812738,0,0)" />
+         height="170.71428"
+         id="image9424"
+         x="-409.15195"
+         y="733.63019" />
     </g>
     <use
        x="0"
@@ -4237,11 +4351,11 @@
       <image
          sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/sw39/sw39_inv.png"
          xlink:href="../../../models/objetos/armas/sw39/sw39_inv.png"
-         y="508.36221"
-         x="910.28571"
-         id="image9129"
+         width="23.357143"
          height="22.285715"
-         width="23.357143" />
+         id="image9129"
+         x="910.28571"
+         y="508.36221" />
       <path
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 932.89098,524.34339 c 2.62965,-4.72165 -4.63049,-4.32127 -4.63049,-4.32127"
@@ -4447,12 +4561,12 @@
       <image
          sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/dark_katana/dark_katana_inv.png"
          xlink:href="../../../models/objetos/armas/dark_katana/dark_katana_inv.png"
-         y="32.606907"
-         x="902.11108"
-         id="image10103"
-         height="76"
+         transform="matrix(0.94590106,0.3244552,-0.3244552,0.94590106,0,0)"
          width="38"
-         transform="matrix(0.94590106,0.3244552,-0.3244552,0.94590106,0,0)" />
+         height="76"
+         id="image10103"
+         x="902.11108"
+         y="32.606907" />
       <path
          id="path10153"
          d="m 871.29404,373.64372 c 1.0714,0.17857 14.4643,-1.07143 14.4643,-1.07143"
@@ -5055,12 +5169,12 @@
       <image
          sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
          xlink:href="../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
-         width="38.000004"
-         height="76.000008"
-         id="image5120"
+         y="885.50549"
          x="118.5812"
-         y="885.50549" />
+         id="image5120"
+         height="76.000008"
+         width="38.000004"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
       <path
          id="path5122"
          d="m 900.18499,345.54216 c 0,0 1.9164,2.60676 -0.4724,4.38497 -2.4256,2.0131 -4.7237,-0.32774 -4.7237,-0.32774"
@@ -5205,12 +5319,12 @@
       <image
          sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
          xlink:href="../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
-         y="-134.7252"
-         x="184.09911"
-         id="image5164"
-         height="76.000008"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
          width="38.000004"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
+         height="76.000008"
+         id="image5164"
+         x="184.09911"
+         y="-134.7252" />
       <path
          style="fill:none;stroke:#000000;stroke-width:0.91376841px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m -108.5729,179.49791 c 0,0 1.91644,2.60676 -0.47244,4.38497 -2.42559,2.0131 -4.72361,-0.32774 -4.72361,-0.32774"
@@ -5335,14 +5449,6 @@
          id="path5206"
          style="fill:#ffcc00;stroke:#f6d72b;stroke-width:2.94199991;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
          sodipodi:type="arc" />
-      <image
-         sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/revoots.png"
-         xlink:href="revoots.png"
-         width="24.501085"
-         height="26.412428"
-         id="image5208"
-         x="908.67419"
-         y="442.16486" />
       <path
          sodipodi:end="3.1578779"
          sodipodi:start="0"
@@ -5355,6 +5461,128 @@
          id="path5210"
          style="fill:#800000;stroke:#000000;stroke-width:2.94199991;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
          sodipodi:type="arc" />
+      <g
+         id="g4463"
+         transform="matrix(0.1337942,0,0,0.1337942,906.93594,440.01154)">
+        <rect
+           y="0"
+           x="0"
+           height="200"
+           width="200"
+           id="rect3765"
+           style="fill:#ad3d3d;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+        <path
+           transform="translate(0.42372881,-5.9322034)"
+           d="m 165.67796,75.847458 c 0,36.740972 -29.78444,66.525422 -66.525418,66.525422 -36.740975,0 -66.525421,-29.78445 -66.525421,-66.525422 0,-36.740976 29.784446,-66.5254213 66.525421,-66.5254213 36.740978,0 66.525418,29.7844453 66.525418,66.5254213 z"
+           sodipodi:ry="66.525421"
+           sodipodi:rx="66.525421"
+           sodipodi:cy="75.847458"
+           sodipodi:cx="99.152542"
+           id="path2987-9"
+           style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           sodipodi:type="arc" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path3757"
+           d="m 39.830508,171.18644 19.067797,-59.32203 72.881355,2.11864 14.40678,58.89831 z"
+           style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+        <text
+           sodipodi:linespacing="100%"
+           id="text3759"
+           y="195.55084"
+           x="100.6356"
+           style="font-size:42px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:100%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Serif;-inkscape-font-specification:Serif Bold Italic"
+           xml:space="preserve"><tspan
+             style="font-size:28px;fill:#000000;fill-opacity:1"
+             y="195.55084"
+             x="100.6356"
+             id="tspan3761"
+             sodipodi:role="line">Revolution!</tspan></text>
+        <path
+           sodipodi:type="arc"
+           style="fill:#c13434;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="path3771"
+           sodipodi:cx="99.152542"
+           sodipodi:cy="75.847458"
+           sodipodi:rx="66.525421"
+           sodipodi:ry="66.525421"
+           d="m 165.67796,75.847458 c 0,36.740972 -29.78444,66.525422 -66.525418,66.525422 -36.740975,0 -66.525421,-29.78445 -66.525421,-66.525422 0,-36.740976 29.784446,-66.5254213 66.525421,-66.5254213 36.740978,0 66.525418,29.7844453 66.525418,66.5254213 z"
+           transform="matrix(0.86624203,0,0,0.86624203,13.686171,4.2129984)" />
+        <path
+           sodipodi:nodetypes="ccccc"
+           style="fill:#c13434;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           d="m 54.237288,171.18644 19.067797,-59.32203 44.491525,2.11864 14.40678,58.89831 z"
+           id="path3773"
+           inkscape:connector-curvature="0" />
+        <path
+           transform="matrix(1.212937,0,0,0.70426131,-21.340515,19.149536)"
+           d="m 121.18644,50.423729 c 0,7.488607 -4.93246,13.559322 -11.01695,13.559322 -6.0845,0 -11.016952,-6.070715 -11.016952,-13.559322 0,-7.488607 4.932452,-13.559322 11.016952,-13.559322 6.08449,0 11.01695,6.070715 11.01695,13.559322 z"
+           sodipodi:ry="13.559322"
+           sodipodi:rx="11.016949"
+           sodipodi:cy="50.423729"
+           sodipodi:cx="110.16949"
+           id="path3775"
+           style="fill:none;stroke:#000000;stroke-width:6;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           sodipodi:type="arc" />
+        <path
+           transform="matrix(0.98517496,0,0,1.1285797,-30.570123,-5.8478722)"
+           sodipodi:type="arc"
+           style="fill:none;stroke:#000000;stroke-width:6;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           id="path3777"
+           sodipodi:cx="110.16949"
+           sodipodi:cy="50.423729"
+           sodipodi:rx="11.016949"
+           sodipodi:ry="13.559322"
+           d="m 121.18644,50.423729 c 0,7.488607 -4.93246,13.559322 -11.01695,13.559322 -6.0845,0 -11.016952,-6.070715 -11.016952,-13.559322 0,-7.488607 4.932452,-13.559322 11.016952,-13.559322 6.08449,0 11.01695,6.070715 11.01695,13.559322 z" />
+        <path
+           sodipodi:nodetypes="cccccc"
+           inkscape:connector-curvature="0"
+           id="path3781"
+           d="M 87.491396,100.84801 72.227515,84.839352 66.068516,105.26962 c 22.201384,-7.002068 43.599944,-4.31989 64.778144,1.02026 l -13.18652,-22.957865 -7.46303,18.051005"
+           style="fill:none;stroke:#000000;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+        <rect
+           transform="matrix(-0.99201871,-0.12609072,-0.12609072,0.99201871,0,0)"
+           y="16.144253"
+           x="-95.300621"
+           height="4"
+           width="68"
+           id="rect3767"
+           style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+        <rect
+           style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="rect3769"
+           width="68"
+           height="4"
+           x="94.111862"
+           y="39.516937"
+           transform="matrix(0.99201871,-0.12609072,0.12609072,0.99201871,0,0)" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path3783"
+           d="m 143.64407,40.677966 45.76271,-9.322034 -34.74576,33.898305"
+           style="fill:#c13434;fill-opacity:1;stroke:#000000;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path3785"
+           d="M 52.966102,42.372881 12.288136,32.627119 47.033898,67.79661"
+           style="fill:#c13434;fill-opacity:1;stroke:#000000;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+        <path
+           sodipodi:nodetypes="cc"
+           inkscape:connector-curvature="0"
+           id="path3787"
+           d="m 61.016949,131.77966 c 27.281761,17.1507 47.983611,9.0784 68.644071,0.84746"
+           style="fill:none;stroke:#000000;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+        <path
+           transform="translate(2.9661017,-0.42372881)"
+           d="m 100.42373,149.57628 c 0,5.85047 -4.74275,10.59322 -10.593225,10.59322 -5.850474,0 -10.59322,-4.74275 -10.59322,-10.59322 0,-5.85048 4.742746,-10.59322 10.59322,-10.59322 5.850475,0 10.593225,4.74274 10.593225,10.59322 z"
+           sodipodi:ry="10.593221"
+           sodipodi:rx="10.593221"
+           sodipodi:cy="149.57628"
+           sodipodi:cx="89.830505"
+           id="path3789"
+           style="fill:#c13434;fill-opacity:1;stroke:#000000;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           sodipodi:type="arc" />
+      </g>
       <path
          sodipodi:type="arc"
          style="fill:#550000;stroke:#000000;stroke-width:2.94199991;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -5610,12 +5838,12 @@
     <image
        sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
        xlink:href="../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
-       y="743.69708"
-       x="781.01599"
-       id="image5314"
-       height="75.907204"
+       transform="matrix(-0.28910686,0.95729683,0.96461787,0.26365196,0,0)"
        width="35.952324"
-       transform="matrix(-0.28910686,0.95729683,0.96461787,0.26365196,0,0)" />
+       height="75.907204"
+       id="image5314"
+       x="781.01599"
+       y="743.69708" />
     <g
        id="g5340"
        transform="translate(-730.57142,272.85714)">
@@ -5699,12 +5927,12 @@
       <image
          sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
          xlink:href="../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
-         y="1037.0879"
-         x="266.80994"
-         id="image5362"
-         height="76.000008"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
          width="38.000004"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
+         height="76.000008"
+         id="image5362"
+         x="266.80994"
+         y="1037.0879" />
       <path
          style="fill:none;stroke:#000000;stroke-width:0.91376841px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 1014.4707,524.1136 c 0,0 1.9164,2.60676 -0.4724,4.38497 -2.4256,2.0131 -4.7237,-0.32774 -4.7237,-0.32774"
@@ -5881,12 +6109,12 @@
       <image
          sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
          xlink:href="../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
-         y="885.50549"
-         x="118.5812"
-         id="image5418"
-         height="76.000008"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
          width="38.000004"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
+         height="76.000008"
+         id="image5418"
+         x="118.5812"
+         y="885.50549" />
       <path
          style="fill:none;stroke:#000000;stroke-width:0.91376841px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 900.18499,345.54216 c 0,0 1.9164,2.60676 -0.4724,4.38497 -2.4256,2.0131 -4.7237,-0.32774 -4.7237,-0.32774"
@@ -6677,12 +6905,12 @@
       <image
          sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/scimitar/scimitar_inv.png"
          xlink:href="../../../models/objetos/armas/scimitar/scimitar_inv.png"
-         transform="matrix(0.97134715,0.23766513,-0.23766513,0.97134715,0,0)"
-         width="27.645937"
-         height="60.595173"
-         id="image5698"
+         y="84.529015"
          x="1007.2947"
-         y="84.529015" />
+         id="image5698"
+         height="60.595173"
+         width="27.645937"
+         transform="matrix(0.97134715,0.23766513,-0.23766513,0.97134715,0,0)" />
     </g>
     <g
        transform="translate(-557.67012,519.90103)"
@@ -6795,11 +7023,11 @@
       <image
          sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/sw39/sw39_inv.png"
          xlink:href="../../../models/objetos/armas/sw39/sw39_inv.png"
-         y="357.6131"
-         x="884.43085"
-         id="image5730"
+         width="23.357143"
          height="22.285715"
-         width="23.357143" />
+         id="image5730"
+         x="884.43085"
+         y="357.6131" />
       <path
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 907.0361,373.59427 c 2.62965,-4.72165 -4.63049,-4.32127 -4.63049,-4.32127"
@@ -7057,12 +7285,12 @@
       <image
          sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
          xlink:href="../../../models/objetos/armas/kalashnikov/kalashnikov_inv.png"
-         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)"
-         width="38.000004"
-         height="76.000008"
-         id="image5855"
+         y="1037.0879"
          x="266.80994"
-         y="1037.0879" />
+         id="image5855"
+         height="76.000008"
+         width="38.000004"
+         transform="matrix(-0.22531901,0.97428504,0.97428504,0.22531901,0,0)" />
       <path
          id="path5857"
          d="m 1014.4707,524.1136 c 0,0 1.9164,2.60676 -0.4724,4.38497 -2.4256,2.0131 -4.7237,-0.32774 -4.7237,-0.32774"
@@ -8249,12 +8477,12 @@
       <image
          sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/axe/axe_inv.png"
          xlink:href="../../../models/objetos/armas/axe/axe_inv.png"
-         transform="matrix(-0.7812738,0.62418847,0.62418847,0.7812738,0,0)"
-         width="29.428572"
-         height="170.71428"
-         id="image6165"
+         y="733.63019"
          x="-409.15195"
-         y="733.63019" />
+         id="image6165"
+         height="170.71428"
+         width="29.428572"
+         transform="matrix(-0.7812738,0.62418847,0.62418847,0.7812738,0,0)" />
     </g>
     <g
        transform="translate(-745.57143,556.42857)"
@@ -8400,12 +8628,12 @@
     <image
        sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/sw39/sw39_inv.png"
        xlink:href="../../../models/objetos/armas/sw39/sw39_inv.png"
-       y="414.63022"
-       x="-922.02515"
-       id="image6245"
-       height="22.285715"
+       transform="matrix(-0.65532334,-0.75534847,-0.75534847,0.65532334,0,0)"
        width="23.357143"
-       transform="matrix(-0.65532334,-0.75534847,-0.75534847,0.65532334,0,0)" />
+       height="22.285715"
+       id="image6245"
+       x="-922.02515"
+       y="414.63022" />
     <g
        transform="translate(-464.19511,537.96122)"
        id="g6255">
@@ -8549,12 +8777,12 @@
       <image
          sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/dark_katana/dark_katana_inv.png"
          xlink:href="../../../models/objetos/armas/dark_katana/dark_katana_inv.png"
-         transform="matrix(0.94590106,0.3244552,-0.3244552,0.94590106,0,0)"
-         width="38"
-         height="76"
-         id="image6297"
+         y="32.606907"
          x="902.11108"
-         y="32.606907" />
+         id="image6297"
+         height="76"
+         width="38"
+         transform="matrix(0.94590106,0.3244552,-0.3244552,0.94590106,0,0)" />
       <path
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 871.29404,373.64372 c 1.0714,0.17857 14.4643,-1.07143 14.4643,-1.07143"
@@ -9201,12 +9429,12 @@
     <image
        sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/other/rev/../../../models/objetos/armas/scimitar/scimitar_inv.png"
        xlink:href="../../../models/objetos/armas/scimitar/scimitar_inv.png"
-       transform="matrix(0.834424,-0.55112303,0.55112303,0.834424,0,0)"
-       width="27.645937"
-       height="60.595173"
-       id="image5704"
+       y="1092.672"
        x="76.50016"
-       y="1092.672" />
+       id="image5704"
+       height="60.595173"
+       width="27.645937"
+       transform="matrix(0.834424,-0.55112303,0.55112303,0.834424,0,0)" />
     <path
        style="fill:none;stroke:#f10000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 649.28572,1009.505 c -1.90477,0 0.23809,-0.2381 -0.71429,0.7143 -0.16836,0.1684 -0.54593,-0.1683 -0.71428,0 -0.16836,0.1684 0,0.4762 0,0.7143 0,0.3735 -0.0939,2.6693 0,2.8572 0.15058,0.3011 0.5637,0.4131 0.71428,0.7142 0.0187,0.037 0.0187,2.1055 0,2.1429 -0.15058,0.3012 -0.47619,0.4762 -0.71428,0.7143 0,0.4762 0.21295,1.0026 0,1.4286 -0.73895,0 -0.98725,-0.1684 -1.42858,0.7142 -0.0939,0.1879 0,2.4837 0,2.8572 0,0.2381 -0.16835,0.5459 0,0.7143 0.16836,0.1683 0.54593,-0.1684 0.71429,0 0.16836,0.1683 -0.10648,0.5013 0,0.7143 0.15058,0.3011 0.5637,0.4131 0.71429,0.7142 0.10647,0.213 -0.10648,0.5014 0,0.7143 0.093,0.186 1.27266,0.8702 0.71428,1.4286 -0.16836,0.1684 -0.54593,-0.1684 -0.71428,0 -0.16836,0.1684 0.16835,0.5459 0,0.7143 -0.16836,0.1683 -0.54593,-0.1684 -0.71429,0 -0.33672,0.3367 0.33672,1.0918 0,1.4286 -0.16836,0.1683 -0.54593,-0.1684 -0.71429,0 -0.16835,0.1683 0,0.4761 0,0.7142 0,0.2381 -0.16835,0.546 0,0.7143 0.16836,0.1684 0.71429,-0.2381 0.71429,0 0,0.2381 -0.47619,0 -0.71429,0"
