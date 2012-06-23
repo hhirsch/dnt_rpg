@@ -1,9 +1,6 @@
 intro/Ameiva.png
 intro/forno.png
-intro/metalerio.png
 intro/ufmg.png
-other/msoftlivre/mus.png
-other/msoftlivre/tcho.png
 other/rev/revoots.png
    unknown
 
@@ -66,6 +63,7 @@ other/msoftlivre/real.png
 
 other/msoftlivre/metal.svg
 other/msoftlivre/metal-text.png
+other/msoftlivre/mus.svg
 other/msoftlivre/ruikre.png
    author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
    license: CC0/Public Domain
