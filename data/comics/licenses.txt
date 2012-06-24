@@ -1,7 +1,3 @@
-intro/forno.png
-intro/ufmg.png
-   unknown
-
 intro/hbomb.png 
    author: farrer (DNTeam)
    license: GPLv3 or later
@@ -71,3 +67,13 @@ intro/Ameiva.png
    author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
    license: CC-BY-SA 3.0 or later
    reference: http://qubodup.deviantart.com/art/Ameiva-on-Concrete-310076020
+
+intro/forno.png
+   author: Martin Stupich
+   license: CC0/Public Domain
+   reference: http://commons.wikimedia.org/wiki/File:Carrie_Furnace_No._7,_U.S._Steel_Homestead_Works,_Blast_Furnace_Plant,_Along_Monongahela_River,_Homestead_(Allegheny_County,_Pennsylvania).jpg
+
+intro/ufmg.png
+   author: Andrevruas <http://commons.wikimedia.org/wiki/User:Andrevruas>
+   license: GFDLv1.2+, CC-BY-SAv3+
+   reference: http://commons.wikimedia.org/wiki/File:Pracacentral.JPG

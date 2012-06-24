@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -13,12 +14,13 @@
    height="297mm"
    id="svg3748"
    sodipodi:version="0.32"
-   inkscape:version="0.46"
+   inkscape:version="0.48.3.1 r9886"
    sodipodi:docname="page2.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   inkscape:export-filename="/home/farrer/hq_dnt/page2.png"
+   inkscape:export-filename="./page2.png"
    inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90">
+   inkscape:export-ydpi="90"
+   version="1.1">
   <defs
      id="defs3750">
     <inkscape:perspective
@@ -57,16 +59,21 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="338.86012"
-     inkscape:cy="32.91579"
+     inkscape:zoom="0.35355339"
+     inkscape:cx="390.61435"
+     inkscape:cy="865.92874"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1360"
-     inkscape:window-height="847"
-     inkscape:window-x="2"
-     inkscape:window-y="2" />
+     inkscape:window-width="835"
+     inkscape:window-height="1181"
+     inkscape:window-x="833"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3000" />
+  </sodipodi:namedview>
   <metadata
      id="metadata3753">
     <rdf:RDF>
@@ -75,6 +82,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -92,24 +100,24 @@
        inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/intro/page2.png"
        inkscape:export-xdpi="89.358215"
        inkscape:export-ydpi="89.358215" />
+    <image
+       sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/intro/bh.png"
+       xlink:href="bh.png"
+       inkscape:export-ydpi="89.358215"
+       inkscape:export-xdpi="89.358215"
+       inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/intro/page2.png"
+       width="421"
+       height="297"
+       id="image3808"
+       x="8"
+       y="8.3621826" />
     <rect
-       style="fill:#ffffff;stroke:#000000;stroke-width:2.94199991;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;stroke:#000000;stroke-width:2.94199990999999983;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect3760"
        width="422.24371"
        height="297.995"
        x="7.0710678"
        y="7.8644509"
-       inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/intro/page2.png"
-       inkscape:export-xdpi="89.358215"
-       inkscape:export-ydpi="89.358215" />
-    <image
-       y="10.334044"
-       x="8.5990515"
-       id="image3808"
-       height="292.00507"
-       width="417.16751"
-       sodipodi:absref="/home/farrer/hq_dnt/bh.png"
-       xlink:href="bh.png"
        inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/intro/page2.png"
        inkscape:export-xdpi="89.358215"
        inkscape:export-ydpi="89.358215" />
@@ -123,24 +131,24 @@
        inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/intro/page2.png"
        inkscape:export-xdpi="89.358215"
        inkscape:export-ydpi="89.358215" />
+    <image
+       sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/intro/Ameiva.png"
+       xlink:href="Ameiva.png"
+       inkscape:export-ydpi="89.358215"
+       inkscape:export-xdpi="89.358215"
+       inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/intro/page2.png"
+       width="297"
+       height="296"
+       id="image3890"
+       x="439"
+       y="8.3621826" />
     <rect
-       style="fill:#ffffff;stroke:#000000;stroke-width:2.94199991;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;stroke:#000000;stroke-width:2.94199990999999983;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect3842"
        width="297.99493"
        height="296.98486"
        x="438.40619"
        y="7.86446"
-       inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/intro/page2.png"
-       inkscape:export-xdpi="89.358215"
-       inkscape:export-ydpi="89.358215" />
-    <image
-       y="8.5472612"
-       x="439.20581"
-       id="image3890"
-       height="293.59897"
-       width="295.3045"
-       sodipodi:absref="/home/farrer/hq_dnt/Ameiva.png"
-       xlink:href="Ameiva.png"
        inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/intro/page2.png"
        inkscape:export-xdpi="89.358215"
        inkscape:export-ydpi="89.358215" />
@@ -186,16 +194,16 @@
        inkscape:export-xdpi="89.358215"
        inkscape:export-ydpi="89.358215" />
     <image
-       y="325.3241"
-       x="146.70061"
-       id="image3975"
-       height="712.62421"
-       width="452.09134"
-       sodipodi:absref="/home/farrer/hq_dnt/metaleiro.png"
+       sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/intro/metaleiro.png"
        xlink:href="metaleiro.png"
-       inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/intro/page2.png"
+       inkscape:export-ydpi="89.358215"
        inkscape:export-xdpi="89.358215"
-       inkscape:export-ydpi="89.358215" />
+       inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/intro/page2.png"
+       width="452.09134"
+       height="712.62421"
+       id="image3975"
+       x="146.70061"
+       y="325.3241" />
     <rect
        style="fill:#ffffff;stroke:#000000;stroke-width:3.26801372;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect3987"

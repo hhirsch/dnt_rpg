@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -13,12 +14,13 @@
    height="297mm"
    id="svg2"
    sodipodi:version="0.32"
-   inkscape:version="0.46"
+   inkscape:version="0.48.3.1 r9886"
    sodipodi:docname="page1.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   inkscape:export-filename="/home/farrer/hq_dnt/page1.png"
+   inkscape:export-filename="./page1.png"
    inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90">
+   inkscape:export-ydpi="90"
+   version="1.1">
   <defs
      id="defs4">
     <inkscape:perspective
@@ -64,16 +66,25 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="450.77644"
-     inkscape:cy="757.70949"
+     inkscape:zoom="1"
+     inkscape:cx="310.17244"
+     inkscape:cy="568.7752"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
-     showgrid="false"
-     inkscape:window-width="1360"
-     inkscape:window-height="847"
-     inkscape:window-x="4"
-     inkscape:window-y="4" />
+     showgrid="true"
+     inkscape:window-width="835"
+     inkscape:window-height="1181"
+     inkscape:window-x="833"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3001"
+       empspacing="4"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
+  </sodipodi:namedview>
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -82,6 +93,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -100,24 +112,24 @@
        inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/intro/page1.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
+    <image
+       sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/intro/ufmg.png"
+       xlink:href="ufmg.png"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/intro/page1.png"
+       width="730"
+       height="324"
+       id="image3455"
+       x="8"
+       y="10.362183" />
     <rect
-       style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:2.94199991;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.94199990999999983;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect2383"
        width="731.258"
        height="325.78882"
        x="7.0649552"
        y="9.4677467"
-       inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/intro/page1.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <image
-       y="10.570081"
-       x="7.588923"
-       id="image3455"
-       height="322.88837"
-       width="728.29449"
-       sodipodi:absref="/home/farrer/hq_dnt/ufmg.png"
-       xlink:href="ufmg.png"
        inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/intro/page1.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
@@ -143,16 +155,16 @@
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <image
-       y="343.5448"
-       x="8.4873934"
-       id="image3555"
-       height="238.82739"
-       width="338.59894"
-       sodipodi:absref="/home/farrer/hq_dnt/fotodcc.png"
+       sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/intro/fotodcc.png"
        xlink:href="fotodcc.png"
-       inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/intro/page1.png"
+       inkscape:export-ydpi="90"
        inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
+       inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/intro/page1.png"
+       width="338.59894"
+       height="238.82739"
+       id="image3555"
+       x="8.4873934"
+       y="343.5448" />
     <rect
        y="349.21762"
        x="13.053587"
@@ -175,16 +187,16 @@
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <image
-       y="342.91693"
-       x="357.65222"
-       id="image3638"
-       height="239.39085"
-       width="375.75635"
-       sodipodi:absref="/home/farrer/hq_dnt/ticoaboboramod.png"
+       sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/intro/ticoaboboramod.png"
        xlink:href="ticoaboboramod.png"
-       inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/intro/page1.png"
+       inkscape:export-ydpi="90"
        inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
+       inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/intro/page1.png"
+       width="375.75635"
+       height="239.39085"
+       id="image3638"
+       x="357.65222"
+       y="342.91693" />
     <rect
        style="fill:#ffffff;stroke:#000000;stroke-width:4.78951311;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect3565"
@@ -206,16 +218,16 @@
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <image
-       y="595.93066"
-       x="7.588922"
-       id="image3732"
-       height="443.14209"
-       width="728.29449"
-       sodipodi:absref="/home/farrer/hq_dnt/hbomb.png"
+       sodipodi:absref="/home/qubodup/src/git/dnt/data/comics/intro/hbomb.png"
        xlink:href="hbomb.png"
-       inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/intro/page1.png"
+       inkscape:export-ydpi="90"
        inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
+       inkscape:export-filename="/home/farrer/projetos/dccnitghtmare/data/comics/intro/page1.png"
+       width="728.29449"
+       height="443.14209"
+       id="image3732"
+       x="7.588922"
+       y="595.93066" />
     <rect
        y="602.33026"
        x="17.628096"
