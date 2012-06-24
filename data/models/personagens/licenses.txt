@@ -1,11 +1,11 @@
 
-Ameiva (except *.png and *.xcf.bz2)
+Ameiva (except *.jpg and *.xcf.bz2)
 Arvore
 galo
 Jacaranda
 Logan
 metaleiro
-Ratazana
+Ratazana (except *.png and *.xcf.bz2)
    author: farrer (DNTeam)
    license: GPLv3 or later
 
@@ -64,5 +64,7 @@ chico, guri, guria, zedobar (armature)
 
 Ameiva/*.jpg
 Ameiva/*.xcf.bz2
+Ratazana/*.png
+Ratazana/*.xcf.bz2
    author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
    license: LGPLv2+, CC-BYv3+
