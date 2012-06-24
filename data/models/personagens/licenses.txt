@@ -1,5 +1,5 @@
 
-Ameiva
+Ameiva (except *.png and *.xcf.bz2)
 Arvore
 galo
 Jacaranda
@@ -62,3 +62,7 @@ chico, guri, guria, zedobar (armature)
    source: opengameart.org/content/base-human-models-low-poly-for-blender-25x
    note: modifications by DNTeam
 
+Ameiva/*.jpg
+Ameiva/*.xcf.bz2
+   author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   license: LGPLv2+, CC-BYv3+
