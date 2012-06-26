@@ -153,6 +153,15 @@ bool ogg_stream::playback(bool rewind)
  
    if(!stream(buffers[1]))
    {
+      if(!rewind)
+      {
+         /* File must be too small for double buffer.
+          * Play as a single buffer. */
+         alSourceQueueBuffers(source, 1, buffers);
+         alSourcePlay(source);
+         return(true);
+      }
+      /* With rewind enabled and couldn't read second buffer? Fail! */
       return(false);
    }
     
