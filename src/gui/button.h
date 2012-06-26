@@ -29,6 +29,10 @@
 #include "draw.h"
 #include "mouse.h"
 
+#ifdef FARSO_USE_DNT_SOUND
+   #include "../sound/sound.h"
+#endif
+
 namespace Farso
 {
 
@@ -98,6 +102,9 @@ class Button: public GuiObject
       std::string fontName; /**< Font Name */
       int fontSize;         /**< Font Size */
       int bType;            /**< Button type */
+#ifdef FARSO_USE_DNT_SOUND
+      sound snd;            /**< Sound engine used */
+#endif
 };
 
 }

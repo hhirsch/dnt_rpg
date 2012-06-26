@@ -1,0 +1,5 @@
+zipclick-press.wav
+zipclick-release.wav
+   license: CC0/Public Domain
+   source: http://opengameart.org/content/zippo-click-sound
+   author: dawith <dawith AT t-2 DOT net>

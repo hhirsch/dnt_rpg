@@ -25,6 +25,10 @@
 #include "menu.h"
 #include "farsoopts.h"
 
+#ifdef FARSO_USE_DNT_SOUND
+   #include "../sound/sound.h"
+#endif
+
 using namespace std;
 using namespace Farso;
 
@@ -229,6 +233,29 @@ bool Button::press(int Xjan, int Yjan, int x, int y, Uint8 Mbotao, int* pronto)
 
    /* Verify if the mouse Button is left */
    *pronto = !(Mbotao & SDL_BUTTON(1));
+
+#ifdef FARSO_USE_DNT_SOUND
+   /* Verify sound */
+   if( (pres != pressed) )
+   {
+      /* Play sound. Verify if pressed or released */
+      if( (pres) && (Mbotao & SDL_BUTTON(1)) )
+      {
+         /* Pressed */
+         snd.addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/zipclick-press.ogg");
+      }
+      else
+      {
+         /* Released */
+         snd.addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/zipclick-release.ogg");
+      }
+   }
+   else if( (*pronto) && (pressed) )
+   {
+      /* Released */
+      snd.addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/zipclick-release.ogg");
+   }
+#endif
 
    /* Verify if Must Redraw */
    if( (pres && (Mbotao & SDL_BUTTON(1))) != pressed)

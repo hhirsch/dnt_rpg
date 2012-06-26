@@ -36,6 +36,8 @@
 namespace Farso
 {
 
+#define FARSO_USE_DNT_SOUND   1
+
 #define RAIZ3D2  0.8660254 /**< Sqrt(3) / 2 */
 
 #ifdef __APPLE__

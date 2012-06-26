@@ -14,12 +14,15 @@
  - Added a brief text alert when Playable Character A* fails 
    to find a path;
  - Zoom can be done also by mouse wheel;
+ - Sound Effect for button press and release;
 
 BugFixes:
  - heightmap2dnt: Fixed a missing include;
  - bumpMapping: Changed shader to suppor not so recent 
                 video cards (Geforce 6 series);
  - ./configure: Restricted SDL_ttf to >= 2.0.10;
+ - sound: Fixed a bug that won't play files with size lesser 
+          or equal to  single buffer;
 
 ================================================
 |                Version 0.9                   |
