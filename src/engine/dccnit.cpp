@@ -2157,6 +2157,7 @@ void engine::treatGuiEvents(Farso::GuiObject* object, int eventInfo)
          {
             /* Open, if not opened the minimap window */
             mapWindow->open(gui, 0,0, actualMap);
+            snd->addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/turn_page.ogg");
          }
          break;
          case SHORTCUTS_WINDOW_END_TURN:
@@ -2197,6 +2198,7 @@ void engine::treatGuiEvents(Farso::GuiObject* object, int eventInfo)
                else
                {
                   journal->open(gui);
+                  snd->addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/turn_page.ogg");
                }
             }
          }
@@ -2963,6 +2965,7 @@ int engine::treatIO(SDL_Surface *screen)
          if(!mapWindow->isOpened())
          {
             mapWindow->open(gui, 0,0, actualMap);
+            snd->addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/turn_page.ogg");
          }
          else
          {
@@ -3031,6 +3034,7 @@ int engine::treatIO(SDL_Surface *screen)
             }
             else
             {
+               snd->addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/turn_page.ogg");
                journal->open(gui);
             }
          }
@@ -4070,7 +4074,10 @@ void engine::openCloseInventoryWindow()
    if(!inventoryWindow)
    {
       inventoryWindow=new inventWindow(PCs->getActiveCharacter(),
-                                       gui, infoWindow, this); 
+                                       gui, infoWindow, this);
+
+      /* Play a sound on inventory window open */
+      snd->addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/cloth-inventory.ogg");
    }
    else
    {

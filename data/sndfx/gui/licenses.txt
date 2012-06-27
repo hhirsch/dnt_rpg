@@ -1,5 +1,12 @@
-zipclick-press.wav
-zipclick-release.wav
+zipclick-press.ogg
+zipclick-release.ogg
    license: CC0/Public Domain
    source: http://opengameart.org/content/zippo-click-sound
    author: dawith <dawith AT t-2 DOT net>
+
+cloth-inventory.ogg
+turn_page.ogg
+   license: GPLv3
+   source: http://opengameart.org/content/inventory-sound-effects
+   author: artisticdude
+
