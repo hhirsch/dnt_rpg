@@ -72,6 +72,8 @@
 #include "sky.h"
 #include "util.h"
 
+#define MAX_MOUSE_BUTTONS  3
+
 /*!
     The Engine Class is where all things are "merged" on game.
  */
@@ -465,6 +467,7 @@ class engine
       int mouseX,                  /**< Actual mouse X coordinates on screen */
           mouseY;                  /**< Actual mouse Y coordinates on screen */
       int mouseWheel;              /**< Mouse Wheel relative move */
+      bool mouseButtonReleased[MAX_MOUSE_BUTTONS]; /**< Release state */
       double xReal,                /**< Actual mouse X coordinates on World */
              zReal,                /**< Actual mouse Z coordinates on World */
              yReal;                /**< Actual mouse Y coordinates on World */

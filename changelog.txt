@@ -23,6 +23,9 @@ BugFixes:
  - ./configure: Restricted SDL_ttf to >= 2.0.10;
  - sound: Fixed a bug that won't play files with size lesser 
           or equal to  single buffer;
+ - dialogWindow: Fixed a bug that open the window before mouse
+                 button release, automatically selecting a dialog
+					  option sometimes;
 
 ================================================
 |                Version 0.9                   |

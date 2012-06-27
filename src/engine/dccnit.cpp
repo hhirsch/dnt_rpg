@@ -2381,7 +2381,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                {
                   occPosition = false;
                   cursors->set(CURSOR_USE);
-                  if( (mButton & SDL_BUTTON(1)) && 
+                  if( (mouseButtonReleased[0]) && 
                       (rangeAction(activeCharacter->scNode->getPosX(), 
                                    activeCharacter->scNode->getPosZ(),
                                    sobj->x, sobj->z,
@@ -2486,7 +2486,7 @@ int engine::verifyMouseActions(Uint8 mButton)
             cursors->set(CURSOR_DOOR);
             cursors->setTextOver(gettext("Door")); 
             
-            if( (mButton & SDL_BUTTON(1)) && 
+            if( (mouseButtonReleased[0]) && 
                 (rangeAction(activeCharacter->scNode->getPosX(), 
                              activeCharacter->scNode->getPosZ(),
                              porta->obj->scNode->getPosX(),
@@ -2761,6 +2761,11 @@ int engine::treatIO(SDL_Surface *screen)
       /* Let's check some events */
       SDL_Event event;
       mouseWheel = 0;
+      for(i=0; i < MAX_MOUSE_BUTTONS; i++)
+      {
+         mouseButtonReleased[i] = false;
+      }
+          
       while(SDL_PollEvent(&event))
       {
          if(event.type == SDL_QUIT)
@@ -2775,6 +2780,13 @@ int engine::treatIO(SDL_Surface *screen)
             else if(event.button.button == SDL_BUTTON_WHEELDOWN)
             {
                mouseWheel--;
+            }
+         }
+         else if(event.type == SDL_MOUSEBUTTONUP)
+         {
+            if(event.button.button <= MAX_MOUSE_BUTTONS)
+            {
+               mouseButtonReleased[event.button.button-1] = true;
             }
          }
       }
@@ -2835,7 +2847,9 @@ int engine::treatIO(SDL_Surface *screen)
 
       if( (time-lastMouse >=  REFRESH_RATE ) || 
             ( (mButton & SDL_BUTTON(1) ) && 
-              (time-lastMousePression >= REFRESH_RATE)) )
+              (time-lastMousePression >= REFRESH_RATE)) ||
+              (mouseButtonReleased[0]) ||
+              (mouseButtonReleased[2]) )
       {
          cursors->set(CURSOR_WALK);
          lastMouse = time;
