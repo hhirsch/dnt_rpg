@@ -38,6 +38,13 @@ transgender.png
    Reference:
    http://opengameart.org/forumtopic/portraits-for-weird-realism-cartoon-style-satirical-post-apocalyptic-rpg
 
+atleticano.png
+cruzeirense.png
+   Author: nubux
+   License: CC-BY 3.0
+   Modifications: color adjustments by qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   Source: http://opengameart.org/content/athlete-portrait-variations
+
 mysterious.png
    Author: Buch
    License: GPLv3
@@ -50,10 +57,8 @@ mercenary.png
    References: http://opengameart.org/content/post-apocaliptic-soldier
                http://opengameart.org/forumtopic/portraits-for-weird-realism-cartoon-style-satirical-post-apocalyptic-rpg
 
-atleticano.png
 borda.png
 chico.png
-cruzeirense.png
 ente.png
 guri2.png
 guria.png
