@@ -137,7 +137,6 @@
 		ABA0E59F13FEDBA600FA02A0 /* map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA0E59313FEDBA600FA02A0 /* map.cpp */; };
 		ABA0E5A013FEDBA600FA02A0 /* mapfog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA0E59513FEDBA600FA02A0 /* mapfog.cpp */; };
 		ABA0E5A113FEDBA600FA02A0 /* maplights.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA0E59713FEDBA600FA02A0 /* maplights.cpp */; };
-		ABA0E5A213FEDBA600FA02A0 /* maproad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA0E59913FEDBA600FA02A0 /* maproad.cpp */; };
 		ABA0E5A313FEDBA600FA02A0 /* mapsound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA0E59B13FEDBA600FA02A0 /* mapsound.cpp */; };
 		ABA0E5C213FEDBB500FA02A0 /* interplane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA0E5A713FEDBB400FA02A0 /* interplane.cpp */; };
 		ABA0E5C313FEDBB500FA02A0 /* lake.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA0E5A913FEDBB400FA02A0 /* lake.cpp */; };
@@ -169,12 +168,12 @@
 		AB838C40143A42E700AD8D24 /* moneywindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = moneywindow.cpp; sourceTree = "<group>"; };
 		AB838C41143A42E700AD8D24 /* moneywindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = moneywindow.h; sourceTree = "<group>"; };
 		AB87870014547E4C0023B65E /* dnt-icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "dnt-icon.icns"; sourceTree = "<group>"; };
-		ABA0E3F713FED9EA00FA02A0 /* DccNiTghmare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DccNiTghmare.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABA0E3F713FED9EA00FA02A0 /* DNT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DNT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABA0E3FB13FED9EA00FA02A0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		ABA0E3FE13FED9EA00FA02A0 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		ABA0E3FF13FED9EA00FA02A0 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		ABA0E40013FED9EA00FA02A0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		ABA0E40313FED9EA00FA02A0 /* DccNiTghmare-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DccNiTghmare-Info.plist"; sourceTree = "<group>"; };
+		ABA0E40313FED9EA00FA02A0 /* DNT-Info.plist */ = {isa = PBXFileReference; path = "DNT-Info.plist"; sourceTree = "<group>"; };
 		ABA0E40513FED9EA00FA02A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		ABA0E40913FED9EA00FA02A0 /* DccNiTghmare-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DccNiTghmare-Prefix.pch"; sourceTree = "<group>"; };
 		ABA0E40B13FED9EA00FA02A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
@@ -417,8 +416,6 @@
 		ABA0E59613FEDBA600FA02A0 /* mapfog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mapfog.h; sourceTree = "<group>"; };
 		ABA0E59713FEDBA600FA02A0 /* maplights.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = maplights.cpp; sourceTree = "<group>"; };
 		ABA0E59813FEDBA600FA02A0 /* maplights.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = maplights.h; sourceTree = "<group>"; };
-		ABA0E59913FEDBA600FA02A0 /* maproad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = maproad.cpp; sourceTree = "<group>"; };
-		ABA0E59A13FEDBA600FA02A0 /* maproad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = maproad.h; sourceTree = "<group>"; };
 		ABA0E59B13FEDBA600FA02A0 /* mapsound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mapsound.cpp; sourceTree = "<group>"; };
 		ABA0E59C13FEDBA600FA02A0 /* mapsound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mapsound.h; sourceTree = "<group>"; };
 		ABA0E5A713FEDBB400FA02A0 /* interplane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = interplane.cpp; sourceTree = "<group>"; };
@@ -498,7 +495,7 @@
 		ABA0E3F813FED9EA00FA02A0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				ABA0E3F713FED9EA00FA02A0 /* DccNiTghmare.app */,
+				ABA0E3F713FED9EA00FA02A0 /* DNT.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -556,7 +553,7 @@
 		ABA0E40213FED9EA00FA02A0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				ABA0E40313FED9EA00FA02A0 /* DccNiTghmare-Info.plist */,
+				ABA0E40313FED9EA00FA02A0 /* DNT-Info.plist */,
 				ABA0E40413FED9EA00FA02A0 /* InfoPlist.strings */,
 				ABA0E40913FED9EA00FA02A0 /* DccNiTghmare-Prefix.pch */,
 				ABA0E40A13FED9EA00FA02A0 /* Credits.rtf */,
@@ -874,8 +871,6 @@
 				ABA0E59613FEDBA600FA02A0 /* mapfog.h */,
 				ABA0E59713FEDBA600FA02A0 /* maplights.cpp */,
 				ABA0E59813FEDBA600FA02A0 /* maplights.h */,
-				ABA0E59913FEDBA600FA02A0 /* maproad.cpp */,
-				ABA0E59A13FEDBA600FA02A0 /* maproad.h */,
 				ABA0E59B13FEDBA600FA02A0 /* mapsound.cpp */,
 				ABA0E59C13FEDBA600FA02A0 /* mapsound.h */,
 			);
@@ -924,9 +919,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		ABA0E3F613FED9EA00FA02A0 /* DccNiTghmare */ = {
+		ABA0E3F613FED9EA00FA02A0 /* DNT */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ABA0E41513FED9EB00FA02A0 /* Build configuration list for PBXNativeTarget "DccNiTghmare" */;
+			buildConfigurationList = ABA0E41513FED9EB00FA02A0 /* Build configuration list for PBXNativeTarget "DNT" */;
 			buildPhases = (
 				ABA0E3F313FED9EA00FA02A0 /* Sources */,
 				ABA0E3F413FED9EA00FA02A0 /* Frameworks */,
@@ -936,9 +931,9 @@
 			);
 			dependencies = (
 			);
-			name = DccNiTghmare;
+			name = DNT;
 			productName = DccNiTghmare;
-			productReference = ABA0E3F713FED9EA00FA02A0 /* DccNiTghmare.app */;
+			productReference = ABA0E3F713FED9EA00FA02A0 /* DNT.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -949,7 +944,7 @@
 			attributes = {
 				LastUpgradeCheck = 0420;
 			};
-			buildConfigurationList = ABA0E3F113FED9EA00FA02A0 /* Build configuration list for PBXProject "DccNiTghmare" */;
+			buildConfigurationList = ABA0E3F113FED9EA00FA02A0 /* Build configuration list for PBXProject "DNT" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -961,7 +956,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				ABA0E3F613FED9EA00FA02A0 /* DccNiTghmare */,
+				ABA0E3F613FED9EA00FA02A0 /* DNT */,
 			);
 		};
 /* End PBXProject section */
@@ -1103,7 +1098,6 @@
 				ABA0E59F13FEDBA600FA02A0 /* map.cpp in Sources */,
 				ABA0E5A013FEDBA600FA02A0 /* mapfog.cpp in Sources */,
 				ABA0E5A113FEDBA600FA02A0 /* maplights.cpp in Sources */,
-				ABA0E5A213FEDBA600FA02A0 /* maproad.cpp in Sources */,
 				ABA0E5A313FEDBA600FA02A0 /* mapsound.cpp in Sources */,
 				ABA0E5C213FEDBB500FA02A0 /* interplane.cpp in Sources */,
 				ABA0E5C313FEDBB500FA02A0 /* lake.cpp in Sources */,
@@ -1209,7 +1203,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DccNiTghmare/DccNiTghmare-Prefix.pch";
 				HEADER_SEARCH_PATHS = /Library/Frameworks/SDL.framework/Headers/;
-				INFOPLIST_FILE = "DccNiTghmare/DccNiTghmare-Info.plist";
+				INFOPLIST_FILE = "DccNiTghmare/DNT-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1222,7 +1216,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DccNiTghmare/DccNiTghmare-Prefix.pch";
 				HEADER_SEARCH_PATHS = /Library/Frameworks/SDL.framework/Headers/;
-				INFOPLIST_FILE = "DccNiTghmare/DccNiTghmare-Info.plist";
+				INFOPLIST_FILE = "DccNiTghmare/DNT-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1231,7 +1225,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		ABA0E3F113FED9EA00FA02A0 /* Build configuration list for PBXProject "DccNiTghmare" */ = {
+		ABA0E3F113FED9EA00FA02A0 /* Build configuration list for PBXProject "DNT" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ABA0E41313FED9EB00FA02A0 /* Debug */,
@@ -1240,7 +1234,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ABA0E41513FED9EB00FA02A0 /* Build configuration list for PBXNativeTarget "DccNiTghmare" */ = {
+		ABA0E41513FED9EB00FA02A0 /* Build configuration list for PBXNativeTarget "DNT" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ABA0E41613FED9EB00FA02A0 /* Debug */,
