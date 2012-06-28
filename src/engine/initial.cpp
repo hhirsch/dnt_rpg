@@ -65,6 +65,7 @@ int initialScreen::run(int Status,GLdouble proj[16],
    int eventInfo = Farso::EVENT_NONE;
    cursor cursors;
    gui = interf;
+   bool esc = false;
 
    int xPos = (int)(Farso::SCREEN_X / 2.0);
    int yPos = (int)(Farso::SCREEN_Y / 2.0);
@@ -129,6 +130,19 @@ int initialScreen::run(int Status,GLdouble proj[16],
          glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
          Uint8 Mbotao = SDL_GetMouseState(&x,&y);
          
+         /* Verify if esc pressed or pressing */
+         if(keys[SDLK_ESCAPE])
+         {
+            esc = true;
+         }
+         else if( (esc == true) && (Status == IN_GAME) )
+         {
+            done = true;
+            esc = false;
+            result = CONTINUE_GAME;
+         }
+         
+         /* Verify GUI events */
          object = gui->manipulateEvents(x,y,Mbotao,keys, eventInfo);
          if(eventInfo != Farso::EVENT_NONE)
          {
