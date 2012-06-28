@@ -15,6 +15,7 @@
    to find a path;
  - Zoom can be done also by mouse wheel;
  - Sound Effect for button press and release;
+ - Enabled keyboard for dialog option selection;
 
 BugFixes:
  - heightmap2dnt: Fixed a missing include;

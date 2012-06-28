@@ -221,9 +221,10 @@ class dialogWindow
        * \param eventInfo -> last GUI Event 
        * \param infoW -> pointer to the used itemWindow
        * \param curEngine ->pointer to the current engine
+       * \param keys -> current keyboard state
        * \return true if event is threated, false otherwise. */
       bool treat(Farso::GuiObject* guiObj, int eventInfo,
-                 itemWindow* infoW, engine* curEngine);
+                 itemWindow* infoW, engine* curEngine, Uint8 *keys);
 
       /*! Verify if the dialog is open or not 
        * \return true if the window is opened */
@@ -263,6 +264,7 @@ class dialogWindow
       static Farso::RolBar* npcText;        /**< The NPC text quad */
       static Farso::SelText* pcSelText;     /**< The PC selection text */
       static Farso::Button* barterButton;   /**< The Barter Button */
+      static int pressKey;              /**< Key pressed for dialog selection */
 };
 
 #endif

@@ -2077,7 +2077,7 @@ void engine::treatGuiEvents(Farso::GuiObject* object, int eventInfo)
    tradeWindow.treat(object, eventInfo, mouseX, mouseY, cursors, actualMap);
 
    /* Verify Dialog Windows */
-   dlgWindow.treat(object, eventInfo, infoWindow, this);
+   dlgWindow.treat(object, eventInfo, infoWindow, this, keys);
 
    /* Verify Money Window */
    moneySplitWindow.treat(object, eventInfo);
@@ -2727,7 +2727,6 @@ int engine::treatIO(SDL_Surface *screen)
    GLfloat varX, varZ;       // to avoid GLfloat calculate
    GLfloat dist;
    activeCharacter = PCs->getActiveCharacter();
-   Uint8 *keys;
    int x,y;
    int guiEvent;
    Uint8 mButton;

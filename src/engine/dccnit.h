@@ -499,6 +499,7 @@ class engine
 
       Uint32 lastKeyb;             /**< Last time read from keyboard */
       Uint32  lastKey;             /**< Last key with refresh readed */
+      Uint8 *keys;                 /**< current keyboard state */
 
       sound* snd;                  /**< Actual Sounds thing */
       sndfx* walkSound;            /**< Actual walking sound */

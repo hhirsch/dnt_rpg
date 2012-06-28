@@ -96,6 +96,9 @@ class SelText: public GuiObject
 
       /*! Clear the selText options text */
       void clearText();
+   
+      /*! Verify if have item "i" on options */
+      bool haveItem(int i);
 
    private:
       /*! Write to the surface the selected item on differente color.

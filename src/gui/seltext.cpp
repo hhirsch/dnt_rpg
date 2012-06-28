@@ -116,7 +116,7 @@ void SelText::draw()
                      cores.colorCont[0].G, cores.colorCont[0].B,
                      cores.colorCont[0].A);
 
-   for(aux = 0; aux<5;aux++)
+   for(aux = 0; aux<MAX_OPTIONS;aux++)
    {
       if(!optText[aux].empty())
       {
@@ -136,6 +136,18 @@ void SelText::draw()
      y[aux] = ya;
      ya += height;
    }
+}
+
+/***************************************************************************
+ *                              haveItem                                   *
+ ***************************************************************************/
+bool SelText::haveItem(int i)
+{
+   if((i >= 0) && (i < MAX_OPTIONS))
+   {
+      return(!optText[i].empty());
+   }
+   return(false);
 }
 
 /***************************************************************************
@@ -160,9 +172,9 @@ int SelText::getSelectedItem(int ya )
    int height = fnt.getHeight();
    int aux;
    int selaux = -1;
-   for(aux=0;aux<5;aux++)
+   for(aux=0;aux<MAX_OPTIONS;aux++)
    {
-        if( (aux>0) && (aux<4) && 
+        if( (aux>0) && (aux<MAX_OPTIONS-1) && 
             (ya > (+y[aux-1]+height)) && 
             (ya < (+y[aux+1]) ) )
         {
@@ -172,7 +184,7 @@ int SelText::getSelectedItem(int ya )
         {
            selaux = aux;
         }
-        else if( (aux==4) && (ya >=  + y[aux-1]+height) )
+        else if( (aux==MAX_OPTIONS-1) && (ya >=  + y[aux-1]+height) )
         {
            selaux = aux;
         }

@@ -1500,8 +1500,8 @@ void conversation::changeDialog(int numDialog)
 /*************************************************************************
  *                                 open                                  *
  *************************************************************************/
-void dialogWindow::open(Farso::GuiInterface* gui, character* PC, conversation* cv,
-                        string pictureFile)
+void dialogWindow::open(Farso::GuiInterface* gui, character* PC, 
+                        conversation* cv, string pictureFile)
 {
    dirs dir;
    int midX = Farso::SCREEN_X / 2;
@@ -1587,8 +1587,8 @@ void dialogWindow::redraw()
 /*************************************************************************
  *                                treat                                  *
  *************************************************************************/
-bool dialogWindow::treat(Farso::GuiObject* guiObj, int eventInfo, itemWindow* infoW,
-                         engine* curEngine)
+bool dialogWindow::treat(Farso::GuiObject* guiObj, int eventInfo, 
+                         itemWindow* infoW, engine* curEngine, Uint8* keys)
 {
    barterWindow tradeWindow;
    int index = -1;
@@ -1598,7 +1598,56 @@ bool dialogWindow::treat(Farso::GuiObject* guiObj, int eventInfo, itemWindow* in
       /* No Opened window, so no event to treat here */
       return(false);
    }
+   
+   /* Verify Key-selection */
+   if(keys[SDLK_1])
+   {
+      pressKey = 1;
+   }
+   else if(keys[SDLK_2])
+   {
+      pressKey = 2;
+   }
+   else if(keys[SDLK_3])
+   {
+      pressKey = 3;
+   }
+   else if(keys[SDLK_4])
+   {
+      pressKey = 4;
+   }
+   else if(keys[SDLK_5])
+   {
+      pressKey = 5;
+   }
+   else if(keys[SDLK_6])
+   {
+      pressKey = 6;
+   }
+   else if(keys[SDLK_7])
+   {
+      pressKey = 7;
+   }
+   else if(keys[SDLK_8])
+   {
+      pressKey = 8;
+   }
+   else if(keys[SDLK_9])
+   {
+      pressKey = 9;
+   }
+   else if(pressKey != 0)
+   {
+      if(pcSelText->haveItem(pressKey-1))
+      {
+         conv->proccessAction(pressKey-1, curEngine);
+         pressKey = 0;
+         return(true);
+      }
+      pressKey = 0;
+   }
 
+   /* Verify GUI events */
    if(eventInfo == Farso::EVENT_SELECTED_SEL_TEXT)
    {
       if(guiObj == (Farso::GuiObject*)pcSelText)
@@ -1677,6 +1726,7 @@ void dialogWindow::clearOptions()
    if(isOpened())
    {
       pcSelText->clearText();
+      pressKey = 0;
    }
 }
 
@@ -1700,4 +1750,5 @@ Farso::GuiInterface* dialogWindow::usedGui = NULL;
 Farso::RolBar* dialogWindow::npcText = NULL;
 Farso::SelText* dialogWindow::pcSelText = NULL;
 Farso::Button* dialogWindow::barterButton = NULL;
+int dialogWindow::pressKey = 0;
 
