@@ -202,7 +202,7 @@ void TabBox::draw()
    }
 
    unsigned int i;
-   int incX = (x2-x1) / tabs.size();
+   int incX = (x2-x1) / (int)tabs.size();
    int posX = 0;
    int endPos = 0;
    TabObj* obj;
@@ -301,7 +301,7 @@ bool TabBox::verifyChanges(int mouseX, int mouseY)
    {
       return(false);//nothing to verify
    }
-   int incX = (x2-x1) / tabs.size();
+   int incX = (x2-x1) / (int)tabs.size();
    int cur = 0;
    TabObj* obj = NULL;
 
@@ -315,6 +315,10 @@ bool TabBox::verifyChanges(int mouseX, int mouseY)
          active = obj;
          draw();
          setChanged();
+#ifdef FARSO_USE_DNT_SOUND
+         /* Play sound */
+         snd.addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/zipclick-press.ogg");
+#endif
          return(true);
       }
    }

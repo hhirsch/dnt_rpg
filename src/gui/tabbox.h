@@ -30,6 +30,10 @@
 #include "guiobject.h"
 #include "guilist.h"
 
+#ifdef FARSO_USE_DNT_SOUND
+   #include "../sound/sound.h"
+#endif
+
 namespace Farso
 {
 
@@ -106,6 +110,9 @@ class TabBox: public GuiObject
       std::list<TabObj*> tabs;
 
       TabObj* active;  /**< The active tabObj */
+#ifdef FARSO_USE_DNT_SOUND
+      sound snd;   /**< Sound controller */
+#endif
 };
 
 }
