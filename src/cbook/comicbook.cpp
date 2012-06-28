@@ -321,6 +321,12 @@ void comicBook::render(comicPage* curPage, float scale)
    SDL_PumpEvents();
    keys = SDL_GetKeyState(NULL);
    mButton = SDL_GetMouseState(&mouseX, &mouseY);
+   
+   /* Clear events */
+   SDL_Event event;
+   while(SDL_PollEvent(&event))
+   {
+   }
 
    /* Clear screen */
    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);

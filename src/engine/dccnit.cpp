@@ -1155,6 +1155,7 @@ void engine::splashScreen()
       SDL_GL_SwapBuffers();
 
       SDL_PumpEvents();
+      clearEventsQueue();
       mButton = SDL_GetMouseState(&x,&y);
       keys = SDL_GetKeyState(NULL);
 
@@ -1170,6 +1171,7 @@ void engine::splashScreen()
    while(mButton & SDL_BUTTON(1))
    {
       SDL_PumpEvents();
+      clearEventsQueue();
       mButton = SDL_GetMouseState(&x,&y);
       SDL_Delay(50);
    }
@@ -1258,6 +1260,7 @@ int engine::optionsScreen()
       {
          timeAnterior = time;
          SDL_PumpEvents();
+         clearEventsQueue();
          glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
          glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
          keys = SDL_GetKeyState(NULL);
@@ -1350,6 +1353,7 @@ int engine::characterScreen()
       {
          timeAnterior = time;
          SDL_PumpEvents();
+         clearEventsQueue();
          glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
          glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
          keys = SDL_GetKeyState(NULL);
@@ -4120,6 +4124,7 @@ void engine::showImage(string fileName)
    {
       //Wait for Mouse Button Release
       SDL_PumpEvents();
+      clearEventsQueue();
       int x,y;
       mButton = SDL_GetMouseState(&x,&y);
 
@@ -4155,6 +4160,18 @@ fightSystem* engine::getFightSystem()
 Map* engine::getCurrentMap()
 {
    return(actualMap);
+}
+
+/*********************************************************************
+ *                        clearEventsQueue                           *
+ *********************************************************************/
+void engine::clearEventsQueue()
+{
+   /* Clear events */
+   SDL_Event event;
+   while(SDL_PollEvent(&event))
+   {
+   }
 }
 
 /*********************************************************************

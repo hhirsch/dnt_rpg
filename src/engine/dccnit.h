@@ -446,6 +446,8 @@ class engine
 
       /*! Clear and free all current game related things */
       void quitCurrentGame();
+      /*! Clear the SDL events queue, ignoring them all */
+      void clearEventsQueue();
 
       dirs dir;                    /**< Data directories finder */
 

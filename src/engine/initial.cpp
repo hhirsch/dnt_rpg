@@ -119,6 +119,11 @@ int initialScreen::run(int Status,GLdouble proj[16],
       {
          tempoAnterior = tempo;
          SDL_PumpEvents();
+         /* Clear events */
+         SDL_Event event;
+         while(SDL_PollEvent(&event))
+         {
+         }
          keys = SDL_GetKeyState(NULL);
          glClearColor(0,0,0,1);
          glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));

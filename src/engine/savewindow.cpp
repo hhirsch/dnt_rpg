@@ -187,6 +187,11 @@ int saveWindow::run(bool load, GLuint tituloId,
 
          /* Get Events */
          SDL_PumpEvents();
+         /* Clear events */
+         SDL_Event event;
+         while(SDL_PollEvent(&event))
+         {
+         }
          keys = SDL_GetKeyState(NULL);
          mButton = SDL_GetMouseState(&x,&y);
          gui->manipulateEvents(x,y,mButton,keys, eventInfo);
