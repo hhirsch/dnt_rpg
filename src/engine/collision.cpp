@@ -428,7 +428,7 @@ bool collision::canWalk(character* actor, boundingBox& actorBox,
             character* pers = (character*)list->getFirst();
             for(j = 0; j < list->getTotal(); j++)
             {
-               if(pers != actor)
+               if( (pers != actor) && (pers->isAlive()) )
                {
                   colBox = pers->scNode->getBoundingBox();
                   if(actorBox.intercepts(colBox))

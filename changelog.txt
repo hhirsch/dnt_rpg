@@ -25,7 +25,8 @@ BugFixes:
           or equal to  single buffer;
  - dialogWindow: Fixed a bug that open the window before mouse
                  button release, automatically selecting a dialog
-					  option sometimes;
+                 option sometimes;
+ - Removed collision with dead characters to avoid potential path block;
 
 ================================================
 |                Version 0.9                   |
