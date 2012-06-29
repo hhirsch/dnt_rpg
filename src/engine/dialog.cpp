@@ -1638,49 +1638,57 @@ bool dialogWindow::treat(Farso::GuiObject* guiObj, int eventInfo,
    }
    else if(pressKey != 0)
    {
-      if(pcSelText->haveItem(pressKey-1))
+      if(pcSelText->haveItem(pcSelText->getItemInfo(pressKey-1)))
       {
-         conv->proccessAction(pressKey-1, curEngine);
+         conv->proccessAction(pcSelText->getItemInfo(pressKey-1), curEngine);
          pressKey = 0;
          return(true);
       }
       pressKey = 0;
    }
-
-   /* Verify GUI events */
-   if(eventInfo == Farso::EVENT_SELECTED_SEL_TEXT)
+   
+   if(pressKey)
    {
-      if(guiObj == (Farso::GuiObject*)pcSelText)
-      {
-         /* Get the last Selected Item Index */
-         pcSelText->getLastSelectedItem(&index);
-
-         if(index != -1)
-         {
-            /* Process the action! */
-            conv->proccessAction(index, curEngine);
-         }
-         return(true);
-      }
+      pcSelText->forceSelectedItem(pressKey-1);
+      return(true);
    }
-   else if(eventInfo == Farso::EVENT_PRESSED_BUTTON)
+   else
    {
-      if(guiObj == (Farso::GuiObject*)barterButton)
+      /* Verify GUI events */
+      if(eventInfo == Farso::EVENT_SELECTED_SEL_TEXT)
       {
-         /* Closes the dialog window  */
-         close();
-
-         /* If exists a barter, delete it! */
-         if( (tradeWindow.isOpen()))
+         if(guiObj == (Farso::GuiObject*)pcSelText)
          {
-            tradeWindow.close();
+            /* Get the last Selected Item Index */
+            pcSelText->getLastSelectedItem(&index);
+            
+            if(index != -1)
+            {
+               /* Process the action! */
+               conv->proccessAction(index, curEngine);
+            }
+            return(true);
          }
-         
-         /* Open the trade. If trade button is avalaible, the
-          * owner is, for sure, a character. */
-         tradeWindow.open((character*)conv->getOwner(), conv->getPC(), 
-                          usedGui, infoW, curEngine);
-
+      }
+      else if(eventInfo == Farso::EVENT_PRESSED_BUTTON)
+      {
+         if(guiObj == (Farso::GuiObject*)barterButton)
+         {
+            /* Closes the dialog window  */
+            close();
+            
+            /* If exists a barter, delete it! */
+            if( (tradeWindow.isOpen()))
+            {
+               tradeWindow.close();
+            }
+            
+            /* Open the trade. If trade button is avalaible, the
+             * owner is, for sure, a character. */
+            tradeWindow.open((character*)conv->getOwner(), conv->getPC(), 
+                             usedGui, infoW, curEngine);
+            
+         }
       }
    }
    return(false);

@@ -99,6 +99,12 @@ class SelText: public GuiObject
    
       /*! Verify if have item "i" on options */
       bool haveItem(int i);
+   
+      /*! Force an item to be selected */
+      void forceSelectedItem(int i);
+   
+      /*! Get info of item "i" on the selection options */
+      int getItemInfo(int i);
 
    private:
       /*! Write to the surface the selected item on differente color.
