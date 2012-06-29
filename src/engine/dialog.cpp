@@ -23,6 +23,7 @@
 #include "../lang/translate.h"
 #include "../etc/dirs.h"
 #include "../classes/mission.h"
+#include "../sound/sound.h"
 #include "briefing.h"
 #include "barterwindow.h"
 #include "modstate.h"
@@ -1644,6 +1645,11 @@ bool dialogWindow::treat(Farso::GuiObject* guiObj, int eventInfo,
       /* Apply selected, if exists */
       if(pcSelText->haveItem(pressKey-1))
       {
+         sound snd;
+         /* Play Selection Sound */
+         snd.addSoundEffect(SOUND_NO_LOOP,
+                            "sndfx/gui/simple-gui-click.ogg");
+         /* Proccess the action */
          conv->proccessAction(pcSelText->getItemInfo(pressKey-1), curEngine);
          pressKey = 0;
          return(true);
