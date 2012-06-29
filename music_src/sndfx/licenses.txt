@@ -21,7 +21,7 @@ simple-gui-click.flac
 
 koops_page-turn-13.wav
    author: Koops
-   license: CC-BY
+   license: CC-BY 3.0
    source: http://www.freesound.org/people/Koops/sounds/20247/
 
 zipclick-press.ogg
@@ -37,4 +37,8 @@ cloth-inv-edit.wav
    author: artisticdude
    modified: qubodup
 
+menu-nav3.wav
+   author: DJ Chronos
+   license: CC-BY 3.0
+   source: http://www.freesound.org/people/DJ%20Chronos/sounds/29929/
 

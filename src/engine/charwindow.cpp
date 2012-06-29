@@ -296,6 +296,8 @@ void charWindow::close()
       inter->closeWindow(intWindow);
       intWindow = NULL;
       current = NULL;
+      sound snd;
+      snd.addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/close.ogg");
    }
 
    /* Close and delete Skill Window */

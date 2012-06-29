@@ -17,5 +17,8 @@ simple-gui-click.ogg
    sources: http://www.freesound.org/people/qubodup/sounds/159698
             http://www.freesound.org/people/qubodup/sounds/159697
 
-
+close.ogg
+   author: DJ Chronos
+   license: CC-BY 3.0
+   source: http://www.freesound.org/people/DJ%20Chronos/sounds/29929/
 

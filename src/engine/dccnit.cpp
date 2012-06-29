@@ -2162,11 +2162,12 @@ void engine::treatGuiEvents(Farso::GuiObject* object, int eventInfo)
             /* Open / Close the minimap window */
             if(!mapWindow->isOpened())
             {
-               mapWindow->open(gui, 0,0, actualMap);
                snd->addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/turn_page.ogg");
+               mapWindow->open(gui, 0,0, actualMap);
             }
             else
             {
+               snd->addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/close.ogg");
                mapWindow->close(gui);
             }
          }
@@ -2201,6 +2202,7 @@ void engine::treatGuiEvents(Farso::GuiObject* object, int eventInfo)
             {
                if(journal->isOpen())
                {
+                  snd->addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/close.ogg");
                   journal->close();
                }
                else
@@ -2971,11 +2973,12 @@ int engine::treatIO(SDL_Surface *screen)
       {
          if(!mapWindow->isOpened())
          {
-            mapWindow->open(gui, 0,0, actualMap);
             snd->addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/turn_page.ogg");
+            mapWindow->open(gui, 0,0, actualMap);
          }
          else
          {
+            snd->addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/close.ogg");
             mapWindow->close(gui);
          }
 
@@ -3037,6 +3040,7 @@ int engine::treatIO(SDL_Surface *screen)
          {
             if(journal->isOpen())
             {
+               snd->addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/close.ogg");
                journal->close();
             }
             else
@@ -4088,6 +4092,7 @@ void engine::openCloseInventoryWindow()
    }
    else
    {
+      snd->addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/close.ogg");
       delete(inventoryWindow);
       inventoryWindow = NULL;
    }
