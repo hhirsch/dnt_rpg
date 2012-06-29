@@ -1,0 +1,33 @@
+drop_item.rg
+explosao_1.rg
+leve_1.rg
+leve_2.rg
+leve_3.rg
+licenses.txt
+metralha_1.rg
+mission_complete.rg
+mission_failed.rg
+rifle_1.rg
+rifle_2.rg
+   author: farrer (DNTeam)
+   license: GPLv3+
+
+scroll-step-hover-sound-for-user-interface.flac
+simple-gui-click.flac
+   author: qubodup
+   license: CC0
+   sources: http://www.freesound.org/people/qubodup/sounds/159698
+            http://www.freesound.org/people/qubodup/sounds/159697
+
+koops_page-turn-13.wav
+   author: Koops
+   license: CC-BY
+   source: http://www.freesound.org/people/Koops/sounds/20247/
+
+zipclick-press.ogg
+zipclick-release.ogg
+   license: CC0/Public Domain
+   source: http://opengameart.org/content/zippo-click-sound
+   author: dawith <dawith AT t-2 DOT net>
+
+
