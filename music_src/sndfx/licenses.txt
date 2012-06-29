@@ -42,3 +42,8 @@ menu-nav3.wav
    license: CC-BY 3.0
    source: http://www.freesound.org/people/DJ%20Chronos/sounds/29929/
 
+soda-machine.wav
+   author: cmusounddesign
+   license: CC-BY 3.0
+   source: http://www.freesound.org/people/cmusounddesign/sounds/84710/
+
