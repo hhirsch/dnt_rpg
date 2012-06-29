@@ -30,4 +30,11 @@ zipclick-release.ogg
    source: http://opengameart.org/content/zippo-click-sound
    author: dawith <dawith AT t-2 DOT net>
 
+turn_page-edit1.wav
+cloth-inv-edit.wav
+   license: GPLv3
+   source: http://opengameart.org/content/inventory-sound-effects
+   author: artisticdude
+   modified: qubodup
+
 
