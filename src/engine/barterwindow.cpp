@@ -21,6 +21,7 @@
 #include "barterwindow.h"
 #include "cursor.h"
 #include "../etc/dirs.h"
+#include "../sound/sound.h"
 
 /***************************************************************
  *                         Constructor                         *
@@ -327,6 +328,9 @@ void barterWindow::openMenu(int mouseX, int mouseY)
    }
 
    objectMenu->setPosition(x,y);
+
+   sound snd;
+   snd.addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/zipclick-press.ogg");
 }
 
 /**************************************************************

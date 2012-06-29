@@ -343,6 +343,11 @@ int Menu::run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
          /* Play Over Sound */
          snd.addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/scroll-step.ogg");
       }
+      else if(*pronto)
+      {
+         /* Play done sound */
+         snd.addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/simple-gui-click.ogg");
+      }
 #endif
    }
 

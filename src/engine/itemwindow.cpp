@@ -21,6 +21,7 @@
 #include "itemwindow.h"
 #include "../classes/weapon.h"
 #include "../lang/translate.h"
+#include "../sound/sound.h"
 using namespace std;
 
 /********************************************************************
@@ -254,6 +255,10 @@ void itemWindow::open(object* item)
    intWindow->setExternPointer(&intWindow);
    intWindow->setAttributes(true,true,false,false);
    inter->openWindow(intWindow);
+   
+   /* Play Sound */
+   sound snd;
+   snd.addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/turn_page.ogg");
 }
 
 /********************************************************************

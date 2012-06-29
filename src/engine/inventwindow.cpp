@@ -429,14 +429,16 @@ void inventWindow::verifyUseObject()
 /**************************************************************
  *                             treat                          *
  **************************************************************/
-int inventWindow::treat(Farso::GuiObject* guiObj, int eventInfo, cursor* mouseCursor,
-                        Map* actualMap, GLfloat X, GLfloat Z, bool seller)
+int inventWindow::treat(Farso::GuiObject* guiObj, int eventInfo, 
+      cursor* mouseCursor, Map* actualMap, GLfloat X, GLfloat Z, bool seller)
 {
    if(!isOpen())
    {
       /* Window is no more opened */
       return(INVENTORY_ACTION_NONE);
    }
+   
+   sound snd;
    int x,y;
    Uint8 Mbotao = SDL_GetMouseState(&x,&y);
 
@@ -490,6 +492,7 @@ int inventWindow::treat(Farso::GuiObject* guiObj, int eventInfo, cursor* mouseCu
             activeObject = NULL;
             state = INVENTORY_STATE_NONE;
             reDraw();
+            snd.addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/zipclick-release.ogg");
             return(INVENTORY_ACTION_REMOVE_ITEM);
          }
       }
@@ -570,6 +573,8 @@ int inventWindow::treat(Farso::GuiObject* guiObj, int eventInfo, cursor* mouseCu
                {
                   activeObject = NULL;
                   state = INVENTORY_STATE_NONE;
+                  snd.addSoundEffect(SOUND_NO_LOOP, 
+                        "sndfx/gui/zipclick-release.ogg");
                   reDraw();
                }
                return(INVENTORY_ACTION_CHANGE_ITEM);
@@ -643,6 +648,8 @@ int inventWindow::treat(Farso::GuiObject* guiObj, int eventInfo, cursor* mouseCu
             {
                if(inventories->equipObject(activeObject,INVENTORY_LEFT_HAND))
                {
+                  snd.addSoundEffect(SOUND_NO_LOOP,
+                        "sndfx/gui/zipclick-release.ogg");
                   activeObject = NULL;
                }
 
@@ -651,6 +658,8 @@ int inventWindow::treat(Farso::GuiObject* guiObj, int eventInfo, cursor* mouseCu
             {
                if(inventories->equipObject(activeObject,INVENTORY_RIGHT_HAND))
                {
+                  snd.addSoundEffect(SOUND_NO_LOOP,
+                        "sndfx/gui/zipclick-release.ogg");
                   activeObject = NULL;
                }
             }
