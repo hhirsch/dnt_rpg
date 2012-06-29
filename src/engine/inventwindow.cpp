@@ -246,6 +246,9 @@ void inventWindow::openMenu(int x, int y, int type, bool seller)
    objectMenu->setPosition(x,y);
    
    state = INVENTORY_STATE_MENU;
+
+   sound snd;
+   snd.addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/zipclick-press.ogg");
 }
 
 /**************************************************************
