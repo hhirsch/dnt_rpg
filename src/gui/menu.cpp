@@ -273,6 +273,7 @@ int Menu::run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
    Options opt;
    Font fnt;
    fnt.defineFont(opt.getDefaultFont(), 10);
+   int lastItem = actualItem;
 
    /* Draws */
    draw(0);
@@ -335,6 +336,14 @@ int Menu::run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
             x+largura-2,(actualItem)*ITEM_HEIGHT+y+4,
             colors.colorCont[2].R, colors.colorCont[2].G,
             colors.colorCont[2].B, colors.colorCont[2].A);
+
+#ifdef FARSO_USE_DNT_SOUND
+      if(actualItem != lastItem)
+      {
+         /* Play Over Sound */
+         snd.addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/scroll-step.ogg");
+      }
+#endif
    }
 
    /* Verify if the mouse is at Menu */

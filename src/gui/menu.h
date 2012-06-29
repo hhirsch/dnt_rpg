@@ -31,6 +31,12 @@
 #include "guiobject.h"
 #include "guilist.h"
 
+#ifdef FARSO_USE_DNT_SOUND
+   #include "../sound/sound.h"
+#endif
+
+
+
 namespace Farso
 {
 
@@ -119,6 +125,9 @@ class Menu: public GuiList
       SDL_Surface* wSurface;   /**< Surface where the menu is */
       int wWidth;              /**< Usefull Surface Width */
       int wHeight;             /**< Usefull Surface Height */
+#ifdef FARSO_USE_DNT_SOUND
+      sound snd;            /**< Sound engine used */
+#endif
 
 };
 
