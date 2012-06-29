@@ -50,6 +50,7 @@ SelText::SelText(int xa,int ya,int xb,int yb, string text0, string text1,
    optInfo[4] = 0;
 
    selec = -1;
+   selForced = false;
    pressed = false;
 }
 
@@ -155,12 +156,26 @@ bool SelText::haveItem(int i)
  ***************************************************************************/
 void SelText::forceSelectedItem(int i)
 {
-   if( ((i >= 0) && (i < MAX_OPTIONS)) && (i != selec) )
+   if( (haveItem(i)) && (i != selec) )
    {
+      selForced = true;
       selec = i;
       draw();
       setChanged();
+#ifdef FARSO_USE_DNT_SOUND
+      /* Play Over Sound */
+      snd.addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/scroll-step.ogg");
+#endif
    }
+}
+
+/***************************************************************************
+ *                          unForceSelection                               *
+ ***************************************************************************/
+void SelText::unForceSelection()
+{
+   selForced = false;
+   selec = -1;
 }
 
 /***************************************************************************
@@ -168,7 +183,7 @@ void SelText::forceSelectedItem(int i)
  ***************************************************************************/
 int SelText::getItemInfo(int i)
 {
-   if( ((i >= 0) && (i < MAX_OPTIONS)) && (i != selec) )
+   if(haveItem(i))
    {
       return(optInfo[i]);
    }
@@ -223,6 +238,12 @@ int SelText::getSelectedItem(int ya )
 int SelText::treat(int xa,int ya, Uint8 Mbotao)
 {
    int lastSelec = selec;
+
+   /* Selection forced, no need to check */
+   if(selForced)
+   {
+      return(-2);
+   }
    selec = -1;
 
    if(!isMouseIn(xa,ya))
@@ -252,6 +273,13 @@ int SelText::treat(int xa,int ya, Uint8 Mbotao)
    {
       draw();
       setChanged();
+#ifdef FARSO_USE_DNT_SOUND
+      if(selec != -1)
+      {
+         /* Play Over Sound */
+         snd.addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/scroll-step.ogg");
+      }
+#endif
    }
 
    /* Test optText pression */
@@ -262,6 +290,10 @@ int SelText::treat(int xa,int ya, Uint8 Mbotao)
    else if(pressed)
    {
       pressed = false;
+#ifdef FARSO_USE_DNT_SOUND
+      /* Play Selection Sound */
+      snd.addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/simple-gui-click.ogg");
+#endif
       return(selec);
    }
    return(-2);

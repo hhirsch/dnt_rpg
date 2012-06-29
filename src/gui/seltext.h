@@ -29,6 +29,10 @@
 #include "mouse.h"
 #include "guiobject.h"
 
+#ifdef FARSO_USE_DNT_SOUND
+   #include "../sound/sound.h"
+#endif
+
 namespace Farso
 {
 
@@ -102,6 +106,9 @@ class SelText: public GuiObject
    
       /*! Force an item to be selected */
       void forceSelectedItem(int i);
+
+      /*! To unforce the current selection */
+      void unForceSelection();
    
       /*! Get info of item "i" on the selection options */
       int getItemInfo(int i);
@@ -123,6 +130,11 @@ class SelText: public GuiObject
       int selec;                   /**< last item selected */
       Colors cores;                /**< colors */
       bool pressed;                /**< while pressed == true */
+      bool selForced;              /**< If forced a selection */
+#ifdef FARSO_USE_DNT_SOUND
+      sound snd;            /**< Sound engine used */
+#endif
+
 };
 
 }

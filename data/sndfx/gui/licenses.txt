@@ -10,3 +10,12 @@ turn_page.ogg
    source: http://opengameart.org/content/inventory-sound-effects
    author: artisticdude
 
+scroll-step.ogg
+simple-gui-click.ogg
+   author: qubodup
+   license: CC0
+   sources: http://www.freesound.org/people/qubodup/sounds/159698
+            http://www.freesound.org/people/qubodup/sounds/159697
+
+
+

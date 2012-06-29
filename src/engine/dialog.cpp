@@ -1638,7 +1638,11 @@ bool dialogWindow::treat(Farso::GuiObject* guiObj, int eventInfo,
    }
    else if(pressKey != 0)
    {
-      if(pcSelText->haveItem(pcSelText->getItemInfo(pressKey-1)))
+      /* Unforce the selection to enable mouse changes */
+      pcSelText->unForceSelection();
+
+      /* Apply selected, if exists */
+      if(pcSelText->haveItem(pressKey-1))
       {
          conv->proccessAction(pcSelText->getItemInfo(pressKey-1), curEngine);
          pressKey = 0;
