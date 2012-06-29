@@ -2159,9 +2159,16 @@ void engine::treatGuiEvents(Farso::GuiObject* object, int eventInfo)
          break;
          case SHORTCUTS_WINDOW_MAP:
          {
-            /* Open, if not opened the minimap window */
-            mapWindow->open(gui, 0,0, actualMap);
-            snd->addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/turn_page.ogg");
+            /* Open / Close the minimap window */
+            if(!mapWindow->isOpened())
+            {
+               mapWindow->open(gui, 0,0, actualMap);
+               snd->addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/turn_page.ogg");
+            }
+            else
+            {
+               mapWindow->close(gui);
+            }
          }
          break;
          case SHORTCUTS_WINDOW_END_TURN:
@@ -2176,10 +2183,7 @@ void engine::treatGuiEvents(Farso::GuiObject* object, int eventInfo)
          case SHORTCUTS_WINDOW_INVENTORY:
          {
             /* Open, if not already opened, the invetory window */
-            if(!inventoryWindow)
-            {
-               openCloseInventoryWindow();
-            }
+            openCloseInventoryWindow();
          }
          break;
          case SHORTCUTS_WINDOW_CHARACTER:
