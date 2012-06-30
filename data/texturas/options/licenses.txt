@@ -1,0 +1,41 @@
+anisotropic.png
+bumpmapping.png
+farview.png
+highlightenemy.png
+multitexture.png
+showenemycircles.png
+stencil_size.png
+   author: farrer (DNTeam)
+   license: GPLv3 or later
+
+alwaysrun.png
+antialiasing.png
+autoendturn.png
+music.png
+sndfx.png
+   author: farrer (DNTeam)
+   license: GPLv3 or later
+   note: edited by qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+
+camera.png
+   author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   license: CC0/Public Domain
+   source: http://openclipart.org/detail/170979/
+
+language.png
+   author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   license: CC0/Public Domain
+   source: http://openclipart.org/detail/170980/
+
+fullscreen.png
+grass.png
+particles.png
+reflexions.png
+resolution.png
+shadow.png
+   author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   license: GPLv3 or later, CC-BY-SAv3+
+
+exit.png
+   author: alerante <http://commons.wikimedia.org/wiki/User:Alerante>
+   license: CC0/Public Domain
