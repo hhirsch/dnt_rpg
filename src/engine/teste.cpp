@@ -75,7 +75,7 @@ int main(int argc, char **argv)
       cout << "I'll conect to " << server << endl;
    #endif
 
-   Farso::init(&screen,"DccNiTghtmare", opt.getScreenWidth(), 
+   Farso::init(&screen,"DNT", opt.getScreenWidth(), 
               opt.getScreenHeight(),  opt.getEnableFullScreen(), 
               opt.getAntiAliasing(), opt.getStencilBufferSize());
    
