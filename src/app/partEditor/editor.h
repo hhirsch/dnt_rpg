@@ -106,6 +106,7 @@ class editor
       bool fileLoading;        /**< If is loading or saving */
       void openFileWindow(bool load);
 
+      Farso::MouseCursor curs;
 
       std::string curFileName;      /**< Filename of Current Particle Open */
 

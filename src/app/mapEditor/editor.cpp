@@ -93,7 +93,6 @@ Editor::Editor()
    gameSky = new sky();
    curScene.init();
    wTypes.init();
-   curs.init();
 
    /* Initialize all shaders */
    glslShaders.init();

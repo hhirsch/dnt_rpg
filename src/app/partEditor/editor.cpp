@@ -338,6 +338,13 @@ void editor::render()
 
    draw2DMode(); 
       gui->draw(proj,modl,viewPort);
+      
+      /* Cursor */
+      glPushMatrix();
+         curs.draw(mouseX, mouseY, 0);
+      glPopMatrix();
+
+
    draw3DMode(INDOOR_FARVIEW);
 
    glFlush();

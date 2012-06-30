@@ -28,6 +28,7 @@ BugFixes:
                  button release, automatically selecting a dialog
                  option sometimes;
  - Removed collision with dead characters to avoid potential path block;
+ - dntPartEditor: added mouse cursor render;
 
 ================================================
 |                Version 0.9                   |
