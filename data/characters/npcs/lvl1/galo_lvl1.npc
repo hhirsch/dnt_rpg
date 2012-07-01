@@ -2,6 +2,7 @@ name = Galo
 model = models/personagens/galo/model.cfg
 portrait = characters/portraits/ameiva.png
 battleScript = ia/script/fight/fight_animal.dsl
+generalScript = ia/script/general/hens_idle.dsl
 bloodFileName = particles/blood2.par
 bloodPosition = 10
 fortitude = 10

@@ -16,6 +16,7 @@
  - Zoom can be done also by mouse wheel;
  - Sound Effect for button press and release;
  - Enabled keyboard for dialog option selection;
+ - Script to control chicken idle behaviour;
 
 BugFixes:
  - heightmap2dnt: Fixed a missing include;

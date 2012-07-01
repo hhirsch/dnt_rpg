@@ -1,4 +1,10 @@
 
+cluck*
+   author: dobroide
+   license: CC-BY 3.0
+   source: http://www.freesound.org/people/dobroide/sounds/120583/
+           http://www.freesound.org/people/dobroide/sounds/120584/
+
 galinha_agitada.ogg
 galinha_tranquila.ogg
    author: Estrada Real Digital
