@@ -5,10 +5,18 @@ door_open.ogg
    Source: http://www.freesound.org/people/FreqMan/sounds/23168/
    Note: Edited by DNTeam.
 
-
 drop_item.ogg  
 et.ogg  
 take_item.ogg
    Author: DNTeam
    License: GPLv3 or later
 
+door_break.ogg
+   Author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   License: GPLv3+, CC-BY-SAv3+
+   Source: http://www.freesound.org/people/qubodup/sounds/160213/
+
+door_unlock.ogg
+   Author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   License: GPLv3+, CC-BY-SAv3+
+   Source: http://www.freesound.org/people/qubodup/sounds/160215/
