@@ -20,3 +20,9 @@ door_unlock.ogg
    Author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
    License: GPLv3+, CC-BY-SAv3+
    Source: http://www.freesound.org/people/qubodup/sounds/160215/
+
+door_pick_lock.ogg
+   author: dobroide
+   license: CC-BY 3.0
+   source: http://www.freesound.org/people/dobroide/sounds/93664/
+

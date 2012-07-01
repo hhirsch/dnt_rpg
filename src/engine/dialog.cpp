@@ -1,21 +1,21 @@
 /* 
-  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  DNT: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
-  This file is part of DccNiTghtmare.
+  This file is part of DNT.
  
-  DccNiTghtmare is free software: you can redistribute it and/or modify
+  DNT is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  DccNiTghtmare is distributed in the hope that it will be useful,
+  DNT is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+  along with DNT.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "dialog.h"
@@ -50,6 +50,7 @@ using namespace std;
 #define TALK_ACTION_GIVE_MONEY          15 /* Give money quantity */
 #define TALK_ACTION_CALL_SCRIPT         16 /* Call a one time finish script */
 #define TALK_ACTION_OPEN                17 /* Open Door or Object Owner */
+#define TALK_ACTION_PLAY_SOUND          18 /* Play a sound effect */
 
 #define TALK_TEST_TRUE                0  /* Always True */
 #define TALK_TEST_ROLL                1  /* Roll some test */
@@ -101,6 +102,7 @@ using namespace std;
 #define TK_ACTION_MAP_TRAVEL "map_travel"
 #define TK_ACTION_CALL_SCRIPT "call_script"
 #define TK_ACTION_OPEN "open"
+#define TK_ACTION_PLAY_SOUND "play_sound"
 
 /* Test Tokens */
 #define TK_TEST_ROLL "roll"
@@ -661,6 +663,10 @@ int conversation::getActionID(string token, string fileName, int line)
    {
       return(TALK_ACTION_OPEN);
    }
+   else if(token == TK_ACTION_PLAY_SOUND)
+   {
+      return(TALK_ACTION_PLAY_SOUND);
+   }
 
    printError(fileName, "Unknow action!", line);
    return(-1);
@@ -947,7 +953,8 @@ int conversation::loadFile(string name)
                            (tact->id == TALK_ACTION_RECEIVE_ITEM) ||
                            (tact->id == TALK_ACTION_KILL_ALL) ||
                            (tact->id == TALK_ACTION_MAP_TRAVEL) ||
-                           (tact->id == TALK_ACTION_CALL_SCRIPT) )
+                           (tact->id == TALK_ACTION_CALL_SCRIPT) ||
+                           (tact->id == TALK_ACTION_PLAY_SOUND) )
                   {
                      //get name
                      token = getString(position, buffer, separator);
@@ -1194,6 +1201,18 @@ void conversation::proccessAction(int opcao, engine* curEngine)
                  d->flip();
                }
             }
+         }
+         break;
+
+         case TALK_ACTION_PLAY_SOUND:
+         {
+            /* Play a sound at owner's position */
+            sound snd;
+            snd.addSoundEffect(owner->scNode->getPosX(), 
+                               owner->scNode->getPosY(),
+                               owner->scNode->getPosZ(),
+                               SOUND_NO_LOOP,
+                               actions[i].satt);
          }
          break;
          
