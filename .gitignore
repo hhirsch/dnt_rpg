@@ -11,6 +11,11 @@ po/make_po.log
 *.toc
 *.aux
 
+# Blender backups
+*.blend1
+*.blend2
+*.blend3
+
 # Pdfs of the books
 doc/livroJogador.pdf
 doc/playerBook.pdf
