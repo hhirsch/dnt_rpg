@@ -47,3 +47,33 @@ soda-machine.wav
    license: CC-BY 3.0
    source: http://www.freesound.org/people/cmusounddesign/sounds/84710/
 
+rbh-household-lock.wav
+   author: RHumphries
+   license: CC-BY 3.0
+   source: http://www.freesound.org/people/RHumphries/sounds/987/
+
+dobroide-goose.wav
+door-slam.wav
+hens_clucking_01.wav
+hens_clucking_02.wav
+rooster.wav
+setting_clock.wav
+   author: dobroide
+   license: CC-BY 3.0
+   source: http://www.freesound.org/people/dobroide/sounds/65263/
+           http://www.freesound.org/people/dobroide/sounds/107637/
+           http://www.freesound.org/people/dobroide/sounds/120583/
+           http://www.freesound.org/people/dobroide/sounds/120584/
+           http://www.freesound.org/people/dobroide/sounds/39923/
+           http://www.freesound.org/people/dobroide/sounds/93664/
+
+noisecollector_barks.wav
+   author: NoiseCollector
+   license: CC-BY 3.0
+   source: http://www.freesound.org/people/NoiseCollector/sounds/4912/
+
+rooster_calls.wav
+   author: AGFX
+   license: CC-BY 3.0
+   source: http://www.freesound.org/people/AGFX/sounds/43382/
+
