@@ -73,6 +73,7 @@ hardware. They are:
 
    farrer@anamabeka:~/$ tar -xvjf dnt.tar.bz2
    farrer@anamabeka:~/$ cd dnt
+   farrer@anamabeka:~/$ autoconf
    farrer@anamabeka:~/dnt/$ ./configure
    farrer@anamabeka:~/dnt/$ make
    farrer@anamabeka:~/dnt/$ sudo make install
@@ -80,12 +81,29 @@ hardware. They are:
    NOTE: the  'make install'  isn't  necessary:  you  can run 
          the game at its local folder.
 
+   NOTE: Any error in the "configure" proccess,  probably  is 
+         related with missing development packages for needed
+         libraries. Check if you installed them.
+
+   NOTE: If  you  didn't  install  the game, in  order to the 
+         language   be   changed,   you'll   need   to  do  a 
+         "make install" only  in  the "po" folder. Otherwise,
+         the game will be only in english.
+ 
    b) WINDOWS (We hope you're not using it on Ruindow$).
 
    To   compile   DNT   on    windows,   you'll   need    the 
 Code::Blocks IDE.  Open the project at ./windows folder on it 
 and compile.
    Don't blame us. Blame Microsoft!
+
+   c) OSX
+
+   You could  either do the Linux proccess or open the XCode4
+project at macos/DccNiTghmare folder and compile there.
+
+   NOTE: Under XCode4 you'll probably need to change paths to
+         your installed libraries to be able to compile it.
 
 ==============================================================
 |                       III - Execution                      |
@@ -95,17 +113,20 @@ and compile.
 
 1) Normal Execution (with "make install")
 
-   Just run "dccnitghtmare" command. Or, to run the map editor
-just run "dntMapEditor" command.
+   Just run "dnt" command.  Or, to run the map editor just run 
+"dntMapEditor" command.
 
 2) Local Execution (without "make install")
 
    To   execute  the  program  without  "make install",  go to 
-directory ./bin and run the file dccnitghtmare.
+directory ./bin and run the file dnt .
 
 ==============================================================
 |                        IV - Input                          |
 ==============================================================
+
+   Those are the defaults. You can  change  the keymap  in the
+options.
 
                  ========================
                  | Camera Movimentation |
@@ -156,10 +177,5 @@ j      =  Open Journal Window
 |                        V - Contacts                        |
 ==============================================================
 
-=========================
-|          DNT          |
-|-----------------------|
-| http://dnt.dnteam.org |
-|     dnt@dnteam.org    |
-=========================
+Contact us via the forum at http://dnt.dnteam.org .
 
