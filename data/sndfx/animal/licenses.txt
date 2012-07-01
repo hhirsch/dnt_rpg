@@ -16,3 +16,9 @@ mudchuteanimals/*
    license: CC-BY-SA 3.0 or later
    source: http://opengameart.org/content/farm-animals
 
+rat/*
+   author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   license: CC-BY 3.0 or later
+   source: http://www.freesound.org/people/qubodup/sounds/160365/
+   attribution: digifishmusic <http://www.freesound.org/people/digifishmusic/>
+   attribution: Brandon Morris <http://opengameart.org/users/haeldb>
