@@ -17,12 +17,12 @@ sndfx.png
    license: GPLv3 or later
    note: edited by qubodup (Iwan Gabovitch) <qubodup@gmail.com>
 
-camera.png
+camera.*
    author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
    license: CC0/Public Domain
    source: http://openclipart.org/detail/170979/
 
-language.png
+language.*
    author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
    license: CC0/Public Domain
    source: http://openclipart.org/detail/170980/
@@ -36,6 +36,8 @@ shadow.png
    author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
    license: GPLv3 or later, CC-BY-SAv3+
 
-exit.png
+exit.*
    author: alerante <http://commons.wikimedia.org/wiki/User:Alerante>
    license: CC0/Public Domain
+   source: https://commons.wikimedia.org/wiki/File:PublicInformationSymbol_EmergencyExit.svg
+   note: edited by qubodup (Iwan Gabovitch) <qubodup@gmail.com>
