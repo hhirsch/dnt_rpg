@@ -1,4 +1,4 @@
-name = Ganso
+name = gettext("Goose")
 model = models/personagens/ganso/ganso.md5def
 portrait = characters/portraits/ameiva.png
 battleScript = ia/script/fight/fight_animal.dsl

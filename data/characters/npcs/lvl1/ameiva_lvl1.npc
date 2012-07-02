@@ -1,4 +1,4 @@
-name = Ameiva
+name = gettext("Ameiva")
 model = models/personagens/Ameiva/modelo.cfg
 portrait = characters/portraits/ameiva.png
 battleScript = ia/script/fight/fight_animal.dsl

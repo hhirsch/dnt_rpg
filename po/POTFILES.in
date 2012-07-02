@@ -524,7 +524,42 @@ data/weapons/types/sizes.dcl
 data/weapons/types/weights.dcl
 
 #characters
+data/characters/pcs/atleticano.pc
+data/characters/pcs/chico.pc
+data/characters/pcs/cruzeirense.pc
+data/characters/pcs/dona.pc
+data/characters/pcs/guri2.pc
+data/characters/pcs/guria.pc
+data/characters/pcs/guri.pc
+data/characters/pcs/hippie.pc
+data/characters/pcs/logan.inv
+data/characters/pcs/logan.pc
+data/characters/pcs/metaleiro.pc
 data/characters/pcs/santa.pc
+data/characters/pcs/velhaca.pc
+data/characters/pcs/zedobar.pc
+
+#animals / npcs
+data/characters/npcs/lvl1/ameiva_lvl1.npc
+data/characters/npcs/lvl1/cowa_lvl1.npc
+data/characters/npcs/lvl1/cowb_lvl1.npc
+data/characters/npcs/lvl1/cowc_lvl1.npc
+data/characters/npcs/lvl1/cow_lvl1.npc
+data/characters/npcs/lvl1/donkey_lvl1.npc
+data/characters/npcs/lvl1/galo_lvl1.npc
+data/characters/npcs/lvl1/horse_lvl1.npc
+data/characters/npcs/lvl1/pig_lvl1.npc
+data/characters/npcs/lvl1/ratazana_lvl1.npc
+data/characters/npcs/lvl1/spider_lvl1.npc
+data/characters/npcs/lvl2/cowa_lvl2.npc
+data/characters/npcs/lvl2/cowb_lvl2.npc
+data/characters/npcs/lvl2/cowc_lvl2.npc
+data/characters/npcs/lvl2/cow_lvl2.npc
+data/characters/npcs/lvl2/galo_lvl2.npc
+data/characters/npcs/lvl2/ganso_lvl2.npc
+data/characters/npcs/lvl3/spider_lvl3.npc
+data/characters/npcs/lvl5/spider_lvl5.npc
+data/characters/npcs/lvl10/spider_lvl10.npc
 
 #scripts
 data/ia/script/general/beggar_idle.dsl

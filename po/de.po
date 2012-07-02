@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2012-06-19 21:48+0200\n"
+"POT-Creation-Date: 2012-07-02 11:00-0300\n"
 "PO-Revision-Date: 2012-05-28 21:08+0000\n"
 "Last-Translator: Iwan Gabovitch <qubodup@gmail.com>\n"
 "Language-Team: German <de@li.org>\n"
@@ -71,9 +71,9 @@ msgid "Critical Hit!"
 msgstr "Kritischer Treffer!"
 
 #: src/classes/actions.cpp:454
-#, fuzzy, c-format
+#, c-format
 msgid "%s try to attack an area."
-msgstr "%s versucht %s anzugreifen"
+msgstr ""
 
 #: src/classes/actions.cpp:640 src/fight/fightSystem.cpp:189
 #, c-format
@@ -84,15 +84,15 @@ msgstr "%s ist tot!"
 msgid "Level"
 msgstr "Level"
 
-#: src/classes/defs.cpp:290 src/engine/charwindow.cpp:209
+#: src/classes/defs.cpp:290 src/engine/charwindow.cpp:210
 msgid "Fortitude"
 msgstr "Tapferkeit"
 
-#: src/classes/defs.cpp:296 src/engine/charwindow.cpp:214
+#: src/classes/defs.cpp:296 src/engine/charwindow.cpp:215
 msgid "Reflexes"
 msgstr "Reflexe"
 
-#: src/classes/defs.cpp:303 src/engine/charwindow.cpp:219
+#: src/classes/defs.cpp:303 src/engine/charwindow.cpp:220
 msgid "I am Not a Fool"
 msgstr "Ich bin kein Narr"
 
@@ -100,11 +100,11 @@ msgstr "Ich bin kein Narr"
 msgid "Invalid Talent"
 msgstr "Ungültiges Talent"
 
-#: src/classes/feats.cpp:242 src/engine/dccnit.cpp:2217
+#: src/classes/feats.cpp:242 src/engine/dccnit.cpp:2229
 msgid "Not enought points to use!"
 msgstr "Nicht genügend Punkte für Gebrauch!"
 
-#: src/classes/mission.cpp:531 src/engine/dialog.cpp:1247
+#: src/classes/mission.cpp:531 src/engine/dialog.cpp:1267
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "Auftrag erledigt: %d XP!"
@@ -126,7 +126,7 @@ msgid "Confirm"
 msgstr "Bestätigen"
 
 #: src/engine/alignwindow.cpp:80 src/engine/aspectwindow.cpp:97
-#: src/engine/attwindow.cpp:246 src/engine/barterwindow.cpp:71
+#: src/engine/attwindow.cpp:246 src/engine/barterwindow.cpp:72
 #: src/engine/classwindow.cpp:124 src/engine/featsel.cpp:259
 #: src/engine/options.cpp:1166 src/engine/racewindow.cpp:126
 #: src/engine/skillwindow.cpp:165 src/engine/teste.cpp:69
@@ -137,15 +137,15 @@ msgstr "Abbrechen"
 msgid "Aspect"
 msgstr "Seitenverhältnis"
 
-#: src/engine/aspectwindow.cpp:67 src/engine/charwindow.cpp:105
+#: src/engine/aspectwindow.cpp:67 src/engine/charwindow.cpp:106
 msgid "Name:"
 msgstr "Name:"
 
-#: src/engine/aspectwindow.cpp:72 src/engine/charwindow.cpp:108
+#: src/engine/aspectwindow.cpp:72 src/engine/charwindow.cpp:109
 msgid "Age:"
 msgstr "Alter:"
 
-#: src/engine/aspectwindow.cpp:76 src/engine/charwindow.cpp:123
+#: src/engine/aspectwindow.cpp:76 src/engine/charwindow.cpp:124
 msgid "Sex:"
 msgstr "Geschlecht:"
 
@@ -165,32 +165,32 @@ msgstr "Leeren"
 msgid "Auto"
 msgstr "Automatisch"
 
-#: src/engine/attwindow.cpp:95 src/engine/charwindow.cpp:166
+#: src/engine/attwindow.cpp:95 src/engine/charwindow.cpp:167
 #: data/skills/forca.ski:1
 msgid "Strength"
 msgstr "Stärke"
 
-#: src/engine/attwindow.cpp:115 src/engine/charwindow.cpp:171
+#: src/engine/attwindow.cpp:115 src/engine/charwindow.cpp:172
 #: data/skills/destreza.ski:1
 msgid "Dexterity"
 msgstr "Geschicklichkeit"
 
-#: src/engine/attwindow.cpp:135 src/engine/charwindow.cpp:176
+#: src/engine/attwindow.cpp:135 src/engine/charwindow.cpp:177
 #: data/skills/constituicao.ski:1
 msgid "Constitution"
 msgstr "Konstitution"
 
-#: src/engine/attwindow.cpp:155 src/engine/charwindow.cpp:181
+#: src/engine/attwindow.cpp:155 src/engine/charwindow.cpp:182
 #: data/skills/inteligencia.ski:1
 msgid "Intelligence"
 msgstr "Intelligenz"
 
-#: src/engine/attwindow.cpp:176 src/engine/charwindow.cpp:186
+#: src/engine/attwindow.cpp:176 src/engine/charwindow.cpp:187
 #: data/skills/sabedoria.ski:1
 msgid "Wisdom"
 msgstr "Weisheit"
 
-#: src/engine/attwindow.cpp:197 src/engine/charwindow.cpp:191
+#: src/engine/attwindow.cpp:197 src/engine/charwindow.cpp:192
 #: data/skills/carisma.ski:1
 msgid "Charisma"
 msgstr "Charisma"
@@ -200,8 +200,8 @@ msgid "Attribute Description"
 msgstr "Eigenschaftsbeschreibung"
 
 #: src/engine/attwindow.cpp:559 src/engine/dccnit.cpp:597
-#: src/engine/dccnit.cpp:2216 src/engine/featsel.cpp:495
-#: src/engine/inventwindow.cpp:366 src/engine/options.cpp:1476
+#: src/engine/dccnit.cpp:2228 src/engine/featsel.cpp:495
+#: src/engine/inventwindow.cpp:369 src/engine/options.cpp:1476
 msgid "Warning"
 msgstr "Warnung"
 
@@ -209,40 +209,40 @@ msgstr "Warnung"
 msgid "You Need to Assign All Attributes."
 msgstr "Sie müssen alle Eigenschaften vergeben"
 
-#: src/engine/barterwindow.cpp:55 src/engine/dialog.cpp:1539
+#: src/engine/barterwindow.cpp:56 src/engine/dialog.cpp:1559
 msgid "Barter"
 msgstr "Tausch-händler"
 
-#: src/engine/barterwindow.cpp:67
+#: src/engine/barterwindow.cpp:68
 msgid "Offer"
 msgstr "Angebot"
 
-#: src/engine/barterwindow.cpp:69
+#: src/engine/barterwindow.cpp:70
 msgid "Impose"
 msgstr "Erzwingen"
 
-#: src/engine/barterwindow.cpp:97 src/engine/barterwindow.cpp:107
+#: src/engine/barterwindow.cpp:98 src/engine/barterwindow.cpp:108
 #: src/engine/inventwindow.cpp:57 src/engine/options.cpp:175
 msgid "Inventory"
 msgstr "Inventar"
 
-#: src/engine/barterwindow.cpp:262
+#: src/engine/barterwindow.cpp:263
 msgid "The barter was accepted."
 msgstr "Der Tausch wurde akzeptiert."
 
-#: src/engine/barterwindow.cpp:267
+#: src/engine/barterwindow.cpp:268
 msgid "The barter was rejected."
 msgstr "Der Tausch wurde abgelehnt."
 
-#: src/engine/barterwindow.cpp:287
+#: src/engine/barterwindow.cpp:288
 msgid "The barter imposition was accepted."
 msgstr "Der Tauschzwang wurde akzeptiert."
 
-#: src/engine/barterwindow.cpp:292
+#: src/engine/barterwindow.cpp:293
 msgid "The barter imposition was rejected."
 msgstr "Der Tauschzwang wurde abgelehnt."
 
-#: src/engine/barterwindow.cpp:311 src/engine/inventwindow.cpp:217
+#: src/engine/barterwindow.cpp:312 src/engine/inventwindow.cpp:217
 msgid "Remove"
 msgstr "Entfernen"
 
@@ -262,89 +262,89 @@ msgstr "Erfolg"
 msgid "Failure"
 msgstr "Fehlschlag"
 
-#: src/engine/character.cpp:568 src/engine/charwindow.cpp:140
+#: src/engine/character.cpp:568 src/engine/charwindow.cpp:141
 msgid "HP"
 msgstr "LP"
 
-#: src/engine/charwindow.cpp:114
+#: src/engine/charwindow.cpp:115
 msgid "Female"
 msgstr "Weiblich"
 
-#: src/engine/charwindow.cpp:117
+#: src/engine/charwindow.cpp:118
 msgid "Male"
 msgstr "Männlich"
 
-#: src/engine/charwindow.cpp:120
+#: src/engine/charwindow.cpp:121
 msgid "Undefined"
 msgstr "Undefiniert"
 
-#: src/engine/charwindow.cpp:126
+#: src/engine/charwindow.cpp:127
 msgid "Race:"
 msgstr "Rasse"
 
-#: src/engine/charwindow.cpp:129
+#: src/engine/charwindow.cpp:130
 msgid "Alignment:"
 msgstr "Ausrichtung:"
 
-#: src/engine/charwindow.cpp:133
+#: src/engine/charwindow.cpp:134
 msgid "XP"
 msgstr "EP"
 
-#: src/engine/charwindow.cpp:134
+#: src/engine/charwindow.cpp:135
 msgid "Next Level"
 msgstr "Nächste Stufe"
 
-#: src/engine/charwindow.cpp:143
+#: src/engine/charwindow.cpp:144
 msgid "AC"
 msgstr "RK"
 
-#: src/engine/charwindow.cpp:204
+#: src/engine/charwindow.cpp:205
 msgid "Total Level"
 msgstr "Stufe gesamt"
 
-#: src/engine/charwindow.cpp:224
+#: src/engine/charwindow.cpp:225
 msgid "Base Attack Modifier"
 msgstr "Grundattackenmodifikator"
 
-#: src/engine/charwindow.cpp:229
+#: src/engine/charwindow.cpp:230
 msgid "Size Modifier"
 msgstr "Größenmodifikator"
 
-#: src/engine/charwindow.cpp:261
+#: src/engine/charwindow.cpp:262
 msgid "Level Up"
 msgstr "Stufenaufstieg!"
 
-#: src/engine/charwindow.cpp:267 src/engine/featsel.cpp:170
+#: src/engine/charwindow.cpp:268 src/engine/featsel.cpp:170
 #: src/engine/featswindow.cpp:75
 msgid "Talents"
 msgstr "Talente"
 
-#: src/engine/charwindow.cpp:271 src/engine/skillwindow.cpp:77
+#: src/engine/charwindow.cpp:272 src/engine/skillwindow.cpp:77
 msgid "Skills"
 msgstr "Fertigkeiten"
 
-#: src/engine/charwindow.cpp:275 src/engine/featswindow.cpp:96
+#: src/engine/charwindow.cpp:276 src/engine/featswindow.cpp:96
 #: src/engine/skillwindow.cpp:172 src/engine/teste.cpp:68
 msgid "Close"
 msgstr "Schließen"
 
-#: src/engine/charwindow.cpp:445
+#: src/engine/charwindow.cpp:452
 msgid "Main Weapon"
 msgstr "Hauptwaffe"
 
-#: src/engine/charwindow.cpp:449
+#: src/engine/charwindow.cpp:456
 msgid "Secondary Weapon"
 msgstr "Sekundärwaffe"
 
-#: src/engine/charwindow.cpp:453
+#: src/engine/charwindow.cpp:460
 msgid "Weapon"
 msgstr "Waffe"
 
-#: src/engine/charwindow.cpp:465
+#: src/engine/charwindow.cpp:472
 msgid "Unarmed"
 msgstr "Unbewaffnet"
 
-#: src/engine/charwindow.cpp:471
+#: src/engine/charwindow.cpp:478
 msgid "Not Applicable"
 msgstr "Nicht einsetzbar"
 
@@ -472,85 +472,85 @@ msgstr ""
 "diese Libraries entwickelt haben: OpenAL, Cal3D, OpenGL, SDL, SDL_image, "
 "SDL_ttf, libVorbis."
 
-#: src/engine/dccnit.cpp:1738
+#: src/engine/dccnit.cpp:1742
 msgid "Too far away for the action!"
 msgstr "Zu weit entfernt zum Agieren!"
 
-#: src/engine/dccnit.cpp:1755
+#: src/engine/dccnit.cpp:1759
 msgid "Couldn't rest at battle mode."
 msgstr "Kann nicht im Kampfmodus ausrasten!"
 
-#: src/engine/dccnit.cpp:1761
+#: src/engine/dccnit.cpp:1765
 msgid "Enemies nearby."
 msgstr "Feinde in der Nähe"
 
-#: src/engine/dccnit.cpp:1865
+#: src/engine/dccnit.cpp:1869
 msgid "No NPCs in the area."
 msgstr "Keine NPCs in der Nähe."
 
-#: src/engine/dccnit.cpp:1923
+#: src/engine/dccnit.cpp:1927
 msgid "Surprise Attack Turn."
 msgstr "Überraschungsangriff."
 
-#: src/engine/dccnit.cpp:1936
+#: src/engine/dccnit.cpp:1940
 msgid "No enemies in the area."
 msgstr "Keine Feinde in der Nähe."
 
-#: src/engine/dccnit.cpp:2437
+#: src/engine/dccnit.cpp:2449
 #, c-format
 msgid "%s taken."
 msgstr "%s genommen."
 
-#: src/engine/dccnit.cpp:2465
+#: src/engine/dccnit.cpp:2477
 msgid "Inventory is full!"
 msgstr "Inventar ist voll!"
 
-#: src/engine/dccnit.cpp:2487
+#: src/engine/dccnit.cpp:2499
 msgid "Door"
 msgstr "Tür"
 
-#: src/engine/dccnit.cpp:2535
+#: src/engine/dccnit.cpp:2547
 msgid "dead"
 msgstr "tot"
 
-#: src/engine/dccnit.cpp:2587
+#: src/engine/dccnit.cpp:2599
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s attackiert %s"
 
-#: src/engine/dccnit.cpp:2828
+#: src/engine/dccnit.cpp:2851
 msgid "No more actions. Turn ended."
 msgstr "Keine Aktionen mehr.  Runde beendet."
 
-#: src/engine/dccnit.cpp:3243
+#: src/engine/dccnit.cpp:3272
 msgid "A* could not find a path!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:4197
+#: src/engine/dccnit.cpp:4243
 msgid "Exit Battle Mode"
 msgstr "Beende Kampfmodus"
 
-#: src/engine/dialog.cpp:1275
+#: src/engine/dialog.cpp:1295
 #, c-format
 msgid "%s lost."
 msgstr "%s hat verloren."
 
-#: src/engine/dialog.cpp:1319
+#: src/engine/dialog.cpp:1339
 #, c-format
 msgid "Received %s."
 msgstr "Erhalte %s"
 
-#: src/engine/dialog.cpp:1329
+#: src/engine/dialog.cpp:1349
 #, c-format
 msgid "Received $%d."
 msgstr "Erhalte %d"
 
-#: src/engine/dialog.cpp:1338
+#: src/engine/dialog.cpp:1358
 #, c-format
 msgid "Lost $%d."
 msgstr "Verlor %d"
 
-#: src/engine/dialog.cpp:1532
+#: src/engine/dialog.cpp:1552
 msgid "Dialog"
 msgstr "Dialog"
 
@@ -574,27 +574,27 @@ msgstr "Sie können nicht mehr Talente sehen"
 msgid "Select"
 msgstr "Auswählen"
 
-#: src/engine/initial.cpp:81
+#: src/engine/initial.cpp:82
 msgid "New"
 msgstr "Neu"
 
-#: src/engine/initial.cpp:86
+#: src/engine/initial.cpp:87
 msgid "Continue"
 msgstr "Fortsetzen"
 
-#: src/engine/initial.cpp:89 src/engine/shortcutswindow.cpp:108
+#: src/engine/initial.cpp:90 src/engine/shortcutswindow.cpp:108
 msgid "Save"
 msgstr "Speichern"
 
-#: src/engine/initial.cpp:92 src/engine/shortcutswindow.cpp:106
+#: src/engine/initial.cpp:93 src/engine/shortcutswindow.cpp:106
 msgid "Load"
 msgstr "Laden"
 
-#: src/engine/initial.cpp:94 src/engine/options.cpp:844
+#: src/engine/initial.cpp:95 src/engine/options.cpp:844
 msgid "Options"
 msgstr "Optionen"
 
-#: src/engine/initial.cpp:96 data/dialogs/objects/computers.dlg:21
+#: src/engine/initial.cpp:97 data/dialogs/objects/computers.dlg:21
 #: data/dialogs/objects/computers.dlg:95
 #: data/dialogs/objects/computers.dlg:136
 #: data/dialogs/objects/computers.dlg:149
@@ -607,15 +607,15 @@ msgstr "Optionen"
 #: data/dialogs/objects/house2_ovo.dlg:17
 #: data/dialogs/objects/house2_ovo.dlg:35
 #: data/dialogs/objects/house2_ovo.dlg:49
-#: data/dialogs/objects/refmachine.dlg:50
-#: data/dialogs/objects/refmachine.dlg:64
-#: data/dialogs/objects/refmachine.dlg:78
-#: data/dialogs/objects/refmachine.dlg:92
-#: data/dialogs/objects/refmachine.dlg:106
-#: data/dialogs/objects/refmachine.dlg:120 data/dialogs/objects/doors.dlg:63
-#: data/dialogs/objects/doors.dlg:78 data/dialogs/objects/doors.dlg:93
-#: data/dialogs/objects/doors.dlg:112 data/dialogs/objects/doors.dlg:128
-#: data/dialogs/objects/doors.dlg:143
+#: data/dialogs/objects/refmachine.dlg:54
+#: data/dialogs/objects/refmachine.dlg:68
+#: data/dialogs/objects/refmachine.dlg:82
+#: data/dialogs/objects/refmachine.dlg:96
+#: data/dialogs/objects/refmachine.dlg:110
+#: data/dialogs/objects/refmachine.dlg:124 data/dialogs/objects/doors.dlg:66
+#: data/dialogs/objects/doors.dlg:81 data/dialogs/objects/doors.dlg:96
+#: data/dialogs/objects/doors.dlg:115 data/dialogs/objects/doors.dlg:131
+#: data/dialogs/objects/doors.dlg:146
 msgid "Exit"
 msgstr "Beenden"
 
@@ -651,71 +651,71 @@ msgstr "Verkaufen"
 msgid "Drop"
 msgstr "Fallenlassen"
 
-#: src/engine/inventwindow.cpp:332
+#: src/engine/inventwindow.cpp:335
 #, c-format
 msgid "%s reloaded %s with %s ammo."
 msgstr "%s lädt %s mit %s Munition"
 
-#: src/engine/inventwindow.cpp:367
+#: src/engine/inventwindow.cpp:370
 msgid "No equipped weapons are compatible with this munition type."
 msgstr "Keine ausgerüsteten Waffen sind mit diesem Munitionstyp kompatibel."
 
-#: src/engine/itemwindow.cpp:79
+#: src/engine/itemwindow.cpp:80
 #, c-format
 msgid "Name: %s"
 msgstr "Name: %s"
 
-#: src/engine/itemwindow.cpp:92
+#: src/engine/itemwindow.cpp:93
 #, c-format
 msgid "Cost: %.2f"
 msgstr "Kosten: %.2f"
 
-#: src/engine/itemwindow.cpp:97
+#: src/engine/itemwindow.cpp:98
 #, c-format
 msgid "Weight: %.2f Kg"
 msgstr "Gewicht: %.2f Kg"
 
-#: src/engine/itemwindow.cpp:112
+#: src/engine/itemwindow.cpp:113
 msgid "Heal Factor: "
 msgstr "Heil Faktor: "
 
-#: src/engine/itemwindow.cpp:122
+#: src/engine/itemwindow.cpp:123
 msgid "Aditional Factor: "
 msgstr "Zusätzlicher Faktor: "
 
-#: src/engine/itemwindow.cpp:144
+#: src/engine/itemwindow.cpp:145
 msgid "Category: "
 msgstr "Kategorie: "
 
-#: src/engine/itemwindow.cpp:150
+#: src/engine/itemwindow.cpp:151
 msgid "Damage Dice: "
 msgstr "Schadenswürfel: "
 
-#: src/engine/itemwindow.cpp:158
+#: src/engine/itemwindow.cpp:159
 msgid "Primary Damage: "
 msgstr "Primärschaden: "
 
-#: src/engine/itemwindow.cpp:165
+#: src/engine/itemwindow.cpp:166
 msgid "Secondary Damage: "
 msgstr "Sekundärschaden: "
 
-#: src/engine/itemwindow.cpp:177
+#: src/engine/itemwindow.cpp:178
 msgid "Range: "
 msgstr "Reichweite: "
 
-#: src/engine/itemwindow.cpp:182
+#: src/engine/itemwindow.cpp:183
 msgid "Size: "
 msgstr "Größe: "
 
-#: src/engine/itemwindow.cpp:195 src/engine/itemwindow.cpp:222
+#: src/engine/itemwindow.cpp:196 src/engine/itemwindow.cpp:223
 msgid "Ammo Type:"
 msgstr "Munitionstyp:"
 
-#: src/engine/itemwindow.cpp:201 src/engine/itemwindow.cpp:228
+#: src/engine/itemwindow.cpp:202 src/engine/itemwindow.cpp:229
 msgid "Quantity:"
 msgstr "Menge:"
 
-#: src/engine/itemwindow.cpp:247
+#: src/engine/itemwindow.cpp:248
 msgid "Ok"
 msgstr "Ok"
 
@@ -2388,7 +2388,7 @@ msgid ""
 "against them."
 msgstr ""
 
-#: data/races/hippie.rca:1
+#: data/races/hippie.rca:1 data/characters/pcs/hippie.pc:1
 msgid "Hippie"
 msgstr "Hippie"
 
@@ -3526,35 +3526,35 @@ msgstr ""
 msgid "Kick the machine."
 msgstr ""
 
-#: data/dialogs/objects/refmachine.dlg:23
+#: data/dialogs/objects/refmachine.dlg:24
 msgid "Study the machine."
 msgstr ""
 
-#: data/dialogs/objects/refmachine.dlg:33
+#: data/dialogs/objects/refmachine.dlg:35
 msgid "Take money from the machine."
 msgstr ""
 
-#: data/dialogs/objects/refmachine.dlg:42
+#: data/dialogs/objects/refmachine.dlg:45
 msgid "Buy a soda"
 msgstr ""
 
-#: data/dialogs/objects/refmachine.dlg:60
+#: data/dialogs/objects/refmachine.dlg:64
 msgid "(You listened a strange noise. Is the machine alright?)"
 msgstr ""
 
-#: data/dialogs/objects/refmachine.dlg:74
+#: data/dialogs/objects/refmachine.dlg:78
 msgid "(A soda appears to you.)"
 msgstr ""
 
-#: data/dialogs/objects/refmachine.dlg:88
+#: data/dialogs/objects/refmachine.dlg:92
 msgid "(This machine seems to be broken.)"
 msgstr ""
 
-#: data/dialogs/objects/refmachine.dlg:102
+#: data/dialogs/objects/refmachine.dlg:106
 msgid "(You've got some coins.)"
 msgstr ""
 
-#: data/dialogs/objects/refmachine.dlg:116
+#: data/dialogs/objects/refmachine.dlg:120
 msgid "(You don't have enough money)"
 msgstr ""
 
@@ -3566,36 +3566,36 @@ msgstr ""
 msgid "Try to unlock it."
 msgstr ""
 
-#: data/dialogs/objects/doors.dlg:30
+#: data/dialogs/objects/doors.dlg:32
 msgid "Force your entrance."
 msgstr ""
 
-#: data/dialogs/objects/doors.dlg:43 data/dialogs/objects/doors.dlg:59
-#: data/dialogs/objects/doors.dlg:108
+#: data/dialogs/objects/doors.dlg:46 data/dialogs/objects/doors.dlg:62
+#: data/dialogs/objects/doors.dlg:111
 msgid "Sit down and cry."
 msgstr ""
 
-#: data/dialogs/objects/doors.dlg:54
+#: data/dialogs/objects/doors.dlg:57
 msgid "(You failed to unlock it.)"
 msgstr ""
 
-#: data/dialogs/objects/doors.dlg:73
+#: data/dialogs/objects/doors.dlg:76
 msgid "(Tic, trec, ouch! You almost lost a finger but the door is now opened.)"
 msgstr ""
 
-#: data/dialogs/objects/doors.dlg:88
+#: data/dialogs/objects/doors.dlg:91
 msgid "(The door is unlocked.)"
 msgstr ""
 
-#: data/dialogs/objects/doors.dlg:103
+#: data/dialogs/objects/doors.dlg:106
 msgid "(You failed to put it down.)"
 msgstr ""
 
-#: data/dialogs/objects/doors.dlg:123
+#: data/dialogs/objects/doors.dlg:126
 msgid "(The jamb was broken and the door is now opened .)"
 msgstr ""
 
-#: data/dialogs/objects/doors.dlg:138
+#: data/dialogs/objects/doors.dlg:141
 msgid "(The door doesn't seem to listen you.)"
 msgstr ""
 
@@ -4431,6 +4431,10 @@ msgstr ""
 msgid "Microwave"
 msgstr "Mikrowelle"
 
+#: data/models/objetos/geral/refmachine/refmachine.dcc:1
+msgid "Soda Machine"
+msgstr ""
+
 #: data/models/objetos/geral/barrel/barrel.dcc:1
 #: data/models/objetos/geral/barrels/barrel2/barrel2_1.dcc:1
 #: data/models/objetos/geral/barrels/barrel2/barrel2_2.dcc:1
@@ -5020,9 +5024,68 @@ msgstr "Leicht"
 msgid "Heavy"
 msgstr "Schwer"
 
+#: data/characters/pcs/guri2.pc:1 data/characters/pcs/guria.pc:1
+#: data/characters/pcs/guri.pc:1
+msgid "Child"
+msgstr ""
+
 #: data/characters/pcs/santa.pc:1
 msgid "Santa Claws"
 msgstr "Santa Claws"
+
+#: data/characters/pcs/velhaca.pc:1
+msgid "Old Ladie"
+msgstr ""
+
+#: data/characters/npcs/lvl1/ameiva_lvl1.npc:1
+msgid "Ameiva"
+msgstr ""
+
+#: data/characters/npcs/lvl1/cowa_lvl1.npc:1
+#: data/characters/npcs/lvl1/cowb_lvl1.npc:1
+#: data/characters/npcs/lvl1/cowc_lvl1.npc:1
+#: data/characters/npcs/lvl1/cow_lvl1.npc:1
+#: data/characters/npcs/lvl2/cowa_lvl2.npc:1
+#: data/characters/npcs/lvl2/cowb_lvl2.npc:1
+#: data/characters/npcs/lvl2/cowc_lvl2.npc:1
+#: data/characters/npcs/lvl2/cow_lvl2.npc:1
+msgid "Cow"
+msgstr ""
+
+#: data/characters/npcs/lvl1/donkey_lvl1.npc:1
+msgid "Donkey"
+msgstr ""
+
+#: data/characters/npcs/lvl1/galo_lvl1.npc:1
+msgid "Chicken"
+msgstr ""
+
+#: data/characters/npcs/lvl1/horse_lvl1.npc:1
+msgid "Horse"
+msgstr ""
+
+#: data/characters/npcs/lvl1/pig_lvl1.npc:1
+msgid "Pig"
+msgstr ""
+
+#: data/characters/npcs/lvl1/ratazana_lvl1.npc:1
+msgid "Rat"
+msgstr ""
+
+#: data/characters/npcs/lvl1/spider_lvl1.npc:1
+#: data/characters/npcs/lvl3/spider_lvl3.npc:1
+#: data/characters/npcs/lvl5/spider_lvl5.npc:1
+#: data/characters/npcs/lvl10/spider_lvl10.npc:1
+msgid "Spider"
+msgstr ""
+
+#: data/characters/npcs/lvl2/galo_lvl2.npc:1
+msgid "Rooster"
+msgstr ""
+
+#: data/characters/npcs/lvl2/ganso_lvl2.npc:1
+msgid "Goose"
+msgstr ""
 
 #: data/ia/script/general/beggar_idle.dsl:21
 msgid "Will no-one spare a dime?"

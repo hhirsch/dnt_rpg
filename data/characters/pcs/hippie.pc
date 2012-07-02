@@ -1,4 +1,4 @@
-name = Hippie
+name = gettext("Hippie")
 model = models/personagens/hippie/model.cfg
 portrait = characters/portraits/hippie.png
 battleScript = ia/script/fight/fight_animal.dsl

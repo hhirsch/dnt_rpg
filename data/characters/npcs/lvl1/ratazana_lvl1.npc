@@ -1,4 +1,4 @@
-name = Ratazana
+name = gettext("Rat")
 model = models/personagens/Ratazana/modelo.cfg
 portrait = characters/portraits/ratazana.png
 battleScript = ia/script/fight/fight_animal.dsl

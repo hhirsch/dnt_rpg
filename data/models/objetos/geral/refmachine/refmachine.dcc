@@ -1,4 +1,4 @@
-name = RefMachine
+name = gettext("Soda Machine")
 cal3d = models/objetos/geral/refmachine/model.cfg
 inventory_sizes = 0 0
 inventory_texture = models/objetos/geral/refmachine/texture_dlg.png
