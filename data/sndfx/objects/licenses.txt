@@ -26,3 +26,9 @@ door_pick_lock.ogg
    license: CC-BY 3.0
    source: http://www.freesound.org/people/dobroide/sounds/93664/
 
+refmachine/*
+   author: cmusounddesign
+   license: CC-BY 3.0
+   source: http://www.freesound.org/people/cmusounddesign/sounds/84710/
+
+
