@@ -30,6 +30,7 @@ BugFixes:
                  option sometimes;
  - Removed collision with dead characters to avoid potential path block;
  - dntPartEditor: added mouse cursor render;
+ - dntPartEditor: fixed a bug on current particle counter and elements menu;
 
 ================================================
 |                Version 0.9                   |

@@ -95,6 +95,7 @@ void partWindow::openWindow()
    Farso::Options opt;
    int posX=0, 
        posY = 64;
+   int y;
    Farso::Font fnt;
 
    if(isOpen())
@@ -110,62 +111,77 @@ void partWindow::openWindow()
                                 "Particle"); 
    curWindow->setExternPointer(&curWindow);
 
+   y = 20;
+
+   /* Current number of particles */
+   curParticles = curWindow->getObjectsList()->insertTextBox(10,y,183,y+17,3,
+         "Current Particles: ");
+   y += 23;
+
    /* maxParticles */
-   curWindow->getObjectsList()->insertTextBox(10,20,80,37,0,"MaxParticles:");
-   maxParticles = curWindow->getObjectsList()->insertTextBar(81, 20, 141, 37, 
+   curWindow->getObjectsList()->insertTextBox(10,y,80,y+17,0,"MaxParticles:");
+   maxParticles = curWindow->getObjectsList()->insertTextBar(81, y, 141, y+17, 
          "", 0);
+   y += 23;
 
    /* maxLifeTime */
-   curWindow->getObjectsList()->insertTextBox(10,43,90,60,0,"MaxLifeTime:");
-   maxLifeTime = curWindow->getObjectsList()->insertTextBar(81, 43, 141, 60, 
+   curWindow->getObjectsList()->insertTextBox(10,y,90,y+17,0,"MaxLifeTime:");
+   maxLifeTime = curWindow->getObjectsList()->insertTextBar(81, y, 141, y+17, 
          "", 0);
+   y += 23;
 
    /* particleLifeTime */
-   curWindow->getObjectsList()->insertTextBox(10,66,90,83,0,
+   curWindow->getObjectsList()->insertTextBox(10,y,90,y+17,0,
          "ParticleLife:");
-   particleLifeTime = curWindow->getObjectsList()->insertTextBar(81,66,141,83, 
+   particleLifeTime = curWindow->getObjectsList()->insertTextBar(81,y,141,y+17, 
          "", 0);
+   y += 23;
 
    /* DrawMode things */
-   curWindow->getObjectsList()->insertTextBox(10,89,80,106,0,"DrawMode:");
-   previousDrawMode = curWindow->getObjectsList()->insertButton(81,89,91,106, 
+   curWindow->getObjectsList()->insertTextBox(10,y,80,y+17,0,"DrawMode:");
+   previousDrawMode = curWindow->getObjectsList()->insertButton(81,y,91,y+17, 
          fnt.createUnicode(0x25C4),0);
    previousDrawMode->defineFont(opt.getDefaultFont(), 9);
-   drawMode = curWindow->getObjectsList()->insertTextBox(92, 89, 172, 106, 
+   drawMode = curWindow->getObjectsList()->insertTextBox(92, y, 172, y+17, 
          1, "");
    drawMode->setFont(opt.getDefaultFont(), 10, Farso::Font::ALIGN_CENTER);
-   nextDrawMode = curWindow->getObjectsList()->insertButton(173, 89, 183, 106, 
+   nextDrawMode = curWindow->getObjectsList()->insertButton(173, y, 183, y+17, 
          fnt.createUnicode(0x25BA),0);
    nextDrawMode->defineFont(opt.getDefaultFont(), 9);
+   y += 23;
 
    /* renderMode things */
-   curWindow->getObjectsList()->insertTextBox(10,112,80,129,0,"RenderMode:");
-   previousRenderMode = curWindow->getObjectsList()->insertButton(81,112,
-         91,129, fnt.createUnicode(0x25C4),0);
+   curWindow->getObjectsList()->insertTextBox(10,y,80,y+17,0,"RenderMode:");
+   previousRenderMode = curWindow->getObjectsList()->insertButton(81,y,
+         91,y+17, fnt.createUnicode(0x25C4),0);
    previousRenderMode->defineFont(opt.getDefaultFont(), 9);
-   renderMode = curWindow->getObjectsList()->insertTextBox(92,112,172,129, 
+   renderMode = curWindow->getObjectsList()->insertTextBox(92,y,172,y+17, 
          1, "");
    renderMode->setFont(opt.getDefaultFont(), 10, Farso::Font::ALIGN_CENTER);
    nextRenderMode = curWindow->getObjectsList()->insertButton(173,112,183,129, 
          fnt.createUnicode(0x25BA),0);
    nextRenderMode->defineFont(opt.getDefaultFont(), 9);
+   y += 23;
 
    /* pointSize */
-   curWindow->getObjectsList()->insertTextBox(10,135,80,152,0,"PointSize:");
-   pointSize = curWindow->getObjectsList()->insertTextBar(81, 135, 141, 152, 
+   curWindow->getObjectsList()->insertTextBox(10,y,80,y+17,0,"PointSize:");
+   pointSize = curWindow->getObjectsList()->insertTextBar(81, y, 141, y+17, 
          "", 0);
+   y += 23;
 
    /* Wind Affect */
-   windAffect = curWindow->getObjectsList()->insertCxSel(10, 162, false);
-   curWindow->getObjectsList()->insertTextBox(21,158,91,175,0,"Wind Affect");
+   windAffect = curWindow->getObjectsList()->insertCxSel(10, y+4, false);
+   curWindow->getObjectsList()->insertTextBox(21,y,91,y+17,0,"Wind Affect");
+   y += 23;
 
    /* Floor Collision */
-   floorCollision = curWindow->getObjectsList()->insertCxSel(10, 185, false);
-   curWindow->getObjectsList()->insertTextBox(21,181,121,198,0,
+   floorCollision = curWindow->getObjectsList()->insertCxSel(10, y+4, false);
+   curWindow->getObjectsList()->insertTextBox(21,y,121,y+17,0,
          "Floor Collision");
+   y += 23;
 
    /* Elements */
-   element = curWindow->getObjectsList()->insertButton(20, 204, 97, 221, 
+   element = curWindow->getObjectsList()->insertButton(20, y, 97, y+17, 
          "Elements", true);
    Farso::Menu* men = new Farso::Menu(80,204,192,318,curWindow->getSurface());
    men->insertItem(DNT_PART_AUX_PARTICLES_TO_CREATE, true);
@@ -186,26 +202,26 @@ void partWindow::openWindow()
    men->insertItem(DNT_PART_AUX_SCALE, true);
    element->men = men;
 
-   origin = curWindow->getObjectsList()->insertButton(103, 204, 173, 221, 
+   origin = curWindow->getObjectsList()->insertButton(103, y, 173, y+17, 
          "Origin", true);
+   y += 23;
 
    /* Gravity */
-   curWindow->getObjectsList()->insertTextBox(10,227,90,244,0,
+   curWindow->getObjectsList()->insertTextBox(10,y,90,y+17,0,
          "Gravity:");
-   gravity = curWindow->getObjectsList()->insertTextBar(81,227,141,244,
+   gravity = curWindow->getObjectsList()->insertTextBar(81,y,141,y+17,
          "", 0);
+   y += 23;
 
    /* Texture select */
-   texture = curWindow->getObjectsList()->insertButton(60, 250, 133, 267, 
+   texture = curWindow->getObjectsList()->insertButton(60, y, 133, y+17, 
          "Texture", true);
+   y += 23;
 
    /* Restart the system */
-   restart = curWindow->getObjectsList()->insertButton(60, 273, 133, 290,
+   restart = curWindow->getObjectsList()->insertButton(60, y, 133, y+17,
          "Restart", true);
-
-   /* Current number of particles */
-   curParticles = curWindow->getObjectsList()->insertTextBox(10,296,183,313,3,
-         "Current Particles: ");
+   y += 23;
 
    /* Finally, open the window */
    gui->openWindow(curWindow);
