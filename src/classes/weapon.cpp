@@ -87,7 +87,8 @@ weapon::weapon(string path): object(path)
       {
          description = translateDataString(value);
       }
-      else if(key == "cal3d")
+      else if( (key == "cal3d") || (key == "model3d") || 
+               (key == "md5") || (key == "model") )
       {
          /* Add the model. The weapon is never a scenery. */
          cal3dName = value;

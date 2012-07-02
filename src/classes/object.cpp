@@ -143,7 +143,8 @@ object::object(string path, string curMap): thing()
       {
          relatedInfo = value;
       }
-      else if(key == "cal3d")
+      else if( (key == "cal3d") || (key == "model3d") || 
+               (key == "md5") || (key == "model") )
       {
          cal3dName = value;
       }
