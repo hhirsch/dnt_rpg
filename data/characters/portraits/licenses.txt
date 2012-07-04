@@ -45,6 +45,11 @@ cruzeirense.png
    Modifications: color adjustments by qubodup (Iwan Gabovitch) <qubodup@gmail.com>
    Source: http://opengameart.org/content/athlete-portrait-variations
 
+cicero.png
+   Author: Filipe Dilly
+   License: CC-BY 3.0
+   Source: http://dillydailydraws.wordpress.com/2011/08/30/217/
+
 mysterious.png
    Author: Buch
    License: GPLv3
