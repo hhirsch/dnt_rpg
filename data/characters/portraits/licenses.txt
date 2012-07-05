@@ -46,14 +46,21 @@ cruzeirense.png
    Source: http://opengameart.org/content/athlete-portrait-variations
 
 cicero.png
+menino01.png
 nikki.png
+senhor01.png
+senhor02.png
 velho01.png
+velho02.png
    Author: Filipe Dilly
    License: CC-BY 3.0
    Source: http://dillydailydraws.wordpress.com/2011/08/30/217/
+           http://dillydailydraws.wordpress.com/2011/07/26/201-2/
            http://dillydailydraws.wordpress.com/2011/08/30/229/
+           http://dillydailydraws.wordpress.com/2011/08/13/211/
+           http://dillydailydraws.wordpress.com/2011/08/07/209/
            http://dillydailydraws.wordpress.com/2011/08/30/222/
-
+           http://dillydailydraws.wordpress.com/2011/10/08/226/
 
 mysterious.png
    Author: Buch
