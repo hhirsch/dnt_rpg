@@ -1,5 +1,6 @@
 gordinho.png
 metaleiro.png
+metaleiro2.png
 mutante.png
 velho.png
    Author: Raquel (from DNTeam), colored by Farrer (from DNTeam).
