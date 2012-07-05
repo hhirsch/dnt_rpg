@@ -31,6 +31,7 @@ BugFixes:
  - Removed collision with dead characters to avoid potential path block;
  - dntPartEditor: added mouse cursor render;
  - dntPartEditor: fixed a bug on current particle counter and elements menu;
+ - OSX: fixed character portrait draw on game screen;
 
 ================================================
 |                Version 0.9                   |

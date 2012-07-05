@@ -433,6 +433,20 @@ void character::newInventory()
  *********************************************************************/
 void character::definePortrait(string portraitFile)
 {
+   /* Define Machine Bit Order */
+   Uint32 rmask, gmask, bmask, amask;
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+   rmask = 0xff000000;
+   gmask = 0x00ff0000;
+   bmask = 0x0000ff00;
+   amask = 0x000000ff;
+#else
+   rmask = 0x000000ff;
+   gmask = 0x0000ff00;
+   bmask = 0x00ff0000;
+   amask = 0xff000000;
+#endif
+   
    if(portraitImage != NULL)
    {
       SDL_FreeSurface(portraitImage);
@@ -483,9 +497,14 @@ void character::definePortrait(string portraitFile)
    SDL_BlitSurface(img, NULL, border, &rect);
 
    /* Put With space for health bar */
+#ifdef __APPLE__
+   /* In OSX, the images are bgra, not rgba. */
    portraitImage = SDL_CreateRGBSurface(SDL_SWSURFACE,border->w,border->h+10,32,
-                                        0x000000FF,0x0000FF00,
-                                        0x00FF0000,0xFF000000);
+                                        bmask, gmask, rmask, amask);
+#else
+   portraitImage = SDL_CreateRGBSurface(SDL_SWSURFACE,border->w,border->h+10,32,
+                                        rmask, gmask, bmask, amask);
+#endif
    /* Fix to the blit get the alpha from source! */
    SDL_SetAlpha(border, 0, 0);
    SDL_BlitSurface(border,NULL,portraitImage,NULL);
