@@ -27,6 +27,8 @@ fille3.png
 garcon.png
 garcon2.png
 garcon3.png
+logan.png
+magda.png
 mama.png
 punk.png
 ratazana.png
@@ -44,6 +46,12 @@ cruzeirense.png
    License: CC-BY 3.0
    Modifications: color adjustments by qubodup (Iwan Gabovitch) <qubodup@gmail.com>
    Source: http://opengameart.org/content/athlete-portrait-variations
+
+sarah.png
+   Author: nubux and qubodup
+   License: CC-BY 3.0
+   Reference:
+   http://opengameart.org/forumtopic/portraits-for-weird-realism-cartoon-style-satirical-post-apocalyptic-rpg
 
 cicero.png
 menino01.png
@@ -81,12 +89,6 @@ mercenary.png
 borda.png
 chico.png
 ente.png
-guri2.png
-guria.png
-guri.png
-logan.png
-santa.png
-velha.png
 zedobar.png
    Author: DNTeam
    License: GPLv3 or later
