@@ -47,6 +47,8 @@ cruzeirense.png
 
 cicero.png
 menino01.png
+moca01.png
+moca02
 nikki.png
 senhor01.png
 senhor02.png
@@ -56,6 +58,8 @@ velho02.png
    License: CC-BY 3.0
    Source: http://dillydailydraws.wordpress.com/2011/08/30/217/
            http://dillydailydraws.wordpress.com/2011/07/26/201-2/
+           http://dillydailydraws.wordpress.com/2011/08/29/216/
+           http://dillydailydraws.wordpress.com/2011/01/02/50/
            http://dillydailydraws.wordpress.com/2011/08/30/229/
            http://dillydailydraws.wordpress.com/2011/08/13/211/
            http://dillydailydraws.wordpress.com/2011/08/07/209/
