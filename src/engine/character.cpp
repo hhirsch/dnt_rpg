@@ -43,6 +43,7 @@ using namespace std;
 
 #define BORDER_FILE "characters/portraits/borda.png"
 #define BORDER_SIZE 5
+#define BACK_FILE   "characters/portraits/back.png"
 
 #define CHARACTER_TREAT_SCRIPTS  5
 
@@ -451,17 +452,32 @@ void character::definePortrait(string portraitFile)
       return;
    }
 
+   /* Load Back */
+   SDL_Surface* back = IMG_Load(dir.getRealFile(BACK_FILE).c_str());
+   if(!back)
+   {
+      SDL_FreeSurface(img);
+      cerr << "Couldn't load back image file: " << BACK_FILE << endl;
+      return;
+   }
+
    /* Load Border */
    SDL_Surface* border = IMG_Load(dir.getRealFile(BORDER_FILE).c_str());
    if(!border)
    {
       SDL_FreeSurface(img);
+      SDL_FreeSurface(back);
       cerr << "Can't Load Border File: " << BORDER_FILE << endl;
       return;
    }
 
-   /* Blit Image With Border */
+   /* Blit Back Image and Image With Border */
    SDL_Rect rect;
+   rect.x = BORDER_SIZE;
+   rect.y = BORDER_SIZE;
+   SDL_SetAlpha(back, 0, 0);
+   SDL_BlitSurface(back, NULL, border, &rect);
+
    rect.x = BORDER_SIZE;
    rect.y = BORDER_SIZE;
    SDL_BlitSurface(img, NULL, border, &rect);
@@ -477,6 +493,7 @@ void character::definePortrait(string portraitFile)
    /* Free Things */
    SDL_FreeSurface(img);
    SDL_FreeSurface(border);
+   SDL_FreeSurface(back);
 
    /* Load Texture */
    Farso::setTextureRGBA(portraitImage, portraitTexture, false, GL_RGBA);

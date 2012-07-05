@@ -86,6 +86,7 @@ mercenary.png
    References: http://opengameart.org/content/post-apocaliptic-soldier
                http://opengameart.org/forumtopic/portraits-for-weird-realism-cartoon-style-satirical-post-apocalyptic-rpg
 
+back.png
 borda.png
 chico.png
 ente.png
