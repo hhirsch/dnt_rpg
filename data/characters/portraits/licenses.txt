@@ -48,6 +48,7 @@ cruzeirense.png
    Modifications: color adjustments by qubodup (Iwan Gabovitch) <qubodup@gmail.com>
    Source: http://opengameart.org/content/athlete-portrait-variations
 
+moco01.png
 sarah.png
    Author: nubux and qubodup
    License: CC-BY 3.0
