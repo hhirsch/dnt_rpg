@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB35C4F115A763B1008D4DF4 /* campaign.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB35C4EF15A763B1008D4DF4 /* campaign.cpp */; };
 		AB3AB4381541946B00DF4F44 /* farsoopts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB3AB4361541946B00DF4F44 /* farsoopts.cpp */; };
 		AB4CFCC41424D6B00000E132 /* dnt.ico in Resources */ = {isa = PBXBuildFile; fileRef = AB4CFCC31424D6B00000E132 /* dnt.ico */; };
 		AB72D9B01454631F00C4331C /* dnt-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AB72D9AF1454631F00C4331C /* dnt-icon.png */; };
@@ -161,6 +162,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB35C4EF15A763B1008D4DF4 /* campaign.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = campaign.cpp; sourceTree = "<group>"; };
+		AB35C4F015A763B1008D4DF4 /* campaign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = campaign.h; sourceTree = "<group>"; };
 		AB3AB4361541946B00DF4F44 /* farsoopts.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = farsoopts.cpp; sourceTree = "<group>"; };
 		AB3AB4371541946B00DF4F44 /* farsoopts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = farsoopts.h; sourceTree = "<group>"; };
 		AB4CFCC31424D6B00000E132 /* dnt.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = dnt.ico; sourceTree = "<group>"; };
@@ -173,7 +176,7 @@
 		ABA0E3FE13FED9EA00FA02A0 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		ABA0E3FF13FED9EA00FA02A0 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		ABA0E40013FED9EA00FA02A0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		ABA0E40313FED9EA00FA02A0 /* DNT-Info.plist */ = {isa = PBXFileReference; path = "DNT-Info.plist"; sourceTree = "<group>"; };
+		ABA0E40313FED9EA00FA02A0 /* DNT-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DNT-Info.plist"; sourceTree = "<group>"; };
 		ABA0E40513FED9EA00FA02A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		ABA0E40913FED9EA00FA02A0 /* DccNiTghmare-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DccNiTghmare-Prefix.pch"; sourceTree = "<group>"; };
 		ABA0E40B13FED9EA00FA02A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
@@ -625,6 +628,8 @@
 		ABA0E46F13FEDB9D00FA02A0 /* engine */ = {
 			isa = PBXGroup;
 			children = (
+				AB35C4EF15A763B1008D4DF4 /* campaign.cpp */,
+				AB35C4F015A763B1008D4DF4 /* campaign.h */,
 				AB838C40143A42E700AD8D24 /* moneywindow.cpp */,
 				AB838C41143A42E700AD8D24 /* moneywindow.h */,
 				ABA0E47013FEDB9D00FA02A0 /* alignwindow.cpp */,
@@ -1118,6 +1123,7 @@
 				ABD6279314FFE060008D83C7 /* md5model.cpp in Sources */,
 				ABD6279414FFE060008D83C7 /* quaternion.cpp in Sources */,
 				AB3AB4381541946B00DF4F44 /* farsoopts.cpp in Sources */,
+				AB35C4F115A763B1008D4DF4 /* campaign.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
