@@ -44,6 +44,8 @@ engine::engine()
 
    /* Initialize internal lists */
    gui  = new Farso::GuiInterface("");
+   curCampaign = NULL;
+   callCampaignScript = false;
    actualMap = NULL;
    PCs = NULL;
    NPCs = NULL;
@@ -323,6 +325,11 @@ engine::~engine()
    {
       delete(actualMap);
    }
+
+   if(curCampaign)
+   {
+      delete(curCampaign);
+   }
  
    /* Clear Cursors */
    cursors->finish();
@@ -453,6 +460,13 @@ void engine::quitCurrentGame()
    {
       delete(actualMap);
       actualMap = NULL;
+   }
+
+   if(curCampaign)
+   {
+      delete(curCampaign);
+      curCampaign = NULL;
+      callCampaignScript = false;
    }
 
    /* Clear Objects List */
@@ -646,6 +660,27 @@ void engine::keepNPCStatus()
 
          dude = (character*)dude->getNext();
       }
+   }
+}
+
+/*********************************************************************
+ *                            loadCampaign                           *
+ *********************************************************************/
+void engine::loadCampaign(std::string campaignFile, bool loadingGame)
+{
+   if(curCampaign)
+   {
+      delete(curCampaign);
+   }
+
+   /* Create the campaign */
+   curCampaign = new DNT::Campaign(this, campaignFile);
+   callCampaignScript = !loadingGame;
+
+   if(!loadingGame)
+   {
+      /* Load the initial map */
+      loadMap(curCampaign->getInitialMap());
    }
 }
 
@@ -2802,508 +2837,522 @@ int engine::treatIO(SDL_Surface *screen)
          }
       }
 
-      /* Get AlwaysRun from Options */
-      run = option->getAlwaysRun();
-
-      /* Verify if will enter the Battle Mode because of
-       * enemies characters at range! */
-      if( (engineMode != ENGINE_MODE_TURN_BATTLE) && (NPCs != NULL) &&
-          (activeCharacter->isAlive()) )
+      /* Input is disabled when running initial campaign script */
+      if(callCampaignScript)
       {
-         character* npc = (character*)NPCs->getFirst();
-         for(i = 0; ( (i < NPCs->getTotal()) && 
-                      (engineMode != ENGINE_MODE_TURN_BATTLE)); i++)
-         {
-            /* Only Force Enter Battle Mode with Hostile Character */
-            if( (npc->isAlive()) && (npc->getPsychoState() == PSYCHO_HOSTILE) )
-            {
-               /* Verify Distance */
-               dist = sqrt( (npc->scNode->getPosX() - 
-                             activeCharacter->scNode->getPosX()) *
-                            (npc->scNode->getPosX() - 
-                             activeCharacter->scNode->getPosX()) +
-                            (npc->scNode->getPosZ() - 
-                             activeCharacter->scNode->getPosZ()) *
-                            (npc->scNode->getPosZ() - 
-                             activeCharacter->scNode->getPosZ()));
-
-               if(dist < DNT_BATTLE_RANGE)
-               {
-                  //TODO -> do a perception check before enter!
-
-                  /* If near, enter battle Mode  */
-                  enterBattleMode(false);
-               }
-            }
-            npc = (character*)npc->getNext();
-         }
-      }
-
-      /* Verify if need to endTurn */
-      if(option->getAutoEndTurn())
-      {
-         if( (engineMode == ENGINE_MODE_TURN_BATTLE) &&
-             (fightStatus == FIGHT_PC_TURN) &&
-             (!PCs->getActiveCharacter()->getCanAttack()) &&
-             (!PCs->getActiveCharacter()->getCanMove()) )
-         {
-            /* Can't take more actions, so autoEnd the turn! */
-            brief->addText(gettext("No more actions. Turn ended."));
-            endTurn();
-         }
-      }
-
-      /* Get Mouse Coordinates at world system */
-      updateMouseWorldPos();
-
-      if( (time-lastMouse >=  REFRESH_RATE ) || 
-            ( (mButton & SDL_BUTTON(1) ) && 
-              (time-lastMousePression >= REFRESH_RATE)) ||
-              (mouseButtonReleased[0]) ||
-              (mouseButtonReleased[2]) )
-      {
-         cursors->set(CURSOR_WALK);
-         lastMouse = time;
-
-         if(!gui->mouseOnGui(mouseX, mouseY))
-         {
-            if(verifyMouseActions(mButton) == 1)
-            {
-               /* Changed Map, so */
-               return(1);
-            }
-         }
-         else
-         {
-            occPosition = false;
-         }
-      }
-
-      /* Keyboard Verification */
-
-      /* Exit Engine */
-      if( ( keys[SDLK_ESCAPE] ) && 
-          ( (time-lastKeyb >= REFRESH_RATE) || 
-            (lastKey != SDLK_ESCAPE) ) &&
-          (!gui->getActiveWindow()->isModal()) )
-      {
-         defineFrontSurface();
-         lastKey = SDLK_ESCAPE;
-         lastKeyb = time;
-         cursors->setTextOver("");
-         return(0);
-      }
-
-      /* Rest */
-      if( ( keys[option->getKey(DNT_KEY_REST)] ) &&
-          ( (time-lastKeyb >= REFRESH_RATE) ||
-            (lastKey != option->getKey(DNT_KEY_REST)) ) &&
-          (!gui->getActiveWindow()->isModal()) )
-      {
-         rest();
-         lastKey = option->getKey(DNT_KEY_REST);
-      }
-
-      /* Screenshot */
-      if( ( keys[SDLK_F12] ) && 
-            ( (time-lastKeyb >= REFRESH_RATE) || 
-              (lastKey != SDLK_F12) ) )
-      {
-         userInfo user;
-         string screenFile = user.getUserHome() + "screenshot.bmp";
-         screenshot(screenFile);
-         lastKey = SDLK_F12;
-         lastKeyb = time;
-      }
-
-      /* Show info about occ square */
-      if(keys[SDLK_F6])
-      {
-         Square* sq = PCs->getActiveCharacter()->ocSquare;
-         cerr << "occ: " << sq << endl;
-         if(sq)
-         {
-            cerr << sq->posX << " " << sq->posZ << endl;
-            cerr << sq->flags << endl;
-            cerr << (sq->flags & SQUARE_REFLECT) << endl;
-         }
-      }
-
-      /* Enter Attack Mode or End Turn */
-      if( (keys[option->getKey(DNT_KEY_BATTLE_TURN)]) && 
-            ( (time-lastKeyb >= REFRESH_RATE) || 
-              (lastKey != option->getKey(DNT_KEY_BATTLE_TURN)) ) )
-      {
-         if(engineMode != ENGINE_MODE_TURN_BATTLE)
-         {
-            enterBattleMode(true);
-         }
-         else if(fightStatus == FIGHT_PC_TURN)
-         {
-            endTurn();
-         }
-         lastKey = option->getKey(DNT_KEY_BATTLE_TURN);
-         lastKeyb = time;
-      }
-
-      /* Enable / Disable The Range Draw */
-      if( (keys[SDLK_k]) && 
-            ( (time-lastKeyb >= REFRESH_RATE) || 
-              (lastKey != SDLK_k) ) )
-      {
-         showRange = !showRange;
-         lastKey = SDLK_k;
-         lastKeyb = time;
-      }
-
-      /* Print All Models on List */
-      if( (keys[SDLK_F2]) && 
-            ( (time-lastKeyb >= REFRESH_RATE) || 
-              (lastKey != SDLK_F2) ) )
-      {
-         lastKey = SDLK_F2;
-         lastKeyb = time;
-         //models.printAll();
-      }      
-
-      /* Open Minimap */
-      if( (keys[option->getKey(DNT_KEY_WINDOW_MINI_MAP)]) && 
-            ( (time-lastKeyb >= REFRESH_RATE) || 
-              (lastKey != option->getKey(DNT_KEY_WINDOW_MINI_MAP)) ) )
-      {
-         if(!mapWindow->isOpened())
-         {
-            snd->addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/turn_page.ogg");
-            mapWindow->open(gui, 0,0, actualMap);
-         }
-         else
-         {
-            snd->addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/close.ogg");
-            mapWindow->close(gui);
-         }
-
-         lastKey = option->getKey(DNT_KEY_WINDOW_MINI_MAP);
-         lastKeyb = time;
-      }
-
-      /* Open ShortCuts */
-      if( (keys[option->getKey(DNT_KEY_WINDOW_SHORTCUTS)]) && 
-            ( (time-lastKeyb >= REFRESH_RATE) || 
-              (lastKey != option->getKey(DNT_KEY_WINDOW_SHORTCUTS)) ) )
-      {
-         shortcuts->open(gui);
-         lastKey = option->getKey(DNT_KEY_WINDOW_SHORTCUTS);
-         lastKeyb = time;
-      }
-
-      /* Open Briefing */
-      if( (keys[option->getKey(DNT_KEY_WINDOW_BRIEFING)]) && 
-            ( (time-lastKeyb >= REFRESH_RATE) || 
-              (lastKey != option->getKey(DNT_KEY_WINDOW_BRIEFING)) ) )
-      {
-         brief->openWindow(gui);
-         lastKey = option->getKey(DNT_KEY_WINDOW_BRIEFING);
-         lastKeyb = time;
-      }
-
-      /* Open Close Inventory */
-      if( (keys[option->getKey(DNT_KEY_WINDOW_INVENTORY)]) && 
-            ( (time-lastKeyb >= REFRESH_RATE) || 
-              (lastKey != option->getKey(DNT_KEY_WINDOW_INVENTORY)) ) )
-      {
-         openCloseInventoryWindow(); 
-         lastKey = option->getKey(DNT_KEY_WINDOW_INVENTORY);
-         lastKeyb = time;
-      }
-
-      /* Open Character Info Window */
-      if( (keys[option->getKey(DNT_KEY_WINDOW_CHARACTER)]) && 
-            ( (time-lastKeyb >= REFRESH_RATE) || 
-              (lastKey != option->getKey(DNT_KEY_WINDOW_CHARACTER)) ) ) 
-      {
-         lastKey = option->getKey(DNT_KEY_WINDOW_CHARACTER);
-         lastKeyb = time;
-         if(charInfoWindow)
-         {
-            charInfoWindow->open(PCs->getActiveCharacter());
-         }
-      }
-
-      /* Open Journal Window */
-      if( (keys[option->getKey(DNT_KEY_WINDOW_JOURNAL)]) && 
-            ( (time-lastKeyb >= REFRESH_RATE) || 
-              (lastKey != option->getKey(DNT_KEY_WINDOW_JOURNAL)) ) ) 
-      {
-         lastKey = option->getKey(DNT_KEY_WINDOW_JOURNAL);
-         lastKeyb = time;
-         if(journal)
-         {
-            if(journal->isOpen())
-            {
-               snd->addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/close.ogg");
-               journal->close();
-            }
-            else
-            {
-               snd->addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/turn_page.ogg");
-               journal->open(gui);
-            }
-         }
-      }
-
-
-      /* Pass time */
-      if( (keys[SDLK_0]) && 
-            ( (time-lastKeyb >= REFRESH_RATE) || 
-              (lastKey != SDLK_0) ) )
-      {
-         lastKey = SDLK_0;
-         lastKeyb = time;
-         hour += 0.1;
-      }
-
-      /* Toggle Run state */
-      if( (keys[option->getKey(DNT_KEY_TOGGLE_RUN_1)]) || 
-          (keys[option->getKey(DNT_KEY_TOGGLE_RUN_2)]) )
-      {
-         run = !option->getAlwaysRun();
-      }
-
-      /* Define current walk interval */
-      if(run)
-      {
-         curWalkInterval = activeCharacter->walk_interval * 
-                           ENGINE_RUN_MULTIPLIER;
+         /* Run campaign script cycle */
+         callCampaignScript = curCampaign->runInitialScript();
+         treatPendingActions();
       }
       else
       {
-         curWalkInterval = activeCharacter->walk_interval;
-      }
+         /* Get AlwaysRun from Options */
+         run = option->getAlwaysRun();
 
-      /* Keys to character's movimentation */
-      if( (keys[option->getKey(DNT_KEY_MOVE_LEFT)]) || 
-          (keys[option->getKey(DNT_KEY_MOVE_RIGHT)]) )
-      {
-         walkStatus = ENGINE_WALK_KEYS;
-          varX = curWalkInterval * 
-                 sin(deg2Rad(activeCharacter->scNode->getAngleY()+90.0f));
-          varZ = curWalkInterval * 
-                 cos(deg2Rad(activeCharacter->scNode->getAngleY()+90.0f));
-         // Left walk
-         if(keys[option->getKey(DNT_KEY_MOVE_LEFT)]) 
+         /* Verify if will enter the Battle Mode because of
+          * enemies characters at range! */
+         if( (engineMode != ENGINE_MODE_TURN_BATTLE) && (NPCs != NULL) &&
+               (activeCharacter->isAlive()) )
          {
-             varX *= -1;
-             varZ *= -1;
-         }
-
-         walked |= tryWalk(varX, varZ);
-        
-      }
-      else if( (keys[option->getKey(DNT_KEY_MOVE_FORWARD)]) || 
-               (keys[option->getKey(DNT_KEY_MOVE_BACKWARD)]) )
-      { 
-         walkStatus = ENGINE_WALK_KEYS;
-         varX = curWalkInterval * 
-                sin(deg2Rad(activeCharacter->scNode->getAngleY()));
-         varZ = curWalkInterval * 
-                cos(deg2Rad(activeCharacter->scNode->getAngleY()));
-         if(keys[option->getKey(DNT_KEY_MOVE_FORWARD)]) 
-         {
-              varX *= -1;
-              varZ *= -1;
-         }
-         
-         walked |= tryWalk(varX, varZ);
-      }
-
-      if( (keys[option->getKey(DNT_KEY_ROTATE_LEFT)]) || 
-          (keys[option->getKey(DNT_KEY_ROTATE_RIGHT)]))
-      {
-         GLfloat ori = activeCharacter->scNode->getAngleY();
-         walkStatus = ENGINE_WALK_KEYS;
-         // CounterClockWise Character turn
-         if( (keys[option->getKey(DNT_KEY_ROTATE_LEFT)]) && 
-             (canWalk(0,0,TURN_VALUE)) )  
-         {
-            ori += TURN_VALUE;
-            if(ori > 360.0f)
-            { 
-               ori -= 360.0f;
-            }
-            activeCharacter->scNode->setAngle(0.0f, ori, 0.0f);
-            walked = true;
-         }
-         // Clockwise Character Turn
-         if( (keys[option->getKey(DNT_KEY_ROTATE_RIGHT)]) && 
-             (canWalk(0,0,-TURN_VALUE)) )
-         {
-            ori -= TURN_VALUE;
-            if(ori < 0.0f)
+            character* npc = (character*)NPCs->getFirst();
+            for(i = 0; ( (i < NPCs->getTotal()) && 
+                     (engineMode != ENGINE_MODE_TURN_BATTLE)); i++)
             {
-               ori += 360.0f;
-            }
-            activeCharacter->scNode->setAngle(0.0f, ori, 0.0f);
-         }
-         walked = true;
-      }
-      if(keys[option->getKey(DNT_KEY_CHANGE_CHARACTER)]) //Activate Character
-      {
-         walkStatus = ENGINE_WALK_KEYS;
-         if(keys[SDLK_LCTRL]) //Previous Character
-         {
-            PCs->setActiveCharacter((character*)activeCharacter->getPrevious());
-         }
-         else //Next Character
-         {
-            PCs->setActiveCharacter((character*)activeCharacter->getNext());
-         }
-         activeCharacter = PCs->getActiveCharacter();
-         gameCamera.updateCamera(activeCharacter->scNode->getPosX(),
-               activeCharacter->scNode->getPosY(), 
-               activeCharacter->scNode->getPosZ(),
-               activeCharacter->scNode->getAngleY());
-         SDL_Delay(100);
-      }
+               /* Only Force Enter Battle Mode with Hostile Character */
+               if( (npc->isAlive()) && 
+                   (npc->getPsychoState() == PSYCHO_HOSTILE) )
+               {
+                  /* Verify Distance */
+                  dist = sqrt( (npc->scNode->getPosX() - 
+                           activeCharacter->scNode->getPosX()) *
+                        (npc->scNode->getPosX() - 
+                         activeCharacter->scNode->getPosX()) +
+                        (npc->scNode->getPosZ() - 
+                         activeCharacter->scNode->getPosZ()) *
+                        (npc->scNode->getPosZ() - 
+                         activeCharacter->scNode->getPosZ()));
 
-      /* Camera Verification */
-      gameCamera.doIO(keys, mButton, x, y, mouseWheel, DELTA_CAMERA );
+                  if(dist < DNT_BATTLE_RANGE)
+                  {
+                     //TODO -> do a perception check before enter!
 
-      /* Set press time, if needed */
-      if( (mButton & SDL_BUTTON(3)) && (!gui->mouseOnGui(x,y)) && 
-          (walkPressTime == 0) && (walkStatus != ENGINE_WALK_MOUSE) )
-      {
-         walkPressTime = time;
-      }
-
-      /* Verify, if we got a continuous mouse action or a A* init */
-      if( ( time - walkPressTime >= ENGINE_WALK_ACTION_DELAY ) &&
-          ( walkPressTime != 0) && (mButton & SDL_BUTTON(3)) )
-      {
-         /* Continuous walk */
-         walkStatus = ENGINE_WALK_MOUSE;
-         walkPressTime = 0;
-         if(activeCharacter->pathFind.getState() == ASTAR_STATE_RUNNING)
-         {
-            /* Must stop the A* */
-            activeCharacter->pathFind.clear();
-         }
-      }
-      else if( (walkPressTime != 0) && !(mButton & SDL_BUTTON(3)) && 
-               (pcHaveWalkAction()) )
-      {
-         /* Path Verification */
-         walkPressTime = 0;
-
-         activeCharacter->pathFind.defineMap(actualMap);
-
-         activeCharacter->pathFind.findPath(activeCharacter, xReal, zReal, 
-               activeCharacter->walk_interval, NPCs, PCs, 
-               engineMode == ENGINE_MODE_TURN_BATTLE);
-      }
-
-      /* Verify Continuous Walk with Mouse */
-      if(walkStatus == ENGINE_WALK_MOUSE)
-      {
-         cursors->set(CURSOR_WALK_CONT);
-         if(mButton & SDL_BUTTON(3))
-         {
-            /* Set character orientation (if mouse is far from character,
-             * because if it is too near, some weird angles appears) */
-            dist = sqrt( (xFloor - activeCharacter->scNode->getPosX()) *
-                         (xFloor - activeCharacter->scNode->getPosX()) +
-                         (zFloor - activeCharacter->scNode->getPosZ()) *
-                         (zFloor - activeCharacter->scNode->getPosZ()) );
-            
-            walkAngle = getAngle(activeCharacter->scNode->getPosX(),
-                                 activeCharacter->scNode->getPosZ(),
-                                 xFloor, zFloor);
-            if(dist > 4)
-            {
-               /* Try to change the angle */
-               if(canWalk(0,0, walkAngle-activeCharacter->scNode->getAngleY()))
-               { 
-                  /* can change */
-                  activeCharacter->scNode->setAngle(0.0f, walkAngle, 0.0f);
+                     /* If near, enter battle Mode  */
+                     enterBattleMode(false);
+                  }
                }
+               npc = (character*)npc->getNext();
+            }
+         }
 
-               /* Verify if is running or walking */
-               run = dist >= ENGINE_CONTINUOUS_RUN_DISTANCE;
+         /* Verify if need to endTurn */
+         if(option->getAutoEndTurn())
+         {
+            if( (engineMode == ENGINE_MODE_TURN_BATTLE) &&
+                  (fightStatus == FIGHT_PC_TURN) &&
+                  (!PCs->getActiveCharacter()->getCanAttack()) &&
+                  (!PCs->getActiveCharacter()->getCanMove()) )
+            {
+               /* Can't take more actions, so autoEnd the turn! */
+               brief->addText(gettext("No more actions. Turn ended."));
+               endTurn();
+            }
+         }
+
+         /* Get Mouse Coordinates at world system */
+         updateMouseWorldPos();
+
+         if( (time-lastMouse >=  REFRESH_RATE ) || 
+               ( (mButton & SDL_BUTTON(1) ) && 
+                 (time-lastMousePression >= REFRESH_RATE)) ||
+               (mouseButtonReleased[0]) ||
+               (mouseButtonReleased[2]) )
+         {
+            cursors->set(CURSOR_WALK);
+            lastMouse = time;
+
+            if(!gui->mouseOnGui(mouseX, mouseY))
+            {
+               if(verifyMouseActions(mButton) == 1)
+               {
+                  /* Changed Map, so */
+                  return(1);
+               }
             }
             else
             {
-               /* Keep the direction angle */
-               walkAngle = activeCharacter->scNode->getAngleY();
-               run = false;
+               occPosition = false;
             }
+         }
 
-            /* Reset, now for the continuous walk, the interval */
-            if(run)
+         /* Keyboard Verification */
+
+         /* Exit Engine */
+         if( ( keys[SDLK_ESCAPE] ) && 
+               ( (time-lastKeyb >= REFRESH_RATE) || 
+                 (lastKey != SDLK_ESCAPE) ) &&
+               (!gui->getActiveWindow()->isModal()) )
+         {
+            defineFrontSurface();
+            lastKey = SDLK_ESCAPE;
+            lastKeyb = time;
+            cursors->setTextOver("");
+            return(0);
+         }
+
+         /* Rest */
+         if( ( keys[option->getKey(DNT_KEY_REST)] ) &&
+               ( (time-lastKeyb >= REFRESH_RATE) ||
+                 (lastKey != option->getKey(DNT_KEY_REST)) ) &&
+               (!gui->getActiveWindow()->isModal()) )
+         {
+            rest();
+            lastKey = option->getKey(DNT_KEY_REST);
+         }
+
+         /* Screenshot */
+         if( ( keys[SDLK_F12] ) && 
+               ( (time-lastKeyb >= REFRESH_RATE) || 
+                 (lastKey != SDLK_F12) ) )
+         {
+            userInfo user;
+            string screenFile = user.getUserHome() + "screenshot.bmp";
+            screenshot(screenFile);
+            lastKey = SDLK_F12;
+            lastKeyb = time;
+         }
+
+         /* Show info about occ square */
+         if(keys[SDLK_F6])
+         {
+            Square* sq = PCs->getActiveCharacter()->ocSquare;
+            cerr << "occ: " << sq << endl;
+            if(sq)
             {
-               curWalkInterval = activeCharacter->walk_interval * 
-                                 ENGINE_RUN_MULTIPLIER;
+               cerr << sq->posX << " " << sq->posZ << endl;
+               cerr << sq->flags << endl;
+               cerr << (sq->flags & SQUARE_REFLECT) << endl;
+            }
+         }
+
+         /* Enter Attack Mode or End Turn */
+         if( (keys[option->getKey(DNT_KEY_BATTLE_TURN)]) && 
+               ( (time-lastKeyb >= REFRESH_RATE) || 
+                 (lastKey != option->getKey(DNT_KEY_BATTLE_TURN)) ) )
+         {
+            if(engineMode != ENGINE_MODE_TURN_BATTLE)
+            {
+               enterBattleMode(true);
+            }
+            else if(fightStatus == FIGHT_PC_TURN)
+            {
+               endTurn();
+            }
+            lastKey = option->getKey(DNT_KEY_BATTLE_TURN);
+            lastKeyb = time;
+         }
+
+         /* Enable / Disable The Range Draw */
+         if( (keys[SDLK_k]) && 
+               ( (time-lastKeyb >= REFRESH_RATE) || 
+                 (lastKey != SDLK_k) ) )
+         {
+            showRange = !showRange;
+            lastKey = SDLK_k;
+            lastKeyb = time;
+         }
+
+         /* Print All Models on List */
+         if( (keys[SDLK_F2]) && 
+               ( (time-lastKeyb >= REFRESH_RATE) || 
+                 (lastKey != SDLK_F2) ) )
+         {
+            lastKey = SDLK_F2;
+            lastKeyb = time;
+            //models.printAll();
+         }      
+
+         /* Open Minimap */
+         if( (keys[option->getKey(DNT_KEY_WINDOW_MINI_MAP)]) && 
+               ( (time-lastKeyb >= REFRESH_RATE) || 
+                 (lastKey != option->getKey(DNT_KEY_WINDOW_MINI_MAP)) ) )
+         {
+            if(!mapWindow->isOpened())
+            {
+               snd->addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/turn_page.ogg");
+               mapWindow->open(gui, 0,0, actualMap);
             }
             else
             {
-               curWalkInterval = activeCharacter->walk_interval;
+               snd->addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/close.ogg");
+               mapWindow->close(gui);
             }
 
-            /* Try to move it forward the angle */
-            varX = -1 * curWalkInterval * sin(deg2Rad(walkAngle));
-            varZ = -1 * curWalkInterval * cos(deg2Rad(walkAngle));
+            lastKey = option->getKey(DNT_KEY_WINDOW_MINI_MAP);
+            lastKeyb = time;
+         }
+
+         /* Open ShortCuts */
+         if( (keys[option->getKey(DNT_KEY_WINDOW_SHORTCUTS)]) && 
+               ( (time-lastKeyb >= REFRESH_RATE) || 
+                 (lastKey != option->getKey(DNT_KEY_WINDOW_SHORTCUTS)) ) )
+         {
+            shortcuts->open(gui);
+            lastKey = option->getKey(DNT_KEY_WINDOW_SHORTCUTS);
+            lastKeyb = time;
+         }
+
+         /* Open Briefing */
+         if( (keys[option->getKey(DNT_KEY_WINDOW_BRIEFING)]) && 
+               ( (time-lastKeyb >= REFRESH_RATE) || 
+                 (lastKey != option->getKey(DNT_KEY_WINDOW_BRIEFING)) ) )
+         {
+            brief->openWindow(gui);
+            lastKey = option->getKey(DNT_KEY_WINDOW_BRIEFING);
+            lastKeyb = time;
+         }
+
+         /* Open Close Inventory */
+         if( (keys[option->getKey(DNT_KEY_WINDOW_INVENTORY)]) && 
+               ( (time-lastKeyb >= REFRESH_RATE) || 
+                 (lastKey != option->getKey(DNT_KEY_WINDOW_INVENTORY)) ) )
+         {
+            openCloseInventoryWindow(); 
+            lastKey = option->getKey(DNT_KEY_WINDOW_INVENTORY);
+            lastKeyb = time;
+         }
+
+         /* Open Character Info Window */
+         if( (keys[option->getKey(DNT_KEY_WINDOW_CHARACTER)]) && 
+               ( (time-lastKeyb >= REFRESH_RATE) || 
+                 (lastKey != option->getKey(DNT_KEY_WINDOW_CHARACTER)) ) ) 
+         {
+            lastKey = option->getKey(DNT_KEY_WINDOW_CHARACTER);
+            lastKeyb = time;
+            if(charInfoWindow)
+            {
+               charInfoWindow->open(PCs->getActiveCharacter());
+            }
+         }
+
+         /* Open Journal Window */
+         if( (keys[option->getKey(DNT_KEY_WINDOW_JOURNAL)]) && 
+               ( (time-lastKeyb >= REFRESH_RATE) || 
+                 (lastKey != option->getKey(DNT_KEY_WINDOW_JOURNAL)) ) ) 
+         {
+            lastKey = option->getKey(DNT_KEY_WINDOW_JOURNAL);
+            lastKeyb = time;
+            if(journal)
+            {
+               if(journal->isOpen())
+               {
+                  snd->addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/close.ogg");
+                  journal->close();
+               }
+               else
+               {
+                  snd->addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/turn_page.ogg");
+                  journal->open(gui);
+               }
+            }
+         }
+
+
+         /* Pass time */
+         if( (keys[SDLK_0]) && 
+               ( (time-lastKeyb >= REFRESH_RATE) || 
+                 (lastKey != SDLK_0) ) )
+         {
+            lastKey = SDLK_0;
+            lastKeyb = time;
+            hour += 0.1;
+         }
+
+         /* Toggle Run state */
+         if( (keys[option->getKey(DNT_KEY_TOGGLE_RUN_1)]) || 
+               (keys[option->getKey(DNT_KEY_TOGGLE_RUN_2)]) )
+         {
+            run = !option->getAlwaysRun();
+         }
+
+         /* Define current walk interval */
+         if(run)
+         {
+            curWalkInterval = activeCharacter->walk_interval * 
+               ENGINE_RUN_MULTIPLIER;
+         }
+         else
+         {
+            curWalkInterval = activeCharacter->walk_interval;
+         }
+
+         /* Keys to character's movimentation */
+         if( (keys[option->getKey(DNT_KEY_MOVE_LEFT)]) || 
+               (keys[option->getKey(DNT_KEY_MOVE_RIGHT)]) )
+         {
+            walkStatus = ENGINE_WALK_KEYS;
+            varX = curWalkInterval * 
+               sin(deg2Rad(activeCharacter->scNode->getAngleY()+90.0f));
+            varZ = curWalkInterval * 
+               cos(deg2Rad(activeCharacter->scNode->getAngleY()+90.0f));
+            // Left walk
+            if(keys[option->getKey(DNT_KEY_MOVE_LEFT)]) 
+            {
+               varX *= -1;
+               varZ *= -1;
+            }
+
+            walked |= tryWalk(varX, varZ);
+
+         }
+         else if( (keys[option->getKey(DNT_KEY_MOVE_FORWARD)]) || 
+               (keys[option->getKey(DNT_KEY_MOVE_BACKWARD)]) )
+         { 
+            walkStatus = ENGINE_WALK_KEYS;
+            varX = curWalkInterval * 
+               sin(deg2Rad(activeCharacter->scNode->getAngleY()));
+            varZ = curWalkInterval * 
+               cos(deg2Rad(activeCharacter->scNode->getAngleY()));
+            if(keys[option->getKey(DNT_KEY_MOVE_FORWARD)]) 
+            {
+               varX *= -1;
+               varZ *= -1;
+            }
+
             walked |= tryWalk(varX, varZ);
          }
-         else
+
+         if( (keys[option->getKey(DNT_KEY_ROTATE_LEFT)]) || 
+               (keys[option->getKey(DNT_KEY_ROTATE_RIGHT)]))
          {
-            /* Move Ends */
+            GLfloat ori = activeCharacter->scNode->getAngleY();
             walkStatus = ENGINE_WALK_KEYS;
-            cursors->set(CURSOR_WALK);
+            // CounterClockWise Character turn
+            if( (keys[option->getKey(DNT_KEY_ROTATE_LEFT)]) && 
+                  (canWalk(0,0,TURN_VALUE)) )  
+            {
+               ori += TURN_VALUE;
+               if(ori > 360.0f)
+               { 
+                  ori -= 360.0f;
+               }
+               activeCharacter->scNode->setAngle(0.0f, ori, 0.0f);
+               walked = true;
+            }
+            // Clockwise Character Turn
+            if( (keys[option->getKey(DNT_KEY_ROTATE_RIGHT)]) && 
+                  (canWalk(0,0,-TURN_VALUE)) )
+            {
+               ori -= TURN_VALUE;
+               if(ori < 0.0f)
+               {
+                  ori += 360.0f;
+               }
+               activeCharacter->scNode->setAngle(0.0f, ori, 0.0f);
+            }
+            walked = true;
          }
-      }
-
-      /* Verify if found path in aStar */
-      int astate = activeCharacter->pathFind.getState();
-      if(astate == ASTAR_STATE_FOUND)
-      {
-         /* Found path to, so walk */
-         walkStatus = ENGINE_WALK_MOUSE_ASTAR;
-      }
-      else if(astate == ASTAR_STATE_NOT_FOUND)
-      {
-         brief->addText(gettext("A* could not find a path!"), 220,20,220, true);
-      }
-
-      if(walkStatus == ENGINE_WALK_MOUSE_ASTAR)
-      {
-         float pX=activeCharacter->scNode->getPosX();
-         float pY=activeCharacter->scNode->getPosY();
-         float pZ=activeCharacter->scNode->getPosZ();
-         float aY=activeCharacter->scNode->getAngleY();
-         if(! activeCharacter->pathFind.getNewPosition(pX,pZ,aY,
-                  engineMode == ENGINE_MODE_TURN_BATTLE, run))
+         if(keys[option->getKey(DNT_KEY_CHANGE_CHARACTER)]) //Activate Character
          {
             walkStatus = ENGINE_WALK_KEYS;
+            if(keys[SDLK_LCTRL]) //Previous Character
+            {
+               PCs->setActiveCharacter(
+                     (character*)activeCharacter->getPrevious());
+            }
+            else //Next Character
+            {
+               PCs->setActiveCharacter((character*)activeCharacter->getNext());
+            }
+            activeCharacter = PCs->getActiveCharacter();
+            gameCamera.updateCamera(activeCharacter->scNode->getPosX(),
+                  activeCharacter->scNode->getPosY(), 
+                  activeCharacter->scNode->getPosZ(),
+                  activeCharacter->scNode->getAngleY());
+            SDL_Delay(100);
          }
-         else
+
+         /* Camera Verification */
+         gameCamera.doIO(keys, mButton, x, y, mouseWheel, DELTA_CAMERA );
+
+         /* Set press time, if needed */
+         if( (mButton & SDL_BUTTON(3)) && (!gui->mouseOnGui(x,y)) && 
+               (walkPressTime == 0) && (walkStatus != ENGINE_WALK_MOUSE) )
          {
-            /* Define New Occuped Square */
-            activeCharacter->scNode->set(pX,pY,pZ,0.0f,aY,0.0f);
-            activeCharacter->defineOcSquare(actualMap);
-
-            /* Define New Height */
-            defineCharacterHeight(activeCharacter, 
-                  activeCharacter->scNode->getPosX(),
-                  activeCharacter->scNode->getPosZ());
+            walkPressTime = time;
          }
 
-         gameCamera.updateCamera(activeCharacter->scNode->getPosX(),
-               activeCharacter->scNode->getPosY(),
-               activeCharacter->scNode->getPosZ(),
-               activeCharacter->scNode->getAngleY());
-         walked = true;
-      }
+         /* Verify, if we got a continuous mouse action or a A* init */
+         if( ( time - walkPressTime >= ENGINE_WALK_ACTION_DELAY ) &&
+               ( walkPressTime != 0) && (mButton & SDL_BUTTON(3)) )
+         {
+            /* Continuous walk */
+            walkStatus = ENGINE_WALK_MOUSE;
+            walkPressTime = 0;
+            if(activeCharacter->pathFind.getState() == ASTAR_STATE_RUNNING)
+            {
+               /* Must stop the A* */
+               activeCharacter->pathFind.clear();
+            }
+         }
+         else if( (walkPressTime != 0) && !(mButton & SDL_BUTTON(3)) && 
+               (pcHaveWalkAction()) )
+         {
+            /* Path Verification */
+            walkPressTime = 0;
 
-      /* IA cycle */
-      treatScripts();
+            activeCharacter->pathFind.defineMap(actualMap);
+
+            activeCharacter->pathFind.findPath(activeCharacter, xReal, zReal, 
+                  activeCharacter->walk_interval, NPCs, PCs, 
+                  engineMode == ENGINE_MODE_TURN_BATTLE);
+         }
+
+         /* Verify Continuous Walk with Mouse */
+         if(walkStatus == ENGINE_WALK_MOUSE)
+         {
+            cursors->set(CURSOR_WALK_CONT);
+            if(mButton & SDL_BUTTON(3))
+            {
+               /* Set character orientation (if mouse is far from character,
+                * because if it is too near, some weird angles appears) */
+               dist = sqrt( (xFloor - activeCharacter->scNode->getPosX()) *
+                     (xFloor - activeCharacter->scNode->getPosX()) +
+                     (zFloor - activeCharacter->scNode->getPosZ()) *
+                     (zFloor - activeCharacter->scNode->getPosZ()) );
+
+               walkAngle = getAngle(activeCharacter->scNode->getPosX(),
+                     activeCharacter->scNode->getPosZ(),
+                     xFloor, zFloor);
+               if(dist > 4)
+               {
+                  /* Try to change the angle */
+                  if(canWalk(0, 0, 
+                           walkAngle-activeCharacter->scNode->getAngleY()))
+                  { 
+                     /* can change */
+                     activeCharacter->scNode->setAngle(0.0f, walkAngle, 0.0f);
+                  }
+
+                  /* Verify if is running or walking */
+                  run = dist >= ENGINE_CONTINUOUS_RUN_DISTANCE;
+               }
+               else
+               {
+                  /* Keep the direction angle */
+                  walkAngle = activeCharacter->scNode->getAngleY();
+                  run = false;
+               }
+
+               /* Reset, now for the continuous walk, the interval */
+               if(run)
+               {
+                  curWalkInterval = activeCharacter->walk_interval * 
+                     ENGINE_RUN_MULTIPLIER;
+               }
+               else
+               {
+                  curWalkInterval = activeCharacter->walk_interval;
+               }
+
+               /* Try to move it forward the angle */
+               varX = -1 * curWalkInterval * sin(deg2Rad(walkAngle));
+               varZ = -1 * curWalkInterval * cos(deg2Rad(walkAngle));
+               walked |= tryWalk(varX, varZ);
+            }
+            else
+            {
+               /* Move Ends */
+               walkStatus = ENGINE_WALK_KEYS;
+               cursors->set(CURSOR_WALK);
+            }
+         }
+
+         /* Verify if found path in aStar */
+         int astate = activeCharacter->pathFind.getState();
+         if(astate == ASTAR_STATE_FOUND)
+         {
+            /* Found path to, so walk */
+            walkStatus = ENGINE_WALK_MOUSE_ASTAR;
+         }
+         else if(astate == ASTAR_STATE_NOT_FOUND)
+         {
+            brief->addText(gettext("A* could not find a path!"), 
+                  220,20,220, true);
+         }
+
+         if(walkStatus == ENGINE_WALK_MOUSE_ASTAR)
+         {
+            float pX=activeCharacter->scNode->getPosX();
+            float pY=activeCharacter->scNode->getPosY();
+            float pZ=activeCharacter->scNode->getPosZ();
+            float aY=activeCharacter->scNode->getAngleY();
+            if(! activeCharacter->pathFind.getNewPosition(pX,pZ,aY,
+                     engineMode == ENGINE_MODE_TURN_BATTLE, run))
+            {
+               walkStatus = ENGINE_WALK_KEYS;
+            }
+            else
+            {
+               /* Define New Occuped Square */
+               activeCharacter->scNode->set(pX,pY,pZ,0.0f,aY,0.0f);
+               activeCharacter->defineOcSquare(actualMap);
+
+               /* Define New Height */
+               defineCharacterHeight(activeCharacter, 
+                     activeCharacter->scNode->getPosX(),
+                     activeCharacter->scNode->getPosZ());
+            }
+
+            gameCamera.updateCamera(activeCharacter->scNode->getPosX(),
+                  activeCharacter->scNode->getPosY(),
+                  activeCharacter->scNode->getPosZ(),
+                  activeCharacter->scNode->getAngleY());
+            walked = true;
+         }
+
+         /* IA cycle */
+         treatScripts();
+      }
 
       /* A* cycle */
       doAStar();
@@ -3315,10 +3364,13 @@ int engine::treatIO(SDL_Surface *screen)
                                          activeCharacter->scNode->getPosZ());
 
       /* Get GUI Event */ 
-      Farso::GuiObject* object;
-      object = gui->manipulateEvents(x,y,mButton,keys, guiEvent);
-      /* Threat the GUI */
-      treatGuiEvents(object, guiEvent);
+      if(!callCampaignScript)
+      {
+         Farso::GuiObject* object;
+         object = gui->manipulateEvents(x,y,mButton,keys, guiEvent);
+         /* Threat the GUI */
+         treatGuiEvents(object, guiEvent);
+      }
          
       /* Draw things */
       if(shadowMap.isEnable())
@@ -4160,6 +4212,14 @@ void engine::showImage(string fileName)
 fightSystem* engine::getFightSystem()
 {
    return(fight);
+}
+
+/*********************************************************************
+ *                        getCurrentCampaign                         *
+ *********************************************************************/
+DNT::Campaign* engine::getCurrentCampaign()
+{
+   return(curCampaign);
 }
 
 /*********************************************************************

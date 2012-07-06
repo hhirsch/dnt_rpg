@@ -49,6 +49,7 @@
 #include "barterwindow.h"
 #include "briefing.h"
 #include "camera.h"
+#include "campaign.h"
 #include "character.h"
 #include "charwindow.h"
 #include "classwindow.h"
@@ -177,6 +178,14 @@ class engine
 
       /*!
        **************************************************************** 
+       * Load a campaign
+       * \param campaignFile -> campaign file name
+       * \param loadingGame -> true when loading from a saveFile
+       ****************************************************************/ 
+      void loadCampaign(std::string campaignFile, bool loadingGame=false);
+
+      /*!
+       **************************************************************** 
        * Load and activate Map to engine
        * \param arqMapa -> string with filename
        * \param loadingGame -> true when loading map for a saveFile
@@ -281,6 +290,13 @@ class engine
        * \return pointer to the current opened map
        ***************************************************************/
       Map* getCurrentMap();
+
+      /*!
+       ***************************************************************
+       * Get the current opened campaign at the engine
+       * \return pointer to the current opened campaign
+       ***************************************************************/
+      DNT::Campaign* getCurrentCampaign();
 
    private:
 
@@ -451,6 +467,8 @@ class engine
 
       dirs dir;                    /**< Data directories finder */
 
+      DNT::Campaign* curCampaign;  /**< Current Campaign */
+      bool callCampaignScript;     /**< Call the campaign script or not */
       Map* actualMap;              /**< Actual Engine Map */
       cursor* cursors;             /**< Utilized mouse cursors */
 

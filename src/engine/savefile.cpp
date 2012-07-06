@@ -1,21 +1,21 @@
 /* 
-  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  DNT: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
-  This file is part of DccNiTghtmare.
+  This file is part of DNT.
  
-  DccNiTghtmare is free software: you can redistribute it and/or modify
+  DNT is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  DccNiTghtmare is distributed in the hope that it will be useful,
+  DNT is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+  along with DNT.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 
@@ -36,6 +36,7 @@ using namespace std;
 #define DNT_SAVE_TOKEN_VERSION       "version"
 #define DNT_SAVE_TOKEN_TITLE         "title"
 #define DNT_SAVE_TOKEN_IMAGE         "image"
+#define DNT_SAVE_TOKEN_CAMPAIGN      "campaign"
 #define DNT_SAVE_TOKEN_MAP           "map"
 #define DNT_SAVE_TOKEN_MOD_STATE     "modState"
 #define DNT_SAVE_TOKEN_MISSIONS      "missions"
@@ -54,6 +55,7 @@ saveFile::saveFile()
    title = "";
    version = "";
    imageFile = "";
+   campaignFile = "campaigns/default.cpg";
    mapFile = "";
    modStateFile = "";
    missionsFile = "";
@@ -92,6 +94,15 @@ string saveFile::getImageFile()
 {
    return(imageFile);
 }
+
+/***********************************************************************
+ *                          getCurrentCampaign                         *
+ ***********************************************************************/
+string saveFile::getCurrentCampaign()
+{
+   return(campaignFile);
+}
+
 
 /***********************************************************************
  *                             getCurrentMap                           *
@@ -176,6 +187,7 @@ bool saveFile::save(string saveFile, engine* curEngine,
    /* Define variables/files */
    version = VERSION;
    imageFile = prefix + ".bmp";
+   campaignFile = curEngine->getCurrentCampaign()->getFileName();
    mapFile = curEngine->getCurrentMap()->getFileName();
    modStateFile = prefix + ".mod";
    missionsFile = prefix + ".mis";
@@ -195,6 +207,8 @@ bool saveFile::save(string saveFile, engine* curEngine,
    file << DNT_SAVE_TOKEN_TITLE << " = " << title << endl;
    /* Save Image path */
    file << DNT_SAVE_TOKEN_IMAGE << " = " << imageFile << endl;
+   /* Current Campaign */
+   file << DNT_SAVE_TOKEN_CAMPAIGN << " = " << campaignFile << endl;
    /* Current Map */
    file << DNT_SAVE_TOKEN_MAP << " = " << mapFile << endl;
    /* Save the Modif State File */
@@ -211,10 +225,10 @@ bool saveFile::save(string saveFile, engine* curEngine,
                                                << pcPos[2] << ":" 
                                                << pcAngle << endl;
    file << DNT_SAVE_TOKEN_CAMERA_INFO << " = " 
-                                      << curEngine->gameCamera.getPhi() << ":"
-                                      << curEngine->gameCamera.getTheta() << ":"
-                                      << curEngine->gameCamera.getDeltaY() << ":"
-                                      << curEngine->gameCamera.getD() << endl;
+        << curEngine->gameCamera.getPhi() << ":"
+        << curEngine->gameCamera.getTheta() << ":"
+        << curEngine->gameCamera.getDeltaY() << ":"
+        << curEngine->gameCamera.getD() << endl;
    file << DNT_SAVE_TOKEN_HOUR << " = " << curEngine->getHour() << endl;
 
    /* Close the file */
@@ -294,6 +308,9 @@ bool saveFile::load(engine* curEngine)
       /* Load the modState! */
       modif.loadState(modStateFile);
    }
+
+   /* Load the campaign */
+   curEngine->loadCampaign(campaignFile, true);
 
    if(!mapFile.empty())
    {
@@ -418,6 +435,11 @@ bool saveFile::loadHeader(string fileName)
          /* Define the positions */
          sscanf(value.c_str(), "%f,%f,%f:%f", &pcPos[0], &pcPos[1], 
                &pcPos[2], &pcAngle);
+      }
+      else if(key == DNT_SAVE_TOKEN_CAMPAIGN)
+      {
+         /* Define the current campaign file */
+         campaignFile = value;
       }
       else if(key == DNT_SAVE_TOKEN_MAP)
       {

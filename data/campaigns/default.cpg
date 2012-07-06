@@ -1,0 +1,6 @@
+# The default DNT campaign
+# TODO: need to define the initial book!
+name = DNT
+description = DNT
+initialMap = mapas/tutorial/house1.map
+initialScript = campaigns/scripts/default.dsl

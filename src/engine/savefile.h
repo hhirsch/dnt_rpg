@@ -1,21 +1,21 @@
 /* 
-  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  DNT: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
-  This file is part of DccNiTghtmare.
+  This file is part of DNT.
  
-  DccNiTghtmare is free software: you can redistribute it and/or modify
+  DNT is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  DccNiTghtmare is distributed in the hope that it will be useful,
+  DNT is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+  along with DNT.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #ifndef _dnt_save_file_h
@@ -58,7 +58,8 @@ class saveFile
        * \param curEngine -> pointer to the current engine
        * \param frontSurface -> pointer to the frontSurface (screenshot)
        * \return -> true if can save, false otherwise */
-      bool save(std::string saveFile, engine* curEngine, SDL_Surface* frontSurface);
+      bool save(std::string saveFile, engine* curEngine, 
+            SDL_Surface* frontSurface);
 
       /*! Get the save file title
        * \return -> save file title */
@@ -66,6 +67,9 @@ class saveFile
       /*! Get the image file
        * \return -> save image file name */
       std::string getImageFile();
+      /*! Get the current campaign filename
+       * \return -> current campaign filename */
+      std::string getCurrentCampaign();
       /*! Get the current map filename
        * \return -> current map filename */
       std::string getCurrentMap();
@@ -82,6 +86,7 @@ class saveFile
       std::string version;          /**< The DNT version who created the save */
       std::string imageFile;        /**< The screenshot file */
       std::string invFile;          /**< The inventory file */
+      std::string campaignFile;     /**< The current campaign */
       std::string mapFile;          /**< The current map file */
       std::string modStateFile;     /**< The modState file */
       std::string missionsFile;     /**< The missions file */

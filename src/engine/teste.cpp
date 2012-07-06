@@ -123,7 +123,7 @@ int main(int argc, char **argv)
              cBook->run();
 
              /* Finally, begin the game! */
-             gameEngine->loadMap("mapas/tutorial/house1.map");
+             gameEngine->loadCampaign("campaigns/default.cpg");
           }
        }
        
