@@ -2250,10 +2250,15 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       if(c != NULL)
       {
          dialogWindow dlgWindow;
-         dlgWindow.open(actualEngine->gui, 
-               actualEngine->PCs->getActiveCharacter(),
+         character* acPc = actualEngine->PCs->getActiveCharacter();
+         dlgWindow.open(actualEngine->gui, acPc,
                (conversation*)c->getConversation(),
                c->getPortraitFileName());
+         /* Set characters angles */
+         float angle = getAngle(c->scNode->getPosX(), c->scNode->getPosZ(),
+               acPc->scNode->getPosX(), acPc->scNode->getPosZ());
+         c->setOrientation(angle);
+         acPc->setOrientation(180-angle);
       }
    }
 
