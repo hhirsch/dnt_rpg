@@ -2243,6 +2243,20 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       }
    }
 
+   /* Syntax void function(character c) */
+   else if(functionName == IA_CHARACTER_OPEN_DIALOG)
+   {
+      character* c = getParameterc(token, strLine, pos);
+      if(c != NULL)
+      {
+         dialogWindow dlgWindow;
+         dlgWindow.open(actualEngine->gui, 
+               actualEngine->PCs->getActiveCharacter(),
+               (conversation*)c->getConversation(),
+               c->getPortraitFileName());
+      }
+   }
+
    /* Syntax int function(character c)  */
    else if( (functionName == IA_CHARACTER_GET_ACTUAL_LIFE) ||
             (functionName == IA_CHARACTER_GET_MAX_LIFE) ||

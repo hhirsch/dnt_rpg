@@ -291,6 +291,9 @@
 /*! void showTextStatic(character c, text string) */
 #define IA_CHARACTER_SHOW_TEXT_STATIC  "showTextStatic"
 
+/*! void openCharacterDialog(character c) */
+#define IA_CHARACTER_OPEN_DIALOG "openCharacterDialog"
+
 /*! int getPsycho(character c)  */
 #define IA_CHARACTER_GET_PSYCHO "getPsycho"
 /*! void setPsycho(character c, int psychoState)  */

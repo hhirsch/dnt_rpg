@@ -155,7 +155,8 @@ bool isFunction(string s)
            (s == IA_CHARACTER_SHOW_TEXT_STATIC) ||
            (s == IA_CHARACTER_SET_ANIMATION) ||
            (s == IA_CHARACTER_CALL_ANIMATION) || (s == IA_PLAY_SOUND) ||
-           (s == IA_CHARACTER_ADD_FEAT) || (s == IA_CHARACTER_HAVE_FEAT) );
+           (s == IA_CHARACTER_ADD_FEAT) || (s == IA_CHARACTER_HAVE_FEAT) ||
+           (s == IA_CHARACTER_OPEN_DIALOG) );
 }
 
 /***********************************************************************

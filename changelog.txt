@@ -18,6 +18,7 @@
  - Enabled keyboard for dialog option selection;
  - Script to control chicken idle behaviour;
  - Campaign abstractions to allow more easy engine customization;
+ - Initial Script for default campaign;
 
 BugFixes:
  - heightmap2dnt: Fixed a missing include;
