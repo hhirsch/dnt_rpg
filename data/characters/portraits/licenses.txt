@@ -61,6 +61,7 @@ moca02
 nikki.png
 senhor01.png
 senhor02.png
+senhor03.png
 velho01.png
 velho02.png
    Author: Filipe Dilly
@@ -72,6 +73,7 @@ velho02.png
            http://dillydailydraws.wordpress.com/2011/08/30/229/
            http://dillydailydraws.wordpress.com/2011/08/13/211/
            http://dillydailydraws.wordpress.com/2011/08/07/209/
+           http://dillydailydraws.wordpress.com/2012/01/09/238/
            http://dillydailydraws.wordpress.com/2011/08/30/222/
            http://dillydailydraws.wordpress.com/2011/10/08/226/
 
