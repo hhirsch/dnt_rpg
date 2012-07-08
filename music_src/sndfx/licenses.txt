@@ -89,3 +89,8 @@ computer-negative.flac
    license: CC-BY 3.0
    source: http://www.freesound.org/people/DJ%20Chronos/sounds/123102/
            http://www.freesound.org/people/DJ%20Chronos/sounds/123100/
+
+fire.flac
+   author: PhreaKsAccount <http://www.freesound.org/people/PhreaKsAccount/>
+   license: CC-BY 3.0
+   souce: http://www.freesound.org/people/PhreaKsAccount/sounds/46272/
