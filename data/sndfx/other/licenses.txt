@@ -1,3 +1,16 @@
 battleMode.ogg
    author: DNTeam
    license: GPLv3 or later;
+
+waterfall.ogg
+   author: dikolson <http://www.freesound.org/people/dikolson/>
+   license: CC0/Public Domain
+   source: http://www.freesound.org/people/dikolson/sounds/130232/
+   note: cut by qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+
+computer-positive.ogg
+computer-negative.ogg
+   author: DJ Chronos <http://www.freesound.org/people/DJ%20Chronos/>
+   license: CC-BY 3.0
+   source: http://www.freesound.org/people/DJ%20Chronos/sounds/123102/
+           http://www.freesound.org/people/DJ%20Chronos/sounds/123100/
