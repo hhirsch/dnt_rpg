@@ -94,3 +94,9 @@ fire.flac
    author: PhreaKsAccount <http://www.freesound.org/people/PhreaKsAccount/>
    license: CC-BY 3.0
    souce: http://www.freesound.org/people/PhreaKsAccount/sounds/46272/
+
+console.flac
+   author: DJ Chronos http://www.freesound.org/people/DJ%20Chronos/
+   license: CC-BY 3.0
+   source: http://www.freesound.org/people/DJ%20Chronos/sounds/123094/
+   note: edited (150% speedup) by qubodup (Iwan Gabovitch) <qubodup@gmail.com
