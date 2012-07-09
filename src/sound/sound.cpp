@@ -117,6 +117,9 @@ bool sound::initOpenAL()
       {
          alcMakeContextCurrent(context);
          enabled = true;
+         
+         /* set attenuation model */
+         alDistanceModel(AL_INVERSE_DISTANCE);
          return(true);
       }
       else
