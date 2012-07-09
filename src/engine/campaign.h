@@ -52,6 +52,8 @@ class Campaign
       std::string getDescription(){return(description);};
       /*! Get campaign initial map filename */
       std::string getInitialMap(){return(initialMap);};
+      /*! Get the introduction book name (if any) */
+      std::string getIntroductionBook(){return(introBook);};
 
       /*! Call initial script
        * \note -> usually called after the initial map first load by engine
@@ -67,6 +69,7 @@ class Campaign
       std::string name;          /**< Campaign name */
       std::string description;   /**< Campaign description */
       std::string initialScript; /**< Initial Script */
+      std::string introBook;     /**< Introduction comic book */
       engine* curEngine;         /**< Current engine */
       iaScript* curScript;       /**< Current running script */
 };

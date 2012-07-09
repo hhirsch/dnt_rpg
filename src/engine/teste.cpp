@@ -29,7 +29,6 @@ using namespace std;
 
 #include "../etc/userinfo.h"
 #include "../etc/dirs.h"
-#include "../cbook/comicbook.h"
 
 
 /*********************************************************************
@@ -116,11 +115,6 @@ int main(int argc, char **argv)
              /* Change to initial music */
              sound snd;
              snd.loadMusic("music/emptycity.ogg");
-             
-             /* Show Introduction comic book */
-             comicBook* cBook = new comicBook();
-             cBook->load("comics/intro/intro.dcb");
-             cBook->run();
 
              /* Finally, begin the game! */
              gameEngine->loadCampaign("campaigns/default.cpg");

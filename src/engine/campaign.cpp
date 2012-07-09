@@ -39,6 +39,7 @@ Campaign::Campaign(engine* eng, std::string fileName)
    initialScript = "";
    initialMap = "";
    campaignFile = fileName;
+   introBook = "";
    load(fileName);
 }
 
@@ -83,6 +84,10 @@ void Campaign::load(std::string fileName)
          else if(key == "initialMap")
          {
             initialMap = value;
+         }
+         else if(key == "intro")
+         {
+            introBook = value;
          }
          else
          {

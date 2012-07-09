@@ -23,6 +23,7 @@
 #include "util.h"
 #include "savefile.h"
 #include "savewindow.h"
+#include "../cbook/comicbook.h"
 
 #include <math.h>
 #ifdef __APPLE__
@@ -679,6 +680,14 @@ void engine::loadCampaign(std::string campaignFile, bool loadingGame)
 
    if(!loadingGame)
    {
+      /* Load and display introduction comic book (if defined) */
+      if(!curCampaign->getIntroductionBook().empty())
+      {
+         comicBook* cBook = new comicBook();
+         cBook->load(curCampaign->getIntroductionBook());
+         cBook->run();
+      }
+      
       /* Load the initial map */
       loadMap(curCampaign->getInitialMap());
    }

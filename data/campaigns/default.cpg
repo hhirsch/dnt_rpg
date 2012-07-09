@@ -1,6 +1,18 @@
-# The default DNT campaign
-# TODO: need to define the initial book!
+#
+# default.cpg: The default DNT campaign definition
+#
+
+# Campaign Name
 name = DNT
+
+# Campaign description
 description = DNT
+
+# Initial campaign map
 initialMap = mapas/tutorial/house1.map
+
+# [OPTIONAL] Script to call at campaign begin (on the initial map)
 initialScript = campaigns/scripts/default.dsl
+
+# [OPTIONAL] Comic book before loading first campaign map at campaign beggining.
+intro = comics/intro/intro.dcb
