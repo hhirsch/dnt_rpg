@@ -109,6 +109,8 @@
 		<Unit filename="..\src\engine\briefing.h" />
 		<Unit filename="..\src\engine\camera.cpp" />
 		<Unit filename="..\src\engine\camera.h" />
+		<Unit filename="..\src\engine\campaign.cpp" />
+		<Unit filename="..\src\engine\campaign.h" />
 		<Unit filename="..\src\engine\character.cpp" />
 		<Unit filename="..\src\engine\character.h" />
 		<Unit filename="..\src\engine\charwindow.cpp" />

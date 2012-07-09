@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_workspace_file>
 	<Workspace title="Workspace">
-		<Project filename="dnt.cbp" />
-		<Project filename="DNTMapEditor.cbp" active="1" />
+		<Project filename="dnt.cbp" active="1" />
+		<Project filename="DNTMapEditor.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>
