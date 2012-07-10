@@ -22,6 +22,7 @@ script()
    cluckSound2 = "sndfx/animal/clucking02.ogg"
    hardCluck1 = "sndfx/animal/cluck_hard01.ogg"
 
+   wait(rollDice(10))
 
    # The infinite while-the-application-is-running loop
    while(true)
@@ -32,26 +33,27 @@ script()
       if(diceValue <= 4)
          # Eating state (40%)
          setAnimation(SELF_CHARACTER, 0)
-         wait(8)
+         wait(20)
       else if(diceValue <= 6)
          # Walk (20%)
          
          # Play sound
-         playSound(cluckSound2, OWNER_POSX, OWNER_HEIGHT, OWNER_POSZ)
+         playSound(cluckSound2, OWNER_POSX, OWNER_HEIGHT, OWNER_POSZ, 30, 5)
 
          # Get a random position 
          # Note that rolDice(3)-2 will return -1, 0 or 1
          pX = OWNER_POSX + (rollDice(3)-2)*rollDice(80)
          pZ = OWNER_POSZ + (rollDice(3)-2)*rollDice(80)
          moveToPosition(SELF_CHARACTER, pX, pZ)
+         wait(20)
       else if(diceValue <= 9)
          # Cluck! (30%)
-         playSound(cluckSound1, OWNER_POSX, OWNER_HEIGHT, OWNER_POSZ)
-         wait(5)
+         playSound(cluckSound1, OWNER_POSX, OWNER_HEIGHT, OWNER_POSZ, 30, 5)
+         wait(10)
       else if(diceValue == 10)
          # Cluck! (10%)
-         playSound(hardCluck1, OWNER_POSX, OWNER_HEIGHT, OWNER_POSZ)
-         wait(3)
+         playSound(hardCluck1, OWNER_POSX, OWNER_HEIGHT, OWNER_POSZ, 30, 5)
+         wait(8)
       end
    end
 
