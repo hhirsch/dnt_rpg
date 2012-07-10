@@ -40,7 +40,9 @@ dialog(1)
          post_test = roll(OPERATE_ELETRONIC_OBJECTS, 5)
          if_action = change_object_state(5)
          if_action = receive_xp(15)
+         if_action = play_sound("sndfx/other/computer-positive.ogg")
          if_action = go_to_dialog(2)
+         else_action = play_sound("sndfx/other/computer-negative.ogg")
          else_action = go_to_dialog(3)
 
       # The ORIGINAL Windows Install
@@ -50,7 +52,9 @@ dialog(1)
          post_test = roll(OPERATE_ELETRONIC_OBJECTS, 6)
          if_action = change_object_state(4)
          if_action = receive_xp(25)
+         if_action = play_sound("sndfx/other/computer-positive.ogg")
          if_action = go_to_dialog(2)
+         else_action = play_sound("sndfx/other/computer-negative.ogg")
          else_action = go_to_dialog(3)
 
       # The UBUNTU Linux Install
@@ -61,7 +65,9 @@ dialog(1)
          if_action = change_object_state(3)
          if_action = receive_xp(25)
          if_action = dialog_init(5)
+         if_action = play_sound("sndfx/other/computer-positive.ogg")
          if_action = go_to_dialog(2)
+         else_action = play_sound("sndfx/other/computer-negative.ogg")
          else_action = go_to_dialog(3)
 
       # The GENTOO Linux Install
@@ -72,7 +78,9 @@ dialog(1)
          if_action = change_object_state(2)
          if_action = receive_xp(50)
          if_action = dialog_init(6)
+         if_action = play_sound("sndfx/other/computer-positive.ogg")
          if_action = go_to_dialog(2)
+         else_action = play_sound("sndfx/other/computer-negative.ogg")
          else_action = go_to_dialog(3)
 
       # Back (do nothing) option
