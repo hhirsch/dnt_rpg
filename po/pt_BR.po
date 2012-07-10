@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DNT\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2012-07-02 11:00-0300\n"
+"POT-Creation-Date: 2012-07-10 02:30+0200\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -98,7 +98,7 @@ msgstr "Não Sou Bobo"
 msgid "Invalid Talent"
 msgstr "Talento Inválido"
 
-#: src/classes/feats.cpp:242 src/engine/dccnit.cpp:2229
+#: src/classes/feats.cpp:242 src/engine/dccnit.cpp:2264
 msgid "Not enought points to use!"
 msgstr "Pontos não suficientes para usar!"
 
@@ -115,7 +115,7 @@ msgstr "Falhou na Missão!"
 msgid "Tendency & Alignment"
 msgstr "Tendência e Alinhamento"
 
-#: src/engine/alignwindow.cpp:76 src/engine/aspectwindow.cpp:93
+#: src/engine/alignwindow.cpp:76 src/engine/aspectwindow.cpp:97
 #: src/engine/attwindow.cpp:242 src/engine/classwindow.cpp:120
 #: src/engine/featsel.cpp:255 src/engine/options.cpp:1162
 #: src/engine/racewindow.cpp:122 src/engine/skillwindow.cpp:162
@@ -123,7 +123,7 @@ msgstr "Tendência e Alinhamento"
 msgid "Confirm"
 msgstr "Confirmar"
 
-#: src/engine/alignwindow.cpp:80 src/engine/aspectwindow.cpp:97
+#: src/engine/alignwindow.cpp:80 src/engine/aspectwindow.cpp:101
 #: src/engine/attwindow.cpp:246 src/engine/barterwindow.cpp:72
 #: src/engine/classwindow.cpp:124 src/engine/featsel.cpp:259
 #: src/engine/options.cpp:1166 src/engine/racewindow.cpp:126
@@ -135,15 +135,15 @@ msgstr "Cancelar"
 msgid "Aspect"
 msgstr "Aspecto"
 
-#: src/engine/aspectwindow.cpp:67 src/engine/charwindow.cpp:106
+#: src/engine/aspectwindow.cpp:71 src/engine/charwindow.cpp:106
 msgid "Name:"
 msgstr "Nome:"
 
-#: src/engine/aspectwindow.cpp:72 src/engine/charwindow.cpp:109
+#: src/engine/aspectwindow.cpp:76 src/engine/charwindow.cpp:109
 msgid "Age:"
 msgstr "Idade:"
 
-#: src/engine/aspectwindow.cpp:76 src/engine/charwindow.cpp:124
+#: src/engine/aspectwindow.cpp:80 src/engine/charwindow.cpp:124
 msgid "Sex:"
 msgstr "Sexo:"
 
@@ -197,8 +197,8 @@ msgstr "Carisma"
 msgid "Attribute Description"
 msgstr "Descrição do Atributo"
 
-#: src/engine/attwindow.cpp:559 src/engine/dccnit.cpp:597
-#: src/engine/dccnit.cpp:2228 src/engine/featsel.cpp:495
+#: src/engine/attwindow.cpp:559 src/engine/dccnit.cpp:611
+#: src/engine/dccnit.cpp:2263 src/engine/featsel.cpp:495
 #: src/engine/inventwindow.cpp:369 src/engine/options.cpp:1476
 msgid "Warning"
 msgstr "Aviso"
@@ -260,7 +260,7 @@ msgstr "Sucesso"
 msgid "Failure"
 msgstr "Falha"
 
-#: src/engine/character.cpp:568 src/engine/charwindow.cpp:141
+#: src/engine/character.cpp:604 src/engine/charwindow.cpp:141
 msgid "HP"
 msgstr "PV"
 
@@ -399,65 +399,65 @@ msgstr "Perícias da Classe"
 msgid "No Skills."
 msgstr "Sem Perícias"
 
-#: src/engine/dccnit.cpp:538 src/engine/dccnit.cpp:588
+#: src/engine/dccnit.cpp:552 src/engine/dccnit.cpp:602
 msgid "Error"
 msgstr "Erro"
 
-#: src/engine/dccnit.cpp:538
+#: src/engine/dccnit.cpp:552
 msgid "Can't load the saved game!"
 msgstr "Não consegui carregar o jogo salvo!"
 
-#: src/engine/dccnit.cpp:583
+#: src/engine/dccnit.cpp:597
 msgid "Information"
 msgstr "Informação"
 
-#: src/engine/dccnit.cpp:584
+#: src/engine/dccnit.cpp:598
 msgid "The game was saved!"
 msgstr "O jogo foi salvo!"
 
-#: src/engine/dccnit.cpp:588
+#: src/engine/dccnit.cpp:602
 msgid "Can't save game!"
 msgstr "Não consegui salvar o jogo!"
 
-#: src/engine/dccnit.cpp:598
+#: src/engine/dccnit.cpp:612
 msgid "Can't save game while fighting!"
 msgstr "Não é possível salvar o jogo durante uma batalha!"
 
-#: src/engine/dccnit.cpp:731
+#: src/engine/dccnit.cpp:766
 msgid "Saving Current Map Modifications"
 msgstr "Salvando Modificações"
 
-#: src/engine/dccnit.cpp:766
+#: src/engine/dccnit.cpp:801
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Carregando Mapa: %s"
 
-#: src/engine/dccnit.cpp:796
+#: src/engine/dccnit.cpp:831
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Carregando NPC: %s"
 
-#: src/engine/dccnit.cpp:833
+#: src/engine/dccnit.cpp:868
 msgid "Creating MiniMap"
 msgstr "Criando Mini Mapa"
 
-#: src/engine/dccnit.cpp:839
+#: src/engine/dccnit.cpp:874
 msgid "Putting GUI on Screen"
 msgstr "Colocando as janelas na tela"
 
-#: src/engine/dccnit.cpp:866
+#: src/engine/dccnit.cpp:901
 msgid "Loading Particles"
 msgstr "Carregando Partículas"
 
-#: src/engine/dccnit.cpp:895
+#: src/engine/dccnit.cpp:930
 msgid "Loading Changes..."
 msgstr "Carregando Mudanças..."
 
-#: src/engine/dccnit.cpp:917
+#: src/engine/dccnit.cpp:952
 msgid "Done!"
 msgstr "Pronto!"
 
-#: src/engine/dccnit.cpp:1129
+#: src/engine/dccnit.cpp:1164
 msgid ""
 "DNT is relesead under GPLv3 or later: Feel free to use its source code and "
 "data the way you want (or to blame us the same way). DNT is thankful to the "
@@ -469,61 +469,61 @@ msgstr ""
 "agradece aos que desenvolveram as bibliotecas: OpenAL, Cal3D, OpenGL, SDL, "
 "SDL_image, SDL_ttf, libVorbis."
 
-#: src/engine/dccnit.cpp:1742
+#: src/engine/dccnit.cpp:1777
 msgid "Too far away for the action!"
 msgstr "Muito distante para realizar a ação!"
 
-#: src/engine/dccnit.cpp:1759
+#: src/engine/dccnit.cpp:1794
 msgid "Couldn't rest at battle mode."
 msgstr "Não é possível descansar no modo de batalha."
 
-#: src/engine/dccnit.cpp:1765
+#: src/engine/dccnit.cpp:1800
 msgid "Enemies nearby."
 msgstr "Inimigos próximos."
 
-#: src/engine/dccnit.cpp:1869
+#: src/engine/dccnit.cpp:1904
 msgid "No NPCs in the area."
 msgstr "Sem NPCs na área."
 
-#: src/engine/dccnit.cpp:1927
+#: src/engine/dccnit.cpp:1962
 msgid "Surprise Attack Turn."
 msgstr "Turno de ataque surpresa."
 
-#: src/engine/dccnit.cpp:1940
+#: src/engine/dccnit.cpp:1975
 msgid "No enemies in the area."
 msgstr "Sem inimigos na área."
 
-#: src/engine/dccnit.cpp:2449
+#: src/engine/dccnit.cpp:2484
 #, c-format
 msgid "%s taken."
 msgstr "Pegou %s."
 
-#: src/engine/dccnit.cpp:2477
+#: src/engine/dccnit.cpp:2512
 msgid "Inventory is full!"
 msgstr "O inventário está cheio!"
 
-#: src/engine/dccnit.cpp:2499
+#: src/engine/dccnit.cpp:2534
 msgid "Door"
 msgstr "Porta"
 
-#: src/engine/dccnit.cpp:2547
+#: src/engine/dccnit.cpp:2582
 msgid "dead"
 msgstr "morto(a)"
 
-#: src/engine/dccnit.cpp:2599
+#: src/engine/dccnit.cpp:2634
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s ataca %s"
 
-#: src/engine/dccnit.cpp:2851
+#: src/engine/dccnit.cpp:2896
 msgid "No more actions. Turn ended."
 msgstr "Sem mais ações: Turno Finalizado."
 
-#: src/engine/dccnit.cpp:3272
+#: src/engine/dccnit.cpp:3319
 msgid "A* could not find a path!"
 msgstr "O A* não encontrou um caminho!"
 
-#: src/engine/dccnit.cpp:4243
+#: src/engine/dccnit.cpp:4303
 msgid "Exit Battle Mode"
 msgstr "Sai do Modo de Batalha"
 
@@ -4112,11 +4112,13 @@ msgid "Who are you?"
 msgstr "Quem é você?"
 
 #: data/dialogs/tutorial/logan.dlg:19
-msgid "I am Logan, maintainer of this squatter."
+#, fuzzy
+msgid "I am Logan, maintainer of this squatting."
 msgstr "Eu sou Logan, controlador desta ocupação."
 
 #: data/dialogs/tutorial/logan.dlg:23
-msgid "Squatter? Is this, the cleanest house I've ever seen, an squatter?"
+#, fuzzy
+msgid "A squatting? This is the cleanest house I've ever seen!"
 msgstr "Ocupação? Esta, a casa mais limpa que já ví, é uma ocupação?"
 
 #: data/dialogs/tutorial/logan.dlg:26 data/dialogs/tutorial/logan.dlg:55
@@ -4143,8 +4145,9 @@ msgid "What do you want of me?"
 msgstr "O que você deseja de mim?"
 
 #: data/dialogs/tutorial/logan.dlg:51
+#, fuzzy
 msgid ""
-"Yes, squatter. A clean and sweet squatter that also serves as a healing "
+"Yes, a squatting. A clean and sweet squatting that also serves as a healing "
 "clinic for people with big tongues and no gratitude!"
 msgstr ""
 "Sim, ocupação. Uma limpa de bonita ocupação que também serve de clínica de "
