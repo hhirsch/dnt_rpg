@@ -4179,14 +4179,17 @@ void engine::updateAllHealthBars()
 void engine::showImage(string fileName)
 {
    GLuint id;
+   int w=0,h=0;
    Uint8 mButton = 0;
    SDL_Surface* img = IMG_Load(fileName.c_str()); 
    glDisable(GL_LIGHTING);
    glGenTextures(1,&id);
    Farso::setTextureRGBA(img,id);
+   w = img->w;
+   h = img->h;
    SDL_FreeSurface(img);
 
-   fadeInTexture(id,0,0,Farso::SCREEN_X-1,Farso::SCREEN_Y-1, 800, 600);
+   fadeInTexture(id,0,0,Farso::SCREEN_X-1,Farso::SCREEN_Y-1, w, h);
 
    /* Wait until Mouse Button pressed */
    while(!(mButton & SDL_BUTTON(1)))
@@ -4201,7 +4204,7 @@ void engine::showImage(string fileName)
       draw2DMode();
       glColor3f(1.0f, 1.0f, 1.0f);
       Farso::textureToScreen(id, 0, 0, Farso::SCREEN_X-1, 
-            Farso::SCREEN_Y-1, 800, 600);
+            Farso::SCREEN_Y-1, w, h);
       draw3DMode(option->getFarViewFactor()*OUTDOOR_FARVIEW);
       glFlush();
       SDL_GL_SwapBuffers();
@@ -4209,7 +4212,7 @@ void engine::showImage(string fileName)
       SDL_Delay(50);
    }
 
-   fadeOutTexture(id,0,0,Farso::SCREEN_X-1,Farso::SCREEN_Y-1, 800, 600);
+   fadeOutTexture(id,0,0,Farso::SCREEN_X-1,Farso::SCREEN_Y-1, w, h);
    
    glEnable(GL_LIGHTING);
    glDeleteTextures(1,&id);

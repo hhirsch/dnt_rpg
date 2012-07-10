@@ -1,11 +1,13 @@
-All Textures used in DNT are free (as in free speech).
+death.png
+   Author: farrer, based on the work of Filipe Dilly
+   License: CC-BY 3.0
+   Source: http://filsd.deviantart.com/art/Skull-312075360
 
-Here are the licenses for those at the current directory.
 
-===========================================================================
-DNTeam Public Domain Textures
+featRangeCircle.png
+fullMovCircle.png
+normalMovCircle.png
+    Author: farrer (DNTeam)
+    License: GPLv3 or latter
 
-death.png  featRangeCircle.png  fullMovCircle.png  normalMovCircle.png
-
-===========================================================================
 
