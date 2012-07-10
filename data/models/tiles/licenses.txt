@@ -4,3 +4,9 @@ cave1/*, temple/*
    source: http://opengameart.org/content/3d-dungeon-tileset
    license: GPLv3
 
+duto/*
+   Author: LFA
+   Blender Conversion: thehumbug
+   License: CC-BY 3.0
+   Source: http://opengameart.org/content/destroyed-walls-blend
+
