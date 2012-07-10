@@ -21,6 +21,7 @@
 #include "briefing.h"
 #include "../etc/dirs.h"
 #include "../lang/translate.h"
+#include "../sound/sound.h"
 #include "util.h"
 
 using namespace std;
@@ -145,6 +146,15 @@ void briefing::addText(string text, string font, int size, int style,
       if( (briefTxt->getLastLine() != text) || (forceRep))
       {
          briefTxt->addText(text, font, size, style, align, R, G, B);
+
+         /* Play a sound on warnings.
+          * FIXME: better do this without just looking for color */
+         if( ( (R == 220) && (G == 20) && (B == 20) ) ||
+               ( (R == 220) && (G == 20) && (B == 220) ) )
+         {
+            sound snd;
+            snd.addSoundEffect(SOUND_NO_LOOP, "sndfx/gui/console.ogg");
+         }
       }
    }
 }
