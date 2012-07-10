@@ -119,7 +119,7 @@ bool sound::initOpenAL()
          enabled = true;
          
          /* set attenuation model */
-         alDistanceModel(AL_INVERSE_DISTANCE);
+         alDistanceModel(AL_EXPONENT_DISTANCE);
          return(true);
       }
       else
@@ -195,9 +195,9 @@ void sound::setListenerPosition(ALfloat centerX, ALfloat centerY,
          ALfloat directionvect[6]; /* Direction Vector of Listener */
          alListener3f(AL_POSITION, centerX, centerY, centerZ);
    
-         directionvect[0] = (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
-         directionvect[1] = deltaY + (float) d * sin(deg2Rad(theta));
-         directionvect[2] = (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
+         directionvect[0] = sin(deg2Rad(phi));
+         directionvect[0] = 0;
+         directionvect[0] = cos(deg2Rad(phi));
          directionvect[3] = 0;
          directionvect[4] = 1;
          directionvect[5] = 0;
