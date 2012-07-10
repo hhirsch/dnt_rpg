@@ -3933,8 +3933,8 @@ void engine::updateBeforeRender()
    /* Redefine camera position */
    gameCamera.lookAt(actualMap);
 
-   snd->setListenerPosition(gameCamera.getCameraX(), gameCamera.getCameraY(),
-                            gameCamera.getCameraZ(), gameCamera.getTheta(),
+   snd->setListenerPosition(gameCamera.getCenterX(), gameCamera.getCenterY(),
+                            gameCamera.getCenterZ(), gameCamera.getTheta(),
                             gameCamera.getPhi(), gameCamera.getD(),
                             gameCamera.getDeltaY());
 

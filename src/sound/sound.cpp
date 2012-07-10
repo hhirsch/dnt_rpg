@@ -1,26 +1,27 @@
 /* 
-  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  DNT: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
-  This file is part of DccNiTghtmare.
+  This file is part of DNT.
  
-  DccNiTghtmare is free software: you can redistribute it and/or modify
+  DNT is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  DccNiTghtmare is distributed in the hope that it will be useful,
+  DNT is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+  along with DNT.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "sound.h"
 #include <math.h>
 #include <SDL/SDL.h>
+#include "../etc/quaternion.h"
 #include "../engine/util.h"
 
 #include <iostream>
@@ -189,15 +190,21 @@ void sound::setListenerPosition(ALfloat centerX, ALfloat centerY,
                                 ALfloat centerZ, ALfloat theta, ALfloat phi,
                                 ALfloat d, ALfloat deltaY)
 {
+   vec3_t pos;               /* Listener Position */
+   ALfloat directionvect[6]; /* Direction Vector of Listener */
    if(enabled)
    {
       lock();
-         ALfloat directionvect[6]; /* Direction Vector of Listener */
-         alListener3f(AL_POSITION, centerX, centerY, centerZ);
-   
-         directionvect[0] = sin(deg2Rad(phi));
-         directionvect[0] = 0;
-         directionvect[0] = cos(deg2Rad(phi));
+      
+         pos.x = centerX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
+         pos.y = centerY + deltaY + (float) d * sin(deg2Rad(theta));
+         pos.z = centerZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
+
+         alListener3f(AL_POSITION, pos.x, pos.y, pos.z);
+
+         directionvect[0] = centerX-pos.x;
+         directionvect[1] = centerY-pos.y;
+         directionvect[2] = centerZ-pos.z;
          directionvect[3] = 0;
          directionvect[4] = 1;
          directionvect[5] = 0;

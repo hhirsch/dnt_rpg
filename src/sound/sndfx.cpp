@@ -1,21 +1,21 @@
 /* 
-  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  DNT: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
  
-  This file is part of DccNiTghtmare.
+  This file is part of DNT.
  
-  DccNiTghtmare is free software: you can redistribute it and/or modify
+  DNT is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  DccNiTghtmare is distributed in the hope that it will be useful,
+  DNT is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+  along with DNT.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "sndfx.h"
@@ -42,10 +42,14 @@ sndfx::sndfx(ALfloat centerX, ALfloat centerY, ALfloat centerZ, int lp,
    oggSndFx = new(ogg_stream);
    if(oggSndFx->open(fileName))
    {
-
-      /* Define Position */
+      /* Define Position and OpenAL things */
+      alSourcei(oggSndFx->getSource(), AL_SOURCE_RELATIVE, AL_FALSE);
       alSource3f(oggSndFx->getSource(), AL_POSITION, centerX, centerY, centerZ);
       alSourcef(oggSndFx->getSource(), AL_REFERENCE_DISTANCE, 160);
+      alSource3f(oggSndFx->getSource(), AL_VELOCITY, 0.0, 0.0, 0.0);
+      alSource3f(oggSndFx->getSource(), AL_DIRECTION, 0.0, 0.0, 0.0);
+      alSourcef(oggSndFx->getSource(), AL_ROLLOFF_FACTOR, 1.0);
+      
       setLoop(lp);
 
       if(!oggSndFx->playback())
@@ -114,6 +118,28 @@ void sndfx::setLoop(int lp)
    if(oggSndFx)
    {
       oggSndFx->setLoop(lp);
+   }
+}
+
+/*************************************************************************
+ *                           setReferenceDistance                        *
+ *************************************************************************/
+void sndfx::setReferenceDistance(float dist)
+{
+   if(oggSndFx)
+   {
+      alSourcef(oggSndFx->getSource(), AL_REFERENCE_DISTANCE, dist);
+   }
+}
+
+/*************************************************************************
+ *                                setRollOff                             *
+ *************************************************************************/
+void sndfx::setRollOff(float rf)
+{
+   if(oggSndFx)
+   {
+      alSourcef(oggSndFx->getSource(), AL_ROLLOFF_FACTOR, rf);
    }
 }
 

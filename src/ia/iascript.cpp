@@ -2519,17 +2519,30 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    else if(functionName == IA_PLAY_SOUND)
    {
       string s;
-      float pX=0.0f, pY=0.0f, pZ=0.0f;
+      float pX=0.0f, pY=0.0f, pZ=0.0f, refDist=0.0f, rollOff=0.0f;
 
       s = getParameters(token, strLine, pos);
       pX = getParameterf(token, strLine, pos);
       pY = getParameterf(token, strLine, pos);
       pZ = getParameterf(token, strLine, pos);
 
+      /* Optionals */
+      refDist = getParameterf(token, strLine, pos);
+      rollOff = getParameterf(token, strLine, pos);
+
       if(!s.empty())
       {
          sound snd;
-         snd.addSoundEffect(pX, pY, pZ, SOUND_NO_LOOP, s);
+         sndfx* sfx;
+         sfx = snd.addSoundEffect(pX, pY, pZ, SOUND_NO_LOOP, s);
+         if(refDist != 0.0f)
+         {
+            sfx->setReferenceDistance(refDist);
+         }
+         if(rollOff != 0.0f)
+         {
+            sfx->setRollOff(rollOff);
+         }
       }
    }
 
