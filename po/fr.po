@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2012-07-11 03:39+0200\n"
+"POT-Creation-Date: 2012-07-11 03:55+0200\n"
 "PO-Revision-Date: 2011-02-09 20:48+0000\n"
 "Last-Translator: lann <lann@worldonline.fr>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -19,13 +19,13 @@ msgstr ""
 "X-Generator: Launchpad (build 12460)\n"
 
 #: src/classes/actions.cpp:160
-#, c-format
-msgid "%s try to attack %s"
+#, fuzzy, c-format
+msgid "%s tries to attack %s"
 msgstr "%s essayer d'attaquer %s"
 
 #: src/classes/actions.cpp:165
-#, c-format
-msgid "%s try to heal %s"
+#, fuzzy, c-format
+msgid "%s tries to heal %s"
 msgstr "%s essayer de soigner %s"
 
 #: src/classes/actions.cpp:176 src/classes/actions.cpp:462
@@ -71,9 +71,9 @@ msgid "Critical Hit!"
 msgstr "Touche Critique !"
 
 #: src/classes/actions.cpp:454
-#, c-format
-msgid "%s try to attack an area."
-msgstr ""
+#, fuzzy, c-format
+msgid "%s tries to attack an area."
+msgstr "%s essayer d'attaquer %s"
 
 #: src/classes/actions.cpp:640 src/fight/fightSystem.cpp:189
 #, c-format

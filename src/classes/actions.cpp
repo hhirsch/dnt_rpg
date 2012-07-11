@@ -157,12 +157,12 @@ bool doHealOrAttack(thing* actor, thing* target,
    /* Show try brief */
    if(!heal)
    {
-      sprintf(texto, gettext("%s try to attack %s"), 
+      sprintf(texto, gettext("%s tries to attack %s"), 
                      actor->name.c_str(), target->name.c_str());
    }
    else
    {
-      sprintf(texto, gettext("%s try to heal %s"), 
+      sprintf(texto, gettext("%s tries to heal %s"), 
                      actor->name.c_str(), target->name.c_str());
    }
    brief.addText(texto);
@@ -451,7 +451,7 @@ bool doAreaAttack(thing* actor, float targetX, float targetZ, int radius,
                                          actor->scNode->getPosZ(),
                                          targetX, targetZ), 0.0f);
    /* Show try brief */
-   sprintf(texto, gettext("%s try to attack an area."), actor->name.c_str());
+   sprintf(texto, gettext("%s tries to attack an area."), actor->name.c_str());
    brief.addText(texto);
 
    /* Verify Action Range */

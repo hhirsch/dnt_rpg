@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DNT\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2012-07-11 03:39+0200\n"
+"POT-Creation-Date: 2012-07-11 03:55+0200\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -17,13 +17,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/classes/actions.cpp:160
-#, c-format
-msgid "%s try to attack %s"
+#, fuzzy, c-format
+msgid "%s tries to attack %s"
 msgstr "%s tenta atacar %s"
 
 #: src/classes/actions.cpp:165
-#, c-format
-msgid "%s try to heal %s"
+#, fuzzy, c-format
+msgid "%s tries to heal %s"
 msgstr "%s tenta medicar %s"
 
 #: src/classes/actions.cpp:176 src/classes/actions.cpp:462
@@ -69,8 +69,8 @@ msgid "Critical Hit!"
 msgstr "Dano Crítico!"
 
 #: src/classes/actions.cpp:454
-#, c-format
-msgid "%s try to attack an area."
+#, fuzzy, c-format
+msgid "%s tries to attack an area."
 msgstr "%s tenta atacar uma área."
 
 #: src/classes/actions.cpp:640 src/fight/fightSystem.cpp:189
