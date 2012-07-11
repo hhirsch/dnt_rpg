@@ -1,21 +1,21 @@
 /* 
-  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  DNT: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
-  This file is part of DccNiTghtmare.
+  This file is part of DNT.
  
-  DccNiTghtmare is free software: you can redistribute it and/or modify
+  DNT is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  DccNiTghtmare is distributed in the hope that it will be useful,
+  DNT is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+  along with DNT.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "wall.h"
@@ -49,6 +49,17 @@ WallController::WallController(Map* acMap)
    glGenTextures(1,&markTexture);
    Farso::setTextureRGBA(img, markTexture);
    SDL_FreeSurface(img);
+
+   /* Load face mark texture */
+   img = IMG_Load(dir.getRealFile("texturas/general/travelmark.png").c_str());
+   if(!img)
+   {
+      cerr << "Couldn't open 'texturas/general/travelmark.png'!" << endl;
+      return;
+   }
+   glGenTextures(1,&faceMarkTexture);
+   Farso::setTextureRGBA(img, faceMarkTexture);
+   SDL_FreeSurface(img);
 }
 
 /******************************************************
@@ -57,6 +68,7 @@ WallController::WallController(Map* acMap)
 WallController::~WallController()
 {
    glDeleteTextures(1,&markTexture);
+   glDeleteTextures(1,&faceMarkTexture);
    actualMap = NULL;
 }
 
@@ -198,6 +210,32 @@ void WallController::drawTemporary(GLdouble modelView[16],
 
    if(actualWall)
    {
+      glColor4f(1,1,1,1);
+      glEnable(GL_BLEND);
+      glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+
+      /* Draw the indicator of actual face */
+      GLfloat x1=0.0f,x2=0.0f,
+              y=WALL_HEIGHT/2.0f+10,
+              z1=0.0f,z2=0.0f;
+      if(getSideTexture(&x1, &z1, &x2, &z2))
+      {
+         glEnable(GL_TEXTURE_2D);
+         glBindTexture(GL_TEXTURE_2D, faceMarkTexture );
+
+         glBegin(GL_QUADS);
+            glTexCoord2f(0,0);
+            glVertex3f(x1, y-8, z1);
+            glTexCoord2f(1,0);
+            glVertex3f(x2, y-8, z2);
+            glTexCoord2f(1,1);
+            glVertex3f(x2, y+8, z2);
+            glTexCoord2f(0,1);
+            glVertex3f(x1, y+8, z1);
+         glEnd();
+         glDisable(GL_TEXTURE_2D);
+      }
+
       /* Draw the indicator of actualWall */
       GLfloat px = (actualWall->x2+actualWall->x1) / 2.0;
       GLfloat pz = (actualWall->z2+actualWall->z1) / 2.0;
@@ -208,13 +246,10 @@ void WallController::drawTemporary(GLdouble modelView[16],
                    (camZ-pz)*(camZ-pz) );
       scale = dist / 500.0;
 
-      glColor4f(1,1,1,1);
-      glEnable(GL_BLEND);
-      glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
       glPushMatrix();
          glTranslatef(px, WALL_HEIGHT, pz);
          glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D, markTexture );
+         glBindTexture(GL_TEXTURE_2D, markTexture );
       glBegin(GL_QUADS);
          glTexCoord2f(0,0);
          glVertex3f(-MARK_SIZE*modelView[0]*scale,0.0f,
@@ -282,18 +317,36 @@ void WallController::doModifyVerHorTexture()
 /******************************************************
  *                    getSideTexture()                *
  ******************************************************/
-wallTexture* WallController::getSideTexture()
+wallTexture* WallController::getSideTexture(float* x1, float* z1, 
+      float* x2, float* z2)
 {
+   float middleX = ((actualWall->x2)-(actualWall->x1)) / 2.0f;
+   float middleZ = ((actualWall->z2)-(actualWall->z1)) / 2.0f;
+
    if((mZ > actualWall->z1) && (mZ < actualWall->z2))
    {
       if(mX >= actualWall->x2)
       {
          /* Right Texture */
+         if( (x1) && (x2) && (z1) && (z2) )
+         {
+            *x1 = actualWall->x2 + 2;
+            *x2 = actualWall->x2 + 2;
+            *z1 = actualWall->z1 + middleZ - 8;
+            *z2 = actualWall->z1 + middleZ + 8;
+         }
          return(&actualWall->rightTexture);
       }
       else if(mX <= actualWall->x1)
       {
          /* Left Texture */
+         if( (x1) && (x2) && (z1) && (z2) )
+         {
+            *x1 = actualWall->x1 - 2;
+            *x2 = actualWall->x1 - 2;
+            *z1 = actualWall->z1 + middleZ-8;
+            *z2 = actualWall->z1 + middleZ+8;
+         }
          return(&actualWall->leftTexture);
       }
    }
@@ -302,11 +355,25 @@ wallTexture* WallController::getSideTexture()
       if(mZ <= actualWall->z1)
       {
          /* Front Texture */
+         if( (x1) && (x2) && (z1) && (z2) )
+         {
+            *x1 = actualWall->x1 + middleX-8;
+            *x2 = actualWall->x1 + middleX+8;
+            *z1 = actualWall->z1-2;
+            *z2 = actualWall->z1-2;
+         }
          return(&actualWall->frontTexture);
       }
       else if(mZ >= actualWall->z2)
       {
          /* Back Texture */
+         if( (x1) && (x2) && (z1) && (z2) )
+         {
+            *x1 = actualWall->x1 + middleX-8;
+            *x2 = actualWall->x1 + middleX+8;
+            *z1 = actualWall->z2+2;
+            *z2 = actualWall->z2+2;
+         }
          return(&actualWall->backTexture);
       }
    }
