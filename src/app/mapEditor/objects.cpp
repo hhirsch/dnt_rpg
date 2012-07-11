@@ -129,11 +129,11 @@ sceneNode* Objects::verifyAction(Uint8* keys,
       }
 
       /* Up/Down Object */
-      if(keys[SDLK_w])
+      if(keys[SDLK_r])
       {
          obstacleY += 0.1;
       }
-      if(keys[SDLK_s])
+      if(keys[SDLK_f])
       {
          obstacleY -= 0.1;
       }

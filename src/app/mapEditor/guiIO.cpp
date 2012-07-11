@@ -612,7 +612,7 @@ int GuiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          qty = 16;
       }
 
-      if(keys[SDLK_KP8])
+      if((keys[SDLK_KP8]) || (keys[SDLK_w]) )
       {
          gameCamera.updateCamera(gameCamera.getCenterX() -
                                  qty * sin(deg2Rad(gameCamera.getPhi())),
@@ -621,7 +621,7 @@ int GuiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
                                  qty * cos(deg2Rad(gameCamera.getPhi())), 
                                  0.0);
       }
-      if(keys[SDLK_KP2])
+      if( (keys[SDLK_KP2]) || (keys[SDLK_s]) )
       {
          gameCamera.updateCamera(gameCamera.getCenterX() +
                                  qty * sin(deg2Rad(gameCamera.getPhi())),
@@ -630,7 +630,7 @@ int GuiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
                                  qty * cos(deg2Rad(gameCamera.getPhi())), 
                                  0.0);
       }
-      if(keys[SDLK_KP4])
+      if( (keys[SDLK_KP4]) || (keys[SDLK_a]) )
       {
          gameCamera.updateCamera(gameCamera.getCenterX() -
                                  qty * sin(deg2Rad(gameCamera.getPhi()) + 
@@ -641,7 +641,7 @@ int GuiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
                                        deg2Rad(90)),
                                  0.0);
       }
-      if(keys[SDLK_KP6])
+      if( (keys[SDLK_KP6]) || (keys[SDLK_d]) )
       {
          gameCamera.updateCamera(gameCamera.getCenterX() +
                                  qty * sin(deg2Rad(gameCamera.getPhi()) + 
