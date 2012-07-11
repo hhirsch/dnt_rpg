@@ -4043,7 +4043,6 @@ msgid "I'm very busy right now."
 msgstr ""
 
 #: data/dialogs/tutorial/cruzeirense.dlg:10
-#, fuzzy
 msgid "I'll come back later."
 msgstr "Ich komme später wieder."
 
@@ -4155,14 +4154,13 @@ msgid "No talk to you. What a drag!"
 msgstr "Ich rede nicht mit Dir. Du bist so öde!"
 
 #: data/dialogs/tutorial/hippie.dlg:124
-#, fuzzy
 msgid ""
 "I need this crazy ration for my chickens. But The Farmer refuses to give it "
 "to me. Can you get a bag for me? But remember: without blood!"
 msgstr ""
 "Ich brauche dieses verrückten Fraß für meine Hüner. Aber die Farmerin "
-"weigertsich, es mir zu geben. Kannst Du eine Portion für mich besorgen? Aber "
-"nur ohne Blutvergießen!"
+"weigert sich, es mir zu geben. Kannst Du mir Portion besorgen? Aber nur ohne "
+"Blutvergießen!"
 
 #: data/dialogs/tutorial/hippie.dlg:128
 msgid "For sure."
@@ -5066,7 +5064,6 @@ msgid "Santa Claws"
 msgstr "Santa Claws"
 
 #: data/characters/pcs/velhaca.pc:1
-#, fuzzy
 msgid "Old Lady"
 msgstr "Alte Dame"
 
