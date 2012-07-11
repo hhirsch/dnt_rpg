@@ -8,7 +8,7 @@ dialog(0)
    pc_begin
       option
          pre_test = mission_active("missions/tutorial/hippie1.dsl")
-         text = gettext("I need some chicken ration.")
+         text = gettext("I need a chicken ration.")
          action = go_to_dialog(7)
       option 
          text = gettext("Where am I?")
@@ -100,7 +100,7 @@ end_dialog
 ############################################################
 dialog(6)
    npc_begin
-      text = gettext("Neither I.")
+      text = gettext("Neither am I.")
    npc_end
    pc_begin
       option
@@ -121,7 +121,7 @@ dialog(7)
          action = dialog_init(8)
          action = go_to_dialog(8)
       option
-         text = gettext("I'm an enthusiast of chicken rations.")
+         text = gettext("I'm a chicken ration enthusiast.")
          post_test = roll(BLUFF, 18)
          if_action = receive_item("models/objetos/itens/racao/racao.dcc")
          if_action = dialog_init(17)
@@ -129,7 +129,7 @@ dialog(7)
          else_action = dialog_init(8)
          else_action = go_to_dialog(9)
       option
-         text = gettext("Because I want!")
+         text = gettext("Give me a ration. Or else!")
          post_test = roll(INTIMIDATE, 14)
          if_action = receive_item("models/objetos/itens/racao/racao.dcc")
          if_action = dialog_init(17)
@@ -146,7 +146,7 @@ dialog(8)
    npc_end
    pc_begin
       option
-         text = gettext("Maybe if I do some favor to you?")
+         text = gettext("Maybe I can do something for you in return?")
          action = go_to_dialog(11)
       option
          text = gettext("Bye.")
@@ -187,11 +187,11 @@ end_dialog
 ############################################################
 dialog(11)
    npc_begin
-      text = gettext("Uhm, there's something I'll want later from you. But first, I'll need some ingredients for the ration. A mushroom...")
+      text = gettext("Uhm, there's something I'll want you to do for me later. But I also need two ingredients for the ration. First, a mushroom.")
    npc_end
    pc_begin
       option
-         text = gettext("I'll get it.")
+         text = gettext("I'll get one.")
          action = dialog_init(12)
          action = finish_dialog()
    pc_end
@@ -201,7 +201,7 @@ end_dialog
 ############################################################
 dialog(12)
    npc_begin
-      text = gettext("Have you got the mushroom?")
+      text = gettext("Do you have a mushroom?")
    npc_end
    pc_begin
       option
@@ -220,11 +220,11 @@ end_dialog
 ############################################################
 dialog(13)
    npc_begin
-      text = gettext("Great. Now I want an egg")
+      text = gettext("Great! Now I need an egg.")
    npc_end
    pc_begin
       option
-         text = gettext("I'll get it.")
+         text = gettext("I'll get one.")
          action = dialog_init(14)
          action = finish_dialog()
    pc_end
@@ -234,7 +234,7 @@ end_dialog
 ############################################################
 dialog(14)
    npc_begin
-      text = gettext("Have you got the egg?")
+      text = gettext("Did you get an egg?")
    npc_end
    pc_begin
       option
@@ -254,7 +254,7 @@ end_dialog
 ############################################################
 dialog(15)
    npc_begin
-      text = gettext("Done. Come back later to do me your favor.")
+      text = gettext("Done! Come back later to pay off the debt.")
    npc_end
    pc_begin
       option

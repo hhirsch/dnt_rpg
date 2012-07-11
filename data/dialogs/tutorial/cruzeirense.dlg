@@ -3,11 +3,11 @@
 ############################################################
 dialog(0)
    npc_begin
-      text = gettext("I'm very busy now.")
+      text = gettext("I'm very busy right now.")
    npc_end
    pc_begin
       option
-         text = gettext("I'll come back later")
+         text = gettext("I'll come back later.")
          action = finish_dialog()
    pc_end
 end_dialog
@@ -50,11 +50,11 @@ end_dialog
 ############################################################
 dialog(3)
    npc_begin
-      text = gettext("I can give any information you want, but, first, I need you to do something.")
+      text = gettext("I can give any information you want, but first, I need you to do something.")
    npc_end
    pc_begin
       option
-         text = gettext("What's it?")
+         text = gettext("What is it?")
          action = go_to_dialog(4)
    pc_end
 end_dialog
@@ -64,7 +64,7 @@ end_dialog
 ############################################################
 dialog(4)
    npc_begin
-      text = gettext("Some chickens are threaten me. You must go to the wasteland place they are and finish them!")
+      text = gettext("Some chickens are threatening me. You must go to the wasteland where they are and finish them!")
    npc_end
    pc_begin
       option
@@ -84,7 +84,7 @@ dialog(5)
    npc_end
    pc_begin
       option
-         text = gettext("Ok.")
+         text = gettext("Okay.")
          action = finish_dialog()
    pc_end
 end_dialog

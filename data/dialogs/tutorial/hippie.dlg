@@ -59,7 +59,7 @@ end_dialog
 ############################################################
 dialog(3)
    npc_begin
-      text = gettext("Bro, I need things from you... Or we'll be wasted!")
+      text = gettext("Bro, I need something from you... Or we'll be wasted!")
    npc_end
    pc_begin
       option
@@ -121,7 +121,7 @@ end_dialog
 ############################################################
 dialog(7)
    npc_begin
-      text = gettext("I need some kind of crazy ration to my chickens. But The Farm refuses to give it to me. Can you get some for me? But remember: without blood!")
+      text = gettext("I need this crazy ration for my chickens. But The Farmer refuses to give it to me. Can you get a bag for me? But remember: without blood!")
    npc_end
    pc_begin
       option
@@ -140,7 +140,7 @@ end_dialog
 ############################################################
 dialog(8)
    npc_begin
-      text = gettext("I'm waiting for my thing, bro.")
+      text = gettext("I'm waiting for my ration, bro.")
    npc_end
    pc_begin
       option

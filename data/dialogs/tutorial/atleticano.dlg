@@ -57,7 +57,7 @@ end_dialog
 ############################################################
 dialog(3)
    npc_begin
-      text = gettext("And so I am.")
+      text = gettext("And so am I.")
    npc_end
    pc_begin
       option
@@ -74,7 +74,7 @@ dialog(4)
    npc_end
    pc_begin
       option
-         text = gettext("What's it?")
+         text = gettext("What's that?")
          action = go_to_dialog(5)
    pc_end
 end_dialog
@@ -83,17 +83,17 @@ end_dialog
 ############################################################
 dialog(5)
    npc_begin
-      text = gettext("The thing is: the Cruzeirense here is having some problems, but he refuses to talk about that. Give him a soda can and let him talk.")
+      text = gettext("The thing is: the Cruzeirense over there is having some problem, but refuses to talk about it. Get him a soda can to make him spill the beans.")
    npc_end
    pc_begin
       option
-         text = gettext("Ok.")
+         text = gettext("Okay.")
          action = dialog_init(6)
          action = call_script("ia/script/tutorial/change_cruz_dialog.dsl")
          action = finish_dialog()
       option
          pre_test = roll(NOT_ENOUGH_TIME, 12)
-         text = gettext("If I have enough time!")
+         text = gettext("I'll do it if I find the time!")
          action = dialog_init(6)
          action = call_script("ia/script/tutorial/change_cruz_dialog.dsl")
          action = finish_dialog()
@@ -104,11 +104,11 @@ end_dialog
 ############################################################
 dialog(6)
    npc_begin
-      text = gettext("I'm very busy now.")
+      text = gettext("I'm very busy right now.")
    npc_end
    pc_begin
       option
-         text = gettext("Ok.")
+         text = gettext("Okay.")
          action = finish_dialog()
    pc_end
 end_dialog
