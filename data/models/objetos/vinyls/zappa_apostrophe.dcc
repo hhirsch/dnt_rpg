@@ -1,5 +1,5 @@
 name = Frank Zappa - Apostrophe (')
-description = gettext("It seems that someone recorded some stories about Nanook, the Eskimo  on this disk.")
+description = gettext("It seems that someone recorded some stories about Nanook, the Eskimo on this disk.")
 cal3d = models/objetos/vinyls/zappa_apostrophe.cfg
 inventory_sizes = 2 2
 inventory_texture = models/objetos/vinyls/zappa_apostrophe_inv.png

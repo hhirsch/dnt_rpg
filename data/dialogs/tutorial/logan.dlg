@@ -3,7 +3,7 @@
 ############################################################
 dialog(0)
    npc_begin
-      text = gettext("Ah, so finally you awake!")
+      text = gettext("Ah, you're finally awake!")
    npc_end
    pc_begin
       option
@@ -32,14 +32,14 @@ end_dialog
 ############################################################
 dialog(2)
    npc_begin
-      text = gettext("We found you bleeding unconscious near the waterfall. For the sake of our ideals, Mattar, <the Forgotten>, healed all your wounds. (You're lucky: the scalpel was expelled with your faeces yesterday!)")
+      text = gettext("We found you bleeding unconscious near the waterfall. For the sake of our ideals, Mattar \"the Forgotten\" healed your wounds. You're lucky too, you expelled the scalpel yesterday!")
    npc_end
    pc_begin
       option
          text = gettext("For the sake of your ideals? What ideals?!")
          action = go_to_dialog(4)
       option
-         text = gettext("What do you want of me?")
+         text = gettext("What do you want from me?")
          action = go_to_dialog(5)
    pc_end
 end_dialog
@@ -55,7 +55,7 @@ dialog(3)
          text = gettext("What am I doing here?")
          action = go_to_dialog(2)
       option
-         text = gettext("What do you want of me?")
+         text = gettext("What do you want from me?")
          action = go_to_dialog(5)
       option
          text = gettext("Shut up and die!")
@@ -67,11 +67,11 @@ end_dialog
 ############################################################
 dialog(4)
    npc_begin
-      text = gettext("Our ideal? It's not the time to tell you about that.")
+      text = gettext("Our ideals? It's not the time to tell you about that.")
    npc_end
    pc_begin
       option
-         text = gettext("What do you want of me?")
+         text = gettext("What do you want from me?")
          action = go_to_dialog(5)
    pc_end
 end_dialog
@@ -80,20 +80,20 @@ end_dialog
 ############################################################
 dialog(5)
    npc_begin
-      text = gettext("Ah, some time ago I've lost our Chrono Trigger Snes cartridge, just find it for us.")
+      text = gettext("Ah, some time ago I've lost our Chrono Trigger SNES cartridge. Find it for us!")
    npc_end
    pc_begin      
       option
          pre_test = greater(INTELLIGENCE, 12)
-         text = gettext("Where it can be?")
+         text = gettext("Where could it be?")
          action = go_to_dialog(13)
       option
-         text = gettext("Ok, I'll search for it")
+         text = gettext("Okay, I'll search for it")
          action = add_mission("missions/tutorial/mission1.mis")
          action = dialog_init(6)
          action = finish_dialog()
       option
-         text = gettext("But everyone knows that Chrono is lost in time! It's impossible to take him from Lavos!")
+         text = gettext("But everybody knows that Chrono is lost in time! It's impossible to take him from Lavos!")
          post_test = roll(BLUFF,20)
          # The bluff Worked!
          if_action = dialog_init(9)
@@ -113,14 +113,14 @@ end_dialog
 ############################################################
 dialog(6)
    npc_begin
-      text = gettext("You still haven't found our Chrono Trigger Snes cartridge!")
+      text = gettext("You still haven't found our Chrono Trigger SNES cartridge!")
    npc_end
    pc_begin
       option 
          text = gettext("I'm still looking...")
          action = finish_dialog()
       option
-         text = gettext("Oh, Chrono Trigger! This name resounds good memories in my head.")
+         text = gettext("Oh, Chrono Trigger! That name brings back good memories.")
          action = finish_dialog()
    pc_end
 end_dialog
@@ -129,7 +129,7 @@ end_dialog
 ############################################################
 dialog(7)
    npc_begin
-      text = gettext("Here! Chrono is here! Let me play it!")
+      text = gettext("You got it! Chrono is back! Let me play it!")
    npc_end
    pc_begin
       option 
@@ -166,7 +166,7 @@ end_dialog
 ############################################################
 dialog(9)
    npc_begin
-      text = gettext("I want another thing from you. Some dangerous living creatures are infesting the subterranean areas of the bunker school. Please, exterminate them all.")
+      text = gettext("I want another thing from you. Some dangerous creatures infested the subterranean areas of the bunker school. Please, exterminate them all.")
    npc_end
    pc_begin
       option 
@@ -217,11 +217,11 @@ end_dialog
 ############################################################
 dialog(12)
    npc_begin
-      text = gettext("No, you are wrong. Chrono is lost somewhere in the Bunker School. Go take a look...")
+      text = gettext("No, you're wrong. Chrono is lost somewhere in the Bunker School. Search for it there.")
    npc_end
    pc_begin
       option
-         text = gettext("Ok, I'll look for it.")
+         text = gettext("Okay, I'll look for it.")
          action = add_mission("missions/tutorial/mission1.mis")
          action = dialog_init(6)
          action = finish_dialog()
@@ -232,11 +232,11 @@ end_dialog
 ############################################################
 dialog(13)
    npc_begin
-      text = gettext("Ahm, last time I saw him was in the Bunker School, when I was riping it to play online with zsnes.")
+      text = gettext("Ahm, last time I saw it in the Bunker School, when I was riping it to play online via ZSNES.")
    npc_end
    pc_begin
       option
-         text = gettext("Ok, I'll look for it.")
+         text = gettext("Okay, I'll look for it.")
          action = add_mission("missions/tutorial/mission1.mis")
          action = dialog_init(6)
          action = finish_dialog()
@@ -247,7 +247,7 @@ end_dialog
 ############################################################
 dialog(14)
    npc_begin
-      text = gettext("About the extermination, have you done it?")
+      text = gettext("About the extermination, have you finished the job?")
    npc_end
    pc_begin
       option
@@ -255,7 +255,7 @@ dialog(14)
          action = finish_dialog()
       option
          pre_test = all_dead("mapas/tutorial/school_2.map.npc")
-         text = gettext("Yes, there's no living thing there...")
+         text = gettext("Yes, there's nothing left alive there...")
          action = complete_mission("missions/tutorial/mission2.dsl", 150, 2)
          action = dialog_init(16)
          action = go_to_dialog(16)
@@ -266,7 +266,7 @@ end_dialog
 ############################################################
 dialog(15)
    npc_begin
-      text = gettext("The Heroes of Lesser Renown? That's true, I'll call them.")
+      text = gettext("The Heroes of Lesser Renown? Good idea, I'll call them.")
    npc_end
    pc_begin
       option
@@ -279,7 +279,7 @@ end_dialog
 ############################################################
 dialog(16)
    npc_begin
-      text = gettext("Give this to the Atleticano at the other part of this house and he'll see that I've sent you. Maybe he can help you.")
+      text = gettext("Give this to the Atleticano in the other part of this building and he'll see that I sent you. Maybe he can help you.")
    npc_end
    pc_begin
       option
@@ -317,7 +317,7 @@ dialog(18)
          action = finish_dialog()
 
        option
-         text = gettext("I've forgot!")
+         text = gettext("I forgot!")
          action = finish_dialog()
    pc_end
 end_dialog

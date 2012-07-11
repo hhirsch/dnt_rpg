@@ -1,4 +1,4 @@
-name = gettext("Old Ladie")
+name = gettext("Old Lady")
 model = models/personagens/velhaca/velhaca.md5def
 portrait = characters/portraits/velhaca.png
 battleScript = ia/script/fight/fight_animal.dsl

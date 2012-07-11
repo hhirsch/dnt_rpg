@@ -3,7 +3,7 @@
 ############################################################
 dialog(0)
    npc_begin
-      text = gettext("Wanna some milk, kid?")
+      text = gettext("Want some milk, kid?")
    npc_end
    pc_begin
       option
@@ -38,7 +38,7 @@ end_dialog
 ############################################################
 dialog(2)
    npc_begin
-      text = gettext("He was the owner of a worldwide factory, with thousands of slaves. His name? Santa Claws. (Same as me).")
+      text = gettext("He was the owner of a worldwide factory, with thousands of slaves. His name? Santa Claws. Same as mine.")
    npc_end
    pc_begin
       option 
@@ -55,7 +55,7 @@ end_dialog
 ############################################################
 dialog(3)
    npc_begin
-      text = gettext("Yes, the great Santa Claws! (I was named in honour of him).")
+      text = gettext("Yes, the great Santa Claws! I was named in honor of him.")
    npc_end
    pc_begin
       option
@@ -88,7 +88,7 @@ end_dialog
 ############################################################
 dialog(5)
    npc_begin
-      text = gettext("I need you to install a Ruindows on the squatter's notebook. Will you do it?")
+      text = gettext("I need you to install Ruindows on the squatter's notebook.")
    npc_end
    pc_begin
       option
@@ -105,7 +105,7 @@ dialog(5)
          action = receive_item("models/objetos/icex/ruindows_box/ruindows_box.dcc")
          action = finish_dialog()
       option
-         text = gettext("Yes. (but inside you something is telling you to take another action)")
+         text = gettext("Yes. (But a voice inside of you is telling you to take another action...)")
          action = dialog_init(8)
          action = receive_item("models/objetos/icex/ruindows_box/ruindows_box.dcc")
          action = add_mission("missions/tutorial/mission3.mis")
@@ -147,10 +147,10 @@ dialog(8)
    npc_end
    pc_begin
       option
-         text = gettext("Ok.")
+         text = gettext("Okay.")
          action = finish_dialog()
       option
-         text = gettext("Ok. (you look suspiciously at Santa Claws' notebook)")
+         text = gettext("Okay. (You look suspiciously at Santa Claws' notebook.)")
          action = finish_dialog()
    pc_end
 end_dialog
@@ -159,7 +159,7 @@ end_dialog
 ############################################################
 dialog(9)
    npc_begin
-      text = gettext("So you've installed it! Soon the blue screen will rule the world!")
+      text = gettext("So you installed it! Soon, the blue screen will rule the world!")
    npc_end
    pc_begin
       option
@@ -185,7 +185,7 @@ end_dialog
 ############################################################
 dialog(10)
    npc_begin
-      text = gettext("You've installed a linux on my notebook? But... it's the cause of it's not freezing up anymore? How can I feel at home now?")
+      text = gettext("You installed Linux on my notebook? But... it's not freezing up any more! How can I ever feel at home now?")
    npc_end
    pc_begin
       option
@@ -205,7 +205,7 @@ end_dialog
 ############################################################
 dialog(11)
    npc_begin
-      text = gettext("Now, Ruindows at the Hippie's computer!")
+      text = gettext("Now get Ruindows onto the Hippie's computer!")
    npc_end
    pc_begin
       option
@@ -221,11 +221,11 @@ end_dialog
 ############################################################
 dialog(12)
    npc_begin
-      text = gettext("I'm waiting for you install the Ruindows on the hippie's computer!")
+      text = gettext("I'm waiting for you install Ruindows on the Hippie's computer!")
    npc_end
    pc_begin
       option
-         text = gettext("Ok.")
+         text = gettext("Okay.")
          action = finish_dialog()
    pc_end
 end_dialog
@@ -234,7 +234,7 @@ end_dialog
 ############################################################
 dialog(13)
    npc_begin
-      text = gettext("So you've installed it! Soon the blue screen will rule the world!")
+      text = gettext("You installed it! Soon the blue screen will rule the world!")
    npc_end
    pc_begin
       option
