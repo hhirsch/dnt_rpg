@@ -84,12 +84,16 @@ class WallController
       GLuint faceMarkTexture; /**< Current wall face mark texture */
 
       Farso::GuiInterface* gui;
-      Farso::Window* detailWindow;
-      Farso::TabButton* detTab;
+      Farso::Window* editWindow;
+      Farso::TabButton* editTab;
       Farso::OneTabButton* incX;
       Farso::OneTabButton* decX;
+      Farso::OneTabButton* add[2];
+      Farso::OneTabButton* sub[2];
       Farso::OneTabButton* incZ;
       Farso::OneTabButton* decZ;
+      Farso::TextBar* editFactorText;
+      float wallEditFactor;
       wall* detailWall;
 
       Farso::Window* faceWindow;
@@ -109,6 +113,9 @@ class WallController
       void openFaceWindow();
       /*! Set values on face window */
       void setFaceValues();
+
+      /*! Open the wall edit window */
+      void openEditWindow();
 
       /*! Gets wall on actual Mouse Position
        * \param radius -> delta from mouse position to verify wall in.
