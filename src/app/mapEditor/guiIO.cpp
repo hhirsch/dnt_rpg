@@ -43,6 +43,7 @@ GuiIO::GuiIO()
    actualFog = NULL;
    fileWindow = NULL;
    portalEditor = NULL;
+   wallEditor = NULL;
 
    invertMultiTexture = false;
 
@@ -309,6 +310,8 @@ void GuiIO::openWallWindow()
    wallEditButton->setMouseHint("Edit Wall");
    wallCutButton = wallTabButton->insertButton(40,0,59,19);      /* Wall Cut */
    wallCutButton->setMouseHint("Cut Wall");
+   wallEditFaceButton = wallTabButton->insertButton(60,0,79,19); /* Face Edit */
+   wallEditFaceButton->setMouseHint("Edit Face");
    wallDestroyButton = wallTabButton->insertButton(100,0,119,19); /* Destroy */
    wallDestroyButton->setMouseHint("Destroy Wall");
    wallTextureButton = wallTabButton->insertButton(0,20,19,39);   /* Texture */
@@ -728,7 +731,11 @@ int GuiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
    {
       return(GUI_IO_OTHER);
    }
-   else if(portalEditor->eventGot(eventInfo, object))
+   else if( (portalEditor) && (portalEditor->eventGot(eventInfo, object)))
+   {
+      return(GUI_IO_OTHER);
+   }
+   else if( (wallEditor) && (wallEditor->eventGot(eventInfo, object)))
    {
       return(GUI_IO_OTHER);
    }
@@ -898,6 +905,12 @@ int GuiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          {
             state = GUI_IO_STATE_WALL;
             tool = TOOL_WALL_CUT;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if(object == (Farso::GuiObject*) wallEditFaceButton)
+         {
+            state = GUI_IO_STATE_WALL;
+            tool = TOOL_WALL_EDIT_FACE;
             return(GUI_IO_NEW_STATE);
          }
          else if(object == (Farso::GuiObject*) wallTextureButton)

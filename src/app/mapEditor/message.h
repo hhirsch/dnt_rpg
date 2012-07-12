@@ -39,6 +39,7 @@ namespace dntMapEditor
 #define TOOL_WALL_ADD               21
 #define TOOL_WALL_EDIT              22
 #define TOOL_WALL_CUT               23
+#define TOOL_WALL_EDIT_FACE         24
 #define TOOL_WALL_TEXTURE           25
 #define TOOL_WALL_LESS_Y_TEXTURE    26
 #define TOOL_WALL_MORE_Y_TEXTURE    27

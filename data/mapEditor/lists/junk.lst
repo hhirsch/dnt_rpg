@@ -1,3 +1,17 @@
+Duto1 = models/tiles/duto/duto1.dcc
+Duto2 = models/tiles/duto/duto2.dcc
+Duto3 = models/tiles/duto/duto3.dcc
+Duto4 = models/tiles/duto/duto4.dcc
+Duto5 = models/tiles/duto/duto5.dcc
+Duto_closed1 = models/tiles/duto/duto_closed1.dcc
+Duto_closed2 = models/tiles/duto/duto_closed2.dcc
+Duto_end1 = models/tiles/duto/duto_end1.dcc
+Duto_end2 = models/tiles/duto/duto_end2.dcc
+Duto_end3 = models/tiles/duto/duto_end3.dcc
+Duto_end4 = models/tiles/duto/duto_end4.dcc
+Duto_l = models/tiles/duto/duto_l.dcc
+Duto_t = models/tiles/duto/duto_t.dcc
+Duto_x = models/tiles/duto/duto_x.dcc
 Apple_Crate = models/junk/apple_crate/apple_crate.dcc
 Box_1 = models/junk/caixa1/caixa1.dcc
 Box_2 = models/junk/caixa1/caixa2.dcc

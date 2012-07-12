@@ -33,8 +33,9 @@ class WallController
 {
    public:
       /*! Constructor 
-       * \param acMap -> pointer to opened map */
-      WallController(Map* acMap);
+       * \param acMap -> pointer to opened map
+       * \param g -> pointer to the gui interface */
+      WallController(Map* acMap, Farso::GuiInterface* g);
       /*! Destructor */
       ~WallController();
 
@@ -57,6 +58,11 @@ class WallController
       void drawTemporary(GLdouble modelView[16], 
                          GLfloat camX, GLfloat camY, GLfloat camZ);
 
+      /*! Treat GUI events
+       * \return true if some event occurred here */
+      bool eventGot(int eventInfo, Farso::GuiObject* obj);
+
+
    private:
       Map* actualMap;         /**< Actual Internal Map */
       int actualTool;         /**< Actual Tool */
@@ -76,6 +82,33 @@ class WallController
 
       GLuint markTexture;     /**< Actual Wall mark Texture */
       GLuint faceMarkTexture; /**< Current wall face mark texture */
+
+      Farso::GuiInterface* gui;
+      Farso::Window* detailWindow;
+      Farso::TabButton* detTab;
+      Farso::OneTabButton* incX;
+      Farso::OneTabButton* decX;
+      Farso::OneTabButton* incZ;
+      Farso::OneTabButton* decZ;
+      wall* detailWall;
+
+      Farso::Window* faceWindow;
+      Farso::Button* incXRep;
+      Farso::TextBar* curXRep;
+      Farso::Button* decXRep;
+      Farso::Button* incYRep;
+      Farso::TextBar* curYRep;
+      Farso::Button* decYRep;
+      Farso::Button* incZRep;
+      Farso::TextBar* curZRep;
+      Farso::Button* decZRep;
+      wallTexture* curFace;
+      GLuint repX, repY, repZ;
+
+      /*! Open the face window for current face */
+      void openFaceWindow();
+      /*! Set values on face window */
+      void setFaceValues();
 
       /*! Gets wall on actual Mouse Position
        * \param radius -> delta from mouse position to verify wall in.
