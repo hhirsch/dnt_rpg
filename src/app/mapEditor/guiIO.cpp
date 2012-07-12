@@ -316,7 +316,7 @@ void GuiIO::openWallWindow()
    wallLessXTexture = wallTabButton->insertButton(20,20,39,39);   /* Less X */
    wallLessXTexture->setMouseHint("Decrease Wall X Texture Repeat");
    wallMoreXTexture = wallTabButton->insertButton(40,20,59,39);   /* More X */
-   wallMoreXTexture->setMouseHint("Increase Wall Z Texture Repeat");
+   wallMoreXTexture->setMouseHint("Increase Wall X Texture Repeat");
    wallLessYTexture = wallTabButton->insertButton(60,20,79,39);   /* Less Y */
    wallLessYTexture->setMouseHint("Decrease Wall Y Texture Repeat");
    wallMoreYTexture = wallTabButton->insertButton(80,20,99,39);   /* Less Y */
