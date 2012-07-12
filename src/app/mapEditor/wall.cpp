@@ -667,6 +667,16 @@ void WallController::doWall()
          actualWall->z1 = actualWall->z2;
          actualWall->z2 = aux;
       }
+
+      /* Avoiding near-zero size walls */
+      if(actualWall->z2 - actualWall->z1 < 1)
+      {
+         actualWall->z2 = actualWall->z1+1;
+      }
+      if(actualWall->x2 - actualWall->x1 < 1)
+      {
+         actualWall->x2 = actualWall->x1+1;
+      }
       
    }
 }
