@@ -2717,8 +2717,8 @@ void Map::drawMiniMap()
 
    /* Put some light */
    GLfloat color[4] = {0.8,0.8,0.8,1.0};
-   GLfloat where[4] = {(OUTDOOR_FARVIEW / 2.0)-1,
-                       (OUTDOOR_FARVIEW / 2.0)-1 + posX,
+   GLfloat where[4] = {(OUTDOOR_FARVIEW_D2)-1,
+                       (OUTDOOR_FARVIEW_D2)-1 + posX,
                        posZ, 1.0};
    glLightfv(GL_LIGHT0, GL_AMBIENT, color);
    glLightfv(GL_LIGHT0, GL_POSITION, where);

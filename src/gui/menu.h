@@ -92,7 +92,7 @@ class Menu: public GuiList
       /*! Get a item
        * \param i -> position of the item on menu
        * \return pointer to desired item, or NULL, if not exists. */
-      GuiObject* getItem(int i);
+      GuiObject* getItem(unsigned i);
 
       /*! Get the actual Item */
       int getActualItem();

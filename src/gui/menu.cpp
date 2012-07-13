@@ -81,9 +81,9 @@ void Menu::insertItem(std::string text, std::string imageFile, bool avaible)
 /*********************************************************
  *                        getItem                        *
  *********************************************************/
-GuiObject* Menu::getItem(int i)
+GuiObject* Menu::getItem(unsigned i)
 {
-   int count=0;
+   unsigned count = 0;
    /* If searching for greater than total, for sure doesn't exist */
    if(i > (list.size()-numPictures))
    {
