@@ -838,7 +838,13 @@ def save_md5(settings):
         file = open(md5mesh_filename, 'w')
       except IOError:
         errmsg = "IOError " #%s: %s" % (errno, strerror)
-      buffer = skeleton.to_md5mesh(len(meshes[0].submeshes))
+      
+      try:
+         buffer = skeleton.to_md5mesh(len(meshes[0].submeshes))
+      except: 
+        print("\nERROR: You must selected BOTH mesh and armature objects!\n")
+        raise
+        
       #for mesh in meshes:
       buffer = buffer + meshes[0].to_md5mesh()
       file.write(buffer)
