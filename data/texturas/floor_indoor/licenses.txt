@@ -33,7 +33,7 @@ tile1_1.png, tile1_2.png, tile2.png
 wall_crete03b.png
   Author: TRaK <http://trak.mercenariesguild.net>
   License: GPLv2+, CC-BY-SAv3+
-  Source: http://trak.mercenariesguild.net/node/3
+  Source: http://trak.mercenariesguild.net/node/3 (TRaK2 Texture Set)
 
 tile3.png
   Author: Dim <http://www.brandonphoenixart.com/>
@@ -41,3 +41,10 @@ tile3.png
   Source: http://opengameart.org/node/8136
   Note: color-corrected by qubodup (Iwan Gabovitch) <qubodup@gmail.com>
 
+concrete6.png
+plaster3c.png
+wood1.png1
+  Author: TRaK <http://trak.mercenariesguild.net>
+  License: MIT
+  Source: http://trak.mercenariesguild.net/node/3 (TRaK4 Texture Set)
+  
