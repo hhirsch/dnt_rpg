@@ -1,0 +1,4 @@
+upper_wall.png
+  Author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+  License: CC0/Public Domain
+  Note: Based on a PD texture from Burningwell.org
