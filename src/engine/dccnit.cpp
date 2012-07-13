@@ -3668,6 +3668,17 @@ void engine::renderNoShadowThings()
                                      0.05f, 20);
    }
 
+   /* The Current Connection */
+   if(option->getAlwaysHighlightConnections())
+   {
+      actualMap->renderConnections();
+   }
+   else if(curConection)
+   {
+      actualMap->renderConnection(curConection);
+   }
+
+
    if( (occPosition) && (walkStatus != ENGINE_WALK_MOUSE) )
    {
       /* Can walk to position mark */
@@ -3746,31 +3757,6 @@ void engine::renderNoShadowThings()
                                      destX + (4 + destinyVariation),
                                      destZ + (4 + destinyVariation),
                                      0.25f,4);
-   }
-
-   /* The Current Connection */
-   if(curConection)
-   {
-      GLfloat ambient[] = { 0.94f, 0.292f, 0.22f, 0.45f };
-      glPushMatrix();
-      glEnable( GL_BLEND );
-      glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-   
-      glBegin(GL_QUADS);
-         glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambient);
-         glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, ambient);
-         glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, ambient);
-         glColor4fv(ambient);
-         glNormal3f(0.0f, 1.0f, 0.0f);
-         glVertex3f(curConection->x1, 0.5f, curConection->z1);
-         glVertex3f(curConection->x1, 0.5f, curConection->z2);
-         glVertex3f(curConection->x2, 0.5f, curConection->z2);
-         glVertex3f(curConection->x2, 0.5f, curConection->z1);
-      glEnd();
-
-      glDisable( GL_BLEND );
-      glColor3f(1.0f, 1.0f, 1.0f);
-      glPopMatrix();
    }
 
    /* Draw Particles */

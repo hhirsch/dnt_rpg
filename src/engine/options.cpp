@@ -1,21 +1,21 @@
 /* 
-  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  DNT: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
-  This file is part of DccNiTghtmare.
+  This file is part of DNT.
  
-  DccNiTghtmare is free software: you can redistribute it and/or modify
+  DNT is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  DccNiTghtmare is distributed in the hope that it will be useful,
+  DNT is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+  along with DNT.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 
@@ -361,6 +361,11 @@ bool options::load(string file)
          /* If will always run or not */
          alwaysRun = (value == "true");
       }
+      else if(key == "AlwaysHighlightConnections")
+      {
+         /* If will always show connections or not */
+         alwaysHighlightConnections = (value == "true");
+      }
 
       /**********************************************
        *                 Video Options              *
@@ -506,6 +511,9 @@ void options::save()
    fprintf(arq, "HighlightEnemy = %s\n", highlightEnemy?"true":"false");
    /* Always Run */
    fprintf(arq, "AlwaysRun = %s\n", alwaysRun?"true":"false");
+   /* Always Highlight Connections */
+   fprintf(arq, "AlwaysHighlightConnections = %s\n", 
+         alwaysHighlightConnections?"true":"false");
 
    /**********************************************
     *                Video Options               *
@@ -1135,6 +1143,16 @@ void options::displayOptionsScreen(Farso::GuiInterface* interf)
                   dir.getRealFile("texturas/options/alwaysrun.png").c_str());
    posY += 25;
 
+   /* AlwaysHighlightConnections or Not */
+   qt = gList->insertTextBox(24,posY,219,posY+17,0,
+                            gettext("Always Highlight Connections"));
+   qt->setFont(fontArial, 10, Farso::Font::ALIGN_CENTER);
+   cxSelAlwaysConnections = gList->insertCxSel(12,posY+4,
+         alwaysHighlightConnections);
+   gList->insertPicture(220,posY,40,112,
+                  dir.getRealFile("texturas/options/exit.png").c_str());
+   posY += 25;
+
    /* ShowEnemyCircles or or Not */
    qt = gList->insertTextBox(24,posY,219,posY+34,0,
                             gettext("Show Enemy Battle Circle"));
@@ -1457,6 +1475,7 @@ int options::treat(Farso::GuiObject* object, int eventInfo,
          enableBumpMapping = cxSelBumpMapping->isSelected();
          autoEndTurn = cxSelAutoEndTurn->isSelected();
          alwaysRun = cxSelAlwaysRun->isSelected();
+         alwaysHighlightConnections = cxSelAlwaysConnections->isSelected();
          showEnemyCircles = cxSelShowEnemyCircles->isSelected();
          highlightEnemy = cxSelHighlightEnemy->isSelected();
 
@@ -1754,6 +1773,14 @@ bool options::getShowEnemyCircles()
 }
 
 /****************************************************************
+ *               getAlwaysHighLightConnections                  *
+ ****************************************************************/
+bool options::getAlwaysHighlightConnections()
+{
+   return(alwaysHighlightConnections);
+}
+
+/****************************************************************
  *                     getHighLightEnemy                        *
  ****************************************************************/
 bool options::getHighlightEnemy()
@@ -1887,7 +1914,8 @@ bool   options::showEnemyCircles = false;
 bool   options::highlightEnemy = true;
 bool   options::enableAnisotropic = true;
 bool   options::enableBumpMapping = true;
-bool   options::alwaysRun = true;
+bool   options::alwaysRun = false;
+bool   options::alwaysHighlightConnections = true;
 Uint32 options::keys[DNT_TOTAL_KEYS];
 
 Uint32 options::prevKeys[DNT_TOTAL_KEYS];

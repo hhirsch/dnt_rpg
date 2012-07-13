@@ -1,21 +1,21 @@
 /*
-  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  DNT: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
 
-  This file is part of DccNiTghtmare.
+  This file is part of DNT.
 
-  DccNiTghtmare is free software: you can redistribute it and/or modify
+  DNT is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  DccNiTghtmare is distributed in the hope that it will be useful,
+  DNT is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+  along with DNT.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 
@@ -2462,7 +2462,7 @@ int Map::save(string arquivo)
    removeUnusedTextures();
 
    /* Write Dimensions */
-   fprintf(arq,"# Made by DccNiTghtmare's MapEditor, %s\n", VERSION);
+   fprintf(arq,"# Made by DNT's MapEditor, %s\n", VERSION);
    fprintf(arq,"size = %dX%d\n",x,z);
 
    /* Write Map's name */
@@ -2640,6 +2640,56 @@ int Map::save(string arquivo)
 
    fclose(arq);
    return(1);
+}
+
+/********************************************************************
+ *                         renderConnections                        *
+ ********************************************************************/
+void Map::renderConnections()
+{
+   int xx,zz;
+   for(zz=0;zz<z;zz++)
+   {
+      for(xx=0;xx<x;xx++)
+      {
+         if( MapSquares[xx][zz].mapConection.active )
+         {
+            renderConnection(&MapSquares[xx][zz].mapConection);
+         }
+      }
+   }
+}
+
+/********************************************************************
+ *                          renderConnection                        *
+ ********************************************************************/
+void Map::renderConnection(conection* c)
+{
+   if(c)
+   {
+      GLfloat ambient[] = { 0.3f, 0.2f, 0.0f, 0.45f };
+      glPushMatrix();
+      glEnable( GL_BLEND );
+      glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+      glBegin(GL_QUADS);
+      glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambient);
+      glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, ambient);
+      glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, ambient);
+      glColor4f(0.0,0.0,0.0,1.0);
+      glNormal3f(0.0f, 1.0f, 0.0f);
+      glVertex3f(c->x1, 0.5f, c->z1);
+      glVertex3f(c->x1, 0.5f, c->z2);
+      glVertex3f(c->x2, 0.5f, c->z2);
+      glVertex3f(c->x2, 0.5f, c->z1);
+      glEnd();
+
+      glDisable( GL_BLEND );
+      glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+      glPopMatrix();
+
+
+   }
 }
 
 /********************************************************************
