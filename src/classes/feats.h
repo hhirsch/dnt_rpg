@@ -123,6 +123,7 @@ class featDescription
       factor aditionalFactor;      /**< The factor that will allows aditional */
 
       int range;                   /**< Range action of the feat */
+      int radius;                  /**< Radius of the feat, if any */
 
       depFeatList depFeats;        /**< Feat Dependency */
       

@@ -21,6 +21,7 @@
  - Initial Script for default campaign;
  - dntMapEditor: Some improvements to wall editor;
  - Implemented area affect talents;
+ - Option to always highlight map connections;
 
 BugFixes:
  - heightmap2dnt: Fixed a missing include;

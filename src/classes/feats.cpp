@@ -92,6 +92,7 @@ featDescription::featDescription()
    powerLevel = 0;
    type = 0;
    range = 0;
+   radius = 0;
    selectable = true;
    scriptFile = "";
    name = "undefined";
@@ -697,6 +698,13 @@ void featsList::init(string dir, string arq)
          {
             sscanf(value.c_str(),"%d",&m_feats[aux].range);
             m_feats[aux].range *= METER_TO_DNT;
+         }
+
+         /* Radius */
+         else if(key == "radius")
+         {
+            sscanf(value.c_str(),"%d",&m_feats[aux].radius);
+            m_feats[aux].radius *= METER_TO_DNT;
          }
 
          /* Cost To Use */

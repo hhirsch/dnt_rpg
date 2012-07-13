@@ -252,6 +252,7 @@ engine::~engine()
    glDeleteTextures(1, &rangeCircle);
    glDeleteTextures(1, &canOccImage);
    glDeleteTextures(1, &featRangeCircle);
+   glDeleteTextures(1, &featAreaCircle);
    glDeleteTextures(1, &idTextura);
 
    /* Clear ModState */
@@ -1708,6 +1709,26 @@ void engine::init(SDL_Surface *screen)
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
    SDL_FreeSurface(img);
+
+   /* feat area circle */
+   img = IMG_Load(
+             dir.getRealFile("texturas/fightMode/featAreaCircle.png").c_str());
+   if(!img)
+   {
+      cerr << "Error: can't Load Texure: fightMode/featAreaCircle.png" << endl;
+   }
+
+   glGenTextures(1, &featAreaCircle);
+
+   glBindTexture(GL_TEXTURE_2D, featAreaCircle);
+   glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
+                0,DNT_IMAGE_FORMAT_A, GL_UNSIGNED_BYTE, img->pixels);
+
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+   SDL_FreeSurface(img);
+
 
    /* range circle */
    img = IMG_Load(dir.getRealFile("texturas/walk/range.png").c_str());
@@ -3732,8 +3753,22 @@ void engine::renderNoShadowThings()
                turnCharacter->scNode->getPosZ()+rangeValue, 
                0.5f,20);
       }
-
    }
+
+   /* Draw Area-Feat radius circle */
+   if((engineMode == ENGINE_MODE_TURN_BATTLE) && 
+      (activeCharacter->getCanAttack()) &&
+      (fightStatus == FIGHT_PC_TURN) && 
+      (activeCharacter->getActiveFeatPtr()->info->type == FEAT_TYPE_ON_AREA))
+   {
+      /* Feat Range Circle */
+      float rangeValue = activeCharacter->getActiveFeatPtr()->info->radius;
+      actualMap->renderSurfaceOnMap(featAreaCircle,
+            xReal-rangeValue, zReal-rangeValue,
+            xReal+rangeValue, zReal+rangeValue,
+            0.6f,20);
+   }
+
 
    /* Draw A* movimentation things */
    if(walkStatus == ENGINE_WALK_MOUSE_ASTAR)

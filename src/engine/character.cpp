@@ -781,8 +781,8 @@ int character::getActiveFeatRange()
        }
 
        /* Bare Hands */
-       f->info->range = 45;
-       return(45);
+       f->info->range = 60;
+       return(60);
    }
    else
    {

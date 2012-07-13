@@ -561,6 +561,7 @@ class engine
       /* Combat Things */
       GLuint  normalMoveCircle,    /**< One Movimentation Circle */
               fullMoveCircle,      /**< Full Round Movimentation Circle */
+              featAreaCircle,      /**< Feat radius area circle */
               featRangeCircle,     /**< Feat Range Circle */
               rangeCircle;         /**< Range Circle */
 

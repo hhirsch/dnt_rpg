@@ -3,7 +3,7 @@ death.png
    License: CC-BY 3.0
    Source: http://filsd.deviantart.com/art/Skull-312075360
 
-
+featAreaCircle.png
 featRangeCircle.png
 fullMovCircle.png
 normalMovCircle.png
