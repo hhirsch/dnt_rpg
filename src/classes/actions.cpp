@@ -187,8 +187,6 @@ bool doHealOrAttack(thing* actor, thing* target,
       }
    }
 
-   srand(SDL_GetTicks());
-
    /* Call the animation */
    //TODO call other animation, if is defined
    if(!heal)
@@ -465,8 +463,6 @@ bool doAreaAttack(thing* actor, float targetX, float targetZ, int radius,
       brief.addText(gettext("Too far away for action!"), 225, 20, 20);
       return(false);
    }
-
-   srand(SDL_GetTicks());
 
    /* Call the animation */
    actor->callAttackAnimation();

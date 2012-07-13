@@ -432,7 +432,6 @@ int feats::getRandomNPCAttackFeat(thing* pers, thing* target)
 
    if( (target != NULL) && (pers != NULL))
    {
-      srand(SDL_GetTicks());
       ft = (int)(totalFeats*(rand() / (RAND_MAX + 1.0)));
 
       //FIXME verify if the feat is in range to use!
@@ -523,7 +522,6 @@ int feats::getRandomHealFeat(thing* pers)
 
    if((pers != NULL))
    {
-      srand(SDL_GetTicks());
       ft = (int)(totalFeats*(rand() / (RAND_MAX + 1.0)));
 
       if( (m_feats[ft].info->action == ACT_HEAL)  && 

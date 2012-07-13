@@ -340,10 +340,6 @@ pendingAction* pendingActionController::addAction(pendingAction* act,
          {
             //FIXME: When can't reach the random, try another near position!
             
-            /* Do some randomize (current ticks + random number [0,1000) */
-            srand(SDL_GetTicks() + (int)(1 + 1000 * 
-                                         (rand() / (RAND_MAX + 1.0))));
-
             /* Get the target bounding box, to set min variation */
             boundingBox bb = act->target->scNode->getBoundingBox();
             GLfloat sizeX = (bb.max.x-bb.min.x) + 16;

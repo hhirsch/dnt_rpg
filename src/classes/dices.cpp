@@ -135,9 +135,6 @@ int dice::roll(bool critical)
    int d; /* dice counter */
    int value = 0; /* the value got */
 
-   /* Do some randomize (current ticks + random number [0,1000) */
-   srand(SDL_GetTicks() + (int)(1 + 1000 * (rand() / (RAND_MAX + 1.0))));
-
    /* Throw the dices */
    for(d = 0; d < numberOfDices; d++)
    {

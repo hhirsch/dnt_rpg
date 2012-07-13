@@ -2817,7 +2817,10 @@ int engine::treatIO(SDL_Surface *screen)
    GLfloat varTempo;  // Time Variation
 
    time = SDL_GetTicks();
-   srand(time*rand());
+   
+   /* Do some randomize (current ticks + random number [0,1000) */
+   srand(time + (int)(1 + 1000 * (rand() / (RAND_MAX + 1.0))));
+
    varTempo = (time-lastRead);
    if( ((varTempo)) >= UPDATE_RATE)
    {
