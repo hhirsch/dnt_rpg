@@ -1,21 +1,21 @@
 /* 
-  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  DNT: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
-  This file is part of DccNiTghtmare.
+  This file is part of DNT.
  
-  DccNiTghtmare is free software: you can redistribute it and/or modify
+  DNT is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  DccNiTghtmare is distributed in the hope that it will be useful,
+  DNT is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+  along with DNT.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include <iostream>
@@ -1798,6 +1798,35 @@ void iaScript::callFunction(iaVariable* var, string strLine,
 
       assignValue(var, (void*)&res, IA_TYPE_BOOL);
    }
+   else if(functionName == IA_FIGHT_DO_ATTACK_ON_AREA)
+   {
+      factor f;
+      factor against;
+
+      /* Let's get all parameters */
+      character* actor = getParameterc(token, strLine, pos);
+      float x = getParameterf(token, strLine, pos);
+      float z = getParameterf(token, strLine, pos);
+      int radius = getParameteri(token, strLine, pos);
+      diceThing* d = getParameterd(token, strLine, pos);
+
+      f.type = getParameters(token, strLine, pos);
+      f.id = getParameters(token, strLine, pos);
+      
+      against.type = getParameters(token, strLine, pos);
+      against.id = getParameters(token, strLine, pos);
+
+      bool res = false;
+
+      if( (actor) && (d) )
+      {
+         res = doAreaAttack(actor, x, z, radius, *d, &f, &against, 
+               0, actualEngine);
+      }
+
+      assignValue(var, (void*)&res, IA_TYPE_BOOL);
+
+   }
 
    
    ////////////////////////////////////////////////////
@@ -2312,11 +2341,11 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       {
          if(functionName == IA_CHARACTER_AT_RANGE)
          {
-            /* syntax characterArRange(character ref, character tgt) */
+            /* syntax characterAtRange(character ref, character tgt) */
             bool atRange = actionInRange(ref->scNode->getPosX(),
                   ref->scNode->getPosZ(), tgt->scNode->getPosX(), 
                    tgt->scNode->getPosZ(), 
-                   ref->getActiveFeatRange()*METER_TO_DNT);
+                   ref->getActiveFeatRange());
             assignValue(var, (void*)&atRange, IA_TYPE_BOOL);
          }
          else if(functionName == IA_SET_TARGET_CHARACTER)

@@ -8,7 +8,7 @@ icon = feats/Img/ameivas_worms.png
 
 required = CLASS BIOLOGY 4
 
-range = 60
+range = 15
 
 quantity = 1
 costToUse = 1

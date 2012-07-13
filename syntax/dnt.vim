@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language: DNT Script Language
 " Maintainer: Farrer <farrer@dnteam.org>
-" Last Change: 2012 Jul 06
+" Last Change: 2012 Jul 13
 
 syn clear
 
@@ -57,7 +57,7 @@ syn keyword dntFunction       classLevel roll rollDice addEffect
 syn keyword dntFunction       particleAddToCharacter
 syn keyword dntFunction       setBaseDice setAditionalDice getBaredHandsDice
 syn keyword dntFunction       setBaseDice3i showText showTextStatic
-syn keyword dntFunction       doAttack doAttackAgainst featDec
+syn keyword dntFunction       doAttack doAttackAgainst featDec doAttackOnArea
 syn keyword dntFunction       doAttackWithoutResistence
 syn keyword dntFunction       weaponEquiped getEquipedWeapon
 syn keyword dntFunction       weaponGetAmmoType weaponGetAmmo weaponDecAmmo

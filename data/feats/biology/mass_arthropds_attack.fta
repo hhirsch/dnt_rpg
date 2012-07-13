@@ -9,7 +9,7 @@ icon = feats/Img/mass_arthropds_attack.png
 
 required = CLASS BIOLOGY 10
 
-range = 80
+range = 35
 
 quantity = 2
 costToUse = 1

@@ -7,7 +7,7 @@ type = FEAT_TYPE_ON_TARGET
 action = ACT_ATTACK
 icon = feats/Img/coward_touch.png
 
-range = 20
+range = 8
 
 # Quantities
 quantity = 3

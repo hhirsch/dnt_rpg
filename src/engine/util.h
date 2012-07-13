@@ -59,8 +59,8 @@
 
 #define ENGINE_LOADING_IMAGES  6 /**< Total available loading images */
 
-#define DNT_TO_METER   0.5f /**< Constant to multiply to convert meter to DNT.*/
-#define METER_TO_DNT   1.0f / DNT_TO_METER /**< Constant to DNT to Meter value*/
+#define DNT_TO_METER   0.2f /**< Constant to multiply to convert DNT to meter.*/
+#define METER_TO_DNT   1.0f / DNT_TO_METER /**< Constant to Meter to DNT value*/
 
 #define THUMB_X      128  /**< X size of the screenshot */
 #define THUMB_Y       96  /**< Y size of the screenshot */

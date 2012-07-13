@@ -20,6 +20,7 @@
  - Campaign abstractions to allow more easy engine customization;
  - Initial Script for default campaign;
  - dntMapEditor: Some improvements to wall editor;
+ - Implemented area affect talents;
 
 BugFixes:
  - heightmap2dnt: Fixed a missing include;

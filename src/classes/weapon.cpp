@@ -23,6 +23,7 @@
 #include "../etc/dirs.h"
 #include "../etc/defparser.h"
 #include "../sound/sound.h"
+#include "../engine/util.h"
 
 #include <iostream>
 using namespace std;
@@ -171,6 +172,7 @@ weapon::weapon(string path): object(path)
       else if(key == "range_value")
       {
          sscanf(value.c_str(),"%d",&rangeValue);
+         rangeValue *= METER_TO_DNT;
       }
       else if( (key == "size_type") || (key == "size"))
       {

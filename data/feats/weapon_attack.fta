@@ -6,7 +6,7 @@ type = FEAT_TYPE_ON_TARGET
 action = ACT_ATTACK
 icon = feats/Img/melee_attack.png
 
-range = 60
+range = 15
 quantity = 1
 costToUse = 0
 powerLevel = 1

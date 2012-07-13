@@ -1853,6 +1853,10 @@ void engine::exitBattleMode()
 
    /* Abort All pending Actions */
    actionControl->abortAllActions();
+
+   /* Clear the current selected feat */
+   activeCharacter->setActiveFeat(FEAT_WEAPON_ATTACK);
+   shortcuts->clearSelectedTalent();
 }
 
 
@@ -2570,6 +2574,33 @@ int engine::verifyMouseActions(Uint8 mButton)
          porta = (door*)porta->getNext();
       }
 
+      /* Are talent use */
+      if((engineMode == ENGINE_MODE_TURN_BATTLE) && 
+         (activeCharacter->getCanAttack()) &&
+         (fightStatus == FIGHT_PC_TURN) && 
+         (activeCharacter->getActiveFeatPtr()->info->type == FEAT_TYPE_ON_AREA))
+      {
+        feat* f = activeCharacter->getActiveFeatPtr();
+        cursors->set(f->info->image);
+        if( (mButton & SDL_BUTTON(1)) &&
+            (rangeAction(activeCharacter->scNode->getPosX(), 
+                         activeCharacter->scNode->getPosZ(),
+                           xReal, zReal,
+                           activeCharacter->getActiveFeatRange()) ) )
+        {
+           activeCharacter->setCanAttack(
+                 !activeCharacter->actualFeats->useFeatAtArea(
+                    activeCharacter, 
+                    activeCharacter->getActiveFeat(), xReal, 0.0f, zReal));
+
+           /* Clear the current selected feat */
+           activeCharacter->setActiveFeat(FEAT_WEAPON_ATTACK);
+           shortcuts->clearSelectedTalent();
+
+           fight->verifyDeads();
+        }
+      }
+
       /* Talk And Attack Events Verification */
       if(NPCs)
       {
@@ -2620,7 +2651,9 @@ int engine::verifyMouseActions(Uint8 mButton)
                /* Verify attacks */
                else if( (engineMode == ENGINE_MODE_TURN_BATTLE) && 
                         (activeCharacter->getCanAttack()) &&
-                        (fightStatus == FIGHT_PC_TURN) )
+                        (fightStatus == FIGHT_PC_TURN) && 
+                        (activeCharacter->getActiveFeatPtr()->info->type == 
+                         FEAT_TYPE_ON_TARGET))
                {
                   if(activeCharacter->getActiveFeat() == FEAT_WEAPON_ATTACK)
                   {
@@ -2637,8 +2670,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                                    activeCharacter->scNode->getPosZ(),
                                    pers->scNode->getPosX(), 
                                    pers->scNode->getPosZ(),
-                                   activeCharacter->getActiveFeatRange() *
-                                   METER_TO_DNT) ) )
+                                   activeCharacter->getActiveFeatRange()) ) )
                   {
                      sprintf(buf, gettext("%s attacks %s"),
                              activeCharacter->name.c_str(),
@@ -3678,7 +3710,7 @@ void engine::renderNoShadowThings()
           (walkDistance < turnCharacter->displacement) )
       {
          /* Feat Range Circle */
-         float rangeValue = turnCharacter->getActiveFeatRange()*METER_TO_DNT;
+         float rangeValue = turnCharacter->getActiveFeatRange();
          actualMap->renderSurfaceOnMap(featRangeCircle, 
                turnCharacter->scNode->getPosX()-rangeValue,
                turnCharacter->scNode->getPosZ()-rangeValue, 

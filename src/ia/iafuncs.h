@@ -1,21 +1,21 @@
 /* 
-  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  DNT: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
-  This file is part of DccNiTghtmare.
+  This file is part of DNT.
  
-  DccNiTghtmare is free software: you can redistribute it and/or modify
+  DNT is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  DccNiTghtmare is distributed in the hope that it will be useful,
+  DNT is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+  along with DNT.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #ifndef _dnt_iafuncs_h
@@ -233,6 +233,10 @@
 #define IA_FIGHT_DO_ATTACK_AGAINST "doAttackAgainst"
 /*! bool doAttackWithoutResistence(character actor, character target, dice d) */
 #define IA_FIGHT_DO_ATTACK_WITHOUT_RESISTENCE "doAttackWithoutResistence"
+/*! bool doAttackOnArea(character actor, float x, float z, int radius, dice d,
+ *                      string factorType, string factorId, 
+ *                      string againstType, string againstId) */
+#define IA_FIGHT_DO_ATTACK_ON_AREA "doAttackOnArea"
 
 ////////////////////////////////////////////////////
 //                 Object Functions               //

@@ -9,7 +9,7 @@ icon = feats/Img/arc_impulse.png
 
 required = CLASS BIOLOGY 7
 
-range = 30
+range = 8
 
 quantity = 2
 costToUse = 1

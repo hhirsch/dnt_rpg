@@ -15,6 +15,8 @@ script(float x, float y, float z)
 
    # TODO: Call animation of insects!
 
+   # TODO: Call insects sound!
+
    # Do the attack to all characters in area
    doAttackOnArea(SELF_CHARACTER, x, z, 10, d, "ATTRIBUTE", "CHARISMA", "THING", "FORTITUDE") 
 

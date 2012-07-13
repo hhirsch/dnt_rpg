@@ -1,21 +1,21 @@
 /* 
-  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  DNT: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
-  This file is part of DccNiTghtmare.
+  This file is part of DNT.
  
-  DccNiTghtmare is free software: you can redistribute it and/or modify
+  DNT is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  DccNiTghtmare is distributed in the hope that it will be useful,
+  DNT is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+  along with DNT.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "iafuncs.h"
@@ -121,6 +121,7 @@ bool isFunction(string s)
            (s == IA_FIGHT_RUN_AWAY_FROM_BATTLE) || (s == IA_FIGHT_DO_ATTACK) ||
            (s == IA_FIGHT_DO_ATTACK_AGAINST) ||
            (s == IA_FIGHT_DO_ATTACK_WITHOUT_RESISTENCE) ||
+           (s == IA_FIGHT_DO_ATTACK_ON_AREA) ||
            (s == IA_GET_OBJECT) || (s == IA_GET_OBJECT_STATE) ||
            (s == IA_CHARACTER_IS_ALIVE) || (s == IA_CHARACTER_IS_ALL_DEAD) ||
            (s == IA_CHARACTER_GET_PSYCHO) ||
@@ -175,6 +176,7 @@ string functionType(string s)
        (s == IA_FIGHT_CAN_ATTACK) || (s == IA_DICE_ROLL) ||
        (s == IA_FIGHT_DO_ATTACK) || (s == IA_FIGHT_DO_ATTACK_AGAINST) ||
        (s == IA_FIGHT_DO_ATTACK_WITHOUT_RESISTENCE) || 
+       (s == IA_FIGHT_DO_ATTACK_ON_AREA) ||
        (s == IA_WEAPON_EQUIPED) || (s == IA_CHARACTER_HAVE_FEAT) ) 
    {
       return(IA_TYPE_BOOL);

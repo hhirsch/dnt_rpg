@@ -771,15 +771,18 @@ int character::getActiveFeatRange()
 {
    if(activeFeat == FEAT_WEAPON_ATTACK)
    {
+       feat* f = actualFeats->featByNumber(FEAT_WEAPON_ATTACK);
        /* Get the weapons range */
        weapon* wp = getEquipedWeapon();
        if(wp)
        {
+          f->info->range = wp->getRange();
           return(wp->getRange());
        }
 
        /* Bare Hands */
-       return(30);
+       f->info->range = 45;
+       return(45);
    }
    else
    {

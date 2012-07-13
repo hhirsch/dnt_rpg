@@ -171,7 +171,7 @@ bool doHealOrAttack(thing* actor, thing* target,
    if( (range != 0) && 
        (!actionInRange(actor->scNode->getPosX(), actor->scNode->getPosZ(), 
                      target->scNode->getPosX(), target->scNode->getPosZ(),
-                     range*METER_TO_DNT)))
+                     range)))
    {
       brief.addText(gettext("Too far away for action!"), 225, 20, 20);
       return(false);
@@ -445,6 +445,9 @@ bool doAreaAttack(thing* actor, float targetX, float targetZ, int radius,
    bool criticalHit = false;
    char texto[1024];
 
+   /* Convert radius to DNT unit */
+   float fradius = METER_TO_DNT*radius;
+
    /* Define Actor orientation
     * FIXME -> call rotate animation! */
    actor->scNode->setAngle(0.0f, getAngle(actor->scNode->getPosX(), 
@@ -457,7 +460,7 @@ bool doAreaAttack(thing* actor, float targetX, float targetZ, int radius,
    /* Verify Action Range */
    if( (range != 0) && 
        (!actionInRange(actor->scNode->getPosX(), actor->scNode->getPosZ(), 
-                     targetX, targetZ, range*METER_TO_DNT)))
+                     targetX, targetZ, range)))
    {
       brief.addText(gettext("Too far away for action!"), 225, 20, 20);
       return(false);
@@ -482,7 +485,7 @@ bool doAreaAttack(thing* actor, float targetX, float targetZ, int radius,
          float dX = (targ->scNode->getPosX() - targetX);
          float dZ = (targ->scNode->getPosZ() - targetZ);
          float dist = sqrt( (dX*dX) + (dZ*dZ) );
-         if(dist <= radius)
+         if(dist <= fradius)
          {
             miss = false;
             criticalHit = false;
@@ -598,6 +601,13 @@ bool doAreaAttack(thing* actor, float targetX, float targetZ, int radius,
 
             /* apply damage on thing */
             targ->addLifePoints(-damage);
+            
+            /* Change its state to hostile, if not PC */
+            if( (l != eng->PCs) &&
+                (targ->getPsychoState() != PSYCHO_HOSTILE) )
+            {
+               targ->setPsychoState(PSYCHO_HOSTILE);
+            }
 
             if(criticalHit)
             {
