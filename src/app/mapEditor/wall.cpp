@@ -19,6 +19,7 @@
 */
 
 #include "wall.h"
+#include "../../engine/util.h"
 #include <iostream>
 using namespace std;
 using namespace dntMapEditor;
@@ -31,13 +32,21 @@ using namespace dntMapEditor;
 /******************************************************
  *                      Constructor                   *
  ******************************************************/
-WallController::WallController(Map* acMap)
+WallController::WallController(Map* acMap, Farso::GuiInterface* g)
 {
    dirs dir;
    actualMap = acMap;
    state = WALL_STATE_OTHER;
    actualWall = actualMap->getFirstWall();
    limitSquare = false;
+
+   gui = g;
+   editWindow = NULL;
+   detailWall = NULL;
+   faceWindow = NULL;
+   curFace = NULL;
+
+   wallEditFactor = 1.0f;
 
    /* Load Mark Texture */
    SDL_Surface* img = IMG_Load(dir.getRealFile("cursors/Walk.png").c_str());
@@ -70,6 +79,15 @@ WallController::~WallController()
    glDeleteTextures(1,&markTexture);
    glDeleteTextures(1,&faceMarkTexture);
    actualMap = NULL;
+
+   if(editWindow)
+   {
+      gui->closeWindow(editWindow);
+   }
+   if(faceWindow)
+   {
+      gui->closeWindow(faceWindow);
+   }
 }
 
 /******************************************************
@@ -118,8 +136,6 @@ void WallController::verifyAction(GLfloat mouseX, GLfloat mouseY,
    fZ = floorZ;
    mB = mButton;
 
-   wall* tmpWall = NULL;
-
    /* Limit Wall to the square limits */
    if(keys[SDLK_b])
    {
@@ -134,16 +150,31 @@ void WallController::verifyAction(GLfloat mouseX, GLfloat mouseY,
    /* Edit Wall Toold */
    else if(tool == TOOL_WALL_EDIT)
    {
-      /* TODO */
+      actualWall = getWall();
+      if( (actualWall) && (mButton & SDL_BUTTON(1)) )
+      {
+         openEditWindow();
+      }
+   }
+
+   else if(tool == TOOL_WALL_EDIT_FACE)
+   {
+      actualWall = getWall();
+      if(actualWall)
+      {
+         if(mButton & SDL_BUTTON(1))
+         {
+            openFaceWindow();
+         }
+      }
    }
 
    /* Add texture to the wall */
    else if(tool == TOOL_WALL_TEXTURE)
    {
-      tmpWall = getWall();
-      if(tmpWall)
+      actualWall = getWall();
+      if(actualWall)
       {
-         actualWall = tmpWall;
          doTexture();
       }
    }
@@ -156,10 +187,9 @@ void WallController::verifyAction(GLfloat mouseX, GLfloat mouseY,
             (tool == TOOL_WALL_LESS_Z_TEXTURE) || 
             (tool == TOOL_WALL_MORE_Z_TEXTURE) )
    {
-      tmpWall = getWall();
-      if(tmpWall)
+      actualWall = getWall();
+      if(actualWall)
       {
-         actualWall = tmpWall;
          doModifyVerHorTexture();
       }
    }
@@ -167,10 +197,9 @@ void WallController::verifyAction(GLfloat mouseX, GLfloat mouseY,
    /* Destroy Current Wall */
    else if(tool == TOOL_WALL_DESTROY)
    {
-      tmpWall = getWall();
-      if(tmpWall)
+      actualWall = getWall();
+      if(actualWall)
       {
-         actualWall = tmpWall;
          doDestroy();
       }
    }
@@ -178,10 +207,9 @@ void WallController::verifyAction(GLfloat mouseX, GLfloat mouseY,
    /* Cut Current Wall */
    else if(tool == TOOL_WALL_CUT)
    {
-      tmpWall = getWall();
-      if(tmpWall)
+      actualWall = getWall();
+      if(actualWall)
       {
-         actualWall = tmpWall;
          doCut();
       }
    }
@@ -639,7 +667,358 @@ void WallController::doWall()
          actualWall->z1 = actualWall->z2;
          actualWall->z2 = aux;
       }
+
+      /* Avoiding near-zero size walls */
+      if(actualWall->z2 - actualWall->z1 < 1)
+      {
+         actualWall->z2 = actualWall->z1+1;
+      }
+      if(actualWall->x2 - actualWall->x1 < 1)
+      {
+         actualWall->x2 = actualWall->x1+1;
+      }
       
    }
 }
+
+/******************************************************
+ *                       eventGot()                   *
+ ******************************************************/
+bool WallController::eventGot(int eventInfo, Farso::GuiObject* obj)
+{
+   bool gotFace = false;
+   bool gotEdit = false;
+   if(eventInfo == Farso::EVENT_ON_PRESS_BUTTON)
+   {
+      /* Face Editor Window Button Pressed */
+      /* X */
+      if(obj == (Farso::GuiObject*)decXRep)
+      {
+         repX -= 1;
+         if(repX <= 0)
+         {
+            repX = 1;
+         }
+         gotFace = true;
+      }
+      else if(obj == (Farso::GuiObject*)incXRep)
+      { 
+         repX += 1;
+         gotFace = true;
+      }
+      /* Y */
+      else if(obj == (Farso::GuiObject*)decYRep)
+      {
+         repY -= 1;
+         if(repY <= 0)
+         {
+            repY = 1;
+         }
+         gotFace = true;
+      }
+      else if(obj == (Farso::GuiObject*)incYRep)
+      {
+         repY += 1;
+         gotFace = true;
+      }
+
+      /* Z */
+      else if(obj == (Farso::GuiObject*)decZRep)
+      {
+         repZ -= 1;
+         if(repZ <= 0)
+         {
+            repZ = 1;
+         }
+         gotFace = true;
+      }
+      else if(obj == (Farso::GuiObject*)incZRep)
+      {
+         repZ += 1;
+         gotFace = true;
+      }
+   }
+   else if(eventInfo == Farso::EVENT_WROTE_TEXT_BAR)
+   {
+      /* Face Window Text Bars */
+      if(obj == (Farso::GuiObject*)curXRep)
+      {
+         sscanf(curXRep->getText().c_str(), "%d", &repX);
+         if(repX <= 0)
+         {
+            repX = 1;
+         }
+         gotFace = true;
+      }
+      else if(obj == (Farso::GuiObject*)curYRep)
+      {
+         sscanf(curYRep->getText().c_str(), "%d", &repY);
+         if(repY <= 0)
+         {
+            repY = 1;
+         }
+         gotFace = true;
+      }
+      else if(obj == (Farso::GuiObject*)curZRep)
+      {
+         sscanf(curZRep->getText().c_str(), "%d", &repZ);
+         if(repZ <= 0)
+         {
+            repZ = 1;
+         }
+         gotFace = true;
+      }
+      /* Edit Window Text Bar */
+      else if(obj == (Farso::GuiObject*)editFactorText)
+      {
+         sscanf(editFactorText->getText().c_str(), "%f", &wallEditFactor);
+         if(wallEditFactor <= 0)
+         {
+            wallEditFactor = 1.0f;
+         }
+         char buf[64];
+         sprintf(buf, "%.3f", wallEditFactor);
+         editFactorText->setText(buf);
+         gotEdit = true;
+      }
+   }
+   else if(eventInfo == Farso::EVENT_ON_PRESS_TAB_BUTTON)
+   {
+      /* Wall Edit Window tab buttons: MOVE */
+      if(obj == (Farso::GuiObject*)incX)
+      {
+         detailWall->x1 += wallEditFactor;
+         detailWall->x2 += wallEditFactor;
+         gotEdit = true;
+      }
+      else if(obj == (Farso::GuiObject*)decX)
+      {
+         detailWall->x1 -= wallEditFactor;
+         detailWall->x2 -= wallEditFactor;
+         gotEdit = true;
+      }
+      else if(obj == (Farso::GuiObject*)incZ)
+      {
+         detailWall->z1 += wallEditFactor;
+         detailWall->z2 += wallEditFactor;
+         gotEdit = true;
+      }
+      else if(obj == (Farso::GuiObject*)decZ)
+      {
+         detailWall->z1 -= wallEditFactor;
+         detailWall->z2 -= wallEditFactor;
+         gotEdit = true;
+      }
+      /* Wall Edit Window tab buttons: APPEND */
+      else if(obj == (Farso::GuiObject*)add[0])
+      {
+         /* Note: Add to first is equal to sub its value. */
+         if(detailWall->x2-detailWall->x1 == 10)
+         {
+            detailWall->z1 -= wallEditFactor;
+         }
+         else
+         {
+            detailWall->x1 -= wallEditFactor;
+         }
+         gotEdit = true;
+      }
+      else if(obj == (Farso::GuiObject*)sub[0])
+      {
+         /* Note: Sub to first is equal to add value */
+         if(detailWall->x2-detailWall->x1 == 10)
+         {
+            if(detailWall->z1+wallEditFactor < detailWall->z2)
+            {
+               detailWall->z1 += wallEditFactor;
+            }
+         }
+         else
+         {
+            if(detailWall->x1+wallEditFactor < detailWall->x2)
+            {
+               detailWall->x1 += wallEditFactor;
+            }
+         }
+         gotEdit = true;
+      }
+      else if(obj == (Farso::GuiObject*)add[1])
+      {
+         if(detailWall->x2-detailWall->x1 == 10)
+         {
+            detailWall->z2 += wallEditFactor;
+         }
+         else
+         {
+            detailWall->x2 += wallEditFactor;
+         }
+         gotEdit = true;
+      }
+      else if(obj == (Farso::GuiObject*)sub[1])
+      {
+         if(detailWall->x2-detailWall->x1 == 10)
+         {
+            if(detailWall->z2-wallEditFactor > detailWall->z1)
+            {
+               detailWall->z2 -= wallEditFactor;
+            }
+         }
+         else
+         {
+            if(detailWall->x2-wallEditFactor > detailWall->x1)
+            {
+               detailWall->x2 -= wallEditFactor;
+            }
+         }
+         gotEdit = true;
+      }
+   }
+
+   if( (gotFace) && (curFace))
+   {
+      curFace->setDelta(repX, repY, repZ);
+      setFaceValues();
+   }
+
+   return(gotFace || gotEdit);
+}
+
+/******************************************************
+ *                     openFaceWindow()               *
+ ******************************************************/
+void WallController::openFaceWindow()
+{
+   int posY;
+   Farso::Font fnt;
+   dirs dir;
+   string fontArial = dir.getRealFile(DNT_FONT_ARIAL);
+
+   wallTexture* wt=NULL;
+   if(actualWall)
+   {
+      wt = getSideTexture();
+      if(wt)
+      {
+         curFace = wt;
+
+         /* Open the window, if already not opened */
+         if(!faceWindow)
+         {
+            /* Create window and widgets */
+            faceWindow = gui->insertWindow(400,200,600,290,"Wall Face");
+
+            posY = 25;
+            decXRep = faceWindow->getObjectsList()->insertButton(11,posY,
+                  21,posY+17, fnt.createUnicode(0x25C4),0);
+            decXRep->defineFont(fontArial, 9);
+            curXRep = faceWindow->getObjectsList()->insertTextBar(23,posY,
+                  86,posY+17,"",0);
+            incXRep = faceWindow->getObjectsList()->insertButton(88,posY,
+                  98,posY+17, fnt.createUnicode(0x25BA),0);
+            incXRep->defineFont(fontArial, 9);
+            faceWindow->getObjectsList()->insertTextBox(100,posY,
+                  186,posY+17,0,"Texture X Repeat");
+            posY += 20;
+
+            decYRep = faceWindow->getObjectsList()->insertButton(11,posY,
+                  21,posY+17, fnt.createUnicode(0x25C4),0);
+            decYRep->defineFont(fontArial, 9);
+            curYRep = faceWindow->getObjectsList()->insertTextBar(23,posY,
+                  86,posY+17,"",0);
+            incYRep = faceWindow->getObjectsList()->insertButton(88,posY,
+                  98,posY+17, fnt.createUnicode(0x25BA),0);
+            incYRep->defineFont(fontArial, 9);
+            faceWindow->getObjectsList()->insertTextBox(100,posY,
+                  186,posY+17,0,"Texture Y Repeat");
+            posY += 20;
+
+            decZRep = faceWindow->getObjectsList()->insertButton(11,posY,
+                  21,posY+17, fnt.createUnicode(0x25C4),0);
+            decZRep->defineFont(fontArial, 9);
+            curZRep = faceWindow->getObjectsList()->insertTextBar(23,posY,
+                  86,posY+17,"",0);
+            incZRep = faceWindow->getObjectsList()->insertButton(88,posY,
+                  98,posY+17, fnt.createUnicode(0x25BA),0);
+            incZRep->defineFont(fontArial, 9);
+            faceWindow->getObjectsList()->insertTextBox(100,posY,
+                  186,posY+17,0,"Texture Z Repeat");
+            posY += 20;
+
+            /* Finally, open */
+            faceWindow->setExternPointer(&faceWindow);
+            gui->openWindow(faceWindow);
+         }
+         curFace->getDelta(repX, repY, repZ);
+         setFaceValues();
+      }
+   }
+}
+
+/******************************************************
+ *                     setFaceValues()                *
+ ******************************************************/
+void WallController::setFaceValues()
+{
+   if(faceWindow)
+   {
+      /* Set the face values on gui */
+      char val[16];
+
+      sprintf(val,"%d", repX);
+      curXRep->setText(val);
+      sprintf(val,"%d", repY);
+      curYRep->setText(val);
+      sprintf(val,"%d", repZ);
+      curZRep->setText(val);
+   }
+}
+
+/******************************************************
+ *                     openEditWindow()               *
+ ******************************************************/
+void WallController::openEditWindow()
+{
+   dirs dir;
+   if(actualWall)
+   {
+      detailWall = actualWall;
+
+      /* Open the window, if not already opened */
+      if(!editWindow)
+      {
+         /* Create window and widgets */
+         editWindow = gui->insertWindow(400,291,521,391,"Wall Edit");
+
+         editTab = editWindow->getObjectsList()->insertTabButton(7,17,0,0,
+                     dir.getRealFile("mapEditor/walleditor.png").c_str());
+         decZ = editTab->insertButton(16,4,30,17);
+         decZ->setMouseHint("Dec Z Pos");
+         incZ = editTab->insertButton(16,32,30,45);
+         incZ->setMouseHint("Inc Z Pos");
+         decX = editTab->insertButton(2,18,16,30);
+         decX->setMouseHint("Dec X Pos");
+         incX = editTab->insertButton(30,18,43,30);
+         incX->setMouseHint("Inc X Pos");
+
+         add[0] = editTab->insertButton(48,0,75,24);
+         add[0]->setMouseHint("Inc Edge1");
+         sub[0] = editTab->insertButton(76,0,103,24);
+         sub[0]->setMouseHint("Dec Edge1");
+
+         add[1] = editTab->insertButton(48,25,75,49);
+         add[1]->setMouseHint("Inc Edge2");
+         sub[1] = editTab->insertButton(76,25,103,49);
+         sub[1]->setMouseHint("Dec Edge2");
+
+         editWindow->getObjectsList()->insertTextBox(10,71,50,85,0, "Delta:");
+         editFactorText = editWindow->getObjectsList()->insertTextBar(50,71,
+               90, 85, "1.0", 0);
+
+         /* Finally, open */
+         editWindow->setExternPointer(&editWindow);
+         gui->openWindow(editWindow);
+      }
+   }
+}
+
 

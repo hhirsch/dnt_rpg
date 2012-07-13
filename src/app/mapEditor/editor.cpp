@@ -267,7 +267,8 @@ void Editor::openMap()
       terrainEditor = new dntMapEditor::Terrain(map);
       portalEditor = new dntMapEditor::Portal(map, gui->getGui());
       gui->setPortalEditor(portalEditor);
-      wallEditor = new dntMapEditor::WallController(map);
+      wallEditor = new dntMapEditor::WallController(map, gui->getGui());
+      gui->setWallEditor(wallEditor);
       tileWall = new dntMapEditor::TileWall(map);
       objectEditor = new dntMapEditor::Objects(map);
       particleEditor = new dntMapEditor::Particles(map);
@@ -571,7 +572,8 @@ void Editor::newMap()
    terrainEditor = new dntMapEditor::Terrain(map);
    portalEditor = new dntMapEditor::Portal(map, gui->getGui());
    gui->setPortalEditor(portalEditor);
-   wallEditor = new dntMapEditor::WallController(map);
+   wallEditor = new dntMapEditor::WallController(map, gui->getGui());
+   gui->setWallEditor(wallEditor);
    tileWall = new dntMapEditor::TileWall(map);
    objectEditor = new dntMapEditor::Objects(map);
    particleEditor = new dntMapEditor::Particles(map);

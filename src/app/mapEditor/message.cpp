@@ -71,10 +71,13 @@ string messageForTool(int tool)
          return("Click on an wall to delete it");
       break;
       case TOOL_WALL_EDIT:
-         return("Grab or Draw The Wall");
+         return("Select an wall to edit");
       break;
       case TOOL_WALL_CUT:
          return("Click on the position to cut wall");
+      break;
+      case TOOL_WALL_EDIT_FACE:
+         return("Select a Wall face to edit");
       break;
       case TOOL_WALL_TEXTURE:
          return("Select a Wall to Change Texture");

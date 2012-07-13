@@ -19,6 +19,7 @@
  - Script to control chicken idle behaviour;
  - Campaign abstractions to allow more easy engine customization;
  - Initial Script for default campaign;
+ - dntMapEditor: Some improvements to wall editor;
 
 BugFixes:
  - heightmap2dnt: Fixed a missing include;

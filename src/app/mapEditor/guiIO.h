@@ -29,6 +29,7 @@
 #include "grasswindow.h"
 #include "waterwindow.h"
 #include "nodeeditor.h"
+#include "wall.h"
 
 namespace dntMapEditor
 {
@@ -137,6 +138,7 @@ class GuiIO
       dntMapEditor::NodeEditor* getNodeEditor(){return(nodeEdit);}
       
       void setPortalEditor(dntMapEditor::Portal* p){portalEditor = p;}
+      void setWallEditor(dntMapEditor::WallController* w){wallEditor = w;}
 
    private:
       
@@ -221,7 +223,8 @@ class GuiIO
       Farso::TabButton* wallTabButton;           /**< Wall Tab Button */
       Farso::OneTabButton* wallAddButton;        /**< Add Wall Button */
       Farso::OneTabButton* wallEditButton;       /**< Edit Wall Button */
-      Farso::OneTabButton* wallCutButton;        /**< X Meio Fio Button */
+      Farso::OneTabButton* wallCutButton;        /**< Cut wall button */
+      Farso::OneTabButton* wallEditFaceButton;   /**< Edit face button */
       Farso::OneTabButton* wallDestroyButton;    /**< Wall Destroy Button */
       Farso::OneTabButton* wallTextureButton;    /**< Wall Texture Button */
       Farso::OneTabButton* wallLessYTexture;     /**< Texture Y Less Button */
@@ -297,6 +300,7 @@ class GuiIO
 
       dntMapEditor::NodeEditor* nodeEdit;          /**< Scene node editor */
       dntMapEditor::Portal* portalEditor;
+      dntMapEditor::WallController* wallEditor;
 };
 
 }
