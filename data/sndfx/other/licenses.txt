@@ -1,5 +1,6 @@
 battleMode.ogg
 battleMode-end.ogg
+battleMode-yourTurn.ogg
    author: DNTeam
    license: GPLv3 or later;
 

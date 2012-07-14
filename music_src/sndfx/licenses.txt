@@ -1,4 +1,5 @@
 battleMode-end.txt
+battleMode-yourTurn.txt
 drop_item.rg
 explosao_1.rg
 leve_1.rg

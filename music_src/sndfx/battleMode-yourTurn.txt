@@ -1,0 +1,13 @@
+Instructions for creating battleMode-yourTurn.ogg:
+
+1. Open battleMode.ogg in Audacity 2.0.1
+2. Select from 0.2s until 0.21s
+3. Apply "Effect/Fade out"
+4. Select from 0s until 0.2s
+5. Delete
+6. Apply "Edit/Duplicate"
+7. Move second track start to 0.25s using Time Shift Tool
+8. Select both tracks from 0s until 0.8s
+9. Apply "Effect/Fade out"
+10. Select both tracks from 0.8s until end
+11. Delete
