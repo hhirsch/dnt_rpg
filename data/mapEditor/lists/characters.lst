@@ -31,6 +31,7 @@ Dona_Velha(2lvl) = characters/pcs/dona.pc
 Hippie(2lvl) = characters/pcs/hippie.pc
 Logan(20lvl) = characters/pcs/logan.pc
 Metaleiro(1lvl) = characters/pcs/metaleiro.pc
+Padre(6lvl) = characters/pcs/padre.pc
 Santa(1lvl) = characters/pcs/santa.pc
 Velhaca(1lvl) = characters/pcs/velhaca.pc
 ZeDoBar(4lvl) = characters/pcs/zedobar.pc

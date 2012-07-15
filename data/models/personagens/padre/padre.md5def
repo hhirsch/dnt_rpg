@@ -1,0 +1,27 @@
+# Exported from Blender by DNT md5 exporter
+
+path = models/personagens/padre/
+scale = 20.6
+blendFrames = 4
+
+# Mesh Information
+mesh = padre.md5mesh
+
+# Animations
+animation = padre_Idle-M.md5anim
+animation = padre_Walk.md5anim
+animation = padre_Die.md5anim
+animation = padre_Dead.md5anim
+animation = padre_Charge-Punch-M.md5anim
+animation = padre_Run-M.md5anim
+animation = padre_Left-Punch-M.md5anim
+animation = padre_Rest.md5anim
+animation = padre_Rest.001.md5anim
+animation = padre_T-Pose.md5anim
+
+# Material
+ambient = 1.0 1.0 1.0 1.0 
+diffuse = 0.0 0.0 0.0 1.0 
+specular = 1.0 1.0 1.0 1.0
+shininess = 0.0
+image = padre.png
