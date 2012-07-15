@@ -24,6 +24,7 @@ dialog(1)
          pre_test = have_item("models/objetos/itens/lata1/lata1.dcc")
          text = gettext("I have something for you.")
          action = give_item("models/objetos/itens/lata1/lata1.dcc")
+         action = dialog_init(3)
          action = go_to_dialog(2)
       option
          text = gettext("Ehr, nothing.")
@@ -55,6 +56,7 @@ dialog(3)
    pc_begin
       option
          text = gettext("What is it?")
+         action = dialog_init(4)
          action = go_to_dialog(4)
    pc_end
 end_dialog
@@ -71,6 +73,10 @@ dialog(4)
          text = gettext("I'm on it!")
          action = add_mission("missions/tutorial/mission4.mis")
          action = map_travel("mapas/tutorial/cruz_local.map")
+         action = finish_dialog()
+
+      option
+         text = gettext("I need to do something first.")
          action = finish_dialog()
    pc_end
 end_dialog
