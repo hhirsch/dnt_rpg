@@ -1,6 +1,6 @@
 #"""
 #Name: 'DNT md5 model (.md5)...'
-#Blender: 260
+#Blender: 263
 #Group: 'Export'
 #Tooltip: 'Export a DNT md5 File'
 #
@@ -9,17 +9,17 @@
 #
 #"""
 
+########################################################################
+#                                                                      #
+#                          Script Definition                           #
+#                                                                      #
+########################################################################
 bl_info = {
     "name": "Export DNT md5 (.md5def/.md5anim/.md5mesh)",
-    "author": "DNTeam <dnt@dnteam.org>," \
-              "Based on .md5 exporter from: " \
-              "    Paul Zirkle aka Keless, "\
-              "    der_ton, " \
-              "    mishaw," \
-              "    kabits (http://www.katsbits.com)",
-    "version": (0,9,0),
-    "blender": (2, 6, 0),
-    "api": 31847,
+    "author": "DNTeam <dnt@dnteam.org>,"\
+              "based on .md5 exporter from nemyax",
+    "version": (0, 10, 0),
+    "blender": (2, 6, 3),
     "location": "File > Export > DNT md5 Data (.md5def/.md5mesh/.md5anim)",
     "description": "Export DNT (.md5def/.md5mesh/.md5anim)",
     "warning": "",
@@ -27,974 +27,672 @@ bl_info = {
     "tracker_url": "",
     "category": "Import-Export"}
 
-import bpy,struct,math,os,time,sys,mathutils
+import bpy
+import bmesh
+import os.path
 
-#MATH UTILTY
+########################################################################
+#                                                                      #
+#                       Common Export Functions                        #
+#                                                                      #
+########################################################################
 
-def vector_crossproduct(v1, v2):
+######################################################
+# Get the record parameters used (matrices) as string
+######################################################
+def record_parameters(correctionMatrix):
     return [
-       v1[1] * v2[2] - v1[2] * v2[1],
-       v1[2] * v2[0] - v1[0] * v2[2],
-       v1[0] * v2[1] - v1[1] * v2[0],
-    ]
+    "// Parameters used during export:\n",
+    "//   Reorient: {}\n".format(bool(correctionMatrix.to_euler()[2])),
+    "//   Scale: {}\n".format(correctionMatrix.decompose()[2][0])]
 
-def point_by_matrix(p, m):
-    #print( str(type( p )) + " " + str(type(m)) )
-    return [p[0] * m[0][0] + p[1] * m[1][0] + p[2] * m[2][0] + m[3][0],
-            p[0] * m[0][1] + p[1] * m[1][1] + p[2] * m[2][1] + m[3][1],
-            p[0] * m[0][2] + p[1] * m[1][2] + p[2] * m[2][2] + m[3][2]]
+######################################################
+# Define the components used at export
+######################################################
+def define_components(obj, bm, bones, correctionMatrix):
+    scaleFactor = correctionMatrix.to_scale()[0]
+    armature = [a for a in bpy.data.armatures if bones[0] in a.bones[:]][0]
+    armatureObj = [o for o in bpy.data.objects if o.data == armature][0]
+    vertGroups = obj.vertex_groups
+    uvData = bm.loops.layers.uv.active
+    weightData = bm.verts.layers.deform.active
+    tris = [[f.index, f.verts[2].index, f.verts[1].index, f.verts[0].index]
+        for f in bm.faces] # reverse vert order to flip normal
+    verts = []
+    weights = []
+    wtIndex = 0
+    firstWt = 0
+    for vert in bm.verts:
+        wtDict = vert[weightData]
+        try:
+           u = vert.link_loops[0][uvData].uv.x
+           v = 1 - vert.link_loops[0][uvData].uv.y # MD5 wants it flipped
+        except:
+           u = 0
+           v = 0
+        numWts = len(wtDict.keys())
+        verts.append([vert.index, u, v, firstWt, numWts])
+        wtScaleFactor = 1.0 / sum(wtDict.values())
+        firstWt += numWts
+        for vGroup in wtDict.keys():
+            bone = [b for b in bones
+                if b.name == vertGroups[vGroup].name][0]
+            boneIndex = bones.index(bone)
+            coords4d =\
+                bone.matrix_local.inverted() *\
+                armatureObj.matrix_world.inverted() *\
+                obj.matrix_world *\
+                (vert.co.to_4d() * scaleFactor)
+            x, y, z = coords4d[:3]
+            weight = wtDict[vGroup] * wtScaleFactor
+            wtEntry = [wtIndex, boneIndex, weight, x, y, z]
+            weights.append(wtEntry)
+            wtIndex += 1
+    return (verts, tris, weights)
 
-def vector_by_matrix(p, m):
-    return [p[0] * m[0][0] + p[1] * m[1][0] + p[2] * m[2][0],
-            p[0] * m[0][1] + p[1] * m[1][1] + p[2] * m[2][1],
-            p[0] * m[0][2] + p[1] * m[1][2] + p[2] * m[2][2]]
+######################################################
+# Make the bone hierarchy string
+######################################################
+def make_hierarchy_block(bones, boneIndexLookup):
+    block = ["hierarchy {\n"]
+    xformIndex = 0
+    for b in bones:
+        if b.parent:
+            parentIndex = boneIndexLookup[b.parent.name]
+        else:
+            parentIndex = -1
+        block.append("  \"{}\" {} 63 {} //\n".format(
+            b.name, parentIndex, xformIndex))
+        xformIndex += 6
+    block.append("}\n")
+    block.append("\n")
+    return block
 
-def vector_normalize(v):
-    l = math.sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2])
-    try:
-        return v[0] / l, v[1] / l, v[2] / l
-    except:
-        return 1, 0, 0
+######################################################
+# Define the base frame block string
+######################################################
+def make_baseframe_block(bones, correctionMatrix):
+    block = ["baseframe {\n"]
+    armature = bones[0].id_data
+    armObject = [o for o in bpy.data.objects
+        if o.data == armature][0]
+    armMatrix = armObject.matrix_world
+    for b in bones:
+        objSpaceMatrix = b.matrix_local
+        if b.parent:
+            bMatrix =\
+            b.parent.matrix_local.inverted() *\
+            armMatrix *\
+            objSpaceMatrix
+        else:
+            bMatrix = correctionMatrix * objSpaceMatrix
+        xPos, yPos, zPos = bMatrix.translation
+        xOrient, yOrient, zOrient = (-bMatrix.to_quaternion()).normalized()[1:]
+        block.append("  ( {:.6f} {:.6f} {:.6f} ) ( {:.6f} {:.6f} {:.6f} )\n".\
+        format(xPos, yPos, zPos, xOrient, yOrient, zOrient))
+    block.append("}\n")
+    block.append("\n")
+    return block
 
-def matrix2quaternion(m):
-    s = math.sqrt(abs(m[0][0] + m[1][1] + m[2][2] + m[3][3]))
-    if s == 0.0:
-        x = abs(m[2][1] - m[1][2])
-        y = abs(m[0][2] - m[2][0])
-        z = abs(m[1][0] - m[0][1])
-        if   (x >= y) and (x >= z): return 1.0, 0.0, 0.0, 0.0
-        elif (y >= x) and (y >= z): return 0.0, 1.0, 0.0, 0.0
-        else:                       return 0.0, 0.0, 1.0, 0.0
-    return quaternion_normalize([
-        -(m[2][1] - m[1][2]) / (2.0 * s),
-        -(m[0][2] - m[2][0]) / (2.0 * s),
-        -(m[1][0] - m[0][1]) / (2.0 * s),
-        0.5 * s,
-        ])
-    
-def matrix_invert(m):
-  det = (m[0][0] * (m[1][1] * m[2][2] - m[2][1] * m[1][2])
-       - m[1][0] * (m[0][1] * m[2][2] - m[2][1] * m[0][2])
-       + m[2][0] * (m[0][1] * m[1][2] - m[1][1] * m[0][2]))
-  if det == 0.0: return None
-  det = 1.0 / det
-  r = [ [
-      det * (m[1][1] * m[2][2] - m[2][1] * m[1][2]),
-    - det * (m[0][1] * m[2][2] - m[2][1] * m[0][2]),
-      det * (m[0][1] * m[1][2] - m[1][1] * m[0][2]),
-      0.0,
-    ], [
-    - det * (m[1][0] * m[2][2] - m[2][0] * m[1][2]),
-      det * (m[0][0] * m[2][2] - m[2][0] * m[0][2]),
-    - det * (m[0][0] * m[1][2] - m[1][0] * m[0][2]),
-      0.0
-    ], [
-      det * (m[1][0] * m[2][1] - m[2][0] * m[1][1]),
-    - det * (m[0][0] * m[2][1] - m[2][0] * m[0][1]),
-      det * (m[0][0] * m[1][1] - m[1][0] * m[0][1]),
-      0.0,
-    ] ]
-  r.append([
-    -(m[3][0] * r[0][0] + m[3][1] * r[1][0] + m[3][2] * r[2][0]),
-    -(m[3][0] * r[0][1] + m[3][1] * r[1][1] + m[3][2] * r[2][1]),
-    -(m[3][0] * r[0][2] + m[3][1] * r[1][2] + m[3][2] * r[2][2]),
-    1.0,
-    ])
-  return r
-    
-def quaternion_normalize(q):
-  l = math.sqrt(q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3])
-  return q[0] / l, q[1] / l, q[2] / l, q[3] / l
-  
+######################################################
+# Create the joint block string
+######################################################
+def make_joints_block(bones, boneIndexLookup, correctionMatrix):
+    block = []
+    block.append("joints {\n")
+    for b in bones:
+        if b.parent:
+            parentIndex = boneIndexLookup[b.parent.name]
+        else:
+            parentIndex = -1
+        boneMatrix = correctionMatrix * b.matrix_local
+        xPos, yPos, zPos = boneMatrix.translation
+        xOrient, yOrient, zOrient =\
+        (-boneMatrix.to_quaternion()).normalized()[1:] # MD5 wants it negated
+        block.append(\
+        "  \"{}\" {} ( {:.6f} {:.6f} {:.6f} ) ( {:.6f} {:.6f} {:.6f} )\n".\
+        format(b.name, parentIndex,\
+        xPos, yPos, zPos,\
+        xOrient, yOrient, zOrient))
+    block.append("}\n")
+    block.append("\n")
+    return block
 
-#shader material
-class Material:
-  name = ""    #string
-  def __init__(self, blenderMaterial):
-    self.name = blenderMaterial.name
-    # Set the texture name
-    self.textureName = ""
-    if(blenderMaterial.active_texture.type == 'IMAGE'):
-       path,self.textureName = os.path.split(
-             blenderMaterial.active_texture.image.filepath)
-    self.ambient = blenderMaterial.ambient
-    self.diffuse = blenderMaterial.diffuse_color
-    self.specular = blenderMaterial.specular_color
-    self.specularAlpha = blenderMaterial.specular_alpha
-    self.shininess = blenderMaterial.emit
-  
-  def to_md5mesh(self):
-    return self.name;
+######################################################
+# Create the mesh block string
+######################################################
+def make_mesh_block(obj, bones, correctionMatrix):
+    bm = bmesh.new()
+    bm.from_mesh(obj.data)
+    triangulate(cut_up(strip_wires(bm)))
+    verts, tris, weights = define_components(obj, bm, bones, correctionMatrix)
+    bm.free()
+    block = []
+    block.append("mesh {\n")
+    block.append("  shader \"default\"\n")
+    block.append("  numverts {}\n".format(len(verts)))
+    for v in verts:
+        block.append(\
+        "  vert {} ( {:.6f} {:.6f} ) {} {}\n".\
+        format(v[0], v[1], v[2], v[3], v[4]))
+    block.append("  numtris {}\n".format(len(tris)))
+    for t in tris:
+        block.append("  tri {} {} {} {}\n".format(t[0], t[1], t[2], t[3]))
+    block.append("  numweights {}\n".format(len(weights)))
+    for w in weights:
+        block.append(\
+        "  weight {} {} {:.6f} ( {:.6f} {:.6f} {:.6f} )\n".\
+        format(w[0], w[1], w[2], w[3], w[4], w[5]))
+    block.append("}\n")
+    block.append("\n")
+    return block
 
-#the 'Model' class, contains all submeshes
-class Mesh:
-  name = ""     #string
-  submeshes = []  #array of SubMesh
-  next_submesh_id = 0  #int
+######################################################
+# Remove wires from model
+######################################################
+def strip_wires(bm):
+    wireVerts = [v for v in bm.verts if v.is_wire]
+    for v in wireVerts: bmesh.utils.vert_dissolve(v)
+    for seq in [bm.verts, bm.faces, bm.edges]: seq.index_update()
+    return bm
 
-  def __init__(self, name):
-    self.name      = name
-    self.submeshes = []
-    
-    self.next_submesh_id = 0
+######################################################
+# Cut up
+######################################################
+def cut_up(bm):
+    uvData = bm.loops.layers.uv.active
+    for v in bm.verts:
+        for e in v.link_edges:
+            linkedFaces = e.link_faces
+            if len(linkedFaces) > 1:
+                uvSets = []
+                for lf in linkedFaces:
+                    uvSets.append([l1[uvData].uv for l1 in lf.loops
+                        if l1.vert == v][0])
+                if uvSets.count(uvSets[0]) != len(uvSets):
+                    e.tag = True
+                    v.tag = True
+        if v.tag:
+            seams = [e for e in v.link_edges if e.tag]
+            v.tag = False
+            bmesh.utils.vert_separate(v, seams)
+    for maybeBowTie in bm.verts: # seems there's no point in a proper test
+        boundaries = [e for e in maybeBowTie.link_edges
+            if len(e.link_faces) == 1]
+        bmesh.utils.vert_separate(maybeBowTie, boundaries)
+    for seq in [bm.verts, bm.faces, bm.edges]: seq.index_update()
+    return bm         
 
-    
-  def to_md5mesh(self):
-    meshnumber=0
-    buf = ""
-    for submesh in self.submeshes:
-      buf=buf + "mesh {\n"
-#      buf=buf + "mesh {\n\t// meshes: " + submesh.name + "\n"  # used for
-#      Sauerbraten -mikshaw
-      meshnumber += 1
-      buf=buf + submesh.to_md5mesh()
-      buf=buf + "}\n\n"
+######################################################
+# Triangulate the mesh
+######################################################
+def triangulate(bm):
+    while True:
+        nonTris = [f for f in bm.faces if len(f.verts) > 3]
+        if nonTris:
+            nt = nonTris[0]
+            pivotLoop = nt.loops[0]
+            allVerts = nt.verts
+            vert1 = pivotLoop.vert
+            wrongVerts = [vert1,
+                pivotLoop.link_loop_next.vert,
+                pivotLoop.link_loop_prev.vert]
+            bmesh.utils.face_split(nt, vert1, [v for v in allVerts
+                if v not in wrongVerts][0])
+            for seq in [bm.verts, bm.faces, bm.edges]: seq.index_update()
+        else: break
+    return bm
 
-    return buf
-
-
-#submeshes reference a parent mesh
-class SubMesh:
-  def __init__(self, mesh, material):
-    self.material   = material
-    self.vertices   = []
-    self.faces      = []
-    self.nb_lodsteps = 0
-    self.springs    = []
-    self.weights    = []
-    
-    self.next_vertex_id = 0
-    self.next_weight_id = 0
-    
-    self.mesh = mesh
-    self.name = mesh.name
-    self.id = mesh.next_submesh_id
-    mesh.next_submesh_id += 1
-    mesh.submeshes.append(self)
-
-  def bindtomesh (self, mesh):
-    # HACK: this is needed for md5 output, for the time being...
-    # appending this submesh to the specified mesh, disconnecting it from the
-    # original one
-    self.mesh.submeshes.remove(self)
-    self.mesh = mesh
-    self.id = mesh.next_submesh_id
-    mesh.next_submesh_id += 1
-    mesh.submeshes.append(self)
-
-  def generateweights(self):
-    self.weights = []
-    self.next_weight_id = 0
-    for vert in self.vertices:
-      vert.generateweights()
-
-  def reportdoublefaces(self):
-    for face in self.faces:
-      for face2 in self.faces:
-        if not face == face2:
-          if (not face.vertex1==face2.vertex1) and (not face.vertex1==face2.vertex2) and (not face.vertex1==face2.vertex3):
-            return
-          if (not face.vertex2==face2.vertex1) and (not face.vertex2==face2.vertex2) and (not face.vertex2==face2.vertex3):
-            return
-          if (not face.vertex3==face2.vertex1) and (not face.vertex3==face2.vertex2) and (not face.vertex3==face2.vertex3):
-            return
-          print('doubleface! %s %s' % (face, face2))
-          
-  def to_md5mesh(self):
-    self.generateweights()
-
-    self.reportdoublefaces()
-    
-    buf="\tshader \"%s\"\n\n" % (self.material.to_md5mesh())
-    if len(self.weights) == 0:
-      buf=buf + "\tnumverts 0\n"
-      buf=buf + "\n\tnumtris 0\n"
-      buf=buf + "\n\tnumweights 0\n"
-      return buf
-    
-    # output vertices
-    buf=buf + "\tnumverts %i\n" % (len(self.vertices))
-    vnumber=0
-    for vert in self.vertices:
-      buf=buf + "\tvert %i %s\n" % (vnumber, vert.to_md5mesh())
-      vnumber += 1
-    
-    # output faces
-    buf=buf + "\n\tnumtris %i\n" % (len(self.faces))
-    facenumber=0
-    for face in self.faces:
-      buf=buf + "\ttri %i %s\n" % (facenumber, face.to_md5mesh())
-      facenumber += 1
-      
-    # output weights
-    buf=buf + "\n\tnumweights %i\n" % (len(self.weights))
-    weightnumber=0
-    for weight in self.weights:
-      buf=buf + "\tweight %i %s\n" % (weightnumber, weight.to_md5mesh())
-      weightnumber += 1
-      
-    return buf
-    
-#vertex class contains and outputs 'verts' but also generates 'weights' data
-class Vertex:
-  def __init__(self, submesh, loc, normal):
-    self.loc    = loc
-    self.normal = normal
-    self.collapse_to         = None
-    self.face_collapse_count = 0
-    self.maps       = []
-    self.influences = []
-    self.weights = []
-    self.weight = None
-    self.firstweightindx = 0
-    self.cloned_from = None
-    self.clones      = []
-    
-    self.submesh = submesh
-    self.id = submesh.next_vertex_id
-    submesh.next_vertex_id += 1
-    submesh.vertices.append(self)
-    
-  def generateweights(self):
-    self.firstweightindx = self.submesh.next_weight_id
-    for influence in self.influences:
-      weightindx = self.submesh.next_weight_id
-      self.submesh.next_weight_id += 1
-      newweight = Weight(influence.bone, influence.weight, self, weightindx, self.loc[0], self.loc[1], self.loc[2])
-      self.submesh.weights.append(newweight)
-      self.weights.append(newweight)
-
-  def to_md5mesh(self):
-    if self.maps:
-      buf = self.maps[0].to_md5mesh()
-    else:
-      buf = "( %f %f )" % (self.loc[0], self.loc[1])
-    buf = buf + " %i %i" % (self.firstweightindx, len(self.influences))
-    return buf    
-    
-#texture coordinate map 
-class Map:
-  def __init__(self, u, v):
-    self.u = u
-    self.v = v
-    
-
-  def to_md5mesh(self):
-    buf = "( %f %f )" % (self.u, self.v)
-    return buf
-
-#NOTE: uses global 'scale' to scale the size of model verticies
-#generated and stored in Vertex class
-class Weight:
-  def __init__(self, bone, weight, vertex, weightindx, x, y, z):
-    self.bone = bone
-    self.weight = weight
-    self.vertex = vertex
-    self.indx = weightindx
-    invbonematrix = matrix_invert(self.bone.matrix)
-    self.x, self.y, self.z = point_by_matrix ((x, y, z), invbonematrix)
-    
-  def to_md5mesh(self):
-    # FIXME: For blender 2.63, needed to invert the weight Y.
-    #buf = "%i %f ( %f %f %f )" % (self.bone.id, self.weight, self.x*scale, self.y*scale, self.z*scale)
-    buf = "%i %f ( %f %f %f )" % (self.bone.id, self.weight, self.x*scale, -self.y*scale, self.z*scale)
-    return buf
-
-#used by SubMesh class
-class Influence:
-  def __init__(self, bone, weight):
-    self.bone   = bone
-    self.weight = weight
-    
-#outputs the 'tris' data
-class Face:
-  def __init__(self, submesh, vertex1, vertex2, vertex3):
-    self.vertex1 = vertex1
-    self.vertex2 = vertex2
-    self.vertex3 = vertex3
-    
-    self.can_collapse = 0
-    
-    self.submesh = submesh
-    submesh.faces.append(self)
-    
-
-  def to_md5mesh(self):
-    buf = "%i %i %i" % (self.vertex1.id, self.vertex3.id, self.vertex2.id)
-    return buf
-
-#holds bone skeleton data and outputs header above the Mesh class
-class Skeleton:
-  def __init__(self, MD5Version = 10, commandline = ""):
-    self.bones = []
-    self.MD5Version = MD5Version
-    self.commandline = commandline
-    self.next_bone_id = 0
-    
-
-  def to_md5mesh(self, numsubmeshes):
-    buf = "MD5Version %i\n" % (self.MD5Version)
-    buf = buf + "commandline \"%s\"\n\n" % (self.commandline)
-    buf = buf + "numJoints %i\n" % (self.next_bone_id)
-    buf = buf + "numMeshes %i\n\n" % (numsubmeshes)
-    buf = buf + "joints {\n"
-    for bone in self.bones:
-      buf = buf + bone.to_md5mesh()
-    buf = buf + "}\n\n"
-    return buf
-
-BONES = {}
-
-#held by Skeleton, generates individual 'joint' data
-class Bone:
-  def __init__(self, skeleton, parent, name, mat, theboneobj):
-    self.parent = parent #Bone
-    self.name   = name   #string
-    self.children = []   #list of Bone objects
-    self.theboneobj = theboneobj #Blender.Armature.Bone
-    # HACK: this flags if the bone is animated in the one animation that we export
-    self.is_animated = 0  # = 1, if there is an ipo that animates this bone
-
-    self.matrix = mat
-    if parent:
-      parent.children.append(self)
-    
-    self.skeleton = skeleton
-    self.id = skeleton.next_bone_id
-    skeleton.next_bone_id += 1
-    skeleton.bones.append(self)
-    
-    BONES[name] = self
-
-
-  def to_md5mesh(self):
-    buf= "\t\"%s\"\t" % (self.name)
-    parentindex = -1
-    if self.parent:
-        parentindex=self.parent.id
-    buf=buf+"%i " % (parentindex)
-    
-    pos1, pos2, pos3= self.matrix[3][0], self.matrix[3][1], self.matrix[3][2]
-    buf=buf+"( %f %f %f ) " % (pos1*scale, pos2*scale, pos3*scale)
-    #qx, qy, qz, qw = matrix2quaternion(self.matrix)
-    #if qw<0:
-    #    qx = -qx
-    #    qy = -qy
-    #    qz = -qz
-    m = self.matrix
-#    bquat = self.matrix.to_quat()  #changed from matrix.toQuat() in blender
-#    2.4x script
-    bquat = self.matrix.to_quaternion()  #changed from to_quat in 2.57 -mikshaw
-    bquat.normalize()
-    qx = bquat.x
-    qy = bquat.y
-    qz = bquat.z
-    if bquat.w > 0:
-        qx = -qx
-        qy = -qy
-        qz = -qz
-    buf=buf+"( %f %f %f )\t\t// " % (qx, qy, qz)
-    if self.parent:
-        buf=buf+"%s" % (self.parent.name)    
-    
-    buf=buf+"\n"
-    return buf
-
-
-class MD5Animation:
-  def __init__(self, md5skel, MD5Version = 10, commandline = ""):
-    self.framedata    = [] # framedata[boneid] holds the data for each frame
-    self.bounds       = []
-    self.baseframe    = []
-    self.skeleton     = md5skel
-    self.boneflags    = []  # stores the md5 flags for each bone in the skeleton
-    self.boneframedataindex = [] # stores the md5 framedataindex for each bone in the skeleton
-    self.MD5Version   = MD5Version
-    self.commandline  = commandline
-    self.numanimatedcomponents = 0
-    self.framerate    = 24
-    self.numframes    = 0
-    self.name = ""
-    for b in self.skeleton.bones:
-      self.framedata.append([])
-      self.baseframe.append([])
-      self.boneflags.append(0)
-      self.boneframedataindex.append(0)
-      
-  def to_md5anim(self):
-    currentframedataindex = 0
-    for bone in self.skeleton.bones:
-      if (len(self.framedata[bone.id])>0):
-        if (len(self.framedata[bone.id])>self.numframes):
-          self.numframes=len(self.framedata[bone.id])
-        (x,y,z),(qw,qx,qy,qz) = self.framedata[bone.id][0]
-        self.baseframe[bone.id]= (x*scale,y*scale,z*scale,qx,qy,qz)
-        self.boneframedataindex[bone.id]=currentframedataindex
-        self.boneflags[bone.id] = 63
-        currentframedataindex += 6
-        self.numanimatedcomponents = currentframedataindex
-      else:
-        rot=bone.pmatrix.toQuat().normalize()
-        qx=rot.x
-        qy=rot.y
-        qz=rot.z
-        if rot.w > 0:
-            qx = -qx
-            qy = -qy
-            qz = -qz            
-        self.baseframe[bone.id]= (bone.pmatrix[3][0]*scale, bone.pmatrix[3][1]*scale, bone.pmatrix[3][2]*scale, qx, qy, qz)
-        
-    buf = "MD5Version %i\n" % (self.MD5Version)
-    buf = buf + "commandline \"%s\"\n\n" % (self.commandline)
-    buf = buf + "numFrames %i\n" % (self.numframes)
-    buf = buf + "numJoints %i\n" % (len(self.skeleton.bones))
-    buf = buf + "frameRate %i\n" % (self.framerate)
-    buf = buf + "numAnimatedComponents %i\n\n" % (self.numanimatedcomponents)
-    buf = buf + "hierarchy {\n"
-
-    for bone in self.skeleton.bones:
-      parentindex = -1
-      flags = self.boneflags[bone.id]
-      framedataindex = self.boneframedataindex[bone.id]
-      if bone.parent:
-        parentindex=bone.parent.id
-      buf = buf + "\t\"%s\"\t%i %i %i\t//" % (bone.name, parentindex, flags, framedataindex)
-      if bone.parent:
-        buf = buf + " " + bone.parent.name
-      buf = buf + "\n"
-    buf = buf + "}\n\n"
-
-    buf = buf + "bounds {\n"
-    for b in self.bounds:
-      buf = buf + "\t( %f %f %f ) ( %f %f %f )\n" % (b)
-    buf = buf + "}\n\n"
-
-    buf = buf + "baseframe {\n"
-    for b in self.baseframe:
-      buf = buf + "\t( %f %f %f ) ( %f %f %f )\n" % (b)
-    buf = buf + "}\n\n"
-
-    for f in range(0, self.numframes):
-      buf = buf + "frame %i {\n" % (f)
-      for b in self.skeleton.bones:
-        if (len(self.framedata[b.id])>0):
-          (x,y,z),(qw,qx,qy,qz) = self.framedata[b.id][f]
-          if qw>0:
-            qx,qy,qz = -qx,-qy,-qz
-          buf = buf + "\t%f %f %f %f %f %f\n" % (x*scale, y*scale, z*scale, qx,qy,qz)
-      buf = buf + "}\n\n"
-      
-    return buf
-  
-  def addkeyforbone(self, boneid, time, loc, rot):
-    # time is ignored. the keys are expected to come in sequentially
-    # it might be useful for future changes or modifications for other export
-    # formats
-    self.framedata[boneid].append((loc, rot))
+######################################################
+# Create and write an .md5mesh
+######################################################
+def write_md5mesh(filePath, prerequisites, correctionMatrix):
+    bones, meshObjects = prerequisites
+    boneIndexLookup = {}
+    for b in bones:
+        boneIndexLookup[b.name] = bones.index(b)
+    md5joints = make_joints_block(bones, boneIndexLookup, correctionMatrix)
+    md5meshes = []
+    for mo in meshObjects:
+        md5meshes.append(make_mesh_block(mo, bones, correctionMatrix))
+    f = open(filePath, 'w')
+    lines = []
+    lines.extend(record_parameters(correctionMatrix))
+    lines.append("MD5Version 10\n")
+    lines.append("commandline \"\"\n")
+    lines.append("\n")
+    lines.append("numJoints " + str(len(bones)) + "\n")
+    lines.append("numMeshes " + str(len(meshObjects)) + "\n")
+    lines.append("\n")
+    lines.extend(md5joints)
+    for m in md5meshes: lines.extend(m)
+    for line in lines: f.write(line)
+    f.close()
     return
-    
 
-# Generate bounding box for current frame of animation
-# The function will insert it at the animation's bounds.
-def generateBoundingBox(objects, md5animation):
-   bmin = [float('inf'), float('inf'), float('inf')]
-   bmax = [-float('inf'), -float('inf'), -float('inf')]
-   for obj in objects:
-      if(obj.type == 'MESH'):
-         # Let's get current mesh bounding box
-         bbox = obj.bound_box
-         for point in bbox:
-            # FIXME: need to apply rotation and translate?
-            p = [point[0], point[1], point[2]]
-            # Apply object scale
-            p[0] = p[0]*obj.scale[0]
-            p[1] = p[1]*obj.scale[1]
-            p[2] = p[2]*obj.scale[2]
-            if(p[0] < bmin[0]):
-               bmin[0] = p[0]
-            if(p[0] > bmax[0]):
-               bmax[0] = p[0]
-            if(p[1] < bmin[1]):
-               bmin[1] = p[1]
-            if(p[1] > bmax[1]):
-               bmax[1] = p[1]
-            if(p[2] < bmin[2]):
-               bmin[2] = p[2]
-            if(p[2] > bmax[2]):
-               bmax[2] = p[2]
-   
-   #print(bmin, bmax)
-   md5animation.bounds.append((bmin[0]*scale, bmin[1]*scale, bmin[2]*scale, 
-                               bmax[0]*scale, bmax[1]*scale, bmax[2]*scale))
+######################################################
+# Create and write an .md5anim
+######################################################
+def write_md5anim(filePath, prerequisites, correctionMatrix, frameRange):
+    goBack = bpy.context.scene.frame_current
+    if frameRange == None:
+        startFrame = bpy.context.scene.frame_start
+        endFrame = bpy.context.scene.frame_end
+    else:
+        startFrame, endFrame = frameRange
+    bones, meshObjects = prerequisites
+    armObj = [o for o in bpy.data.objects if o.data == bones[0].id_data][0]
+    pBones = armObj.pose.bones
+    boneIndexLookup = {}
+    for b in bones:
+        boneIndexLookup[b.name] = bones.index(b)
+    hierarchy = make_hierarchy_block(bones, boneIndexLookup)
+    baseframe = make_baseframe_block(bones, correctionMatrix)
+    bounds = []
+    frames = []
+    for frame in range(startFrame, endFrame + 1):
+        bpy.context.scene.frame_set(frame)
+        verts = []
+        for mo in meshObjects:
+            bm = bmesh.new()
+            bm.from_object(mo)
+            verts.extend([correctionMatrix * mo.matrix_world * v.co.to_4d()
+                for v in bm.verts])
+            bm.free()
+        minX = min([co[0] for co in verts])
+        minY = min([co[1] for co in verts])
+        minZ = min([co[2] for co in verts])
+        maxX = max([co[0] for co in verts])
+        maxY = max([co[1] for co in verts])
+        maxZ = max([co[2] for co in verts])
+        bounds.append(\
+        "  ( {:.6f} {:.6f} {:.6f} ) ( {:.6f} {:.6f} {:.6f} )\n".\
+        format(minX, minY, minZ, maxX, maxY, maxZ))
+        frameBlock = ["frame {} {{\n".format(frame - startFrame)]
+        scaleFactor = correctionMatrix.to_scale()[0]
+        for b in bones:
+            pBone = pBones[b.name]
+            pBoneMatrix = pBone.matrix
+            if pBone.parent:
+                diffMatrix = pBone.parent.matrix.inverted() * \
+                             armObj.matrix_world * (pBoneMatrix * scaleFactor)
+            else:
+                diffMatrix = correctionMatrix * pBoneMatrix
+            xPos, yPos, zPos = diffMatrix.translation
+            xOrient, yOrient, zOrient =\
+            (-diffMatrix.to_quaternion()).normalized()[1:]
+            frameBlock.append(\
+            "  {:.6f} {:.6f} {:.6f} {:.6f} {:.6f} {:.6f}\n".\
+            format(xPos, yPos, zPos, xOrient, yOrient, zOrient))
+        frameBlock.append("}\n")
+        frameBlock.append("\n")
+        frames.extend(frameBlock)
+    f = open(filePath, 'w')
+    numJoints = len(bones)
+    bounds.insert(0, "bounds {\n")
+    bounds.append("}\n")
+    bounds.append("\n")
+    lines = []
+    lines.extend(record_parameters(correctionMatrix))
+    lines.append("MD5Version 10\n")
+    lines.append("commandline \"\"\n")
+    lines.append("\n")
+    lines.append("numFrames " + str(endFrame - startFrame + 1) + "\n")
+    lines.append("numJoints " + str(numJoints) + "\n")
+    lines.append("frameRate " + "24" + "\n")
+    lines.append("numAnimatedComponents " + str(numJoints * 6) + "\n")
+    lines.append("\n")
+    for chunk in [hierarchy, bounds, baseframe, frames]:
+        lines.extend(chunk)
+    for line in lines:
+        f.write(line)
+    bpy.context.scene.frame_set(goBack)
+    return
 
+######################################################
+# The material definition
+######################################################
+class Material:
+   name = ""    #string
+   def __init__(self, blenderMaterial):
+      self.name = blenderMaterial.name
+      # Set the texture name
+      self.textureName = ""
+      if(blenderMaterial.active_texture.type == 'IMAGE'):
+         path,self.textureName = os.path.split(
+               blenderMaterial.active_texture.image.filepath)
+         self.ambient = blenderMaterial.ambient
+         self.diffuse = blenderMaterial.diffuse_color
+         self.specular = blenderMaterial.specular_color
+         self.specularAlpha = blenderMaterial.specular_alpha
+         self.shininess = blenderMaterial.emit
 
-#exporter settings
-class md5Settings:
-  def __init__(self,
-               savepath,
-               scale,
-               exportMode,
-               appendPath,
-               softScale,
-               blendFrames
-               ):
-    self.savepath = savepath
-    self.scale = scale
-    self.exportMode = exportMode
-    self.path = appendPath
-    self.softScale = softScale
-    self.blendFrames = blendFrames
-
-scale = 1.0
-
-# Definea key for an animation's name according to DNT precedence
+######################################################
+# Define a key for an animation's name 
+# according to DNT precedence
+######################################################
 def animationsKey(a):
-    knowItens = ( "idle",
-                  "walk",
-                  "die",
-                  "dead",
-                  "attack", "attackmeele",
-                  "run",
-                  "attackgun", "gunuse" )
-    aLower = a.lower()
-    if(aLower in knowItens): 
-        return knowItens.index(aLower)
-    return 1000
+   knowItens = ("idle",
+                "walk",
+                "die",
+                "dead",
+                "attack", "attackmeele",
+                "run",
+                "attackgun", "gunuse" )
+   aLower = a.lower()
+   if(aLower in knowItens):
+      return knowItens.index(aLower)
+   return 1000
 
-#SERIALIZE FUNCTION
-def save_md5(settings):
-  print("Exporting selected objects...")
-  bpy.ops.object.mode_set(mode='OBJECT')
-  
-  scale = settings.scale
-  
-  
-  
-  thearmature = 0  #null to start, will assign in next section 
-  
-  #first pass on selected data, pull one skeleton
-  skeleton = Skeleton(10, "Exported from Blender by io_export_dnt.py")
-  bpy.context.scene.frame_set(bpy.context.scene.frame_start)
-  for obj in bpy.context.selected_objects:
-    if obj.type == 'ARMATURE':
-      #skeleton.name = obj.name
-      thearmature = obj
-      w_matrix = obj.matrix_world
+######################################################
+# Create and write an .md5def file
+######################################################
+def write_md5def(filePath, exportedAnimations, mat):
+   # Set filename to export
+   md5def_filename = filePath + ".md5def"
+   
+   # Let's get also the savepath without path!
+   crudePath,crudeFileName = os.path.split(filePath)
+   
+   try:
+      file = open(md5def_filename, 'w')
+   except IOError:
+      errmsg = "IOError " #%s: %s" % (errno, strerror)
+   
+   file.write("# Exported from Blender by DNT md5 exporter\n\n")
+   
+   # Get the relative path
+   pos = crudePath.find("data")
+   if(pos != -1):
+      file.write("path = " + crudePath[pos+5:] + "/\n")
+   else:
+      file.write("path = \n");
+
+   # Set others as default
+   file.write("scale = 1.0\n");
+   file.write("blendFrames = 4\n");
+   file.write("\n# Mesh Information\n")
+
+   # Write the mesh file name
+   file.write("mesh = " + crudeFileName + ".md5mesh" + "\n")
+   # Write each animation file
+   file.write("\n# Animations\n")
+   # Sort animations
+   exportedAnimations.sort(key=animationsKey)
+   for anim in exportedAnimations:
+      file.write("animation = " + crudeFileName + "_" + anim+".md5anim" + "\n")
       
-      #define recursive bone parsing function
-      def treat_bone(b, parent = None):
-        if (parent and not b.parent.name==parent.name):
-          return #only catch direct children
-        
-        mat =  mathutils.Matrix(w_matrix) * mathutils.Matrix(b.matrix_local)  #reversed order of multiplication from 2.4 to 2.5!!! ARRRGGG
-        
-        bone = Bone(skeleton, parent, b.name, mat, b)
-        
-        if( b.children ):
-          for child in b.children: treat_bone(child, bone)
-          
-      for b in thearmature.data.bones:
-        if( not b.parent ): #only treat root bones'
-          print( "root bone: " + b.name )
-          treat_bone(b)
+   # Write material
+   file.write("\n# Material\n")
+   file.write("ambient = " + str(mat.ambient) + " " + str(mat.ambient) + " " +
+         str(mat.ambient) + " 1.0 \n")
+   file.write("diffuse = " + str(mat.diffuse[0]) + " " + str(mat.diffuse[1]) +
+         " " + str(mat.diffuse[2]) + " 1.0 \n")
+   file.write("specular = " + str(mat.specular[0]) + " " +str(mat.specular[1]) +
+         " " + str(mat.specular[2]) + " " + str(mat.specularAlpha) + "\n")
+   file.write("shininess = " + str(mat.shininess) + "\n")
+   file.write("image = " + mat.textureName + "\n")
+   # Done!
+   file.close()
+
+
+########################################################################
+#                                                                      #
+#                    Interface and Check Functions                     #
+#                                                                      #
+########################################################################
+
+
+import bpy
+import bmesh
+import mathutils
+import math
+from bpy.props import (BoolProperty,
+                       FloatProperty,
+                       StringProperty,
+                       )
+from bpy_extras.io_utils import (ExportHelper,
+                                 ImportHelper,
+                                 path_reference_mode,
+                                 )
+
+msgLines = [] # global for error messages
+meshPre = None
+animPre = None
+
+######################################################
+# Get a string related to the error message
+######################################################
+def message(id, *details):
+    if id == "no_deformables":
+        return ["No armature-deformed meshes are selected.",\
+        "Select the meshes you want to export, and retry export."]
+    elif id == "multiple_armatures":
+        return ["The selected meshes use more than one armature.",\
+        "Select the meshes using the same armature, and try again."]
+    elif id == "no_armature":
+        return ["No deforming armature is associated with the selection.",\
+        "Select the model or models you want to export, and try again"]
+    elif id == "no_bones":
+        return ["The deforming armature has no bones.",\
+        "Add all of the bones you want to export to the armature,"\
+        "and retry export."]
+    elif id == "missing_parents":
+        return ["One or more bones have parents missing.",\
+        "Offending bones:"] + details[0]
+    elif id == "orphans":
+        return ["There are multiple root bones (listed below)",\
+        "in the export-bound collection, but only one root bone",\
+        "is allowed in MD5. Revise your armature's membership,",\
+        "and retry export.",\
+        "Root bones:"] + details[0]
+    elif id == "unweighted_verts":
+        return ["The '" + details[0] + "' object contains vertices with",\
+        "no deformation weights assigned. Valid MD5 data cannot be produced.",\
+        "Paint the weights on all the vertices in the mesh,",\
+        "and retry export."]
+    elif id == "no_uvs":
+        return ["The '" + details[0] + "' object has no UV coordinates.",\
+        "Valid MD5 data cannot be produced. Unwrap the object",\
+        "or exclude it from your selection, and retry export."]
+
+######################################################
+# Check if everything is ok to do a export
+# \param what: "anim" or "mesh"
+# \param selection: current selected objects
+######################################################
+def is_export_go(what, selection):
+    meshObjects = [o for o in selection
+        if o.data in bpy.data.meshes[:] and o.find_armature()]
+    armatures = [a.find_armature() for a in meshObjects]
+    if not meshObjects:
+        return ["no_deformables", None]
+    armature = armatures[0]
+    if armatures.count(armature) < len(meshObjects):
+        return ["multiple_armatures", None]
+    bones = [b for b in armature.data.bones]
+    if not bones:
+        return ["no_bones", None]
+    rootBones = [i for i in bones if ((not i.parent) and (i.name[0] != '_'))]
+    if len(rootBones) > 1:
+        boneList = []
+        for rb in rootBones:
+            boneList.append("- " + str(rb.name))
+        return ["orphans", boneList]
+    abandonedBones = [i for i in bones
+        if i.parent and i.parent not in bones[:]]
+    if abandonedBones:
+        boneList = []
+        for ab in abandonedBones:
+            boneList.append("- " + str(ab.name))
+        return ["missing_parents", boneList]
+    if what != "anim":
+        for mo in meshObjects:
+            bm = bmesh.new()
+            bm.from_mesh(mo.data)
+            weightData = bm.verts.layers.deform.active
+            unweightedVerts = [v for v in bm.verts if not v[weightData]]
+            uvLayer = bm.loops.layers.uv.active
+            bm.free()
+            if unweightedVerts:
+                return ["unweighted_verts", mo.name]
+            if not uvLayer:
+                return ["no_uvs", mo.name]
     
-      break #only pull one skeleton out
-  
-  #second pass on selected data, pull meshes
-  meshes = []
-  for obj in bpy.context.selected_objects:
-    if ((obj.type == 'MESH') and ( len(obj.data.vertices.values()) > 0 )):
-      #for each non-empty mesh
-      mesh = Mesh(obj.name)
-      print( "Processing mesh: "+ obj.name )
-      meshes.append(mesh)
+    return ["ok", (bones, meshObjects)]
 
-      # Change for blender 2.63, calculate tessfaces
-      obj.data.calc_tessface()
+######################################################
+# Show a blender message with some error occurred
+######################################################
+class MD5ErrorMsg(bpy.types.Operator):
+    global msgLines
+    bl_idname = "object.md5_error_msg"
+    bl_label = "Show DNT .md5 export failure reason"
+    def draw(self, context):
+        layout = self.layout
+        layout.label(icon='ERROR',text="DNT .md5* Export Error")
+        frame = layout.box()
+        frame.separator
+        for l in msgLines:
+            layout.label(text=l)
+        return
+    def execute(self, context):
+        return {'CANCELLED'}
+    def invoke(self, context, event):
+        wm = context.window_manager
+        return wm.invoke_popup(self, width=600)
 
-      numTris = 0
-      numWeights = 0
-      for f in obj.data.tessfaces:
-        numTris += len(f.vertices) - 2
-      for v in obj.data.vertices:
-        numWeights += len( v.groups )
-        
-      w_matrix = obj.matrix_world
-      verts = obj.data.vertices
-      
-      uv_textures = obj.data.tessface_uv_textures
-      faces = []
-      for f in obj.data.tessfaces:
-        faces.append( f )
-      
-      createVertexA = 0
-      createVertexB = 0
-      createVertexC = 0
-        
-      while faces:
-        material_index = faces[0].material_index
-        material = Material(obj.data.materials[0] ) #call the shader name by the material's name
-        
-        submesh = SubMesh(mesh, material)
-        vertices = {}
-        for face in faces[:]:
-          # der_ton: i added this check to make sure a face has at least 3 vertices.
-          # (pdz) also checks for and removes duplicate verts
-          if len(face.vertices) < 3: # throw away faces that have less than 3 vertices
-            faces.remove(face)
-          elif face.vertices[0] == face.vertices[1]:  #throw away degenerate triangles
-            faces.remove(face)
-          elif face.vertices[0] == face.vertices[2]:
-            faces.remove(face)
-          elif face.vertices[1] == face.vertices[2]:
-            faces.remove(face)
-          elif face.material_index == material_index:
-            #all faces in each sub-mesh must have the same material applied
-            faces.remove(face)
-            
-            if not face.use_smooth :
-              p1 = verts[ face.vertices[0] ].co
-              p2 = verts[ face.vertices[1] ].co
-              p3 = verts[ face.vertices[2] ].co
-              normal = vector_normalize(vector_by_matrix(vector_crossproduct( \
-                [p3[0] - p2[0], p3[1] - p2[1], p3[2] - p2[2]], \
-                [p1[0] - p2[0], p1[1] - p2[1], p1[2] - p2[2]], \
-                ), w_matrix))
-            
-            #for each vertex in this face, add unique to vertices dictionary
-            face_vertices = []
-            for i in range(len(face.vertices)):
-              vertex = False
-              if face.vertices[i] in vertices: 
-                vertex = vertices[  face.vertices[i] ] #type of Vertex
-              if not vertex: #found unique vertex, add to list
-                coord  = point_by_matrix( verts[face.vertices[i]].co, w_matrix ) #TODO: fix possible bug here
-                if face.use_smooth: normal = vector_normalize(vector_by_matrix( verts[face.vertices[i]].normal, w_matrix ))
-                vertex  = vertices[face.vertices[i]] = Vertex(submesh, coord, normal) 
-                createVertexA += 1
-                
-                influences = []
-                for j in range(len( obj.data.vertices[ face.vertices[i] ].groups )):
-                  inf = [obj.vertex_groups[ obj.data.vertices[ face.vertices[i] ].groups[j].group ].name, obj.data.vertices[ face.vertices[i] ].groups[j].weight]
-                  influences.append( inf )
-                
-                if not influences:
-                  print( "There is a vertex without attachment to a bone in mesh: " + mesh.name )
-                sum = 0.0
-                for bone_name, weight in influences: sum += weight
-                
-                for bone_name, weight in influences:
-                  if sum != 0:
-                    try:
-                        vertex.influences.append(Influence(BONES[bone_name], weight / sum))
-                    except:
-                        continue
-                  else: # we have a vertex that is probably not skinned. export anyway
-                    try:
-                        vertex.influences.append(Influence(BONES[bone_name], weight))
-                    except:
-                        continue
-                
-                #print( "vert " + str( face.vertices[i] ) + " has " + str(len( vertex.influences ) ) + " influences ")
-                        
-              elif not face.use_smooth:
-                # We cannot share vertex for non-smooth faces, since Cal3D does not
-                # support vertex sharing for 2 vertices with different normals.
-                # => we must clone the vertex.
-                
-                old_vertex = vertex
-                vertex = Vertex(submesh, vertex.loc, normal)
-                createVertexB += 1
-                vertex.cloned_from = old_vertex
-                vertex.influences = old_vertex.influences
-                old_vertex.clones.append(vertex)
-              
-              hasFaceUV = len(uv_textures) > 0 #borrowed from export_obj.py
-              
-              if hasFaceUV: 
-                uv = [uv_textures.active.data[face.index].uv[i][0], uv_textures.active.data[face.index].uv[i][1]]
-                uv[1] = 1.0 - uv[1]  # should we flip Y? yes, new in Blender 2.5x
-                if not vertex.maps: vertex.maps.append(Map(*uv))
-                elif (vertex.maps[0].u != uv[0]) or (vertex.maps[0].v != uv[1]):
-                  # This vertex can be shared for Blender, but not for MD5
-                  # MD5 does not support vertex sharing for 2 vertices with
-                  # different UV texture coodinates.
-                  # => we must clone the vertex.
+######################################################
+# Do the DNT MD5 export check and call
+######################################################
+class DNT_MD5Export(bpy.types.Operator):
+    '''Export to DNT md5 (.md5def/.md5mesh/.md5anim)'''
+    bl_idname = "export_scene.dnt_md5export"
+    bl_label = 'Export MD5ANIM'
+    def invoke(self, context, event):
+        global msgLines, meshPre, animPre
 
-                  for clone in vertex.clones:
-                    if (clone.maps[0].u == uv[0]) and (clone.maps[0].v == uv[1]):
-                      vertex = clone
-                      break
-                  else: # Not yet cloned...  (PDZ) note: this ELSE belongs attached to the FOR loop.. python can do that apparently
-                    old_vertex = vertex
-                    vertex = Vertex(submesh, vertex.loc, vertex.normal)
-                    createVertexC += 1
-                    vertex.cloned_from = old_vertex
-                    vertex.influences = old_vertex.influences
-                    vertex.maps.append(Map(*uv))
-                    old_vertex.clones.append(vertex)
+        selection = context.selected_objects
 
-              face_vertices.append(vertex)
-              
-            # Split faces with more than 3 vertices
-            for i in range(1, len(face.vertices) - 1):
-              Face(submesh, face_vertices[0], face_vertices[i], face_vertices[i + 1])
-          else:
-            print( "found face with invalid material!!!!" )
-      print( "created verts at A " + str(createVertexA) + ", B " + str( createVertexB ) + ", C " + str( createVertexC ) )
-      
-  # Export animations
-  ANIMATIONS = {}
+        # check and set pre-requisites for mesh
+        checkResult = is_export_go("mesh", selection)
+        if checkResult[0] == "ok":
+            meshPre = checkResult[-1]
+        else:
+            # Error on check, show error message!
+            msgLines = message(checkResult[0], checkResult[1])
+            for l in msgLines:
+                print(l)
+            return bpy.ops.object.md5_error_msg('INVOKE_DEFAULT')
 
-  previousAction = None
+        # check and set pre-requisites for anim
+        checkResult = is_export_go("anim", selection)
+        if checkResult[0] == "ok":
+            animPre = checkResult[-1]
+        else:
+            msgLines = message(checkResult[0], checkResult[1])
+            for l in msgLines:
+                print(l)
+            return bpy.ops.object.md5_error_msg('INVOKE_DEFAULT')
 
-  # Try to get the dopesheet context to set active action to
-  # the all needed ones on export;
-  for a in bpy.context.screen.areas:
-     if a.type == 'DOPESHEET_EDITOR':
-        dopeSheet = a.spaces.active
+        # Export the mesh and animations
+        return bpy.ops.export_scene.dntmd5('INVOKE_DEFAULT')
+
+######################################################
+# Really export the md5 files (with a dialog 
+# to get input values)
+######################################################
+class ExportDNTMD5(bpy.types.Operator, ExportHelper):
+    '''Save DNT md5 files (.md5def/.md5mesh/.md5anim)'''
+    global meshPre, animPre
+    bl_idname = "export_scene.dntmd5"
+    bl_label = 'Export DNT'
+    bl_options = {'PRESET'}
+    filename_ext = ""
+    path_mode = path_reference_mode
+    check_extension = False
+    def execute(self, context):
+        scaleFactor = 1.0
+        # First, export the meshes
+        scaleTweak = mathutils.Matrix.Scale(scaleFactor, 4)
+        correctionMatrix = scaleTweak
+        write_md5mesh(self.filepath+".md5mesh", meshPre, correctionMatrix)
+
+        # Let's try to export all animations related to the armature
+
+        # Set correction matrix
+        scaleTweak = mathutils.Matrix.Scale(scaleFactor, 4)
+        correctionMatrix = scaleTweak
+
+        # Get all selected meshes
+        selection = context.selected_objects
+        meshObjects = [o for o in selection if o.data in bpy.data.meshes[:]]
+
+        previousAction = None
+        previousFrame = None
+
         # Save previous action to restore latter
-        previousAction = a.spaces.active.action
+        armature = meshObjects[0].find_armature()
+        previousAction = armature.animation_data.action
         previousFrame = bpy.context.scene.frame_current
 
-  #arm_action = thearmature.animation_data.action
+        # Export each animation
+        exportedAnimations = []
+        for arm_action in bpy.data.actions:
+            # Set the active action to current
+            for ob in meshObjects:
+               ob.animation_data.action = arm_action
+            armature.animation_data.action = arm_action
+            bpy.context.scene.update()
 
-  for arm_action in bpy.data.actions:
-    print(arm_action.name)
+            # Set range
+            rangestart = int( arm_action.frame_range[0] )
+            rangeend = int( arm_action.frame_range[1] )
 
-    # Set the active dopeSheet action to current
-    dopeSheet.action = arm_action
+            # Export the current action 
+            write_md5anim(
+                self.filepath + "_" + arm_action.name + ".md5anim", 
+                animPre, correctionMatrix, [rangestart, rangeend])
+            exportedAnimations.append(arm_action.name)
 
-    rangestart = 0
-    rangeend = 0
-  #if arm_action:
-    animation = ANIMATIONS[arm_action.name] = MD5Animation(skeleton)
-    animation.name = arm_action.name
+        # Restore the previous active action and frame
+        if(previousAction):
+           for ob in meshObjects:
+               ob.animation_data.action = previousAction
+           armature.animation_data.action = previousAction
+           bpy.context.scene.frame_set(previousFrame)
 
-    rangestart = int( arm_action.frame_range[0] )
-    rangeend = int( arm_action.frame_range[1] )
-    currenttime = rangestart
-    while currenttime <= rangeend: 
-      bpy.context.scene.frame_set(currenttime)
-      time = (currenttime - 1.0) / 24.0 #(assuming default 24fps for md5 anim)
-      pose = thearmature.pose
+        # And finally, export the .md5def file
+        material = Material(meshObjects[0].data.materials[0])
+        write_md5def(self.filepath, exportedAnimations, material)
 
-      # Get the bounding box for current frame
-      generateBoundingBox(bpy.context.selected_objects, animation)
-
-      for bonename in thearmature.data.bones.keys():
-        posebonemat = mathutils.Matrix(pose.bones[bonename].matrix ) # @ivar poseMatrix: The total transformation of this PoseBone including constraints. -- different from localMatrix
-
-        try:
-          bone  = BONES[bonename] #look up md5bone
-        except:
-          print( "found a posebone animating a bone that is not part of the exported armature: " + bonename )
-          continue
-        if bone.parent: # need parentspace-matrix
-          parentposemat = mathutils.Matrix(pose.bones[bone.parent.name].matrix ) # @ivar poseMatrix: The total transformation of this PoseBone including constraints. -- different from localMatrix
-#          posebonemat = parentposemat.invert() * posebonemat #reverse order of multiplication!!!
-          parentposemat.invert() # mikshaw
-          posebonemat = parentposemat * posebonemat # mikshaw
-        else:
-          posebonemat = thearmature.matrix_world * posebonemat  #reverse order of multiplication!!!
-        loc = [posebonemat[3][0],
-            posebonemat[3][1],
-            posebonemat[3][2],
-            ]
-#        rot = posebonemat.to_quat().normalize()
-        rot = posebonemat.to_quaternion() # changed from to_quat in 2.57 -mikshaw
-        rot.normalize() # mikshaw
-        rot = [rot.w,rot.x,rot.y,rot.z]
-        
-        animation.addkeyforbone(bone.id, time, loc, rot)
-      currenttime += 1
-  
-  # Restore the previous active action and frame
-  if(previousAction):
-      dopeSheet.action = previousAction
-      print("Previous Frame:" + str(previousFrame))
-      bpy.context.scene.frame_set(previousFrame)
-
-
-
-  # here begins md5mesh and anim output
-  # this is how it works
-  # first the skeleton is output, using the data that was collected 
-  # by the above code in this export function
-  # then the mesh data is output (into the same md5mesh file)
-  # and, finally, all skeleton actions are exported on .md5anim files
-
-  if( (settings.exportMode == "mesh & anim") or 
-      (settings.exportMode == "mesh only") ):
-    md5mesh_filename = settings.savepath + ".md5mesh"
-
-    #save all submeshes in the first mesh
-    if len(meshes)>1:
-      for mesh in range (1, len(meshes)):
-        for submesh in meshes[mesh].submeshes:
-          submesh.bindtomesh(meshes[0])
-    if (md5mesh_filename != ""):
-      try:
-        file = open(md5mesh_filename, 'w')
-      except IOError:
-        errmsg = "IOError " #%s: %s" % (errno, strerror)
-      
-      try:
-         buffer = skeleton.to_md5mesh(len(meshes[0].submeshes))
-      except: 
-        print("\nERROR: You must selected BOTH mesh and armature objects!\n")
-        raise
-        
-      #for mesh in meshes:
-      buffer = buffer + meshes[0].to_md5mesh()
-      file.write(buffer)
-      file.close()
-      print( "saved mesh to " + md5mesh_filename )
-    else:
-      print( "No md5mesh file was generated." )
-
-  # Let's export animations
-  # Note that DNT will export all animations here, each one in a separated
-  # .md5anim file
-  exportedAnimations = []
-  if( (settings.exportMode == "mesh & anim") or 
-      (settings.exportMode == "anim only") ):
-     print(len(ANIMATIONS))
-
-     if(len(ANIMATIONS) == 0):
-       print( "No md5anim file was generated." )
-
-    #save animation file
-     while(len(ANIMATIONS) > 0):
-      anim = ANIMATIONS.popitem()[1] #ANIMATIONS.values()[0]
-      md5anim_filename = settings.savepath + "_" + anim.name + ".md5anim"
-      print(len(ANIMATIONS))
-      print( str( anim ) )
-      try:
-        file = open(md5anim_filename, 'w')
-      except IOError:
-        errmsg = "IOError " #%s: %s" % (errno, strerror)
-      objects = []
-      for submesh in meshes[0].submeshes:
-        if len(submesh.weights) > 0:
-          obj = None
-          for sob in bpy.context.selected_objects:
-              if sob and sob.type == 'MESH' and sob.name == submesh.name:
-                obj = sob
-          objects.append (obj)
-      #generateboundingbox(objects, anim, [rangestart, rangeend])
-      buffer = anim.to_md5anim()
-      file.write(buffer)
-      file.close()
-      print( "saved anim to " + md5anim_filename )
-      exportedAnimations.append(anim.name)
-
-# Finally, let's export the .md5def file, trying to sort animations
-# as DNT needs.
-  md5def_filename = settings.savepath + ".md5def"
-  # Let's get also the savepath without path!
-  crudePath,crudeFileName = os.path.split(settings.savepath)
-  try:
-      file = open(md5def_filename, 'w')
-  except IOError:
-      errmsg = "IOError " #%s: %s" % (errno, strerror)
-  file.write("# Exported from Blender by DNT md5 exporter\n\n")
-  # Let's write the path and soft scale
-  file.write("path = " + str(settings.path) + "\n")
-  file.write("scale = " + str(settings.softScale) +"\n")
-  file.write("blendFrames = " + str(settings.blendFrames) +"\n")
-  file.write("\n# Mesh Information\n")
-  # Write the mesh file name
-  file.write("mesh = " + crudeFileName + ".md5mesh" + "\n")
-  # Write each animation file
-  file.write("\n# Animations\n")
-  exportedAnimations.sort(key=animationsKey)
-  for anim in exportedAnimations:
-     file.write("animation = " + crudeFileName + "_" + anim + ".md5anim" + "\n")
-  # Write material
-  file.write("\n# Material\n")
-  mat = meshes[0].submeshes[0].material
-  file.write("ambient = " + str(mat.ambient) + " " + str(mat.ambient) + " " +
-      str(mat.ambient) + " 1.0 \n")
-  file.write("diffuse = " + str(mat.diffuse[0]) + " " + str(mat.diffuse[1]) +
-      " " + str(mat.diffuse[2]) + " 1.0 \n")
-  file.write("specular = " + str(mat.specular[0]) + " " + str(mat.specular[1]) +
-      " " + str(mat.specular[2]) + " " + str(mat.specularAlpha) + "\n")
-  file.write("shininess = " + str(mat.shininess) + "\n")
-  file.write("image = " + mat.textureName + "\n")
-  # Done!
-  file.close()
-
-  
-########################################################################
-#
-#  export class registration and interface
-#
-########################################################################
-
-from bpy.props import *
-class ExportDNT(bpy.types.Operator):
-    '''Export to DNT md5 (.md5def/.md5mesh/.md5anim)'''
-    bl_idname = "export.dnt"
-    bl_label = 'Export DNT'
-  
-    logenum = [("console","Console","log to console"),
-               ("append","Append","append to log file"),
-               ("overwrite","Overwrite","overwrite log file")]
-             
-    exportModes = [("mesh & anim", "Mesh & Anim", 
-          "Export .md5mesh and .md5anim files."),
-         ("anim only", "Anim only.", "Export .md5anim only."),
-         ("mesh only", "Mesh only.", "Export .md5mesh only.")]
-
-    # Let's set all properties
-    filepath = StringProperty(subtype = 'FILE_PATH', name="File Path", 
-         description="Filepath for exporting", maxlen= 1024, default= "")
-    md5exportList = EnumProperty(name="Exports", items=exportModes, 
-         description="Choose export mode", default='mesh & anim')
-    md5scale = FloatProperty(name="Scale", 
-        description="Scale all objects from world origin (0,0,0) before export",
-        default=1.0, precision=5)
-    defAppendPath = StringProperty(name="Path", 
-         description="Path to insert at .md5def", 
-         maxlen=1024, default="models/")
-    defSoftScale = FloatProperty(name="Scale Factor",
-         description="Scale factor to set at .md5def descriptor",
-         min=0.001, default=1.0, precision=5)
-    defBlendFrames = IntProperty(name="Blend Frames",
-         description="Number of frames for blend between animations",
-         default=4, min=1)
-
-    def execute(self, context):
-        settings = md5Settings(savepath = self.properties.filepath,
-                              scale = self.properties.md5scale,
-                              exportMode = self.properties.md5exportList,
-                              appendPath = self.properties.defAppendPath,
-                              softScale = self.properties.defSoftScale,
-                              blendFrames = self.properties.defBlendFrames)
-        save_md5(settings)
+        # Done!
         return {'FINISHED'}
 
-    def invoke(self, context, event):
-        WindowManager = context.window_manager
-        WindowManager.fileselect_add(self)
-        return {"RUNNING_MODAL"}  
+######################################################
+# The function to call when selected on menu
+######################################################
+def menu_func_export_dnt(self, context):
+    self.layout.operator(DNT_MD5Export.bl_idname, 
+                         text="DNT md5 model (.md5def/.md5mesh/.md5anim)")
 
-def menu_func(self, context):
-    default_path = os.path.splitext(bpy.data.filepath)[0]
-    self.layout.operator(ExportDNT.bl_idname, 
-                         text="DNT md5 model (.md5def/.md5mesh/.md5anim)"
-                         ).filepath = default_path
-  
+######################################################
+# Register script components
+######################################################
 def register():
     bpy.utils.register_module(__name__)
-    bpy.types.INFO_MT_file_export.append(menu_func)
+    bpy.types.INFO_MT_file_export.append(menu_func_export_dnt)
 
+######################################################
+# Unregister script components
+######################################################
 def unregister():
     bpy.utils.unregister_module(__name__)
-    bpy.types.INFO_MT_file_export.remove(menu_func)
+    bpy.types.INFO_MT_file_export.remove(menu_func_export_dnt)
 
+######################################################
+# Main
+######################################################
 if __name__ == "__main__":
     register()
-
 
