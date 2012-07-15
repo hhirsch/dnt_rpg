@@ -1866,6 +1866,8 @@ void engine::rest()
  *********************************************************************/
 void engine::exitBattleMode()
 {
+   brief->addText( gettext("Exit Battle Mode"));
+   
    /* Empty Fight */
    fight->empty();
 
@@ -1878,6 +1880,9 @@ void engine::exitBattleMode()
    /* Clear the current selected feat */
    activeCharacter->setActiveFeat(FEAT_WEAPON_ATTACK);
    shortcuts->clearSelectedTalent();
+
+   /* Play battle ended sound */
+   snd->addSoundEffect(SOUND_NO_LOOP,"sndfx/other/battleMode-end.ogg");
 }
 
 
@@ -4367,8 +4372,8 @@ int engine::run(SDL_Surface *surface, bool commingBack)
         time = SDL_GetTicks();
         if(fightStatus == FIGHT_END)
         {
-           engineMode = ENGINE_MODE_REAL_TIME;
-           brief->addText( gettext("Exit Battle Mode"));
+           exitBattleMode();
+
            /* Verify if any PC is alive. */
            character* pers = (character*) PCs->getFirst();
            bool alive = false;
@@ -4400,12 +4405,18 @@ int engine::run(SDL_Surface *surface, bool commingBack)
            {
                if(fight->actualCharacterTurn()) 
                {
+                  /* Set active character to current pc */
                   PCs->setActiveCharacter(fight->actualCharacterTurn());
                   activeCharacter = PCs->getActiveCharacter();
 
+                  /* Set move circles */
                   moveCircleX = activeCharacter->scNode->getPosX();
                   moveCircleY = activeCharacter->scNode->getPosY();
                   moveCircleZ = activeCharacter->scNode->getPosZ();
+
+                  /* Play turn sound */
+                  snd->addSoundEffect(SOUND_NO_LOOP,
+                        "sndfx/other/battleMode-yourTurn.ogg");
                }
                else
                { //FIXME
