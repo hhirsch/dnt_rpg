@@ -1,6 +1,7 @@
 
-*.psd: portraits created by nubux for DNT
+*.psd, *.xcf: portraits created by nubux for DNT
    Author: nubux
    License: CC-BY 3.0
    Reference: http://opengameart.org/content/9-portaits-108px
+              http://opengameart.org/content/11-portraits-108px
 
