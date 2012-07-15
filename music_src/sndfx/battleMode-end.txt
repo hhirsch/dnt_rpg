@@ -1,0 +1,20 @@
+Instructions for creating battleMode-end.ogg:
+
+1. Open battleMode.ogg in Audacity 2.0.1 with LADSPA plugins
+2. Select entire sound
+3. Apply "Effect/GVerb" with settings
+   * Roomsize (m) = 31.2
+   * Reverb time (s) = 1.0
+   * Damping = 0.6
+   * Input bandwidth = 0.66
+   * Dry signal level (dB) = -70
+   * Early reflection level (dB) = 0
+   * Tail level (dB) = 17.5
+4. Apply "Effect/Normalize" with settings
+   * Remove any DC offset = YES
+   * Normalize maximum amplitude (dB) = -6.0
+   * Normalize stereo channels independently = NO
+4. Select from 0.814s until 0.932s
+5. Apply "Effect/Fade out"
+6. Select from 0.32s until end
+7. Delete
