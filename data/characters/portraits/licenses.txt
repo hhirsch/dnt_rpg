@@ -36,10 +36,14 @@ ratazana.png
 santa.png
 santa2.png
 transgender.png
+zedobar.png
    Author: nubux
    License: CC-BY 3.0
    Reference:
    http://opengameart.org/forumtopic/portraits-for-weird-realism-cartoon-style-satirical-post-apocalyptic-rpg
+   http://opengameart.org/content/9-portaits-108px
+   http://opengameart.org/content/11-portraits-108px
+
 
 atleticano.png
 cruzeirense.png
@@ -93,8 +97,6 @@ mercenary.png
 back.png
 borda.png
 chico.png
-ente.png
-zedobar.png
    Author: DNTeam
    License: GPLv3 or later
 
