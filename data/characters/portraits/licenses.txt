@@ -28,7 +28,6 @@ fille3.png
 garcon.png
 garcon2.png
 garcon3.png
-logan.png
 magda.png
 mama.png
 punk.png
@@ -44,6 +43,12 @@ zedobar.png
    http://opengameart.org/content/9-portaits-108px
    http://opengameart.org/content/11-portraits-108px
 
+logan.png
+   Author: nubux
+   License: CC-BY 3.0
+   Reference:
+   http://opengameart.org/forumtopic/portraits-for-weird-realism-cartoon-style-satirical-post-apocalyptic-rpg
+   Note: Modified by qubodup (Iwan Gabovitch) <qubodup@gmail.com>
 
 atleticano.png
 cruzeirense.png
