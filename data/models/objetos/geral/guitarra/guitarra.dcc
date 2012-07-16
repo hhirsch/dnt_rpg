@@ -1,7 +1,8 @@
 name = gettext("Guitar")
+description = gettext("A guitar in not so good shape, with scratches here and there.")
 cal3d = models/objetos/geral/guitarra/model.cfg
-inventory_sizes = 0 0
-inventory_texture = texturas/na.png
+inventory_sizes = 2 5
+inventory_texture = models/objetos/geral/guitarra/guitarra_inv.png
 life_points = 200
 fortitude = 5
 reflex = 2
@@ -9,4 +10,4 @@ will = 0
 displacement = 0
 armature_class = 10
 size_modifier = 0
-cost = 350
+cost = 80
