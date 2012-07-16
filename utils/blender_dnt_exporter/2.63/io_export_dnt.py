@@ -640,8 +640,9 @@ class ExportDNTMD5(bpy.types.Operator, ExportHelper):
         exportedAnimations = []
         for arm_action in bpy.data.actions:
             # Set the active action to current
-            for ob in meshObjects:
-               ob.animation_data.action = arm_action
+            #for ob in meshObjects:
+            #   if(ob.type == 'MESH'):
+            #      ob.animation_data.action = arm_action
             armature.animation_data.action = arm_action
             bpy.context.scene.update()
 
@@ -657,8 +658,8 @@ class ExportDNTMD5(bpy.types.Operator, ExportHelper):
 
         # Restore the previous active action and frame
         if(previousAction):
-           for ob in meshObjects:
-               ob.animation_data.action = previousAction
+           #for ob in meshObjects:
+           #    ob.animation_data.action = previousAction
            armature.animation_data.action = previousAction
            bpy.context.scene.frame_set(previousFrame)
 
