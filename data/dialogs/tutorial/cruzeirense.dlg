@@ -22,7 +22,7 @@ dialog(1)
    pc_begin
       option
          pre_test = have_item("models/objetos/itens/lata1/lata1.dcc")
-         text = gettext("I have something for you.")
+         text = gettext("I have something for you. (Give soda can)")
          action = give_item("models/objetos/itens/lata1/lata1.dcc")
          action = dialog_init(3)
          action = go_to_dialog(2)
