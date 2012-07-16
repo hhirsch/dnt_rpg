@@ -44,6 +44,7 @@ GuiIO::GuiIO()
    fileWindow = NULL;
    portalEditor = NULL;
    wallEditor = NULL;
+   soundEditor = NULL;
 
    invertMultiTexture = false;
 
@@ -66,6 +67,7 @@ GuiIO::GuiIO()
    openMessageWindow();
    openObjectWindow();
    openMainWindow();
+   openSoundWindow();
 
    nodeEdit = new dntMapEditor::NodeEditor(gui);
 }
@@ -360,15 +362,13 @@ void GuiIO::openTileWallWindow()
 void GuiIO::openSoundWindow()
 {
    dirs dir;
-   soundWindow = gui->insertWindow(0,599,153,661,"Sound");
+   soundWindow = gui->insertWindow(0,661,153,723,"Sound");
    soundTabButton = soundWindow->getObjectsList()->insertTabButton(7,17,0,0,
                                 dir.getRealFile("mapEditor/sound.png").c_str());
    soundAddButton = soundTabButton->insertButton(0,0,19,19);    /* Sound Add */
    soundAddButton->setMouseHint("Add sound");
-   soundRemoveButton = soundTabButton->insertButton(20,0,39,19);/* Sound Rm */
-   soundRemoveButton->setMouseHint("Remove sound");
-   soundEditButton = soundTabButton->insertButton(40,0,59,19);  /* Sound Edit */
-   soundEditButton->setMouseHint("Edit sound info");
+   soundEditButton = soundTabButton->insertButton(20,0,39,19);  /* Sound Edit */
+   soundEditButton->setMouseHint("Edit sound");
 
    soundWindow->setExternPointer(&soundWindow);
    gui->openWindow(soundWindow);
@@ -739,6 +739,10 @@ int GuiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
    {
       return(GUI_IO_OTHER);
    }
+   else if( (soundEditor) && (soundEditor->eventGot(eventInfo, object)))
+   {
+      return(GUI_IO_OTHER);
+   }
 
    switch(eventInfo)
    {
@@ -1040,12 +1044,13 @@ int GuiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          }
          else if(object == (Farso::GuiObject*) soundAddButton)
          {
-         }
-         else if(object == (Farso::GuiObject*) soundRemoveButton)
-         {
+            state = GUI_IO_STATE_SOUNDS;
+            tool = TOOL_SOUND_ADD;
          }
          else if(object == (Farso::GuiObject*) soundEditButton)
          {
+            state = GUI_IO_STATE_SOUNDS;
+            tool = TOOL_SOUND_EDIT;
          }
          break;
       }
@@ -1157,6 +1162,14 @@ int GuiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
             if(!fogWindow)
             {
                openFogWindow();
+            }
+            return(GUI_IO_OTHER);
+         }
+         else if(object == (Farso::GuiObject*)sndFxButton)
+         {
+            if(!soundWindow)
+            {
+               openSoundWindow();
             }
             return(GUI_IO_OTHER);
          }

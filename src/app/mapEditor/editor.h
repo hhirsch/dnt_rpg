@@ -31,6 +31,7 @@
 #include "npcs.h"
 #include "nodeeditor.h"
 #include "tilewall.h"
+#include "soundeditor.h"
 
 #include "../../etc/scene.h"
 #include "../../etc/shader.h"
@@ -133,6 +134,7 @@ class Editor
       dntMapEditor::Objects* objectEditor; /**< The Object Editor Module */
       dntMapEditor::Particles* particleEditor;/**< The Particle Editor Module */
       dntMapEditor::Npcs* npcController;      /**< The Npcs Controller */
+      dntMapEditor::SoundEditor* sndEditor;   /**< The sound editor */
       
       weaponTypes wTypes;            /**< The list of types */
       scene curScene;                /**< The Scene */

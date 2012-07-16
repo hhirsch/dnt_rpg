@@ -108,6 +108,7 @@ Editor::Editor()
    portalEditor = NULL;
    wallEditor = NULL;
    tileWall = NULL;
+   sndEditor = NULL;
    particleEditor = NULL;
 }
 
@@ -124,6 +125,7 @@ Editor::~Editor()
       delete(portalEditor);
       delete(wallEditor);
       delete(tileWall);
+      delete(sndEditor);
       delete(particleEditor);
       delete(npcController);
    }
@@ -235,6 +237,7 @@ void Editor::closeMap()
       delete(portalEditor);
       delete(wallEditor);
       delete(tileWall);
+      delete(sndEditor);
       delete(objectEditor);
       delete(particleEditor);
       delete(npcController);
@@ -270,6 +273,9 @@ void Editor::openMap()
       wallEditor = new dntMapEditor::WallController(map, gui->getGui());
       gui->setWallEditor(wallEditor);
       tileWall = new dntMapEditor::TileWall(map);
+      sndEditor = new dntMapEditor::SoundEditor(gui->getGui());
+      sndEditor->setMap(map);
+      gui->setSoundEditor(sndEditor);
       objectEditor = new dntMapEditor::Objects(map);
       particleEditor = new dntMapEditor::Particles(map);
       curTexture = ((mapTexture*)map->textures.getFirst())->index;
@@ -575,6 +581,9 @@ void Editor::newMap()
    wallEditor = new dntMapEditor::WallController(map, gui->getGui());
    gui->setWallEditor(wallEditor);
    tileWall = new dntMapEditor::TileWall(map);
+   sndEditor = new dntMapEditor::SoundEditor(gui->getGui());
+   sndEditor->setMap(map);
+   gui->setSoundEditor(sndEditor);
    objectEditor = new dntMapEditor::Objects(map);
    particleEditor = new dntMapEditor::Particles(map);
    curTexture = index;
@@ -860,6 +869,10 @@ void Editor::draw()
          {
             tileWall->drawTemporary();
          }
+         else if(gui->getState() == GUI_IO_STATE_SOUNDS)
+         {
+            sndEditor->drawTemporary();
+         }
          else if(gui->getState() == GUI_IO_STATE_OBJECTS)
          {
             objectEditor->drawTemporary();
@@ -1061,6 +1074,16 @@ void Editor::doEditorIO()
       tileWall->verifyAction(xReal, yReal, zReal, xFloor, zFloor,
                   mButton, keys, gui->getTool());
    }
+   else if( (gui->getState() == GUI_IO_STATE_SOUNDS) )
+   {
+      int ac = sndEditor->verifyAction(keys, xReal, yReal, zReal, 
+            xFloor, zFloor, mButton, gui->getTool());
+      if(ac == SOUND_EDITOR_ACTION_ADDED)
+      {
+         /* Added a sound, must change state to EDIT */
+         gui->setTool(TOOL_SOUND_EDIT);
+      }
+   }
    else if( (gui->getState() == GUI_IO_STATE_OBJECTS) && (mapOpened))
    {
       /* Object Add */
@@ -1161,6 +1184,8 @@ void Editor::verifyIO()
    int guiEvent;
    bool outdoor = false;
 
+   int prevTool = gui->getTool();
+
    SDL_PumpEvents();
    keys = SDL_GetKeyState(NULL);
    mButton = SDL_GetMouseState(&mouseX,&mouseY);
@@ -1243,6 +1268,11 @@ void Editor::verifyIO()
    }
    else if(guiEvent == GUI_IO_NEW_STATE)
    {
+      if(prevTool == TOOL_SOUND_ADD)
+      {
+         /* Changed tool from the ADD one. Must delete the current node! */
+         sndEditor->clearTemporary();
+      }
       gui->showMessage(messageForTool(gui->getTool()));
    }
 }
