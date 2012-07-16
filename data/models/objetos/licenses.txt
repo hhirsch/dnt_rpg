@@ -191,6 +191,7 @@ tumbas/cementery_fence
    author: farrer, based on zerberros cementery_gate
    license: GPLv3
 
+geral/poster-med
 icex/dnt2_box
 icex/snes/snes_game.xcf.bz2
 icex/snes/*/*.png
