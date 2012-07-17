@@ -108,6 +108,10 @@ class SoundEditor
       Farso::CxSel* cxSelSndLoop;       /**< If sound will loop or not */
       Farso::TextBar* loopIntervalText; /**< Interval before loop again text */
 
+      Farso::TextBar* rollOffText;      /**< Current rollOff */
+      Farso::TextBar* refDistanceText;  /**< Current refDistance */
+      Farso::TextBar* volumeText;       /**< Current volume */
+
       Farso::Window* fileWindow;        /**< Window for file selector */
       Farso::FileSel* fileSelector;     /**< The file selector */
 };

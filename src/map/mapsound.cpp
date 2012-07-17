@@ -90,9 +90,26 @@ bool mapSound::load(string fileName)
             {
                sscanf(value.c_str(),"%f", &snd->z);
             }
+            else if(key == "rollOff")
+            {
+               sscanf(value.c_str(),"%f", &snd->rollOff);
+            }
+            else if(key == "refDistance")
+            {
+               sscanf(value.c_str(),"%f", &snd->refDistance);
+            }
+            else if(key == "volume")
+            {
+               sscanf(value.c_str(),"%d", &snd->volume);
+            }
             else if(key == "loopInterval")
             {
                sscanf(value.c_str(),"%d", &snd->loopInterval);
+            }
+            else
+            {
+               std::cerr << "Unknown key '" << key << "' "
+                  << "at sound definitions file " << fileName << std::endl; 
             }
          }
          else
@@ -132,6 +149,9 @@ bool mapSound::save(string fileName)
       file << "posX = " << s->x << endl;
       file << "posY = " << s->y << endl;
       file << "posZ = " << s->z << endl;
+      file << "rollOff = " << s->rollOff << endl;
+      file << "refDistance = " << s->refDistance << endl;
+      file << "volume = " << s->volume << endl;
       file << "loopInterval = " << s->loopInterval << endl;
 
       /* Next sound */
@@ -156,13 +176,17 @@ void mapSound::freeElement(dntListElement* obj)
 void mapSound::flush()
 {
    sound snd;
+   sndfx* sfx;
    int i;
 
    /* Add all sounds to the sound controller */
    soundInfo* s = (soundInfo*)first;
    for(i = 0; i < total; i++)
    {
-      snd.addSoundEffect(s->x, s->y, s->z, s->loopInterval, s->fileName);
+      sfx = snd.addSoundEffect(s->x, s->y, s->z, s->loopInterval, s->fileName);
+      sfx->changeVolume(s->volume);
+      sfx->setReferenceDistance(s->refDistance);
+      sfx->setRollOff(s->rollOff);
       s = (soundInfo*)s->getNext();
    }
 }

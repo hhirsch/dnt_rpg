@@ -110,9 +110,25 @@ void SoundEditor::openWindow()
       sndWindow->getObjectsList()->insertTextBox(80, 35, 190, 49, 0, 
             "Enable loop at end");
       sndWindow->getObjectsList()->insertTextBox(70, 52, 184, 66, 0,
-            "Loop interval (seconds)");
+            "Loop interval (seconds):");
       loopIntervalText = sndWindow->getObjectsList()->insertTextBar(185,53,
             235,67, "0", 0);
+
+      sndWindow->getObjectsList()->insertTextBox(70, 70, 114, 84, 0,
+            "Volume:");
+      volumeText = sndWindow->getObjectsList()->insertTextBar(115,71,155,85,
+            "128", 0);
+
+      sndWindow->getObjectsList()->insertTextBox(160, 70, 199, 84, 0,
+            "RollOff:");
+      rollOffText = sndWindow->getObjectsList()->insertTextBar(200,71,235,85,
+            "1.0", 0);
+
+      sndWindow->getObjectsList()->insertTextBox(70, 88, 169, 102, 0,
+            "Reference Distance:");
+      refDistanceText = sndWindow->getObjectsList()->insertTextBar(170,89,
+            235,103,"160.0",0);
+
 
       /* Finally, open it! */
       sndWindow->setExternPointer(&sndWindow);
@@ -125,8 +141,17 @@ void SoundEditor::openWindow()
 
    char buf[32];
    sprintf(buf, "%d", curSound->loopInterval);
-         loopIntervalText->setText(buf);
+   loopIntervalText->setText(buf);
    loopIntervalText->setAvailable(cxSelSndLoop->isSelected());
+
+   sprintf(buf, "%d", curSound->volume);
+   volumeText->setText(buf);
+   sprintf(buf, "%.2f", curSound->rollOff);
+   rollOffText->setText(buf);
+   sprintf(buf, "%.2f", curSound->refDistance);
+   refDistanceText->setText(buf);
+
+   /* Redraw */
    sndWindow->draw();
 }
 
@@ -236,6 +261,8 @@ int SoundEditor::verifyAction(Uint8* keys, GLfloat mouseX, GLfloat mouseY,
  ***********************************************************************/
 bool SoundEditor::eventGot(int eventInfo, Farso::GuiObject* obj)
 {
+   char buf[32];
+   
    /* Close window if no sound is defined to edit */
    if( (!curNode) && (!curSound) && (sndWindow) )
    {
@@ -314,8 +341,6 @@ bool SoundEditor::eventGot(int eventInfo, Farso::GuiObject* obj)
       }
       else if(obj == (Farso::GuiObject*)loopIntervalText)
       {
-         char buf[32];
-
          /* update from text bar */
          sscanf(loopIntervalText->getText().c_str(), "%d", 
                &curSound->loopInterval);
@@ -324,6 +349,26 @@ bool SoundEditor::eventGot(int eventInfo, Farso::GuiObject* obj)
          sprintf(buf, "%d", curSound->loopInterval);
          loopIntervalText->setText(buf);
          return(true);
+      }
+      else if(obj == (Farso::GuiObject*)volumeText)
+      {
+         sscanf(volumeText->getText().c_str(), "%d", &curSound->volume);
+         sprintf(buf, "%d", curSound->volume);
+         volumeText->setText(buf);
+         return(true);
+      }
+      else if(obj == (Farso::GuiObject*)rollOffText)
+      {
+         sscanf(rollOffText->getText().c_str(), "%f", &curSound->rollOff);
+         sprintf(buf, "%.2f", curSound->rollOff);
+         rollOffText->setText(buf);
+      }
+      else if(obj == (Farso::GuiObject*)refDistanceText)
+      {
+         sscanf(refDistanceText->getText().c_str(), "%f", 
+               &curSound->refDistance);
+         sprintf(buf, "%.2f", curSound->refDistance);
+         refDistanceText->setText(buf);
       }
    }
    else if(eventInfo == Farso::EVENT_MODIFIED_CX_SEL)

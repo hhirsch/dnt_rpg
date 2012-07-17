@@ -28,10 +28,27 @@
 class soundInfo: public dntListElement
 {
    public:
+      /*! Constructor */
+      soundInfo()
+      {
+         fileName = "";
+         x=0.0f;y=0.0f;z=0.0f;
+         refDistance = 160.0f;
+         rollOff = 1.0f;
+         volume = 128; 
+         loopInterval = 0;
+      };
+
       std::string fileName;   /**< Ogg File Name */
       ALfloat x,         /**< Sound X Position */
               y,         /**< Sound Y Position */
               z;         /**< Sound Z Position */
+
+      ALfloat refDistance; /**< Sound Reference distance */
+      ALfloat rollOff;     /**< Roll off factor */
+
+      int volume;        /**< Sound effect volume */
+
       int loopInterval;  /**< Sound Loop Interval */
 };
 
