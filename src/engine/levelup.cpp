@@ -112,6 +112,11 @@ void levelUp::doLevelUp(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
          mButton = SDL_GetMouseState(&x,&y);
          obj = gui->manipulateEvents(x,y,mButton,keys, eventInfo);
 
+         glPushAttrib(GL_ENABLE_BIT);
+
+         glDisable(GL_FOG);
+         glDisable(GL_LIGHTING);
+
          /* Render Things */
          glPushMatrix();
             draw2DMode();
@@ -123,6 +128,9 @@ void levelUp::doLevelUp(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
             glPopMatrix();
             draw3DMode(option.getFarViewFactor()*OUTDOOR_FARVIEW);
          glPopMatrix();
+         
+         glPopAttrib();
+         
          glFlush();
          SDL_GL_SwapBuffers();
 
