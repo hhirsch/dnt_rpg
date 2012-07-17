@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB863F7615B5D9E500113490 /* soundeditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB863F7415B5D9E500113490 /* soundeditor.cpp */; };
 		ABA6F07015540F8600602EF2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA6F06F15540F8600602EF2 /* Cocoa.framework */; };
 		ABA6F07A15540F8600602EF2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ABA6F07815540F8600602EF2 /* InfoPlist.strings */; };
 		ABA6F08F1554102E00602EF2 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA6F08C1554102E00602EF2 /* SDL.framework */; };
@@ -172,6 +173,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB863F7415B5D9E500113490 /* soundeditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = soundeditor.cpp; sourceTree = "<group>"; };
+		AB863F7515B5D9E500113490 /* soundeditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = soundeditor.h; sourceTree = "<group>"; };
 		ABA6F06B15540F8600602EF2 /* DNTMapEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DNTMapEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABA6F06F15540F8600602EF2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		ABA6F07215540F8600602EF2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -614,6 +617,8 @@
 		ABA6F0BB155410E500602EF2 /* mapEditor */ = {
 			isa = PBXGroup;
 			children = (
+				AB863F7415B5D9E500113490 /* soundeditor.cpp */,
+				AB863F7515B5D9E500113490 /* soundeditor.h */,
 				ABA6F0BC155410E500602EF2 /* area.cpp */,
 				ABA6F0BD155410E500602EF2 /* area.h */,
 				ABA6F0BE155410E500602EF2 /* editor.cpp */,
@@ -1208,6 +1213,7 @@
 				ABA6F2D9155410E500602EF2 /* ogg_stream.cpp in Sources */,
 				ABA6F2DA155410E500602EF2 /* sndfx.cpp in Sources */,
 				ABA6F2DB155410E500602EF2 /* sound.cpp in Sources */,
+				AB863F7615B5D9E500113490 /* soundeditor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1315,6 +1321,7 @@
 				ABA6F08B15540F8600602EF2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

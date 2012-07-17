@@ -242,7 +242,7 @@ bool ogg_stream::stream(ALuint buffer, bool rewind)
    char data[BUFFER_SIZE] = { 0 };
    int  size = 0;
    int  section;
-   int  result = -1;
+   long  result = -1;
    int bufferSize = BUFFER_SIZE;
    
 #if (defined(__APPLE__) && (SDL_BYTEORDER != SDL_BIG_ENDIAN))
@@ -333,7 +333,7 @@ bool ogg_stream::stream(ALuint buffer, bool rewind)
       }
       else if(result < 0)
       {
-         cerr << "Ogg Buffer Error: " << errorString(result) << endl;
+         cerr << "Ogg Buffer Error: " << errorString((int)result) << endl;
          return(false);
       }
       else
@@ -364,7 +364,7 @@ bool ogg_stream::stream(ALuint buffer, bool rewind)
    }
    else
    {
-      alBufferData(buffer, format, data, size, vorbisInfo->rate);
+      alBufferData(buffer, format, data, size, (ALsizei)vorbisInfo->rate);
       check("::stream() alBufferData");
    }
    

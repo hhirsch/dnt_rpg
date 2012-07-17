@@ -74,7 +74,7 @@ void Menu::insertItem(std::string text, std::string imageFile, bool avaible)
    novo->setAvailable(avaible);
    if(text.length() > maxCharac)
    {
-      maxCharac = text.length();
+      maxCharac = (int)text.length();
    }
 }
 
@@ -155,7 +155,7 @@ void Menu::draw(int pos)
    int x1 = x;
    int x2 = x1 + (maxCharac)*(fnt.getIncCP()+1)+4; 
    int y1 = y;
-   int y2 = ((list.size()-numPictures) * ITEM_HEIGHT) + 
+   int y2 = (((int)list.size()-numPictures) * ITEM_HEIGHT) + 
                                          y1 + 5; /* bizarre from DOS version */
    
    /* Verify Sides */
@@ -277,7 +277,7 @@ int Menu::run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
 
    /* Draws */
    draw(0);
-   int altura = ((list.size()-numPictures)*ITEM_HEIGHT)+6;
+   int altura = (((int)list.size()-numPictures)*ITEM_HEIGHT)+6;
    int largura = (maxCharac)*(fnt.getIncCP()+1)+5;
 
    /* Runs */

@@ -88,7 +88,7 @@ void TextBar::putText(unsigned int pos, int marca)
    }
 
    init = 0;
-   end = text.length();
+   end = (int)text.length();
    string writeText = text;
 
    int maxWidth = ((x2-1) - (x1+3));
@@ -206,7 +206,7 @@ int TextBar::doWrite(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclas)
    else
    if ( (teclas[SDLK_END]) && ((ult - lastWrite) >= REFRESH_RATE))
    {
-       pos = text.length();
+       pos = (int)text.length();
        lastWrite = ult;
    }
    else

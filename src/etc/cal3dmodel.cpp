@@ -412,7 +412,8 @@ void cal3DModel::defineMaterial()
       meshMaterial.shininess = pCalRenderer->getShininess();
 
       /* Set textureID */
-      meshMaterial.textureId = (unsigned long)pCalRenderer->getMapUserData(0);
+      meshMaterial.textureId = (GLuint)
+            (unsigned long)pCalRenderer->getMapUserData(0);
    }
 
    pCalRenderer->endRendering();

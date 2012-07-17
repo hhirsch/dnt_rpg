@@ -385,7 +385,8 @@ void Font::writeSingleLine(SDL_Surface* screen, int x, int y, string text,
  ***********************************************************************/
 void Font::write(SDL_Surface *screen,int x,int y,string text, bool solid)
 {
-   write(screen,x,y,text,0,text.length()-1,0,0,screen->w-1,screen->h-1,solid);
+   write(screen,x,y,text,0,(int)text.length()-1,0,0,
+         screen->w-1,screen->h-1,solid);
 }
 
 /***********************************************************************
@@ -394,7 +395,7 @@ void Font::write(SDL_Surface *screen,int x,int y,string text, bool solid)
 int Font::write(SDL_Surface *screen,int x, int y,string text,int x1,int y1,
                    int x2,int y2,bool solid)
 {
-   return(write(screen,x,y,text,0,text.length()-1,x1,y1,x2,y2,solid));
+   return(write(screen,x,y,text,0,(int)text.length()-1,x1,y1,x2,y2,solid));
 }
 
 /***********************************************************************
@@ -563,7 +564,7 @@ string Font::getNextLine(string source, int& lastLinePos,
             else
             {
                /* Can't write! */
-               lastLinePos = source.length();
+               lastLinePos = (int)source.length();
                return("");
             }
          }
@@ -578,7 +579,7 @@ string Font::getNextLine(string source, int& lastLinePos,
 
    if((!potLine.empty()) || (!curLine.empty()))
    {
-      lastLinePos = source.length();
+      lastLinePos = (int)source.length();
       return(curLine + potLine);
    }
    
