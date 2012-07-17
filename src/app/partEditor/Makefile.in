@@ -20,7 +20,7 @@ CFLAGS = @CPPFLAGS@ -g -c -Wall -O2
 CC = @CXX@
 LDFLAGS = @LDFLAGS@
 LIBS= @LIBS@
-EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
+EFLAGS = @CPPFLAGS@
 ENDGUI = ../../gui/
 ENDENGINE = ../../engine/
 ENDMAP = ../../map/
@@ -130,7 +130,7 @@ partwindow.o: partwindow.h partwindow.cpp partaux.h partelementwindow.h \
 
 $(BIN)dntPartEditor: $(FARSOLIB) $(OBJSMAPA) $(OBJSPART) $(OBJS)
 	@printf "Linking $@...\n"
-	@$(CC) $(EFLAGS) $(OBJSIA) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) $(OBJSCBOOK) $(OBJS) $(FARSOLIB) -o $@
+	@$(CC) $(EFLAGS) $(LDFLAGS) $(OBJSIA) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) $(OBJSCBOOK) $(OBJS) $(FARSOLIB) -o $@ $(LIBS)
 	@printf "\e[0;32mLinked\e[0;0m ($@)\n"
 
 clean:
