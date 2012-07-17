@@ -48,3 +48,7 @@ wood1.png1
   License: MIT
   Source: http://trak.mercenariesguild.net/node/3 (TRaK4 Texture Set)
   
+wall8.jpg
+  Author: TRaK <http://trak.mercenariesguild.net>
+  License: GPLv2+, CC-BY-SAv3+
+  Source: http://trak.mercenariesguild.net/node/3 (Babel Texture Set)
