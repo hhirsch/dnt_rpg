@@ -30,6 +30,7 @@
 #include "waterwindow.h"
 #include "nodeeditor.h"
 #include "wall.h"
+#include "soundeditor.h"
 
 namespace dntMapEditor
 {
@@ -139,6 +140,7 @@ class GuiIO
       
       void setPortalEditor(dntMapEditor::Portal* p){portalEditor = p;}
       void setWallEditor(dntMapEditor::WallController* w){wallEditor = w;}
+      void setSoundEditor(dntMapEditor::SoundEditor* s){soundEditor = s;}
 
    private:
       
@@ -279,7 +281,6 @@ class GuiIO
       Farso::Window* soundWindow;                /**< Sound Window */
       Farso::TabButton* soundTabButton;          /**< sound TabButton */
       Farso::OneTabButton* soundAddButton;       /**< Sound Add Button */
-      Farso::OneTabButton* soundRemoveButton;    /**< Sound Remove Button */
       Farso::OneTabButton* soundEditButton;      /**< Sound Edit Button */
       void openSoundWindow();
       /*********************Message*Window*******************************/
@@ -301,6 +302,7 @@ class GuiIO
       dntMapEditor::NodeEditor* nodeEdit;          /**< Scene node editor */
       dntMapEditor::Portal* portalEditor;
       dntMapEditor::WallController* wallEditor;
+      dntMapEditor::SoundEditor* soundEditor;
 };
 
 }

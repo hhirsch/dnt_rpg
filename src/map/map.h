@@ -557,6 +557,8 @@ class Map
        * \return -> mapFog information */
       mapFog getFog();
 
+      /*! Get the current mapSound */
+      mapSound* getSounds();
       
       /*! Add a lake to the map
        * \param x1 -> X first coordinate 

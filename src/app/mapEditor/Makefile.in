@@ -86,7 +86,7 @@ OBJSENGINE = $(ENDENGINE)alignwindow.o $(ENDENGINE)aspectwindow.o \
 				 $(ENDENGINE)sky.o $(ENDENGINE)sun.o $(ENDENGINE)util.o
 OBJS = area.o editor.o grasswindow.o guiIO.o listwindow.o mapEditor.o \
        message.o nodeeditor.o npcs.o objects.o particles.o portal.o \
-		 tilewall.o terrain.o wall.o waterwindow.o
+		 soundeditor.o tilewall.o terrain.o wall.o waterwindow.o
 
 BIN = ../../../bin/
 
@@ -159,6 +159,11 @@ portal.o: portal.cpp portal.h area.h message.h $(ENDMAP)map.h\
           $(ENDENGINE)util.h
 	@printf "Making $@...\n"
 	@$(CC) $(CFLAGS) portal.cpp -o $@
+	@printf "\e[0;32mDone\e[0;0m ($@)\n"
+
+soundeditor.o: soundeditor.cpp soundeditor.h
+	@printf "Making $@...\n"
+	@$(CC) $(CFLAGS) soundeditor.cpp -o $@
 	@printf "\e[0;32mDone\e[0;0m ($@)\n"
 
 terrain.o: terrain.cpp terrain.h $(ENDMAP)map.h message.h
