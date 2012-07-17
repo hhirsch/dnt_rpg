@@ -410,6 +410,13 @@ void Editor::saveMap()
          map->fog.save();
       }
 
+      /* Save sounds */
+      if(map->getSounds()->getTotal() > 0)
+      {
+         map->soundsFileName = (gui->getFileName()+".snd");
+         map->getSounds()->save(map->soundsFileName);
+      }
+
       /* Save the Map File */
       map->save(gui->getFileName());
       tmp = "Map Saved as:";
