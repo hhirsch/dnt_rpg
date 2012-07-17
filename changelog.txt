@@ -22,6 +22,7 @@
  - dntMapEditor: Some improvements to wall editor;
  - Implemented area affect talents;
  - Option to always highlight map connections;
+ - dntMapEditor: Added map sound editor;
 
 BugFixes:
  - heightmap2dnt: Fixed a missing include;
