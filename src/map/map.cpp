@@ -2314,8 +2314,8 @@ void Map::newMap(int X, int Z, std::string defaultTexture)
       }
       else
       {
-         IDtexture = insertTexture("texturas/floor_indoor/steel1.png",
-               "texturas/floor_indoor/steel1.png");
+         IDtexture = insertTexture("texturas/floor_indoor/wall_crete03b.png",
+               "texturas/floor_indoor/wall_crete03b.png");
       }
    }
    else
