@@ -38,6 +38,8 @@ BugFixes:
  - dntPartEditor: added mouse cursor render;
  - dntPartEditor: fixed a bug on current particle counter and elements menu;
  - OSX: fixed character portrait draw on game screen;
+ - Makefiles: Fix for makefiles with broken $(LIBS);
+ - MoneyWindow: Don't allow money splits by 0;
 
 ================================================
 |                Version 0.9                   |
