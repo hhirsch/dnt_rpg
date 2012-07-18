@@ -43,6 +43,8 @@
 		<Unit filename="..\src\app\mapEditor\particles.h" />
 		<Unit filename="..\src\app\mapEditor\portal.cpp" />
 		<Unit filename="..\src\app\mapEditor\portal.h" />
+		<Unit filename="..\src\app\mapEditor\soundeditor.cpp" />
+		<Unit filename="..\src\app\mapEditor\soundeditor.h" />
 		<Unit filename="..\src\app\mapEditor\terrain.cpp" />
 		<Unit filename="..\src\app\mapEditor\terrain.h" />
 		<Unit filename="..\src\app\mapEditor\tilewall.cpp" />
