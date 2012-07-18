@@ -1,5 +1,6 @@
 ================================================
 |                Version 0.10                  |
+|                                              |
 ================================================
  - The game is now called DNT;
  - New portraits (thanks to nubux, qubodup and scribe);
