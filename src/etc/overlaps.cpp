@@ -15,6 +15,7 @@
  *
  */
 
+#include "overlaps.h"
 #include <math.h>
 #define FABS(x) (float(fabs(x))) /* implement as is fastest on your machine */
 
