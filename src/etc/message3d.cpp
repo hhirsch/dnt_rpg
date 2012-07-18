@@ -97,6 +97,17 @@ void message3d::init(GLfloat x, GLfloat y, GLfloat z, string msg,
    size = fnt.getStringWidth(message) + 8;
    halfSize = (size / 2.0f);
    Farso::color_Set(0,0,0,255);
+#ifdef __APPLE__
+   /* In OSX, the images are bgra, not rgba. */
+   SDL_Surface* s = SDL_CreateRGBSurface(SDL_SWSURFACE,
+                                         Farso::smallestPowerOfTwo(size),
+                                         32,
+                                         32, bmask, gmask, rmask, amask);
+   SDL_Surface* bs = SDL_CreateRGBSurface(SDL_SWSURFACE,
+                                          Farso::smallestPowerOfTwo(size),
+                                          32,
+                                          32, bmask, gmask, rmask, amask);
+#else
    SDL_Surface* s = SDL_CreateRGBSurface(SDL_SWSURFACE,
                                          Farso::smallestPowerOfTwo(size),
                                          32,
@@ -105,7 +116,7 @@ void message3d::init(GLfloat x, GLfloat y, GLfloat z, string msg,
                                           Farso::smallestPowerOfTwo(size),
                                           32,
                                           32, rmask, gmask, bmask, amask);
-   
+#endif
    fnt.defineFontOutline(2);
    Farso::color_Set(0, 0, 0, 255);
    fnt.write(bs, 0, 0, message.c_str(), true);
