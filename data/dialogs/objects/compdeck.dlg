@@ -10,12 +10,14 @@ dialog(0)
       option
          pre_test = have_item("models/objetos/geral/letter/letter.dcc")
          text = gettext("Insert the code from the letter")
+         action = dialog_init(2)
          action = go_to_dialog(2)
 
       option
          text = gettext("Try a random password")
          post_test = roll(WISDOM, 30)
          if_action = receive_xp(20)
+         if_action = dialog_init(2)
          if_action = go_to_dialog(2)
          else_action = go_to_dialog(1)
 
@@ -23,6 +25,7 @@ dialog(0)
          text = gettext("Search for a buffer overflow")
          post_test = roll(OPERATE_ELETRONIC_OBJECTS, 28)
          if_action = receive_xp(20)
+         if_action = dialog_init(2)
          if_action = go_to_dialog(2)
          else_action = go_to_dialog(3)
 
