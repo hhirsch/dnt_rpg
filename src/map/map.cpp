@@ -57,6 +57,7 @@ Square::Square()
 {
    flags = 0;
    h1 = h2 = h3 = h4 = 0;
+   textureScale = 1.0f;
    mapConection.active = false;
    mapConection.mapName = "Nothing";
    mapConection.angle = 0.0;
@@ -1100,7 +1101,9 @@ void Map::renderFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
                              MapSquares[x1][z1].x2, MapSquares[x1][z1].z2,
                              MapSquares[x1][z1].h1, MapSquares[x1][z1].h2,
                              MapSquares[x1][z1].h3, MapSquares[x1][z1].h4,
-                             0.0, 0.0, 1.0, 1.0);
+                             0.0, 0.0, 
+                             MapSquares[x1][z1].textureScale, 
+                             MapSquares[x1][z1].textureScale); 
                }
             }
          }
@@ -2206,6 +2209,10 @@ int Map::open(string arquivo)
          IDtextureAtual = getTextureID(value);
          MapSquares[posX][posZ].texture = IDtextureAtual;
       }
+      else if(key == "textureRepeat")
+      {
+          sscanf(value.c_str(), "%f", &MapSquares[posX][posZ].textureScale);
+      }
       /* Define Object at the square */
       else if(key == "useObject")
       {
@@ -2608,6 +2615,13 @@ int Map::save(string arquivo)
           fprintf(arq,"useTexture = %s\n",
                   getTextureName(MapSquares[x1][z1].texture).c_str());
 
+          /* Texture repeat (scale) */
+          if(MapSquares[x1][z1].textureScale != 1.0f)
+          {
+             fprintf(arq,"textureRepeat = %.3f\n",
+                   MapSquares[x1][z1].textureScale);
+          }
+
           /* Connection */
           if( MapSquares[x1][z1].mapConection.active )
           {
@@ -2873,7 +2887,8 @@ void Map::createBuffers(GLfloat** matriz)
             vertexBuffer[totalVertex+2] = MapSquares[x1][z1].z1;
 
             uvBuffer[actualTexture+2] = 0.0;
-            uvBuffer[actualTexture+3] = TEXTURE_REPEATS;
+            uvBuffer[actualTexture+3] = TEXTURE_REPEATS*
+               MapSquares[x1][z1].textureScale;
             uvAlphaBuffer[actualTexture+2] = alphaCoordX / modX;
             uvAlphaBuffer[actualTexture+3] = (alphaCoordZ + ALPHA_TEXTURE_INC)
                                              / modZ;
@@ -2881,8 +2896,12 @@ void Map::createBuffers(GLfloat** matriz)
             vertexBuffer[totalVertex+4] = MapSquares[x1][z1].h2;
             vertexBuffer[totalVertex+5] = MapSquares[x1][z1].z2;
 
-            uvBuffer[actualTexture+4] = TEXTURE_REPEATS;
-            uvBuffer[actualTexture+5] = TEXTURE_REPEATS;
+            uvBuffer[actualTexture+4] = TEXTURE_REPEATS *
+               MapSquares[x1][z1].textureScale;
+            uvAlphaBuffer[actualTexture+2] = alphaCoordX / modX;
+            uvBuffer[actualTexture+5] = TEXTURE_REPEATS * 
+               MapSquares[x1][z1].textureScale;
+            uvAlphaBuffer[actualTexture+2] = alphaCoordX / modX;
             uvAlphaBuffer[actualTexture+4] = (alphaCoordX + ALPHA_TEXTURE_INC)
                                              / modX;
             uvAlphaBuffer[actualTexture+5] = (alphaCoordZ + ALPHA_TEXTURE_INC)
@@ -2891,7 +2910,9 @@ void Map::createBuffers(GLfloat** matriz)
             vertexBuffer[totalVertex+7] = MapSquares[x1][z1].h3;
             vertexBuffer[totalVertex+8] = MapSquares[x1][z1].z2;
 
-            uvBuffer[actualTexture+6] = TEXTURE_REPEATS;
+            uvBuffer[actualTexture+6] = TEXTURE_REPEATS*
+               MapSquares[x1][z1].textureScale;
+            uvAlphaBuffer[actualTexture+2] = alphaCoordX / modX;
             uvBuffer[actualTexture+7] = 0.0;
             uvAlphaBuffer[actualTexture+6] = (alphaCoordX + ALPHA_TEXTURE_INC)
                                              / modX;

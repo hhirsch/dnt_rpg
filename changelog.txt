@@ -24,6 +24,7 @@
  - Implemented area affect talents;
  - Option to always highlight map connections;
  - dntMapEditor: Added map sound editor;
+ - map: Floor textures could now be scaled;
 
 BugFixes:
  - heightmap2dnt: Fixed a missing include;

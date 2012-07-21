@@ -215,6 +215,7 @@ class Square: public dntList
 
       GLfloat x1,z1,x2,z2;              /**< Coordinates */
       GLfloat h1,h2,h3,h4;              /**< Vertice's Height */
+      float textureScale;               /**< Square texture scale factor */
       int posX, posZ;                   /**< Map positions */
       int flags;                        /**< Condition flag */
       int visible;                      /**< Visible on active frame ? */
