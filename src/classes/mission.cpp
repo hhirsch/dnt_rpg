@@ -288,6 +288,17 @@ void mission::saveAsCurrent(ofstream* file)
    /* Save area Info */
    *file << MISSION_TOKEN_AREA << " = " << area << endl;
 
+   /* Save Completion and Failure scripts */
+   if(!completionScript.empty())
+   {
+      *file << MISSION_TOKEN_COMPLETION_SCRIPT << " = " 
+         << completionScript << endl;
+   }
+   if(!failureScript.empty())
+   {
+      *file << MISSION_TOKEN_FAILURE_SCRIPT << " = " << failureScript << endl;
+   }
+
    /* Save Script Related Things */
 
    /* Actual Line */
@@ -367,6 +378,16 @@ void mission::loadAsCurrent(defParser* def)
          {
             /* Set the area */
             area = value;
+         }
+         else if(key == MISSION_TOKEN_COMPLETION_SCRIPT)
+         {
+            /* Set completion script */
+            completionScript = value;
+         }
+         else if(key == MISSION_TOKEN_FAILURE_SCRIPT)
+         {
+            /* Set failure script */
+            failureScript = value;
          }
          /* Actual Line */
          else if(key == MISSION_TOKEN_ACTUAL_LINE)

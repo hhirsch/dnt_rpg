@@ -2426,6 +2426,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       else if(functionName == IA_INVENTORY_GET_ITEM_VALUE)
       {
          assignValue(var, (void*)&fl, IA_TYPE_FLOAT);
+         printf("Cost: %.3f\n", fl);
       }
    }
 
