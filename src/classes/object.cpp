@@ -139,7 +139,7 @@ object::object(string path, string curMap): thing()
          setConversationFile(value);
          createConversation(curMap);
       }
-      else if(key == "related_info")
+      else if( (key == "related_info") || (key == "info") )
       {
          relatedInfo = value;
       }
