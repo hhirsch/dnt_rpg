@@ -1,21 +1,21 @@
 /* 
-  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  DNT: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
-  This file is part of DccNiTghtmare.
+  This file is part of DNT.
  
-  DccNiTghtmare is free software: you can redistribute it and/or modify
+  DNT is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  DccNiTghtmare is distributed in the hope that it will be useful,
+  DNT is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+  along with DNT.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #ifndef _dnt_mission_h
@@ -116,6 +116,9 @@ class mission: public iaScript, public dntListElement
       std::string area;        /**< Area where mission occurs (ex: Tyrol) */
       std::string description; /**< Mission's Description */
 
+      std::string completionScript; /**< Script to call when mission complete */
+      std::string failureScript;    /**< Script to call when mission failed  */
+
       int xpValue;      /**< XP received on complete the mission */
 
       int completed; /**< 0 if isn't completed. < 0 means failed. > 0 success */
@@ -160,7 +163,8 @@ class missionsController
       /*! Complete the mission (remove from current and put at completed)
        * \param m -> mission completed.
        * \param type -> type of completion 
-       *                (<= 0 for failure, > 0 for success) */
+       *                (<= 0 for failure, > 0 for success)
+       * \note this function will call the mission completion script, if any. */
       void completeMission(mission* m, int type);
 
       /*! Search for a mission on the current list

@@ -1,21 +1,21 @@
 /* 
-  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  DNT: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
-  This file is part of DccNiTghtmare.
+  This file is part of DNT.
  
-  DccNiTghtmare is free software: you can redistribute it and/or modify
+  DNT is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  DccNiTghtmare is distributed in the hope that it will be useful,
+  DNT is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+  along with DNT.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "mission.h"
@@ -32,6 +32,8 @@ using namespace std;
 #define MISSION_TOKEN_TEMP_FLAG          "tempFlag"
 #define MISSION_TOKEN_DESCRIPTION        "description"
 #define MISSION_TOKEN_AREA               "area"
+#define MISSION_TOKEN_COMPLETION_SCRIPT  "completionScript"
+#define MISSION_TOKEN_FAILURE_SCRIPT     "failureScript"
 
 #define MISSION_TOKEN_END_MISSION        "endMission"
 
@@ -60,6 +62,8 @@ mission::mission(string missionFile, engine* usedEngine,
    /* Clear Values */
    description = "";
    area = "";
+   completionScript = "";
+   failureScript = "";
 
    /* Read the information from the definition's file */
    if(loadDefinition)
@@ -78,6 +82,14 @@ mission::mission(string missionFile, engine* usedEngine,
          else if(key == MISSION_TOKEN_AREA)
          {
             area = value;
+         }
+         else if(key == MISSION_TOKEN_COMPLETION_SCRIPT)
+         {
+            completionScript = value;
+         }
+         else if(key == MISSION_TOKEN_FAILURE_SCRIPT)
+         {
+            failureScript = value;
          }
       }
    }
@@ -516,6 +528,15 @@ void missionsController::completeMission(mission* m, int type)
    /* type <= 0 means failed. > 0 success */
    if(type > 0)
    {
+      /* Call the completion script, if any */
+      if(!m->completionScript.empty())
+      {
+         iaScript* sc = new iaScript(m->completionScript, pEngine);
+         sc->defineMap( pEngine->getCurrentMap(), pEngine->NPCs);
+         sc->run(0);
+         delete(sc);
+      }
+
       character* dude = (character*)pEngine->PCs->getFirst();
       
       /* Add XP to all PC characters */
@@ -541,6 +562,15 @@ void missionsController::completeMission(mission* m, int type)
    }
    else 
    {
+      /* Call the failure script, if any */
+      if(!m->failureScript.empty())
+      {
+         iaScript* sc = new iaScript(m->failureScript, pEngine);
+         sc->defineMap( pEngine->getCurrentMap(), pEngine->NPCs);
+         sc->run(0);
+         delete(sc);
+      }
+
       /* Add 3D message of failure */
       character* dude = pEngine->PCs->getActiveCharacter();
       msgController.addMessage(dude->scNode->getPosX(), 
