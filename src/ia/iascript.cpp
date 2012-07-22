@@ -2406,7 +2406,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          else if(functionName == IA_INVENTORY_GET_ITEM_VALUE)
          {
             /* Set as the object cost */
-            object* ob = dude->inventories->getItemByInfo(s);
+            object* ob = dude->inventories->getItemByFileName(s);
             if(ob)
             {
                fl = ob->cost;
@@ -2426,7 +2426,6 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       else if(functionName == IA_INVENTORY_GET_ITEM_VALUE)
       {
          assignValue(var, (void*)&fl, IA_TYPE_FLOAT);
-         printf("Cost: %.3f\n", fl);
       }
    }
 
@@ -2484,7 +2483,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          
          briefing brief;
          char buf[256];
-         sprintf(buf,gettext("%s received $%f."),
+         sprintf(buf,gettext("%s received $%.2f."),
                dude->name.c_str(), qty);
          brief.addText(buf,18,191,0);
       }
@@ -2868,6 +2867,9 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine,
       token = nextToken(postFix, pos);
       while(!token.empty())
       {
+#ifdef DNT_DEBUG_SCRIPTS
+         cerr << "Evaluting: " << token << endl;
+#endif
          if(isOperator(token))
          {
             /* Apply the operator */
@@ -2885,6 +2887,10 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine,
                       (varStack[0]->type == IA_TYPE_INT) )
                   {
                      varStack[0]->changeSignal();
+#ifdef DNT_DEBUG_SCRIPTS
+                     cerr << "Signal changed to: " 
+                        << varStack[0]->toString() << endl;
+#endif
                   }
                   else
                   {
@@ -2901,6 +2907,11 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine,
                   /* Pop the two variables */
                   var1 = varStack[varPos-1];
                   var2 = varStack[varPos-2];
+#ifdef DNT_DEBUG_SCRIPTS
+                     cerr << "Operators: " 
+                        << var1->toString() << "," << var2->toString() <<  endl;
+#endif
+
                   varPos -= 2;
                   /* Type must be integer or float */
                   if( ( (var1->type == IA_TYPE_FLOAT) ||
@@ -2920,6 +2931,10 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine,
                      /* Alloc the result variable */
                      varStack[varPos] = new iaVariable(type,"result");
                      varStack[varPos]->receiveOperation(token, var2, var1);
+#ifdef DNT_DEBUG_SCRIPTS
+                     cerr << "Result: " 
+                        << varStack[varPos]->toString() << endl;
+#endif
                      varPos++;
                   }
                   else
@@ -3030,6 +3045,10 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine,
                   varStack[varPos] = new iaVariable(ftype, token);
                   callFunction(varStack[varPos], postFix, token, pos);
                   varPos++;
+#ifdef DNT_DEBUG_SCRIPTS
+                  cerr << "Function returned: " 
+                     << varStack[varPos-1]->toString() << endl;
+#endif
                }
                else
                {
@@ -3098,6 +3117,10 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine,
       else if(var != NULL)
       {
          *(var) = *(varStack[0]);
+#ifdef DNT_DEBUG_SCRIPTS
+         cerr << "Will set result as: " << varStack[0]->toString() << endl;
+         cerr << "Set result: " << var->toString() << endl;
+#endif
          delete(varStack[0]);
       }
 
