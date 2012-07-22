@@ -2367,27 +2367,126 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    ////////////////////////////////////////////////////
 
 
-   /* inventoryHave */
-   else if(functionName == IA_INVENTORY_HAVE)
+   /* Syntax * inventory*(character* owner, string i) */
+   else if( (functionName == IA_INVENTORY_HAVE) || 
+            (functionName == IA_INVENTORY_GET_ITEM_BY_INFO) || 
+            (functionName == IA_INVENTORY_GET_ITEM_VALUE) )
    {
       /* Syntax: bool inventoryHave(character* owner, string objectFile) */
       character* dude = NULL;
-      string objectFile = "";
+      string s = "";
 
       /* Get character */
       dude = getParameterc(token, strLine, pos);
 
-      /* Get Object FileName */
-      objectFile = getParameters(token, strLine, pos);
+      /* Get string */
+      s = getParameters(token, strLine, pos);
 
-      /* Set the result */
+      /* result, if any */
       bool bl = false;
+      string st = "";
+      float fl = 0.0f;
       
       if(dude != NULL)
-      {         
-         bl = (dude->inventories->getItemByFileName(objectFile) != NULL);
+      {
+         if(functionName == IA_INVENTORY_HAVE)
+         {
+            /* Check if have the inventory */
+            bl = (dude->inventories->getItemByFileName(s) != NULL);
+         }
+         else if (functionName == IA_INVENTORY_GET_ITEM_BY_INFO)
+         {
+            /* Set as the object fileName */
+            object* ob = dude->inventories->getItemByInfo(s);
+            if(ob)
+            {
+               st = ob->getFileName();
+            }
+         }
+         else if(functionName == IA_INVENTORY_GET_ITEM_VALUE)
+         {
+            /* Set as the object cost */
+            object* ob = dude->inventories->getItemByInfo(s);
+            if(ob)
+            {
+               fl = ob->cost;
+            }
+         }
       }
-      assignValue(var, (void*)&bl, IA_TYPE_BOOL);
+      
+      /* Assign result values, if any */
+      if(functionName == IA_INVENTORY_HAVE)
+      {
+         assignValue(var, (void*)&bl, IA_TYPE_BOOL);
+      }
+      else if(functionName == IA_INVENTORY_GET_ITEM_BY_INFO)
+      {
+         assignValue(var, (void*)&st, IA_TYPE_STRING);
+      }
+      else if(functionName == IA_INVENTORY_GET_ITEM_VALUE)
+      {
+         assignValue(var, (void*)&fl, IA_TYPE_FLOAT);
+      }
+   }
+
+   /* Syntax void inventoryGiveItem(character* owner, character* receiver, 
+    *                               string item) */
+   else if(functionName == IA_INVENTORY_GIVE_ITEM)
+   {
+      character* dude = NULL;
+      character* receiver = NULL;
+      string s = "";
+
+      /* Get characters */
+      dude = getParameterc(token, strLine, pos);
+      receiver = getParameterc(token, strLine, pos);
+
+      /* Get string */
+      s = getParameters(token, strLine, pos);
+
+      if( (dude) && (receiver))
+      {
+         object* ob = dude->inventories->getItemByFileName(s);
+         if(ob)
+         {
+            /* Remove from owner inventory and add to the receiver */
+            dude->inventories->removeFromInventory(ob);
+            receiver->inventories->addObject(ob);
+
+            /* Set text */
+            briefing brief;
+            char buf[256];
+            sprintf(buf,gettext("%s lost %s."), 
+                  dude->name.c_str(), ob->name.c_str());
+            brief.addText(buf,206,137,16);
+         }
+      }
+   }
+
+
+   /* Syntax: void inventoryAddMoney(character* owner, float qty) */
+   else if(functionName == IA_INVENTORY_ADD_MONEY)
+   {
+      /* Syntax: bool inventoryHave(character* owner, string objectFile) */
+      character* dude = NULL;
+      float qty = 0.0f;
+
+      /* Get character */
+      dude = getParameterc(token, strLine, pos);
+
+      /* Get quantity */
+      qty = getParameterf(token, strLine, pos);
+
+      if(dude)
+      {
+         dude->inventories->addMoney(qty);
+         
+         briefing brief;
+         char buf[256];
+         sprintf(buf,gettext("%s received $%f."),
+               dude->name.c_str(), qty);
+         brief.addText(buf,18,191,0);
+      }
    }
 
    ////////////////////////////////////////////////////

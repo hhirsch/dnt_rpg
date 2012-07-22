@@ -157,7 +157,11 @@ bool isFunction(string s)
            (s == IA_CHARACTER_SET_ANIMATION) ||
            (s == IA_CHARACTER_CALL_ANIMATION) || (s == IA_PLAY_SOUND) ||
            (s == IA_CHARACTER_ADD_FEAT) || (s == IA_CHARACTER_HAVE_FEAT) ||
-           (s == IA_CHARACTER_OPEN_DIALOG) );
+           (s == IA_CHARACTER_OPEN_DIALOG) ||
+           (s == IA_INVENTORY_GET_ITEM_BY_INFO) || 
+           (s == IA_INVENTORY_GIVE_ITEM) ||
+           (s == IA_INVENTORY_ADD_MONEY) ||
+           (s == IA_INVENTORY_GET_ITEM_VALUE) );
 }
 
 /***********************************************************************
@@ -201,14 +205,15 @@ string functionType(string s)
    }
    /* Float functions */
    else if((s == IA_OWNER_HEIGHT) || (s == IA_OWNER_POSX) ||
-           (s == IA_OWNER_POSZ) )
+           (s == IA_OWNER_POSZ) || 
+           (s == IA_INVENTORY_GET_ITEM_VALUE) )
    {
       return(IA_TYPE_FLOAT);
    }
    /* String Functions */
    else if( (s == IA_SELF_MISSION) || (s == IA_ACTUAL_MAP) ||
             (s == IA_WEAPON_GET_AMMO_TYPE) || (s == IA_WEAPON_GET_RANGE_TYPE) ||
-            (s == IA_GET_TEXT) )
+            (s == IA_GET_TEXT) || (s == IA_INVENTORY_GET_ITEM_BY_INFO) )
    {
       return(IA_TYPE_STRING);
    }

@@ -329,6 +329,14 @@
 ////////////////////////////////////////////////////
 /*! bool inventoryHave(character owner, string objectFile) */
 #define IA_INVENTORY_HAVE "inventoryHave"
+/*! string inventoryGetItemByInfo(character owner, string info) */
+#define IA_INVENTORY_GET_ITEM_BY_INFO "inventoryGetItemByInfo"
+/*! float inventoryGetItemValue(character owner, string item) */
+#define IA_INVENTORY_GET_ITEM_VALUE "inventoryGetItemValue"
+/*! void inventoryGiveItem(character owner, character receiver, string item) */
+#define IA_INVENTORY_GIVE_ITEM "inventoryGiveItem"
+/*! void inventoryAddMoney(character owner, float qty) */
+#define IA_INVENTORY_ADD_MONEY "inventoryAddMoney"
 
 ////////////////////////////////////////////////////
 //                  Dialog Functions              //
