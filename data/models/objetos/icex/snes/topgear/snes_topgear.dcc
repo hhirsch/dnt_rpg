@@ -1,5 +1,6 @@
 name = Snes Topgear
 description = gettext("Use the nitros but watch the fuel!")
+info = SNES cartridge
 cal3d = models/objetos/icex/snes/topgear/model.cfg
 inventory_sizes = 1 1
 inventory_texture = models/objetos/icex/snes/topgear/snes_topgear_inv.png

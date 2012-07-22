@@ -1,5 +1,6 @@
 name = Snes Chrono Trigger
 description = gettext("The best SNES RPG whose name begins with 'Chro'.")
+info = SNES cartridge
 cal3d = models/objetos/icex/snes/chrono/model.cfg
 inventory_sizes = 1 1
 inventory_texture = models/objetos/icex/snes/chrono/snes_chrono_inv.png

@@ -1,5 +1,6 @@
 name = Snes Donkey Kong Country
 description = gettext("A game about monkeys jumping around and playing music. You'll love that.")
+info = SNES cartridge
 cal3d = models/objetos/icex/snes/dk/model.cfg
 inventory_sizes = 1 1
 inventory_texture = models/objetos/icex/snes/dk/snes_dk_inv.png

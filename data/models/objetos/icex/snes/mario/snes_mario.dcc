@@ -1,5 +1,6 @@
 name = Snes Super Mario World
 description = gettext("The italian plumber strikes back, this time with a dino!")
+info = SNES cartridge
 cal3d = models/objetos/icex/snes/mario/model.cfg
 inventory_sizes = 1 1
 inventory_texture = models/objetos/icex/snes/mario/snes_mario_inv.png

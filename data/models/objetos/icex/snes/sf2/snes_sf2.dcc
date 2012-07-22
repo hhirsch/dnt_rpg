@@ -1,5 +1,6 @@
 name = Snes Street Fighter II Turbo
 description = gettext("You remember playing it in a dirty bar at the beach.")
+info = SNES cartridge
 cal3d = models/objetos/icex/snes/sf2/model.cfg
 inventory_sizes = 1 1
 inventory_texture = models/objetos/icex/snes/sf2/snes_sf2_inv.png

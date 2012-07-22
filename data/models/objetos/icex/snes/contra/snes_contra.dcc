@@ -1,5 +1,6 @@
 name = Snes Contra III
 description = gettext("You surely can't stay alive for more than 3 hours on this game.")
+info = SNES cartridge
 cal3d = models/objetos/icex/snes/contra/model.cfg
 inventory_sizes = 1 1
 inventory_texture = models/objetos/icex/snes/contra/snes_contra_inv.png

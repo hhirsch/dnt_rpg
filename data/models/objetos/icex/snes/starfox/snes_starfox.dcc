@@ -1,5 +1,6 @@
 name = Snes Starfox
 description = gettext("A fox that thinks he's Tom Hanks in Apollo 13.")
+info = SNES cartridge
 cal3d = models/objetos/icex/snes/starfox/model.cfg
 inventory_sizes = 1 1
 inventory_texture = models/objetos/icex/snes/starfox/snes_starfox_inv.png
