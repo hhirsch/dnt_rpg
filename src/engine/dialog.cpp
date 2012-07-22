@@ -65,6 +65,7 @@ using namespace std;
 #define TALK_TEST_ALL_DEAD           10  /* If all characters are dead */
 #define TALK_TEST_HAVE_MONEY         11  /* If have money */
 #define TALK_TEST_MISSION_ACTIVE     12  /* If some mission is active or not */
+#define TALK_TEST_HAVE_ITEM_WITH_INFO 13 /* If have item os some info */
 
 #define BUFFER_SIZE 512
 
@@ -113,6 +114,7 @@ using namespace std;
 #define TK_TEST_ALIGN "align"
 #define TK_TEST_ALIGN_NOT "align_not"
 #define TK_TEST_HAVE_ITEM "have_item"
+#define TK_TEST_HAVE_ITEM_WITH_INFO "have_item_with_info"
 #define TK_TEST_ALL_ALIVE "all_alive"
 #define TK_TEST_ALL_DEAD "all_dead"
 #define TK_TEST_HAVE_MONEY "have_money"
@@ -208,6 +210,11 @@ bool talkTest::set(string token, string t, string a)
    else if(token == TK_TEST_HAVE_ITEM)
    {
       id = TALK_TEST_HAVE_ITEM;
+   }
+   /* have_item_with_info */
+   else if(token == TK_TEST_HAVE_ITEM_WITH_INFO)
+   {
+      id = TALK_TEST_HAVE_ITEM_WITH_INFO;
    }
    /* align_not */
    else if(token == TK_TEST_ALIGN_NOT)
@@ -344,6 +351,12 @@ bool talkTest::doTest(character* pc, thing* owner)
    else if(id == TALK_TEST_HAVE_ITEM)
    {
       return(pc->inventories->getItemByFileName(test) != NULL);  
+   }
+
+   /* Have Item with info test */
+   else if(id == TALK_TEST_HAVE_ITEM_WITH_INFO)
+   {
+      return(pc->inventories->getItemByInfo(test) != NULL);
    }
 
    /* Align Not Test */

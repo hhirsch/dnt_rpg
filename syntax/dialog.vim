@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language: DNT Dialogs Language
 " Maintainer: Guilherme Farrer <farrer@dnteam.org>
-" Last Change: 2012 Jul 01 
+" Last Change: 2012 Jul 22 
 
 syn clear
 
@@ -44,7 +44,7 @@ syn keyword dntFunction       open play_sound
 syn keyword dntTest           roll
 syn keyword dntTest           greater lesser equal diff 
 syn keyword dntTest           align align_not
-syn keyword dntTest           have_item
+syn keyword dntTest           have_item have_item_with_info
 syn keyword dntTest           all_dead all_alive have_money
 syn keyword dntTest           mission_active
 
