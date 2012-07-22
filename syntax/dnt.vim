@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language: DNT Script Language
 " Maintainer: Farrer <farrer@dnteam.org>
-" Last Change: 2012 Jul 13
+" Last Change: 2012 Jul 22
 
 syn clear
 
@@ -47,7 +47,9 @@ syn keyword dntFunction       getPsycho setPsycho getActualLife getMaxLife
 syn keyword dntFunction       characterAtRange canAttack
 syn keyword dntFunction       callAnimation setAnimation
 syn keyword dntFunction       featUseAtCharacter runAwayFromBattle
-syn keyword dntFunction       inventoryHave
+syn keyword dntFunction       inventoryHave inventoryGetItemByInfo
+syn keyword dntFunction       inventoryGetItemValue inventoryGiveItem
+syn keyword dntFunction       inventoryAddMoney
 syn keyword dntFunction       dialogSetInitial
 syn keyword dntFunction       getObject getObjectState
 syn keyword dntFunction       isAllDead mapTravel

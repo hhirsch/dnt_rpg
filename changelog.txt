@@ -42,6 +42,7 @@ BugFixes:
  - OSX: fixed character portrait draw on game screen;
  - Makefiles: Fix for makefiles with broken $(LIBS);
  - MoneyWindow: Don't allow money splits by 0;
+ - scripts: accept integers as assigns to float variables;
 
 ================================================
 |                Version 0.9                   |

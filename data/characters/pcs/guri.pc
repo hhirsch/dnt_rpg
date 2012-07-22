@@ -1,6 +1,7 @@
 name = gettext("Child")
 model = models/personagens/guri/guri.md5def
 portrait = characters/portraits/garcon.png
+conversationFile = dialogs/tutorial/kids_snes.dlg
 battleScript = ia/script/fight/fight_animal.dsl
 generalScript = ia/script/general/guri_idle.dsl
 killedScript = ia/script/kill/guri_kill.dsl
