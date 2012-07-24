@@ -1,21 +1,21 @@
 /* 
-  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  DNT: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
-  This file is part of DccNiTghtmare.
+  This file is part of DNT.
  
-  DccNiTghtmare is free software: you can redistribute it and/or modify
+  DNT is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  DccNiTghtmare is distributed in the hope that it will be useful,
+  DNT is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+  along with DNT.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "character.h"
@@ -44,6 +44,7 @@ using namespace std;
 #define BORDER_FILE "characters/portraits/borda.png"
 #define BORDER_SIZE 5
 #define BACK_FILE   "characters/portraits/back.png"
+#define LEVEL_UP_FILE "characters/portraits/levelup.png"
 
 #define CHARACTER_TREAT_SCRIPTS  5
 
@@ -73,6 +74,8 @@ character::character(featsList* ft, engine* usedEngine)
    actualRace = NULL;
    actualAlign = NULL;
    portraitImage = NULL;
+   levelUpImage = NULL;
+   showLevelUp = false;
    conversationFile = "";
    conv = NULL;
    cr = 1;
@@ -133,6 +136,10 @@ character::~character()
    {
      glDeleteTextures(1, &portraitTexture);
      SDL_FreeSurface(portraitImage);
+   }
+   if(levelUpImage)
+   {
+      SDL_FreeSurface(levelUpImage);
    }
    if(inventories)
    {
@@ -526,7 +533,65 @@ void character::definePortrait(string portraitFile)
 
    /* Define surface to the health bar */
    lifeBar->setSurface(portraitImage);
+
+   if(levelUpImage == NULL)
+   {
+      /* Load the level up image */
+      levelUpImage = IMG_Load(dir.getRealFile(LEVEL_UP_FILE).c_str());
+      if(!levelUpImage)
+      {
+         cerr << "Couldn't load image: " << LEVEL_UP_FILE << endl;
+      }
+   }
 }
+
+/*********************************************************************
+ *                          blitLevelUpImage                         *
+ *********************************************************************/
+void character::blitLevelUpImage()
+{
+   /* Define Machine Bit Order */
+   Uint32 rmask, gmask, bmask, amask;
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+   rmask = 0xff000000;
+   gmask = 0x00ff0000;
+   bmask = 0x0000ff00;
+   amask = 0x000000ff;
+#else
+   rmask = 0x000000ff;
+   gmask = 0x0000ff00;
+   bmask = 0x00ff0000;
+   amask = 0xff000000;
+#endif
+
+   SDL_Surface* portraitUp;
+
+#ifdef __APPLE__
+   /* In OSX, the images are bgra, not rgba. */
+   portraitUp = SDL_CreateRGBSurface(SDL_SWSURFACE,
+         portraitImage->w, portraitImage->h, 32,
+         bmask, gmask, rmask, amask);
+#else
+   portraitUp = SDL_CreateRGBSurface(SDL_SWSURFACE,
+         portraitImage->w, portraitImage->h, 32,
+         rmask, gmask, bmask, amask);
+#endif
+
+   /* Blit the portrait */
+   SDL_SetAlpha(portraitImage, 0, 0);
+   SDL_BlitSurface(portraitImage, NULL, portraitUp, NULL);
+
+   /* Blit the level up */
+   SDL_Rect rec;
+   rec.x = BORDER_SIZE;
+   rec.y = BORDER_SIZE;
+   SDL_BlitSurface(levelUpImage, NULL, portraitUp, &rec);
+
+   Farso::setTextureRGBA(portraitUp, portraitTexture);
+   SDL_FreeSurface(portraitUp);
+   showLevelUp = true;
+}
+ 
 
 /*********************************************************************
  *                        getPortraitFileName                        *
@@ -543,7 +608,14 @@ void character::updateHealthBar()
 {
   lifeBar->defineMaxHealth(maxLifePoints);
   lifeBar->defineActualHealth(lifePoints);
-  Farso::setTextureRGBA(portraitImage, portraitTexture);
+  if(showLevelUp)
+  {
+     blitLevelUpImage();
+  }
+  else
+  {
+     Farso::setTextureRGBA(portraitImage, portraitTexture);
+  }
 }
 
 /*********************************************************************
@@ -551,6 +623,18 @@ void character::updateHealthBar()
  *********************************************************************/
 void character::drawMainPortrait()
 {
+   if( (getUpLevels() > 0) && (!showLevelUp) )
+   {
+      /* Level up not current displayed, must set it! */
+      blitLevelUpImage();
+   }
+   else if( (getUpLevels() == 0) && (showLevelUp) )
+   {
+      /* No more levels to up. Must remove levelUp image */
+      Farso::setTextureRGBA(portraitImage, portraitTexture);
+      showLevelUp = false;
+   }
+
    glEnable(GL_BLEND);
    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
    glEnable(GL_TEXTURE_2D);
@@ -582,7 +666,15 @@ bool character::mouseUnderPortrait(int mouseX, int mouseY)
    if(Farso::isMouseAt(Farso::SCREEN_X-portraitImage->w-1, 1,
                 Farso::SCREEN_X-1, 64, mouseX, mouseY) )
    {
-      sprintf(buf, "%s (%d/%d)", name.c_str(), xp, nextLevelXP(xp)); 
+      if(getUpLevels() == 0)
+      {
+         sprintf(buf, "%s (%d/%d)", name.c_str(), xp, nextLevelXP(xp)); 
+      }
+      else
+      {
+         sprintf(buf, gettext("%s: %d level(s) to up"), 
+               name.c_str(), getUpLevels());
+      }
       cur.set(CURSOR_WALK);
       cur.setTextOver(buf);
       return(true);
