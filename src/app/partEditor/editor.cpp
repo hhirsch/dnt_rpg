@@ -176,6 +176,16 @@ void editor::updateParticle()
    }
 
    p->doStep(NULL);
+
+   /* verify max time */
+   int maxLifeTime = p->getInt(DNT_PART_AUX_MAX_LIFE_TIME);
+   int initialLifeTime = p->getInt(DNT_PART_AUX_INITIAL_LIFE_TIME);
+   int time = SDL_GetTicks();
+   if( (maxLifeTime != 0) && (time - initialLifeTime >= maxLifeTime) )
+   {
+      /* Particle system expired */
+      p->reset();
+   }
 }
 
 /****************************************************************

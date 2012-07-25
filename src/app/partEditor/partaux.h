@@ -29,6 +29,7 @@
 #define DNT_PART_AUX_MAX_PARTICLES             "maxParticles"
 #define DNT_PART_AUX_MAX_LIFE_TIME             "maxLifeTime"
 #define DNT_PART_AUX_MAX_PARTICLE_LIFE_TIME    "particleLifeTime"
+#define DNT_PART_AUX_INITIAL_LIFE_TIME         "initialLifeTime"
 #define DNT_PART_AUX_DRAW_MODE                 "drawMode"
 #define DNT_PART_AUX_RENDER_MODE               "renderMode"
 #define DNT_PART_AUX_POINT_SIZE                "pointSize"
