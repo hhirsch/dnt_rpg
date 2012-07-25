@@ -27,6 +27,7 @@
 #include "../engine/briefing.h"
 #include "../ia/iascript.h"
 #include "../etc/message3d.h"
+#include "../particle/partcontroller.h"
 
 #include <math.h>
 #include <string>
@@ -363,6 +364,12 @@ void thing::addXP(int points)
       char buf[1024];
       sprintf(buf, gettext("%s advanced a level!"), name.c_str());
       brief.addText(buf, 220, 200, 40);
+
+      /* Add level up particle */
+      partController part;
+      part.addParticle(scNode->getPosX(),
+            scNode->getPosY() + scNode->getBoundingBox().max.y-5,
+            scNode->getPosZ(), "particles/levelup.par");
 
       /* Show level up as 3d message */
       messageController msg;
