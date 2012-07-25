@@ -3,7 +3,7 @@
 ############################################################
 dialog(0)
    npc_begin
-      text = gettext("A big person!")
+      text = gettext("Hey, a grownup!")
    npc_end
    pc_begin
       option
@@ -16,7 +16,7 @@ end_dialog
 ############################################################
 dialog(1)
    npc_begin
-      text = gettext("I heard that you found an SNES cartridge for Logan. Did you know that nearly all of them melted or were magnetized from 'the big explosion'? I could give you some money if you bring me working game cartridges.")
+      text = gettext("Hey, I heard Logan got a SNES cartridge from you. Did you know that nearly all of them melted or were magnetized from 'the big explosion'? I could give you some money if you bring me working game cartridges.")
    npc_end
    pc_begin
       option
@@ -50,11 +50,11 @@ end_dialog
 ############################################################
 dialog(3)
    npc_begin
-      text = gettext("When my mother was able to make photos, she used to share photos of old books online. I want to do that with old games now, or else they might be forgotten or fall into the wrong hands.")
+      text = gettext("When my mother was able to make photos, she would put old books in website libraries or something like that. I want to do that with old games, or else people might forget how it feels to play them or they might even fall into bad people's hands.")
    npc_end
    pc_begin
       option
-         text = gettext("Wrong hands?")
+         text = gettext("Bad people?")
          action = go_to_dialog(4)
       option
          text = gettext("I'll see what I can do.")
@@ -71,7 +71,7 @@ end_dialog
 ############################################################
 dialog(4)
    npc_begin
-      text = gettext("Well, I don't really know. That's just what Mom used to say. Will you do it?")
+      text = gettext("Well, I don't really know any. That's just what Mom used to say. Will you get game cartridges for me?")
    npc_end
    pc_begin
       option
@@ -89,12 +89,12 @@ end_dialog
 ############################################################
 dialog(5)
    npc_begin
-      text = gettext("Got any SNES cartridges today?")
+      text = gettext("Hey, got any SNES cartridges for me?")
    npc_end
    pc_begin
       option 
          pre_test = have_item_with_info("SNES cartridge")
-         text = gettext("Yes.")
+         text = gettext("Yes. (Sell all cartridges in your inventory)")
          action = call_script("missions/tyrol_kids/tyrol_kids.dsl")
          action = go_to_dialog(2)
       option
