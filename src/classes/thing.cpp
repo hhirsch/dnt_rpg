@@ -24,7 +24,9 @@
 
 #include "../engine/util.h"
 #include "../engine/dialog.h" 
+#include "../engine/briefing.h"
 #include "../ia/iascript.h"
+#include "../etc/message3d.h"
 
 #include <math.h>
 #include <string>
@@ -355,6 +357,18 @@ void thing::addXP(int points)
    if(curLevel > prevLevel)
    {
       upLevels += curLevel - prevLevel;
+
+      /* Show level up briefing message */
+      briefing brief;
+      char buf[1024];
+      sprintf(buf, gettext("%s advanced a level!"), name.c_str());
+      brief.addText(buf, 220, 200, 40);
+
+      /* Show level up as 3d message */
+      messageController msg;
+      msg.addMessage(scNode->getPosX(), 
+                     scNode->getPosY() + scNode->getBoundingBox().max.y-10, 
+                     scNode->getPosZ(), "Level up", 0.9f, 0.8f, 0.2f);
    }
 }
 
