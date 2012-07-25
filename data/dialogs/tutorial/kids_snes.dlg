@@ -3,7 +3,7 @@
 ############################################################
 dialog(0)
    npc_begin
-      text = gettext("A big person!")
+      text = gettext("Hey, a grownup!")
    npc_end
    pc_begin
       option
@@ -94,7 +94,7 @@ dialog(5)
    pc_begin
       option 
          pre_test = have_item_with_info("SNES cartridge")
-         text = gettext("Yes.")
+         text = gettext("Yes. (Sell all cartridges in your inventory)")
          action = call_script("missions/tyrol_kids/tyrol_kids.dsl")
          action = go_to_dialog(2)
       option
