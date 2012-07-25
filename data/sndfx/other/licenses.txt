@@ -20,4 +20,13 @@ computer-negative.ogg
 fire.ogg
    author: PhreaKsAccount <http://www.freesound.org/people/PhreaKsAccount/>
    license: CC-BY 3.0
-   souce: http://www.freesound.org/people/PhreaKsAccount/sounds/46272/
+   source: http://www.freesound.org/people/PhreaKsAccount/sounds/46272/
+
+levelup.ogg
+   author: qubodup
+   license: CC-BY 3.0
+   source: http://www.freesound.org/people/qubodup/sounds/161653/
+   Based on:
+      http://www.freesound.org/people/spt3125/sounds/24810/ by spt3125
+      http://www.freesound.org/people/Benboncan/sounds/66922/ by Benboncan
+

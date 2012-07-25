@@ -28,6 +28,7 @@
 #include "../ia/iascript.h"
 #include "../etc/message3d.h"
 #include "../particle/partcontroller.h"
+#include "../sound/sound.h"
 
 #include <math.h>
 #include <string>
@@ -358,6 +359,11 @@ void thing::addXP(int points)
    if(curLevel > prevLevel)
    {
       upLevels += curLevel - prevLevel;
+
+      /* Add sound effect */
+      sound snd;
+      snd.addSoundEffect(scNode->getPosX(),scNode->getPosY(),scNode->getPosZ(),
+            SOUND_NO_LOOP, "sndfx/other/levelup.ogg");
 
       /* Show level up briefing message */
       briefing brief;
