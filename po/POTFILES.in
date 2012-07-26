@@ -265,6 +265,7 @@ data/dialogs/tutorial/atleticano.dlg
 data/dialogs/tutorial/cruzeirense.dlg
 data/dialogs/tutorial/hippie.dlg
 data/dialogs/tutorial/dona.dlg
+data/dialogs/tutorial/kids_snes.dlg
 
 #missions
 data/missions/tutorial/mission1.mis

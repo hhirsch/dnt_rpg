@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2012-07-02 11:00-0300\n"
+"POT-Creation-Date: 2012-07-26 13:09-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,16 +19,16 @@ msgstr ""
 
 #: src/classes/actions.cpp:160
 #, c-format
-msgid "%s try to attack %s"
+msgid "%s tries to attack %s"
 msgstr ""
 
 #: src/classes/actions.cpp:165
 #, c-format
-msgid "%s try to heal %s"
+msgid "%s tries to heal %s"
 msgstr ""
 
-#: src/classes/actions.cpp:176 src/classes/actions.cpp:462
-#: src/classes/feats.cpp:301 src/classes/feats.cpp:354
+#: src/classes/actions.cpp:176 src/classes/actions.cpp:463
+#: src/classes/feats.cpp:302 src/classes/feats.cpp:355
 msgid "Too far away for action!"
 msgstr ""
 
@@ -36,45 +36,45 @@ msgstr ""
 msgid "Enemy out of sight!"
 msgstr ""
 
-#: src/classes/actions.cpp:283 src/classes/actions.cpp:305
-#: src/classes/actions.cpp:553 src/classes/actions.cpp:557
+#: src/classes/actions.cpp:281 src/classes/actions.cpp:303
+#: src/classes/actions.cpp:552 src/classes/actions.cpp:556
 msgid "Miss."
 msgstr ""
 
-#: src/classes/actions.cpp:286 src/classes/actions.cpp:290
+#: src/classes/actions.cpp:284 src/classes/actions.cpp:288
 msgid "Critical Miss!"
 msgstr ""
 
-#: src/classes/actions.cpp:332
+#: src/classes/actions.cpp:330
 #, c-format
 msgid "Healed %d points."
 msgstr ""
 
-#: src/classes/actions.cpp:343 src/classes/actions.cpp:590
+#: src/classes/actions.cpp:341 src/classes/actions.cpp:589
 #, c-format
 msgid "Hit at a vital area, inflicting %d points of damage."
 msgstr ""
 
-#: src/classes/actions.cpp:348 src/classes/actions.cpp:595
+#: src/classes/actions.cpp:346 src/classes/actions.cpp:594
 #, c-format
 msgid "Hit for %d points."
 msgstr ""
 
-#: src/classes/actions.cpp:368 src/classes/actions.cpp:371
+#: src/classes/actions.cpp:366 src/classes/actions.cpp:369
 msgid "Critical Heal!"
 msgstr ""
 
-#: src/classes/actions.cpp:376 src/classes/actions.cpp:380
-#: src/classes/actions.cpp:604 src/classes/actions.cpp:609
+#: src/classes/actions.cpp:374 src/classes/actions.cpp:378
+#: src/classes/actions.cpp:610 src/classes/actions.cpp:615
 msgid "Critical Hit!"
 msgstr ""
 
-#: src/classes/actions.cpp:454
+#: src/classes/actions.cpp:455
 #, c-format
-msgid "%s try to attack an area."
+msgid "%s tries to attack an area."
 msgstr ""
 
-#: src/classes/actions.cpp:640 src/fight/fightSystem.cpp:189
+#: src/classes/actions.cpp:646 src/fight/fightSystem.cpp:189
 #, c-format
 msgid "%s is dead!"
 msgstr ""
@@ -95,40 +95,45 @@ msgstr ""
 msgid "I am Not a Fool"
 msgstr ""
 
-#: src/classes/feats.cpp:220
+#: src/classes/feats.cpp:221
 msgid "Invalid Talent"
 msgstr ""
 
-#: src/classes/feats.cpp:242 src/engine/dccnit.cpp:2229
+#: src/classes/feats.cpp:243 src/engine/dccnit.cpp:2303
 msgid "Not enought points to use!"
 msgstr ""
 
-#: src/classes/mission.cpp:531 src/engine/dialog.cpp:1267
+#: src/classes/mission.cpp:573 src/engine/dialog.cpp:1280
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr ""
 
-#: src/classes/mission.cpp:549 src/classes/mission.cpp:552
+#: src/classes/mission.cpp:600 src/classes/mission.cpp:603
 msgid "Mission Failure!"
+msgstr ""
+
+#: src/classes/thing.cpp:371
+#, c-format
+msgid "%s advanced a level!"
 msgstr ""
 
 #: src/engine/alignwindow.cpp:50
 msgid "Tendency & Alignment"
 msgstr ""
 
-#: src/engine/alignwindow.cpp:76 src/engine/aspectwindow.cpp:93
+#: src/engine/alignwindow.cpp:76 src/engine/aspectwindow.cpp:97
 #: src/engine/attwindow.cpp:242 src/engine/classwindow.cpp:120
-#: src/engine/featsel.cpp:255 src/engine/options.cpp:1162
+#: src/engine/featsel.cpp:255 src/engine/options.cpp:1180
 #: src/engine/racewindow.cpp:122 src/engine/skillwindow.cpp:162
-#: src/engine/teste.cpp:68
+#: src/engine/teste.cpp:67
 msgid "Confirm"
 msgstr ""
 
-#: src/engine/alignwindow.cpp:80 src/engine/aspectwindow.cpp:97
+#: src/engine/alignwindow.cpp:80 src/engine/aspectwindow.cpp:101
 #: src/engine/attwindow.cpp:246 src/engine/barterwindow.cpp:72
 #: src/engine/classwindow.cpp:124 src/engine/featsel.cpp:259
-#: src/engine/options.cpp:1166 src/engine/racewindow.cpp:126
-#: src/engine/skillwindow.cpp:165 src/engine/teste.cpp:69
+#: src/engine/options.cpp:1184 src/engine/racewindow.cpp:126
+#: src/engine/skillwindow.cpp:165 src/engine/teste.cpp:68
 msgid "Cancel"
 msgstr ""
 
@@ -136,15 +141,15 @@ msgstr ""
 msgid "Aspect"
 msgstr ""
 
-#: src/engine/aspectwindow.cpp:67 src/engine/charwindow.cpp:106
+#: src/engine/aspectwindow.cpp:71 src/engine/charwindow.cpp:106
 msgid "Name:"
 msgstr ""
 
-#: src/engine/aspectwindow.cpp:72 src/engine/charwindow.cpp:109
+#: src/engine/aspectwindow.cpp:76 src/engine/charwindow.cpp:109
 msgid "Age:"
 msgstr ""
 
-#: src/engine/aspectwindow.cpp:76 src/engine/charwindow.cpp:124
+#: src/engine/aspectwindow.cpp:80 src/engine/charwindow.cpp:124
 msgid "Sex:"
 msgstr ""
 
@@ -198,9 +203,9 @@ msgstr ""
 msgid "Attribute Description"
 msgstr ""
 
-#: src/engine/attwindow.cpp:559 src/engine/dccnit.cpp:597
-#: src/engine/dccnit.cpp:2228 src/engine/featsel.cpp:495
-#: src/engine/inventwindow.cpp:369 src/engine/options.cpp:1476
+#: src/engine/attwindow.cpp:559 src/engine/dccnit.cpp:613
+#: src/engine/dccnit.cpp:2302 src/engine/featsel.cpp:495
+#: src/engine/inventwindow.cpp:369 src/engine/options.cpp:1495
 msgid "Warning"
 msgstr ""
 
@@ -208,7 +213,7 @@ msgstr ""
 msgid "You Need to Assign All Attributes."
 msgstr ""
 
-#: src/engine/barterwindow.cpp:56 src/engine/dialog.cpp:1559
+#: src/engine/barterwindow.cpp:56 src/engine/dialog.cpp:1572
 msgid "Barter"
 msgstr ""
 
@@ -245,23 +250,28 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: src/engine/briefing.cpp:62 src/engine/options.cpp:174
+#: src/engine/briefing.cpp:63 src/engine/options.cpp:174
 msgid "Briefing"
 msgstr ""
 
-#: src/engine/briefing.cpp:64
+#: src/engine/briefing.cpp:65
 msgid "Welcome to DNT!"
 msgstr ""
 
-#: src/engine/briefing.cpp:163
+#: src/engine/briefing.cpp:173
 msgid "Success"
 msgstr ""
 
-#: src/engine/briefing.cpp:163
+#: src/engine/briefing.cpp:173
 msgid "Failure"
 msgstr ""
 
-#: src/engine/character.cpp:568 src/engine/charwindow.cpp:141
+#: src/engine/character.cpp:675
+#, c-format
+msgid "%s: %d level(s) to up"
+msgstr ""
+
+#: src/engine/character.cpp:696 src/engine/charwindow.cpp:141
 msgid "HP"
 msgstr ""
 
@@ -323,7 +333,7 @@ msgid "Skills"
 msgstr ""
 
 #: src/engine/charwindow.cpp:276 src/engine/featswindow.cpp:96
-#: src/engine/skillwindow.cpp:172 src/engine/teste.cpp:68
+#: src/engine/skillwindow.cpp:172 src/engine/teste.cpp:67
 msgid "Close"
 msgstr ""
 
@@ -400,65 +410,65 @@ msgstr ""
 msgid "No Skills."
 msgstr ""
 
-#: src/engine/dccnit.cpp:538 src/engine/dccnit.cpp:588
+#: src/engine/dccnit.cpp:554 src/engine/dccnit.cpp:604
 msgid "Error"
 msgstr ""
 
-#: src/engine/dccnit.cpp:538
+#: src/engine/dccnit.cpp:554
 msgid "Can't load the saved game!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:583
+#: src/engine/dccnit.cpp:599
 msgid "Information"
 msgstr ""
 
-#: src/engine/dccnit.cpp:584
+#: src/engine/dccnit.cpp:600
 msgid "The game was saved!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:588
+#: src/engine/dccnit.cpp:604
 msgid "Can't save game!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:598
+#: src/engine/dccnit.cpp:614
 msgid "Can't save game while fighting!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:731
+#: src/engine/dccnit.cpp:776
 msgid "Saving Current Map Modifications"
 msgstr ""
 
-#: src/engine/dccnit.cpp:766
+#: src/engine/dccnit.cpp:811
 #, c-format
 msgid "Loading Map: %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:796
+#: src/engine/dccnit.cpp:841
 #, c-format
 msgid "Loading NPC: %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:833
+#: src/engine/dccnit.cpp:878
 msgid "Creating MiniMap"
 msgstr ""
 
-#: src/engine/dccnit.cpp:839
+#: src/engine/dccnit.cpp:884
 msgid "Putting GUI on Screen"
 msgstr ""
 
-#: src/engine/dccnit.cpp:866
+#: src/engine/dccnit.cpp:911
 msgid "Loading Particles"
 msgstr ""
 
-#: src/engine/dccnit.cpp:895
+#: src/engine/dccnit.cpp:940
 msgid "Loading Changes..."
 msgstr ""
 
-#: src/engine/dccnit.cpp:917
+#: src/engine/dccnit.cpp:962
 msgid "Done!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1129
+#: src/engine/dccnit.cpp:1174
 msgid ""
 "DNT is relesead under GPLv3 or later: Feel free to use its source code and "
 "data the way you want (or to blame us the same way). DNT is thankful to the "
@@ -466,85 +476,85 @@ msgid ""
 "SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1742
+#: src/engine/dccnit.cpp:1807
 msgid "Too far away for the action!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1759
+#: src/engine/dccnit.cpp:1824
 msgid "Couldn't rest at battle mode."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1765
+#: src/engine/dccnit.cpp:1830
 msgid "Enemies nearby."
 msgstr ""
 
 #: src/engine/dccnit.cpp:1869
+msgid "Exit Battle Mode"
+msgstr ""
+
+#: src/engine/dccnit.cpp:1943
 msgid "No NPCs in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1927
+#: src/engine/dccnit.cpp:2001
 msgid "Surprise Attack Turn."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1940
+#: src/engine/dccnit.cpp:2014
 msgid "No enemies in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:2449
+#: src/engine/dccnit.cpp:2523
 #, c-format
 msgid "%s taken."
 msgstr ""
 
-#: src/engine/dccnit.cpp:2477
+#: src/engine/dccnit.cpp:2551
 msgid "Inventory is full!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2499
+#: src/engine/dccnit.cpp:2573
 msgid "Door"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2547
+#: src/engine/dccnit.cpp:2648
 msgid "dead"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2599
+#: src/engine/dccnit.cpp:2701
 #, c-format
 msgid "%s attacks %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2851
+#: src/engine/dccnit.cpp:2966
 msgid "No more actions. Turn ended."
 msgstr ""
 
-#: src/engine/dccnit.cpp:3272
+#: src/engine/dccnit.cpp:3389
 msgid "A* could not find a path!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:4243
-msgid "Exit Battle Mode"
-msgstr ""
-
-#: src/engine/dialog.cpp:1295
+#: src/engine/dialog.cpp:1308
 #, c-format
 msgid "%s lost."
 msgstr ""
 
-#: src/engine/dialog.cpp:1339
+#: src/engine/dialog.cpp:1352
 #, c-format
 msgid "Received %s."
 msgstr ""
 
-#: src/engine/dialog.cpp:1349
+#: src/engine/dialog.cpp:1362
 #, c-format
 msgid "Received $%d."
 msgstr ""
 
-#: src/engine/dialog.cpp:1358
+#: src/engine/dialog.cpp:1371
 #, c-format
 msgid "Lost $%d."
 msgstr ""
 
-#: src/engine/dialog.cpp:1552
+#: src/engine/dialog.cpp:1565
 msgid "Dialog"
 msgstr ""
 
@@ -584,14 +594,14 @@ msgstr ""
 msgid "Load"
 msgstr ""
 
-#: src/engine/initial.cpp:95 src/engine/options.cpp:844
+#: src/engine/initial.cpp:95 src/engine/options.cpp:852
 msgid "Options"
 msgstr ""
 
 #: src/engine/initial.cpp:97 data/dialogs/objects/computers.dlg:21
-#: data/dialogs/objects/computers.dlg:95
-#: data/dialogs/objects/computers.dlg:136
-#: data/dialogs/objects/computers.dlg:149
+#: data/dialogs/objects/computers.dlg:103
+#: data/dialogs/objects/computers.dlg:144
+#: data/dialogs/objects/computers.dlg:157
 #: data/dialogs/objects/bunker_school_server.dlg:22
 #: data/dialogs/objects/bunker_school_server.dlg:36
 #: data/dialogs/objects/bunker_school_server.dlg:50
@@ -873,162 +883,166 @@ msgstr ""
 msgid "Character Info"
 msgstr ""
 
-#: src/engine/options.cpp:625 src/engine/options.cpp:652
+#: src/engine/options.cpp:633 src/engine/options.cpp:660
 #: data/weapons/types/munitions.dcl:2
 msgid "None"
 msgstr ""
 
-#: src/engine/options.cpp:630
+#: src/engine/options.cpp:638
 msgid "Characters"
 msgstr ""
 
-#: src/engine/options.cpp:635
+#: src/engine/options.cpp:643
 msgid "All"
 msgstr ""
 
-#: src/engine/options.cpp:657
+#: src/engine/options.cpp:665
 msgid "Projective"
 msgstr ""
 
-#: src/engine/options.cpp:673 data/weapons/types/sizes.dcl:3
+#: src/engine/options.cpp:681 data/weapons/types/sizes.dcl:3
 #: data/weapons/types/weights.dcl:3
 msgid "Normal"
 msgstr ""
 
-#: src/engine/options.cpp:676
+#: src/engine/options.cpp:684
 msgid "Pursue"
 msgstr ""
 
-#: src/engine/options.cpp:692 src/engine/options.cpp:712
-#: src/engine/options.cpp:734
+#: src/engine/options.cpp:700 src/engine/options.cpp:720
+#: src/engine/options.cpp:742
 msgid "Disabled"
 msgstr ""
 
-#: src/engine/options.cpp:737
+#: src/engine/options.cpp:745
 msgid "2x"
 msgstr ""
 
-#: src/engine/options.cpp:740
+#: src/engine/options.cpp:748
 msgid "4x"
 msgstr ""
 
-#: src/engine/options.cpp:855
+#: src/engine/options.cpp:863
 msgid "Input"
 msgstr ""
 
-#: src/engine/options.cpp:858
+#: src/engine/options.cpp:866
 msgid "Windows"
 msgstr ""
 
-#: src/engine/options.cpp:861
+#: src/engine/options.cpp:869
 msgid "Character"
 msgstr ""
 
-#: src/engine/options.cpp:864
+#: src/engine/options.cpp:872
 msgid "Camera"
 msgstr ""
 
-#: src/engine/options.cpp:869
+#: src/engine/options.cpp:877
 msgid "Audio"
 msgstr ""
 
-#: src/engine/options.cpp:873
+#: src/engine/options.cpp:881
 msgid "Music Volume:"
 msgstr ""
 
-#: src/engine/options.cpp:890
+#: src/engine/options.cpp:898
 msgid "Effects Volume:"
 msgstr ""
 
-#: src/engine/options.cpp:907
+#: src/engine/options.cpp:915
 msgid "Video"
 msgstr ""
 
-#: src/engine/options.cpp:915
+#: src/engine/options.cpp:923
 msgid "Screen Resolution:"
 msgstr ""
 
-#: src/engine/options.cpp:930
+#: src/engine/options.cpp:938
 msgid "Enable FullScreen"
 msgstr ""
 
-#: src/engine/options.cpp:939
+#: src/engine/options.cpp:947
 msgid "Enable Grass Effects (need particles)"
 msgstr ""
 
-#: src/engine/options.cpp:948
+#: src/engine/options.cpp:956
 msgid "Enable Particles Effects"
 msgstr ""
 
-#: src/engine/options.cpp:960
+#: src/engine/options.cpp:968
 msgid "Enable Anisotropic Filter"
 msgstr ""
 
-#: src/engine/options.cpp:971
+#: src/engine/options.cpp:979
 msgid "Enable bump mapping"
 msgstr ""
 
-#: src/engine/options.cpp:985
+#: src/engine/options.cpp:993
 msgid "Splatting:"
 msgstr ""
 
-#: src/engine/options.cpp:1002
+#: src/engine/options.cpp:1010
 msgid "Stencil Buffer:"
 msgstr ""
 
-#: src/engine/options.cpp:1019
+#: src/engine/options.cpp:1027
 msgid "Reflections:"
 msgstr ""
 
-#: src/engine/options.cpp:1036
+#: src/engine/options.cpp:1044
 msgid "Shadows:"
 msgstr ""
 
-#: src/engine/options.cpp:1052
+#: src/engine/options.cpp:1060
 msgid "Anti-Aliasing:"
 msgstr ""
 
-#: src/engine/options.cpp:1067
+#: src/engine/options.cpp:1075
 msgid "FarView:"
 msgstr ""
 
-#: src/engine/options.cpp:1083
+#: src/engine/options.cpp:1091
 msgid "Game"
 msgstr ""
 
-#: src/engine/options.cpp:1089
+#: src/engine/options.cpp:1097
 msgid "Language:"
 msgstr ""
 
-#: src/engine/options.cpp:1106
+#: src/engine/options.cpp:1114
 msgid "Camera Mode:"
 msgstr ""
 
-#: src/engine/options.cpp:1122
+#: src/engine/options.cpp:1130
 msgid "Auto End Turn"
 msgstr ""
 
-#: src/engine/options.cpp:1131
+#: src/engine/options.cpp:1139
 msgid "Always Run"
 msgstr ""
 
-#: src/engine/options.cpp:1140
+#: src/engine/options.cpp:1148
+msgid "Always Highlight Connections"
+msgstr ""
+
+#: src/engine/options.cpp:1158
 msgid "Show Enemy Battle Circle"
 msgstr ""
 
-#: src/engine/options.cpp:1149
+#: src/engine/options.cpp:1167
 msgid "Highlight current enemy"
 msgstr ""
 
-#: src/engine/options.cpp:1477
+#: src/engine/options.cpp:1496
 msgid "Some changes will only take effect upon restart."
 msgstr ""
 
-#: src/engine/options.cpp:1523
+#: src/engine/options.cpp:1542
 msgid "Press a key to: "
 msgstr ""
 
-#: src/engine/options.cpp:1526
+#: src/engine/options.cpp:1545
 msgid "Waiting..."
 msgstr ""
 
@@ -1116,7 +1130,7 @@ msgstr ""
 msgid "Unknow!"
 msgstr ""
 
-#: src/engine/teste.cpp:68
+#: src/engine/teste.cpp:67
 msgid "Maximize"
 msgstr ""
 
@@ -1142,9 +1156,19 @@ msgstr ""
 msgid "%s's turn."
 msgstr ""
 
-#: src/fight/initiative.cpp:57
+#: src/fight/initiative.cpp:56
 #, c-format
 msgid "%s rolls initiative: "
+msgstr ""
+
+#: src/ia/iascript.cpp:2459
+#, c-format
+msgid "%s lost %s."
+msgstr ""
+
+#: src/ia/iascript.cpp:2486
+#, c-format
+msgid "%s received $%.2f."
 msgstr ""
 
 #: data/comics/intro/intro.dcb:15
@@ -1152,7 +1176,7 @@ msgid "Once Upon a time, there was a happy university called UFMG..."
 msgstr ""
 
 #: data/comics/intro/intro.dcb:25
-msgid "People there used to live peacefull lives"
+msgid "People there used to live peaceful lives"
 msgstr ""
 
 #: data/comics/intro/intro.dcb:35
@@ -1166,30 +1190,29 @@ msgid "When something happened..."
 msgstr ""
 
 #: data/comics/intro/intro.dcb:47
-msgid "a big explosion, with unknown causes."
+msgid "a big explosion, with unknown cause."
 msgstr ""
 
 #: data/comics/intro/intro.dcb:61
 msgid ""
-"It made the happy and peacefull city called Belo Horizonte be known as "
+"It made the happy and peaceful city called Belo Horizonte be known as "
 "Horrivel Horizonte."
 msgstr ""
 
 #: data/comics/intro/intro.dcb:71
-msgid "Trees became alive,"
+msgid "Trees became alive..."
 msgstr ""
 
 #: data/comics/intro/intro.dcb:73
-msgid "Ameivas became agressive"
+msgid "Ameivas became aggressive..."
 msgstr ""
 
 #: data/comics/intro/intro.dcb:75
-msgid "and rats became blood thirsty."
+msgid "and rats became blood thirsty..."
 msgstr ""
 
 #: data/comics/intro/intro.dcb:85
-msgid ""
-"From this chaotic scene, emerged the main race that would dominate the land:"
+msgid "From this chaotic scene, emerged a group, that would dominate the land:"
 msgstr ""
 
 #: data/comics/intro/intro.dcb:87
@@ -1197,18 +1220,17 @@ msgid "UNIVERSITY STUDENTS!"
 msgstr ""
 
 #: data/comics/intro/intro.dcb:89
-msgid ""
-"who desired to, at all costs, obtain their legendary levels of knowledge."
+msgid "They desired - at any cost - to obtain legendary levels of knowledge."
 msgstr ""
 
 #: data/comics/intro/intro.dcb:103
 msgid ""
-"On this doomed world, thanks to the risen journalists, tales were told and "
-"spread by word of mouth, saying that"
+"On this doomed world, the risen journalists spread a tale by word of mouth..."
 msgstr ""
 
 #: data/comics/intro/intro.dcb:113
-msgid "the first man who came and proclaimed his right to graduate"
+msgid ""
+"saying that the first man who came and proclaimed his right to graduate..."
 msgstr ""
 
 #: data/comics/intro/intro.dcb:123
@@ -1216,7 +1238,7 @@ msgid "was Logan."
 msgstr ""
 
 #: data/comics/intro/intro.dcb:125
-msgid "And that's how the tale began..."
+msgid "And that is how the tale began..."
 msgstr ""
 
 #: data/comics/other/mjack/mjack.dcb:15
@@ -3202,46 +3224,46 @@ msgstr ""
 msgid "Install Pirate Ruindows"
 msgstr ""
 
-#: data/dialogs/objects/computers.dlg:49
+#: data/dialogs/objects/computers.dlg:51
 msgid "Install Original Ruindows"
 msgstr ""
 
-#: data/dialogs/objects/computers.dlg:59
+#: data/dialogs/objects/computers.dlg:63
 msgid "Install Ubuntu Linux"
 msgstr ""
 
-#: data/dialogs/objects/computers.dlg:70
+#: data/dialogs/objects/computers.dlg:76
 msgid "Install Gentoo Linux"
 msgstr ""
 
-#: data/dialogs/objects/computers.dlg:80
-#: data/dialogs/objects/computers.dlg:109
+#: data/dialogs/objects/computers.dlg:88
+#: data/dialogs/objects/computers.dlg:117
 msgid "Back"
 msgstr ""
 
-#: data/dialogs/objects/computers.dlg:91
+#: data/dialogs/objects/computers.dlg:99
 msgid "Operational System successfully installed."
 msgstr ""
 
-#: data/dialogs/objects/computers.dlg:105
+#: data/dialogs/objects/computers.dlg:113
 msgid "You have failed to install an Operational System"
 msgstr ""
 
-#: data/dialogs/objects/computers.dlg:119
+#: data/dialogs/objects/computers.dlg:127
 msgid ""
 "(You see a blue screen with some hexadecimal codes. There's nothing you can "
 "do except restart the system.)"
 msgstr ""
 
-#: data/dialogs/objects/computers.dlg:123
+#: data/dialogs/objects/computers.dlg:131
 msgid "Restart"
 msgstr ""
 
-#: data/dialogs/objects/computers.dlg:132
+#: data/dialogs/objects/computers.dlg:140
 msgid "(You see a debian-like aptitude at the computer's main screen)"
 msgstr ""
 
-#: data/dialogs/objects/computers.dlg:145
+#: data/dialogs/objects/computers.dlg:153
 msgid "(You see a pacman-like figure at computer's main screen)"
 msgstr ""
 
@@ -3253,36 +3275,36 @@ msgstr ""
 msgid "Insert the code from the letter"
 msgstr ""
 
-#: data/dialogs/objects/compdeck.dlg:16
+#: data/dialogs/objects/compdeck.dlg:17
 msgid "Try a random password"
 msgstr ""
 
-#: data/dialogs/objects/compdeck.dlg:23
+#: data/dialogs/objects/compdeck.dlg:25
 msgid "Search for a buffer overflow"
 msgstr ""
 
-#: data/dialogs/objects/compdeck.dlg:30 data/dialogs/objects/compdeck.dlg:48
-#: data/dialogs/objects/compdeck.dlg:68 data/dialogs/objects/compdeck.dlg:83
+#: data/dialogs/objects/compdeck.dlg:33 data/dialogs/objects/compdeck.dlg:51
+#: data/dialogs/objects/compdeck.dlg:71 data/dialogs/objects/compdeck.dlg:86
 msgid "Leave the computer"
 msgstr ""
 
-#: data/dialogs/objects/compdeck.dlg:40
+#: data/dialogs/objects/compdeck.dlg:43
 msgid "(You've entered an wrong code)"
 msgstr ""
 
-#: data/dialogs/objects/compdeck.dlg:45
+#: data/dialogs/objects/compdeck.dlg:48
 msgid "Try again"
 msgstr ""
 
-#: data/dialogs/objects/compdeck.dlg:57
+#: data/dialogs/objects/compdeck.dlg:60
 msgid "(You've got full access to the computer)"
 msgstr ""
 
-#: data/dialogs/objects/compdeck.dlg:63
+#: data/dialogs/objects/compdeck.dlg:66
 msgid "Copy all information to Logan's notebook"
 msgstr ""
 
-#: data/dialogs/objects/compdeck.dlg:78
+#: data/dialogs/objects/compdeck.dlg:81
 msgid "(You couldn't find any flaws)"
 msgstr ""
 
@@ -3413,7 +3435,7 @@ msgid "(The door doesn't seem to listen you.)"
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:6
-msgid "Ah, so finally you awake!"
+msgid "Ah, you're finally awake!"
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:10 data/dialogs/tutorial/santa.dlg:10
@@ -3422,11 +3444,11 @@ msgid "Who are you?"
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:19
-msgid "I am Logan, maintainer of this squatter."
+msgid "I am Logan, maintainer of this squatting."
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:23
-msgid "Squatter? Is this, the cleanest house I've ever seen, an squatter?"
+msgid "A squatting? This is the cleanest house I've ever seen!"
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:26 data/dialogs/tutorial/logan.dlg:55
@@ -3436,8 +3458,8 @@ msgstr ""
 #: data/dialogs/tutorial/logan.dlg:35
 msgid ""
 "We found you bleeding unconscious near the waterfall. For the sake of our "
-"ideals, Mattar, <the Forgotten>, healed all your wounds. (You're lucky: the "
-"scalpel was expelled with your faeces yesterday!)"
+"ideals, Mattar 'the Forgotten' healed your wounds. You're lucky too, you "
+"expelled the scalpel yesterday!"
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:39
@@ -3446,12 +3468,12 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:42 data/dialogs/tutorial/logan.dlg:58
 #: data/dialogs/tutorial/logan.dlg:74
-msgid "What do you want of me?"
+msgid "What do you want from me?"
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:51
 msgid ""
-"Yes, squatter. A clean and sweet squatter that also serves as a healing "
+"Yes, a squatting. A clean and sweet squatting that also serves as a healing "
 "clinic for people with big tongues and no gratitude!"
 msgstr ""
 
@@ -3460,26 +3482,26 @@ msgid "Shut up and die!"
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:70
-msgid "Our ideal? It's not the time to tell you about that."
+msgid "Our ideals? It's not the time to tell you about that."
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:83
 msgid ""
-"Ah, some time ago I've lost our Chrono Trigger Snes cartridge, just find it "
-"for us."
+"Ah, some time ago I've lost our Chrono Trigger SNES cartridge. Find it for "
+"us!"
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:88
-msgid "Where it can be?"
+msgid "Where could it be?"
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:91
-msgid "Ok, I'll search for it"
+msgid "Okay, I'll search for it"
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:96
 msgid ""
-"But everyone knows that Chrono is lost in time! It's impossible to take him "
+"But everybody knows that Chrono is lost in time! It's impossible to take him "
 "from Lavos!"
 msgstr ""
 
@@ -3488,7 +3510,7 @@ msgid "Never! Chrono took 3 years from me! I'll kill you!"
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:116
-msgid "You still haven't found our Chrono Trigger Snes cartridge!"
+msgid "You still haven't found our Chrono Trigger SNES cartridge!"
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:120
@@ -3496,11 +3518,11 @@ msgid "I'm still looking..."
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:123
-msgid "Oh, Chrono Trigger! This name resounds good memories in my head."
+msgid "Oh, Chrono Trigger! That name brings back good memories."
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:132
-msgid "Here! Chrono is here! Let me play it!"
+msgid "You got it! Chrono is back! Let me play it!"
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:136
@@ -3523,8 +3545,8 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:169
 msgid ""
-"I want another thing from you. Some dangerous living creatures are infesting "
-"the subterranean areas of the bunker school. Please, exterminate them all."
+"I want another thing from you. Some dangerous creatures infested the "
+"subterranean areas of the bunker school. Please, exterminate them all."
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:173
@@ -3555,22 +3577,22 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:220
 msgid ""
-"No, you are wrong. Chrono is lost somewhere in the Bunker School. Go take a "
-"look..."
+"No, you're wrong. Chrono is lost somewhere in the Bunker School. Search for "
+"it there."
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:224 data/dialogs/tutorial/logan.dlg:239
-msgid "Ok, I'll look for it."
+msgid "Okay, I'll look for it."
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:235
 msgid ""
-"Ahm, last time I saw him was in the Bunker School, when I was riping it to "
-"play online with zsnes."
+"Ahm, last time I saw it in the Bunker School, when I was riping it to play "
+"online via ZSNES."
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:250
-msgid "About the extermination, have you done it?"
+msgid "About the extermination, have you finished the job?"
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:254 data/dialogs/tutorial/dona.dlg:208
@@ -3579,11 +3601,11 @@ msgid "Not yet."
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:258
-msgid "Yes, there's no living thing there..."
+msgid "Yes, there's nothing left alive there..."
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:269
-msgid "The Heroes of Lesser Renown? That's true, I'll call them."
+msgid "The Heroes of Lesser Renown? Good idea, I'll call them."
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:273
@@ -3592,8 +3614,8 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:282
 msgid ""
-"Give this to the Atleticano at the other part of this house and he'll see "
-"that I've sent you. Maybe he can help you."
+"Give this to the Atleticano in the other part of this building and he'll see "
+"that I sent you. Maybe he can help you."
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:297
@@ -3614,12 +3636,12 @@ msgid ""
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:320
-msgid "I've forgot!"
+msgid "I forgot!"
 msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:329
 #: data/dialogs/tutorial/atleticano.dlg:120
-#: data/dialogs/tutorial/cruzeirense.dlg:83
+#: data/dialogs/tutorial/cruzeirense.dlg:89
 #: data/dialogs/tutorial/hippie.dlg:206 data/dialogs/tutorial/dona.dlg:283
 msgid ""
 "I have nothing else for you in this version of DNT. Come back when there is "
@@ -3634,11 +3656,12 @@ msgstr ""
 #: data/dialogs/tutorial/hippie.dlg:89 data/dialogs/tutorial/hippie.dlg:210
 #: data/dialogs/tutorial/dona.dlg:152 data/dialogs/tutorial/dona.dlg:261
 #: data/dialogs/tutorial/dona.dlg:274 data/dialogs/tutorial/dona.dlg:287
+#: data/dialogs/tutorial/kids_snes.dlg:44
 msgid "Bye."
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:6
-msgid "Wanna some milk, kid?"
+msgid "Want some milk, kid?"
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:19
@@ -3652,7 +3675,7 @@ msgstr ""
 #: data/dialogs/tutorial/santa.dlg:41
 msgid ""
 "He was the owner of a worldwide factory, with thousands of slaves. His name? "
-"Santa Claws. (Same as me)."
+"Santa Claws. Same as mine."
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:46
@@ -3660,7 +3683,7 @@ msgid "Mr. Santa Claws of Cica Cula? Ow..."
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:58
-msgid "Yes, the great Santa Claws! (I was named in honour of him)."
+msgid "Yes, the great Santa Claws! I was named in honor of him."
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:71
@@ -3685,8 +3708,7 @@ msgid "No."
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:91
-msgid ""
-"I need you to install a Ruindows on the squatter's notebook. Will you do it?"
+msgid "I need you to install Ruindows on the squatter's notebook."
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:96
@@ -3699,7 +3721,8 @@ msgid "For sure!"
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:108
-msgid "Yes. (but inside you something is telling you to take another action)"
+msgid ""
+"Yes. (But a voice inside of you is telling you to take another action...)"
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:120
@@ -3709,7 +3732,7 @@ msgstr ""
 #: data/dialogs/tutorial/santa.dlg:124 data/dialogs/tutorial/santa.dlg:137
 #: data/dialogs/tutorial/hippie.dlg:115 data/dialogs/tutorial/hippie.dlg:181
 #: data/dialogs/tutorial/hippie.dlg:223 data/dialogs/tutorial/dona.dlg:94
-#: data/dialogs/tutorial/dona.dlg:107
+#: data/dialogs/tutorial/dona.dlg:107 data/dialogs/tutorial/kids_snes.dlg:10
 msgid "(Close dialog)"
 msgstr ""
 
@@ -3724,16 +3747,16 @@ msgstr ""
 #: data/dialogs/tutorial/santa.dlg:150 data/dialogs/tutorial/santa.dlg:228
 #: data/dialogs/tutorial/atleticano.dlg:90
 #: data/dialogs/tutorial/atleticano.dlg:111
-#: data/dialogs/tutorial/cruzeirense.dlg:87
-msgid "Ok."
+#: data/dialogs/tutorial/cruzeirense.dlg:93
+msgid "Okay."
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:153
-msgid "Ok. (you look suspiciously at Santa Claws' notebook)"
+msgid "Okay. (You look suspiciously at Santa Claws' notebook.)"
 msgstr ""
 
-#: data/dialogs/tutorial/santa.dlg:162 data/dialogs/tutorial/santa.dlg:237
-msgid "So you've installed it! Soon the blue screen will rule the world!"
+#: data/dialogs/tutorial/santa.dlg:162
+msgid "So you installed it! Soon, the blue screen will rule the world!"
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:167 data/dialogs/tutorial/santa.dlg:242
@@ -3747,8 +3770,8 @@ msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:188
 msgid ""
-"You've installed a linux on my notebook? But... it's the cause of it's not "
-"freezing up anymore? How can I feel at home now?"
+"You installed Linux on my notebook? But... it's not freezing up any more! "
+"How can I ever feel at home now?"
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:192
@@ -3760,11 +3783,15 @@ msgid "Linux rocks!"
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:208
-msgid "Now, Ruindows at the Hippie's computer!"
+msgid "Now get Ruindows onto the Hippie's computer!"
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:224
-msgid "I'm waiting for you install the Ruindows on the hippie's computer!"
+msgid "I'm waiting for you install Ruindows on the Hippie's computer!"
+msgstr ""
+
+#: data/dialogs/tutorial/santa.dlg:237
+msgid "You installed it! Soon the blue screen will rule the world!"
 msgstr ""
 
 #: data/dialogs/tutorial/santa.dlg:258
@@ -3808,7 +3835,7 @@ msgid "Please, don't do anything bad to us!"
 msgstr ""
 
 #: data/dialogs/tutorial/atleticano.dlg:60
-msgid "And so I am."
+msgid "And so am I."
 msgstr ""
 
 #: data/dialogs/tutorial/atleticano.dlg:73
@@ -3816,27 +3843,26 @@ msgid "So you're the one Logan found. I need something from you."
 msgstr ""
 
 #: data/dialogs/tutorial/atleticano.dlg:77
-#: data/dialogs/tutorial/cruzeirense.dlg:57
-msgid "What's it?"
+msgid "What's that?"
 msgstr ""
 
 #: data/dialogs/tutorial/atleticano.dlg:86
 msgid ""
-"The thing is: the Cruzeirense here is having some problems, but he refuses "
-"to talk about that. Give him a soda can and let him talk."
+"The thing is: the Cruzeirense over there is having some problem, but refuses "
+"to talk about it. Get him a soda can to make him spill the beans."
 msgstr ""
 
 #: data/dialogs/tutorial/atleticano.dlg:96
-msgid "If I have enough time!"
+msgid "I'll do it if I find the time!"
 msgstr ""
 
 #: data/dialogs/tutorial/atleticano.dlg:107
 #: data/dialogs/tutorial/cruzeirense.dlg:6
-msgid "I'm very busy now."
+msgid "I'm very busy right now."
 msgstr ""
 
 #: data/dialogs/tutorial/cruzeirense.dlg:10
-msgid "I'll come back later"
+msgid "I'll come back later."
 msgstr ""
 
 #: data/dialogs/tutorial/cruzeirense.dlg:20
@@ -3844,34 +3870,42 @@ msgid "What now?"
 msgstr ""
 
 #: data/dialogs/tutorial/cruzeirense.dlg:25
-msgid "I have something for you."
+msgid "(Give soda can) I have something for you."
 msgstr ""
 
-#: data/dialogs/tutorial/cruzeirense.dlg:29
+#: data/dialogs/tutorial/cruzeirense.dlg:30
 msgid "Ehr, nothing."
 msgstr ""
 
-#: data/dialogs/tutorial/cruzeirense.dlg:39
+#: data/dialogs/tutorial/cruzeirense.dlg:40
 msgid "Oh, soda!"
 msgstr ""
 
-#: data/dialogs/tutorial/cruzeirense.dlg:43
+#: data/dialogs/tutorial/cruzeirense.dlg:44
 msgid "I need some info from you."
 msgstr ""
 
-#: data/dialogs/tutorial/cruzeirense.dlg:53
+#: data/dialogs/tutorial/cruzeirense.dlg:54
 msgid ""
-"I can give any information you want, but, first, I need you to do something."
+"I can give any information you want, but first, I need you to do something."
 msgstr ""
 
-#: data/dialogs/tutorial/cruzeirense.dlg:67
-msgid ""
-"Some chickens are threaten me. You must go to the wasteland place they are "
-"and finish them!"
+#: data/dialogs/tutorial/cruzeirense.dlg:58
+msgid "What is it?"
 msgstr ""
 
-#: data/dialogs/tutorial/cruzeirense.dlg:71
+#: data/dialogs/tutorial/cruzeirense.dlg:69
+msgid ""
+"Some chickens are threatening me. You must go to the wasteland where they "
+"are and finish them!"
+msgstr ""
+
+#: data/dialogs/tutorial/cruzeirense.dlg:73
 msgid "I'm on it!"
+msgstr ""
+
+#: data/dialogs/tutorial/cruzeirense.dlg:79
+msgid "I need to do something first."
 msgstr ""
 
 #: data/dialogs/tutorial/hippie.dlg:6
@@ -3903,7 +3937,7 @@ msgid "Ouch... another freak out!"
 msgstr ""
 
 #: data/dialogs/tutorial/hippie.dlg:62
-msgid "Bro, I need things from you... Or we'll be wasted!"
+msgid "Bro, I need something from you... Or we'll be wasted!"
 msgstr ""
 
 #: data/dialogs/tutorial/hippie.dlg:66
@@ -3940,8 +3974,8 @@ msgstr ""
 
 #: data/dialogs/tutorial/hippie.dlg:124
 msgid ""
-"I need some kind of crazy ration to my chickens. But The Farm refuses to "
-"give it to me. Can you get some for me? But remember: without blood!"
+"I need this crazy ration for my chickens. But The Farmer refuses to give it "
+"to me. Can you get a bag for me? But remember: without blood!"
 msgstr ""
 
 #: data/dialogs/tutorial/hippie.dlg:128
@@ -3953,11 +3987,10 @@ msgid "I can't! I love bloody work!"
 msgstr ""
 
 #: data/dialogs/tutorial/hippie.dlg:143
-msgid "I'm waiting for my thing, bro."
+msgid "I'm waiting for my ration, bro."
 msgstr ""
 
-#: data/dialogs/tutorial/hippie.dlg:147 data/dialogs/tutorial/dona.dlg:194
-#: data/dialogs/tutorial/dona.dlg:227
+#: data/dialogs/tutorial/hippie.dlg:147
 msgid "I'll get it."
 msgstr ""
 
@@ -3990,7 +4023,7 @@ msgid "Hello stranger!"
 msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:11
-msgid "I need some chicken ration."
+msgid "I need a chicken ration."
 msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:14
@@ -4042,7 +4075,7 @@ msgid "Pig!"
 msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:103
-msgid "Neither I."
+msgid "Neither am I."
 msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:116
@@ -4054,11 +4087,11 @@ msgid "The F.S.C. Hippie told me you have some."
 msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:124
-msgid "I'm an enthusiast of chicken rations."
+msgid "I'm a chicken ration enthusiast."
 msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:132
-msgid "Because I want!"
+msgid "Give me a ration. Or else!"
 msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:145
@@ -4066,7 +4099,7 @@ msgid "I won't sell anything more to that lazy hippie."
 msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:149
-msgid "Maybe if I do some favor to you?"
+msgid "Maybe I can do something for you in return?"
 msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:161
@@ -4083,12 +4116,16 @@ msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:190
 msgid ""
-"Uhm, there's something I'll want later from you. But first, I'll need some "
-"ingredients for the ration. A mushroom..."
+"Uhm, there's something I'll want you to do for me later. But I also need two "
+"ingredients for the ration. First, a mushroom."
+msgstr ""
+
+#: data/dialogs/tutorial/dona.dlg:194 data/dialogs/tutorial/dona.dlg:227
+msgid "I'll get one."
 msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:204
-msgid "Have you got the mushroom?"
+msgid "Do you have a mushroom?"
 msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:212 data/dialogs/tutorial/dona.dlg:245
@@ -4096,35 +4133,96 @@ msgid "Here it is."
 msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:223
-msgid "Great. Now I want an egg"
+msgid "Great! Now I need an egg."
 msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:237
-msgid "Have you got the egg?"
+msgid "Did you get an egg?"
 msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:257
-msgid "Done. Come back later to do me your favor."
+msgid "Done! Come back later to pay off the debt."
 msgstr ""
 
 #: data/dialogs/tutorial/dona.dlg:270
 msgid "What a world! Threats, threats and more threats..."
 msgstr ""
 
+#: data/dialogs/tutorial/kids_snes.dlg:6
+msgid "Hey, a grownup!"
+msgstr ""
+
+#: data/dialogs/tutorial/kids_snes.dlg:19
+msgid ""
+"Hey, I heard Logan got a SNES cartridge from you. Did you know that nearly "
+"all of them melted or were magnetized from 'the big explosion'? I could give "
+"you some money if you bring me working game cartridges."
+msgstr ""
+
+#: data/dialogs/tutorial/kids_snes.dlg:23
+#: data/dialogs/tutorial/kids_snes.dlg:60
+#: data/dialogs/tutorial/kids_snes.dlg:78
+msgid "I'll see what I can do."
+msgstr ""
+
+#: data/dialogs/tutorial/kids_snes.dlg:27
+msgid "What do you plan to do with them?"
+msgstr ""
+
+#: data/dialogs/tutorial/kids_snes.dlg:30
+#: data/dialogs/tutorial/kids_snes.dlg:64
+#: data/dialogs/tutorial/kids_snes.dlg:82
+msgid "I do not work for a cartridge delivery shop!"
+msgstr ""
+
+#: data/dialogs/tutorial/kids_snes.dlg:40
+msgid "Great!"
+msgstr ""
+
+#: data/dialogs/tutorial/kids_snes.dlg:53
+msgid ""
+"When my mother was able to make photos, she would put old books in website "
+"libraries or something like that. I want to do that with old games, or else "
+"people might forget how it feels to play them or they might even fall into "
+"bad people's hands."
+msgstr ""
+
+#: data/dialogs/tutorial/kids_snes.dlg:57
+msgid "Bad people?"
+msgstr ""
+
+#: data/dialogs/tutorial/kids_snes.dlg:74
+msgid ""
+"Well, I don't really know any. That's just what Mom used to say. Will you "
+"get game cartridges for me?"
+msgstr ""
+
+#: data/dialogs/tutorial/kids_snes.dlg:92
+msgid "Hey, got any SNES cartridges for me?"
+msgstr ""
+
+#: data/dialogs/tutorial/kids_snes.dlg:97
+msgid "(Sell all cartridges in your inventory) Yes."
+msgstr ""
+
+#: data/dialogs/tutorial/kids_snes.dlg:101
+msgid "No, I don't."
+msgstr ""
+
 #: data/missions/tutorial/mission1.mis:2
-msgid "Find Chrono Trigger cartdrige for Logan."
+msgid "Find Chrono Trigger SNES cartdrige for Logan."
 msgstr ""
 
 #: data/missions/tutorial/mission2.mis:2
-msgid "Exterminate all living Creatures at Bunker School."
+msgid "Exterminate the creatures at Bunker School for Logan."
 msgstr ""
 
 #: data/missions/tutorial/mission3.mis:2
-msgid "Install Ruindows at the squatter's notebook for Santa Claws."
+msgid "Install Ruindows on the notebook in the clinic for Santa Claws."
 msgstr ""
 
 #: data/missions/tutorial/mission4.mis:2
-msgid "Fight for Cruzeirense."
+msgid "Fight chicken for Cruzeirense."
 msgstr ""
 
 #: data/missions/tutorial/hippie1.mis:2
@@ -4286,6 +4384,10 @@ msgstr ""
 msgid "Guitar"
 msgstr ""
 
+#: data/models/objetos/geral/guitarra/guitarra.dcc:2
+msgid "A guitar in not so good shape, with scratches here and there."
+msgstr ""
+
 #: data/models/objetos/geral/estante/estante.dcc:1
 msgid "Shelf"
 msgstr ""
@@ -4374,7 +4476,7 @@ msgid "Chicken Ration"
 msgstr ""
 
 #: data/models/objetos/itens/racao/racao.dcc:2
-msgid "A packet of delicious chicken ration. Smells like corn."
+msgid "A bag of delicious chicken ration. Smells like corn."
 msgstr ""
 
 #: data/models/objetos/itens/healkit/healkit.dcc:1
@@ -4451,8 +4553,8 @@ msgstr ""
 
 #: data/models/objetos/vinyls/zappa_apostrophe.dcc:2
 msgid ""
-"It seems that someone recorded some stories about Nanook, the Eskimo  on "
-"this disk."
+"It seems that someone recorded some stories about Nanook, the Eskimo on this "
+"disk."
 msgstr ""
 
 #: data/models/objetos/vinyls/banco_darwin.dcc:2
@@ -4815,7 +4917,7 @@ msgid "Santa Claws"
 msgstr ""
 
 #: data/characters/pcs/velhaca.pc:1
-msgid "Old Ladie"
+msgid "Old Lady"
 msgstr ""
 
 #: data/characters/npcs/lvl1/ameiva_lvl1.npc:1

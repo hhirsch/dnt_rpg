@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2012-07-11 03:55+0200\n"
+"POT-Creation-Date: 2012-07-26 13:09-0300\n"
 "PO-Revision-Date: 2010-05-06 06:48+0000\n"
 "Last-Translator: Cédric VALMARY (Tot en òc) <cvalmary@yahoo.fr>\n"
 "Language-Team: Occitan (post 1500) <oc@li.org>\n"
@@ -28,8 +28,8 @@ msgstr "%s ensajar d'atacar %s"
 msgid "%s tries to heal %s"
 msgstr "%s ensajar de sonhar %s"
 
-#: src/classes/actions.cpp:176 src/classes/actions.cpp:462
-#: src/classes/feats.cpp:301 src/classes/feats.cpp:354
+#: src/classes/actions.cpp:176 src/classes/actions.cpp:463
+#: src/classes/feats.cpp:302 src/classes/feats.cpp:355
 msgid "Too far away for action!"
 msgstr "Tròp luènh per aquesta accion !"
 
@@ -37,45 +37,45 @@ msgstr "Tròp luènh per aquesta accion !"
 msgid "Enemy out of sight!"
 msgstr ""
 
-#: src/classes/actions.cpp:283 src/classes/actions.cpp:305
-#: src/classes/actions.cpp:553 src/classes/actions.cpp:557
+#: src/classes/actions.cpp:281 src/classes/actions.cpp:303
+#: src/classes/actions.cpp:552 src/classes/actions.cpp:556
 msgid "Miss."
 msgstr "Mancat."
 
-#: src/classes/actions.cpp:286 src/classes/actions.cpp:290
+#: src/classes/actions.cpp:284 src/classes/actions.cpp:288
 msgid "Critical Miss!"
 msgstr "Fracàs Critic !"
 
-#: src/classes/actions.cpp:332
+#: src/classes/actions.cpp:330
 #, c-format
 msgid "Healed %d points."
 msgstr ""
 
-#: src/classes/actions.cpp:343 src/classes/actions.cpp:590
+#: src/classes/actions.cpp:341 src/classes/actions.cpp:589
 #, c-format
 msgid "Hit at a vital area, inflicting %d points of damage."
 msgstr ""
 
-#: src/classes/actions.cpp:348 src/classes/actions.cpp:595
+#: src/classes/actions.cpp:346 src/classes/actions.cpp:594
 #, c-format
 msgid "Hit for %d points."
 msgstr "Tòca de %d punts."
 
-#: src/classes/actions.cpp:368 src/classes/actions.cpp:371
+#: src/classes/actions.cpp:366 src/classes/actions.cpp:369
 msgid "Critical Heal!"
 msgstr ""
 
-#: src/classes/actions.cpp:376 src/classes/actions.cpp:380
-#: src/classes/actions.cpp:604 src/classes/actions.cpp:609
+#: src/classes/actions.cpp:374 src/classes/actions.cpp:378
+#: src/classes/actions.cpp:610 src/classes/actions.cpp:615
 msgid "Critical Hit!"
 msgstr "Tòca Critica !"
 
-#: src/classes/actions.cpp:454
+#: src/classes/actions.cpp:455
 #, fuzzy, c-format
 msgid "%s tries to attack an area."
 msgstr "%s ensajar d'atacar %s"
 
-#: src/classes/actions.cpp:640 src/fight/fightSystem.cpp:189
+#: src/classes/actions.cpp:646 src/fight/fightSystem.cpp:189
 #, c-format
 msgid "%s is dead!"
 msgstr "%s es mòrt !"
@@ -96,22 +96,27 @@ msgstr "Reflèxe"
 msgid "I am Not a Fool"
 msgstr "Soi pas un piòt"
 
-#: src/classes/feats.cpp:220
+#: src/classes/feats.cpp:221
 msgid "Invalid Talent"
 msgstr "Don invalid"
 
-#: src/classes/feats.cpp:242 src/engine/dccnit.cpp:2273
+#: src/classes/feats.cpp:243 src/engine/dccnit.cpp:2303
 msgid "Not enought points to use!"
 msgstr ""
 
-#: src/classes/mission.cpp:531 src/engine/dialog.cpp:1267
+#: src/classes/mission.cpp:573 src/engine/dialog.cpp:1280
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "Mission complida : %d XP !"
 
-#: src/classes/mission.cpp:549 src/classes/mission.cpp:552
+#: src/classes/mission.cpp:600 src/classes/mission.cpp:603
 msgid "Mission Failure!"
 msgstr "Fracàs de la Mission !"
+
+#: src/classes/thing.cpp:371
+#, c-format
+msgid "%s advanced a level!"
+msgstr ""
 
 #: src/engine/alignwindow.cpp:50
 msgid "Tendency & Alignment"
@@ -119,7 +124,7 @@ msgstr "Tendéncia & Alinhament"
 
 #: src/engine/alignwindow.cpp:76 src/engine/aspectwindow.cpp:97
 #: src/engine/attwindow.cpp:242 src/engine/classwindow.cpp:120
-#: src/engine/featsel.cpp:255 src/engine/options.cpp:1162
+#: src/engine/featsel.cpp:255 src/engine/options.cpp:1180
 #: src/engine/racewindow.cpp:122 src/engine/skillwindow.cpp:162
 #: src/engine/teste.cpp:67
 msgid "Confirm"
@@ -128,7 +133,7 @@ msgstr "Confirmar"
 #: src/engine/alignwindow.cpp:80 src/engine/aspectwindow.cpp:101
 #: src/engine/attwindow.cpp:246 src/engine/barterwindow.cpp:72
 #: src/engine/classwindow.cpp:124 src/engine/featsel.cpp:259
-#: src/engine/options.cpp:1166 src/engine/racewindow.cpp:126
+#: src/engine/options.cpp:1184 src/engine/racewindow.cpp:126
 #: src/engine/skillwindow.cpp:165 src/engine/teste.cpp:68
 msgid "Cancel"
 msgstr "Anullar"
@@ -199,9 +204,9 @@ msgstr "Carisme"
 msgid "Attribute Description"
 msgstr "Descripcion dels atributs"
 
-#: src/engine/attwindow.cpp:559 src/engine/dccnit.cpp:612
-#: src/engine/dccnit.cpp:2272 src/engine/featsel.cpp:495
-#: src/engine/inventwindow.cpp:369 src/engine/options.cpp:1476
+#: src/engine/attwindow.cpp:559 src/engine/dccnit.cpp:613
+#: src/engine/dccnit.cpp:2302 src/engine/featsel.cpp:495
+#: src/engine/inventwindow.cpp:369 src/engine/options.cpp:1495
 msgid "Warning"
 msgstr "Avertiment"
 
@@ -209,7 +214,7 @@ msgstr "Avertiment"
 msgid "You Need to Assign All Attributes."
 msgstr "Vos cal distribuir totes los atributs."
 
-#: src/engine/barterwindow.cpp:56 src/engine/dialog.cpp:1559
+#: src/engine/barterwindow.cpp:56 src/engine/dialog.cpp:1572
 msgid "Barter"
 msgstr "Tròc"
 
@@ -262,7 +267,12 @@ msgstr "Succès"
 msgid "Failure"
 msgstr "Fracàs"
 
-#: src/engine/character.cpp:604 src/engine/charwindow.cpp:141
+#: src/engine/character.cpp:675
+#, c-format
+msgid "%s: %d level(s) to up"
+msgstr ""
+
+#: src/engine/character.cpp:696 src/engine/charwindow.cpp:141
 msgid "HP"
 msgstr "PV"
 
@@ -401,65 +411,65 @@ msgstr "Competéncias de la classa"
 msgid "No Skills."
 msgstr "Pas de Competéncias."
 
-#: src/engine/dccnit.cpp:553 src/engine/dccnit.cpp:603
+#: src/engine/dccnit.cpp:554 src/engine/dccnit.cpp:604
 msgid "Error"
 msgstr "Error"
 
-#: src/engine/dccnit.cpp:553
+#: src/engine/dccnit.cpp:554
 msgid "Can't load the saved game!"
 msgstr "Pòt pas cargar lo jòc !"
 
-#: src/engine/dccnit.cpp:598
+#: src/engine/dccnit.cpp:599
 msgid "Information"
 msgstr "Informacion"
 
-#: src/engine/dccnit.cpp:599
+#: src/engine/dccnit.cpp:600
 msgid "The game was saved!"
 msgstr "Lo jòc es estat salvat !"
 
-#: src/engine/dccnit.cpp:603
+#: src/engine/dccnit.cpp:604
 msgid "Can't save game!"
 msgstr "Pòt pas salvar lo jòc !"
 
-#: src/engine/dccnit.cpp:613
+#: src/engine/dccnit.cpp:614
 msgid "Can't save game while fighting!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:775
+#: src/engine/dccnit.cpp:776
 msgid "Saving Current Map Modifications"
 msgstr ""
 
-#: src/engine/dccnit.cpp:810
+#: src/engine/dccnit.cpp:811
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Cargament de la Mapa : %s"
 
-#: src/engine/dccnit.cpp:840
+#: src/engine/dccnit.cpp:841
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Cargament del PNJ : %s"
 
-#: src/engine/dccnit.cpp:877
+#: src/engine/dccnit.cpp:878
 msgid "Creating MiniMap"
 msgstr "Creacion d'una Mapa miniatura"
 
-#: src/engine/dccnit.cpp:883
+#: src/engine/dccnit.cpp:884
 msgid "Putting GUI on Screen"
 msgstr "Afichatge per interfàcia grafica"
 
-#: src/engine/dccnit.cpp:910
+#: src/engine/dccnit.cpp:911
 msgid "Loading Particles"
 msgstr "Cargament de las Particulas"
 
-#: src/engine/dccnit.cpp:939
+#: src/engine/dccnit.cpp:940
 msgid "Loading Changes..."
 msgstr "Cargament de las modificacions..."
 
-#: src/engine/dccnit.cpp:961
+#: src/engine/dccnit.cpp:962
 msgid "Done!"
 msgstr "Acabat !"
 
-#: src/engine/dccnit.cpp:1173
+#: src/engine/dccnit.cpp:1174
 msgid ""
 "DNT is relesead under GPLv3 or later: Feel free to use its source code and "
 "data the way you want (or to blame us the same way). DNT is thankful to the "
@@ -467,85 +477,85 @@ msgid ""
 "SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1786
+#: src/engine/dccnit.cpp:1807
 msgid "Too far away for the action!"
 msgstr "Tròp luènh per aquesta accion !"
 
-#: src/engine/dccnit.cpp:1803
+#: src/engine/dccnit.cpp:1824
 msgid "Couldn't rest at battle mode."
 msgstr "Impossible de se repausar en mòde combat."
 
-#: src/engine/dccnit.cpp:1809
+#: src/engine/dccnit.cpp:1830
 msgid "Enemies nearby."
 msgstr "Enemics pròches."
 
-#: src/engine/dccnit.cpp:1913
+#: src/engine/dccnit.cpp:1869
+msgid "Exit Battle Mode"
+msgstr "Quitar lo Mòde Combat"
+
+#: src/engine/dccnit.cpp:1943
 msgid "No NPCs in the area."
 msgstr "Pas de PNJ dins la zòna"
 
-#: src/engine/dccnit.cpp:1971
+#: src/engine/dccnit.cpp:2001
 msgid "Surprise Attack Turn."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1984
+#: src/engine/dccnit.cpp:2014
 msgid "No enemies in the area."
 msgstr "Pas d'enemics dins la zòna."
 
-#: src/engine/dccnit.cpp:2493
+#: src/engine/dccnit.cpp:2523
 #, c-format
 msgid "%s taken."
 msgstr "%s pres."
 
-#: src/engine/dccnit.cpp:2521
+#: src/engine/dccnit.cpp:2551
 msgid "Inventory is full!"
 msgstr "L'inventari es comol !"
 
-#: src/engine/dccnit.cpp:2543
+#: src/engine/dccnit.cpp:2573
 msgid "Door"
 msgstr "Pòrta"
 
-#: src/engine/dccnit.cpp:2591
+#: src/engine/dccnit.cpp:2648
 msgid "dead"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2643
+#: src/engine/dccnit.cpp:2701
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s atacs %s"
 
-#: src/engine/dccnit.cpp:2905
+#: src/engine/dccnit.cpp:2966
 msgid "No more actions. Turn ended."
 msgstr "Pas d'accions suplementàrias. Fin del torn."
 
-#: src/engine/dccnit.cpp:3328
+#: src/engine/dccnit.cpp:3389
 msgid "A* could not find a path!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:4315
-msgid "Exit Battle Mode"
-msgstr "Quitar lo Mòde Combat"
-
-#: src/engine/dialog.cpp:1295
+#: src/engine/dialog.cpp:1308
 #, c-format
 msgid "%s lost."
 msgstr "%s perdut."
 
-#: src/engine/dialog.cpp:1339
+#: src/engine/dialog.cpp:1352
 #, c-format
 msgid "Received %s."
 msgstr "Recebut %s."
 
-#: src/engine/dialog.cpp:1349
+#: src/engine/dialog.cpp:1362
 #, c-format
 msgid "Received $%d."
 msgstr "%d $ recebuts."
 
-#: src/engine/dialog.cpp:1358
+#: src/engine/dialog.cpp:1371
 #, c-format
 msgid "Lost $%d."
 msgstr "%d $ perduts."
 
-#: src/engine/dialog.cpp:1552
+#: src/engine/dialog.cpp:1565
 msgid "Dialog"
 msgstr "Dialòg"
 
@@ -585,7 +595,7 @@ msgstr "Salvar"
 msgid "Load"
 msgstr "Cargar"
 
-#: src/engine/initial.cpp:95 src/engine/options.cpp:844
+#: src/engine/initial.cpp:95 src/engine/options.cpp:852
 msgid "Options"
 msgstr "Opcions"
 
@@ -874,162 +884,166 @@ msgstr "Acorchis de clavièr"
 msgid "Character Info"
 msgstr "Informacion sul Personatge"
 
-#: src/engine/options.cpp:625 src/engine/options.cpp:652
+#: src/engine/options.cpp:633 src/engine/options.cpp:660
 #: data/weapons/types/munitions.dcl:2
 msgid "None"
 msgstr "Pas cap"
 
-#: src/engine/options.cpp:630
+#: src/engine/options.cpp:638
 msgid "Characters"
 msgstr "Personatges"
 
-#: src/engine/options.cpp:635
+#: src/engine/options.cpp:643
 msgid "All"
 msgstr "Totes"
 
-#: src/engine/options.cpp:657
+#: src/engine/options.cpp:665
 msgid "Projective"
 msgstr "Projeccion"
 
-#: src/engine/options.cpp:673 data/weapons/types/sizes.dcl:3
+#: src/engine/options.cpp:681 data/weapons/types/sizes.dcl:3
 #: data/weapons/types/weights.dcl:3
 msgid "Normal"
 msgstr "Normal"
 
-#: src/engine/options.cpp:676
+#: src/engine/options.cpp:684
 msgid "Pursue"
 msgstr ""
 
-#: src/engine/options.cpp:692 src/engine/options.cpp:712
-#: src/engine/options.cpp:734
+#: src/engine/options.cpp:700 src/engine/options.cpp:720
+#: src/engine/options.cpp:742
 msgid "Disabled"
 msgstr "Desactivat"
 
-#: src/engine/options.cpp:737
+#: src/engine/options.cpp:745
 msgid "2x"
 msgstr "2x"
 
-#: src/engine/options.cpp:740
+#: src/engine/options.cpp:748
 msgid "4x"
 msgstr "4x"
 
-#: src/engine/options.cpp:855
+#: src/engine/options.cpp:863
 msgid "Input"
 msgstr "Entrada"
 
-#: src/engine/options.cpp:858
+#: src/engine/options.cpp:866
 msgid "Windows"
 msgstr "Fenèstras"
 
-#: src/engine/options.cpp:861
+#: src/engine/options.cpp:869
 msgid "Character"
 msgstr "Personatge"
 
-#: src/engine/options.cpp:864
+#: src/engine/options.cpp:872
 msgid "Camera"
 msgstr "Camèra"
 
-#: src/engine/options.cpp:869
+#: src/engine/options.cpp:877
 msgid "Audio"
 msgstr "Àudio"
 
-#: src/engine/options.cpp:873
+#: src/engine/options.cpp:881
 msgid "Music Volume:"
 msgstr "Volum de la musica :"
 
-#: src/engine/options.cpp:890
+#: src/engine/options.cpp:898
 msgid "Effects Volume:"
 msgstr "Volum dels efièches :"
 
-#: src/engine/options.cpp:907
+#: src/engine/options.cpp:915
 msgid "Video"
 msgstr "Vidèo"
 
-#: src/engine/options.cpp:915
+#: src/engine/options.cpp:923
 msgid "Screen Resolution:"
 msgstr "Resolucion d'ecran :"
 
-#: src/engine/options.cpp:930
+#: src/engine/options.cpp:938
 msgid "Enable FullScreen"
 msgstr "Activar l'ecran complet"
 
-#: src/engine/options.cpp:939
+#: src/engine/options.cpp:947
 msgid "Enable Grass Effects (need particles)"
 msgstr ""
 
-#: src/engine/options.cpp:948
+#: src/engine/options.cpp:956
 msgid "Enable Particles Effects"
 msgstr ""
 
-#: src/engine/options.cpp:960
+#: src/engine/options.cpp:968
 msgid "Enable Anisotropic Filter"
 msgstr ""
 
-#: src/engine/options.cpp:971
+#: src/engine/options.cpp:979
 msgid "Enable bump mapping"
 msgstr ""
 
-#: src/engine/options.cpp:985
+#: src/engine/options.cpp:993
 msgid "Splatting:"
 msgstr ""
 
-#: src/engine/options.cpp:1002
+#: src/engine/options.cpp:1010
 msgid "Stencil Buffer:"
 msgstr "Stencil Buffer :"
 
-#: src/engine/options.cpp:1019
+#: src/engine/options.cpp:1027
 msgid "Reflections:"
 msgstr "Reflèctes :"
 
-#: src/engine/options.cpp:1036
+#: src/engine/options.cpp:1044
 msgid "Shadows:"
 msgstr "Ombras :"
 
-#: src/engine/options.cpp:1052
+#: src/engine/options.cpp:1060
 msgid "Anti-Aliasing:"
 msgstr "Anti-Aliasing :"
 
-#: src/engine/options.cpp:1067
+#: src/engine/options.cpp:1075
 msgid "FarView:"
 msgstr ""
 
-#: src/engine/options.cpp:1083
+#: src/engine/options.cpp:1091
 msgid "Game"
 msgstr "Jòc"
 
-#: src/engine/options.cpp:1089
+#: src/engine/options.cpp:1097
 msgid "Language:"
 msgstr "Lenga :"
 
-#: src/engine/options.cpp:1106
+#: src/engine/options.cpp:1114
 msgid "Camera Mode:"
 msgstr "Mòde de la Camèra :"
 
-#: src/engine/options.cpp:1122
+#: src/engine/options.cpp:1130
 msgid "Auto End Turn"
 msgstr "Fin de Torn Automatica"
 
-#: src/engine/options.cpp:1131
+#: src/engine/options.cpp:1139
 msgid "Always Run"
 msgstr ""
 
-#: src/engine/options.cpp:1140
+#: src/engine/options.cpp:1148
+msgid "Always Highlight Connections"
+msgstr ""
+
+#: src/engine/options.cpp:1158
 msgid "Show Enemy Battle Circle"
 msgstr ""
 
-#: src/engine/options.cpp:1149
+#: src/engine/options.cpp:1167
 msgid "Highlight current enemy"
 msgstr ""
 
-#: src/engine/options.cpp:1477
+#: src/engine/options.cpp:1496
 msgid "Some changes will only take effect upon restart."
 msgstr ""
 
-#: src/engine/options.cpp:1523
+#: src/engine/options.cpp:1542
 msgid "Press a key to: "
 msgstr ""
 
-#: src/engine/options.cpp:1526
+#: src/engine/options.cpp:1545
 msgid "Waiting..."
 msgstr "En espèra ..."
 
@@ -1143,17 +1157,27 @@ msgstr "Error : Pas cap de personatge !"
 msgid "%s's turn."
 msgstr "Torn de %s."
 
-#: src/fight/initiative.cpp:57
+#: src/fight/initiative.cpp:56
 #, c-format
 msgid "%s rolls initiative: "
 msgstr ""
+
+#: src/ia/iascript.cpp:2459
+#, fuzzy, c-format
+msgid "%s lost %s."
+msgstr "%s perdut."
+
+#: src/ia/iascript.cpp:2486
+#, fuzzy, c-format
+msgid "%s received $%.2f."
+msgstr "%d $ recebuts."
 
 #: data/comics/intro/intro.dcb:15
 msgid "Once Upon a time, there was a happy university called UFMG..."
 msgstr ""
 
 #: data/comics/intro/intro.dcb:25
-msgid "People there used to live peacefull lives"
+msgid "People there used to live peaceful lives"
 msgstr ""
 
 #: data/comics/intro/intro.dcb:35
@@ -1167,30 +1191,30 @@ msgid "When something happened..."
 msgstr "Quand quicòm se passa..."
 
 #: data/comics/intro/intro.dcb:47
-msgid "a big explosion, with unknown causes."
+msgid "a big explosion, with unknown cause."
 msgstr ""
 
 #: data/comics/intro/intro.dcb:61
 msgid ""
-"It made the happy and peacefull city called Belo Horizonte be known as "
+"It made the happy and peaceful city called Belo Horizonte be known as "
 "Horrivel Horizonte."
 msgstr ""
 
 #: data/comics/intro/intro.dcb:71
-msgid "Trees became alive,"
+#, fuzzy
+msgid "Trees became alive..."
 msgstr "Los arbres venguèron vius,"
 
 #: data/comics/intro/intro.dcb:73
-msgid "Ameivas became agressive"
+msgid "Ameivas became aggressive..."
 msgstr ""
 
 #: data/comics/intro/intro.dcb:75
-msgid "and rats became blood thirsty."
+msgid "and rats became blood thirsty..."
 msgstr ""
 
 #: data/comics/intro/intro.dcb:85
-msgid ""
-"From this chaotic scene, emerged the main race that would dominate the land:"
+msgid "From this chaotic scene, emerged a group, that would dominate the land:"
 msgstr ""
 
 #: data/comics/intro/intro.dcb:87
@@ -1198,18 +1222,17 @@ msgid "UNIVERSITY STUDENTS!"
 msgstr "LOS ESTUDIANTS UNIVERSITARIS !"
 
 #: data/comics/intro/intro.dcb:89
-msgid ""
-"who desired to, at all costs, obtain their legendary levels of knowledge."
+msgid "They desired - at any cost - to obtain legendary levels of knowledge."
 msgstr ""
 
 #: data/comics/intro/intro.dcb:103
 msgid ""
-"On this doomed world, thanks to the risen journalists, tales were told and "
-"spread by word of mouth, saying that"
+"On this doomed world, the risen journalists spread a tale by word of mouth..."
 msgstr ""
 
 #: data/comics/intro/intro.dcb:113
-msgid "the first man who came and proclaimed his right to graduate"
+msgid ""
+"saying that the first man who came and proclaimed his right to graduate..."
 msgstr ""
 
 #: data/comics/intro/intro.dcb:123
@@ -1217,7 +1240,8 @@ msgid "was Logan."
 msgstr ""
 
 #: data/comics/intro/intro.dcb:125
-msgid "And that's how the tale began..."
+#, fuzzy
+msgid "And that is how the tale began..."
 msgstr "Atal comencèt l'istòria..."
 
 #: data/comics/other/mjack/mjack.dcb:15
@@ -3254,36 +3278,36 @@ msgstr ""
 msgid "Insert the code from the letter"
 msgstr ""
 
-#: data/dialogs/objects/compdeck.dlg:16
+#: data/dialogs/objects/compdeck.dlg:17
 msgid "Try a random password"
 msgstr ""
 
-#: data/dialogs/objects/compdeck.dlg:23
+#: data/dialogs/objects/compdeck.dlg:25
 msgid "Search for a buffer overflow"
 msgstr ""
 
-#: data/dialogs/objects/compdeck.dlg:30 data/dialogs/objects/compdeck.dlg:48
-#: data/dialogs/objects/compdeck.dlg:68 data/dialogs/objects/compdeck.dlg:83
+#: data/dialogs/objects/compdeck.dlg:33 data/dialogs/objects/compdeck.dlg:51
+#: data/dialogs/objects/compdeck.dlg:71 data/dialogs/objects/compdeck.dlg:86
 msgid "Leave the computer"
 msgstr ""
 
-#: data/dialogs/objects/compdeck.dlg:40
+#: data/dialogs/objects/compdeck.dlg:43
 msgid "(You've entered an wrong code)"
 msgstr ""
 
-#: data/dialogs/objects/compdeck.dlg:45
+#: data/dialogs/objects/compdeck.dlg:48
 msgid "Try again"
 msgstr ""
 
-#: data/dialogs/objects/compdeck.dlg:57
+#: data/dialogs/objects/compdeck.dlg:60
 msgid "(You've got full access to the computer)"
 msgstr ""
 
-#: data/dialogs/objects/compdeck.dlg:63
+#: data/dialogs/objects/compdeck.dlg:66
 msgid "Copy all information to Logan's notebook"
 msgstr ""
 
-#: data/dialogs/objects/compdeck.dlg:78
+#: data/dialogs/objects/compdeck.dlg:81
 msgid "(You couldn't find any flaws)"
 msgstr ""
 
@@ -3437,7 +3461,7 @@ msgstr ""
 #: data/dialogs/tutorial/logan.dlg:35
 msgid ""
 "We found you bleeding unconscious near the waterfall. For the sake of our "
-"ideals, Mattar \"the Forgotten\" healed your wounds. You're lucky too, you "
+"ideals, Mattar 'the Forgotten' healed your wounds. You're lucky too, you "
 "expelled the scalpel yesterday!"
 msgstr ""
 
@@ -3621,7 +3645,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:329
 #: data/dialogs/tutorial/atleticano.dlg:120
-#: data/dialogs/tutorial/cruzeirense.dlg:83
+#: data/dialogs/tutorial/cruzeirense.dlg:89
 #: data/dialogs/tutorial/hippie.dlg:206 data/dialogs/tutorial/dona.dlg:283
 msgid ""
 "I have nothing else for you in this version of DNT. Come back when there is "
@@ -3636,6 +3660,7 @@ msgstr ""
 #: data/dialogs/tutorial/hippie.dlg:89 data/dialogs/tutorial/hippie.dlg:210
 #: data/dialogs/tutorial/dona.dlg:152 data/dialogs/tutorial/dona.dlg:261
 #: data/dialogs/tutorial/dona.dlg:274 data/dialogs/tutorial/dona.dlg:287
+#: data/dialogs/tutorial/kids_snes.dlg:44
 msgid "Bye."
 msgstr "Adissiatz."
 
@@ -3711,7 +3736,7 @@ msgstr ""
 #: data/dialogs/tutorial/santa.dlg:124 data/dialogs/tutorial/santa.dlg:137
 #: data/dialogs/tutorial/hippie.dlg:115 data/dialogs/tutorial/hippie.dlg:181
 #: data/dialogs/tutorial/hippie.dlg:223 data/dialogs/tutorial/dona.dlg:94
-#: data/dialogs/tutorial/dona.dlg:107
+#: data/dialogs/tutorial/dona.dlg:107 data/dialogs/tutorial/kids_snes.dlg:10
 msgid "(Close dialog)"
 msgstr "(Fin del dialòg)"
 
@@ -3726,7 +3751,7 @@ msgstr ""
 #: data/dialogs/tutorial/santa.dlg:150 data/dialogs/tutorial/santa.dlg:228
 #: data/dialogs/tutorial/atleticano.dlg:90
 #: data/dialogs/tutorial/atleticano.dlg:111
-#: data/dialogs/tutorial/cruzeirense.dlg:87
+#: data/dialogs/tutorial/cruzeirense.dlg:93
 msgid "Okay."
 msgstr ""
 
@@ -3851,39 +3876,43 @@ msgid "What now?"
 msgstr "E ara ?"
 
 #: data/dialogs/tutorial/cruzeirense.dlg:25
-msgid "I have something for you."
+msgid "(Give soda can) I have something for you."
 msgstr ""
 
-#: data/dialogs/tutorial/cruzeirense.dlg:29
+#: data/dialogs/tutorial/cruzeirense.dlg:30
 msgid "Ehr, nothing."
 msgstr ""
 
-#: data/dialogs/tutorial/cruzeirense.dlg:39
+#: data/dialogs/tutorial/cruzeirense.dlg:40
 msgid "Oh, soda!"
 msgstr ""
 
-#: data/dialogs/tutorial/cruzeirense.dlg:43
+#: data/dialogs/tutorial/cruzeirense.dlg:44
 msgid "I need some info from you."
 msgstr ""
 
-#: data/dialogs/tutorial/cruzeirense.dlg:53
+#: data/dialogs/tutorial/cruzeirense.dlg:54
 msgid ""
 "I can give any information you want, but first, I need you to do something."
 msgstr ""
 
-#: data/dialogs/tutorial/cruzeirense.dlg:57
+#: data/dialogs/tutorial/cruzeirense.dlg:58
 #, fuzzy
 msgid "What is it?"
 msgstr "Qu'es aquò ?"
 
-#: data/dialogs/tutorial/cruzeirense.dlg:67
+#: data/dialogs/tutorial/cruzeirense.dlg:69
 msgid ""
 "Some chickens are threatening me. You must go to the wasteland where they "
 "are and finish them!"
 msgstr ""
 
-#: data/dialogs/tutorial/cruzeirense.dlg:71
+#: data/dialogs/tutorial/cruzeirense.dlg:73
 msgid "I'm on it!"
+msgstr ""
+
+#: data/dialogs/tutorial/cruzeirense.dlg:79
+msgid "I need to do something first."
 msgstr ""
 
 #: data/dialogs/tutorial/hippie.dlg:6
@@ -4126,20 +4155,82 @@ msgstr ""
 msgid "What a world! Threats, threats and more threats..."
 msgstr ""
 
+#: data/dialogs/tutorial/kids_snes.dlg:6
+msgid "Hey, a grownup!"
+msgstr ""
+
+#: data/dialogs/tutorial/kids_snes.dlg:19
+msgid ""
+"Hey, I heard Logan got a SNES cartridge from you. Did you know that nearly "
+"all of them melted or were magnetized from 'the big explosion'? I could give "
+"you some money if you bring me working game cartridges."
+msgstr ""
+
+#: data/dialogs/tutorial/kids_snes.dlg:23
+#: data/dialogs/tutorial/kids_snes.dlg:60
+#: data/dialogs/tutorial/kids_snes.dlg:78
+msgid "I'll see what I can do."
+msgstr ""
+
+#: data/dialogs/tutorial/kids_snes.dlg:27
+msgid "What do you plan to do with them?"
+msgstr ""
+
+#: data/dialogs/tutorial/kids_snes.dlg:30
+#: data/dialogs/tutorial/kids_snes.dlg:64
+#: data/dialogs/tutorial/kids_snes.dlg:82
+msgid "I do not work for a cartridge delivery shop!"
+msgstr ""
+
+#: data/dialogs/tutorial/kids_snes.dlg:40
+#, fuzzy
+msgid "Great!"
+msgstr "Genial."
+
+#: data/dialogs/tutorial/kids_snes.dlg:53
+msgid ""
+"When my mother was able to make photos, she would put old books in website "
+"libraries or something like that. I want to do that with old games, or else "
+"people might forget how it feels to play them or they might even fall into "
+"bad people's hands."
+msgstr ""
+
+#: data/dialogs/tutorial/kids_snes.dlg:57
+msgid "Bad people?"
+msgstr ""
+
+#: data/dialogs/tutorial/kids_snes.dlg:74
+msgid ""
+"Well, I don't really know any. That's just what Mom used to say. Will you "
+"get game cartridges for me?"
+msgstr ""
+
+#: data/dialogs/tutorial/kids_snes.dlg:92
+msgid "Hey, got any SNES cartridges for me?"
+msgstr ""
+
+#: data/dialogs/tutorial/kids_snes.dlg:97
+msgid "(Sell all cartridges in your inventory) Yes."
+msgstr ""
+
+#: data/dialogs/tutorial/kids_snes.dlg:101
+msgid "No, I don't."
+msgstr ""
+
 #: data/missions/tutorial/mission1.mis:2
-msgid "Find Chrono Trigger cartdrige for Logan."
+msgid "Find Chrono Trigger SNES cartdrige for Logan."
 msgstr ""
 
 #: data/missions/tutorial/mission2.mis:2
-msgid "Exterminate all living Creatures at Bunker School."
+msgid "Exterminate the creatures at Bunker School for Logan."
 msgstr ""
 
 #: data/missions/tutorial/mission3.mis:2
-msgid "Install Ruindows at the squatter's notebook for Santa Claws."
+msgid "Install Ruindows on the notebook in the clinic for Santa Claws."
 msgstr ""
 
 #: data/missions/tutorial/mission4.mis:2
-msgid "Fight for Cruzeirense."
+msgid "Fight chicken for Cruzeirense."
 msgstr ""
 
 #: data/missions/tutorial/hippie1.mis:2
@@ -4299,6 +4390,10 @@ msgstr ""
 
 #: data/models/objetos/geral/guitarra/guitarra.dcc:1
 msgid "Guitar"
+msgstr ""
+
+#: data/models/objetos/geral/guitarra/guitarra.dcc:2
+msgid "A guitar in not so good shape, with scratches here and there."
 msgstr ""
 
 #: data/models/objetos/geral/estante/estante.dcc:1
