@@ -94,7 +94,7 @@ dialog(5)
    pc_begin
       option 
          pre_test = have_item_with_info("SNES cartridge")
-         text = gettext("Yes. (Sell all cartridges in your inventory)")
+         text = gettext("(Sell all cartridges in your inventory) Yes.")
          action = call_script("missions/tyrol_kids/tyrol_kids.dsl")
          action = go_to_dialog(2)
       option
