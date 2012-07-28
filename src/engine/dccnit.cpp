@@ -2831,6 +2831,7 @@ int engine::treatIO(SDL_Surface *screen)
    bool timePass = false;    // The time to update passes ?
    bool run = false;         // Is to run, instead of walk ?
    float curWalkInterval = 0.0f; // Current Active Character walk interval
+   float curTurnInterval = 0.0f; // Current character turn interval
    Uint32 time;              // Actual Time
    GLfloat varX, varZ;       // to avoid GLfloat calculate
    GLfloat dist;
@@ -3189,10 +3190,12 @@ int engine::treatIO(SDL_Surface *screen)
          {
             curWalkInterval = activeCharacter->walk_interval * 
                ENGINE_RUN_MULTIPLIER;
+            curTurnInterval = TURN_VALUE * ENGINE_RUN_MULTIPLIER;
          }
          else
          {
             curWalkInterval = activeCharacter->walk_interval;
+            curTurnInterval = TURN_VALUE;
          }
 
          /* Keys to character's movimentation */
@@ -3238,9 +3241,9 @@ int engine::treatIO(SDL_Surface *screen)
             walkStatus = ENGINE_WALK_KEYS;
             // CounterClockWise Character turn
             if( (keys[option->getKey(DNT_KEY_ROTATE_LEFT)]) && 
-                  (canWalk(0,0,TURN_VALUE)) )  
+                  (canWalk(0,0,curTurnInterval)) )  
             {
-               ori += TURN_VALUE;
+               ori += curTurnInterval;
                if(ori > 360.0f)
                { 
                   ori -= 360.0f;
@@ -3250,9 +3253,9 @@ int engine::treatIO(SDL_Surface *screen)
             }
             // Clockwise Character Turn
             if( (keys[option->getKey(DNT_KEY_ROTATE_RIGHT)]) && 
-                  (canWalk(0,0,-TURN_VALUE)) )
+                  (canWalk(0,0,-curTurnInterval)) )
             {
-               ori -= TURN_VALUE;
+               ori -= curTurnInterval;
                if(ori < 0.0f)
                {
                   ori += 360.0f;
