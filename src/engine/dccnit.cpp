@@ -3190,7 +3190,7 @@ int engine::treatIO(SDL_Surface *screen)
          {
             curWalkInterval = activeCharacter->walk_interval * 
                ENGINE_RUN_MULTIPLIER;
-            curTurnInterval = TURN_VALUE * ENGINE_RUN_MULTIPLIER;
+            curTurnInterval = TURN_VALUE * ENGINE_RUN_TURN_MULTIPLIER;
          }
          else
          {
