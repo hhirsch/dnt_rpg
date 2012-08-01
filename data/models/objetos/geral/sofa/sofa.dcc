@@ -1,5 +1,5 @@
 name = gettext("Sofa")
-cal3d = models/objetos/geral/sofa/model.cfg
+cal3d = models/objetos/geral/sofa/sofa.md5def
 inventory_sizes = 0 0
 inventory_texture = texturas/na.png
 life_points = 250
