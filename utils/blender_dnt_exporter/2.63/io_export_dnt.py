@@ -633,8 +633,10 @@ class ExportDNTMD5(bpy.types.Operator, ExportHelper):
 
         # Save previous action to restore latter
         armature = meshObjects[0].find_armature()
-        previousAction = armature.animation_data.action
-        previousFrame = bpy.context.scene.frame_current
+        
+        if(armature.animation_data):
+           previousAction = armature.animation_data.action
+           previousFrame = bpy.context.scene.frame_current
 
         # Export each animation
         exportedAnimations = []
