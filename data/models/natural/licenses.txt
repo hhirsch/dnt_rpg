@@ -16,3 +16,13 @@ bush
    license: GPLv2
    source: http://ufoai.sf.net
 
+arvores/deadtrees
+   model author: p0ss
+   model license: CC-BY 3.0
+   model sources:  http://opengameart.org/content/3-dead-trees
+   texture author: OpenFrag and Lemog3D
+   texture license: CC-BY
+   texture source: http://sourceforge.net/projects/openfrag/files/Artwork/
+
+
+

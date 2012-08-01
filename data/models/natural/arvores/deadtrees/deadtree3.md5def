@@ -1,0 +1,17 @@
+# Exported from Blender by DNT md5 exporter
+
+path = models/natural/arvores/deadtrees/
+scale = 26.0
+blendFrames = 4
+
+# Mesh Information
+mesh = deadtree3.md5mesh
+
+# Animations
+
+# Material
+ambient = 1.0 1.0 1.0 1.0 
+diffuse = 0.5218319892883301 0.48215198516845703 0.4727180004119873 1.0 
+specular = 0.0 0.0 0.0 1.0
+shininess = 0.0
+image = texture.png
