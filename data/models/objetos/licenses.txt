@@ -161,12 +161,12 @@ tumbas/ts6
 
 geral/dinner_chair
 geral/dinner_table
-geral/sofa
 geral/wardrobe
    author: Scopia Visual Interfaces Systems, s.l. (http://www.scopia.es)
    license: CC-BY
    sources: http://resources.blogscopia.com
 
+geral/sofa
 geral/pillow
    model author: Scopia Visual Interfaces Systems, s.l. (http://www.scopia.es)
    model license: CC-BY
