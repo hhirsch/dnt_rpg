@@ -291,6 +291,8 @@ void messageController::draw(GLdouble modelView[16], GLdouble projection[16],
 
    GLfloat factor = 1.0f;
 
+   GLfloat z = 0.0;
+
    glDisable(GL_LIGHTING);
    glDisable(GL_FOG);
    glEnable(GL_TEXTURE_2D);
@@ -310,15 +312,17 @@ void messageController::draw(GLdouble modelView[16], GLdouble projection[16],
       glPushMatrix();
       glBegin(GL_QUADS);
          glTexCoord2f(0,1);
-         glVertex2f(winX - msg->halfSize, winY - 16);
+         glVertex3f(winX - msg->halfSize, winY - 16, z);
          glTexCoord2f(factor,1);
-         glVertex2f(winX + msg->halfSize, winY - 16);
+         glVertex3f(winX + msg->halfSize, winY - 16, z);
          glTexCoord2f(factor,0);
-         glVertex2f(winX + msg->halfSize, winY + 16);
+         glVertex3f(winX + msg->halfSize, winY + 16, z);
          glTexCoord2f(0,0);
-         glVertex2f(winX - msg->halfSize, winY + 16);
+         glVertex3f(winX - msg->halfSize, winY + 16, z);
       glEnd();
       glPopMatrix();
+
+      z += 0.1f;
 
       msg->live++;
       if(!msg->isStatic)
