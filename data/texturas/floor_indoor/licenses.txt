@@ -43,6 +43,7 @@ tile3.png
 
 concrete6.png
 plaster3c.png
+plaster3c_2.png
 wood1.png1
   Author: TRaK <http://trak.mercenariesguild.net>
   License: MIT
