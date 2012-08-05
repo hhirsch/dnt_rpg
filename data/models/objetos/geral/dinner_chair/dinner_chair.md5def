@@ -1,0 +1,17 @@
+# Exported from Blender by DNT md5 exporter
+
+path = models/objetos/geral/dinner_chair/
+scale = 23.5
+blendFrames = 4
+
+# Mesh Information
+mesh = dinner_chair.md5mesh
+
+# Animations
+
+# Material
+ambient = 1.0 1.0 1.0 1.0 
+diffuse = 0.800000011920929 0.800000011920929 0.800000011920929 1.0 
+specular = 1.0 1.0 1.0 1.0
+shininess = 0.0
+image = texture.png
