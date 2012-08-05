@@ -1,0 +1,99 @@
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(0)
+   npc_begin
+      text = gettext("Hey, a grownup!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("(Close dialog)")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(1)
+   npc_begin
+      text = gettext("Hey, I heard Logan got a SNES cartridge from you. Did you know that nearly all of them melted or were magnetized from 'the big explosion'? I could give you some money if you bring me working game cartridges.")
+   npc_end
+   pc_begin
+      option
+         text = gettext("I'll see what I can do.")
+         action = dialog_init(4)
+         action = go_to_dialog(2)
+      option
+         text = gettext("What do you plan to do with them?")
+         action = go_to_dialog(3)
+      option
+         text = gettext("I'm not going to play package delivery with you!")
+         action = dialog_init(5)
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(2)
+   npc_begin
+      text = gettext("Great!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Bye.")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(3)
+   npc_begin
+      text = gettext("These cartridges are really rare and I just want to help... those who want them the most to own them just on their own. Before I can add copy protection and start searching for the biggest fans, I need to have all the games first.")
+   npc_end
+   pc_begin
+      option
+         text = gettext("I'll see what I can do.")
+         action = dialog_init(4)
+         action = go_to_dialog(2)
+      option
+         text = gettext("Let me think about it.")
+         action = finish_dialog(2)
+      option
+         text = gettext("I'm not going to play package delivery with you!")
+         action = dialog_init(5)
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(4)
+   npc_begin
+      text = gettext("Hey, got any SNES cartridges for me?")
+   npc_end
+   pc_begin
+      option 
+         pre_test = have_item_with_info("SNES cartridge")
+         text = gettext("(Sell all cartridges in your inventory) Yes.")
+         action = call_script("missions/tyrol_kids/tyrol_kids.dsl")
+         action = go_to_dialog(2)
+      option
+         text = gettext("No, I don't.")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(5)
+   npc_begin
+      text = gettext("Go away!")
+   npc_end
+   pc_begin
+      option 
+         text = gettext("(Close dialog)")
+         action = finish_dialog()
+   pc_end
+end_dialog
