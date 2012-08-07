@@ -7,11 +7,15 @@ apple_crate
 bloco1
 bloco2
 bloco3
-caixa1
 madeira1
 pneu
    author: farrer (DNTeam)
    license: GPLv3
+
+caixa1
+   author: farrer (DNTeam)
+   license: GPLv3
+   note: edited by qubodup by using own and public domain photos and clipart, changes are in the public domain
 
 bloco4
    Author: LFA
