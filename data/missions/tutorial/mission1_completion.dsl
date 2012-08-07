@@ -10,9 +10,9 @@ script()
    string matilde
    matilde = "characters/pcs/matilde.pc"
    string ethan
-   matilde = "characters/pcs/ethan.pc"
+   ethan = "characters/pcs/ethan.pc"
    string billy
-   matilde = "characters/pcs/billy.pc"
+   billy = "characters/pcs/billy.pc"
 
    # define tyrol map
    string tyrol

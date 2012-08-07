@@ -43,6 +43,7 @@ BugFixes:
  - Makefiles: Fix for makefiles with broken $(LIBS);
  - MoneyWindow: Don't allow money splits by 0;
  - scripts: accept integers as assigns to float variables;
+ - Fixed skill costs when levelling up in multiple classes;
 
 ================================================
 |                Version 0.9                   |
