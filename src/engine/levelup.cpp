@@ -153,6 +153,11 @@ void levelUp::doLevelUp(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
                      int points = current->getOtherLevelSkillPoints(selClass);
                      current->sk.setAvaiblePoints(points + 
                                                 current->sk.getAvaiblePoints());
+                     /* Apply currect costs */
+                     current->applySkillCosts();
+                     /* Apply selected class costs */
+                     selClass->applySkillCosts(&current->sk);
+
                      skWindow = new skillWindow(&current->sk, gui, 
                                                 current->getLevel(selClass)+1);
                      state = LEVEL_UP_SKILL_WINDOW;
@@ -204,6 +209,7 @@ void levelUp::doLevelUp(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
                   int points = current->getOtherLevelSkillPoints(selClass);
                   current->sk.setAvaiblePoints(current->sk.getAvaiblePoints() -
                                                points);
+                  current->applySkillCosts();
                   /* Must go back to the class window */
                   delete(skWindow);
                   state = LEVEL_UP_CLASS_WINDOW;

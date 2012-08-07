@@ -896,6 +896,9 @@ void character::applySkillCosts()
 {
    int i;
 
+   /* Clear current costs */
+   sk.clearCosts();
+
    /* Apply Race Costs */
    if(actualRace)
    {
