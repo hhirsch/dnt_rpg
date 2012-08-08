@@ -7,6 +7,14 @@ script()
    int snesMsg
    string msg
 
+   # define kids characters, for special messages
+   character matilde 
+   matilde = getNPCByName("characters/pcs/matilde.pc")
+   character ethan
+   ethan = getNPCByName("characters/pcs/ethan.pc")
+   character billy
+   billy = getNPCByName("characters/pcs/billy.pc")
+
    while(true)
 
       # Verify if active character is near
@@ -31,9 +39,21 @@ script()
             if(snesMsg == 1)
                msg = gettext("Where are these cartridges?")
             else if(snesMsg == 2)
-               msg = gettext("Mom would be proud of me")
+               if(SELF_CHARACTER == matilde)
+                  msg = gettext("Mom would be proud of me")
+               else if(SELF_CHARACTER == billy)
+                  msg = gettext("I'll control the game world")
+               else if(SELF_CHARACTER == ethan)
+                  msg = gettext("The world must be freed of games")
+               end
             else
-               msg = gettext("I need to share them")
+               if(SELF_CHARACTER == matilde)
+                  msg = gettext("I need to share them")
+               else if(SELF_CHARACTER == billy)
+                  msg = gettext("I need to add protection to them all")
+               else if(SELF_CHARACTER == ethan)
+                  msg = gettext("I need to destroy them all")
+               end
             end
             showTextStatic(SELF_CHARACTER, msg)
 
