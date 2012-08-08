@@ -49,6 +49,14 @@ wood1.png1
   License: MIT
   Source: http://trak.mercenariesguild.net/node/3 (TRaK4 Texture Set)
   
+plaster2.jpg
+painted1.jpg
+  Author 2011: TRaK <http://trak.mercenariesguild.net>
+  Author 2012: Iwan 'qubodup' Gabovitch <qubodup@gmail.com>
+  Changes: layered plaster2 with painted2, changed color values, layer positions and alpha values of layers
+  License: MIT
+  Source: http://opengameart.org/content/grey-plastered-wall-trak-remix
+
 wall8.jpg
   Author: TRaK <http://trak.mercenariesguild.net>
   License: GPLv2+, CC-BY-SAv3+
