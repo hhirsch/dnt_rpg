@@ -468,6 +468,7 @@ character* fightSystem::getNearestEnemy(character* pers)
          }
          group++;
       }
+      return(enemy);
    }
    
    group = 0;
