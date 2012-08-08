@@ -16,7 +16,7 @@ end_dialog
 ############################################################
 dialog(1)
    npc_begin
-      text = gettext("Hey, I heard Logan got a SNES cartridge from you. Did you know that nearly all of them melted or were magnetized from 'the big explosion'? I could give you some money if you bring me working game cartridges.")
+      text = gettext("Hello, I'm looking for SNES cartridges. There are very few left and I can pay you a bit if you bring them to me. Deal?")
    npc_end
    pc_begin
       option
