@@ -292,7 +292,8 @@
 
 /*! void showText(character c, text string) */
 #define IA_CHARACTER_SHOW_TEXT  "showText"
-/*! void showTextStatic(character c, text string) */
+/*! void showTextStatic(character c, text string)
+ *  void showTextStatic(character c, text string, float r, float g, float b) */
 #define IA_CHARACTER_SHOW_TEXT_STATIC  "showTextStatic"
 
 /*! void openCharacterDialog(character c) */

@@ -25,6 +25,8 @@ using namespace std;
 #include "../engine/dccnit.h"
 #include "../etc/dirs.h"
 
+#include <math.h>
+
 /***********************************************************************
  *                           Constructor                               *
  ***********************************************************************/
@@ -707,6 +709,13 @@ iaVariable* iaScript::getParameter(string& token, string strLine,
    token = nextToken(strLine, pos);
    iaVariable* iv = symbols->getSymbol(token);
 
+   if(token.empty())
+   {
+      /* No token means, no variable 
+       * (got here when calling for parameter get on overriden funcs) */
+      return(NULL);
+   }
+
    if(isFunction(token))
    {
       /* Get the function value */
@@ -804,7 +813,8 @@ int iaScript::getParameteri(string& token, string strLine, unsigned int& pos)
 float iaScript::getParameterf(string& token, string strLine, unsigned int& pos)
 {
    iaVariable* iv = NULL;
-   float val = 0.0f;
+   float val = INFINITY;
+   printf("%f\n", val);
 
    /* Try to get the parameter */
    iv = getParameter(token, strLine, IA_TYPE_FLOAT, pos);
@@ -815,7 +825,7 @@ float iaScript::getParameterf(string& token, string strLine, unsigned int& pos)
       {
          val = *(float*)iv->value;
       }
-      else
+      else if(iv->type == IA_TYPE_INT)
       {
          val = *(int*)iv->value;
       }
@@ -2139,10 +2149,27 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          }
          else if(functionName == IA_CHARACTER_SHOW_TEXT_STATIC)
          {
-            msgCtl.addMessage(dude->scNode->getPosX(), 
+            /* Try to get some color */
+            float r, g, b;
+            r = getParameterf(token, strLine, pos);
+            g = getParameterf(token, strLine, pos);
+            b = getParameterf(token, strLine, pos);
+            printf("%f %f %f\n", r,g,b);
+            printf("%d %d %d\n", isfinite(r),isfinite(g),isfinite(b));
+            if( (isfinite(r)) && (isfinite(g)) && (isfinite(b)) )
+            {
+               msgCtl.addMessage(dude->scNode->getPosX(), 
+                  dude->scNode->getPosY()+dude->scNode->getBoundingBox().max.y, 
+                  dude->scNode->getPosZ(), text,
+                  r, g, b, DNT_FONT_ARIAL, 14, true);
+            }
+            else
+            {
+               msgCtl.addMessage(dude->scNode->getPosX(), 
                   dude->scNode->getPosY()+dude->scNode->getBoundingBox().max.y, 
                   dude->scNode->getPosZ(), text,
                   0.9f, 0.12f, 0.2f, DNT_FONT_ARIAL, 14, true);
+            }
          }
          else if(functionName == IA_CHARACTER_ADD_FEAT)
          {
