@@ -67,7 +67,15 @@ script()
                   msg = gettext("I need to destroy them all")
                end
             end
-            showTextStatic(SELF_CHARACTER, msg)
+
+            # Show the message with specific kid color
+            if(SELF_CHARACTER == matilde)
+               showTextStatic(SELF_CHARACTER, msg, 0.94, 0.65, 0.87)
+            else if(SELF_CHARACTER == billy)
+               showTextStatic(SELF_CHARACTER, msg, 0.6, 0.6, 0.98)
+            else if(SELF_CHARACTER == ethan)
+               showTextStatic(SELF_CHARACTER, msg, 0.53, 0.76, 0.2)
+            end
 
             # Try to walk.
             moveToPosition(SELF_CHARACTER, pX, pZ)
