@@ -35,10 +35,12 @@ script()
             pZ = OWNER_POSZ + (rollDice(3)-2)*rollDice(128)
 
             # Show a message related to the cartridges search
-            snesMsg = rollDice(3)
+            snesMsg = rollDice(4)
             if(snesMsg == 1)
+               # Question about where they are
                msg = gettext("Where are these cartridges?")
             else if(snesMsg == 2)
+               # The real desire of the kids
                if(SELF_CHARACTER == matilde)
                   msg = gettext("Mom would be proud of me")
                else if(SELF_CHARACTER == billy)
@@ -46,7 +48,17 @@ script()
                else if(SELF_CHARACTER == ethan)
                   msg = gettext("The world must be freed of games")
                end
+            else if(snesMsg == 3)
+               # What they feel about it
+               if(SELF_CHARACTER == matilde)
+                  msg = gettext("Can't wait for everyone be pleased with them")
+               else if(SELF_CHARACTER == billy)
+                  msg = gettext("I'm sure there will be lots of interested buyers")
+               else if(SELF_CHARACTER == ethan)
+                  msg = gettext("They are so hard and unfair")
+               end
             else
+               # What they desire
                if(SELF_CHARACTER == matilde)
                   msg = gettext("I need to share them")
                else if(SELF_CHARACTER == billy)
