@@ -14,4 +14,5 @@ elective/feline.fta
 elective/pinocchios_aura.fta
 elective/rough.fta
 elective/strong_will.fta
+law/supreme_bluff.fta
 received/mj_friends_killer.fta
