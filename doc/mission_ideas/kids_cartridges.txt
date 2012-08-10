@@ -1,0 +1,23 @@
+
+by qubodup:
+
+(non-hidden) quest related to the cartridge collecting.
+
+  - It starts as soon as you accept any of the kids' offers.
+  
+  - The quest should be called "Game Cartridge Delivery", description:
+    "There is at least one kid in Tyrol interested in acquiring SNES game
+     cartridges from you. Bring them all the cartridges that you can find!"
+     
+  - It succeeds and gives you some XP as soon as every cartridge is in
+    the inventory of one of the 3 kids. (Perhaps only alive kids
+    should be counted?)
+  
+  - It fails if all kids are dead and the quest has not yet been completed.
+    (If you permanently rejected the alive kid's offers, they should also be
+    counted as "dead" for the sake of calculating the failure?
+    
+  - If you kill (all) the kids or take away/buy away cartridges, the quest
+    should stay unchanged. It's basically a one-time reward for finding and
+    selling all game cartridges.
+
