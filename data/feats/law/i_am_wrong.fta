@@ -9,7 +9,8 @@ icon = feats/Img/i_am_wrong.png
 
 required = CLASS LAW 4
 
-range = 30
+range = 50
+radius = 30
 
 quantity = 1
 costToUse = 1
