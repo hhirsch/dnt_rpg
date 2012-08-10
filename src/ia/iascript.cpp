@@ -814,7 +814,6 @@ float iaScript::getParameterf(string& token, string strLine, unsigned int& pos)
 {
    iaVariable* iv = NULL;
    float val = INFINITY;
-   printf("%f\n", val);
 
    /* Try to get the parameter */
    iv = getParameter(token, strLine, IA_TYPE_FLOAT, pos);
@@ -2154,8 +2153,6 @@ void iaScript::callFunction(iaVariable* var, string strLine,
             r = getParameterf(token, strLine, pos);
             g = getParameterf(token, strLine, pos);
             b = getParameterf(token, strLine, pos);
-            printf("%f %f %f\n", r,g,b);
-            printf("%d %d %d\n", isfinite(r),isfinite(g),isfinite(b));
             if( (isfinite(r)) && (isfinite(g)) && (isfinite(b)) )
             {
                msgCtl.addMessage(dude->scNode->getPosX(), 
