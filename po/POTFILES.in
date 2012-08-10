@@ -265,7 +265,9 @@ data/dialogs/tutorial/atleticano.dlg
 data/dialogs/tutorial/cruzeirense.dlg
 data/dialogs/tutorial/hippie.dlg
 data/dialogs/tutorial/dona.dlg
-data/dialogs/tutorial/kids_snes.dlg
+data/dialogs/tutorial/kid_billy.dlg
+data/dialogs/tutorial/kid_ethan.dlg
+data/dialogs/tutorial/kid_matilde.dlg
 
 #missions
 data/missions/tutorial/mission1.mis
@@ -529,9 +531,9 @@ data/characters/pcs/atleticano.pc
 data/characters/pcs/chico.pc
 data/characters/pcs/cruzeirense.pc
 data/characters/pcs/dona.pc
-data/characters/pcs/guri2.pc
-data/characters/pcs/guria.pc
-data/characters/pcs/guri.pc
+data/characters/pcs/matilde.pc
+data/characters/pcs/billy.pc
+data/characters/pcs/ethan.pc
 data/characters/pcs/hippie.pc
 data/characters/pcs/logan.inv
 data/characters/pcs/logan.pc
@@ -564,5 +566,6 @@ data/characters/npcs/lvl10/spider_lvl10.npc
 
 #scripts
 data/ia/script/general/beggar_idle.dsl
+data/ia/script/general/guri_snes_idle.dsl
 
 

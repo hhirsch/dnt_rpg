@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2012-07-26 13:09-0300\n"
+"POT-Creation-Date: 2012-08-10 10:46-0300\n"
 "PO-Revision-Date: 2011-01-09 09:54+0000\n"
 "Last-Translator: Ahmed Mohammed <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
@@ -527,11 +527,11 @@ msgstr ""
 msgid "%s attacks %s"
 msgstr "%s يهاجم %s"
 
-#: src/engine/dccnit.cpp:2966
+#: src/engine/dccnit.cpp:2967
 msgid "No more actions. Turn ended."
 msgstr ""
 
-#: src/engine/dccnit.cpp:3389
+#: src/engine/dccnit.cpp:3392
 msgid "A* could not find a path!"
 msgstr ""
 
@@ -3657,7 +3657,9 @@ msgstr ""
 #: data/dialogs/tutorial/hippie.dlg:89 data/dialogs/tutorial/hippie.dlg:210
 #: data/dialogs/tutorial/dona.dlg:152 data/dialogs/tutorial/dona.dlg:261
 #: data/dialogs/tutorial/dona.dlg:274 data/dialogs/tutorial/dona.dlg:287
-#: data/dialogs/tutorial/kids_snes.dlg:44
+#: data/dialogs/tutorial/kid_billy.dlg:44
+#: data/dialogs/tutorial/kid_ethan.dlg:44
+#: data/dialogs/tutorial/kid_matilde.dlg:44
 msgid "Bye."
 msgstr ""
 
@@ -3733,7 +3735,12 @@ msgstr ""
 #: data/dialogs/tutorial/santa.dlg:124 data/dialogs/tutorial/santa.dlg:137
 #: data/dialogs/tutorial/hippie.dlg:115 data/dialogs/tutorial/hippie.dlg:181
 #: data/dialogs/tutorial/hippie.dlg:223 data/dialogs/tutorial/dona.dlg:94
-#: data/dialogs/tutorial/dona.dlg:107 data/dialogs/tutorial/kids_snes.dlg:10
+#: data/dialogs/tutorial/dona.dlg:107 data/dialogs/tutorial/kid_billy.dlg:10
+#: data/dialogs/tutorial/kid_billy.dlg:96
+#: data/dialogs/tutorial/kid_ethan.dlg:10
+#: data/dialogs/tutorial/kid_ethan.dlg:96
+#: data/dialogs/tutorial/kid_matilde.dlg:10
+#: data/dialogs/tutorial/kid_matilde.dlg:114
 msgid "(Close dialog)"
 msgstr ""
 
@@ -4149,38 +4156,112 @@ msgstr ""
 msgid "What a world! Threats, threats and more threats..."
 msgstr ""
 
-#: data/dialogs/tutorial/kids_snes.dlg:6
+#: data/dialogs/tutorial/kid_billy.dlg:6 data/dialogs/tutorial/kid_ethan.dlg:6
+#: data/dialogs/tutorial/kid_matilde.dlg:6
 msgid "Hey, a grownup!"
 msgstr ""
 
-#: data/dialogs/tutorial/kids_snes.dlg:19
+#: data/dialogs/tutorial/kid_billy.dlg:19
+msgid ""
+"Hello, I'm looking for SNES cartridges. There are very few left and I can "
+"pay you a bit if you bring them to me. Deal?"
+msgstr ""
+
+#: data/dialogs/tutorial/kid_billy.dlg:23
+#: data/dialogs/tutorial/kid_billy.dlg:57
+#: data/dialogs/tutorial/kid_ethan.dlg:23
+#: data/dialogs/tutorial/kid_ethan.dlg:57
+#: data/dialogs/tutorial/kid_matilde.dlg:23
+#: data/dialogs/tutorial/kid_matilde.dlg:60
+#: data/dialogs/tutorial/kid_matilde.dlg:78
+msgid "I'll see what I can do."
+msgstr ""
+
+#: data/dialogs/tutorial/kid_billy.dlg:27
+#: data/dialogs/tutorial/kid_ethan.dlg:27
+#: data/dialogs/tutorial/kid_matilde.dlg:27
+msgid "What do you plan to do with them?"
+msgstr ""
+
+#: data/dialogs/tutorial/kid_billy.dlg:30
+#: data/dialogs/tutorial/kid_billy.dlg:64
+#: data/dialogs/tutorial/kid_ethan.dlg:30
+#: data/dialogs/tutorial/kid_matilde.dlg:30
+#: data/dialogs/tutorial/kid_matilde.dlg:64
+#: data/dialogs/tutorial/kid_matilde.dlg:82
+msgid "I'm not going to play package delivery with you!"
+msgstr ""
+
+#: data/dialogs/tutorial/kid_billy.dlg:40
+#: data/dialogs/tutorial/kid_ethan.dlg:40
+#: data/dialogs/tutorial/kid_matilde.dlg:40
+msgid "Great!"
+msgstr ""
+
+#: data/dialogs/tutorial/kid_billy.dlg:53
+msgid ""
+"These cartridges are really rare and I just want to help... those who want "
+"them the most to own them just on their own. Before I can add copy "
+"protection and start searching for the biggest fans, I need to have all the "
+"games first."
+msgstr ""
+
+#: data/dialogs/tutorial/kid_billy.dlg:61
+#: data/dialogs/tutorial/kid_ethan.dlg:61
+msgid "Let me think about it."
+msgstr ""
+
+#: data/dialogs/tutorial/kid_billy.dlg:74
+#: data/dialogs/tutorial/kid_ethan.dlg:74
+#: data/dialogs/tutorial/kid_matilde.dlg:92
+msgid "Hey, got any SNES cartridges for me?"
+msgstr ""
+
+#: data/dialogs/tutorial/kid_billy.dlg:79
+#: data/dialogs/tutorial/kid_ethan.dlg:79
+#: data/dialogs/tutorial/kid_matilde.dlg:97
+msgid "(Sell all cartridges in your inventory) Yes."
+msgstr ""
+
+#: data/dialogs/tutorial/kid_billy.dlg:83
+#: data/dialogs/tutorial/kid_ethan.dlg:83
+#: data/dialogs/tutorial/kid_matilde.dlg:101
+msgid "No, I don't."
+msgstr ""
+
+#: data/dialogs/tutorial/kid_billy.dlg:92
+msgid "Go away!"
+msgstr ""
+
+#: data/dialogs/tutorial/kid_ethan.dlg:19
+msgid ""
+"Uh... do you have any SNES cartridges? I really want to get my hands on the "
+"few that are left... Will you take some money in exchange?"
+msgstr ""
+
+#: data/dialogs/tutorial/kid_ethan.dlg:53
+msgid ""
+"I just want to get rid of them all! They are just made by misfits to "
+"frustrate and distract us normal people from important things. And they are "
+"never fair! I have to destroy them all! Please help me find the cartridges."
+msgstr ""
+
+#: data/dialogs/tutorial/kid_ethan.dlg:64
+msgid "No way, I don't work for megalomaniacs!"
+msgstr ""
+
+#: data/dialogs/tutorial/kid_ethan.dlg:92
+msgid "I'm not talking to you!"
+msgstr ""
+
+#: data/dialogs/tutorial/kid_matilde.dlg:19
 msgid ""
 "Hey, I heard Logan got a SNES cartridge from you. Did you know that nearly "
 "all of them melted or were magnetized from 'the big explosion'? I could give "
 "you some money if you bring me working game cartridges."
 msgstr ""
 
-#: data/dialogs/tutorial/kids_snes.dlg:23
-#: data/dialogs/tutorial/kids_snes.dlg:60
-#: data/dialogs/tutorial/kids_snes.dlg:78
-msgid "I'll see what I can do."
-msgstr ""
-
-#: data/dialogs/tutorial/kids_snes.dlg:27
-msgid "What do you plan to do with them?"
-msgstr ""
-
-#: data/dialogs/tutorial/kids_snes.dlg:30
-#: data/dialogs/tutorial/kids_snes.dlg:64
-#: data/dialogs/tutorial/kids_snes.dlg:82
-msgid "I do not work for a cartridge delivery shop!"
-msgstr ""
-
-#: data/dialogs/tutorial/kids_snes.dlg:40
-msgid "Great!"
-msgstr ""
-
-#: data/dialogs/tutorial/kids_snes.dlg:53
+#: data/dialogs/tutorial/kid_matilde.dlg:53
 msgid ""
 "When my mother was able to make photos, she would put old books in website "
 "libraries or something like that. I want to do that with old games, or else "
@@ -4188,26 +4269,18 @@ msgid ""
 "bad people's hands."
 msgstr ""
 
-#: data/dialogs/tutorial/kids_snes.dlg:57
+#: data/dialogs/tutorial/kid_matilde.dlg:57
 msgid "Bad people?"
 msgstr ""
 
-#: data/dialogs/tutorial/kids_snes.dlg:74
+#: data/dialogs/tutorial/kid_matilde.dlg:74
 msgid ""
 "Well, I don't really know any. That's just what Mom used to say. Will you "
 "get game cartridges for me?"
 msgstr ""
 
-#: data/dialogs/tutorial/kids_snes.dlg:92
-msgid "Hey, got any SNES cartridges for me?"
-msgstr ""
-
-#: data/dialogs/tutorial/kids_snes.dlg:97
-msgid "(Sell all cartridges in your inventory) Yes."
-msgstr ""
-
-#: data/dialogs/tutorial/kids_snes.dlg:101
-msgid "No, I don't."
+#: data/dialogs/tutorial/kid_matilde.dlg:110
+msgid "Leave me alone!"
 msgstr ""
 
 #: data/missions/tutorial/mission1.mis:2
@@ -4908,11 +4981,6 @@ msgstr "خفيف"
 msgid "Heavy"
 msgstr "ثقيل"
 
-#: data/characters/pcs/guri2.pc:1 data/characters/pcs/guria.pc:1
-#: data/characters/pcs/guri.pc:1
-msgid "Child"
-msgstr ""
-
 #: data/characters/pcs/santa.pc:1
 msgid "Santa Claws"
 msgstr "سانتا كلوز"
@@ -5009,6 +5077,46 @@ msgstr ""
 
 #: data/ia/script/general/beggar_idle.dsl:39
 msgid "I cook with wine"
+msgstr ""
+
+#: data/ia/script/general/guri_snes_idle.dsl:41
+msgid "Where are these cartridges?"
+msgstr ""
+
+#: data/ia/script/general/guri_snes_idle.dsl:45
+msgid "Mom would be proud of me"
+msgstr ""
+
+#: data/ia/script/general/guri_snes_idle.dsl:47
+msgid "I'll control the game world"
+msgstr ""
+
+#: data/ia/script/general/guri_snes_idle.dsl:49
+msgid "The world must be freed of games"
+msgstr ""
+
+#: data/ia/script/general/guri_snes_idle.dsl:54
+msgid "Can't wait for everyone be pleased with them"
+msgstr ""
+
+#: data/ia/script/general/guri_snes_idle.dsl:56
+msgid "I'm sure there will be lots of interested buyers"
+msgstr ""
+
+#: data/ia/script/general/guri_snes_idle.dsl:58
+msgid "They are so hard and unfair"
+msgstr ""
+
+#: data/ia/script/general/guri_snes_idle.dsl:63
+msgid "I need to share them"
+msgstr ""
+
+#: data/ia/script/general/guri_snes_idle.dsl:65
+msgid "I need to add protection to them all"
+msgstr ""
+
+#: data/ia/script/general/guri_snes_idle.dsl:67
+msgid "I need to destroy them all"
 msgstr ""
 
 #~ msgid "Nothing"
