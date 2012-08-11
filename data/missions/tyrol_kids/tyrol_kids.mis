@@ -1,0 +1,4 @@
+# Game Cartridge Delivery
+area = Tyrol
+description = gettext("Game Cartridge Delivery: There is at least one kid in Tyrol interested in acquiring SNES game cartridges from you. Bring them all the cartridges that you can find!")
+script = missions/tyrol_kids/tyrol_kids_main.dsl

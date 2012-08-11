@@ -1,6 +1,6 @@
 /* 
   DNT: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2011 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DNT.
  
@@ -562,8 +562,29 @@ object* inventory::getItemByInfo(string relatedInfo)
          return(res);
       }
    }
-
+   
    return(NULL);
 }
 
+/**************************************************************
+ *                      countItemByInfo                       *
+ **************************************************************/
+int inventory::countItemByInfo(string relatedInfo)
+{
+   int res = 0;
 
+   /* First, search at the normal slots */
+   int i;
+   for(i=0; i<INVENTORY_PER_CHARACTER; i++)
+   {
+      res += slots[i]->countItemByInfo(relatedInfo);
+   }
+
+   /* Next search at the equipped ones */
+   for(i = 0; i < INVENTORY_TOTAL_PLACES; i++)
+   {
+      res += equippedSlots[i]->countItemByInfo(relatedInfo);
+   }
+   
+   return(res);
+}

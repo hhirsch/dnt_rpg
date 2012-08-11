@@ -21,8 +21,12 @@ dialog(1)
    pc_begin
       option
          text = gettext("I'll see what I can do.")
-         action = dialog_init(4)
-         action = go_to_dialog(2)
+         post_test = mission_active("missions/tyrol_kids/tyrol_kids_main.dsl")
+         if_action = dialog_init(4)
+         if_action = go_to_dialog(2)
+         else_action = add_mission("missions/tyrol_kids/tyrol_kids.mis")
+         else_action = dialog_init(4)
+         else_action = go_to_dialog(2)
       option
          text = gettext("What do you plan to do with them?")
          action = go_to_dialog(3)
@@ -55,8 +59,12 @@ dialog(3)
    pc_begin
       option
          text = gettext("I'll see what I can do.")
-         action = dialog_init(4)
-         action = go_to_dialog(2)
+         post_test = mission_active("missions/tyrol_kids/tyrol_kids_main.dsl")
+         if_action = dialog_init(4)
+         if_action = go_to_dialog(2)
+         else_action = add_mission("missions/tyrol_kids/tyrol_kids.mis")
+         else_action = dialog_init(4)
+         else_action = go_to_dialog(2)
       option
          text = gettext("Let me think about it.")
          action = finish_dialog(2)
@@ -90,6 +98,45 @@ end_dialog
 dialog(5)
    npc_begin
       text = gettext("I'm not talking to you!")
+   npc_end
+   pc_begin
+      option 
+         text = gettext("(Close dialog)")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#  Dialog: Ethan Have all                                  #
+############################################################
+dialog(6)
+   npc_begin
+      text = gettext("Thanks for giving me the game cartridges. They are the last ones. Now I can rid the world of them once and for all!")
+   npc_end
+   pc_begin
+      option 
+         text = gettext("(Close dialog)")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#  Dialog: Matilde Have all                                #
+############################################################
+dialog(7)
+   npc_begin
+      text = gettext("Matilde will spread the games to everyone and the serious real world will be lost forever!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("(Close dialog)")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#  Dialog: Billy Have all                                  #
+############################################################
+dialog(8)
+   npc_begin
+      text = gettext("Not so bad that with Billy the game illness will be so restrict to not affect too many people after all...")
    npc_end
    pc_begin
       option 

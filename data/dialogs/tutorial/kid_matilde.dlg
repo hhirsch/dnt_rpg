@@ -21,8 +21,12 @@ dialog(1)
    pc_begin
       option
          text = gettext("I'll see what I can do.")
-         action = dialog_init(5)
-         action = go_to_dialog(2)
+         post_test = mission_active("missions/tyrol_kids/tyrol_kids_main.dsl")
+         if_action = dialog_init(5)
+         if_action = go_to_dialog(2)
+         else_action = add_mission("missions/tyrol_kids/tyrol_kids.mis")
+         else_action = dialog_init(5)
+         else_action = go_to_dialog(2)
       option
          text = gettext("What do you plan to do with them?")
          action = go_to_dialog(3)
@@ -58,8 +62,12 @@ dialog(3)
          action = go_to_dialog(4)
       option
          text = gettext("I'll see what I can do.")
-         action = dialog_init(5)
-         action = go_to_dialog(2)
+         post_test = mission_active("missions/tyrol_kids/tyrol_kids_main.dsl")
+         if_action = dialog_init(5)
+         if_action = go_to_dialog(2)
+         else_action = add_mission("missions/tyrol_kids/tyrol_kids.mis")
+         else_action = dialog_init(5)
+         else_action = go_to_dialog(2)
       option
          text = gettext("I'm not going to play package delivery with you!")
          action = dialog_init(6)
@@ -76,8 +84,12 @@ dialog(4)
    pc_begin
       option
          text = gettext("I'll see what I can do.")
-         action = dialog_init(5)
-         action = go_to_dialog(2)
+         post_test = mission_active("missions/tyrol_kids/tyrol_kids_main.dsl")
+         if_action = dialog_init(5)
+         if_action = go_to_dialog(2)
+         else_action = add_mission("missions/tyrol_kids/tyrol_kids.mis")
+         else_action = dialog_init(5)
+         else_action = go_to_dialog(2)
       option
          text = gettext("I'm not going to play package delivery with you!")
          action = dialog_init(6)
@@ -108,6 +120,46 @@ end_dialog
 dialog(6)
    npc_begin
       text = gettext("Leave me alone!")
+   npc_end
+   pc_begin
+      option 
+         text = gettext("(Close dialog)")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#  Dialog: Matilde Have all                                #
+############################################################
+dialog(7)
+   npc_begin
+      text = gettext("It's so cool to have all the SNES games there are. Now I just need to make copies and put them online!")
+   npc_end
+   pc_begin
+      option
+         # TODO: here should enter the camera mission (on dialog 10).
+         text = gettext("(Close dialog)")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#  Dialog: Billy Have all                                  #
+############################################################
+dialog(8)
+   npc_begin
+      text = gettext("What?! Billy have all SNES games? How can people play SNES now?")
+   npc_end
+   pc_begin
+      option 
+         text = gettext("(Close dialog)")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#  Dialog: Ethan Have all                                  #
+############################################################
+dialog(9)
+   npc_begin
+      text = gettext("Oh, no! Ethan will destroy all games now!")
    npc_end
    pc_begin
       option 

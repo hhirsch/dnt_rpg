@@ -186,6 +186,11 @@ class inventory
        * \return -> pointer to the found object of NULL */
       object* getItemByInfo(std::string relatedInfo);
 
+      /*! Count the items with relatedInfo
+       * \relatedInfo -> info of the item to count
+       * \return -> number of items with relatedInfo */
+      int countItemByInfo(std::string relatedInfo);
+
       /*! Set the inventory Opened Window
        * \param w -> pointer to an inventWindow */
       void setOpenedWindow(inventWindow* w);

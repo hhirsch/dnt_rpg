@@ -2394,9 +2394,9 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    /* Syntax * inventory*(character* owner, string i) */
    else if( (functionName == IA_INVENTORY_HAVE) || 
             (functionName == IA_INVENTORY_GET_ITEM_BY_INFO) || 
-            (functionName == IA_INVENTORY_GET_ITEM_VALUE) )
+            (functionName == IA_INVENTORY_GET_ITEM_VALUE) ||
+            (functionName == IA_INVENTORY_COUNT_ITEM_BY_INFO) )
    {
-      /* Syntax: bool inventoryHave(character* owner, string objectFile) */
       character* dude = NULL;
       string s = "";
 
@@ -2410,6 +2410,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       bool bl = false;
       string st = "";
       float fl = 0.0f;
+      int iRes = 0;
       
       if(dude != NULL)
       {
@@ -2426,6 +2427,10 @@ void iaScript::callFunction(iaVariable* var, string strLine,
             {
                st = ob->getFileName();
             }
+         }
+         else if(functionName == IA_INVENTORY_COUNT_ITEM_BY_INFO)
+         {
+            iRes = dude->inventories->countItemByInfo(s);
          }
          else if(functionName == IA_INVENTORY_GET_ITEM_VALUE)
          {
@@ -2446,6 +2451,10 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       else if(functionName == IA_INVENTORY_GET_ITEM_BY_INFO)
       {
          assignValue(var, (void*)&st, IA_TYPE_STRING);
+      }
+      else if(functionName == IA_INVENTORY_COUNT_ITEM_BY_INFO)
+      {
+         assignValue(var, (void*)&iRes, IA_TYPE_INT);
       }
       else if(functionName == IA_INVENTORY_GET_ITEM_VALUE)
       {

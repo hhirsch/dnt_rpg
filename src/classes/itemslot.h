@@ -123,6 +123,9 @@ class itemSlot
        * \return -> pointer to the found object of NULL */
       object* getItemByInfo(std::string relatedInfo);
 
+      /*! Get the number of items with relatedInfo in slot */
+      int countItemByInfo(std::string relatedInfo);
+
 
       /*! Get the number of items at the itemSlot
        * \return -> number of items at the itemSlot */

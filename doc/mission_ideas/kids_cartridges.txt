@@ -21,3 +21,18 @@ by qubodup:
     should stay unchanged. It's basically a one-time reward for finding and
     selling all game cartridges.
 
+
+When a kid has the max. quantity of cartridges, she/he should not ask for
+more:
+
+ Freedom kid: "It's so cool to have all the SNES games there are. Now I just
+ need to make copies and put them online!"
+ 
+ Proprietary kid: "Thanks to you I have all the SNES cartridges that were ever
+ made! Now I just need to make sure nobody can make copies and then start
+ finding people to rent them to!"
+            
+ Game-hater kid: "Thanks for giving me the game cartridges. They are the last
+ ones. Now I can rid the world of them once and for all!"
+
+

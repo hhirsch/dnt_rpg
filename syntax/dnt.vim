@@ -49,7 +49,7 @@ syn keyword dntFunction       callAnimation setAnimation
 syn keyword dntFunction       featUseAtCharacter runAwayFromBattle
 syn keyword dntFunction       inventoryHave inventoryGetItemByInfo
 syn keyword dntFunction       inventoryGetItemValue inventoryGiveItem
-syn keyword dntFunction       inventoryAddMoney
+syn keyword dntFunction       inventoryAddMoney inventoryCountItemByInfo
 syn keyword dntFunction       dialogSetInitial
 syn keyword dntFunction       getObject getObjectState
 syn keyword dntFunction       isAllDead mapTravel

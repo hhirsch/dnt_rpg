@@ -332,6 +332,8 @@
 #define IA_INVENTORY_HAVE "inventoryHave"
 /*! string inventoryGetItemByInfo(character owner, string info) */
 #define IA_INVENTORY_GET_ITEM_BY_INFO "inventoryGetItemByInfo"
+/*! int inventoryCountItemByInfo(character owner, string info) */
+#define IA_INVENTORY_COUNT_ITEM_BY_INFO "inventoryCountItemByInfo"
 /*! float inventoryGetItemValue(character owner, string item) */
 #define IA_INVENTORY_GET_ITEM_VALUE "inventoryGetItemValue"
 /*! void inventoryGiveItem(character owner, character receiver, string item) */

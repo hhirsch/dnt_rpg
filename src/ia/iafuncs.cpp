@@ -160,7 +160,8 @@ bool isFunction(string s)
            (s == IA_CHARACTER_OPEN_DIALOG) ||
            (s == IA_INVENTORY_GET_ITEM_BY_INFO) || 
            (s == IA_INVENTORY_GIVE_ITEM) ||
-           (s == IA_INVENTORY_ADD_MONEY) ||
+           (s == IA_INVENTORY_ADD_MONEY) || 
+           (s == IA_INVENTORY_COUNT_ITEM_BY_INFO) ||
            (s == IA_INVENTORY_GET_ITEM_VALUE) );
 }
 
@@ -199,7 +200,8 @@ string functionType(string s)
             (s == IA_FEAT_GET_POWERFULL_HEAL) ||
             (s == IA_GET_OBJECT_STATE) || (s == IA_CLASS_LEVEL) ||
             (s == IA_ROLL_DICE) || (s == IA_WEAPON_DEC_AMMO) ||
-            (s == IA_WEAPON_GET_AMMO) || (s == IA_WEAPON_GET_RANGE))
+            (s == IA_WEAPON_GET_AMMO) || (s == IA_WEAPON_GET_RANGE) ||
+            (s == IA_INVENTORY_COUNT_ITEM_BY_INFO) )
    {
       return(IA_TYPE_INT);
    }

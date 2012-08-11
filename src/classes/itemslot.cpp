@@ -1,5 +1,5 @@
 /* 
-  DNT: a satiric post-apocalyptical RPG.
+  DNT: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DNT.
@@ -354,6 +354,30 @@ object* itemSlot::getItemByInfo(string relatedInfo)
       }
    }
    return(NULL);
+}
+
+/**************************************************************
+ *                        countItemByInfo                     *
+ **************************************************************/
+int itemSlot::countItemByInfo(string relatedInfo)
+{
+   int count = 0;
+   int j,k;
+   for(j=0; j < sizeX; j++)
+   {
+      for(k=0; k < sizeY; k++)
+      {
+         if( (spaces[j][k].obj != NULL) &&
+             (spaces[j][k].obj->getRelatedInfo() == relatedInfo) &&
+             (spaces[j][k].origX == j) &&
+             (spaces[j][k].origY == k) )
+         {
+            /* Found One! */
+            count++;
+         }
+      }
+   }
+   return(count);
 }
 
 /**************************************************************
