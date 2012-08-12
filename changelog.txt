@@ -25,6 +25,15 @@
  - Option to always highlight map connections;
  - dntMapEditor: Added map sound editor;
  - map: Floor textures could now be scaled;
+ - Verifying if object is in sight before getting it;
+ - Lots of new sound effects (thanks to qubodup);
+ - Effects and marks when character is able to level up;
+ - scripts: letting integers be used as float assign on scripts;
+ - New mission: Game Cartridge Delivery for Tyrol kids;
+ - New script functions added;
+ - New models;
+ - Much better indoor textures (thanks to qubodup);
+ - Few new talents implemented;
 
 BugFixes:
  - heightmap2dnt: Fixed a missing include;
@@ -44,6 +53,10 @@ BugFixes:
  - MoneyWindow: Don't allow money splits by 0;
  - scripts: accept integers as assigns to float variables;
  - Fixed skill costs when levelling up in multiple classes;
+ - Fixed getNearestEnemy for NPCs;
+ - Fixed glitches on 3D messages;
+ - Better turn factor when running;
+ - Centralized srand calls for better pseudo-randomization;
 
 ================================================
 |                Version 0.9                   |
