@@ -64,7 +64,8 @@ string dntLanguageName[] =
    gettext("Occitan"),
    gettext("Russian"),
    gettext("Japanese"),
-   gettext("Polish")
+   gettext("Polish"),
+   gettext("Arabic")
 };
 
 /*! The language code  */
@@ -81,7 +82,8 @@ string dntLanguageCode[] =
    "oc",
    "ru",
    "ja",
-   "pl"
+   "pl",
+   "ar"
 };
 
 /*! The language numbers */
@@ -99,6 +101,7 @@ enum
    DNT_LANG_RUSSIAN,
    DNT_LANG_JAPANESE,
    DNT_LANG_POLISH,
+   DNT_LANG_ARABIC,
    DNT_LANG_LAST
 };
 
@@ -575,7 +578,8 @@ string options::languageName()
 bool options::isLanguageUnicode()
 {
    return( (langNumber == DNT_LANG_RUSSIAN) || 
-           (langNumber == DNT_LANG_JAPANESE) );
+           (langNumber == DNT_LANG_JAPANESE) ||
+           (langNumber == DNT_LANG_ARABIC) );
 }
 
 /****************************************************************
