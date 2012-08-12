@@ -1343,7 +1343,25 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       bool bl = (m != NULL);
 
       assignValue(var, (void*)&bl, IA_TYPE_BOOL);
+   }
 
+   /* MissionCompletionValue  */
+   else if(functionName == IA_MISSION_COMPLETION_VALUE)
+   {
+      /*! int missionCompletionValue(string missionFile) */
+      string st = getParameters(token, strLine, pos);
+
+      /* Add the mission to the engine */
+      missionsController missions;
+      mission* m = missions.getCompletedMission(st);
+      int iRes = -1;
+
+      if(m)
+      {
+         iRes = m->getCompletion();
+      }
+
+      assignValue(var, (int*)&iRes, IA_TYPE_INT);
    }
 
 

@@ -665,6 +665,24 @@ mission* missionsController::getCurrentMission(string scriptFile)
 }
 
 /************************************************************
+ *                   getCompletedMission                    *
+ ************************************************************/
+mission* missionsController::getCompletedMission(string scriptFile)
+{
+   int i;
+   mission* m = (mission*)completed->getFirst();
+   for(i = 0; i < completed->getTotal(); i++)
+   {
+      if(m->fileName == scriptFile)
+      {
+         return(m);
+      }
+      m = (mission*)m->getNext();
+   }
+   return(NULL);
+}
+
+/************************************************************
  *                           Treat                          *
  ************************************************************/
 void missionsController::treat(Map* acMap, characterList* NPCs)

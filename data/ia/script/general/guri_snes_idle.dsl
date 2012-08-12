@@ -6,6 +6,11 @@ script()
    int val
    int snesMsg
    string msg
+   int cartCompType
+
+   # define the cartridge search mission script
+   string cartMission
+   cartMission = "missions/tyrol_kids/tyrol_kids_main.dsl"
 
    # define kids characters, for special messages
    character matilde 
@@ -34,37 +39,70 @@ script()
             pX = OWNER_POSX + (rollDice(3)-2)*rollDice(128)
             pZ = OWNER_POSZ + (rollDice(3)-2)*rollDice(128)
 
-            # Show a message related to the cartridges search
-            snesMsg = rollDice(4)
-            if(snesMsg == 1)
-               # Question about where they are
-               msg = gettext("Where are these cartridges?")
-            else if(snesMsg == 2)
-               # The real desire of the kids
-               if(SELF_CHARACTER == matilde)
-                  msg = gettext("Mom would be proud of me")
-               else if(SELF_CHARACTER == billy)
-                  msg = gettext("I'll control the game world")
-               else if(SELF_CHARACTER == ethan)
-                  msg = gettext("The world must be freed of games")
+            # Get the cartridge mission completion type
+            cartCompType = missionCompletionValue(cartMission)
+
+            if(cartCompType < 0)
+               # Mission not completed (or inactive)
+               # Show a message related to the cartridges search
+               snesMsg = rollDice(4)
+               if(snesMsg == 1)
+                  # Question about where they are
+                  msg = gettext("Where are these cartridges?")
+               else if(snesMsg == 2)
+                  # The real desire of the kids
+                  if(SELF_CHARACTER == matilde)
+                     msg = gettext("Mom would be proud of me")
+                  else if(SELF_CHARACTER == billy)
+                     msg = gettext("I'll control the game world")
+                  else if(SELF_CHARACTER == ethan)
+                     msg = gettext("The world must be freed of games")
+                  end
+               else if(snesMsg == 3)
+                  # What they feel about it
+                  if(SELF_CHARACTER == matilde)
+                     msg = gettext("Can't wait for everyone be pleased with them")
+                  else if(SELF_CHARACTER == billy)
+                     msg = gettext("I'm sure there will be lots of interested buyers")
+                  else if(SELF_CHARACTER == ethan)
+                     msg = gettext("They are so hard and unfair")
+                  end
+               else
+                  # What they desire
+                  if(SELF_CHARACTER == matilde)
+                     msg = gettext("I need to share them")
+                  else if(SELF_CHARACTER == billy)
+                     msg = gettext("I need to add protection to them all")
+                  else if(SELF_CHARACTER == ethan)
+                     msg = gettext("I need to destroy them all")
+                  end
                end
-            else if(snesMsg == 3)
-               # What they feel about it
+            else if(cartCompType == 1)
+               # Matilde completed!
                if(SELF_CHARACTER == matilde)
-                  msg = gettext("Can't wait for everyone be pleased with them")
+                  msg = gettext("I'm so happy to share them all")
                else if(SELF_CHARACTER == billy)
-                  msg = gettext("I'm sure there will be lots of interested buyers")
+                  msg = gettext("I'll never be rich")
                else if(SELF_CHARACTER == ethan)
-                  msg = gettext("They are so hard and unfair")
+                  msg = gettext("Real world is lost")
                end
-            else
-               # What they desire
+            else if(cartCompType == 2)
+               # Billy completed
                if(SELF_CHARACTER == matilde)
-                  msg = gettext("I need to share them")
+                  msg = gettext("How could it happen?")
                else if(SELF_CHARACTER == billy)
-                  msg = gettext("I need to add protection to them all")
+                  msg = gettext("Must find all game fans")
                else if(SELF_CHARACTER == ethan)
-                  msg = gettext("I need to destroy them all")
+                  msg = gettext("Not so bad after all")
+               end
+            else if(cartCompType == 3)
+               # Ethan completed
+               if(SELF_CHARACTER == matilde)
+                  msg = gettext("Forever lost!")
+               else if(SELF_CHARACTER == billy)
+                  msg = gettext("No games, no power")
+               else if(SELF_CHARACTER == ethan)
+                  msg = gettext("No more games")
                end
             end
 

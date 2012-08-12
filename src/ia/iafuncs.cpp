@@ -137,6 +137,7 @@ bool isFunction(string s)
            (s == IA_MISSION_ABORT) ||
            (s == IA_MISSION_IS_ACTIVE) || (s == IA_MISSION_SET_TEMP) ||
            (s == IA_MISSION_GET_TEMP) || (s == IA_MISSION_SET_XP) ||
+           (s == IA_MISSION_COMPLETION_VALUE) ||
            (s == IA_INVENTORY_HAVE) || (s == IA_FIGHT_GET_NEAREST_ENEMY) ||
            (s == IA_DIALOG_SET_INITIAL) || (s == IA_GET_NPC_BY_NAME) ||
            (s == IA_MAP_TRAVEL) || 
@@ -201,7 +202,8 @@ string functionType(string s)
             (s == IA_GET_OBJECT_STATE) || (s == IA_CLASS_LEVEL) ||
             (s == IA_ROLL_DICE) || (s == IA_WEAPON_DEC_AMMO) ||
             (s == IA_WEAPON_GET_AMMO) || (s == IA_WEAPON_GET_RANGE) ||
-            (s == IA_INVENTORY_COUNT_ITEM_BY_INFO) )
+            (s == IA_INVENTORY_COUNT_ITEM_BY_INFO) ||
+            (s == IA_MISSION_COMPLETION_VALUE) )
    {
       return(IA_TYPE_INT);
    }

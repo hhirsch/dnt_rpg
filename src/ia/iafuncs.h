@@ -171,6 +171,8 @@
 #define IA_MISSION_GET_TEMP "missionGetTemp"
 /*! void missionSetXp(string missionFile, int xpValue) */
 #define IA_MISSION_SET_XP "missionSetXp"
+/*! int missionCompletionValue(string missionFile) */
+#define IA_MISSION_COMPLETION_VALUE "missionCompletionValue"
 
 ////////////////////////////////////////////////////
 //                 Feats Functions                //

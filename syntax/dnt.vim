@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language: DNT Script Language
 " Maintainer: Farrer <farrer@dnteam.org>
-" Last Change: 2012 Jul 22
+" Last Change: 2012 Aug 11
 
 syn clear
 
@@ -35,7 +35,7 @@ syn keyword dntFunction       gettext
 syn keyword dntFunction       moveToPosition moveToCharacter moveFromCharacter
 syn keyword dntFunction       moveToObject setIdle
 syn keyword dntFunction       missionAdd missionComplete missionIsActive
-syn keyword dntFunction       missionAbort
+syn keyword dntFunction       missionAbort missionCompletionValue
 syn keyword dntFunction       missionSetTemp missionGetTemp missionSetXp
 syn keyword dntFunction       featActualQuantity featCost featQuantityPerDay
 syn keyword dntFunction       getRandomAttackFeat getPowerfullAttackFeat

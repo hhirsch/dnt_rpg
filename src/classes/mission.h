@@ -167,10 +167,15 @@ class missionsController
        * \note this function will call the mission completion script, if any. */
       void completeMission(mission* m, int type);
 
-      /*! Search for a mission on the current list
+      /*! Search for a mission in the current list
        * \param scriptFile -> filename of mission to find
        * \return -> pointer to the mission */
       mission* getCurrentMission(std::string scriptFile);
+
+      /*! Search for a mission in the completed list
+       * \param scriptFile -> filename of mission to find
+       * \return -> pointer to the mission */
+      mission* getCompletedMission(std::string scriptFile);
 
       /*! Treat all current missions scripts
        * \param acMap -> pointer to current opened map
