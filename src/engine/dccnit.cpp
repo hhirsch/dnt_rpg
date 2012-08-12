@@ -2484,8 +2484,11 @@ int engine::verifyMouseActions(Uint8 mButton)
                {
                   occPosition = false;
                   cursors->set(CURSOR_GET);
-                  cursors->setTextOver(sobj->obj->getName()); 
-                  if( (mButton & SDL_BUTTON(1)) && 
+                  cursors->setTextOver(sobj->obj->getName());
+
+                  if( (mButton & SDL_BUTTON(1)) &&
+                      (colisionDetect.objectAtSight(activeCharacter, 
+                                                    sobj->obj)) &&
                       (rangeAction(activeCharacter->scNode->getPosX(), 
                                    activeCharacter->scNode->getPosZ(),
                                    sobj->x, sobj->z,

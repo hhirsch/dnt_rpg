@@ -120,6 +120,28 @@ bool collision::verifySquare(boundingBox& actorBox, Square* quad,
 }
 
 /*********************************************************************
+ *                        verifySquareWalls                          *
+ *********************************************************************/
+bool collision::verifySquareWalls(ray& acRay, Square* quad)
+{
+   boundingBox colBox;
+   int mur = 0;
+   while((mur < MAX_WALLS ) && (quad->walls[mur] != NULL))
+   {
+      colBox.setMin(quad->walls[mur]->x1, 0, quad->walls[mur]->z1);
+      colBox.setMax(quad->walls[mur]->x2, WALL_HEIGHT, 
+            quad->walls[mur]->z2);
+      if(colBox.intercepts(acRay))
+      {
+         return(false);
+      }
+      mur++;
+   }
+
+   return(true);
+}
+
+/*********************************************************************
  *                           verifySquare                            *
  *********************************************************************/
 bool collision::verifySquare(ray& acRay, Square* quad)
@@ -132,18 +154,10 @@ bool collision::verifySquare(ray& acRay, Square* quad)
      return(false);
    }
 
-   /* test with walls */
-   int mur = 0;
-   while((mur < MAX_WALLS ) && (quad->walls[mur] != NULL))
+   if(!verifySquareWalls(acRay, quad))
    {
-      colBox.setMin(quad->walls[mur]->x1, 0, quad->walls[mur]->z1);
-      colBox.setMax(quad->walls[mur]->x2, WALL_HEIGHT, 
-            quad->walls[mur]->z2);
-      if(colBox.intercepts(acRay))
-      {
-         return(false);
-      }
-      mur++;
+      /* Collided with wall */
+      return(false);
    }
 
    /* test with objects */
@@ -690,6 +704,83 @@ bool collision::characterAtSight(character* actor, character* target)
 
    return(result);
 }
+
+/*********************************************************************
+ *                           objectAtSight                           *
+ *********************************************************************/
+bool collision::objectAtSight(character* actor, object* target)
+{
+   int x, z;
+   Square* quad;
+
+   bool result = true;
+
+   ray sightRay;
+   
+   float difX = (target->scNode->getPosX() - actor->scNode->getPosX());
+   float difZ = (target->scNode->getPosZ() - actor->scNode->getPosZ());
+   sightRay.size = sqrt((difX*difX) + (difZ*difZ));
+
+   sightRay.direction = vec3_t(difX, 0.0f, difZ);
+   sightRay.direction.normalize();
+
+   sightRay.origin = vec3_t(actor->scNode->getPosX(), 30.0f, 
+         actor->scNode->getPosZ());
+
+   /* Let's check each possible square */
+   int initX = (int)floor(actor->scNode->getPosX() / (actualMap->squareSize()));
+   int endX = (int)floor(target->scNode->getPosX() / (actualMap->squareSize()));
+   int initZ = (int)floor(actor->scNode->getPosZ() / (actualMap->squareSize()));
+   int endZ = (int)floor(target->scNode->getPosZ() / (actualMap->squareSize()));
+
+   /* Make sure initial is lesser than final */
+   if(endX < initX)
+   {
+      int tmp = initX;
+      initX = endX;
+      endX = tmp;
+   }
+   if(endZ < initZ)
+   {
+      int tmp = initZ;
+      initZ = endZ;
+      endZ = tmp;
+   }
+
+   /* FIXME: better if verify only in squares at the line, not at the 
+    * rectangle as it is now... */
+   for(x = initX; x <= endX; x++)
+   {
+      for(z = initZ; z <= endZ; z++)
+      {
+         quad = actualMap->relativeSquare(x, z);
+         if(quad)
+         {
+            result &= verifySquareWalls(sightRay, quad);
+            if(!result) 
+            {
+               return(false);
+            }
+         }
+      }
+   }
+
+   /* Test Doors */
+   door* door1 = actualMap->getFirstDoor();
+   boundingBox colBox;
+   for(int i=0; i < actualMap->getTotalDoors(); i++)
+   {
+      colBox = door1->obj->scNode->getBoundingBox();
+      if(colBox.intercepts(sightRay))
+      {
+         return(false);
+      }
+      door1 = (door*)door1->getNext();
+   }
+
+   return(result);
+}
+
 
 /*********************************************************************
  *                         Static Members                            *
