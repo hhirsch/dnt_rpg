@@ -109,6 +109,10 @@ class mission: public iaScript, public dntListElement
        * \param def -> pointer to the defintions file to load from */
       void loadAsCurrent(defParser* def);
 
+      /*! Verify if the mission is under development (and probably
+       * couldn't be finished in this version) */
+      bool isUnderDevelopment();
+
       /*! Define the controller as friend */
       friend class missionsController;
 
@@ -118,6 +122,8 @@ class mission: public iaScript, public dntListElement
 
       std::string completionScript; /**< Script to call when mission complete */
       std::string failureScript;    /**< Script to call when mission failed  */
+
+      bool underDevelopment; /**< If the mission is under developement */
 
       int xpValue;      /**< XP received on complete the mission */
 

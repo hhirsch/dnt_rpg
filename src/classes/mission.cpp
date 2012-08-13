@@ -31,6 +31,7 @@ using namespace std;
 #define MISSION_TOKEN_XP_VALUE           "xpValue"
 #define MISSION_TOKEN_TEMP_FLAG          "tempFlag"
 #define MISSION_TOKEN_DESCRIPTION        "description"
+#define MISSION_TOKEN_UNDER_DEVELOPMENT  "underDevelopment"
 #define MISSION_TOKEN_AREA               "area"
 #define MISSION_TOKEN_COMPLETION_SCRIPT  "completionScript"
 #define MISSION_TOKEN_FAILURE_SCRIPT     "failureScript"
@@ -64,6 +65,7 @@ mission::mission(string missionFile, engine* usedEngine,
    area = "";
    completionScript = "";
    failureScript = "";
+   underDevelopment = false;
 
    /* Read the information from the definition's file */
    if(loadDefinition)
@@ -78,6 +80,10 @@ mission::mission(string missionFile, engine* usedEngine,
          else if(key == MISSION_TOKEN_DESCRIPTION)
          {
             description = translateDataString(value);
+         }
+         else if(key == MISSION_TOKEN_UNDER_DEVELOPMENT)
+         {
+            underDevelopment = (value == "true");
          }
          else if(key == MISSION_TOKEN_AREA)
          {
@@ -119,6 +125,14 @@ mission::mission(string missionFile, engine* usedEngine,
  ************************************************************/
 mission::~mission()
 {
+}
+
+/************************************************************
+ *                    isUnderDevelopment                    *
+ ************************************************************/
+bool mission::isUnderDevelopment()
+{
+   return(underDevelopment);
 }
 
 /************************************************************
@@ -287,6 +301,10 @@ void mission::saveAsCurrent(ofstream* file)
 
    /* Save area Info */
    *file << MISSION_TOKEN_AREA << " = " << area << endl;
+
+   /* Save underDevelopment flag */
+   *file << MISSION_TOKEN_UNDER_DEVELOPMENT << " = " 
+      << underDevelopment << endl;
 
    /* Save Completion and Failure scripts */
    if(!completionScript.empty())
