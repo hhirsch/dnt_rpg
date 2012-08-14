@@ -22,6 +22,8 @@ ameiva.png
 ameiva02.png
 athlete.png
 chicolee.png
+chico.png
+chico_a.png
 fille.png
 fille2.png
 fille3.png
@@ -101,7 +103,6 @@ mercenary.png
 
 back.png
 borda.png
-chico.png
    Author: DNTeam
    License: GPLv3 or later
 
