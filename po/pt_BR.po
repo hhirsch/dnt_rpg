@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DNT\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2012-08-12 09:44-0300\n"
+"POT-Creation-Date: 2012-08-15 10:23-0300\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -102,12 +102,12 @@ msgstr "Talento Inválido"
 msgid "Not enought points to use!"
 msgstr "Pontos não suficientes para usar!"
 
-#: src/classes/mission.cpp:573 src/engine/dialog.cpp:1280
+#: src/classes/mission.cpp:591 src/engine/dialog.cpp:1280
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "Missão Cumprida: %d XP!"
 
-#: src/classes/mission.cpp:600 src/classes/mission.cpp:603
+#: src/classes/mission.cpp:618 src/classes/mission.cpp:621
 msgid "Mission Failure!"
 msgstr "Falhou na Missão!"
 
@@ -507,33 +507,33 @@ msgstr "Turno de ataque surpresa."
 msgid "No enemies in the area."
 msgstr "Sem inimigos na área."
 
-#: src/engine/dccnit.cpp:2523
+#: src/engine/dccnit.cpp:2526
 #, c-format
 msgid "%s taken."
 msgstr "Pegou %s."
 
-#: src/engine/dccnit.cpp:2551
+#: src/engine/dccnit.cpp:2554
 msgid "Inventory is full!"
 msgstr "O inventário está cheio!"
 
-#: src/engine/dccnit.cpp:2573
+#: src/engine/dccnit.cpp:2576
 msgid "Door"
 msgstr "Porta"
 
-#: src/engine/dccnit.cpp:2648
+#: src/engine/dccnit.cpp:2651
 msgid "dead"
 msgstr "morto(a)"
 
-#: src/engine/dccnit.cpp:2701
+#: src/engine/dccnit.cpp:2704
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s ataca %s"
 
-#: src/engine/dccnit.cpp:2967
+#: src/engine/dccnit.cpp:2970
 msgid "No more actions. Turn ended."
 msgstr "Sem mais ações: Turno Finalizado."
 
-#: src/engine/dccnit.cpp:3392
+#: src/engine/dccnit.cpp:3395
 msgid "A* could not find a path!"
 msgstr "O A* não encontrou um caminho!"
 
@@ -737,6 +737,14 @@ msgstr "Área Desconhecida"
 #: src/engine/journalwindow.cpp:358
 msgid "No missions."
 msgstr "Sem missões."
+
+#: src/engine/journalwindow.cpp:397
+msgid ""
+"(NOTE: This mission is under development and maybe you couldn't finish it in "
+"this version)"
+msgstr ""
+"(NOTA: Esta missão está em desenvolvimento e talvez você não consiga "
+"finalizá-la na atual versão de DNT)"
 
 #: src/engine/minimapwindow.cpp:61
 msgid "Map"
@@ -3067,6 +3075,19 @@ msgstr ""
 "Qualquer teste social com crianças resultará numa falha automática, pois a "
 "criança o considerará um palhaço e irá querer brincar com ele."
 
+#: data/feats/headbanger/voluntary_autism.fta:2
+msgid "Voluntary Autism"
+msgstr "Autismo Voluntário"
+
+#: data/feats/headbanger/voluntary_autism.fta:3
+msgid ""
+"Headbangers can ignore the world only imagining and thinking they are "
+"playing their loved music. So, they receive +1 in I Am Not A Fool."
+msgstr ""
+"Os Metaleiros conseguem se desligar do mundo que os rodeia imaginando a "
+"música que gostam e encenando que está a tocar algum instrumento da mesma ou "
+"cantarolá-la. Assim sendo, eles recebem +1 em Não Sou Bobo."
+
 #: data/feats/law/i_am_wrong.fta:1
 msgid "I am Wrong"
 msgstr "Eu Sou Errado"
@@ -3092,6 +3113,21 @@ msgstr ""
 "Estudante de Direito para evitar o atordoamento e reduzir o dano à metade. O "
 "organismo pode utilizar-se desse poder um número igual ao seu (Nível de "
 "Estudante de Direito)/4."
+
+#: data/feats/law/supreme_bluff.fta:3
+msgid "Supreme Bluff"
+msgstr "Blefe Supremo"
+
+#: data/feats/law/supreme_bluff.fta:4
+msgid ""
+"At this level, the creature is so hardened in the art of lie or hide "
+"information, that is capable to convince his own mother that he isn't his "
+"son. Thus all Bluff tests of the Law Students have a +10 bonus"
+msgstr ""
+"Neste nível, o organismo já se encontra tão calejado na arte de mentir ou "
+"ocultar informações, que é capaz de convencer a própria mãe de que ele não é "
+"seu filho. Assim sendo, todos os testes de Blefar realizados pelo Estudante "
+"de Direito têm +10 de bônus."
 
 #: data/feats/mandatory/rookie.fta:1
 msgid "Rookie"
@@ -3279,6 +3315,22 @@ msgstr ""
 "A criatura detentora de Toque Covarde pode realizar, 3 vezes ao dia, um "
 "ataque que não segue as regras de uma luta limpa, causando 1d3+nível da "
 "criatura pontos de dano."
+
+#: data/feats/elective/diplomat.fta:3
+msgid "Diplomat"
+msgstr "Diplomata"
+
+#: data/feats/elective/diplomat.fta:4
+msgid ""
+"After reading a Jerry Davila book, the creature know all the secrets and "
+"deturpations used by the Brazilian Foreign Affairs before the world "
+"collapse, being ready to use them on his own interests, receiving +3 in "
+"Diplomacy."
+msgstr ""
+"Após ler um livro de Jerry Dávila, a criatura conhece todos os segredos e "
+"deturpações utilizados pelo Ministério das Relações Exteriores brasileiro "
+"antes do colapso mundial, estando apto a utilizá-los em seus próprios "
+"interesses, recebendo +3 em Diplomacia."
 
 #: data/feats/received/mj_friends_killer.fta:3
 msgid "M. J. Friends Killer"

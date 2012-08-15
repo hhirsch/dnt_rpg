@@ -185,7 +185,9 @@ data/feats/compsci/world_conception.fta
 data/feats/gothic/lament_souls.fta
 data/feats/gothic/night_adoration.fta
 data/feats/gothic/sun_weakness.fta
+data/feats/headbanger/voluntary_autism.fta
 data/feats/law/i_am_wrong.fta
+data/feats/law/supreme_bluff.fta
 data/feats/mandatory/rookie.fta
 data/feats/physicaled/esophagus.fta
 data/feats/physicaled/i_am_a_little_conan.fta
@@ -200,6 +202,7 @@ data/feats/elective/hasty.fta
 data/feats/elective/bolivian_blood.fta
 data/feats/elective/pinocchios_aura.fta
 data/feats/elective/coward_touch.fta
+data/feats/elective/diplomat.fta
 data/feats/received/mj_friends_killer.fta
 
 #skills

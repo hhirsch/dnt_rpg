@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2012-08-12 09:44-0300\n"
+"POT-Creation-Date: 2012-08-15 10:23-0300\n"
 "PO-Revision-Date: 2010-05-27 16:34+0000\n"
 "Last-Translator: Dani Cases <danicases@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
@@ -104,12 +104,12 @@ msgstr "Talent invàlid"
 msgid "Not enought points to use!"
 msgstr "No tens prous punts!"
 
-#: src/classes/mission.cpp:573 src/engine/dialog.cpp:1280
+#: src/classes/mission.cpp:591 src/engine/dialog.cpp:1280
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "Missió completada: %d XP!"
 
-#: src/classes/mission.cpp:600 src/classes/mission.cpp:603
+#: src/classes/mission.cpp:618 src/classes/mission.cpp:621
 msgid "Mission Failure!"
 msgstr "Missió fallida!"
 
@@ -510,33 +510,33 @@ msgstr "Torn d'atac sorpresa"
 msgid "No enemies in the area."
 msgstr "Cap enemic a la zona."
 
-#: src/engine/dccnit.cpp:2523
+#: src/engine/dccnit.cpp:2526
 #, c-format
 msgid "%s taken."
 msgstr "%s recollit."
 
-#: src/engine/dccnit.cpp:2551
+#: src/engine/dccnit.cpp:2554
 msgid "Inventory is full!"
 msgstr "L'inventari està ple!"
 
-#: src/engine/dccnit.cpp:2573
+#: src/engine/dccnit.cpp:2576
 msgid "Door"
 msgstr "Porta"
 
-#: src/engine/dccnit.cpp:2648
+#: src/engine/dccnit.cpp:2651
 msgid "dead"
 msgstr ""
 
-#: src/engine/dccnit.cpp:2701
+#: src/engine/dccnit.cpp:2704
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s ataca a %s"
 
-#: src/engine/dccnit.cpp:2967
+#: src/engine/dccnit.cpp:2970
 msgid "No more actions. Turn ended."
 msgstr "No queden accions. Torn finalitzat."
 
-#: src/engine/dccnit.cpp:3392
+#: src/engine/dccnit.cpp:3395
 msgid "A* could not find a path!"
 msgstr ""
 
@@ -740,6 +740,12 @@ msgstr "Zona desconeguda"
 #: src/engine/journalwindow.cpp:358
 msgid "No missions."
 msgstr "No hi han missions."
+
+#: src/engine/journalwindow.cpp:397
+msgid ""
+"(NOTE: This mission is under development and maybe you couldn't finish it in "
+"this version)"
+msgstr ""
 
 #: src/engine/minimapwindow.cpp:61
 msgid "Map"
@@ -2634,6 +2640,16 @@ msgid ""
 "to play with them."
 msgstr ""
 
+#: data/feats/headbanger/voluntary_autism.fta:2
+msgid "Voluntary Autism"
+msgstr ""
+
+#: data/feats/headbanger/voluntary_autism.fta:3
+msgid ""
+"Headbangers can ignore the world only imagining and thinking they are "
+"playing their loved music. So, they receive +1 in I Am Not A Fool."
+msgstr ""
+
 #: data/feats/law/i_am_wrong.fta:1
 msgid "I am Wrong"
 msgstr ""
@@ -2648,6 +2664,17 @@ msgid ""
 "fortitude test of all targets in a 30 meters radius against a difficulty of "
 "10 + Law Student Level to avoid being stunned and reduce the damage to a "
 "half."
+msgstr ""
+
+#: data/feats/law/supreme_bluff.fta:3
+msgid "Supreme Bluff"
+msgstr ""
+
+#: data/feats/law/supreme_bluff.fta:4
+msgid ""
+"At this level, the creature is so hardened in the art of lie or hide "
+"information, that is capable to convince his own mother that he isn't his "
+"son. Thus all Bluff tests of the Law Students have a +10 bonus"
 msgstr ""
 
 #: data/feats/mandatory/rookie.fta:1
@@ -2794,6 +2821,18 @@ msgid ""
 "The creature with Coward Touch can do, 3 times per day, an attack that do "
 "not follow clean-fight rules, inflicting 1d3+character level points of "
 "damage."
+msgstr ""
+
+#: data/feats/elective/diplomat.fta:3
+msgid "Diplomat"
+msgstr ""
+
+#: data/feats/elective/diplomat.fta:4
+msgid ""
+"After reading a Jerry Davila book, the creature know all the secrets and "
+"deturpations used by the Brazilian Foreign Affairs before the world "
+"collapse, being ready to use them on his own interests, receiving +3 in "
+"Diplomacy."
 msgstr ""
 
 #: data/feats/received/mj_friends_killer.fta:3
