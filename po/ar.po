@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2012-08-15 10:23-0300\n"
+"POT-Creation-Date: 2012-08-15 19:01-0300\n"
 "PO-Revision-Date: 2011-01-09 09:54+0000\n"
 "Last-Translator: Ahmed Mohammed <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
@@ -4799,7 +4799,9 @@ msgid "The best SNES RPG whose name begins with 'Chro'."
 msgstr ""
 
 #: data/models/objetos/icex/snes/contra/snes_contra.dcc:2
-msgid "You surely can't stay alive for more than 3 hours on this game."
+msgid ""
+"You surely can't stay alive for more than 3 hours on this game. Maybe that's "
+"why you found it on a hospital bed."
 msgstr ""
 
 #: data/models/objetos/icex/ruindows_box/ruindows_box.dcc:1
