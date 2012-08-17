@@ -24,12 +24,15 @@ athlete.png
 chicolee.png
 chico.png
 chico_a.png
+f04.png 
 fille.png
 fille2.png
 fille3.png
 garcon.png
 garcon2.png
 garcon3.png
+h06.png
+linda.png
 magda.png
 mama.png
 punk.png
