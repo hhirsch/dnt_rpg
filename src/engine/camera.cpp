@@ -31,7 +31,7 @@
 camera::camera()
 {
    theta = 45.0f;
-   phi = 75.75f;
+   phi = 285.75f;
    d = 320.0f;
    centerX = 0.0f;
    centerZ = 0.0f;
