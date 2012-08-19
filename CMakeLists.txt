@@ -131,4 +131,5 @@ configure_file("./Doxyfile.in" "./Doxyfile")
 # Install files
 install(TARGETS dnt DESTINATION bin)
 install(DIRECTORY ./data DESTINATION ${DATADIR}/${PACKAGE})
-#$(INSTALL) -c -m 644 $(BIN)dcc.opc $(datadir)/$(PACKAGE)
+install(FILES ./bin/dcc.opc DESTINATION ${DATADIR}/${PACKAGE})
+
