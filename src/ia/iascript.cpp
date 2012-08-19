@@ -2329,7 +2329,9 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          float angle = getAngle(c->scNode->getPosX(), c->scNode->getPosZ(),
                acPc->scNode->getPosX(), acPc->scNode->getPosZ());
          c->setOrientation(angle);
-         acPc->setOrientation(180-angle);
+         angle = getAngle(acPc->scNode->getPosX(), acPc->scNode->getPosZ(),
+               c->scNode->getPosX(), c->scNode->getPosZ());
+         acPc->setOrientation(angle);
       }
    }
 
