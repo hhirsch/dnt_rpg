@@ -856,6 +856,32 @@ iaVariable* iaSymbolsTable::getSymbol(string name)
 }
 
 /***********************************************************
+ *                        mapChanged                       *
+ ***********************************************************/
+void iaSymbolsTable::mapChanged()
+{
+   /* Clear all map-related pointer variables */
+   iaVariable* iv = (iaVariable*)first;
+   int i;
+
+   /* Save All Variables */
+   for(i=0; i<total; i++)
+   {
+      /* Verify variables */
+      if(!isTemp(iv))
+      {
+         if( (iv->type == IA_TYPE_CHARACTER) ||
+             (iv->type == IA_TYPE_OBJECT) )
+         {
+            iv->value = NULL;
+         }
+      }
+      iv = (iaVariable*)iv->getNext();
+   }
+
+}
+
+/***********************************************************
  *                          save                           *
  ***********************************************************/
 void iaSymbolsTable::save(ofstream* file)

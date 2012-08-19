@@ -227,7 +227,11 @@ character* iaScript::getCharacterOwner()
  ***********************************************************************/
 void iaScript::defineMap(Map* acMap, characterList* NPCs)
 {
-   actualMap = acMap;
+   if(actualMap != acMap)
+   {
+      actualMap = acMap;
+      symbols->mapChanged();
+   }
    npcs = NPCs;
 }
 
