@@ -417,4 +417,4 @@ useObject = models/objetos/icex/lixo/lixo.dcc 1:6,8:368.803,0.000,496.931:0.000,
 useObject = models/objetos/geral/pia/pia.dcc 0:5,8:314.267,0.000,493.257:0.000,-180.000,0.000:0
 useObject = models/objetos/geral/oven/oven.dcc 1:6,8:350.685,0.000,492.325:0.000,0.000,0.000:0
 useObject = models/objetos/geral/microwave/microwave.dcc 1:6,8:332.305,31.500,499.606:0.000,0.000,0.000:0
-initial = 212.000,422.000
+initial = 243.000,439.000
