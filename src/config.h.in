@@ -21,10 +21,11 @@
 #ifndef _dnt_config_h
 #define _dnt_config_h
 
-#define PACKAGE @PACKAGE@
-#define VERSION @VERSION@
+#define PACKAGE "@PACKAGE@"
+#define VERSION "@VERSION@"
 
-#define DATADIR @datadir@
+#define DATADIR "@DATADIR@"
+#define LOCALEDIR "@LOCALEDIR@"
 
 #if defined (__amigaos4__)
    #define ENABLE_NLS  0

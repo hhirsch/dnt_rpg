@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2012-08-15 19:01-0300\n"
+"POT-Creation-Date: 2012-08-19 19:25-0300\n"
 "PO-Revision-Date: 2010-05-06 06:48+0000\n"
 "Last-Translator: Cédric VALMARY (Tot en òc) <cvalmary@yahoo.fr>\n"
 "Language-Team: Occitan (post 1500) <oc@li.org>\n"
-"Language: \n"
+"Language: oc\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1172,12 +1172,12 @@ msgstr "Torn de %s."
 msgid "%s rolls initiative: "
 msgstr ""
 
-#: src/ia/iascript.cpp:2510
+#: src/ia/iascript.cpp:2512
 #, c-format
 msgid "%s lost %s."
 msgstr ""
 
-#: src/ia/iascript.cpp:2537
+#: src/ia/iascript.cpp:2539
 #, c-format
 msgid "%s received $%.2f."
 msgstr ""
@@ -5010,34 +5010,6 @@ msgstr "Uzi"
 msgid "Everybody's favorite Warmux weapon."
 msgstr ""
 
-#: data/weapons/types/categories.dcl:2
-msgid "Martial"
-msgstr "de Guerrièr"
-
-#: data/weapons/types/categories.dcl:3
-msgid "Exotic"
-msgstr "Exotic"
-
-#: data/weapons/types/categories.dcl:4
-msgid "Throwing"
-msgstr ""
-
-#: data/weapons/types/categories.dcl:5
-msgid "Simple"
-msgstr "Simple"
-
-#: data/weapons/types/categories.dcl:6
-msgid "Two Handed"
-msgstr ""
-
-#: data/weapons/types/categories.dcl:7
-msgid "Gun"
-msgstr ""
-
-#: data/weapons/types/categories.dcl:8
-msgid "Rifle"
-msgstr ""
-
 #: data/weapons/types/damages.dcl:2
 msgid "Piercing"
 msgstr "Perforacion"
@@ -5264,23 +5236,32 @@ msgstr ""
 msgid "No more games"
 msgstr ""
 
-#~ msgid "Ok."
-#~ msgstr "D'acòrdi."
+#~ msgid "Exotic"
+#~ msgstr "Exotic"
 
-#~ msgid "Now!"
-#~ msgstr "Ara !"
+#~ msgid "Martial"
+#~ msgstr "de Guerrièr"
+
+#~ msgid "Simple"
+#~ msgstr "Simple"
 
 #~ msgid "Enable MultiTextures"
 #~ msgstr "Activar MultiTexturas"
-
-#~ msgid "Nothing"
-#~ msgstr "Pas res"
-
-#~ msgid "Particles"
-#~ msgstr "Particulas"
 
 #~ msgid "FPS"
 #~ msgstr "FPS"
 
 #~ msgid "No talents"
 #~ msgstr "Pas de dons."
+
+#~ msgid "Nothing"
+#~ msgstr "Pas res"
+
+#~ msgid "Now!"
+#~ msgstr "Ara !"
+
+#~ msgid "Ok."
+#~ msgstr "D'acòrdi."
+
+#~ msgid "Particles"
+#~ msgstr "Particulas"

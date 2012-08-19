@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2012-08-15 19:01-0300\n"
+"POT-Creation-Date: 2012-08-19 19:25-0300\n"
 "PO-Revision-Date: 2010-05-27 16:34+0000\n"
 "Last-Translator: Dani Cases <danicases@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
@@ -1177,12 +1177,12 @@ msgstr "Torn de %s."
 msgid "%s rolls initiative: "
 msgstr "%s tira per iniciativa: "
 
-#: src/ia/iascript.cpp:2510
+#: src/ia/iascript.cpp:2512
 #, c-format
 msgid "%s lost %s."
 msgstr "%s ha perdut %s."
 
-#: src/ia/iascript.cpp:2537
+#: src/ia/iascript.cpp:2539
 #, c-format
 msgid "%s received $%.2f."
 msgstr "%s reps $%.2f."
@@ -5077,34 +5077,6 @@ msgstr ""
 msgid "Everybody's favorite Warmux weapon."
 msgstr ""
 
-#: data/weapons/types/categories.dcl:2
-msgid "Martial"
-msgstr ""
-
-#: data/weapons/types/categories.dcl:3
-msgid "Exotic"
-msgstr ""
-
-#: data/weapons/types/categories.dcl:4
-msgid "Throwing"
-msgstr ""
-
-#: data/weapons/types/categories.dcl:5
-msgid "Simple"
-msgstr ""
-
-#: data/weapons/types/categories.dcl:6
-msgid "Two Handed"
-msgstr ""
-
-#: data/weapons/types/categories.dcl:7
-msgid "Gun"
-msgstr ""
-
-#: data/weapons/types/categories.dcl:8
-msgid "Rifle"
-msgstr ""
-
 #: data/weapons/types/damages.dcl:2
 msgid "Piercing"
 msgstr ""
@@ -5331,21 +5303,8 @@ msgstr ""
 msgid "No more games"
 msgstr ""
 
-#~ msgid ""
-#~ "Since they are Taylor's faithful disciples, they receive +4 of Taylorism "
-#~ "Skill."
-#~ msgstr ""
-#~ "Com que són els deixebles creients d'en Taylor, reben +4 en l'Habilitat "
-#~ "Taylorisme."
-
-#~ msgid ""
-#~ "In their dogmatic cult to Taylor they found bizarre things (with maximun "
-#~ "financial efficiency) to be their 'clothes', receiving +4 of Bizarre "
-#~ "Clothes."
-#~ msgstr ""
-#~ "En el seu culte dogmàtic a Taylor han descobert coses excèntriques (amb "
-#~ "la màxima eficiència econòmica) per a 'vestir-se', rebent +4 en Roba "
-#~ "Extravagant"
+#~ msgid "Enable MultiTextures"
+#~ msgstr "Activa MultiTextures"
 
 #~ msgid ""
 #~ "Everyone knows that Administration Students have a lot of difficulty in "
@@ -5356,17 +5315,30 @@ msgstr ""
 #~ "assimilant la opinió dels demés, i també per formular preguntes concises "
 #~ "sobre qualsevol cosa, per això reben un -6 en Escoltar"
 
-#~ msgid "Enable MultiTextures"
-#~ msgstr "Activa MultiTextures"
+#~ msgid ""
+#~ "In their dogmatic cult to Taylor they found bizarre things (with maximun "
+#~ "financial efficiency) to be their 'clothes', receiving +4 of Bizarre "
+#~ "Clothes."
+#~ msgstr ""
+#~ "En el seu culte dogmàtic a Taylor han descobert coses excèntriques (amb "
+#~ "la màxima eficiència econòmica) per a 'vestir-se', rebent +4 en Roba "
+#~ "Extravagant"
+
+#~ msgid "No talents"
+#~ msgstr "Sense talents"
 
 #~ msgid "Nothing"
 #~ msgstr "Res"
 
-#~ msgid "Particles"
-#~ msgstr "Partícules"
-
 #~ msgid "Open Assign Attacks Window"
 #~ msgstr "Obre la finestra d'assignar atacs"
 
-#~ msgid "No talents"
-#~ msgstr "Sense talents"
+#~ msgid "Particles"
+#~ msgstr "Partícules"
+
+#~ msgid ""
+#~ "Since they are Taylor's faithful disciples, they receive +4 of Taylorism "
+#~ "Skill."
+#~ msgstr ""
+#~ "Com que són els deixebles creients d'en Taylor, reben +4 en l'Habilitat "
+#~ "Taylorisme."

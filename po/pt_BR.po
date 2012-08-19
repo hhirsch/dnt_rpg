@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DNT\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2012-08-15 19:01-0300\n"
+"POT-Creation-Date: 2012-08-19 19:25-0300\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
-"Language: \n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1176,12 +1176,12 @@ msgstr "Turno de %s."
 msgid "%s rolls initiative: "
 msgstr "%s rola iniciativa: "
 
-#: src/ia/iascript.cpp:2510
+#: src/ia/iascript.cpp:2512
 #, c-format
 msgid "%s lost %s."
 msgstr "%s perdeu %s."
 
-#: src/ia/iascript.cpp:2537
+#: src/ia/iascript.cpp:2539
 #, c-format
 msgid "%s received $%.2f."
 msgstr "%s recebeu $%.2f."
@@ -5822,34 +5822,6 @@ msgstr "Uzi"
 msgid "Everybody's favorite Warmux weapon."
 msgstr "Sua arma favorita ao jogar Warmux."
 
-#: data/weapons/types/categories.dcl:2
-msgid "Martial"
-msgstr "Marcial"
-
-#: data/weapons/types/categories.dcl:3
-msgid "Exotic"
-msgstr "Exotico"
-
-#: data/weapons/types/categories.dcl:4
-msgid "Throwing"
-msgstr "Arremesso"
-
-#: data/weapons/types/categories.dcl:5
-msgid "Simple"
-msgstr "Simples"
-
-#: data/weapons/types/categories.dcl:6
-msgid "Two Handed"
-msgstr "Duas Mãos"
-
-#: data/weapons/types/categories.dcl:7
-msgid "Gun"
-msgstr "Arma de Fogo"
-
-#: data/weapons/types/categories.dcl:8
-msgid "Rifle"
-msgstr "Rifle"
-
 #: data/weapons/types/damages.dcl:2
 msgid "Piercing"
 msgstr "Perfuração"
@@ -6076,105 +6048,26 @@ msgstr "Sem jogos, sem poder"
 msgid "No more games"
 msgstr "Sem mais jogos"
 
-#~ msgid "Child"
-#~ msgstr "Criança"
+#~ msgid "Exotic"
+#~ msgstr "Exotico"
 
-#~ msgid "Ok."
-#~ msgstr "Ok."
+#~ msgid "Gun"
+#~ msgstr "Arma de Fogo"
 
-#~ msgid "If I have enough time!"
-#~ msgstr "Se eu arrumar tempo!"
+#~ msgid "Martial"
+#~ msgstr "Marcial"
 
-#~ msgid "Because I want!"
-#~ msgstr "Porque eu quero!"
+#~ msgid "Rifle"
+#~ msgstr "Rifle"
 
-#~ msgid "Now!"
-#~ msgstr "Agora!"
+#~ msgid "Simple"
+#~ msgstr "Simples"
 
-#~ msgid "The most insurgent weapon of the Asia."
-#~ msgstr "A mais insurgente arma da Ásia."
+#~ msgid "Throwing"
+#~ msgstr "Arremesso"
 
-#~ msgid "Your Warmux favorite weapon."
-#~ msgstr "Sua arma favorita em Warmux."
-
-#~ msgid ""
-#~ "Since they are Taylor's faithful disciples, they receive +4 of Taylorism "
-#~ "Skill."
-#~ msgstr ""
-#~ "Por serem fiéis discípulos de Taylor, recebem +4 na perícia Bovinice de "
-#~ "Taylor."
-
-#~ msgid ""
-#~ "In their dogmatic cult to Taylor they found bizarre things (with maximun "
-#~ "financial efficiency) to be their 'clothes', receiving +4 of Bizarre "
-#~ "Clothes."
-#~ msgstr ""
-#~ "Recebem +4 em  Roupas Bizarras, uma vez que, em seu culto dogmático a "
-#~ "taylor, acabam achando coisas bizarras (mas de eficiência financeira "
-#~ "máxima) para utilizar como vestimentas."
-
-#~ msgid ""
-#~ "Everyone knows that Administration Students have a lot of difficulty in "
-#~ "the assimilation of other's opinions, and also to ask in a concise way "
-#~ "some question, so they receive -6 of Listen."
-#~ msgstr ""
-#~ "Sabe-se muito bem que os Estudantes de Administração tem grandes "
-#~ "dificuldades em assimilar a opinião alheia, bem como a responder de forma "
-#~ "concisa a alguma pergunta, logo recebem -6 em Ouvir."
-
-#~ msgid ""
-#~ "Since they are commonly mistaken for hippies, Biology Students receive +6 "
-#~ "of Disguises when disguised as hippies (and when not of this race)"
-#~ msgstr ""
-#~ "Por serem costumeiramente confundidos com hippies, Estudantes de Biologia "
-#~ "recebem +6 em disfarces ao se disfarçar de hippies (caso já não sejam "
-#~ "desta raça)."
-
-#~ msgid "For the same reason, -4 of Carte Blanche."
-#~ msgstr "Pelo mesmo motivo, recebem -4 em passe-livre."
-
-#~ msgid ""
-#~ "For the hard work observing ameivas, the Biology Student receives +2 of "
-#~ "furtivity."
-#~ msgstr ""
-#~ "Pelo árduo trabalho de observação de ameivas, o Estudante de Biologia "
-#~ "recebe +2 em furtividade"
-
-#~ msgid ""
-#~ "Because he doesn't attend any (or very few) classes, the Philosophy "
-#~ "Student receives -4 of Not Enough Time."
-#~ msgstr ""
-#~ "Por fazerem poucas ou nenhuma matéria, os Estudantes de Filosofia recebem "
-#~ "-4 em Sem Tempo."
-
-#~ msgid "-4 of Hide, since they are coarse hulks."
-#~ msgstr "-4 em Esconder-se, por serem  brutamontes grossos."
-
-#~ msgid "-2 of Listen, since their muscles fill their ear canals."
-#~ msgstr ""
-#~ "-2 em ouvir, pois os músculos tomaram conta dos orifícios auriculares."
-
-#~ msgid ""
-#~ "The Student receives -4 in Training Animals, since, because they haven't "
-#~ "absolute control of their muscles, there is a chance of crushing the "
-#~ "animal."
-#~ msgstr ""
-#~ "O Estudante de Ed.Física possui -4 em Adestrar Bichos pois, por não ter "
-#~ "controle absoluto de seus músculos, há uma chance de esmagar o animal."
-
-#~ msgid ""
-#~ "Receives -3 in Direction cause they usually get lost among their own "
-#~ "muscles."
-#~ msgstr ""
-#~ "Possuem também -3 em Direção por se perderem em meio a seus próprios "
-#~ "músculos."
-
-#~ msgid ""
-#~ "Because his skills are extremely limited, the Physical Education Student "
-#~ "doesn't have any limits concerning how many points he can get in Sports."
-#~ msgstr ""
-#~ "O Estudante de Ed. Física, por ser extremamente limitado em suas "
-#~ "perícias, não possui limite estabelecido para graduar-se em Esportes."
+#~ msgid "Two Handed"
+#~ msgstr "Duas Mãos"
 
 #~ msgid ""
 #~ "-12 of Furtive when in a radius of 30 meters of at least one ICEX Student."
@@ -6185,15 +6078,29 @@ msgstr "Sem mais jogos"
 #~ msgid "-12 of Hide in the same circunstances."
 #~ msgstr "-12 em Esconder-se nas mesmas circustâncias."
 
-#~ msgid ""
-#~ "OT Students have a tendency to play that musical instrument called a "
-#~ "bass, receiving -4 of Observe."
+#~ msgid "-2 of Listen, since their muscles fill their ear canals."
 #~ msgstr ""
-#~ "Estudantes de TO tem tendência a tocarem aquele instrumento musical "
-#~ "denominado baixo, recebendo -4 de penalidade em Observar."
+#~ "-2 em ouvir, pois os músculos tomaram conta dos orifícios auriculares."
 
-#~ msgid "For the aforesaid reasons, the Patys also receive + 2 of Disguises."
-#~ msgstr "Pelas razões supracitadas, as Patys também recebem +2 em Disfarces."
+#~ msgid "-4 of Hide, since they are coarse hulks."
+#~ msgstr "-4 em Esconder-se, por serem  brutamontes grossos."
+
+#~ msgid "Because I want!"
+#~ msgstr "Porque eu quero!"
+
+#~ msgid ""
+#~ "Because he doesn't attend any (or very few) classes, the Philosophy "
+#~ "Student receives -4 of Not Enough Time."
+#~ msgstr ""
+#~ "Por fazerem poucas ou nenhuma matéria, os Estudantes de Filosofia recebem "
+#~ "-4 em Sem Tempo."
+
+#~ msgid ""
+#~ "Because his skills are extremely limited, the Physical Education Student "
+#~ "doesn't have any limits concerning how many points he can get in Sports."
+#~ msgstr ""
+#~ "O Estudante de Ed. Física, por ser extremamente limitado em suas "
+#~ "perícias, não possui limite estabelecido para graduar-se em Esportes."
 
 #~ msgid ""
 #~ "Boys have Driver as class skill, since they are distinguished offenders "
@@ -6202,14 +6109,100 @@ msgstr "Sem mais jogos"
 #~ "Os Boys recebem Condução como perícia de classe, por serem exímios  "
 #~ "infratores das leis de trânsito."
 
+#~ msgid "Child"
+#~ msgstr "Criança"
+
 #~ msgid "Enable MultiTextures"
 #~ msgstr "Habilitar Múltiplas Texturas"
+
+#~ msgid ""
+#~ "Everyone knows that Administration Students have a lot of difficulty in "
+#~ "the assimilation of other's opinions, and also to ask in a concise way "
+#~ "some question, so they receive -6 of Listen."
+#~ msgstr ""
+#~ "Sabe-se muito bem que os Estudantes de Administração tem grandes "
+#~ "dificuldades em assimilar a opinião alheia, bem como a responder de forma "
+#~ "concisa a alguma pergunta, logo recebem -6 em Ouvir."
+
+#~ msgid "FPS"
+#~ msgstr "FPS"
+
+#~ msgid "For the aforesaid reasons, the Patys also receive + 2 of Disguises."
+#~ msgstr "Pelas razões supracitadas, as Patys também recebem +2 em Disfarces."
+
+#~ msgid ""
+#~ "For the hard work observing ameivas, the Biology Student receives +2 of "
+#~ "furtivity."
+#~ msgstr ""
+#~ "Pelo árduo trabalho de observação de ameivas, o Estudante de Biologia "
+#~ "recebe +2 em furtividade"
+
+#~ msgid "For the same reason, -4 of Carte Blanche."
+#~ msgstr "Pelo mesmo motivo, recebem -4 em passe-livre."
+
+#~ msgid "If I have enough time!"
+#~ msgstr "Se eu arrumar tempo!"
+
+#~ msgid ""
+#~ "In their dogmatic cult to Taylor they found bizarre things (with maximun "
+#~ "financial efficiency) to be their 'clothes', receiving +4 of Bizarre "
+#~ "Clothes."
+#~ msgstr ""
+#~ "Recebem +4 em  Roupas Bizarras, uma vez que, em seu culto dogmático a "
+#~ "taylor, acabam achando coisas bizarras (mas de eficiência financeira "
+#~ "máxima) para utilizar como vestimentas."
 
 #~ msgid "Nothing"
 #~ msgstr "Nada"
 
+#~ msgid "Now!"
+#~ msgstr "Agora!"
+
+#~ msgid ""
+#~ "OT Students have a tendency to play that musical instrument called a "
+#~ "bass, receiving -4 of Observe."
+#~ msgstr ""
+#~ "Estudantes de TO tem tendência a tocarem aquele instrumento musical "
+#~ "denominado baixo, recebendo -4 de penalidade em Observar."
+
+#~ msgid "Ok."
+#~ msgstr "Ok."
+
 #~ msgid "Particles"
 #~ msgstr "Partículas"
 
-#~ msgid "FPS"
-#~ msgstr "FPS"
+#~ msgid ""
+#~ "Receives -3 in Direction cause they usually get lost among their own "
+#~ "muscles."
+#~ msgstr ""
+#~ "Possuem também -3 em Direção por se perderem em meio a seus próprios "
+#~ "músculos."
+
+#~ msgid ""
+#~ "Since they are Taylor's faithful disciples, they receive +4 of Taylorism "
+#~ "Skill."
+#~ msgstr ""
+#~ "Por serem fiéis discípulos de Taylor, recebem +4 na perícia Bovinice de "
+#~ "Taylor."
+
+#~ msgid ""
+#~ "Since they are commonly mistaken for hippies, Biology Students receive +6 "
+#~ "of Disguises when disguised as hippies (and when not of this race)"
+#~ msgstr ""
+#~ "Por serem costumeiramente confundidos com hippies, Estudantes de Biologia "
+#~ "recebem +6 em disfarces ao se disfarçar de hippies (caso já não sejam "
+#~ "desta raça)."
+
+#~ msgid ""
+#~ "The Student receives -4 in Training Animals, since, because they haven't "
+#~ "absolute control of their muscles, there is a chance of crushing the "
+#~ "animal."
+#~ msgstr ""
+#~ "O Estudante de Ed.Física possui -4 em Adestrar Bichos pois, por não ter "
+#~ "controle absoluto de seus músculos, há uma chance de esmagar o animal."
+
+#~ msgid "The most insurgent weapon of the Asia."
+#~ msgstr "A mais insurgente arma da Ásia."
+
+#~ msgid "Your Warmux favorite weapon."
+#~ msgstr "Sua arma favorita em Warmux."

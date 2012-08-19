@@ -66,15 +66,14 @@ hardware. They are:
    a) LINUX, BSD, *NIX
 
    To "install" DNT, decompact the tar.bz2, go to the directory
-"dnt",  run   ./configure ,   run   "make"   and,   optionally, 
+"dnt",  run   "cmake ." ,   run   "make"   and,   optionally, 
 "make install".
 
    Example:
 
    farrer@anamabeka:~/$ tar -xvjf dnt.tar.bz2
    farrer@anamabeka:~/$ cd dnt
-   farrer@anamabeka:~/$ autoconf
-   farrer@anamabeka:~/dnt/$ ./configure
+   farrer@anamabeka:~/dnt/$ cmake .
    farrer@anamabeka:~/dnt/$ make
    farrer@anamabeka:~/dnt/$ sudo make install
 

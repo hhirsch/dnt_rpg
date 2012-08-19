@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2012-08-15 19:01-0300\n"
+"POT-Creation-Date: 2012-08-19 19:25-0300\n"
 "PO-Revision-Date: 2011-02-09 20:48+0000\n"
 "Last-Translator: lann <lann@worldonline.fr>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -1176,12 +1176,12 @@ msgstr "Tour de %s."
 msgid "%s rolls initiative: "
 msgstr "Jet d'initiative de %s : "
 
-#: src/ia/iascript.cpp:2510
+#: src/ia/iascript.cpp:2512
 #, c-format
 msgid "%s lost %s."
 msgstr ""
 
-#: src/ia/iascript.cpp:2537
+#: src/ia/iascript.cpp:2539
 #, c-format
 msgid "%s received $%.2f."
 msgstr ""
@@ -5667,34 +5667,6 @@ msgstr "Uzi"
 msgid "Everybody's favorite Warmux weapon."
 msgstr ""
 
-#: data/weapons/types/categories.dcl:2
-msgid "Martial"
-msgstr "de Guerrier"
-
-#: data/weapons/types/categories.dcl:3
-msgid "Exotic"
-msgstr "Exotique"
-
-#: data/weapons/types/categories.dcl:4
-msgid "Throwing"
-msgstr "Qui se lancent"
-
-#: data/weapons/types/categories.dcl:5
-msgid "Simple"
-msgstr "Simple"
-
-#: data/weapons/types/categories.dcl:6
-msgid "Two Handed"
-msgstr "A deux Mains"
-
-#: data/weapons/types/categories.dcl:7
-msgid "Gun"
-msgstr "Pistolet"
-
-#: data/weapons/types/categories.dcl:8
-msgid "Rifle"
-msgstr "Rifle"
-
 #: data/weapons/types/damages.dcl:2
 msgid "Piercing"
 msgstr "Perforation"
@@ -5921,99 +5893,26 @@ msgstr ""
 msgid "No more games"
 msgstr ""
 
-#~ msgid "Ok."
-#~ msgstr "Ok."
+#~ msgid "Exotic"
+#~ msgstr "Exotique"
 
-#~ msgid "If I have enough time!"
-#~ msgstr "Si j'avais assez de temps !"
+#~ msgid "Gun"
+#~ msgstr "Pistolet"
 
-#~ msgid "Because I want!"
-#~ msgstr "Parce que je veux !"
+#~ msgid "Martial"
+#~ msgstr "de Guerrier"
 
-#~ msgid "Now!"
-#~ msgstr "Maintenant !"
+#~ msgid "Rifle"
+#~ msgstr "Rifle"
 
-#~ msgid ""
-#~ "Since they are Taylor's faithful disciples, they receive +4 of Taylorism "
-#~ "Skill."
-#~ msgstr ""
-#~ "Etant de fidèles disciples de Taylor, ils reçoivent +4 en Taylorisme."
+#~ msgid "Simple"
+#~ msgstr "Simple"
 
-#~ msgid ""
-#~ "In their dogmatic cult to Taylor they found bizarre things (with maximun "
-#~ "financial efficiency) to be their 'clothes', receiving +4 of Bizarre "
-#~ "Clothes."
-#~ msgstr ""
-#~ "Dans le culte dogmatique qu'ils vouent à Taylor, ils trouvèrent des "
-#~ "choses bizarres (ayant une maximum d'efficacité dans le domaine de la "
-#~ "finance) qui leur servent de \"vêtements\". Ainsi, ils reçoivent +4 en "
-#~ "Vêtements bizarres."
+#~ msgid "Throwing"
+#~ msgstr "Qui se lancent"
 
-#~ msgid ""
-#~ "Everyone knows that Administration Students have a lot of difficulty in "
-#~ "the assimilation of other's opinions, and also to ask in a concise way "
-#~ "some question, so they receive -6 of Listen."
-#~ msgstr ""
-#~ "Chacun sait que les étudiants en Administration n'adoptent pas facilement "
-#~ "l'opinion des autres et ne savent pas poser des questions de façon "
-#~ "concise. Ainsi, ils reçoivent -6 en Ecoute."
-
-#~ msgid ""
-#~ "Since they are commonly mistaken for hippies, Biology Students receive +6 "
-#~ "of Disguises when disguised as hippies (and when not of this race)"
-#~ msgstr ""
-#~ "Puisqu'on les prend souvent pour de hippies, les étudiants en Biologie "
-#~ "reçoivent +6 en Déguisements lorsqu'ils se sont déguisés en hippies (et "
-#~ "quand ils n'appartiennent pas à cette race)."
-
-#~ msgid "For the same reason, -4 of Carte Blanche."
-#~ msgstr "Pour la même raison, -4 en Carte Blanche"
-
-#~ msgid ""
-#~ "For the hard work observing ameivas, the Biology Student receives +2 of "
-#~ "furtivity."
-#~ msgstr ""
-#~ "Grâce au dur labeur durant l'observation des améives, l'Etudiant en "
-#~ "Biologie reçoit +2 en furtivité."
-
-#~ msgid ""
-#~ "Because he doesn't attend any (or very few) classes, the Philosophy "
-#~ "Student receives -4 of Not Enough Time."
-#~ msgstr ""
-#~ "Parce qu'il n'assiste pas - ou très peu - aux cours, l'étudiant en "
-#~ "philosophie reçoit -4 en Manque de Temps."
-
-#~ msgid "-4 of Hide, since they are coarse hulks."
-#~ msgstr ""
-#~ "-4 en Capacité de se cacher, puisqu'ils sont des mastodontes grossiers."
-
-#~ msgid "-2 of Listen, since their muscles fill their ear canals."
-#~ msgstr ""
-#~ "-2 en Ecoute, puisque leurs muscles commandent toutes les ouvertures de "
-#~ "leurs oreilles."
-
-#~ msgid ""
-#~ "The Student receives -4 in Training Animals, since, because they haven't "
-#~ "absolute control of their muscles, there is a chance of crushing the "
-#~ "animal."
-#~ msgstr ""
-#~ "L'étudiant reçoit -4 en Dressage des Animaux, puisque qu'il y a des "
-#~ "chances qu'ils écrasent l'animal, car ils ne contrôlent pas leur muscles "
-#~ "complètement."
-
-#~ msgid ""
-#~ "Receives -3 in Direction cause they usually get lost among their own "
-#~ "muscles."
-#~ msgstr ""
-#~ "Il reçoit -3 en Direction car il se perd généralement dans ses propres "
-#~ "muscles."
-
-#~ msgid ""
-#~ "Because his skills are extremely limited, the Physical Education Student "
-#~ "doesn't have any limits concerning how many points he can get in Sports."
-#~ msgstr ""
-#~ "Parce qu'il est extrêmement limité dans ses Compétences, l'Etudiant en "
-#~ "Education Physique n'a aucune limite de point en Sports."
+#~ msgid "Two Handed"
+#~ msgstr "A deux Mains"
 
 #~ msgid ""
 #~ "-12 of Furtive when in a radius of 30 meters of at least one ICEX Student."
@@ -6024,17 +5923,31 @@ msgstr ""
 #~ msgid "-12 of Hide in the same circunstances."
 #~ msgstr "-12 en capacité de se cacher dans les mêmes circonstances"
 
-#~ msgid ""
-#~ "OT Students have a tendency to play that musical instrument called a "
-#~ "bass, receiving -4 of Observe."
+#~ msgid "-2 of Listen, since their muscles fill their ear canals."
 #~ msgstr ""
-#~ "Les étudiantes en ergothérapie ont tendance à jouer de cet instrument de "
-#~ "musique que l'on appelle une basse et reçoivent -4 en Observation."
+#~ "-2 en Ecoute, puisque leurs muscles commandent toutes les ouvertures de "
+#~ "leurs oreilles."
 
-#~ msgid "For the aforesaid reasons, the Patys also receive + 2 of Disguises."
+#~ msgid "-4 of Hide, since they are coarse hulks."
 #~ msgstr ""
-#~ "Pour les raisons déjà déonnées, les Patys reçoivent également +2 en "
-#~ "Déguisement."
+#~ "-4 en Capacité de se cacher, puisqu'ils sont des mastodontes grossiers."
+
+#~ msgid "Because I want!"
+#~ msgstr "Parce que je veux !"
+
+#~ msgid ""
+#~ "Because he doesn't attend any (or very few) classes, the Philosophy "
+#~ "Student receives -4 of Not Enough Time."
+#~ msgstr ""
+#~ "Parce qu'il n'assiste pas - ou très peu - aux cours, l'étudiant en "
+#~ "philosophie reçoit -4 en Manque de Temps."
+
+#~ msgid ""
+#~ "Because his skills are extremely limited, the Physical Education Student "
+#~ "doesn't have any limits concerning how many points he can get in Sports."
+#~ msgstr ""
+#~ "Parce qu'il est extrêmement limité dans ses Compétences, l'Etudiant en "
+#~ "Education Physique n'a aucune limite de point en Sports."
 
 #~ msgid ""
 #~ "Boys have Driver as class skill, since they are distinguished offenders "
@@ -6043,29 +5956,11 @@ msgstr ""
 #~ "Chauffeur est la compétence de la classe des garçons, puisqu'ils "
 #~ "contreviennent au Code de la route, et ce, de façon très distinguée."
 
-#~ msgid "Enable MultiTextures"
-#~ msgstr "Activer MultiTextures"
-
-#~ msgid "Nothing"
-#~ msgstr "Rien"
+#~ msgid "Character's melee attack."
+#~ msgstr "Attaque de melée du personnage"
 
 #~ msgid "Character's ranged attack."
 #~ msgstr "Attaque à distance du personnage"
-
-#~ msgid "Ranged Attack"
-#~ msgstr "Attaque à distance"
-
-#~ msgid "Reflex"
-#~ msgstr "Réflexe"
-
-#~ msgid "Particles"
-#~ msgstr "Particules"
-
-#~ msgid "Open Assign Attacks Window"
-#~ msgstr "Ouvrir la fenêtre des Postes d'attaque"
-
-#~ msgid "Not found in dialog: %d\n"
-#~ msgstr "Introuvable dans le dialogue : %d\n"
 
 #~ msgid ""
 #~ "DccNiTghtmare is developed under Public Domain: Feel free to use its "
@@ -6079,27 +5974,41 @@ msgstr ""
 #~ "des bibliothèques (librairies) suivantes: OpenAL, Cal3D, OpenGL, SDL, "
 #~ "SDL_image, SDL_ttf, libVorbis."
 
+#~ msgid "Enable MultiTextures"
+#~ msgstr "Activer MultiTextures"
+
+#~ msgid ""
+#~ "Everyone knows that Administration Students have a lot of difficulty in "
+#~ "the assimilation of other's opinions, and also to ask in a concise way "
+#~ "some question, so they receive -6 of Listen."
+#~ msgstr ""
+#~ "Chacun sait que les étudiants en Administration n'adoptent pas facilement "
+#~ "l'opinion des autres et ne savent pas poser des questions de façon "
+#~ "concise. Ainsi, ils reçoivent -6 en Ecoute."
+
+#~ msgid "FPS"
+#~ msgstr "IPS"
+
+#~ msgid "For the aforesaid reasons, the Patys also receive + 2 of Disguises."
+#~ msgstr ""
+#~ "Pour les raisons déjà déonnées, les Patys reçoivent également +2 en "
+#~ "Déguisement."
+
+#~ msgid ""
+#~ "For the hard work observing ameivas, the Biology Student receives +2 of "
+#~ "furtivity."
+#~ msgstr ""
+#~ "Grâce au dur labeur durant l'observation des améives, l'Etudiant en "
+#~ "Biologie reçoit +2 en furtivité."
+
+#~ msgid "For the same reason, -4 of Carte Blanche."
+#~ msgstr "Pour la même raison, -4 en Carte Blanche"
+
 #~ msgid "I am Bombadinho"
 #~ msgstr "Je suis Bambadinho"
 
-#~ msgid "Melee Attack"
-#~ msgstr "Attaque en melée"
-
 #~ msgid "I am Logan, maintainer of this occupation."
 #~ msgstr "Je m'appelle Logan, le préposé à l'entretien de cette occupation."
-
-#~ msgid ""
-#~ "Occupation? Is this, the cleanest house I've ever seen, an occupation?"
-#~ msgstr ""
-#~ "Occupation ? Cette maison-ci, la maison la plus propre que j'ai jamais "
-#~ "vue, est-elle une occupation ?"
-
-#~ msgid ""
-#~ "Yes, occupation. A clean and sweet ocupation that also serves as a "
-#~ "healing clinic for people with big tongues and no gratitude!"
-#~ msgstr ""
-#~ "Oui, une occupation. Une occupation propre et douce qui sert aussi comme "
-#~ "clinique de guérison pour des gens sans gratitude et qui parlent trop."
 
 #~ msgid ""
 #~ "I need you to install a Ruindows on the occupation's notebook. Will you "
@@ -6108,8 +6017,88 @@ msgstr ""
 #~ "J'ai besoin de vous pour installer une version de Ruindows sur le "
 #~ "portable de l'habitation. Le ferez-vous ?"
 
-#~ msgid "Character's melee attack."
-#~ msgstr "Attaque de melée du personnage"
+#~ msgid "If I have enough time!"
+#~ msgstr "Si j'avais assez de temps !"
+
+#~ msgid ""
+#~ "In their dogmatic cult to Taylor they found bizarre things (with maximun "
+#~ "financial efficiency) to be their 'clothes', receiving +4 of Bizarre "
+#~ "Clothes."
+#~ msgstr ""
+#~ "Dans le culte dogmatique qu'ils vouent à Taylor, ils trouvèrent des "
+#~ "choses bizarres (ayant une maximum d'efficacité dans le domaine de la "
+#~ "finance) qui leur servent de \"vêtements\". Ainsi, ils reçoivent +4 en "
+#~ "Vêtements bizarres."
+
+#~ msgid "Melee Attack"
+#~ msgstr "Attaque en melée"
+
+#~ msgid "Not found in dialog: %d\n"
+#~ msgstr "Introuvable dans le dialogue : %d\n"
+
+#~ msgid "Nothing"
+#~ msgstr "Rien"
+
+#~ msgid "Now!"
+#~ msgstr "Maintenant !"
+
+#~ msgid ""
+#~ "OT Students have a tendency to play that musical instrument called a "
+#~ "bass, receiving -4 of Observe."
+#~ msgstr ""
+#~ "Les étudiantes en ergothérapie ont tendance à jouer de cet instrument de "
+#~ "musique que l'on appelle une basse et reçoivent -4 en Observation."
+
+#~ msgid ""
+#~ "Occupation? Is this, the cleanest house I've ever seen, an occupation?"
+#~ msgstr ""
+#~ "Occupation ? Cette maison-ci, la maison la plus propre que j'ai jamais "
+#~ "vue, est-elle une occupation ?"
+
+#~ msgid "Ok."
+#~ msgstr "Ok."
+
+#~ msgid "Open Assign Attacks Window"
+#~ msgstr "Ouvrir la fenêtre des Postes d'attaque"
+
+#~ msgid "Particles"
+#~ msgstr "Particules"
+
+#~ msgid "Ranged Attack"
+#~ msgstr "Attaque à distance"
+
+#~ msgid ""
+#~ "Receives -3 in Direction cause they usually get lost among their own "
+#~ "muscles."
+#~ msgstr ""
+#~ "Il reçoit -3 en Direction car il se perd généralement dans ses propres "
+#~ "muscles."
+
+#~ msgid "Reflex"
+#~ msgstr "Réflexe"
+
+#~ msgid ""
+#~ "Since they are Taylor's faithful disciples, they receive +4 of Taylorism "
+#~ "Skill."
+#~ msgstr ""
+#~ "Etant de fidèles disciples de Taylor, ils reçoivent +4 en Taylorisme."
+
+#~ msgid ""
+#~ "Since they are commonly mistaken for hippies, Biology Students receive +6 "
+#~ "of Disguises when disguised as hippies (and when not of this race)"
+#~ msgstr ""
+#~ "Puisqu'on les prend souvent pour de hippies, les étudiants en Biologie "
+#~ "reçoivent +6 en Déguisements lorsqu'ils se sont déguisés en hippies (et "
+#~ "quand ils n'appartiennent pas à cette race)."
+
+#~ msgid ""
+#~ "The Student receives -4 in Training Animals, since, because they haven't "
+#~ "absolute control of their muscles, there is a chance of crushing the "
+#~ "animal."
+#~ msgstr ""
+#~ "L'étudiant reçoit -4 en Dressage des Animaux, puisque qu'il y a des "
+#~ "chances qu'ils écrasent l'animal, car ils ne contrôlent pas leur muscles "
+#~ "complètement."
 
 #~ msgid ""
 #~ "The Student who has frequently gone to the academy, permanently receives "
@@ -6118,5 +6107,9 @@ msgstr ""
 #~ "L'étudiant qui va souvent et depuis longtemps à l'académie, reçoit +1 en "
 #~ "Force de façon permanente."
 
-#~ msgid "FPS"
-#~ msgstr "IPS"
+#~ msgid ""
+#~ "Yes, occupation. A clean and sweet ocupation that also serves as a "
+#~ "healing clinic for people with big tongues and no gratitude!"
+#~ msgstr ""
+#~ "Oui, une occupation. Une occupation propre et douce qui sert aussi comme "
+#~ "clinique de guérison pour des gens sans gratitude et qui parlent trop."

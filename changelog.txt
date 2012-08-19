@@ -34,6 +34,7 @@
  - New models;
  - Much better indoor textures (thanks to qubodup);
  - Few new talents implemented;
+ - Using cmake as building tool;
 
 BugFixes:
  - heightmap2dnt: Fixed a missing include;

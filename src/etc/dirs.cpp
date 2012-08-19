@@ -51,6 +51,7 @@ void dirs::findDataDirectories()
 #else
    dataDir += "/";
    dataDir += PACKAGE;
+   dataDir += "/data";
 #endif
    
 #if defined (__amigaos4__)

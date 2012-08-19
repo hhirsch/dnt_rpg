@@ -523,7 +523,7 @@ data/weapons/definitions/knife.wcc
 data/weapons/definitions/scimitar.wcc
 data/weapons/definitions/sw39.wcc
 data/weapons/definitions/uzi.wcc
-data/weapons/types/categories.dcl  
+#data/weapons/types/categories.dcl  
 data/weapons/types/damages.dcl
 data/weapons/types/munitions.dcl
 data/weapons/types/ranges.dcl

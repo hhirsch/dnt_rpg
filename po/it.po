@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2012-08-15 19:01-0300\n"
+"POT-Creation-Date: 2012-08-19 19:25-0300\n"
 "PO-Revision-Date: 2012-02-04 01:59+0000\n"
 "Last-Translator: Vinnie <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -1176,12 +1176,12 @@ msgstr "Turno di %s."
 msgid "%s rolls initiative: "
 msgstr "%s tira per l'iniziativa: "
 
-#: src/ia/iascript.cpp:2510
+#: src/ia/iascript.cpp:2512
 #, c-format
 msgid "%s lost %s."
 msgstr "%s perso %s"
 
-#: src/ia/iascript.cpp:2537
+#: src/ia/iascript.cpp:2539
 #, c-format
 msgid "%s received $%.2f."
 msgstr "%s ricevuto $%.2f."
@@ -5734,34 +5734,6 @@ msgstr "Uzi"
 msgid "Everybody's favorite Warmux weapon."
 msgstr ""
 
-#: data/weapons/types/categories.dcl:2
-msgid "Martial"
-msgstr "Marziale"
-
-#: data/weapons/types/categories.dcl:3
-msgid "Exotic"
-msgstr "Esotico"
-
-#: data/weapons/types/categories.dcl:4
-msgid "Throwing"
-msgstr "Lancio"
-
-#: data/weapons/types/categories.dcl:5
-msgid "Simple"
-msgstr "Semplice"
-
-#: data/weapons/types/categories.dcl:6
-msgid "Two Handed"
-msgstr "A Due Mani"
-
-#: data/weapons/types/categories.dcl:7
-msgid "Gun"
-msgstr "Pistola"
-
-#: data/weapons/types/categories.dcl:8
-msgid "Rifle"
-msgstr "Fucile"
-
 #: data/weapons/types/damages.dcl:2
 msgid "Piercing"
 msgstr "Perforante"
@@ -5988,37 +5960,64 @@ msgstr ""
 msgid "No more games"
 msgstr ""
 
-#~ msgid "Ok."
-#~ msgstr "Ok."
+#~ msgid "Exotic"
+#~ msgstr "Esotico"
 
-#~ msgid "If I have enough time!"
-#~ msgstr "Se avessi tempo!"
+#~ msgid "Gun"
+#~ msgstr "Pistola"
+
+#~ msgid "Martial"
+#~ msgstr "Marziale"
+
+#~ msgid "Rifle"
+#~ msgstr "Fucile"
+
+#~ msgid "Simple"
+#~ msgstr "Semplice"
+
+#~ msgid "Throwing"
+#~ msgstr "Lancio"
+
+#~ msgid "Two Handed"
+#~ msgstr "A Due Mani"
+
+#~ msgid ""
+#~ "-12 of Furtive when in a radius of 30 meters of at least one ICEX Student."
+#~ msgstr ""
+#~ "-12 alla Furtività quando hanno uno Studente dell'ICEX a meno di 30 metri."
+
+#~ msgid "-12 of Hide in the same circunstances."
+#~ msgstr "-12 a Nascondersi nelle stesse condizioni."
+
+#~ msgid "-2 of Listen, since their muscles fill their ear canals."
+#~ msgstr "-2 di Ascolto, in quanto i muscoli occupano i loro canali uditivi."
+
+#~ msgid "-4 of Hide, since they are coarse hulks."
+#~ msgstr "-4 a Nascondersi per la stazza enorme"
 
 #~ msgid "Because I want!"
 #~ msgstr "Perché voglio!"
 
-#~ msgid "Now!"
-#~ msgstr "Ora!"
-
-#~ msgid "The most insurgent weapon of the Asia."
-#~ msgstr "L'arma più ribelle dell'Asia."
-
-#~ msgid "Your Warmux favorite weapon."
-#~ msgstr "La tua arma preferita di Wormux."
-
 #~ msgid ""
-#~ "Since they are Taylor's faithful disciples, they receive +4 of Taylorism "
-#~ "Skill."
-#~ msgstr "Dato che sono discepoli fedeli di Taylor ricevono +4 in Taylorismo"
-
-#~ msgid ""
-#~ "In their dogmatic cult to Taylor they found bizarre things (with maximun "
-#~ "financial efficiency) to be their 'clothes', receiving +4 of Bizarre "
-#~ "Clothes."
+#~ "Because he doesn't attend any (or very few) classes, the Philosophy "
+#~ "Student receives -4 of Not Enough Time."
 #~ msgstr ""
-#~ "Nel loro culto dogmatico verso Taylor trovano cose bizzarre (con il "
-#~ "massimo dell'efficienza finanziaria) da usare come 'vestiti', ricevendo "
-#~ "+4 a Vestiti Bizzari"
+#~ "Poichè non si aspettano nessuna (o molte pochi) classi ricevono -4 a Non "
+#~ "Abbastanza Tempo."
+
+#~ msgid ""
+#~ "Because his skills are extremely limited, the Physical Education Student "
+#~ "doesn't have any limits concerning how many points he can get in Sports."
+#~ msgstr ""
+#~ "A causa delle sue capacità estrememante limitate, lo Studente di "
+#~ "Educazione Fisica non ha limiti nel numero di punti spendibili in Sports."
+
+#~ msgid ""
+#~ "Boys have Driver as class skill, since they are distinguished offenders "
+#~ "of traffic laws."
+#~ msgstr ""
+#~ "I Bulli hanno Pilota come abilità di classe dato che si distinguono come "
+#~ "violatori delle leggi del traffico."
 
 #~ msgid ""
 #~ "Everyone knows that Administration Students have a lot of difficulty in "
@@ -6029,16 +6028,8 @@ msgstr ""
 #~ "difficoltà nell'assimilare le opinioni degli altri, così come fare "
 #~ "domande in forma concisa, quindi ricevono -6 ad Ascoltare"
 
-#~ msgid ""
-#~ "Since they are commonly mistaken for hippies, Biology Students receive +6 "
-#~ "of Disguises when disguised as hippies (and when not of this race)"
-#~ msgstr ""
-#~ "Dato che comunemente sono scambiati per hippies, i Studenti di Biologia "
-#~ "ricevono +6 in Camuffamento quando devono camuffarsi in hippies (e non è "
-#~ "di questa razza)"
-
-#~ msgid "For the same reason, -4 of Carte Blanche."
-#~ msgstr "Per la stessa ragione, -4 di Carta Bianca."
+#~ msgid "For the aforesaid reasons, the Patys also receive + 2 of Disguises."
+#~ msgstr "Per le suddette ragioni le Pupe ricevono +2 in Camuffarsi."
 
 #~ msgid ""
 #~ "For the hard work observing ameivas, the Biology Student receives +2 of "
@@ -6047,18 +6038,52 @@ msgstr ""
 #~ "Grazie al duro lavoro di osservazione delle lucertole, lo Studente di "
 #~ "Biologia riceve +2 in furtività"
 
+#~ msgid "For the same reason, -4 of Carte Blanche."
+#~ msgstr "Per la stessa ragione, -4 di Carta Bianca."
+
+#~ msgid "If I have enough time!"
+#~ msgstr "Se avessi tempo!"
+
 #~ msgid ""
-#~ "Because he doesn't attend any (or very few) classes, the Philosophy "
-#~ "Student receives -4 of Not Enough Time."
+#~ "In their dogmatic cult to Taylor they found bizarre things (with maximun "
+#~ "financial efficiency) to be their 'clothes', receiving +4 of Bizarre "
+#~ "Clothes."
 #~ msgstr ""
-#~ "Poichè non si aspettano nessuna (o molte pochi) classi ricevono -4 a Non "
-#~ "Abbastanza Tempo."
+#~ "Nel loro culto dogmatico verso Taylor trovano cose bizzarre (con il "
+#~ "massimo dell'efficienza finanziaria) da usare come 'vestiti', ricevendo "
+#~ "+4 a Vestiti Bizzari"
 
-#~ msgid "-4 of Hide, since they are coarse hulks."
-#~ msgstr "-4 a Nascondersi per la stazza enorme"
+#~ msgid "Now!"
+#~ msgstr "Ora!"
 
-#~ msgid "-2 of Listen, since their muscles fill their ear canals."
-#~ msgstr "-2 di Ascolto, in quanto i muscoli occupano i loro canali uditivi."
+#~ msgid ""
+#~ "OT Students have a tendency to play that musical instrument called a "
+#~ "bass, receiving -4 of Observe."
+#~ msgstr ""
+#~ "Hanno la tendenza a suonare quello strumento musicale chiamato basso, "
+#~ "ricevendo -4 ad Osservare"
+
+#~ msgid "Ok."
+#~ msgstr "Ok."
+
+#~ msgid ""
+#~ "Receives -3 in Direction cause they usually get lost among their own "
+#~ "muscles."
+#~ msgstr ""
+#~ "Ricevono -3 in Orientamento perché si perdono anche tra i loro muscoli"
+
+#~ msgid ""
+#~ "Since they are Taylor's faithful disciples, they receive +4 of Taylorism "
+#~ "Skill."
+#~ msgstr "Dato che sono discepoli fedeli di Taylor ricevono +4 in Taylorismo"
+
+#~ msgid ""
+#~ "Since they are commonly mistaken for hippies, Biology Students receive +6 "
+#~ "of Disguises when disguised as hippies (and when not of this race)"
+#~ msgstr ""
+#~ "Dato che comunemente sono scambiati per hippies, i Studenti di Biologia "
+#~ "ricevono +6 in Camuffamento quando devono camuffarsi in hippies (e non è "
+#~ "di questa razza)"
 
 #~ msgid ""
 #~ "The Student receives -4 in Training Animals, since, because they haven't "
@@ -6069,40 +6094,8 @@ msgstr ""
 #~ "capacità di controllo dei loro muscoli ed rischiano di stritolare "
 #~ "l'animale."
 
-#~ msgid ""
-#~ "Receives -3 in Direction cause they usually get lost among their own "
-#~ "muscles."
-#~ msgstr ""
-#~ "Ricevono -3 in Orientamento perché si perdono anche tra i loro muscoli"
+#~ msgid "The most insurgent weapon of the Asia."
+#~ msgstr "L'arma più ribelle dell'Asia."
 
-#~ msgid ""
-#~ "Because his skills are extremely limited, the Physical Education Student "
-#~ "doesn't have any limits concerning how many points he can get in Sports."
-#~ msgstr ""
-#~ "A causa delle sue capacità estrememante limitate, lo Studente di "
-#~ "Educazione Fisica non ha limiti nel numero di punti spendibili in Sports."
-
-#~ msgid ""
-#~ "-12 of Furtive when in a radius of 30 meters of at least one ICEX Student."
-#~ msgstr ""
-#~ "-12 alla Furtività quando hanno uno Studente dell'ICEX a meno di 30 metri."
-
-#~ msgid "-12 of Hide in the same circunstances."
-#~ msgstr "-12 a Nascondersi nelle stesse condizioni."
-
-#~ msgid ""
-#~ "OT Students have a tendency to play that musical instrument called a "
-#~ "bass, receiving -4 of Observe."
-#~ msgstr ""
-#~ "Hanno la tendenza a suonare quello strumento musicale chiamato basso, "
-#~ "ricevendo -4 ad Osservare"
-
-#~ msgid "For the aforesaid reasons, the Patys also receive + 2 of Disguises."
-#~ msgstr "Per le suddette ragioni le Pupe ricevono +2 in Camuffarsi."
-
-#~ msgid ""
-#~ "Boys have Driver as class skill, since they are distinguished offenders "
-#~ "of traffic laws."
-#~ msgstr ""
-#~ "I Bulli hanno Pilota come abilità di classe dato che si distinguono come "
-#~ "violatori delle leggi del traffico."
+#~ msgid "Your Warmux favorite weapon."
+#~ msgstr "La tua arma preferita di Wormux."

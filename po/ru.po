@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2012-08-15 19:01-0300\n"
+"POT-Creation-Date: 2012-08-19 19:25-0300\n"
 "PO-Revision-Date: 2011-06-28 19:52+0000\n"
 "Last-Translator: Gnatyuk Roman <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -1176,12 +1176,12 @@ msgstr "%s ходит."
 msgid "%s rolls initiative: "
 msgstr "%s перехватывает инициативу: "
 
-#: src/ia/iascript.cpp:2510
+#: src/ia/iascript.cpp:2512
 #, fuzzy, c-format
 msgid "%s lost %s."
 msgstr "%s потеряно."
 
-#: src/ia/iascript.cpp:2537
+#: src/ia/iascript.cpp:2539
 #, fuzzy, c-format
 msgid "%s received $%.2f."
 msgstr "Получено $%d."
@@ -5254,34 +5254,6 @@ msgstr "Узи"
 msgid "Everybody's favorite Warmux weapon."
 msgstr ""
 
-#: data/weapons/types/categories.dcl:2
-msgid "Martial"
-msgstr ""
-
-#: data/weapons/types/categories.dcl:3
-msgid "Exotic"
-msgstr ""
-
-#: data/weapons/types/categories.dcl:4
-msgid "Throwing"
-msgstr "Метательный"
-
-#: data/weapons/types/categories.dcl:5
-msgid "Simple"
-msgstr "Простой"
-
-#: data/weapons/types/categories.dcl:6
-msgid "Two Handed"
-msgstr "Двуручный"
-
-#: data/weapons/types/categories.dcl:7
-msgid "Gun"
-msgstr "Пушка"
-
-#: data/weapons/types/categories.dcl:8
-msgid "Rifle"
-msgstr "Ружье"
-
 #: data/weapons/types/damages.dcl:2
 msgid "Piercing"
 msgstr "Колющее"
@@ -5510,64 +5482,26 @@ msgstr ""
 msgid "No more games"
 msgstr "Нет больше врагов"
 
-#~ msgid "Ok."
-#~ msgstr "Ok."
+#~ msgid "Gun"
+#~ msgstr "Пушка"
 
-#~ msgid "If I have enough time!"
-#~ msgstr "Если бы у меня было время!"
+#~ msgid "Rifle"
+#~ msgstr "Ружье"
 
-#~ msgid "Now!"
-#~ msgstr "Сейчас!"
+#~ msgid "Simple"
+#~ msgstr "Простой"
 
-#~ msgid ""
-#~ "Since they are Taylor's faithful disciples, they receive +4 of Taylorism "
-#~ "Skill."
-#~ msgstr ""
-#~ "Так как они преданные ученники Тэйлора, они получают +4 к Тэйлоризму."
+#~ msgid "Throwing"
+#~ msgstr "Метательный"
 
-#~ msgid ""
-#~ "In their dogmatic cult to Taylor they found bizarre things (with maximun "
-#~ "financial efficiency) to be their 'clothes', receiving +4 of Bizarre "
-#~ "Clothes."
-#~ msgstr ""
-#~ "В их догматической секте Тэйлора они нашли в забавных вещях (с "
-#~ "максимальной финансовой отдачей) собственную 'одежду', получение +4 к "
-#~ "Причудливой Одежде."
-
-#~ msgid ""
-#~ "Everyone knows that Administration Students have a lot of difficulty in "
-#~ "the assimilation of other's opinions, and also to ask in a concise way "
-#~ "some question, so they receive -6 of Listen."
-#~ msgstr ""
-#~ "Все знают, что у Студентов Администрации присутствует большая сложность в "
-#~ "ассимиляции мнений других и также в составлении какого-нибудь краткого "
-#~ "вопроса, так что они получают -6 к Слушанию."
-
-#~ msgid ""
-#~ "Since they are commonly mistaken for hippies, Biology Students receive +6 "
-#~ "of Disguises when disguised as hippies (and when not of this race)"
-#~ msgstr ""
-#~ "Поскольку их часто принимают за хиппи, Студенты Биологи получают +6 к "
-#~ "Маскировке когда замаскированы под хиппи (если не относятся к этой расе)"
-
-#~ msgid "For the same reason, -4 of Carte Blanche."
-#~ msgstr "По той же причине, -4 к Карт Бланшу."
-
-#~ msgid ""
-#~ "For the hard work observing ameivas, the Biology Student receives +2 of "
-#~ "furtivity."
-#~ msgstr ""
-#~ "За тяжкий труд по наблюдению за ящерицами, Студент Биолог получает +2 к "
-#~ "Скрытности."
+#~ msgid "Two Handed"
+#~ msgstr "Двуручный"
 
 #~ msgid "-2 of Listen, since their muscles fill their ear canals."
 #~ msgstr "-2 к Слуху из-за того, что мышцы забили их ушные раковины."
 
-#~ msgid "Enable MultiTextures"
-#~ msgstr "Включить мультитекстурирование"
-
-#~ msgid "Nothing"
-#~ msgstr "Ничего"
+#~ msgid "Character's ranged attack."
+#~ msgstr "Дистанционная атака персонажа"
 
 #~ msgid ""
 #~ "DccNiTghtmare is developed under Public Domain: Feel free to use its "
@@ -5581,26 +5515,79 @@ msgstr "Нет больше врагов"
 #~ "разработавшим следующие библиотеки: OpenAL, Cal3D, OpenGL, SDL, "
 #~ "SDL_image, SDL_ttf, libVorbis."
 
-#~ msgid "Reflex"
-#~ msgstr "Рефлекс"
+#~ msgid "Enable MultiTextures"
+#~ msgstr "Включить мультитекстурирование"
 
-#~ msgid "Particles"
-#~ msgstr "Частицы"
+#~ msgid ""
+#~ "Everyone knows that Administration Students have a lot of difficulty in "
+#~ "the assimilation of other's opinions, and also to ask in a concise way "
+#~ "some question, so they receive -6 of Listen."
+#~ msgstr ""
+#~ "Все знают, что у Студентов Администрации присутствует большая сложность в "
+#~ "ассимиляции мнений других и также в составлении какого-нибудь краткого "
+#~ "вопроса, так что они получают -6 к Слушанию."
 
 #~ msgid "FPS"
 #~ msgstr "FPS"
 
-#~ msgid "Not found in dialog: %d\n"
-#~ msgstr "Не найден в диалоге: %d\n"
+#~ msgid ""
+#~ "For the hard work observing ameivas, the Biology Student receives +2 of "
+#~ "furtivity."
+#~ msgstr ""
+#~ "За тяжкий труд по наблюдению за ящерицами, Студент Биолог получает +2 к "
+#~ "Скрытности."
 
-#~ msgid "Open Assign Attacks Window"
-#~ msgstr "Открыть расстановку атак"
+#~ msgid "For the same reason, -4 of Carte Blanche."
+#~ msgstr "По той же причине, -4 к Карт Бланшу."
+
+#~ msgid "If I have enough time!"
+#~ msgstr "Если бы у меня было время!"
+
+#~ msgid ""
+#~ "In their dogmatic cult to Taylor they found bizarre things (with maximun "
+#~ "financial efficiency) to be their 'clothes', receiving +4 of Bizarre "
+#~ "Clothes."
+#~ msgstr ""
+#~ "В их догматической секте Тэйлора они нашли в забавных вещях (с "
+#~ "максимальной финансовой отдачей) собственную 'одежду', получение +4 к "
+#~ "Причудливой Одежде."
 
 #~ msgid "Melee Attack"
 #~ msgstr "Ближний бой"
 
-#~ msgid "Character's ranged attack."
-#~ msgstr "Дистанционная атака персонажа"
+#~ msgid "Not found in dialog: %d\n"
+#~ msgstr "Не найден в диалоге: %d\n"
+
+#~ msgid "Nothing"
+#~ msgstr "Ничего"
+
+#~ msgid "Now!"
+#~ msgstr "Сейчас!"
+
+#~ msgid "Ok."
+#~ msgstr "Ok."
+
+#~ msgid "Open Assign Attacks Window"
+#~ msgstr "Открыть расстановку атак"
+
+#~ msgid "Particles"
+#~ msgstr "Частицы"
 
 #~ msgid "Ranged Attack"
 #~ msgstr "Дистанционная атака"
+
+#~ msgid "Reflex"
+#~ msgstr "Рефлекс"
+
+#~ msgid ""
+#~ "Since they are Taylor's faithful disciples, they receive +4 of Taylorism "
+#~ "Skill."
+#~ msgstr ""
+#~ "Так как они преданные ученники Тэйлора, они получают +4 к Тэйлоризму."
+
+#~ msgid ""
+#~ "Since they are commonly mistaken for hippies, Biology Students receive +6 "
+#~ "of Disguises when disguised as hippies (and when not of this race)"
+#~ msgstr ""
+#~ "Поскольку их часто принимают за хиппи, Студенты Биологи получают +6 к "
+#~ "Маскировке когда замаскированы под хиппи (если не относятся к этой расе)"
