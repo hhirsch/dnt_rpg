@@ -30,7 +30,7 @@ class journalDesc: public dntListElement
 {
    public:
       std::string text;  /**< Description Text */
-      bool completed;    /**< If completed or not */
+      int completed;     /**< If completed or not */
 };
 
 /*! The journalArea keeps information about
@@ -55,8 +55,8 @@ class journalArea : public bTreeCell, public dntList
 
       /*! Insert a mission at the area
        * \param desc -> mission description
-       * \param comp -> true if completed */
-      void insertMission(std::string desc, bool comp);
+       * \param comp -> >0 if completed, 0 if current, <0 if failed */
+      void insertMission(std::string desc, int comp);
 
       /*! Get the area name
        * \return string with area's name */

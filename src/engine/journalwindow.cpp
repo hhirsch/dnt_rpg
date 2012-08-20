@@ -74,7 +74,7 @@ void journalArea::setName(string n)
 /***********************************************************************
  *                            insertMission                            *
  ***********************************************************************/
-void journalArea::insertMission(string desc, bool comp)
+void journalArea::insertMission(string desc, int comp)
 {
    /* Create and define the description */
    journalDesc* d = new journalDesc();
@@ -335,17 +335,26 @@ void journalWindow::showArea()
          {
             sprintf(buf,"%d - ", i+1);
             text = buf + desc->text;
-            if(!desc->completed)
+            if(desc->completed == MISSION_COMPLETION_FALSE)
             {
+               /* Current mission */
                missionsText->addText(text, dir.getRealFile(DNT_FONT_ARIAL), 9,
                                      Farso::Font::ALIGN_LEFT, 
                                      Farso::Font::STYLE_NORMAL, 240, 120, 0);
             }
-            else
+            else if(desc->completed > 0)
             {
+               /* Completed with success */
                missionsText->addText(text, dir.getRealFile(DNT_FONT_ARIAL), 9,
                                      Farso::Font::ALIGN_LEFT, 
                                      Farso::Font::STYLE_ITALIC, 0, 120, 0);
+            }
+            else
+            {
+               /* Completed with failure */
+               missionsText->addText(text, dir.getRealFile(DNT_FONT_ARIAL), 9,
+                                     Farso::Font::ALIGN_LEFT, 
+                                     Farso::Font::STYLE_ITALIC, 200, 10, 10);
             }
 
             desc = (journalDesc*)desc->getNext();
@@ -389,14 +398,14 @@ void journalWindow::createLists()
       }
       if(!mis->isUnderDevelopment())
       {
-         area->insertMission(mis->getDescription(), false);
+         area->insertMission(mis->getDescription(), MISSION_COMPLETION_FALSE);
       }
       else
       {
          string desc = mis->getDescription();
          desc += gettext("(NOTE: This mission is under development and "
                          "maybe you couldn't finish it in this version)");
-         area->insertMission(desc, false);
+         area->insertMission(desc, MISSION_COMPLETION_FALSE);
       }
    }
 
@@ -409,7 +418,7 @@ void journalWindow::createLists()
       {
          area = areas->insert(mis->getArea());
       }
-      area->insertMission(mis->getDescription(), true);
+      area->insertMission(mis->getDescription(), mis->getCompletion());
    }
 }
 
