@@ -778,6 +778,7 @@ void objectsList::insert(object* o)
 
    /* Set it as the initial one */
    first = o;
+
    total++;
 }
 

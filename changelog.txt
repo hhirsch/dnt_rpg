@@ -58,6 +58,9 @@ BugFixes:
  - Fixed glitches on 3D messages;
  - Better turn factor when running;
  - Centralized srand calls for better pseudo-randomization;
+ - script: fixed a bug when saving pointer-like variables;
+ - objects: fixed a bug when removing objects on map, that was checking if an
+             object is static scenery after removing all static sceneries;
 
 ================================================
 |                Version 0.9                   |

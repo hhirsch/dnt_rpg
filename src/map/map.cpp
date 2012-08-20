@@ -710,10 +710,7 @@ void Map::deleteObjects()
    objSquare* sobj;
    objSquare* next;
 
-   /* First, remove all sceneries */
-   objectsList::removeStaticSceneries();
-
-   /* Now, all doors Objects */
+   /* Remove all doors Objects */
    door* dor = (door*)doors.getFirst();
    for(o = 0; o < doors.getTotal(); o++)
    {
@@ -721,7 +718,7 @@ void Map::deleteObjects()
       dor = (door*)dor->getNext();
    }
 
-   /* and finally, search all squares for non sceneries objects */
+   /* Search all squares for non sceneries objects */
    for(Xaux = 0; Xaux < x; Xaux++)
    {
      for(Zaux = 0; Zaux < z; Zaux++)
@@ -744,6 +741,9 @@ void Map::deleteObjects()
         }
      }
    }
+
+   /* Remove all sceneries */
+   objectsList::removeStaticSceneries();
 
 }
 
