@@ -105,7 +105,6 @@ ENDIF(GETTEXT_FOUND)
 # include the ./src as default too
 include_directories(${PROJECT_SOURCE_DIR}/src)
 
-
 # Include the sources
 include(sources.cmake)
 
@@ -113,33 +112,80 @@ include(sources.cmake)
 add_library(farso ${FARSO_SOURCES} ${FARSO_HEADERS} )
 add_library(dntlib ${DNT_LIB_SOURCES} ${DNT_LIB_HEADERS} )
 
-# Make Binaries
-add_executable(dnt ${DNT_SOURCES} ${DNT_HEADERS} )
-target_link_libraries(dnt ${OPENGL_LIBRARY} 
+IF(${CREATE_BUNDLE})
+
+   # Add OSX icon
+   set(OSX_ICON_FILES ${PROJECT_SOURCE_DIR}/macosx/DccNiTghmare/dnt-icon.icns)
+   set_source_files_properties(${OSX_ICON_FILES} PROPERTIES 
+                      MACOSX_PACKAGE_LOCATION Resources)
+   set(DNT_SOURCES ${DNT_SOURCES} ${OSX_ICON_FILES}) 
+
+   # Create the executable as BUNDLE
+   add_executable(dnt MACOSX_BUNDLE ${DNT_SOURCES} ${DNT_HEADERS} )
+   
+   # Search for bundle libraries
+   find_library(IOKIT_LIBRARY IOKit)
+   find_library(QUICKTIME_LIBRARY QuickTime)
+   find_library(CARBON_LIBRARY Carbon)
+   find_library(AUDIOUNIT_LIBRARY AudioUnit)
+   find_library(COCOA_LIBRARY Cocoa)
+
+   target_link_libraries(dnt
+	         ${IOKIT_LIBRARY}
+	         ${QUICKTIME_LIBRARY}
+	         ${CARBON_LIBRARY}
+	         ${AUDIOUNIT_LIBRARY}
+	         ${COCOA_LIBRARY}
+                 ${OPENGL_LIBRARY} 
+                 ${OPENAL_LIBRARY} 
+                 ${SDL_LIBRARY} ${SDLIMAGE_LIBRARY} ${SDLTTF_LIBRARY}
+                 ${VORBISFILE_LIBRARY} ${VORBIS_LIBRARY}
+                 ${OGG_LIBRARY} m ${CAL3D_LIBRARY} pthread
+                 dntlib farso)
+
+   # configure CMake to use a custom Info.plist
+   set_target_properties(dnt PROPERTIES MACOSX_BUNDLE_INFO_PLIST 
+              ${PROJECT_SOURCE_DIR}/macosx/DccNiTghmare/DccNiTghmare/DNT-Info.plist)
+   
+   #add_custom_command(TARGET dnt PRE_BUILD
+   #	      COMMAND ln -s ${PROJECT_SOURCE_DIR}/data 
+   #                         ${CMAKE_BINARY_DIR}/bin/dnt.app/Contents/Resources)
+
+   add_custom_command(TARGET dnt PRE_BUILD
+	      COMMAND cp -R ${PROJECT_SOURCE_DIR}/data 
+                            ${CMAKE_BINARY_DIR}/bin/dnt.app/Contents/Resources)
+ 
+
+ 
+
+ELSE(${CREATE_BUNDLE})
+
+   # Make Binaries
+   add_executable(dnt ${DNT_SOURCES} ${DNT_HEADERS} )
+   target_link_libraries(dnt ${OPENGL_LIBRARY} 
                           ${OPENAL_LIBRARY} 
                           ${SDL_LIBRARY} ${SDLIMAGE_LIBRARY} ${SDLTTF_LIBRARY}
                           ${VORBISFILE_LIBRARY} ${VORBIS_LIBRARY}
                           ${OGG_LIBRARY} m ${CAL3D_LIBRARY} pthread
                           dntlib farso)
-add_executable(dntMapEditor ${DNT_MAP_EDITOR_SOURCES} ${DNT_MAP_EDITOR_HEADERS})
-target_link_libraries(dntMapEditor ${OPENGL_LIBRARY} 
+   add_executable(dntMapEditor ${DNT_MAP_EDITOR_SOURCES} ${DNT_MAP_EDITOR_HEADERS})
+   target_link_libraries(dntMapEditor ${OPENGL_LIBRARY} 
                           ${OPENAL_LIBRARY}
                           ${SDL_LIBRARY} ${SDLIMAGE_LIBRARY} ${SDLTTF_LIBRARY}
                           ${VORBISFILE_LIBRARY} ${VORBIS_LIBRARY}
                           ${OGG_LIBRARY} m ${CAL3D_LIBRARY} pthread
                           dntlib farso)
-add_executable(dntPartEditor 
+   add_executable(dntPartEditor 
                ${DNT_PART_EDITOR_SOURCES} ${DNT_PART_EDITOR_HEADERS})
-target_link_libraries(dntPartEditor ${OPENGL_LIBRARY} 
+   target_link_libraries(dntPartEditor ${OPENGL_LIBRARY} 
                           ${OPENAL_LIBRARY}
                           ${SDL_LIBRARY} ${SDLIMAGE_LIBRARY} ${SDLTTF_LIBRARY}
                           ${VORBISFILE_LIBRARY} ${VORBIS_LIBRARY}
                           ${OGG_LIBRARY} m ${CAL3D_LIBRARY} pthread
                           dntlib farso)
+ENDIF(${CREATE_BUNDLE})
 
 # Create the .gmo files
-#include(po/linguas.cmake)
-#GETTEXT_CREATE_TRANSLATIONS(po/dnt.pot ALL ${LINGUAS})
 include(GettextTranslate)
 add_subdirectory(./po)
 
@@ -152,7 +198,12 @@ add_subdirectory(./po)
 configure_file("./src/config.h.in" "./src/config.h")
 configure_file("./Doxyfile.in" "./Doxyfile")
 
+
+if(NOT ${CREATE_BUNDLE})
+
 # Install files
 install(TARGETS dnt DESTINATION bin)
 install(DIRECTORY ./data DESTINATION ${DATADIR}/${PACKAGE})
+
+endif(NOT ${CREATE_BUNDLE})
 
