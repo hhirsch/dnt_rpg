@@ -240,22 +240,9 @@ bool options::load()
    if(!load(file))
    {
       cerr << "Can't Open the options file: " << file << endl;
-      /* Try to Load from Default Installed Data Dir */
-      file = DATADIR;
-      file += "/";
-      file += PACKAGE;
-      file += "/dcc.opc";
-      if(!load(file))
-      {
-         cerr << "Can't Open the options file: " << file << endl;
-         /* Load from default executable path */
-         if(!load("./dcc.opc"))
-         {
-            cerr << "No Options File Avaible!" << endl;
-         }
-      }
-
+      /* Will use the default values */
       cerr << "Creating Directory: " << info.getUserHome() << ":";
+      
       /* Create the User directory */
 
       #ifdef _MSC_VER
@@ -271,17 +258,24 @@ bool options::load()
          cerr << "Creating Saves Directory... " << endl;
          CreateDirectory(info.getSavesDirectory().c_str(), NULL);
       #else
-         mkdir(info.getUserHome().c_str(),0755);
-         if(errno != EEXIST)
+         if(mkdir(info.getUserHome().c_str(),0755) != 0)
          {
-            cerr << strerror(errno) << endl;
+            if(errno != EEXIST)
+            {
+               cerr << " " << strerror(errno) << endl;
+            }
+         }
+         else
+         {
+            cerr << " Done." << endl;
          }
          /* Create the saves directories */
          cerr << "Creating Saves Directory... " << endl;
          mkdir(info.getSavesDirectory().c_str(), 0755);
       #endif
 
-      /* Save the options file */
+      /* Save the options file to default place */
+      fileName = info.getUserHome() + "options.cfg";
       cerr << "Creating Options: " << fileName << endl;
       save();
    }
