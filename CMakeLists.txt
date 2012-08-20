@@ -14,6 +14,10 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ./CMakeFiles)
 
 project(dnt)
 
+# Some Options
+option(DEBUG_ASTAR "Enable A* Visual Debug" OFF)
+option(DNT_DEBUG_PENDING_ACTION "Enable Pending Action Debug Log" OFF)
+option(DNT_DEBUG_SCRIPTS "Enable DNT Script Language Debug Log" OFF)
 
 # First, try to find required libraries
 

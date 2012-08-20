@@ -1,6 +1,6 @@
 /* 
   DccNiTghtmare: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DccNiTghtmare.
  
@@ -26,6 +26,10 @@
 
 #define DATADIR "@DATADIR@"
 #define LOCALEDIR "@LOCALEDIR@"
+
+#cmakedefine01 DEBUG_ASTAR
+#cmakedefine01 DNT_DEBUG_PENDING_ACTION
+#cmakedefine01 DNT_DEBUG_SCRIPTS
 
 #if defined (__amigaos4__)
    #define ENABLE_NLS  0
