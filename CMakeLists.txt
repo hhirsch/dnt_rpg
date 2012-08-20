@@ -106,7 +106,7 @@ add_library(dntlib ${DNT_LIB_SOURCES} ${DNT_LIB_HEADERS} )
 # Make Binaries
 add_executable(dnt ${DNT_SOURCES} ${DNT_HEADERS} )
 target_link_libraries(dnt ${OPENGL_LIBRARY} 
-                          ${OPENAL_LIBRARY}
+                          ${OPENAL_LIBRARY} 
                           ${SDL_LIBRARY} ${SDLIMAGE_LIBRARY} ${SDLTTF_LIBRARY}
                           ${VORBISFILE_LIBRARY} ${VORBIS_LIBRARY}
                           ${OGG_LIBRARY} m ${CAL3D_LIBRARY} pthread

@@ -338,6 +338,15 @@ src/engine/sun.h
 src/engine/util.h
 )
 
+IF(${APPLE})
+   set(APPLE_CONFIG_SOURCES
+       src/config_mac.cpp
+       macosx/DccNiTghmare/DccNiTghmare/SDLMain.m)
+   set(APPLE_CONFIG_HEADERS
+       macosx/DccNiTghmare/DccNiTghmare/SDLMain.h)
+ENDIF(${APPLE})
+
+
 set(DNT_LIB_HEADERS
 ${CBOOK_HEADERS}
 ${LANG_HEADERS}
@@ -349,7 +358,9 @@ ${MAP_HEADERS}
 ${PARTICLE_HEADERS}
 ${SOUND_HEADERS}
 ${ENGINE_HEADERS}
+${APPLE_CONFIG_HEADERS}
 )
+
 set(DNT_LIB_SOURCES
 ${CBOOK_SOURCES}
 ${LANG_SOURCES}
@@ -361,6 +372,7 @@ ${MAP_SOURCES}
 ${PARTICLE_SOURCES}
 ${SOUND_SOURCES}
 ${ENGINE_SOURCES}
+${APPLE_CONFIG_SOURCES}
 )
 
 set(DNT_SOURCES
