@@ -19,6 +19,12 @@ option(DEBUG_ASTAR "Enable A* Visual Debug" OFF)
 option(DNT_DEBUG_PENDING_ACTION "Enable Pending Action Debug Log" OFF)
 option(DNT_DEBUG_SCRIPTS "Enable DNT Script Language Debug Log" OFF)
 
+# Some compiler options
+if(UNIX)
+   add_definitions(-Wall)
+endif(UNIX)
+
+
 # First, try to find required libraries
 
 FIND_PACKAGE(SDL REQUIRED)
