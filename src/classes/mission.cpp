@@ -303,8 +303,9 @@ void mission::saveAsCurrent(ofstream* file)
    *file << MISSION_TOKEN_AREA << " = " << area << endl;
 
    /* Save underDevelopment flag */
+   string bl = underDevelopment?"true":"false";
    *file << MISSION_TOKEN_UNDER_DEVELOPMENT << " = " 
-      << underDevelopment << endl;
+      << bl << endl;
 
    /* Save Completion and Failure scripts */
    if(!completionScript.empty())
@@ -367,6 +368,11 @@ void mission::loadAsCurrent(defParser* def)
          {
             /* So, no more parser here! */
             done = true;
+         }
+         /* Under development flag */
+         else if(key == MISSION_TOKEN_UNDER_DEVELOPMENT)
+         {
+            underDevelopment = (value == "true");
          }
          /* Xp Value */
          else if(key == MISSION_TOKEN_XP_VALUE)
