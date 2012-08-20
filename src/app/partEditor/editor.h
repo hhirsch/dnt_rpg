@@ -32,8 +32,13 @@
 #include "partwindow.h"
 
 #include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
 #include <SDL/SDL_opengl.h>
+
+#ifdef __APPLE__
+   #include <SDL_image.h>
+#else
+   #include <SDL/SDL_image.h>
+#endif
 
 /*! The partEditor main class */
 class editor
