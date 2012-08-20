@@ -403,7 +403,6 @@ src/app/mapEditor/particles.h
 src/app/mapEditor/portal.h
 src/app/mapEditor/soundeditor.h
 src/app/mapEditor/terrain.h
-src/app/mapEditor/tileseq.h
 src/app/mapEditor/tilewall.h
 src/app/mapEditor/wall.h
 src/app/mapEditor/waterwindow.h
