@@ -30,22 +30,21 @@
 #include "../etc/extensions.h"
 
 #ifdef _MSC_VER
-   #include "../config_win.h"
    #include <windows.h>
 #else
 
 #ifdef __APPLE__
-   #include "../config_mac.h"
    #include <sys/stat.h>
    #include <sys/types.h>
    #include <errno.h>
 #else
-   #include "../config.h"
    #include <sys/stat.h>
    #include <sys/types.h>
    #include <errno.h>
 #endif
 #endif
+
+#include "config.h"
 
 #include <iostream>
 using namespace std;

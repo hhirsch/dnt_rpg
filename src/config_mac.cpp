@@ -19,7 +19,7 @@
  */
 
 
-#include "config_mac.h"
+#include "config.h"
 #include <CoreFoundation/CoreFoundation.h>
 using namespace std;
 

@@ -117,6 +117,9 @@ ELSE(GETTEXT_FOUND)
    set(ENABLE_NLS 0) 
 ENDIF(GETTEXT_FOUND)
 
+FIND_PACKAGE(Libintl)
+include_directories(${LIBINTL_INCLUDE_DIR})
+
 # include the ./src as default too
 include_directories(${PROJECT_SOURCE_DIR}/src)
 
@@ -155,7 +158,8 @@ IF(${CREATE_BUNDLE})
                  ${OPENAL_LIBRARY} 
                  ${SDL_LIBRARY} ${SDLIMAGE_LIBRARY} ${SDLTTF_LIBRARY}
                  ${VORBISFILE_LIBRARY} ${VORBIS_LIBRARY}
-                 ${OGG_LIBRARY} m ${CAL3D_LIBRARY} pthread
+                 ${OGG_LIBRARY} m ${CAL3D_LIBRARY} 
+                 ${LIBINTL_LIBRARIES} pthread
                  dntlib farso)
 
    # configure CMake to use a custom Info.plist
@@ -181,14 +185,16 @@ ELSE(${CREATE_BUNDLE})
                           ${OPENAL_LIBRARY} 
                           ${SDL_LIBRARY} ${SDLIMAGE_LIBRARY} ${SDLTTF_LIBRARY}
                           ${VORBISFILE_LIBRARY} ${VORBIS_LIBRARY}
-                          ${OGG_LIBRARY} m ${CAL3D_LIBRARY} pthread
+                          ${OGG_LIBRARY} m ${CAL3D_LIBRARY} 
+                          ${LIBINTL_LIBRARIES} pthread
                           dntlib farso)
    add_executable(dntMapEditor ${DNT_MAP_EDITOR_SOURCES} ${DNT_MAP_EDITOR_HEADERS})
    target_link_libraries(dntMapEditor ${OPENGL_LIBRARY} 
                           ${OPENAL_LIBRARY}
                           ${SDL_LIBRARY} ${SDLIMAGE_LIBRARY} ${SDLTTF_LIBRARY}
                           ${VORBISFILE_LIBRARY} ${VORBIS_LIBRARY}
-                          ${OGG_LIBRARY} m ${CAL3D_LIBRARY} pthread
+                          ${OGG_LIBRARY} m ${CAL3D_LIBRARY} 
+                          ${LIBINTL_LIBRARIES} pthread
                           dntlib farso)
    add_executable(dntPartEditor 
                ${DNT_PART_EDITOR_SOURCES} ${DNT_PART_EDITOR_HEADERS})
@@ -196,7 +202,8 @@ ELSE(${CREATE_BUNDLE})
                           ${OPENAL_LIBRARY}
                           ${SDL_LIBRARY} ${SDLIMAGE_LIBRARY} ${SDLTTF_LIBRARY}
                           ${VORBISFILE_LIBRARY} ${VORBIS_LIBRARY}
-                          ${OGG_LIBRARY} m ${CAL3D_LIBRARY} pthread
+                          ${OGG_LIBRARY} m ${CAL3D_LIBRARY} 
+                          ${LIBINTL_LIBRARIES} pthread
                           dntlib farso)
 ENDIF(${CREATE_BUNDLE})
 

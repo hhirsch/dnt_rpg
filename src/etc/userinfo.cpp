@@ -22,19 +22,13 @@
 
 #ifdef _MSC_VER
    #include <windows.h>
-   #include "../config_win.h"
 #else
    #include <pwd.h>
    #include <unistd.h>
    #include <sys/types.h>
-
-   #ifdef __APPLE__
-      #include "config_mac.h"
-   #else
-      #include "config.h"
-   #endif
-
 #endif
+
+#include "config.h"
 
 #include <iostream>
 using namespace std;
