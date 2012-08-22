@@ -24,6 +24,7 @@
 #include "savefile.h"
 #include "savewindow.h"
 #include "../cbook/comicbook.h"
+#include "../config.h"
 
 #include <math.h>
 #ifdef __APPLE__

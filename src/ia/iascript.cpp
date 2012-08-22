@@ -25,6 +25,8 @@ using namespace std;
 #include "../engine/dccnit.h"
 #include "../etc/dirs.h"
 
+#include "../config.h"
+
 #include <math.h>
 
 /***********************************************************************

@@ -21,6 +21,7 @@
 #include "pendingaction.h"
 
 #include "../engine/dialog.h"
+#include "../config.h"
 
 using namespace std;
 

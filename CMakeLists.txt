@@ -1,3 +1,18 @@
+# This is the CMake definition file for DNT usage.
+#
+# Usually you should just call:
+#
+#    cmake .
+#
+# To create the needed makefiles for DNT compilation.
+# 
+# You could also set some debug options with:
+#    -DDEBUG_ASTAR=ON 
+#    -DDNT_DEBUG_PENDING_ACTION=ON
+#    -DDNT_DEBUG_SCRIPTS=ON
+#
+# 
+
 cmake_minimum_required(VERSION 2.8)
 
 set(PACKAGE dnt)
@@ -145,7 +160,7 @@ IF(${CREATE_BUNDLE})
 
    # configure CMake to use a custom Info.plist
    set_target_properties(dnt PROPERTIES MACOSX_BUNDLE_INFO_PLIST 
-              ${PROJECT_SOURCE_DIR}/macosx/DccNiTghmare/DccNiTghmare/DNT-Info.plist)
+         ${PROJECT_SOURCE_DIR}/macosx/DccNiTghmare/DccNiTghmare/DNT-Info.plist)
    
    #add_custom_command(TARGET dnt PRE_BUILD
    #	      COMMAND ln -s ${PROJECT_SOURCE_DIR}/data 
@@ -153,7 +168,7 @@ IF(${CREATE_BUNDLE})
 
    add_custom_command(TARGET dnt PRE_BUILD
 	      COMMAND cp -R ${PROJECT_SOURCE_DIR}/data 
-                            ${CMAKE_BINARY_DIR}/bin/dnt.app/Contents/Resources)
+                       ${CMAKE_BINARY_DIR}/bin/dnt.app/Contents/Resources)
  
 
  
