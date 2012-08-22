@@ -65,8 +65,8 @@ hardware. They are:
 
    a) LINUX, BSD, *NIX
 
-   To "install" DNT, decompact the tar.bz2, go to the directory
-"dnt",  run   "cmake ." ,   run   "make"   and,   optionally, 
+   To  "install"  DNT,  decompact  the  tar.bz2,  go  to  the 
+directory "dnt", run  "cmake ." , run "make" and, optionally, 
 "make install".
 
    Example:
@@ -98,11 +98,28 @@ and compile.
 
    c) OSX
 
-   You could  either do the Linux proccess or open the XCode4
-project at macos/DccNiTghmare folder and compile there.
+   To  compile under  OSX, do the same proccess described for
+the  Linux  platform ("a").  Aditionally, you  can create the 
+"dnt.app" bundle application by calling:
+   
+   cmake -DCREATE_BUNDLE=1 .
 
-   NOTE: Under XCode4 you'll probably need to change paths to
-         your installed libraries to be able to compile it.
+   instead of just "cmake ."
+
+   NOTE: The CREATE_BUNDLE option won't build the DNT editors,
+         just the game itself.
+
+
+   d) Other
+
+   That's a long time since last time we checked DNT on an OS
+different of those described above.
+   To  compile  on a different  OS,  try  the  same  proccess 
+described for *nix, if you have cmake ported for it.
+   Any patches  that  would enable DNT  use on  more  OS  are 
+welcome, just submit them at:
+   
+    http://sourceforge.net/projects/dnt 
 
 ==============================================================
 |                       III - Execution                      |

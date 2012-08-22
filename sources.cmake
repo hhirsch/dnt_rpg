@@ -341,9 +341,9 @@ src/engine/util.h
 IF(${APPLE})
    set(APPLE_CONFIG_SOURCES
        src/config_mac.cpp
-       macosx/DccNiTghmare/DccNiTghmare/SDLMain.m)
+       macosx/SDLMain.m)
    set(APPLE_CONFIG_HEADERS
-       macosx/DccNiTghmare/DccNiTghmare/SDLMain.h)
+       macosx/SDLMain.h)
 ENDIF(${APPLE})
 
 

@@ -11,6 +11,8 @@
 #    -DDNT_DEBUG_PENDING_ACTION=ON
 #    -DDNT_DEBUG_SCRIPTS=ON
 #
+# If you desire to create the OSX dnt.app bundle application, you should define:
+#    -DCREATE_BUNDLE=1
 # 
 
 cmake_minimum_required(VERSION 2.8)
@@ -132,8 +134,11 @@ add_library(dntlib ${DNT_LIB_SOURCES} ${DNT_LIB_HEADERS} )
 
 IF(${CREATE_BUNDLE})
 
+   # Reset the data dir
+   set(DATADIR "/data")
+
    # Add OSX icon
-   set(OSX_ICON_FILES ${PROJECT_SOURCE_DIR}/macosx/DccNiTghmare/dnt-icon.icns)
+   set(OSX_ICON_FILES ${PROJECT_SOURCE_DIR}/macosx/dnt-icon.icns)
    set_source_files_properties(${OSX_ICON_FILES} PROPERTIES 
                       MACOSX_PACKAGE_LOCATION Resources)
    set(DNT_SOURCES ${DNT_SOURCES} ${OSX_ICON_FILES}) 
@@ -164,18 +169,13 @@ IF(${CREATE_BUNDLE})
 
    # configure CMake to use a custom Info.plist
    set_target_properties(dnt PROPERTIES MACOSX_BUNDLE_INFO_PLIST 
-         ${PROJECT_SOURCE_DIR}/macosx/DccNiTghmare/DccNiTghmare/DNT-Info.plist)
+         ${PROJECT_SOURCE_DIR}/macosx/DNT-Info.plist)
    
-   #add_custom_command(TARGET dnt PRE_BUILD
-   #	      COMMAND ln -s ${PROJECT_SOURCE_DIR}/data 
-   #                         ${CMAKE_BINARY_DIR}/bin/dnt.app/Contents/Resources)
-
-   add_custom_command(TARGET dnt PRE_BUILD
-	      COMMAND cp -R ${PROJECT_SOURCE_DIR}/data 
+   # Add data files to resources
+   add_custom_target(dntData COMMAND cp -R ${PROJECT_SOURCE_DIR}/data 
                        ${CMAKE_BINARY_DIR}/bin/dnt.app/Contents/Resources)
- 
+   add_dependencies(dnt dntData)
 
- 
 
 ELSE(${CREATE_BUNDLE})
 
