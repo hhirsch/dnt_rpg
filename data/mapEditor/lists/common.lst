@@ -44,6 +44,7 @@ PC_Chair = models/objetos/geral/pc_chair/pc_chair.dcc
 PC_Table = models/objetos/geral/pc_table/pc_table.dcc
 Pia = models/objetos/geral/pia/pia.dcc
 Pillow = models/objetos/geral/pillow/pillow.dcc
+Poster_DNTpiens = models/objetos/geral/poster-med/poster_med.dcc
 Racao = models/objetos/itens/racao/racao.dcc
 RefMachine = models/objetos/geral/refmachine/refmachine.dcc
 Rug = models/objetos/geral/rug/rug.dcc
