@@ -1,6 +1,6 @@
 /* 
   DNT: a satirical post-apocalyptical RPG.
-  Copyright (C) 2005-2009 DNTeam <dnt@dnteam.org>
+  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
   This file is part of DNT.
  
@@ -67,24 +67,22 @@ void userInfo::getValuesFromSystem()
    #elif defined (__amigaos4__)
       userName = "Don Ramon";
       userHome = "PROGDIR:data/userdata/";
-   #elif defined (__APPLE__)
-      /* Get username from unix-like */
-      struct passwd *info;
-      info = getpwuid(getuid());
-      userName = info->pw_name;
-   
-      /* Set path as the macBundle one */
-      userHome = macBundlePath() + "/";
-   
    #else
       /* Get all Current User's Info (so more clean, isn't it?) */
       struct passwd *info;
       info = getpwuid(getuid());
       userName = info->pw_name;
       userHome = info->pw_dir;
-      userHome += "/.";
+
+      #ifdef __APPLE__
+         userHome += "/Library/Application Support/";
+      #else
+         userHome += "/.";
+      #endif
+
       userHome += PACKAGE;
       userHome += "/";
+   
    #endif
 }
 
