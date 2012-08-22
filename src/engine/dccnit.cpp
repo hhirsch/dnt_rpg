@@ -3786,7 +3786,7 @@ void engine::renderNoShadowThings()
    if(walkStatus == ENGINE_WALK_MOUSE_ASTAR)
    {
       GLfloat destX =0, destZ=0;
-#ifdef DEBUG_ASTAR
+#if DEBUG_ASTAR
       activeCharacter->pathFind.drawPath();
 #endif
       activeCharacter->pathFind.getDestiny(destX, destZ);
@@ -3935,7 +3935,7 @@ void engine::drawWithShadows(bool flush)
    renderNoShadowThings();
    renderGUI();
 
-#ifdef DEBUG_ASTAR
+#if DEBUG_ASTAR
    /* Debug for a* */
    activeCharacter->pathFind.drawSearch();
 #endif
@@ -3965,7 +3965,7 @@ void engine::drawWithoutShadows(bool flush)
 
    renderGUI();
 
-#ifdef DEBUG_ASTAR
+#if DEBUG_ASTAR
    /* Debug for a* */
    activeCharacter->pathFind.drawSearch();
 #endif

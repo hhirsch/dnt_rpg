@@ -301,7 +301,7 @@ void iaScript::run(int maxLines)
 
    iaVariable* iv = NULL;
 
-#ifdef DNT_DEBUG_SCRIPTS
+#if DNT_DEBUG_SCRIPTS
    cerr << "Interpreting: " << fileName << endl;
 #endif
 
@@ -320,7 +320,7 @@ void iaScript::run(int maxLines)
             eng->actionControl->removeAction(pendAction);
             pendAction = NULL;
 
-#ifdef DNT_DEBUG_SCRIPTS
+#if DNT_DEBUG_SCRIPTS
             cerr << fileName << ": " << "Done Pending Action..." << endl;
 #endif
          }
@@ -330,7 +330,7 @@ void iaScript::run(int maxLines)
             done = true;
             interpret = false;
 
-#ifdef DNT_DEBUG_SCRIPTS
+#if DNT_DEBUG_SCRIPTS
             cerr << fileName << ": " << "Waiting Pending Action..." << endl;
 #endif
          }
@@ -343,7 +343,7 @@ void iaScript::run(int maxLines)
             lines++;
             interpret = true;
 
-#ifdef DNT_DEBUG_SCRIPTS
+#if DNT_DEBUG_SCRIPTS
             cerr << fileName << ": " << strBuffer << endl;
 #endif
          }
@@ -358,7 +358,7 @@ void iaScript::run(int maxLines)
             }
             else
             {
-#ifdef DNT_DEBUG_SCRIPTS
+#if DNT_DEBUG_SCRIPTS
                cerr << "Interpreting: " << strBuffer << endl;
 #endif
 
@@ -2926,7 +2926,7 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine,
       token = nextToken(postFix, pos);
       while(!token.empty())
       {
-#ifdef DNT_DEBUG_SCRIPTS
+#if DNT_DEBUG_SCRIPTS
          cerr << "Evaluting: " << token << endl;
 #endif
          if(isOperator(token))
@@ -2946,7 +2946,7 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine,
                       (varStack[0]->type == IA_TYPE_INT) )
                   {
                      varStack[0]->changeSignal();
-#ifdef DNT_DEBUG_SCRIPTS
+#if DNT_DEBUG_SCRIPTS
                      cerr << "Signal changed to: " 
                         << varStack[0]->toString() << endl;
 #endif
@@ -2966,7 +2966,7 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine,
                   /* Pop the two variables */
                   var1 = varStack[varPos-1];
                   var2 = varStack[varPos-2];
-#ifdef DNT_DEBUG_SCRIPTS
+#if DNT_DEBUG_SCRIPTS
                      cerr << "Operators: " 
                         << var1->toString() << "," << var2->toString() <<  endl;
 #endif
@@ -2990,7 +2990,7 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine,
                      /* Alloc the result variable */
                      varStack[varPos] = new iaVariable(type,"result");
                      varStack[varPos]->receiveOperation(token, var2, var1);
-#ifdef DNT_DEBUG_SCRIPTS
+#if DNT_DEBUG_SCRIPTS
                      cerr << "Result: " 
                         << varStack[varPos]->toString() << endl;
 #endif
@@ -3104,7 +3104,7 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine,
                   varStack[varPos] = new iaVariable(ftype, token);
                   callFunction(varStack[varPos], postFix, token, pos);
                   varPos++;
-#ifdef DNT_DEBUG_SCRIPTS
+#if DNT_DEBUG_SCRIPTS
                   cerr << "Function returned: " 
                      << varStack[varPos-1]->toString() << endl;
 #endif
@@ -3176,7 +3176,7 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine,
       else if(var != NULL)
       {
          *(var) = *(varStack[0]);
-#ifdef DNT_DEBUG_SCRIPTS
+#if DNT_DEBUG_SCRIPTS
          cerr << "Will set result as: " << varStack[0]->toString() << endl;
          cerr << "Set result: " << var->toString() << endl;
 #endif
