@@ -29,7 +29,7 @@ FIND_PATH(SDLIMAGE_INCLUDE_DIR SDL_image.h
   HINTS
   $ENV{SDLIMAGEDIR}
   $ENV{SDLDIR}
-  PATH_SUFFIXES include
+  PATH_SUFFIXES include include/SDL
   PATHS
   ~/Library/Frameworks
   /Library/Frameworks

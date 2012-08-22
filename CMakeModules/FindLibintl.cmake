@@ -20,7 +20,20 @@ if(LIBINTL_INCLUDE_DIR AND LIBINTL_LIB_FOUND)
   set(Libintl_FIND_QUIETLY TRUE)
 endif(LIBINTL_INCLUDE_DIR AND LIBINTL_LIB_FOUND)
  
-find_path(LIBINTL_INCLUDE_DIR libintl.h)
+find_path(LIBINTL_INCLUDE_DIR libintl.h
+  HINTS
+  $ENV{LIBINTLDIR}
+  PATH_SUFFIXES include
+  PATHS
+  ~/Library/Frameworks
+  /Library/Frameworks
+  /usr/local/include
+  /usr/include
+  /sw/include
+  /opt/local/include
+  /opt/csw/include 
+  /opt/include
+)
  
 set(LIBINTL_LIB_FOUND FALSE)
  

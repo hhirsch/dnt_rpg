@@ -29,7 +29,7 @@ FIND_PATH(SDLTTF_INCLUDE_DIR SDL_ttf.h
   HINTS
   $ENV{SDLTTFDIR}
   $ENV{SDLDIR}
-  PATH_SUFFIXES include
+  PATH_SUFFIXES include include/SDL
   PATHS
   ~/Library/Frameworks
   /Library/Frameworks

@@ -45,71 +45,31 @@ endif(UNIX)
 # First, try to find required libraries
 
 FIND_PACKAGE(SDL REQUIRED)
-IF(NOT SDL_FOUND)
-   MESSAGE("\n FATAL_ERROR_SDL: Could not find SDL Library.\n")
-   return()
-ENDIF(NOT SDL_FOUND)
 include_directories(${SDL_INCLUDE_DIR})
 
 FIND_PACKAGE(SDL_image REQUIRED)
-IF(NOT SDLIMAGE_FOUND)
-   MESSAGE("\n FATAL_ERROR_SDL_IMAGE: Could not find SDL_image Library.\n")
-   return()
-ENDIF(NOT SDLIMAGE_FOUND)
 include_directories(${SDLIMAGE_INCLUDE_DIR})
 
 FIND_PACKAGE(SDL_ttf REQUIRED)
-IF(NOT SDLTTF_FOUND)
-   MESSAGE("\n FATAL_ERROR_SDL_TTF: Could not find SDL_ttf Library.\n")
-   return()
-ENDIF(NOT SDLTTF_FOUND)
 include_directories(${SDLTTF_INCLUDE_DIR})
 
 
 FIND_PACKAGE(OpenGL REQUIRED)
-IF(NOT OPENGL_FOUND)
-   MESSAGE("\n FATAL_ERROR_OPENGL: Could not find OpenGL Library.\n")
-   return()
-ENDIF(NOT OPENGL_FOUND)
-IF(NOT OPENGL_GLU_FOUND)
-   MESSAGE("\n FATAL_ERROR_GLU: Could not find GLU Library.\n")
-   return()
-ENDIF(NOT OPENGL_GLU_FOUND)
 include_directories(${OPENGL_INCLUDE_DIR})
 
 FIND_PACKAGE(OpenAL REQUIRED)
-IF(NOT OPENAL_FOUND)
-   MESSAGE("\n FATAL_ERROR_OPENAL: Could not find OpenAL Library.\n")
-   return()
-ENDIF(NOT OPENAL_FOUND)
 include_directories(${OPENAL_INCLUDE_DIR})
 
 FIND_PACKAGE(Cal3d REQUIRED)
-IF(NOT CAL3D_FOUND)
-   MESSAGE("\n FATAL_ERROR_CAL3D: Could not find Cal3D Library.\n")
-   return()
-ENDIF(NOT CAL3D_FOUND)
 include_directories(${CAL3D_INCLUDE_DIR})
 
 FIND_PACKAGE(Ogg REQUIRED)
-IF(NOT OGG_FOUND)
-   MESSAGE("\n FATAL_ERROR_OGG: Could not find ogg Library.\n")
-   return()
-ENDIF(NOT OGG_FOUND)
 include_directories(${OGG_INCLUDE_DIR})
 
 FIND_PACKAGE(Vorbis REQUIRED)
-IF(NOT VORBIS_FOUND)
-   MESSAGE("\n FATAL_ERROR_VORBIS: Could not find vorbis Library.\n")
-   return()
-ENDIF(NOT VORBIS_FOUND)
 include_directories(${VORBIS_INCLUDE_DIR})
 
 FIND_PACKAGE(Vorbisfile REQUIRED)
-IF(NOT VORBISFILE_FOUND)
-   MESSAGE("\n FATAL_ERROR_VORBIS_FILE: Could not find vorbisfile Library.\n")
-   return()
-ENDIF(NOT VORBISFILE_FOUND)
 include_directories(${VORBISFILE_INCLUDE_DIR})
 
 FIND_PACKAGE(Gettext)
@@ -121,6 +81,10 @@ ENDIF(GETTEXT_FOUND)
 
 FIND_PACKAGE(Libintl)
 include_directories(${LIBINTL_INCLUDE_DIR})
+
+if(NOT ${LIBINTL_LIB_FOUND})
+   set(LIBINTL_LIBRARIES "")
+endif(NOT ${LIBINTL_LIB_FOUND})
 
 # include the ./src as default too
 include_directories(${PROJECT_SOURCE_DIR}/src)
