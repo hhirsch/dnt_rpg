@@ -87,10 +87,6 @@ int main(int argc, char **argv)
    
    gameEngine->init(screen);
 
-   /* Set intial sound */
-   sound snd;
-   snd.loadMusic("music/main_menu.ogg");
-
    /* Call Splash Screen  */
    gameEngine->splashScreen();
 
