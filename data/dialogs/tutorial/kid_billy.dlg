@@ -110,7 +110,7 @@ end_dialog
 ############################################################
 dialog(6)
    npc_begin
-      text = gettext("Thanks to you I have all the SNES cartridges that were ever made! Now I just need to make sure nobody can make copies and then start finding people to rent them to!")
+      text = gettext("Thanks to you I have all the remaining SNES cartridges! Now I just need to add the best copy protection and then start finding the richest fans!")
    npc_end
    pc_begin
       option
@@ -123,7 +123,7 @@ end_dialog
 ############################################################
 dialog(7)
    npc_begin
-      text = gettext("No way! You gave them all to Matilde and I won't be able to be rich anymore!")
+      text = gettext("No way! You gave them all to Matilde and there's no way for me to make a profit off them!")
    npc_end
    pc_begin
       option 
@@ -136,7 +136,7 @@ end_dialog
 ############################################################
 dialog(8)
    npc_begin
-      text = gettext("With Ethan destroying all games, how can I have power now?")
+      text = gettext("With Ethan destroying all games, how can I make a profit now?")
    npc_end
    pc_begin
       option 

@@ -132,7 +132,7 @@ end_dialog
 ############################################################
 dialog(7)
    npc_begin
-      text = gettext("It's so cool to have all the SNES games there are. Now I just need to make copies and put them online!")
+      text = gettext("It's so cool to have all the SNES games. Now I just need to make copies and put them online!")
    npc_end
    pc_begin
       option
@@ -146,7 +146,7 @@ end_dialog
 ############################################################
 dialog(8)
    npc_begin
-      text = gettext("What?! Billy have all SNES games? How can people play SNES now?")
+      text = gettext("You gave all the games to Billy! Hardly anybody will be able to have fun playing them now!")
    npc_end
    pc_begin
       option 

@@ -123,7 +123,7 @@ end_dialog
 ############################################################
 dialog(7)
    npc_begin
-      text = gettext("Matilde will spread the games to everyone and the serious real world will be lost forever!")
+      text = gettext("You fool! Matilde will spread the games to everyone and real life will be lost forever!")
    npc_end
    pc_begin
       option
@@ -136,7 +136,7 @@ end_dialog
 ############################################################
 dialog(8)
    npc_begin
-      text = gettext("Not so bad that with Billy the game illness will be so restrict to not affect too many people after all...")
+      text = gettext("At least Billy will restrict the game epidemic to very few people...")
    npc_end
    pc_begin
       option 
