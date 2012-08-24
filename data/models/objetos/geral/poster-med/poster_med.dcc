@@ -1,4 +1,4 @@
-name = gettext("Homo DNTpiens")
+name = gettext("Anatomy poster")
 cal3d = models/objetos/geral/poster-med/poster.md5def
 inventory_sizes = 0 0
 inventory_texture = texturas/na.png
