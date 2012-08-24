@@ -267,7 +267,7 @@ macro(GettextTranslate)
         -o ${GMO_FILE_NAME} ${PO_FILE_NAME}
         DEPENDS ${PO_TARGET}
     )
-    add_custom_target(${GMO_TARGET} DEPENDS ${GMO_FILE_NAME})
+    add_custom_target(${GMO_TARGET} DEPENDS ${GMO_FILE_NAME} ${PO_FILE_NAME})
 
     add_custom_target(${PO_TARGET} DEPENDS ${PO_FILE_NAME})
     add_dependencies(${PO_TARGET} ${MAKEVAR_DOMAIN}.pot-update)

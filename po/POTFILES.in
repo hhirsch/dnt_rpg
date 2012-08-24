@@ -364,6 +364,7 @@ data/models/objetos/geral/rug/rug.dcc
 data/models/objetos/geral/computador/computador.dcc
 data/models/objetos/geral/porta/porta.dcc
 data/models/objetos/geral/calendar/calendar.dcc
+data/models/objetos/geral/poster-med/poster_med.dcc
 data/models/objetos/itens/money/money.dcc
 data/models/objetos/itens/lata1/lata1.dcc
 data/models/objetos/itens/lata1/logan_lata1.dcc
@@ -523,12 +524,12 @@ data/weapons/definitions/knife.wcc
 data/weapons/definitions/scimitar.wcc
 data/weapons/definitions/sw39.wcc
 data/weapons/definitions/uzi.wcc
-#data/weapons/types/categories.dcl  
 data/weapons/types/damages.dcl
 data/weapons/types/munitions.dcl
 data/weapons/types/ranges.dcl
 data/weapons/types/sizes.dcl
 data/weapons/types/weights.dcl
+data/weapons/types/categories.dcl
 
 #characters
 data/characters/pcs/atleticano.pc
