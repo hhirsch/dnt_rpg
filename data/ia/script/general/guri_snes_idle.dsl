@@ -52,57 +52,57 @@ script()
                else if(snesMsg == 2)
                   # The real desire of the kids
                   if(SELF_CHARACTER == matilde)
-                     msg = gettext("Mom would be proud of me")
+                     msg = gettext("I'll share them just like mom did!")
                   else if(SELF_CHARACTER == billy)
-                     msg = gettext("I'll control the game world")
+                     msg = gettext("I'll control the game world!")
                   else if(SELF_CHARACTER == ethan)
-                     msg = gettext("The world must be freed of games")
+                     msg = gettext("The world must be freed of games!")
                   end
                else if(snesMsg == 3)
                   # What they feel about it
                   if(SELF_CHARACTER == matilde)
-                     msg = gettext("Can't wait for everyone be pleased with them")
+                     msg = gettext("I can't wait to share them...")
                   else if(SELF_CHARACTER == billy)
-                     msg = gettext("I'm sure there will be lots of interested buyers")
+                     msg = gettext("I'm sure there will be many interested players...")
                   else if(SELF_CHARACTER == ethan)
-                     msg = gettext("They are so hard and unfair")
+                     msg = gettext("They are so hard and so unfair...")
                   end
                else
                   # What they desire
                   if(SELF_CHARACTER == matilde)
-                     msg = gettext("I need to share them")
+                     msg = gettext("Everybody should be allowed to play them...")
                   else if(SELF_CHARACTER == billy)
-                     msg = gettext("I need to add protection to them all")
+                     msg = gettext("I need to get the best copy protection...")
                   else if(SELF_CHARACTER == ethan)
-                     msg = gettext("I need to destroy them all")
+                     msg = gettext("I need to destroy them all...")
                   end
                end
             else if(cartCompType == 1)
                # Matilde completed!
                if(SELF_CHARACTER == matilde)
-                  msg = gettext("I'm so happy to share them all")
+                  msg = gettext("I'm glad I can finally share them!")
                else if(SELF_CHARACTER == billy)
-                  msg = gettext("I'll never be rich")
+                  msg = gettext("Now they will loose all value...")
                else if(SELF_CHARACTER == ethan)
-                  msg = gettext("Real world is lost")
+                  msg = gettext("Real life is lost forever...")
                end
             else if(cartCompType == 2)
                # Billy completed
                if(SELF_CHARACTER == matilde)
-                  msg = gettext("How could it happen?")
+                  msg = gettext("Now only the privileged will be allowed to play...")
                else if(SELF_CHARACTER == billy)
-                  msg = gettext("Must find all game fans")
+                  msg = gettext("Now to find the richest gamers alive!")
                else if(SELF_CHARACTER == ethan)
-                  msg = gettext("Not so bad after all")
+                  msg = gettext("At least not everybody will suffer from them...")
                end
             else if(cartCompType == 3)
                # Ethan completed
                if(SELF_CHARACTER == matilde)
-                  msg = gettext("Forever lost!")
+                  msg = gettext("What a blow for our culture...")
                else if(SELF_CHARACTER == billy)
-                  msg = gettext("No games, no power")
+                  msg = gettext("What a blow for the market...")
                else if(SELF_CHARACTER == ethan)
-                  msg = gettext("No more games")
+                  msg = gettext("Finally I can destroy them!")
                end
             end
 
