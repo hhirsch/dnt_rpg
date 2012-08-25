@@ -45,7 +45,16 @@ if(LIBINTL_INCLUDE_DIR)
     set(LIBINTL_LIBRARIES)
     set(LIBINTL_LIB_FOUND TRUE)
   else (LIBINTL_LIBC_HAS_DGETTEXT)
-    find_library(LIBINTL_LIBRARIES NAMES intl libintl )
+    find_library(LIBINTL_LIBRARIES NAMES intl libintl 
+      HINTS
+      $ENV{SDLDIR}
+      PATH_SUFFIXES lib64 lib
+      PATHS
+      /sw
+      /opt/local
+      /opt/csw
+      /opt
+    )
     if(LIBINTL_LIBRARIES)
       set(LIBINTL_LIB_FOUND TRUE)
     endif(LIBINTL_LIBRARIES)

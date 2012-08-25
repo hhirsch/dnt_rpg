@@ -20,7 +20,7 @@
 
 #include "userinfo.h"
 
-#ifdef _MSC_VER
+#if (defined __MINGW32__ || defined _WIN32)
    #include <windows.h>
 #else
    #include <pwd.h>
@@ -38,7 +38,7 @@ using namespace std;
  ****************************************************************/
 void userInfo::getValuesFromSystem()
 {
-   #ifdef _MSC_VER
+   #if (defined __MINGW32__ || defined _WIN32)
       char buffer[512];
       DWORD bufSize = sizeof(buffer);
 

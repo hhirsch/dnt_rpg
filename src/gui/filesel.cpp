@@ -19,7 +19,7 @@
 */
 
 
-#ifndef _MSC_VER
+#if !(defined __MINGW32__ || defined _WIN32)
    #include <dirent.h>
    #include <sys/types.h>
 #else
@@ -38,7 +38,7 @@ using namespace std;
 
 using namespace Farso;
 
-#ifndef _MSC_VER
+#if !(defined __MINGW32__ || defined _WIN32)
    #define FILE_SEL_SLASH '/'
 #else
    #define FILE_SEL_SLASH '\\'
@@ -144,7 +144,7 @@ void FileSel::changeCurDir(string newDir)
    string aux = "";
    string* s = NULL;
 
-#ifndef _MSC_VER
+#if !(defined __MINGW32__ || defined _WIN32)
    DIR* dir = NULL;
    struct dirent* dirEnt = NULL;
 #else
@@ -163,7 +163,7 @@ void FileSel::changeCurDir(string newDir)
       curDir += FILE_SEL_SLASH;
    }
 
-#ifndef _MSC_VER
+#if !(defined __MINGW32__ || defined _WIN32)
    dir = opendir(newDir.c_str());
 #else
    fullDir = curDir+"*.*";
@@ -172,14 +172,15 @@ void FileSel::changeCurDir(string newDir)
 
    total = 0;
 
-#ifndef _MSC_VER
+#if !(defined __MINGW32__ || defined _WIN32)
    if(dir)
 #else
    if(hSearch != INVALID_HANDLE_VALUE)
 #endif
    {
       /* first pass to define the size */
-#ifndef _MSC_VER
+#if !(defined __MINGW32__ || defined _WIN32)
+   if(dir)
       for(dirEnt = readdir(dir); dirEnt != NULL; dirEnt = readdir(dir) )
       {
          total++;
@@ -194,7 +195,7 @@ void FileSel::changeCurDir(string newDir)
       }
 
       /* rewind for next pass */
-#ifndef _MSC_VER
+#if !(defined __MINGW32__ || defined _WIN32)
       rewinddir(dir);
 #else
       hSearch = FindFirstFile((const char*)fullDir.c_str(), &dir);
@@ -203,7 +204,7 @@ void FileSel::changeCurDir(string newDir)
       /* now save each directory/file name */
       j = 0;
 
-#ifndef _MSC_VER
+#if !(defined __MINGW32__ || defined _WIN32)
       for(dirEnt = readdir(dir); dirEnt != NULL; dirEnt = readdir(dir) )
       {
          s[j] = dirEnt->d_name;

@@ -29,7 +29,7 @@
 #include "../etc/dirs.h"
 #include "../etc/extensions.h"
 
-#ifdef _MSC_VER
+#if (defined __MINGW32__ || defined _WIN32)
    #include <windows.h>
 #else
 
@@ -244,7 +244,7 @@ bool options::load()
       
       /* Create the User directory */
 
-      #ifdef _MSC_VER
+      #if (defined __MINGW32__ || defined _WIN32)
          if(CreateDirectory(info.getUserHome().c_str(),NULL))
          {
             cerr << "ok" << endl;
@@ -600,7 +600,7 @@ void options::setLanguage()
    if(!saux.empty())
    {
       /* Change language.  */
-      #ifdef _MSC_VER
+      #if (defined __MINGW32__ || defined _WIN32)
          putenv((string("LANG=" + saux)).c_str());
       #else
          setenv("LANGUAGE", saux.c_str(), 1);
