@@ -20,6 +20,7 @@
 
 #include "mapEditor.h"
 #include "../../etc/dirs.h"
+#include "../../etc/userinfo.h"
 #include "../../etc/extensions.h"
 #include "../../engine/options.h"
 
@@ -28,7 +29,9 @@
  ************************************************************************/
 int main(int argc, char **argv)
 {
-
+   /* Load options and directorues */
+   userInfo user;
+   user.getValuesFromSystem();
    dirs dir;
    dir.findDataDirectories();
    options opt;

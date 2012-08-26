@@ -20,6 +20,7 @@
 
 #include "editor.h"
 #include "../../etc/extensions.h"
+#include "../../etc/userinfo.h"
 #include "../../etc/dirs.h"
 #include "../../etc/npcfile.h"
 #include "../../engine/options.h"
