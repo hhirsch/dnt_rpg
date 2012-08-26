@@ -346,6 +346,10 @@ IF(${APPLE})
        macosx/SDLMain.h)
 ENDIF(${APPLE})
 
+IF(${WIN32} OR ${MINGW})
+   set(WIN_SOURCES
+       windows/resource.rc)
+ENDIF(${WIN32} OR ${MINGW})
 
 set(DNT_LIB_HEADERS
 ${CBOOK_HEADERS}
@@ -373,6 +377,7 @@ ${PARTICLE_SOURCES}
 ${SOUND_SOURCES}
 ${ENGINE_SOURCES}
 ${APPLE_CONFIG_SOURCES}
+${WIN_SOURCES}
 )
 
 set(DNT_SOURCES
