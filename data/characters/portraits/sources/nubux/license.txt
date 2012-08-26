@@ -4,6 +4,7 @@
    License: CC-BY 3.0
    Reference: http://opengameart.org/content/9-portaits-108px
               http://opengameart.org/content/11-portraits-108px
+              http://opengameart.org/content/5-portraits-108px
 
 Logan-small.xcf
    Author: nubux
