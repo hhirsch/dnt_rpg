@@ -13,7 +13,9 @@
 #
 # If you desire to create the OSX dnt.app bundle application, you should define:
 #    -DCREATE_BUNDLE=ON
-# 
+#
+# You could also create the package with CPack by defining:
+#    -DCREATE_PACKAGE=ON 
 
 cmake_minimum_required(VERSION 2.8)
 
@@ -36,6 +38,7 @@ option(DEBUG_ASTAR "Enable A* Visual Debug" OFF)
 option(DNT_DEBUG_PENDING_ACTION "Enable Pending Action Debug Log" OFF)
 option(DNT_DEBUG_SCRIPTS "Enable DNT Script Language Debug Log" OFF)
 option(CREATE_BUNDLE "Create OSX Bundle Application" OFF)
+option(CREATE_PACKAGE "Create package using CPack" OFF)
 
 # Some compiler options
 if(UNIX)
@@ -186,16 +189,16 @@ ENDIF(NOT WIN32 AND NOT MINGW)
 configure_file("./src/config.h.in" "./src/config.h")
 configure_file("./Doxyfile.in" "./Doxyfile")
 
-#IF(WIN32 OR MINGW)
-#   Include(CPack)
-#ENDIF(WIN32 OR MINGW)
+IF(${CREATE_PACKAGE})
+   Include(CPack)
+ENDIF(${CREATE_PACKAGE})
 
 
 if(NOT ${CREATE_BUNDLE})
 
 # Install files
 install(TARGETS dnt DESTINATION bin)
-install(DIRECTORY ./data DESTINATION ${DATADIR}/${PACKAGE})
+install(DIRECTORY ./data DESTINATION share/${PACKAGE})
 
 endif(NOT ${CREATE_BUNDLE})
 
