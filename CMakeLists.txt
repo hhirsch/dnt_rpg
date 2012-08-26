@@ -144,7 +144,7 @@ IF(${CREATE_BUNDLE})
 ELSE(${CREATE_BUNDLE})
 
    # Make Binaries
-   add_executable(dnt ${DNT_SOURCES} ${DNT_HEADERS} )
+   add_executable(dnt WIN32 ${DNT_SOURCES} ${DNT_HEADERS} )
    target_link_libraries(dnt dntlib farso ${OPENGL_LIBRARY} 
                           ${OPENAL_LIBRARY} 
                           ${SDL_LIBRARY} ${SDLIMAGE_LIBRARY} ${SDLTTF_LIBRARY}
@@ -152,14 +152,15 @@ ELSE(${CREATE_BUNDLE})
                           ${OGG_LIBRARY} ${CAL3D_LIBRARY} m
                           ${LIBINTL_LIBRARIES} pthread)
                           
-   add_executable(dntMapEditor ${DNT_MAP_EDITOR_SOURCES} ${DNT_MAP_EDITOR_HEADERS})
+   add_executable(dntMapEditor WIN32
+                  ${DNT_MAP_EDITOR_SOURCES} ${DNT_MAP_EDITOR_HEADERS})
    target_link_libraries(dntMapEditor dntlib farso ${OPENGL_LIBRARY} 
                           ${OPENAL_LIBRARY}
                           ${SDL_LIBRARY} ${SDLIMAGE_LIBRARY} ${SDLTTF_LIBRARY}
                           ${VORBISFILE_LIBRARY} ${VORBIS_LIBRARY}
                           ${OGG_LIBRARY} m ${CAL3D_LIBRARY} 
                           ${LIBINTL_LIBRARIES} pthread)
-   add_executable(dntPartEditor 
+   add_executable(dntPartEditor WIN32 
                ${DNT_PART_EDITOR_SOURCES} ${DNT_PART_EDITOR_HEADERS})
    target_link_libraries(dntPartEditor dntlib farso ${OPENGL_LIBRARY} 
                           ${OPENAL_LIBRARY}
