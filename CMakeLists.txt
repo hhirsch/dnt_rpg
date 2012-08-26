@@ -12,7 +12,7 @@
 #    -DDNT_DEBUG_SCRIPTS=ON
 #
 # If you desire to create the OSX dnt.app bundle application, you should define:
-#    -DCREATE_BUNDLE=1
+#    -DCREATE_BUNDLE=ON
 # 
 
 cmake_minimum_required(VERSION 2.8)
@@ -35,6 +35,7 @@ project(dnt)
 option(DEBUG_ASTAR "Enable A* Visual Debug" OFF)
 option(DNT_DEBUG_PENDING_ACTION "Enable Pending Action Debug Log" OFF)
 option(DNT_DEBUG_SCRIPTS "Enable DNT Script Language Debug Log" OFF)
+option(CREATE_BUNDLE "Create OSX Bundle Application" OFF)
 
 # Some compiler options
 if(UNIX)
@@ -171,8 +172,10 @@ ELSE(${CREATE_BUNDLE})
 ENDIF(${CREATE_BUNDLE})
 
 # Create the .gmo files
-include(GettextTranslate)
-add_subdirectory(./po)
+IF(NOT WIN32 AND NOT MINGW)
+  include(GettextTranslate)
+  add_subdirectory(./po)
+ENDIF(NOT WIN32 AND NOT MINGW)
 
 #get_cmake_property(_variableNames VARIABLES)
 #foreach (_variableName ${_variableNames})
@@ -182,6 +185,10 @@ add_subdirectory(./po)
 # Configure some files
 configure_file("./src/config.h.in" "./src/config.h")
 configure_file("./Doxyfile.in" "./Doxyfile")
+
+#IF(WIN32 OR MINGW)
+#   Include(CPack)
+#ENDIF(WIN32 OR MINGW)
 
 
 if(NOT ${CREATE_BUNDLE})
