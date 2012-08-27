@@ -102,3 +102,8 @@ console.flac
    license: CC-BY 3.0
    source: http://www.freesound.org/people/DJ%20Chronos/sounds/123094/
    note: edited (150% speedup) by qubodup (Iwan Gabovitch) <qubodup@gmail.com
+
+gecko*
+   author: vollkornbrot
+   license: CC0/PD
+   source: http://www.freesound.org/people/vollkornbrot/sounds/149924/
