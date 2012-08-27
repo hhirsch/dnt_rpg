@@ -273,7 +273,7 @@ macro(GettextTranslate)
     add_dependencies(${PO_TARGET} ${MAKEVAR_DOMAIN}.pot-update)
 
     install(FILES ${GMO_FILE_NAME} DESTINATION
-      ${LOCALEDIR}/${lang}/LC_MESSAGES
+      ${LOCALE_DIR}/${lang}/LC_MESSAGES
       RENAME ${MAKEVAR_DOMAIN}.mo
     )
 

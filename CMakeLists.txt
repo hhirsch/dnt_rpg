@@ -34,6 +34,7 @@ endif(${VERSION_PATCH})
 # Set directories
 set(DATADIR ${CMAKE_INSTALL_PREFIX}/share)
 set(LOCALEDIR ${CMAKE_INSTALL_PREFIX}/share/locale)
+set(LOCALE_DIR share/locale)
 set(INSTALL_BIN_DIR ${CMAKE_INSTALL_PREFIX}/bin)
 
 set(BIN_DIR ./bin)
@@ -187,10 +188,10 @@ ELSE(${CREATE_BUNDLE} STREQUAL "ON")
 ENDIF(${CREATE_BUNDLE} STREQUAL "ON")
 
 # Create the .gmo files
-IF(NOT WIN32 AND NOT MINGW)
+#IF(NOT WIN32 AND NOT MINGW)
   include(GettextTranslate)
   add_subdirectory(./po)
-ENDIF(NOT WIN32 AND NOT MINGW)
+#ENDIF(NOT WIN32 AND NOT MINGW)
 
 #get_cmake_property(_variableNames VARIABLES)
 #foreach (_variableName ${_variableNames})

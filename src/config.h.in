@@ -24,10 +24,10 @@
 #define PACKAGE "@PACKAGE@"
 #define VERSION "@VERSION@"
 
-#ifdef _MSC_VER
+#if (defined __MINGW32__ || defined _WIN32)
    /* Always use ../data for Windows */
-   #define LOCALEDIR "..\\data\\locale\\"
-   #define DATADIR "..\\data\\"
+   #define LOCALEDIR "..\\share\\locale\\"
+   #define DATADIR "..\\share\\dnt\\data\\"
 #else
    #define LOCALEDIR "@LOCALEDIR@"
    #define DATADIR "@DATADIR@"
