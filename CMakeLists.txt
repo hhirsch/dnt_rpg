@@ -14,13 +14,24 @@
 # If you desire to create the OSX dnt.app bundle application, you should define:
 #    -DCREATE_BUNDLE=ON
 #
-# You could also create the package with CPack by defining:
+# You could also create a system specific package with CPack by defining:
 #    -DCREATE_PACKAGE=ON 
 
 cmake_minimum_required(VERSION 2.8)
 
 set(PACKAGE dnt)
-set(VERSION "0.10")
+
+# Set Version number
+set(VERSION_MAJOR 0)
+set(VERSION_MINOR 10)
+set(VERSION_PATCH 0)
+if(${VERSION_PATCH})
+   set(VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
+else(${VERSION_PATCH})
+   set(VERSION ${VERSION_MAJOR}.${VERSION_MINOR})
+endif(${VERSION_PATCH})
+
+# Set directories
 set(DATADIR ${CMAKE_INSTALL_PREFIX}/share)
 set(LOCALEDIR ${CMAKE_INSTALL_PREFIX}/share/locale)
 set(INSTALL_BIN_DIR ${CMAKE_INSTALL_PREFIX}/bin)
@@ -100,7 +111,7 @@ include(sources.cmake)
 add_library(farso ${FARSO_SOURCES} ${FARSO_HEADERS} )
 add_library(dntlib ${DNT_LIB_SOURCES} ${DNT_LIB_HEADERS} )
 
-IF(${CREATE_BUNDLE})
+IF(${CREATE_BUNDLE} STREQUAL "ON")
 
    # Reset the data dir
    set(DATADIR "/data")
@@ -145,7 +156,7 @@ IF(${CREATE_BUNDLE})
    add_dependencies(dnt dntData)
 
 
-ELSE(${CREATE_BUNDLE})
+ELSE(${CREATE_BUNDLE} STREQUAL "ON")
 
    # Make Binaries
    add_executable(dnt WIN32 ${DNT_SOURCES} ${DNT_HEADERS} )
@@ -172,7 +183,8 @@ ELSE(${CREATE_BUNDLE})
                           ${VORBISFILE_LIBRARY} ${VORBIS_LIBRARY}
                           ${OGG_LIBRARY} m ${CAL3D_LIBRARY} 
                           ${LIBINTL_LIBRARIES} pthread)
-ENDIF(${CREATE_BUNDLE})
+
+ENDIF(${CREATE_BUNDLE} STREQUAL "ON")
 
 # Create the .gmo files
 IF(NOT WIN32 AND NOT MINGW)
@@ -189,16 +201,67 @@ ENDIF(NOT WIN32 AND NOT MINGW)
 configure_file("./src/config.h.in" "./src/config.h")
 configure_file("./Doxyfile.in" "./Doxyfile")
 
-IF(${CREATE_PACKAGE})
+IF(WIN32 OR MINGW)
+   configure_file("./windows/resource.rc.in" "./windows/resource.rc")
+ENDIF(WIN32 OR MINGW)
+
+IF(${CREATE_PACKAGE} STREQUAL "ON")
+
+   IF(WIN32 OR MINGW)
+      # Add DLLs
+      install(FILES 
+              bin/libcal3d-12.dll
+	      bin/libfreetype-6.dll
+	      bin/libjpeg-8.dll
+	      bin/libogg-0.dll
+	      bin/libpng15-15.dll
+	      bin/libtiff-5.dll
+	      bin/libvorbis-0.dll
+	      bin/libvorbisfile-3.dll
+	      bin/libwebp-2.dll
+	      bin/OpenAL32.dll
+	      bin/SDL.dll
+	      bin/SDL_image.dll
+	      bin/SDL_ttf.dll
+	      bin/wrap_oal.dll
+	      bin/zlib1.dll
+	      DESTINATION bin)
+	#Add Editors
+	install(TARGETS dntMapEditor DESTINATION bin)
+	install(TARGETS dntPartEditor DESTINATION bin)
+
+        #Set Shortcuts
+	#CPACK_NSIS_CREATE_ICONS_EXTRA
+
+	# Set executables to create shortcuts
+	set(CPACK_PACKAGE_EXECUTABLES 
+	    "dnt;DNT"
+	    "dntMapEditor;dntMapEditor"
+	    "dntPartEditor;dntPartEditor")
+
+   ENDIF(WIN32 OR MINGW)
+
+   # Set package description/info
+   set(CPACK_PACKAGE_DESCRIPTION_SUMMARY 
+       "DNT - Post-Apocalyptical RPG")
+   set(CPACK_PACKAGE_VENDOR "DNTeam")
+   
+   set(CPACK_RESOURCE_FILE_LICENSE ${PROJECT_SOURCE_DIR}/COPYING)
+
+   # Set package version
+   set(CPACK_PACKAGE_VERSION ${VERSION})
+   set(CPACK_PACKAGE_VERSION_MAJOR ${VERSION_MAJOR})
+   set(CPACK_PACKAGE_VERSION_MINOR ${VERSION_MINOR})
+   set(CPACK_PACKAGE_VERSION_PATCH ${VERSION_PATCH})
+
    Include(CPack)
-ENDIF(${CREATE_PACKAGE})
+
+ENDIF(${CREATE_PACKAGE} STREQUAL "ON")
 
 
-if(NOT ${CREATE_BUNDLE})
-
-# Install files
-install(TARGETS dnt DESTINATION bin)
-install(DIRECTORY ./data DESTINATION share/${PACKAGE})
-
-endif(NOT ${CREATE_BUNDLE})
+if(NOT (${CREATE_BUNDLE} STREQUAL "ON"))
+   # Install files
+   install(TARGETS dnt DESTINATION bin)
+   install(DIRECTORY ./data DESTINATION share/${PACKAGE})
+endif(NOT (${CREATE_BUNDLE} STREQUAL "ON"))
 

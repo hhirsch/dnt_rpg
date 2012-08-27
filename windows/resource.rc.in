@@ -1,7 +1,7 @@
 IDR_ICO_MAIN ICON "data\\dnt.ico"
 
 1 VERSIONINFO
-FILEVERSION    	0,10,0,0
+FILEVERSION    	@VERSION_MAJOR@,@VERSION_MINOR@,@VERSION_PATCH@,0
 PRODUCTVERSION 	0,10,0,0
 FILEFLAGSMASK  	0x17L
 FILEFLAGS      	0x1L
@@ -15,14 +15,14 @@ BEGIN
         BEGIN
             VALUE "CompanyName",      "DNTeam"
             VALUE "FileDescription",  "DNT - Post-Apocalyptical RPG"
-            VALUE "FileVersion",      "0.10"
+            VALUE "FileVersion",      "@VERSION@" 
             VALUE "InternalName",     "DNT"
             VALUE "LegalCopyright",   "GPLv3"
             VALUE "LegalTrademarks1", ""
             VALUE "LegalTrademarks2", ""
             VALUE "OriginalFilename", "dnt"
             VALUE "ProductName",      "DNT"
-            VALUE "ProductVersion",   "0.10"
+            VALUE "ProductVersion",   "@VERSION@" 
         END
     END
     BLOCK "VarFileInfo"
