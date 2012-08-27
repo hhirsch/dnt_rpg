@@ -240,6 +240,11 @@ IF(${CREATE_PACKAGE} STREQUAL "ON")
 	    "dntMapEditor;dntMapEditor"
 	    "dntPartEditor;dntPartEditor")
 
+	# Create an extra shortcut
+        set(CPACK_NSIS_CREATE_ICONS_EXTRA 
+	"CreateShortCut '\$INSTDIR\\\\${PROJECT_NAME}.lnk' '\$INSTDIR\\\\bin\\\\${PROJECT_NAME}.exe'")
+
+
    ENDIF(WIN32 OR MINGW)
 
    # Set package description/info
