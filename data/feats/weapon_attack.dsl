@@ -7,7 +7,10 @@ script(character target)
    int curAmmo
    weapon curWeapon
    string concept
+   string bareHandsSound
    
+   # Initialize to some defaults
+   bareHandsSound = "sndfx/guns/other/sharp_swosh.ogg"
    concept = "STRENGTH"
 
    # Verify if is an weapon attack or unarmed
@@ -52,6 +55,10 @@ script(character target)
 
       # Do the attack
       doAttack(SELF_CHARACTER, target, d, "ATTRIBUTE", concept)
+      
+      # Call the bare hands sound
+      playSound(bareHandsSound, OWNER_POSX, OWNER_HEIGHT, OWNER_POSZ)
+
    end
 
 end
