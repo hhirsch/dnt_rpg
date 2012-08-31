@@ -18,5 +18,5 @@ range_value = 12
 size_type = large
 weight_value = 9
 main_damage_type = slashing
-main_attack_sound = sndfx/weapons/slashing_large.ogg
+main_attack_sound = sndfx/guns/other/sharp_swosh.ogg 
 damage_dice = 1*1d10+0x3
