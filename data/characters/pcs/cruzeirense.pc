@@ -5,6 +5,7 @@ generalScript = ia/script/tutorial/cruzeirense.dsl
 battleScript = ia/script/fight/fight_animal.dsl
 maxLifePoints = 27
 conversationFile = dialogs/tutorial/cruzeirense.dlg
+onAttackSound = sndfx/guns/other/sharp_swosh.ogg
 class = PHYSICAL_EDUCATION 2
 race = COMMON_HUMAN
 align = CENTER_NEUTRAL

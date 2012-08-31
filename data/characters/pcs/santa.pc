@@ -5,6 +5,7 @@ battleScript = ia/script/fight/fight_animal.dsl
 bloodFileName = particles/blood2.par
 bloodPosition = 45
 conversationFile = dialogs/tutorial/santa.dlg
+onAttackSound = sndfx/guns/other/sharp_swosh.ogg
 challengeRating = 1
 maxLifePoints = 12
 align = CAPITALIST_PROPRIETARY_SOFTWARE

@@ -4,6 +4,7 @@ portrait = characters/portraits/zedobar.png
 battleScript = ia/script/fight/fight_animal.dsl
 bloodFileName = particles/blood2.par
 bloodPosition = 40
+onAttackSound = sndfx/guns/other/sharp_swosh.ogg
 challengeRating = 4
 maxLifePoints = 72
 align = CENTER_FREE_SOFTWARE

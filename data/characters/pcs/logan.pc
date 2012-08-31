@@ -9,6 +9,7 @@ class = COM 20
 race = MUTANT_HUMAN_CRICKET
 align = CHAOTIC_FREE_SOFTWARE
 sizeModifier = 0
+onAttackSound = sndfx/guns/other/sharp_swosh.ogg
 conversationFile = dialogs/tutorial/logan.dlg
 STRENGTH = 14
 DEXTERITY = 16

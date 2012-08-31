@@ -9,6 +9,7 @@ race = COMMON_HUMAN
 align = CENTER_NEUTRAL
 sizeModifier = 0
 psychoState = 2
+onAttackSound = sndfx/guns/other/sharp_swosh.ogg
 walk_interval = 32
 STRENGTH = 18
 DEXTERITY = 14

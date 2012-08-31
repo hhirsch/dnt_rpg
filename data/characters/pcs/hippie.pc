@@ -6,6 +6,7 @@ bloodFileName = particles/blood2.par
 bloodPosition = 45
 conversationFile = dialogs/tutorial/hippie.dlg
 challengeRating = 2
+onAttackSound = sndfx/guns/other/sharp_swosh.ogg
 maxLifePoints = 58
 align = CHAOTIC_NEUTRAL
 class = TO 1

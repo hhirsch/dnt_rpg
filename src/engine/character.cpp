@@ -1141,6 +1141,20 @@ bool character::save(string saveFile)
    /* Total Levels */
    file << "totalLevels = " <<  curBonusAndSaves.level << endl;
 
+   /* Default Sounds, if any */
+   if(!onHitSound.empty())
+   {
+      file << "onHitSound = " << onHitSound << endl;
+   }
+   if(!onAttackSound.empty())
+   {
+      file << "onAttackSound = " << onAttackSound << endl;
+   }
+   if(!onDeathSound.empty())
+   {
+      file << "onDeathSound = " << onDeathSound << endl;
+   }
+
    /* Inventory File */
    if(!inventoryFile.empty())
    {
@@ -1450,6 +1464,19 @@ character* characterList::insertCharacter(string file, featsList* ft,
          /* Only insert, don't apply, since it's already at applied the
           * loaded values from file. */
          novo->effects->insert(m, false);
+      }
+      /* Default fight sounds */
+      else if(key == "onAttackSound")
+      {
+         novo->onAttackSound = value;
+      }
+      else if(key == "onHitSound")
+      {
+         novo->onHitSound = value;
+      }
+      else if((key == "onDeathSound") || (key == "onDestroyedSound"))
+      {
+         novo->onDeathSound = value;
       }
       /* Feat (and feat quantity) */
       else if(key == "feat")

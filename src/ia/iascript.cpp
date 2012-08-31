@@ -2732,6 +2732,38 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          }
       }
    }
+   
+   /* void function(character c [, float refDist, float rollOff]) */
+   else if(functionName == IA_PLAY_BARE_HANDS_SOUND)
+   {
+      character* dude;
+      float refDist, rollOff;
+
+      dude = getParameterc(token, strLine, pos);
+
+      /* Optionals */
+      refDist = getParameterf(token, strLine, pos);
+      rollOff = getParameterf(token, strLine, pos);
+
+      if( (dude != NULL) && (!dude->onAttackSound.empty()) )
+      {
+         sound snd;
+         sndfx* sfx;
+         sfx = snd.addSoundEffect(dude->scNode->getPosX(), 
+                                  dude->scNode->getPosY(), 
+                                  dude->scNode->getPosZ(), 
+                                  SOUND_NO_LOOP, 
+                                  dude->onAttackSound);
+         if(refDist != 0.0f)
+         {
+            sfx->setReferenceDistance(refDist);
+         }
+         if(rollOff != 0.0f)
+         {
+            sfx->setRollOff(rollOff);
+         }
+      }
+   }
 
    ////////////////////////////////////////////////////
    //                Quick Pointers                  //

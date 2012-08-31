@@ -5,6 +5,7 @@ battleScript = ia/script/fight/fight_animal.dsl
 bloodFileName = particles/blood2.par
 bloodPosition = 40
 conversationFile = dialogs/tutorial/dona.dlg
+onAttackSound = sndfx/guns/other/sharp_swosh.ogg
 challengeRating = 2
 maxLifePoints = 58
 align = CHAOTIC_NEUTRAL

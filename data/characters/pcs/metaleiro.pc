@@ -2,6 +2,7 @@ name = Metaleiro
 model = models/personagens/metaleiro/model.cfg
 portrait = characters/portraits/metaleiro.png
 maxLifePoints = 10
+onAttackSound = sndfx/guns/other/sharp_swosh.ogg
 sizeModifier = 0
 psychoState = 2
 walk_interval = 32

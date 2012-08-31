@@ -6,6 +6,7 @@ bloodFileName = particles/blood2.par
 bloodPosition = 40
 challengeRating = 4
 maxLifePoints = 78
+onAttackSound = sndfx/guns/other/sharp_swosh.ogg
 align = CENTER_FREE_SOFTWARE
 class = PHYSICAL_EDUCATION 4
 race = STRANGE_AUTISTIC 

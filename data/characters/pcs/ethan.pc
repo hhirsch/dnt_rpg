@@ -8,6 +8,7 @@ killedScript = ia/script/kill/guri_kill.dsl
 bloodFileName = particles/blood2.par
 bloodPosition = 20
 challengeRating = 1
+onAttackSound = sndfx/guns/other/sharp_swosh.ogg
 maxLifePoints = 18
 align = CENTER_NEUTRAL
 class = COMP 1

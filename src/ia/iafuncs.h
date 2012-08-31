@@ -373,7 +373,8 @@
 ////////////////////////////////////////////////////
 /*! void playSound(string soundFile, float pX, float pY, float pZ) */
 #define IA_PLAY_SOUND "playSound"
-
+/*! void playBareHandsSound(character c[, float refDist, float rollOff])  */
+#define IA_PLAY_BARE_HANDS_SOUND "playBareHandsSound"
 
 /*! Convert the infix string to a postfix one
  * \param infix -> infix expression 

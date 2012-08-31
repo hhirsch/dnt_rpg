@@ -9,6 +9,7 @@ bloodFileName = particles/blood2.par
 bloodPosition = 20
 challengeRating = 1
 maxLifePoints = 18
+onAttackSound = sndfx/guns/other/sharp_swosh2.ogg
 align = CAPITALIST_PROPRIETARY_SOFTWARE
 class = COMP 1
 race = COMMOM_HUMAN 
