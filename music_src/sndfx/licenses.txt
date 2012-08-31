@@ -16,10 +16,12 @@ rifle_2.rg
 
 scroll-step-hover-sound-for-user-interface.flac
 simple-gui-click.flac
+sharp-swosh-18.flac
    author: qubodup
    license: CC0
    sources: http://www.freesound.org/people/qubodup/sounds/159698
             http://www.freesound.org/people/qubodup/sounds/159697
+            http://www.freesound.org/people/qubodup/sounds/60005/
 
 koops_page-turn-13.wav
    author: Koops
@@ -107,3 +109,4 @@ gecko*
    author: vollkornbrot
    license: CC0/PD
    source: http://www.freesound.org/people/vollkornbrot/sounds/149924/
+
