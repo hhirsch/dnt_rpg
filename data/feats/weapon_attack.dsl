@@ -35,8 +35,10 @@ script(character target)
 
       # Do the attack
       if(doAttack(SELF_CHARACTER, target, d, "ATTRIBUTE", concept))
+
          # Make the weapon's sound
          weaponSoundAtCharacter(curWeapon, SELF_CHARACTER)
+         
          # Apply the ammo - 1, if needed
          if(weaponGetAmmoType(curWeapon) != "none")
             
@@ -50,12 +52,12 @@ script(character target)
    else
       # Unarmed attack, get the bared hands dice
       d = getBaredHandsDice(SELF_CHARACTER)
-
-      # Do the attack
-      doAttack(SELF_CHARACTER, target, d, "ATTRIBUTE", concept)
       
       # Call the bare hands sound
       playBareHandsSound(SELF_CHARACTER)
+
+      # Do the attack
+      doAttack(SELF_CHARACTER, target, d, "ATTRIBUTE", concept)
 
    end
 
