@@ -41,7 +41,7 @@ square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/oldwood1.png
 square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/oldwood1.png
-connection = 162.822937,49.513943,188.529755,67.492210:0.000000:mapas/tutorial/tyrol.map
+connection = 162.822937,49.513943,188.529755,67.492210:90.000000:mapas/tutorial/tyrol.map
 useObject = models/objetos/banho/papel_higienico/papel_higienico.dcc 1:3,1:163.240,9.700,3.058:0.000,-452.000,0.000:0
 useObject = models/objetos/banho/privada2/privada.dcc 1:3,1:173.756,0.000,9.826:0.000,-444.000,0.000:0
 #Z: 1
@@ -51,7 +51,7 @@ square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/oldwood1.png
 square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/oldwood1.png
-connection = 162.822937,49.513943,188.529755,67.492210:0.000000:mapas/tutorial/tyrol.map
+connection = 162.822937,49.513943,188.529755,67.492210:90.000000:mapas/tutorial/tyrol.map
 useObject = models/objetos/ammo/9mm_pack/9mm_pack.dcc 1:3,2:179.456,11.400,91.941:0.000,-125.000,0.000:0
 useObject = weapons/definitions/beretta92.wcc 1:3,2:180.285,11.400,88.948:0.000,-146.000,0.000:0
 useObject = models/objetos/geral/dinner_chair/dinner_chair.dcc 1:3,2:182.759,0.000,89.172:0.000,0.000,0.000:0
