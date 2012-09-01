@@ -173,7 +173,7 @@ useTexture = texturas/floor_indoor/concrete6.png
 #Z: 2
 square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/concrete6.png
-connection = 11.324504,153.929901,27.349791,178.292450:0.000000:mapas/tutorial/school_2.map
+connection = 11.324504,153.929901,27.349791,178.292450:-90.000000:mapas/tutorial/school_2.map
 useObject = models/objetos/geral/escada/escada.dcc 1:1,3:-1.054,-41.500,166.508:0.000,89.000,0.000:0
 square = 1,0.000000,0.000000,0.000000,0.000000
 useTexture = texturas/floor_indoor/concrete6.png
