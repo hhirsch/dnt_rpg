@@ -1,6 +1,6 @@
 ================================================
 |                Version 0.10                  |
-|                                              |
+|            Released: 2012-09-15              |
 ================================================
  - The game is now called DNT;
  - New portraits (thanks to nubux, qubodup and scribe);

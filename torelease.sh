@@ -27,10 +27,9 @@
 
 tarFile=$1
 project="dnt"
-workDirs="bin data po src syntax macosx windows"
-homeFiles="aclocal.m4 configure configure.in Doxyfile.in \
-           install.sh Makefile.in COPYING README \
-           torelease.sh config.sub config.guess"
+workDirs="CMakeModules bin data po src syntax macosx windows utils"
+homeFiles="changelog.txt CMakeLists.txt Doxyfile.in \
+           COPYING README torelease.sh sources.cmake"
 
 # Verify if file was defined
 if [[ -z $tarFile ]]; then
