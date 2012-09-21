@@ -1,24 +1,24 @@
 /* 
-  DccNiTghtmare: a satirical post-apocalyptical RPG.
+  DNT: a satirical post-apocalyptical RPG.
   Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
  
-  This file is part of DccNiTghtmare.
+  This file is part of DNT.
   
   Originally based on the work of David Henry <tfc_duke@club-internet.fr>
   Copyright (c) 2005-2007 David HENRY
  
-  DccNiTghtmare is free software: you can redistribute it and/or modify
+  DNT is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  DccNiTghtmare is distributed in the hope that it will be useful,
+  DNT is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with DccNiTghtmare.  If not, see <http://www.gnu.org/licenses/>.
+  along with DNT.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 
@@ -228,7 +228,7 @@ bool md5Model::loadMeshFile(const std::string strFileName)
             /* Clear leading spaces */
             buff.erase(0, buff.find_first_not_of(" \t"));
 
-            /* Get joint date */
+            /* Get joint data */
             if(sscanf(buff.c_str(), "%s %d ( %f %f %f ) ( %f %f %f )",
                      &buf2[0], &joint->parent, &joint->pos.x,
                      &joint->pos.y, &joint->pos.z, &joint->orient.x,
@@ -238,6 +238,18 @@ bool md5Model::loadMeshFile(const std::string strFileName)
                /* Remove quotes */
                joint->name.erase(0, joint->name.find_first_of("\"")+1);
                joint->name.erase(joint->name.find_first_of("\""), 1);
+
+               /* Keep joint info, if it's related to a key vertex */
+               if(joint->name == MD5_KEY_BONE_HAND_LEFT)
+               {
+                  /* Joint is related to a left hand */
+                  boneHandLeft.boneId = i;
+               }
+               else if(joint->name == MD5_KEY_BONE_HAND_RIGHT)
+               {
+                  /* Joint is related to a right hand */
+                  boneHandRight.boneId = i;
+               }
 
                //std::cerr << "Got Joint: " << joint->name << std::endl;
                joint->orient.computeW();

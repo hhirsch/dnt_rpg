@@ -103,6 +103,20 @@ class aniModel
          float angleYZ; /**< current Y/Z angle */
       };
 
+      /*! Reference of a key bone (used for influence on
+       *  equipped objects).  */
+      class keyBone
+      {
+         public:
+            /*! Constructor */
+            keyBone()
+            {
+               boneId = -1;
+            };
+
+            int boneId;  /**< id of the bone */
+      };
+
       /*! Constructor */
       aniModel(int modelType);
       /*! Destructor */
@@ -244,6 +258,9 @@ class aniModel
       vertexInfo leftHand;           /**< Base vertex at left hand */
       vertexInfo rightHand;          /**< Base vextex at right hand */
       vertexInfo head;               /**< Base vertex at head */
+
+      keyBone boneHandLeft;          /**< Bone related to the left hand */
+      keyBone boneHandRight;         /**< Bone related to the right hand */
 
    protected:
       std::string fileName;          /**< current model fileName */
