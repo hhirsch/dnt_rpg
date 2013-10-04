@@ -1,6 +1,6 @@
 /* 
-  DNT: a satiric post-apocalyptical RPG.
-  Copyright (C) 2005-2012 DNTeam <dnt@dnteam.org>
+  DNT: a satirical post-apocalyptical RPG.
+  Copyright (C) 2005-2013 DNTeam <dnt@dnteam.org>
  
   This file is part of DNT.
  
