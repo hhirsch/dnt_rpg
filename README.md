@@ -1,17 +1,6 @@
-==============================================================
-|                              DNT                           |
-==============================================================
+# DNT
+## License                         
 
-0   - License
-I   - Requirenment
-II  - Installation
-III - Execution
-IV  - Input
-V   - Contact
-
-==============================================================
-|                        0 - License                         |
-==============================================================
 DNT  source  code  is  released  under  GPLv3 or any later 
 version. The   content   created  by  the   DNTeam  is  also 
 released  under  GPLv3  or  later.  Other  content  is either 
@@ -37,9 +26,8 @@ contents  on  the game (.blend files).
 
 * git://git.code.sf.net/p/dnt/code
 
-==============================================================
-|                      I - Requirenments                     |
-==============================================================
+
+## Requirenments                     
 
    The  DNT  compilation and execution needs some software and 
 hardware. They are:
@@ -57,9 +45,7 @@ hardware. They are:
    Hardware:
       Video  Card  with  3D  aceleration, OpenGL  compatible.
 
-==============================================================
-|                      II - Installation                      |
-==============================================================
+## Installation
 
 1) Source-Code Distribution
 
@@ -117,15 +103,10 @@ different of those described above.
    To  compile  on a different  OS,  try  the  same  proccess 
 described for *nix, if you have cmake ported for it.
    Any patches  that  would enable DNT  use on  more  OS  are 
-welcome, just submit them at:
-   
-    http://sourceforge.net/projects/dnt 
+welcome, just submit them as a pull request.
 
-==============================================================
-|                       III - Execution                      |
-==============================================================
 
-[*nix note: We'll need to be on X.]
+## Execution 
 
 1) Normal Execution (with "make install")
 
@@ -137,39 +118,33 @@ welcome, just submit them at:
    To   execute  the  program  without  "make install",  go to 
 directory ./bin and run the file dnt .
 
-==============================================================
-|                        IV - Input                          |
-==============================================================
+## Input
 
    Those are the defaults. You can  change  the keymap  in the
 options.
 
-                 ========================
-                 | Camera Movement      |
-                 ========================
+### Camera Movement
 
-mouse at left corner  =  turn camera                  (0-360°)
-left arrow            =  turn camera left             (0-360°)
-mouse at right corner =  turn camera                  (0-360°)
-right arrow           =  turn camera right            (0-360°)
+mouse at left corner  =  turn camera                  (0-360Â°)
+left arrow            =  turn camera left             (0-360Â°)
+mouse at right corner =  turn camera                  (0-360Â°)
+right arrow           =  turn camera right            (0-360Â°)
 up arrow              =  increases zoom               (X-Ym)
 down arrow            =  decreases zoom               (X-Ym)
 home                  =  maximize zoom
 end                   =  minimize zoom
-pageup                =  camera up                    (0-89°)
-pagedown              =  camera down                  (0-89°)
+pageup                =  camera up                    (0-89Â°)
+pagedown              =  camera down                  (0-89Â°)
 insert                =  put camera on top
 delete                =  put camera on floor
 middle mouse button   =  move the camera freely
 
-              ===========================
-              | Character Movement      |
-              ===========================
+### Character Movement
 
 mouse right button = move character to position
 mouse left button  = do some action
-a          =  turn left                       (0-360°)
-d          =  turn right                      (0-360°)
+a          =  turn left                       (0-360Â°)
+d          =  turn right                      (0-360Â°)
 w          =  forward                         (0-?)
 s          =  backward                        (0-?)
 q          =  move left                       (0-?)
@@ -180,18 +155,15 @@ y          =  protect effect
 space      =  enter battle mode
 r          =  show range of action
  
-                    =====================
-                    | Auxiliar Windows  |
-                    =====================
+## Auxiliar Windows
 
 m      =  Open MiniMap window
 i      =  Open Inventory window
 c      =  Open Character Window
 j      =  Open Journal window
 
-==============================================================
-|                        Contact                             |
-==============================================================
+
+## Contact
 
 Contact us via the forum at http://dnt.dnteam.org .
 
