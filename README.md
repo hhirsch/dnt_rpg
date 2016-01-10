@@ -1,4 +1,8 @@
 # DNT
+A Post-Apocalyptic sci-fi rpg.
+> This is very rough. But still to good to let it die.
+> I am really looking forward to accepting your Pull Requests and fixing some quirks on my own.
+
 ## License                         
 
 DNT  source  code  is  released  under  GPLv3 or any later 
